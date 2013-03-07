@@ -1,0 +1,127 @@
+<?php
+
+/**
+ *   @file guide_bits.php
+ *   @brief Inserting elements via .load 
+ *
+ *   @author adarby
+ *   @date 
+ *   @todo 
+ */
+$subsubcat = "";
+$subcat = "records";
+$page_title = "Guide Bits include";
+$header = "noshow";
+
+
+include("../../includes/header.php");
+
+// Connect to database
+try {
+    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+} catch (Exception $e) {
+    echo $e;
+}
+
+//print_r($_POST);
+
+switch ($_REQUEST["type"]) {
+
+    case "add_item":
+
+        $item_name = scrubData($_POST["our_item_text"]);
+        $item_id = scrubData($_POST["our_item_id"], 'integer');
+
+        echo "
+	<div class=\"selected_item_wrapper\">
+		<div class=\"selected_item\">
+			<input name=\"staff_id[]\" value=\"$item_id\" type=\"hidden\" />
+			$item_name<br />
+		</div>
+		<div class=\"selected_item_options\">
+			<img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+		</div>
+	</div>";
+
+        break;
+    case "add_discipline":
+        $item_name = scrubData($_POST["our_item_text"]);
+        $item_id = scrubData($_POST["our_item_id"], 'integer');
+
+        echo "
+    <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item\">
+            <input name=\"discipline_id[]\" value=\"$item_id\" type=\"hidden\" />
+            $item_name<br />
+        </div>
+        <div class=\"selected_item_options\">
+            <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+        </div>
+    </div>";
+
+        break;
+    case "test_shortform":
+
+        if ($_GET["subject_id"] == "") {
+            // INSERT
+            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . mysql_real_escape_string(scrubData($_GET["value"])) . "'";
+        } else {
+            // UPDATE
+            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . mysql_real_escape_string(scrubData($_GET["value"])) . "' AND subject_id != '" . mysql_real_escape_string(scrubData($_GET["subject_id"])) . "'";
+        }
+
+        //print $qcheck;
+        $rcheck = MYSQL_QUERY($qcheck);
+
+        if (mysql_num_rows($rcheck) == 0) {
+            echo "ok";
+        } else {
+            echo "dupe";
+        }
+        break;
+    case "email_link_report":
+        $message_body = stripslashes($_POST["linkresults"]);
+        $subject_line = _("LinkChecker Results for ") . $_POST["shortform"];
+
+        if ($_POST["sendto"] == "send_report2all") {
+            $q = "SELECT subject, email
+                FROM subject s, staff_subject ss, staff st
+                WHERE s.subject_id = ss.subject_id
+                AND ss.staff_id = st.staff_id
+                AND s.shortform = '" . $_POST["shortform"] . "'";
+            //print $q;
+            $r = MYSQL_QUERY($q);
+
+            while ($row = mysql_fetch_array($r)) {
+
+                $mail_to .= $row[1] . ",";
+            }
+
+            $mail_to = trim($mail_to, ',');
+        } else {
+            $mail_to = $_SESSION["email"];
+        }
+
+        print "Sending mail to: $mail_to";
+        //print_r($_POST);
+
+        $messageParams = array('from' => $administrator_email,
+            'to' => $mail_to,
+            'subjectLine' => $subject_line,
+            'content' => $message_body);
+        $message = new sp_MailMessage($messageParams);
+        $mailer = new sp_Mailer();
+        $mailer->send($message);
+        break;
+    case "delete_file":
+
+
+        $unlinky = "../../../assets/users/" . $_POST["folder_hint"] . "/" . $_POST["path"];
+        $delete_it = unlink($unlinky);
+
+        if ($delete_it) {
+            print _("They Will Be Done:  Deleted.");
+        }
+        break;
+}
+?>

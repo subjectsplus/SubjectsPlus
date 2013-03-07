@@ -1,0 +1,476 @@
+/* /////////
+// guide.css
+// used for the styling of the admin view of the guides
+// called from guide folder
+///////// */
+
+#guide_header {
+    position: relative;
+    float: left;
+    margin-bottom: 0;
+    color: #fff;
+    background-color: #333;
+    padding: 10px 0;
+    margin-top: 0;
+    height: 25px;
+    width: 100%;
+    background: rgba(51, 51, 51, 0.7)
+
+}
+
+#header { display: none;}
+
+#guide_nav {
+    float: left;
+    margin-left: 40px;
+}
+
+#subject_title {
+    float: left;
+    color: #333;
+}
+
+#subject_title h2 {
+
+    color: #fff;
+    font-weight: 700;
+    padding: 0px  5px;
+    font-size: 1.1em;
+    margin-top: 0;
+}
+
+#subject_title a {
+    color: #fff;
+}
+
+#subject_title a:hover {
+    color: #DD647F;
+}
+
+#guide_header ul {
+    margin-left: 5px;
+}
+
+#guide_header ul li {
+    list-style-type: none;
+    padding: 0px 5px 1px 5px;
+    margin: 0px 10px 0 10px;
+    display: block-inline;
+    float: left;
+    background-color: #333;
+
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+}
+
+#guide_header ul li:first-child {
+    margin-left: 0;
+    background-color: #efefef;
+}
+
+#guide_header ul li:hover {
+    background-color: #C03957;
+}
+
+#guide_header img {
+    position: relative;
+    top: 2px;
+
+}
+
+#guide_header ul li a{
+
+    text-decoration: none;
+
+}
+
+#guide_header ul li a:hover{
+
+    text-decoration: underline;
+
+}
+
+#subject_header {
+    text-align:left;
+    background-color: #333;
+    width: 100%;
+    border-bottom: 1px solid #DD647F;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height:22px;
+    margin: 0;
+    padding-top: 4px;
+}
+
+#subject_header a {
+    color: #fff;
+}
+
+#subject_header a:hover {
+    color: #DD647F;
+}
+
+img.togglecontent, img.toggletoken {cursor:pointer;}
+
+img { padding-top: 0;}
+
+#portal h2 {
+    padding: 0;
+    margin: 0;
+    padding-top: 5px;
+}
+
+
+#container-0 {
+    float: left;
+    width: 15%;
+    padding: 5px;
+}
+
+#container-0 h2 {
+    font-size: 16px;
+    margin: 1px;
+    background-color: none;
+    padding: 2px;
+}
+
+#container-0 h3 {
+    font-size: 14px;
+    margin: 1px;
+}
+
+#container-0 {
+    float: left;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#container-1 {
+    float: left;
+    width: 60%;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#container-2 {
+    float: left;
+    width: 35%;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#guide_header ul {
+    margin-left: 5px;
+}
+
+/* Section with draggable boxes */
+
+#all-results  {
+
+    clear: both;
+    padding: 0px 4px 4px 0px;
+    font-size: .92em;
+    background: rgba(51, 51, 51, .6);
+    margin-top: 0;
+}
+
+#closer {
+    float: left;
+    margin: 0 10px;
+    padding: 3px 5px 3px 5px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+#all-results ul li {
+    list-style-type: none;
+    margin: 0px 10px 0 0px;
+    display: block-inline;
+    float: left;
+    background-color: #fff;
+    color: #333;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: hand;
+    background-image: url(../images/icons/list-add.png);
+    background-repeat: no-repeat;
+    background-position: 3px 50%;
+    padding: 3px 5px 3px 20px;
+}
+
+#newbox {
+
+}
+
+#box_options {
+    position: absolute;
+    display: none;
+    margin-left: 0;
+    top: 50px;
+    width: 250px;
+    background-color: #fff;
+    list-style-type: none;
+    padding: 0px 5px 1px 5px;
+    margin: 0px 10px 0 -12px !important;
+    display: block-inline;
+    float: left;
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000 !important;
+}
+
+#box_options li {
+    display: block !important;
+    float: none !important;
+    clear: left !important;
+    margin: 3px 0 !important;
+    border: 1px solid #ccc !important;
+}
+
+#box_options li.box_note {
+    border: 0px #fff !important;
+    background-color: #fff !important;
+    color: #333;
+    font-size: 10px;
+    cursor: text !important;
+}
+
+#box_options li.box_note:hover {
+    border: none !important;
+    background-color: #fff !important;
+    color: #333;
+    font-size: 10px;
+}
+
+#all-results2  {
+    list-style: none;
+    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+    left: 0; top: 35px;
+    background: #333;
+    margin: 0; padding: 0;
+    display: none;
+    float: left;
+    width: 170px;
+    border: 1px solid #111;
+    z-index: 100;
+
+}
+
+
+/* guide.js, get_pluslets.php */
+
+.draggable {
+    border: 1px solid #e0e0e0;
+    z-index: 100;
+    cursor:move;
+    width: 240px;
+}
+
+
+.dropspotty {
+    position: relative;
+    background-color: #F8F5F5;
+    text-align: center;
+    margin-bottom: 10px;
+    z-index: 50;
+    border: 1px dashed #ccc;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0;
+    height: 50px;
+
+}
+
+
+
+#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {float: left; }
+
+/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
+
+#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: 8px; margin-left: 1em;}
+
+/* When you hover over one of the two drop spots, make em show */
+.drop_hover {background-color: #C03957; border: 1px solid #ccc;}
+
+/* this might be used by the jquery ui plugin . . . */
+
+.ui-sortable-placeholder {background-color: #F8F5F5; border: 1px dotted #CC6699; visibility: visible !important; height: 50px !important; }
+
+.pluslet {
+    position: relative;
+    clear: both;
+    background: #fff;
+    margin-bottom: 10px;
+    z-index: 50;
+    border: 1px solid #B3B9BF;
+    padding: 2px;
+    cursor: move;
+    font-size: 10pt;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 5px;
+    min-height: 2.2em;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    box-shadow: 5px 5px 5px #ccc;
+}
+
+.titlebar {
+    color: #333;
+    position: relative;
+    height: 2em;
+    padding: 0px 0;
+    margin: 0;
+    top: 0px;
+    right: 0px;
+    background-color: #D1D8DF;
+    width: 100%;
+    border-bottom: 1px solid #B3B9BF;
+    /*background:url(../images/admin/titlebar_bg.gif) */
+    background-color: #efefef;
+    background-color: #F6E3E7;
+    background-color: #efefef;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #e6e6e6;
+
+}
+
+div.titlebar input {
+    background-color: #fff;
+}
+
+.titlebar_text {
+    float: left;
+    margin-left: 5px;
+    margin-top: 2px;
+    color: #333;
+    text-shadow: 0px 1px 2px #afafaf;
+}
+
+.titlebar_options {
+    float: right;
+    padding: 4px 5px 0 0;
+    cursor: pointer;
+}
+
+.pluslet_body {
+    position: relative;
+    clear: both;
+    padding-left: 5px;
+    text-align: left;
+    background-color: #fff;
+    /*background-color: #ededed;*/
+}
+
+div.type-heading {
+    width: 70%;
+    text-transform: uppercase;
+}
+
+/* The following is to stick a margin around objects inserted into pluslets, i.e., youtoobies */
+
+.pluslet_body object {
+    margin: 3px 5px 3px 3px;
+}
+
+.unsortable {
+    cursor:default;
+}
+
+.resultsdiv { color: #fff; }
+
+.togglebase {margin-top: 0;}
+
+.sort_column {background-color: #F8F5F5;}
+.portal_column {background-color: #F8F5F5;}
+.ui-sortable {background-color: #F8F5F5;}
+
+.staff_photo {
+    position: relative;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.staff_photo2 {
+    position: relative;
+    float: left;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin: 0 10px 0 10px;
+}
+
+.smallgrey { color: #CCCCCC; font-size: 11px; text-shadow: none;}
+
+.dropspot-text {position: relative; top: -8px; font-size: 14pt; font-weight: bold; color: #ccc; margin-right: 1em;}
+
+.borderless {border: none;}
+
+.toc {
+    float: left;
+    width: 30%;
+    margin: 0 1% 1em 1%;
+}
+
+/* Override for V 3, multiple layouts */
+
+#portal-column-0, #portal-column-1, #portal-column-2  {
+    width: 100%;
+	background-color: transparent;
+}
+
+/* Layout dropdown in header */
+
+#slider_options {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px 5px 5px 5px;
+    clear: left;
+    list-style-type: none;
+    margin: 0 10px 0 -12px !important;
+    padding: 0 5px 1px;
+    position: absolute;
+    top: 50px;
+    width: 250px;
+    z-index: 1000 !important;
+}
+
+#slider_options p {
+    color: #333;
+    padding: .5em;
+    font-size: smaller;
+}
+
