@@ -74,7 +74,7 @@ CKEDITOR.dialog.add( 'subsplus_assetDialog', function( editor ) {
 
 
 						},
-						html: '<div id="radio-buttons-div"><strong>' + editor.lang['subsplus_asset.BeforeRadioButtonsLoad'] + '</strong></div>'
+						html: '<div id="radio-buttons-div" style="max-height:200px; overflow:auto;"><strong>' + editor.lang['subsplus_asset.BeforeRadioButtonsLoad'] + '</strong></div>'
 
 					},
 					{

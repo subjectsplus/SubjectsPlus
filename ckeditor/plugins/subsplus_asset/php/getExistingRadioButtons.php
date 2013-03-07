@@ -81,7 +81,7 @@ function getRadioButtons($lstrPath)
 		$lstrToken = "{{fil},{" . $lobjTemp[ count( $lobjTemp ) - 1 ] . "/" . $lstrFile . "}, {" . $lstrFile . "}}";
 		$lstrChanged = date( "F d Y H:i:s.",filectime( $lstrPath . "/" . $lstrFile ) );
 
-		$lstrHTML .= "<input name=\"but\" type=\"radio\" value=\"$lstrToken\" ><strong>$lstrFile</strong> ($lstrChanged)<br />";
+		$lstrHTML .= "<input name=\"but\" type=\"radio\" value=\"$lstrToken\" ><strong> $lstrFile</strong> ($lstrChanged)<br />";
 	}
 
 	return $lstrHTML;
