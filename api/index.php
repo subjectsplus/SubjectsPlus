@@ -11,6 +11,13 @@
 include_once("../control/includes/config.php");
 include_once("../control/includes/functions.php");
 
+//if the not properly configured, redirect to control folder for installation/update
+if( !isset( $BaseURL ) )
+{
+	header( "Location: ../control/" );
+	exit;
+}
+
 $lobjWebServiceHandler = new sp_WebServiceHandler($uname, $pword, $dbName_SPlus, $hname);
 
 $lobjWebServiceHandler->doService();

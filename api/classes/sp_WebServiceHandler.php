@@ -51,7 +51,7 @@ class sp_WebServiceHandler
 		{
 			if(isset($lobjTemp[$i + 1]))
 			{
-				$this->mobjUrlParams[strtolower($lobjTemp[$i])] = $lobjTemp[$i + 1];
+				$this->mobjUrlParams[strtolower($lobjTemp[$i])] = urldecode($lobjTemp[$i + 1]);
 			}
 		}
 
@@ -72,9 +72,20 @@ class sp_WebServiceHandler
 	 */
 	public function doService()
 	{
-		if($this->mstrService == '')
+		global $api_enabled;
+		global $api_key;
+
+		if( !isset( $api_enabled ) || $api_enabled === FALSE ) exit;
+
+		if($this->mstrService == '' )
 		{
 			$this->displayDocumentation();
+			exit;
+		}
+
+		if( ( !isset( $this->mobjUrlParams['key'] ) || !isset( $api_key ) || $this->mobjUrlParams['key'] != $api_key ) )
+		{
+			$this->displayDocumentation( TRUE );
 			exit;
 		}
 
@@ -149,22 +160,24 @@ class sp_WebServiceHandler
 			print "<h1>No service selected.  Here's how you use this thing.</h1>";
 		}
 
-		print "<pre>You Can Query Like This:\n/sp/api/service/parameter-name/parameter-value\n\n";
-		print "Results can be returned as xml or json (default).  E.g.:\nsp/api/staff/output/xml\n\n";
+		print "<pre><strong>You need to send the API security key in order for the API to work.</strong>";
+		print "\nThe key is in the config file (REMEMBER that security key might need to be url encoded to be passed)</pre>";
+		print "<pre>You Can Query Like This:\n/sp/api/service/parameter-name/parameter-value/key/api-key\n\n";
+		print "Results can be returned as xml or json (default).  E.g.:\nsp/api/staff/output/xml/key/api-key\n\n";
 		print "staff\n  * enter email address to return results.  Separate multiple addresses with commas.  Examples:\n";
-		print "  sp/api/staff/email/you@miami.edu\n  sp/api/staff/email/you@miami.edu,me@miami.edu\n";
-		print "  * select a department by id\n  sp/api/staff/department/99\n  * set a limit\n  sp/api/staff/department/99/max/5\n\n";
-		print "talkback\n  * enter max number of returns\n  sp/api/talkback/max/10\n\ndatabase\n  * Lots of options:\n";
-		print "  sp/api/database/letter/A -- show items beginning with A\n  sp/api/database/letter/Num -- show numbers\n";
-		print "  sp/api/database/search/Science -- show all items with Science in title\n";
-		print "  sp/api/database/subject_id/10 -- show all databases associated with that subject id\n";
-		print "  sp/api/database/type/Reference -- show all items with that ctag\n\n";
-		print "  * enter max number of returns\n  sp/api/database/type/Reference/max/10";
+		print "  sp/api/staff/email/you@miami.edu/key/api-key\n  sp/api/staff/email/you@miami.edu,me@miami.edu/key/api-key\n";
+		print "  * select a department by id\n  sp/api/staff/department/99/key/api-key\n  * set a limit\n  sp/api/staff/department/99/max/5/key/api-key\n\n";
+		print "talkback\n  * enter max number of returns\n  sp/api/talkback/max/10/key/api-key\n\ndatabase\n  * Lots of options:\n";
+		print "  sp/api/database/letter/A/key/api-key -- show items beginning with A\n  sp/api/database/letter/Num -- show numbers\n";
+		print "  sp/api/database/search/Science/key/api-key -- show all items with Science in title\n";
+		print "  sp/api/database/subject_id/10/key/api-key -- show all databases associated with that subject id\n";
+		print "  sp/api/database/type/Reference/key/api-key -- show all items with that ctag\n\n";
+		print "  * enter max number of returns\n  sp/api/database/type/Reference/max/10/key/api-key";
 		print "\n\nguides\n* Lots of options:\n";
-		print "  sp/api/guides/subject_id/22 -- show all guides associated with that subject id\n";
-		print "  sp/api/guides/shortform/Nursing -- show all guides associated with that shortform\n";
-		print "  sp/api/guides/type/Subject -- show all guides of that type\n";
-		print "\n  * enter max number of returns\n  sp/api/guides/type/Subject/max/10\n\nfaq\n  * coming soon";
+		print "  sp/api/guides/subject_id/22/key/api-key -- show all guides associated with that subject id\n";
+		print "  sp/api/guides/shortform/Nursing/key/api-key -- show all guides associated with that shortform\n";
+		print "  sp/api/guides/type/Subject/key/api-key -- show all guides of that type\n";
+		print "\n  * enter max number of returns\n  sp/api/guides/type/Subject/max/10/key/api-key\n\nfaq\n  * coming soon";
 		print "\n\n\n  * If web service is not working correctly, the most common problem is that the .htaccess file has the wrong 'RewriteBase' path.";
 		print "\n    It should reflect the path that is after your websites url. E.g. if you have www.mywebsite.com/dir1/sp/api then .htaccess file should have 'RewriteBase' path of /dir1/sp/api/";
 		print "</pre>";

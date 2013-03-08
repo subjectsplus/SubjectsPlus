@@ -163,6 +163,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 					//file
 					$lobjConfig->setConfigPath( $lstrConfigFilePath, FALSE );
 					$lobjConfig->setChangeSalt( TRUE );
+					$lobjConfig->setChangeAPIKey( TRUE );
 					$lobjReturn = $lobjConfig->writeConfigFile();
 
 					//if no error display complete. Otherwise, display error

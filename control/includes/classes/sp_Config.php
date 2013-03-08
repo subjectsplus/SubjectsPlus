@@ -23,6 +23,7 @@ class sp_Config
 	private $lstrConfigPath;
 	private $lobjConfigFile;
 	private $lboolChangeSalt;
+	private $lboolChangeAPIKey;
 	private $lobjSetupDBKeys;
 	private $lobjSetupSiteKeys;
 
@@ -37,6 +38,7 @@ class sp_Config
 		$this->lobjNewConfigValues = array();
 		$this->lstrConfigPath = '';
 		$this->lboolChangeSalt = FALSE;
+		$this->lboolChangeAPIKey = FALSE;
 
 		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus' );
 		$this->lobjSetupSiteKeys = array( 'resource_name', 'institution_name', 'administrator', 'administrator_email', 'email_key', 'tel_prefix' );
@@ -94,6 +96,17 @@ class sp_Config
 	}
 
 	/**
+	 * sp_Config::setChangeAPIKey() - this method sets the change API key property
+	 *
+	 * @param boolean $lboolChange
+	 * @return void
+	 */
+	public function setChangeAPIKey( $lboolChange = FALSE )
+	{
+		$this->lboolChangeAPIKey = $lboolChange;
+	}
+
+	/**
 	 * setNewConfigValues()- this method gathers all POST configurations based on
 	 * options property which specify type of configuration and srubs them and then
 	 * sets the new values property
@@ -143,6 +156,17 @@ class sp_Config
 	public function getChangeSalt()
 	{
 		return $this->lboolChangeSalt;
+	}
+
+	/**
+	 * sp_Config::getChangeAPIKey() - this method is a getter for the private change
+	 * API key property
+	 *
+	 * @return boolean
+	 */
+	public function getChangeAPIKey()
+	{
+		return $this->lboolChangeAPIKey;
 	}
 
 	/**
@@ -915,11 +939,18 @@ class sp_Config
 		$pword = $this->lobjNewConfigValues[ 'pword' ];
 		$dbName_SPlus = $this->lobjNewConfigValues[ 'dbName_SPlus' ];
 
-		//if installing, chnage the salt of the SubjectsPlus config file
+		//if installing, change the salt of the SubjectsPlus config file
 		if( $this->lboolChangeSalt )
 		{
 			$this->lobjConfigOptions[ 'salt' ] = array( "", "", "string", "", "", "", "" );
 			$this->lobjNewConfigValues[ 'salt' ] = $this->generateRandomString( 11 );
+		}
+
+		//if installing, change the API key of the SubjectsPlus config file
+		if( $this->lboolChangeAPIKey )
+		{
+			$this->lobjConfigOptions[ 'api_key' ] = array( "", "", "string", "", "", "", "" );
+			$this->lobjNewConfigValues[ 'api_key' ] = $this->generateRandomString( 20, FALSE );
 		}
 
 		//go through file array to change the variables configurations
@@ -1110,10 +1141,14 @@ class sp_Config
 	 * @param integer $lintLength
 	 * @return string
 	 */
-	private function generateRandomString( $lintLength = 10 )
+	private function generateRandomString( $lintLength = 10, $lboolSpecialCharacters = TRUE )
 	{
-		//list of vaild random characters
-		$lstrCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%^&*';
+		//list of vaild random characters; includes special characters depending on flag
+		if( $lboolSpecialCharacters )
+			$lstrCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%^&*';
+		else
+			$lstrCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 		$lstrRandomString = '';
 		for ($i = 0; $i < $lintLength; $i++)
 		{

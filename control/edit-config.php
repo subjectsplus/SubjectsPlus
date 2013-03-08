@@ -67,6 +67,8 @@ if(!is_writable($lstrConfigFilePath))
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 							_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),
 
+							"api_enabled" => array( _( "Enable the API service" ), _( "If turned off, the API will return empty results" ), "boolean", "right", "small", "" , "" ),
+
 							"user_bio_update" => array( _( "Enable Users to Edit Bio" ), "", "boolean", "right", "small", "" , "" ),
 
 							"user_photo_update" => array( _( "Enable Users to Edit Headshot Photo" ), "", "boolean", "right", "small", "" , "" ),
