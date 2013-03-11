@@ -161,7 +161,7 @@ class sp_WebServiceHandler
 		}
 
 		print "<pre><strong>You need to send the API security key in order for the API to work.</strong>";
-		print "\nThe key is in the config file (REMEMBER that security key might need to be url encoded to be passed)</pre>";
+		print "\nThe key can be viewed in the 'Config Site' page, under the Admin tab. (REMEMBER that security key might need to be url encoded to be passed)</pre>";
 		print "<pre>You Can Query Like This:\n/sp/api/service/parameter-name/parameter-value/key/api-key\n\n";
 		print "Results can be returned as xml or json (default).  E.g.:\nsp/api/staff/output/xml/key/api-key\n\n";
 		print "staff\n  * enter email address to return results.  Separate multiple addresses with commas.  Examples:\n";
