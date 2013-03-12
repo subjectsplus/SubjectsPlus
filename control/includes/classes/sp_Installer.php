@@ -377,8 +377,8 @@ class sp_Installer
 			<h2 class="bw_head"><?php echo _( "Installation Complete" ); ?></h2>
 			<div class="box" name="error_page" align="center">
 				<p><?php echo _( "SubjectsPlus installation complete. Please log in." ); ?></p>
-				<p><?php echo _( "<strong>Username: </strong> admin@sp.edu" ); ?></p>
-				<p><?php echo _( "<strong>Password: </strong> " ); echo $this->lstrRandomPassword ?></p>
+				<p><?php echo _( "<strong>Username: </strong> " ) . "admin@sp.edu"; ?></p>
+				<p><?php echo _( "<strong>Password: </strong> " ); echo htmlentities($this->lstrRandomPassword) ?></p>
 				<p><a href="login.php" target="_blank"><?php echo _( "Log In" ); ?></a></p>
 			</div>
 		</div>
