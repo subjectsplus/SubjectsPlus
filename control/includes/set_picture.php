@@ -6,7 +6,7 @@
  *
  *   @author adarby
  *   @date Sep 17, 2009
- *   @todo 
+ *   @todo
  */
 $subsubcat = "";
 $subcat = "";
@@ -89,13 +89,32 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
   // in its *temporary* location in the server (often, it is /tmp)
   if ($handle->uploaded) {
 
+  	//check width.
+  	list( $intOriginalWidth, $intOriginalHeight ) = getimagesize($handle->file_src_pathname);
+  	switch( $intOriginalWidth )
+  	{
+  		case ( $intOriginalWidth < 70 ): //if less than 70, resize to 70 and create headshot file
+  			$handle->image_x = 70;
+  			$handle->file_new_name_body = 'headshot';
+  			$lboolResize = FALSE;
+  			break;
+  		case ( $intOriginalWidth < 225 ): //If greater than 70 and less than 225, upload with width as is to headshot_large
+  			$handle->image_x = $intOriginalWidth;
+  			$handle->file_new_name_body = 'headshot_large';
+  			$lboolResize = TRUE;
+  			break;
+  		default:
+  			$handle->image_x = 225; //If greater than 225, resize to 225 and create headshot_large file
+  			$handle->file_new_name_body = 'headshot_large';
+  			$lboolResize = TRUE;
+  			break;
+  	}
+
     // yes, the file is on the server
     // below are some example settings which can be used if the uploaded file is an image.
     $handle->image_resize = true;
     $handle->image_ratio_y = true;
-    $handle->image_x = 70;
     $handle->image_convert = 'jpg';
-    $handle->file_new_name_body = 'headshot';
     $handle->file_overwrite = true;
     $handle->file_auto_rename = false;
     $handle->dir_auto_chmod = true;
@@ -107,6 +126,21 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
 
     // we check if everything went OK
     if ($handle->processed) {
+
+    	//if resize is true, large was uploaded so resize and create thumbnail
+    	//if resize is false, just copy thumbnail as headshot_large
+      if( $lboolResize )
+      {
+      	list( $width, $height ) = getimagesize($dir_dest . DIRECTORY_SEPARATOR . "headshot_large.jpg");
+        $rscThumbnail = imagecreatetruecolor(70, 70);
+        $rscLargeImage = imagecreatefromjpeg($dir_dest . DIRECTORY_SEPARATOR . "headshot_large.jpg");
+        imagecopyresampled( $rscThumbnail, $rscLargeImage, 0, 0, 0, 0, 70, 70, $width, $height );
+        imagejpeg( $rscThumbnail, $dir_dest . DIRECTORY_SEPARATOR . "headshot.jpg" );
+      }else
+      {
+      	copy( $dir_dest . DIRECTORY_SEPARATOR . "headshot.jpg", $dir_dest . DIRECTORY_SEPARATOR . "headshot_large.jpg" );
+      }
+
       // everything was fine ! Close the modal window
       ?>
       <script type="text/javascript" language="javascript"> $(document).ready(function(){ parent.$.colorbox.close(); }); </script>

@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file services/staff_details.php
- *   @brief 
+ *   @brief
  *
  *   @author adarby
  *   @date July 1, 2010
@@ -66,7 +66,7 @@ $tel = $tel_prefix . $staffmem[4];
 
 $fullname = $staffmem[2] . " " . $staffmem[1];
 
-$info = "<img src=\"" . $UserPath . "/_$check_this/headshot.jpg\" alt=\"Picture: $staffmem[2] $staffmem[1]\"
+$info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: $staffmem[2] $staffmem[1]\"
 title=\"Picture: $staffmem[2] $staffmem[1]\"  align=\"left\" class=\"staff_photo\" />
 <p style=\"margin-top; 0; padding-top: 0; font-size: larger;\"><strong>$fullname</strong><br />
 $staffmem[3]<br />
