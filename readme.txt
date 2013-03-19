@@ -106,7 +106,7 @@ the wiki (http://www.subjectsplus.com/wiki/).
 -- Additional guide metadata (description, keywords)
 -- Beta integration into Serials Solution's Summon
 -- 3 Column guide layout
--- Boxes without titlebars!  Tip:  give it a title of "notitle"
+-- Boxes without titlebars!  Tip:  give it a title of "notitleNew "
 -- New "Lost Password" functionality
 -- On upgrade from 1.x, chchchanges table is cleared, so only original insert and last update data retained
 

@@ -5,7 +5,7 @@
  *   @brief 
  *
  *   @author adarby, rgilmour
- *   @date feb 2012
+ *   @date mar 2013
  */
 $subcat = "video";
 $page_title = "Video Admin";
@@ -247,13 +247,16 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
       // API endpoint
       $api_endpoint = 'http://vimeo.com/api/v2/' . $vid_user_name;
       $vid_data = $api_endpoint . "/videos.xml";
+      if ($start_index == 2 || $start_index == 3) {
+        $vid_data .= "?page=$start_index";
+      }
       $base = "video";
-
       break;
+
     case "YouTube":
       // API endpoint
-  	  $api_endpoint = 'http://gdata.youtube.com/feeds/api/users/' . $vid_user_name;
-  	  $vid_data = $api_endpoint . '/uploads?max-results=50&start-index=' . $start_index;
+      $api_endpoint = 'http://gdata.youtube.com/feeds/api/users/' . $vid_user_name;
+      $vid_data = $api_endpoint . '/uploads?max-results=50&start-index=' . $start_index;
       $base = "entry";
       break;
   }
@@ -318,9 +321,9 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
         $this_vid_duration = $attrs['seconds'];
         break;
     }
-	
-	$vid_count++;
-	
+  
+  $vid_count++;
+  
     // check if this video is in place
     $qcheck = "SELECT title FROM video WHERE foreign_id = \"" . $this_vid_id . "\"";
     //print $qcheck;
@@ -346,15 +349,32 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
 
     $row_count++;
   }
-  
-  if ($vid_count % 50) { // we've probably got 'em all
-  	$content .= "</table>";                          
-    return $content;
-  } else {               // there are probably more                             
-    $start_index += 50;
-    $content .= seekVids($source, $vid_user_name, $start_index, $vid_count);
-    return $content;
-  }
+   switch($source) {
+
+    case "YouTube":
+      if ($vid_count % 50) { // we've probably got 'em all
+        $content .= "</table>";                          
+        return $content;
+      } else {               // there are probably more                             
+        $start_index += 50;
+        $content .= seekVids($source, $vid_user_name, $start_index, $vid_count);
+        return $content;
+      }
+    break;
+
+    case "Vimeo":            // THIS WILL ONLY WORK FOR 60 VIDEOS OR FEWER
+      if ($vid_count % 20) { // we've probably got 'em all
+        $content .= "</table>";
+        return $content;
+      } else {              // there are probably more
+        $start_index++;
+        $content .= seekVids($source, $vid_user_name, $start_index, $vid_count);
+        return $content;
+      }
+    break;
+
+   }
+
 }
 
 ?>

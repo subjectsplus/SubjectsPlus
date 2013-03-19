@@ -40,7 +40,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbar_SubsPlus_Narrow =
 	[
 
-		['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteWord','-', 'Source'],
+		['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteWord','-', 'Source'],
 
 		'/',
 
@@ -51,13 +51,13 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbar_SubsPlus =
 	[
 
-		['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteWord','-', 'Source', '-', 'GetResourceToken', 'GetFile', 'GetFAQs', 'GetCatalogLink']
+		['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteWord','-', 'Source', '-', 'GetResourceToken', 'GetFile', 'GetFAQs', 'GetCatalogLink']
 
 	];
 
 	config.toolbar_Basic =
 	[
-		['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteWord','-', 'Source']
+		['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteWord','-', 'Source']
 	];
 
 	config.enterMode = CKEDITOR.ENTER_BR;

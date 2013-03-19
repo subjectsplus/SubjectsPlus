@@ -156,9 +156,6 @@ mb_internal_encoding('UTF-8');
 
     print generatejQuery($our_jquery);
 
-// add our shared ckeditor file ...next version!
-//print "<script type=\"text/javascript\" src=\"$BaseURL" . "ckeditor/ckeditor.js\"></script>\n";
-//print "<script type=\"text/javascript\" src=\"$BaseURL" . "ckeditor/adapters/jquery.js\"></script>\n";
     ?>
 
 
