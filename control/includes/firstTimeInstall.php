@@ -17,6 +17,7 @@ include("header.php");
 				<ul>
 					<li><?php echo _( 'Change your default password to something more memorable.' ) ?></li>
 					<li><?php echo _( 'Configure SubjectsPlus ' ) ?><a href="../edit-config.php" target="_blank"><?php echo _( 'here' ) ?></a>.</li>
+					<li><a href="http://www.subjectsplus.com/wiki/"><?php echo _( 'Find out about customizing and using SP on the wiki. ' ) ?></a>.</li>
 				</ul>
 			</div>
 		</div>

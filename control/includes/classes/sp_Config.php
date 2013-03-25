@@ -360,6 +360,7 @@ class sp_Config
 		$lstrLeftHTML = '';
 		$lstrRightHTML = '';
 		$lstrLeftBottomHTML = '';
+		$lstrRightBottomHTML = '';
 
 		//go through all options
 		foreach( $this->lobjConfigOptions as $lstrKey => $lobjOption )
@@ -507,6 +508,9 @@ class sp_Config
 			}elseif( strtolower( $lobjOption[3] ) == 'left-bottom' )
 			{
 				$lstrLeftBottomHTML .= $lstrHTML;
+			}elseif( strtolower( $lobjOption[3] ) == 'right-bottom' )
+			{
+				$lstrRightBottomHTML .= $lstrHTML;
 			}else
 			{
 				$lstrRightHTML .= $lstrHTML;
@@ -530,10 +534,13 @@ class sp_Config
 				<div class="box" align="center">
 					<input type="submit" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
 				</div>
-
 				<h2 class="bw_head"><?php echo _( "Other Configurations" ); ?></h2>
 				<div class="box">
 					<?php echo $lstrRightHTML; ?>
+				</div>
+				<h2 class="bw_head"><?php echo _( "Catalog Connections" ); ?></h2>
+				<div class="box">
+					<?php echo $lstrRightBottomHTML; ?>
 				</div>
 			</div>
 		</form>

@@ -1,4 +1,4 @@
-// SubjectsPlus Version 2.0 (Beta) //
+// SubjectsPlus Version 2.0 //
 
 SubjectsPlus is based on "Pirate Source," developed by the Joyner Library at East
 Carolina University.  No license was attached to the initial distribution of the
@@ -63,7 +63,7 @@ UPDATE, ALTER, DELETE, CREATE and DROP privileges.
 4. In the Control Panel, visit admin > config site and see if anything needs tweaking.  For instance, there is now
 an enlarged set of info about staff users; you might want to cut it back and/or decide which fields are required.
 
-5.  Everything went okay?  Hooray!  Now make sure these folder permissions are okay.  (The first two probably were
+5.  Everything went okay?  Hooray!  Now make sure these folder permissions are okay.  (The first two probably were OK 
 or else the installer would have conked out.)
 
 /control/includes/config-default.php     --- readable by php to make config.php

@@ -101,7 +101,21 @@ if(!is_writable($lstrConfigFilePath))
 
 							"upload_whitelist" => array( _( "List of accepted uploads' file extentions" ), _( "This option contains the coma-separated list of accepted file extensions for file uploads via CKEditor." ), "array", "right", "large", "" , _("If a file isn't in this list, it should not be uploaded.  File uploads only occur via the admin backend, using CKEditor, but this is to stop a user from doing something, uh, foolish.") ),
 
-							"proxyURL" => array( _( "Proxy URL" ), _( "String which should be prepended if you use a proxy server" ), "string", "right", "large", "" , _( "In the Records tab of SP, if you flag an item as 'restricted,' the proxy string will be prepended." ) ),
+							"proxyURL" => array( _( "Proxy URL" ), _( "String which should be prepended if you use a proxy server" ), "string", "right-bottom", "large", "" , _( "In the Records tab of SP, if you flag an item as 'restricted,' the proxy string will be prepended." ) ),
+
+							"open_string" => array( _( "Open String" ), _( "Used to create a link to an item in your Catalog. Your subject search term is sandwiched between these two strings" ), "string", "right-bottom", "medium", "" , "" ),
+
+							"close_string" => array( _( "Close String" ), _( "If you don't need to close string, leave blank." ), "string", "right-bottom", "medium", "" , "" ),
+
+							"open_string_kw" => array( _( "Open String Keyword" ), _( "As above, for Keyword search." ), "string", "right-bottom", "medium", "" , "" ),
+
+							"close_string_kw" => array( _( "Close String Keyword" ), _( "If necessary." ), "string", "right-bottom", "medium", "" , "" ),
+
+							"open_string_cn" => array( _( "Open String Call Number" ), _( "As above, for Call Number search." ), "string", "right-bottom", "medium", "" , "" ),
+
+							"close_string_cn" => array( _( "Close String Call Number" ), _( "If necessary." ), "string", "right-bottom", "medium", "" , "" ),
+
+							"open_string_bib" => array( _( "Open String Bib" ), _( "Used to create a link to an item in your Catalog. Your Bib search term is sandwiched between these two strings" ), "string", "right-bottom", "medium", "" , "" ),
 
 							"CKBasePath" => array( _( "Base Path for CKEditor" ), _( "Path to CKEditor files appended to base URL" ), "string", "left", "medium", "" , _( "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path." ) )
 						 );
