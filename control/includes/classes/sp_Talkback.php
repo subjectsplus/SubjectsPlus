@@ -18,6 +18,7 @@ class sp_Talkback {
   private $_a_from;
   private $_display;
   private $_tbtags;
+  private $_cattags;
   private $_message;
 
   public function __construct($talkback_id="", $flag="") {
@@ -41,6 +42,7 @@ class sp_Talkback {
         $this->_a_from = $_POST["a_from"];
         $this->_display = $_POST["display"];
         $this->_tbtags = $_POST["tbtags"]; // array
+        $this->_cattags = $_POST["cattags"]; // array
         break;
       case "delete":
         // kind of redundant, but just set up to delete appropriate tables?
@@ -58,7 +60,7 @@ class sp_Talkback {
         /////////////
 
         $querier = new sp_Querier();
-        $q1 = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_entered, answer, a_from, display, tbtags
+        $q1 = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_entered, answer, a_from, display, tbtags, cattags
                     FROM talkback WHERE talkback_id = " . $this->_talkback_id;
         $guideArray = $querier->getResult($q1);
 
@@ -75,6 +77,7 @@ class sp_Talkback {
           $this->_a_from = $guideArray[0]["a_from"];
           $this->_display = $guideArray[0]["display"];
           $this->_tbtags = $guideArray[0]["tbtags"];
+          $this->_cattags = $guideArray[0]["cattags"];
         }
 
         ///////////////////
@@ -101,6 +104,7 @@ class sp_Talkback {
     global $IconPath;
     global $guide_types;
     global $all_tbtags;
+  	global $all_cattags;
 
     //print "<pre>";print_r($this->_staffers); print "</pre>";
 
@@ -186,7 +190,7 @@ class sp_Talkback {
 ////////////////////
 
     $tb_tags = "<input type=\"hidden\" name=\"tbtags\" value=\"" . $this->_tbtags . "\" />
-			<span class=\"record_label\">Tags (Highlight library and/or topic)</span><br />";
+			<span class=\"record_label\">Site Tags (Highlight relative library sites)</span><br />";
 
     $current_tbtags = explode("|", $this->_tbtags);
 
@@ -203,6 +207,31 @@ class sp_Talkback {
         $tb_tags .= "<span class=\"ctag-on\">$key</span>";
       } else {
         $tb_tags .= "<span class=\"ctag-off\">$key</span>";
+      }
+      $tag_count++;
+    }
+
+/////////////////////
+// cattags
+////////////////////
+
+    $cat_tags = "<input type=\"hidden\" name=\"cattags\" value=\"" . $this->_cattags . "\" />
+			<span class=\"record_label\">Topic Tags (Highlight relative topics)</span><br />";
+
+    $current_cattags = explode("|", $this->_cattags);
+
+    $tag_count = 0; // added because if you have a lot of ctags, it just stretches the div forever
+
+    foreach ($all_cattags as $key => $value) {
+      if ($tag_count == 3) {
+        $cat_tags .= "<br />";
+        $tag_count = 0;
+      }
+
+      if (in_array($value, $current_cattags)) {
+        $cat_tags .= "<span class=\"ctag-on\">$value</span>";
+      } else {
+        $cat_tags .= "<span class=\"ctag-off\">$value</span>";
       }
       $tag_count++;
     }
@@ -232,7 +261,12 @@ class sp_Talkback {
             $answerer
             <br /><br />
             $is_live
+            <div ctag-data=\"tbtags\">
             $tb_tags
+            </div>
+            <div ctag-data=\"cattags\">
+            $cat_tags
+            </div>
             </div>
             </form>";
   }
@@ -280,7 +314,7 @@ class sp_Talkback {
     // update tb table
     /////////////////////
 
-    $qInsertTB = "INSERT INTO talkback (question, q_from, date_submitted, answer, a_from, display, tbtags) VALUES (
+    $qInsertTB = "INSERT INTO talkback (question, q_from, date_submitted, answer, a_from, display, tbtags, cattags) VALUES (
 	  '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
 	  '" . mysql_real_escape_string(scrubData($this->_q_from, "text")) . "',
       NOW(),
@@ -288,6 +322,7 @@ class sp_Talkback {
 	  '" . mysql_real_escape_string(scrubData($this->_a_from, "text")) . "',
       '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
       '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "'
+      '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
           )";
 
     $rInsertTB = mysql_query($qInsertTB);
@@ -324,7 +359,8 @@ class sp_Talkback {
   	  if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
   	  else 	$qUpTB .= "a_from = '" . mysql_real_escape_string(scrubData($this->_a_from, "text")) . "',";
   	  $qUpTB .= "display = '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      tbtags = '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "'
+      tbtags = '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "',
+      cattags = '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
       WHERE talkback_id = " . scrubData($this->_talkback_id, "integer");
 
     $rUpTB = mysql_query($qUpTB);

@@ -35,6 +35,11 @@ $all_ptags = array("talkback", "faq", "records", "eresource_mgr", "videos", "adm
 // the key is the email address to which notification should be sent.  No value = send to admin.
 $all_tbtags = array( "main" => "");
 
+// These are the tags associated with TalkBack entries.  Used in a pipe-delimited
+// list in the cattags field of the talkback table. They can be
+// used to tag talkbacks with categories.
+$all_cattags = array( "Noise", "Resources", "Computers", "Facilities", "Services");
+
 // To add a new background option (for the admin), create a new css file (e.g.
 // sp/assets/css/green.css ) and then add "green" to this array.  Boom!
 $all_bgs = array("basic", "flocking", "metamorphosis");

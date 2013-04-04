@@ -197,6 +197,9 @@ function curl_get($url) {
 // Found in talkback
 
 function TruncByWord($phrase, $max_words) {
+  //remove all tags (if any) so that html is not included
+  $phrase = preg_replace( '/<[^>]*>/', '', $phrase );
+
   $phrase_array = explode(' ', $phrase);
   if (count($phrase_array) > $max_words && $max_words > 0)
     $phrase = implode(' ', array_slice($phrase_array, 0, $max_words)) . '...';

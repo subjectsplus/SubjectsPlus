@@ -11,7 +11,7 @@ $subcat = "talkback";
 $page_title = "Manage TalkBack";
 
 // Suppress header if it is to be shown in colorbox or popup window
-if ($_REQUEST["wintype"] == "pop") {
+if ( isset( $_REQUEST["wintype"] ) && $_REQUEST["wintype"] == "pop") {
     $no_header = "yes";
 }
 
@@ -108,9 +108,9 @@ include("../includes/footer.php");
         ///////////////
 
         $("span[class*=ctag-]").livequery('click', function() {
-	
+
             var all_tags = "";
-	
+
             // change to other class
             if ($(this).attr("class") == "ctag-off") {
                 $(this).attr("class", "ctag-on");
@@ -122,16 +122,17 @@ include("../includes/footer.php");
             $(this).parent().find(".ctag-on").each(function(i) {
                 var this_ctag = $(this).text();
                 all_tags = all_tags + this_ctag + "|";
-		
+
             });
             // strip off final pipe (|)
             all_tags = all_tags.replace( /[|]$/, "" );
             // set new value to hidden form field
-            $(this).parent().find("input[name*=tbtags]").val(all_tags);
-	
+        	lstrName = $(this).parent().attr("ctag-data");
+            $(this).parent().find("input[name*=" + lstrName + "]").val(all_tags);
+
 
         });
-        
+
         ////////////////
         // Check Submit
         // When the form has been submitted, check required fields
@@ -164,7 +165,7 @@ include("../includes/footer.php");
             if (alerter == 1) {
                 alert("<?php print _("You must complete all required form fields."); ?>");
                 return false;
-            } 
+            }
 
         });
 

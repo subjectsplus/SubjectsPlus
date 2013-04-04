@@ -24,10 +24,16 @@ if (isset($_GET["tbtag"]) && $_GET["tbtag"] != "") {
   $set_tag = "";
 }
 
+if (isset($_GET["cattag"]) && $_GET["cattag"] != "") {
+	$set_cattag = scrubData($_GET["cattag"]);
+} else {
+	$set_cattag = "";
+}
+
 //////////////////////
 // LIMITS
 // Set up limit for use in page; in sql; and acceptable range of limits
-// 
+//
 //////////////////////
 
 // See if user has submitted limit
@@ -48,10 +54,10 @@ if (isset($_GET["show"]) && $_GET["show"] != "") {
       break;
     default:
       $our_sql_limit = "LIMIT 0, 25";
-      $set_limit = $default_limit; 
+      $set_limit = $default_limit;
   }
 } else {
-  $set_limit = $default_limit; 
+  $set_limit = $default_limit;
   $our_sql_limit = "LIMIT 0, 25";
 }
 
@@ -65,12 +71,16 @@ $our_limit = ""; // init
 // Loop through all available tags; determine which is IT
 
 $our_filter = ""; // init -- used in limit URL
-$filters = ""; // init 
+$cat_filter = ""; //init
+$filters = ""; // init
+$cat_filters = ""; // init
+
 
 // let's add the default no filter to our array
 $prepend_array = array("All" => "All");
 
 $all_tbtags = $prepend_array + $all_tbtags;
+$all_cattags = $prepend_array + $all_cattags;
 
 foreach ($all_tbtags as $key => $value) {
   if (isset($_GET["tbtag"]) && $key == $_GET["tbtag"]) {
@@ -79,7 +89,17 @@ foreach ($all_tbtags as $key => $value) {
   } else {
     $tag_class = "ctag-off";
   }
-  $filters .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$key&show=$set_limit\" class=\"filter_results\">$key</a></span>";
+  $filters .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$key&show=$set_limit&cattag=\" class=\"filter_results\">$key</a></span>";
+}
+
+foreach ($all_cattags as $value) {
+	if (isset($_GET["cattag"]) && $value == $_GET["cattag"]) {
+		$tag_class = "ctag-on";
+		$cat_filter = $value;
+	} else {
+		$tag_class = "ctag-off";
+	}
+	$cat_filters .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$our_filter&show=$set_limit&cattag=$value\" class=\"filter_results\">$value</a></span>";
 }
 
 // layout for our # to show
@@ -91,9 +111,9 @@ foreach ($num_filters as $value) {
     $tag_class = "ctag-on";
   } else {
     $tag_class = "ctag-off";
-    
+
   }
-  $show_links .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$our_filter&show=$value\" class=\"filter_results\">$value</a></span>";
+  $show_links .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$our_filter&show=$value&cattag=$cat_filter\" class=\"filter_results\">$value</a></span>";
 }
 
 /////////////////////
@@ -105,6 +125,13 @@ if (isset($_GET["tbtag"]) && $_GET["tbtag"] != '' && $_GET["tbtag"] != 'All' ) {
   $sql_where = "WHERE tbtags LIKE '%" . $set_tag . "%'";
 } else {
   $sql_where = "";
+}
+
+if (isset($_GET["cattag"]) && $_GET["cattag"] != '' && $_GET["cattag"] != 'All' ) {
+	if( $sql_where == '' ) $sql_where .= "WHERE cattags LIKE '%" . $_GET["cattag"] . "%'";
+	else $sql_where .= " AND cattags LIKE '%" . $_GET["cattag"] . "%'";
+} else {
+	$sql_where .= "";
 }
 
 $querierTBYES = new sp_Querier();
@@ -131,7 +158,8 @@ $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
 <h2 class="bw_head"><?php print _("View and Answer TalkBacks"); ?></h2>
 <div class="box no_overflow">
   <p><?php print _("Show:") . $show_links; ?> </p>
-  <p><?php print _("Filter:") . $filters; ?></p>
+  <p><?php print _("Site Filter:") . $filters; ?></p>
+  <p><?php print _("Topic Filter:") . $cat_filters; ?></p>
   <br /><br />
   <?php print $tb_yes_answer; ?>
 </div>
@@ -169,7 +197,7 @@ function genTalkBacks($tbArray, $show_response = 1) {
   if (!is_array($tbArray)) {
     return "<strong>" . _("Alas, there are no items with this tag.") . "</strong>";
   }
-  
+
   foreach ($tbArray as $key=>$value) {
     $tb_tagger = "";
     $row_colour = ($row_count2 % 2) ? $colour1 : $colour2;
@@ -182,9 +210,11 @@ function genTalkBacks($tbArray, $show_response = 1) {
 
     if ($value["answer"] == '') {
       $row_colour = "tb_highlight";
-      $tb_tagger = "<span class=\"ctag-on\">" . $value["tbtags"] . "</span>";
     }
-    
+
+  	//show tag even if answer is not empty
+	$tb_tagger = "<span class=\"ctag-on\">" . $value["tbtags"] . "</span>";
+
     if (isset($show_response) && $show_response == 0) {
       $first_div_width = "90%";
       $last_mod_tb = "";
@@ -202,7 +232,7 @@ function genTalkBacks($tbArray, $show_response = 1) {
     } else {
       $mod_line = "";
     }
-    
+
     $tb_answer .= "
             <div style=\"clear: both; float: left;  padding: 3px 5px; width: 98%;\" class=\"striper $row_colour\">
                 <div style=\"float: left; width: 32px; max-width: 5%;\"><a class=\"showmedium-reloader\" style=\"color: #333;\" href=\"talkback.php?talkback_id=$value[0]&amp;wintype=pop\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a></div>

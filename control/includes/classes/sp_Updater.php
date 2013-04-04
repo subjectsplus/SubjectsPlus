@@ -168,7 +168,7 @@ class sp_Updater
 			"ALTER TABLE `staff_subject` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NOT NULL DEFAULT '0'",
 			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq` , DROP COLUMN `rss`,
 			ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform` , ADD COLUMN `keywords` VARCHAR(255) NULL DEFAULT NULL  AFTER `description`",
-			"ALTER TABLE `talkback` ADD COLUMN `tbtags` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_revised_by` , ADD COLUMN `tootags` VARCHAR(255) NULL DEFAULT NULL  AFTER `tbtags`",
+			"ALTER TABLE `talkback` ADD COLUMN `tbtags` VARCHAR(255) NULL DEFAULT 'main'  AFTER `last_revised_by` , ADD COLUMN `tootags` VARCHAR(255) NULL DEFAULT NULL  AFTER `tbtags`",
 			"ALTER TABLE `title` ADD COLUMN `alternate_title` VARCHAR(255) NULL DEFAULT NULL  AFTER `title`",
 			"ALTER TABLE `department`  ADD INDEX `INDEXSEARCHdepart` (`name` ASC)",
 			"ALTER TABLE `faq_faqpage` ADD CONSTRAINT `fk_ff_faq_id` FOREIGN KEY (`faq_id` ) REFERENCES `faq` (`faq_id` ) ON DELETE CASCADE ON UPDATE CASCADE,
