@@ -1,6 +1,6 @@
 # SubjectsPlus 
 
-SubjectsPlus is a a LAMP application that allows you to manage a number of interrelated parts of a library website:
+SubjectsPlus is a a LAMP/WAMP application that allows you to manage a number of interrelated parts of a library website:
 
 * Research Guides (i.e., subject, course, etc.)
 * Database A-Z List
