@@ -167,7 +167,9 @@ class sp_WebServiceHandler
 		print "staff\n  * enter email address to return results.  Separate multiple addresses with commas.  Examples:\n";
 		print "  sp/api/staff/email/you@miami.edu/key/api-key\n  sp/api/staff/email/you@miami.edu,me@miami.edu/key/api-key\n";
 		print "  * select a department by id\n  sp/api/staff/department/99/key/api-key\n  * set a limit\n  sp/api/staff/department/99/max/5/key/api-key\n\n";
-		print "talkback\n  * enter max number of returns\n  sp/api/talkback/max/10/key/api-key\n\ndatabase\n  * Lots of options:\n";
+		print "talkback\n  * show all talkbacks submitted between start date and end date\n  sp/api/talkback/startdate/2013-04-01/enddate/2013-04-30/key/api-key\n";
+		print "  * show all talkbacks submitted on one date\n  sp/api/talkback/startdate/2013-04-01/key/api-key\n";
+		print "  * enter max number of returns\n  sp/api/talkback/max/10/key/api-key\n\ndatabase\n  * Lots of options:\n";
 		print "  sp/api/database/letter/A/key/api-key -- show items beginning with A\n  sp/api/database/letter/Num -- show numbers\n";
 		print "  sp/api/database/search/Science/key/api-key -- show all items with Science in title\n";
 		print "  sp/api/database/subject_id/10/key/api-key -- show all databases associated with that subject id\n";
