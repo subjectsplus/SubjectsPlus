@@ -857,9 +857,10 @@ echo "</div>
       $path = "../../assets/users/_" . $user_folder[0];
       mkdir($path);
 
-      // And copy over the generic headshot image
+      // And copy over the generic headshot image and headshot_large image
       $nufile = $path . "/headshot.jpg";
       $copier = copy("../../assets/images/headshot.jpg", $nufile);
+      $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
     }
 
     // /////////////////////
