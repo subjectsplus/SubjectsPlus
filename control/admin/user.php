@@ -302,6 +302,8 @@ include("../includes/footer.php");
     	//////////////////
 
     	$("*[class*=required_field]").prev().prev().append('<span style="color: red;">*</span>');
+    	//The telephone field needs an additional prev
+    	$("#tel[class*=required_field]").prev().prev().append('<span style="color: red;">*</span>');
 
         //////////////////
         // Make sure that delete was intentional
