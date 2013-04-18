@@ -93,7 +93,8 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
   //print $q . "<br /><br />";
 
   $r = MYSQL_QUERY($q);
-
+  
+  if( !$r ) return $data;
 
   $row_count = mysql_num_rows($r);
 
