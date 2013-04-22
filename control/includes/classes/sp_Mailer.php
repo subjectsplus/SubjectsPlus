@@ -1,10 +1,13 @@
 <?php
 
 class sp_Mailer {
-	
+
   public function __construct() {
-    ini_set("SMTP", $sendmail);
-    ini_set("sendmail_from", $administrator_email);
+  	global $email_server;
+  	global $administrator_email;
+
+  	ini_set("SMTP", $email_server);
+  	ini_set("sendmail_from", $administrator_email);
   }
 
   public function send(sp_MailMessage $m) {

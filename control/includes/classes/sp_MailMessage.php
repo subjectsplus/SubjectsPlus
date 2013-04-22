@@ -23,9 +23,9 @@ class sp_MailMessage {
             if (isset($params['from'])) {
                 $this->_from = $params['from'];
                 $this->_fromString = _("Library_No_Reply") . "<" . $this->_from . ">";
-                $this->_header = "Return-Path: " . $this->_from . "\r\n";
-                $this->_header .= "From:  " . $this->_from . "\r\n";
-                $this->_header .= "Content-Type: text/html; charset=iso-8859-1;\n\n\r\n";
+                $this->_header = "Return-Path: " . $this->_from . "\n";
+                $this->_header .= "From:  " . $this->_from . "\n";
+                $this->_header .= "Content-Type: text/html; charset=iso-8859-1;\n";
             }
         }
     }
