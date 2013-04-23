@@ -50,13 +50,18 @@ $staff_name = $record->getFullName();
 // See if a password has been submitted
 if (isset($_POST['action']) && ($_POST['action'] == 'password')) {
     if ($_POST["password"] != "") {
-        $pass_result = $record->updatePassword($_POST["password"]);
-        if ($pass_result == TRUE) {
-            $feedback = "<div class=\"box\">" . _("Password updated.  Close this box to continue.") . "</div>";
-            $password_box = "";
-        } else {
-            $feedback = "<div class=\"box\">" . _("There was a problem.  Contact the admin.") . "</div>";
-        }
+    	if( $record->correctPassword( $_POST[ 'password' ] ) )
+    	{
+	    	$pass_result = $record->updatePassword($_POST["password"]);
+	        if ($pass_result == TRUE) {
+	            $feedback = "<div class=\"box\">" . _("Password updated.  Close this box to continue.") . "</div>";
+	            $password_box = "";
+	        } else {
+	            $feedback = "<div class=\"box\">" . _("There was a problem.  Contact the admin.") . "</div>";
+	        }
+    	}else{
+    		$feedback = "<div class=\"box\">" . _("Password must have at least one letter, one number, one special character, and be at least 6 characters long.") . "</div>";
+    	}
     } else {
         $feedback = "<div class=\"box\">" . _("You cannot leave the password box blank.  Close this window if you don't want to change the password.") . "</div>";
     }

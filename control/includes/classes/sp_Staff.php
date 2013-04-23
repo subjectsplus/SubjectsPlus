@@ -1071,6 +1071,8 @@ echo "</div>
 
   function correctPassword($lstrPassword)
   {
+  	if( strlen( $lstrPassword ) < 6 ) return false;
+
     $lstrExpression = '/^.*(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$/';
 
     $lintMatch = preg_match($lstrExpression, $lstrPassword);

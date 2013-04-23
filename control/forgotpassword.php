@@ -25,8 +25,11 @@ if(!isset($_GET['id']))
 
 			$lstrForm = $lobjStaff->outputEmailForm();
 		}else{
-			$lstrCode = md5($lobjStaff->getEmail() . $salt);
-			$lstrMessage = "Hello {$lobjStaff->getFullName()},\n\nHere is the link to reset your password. {$BaseURL}control/forgotpassword.php?id={$lobjStaff->getRecordID()}&code={$lstrCode}";
+			$lobjTodayDate = new DateTime();
+
+			//The code is a hased string composed of the user's email, installation's salt, and today's date MMDDYYYY
+			$lstrCode = md5($lobjStaff->getEmail() . $salt . $lobjTodayDate->format('mdY'));
+			$lstrMessage = "Hello {$lobjStaff->getFullName()},\n\nHere is the link to reset your password. Link only works for three days. {$BaseURL}control/forgotpassword.php?id={$lobjStaff->getRecordID()}&code={$lstrCode}";
 
 			mail($lobjStaff->getEmail(), 'Reset password for SubjectsPlus', $lstrMessage, "From: $administrator_email");
 
@@ -55,25 +58,38 @@ if(!isset($_GET['id']))
 				$introtext .= '<br><p align="center"><a href="login.php">Login</a></p>';
 			}else{
 				$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br /><span style=\"background-color:yellow;\">" . _("Passwords did not match.") . "</span><br />" ._("Please enter your new password.")
-					. "<br /><strong>" . _("Password must have at least one letter, one number, and one special character.") . "</strong></p>";
+					. "<br /><strong>" . _("Password must have at least one letter, one number, one special character, and be at least 6 characters long.") . "</strong></p>";
 
 				$lstrForm = $lobjStaff->outputResetPasswordForm();
 			}
 		}else{
 			$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br /><span style=\"background-color:yellow;\">" . _("Password doesn't meet requirements.") . "</span><br />" ._("Please enter your new password.")
-					. "<br /><strong>" . _("Password must have at least one letter, one number, and one special character.") . "</strong></p>";
+					. "<br /><strong>" . _("Password must have at least one letter, one number, one special character, and be at least 6 characters long.") . "</strong></p>";
 
 			$lstrForm = $lobjStaff->outputResetPasswordForm();
 		}
 
 	}else{
+		//create a DateTime object that defaults to today's date
+		$lobjTodayDate = new DateTime();
+		//clone Today's Date object because without clone, the object will pass by reference
+		$lobjTodayMinusOne = clone $lobjTodayDate;
+		//subtract a day from the Date Time object
+		$lobjTodayMinusOne->sub(new DateInterval('P1D'));
+		//clone Today's Date object again
+		$lobjTodayMinusTwo = clone $lobjTodayDate;
+		//subtract 2 days from the Date Time object
+		$lobjTodayMinusTwo->sub(new DateInterval('P2D'));
 
-		if($lobjStaff->getEmail() == NULL || md5($lobjStaff->getEmail() . $salt) != $_GET['code'])
+		//display error if Staff object's email object is null or if the passed code does not equal the hashed code containing
+		//the passed user id for today or the passed 2 days
+		if($lobjStaff->getEmail() == NULL || (md5($lobjStaff->getEmail() . $salt . $lobjTodayDate->format('mdY')) != $_GET['code']
+			&& md5($lobjStaff->getEmail() . $salt . $lobjTodayMinusOne->format('mdY')) != $_GET['code'] && md5($lobjStaff->getEmail() . $salt . $lobjTodayMinusTwo->format('mdY')) != $_GET['code']))
 		{
-			$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br />" . _("The id and email do not match or the id does not exits.") . "</p>";
+			$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br />" . _("The id and email do not match or the id does not exits or the link has expired.") . "</p>";
 		}else{
 			$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br />" . _("Please enter your new password.")
-					. "<br /><strong>" . _("Password must have at least one letter, one number, and one special character.") . "</strong></p>";
+					. "<br /><strong>" . _("Password must have at least one letter, one number, one special character, and be at least 6 characters long.") . "</strong></p>";
 
 			$lstrForm = $lobjStaff->outputResetPasswordForm();
 		}
