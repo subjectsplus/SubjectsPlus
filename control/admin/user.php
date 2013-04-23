@@ -301,9 +301,7 @@ include("../includes/footer.php");
     	// Add red star to labels of required inputs
     	//////////////////
 
-    	$("*[class*=required_field]").prev().prev().append('<span style="color: red;">*</span>');
-    	//The telephone field needs an additional prev
-    	$("#tel[class*=required_field]").prev().prev().append('<span style="color: red;">*</span>');
+    	$("*[class*=required_field]").parent().children('span').append('<span style="color: red;">*</span>');
 
         //////////////////
         // Make sure that delete was intentional
