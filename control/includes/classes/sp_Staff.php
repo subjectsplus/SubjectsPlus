@@ -40,6 +40,7 @@ class sp_Staff {
   private $_fax;
   private $_intercom;
   private $_lat_long;
+  private $_fullname;
 
   public function __construct($staff_id="", $flag="", $full_record = FALSE) {
 
@@ -770,10 +771,27 @@ echo "</div>
   public function insertRecord() {
 
     ////////////////
-    // hash password
+    // check and hash password
     ////////////////
 
-    $this->_password = md5($this->_password);
+  	if( $this->correctPassword($this->_password) )
+  	{
+  		$this->_password = md5($this->_password);
+  	}else
+  	{
+  		$this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
+  		return;
+  	}
+
+  	////////////////
+  	// check whether email is unique
+  	///////////////
+  	if( !$this->isEmailUnique( "insert" ) )
+  	{
+  		$this->_message = _("Email is not unique. Insert was not executed.");
+  		return;
+  	}
+
 
   	////////////////
   	// alter values that are blank that need to be saved as NULL values
@@ -875,6 +893,16 @@ echo "</div>
   }
 
   public function updateRecord() {
+
+  	////////////////
+  	// check whether email is unique
+  	///////////////
+  	if( !$this->isEmailUnique( "update" ) )
+  	{
+  		// message
+  		$this->_message = _("Email is not unique. Update was not executed.");
+  		return;
+  	}
 
   	////////////////
   	// alter values that are blank that need to be saved as NULL values
@@ -1087,6 +1115,26 @@ echo "</div>
 
   function getCoordinates() {
 
+  }
+
+  function isEmailUnique($lstrType = "")
+  {
+  	switch (strtolower( $lstrType ))
+  	{
+  		case "insert":
+  			$lstrQuery = "SELECT email FROM staff WHERE email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "'";
+  			break;
+  		case "update":
+  			$lstrQuery = "SELECT email FROM staff WHERE email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "'
+  						  AND staff_id <> " . scrubData($this->_staff_id, "integer");
+  			break;
+  		default:
+  			return false;
+  	}
+  	$lrscSQL = mysql_query($lstrQuery);
+  	$lintNumberOfRows = mysql_num_rows($lrscSQL);
+  	if( $lintNumberOfRows > 0 ) return false;
+  	return true;
   }
 
 }
