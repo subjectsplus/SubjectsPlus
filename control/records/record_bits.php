@@ -5,7 +5,7 @@
  *   @brief Inserting elements via .load into record.php
  *
  *   @author adarby
- *   @date 
+ *   @date
  *   @todo scrub post vars
  */
 $subsubcat = "";
@@ -73,18 +73,15 @@ switch ($_POST["type"]) {
         break;
     case "check_url":
 
-        // visit the link
-        $c = curl_init($_REQUEST["checkurl"]);
-        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($c, CURLOPT_NOBODY, 1);
-        curl_setopt($c, CURLOPT_HEADER, 1);
-        $link_headers = curl_exec($c);
-        $curl_info = curl_getinfo($c);
-        curl_close($c);
+        // check link
+    	if( isset($_POST['useProxy']) && $_POST['useProxy'] == 'TRUE' )
+    		$lobjLinkChecker = new sp_LinkChecker($proxyURL, 5, FALSE);
+    	else
+    		$lobjLinkChecker = new sp_LinkChecker('', 5, FALSE);
 
-        $rc = $curl_info['http_code'];
+    	$lobjError = $lobjLinkChecker->checkUrl($_REQUEST["checkurl"]);
 
-        if ($rc == "200") {
+        if ($lobjError['message'] == "") {
             $feedback = _("This URL looks OK to me");
             print "<img src=\"$IconPath/accept.png\" alt=\"check url\" border=\"0\" id=\"check_url\" alt=\"$feedback\" title=\"$feedback\" >";
         } else {

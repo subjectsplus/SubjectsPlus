@@ -63,10 +63,10 @@ if ($num_rows > 0) {
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
 
-        $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp; 
+        $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp;
         <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"$gear_alt\" title=\"$gear_alt\" border=\"0\" /></a> &nbsp;&nbsp;
         <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><img src=\"$IconPath/eye.png\" alt=\"$eye_alt\" border=\"0\" /></a> &nbsp;&nbsp;
-        <a class=\"showmedium\" href=\"../includes/linkchecker.php?shortform=$myrow1[3]&amp;wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" border=\"0\" /></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
+        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" border=\"0\" /></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
         if ($active != "1") {
             $myguides .= " <span style=\"color: #666;\">" . _("unpublished") . "</span>";
         }

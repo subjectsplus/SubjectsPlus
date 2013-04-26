@@ -5,7 +5,7 @@
  *
  *   @author adarby
  *   @date Oct 2012
- * 	  @todo add last modified, info/help buttons for each field, 
+ * 	  @todo add last modified, info/help buttons for each field,
  *   check_url needs to be class rather than id, or have a unique id; title check for dupe in .js
   have an update button next to default_source type, to change all ?
  */
@@ -136,15 +136,15 @@ include("../includes/footer.php");
 var win_type = '<?php print $_GET["wintype"]; ?>';
 
 if (win_type == "pop") {
-	
+
         var our_sub_id = '<?php print ($_GET["caller_id"]); ?>';
         var our_sub_text = 'boo';
         var our_source_text = $('select[name=default_source_id] :selected').text();
         var our_source_id = $('select[name=default_source_id] :selected').val();
-	
+
         $('#subject_list').prepend('<div class="new_subject-'+our_sub_id+'"></div>');
         $('.new_subject-'+our_sub_id+'').hide().load("record_bits.php", {type: 'add_subject', our_sub_id: our_sub_id, our_sub_text: our_sub_text, our_source_text: our_source_text, our_source_id:our_source_id}).fadeIn(1600);
-	
+
 } */
 
         // add in some default text
@@ -159,7 +159,7 @@ if (win_type == "pop") {
             // create space
             $(this).before('<div class="new_location"></div>');
             $(".new_location").load("record_bits.php", {type: 'location'});
-	
+
         });
 
         ///////////////////
@@ -181,20 +181,20 @@ if (win_type == "pop") {
         ///////////////////////
 
         $('select[name*=format]').livequery('change', function() {
-	
+
             // from format table 1 = web, 2 = print, 3 = print w/url
             var format_type_id = $(this).val()
-	
+
             if (format_type_id == 1) {
                 //alert("changed to web");
 
                 // Enlarge Location Box (if necessary) and show life preserver (if necessary)
                 $(this).parent().parent().children(".record_location").attr("size", 60);
                 $(this).parent().parent().find(".checkurl_img").show();
-				
+
                 // hide call_num box
                 $(".call_num_box").hide("slow");
-		
+
             } else if (format_type_id == 2){
                 // change to Print type
 
@@ -202,11 +202,11 @@ if (win_type == "pop") {
                 $(this).parent().parent().find(".checkurl_img").hide();
                 // hide call_num box
                 $(".call_num_box").hide("slow");
-		
+
                 // Shrink Location Box
                 $(this).parent().parent().children(".record_location").attr("size", 30);
-		
-		
+
+
             } else if (format_type_id == 3){
                 // change to Print with URL type:  Show secondary box
                 // Enlarge Location Box (if necessary) and show life preserver (if necessary)
@@ -216,9 +216,9 @@ if (win_type == "pop") {
                 $(".call_num_box").show("slow");
 
             }
-	
+
             var new_record_label = "";
-	
+
             //$(this).parent().parent().children(".record_label").replaceWith(new_record_label);
             $(this).parent().parent().children(".record_label:first").load("record_bits.php", {type: 'new_record_label', format_type_id: format_type_id});
         });
@@ -246,7 +246,7 @@ if (win_type == "pop") {
         ///////////////////
 
         $(".delete_sub").livequery('click', function() {
-	
+
             // make sure this isn't the only location first
             var numsub = $(".selected_item_wrapper").length;
             if (numsub >1) {
@@ -254,8 +254,8 @@ if (win_type == "pop") {
             } else {
                 alert("Thwarted!  You must have at least one subject for a record.");
             }
-	
-	
+
+
         });
 
         ////////////////////
@@ -269,11 +269,11 @@ if (win_type == "pop") {
 
             // dim out the link, change class name so it can't be clicked
             $(this).attr("class", "unclickable");
-	
+
             var our_item = $(this).parent().parent().find(".small_extra");
-	
+
             // add our dropdown list
-	
+
             new_sources = $.ajax({
                 url: "record_bits.php",
                 type: "POST",
@@ -283,23 +283,23 @@ if (win_type == "pop") {
                     our_item.append(html);
                 }
             });
-	
-	
+
+
         });
 
         // cancel the source override by clicking the X icon
 
         $(".cancel_add_source").livequery('click', function() {
-	
+
             // extract caller's id
             var this_source_id = $(this).attr("id").split("-");
-	
+
             // create link back to the clickable button
             var calling_link = '#source_override-' +this_source_id[1]+'-'+this_source_id[2];
-	
+
             // remove the dropdown from dom
             $(this).parent().remove();
-	
+
             // reset the source_override link/img to clickable
             $(calling_link).attr("class", "source_override");
         });
@@ -311,23 +311,23 @@ if (win_type == "pop") {
 
             // extract caller's id
             var this_source_id = $(this).attr("id").split("-");
-	
+
             // find the text of the new source type & update the parenthetical text
             var new_source_text = $(this).parent().find("option:selected").text();
             new_source_text = '<span class="small_extra">' + new_source_text + '</span>';
             $(this).parent().parent().replaceWith(new_source_text);
-	
+
             // update the hidden value
             var new_source_id = $(this).prev().val();
             var hidden_source = '#hidden_source-' +this_source_id[1]+'-'+this_source_id[2];
             $(hidden_source).attr("value", new_source_id);
-	
+
             // remove the dropdown from dom
             $(this).parent().remove();
-	
+
             // create link back to the clickable button
             var calling_link = '#source_override-' +this_source_id[1]+'-'+this_source_id[2];
-	
+
             // reset the source_override link/img to clickable
             $(calling_link).attr("class", "source_override");
         });
@@ -339,7 +339,7 @@ if (win_type == "pop") {
         $(".note_override").livequery('click', function() {
             // display text editor or textarea
             $(this).parent().parent().find(".desc_override").toggle();
-	
+
             // on add remove dropdown from dom, add hidden field with appropriate id, put small text after subject, make colour icon
         });
 
@@ -348,9 +348,9 @@ if (win_type == "pop") {
         ///////////////
 
         $("span[class*=ctag-]").livequery('click', function() {
-	
+
             var all_tags = "";
-	
+
             // change to other class
             if ($(this).attr("class") == "ctag-off") {
                 $(this).attr("class", "ctag-on");
@@ -362,13 +362,13 @@ if (win_type == "pop") {
             $(this).parent().find(".ctag-on").each(function(i) {
                 var this_ctag = $(this).text();
                 all_tags = all_tags + this_ctag + "|";
-		
+
             });
             // strip off final pipe (|)
             all_tags = all_tags.replace( /[|]$/, "" );
             // set new value to hidden form field
             $(this).parent().find("input[name*=ctags]").val(all_tags);
-	
+
 
         });
 
@@ -377,7 +377,7 @@ if (win_type == "pop") {
         //////////////////
 
         $("span[class*=aztag-]").livequery('click', function() {
-	
+
             // change to other class, update hidden input field
             if ($(this).attr("class") == "aztag-off") {
                 $(this).attr("class", "aztag-on");
@@ -397,21 +397,21 @@ if (win_type == "pop") {
             // find our message div, clear out any message from before
             var feedback_div = $(this).parent().find(".url_feedback")
             feedback_div.empty();
-	
+
             // find our our url, trim it, then find out if this is a restricted resource
             var url_location = $(this).parent().find("input.check_url");
             var checkurl = jQuery.trim(url_location.val());
             var restrictions = $(this).parent().find("select[name*=access_restrictions]").val();
-	
+
             //alert("now checking: " + checkurl);
             // make sure it's not null
             if (checkurl.length > 0) {
-	
+
+            	var useProxy = '';
+
                 // 0. see if it's restricted (2); no point testing
                 if (restrictions == 2) {
-                    var feedback = "Proxy restricted resource; can't check";
-                    feedback_div.append(feedback);
-                    return;
+                    useProxy = 'TRUE';
                 }
                 // 1. see if there's a proxy string
                 var testproxy = "";
@@ -432,16 +432,16 @@ if (win_type == "pop") {
 
                 // insert the modified url into the text box
                 url_location.val(checkurl);
-  
+
                 // check the URL
-                $(this).hide().load("record_bits.php", {type: 'check_url', checkurl: checkurl}).fadeIn(1600);
-  
+                $(this).hide().load("record_bits.php", {type: 'check_url', checkurl: checkurl, useProxy: useProxy}).fadeIn(1600);
+
             } else {
                 alert("You must enter a location first!");
             }
-  
+
         });
-	
+
         function isUrl(s) {
             var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
             return regexp.test(s);
@@ -449,7 +449,7 @@ if (win_type == "pop") {
 
         function checkHTTP(s) {
 
-            var pattern = new RegExp('^http:\/\/');
+            var pattern = new RegExp('^http[s]*:\/\/');
             var result = s.match(pattern);
             if (result == null) {
                 result = "http://" + s;
@@ -457,11 +457,18 @@ if (win_type == "pop") {
                 result = s;
             }
             return result;
-	
+
         }
         //http://ezproxy.ithaca.edu:2048/login?url=http://search.epnet.com/login.aspx?authtype=ip,uid&profile=ehost&defaultdb=mth
 
         function isProxy(s) {
+		<?php
+		if($proxyURL == '')
+		{
+			?>
+			return null;
+			<?php
+		} ?>
             var proxyURL = RegExp.escape('<?php print $proxyURL; ?>');
             var safeURL = new RegExp(proxyURL);
             var result = s.match(safeURL, '');
@@ -474,7 +481,7 @@ if (win_type == "pop") {
             var safeURL = new RegExp(proxyURL);
             var result = s.replace(safeURL, '');
             return result;
-	
+
         }
 
 
@@ -491,18 +498,18 @@ if (win_type == "pop") {
         ////////////////
 
         $("#new_record").submit( function () {
-	 
+
             // Check that there is at least one subject
             var numsub = $(".selected_item_wrapper").length;
-	
+
             if (numsub < 1) {
                 alert("<?php print _("You must have at least one subject."); ?>");
                 return false;
             };
-	
+
             // check required fields
             // make sure the record isn't a dupe--check for title and location
-	
+
             // If a required field is empty, set zonk to 1, and change the bg colour
             // of the offending field
             var alerter = 0;
@@ -511,7 +518,7 @@ if (win_type == "pop") {
                 // get contents of string, trim off whitespace
                 var our_contents = $(this).val();
                 var our_contents  = jQuery.trim(our_contents );
-		
+
                 if (our_contents  == '') {
                     $(this).attr("style", "background-color:#FFDFDF");
                     alerter = 1;
@@ -524,14 +531,14 @@ if (win_type == "pop") {
             });
 
 
-	
+
             if (alerter == 1) {
                 alert("<?php print _("You must complete all required form fields."); ?>");
                 return false;
             } else {
                 // now check that the title is ok, not a dupe--if it's a new record
                 var title_string = $("#record_title").val();
-			 
+
                 //alert(title_string);
                 return true;
             }

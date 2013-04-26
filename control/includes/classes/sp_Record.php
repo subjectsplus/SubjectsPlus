@@ -391,11 +391,11 @@ public function buildLocation() {
  	}
 
  	// do we want the checkurl image?
- 	$checkurl_icon = "<span class=\"checkurl_img_wrapper\"><img src=\"$IconPath/lifebuoy.png\" alt=\"check url\" border=\"0\" class=\"checkurl_img\" /></span>";
-   
+ 	$checkurl_icon = "<span class=\"checkurl_img_wrapper\"><img src=\"$IconPath/linkcheck.png\" alt=\"check url\" title=\"check url\" border=\"0\" class=\"checkurl_img\" /></span>";
+
    // get appropriate text for format box title line
    $format_label_text = _("Location (Enter URL)");  // default for new record
-   
+
  	switch ($this->_format) {
  		case 1:
  		$format_label_text = _("Location (Enter URL)");

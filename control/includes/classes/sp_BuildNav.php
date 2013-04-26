@@ -51,6 +51,7 @@ class sp_BuildNav {
       <li><a href=\"$CpanelPath" . "guides/\">" . _("Browse Guides") . "</a></li>
       <li><a href=\"$CpanelPath" . "guides/manage.php\">" . _("Manage Files") . "</a></li>
       <li><a href=\"$CpanelPath" . "guides/delish_url.php\">" . _("Delicious Builder") . "</a></li>
+      <li><a href=\"$CpanelPath" . "guides/link_checker.php\">" . _("Link Checker") . "</a></li>
    </ul>
 </li>";
     }

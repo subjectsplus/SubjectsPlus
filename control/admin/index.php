@@ -5,7 +5,7 @@
  *
  *   @author agdarby
  *   @date Dec 2012
- *   @todo 
+ *   @todo
  */
 $subcat = "admin";
 $page_title = "Admin SubjectsPlus";
@@ -33,12 +33,12 @@ $recent_activity = seeRecentChanges("", 20);
             <li><a href="staff_map.php"><?php print _("View Map of Staff Addresses"); ?></a></li>
         </ul>
     </div>
-        
+
     <h2 class="bw_head"><?php print _("Guides"); ?></h2>
     <div class="box">
         <ul>
             <li><a href="manage_guides.php"><?php print _("Manage Guides"); ?></a></li>
-            <?php 
+            <?php
             if ($use_disciplines == TRUE) {
                 print '<li><a href="disciplines.php">' .  _("Manage Disciplines") . '</a></li>';
             }
@@ -57,6 +57,7 @@ $recent_activity = seeRecentChanges("", 20);
     <div class="box">
         <ul>
             <li><a href="sources.php"><?php print _("Add New Source Type"); ?></a></li>
+            <li><a href="../guides/link_checker.php?type=records"><?php print _("Check All Records' Links"); ?></a></li>
         </ul>
     </div>
 
