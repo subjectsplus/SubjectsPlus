@@ -192,7 +192,7 @@ if (isset($_POST["submit_record"])) {
 // Start the record display
 ////////////////////
 
-$record = new sp_Staff($ok_record_id, '', TRUE);
+$record = (!isset($record)) ? new sp_Staff($ok_record_id, '', TRUE) : $record;
 
 // show feedback if it isn't already set
 if (!$feedback) {
@@ -301,7 +301,7 @@ include("../includes/footer.php");
     	// Add red star to labels of required inputs
     	//////////////////
 
-    	$("*[class*=required_field]").parent().children('span').append('<span style="color: red;">*</span>');
+    	$("*[class*=required_field]").prevUntil('div', 'span').append('<span style="color: red;">*</span>');
 
         //////////////////
         // Make sure that delete was intentional
