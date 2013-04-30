@@ -190,7 +190,7 @@ class sp_Installer
 					  `display` varchar(11) NOT NULL DEFAULT 'No',
 					  `last_revised_by` varchar(100) NOT NULL DEFAULT '',
 					  `tbtags` varchar(255) DEFAULT 'main',
-					  `tootags` varchar(255) DEFAULT NULL,
+					  `cattags` varchar(255) DEFAULT NULL,
 					  PRIMARY KEY (`talkback_id`),
 					  KEY `INDEXSEARCHtalkback` (`question`(200),`answer`(200)),
 					  KEY `fk_talkback_staff_id_idx` (`a_from`),
