@@ -38,15 +38,15 @@ $subsArray = $querier->getResult($q);
 	// set up striping
   $row_count = 0; $colour1 = "oddrow"; $colour2 = "evenrow";
   $staff_list = "";
-  
+
   foreach ($subsArray as $value) {
 
 	if ($value[7] != "1") { $active = " <span style=\"font-size:smaller; color: #666;\">inactive</span>";} else { $active = ""; }
-	
+
 	  $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 	  $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 500px;\">
           <input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"modify\" border=\"0\"></a> &nbsp;&nbsp;
-          <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><img src=\"$IconPath/eye.png\" alt=\"see live\" border=\"0\"></a> &nbsp;&nbsp; <a class=\"showmedium\" href=\"../includes/linkchecker.php?shortform=$value[6]&wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"check links\" border=\"0\"></a> &nbsp;&nbsp;<a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div>
+          <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><img src=\"$IconPath/eye.png\" alt=\"see live\" border=\"0\"></a> &nbsp;&nbsp; <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"check links\" border=\"0\"></a> &nbsp;&nbsp;<a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div>
           <div class=\"$row_colour striper\" style=\"float: left; min-width: 100px; font-size: smaller;\">$value[2] $value[3]</div>
           <div class=\"$row_colour striper\" style=\"float: left; min-width: 75px;font-size: smaller;\">$value[5]</div>";
 	  $row_count++;
@@ -77,7 +77,7 @@ foreach($staffArray as $s) {
 	$staff_drop_vals .= "<option value=\"$s[0]\">$s[fullname]</option>";
 }
 
-$staff_drop_close = "</select>\n";	
+$staff_drop_close = "</select>\n";
 
 $staff_dropdown = $staff_drop_base . $staff_drop_vals . $staff_drop_close;
 $staff_dropdown_ticks = $staff_drop_ticks . $staff_drop_vals . $staff_drop_close;
@@ -98,8 +98,8 @@ $type_drop_vals = "
   foreach ($guide_types as $key=>$value) {
 	  $type_drop_vals .= "<option value=\"$key\">$value</option>\n";
   }
-  
-$type_drop_close = "</select>\n";	
+
+$type_drop_close = "</select>\n";
 
 $type_dropdown = $type_drop_base . $type_drop_vals . $type_drop_close;
 $type_dropdown_ticks = $type_drop_ticks . $type_drop_vals . $type_drop_close;
@@ -152,7 +152,7 @@ $('#listing_space input:checkbox').livequery('click', function() {
 	//expose the filter options
 	$("#tickzone").show();
 	// only need to do this once
-	$("#listing_space input:checkbox").unbind("click"); 
+	$("#listing_space input:checkbox").unbind("click");
 });
 
 $('#ticked_label').livequery('click', function() {
@@ -164,7 +164,7 @@ $('#ticked_label').livequery('click', function() {
        allVals.push($(this).val());
     });
 	  $('#t').val(allVals)
-	
+
 	//$("#listing_space").load("admin_bits.php", {action: 'ticks', filter_key: allVals});
 });
 
@@ -186,12 +186,12 @@ $('select[id*=_ticked]').livequery('change', function() {
 	// Empty ID = placeholder text in selects like "select a librarian"
 	if (our_id != "") {
 		var allTicks = [];
-		
+
 		// grab all items that have been ticked into an array
 		$('#listing_space :checked').each(function() {
 			 allTicks.push($(this).val());
 		 });
-		
+
 		// Make sure array isn't empty, then load our page
 		if (allTicks.length > 0) {
 			// route as appropriate based on our_type, callback makes normal controls reappear
@@ -206,12 +206,12 @@ $('select[id*=_ticked]').livequery('change', function() {
 							$(".filter").fadeIn();
 					});
 				}
-			
+
 		}
-		
+
 	}
 
-	
+
 });
 
 /* $('#filter_by_staff_ticked').livequery('change', function() {
@@ -221,10 +221,10 @@ $('select[id*=_ticked]').livequery('change', function() {
 		$('#listing_space :checked').each(function() {
 			 allTicks.push($(this).val());
 		 });
-		 
+
 		$("#listing_space").load("admin_bits.php", {action: 'staff_mod', filter_key: staff_id, selected: allTicks});
 	}
-}); 
+});
 
 $('#filter_by_type_ticked').livequery('change', function() {
 	var type_id = $('#filter_by_type_ticked :selected').val();
@@ -240,8 +240,8 @@ $('#filter_by_type_ticked').livequery('change', function() {
 		}
 	}
 });  */
- 	
+
 });
 
-</script>	
+</script>
 
