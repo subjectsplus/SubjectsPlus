@@ -697,19 +697,21 @@ public function updateRecord($notrack = 0) {
 function modifyRank() {
 	for ($i = 0; $i < $this->_subject_count; $i++) {
 		$qUpRank = "INSERT INTO rank (rank, subject_id, title_id, source_id, description_override) VALUES (
-			'" . scrubData($this->_rank[$i], "integer") . "',
-			'" . scrubData($this->_subject[$i], "integer") . "',
-			'" . scrubData($this->_title_id, "integer") . "',
-			'" . scrubData($this->_source[$i], "integer") . "',
-			'" . mysql_real_escape_string(scrubData($this->_description_override[$i], "richtext")) . "')";
+			'" . scrubData($this->_rank[$i], "integer") . "', ";
+		//added dgonzalez to check whether the value must be inserted into database as NULL
+		$qUpRank .= scrubData($this->_subject[$i], "integer") != 0 ? "'" . scrubData($this->_subject[$i], "integer") . "'," : "NULL, ";
+		$qUpRank .= scrubData($this->_title_id, "integer") != 0 ? "'" . scrubData($this->_title_id, "integer") . "'," : "NULL, ";
+		$qUpRank .= scrubData($this->_source[$i], "integer") != 0 ? "'" . scrubData($this->_source[$i], "integer") . "'," : "NULL, ";
+		$qUpRank .= "'" . mysql_real_escape_string(scrubData($this->_description_override[$i], "richtext")) . "')";
 
-$rUpRank = mysql_query($qUpRank);
+		$rUpRank = mysql_query($qUpRank);
 
-$this->_debug .= "<p>3. (update rank loop) : $qUpRank</p>";
-if (!$rUpRank) {
-	echo blunDer("We have a problem with the rank query: $qUpRank");
-}
-}
+		$this->_debug .= "<p>3. (update rank loop) : $qUpRank</p>";
+		if (!$rUpRank)
+		{
+			echo blunDer("We have a problem with the rank query: $qUpRank");
+		}
+	}
 }
 
 function modifyLocation() {
