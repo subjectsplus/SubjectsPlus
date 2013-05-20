@@ -15,24 +15,32 @@ include("../includes/header.php");
 
 switch ($_GET["type"]) {
   case "all_staff":
-    
+  	//depending on permissions user has, set credential as true or false
+	$check_credentials = (isset($_SESSION["view_map"]) && $_SESSION["view_map"] == 1) ? TRUE : FALSE;
     break;
   case "direct":
-    // get only those reporting DIRECTLY to this person 
+  	//depending on permissions user has, set credential as true or false
+  	$check_credentials = (isset($_SESSION["supervisor"]) && $_SESSION["supervisor"] == 1) ? TRUE : FALSE;
+
+    // get only those reporting DIRECTLY to this person
     $and = "AND supervisor_id = " . $_SESSION["staff_id"];
    
     break;
   
   case "all_reports":
      // Get the whole chain of folks reporting to this person
-    
+  	//depending on permissions user has, set credential as true or false
+  	$check_credentials = (isset($_SESSION["supervisor"]) && $_SESSION["supervisor"] == 1) ? TRUE : FALSE;
+
      //$and = "AND supervisor_id IN (" . $_GET["ids"] . ")";
     $and = "AND supervisor_id IN (" . $_GET["ids"] . ")";
     break;
   default:
+  	//depending on permissions user has, set credential as true or false
+  	$check_credentials = (isset($_SESSION["view_map"]) && $_SESSION["view_map"] == 1) ? TRUE : FALSE;
+
     $and = "AND user_type_id = '1' ";
 }
-print_r($_SESSION);
 
 // Boot them out if they shouldn't be viewing this file 
 if ($check_credentials == FALSE) {
