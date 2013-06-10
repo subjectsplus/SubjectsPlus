@@ -197,25 +197,40 @@ if ($check_this) {
 
 include("includes/header.php");
 
-// make sure they aren't 0
+// responsive or not?
+if (isset($is_responsive) && $is_responsive == TRUE) { 
+    // make sure they aren't 0
 
-if ($left_width > 0) {
-    print "<div class='span$left_width'>
+    if ($left_width > 0) {
+        print "<div class='span$left_width'>
+        $left_col_pluslets
+        </div>";
+    }
+
+    if ($main_width > 0) {
+        print "<div class='span$main_width'>
+        $main_col_pluslets
+        </div>";
+    }
+
+    if ($side_width > 0) {
+        print "<div class='span$side_width'>
+        $sidebar_pluslets
+        </div>";
+    }
+
+} else {
+    print "<div id=\"leftcol\">
     $left_col_pluslets
-    </div>";
-}
-
-if ($main_width > 0) {
-    print "<div class='span$main_width'>
+    </div>
+    <div id=\"maincol\">
     $main_col_pluslets
-    </div>";
+    </div>
+    <div id=\"rightcol\">
+    $sidebar_pluslets
+    </div>"; 
 }
 
-if ($side_width > 0) {
-    print "<div class='span$side_width'>
-    $sidebar_pluslets
-    </div>";
-}
 
 
 ///////////////////////////
@@ -236,10 +251,13 @@ include("includes/footer.php");
             $(this).parent().next('.pluslet_body').toggle('slow');
         });
 
-        var new_main_width = "<?php print $main_width; ?>%";
-        var new_sidebar_width = "<?php print $side_width; ?>%";
+        var new_left_width = "<?php print $left_width * 7.5; ?>%";
+        var new_main_width = "<?php print $main_width * 7.5; ?>%";
+        var new_sidebar_width = "<?php print $side_width * 7.5; ?>%";
+        //alert(new_left_width + "-" + new_main_width + "-" + new_sidebar_width);
         if (new_main_width.length > 0) {
-            $('#leftcol').width(new_main_width);
+            $('#leftcol').width(new_left_width);
+            $('#maincol').width(new_main_width);
             $('#rightcol').width(new_sidebar_width);
         }
 

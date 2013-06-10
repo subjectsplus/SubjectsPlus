@@ -156,11 +156,15 @@ img {
 }
 
 #leftcol {
-    clear: both; float: left; width: 70%;
+    clear: both; float: left; width: 30%; margin-left: 2%;
+}
+
+#maincol {
+    float: left; width: 30%; margin-left: 3%;
 }
 
 #rightcol {
-    float: right; width: 28%; margin-left: 2%;
+    float: left; width: 30%; margin-left: 3%;
 }
 
 #rightcol p,#rightcol ul,#rightcol dl {
