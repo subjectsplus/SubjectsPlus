@@ -261,9 +261,9 @@ class sp_Installer
 					  KEY `fk_rank_subject_id_idx` (`subject_id`),
 					  KEY `fk_rank_title_id_idx` (`title_id`),
 					  KEY `fk_rank_source_id_idx` (`source_id`),
-					  CONSTRAINT `fk_rank_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-					  CONSTRAINT `fk_rank_source_id` FOREIGN KEY (`source_id`) REFERENCES `source` (`source_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+					  CONSTRAINT `fk_rank_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_rank_source_id` FOREIGN KEY (`source_id`) REFERENCES `source` (`source_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8",
 					"CREATE TABLE `location` (
 					  `location_id` bigint(20) NOT NULL AUTO_INCREMENT,
