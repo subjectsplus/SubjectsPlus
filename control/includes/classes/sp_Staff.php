@@ -490,7 +490,7 @@ $tel_line
 
   	if ( $isUserTypeOmitted )
   	{
-  		echo "<input type=\"hidden\" name=\"user_type_id\" id=\"user_type_id\" value=\"\" />";
+  		echo "<input type=\"hidden\" name=\"user_type_id\" id=\"user_type_id\" value=\"1\" />";
   	}else
   	{
   		echo "
