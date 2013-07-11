@@ -24,7 +24,12 @@ jQuery(document).ready(function(){
 
     makeHelpable("img[class*=help-]");
 
+    setupTabs('a[id*=tab-]');
+
+
 }); // End jQuery within document.ready
+
+
 
 function makeDropable( lstrSelector )
 {
@@ -35,7 +40,9 @@ function makeDropable( lstrSelector )
 	//
 	////////////////////////////////
 
-	jQuery(lstrSelector).droppable({
+jQuery(lstrSelector).livequery(function() {
+
+	jQuery(this).droppable({
 
 		hoverClass: "drop_hover",
 		accept: ".draggable",
@@ -89,6 +96,8 @@ function makeDropable( lstrSelector )
 
 		}
 	});
+
+  });
 }
 
 function makeSortable( lstrSelector )
@@ -357,20 +366,32 @@ function setupSaveButton( lstrSelector )
 
 	function saveGuide() {
 
-		jQuery('#portal-column-0').sortable();
-		jQuery('#portal-column-1').sortable();
-		jQuery('#portal-column-2').sortable();
+		var lobjTabs = [];
 
-		var left_data = jQuery('#portal-column-0').sortable('serialize');
-		var center_data = jQuery('#portal-column-1').sortable('serialize');
-		var sidebar_data = jQuery('#portal-column-2').sortable('serialize');
+		jQuery('a[href^="#tab"]').each(function(){
+			var lstrName = jQuery(this).text();
+			var tab_id = $(this).attr("href").split("tabs-")[1];
+
+			var lobjTab = {};
+			lobjTab.name = lstrName;
+
+			jQuery('div#tabs-' + tab_id + ' div.portal-column-0').sortable();
+			jQuery('div#tabs-' + tab_id + ' div.portal-column-1').sortable();
+			jQuery('div#tabs-' + tab_id + ' div.portal-column-2').sortable();
+
+			lobjTab.left_data = jQuery('div#tabs-' + tab_id + ' div.portal-column-0').sortable('serialize');
+			lobjTab.center_data = jQuery('div#tabs-' + tab_id + ' div.portal-column-1').sortable('serialize');
+			lobjTab.sidebar_data = jQuery('div#tabs-' + tab_id + ' div.portal-column-2').sortable('serialize');
+
+			lobjTabs.push(lobjTab);
+		});
+
+		lstrTabs = JSON.stringify(lobjTabs);
 
 		jQuery("#response").load("helpers/save_guide.php", {
 			this_subject_id: subject_id,
 			user_name: user_name,
-			left_data: left_data,
-			center_data:center_data,
-			sidebar_data:sidebar_data
+			tabs: lstrTabs
 		},
 		function() {
 
@@ -648,6 +669,17 @@ function setupMiscLiveQueries()
     //jQuery(selected_box).animateHighlight("#dd0000", 1000);
 
     });
+
+    ////////////////////
+    // Make page tabs clickable
+    ///////////////////
+    jQuery('a[id*=tab-]').livequery('click', function(event) {
+        var tab_id = jQuery(this).attr("id").split("-");
+        //var selected_tab = "#pluslet-" + box_id[1];
+        setupTabs(tab_id[1]);
+
+     });
+    
 }
 
 function setupMiscClickEvents()
@@ -691,6 +723,24 @@ function makeHelpable( lstrSelector )
             maxWidth: "1100px",
             maxHeight: "800px"
         });
+      });
+}
+
+function setupTabs( lstrSelector )
+{
+	////////////////
+    // Setup Tabs 
+    ////////////////
+        
+      jQuery(lstrSelector).unbind('click');
+      jQuery(lstrSelector).on('click', function(){
+        var tab_id = jQuery(this).attr("id").split("-");
+        // fade out all  tabs
+        jQuery("#tab_body-0").fadeOut("");
+        jQuery("#tab_body-" + tab_id[1]).fadeIn("slow");
+        //fade in our tab
+        
+
       });
 }
 

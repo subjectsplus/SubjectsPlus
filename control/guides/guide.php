@@ -116,62 +116,27 @@ if (isset($this_id)) {
         $side_width = 0;
     }
 
-    // Populate guide or build a clone!
-    // select all the pluslets from an existing guide and put on screen
-
-    $qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
-    FROM pluslet p, subject s, pluslet_subject ps
-    WHERE p.pluslet_id = ps.pluslet_id
-    AND s.subject_id = ps.subject_id
-    AND s.subject_id = '$this_id'
-    ORDER BY prow ASC
-    ";
-
-    //print $qc;
-
-    $rc = mysql_query($qc);
-
-    //init
-    $left_col_pluslets = "";
-    $main_col_pluslets = "";
-    $sidebar_pluslets = "";
-
-    while ($myrow = mysql_fetch_array($rc)) {
-
-        // Get our guide type
-        // Make sure it's not blank, as that will throw an error
-        if ($myrow["type"] != "") {
-
-            if ($myrow["type"] == "Special") {
-                $obj = "sp_Pluslet_" . $myrow[0];
-            } else {
-                $obj = "sp_Pluslet_" . $myrow[4];
-            }
-
-
-            global $obj;
-            $record = new $obj($myrow[0], "", $subject_id);
-
-            switch ($myrow[3]) {
-                case 0:
-                    # code...
-                $left_col_pluslets .= $record->output("view", "admin");
-                break;
-                case 1:
-                default:
-                    # code...
-                $main_col_pluslets .= $record->output("view", "admin");
-                break;
-                case 2:
-                    # code...
-                $sidebar_pluslets .= $record->output("view", "admin");
-                break;
-            }
-
-        }
-        unset($record);
+    // Is there a selected tab?
+    if (isset($_GET["t"]) && $_GET["t"] != "") {
+        $selected_tab = scrubData($_GET["t"]);
+    } else {
+        $selected_tab = 0;
     }
+
+	//create new guide object and set admin view to true
+    $lobjGuide = new sp_Guide($this_id);
+	$lobjGuide->_isAdmin = TRUE;
+
+    $all_tabs = $lobjGuide->getTabs();
+
+} else {
+    print "no guide";
 }
+
+
+
+
+
 
 ////////////////////////////
 // Now, get our pluslets //
@@ -224,7 +189,6 @@ setcookie("our_guide_id", $postvar_subject_id, 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_shortform", $shortform, 0, '/', $_SERVER['HTTP_HOST']);
 ob_end_flush();
 
-//
 ?>
 
 <style type="text/css">@import url(../../assets/css/guide.css);</style>
@@ -253,23 +217,23 @@ ob_end_flush();
 
         // Adjust our three columns according to data from extra field
         if (l_c < 8) {
-                    jQuery('#container-0').width(0);
-                    jQuery('#container-0').hide();
+                    jQuery('.sptab div#container-0').width(0);
+                    jQuery('.sptab div#container-0').hide();
         } else {
-                    jQuery('#container-0').show();
-                    jQuery('#container-0').width(new_left_width);
+                    jQuery('.sptab div#container-0').show();
+                    jQuery('.sptab div#container-0').width(new_left_width);
         }
 
 
         jQuery('#container-1').width(new_main_width);
 
         if (r_c < 8) {
-                    jQuery('#container-2').width(0);
-                    jQuery('#container-2').hide();
+                    jQuery('.sptab div#container-2').width(0);
+                    jQuery('.sptab div#container-2').hide();
         } else {
 
-                    jQuery('#container-2').show();
-                    jQuery('#container-2').width(new_sidebar_width);
+                    jQuery('.sptab div#container-2').show();
+                    jQuery('.sptab div#container-2').width(new_sidebar_width);
         }
 
 
@@ -294,7 +258,38 @@ ob_end_flush();
 
         jQuery("#newbox").hoverIntent(boxyConfig);
 
+    // config our box for tabs
+/*
+    function addTabOptionsBox(){
+        jQuery("#tabs_options").show();
+        return;
+
+    }
+
+    function removeTabOptionsBox(){
+        jQuery("#tabs_options").hide();
+        //alert ($( "#extra" ).val());
+        return;
+    }
+
+    var tabsOptionsConfig = {
+        interval: 50,
+        sensitivity: 4,
+        over: addTabOptionsBox,
+        timeout: 500,
+        out: removeTabOptionsBox
+    };
+
+    jQuery("#tabsbox").hoverIntent(tabsOptionsConfig);
+    jQuery("#tabsbox input[type='text']").change(function() {
+        jQuery("#save_tab").show();
+    });
+
+  */
+
+    ///////////////////////////////////
     // config our box for layout slider
+    ///////////////////////////////////
 
     function addSlider(){
         jQuery("#slider_options").show();
@@ -339,8 +334,8 @@ ob_end_flush();
         jQuery( "#extra" ).val(extra_val);
         jQuery( "#main_col_width" ).html(left_col + "-" + center_col + "-" + right_col);
         jQuery("#save_layout").show();
-    }
-});
+        }
+    });
 
     jQuery( "#extra" ).val(jQuery( "#slider" ).slider( "value" ) );
 
@@ -361,21 +356,21 @@ ob_end_flush();
 
                 // now insert these vals to update columns
                 if (parseInt(ourval[0]) == 0) {
-                    jQuery('#container-0').width(0);
-                    jQuery('#container-0').hide();
+                    jQuery('.sptab div#container-0').width(0);
+                    jQuery('.sptab div#container-0').hide();
                 } else {
-                    jQuery('#container-0').show();
-                    jQuery('#container-0').width(lc);
+                    jQuery('.sptab div#container-0').show();
+                    jQuery('.sptab div#container-0').width(lc);
                 }
 
                 jQuery('#container-1').width(cc);
 
                 if (parseInt(ourval[2]) == 0) {
-                    jQuery('#container-2').width(0);
-                    jQuery('#container-2').hide();
+                    jQuery('.sptab div#container-2').width(0);
+                    jQuery('.sptab div#container-2').hide();
                 } else {
-                    jQuery('#container-2').show();
-                    jQuery('#container-2').width(rc);
+                    jQuery('.sptab div#container-2').show();
+                    jQuery('.sptab div#container-2').width(rc);
                 }
 
 
@@ -384,6 +379,129 @@ ob_end_flush();
     });
 
 
+     jQuery("div#tabs ul li a").dblclick(function () {
+
+        alert("doublclickitude!");
+     })
+});
+
+//setup jQuery UI tabs and dialogs
+jQuery(function() {
+    var tabTitle = $( "#tab_title" ),
+    tabContent = $( "#tab_content" ),
+    tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
+    tabCounter = <?php echo ( count($all_tabs) ); ?>;
+    var tabs = $( "#tabs" ).tabs();
+
+    // modal dialog init: custom buttons and a "close" callback reseting the form inside
+    var dialog = $( "#dialog" ).dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            Add: function() {
+            addTab();
+                $( this ).dialog( "close" );
+            },
+            Cancel: function() {
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            form[ 0 ].reset();
+        }
+    });
+
+    //setup dialog to edit tab
+    $( "#dialog_edit" ).dialog({
+        autoOpen: false,
+        modal: true,
+        width: "auto",
+        height: "auto",
+        buttons: {
+            "Rename": function() {
+              var id = window.lastClickedTab.replace("#tabs-", "");
+
+              $( 'a[href="#tabs-' + id + '"]' ).text( $('input[name="rename_tab_title"]').val() );
+
+              $( this ).dialog( "close" );
+              $('#save_guide').fadeIn();
+            },
+            "Delete" : function() {
+              var id = window.lastClickedTab.replace("#tabs-", "");
+
+              $( 'a[href="#tabs-' + id + '"]' ).parent().remove();
+              $( 'div#tabs-' + id ).remove();
+              tabs.tabs("destroy");
+              tabs.tabs();
+              $( this ).dialog( "close" );
+              $('#save_guide').fadeIn();
+            },
+            Cancel: function() {
+            $( this ).dialog( "close" );
+            }
+        },
+        open: function(event, ui) {
+          var id = window.lastClickedTab.replace("#tabs-", "");
+          $(this).find('input[name="rename_tab_title"]').val($( 'a[href="#tabs-' + id + '"]' ).text());
+        },
+        close: function() {
+            form[ 0 ].reset();
+        }
+    });
+
+    //override submit for form in edit tab dialog to click rename button
+    $( "#dialog_edit" ).find( "form" ).submit(function( event ) {
+        $(this).parent().parent().find('span:contains("Rename")').click();
+        event.preventDefault();
+    });
+
+    // addTab form: calls addTab function on submit and closes the dialog
+    var form = dialog.find( "form" ).submit(function( event ) {
+        addTab();
+        dialog.dialog( "close" );
+        event.preventDefault();
+    });
+
+    // actual addTab function: adds new tab using the input from the form above
+    function addTab() {
+        var label = tabTitle.val() || "Tab " + tabCounter,
+        id = "tabs-" + tabCounter,
+        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+        tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+        tabs.find( ".ui-tabs-nav" ).append( li );
+
+        var slim = jQuery.ajax({
+                    url: "helpers/create_tab.php",
+                    type: "GET",
+                    data: {},
+                    dataType: "html",
+                    success: function(html) {
+                        tabs.tabs("destroy");
+
+                        tabs.append( "<div id='" + id + "'>" + html
+                         + "</div>" );
+
+                        jQuery("#response").hide();
+                        jQuery("#save_guide").fadeIn();
+
+                        tabs.tabs();
+                        tabCounter++;
+                    }
+                });
+    }
+
+    // addTab button: just opens the dialog
+    $( "#add_tab" ).button().click(function() {
+        dialog.dialog( "open" );
+    });
+
+    // edit icon: removing or renaming tab on click
+    tabs.delegate( "span.ui-icon-wrench", "click", function(lobjClicked) {
+        var List = $(this).parent().children("a");
+        var Tab = List[0];
+        window.lastClickedTab = $(Tab).attr("href");
+        $('#dialog_edit').dialog("open");
+    });
 });
 
 jQuery(window).load(function(){
@@ -399,64 +517,78 @@ jQuery(window).load(function(){
             <li id="newbox" class="togglenewz"><img src="<?php print "$IconPath/box.png"; ?>" alt="new box" border="0" /> <?php
             print _("New Box");
             print $all_boxes;
-            ?>
-
-        </li>
+            ?></li>
         <li class="showdisco" href="helpers/discover.php"><?php print _("Find Box"); ?></li>
         <li class="showrecord" href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></li>
         <li class="showmeta" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></li>
-        <li id="layoutbox" class="togglelayout" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Layout"); ?>
+        <li id="layoutbox" class="togglelayout"><?php print _("Layout"); ?>
             <div id="slider_options" style="display: none; width: 200px; padding: 1em;">
                 <p><?php print _("Adjust column sizes"); ?></p>
                 <div id="slider"></div>
                 <button id="save_layout" style="display:none;clear: left;margin-top: 1em;font-size: smaller;"><?php print _("SAVE CHANGES"); ?></button>
             </div>
         </li>
+        <!--<li id="tabsbox" class="toggletab"><?php print _("Tabs"); ?>
+            <div id="tabs_options" style="display: none; width: 200px; padding: 1em;">
+                <p><?php print _("Rename/Add Tabs"); ?></p>
+                <?php print $tabs_input; ?>
+                <button id="save_tab_options" style="display:none;clear: left;margin-top: 1em;font-size: smaller;"><?php print _("SAVE CHANGES"); ?></button>
+            </div>
+        </li>-->
     </ul>
-</div>
-<input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra">
+</div> <!-- end guide_nav -->
+<input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra" />
 
-<div id="subject_title">
-    <h2><?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?></h2>
-</div>
-</div>
+<div id="subject_title"><h2><?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?></h2></div>
+
+</div>  <!-- end guide header -->
 
 <!-- Feedback -->
 <div id="response" style="position: relative; float: left; background-color: #DD647F; width: 100%; text-align:center; display: none;"></div>
 
 <!-- Save Button -->
 <p align="center" id="savour" style="clear: both;float:left; margin-top: 5px; height: 30px; width: 100%;"><button id="save_guide" style="display:none;"><?php print _("SAVE CHANGES"); ?></button></p>
+<div id="dialog" title="Tab data">
+<form>
+<fieldset class="ui-helper-reset">
+<label for="tab_title">Title</label>
+<input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+</fieldset>
+</form>
+</div>
+<div id="dialog_edit" title="Tab edit">
+<form>
+<fieldset class="ui-helper-reset">
+<label for="tab_title">New Title</label>
+<input type="text" name="rename_tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+</fieldset>
+</form>
+</div>
+<script>
+//make tabs sortable
+jQuery(function() {
+    $(tabs).find( ".ui-tabs-nav" ).sortable({
+        axis: "x",
+        stop: function(event, ui) {
+            if(jQuery(ui.item).attr("id") == 'add_tab' || jQuery(ui.item).parent().children(':first').attr("id") != 'add_tab')
+                $(tabs).find( ".ui-tabs-nav" ).sortable("cancel");
+            else
+            {
+                $(tabs).tabs( "refresh" );
+                jQuery("#save_guide").fadeIn();
+            }
+        }
+    });
+});
+</script>
 
-<!-- Begin Sortable Columns -->
+<div id="tabs" style="clear:both; position: relative; width: 96%; margin: 0 auto;">
+
+<?php $lobjGuide->outputNavTabs(); ?>
 
 <?php
-
-
-// init some stuff
-
-$droppit = '<img src="' . $AssetPath . 'images/icons/package-x-generic.png" alt="' . _("Drop Content Here") . '" /> ';
-
-print dropBoxes(0, 'left', $left_col_pluslets);
-print dropBoxes(1, 'center', $main_col_pluslets);
-print dropBoxes(2, 'sidebar', $sidebar_pluslets);
-
-
-
-function dropBoxes($i, $itext, $content) {
-    global $AssetPath;
-
-    $col = '<div id="container-' . $i . '" style="float: left; width: 30%;">
-	<div class="dropspotty unsortable" id="dropspot-' . $itext . '-1">
-    <img src="' . $AssetPath . 'images/icons/package-x-generic.png" alt="' . _("Drop Content Here") . '" />
-    <span class="dropspot-text">' . _("Drop Here") . '</span>
-    </div>
-    <div class="portal-column sort-column" id="portal-column-' . $i . '" style="float: left;">' .
-    $content . "<div></br></div>"
-    . '</div></div>';
-
-    return $col;
-}
-
+$lobjGuide->outputTabs();
 ?>
+</div>
 
 <?php include("../includes/footer.php"); ?>

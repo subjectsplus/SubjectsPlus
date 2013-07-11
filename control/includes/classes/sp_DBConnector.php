@@ -1,11 +1,11 @@
 <?php
 
 /**
- *   @file 
+ *   @file
  *   @brief make connection to selected database
  *
  *   @author rgilmour, adarby
- *   @date 
+ *   @date
  *   @todo
  */
 
@@ -27,18 +27,24 @@ class sp_DBConnector {
       if (!mysql_select_db($dbName)) {
         throw new Exception('Could not choose database.');
       }
-		
+
     // Make sure things are unicode-friendly
     $setup_q = "SET NAMES 'utf8'";
     mysql_query($setup_q);
-		 		
+
       return $this->_connection;
     } else {
       throw new Exception('Could not connect to database server.');
     }
-	 
 
-	 
+
+
   }
+
+
+	public function getConnection()
+	{
+		return $this->_connection;
+	}
 }
 ?>

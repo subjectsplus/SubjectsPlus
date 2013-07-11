@@ -24,57 +24,81 @@ include("../../includes/header.php");
 // Connect to database
 try {$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
 
-$left_col = $_POST["left_data"];
-$center_col = $_POST["center_data"];
-$sidebar = $_POST["sidebar_data"];
-$subject_id = $_POST["this_subject_id"];
-
-//added by dgonzalez in order to separate by '&pluslet[]=' even if dropspot-left doesn't exist
-$left_col = "&" . $left_col;
-$center_col = "&" . $center_col;
-$sidebar = "&" . $sidebar;
-
-// remove the "drop here" non-content & get all our "real" contents into array
-$left_col = str_replace("dropspot-left[]=1", "", $left_col);
-$leftconts = explode("&pluslet[]=", $left_col);
-
-$center_col = str_replace("dropspot-center[]=1", "", $center_col);
-$centerconts = explode("&pluslet[]=", $center_col);
-
-$sidebar = str_replace("dropspot-sidebar[]=1", "", $sidebar);
-$sidebarconts = explode("&pluslet[]=", $sidebar);
-
-// CHECK IF THERE IS CONTENT
+$lobjTabs = json_decode($_POST['tabs'], true);
 
 // Remove all existing entries for that guide from intervening table
+$subject_id = $_POST["this_subject_id"];
 
-$qd = "DELETE FROM pluslet_subject WHERE subject_id = '$subject_id'";
-$dr = mysql_query($qd);
+$qs = "SELECT tab_id FROM tab WHERE subject_id = '$subject_id'";
+$drs = mysql_query($qs);
 
-// Now insert the appropriate entries
+while($row = mysql_fetch_array($drs))
+{
+	$qd = "DELETE FROM pluslet_tab WHERE tab_id = '{$row[0]}'";
+	$dr = mysql_query($qd);
 
-foreach ($leftconts as $key => $value) {
-	if ($key != 0) {
-		$qi = "INSERT INTO pluslet_subject (pluslet_id, subject_id, pcolumn, prow) VALUES ('$value', '$subject_id', 0, '$key')";
-		//print $qi . "<br />";
-		$ir = mysql_query($qi);
-	}
+	$qd = "DELETE FROM tab WHERE tab_id = '{$row[0]}'";
+	$dr = mysql_query($qd);
 }
 
-foreach ($centerconts as $key => $value) {
-	if ($key != 0) {
-		$qi = "INSERT INTO pluslet_subject (pluslet_id, subject_id, pcolumn, prow) VALUES ('$value', '$subject_id', 1, '$key')";
-		//print $qi . "<br />";
-		$ir = mysql_query($qi);
-	}
-}
+$lintTabIndex = 0;
 
-foreach ($sidebarconts as $key => $value) {
-	if ($key != 0) {
-		$qi = "INSERT INTO pluslet_subject (pluslet_id, subject_id, pcolumn, prow) VALUES ('$value', '$subject_id', 2, '$key')";
-		//print $qi . "<br />";
-		$ir = mysql_query($qi);
+foreach( $lobjTabs as $lobjTab )
+{
+	$qi = "INSERT INTO tab (subject_id, label, tab_index) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex)";
+	//print $qi . "<br />";
+	$ir = mysql_query($qi);
+
+	$lintTabId = mysql_insert_id($dbc->getConnection());
+
+	$left_col = $lobjTab["left_data"];
+	$center_col = $lobjTab["center_data"];
+	$sidebar = $lobjTab["sidebar_data"];
+
+	//added by dgonzalez in order to separate by '&pluslet[]=' even if dropspot-left doesn't exist
+	$left_col = "&" . $left_col;
+	$center_col = "&" . $center_col;
+	$sidebar = "&" . $sidebar;
+
+	// remove the "drop here" non-content & get all our "real" contents into array
+	$left_col = str_replace("dropspot-left[]=1", "", $left_col);
+	$leftconts = explode("&pluslet[]=", $left_col);
+
+	$center_col = str_replace("dropspot-center[]=1", "", $center_col);
+	$centerconts = explode("&pluslet[]=", $center_col);
+
+	$sidebar = str_replace("dropspot-sidebar[]=1", "", $sidebar);
+	$sidebarconts = explode("&pluslet[]=", $sidebar);
+
+	// CHECK IF THERE IS CONTENT
+
+	// Now insert the appropriate entries
+
+	foreach ($leftconts as $key => $value) {
+		if ($key != 0) {
+			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 0, '$key')";
+			//print $qi . "<br />";
+			$ir = mysql_query($qi);
+		}
 	}
+
+	foreach ($centerconts as $key => $value) {
+		if ($key != 0) {
+			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 1, '$key')";
+			//print $qi . "<br />";
+			$ir = mysql_query($qi);
+		}
+	}
+
+	foreach ($sidebarconts as $key => $value) {
+		if ($key != 0) {
+			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 2, '$key')";
+			//print $qi . "<br />";
+			$ir = mysql_query($qi);
+		}
+	}
+
+	$lintTabIndex++;
 }
 
 /////////////////////

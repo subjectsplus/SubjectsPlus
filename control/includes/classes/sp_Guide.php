@@ -19,6 +19,9 @@ class sp_Guide {
     private $_type;
     private $_extra;
     private $_message;
+	private $_all_tabs;
+
+	public $_isAdmin;
 
     public function __construct($subject_id="", $flag="") {
 
@@ -27,6 +30,9 @@ class sp_Guide {
         if ($flag == "" && $subject_id == "") {
             $flag = "empty";
         }
+
+    	$this->_isAdmin = FALSE;
+    	$this->_all_tabs = NULL;
 
         switch ($flag) {
             case "empty":
@@ -225,15 +231,15 @@ class sp_Guide {
 
             $jobj = $this->_extra;
             $main_col_size = $jobj['maincol'];
-            
+
         } else {
             $main_col_size = "0-8-4";
-        	
+
         }
         $screen_layout = "<span class=\"record_label\">" . _("Column widths (add up to 12):") . " <span id=\"main_col_width\">$main_col_size</span></span><br />
         <div id=\"slider\"></div>
         <input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
-        
+
 
 /////////////////////
 // Guide types dropdown
@@ -589,6 +595,203 @@ echo "</div>
         $this->_message = _("Thy Will Be Done.  Guide updated.");
     }
 
+	public function getTabs()
+	{
+		if(isset($this->_all_tabs))
+		{
+			return $this->_all_tabs;
+		}
+
+		// Find our existing tabs for this guide
+		$qtab = "SELECT DISTINCT tab_id, label, tab_index FROM tab WHERE subject_id = '{$this->_subject_id}' ORDER BY tab_index";
+		$rtab = mysql_query($qtab);
+
+		$all_tabs = array();
+
+		while ($myrow = mysql_fetch_array($rtab))
+		{
+			$all_tabs[] .= $myrow[1];
+		}
+
+		$this->_all_tabs = $all_tabs;
+		return $this->_all_tabs;
+	}
+
+	public function outputNavTabs()
+	{
+		$all_tabs = $this->getTabs();
+
+		$tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>";  // init tabs (in header of body of guide)
+		foreach ($all_tabs as $key=> $value) {
+
+			$tabs .= "<li><a href=\"#tabs-$key\">$value</a>";
+			$tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>" : "</li>";
+
+		}
+
+		//$tabs .= "<li><a id=\"newtab\" href=\"#tabs-new\">{+}</a></li>";
+		$tabs .= "</ul>"; // close out our tabs
+
+		echo $tabs;
+	}
+
+	public function outputTabs()
+	{
+		$all_tabs = $this->getTabs();
+
+		// Now loop through tab content
+		foreach ($all_tabs as $key=> $value) {
+			print "<div id=\"tabs-$key\" class=\"sptab\">";
+			// get our content
+			$this->dropTabs($key);
+			print "</div><!-- close div $key -->";  // close tab div
+		}
+	}
+
+	public function dropTabs($selected_tab = 0) {
+
+
+		$qc = "SELECT p.pluslet_id, p.title, p.body, pt.pcolumn, p.type, p.extra, t.tab_index
+			    FROM subject s LEFT JOIN tab t
+			    ON s.subject_id = t.subject_id
+			    LEFT JOIN pluslet_tab pt
+			    ON pt.tab_id = t.tab_id
+			    LEFT JOIN pluslet p
+			    ON p.pluslet_id = pt.pluslet_id
+			    WHERE s.subject_id = '{$this->_subject_id}'
+			    AND t.tab_index = '$selected_tab'
+			    ORDER BY prow ASC";
+
+
+		$rc = mysql_query($qc);
+
+		//init
+		$left_col_pluslets = "";
+		$main_col_pluslets = "";
+		$sidebar_pluslets = "";
+
+		while ($myrow = mysql_fetch_array($rc)) {
+
+			// Get our guide type
+			// Make sure it's not blank, as that will throw an error
+			if ($myrow["type"] != "") {
+
+				if ($myrow["type"] == "Special") {
+					$obj = "sp_Pluslet_" . $myrow[0];
+				} else {
+					$obj = "sp_Pluslet_" . $myrow[4];
+				}
+
+
+				//global $obj;
+				$record = new $obj($myrow[0], "", $this->_subject_id);
+				$view = $this->_isAdmin ? "admin" : "public";
+
+				switch ($myrow[3]) {
+					case 0:
+						# code...
+						$left_col_pluslets .= $record->output("view", $view);
+						break;
+					case 1:
+					default:
+						# code...
+						$main_col_pluslets .= $record->output("view", $view);
+						break;
+					case 2:
+						# code...
+						$sidebar_pluslets .= $record->output("view", $view);
+						break;
+				}
+
+			}
+			unset($record);
+		}
+
+		if($this->_isAdmin)
+		{
+			print $this->dropBoxes(0, 'left', $left_col_pluslets);
+			print $this->dropBoxes(1, 'center', $main_col_pluslets);
+			print $this->dropBoxes(2, 'sidebar', $sidebar_pluslets);
+			print '<div id="clearblock" style="clear:both;"></div> <!-- this just seems to allow the space to grow to fit dropbox areas -->';
+		}else{
+			global $is_responsive;
+
+			$query = "select extra from subject where subject_id = '{$this->_subject_id}'";
+			$result = mysql_query($query);
+			$sub = mysql_fetch_row($result);
+
+			$jobj = json_decode($sub[0]);
+			$col_widths = explode("-", $jobj->{'maincol'});
+
+			if (isset($col_widths[0]) && $col_widths[0] > 0) {
+				$left_width = $col_widths[0];
+			} else {
+				$left_width = 0;
+			}
+
+			if (isset($col_widths[1])) {
+				$main_width = $col_widths[1];
+			} else {
+				$main_width = 0;
+			}
+
+			if (isset($col_widths[2]) && $col_widths[2] > 0) {
+				$side_width = $col_widths[2];
+			} else {
+				$side_width = 0;
+			}
+
+			// responsive or not?
+			if (isset($is_responsive) && $is_responsive == TRUE) {
+				// make sure they aren't 0
+
+				if ($left_width > 0) {
+					print "<div class='span$left_width'>
+					$left_col_pluslets
+					</div>";
+				}
+
+				if ($main_width > 0) {
+					print "<div class='span$main_width'>
+					$main_col_pluslets
+					</div>";
+				}
+
+				if ($side_width > 0) {
+					print "<div class='span$side_width'>
+					$sidebar_pluslets
+					</div>";
+				}
+
+			} else {
+				print "<div id=\"leftcol\">
+				$left_col_pluslets
+				</div>
+				<div id=\"maincol\">
+				$main_col_pluslets
+				</div>
+				<div id=\"rightcol\">
+				$sidebar_pluslets
+				</div>";
+			}
+		}
+	}
+
+	public function dropBoxes($i, $itext, $content) {
+		global $AssetPath;
+
+		$col = '<div id="container-' . $i . '" style="position: relative; float: left; width: 30%;">
+			<div class="dropspotty unsortable" id="dropspot-' . $itext . '-1">
+			<img src="' . $AssetPath . 'images/icons/package-x-generic.png" alt="' . _("Drop Content Here") . '" />
+    		<span class="dropspot-text">' . _("Drop Here") . '</span>
+    		</div>
+    		<div class="portal-column sort-column portal-column-' . $i . '" style="float: left;">' .
+			$content . "<div><br /></div>"
+			. '</div></div>';
+
+		return $col;
+	}
+
     function updateExtra() {
 
         // Encode our extra as json
@@ -598,7 +801,7 @@ echo "</div>
         // update subject table
         /////////////////////
 
-        $qUpExtra = "UPDATE subject 
+        $qUpExtra = "UPDATE subject
         SET extra = '" . mysql_real_escape_string($json_extra) . "'
           WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
@@ -634,7 +837,7 @@ echo "</div>
     function modifySD() {
         global $use_disciplines;
         if ($use_disciplines != TRUE) { return;}
-        
+
         $de_duped = array_unique($this->_discipline_id);
 
         foreach ($de_duped as $value) {

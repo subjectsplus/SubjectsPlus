@@ -141,7 +141,7 @@ if(validExtension($lstrFile))
 		}else
 		{
 			//create error message
-			$lstrMessage = _('Could not upload file to user\'s assets folder.');
+			$lstrMessage = _('Could not upload file to user\\\'s assets folder.');
 		}
 	}else
 	{
