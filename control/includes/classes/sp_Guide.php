@@ -493,6 +493,12 @@ echo "</div>
 
         self::modifySD();
 
+        ///////////////////
+        // create inital tab
+        ///////////////////
+
+        self::modifyTabs();
+
         // /////////////////////
         // Alter chchchanges table
         // table, flag, item_id, title, staff_id
@@ -853,6 +859,19 @@ echo "</div>
                     echo blunDer("We have a problem with the subject_discipline query: $qUpSD");
                 }
             }
+        }
+    }
+
+    function modifyTabs()
+    {
+        $lstrQuery = "INSERT INTO tab (subject_id, tab_index) VALUES ('"
+            . scrubData($this->_subject_id, "integer") . "', '0')";
+
+        $rscResponse = mysql_query($lstrQuery);
+
+        $this->_debug .= "<p>4. (insert new tab) : $lstrQuery</p>";
+        if (!$rscResponse) {
+            echo blunDer("We have a problem with the new tab query: $rscResponse");
         }
     }
 
