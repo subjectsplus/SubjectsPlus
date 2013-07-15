@@ -19,11 +19,15 @@ $results = "";
 
 if (isset($_POST['shortform'])) {
 
-	$q = "SELECT distinct p.pluslet_id, LEFT(p.title, 75), p.type FROM pluslet p, subject s, pluslet_subject ps
-	WHERE p.pluslet_id = ps.pluslet_id
-	AND s.subject_id = ps.subject_id
-	AND s.shortform = '" . $_POST["shortform"] . "'
-	AND p.type != 'Special'";
+	$q = "SELECT DISTINCT p.pluslet_id, LEFT(p.title, 75), p.type
+			FROM pluslet p INNER JOIN pluslet_tab pt
+			ON p.pluslet_id = pt.pluslet_id
+			INNER JOIN tab t
+			ON pt.tab_id = t.tab_id
+			INNER JOIN subject s
+			ON t.subject_id = s.subject_id
+			WHERE s.shortform = '" . $_POST["shortform"] . "'
+			AND p.type != 'Special'";
 
 } elseif ($_POST["search_terms"]) {
 
@@ -50,7 +54,14 @@ if (mysql_num_rows($r) != 0) {
 			if (isset($_POST["search_terms"])) {
 				$add_info = "";
 				// get the subject
-				$q2 = "select s.subject from pluslet p, subject s, pluslet_subject ps WHERE s.subject_id = ps.subject_id AND p.pluslet_id = ps.pluslet_id AND p.pluslet_id = $myrow[0]";
+				$q2 = "SELECT s.subject
+						FROM subject s INNER JOIN tab t
+						ON s.subject_id = t.subject_id
+						INNER JOIN pluslet_tab pt
+						ON t.tab_id = pt.tab_id
+						INNER JOIN pluslet p
+						ON pt.pluslet_id = p.pluslet_id
+						WHERE p.pluslet_id = $myrow[0]";
 				$r2 = MYSQL_QUERY($q2);
 				$this_sub = mysql_fetch_row($r2);
 				$add_info = "<span style=\"font-size: 10px;\">($this_sub[0])</span>";

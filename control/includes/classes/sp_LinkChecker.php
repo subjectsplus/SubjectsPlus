@@ -177,11 +177,16 @@ class sp_LinkChecker {
 					</tbody>
 				</table>
 			<?php endif;
-			$box_select = "SELECT pluslet.pluslet_id, pluslet.title, pluslet.body, pluslet.type FROM pluslet, pluslet_subject " .
-							  "WHERE pluslet.pluslet_id = pluslet_subject.pluslet_id " .
-							  "AND pluslet_subject.subject_id = $lintSubjectID " .
-							  "AND pluslet.type IN('Basic','Feed') " .
-							  "ORDER BY pcolumn ASC, prow ASC";
+		$box_select = "SELECT p.pluslet_id, p.title, p.body, p.type
+						FROM pluslet p INNER JOIN pluslet_tab pt
+						ON p.pluslet_id = pt.pluslet_id
+						INNER JOIN tab t
+						ON pt.tab_id = t.tab_id
+						INNER JOIN subject s
+						ON t.subject_id = s.subject_id
+						WHERE s.subject_id = $lintSubjectID
+						AND p.type IN('Basic','Feed')
+						ORDER BY pt.pcolumn ASC, pt.prow ASC";
 			$box_result = mysql_query($box_select) or die("Cannot SELECT: " . mysql_error() . " SQL: " . $box_select);
 			?>
 			<?php if(!mysql_num_rows($box_result)): ?>

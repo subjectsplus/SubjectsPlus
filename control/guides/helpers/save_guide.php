@@ -5,10 +5,10 @@
  *   @brief Save the contents of the guide.
  *   @description Called by guide.js, which passes in an array of all the pluslets for a guide
  *   and their position within the page (i.e., left, center or right column + row number).  The existing
- *   entries in the intervening pluslet_subject table are emptied out, and new ones are added.
+ *   entries in the intervening pluslet_tab table are emptied out, and new ones are added.
  *
- *   @author agdarby
- *   @date updated dec 2012
+ *   @author agdarby, dgonzalez
+ *   @date updated jul 2013
  */
 
 $subsubcat = "";

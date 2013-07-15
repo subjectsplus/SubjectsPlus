@@ -29,13 +29,16 @@ class sp_Pluslet_6 extends sp_Pluslet {
 
         // Get librarians associated with this guide
         $querier = new sp_Querier();
-        $qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
-	FROM pluslet p, subject s, pluslet_subject ps
-	WHERE p.pluslet_id = ps.pluslet_id
-	AND s.subject_id = ps.subject_id
-	AND s.subject_id = '$this->_subject_id'
-        AND p.pluslet_id != '$this->_pluslet_id'
-	ORDER BY prow ASC";
+    	$qs = "SELECT p.pluslet_id, p.title, p.body, pt.pcolumn, p.type, p.extra
+				FROM pluslet p INNER JOIN pluslet_tab pt
+				ON p.pluslet_id = pt.pluslet_id
+				INNER JOIN tab t
+				ON pt.tab_id = t.tab_id
+				INNER JOIN subject s
+				ON t.subject_id = s.subject_id
+				WHERE s.subject_id = '$this->_subject_id'
+				AND p.pluslet_id != '$this->_pluslet_id'
+				ORDER BY pt.prow ASC";
 
         //print $qs;
 
@@ -63,7 +66,7 @@ class sp_Pluslet_6 extends sp_Pluslet {
             }
 
             $this->_body .= "";
-            
+
         } else {
             $this->_body = _("There are no contents for this guide yet!");
         }

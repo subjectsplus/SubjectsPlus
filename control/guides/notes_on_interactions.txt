@@ -43,5 +43,5 @@ necessary?]
 ** We hide our save button
 ** After a pause (to give time for the dom to reassemble completely), we call SaveGuide()
 * SaveGuide() notes the ids and locations of every pluslet on the page
-* Calls helpers/save_guide.php which updates the pluslet_subject table, and
+* Calls helpers/save_guide.php which updates the pluslet_tab table, and
 updates chchchanges table

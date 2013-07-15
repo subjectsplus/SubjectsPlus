@@ -804,7 +804,7 @@ function plantClone(clone_id, item_type) {
     // Create new node below, using a random number
 
     var randomnumber=Math.floor(Math.random()*1000001);
-    jQuery("#portal-column-1").prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
+    jQuery(".portal-column-1:visible").prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
     //alert (drag_id + " drop: " + drop_id);
     //alert(clone_id);
 

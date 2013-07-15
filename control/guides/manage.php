@@ -121,21 +121,27 @@ if ($userFiles) {
 */
 
             $findGuidesQuery = "
-                SELECT st.fname, st.lname, s.subject, s.subject_id
-                FROM pluslet p
-                INNER JOIN pluslet_subject ps ON p.pluslet_id = ps.pluslet_id
-                INNER JOIN subject s ON ps.subject_id = s.subject_id
-                INNER JOIN staff_subject ss ON s.subject_id = ss.subject_id
-                INNER JOIN staff st ON ss.staff_id = st.staff_id
-                WHERE p.body LIKE '%" . $location_hint . "/" . $shortName . "%'
-                OR p.body LIKE '%$location_hint\\$shortName%'
-                OR p.body LIKE '%$location_hint\\image\\$shortName%'
-                OR p.body LIKE '%$location_hint/image/$shortName%'";
+				SELECT st.fname, st.lname, s.subject, s.subject_id
+				FROM pluslet p INNER JOIN pluslet_tab pt
+				ON p.pluslet_id = pt.pluslet_id
+				INNER JOIN tab t
+				ON pt.tab_id = t.tab_id
+				INNER JOIN subject s
+				ON t.subject_id = s.subject_id
+				INNER JOIN staff_subject ss
+				ON s.subject_id = ss.subject_id
+				INNER JOIN staff st
+				ON ss.staff_id = st.staff_id
+				WHERE p.body LIKE '%" . $location_hint . "/" . $shortName . "%'
+				OR p.body LIKE '%$location_hint\\$shortName%'
+				OR p.body LIKE '%$location_hint\\image\\$shortName%'
+				OR p.body LIKE '%$location_hint/image/$shortName%'";
 
             $findGuidesResult = $querier->getResult($findGuidesQuery);
             $guides = array(); // for the list of guides in which the file appears
 
             if ($findGuidesResult) {
+
                 foreach ($findGuidesResult as $row) {
                     $owner = $row['fname'] . " " . $row['lname'];
                     $guideName = $row['subject'];

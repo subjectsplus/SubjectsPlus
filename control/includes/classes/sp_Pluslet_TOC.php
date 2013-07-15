@@ -24,13 +24,16 @@ class sp_Pluslet_TOC extends sp_Pluslet {
 
     // Get pluslets associated with this
     $querier = new sp_Querier();
-    $qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
-    FROM pluslet p, subject s, pluslet_subject ps
-    WHERE p.pluslet_id = ps.pluslet_id
-    AND s.subject_id = ps.subject_id
-    AND s.subject_id = '$this->_subject_id'
-        AND p.type != 'TOC'
-    ORDER BY prow ASC";
+  	$qs = "SELECT p.pluslet_id, p.title, p.body, pt.pcolumn, p.type, p.extra
+			FROM pluslet p INNER JOIN pluslet_tab pt
+			ON p.pluslet_id = pt.pluslet_id
+			INNER JOIN tab t
+			ON pt.tab_id = t.tab_id
+			INNER JOIN subject s
+			ON t.subject_id = s.subject_id
+			WHERE s.subject_id = '$this->_subject_id'
+			AND p.type != 'TOC'
+			ORDER BY pt.prow ASC";
 
     //print $qs;
 
@@ -68,7 +71,7 @@ class sp_Pluslet_TOC extends sp_Pluslet {
         $this_instance = "pluslet-new-body-$new_id";
       }
 
-      
+
 
 
       self::generateTOC($action);
@@ -85,7 +88,7 @@ class sp_Pluslet_TOC extends sp_Pluslet {
 
       // notitle hack
       if (trim($this->_title) == "notitle") { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
-      
+
       parent::assemblePluslet($hide_titlebar);
 
       return $this->_pluslet;
@@ -123,7 +126,7 @@ class sp_Pluslet_TOC extends sp_Pluslet {
       } else {
 
         // View
-        // display only ticked items   
+        // display only ticked items
         if ($this->_ticked_items) {
           foreach ($this->_tocArray as $value) {
             if (in_array($value[0], $this->_ticked_items)) {

@@ -127,10 +127,15 @@ switch ($_POST["flag"]) {
         $q = "DELETE FROM `pluslet` where pluslet_id = '$delete_id' AND type != 'Special'";
         $r = mysql_query($q);
 
-    	//added by dgonzalez because if pluslet is special, no deletetion so need to manually delte relationship
+    	//added by dgonzalez because if pluslet is special, no deletetion so need to manually delete relationship
     	if( mysql_affected_rows() == 0 )
     	{
-    		$q2 = "DELETE FROM `pluslet_subject` where pluslet_id = '$delete_id' AND subject_id = '$subject_id'";
+    		$q2 = "DELETE pt FROM `pluslet_tab` pt INNER JOIN tab t
+    				ON pt.tab_id = t.tab_id
+    				INNER JOIN subject s
+    				ON t.subject_id = s.subject_id
+    				WHERE pt.pluslet_id = '$delete_id' AND s.subject_id = '$subject_id'";
+
     		$r2 = mysql_query($q2);
     	}
 

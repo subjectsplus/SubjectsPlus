@@ -402,15 +402,23 @@ echo "</div>
             return FALSE;
         }
 
-        // Delete the records from staff and staff_subject tables
-        $q = "DELETE subject,staff_subject FROM subject LEFT JOIN staff_subject ON subject.subject_id = staff_subject.subject_id WHERE subject.subject_id = '" . $this->_subject_id . "'";
+        // Delete the records from pluslet that are associated with subject
+    	$q = "DELETE p
+				FROM pluslet p INNER JOIN pluslet_tab pt
+				ON p.pluslet_id = pt.pluslet_id
+				INNER JOIN tab t
+				ON pt.tab_id = t.tab_id
+				INNER JOIN subject s
+				ON t.subject_id = s.subject_id
+				WHERE p.type != 'Special' AND s.subject_id = '" . $this->_subject_id . "'";
 
         $delete_result = mysql_query($q);
 
         $this->_debug = "<p>Del query: $q";
 
         if (mysql_affected_rows() != 0) {
-            $q2 = "DELETE pluslet, pluslet_subject FROM pluslet LEFT JOIN pluslet_subject ON pluslet.pluslet_id = pluslet_subject.pluslet_id WHERE type != 'Special' AND subject_id = '" . $this->_subject_id . "'";
+        	//delete subject
+            $q2 = "DELETE subject,staff_subject FROM subject LEFT JOIN staff_subject ON subject.subject_id = staff_subject.subject_id WHERE subject.subject_id = '" . $this->_subject_id . "'";
             $delete_result2 = mysql_query($q2);
             $this->_debug .= "<p>Del query 2: $q2";
         } else {

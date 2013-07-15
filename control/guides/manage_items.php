@@ -54,10 +54,14 @@ if (isset($_REQUEST["subject_id"])) {
 
 ob_end_flush();
 
-$subs_query = "SELECT distinct s.subject_id, s.subject FROM pluslet p, subject s, pluslet_subject ps
-WHERE p.pluslet_id = ps.pluslet_id
-AND s.subject_id = ps.subject_id
-AND p.type != 'Special'
+$subs_query = "SELECT distinct s.subject_id, s.subject
+FROM subject s INNER JOIN tab t
+ON s.subject_id = t.subject_id
+INNER JOIN pluslet_tab pt
+ON t.tab_id = pt.tab_id
+INNER JOIN pluslet p
+ON pt.pluslet_id = p.pluslet_id
+WHERE p.type != 'Special'
 ORDER BY s.subject, s.type";
 
 
@@ -81,7 +85,6 @@ $all_guides = "
 $subs_option_boxes
 </select>
 </form>";
-
 
 $q = "select title.title_id, title, location, source, source.source_id, rank.rank_id
 FROM title, restrictions, location, location_title, source, rank

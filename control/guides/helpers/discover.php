@@ -24,10 +24,12 @@ if (isset($_GET["subject_id"])) {
 }
 
 // get list of all subjects with pluslets, to use later
-$q3 = "SELECT s.shortform, s.subject FROM pluslet p, subject s, pluslet_subject ps
-WHERE p.pluslet_id = ps.pluslet_id
-AND s.subject_id = ps.subject_id
-group by s.subject";
+$q3 = "SELECT s.shortform, s.subject FROM subject s
+INNER JOIN tab t
+ON s.subject_id = t.subject_id
+INNER JOIN pluslet_tab pt
+ON t.tab_id = pt.tab_id
+GROUP BY s.subject";
 
 //print $q2;
 
