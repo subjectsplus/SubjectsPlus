@@ -44,9 +44,40 @@ jQuery(lstrSelector).livequery(function() {
 
 	jQuery(this).droppable({
 
-		hoverClass: "drop_hover",
-		accept: ".draggable",
+		accept: ".draggable, .pluslet",
 		drop: function(event, props) {
+
+			jQuery(this).removeClass("drop_hover");
+			jQuery(this).css("background", "");
+
+			//do if droppable tab
+			if(jQuery(this).children('a[href^="#tabs-"]').length > 0 )
+			{
+				if( jQuery(props.draggable).hasClass('pluslet') )
+				{
+					if( !jQuery(this).hasClass('ui-state-active') )
+					{
+						var drop_tab = this;
+
+						jQuery(props.draggable).hide('slow', function()
+						{
+							jQuery(this).remove();
+							jQuery(drop_tab).children('a[href^="#tabs-"]').click();
+							jQuery('.portal-column-1:visible').prepend(this);
+							jQuery(this).height("auto");
+							jQuery(this).width("auto");
+							jQuery(this).show("slow");
+
+							jQuery("#response").hide();
+							//Make save button appear, since there has been a change to the page
+							jQuery("#save_guide").fadeIn();
+						});	
+					}				
+				}
+				
+				return;
+			}
+
 			// if there can only be one, could remove from list items
 			var drop_id = jQuery(this).attr("id");
 			var drag_id = jQuery(props.draggable).attr("id");
@@ -94,6 +125,31 @@ jQuery(lstrSelector).livequery(function() {
 
 			});
 
+		},
+		over: function(event, ui)
+		{
+			if(jQuery(this).children('a[href^="#tabs-"]').length > 0 && jQuery(ui.draggable).hasClass('pluslet')
+				&& !jQuery(this).hasClass('ui-state-active'))
+			{	
+				jQuery(this).css("background", "none repeat scroll 0% 0% #C03957");
+			}
+			
+			if(jQuery(this).children('a[href^="#tabs-"]').length < 1 && !jQuery(ui.draggable).hasClass('pluslet'))
+			{
+				jQuery(this).addClass("drop_hover");	
+			}
+		},
+		out: function(event, ui)
+		{
+			if(jQuery(this).children('a[href^="#tabs-"]').length > 0 && jQuery(ui.draggable).hasClass('pluslet'))
+			{
+				jQuery(this).css("background", "");
+			}
+
+			if(jQuery(this).children('a[href^="#tabs-"]').length < 1 && !jQuery(ui.draggable).hasClass('pluslet'))
+			{
+				jQuery(this).removeClass("drop_hover");	
+			}
 		}
 	});
 
@@ -112,7 +168,7 @@ function makeSortable( lstrSelector )
 
 		jQuery(this).sortable({
 
-			connectWith :['#portal-column-0', '#portal-column-1', '#portal-column-2'],
+			connectWith :['.portal-column-0', '.portal-column-1', '.portal-column-2'],
 			opacity: 0.7,
 			tolerance: 'intersect',
 			cancel: '.unsortable',
@@ -120,6 +176,16 @@ function makeSortable( lstrSelector )
 				jQuery("#response").hide();
 				jQuery("#save_guide").fadeIn();
 
+			},
+			start: function(event, ui)
+			{
+				jQuery(ui.item).children('.pluslet_body').hide();
+				jQuery(ui.item).height('2em');
+				jQuery(ui.item).width('250px');
+			},
+			stop: function(event, ui)
+			{
+				jQuery(ui.item).children('.pluslet_body').show();
 			}
 		});
 	});

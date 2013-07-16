@@ -305,7 +305,9 @@ img { padding-top: 0;}
 
 }
 
-
+li.dropspotty {
+	height: auto;
+}
 
 #dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {float: left; }
 

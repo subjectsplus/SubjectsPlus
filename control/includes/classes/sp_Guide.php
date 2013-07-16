@@ -638,7 +638,7 @@ echo "</div>
 		$tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>";  // init tabs (in header of body of guide)
 		foreach ($all_tabs as $key=> $value) {
 
-			$tabs .= "<li><a href=\"#tabs-$key\">$value</a>";
+			$tabs .= "<li class=\"dropspotty\" style=\"height: auto;\"><a href=\"#tabs-$key\">$value</a>";
 			$tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>" : "</li>";
 
 		}

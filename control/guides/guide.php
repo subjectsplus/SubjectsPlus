@@ -389,7 +389,7 @@ ob_end_flush();
 jQuery(function() {
     var tabTitle = $( "#tab_title" ),
     tabContent = $( "#tab_content" ),
-    tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
+    tabTemplate = "<li class=\"dropspotty\" style=\"height: auto;\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
     tabCounter = <?php echo ( count($all_tabs) ); ?>;
     var tabs = $( "#tabs" ).tabs();
 
@@ -574,7 +574,10 @@ jQuery(function() {
                 $(tabs).find( ".ui-tabs-nav" ).sortable("cancel");
             else
             {
-                $(tabs).tabs( "refresh" );
+               // $(tabs).tabs( "refresh" );
+            	tabs.tabs("destroy");
+            	tabs.tabs();
+            	jQuery("#response").hide();
                 jQuery("#save_guide").fadeIn();
             }
         }
