@@ -110,18 +110,24 @@ class sp_Pluslet {
 
     protected function assemblePluslet($hide_titlebar=0) {
 
+    	global $IconPath;
+
         $this->_pluslet = "<a name=\"box-" . $this->_pluslet_id . "\"></a>";;
 
         // if we're using a simple pluslet, things are diff
         // we use $this->_visible_id to make sure this is only on the frontend
-        
+
         if ($hide_titlebar == 1 && $this->_visible_id == "") {
             $this->_pluslet .= "<div class=\"pluslet_simple no_overflow\">" . htmlspecialchars_decode($this->_body);
             // this div closed outside of if/else
         } else {
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
-            <div class=\"titlebar\">
-            <div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
+            <div class=\"titlebar\">";
+        	//only if on admin side, display sort icon
+        	if( $this->_visible_id != '' )
+        		$this->_pluslet .= "<img src=\"$IconPath/drag_arrow.png\" id=\"sort\" />";
+
+        	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
             <div class=\"titlebar_options\">$this->_icons</div>
             </div>";
 
@@ -132,9 +138,9 @@ class sp_Pluslet {
             }
 
         }
-            
 
-        
+
+
         $this->_pluslet .= "</div>";
     }
 

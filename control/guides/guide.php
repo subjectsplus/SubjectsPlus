@@ -215,27 +215,7 @@ ob_end_flush();
 
     jQuery(document).ready(function(){
 
-        // Adjust our three columns according to data from extra field
-        if (l_c < 8) {
-                    jQuery('.sptab div#container-0').width(0);
-                    jQuery('.sptab div#container-0').hide();
-        } else {
-                    jQuery('.sptab div#container-0').show();
-                    jQuery('.sptab div#container-0').width(new_left_width);
-        }
-
-
-        jQuery('#container-1').width(new_main_width);
-
-        if (r_c < 8) {
-                    jQuery('.sptab div#container-2').width(0);
-                    jQuery('.sptab div#container-2').hide();
-        } else {
-
-                    jQuery('.sptab div#container-2').show();
-                    jQuery('.sptab div#container-2').width(new_sidebar_width);
-        }
-
+        reLayout(new_left_width, new_main_width, new_sidebar_width);
 
         function addBoxy(){
             jQuery("#box_options").show();
@@ -337,8 +317,6 @@ ob_end_flush();
         }
     });
 
-    jQuery( "#extra" ).val(jQuery( "#slider" ).slider( "value" ) );
-
     jQuery('button[id=save_layout]').click(function(event) {
         var ourcols = jQuery( "#extra" ).val();
         new_layout = jQuery.ajax({
@@ -349,31 +327,14 @@ ob_end_flush();
             success: function(html) {
                 var ourval = jQuery( "#extra" ).val().split("-");
 
-                var lc = parseInt(ourval[0]) *8 + "%";
-                var cc = parseInt(ourval[1]) *8 + "%";
-                var rc = parseInt(ourval[2]) *8 + "%";
-                //alert("left: " + lc + "; center " + cc + ";right: " + rc);
+                var lc = parseInt(ourval[0]) * 8;
+                lc = lc.toString() + "%"; //convert to string before concating
+                var cc = parseInt(ourval[1]) * 8;
+                cc = cc.toString() + "%";
+                var rc = (parseInt(ourval[2]) * 8 - 3);
+                rc = rc.toString() + "%";
 
-                // now insert these vals to update columns
-                if (parseInt(ourval[0]) == 0) {
-                    jQuery('.sptab div#container-0').width(0);
-                    jQuery('.sptab div#container-0').hide();
-                } else {
-                    jQuery('.sptab div#container-0').show();
-                    jQuery('.sptab div#container-0').width(lc);
-                }
-
-                jQuery('#container-1').width(cc);
-
-                if (parseInt(ourval[2]) == 0) {
-                    jQuery('.sptab div#container-2').width(0);
-                    jQuery('.sptab div#container-2').hide();
-                } else {
-                    jQuery('.sptab div#container-2').show();
-                    jQuery('.sptab div#container-2').width(rc);
-                }
-
-
+                reLayout(lc, cc, rc);
             }
         });
     });
@@ -478,8 +439,19 @@ jQuery(function() {
                     success: function(html) {
                         tabs.tabs("destroy");
 
-                        tabs.append( "<div id='" + id + "'>" + html
+                        tabs.append( "<div id='" + id + "' class=\"sptab\">" + html
                          + "</div>" );
+
+                        var ourval = jQuery( "#extra" ).val().split("-");
+
+                        var lc = parseInt(ourval[0]) * 8;
+                        lc = lc.toString() + "%"; //convert to string before concating
+                        var cc = parseInt(ourval[1]) * 8;
+                        cc = cc.toString() + "%";
+                        var rc = (parseInt(ourval[2]) * 8 - 3);
+                        rc = rc.toString() + "%";
+
+                        reLayout(lc, cc, rc);
 
                         jQuery("#response").hide();
                         jQuery("#save_guide").fadeIn();
@@ -514,10 +486,12 @@ jQuery(window).load(function(){
     <div id="guide_nav">
         <ul>
             <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/expand.png" alt="show/hide header" /></li>
-            <li id="newbox" class="togglenewz"><img src="<?php print "$IconPath/box.png"; ?>" alt="new box" border="0" /> <?php
-            print _("New Box");
-            print $all_boxes;
-            ?></li>
+            <li id="newbox" class="togglenewz"><img src="<?php print "$IconPath/box.png"; ?>" alt="new box" border="0" />
+            <?php
+                print _("New Box");
+                print $all_boxes;
+            ?>
+            </li>
         <li class="showdisco" href="helpers/discover.php"><?php print _("Find Box"); ?></li>
         <li class="showrecord" href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></li>
         <li class="showmeta" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></li>

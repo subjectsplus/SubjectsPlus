@@ -284,8 +284,8 @@ img { padding-top: 0;}
 .draggable {
     border: 1px solid #e0e0e0;
     z-index: 100;
-    cursor:move;
     width: 240px;
+    cursor: move;
 }
 
 
@@ -330,7 +330,6 @@ li.dropspotty {
     z-index: 50;
     border: 1px solid #B3B9BF;
     padding: 2px;
-    cursor: move;
     font-size: 10pt;
     -moz-border-radius: 10px;
     -khtml-border-radius: 10px;
@@ -340,6 +339,16 @@ li.dropspotty {
     -moz-box-shadow: 5px 5px 5px #ccc;
     -webkit-box-shadow: 5px 5px 5px #ccc;
     box-shadow: 5px 5px 5px #ccc;
+}
+
+.pluslet img#sort
+{
+    cursor: move;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .titlebar {

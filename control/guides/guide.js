@@ -59,6 +59,11 @@ jQuery(lstrSelector).livequery(function() {
 					{
 						var drop_tab = this;
 
+						//make sure to show all of pluslet before hiding
+						jQuery(props.draggable).children('.pluslet_body').show();
+						jQuery(props.draggable).children().children('.titlebar_text').show();
+						jQuery(props.draggable).children().children('.titlebar_options').show();
+
 						jQuery(props.draggable).hide('slow', function()
 						{
 							jQuery(this).remove();
@@ -78,53 +83,56 @@ jQuery(lstrSelector).livequery(function() {
 				return;
 			}
 
-			// if there can only be one, could remove from list items
-			var drop_id = jQuery(this).attr("id");
-			var drag_id = jQuery(props.draggable).attr("id");
-			//alert(drag_id);
-			var pluslet_title = jQuery(props.draggable).html();
+			//only do for class draggable
+			if( jQuery(props.draggable).hasClass('draggable') )
+			{
+				// if there can only be one, could remove from list items
+				var drop_id = jQuery(this).attr("id");
+				var drag_id = jQuery(props.draggable).attr("id");
+				//alert(drag_id);
+				var pluslet_title = jQuery(props.draggable).html();
 
-			// Create new node below, using a random number
+				// Create new node below, using a random number
 
-			var randomnumber=Math.floor(Math.random()*1000001);
-			jQuery(this).next('div').prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
-			//alert (drag_id + " drop: " + drop_id);
+				var randomnumber=Math.floor(Math.random()*1000001);
+				jQuery(this).next('div').prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
+				//alert (drag_id + " drop: " + drop_id);
 
-			// Load new data, on success (or failure!) change class of container to "pluslet", and thus draggable in theory
-			jQuery("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
-				from: drag_id,
-				to: drop_id,
-				pluslet_title: pluslet_title,
-				flag: 'drop',
-				this_subject_id:subject_id
-			},
-			function() {
+				// Load new data, on success (or failure!) change class of container to "pluslet", and thus draggable in theory
+				jQuery("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
+					from: drag_id,
+					to: drop_id,
+					pluslet_title: pluslet_title,
+					flag: 'drop',
+					this_subject_id:subject_id
+				},
+				function() {
 
-				// 1.  remove the wrapper
-				// 2. put the contents of the div into a variable
-				// 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
-				var cnt = jQuery("#new-" + randomnumber).contents();
-				jQuery("#new-" + randomnumber).replaceWith(cnt);
-				//alert(jQuery(this).attr("id"));
-				jQuery(this).addClass("unsortable");
+					// 1.  remove the wrapper
+					// 2. put the contents of the div into a variable
+					// 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
+					var cnt = jQuery("#new-" + randomnumber).contents();
+					jQuery("#new-" + randomnumber).replaceWith(cnt);
+					//alert(jQuery(this).attr("id"));
+					jQuery(this).addClass("unsortable");
 
-				jQuery("#response").hide();
-				//Make save button appear, since there has been a change to the page
-				jQuery("#save_guide").fadeIn();
+					jQuery("#response").hide();
+					//Make save button appear, since there has been a change to the page
+					jQuery("#save_guide").fadeIn();
 
 
-				jQuery("a[class*=showmedium]").colorbox({
-					iframe: true,
-					innerWidth:"90%",
-					innerHeight:"80%",
-					maxWidth: "1100px",
-					maxHeight: "800px"
+					jQuery("a[class*=showmedium]").colorbox({
+						iframe: true,
+						innerWidth:"90%",
+						innerHeight:"80%",
+						maxWidth: "1100px",
+						maxHeight: "800px"
+					});
+
+					makeHelpable("img[class*=help-]");
+
 				});
-
-				makeHelpable("img[class*=help-]");
-
-			});
-
+			}
 		},
 		over: function(event, ui)
 		{
@@ -172,6 +180,7 @@ function makeSortable( lstrSelector )
 			opacity: 0.7,
 			tolerance: 'intersect',
 			cancel: '.unsortable',
+			handle: 'img#sort',
 			update: function(event, ui) {
 				jQuery("#response").hide();
 				jQuery("#save_guide").fadeIn();
@@ -180,12 +189,16 @@ function makeSortable( lstrSelector )
 			start: function(event, ui)
 			{
 				jQuery(ui.item).children('.pluslet_body').hide();
+				jQuery(ui.item).children().children('.titlebar_text').hide();
+				jQuery(ui.item).children().children('.titlebar_options').hide();
 				jQuery(ui.item).height('2em');
-				jQuery(ui.item).width('250px');
+				jQuery(ui.item).width('auto');
 			},
 			stop: function(event, ui)
 			{
 				jQuery(ui.item).children('.pluslet_body').show();
+				jQuery(ui.item).children().children('.titlebar_text').show();
+				jQuery(ui.item).children().children('.titlebar_options').show();
 			}
 		});
 	});
@@ -896,4 +909,29 @@ function plantClone(clone_id, item_type) {
         jQuery("#save_guide").fadeIn();
 
     });
+}
+
+///////////////
+// function to correctly size layout of guide
+//////////////
+function reLayout( lc, cc, rc)
+{
+	if (parseInt(lc) == 0) {
+        jQuery('.sptab div#container-0').width(0);
+        jQuery('.sptab div#container-0').hide();
+    } else {
+        jQuery('.sptab div#container-0').show();
+        jQuery('.sptab div#container-0').width(lc);
+    }
+
+    jQuery('.sptab div#container-1').width(cc);
+
+    if (parseInt(rc) == 0) {
+        jQuery('.sptab div#container-2').width(0);
+        jQuery('.sptab div#container-2').hide();
+    } else {
+        jQuery('.sptab div#container-2').show();
+        jQuery('.sptab div#container-2').width(rc);
+    }
+
 }
