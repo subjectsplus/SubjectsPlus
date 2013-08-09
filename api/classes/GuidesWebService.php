@@ -149,7 +149,7 @@ class GuidesWebService extends sp_WebService implements WebService
 	 */
 	function generateQuery(Array $lobjParams)
 	{
-		$lstrQuery = 'SELECT subject_id, subject as \'title\', description, keywords
+		$lstrQuery = 'SELECT subject_id, subject as \'title\', description, keywords, shortform
 					FROM subject';
 
 		$lobjConditions = array();
@@ -233,7 +233,7 @@ class GuidesWebService extends sp_WebService implements WebService
 		$lobjGuide['disciplines'] = array();
 		$lobjGuide['disciplines']['discipline'] = $this->getDisciplines( 'subject', intval($lobjRow['subject_id']));
 
-		$lobjGuide['url'] = PATH_TO_SP . 'subjects/subject.php?id=' . $lobjRow['subject_id'];
+		$lobjGuide['url'] = PATH_TO_SP . 'subjects/guide.php?subject=' . $lobjRow['shortform'];
 		$lobjGuide['date_created'] = $this->getDateCreated(intval($lobjRow['subject_id']));
 		$lobjGuide['last_modified'] = $this->getDateModified(intval($lobjRow['subject_id']));
 
