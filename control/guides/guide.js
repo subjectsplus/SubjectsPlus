@@ -192,7 +192,7 @@ function setupSaveButton( lstrSelector )
 		jQuery("#response").hide();
 		jQuery("#save_guide").fadeOut();
 		//jQuery("#savour").append('<span class="loader"><img src="images/loading_animated.gif" height="30" /></span>');
-		setTimeout(saveGuide, 1000);
+		saveGuide();
 
 		return false;
 
@@ -318,35 +318,45 @@ function setupSaveButton( lstrSelector )
 		////////////////////////
 		// Load the data into guide_data.php
 		// which will do an insert or update as appropriate
+		// 
+		// **changed by dgonzalez 08/2013 so that request is not done
+		// asynchronously so that setTimeout to save guide is no longer needed.
 		////////////////////////
 
-		jQuery(lstrDiv).load("helpers/guide_data.php", {
-			update_id: lintUID,
-			pluslet_title:lstrTitle,
-			pluslet_body:pbody,
-			flag: ourflag,
-			staff_id: user_id,
-			item_type: pitem_type,
-			clone:isclone,
-			special: pspecial,
-			this_subject_id: subject_id
-		},
-		function() {
+		jQuery.ajax({
+			url: "helpers/guide_data.php", 
+			data: {
+				update_id: lintUID,
+				pluslet_title:lstrTitle,
+				pluslet_body:pbody,
+				flag: ourflag,
+				staff_id: user_id,
+				item_type: pitem_type,
+				clone:isclone,
+				special: pspecial,
+				this_subject_id: subject_id
+			},
+			type: "POST",
+			success: function(response) {
 
-			// check if it's an insert or an update, and name div accordingly
-			if (ourflag == "update" || isclone == 1) {
-				var this_div = '#pluslet-'+lintID;
-			} else {
-				var this_div = '#'+lintID;
-			}
+				//load response into pluslet
+				jQuery(lstrDiv).html(response);
 
-			// 1.  remove the wrapper
-			// 2. put the contents of the div into a variable
-			// 3.  replace parent div (i.e., id="xxxxxx") with the content made by loaded file
-			var cnt = jQuery(this_div).contents();
-			//alert(cnt);
-			jQuery(this_div).replaceWith(cnt);
+				// check if it's an insert or an update, and name div accordingly
+				if (ourflag == "update" || isclone == 1) {
+					var this_div = '#pluslet-'+lintID;
+				} else {
+					var this_div = '#'+lintID;
+				}
 
+				// 1.  remove the wrapper
+				// 2. put the contents of the div into a variable
+				// 3.  replace parent div (i.e., id="xxxxxx") with the content made by loaded file
+				var cnt = jQuery(this_div).contents();
+				//alert(cnt);
+				jQuery(this_div).replaceWith(cnt);
+			},
+			async: false
 		});
 	}
 
