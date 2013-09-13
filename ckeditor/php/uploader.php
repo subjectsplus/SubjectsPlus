@@ -44,7 +44,7 @@ function validExtension($lstrFileName)
 
 	$lobjTemp = explode('.', $lstrFileName);
 
-	if(!in_array(end($lobjTemp), $upload_whitelist))
+	if(!in_array(strtolower(end($lobjTemp)), $upload_whitelist))
 	{
 		return false;
 	}
@@ -107,9 +107,7 @@ function moveFile( $lstrDesiredPath )
 	{
 		$lobjTemp = explode( DIRECTORY_SEPARATOR , $lstrDesiredPath );
 
-		global $BaseURL;
-
-		return $BaseURL . 'assets/users/' . $lobjTemp[count( $lobjTemp ) - 2] . '/' . $lobjTemp[count( $lobjTemp ) - 1];
+		return getRewriteBase("ckeditor") . 'assets/users/' . $lobjTemp[count( $lobjTemp ) - 2] . '/' . $lobjTemp[count( $lobjTemp ) - 1];
 
 	} else {
 
