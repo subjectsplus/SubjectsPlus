@@ -327,7 +327,7 @@ function getDBbySubBoxes($selected_sub) {
   $subs_option_boxes = "";
   $alphabet = "";
 
-  $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type = 'Subject' ORDER BY subject";
+  $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type = 'Subject' AND active = '1' ORDER BY subject";
   $subs_result = MYSQL_QUERY($subs_query);
 
   $num_subs = mysql_num_rows($subs_result);
