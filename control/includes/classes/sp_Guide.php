@@ -15,6 +15,7 @@ class sp_Guide {
     private $_shortform;
     private $_description;
     private $_keywords;
+    private $_redirect_url;
     private $_active;
     private $_type;
     private $_extra;
@@ -50,10 +51,15 @@ class sp_Guide {
                 $this->_shortform = $_POST["shortform"];
                 $this->_description = $_POST["description"];
                 $this->_keywords = $_POST["keywords"];
+                $this->_redirect_url = $_POST["redirect_url"];
                 $this->_active = $_POST["active"];
                 $this->_type = $_POST["type"];
                 $this->_shortform = $_POST["shortform"];
             	$this->_extra = $_POST['extra'];
+
+            	//add http to redirect url if not present
+            	$this->_redirect_url = strpos( $this->_redirect_url, "http://" ) === 0 || strpos( $this->_redirect_url, "https://" ) === 0
+            		|| $this->_redirect_url == "" ? $this->_redirect_url : "http://" . $this->_redirect_url;
 
                 // data stored in staff_subject table
                 $this->_staff_id = $_POST["staff_id"]; // array
@@ -86,7 +92,7 @@ class sp_Guide {
                 /////////////
 
                 $querier = new sp_Querier();
-                $q1 = "select subject_id, subject, active, shortform, description, keywords, type, extra from subject where subject_id = " . $this->_subject_id;
+                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra from subject where subject_id = " . $this->_subject_id;
                 $guideArray = $querier->getResult($q1);
 
                 $this->_debug .= "<p>Subject query: $q1";
@@ -98,6 +104,7 @@ class sp_Guide {
                     $this->_shortform = $guideArray[0]["shortform"];
                     $this->_description = $guideArray[0]["description"];
                     $this->_keywords = $guideArray[0]["keywords"];
+                    $this->_redirect_url = $guideArray[0]["redirect_url"];
                     $this->_active = $guideArray[0]["active"];
                     $this->_type = $guideArray[0]["type"];
                     $this->_extra = json_decode($guideArray[0]["extra"], true);
@@ -341,6 +348,10 @@ $screen_layout
 <span class=\"record_label\">" . _("Keywords (separate with commas)") . "</span><br />
 <input type=\"text\" name=\"keywords\" id=\"record_keywords\" size=\"40\" class=\"\" value=\"" . $this->_keywords . "\">
 <br />
+<br />
+<span class=\"record_label\">" . _("Redirect Url") . "</span><br />
+<input type=\"text\" name=\"redirect_url\" id=\"record_redirect_url\" size=\"40\" class=\"\" value=\"" . $this->_redirect_url . "\">
+<br />
 <br />";
 
 if ($use_disciplines == TRUE) {
@@ -470,11 +481,12 @@ echo "</div>
         // update subject table
         /////////////////////
 
-        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, active, type, extra) VALUES (
+        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, extra) VALUES (
 	  '" . mysql_real_escape_string(scrubData($this->_subject, "text")) . "',
 	  '" . mysql_real_escape_string(scrubData($this->_shortform, "text")) . "',
       '" . mysql_real_escape_string(scrubData($this->_description, "text")) . "',
       '" . mysql_real_escape_string(scrubData($this->_keywords, "text")) . "',
+      '" . mysql_real_escape_string(scrubData($this->_redirect_url, "text")) . "',
 	  '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
 	  '" . mysql_real_escape_string(scrubData($this->_type, "text")) . "',
           '" . mysql_real_escape_string($json_extra) . "'
@@ -545,6 +557,7 @@ echo "</div>
 	  shortform = '" . mysql_real_escape_string(scrubData($this->_shortform, "text")) . "',
       description = '" . mysql_real_escape_string(scrubData($this->_description, "text")) . "',
       keywords = '" . mysql_real_escape_string(scrubData($this->_keywords, "text")) . "',
+      redirect_url = '" . mysql_real_escape_string(scrubData($this->_redirect_url, "text")) . "',
 	  active = '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
 	  type = '" . mysql_real_escape_string(scrubData($this->_type, "text")) . "',
       extra = '" . mysql_real_escape_string($json_extra) . "'

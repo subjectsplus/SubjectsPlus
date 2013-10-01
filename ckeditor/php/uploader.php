@@ -95,6 +95,57 @@ function getUserPath()
 
 }
 
+
+/**
+ * getUserURL() - checks to see if session exists and then extracts username
+ * 					and returnsuser assets folder url.
+ *
+ * @return string
+ */
+function getUserURL()
+{
+	// start our session
+	session_start();
+
+	//check to see if user is logged in
+	if(isset($_SESSION['email']))
+	{
+		$lstrURL = $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ];
+
+		//extract user name from email
+		$lobjTemp = explode( '@', $_SESSION['email']);
+		$lstrUsername = $lobjTemp[0];
+
+		$lobjSplit = explode( '/', $lstrURL );
+
+		for( $i=(count($lobjSplit) - 1); $i >=0; $i-- )
+		{
+			if( $lobjSplit[$i] == 'ckeditor' )
+			{
+				unset($lobjSplit[$i]);
+				$lstrURL = implode( '/' , $lobjSplit );
+				break;
+			}else
+			{
+				unset($lobjSplit[$i]);
+			}
+		}
+
+		$lstrURL = 'http://' . $lstrURL . '/assets/';
+
+		//check to see if the user has their assets folder
+		$lstrURL = $lstrURL . "users/_" . $lstrUsername;
+
+		//return the url of the user's assets folder
+		return $lstrURL;
+	}else
+	{
+		//return error message
+		return "Not currently logged in!";
+	}
+
+}
+
 /**
  * moveFile() - tries to move uploaded file to desired path and returns the uploaded files url
  *
@@ -135,11 +186,11 @@ if(validExtension($lstrFile))
 		if($lstrTemp = moveFile($lstrPath . DIRECTORY_SEPARATOR . $lstrFile))
 		{
 			//if no error, store as url
-			$lstrUrl = $lstrTemp;
+			$lstrUrl = getUserURL() . "/" . $lstrFile;
 		}else
 		{
 			//create error message
-			$lstrMessage = _('Could not upload file to user\'s assets folder.');
+			$lstrMessage = _('Could not upload file to user\\\'s assets folder.');
 		}
 	}else
 	{

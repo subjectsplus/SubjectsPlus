@@ -63,11 +63,18 @@ $keywords = _("library, research, databases, subjects, search, find");
 if ($check_this) {
 
 
-    $query = "select subject, subject_id, extra, description, keywords from subject where shortform = '$check_this'";
+    $query = "select subject, subject_id, extra, description, keywords, redirect_url from subject where shortform = '$check_this'";
 //print $query;
     $result = mysql_query($query);
 
     $sub = mysql_fetch_row($result);
+
+	$redirect_url = $sub[5];
+	if( !is_null($redirect_url) && !empty($redirect_url)  )
+	{
+		header("Location:$redirect_url");
+	}
+
     $subject_string = $sub[0];
     $this_id = $sub[1];
 
@@ -198,7 +205,7 @@ if ($check_this) {
 include("includes/header.php");
 
 // responsive or not?
-if (isset($is_responsive) && $is_responsive == TRUE) { 
+if (isset($is_responsive) && $is_responsive == TRUE) {
     // make sure they aren't 0
 
     if ($left_width > 0) {
@@ -228,7 +235,7 @@ if (isset($is_responsive) && $is_responsive == TRUE) {
     </div>
     <div id=\"rightcol\">
     $sidebar_pluslets
-    </div>"; 
+    </div>";
 }
 
 

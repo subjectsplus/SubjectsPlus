@@ -198,6 +198,72 @@ CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', function( editor ) {
 					}
 				}
 				]
+			},
+			{
+				// Definition of the Link to Bib Record dialog tab (page).
+				id: 'tab-bib-num',
+				label: editor.lang['subsplus_cat_link.Tab4Label'],
+
+				// The tab contents.
+				elements: [
+				{
+					// Text input field for the bib record text.
+					type: 'text',
+					id: 'bib',
+					label: editor.lang['subsplus_cat_link.Tab4Text']
+				},
+				{
+					// Text input field for the html hint (explanation).
+					type: 'html',
+					html: '<span style="font-size: 10px;">E.g., ' + editor.lang['subsplus_cat_link.Tab4EG'] + '</span>'
+				},
+				{
+					// Text input field for the Title or link Text text.
+					type: 'text',
+					id: 'bib_label',
+					label: editor.lang['subsplus_cat_link.Tab4Title']
+				},
+				{
+					// html break
+					type: 'html',
+					html: '<div></div>'
+				},
+				{
+					//button to add link to subject heading
+					type: 'button',
+					id: 'bib-num-button',
+					label: editor.lang['subsplus_cat_link.Tab4Button'],
+					title: editor.lang['subsplus_cat_link.Tab4Button'],
+					className: 'cke_dialog_ui_button cke_dialog_ui_button_ok',
+					onClick: function()
+					{
+						var dialog = this._.dialog;
+
+						var lstrBib = dialog.getValueOf( 'tab-bib-num', 'bib' );
+						var lstrLabel = dialog.getValueOf( 'tab-bib-num', 'bib_label' );
+
+						//validate the input
+						if(lstrBib == '' && lstrLabel == '')
+						{
+							alert(html_entity_decode(editor.lang['subsplus_cat_link.Tab4ValidateAlertBoth']));
+						}else if(lstrBib == '')
+						{
+							alert(html_entity_decode(editor.lang['subsplus_cat_link.Tab4ValidateAlertBib']));
+						}else if(lstrLabel == '')
+						{
+							alert(html_entity_decode(editor.lang['subsplus_cat_link.Tab4ValidateAlertTitle']));
+						}else{
+							//create token
+							var lstrToken = "{{cat}, {" + lstrBib + "},{" + lstrLabel + "},{bib}}";
+
+							// Finally, inserts the element at the editor caret position.
+							editor.insertHtml( lstrToken );
+							//close dialog box
+							CKEDITOR.dialog.getCurrent().hide()
+						}
+					}
+				}
+				]
 			}
 		]
 	};
