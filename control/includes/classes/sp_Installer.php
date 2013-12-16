@@ -88,6 +88,7 @@ class sp_Installer
 					  `subject` varchar(255) DEFAULT NULL,
 					  `active` int(1) NOT NULL DEFAULT '0',
 					  `shortform` varchar(50) NOT NULL DEFAULT '0',
+					  `redirect_url` varchar(255) DEFAULT NULL,
 					  `description` varchar(255) DEFAULT NULL,
 					  `keywords` varchar(255) DEFAULT NULL,
 					  `type` varchar(20) DEFAULT NULL,
