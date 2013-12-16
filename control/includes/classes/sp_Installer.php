@@ -294,10 +294,10 @@ class sp_Installer
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 			);
 
-		//all the insert into queries -- default data
+		//all the subjectqueries -- default data
 		$this->lobjInsertQueries = array(
 					"INSERT INTO `chchchanges` VALUES (1,1,'guide',1,'General','insert','2011-03-26 19:16:19'),(2,1,'record',1,'Sample Record','insert','2011-03-26 20:08:54')",
-					"INSERT INTO `subject` VALUES (1,'General',1,'general',NULL,NULL,'Subject','2011-03-26 19:16:19','{\"maincol\": \"4-6-2\"}')",
+					"INSERT INTO `subject` VALUES (1,'General',1,'general',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19','{\"maincol\": \"4-6-2\"}')",
 					"INSERT INTO `pluslet` VALUES (1,'All Items by Source','','',0,'Special',''),(2,'Key to Icons','','',0,'Special',''),(3,'Subject Specialist','','',0,'Special',''),
 					(4,'FAQs','','',0,'Special',''),(5,'Books:  Use the Library Catalog','','',0,'Special',''),(6,'','','',0,'Reserved_for_Special',''),(7,'','','',0,'Reserved_for_Special',''),
 					(8,'','','',0,'Reserved_for_Special',''),(9,'','','',0,'Reserved_for_Special',''),(10,'','','',0,'Reserved_for_Special',''),(11,'','','',0,'Reserved_for_Special',''),
