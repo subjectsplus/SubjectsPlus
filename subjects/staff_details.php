@@ -20,7 +20,7 @@ try {
 }
 // Get array of acceptable users
 
-$q = "SELECT email FROM staff WHERE user_type_id = '1'";
+$q = "SELECT email FROM staff WHERE user_type_id = '1' and active = '1'";
 $r = mysql_query($q);
 
 while ($okemail = mysql_fetch_array($r)) {
@@ -34,8 +34,9 @@ if (isset($_GET['name']) && in_array(($_GET['name']), $ok_names)) {
     // use the submitted name
     $check_this = $_GET['name'];
 } else {
-    // use the first good email address
+    // use the first good email address; actually, just don't show (quick fix)
     $check_this = $ok_names[0];
+    $no_results = TRUE;
 }
 
 // agd 2011 using a LIKE in the $qstaffer query below
@@ -127,7 +128,12 @@ if ($staffmem[8] != "") {
 // Assemble the content for our main pluslet
 $display = $info . $subject_listing;
 
-$page_title = _("Staff Listing: ") . $fullname;
+// tidy up page name
+if ($no_results == TRUE) {
+  $page_title = _("Staff Profile");
+} else {
+  $page_title = _("Staff Profile") . ": " . $staffmem[9];
+}
 
 ////////////////////////////
 // Now we are finally read to display the page
@@ -153,7 +159,13 @@ if ($is_responsive == TRUE) {
             <div class="titlebar_text"></div>
         </div>
         <div class="pluslet_body">
-<?php print $display; ?>
+<?php 
+  if ($no_results == TRUE) {
+    print _("There is no current user by that name.");
+  } else {
+    print $display;
+  }
+ ?>
         </div>
     </div>
 </div>

@@ -39,7 +39,7 @@ class sp_Pluslet_4 extends sp_Pluslet {
         if ($faqArray) {
             $this->_body = "<ul>";
             foreach ($faqArray as $value) {
-                $short_q = Truncate($value[question], 150, '');
+                $short_q = Truncate($value["question"], 150, '');
 
                 $this->_body .= "<li><a target=\"_blank\" href=\"$PublicPath" . "faq.php?faq_id=$value[0]\">$short_q</a></li>\n";
             }
