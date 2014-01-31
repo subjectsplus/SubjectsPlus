@@ -166,7 +166,7 @@ class sp_Updater
 			ADD COLUMN `fax` VARCHAR(60) NULL DEFAULT NULL  AFTER `cell_phone` , ADD COLUMN `intercom` VARCHAR(30) NULL DEFAULT NULL  AFTER `fax`,
 			ADD COLUMN `lat_long` VARCHAR(75) NULL DEFAULT NULL  AFTER `intercom`",
 			"ALTER TABLE `staff_subject` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NOT NULL DEFAULT '0'",
-			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq` , DROP COLUMN `rss`,
+			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq`,
 			ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`, ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`,
 			ADD COLUMN `keywords` VARCHAR(255) NULL DEFAULT NULL  AFTER `description`",
 			"ALTER TABLE `talkback` ADD COLUMN `tbtags` VARCHAR(255) NULL DEFAULT 'main'  AFTER `last_revised_by` , ADD COLUMN `cattags` VARCHAR(255) NULL DEFAULT NULL  AFTER `tbtags`",
