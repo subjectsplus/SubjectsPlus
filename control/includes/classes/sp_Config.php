@@ -1309,7 +1309,7 @@ class sp_Config
 			if( $lstrItem == 'control' )
 			{
 				$this->lobjConfigValues[ 'BaseURL' ] = urldecode( 'http://' . $_SERVER[ 'HTTP_HOST' ] . implode( '/', $lobjSplit ) . '/' );
-				$this->lobjConfigValues[ 'CKBasePath' ] = urldecode( implode( DIRECTORY_SEPARATOR, $lobjSplit ) . DIRECTORY_SEPARATOR . 'ckeditor' . DIRECTORY_SEPARATOR );
+				$this->lobjConfigValues[ 'CKBasePath' ] = urldecode( implode( '/', $lobjSplit ) .'/' . 'ckeditor' . '/' );
 				$this->lobjConfigValues[ 'all_tbtags' ] = array( 'main' => '' );
 				break;
 			}

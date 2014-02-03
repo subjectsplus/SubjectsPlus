@@ -291,7 +291,27 @@ class sp_Installer
 					  KEY `fk_lt_title_id_idx` (`title_id`),
 					  CONSTRAINT `fk_lt_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`) ON DELETE CASCADE ON UPDATE CASCADE,
 					  CONSTRAINT `fk_lt_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `tab` (
+					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `subject_id` int(11) NOT NULL DEFAULT '0',
+					  `label` varchar(20) NOT NULL DEFAULT 'Main',
+					  `tab_index` int(11) NOT NULL DEFAULT '0',
+					  PRIMARY KEY (`tab_id`),
+					  KEY `fk_t_subject_id_idx` (`subject_id`)
+					) ENGINE=InnoDB AUTO_INCREMENT=1126 DEFAULT CHARSET=utf8",
+					"CREATE TABLE `pluslet_tab` (
+					  `pluslet_tab_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `pluslet_id` int(11) NOT NULL DEFAULT '0',
+					  `tab_id` int(11) NOT NULL,
+					  `pcolumn` int(11) NOT NULL,
+					  `prow` int(11) NOT NULL,
+					  PRIMARY KEY (`pluslet_tab_id`),
+					  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
+					  KEY `fk_pt_tab_id_idx` (`tab_id`),
+					  CONSTRAINT `fk_pt_pluslet_id` FOREIGN KEY (`pluslet_id`) REFERENCES `pluslet` (`pluslet_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_pt_tab_id` FOREIGN KEY (`tab_id`) REFERENCES `tab` (`tab_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB AUTO_INCREMENT=8181 DEFAULT CHARSET=utf8"
 			);
 
 		//all the subjectqueries -- default data
