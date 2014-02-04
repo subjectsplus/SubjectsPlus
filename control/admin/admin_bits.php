@@ -288,14 +288,14 @@ if (!empty($subsArray)) {
 
   foreach ($subsArray as $value) {
     if ($value[7] != "1") {
-      $active = " <span style=\"font-size:smaller; color: #666;\">" . _("inactive") . "</span>";
+      $active = " <span class=\"staff-list-inactive\">" . _("inactive") . "</span>";
     } else {
       $active = "";
     }
     $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-    $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 500px;\"><input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"" . _("delete") . "\" border=\"0\"></a> &nbsp;&nbsp;
+    $staff_list .= "<div class=\"$row_colour striper staff-list-row\"><input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"" . _("delete") . "\" border=\"0\"></a> &nbsp;&nbsp;
         <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[0]\"><img src=\"$IconPath/eye.png\" alt=\"" . _("see live") . "\" border=\"0\"></a> &nbsp;&nbsp;
-        <a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div> <div class=\"$row_colour striper\" style=\"float: left; min-width: 100px; font-size: smaller;\">$value[2] $value[3]</div>  <div class=\"$row_colour striper\" style=\"float: left; min-width: 75px;font-size: smaller;\">$value[5]</div>";
+        <a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div> <div class=\"$row_colour striper staff-list-active-row\">$value[2] $value[3]</div>  <div class=\"$row_colour striper staff-list-link\">$value[5]</div>";
     $row_count++;
   }
 } else {

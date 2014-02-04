@@ -91,20 +91,20 @@ $disciplineArray = $querierDept->getResult($qdiscipline);
 
 foreach ($disciplineArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
+    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item disc-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
 }
 
 print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"disciplines\" action=\"\" method=\"post\">
-<div id=\"savour\" style=\"clear: both;float:left; \">
+<div id=\"savour\" class=\"department-save\">
 	<div id=\"save_zone\" style=\"\">
 		<button id=\"save_guide\" name=\"update_disciplines\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 	
 </div>
 <br />
-<div class=\"box\" style=\"clear: both; float: left; min-width: 500px; max-width: 600px;\">
+<div class=\"box disc-box\">
 <p>" . _("NOTE:  Disciplines were added to facilitate Serials Solution ingest of data.  This original set was provided by SerSol in Nov 2012. 
     If you are a SerSol customer, you might not want to change these.  Sort may or may not be implemented in your version of SP.") . "</p>
 <p>" . _("Enter discipline type label.") . "</p>
@@ -115,7 +115,7 @@ $ourlist
 </ul>
 </form>
 </div>
-<div style=\"float: left; margin-left: 1em;\">
+<div class=\"add-disc\">
 <h2 class=\"bw_head\">" . _("Add discipline") . "</h2>
 <div class=\"box\">
 <form id=\"new_discipline\" action=\"\" method=\"post\">

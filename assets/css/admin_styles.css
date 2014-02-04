@@ -1093,3 +1093,74 @@ img .tooltip {
   padding: 5px;
   text-align: left;
 }
+
+
+
+.staff-list-inactive {
+color: #666;
+font-size:smaller; 
+
+}
+
+.staff-list-row {
+clear: both; 
+float: left; 
+min-width: 500px;
+}
+
+.staff-list-active-row {
+float: left; 
+min-width: 100px; 
+font-size: smaller;
+
+}
+
+.staff-list-link {
+float: left; min-width: 75px;font-size: smaller;
+}
+
+.department-sortable {
+margin-bottom: .5em;
+}
+
+.department-save {
+clear: both;
+float:left;
+}
+
+.department-box {
+clear: both;
+float: left; 
+min-width: 500px;
+
+}
+
+.add-department {
+float: left; 
+margin-left: 1em;
+}
+
+
+.disc-sortable {
+margin-bottom: .5em;
+}
+
+.disc-box {
+clear: both; 
+float: left; 
+min-width: 500px; 
+max-width: 600px;
+}
+
+.add-disc {
+
+float: left; margin-left: 1em;
+
+}
+
+.should-not-be-here {
+
+background-color: red;
+ color: white;
+
+}

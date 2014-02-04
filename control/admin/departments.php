@@ -128,7 +128,7 @@ $ourlist = "";
 
 foreach ($deptArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> 
+    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item department-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a>
   &nbsp; <input type=\"text\" size=\"40\" name=\"dept[]\" value=\"$value[1]\" /> 
   &nbsp; <input type=\"text\" size=\"10\" name=\"tel[]\" value=\"$value[2]\" /> 
   &nbsp; <input type=\"text\" size=\"20\" name=\"email[]\" value=\"$value[4]\" />
@@ -139,14 +139,14 @@ foreach ($deptArray as $value) {
 print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"departments\" action=\"\" method=\"post\">
-<div id=\"savour\" style=\"clear: both;float:left; \">
-	<div id=\"save_zone\" style=\"\">
+<div id=\"savour\" class=\"department-save\">
+	<div id=\"save_zone\">
 		<button id=\"save_guide\" name=\"update_departments\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 	
 </div>
 <br />
-<div class=\"box\" style=\"clear: both; float: left; min-width: 500px;\">
+<div class=\"box department-box\">
 <p>" . _("Enter department name, telephone number, email, website url.  Drag departments to change display order.") . "</p>
 <br />
 
@@ -155,7 +155,7 @@ $ourlist
 </ul>
 </form>
 </div>
-<div style=\"float: left; margin-left: 1em;\">
+<div class=\"add-department">
 <h2 class=\"bw_head\">" . _("Add Department") . "</h2>
 <div class=\"box\">
 <form id=\"new_deptartment\" action=\"\" method=\"post\">
