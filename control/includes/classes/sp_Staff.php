@@ -397,7 +397,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div style=\"float: left;margin-left: 10px;\">
+<div class=\"staff-priority">
 <span class=\"record_label\">" . _("Priority") . "</span><br />
 <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" size=\"2\" class=\"";
   		if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
@@ -408,7 +408,7 @@ class sp_Staff {
 
   	if ( !( $isDepartmentOmitted && $isPriorityOmitted ) )
   	{
-  		echo "<br style=\"clear: both;\" /><br />";
+  		echo "<br class=\"staff-clear\" /><br />";
   	}
 
   	if ( $isSupervisorOmitted )
@@ -439,7 +439,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div style=\"float: left;margin-left: 20px;\">
+<div class=\"input-left-box\">
 <span class=\"record_label\">" . _("FAX") . "</span><br />
 <input type=\"text\" name=\"fax\" id=\"fax\" size=\"15\" class=\"";
   		if ( in_array( _( 'fax' ) , $require_user_columns ) ) echo 'required_field';
@@ -454,7 +454,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div style=\"float: left;margin-left: 20px;\">
+<div class=\"input-left-box\">
 <span class=\"record_label\">" . _("Intercom") . "</span><br />
 <input type=\"text\" name=\"intercom\" id=\"intercom\" class=\"";
   		if ( in_array( _( 'intercom' ) , $require_user_columns ) ) echo 'required_field';
@@ -469,7 +469,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div style=\"float: left;margin-left: 20px;\">
+<div class=\"input-left-box\">
 <span class=\"record_label\">" . _("Room #") . "</span><br />
 <input type=\"text\" name=\"room_number\" id=\"room_number\" class=\"";
   		if ( in_array( _( 'room_number' ) , $require_user_columns ) ) echo 'required_field';
@@ -500,7 +500,7 @@ $tel_line
 </div>";
   	}
   		echo "
-<div style=\"float: left;margin-left: 20px;\">
+<div class=\"input-left-box\">
 <span class=\"record_label\">" . _("Active User?") . "</span><br />
 {$this->_active_or_not}
 </div><br /><br /></div>";
@@ -628,7 +628,7 @@ $headshot
 </div>
 </div>
 <!-- right hand column -->
-<div style=\"float: left; max-width: 400px;\">
+<div class=\"staff-right-column\">
 <h2 class=\"bw_head\">" . _("Permissions") . "</h2>
 <div class=\"box\">
 ";

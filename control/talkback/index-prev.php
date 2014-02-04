@@ -116,44 +116,7 @@ $tbArrayYes = $querierTBYES->getResult($qTBYES);
 if ($tbArrayYes) {
 
 
-  /*
-    foreach ($tbArrayYes as $value) {
-    $row_colour = ($row_count2 % 2) ? $colour1 : $colour2;
 
-    if ($value[2]) {
-    $q_from = $value[2];
-    } else {
-    $q_from = _("Anonymous");
-    }
-
-    $short_question = Truncate($value["question"], 200);
-    $short_answer = stripslashes(htmlspecialchars_decode(TruncByWord($value["answer"], 15)));
-
-    // get last mod date
-    $last_mod_tb = lastModded("talkback", $value["talkback_id"], 0, 1);
-
-    if ($last_mod_tb) {
-    $mod_line = _("--") . $last_mod_tb;
-    } else {
-    $mod_line = "";
-    }
-    $tb_yes_answer .= "
-    <div style=\"clear: both; float: left;  padding: 3px 5px; width: 98%;\" class=\"striper $row_colour\">
-    <div style=\"float: left; width: 32px; max-width: 5%;\"><a class=\"showcustom\" style=\"color: #333;\" href=\"talkback.php?talkback_id=$value[0]&amp;wintype=pop\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a></div>
-    <div style=\"float: left; width: 45%;\">
-    <strong>Q:</strong> $short_question <span style=\"color: #666; font-size: 10px;\">($q_from, $value[date_formatted])</span>
-    </div>
-    <div style=\"float: left; width: 45%; margin-left: 4%;\">
-    <strong>A:</strong> $short_answer <span style=\"color: #666; font-size: 10px;\">$mod_line</span>
-    </div>
-    </div>";
-
-
-
-    $row_count2++;
-    }
-
-   */
 
   $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
 } else {

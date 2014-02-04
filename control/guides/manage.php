@@ -197,7 +197,7 @@ $subs_option_boxes
 
 print "<div id=\"response\" class=\"feedback\"></div>
     <br />
-    <div style=\"float: left; width: 600px\">
+    <div class=\"manage-by-source\">
     <h2>" . _("Manage All Items by Source") . "</h2>
 <div class=\"box\">
 <p>" . _("Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box.") . "</p>
@@ -210,7 +210,7 @@ $all_guides
 </div>";
 
 
-print "<div style=\"clear: both;float: left; min-width: 600px;\">
+print "<div class=\"manage-uploads\">
 <h2>" . _("Manage your Uploads") . "</h2>
 <div class=\"box\">
 <p>" . _("Highlighted items are orphans.  Pity the orphans!") . "</p>";

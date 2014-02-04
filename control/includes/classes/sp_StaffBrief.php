@@ -196,7 +196,7 @@ class sp_Staff {
 <span class=\"record_label\">" . _("Department") . "</span><br />
 {$this->_departments}
 </div>
-<div style=\"float: left;margin-left: 10px;\">
+<div class=\"staff-department-label\">
 <span class=\"record_label\">" . _("Show First in Dept List?") . "</span><br />
 <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" size=\"2\" class=\"required_field\" value=\"" . $this->_staff_sort . "\" />
 </div>
@@ -211,7 +211,7 @@ $tel_line
 <span class=\"record_label\">" . _("User Type") . "</span><br />
 {$this->_user_types}
 </div>
-<div style=\"float: left;margin-left: 20px;\">
+<div class=\"input-left-box\">
 <span class=\"record_label\">" . _("Active User?") . "</span><br />
 {$this->_active_or_not}
 </div>
@@ -232,7 +232,7 @@ $headshot
 </div>
 </div>
 <!-- right hand column -->
-<div style=\"float: left; max-width: 400px;\">
+<div style=\"staff-right-column\">
 <h2 class=\"bw_head\">" . _("Permissions") . "</h2>
 <div class=\"box\">
 ";

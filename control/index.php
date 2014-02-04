@@ -20,9 +20,9 @@ $user = new sp_Staff($_SESSION["staff_id"]);
 $headshot = $user->getHeadshot($_SESSION["email"], "medium");
 print "
 <br />
-<div style=\"clear: both;float: left; margin-right: 1em; width: 600px\">
+<div class=\"admin-headshot-box-wrap\">
     <div class=\"box no_overflow\">
-            <div style=\"float: left; margin-right: 1em;\">
+            <div class=\"admin-headshot-box\">
         <p>$headshot ";
 printf(_("Hello %s"), $full_name);
 print "</p>
@@ -55,7 +55,7 @@ print "</div>
     $recent_activity
     </div>
 </div>
-<div style=\"float: left; min-width: 300px\">
+<div class=\"admin-background-options\">
     <h2>" . _("Background Options") . "</h2>
     <div class=\"box no_overflow\">
         <span id=\"bg_feedback\" class=\"feedback\"></span>";

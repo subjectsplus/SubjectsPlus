@@ -15,7 +15,7 @@ $page_title = "Generate delicious Display Page";
 include("../includes/header.php");
 
 print "<br />
-    <div style=\"float: left; width: 500px\">
+    <div class=\"del-box\">
     <h2>" . _("Generate Delicious Display Page.  Yum.") . "</h2>
 <div class=\"box\">
 <p>" . _("Use this tool to generate a page that display results from delicious.") . "</p>
@@ -45,7 +45,7 @@ print "<br />
 <div id=\"test_url\" style=\"background-color: yellow;\"></div>
 </div>
 </div>
-<div style=\"float: left; width: 400px; margin-left: 2em;\">
+<div class=\"huh\">
 <h2>Huh?</h2>
 <div class=\"box\">
 <p>" . _("This is a way to generate a URL that displays data from your delicious account. You can point users to a

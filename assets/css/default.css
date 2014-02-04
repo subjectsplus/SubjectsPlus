@@ -922,3 +922,117 @@ div.plusheading .pluslet_body, div.type-heading .pluslet_body {
 .evenrow {
   background-color: #E3E1D9;
 }
+
+
+
+
+.nav-logo {
+float:left;
+
+}
+
+.faq-right-column {
+float: left;
+min-width: 50px;
+max-width: 400px
+}
+
+.guide-right-column {
+float: left;
+min-width: 200px;
+}
+
+.source-row {
+float: left; 
+width: 33%
+}
+
+.staff-clear {
+clear:both;
+
+}
+
+.toc-column {
+float: left; margin-right: 2em; overflow: none;
+}
+
+.record-right-column {
+float: left;
+min-width: 270px;
+}
+
+.record-format {
+float: left;
+ margin-right: 1em;
+}
+
+.record-clear {
+clear:both;
+
+}
+
+.record-row {
+float: left; 
+width: 33%;
+}
+
+.staff-right-column {
+float: left; 
+max-width: 400px;
+}
+
+.staff-department-label {
+float: left;
+margin-left: 10px;
+}
+
+.talkback-right-column  {
+float: left;
+min-width: 50px;
+}
+
+.video-right-column {
+float: left;
+min-width: 50px;
+}
+
+.browse-faq-box {
+float:left;
+width:70%; 
+
+}
+
+.del-box {
+float: left; 
+width: 500px
+}
+
+.huh {
+float: left; 
+margin-left: 2em;
+width: 400px; 
+}
+
+.guides-no-fun {
+float: right; 
+width: 45%;
+margin-left: 10px;
+}
+
+.guides-create {
+clear: right; 
+float: right; 
+margin-left: 10px;
+width: 45%;
+}
+
+.guides-tips {
+clear: right; 
+float: right; 
+width: 45%;
+margin-left: 10px;
+}
+
+.guides-dropdown {
+margin: 1em 0;
+}

@@ -78,7 +78,7 @@ if ($num_rows > 0) {
 }
 
 print "<br />
-<div style=\"float: left;  width: 50%;\"><h2>" . _("Edit Your Guides") . "</h2>
+<div class=\"edit-your-guides\"><h2>" . _("Edit Your Guides") . "</h2>
 <div class=\"box\">
 $myguides
 </div>
@@ -86,15 +86,15 @@ $myguides
 
 // Don't allow the NOFUN person to go to other guides
 if (!isset($_SESSION["NOFUN"])) {
-    print "<div style=\"float: right; width: 45%;margin-left: 10px;\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
+    print "<div class=\"guides-no-fun\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
     <div class=\"box\">
     <p>$dropdown_intro_text</p>
-    <div style=\"margin: 1em 0;\" class=\"dropdown_list\">$all_guides</div>
+    <div class=\"guides-dropdown\" class=\"dropdown_list\">$all_guides</div>
     </div>
     </div>";
 }
 
-print "<div style=\"clear: right; float: right; width: 45%;margin-left: 10px; \"><h2 class=\"bw_head\">" . _("Create") . "</h2>
+print "<div class=\"guides-create\"><h2 class=\"bw_head\">" . _("Create") . "</h2>
 <div class=\"box\">
 <ol>
 <li>" . _("Make sure the guide doesn't already exist!") . "</li>
@@ -102,7 +102,7 @@ print "<div style=\"clear: right; float: right; width: 45%;margin-left: 10px; \"
 </ol>
 </div>
 </div>
-<div style=\"clear: right; float: right; width: 45%;margin-left: 10px; \"><h2 class=\"bw_head\">" . _("Tips") . "</h2>
+<div class=\"guides-tips\"><h2 class=\"bw_head\">" . _("Tips") . "</h2>
 <div class=\"box\">
 <p><img src=\"$IconPath/emblem-system.png\" alt=\"$gear_alt\" border=\"0\" /> = $gear_alt</p>
 <p><img src=\"$IconPath/eye.png\" alt=\"$eye_alt\" border=\"0\" /> = $eye_alt</p>

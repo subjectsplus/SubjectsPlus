@@ -241,7 +241,7 @@ class sp_Talkback {
 </div>
 </div>
 <!-- right hand column -->
-<div style=\"float: left;min-width: 50px;\">
+<div class=\"talkback-right-column\">
 	<div id=\"record_buttons\" class=\"box\">
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Now") . "\">";
 

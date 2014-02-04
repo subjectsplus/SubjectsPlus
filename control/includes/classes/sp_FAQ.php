@@ -177,7 +177,7 @@ class sp_FAQ {
 </div>
 </div>
 <!-- right hand column -->
-<div style=\"float: left;min-width: 50px;max-width: 400px\">
+      <div class=\"faq-right-column\">
 	<div id=\"record_buttons\" class=\"box\">
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Now") . "\" />";
 

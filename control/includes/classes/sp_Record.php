@@ -166,7 +166,7 @@ class sp_Record {
   	echo "
   	<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
   	<input type=\"hidden\" name=\"title_id\" value=\"" . $this->_record_id . "\" />
-  	<div style=\"float: left; margin-right: 20px; \">
+  	<div class=\"input-box\">
   	<div class=\"box\">
   	<span class=\"record_label\">" . _("Record Title") . "</span><br />
   	<input type=\"text\" name=\"prefix\" id=\"prefix\" size=\"1\" value=\"" . $this->_prefix . "\" /><input type=\"text\" name=\"title\" id=\"record_title\" size=\"60\" class=\"required_field\" value=\"" . $this->_title . "\" />
@@ -206,7 +206,7 @@ class sp_Record {
 	<div class=\"add_location\"><img src=\"$IconPath/list-add.png\" alt=\"add new location\"  border=\"0\" /> Add another location</div>
 	</div>
 	<!-- right hand column -->
-	<div style=\"float: left;min-width: 270px;\">
+	<div clsas=\"record-right-column\">
 	<div id=\"record_buttons\" class=\"box\">
 	<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
@@ -416,13 +416,13 @@ public function buildLocation() {
  	<span class=\"smaller url_feedback\"></span>
  	<div class=\"$input_callnum_class\"><span class=\"record_label\">" . _("Call Number") . "</span><br /><input type=\"text\" value=\"{$this->_call_number}\" name=\"call_number[]\" size=\"20\" /></div>
  	<br style=\"clear: both;\" />
- 	<div style=\"float: left; margin-right: 1em;\"><span class=\"record_label\">" . _("Format") . "</span><br />
+ 	<div class=\"record-format\"><span class=\"record_label\">" . _("Format") . "</span><br />
  	{$this->_formats}</div>
- 	<div style=\"float: left; margin-right: 1em;\"><span class=\"record_label\">" . _("Access Restrictions") . "</span><br />
+ 	<div class=\"record-format\"><span class=\"record_label\">" . _("Access Restrictions") . "</span><br />
  	{$this->_restrictions}<br /></div>";
 
  	if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
- 		echo "<div style=\"float: left; width: 33%;\"><br />";
+ 		echo "<div class=\"record-row\"><br />";
 
       // A-Z DB List
  		$a_z_string = "<input type=\"hidden\" name=\"eres_display[]\" value=\"" . $this->_az_display . "\" />";
@@ -435,7 +435,7 @@ public function buildLocation() {
 
  		echo "
  		$a_z_string<br /></div>
- 		<div style=\"clear: both;\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
+ 		<div class=\"record-clear\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
 
  		if ($wysiwyg_desc == 1 && $this->_boxcount == 1) {
  			include ($CKPath);
@@ -453,7 +453,7 @@ public function buildLocation() {
     }
 
     echo "</div>
-    <div style=\"clear: both;\"><br /><span class=\"record_label\">" . _("Help Guide Location") . "</span>  <br /><input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" /></div>
+    <div class=\"record-clear\"><br /><span class=\"record_label\">" . _("Help Guide Location") . "</span>  <br /><input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" /></div>
     ";
  } else {
  	echo "<br /><br /><input type=\"hidden\" name=\"eres_display[]\" value=\"{$this->_az_display}\">

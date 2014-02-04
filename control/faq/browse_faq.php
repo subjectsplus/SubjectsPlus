@@ -21,7 +21,7 @@ if(isset($_GET['type']))
 
 include("../includes/header.php");
 
-print "<br /><br /><div style=\"float: left;  width: 70%;\">";
+print "<br /><br /><div class=\"browse-faq-box\">";
 
 if ($postvar_type == "holding") {
 
