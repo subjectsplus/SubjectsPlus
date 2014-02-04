@@ -60,7 +60,7 @@ a img {
 body {
   background: #e3e1d9 url(../images/background.jpg) no-repeat center top;
   color: #000;
-  font-family: 'Helevtica Neue', 'Helvetica', Arial, Verdana, sans-serif;
+  font-family: "Helevtica Neue", "Helvetica", Arial, Verdana, sans-serif;
   font-size: .9em;
   line-height: 1.5em;
   margin: 0;
@@ -1116,8 +1116,18 @@ min-width: 100px;
 
 }
 
+.staff-priority {
+float: left;
+margin-left: 10px;
+}
+
 .staff-list-link {
 float: left; min-width: 75px;font-size: smaller;
+}
+
+.staff-clear {
+clear:both;
+
 }
 
 .department-sortable {
@@ -1194,4 +1204,47 @@ height: 100px;
 padding:1em 10px;
 
 
+}
+
+.admin-headshot-box-wrap {
+clear: both;
+float: left;
+ margin-right: 1em; 
+width: 600px
+}
+
+.admin-headshot-box {
+float: left; 
+margin-right: 1em;
+}
+
+.admin-background-options {
+
+float: left; 
+min-width: 300px
+
+}
+
+.nav-logo {
+float:left;
+
+}
+
+.records-results {
+clear: both; 
+float: left; 
+width: 98%; 
+padding: 3px 5px;
+}
+.records-toc {
+
+float: left; 
+min-width: 700px;
+max-width: 75%;
+}
+
+
+.records-new {
+float: left; 
+margin-left: 20px;
 }

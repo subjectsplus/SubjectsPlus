@@ -131,7 +131,7 @@ if ($alpha_id) {
             // weed out extraneous P tags
             $blurb = stripP($blurb);
 
-            $results .= "<div style=\"clear: both; float: left; width: 98%; padding: 3px 5px;\" class=\"$row_colour\">\n
+            $results .= "<div class=\"records-results\" class=\"$row_colour\">\n
         <a href=\"record.php?record_id=$id\" style=\"color: #333;\">$label</a>\n";
             /* not being used 
         <span style=\"display: none;\" class=\"toggle\">$icons<br />\n
@@ -145,7 +145,7 @@ if ($alpha_id) {
     }
 }
 print "<br /><br />
-<div style=\"float: left; min-width: 700px;max-width: 75%;\">
+<div class=\"records-toc\">
     <div class=\"box\">
     <div align=\"center\">$atoz</div>
     <div align=\"center\" class=\"ctag_list\">$tag_list</div>
@@ -153,7 +153,7 @@ print "<br /><br />
     </div>
     <div class=\"box no_overflow\">$results</div>
 </div>
-<div style=\"float: left; margin-left: 20px;\">
+<div class=\"records-new\">
   <h2 class=\"bw_head\">" . _("New Record") . "</h2>
   <div class=\"box\">
   <ol>

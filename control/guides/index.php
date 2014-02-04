@@ -86,7 +86,7 @@ $myguides
 
 // Don't allow the NOFUN person to go to other guides
 if (!isset($_SESSION["NOFUN"])) {
-    print "<div class=\"guides-no-fun\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
+    print "<div class=\"guides-all\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
     <div class=\"box\">
     <p>$dropdown_intro_text</p>
     <div class=\"guides-dropdown\" class=\"dropdown_list\">$all_guides</div>

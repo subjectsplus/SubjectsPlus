@@ -926,10 +926,7 @@ div.plusheading .pluslet_body, div.type-heading .pluslet_body {
 
 
 
-.nav-logo {
-float:left;
 
-}
 
 .faq-right-column {
 float: left;
@@ -1013,7 +1010,7 @@ margin-left: 2em;
 width: 400px; 
 }
 
-.guides-no-fun {
+.guides-all {
 float: right; 
 width: 45%;
 margin-left: 10px;
@@ -1035,4 +1032,15 @@ margin-left: 10px;
 
 .guides-dropdown {
 margin: 1em 0;
+}
+
+.manage-by-source {
+float: left; 
+width: 600px;
+}
+
+.manage-uploads {
+clear: both;
+float: left; 
+min-width: 600px;
 }
