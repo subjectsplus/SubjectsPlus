@@ -872,10 +872,10 @@ div.ctag_list a:hover {
 }
 
 .rec_delete_confirm {
-  text-align: right;
   background-color: yellow;
   margin: 5px;
   padding:  2px 1em 2px 2px;
+  text-align: right;
 
 }
 
@@ -888,14 +888,14 @@ div.ctag_list a:hover {
 /* Form Feedback */
 
 .feedback {
-  position: relative;
-  float: left;
   background-color: #DD647F;
-  width: 100%;
-  text-align: center;
-  display: block;
-  font-weight: bold;
   background: rgba(221, 100, 127, 1);
+  display: block;
+  float: left;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+  width: 100%;
 }
 
 .feedback a:link {
@@ -918,8 +918,8 @@ div.ctag_list a:hover {
 
 .sortable_list {
   list-style-type: none;
-  padding-left: 0 !important;
   margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .unsortable_list {
@@ -1108,10 +1108,11 @@ float: left;
 min-width: 500px;
 }
 
+
 .staff-list-active-row {
 float: left; 
-min-width: 100px; 
 font-size: smaller;
+min-width: 100px; 
 
 }
 
@@ -1148,19 +1149,49 @@ margin-bottom: .5em;
 .disc-box {
 clear: both; 
 float: left; 
-min-width: 500px; 
 max-width: 600px;
+min-width: 500px; 
 }
 
 .add-disc {
 
-float: left; margin-left: 1em;
+float: left;
+margin-left: 1em;
 
 }
 
 .should-not-be-here {
 
 background-color: red;
- color: white;
+color: white;
+
+}
+
+.guide-status {
+background-color: #F6E3E7;
+}
+
+
+.tick-zone {
+display: none;
+padding: 1em 10px;
+}
+
+.listing-space {
+ border-top: 1px solid #efefef;
+}
+
+.faq-item-value {
+margin-bottom: 1em;
+
+}
+
+.tick-wrap {
+height: 100px;
+}
+
+.tick-wrap-wrap {
+padding:1em 10px;
+
 
 }

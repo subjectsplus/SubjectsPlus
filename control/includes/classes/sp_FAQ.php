@@ -146,7 +146,7 @@ class sp_FAQ {
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_faq_id . "\" />
-<div style=\"float: left; margin-right: 20px;\">
+<div class=\"input-box\">
 <h2 class=\"bw_head\">$faq_title_line</h2>
 <div class=\"box\">
 <span class=\"record_label\">" . _("Question") . "</span><br />

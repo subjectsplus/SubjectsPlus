@@ -300,14 +300,14 @@ class sp_Staff {
   	echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
-<div style=\"float: left; margin-right: 20px;\">
+<div class=\"staff-form\">
 <h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
 <div class=\"box\">
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("First Name ") . "</span><br />
 <input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class=\"required_field\" value=\"" . $this->_fname . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Last Name ") . "</span><br />
 <input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\" class=\"required_field\" value=\"" . $this->_lname . "\" />
 </div>
@@ -337,7 +337,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Position Title") . "</span><br />
 <input type=\"text\" name=\"title\" id=\"title\" size=\"50\" class=\"";
   		if ( in_array( _( 'title' ) , $require_user_columns ) ) echo 'required_field';
@@ -352,7 +352,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Postion #") . "</span><br />
 <input type=\"text\" name=\"position_number\" id=\"position_number\" size=\"5\" class=\"";
   		if ( in_array( _( 'position_number' ) , $require_user_columns ) ) echo 'required_field';
@@ -385,7 +385,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Department") . "</span><br />
 {$this->_departments}
 </div>";
@@ -427,7 +427,7 @@ class sp_Staff {
   		echo "<input id=\"tel\" type=\"hidden\" value=\"" . $this->_tel . "\" name=\"tel\">";
   	}else{
   		echo "
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Telephone") . "</span><br />
 $tel_line
 </div>";
@@ -494,7 +494,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("User Type") . "</span><br />
 {$this->_user_types}
 </div>";
@@ -526,21 +526,21 @@ $tel_line
   		echo "
 \" value=\"" . $this->_street_address . "\" />
 <br /><br />
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("City") . "</span><br />
 <input type=\"text\" name=\"city\" id=\"city\" size=\"20\" class=\"";
   		if ( in_array( _( 'city' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" value=\"" . $this->_city . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("State") . "</span><br />
 <input type=\"text\" name=\"state\" id=\"state\" size=\"10\" class=\"";
   		if ( in_array( _( 'state' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" value=\"" . $this->_state . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Zip") . "</span><br />
 <input type=\"text\" name=\"zip\" id=\"zip\" size=\"5\" class=\"";
   		if ( in_array( _( 'zip' ) , $require_user_columns ) ) echo 'required_field';
@@ -548,14 +548,14 @@ $tel_line
 \" value=\"" . $this->_zip . "\" />
 </div>
 <br style=\"clear: both;\"/><br />
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Home Phone") . "</span><br />
 <input type=\"text\" name=\"home_phone\" id=\"home_phone\" class=\"";
   		if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" size=\"15\" value=\"" . $this->_home_phone . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Cell Phone") . "</span><br />
 <input type=\"text\" name=\"cell_phone\" id=\"cell_phone\" class=\"";
   		if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) echo 'required_field';
@@ -563,14 +563,14 @@ $tel_line
 \" size=\"15\" value=\"" . $this->_cell_phone . "\" />
 </div>
 <br style=\"clear: both;\"/><br />
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Latitude, Longitude") . "</span><br />
 <input type=\"text\" name=\"lat_long\" id=\"lat_long\" class=\"";
   		if ( in_array( _( 'lat_long' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" size=\"25\" value=\"" . $this->_lat_long . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Get Coordinates") . "</span><br />
 <span class=\"lookup_button\" value=\"$full_address\">look up now</span>
 </div>
@@ -588,21 +588,21 @@ $tel_line
 		echo "
 <h2 class=\"bw_head\">" . _("Emergency Contact Information") . "</h2>
 <div class=\"box no_overflow\">
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Emergency Contact") . "</span><br />
 <input type=\"text\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" size=\"30\" class=\"";
 		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
 		echo "
 \" value=\"" . $this->_emergency_contact_name . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Relationship") . "</span><br />
 <input type=\"text\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" size=\"15\" class=\"";
 		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
 		echo "
 \" value=\"" . $this->_emergency_contact_relation . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Phone") . "</span><br />
 <input type=\"text\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" size=\"15\" class=\"";
 		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';

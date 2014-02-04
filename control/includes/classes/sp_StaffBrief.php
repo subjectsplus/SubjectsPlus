@@ -177,14 +177,14 @@ class sp_Staff {
         echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
-<div style=\"float: left; margin-right: 20px;\">
+<div class=\"input-box\">
 <h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
 <div class=\"box\">
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("First Name ") . "</span><br />
 <input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class=\"required_field\" value=\"" . $this->_fname . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Last Name ") . "</span><br />
 <input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\" class=\"required_field\" value=\"" . $this->_lname . "\" />
 </div>
@@ -192,7 +192,7 @@ class sp_Staff {
 <span class=\"record_label\">" . _("Title") . "</span><br />
 <input type=\"text\" name=\"title\" id=\"title\" size=\"50\" class=\"required_field\" value=\"" . $this->_title . "\" />
 <br /><br />
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("Department") . "</span><br />
 {$this->_departments}
 </div>
@@ -207,7 +207,7 @@ $tel_line
 <span class=\"record_label\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</span><br />
 <input type=\"text\" name=\"email\" id=\"email\" size=\"40\" class=\"required_field\" value=\"" . $this->_email . "\" />
 <br /><br />
-<div style=\"float: left;\">
+<div class=\"staff-form\">
 <span class=\"record_label\">" . _("User Type") . "</span><br />
 {$this->_user_types}
 </div>

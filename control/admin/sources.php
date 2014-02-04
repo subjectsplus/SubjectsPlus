@@ -93,20 +93,20 @@ $sourceArray = $querierDept->getResult($qSource);
 
 foreach ($sourceArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
+    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item department-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
 }
 
 print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"sources\" action=\"\" method=\"post\">
-<div id=\"savour\" style=\"clear: both;float:left; \">
+<div id=\"savour\" class=\"department-save\">
 	<div id=\"save_zone\" style=\"\">
 		<button id=\"save_guide\" name=\"update_sources\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 	
 </div>
 <br />
-<div class=\"box\" style=\"clear: both; float: left; min-width: 500px;\">
+<div class=\"box\" class=\"department-box\">
 <p>" . _("Enter source type label.  Drag sources to change sort order.") . "</p>
 <br />
 
@@ -115,7 +115,7 @@ $ourlist
 </ul>
 </form>
 </div>
-<div style=\"float: left; margin-left: 1em;\">
+<div class=\"add-department\">
 <h2 class=\"bw_head\">" . _("Add Source") . "</h2>
 <div class=\"box\">
 <form id=\"new_source\" action=\"\" method=\"post\">

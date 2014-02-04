@@ -98,7 +98,7 @@ print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"disciplines\" action=\"\" method=\"post\">
 <div id=\"savour\" class=\"department-save\">
-	<div id=\"save_zone\" style=\"\">
+	<div id=\"save_zone\">
 		<button id=\"save_guide\" name=\"update_disciplines\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 	

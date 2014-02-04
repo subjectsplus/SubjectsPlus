@@ -86,7 +86,7 @@ if (isset($_GET["browse"])) {
         $staff_list .= "</div>";
     }
 
-    print "<br /><div style=\"float: left; min-width: 500px;\">";
+    print "<br /><div class=\"staff-list-row\">";
     print $staff_list;
     print "</div>";
     include("../includes/footer.php");

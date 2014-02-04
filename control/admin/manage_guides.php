@@ -41,14 +41,14 @@ $subsArray = $querier->getResult($q);
 
   foreach ($subsArray as $value) {
 
-	if ($value[7] != "1") { $active = " <span style=\"font-size:smaller; color: #666;\">inactive</span>";} else { $active = ""; }
+	if ($value[7] != "1") { $active = " <span class=\"staff-list-inactive\">inactive</span>";} else { $active = ""; }
 
 	  $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-	  $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 500px;\">
+	  $staff_list .= "<div class=\"$row_colour striper staff-list-row\">
           <input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"modify\" border=\"0\"></a> &nbsp;&nbsp;
           <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><img src=\"$IconPath/eye.png\" alt=\"see live\" border=\"0\"></a> &nbsp;&nbsp; <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"check links\" border=\"0\"></a> &nbsp;&nbsp;<a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div>
-          <div class=\"$row_colour striper\" style=\"float: left; min-width: 100px; font-size: smaller;\">$value[2] $value[3]</div>
-          <div class=\"$row_colour striper\" style=\"float: left; min-width: 75px;font-size: smaller;\">$value[5]</div>";
+          <div class=\"$row_colour striper staff-list-row\">$value[2] $value[3]</div>
+          <div class=\"$row_colour striper staff-list-active-row\">$value[5]</div>";
 	  $row_count++;
   }
 
@@ -90,10 +90,10 @@ $type_drop_base = "<select name=\"filter_type_id\" id=\"filter_by_type\">\n
 $type_drop_ticks = "<select name=\"filter_type_id\" id=\"filter_by_type_ticked\">\n";
 
 $type_drop_vals = "
-<option value=\"\" style=\"background-color: #F6E3E7\">" . _("~~Guide Status~~") . "</option>\n
+<option value=\"\" class=\"guide-status\">" . _("~~Guide Status~~") . "</option>\n
 <option value=\"Active\">" . _("Active") . "</option>\n
 <option value=\"Inactive\">" . _("Inactive") . "</option>\n
-<option value=\"\" style=\"background-color: #F6E3E7\">" . _("~~Guide Types~~") . "</option>\n";
+<option value=\"\" class=\"guide-status\">" . _("~~Guide Types~~") . "</option>\n";
 
   foreach ($guide_types as $key=>$value) {
 	  $type_drop_vals .= "<option value=\"$key\">$value</option>\n";
@@ -106,18 +106,18 @@ $type_dropdown_ticks = $type_drop_ticks . $type_drop_vals . $type_drop_close;
 
 
 
-print "<br /><div style=\"float: left; min-width: 500px;\">
+print "<br /><div class=\"department-box\">
 <div class=\"box no_overflow\">
-<div style=\"height: 100px;\">
-<div style=\"padding: 1em 10px;\">
+<div class=\"tick-wrap\">
+<div class=\"tick-wrap-wrap\">
 	<span class=\"filter\" id=\"ticked_label\">" . _("Ticked Guides") . "</span>
 	<span class=\"filter\">" . _("Show Guides By") . " $staff_dropdown</span>
 	<span class=\"filter\">" . _("Show") . " $type_dropdown</span>
 </div>
 
-<div id=\"tickzone\" style=\"display: none;padding: 1em 10px;\"><span class=\"filter_ticks\" >" . _("Assign to ") . " $staff_dropdown_ticks</span><span class=\"filter_ticks\" > Change To $type_dropdown_ticks</span><span class=\"filter_ticks\" id=\"tick_forget\">Never Mind</span></div>
+<div id=\"tickzone\" class=\"tick-zone\"><span class=\"filter_ticks\" >" . _("Assign to ") . " $staff_dropdown_ticks</span><span class=\"filter_ticks\" > Change To $type_dropdown_ticks</span><span class=\"filter_ticks\" id=\"tick_forget\">Never Mind</span></div>
 </div>
-<div id=\"listing_space\" style=\" border-top: 1px solid #efefef;\">
+<div id=\"listing_space\" class=\"listing-space\">
 ";
 print $staff_list;
 print "</div></div>";

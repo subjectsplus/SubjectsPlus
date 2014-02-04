@@ -27,7 +27,7 @@ print "
 printf(_("Hello %s"), $full_name);
 print "</p>
     </div>
-        <div style=\"float: left;\">
+        <div class=\"staff-form\">
                 <p><img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a href=\"includes/set_password.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"reset_password\">" . _("Reset Password") . "</a></p>
 ";
 if ($_SESSION['user_type_id'] == '1') {
