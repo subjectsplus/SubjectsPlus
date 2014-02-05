@@ -149,7 +149,7 @@ $all_boxes = "
 <li class=\"box-item draggable special-heading\" id=\"pluslet-id-Heading\">" . _("Heading") . "</li>
 <li class=\"box-item draggable special-rss\" id=\"pluslet-id-Feed\">" . _("Delicious/RSS/Flickr/Twitter") . "</li>
 <li class=\"box-item draggable special-rss\" id=\"pluslet-id-TOC\">" . _("Table of Contents") . "</li>
-    <li class=\"box-item draggable special-html5-video\" id=\"pluslet-id-HTML5Video\"> <i class=\"fa fa-video-camera\"></i> " .  _("  Video") . "</li>";
+    <li class=\"box-item draggable special-html5-video\" id=\"pluslet-id-HTML5Video\">" .  _("  Video") . "</li>";
 
 // Now get Special ones
 // make sure:  a) there are some linked resources (to show All Items by Source)
@@ -485,8 +485,8 @@ jQuery(window).load(function(){
 <div id="guide_header">
     <div id="guide_nav">
         <ul class="guide-nav-menu">
-            <li id="hide_header" class="guide-nav-item"><i class="fa fa-bars" alt="show/hide header" /></i> Menu</li>
-            <li id="newbox" class="guide-nav-item togglenewz"><i alt="new box" border="0" class="fa fa-plus-square-o"> New Box</i>
+               <li id="hide_header" class="guide-nav-item"><img src=<?php echo $IconPath; ?>/menu.png"  Menu</li>
+            <li id="newbox" class="guide-nav-item togglenewz"> New Box
             <?php
                 print $all_boxes;
             ?>

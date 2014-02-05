@@ -32,24 +32,24 @@ $headshot = $user->getHeadshot($_SESSION["email"], "medium");
       </p>
     </div>
     <div class="control-options">
-      <p><i class="fa fa-star" alt="bullet"/></i> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password"> Reset Password </a></p>
+      <p><img src="<?php echo $IconPath; ?>/required.png" alt="bullet"/></i> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password"> Reset Password </a></p>
 
       <?php
       if ($_SESSION['user_type_id'] == '1') {
 	// allow user to update their own bio?
 				       if (isset($user_bio_update) && $user_bio_update == TRUE) {
-	  print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+	  print "<p><img src=\"$IconPath/required.png\" alt=\"bullet\" /></i><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
 	}
 	// allow user to update their own photo?
 																				   if (isset($user_photo_update) && $user_photo_update == TRUE) {
-	  print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+	  print "<p><img src=\"$IconPath/required.png\"  alt=\"bullet\" /></i><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
 
 	}
       }
 
       // UM Only :  Now, export our contact information
       if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
-	print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i> <a href=\"admin/contacts.php\">View/Export Staff Contact Info</a></p>";
+	print "<p><img src=\"$IconPath/required.png\"  alt=\"bullet\" /></i> <a href=\"admin/contacts.php\">View/Export Staff Contact Info</a></p>";
       }
       ?>
 
@@ -74,7 +74,7 @@ $headshot = $user->getHeadshot($_SESSION["email"], "medium");
       <span id="bg_feedback" class="feedback"></span>
       <?php
       foreach ($all_bgs as $value) {
-	print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i><a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></p>";
+	print "<p><img src=\"$IconPath/required.png\" /></i><a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></p>";
       }
       ?>
 

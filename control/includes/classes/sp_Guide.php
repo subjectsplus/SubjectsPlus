@@ -808,11 +808,13 @@ echo "</div>
 	}
 
 	public function dropBoxes($i, $itext, $content) {
+        global $IconPath;
 		global $AssetPath;
+      
 
 		$col = '<div id="container-' . $i . '" style="position: relative; float: left; width: 30%;">
 			<div class="dropspotty unsortable" id="dropspot-' . $itext . '-1">
-			<i class="drop-spot-box fa fa-plus-square-o"  alt="' . _("Drop Content Here") . '" /></i>
+			<img src=\"$IconPath/box.png\"  alt="' . _("Drop Content Here") . '" />
     		<span class="dropspot-text">' . _("Drop Here") . '</span>
     		</div>
     		<div class="portal-column sort-column portal-column-' . $i . '" style="float: left;">' .
