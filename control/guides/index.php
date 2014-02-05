@@ -13,14 +13,14 @@ $page_title = "Modify Guides in SubjectsPlus";
 include("../includes/config.php");
 include("../includes/header.php");
 
-$gear_alt = _("Edit Guide Metadata");
-$eye_alt = _("View Guide on Public Site");
-$linkie_alt = _("Check Guide Links");
+$gear_alt = "Edit Guide Metadata";
+$eye_alt = "View Guide on Public Site";
+$linkie_alt = "Check Guide Links";
 
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+  $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
-    echo $e;
+  echo $e;
 }
 
 $subs_option_boxes = getSubBoxes("guide.php?subject_id=", "", 1);
@@ -49,67 +49,73 @@ $num_rows = mysql_num_rows($my_subs_result);
 
 if ($num_rows > 0) {
 
-    $myguides = "";
-    $row_count = 0;
-    $colour1 = "#fff";
-    $colour2 = "#F6E3E7";
-    $colour3 = "highlight";
+  $myguides = "";
+  $row_count = 0;
+  $colour1 = "#fff";
+  $colour2 = "#F6E3E7";
+  $colour3 = "highlight";
 
-    while ($myrow1 = mysql_fetch_array($my_subs_result)) {
-        $mysubs_id = $myrow1["0"];
-        $mysubs_name = stripslashes($myrow1["1"]);
-        $active = $myrow1["2"];
+  while ($myrow1 = mysql_fetch_array($my_subs_result)) {
+    $mysubs_id = $myrow1["0"];
+    $mysubs_name = stripslashes($myrow1["1"]);
+    $active = $myrow1["2"];
 
-        $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+    $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
 
-        $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp;
-        <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"$gear_alt\" title=\"$gear_alt\" border=\"0\" /></a> &nbsp;&nbsp;
+    $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp;
+        <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><i class=\"fa fa-gear\"  alt=\"$gear_alt\" title=\"$gear_alt\" border=\"0\" /></i></a> &nbsp;&nbsp;
         <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><img src=\"$IconPath/eye.png\" alt=\"$eye_alt\" border=\"0\" /></a> &nbsp;&nbsp;
         <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" border=\"0\" /></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
-        if ($active != "1") {
-            $myguides .= " <span style=\"color: #666;\">" . _("unpublished") . "</span>";
-        }
-        $myguides .= " <span style=\"color: #666; font-size: 10px;\">$myrow1[4]</span> </div>";
-        $row_count++;
+    if ($active != "1") {
+      $myguides .= " <span style=\"color: #666;\">" . _("unpublished") . "</span>";
     }
+    $myguides .= " <span style=\"color: #666; font-size: 10px;\">$myrow1[4]</span> </div>";
+    $row_count++;
+  }
 } else {
-    $myguides = "<p>" . _("You don't have any guides yet.  Why not create one?") . "</p>";
+  $myguides = "<p>" . _("You don't have any guides yet.  Why not create one?") . "</p>";
 }
 
-print "<br />
+print "<br /><div class=\"box\">
 <div class=\"edit-your-guides\"><h2>" . _("Edit Your Guides") . "</h2>
-<div class=\"box\">
+
 $myguides
 </div>
 </div>";
 
 // Don't allow the NOFUN person to go to other guides
 if (!isset($_SESSION["NOFUN"])) {
-    print "<div class=\"guides-all\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
-    <div class=\"box\">
+  print "
+        <div class=\"box\">
+    <div class=\"all-guides\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
+
     <p>$dropdown_intro_text</p>
-    <div class=\"guides-dropdown\" class=\"dropdown_list\">$all_guides</div>
+    <div class=\"all-guides-dropdown\" class=\"dropdown_list\">$all_guides</div>
     </div>
     </div>";
 }
+?>
+  <div class="box">
+<div class="create"><h2 class="bw_head">Create</h2>
 
-print "<div class=\"guides-create\"><h2 class=\"bw_head\">" . _("Create") . "</h2>
-<div class=\"box\">
-<ol>
-<li>" . _("Make sure the guide doesn't already exist!") . "</li>
-<li><a href=\"metadata.php\">" . _("Create new guide") . "</a></li>
-</ol>
+    <ol>
+      <li>Make sure the guide doesn't already exist!</li>
+      <li><a href="metadata.php">Create new guide</a></li>
+    </ol>
+  </div>
 </div>
-</div>
-<div class=\"guides-tips\"><h2 class=\"bw_head\">" . _("Tips") . "</h2>
-<div class=\"box\">
-<p><img src=\"$IconPath/emblem-system.png\" alt=\"$gear_alt\" border=\"0\" /> = $gear_alt</p>
-<p><img src=\"$IconPath/eye.png\" alt=\"$eye_alt\" border=\"0\" /> = $eye_alt</p>
-<p><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" border=\"0\" /> = $linkie_alt</p>
-<p><img src=\"$IconPath/delete.png\" alt=\"$eye_alt\" border=\"0\" /> = " . _("Need to delete a guide?  Use the gear icon, and use the Delete button.") . "</p>
-</div>
-</div>";
 
+  <div class="box">
+<div class="tips"><h2 class="bw_head">Tips</h2>
+
+    <p><i class="fa fa-circle" alt="Edit Guide Metadata" border="0" /></i> = Edit Guide Metadata </p>
+    <p><i class="fa fa-circle" alt="View Guide on Public Site" border="0" /></i> = View Guide on Public Site</p>
+    <p><i class="fa fa-circle" alt="Check Guide Links" border="0" /></i> = Check Guide Links</p>
+    <p><i class="fa fa-circle" alt="Need to delete a guide?  Use the gear icon, and use the Delete button" border="0" /></i>Need to delete a guide?  Use the gear icon, and use the Delete button</p>
+  </div>
+</div>
+
+<?php
 include("../includes/footer.php");
 ?>

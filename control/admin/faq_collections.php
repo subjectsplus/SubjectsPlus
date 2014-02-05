@@ -89,34 +89,35 @@ $resultArray = $querierDept->getResult($q);
 if ($resultArray) {
     foreach ($resultArray as $value) {
 
-        $ourlist .= "<p id=\"item-$value[0]\" class=\"faq-item-value\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
+        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
     }
 }
 
 print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"sources\" action=\"\" method=\"post\">
-<div id=\"savour\" class=\"department-save\">
-	<div id=\"save_zone\">
-		<button id=\"save_guide\" name=\"update_collections\" >" . _("SAVE CHANGES") . "</button>
+<div id=\"savour\" style=\"clear: both;float:left; \">
+	<div id=\"save_zone\" style=\"\">
+		<button class=\"button\" id=\"save_guide\" name=\"update_collections\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 
 </div>
 <br />
-<div class=\"box\" class=\"department-box\">
+<div class=\"box\" style=\"clear: both; float: left; min-width: 500px;\">
 <p>" . _("Edit label or delete collection.") . "</p>
 <br />
 $ourlist
 </form>
 </div>
-<div class=\"add-department\">
-<h2 class=\"bw_head\">" . _("Add Collection") . "</h2>
+<div style=\"float: left; margin-left: 1em;\">
 <div class=\"box\">
+    <h2 class=\"bw_head\">" . _("Add Collection") . "</h2>
+
 <form id=\"new_collection\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Collection Name") . "</span><br />
 <input type=\"text\" name=\"new_coll_name\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
 <br /><br />
-<button id=\"add_collection\" name=\"add_collection\">" . _("Add New Collection") . "</button>
+<button class=\"button\" id=\"add_collection\" name=\"add_collection\">" . _("Add New Collection") . "</button>
 </form>
 <div>";
 

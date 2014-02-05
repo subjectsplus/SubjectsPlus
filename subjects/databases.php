@@ -8,7 +8,9 @@
  */
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-
+include("../control/includes/autoloader.php");
+    
+    
 $use_jquery = array("ui");
 
 $page_title = _("Database List");

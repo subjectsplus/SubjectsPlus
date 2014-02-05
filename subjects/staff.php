@@ -17,6 +17,7 @@ $keywords = "staff list, librarians, contacts";
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+include("../control/includes/autoloader.php");
 
 try {
     $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);

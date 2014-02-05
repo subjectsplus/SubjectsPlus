@@ -15,9 +15,9 @@ $page_title = "Generate delicious Display Page";
 include("../includes/header.php");
 
 print "<br />
-    <div class=\"del-box\">
+    <div class=\"generate-delicious\"><div class=\"box\">
     <h2>" . _("Generate Delicious Display Page.  Yum.") . "</h2>
-<div class=\"box\">
+
 <p>" . _("Use this tool to generate a page that display results from delicious.") . "</p>
     <br />
 <form>
@@ -42,12 +42,13 @@ print "<br />
 
 </form>
 <br /><br />
-<div id=\"test_url\" style=\"background-color: yellow;\"></div>
+<div id=\"test_url\"></div>
 </div>
 </div>
 <div class=\"huh\">
+    <div class=\"box\">
 <h2>Huh?</h2>
-<div class=\"box\">
+
 <p>" . _("This is a way to generate a URL that displays data from your delicious account. You can point users to a
     page of results that looks like a regular page of your website.  Or your SubjectsPlus installation, anyway.") . "</p>
 <br /><p>" . _("The public delish feed page is located at sp/subjects/delish_feed.php .") . "<p></div>

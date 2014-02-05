@@ -97,9 +97,10 @@ if (isset($_POST["searchterm"])) {
 ?>
 
 <br />
-<div style="float: left;  width: 50%;">
-    <h2 class="bw_head"><?php print _("Search Results"); ?></h2>
-    <div class="box">
+<div class="search-results">
+  <div class="box">
+<h2 class="bw_head"><?php print _("Search Results"); ?></h2>
+
 <?php print $intro . $search_result; ?>
     </div>
 
@@ -109,4 +110,3 @@ if (isset($_POST["searchterm"])) {
 <?php
 include("includes/footer.php");
 ?>
-

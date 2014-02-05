@@ -91,20 +91,20 @@ $disciplineArray = $querierDept->getResult($qdiscipline);
 
 foreach ($disciplineArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item disc-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
+    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
 }
 
 print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"disciplines\" action=\"\" method=\"post\">
-<div id=\"savour\" class=\"department-save\">
-	<div id=\"save_zone\">
-		<button id=\"save_guide\" name=\"update_disciplines\" >" . _("SAVE CHANGES") . "</button>
+<div id=\"savour\" style=\"clear: both;float:left; \">
+	<div id=\"save_zone\" style=\"\">
+		<button class=\"button\" id=\"save_guide\" name=\"update_disciplines\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 	
 </div>
 <br />
-<div class=\"box disc-box\">
+<div class=\"box\" style=\"clear: both; float: left; min-width: 500px; max-width: 600px;\">
 <p>" . _("NOTE:  Disciplines were added to facilitate Serials Solution ingest of data.  This original set was provided by SerSol in Nov 2012. 
     If you are a SerSol customer, you might not want to change these.  Sort may or may not be implemented in your version of SP.") . "</p>
 <p>" . _("Enter discipline type label.") . "</p>
@@ -115,14 +115,15 @@ $ourlist
 </ul>
 </form>
 </div>
-<div class=\"add-disc\">
+<div style=\"float: left; margin-left: 1em;\">
+    <div class=\"box\">
 <h2 class=\"bw_head\">" . _("Add discipline") . "</h2>
-<div class=\"box\">
+
 <form id=\"new_discipline\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("discipline Name") . "</span><br />
 <input type=\"text\" name=\"discipline\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
 <br /><br />
-<button id=\"add_discipline\" name=\"add_discipline\">" . _("Add New discipline") . "</button>
+<button class=\"button\" id=\"add_discipline\" name=\"add_discipline\">" . _("Add New discipline") . "</button>
 </form>
 <div>";
 

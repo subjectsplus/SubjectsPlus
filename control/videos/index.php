@@ -91,16 +91,19 @@ print "</p><br />
 </div>
 
 <div style=\"float: right; width: 28%;margin-left: 10px;\">
+        <div class=\"box\">
     <h2 class=\"bw_head\">" . _("Ingest Video Metadata") . "</h2>
-    <div class=\"box\">
+
     <p><a href=\"ingest.php\">" . _("FIND VIDEOS") . "</a></p>
     </div>
+      <div class=\"box\">
     <h2 class=\"bw_head\">" . _("Add Metadata by Hand") . "</h2>
-    <div class=\"box\">
+  
     <p><a href=\"video.php\">" . _("ENTER VIDEO") . "</a></p>
     </div>
-    <h2 class=\"bw_head\">" . _("About Videos") . "</h2>
     <div class=\"box\">
+    <h2 class=\"bw_head\">" . _("About Videos") . "</h2>
+    
     <p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit Video Info") . "</p>
     <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View Video on Public Site") . "</p>
     </div>

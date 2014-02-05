@@ -13,6 +13,7 @@ $keywords = "FAQ, FAQs, help, questions";
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+include("../control/includes/autoloader.php");
 
 $use_jquery = array("ui");
 
@@ -321,7 +322,7 @@ print $results; ?>
         <div class="pluslet_body" style="padding-right: 0; margin-right: 0;">
             <form action="faq.php" method="post">
 <?php print $guide_string; ?>
-                <input type="submit" value="go" class="form_button" />
+                <input type="submit" value="go" class="form_button button" />
             </form>
         </div>
     </div>

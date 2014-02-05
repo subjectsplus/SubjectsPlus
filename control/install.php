@@ -31,8 +31,9 @@ if( isInstalled() )
 {
 	?>
 	<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-		<h2 class="bw_head"><?php echo _( "Already Installed" ); ?></h2>
-		<div class="box required_field">
+<div class="box required_field">
+    <h2 class="bw_head"><?php echo _( "Already Installed" ); ?></h2>
+
 			<p><?php echo _( 'There appears to already be an installation of SubjectsPlus. To reinstall please clear old database tables first.' ) ?></p>
 			<p><a href="login.php"><?php echo _( 'Log In' ) ?></a></p>
 		</div>

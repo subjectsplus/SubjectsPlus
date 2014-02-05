@@ -46,8 +46,9 @@ print "
 <form action=\"discover.php\" method=\"post\" id=\"target\">
 
 <div style=\"float: left; width: 60%;\">
-	<h2>Browse</h2>
-	<div class=\"box\">
+    <div class=\"box\">
+    <h2>Browse</h2>
+	
 	<select name=\"all_subs\" id=\"all_subs\">
 	<option value=\"\" style=\"font-size: 9pt;\">" . _("- Browse Boxes -") . "</option>
 
@@ -57,8 +58,9 @@ print "
 
 </div>
 <div style=\"float: left;  width: 35%; margin-left: 3%;\">
-	<h2>Search</h2>
 	<div class=\"box\">
+    <h2>Search</h2>
+	
 	 <input type=\"text\" id=\"search_terms\" name=\"search\" />
 	 <input type=\"submit\" value=\"" . _("Go!") . "\" name=\"searcher\" id=\"searcho\" />
 	 </div>

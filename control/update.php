@@ -30,9 +30,10 @@ $lintStep = ( isset( $_GET['step'] ) ? (int) $_GET['step'] : 0 );
 if( isUpdated() )
 {
 	?>
-	<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+	<div id="maincontent" class="update-main">
+<div class="box required_field">    
 		<h2 class="bw_head"><?php echo _( "Already Updated" ); ?></h2>
-		<div class="box required_field">
+
 			<p><?php echo _( 'Already at SubjectsPlus 2.0. No need to run updater.' ) ?></p>
 			<p><a href="login.php"><?php echo _( 'Log In.' ) ?></a></p>
 		</div>

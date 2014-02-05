@@ -139,7 +139,7 @@ if ($nocookies == "yes") {
     $title_line = "<h2>" . _("Organize Resources for ") . "$subject_name</h2>";
     $response = "<div id=\"response\" class=\"feedback\"></div>
 	<br />
-	<div id=\"savour\" style=\"clear: both;float:left; padding-left: 40%;  \"><button id=\"save_guide\" style=\"display:none;\">" . _("SAVE CHANGES") . "</button></div>";
+	<div id=\"savour\" style=\"clear: both;float:left; padding-left: 40%;  \"><button class=\"button\" id=\"save_guide\" style=\"display:none;\">" . _("SAVE CHANGES") . "</button></div>";
 }
 
 

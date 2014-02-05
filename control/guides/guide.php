@@ -143,13 +143,13 @@ if (isset($this_id)) {
 ///////////////////////////
 
 $all_boxes = "
-<ul id=\"box_options\" style=\"display: none;\">
-<li class=\"box_note\">" . _("Drag selection, then drop to right") . "</li>
-<li class=\"draggable special-new\" id=\"pluslet-id-Basic\">" . _("Editable Box") . "</li>
-<li class=\"draggable special-heading\" id=\"pluslet-id-Heading\">" . _("Heading") . "</li>
-<li class=\"draggable special-rss\" id=\"pluslet-id-Feed\">" . _("Delicious/RSS/Flickr/Twitter") . "</li>
-<li class=\"draggable special-rss\" id=\"pluslet-id-TOC\">" . _("Table of Contents") . "</li>
-";
+<ul id=\"box_options\">
+<li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>
+<li class=\"box-item draggable special-new\" id=\"pluslet-id-Basic\">" . _("Editable Box") . "</li>
+<li class=\"box-item draggable special-heading\" id=\"pluslet-id-Heading\">" . _("Heading") . "</li>
+<li class=\"box-item draggable special-rss\" id=\"pluslet-id-Feed\">" . _("Delicious/RSS/Flickr/Twitter") . "</li>
+<li class=\"box-item draggable special-rss\" id=\"pluslet-id-TOC\">" . _("Table of Contents") . "</li>
+    <li class=\"box-item draggable special-html5-video\" id=\"pluslet-id-HTML5Video\"> <i class=\"fa fa-video-camera\"></i> " .  _("  Video") . "</li>";
 
 // Now get Special ones
 // make sure:  a) there are some linked resources (to show All Items by Source)
@@ -175,7 +175,7 @@ $conditions
 $r = mysql_query($q);
 
 while ($myrow = mysql_fetch_array($r)) {
-    $all_boxes .= "<li class=\"draggable clone\" style=\"z-index: 10\" id=\"pluslet-id-" . $myrow[0] . "\">\n";
+    $all_boxes .= "<li class=\"box-item draggable clone\" id=\"pluslet-id-" . $myrow[0] . "\">\n";
     $all_boxes .= $myrow[1] . "</li>";
 }
 
@@ -214,7 +214,7 @@ ob_end_flush();
     //jQuery("#header, #subnavcontainer").hide();
 
     jQuery(document).ready(function(){
-
+     jQuery("#box_options").hide();
         reLayout(new_left_width, new_main_width, new_sidebar_width);
 
         function addBoxy(){
@@ -350,7 +350,7 @@ ob_end_flush();
 jQuery(function() {
     var tabTitle = $( "#tab_title" ),
     tabContent = $( "#tab_content" ),
-    tabTemplate = "<li class=\"dropspotty\" style=\"height: auto;\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
+    tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
     tabCounter = <?php echo ( count($all_tabs) ); ?>;
     var tabs = $( "#tabs" ).tabs();
 
@@ -484,29 +484,93 @@ jQuery(window).load(function(){
 
 <div id="guide_header">
     <div id="guide_nav">
-        <ul>
-            <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/expand.png" alt="show/hide header" /></li>
-            <li id="newbox" class="togglenewz"><img src="<?php print "$IconPath/box.png"; ?>" alt="new box" border="0" />
+        <ul class="guide-nav-menu">
+            <li id="hide_header" class="guide-nav-item"><i class="fa fa-bars" alt="show/hide header" /></i> Menu</li>
+            <li id="newbox" class="guide-nav-item togglenewz"><i alt="new box" border="0" class="fa fa-plus-square-o"> New Box</i>
             <?php
-                print _("New Box");
                 print $all_boxes;
             ?>
             </li>
-        <li class="showdisco" href="helpers/discover.php"><?php print _("Find Box"); ?></li>
-        <li class="showrecord" href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></li>
-        <li class="showmeta" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></li>
-        <li id="layoutbox" class="togglelayout"><?php print _("Layout"); ?>
-            <div id="slider_options" style="display: none; width: 200px; padding: 1em;">
-                <p><?php print _("Adjust column sizes"); ?></p>
+        <li class="showdisco guide-nav-item"> Find Box
+               
+               
+               
+               <div class="inner-nav-content">
+               <form action="discover.php" method="post" id="target">
+               
+               <div>
+               <div class="box">
+               <h2>Browse</h2>
+               
+               <select name="all_subs" id="all_subs">
+               <option value="">- Browse Boxes -</option>
+               
+               
+               </select>
+               </div>
+               
+               </div>
+               <div>
+                <div class="box">
+               <h2>Search</h2>
+              
+               <input type="text" id="search_terms" name="search" />
+               <input type="submit" value="Go!" name="searcher" id="searcho" class="button" />
+               </div>
+               </div>
+               </form>
+               <div class="box no_overflow">
+               <div id="results"></div>
+               </div>
+               
+               <script type="text/javascript" language="javascript">
+               $(document).ready(function(){
+                                 
+                                 var thisguide = '';
+                                 $("#all_subs").change(function() {
+                                                       var desired_guide = $("select option:selected").val();
+                                                       $("#results").fadeIn(3000).load("find_results.php", {shortform: desired_guide, guide_id: thisguide});
+                                                       });
+                                 
+                                 $('form').submit(function() {
+                                                  var terms = $("#search_terms").val();
+                                                  $("#results").fadeIn(3000).load("find_results.php", {search_terms: terms, guide_id: thisguide });
+                                                  return false;
+                                                  });
+                                 
+                                 
+                                 $("img[name*=add-]").livequery('click', function(event) {
+                                                                var item_id = $(this).attr("name").split("-");
+                                                                // make these vars available to the parent file, guide.php
+                                                                parent.addItem = item_id[1];
+                                                                parent.addItemType = item_id[2];
+                                                                parent.jQuery.colorbox.close();
+                                                                return false;
+                                                                });
+                                 
+                                 
+                                 });
+               </script>
+
+               </div>
+               
+               
+               
+               
+               </li>
+        <li class="showrecord guide-nav-item" href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>">New Record</li>
+        <li class="showmeta guide-nav-item" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop">Metadata</li>
+        <li id="layoutbox" class="togglelayout guide-nav-item">Layout <div id="slider_options" class="slider_options_guide">
+                <p>Adjust column sizes</p>
                 <div id="slider"></div>
-                <button id="save_layout" style="display:none;clear: left;margin-top: 1em;font-size: smaller;"><?php print _("SAVE CHANGES"); ?></button>
+                <button class="button" id="save_layout">Save Changes/button>
             </div>
         </li>
-        <!--<li id="tabsbox" class="toggletab"><?php print _("Tabs"); ?>
-            <div id="tabs_options" style="display: none; width: 200px; padding: 1em;">
-                <p><?php print _("Rename/Add Tabs"); ?></p>
+        <!--<li id="tabsbox" class="toggletab">Tabs
+            <div id="tabs_options">
+                <p>Rename/Add Tabs</p>
                 <?php print $tabs_input; ?>
-                <button id="save_tab_options" style="display:none;clear: left;margin-top: 1em;font-size: smaller;"><?php print _("SAVE CHANGES"); ?></button>
+                <button class="button" id="save_tab_options"><?php print _("Save Changes"); ?></button>
             </div>
         </li>-->
     </ul>
@@ -518,10 +582,9 @@ jQuery(window).load(function(){
 </div>  <!-- end guide header -->
 
 <!-- Feedback -->
-<div id="response" style="position: relative; float: left; background-color: #DD647F; width: 100%; text-align:center; display: none;"></div>
+<div id="response"></div>
 
 <!-- Save Button -->
-<p align="center" id="savour" style="clear: both;float:left; margin-top: 5px; height: 30px; width: 100%;"><button id="save_guide" style="display:none;"><?php print _("SAVE CHANGES"); ?></button></p>
 <div id="dialog" title="Tab data">
 <form>
 <fieldset class="ui-helper-reset">
@@ -559,13 +622,16 @@ jQuery(function() {
 });
 </script>
 
-<div id="tabs" style="clear:both; position: relative; width: 96%; margin: 0 auto;">
+<div id="tabs">
 
 <?php $lobjGuide->outputNavTabs(); ?>
 
 <?php
 $lobjGuide->outputTabs();
 ?>
+               <p align="center" id="savour"><button class="button" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
+
+               
 </div>
 
 <?php include("../includes/footer.php"); ?>

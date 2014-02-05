@@ -2,7 +2,7 @@
 $css = "<style type=\"text/css\" media=\"all\">
 
 body {
-	font-family: "Helvetica Neue", "Helvetica", Verdana, sans-serif;
+	font-family: sans-serif;
 	font-size: .9em;
 	line-height: 1.5em;
 	color: #000;

@@ -155,8 +155,9 @@ $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
 
 <br />
 <div style="float: left;  width: 70%;">
-<h2 class="bw_head"><?php print _("View and Answer TalkBacks"); ?></h2>
 <div class="box no_overflow">
+<h2 class="bw_head"><?php print _("View and Answer TalkBacks"); ?></h2>
+
   <p><?php print _("Show:") . $show_links; ?> </p>
   <p><?php print _("Site Filter:") . $filters; ?></p>
   <p><?php print _("Topic Filter:") . $cat_filters; ?></p>

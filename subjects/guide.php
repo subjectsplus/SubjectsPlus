@@ -16,6 +16,7 @@ if (!isset($_REQUEST['subject'])) {
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+include("../control/includes/autoloader.php");
 
 // init
 $oksubs = array();

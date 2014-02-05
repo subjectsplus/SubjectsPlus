@@ -18,118 +18,133 @@ $recent_activity = seeRecentChanges($_SESSION["staff_id"]);
 $user = new sp_Staff($_SESSION["staff_id"]);
 
 $headshot = $user->getHeadshot($_SESSION["email"], "medium");
-print "
-<br />
-<div class=\"admin-headshot-box-wrap\">
-    <div class=\"box no_overflow\">
-            <div class=\"admin-headshot-box\">
-        <p>$headshot ";
-printf(_("Hello %s"), $full_name);
-print "</p>
-    </div>
-        <div class=\"staff-form\">
-                <p><img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a href=\"includes/set_password.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"reset_password\">" . _("Reset Password") . "</a></p>
-";
-if ($_SESSION['user_type_id'] == '1') {
-  // allow user to update their own bio?
-  if (isset($user_bio_update) && $user_bio_update == TRUE) {
-      print "<p><img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">" . _("Update Your Biographical Details") . "</a></p>";
-  }
-  // allow user to update their own photo?
-  if (isset($user_photo_update) && $user_photo_update == TRUE) {
-      print "<p><img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">" . _("Update Headshot") . "</a></p>";
-
-  }
-}
-
-// UM Only :  Now, export our contact information
-if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
-  print "<p><img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a href=\"admin/contacts.php\" id=\"\">" . _("View/Export Staff Contact Info") . "</a></p>";
-}
-
-print "</div>
-    </div>
-    <h2>" . _("Recent Activity") . "</h2>
-    <div class=\"box no_overflow\">
-    <p>" . _("You have recently added or edited:") . "</p>
-    $recent_activity
-    </div>
-</div>
-<div class=\"admin-background-options\">
-    <h2>" . _("Background Options") . "</h2>
-    <div class=\"box no_overflow\">
-        <span id=\"bg_feedback\" class=\"feedback\"></span>";
-
-foreach ($all_bgs as $value) {
-  print "<p><img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></p>";
-}
-print "</div>
-";
-
-//first time pop up after installation
-if( isset($_SESSION['firstInstall']) && $_SESSION['firstInstall'] == 1 )
-{
-	?>
-	<a id="add" style="display:none;"></a>
-	<script type="text/javascript">
-		jQuery(document).ready(function($)
-		{
-			$('#add').colorbox(
-			{
-				iframe: true,
-				innerWidth:800,
-				innerHeight:600,
-				open: true,
-				href: 'includes/firstTimeInstall.php'
-			});
-		});
-</script>
-	<?php
-	unset($_SESSION['firstInstall']);
-}
-//first time pop up after update
-if( isset($_SESSION['firstUpdate']) && $_SESSION['firstUpdate'] == 1 )
-{
-	?>
-	<a id="add" style="display:none;"></a>
-	<script type="text/javascript">
-jQuery(document).ready(function($)
-{
-	$('#add').colorbox(
-	{
-		iframe: true,
-		innerWidth:800,
-		innerHeight:600,
-		open: true,
-		href: 'includes/firstTimeUpdate.php'
-	});
-});
-</script>
-	<?php
-	unset($_SESSION['firstUpdate']);
-}
-
-include("includes/footer.php");
 ?>
 
+<div class="index-content">
+  <div class="box no_overflow">
+    <div class="greeting">
+      <p>
+	<?php
+	echo $headshot;
+	printf(_("Hello %s"), $full_name);
+	?>
 
-<script type="text/javascript">
+      </p>
+    </div>
+    <div class="control-options">
+      <p><i class="fa fa-star" alt="bullet"/></i> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password"> Reset Password </a></p>
 
-  var headshot_location = "<?php print $user->getHeadshotLoc(); ?>";
+      <?php
+      if ($_SESSION['user_type_id'] == '1') {
+	// allow user to update their own bio?
+				       if (isset($user_bio_update) && $user_bio_update == TRUE) {
+	  print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+	}
+	// allow user to update their own photo?
+																				   if (isset($user_photo_update) && $user_photo_update == TRUE) {
+	  print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
 
-  $(document).ready(function(){
+	}
+      }
+
+      // UM Only :  Now, export our contact information
+      if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
+	print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i> <a href=\"admin/contacts.php\">View/Export Staff Contact Info</a></p>";
+      }
+      ?>
+
+    </div>
+
+  </div>
+  <div class="recent-activity">
+ <div class="box no_overflow">
+    <h2>Recent Activity</h2>
+
+      <p>You have recently added or edited:</p>
+      <?php echo $recent_activity ?>
+    </div>
+  </div>
 
 
-    $('a[id*=css-]').live('click', function(){
+  <div class="background-options">
+  <div class="box no_overflow">
+    <h2>Background Options</h2>
 
-      var css_class = $(this).attr("id").split("-");
-      var new_css = "<?php print $AssetPath; ?>css/" + css_class[1] + ".css";
 
-      $("#css_choice" ).attr("href", new_css);
-      $("#bg_feedback").load("includes/config_bits.php", {type: 'set_css', css_file: css_class[1]});
-      return false;
+      <span id="bg_feedback" class="feedback"></span>
+      <?php
+      foreach ($all_bgs as $value) {
+	print "<p><i class=\"fa fa-star\" alt=\"bullet\" /></i><a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></p>";
+      }
+      ?>
 
-    });
+    </div>
+    <?php
+    //first time pop up after installation
+    if( isset($_SESSION['firstInstall']) && $_SESSION['firstInstall'] == 1 )
+    {
+    ?>
+    <a id="add" style="display:none;"></a>
+    <script type="text/javascript">
+     jQuery(document).ready(function($)
+			    {
+	 $('#add').colorbox(
+	   {
+	     iframe: true,
+	     innerWidth:800,
+	     innerHeight:600,
+	     open: true,
+	     href: 'includes/firstTimeInstall.php'
+	   });
+       });
+    </script>
+    <?php
+    unset($_SESSION['firstInstall']);
+    }
+    //first time pop up after update
+    if( isset($_SESSION['firstUpdate']) && $_SESSION['firstUpdate'] == 1 )
+    {
+    ?>
+    <a id="add"></a>
+    <script type="text/javascript">
+     jQuery(document).ready(function($)
+			    {
+	 $('#add').colorbox(
+	   {
+	     iframe: true,
+	     innerWidth:800,
+	     innerHeight:600,
+	     open: true,
+	     href: 'includes/firstTimeUpdate.php'
+	   });
+       });
+    </script>
+    <?php
+    unset($_SESSION['firstUpdate']);
+    }
 
-  });
-</script>
+    include("includes/footer.php");
+    ?>
+
+
+    <script type="text/javascript">
+
+     var headshot_location = "<?php print $user->getHeadshotLoc(); ?>";
+
+     $(document).ready(function(){
+
+
+       $('a[id*=css-]').on('click', function(){
+
+	 var css_class = $(this).attr("id").split("-");
+	 var new_css = "<?php print $AssetPath; ?>css/" + css_class[1] + ".css";
+
+	 $("#css_choice" ).attr("href", new_css);
+	 $("#bg_feedback").load("includes/config_bits.php", {type: 'set_css', css_file: css_class[1]});
+	 return false;
+
+       });
+
+     });
+?>
+    </script>

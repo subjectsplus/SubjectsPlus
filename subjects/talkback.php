@@ -18,6 +18,7 @@
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+include("../control/includes/autoloader.php");
 
 try {
 	$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
@@ -352,7 +353,7 @@ if ($is_responsive == TRUE) {
 						<p class="zebra oddrow"><strong><?php print $stk; ?></strong><br />
 							<?php print _("Enter Number:"); ?> <input type="text" name="skill" size="2" /></p>
 
-							<p class="zebra evenrow"><input type="submit" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
+							<p class="zebra evenrow"><input type="submit" class="button" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
 						</form>
 					</div>
 				</div>

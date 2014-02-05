@@ -197,22 +197,23 @@ $subs_option_boxes
 
 print "<div id=\"response\" class=\"feedback\"></div>
     <br />
-    <div class=\"manage-by-source\">
+    <div class=\"manage-all-items\">
+    <div class=\"box\">
     <h2>" . _("Manage All Items by Source") . "</h2>
-<div class=\"box\">
+
 <p>" . _("Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box.") . "</p>
     <br />
 $all_guides
 <br />
 <p><img src=\"$IconPath/pencil.png\" alt=\"" . _("pencil image") . "\" /> " . _("Note: You can also do this in a guide, by clicking on the pencil icon for an 'All Items by Source' box.") . "</p>
-<div id=\"test_url\" style=\"background-color: yellow;\"></div>
+<div id=\"test_url\"></div>
 </div>
 </div>";
 
 
-print "<div class=\"manage-uploads\">
+print "<div class=\"manage-your-uploads\"><div class=\"box\">
 <h2>" . _("Manage your Uploads") . "</h2>
-<div class=\"box\">
+
 <p>" . _("Highlighted items are orphans.  Pity the orphans!") . "</p>";
 
 // Allow admin to see all

@@ -8,6 +8,7 @@
  */
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+include("../control/includes/autoloader.php");
 
 $use_jquery = "";
 
@@ -111,7 +112,7 @@ include("includes/header.php");
 
       <form action="search.php" method="post" style="margin-left: 1em;">
         <input type="text" id="letterhead_suggest" size="30" class="searchinput-3" name="searchterm" value="<?php print $selected; ?>" /> 
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" class="button" />
       </form><br/>
  
       <ul style="margin-left: 2em;">

@@ -336,6 +336,13 @@ function setupSaveButton( lstrSelector )
 				var pitem_type = "Basic";
 				var pspecial = '';
 				break;
+            case "HTML5Video":
+                var pbody = jQuery('#video_markup').html();
+                
+                var pitem_type = "HTML5Video";
+                var pspecial = '';
+                break;
+
 			case "Heading":
 				var pbody = ""; // headings have no body
 				var pitem_type = "Heading";

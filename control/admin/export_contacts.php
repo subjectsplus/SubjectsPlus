@@ -45,7 +45,7 @@ switch ($_GET["type"]) {
 // Boot them out if they shouldn't be viewing this file 
 if ($check_credentials == FALSE) {
 
-  echo "<p class=\"should-not-be-here\">You probably should not be here.  Please use the back button.  If you think you should be able to access this part of the site, please contact an administrator";
+  echo "<p style=\"background-color: red; color: white;\">You probably should not be here.  Please use the back button.  If you think you should be able to access this part of the site, please contact an administrator";
   include("../includes/footer.php");
   
   exit;

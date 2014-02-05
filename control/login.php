@@ -23,7 +23,9 @@ if(isset($_POST['thecount']) && isset($_POST['username']) && isset($_POST['passw
 $debugger = "no";
 
 include("includes/functions.php");
-
+include("includes/autoloader.php");
+    
+    
 //added in order to redirect to proper page if config file doesn't exist
 if( !file_exists( "includes/config.php" ) || filesize( "includes/config.php" ) < 10 )
 {

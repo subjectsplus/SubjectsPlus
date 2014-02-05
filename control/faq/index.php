@@ -53,13 +53,13 @@ if ($faqArray) {
     $last_revised_line = lastModded("faq", $value[0]);
 // Answered FAQs
     $faq_list .= "
-            <div class=\"striper faq-answered$row_colour1\">
-                <div class=\"faq-answered-child\">
+            <div style=\"clear: both; float: left;  padding: 3px 5px; width: 98%;\" class=\"striper $row_colour1\">
+                <div style=\"float: left; width: 64px; max-width: 10%;\">
                 <a href=\"faq.php?faq_id=$value[0]&amp;wintype=pop\" class=\"showmedium-reloader\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
                 &nbsp; &nbsp;<a href=\"" . $FAQPath . "?faq_id=$value[0]\" target=\"_blank\"><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
                 </div>
-                <div class=\"faq-short-question-wrap\">
-                 $short_question <span class=\"faq-short-question\">($last_revised_line)</span>
+                <div style=\"float: left; width: 90%;\">
+                 $short_question <span style=\"color: #666; font-size: 10px;\">($last_revised_line)</span>
                 </div>
             </div>";
 
@@ -72,7 +72,7 @@ if ($faqArray) {
 
 
 print "<br />
-<div class=\"faq-visible\">
+<div style=\"float: left;  width: 70%;\">
     <div class=\"box no_overflow\" id=\"answered\">
     <p><strong>$row_count1 " . _("FAQs visible") . "</strong> ";
 if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
@@ -84,13 +84,15 @@ print "</p><br />
 
 </div>
 
-<div class=\"faq-create\">
+<div style=\"float: right; width: 28%;margin-left: 10px;\">
+     <div class=\"box\">
     <h2 class=\"bw_head\">" . _("Create FAQ") . "</h2>
-    <div class=\"box\">
+   
     <p><a href=\"faq.php?faq_id=&amp;wintype=pop\" class=\"showmedium-reloader\">" . _("CREATE FAQ") . "</a></p>
     </div>
+        <div class=\"box\">
     <h2 class=\"bw_head\">" . _("About FAQs") . "</h2>
-    <div class=\"box\">
+
     <p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit FAQ") . "</p>
     <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View FAQ on Public Site") . "</p>
     </div>

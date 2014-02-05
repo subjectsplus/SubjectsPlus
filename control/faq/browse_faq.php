@@ -21,13 +21,13 @@ if(isset($_GET['type']))
 
 include("../includes/header.php");
 
-print "<br /><br /><div class=\"browse-faq-box\">";
+print "<br /><br /><div style=\"float: left;  width: 70%;\">";
 
 if ($postvar_type == "holding") {
 
-  print "<h2>" . _("Browse FAQs by Collection") . "</h2>
+  print "<div class=\"box no_overflow\">" . "<h2>" . _("Browse FAQs by Collection") . "</h2>
 <p>
-<div class=\"box no_overflow\">" . _("If you wish to edit a FAQ, click the link.") . "</p>";
+. _("If you wish to edit a FAQ, click the link.") . "</p>";
 
   $q = "SELECT fp.faqpage_id, fp.name FROM faq f, faq_faqpage ff, faqpage fp WHERE f.faq_id = ff.faq_id AND fp.faqpage_id = ff.faqpage_id GROUP BY fp.name";
 
@@ -61,8 +61,8 @@ if ($postvar_type == "holding") {
   }
 } else {
 
-  print "<h2>" . _("Browse FAQs by Subject Area") . "</h2>
-<div class=\"box no_overflow\">
+    print "<div class=\"box no_overflow\">". "<h2>" . _("Browse FAQs by Subject Area") . "</h2>
+
 <p>" . _("If you wish to edit a FAQ, click the link.") . "</p>
     ";
 

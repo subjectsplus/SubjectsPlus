@@ -11,6 +11,7 @@ $use_jquery = array("ui");
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+include("../control/includes/autoloader.php");
 
 $page_title = $resource_name;
 $description = "The best stuff for your research.  No kidding.";

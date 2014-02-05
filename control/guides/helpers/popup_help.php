@@ -1,5 +1,5 @@
 <style type="text/css">
-    body {margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:11pt;}
+    body {margin:0; padding:0; font-family:sans-serif; font-size:11pt;}
 </style>
 <?php
 /**

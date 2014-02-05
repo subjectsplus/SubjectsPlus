@@ -133,7 +133,7 @@ include("../includes/footer.php");
 
   a.button {
     color: #6e6e6e;
-    font: bold 12px Helvetica, Arial, sans-serif;
+    font: bold 12px sans-serif;
     text-decoration: none;
     padding: 7px 12px;
     position: relative;

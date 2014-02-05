@@ -131,8 +131,8 @@ if ($alpha_id) {
             // weed out extraneous P tags
             $blurb = stripP($blurb);
 
-            $results .= "<div class=\"records-results\" class=\"$row_colour\">\n
-        <a href=\"record.php?record_id=$id\" style=\"color: #333;\">$label</a>\n";
+            $results .= "<div class=\"record-results\" class=\"$row_colour\">\n
+        <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
             /* not being used 
         <span style=\"display: none;\" class=\"toggle\">$icons<br />\n
         $blurb<br />\n 
@@ -145,7 +145,7 @@ if ($alpha_id) {
     }
 }
 print "<br /><br />
-<div class=\"records-toc\">
+<div class=\"ctag-list-box\">
     <div class=\"box\">
     <div align=\"center\">$atoz</div>
     <div align=\"center\" class=\"ctag_list\">$tag_list</div>
@@ -153,9 +153,10 @@ print "<br /><br />
     </div>
     <div class=\"box no_overflow\">$results</div>
 </div>
-<div class=\"records-new\">
+<div class=\"new-record\">
+    <div class=\"box\">
   <h2 class=\"bw_head\">" . _("New Record") . "</h2>
-  <div class=\"box\">
+  
   <ol>
     <li>" . _("Make sure the item doesn't already exist!") . "</li>
     <li><a href=\"record.php\">" . _("Create new item") . "</a></li>
