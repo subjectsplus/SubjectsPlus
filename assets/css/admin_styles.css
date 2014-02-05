@@ -620,7 +620,7 @@ div.autoC input.searchy{
     font-size: 14px;
     background-color: #F6E3E7;
     background-color: #efefef;
-    background-image: url(../images/icons/search_box_bg.png);
+    background-image: url(../../assets/images/icons/search_box_bg.png);
     background-repeat:no-repeat;
     background-position: 3px 3px;
     padding: 2px 0 2px 20px;

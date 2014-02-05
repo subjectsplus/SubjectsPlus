@@ -146,5 +146,4 @@ $headshot = $user->getHeadshot($_SESSION["email"], "medium");
        });
 
      });
-?>
     </script>
