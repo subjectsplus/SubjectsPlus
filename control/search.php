@@ -88,7 +88,7 @@ if (isset($_POST["searchterm"])) {
             foreach ($$currentArray as $value) {
                 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
                 $search_result .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\">
-            &nbsp;&nbsp;<img src=\"$IconPath/required.png\" alt=\"bullet\" />  <a  href=\"" . $$currentTakemeto . $value[0] . "\">$value[1]</a></div>";
+            &nbsp;&nbsp;<img src=\"$IconPath/required.png\" class=\"bullet\" alt=\"bullet\" />  <a  href=\"" . $$currentTakemeto . $value[0] . "\">$value[1]</a></div>";
                 $row_count++;
             }
         }

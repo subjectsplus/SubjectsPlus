@@ -911,3 +911,8 @@ div.type-heading .titlebar {}
 .evenrow {
     background-color: #E3E1D9;
 }
+
+.bullet {
+height:55px;
+width:55px;
+}
