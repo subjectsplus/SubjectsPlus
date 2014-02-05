@@ -32,7 +32,7 @@ $headshot = $user->getHeadshot($_SESSION["email"], "medium");
       </p>
     </div>
     <div class="control-options">
-      <p><img src="<?php echo $IconPath; ?>/required.png" alt="bullet"/></i> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password"> Reset Password </a></p>
+      <p><img src="<?php echo $IconPath; ?>/required.png" alt="bullet"/></i> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password">Reset Password </a></p>
 
       <?php
       if ($_SESSION['user_type_id'] == '1') {
