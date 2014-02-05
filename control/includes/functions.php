@@ -1,12 +1,5 @@
 <?php
 
-////// Autoload Classes (Requires PHP >= 5.2 ////////
-
-function __autoload($class_name) {
-  if ($class_name != "finfo") {
-    require_once 'classes/' . $class_name . '.php';
-  } // this if is to fix a bug with autoload and the upload.php class
-}
 
 //////////////////////////////
 // If gettext isn't installed
@@ -737,13 +730,13 @@ function seeRecentChanges($staff_id, $limit=10) {
           break;
       }
 
-      $recent_activity .= "<div style=\"clear: both; padding: 3px 5px;\" class=\"$row_colour\"> <img src=\"$IconPath/required.png\" alt=\"bullet\" /> $intro";
+      $recent_activity .= "<div class=\"recent-activity $row_colour\"> <i class=\"fa fa-star\" alt=\"bullet\" /></i> $intro";
       if ($myrow2["2"] != "") {
-        $recent_activity .= ": <a href=\"$linkit\" style=\"color: #333;\" title=\"Took place: $myrow2[4]\">$myrow2[2]</a>";
+        $recent_activity .= ": <a href=\"$linkit\" classs=\"recent-activity-link\" title=\"Took place: $myrow2[4]\">$myrow2[2]</a>";
       }
 
       if (!$staff_id) {
-        $recent_activity .= " <span style=\"color: #666; font-size: 10px;\">$myrow2[5]</span>";
+        $recent_activity .= " <span class=\"recent-activity-span\">$myrow2[5]</span>";
       }
       $recent_activity .= "</div>";
       $row_count++;
@@ -763,6 +756,9 @@ function getHeadshot($email, $pic_size="medium") {
     case "small":
       $headshot .= " width=\"50\"";
       break;
+                           case "smaller":
+                           $headshot .= " width=\"30\"";
+                           break;
     case "medium":
       $headshot .= " width=\"70\"";
       break;

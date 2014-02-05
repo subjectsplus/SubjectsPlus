@@ -166,7 +166,7 @@ class sp_Updater
 			ADD COLUMN `fax` VARCHAR(60) NULL DEFAULT NULL  AFTER `cell_phone` , ADD COLUMN `intercom` VARCHAR(30) NULL DEFAULT NULL  AFTER `fax`,
 			ADD COLUMN `lat_long` VARCHAR(75) NULL DEFAULT NULL  AFTER `intercom`",
 			"ALTER TABLE `staff_subject` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NOT NULL DEFAULT '0'",
-			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq`,
+			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq` , DROP COLUMN `rss`,
 			ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`, ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`,
 			ADD COLUMN `keywords` VARCHAR(255) NULL DEFAULT NULL  AFTER `description`",
 			"ALTER TABLE `talkback` ADD COLUMN `tbtags` VARCHAR(255) NULL DEFAULT 'main'  AFTER `last_revised_by` , ADD COLUMN `cattags` VARCHAR(255) NULL DEFAULT NULL  AFTER `tbtags`",
@@ -222,8 +222,9 @@ class sp_Updater
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-			<h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 2.0" ); ?></h2>
-			<div class="box" name="error_page">
+	<div class="box" name="error_page">
+    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 2.0" ); ?></h2>
+
 				<div align="center">
 					<p><?php echo _( "Welcome to the SubjectPlus Updater!" ); ?></p>
 					<br />
@@ -305,8 +306,9 @@ class sp_Updater
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+	<div class="box" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Update Complete" ); ?></h2>
-			<div class="box" name="error_page" align="center">
+
 				<p><?php echo _( "SubjectsPlus update to 2.0 complete. Please log in." ); ?></p>
 				<br />
 				<p><a href="login.php"><?php echo _( "Log In" ); ?></a></p>
@@ -328,8 +330,9 @@ class sp_Updater
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+	<div class="box" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Updater Error" ); ?></h2>
-			<div class="box" name="error_page" align="center">
+
 				<p><?php echo $lstrReason; ?></p>
 				<p><?php echo _( "Please drop database and restore backup before trying again." ); ?></p>
 			</div>

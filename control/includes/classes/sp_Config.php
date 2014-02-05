@@ -520,26 +520,31 @@ class sp_Config
 		?>
 		<form id="config_form" action="edit-config.php" method="POST">
 			<div style="float: left; margin-right: 20px; max-width: 430px;">
+                <div class="box required_field">
 				<h2 class="bw_head"><?php echo _( "CORE Configurations" ); ?></h2>
-				<div class="box required_field">
+
 					<?php echo $lstrLeftHTML; ?>
 				</div>
+                <div class="box">
 				<h2 class="bw_head"><?php echo _( "Institutional Configurations" ); ?></h2>
-				<div class="box">
+
 					<?php echo $lstrLeftBottomHTML; ?>
 				</div>
 			</div>
 			<div style="float: left; margin-right: 20px; max-width: 450px;">
+	<div class="box" align="center">
 				<h2 class="bw_head"><?php echo _( "Save" ); ?></h2>
-				<div class="box" align="center">
-					<input type="submit" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
+
+					<input type="submit" class="button" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
 				</div>
+                	<div class="box">
 				<h2 class="bw_head"><?php echo _( "Other Configurations" ); ?></h2>
-				<div class="box">
+
 					<?php echo $lstrRightHTML; ?>
 				</div>
+<div class="box">
+
 				<h2 class="bw_head"><?php echo _( "Catalog Connections" ); ?></h2>
-				<div class="box">
 					<?php echo $lstrRightBottomHTML; ?>
 				</div>
 			</div>
@@ -586,8 +591,9 @@ class sp_Config
 		?>
 		<br /><br />
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+    	<div class="box" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( $lstrTitle ); ?></h2>
-			<div class="box" name="error_page" align="center">
+
 				<?php if( $lboolError )
 				{
 					?> <p><?php echo _( "Something went wrong:" ); ?></p><?php
@@ -611,8 +617,9 @@ class sp_Config
 		?>
 		<br /><br />
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-			<h2 class="bw_head"><?php echo _( "Welcome!" ); ?></h2>
-			<div class="box" name="error_page">
+            <div class="box" name="error_page">
+            <h2 class="bw_head"><?php echo _( "Welcome!" ); ?></h2>
+
 				<p><?php echo _( "Before getting started, we need some information about the database, You will need to know the following: " ); ?></p><br />
 				<ul>
 					<li><?php echo _( "Database host" ); ?></li>
@@ -891,13 +898,15 @@ class sp_Config
 			?>
 			<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
 				<form id="config_form" action="setup-config.php" method="POST">
+                    <div class="box required_field">
 					<h2 class="bw_head"><?php echo _( "Database Configurations" ); ?></h2>
-					<div class="box required_field">
+
 						<?php echo $lstrHTML; ?>
 					</div>
+                    <div class="box" align="center">
 					<h2 class="bw_head"><?php echo _( "Save" ); ?></h2>
-					<div class="box" align="center">
-						<input type="submit" name="submit_setup_db_config" value="<?php echo _("Save Config"); ?>" />
+
+						<input type="submit" class="button" name="submit_setup_db_config" value="<?php echo _("Save Config"); ?>" />
 					</div>
 				</form>
 			</div>
@@ -909,17 +918,21 @@ class sp_Config
 			?>
 			<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
 				<form id="config_form" action="install.php?step=1" method="POST">
-					<h2 class="bw_head"><?php echo _( "SubjectsPlus Installation" ); ?></h2>
-					<div class="box required_field">
+                        <div class="box required_field">
+                        <h2 class="bw_head"><?php echo _( "SubjectsPlus Installation" ); ?></h2>
+
 						<?php echo _( '<p>Welcome to the SubjetsPlus Installation. Please complete the following information so that we can continue with installation. These can be changed later.</p>' ) ?>
 					</div>
+                        <div class="box required_field">
 					<h2 class="bw_head"><?php echo _( "Site Configurations" ); ?></h2>
-					<div class="box required_field">
+
 						<?php echo $lstrHTML; ?>
 					</div>
+
+                    <div class="box" align="center">
 					<h2 class="bw_head"><?php echo _( "Install" ); ?></h2>
-					<div class="box" align="center">
-						<input type="submit" name="submit_setup_site_config" value="<?php echo _("Install SubjectsPlus"); ?>" />
+
+						<input type="submit" class="button" name="submit_setup_site_config" value="<?php echo _("Install SubjectsPlus"); ?>" />
 					</div>
 				</form>
 			</div>

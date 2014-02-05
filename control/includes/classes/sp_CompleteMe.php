@@ -47,7 +47,7 @@ class sp_CompleteMe {
     echo "
    <div class=\"autoC\">
   		<form action=\"$this->action\" method=\"post\">
- 		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" class=\"searchy\" /><input type=\"submit\" value=\"" . _("Go") . "\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
+ 		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" class=\"searchy\" /><input type=\"submit\" value=\"" . _("Go") . "\"  class=\"button\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
   		</form>   
 	</div>";
 

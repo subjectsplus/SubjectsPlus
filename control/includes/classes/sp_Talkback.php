@@ -120,9 +120,10 @@ class sp_Talkback {
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"talkback_id\" value=\"" . $this->_talkback_id . "\" />
-<div class=\"input-box\">
-<h2 class=\"bw_head\">$tb_title_line</h2>
+<div style=\"float: left; margin-right: 20px;\">
 <div class=\"box\">
+      <h2 class=\"bw_head\">$tb_title_line</h2>
+
 <span class=\"record_label\">" . _("Question") . "</span><br />
 <textarea name=\"question\" rows=\"4\" cols=\"50\">" . stripslashes($this->_question) . "</textarea>
 <br /><br />
@@ -241,7 +242,7 @@ class sp_Talkback {
 </div>
 </div>
 <!-- right hand column -->
-<div class=\"talkback-right-column\">
+<div style=\"float: left;min-width: 50px;\">
 	<div id=\"record_buttons\" class=\"box\">
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Now") . "\">";
 

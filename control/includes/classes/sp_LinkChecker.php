@@ -54,7 +54,7 @@ class sp_LinkChecker {
 			?>
 			<span class="record_label">Records: (<em style="font-style: italic; font-size: smaller;"><?php echo _( "This may take a while. Be patient." ); ?></em>)</span><br />
 				<form method="post">
-					<input type="submit" name="LinkCheckRecords" value="Check Links In Records" />
+					<input type="submit" class="button" name="LinkCheckRecords" value="Check Links In Records" />
 			<?php
 		}
 		if ($lstrType == 'subject')

@@ -395,8 +395,9 @@ class sp_Installer
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+<div class="box" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Installation Complete" ); ?></h2>
-			<div class="box" name="error_page" align="center">
+
 				<p><?php echo _( "SubjectsPlus installation complete. Please log in." ); ?></p>
 				<p><?php echo _( "<strong>Username: </strong> " ) . "admin@sp.edu"; ?></p>
 				<p><?php echo _( "<strong>Password: </strong> " ); echo htmlentities($this->lstrRandomPassword) ?></p>
@@ -417,8 +418,9 @@ class sp_Installer
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+	<div class="box" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Installation Error" ); ?></h2>
-			<div class="box" name="error_page" align="center">
+
 				<p><?php echo $lstrReason; ?></p>
 				<p><?php echo _( "Try again." ); ?></p>
 			</div>

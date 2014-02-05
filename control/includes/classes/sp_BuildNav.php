@@ -14,9 +14,11 @@ class sp_BuildNav {
     global $AssetPath;
     global $CpanelPath;
     global $subcat;
-
+      
+    $headshot = getHeadshot($_SESSION["email"], "smaller");
+      
     print "
-	<div class=\"nav-logo\" id=\"logo\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_small.png\"  border=\"0\" class=\"logo\" alt=\"SubjectsPlus\" /></a></div>
+	<div style=\"float: left;\" id=\"logo\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_small.png\"  border=\"0\" class=\"logo\" alt=\"SubjectsPlus\" /></a></div>
    <div id=\"navcats\">
       <ul class=\"topnav\">";
 
@@ -122,6 +124,7 @@ class sp_BuildNav {
 
     print "</ul>
 		</div>
+      <div class=\"right-nav-container\">
       <div id=\"supersearch\">";
 
     // determine our default search/search box text
@@ -161,6 +164,7 @@ class sp_BuildNav {
       <ul class=\"topnav\">
       <li class=\"zoom\"><a>";
 
+      print $headshot;
     print _("Hi") . ", " . $_SESSION["fname"];
 
     print "</a>
@@ -171,6 +175,7 @@ class sp_BuildNav {
       </li>
       </ul>
        </div>
+      </div>
 ";
   }
 

@@ -140,8 +140,8 @@ class sp_Pluslet_TOC extends sp_Pluslet {
         }
       }
 
-      $this->_body .= "<div class=\"toc-column\">$left_col</div>
-                <div class=\"staff-form\">$right_col</div>";
+      $this->_body .= "<div style=\"float: left; margin-right: 2em; overflow: none;\">$left_col</div>
+                <div style=\"float: left;\">$right_col</div>";
     } else {
       $this->_body = _("There are no contents for this guide yet!");
     }

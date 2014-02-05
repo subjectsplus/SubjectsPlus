@@ -300,14 +300,15 @@ class sp_Staff {
   	echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
-<div class=\"staff-form\">
+<div style=\"float: left; margin-right: 20px;\">
+      <div class=\"box\">
 <h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
-<div class=\"box\">
-<div class=\"staff-form\">
+
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("First Name ") . "</span><br />
 <input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class=\"required_field\" value=\"" . $this->_fname . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Last Name ") . "</span><br />
 <input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\" class=\"required_field\" value=\"" . $this->_lname . "\" />
 </div>
@@ -337,7 +338,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Position Title") . "</span><br />
 <input type=\"text\" name=\"title\" id=\"title\" size=\"50\" class=\"";
   		if ( in_array( _( 'title' ) , $require_user_columns ) ) echo 'required_field';
@@ -352,7 +353,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Postion #") . "</span><br />
 <input type=\"text\" name=\"position_number\" id=\"position_number\" size=\"5\" class=\"";
   		if ( in_array( _( 'position_number' ) , $require_user_columns ) ) echo 'required_field';
@@ -385,7 +386,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Department") . "</span><br />
 {$this->_departments}
 </div>";
@@ -397,7 +398,7 @@ class sp_Staff {
   	}else
   	{
   		echo "
-<div class=\"staff-priority">
+<div style=\"float: left;margin-left: 10px;\">
 <span class=\"record_label\">" . _("Priority") . "</span><br />
 <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" size=\"2\" class=\"";
   		if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
@@ -408,7 +409,7 @@ class sp_Staff {
 
   	if ( !( $isDepartmentOmitted && $isPriorityOmitted ) )
   	{
-  		echo "<br class=\"staff-clear\" /><br />";
+  		echo "<br style=\"clear: both;\" /><br />";
   	}
 
   	if ( $isSupervisorOmitted )
@@ -427,7 +428,7 @@ class sp_Staff {
   		echo "<input id=\"tel\" type=\"hidden\" value=\"" . $this->_tel . "\" name=\"tel\">";
   	}else{
   		echo "
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Telephone") . "</span><br />
 $tel_line
 </div>";
@@ -439,7 +440,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div class=\"input-left-box\">
+<div style=\"float: left;margin-left: 20px;\">
 <span class=\"record_label\">" . _("FAX") . "</span><br />
 <input type=\"text\" name=\"fax\" id=\"fax\" size=\"15\" class=\"";
   		if ( in_array( _( 'fax' ) , $require_user_columns ) ) echo 'required_field';
@@ -454,7 +455,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div class=\"input-left-box\">
+<div style=\"float: left;margin-left: 20px;\">
 <span class=\"record_label\">" . _("Intercom") . "</span><br />
 <input type=\"text\" name=\"intercom\" id=\"intercom\" class=\"";
   		if ( in_array( _( 'intercom' ) , $require_user_columns ) ) echo 'required_field';
@@ -469,7 +470,7 @@ $tel_line
   	}else
   	{
   		echo "
-<div class=\"input-left-box\">
+<div style=\"float: left;margin-left: 20px;\">
 <span class=\"record_label\">" . _("Room #") . "</span><br />
 <input type=\"text\" name=\"room_number\" id=\"room_number\" class=\"";
   		if ( in_array( _( 'room_number' ) , $require_user_columns ) ) echo 'required_field';
@@ -494,13 +495,13 @@ $tel_line
   	}else
   	{
   		echo "
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("User Type") . "</span><br />
 {$this->_user_types}
 </div>";
   	}
   		echo "
-<div class=\"input-left-box\">
+<div style=\"float: left;margin-left: 20px;\">
 <span class=\"record_label\">" . _("Active User?") . "</span><br />
 {$this->_active_or_not}
 </div><br /><br /></div>";
@@ -518,29 +519,30 @@ $tel_line
   	}else
   	{
   		echo "
+        <div class=\"box no_overflow\">
 <h2 class=\"bw_head\">" . _("Personal Information") . "</h2>
-<div class=\"box no_overflow\">
+
 <span class=\"record_label\">" . _("Street Address") . "</span><br />
 <input type=\"text\" name=\"street_address\" id=\"street_address\" size=\"50\" class=\"";
   		if ( in_array( _( 'address' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" value=\"" . $this->_street_address . "\" />
 <br /><br />
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("City") . "</span><br />
 <input type=\"text\" name=\"city\" id=\"city\" size=\"20\" class=\"";
   		if ( in_array( _( 'city' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" value=\"" . $this->_city . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("State") . "</span><br />
 <input type=\"text\" name=\"state\" id=\"state\" size=\"10\" class=\"";
   		if ( in_array( _( 'state' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" value=\"" . $this->_state . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Zip") . "</span><br />
 <input type=\"text\" name=\"zip\" id=\"zip\" size=\"5\" class=\"";
   		if ( in_array( _( 'zip' ) , $require_user_columns ) ) echo 'required_field';
@@ -548,14 +550,14 @@ $tel_line
 \" value=\"" . $this->_zip . "\" />
 </div>
 <br style=\"clear: both;\"/><br />
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Home Phone") . "</span><br />
 <input type=\"text\" name=\"home_phone\" id=\"home_phone\" class=\"";
   		if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" size=\"15\" value=\"" . $this->_home_phone . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Cell Phone") . "</span><br />
 <input type=\"text\" name=\"cell_phone\" id=\"cell_phone\" class=\"";
   		if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) echo 'required_field';
@@ -563,14 +565,14 @@ $tel_line
 \" size=\"15\" value=\"" . $this->_cell_phone . "\" />
 </div>
 <br style=\"clear: both;\"/><br />
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Latitude, Longitude") . "</span><br />
 <input type=\"text\" name=\"lat_long\" id=\"lat_long\" class=\"";
   		if ( in_array( _( 'lat_long' ) , $require_user_columns ) ) echo 'required_field';
   		echo "
 \" size=\"25\" value=\"" . $this->_lat_long . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Get Coordinates") . "</span><br />
 <span class=\"lookup_button\" value=\"$full_address\">look up now</span>
 </div>
@@ -586,23 +588,24 @@ $tel_line
 	}else
 	{
 		echo "
+        <div class=\"box no_overflow\">
 <h2 class=\"bw_head\">" . _("Emergency Contact Information") . "</h2>
-<div class=\"box no_overflow\">
-<div class=\"staff-form\">
+
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Emergency Contact") . "</span><br />
 <input type=\"text\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" size=\"30\" class=\"";
 		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
 		echo "
 \" value=\"" . $this->_emergency_contact_name . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Relationship") . "</span><br />
 <input type=\"text\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" size=\"15\" class=\"";
 		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
 		echo "
 \" value=\"" . $this->_emergency_contact_relation . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Phone") . "</span><br />
 <input type=\"text\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" size=\"15\" class=\"";
 		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
@@ -613,12 +616,12 @@ $tel_line
 	}
 
   	echo "
-<h2 class=\"bw_head\">" . _("Photo") . "</h2>
 <div class=\"box no_overflow\">
+      <h2 class=\"bw_head\">" . _("Photo") . "</h2>
 $headshot
 </div>
+      <div class=\"box no_overflow\">
 <h2 class=\"bw_head\">" . _("Biographical Details") . "</h2>
-<div class=\"box no_overflow\">
 <p>" . _("Please only include professional details.") . "</p><br />";
 
     self::outputBioForm();
@@ -628,9 +631,10 @@ $headshot
 </div>
 </div>
 <!-- right hand column -->
-<div class=\"staff-right-column\">
+<div style=\"float: left; max-width: 400px;\">
+      <div class=\"box\">
 <h2 class=\"bw_head\">" . _("Permissions") . "</h2>
-<div class=\"box\">
+
 ";
 
 // Get our permission tags, or ptags
@@ -653,8 +657,9 @@ $headshot
                 <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.
                 <br /><strong>others</strong> are hopefully self-explanatory");
 echo "</div>
+           <div class=\"box\">
 	<h2 class=\"bw_head\">" . _("Password") . "</h2>
-	<div class=\"box\">";
+	";
 
     if ($this->_staff_id != "") {
       echo "<p style=\"\"><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>
@@ -666,8 +671,9 @@ echo "</div>
 
     echo "
 	</div>
+           <div id=\"record_buttons\" class=\"box\">
 	<h2 class=\"bw_head\">" . _("Save") . "</h2>
-	<div id=\"record_buttons\" class=\"box\">
+	
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
     if ($this->_staff_id != "") {

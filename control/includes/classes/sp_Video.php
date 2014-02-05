@@ -111,9 +111,10 @@ class sp_Video {
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"video_id\" value=\"" . $this->_video_id . "\" />
-<div class=\"input-box\">
+<div style=\"float: left; margin-right: 20px;\">
+      <div class=\"box\">
 <h2 class=\"bw_head\">$vid_title_line</h2>
-<div class=\"box\">
+
 <span class=\"record_label\">" . _("title") . "</span><br />
 <textarea name=\"title\" rows=\"2\" cols=\"50\">" . stripslashes($this->_title) . "</textarea>
 <br /><br />
@@ -212,13 +213,14 @@ $guide_string
     echo "
 
 </div>
+      <div class=\"box no_overflow\">
 <h2 class=\"bw_head\">" . _("Thumbnail (Medium)") . "</h2>
-<div class=\"box no_overflow\">
+
 $thumbnail
 </div>
 </div>
 <!-- right hand column -->
-<div class=\"video-right-column\">
+<div style=\"float: left;min-width: 50px;\">
 	<div id=\"record_buttons\" class=\"box\">
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Now") . "\">";
 

@@ -81,9 +81,10 @@ if (!isset($_POST["runcheck"])) {
 
 
 print "<div id=\"maincontent\">
-<h2 class=\"bw_head\">" . _("Link Report for ") . $shortie . "</h2>
-
 <div class=\"box no_overflow\">
+    <h2 class=\"bw_head\">" . _("Link Report for ") . $shortie . "</h2>
+
+
 $mailReport
 $linkReport
     </div>
@@ -109,4 +110,9 @@ include("../includes/footer.php");
 
     });
 
+
 </script>
+
+
+
+?>

@@ -192,9 +192,10 @@ class sp_Guide {
         echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
-<div class=\"input-box\">
+<div style=\"float: left; margin-right: 20px;\">
+        <div class=\"box\">
 <h2 class=\"bw_head\">$guide_title_line</h2>
-<div class=\"box\">
+
 <span class=\"record_label\">" . _("Guide") . "</span><br />
 <input type=\"text\" name=\"subject\" id=\"record_title\" size=\"50\" class=\"required_field\" value=\"" . $this->_subject . "\">
 <br /><br />
@@ -263,7 +264,7 @@ $screen_layout
 </div>
 </div>
 <!-- right hand column -->
-<div class=\"guide-right-column\">
+<div style=\"float: left;min-width: 200px;\">
 	<div id=\"record_buttons\" class=\"box\">
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Now") . "\">";
 
@@ -333,13 +334,15 @@ $screen_layout
         }
 
         echo "
+          <div class=\"box no_overflow\" id=\"staff_menu\">
 <h2 class=\"bw_head\">" . _("Staff") . "</h2>
-   <div class=\"box no_overflow\" id=\"staff_menu\">
+ 
    $staff_string
 		<div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->
    </div>
+        <div class=\"box\"  id=\"metadata_menu\">
    <h2 class=\"bw_head\">" . _("Metadata") . "</h2>
-   <div class=\"box\"  id=\"metadata_menu\">
+   
 
    <span class=\"record_label\">" . _("Description") . "</span><br />
 <textarea name=\"description\" id=\"record_description\" class=\"\" cols=\"35\" rows=\"2\">" . $this->_description . "</textarea>
@@ -809,7 +812,7 @@ echo "</div>
 
 		$col = '<div id="container-' . $i . '" style="position: relative; float: left; width: 30%;">
 			<div class="dropspotty unsortable" id="dropspot-' . $itext . '-1">
-			<img src="' . $AssetPath . 'images/icons/package-x-generic.png" alt="' . _("Drop Content Here") . '" />
+			<i class="drop-spot-box fa fa-plus-square-o"  alt="' . _("Drop Content Here") . '" /></i>
     		<span class="dropspot-text">' . _("Drop Here") . '</span>
     		</div>
     		<div class="portal-column sort-column portal-column-' . $i . '" style="float: left;">' .

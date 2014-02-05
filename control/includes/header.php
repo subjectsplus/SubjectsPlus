@@ -9,6 +9,11 @@
  *   @date mar 2011
  */
 
+require_once(__DIR__ . "/autoloader.php");
+  
+    
+    
+    
 require_once(dirname(__FILE__) . "/functions.php");
 
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
@@ -88,7 +93,10 @@ if( !isset($sessionCheck) || $sessionCheck != 'no' )
 
 		// set a cookie for the page they wanted to visit
 		session_regenerate_id();
+        if(!isset($_SESSION))
+        {
 		session_start();
+        }
 		$_SESSION['desired_page'] = $_SERVER["REQUEST_URI"];
 		// Send to login page for pword
 		$login_page = $CpanelPath . "login.php";
@@ -134,31 +142,29 @@ header("Content-Type: text/html; charset=utf-8");
 mb_language('uni');
 mb_internal_encoding('UTF-8');
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
   <head>
     <title><?php print $page_title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style type="text/css" media="all">@import "<?php print $AssetPath; ?>css/admin_styles.css";</style>
+
+    <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/base/jquery-ui.css" type="text/css" media="all" />
     <?php
     // this is for custom css, set by user and stored in database
+        
+        /*
+ 
+
     if (isset($_SESSION['css'])) {
       print "<link id=\"css_choice\" href=\"$AssetPath" . "css/" . $_SESSION['css'] . ".css\" rel=\"stylesheet\" type=\"text/css\"></link>";
     }
-
-    $our_jquery = array("hover", "colorbox", "ui");
-
-    if (isset($use_jquery)) {
-      $our_jquery = array_merge($use_jquery, $our_jquery);
-    }
-    // Load our jQuery libraries + some css; $use_jquery would show any additional jquery libs to load
-
-    print generatejQuery($our_jquery);
-
+ 
+        */
+        
     ?>
 
-
+<script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
   </head>
   <body>
 
@@ -195,5 +201,6 @@ mb_internal_encoding('UTF-8');
       } else {
         print "<div id=\"maincontent\">";
 
+          
       }
-      ?>
+?>

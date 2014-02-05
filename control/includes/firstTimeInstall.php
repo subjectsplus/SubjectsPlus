@@ -10,8 +10,9 @@ include("header.php");
 
 ?>
 	<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-		<h2 class="bw_head"><?php echo _( "First Time Installation " ); ?></h2>
-		<div class="box" align="center">
+<div class="box" align="center">
+<h2 class="bw_head"><?php echo _( "First Time Installation " ); ?></h2>
+
 			<p><?php echo _( 'Here are a few tips for setting up your SujectsPlus installation.' ) ?></p>
 			<div align="left">
 				<ul>

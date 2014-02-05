@@ -206,7 +206,7 @@ class sp_Pluslet_1 extends sp_Pluslet {
             $source_name = $myrow["0"];
 
             if ($row_count == "1" OR $row_count == 1 + $num_per_row OR $row_count == 1 + $num_per_row + $num_per_row) {
-                $toc .= "<div class=\"source-row\" class=\"toc1\">";
+                $toc .= "<div style=\"float: left; width: 33%\" class=\"toc1\">";
             }
 
             $toc .= "<a href=\"#$source_id\" class=\"smaller\">$source_name</a><br />\n";

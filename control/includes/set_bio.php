@@ -75,7 +75,7 @@ $record->outputBioForm();
 
 print "</div>
     <div class=\"box no_overflow\">
-    <button id=\"add_bio\" name=\"add_bio\">" . _("Update Bio") . "</button>
+    <button class=\"button\" id=\"add_bio\" name=\"add_bio\">" . _("Update Bio") . "</button>
     </div>
     </form>
     </div>";

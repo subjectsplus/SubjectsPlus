@@ -10,6 +10,7 @@
  */
 ///////// Databases ///////////
 
+    
 class sp_AllHandler {
 
   function writeTable($qualifier, $subject_id = '') {

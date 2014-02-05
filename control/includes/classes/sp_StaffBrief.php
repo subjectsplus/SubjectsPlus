@@ -177,14 +177,15 @@ class sp_Staff {
         echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
-<div class=\"input-box\">
-<h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
+<div style=\"float: left; margin-right: 20px;\">
 <div class=\"box\">
-<div class=\"staff-form\">
+        <h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
+
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("First Name ") . "</span><br />
 <input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class=\"required_field\" value=\"" . $this->_fname . "\" />
 </div>
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Last Name ") . "</span><br />
 <input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\" class=\"required_field\" value=\"" . $this->_lname . "\" />
 </div>
@@ -192,11 +193,11 @@ class sp_Staff {
 <span class=\"record_label\">" . _("Title") . "</span><br />
 <input type=\"text\" name=\"title\" id=\"title\" size=\"50\" class=\"required_field\" value=\"" . $this->_title . "\" />
 <br /><br />
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("Department") . "</span><br />
 {$this->_departments}
 </div>
-<div class=\"staff-department-label\">
+<div style=\"float: left;margin-left: 10px;\">
 <span class=\"record_label\">" . _("Show First in Dept List?") . "</span><br />
 <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" size=\"2\" class=\"required_field\" value=\"" . $this->_staff_sort . "\" />
 </div>
@@ -207,22 +208,24 @@ $tel_line
 <span class=\"record_label\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</span><br />
 <input type=\"text\" name=\"email\" id=\"email\" size=\"40\" class=\"required_field\" value=\"" . $this->_email . "\" />
 <br /><br />
-<div class=\"staff-form\">
+<div style=\"float: left;\">
 <span class=\"record_label\">" . _("User Type") . "</span><br />
 {$this->_user_types}
 </div>
-<div class=\"input-left-box\">
+<div style=\"float: left;margin-left: 20px;\">
 <span class=\"record_label\">" . _("Active User?") . "</span><br />
 {$this->_active_or_not}
 </div>
 <br /><br />
 </div>
+        <div class=\"box no_overflow\">
 <h2 class=\"bw_head\">" . _("Photo") . "</h2>
-<div class=\"box no_overflow\">
+
 $headshot
 </div>
+        <div class=\"box no_overflow\">
 <h2 class=\"bw_head\">" . _("Biographical Details") . "</h2>
-<div class=\"box no_overflow\">
+
 <p>" . _("Please only include professional details.") . "</p><br />";
 
         self::outputBioForm();
@@ -232,9 +235,10 @@ $headshot
 </div>
 </div>
 <!-- right hand column -->
-<div style=\"staff-right-column\">
+<div style=\"float: left; max-width: 400px;\">
+        <div class=\"box\">
 <h2 class=\"bw_head\">" . _("Permissions") . "</h2>
-<div class=\"box\">
+
 ";
 
 // Get our permission tags, or ptags
@@ -254,8 +258,9 @@ $headshot
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
                 <br /><strong>NOFUN</strong> means user can't modify other peoples' guides, or view records</p>
 </div>
+        	<div class=\"box\">"
 	<h2 class=\"bw_head\">" . _("Password") . "</h2>
-	<div class=\"box\">";
+;
 
         if ($this->_staff_id != "") {
             echo "<p style=\"\"><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
@@ -266,8 +271,9 @@ $headshot
 
         echo "
 	</div>
+        <div id=\"record_buttons\" class=\"box\">
 	<h2 class=\"bw_head\">" . _("Save") . "</h2>
-	<div id=\"record_buttons\" class=\"box\">
+	
 		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Record Now") . "\" />";
         // if it's not a new record, and we're authorized, show delete button
         if ($this->_staff_id != "") {
