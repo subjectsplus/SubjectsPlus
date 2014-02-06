@@ -75,19 +75,19 @@ class sp_Pluslet {
         switch ($view) {
             case "admin":
                 $helptext = _("Help");
-                $this->_icons = "<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"help-$this->_type\" alt=\"" . _("help") . "\" /></img> <a class=\"togglebody\"><img src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>";
+                $this->_icons = "<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img> <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>";
 
                 // If editable, give the pencil icon
                 if ($this->_editable == TRUE) {
                     // Deal with All Items by Source type (#1 in db)
                     if ($this->_pluslet_id == 1) {
-                        $this->_icons .= " <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><img src=\"$IconPath/pencil.png\"  alt=\"" . _("Edit") . "\" title=\"" . _("Edit") . "\" /> </img> </a>";
+                        $this->_icons .= " <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><img class=\"pluslet-icon\"  src=\"$IconPath/pencil.png\"  alt=\"" . _("Edit") . "\" title=\"" . _("Edit") . "\" /> </img> </a>";
                     } else {
-                        $this->_icons .= " <a id=\"edit-$this->_pluslet_id-$this->_type\"><img src=\"$IconPath/pencil.png\" alt=\"" . _("Edit") . "\" title=\"" . _("Edit") . "\" /></img></a>";
+                        $this->_icons .= " <a id=\"edit-$this->_pluslet_id-$this->_type\"><img class=\"pluslet-icon\"  src=\"$IconPath/pencil.png\" alt=\"" . _("Edit") . "\" title=\"" . _("Edit") . "\" /></img></a>";
                     }
                 }
                 // Everyone gets a delete button in the admin
-                $this->_icons .= " <a id=\"delete-$this->_pluslet_id\"><img src=\"$IconPath/delete.png\"" . _("Remove item from this guide") . "\" title=\"" . _("Remove item from this guide") . "\" border=\"0\" /></i></a>";
+                $this->_icons .= " <a id=\"delete-$this->_pluslet_id\"><img class=\"pluslet-icon\"  src=\"$IconPath/delete.png\"" . _("Remove item from this guide") . "\" title=\"" . _("Remove item from this guide") . "\" border=\"0\" /></i></a>";
 
                 // Show the item id --it's handy for debugging
                 $this->_visible_id = "<span class=\"smallgrey\">$this->_pluslet_id</span>";

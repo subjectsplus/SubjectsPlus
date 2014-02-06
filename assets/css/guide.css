@@ -109,9 +109,8 @@
 
 
 #hide_header {
-    background-color:inherit;
-    font-size:1.5em;
-    padding:0;
+    
+
 }
 
 #guide_header ul li:hover {
@@ -629,3 +628,17 @@ display:none;
     
     margin:.2em;
 }
+
+
+
+.talkback {
+float: right; 
+width: 28%;
+margin-left: 10px;
+}
+
+.pluslet-icon  {
+width:15px;
+height:15px;
+}
+

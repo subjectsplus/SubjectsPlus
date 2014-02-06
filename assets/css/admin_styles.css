@@ -1085,6 +1085,21 @@ div.tooltip div
 }
 
 
+.talkback {
+float: right; 
+width: 28%;
+margin-left: 10px;
+}
+
+.pluslet-icon {
+width:15px;
+height:15px;
+}
+
+.titlebar_options {
+height: 15px;
+}
+
 /* guides/index.php */
 
 #savour {
@@ -1207,8 +1222,4 @@ width:55px;
 
 
 
-.talkback {
-float: right; 
-width: 28%;
-margin-left: 10px;
-}
+
