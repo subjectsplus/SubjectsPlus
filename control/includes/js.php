@@ -34,7 +34,7 @@
                                       ));
     
     $am->set('otherjs', new AssetCache(
-             new GlobAsset($assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR .  '*.js')
+             new GlobAsset($assets . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR .  '*.js')
 
              ,new FilesystemCache($cache)
             

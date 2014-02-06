@@ -337,7 +337,7 @@ function setupSaveButton( lstrSelector )
 				var pspecial = '';
 				break;
             case "HTML5Video":
-                var pbody = jQuery('#video_markup').html();
+                var pbody = jQuery('.video-display').html();
                 
                 var pitem_type = "HTML5Video";
                 var pspecial = '';

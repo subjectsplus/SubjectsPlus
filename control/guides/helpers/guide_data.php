@@ -144,7 +144,7 @@ switch ($_POST["flag"]) {
         //$r2 = mysql_query($q2);
         //print $q2;
 
-        print _("<strong>Box removed</strong>");
+        print _("<script type='text/javascript'>$.growl({message: 'The box was removed.', title:'" . _("Box Removed") . "'})</script>");
         break;
 }
 
