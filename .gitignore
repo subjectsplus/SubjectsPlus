@@ -61,5 +61,5 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-
+assets/cache/
 control/includes/config.php
