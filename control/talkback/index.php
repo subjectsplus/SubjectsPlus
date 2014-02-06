@@ -165,8 +165,8 @@ $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
   <?php print $tb_yes_answer; ?>
 </div>
 </div>
-<div style="float: right; width: 28%;margin-left: 10px;"><h2 class="bw_head"><?php print _("About TalkBack"); ?></h2>
-<div class="box">
+<div class="box" style="float: right; width: 28%;"><h2 class="bw_head"><?php print _("About TalkBack"); ?></h2>
+
 <p><?php print _("TalkBack questions come via the web form on the public TalkBack page. An email should be sent to the admin when a new one arrives, and they may be answered here."); ?></p>
 <br />
     <ul>

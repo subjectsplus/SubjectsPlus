@@ -111,6 +111,7 @@
 #hide_header {
     background-color:inherit;
     font-size:1.5em;
+    padding:0;
 }
 
 #guide_header ul li:hover {

@@ -485,7 +485,7 @@ jQuery(window).load(function(){
 <div id="guide_header">
     <div id="guide_nav">
         <ul class="guide-nav-menu">
-               <li id="hide_header" class="guide-nav-item">Menu </li>
+               <li id="hide_header" class="guide-nav-item"><?php echo "<img src='$IconPath/menu.png'/>"; ?> Menu </li>
             <li id="newbox" class="guide-nav-item togglenewz"> New Box
             <?php
                 print $all_boxes;

@@ -38,11 +38,11 @@ $headshot = $user->getHeadshot($_SESSION["email"], "medium");
       if ($_SESSION['user_type_id'] == '1') {
 	// allow user to update their own bio?
 				       if (isset($user_bio_update) && $user_bio_update == TRUE) {
-	  print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+	  print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
 	}
 	// allow user to update their own photo?
 																				   if (isset($user_photo_update) && $user_photo_update == TRUE) {
-	  print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+	  print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
 
 	}
       }
