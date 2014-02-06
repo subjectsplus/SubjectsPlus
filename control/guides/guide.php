@@ -147,7 +147,7 @@ $all_boxes = "
 <li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>
 <li class=\"box-item draggable special-new\" id=\"pluslet-id-Basic\">" . _("Editable Box") . "</li>
 <li class=\"box-item draggable special-heading\" id=\"pluslet-id-Heading\">" . _("Heading") . "</li>
-<li class=\"box-item draggable special-rss\" id=\"pluslet-id-Feed\">" . _("Delicious/RSS/Flickr/Twitter") . "</li>
+<li class=\"box-item draggable special-rss\" id=\"pluslet-id-Feed\">" . _("RSS") . "</li>
 <li class=\"box-item draggable special-rss\" id=\"pluslet-id-TOC\">" . _("Table of Contents") . "</li>
     <li class=\"box-item draggable special-html5-video\" id=\"pluslet-id-HTML5Video\">" .  _("  Video") . "</li>";
 
@@ -191,9 +191,9 @@ ob_end_flush();
 
 ?>
 
-<style type="text/css">@import url(../../assets/css/guide.css);</style>
 
-<script type="text/javascript" src="guide.js"></script>
+
+
 
 <script type="text/javascript">
     // We're just setting up a few vars that we'll need
@@ -211,7 +211,9 @@ ob_end_flush();
     window.addItem = 0;
 
     // Hides the global nav on load
-    //jQuery("#header, #subnavcontainer").hide();
+    jQuery("#header, #subnavcontainer").hide();
+
+
 
     jQuery(document).ready(function(){
      jQuery("#box_options").hide();
