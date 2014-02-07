@@ -11,7 +11,7 @@ use SubjectsPlus\Control\Staff;
 $page_title = "SubjectsPlus";
 $subcat = "home";
     
-include(dirname(__DIR__).'/includes/header.php');
+include(__DIR__.'/includes/header.php');
 
 $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
 

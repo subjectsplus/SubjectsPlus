@@ -1,5 +1,6 @@
 <?php
-    require_once dirname(__DIR__).'/lib/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+    
+    require_once dirname(dirname(__DIR__)).'/lib/Symfony/Component/ClassLoader/UniversalClassLoader.php';
     
     use Symfony\Component\ClassLoader\UniversalClassLoader;
     
