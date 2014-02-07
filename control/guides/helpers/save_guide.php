@@ -10,7 +10,8 @@
  *   @author agdarby, dgonzalez
  *   @date updated jul 2013
  */
-
+use SubjectsPlus\Control\DBConnector;
+    
 $subsubcat = "";
 $subcat = "guides";
 $page_title = "Save Guides include";

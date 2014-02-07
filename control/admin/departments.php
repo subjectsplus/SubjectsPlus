@@ -9,6 +9,7 @@
  */
 
 use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Querier;
     
 $subsubcat = "";
 $subcat = "admin";
@@ -158,9 +159,8 @@ $ourlist
 </ul>
 </form>
 </div>
-<div class=\"add-department">
-<h2 class=\"bw_head\">" . _("Add Department") . "</h2>
-<div class=\"box\">
+<div class=\"add-department\">
+<h2 class=\"bw_head\">" . _("Add Department") . "</h2><div class=\"box\">
 <form id=\"new_deptartment\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Department Name") . "</span><br />
 <input type=\"text\" name=\"department\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
