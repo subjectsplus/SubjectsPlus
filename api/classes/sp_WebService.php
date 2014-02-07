@@ -25,7 +25,7 @@ abstract class sp_WebService
 	 * sp_WebService::__construct() - method to set url parameters and db connector
 	 *
 	 * @param array $lobjUrlParams
-	 * @param sp_DBConnector $lobjDBConnector
+	 * @param DBConnector $lobjDBConnector
 	 */
 	function __construct($lobjUrlParams, $lobjDBConnector)
 	{
@@ -52,7 +52,7 @@ abstract class sp_WebService
 
 		$lstrQuery = $this->generateQuery($lobjParams) or die;
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 

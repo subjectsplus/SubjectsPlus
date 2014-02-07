@@ -10,6 +10,8 @@
  * @version $Id$
  * @access public
  */
+use SubjectsPlus\Control\DBConnector;
+    
 class DatabaseWebService extends sp_WebService implements WebService
 {
 	/**
@@ -17,7 +19,7 @@ class DatabaseWebService extends sp_WebService implements WebService
 	 * set the service and tag properties
 	 *
 	 * @param array $lobjUrlParams
-	 * @param sp_DBConnector $lobjDBConnector
+	 * @param DBConnector $lobjDBConnector
 	 */
 	function __construct($lobjUrlParams, $lobjDBConnector)
 	{

@@ -18,7 +18,7 @@ include("../includes/header.php");
 
 // Connect to database
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }
@@ -43,7 +43,7 @@ switch ($_POST["type"]) {
     case "source_override":
 
         // load list of sources
-        $querierSource = new sp_Querier();
+        $querierSource = new Querier();
         $qSource = "select source_id, source from source order by source";
         $defsourceArray = $querierSource->getResult($qSource);
 

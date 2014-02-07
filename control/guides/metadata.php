@@ -7,6 +7,9 @@
  *   @date Jan 2011
  * 	  @todo Add a delete button if a) it's one of the creators, or b) it's the admin
  */
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Guide;
+use SubjectsPlus\Control\Dropdown;
 $subcat = "guides";
 $page_title = "Manage Guide Metadata";
 
@@ -23,7 +26,7 @@ include("../includes/header.php");
 //$_SESSION["eresource_mgr"] = 1;
 // Connect to database
 try {
-  $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
   echo $e;
 }
@@ -49,7 +52,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
   if ($ok_record_id != "") {
     // do the delete
-    $record = new sp_Guide($ok_record_id, "delete");
+    $record = new Guide($ok_record_id, "delete");
     $record->deleteRecord();
     //$record->deBug();
     // Show feedback
@@ -77,7 +80,7 @@ if (isset($_POST["submit_record"])) {
 
   // Submit form
 
-  $record = new sp_Guide($_POST["subject_id"], "post");
+  $record = new Guide($_POST["subject_id"], "post");
 
   //////////////////////////////////
   // Is this an Insert or an update?
@@ -97,7 +100,7 @@ if (isset($_POST["submit_record"])) {
 }
 
 if (!isset($no_form)) {
-  $record = new sp_Guide($ok_record_id);
+  $record = new Guide($ok_record_id);
 }
 
 // show feedback if it isn't already set

@@ -6,7 +6,7 @@ require_once("includes/config.php");
 require_once("includes/functions.php");
 
 try {
-	$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+	$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
 	echo $e;
 }

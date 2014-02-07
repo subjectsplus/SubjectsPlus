@@ -1,5 +1,5 @@
 <?php
-
+use SubjectsPlus\Control\DBConnector;
 session_start();
 /**
  *   @file login.php
@@ -52,7 +52,7 @@ if( !isset($tryDB) || $tryDB != 'no')
 	global $hname;
 
 	try {
-		@$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+		@$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 	} catch (Exception $e) {
 		$lstrURL = getControlURL();
 

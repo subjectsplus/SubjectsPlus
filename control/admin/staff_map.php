@@ -19,7 +19,7 @@ if (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) {
   exit;
 }
 
-$querier = new sp_Querier();
+$querier = new Querier();
 $q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
 FROM staff
 WHERE lat_long != ""';

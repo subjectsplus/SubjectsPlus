@@ -35,7 +35,7 @@ class GuidesWebService extends sp_WebService implements WebService
 	 * set the service and tag properties
 	 *
 	 * @param array $lobjUrlParams
-	 * @param sp_DBConnector $lobjDBConnector
+	 * @param DBConnector $lobjDBConnector
 	 */
 	function __construct($lobjUrlParams, $lobjDBConnector)
 	{
@@ -64,7 +64,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lstrQuery = $this->generateQuery($lobjParams) or die;
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 
@@ -263,7 +263,7 @@ class GuidesWebService extends sp_WebService implements WebService
 					ON s.staff_id = ss.staff_id
 					WHERE ss.subject_id = $lintSubjectID";
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 
@@ -344,7 +344,7 @@ class GuidesWebService extends sp_WebService implements WebService
 				return array();
 		}
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 
@@ -380,7 +380,7 @@ class GuidesWebService extends sp_WebService implements WebService
 					AND c.ourtable = 'guide'
 					AND c.message LIKE '%insert%'";
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 
@@ -408,7 +408,7 @@ class GuidesWebService extends sp_WebService implements WebService
 					ORDER BY date_added DESC
 					LIMIT 1";
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 

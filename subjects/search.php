@@ -24,7 +24,7 @@ $keywords = _("library, research, electronic journals, databases, electronic res
 
 
 try {
-  $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
   echo $e;
 }

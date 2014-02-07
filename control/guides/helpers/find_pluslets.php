@@ -21,7 +21,7 @@ $header = "noshow";
 include("../../includes/header.php");
 
 // Connect to database
-try {$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
+try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
 
 if ($_POST["browse_subject_id"]) {
 

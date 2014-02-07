@@ -17,7 +17,7 @@ class TalkbackWebService extends sp_WebService implements WebService
 	 * set the service and tag properties
 	 *
 	 * @param array $lobjUrlParams
-	 * @param sp_DBConnector $lobjDBConnector
+	 * @param DBConnector $lobjDBConnector
 	 */
 	function __construct($lobjUrlParams, $lobjDBConnector)
 	{

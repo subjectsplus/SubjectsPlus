@@ -6,16 +6,18 @@
  *   @author adarby
  *   @date May 2011
  */
+use SubjectsPlus\Control\Staff;
+
 $page_title = "SubjectsPlus";
 $subcat = "home";
-
-include("includes/header.php");
+    
+include(dirname(__DIR__).'/includes/header.php');
 
 $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
 
 $recent_activity = seeRecentChanges($_SESSION["staff_id"]);
 
-$user = new sp_Staff($_SESSION["staff_id"]);
+$user = new Staff($_SESSION["staff_id"]);
 
 $headshot = $user->getHeadshot($_SESSION["email"], "medium");
 ?>

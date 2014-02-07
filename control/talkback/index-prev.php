@@ -36,7 +36,7 @@ $tb_no_answer = "";
 ///////////////
 
 if (isset($_GET["tbtag"])) {
-  $querierTbtag = new sp_Querier();
+  $querierTbtag = new Querier();
   $qTbtag = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_formatted, answer, a_from, display, last_revised_by, tbtags
     FROM talkback
     WHERE tbtags like '%" . $_GET["tbtag"] . "%'
@@ -58,7 +58,7 @@ if (isset($_GET["tbtag"])) {
 // Check for unanswered TalkBacks
 ///////////////
 
-$querierTBNO = new sp_Querier();
+$querierTBNO = new Querier();
 $qTBNO = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_formatted, answer, a_from, display, last_revised_by, tbtags
     FROM talkback
     WHERE answer = ''
@@ -104,7 +104,7 @@ if ($tbArrayNo) {
 // Check for answered TalkBacks
 ///////////////
 
-$querierTBYES = new sp_Querier();
+$querierTBYES = new Querier();
 $qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_formatted, answer, a_from, display, last_revised_by, tbtags
     FROM talkback
     WHERE answer != ''

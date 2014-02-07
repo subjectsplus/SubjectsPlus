@@ -3,7 +3,7 @@
 body {
 
 	background-color: #fff; 	
-	font-family: sans-serif;
+	font-family: "Helvetica Neue", "Helvetica", sans-serif;
 	font-size: 10pt;
 
 }
@@ -284,7 +284,7 @@ text-decoration: underline;
 .initial {
 	font-size: 22pt;
 	font-weight: 700;
-	font-family: sans-serif;
+	font-family: verdana;
 	color: #333;
 	line-height: 24pt;
 }

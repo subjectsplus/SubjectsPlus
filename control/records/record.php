@@ -25,7 +25,7 @@ include("../includes/header.php");
 
 // Connect to database
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }
@@ -73,7 +73,7 @@ if (isset($_POST["submit_record"])) {
     // 1b. IF THIS IS AN INSERT make sure the title isn't an exact dupe
     if ($_POST["title_id"] == "") {
 
-        $querierDupe = new sp_Querier();
+        $querierDupe = new Querier();
         $qDupe = "SELECT title_id, title FROM title WHERE title LIKE '" . mysql_real_escape_string($_POST["title"]) . "'";
         $dupetitleArray = $querierDupe->getResult($qDupe);
 

@@ -9,13 +9,13 @@
  *   @date mar 2011
  */
 
-require_once(__DIR__ . "/autoloader.php");
+require_once("autoloader.php");
   
+require_once("functions.php");
     
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\BuildNav;
     
-    
-require_once(dirname(__FILE__) . "/functions.php");
-
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
 if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FILE__) . '/config.php' ) < 10 )
 {
@@ -41,7 +41,7 @@ session_start();
 if( !isset($tryDB) || $tryDB != 'no')
 {
 	try {
-		@$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+		@$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 	} catch (Exception $e) {
 		$lstrURL = getControlURL();
 
@@ -180,7 +180,7 @@ mb_internal_encoding('UTF-8');
 
         <?php
         // Our Nav is built here:
-        $b_box = new sp_BuildNav();
+        $b_box = new BuildNav();
         $b_box->displayNav();
         ?>
 

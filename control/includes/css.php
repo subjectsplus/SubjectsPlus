@@ -10,7 +10,7 @@
     use Assetic\AssetWriter;
     use Assetic\Cache\FilesystemCache;
     use Assetic\Asset\AssetCache;
-    
+ 
     // Define the asset and cache directories
     
     $assets = dirname(dirname (__DIR__)) . DIRECTORY_SEPARATOR . 'assets';
@@ -23,7 +23,7 @@
     
     
     // Apply the CSSMinFilter
-    $css_files = new AssetCollection(array (new AssetReference($am, 'css')), array(new CSSMinFilter()));
+    $css_files = new AssetCollection(array (new AssetReference($am, 'css')));
     
     
     // Create an AssetCollection that uses the newly minified css

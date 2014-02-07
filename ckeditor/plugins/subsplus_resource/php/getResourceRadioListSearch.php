@@ -17,7 +17,7 @@ if (isset($_POST["search_terms"]))
 
 	// Connect to database
 	try {
-		$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+		$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 	} catch (Exception $e) {
 		echo $e;
 	}

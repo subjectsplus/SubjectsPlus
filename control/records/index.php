@@ -7,6 +7,8 @@
  *   @author adarby
  *   @date Nov, 2011
  */
+use SubjectsPlus\Control\DBConnector;
+    
 $subcat = "records";
 $subsubcat = "index.php";
 $page_title = "Browse Items";
@@ -20,7 +22,7 @@ $full_query = "";
 include("../includes/header.php");
 
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }

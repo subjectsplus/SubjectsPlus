@@ -13,7 +13,7 @@ $header = "noshow";
 
 include("../includes/header.php");
 
-try {$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
+try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
 $orig = scrubData($_GET["collection"]);
 $param = scrubData($_REQUEST["term"]);
 

@@ -6,13 +6,16 @@
  *   @author adarby
  *   @date march 2011
  */
+use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\DBConnector;
+    
 $subcat = "video";
 $page_title = "Video Admin";
 
 include("../includes/header.php");
 
 try {
-  $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
   echo $e;
 }
@@ -28,7 +31,7 @@ if (isset($_GET["limit"])) {
   $limit = "";
 }
 
-$querierVid = new sp_Querier();
+$querierVid = new Querier();
 $qVid = "SELECT video_id, title, description, source, foreign_id, duration, date, display, vtags
 	FROM video
 	ORDER BY video_id DESC

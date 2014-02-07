@@ -1,14 +1,14 @@
 <?php
-
+    use SubjectsPlus\Control\DBConnector;
 include_once("../control/includes/config.php");
 include_once("../control/includes/functions.php");
 
 
-$lobjDB = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+$lobjDB = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 
 $lstrQuery = "SELECT * FROM subject";
 
-$lobjQuerier = new sp_Querier();
+$lobjQuerier = new Querier();
 
 $lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 

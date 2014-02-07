@@ -26,7 +26,7 @@ switch ($_POST["limit"]) {
       $our_limit = "";
     break;
 }
-$querierTBYES = new sp_Querier();
+$querierTBYES = new Querier();
 $qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_formatted, answer, a_from, display, last_revised_by, tbtags
     FROM talkback
     WHERE tbtags LIKE '%" . $_POST["filter"] . "%'

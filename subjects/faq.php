@@ -47,7 +47,7 @@ $default_faqpage_id = "1";
 $intro = _("<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them <strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., different groupings of FAQs for different purposes/audiences), or browse the Basic FAQs, below.</p>");
 
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }  
@@ -88,7 +88,7 @@ if(isset($_POST['searchterm']))
 // Get list of subjects for sidebar
 ///////////////
 
-$querier2 = new sp_Querier();
+$querier2 = new Querier();
 $q2 = "select distinct s.subject_id, s.subject
     from faq f, faq_subject fs, subject s 
     WHERE f.faq_id = fs.faq_id 

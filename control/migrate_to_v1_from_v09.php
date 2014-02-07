@@ -35,7 +35,7 @@ $page_title = "Migration script";
 include("includes/header.php");
 
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }
@@ -49,7 +49,7 @@ try {
 
 if ($fixPermissions) {
 
-    $querierUser = new sp_Querier();
+    $querierUser = new Querier();
     $qUser = "SELECT staff_id, email, talkback, rxs, rxs_eres, admin, faq FROM staff WHERE user_type_id = 1";
     $userArray = $querierUser->getResult($qUser);
 
@@ -114,7 +114,7 @@ if ($removeOldPermissions) {
 /////////////////
 
 if ($addStaffDeets) {
-    $querierUser = new sp_Querier();
+    $querierUser = new Querier();
     $qUser = "SELECT s.staff_id, sd.responsibilities, sd.education, sd.affiliations, sd.since
         FROM staff s, staff_details sd
         WHERE s.staff_id = sd.staff_id
@@ -178,7 +178,7 @@ if ($updateCtags) {
         print "<p>Problem adding ctags field to location table.</p>";
     }
 
-    $querierLoc = new sp_Querier();
+    $querierLoc = new Querier();
     $qLoc = "SELECT location_id, article_linker, image_files, video_files, audio_files, fulltextCol
     FROM location";
     $locArray = $querierLoc->getResult($qLoc);
@@ -297,7 +297,7 @@ if ($addExtraFieldToPluslet) {
 //////////////////
 
 if ($convertToJson) {
-    $querierExtra = new sp_Querier();
+    $querierExtra = new Querier();
     $qextra = "SELECT pluslet_id, type, extra
     FROM `pluslet` 
     WHERE  type = 'deliciouslinks' OR type = 'flickr' OR type = 'rss' OR type = 'twitter'";

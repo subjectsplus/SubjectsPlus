@@ -18,7 +18,7 @@ $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
 
 try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }

@@ -15,6 +15,10 @@
  *   @todo Edit history not present
  *   @todo Make sure user is allowed to modify this guide (NOFUN not set)
  */
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Guide;
+    
+    
 if (!isset($_GET["subject_id"])) {
     header("location:index.php");
 }
@@ -35,7 +39,7 @@ ob_start();
 
 include("../includes/header.php");
 
-try {$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
+try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
 
 $postvar_subject_id = scrubData($_GET['subject_id']);
 
@@ -124,7 +128,7 @@ if (isset($this_id)) {
     }
 
 	//create new guide object and set admin view to true
-    $lobjGuide = new sp_Guide($this_id);
+    $lobjGuide = new Guide($this_id);
 	$lobjGuide->_isAdmin = TRUE;
 
     $all_tabs = $lobjGuide->getTabs();

@@ -7,7 +7,7 @@ class StaffWebService extends sp_WebService implements WebService
 	 * set the service and tag properties
 	 *
 	 * @param array $lobjUrlParams
-	 * @param sp_DBConnector $lobjDBConnector
+	 * @param DBConnector $lobjDBConnector
 	 */
 	function __construct($lobjUrlParams, $lobjDBConnector)
 	{
@@ -35,7 +35,7 @@ class StaffWebService extends sp_WebService implements WebService
 
 		$lstrQuery = $this->generateQuery($lobjParams) or die;
 
-		$lobjQuerier = new sp_Querier();
+		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
 

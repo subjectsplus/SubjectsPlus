@@ -10,6 +10,7 @@
  * @version $Id$
  * @access public
  */
+    use SubjectsPlus\Control\DBConnector;   
 class FaqWebService extends sp_WebService implements WebService
 {
 	/**

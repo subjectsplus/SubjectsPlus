@@ -13,7 +13,9 @@ $page_title = "Admin::Users";
 
 // init
 $feedback = "";
+    
 
+    
 include("../includes/header.php");
 
 // Test our record_id, if it exists; must be integer
@@ -37,7 +39,7 @@ if (isset($_GET["browse"])) {
 
     $q = "SELECT user_type_id, user_type FROM user_type ORDER BY user_type_id";
 
-    $querier = new sp_Querier();
+    $querier = new Querier();
     $typeArray = $querier->getResult($q);
 
     $staff_list = "";
@@ -47,7 +49,7 @@ if (isset($_GET["browse"])) {
         $staff_list .= "<h2>" . $value[1] . "</h2>";
 
         $q2 = "SELECT staff_id, fname, lname, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
-        $querier2 = new sp_Querier();
+        $querier2 = new Querier();
         $staffArray = $querier2->getResult($q2);
 
         $staff_list .= "<div class=\"box no_overflow\">";
@@ -77,7 +79,7 @@ if (isset($_GET["browse"])) {
                     }
                 }
                 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$value2[0]\">$value2[2], $value2[1]</a></div> <div id=\"user-$value2[0]\" class=\"$row_colour striper\" style=\"float: left;\">$these_tags <button class=\"button\" id=\"save_changes-$value2[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
+                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$value2[0]\">$value2[2], $value2[1]</a></div> <div id=\"user-$value2[0]\" class=\"$row_colour striper\" style=\"float: left;\">$these_tags <button id=\"save_changes-$value2[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
 </div>";
                 $row_count++;
             }
@@ -86,7 +88,7 @@ if (isset($_GET["browse"])) {
         $staff_list .= "</div>";
     }
 
-    print "<br /><div style=\"float: left; min-width: 500px;\">";
+    print "<br /><div class=\"staff-list-row\">";
     print $staff_list;
     print "</div>";
     include("../includes/footer.php");

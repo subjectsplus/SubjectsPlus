@@ -56,7 +56,7 @@ class sp_WebServiceHandler
 		}
 
 		try {
-			$this->mobjDBConnector = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+			$this->mobjDBConnector = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 		} catch (Exception $e) {
 			die($e);
 		}

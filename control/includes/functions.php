@@ -1,4 +1,5 @@
 <?php
+use SubjectsPlus\Control\DBConnector;
 
 
 //////////////////////////////
@@ -55,7 +56,7 @@ function isCool($emailAdd="", $password="") {
 
 
   try {
-    $dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
   } catch (Exception $e) {
     echo $e;
   }
@@ -994,7 +995,7 @@ function isInstalled()
 	global $dbName_SPlus;
 
 	try {
-		$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+		$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 	} catch (Exception $e) {
 		echo $e;
 	}
@@ -1017,13 +1018,14 @@ function isInstalled()
  */
 function isUpdated()
 {
+    
 	global $hname;
 	global $uname;
 	global $pword;
 	global $dbName_SPlus;
 
 	try {
-		$dbc = new sp_DBConnector($uname, $pword, $dbName_SPlus, $hname);
+		$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 	} catch (Exception $e) {
 		echo $e;
 	}
