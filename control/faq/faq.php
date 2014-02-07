@@ -7,6 +7,9 @@
  *   @date mar 2011
  *
  */
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\FAQ;
+
 $subcat = "faq";
 $page_title = "Manage FAQ";
 
@@ -43,7 +46,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
   if ($ok_record_id != "") {
     // do the delete
-    $record = new sp_FAQ($ok_record_id, "delete");
+    $record = new FAQ($ok_record_id, "delete");
     $record->deleteRecord();
     //$record->deBug();
     // Show feedback
@@ -59,7 +62,7 @@ if (isset($_POST["submit_record"])) {
 
   // Submit form
 
-  $record = new sp_FAQ($_POST["faq_id"], "post");
+  $record = new FAQ($_POST["faq_id"], "post");
 
   //////////////////////////////////
   // Is this an Insert or an update?
@@ -78,7 +81,7 @@ if (isset($_POST["submit_record"])) {
   //$record->deBug();
 }
 
-$record = new sp_FAQ($ok_record_id);
+$record = new FAQ($ok_record_id);
 
 // show feedback if it isn't already set
 if (!isset($feedback)) {

@@ -7,6 +7,10 @@
  *   @date feb 2012
  * 	  @todo 
  */
+
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Video;
+
 $subcat = "video";
 $page_title = "Manage Video";
 
@@ -47,7 +51,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
     if ($ok_record_id != "") {
         // do the delete
-        $record = new sp_Video($ok_record_id, "delete");
+        $record = new Video($ok_record_id, "delete");
         $record->deleteRecord();
         //$record->deBug();
         // Show feedback
@@ -63,7 +67,7 @@ if (isset($_POST["submit_record"])) {
 
     // Submit form
 
-    $record = new sp_Video($_POST["video_id"], "post");
+    $record = new Video($_POST["video_id"], "post");
 
     //////////////////////////////////
     // Is this an Insert or an update?
@@ -82,7 +86,7 @@ if (isset($_POST["submit_record"])) {
     //$record->deBug();
 }
 
-$record = new sp_Video($ok_record_id);
+$record = new Video($ok_record_id);
 
 // show feedback if it isn't already set
 if (!$feedback) {

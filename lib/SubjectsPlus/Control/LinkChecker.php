@@ -7,6 +7,8 @@ namespace SubjectsPlus\Control;
  *   @author rgilmour, gspomer, dgonzalez
  *   @date Apr 2013
  */
+    
+ 
 class LinkChecker {
 
 	private $_proxy;
@@ -84,7 +86,7 @@ class LinkChecker {
 			}
 
 			$lintCurrentSubjectID = isset( $_REQUEST['subject_id'] ) ? $_REQUEST['subject_id'] : '';
-			$lobjDropDown = new sp_Dropdown( 'subject_id', $guide_list, $lintCurrentSubjectID, "50" );
+			$lobjDropDown = new Dropdown( 'subject_id', $guide_list, $lintCurrentSubjectID, "50" );
 			echo $lobjDropDown->display();
 			?>
 					<br />

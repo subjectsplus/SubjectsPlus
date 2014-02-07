@@ -8,6 +8,8 @@
  *   @date Jan 2013
  *   @todo
  */
+    
+use SubjectsPlus\Control\Config;
 
 //variables required in header and add header
 $subcat = "admin";
@@ -15,10 +17,10 @@ $page_title = "Configuration Editing";
 $use_jquery = array("ui_styles");
 
 include("includes/header.php");
-include("includes/classes/sp_Config.php");
+
 
 //new instance of config class
-$lobjConfig = new sp_Config();
+$lobjConfig = new Config();
 
 //declare variable that stores configuration path
 $lstrConfigFilePath = 'includes/config.php';

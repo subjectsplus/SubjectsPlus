@@ -13,7 +13,11 @@ $subcat = "records";
 $page_title = "Record Bits include";
 $header = "noshow";
 
-
+use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\Dropdown;
+use SubjectsPlus\Control\Record;
+use SubjectsPlus\Control\LinkChecker;
+    
 include("../includes/header.php");
 
 // Connect to database
@@ -28,7 +32,7 @@ try {
 switch ($_POST["type"]) {
     case "location":
 
-        $record = new sp_Record();
+        $record = new Record();
         $record->buildLocation();
 
         break;
@@ -47,7 +51,7 @@ switch ($_POST["type"]) {
         $qSource = "select source_id, source from source order by source";
         $defsourceArray = $querierSource->getResult($qSource);
 
-        $sourceMe = new sp_Dropdown("default_source_id", $defsourceArray, $_POST["our_source_id"]);
+        $sourceMe = new Dropdown("default_source_id", $defsourceArray, $_POST["our_source_id"]);
         $source_string = $sourceMe->display();
 
         echo "<span class=\"record-source-override\">" . _("Source Override") . "<br />$source_string <img src=\"$IconPath/list-add.png\" class=\"add_source\" id=\"add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("add source override") . "\" title=\"" . _("add source override") . "\" border=\"0\"> <img src=\"$IconPath/cross_octagon_fram.png\" class=\"cancel_add_source\" id=\"cancel_add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("never mind") . "\" title=\"" . _("never mind") . "\" border=\"0\"></span>";
@@ -75,9 +79,9 @@ switch ($_POST["type"]) {
 
         // check link
     	if( isset($_POST['useProxy']) && $_POST['useProxy'] == 'TRUE' )
-    		$lobjLinkChecker = new sp_LinkChecker($proxyURL, 5, FALSE);
+    		$lobjLinkChecker = new LinkChecker($proxyURL, 5, FALSE);
     	else
-    		$lobjLinkChecker = new sp_LinkChecker('', 5, FALSE);
+    		$lobjLinkChecker = new LinkChecker('', 5, FALSE);
 
     	$lobjError = $lobjLinkChecker->checkUrl($_REQUEST["checkurl"]);
 

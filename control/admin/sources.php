@@ -7,10 +7,11 @@
  *   @date feb 2011
  *   @todo
  */
+use SubjectsPlus\Control\Querier;
+
 $subsubcat = "";
 $subcat = "admin";
 $page_title = "Admin Source Types";
-
 //print_r($_POST);
 
 include("../includes/header.php");
@@ -87,7 +88,7 @@ if (isset($_POST["update_sources"])) {
 // Sources
 ///////////////
 
-$querierDept = new sp_Querier();
+$querierDept = new Querier();
 $qSource = "select source_id, source, rs from source order by rs, source";
 $sourceArray = $querierDept->getResult($qSource);
 

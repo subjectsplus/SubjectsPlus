@@ -9,10 +9,19 @@
  *   check_url needs to be class rather than id, or have a unique id; title check for dupe in .js
   have an update button next to default_source type, to change all ?
  */
+    
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Dropdown;
+use SubjectsPlus\Control\Record;
+use SubjectsPlus\Control\LinkChecker;
+    
+    
 $subcat = "records";
 $page_title = "Edit Record";
 $wintype = "";
+    
 
+    
 // Suppress header if it is to be shown in colorbox or popup window
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
     $no_header = "yes";
@@ -49,7 +58,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
     if ($ok_record_id != "") {
         // do the delete
-        $record = new sp_Record($ok_record_id, "delete");
+        $record = new Record($ok_record_id, "delete");
         $record->deleteRecord();
         //$record->deBug();
         // Show feedback
@@ -104,7 +113,7 @@ if (isset($_POST["submit_record"])) {
     //$record->deBug();
 }
 
-$record = new sp_Record($ok_record_id);
+$record = new Record($ok_record_id);
 
 // show feedback if it isn't already set
 if (!isset($feedback)) {

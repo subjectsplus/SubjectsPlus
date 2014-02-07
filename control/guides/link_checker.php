@@ -7,6 +7,8 @@
  *   @date Apr 2013
  */
 
+use SubjectsPlus\Control\LinkChecker;
+    
 //set up variable whether to include head nav or not
 if( isset($_GET['wintype']) && $_GET['wintype'] == 'pop') $no_header = "yes"; //if popup, do not display header
 
@@ -20,7 +22,7 @@ if( isset($_GET['type']) && strtolower( $_GET['type'] ) == 'records' )
 	include("../includes/header.php");
 
 	//create new link checker object
-	$lobjLinkChecker = new sp_LinkChecker($proxyURL);
+	$lobjLinkChecker = new LinkChecker($proxyURL);
 
 	$lobjLinkChecker->displayHTMLForm('record');
 	if(isset($_POST['LinkCheckRecords']))
@@ -37,7 +39,7 @@ if( isset($_GET['type']) && strtolower( $_GET['type'] ) == 'records' )
 	include("../includes/header.php");
 
 	//create new link checker object
-	$lobjLinkChecker = new sp_LinkChecker($proxyURL);
+	$lobjLinkChecker = new LinkChecker($proxyURL);
 
 	$lobjLinkChecker->displayHTMLForm('subject');
 	if(isset($_POST['subject_id']))

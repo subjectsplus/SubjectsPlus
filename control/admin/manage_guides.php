@@ -11,6 +11,7 @@
  *   @todo Not sure how this page fits into the new version
  */
 use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Querier;
     
 $subsubcat = "";
 $subcat = "admin";

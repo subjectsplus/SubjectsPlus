@@ -7,6 +7,8 @@
  *   @author adarby, rgilmour
  *   @date mar 2013
  */
+use SubjectsPlus\Control\DBConnector;
+
 $subcat = "video";
 $page_title = "Video Admin";
 

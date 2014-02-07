@@ -8,6 +8,10 @@
  *   @date Jan 2011
  *   @todo
  */
+    
+use SubjectsPlus\Control\Staff;
+use SubjectsPlus\Control\Querier;
+  
 $subcat = "admin";
 $page_title = "Admin::Users";
 
@@ -155,7 +159,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
     if ($ok_record_id != "") {
         // do the delete
-        $record = new sp_Staff($ok_record_id, "delete", TRUE);
+        $record = new Staff($ok_record_id, "delete", TRUE);
         $record->deleteRecord();
         //$record->deBug();
         // Show feedback
@@ -170,7 +174,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 if (isset($_POST["submit_record"])) {
 
     // Submit form
-    $record = new sp_Staff($_POST["staff_id"], "post", TRUE);
+    $record = new Staff($_POST["staff_id"], "post", TRUE);
 
     //////////////////////////////////
     // Is this an insert or an update?
@@ -194,7 +198,7 @@ if (isset($_POST["submit_record"])) {
 // Start the record display
 ////////////////////
 
-$record = (!isset($record)) ? new sp_Staff($ok_record_id, '', TRUE) : $record;
+$record = (!isset($record)) ? new Staff($ok_record_id, '', TRUE) : $record;
 
 // show feedback if it isn't already set
 if (!$feedback) {

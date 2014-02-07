@@ -6,10 +6,14 @@
  *   @author adarby, rgilmour
  *   @date april 2011; updated mar 2013--removed staff_pluslet table functionality, thus we can delete this table.
  */
+
+use SubjectsPlus\Control\Querier;
+
+    
 $subsubcat = "";
 $subcat = "guides";
 $page_title = "Manage Files, Record Associations, etc.";
-
+    
 include("../includes/header.php");
 
 //init
@@ -62,7 +66,7 @@ if (!isset($use_unix_find)) {
     $userFiles = listdir($userPath);
 }
 
-$querier = new sp_Querier;
+$querier = new Querier;
 
 $file_list = "<table width=\"98%\" class=\"striper\">
     <tr>

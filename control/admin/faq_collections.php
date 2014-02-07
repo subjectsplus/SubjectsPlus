@@ -7,6 +7,8 @@
  *   @date march 2011
  *
  */
+use SubjectsPlus\Control\Querier;
+
 $subsubcat = "";
 $subcat = "admin";
 $page_title = "Admin FAQ Collections";
@@ -82,7 +84,7 @@ if (isset($_POST["update_collections"])) {
 // Collections
 ///////////////
 
-$querierDept = new sp_Querier();
+$querierDept = new Querier();
 $q = "select faqpage_id, name from faqpage order by name";
 $resultArray = $querierDept->getResult($q);
 

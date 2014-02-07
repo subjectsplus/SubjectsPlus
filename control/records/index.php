@@ -8,6 +8,9 @@
  *   @date Nov, 2011
  */
 use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Dropdown;
+use SubjectsPlus\Control\Record;
+use SubjectsPlus\Control\LinkChecker;
     
 $subcat = "records";
 $subsubcat = "index.php";
