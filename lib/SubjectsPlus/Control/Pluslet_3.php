@@ -31,7 +31,7 @@ class Pluslet_3 extends Pluslet {
     parent::establishView($view);
 
     // Get librarians associated with this guide
-    $querier = new sp_Querier();
+    $querier = new Querier();
     $qs = "SELECT lname, fname, email, tel, title from staff s, staff_subject ss WHERE s.staff_id = ss.staff_id and ss.subject_id = " . $this->_subject_id . " ORDER BY lname, fname";
 
     //print $qs;

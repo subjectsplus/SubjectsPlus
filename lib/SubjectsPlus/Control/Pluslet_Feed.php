@@ -73,7 +73,7 @@ class Pluslet_Feed extends Pluslet {
             $dd_name = "feed_type-$current_id";
             $dd_array = array("Delicious", "RSS", "Flickr", "Twitter");
 
-            $typeMe = new sp_Dropdown($dd_name, $dd_array, $feed_type);
+            $typeMe = new Dropdown($dd_name, $dd_array, $feed_type);
             $feed_type_dd = $typeMe->display();
 
             $this->_body = "<br /><input type=\"text\" name=\"$this_instance\" class=\"required_field\" value=\"$this->_body\" size=\"$title_input_size\" />

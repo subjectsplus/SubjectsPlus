@@ -230,7 +230,7 @@ class Record {
 	$qSource = "select source_id, source from source order by source";
 	$defsourceArray = $querierSource->getResult($qSource);
 
-	$sourceMe = new sp_Dropdown("default_source_id", $defsourceArray, $this->_def_source[0][0]);
+	$sourceMe = new Dropdown("default_source_id", $defsourceArray, $this->_def_source[0][0]);
 	$source_string = $sourceMe->display();
 
 	echo " <div class=\"box\">
@@ -301,11 +301,11 @@ public function buildLocation() {
 	if ($this->_locations == FALSE) {
       // no location
       // create format box for later
-		$formatMe = new sp_Dropdown("format[]", $formatArray);
+		$formatMe = new Dropdown("format[]", $formatArray);
 		$this->_formats = $formatMe->display();
 
       // create restrictions box for later
-		$restrictMe = new sp_Dropdown("access_restrictions[]", $restrictionsArray);
+		$restrictMe = new Dropdown("access_restrictions[]", $restrictionsArray);
 		$this->_restrictions = $restrictMe->display();
 
 		$new_loc = self::outputLocation();
@@ -329,13 +329,13 @@ public function buildLocation() {
 			$this->_location = $value["location"];
 
         // create format box
-			$formatMe = new sp_Dropdown("format[]", $formatArray, $value["format"]);
+			$formatMe = new Dropdown("format[]", $formatArray, $value["format"]);
 			$this->_formats = $formatMe->display();
 
 			$this->_format = $value["format"];
 
         // create restrictions box
-			$restrictMe = new sp_Dropdown("access_restrictions[]", $restrictionsArray, $value["access_restrictions"]);
+			$restrictMe = new Dropdown("access_restrictions[]", $restrictionsArray, $value["access_restrictions"]);
 			$this->_restrictions = $restrictMe->display();
 
         ///////////////

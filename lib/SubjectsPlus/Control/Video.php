@@ -137,7 +137,7 @@ class Video {
     }
 
     // Generate our dropdown
-        $guideMe = new sp_Dropdown("source", $video_storage_types, $this->_source, "50");
+        $guideMe = new Dropdown("source", $video_storage_types, $this->_source, "50");
         $guide_string = $guideMe->display();
 
     echo "<br /><br />

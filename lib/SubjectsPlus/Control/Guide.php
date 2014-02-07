@@ -212,7 +212,7 @@ class Guide {
 // Guide types dropdown
 /////////////////////
 
-        $guideMe = new sp_Dropdown("type", $guide_types, $this->_type, "50");
+        $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
         $guide_string = $guideMe->display();
 
 /////////////////////
@@ -253,7 +253,7 @@ class Guide {
 // Guide types dropdown
 /////////////////////
 
-        $guideMe = new sp_Dropdown("type", $guide_types, $this->_type, 50);
+        $guideMe = new Dropdown("type", $guide_types, $this->_type, 50);
         $guide_types_string = $guideMe->display();
 
         echo "
@@ -302,7 +302,7 @@ $screen_layout
         $querierStaff = new Querier();
         $staffArray = $querierStaff->getResult($qStaff);
 
-        $staffMe = new sp_Dropdown("staff_id[]", $staffArray, "", "50", "--Select--");
+        $staffMe = new Dropdown("staff_id[]", $staffArray, "", "50", "--Select--");
         $staff_string = $staffMe->display();
 
         /////////////////
@@ -329,7 +329,7 @@ $screen_layout
             $querierDiscipline = new Querier();
             $disciplineArray = $querierStaff->getResult($qDiscipline);
 
-            $disciplineMe = new sp_Dropdown("discipline_id[]", $disciplineArray, "", "50", "--Select--");
+            $disciplineMe = new Dropdown("discipline_id[]", $disciplineArray, "", "50", "--Select--");
             $discipline_string = $disciplineMe->display();
         }
 

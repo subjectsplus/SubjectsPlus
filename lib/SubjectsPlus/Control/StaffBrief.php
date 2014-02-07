@@ -114,7 +114,7 @@ class Staff {
         $deptArray = $querierDept->getResult($qDept);
 
         // create department dropdown
-        $deptMe = new sp_Dropdown("department_id", $deptArray, $this->_department_id);
+        $deptMe = new Dropdown("department_id", $deptArray, $this->_department_id);
         $this->_departments = $deptMe->display();
 
         ///////////////
@@ -126,7 +126,7 @@ class Staff {
         $userTypeArray = $querierUserType->getResult($qUserType);
 
         // create type dropdown
-        $typeMe = new sp_Dropdown("user_type_id", $userTypeArray, $this->_user_type_id);
+        $typeMe = new Dropdown("user_type_id", $userTypeArray, $this->_user_type_id);
         $this->_user_types = $typeMe->display();
 
         ///////////////
@@ -139,7 +139,7 @@ class Staff {
         );
 
         // create type dropdown
-        $activateMe = new sp_Dropdown("active", $activeArray, $this->_active);
+        $activateMe = new Dropdown("active", $activeArray, $this->_active);
         $this->_active_or_not = $activateMe->display();
 
         //////////////

@@ -164,7 +164,7 @@ class Talkback {
       $selected_user = $this->_a_from;
     }
 
-    $staffMe = new sp_Dropdown("a_from", $staffArray, $selected_user, "50", "--Select--");
+    $staffMe = new Dropdown("a_from", $staffArray, $selected_user, "50", "--Select--");
     $staff_string = $staffMe->display();
 
     $answerer = "<span class=\"record_label\">" . _("Answered By") . "</span><br />
