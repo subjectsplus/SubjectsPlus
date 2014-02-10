@@ -160,19 +160,12 @@ class FAQ {
 	   	global $BaseURL;
 
     	// Create and output object
-        /*
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);
-        */
-        echo "<textarea name=\"answer\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
-        echo "<script src='../../CKEditor/ckeditor.js'></script>";
-		echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'answer' ); };  </script>";
-        
-        
 		echo "<br />";
     } else {
       echo "<textarea name=\"answer\" rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
@@ -255,7 +248,7 @@ class FAQ {
     echo "
         <div class=\"box no_overflow\">
     <h2 class=\"bw_head\">" . _("Relevant Subjects") . "</h2>
-  
+
         <select name=\"subject_id[]\"><option value=\"\">-- Select --</option>
             $subject_string
         </select>
@@ -263,7 +256,7 @@ class FAQ {
     </div>
         <div class=\"box no_overflow\">
     <h2 class=\"bw_head\">" . _("Relevant Collections") . "</h2>
-    
+
         <select name=\"collection_id[]\"><option value=\"\">-- Select --</option>
             $collection_string
         </select>

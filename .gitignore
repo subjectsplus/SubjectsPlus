@@ -63,3 +63,5 @@ $RECYCLE.BIN/
 
 assets/cache/
 control/includes/config.php
+
+*.PHPEdit*

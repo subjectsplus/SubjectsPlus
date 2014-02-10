@@ -180,19 +180,16 @@ class Record {
 
   	if ($wysiwyg_desc == 1) {
   		include($CKPath);
-  		//global $BaseURL;
+  		global $BaseURL;
 
-		// Create and output object
-  		//$oCKeditor = new CKEditor($CKBasePath);
-  		//$oCKeditor->timestamp = time();
-		//$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-		//$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+  		// Create and output object
+  		$oCKeditor = new CKEditor($CKBasePath);
+  		$oCKeditor->timestamp = time();
+  		$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+  		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-		//echo $oCKeditor->editor('description', $this->_description, $config);
-        echo "<textarea name=\"description\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
-        echo "<script src='../../CKEditor/ckeditor.js'></script>";
-		echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'description' ); };  </script>";
-        echo "<br />";
+  		echo $oCKeditor->editor('description', $this->_description, $config);
+  		echo "<br />";
 	} else {
 		echo "<textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
 	}
@@ -238,7 +235,7 @@ class Record {
 
 	echo " <div class=\"box\">
 	<h2 class=\"bw_head\"><img src=\"$IconPath/source_override.png\" alt=\"delete\" border=\"0\"> " . _("Default Source Type") . "</h2>
-	
+
 	$source_string
 	</div>";
 
@@ -268,7 +265,7 @@ class Record {
 	echo "
       <div class=\"box no_overflow\">
 	<h2 class=\"bw_head\">" . _("Subjects") . "</h2>
-	
+
 	<select name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
 	$subject_string
 	</select>
@@ -442,22 +439,16 @@ public function buildLocation() {
  		<div style=\"clear: both;\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
 
  		if ($wysiwyg_desc == 1 && $this->_boxcount == 1) {
- 		//	include ($CKPath);
-    	// Create and output object
-            /*
+ 			include ($CKPath);
+ 			// Create and output object
  			$oCKeditor = new CKEditor($CKBasePath);
  			$oCKeditor->timestamp = time();
-    	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-    	$config['height'] = 75;
-    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+ 			$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+ 			$config['height'] = 75;
+ 			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-    	echo $oCKeditor->editor('display_note[]', $this->_display_note, $config);
-            */
-            
-            echo "<textarea name=\"display_note\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
-            echo "<script src='../../CKEditor/ckeditor.js'></script>";
-            echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'description' ); };  </script>";
-    	echo "<br />";
+ 			echo $oCKeditor->editor('display_note[]', $this->_display_note, $config);
+ 			echo "<br />";
     } else {
     	echo "<textarea name=\"display_note[]\" rows=\"2\" cols=\"50\">" . stripslashes($this->_display_note) . "</textarea>";
     }

@@ -1,19 +1,19 @@
 <?php
    namespace SubjectsPlus\Control;
-    
+
    require_once("Pluslet.php");
-   
+
 /**
  *   @file sp_Pluslet_Basic
- *   @brief 
+ *   @brief
  *
  *   @author agdarby
  *   @date Feb 2011
- *   @todo 
+ *   @todo
  */
-    
-    
-    
+
+
+
 
     class Pluslet_Basic extends Pluslet {
 
@@ -51,7 +51,7 @@
                 $this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
                 $this_instance = "pluslet-new-body-$new_id";
             }
-            /*
+
 			include ($CKPath);
 			global $BaseURL;
 
@@ -68,13 +68,7 @@
 			print parent::startPluslet();
 			$this->_body = $oCKeditor->editor($this_instance, $this->_body, $config);
 			print parent::finishPluslet();
-*/
-  
-            
-            echo "<textarea name=\"pluslet_body\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
-            echo "<script src='../../CKEditor/ckeditor.js'></script>";
-            echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'pluslet_body' ); };  </script>";
-            
+
 			return;
 		} else {
 

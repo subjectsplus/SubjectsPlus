@@ -15,6 +15,8 @@
  * $CKEditor->editor("editor1", "<p>Initial value.</p>");
  * @endcode
  */
+namespace SubjectsPlus\Control;
+
 class CKEditor
 {
 	/**

@@ -11,7 +11,6 @@
 use SubjectsPlus\Control\DBConnector;
 
 
-    
 $subcat = "guides";
 $header = "noshow"; // authentication only
 
@@ -76,8 +75,8 @@ switch ($_POST["flag"]) {
             $our_id = "";
         }
 
-        $obj = {"Pluslet_" . $our_type};
-        global $obj;
+        $obj = "SubjectsPlus\Control\Pluslet_" . $our_type;
+        //global $obj;
         $record = new $obj($our_id, "", $our_subject_id, $isclone);
         print $record->output("edit", "admin");
 
@@ -85,8 +84,8 @@ switch ($_POST["flag"]) {
         break;
     case "modify":
 
-        $obj = {"Pluslet_" . $_POST["type"]};
-        global $obj;
+        $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["type"];
+        //global $obj;
         $record = new $obj($_POST["edit"], "", $our_subject_id);
         print $record->output("edit", "admin");
 
@@ -100,9 +99,9 @@ switch ($_POST["flag"]) {
 
         //print "this id = $this_id; our sub id = $our_subject_id<p>";
         if ($this_id) {
-            $obj = "Pluslet_" . $_POST["item_type"];
+            $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
             //print "obj = $obj<p>";
-            global $obj;
+            //global $obj;
             $record = new $obj($this_id, "", $our_subject_id);
 
             print $record->output("view", "admin");
@@ -118,8 +117,8 @@ switch ($_POST["flag"]) {
 
         $this_id = modifyDB($_POST["update_id"], "update");
 
-        $obj = {"Pluslet_" . $_POST["item_type"]};
-        global $obj;
+        $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
+        //global $obj;
         $record = new $obj($_POST["update_id"], "", $our_subject_id);
         print $record->output("view", "admin");
 

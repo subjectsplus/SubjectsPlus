@@ -6,12 +6,12 @@
  *   @author adarby
  *   @date mar 2011
  */
-    
+
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\CompleteMe;
-    
+
 $use_jquery = "yes";
 
 // so that it doesn't conk out if you go directly to display.php
@@ -149,13 +149,13 @@ if ($check_this) {
         if ($myrow[4] != "") {
             // Here we assemble the pluslet, that will be gound in
             if ($myrow[4] == "Special") {
-                $obj = "sp_Pluslet_" . $myrow[0];
+                $obj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
             } else {
-                $obj = "sp_Pluslet_" . $myrow[4];
+                $obj = "SubjectsPlus\Control\Pluslet_" . $myrow[4];
             }
 
 
-            global $obj;
+            //global $obj;
             $record = new $obj($myrow[0], "", $this_id);
 /*
             if ($myrow[3] == 1) {

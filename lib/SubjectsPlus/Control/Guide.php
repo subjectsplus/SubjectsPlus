@@ -336,13 +336,13 @@ $screen_layout
         echo "
           <div class=\"box no_overflow\" id=\"staff_menu\">
 <h2 class=\"bw_head\">" . _("Staff") . "</h2>
- 
+
    $staff_string
 		<div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->
    </div>
         <div class=\"box\"  id=\"metadata_menu\">
    <h2 class=\"bw_head\">" . _("Metadata") . "</h2>
-   
+
 
    <span class=\"record_label\">" . _("Description") . "</span><br />
 <textarea name=\"description\" id=\"record_description\" class=\"\" cols=\"35\" rows=\"2\">" . $this->_description . "</textarea>
@@ -707,9 +707,9 @@ echo "</div>
 			if ($myrow["type"] != "") {
 
 				if ($myrow["type"] == "Special") {
-					$obj = "Pluslet_" . $myrow[0];
+					$obj = __NAMESPACE__ . "\Pluslet_" . $myrow[0];
 				} else {
-					$obj = "Pluslet_" . $myrow[4];
+					$obj =  __NAMESPACE__ . "\Pluslet_" . $myrow[4];
 				}
 
 
