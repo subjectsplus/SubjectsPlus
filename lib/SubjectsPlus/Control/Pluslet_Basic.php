@@ -1,7 +1,8 @@
 <?php
    namespace SubjectsPlus\Control;
-
     
+   require_once("Pluslet.php");
+   
 /**
  *   @file sp_Pluslet_Basic
  *   @brief 
@@ -10,9 +11,10 @@
  *   @date Feb 2011
  *   @todo 
  */
-    require_once('Pluslet.php');
     
     
+    
+
     class Pluslet_Basic extends Pluslet {
 
     public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
@@ -67,6 +69,7 @@
 			$this->_body = $oCKeditor->editor($this_instance, $this->_body, $config);
 			print parent::finishPluslet();
 */
+  
             
             echo "<textarea name=\"pluslet_body\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
             echo "<script src='../../CKEditor/ckeditor.js'></script>";

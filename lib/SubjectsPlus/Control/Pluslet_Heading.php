@@ -1,5 +1,6 @@
 <?php
    namespace SubjectsPlus\Control;
+     require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_Heading
  *   @brief 

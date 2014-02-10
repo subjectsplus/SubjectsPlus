@@ -9,19 +9,8 @@
  */
 
 use SubjectsPlus\Control\DBConnector;
-use SubjectsPlus\Control\Pluslet;
-use SubjectsPlus\Control\Pluslet_1;
-use SubjectsPlus\Control\Pluslet_2;
-use SubjectsPlus\Control\Pluslet_3;
-use SubjectsPlus\Control\Pluslet_4;
-use SubjectsPlus\Control\Pluslet_5;
-use SubjectsPlus\Control\Pluslet_6;
-use SubjectsPlus\Control\Pluslet_Basic;
-use SubjectsPlus\Control\Pluslet_Feed;
-use SubjectsPlus\Control\Pluslet_Heading;
-use SubjectsPlus\Control\Pluslet_Reserved_for_Special;
-use SubjectsPlus\Control\Pluslet_TOC;
-    
+
+
     
 $subcat = "guides";
 $header = "noshow"; // authentication only
@@ -87,16 +76,16 @@ switch ($_POST["flag"]) {
             $our_id = "";
         }
 
-        $obj = "Pluslet_" . $our_type;
+        $obj = {"Pluslet_" . $our_type};
         global $obj;
-        $record = new Pluslet_Basic($our_id, "", $our_subject_id, $isclone);
+        $record = new $obj($our_id, "", $our_subject_id, $isclone);
         print $record->output("edit", "admin");
 
 
         break;
     case "modify":
 
-        $obj = "Pluslet_" . $_POST["type"];
+        $obj = {"Pluslet_" . $_POST["type"]};
         global $obj;
         $record = new $obj($_POST["edit"], "", $our_subject_id);
         print $record->output("edit", "admin");
@@ -129,7 +118,7 @@ switch ($_POST["flag"]) {
 
         $this_id = modifyDB($_POST["update_id"], "update");
 
-        $obj = "Pluslet_" . $_POST["item_type"];
+        $obj = {"Pluslet_" . $_POST["item_type"]};
         global $obj;
         $record = new $obj($_POST["update_id"], "", $our_subject_id);
         print $record->output("view", "admin");

@@ -1,5 +1,6 @@
 <?php
    namespace SubjectsPlus\Control;
+     require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_5
  *   @brief The number corresponds to the ID in the database.  Numbered pluslets are UNEDITABLE clones

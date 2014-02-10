@@ -1,5 +1,6 @@
 <?php
        namespace SubjectsPlus\Control;
+     require_once("Pluslet.php");
 /* 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
