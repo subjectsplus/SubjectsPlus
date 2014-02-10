@@ -7,10 +7,10 @@
  *   @date mar 2011
  */
     
-    use SubjectsPlus\Control\DBConnector;
-    use SubjectsPlus\Control\Querier;
-    use SubjectsPlus\Control\Dropdown;
-    use SubjectsPlus\Control\CompleteMe;
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\Dropdown;
+use SubjectsPlus\Control\CompleteMe;
     
 $use_jquery = "yes";
 

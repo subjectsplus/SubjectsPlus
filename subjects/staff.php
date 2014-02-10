@@ -9,7 +9,7 @@
  *   @todo
  */
 use SubjectsPlus\Control\Staff;
-use SubjectsPlus\Control\StaffDisplay  ;
+use SubjectsPlus\Control\StaffDisplay;
 
 $page_title = "Library Staff";
 $description = "Library contact list.";

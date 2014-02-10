@@ -159,8 +159,8 @@ $ourlist
 </ul>
 </form>
 </div>
-<div class=\"add-department\">
-<h2 class=\"bw_head\">" . _("Add Department") . "</h2><div class=\"box\">
+<div class=\"add-department\"><div class=\"box\">
+<h2 class=\"bw_head\">" . _("Add Department") . "</h2>
 <form id=\"new_deptartment\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Department Name") . "</span><br />
 <input type=\"text\" name=\"department\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
@@ -177,8 +177,9 @@ $ourlist
 <button id=\"add_dept\" name=\"add_department\" >" . _("Add New Department") . "</button>
 </form>
 </div>
-<h2 class=\"bw_head\">" . _("View Live!") . "</h2>
+
 <div class=\"box\">
+<h2 class=\"bw_head\">" . _("View Live!") . "</h2>
 <ul>
 <li><a href=\"$PublicPath" . "/staff.php?letter=By Department\" target=\"_blank\">" . _("Staff by Department") . "</a></li>
 </ul>

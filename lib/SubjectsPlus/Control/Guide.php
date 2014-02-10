@@ -273,7 +273,7 @@ $screen_layout
 
         if ($this->_subject_id != "") {
             if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
-                echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\">";
+                echo "<input type=\"submit\" name=\"delete_record\" class=\"button delete_button\" value=\"" . _("Delete Forever!") . "\">";
             }
             $last_mod = _("Last modified: ") . lastModded("guide", $this->_subject_id);
             echo "<div id=\"last_edited\">$last_mod</div>";

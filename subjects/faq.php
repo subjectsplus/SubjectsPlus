@@ -7,10 +7,10 @@
  *   @date Sep 28, 2009
  *   @todo The interface for this is pretty lacklustre.  Make it better!
  */
-    use SubjectsPlus\Control\DBConnector;
-    use SubjectsPlus\Control\Querier;
-    use SubjectsPlus\Control\Dropdown;
-    use SubjectsPlus\Control\CompleteMe;
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\Dropdown;
+use SubjectsPlus\Control\CompleteMe;
     
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";

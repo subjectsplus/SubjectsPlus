@@ -295,7 +295,7 @@ $headshot
 		<input type=\"hidden\" name=\"action\" value=\"password\" />
 		<input type=\"hidden\" name=\"staff_id\" value=\"$this->_staff_id\" />
 		<p><input type=\"password\" size=\"20\" name=\"password\" value=\"\" />
-		<input type=\"submit\" name=\"Submit\" value=\"Update Password!\" /></p>
+		<input class=\"button\"  type=\"submit\" name=\"Submit\" value=\"Update Password!\" /></p>
 		</div>";
 
         return $box;

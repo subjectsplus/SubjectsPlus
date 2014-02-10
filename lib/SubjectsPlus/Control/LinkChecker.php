@@ -504,13 +504,13 @@ class LinkChecker {
 		if( !$onlyCurrent)
 		{
 			$mailReport = "<p>" ._("Would you like to mail this report to someone?") .
-				"</p><br /><input type=\"submit\" name=\"send_report2owner\" value=\"" . _("Send report to: ")
+				"</p><br /><input type=\"submit\" class=\"button\" name=\"send_report2owner\" value=\"" . _("Send report to: ")
 	        . $_SESSION["email"] . "\"> &nbsp; <input type=\"submit\" name=\"send_report2all\" value=\""
 	        . _("Send report to All Guide Owners") . "\"><br /><br />";
 		}else
 		{
 			$mailReport = "<p>" ._("Would you like to mail this report to someone?") .
-				"</p><br /><input type=\"submit\" name=\"send_report2owner\" value=\"" . _("Send report to: ")
+				"</p><br /><input type=\"submit\" class=\"button\"  name=\"send_report2owner\" value=\"" . _("Send report to: ")
 	        . $_SESSION["email"] . "\"><br /><br />";
 		}
 

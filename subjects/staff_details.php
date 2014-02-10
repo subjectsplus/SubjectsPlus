@@ -7,6 +7,8 @@
  *   @date July 1, 2010
  *   @todo
  */
+use SubjectsPlus\Control\DBConnector;
+    
 $page_title = "Library Staff Details";
 $subfolder = "services";
 

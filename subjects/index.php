@@ -6,7 +6,8 @@
  *   @author adarby
  *   @date mar 2011
  */
-    use SubjectsPlus\Control\CompleteMe;
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\CompleteMe;
     
 $use_jquery = array("ui");
 

@@ -155,7 +155,7 @@ $login_form = "<div align=\"center\">\n
 <td valign=\"top\" class=\"even\" align=\"left\"><input name=\"password\" type=\"password\" value=\"$postvar_password\" size=\"20\" /></td>\n
 </tr>\n
 <tr>\n
-<td valign=\"top\" class=\"odd\" colspan=\"2\"><div align=\"center\"><input type=\"submit\" value=\"login\" /></div></td>\n
+<td valign=\"top\" class=\"odd\" colspan=\"2\"><div align=\"center\"><input class=\"button\"  type=\"submit\" value=\"login\" /></div></td>\n
 </tr>\n
 <tr>\n
 <td valign=\"top\" class=\"even\" colspan=\"2\"><div align=\"right\"><a href=\"forgotpassword.php\">" . _("Forgot Password") ."</a></div></td>\n
