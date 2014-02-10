@@ -222,7 +222,7 @@ $thumbnail
 <!-- right hand column -->
 <div style=\"float: left;min-width: 50px;\">
 	<div id=\"record_buttons\" class=\"box\">
-		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Now") . "\">";
+		<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Now") . "\">";
 
     // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
     if ($this->_video_id != "") {

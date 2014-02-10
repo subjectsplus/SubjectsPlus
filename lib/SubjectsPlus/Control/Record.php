@@ -211,7 +211,7 @@ class Record {
 	<!-- right hand column -->
 	<div style=\"float: left;min-width: 270px;\">
 	<div id=\"record_buttons\" class=\"box\">
-	<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Record Now") . "\" />";
+	<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
 	if ($this->_record_id != "") {
 		if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {

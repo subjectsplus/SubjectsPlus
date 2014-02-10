@@ -274,7 +274,7 @@ $headshot
         <div id=\"record_buttons\" class=\"box\">
 	<h2 class=\"bw_head\">" . _("Save") . "</h2>
 	
-		<input type=\"submit\" name=\"submit_record\" class=\"save_button\" value=\"" . _("Save Record Now") . "\" />";
+		<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Record Now") . "\" />";
         // if it's not a new record, and we're authorized, show delete button
         if ($this->_staff_id != "") {
             echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\" />";
