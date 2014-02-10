@@ -1056,7 +1056,9 @@ table.contact_table tr:hover {
 
 /* Tooltip CSS */
 img.tooltip {
-	cursor: pointer;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
 }
 
 div.tooltip
@@ -1207,3 +1209,6 @@ width:55px;
 
 
 
+img.tooltip  {
+width:15px;
+}

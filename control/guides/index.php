@@ -112,9 +112,9 @@ if (!isset($_SESSION["NOFUN"])) {
   <div class="box">
 <div class="tips"><h2 class="bw_head">Tips</h2>
 
-<p> <img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"/> = Edit Guide Metadata </p>
-    <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"/> = View Guide on Public Site</p>
-    <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"/> = Check Guide Links</p>
+<p> <img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"/> — Edit Guide Metadata </p>
+    <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"/> — View Guide on Public Site</p>
+    <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"/> — Check Guide Links</p>
     <p>Need to delete a guide?  Use the gear icon, and use the Delete button</p>
   </div>
 </div>

@@ -491,7 +491,7 @@ jQuery(window).load(function(){
 <div id="guide_header">
     <div id="guide_nav">
         <ul class="guide-nav-menu">
-               <li id="hide_header" class="guide-nav-item">Menu </li>
+               <li id="hide_header" class="guide-nav-item">☰ Menu </li>
             <li id="newbox" class="guide-nav-item togglenewz"> New Box
             <?php
                 print $all_boxes;
@@ -584,7 +584,7 @@ jQuery(window).load(function(){
 <input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra" />
 
 <div id="subject_title"><h2><?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?></h2></div>
-
+ <p align="center" id="savour"><button class="button" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
 </div>  <!-- end guide header -->
 
 <!-- Feedback -->
@@ -635,7 +635,7 @@ jQuery(function() {
 <?php
 $lobjGuide->outputTabs();
 ?>
-               <p align="center" id="savour"><button class="button" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
+              
 
                
 </div>

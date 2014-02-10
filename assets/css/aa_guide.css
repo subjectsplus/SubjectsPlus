@@ -13,7 +13,10 @@
     font-family:inherit;
     
 }
-
+.ui-widget-content {
+  background:0;
+  border:0;
+}
 .ui-corner-all {
     
     border-radius:0px;
@@ -27,7 +30,10 @@
 }
 
 .ui-widget-header {
-    
+     border:0;
+ -moz-box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+ -webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+ box-shadow: 0 2px 1px rgba(0,0,0,0.08);
     background:inherit;
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header {
@@ -643,4 +649,8 @@ height:15px;
 
 .titlebar_options {
 height: 15px;
+}
+
+img.tooltip  {
+width:15px;
 }

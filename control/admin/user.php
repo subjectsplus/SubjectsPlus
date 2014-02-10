@@ -50,13 +50,13 @@ if (isset($_GET["browse"])) {
     // Loop through user types
     foreach ($typeArray as $value) {
 
-        $staff_list .= "<h2>" . $value[1] . "</h2>";
+        $staff_list .= "<div class=\"box\"><h2>" . $value[1] . "</h2>";
 
         $q2 = "SELECT staff_id, fname, lname, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
         $querier2 = new Querier();
         $staffArray = $querier2->getResult($q2);
 
-        $staff_list .= "<div class=\"box no_overflow\">";
+        $staff_list .= "";
 
         // if there are no results
         if (!$staffArray) {
@@ -84,7 +84,7 @@ if (isset($_GET["browse"])) {
                 }
                 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
                 $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$value2[0]\">$value2[2], $value2[1]</a></div> <div id=\"user-$value2[0]\" class=\"$row_colour striper\" style=\"float: left;\">$these_tags <button id=\"save_changes-$value2[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
-</div>";
+</div></div>";
                 $row_count++;
             }
         }
