@@ -25,8 +25,7 @@ print "<br /><br /><div style=\"float: left;  width: 70%;\">";
 
 if ($postvar_type == "holding") {
 
-  print "<div class=\"box no_overflow\">" . "<h2>" . _("Browse FAQs by Collection") . "</h2>
-<p>
+  print "<div class=\"box no_overflow\">" . "<h2>" . _("Browse FAQs by Collection") . "</h2><p>"
 . _("If you wish to edit a FAQ, click the link.") . "</p>";
 
   $q = "SELECT fp.faqpage_id, fp.name FROM faq f, faq_faqpage ff, faqpage fp WHERE f.faq_id = ff.faq_id AND fp.faqpage_id = ff.faqpage_id GROUP BY fp.name";
