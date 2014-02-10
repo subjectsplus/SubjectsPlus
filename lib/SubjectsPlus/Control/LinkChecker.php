@@ -99,7 +99,7 @@ class LinkChecker {
 			</div>
 			<div class="box" style="float:left;width:420px;">
 				<img src="<?php echo $AssetPath; ?>images/icons/accept.png" /> = Link is good!<br /><br />
-				<img src="<?php echo $AssetPath; ?>images/icons/info2.gif" /> = <i>Possible</i> problem with link; click on link to open in new window.<br />
+				<img src="<?php echo $AssetPath; ?>images/icons/info2.png" /> = <i>Possible</i> problem with link; click on link to open in new window.<br />
 			</div>
 		<?php
 	}
@@ -411,7 +411,7 @@ class LinkChecker {
 			{
 				$error['message'] = 'No response from server.';
 			}
-			$error['img_src'] = $AssetPath . 'images/icons/info2.gif';
+			$error['img_src'] = $AssetPath . 'images/icons/info2.png';
 			$error['row_style'] = ' style="background: #ffff33;"';
 		}
 		else
