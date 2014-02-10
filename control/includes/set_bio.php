@@ -1,5 +1,4 @@
 <?php
-
 /**
  *   @file set_bio.php
  *   @brief update biographical information
@@ -8,6 +7,10 @@
  *   @date Oct 2012
  *   @todo 
  */
+
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Staff;
+    
 $subsubcat = "";
 $subcat = "";
 $feedback = "";
@@ -41,7 +44,7 @@ if (is_numeric($_REQUEST["staff_id"])) {
 }
 
 /// Create our record
-$record = new sp_Staff($staff_id);
+$record = new Staff($staff_id);
 $staff_name = $record->getFullName();
 
 // See if a password has been submitted
@@ -56,7 +59,7 @@ if (isset($_POST['add_bio'])) {
   }
 
 /// Create our record again
-  $record = new sp_Staff($staff_id);
+  $record = new Staff($staff_id);
   $staff_name = $record->getFullName();
 } else {
   $feedback = "";

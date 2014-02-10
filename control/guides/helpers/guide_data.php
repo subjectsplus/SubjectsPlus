@@ -89,7 +89,7 @@ switch ($_POST["flag"]) {
 
         $obj = "Pluslet_" . $our_type;
         global $obj;
-        $record = new $obj($our_id, "", $our_subject_id, $isclone);
+        $record = new Pluslet_Basic($our_id, "", $our_subject_id, $isclone);
         print $record->output("edit", "admin");
 
 

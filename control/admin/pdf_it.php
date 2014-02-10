@@ -26,7 +26,8 @@
  * @author Nicola Asuni
  * @since 2009-03-20
  */
-
+use SubjectsPlus\Control\Staff;
+    
 $page_title = "Library Staff";
 $subfolder = "services";
 $subcat = "";
@@ -73,20 +74,20 @@ table.item_listing th {
 switch ($_GET["report"]) {
   case "staff-az":
     $display_title = "Staff List A - Z";
-    $staff_data = new sp_StaffDisplay();
+    $staff_data = new StaffDisplay();
     $out = $css . $staff_data->writeTable('A-Z',0);
     $doc_name = $_GET["report"];
     break;
   case "staff-dept":
     $display_title = "Staff List by Department";
-    $staff_data = new sp_StaffDisplay();
+    $staff_data = new StaffDisplay();
     $out = $css . $staff_data->writeTable('By Department',0);  
     $doc_name = $_GET["report"];
     break;
   
   case "staff-subject-libs":
     $display_title = "Staff List: Subject Librarians A-Z";
-    $staff_data = new sp_StaffDisplay();
+    $staff_data = new StaffDisplay();
     $out = $css . $staff_data->writeTable('Subject Librarians A-Z');      
     $doc_name = $_GET["report"];
     

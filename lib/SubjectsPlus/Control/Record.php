@@ -180,18 +180,21 @@ class Record {
 
   	if ($wysiwyg_desc == 1) {
   		include($CKPath);
-  		global $BaseURL;
+  		//global $BaseURL;
 
 		// Create and output object
-  		$oCKeditor = new CKEditor($CKBasePath);
-  		$oCKeditor->timestamp = time();
-		$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+  		//$oCKeditor = new CKEditor($CKBasePath);
+  		//$oCKeditor->timestamp = time();
+		//$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+		//$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-		echo $oCKeditor->editor('description', $this->_description, $config);
-		echo "<br />";
+		//echo $oCKeditor->editor('description', $this->_description, $config);
+        echo "<textarea name=\"description\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
+        echo "<script src='../../CKEditor/ckeditor.js'></script>";
+		echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'description' ); };  </script>";
+        echo "<br />";
 	} else {
-		echo "<textarea name=\"description\" rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
+		echo "<textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
 	}
 
 	echo "</div>
@@ -439,8 +442,9 @@ public function buildLocation() {
  		<div style=\"clear: both;\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
 
  		if ($wysiwyg_desc == 1 && $this->_boxcount == 1) {
- 			include ($CKPath);
+ 		//	include ($CKPath);
     	// Create and output object
+            /*
  			$oCKeditor = new CKEditor($CKBasePath);
  			$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
@@ -448,6 +452,11 @@ public function buildLocation() {
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
     	echo $oCKeditor->editor('display_note[]', $this->_display_note, $config);
+            */
+            
+            echo "<textarea name=\"display_note\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
+            echo "<script src='../../CKEditor/ckeditor.js'></script>";
+            echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'description' ); };  </script>";
     	echo "<br />";
     } else {
     	echo "<textarea name=\"display_note[]\" rows=\"2\" cols=\"50\">" . stripslashes($this->_display_note) . "</textarea>";

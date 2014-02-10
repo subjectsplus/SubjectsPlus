@@ -7,7 +7,11 @@
  *   @date Sep 28, 2009
  *   @todo The interface for this is pretty lacklustre.  Make it better!
  */
-
+    use SubjectsPlus\Control\DBConnector;
+    use SubjectsPlus\Control\Querier;
+    use SubjectsPlus\Control\Dropdown;
+    use SubjectsPlus\Control\CompleteMe;
+    
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
 
@@ -98,7 +102,7 @@ $q2 = "select distinct s.subject_id, s.subject
 
 $oursubs = $querier2->getResult($q2);
 
-$guideMe = new sp_Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
+$guideMe = new Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
 $guide_string = $guideMe->display();
 
 /* Set local variables */
@@ -304,7 +308,7 @@ print $results; ?>
             <form action="faq.php" method="post" autocomplete="off">
                 <p>
                     <?php
-                    $input_box = new sp_CompleteMe("quick_search", "faq.php", "faq.php?faq_id=", "Quick Search", "faq", 40);
+                    $input_box = new CompleteMe("quick_search", "faq.php", "faq.php?faq_id=", "Quick Search", "faq", 40);
                     $input_box->displayBox();
                     ?>
 

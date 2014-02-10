@@ -8,7 +8,8 @@
  *   @date august, 2010
  *   @todo
  */
-
+use SubjectsPlus\Control\Staff;
+use SubjectsPlus\Control\StaffDisplay  ;
 
 $page_title = "Library Staff";
 $description = "Library contact list.";
@@ -47,7 +48,7 @@ $intro = "<p><img src=\"$IconPath/information.png\" alt=\"icon\" /> Click on a n
 
 }
 
-$staff_data = new sp_StaffDisplay();
+$staff_data = new StaffDisplay();
 $out = $staff_data->writeTable($selected_letter);
 
 

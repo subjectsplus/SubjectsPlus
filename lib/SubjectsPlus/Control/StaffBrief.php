@@ -1,7 +1,7 @@
 <?php
    namespace SubjectsPlus\Control;
 /**
- *   @file sp_Staff
+ *   @file Staff
  *   @brief manage staff
  *
  *   @author agdarby, rgilmour

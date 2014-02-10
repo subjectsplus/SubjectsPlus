@@ -1,5 +1,6 @@
 <?php
-
+use SubjectsPlus\Control\Staff;
+    
 error_reporting(1);
 
 require_once("includes/config.php");
@@ -17,7 +18,7 @@ if(!isset($_GET['id']))
 {
 	if(isset($_POST['email']))
 	{
-		$lobjStaff = new sp_Staff('','forgot');
+		$lobjStaff = new Staff('','forgot');
 
 		if($lobjStaff->getRecordId() == NULL)
 		{
@@ -36,7 +37,7 @@ if(!isset($_GET['id']))
 			$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br /><strong>" . _("An email has been sent to reset your password.  Please click the link in the email and follow the instructions.") . "</strong></p>";
 		}
 	}else{
-		$lobjStaff = new sp_Staff();
+		$lobjStaff = new Staff();
 
 		$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br />" . _("Please enter your <strong>email</strong> so we can email you a link to reset your password.") . "</p>";
 
@@ -44,7 +45,7 @@ if(!isset($_GET['id']))
 	}
 }else{
 	$_SESSION['staff_id'] = $_GET['id'];
-	$lobjStaff = new sp_Staff($_GET['id']);
+	$lobjStaff = new Staff($_GET['id']);
 
 	if(isset($_POST['password']))
 	{

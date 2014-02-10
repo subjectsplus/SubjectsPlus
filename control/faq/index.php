@@ -88,12 +88,14 @@ print "</p><br />
 </div>
 
 <div class=\"faq-create\">
-    <h2 class=\"bw_head\">" . _("Create FAQ") . "</h2>
+  
     <div class=\"box\">
+    <h2 class=\"bw_head\">" . _("Create FAQ") . "</h2>
     <p><a href=\"faq.php?faq_id=&amp;wintype=pop\" class=\"showmedium-reloader\">" . _("CREATE FAQ") . "</a></p>
     </div>
-    <h2 class=\"bw_head\">" . _("About FAQs") . "</h2>
+    
     <div class=\"box\">
+    <h2 class=\"bw_head\">" . _("About FAQs") . "</h2>
     <p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit FAQ") . "</p>
     <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View FAQ on Public Site") . "</p>
     </div>

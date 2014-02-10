@@ -8,6 +8,10 @@
  *   @date Sep 17, 2009
  *   @todo file uploader so staff can add their own pictures.
  */
+    
+use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Staff;
+    
 $subsubcat = "";
 $subcat = "";
 $feedback = "";
@@ -41,7 +45,7 @@ if (is_numeric($_REQUEST["staff_id"])) {
 }
 
 /// Create our record
-$record = new sp_Staff($staff_id);
+$record = new Staff($staff_id);
 // Generate form box
 $password_box = $record->outputPasswordForm();
 

@@ -8,6 +8,7 @@
  *   @date feb 2012
  *   @todo this is hopelessly redundant of set_picture.php
  */
+use SubjectsPlus\Control\DBConnector;
 
 $subsubcat = "";
 $subcat = "";

@@ -25,7 +25,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: control/login.php:48 control/includes/classes/sp_Staff.php:258
+#: control/login.php:48 control/includes/classes/Staff.php:258
 msgid "Password"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgid "Are you sure you wish to <strong>delete this item forever</strong>?"
 msgstr ""
 
 #: control/includes/functions_legacy.php:333
-#: control/includes/classes/sp_Staff.php:275
+#: control/includes/classes/Staff.php:275
 #: control/includes/classes/sp_Record.php:180
 #: control/includes/classes/sp_FAQ.php:168
 #: control/includes/classes/sp_Guide.php:209
@@ -612,105 +612,105 @@ msgstr ""
 msgid "There are no FAQs linked for this guide"
 msgstr ""
 
-#: control/includes/classes/sp_StaffDisplay.php:95
+#: control/includes/classes/StaffDisplay.php:95
 msgid "Librarian"
 msgstr ""
 
-#: control/includes/classes/sp_StaffDisplay.php:96
+#: control/includes/classes/StaffDisplay.php:96
 msgid "Subject Responsibilities"
 msgstr ""
 
-#: control/includes/classes/sp_StaffDisplay.php:175
+#: control/includes/classes/StaffDisplay.php:175
 msgid "Name"
 msgstr ""
 
-#: control/includes/classes/sp_StaffDisplay.php:176
-#: control/includes/classes/sp_Staff.php:193
+#: control/includes/classes/StaffDisplay.php:176
+#: control/includes/classes/Staff.php:193
 msgid "Title"
 msgstr ""
 
-#: control/includes/classes/sp_StaffDisplay.php:177
+#: control/includes/classes/StaffDisplay.php:177
 msgid "Phone"
 msgstr ""
 
-#: control/includes/classes/sp_StaffDisplay.php:178
+#: control/includes/classes/StaffDisplay.php:178
 msgid "Email"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:163
+#: control/includes/classes/Staff.php:163
 msgid "Click to update photo"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:165
+#: control/includes/classes/Staff.php:165
 msgid "You can change the photo after saving."
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:182
+#: control/includes/classes/Staff.php:182
 msgid "Staff Member"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:185
+#: control/includes/classes/Staff.php:185
 msgid "First Name "
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:189
+#: control/includes/classes/Staff.php:189
 msgid "Last Name "
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:197
+#: control/includes/classes/Staff.php:197
 msgid "Department"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:201
+#: control/includes/classes/Staff.php:201
 msgid "Show First in Dept List?"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:205 control/admin/departments.php:153
+#: control/includes/classes/Staff.php:205 control/admin/departments.php:153
 msgid "Telephone"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:208
+#: control/includes/classes/Staff.php:208
 msgid "Email (This is the username for logging in to SubjectsPlus)"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:212
+#: control/includes/classes/Staff.php:212
 msgid "User Type"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:216
+#: control/includes/classes/Staff.php:216
 msgid "Active User?"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:221
+#: control/includes/classes/Staff.php:221
 msgid "Photo"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:225
+#: control/includes/classes/Staff.php:225
 msgid "Biographical Details"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:227 control/includes/set_bio.php:71
+#: control/includes/classes/Staff.php:227 control/includes/set_bio.php:71
 msgid "Please only include professional details."
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:237
+#: control/includes/classes/Staff.php:237
 msgid "Permissions"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:262
+#: control/includes/classes/Staff.php:262
 msgid "The password is hidden.  Reset?"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:270
+#: control/includes/classes/Staff.php:270
 msgid "Save"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:272
+#: control/includes/classes/Staff.php:272
 #: control/includes/classes/sp_Record.php:176
 msgid "Save Record Now"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:278
+#: control/includes/classes/Staff.php:278
 #: control/includes/classes/sp_Record.php:186
 #: control/includes/classes/sp_FAQ.php:173
 #: control/includes/classes/sp_Guide.php:211
@@ -718,26 +718,26 @@ msgstr ""
 msgid "Last modified: "
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:287
+#: control/includes/classes/Staff.php:287
 msgid "Enter the new password.  Make it a good one!"
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:322
+#: control/includes/classes/Staff.php:322
 msgid ""
 "Thy will be done.  Note that any subject guides associated with this user "
 "are now orphans."
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:326
+#: control/includes/classes/Staff.php:326
 #: control/includes/classes/sp_Talkback.php:232
 msgid "There was a problem with your delete."
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:388
+#: control/includes/classes/Staff.php:388
 msgid "Thy Will Be Done.  Added."
 msgstr ""
 
-#: control/includes/classes/sp_Staff.php:429
+#: control/includes/classes/Staff.php:429
 #: control/includes/classes/sp_FAQ.php:440
 #: control/includes/classes/sp_Talkback.php:304
 #: control/admin/faq_collections.php:38 control/admin/faq_collections.php:76

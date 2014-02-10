@@ -160,12 +160,19 @@ class FAQ {
 	   	global $BaseURL;
 
     	// Create and output object
+        /*
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);
+        */
+        echo "<textarea name=\"answer\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
+        echo "<script src='../../CKEditor/ckeditor.js'></script>";
+		echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'answer' ); };  </script>";
+        
+        
 		echo "<br />";
     } else {
       echo "<textarea name=\"answer\" rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";

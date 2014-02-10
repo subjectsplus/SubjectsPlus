@@ -6,7 +6,8 @@
  *   @author adarby
  *   @date mar 2011
  */
-
+    use SubjectsPlus\Control\CompleteMe;
+    
 $use_jquery = array("ui");
 
 include("../control/includes/config.php");
@@ -181,7 +182,7 @@ if ($is_responsive == TRUE) {
             <p style="margin: 0;"><?php print _("Find the research guide of your dreams"); ?></p>
             <form action="search.php"  method="post" autocomplete="off">
 <?php
-$input_box = new sp_CompleteMe("quick_search", "search.php", "guide.php?subject=", "Quick Search", "guides", 40);
+$input_box = new CompleteMe("quick_search", "search.php", "guide.php?subject=", "Quick Search", "guides", 40);
 $input_box->displayBox();
 ?>
             </form>

@@ -707,9 +707,9 @@ echo "</div>
 			if ($myrow["type"] != "") {
 
 				if ($myrow["type"] == "Special") {
-					$obj = "sp_Pluslet_" . $myrow[0];
+					$obj = "Pluslet_" . $myrow[0];
 				} else {
-					$obj = "sp_Pluslet_" . $myrow[4];
+					$obj = "Pluslet_" . $myrow[4];
 				}
 
 

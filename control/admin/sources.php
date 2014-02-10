@@ -8,7 +8,8 @@
  *   @todo
  */
 use SubjectsPlus\Control\Querier;
-
+use SubjectsPlus\Control\Staff;
+    
 $subsubcat = "";
 $subcat = "admin";
 $page_title = "Admin Source Types";
@@ -107,7 +108,7 @@ print "
 	
 </div>
 <br />
-<div class=\"box\" style=\"clear: both; float: left; min-width: 500px;\">
+<div class=\"box\" style=\"\">
 <p>" . _("Enter source type label.  Drag sources to change sort order.") . "</p>
 <br />
 
@@ -117,7 +118,7 @@ $ourlist
 </form>
 </div>
     <div class=\"box\">
-<div style=\"float: left; margin-left: 1em;\">
+<div style=\"\">
 
     <h2 class=\"bw_head\">" . _("Add Source") . "</h2>
 

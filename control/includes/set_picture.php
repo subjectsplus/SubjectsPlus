@@ -8,6 +8,9 @@
  *   @date Sep 17, 2009
  *   @todo
  */
+    
+use SubjectsPlus\Control\DBConnector;
+
 $subsubcat = "";
 $subcat = "";
 $page_title = "Set Picture";

@@ -1062,16 +1062,23 @@ echo "</div>
     global $CKBasePath;
 
     if ($wysiwyg_desc == 1) {
+        /*
 		include($CKPath);
 		global $BaseURL;
-
-		$oCKeditor = new CKEditor($CKBasePath);
-		$oCKeditor->timestamp = time();
 		$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
 		$config['height'] = '300';
 		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+		$oCKeditor = new CKEditor($CKBasePath);
+		$oCKeditor->timestamp = time();
+        */
+        echo "<textarea name=\"bio\"  rows=\"4\" cols=\"70\">" . stripslashes($this->_bio) . "</textarea>";
+        echo "<script src='../../CKEditor/ckeditor.js'></script>";
+		echo "<script type='text/javascript'> window.onload = function(){ CKEDITOR.replace( 'bio' ); };  </script>";
+        
+        
 
-    	echo $oCKeditor->editor('bio', $this->_bio, $config);
+
+    	//echo $oCKeditor->editor('bio', $this->_bio, $config);
     	echo "<br />";
     } else {
       echo "<textarea name=\"answer\" rows=\"6\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
