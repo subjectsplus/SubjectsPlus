@@ -26,7 +26,31 @@ jQuery(document).ready(function(){
 
     setupTabs('a[id*=tab-]');
 
+                       jQuery(".box-item").on('drag', function()
+                                              {
+                                              jQuery('#box_options').hide();
 
+                                              
+                                    });
+                       
+                       
+                       
+                       jQuery(".draggable").draggable({
+                                                 helper: 'clone', // Use a cloned helper
+                                                 appendTo: 'body', // Append helper to body so you can hide the parent
+                                                 start: function(){
+                                                 // Make the original transparent to avoid re-flowing of the elements
+                                                 // This makes the illusion of dragging the original item
+                                                 jQuery(this).css({opacity:0});
+                                                 },
+                                                 stop: function(){
+                                                 // Show original after dragging stops
+                                                 jQuery(this).css({opacity:1});
+                                                 
+                                                 }
+                                                 });
+                       
+                       
 }); // End jQuery within document.ready
 
 

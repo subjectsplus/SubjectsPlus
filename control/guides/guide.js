@@ -25,8 +25,12 @@ jQuery(document).ready(function(){
     makeHelpable("img[class*=help-]");
 
     setupTabs('a[id*=tab-]');
-
-
+                       
+                       
+                       
+                       
+                       }
+                       
 }); // End jQuery within document.ready
 
 
@@ -221,7 +225,8 @@ function makeDraggable( lstrSelector )
 			cursor: 'pointer',
 			helper: 'clone',
 			zIndex: 350
-		});
+                               
+                               });
 	});
 }
 
@@ -952,3 +957,7 @@ function reLayout( lc, cc, rc)
     }
 
 }
+
+
+
+                          

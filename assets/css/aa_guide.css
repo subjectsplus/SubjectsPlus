@@ -106,11 +106,11 @@
     list-style-type: none;
     padding: .5%;
     margin-right: .5%;
-    display: inline-block;
+    max-width:200px;
     background-color: #333;
     cursor: pointer;
     font-size: 85%;
-    margin-top: .5%;
+    color:#fff;
 }
 
 
@@ -265,7 +265,7 @@ img { padding-top: 0;}
     
     
     margin-left: 1%;
-    left:0;
+    left:120px;
     top: 45px;
     
     list-style-type: none;

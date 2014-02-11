@@ -1,5 +1,5 @@
 <?php
-    use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\DBConnector;
 include_once("../control/includes/config.php");
 include_once("../control/includes/functions.php");
 
