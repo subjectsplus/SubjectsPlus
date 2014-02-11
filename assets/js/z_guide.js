@@ -976,3 +976,14 @@ function reLayout( lc, cc, rc)
     }
 
 }
+
+
+
+
+////// Run all pastes through Word filter
+
+                                  CKEDITOR.on('instanceReady', function(ev) {
+                                              ev.editor.on('paste', function(evt) {
+                                                           evt.data['html'] = '<!--class="Mso"-->'+evt.data['html'];
+                                                           }, null, null, 9);
+                                              });
