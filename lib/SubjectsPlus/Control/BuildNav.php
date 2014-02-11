@@ -169,8 +169,8 @@ class BuildNav {
 
     print "</a>
          <ul class=\"subnav\">
-            <!--<li><a href=\"#\">" . _("My options") . "</a></li>-->
-            <li><a href=\"$CpanelPath" . "logout.php\">" . _("{Logout}") . "</a></li>
+            <li><a href=\"#\">" . _("View My Profile") . "</a></li>
+            <li><a href=\"$CpanelPath" . "logout.php\">" . _("Logout") . "</a></li>
          </ul>
       </li>
       </ul>
