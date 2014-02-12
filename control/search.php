@@ -7,6 +7,9 @@
  *   @date feb, 2011
  *   @todo text translations
  */
+    
+use SubjectsPlus\Control\Querier;
+    
 $subcat = "home";
 $page_title = "Search Results";
 

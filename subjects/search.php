@@ -7,6 +7,7 @@
  *   @date adapted feb 2012
  */
 use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Querier;
     
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
