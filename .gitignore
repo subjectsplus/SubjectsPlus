@@ -65,3 +65,7 @@ assets/cache/
 control/includes/config.php
 
 *.PHPEdit*
+
+
+
+/assets/users/
