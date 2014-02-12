@@ -638,7 +638,7 @@ div.autoC input:hover {
    
     font-size: 100%;
     background-color: #C03957;
-    color: whitesmoke;
+    color: whitesmoke !important;
     text-transform: none;
     border:none;
     margin-right: 1em;
