@@ -325,7 +325,7 @@ function setupSaveButton( lstrSelector )
 				//used to get contents of CKeditor box
 				var lstrInstance = "pluslet-update-body-" + lintID;
 				//Title of item
-				var lstrTitle = addslashes(jQuery("#pluslet-update-title-" + lintID).attr('value'));
+				var lstrTitle = addslashes(jQuery("#pluslet-update-title-" + lintID).val());
 				//Div Selector
 				var lstrDiv = "#pluslet-" + lintID;
 				//depending update_id
@@ -337,7 +337,7 @@ function setupSaveButton( lstrSelector )
 				//used to get contents of CKeditor box
 				var lstrInstance = "pluslet-new-body-" + lintID;
 				//Title of item
-				var lstrTitle = addslashes(jQuery("#pluslet-new-title-" + lintID).attr('value'));
+				var lstrTitle = addslashes(jQuery("#pluslet-new-title-" + lintID).val());
 				//Div Selector
 				var lstrDiv = "#" + lintID;
 				//depending update_id
