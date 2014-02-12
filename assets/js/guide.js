@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
     makeDraggable(".draggable");
 
     setupSaveButton('#save_guide');
-                       
+
     makeEditable('a[id*=edit]');
 
     makeDeleteable('a[id*=delete]');
@@ -30,11 +30,11 @@ jQuery(document).ready(function(){
                                               {
                                               jQuery('#box_options').hide();
 
-                                              
+
                                     });
-                       
-                       
-                       
+
+
+
                        jQuery(".draggable").draggable({
                                                  helper: 'clone', // Use a cloned helper
                                                  appendTo: 'body', // Append helper to body so you can hide the parent
@@ -46,11 +46,11 @@ jQuery(document).ready(function(){
                                                  stop: function(){
                                                  // Show original after dragging stops
                                                  jQuery(this).css({opacity:1});
-                                                 
+
                                                  }
                                                  });
-                       
-                       
+
+
 }); // End jQuery within document.ready
 
 
@@ -100,10 +100,10 @@ jQuery(lstrSelector).livequery(function() {
 							jQuery("#response").hide();
 							//Make save button appear, since there has been a change to the page
 							jQuery("#save_guide").fadeIn();
-						});	
-					}				
+						});
+					}
 				}
-				
+
 				return;
 			}
 
@@ -162,13 +162,13 @@ jQuery(lstrSelector).livequery(function() {
 		{
 			if(jQuery(this).children('a[href^="#tabs-"]').length > 0 && jQuery(ui.draggable).hasClass('pluslet')
 				&& !jQuery(this).hasClass('ui-state-active'))
-			{	
+			{
 				jQuery(this).css("background", "none repeat scroll 0% 0% #C03957");
 			}
-			
+
 			if(jQuery(this).children('a[href^="#tabs-"]').length < 1 && !jQuery(ui.draggable).hasClass('pluslet'))
 			{
-				jQuery(this).addClass("drop_hover");	
+				jQuery(this).addClass("drop_hover");
 			}
 		},
 		out: function(event, ui)
@@ -180,7 +180,7 @@ jQuery(lstrSelector).livequery(function() {
 
 			if(jQuery(this).children('a[href^="#tabs-"]').length < 1 && !jQuery(ui.draggable).hasClass('pluslet'))
 			{
-				jQuery(this).removeClass("drop_hover");	
+				jQuery(this).removeClass("drop_hover");
 			}
 		}
 	});
@@ -362,7 +362,7 @@ function setupSaveButton( lstrSelector )
 				break;
             case "HTML5Video":
                 var pbody = jQuery('.video-display').html();
-                
+
                 var pitem_type = "HTML5Video";
                 var pspecial = '';
                 break;
@@ -437,13 +437,13 @@ function setupSaveButton( lstrSelector )
 		////////////////////////
 		// Load the data into guide_data.php
 		// which will do an insert or update as appropriate
-		// 
+		//
 		// **changed by dgonzalez 08/2013 so that request is not done
 		// asynchronously so that setTimeout to save guide is no longer needed.
 		////////////////////////
 
 		jQuery.ajax({
-			url: "helpers/guide_data.php", 
+			url: "helpers/guide_data.php",
 			data: {
 				update_id: lintUID,
 				pluslet_title:lstrTitle,
@@ -799,7 +799,7 @@ function setupMiscLiveQueries()
         setupTabs(tab_id[1]);
 
      });
-    
+
 }
 
 function setupMiscClickEvents()
@@ -849,9 +849,9 @@ function makeHelpable( lstrSelector )
 function setupTabs( lstrSelector )
 {
 	////////////////
-    // Setup Tabs 
+    // Setup Tabs
     ////////////////
-        
+
       jQuery(lstrSelector).unbind('click');
       jQuery(lstrSelector).on('click', function(){
         var tab_id = jQuery(this).attr("id").split("-");
@@ -859,7 +859,7 @@ function setupTabs( lstrSelector )
         jQuery("#tab_body-0").fadeOut("");
         jQuery("#tab_body-" + tab_id[1]).fadeIn("slow");
         //fade in our tab
-        
+
 
       });
 }
@@ -981,9 +981,10 @@ function reLayout( lc, cc, rc)
 
 
 ////// Run all pastes through Word filter
-
+/*
                                   CKEDITOR.on('instanceReady', function(ev) {
                                               ev.editor.on('paste', function(evt) {
                                                            evt.data['html'] = '<!--class="Mso"-->'+evt.data['html'];
                                                            }, null, null, 9);
                                               });
+*/

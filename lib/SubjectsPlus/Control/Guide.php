@@ -815,7 +815,7 @@ echo "</div>
 			<img src=\"$IconPath/box.png\"  alt=\"" . _('Drop Content Here') . "\" /></i>
     		<span class=\"dropspot-text\">" . _('Drop Here') . "</span>
     		</div>
-    		<div class=\"portal-column sort-column portal-column-" . $i . " style=\"float: left;\"> " .
+    		<div class=\"portal-column sort-column portal-column-" . $i . "\" style=\"float: left;\"> " .
 			$content . "<div><br /></div>"
 			. '</div></div>';
 
