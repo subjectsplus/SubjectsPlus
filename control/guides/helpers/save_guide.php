@@ -107,7 +107,7 @@ foreach( $lobjTabs as $lobjTab )
 // table, flag, item_id, title, staff_id
 ////////////////////
 
-$updateChangeTable = changeMe("guide", "update", $_COOKIE["our_guide_id"], $_COOKIE["our_guide"], $_SESSION['staff_id']);
+//$updateChangeTable = changeMe("guide", "update", $_COOKIE["our_guide_id"], $_COOKIE["our_guide"], $_SESSION['staff_id']);
 
 
 print "<script type='text/javascript'>$.growl.notice({message: 'The guide was updated successfully.', title:'" . _("Guide Updated.") . "'})</script>";
