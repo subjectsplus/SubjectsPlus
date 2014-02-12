@@ -149,7 +149,6 @@ mb_internal_encoding('UTF-8');
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/base/jquery-ui.css" type="text/css" media="all" />
     <?php
     // this is for custom css, set by user and stored in database
         

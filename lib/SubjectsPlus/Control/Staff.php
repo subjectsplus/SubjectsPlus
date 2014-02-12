@@ -306,11 +306,11 @@ class Staff {
 
 <div style=\"float: left;\">
 <span class=\"record_label\">" . _("First Name ") . "</span><br />
-<input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class=\"required_field\" value=\"" . $this->_fname . "\" />
+<input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class= value=\"" . $this->_fname . "\" />
 </div>
 <div style=\"float: left;\">
 <span class=\"record_label\">" . _("Last Name ") . "</span><br />
-<input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\" class=\"required_field\" value=\"" . $this->_lname . "\" />
+<input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\"  value=\"" . $this->_lname . "\" />
 </div>
 <br style=\"clear: both;\"/><br />";
 

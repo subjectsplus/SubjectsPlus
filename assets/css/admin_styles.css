@@ -866,6 +866,12 @@ div.ctag_list a:hover {
     background-color: yellow;
     margin: 5px;
     padding:  2px 1em 2px 2px;
+    
+    top: 10px;
+position: absolute;
+right: 1%;
+padding: 1%;
+
 
 }
 

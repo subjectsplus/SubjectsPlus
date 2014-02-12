@@ -27,6 +27,8 @@ if (!isset($_GET["subject_id"])) {
 $use_jquery = array("ui_styles");
 
 // clear out existing cookies
+    
+
 setcookie("our_guide", "", 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_guide_id", "", 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_shortform", "", 0, '/', $_SERVER['HTTP_HOST']);
