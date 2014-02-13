@@ -58,6 +58,8 @@ $omit_user_columns = array( );
 // 'lat_long', 'emergency_contact' (all three emergency contact information)
 $require_user_columns = array( "title", "classification", "tel", "address", "city", "state", "zip", "emergency_contact");
 
+$pluslets_activated = array('Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video');
+
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)
 // You need to set this to TRUE
