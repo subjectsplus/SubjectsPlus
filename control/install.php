@@ -10,6 +10,9 @@
  *   @todo
  */
 
+use SubjectsPlus\Control\Config;
+use SubjectsPlus\Control\Installer;
+
 //set varirables needed in header
 $subcat = "install";
 $page_title = "Installation";
@@ -93,7 +96,7 @@ if( isInstalled() )
 		);
 
 	//new instance of config amd set path and options
-	$lobjConfig = new sp_Config();
+	$lobjConfig = new Config();
 	$lobjConfig->setConfigPath('includes/config.php');
 	$lobjConfig->setConfigOptions( $lobjConfigOptions );
 
@@ -116,7 +119,7 @@ if( isInstalled() )
 				}else
 				{
 					//new installer instance and install and on success show complete page
-					$lobjInstaller = new sp_Installer();
+					$lobjInstaller = new Installer();
 					if( $lobjInstaller->install( ) )
 					{
 						$lobjInstaller->displayInstallationCompletePage();

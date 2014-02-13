@@ -11,6 +11,8 @@
  *   @todo
  */
 
+use SubjectsPlus\Control\Updater;
+
 //set varirables needed in header
 $subcat = "update";
 $page_title = "Update";
@@ -31,7 +33,7 @@ if( isUpdated() )
 {
 	?>
 	<div id="maincontent" class="update-main">
-<div class="box required_field">    
+<div class="box required_field">
 		<h2 class="bw_head"><?php echo _( "Already Updated" ); ?></h2>
 
 			<p><?php echo _( 'Already at SubjectsPlus 2.0. No need to run updater.' ) ?></p>
@@ -42,7 +44,7 @@ if( isUpdated() )
 }else
 {
 	//new of Updater
-	$lobjUpdater = new sp_Updater();
+	$lobjUpdater = new Updater();
 
 	//depending on step, display content
 	switch( $lintStep )

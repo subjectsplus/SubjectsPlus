@@ -8,7 +8,7 @@
  *   @date Jan 2013
  *   @todo
  */
-    
+
 use SubjectsPlus\Control\Config;
 
 //variables required in header and add header
@@ -67,6 +67,8 @@ if(!is_writable($lstrConfigFilePath))
 							"aarray", "right", "large", "", _( "e.g. To make a main branch sending to admin email and branch1 branch sent to specified email -> 'main=,branch1=example@branch1.edu'" ) ),
 
 							"all_cattags" => array( _( "Talkback Topic Tags" ), _( "These are the tags that a given talkback can have associated with it." ), "array", "right", "textarea", "", _("Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places.") ),
+
+							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "textarea", "", _("") ),
 
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 							_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),

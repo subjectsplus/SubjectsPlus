@@ -8,7 +8,8 @@
  */
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Querier;
-    
+use SubjectsPlus\Control\AllHandler;
+
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
@@ -40,7 +41,7 @@ if (isset($_POST["searchterm"])) {
   $searchphrase = scrubData($_POST["searchterm"]);
   $page_title1 = "Search results for: " . $searchphrase;
 } else {
-  
+
 }
 
 //$alphabet = getLetters("databases", $_GET["letter"]);
@@ -70,10 +71,10 @@ $newlist .= "</ul>\n";
 if (isset($_POST["searchterm"])) {
   $selected = scrubData($_POST["searchterm"]);
   $intro .= "<p style=\"\">Search results for <strong>$selected</strong></p><br />";
-  
+
   // Create our table of databases object
 
-$our_items = new sp_AllHandler();
+$our_items = new AllHandler();
 $out = $our_items->writeTable($_GET["letter"], "");
 } else {
   $out = _("You must enter a search term.");
@@ -114,14 +115,14 @@ include("includes/header.php");
 
 
       <form action="search.php" method="post" style="margin-left: 1em;">
-        <input type="text" id="letterhead_suggest" size="30" class="searchinput-3" name="searchterm" value="<?php print $selected; ?>" /> 
+        <input type="text" id="letterhead_suggest" size="30" class="searchinput-3" name="searchterm" value="<?php print $selected; ?>" />
         <input type="submit" value="Search" class="button" />
       </form><br/>
- 
+
       <ul style="margin-left: 2em;">
         <li>Enter a search term of greater than 3 characters (e.g. biology) or a search phrase (e.g. American history). </li>
         <li>Results based on resource title and description.</li>
-      </ul>     
+      </ul>
       <br />
     </div>
   </div>
@@ -160,7 +161,7 @@ include("includes/header.php");
 
 function getTableOptions($selected, $subject_id = '') {
 
-  // 
+  //
 
   $selection = "WHERE (title LIKE '%" . mysql_real_escape_string($selected) . "%' OR description LIKE '%" . mysql_real_escape_string($selected) . "%')";
 

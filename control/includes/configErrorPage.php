@@ -9,6 +9,8 @@
  *   @date Jan 2013
  */
 
+use SubjectsPlus\Control\Config;
+
 //set asset path
 $lstrURL = $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ];
 
@@ -41,10 +43,9 @@ for( $i=(count($lobjSplit) - 1); $i >=0; $i-- )
 <?php
 
 include("functions.php");
-include("classes/sp_Config.php");
 
 //create new config instance
-$lobjConfig = new sp_Config();
+$lobjConfig = new Config();
 
 //display only if error variable exists
 if( isset($_GET['error'] ) )

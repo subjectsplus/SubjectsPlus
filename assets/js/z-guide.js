@@ -360,13 +360,6 @@ function setupSaveButton( lstrSelector )
 				var pitem_type = "Basic";
 				var pspecial = '';
 				break;
-            case "HTML5Video":
-                var pbody = jQuery('.video-display').html();
-
-                var pitem_type = "HTML5Video";
-                var pspecial = '';
-                break;
-
 			case "Heading":
 				var pbody = ""; // headings have no body
 				var pitem_type = "Heading";
@@ -405,8 +398,35 @@ function setupSaveButton( lstrSelector )
 				//pitems = " +pnum_items + " pshow_desc = " + pshow_desc + " pshow_feed = " +pshow_feed
 				//alert ("Feed update:" + pspecial );
 				break;
-				default:
-				alert ("no matching item type");
+			default:
+				var pbody = jQuery('#' + item_type[2] + '-body').html();
+				pbody = pbody == undefined ? ""  : pbody;
+				var pitem_type = item_type[2];
+				var extra = {};
+
+				jQuery(lobjThis).find('input[name^=' + item_type[2] + '-extra]').each(function()
+				{
+					var name_split = jQuery(this).attr("name").split("-");
+
+					extra[name_split[2]] = jQuery(this).val();
+				});
+
+				jQuery(lobjThis).find('textarea[name^=' + item_type[2] + '-extra]').each(function()
+				{
+					var name_split = jQuery(this).attr("name").split("-");
+
+					extra[name_split[2]] = jQuery(this).text();
+				});
+
+				jQuery(lobjThis).find('select[name^=' + item_type[2] + '-extra]').each(function()
+				{
+					var name_split = jQuery(this).attr("name").split("-");
+
+					extra[name_split[2]] = jQuery(this).val();
+				});
+
+				var pspecial = jQuery.isEmptyObject( extra ) ? "" : JSON.stringify(extra);
+
 				break;
 		}
 

@@ -9,11 +9,14 @@
  *   @date Jan 2013
  *   @todo
  */
+
+use SubjectsPlus\Control\Config;
+
 include("includes/functions.php");
 include("includes/classes/sp_Config.php");
 
 //create an instance of the sp_config class
-$lobjConfig = new sp_Config();
+$lobjConfig = new Config();
 
 //declare variable that stores configuration path
 $lstrConfigFilePath = 'includes/config.php';

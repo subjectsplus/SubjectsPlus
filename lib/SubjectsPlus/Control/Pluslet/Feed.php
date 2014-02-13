@@ -3,11 +3,11 @@
      require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_Feed
- *   @brief 
+ *   @brief
  *
  *   @author agdarby
  *   @date Feb 2011
- *   @todo 
+ *   @todo
  */
 class Pluslet_Feed extends Pluslet {
 
@@ -16,6 +16,11 @@ class Pluslet_Feed extends Pluslet {
 
         $this->_editable = TRUE;
     }
+
+	static function getMenuName()
+	{
+		return _('RSS');
+	}
 
     public function output($action="", $view="public") {
 
@@ -29,20 +34,20 @@ class Pluslet_Feed extends Pluslet {
             $num_items = $jobj->{'num_items'};
             $show_desc = $jobj->{'show_desc'};
             $show_feed = $jobj->{'show_feed'};
-            
+
             if ($num_items == "") { $num_items = 5; } // need to pass something along
 
         } else {
             $feed_type = "";
             $num_items = 5;
             $show_desc = "";
-            $show_feed = "";            
+            $show_feed = "";
         }
 
         if ($action == "edit") {
 
             global $title_input_size; // alter size based on column
-            
+
             //////////////////////
             // New or Existing?
             //////////////////////
@@ -69,7 +74,7 @@ class Pluslet_Feed extends Pluslet {
             $vRss1 = _("Display");
             $vRss2 = _("items<br />Show descriptions?");
 
-            
+
             // Generate our dropdown
             $dd_name = "feed_type-$current_id";
             $dd_array = array("Delicious", "RSS", "Flickr", "Twitter");
@@ -78,11 +83,11 @@ class Pluslet_Feed extends Pluslet {
             $feed_type_dd = $typeMe->display();
 
             $this->_body = "<br /><input type=\"text\" name=\"$this_instance\" class=\"required_field\" value=\"$this->_body\" size=\"$title_input_size\" />
-            $feed_type_dd        
+            $feed_type_dd
             <br />
             " . _("Enter RSS feed or username/tag (for delicious)");
             $this->_body .= "
-            
+
             <p style=\"font-size: 11px;padding-top: 3px;\">
             $vRss1 <input type=\"text\" name=\"displaynum-$current_id\" value=\"$num_items\" size=\"1\" />
             $vRss2 <input name=\"showdesc-$current_id\" type=\"radio\" value=\"1\"";
@@ -119,7 +124,7 @@ class Pluslet_Feed extends Pluslet {
 
             // notitle hack
             if (trim($this->_title) == "notitle") { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
-            
+
             parent::assemblePluslet($hide_titlebar);
 
             return $this->_pluslet;

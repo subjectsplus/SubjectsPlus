@@ -6,8 +6,11 @@
  *
  *   @author rgilmour, adarby
  *   @date mar 2011
- *   @todo 
+ *   @todo
  */
+
+use SubjectsPlus\Control\LinkChecker;
+
 $subsubcat = "";
 $subcat = "";
 $page_title = "Link Checker";
@@ -54,7 +57,7 @@ if (!isset($_POST["runcheck"])) {
 
 
     try {
-        $lc = new sp_LinkChecker("linkcheck_blacklist.txt", $base_url);
+        $lc = new LinkChecker("linkcheck_blacklist.txt", $base_url);
     } catch (Exception $e) {
         echo $e;
     }
@@ -101,7 +104,7 @@ include("../includes/footer.php");
             var shortform = "<?php print $shortie; ?>";
             var our_contents = $(this).attr("name");
             var our_linkresults = $("#link_result_set").html();
-            
+
             $("#email_results").load("../guides/helpers/guide_bits.php",
             {type: 'email_link_report', sendto: our_contents, linkresults: our_linkresults, shortform: shortform}).fadeIn(1600);
             return false;

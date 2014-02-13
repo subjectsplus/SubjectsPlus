@@ -21,6 +21,11 @@
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
     }
 
+   	static function getMenuName()
+   	{
+   		return _('Editable Box');
+   	}
+
     public function output($action="", $view) {
 
 		global $CKPath;

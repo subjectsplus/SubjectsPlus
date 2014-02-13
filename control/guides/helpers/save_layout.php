@@ -9,6 +9,8 @@
  *   @date updated dec 2012
  */
 
+use SubjectsPlus\Control\Guide;
+
 $subsubcat = "";
 $subcat = "guides";
 $page_title = "Save Layout include";
@@ -18,7 +20,7 @@ include("../../includes/header.php");
 
 //print_r($_POST);
 
-$oSaveLayout = new sp_Guide($_POST["subject_id"]);
+$oSaveLayout = new Guide($_POST["subject_id"]);
 $oSaveLayout->addExtra("maincol", $_POST["cols"]);
 $oSaveLayout->updateExtra();
 
