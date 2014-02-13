@@ -13,7 +13,7 @@
 use SubjectsPlus\Control\Config;
 
 include("includes/functions.php");
-include("includes/classes/sp_Config.php");
+include("includes/autoloader.php");
 
 //create an instance of the sp_config class
 $lobjConfig = new Config();

@@ -1,10 +1,11 @@
 <?php
 use SubjectsPlus\Control\Staff;
-    
+
 error_reporting(1);
 
 require_once("includes/config.php");
 require_once("includes/functions.php");
+require_once("includes/autoloader.php");
 
 try {
 	$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
