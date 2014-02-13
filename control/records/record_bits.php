@@ -17,7 +17,9 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
-    
+use SubjectsPlus\Control\Mailer;
+use SubjectsPlus\Control\MailMessage;
+
 include("../includes/header.php");
 
 // Connect to database
@@ -102,8 +104,8 @@ switch ($_POST["type"]) {
             'to' => $administrator_email,
             'subjectLine' => _("SubjectsPlus: Record Delete Recommendation"),
             'content' => $message_body);
-        $message = new sp_MailMessage($messageParams);
-        $mailer = new sp_Mailer();
+        $message = new MailMessage($messageParams);
+        $mailer = new Mailer();
         $mailer->send($message);
         echo "<div class=\"rec_delete_confirm\">" . _("Delete request sent to ") . "$administrator_email</div>";
         break;

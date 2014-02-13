@@ -1,12 +1,14 @@
 <?php
 
+use SubjectsPlus\Control\Querier;
+
 /**
  *   @file admin_bits.php
  *   @brief Inserting elements via .load into record.php, and updating staff table
  *
  *   @author adarby
  *   @date updated Dec 2012
- *   @todo 
+ *   @todo
  */
 $subsubcat = "";
 $page_title = "Admin Bits include";
@@ -226,7 +228,7 @@ switch ($_REQUEST["action"]) {
   case "delete_discipline":
 
     // Make sure no one is associated with this discipline
-    $qChecker = "SELECT * FROM subject, subject_discipline WHERE subject.subject_id = subject_discipline.subject_id 
+    $qChecker = "SELECT * FROM subject, subject_discipline WHERE subject.subject_id = subject_discipline.subject_id
     AND subject_discipline.discipline_id = " . scrubData($_POST["delete_id"], "integer");
 
     $rChecker = mysql_query($qChecker);
@@ -275,7 +277,7 @@ LEFT JOIN staff st ON ss.staff_id = st.staff_id
 $extra_q
 ORDER BY subject";
 
-$querier = new sp_Querier();
+$querier = new Querier();
 $subsArray = $querier->getResult($q);
 
 if (!empty($subsArray)) {

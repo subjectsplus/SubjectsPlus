@@ -1,5 +1,8 @@
 <?php
 
+use SubjectsPlus\Control\Mailer;
+use SubjectsPlus\Control\MailMessage;
+
 /**
  *   @file faq_bits.php
  *   @brief Inserting elements via .load into faq.php
@@ -55,8 +58,8 @@ switch ($_POST["type"]) {
                                 'to' => $administrator_email,
                                 'subjectLine' => _("SubjectsPlus: FAQ Delete Recommendation"),
                                 'content' => $message_body);
-        $message = new sp_MailMessage($messageParams);
-        $mailer = new sp_Mailer();
+        $message = new MailMessage($messageParams);
+        $mailer = new Mailer();
         $mailer->send($message);
         echo "<div class=\"rec_delete_confirm\">" . _("Delete request sent to ") . "$administrator_email</div>";
         break;

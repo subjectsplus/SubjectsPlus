@@ -2,12 +2,16 @@
 
 /**
  *   @file guide_bits.php
- *   @brief Inserting elements via .load 
+ *   @brief Inserting elements via .load
  *
  *   @author adarby
- *   @date 
- *   @todo 
+ *   @date
+ *   @todo
  */
+
+use SubjectsPlus\Control\Mailer;
+use SubjectsPlus\Control\MailMessage;
+
 $subsubcat = "";
 $subcat = "records";
 $page_title = "Guide Bits include";
@@ -109,8 +113,8 @@ switch ($_REQUEST["type"]) {
             'to' => $mail_to,
             'subjectLine' => $subject_line,
             'content' => $message_body);
-        $message = new sp_MailMessage($messageParams);
-        $mailer = new sp_Mailer();
+        $message = new MailMessage($messageParams);
+        $mailer = new Mailer();
         $mailer->send($message);
         break;
     case "delete_file":

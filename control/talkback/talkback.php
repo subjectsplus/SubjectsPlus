@@ -7,6 +7,9 @@
  *   @date Jan 2011
  * 	  @todo Add a delete button if a) it's one of the creators, or b) it's the admin
  */
+
+use SubjectsPlus\Control\Talkback;
+
 $subcat = "talkback";
 $page_title = "Manage TalkBack";
 
@@ -36,7 +39,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
     if ($ok_record_id != "") {
         // do the delete
-        $record = new sp_Talkback($ok_record_id, "delete");
+        $record = new Talkback($ok_record_id, "delete");
         $record->deleteRecord();
         //$record->deBug();
         // Show feedback
@@ -52,7 +55,7 @@ if (isset($_POST["submit_record"])) {
 
     // Submit form
 
-    $record = new sp_Talkback($_POST["talkback_id"], "post");
+    $record = new Talkback($_POST["talkback_id"], "post");
 
     //////////////////////////////////
     // Is this an Insert or an update?
@@ -71,7 +74,7 @@ if (isset($_POST["submit_record"])) {
     //$record->deBug();
 }
 
-$record = new sp_Talkback($ok_record_id);
+$record = new Talkback($ok_record_id);
 
 // show feedback if it isn't already set
 if (!$feedback) {

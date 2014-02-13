@@ -7,13 +7,15 @@
  *   @date jan 2012
  */
 use SubjectsPlus\Control\DBConnector;
-    
-    
+use SubjectsPlus\Control\DbHandler;
+use SubjectsPlus\Control\CompleteMe;
+
+
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
-    
-    
+
+
 $use_jquery = array("ui");
 
 $page_title = _("Database List");
@@ -52,7 +54,7 @@ if ($_GET["letter"] == "bysub") {
     $show_subjects = TRUE;
   } else {
     $show_subjects = FALSE;
-    // add subject name to title 
+    // add subject name to title
     $qt = "SELECT subject FROM subject WHERE subject_id=" . $clean_id . " LIMIT 0,1";
 
     $rt = mysql_query($qt);
@@ -128,7 +130,7 @@ $intro .= "<br style=\"clear: both;\" />";
 
 // Create our table of databases object
 
-$our_items = new sp_DbHandler();
+$our_items = new DbHandler();
 
 // if we're showing the subject list, do so
 
@@ -203,11 +205,11 @@ include("includes/header.php");
     <div class="titlebar">
       <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
     </div>
-    <div class="pluslet_body">      
+    <div class="pluslet_body">
       <form action="databases.php" method="post" autocomplete="off">
         <p>
           <?php
-          $input_box = new sp_CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "databases", 30);
+          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "databases", 30);
           $input_box->displayBox();
           ?>
         </p>

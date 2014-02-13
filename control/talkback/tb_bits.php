@@ -8,6 +8,10 @@
  *   @date
  *   @todo scrub post vars
  */
+
+use SubjectsPlus\Control\Mailer;
+use SubjectsPlus\Control\MailMessage;
+
 $subcat = "talkback";
 $page_title = "TB Bits include";
 $header = "noshow";
@@ -72,8 +76,8 @@ switch ($_POST["filter"]) {
         'to' => $administrator_email,
         'subjectLine' => _("SubjectsPlus: FAQ Delete Recommendation"),
         'content' => $message_body);
-    $message = new sp_MailMessage($messageParams);
-    $mailer = new sp_Mailer();
+    $message = new MailMessage($messageParams);
+    $mailer = new Mailer();
     $mailer->send($message);
     echo "<div class=\"rec_delete_confirm\">" . _("Delete request sent to ") . "$administrator_email</div>";
     break;
