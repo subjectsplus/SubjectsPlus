@@ -33,7 +33,26 @@ if (isset($_POST["searchterm"])) {
         $recordsArray = $querier1->getResult($q1);
 
         $querier2 = new Querier();
-        $q2 = "SELECT subject_id, subject FROM subject WHERE subject LIKE '%" . $searcher . "%' ORDER BY subject";
+
+        $q2 =
+        "SELECT
+            d.subject_id, d.subject
+        FROM
+            pluslet a
+        INNER JOIN
+            pluslet_tab b
+            on a.pluslet_id = b.pluslet_id
+        INNER JOIN
+            tab c
+            ON b.tab_id = c.tab_id
+	    INNER JOIN
+            subject d
+            ON c.subject_id = d.subject_id
+        WHERE a.body LIKE '%" . $searcher . "%'
+        OR a.title LIKE '%" . $searcher . "%'
+        ORDER BY d.subject_id";
+
+        
         $guidesArray = $querier2->getResult($q2);
     }
 
