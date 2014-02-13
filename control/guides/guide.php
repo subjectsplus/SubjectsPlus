@@ -17,8 +17,8 @@
  */
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Guide;
-    
-    
+
+
 if (!isset($_GET["subject_id"])) {
     header("location:index.php");
 }
@@ -27,7 +27,7 @@ if (!isset($_GET["subject_id"])) {
 $use_jquery = array("ui_styles");
 
 // clear out existing cookies
-    
+
 
 setcookie("our_guide", "", 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_guide_id", "", 0, '/', $_SERVER['HTTP_HOST']);
@@ -147,15 +147,27 @@ if (isset($this_id)) {
 ////////////////////////////
 // Now, get our pluslets //
 ///////////////////////////
+global $pluslets_activated;
 
 $all_boxes = "
 <ul id=\"box_options\">
-<li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>
-<li class=\"box-item draggable special-new\" id=\"pluslet-id-Basic\">" . _("Editable Box") . "</li>
-<li class=\"box-item draggable special-heading\" id=\"pluslet-id-Heading\">" . _("Heading") . "</li>
-<li class=\"box-item draggable special-rss\" id=\"pluslet-id-Feed\">" . _("RSS") . "</li>
-<li class=\"box-item draggable special-rss\" id=\"pluslet-id-TOC\">" . _("Table of Contents") . "</li>
-    <li class=\"box-item draggable special-html5-video\" id=\"pluslet-id-HTML5Video\">" .  _("  Video") . "</li>";
+<li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
+
+foreach( $pluslets_activated as $lstrPluslet )
+{
+	if( file_exists( dirname(dirname(__DIR__)) . "/lib/SubjectsPlus/Control/Pluslet/$lstrPluslet.php" ) )
+	{
+		$lstrObj = "SubjectsPlus\Control\Pluslet_" . $lstrPluslet;
+
+		if( method_exists( $lstrObj, 'getMenuName' ) )
+		{
+			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\">" . call_user_func(array( $lstrObj, 'getMenuName' )) . "</li>";
+		}else
+		{
+			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\">" . $lstrPluslet . "</li>";
+		}
+	}
+}
 
 // Now get Special ones
 // make sure:  a) there are some linked resources (to show All Items by Source)
@@ -500,28 +512,28 @@ jQuery(window).load(function(){
             ?>
             </li>
         <li class="showdisco guide-nav-item"> Find Box
-               
-               
-               
+
+
+
                <div class="inner-nav-content">
                <form action="discover.php" method="post" id="target">
-               
+
                <div>
                <div class="box">
                <h2>Browse</h2>
-               
+
                <select name="all_subs" id="all_subs">
                <option value="">- Browse Boxes -</option>
-               
-               
+
+
                </select>
                </div>
-               
+
                </div>
                <div>
                 <div class="box">
                <h2>Search</h2>
-              
+
                <input type="text" id="search_terms" name="search" />
                <input type="submit" value="Go!" name="searcher" id="searcho" class="button" />
                </div>
@@ -530,23 +542,23 @@ jQuery(window).load(function(){
                <div class="box no_overflow">
                <div id="results"></div>
                </div>
-               
+
                <script type="text/javascript" language="javascript">
                $(document).ready(function(){
-                                 
+
                                  var thisguide = '';
                                  $("#all_subs").change(function() {
                                                        var desired_guide = $("select option:selected").val();
                                                        $("#results").fadeIn(3000).load("find_results.php", {shortform: desired_guide, guide_id: thisguide});
                                                        });
-                                 
+
                                  $('form').submit(function() {
                                                   var terms = $("#search_terms").val();
                                                   $("#results").fadeIn(3000).load("find_results.php", {search_terms: terms, guide_id: thisguide });
                                                   return false;
                                                   });
-                                 
-                                 
+
+
                                  $("img[name*=add-]").livequery('click', function(event) {
                                                                 var item_id = $(this).attr("name").split("-");
                                                                 // make these vars available to the parent file, guide.php
@@ -555,16 +567,16 @@ jQuery(window).load(function(){
                                                                 parent.jQuery.colorbox.close();
                                                                 return false;
                                                                 });
-                                 
-                                 
+
+
                                  });
                </script>
 
                </div>
-               
-               
-               
-               
+
+
+
+
                </li>
         <li class="showrecord guide-nav-item" href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>">New Record</li>
         <li class="showmeta guide-nav-item" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop">Metadata</li>
@@ -577,7 +589,7 @@ jQuery(window).load(function(){
         <!--<li id="tabsbox" class="toggletab">Tabs
             <div id="tabs_options">
                 <p>Rename/Add Tabs</p>
-                <?php print $tabs_input; ?>
+                <?php //print $tabs_input; ?>
                 <button class="button" id="save_tab_options"><?php print _("Save Changes"); ?></button>
             </div>
         </li>-->
@@ -637,9 +649,9 @@ jQuery(function() {
 <?php
 $lobjGuide->outputTabs();
 ?>
-              
 
-               
+
+
 </div>
 
 <?php include("../includes/footer.php"); ?>

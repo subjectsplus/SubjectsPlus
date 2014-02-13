@@ -1,137 +1,65 @@
-        <div class='html5_video'>
-
-            <ul>
-            <li>
-                <button class="embed" value="youtube">Embed YouTube Video</button>   
-            </li>
-                <li>
-                 <button class="embed" value="vimeo">Embed Vimeo Video</button>
-
-                </li>
-                <li>
-                 <button class="embed" value="html5">Embed HTML5 Video</button>
-
-                </li>
-
-            </ul>
-
-            <div class="youtube">
-            <label class="youtube">YouTube URL</label>
-            <input class="youtube" type="text" id="youtubeurl"/>
-            </div>
-
-            <div class="vimeo">
-                <label>Viemo URL</label>
-            <input type="text" id="vimeourl"/>
-                </div>
+<div class='html5_video'>
+    <label>YouTube URL</label>
+    <input type="text" id="youtubeurl" name="HTML5Video-extra-youtube" value="<?php echo $this->_extra['youtube']; ?>"></input>
+    <label>Viemo URL</label>
+    <input type="text" id="vimeourl" name="HTML5Video-extra-vimeo"  value="<?php echo $this->_extra['vimeo']; ?>"></input>
+<label>MP4/H.264 (Safari, Chrome, Internet Explorer 10+) Url:</label>
+<input type='text' id='mp4url' name="HTML5Video-extra-mp4"  value="<?php echo $this->_extra['mp4']; ?>"></input>
+<label>Ogg/Theora (Firefox) Url:</label>
+<input type='text' id='oggurl' name="HTML5Video-extra-ogg"  value="<?php echo $this->_extra['ogg']; ?>"></input>
+<!--<button id='gen_video_tag'>Generate Video Markup</button>-->
+</div>
+<div class='video-display'>
+</div>
+<script>
 
 
-            <div class="html5">
-             <label>MP4/H.264 (Safari, Chrome, Internet Explorer 10+) Url:</label>
-                <input type='text' id='mp4url'/>
-            <label>Ogg/Theora (Firefox) Url:</label>
-        <input type='text' id='oggurl'>
+    function generateYouTubeMarkup() {
+        var youtubeurl = $('#youtubeurl').val();
+        var youtubecode = youtubeurl.split('watch?v=');
 
-        </div>
+        markup =" <div class='video-container'>" +
 
-        <button id='gen_video_tag'>Generate Video Markup</button>
+        "<iframe src='http://www.youtube.com/embed/" +  youtubecode[1] +  "' frameborder='0' width='560' height='315'></iframe>" +
+        "</div>"
 
-        <div class='video-display'>
-            <style>
+        return markup;
 
-                .youtube {
-                 display: none;   
-                }
-                
-                .vimeo {
-                display:none;
+    }
 
-                }
-                .html5 {
-                 display:none;   
-                }
-                
-                
-                
-                .html5_video input {
+jQuery('#gen_video_tag').on('click', function() {
 
-                    display:  block;
-                }
-            #gen_video_tag {
-                margin-top:5px;
-            }
+                            if($('#youtubeurl')) {
+                            jQuery('.video-display').append(
+                                generateYouTubeMarkup()
+                            )
 
-            .video-container {
-                position: relative;
-                padding-bottom: 56.25%;
-                padding-top: 30px; height: 0; overflow: hidden;
-            }
-
-            .video-container iframe,
-            .video-container object,
-            .video-container embed {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
+                            }
 
 
-                </style>
-            </div>
-        <script>
+video_mp4 = jQuery('#mp4url').val();
+video_ogg = jQuery('#oggurl').val();
 
-            jQuery('.jquery
+                            if(video_mp4) {
 
+jQuery('.video-display').append("<div id='video_markup'>" +
+    "<video class='video_display' controls>" +
 
+     "<source class='video_display' src='" +
+video_mp4 + "' type='video/mp4'>" +
+	"<source class='video_display' src='" +
+video_ogg + "' type='video/ogg'> " +
 
-            function generateYouTubeMarkup() {
-                var youtubeurl = $('#youtubeurl').val();
-                var youtubecode = youtubeurl.split('watch?v=');
-
-                markup =" <div class='video-container'>" +
-
-                "<iframe src='http://www.youtube.com/embed/" +  youtubecode[1] +  "' frameborder='0' width='560' height='315'></iframe>" +
-                "</div>"
-
-                return markup;
-
-            }
-
-        jQuery('#gen_video_tag').on('click', function() {
-
-                                    if($('#youtubeurl')) {
-                                    jQuery('.video-display').append(
-                                        generateYouTubeMarkup()
-                                    )
-
-                                    }
+"Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href='videofile.ogg'>download it</a> and watch it with your favorite video player! </video></div>");
 
 
-        video_mp4 = jQuery('#mp4url').val();
-        video_ogg = jQuery('#oggurl').val();
-
-                                    if(video_mp4) {
-
-        jQuery('.video-display').append("<div id='video_markup'>" +
-            "<video class='video_display' controls>" +
-
-             "<source class='video_display' src='" + 
-        video_mp4 + "' type='video/mp4'>" + 
-            "<source class='video_display' src='" + 
-        video_ogg + "' type='video/ogg'> " +
-
-        "Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href='videofile.ogg'>download it</a> and watch it with your favorite video player! </video></div>");
+                            }
 
 
-                                    }
+                               jQuery('.html5_video').hide();
+
+                            });
 
 
-                                       jQuery('.html5_video').hide();
-
-                                    });
-
-
-        </script>
+</script>
 

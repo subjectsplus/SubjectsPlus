@@ -19,6 +19,11 @@ class Pluslet_TOC extends Pluslet {
     $this->_pluslet_bonus_classes = "no_overflow";
   }
 
+  static function getMenuName()
+  {
+	return _('Table of Contents');
+  }
+
   public function output($action="", $view="public") {
 
     global $title_input_size; // alter size based on column
