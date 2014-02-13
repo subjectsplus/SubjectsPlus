@@ -151,15 +151,13 @@ mb_internal_encoding('UTF-8');
     <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
     <?php
     // this is for custom css, set by user and stored in database
-        
-        /*
- 
+    
 
     if (isset($_SESSION['css'])) {
       print "<link id=\"css_choice\" href=\"$AssetPath" . "css/" . $_SESSION['css'] . ".css\" rel=\"stylesheet\" type=\"text/css\"></link>";
     }
  
-        */
+      
         
     ?>
 

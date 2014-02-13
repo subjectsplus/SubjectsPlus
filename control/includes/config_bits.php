@@ -8,6 +8,9 @@
  *   @date
  *   @todo scrub post vars
  */
+use SubjectsPlus\Control\DBConnector;
+    
+    
 $subsubcat = "";
 $subcat = "";
 $page_title = "Record Bits include";
@@ -32,7 +35,7 @@ switch ($_POST["type"]) {
         $q = "UPDATE staff SET extra = '" . mysql_real_escape_string($extra_stuff) . "' WHERE staff_id = " . $_SESSION["staff_id"];
         $r = MYSQL_QUERY($q);
         $_SESSION['css'] = $_POST["css_file"];
-        print _("Background Updated!");
+        print "<script> jQuery.growl.notice({message:'', title:'" .  _("Background Updated!") . "'});</script>";
         break;
 }
 ?>

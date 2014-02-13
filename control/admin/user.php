@@ -49,9 +49,9 @@ if (isset($_GET["browse"])) {
     $staff_list = "";
     // Loop through user types
     foreach ($typeArray as $value) {
-
-        $staff_list .= "<div class=\"box\"><h2>" . $value[1] . "</h2>";
-
+        $staff_list .= "<div class=\"box\">";
+        $staff_list .= "<h2>" . $value[1] . "</h2>";
+        
         $q2 = "SELECT staff_id, fname, lname, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
         $querier2 = new Querier();
         $staffArray = $querier2->getResult($q2);
@@ -71,7 +71,7 @@ if (isset($_GET["browse"])) {
             $colour2 = "evenrow";
 
             foreach ($staffArray as $value2) {
-
+                
                 // unpack the ptags
                 $these_tags = "";
                 $current_ptags = explode("|", $value2[3]);
@@ -89,12 +89,12 @@ if (isset($_GET["browse"])) {
             }
         }
 
-        $staff_list .= "</div>";
+        $staff_list .= "";
     }
 
     print "<br /><div class=\"staff-list-row\">";
     print $staff_list;
-    print "</div>";
+    print "</div></div>";
     include("../includes/footer.php");
     ?>
 
