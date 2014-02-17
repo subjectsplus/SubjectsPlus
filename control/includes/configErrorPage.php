@@ -42,6 +42,7 @@ for( $i=(count($lobjSplit) - 1); $i >=0; $i-- )
     <body>
 <?php
 
+include("autoloader.php");
 include("functions.php");
 
 //create new config instance
