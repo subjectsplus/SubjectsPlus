@@ -19,16 +19,42 @@
     // Create a reference to all the CSS files in the asset directory
     
     $am = new AssetManager();
+    
+    $am->set('jqueryui', new AssetCache(
+                                     new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'jquery-ui.css')
+                                     ,new FilesystemCache($cache)
+                                     
+                                     ));
+    
+    $am->set('colorbox', new AssetCache(
+                                     new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'colorbox.css')
+                                     ,new FilesystemCache($cache)
+                                     
+                                     ));
+    
+    $am->set('guide', new AssetCache(
+             new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'guide.css')
+             ,new FilesystemCache($cache)
+             
+                                     ));
+    
+    
+    
+    
     $am->set('css', new AssetCache(new GlobAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR .  '*.css'), new FilesystemCache($cache)));
     
     
     // Apply the CSSMinFilter
+    $guide = new AssetCollection(array (new AssetReference($am, 'guide')));
+    $jqueryui = new AssetCollection(array (new AssetReference($am, 'jqueryui')));
+    $colorbox = new AssetCollection(array (new AssetReference($am, 'colorbox')));
     $css_files = new AssetCollection(array (new AssetReference($am, 'css')));
+    
     
     
     // Create an AssetCollection that uses the newly minified css
     
-    $css = new AssetCollection(array ($css_files) );
+    $css = new AssetCollection(array ($colorbox, $guide,  $jqueryui,  $css_files) );
     
     
     // Tell the browser that this is CSS and that it should be cached

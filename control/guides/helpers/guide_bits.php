@@ -11,7 +11,8 @@
 
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
-
+use SubjectsPlus\Control\DBConnector;
+    
 $subsubcat = "";
 $subcat = "records";
 $page_title = "Guide Bits include";

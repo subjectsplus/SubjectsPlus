@@ -10,7 +10,8 @@
  */
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\StaffDisplay;
-
+use SubjectsPlus\Control\DBConnector;
+    
 $page_title = "Library Staff";
 $description = "Library contact list.";
 $keywords = "staff list, librarians, contacts";

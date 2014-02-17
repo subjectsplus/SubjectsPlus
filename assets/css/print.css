@@ -1,5 +1,8 @@
 /* CSS Document for SubjectsPlus, public display (i.e., subjects/ folder ) */
 
+@media print {
+
+
 body {
 
 	background-color: #fff; 	
@@ -324,3 +327,7 @@ display: none;
 #navheader { display: none; }
 #footer { display: none; }
 #shortfooter {display: none; }
+
+
+
+}

@@ -153,7 +153,9 @@ $all_boxes = "
 <ul id=\"box_options\">
 <li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
 
-foreach( $pluslets_activated as $lstrPluslet )
+/*
+
+ foreach( $pluslets_activated as $lstrPluslet )
 {
 	if( file_exists( dirname(dirname(__DIR__)) . "/lib/SubjectsPlus/Control/Pluslet/$lstrPluslet.php" ) )
 	{
@@ -168,7 +170,9 @@ foreach( $pluslets_activated as $lstrPluslet )
 		}
 	}
 }
+*/
 
+    
 // Now get Special ones
 // make sure:  a) there are some linked resources (to show All Items by Source)
 
