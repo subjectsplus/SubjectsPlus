@@ -102,13 +102,13 @@ print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"sources\" action=\"\" method=\"post\">
 <div id=\"savour\" style=\"clear: both;float:left; \">
-	<div id=\"save_zone\" style=\"\">
+	<div id=\"save_zone\"  >
 		<button class=\"button\" id=\"save_guide\" name=\"update_sources\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 	
 </div>
 <br />
-<div class=\"box\" style=\"\">
+<div class=\"box\"  >
 <p>" . _("Enter source type label.  Drag sources to change sort order.") . "</p>
 <br />
 
@@ -118,7 +118,7 @@ $ourlist
 </form>
 </div>
     <div class=\"box\">
-<div style=\"\">
+<div  >
 
     <h2 class=\"bw_head\">" . _("Add Source") . "</h2>
 

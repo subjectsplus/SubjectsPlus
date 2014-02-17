@@ -916,3 +916,25 @@ div.type-heading .titlebar {}
 height:55px;
 width:55px;
 }
+
+
+.staff-info {
+    float:left;
+}
+
+.clearboth {
+    
+    clear:both;
+}
+
+.clear-both-left {
+    clear:both;
+    float:left;
+    
+}
+
+.float-left {
+    float:left;
+}
+
+

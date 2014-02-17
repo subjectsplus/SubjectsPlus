@@ -181,19 +181,19 @@ class Staff {
 <div class=\"box\">
         <h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
 
-<div style=\"float: left;\">
+<div class=\"float-left\">
 <span class=\"record_label\">" . _("First Name ") . "</span><br />
 <input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class=\"required_field\" value=\"" . $this->_fname . "\" />
 </div>
-<div style=\"float: left;\">
+<div class=\"float-left\">
 <span class=\"record_label\">" . _("Last Name ") . "</span><br />
 <input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\" class=\"required_field\" value=\"" . $this->_lname . "\" />
 </div>
-<br style=\"clear: both;\"/><br />
+<br class=\"clear-both\"/><br />
 <span class=\"record_label\">" . _("Title") . "</span><br />
 <input type=\"text\" name=\"title\" id=\"title\" size=\"50\" class=\"required_field\" value=\"" . $this->_title . "\" />
 <br /><br />
-<div style=\"float: left;\">
+<div class=\"float-left\">
 <span class=\"record_label\">" . _("Department") . "</span><br />
 {$this->_departments}
 </div>
@@ -201,14 +201,14 @@ class Staff {
 <span class=\"record_label\">" . _("Show First in Dept List?") . "</span><br />
 <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" size=\"2\" class=\"required_field\" value=\"" . $this->_staff_sort . "\" />
 </div>
-<br style=\"clear: both;\" /><br />
+<br class=\"clear-both\" /><br />
 <span class=\"record_label\">" . _("Telephone") . "</span><br />
 $tel_line
 <br /><br />
 <span class=\"record_label\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</span><br />
 <input type=\"text\" name=\"email\" id=\"email\" size=\"40\" class=\"required_field\" value=\"" . $this->_email . "\" />
 <br /><br />
-<div style=\"float: left;\">
+<div class=\"float-left\">
 <span class=\"record_label\">" . _("User Type") . "</span><br />
 {$this->_user_types}
 </div>
@@ -252,7 +252,7 @@ $headshot
             }
         }
 
-        echo "<input type=\"hidden\" name=\"ptags\" value=\"$this->_ptags\" /><br style=\"clear: both;\" /><p style=\"font-size: smaller\">Select which parts of SubjectsPlus this user may access.
+        echo "<input type=\"hidden\" name=\"ptags\" value=\"$this->_ptags\" /><br class=\"clear-both\" /><p style=\"font-size: smaller\">Select which parts of SubjectsPlus this user may access.
                 <br /><strong>records</strong> allows access to both the Record and Guide tabs.
                 <br /><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
@@ -263,7 +263,7 @@ $headshot
 ;
 
         if ($this->_staff_id != "") {
-            echo "<p style=\"\"><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
+            echo "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
         } else {
             echo "<input type=\"password\" name=\"password\" size=\"20\" class=\"required_field\" /><br />
 		<p style=\"font-size: smaller\">The password is stored as a hash in the database, but unless you have SSL travels clear text across the internet.</p>";

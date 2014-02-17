@@ -614,6 +614,10 @@ jQuery(window).load(function(){
 <fieldset class="ui-helper-reset">
 <label for="tab_title">Title</label>
 <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+               
+<label for="tab_external_link">Add Custom Url</label>
+<input type="text" name="tab_external_link" id="tab_external link" />
+               
 </fieldset>
 </form>
 </div>

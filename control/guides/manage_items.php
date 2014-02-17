@@ -145,8 +145,8 @@ if ($nocookies == "yes") {
 
     print "<div id=\"maincontent\">
 $response
-<div style=\"clear:both;float: left; width: 600px;\">
-	<br style=\"clear: both;\" />
+<div class=\"clearboth\"float: left; width: 600px;\">
+	<br class=\"clear-both\" />
 	$title_line
 	<div class=\"box no_overflow\">
         <div id=\"res_content\">

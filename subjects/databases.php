@@ -115,7 +115,7 @@ $newlist .= "</ul>\n";
 // Intro text
 
 $intro = "<p><img src=\"$IconPath/information.png\" border=\"0\" alt=\"more information icon\" /> " . _("Click for more information about a database.") . "</p>
-<br style=\"clear: both;\" />";
+<br class=\"clear-both\" />";
 
 
 // Intro text
@@ -126,7 +126,7 @@ if (isset($_POST["searchterm"])) {
   $intro .= "<p style=\"background-color: #eee; padding: .3em; border: 1px solid #ccc; width: 75%;\">Search results for <strong>$selected</strong></p><br />";
 }
 
-$intro .= "<br style=\"clear: both;\" />";
+$intro .= "<br class=\"clear-both\" />";
 
 // Create our table of databases object
 

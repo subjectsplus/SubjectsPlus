@@ -18,7 +18,7 @@ class BuildNav {
     $headshot = getHeadshot($_SESSION["email"], "smaller");
       
     print "
-	<div style=\"float: left;\" id=\"logo\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_small.png\"  border=\"0\" class=\"logo\" alt=\"SubjectsPlus\" /></a></div>
+	<div class=\"float-left\" id=\"logo\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_small.png\"  border=\"0\" class=\"logo\" alt=\"SubjectsPlus\" /></a></div>
    <div id=\"navcats\">
       <ul class=\"topnav\">";
 

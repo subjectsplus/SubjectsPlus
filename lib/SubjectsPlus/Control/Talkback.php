@@ -184,7 +184,7 @@ class Talkback {
       $is_live .= " checked=\"checked\"";
     }
     $is_live .= " /> " . _("No") . "
-<br style=\"clear: both;\" /><br />";
+<br class=\"clear-both\" /><br />";
 
 /////////////////////
 // tbtags

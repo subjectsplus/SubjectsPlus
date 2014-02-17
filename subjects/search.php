@@ -70,7 +70,7 @@ $newlist .= "</ul>\n";
 
 if (isset($_POST["searchterm"])) {
   $selected = scrubData($_POST["searchterm"]);
-  $intro .= "<p style=\"\">Search results for <strong>$selected</strong></p><br />";
+  $intro .= "<p  >Search results for <strong>$selected</strong></p><br />";
 
   // Create our table of databases object
 

@@ -99,7 +99,7 @@ print "
 <div class=\"feedback\">$feedback</div><br /><br />
 <form id=\"sources\" action=\"\" method=\"post\">
 <div id=\"savour\" style=\"clear: both;float:left; \">
-	<div id=\"save_zone\" style=\"\">
+	<div id=\"save_zone\"  >
 		<button class=\"button\" id=\"save_guide\" name=\"update_collections\" >" . _("SAVE CHANGES") . "</button>
 	</div>
 

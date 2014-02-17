@@ -374,7 +374,7 @@ $header .= "Content-Type: text/html; charset=iso-8859-1;\n\n\r\n";
 
 $message = "<html>\n<head>\n$css\n</head>\n<body>\n
 $results
-<br style=\"clear:both;\">\n
+<br class=\"clearboth\"\">\n
 <div id=\"footer\">This is an automatically generated email.  Please do not respond.  <strong>Email sent: " . date("l F j, Y, g:i a") . "</strong></div>\n
 </body>\n
 </html>\n";

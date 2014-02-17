@@ -49,7 +49,7 @@ $dir_pics = (isset($_GET['pics']) ? $_GET['pics'] : $dir_dest);
 
 $original_photo = "
 <div class=\"box no_overflow\" id=\"original_photo\">
-<p><img src=\"../../assets/images/video_thumbs/" . $video_id . "_medium.jpg\" class=\"staff_photo\" align=\"left\" style=\"\" />" . _("Current Thumbnail . . . boooring.") . "</p>
+<p><img src=\"../../assets/images/video_thumbs/" . $video_id . "_medium.jpg\" class=\"staff_photo\" align=\"left\"   />" . _("Current Thumbnail . . . boooring.") . "</p>
 </div>";
 
 

@@ -215,9 +215,19 @@ class Guide {
         $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
         $guide_string = $guideMe->display();
 
+        
+//////////////////////
+// Guide parent
+//////////////////////
+        
+        echo "<span class='record_label'>" ._("Guide Parent") . "</span><br />";
+        // To-do: Add dropdown to chose guide parent?
+        
+        
 /////////////////////
 // Is Live
 ////////////////////
+    
 
         $is_live = "<span class=\"record_label\">" . _("Publish Guide (publicly accessible)?") . "</span><br />
 <input name=\"active\" type=\"radio\" value=\"1\"";
@@ -229,7 +239,7 @@ class Guide {
             $is_live .= " checked=\"checked\"";
         }
         $is_live .= " /> " . _("No") . "
-<br style=\"clear: both;\" /><br />";
+<br class=\"clear-both\" /><br />";
 
         ///////////////////
         // Screen layout
@@ -815,7 +825,7 @@ echo "</div>
 			<img src=\"$IconPath/box.png\"  alt=\"" . _('Drop Content Here') . "\" /></i>
     		<span class=\"dropspot-text\">" . _('Drop Here') . "</span>
     		</div>
-    		<div class=\"portal-column sort-column portal-column-" . $i . "\" style=\"float: left;\"> " .
+    		<div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
 			$content . "<div><br /></div>"
 			. '</div></div>';
 

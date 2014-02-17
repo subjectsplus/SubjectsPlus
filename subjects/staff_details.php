@@ -80,7 +80,7 @@ $staffmem[3]<br />
 $info .= "</p>";
 
 if ($staffmem[7] != "") {
-    $info .= "<br style=\"clear: both;\" /><br />" . $staffmem[7];
+    $info .= "<br class=\"clear-both\" /><br />" . $staffmem[7];
 }
 
 
@@ -104,7 +104,7 @@ if ($staffmem[8] != "") {
     $colour1 = "odd";
     $colour2 = "even";
 
-    $subject_listing = "<p style=\"clear: both;\"><br /><strong>Subject Liaison for . . . </strong></p>
+    $subject_listing = "<p class=\"clear-both\"><br /><strong>Subject Liaison for . . . </strong></p>
 <div style=\"float: left; width: 47%\">";
 
     while ($mysubs = mysql_fetch_array($r)) {

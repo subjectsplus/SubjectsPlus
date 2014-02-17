@@ -66,7 +66,7 @@ print "
 	 </div>
 </div>
 </form>
-<div class=\"box no_overflow\" style=\"clear: both;\">
+<div class=\"box no_overflow\" class=\"clear-both\">
 <div id=\"results\"></div>
 </div>
 ";

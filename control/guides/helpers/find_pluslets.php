@@ -52,7 +52,7 @@ $content = "<div valign=\"top\" style=\"float: left; min-width: 230px;\">" . _("
 } else {
 
 while($myrow =  mysql_fetch_array($r)) {
-print "<div class=\"draggable clone\" style=\"z-index: 10\" id=\"pluslet-id-" . $myrow[0] . "\" style=\"\">";
+print "<div class=\"draggable clone\" style=\"z-index: 10\" id=\"pluslet-id-" . $myrow[0] . "\"  >";
 	if ($myrow["clone"] != 0) { print "c:"; }
 print $myrow[1] . "</div>";
 

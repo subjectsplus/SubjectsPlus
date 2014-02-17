@@ -64,7 +64,7 @@ $dir_pics = (isset($_GET['pics']) ? $_GET['pics'] : $dir_dest);
 
 $original_photo = "
 <div class=\"box no_overflow\" id=\"original_photo\">
-<p><img src=\"../../assets/users/_" . $truncated_email[0] . "/headshot.jpg\" class=\"staff_photo\" align=\"left\" style=\"\" />" . _("Current Picture . . . boooring.") . "</p>
+<p><img src=\"../../assets/users/_" . $truncated_email[0] . "/headshot.jpg\" class=\"staff_photo\" align=\"left\"   />" . _("Current Picture . . . boooring.") . "</p>
 </div>";
 
 

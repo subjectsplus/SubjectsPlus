@@ -97,7 +97,7 @@ $feedback = "";
 
 $submission_feedback = "
 <div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\" style=\"\">" . _("Thanks") . "</div></div>\n
+<div class=\"titlebar\"><div class=\"titlebar_text\"  >" . _("Thanks") . "</div></div>\n
 <div class=\"pluslet_body\">\n
 <p>" . _("Thank you for your feedback.  We will try to post a response within the next three business days.") . "</p>\n
 </div>\n
@@ -106,7 +106,7 @@ $submission_feedback = "
 
 $submission_failure_feedback = "
 <div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\" style=\"\">" . _("Oh dear.") . "</div></div>\n
+<div class=\"titlebar\"><div class=\"titlebar_text\"  >" . _("Oh dear.") . "</div></div>\n
 <div class=\"pluslet_body\">\n
 <p>" . _("There was a problem with your submission.  Please try again.") . "</p>
 <p>" . _("If you continue to get an error, please contact the <a href=\"mailto:$administrator_email\">administrator</a>") . "
@@ -295,7 +295,7 @@ if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 
 	$stk_message = "
 	<div class=\"pluslet\">\n
-	<div class=\"titlebar\"><div class=\"titlebar_text\" style=\"\">" ._("Hmm, That Was a Tricky Bit of Math") . "</div></div>\n
+	<div class=\"titlebar\"><div class=\"titlebar_text\"  >" ._("Hmm, That Was a Tricky Bit of Math") . "</div></div>\n
 	<div class=\"pluslet_body\">\n
 	<p><strong>" . _("Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . .") . "</strong></p>
 	</ul>\n

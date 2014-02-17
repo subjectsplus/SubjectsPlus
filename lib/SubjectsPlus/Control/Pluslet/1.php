@@ -183,7 +183,7 @@ class Pluslet_1 extends Pluslet {
     }
 
     public function createTOC() {
-        $toc = "<p style=\"clear:both; font-size: 10px; text-align: center;\">Table of Contents</p>";
+        $toc = "<p class=\"clearboth\" font-size: 10px; text-align: center;\">Table of Contents</p>";
         $toc = "";
         $source_string = "select distinct source, source.source_id
 		FROM title, restrictions, location, location_title, source, rank
@@ -218,7 +218,7 @@ class Pluslet_1 extends Pluslet {
             $row_count++;
         }
 
-        $toc .= "<br style=\"clear:both;\" />";
+        $toc .= "<br class=\"clearboth\"\" />";
         //$toc .= "<br />";
         return $toc;
     }

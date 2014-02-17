@@ -83,7 +83,7 @@ if (isset($_GET["browse"])) {
                     }
                 }
                 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$value2[0]\">$value2[2], $value2[1]</a></div> <div id=\"user-$value2[0]\" class=\"$row_colour striper\" style=\"float: left;\">$these_tags <button id=\"save_changes-$value2[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
+                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$value2[0]\">$value2[2], $value2[1]</a></div> <div id=\"user-$value2[0]\" class=\"$row_colour striper\" class=\"float-left\">$these_tags <button id=\"save_changes-$value2[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
 </div></div>";
                 $row_count++;
             }

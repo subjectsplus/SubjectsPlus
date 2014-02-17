@@ -416,7 +416,7 @@ public function buildLocation() {
  	<input type=\"text\" class=\"record_location check_url required_field\" name=\"location[]\" size=\"60\" value=\"{$this->_location}\" />$checkurl_icon<br />
  	<span class=\"smaller url_feedback\"></span>
  	<div class=\"$input_callnum_class\"><span class=\"record_label\">" . _("Call Number") . "</span><br /><input type=\"text\" value=\"{$this->_call_number}\" name=\"call_number[]\" size=\"20\" /></div>
- 	<br style=\"clear: both;\" />
+ 	<br class=\"clear-both\" />
  	<div style=\"float: left; margin-right: 1em;\"><span class=\"record_label\">" . _("Format") . "</span><br />
  	{$this->_formats}</div>
  	<div style=\"float: left; margin-right: 1em;\"><span class=\"record_label\">" . _("Access Restrictions") . "</span><br />
@@ -436,7 +436,7 @@ public function buildLocation() {
 
  		echo "
  		$a_z_string<br /></div>
- 		<div style=\"clear: both;\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
+ 		<div class=\"clear-both\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
 
  		if ($wysiwyg_desc == 1 && $this->_boxcount == 1) {
  			include ($CKPath);
@@ -454,7 +454,7 @@ public function buildLocation() {
     }
 
     echo "</div>
-    <div style=\"clear: both;\"><br /><span class=\"record_label\">" . _("Help Guide Location") . "</span>  <br /><input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" /></div>
+    <div class=\"clear-both\"><br /><span class=\"record_label\">" . _("Help Guide Location") . "</span>  <br /><input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" /></div>
     ";
  } else {
  	echo "<br /><br /><input type=\"hidden\" name=\"eres_display[]\" value=\"{$this->_az_display}\">

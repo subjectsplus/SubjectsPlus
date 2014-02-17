@@ -801,7 +801,7 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
     }
 
 
-    $staffer = "<p style=\"clear: both;\">";
+    $staffer = "<p class=\"clear-both\">";
     $staffer .= getHeadshot($email, $pic_size);
     $staffer .= "<strong>$full_name</strong><br />$myrow[2]<br />$tel_prefix$myrow[3]<br /><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p>";
   }

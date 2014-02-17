@@ -140,7 +140,7 @@ if ($postvar_username == "") {
 
 $success = "no";
 
-$introtext = "<p align=\"center\" style=\"clear: both;\" class=\"smaller\"><br />" . _("Please enter your <strong>login and password</strong> to proceed.") . "</p>";
+$introtext = "<p align=\"center\" class=\"clear-both\" class=\"smaller\"><br />" . _("Please enter your <strong>login and password</strong> to proceed.") . "</p>";
 
 $login_form = "<div align=\"center\">\n
 <form action=\"login.php\" method=\"post\" style=\"font-size: 1em;\">\n
