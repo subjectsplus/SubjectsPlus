@@ -81,7 +81,6 @@ function isCool($emailAdd="", $password="") {
 //set session variables
       session_start();
       session_regenerate_id();
-      session_start();
 
 // Create session vars for the basic types
       $_SESSION['checkit'] = md5($user[4]) . $salt;
@@ -1018,7 +1017,7 @@ function isInstalled()
  */
 function isUpdated()
 {
-    
+
 	global $hname;
 	global $uname;
 	global $pword;

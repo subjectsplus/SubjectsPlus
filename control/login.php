@@ -1,6 +1,6 @@
 <?php
 use SubjectsPlus\Control\DBConnector;
-session_start();
+
 /**
  *   @file login.php
  *   @brief Where you login--or not.
@@ -24,8 +24,8 @@ $debugger = "no";
 
 include("includes/functions.php");
 include("includes/autoloader.php");
-    
-    
+
+
 //added in order to redirect to proper page if config file doesn't exist
 if( !file_exists( "includes/config.php" ) || filesize( "includes/config.php" ) < 10 )
 {
@@ -77,20 +77,6 @@ if( !isset( $installCheck ) || $installCheck != 'no' )
 		$lstrURL = getControlURL();
 
 		header("location:{$lstrURL}install.php");
-		exit;
-	}
-}
-
-//added in order to redirect to proper page if SubjectsPlus is not updated to 2.0. Only check if $updateCheck variable doesn't exists and says no
-if( !isset( $updateCheck ) || $updateCheck != 'no' )
-{
-	$isUpdated = isUpdated();
-
-	if( !$isUpdated )
-	{
-		$lstrURL = getControlURL();
-
-		header("location:{$lstrURL}update.php");
 		exit;
 	}
 }
