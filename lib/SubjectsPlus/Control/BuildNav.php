@@ -15,117 +15,130 @@ class BuildNav {
     global $CpanelPath;
     global $subcat;
       
-    $headshot = getHeadshot($_SESSION["email"], "smaller");
+    $headshot = getHeadshot($_SESSION["email"], "smaller", "");
+    $headshot_lg = getHeadshot($_SESSION["email"], "", "");
       
     print "
-	<div class=\"float-left\" id=\"logo\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_small.png\"  border=\"0\" class=\"logo\" alt=\"SubjectsPlus\" /></a></div>
-   <div id=\"navcats\">
-      <ul class=\"topnav\">";
-
-    // Records tab, Guides Tab
+      <ul id=\"topnav\">
+      <li><a href=\"$CpanelPath" . "index.php\">SP</a></li>
+      <li class=\"nohover\"><a class=\"profile\" href=\"\">$headshot</a>
+      <div>$headshot_lg
+      <p>Hi Andrew.</p>
+      <br style=\"clear: both\" />
+      <ul>
+      <li><a href=\"\">Edit your Profile</a></li>
+      <li><a href=\"$CpanelPath" . "logout.php\">Log Out</a></li>
+      </ul>
+      </div>
+      </li>
+      ";
+    ///////////////  
+    // RECORDS
+    // records and guides use same authentication credential
+    ///////////////
     if (isset($_SESSION["records"]) && $_SESSION["records"] == 1) {
 
-      // Actually, someone with the NOFUN permission can't view records
-      if (!isset($_SESSION["NOFUN"])) {
         print "
-	<li class=\"zoom\"><a href=\"$CpanelPath" . "records/\"";
+	     <li";
         if ($subcat == "records") {
           print " class=\"selected\"";
         }
-        print ">" . _("Records") . "</a>
-         <ul class=\"subnav\">
+        print "><a href=\"$CpanelPath" . "records/\">" . _("Records") . "</a>
+        <div>
+         <ul>
             <li><a href=\"$CpanelPath" . "records/record.php\">" . _("New Record") . "</a></li>
             <li><a href=\"$CpanelPath" . "records/index.php\">" . _("Browse Items") . "</a></li>
          </ul>
-		</li>";
-      }
+		  </div></li>";
 
       ///////////////
       // GUIDES
       //////////////
-      print "<li class=\"zoom\"><a href=\"$CpanelPath" . "guides/\"";
+      print "<li";
       if ($subcat == "guides") {
         print " class=\"selected\"";
       }
-      print ">" . _("Guides") . "</a>
-   <ul class=\"subnav\">
-      <li><a href=\"$CpanelPath" . "guides/metadata.php\">" . _("New Guide") . "</a></li>
-      <li><a href=\"$CpanelPath" . "guides/\">" . _("Browse Guides") . "</a></li>
-      <li><a href=\"$CpanelPath" . "guides/manage.php\">" . _("Manage Files") . "</a></li>
-      <li><a href=\"$CpanelPath" . "guides/delish_url.php\">" . _("Delicious Builder") . "</a></li>
-      <li><a href=\"$CpanelPath" . "guides/link_checker.php\">" . _("Link Checker") . "</a></li>
-   </ul>
-</li>";
+
+      print "><a href=\"$CpanelPath" . "guides/\">" . _("Guides") . "</a>
+      <div>
+       <ul>
+          <li><a href=\"$CpanelPath" . "guides/metadata.php\">" . _("New Guide") . "</a></li>
+          <li><a href=\"$CpanelPath" . "guides/\">" . _("Browse Guides") . "</a></li>
+          <li><a href=\"$CpanelPath" . "guides/manage.php\">" . _("Manage Files") . "</a></li>
+          <!--<li><a href=\"$CpanelPath" . "guides/delish_url.php\">" . _("Delicious Builder") . "</a></li>-->
+          <li><a href=\"$CpanelPath" . "guides/link_checker.php\">" . _("Link Checker") . "</a></li>
+       </ul>
+      </div></li>";
     }
 
-    // FAQ tab
+    //////////
+    // FAQs
+    //////////
     if (isset($_SESSION["faq"]) && $_SESSION["faq"] == 1) {
       print "
-            <li class=\"zoom\"><a href=\"$CpanelPath" . "faq/\"";
+        <li";
       if ($subcat == "faq") {
         print " class=\"selected\"";
       }
-      print ">FAQs</a>
-                    <ul class=\"subnav\">
-                            <li><a href=\"$CpanelPath" . "faq/faq.php\">" . _("New FAQ") . "</a></li>
-                            <li><a href=\"$CpanelPath" . "faq/browse_faq.php?type=subject\">" . _("Browse by Subject") . "</a></li>
-                            <li><a href=\"$CpanelPath" . "faq/browse_faq.php?type=holding\">" . _("Browse by Collection") . "</a></li>
-                    </ul>
-
-            </li>";
+      print"><a href=\"$CpanelPath" . "faq/\">FAQs</a>
+      <div>
+        <ul>
+          <li><a href=\"$CpanelPath" . "faq/faq.php\">" . _("New FAQ") . "</a></li>
+          <li><a href=\"$CpanelPath" . "faq/browse_faq.php?type=subject\">" . _("Browse by Subject") . "</a></li>
+          <li><a href=\"$CpanelPath" . "faq/browse_faq.php?type=holding\">" . _("Browse by Collection") . "</a></li>
+        </ul>
+      </div>
+      </li>";
     }
 
     // TalkBack tab
     if (isset($_SESSION["talkback"]) && $_SESSION["talkback"] == 1) {
       print "
-	<li class=\"zoom\"><a href=\"$CpanelPath" . "talkback/\"";
+	<li";
       if ($subcat == "talkback") {
         print " class=\"selected\"";
       }
-      print ">TalkBack</a></li>";
+
+    print "><a href=\"$CpanelPath" . "talkback/\">TalkBack</a></li>";
     }
 
     // Videos tab
     if (isset($_SESSION["videos"]) && $_SESSION["videos"] == 1) {
       print "
-            <li class=\"zoom\"><a href=\"$CpanelPath" . "videos/\"";
+            <li><a href=\"$CpanelPath" . "videos/\"";
       if ($subcat == "videos") {
         print " class=\"selected\"";
       }
       print ">Videos</a>
-                    <ul class=\"subnav\">
-                      <li><a href=\"$CpanelPath" . "videos/\">" . _("List Current") . "</a></li>
-                      <li><a href=\"$CpanelPath" . "videos/ingest.php\">" . _("Find/Ingest") . "</a></li>
-                      <li><a href=\"$CpanelPath" . "videos/video.php\">" . _("Manually Enter") . "</a></li>
-                    </ul>
-            </li>";
+      <div>
+        <ul>
+          <li><a href=\"$CpanelPath" . "videos/\">" . _("List Current") . "</a></li>
+          <li><a href=\"$CpanelPath" . "videos/ingest.php\">" . _("Find/Ingest") . "</a></li>
+          <li><a href=\"$CpanelPath" . "videos/video.php\">" . _("Manually Enter") . "</a></li>
+        </ul>
+       </div></li>";
     }
     // Admin tab
     if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
       print "
-	<li class=\"zoom\"><a href=\"$CpanelPath" . "admin/\"";
+	<li";
       if ($subcat == "admin") {
         print " class=\"selected\"";
       }
-      print ">" . _("Admin") . "</a>
-		<ul class=\"subnav\">
-			<li><a href=\"$CpanelPath" . "admin/user.php\">" . _("Add New User") . "</a></li>
-                    <li><a href=\"$CpanelPath" . "admin/user.php?browse\">" . _("Manage Users") . "</a></li>
-			<li><a href=\"$CpanelPath" . "admin/manage_guides.php\">" . _("Manage Guides") . "</a></li>
-			<li><a href=\"$CpanelPath" . "admin/departments.php\">" . _("Departments") . "</a></li>
-			<li><a href=\"$CpanelPath" . "admin/sources.php\">" . _("Sources") . "</a></li>
-                        <li><a href=\"$CpanelPath" . "admin/faq_collections.php\">" . _("FAQ Collections") . "</a></li>
-			<li><a href=\"$CpanelPath" . "edit-config.php\">" . _("Config Site") . "</a></li>
-		</ul>
-
-	</li>";
+    print "><a href=\"$CpanelPath" . "admin/\">" . _("Admin") . "</a>
+      <div>
+    		<ul>
+    			<li><a href=\"$CpanelPath" . "admin/user.php\">" . _("Add New User") . "</a></li>
+          <li><a href=\"$CpanelPath" . "admin/user.php?browse\">" . _("Manage Users") . "</a></li>
+    			<li><a href=\"$CpanelPath" . "admin/manage_guides.php\">" . _("Manage Guides") . "</a></li>
+    			<li><a href=\"$CpanelPath" . "admin/departments.php\">" . _("Departments") . "</a></li>
+    			<li><a href=\"$CpanelPath" . "admin/sources.php\">" . _("Sources") . "</a></li>
+          <li><a href=\"$CpanelPath" . "admin/faq_collections.php\">" . _("FAQ Collections") . "</a></li>
+    			<li><a href=\"$CpanelPath" . "edit-config.php\">" . _("Config Site") . "</a></li>
+    		</ul>
+      </div>
+	   </li>";
     }
-
-
-    print "</ul>
-		</div>
-      <div class=\"right-nav-container\">
-      <div id=\"supersearch\">";
 
     // determine our default search/search box text
     switch ($subcat) {
@@ -154,29 +167,16 @@ class BuildNav {
         $target_url = "guide.php?subject_id=";
         break;
     }
-    // don't show to the NOFUN crowd
-    if (!isset($_SESSION["NOFUN"])) {
-      $input_box = new CompleteMe("quick_search", $CpanelPath . "search.php", $target_url, $input_text, $subcat, "", "private");
-      $input_box->displayBox();
-    }
-    print "</div>
-      <div id=\"user\">
-      <ul class=\"topnav\">
-      <li class=\"zoom\"><a>";
 
-      print $headshot;
-    print _("Hi") . ", " . $_SESSION["fname"];
+    print "
+    <li class=\"nohover\">
+      <form class=\"pure-form\" id=\"sp_admin_search\">";
+        $input_box = new CompleteMe("sp_search", $CpanelPath . "search.php", $target_url, $input_text, $subcat, "", "private");
+        $input_box->displayBox();
+      print "</form>
+    </li>";
 
-    print "</a>
-         <ul class=\"subnav\">
-            <li><a href=\"#\">" . _("View My Profile") . "</a></li>
-            <li><a href=\"$CpanelPath" . "logout.php\">" . _("Logout") . "</a></li>
-         </ul>
-      </li>
-      </ul>
-       </div>
-      </div>
-";
+
   }
 
 }

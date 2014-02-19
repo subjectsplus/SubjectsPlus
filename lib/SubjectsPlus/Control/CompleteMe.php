@@ -19,7 +19,7 @@ class CompleteMe {
   public $target_url;
   public $default_text;
 
-  public function __construct($input_id, $action, $target_url, $default_text = "Start typing ...", $collection = "guides", $box_size="", $display="public") {
+  public function __construct($input_id, $action, $target_url, $default_text = "Search", $collection = "guides", $box_size="", $display="public") {
 
     self::$_counter++;
     $this->num = self::$_counter;
@@ -46,30 +46,19 @@ class CompleteMe {
     }
     echo "
    <div class=\"autoC\">
-  		<form action=\"$this->action\" method=\"post\">
- 		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" class=\"searchy\" /><input type=\"submit\" value=\"" . _("Go") . "\"  class=\"button\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
+  		<form action=\"$this->action\" method=\"post\" class=\"pure-form\" id=\"sp_admin_search\">
+ 		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" placeholder=\"" . $this->default_text . "\" /><input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
   		</form>   
 	</div>";
 
     // now print out some variables for the js
     echo "<script type=\"text/javascript\">
 	var startURL = '$this->target_url';
-    
-	var defaultSearchText_" . $this->num . " = '$this->default_text';
 
 	jQuery(document).ready(function(){
 
 	// Caching 
 	var autoC = jQuery('#" . $this->input_id . "');
-	
-	// Defining a placeholder text; first check if the text is already set
-	// then fallback to default
-	if (window.defaultSearchText_" . $this->num . " == null) {
-		var defaultSearchText_" . $this->num . " = 'Start typing . . .';
-	} else {
-		var defaultSearchText_" . $this->num . " = window.defaultSearchText_" . $this->num . ";
-	}
-
 	
 	
 	// Using jQuery UI's autocomplete widget:
@@ -84,7 +73,7 @@ class CompleteMe {
 			location.href = startURL + ui.item.value;
 		}
 	});
-        autoC.defaultText(defaultSearchText_" . $this->num . ");
+        //autoC.defaultText(defaultSearchText_" . $this->num . ");
 	});
 	</script>";
   }

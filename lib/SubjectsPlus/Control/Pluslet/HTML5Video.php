@@ -22,7 +22,7 @@ class Pluslet_HTML5Video extends Pluslet {
 
   	if($this->_extra == "")
   	{
-  		$this->_extra = [];
+  		$this->_extra = array();
   		$this->_extra['youtube'] = "";
   		$this->_extra['vimeo'] = "";
   		$this->_extra['mp4'] = "";
