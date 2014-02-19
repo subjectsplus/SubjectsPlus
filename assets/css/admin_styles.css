@@ -4,8 +4,6 @@
     margin: 0;
 }
 
-
-
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
     margin: 0;
     padding: 0;
@@ -63,11 +61,11 @@ a img {
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: .9em;
-    text-align: center;
+    text-align: left;
     line-height: 1.5em;
-    color: #000;
+    color: #333;
     background: #e3e1d9 url(../../assets/images/background.jpg) no-repeat center top;;
 
 }
@@ -93,57 +91,134 @@ a:hover {
     color: #C03957;
 }
 
+
+.wrapper {
+margin: 0 auto;
+text-align: left;
+max-width: 1200px;
+}
+
 /* Header and nav/subnav stuff */
-#header {
-    background: #232323;
-    margin-top: 0;
-    padding-top: 0;
-    height: 45px;
-    border-bottom: 4px solid #232323;
-    border-top: 4px solid #232323;
 
-
-}
-
-#header a, #header a:link, #header a:visited {
-    font-family: sans-serif;
-    color:#EFEFEF;
-    text-decoration: none;
-    display: block;
-    padding: 0 10px;
-    z-index: 100;
-    font-weight:300;
-    font-size:1.5em;
-    white-space: nowrap;
-}
-
-#header a:hover, #header a.selected {
-    color: #C03957;
-    color: #DF6F89;
-
-
+header {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #B7B7B7;
+  height: 2.8em;
+  line-height: 2.8em;
 }
 
 
-.zoom a {
-    
-    width: 100%;
-}
-
-.zoom img {
-    
+#topnav {
+    float: left;
+    list-style: none outside none;
     margin: 0;
     padding: 0;
-    margin-right: 5px;
-    border: 3px solid #efefef;
-    top: -5px;
+    vertical-align: middle;
+}
+
+#topnav li {
+  display: inline-block;
+}
+
+#topnav li a {
+
+    color: #777777;
+    text-decoration: none;
+    padding: .5em 1em;
+    text-align: left;
+    font-size: 1.2em;
+    color: #333;
 
 }
 
-#header li.zoom a {
-    cursor: pointer;
+#topnav li a.profile {padding-right: 0px;}
+
+#topnav li a.selected, #topnav li:hover, #topnav li.selected {
+   background-color: #E488B6;
+   background-color: #858585;
     
 }
+
+#topnav li:hover {
+   background-color: #E488B6;
+
+    
+}
+
+#topnav li.selected a, #topnav li a:hover {
+  color: #FFFFFF !important;
+}
+
+#topnav li.nohover {
+  background-color: transparent;
+}
+
+#topnav > li > div {
+    position: absolute;
+    display: block;
+    
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;/**/
+    -webkit-transition: all .3s ease .15s;
+    -moz-transition: all .3s ease .15s;
+    -o-transition: all .3s ease .15s;
+    -ms-transition: all .3s ease .15s;
+    transition: all .3s ease .15s;
+
+    background: none repeat scroll 0 0 #fff;
+
+    border-radius: 5px;
+    padding: 0px 0;
+    position: absolute;
+    border: 1px solid #333;
+    top: 60px;
+    min-width: 200px;
+    max-width: 800px;
+    z-index: 1000;
+
+}
+
+#topnav > li:hover > div {
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+}
+
+#topnav > li > div ul {
+  padding: 0;
+  margin: 2px;
+}
+#topnav > li > div ul li {
+  display: block;
+  border-bottom: 1px dashed #ccc;
+}
+
+#topnav > li > div ul li a, #topnav > li.selected > div ul li a {
+  color: #333 !important;
+}
+
+#topnav > li > div ul li:hover {
+  background-color: #fff;
+  
+}
+
+#topnav > li > div ul li a:hover {
+  font-weight: bold;
+}
+
+#topnav > li > div ul li:last-child, .last-item {border: none !important;}
+
+#sp_admin_search input {
+  line-height: 2em;
+  font-size: 1em;
+  padding: .3em .4em;
+  margin-left: .5em;
+}
+
+/* old stuff? */
+
 .logo {
     margin-top: 8px;
     margin-left: 30px;
@@ -170,77 +245,6 @@ a:hover {
 
 }
 
-
-/* from soh tanaka: http://www.noupe.com/tutorial/drop-down-menu-jquery-css.html */
-
-ul.topnav {
-    list-style: none;
-    padding: 0 20px;
-    margin: 0;
-    float: left;
-
-
-
-}
-ul.topnav li {
-    float: left;
-    margin: 0;
-    padding: 0 15px 0 0;
-    position: relative; /*--Declare X and Y axis base for sub navigation--*/
-    height: 35px;
-
-}
-ul.topnav li a{
-    padding: 10px 5px;
-    color: #fff;
-    display: block;
-    text-decoration: none;
-    float: left;
-    text-align: left;
-    height: 30px;
-
-}
-
-
-ul.topnav li span { /*--Drop down trigger styles--*/
-    width: 17px;
-    height: 35px;
-    float: left;
-    /* background: url(../images/admin/click_me.png) no-repeat center top; */
-
-}
-ul.topnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
-ul.topnav li ul.subnav {
-    list-style: none;
-    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
-    left: 0; top: 35px;
-    background: #333;
-    margin: 0; padding: 0;
-    display: none;
-    float: left;
-    width: 235px;
- 
-    z-index: 100;
-
-}
-ul.topnav li ul.subnav li{
-    margin: 0; padding: 0;
-    /* border-top: 1px solid #252525;
-    border-bottom: 1px solid #444; */
-    clear: both;
-    width: 200px;
-
-}
-html ul.topnav li ul.subnav li a {
-    float: left;
-    width: 180px;
-    background: #333;
-    padding-left: 20px;margin-top: 5px;
-}
-
-html ul.topnav li ul.subnav li a:last {
-    padding: 10px; background-color: red;
-}
 
 #supersearch {
     float: left;
@@ -613,24 +617,6 @@ html>body #res_content li { height: 1.5em; line-height: 1.2em; }
 }
 
 /* Form input */
-
-div.box input {margin-right: 1em; }
-
-div.autoC input.searchy{
-    border: 1px solid #ccc;
-    font-size: 14px;
-    background-color: #F6E3E7;
-    background-color: #efefef;
-    background-image: url(../../assets/images/icons/search_box_bg.png);
-    background-repeat:no-repeat;
-    background-position: 3px 3px;
-    padding: 2px 0 2px 20px;
-}
-
-div.autoC input:hover {
-    background-color: #ccc;
-}
-
 
 .button {
     position: relative;
