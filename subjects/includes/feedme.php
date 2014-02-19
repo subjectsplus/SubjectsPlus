@@ -5,9 +5,14 @@
  *   @brief Decide what to do with an RSS-like request (could be flickr, delicious, rss)
  *
  *   @author adarby
- *   @date 
+ *   @date
  *   @todo
  */
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+include("../../control/includes/autoloader.php");
+
+use SubjectsPlus\Control\PGFeed;
 
 $source = $_POST["feed"];
 // tweak the source if it's a delicious feed
@@ -24,8 +29,6 @@ if ($_POST["count"]) {
 
 $show_desc = $_POST["show_desc"];
 $show_feed = $_POST["show_feed"];
-
-include("../../control/includes/classes/PGFeed.php");
 
 //print "show feed = $show_feed; count = $count; show desc = $show_desc";
 $p = new PGFeed;

@@ -25,9 +25,9 @@ foreach ($items as $i) {
 
 // displays linked thumbnails from a Flickr feed
 foreach ($items as $i) {
-  echo "<a href=\"" . $item['link'] . "\"><img src=\"" . 
-        $item["thumbnailURL"] . "\" height=\"" . 
-        $item['thumbnailHeight'] . "\" width=\"" . 
+  echo "<a href=\"" . $item['link'] . "\"><img src=\"" .
+        $item["thumbnailURL"] . "\" height=\"" .
+        $item['thumbnailHeight'] . "\" width=\"" .
         $item['thumbnailWidth'] . "\" /></a><br />";
 }
 
@@ -89,6 +89,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+namespace SubjectsPlus\Control;
 
 class PGFeed {
 
@@ -143,7 +144,7 @@ class PGFeed {
   private $isInMediaCredit;
 
   private function checkSource($source) {
-    if (XMLReader::open($source)) {
+    if (\XMLReader::open($source)) {
       return true;
     } else {
       throw new Exception($this->errorMessage);
@@ -160,23 +161,23 @@ class PGFeed {
   public function stripMarkup() {
   	$this->strip = 1;
   }
-  
+
   public function setReturns($returns) {
   	$this->returns = $returns;
   }
- 
+
   public function reportErrors() {
   	$this->report = 1;
   }
-  
+
   public function setCacheTime($cache) {
   	$this->cache = $cache;
   }
-  
+
   public function dontCache() {
   	$this->cache = NULL;
   }
-  
+
   public function setErrorMessage($message) {
     $this->errorMessage = $message;
   }
@@ -187,7 +188,7 @@ class PGFeed {
     }
     $localfile = "pgcache/" . urlencode($source);
     $feedxml = file_get_contents($source);
-    
+
     $fp = fopen($localfile,"w");
     fwrite($fp, $feedxml);
     fclose($fp);
@@ -196,11 +197,11 @@ class PGFeed {
   public function getChannel() {
     return $this->channel;
   }
-  
+
   public function getItems() {
     return $this->items;
   }
-  
+
   public function dump() {
     print "<pre>";
     print_r($this->channel);
@@ -247,7 +248,7 @@ class PGFeed {
     $this->itemNumber = 0;
     $this->errorMessage = "I'm afraid I can't do that, Dave";
   }
-  
+
   public function parse($source) {
 
     if (preg_match('/flickr/',$source)) {
@@ -270,10 +271,10 @@ class PGFeed {
     $itemLinks = -1;
     $itemCategories = -1;
 
-    $reader = new XMLReader();
+    $reader = new \XMLReader();
 
     $cachedCopy = "pgcache/" . urlencode($source);
-    
+
     if (file_exists($cachedCopy)) {
       $cacheTime = filemtime($cachedCopy);
       $now = time();
@@ -298,8 +299,8 @@ class PGFeed {
       $cachedContents = file_get_contents($cachedCopy);
       $reader->XML($cachedContents);
     }
-    
-  
+
+
     while ($reader->read()) {
       $name = $reader->name;
 
@@ -312,8 +313,8 @@ class PGFeed {
 	$reader->read();
 	$this->channel["$name"] = $reader->value;
       }
-      
-      // RSS channel/cloud 
+
+      // RSS channel/cloud
       else if ($name == "cloud" && $reader->nodeType == 1 && !($isAtom)) {
 	foreach ($this->cloudAttributes as $att) {
 	  if ($reader->moveToAttribute("$att")) {
@@ -326,7 +327,7 @@ class PGFeed {
       else if ($name == "image" && $reader->nodeType == 1 && !($isAtom)) {
 	$isInImage = 1;
       }
-      
+
       else if ($name == "image" && $reader->nodeType == 15 && !($isAtom)) {
 	$isInImage = 0;
       }
@@ -357,7 +358,7 @@ class PGFeed {
 	$itemNumber++;
        	$item = array();
       }
-      
+
       // RSS children of item (except description & enclosure)
       else if (in_array("$name",$this->itemElements) && $reader->nodeType == 1 && $isInItem && !($isAtom)) {
 	$reader->read();
@@ -390,7 +391,7 @@ class PGFeed {
 	  }
 	}
       }
-      
+
       // RSS item end tag
       else if ($name == "item" && $reader->nodeType == 15 && !($isAtom)) {
 	$isInItem = 0;
@@ -517,7 +518,7 @@ class PGFeed {
 	  $this->channel["title"] = $reader->value;
 	}
       }
-      
+
       // Atom feed link
       else if ($name == "link" && $reader->nodeType == 1 && !($isInItem) && $isAtom) {
 	$feedLinks++;
@@ -536,7 +537,7 @@ class PGFeed {
 	$reader->read();
 	$this->channel["$name"] = $reader->value;
       }
-      
+
       // Atom author (feed and entry)
       else if ($name == "author" && $reader->nodeType == 1 && $isAtom) {
 	$isInAuthor = 1;
@@ -600,7 +601,7 @@ class PGFeed {
 	$authors = array();
       }
 
-      
+
       // Atom children of entry (only the simple ones)
       else if (in_array("$name",$this->entryElements) && $reader->nodeType == 1 && $isInItem && $isAtom) {
 	$reader->read();
@@ -726,7 +727,7 @@ class PGFeed {
       $reader->close;
     }
   }
-  
+
 }
 
 ?>

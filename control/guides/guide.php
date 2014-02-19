@@ -153,8 +153,6 @@ $all_boxes = "
 <ul id=\"box_options\">
 <li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
 
-/*
-
  foreach( $pluslets_activated as $lstrPluslet )
 {
 	if( file_exists( dirname(dirname(__DIR__)) . "/lib/SubjectsPlus/Control/Pluslet/$lstrPluslet.php" ) )
@@ -170,9 +168,7 @@ $all_boxes = "
 		}
 	}
 }
-*/
 
-    
 // Now get Special ones
 // make sure:  a) there are some linked resources (to show All Items by Source)
 
@@ -614,10 +610,10 @@ jQuery(window).load(function(){
 <fieldset class="ui-helper-reset">
 <label for="tab_title">Title</label>
 <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
-               
+
 <label for="tab_external_link">Add Custom Url</label>
 <input type="text" name="tab_external_link" id="tab_external link" />
-               
+
 </fieldset>
 </form>
 </div>

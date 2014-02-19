@@ -57,7 +57,7 @@ class Pluslet {
             $this->_body = $plusletArray[0]["body"];
             $this->_clone = $plusletArray[0]["clone"];
             $this->_type = $plusletArray[0]["type"];
-            $this->_extra = json_decode($plusletArray[0]["extra"], true);
+        	$this->_extra = $plusletArray[0]["extra"];
         }
 
 

@@ -40,6 +40,11 @@ class Pluslet_HTML5Video extends Pluslet {
 
   protected function onViewOutput()
   {
+	if ($this->_extra != "")
+	{
+		$this->_extra = json_decode( $this->_extra, true );
+	}
+
   	$this->_body = " <style>
         .html5_video input {
 
