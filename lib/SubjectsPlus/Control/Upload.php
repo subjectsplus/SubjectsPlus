@@ -28,6 +28,8 @@
 // +------------------------------------------------------------------------+
 //
 
+namespace SubjectsPlus\Control;
+
 /**
  * Class upload
  *
@@ -848,7 +850,7 @@ class upload {
     var $mime_check;
 
     /**
-     * Set this variable to false in the init() function if you don't want to check the MIME 
+     * Set this variable to false in the init() function if you don't want to check the MIME
      * with Fileinfo PECL extension. On some systems, Fileinfo is known to be buggy, and you
      * may want to deactivate it in the class code directly.
      *
@@ -865,7 +867,7 @@ class upload {
     var $mime_fileinfo;
 
     /**
-     * Set this variable to false in the init() function if you don't want to check the MIME 
+     * Set this variable to false in the init() function if you don't want to check the MIME
      * with UNIX file() command
      *
      * This variable is set to true by default for security reason
@@ -876,7 +878,7 @@ class upload {
     var $mime_file;
 
     /**
-     * Set this variable to false in the init() function if you don't want to check the MIME 
+     * Set this variable to false in the init() function if you don't want to check the MIME
      * with the magic.mime file
      *
      * The function mime_content_type() will be deprecated,
@@ -890,7 +892,7 @@ class upload {
     var $mime_magic;
 
     /**
-     * Set this variable to false in the init() function if you don't want to check the MIME 
+     * Set this variable to false in the init() function if you don't want to check the MIME
      * with getimagesize()
      *
      * The class tries to get a MIME type from getimagesize()
@@ -1422,7 +1424,7 @@ class upload {
      * @var integer
      */
     var $image_unsharp_amount;
- 
+
     /**
      * Sets the unsharp mask radius
      *
@@ -1436,7 +1438,7 @@ class upload {
      * @var integer
      */
     var $image_unsharp_radius;
- 
+
     /**
      * Sets the unsharp mask threshold
      *
@@ -1982,7 +1984,7 @@ class upload {
     var $image_watermark_no_zoom_in;
 
     /**
-     * Prevents the watermark to be resized down if it is bigger than the image 
+     * Prevents the watermark to be resized down if it is bigger than the image
      *
      * If the watermark if bigger than the destination image, taking in account the desired watermark position
      * then it will be resized down to fit in the image (minus the {@link image_watermark_x} or {@link image_watermark_y} values)
@@ -1991,7 +1993,7 @@ class upload {
      * set {@link image_watermark_no_zoom_in} and {@link image_watermark_no_zoom_out} to true
      * If you want your watermark to be resized up or doan to fill in the image better, then
      * set {@link image_watermark_no_zoom_in} and {@link image_watermark_no_zoom_out} to false
-     *     
+     *
      * Default value is false (so the watermark may be shrinked to fit in the image)
      *
      * @access public
@@ -4004,66 +4006,66 @@ class upload {
                     // unsharp mask
                     if ($gd_version >= 2 && $this->image_unsharp && is_numeric($this->image_unsharp_amount) && is_numeric($this->image_unsharp_radius) && is_numeric($this->image_unsharp_threshold)) {
                         // Unsharp Mask for PHP - version 2.1.1
-                        // Unsharp mask algorithm by Torstein Hønsi 2003-07. 
+                        // Unsharp mask algorithm by Torstein Hønsi 2003-07.
                         // Used with permission
                         // Modified to support alpha transparency
-                        if ($this->image_unsharp_amount > 500)    $this->image_unsharp_amount = 500; 
-                        $this->image_unsharp_amount = $this->image_unsharp_amount * 0.016; 
-                        if ($this->image_unsharp_radius > 50)    $this->image_unsharp_radius = 50; 
-                        $this->image_unsharp_radius = $this->image_unsharp_radius * 2; 
-                        if ($this->image_unsharp_threshold > 255)    $this->image_unsharp_threshold = 255; 
+                        if ($this->image_unsharp_amount > 500)    $this->image_unsharp_amount = 500;
+                        $this->image_unsharp_amount = $this->image_unsharp_amount * 0.016;
+                        if ($this->image_unsharp_radius > 50)    $this->image_unsharp_radius = 50;
+                        $this->image_unsharp_radius = $this->image_unsharp_radius * 2;
+                        if ($this->image_unsharp_threshold > 255)    $this->image_unsharp_threshold = 255;
                         $this->image_unsharp_radius = abs(round($this->image_unsharp_radius));
-                        if ($this->image_unsharp_radius != 0) {       
-                            $this->image_dst_x = imagesx($image_dst); $this->image_dst_y = imagesy($image_dst); 
-                            $canvas = $this->imagecreatenew($this->image_dst_x, $this->image_dst_y, false, true); 
-                            $blur = $this->imagecreatenew($this->image_dst_x, $this->image_dst_y, false, true); 
-                            if (function_exists('imageconvolution')) { // PHP >= 5.1  
-                                $matrix = array(array( 1, 2, 1 ), array( 2, 4, 2 ), array( 1, 2, 1 ));  
-                                imagecopy($blur, $image_dst, 0, 0, 0, 0, $this->image_dst_x, $this->image_dst_y); 
-                                imageconvolution($blur, $matrix, 16, 0);  
-                            } else {  
-                                for ($i = 0; $i < $this->image_unsharp_radius; $i++) { 
-                                    imagecopy($blur, $image_dst, 0, 0, 1, 0, $this->image_dst_x - 1, $this->image_dst_y); // left 
-                                    $this->imagecopymergealpha($blur, $image_dst, 1, 0, 0, 0, $this->image_dst_x, $this->image_dst_y, 50); // right 
-                                    $this->imagecopymergealpha($blur, $image_dst, 0, 0, 0, 0, $this->image_dst_x, $this->image_dst_y, 50); // center 
-                                    imagecopy($canvas, $blur, 0, 0, 0, 0, $this->image_dst_x, $this->image_dst_y); 
-                                    $this->imagecopymergealpha($blur, $canvas, 0, 0, 0, 1, $this->image_dst_x, $this->image_dst_y - 1, 33.33333 ); // up 
-                                    $this->imagecopymergealpha($blur, $canvas, 0, 1, 0, 0, $this->image_dst_x, $this->image_dst_y, 25); // down 
-                                } 
-                            } 
+                        if ($this->image_unsharp_radius != 0) {
+                            $this->image_dst_x = imagesx($image_dst); $this->image_dst_y = imagesy($image_dst);
+                            $canvas = $this->imagecreatenew($this->image_dst_x, $this->image_dst_y, false, true);
+                            $blur = $this->imagecreatenew($this->image_dst_x, $this->image_dst_y, false, true);
+                            if (function_exists('imageconvolution')) { // PHP >= 5.1
+                                $matrix = array(array( 1, 2, 1 ), array( 2, 4, 2 ), array( 1, 2, 1 ));
+                                imagecopy($blur, $image_dst, 0, 0, 0, 0, $this->image_dst_x, $this->image_dst_y);
+                                imageconvolution($blur, $matrix, 16, 0);
+                            } else {
+                                for ($i = 0; $i < $this->image_unsharp_radius; $i++) {
+                                    imagecopy($blur, $image_dst, 0, 0, 1, 0, $this->image_dst_x - 1, $this->image_dst_y); // left
+                                    $this->imagecopymergealpha($blur, $image_dst, 1, 0, 0, 0, $this->image_dst_x, $this->image_dst_y, 50); // right
+                                    $this->imagecopymergealpha($blur, $image_dst, 0, 0, 0, 0, $this->image_dst_x, $this->image_dst_y, 50); // center
+                                    imagecopy($canvas, $blur, 0, 0, 0, 0, $this->image_dst_x, $this->image_dst_y);
+                                    $this->imagecopymergealpha($blur, $canvas, 0, 0, 0, 1, $this->image_dst_x, $this->image_dst_y - 1, 33.33333 ); // up
+                                    $this->imagecopymergealpha($blur, $canvas, 0, 1, 0, 0, $this->image_dst_x, $this->image_dst_y, 25); // down
+                                }
+                            }
                             $p_new = array();
-                            if($this->image_unsharp_threshold>0) { 
-                                for ($x = 0; $x < $this->image_dst_x-1; $x++) { 
+                            if($this->image_unsharp_threshold>0) {
+                                for ($x = 0; $x < $this->image_dst_x-1; $x++) {
                                     for ($y = 0; $y < $this->image_dst_y; $y++) {
                                         $p_orig = imagecolorsforindex($image_dst, imagecolorat($image_dst, $x, $y));
                                         $p_blur = imagecolorsforindex($blur, imagecolorat($blur, $x, $y));
-                                        $p_new['red'] = (abs($p_orig['red'] - $p_blur['red']) >= $this->image_unsharp_threshold) ? max(0, min(255, ($this->image_unsharp_amount * ($p_orig['red'] - $p_blur['red'])) + $p_orig['red'])) : $p_orig['red']; 
-                                        $p_new['green'] = (abs($p_orig['green'] - $p_blur['green']) >= $this->image_unsharp_threshold) ? max(0, min(255, ($this->image_unsharp_amount * ($p_orig['green'] - $p_blur['green'])) + $p_orig['green'])) : $p_orig['green']; 
-                                        $p_new['blue'] = (abs($p_orig['blue'] - $p_blur['blue']) >= $this->image_unsharp_threshold) ? max(0, min(255, ($this->image_unsharp_amount * ($p_orig['blue'] - $p_blur['blue'])) + $p_orig['blue'])) : $p_orig['blue'];         
-                                        if (($p_orig['red'] != $p_new['red']) || ($p_orig['green'] != $p_new['green']) || ($p_orig['blue'] != $p_new['blue'])) { 
+                                        $p_new['red'] = (abs($p_orig['red'] - $p_blur['red']) >= $this->image_unsharp_threshold) ? max(0, min(255, ($this->image_unsharp_amount * ($p_orig['red'] - $p_blur['red'])) + $p_orig['red'])) : $p_orig['red'];
+                                        $p_new['green'] = (abs($p_orig['green'] - $p_blur['green']) >= $this->image_unsharp_threshold) ? max(0, min(255, ($this->image_unsharp_amount * ($p_orig['green'] - $p_blur['green'])) + $p_orig['green'])) : $p_orig['green'];
+                                        $p_new['blue'] = (abs($p_orig['blue'] - $p_blur['blue']) >= $this->image_unsharp_threshold) ? max(0, min(255, ($this->image_unsharp_amount * ($p_orig['blue'] - $p_blur['blue'])) + $p_orig['blue'])) : $p_orig['blue'];
+                                        if (($p_orig['red'] != $p_new['red']) || ($p_orig['green'] != $p_new['green']) || ($p_orig['blue'] != $p_new['blue'])) {
                                             $color = imagecolorallocatealpha($image_dst, $p_new['red'], $p_new['green'], $p_new['blue'], $p_orig['alpha']);
-                                            imagesetpixel($image_dst, $x, $y, $color);                                            
-                                        } 
-                                    } 
-                                } 
-                            } else { 
+                                            imagesetpixel($image_dst, $x, $y, $color);
+                                        }
+                                    }
+                                }
+                            } else {
                                 for ($x = 0; $x < $this->image_dst_x; $x++) {
                                     for ($y = 0; $y < $this->image_dst_y; $y++) {
                                         $p_orig = imagecolorsforindex($image_dst, imagecolorat($image_dst, $x, $y));
                                         $p_blur = imagecolorsforindex($blur, imagecolorat($blur, $x, $y));
-                                        $p_new['red'] = ($this->image_unsharp_amount * ($p_orig['red'] - $p_blur['red'])) + $p_orig['red']; 
-                                        if ($p_new['red']>255) { $p_new['red']=255; } elseif ($p_new['red']<0) { $p_new['red']=0; } 
-                                        $p_new['green'] = ($this->image_unsharp_amount * ($p_orig['green'] - $p_blur['green'])) + $p_orig['green']; 
-                                        if ($p_new['green']>255) { $p_new['green']=255; }  elseif ($p_new['green']<0) { $p_new['green']=0; } 
-                                        $p_new['blue'] = ($this->image_unsharp_amount * ($p_orig['blue'] - $p_blur['blue'])) + $p_orig['blue']; 
-                                        if ($p_new['blue']>255) { $p_new['blue']=255; } elseif ($p_new['blue']<0) { $p_new['blue']=0; } 
+                                        $p_new['red'] = ($this->image_unsharp_amount * ($p_orig['red'] - $p_blur['red'])) + $p_orig['red'];
+                                        if ($p_new['red']>255) { $p_new['red']=255; } elseif ($p_new['red']<0) { $p_new['red']=0; }
+                                        $p_new['green'] = ($this->image_unsharp_amount * ($p_orig['green'] - $p_blur['green'])) + $p_orig['green'];
+                                        if ($p_new['green']>255) { $p_new['green']=255; }  elseif ($p_new['green']<0) { $p_new['green']=0; }
+                                        $p_new['blue'] = ($this->image_unsharp_amount * ($p_orig['blue'] - $p_blur['blue'])) + $p_orig['blue'];
+                                        if ($p_new['blue']>255) { $p_new['blue']=255; } elseif ($p_new['blue']<0) { $p_new['blue']=0; }
                                         $color = imagecolorallocatealpha($image_dst, $p_new['red'], $p_new['green'], $p_new['blue'], $p_orig['alpha']);
-                                        imagesetpixel($image_dst, $x, $y, $color);                                            
-                                    } 
-                                } 
-                            } 
-                            imagedestroy($canvas); 
-                            imagedestroy($blur); 
+                                        imagesetpixel($image_dst, $x, $y, $color);
+                                    }
+                                }
+                            }
+                            imagedestroy($canvas);
+                            imagedestroy($blur);
                         }
                     }
 
@@ -4296,7 +4298,7 @@ class upload {
                             if ((!$this->image_watermark_no_zoom_out && ($watermark_dst_width > $this->image_dst_x || $watermark_dst_height > $this->image_dst_y))
                              || (!$this->image_watermark_no_zoom_in && $watermark_dst_width < $this->image_dst_x && $watermark_dst_height < $this->image_dst_y)) {
                                 $canvas_width  = $this->image_dst_x - abs($this->image_watermark_x);
-                                $canvas_height = $this->image_dst_y - abs($this->image_watermark_y);                            
+                                $canvas_height = $this->image_dst_y - abs($this->image_watermark_y);
                                 if (($watermark_src_width/$canvas_width) > ($watermark_src_height/$canvas_height)) {
                                     $watermark_dst_width = $canvas_width;
                                     $watermark_dst_height = intval($watermark_src_height*($canvas_width / $watermark_src_width));

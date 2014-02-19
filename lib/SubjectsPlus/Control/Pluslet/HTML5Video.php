@@ -32,7 +32,7 @@ class Pluslet_HTML5Video extends Pluslet {
   	// Create and output object
 
   	ob_start();
-  	include __DIR__ . '/views/test.html';
+  	include __DIR__ . '/views/HTML5Video.html';
   	$view = ob_get_clean();
 
   	$this->_body = $view;
@@ -40,6 +40,11 @@ class Pluslet_HTML5Video extends Pluslet {
 
   protected function onViewOutput()
   {
+	if ($this->_extra != "")
+	{
+		$this->_extra = json_decode( $this->_extra, true );
+	}
+
   	$this->_body = " <style>
         .html5_video input {
 
@@ -72,15 +77,47 @@ class Pluslet_HTML5Video extends Pluslet {
   	{
   		$lobjSplit = explode('watch?v=', $this->_extra['youtube']);
 
+        if (isset ( $lobjSplit[1])) {
   		$this->_body .= "<div class='video-container'>" . "<iframe src='http://www.youtube.com/embed/" .
   			$lobjSplit[1] .  "' frameborder='0' width='560' height='315'></iframe></div>";
+        } else {
+            $this->_body .= "<p class='video-error'>There was a problem creating the YouTube embed. The URL should look like: http://www.youtube.com/watch?v=abc1234 </p>";
+            
+        }
   	}
-  }
+    
+    if( $this->_extra['vimeo'] != "" )
+  	{
+  		$lobjSplit = explode('/', $this->_extra['vimeo']);
+        
+        if (isset ( $lobjSplit[3])) {
+  		$this->_body .= "<div class='video-container'>" . "<iframe src='//player.vimeo.com/video/" .
+        $lobjSplit[3] .  "' frameborder='0' width='560' height='315'></iframe></div>";
+        } else {
+            $this->_body .= "<p class='video-error'>There was a problem creating the Vimeo embed. The URL should look like: http://vimeo.com/0137581375135 </p>";
+
+            
+        }
+  	}
+    
+    if( $this->_extra['mp4'] != "" AND $this->_extra['ogg'] != "" ) {
+        
+        $mp4 = $this->_extra['mp4'];
+        $ogg = $this->_extra['ogg'];
+        
+        $this->_body .= "<div id='video_markup'><video class='video_display' controls><source class='video_display' src='" . $mp4 . "' type='video/mp4'><source class='video_display' src='" . $ogg . "' type='video/ogg'>Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href='videofile.ogg'>download it</a> and watch it with your favorite video player! </video></div>";
+        
+    }
+    
+
+}
 
   static function getMenuName()
   {
   	return _('Video');
   }
+    
+    
 }
 
 ?>
