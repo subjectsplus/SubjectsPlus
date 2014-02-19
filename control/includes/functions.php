@@ -745,7 +745,7 @@ function seeRecentChanges($staff_id, $limit=10) {
   return $recent_activity;
 }
 
-function getHeadshot($email, $pic_size="medium") {
+function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
 
   $name_id = explode("@", $email);
   $lib_image = "_" . $name_id[0];
@@ -756,15 +756,15 @@ function getHeadshot($email, $pic_size="medium") {
     case "small":
       $headshot .= " width=\"50\"";
       break;
-                           case "smaller":
-                           $headshot .= " width=\"30\"";
-                           break;
+    case "smaller":
+      $headshot .= " width=\"40\"";
+      break;
     case "medium":
       $headshot .= " width=\"70\"";
       break;
   }
 
-  $headshot .= " class=\"staff_photo\" align=\"left\" />";
+  $headshot .= " class=\"$class\" align=\"left\" />";
   return $headshot;
 }
 

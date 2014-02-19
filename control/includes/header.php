@@ -172,8 +172,15 @@ mb_internal_encoding('UTF-8');
     }
     ?>
 
-    <div id="wrap">
-      <div id="header">
+<!--<img class="background" src="<?php print $AssetPath; ?>/images/mission_control2.jpg" alt="Booksbg" />-->
+
+<header>
+    <div class="pure-g-r">
+        <div class="pure-u-1">
+    <div class="wrapper">
+
+    <!--<div id="wrap">
+      <div id="header"> -->
 
         <?php
         // Our Nav is built here:
@@ -181,7 +188,10 @@ mb_internal_encoding('UTF-8');
         $b_box->displayNav();
         ?>
 
-      </div> <!-- end header -->
+    </div> <!-- end nav wrapper -->
+</div>
+</div>
+</header>
       <?php
       // This is used in control/records to link to the public site -- you probably don't need to change
       if (isset($_COOKIE["sub_shortform"])) {
