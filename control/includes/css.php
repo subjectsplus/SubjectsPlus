@@ -16,9 +16,15 @@
     $assets = dirname(dirname (__DIR__)) . DIRECTORY_SEPARATOR . 'assets';
     $cache = $assets . DIRECTORY_SEPARATOR . 'cache';
     
-    // Create a reference to all the CSS files in the asset directory
+    // A new CSS file can be added by sticking it in the assets folder or in 3 steps you can add a file that needs to be called in a specific order.
+    
+  
+    // Create references to specific files in the assest directory with the AssetManager
     
     $am = new AssetManager();
+
+    
+    // Step 1.
     
     $am->set('pure', new AssetCache(
                                         new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'pure.css')
@@ -45,12 +51,15 @@
                                      ));
     
     
+    // Glob all the rest of the CSS files together
     
     
     $am->set('css', new AssetCache(new GlobAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR .  '*.css'), new FilesystemCache($cache)));
     
     
-    // Apply the CSSMinFilter
+    
+    // Step 2.
+    // This is where the CSSMin filter will be applied eventually.
     $pure = new AssetCollection(array (new AssetReference($am, 'pure')));
     $guide = new AssetCollection(array (new AssetReference($am, 'guide')));
     $jqueryui = new AssetCollection(array (new AssetReference($am, 'jqueryui')));
@@ -59,8 +68,9 @@
     
     
     
-    // Create an AssetCollection that uses the newly minified css
     
+    // Step 3.
+    // Create an AssetCollection that uses the newly minified css
     $css = new AssetCollection(array ($pure, $colorbox, $guide,  $jqueryui,  $css_files) );
     
     
