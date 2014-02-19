@@ -81,8 +81,7 @@ class Pluslet_HTML5Video extends Pluslet {
   		$this->_body .= "<div class='video-container'>" . "<iframe src='http://www.youtube.com/embed/" .
   			$lobjSplit[1] .  "' frameborder='0' width='560' height='315'></iframe></div>";
         } else {
-            
-            
+            $this->_body .= "<p class='video-error'>There was a problem creating the YouTube embed. The URL should look like: http://www.youtube.com/watch?v=abc1234 </p>";
             
         }
   	}
@@ -95,7 +94,8 @@ class Pluslet_HTML5Video extends Pluslet {
   		$this->_body .= "<div class='video-container'>" . "<iframe src='//player.vimeo.com/video/" .
         $lobjSplit[3] .  "' frameborder='0' width='560' height='315'></iframe></div>";
         } else {
-            
+            $this->_body .= "<p class='video-error'>There was a problem creating the Vimeo embed. The URL should look like: http://vimeo.com/0137581375135 </p>";
+
             
         }
   	}
