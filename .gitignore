@@ -66,6 +66,6 @@ control/includes/config.php
 
 *.PHPEdit*
 
-
+subjects/includes/pgcache/*
 
 /assets/users/
