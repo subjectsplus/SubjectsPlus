@@ -79,46 +79,69 @@ if ($num_rows > 0) {
 } else {
   $myguides = "<p>" . _("You don't have any guides yet.  Why not create one?") . "</p>";
 }
-
-print "<br /><div class=\"box\">
-<div class=\"edit-your-guides\"><h2>" . _("Edit Your Guides") . "</h2>
-
-$myguides
-</div>
-</div>";
-
-// Don't allow the NOFUN person to go to other guides
-if (!isset($_SESSION["NOFUN"])) {
-  print "
-        <div class=\"box\">
-    <div class=\"all-guides\"><h2 class=\"bw_head\">" . _("All Guides") . "</h2>
-
-    <p>$dropdown_intro_text</p>
-    <div class=\"all-guides-dropdown\" class=\"dropdown_list\">$all_guides</div>
-    </div>
-    </div>";
-}
 ?>
-  <div class="box">
-<div class="create"><h2 class="bw_head">Create</h2>
 
-    <ol>
-      <li>Make sure the guide doesn't already exist!</li>
-      <li><a href="metadata.php">Create new guide</a></li>
-    </ol>
+<div class="pure-g-r">
+  <div class="pure-u-1-3">  
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("Edit Your Guides"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <p><?php print $myguides; ?></p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="pure-u-1-3">  
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("All Guides"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <p><?php print $dropdown_intro_text; ?></p>
+        <br />
+        <div class="all-guides-dropdown dropdown_list"><?php print $all_guides; ?></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="pure-u-1-3">  
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("Create"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <ol>
+          <li><?php print _("Make sure the guide doesn't already exist!"); ?></li>
+          <li><a href="metadata.php"><?php print _("Create new guide"); ?></a></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("Tips"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <p><img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"/> <?php print _("Edit Guide Metadata"); ?> </p>
+        <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"/> <?php print _("View Guide on Public Site"); ?></p>
+        <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"/> <?php print _("Check Guide Links"); ?></p>
+        <p><?php echo _("Need to delete a guide?  Use the gear icon, and use the Delete button."); ?></p>
+      </div>
+    </div>
   </div>
 </div>
-
-  <div class="box">
-<div class="tips"><h2 class="bw_head">Tips</h2>
-
-<p> <img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"/> — Edit Guide Metadata </p>
-    <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"/> — View Guide on Public Site</p>
-    <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"/> — Check Guide Links</p>
-    <p>Need to delete a guide?  Use the gear icon, and use the Delete button</p>
-  </div>
-</div>
-
 <?php
 include("../includes/footer.php");
 ?>

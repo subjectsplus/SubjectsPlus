@@ -161,9 +161,11 @@ mb_internal_encoding('UTF-8');
         
     ?>
 
+<link rel="stylesheet" href="<?php echo $AssetPath; ?>css/override.css" type="text/css" media="all" />
+
 <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
   </head>
-  <body>
+  <body id="controlpage">
 
     <?php
     // for those times when you  need the CSS and jQuery, but no header . . .
@@ -172,7 +174,7 @@ mb_internal_encoding('UTF-8');
     }
     ?>
 
-<!--<img class="background" src="<?php print $AssetPath; ?>/images/mission_control2.jpg" alt="Booksbg" />-->
+<img class="background" src="<?php print $AssetPath; ?>/images/admin/mission_control2.jpg" alt="background" />
 
 <header>
     <div class="pure-g-r">
@@ -206,7 +208,7 @@ mb_internal_encoding('UTF-8');
       if (isset($tertiary_nav) && $tertiary_nav == "yes") {
 
       } else {
-        print "<div id=\"maincontent\">";
+       print "<div id=\"maincontent\">";
 
           
       }

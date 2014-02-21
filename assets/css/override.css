@@ -1,0 +1,39 @@
+/* 
+    Document   : override.css
+    Created on : updated Feb 2014 
+    Author     : agdarby
+    Description: stylesheet for easy overrides of css; always called last by assestic
+*/
+
+#controlpage div.pluslet {
+padding: 0em 0em;
+margin: 1em;
+background-color: #fff;
+border: 2px solid #efefef;
+
+}
+
+#controlpage div.pluslet > .titlebar {
+    background-color: #858585;
+  padding: .5em;
+  color: #fff;
+  background-color: #efefef;
+  color: #333;
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+#controlpage .titlebar_options {
+	height: auto;
+}
+
+#controlpage .pluslet_body {
+  padding: .5em;
+  background-color: #fff;
+}
+
+div.breather > h2 {
+  background-color: #858585;
+  padding: .5em;
+  color: #fff;
+}

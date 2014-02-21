@@ -1,3 +1,10 @@
+/* 
+    Document   : admin_styles.css
+    Created on : updated Feb 2014 
+    Author     : agdarby
+    Description: base stylesheet for backend of subjectsplus, i.e., /control/
+*/
+
 /* reset - blueprint mod */
 * {
     padding: 0;
@@ -99,6 +106,21 @@ max-width: 1200px;
 }
 
 /* Header and nav/subnav stuff */
+
+/* note:  this is used for the nasa control room bg image; it gets turned on by choosing the nasa bg option in control/index.php */
+
+.background {
+    bottom: 0;
+    height: 1280px;
+    left: auto;
+    opacity: 0.2;
+    position: fixed;
+    right: 0;
+    top: auto;
+    width: 1920px;
+    z-index: -1;
+    display: none;
+}
 
 header {
   width: 100%;
@@ -954,7 +976,7 @@ ul.sortable_list li:hover  {
     box-shadow: 5px 5px 5px #ccc;
 }
 
-/* Guides -- Admin View */
+/* Guides -- Admin View 
 
 .pluslet_body {
     padding: .5em;
@@ -965,6 +987,8 @@ ul.sortable_list li:hover  {
 .pluslet_body p {
     margin: .5em 0 ;
 }
+*/
+
 
 .leftcolheader {
     background-color: #CFDAE6;
@@ -1228,4 +1252,3 @@ width:15px;
     
     float:left;
 }
-

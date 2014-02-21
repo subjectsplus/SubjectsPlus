@@ -1,9 +1,9 @@
-/* /////////
- // guide.css
- // used for the styling of the admin view of the guides
- // called from guide folder
- ///////// */
-
+/* 
+    Document   : guide.css
+    Created on : updated Feb 2014 
+    Author     : agdarby
+    Description: some override styling for admin view of guides; should be merged with admin_styles
+*/
 
 #guide_header {
     position: relative;
@@ -341,6 +341,7 @@ li.dropspotty {
     height: 50px !important;
 }
 
+/*
 .pluslet {
     position: relative;
     clear: both;
@@ -357,6 +358,7 @@ li.dropspotty {
     box-shadow: 1px 1px 1px 1px #ccc;
 }
 
+*/
 .pluslet img#sort
 {
     cursor: move;
@@ -366,7 +368,7 @@ li.dropspotty {
     margin-left: 5px;
     margin-top: 5px;
 }
-
+/*
 .titlebar {
     color: #333;
     position: relative;
@@ -412,6 +414,7 @@ div.titlebar input {
     text-align: left;
     background-color: #fff;
 }
+*/
 
 div.type-heading {
     width: 70%;

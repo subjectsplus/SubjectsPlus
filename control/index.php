@@ -20,67 +20,92 @@ $recent_activity = seeRecentChanges($_SESSION["staff_id"]);
 $user = new Staff($_SESSION["staff_id"]);
 
 $headshot = $user->getHeadshot($_SESSION["email"], "medium");
+
+//////////////
+//Permissions
+//////////////
+$mod_bio = "";
+$mod_photo = "";
+$view_contact_info = "";
+
+if ($_SESSION['user_type_id'] == '1') {
+  // allow user to update their own bio?
+  if (isset($user_bio_update) && $user_bio_update == TRUE) {
+    $mod_bio = "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+  }
+  // allow user to update their own photo?
+ if (isset($user_photo_update) && $user_photo_update == TRUE) {
+    $mod_photo = "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+
+  }
+}
+
+// UM Only :  Now, export our contact information
+if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
+  $view_contact_info = "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"admin/contacts.php\">" . _("View/Export Staff Contact Info") . "</a></p>";
+}
+
 ?>
-
-<div class="index-content">
-  <div class="box no_overflow">
-    <div class="greeting">
-      <p>
-	<?php
-	echo $headshot;
-	printf(_("Hello %s"), $full_name);
-	?>
-
-      </p>
+<div class="pure-g-r">
+<div class="pure-u-1-3">  
+  <div class="pluslet">
+    <div class="titlebar">
+      <div class="titlebar_text"><?php printf(_("Hello %s"), $full_name); ?></div>
+      <div class="titlebar_options"></div>
     </div>
-    <div class="control-options">
-      <p><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/></i> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password">Reset Password </a></p>
+    <div class="topimage"></div>
+    <div class="pluslet_body">
+
+    <?php print $headshot; ?>
+          <p><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password">Reset Password </a></p>
 
       <?php
-      if ($_SESSION['user_type_id'] == '1') {
-	// allow user to update their own bio?
-				       if (isset($user_bio_update) && $user_bio_update == TRUE) {
-	  print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
-	}
-	// allow user to update their own photo?
-																				   if (isset($user_photo_update) && $user_photo_update == TRUE) {
-	  print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+      print $mod_bio;
+      print $mod_photo;
+      print $view_contact_info;
+      ?>
+    </div>
+  </div>
 
-	}
-      }
-
-      // UM Only :  Now, export our contact information
-      if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
-	print "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /></i> <a href=\"admin/contacts.php\">View/Export Staff Contact Info</a></p>";
+  <div class="pluslet">
+    <div class="titlebar">
+      <div class="titlebar_text"><?php print _("Background Options"); ?></div>
+      <div class="titlebar_options"></div>
+    </div>
+    <div class="topimage"></div>
+    <div class="pluslet_body">
+      <span id="bg_feedback" class="feedback"></span>
+      <ul>
+      <?php
+      foreach ($all_bgs as $value) {
+        print "<li><a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></li>";
       }
       ?>
-
+      </ul>
     </div>
-
   </div>
-  <div class="recent-activity">
- <div class="box no_overflow">
-    <h2>Recent Activity</h2>
 
-      <p>You have recently added or edited:</p>
+</div>
+
+<div class="pure-u-1-3">  
+
+</div>
+
+<div class="pure-u-1-3">  
+  <div class="pluslet">
+    <div class="titlebar">
+      <div class="titlebar_text"><?php print _("Recent Activity"); ?></div>
+      <div class="titlebar_options"></div>
+    </div>
+    <div class="topimage"></div>
+    <div class="pluslet_body">
+      <p><?php print _("You have recently added or edited:"); ?></p>
       <?php echo $recent_activity ?>
     </div>
   </div>
+</div>
+</div>
 
-
-  <div class="background-options">
-  <div class="box no_overflow">
-    <h2>Background Options</h2>
-
-
-      <span id="bg_feedback" class="feedback"></span>
-      <?php
-      foreach ($all_bgs as $value) {
-	print "<p><img src=\"$IconPath/required.png\" class=\"bullet\"  /></i><a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></p>";
-      }
-      ?>
-
-    </div>
     <?php
     //first time pop up after installation
     if( isset($_SESSION['firstInstall']) && $_SESSION['firstInstall'] == 1 )
