@@ -124,9 +124,9 @@ class Pluslet_TOC extends Pluslet {
           }
 
           if ($value[3] == 1) {
-            $left_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+            $left_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
           } else {
-            $right_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+            $right_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
           }
         }
       } else {
@@ -137,9 +137,9 @@ class Pluslet_TOC extends Pluslet {
           foreach ($this->_tocArray as $value) {
             if (in_array($value[0], $this->_ticked_items)) {
               if ($value[3] == 1) {
-                $left_col .= "<a href=\"#box-$value[0]\" class=\"smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+                $left_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
               } else {
-                $right_col .= "<a href=\"#box-$value[0]\" class=\"smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+                $right_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
               }
             }
           }
