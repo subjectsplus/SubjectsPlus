@@ -30,6 +30,38 @@ CKEDITOR.plugins.add( 'abbr', {
 			toolbar: 'insert'
 		});
 
+		if ( editor.contextMenu ) {
+			editor.addMenuGroup( 'abbrGroup' );
+			editor.addMenuItem( 'abbrItem', {
+				label: 'Edit Abbreviation',
+				icon: this.path + 'icons/abbr.png',
+				command: 'abbr',
+				group: 'abbrGroup'
+			});
+
+			editor.contextMenu.addListener( function( element ) {
+				if ( element.getAscendant( 'img', true ) ) {
+					return { abbrItem: CKEDITOR.TRISTATE_OFF };
+				}
+			});
+		}
+
+		editor.on( 'doubleclick', function( evt )
+		{
+			var element = evt.data.element;
+
+			if ( !element.isReadOnly() )
+			{
+				if ( $(element.$).closest('div.spimg').length > 0 )
+				{
+				evt.data.dialog = 'abbrDialog';
+				editor.getSelection().selectElement( element );
+				}
+			}
+		});
+
+		//contentEditable='false'
+
 		// Register our dialog file. this.path is the plugin folder path.
 		CKEDITOR.dialog.add( 'abbrDialog', this.path + 'dialogs/abbr.js' );
 	}
