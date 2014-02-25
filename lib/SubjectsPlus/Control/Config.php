@@ -216,7 +216,7 @@ class Config
 		{
 			@$lobjConnection = new DBConnector( $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], $this->lobjNewConfigValues['dbName_SPlus'], $this->lobjNewConfigValues['hname'] );
 		}
-		catch(Exception $e)
+		catch(\Exception $e)
 		{
 			$lstrError = $e->getMessage() . _( " Cofigurations were not saved." );
 		}

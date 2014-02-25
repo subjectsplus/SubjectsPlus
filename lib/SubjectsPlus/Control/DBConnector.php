@@ -25,7 +25,7 @@ class DBConnector {
 
     if ($this->_connection = mysql_connect($hname, $uname, $pword)) {
       if (!mysql_select_db($dbName)) {
-        throw new Exception('Could not choose database.');
+        throw new \Exception('Could not choose database.');
       }
 
     // Make sure things are unicode-friendly
@@ -34,7 +34,7 @@ class DBConnector {
 
       return $this->_connection;
     } else {
-      throw new Exception('Could not connect to database server.');
+      throw new \Exception('Could not connect to database server.');
     }
 
 
