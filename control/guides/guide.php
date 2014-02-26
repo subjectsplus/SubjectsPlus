@@ -503,127 +503,82 @@ jQuery(window).load(function(){
 </script>
 
 <div id="guide_header">
-    <div id="guide_nav">
-        <ul class="guide-nav-menu">
-               <li id="hide_header" class="guide-nav-item">☰ Menu </li>
-            <li id="newbox" class="guide-nav-item togglenewz"> New Box
-            <?php
-                print $all_boxes;
-            ?>
+    <div class="pure-g-r">
+      <div class="wrapper-full">
+        <div class="pure-u-1-2"> 
+        
+            <ul id="guide_nav">
+                <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
+                <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
+                    <?php print $all_boxes; ?>
+                </li>
+                <li class="showdisco"><a href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
+                <li><a href=""><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
+                <!--<li class="showrecord"><a href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></a></li>
+                <li class="showmeta"><a href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></a></li>
+                <li id="layoutbox" class="togglelayout" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><a href="#"><?php print _("Layout"); ?></a>
+                <div id="slider_options" style="display: none; width: 200px; padding: 1em;">
+                    <p><?php print _("Adjust column sizes"); ?></p>
+                    <div id="slider"></div>
+                    <button id="save_layout" style="display:none;clear: left;margin-top: 1em;font-size: smaller;"><?php print _("SAVE CHANGES"); ?></button>
+                </div>-->
             </li>
-        <li class="showdisco guide-nav-item"> Find Box
+            <li class="selected"></li>
+          </ul>
+        </div>
+        <div class="pure-u-1-2"> <h2>
+        <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
+        <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
+        <a href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/gears-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+        
+        </h2></div>
+      </div>
+    </div>
+</div>
 
 
-
-               <div class="inner-nav-content">
-               <form action="discover.php" method="post" id="target">
-
-               <div>
-               <div class="box">
-               <h2>Browse</h2>
-
-               <select name="all_subs" id="all_subs">
-               <option value="">- Browse Boxes -</option>
-
-
-               </select>
-               </div>
-
-               </div>
-               <div>
-                <div class="box">
-               <h2>Search</h2>
-
-               <input type="text" id="search_terms" name="search" />
-               <input type="submit" value="Go!" name="searcher" id="searcho" class="button" />
-               </div>
-               </div>
-               </form>
-               <div class="box no_overflow">
-               <div id="results"></div>
-               </div>
-
-               <script type="text/javascript" language="javascript">
-               $(document).ready(function(){
-
-                                 var thisguide = '';
-                                 $("#all_subs").change(function() {
-                                                       var desired_guide = $("select option:selected").val();
-                                                       $("#results").fadeIn(3000).load("find_results.php", {shortform: desired_guide, guide_id: thisguide});
-                                                       });
-
-                                 $('form').submit(function() {
-                                                  var terms = $("#search_terms").val();
-                                                  $("#results").fadeIn(3000).load("find_results.php", {search_terms: terms, guide_id: thisguide });
-                                                  return false;
-                                                  });
-
-
-                                 $("img[name*=add-]").livequery('click', function(event) {
-                                                                var item_id = $(this).attr("name").split("-");
-                                                                // make these vars available to the parent file, guide.php
-                                                                parent.addItem = item_id[1];
-                                                                parent.addItemType = item_id[2];
-                                                                parent.jQuery.colorbox.close();
-                                                                return false;
-                                                                });
-
-
-                                 });
-               </script>
-
-               </div>
-
-
-
-
-               </li>
-        <li class="showrecord guide-nav-item" href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>">New Record</li>
-        <li class="showmeta guide-nav-item" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop">Metadata</li>
-        <li id="layoutbox" class="togglelayout guide-nav-item">Layout <div id="slider_options" class="slider_options_guide">
-                <p>Adjust column sizes</p>
-                <div id="slider"></div>
-                <button class="button" id="save_layout">Save Changes/button>
-            </div>
-        </li>
-        <!--<li id="tabsbox" class="toggletab">Tabs
-            <div id="tabs_options">
-                <p>Rename/Add Tabs</p>
-                <?php //print $tabs_input; ?>
-                <button class="button" id="save_tab_options"><?php print _("Save Changes"); ?></button>
-            </div>
-        </li>-->
-    </ul>
-</div> <!-- end guide_nav -->
 <input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra" />
 
-<div id="subject_title"><h2><?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?></h2></div>
+<!-- Save Button -->
  <p align="center" id="savour"><button class="button" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
-</div>  <!-- end guide header -->
+</div>  
+<!-- end guide header -->
 
 <!-- Feedback -->
 <div id="response"></div>
 
-<!-- Save Button -->
+
+
+<!-- new tab form (suppressed until wrench clicked) -->
 <div id="dialog" title="Tab data">
-<form>
-<fieldset class="ui-helper-reset">
-<label for="tab_title">Title</label>
-<input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
-
-<label for="tab_external_link">Add Custom Url</label>
-<input type="text" name="tab_external_link" id="tab_external link" />
-
-</fieldset>
+<form class="pure-form pure-form-aligned">
+    <fieldset class="ui-helper-reset">
+        <div class="pure-control-group">
+            <label for="tab_title"><?php print _("Title"); ?></label>
+            <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+        </div>
+        <div class="pure-control-group">
+            <label for="tab_external_link"><?php print _("Redirect URL"); ?></label>
+            <input type="text" name="tab_external_link" id="tab_external link" />
+        </div>
+    </fieldset>
 </form>
 </div>
+
+<!-- edit tab form (suppressed until wrench clicked) -->
 <div id="dialog_edit" title="Tab edit">
-<form>
-<fieldset class="ui-helper-reset">
-<label for="tab_title">New Title</label>
-<input type="text" name="rename_tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
-</fieldset>
-</form>
+    <form class="pure-form pure-form-aligned">
+        <fieldset class="ui-helper-reset">
+        <div class="pure-control-group">
+        <label for="tab_title"><?php print _("New Title"); ?></label>
+        <input type="text" name="rename_tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+        </div>
+        <div class="pure-control-group">
+            <label for="tab_external_link"><?php print _("Redirect URL"); ?></label>
+            <input type="text" name="tab_external_link" id="tab_external link" />
+        </div>
+        </fieldset>
+    </form>
 </div>
 <script>
 //make tabs sortable
@@ -646,16 +601,15 @@ jQuery(function() {
 });
 </script>
 
-<div id="tabs">
+<div class="guidewrapper">
+    <div id="tabs">
 
-<?php $lobjGuide->outputNavTabs(); ?>
+    <?php $lobjGuide->outputNavTabs(); ?>
 
-<?php
-$lobjGuide->outputTabs();
-?>
+    <?php
+    $lobjGuide->outputTabs();
+    ?>
 
-
-
+    </div>
 </div>
-
 <?php include("../includes/footer.php"); ?>

@@ -176,10 +176,10 @@ mb_internal_encoding('UTF-8');
 
 <img class="background" src="<?php print $AssetPath; ?>/images/admin/mission_control2.jpg" alt="background" />
 
-<header>
+<header id="header">
     <div class="pure-g-r">
         <div class="pure-u-1">
-    <div class="wrapper">
+    		<div class="wrapper-full">
 
     <!--<div id="wrap">
       <div id="header"> -->
@@ -190,9 +190,9 @@ mb_internal_encoding('UTF-8');
         $b_box->displayNav();
         ?>
 
-    </div> <!-- end nav wrapper -->
-</div>
-</div>
+    		</div> <!-- end nav wrapper -->
+		</div>
+	</div>
 </header>
       <?php
       // This is used in control/records to link to the public site -- you probably don't need to change

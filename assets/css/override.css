@@ -7,27 +7,66 @@
 
 #controlpage div.pluslet {
 padding: 0em 0em;
-margin: 1em;
+margin: 1em 1em 1em 0;
 background-color: #fff;
-border: 2px solid #efefef;
+border: 2px solid #ccc;
+border: none;
+clear:both;
 
 }
 
 #controlpage div.pluslet > .titlebar {
-    background-color: #858585;
-  padding: .5em;
+  background-color: #858585;
+  padding: .2em .5em;
   color: #fff;
-  background-color: #efefef;
+  background-color: #fff;
   color: #333;
-  font-size: 1.2em;
-  font-weight: 800;
+  font-size: 1.1em;
+  font-weight:400;
+  height: 100%;
+  min-height: 2em;
+  border-bottom: 1px solid #ccc;
+}
+
+#controlpage .titlebar_text {
+float: left;
+margin-top: .3em;
+
+}
+
+.pluslet img#sort
+{
+    cursor: move;
+    float: left;
+    margin-right: .5em;
+    margin-top: 2px;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 20px;
+    padding: 0.2em;
+    width: 20px;
 }
 
 #controlpage .titlebar_options {
-	height: auto;
+
+float: right;
+padding: .2em 0em .1em .5em;
+}
+
+#controlpage .titlebar_options img {
+
+padding: .2em;
+background-color: #E488B6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+height: 20px;
+width: 20px;
+cursor: pointer;
 }
 
 #controlpage .pluslet_body {
+	clear: both;
   padding: .5em;
   background-color: #fff;
 }
@@ -36,4 +75,179 @@ div.breather > h2 {
   background-color: #858585;
   padding: .5em;
   color: #fff;
+}
+
+/* UI tabs */
+
+.ui-tabs .ui-tabs-nav li {
+
+    padding: .2em 1em 0 1em;
+
+}
+
+ #tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+ #tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
+
+/* Secondary Nav for Guides Creation */
+
+#guide_header {
+  width: 100%;
+  background-color: #333;
+  border-top: 2px solid #fff;
+  border-bottom: 1px solid #000;
+  height: 2.8em;
+  line-height: 2.8em;
+}
+
+#guide_header h2 {
+	margin: 0;
+}
+
+#guide_header h2 a {
+	text-decoration: none;
+	color: #fff;
+}
+
+#guide_header img {
+    position: relative;
+    vertical-align: text-bottom; 
+    margin-right: .5em;
+    margin-left: .5em;
+}
+
+.icon-view-guide {
+
+}
+
+#guide_header .icon-edit-guide {
+	height: 20px;
+	margin-bottom: 4px;
+}
+
+#guide_header ul li a{
+    
+    text-decoration: none;
+    
+}
+
+#guide_header ul li a:hover{
+    
+    text-decoration: underline;
+    
+}
+
+#guide_nav {
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    color: #333;
+}
+
+#guide_nav li {
+  display: inline-block;
+  padding-top: .1em;
+}
+
+#guide_nav li a {
+
+    color: #777777;
+    text-decoration: none !important;
+    padding: .5em 1em;
+    text-align: left;
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: bold;
+
+}
+
+#hide_header {
+	background-color: #fff;
+	padding: 0em 0em;
+	padding-right: .5em;
+	top: 0;
+	font-size: 1.2em;
+	cursor: pointer;
+}
+
+#hide_header img {
+	position:relative;
+	top: 2px;
+	margin-left: .5em;
+	margin-right: 0;
+}
+
+/* The draggable boxes from the admin guide header */
+
+#box_options {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    float: left;
+    list-style-type: none;
+    margin: 0 10px 0 -12px !important;
+    padding: 0 5px 1px;
+    position: absolute;
+    top: 50px;
+    z-index: 1000 !important;
+
+}
+#box_options li {
+    border: 1px solid #CCCCCC !important;
+    clear: left !important;
+    display: block !important;
+    float: none !important;
+    margin: 0 !important;
+    line-height: 1.5em !important;
+    font-size: 1.1em !important;
+    padding: .2em .2em .2em .5em;
+}
+
+.box-item {
+    list-style-type: none;
+
+    max-width:200px;
+    background-color: #333;
+    cursor: pointer;
+    color:#fff;
+        border: 1px solid #CCCCCC !important;
+    clear: left !important;
+    display: block !important;
+    float: none !important;
+    margin: 0 !important;
+    line-height: 1.5em !important;
+    font-size: 1.1em !important;
+    padding: .2em .2em .2em .5em;
+}
+
+.box-item:hover {
+background: #C03957;
+}
+
+#box_options li.box_note {
+    background-color: #FFFFFF !important;
+    border: 0 none #FFFFFF !important;
+    color: #333333;
+    cursor: text !important;
+    font-size: 0.9em !important;
+    padding: .5em .2em;
+}
+
+/* jquery ui popup boxes */
+
+label {
+	clear: left;
+}
+
+/* guide tab editing zone 
+background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
+*/
+
+.sptab {
+	background-color: #dfdfdf !important;
+	
 }

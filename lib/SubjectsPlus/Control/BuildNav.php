@@ -20,7 +20,7 @@ class BuildNav {
       
     print "
       <ul id=\"topnav\">
-      <li><a href=\"$CpanelPath" . "index.php\">SP</a></li>
+      <!--<li><a href=\"$CpanelPath" . "index.php\">SP</a></li>-->
       <li class=\"nohover\"><a class=\"profile\" href=\"\">$headshot</a>
       <div>$headshot_lg
       <p>Hi Andrew.</p>

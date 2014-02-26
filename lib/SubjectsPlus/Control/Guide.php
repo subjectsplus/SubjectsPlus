@@ -665,7 +665,7 @@ echo "</div>
 		foreach ($all_tabs as $key=> $value) {
 
 			$tabs .= "<li class=\"dropspotty\" style=\"height: auto;\"><a href=\"#tabs-$key\">$value</a>";
-			$tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>" : "</li>";
+			$tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
 
 		}
 
@@ -822,7 +822,7 @@ echo "</div>
         global $IconPath;
 		$col = "<div id=\"container-" . $i . "\" style=\"position: relative; float: left; width: 30%;\">
 			<div class=\"dropspotty unsortable\" id=\"dropspot-". $itext . "-1\">
-			<img src=\"$IconPath/box.png\"  alt=\"" . _('Drop Content Here') . "\" /></i>
+			<img src=\"$IconPath/air_force-26.png\"  alt=\"" . _('Drop Content Here') . "\" />
     		<span class=\"dropspot-text\">" . _('Drop Here') . "</span>
     		</div>
     		<div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .

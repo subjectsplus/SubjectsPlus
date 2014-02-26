@@ -16,9 +16,9 @@ $page_title = "Modify Guides in SubjectsPlus";
 include("../includes/config.php");
 include("../includes/header.php");
 
-$gear_alt = "Edit Guide Metadata";
-$eye_alt = "View Guide on Public Site";
-$linkie_alt = "Check Guide Links";
+$gear_alt = _("Edit Guide Metadata");
+$view_alt = _("View Guide on Public Site");
+$linkie_alt = _("Check Guide Links");
 
 try {
   $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
@@ -67,9 +67,9 @@ if ($num_rows > 0) {
 
 
     $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp;
-        <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/emblem-system.png\"   alt=\"$gear_alt\" title=\"$gear_alt\" border=\"0\" /></a> &nbsp;&nbsp;
-        <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><img src=\"$IconPath/eye.png\" alt=\"$eye_alt\" border=\"0\" /></a> &nbsp;&nbsp;
-        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" border=\"0\" /></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
+        <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"$gear_alt\" title=\"$gear_alt\" border=\"0\" class=\"icon\" /></a> &nbsp;&nbsp;
+        <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><img src=\"$IconPath/eye.png\" alt=\"$view_alt\" title=\"$view_alt\" border=\"0\" class=\"icon\" /></a> &nbsp;&nbsp;
+        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" title=\"$linkie_alt\" border=\"0\" class=\"icon\" /></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
     if ($active != "1") {
       $myguides .= " <span style=\"color: #666;\">" . _("unpublished") . "</span>";
     }
@@ -134,9 +134,9 @@ if ($num_rows > 0) {
       </div>
       <div class="topimage"></div>
       <div class="pluslet_body">
-        <p><img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"/> <?php print _("Edit Guide Metadata"); ?> </p>
-        <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"/> <?php print _("View Guide on Public Site"); ?></p>
-        <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"/> <?php print _("Check Guide Links"); ?></p>
+        <p><img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>" class="icon" /> <?php print _("Edit Guide Metadata"); ?> </p>
+        <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>" class="icon"/> <?php print _("View Guide on Public Site"); ?></p>
+        <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>" class="icon" /> <?php print _("Check Guide Links"); ?></p>
         <p><?php echo _("Need to delete a guide?  Use the gear icon, and use the Delete button."); ?></p>
       </div>
     </div>

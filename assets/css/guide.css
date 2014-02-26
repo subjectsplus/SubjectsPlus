@@ -3,7 +3,7 @@
     Created on : updated Feb 2014 
     Author     : agdarby
     Description: some override styling for admin view of guides; should be merged with admin_styles
-*/
+
 
 #guide_header {
     position: relative;
@@ -22,6 +22,7 @@
 #guide_nav {
     float: left;
     margin-left: 40px;
+    margin: 0 auto;
 }
 
 #subject_title {
@@ -47,10 +48,21 @@
     color: :#C03957;
 }
 
-#guide_header ul {
-    
+.box-item {
+    list-style-type: none;
+    padding: .5%;
+    margin-right: .5%;
+    max-width:200px;
+    background-color: #333;
+    cursor: pointer;
+    font-size: 85%;
+    color:#fff;
 }
 
+.box-item:hover {
+background: #C03957;
+}
+*/
 .guide-nav-item {
     list-style-type: none;
     padding: 5px 5px 5px 5px;
@@ -66,48 +78,16 @@
     cursor: pointer;
 }
 
-.box-item {
-    list-style-type: none;
-    padding: .5%;
-    margin-right: .5%;
-    max-width:200px;
-    background-color: #333;
-    cursor: pointer;
-    font-size: 85%;
-    color:#fff;
-}
 
 
-#hide_header {
-    
-
-}
 
 .guide-nav-item:hover {
     color: #DF6F89;
 }
 
-.box-item:hover {
-background: #C03957;
-}
 
-#guide_header img {
-    position: relative;
-    top: 2px;
-    
-}
 
-#guide_header ul li a{
-    
-    text-decoration: none;
-    
-}
 
-#guide_header ul li a:hover{
-    
-    text-decoration: underline;
-    
-}
 
 #subject_header {
     text-align:left;
@@ -232,7 +212,7 @@ img { padding-top: 0;}
 .guide-nav-item { transition: all 0.2s; }
 #box_options li { transition: all 0.2s; }
 
-
+/*
 
 #box_options {
     position: absolute;
@@ -272,6 +252,7 @@ img { padding-top: 0;}
     transition: background 0.2s;
 }
 
+*/
 #all-results2  {
     list-style: none;
     position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
@@ -298,7 +279,7 @@ img { padding-top: 0;}
 
 .dropspotty {
     position: relative;
-    background-color: #F8F5F5;
+    background-color: #fff;
     text-align: center;
     margin-bottom: 10px;
     z-index: 50;
@@ -326,10 +307,14 @@ li.dropspotty {
 
 /* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
 
-#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: 8px; margin-left: 1em;}
+#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: .7em; margin-left: 1em; vertical-align: text-bottom;}
 
 /* When you hover over one of the two drop spots, make em show */
 .drop_hover {background-color: #C03957; border: 1px solid #ccc;}
+
+.dropspot-text {
+    position: relative;  font-size: 14pt; font-weight: bold; color: #ccc; margin-right: 1em; margin-bottom: 1em;
+}
 
 /* this might be used by the jquery ui plugin . . . */
 
@@ -358,7 +343,7 @@ li.dropspotty {
     box-shadow: 1px 1px 1px 1px #ccc;
 }
 
-*/
+
 .pluslet img#sort
 {
     cursor: move;
@@ -368,7 +353,7 @@ li.dropspotty {
     margin-left: 5px;
     margin-top: 5px;
 }
-/*
+
 .titlebar {
     color: #333;
     position: relative;
@@ -467,9 +452,7 @@ div.type-heading {
     color: #CCCCCC; font-size: 11px; text-shadow: none;
 }
 
-.dropspot-text {
-    position: relative;  font-size: 14pt; font-weight: bold; color: #ccc; margin-right: 1em;
-}
+
 
 .borderless {
     border: none;
@@ -641,6 +624,8 @@ width: 28%;
 margin-left: 10px;
 }
 
+/*
+
 .pluslet-icon {
 width:15px;
 height:15px;
@@ -649,7 +634,7 @@ height:15px;
 .titlebar_options {
 height: 15px;
 }
-
+*/
 img.tooltip  {
 width:15px;
 }
