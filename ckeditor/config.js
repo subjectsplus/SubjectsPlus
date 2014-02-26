@@ -9,7 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
 	//added by dgonzalez
-	config.extraPlugins = 'subsplus_asset,subsplus_cat_link,subsplus_resource,subsplus_faq,abbr';
+	config.extraPlugins = 'subsplus_asset,subsplus_cat_link,subsplus_resource,subsplus_faq,subsplus_sub_spe';
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [

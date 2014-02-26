@@ -11,6 +11,8 @@
  */
 class Pluslet_TOC extends Pluslet {
 
+	protected $_ticked_items = "";
+
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
@@ -143,6 +145,9 @@ class Pluslet_TOC extends Pluslet {
               }
             }
           }
+        }else
+        {
+        	return 'No items ticked. Please edit.';
         }
       }
 

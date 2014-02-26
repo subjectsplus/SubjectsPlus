@@ -17,6 +17,7 @@ class Pluslet {
     protected $_type;
     protected $_extra;
     protected $_pluslet_bonus_classes = "";
+    protected $_pluslet_id_field = "";
     protected $_pluslet_name_field = "";
     protected $_pluslet_body_bonus_classes = "";
     protected $_editable = "";
@@ -414,6 +415,16 @@ class Pluslet {
 
 			return $this->_pluslet;
 		}
+	}
+
+	public function getBody()
+	{
+		return $this->_body;
+	}
+
+	public static function getCkPluginName()
+	{
+		return '';
 	}
 
     function getRecordId() {

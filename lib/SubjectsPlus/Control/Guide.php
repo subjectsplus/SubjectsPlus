@@ -215,19 +215,19 @@ class Guide {
         $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
         $guide_string = $guideMe->display();
 
-        
+
 //////////////////////
 // Guide parent
 //////////////////////
-        
+
         echo "<span class='record_label'>" ._("Guide Parent") . "</span><br />";
         // To-do: Add dropdown to chose guide parent?
-        
-        
+
+
 /////////////////////
 // Is Live
 ////////////////////
-    
+
 
         $is_live = "<span class=\"record_label\">" . _("Publish Guide (publicly accessible)?") . "</span><br />
 <input name=\"active\" type=\"radio\" value=\"1\"";
@@ -643,14 +643,17 @@ echo "</div>
 		}
 
 		// Find our existing tabs for this guide
-		$qtab = "SELECT DISTINCT tab_id, label, tab_index FROM tab WHERE subject_id = '{$this->_subject_id}' ORDER BY tab_index";
+		$qtab = "SELECT DISTINCT tab_id, label, tab_index, external_url FROM tab WHERE subject_id = '{$this->_subject_id}' ORDER BY tab_index";
 		$rtab = mysql_query($qtab);
 
 		$all_tabs = array();
 
 		while ($myrow = mysql_fetch_array($rtab))
 		{
-			$all_tabs[] .= $myrow[1];
+			$tab['label'] = $myrow[1];
+			$tab['external_url'] = $myrow[3];
+
+			$all_tabs[] = $tab;
 		}
 
 		$this->_all_tabs = $all_tabs;
@@ -662,11 +665,9 @@ echo "</div>
 		$all_tabs = $this->getTabs();
 
 		$tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>";  // init tabs (in header of body of guide)
-		foreach ($all_tabs as $key=> $value) {
-
-			$tabs .= "<li class=\"dropspotty\" style=\"height: auto;\"><a href=\"#tabs-$key\">$value</a>";
+		foreach ($all_tabs as $key => $lobjTab) {
+			$tabs .= "<li class=\"dropspotty\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
 			$tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
-
 		}
 
 		//$tabs .= "<li><a id=\"newtab\" href=\"#tabs-new\">{+}</a></li>";
@@ -680,7 +681,7 @@ echo "</div>
 		$all_tabs = $this->getTabs();
 
 		// Now loop through tab content
-		foreach ($all_tabs as $key=> $value) {
+		foreach ($all_tabs as $key => $lobjTab) {
 			print "<div id=\"tabs-$key\" class=\"sptab\">";
 			// get our content
 			$this->dropTabs($key);
