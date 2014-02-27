@@ -11,7 +11,7 @@
  *   @date updated jul 2013
  */
 use SubjectsPlus\Control\DBConnector;
-    
+
 $subsubcat = "";
 $subcat = "guides";
 $page_title = "Save Guides include";
@@ -46,7 +46,7 @@ $lintTabIndex = 0;
 
 foreach( $lobjTabs as $lobjTab )
 {
-	$qi = "INSERT INTO tab (subject_id, label, tab_index) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex)";
+	$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}')";
 	//print $qi . "<br />";
 	$ir = mysql_query($qi);
 

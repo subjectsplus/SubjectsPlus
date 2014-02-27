@@ -5,6 +5,7 @@
 jQuery(document).ready(function(){
 
 	makeDropable(".dropspotty");
+	makeDropable(".cke");
 
     makeSortable(".sort-column");
 
@@ -68,6 +69,7 @@ jQuery(lstrSelector).livequery(function() {
 
 	jQuery(this).droppable({
 
+		iframeFix: true,
 		accept: ".draggable, .pluslet",
 		drop: function(event, props) {
 
@@ -110,52 +112,69 @@ jQuery(lstrSelector).livequery(function() {
 			//only do for class draggable
 			if( jQuery(props.draggable).hasClass('draggable') )
 			{
-				// if there can only be one, could remove from list items
+
 				var drop_id = jQuery(this).attr("id");
 				var drag_id = jQuery(props.draggable).attr("id");
 				//alert(drag_id);
 				var pluslet_title = jQuery(props.draggable).html();
+				if( jQuery(this).hasClass('cke') )
+				{
+					if( jQuery(props.draggable).attr("ckclass") != "" )
+					{
+						CKEDITOR.instances[jQuery(this).attr('id').replace('cke_', '')].openDialog(jQuery(props.draggable).attr("ckclass") + 'Dialog');
+					}else
+					{
+						alert( 'This pluslet isn\'t configured to drag into CKEditor!' );
+					}
+				}else
+				{
+					// if there can only be one, could remove from list items
+					var drop_id = jQuery(this).attr("id");
+					var drag_id = jQuery(props.draggable).attr("id");
+					//alert(drag_id);
+					var pluslet_title = jQuery(props.draggable).html();
 
-				// Create new node below, using a random number
+					// Create new node below, using a random number
 
-				var randomnumber=Math.floor(Math.random()*1000001);
-				jQuery(this).next('div').prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
-				//alert (drag_id + " drop: " + drop_id);
+					var randomnumber=Math.floor(Math.random()*1000001);
+					jQuery(this).next('div').prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
+					//alert (drag_id + " drop: " + drop_id);
 
-				// Load new data, on success (or failure!) change class of container to "pluslet", and thus draggable in theory
-				jQuery("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
-					from: drag_id,
-					to: drop_id,
-					pluslet_title: pluslet_title,
-					flag: 'drop',
-					this_subject_id:subject_id
-				},
-				function() {
+					// Load new data, on success (or failure!) change class of container to "pluslet", and thus draggable in theory
+					jQuery("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
+						from: drag_id,
+						to: drop_id,
+						pluslet_title: pluslet_title,
+						flag: 'drop',
+						this_subject_id:subject_id
+					},
+					function() {
 
-					// 1.  remove the wrapper
-					// 2. put the contents of the div into a variable
-					// 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
-					var cnt = jQuery("#new-" + randomnumber).contents();
-					jQuery("#new-" + randomnumber).replaceWith(cnt);
-					//alert(jQuery(this).attr("id"));
-					jQuery(this).addClass("unsortable");
+						// 1.  remove the wrapper
+						// 2. put the contents of the div into a variable
+						// 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
+						var cnt = jQuery("#new-" + randomnumber).contents();
+						jQuery("#new-" + randomnumber).replaceWith(cnt);
+						//alert(jQuery(this).attr("id"));
+						jQuery(this).addClass("unsortable");
 
-					jQuery("#response").hide();
-					//Make save button appear, since there has been a change to the page
-					jQuery("#save_guide").fadeIn();
+						jQuery("#response").hide();
+						//Make save button appear, since there has been a change to the page
+						jQuery("#save_guide").fadeIn();
 
 
-					jQuery("a[class*=showmedium]").colorbox({
-						iframe: true,
-						innerWidth:"90%",
-						innerHeight:"80%",
-						maxWidth: "1100px",
-						maxHeight: "800px"
+						jQuery("a[class*=showmedium]").colorbox({
+							iframe: true,
+							innerWidth:"90%",
+							innerHeight:"80%",
+							maxWidth: "1100px",
+							maxHeight: "800px"
+						});
+
+						makeHelpable("img[class*=help-]");
+
 					});
-
-					makeHelpable("img[class*=help-]");
-
-				});
+				}
 			}
 		},
 		over: function(event, ui)
@@ -510,10 +529,12 @@ function setupSaveButton( lstrSelector )
 
 		jQuery('a[href^="#tab"]').each(function(){
 			var lstrName = jQuery(this).text();
+			var lstrExternal = jQuery(this).parent('li').attr('data-external-link');
 			var tab_id = $(this).attr("href").split("tabs-")[1];
 
 			var lobjTab = {};
 			lobjTab.name = lstrName;
+			lobjTab.external = lstrExternal;
 
 			jQuery('div#tabs-' + tab_id + ' div.portal-column-0').sortable();
 			jQuery('div#tabs-' + tab_id + ' div.portal-column-1').sortable();

@@ -161,10 +161,10 @@ $all_boxes = "
 
 		if( method_exists( $lstrObj, 'getMenuName' ) )
 		{
-			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\">" . call_user_func(array( $lstrObj, 'getMenuName' )) . "</li>";
+			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuName' )) . "</li>";
 		}else
 		{
-			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\">" . $lstrPluslet . "</li>";
+			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . $lstrPluslet . "</li>";
 		}
 	}
 }
@@ -193,7 +193,8 @@ $conditions
 $r = mysql_query($q);
 
 while ($myrow = mysql_fetch_array($r)) {
-    $all_boxes .= "<li class=\"box-item draggable clone\" id=\"pluslet-id-" . $myrow[0] . "\">\n";
+	$lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
+    $all_boxes .= "<li class=\"box-item draggable clone\" id=\"pluslet-id-" . $myrow[0] . "\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>\n";
     $all_boxes .= $myrow[1] . "</li>";
 }
 
@@ -374,6 +375,36 @@ jQuery(function() {
     tabCounter = <?php echo ( count($all_tabs) ); ?>;
     var tabs = $( "#tabs" ).tabs();
 
+	//add click event for external url tabs
+	jQuery('li[data-external-link]').each(function()
+	{
+		if($(this).attr('data-external-link') != "")
+		{
+			jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
+			{
+				window.open($(this).parent('li').attr('data-external-link'), '_blank');
+				evt.stopImmediatePropagation();
+			});
+
+			jQuery(this).children('a[href^="#tabs-"]').each(function() {
+				var elementData = jQuery._data(this),
+				events = elementData.events;
+
+				var onClickHandlers = events['click'];
+
+				// Only one handler. Nothing to change.
+				if (onClickHandlers.length == 1) {
+					return;
+				}
+
+				onClickHandlers.splice(0, 0, onClickHandlers.pop());
+			});
+		}
+	});
+
+    //preselect first
+	tabs.tabs('select', 0);
+
     // modal dialog init: custom buttons and a "close" callback reseting the form inside
     var dialog = $( "#dialog" ).dialog({
         autoOpen: false,
@@ -387,6 +418,15 @@ jQuery(function() {
                 $( this ).dialog( "close" );
             }
         },
+    	open: function() {
+    		$(this).find('input[name="tab_external_link"]').hide();
+    		$(this).find('input[name="tab_external_link"]').prev().hide();
+    		if( tabCounter > 0 )
+    		{
+    			$(this).find('input[name="tab_external_link"]').show();
+    			$(this).find('input[name="tab_external_link"]').prev().show();
+    		}
+    	},
         close: function() {
             form[ 0 ].reset();
         }
@@ -399,10 +439,52 @@ jQuery(function() {
         width: "auto",
         height: "auto",
         buttons: {
-            "Rename": function() {
+            "Save": function() {
               var id = window.lastClickedTab.replace("#tabs-", "");
 
               $( 'a[href="#tabs-' + id + '"]' ).text( $('input[name="rename_tab_title"]').val() );
+
+           	  if( $( 'a[href="#tabs-' + id + '"]' ).parent('li').attr( 'data-external-link') != '' )
+           	  {
+           	  	$( 'a[href="#tabs-' + id + '"]' ).each(function() {
+           			var elementData = jQuery._data(this),
+           			events = elementData.events;
+
+           			var onClickHandlers = events['click'];
+
+           			// Only one handler. Nothing to change.
+           			if (onClickHandlers.length == 1) {
+           				return;
+           			}
+
+           			onClickHandlers.splice(0, 1);
+           		});
+           	  }
+
+              $( 'a[href="#tabs-' + id + '"]' ).parent('li').attr( 'data-external-link', $('input[name="tab_external_url"]').val() );
+
+              if( $('input[name="tab_external_url"]').val() != '')
+              {
+              	$( 'a[href="#tabs-' + id + '"]' ).on('click', function(evt)
+              	{
+              		window.open($(this).parent('li').attr('data-external-link'), '_blank');
+              		evt.stopImmediatePropagation();
+              	});
+
+              	$( 'a[href="#tabs-' + id + '"]' ).each(function() {
+              		var elementData = jQuery._data(this),
+              		events = elementData.events;
+
+              		var onClickHandlers = events['click'];
+
+              		// Only one handler. Nothing to change.
+              		if (onClickHandlers.length == 1) {
+              			return;
+              		}
+
+              		onClickHandlers.splice(0, 0, onClickHandlers.pop());
+              	});
+              }
 
               $( this ).dialog( "close" );
               $('#save_guide').fadeIn();
@@ -414,6 +496,7 @@ jQuery(function() {
               $( 'div#tabs-' + id ).remove();
               tabs.tabs("destroy");
               tabs.tabs();
+              tabCounter--;
               $( this ).dialog( "close" );
               $('#save_guide').fadeIn();
             },
@@ -424,6 +507,17 @@ jQuery(function() {
         open: function(event, ui) {
           var id = window.lastClickedTab.replace("#tabs-", "");
           $(this).find('input[name="rename_tab_title"]').val($( 'a[href="#tabs-' + id + '"]' ).text());
+
+          //external url add text input unless first tab
+          $(this).find('input[name="tab_external_url"]').val('');
+          $(this).find('input[name="tab_external_url"]').hide();
+          $(this).find('input[name="tab_external_url"]').prev().hide();
+          $(this).find('input[name="tab_external_url"]').val($( 'a[href="#tabs-' + id + '"]' ).parent('li').attr('data-external-link'));
+          if( id != '0' )
+          {
+            $(this).find('input[name="tab_external_url"]').show();
+            $(this).find('input[name="tab_external_url"]').prev().show();
+          }
         },
         close: function() {
             form[ 0 ].reset();
@@ -446,9 +540,11 @@ jQuery(function() {
     // actual addTab function: adds new tab using the input from the form above
     function addTab() {
         var label = tabTitle.val() || "Tab " + tabCounter,
+    	external_link = $('input#tab_external_link').val(),
         id = "tabs-" + tabCounter,
         li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
         tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+    	$(li).attr('data-external-link', external_link);
         tabs.find( ".ui-tabs-nav" ).append( li );
 
         var slim = jQuery.ajax({
@@ -477,6 +573,37 @@ jQuery(function() {
                         jQuery("#save_guide").fadeIn();
 
                         tabs.tabs();
+
+                    	if( external_link == '' )
+                    	{
+                    		tabs.tabs('select', tabCounter);
+                    	}else
+                    	{
+                    		tabs.tabs('select', 0);
+                    	}
+
+                    	jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
+                    	{
+                    		window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    		evt.stopImmediatePropagation();
+                    	});
+
+                    	jQuery(li).children('a[href^="#tabs-"]').each(function() {
+                    		var elementData = jQuery._data(this),
+                    		events = elementData.events;
+
+                    		var onClickHandlers = events['click'];
+
+                    		// Only one handler. Nothing to change.
+                    		if (onClickHandlers.length == 1) {
+                    			return;
+                    		}
+
+                    		onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                    	});
+
+
+
                         tabCounter++;
                     }
                 });
@@ -505,8 +632,8 @@ jQuery(window).load(function(){
 <div id="guide_header">
     <div class="pure-g-r">
       <div class="wrapper-full">
-        <div class="pure-u-1-2"> 
-        
+        <div class="pure-u-1-2">
+
             <ul id="guide_nav">
                 <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
                 <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
@@ -530,7 +657,7 @@ jQuery(window).load(function(){
         <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
         <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
         <a href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/gears-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
-        
+
         </h2></div>
       </div>
     </div>
@@ -541,13 +668,11 @@ jQuery(window).load(function(){
 
 <!-- Save Button -->
  <p align="center" id="savour"><button class="button" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
-</div>  
+</div>
 <!-- end guide header -->
 
 <!-- Feedback -->
 <div id="response"></div>
-
-
 
 <!-- new tab form (suppressed until wrench clicked) -->
 <div id="dialog" title="Tab data">
@@ -574,8 +699,8 @@ jQuery(window).load(function(){
         <input type="text" name="rename_tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
         </div>
         <div class="pure-control-group">
-            <label for="tab_external_link"><?php print _("Redirect URL"); ?></label>
-            <input type="text" name="tab_external_link" id="tab_external link" />
+            <label for="tab_external_url"><?php print _("Redirect URL"); ?></label>
+            <input type="text" name="tab_external_url" id="tab_external_url" />
         </div>
         </fieldset>
     </form>
@@ -586,13 +711,14 @@ jQuery(function() {
     $(tabs).find( ".ui-tabs-nav" ).sortable({
         axis: "x",
         stop: function(event, ui) {
-            if(jQuery(ui.item).attr("id") == 'add_tab' || jQuery(ui.item).parent().children(':first').attr("id") != 'add_tab')
+            if(jQuery(ui.item).attr("id") == 'add_tab' || jQuery(ui.item).parent().children(':first').attr("id") != 'add_tab' || jQuery(ui.item).attr('data-external-link') != '')
                 $(tabs).find( ".ui-tabs-nav" ).sortable("cancel");
             else
             {
                // $(tabs).tabs( "refresh" );
-            	tabs.tabs("destroy");
-            	tabs.tabs();
+            	$(tabs).tabs("destroy");
+            	$(tabs).tabs();
+            	$(tabs).tabs('select', 0);
             	jQuery("#response").hide();
                 jQuery("#save_guide").fadeIn();
             }
