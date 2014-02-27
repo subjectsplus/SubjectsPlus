@@ -20,8 +20,7 @@ class BuildNav {
       
     print "
       <ul id=\"topnav\">
-      <!--<li><a href=\"$CpanelPath" . "index.php\">SP</a></li>-->
-      <li class=\"nohover\"><a class=\"profile\" href=\"\">$headshot</a>
+      <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
       <div>$headshot_lg
       <p>Hi Andrew.</p>
       <br style=\"clear: both\" />

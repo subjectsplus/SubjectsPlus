@@ -5,6 +5,14 @@
     Description: stylesheet for easy overrides of css; always called last by assestic
 */
 
+  @font-face {
+    font-family: 'ChunkFiveRegular';
+    src: url('Chunkfive-webfont.eot');
+    src: url('Chunkfive-webfont.eot?#iefix') format('embedded-opentype'), url('Chunkfive-webfont.woff') format('woff'), url('Chunkfive-webfont.ttf') format('truetype'), url('Chunkfive-webfont.svg#ChunkFiveRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 #controlpage div.pluslet {
 padding: 0em 0em;
 margin: 1em 1em 1em 0;
@@ -155,11 +163,11 @@ div.breather > h2 {
 
     color: #777777;
     text-decoration: none !important;
-    padding: .5em 1em;
+    padding: 0em 1em;
     text-align: left;
     font-size: 1.2em;
     color: #fff;
-    font-weight: bold;
+
 
 }
 
@@ -250,4 +258,134 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 .sptab {
 	background-color: #dfdfdf !important;
 	
+}
+/* Override for V 3, multiple layouts */
+
+#portal-column-0, #portal-column-1, #portal-column-2, .portal-column-0, .portal-column-1, .portal-column-2   {
+    width: 100%;
+	background-color: transparent;
+}
+
+/* Layout dropdown in header */
+
+.inner-nav-content {
+
+position:absolute;
+display:none;
+
+
+}
+
+#slider_options, #tabs_options {
+    background-color: #FFFFFF;
+    clear: left;
+    list-style-type: none;
+    margin: 0 10px 0 -12px !important;
+    padding: 1%;
+    position: absolute;
+    top: 50px;
+    width: 250px;
+    z-index: 1000 !important;
+    
+    
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+#slider_options p, #tabs_options p {
+    color: #333;
+    padding: .5em;
+    font-size: smaller;
+}
+
+.slider_options_guide {
+    display: none;
+    width: 200px;
+    padding: 1em;
+    
+}
+
+
+#tabs {
+    
+    clear:both;
+    position: relative;
+    width: 94%;
+    margin: 0 auto;
+    top:35px;
+}
+
+#tab_options {
+    
+    display: none;
+    width: 200px;
+    padding: 1em;
+}
+
+#save_tab_options {
+    display:none;clear: left;margin-top: 1em;font-size: smaller;
+}
+
+#tabs_options input {
+    margin-bottom: 1em;
+    width: 100px;
+}
+
+#tab_wrapper {
+    margin-top: 0em;min-height: 600px;
+}
+
+#tab_header {
+    
+}
+
+#tab_header ul {
+    margin-left: 2em;
+}
+
+#tab_header ul li {
+    list-style-type: none;
+    padding: 0px 5px 1px 5px;
+    margin: 0px 5px 0 5px;
+    display: block-inline;
+    float: left;
+    background-color: #cccc99;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    cursor: pointer;
+}
+
+#tab_header ul li.active {
+    background-color: orange;
+}
+
+#tab_header ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+#tabs li .ui-icon-wrench { float: left; margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+#tabs > .ui-widget-content {
+
+}
+
+
+#save_layout {
+    display:none;
+    clear: left;
+    margin-top: 1em;
+    font-size: smaller;
+    
+}
+
+#save_guide {
+    display:none;
+    
 }

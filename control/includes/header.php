@@ -174,7 +174,7 @@ mb_internal_encoding('UTF-8');
     }
     ?>
 
-<img class="background" src="<?php print $AssetPath; ?>/images/admin/mission_control2.jpg" alt="background" />
+<!--<img class="background" src="<?php print $AssetPath; ?>/images/admin/mission_control2.jpg" alt="background" />-->
 
 <header id="header">
     <div class="pure-g-r">

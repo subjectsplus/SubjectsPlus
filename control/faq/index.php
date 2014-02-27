@@ -73,36 +73,54 @@ if ($faqArray) {
   $faq_list = "<p>" . _("No FAQs yet.  Why not dream one up?") . "</p>";
 }
 
-
-print "<br />
-<div class=\"faq-visible\">
-    <div class=\"box no_overflow\" id=\"answered\">
-    <p><strong>$row_count1 " . _("FAQs visible") . "</strong> ";
-if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
-  print "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
-}
-print "</p><br />
-    $faq_list
+?>
+<div class="pure-g-r">
+  <div class="pure-u-2-3">  
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("View FAQs"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <p><strong><?php print $row_count1 . " " . _("FAQs visible"); ?></strong> 
+        <?php
+        if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
+          print "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
+        }
+        ?>
+        </p>
+        <?php echo $faq_list; ?>
+      </div>
     </div>
+  </div>
+  <div class="pure-u-1-3">  
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("Create FAQ"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <p><a href="faq.php?faq_id=&amp;wintype=pop" class="showmedium-reloader"><?php print _("CREATE FAQ"); ?></a></p>
+      </div>
+    </div>
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("About FAQs"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="topimage"></div>
+      <div class="pluslet_body">
+        <p><img src="<?php print $IconPath; ?>/pencil.png" alt="<?php print _("Edit FAQ"); ?>" width="16" height="16" /> <?php print _("Edit FAQ"); ?></p>
+        <p><img src="<?php print $IconPath; ?>/eye.png" alt="<?php print _("View FAQ"); ?>" width="16" height="16" /> <?php print _("View FAQ on Public Site"); ?></p>
+      </div>
+    </div>
+  </div>
+
 
 </div>
-
-<div class=\"faq-create\">
-  
-    <div class=\"box\">
-    <h2 class=\"bw_head\">" . _("Create FAQ") . "</h2>
-    <p><a href=\"faq.php?faq_id=&amp;wintype=pop\" class=\"showmedium-reloader\">" . _("CREATE FAQ") . "</a></p>
-    </div>
-    
-    <div class=\"box\">
-    <h2 class=\"bw_head\">" . _("About FAQs") . "</h2>
-    <p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> — " . _("Edit FAQ") . "</p>
-    <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> — " . _("View FAQ on Public Site") . "</p>
-    </div>
-</div>
-";
-
-
+<?php
 include("../includes/footer.php");
 ?>
 

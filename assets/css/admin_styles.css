@@ -25,6 +25,9 @@ body {
     line-height: 1.5;
 
 }*/
+
+
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
     border-collapse: separate;
@@ -73,7 +76,11 @@ body {
     text-align: left;
     line-height: 1.5em;
     color: #333;
-    background: #e3e1d9 url(../../assets/images/background.jpg) no-repeat center top;;
+    background: #e3e1d9 url(../../assets/images/admin/mission_control_lg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
 }
 
@@ -132,6 +139,7 @@ header {
 
 
 #topnav {
+    font-family: 'ChunkFiveRegular';
     float: left;
     list-style: none outside none;
     margin: 0;
@@ -145,28 +153,27 @@ header {
 
 #topnav li a {
 
-    color: #777777;
+
     text-decoration: none;
     padding: .5em 1em;
     text-align: left;
     font-size: 1.2em;
     color: #333;
-
+    color: #858585;
 }
 
 #topnav li a.profile {padding-right: 0px;}
 
 #topnav li a.selected, #topnav li:hover, #topnav li.selected {
-   background-color: #858585;   
-   background-color: #2f2f2f;
+    color: #E488B6;
 }
 
 #topnav li:hover {
-   background-color: #E488B6;   
+      
 }
 
 #topnav li.selected a, #topnav li a:hover {
-  color: #FFFFFF !important;
+  color: #E488B6 !important;
 }
 
 #topnav li.nohover {
@@ -224,7 +231,7 @@ header {
 }
 
 #topnav > li > div ul li a:hover {
-  font-weight: bold;
+  color: #E488B6;
 }
 
 #topnav > li > div ul li:last-child, .last-item {border: none !important;}
@@ -236,7 +243,10 @@ header {
   margin-left: .5em;
 }
 
-
+#topnav li#logospot img {
+    float: left;
+    margin: .5em 0 0 2.5em;
+}
 
 
 /* old stuff? */
