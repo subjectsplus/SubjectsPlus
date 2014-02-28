@@ -9,7 +9,7 @@
  */
 
 use SubjectsPlus\Control\DBConnector;
-    
+
 $subcat = "guides";
 $page_title = "Modify Guides in SubjectsPlus";
 
@@ -17,7 +17,7 @@ include("../includes/config.php");
 include("../includes/header.php");
 
 $gear_alt = _("Edit Guide Metadata");
-$view_alt = _("View Guide on Public Site");
+$eye_alt = _("View Guide on Public Site");
 $linkie_alt = _("Check Guide Links");
 
 try {
@@ -82,7 +82,7 @@ if ($num_rows > 0) {
 ?>
 
 <div class="pure-g-r">
-  <div class="pure-u-1-3">  
+  <div class="pure-u-1-3">
     <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Edit Your Guides"); ?></div>
@@ -96,7 +96,7 @@ if ($num_rows > 0) {
   </div>
 
 
-  <div class="pure-u-1-3">  
+  <div class="pure-u-1-3">
     <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("All Guides"); ?></div>
@@ -112,7 +112,7 @@ if ($num_rows > 0) {
   </div>
 
 
-  <div class="pure-u-1-3">  
+  <div class="pure-u-1-3">
     <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Create"); ?></div>

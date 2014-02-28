@@ -42,7 +42,7 @@ $all_cattags = array( "Noise", "Resources", "Computers", "Facilities", "Services
 
 // To add a new background option (for the admin), create a new css file (e.g.
 // sp/assets/css/green.css ) and then add "green" to this array.  Boom!
-$all_bgs = array("basic", "flocking", "metamorphosis");
+$all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
 // This array contains the list of columns that should be omitted in the user forms
 // First Name, Last Name, Email Address, Ptags, and Password cannot be omitted
