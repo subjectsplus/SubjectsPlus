@@ -62,7 +62,7 @@ class Pluslet_3 extends Pluslet {
 
 	public static function getCkPluginName()
 	{
-		return 'subsplus_asset';
+		return 'subsplus_sub_spe';
 	}
 
 }

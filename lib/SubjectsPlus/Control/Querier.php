@@ -37,7 +37,7 @@ class Querier {
 				return FALSE;
 			}
 		} else {
-			throw new Exception('Query failed: ' . $query . '\n');
+			throw new \Exception('Query failed: ' . mysql_error() . '\n');
 		}
 	}
 

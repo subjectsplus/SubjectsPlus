@@ -351,6 +351,14 @@ class Pluslet {
                 }
             } // end foreach
         } else {
+
+        	$matches = array();
+        	preg_match_all( '/<div[^>]*data-subsplus-sub-spe[^>]*>.*<\/div>/', $this->_body, $matches);
+        	if(count($matches[0]) > 0){
+        		$this->_body = var_dump($matches);
+        		return;
+        	}
+
             $this->_body = $this->_body;
             return;
         }
