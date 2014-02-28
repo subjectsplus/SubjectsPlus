@@ -639,7 +639,7 @@ jQuery(window).load(function(){
                 <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
                     <?php print $all_boxes; ?>
                 </li>
-                <li class="showdisco"><a href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
+                <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
                 <li><a href=""><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
                 <!--<li class="showrecord"><a href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></a></li>
                 <li class="showmeta"><a href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></a></li>
@@ -656,7 +656,7 @@ jQuery(window).load(function(){
         <div class="pure-u-1-2"> <h2>
         <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
         <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-        <a href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/gears-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+        <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/gears-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
 
         </h2></div>
       </div>
