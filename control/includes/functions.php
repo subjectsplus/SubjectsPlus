@@ -808,7 +808,7 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
   return $staffer;
 }
 
-function getDBbyTypeBoxes($selected_type = "") {
+function getDBbyTypeBoxes($selected_type = "", $show_formats = TRUE) {
 
   $types_option_boxes = "";
   $alphabet = "";
@@ -828,17 +828,18 @@ function getDBbyTypeBoxes($selected_type = "") {
       $types_option_boxes .= ">" . _( $new_tag ) . "</option>";
     }
 
-
-  $alphabet .= " <select name=\"browser\" onChange=\"window.location=this.options[selectedIndex].value\">
-  <option value=\"\">- by format -</option>
-    <option value=\"databases.php?letter=bytype\">" . _("List All Format Types") . "</option>
-        $types_option_boxes
-        </select>";
+    if ($show_formats == TRUE) {
+      $alphabet .= " <select name=\"browser\" onChange=\"window.location=this.options[selectedIndex].value\">
+      <option value=\"\">- by format -</option>
+      <option value=\"databases.php?letter=bytype\">" . _("List All Format Types") . "</option>
+      $types_option_boxes
+      </select>";
+    }
 
   return $alphabet;
 }
 
-function getLetters($table, $selected = "A", $numbers = 1) {
+function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE) {
 
   $selected = scrubData($selected);
 
@@ -907,7 +908,7 @@ function getLetters($table, $selected = "A", $numbers = 1) {
   }
 
   if ($table == "databases") {
-    $alphabet .= getDBbyTypeBoxes($selected_type);
+    $alphabet .= getDBbyTypeBoxes($selected_type, $show_formats);
     $alphabet .= getDBbySubBoxes($selected_subject);
   }
 

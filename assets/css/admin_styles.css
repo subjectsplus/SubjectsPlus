@@ -198,14 +198,20 @@ header {
     border-radius: 5px;
     padding: 0px 0;
     position: absolute;
-    border: 1px solid #333;
+    border: 0px solid #9A9A9A;
     top: 60px;
     min-width: 200px;
     max-width: 800px;
     z-index: 1000;
+    -moz-box-shadow: 2px 2px 3px #9a9a9a;
+    -webkit-box-shadow: 2px 2px 3px #9a9a9a;
+    box-shadow: 2px 2px 3px #9a9a9a;
 
 }
 
+#topnav > li#logospot > div {
+    left: 3em;
+}
 #topnav > li:hover > div {
     opacity: 1;
     visibility: visible;
@@ -243,11 +249,16 @@ header {
   margin-left: .5em;
 }
 
-#topnav li#logospot img {
+#topnav > li#logospot img {
     float: left;
     margin: .5em 0 0 2.5em;
 }
 
+#topnav > li#logospot div img {
+    float: left;
+    margin: .5em 1em 0 .5em;
+    border: 1px solid #9A9A9A;
+}
 
 /* old stuff? */
 

@@ -90,7 +90,7 @@ if (isset($_POST["searchterm"])) {
   $page_title = _("Database List: Search Results");
 }
 
-$alphabet = getLetters("databases", $_GET["letter"]);
+$alphabet = getLetters("databases", $_GET["letter"], "", FALSE);
 
 
 // Get our newest databases

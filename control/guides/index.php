@@ -17,7 +17,7 @@ include("../includes/config.php");
 include("../includes/header.php");
 
 $gear_alt = _("Edit Guide Metadata");
-$view_alt = _("View Guide on Public Site");
+$eye_alt = _("View Guide on Public Site");
 $linkie_alt = _("Check Guide Links");
 
 try {
