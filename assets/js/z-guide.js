@@ -646,9 +646,8 @@ function makeDeleteable( lstrSelector )
     jQuery(lstrSelector).livequery('click', function(event) {
 
         var delete_id = jQuery(this).attr("id").split("-");
-        //jQuery(this).parent().hide();
         jQuery(this).after('<div class="rec_delete_confirm growl growl-default">Are you sure?  <a class="button" id="confirm-yes-' + delete_id[1] + '">Yes</a>  <a class="button" id="confirm-no">No</a></div>');
-
+        //jQuery(this).after('<div class="rec_delete_confirm">Are you sure?  <a id="confirm-yes-' + delete_id[1] + '">Yes</a> | <a id="confirm-no">No</a></div>');
         return false;
     });
 
@@ -838,6 +837,15 @@ function setupMiscLiveQueries()
         var tab_id = jQuery(this).attr("id").split("-");
         //var selected_tab = "#pluslet-" + box_id[1];
         setupTabs(tab_id[1]);
+
+     });
+
+    ////////////////////
+    // Make titlebar options box clickable
+    ///////////////////
+    jQuery('a[id*=settings-]').livequery('click', function(event) {
+    	
+        jQuery(this).parent().next('.box_settings').toggle('slow');
 
      });
 

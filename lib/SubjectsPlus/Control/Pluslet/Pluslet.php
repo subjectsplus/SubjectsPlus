@@ -4,7 +4,7 @@
  *   @file sp_Guide
  *   @brief manage guide metadata
  *
- *   @author agdarby, rgilmour
+ *   @author agdarby, rgilmour, dgonzalez
  *   @date Jan 2011
  *   @todo better blunDer interaction, better message, maybe hide the blunder errors until the end
  */
@@ -22,6 +22,11 @@ class Pluslet {
     protected $_pluslet_body_bonus_classes = "";
     protected $_editable = "";
     protected $_icons = "";
+    // added v 3
+    protected $_hide_titlebar = "";
+    protected $_collapse_body = "";
+    protected $_suppress_body = "";
+    protected $_titlebar_styling = "";   
 
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
@@ -44,7 +49,8 @@ class Pluslet {
         /////////////
 
         $querier = new Querier();
-        $q1 = "SELECT pluslet_id, title, body, clone, type, extra FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
+        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling
+        FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
         //print $q1;
         $plusletArray = $querier->getResult($q1);
@@ -59,6 +65,10 @@ class Pluslet {
             $this->_clone = $plusletArray[0]["clone"];
             $this->_type = $plusletArray[0]["type"];
         	$this->_extra = $plusletArray[0]["extra"];
+            $this->_hide_titlebar = $plusletArray[0]["hide_titlebar"];
+            $this->_collapse_body = $plusletArray[0]["collapse_body"];
+            $this->_suppress_body = $plusletArray[0]["suppress_body"];
+            $this->_titlebar_styling = $plusletArray[0]["titlebar_styling"];
         }
 
 
@@ -76,7 +86,11 @@ class Pluslet {
         switch ($view) {
             case "admin":
                 $helptext = _("Help");
-                $this->_icons = "<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img> <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>";
+                $settingstext = _("Box Settings");
+                $this->_icons = "
+                <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
+                <!--<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img> 
+                <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>-->";
 
                 // If editable, give the pencil icon
                 if ($this->_editable == TRUE) {
@@ -112,6 +126,15 @@ class Pluslet {
     protected function assemblePluslet($hide_titlebar=0) {
 
     	global $IconPath;
+        global $titlebar_styles;
+
+        // generate our titlebar styles
+        $tb_styles = "";
+        foreach ($titlebar_styles as $key => $value) {
+            $tb_styles .= "<option value=\"$value\" style=\"$value\"";
+                if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
+            $tb_styles .= ">$key</option>";
+        }
 
         $this->_pluslet = "<a name=\"box-" . $this->_pluslet_id . "\"></a>";;
 
@@ -125,11 +148,41 @@ class Pluslet {
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
             <div class=\"titlebar\">";
         	//only if on admin side, display sort icon
-        	if( $this->_visible_id != '' )
+        	if( $this->_visible_id != '' ) {
         		$this->_pluslet .= "<img src=\"$IconPath/drag_arrow.png\" id=\"sort\" />";
+            }
 
         	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
             <div class=\"titlebar_options\">$this->_icons</div>
+            <div class=\"box_settings\">
+            <form class=\"pure-form pure-form-aligned\">
+            <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
+
+                if ($this->_hide_titlebar == 1) {$this->_pluslet .= " checked";}
+
+            $this->_pluslet .= "> " . _("Hide titlebar") . "
+            </label>
+            <label for=\"start-collapsed-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"start-collapsed-$this->_pluslet_id\" type=\"checkbox\"";
+
+                if ($this->_collapse_body == 1) {$this->_pluslet .= " checked";}
+
+            $this->_pluslet .= "> " . _("Hide box body by default (public site)") . "
+            </label>
+            <label for=\"nobody-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"nobody-$this->_pluslet_id\" type=\"checkbox\"";
+
+                if ($this->_suppress_body == 1) {$this->_pluslet .= " checked";}
+
+            $this->_pluslet .= "> " . _("Hide box body completely") . "
+            </label>
+            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
+                <select id=\"titlebar-styling-$this->_pluslet_id\">
+                    $tb_styles
+                </select>
+            </form>
+            </div>
             </div>";
 
             if ($this->_body != "") {
@@ -404,7 +457,7 @@ class Pluslet {
 		} else {
 
 			// notitle hack
-			if (trim($this->_title) == "notitle") { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
+			if ($this->_hide_titlebar == 1) { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
 
 			$this->onViewOutput();
 

@@ -68,8 +68,8 @@ background-color: #E488B6;
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
-height: 20px;
-width: 20px;
+height: 15px;
+width: 15px;
 cursor: pointer;
 }
 
@@ -213,6 +213,15 @@ div.breather > h2 {
     line-height: 1.5em !important;
     font-size: 1.1em !important;
     padding: .2em .2em .2em .5em;
+}
+
+.box_settings {
+	clear: both; 
+	border-top: 1px solid #E488B6;
+	padding: .5em 0;
+	text-transform: none;
+	font-size: 0.9em;
+	display: none;
 }
 
 .box-item {
@@ -388,4 +397,17 @@ display:none;
 #save_guide {
     display:none;
     
+}
+
+/* User Styles */
+/* Front-end pluslet customization */
+
+.ts-blackwhite {
+	background-color: #000 !important;
+	color: #fff !important;
+}
+
+.ts-blackwhite {
+	background-color: #fff !important;
+	color: #000 !important;
 }

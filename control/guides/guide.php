@@ -365,6 +365,8 @@ ob_end_flush();
 
         alert("doublclickitude!");
      })
+
+     
 });
 
 //setup jQuery UI tabs and dialogs
@@ -656,7 +658,7 @@ jQuery(window).load(function(){
         <div class="pure-u-1-2"> <h2>
         <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
         <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-        <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/gears-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+        <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
 
         </h2></div>
       </div>

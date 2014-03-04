@@ -35,7 +35,7 @@ switch ($_POST["type"]) {
         $q = "UPDATE staff SET extra = '" . mysql_real_escape_string($extra_stuff) . "' WHERE staff_id = " . $_SESSION["staff_id"];
         $r = MYSQL_QUERY($q);
         $_SESSION['css'] = $_POST["css_file"];
-        print "<script> jQuery.growl.notice({message:'', title:'" .  _("Background Updated!") . "'});</script>";
+        print "<script> jQuery.growl.notice({message:'', title:'" .  _("Background Updated!") . "'});</script>";
         break;
 }
 ?>
