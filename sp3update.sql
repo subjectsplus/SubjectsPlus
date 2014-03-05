@@ -9,6 +9,8 @@ ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`;
 ALTER TABLE `subject` 
 ADD COLUMN `parent` BIGINT(20) NULL AFTER `extra`;
 
+/* And give it a header, for header switching (perhaps UM only) */
+ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra` 
 
 /* Let the tab point to external url */
 
