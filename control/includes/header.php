@@ -154,14 +154,12 @@ mb_internal_encoding('UTF-8');
     
 
     if (isset($_SESSION['css'])) {
-      print "<link id=\"css_choice\" href=\"$AssetPath" . "css/" . $_SESSION['css'] . ".css\" rel=\"stylesheet\" type=\"text/css\"></link>";
+      print "<link id=\"css_choice\" href=\"$AssetPath" . "css/theme/" . $_SESSION['css'] . ".css\" rel=\"stylesheet\" type=\"text/css\"></link>";
     }
  
       
         
     ?>
-
-<link rel="stylesheet" href="<?php echo $AssetPath; ?>css/override.css" type="text/css" media="all" />
 
 <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
   </head>
@@ -174,15 +172,10 @@ mb_internal_encoding('UTF-8');
     }
     ?>
 
-<!--<img class="background" src="<?php print $AssetPath; ?>/images/admin/mission_control2.jpg" alt="background" />-->
-
 <header id="header">
     <div class="pure-g-r">
         <div class="pure-u-1">
     		<div class="wrapper-full">
-
-    <!--<div id="wrap">
-      <div id="header"> -->
 
         <?php
         // Our Nav is built here:

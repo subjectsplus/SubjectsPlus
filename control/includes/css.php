@@ -49,11 +49,6 @@
                                             ,new FilesystemCache($cache)
                                             ));
     
-    $am->set('guide', new AssetCache(
-                                     new FileAsset($assets . '/css/admin/guide.css')
-                                     ,new FilesystemCache($cache)
-                                     ));
-    
     $am->set('override', new AssetCache(
                                         new FileAsset($assets .'/css/admin/override.css')
                                         ,new FilesystemCache($cache)
@@ -69,7 +64,6 @@
     // Step 2.
     // This is where the CSSMin filter will be applied eventually.
     $pure = new AssetCollection(array (new AssetReference($am, 'pure')));
-    $guide = new AssetCollection(array (new AssetReference($am, 'guide')));
     $jqueryui = new AssetCollection(array (new AssetReference($am, 'jqueryui')));
     $colorbox = new AssetCollection(array (new AssetReference($am, 'colorbox')));
     $override = new AssetCollection(array (new AssetReference($am, 'override')));
@@ -83,7 +77,7 @@
     // Step 3.
     // Create an AssetCollection that uses the newly minified css
     //$css = new AssetCollection(array ($pure, $colorbox, $guide,  $jqueryui,  $css_files) );
-    $css = new AssetCollection(array ($pure, $colorbox, $admin_styles, $guide,  $jqueryui, $override) );
+    $css = new AssetCollection(array ($pure, $colorbox, $admin_styles, $jqueryui, $override) );
     
     // Tell the browser that this is CSS and that it should be cached
     

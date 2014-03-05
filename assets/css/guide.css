@@ -62,7 +62,7 @@
 .box-item:hover {
 background: #C03957;
 }
-*/
+
 .guide-nav-item {
     list-style-type: none;
     padding: 5px 5px 5px 5px;
@@ -158,9 +158,9 @@ img { padding-top: 0;}
     padding: 10px;
     background-color: transparent;
 }
+*/
 
-
-/* Section with draggable boxes */
+/* Section with draggable boxes 
 
 #all-results  {
     
@@ -211,7 +211,7 @@ img { padding-top: 0;}
 .zoom a { transition: all 0.2s; }
 .guide-nav-item { transition: all 0.2s; }
 #box_options li { transition: all 0.2s; }
-
+*/
 /*
 
 #box_options {
@@ -268,11 +268,9 @@ img { padding-top: 0;}
 }
 
 
-/* guide.js, get_pluslets.php */
+/* guide.js, get_pluslets.php 
 
 .draggable {
-    
-    
     cursor: move;
 }
 
@@ -304,19 +302,19 @@ li.dropspotty {
 
 
 #dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {float: left; }
-
-/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
-
+*/
+/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) 
 #dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: .7em; margin-left: 1em; vertical-align: text-bottom;}
+*/
 
-/* When you hover over one of the two drop spots, make em show */
+/* When you hover over one of the two drop spots, make em show 
 .drop_hover {background-color: #C03957; border: 1px solid #ccc;}
 
 .dropspot-text {
     position: relative;  font-size: 14pt; font-weight: bold; color: #ccc; margin-right: 1em; margin-bottom: 1em;
-}
+}*/
 
-/* this might be used by the jquery ui plugin . . . */
+/* this might be used by the jquery ui plugin . . . 
 
 .ui-sortable-placeholder {
     
@@ -324,7 +322,7 @@ li.dropspotty {
     border: 1px dotted #CC6699;
     visibility: visible !important;
     height: 50px !important;
-}
+}*/
 
 /*
 .pluslet {
@@ -399,15 +397,14 @@ div.titlebar input {
     text-align: left;
     background-color: #fff;
 }
-*/
+
 
 div.type-heading {
     width: 70%;
     text-transform: uppercase;
 }
-
-/* The following is to stick a margin around objects inserted into pluslets, i.e., youtoobies */
-
+*/
+/* The following is to stick a margin around objects inserted into pluslets, i.e., youtoobies 
 .pluslet_body object {
     margin: 3px 5px 3px 3px;
 }
@@ -491,6 +488,7 @@ float: right;
 width: 28%;
 margin-left: 10px;
 }
+*/
 
 /*
 
@@ -502,7 +500,7 @@ height:15px;
 .titlebar_options {
 height: 15px;
 }
-*/
+
 img.tooltip  {
 width:15px;
 }
@@ -538,4 +536,4 @@ margin-right: 10px;
 
 
 
-
+*/

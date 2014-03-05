@@ -5,28 +5,19 @@
     Description: base stylesheet for backend of subjectsplus, i.e., /control/
 */
 
-/* reset - blueprint mod 
-* {
-    padding: 0;
-    margin: 0;
-}
 
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    font-size: 100%;
-    font-family: inherit;
-    vertical-align: baseline;
-}
-body {
-    line-height: 1.5;
+/* It seems possible you might need to fix the paths to this font */
 
-}*/
-
-
+  @font-face {
+    font-family: 'ChunkFiveRegular';
+    src: url('../../assets/css/admin/Chunkfive-webfont.eot');
+    src: url('../../assets/css/admin/Chunkfive-webfont.eot?#iefix') format('embedded-opentype'), 
+    url('../../assets/css/admin/Chunkfive-webfont.woff') format('woff'), 
+    url('../../assets/css/admin/Chunkfive-webfont.ttf') format('truetype'), 
+    url('../../assets/css/admin/Chunkfive-webfont.svg#ChunkFiveRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
 
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
@@ -84,15 +75,6 @@ body {
 
 }
 
-#wrap {
-
-    min-width: 900px;
-    min-width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-}
-html>body #wrap { min-width: 900px; }
 
 a:link {
     color: #4977A4;
@@ -112,7 +94,9 @@ text-align: left;
 max-width: 1200px;
 }
 
-/* Header and nav/subnav stuff */
+/* //////////////////////
+Header and nav/subnav stuff 
+////////////////////// */
 
 /* note:  this is used for the nasa control room bg image; it gets turned on by choosing the nasa bg option in control/index.php */
 
@@ -181,9 +165,7 @@ header {
 }
 
 #topnav > li > div {
-    position: absolute;
     display: block;
-    
     opacity: 0;
     visibility: hidden;
     overflow: hidden;/**/
@@ -313,22 +295,7 @@ header {
 
 
 /* Main content areas */
-.index-content {
-    clear: both;float: left; margin-right: 1em; width: 600px
-}
 
-.greeting {
-    float: left; margin-right: 1em;
-    
-}
-
-.control-options {
-    float: left;
-}
-
-.background-options {
-    float: left; min-width: 300px;
-}
 
 #maincontent {
     clear: both;
@@ -409,6 +376,8 @@ img.icon {
     text-decoration:underline;
 
 }
+
+/* TABLES */
 
 table td {
     padding: .3em;
@@ -1171,6 +1140,166 @@ div.tooltip div
     clear: right; float: right; width: 45%;margin-left: 10px;
 }
 
+/* GUIDE LAYOUT */
+
+#portal h2 {
+    padding: 0;
+    margin: 0;
+    padding-top: 5px;
+}
+
+
+#container-0 {
+    float: left;
+    width: 15%;
+    padding: 5px;
+}
+
+#container-0 h2 {
+    font-size: 16px;
+    margin: 1px;
+    background-color: none;
+    padding: 2px;
+}
+
+#container-0 h3 {
+    font-size: 14px;
+    margin: 1px;
+}
+
+#container-0 {
+    float: left;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#container-1 {
+    float: left;
+    width: 60%;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#container-2 {
+    float: left;
+    width: 35%;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#all-results  {
+    
+    clear: both;
+    padding: 0px 4px 4px 0px;
+    font-size: .92em;
+    background: rgba(51, 51, 51, .6);
+    margin-top: 0;
+}
+
+#closer {
+    float: left;
+    margin: 0 10px;
+    padding: 3px 5px 3px 5px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+#all-results ul li {
+    list-style-type: none;
+    margin: 0px 10px 0 0px;
+    display: block-inline;
+    float: left;
+    background-color: #fff;
+    color: #333;
+    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    cursor: hand;
+    background-image: url(../images/icons/list-add.png);
+    background-repeat: no-repeat;
+    background-position: 3px 50%;
+    padding: 3px 5px 3px 20px;
+}
+
+.zoom a { transition: all 0.2s; }
+.guide-nav-item { transition: all 0.2s; }
+#box_options li { transition: all 0.2s; }
+
+
+/* guide.js, get_pluslets.php */
+
+.draggable {
+    cursor: move;
+}
+
+
+.dropspotty {
+    position: relative;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    z-index: 50;
+    border: 1px dashed #ccc;
+    
+    padding: 0;
+    height: 50px;
+    
+}
+
+li.dropspotty {
+    height: auto;
+}
+
+.drop-spot-box {
+    font-size: 2em;
+    margin-left: .2em;
+    margin-top: .3em;
+    margin-right: .2em;
+    vertical-align:sub;
+}
+
+
+#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {float: left; }
+
+/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
+
+#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: .7em; margin-left: 1em; vertical-align: text-bottom;}
+
+/* When you hover over one of the two drop spots, make em show */
+.drop_hover {background-color: #C03957; border: 1px solid #ccc;}
+
+.dropspot-text {
+    position: relative;  font-size: 14pt; font-weight: bold; color: #ccc; margin-right: 1em; margin-bottom: 1em;
+}
+
+/* this might be used by the jquery ui plugin . . . */
+
+.ui-sortable-placeholder {
+    
+    background-color: #F8F5F5;
+    border: 1px dotted #CC6699;
+    visibility: visible !important;
+    height: 50px !important;
+}
+
+/* For pluslet designated as a heading */
+div.type-heading {
+    width: 70%;
+    text-transform: uppercase;
+}
+
 /* guides/manage.php */
 
 .manage-your-uploads {
@@ -1248,8 +1377,8 @@ float: left; min-width: 700px;max-width: 75%;
 }
 
 .bullet {
-height:55px;
-width:55px;
+/*height:55px;
+width:55px;*/
 }
 
 
@@ -1280,4 +1409,123 @@ width:15px;
 #logo a img {
     
     float:left;
+}
+
+
+.pluslet_body object {
+    margin: 3px 5px 3px 3px;
+}
+
+.unsortable {
+    cursor:default;
+}
+
+.resultsdiv { color: #fff; }
+
+.togglebase {margin-top: 0;}
+
+.sort_column {
+    background-color: #F8F5F5;
+}
+.portal_column {
+    background-color: #F8F5F5;
+}
+.ui-sortable {
+    background-color: #F8F5F5;
+}
+
+.staff_photo {
+    position: relative;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.staff_photo2 {
+    position: relative;
+    float: left;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin: 0 10px 0 10px;
+}
+
+.smallgrey {
+    color: #CCCCCC; font-size: 11px; text-shadow: none;
+}
+
+
+
+.borderless {
+    border: none;
+}
+
+.toc {
+    float: left;
+    width: 30%;
+    margin: 0 1% 1em 1%;
+}
+
+
+
+.recent-activity {
+    clear: both;
+
+}
+
+.recent-activity-span {
+    color: #666;
+    font-size: 10px;
+}
+
+.recent-activity-link {
+    color: #333;
+}
+
+.fa-star {
+    
+    margin:.2em;
+}
+
+
+.talkback {
+float: right; 
+width: 28%;
+margin-left: 10px;
+}
+
+
+img.tooltip  {
+width:15px;
+}
+
+
+.delete_item {
+width:15px;
+}
+
+.ui-widget-content a {
+color:whitesmoke;
+}
+
+
+.rec_delete_confirm.growl {
+    text-align: right;
+    margin: 5px;
+    padding:  2px 1em 2px 2px;
+    top: 10px;
+    position: fixed;
+    right: 1%;
+    padding: 1%;
+    opacity:1;
+    z-index:5000;
+}
+
+#add_tab {
+cursor:pointer;
+margin-top: 10px;
+margin-left: 10px;
+margin-right: 10px;
 }
