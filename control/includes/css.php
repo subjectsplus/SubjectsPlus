@@ -27,33 +27,42 @@
     // Step 1.
     
     $am->set('pure', new AssetCache(
-                                        new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'pure.css')
+                                        new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'shared' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'pure.css')
                                         ,new FilesystemCache($cache)
                                         
                                         ));
     
     $am->set('jqueryui', new AssetCache(
-                                     new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'jquery-ui.css')
+                                     new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'shared' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'jquery-ui.css')
                                      ,new FilesystemCache($cache)
                                      
                                      ));
     
     $am->set('colorbox', new AssetCache(
-                                     new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'colorbox.css')
+                                     new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'shared' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'colorbox.css')
                                      ,new FilesystemCache($cache)
                                      
                                      ));
-    
-    $am->set('guide', new AssetCache(
-             new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'guide.css')
+
+      $am->set('admin_styles', new AssetCache(
+             new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'admin_styles.css')
              ,new FilesystemCache($cache)
                                      ));
     
+    $am->set('guide', new AssetCache(
+             new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'admin'  . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'guide.css')
+             ,new FilesystemCache($cache)
+                                     ));
+
+$am->set('override', new AssetCache(
+             new FileAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . 'override.css')
+             ,new FilesystemCache($cache)
+                                     ));    
     
     // Glob all the rest of the CSS files together
     
     
-    $am->set('css', new AssetCache(new GlobAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR .  '*.css'), new FilesystemCache($cache)));
+   // $am->set('css', new AssetCache(new GlobAsset($assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR .  '*.css'), new FilesystemCache($cache)));
     
     
     
@@ -63,15 +72,18 @@
     $guide = new AssetCollection(array (new AssetReference($am, 'guide')));
     $jqueryui = new AssetCollection(array (new AssetReference($am, 'jqueryui')));
     $colorbox = new AssetCollection(array (new AssetReference($am, 'colorbox')));
-    $css_files = new AssetCollection(array (new AssetReference($am, 'css')));
+    $override = new AssetCollection(array (new AssetReference($am, 'override')));
+    $admin_styles = new AssetCollection(array (new AssetReference($am, 'admin_styles')));
+
+    //$css_files = new AssetCollection(array (new AssetReference($am, 'css')));
     
     
     
     
     // Step 3.
     // Create an AssetCollection that uses the newly minified css
-    $css = new AssetCollection(array ($pure, $colorbox, $guide,  $jqueryui,  $css_files) );
-    
+    //$css = new AssetCollection(array ($pure, $colorbox, $guide,  $jqueryui,  $css_files) );
+    $css = new AssetCollection(array ($pure, $colorbox, $admin_styles, $guide,  $jqueryui, $override) );
     
     // Tell the browser that this is CSS and that it should be cached
 

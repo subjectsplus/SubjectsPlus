@@ -364,6 +364,19 @@ function setupSaveButton( lstrSelector )
 				break;
 			}
 		}
+
+		///////////////////////////////////////////////////////////////
+		// The box settings  are available on all pluslets potentially
+		// --they determine if titlebar shows, titlebar styling, if body
+		// is collapsed by default, and if body is suppressed (for a header pluslet)
+		////////////////////////////////////////////////////////////////
+
+		var boxsetting_hide_titlebar = jQuery('input[id=notitle-'+lintID+']').attr('value');
+		var boxsetting_collapse_titlebar = jQuery('input[id=start-collapsed-'+lintID+']').attr('value');
+		var boxsetting_suppress_body = jQuery('input[id=nobody-'+lintID+']').attr('value');
+		var boxsetting_titlebar_styling = jQuery('select[id=titlebar-styling-'+lintID+']').attr('value');
+		alert(lintID);
+		alert(boxsetting_titlebar_styling);
 		//////////////////////////////////////////////////////////////////
 		// Check the pluslet's "name" value to see if there is a number
 		// --If it is numeric, it's a "normal" item with a ckeditor instance
