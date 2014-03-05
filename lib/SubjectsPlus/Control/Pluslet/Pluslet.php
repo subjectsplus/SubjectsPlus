@@ -126,15 +126,6 @@ class Pluslet {
     protected function assemblePluslet($hide_titlebar=0) {
 
     	global $IconPath;
-        global $titlebar_styles;
-
-        // generate our titlebar styles
-        $tb_styles = "";
-        foreach ($titlebar_styles as $key => $value) {
-            $tb_styles .= "<option value=\"$value\" style=\"$value\"";
-                if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
-            $tb_styles .= ">$key</option>";
-        }
 
         $this->_pluslet = "<a name=\"box-" . $this->_pluslet_id . "\"></a>";;
 
@@ -153,37 +144,11 @@ class Pluslet {
             }
 
         	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
-            <div class=\"titlebar_options\">$this->_icons</div>
-            <div class=\"box_settings\">
-            <form class=\"pure-form pure-form-aligned\">
-            <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
+            <div class=\"titlebar_options\">$this->_icons</div>";
 
-                if ($this->_hide_titlebar == 1) {$this->_pluslet .= " checked";}
+            $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
 
-            $this->_pluslet .= "> " . _("Hide titlebar") . "
-            </label>
-            <label for=\"start-collapsed-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"start-collapsed-$this->_pluslet_id\" type=\"checkbox\"";
-
-                if ($this->_collapse_body == 1) {$this->_pluslet .= " checked";}
-
-            $this->_pluslet .= "> " . _("Hide box body by default (public site)") . "
-            </label>
-            <label for=\"nobody-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"nobody-$this->_pluslet_id\" type=\"checkbox\"";
-
-                if ($this->_suppress_body == 1) {$this->_pluslet .= " checked";}
-
-            $this->_pluslet .= "> " . _("Hide box body completely") . "
-            </label>
-            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
-                <select id=\"titlebar-styling-$this->_pluslet_id\">
-                    $tb_styles
-                </select>
-            </form>
-            </div>
-            </div>";
+            $this->_pluslet .= "</div>";
 
             if ($this->_body != "") {
                 $this->_pluslet .= "<div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">
@@ -210,7 +175,11 @@ class Pluslet {
             <div class=\"titlebar\">
                 <div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
                 <div class=\"titlebar_options\">$this->_icons</div>
-            </div>
+            ";
+
+        echo self::boxSettings(); // add in our hidden div full of box config options
+
+        echo "</div>
         <div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">";
     }
 
@@ -218,6 +187,51 @@ class Pluslet {
 
         echo "</div>
             </div>";
+    }
+
+    protected function boxSettings() {
+        global $titlebar_styles;
+
+        // generate our titlebar styles
+        $tb_styles = "";
+        foreach ($titlebar_styles as $key => $value) {
+            $tb_styles .= "<option value=\"$value\" style=\"$value\"";
+                if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
+            $tb_styles .= ">$key</option>";
+        }
+
+            $box_settings = "<div class=\"box_settings\">
+            <form class=\"pure-form pure-form-aligned\">
+            <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
+
+                if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
+
+            $box_settings .= "> " . _("Hide titlebar") . "
+            </label>
+            <label for=\"start-collapsed-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"start-collapsed-$this->_pluslet_id\" type=\"checkbox\"";
+
+                if ($this->_collapse_body == 1) {$box_settings .= " checked";}
+
+            $box_settings .= "> " . _("Hide box body by default (public site)") . "
+            </label>
+            <label for=\"nobody-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"nobody-$this->_pluslet_id\" type=\"checkbox\"";
+
+                if ($this->_suppress_body == 1) {$box_settings .= " checked";}
+
+            $box_settings .= "> " . _("Hide box body completely") . "
+            </label>
+            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
+                <select id=\"titlebar-styling-$this->_pluslet_id\">
+                    $tb_styles
+                </select>
+            </form>
+            </div>";
+
+            return $box_settings;
+
     }
 
     protected function tokenizeText() {

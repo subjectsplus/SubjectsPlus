@@ -20,7 +20,7 @@ $location = "";
 $is_sidebar = "";
 $our_subject_id = "";
 
-//print_r($_POST);
+print_r($_POST);
 
 ///////////////////////////
 // Determine Column (main or sidebar)

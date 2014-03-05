@@ -375,8 +375,9 @@ function setupSaveButton( lstrSelector )
 		var boxsetting_collapse_titlebar = jQuery('input[id=start-collapsed-'+lintID+']').attr('value');
 		var boxsetting_suppress_body = jQuery('input[id=nobody-'+lintID+']').attr('value');
 		var boxsetting_titlebar_styling = jQuery('select[id=titlebar-styling-'+lintID+']').attr('value');
-		alert(lintID);
-		alert(boxsetting_titlebar_styling);
+		
+		//alert(lintID);
+		//alert(boxsetting_titlebar_styling);
 		//////////////////////////////////////////////////////////////////
 		// Check the pluslet's "name" value to see if there is a number
 		// --If it is numeric, it's a "normal" item with a ckeditor instance
@@ -505,7 +506,12 @@ function setupSaveButton( lstrSelector )
 				item_type: pitem_type,
 				clone:isclone,
 				special: pspecial,
-				this_subject_id: subject_id
+				this_subject_id: subject_id,
+				boxsetting_hide_titlebar: boxsetting_hide_titlebar,
+				boxsetting_collapse_titlebar: boxsetting_collapse_titlebar,
+				boxsetting_suppress_body: boxsetting_suppress_body,
+				boxsetting_titlebar_styling: boxsetting_titlebar_styling
+
 			},
 			type: "POST",
 			success: function(response) {
@@ -857,7 +863,7 @@ function setupMiscLiveQueries()
     // Make titlebar options box clickable
     ///////////////////
     jQuery('a[id*=settings-]').livequery('click', function(event) {
-    	
+
         jQuery(this).parent().next('.box_settings').toggle('slow');
 
      });

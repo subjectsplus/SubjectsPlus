@@ -1109,8 +1109,9 @@ div.tooltip div
 }
 
 #response {
-    position: relative; float: left; background-color: #DD647F; width: 100%; text-align:center; display: none;
-    margin-top:25px;
+    position: absolute; float: left; background-color: #DD647F; width: 100%; text-align:center; display: none;
+    margin-top:0px;
+    padding: .5em 0;
 }
 
 .clone {
