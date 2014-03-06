@@ -22,11 +22,11 @@ class BuildNav {
       <ul id=\"topnav\">
       <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
       <div>$headshot_lg
-      <p>Hi Andrew.</p>
+      <p>" . _("Hi") . " Andrew.</p>
       <br style=\"clear: both\" />
       <ul>
-      <li><a href=\"\">Edit your Profile</a></li>
-      <li><a href=\"$CpanelPath" . "logout.php\">Log Out</a></li>
+      <li><a href=\"\">" . _("Edit Your Profile") . "</a></li>
+      <li><a href=\"$CpanelPath" . "logout.php\">" . _("Log Out") . "</a></li>
       </ul>
       </div>
       </li>
@@ -79,7 +79,7 @@ class BuildNav {
       if ($subcat == "faq") {
         print " class=\"selected\"";
       }
-      print"><a href=\"$CpanelPath" . "faq/\">FAQs</a>
+      print"><a href=\"$CpanelPath" . "faq/\">" . _("FAQs") . "</a>
       <div>
         <ul>
           <li><a href=\"$CpanelPath" . "faq/faq.php\">" . _("New FAQ") . "</a></li>
@@ -98,7 +98,7 @@ class BuildNav {
         print " class=\"selected\"";
       }
 
-    print "><a href=\"$CpanelPath" . "talkback/\">TalkBack</a></li>";
+    print "><a href=\"$CpanelPath" . "talkback/\">" . _("TalkBack") . "</a></li>";
     }
 
     // Videos tab
@@ -108,7 +108,7 @@ class BuildNav {
       if ($subcat == "videos") {
         print " class=\"selected\"";
       }
-      print ">Videos</a>
+      print ">" . _("Videos") . "</a>
       <div>
         <ul>
           <li><a href=\"$CpanelPath" . "videos/\">" . _("List Current") . "</a></li>
@@ -117,6 +117,23 @@ class BuildNav {
         </ul>
        </div></li>";
     }
+
+    // Stats tab
+    if (isset($_SESSION["records"]) && $_SESSION["records"] == 1) {
+      print "
+            <li><a href=\"$CpanelPath" . "stats/\"";
+      if ($subcat == "stats") {
+        print " class=\"selected\"";
+      }
+      print ">" . _("Stats") . "</a>
+      <div>
+        <ul>
+          <li><a href=\"$CpanelPath" . "stats/\">" . _("Overview") . "</a></li>
+          <li><a href=\"$CpanelPath" . "stats/ref_stats.php\">" . _("Add Transaction") . "</a></li>
+        </ul>
+       </div></li>";
+    }    
+
     // Admin tab
     if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
       print "
