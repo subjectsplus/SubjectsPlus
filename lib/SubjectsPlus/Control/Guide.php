@@ -763,20 +763,27 @@ echo "</div>
 
 			$jobj = json_decode($sub[0]);
 			$col_widths = explode("-", $jobj->{'maincol'});
+            $purified = ""; // init
 
 			if (isset($col_widths[0]) && $col_widths[0] > 0) {
+                $purified = reduce($col_widths[0],12);
+                $pure_left = "pure-u-" . $purified[0] . "-" . $purified[1];
 				$left_width = $col_widths[0];
 			} else {
 				$left_width = 0;
 			}
 
 			if (isset($col_widths[1])) {
+                $purified = reduce($col_widths[1],12);
+                $pure_center = "pure-u-" . $purified[0] . "-" . $purified[1];                
 				$main_width = $col_widths[1];
 			} else {
 				$main_width = 0;
 			}
 
 			if (isset($col_widths[2]) && $col_widths[2] > 0) {
+                $purified = reduce($col_widths[2],12);
+                $pure_right = "pure-u-" . $purified[0] . "-" . $purified[1];                
 				$side_width = $col_widths[2];
 			} else {
 				$side_width = 0;
@@ -787,21 +794,32 @@ echo "</div>
 				// make sure they aren't 0
 
 				if ($left_width > 0) {
-					print "<div class='span$left_width'>
+					/*print "<div class='span$left_width'>
 					$left_col_pluslets
-					</div>";
+					</div>";*/
+                    print "<div class='$pure_left'>
+                    $left_col_pluslets
+                    </div>";
 				}
 
 				if ($main_width > 0) {
-					print "<div class='span$main_width'>
+                    print "<div class='$pure_center'>
+                    $main_col_pluslets
+                    </div>";
+
+					/*print "<div class='span$main_width'>
 					$main_col_pluslets
-					</div>";
+					</div>";*/
 				}
 
 				if ($side_width > 0) {
-					print "<div class='span$side_width'>
+                    print "<div class='$pure_right'>
+                    $sidebar_pluslets
+                    </div>";
+
+					/*print "<div class='span$side_width'>
 					$sidebar_pluslets
-					</div>";
+					</div>";*/
 				}
 
 			} else {

@@ -125,7 +125,7 @@ function generatejQuery($use_jquery) {
 
 // Always load jQuery core, ui, livequery
   $myjquery = "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"></script>\n
-	<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.livequery.min.js\"></script>\n";
+	<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n";
 
 // If there's not an array of values, send 'er back
   if (!is_array($use_jquery)) {
@@ -135,7 +135,7 @@ function generatejQuery($use_jquery) {
 // Check to see what additional jquery files need to be loaded
   if (in_array("colorbox", $use_jquery)) {
     $myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.colorbox-min.js\"></script>\n
-	<style type=\"text/css\">@import url($AssetPath" . "css/colorbox.css);</style>\n";
+	<style type=\"text/css\">@import url($AssetPath" . "css/shared/colorbox.css);</style>\n";
   }
   if (in_array("hover", $use_jquery)) {
     $myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.hoverIntent.js\"></script>\n";
@@ -146,7 +146,7 @@ function generatejQuery($use_jquery) {
   }
 
   if (in_array("ui_styles", $use_jquery)) {
-    $myjquery .= "<link rel=\"stylesheet\" href=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/base/jquery-ui.css\" type=\"text/css\" media=\"all\" />";
+    $myjquery .= "<link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/jquery-ui.css\" type=\"text/css\" media=\"all\" />";
   }
 
   if (in_array("tablesorter", $use_jquery)) {
@@ -1157,5 +1157,21 @@ function getRewriteBase()
 
 	return $lstrRewriteBase;
 }
+
+/**
+ * gcd() and reduce() will return us the lowest common denominator fraction.
+ * Used to get pure.css-friendly numbers
+ *
+ * @return string
+ */
+
+function gcd( $a, $b)
+{
+  return $b ? gcd($b, $a%$b) : $a;
+}
+
+function reduce($numerator,$denominator) {
+  $gcd = gcd($numerator,$denominator);
+  return array($numerator/$gcd, $denominator/$gcd); }
 
 ?>

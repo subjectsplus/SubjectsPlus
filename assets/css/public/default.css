@@ -277,6 +277,7 @@ img {
     -khtml-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+    margin: 1em;
 
 }
 .titlebar {

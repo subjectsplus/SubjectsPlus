@@ -9,20 +9,20 @@
 
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\Dropdown;
-use SubjectsPlus\Control\CompleteMe;
+use SubjectsPlus\Control\Guide;
 
-$use_jquery = "yes";
+// Is it a BarfGuide?  Check our whitelist of SP guides first
+// Need to add a param to SP for this
 
-// so that it doesn't conk out if you go directly to display.php
+//$goodSPGuides = array("superfun", "gis", "MCY564", "chcmusic", "GTEST");
+$chcGuides = array("superfun","chcmusic");
 
-if (!isset($_REQUEST['subject'])) {
-    header("Location:index.php?type=redirect");
-}
 
+$use_jquery = array("ui", "ui_styles");
+
+include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
 
 // init
 $oksubs = array();
@@ -50,6 +50,8 @@ while ($oksub = mysql_fetch_array($r)) {
     $oksubs[] .= $oksub[0];
 }
 
+//print_r($oksubs);
+
 // Check if our user-submitted name is okay; else use default
 if (in_array(($_GET['subject']), $oksubs)) {
     // use the submitted subject
@@ -63,190 +65,127 @@ if (in_array(($_GET['subject']), $oksubs)) {
 }
 
 
-$page_title = $resource_name;
-$description = _("The best stuff for your research.  No kidding.");
-$keywords = _("library, research, databases, subjects, search, find");
+$page_description = _("The best stuff for your research.  No kidding.");
+$page_keywords = _("library, research, databases, subjects, search, find");
 
 if ($check_this) {
 
 
-    $query = "select subject, subject_id, extra, description, keywords, redirect_url from subject where shortform = '$check_this'";
-//print $query;
-    $result = mysql_query($query);
+    // get name of quide
+    $q = "select subject, subject_id, extra, description, keywords, redirect_url, header from subject where shortform = '$check_this'";
+    //print $q;
+    $r = mysql_query($q);
 
-    $sub = mysql_fetch_row($result);
+    // If this guide doesn't exist, send them away
+    if (mysql_numrows($r) == 0) {
+        header("location:index.php");
+    }
+	$mysub = mysql_fetch_array($r);
 
-	$redirect_url = $sub[5];
+	$redirect_url = $mysub[5];
 	if( !is_null($redirect_url) && !empty($redirect_url)  )
 	{
 		header("Location:$redirect_url");
 	}
 
-    $subject_string = $sub[0];
-    $this_id = $sub[1];
+    $subject_name = $mysub["0"];
+    $this_id = $mysub["1"];
+	$header_type = $mysub[6];
 
     // check for description and keywords, which may be blank since they were added v2
-    if ($sub[3] != "") {
-        $description = $sub[3];
+    if ($mysub[3] != "") {
+        $page_description = $mysub[3];
     }
-    if ($sub[4] != "") {
-        $keywords = $sub[4];
+    if ($mysub[4] != "") {
+        $page_keywords = $mysub[4];
     }
 
-// get any adjustments to the column widths
-/*    if ($sub[2]) {
-        $jobj = json_decode($sub[2]);
-        $main_width = $jobj->{'maincol'};
-        $side_width = 98 - $main_width;
-    }
-*/
+    $jobj = json_decode($mysub["extra"]);
 
-
-    $jobj = json_decode($sub[2]);
+    // In this section, we get the widths of the three columns, which add up to 12
+    // We then do a little bit of math to get them into columns that add up to a bit under 100
+    // In order to convert to css %.  If this page were bootstrapped, this wouldn't be necessary.
     $col_widths = explode("-", $jobj->{'maincol'});
-
+    //print_r($col_widths);
     if (isset($col_widths[0]) && $col_widths[0] > 0) {
-        $left_width = $col_widths[0];
+        $left_width = $col_widths[0] * 8;
     } else {
         $left_width = 0;
     }
 
     if (isset($col_widths[1])) {
-        $main_width = $col_widths[1];
+        $main_width = $col_widths[1] * 8;
     } else {
         $main_width = 0;
     }
 
     if (isset($col_widths[2]) && $col_widths[2] > 0) {
-        $side_width = $col_widths[2];
+        $side_width = ($col_widths[2] * 8) - 3; // we make this a squidgen narrower so it doesn't wrap nastily
     } else {
         $side_width = 0;
     }
 
-// select all the pluslets from an existing guide and put on screen
-
-    $qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
-	FROM pluslet p, subject s, pluslet_subject ps
-	WHERE p.pluslet_id = ps.pluslet_id
-	AND s.subject_id = ps.subject_id
-	AND s.subject_id = '$this_id'
-	ORDER BY prow ASC
-	";
-
-//print $qc;
-
-    $rc = mysql_query($qc);
-
-        //init
-    $left_col_pluslets = "";
-    $main_col_pluslets = "";
-    $sidebar_pluslets = "";
-
-    while ($myrow = mysql_fetch_array($rc)) {
-
-        // Get our guide type
-        // Make sure it's not blank, as that will throw an error
-        if ($myrow[4] != "") {
-            // Here we assemble the pluslet, that will be gound in
-            if ($myrow[4] == "Special") {
-                $obj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
-            } else {
-                $obj = "SubjectsPlus\Control\Pluslet_" . $myrow[4];
-            }
-
-
-            //global $obj;
-            $record = new $obj($myrow[0], "", $this_id);
-/*
-            if ($myrow[3] == 1) {
-                // Main column content
-                $main_col_pluslets .= $record->output("view", "public");
-            } else {
-                // sidebar contents
-                $sidebar_pluslets .= $record->output("view", "public");
-            }
-
-            */
-
-            switch ($myrow[3]) {
-                case 0:
-                $left_col_pluslets .= $record->output("view", "public");
-                break;
-                case 1:
-                default:
-                $main_col_pluslets .= $record->output("view", "public");
-                break;
-                case 2:
-                $sidebar_pluslets .= $record->output("view", "public");
-                break;
-            }
-        }
-        unset($record);
+    // Is there a selected tab?
+    if (isset($_GET["t"]) && $_GET["t"] != "") {
+        $selected_tab = scrubData($_GET["t"]);
+    } else {
+        $selected_tab = 0;
     }
 
-    $page_title = "$page_title: $subject_string";
+    //create new guide object and set admin view to true
+    $lobjGuide = new Guide($this_id);
+    $lobjGuide->_isAdmin = FALSE;
 
-    // get last revised
-    $last_mod = lastModded("guide", $this_id,0,0);
+    $all_tabs = $lobjGuide->getTabs();
 
 } else {
-    //////////////
-    //Invalid subject name
-    /////////////
-
-    $main_col_pluslets = "
-<div class=\"pluslet\">
-   <div class=\"titlebar\">
-    <div class=\"titlebar_text\">" . _("No Guide") . "</div>
-   </div>
-   <div class=\"pluslet_body\">
-   <p>There does not appear to be any guide by that name.</p>
-   <p><a href=\"index.php\">Please try again</a></p>
-   </div>
-</div>";
+    //header("location:http://library.miami.edu/sp/subjects/");
 }
-////////////////////////////
-// Now we are finally read to display the page
-////////////////////////////
 
-include("includes/header.php");
+$page_title = $subject_name;
 
-// responsive or not?
-if (isset($is_responsive) && $is_responsive == TRUE) {
-    // make sure they aren't 0
-
-    if ($left_width > 0) {
-        print "<div class='span$left_width'>
-        $left_col_pluslets
-        </div>";
-    }
-
-    if ($main_width > 0) {
-        print "<div class='span$main_width'>
-        $main_col_pluslets
-        </div>";
-    }
-
-    if ($side_width > 0) {
-        print "<div class='span$side_width'>
-        $sidebar_pluslets
-        </div>";
-    }
-
+/*if (in_array($_REQUEST["subject"], $chcGuides)) {
+    include("includes/header_chc.php");
+    $our_site="chc";
 } else {
-    print "<div id=\"leftcol\">
-    $left_col_pluslets
-    </div>
-    <div id=\"maincol\">
-    $main_col_pluslets
-    </div>
-    <div id=\"rightcol\">
-    $sidebar_pluslets
-    </div>";
+    include("includes/header_um.php");
+    $our_site="um";
+}*/
+
+// do we have more than one tab?
+if (count($all_tabs) > 1) {
+    $multi_tab = TRUE;
+} else {
+    $multi_tab = FALSE;
+}
+
+if( file_exists("includes/header_$header_type.php") )
+{
+	include("includes/header_$header_type.php");
+}
+else
+{
+	include("includes/header.php");
 }
 
 
+?>
+<div id="tabs" style="clear:both; position: relative; ">
 
+<?php 
+
+// Only show tabs if there is more than one tab
+
+if ($multi_tab === TRUE) {
+    $lobjGuide->outputNavTabs();
+}
+
+$lobjGuide->outputTabs();
+?>
+
+</div>
+
+<?php
 ///////////////////////////
 // Load footer file
 ///////////////////////////
@@ -265,9 +204,9 @@ include("includes/footer.php");
             $(this).parent().next('.pluslet_body').toggle('slow');
         });
 
-        var new_left_width = "<?php print $left_width * 7.5; ?>%";
-        var new_main_width = "<?php print $main_width * 7.5; ?>%";
-        var new_sidebar_width = "<?php print $side_width * 7.5; ?>%";
+        var new_left_width = "<?php print $left_width; ?>%";
+        var new_main_width = "<?php print $main_width; ?>%";
+        var new_sidebar_width = "<?php print $side_width; ?>%";
         //alert(new_left_width + "-" + new_main_width + "-" + new_sidebar_width);
         if (new_main_width.length > 0) {
             $('#leftcol').width(new_left_width);
@@ -292,5 +231,27 @@ include("includes/footer.php");
         findStuff();
     });
 
+<?php 
+// this messes stuff up if it displays for tabless page
+
+if ($multi_tab == TRUE) { ?>
+//setup jQuery UI tabs and dialogs
+jQuery(function() {
+    var tabTitle = $( "#tab_title" ),
+    tabContent = $( "#tab_content" ),
+    tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
+    tabCounter = <?php echo ( count($all_tabs) ); ?>;
+    var tabs = $( "#tabs" ).tabs();
+  
+});
+<?php } ?>
 
 </script>
+<!--[if IE]>
+<style>
+    #tabs .pluslet ul {
+    margin-bottom: .5em;
+    list-style-position: inside;
+}
+</style>
+<![endif]-->
