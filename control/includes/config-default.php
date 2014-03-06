@@ -58,7 +58,13 @@ $omit_user_columns = array( );
 // 'lat_long', 'emergency_contact' (all three emergency contact information)
 $require_user_columns = array( "title", "classification", "tel", "address", "city", "state", "zip", "emergency_contact");
 
+//used to declare which pluslets are activated in new box drop-down
 $pluslets_activated = array('Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video');
+
+// These are used to allow the admin to set different "themes" for the pluslet titlebar
+// which the guide author may choose from
+$titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
+
 
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)
