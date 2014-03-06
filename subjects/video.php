@@ -115,24 +115,14 @@ if ($num_rows != 0) {
   $display .= "<div class=\"no_results\">" . _("Sorry, no videos match this criteria.") . "</div>";
 }
 
-//////////////////////
-// To Respond or Not
-// Setup our columns
-if ($is_responsive == TRUE) {
-  $ldiv = "class=\"span9\"";
-  $rdiv = "class=\"span3\"";
-} else {
-  $ldiv = "id=\"leftcol\"";
-  $rdiv = "id=\"rightcol\"";
-}
-
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
 include("includes/header.php");
 ?>
-<div <?php print $ldiv; ?>>
+<div class="pure-g-r">
+<div class="pure-u-2-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print $page_title; ?></div>
@@ -145,7 +135,7 @@ include("includes/header.php");
         </div>
     </div>
 </div>
-<div <?php print $rdiv; ?>>
+<div class="pure-u-1-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Feature Films"); ?></div>
@@ -163,7 +153,7 @@ include("includes/header.php");
     <br />
 
 </div>
-
+</div>
 <br />
 
 <?php

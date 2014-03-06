@@ -181,7 +181,8 @@ if ($is_responsive == TRUE) {
 
 include("includes/header.php");
 ?>
-<div <?php print $ldiv; ?>>
+<div class="pure-g-r">
+<div class="pure-u-2-3">
   <div class="pluslet">
     <div class="titlebar">
       <div class="titlebar_text"><?php print _("Databases"); ?></div>
@@ -191,7 +192,7 @@ include("includes/header.php");
     </div>
   </div>
 </div>
-<div <?php print $rdiv; ?>>
+<div  class="pure-u-1-3">
   <!-- start pluslet -->
   <div class="pluslet">
     <div class="titlebar">
@@ -225,7 +226,7 @@ include("includes/header.php");
   <br />
 
 </div>
-
+</div>
 
 
 

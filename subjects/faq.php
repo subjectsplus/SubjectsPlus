@@ -279,7 +279,8 @@ if ($is_responsive == TRUE) {
 
 ?>
 
-<div <?php print $ldiv; ?>>
+<div class="pure-g-r">
+<div class="pure-u-2-3">
 <?php
 //$num_faqs = $row_count - 1;
 // print "<p style=\"background-color: #ffffcf;\"><strong>Note:</strong>  $num_faqs FAQs displayed.  Search <strong>all FAQs</strong> with the boxes to the right.</p><br />";
@@ -298,7 +299,7 @@ if (isset($index)) {
 
 print $results; ?>
 </div>
-<div <?php print $rdiv; ?>>
+<div class="pure-u-1-3">
   <a name="rdiv"></a>
     <div class="pluslet">
         <div class="titlebar">
@@ -343,7 +344,7 @@ print $results; ?>
     </div>
 
 </div>
-
+</div>
 <?php
 
 include("includes/footer.php");

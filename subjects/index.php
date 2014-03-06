@@ -162,19 +162,9 @@ function listGuides($search = "", $type="all") {
 
 include("includes/header.php");
 
-//////////////////////
-// To Respond or Not
-// Setup our columns
-if ($is_responsive == TRUE) {
-  $ldiv = "class=\"span8\"";
-  $rdiv = "class=\"span4\"";
-} else {
-  $ldiv = "id=\"leftcol\"";
-  $rdiv = "id=\"rightcol\"";
-}
-
 ?>
-<div <?php print $ldiv; ?>>
+<div class="pure-g-r">
+<div class="pure-u-2-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Find Research Guides"); ?></div>
@@ -203,7 +193,7 @@ $input_box->displayBox();
         </div>
     </div>
 
-    <div  <?php print $rdiv; ?>>
+    <div class="pure-u-1-3">
         <div class="pluslet">
             <div class="titlebar">
                 <div class="titlebar_text"><?php print _("Newest Guides"); ?></div>
@@ -221,7 +211,7 @@ $input_box->displayBox();
         <br />
 
     </div>
-
+</div>
 <?php
 ///////////////////////////
 // Load footer file

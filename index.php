@@ -12,7 +12,8 @@ $keywords = "research, databases, subjects, search, find, suggestion box, talkba
 include("subjects/includes/header.php");
 
 ?>
-
+<div class="pure-g-r">
+<div class="pure-u-2-3">
 <p><strong>Note</strong>:  You should uncomment the redirect in the code for this page; the links
 below are just to display the different available public pages for SubjectsPlus.  Better to have this
 page take the user to the subject guides splash page.  Or put whatever you want here.</p>
@@ -26,3 +27,6 @@ page take the user to the subject guides splash page.  Or put whatever you want 
     <li><a href="subjects/video.php">Video Management</a></li>
     <li><a href="api/">API</a></li>
 </ul>
+
+</div>
+</div>

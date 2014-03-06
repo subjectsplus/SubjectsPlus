@@ -138,19 +138,9 @@ $page_title = _("Staff Listing: ") . $fullname;
 
 include("includes/header.php");
 
-//////////////////////
-// To Respond or Not
-// Setup our columns
-if ($is_responsive == TRUE) {
-    $ldiv = "class=\"span8\"";
-    $rdiv = "class=\"span4\"";
-} else {
-    $ldiv = "id=\"leftcol\" style=\"width: 66%;\"";
-    $rdiv = "id=\"rightcol\" style=\"width: 30%;\"";
-}
-
 ?>
-<div <?php print $ldiv; ?>>
+<div class="pure-g-r">
+<div class="pure-u-2-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"></div>
@@ -160,7 +150,7 @@ if ($is_responsive == TRUE) {
         </div>
     </div>
 </div>
-<div  <?php print $rdiv; ?>>
+<div class="pure-u-1-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text">Other Information</div>
@@ -170,6 +160,7 @@ if ($is_responsive == TRUE) {
 
     <br />
 
+</div>
 </div>
 
 <?php

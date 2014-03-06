@@ -1162,7 +1162,7 @@ function getRewriteBase()
  * gcd() and reduce() will return us the lowest common denominator fraction.
  * Used to get pure.css-friendly numbers
  *
- * @return string
+ * @return array
  */
 
 function gcd( $a, $b)

@@ -30,12 +30,12 @@ body {
     padding: 0;
     font-family: sans-serif;
     font-size: 0.8125em;
-    text-align: center;
+    text-align: left;
     line-height: 1.5em;
     color: #000;
     margin-left: auto;
     margin-right: auto;
-    background: url("../images/grid.png") repeat scroll 0 0 #FFFFFF;
+    background: url("../../images/grid.png") repeat scroll 0 0 #FFFFFF;
 }
 
 
@@ -120,46 +120,10 @@ img {
     margin: 0px auto;
     width: 100%;
     min-width: 550px;
-    max-width: 1100px;
     background-color: transparent;
 }
 /* Main content areas */
 
-
-#maincontent {
-    clear: both;
-    text-align: left;
-    margin-left: 40px;
-    margin-right: 40px;
-}
-
-#maincontent h2  {
-    background-color: #efefef;
-
-    color: #333;
-    font-weight: 700;
-    border: 1px solid #999;
-    padding: 4px 4px 4px 10px;
-    font-size: 12pt;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    margin: 5px 0;
-
-}
-
-#maincontent h3 {
-    color: #333;
-    font-weight: bold;
-    font-size: 12pt;
-    margin: 5px 0;
-}
-
-#maincontent ol, #maincontent ul, #maincontent ol {
-    padding-left: 2em;
-
-}
 
 #leftcol {
     clear: both; float: left; width: 30%; margin-left: 2%;
@@ -887,6 +851,26 @@ div.video_thumb img {
  * I did a couple to get ya started
 */
 
+
+#header_inner_wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.wrapper-full {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* these .ui class overrides tweak border and spacing of tab containers */
+.ui-widget-content {
+    border: none !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em !important;
+}
+
 .pluslet {
     border: 1px solid #ccc;
     box-shadow: 5px 5px 7px #e0e0e0;
@@ -937,5 +921,3 @@ width:55px;
 .float-left {
     float:left;
 }
-
-

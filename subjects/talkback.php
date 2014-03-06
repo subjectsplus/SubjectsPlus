@@ -310,20 +310,9 @@ if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 
 include("includes/header.php");
 
-//////////////////////
-// To Respond or Not
-// Setup our columns
-if ($is_responsive == TRUE) {
-	$ldiv = "class=\"span8\"";
-	$rdiv = "class=\"span4\"";
-} else {
-	$ldiv = "id=\"leftcol\" style=\"width: 65%;\"";
-	$rdiv = "id=\"rightcol\" style=\"width: 32%;\"";
-}
-
-
 ?>
-<div <?php print $ldiv; ?>>
+<div class="pure-g-r">
+<div class="pure-u-2-3">
 	<?php print $feedback . $stk_message; ?>
 	<div class="pluslet_simple no_overflow">
 
@@ -337,7 +326,7 @@ if ($is_responsive == TRUE) {
 
 	</div>  
 </div>
-<div <?php print $rdiv; ?>>
+<div class="pure-u-1-3">
 	<!-- start pluslet -->
 	<div class="pluslet">
 		<div class="titlebar"><div class="titlebar_text"><?php print _("Tell Us What You Think"); ?></div></div>
@@ -361,7 +350,8 @@ if ($is_responsive == TRUE) {
 				<!-- end pluslet -->
 				<br />
 
-			</div>
+</div>
+</div>
 			<!-- END BODY CONTENT -->
 			<?php
 
