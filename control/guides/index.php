@@ -19,7 +19,8 @@ include("../includes/header.php");
 $gear_alt = _("Edit Guide Metadata");
 $eye_alt = _("View Guide on Public Site");
 $linkie_alt = _("Check Guide Links");
-
+$view_alt = _("View Guide on Public Site");
+    
 try {
   $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
