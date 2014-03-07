@@ -3,6 +3,7 @@
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
+include_once('../../../../control/includes/autoloader.php');
 
 /**
  * getUserPath() - checks to see if session exists and then extracts username

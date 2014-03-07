@@ -195,7 +195,7 @@ CKEDITOR.dialog.add( 'subsplus_assetDialog', function( editor ) {
 			}
 
 			//place the token in the editor
-			editor.insertHtml( lstrToken );
+			editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 
 			//uncheck any checked radio buttons
 			jQuery('input[name="but"]:checked').attr('checked', false);

@@ -152,7 +152,7 @@ CKEDITOR.dialog.add( 'subsplus_faqDialog', function( editor ) {
 			lstrToken = lstrToken + '}}';
 
 			//place the token in the editor
-			editor.insertHtml( lstrToken );
+			editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 		}
 	};
 });

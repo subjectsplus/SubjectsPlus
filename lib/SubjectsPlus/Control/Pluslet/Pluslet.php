@@ -256,7 +256,7 @@ class Pluslet {
         $target = "";
         $tokenized = "";
 
-        $parts = preg_split('/{{|}}/', $this->_body);
+        $parts = preg_split('/<span[^>]*>{{|}}<\/span>/', $this->_body);
         if (count($parts) > 1) { // there are tokens in $body
             foreach ($parts as $part) {
                 if (preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part) || preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)) { // $part is a properly formed token
