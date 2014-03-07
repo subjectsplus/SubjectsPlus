@@ -26,7 +26,7 @@ class Pluslet {
     protected $_hide_titlebar = "";
     protected $_collapse_body = "";
     protected $_suppress_body = "";
-    protected $_titlebar_styling = "";   
+    protected $_titlebar_styling = "";
 
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
@@ -89,7 +89,7 @@ class Pluslet {
                 $settingstext = _("Box Settings");
                 $this->_icons = "
                 <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
-                <!--<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img> 
+                <!--<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img>
                 <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>-->";
 
                 // If editable, give the pencil icon
@@ -149,7 +149,7 @@ class Pluslet {
             if ($hide_titlebar != 0) {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
             }
-            
+
 
             $this->_pluslet .= "</div>";
 
@@ -421,13 +421,6 @@ class Pluslet {
                 }
             } // end foreach
         } else {
-
-        	$matches = array();
-        	preg_match_all( '/<div[^>]*data-subsplus-sub-spe[^>]*>.*<\/div>/', $this->_body, $matches);
-        	if(count($matches[0]) > 0){
-        		$this->_body = var_dump($matches);
-        		return;
-        	}
 
             $this->_body = $this->_body;
             return;
