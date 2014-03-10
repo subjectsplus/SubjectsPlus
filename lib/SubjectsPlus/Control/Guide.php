@@ -215,6 +215,40 @@ class Guide {
         $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
         $guide_string = $guideMe->display();
 
+?>
+
+
+/////////
+// Department Dropdown
+////////
+
+<?php
+
+    $querier = new Querier();
+    $dept_query = "SELECT department_id, name FROM department;";
+    $deptArray = $querier->getResult($dept_query);
+
+?>
+
+<span class="record_label"> Department </span>
+
+
+<select name="guide_department">
+
+<?php
+
+    foreach ($deptArray as $dept) {
+        echo "<option value='" . $dept["department_id"] . "'>" . $dept["name"] . "</option>";
+    }
+    
+?>
+
+</select>
+
+
+
+<?php
+
 
 //////////////////////
 // Guide parent
