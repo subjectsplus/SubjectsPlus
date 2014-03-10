@@ -10,7 +10,8 @@
  */
     
 use SubjectsPlus\Control\DBConnector;
-
+use SubjectsPlus\Control\Upload;
+    
 $subsubcat = "";
 $subcat = "";
 $page_title = "Set Picture";
@@ -152,7 +153,7 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
     } else {
       // one error occured
       echo '<fieldset>';
-      echo '  <legend>file not uploaded to the wanted location</legend>';
+      echo '  <legend>' . _("File not uploaded to the specified location") . '</legend>';
       echo '  Error: ' . $handle->error . '';
       echo '</fieldset>';
     }
@@ -163,7 +164,7 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
     // if we're here, the upload file failed for some reasons
     // i.e. the server didn't receive the file
     echo '<fieldset>';
-    echo '  <legend>file not uploaded on the server</legend>';
+    echo '  <legend>' . _("File not uploaded to the server") . '</legend>';
     echo '  Error: ' . $handle->error . '';
     echo '</fieldset>';
   }
