@@ -1,8 +1,10 @@
 <?php
+use SubjectsPlus\Control\DBConnector;
 
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
+include_once('../../../../control/includes/autoloader.php');
 
 //only do something if the search_terms is activated
 if (isset($_POST["search_terms"]))
