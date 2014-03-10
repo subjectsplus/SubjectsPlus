@@ -22,6 +22,7 @@ class Guide {
     private $_message;
 	private $_all_tabs;
     private $_department;
+    private $_parent;
     
     
 	public $_isAdmin;
@@ -59,7 +60,8 @@ class Guide {
                 $this->_shortform = $_POST["shortform"];
             	$this->_extra = $_POST['extra'];
                 $this->_department = $_POST['department'];
-
+                $this->_parent = $_POST['parent'];
+                
             	//add http to redirect url if not present
             	$this->_redirect_url = strpos( $this->_redirect_url, "http://" ) === 0 || strpos( $this->_redirect_url, "https://" ) === 0
             		|| $this->_redirect_url == "" ? $this->_redirect_url : "http://" . $this->_redirect_url;
@@ -227,7 +229,7 @@ class Guide {
 <?php
     
     /////////
-    // Department Dropdown
+    // Department dropdown
     ////////
 
     $querier = new Querier();
@@ -250,6 +252,30 @@ class Guide {
 
 </select>
 </p>
+
+<?php
+    
+    ////////
+    // Parent dropdown
+    ////////
+    
+    $querier = new Querier();
+    $subject_query = "SELECT subject_id, subject FROM subject;";
+    $subject_array = $querier->getResult($subject_query);
+    ?>
+<span class="record_label"> Parent Guide </span>
+<select name="parent">
+    <option value="">   </option>
+     <?php
+         foreach ($subject_array as $subject) {
+             echo "<option value='" . $subject["subject_id"] . "'>" . $subject["subject"] . "</option>";
+
+             
+                  }
+         ?>
+</select>
+
+
 
 
 <?php
@@ -583,9 +609,16 @@ echo "</div>
         
         // Insert subject_department relationship
         $insert_department = new Querier();
-        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('" . $this->_subject_id . "', '" . $this->_department . "')";
+        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department')";
         $insert_department->insertQuery($dept_query);
-
+        
+        
+        // Insert parent guide relationship
+        
+        $insert_parent = new Querier();
+        $parent_query = "INSERT INTO subject_subject (subject_child, subject_parent) VALUES ('$this->_subject_id', '$this->_parent')";
+        $insert_parent->insertQuery($parent_query);
+        
         
         
         // message
