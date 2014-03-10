@@ -218,11 +218,13 @@ class Guide {
 ?>
 
 
-/////////
-// Department Dropdown
-////////
+
 
 <?php
+    
+    /////////
+    // Department Dropdown
+    ////////
 
     $querier = new Querier();
     $dept_query = "SELECT department_id, name FROM department;";
