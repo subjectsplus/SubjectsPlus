@@ -236,12 +236,23 @@ class Guide {
     $dept_query = "SELECT department_id, name FROM department;";
     $deptArray = $querier->getResult($dept_query);
 
+
+    $current_dept = new Querier();
+    $current_dept_query = "SELECT DISTINCT subject.subject, subject.subject_id, department.name, department.department_id
+    FROM subject_department
+    JOIN subject ON subject.subject_id = subject_department.id_subject
+    JOIN department ON department.department_id = subject_department.id_department
+    WHERE subject.subject_id = '$this->_subject_id'";
+    
+    $current_dept_array = $current_dept->getResult($current_dept_query);
+    
 ?>
 <p>
 <span class="record_label"> Department </span>
 
+
 <select name="department">
-    <option value="0">    </option>
+<option value="<?php echo $current_dept_array['2']; ?>"> <?php echo $current_dept_array[0]['name']; ?> </option>
 <?php
 
     foreach ($deptArray as $dept) {
@@ -265,7 +276,7 @@ class Guide {
     ?>
 <span class="record_label"> Parent Guide </span>
 <select name="parent">
-    <option value="">   </option>
+    <option value="0">   </option>
      <?php
          foreach ($subject_array as $subject) {
              echo "<option value='" . $subject["subject_id"] . "'>" . $subject["subject"] . "</option>";
@@ -660,6 +671,23 @@ echo "</div>
 
         $rUpSubject = mysql_query($qUpSubject);
 
+        
+        // Insert subject_department relationship
+        $insert_department = new Querier();
+        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department')";
+        $insert_department->insertQuery($dept_query);
+        
+        
+        // Insert parent guide relationship
+        
+        $insert_parent = new Querier();
+        $parent_query = "INSERT INTO subject_subject (subject_child, subject_parent) VALUES ('$this->_subject_id', '$this->_parent')";
+        $insert_parent->insertQuery($parent_query);
+        
+
+        
+        
+        
         $this->_debug = "<p>1. update title: $qUpSubject</p>";
         if (!$rUpSubject) {
             print "affected rows = " . mysql_affected_rows();

@@ -35,7 +35,6 @@ CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `departme
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
 /* Subject parent relationship */
 
 
