@@ -39,7 +39,20 @@ class Querier {
 		} else {
 			throw new \Exception('Query failed: ' . mysql_error() . '\n');
 		}
-	}
+    }
+    
+    
+    public function insertQuery($query) {
+        $this->_query = $query;
+		$resultArray = array();
+		$result  = mysql_query($query);
+        if ($result) {
+            
+		} else {
+			throw new \Exception('Query failed: ' . mysql_error() . '\n');
+		}
+	
+    }
 
 	public function getQuery() {
 		return $this->_query;

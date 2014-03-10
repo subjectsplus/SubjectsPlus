@@ -21,7 +21,9 @@ class Guide {
     private $_extra;
     private $_message;
 	private $_all_tabs;
-
+    private $_department;
+    
+    
 	public $_isAdmin;
 
     public function __construct($subject_id="", $flag="") {
@@ -56,6 +58,7 @@ class Guide {
                 $this->_type = $_POST["type"];
                 $this->_shortform = $_POST["shortform"];
             	$this->_extra = $_POST['extra'];
+                $this->_department = $_POST['department'];
 
             	//add http to redirect url if not present
             	$this->_redirect_url = strpos( $this->_redirect_url, "http://" ) === 0 || strpos( $this->_redirect_url, "https://" ) === 0
@@ -198,14 +201,14 @@ class Guide {
 
 <span class=\"record_label\">" . _("Guide") . "</span><br />
 <input type=\"text\" name=\"subject\" id=\"record_title\" size=\"50\" class=\"required_field\" value=\"" . $this->_subject . "\">
-<br /><br />
+
 <span class=\"record_label\">" . _("Short Form") . "</span><br />
 <input type=\"text\" name=\"shortform\" id=\"record_shortform\" size=\"20\" class=\"required_field\" value=\"" . $this->_shortform . "\">
 <br />
 <span class=\"smaller\">* " . _("Short label for subject--minus spaces, ampersands, etc.") . "</span>
-<br />
-<br />
-<span class=\"record_label\">" . _("Type of Guide") . "</span><br />
+
+        <p>
+<span class=\"record_label\">" . _("Type of Guide") . "</span>
 ";
 
 /////////////////////
@@ -214,6 +217,7 @@ class Guide {
 
         $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
         $guide_string = $guideMe->display();
+        echo $guide_string;
 
 ?>
 
@@ -231,12 +235,11 @@ class Guide {
     $deptArray = $querier->getResult($dept_query);
 
 ?>
-
+<p>
 <span class="record_label"> Department </span>
 
-
-<select name="guide_department">
-
+<select name="department">
+    <option value="0">    </option>
 <?php
 
     foreach ($deptArray as $dept) {
@@ -246,7 +249,7 @@ class Guide {
 ?>
 
 </select>
-
+</p>
 
 
 <?php
@@ -256,7 +259,7 @@ class Guide {
 // Guide parent
 //////////////////////
 
-        echo "<span class='record_label'>" ._("Guide Parent") . "</span><br />";
+        //echo "<span class='record_label'>" ._("Guide Parent") . "</span><br />";
         // To-do: Add dropdown to chose guide parent?
 
 
@@ -295,15 +298,8 @@ class Guide {
         <input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
 
 
-/////////////////////
-// Guide types dropdown
-/////////////////////
-
-        $guideMe = new Dropdown("type", $guide_types, $this->_type, 50);
-        $guide_types_string = $guideMe->display();
-
         echo "
-$guide_types_string
+
 <br /><br />
 $is_live
 $screen_layout
@@ -545,6 +541,13 @@ echo "</div>
 
         $this->_subject_id = mysql_insert_id();
 
+        
+        
+        
+        
+        
+        
+        
         $this->_debug = "<p>1. insert subject: $qInsertSubject</p>";
         if (!$rInsertSubject) {
             echo blunDer("We have a problem with the title query: $qInsertSubject");
@@ -575,6 +578,16 @@ echo "</div>
 
         $updateChangeTable = changeMe("guide", "insert", $this->_subject_id, $this->_subject, $_SESSION['staff_id']);
 
+        
+        
+        
+        // Insert subject_department relationship
+        $insert_department = new Querier();
+        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('" . $this->_subject_id . "', '" . $this->_department . "')";
+        $insert_department->insertQuery($dept_query);
+
+        
+        
         // message
         $this->_message = _("Thy Will Be Done.") . " <a href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("View Your Guide") . "</a>";
     }

@@ -28,7 +28,7 @@ ADD `titlebar_styling` VARCHAR( 100 ) NULL
 /* Associate subject guides with departments like CHC */
 
 CREATE TABLE `subject_department` (
-`idsubject_department` int(11) NOT NULL,
+`idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
 `id_subject` bigint(20) NOT NULL,
 `id_department` int(11) NOT NULL,
 PRIMARY KEY (`idsubject_department`),
@@ -37,5 +37,3 @@ KEY `fk_department_id_idx` (`id_department`),
 CONSTRAINT `fk_subject_id` FOREIGN KEY (`id_subject`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
