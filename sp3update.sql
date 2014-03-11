@@ -35,6 +35,9 @@ CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `departme
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+ALTER TABLE `subjectsplus`.`subject_department`
+ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`;
+
 /* Subject parent relationship */
 
 
@@ -55,3 +58,6 @@ FOREIGN KEY (`subject_child`)
 REFERENCES `subjectsplus`.`subject` (`subject_id`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION);
+
+ALTER TABLE `subjectsplus`.`subject_subject`
+ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`;

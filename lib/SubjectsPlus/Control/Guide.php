@@ -238,11 +238,14 @@ class Guide {
 
 
     $current_dept = new Querier();
-    $current_dept_query = "SELECT DISTINCT subject.subject, subject.subject_id, department.name, department.department_id
-    FROM subject_department
-    JOIN subject ON subject.subject_id = subject_department.id_subject
-    JOIN department ON department.department_id = subject_department.id_department
-    WHERE subject.subject_id = '$this->_subject_id'";
+    $current_dept_query =
+    "SELECT DISTINCT subject.subject, subject.subject_id, department.name, department.department_id, subject_department.date
+        FROM subject_department
+            JOIN subject ON subject.subject_id = subject_department.id_subject
+            JOIN department ON department.department_id = subject_department.id_department
+        WHERE subject.subject_id = '$this->_subject_id'
+        ORDER BY date DESC
+        LIMIT 1";
     
     $current_dept_array = $current_dept->getResult($current_dept_query);
     
@@ -252,7 +255,7 @@ class Guide {
 
 
 <select name="department">
-<option value="<?php echo $current_dept_array['2']; ?>"> <?php echo $current_dept_array[0]['name']; ?> </option>
+<option value="<?php echo $current_dept_array[0]['department_id']; ?>"> <?php echo $current_dept_array[0]['name']; ?> </option>
 <?php
 
     foreach ($deptArray as $dept) {
@@ -273,10 +276,25 @@ class Guide {
     $querier = new Querier();
     $subject_query = "SELECT subject_id, subject FROM subject;";
     $subject_array = $querier->getResult($subject_query);
+    
+    $current_parent_querier = new Querier();
+    $current_parent_query =
+    "SELECT DISTINCT child.subject AS child_subject, child.subject_id AS child_id, parent.subject AS parent_subject, parent.subject_id AS parent_id, has.date, has.subject_parent
+        FROM subject_subject AS has
+            JOIN subject as child ON child.subject_id = has.subject_child
+            JOIN subject as parent ON parent.subject_id = has.subject_parent
+        WHERE child.subject_id = '$this->_subject_id'
+        ORDER BY has.date DESC
+        LIMIT 1";
+    
+    $current_parent_array = $current_parent_querier->getResult($current_parent_query);
+    
+    
+    
     ?>
 <span class="record_label"> Parent Guide </span>
 <select name="parent">
-    <option value="0">   </option>
+<option value="<?php echo $current_parent_array[0]['parent_id']; ?>"> <?php echo $current_parent_array[0][2]; ?> </option>
      <?php
          foreach ($subject_array as $subject) {
              echo "<option value='" . $subject["subject_id"] . "'>" . $subject["subject"] . "</option>";
