@@ -198,7 +198,7 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 				}
 
 				//place the token in the editor
-				editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
+				editor.insertHtml( '&nbsp;<span class="subsplus_resource" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 			}
 		}
 	};

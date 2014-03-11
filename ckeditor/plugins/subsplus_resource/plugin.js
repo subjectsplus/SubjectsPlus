@@ -36,6 +36,17 @@ CKEDITOR.plugins.add( 'subsplus_resource', {
 			icon: '../assets/images/icons/database_add.png'
 		});
 
+        editor.on( 'doubleclick', function( evt )
+        {
+            var element = evt.data.element;
+
+            if ( $(element.$).is('span.subsplus_resource') )
+            {
+                evt.data.dialog = 'subsplus_resourceDialog';
+                editor.getSelection().selectElement( element );
+            }
+        });
+
 		// Register our dialog file. this.path is the plugin folder path.
 		CKEDITOR.dialog.add( 'subsplus_resourceDialog', this.path + 'dialogs/subsplus_resource.js' );
 	}
