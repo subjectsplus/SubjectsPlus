@@ -1,6 +1,7 @@
 <?php
 use SubjectsPlus\Control\Staff;
-
+use SubjectsPlus\Control\DBConnector;
+    
 error_reporting(1);
 
 require_once("includes/config.php");
