@@ -25,6 +25,66 @@ function html_entity_decode(str)
 	return ta.value;
 }
 
+function generateToken( dialog )
+{
+	//if focus is recorded, search for resource
+	if( focusID != '')
+	{
+		//get the search keywords
+		var lstrSearch = dialog.getValueOf( 'tab-main' , 'searchtext');
+
+		//get resource radio buttons list
+		getResourceRadioList( lstrSearch, function( lstrHTML )
+		{
+			var elements = this.CKEDITOR.dialog.getCurrent().getElement().getElementsByTag('div');
+
+			var element = elements.getItem(7);
+
+			//set html for radio buttons list
+			element.setHtml(lstrHTML);
+		})
+
+		return false;
+	}else
+	{
+		//get the token chosen and if check boxes checked
+		var lstrToken = jQuery('input[name="but"]:checked').val();
+		var lboolIcons = dialog.getValueOf( 'tab-main' , 'check-icons');
+		var lboolDesc = dialog.getValueOf( 'tab-main' , 'check-desc');
+
+		//if no radio button chosen, alert error
+		if(typeof lstrToken == 'undefined')
+		{
+			alert(html_entity_decode(editor.lang['subsplus_resource.ValidateRadio']));
+
+			return false;
+		}
+
+		//finish token depending on check boxes
+		lstrToken = lstrToken + ',{';
+
+		//1 if icons, 0 is no icons
+		if(lboolIcons)
+		{
+			lstrToken = lstrToken + '1';
+		}else
+		{
+			lstrToken = lstrToken + '0';
+		}
+
+		//1 if description, 0 is no description
+		if(lboolDesc)
+		{
+			lstrToken = lstrToken + '1}}';
+		}else
+		{
+			lstrToken = lstrToken + '0}}';
+		}
+	}
+
+	return lstrToken;
+}
+
 //get current script url so we can get path
 var lobjScripts = document.getElementsByTagName("script");
 
@@ -84,6 +144,10 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 							{
 								focusID = '';
 							})
+						},
+						setup: function( element )
+						{
+							this.setValue( element.getText() );
 						}
 					},
 					{
@@ -138,68 +202,43 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 			//uncheck any checked boxes
 			jQuery('input[type="checkbox"].clear-after-close').attr('checked', false);
 		},
+		onShow: function() {
+			var selection = editor.getSelection(),
+			    element = selection.getStartElement();
+			if ( element )
+			    element = element.getAscendant( 'span', true );
+
+			if ( !element || element.getName() != 'span' || element.data( 'cke-realelement' ) ) {
+			    element = editor.document.createElement( 'span' );
+				element.addClass('subsplus_resource');
+				element.setStyle('background', '#E488B6');
+				element.setAttribute('contentEditable', 'false');
+			    this.insertMode = true;
+			}
+			else
+			    this.insertMode = false;
+
+			this.element = element;
+
+			if ( !this.insertMode )
+			    this.setupContent( this.element );
+        },
 		onOk: function()
 		{
 			//get current dialog
 			var dialog = this;
+			var token = generateToken( dialog );
 
-			//if focus is recorded, search for resource
-			if( focusID != '')
-			{
-				//get the search keywords
-				var lstrSearch = dialog.getValueOf( 'tab-main' , 'searchtext');
-
-				//get resource radio buttons list
-				getResourceRadioList( lstrSearch, function( lstrHTML )
-				{
-					var elements = this.CKEDITOR.dialog.getCurrent().getElement().getElementsByTag('div');
-
-					var element = elements.getItem(7);
-
-					//set html for radio buttons list
-					element.setHtml(lstrHTML);
-				})
-
+			if( token )
+				this.element.setText( token );
+			else
 				return false;
-			}else
-			{
-				//get the token chosen and if check boxes checked
-				var lstrToken = jQuery('input[name="but"]:checked').val();
-				var lboolIcons = dialog.getValueOf( 'tab-main' , 'check-icons');
-				var lboolDesc = dialog.getValueOf( 'tab-main' , 'check-desc');
 
-				//if no radio button chosen, alert error
-				if(typeof lstrToken == 'undefined')
-				{
-					alert(html_entity_decode(editor.lang['subsplus_resource.ValidateRadio']));
+			if ( this.insertMode )
+				editor.insertElement( this.element );
 
-					return false;
-				}
-
-				//finish token depending on check boxes
-				lstrToken = lstrToken + ',{';
-
-				//1 if icons, 0 is no icons
-				if(lboolIcons)
-				{
-					lstrToken = lstrToken + '1';
-				}else
-				{
-					lstrToken = lstrToken + '0';
-				}
-
-				//1 if description, 0 is no description
-				if(lboolDesc)
-				{
-					lstrToken = lstrToken + '1}}';
-				}else
-				{
-					lstrToken = lstrToken + '0}}';
-				}
-
-				//place the token in the editor
-				editor.insertHtml( '&nbsp;<span class="subsplus_resource" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
-			}
+			//place the token in the editor
+			//editor.insertHtml( '&nbsp;<span class="subsplus_resource" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 		}
 	};
 });
