@@ -1,5 +1,6 @@
 <?php
 use SubjectsPlus\Control\Staff;
+use SubjectsPlus\Control\DBConnector;
 
 error_reporting(1);
 
@@ -27,7 +28,7 @@ if(!isset($_GET['id']))
 
 			$lstrForm = $lobjStaff->outputEmailForm();
 		}else{
-			$lobjTodayDate = new DateTime();
+			$lobjTodayDate = new \DateTime();
 
 			//The code is a hased string composed of the user's email, installation's salt, and today's date MMDDYYYY
 			$lstrCode = md5($lobjStaff->getEmail() . $salt . $lobjTodayDate->format('mdY'));
@@ -73,15 +74,15 @@ if(!isset($_GET['id']))
 
 	}else{
 		//create a DateTime object that defaults to today's date
-		$lobjTodayDate = new DateTime();
+		$lobjTodayDate = new \DateTime();
 		//clone Today's Date object because without clone, the object will pass by reference
 		$lobjTodayMinusOne = clone $lobjTodayDate;
 		//subtract a day from the Date Time object
-		$lobjTodayMinusOne->sub(new DateInterval('P1D'));
+		$lobjTodayMinusOne->sub(new \DateInterval('P1D'));
 		//clone Today's Date object again
 		$lobjTodayMinusTwo = clone $lobjTodayDate;
 		//subtract 2 days from the Date Time object
-		$lobjTodayMinusTwo->sub(new DateInterval('P2D'));
+		$lobjTodayMinusTwo->sub(new \DateInterval('P2D'));
 
 		//display error if Staff object's email object is null or if the passed code does not equal the hashed code containing
 		//the passed user id for today or the passed 2 days
