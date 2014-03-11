@@ -77,7 +77,7 @@ CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', function( editor ) {
 								var lstrToken = "{{cat}, {" + lstrSubject + "},{" + lstrPrefix + "},{subject}}";
 
 								// Finally, inserts the element at the editor caret position.
-								editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
+								editor.insertHtml( '&nbsp;<span class="subsplus_cat_link" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 								//close dialog box
 								CKEDITOR.dialog.getCurrent().hide()
 							}
@@ -130,7 +130,7 @@ CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', function( editor ) {
 							var lstrToken = "{{cat}, {" + lstrKeyword + "},{" + lstrKeyword + "},{keywords}}";
 
 							// Finally, inserts the element at the editor caret position.
-							editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
+							editor.insertHtml( '&nbsp;<span class="subsplus_cat_link" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 							//close dialog box
 							CKEDITOR.dialog.getCurrent().hide()
 						}
@@ -191,7 +191,7 @@ CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', function( editor ) {
 							var lstrToken = " {{cat}, {" + lstrCallNum + "},{" + lstrLabel + "},{call_num}} ";
 
 							// Finally, inserts the element at the editor caret position.
-							editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
+							editor.insertHtml( '&nbsp;<span class="subsplus_cat_link" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 							//close dialog box
 							CKEDITOR.dialog.getCurrent().hide()
 						}
@@ -257,7 +257,7 @@ CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', function( editor ) {
 							var lstrToken = "{{cat}, {" + lstrBib + "},{" + lstrLabel + "},{bib}}";
 
 							// Finally, inserts the element at the editor caret position.
-							editor.insertHtml( '&nbsp;<span style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
+							editor.insertHtml( '&nbsp;<span class="subsplus_cat_link" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
 							//close dialog box
 							CKEDITOR.dialog.getCurrent().hide()
 						}

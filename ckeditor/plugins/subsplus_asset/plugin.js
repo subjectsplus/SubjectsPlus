@@ -36,6 +36,17 @@ CKEDITOR.plugins.add( 'subsplus_asset', {
 			icon: '../assets/images/icons/folder_add.png'
 		});
 
+        editor.on( 'doubleclick', function( evt )
+        {
+            var element = evt.data.element;
+
+            if ( $(element.$).is('span.subsplus_asset') )
+            {
+                evt.data.dialog = 'subsplus_assetDialog';
+                editor.getSelection().selectElement( element );
+            }
+        });
+
 		// Register our dialog file. this.path is the plugin folder path.
 		CKEDITOR.dialog.add( 'subsplus_assetDialog', this.path + 'dialogs/subsplus_asset.js' );
 	}

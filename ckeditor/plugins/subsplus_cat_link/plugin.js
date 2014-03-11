@@ -36,6 +36,17 @@ CKEDITOR.plugins.add( 'subsplus_cat_link', {
 			icon: '../assets/images/icons/book_add.png'
 		});
 
+        editor.on( 'doubleclick', function( evt )
+        {
+            var element = evt.data.element;
+
+            if ( $(element.$).is('span.subsplus_cat_link') )
+            {
+                evt.data.dialog = 'subsplus_cat_linkDialog';
+                editor.getSelection().selectElement( element );
+            }
+        });
+
 		// Register our dialog file. this.path is the plugin folder path.
 		CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', this.path + 'dialogs/subsplus_cat_link.js' );
 	}

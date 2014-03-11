@@ -2,6 +2,7 @@
 
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
+use SubjectsPlus\Control\DBConnector;
 
 /**
  *   @file faq_bits.php

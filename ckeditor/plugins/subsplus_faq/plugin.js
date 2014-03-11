@@ -36,6 +36,17 @@ CKEDITOR.plugins.add( 'subsplus_faq', {
 			icon: '../assets/images/icons/faq_add.png'
 		});
 
+        editor.on( 'doubleclick', function( evt )
+        {
+            var element = evt.data.element;
+
+            if ( $(element.$).is('span.subsplus_faq') )
+            {
+                evt.data.dialog = 'subsplus_faqDialog';
+                editor.getSelection().selectElement( element );
+            }
+        });
+
 		// Register our dialog file. this.path is the plugin folder path.
 		CKEDITOR.dialog.add( 'subsplus_faqDialog', this.path + 'dialogs/subsplus_faq.js' );
 	}
