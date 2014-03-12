@@ -18,13 +18,36 @@ for(var i = 0; i < lobjScripts.length; i++)
 
 function getStaffCheckboxList( callback )
 {
+	var lstrChosenEmails = '';
+
+	if( CKEDITOR.dialog.getCurrent().element.getText() != '' )
+	{
+		var lobjToken = CKEDITOR.dialog.getCurrent().element.getText().split(/{{|}}|}[^{]*{/);
+
+		lstrChosenEmails = lobjToken[2];
+	}
+
 	jQuery.ajax({
 		url: lstrPathToCkEditor + 'plugins/subsplus_sub_spe/php/getStaffCheckboxes.php',
+		data: {
+			emails: lstrChosenEmails
+		},
+		type: 'post',
 		success: function( response )
 		{
 			return callback( response );
 		}
 	});
+}
+
+function generateSSToken( lobjStaff )
+{
+	var lstrToken = '{{ss},{';
+
+	lstrToken += lobjStaff.join(',');
+	lstrToken += '}}';
+
+	return lstrToken;
 }
 
 // Our dialog definition.
@@ -77,6 +100,27 @@ CKEDITOR.dialog.add( 'subsplus_sub_speDialog', function( editor ) {
 			//uncheck any checked boxes
 			jQuery('input[type="checkbox"].clear-after-close').attr('checked', false);
 		},
+		onShow: function() {
+			var selection = editor.getSelection(),
+			element = selection.getStartElement();
+			if ( element )
+				element = element.getAscendant( 'span', true );
+
+			if ( !element || element.getName() != 'span' || element.data( 'cke-realelement' ) ) {
+				element = editor.document.createElement( 'span' );
+				element.addClass('subsplus_sub_spe');
+				element.setStyle('background', '#E488B6');
+				element.setAttribute('contentEditable', 'false');
+				this.insertMode = true;
+			}
+			else
+				this.insertMode = false;
+
+			this.element = element;
+
+			if ( !this.insertMode )
+				this.setupContent( this.element );
+		},
 		onOk: function()
 		{
 			//get current dialog
@@ -91,19 +135,16 @@ CKEDITOR.dialog.add( 'subsplus_sub_speDialog', function( editor ) {
 					lobjStaff.push( $(checkbox).val() );
 				});
 
-				jQuery.ajax({
-					url: lstrPathToCkEditor + 'plugins/subsplus_sub_spe/php/getStaffToken.php',
-					data: {
-						'staff_list' : lobjStaff
-					},
-					type: 'post',
-					success: function( response )
-					{
-						editor.insertHtml(response);
-					}
-				});
-			}
+				var token = generateSSToken( lobjStaff );
 
+				if( token )
+					this.element.setText( token );
+				else
+					return false;
+
+				if ( this.insertMode )
+					editor.insertElement( this.element );
+			}
 		}
 	};
 });
