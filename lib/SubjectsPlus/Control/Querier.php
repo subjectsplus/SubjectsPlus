@@ -12,7 +12,8 @@
 class Querier {
 
 	private $_query;
-
+    
+    
 	public function getResult($query, $boolAssoc = false) {
 		$this->_query = $query;
 		$resultArray = array();
@@ -59,5 +60,11 @@ class Querier {
 	}
 
 }
+
+?>
+
+<?php
+
+    
 
 ?>
