@@ -257,9 +257,15 @@ class Pluslet {
         $tokenized = "";
 
         $parts = preg_split('/<span[^>]*>{{|}}<\/span>/', $this->_body);
+
+    	if( count($parts) == 1 )
+    		$parts = preg_split('/{{|}}/', $this->_body);
+
         if (count($parts) > 1) { // there are tokens in $body
             foreach ($parts as $part) {
-                if (preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part) || preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)) { // $part is a properly formed token
+                if (preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part)
+                	|| preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)
+                	|| preg_match('/^sss},\s?{[^}]*/', $part) ) { // $part is a properly formed token
                     $fields = preg_split('/},\s?{/', $part);
                     $prefix = substr($part, 0, 3);
                     switch ($prefix) {
@@ -413,6 +419,31 @@ class Pluslet {
                                 }
                             }
                             break;
+                    	case 'sss':
+                    		global $tel_prefix;
+
+                    		$querier = new Querier();
+                    		$qs = "SELECT lname, fname, email, tel, title from staff WHERE email IN ('" . str_replace( ',', "','", $fields[1] ) . "') ORDER BY lname, fname";
+
+                    		//print $qs;
+
+                    		$staffArray = $querier->getResult($qs);
+
+                    		foreach ($staffArray as $value) {
+
+                    			// get username from email
+                    			$truncated_email = explode("@", $value[2]);
+
+                    			$staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
+
+                    			// Output Picture and Contact Info
+                    			$tokenized .= "
+                    			<div class=\"clearboth\"><img src=\"$staff_picture\" alt=\"Picture: $value[1] $value[0]\"  class=\"staff_photo2\" align=\"left\" style=\"margin-bottom: 5px;\" />
+                    			<p><a href=\"mailto:$value[2]\">$value[1] $value[0]</a><br />$value[4]<br />
+                    			Tel: $tel_prefix $value[3]</p>\n</div>\n";
+                    		}
+                    		break;
+
                     }
                 } elseif (preg_match('/{|}/', $part) && preg_match('/\bdab\b|\bfaq\b|\bcat\b|\bfil\b/', $part)) { // looks kinda like a token
                     $tokenized.= "<span style='background-color:yellow'>BROKEN TOKEN: " . $part . "</span>";

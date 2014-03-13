@@ -38,7 +38,7 @@ $staffArray = $querier->getResult($qs);
 if( count($sugStaffArray) > 0 )
 {
 	$lstrHTML = "<table>";
-	$lstrHTML .= "<strong>" . _("Related") . "</strong>";
+	$lstrHTML .= "<strong>" . _("Specialists") . "</strong>";
 }
 
 foreach ($sugStaffArray as $value) {

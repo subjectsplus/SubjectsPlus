@@ -42,7 +42,7 @@ function getStaffCheckboxList( callback )
 
 function generateSSToken( lobjStaff )
 {
-	var lstrToken = '{{ss},{';
+	var lstrToken = '{{sss},{';
 
 	lstrToken += lobjStaff.join(',');
 	lstrToken += '}}';

@@ -171,6 +171,13 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 
 								element.setHtml(lstrHTML);
 							})
+						},
+						setup: function( element )
+						{
+							if( element )
+							{
+								$(this).click();
+							}
 						}
 					},
 					{
