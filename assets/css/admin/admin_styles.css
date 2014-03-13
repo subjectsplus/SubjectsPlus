@@ -1529,3 +1529,405 @@ margin-top: 10px;
 margin-left: 10px;
 margin-right: 10px;
 }
+
+
+#controlpage div.pluslet {
+padding: 0em 0em;
+margin: 1em 1em 1em 0;
+background-color: #fff;
+border: 2px solid #ccc;
+border: none;
+clear:both;
+background-color: #EFEFEF;
+    border: 2px solid #FFFFFF;
+
+}
+
+#controlpage div.pluslet > .titlebar {
+  background-color: #858585;
+  padding: .2em .5em;
+  color: #fff;
+  background-color: #fff;
+  color: #333;
+  font-size: 1.1em;
+  font-weight:700;
+  height: 100%;
+  min-height: 2em;
+  border-bottom: 1px solid #ccc;
+}
+
+#controlpage .titlebar_text {
+float: left;
+margin-top: .3em;
+
+}
+
+.pluslet img#sort
+{
+    cursor: move;
+    float: left;
+    margin-right: .5em;
+    margin-top: 2px;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 20px;
+    padding: 0.2em;
+    width: 20px;
+}
+
+#controlpage .titlebar_options {
+
+float: right;
+padding: .2em 0em .1em .5em;
+}
+
+#controlpage .titlebar_options img {
+
+padding: .2em;
+background-color: #E488B6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+height: 15px;
+width: 15px;
+cursor: pointer;
+}
+
+#controlpage .pluslet_body {
+    clear: both;
+  padding: .5em;
+  
+}
+
+div.breather > h2 {
+  background-color: #858585;
+  padding: .5em;
+  color: #fff;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+/* UI tabs */
+
+.ui-tabs .ui-tabs-nav li {
+
+    padding: .2em 1em 0 1em;
+
+}
+
+ #tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+ #tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
+
+/* Secondary Nav for Guides Creation */
+
+#guide_header {
+  width: 100%;
+  background-color: #333;
+  border-top: 2px solid #fff;
+  border-bottom: 1px solid #000;
+  height: 2.8em;
+  line-height: 2.8em;
+}
+
+#guide_header h2 {
+    margin: 0;
+}
+
+#guide_header h2 a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#guide_header img {
+    position: relative;
+    vertical-align: text-bottom; 
+    margin-right: .5em;
+    margin-left: .5em;
+}
+
+.icon-view-guide {
+
+}
+
+#guide_header .icon-edit-guide {
+    height: 20px;
+    margin-bottom: 4px;
+}
+
+#guide_header ul li a{
+    
+    text-decoration: none;
+    
+}
+
+#guide_header ul li a:hover{
+    
+    text-decoration: underline;
+    
+}
+
+#guide_nav {
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    color: #333;
+}
+
+#guide_nav li {
+  display: inline-block;
+  padding-top: .1em;
+}
+
+#guide_nav li a {
+
+    color: #777777;
+    text-decoration: none !important;
+    padding: 0em 1em;
+    text-align: left;
+    font-size: 1.2em;
+    color: #fff;
+
+
+}
+
+#hide_header {
+    background-color: #fff;
+    padding: 0em 0em;
+    padding-right: .5em;
+    top: 0;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#hide_header img {
+    position:relative;
+    top: 2px;
+    margin-left: .5em;
+    margin-right: 0;
+}
+
+/* The draggable boxes from the admin guide header */
+
+#box_options {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    float: left;
+    list-style-type: none;
+    margin: 0 10px 0 -12px !important;
+    padding: 0 5px 1px;
+    position: absolute;
+    top: 50px;
+    z-index: 1000 !important;
+
+}
+#box_options li {
+    border: 1px solid #CCCCCC !important;
+    clear: left !important;
+    display: block !important;
+    float: none !important;
+    margin: 0 !important;
+    line-height: 1.5em !important;
+    font-size: 1.1em !important;
+    padding: .2em .2em .2em .5em;
+}
+
+.box_settings {
+    clear: both; 
+    border-top: 1px solid #E488B6;
+    padding: .5em 0;
+    text-transform: none;
+    font-size: 0.9em;
+    display: none;
+}
+
+.box-item {
+    list-style-type: none;
+
+    max-width:200px;
+    background-color: #333;
+    cursor: pointer;
+    color:#fff;
+        border: 1px solid #CCCCCC !important;
+    clear: left !important;
+    display: block !important;
+    float: none !important;
+    margin: 0 !important;
+    line-height: 1.5em !important;
+    font-size: 1.1em !important;
+    padding: .2em .2em .2em .5em;
+}
+
+.box-item:hover {
+background: #C03957;
+}
+
+#box_options li.box_note {
+    background-color: #FFFFFF !important;
+    border: 0 none #FFFFFF !important;
+    color: #333333;
+    cursor: text !important;
+    font-size: 0.9em !important;
+    padding: .5em .2em;
+}
+
+/* jquery ui popup boxes */
+
+label {
+    clear: left;
+}
+
+/* guide tab editing zone 
+background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
+*/
+
+.sptab {
+    background-color: #dfdfdf !important;
+    
+}
+/* Override for V 3, multiple layouts */
+
+#portal-column-0, #portal-column-1, #portal-column-2, .portal-column-0, .portal-column-1, .portal-column-2   {
+    width: 100%;
+    background-color: transparent;
+}
+
+/* Layout dropdown in header */
+
+.inner-nav-content {
+
+position:absolute;
+display:none;
+
+
+}
+
+#slider_options, #tabs_options {
+    background-color: #FFFFFF;
+    clear: left;
+    list-style-type: none;
+    margin: 0 10px 0 -12px !important;
+    padding: 1%;
+    position: absolute;
+    top: 50px;
+    width: 250px;
+    z-index: 1000 !important;
+    
+    
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+#slider_options p, #tabs_options p {
+    color: #333;
+    padding: .5em;
+    font-size: smaller;
+}
+
+.slider_options_guide {
+    display: none;
+    width: 200px;
+    padding: 1em;
+    
+}
+
+
+#tabs {
+    
+    clear:both;
+    position: relative;
+    width: 94%;
+    margin: 0 auto;
+    top:35px;
+}
+
+#tab_options {
+    
+    display: none;
+    width: 200px;
+    padding: 1em;
+}
+
+#save_tab_options {
+    display:none;clear: left;margin-top: 1em;font-size: smaller;
+}
+
+#tabs_options input {
+    margin-bottom: 1em;
+    width: 100px;
+}
+
+#tab_wrapper {
+    margin-top: 0em;min-height: 600px;
+}
+
+#tab_header {
+    
+}
+
+#tab_header ul {
+    margin-left: 2em;
+}
+
+#tab_header ul li {
+    list-style-type: none;
+    padding: 0px 5px 1px 5px;
+    margin: 0px 5px 0 5px;
+    display: block-inline;
+    float: left;
+    background-color: #cccc99;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    cursor: pointer;
+}
+
+#tab_header ul li.active {
+    background-color: orange;
+}
+
+#tab_header ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+#tabs li .ui-icon-wrench { float: left; margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+#tabs > .ui-widget-content {
+
+}
+
+#tabs div.pluslet > .titlebar {
+    font-weight: 400;
+}
+
+#save_layout {
+    display:none;
+    clear: left;
+    margin-top: 1em;
+    font-size: smaller;
+    
+}
+
+#save_guide {
+    display:none;
+    
+}
+
+
+.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
+    background-color: #E488B6;
+    color: #FFFFFF;
+}

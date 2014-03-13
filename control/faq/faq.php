@@ -1,7 +1,7 @@
 <?php
 /**
- *   @file talkback.php
- *   @brief Create the metadata for a guide (and thus, the guide); also update and delete
+ *   @file faq.php
+ *   @brief Create, modify, delete FAQs
  *
  *   @author adarby
  *   @date mar 2011

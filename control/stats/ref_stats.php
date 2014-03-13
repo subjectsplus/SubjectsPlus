@@ -23,6 +23,31 @@ try {
   echo $e;
 }
 
+if (isset($_POST["submit_stat"])) {
+
+  // Submit form
+
+  $record = new RefStat($_POST["refstat_id"], "post");
+
+  //////////////////////////////////
+
+  if ($_POST["faq_id"] == "") {
+    $record->insertRecord();
+    $ok_record_id = $record->getRecordId();
+  } 
+
+  // Show feedback
+  $feedback = $record->getMessage();
+  // See all the queries?
+  //$record->deBug();
+
+echo "<div class=\"feedback\">$feedback</div><br /><br />";  
+
+}
+
+
+
+
 ?>
 
 <form class="pure-form">
@@ -90,22 +115,22 @@ $ourboxes = '
 
 $our_refs = array ("In Person", "Phone", "Email", "IM");
 
-$boxes = "<div class=\"pure-g-r bigreadable\">";
+$boxes = "<div class=\"pure-g-r bigreadable\"><div class=\"pure-u-1\">  ";
 
 foreach ($our_refs as $key => $value) {
   $boxes .= "
-<div class=\"pure-u-1-4\">  
-  <div class=\"pluslet\" id=\"pluslet-$key\" name=\"\">
+
+  <div class=\"pluslet inline-block\" id=\"pluslet-$key\" name=\"\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">$value</div>
       <div class=\"titlebar_options\"></div>
     </div>
     <div class=\"pluslet_body\">$ourboxes
     <br />
-    <p><a class=\"pure-button pure-button-primary\">Add</a>&nbsp; x &nbsp;<input name=\"times-$key\" type=\"text\" value=\"1\" size=\"1\" /></p>
+    <p><a class=\"pure-button pure-button-primary\">Add $value</a>&nbsp; x &nbsp;<input name=\"times-$key\" type=\"text\" value=\"1\" size=\"1\" /></p>
     </div>
   </div>
-</div>
+
   ";
 }
 

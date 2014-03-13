@@ -1174,4 +1174,22 @@ function reduce($numerator,$denominator) {
   $gcd = gcd($numerator,$denominator);
   return array($numerator/$gcd, $denominator/$gcd); }
 
+/**
+ * makePluslet() is just to save time in creating pluslets
+ * you pass in title and body, it returns pluslet
+ *
+ * @return string
+ */
+
+function makePluslet ($title = "", $body = "", $bonus_styles = "") {
+  print "
+  <div class=\"pluslet $bonus_styles\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">$title</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">$body
+    </div>
+  </div>";
+}
 ?>
