@@ -26,6 +26,8 @@ CKEDITOR.plugins.add( 'subsplus_sub_spe', {
 
 			if ( $(element.$).is('span.subsplus_sub_spe') )
 			{
+				var selection = editor.getSelection();
+				selection.fake(element);
 				evt.data.dialog = 'subsplus_sub_speDialog';
 			}
 		});
