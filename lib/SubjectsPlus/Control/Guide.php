@@ -638,7 +638,7 @@
         
         // Insert subject_department relationship
         $insert_department = new Querier();
-        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department')";
+        $dept_query = "INSERT INTO subject_department (subject_id, department_id) VALUES ('$this->_subject_id ', '$this->_department')";
         $insert_department->insertQuery($dept_query);
         
         

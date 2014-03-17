@@ -165,6 +165,11 @@ function modifyDB($id, $type) {
     $pluslet_body = $_POST["pluslet_body"];
     $pluslet_type = $_POST["item_type"];
     $pluslet_extra = $_POST["special"];
+    $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
+    $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
+    $pluslet_supress_body = $_POST["boxsetting_suppress_body"];
+    $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];
+    
     // If clone isn't set, set to 0
     if (isset($_POST["clone"])) {
         $pluslet_clone = $_POST["clone"];
@@ -183,7 +188,7 @@ function modifyDB($id, $type) {
     }
     switch ($type) {
         case "insert":
-            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra) VALUES ('%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), mysql_real_escape_string($pluslet_extra));
+            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, supress_body, titlebar_styling) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), mysql_real_escape_string($pluslet_extra), mysql_real_escape_string($pluslet_hide_titlebar), mysql_real_escape_string($pluslet_collapse_body),  mysql_real_escape_string($supress_body), mysql_real_escape_string($titlebar_styling));
             $r = mysql_query($q);
             if ($r) {
                 $id = mysql_insert_id();

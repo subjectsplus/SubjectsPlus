@@ -488,7 +488,7 @@ function setupSaveButton( lstrSelector )
 		}
 
 		////////////////////////
-		// Load the data into guide_data.php
+		// Post the data to guide_data.php
 		// which will do an insert or update as appropriate
 		//
 		// **changed by dgonzalez 08/2013 so that request is not done
