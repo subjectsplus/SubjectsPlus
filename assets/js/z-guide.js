@@ -371,11 +371,19 @@ function setupSaveButton( lstrSelector )
 		// is collapsed by default, and if body is suppressed (for a header pluslet)
 		////////////////////////////////////////////////////////////////
 
-		var boxsetting_hide_titlebar = jQuery('input[id=notitle-'+lintID+']').attr('value');
-		var boxsetting_collapse_titlebar = jQuery('input[id=start-collapsed-'+lintID+']').attr('value');
-		var boxsetting_suppress_body = jQuery('input[id=nobody-'+lintID+']').attr('value');
-		var boxsetting_titlebar_styling = jQuery('select[id=titlebar-styling-'+lintID+']').attr('value');
-		
+		var boxsetting_hide_titlebar = Number(jQuery('input[id=notitle-'+lintID+']').is(':checked'));
+		var boxsetting_collapse_titlebar = Number(jQuery('input[id=start-collapsed-'+lintID+']').is(':checked'));
+		var boxsetting_suppress_body = Number(jQuery('input[id=nobody-'+lintID+']').is(':checked'));
+		var boxsetting_titlebar_styling = jQuery('select[id=titlebar-styling-'+lintID+']').val();
+        
+    
+        
+        
+		console.log (boxsetting_hide_titlebar);
+        console.log (boxsetting_collapse_titlebar);
+        console.log( boxsetting_suppress_body);
+        console.log(boxsetting_titlebar_styling);
+        
 		//alert(lintID);
 		//alert(boxsetting_titlebar_styling);
 		//////////////////////////////////////////////////////////////////

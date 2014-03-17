@@ -23,10 +23,10 @@ class Pluslet {
     protected $_editable = "";
     protected $_icons = "";
     // added v 3
-    protected $_hide_titlebar = "";
-    protected $_collapse_body = "";
-    protected $_suppress_body = "";
-    protected $_titlebar_styling = "";
+    protected $_hide_titlebar;
+    protected $_collapse_body;
+    protected $_suppress_body;
+    protected $_titlebar_styling;
 
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
@@ -193,7 +193,7 @@ class Pluslet {
     }
 
     protected function boxSettings() {
-        global $titlebar_styles;
+        $titlebar_styles =  array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
 
         // generate our titlebar styles
         $tb_styles = "";
