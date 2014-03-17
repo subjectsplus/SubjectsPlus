@@ -42,6 +42,8 @@ CKEDITOR.plugins.add( 'subsplus_resource', {
 
             if ( $(element.$).is('span.subsplus_resource') )
             {
+            	var selection = editor.getSelection();
+            	selection.fake(element);
                 evt.data.dialog = 'subsplus_resourceDialog';
             }
         });

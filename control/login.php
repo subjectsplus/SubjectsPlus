@@ -126,9 +126,11 @@ if ($postvar_username == "") {
 
 $success = "no";
 
-$introtext = "<p align=\"center\" class=\"clear-both\" class=\"smaller\"><br />" . _("Please enter your <strong>login and password</strong> to proceed.") . "</p>";
+$introtext = "
+<br />" . _("Please enter your <strong>credentials</strong> to proceed.") . "</p>";
 
 $login_form = "<div align=\"center\">\n
+
 <form action=\"login.php\" method=\"post\" style=\"font-size: 1em;\">\n
 <input type=\"hidden\" name=\"thecount\" value=\"" . $postvar_thecount . "\" />
 <table cellpadding=\"7\" cellspacing=\"0\" border=\"0\" class=\"striped_data\">\n
@@ -149,6 +151,8 @@ $login_form = "<div align=\"center\">\n
 </table>\n
 </form>\n
 </div>\n";
+
+
 
 if (($postvar_username != "") AND (isset($postvar_password))) {
 
@@ -178,7 +182,7 @@ if (($postvar_username != "") AND (isset($postvar_password))) {
         }
     } else {
         // Bad credentials, try again.  Only 3 tries before you get bumped
-        $introtext = "<p align=\"center\"><strong>" . _("Please check your login and password and try again.  (Note that login attempts are logged.)") . "</strong></p><br />";
+        $introtext = "<p align=\"center\"><strong>" . _("Please check your email and password and try again.  (Note that login attempts are logged.)") . "</strong></p><br />";
         $success = "no";
     }
 
@@ -188,28 +192,56 @@ if (($postvar_username != "") AND (isset($postvar_password))) {
 } else {
 
 }
+
+$login_form = $introtext . '
+<form action="login.php" method="post" class="pure-form pure-form-stacked">
+<input type="hidden" name="thecount" value="' . $postvar_thecount . '\" />
+    <fieldset>
+    
+        <div class="pure-control-group">
+            <label for="email">' . _("Email") . '</label>
+            <input id="email" type="email" name="username" value="' . $postvar_username . '" placeholder="' . _("Email Address") . '">
+        </div>
+
+        <div class="pure-control-group">
+            <label for="password">' . _("Password") . '</label>
+            <input id="password" name="password" type="password" placeholder="' . _("Password") . '">
+        </div>
+        <br />
+        <div class="pure-controls">
+
+            <button type="submit" class="pure-button pure-button-primary">' . _("Submit") . '</button>
+        </div>
+    </fieldset>
+    <br />
+    <div align="center"><a href="forgotpassword.php">' . _("I have forgotten my password") . '</a></div>
+</form>
+';
+
+$logo = "<img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" border=\"0\" />\n
+<br />";
+
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <style type="text/css" media="all">@import "<?php print $AssetPath; ?>css/admin/admin_styles.css";</style>
+        <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
         <title>Login</title>
     </head>
 
-    <body>
-        <div id="header">
-            <div style="width: 100%; text-align: left;"><img src="<?php print $AssetPath; ?>images/admin/logo_small.png"  border="0" class="logo" width="136" height="28" /></div>
-        </div>
-<?php
-print "<div class=\"box\" style=\"width: 300px; margin: 2em auto;\">
-$introtext
-<br />
-$login_form
-<br />
-</div>";
+<body id="controlpage">
 
+    <div style="margin: 4em auto; width: 350px;">
+<?php
+
+makePluslet($logo, $login_form,"");
 ?>
-    </body>
+
+</div>
+
+</body>
 </html>
 

@@ -25,7 +25,7 @@ function html_entity_decode(str)
 	return ta.value;
 }
 
-function generateToken( dialog )
+function generateDABToken( dialog, editor )
 {
 	//if focus is recorded, search for resource
 	if( focusID != '')
@@ -147,7 +147,8 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 						},
 						setup: function( element )
 						{
-							this.setValue( element.getText() );
+							var lobjToken = element.getText().split(/{{|}}|}[^{]*{/);
+							this.setValue( lobjToken[3] );
 						}
 					},
 					{
@@ -170,6 +171,13 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 
 								element.setHtml(lstrHTML);
 							})
+						},
+						setup: function( element )
+						{
+							if( element )
+							{
+								$(this).click();
+							}
 						}
 					},
 					{
@@ -177,14 +185,28 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 						type: 'checkbox',
 						id: 'check-icons',
 						label: html_entity_decode(editor.lang['subsplus_resource.IconsCheckbox']),
-						className: 'clear-after-close'
+						className: 'clear-after-close',
+						setup: function( element )
+						{
+							var lobjToken = element.getText().split(/{{|}}|}[^{]*{/);
+
+							if( lobjToken[4].charAt(0) == '1' )
+								this.setValue( true );
+						}
 					},
 					{
 						//checkbox for include description
 						type: 'checkbox',
 						id: 'check-desc',
 						label: html_entity_decode(editor.lang['subsplus_resource.DescCheckbox']),
-						className: 'clear-after-close'
+						className: 'clear-after-close',
+						setup: function( element )
+						{
+							var lobjToken = element.getText().split(/{{|}}|}[^{]*{/);
+
+							if( lobjToken[4].charAt(1) == '1' )
+								this.setValue( true );
+						}
 					},
 					{
 						//html to add radio list
@@ -227,7 +249,7 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 		{
 			//get current dialog
 			var dialog = this;
-			var token = generateToken( dialog );
+			var token = generateDABToken( dialog, editor );
 
 			if( token )
 				this.element.setText( token );

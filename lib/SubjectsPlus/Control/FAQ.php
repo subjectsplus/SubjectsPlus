@@ -1,7 +1,7 @@
 <?php
    namespace SubjectsPlus\Control;
 /**
- *   @file sp_FAQ
+ *   @file FAQ
  *   @brief manage faq submissions (called by faq/index.php)
  *
  *   @author agdarby
