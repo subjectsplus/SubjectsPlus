@@ -242,8 +242,8 @@
     $current_dept_query =
     "SELECT DISTINCT subject.subject, subject.subject_id, department.name, department.department_id, subject_department.date
     FROM subject_department
-    JOIN subject ON subject.subject_id = subject_department.id_subject
-    JOIN department ON department.department_id = subject_department.id_department
+    JOIN subject ON subject.subject_id = subject_department.subject_id
+    JOIN department ON department.department_id = subject_department.department_id
     WHERE subject.subject_id = '$this->_subject_id'
     ORDER BY date DESC
     LIMIT 1";
@@ -256,7 +256,6 @@
 
 
 <select name="department">
-<option value="<?php echo $current_dept_array[0]['department_id']; ?>"> <?php echo $current_dept_array[0]['name']; ?> </option>
 <?php
     
     foreach ($deptArray as $dept) {
@@ -693,7 +692,7 @@
         
         // Insert subject_department relationship
         $insert_department = new Querier();
-        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department')";
+        $dept_query = "INSERT INTO subject_department (subject_id, department_id) VALUES ('$this->_subject_id ', '$this->_department')";
         $insert_department->insertQuery($dept_query);
         
         
@@ -737,6 +736,8 @@
         // clear subject_discipline
         /////////////////////
         
+        
+        /*
         $qClearSD = "DELETE FROM subject_discipline WHERE subject_id = " . $this->_subject_id;
         
         $rClearSD = mysql_query($qClearSD);
@@ -746,6 +747,7 @@
         if (!$rClearSD) {
             echo blunDer("We have a problem with the clear subject_discipline query: $qClearSD");
         }
+         */
         
         /////////////////////
         // insert into subject_discipline
