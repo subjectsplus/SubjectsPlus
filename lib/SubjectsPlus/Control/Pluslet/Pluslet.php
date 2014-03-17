@@ -146,9 +146,9 @@ class Pluslet {
         	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
             <div class=\"titlebar_options\">$this->_icons</div>";
 
-            if ($hide_titlebar != 0) {
+           // if ($hide_titlebar != 0) {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
-            }
+           // }
 
 
             $this->_pluslet .= "</div>";
