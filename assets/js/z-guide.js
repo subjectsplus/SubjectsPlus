@@ -89,8 +89,9 @@ jQuery(lstrSelector).livequery(function() {
 						jQuery(props.draggable).children('.pluslet_body').show();
 						jQuery(props.draggable).children().children('.titlebar_text').show();
 						jQuery(props.draggable).children().children('.titlebar_options').show();
-
-						jQuery(props.draggable).hide('slow', function()
+                        
+						
+                           jQuery(props.draggable).hide('slow', function()
 						{
 							jQuery(this).remove();
 							jQuery(drop_tab).children('a[href^="#tabs-"]').click();
@@ -242,6 +243,7 @@ function makeSortable( lstrSelector )
 				jQuery(ui.item).children('.pluslet_body').show();
 				jQuery(ui.item).children().children('.titlebar_text').show();
 				jQuery(ui.item).children().children('.titlebar_options').show();
+                              
 			}
 		});
 	});
@@ -397,7 +399,15 @@ function setupSaveButton( lstrSelector )
 		// Loop through the box types
 		switch (item_type[2]) {
 			case "Basic":
-				var pbody = addslashes(CKEDITOR.instances[lstrInstance].getData());
+                if (typeof CKEDITOR != 'undefined') {
+                
+                    var pbody = addslashes(CKEDITOR.instances[lstrInstance].getData());
+
+                } else {
+                    
+                    var pbody = jQuery('#pluslet-' + lintID).find('.pluslet_body').html()
+                }
+                
 				var pitem_type = "Basic";
 				var pspecial = '';
 				break;
@@ -598,9 +608,11 @@ function makeEditable( lstrSelector )
     // MODIFY PLUSLET -- on click of edit (pencil) icon
     ////////////////////////////////
 
+    console.log(lstrSelector);
     jQuery(lstrSelector).livequery('click', function(event) {
 
         var edit_id = jQuery(this).attr("id").split("-");
+                                   console.log(edit_id);
         //alert(edit_id[1]);
         ////////////
         // Clone?
@@ -873,9 +885,21 @@ function setupMiscLiveQueries()
     jQuery('a[id*=settings-]').livequery('click', function(event) {
 
         jQuery(this).parent().next('.box_settings').toggle('slow');
+        
 
      });
 
+    jQuery('.pure-checkbox').on('click',  function() {
+             
+            var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
+            console.log(pluslet_id);
+            jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-Basic');
+                                console.log(jQuery(pluslet_id));
+            jQuery("#save_guide").fadeIn();
+            
+                            
+    });
+    
 }
 
 function setupMiscClickEvents()
@@ -1053,14 +1077,3 @@ function reLayout( lc, cc, rc)
 
 }
 
-
-
-
-////// Run all pastes through Word filter
-/*
-                                  CKEDITOR.on('instanceReady', function(ev) {
-                                              ev.editor.on('paste', function(evt) {
-                                                           evt.data['html'] = '<!--class="Mso"-->'+evt.data['html'];
-                                                           }, null, null, 9);
-                                              });
-*/

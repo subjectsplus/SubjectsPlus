@@ -105,7 +105,7 @@ class Pluslet {
                 $this->_icons .= " <a id=\"delete-$this->_pluslet_id\"><img class=\"pluslet-icon\"  src=\"$IconPath/delete.png\"" . _("Remove item from this guide") . "\" title=\"" . _("Remove item from this guide") . "\" border=\"0\" /></i></a>";
 
                 // Show the item id --it's handy for debugging
-                $this->_visible_id = "<span class=\"smallgrey\">$this->_pluslet_id</span>";
+                $this->_visible_id = "<span class=\"pluslet_id smallgrey\">$this->_pluslet_id</span>";
 
                 // get our relative path to the legacy fixed_pluslet folder
                 $this->_relative_asset_path = "../../assets/";
@@ -195,6 +195,7 @@ class Pluslet {
     protected function boxSettings() {
 
         global $titlebar_styles;
+        $titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
 
         // generate our titlebar styles
         $tb_styles = "";

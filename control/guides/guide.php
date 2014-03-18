@@ -704,6 +704,14 @@ jQuery(window).load(function(){
             <label for="tab_external_url"><?php print _("Redirect URL"); ?></label>
             <input type="text" name="tab_external_url" id="tab_external_url" />
         </div>
+               <div class="pure-control-group">
+               <label><?php print _("Visibility"); ?></label>
+               <select name="visibility">
+               <option value="2">Public</option>
+               <option value="1">Private (Login required)</option>
+               <option value="0">Hidden</option>
+               </select>
+               </div>
         </fieldset>
     </form>
 </div>
