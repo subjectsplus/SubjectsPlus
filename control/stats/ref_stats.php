@@ -2,7 +2,7 @@
 
 /**
  *   @file ref_stats.php
- *   @brief Transactions statistics 
+ *   @brief Transactions statistics
  *
  *   @author adarby
  *   @date mar 2014
@@ -27,7 +27,7 @@ try {
 // loop through the modes and find which one was submitted
 
 // only choose those values
-if (isset($_POST["submit_record"])) {
+if (isset($_POST["mode_id"]) && $_POST["mode_id"] != "") {
 
   var_dump($_POST);
 
@@ -41,14 +41,14 @@ if (isset($_POST["submit_record"])) {
   if ($_POST["faq_id"] == "") {
     $record->insertRecord();
     $ok_record_id = $record->getRecordId();
-  } 
+  }
 
   // Show feedback
   $feedback = $record->getMessage();
   // See all the queries?
   //$record->deBug();
 
-echo "<div class=\"feedback\">$feedback</div><br /><br />";  
+echo "<div class=\"feedback\">$feedback</div><br /><br />";
 
 }
 
@@ -61,8 +61,14 @@ include("../includes/footer.php");
 <script>
 jQuery(document).ready(function(){
 
-$( "form#new_transaction" ).submit(function() {
+$('input[type="submit"]').click(function()
+{
+	var lstrName = $(this).attr('name');
+	window.clickedSubmit = lstrName.replace('submit_record-', '');
+});
 
+$( "form#new_transaction" ).submit(function( evt ) {
+	$('input[name="mode_id"]').val(window.clickedSubmit);
 });
 
 });
