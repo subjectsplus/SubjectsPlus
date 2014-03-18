@@ -22,7 +22,11 @@ try {
 } catch (Exception $e) {
   echo $e;
 }
+// look for wildcard or array keys
 
+// loop through the modes and find which one was submitted
+
+// only choose those values
 if (isset($_POST["submit_record"])) {
 
   var_dump($_POST);
@@ -53,3 +57,15 @@ $record->outputForm();
 
 include("../includes/footer.php");
 ?>
+
+<script>
+jQuery(document).ready(function(){
+
+$( "form#new_transaction" ).submit(function() {
+
+});
+
+});
+
+
+</script>
