@@ -61,3 +61,6 @@ ON UPDATE NO ACTION);
 
 ALTER TABLE `subjectsplus`.`subject_subject`
 ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`;
+
+ALTER TABLE `subjectsplus`.`tab`
+ADD COLUMN `visibility` INT(11) NOT NULL DEFAULT 2 AFTER `external_url`;
