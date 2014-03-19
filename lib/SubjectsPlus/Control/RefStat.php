@@ -140,7 +140,7 @@ foreach ($this->_modes as $value) {
 
   $box_content .= "<textarea class=\"form-control\" rows=\"2\" placeholder=\"notes\" name=\"notes-$value[0]\"></textarea>
   <br />
-  <p><input class=\"pure-button pure-button-primary\" type=\"submit\" value=\"Add $value[1]\" name=\"submit_record-$value[1]\">
+  <p><input class=\"pure-button pure-button-primary\" type=\"submit\" value=\"Add $value[1]\" name=\"submit_record-$value[0]\">
   &nbsp; x &nbsp;<input name=\"times-$value[0]\" type=\"text\" value=\"1\" size=\"1\" /></p>
   ";
 
@@ -149,6 +149,7 @@ foreach ($this->_modes as $value) {
 
 }
 
+echo "<input type=\"hidden\" name=\"mode_id\" value=\"\"/>";
 echo "</form>";
 
   }
@@ -164,7 +165,7 @@ echo "</form>";
     $qInsert = "INSERT INTO uml_refstats (type_id, location_id, mode_id, note) VALUES (
 	  '" . mysql_real_escape_string(scrubData($this->_type_id, "integer")) . "',
 	  '" . mysql_real_escape_string(scrubData($this->_location_id, "integer")) . "',
-    '" . mysql_real_escape_string(scrubData($this->_mode_id, "integer")) . "',    
+    '" . mysql_real_escape_string(scrubData($this->_mode_id, "integer")) . "',
     '" . mysql_real_escape_string(scrubData($this->_note, "text")) . "'
     )";
 
@@ -181,7 +182,7 @@ echo "</form>";
     $this->_message = _("Thy Will Be Done.");
   }
 
-  
+
   function getMessage() {
     return $this->_message;
   }
