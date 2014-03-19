@@ -1,20 +1,71 @@
 <?php
-   namespace SubjectsPlus\Control;
+
+namespace SubjectsPlus\Control;
 /**
  *   @file
  *   @brief
  *
- *   @author rgilmour, adarby
+ *   @author rgilmour, adarby, jlittle
  *   @date
  *   @todo fix getQuery()
  */
 
+use PDO;
+    
 class Querier {
-
+    
 	private $_query;
+    private $_connection;
+    
+        function __construct() {
+        // This creates the connection by reading the credentials from a db.ini file
+        $config = parse_ini_file(dirname(dirname(dirname(__DIR__))) . "/control/includes/db.ini", true);
+        
+        $dsn = 'mysql:dbname='. $config['database']['dbname'] . ';host=' . $config['database']['host'] . ';port=' . $config['database']['port'] . ';charset=' .$config['database']['charset'];
+            
+        $username = $config['database']['username'];
+        $password = $config['database']['password'];
+         
+        try {
+        $this->_connection = new PDO($dsn, $username, $password, array(
+                       PDO::ATTR_PERSISTENT => true));
+        } catch (PDOException $e) {
+           
+         
+            echo 'Connection failed: ' . $e->getMessage();
+            
+        }
+        
+    }
     
     
-	public function getResult($query, $boolAssoc = false) {
+    public function query($sql, $fetch_style=NULL) {
+        // Fetch styles: http://www.php.net/manual/en/pdostatement.fetch.php
+        // Example:
+
+        /*
+         $q = new Querier;
+         $rows = $q->query('SELECT * FROM department');
+         print_r($rows);
+         */
+        
+        // Default is numbered array
+        if ($fetch_style === NULL ){
+            $fetch_style = PDO::FETCH_NUM;
+        }
+        
+        $connection = $this->_connection;
+        $result = $connection->query($sql);
+        $rows = $result->fetchAll($fetch_style);
+        
+        return $rows;
+        
+    }
+    
+    // Ye olde Querier
+    ///////////////////////////////////////////////////////
+	
+    public function getResult($query, $boolAssoc = false) {
 		$this->_query = $query;
 		$resultArray = array();
 		$result  = mysql_query($query);
@@ -60,11 +111,5 @@ class Querier {
 	}
 
 }
-
-?>
-
-<?php
-
-    
 
 ?>

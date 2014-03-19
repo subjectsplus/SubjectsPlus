@@ -8,6 +8,8 @@
  */
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\CompleteMe;
+use SubjectsPlus\Control\Querier;
+    
     
 $use_jquery = array("ui");
 
@@ -19,12 +21,17 @@ $page_title = $resource_name;
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
 
+    /*
 try {
     $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
 } catch (Exception $e) {
     echo $e;
 }
 
+     */
+
+$db = new Querier;
+    
 $guide_path = "guide.php?subject=";
 
 if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
@@ -62,13 +69,13 @@ $suggestibles = "";  // init
 
 $q = "select subject, shortform from subject where active = '1' order by subject";
 
-$r = MYSQL_QUERY($q);
+
 
 //initialize $suggestibles
 $suggestibles = '';
 
-while ($myrow = mysql_fetch_array($r)) {
-    $item_title = trim($myrow[0]);
+foreach ($db->query($q) as $myrow) {
+    $item_title = trim($myrow[0][0]);
 
 
 	if(!isset($link))
@@ -76,7 +83,7 @@ while ($myrow = mysql_fetch_array($r)) {
 		$link = '';
 	}
 
-    $suggestibles .= "{text:\"" . htmlspecialchars($item_title) . "\", url:\"$link$myrow[1]\"}, ";
+    $suggestibles .= "{text:\"" . htmlspecialchars($item_title) . "\", url:\"$link$myrow[1][0]\"}, ";
 
 }
 
@@ -87,11 +94,11 @@ $suggestibles = trim($suggestibles, ', ');
 
 $q2 = "select subject, subject_id, shortform from subject where active = '1' order by subject_id DESC limit 0,5";
 
-$r2 = MYSQL_QUERY($q2);
+//$r2 = MYSQL_QUERY($q2);
 
 $newest_guides = "<ul>\n";
 
-while ($myrow2 = mysql_fetch_array($r2)) {
+foreach ($db->query($q2) as $myrow2 ) {
     $guide_location = $guide_path . $myrow2[2];
     $newest_guides .= "<li><a href=\"$guide_location\">" . trim($myrow2[0]) . "</a></li>\n";
 }
@@ -103,10 +110,10 @@ $newest_guides .= "</ul>\n";
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-$rnew = mysql_query($qnew);
+//$rnew = mysql_query($qnew);
 
 $newlist = "<ul>\n";
-while ($myrow = mysql_fetch_array($rnew)) {
+    foreach ($db->query($qnew) as $myrow) {
     $db_url = "";
 
     // add proxy string if necessary
@@ -114,7 +121,7 @@ while ($myrow = mysql_fetch_array($rnew)) {
         $db_url = $proxyURL;
     }
 
-    $newlist .= "<li><a href=\"$db_url$myrow[1]\">$myrow[0]</a></li>\n";
+    $newlist .= "<li><a href=\"$db_url$myrow[1][0]\">$myrow[0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
 
@@ -135,13 +142,14 @@ function listGuides($search = "", $type="all") {
     }
 
     $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
-    $r = MYSQL_QUERY($q);
+   // $r = MYSQL_QUERY($q);
     //print $q;
     $row_count = 0;
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    while ($myrow = mysql_fetch_array($r)) {
+    $db = new Querier;
+    foreach ($db->query($q) as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
