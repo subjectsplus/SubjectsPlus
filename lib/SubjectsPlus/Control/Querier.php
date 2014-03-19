@@ -62,6 +62,30 @@ class Querier {
         
     }
     
+    public function num_rows($sql) {
+        $connection = $this->_connection;
+        $result = $connection->query($sql);
+        return count($result);
+        
+    }
+    
+    
+    public function insert() {
+        
+    }
+    
+    public function update() {
+        
+    }
+    
+    public function delete() {
+        
+    }
+    
+    public function
+    
+    
+    
     // Ye olde Querier
     ///////////////////////////////////////////////////////
 	

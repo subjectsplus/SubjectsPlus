@@ -8,8 +8,8 @@
  */
 
 use SubjectsPlus\Control\DBConnector;
-use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide;
+use SubjectsPlus\Control\Querier;
 
 // Is it a BarfGuide?  Check our whitelist of SP guides first
 // Need to add a param to SP for this
@@ -23,9 +23,9 @@ $use_jquery = array("ui", "ui_styles");
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-
+$db = new Querier;
 // init
-$oksubs = array();
+
 $main_col_pluslets = "";
 $sidebar_pluslets = "";
 
@@ -43,28 +43,21 @@ try {
 //  WHERE active = '1'
 
 $q = "SELECT shortform FROM subject";
-$r = mysql_query($q);
+    
+$oksubs = $db->query($q);
+    
+    
+    foreach ($oksubs as  $subject) {
+   
+        if ($_GET['subject'] === $subject[0]) {
+            $check_this = $_GET['subject'];
 
-while ($oksub = mysql_fetch_array($r)) {
-
-    $oksubs[] .= $oksub[0];
-}
-
-//print_r($oksubs);
-
-// Check if our user-submitted name is okay; else use default
-if (in_array(($_GET['subject']), $oksubs)) {
-    // use the submitted subject
-    $check_this = $_GET['subject'];
-} elseif (in_array(($_POST['subject']), $oksubs)) {
-    // use the submitted subject
-    $check_this = $_POST['subject'];
-} else {
-    // use the first good subject
-    $check_this = FALSE;
-}
-
-
+        } else {
+           
+        }
+        
+    }
+ 
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
 
@@ -74,33 +67,39 @@ if ($check_this) {
     // get name of quide
     $q = "select subject, subject_id, extra, description, keywords, redirect_url, header from subject where shortform = '$check_this'";
     //print $q;
-    $r = mysql_query($q);
+    //$r = $db->query($q);
 
+    $r = $db->query($q, PDO::FETCH_ASSOC);
+  
+    //print_r($r2);
+    
     // If this guide doesn't exist, send them away
-    if (mysql_numrows($r) == 0) {
+    if (count($r) == 0) {
         header("location:index.php");
     }
-	$mysub = mysql_fetch_array($r);
+    
 
-	$redirect_url = $mysub[5];
+
+	$redirect_url = $r[0]["redirect_url"];
+    
 	if( !is_null($redirect_url) && !empty($redirect_url)  )
 	{
 		header("Location:$redirect_url");
 	}
 
-    $subject_name = $mysub["0"];
-    $this_id = $mysub["1"];
-	$header_type = $mysub[6];
+    $subject_name = $r[0]["subject"];
+    $this_id = $r[0]["subject_id"];
+	$header_type = $r[0]["header"];
 
     // check for description and keywords, which may be blank since they were added v2
-    if ($mysub[3] != "") {
-        $page_description = $mysub[3];
+    if ($r[0]["description"] != "") {
+        $page_description = $r[0]["description"];
     }
-    if ($mysub[4] != "") {
-        $page_keywords = $mysub[4];
+    if ($r[0]["keywords"] != "") {
+        $page_keywords = $r[0]["keywords"];
     }
 
-    $jobj = json_decode($mysub["extra"]);
+    $jobj = json_decode($r[0]["extra"]);
 
     // In this section, we get the widths of the three columns, which add up to 12
     // We then do a little bit of math to get them into columns that add up to a bit under 100
