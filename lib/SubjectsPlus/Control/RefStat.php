@@ -12,15 +12,11 @@ class RefStat {
 
   private $_refstat_id;
   private $_location_id;
-  private $_type_id;
-  private $_mode_id;
+  private $_type_id; 
+  private $_mode_id; // this is created by js
   private $_date;
   private $_note;
-
-  private $_locations;  // array of locations
-  private $_types; // array of types
-  private $_modes; // array of modes
-
+  private $_submit_times_x; // how many times this submit should be looped
 
   public function __construct($refstat_id="", $flag="") {
 
@@ -31,14 +27,21 @@ class RefStat {
     switch ($flag) {
 
       case "post":
-        // prepare record for insertion or update
-        // data stored in subject table
-        $this->_refstat_id = $_POST["refstat_id"];
+        // prepare record for insertion 
+        // based on mode id, only select certain values
+        $this->_mode_id = $_POST["mode_id"];
+        $this->_note = $_POST["notes" . "-" . $this->_mode_id];
+        $this->_submit_times_x = $_POST["times" . "-" . $this->_mode_id];
+
         $this->_location_id = $_POST["location_id"];
         $this->_type_id = $_POST["type_id"];
-        $this->_mode_id = $_POST["mode_id"];
-        $this->_date = $_POST["date"];
-        $this->_note = $_POST["note"];
+
+        // example:  March 19, 2014, 1:20 pm
+        $format = 'F d, Y, g:i a';
+        $ourdate =$_POST["datetime"];
+        $date = \DateTime::createFromFormat($format, $ourdate);
+        $this->_date = $date->format('Y-m-d H:i:s');
+
 
         break;
       case "delete":
@@ -133,7 +136,7 @@ foreach ($this->_modes as $value) {
   foreach ($this->_types as $value2) {
     $box_content .= "
         <label for=\"option-$value[1]-$value2[0]\" class=\"pure-radio\">
-        <input id=\"option-$value[1]-$value2[0]\" type=\"radio\" name=\"types-$value[0]\" value=\"$value2[0]\">
+        <input id=\"option-$value[1]-$value2[0]\" type=\"radio\" name=\"type_id\" value=\"$value2[0]\">
         $value2[1]
     </label>";
   }
@@ -159,18 +162,26 @@ echo "</form>";
   public function insertRecord() {
 
     /////////////////////
-    // update tb table
+    // update refstats table
     /////////////////////
 
-    $qInsert = "INSERT INTO uml_refstats (type_id, location_id, mode_id, note) VALUES (
+    $qInsert = "INSERT INTO uml_refstats (type_id, location_id, mode_id, date, note) VALUES (
 	  '" . mysql_real_escape_string(scrubData($this->_type_id, "integer")) . "',
 	  '" . mysql_real_escape_string(scrubData($this->_location_id, "integer")) . "',
     '" . mysql_real_escape_string(scrubData($this->_mode_id, "integer")) . "',
+    '" . mysql_real_escape_string(scrubData($this->_date, "text")) . "',
     '" . mysql_real_escape_string(scrubData($this->_note, "text")) . "'
     )";
 
-    $rInsert = mysql_query($qInsert);
+    //print $qInsert;
 
+    // if we're doing multiple identicals. we loop
+      $x = 0;
+      while ($x < $this->_submit_times_x ) {
+        $rInsert = mysql_query($qInsert);
+        $x++;
+      }
+      
     $this->_refstat_id = mysql_insert_id();
 
     $this->_debug = "<p>1. insert: $qInsert</p>";

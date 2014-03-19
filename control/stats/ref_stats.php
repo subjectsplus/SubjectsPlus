@@ -29,22 +29,20 @@ try {
 // only choose those values
 if (isset($_POST["mode_id"]) && $_POST["mode_id"] != "") {
 
-  var_dump($_POST);
+  //var_dump($_POST);
 
-  exit;
   // Submit form
 
   $record = new RefStat("", "post");
 
   //////////////////////////////////
 
-  if ($_POST["faq_id"] == "") {
     $record->insertRecord();
     $ok_record_id = $record->getRecordId();
-  }
 
   // Show feedback
   $feedback = $record->getMessage();
+  
   // See all the queries?
   //$record->deBug();
 
