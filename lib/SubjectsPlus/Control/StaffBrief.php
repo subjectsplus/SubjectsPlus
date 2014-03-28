@@ -1,5 +1,7 @@
 <?php
-   namespace SubjectsPlus\Control;
+
+namespace SubjectsPlus\Control;
+
 /**
  *   @file Staff
  *   @brief manage staff
@@ -25,7 +27,7 @@ class Staff {
     private $_bio;
     private $_message;
 
-    public function __construct($staff_id="", $flag="") {
+    public function __construct($staff_id = "", $flag = "") {
 
         if ($flag == "" && $staff_id == "") {
             $flag = "empty";
@@ -96,7 +98,7 @@ class Staff {
         }
     }
 
-    public function outputForm($wintype="") {
+    public function outputForm($wintype = "") {
 
         global $wysiwyg_desc;
         global $CKPath;
@@ -258,9 +260,8 @@ $headshot
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
                 <br /><strong>NOFUN</strong> means user can't modify other peoples' guides, or view records</p>
 </div>
-        	<div class=\"box\">"
-	<h2 class=\"bw_head\">" . _("Password") . "</h2>
-;
+        	<div class=\"box\">
+	<h2 class=\"bw_head\">" . _("Password") . "</h2>";
 
         if ($this->_staff_id != "") {
             echo "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
@@ -380,7 +381,7 @@ $headshot
             // And copy over the generic headshot image and headshot_large.jpg
             $nufile = $path . "/headshot.jpg";
             $copier = copy("../../assets/images/headshot.jpg", $nufile);
-        	$copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
+            $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
         }
 
         // /////////////////////
@@ -464,7 +465,7 @@ $headshot
         }
     }
 
-    public function getHeadshot($email, $pic_size="medium") {
+    public function getHeadshot($email, $pic_size = "medium") {
 
         global $AssetPath;
 
@@ -498,17 +499,17 @@ $headshot
         global $CKBasePath;
 
         if ($wysiwyg_desc == 1) {
-			include($CKPath);
-			global $BaseURL;
+            include($CKPath);
+            global $BaseURL;
 
-			$oCKeditor = new CKEditor($CKBasePath);
-			$oCKeditor->timestamp = time();
-			$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-			$config['height'] = '300';
-			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+            $oCKeditor = new CKEditor($CKBasePath);
+            $oCKeditor->timestamp = time();
+            $config['toolbar'] = 'Basic'; // Default shows a much larger set of toolbar options
+            $config['height'] = '300';
+            $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-			echo $oCKeditor->editor('bio', $this->_bio, $config);
-			echo "<br />";
+            echo $oCKeditor->editor('bio', $this->_bio, $config);
+            echo "<br />";
         } else {
             echo "<textarea name=\"answer\" rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
         }
