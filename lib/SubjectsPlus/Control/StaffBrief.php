@@ -71,7 +71,7 @@ class Staff {
                 /////////////
                 $querier = new Querier();
                 $q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio from staff where staff_id = " . $this->_staff_id;
-                $staffArray = $querier->getResult($q1);
+                $staffArray = $querier->query($q1);
 
                 $this->_debug .= "<p class=\"debug\">Staff query: $q1";
                 // Test if these exist, otherwise go to plan B
@@ -113,7 +113,7 @@ class Staff {
 
         $querierDept = new Querier();
         $qDept = "select department_id, name from department order by name";
-        $deptArray = $querierDept->getResult($qDept);
+        $deptArray = $querierDept->query($qDept);
 
         // create department dropdown
         $deptMe = new Dropdown("department_id", $deptArray, $this->_department_id);
@@ -125,7 +125,7 @@ class Staff {
 
         $querierUserType = new Querier();
         $qUserType = "select user_type_id, user_type from user_type order by user_type_id";
-        $userTypeArray = $querierUserType->getResult($qUserType);
+        $userTypeArray = $querierUserType->query($qUserType);
 
         // create type dropdown
         $typeMe = new Dropdown("user_type_id", $userTypeArray, $this->_user_type_id);
@@ -312,7 +312,7 @@ $headshot
         // Delete the records from staff table
         $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
-        $delete_result = mysql_query($q);
+        $delete_result = $db->query($q);
 
         $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
@@ -361,7 +361,7 @@ $headshot
                 '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "'
 		)";
 
-        $rInsertStaff = mysql_query($qInsertStaff);
+        $rInsertStaff = $db->query($qInsertStaff);
 
         $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
 
@@ -416,7 +416,7 @@ $headshot
           bio = '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "'
 	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
 
-        $rUpStaff = mysql_query($qUpStaff);
+        $rUpStaff = $db->query($qUpStaff);
 
         $this->_debug = "<p class=\"debug\">Update query: $qUpStaff</p>";
         if (!$rUpStaff) {
@@ -442,7 +442,7 @@ $headshot
 
         $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         if ($r) {
             $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "password update", $_SESSION['staff_id']);
@@ -457,7 +457,7 @@ $headshot
 
         $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         if ($r) {
             $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "bio update", $_SESSION['staff_id']);

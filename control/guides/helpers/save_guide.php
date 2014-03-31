@@ -10,7 +10,7 @@
  *   @author agdarby, dgonzalez
  *   @date updated jul 2013
  */
-use SubjectsPlus\Control\DBConnector;
+
 
 $subsubcat = "";
 $subcat = "guides";
@@ -31,15 +31,15 @@ $lobjTabs = json_decode($_POST['tabs'], true);
 $subject_id = $_POST["this_subject_id"];
 
 $qs = "SELECT tab_id FROM tab WHERE subject_id = '$subject_id'";
-$drs = mysql_query($qs);
+$drs = $db->query($qs);
 
 while($row = mysql_fetch_array($drs))
 {
 	$qd = "DELETE FROM pluslet_tab WHERE tab_id = '{$row[0]}'";
-	$dr = mysql_query($qd);
+	$dr = $db->query($qd);
 
 	$qd = "DELETE FROM tab WHERE tab_id = '{$row[0]}'";
-	$dr = mysql_query($qd);
+	$dr = $db->query($qd);
 }
 
 $lintTabIndex = 0;
@@ -48,7 +48,7 @@ foreach( $lobjTabs as $lobjTab )
 {
 	$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}')";
 	//print $qi . "<br />";
-	$ir = mysql_query($qi);
+	$ir = $db->query($qi);
 
 	$lintTabId = mysql_insert_id($dbc->getConnection());
 
@@ -79,7 +79,7 @@ foreach( $lobjTabs as $lobjTab )
 		if ($key != 0) {
 			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 0, '$key')";
 			//print $qi . "<br />";
-			$ir = mysql_query($qi);
+			$ir = $db->query($qi);
 		}
 	}
 
@@ -87,7 +87,7 @@ foreach( $lobjTabs as $lobjTab )
 		if ($key != 0) {
 			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 1, '$key')";
 			//print $qi . "<br />";
-			$ir = mysql_query($qi);
+			$ir = $db->query($qi);
 		}
 	}
 
@@ -95,7 +95,7 @@ foreach( $lobjTabs as $lobjTab )
 		if ($key != 0) {
 			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 2, '$key')";
 			//print $qi . "<br />";
-			$ir = mysql_query($qi);
+			$ir = $db->query($qi);
 		}
 	}
 

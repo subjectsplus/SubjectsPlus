@@ -1,5 +1,5 @@
 <?php
-use SubjectsPlus\Control\DBConnector;
+
 
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
@@ -47,8 +47,7 @@ $row_count = 0;
 
 // Connect to database
 try {
-	$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+	} catch (Exception $e) {
 	echo $e;
 }
 
@@ -59,7 +58,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 
 	//sql for all subjects
 	$q = "SELECT * FROM faq f, faq_subject fs, subject s WHERE f.faq_id = fs.faq_id AND s.subject_id = fs.subject_id GROUP BY subject";
-	$r = MYSQL_QUERY($q);
+	$r = $db->query($q);
 
 	//go through all subjects and get the related faqs
 	while($myrow =  mysql_fetch_array($r))
@@ -72,7 +71,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 
 		//sql for faqs
 		$q2 = "SELECT f.faq_id, f.question FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = '$sub_id' ORDER BY f.question";
-		$r2 = MYSQL_QUERY($q2);
+		$r2 = $db->query($q2);
 
 		//go through all results to print out checkboxes
 		$rc = innerLoop($sub_id, $r2, 1);
@@ -90,7 +89,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 	//sql for all collections
 	$q = "SELECT fp.faqpage_id, fp.name FROM faq f, faq_faqpage ff, faqpage fp WHERE f.faq_id = ff.faq_id AND fp.faqpage_id = ff.faqpage_id GROUP BY fp.name";
 
-	$r = MYSQL_QUERY($q);
+	$r = $db->query($q);
 
 	//go through all collections and get the related faqs
 	while($myrow =  mysql_fetch_array($r)) {
@@ -102,7 +101,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 
 		//sql for faqs
 		$q2 = "SELECT f.faq_id, f.question FROM faq_faqpage ff, faq f WHERE  f.faq_id = ff.faq_id AND ff.faqpage_id = '$coll_id' ORDER BY f.question";
-		$r2 = MYSQL_QUERY($q2);
+		$r2 = $db->query($q2);
 
 		//go through all results to print out checkboxes
 		$rc = innerLoop($coll_id, $r2, 1);
@@ -121,7 +120,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 
 	//select faqs for current guide
 	$q = "SELECT f.faq_id, f.question FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = '" . $_COOKIE["our_guide_id"] . "'";
-	$r = MYSQL_QUERY($q);
+	$r = $db->query($q);
 
 	//go thtough all faqs and print out checkboxes
 	$rc = innerLoop($_COOKIE["our_guide_id"], $r, 1);

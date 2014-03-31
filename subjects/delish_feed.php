@@ -9,7 +9,7 @@
  *   @author adarby
  *   @date Sep 22, 2009
  */
-use SubjectsPlus\Control\DBConnector;
+
     
 include("../control/includes/config.php");
 include("../control/includes/functions.php");

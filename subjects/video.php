@@ -6,12 +6,15 @@
  *   @author adarby
  *   @date feb 2012
  */
-use SubjectsPlus\Control\DBConnector;
+
+use SubjectsPlus\Control\Querier;
+
     
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
+    
 $use_jquery = array("colorbox");
 
 $page_title = _("Library Videos");
@@ -24,8 +27,7 @@ $intro = "<p>A collection of videos produced at this library.</p>";
 $display = "<br class=\"clear\" />";
 
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -63,10 +65,11 @@ $q = "select distinct video_id, title, description, source, foreign_id, duration
 // print $q;
 
 // check row count for 0 returns
-$r = MYSQL_QUERY($q);
-$num_rows = mysql_num_rows($r);
-
-
+    
+$db = new Querier;
+    
+$r = $db->query($q);
+$num_rows = count($r);
 
 if ($num_rows != 0) {
 

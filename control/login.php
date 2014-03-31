@@ -1,5 +1,5 @@
 <?php
-use SubjectsPlus\Control\DBConnector;
+
 
 /**
  *   @file login.php
@@ -46,15 +46,13 @@ require_once("includes/config.php");
 //added in order to redirect to proper page if we cannot connect to mySQL database
 if( !isset($tryDB) || $tryDB != 'no')
 {
+    /*
 	global $uname;
 	global $pword;
 	global $dbName_SPlus;
 	global $hname;
 
-	try {
-		@$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-	} catch (Exception $e) {
-		$lstrURL = getControlURL();
+        $lstrURL = getControlURL();
 
 		if ( strstr( $e->getMessage() , 'Could not choose database.' ) )
 		{
@@ -64,8 +62,9 @@ if( !isset($tryDB) || $tryDB != 'no')
 			header("location:{$lstrURL}includes/configErrorPage.php?error=connection");
 		}
 		exit();
-	}
-}
+*/
+ }
+ 
 
 //added in order to redirect to proper page if SubjectsPlus is not installed. Only check if $installCheck variable doesn't exists and says no
 if( !isset( $installCheck ) || $installCheck != 'no' )

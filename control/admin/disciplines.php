@@ -7,6 +7,9 @@
  *   @date Dec 2012
  *   @todo
  */
+use SubjectsPlus\Control\Querier;
+$db = new Querier;
+
 $subsubcat = "";
 $subcat = "admin";
 $page_title = "Admin Discipline Types";
@@ -28,7 +31,7 @@ if (isset($_POST["add_discipline"])) {
     $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
 		'" . mysql_real_escape_string(scrubData($_POST["discipline"])) . "')";
 
-    $rInsertdiscipline = mysql_query($qInsertdiscipline);
+    $rInsertdiscipline = $db->query($qInsertdiscipline);
 
     if ($rInsertdiscipline) {
         $feedback = _("Thy Will Be Done.  Discipline list updated.");
@@ -63,7 +66,7 @@ if (isset($_POST["update_disciplines"])) {
 		WHERE discipline_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
-        $rUpDept = mysql_query($qUpDept);
+        $rUpDept = $db->query($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
@@ -87,7 +90,7 @@ if (isset($_POST["update_disciplines"])) {
 
 $querierDept = new Querier();
 $qdiscipline = "select discipline_id, discipline, sort from discipline order by sort, discipline";
-$disciplineArray = $querierDept->getResult($qdiscipline);
+$disciplineArray = $querierDept->query($qdiscipline);
 
 foreach ($disciplineArray as $value) {
 

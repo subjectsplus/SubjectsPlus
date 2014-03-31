@@ -7,8 +7,9 @@
  *   @date feb 2011
  *   @todo
  */
-use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Staff;
+use SubjectsPlus\Control\Querier;
+$db = new Querier;
     
 $subsubcat = "";
 $subcat = "admin";
@@ -32,7 +33,7 @@ if (isset($_POST["add_source"])) {
 		'0'
 		)";
 
-    $rInsertSource = mysql_query($qInsertSource);
+    $rInsertSource = $db->query($qInsertSource);
 
     if ($rInsertSource) {
         $feedback = _("Thy Will Be Done.  Source list updated.");
@@ -67,7 +68,7 @@ if (isset($_POST["update_sources"])) {
 		WHERE source_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
-        $rUpDept = mysql_query($qUpDept);
+        $rUpDept = $db->query($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
@@ -91,7 +92,7 @@ if (isset($_POST["update_sources"])) {
 
 $querierDept = new Querier();
 $qSource = "select source_id, source, rs from source order by rs, source";
-$sourceArray = $querierDept->getResult($qSource);
+$sourceArray = $querierDept->query($qSource);
 
 foreach ($sourceArray as $value) {
 

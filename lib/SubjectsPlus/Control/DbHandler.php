@@ -75,7 +75,8 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 		ORDER BY newtitle";
 
       //print $q1 . ";";
-     $r1 = MYSQL_QUERY($q1); 
+     $db = new Querier;
+     $r1 = $db->query($q1); 
      
      
       $q2 = "INSERT INTO merge 
@@ -92,7 +93,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 		ORDER BY newtitle";
       
       //print $q2 . ";";
-      $r2 = MYSQL_QUERY($q2);
+      $r2 = $db->query($q2);
       
       $q = "SELECT * FROM merge WHERE newtitle != '' ORDER BY newtitle";
       
@@ -100,8 +101,8 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 
       
     // check row count for 0 returns
-    $r = MYSQL_QUERY($q);
-    $num_rows = mysql_num_rows($r);
+    $r = $db->query($q);
+    $num_rows = count($r);
 
     if ($num_rows == 0) {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";
@@ -191,11 +192,11 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
   function displaySubjects() {
 
     $q = "SELECT subject, subject_id FROM subject WHERE active = '1' ORDER BY subject";
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     // check row count for 0 returns
 
-    $num_rows = mysql_num_rows($r);
+    $num_rows = count($r);
 
     if ($num_rows == 0) {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";

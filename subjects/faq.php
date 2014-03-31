@@ -7,11 +7,11 @@
  *   @date Sep 28, 2009
  *   @todo The interface for this is pretty lacklustre.  Make it better!
  */
-use SubjectsPlus\Control\DBConnector;
-use SubjectsPlus\Control\Querier;
+
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\CompleteMe;
-    
+use SubjectsPlus\Control\Querier;
+
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
 
@@ -50,12 +50,7 @@ $default_faqpage_id = "1";
 
 $intro = _("<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them <strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., different groupings of FAQs for different purposes/audiences), or browse the Basic FAQs, below.</p>");
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}  
-
+ 
 // init our faq result.  
 $faq_result = "";
 
@@ -92,7 +87,7 @@ if(isset($_POST['searchterm']))
 // Get list of subjects for sidebar
 ///////////////
 
-$querier2 = new Querier();
+$db= new Querier();
 $q2 = "select distinct s.subject_id, s.subject
     from faq f, faq_subject fs, subject s 
     WHERE f.faq_id = fs.faq_id 
@@ -100,7 +95,7 @@ $q2 = "select distinct s.subject_id, s.subject
     AND active = '1'
     ORDER BY subject";
 
-$oursubs = $querier2->getResult($q2);
+$oursubs = $db->query($q2);
 
 $guideMe = new Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
 $guide_string = $guideMe->display();
@@ -124,10 +119,12 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
 
     // Get the name of the collection
     $query = "SELECT name, description FROM faqpage WHERE faqpage_id = '$postvar_coll_id'";
-    $result = MYSQL_QUERY($query);
-    $name = mysql_fetch_row($result);
+   
+    $db = new Querier;
+    $name = $db->query($query);
+    
 
-    $page_title = "FAQS: $name[0]";
+    $page_title = "FAQS: $name[0][0]";
     $intro = stripslashes(htmlspecialchars_decode($name[1]));
 } elseif ($postvar_faq_id != "") {
     $displaytype = "single";
@@ -197,9 +194,9 @@ if (isset($debugger) && $debugger == "yes") {
     print "<p class=\"debugger\">$full_query<br /><strong>from</strong> this file</p>";
 }
 
-$full_result = MYSQL_QUERY($full_query);
+$full_result = $db->query($full_query);
 
-$result_count = mysql_num_rows($full_result);
+$result_count = count($full_result);
 
 if ($result_count != 0) {
 
@@ -254,14 +251,14 @@ GROUP BY name";
 
 // print $collections_query;
 
-$collections_result = MYSQL_QUERY($collections_query);
+$collections_result = $db->query($collections_query);
 
 // create the option
 $coll_items = "<li><a href=\"faq.php?page=all\">All</a></li>";
 
-while ($myrow1 = mysql_fetch_array($collections_result)) {
-    $coll_id = $myrow1["0"];
-    $coll_name = $myrow1["1"];
+foreach ($collections_result as $myrow1) {
+    $coll_id = $myrow1[0][0];
+    $coll_name = $myrow1[1][0];
 
     $coll_items .= "<li><a href=\"faq.php?coll_id=$coll_id\">$coll_name</a></li>";
 }

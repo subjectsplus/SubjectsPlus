@@ -62,7 +62,7 @@ class Talkback {
         $querier = new Querier();
         $q1 = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_entered, answer, a_from, display, tbtags, cattags
                     FROM talkback WHERE talkback_id = " . $this->_talkback_id;
-        $guideArray = $querier->getResult($q1);
+        $guideArray = $querier->query($q1);
 
         $this->_debug .= "<p>TB query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -88,7 +88,7 @@ class Talkback {
         $querier2 = new Querier();
         $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, talkback tb WHERE s.staff_id = tb.a_from AND tb.talkback_id = " . $this->_talkback_id;
 
-        $this->_staffers = $querier2->getResult($q2);
+        $this->_staffers = $querier2->query($q2);
 
         $this->_debug .= "<p>Staff query: $q2";
 
@@ -155,7 +155,7 @@ class Talkback {
     $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%talkback%' ORDER BY lname, fname";
 
     $querierStaff = new Querier();
-    $staffArray = $querierStaff->getResult($qStaff);
+    $staffArray = $querierStaff->query($qStaff);
 
     // put in a default user
     if ($this->_a_from == "") {
@@ -282,7 +282,7 @@ class Talkback {
     // Delete the records from talkback table
     $q = "DELETE FROM talkback WHERE talkback_id = '" . $this->_talkback_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->query($q);
 
     $this->_debug = "<p>Del query: $q";
 
@@ -326,7 +326,7 @@ class Talkback {
       '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
           )";
 
-    $rInsertTB = mysql_query($qInsertTB);
+    $rInsertTB = $db->query($qInsertTB);
 
     $this->_talkback_id = mysql_insert_id();
 
@@ -364,7 +364,7 @@ class Talkback {
       cattags = '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
       WHERE talkback_id = " . scrubData($this->_talkback_id, "integer");
 
-    $rUpTB = mysql_query($qUpTB);
+    $rUpTB = $db->query($qUpTB);
 
     $this->_debug = "<p>1. update title: $qUpTB</p>";
     if (!$rUpTB) {

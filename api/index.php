@@ -7,7 +7,10 @@
  *   @author dgonzalez
  *   @date November 2012
  */
-
+    
+use SubjectsPlus\Control\sp_WebServiceHandler;
+    
+include_once("../control/includes/autoloader.php");
 include_once("../control/includes/config.php");
 include_once("../control/includes/functions.php");
 

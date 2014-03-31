@@ -110,7 +110,7 @@ class Staff {
       	/////////////
       	$querier = new  Querier();
       	$q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio from staff where email = '" . $this->_email . "'";
-      	$staffArray = $querier->getResult($q1);
+      	$staffArray = $querier->query($q1);
 
       	$this->_debug .= "<p class=\"debug\">Staff query: $q1";
       	// Test if these exist, otherwise go to plan B
@@ -140,7 +140,7 @@ class Staff {
         // Get staff table info
         // Don't call full record for regular log in
         /////////////
-        $querier = new  Querier();
+        $db = new Querier;
         if ($full_record == TRUE) {
         $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio
             , position_number, job_classification, room_number, supervisor_id, emergency_contact_name, emergency_contact_relation, emergency_contact_phone,
@@ -151,7 +151,7 @@ class Staff {
             FROM staff WHERE staff_id = " . $this->_staff_id;
         }
 
-        $staffArray = $querier->getResult($q1);
+        $staffArray = $db->query($q1);
 
         $this->_debug .= "<p class=\"debug\">Staff query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -216,7 +216,7 @@ class Staff {
 
     $querierDept = new  Querier();
     $qDept = "select department_id, name from department order by name";
-    $deptArray = $querierDept->getResult($qDept);
+    $deptArray = $querierDept->query($qDept);
 
     // create department dropdown
     $deptMe = new  Dropdown("department_id", $deptArray, $this->_department_id);
@@ -228,7 +228,7 @@ class Staff {
 
     $querierUserType = new  Querier();
     $qUserType = "select user_type_id, user_type from user_type order by user_type_id";
-    $userTypeArray = $querierUserType->getResult($qUserType);
+    $userTypeArray = $querierUserType->query($qUserType);
 
     // create type dropdown
     $typeMe = new  Dropdown("user_type_id", $userTypeArray, $this->_user_type_id);
@@ -240,7 +240,7 @@ class Staff {
 
     $querierSupervisor = new  Querier();
     $qSupervisor = "select staff_id, CONCAT( fname, ' ', lname ) AS fullname FROM staff WHERE ptags LIKE '%supervisor%' AND active = '1' ORDER BY lname";
-    $supervisorArray = $querierSupervisor->getResult($qSupervisor);
+    $supervisorArray = $querierSupervisor->query($qSupervisor);
 
     // create type dropdown
     $superviseMe = new  Dropdown("supervisor_id", $supervisorArray, $this->_supervisor_id, '', '* External Supervisor');
@@ -752,7 +752,7 @@ echo "</div>
     // Delete the records from staff table
     $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->query($q);
 
     $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
@@ -864,7 +864,7 @@ echo "</div>
         '" . mysql_real_escape_string(scrubData($this->_lat_long)) . "'
 		)";
     //print $qInsertStaff;
-    $rInsertStaff = mysql_query($qInsertStaff);
+    $rInsertStaff = $db->query($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
 
@@ -973,7 +973,7 @@ echo "</div>
       lat_long = '" . mysql_real_escape_string(scrubData($this->_lat_long)) . "'
 	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
 
-    $rUpStaff = mysql_query($qUpStaff);
+    $rUpStaff = $db->query($qUpStaff);
 
     $this->_debug = "<p class=\"debug\">Update query: $qUpStaff</p>";
 
@@ -999,7 +999,7 @@ echo "</div>
 
     $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     if ($r) {
       $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "password update", $_SESSION['staff_id']);
@@ -1014,13 +1014,13 @@ echo "</div>
 
     $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
     // now our detailed version
     $q2 = "UPDATE staff SET bio = '" . mysql_real_escape_string(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug .= "<p class=\"debug\">Bio Update query: $q2</p>";
 
-    $r2 = MYSQL_QUERY($q2);
+    $r2 = $db->query($q2);
 
     if ($r) {
       $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "bio update", $_SESSION['staff_id']);
@@ -1137,8 +1137,8 @@ echo "</div>
   		default:
   			return false;
   	}
-  	$lrscSQL = mysql_query($lstrQuery);
-  	$lintNumberOfRows = mysql_num_rows($lrscSQL);
+  	$lrscSQL = $db->query($lstrQuery);
+  	$lintNumberOfRows = count($lrscSQL);
   	if( $lintNumberOfRows > 0 ) return false;
   	return true;
   }

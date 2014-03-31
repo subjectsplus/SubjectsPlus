@@ -10,7 +10,7 @@
   have an update button next to default_source type, to change all ?
  */
 
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
@@ -33,11 +33,7 @@ include("../includes/header.php");
 //$_SESSION["eresource_mgr"] = 0;
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 
 // Test our record_id, if it exists; must be integer
@@ -84,7 +80,7 @@ if (isset($_POST["submit_record"])) {
 
         $querierDupe = new Querier();
         $qDupe = "SELECT title_id, title FROM title WHERE title LIKE '" . mysql_real_escape_string($_POST["title"]) . "'";
-        $dupetitleArray = $querierDupe->getResult($qDupe);
+        $dupetitleArray = $querierDupe->query($qDupe);
 
         if ($dupetitleArray != "") {
             echo _("There is already a record with this title: ") . "<a href=\"record.php?record_id=" . $dupetitleArray[0][0] . "\">" . $dupetitleArray[0][1] . "</a>.  " . _("Maybe do a search and make sure it doesn't already exist?");

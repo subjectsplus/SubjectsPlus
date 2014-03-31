@@ -42,9 +42,9 @@ return;
 
 //print $q;
 
-$r = mysql_query($q);
+$r = $db->query($q);
 
-$total_items = mysql_num_rows($r);
+$total_items = count($r);
 
 if ($total_items == 0 && (!isset($_POST["base"])) ) {
 $content = "<div valign=\"top\" style=\"float: left; min-width: 230px;\">" . _("There were no results matching your query.") . "</div>";

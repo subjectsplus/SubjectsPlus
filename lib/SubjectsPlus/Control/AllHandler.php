@@ -50,11 +50,11 @@ eres_display, display_note, pre, citation_guide, ctags
 
     //print $q;
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     // check row count for 0 returns
 
-    $num_rows = mysql_num_rows($r);
+    $num_rows = count($r);
 
     if ($num_rows == 0) {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";

@@ -42,7 +42,7 @@ if (isset($_GET["tbtag"])) {
     WHERE tbtags like '%" . $_GET["tbtag"] . "%'
     ORDER BY date_submitted DESC";
 
-  $tbArrayTag = $querierTbtag->getResult($qTbtag);
+  $tbArrayTag = $querierTbtag->query($qTbtag);
 
   if ($tbArrayTag) {
     $tag_block = genTalkBacks($tbArrayTag, 0);
@@ -64,7 +64,7 @@ $qTBNO = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date
     WHERE answer = ''
     ORDER BY date_submitted DESC";
 
-$tbArrayNo = $querierTBNO->getResult($qTBNO);
+$tbArrayNo = $querierTBNO->query($qTBNO);
 
 if ($tbArrayNo) {
 
@@ -111,7 +111,7 @@ $qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(dat
     ORDER BY date_submitted DESC
     $limit";
 
-$tbArrayYes = $querierTBYES->getResult($qTBYES);
+$tbArrayYes = $querierTBYES->query($qTBYES);
 
 if ($tbArrayYes) {
 

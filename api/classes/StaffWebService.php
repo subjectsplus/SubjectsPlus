@@ -37,7 +37,7 @@ class StaffWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 		if(!$lobjResults) $lobjResults = array();
 

@@ -8,8 +8,8 @@
  *   
  */
 
-use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Querier;
+$db = new Querier;
     
 $subsubcat = "";
 $subcat = "admin";
@@ -21,11 +21,7 @@ $feedback = "";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 if (isset($_POST["add_department"])) {
 
@@ -41,7 +37,7 @@ if (isset($_POST["add_department"])) {
         '" . mysql_real_escape_string(scrubData($_POST["url"])) . "'
 		)";
 
-    $rInsertDept = mysql_query($qInsertDept);
+    $rInsertDept = $db->query($qInsertDept);
 
     if ($rInsertDept) {
         $feedback = _("Thy Will Be Done.  Department list updated.");
@@ -98,7 +94,7 @@ if (isset($_POST["update_departments"])) {
         WHERE department_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
-        $rUpDept = mysql_query($qUpDept);
+        $rUpDept = $db->query($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
@@ -127,7 +123,7 @@ if (isset($_POST["update_departments"])) {
 
 $querierDept = new Querier();
 $qDept = "select department_id, name, telephone, department_sort, email, url from department order by department_sort";
-$deptArray = $querierDept->getResult($qDept);
+$deptArray = $querierDept->query($qDept);
 $ourlist = "";
 
 foreach ($deptArray as $value) {

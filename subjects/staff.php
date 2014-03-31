@@ -10,7 +10,8 @@
  */
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\StaffDisplay;
-use SubjectsPlus\Control\DBConnector;
+
+use SubjectsPlus\Control\Querier;
     
 $page_title = "Library Staff";
 $description = "Library contact list.";
@@ -21,11 +22,7 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 
 //////////

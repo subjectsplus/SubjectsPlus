@@ -8,7 +8,7 @@
  *   @date Dec 2012
  */
 
-use SubjectsPlus\Control\DBConnector;
+
 
 
 $subcat = "guides";
@@ -129,7 +129,7 @@ switch ($_POST["flag"]) {
         $subject_id = scrubData($_POST["subject_id"], "int");
 
         $q = "DELETE FROM `pluslet` where pluslet_id = '$delete_id' AND type != 'Special'";
-        $r = mysql_query($q);
+        $r = $db->query($q);
 
     	//added by dgonzalez because if pluslet is special, no deletetion so need to manually delete relationship
     	if( mysql_affected_rows() == 0 )
@@ -140,12 +140,12 @@ switch ($_POST["flag"]) {
     				ON t.subject_id = s.subject_id
     				WHERE pt.pluslet_id = '$delete_id' AND s.subject_id = '$subject_id'";
 
-    		$r2 = mysql_query($q2);
+    		$r2 = $db->query($q2);
     	}
 
     	//removed by david because new db referential integrity does this automatically
         //$q2 = "DELETE FROM `pluslet_subject` where pluslet_id = '$delete_id' AND subject_id = '$subject_id'";
-        //$r2 = mysql_query($q2);
+        //$r2 = $db->query($q2);
         //print $q2;
 
         print _("<script type='text/javascript'>$.growl({message: 'The box was removed.', title:'" . _("Box Removed") . "'})</script>");
@@ -189,7 +189,7 @@ function modifyDB($id, $type) {
     switch ($type) {
         case "insert":
             $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), mysql_real_escape_string($pluslet_extra), mysql_real_escape_string($pluslet_hide_titlebar), mysql_real_escape_string($pluslet_collapse_body),  mysql_real_escape_string($pluslet_supress_body), mysql_real_escape_string($pluslet_titlebar_styling));
-            $r = mysql_query($q);
+            $r = $db->query($q);
             if ($r) {
                 $id = mysql_insert_id();
             	// If successful inserted, add link to plulset_staff table
@@ -199,7 +199,7 @@ function modifyDB($id, $type) {
                 $staff_id = $_POST["staff_id"];
                 $q2 = "INSERT INTO pluslet_staff (pluslet_id, staff_id) VALUES ('$id', '$staff_id')";
                 //print $q2;
-                $r2 = mysql_query($q2);
+                $r2 = $db->query($q2);
                 */
             } else {
                 print "<p>There was a problem with your insert:</p>";
@@ -221,7 +221,7 @@ function modifyDB($id, $type) {
                 suppress_body = '$pluslet_supress_body',
                 titlebar_styling = '$pluslet_titlebar_styling'
                 WHERE pluslet_id ='$id'";
-            $r = mysql_query($q);
+            $r = $db->query($q);
             //print $q;
             if (!$r) {
                 print "<p>There was a problem with your insert:</p>";
@@ -231,7 +231,7 @@ function modifyDB($id, $type) {
             break;
         case "delete":
             $q = "DELETE FROM pluslets WHERE pluslet_id = '$id'";
-            $r = mysql_query($q);
+            $r = $db->query($q);
             break;
     }
     return $id;

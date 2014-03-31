@@ -43,7 +43,7 @@ switch ($_GET["collection"]) {
 
 
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
 $arr = array();
 

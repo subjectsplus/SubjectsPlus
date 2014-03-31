@@ -97,9 +97,9 @@
                     // Get subject table info
                     /////////////
                     
-                    $querier = new Querier();
+                    $db = new Querier();
                     $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra from subject where subject_id = " . $this->_subject_id;
-                    $guideArray = $querier->getResult($q1);
+                    $guideArray = $db->query($q1);
                     
                     $this->_debug .= "<p>Subject query: $q1";
                     // Test if these exist, otherwise go to plan B
@@ -137,10 +137,10 @@
         
         public function getAssociatedStaff() {
             
-            $querier2 = new Querier();
+            $db = new Querier();
             $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id;
             
-            $this->_staffers = $querier2->getResult($q2);
+            $this->_staffers = $db->query($q2);
             
             foreach ($this->_staffers as $value) {
                 $this->_ok_staff[] = $value[0];
@@ -155,7 +155,7 @@
             $q3 = "SELECT d.discipline_id, d.discipline FROM discipline d, subject_discipline sd WHERE d.discipline_id = sd.discipline_id
             AND sd.subject_id = " . $this->_subject_id;
             
-            $this->_discipliners = $querier3->getResult($q3);
+            $this->_discipliners = $querier3->query($q3);
             
             if ($this->_discipliners) {
                 foreach ($this->_discipliners as $value) {
@@ -235,7 +235,7 @@
     
     $querier = new Querier();
     $dept_query = "SELECT department_id, name FROM department;";
-    $deptArray = $querier->getResult($dept_query);
+    $deptArray = $querier->query($dept_query);
     
     
     $current_dept = new Querier();
@@ -248,7 +248,7 @@
     ORDER BY date DESC
     LIMIT 1";
     
-    $current_dept_array = $current_dept->getResult($current_dept_query);
+    $current_dept_array = $current_dept->query($current_dept_query);
     
     ?>
 <p>
@@ -275,7 +275,7 @@
     
     $querier = new Querier();
     $subject_query = "SELECT subject_id, subject FROM subject;";
-    $subject_array = $querier->getResult($subject_query);
+    $subject_array = $querier->query($subject_query);
     
     $current_parent_querier = new Querier();
     $current_parent_query =
@@ -287,14 +287,18 @@
     ORDER BY has.date DESC
     LIMIT 1";
     
-    $current_parent_array = $current_parent_querier->getResult($current_parent_query);
+    $current_parent_array = $current_parent_querier->query($current_parent_query);
     
     
     
     ?>
 <span class="record_label"> Parent Guide </span>
 <select name="parent">
-<option value="<?php echo $current_parent_array[0]['parent_id']; ?>"> <?php echo $current_parent_array[0][2]; ?> </option>
+
+<option value="<?php if ($current_parent_array) { echo $current_parent_array[0]['parent_id']; } ?>">
+
+    <?php if ($current_parent_array) { echo $current_parent_array[0]['parent_id']; }  ?> </option>
+
 <?php
     foreach ($subject_array as $subject) {
         echo "<option value='" . $subject["subject_id"] . "'>" . $subject["subject"] . "</option>";
@@ -397,7 +401,7 @@
     $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' ORDER BY lname, fname";
     
     $querierStaff = new Querier();
-    $staffArray = $querierStaff->getResult($qStaff);
+    $staffArray = $querierStaff->query($qStaff);
     
     $staffMe = new Dropdown("staff_id[]", $staffArray, "", "50", "--Select--");
     $staff_string = $staffMe->display();
@@ -424,7 +428,7 @@
         $qDiscipline = "select discipline_id, discipline FROM discipline ORDER BY discipline";
         
         $querierDiscipline = new Querier();
-        $disciplineArray = $querierStaff->getResult($qDiscipline);
+        $disciplineArray = $querierStaff->query($qDiscipline);
         
         $disciplineMe = new Dropdown("discipline_id[]", $disciplineArray, "", "50", "--Select--");
         $discipline_string = $disciplineMe->display();
@@ -523,14 +527,14 @@
         ON t.subject_id = s.subject_id
         WHERE p.type != 'Special' AND s.subject_id = '" . $this->_subject_id . "'";
         
-        $delete_result = mysql_query($q);
+        $delete_result = $db->query($q);
         
         $this->_debug = "<p>Del query: $q";
         
         if (mysql_affected_rows() != 0) {
         	//delete subject
             $q2 = "DELETE subject,staff_subject FROM subject LEFT JOIN staff_subject ON subject.subject_id = staff_subject.subject_id WHERE subject.subject_id = '" . $this->_subject_id . "'";
-            $delete_result2 = mysql_query($q2);
+            $delete_result2 = $db->query($q2);
             $this->_debug .= "<p>Del query 2: $q2";
         } else {
             // message
@@ -592,7 +596,7 @@
         '" . mysql_real_escape_string($json_extra) . "'
         )";
         
-        $rInsertSubject = mysql_query($qInsertSubject);
+        $rInsertSubject = $db->query($qInsertSubject);
         
         $this->_subject_id = mysql_insert_id();
         
@@ -687,7 +691,7 @@
         extra = '" . mysql_real_escape_string($json_extra) . "'
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
         
-        $rUpSubject = mysql_query($qUpSubject);
+        $rUpSubject = $db->query($qUpSubject);
         
         
         // Insert subject_department relationship
@@ -718,7 +722,7 @@
         
         $qClearSS = "DELETE FROM staff_subject WHERE subject_id = " . $this->_subject_id;
         
-        $rClearSS = mysql_query($qClearSS);
+        $rClearSS = $db->query($qClearSS);
         
         $this->_debug .= "<p>2. clear staff_subject: $qClearSS</p>";
         
@@ -740,7 +744,7 @@
         /*
         $qClearSD = "DELETE FROM subject_discipline WHERE subject_id = " . $this->_subject_id;
         
-        $rClearSD = mysql_query($qClearSD);
+        $rClearSD = $db->query($qClearSD);
         
         $this->_debug .= "<p>2. clear subject_discipline: $qClearSD</p>";
         
@@ -773,13 +777,15 @@
 			return $this->_all_tabs;
 		}
         
+        $db = new Querier;
+        
 		// Find our existing tabs for this guide
 		$qtab = "SELECT DISTINCT tab_id, label, tab_index, external_url FROM tab WHERE subject_id = '{$this->_subject_id}' ORDER BY tab_index";
-		$rtab = mysql_query($qtab);
+		$rtab = $db->query($qtab);
         
 		$all_tabs = array();
         
-		while ($myrow = mysql_fetch_array($rtab))
+		foreach ($rtab as $myrow)
 		{
 			$tab['label'] = $myrow[1];
 			$tab['external_url'] = $myrow[3];
@@ -835,7 +841,7 @@
         ORDER BY prow ASC";
         
         
-		$rc = mysql_query($qc);
+		$rc = $db->query($qc);
         
 		//init
 		$left_col_pluslets = "";
@@ -889,7 +895,7 @@
 			global $is_responsive;
             
 			$query = "select extra from subject where subject_id = '{$this->_subject_id}'";
-			$result = mysql_query($query);
+			$result = $db->query($query);
 			$sub = mysql_fetch_row($result);
             
 			$jobj = json_decode($sub[0]);
@@ -995,7 +1001,7 @@
         SET extra = '" . mysql_real_escape_string($json_extra) . "'
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
         
-        $rUpExtra = mysql_query($qUpExtra);
+        $rUpExtra = $db->query($qUpExtra);
         
         $this->_debug = "<p>1. update title: $qUpExtra</p>";
         if (!$rUpExtra) {
@@ -1014,7 +1020,7 @@
 				'" . scrubData($value, "integer") . "',
 				'" . scrubData($this->_subject_id, "integer") . "')";
                 
-                $rUpSS = mysql_query($qUpSS);
+                $rUpSS = $db->query($qUpSS);
                 
                 $this->_debug .= "<p>3. (insert staff_subject loop) : $qUpSS</p>";
                 if (!$rUpSS) {
@@ -1036,7 +1042,7 @@
                 '" . scrubData($this->_subject_id, "integer") . "',
                 '" . scrubData($value, "integer") . "')";
                 
-                $rUpSD = mysql_query($qUpSD);
+                $rUpSD = $db->query($qUpSD);
                 
                 $this->_debug .= "<p>3. (insert subject_discipline loop) : $qUpSD</p>";
                 if (!$rUpSD) {
@@ -1051,7 +1057,7 @@
         $lstrQuery = "INSERT INTO tab (subject_id, tab_index) VALUES ('"
         . scrubData($this->_subject_id, "integer") . "', '0')";
         
-        $rscResponse = mysql_query($lstrQuery);
+        $rscResponse = $db->query($lstrQuery);
         
         $this->_debug .= "<p>4. (insert new tab) : $lstrQuery</p>";
         if (!$rscResponse) {
@@ -1076,11 +1082,11 @@
         }
         //print $qcheck;
         
-        $rcheck = MYSQL_QUERY($qcheck);
+        $rcheck = $db->query($qcheck);
         
         $this->_debug .= "<p>Dupe check: $qcheck</p>";
         
-        if (mysql_num_rows($rcheck) == 0) {
+        if (count($rcheck) == 0) {
             return FALSE;
         } else {
             return TRUE;

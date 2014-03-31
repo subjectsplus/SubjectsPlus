@@ -361,7 +361,7 @@ class Installer
 	{
 		foreach($this->lobjCreateQueries as $lstrCQuery)
 		{
-			if( !mysql_query( $lstrCQuery ) )
+			if( !$db->query( $lstrCQuery ) )
 			{
 				$this->displayInstallationErrorPage( _( "Problem creating new table." ) );
 				return FALSE;
@@ -370,7 +370,7 @@ class Installer
 
 		foreach($this->lobjInsertQueries as $lstrIQuery)
 		{
-			if( !mysql_query( $lstrIQuery ) )
+			if( !$db->query( $lstrIQuery ) )
 			{
 				$this->displayInstallationErrorPage( _( "Problem inserting new data into table." ) );
 				return FALSE;

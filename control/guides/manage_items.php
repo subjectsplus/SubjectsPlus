@@ -32,7 +32,7 @@ if (isset($_REQUEST["subject_id"])) {
 
     $q = "SELECT subject, shortform FROM subject WHERE subject_id = '$subject_id'";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     $mysub = mysql_fetch_row($r);
 
@@ -66,7 +66,7 @@ ORDER BY s.subject, s.type";
 
 
 /* Select all active records (this is based on a db connection made above) */
-$subs_result = MYSQL_QUERY($subs_query);
+$subs_result = $db->query($subs_query);
 
 // create the option
 $subs_option_boxes = "";
@@ -93,9 +93,9 @@ AND restrictions_id = access_restrictions and rank.subject_id = '$subject_id' an
 AND source.source_id = rank.source_id order by source.rs asc, source.source,
 rank.rank asc, title.title";
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
-$num_rows = mysql_num_rows($r);
+$num_rows = count($r);
 $last_source_id = ""; // init
 $ourlist = ""; // init
 

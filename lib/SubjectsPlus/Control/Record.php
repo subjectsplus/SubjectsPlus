@@ -89,7 +89,7 @@ class Record {
         /////////////
         $querier = new Querier();
         $q1 = "select title_id, pre, title, alternate_title, description from title where title_id = " . $this->_record_id;
-        $titleArray = $querier->getResult($q1);
+        $titleArray = $querier->query($q1);
 
         $this->_debug .= "<p>Title query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -115,7 +115,7 @@ class Record {
         AND title_id = " . $this->_record_id . "
         ORDER BY subject";
 
-        $this->_subjects = $querier2->getResult($q2);
+        $this->_subjects = $querier2->query($q2);
 
         $this->_debug .= "<p>Rank query: $q2";
 
@@ -126,7 +126,7 @@ class Record {
         $querier3 = new Querier();
         $q3 = "SELECT l.location_id, format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide FROM location_title lt, location l WHERE lt.location_id = l.location_id AND lt.title_id = " . $this->_record_id;
         //print $q3;
-        $this->_locations = $querier3->getResult($q3);
+        $this->_locations = $querier3->query($q3);
 
         $this->_debug .= "<p>Location query: $q3";
 
@@ -142,7 +142,7 @@ class Record {
         GROUP BY rank.source_id
         ORDER BY counter DESC, source ASC
         LIMIT 0, 1";
-        $this->_def_source = $querier4->getResult($q4);
+        $this->_def_source = $querier4->query($q4);
 
         $this->_debug .= "<p>Source query: $q4";
 
@@ -228,7 +228,7 @@ class Record {
 
 	$querierSource = new Querier();
 	$qSource = "select source_id, source from source order by source";
-	$defsourceArray = $querierSource->getResult($qSource);
+	$defsourceArray = $querierSource->query($qSource);
 
 	$sourceMe = new Dropdown("default_source_id", $defsourceArray, $this->_def_source[0][0]);
 	$source_string = $sourceMe->display();
@@ -287,7 +287,7 @@ public function buildLocation() {
 
 	$querierLoc = new Querier();
 	$qLoc = "select format_id, format from format order by format_id";
-	$formatArray = $querierLoc->getResult($qLoc);
+	$formatArray = $querierLoc->query($qLoc);
 
     ////////////////
     // Location Restrictions
@@ -295,7 +295,7 @@ public function buildLocation() {
 
 	$querierRes = new Querier();
 	$qRes = "select restrictions_id, restrictions from restrictions order by restrictions_id";
-	$restrictionsArray = $querierRes->getResult($qRes);
+	$restrictionsArray = $querierRes->query($qRes);
 
     // Test if these exist, otherwise go to plan B
 	if ($this->_locations == FALSE) {
@@ -541,13 +541,13 @@ public function buildLocation() {
  	AND title.title_id = location_title.title_id
  	AND title.title_id = '" . $this->_record_id . "'";
 
- 	$delete_result = mysql_query($q);
+ 	$delete_result = $db->query($q);
 
  	$this->_debug = "<p>Del query: $q";
 
  	if (mysql_affected_rows() != 0) {
  		$q2 = "DELETE FROM rank WHERE title_id = '" . $this->_record_id . "'";
- 		$delete_result2 = mysql_query($q2);
+ 		$delete_result2 = $db->query($q2);
  		$this->_debug .= "<p>Del query 2: $q2";
  	} else {
       // message
@@ -591,7 +591,7 @@ public function buildLocation() {
  		'" . $our_prefix . "'
  		)";
 
-$rInsertTitle = mysql_query($qInsertTitle);
+$rInsertTitle = $db->query($qInsertTitle);
 
 $this->_debug .= "<p>1. insert title: $qInsertTitle</p>";
 if (!$rInsertTitle) {
@@ -639,7 +639,7 @@ public function updateRecord($notrack = 0) {
 
 	$qUpTitle = "UPDATE title SET title = '" . $our_title . "', alternate_title = '" . $our_alternate_title . "', description = '" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "', pre = '" . $our_prefix . "' WHERE title_id = " . scrubData($this->_title_id, "integer");
 
-	$rUpTitle = mysql_query($qUpTitle);
+	$rUpTitle = $db->query($qUpTitle);
 
 	$this->_debug = "<p>1. update title: $qUpTitle</p>";
 	if (!$rUpTitle) {
@@ -653,7 +653,7 @@ public function updateRecord($notrack = 0) {
 
 	$qClearRank = "DELETE FROM rank WHERE title_id = " . $this->_title_id;
 
-	$rClearRank = mysql_query($qClearRank);
+	$rClearRank = $db->query($qClearRank);
 
 	$this->_debug .= "<p>2. clear rank: $qClearRank</p>";
 
@@ -669,7 +669,7 @@ public function updateRecord($notrack = 0) {
 
     // wipe entry from intervening table, location_title
 	$qClearLoc = "DELETE FROM location_title WHERE title_id = " . scrubData($this->_title_id, "integer");
-	$rClearLoc = mysql_query($qClearLoc);
+	$rClearLoc = $db->query($qClearLoc);
 
 	$this->_debug .= "<p>4. wipe location_title: $qClearLoc</p>";
 	if (!$rClearLoc) {
@@ -705,7 +705,7 @@ function modifyRank() {
 		$qUpRank .= scrubData($this->_source[$i], "integer") != 0 ? "'" . scrubData($this->_source[$i], "integer") . "'," : "NULL, ";
 		$qUpRank .= "'" . mysql_real_escape_string(scrubData($this->_description_override[$i], "richtext")) . "')";
 
-		$rUpRank = mysql_query($qUpRank);
+		$rUpRank = $db->query($qUpRank);
 
 		$this->_debug .= "<p>3. (update rank loop) : $qUpRank</p>";
 		if (!$rUpRank)
@@ -733,7 +733,7 @@ function modifyLocation() {
 				'" . mysql_real_escape_string(scrubData($this->_helpguide[$key])) . "'
 				)";
 
-$rInsertLoc = mysql_query($qInsertLoc);
+$rInsertLoc = $db->query($qInsertLoc);
 
 $this->_debug .= "<p>5a. insert location loop: $qInsertLoc</p>";
 if (!$rInsertLoc) {
@@ -753,7 +753,7 @@ $current_location_id = mysql_insert_id();
 	"', helpguide = '" . mysql_real_escape_string(scrubData($this->_helpguide[$key])) .
 	"' WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
 
-	$rUpLoc = mysql_query($qUpLoc);
+	$rUpLoc = $db->query($qUpLoc);
 
 	$this->_debug .= "<p>5b. update location loop: $qUpLoc</p>";
 	if (!$rUpLoc) {
@@ -771,7 +771,7 @@ $qInsertLocTitle = "INSERT INTO location_title (title_id, location_id) VALUES (
 	)";
 $this->_debug .= "<p>6. insert into location_title: $qInsertLocTitle</p>";
 ;
-$rInsertLocTitle = mysql_query($qInsertLocTitle);
+$rInsertLocTitle = $db->query($qInsertLocTitle);
 
 if (!$rInsertLocTitle) {
 	echo blunDer("We have a problem with the insert location_title query: $qInsertLocTitle");

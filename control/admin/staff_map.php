@@ -31,7 +31,7 @@ WHERE lat_long != ""
 AND ptags LIKE "%librarian%"';
 }
 
-$staffArray = $querier->getResult($q1);
+$staffArray = $querier->query($q1);
 
 //print_r($staffArray);
 ?>

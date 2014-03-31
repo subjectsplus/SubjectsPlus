@@ -9,7 +9,7 @@
  *   @todo
  */
     
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Upload;
     
 $subsubcat = "";
@@ -25,8 +25,7 @@ $result = "";
 
 // Connect to database
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -50,7 +49,7 @@ if (is_numeric($_REQUEST["staff_id"])) {
 
 $staff_query = "select distinct lname, fname, email from staff WHERE staff_id = $staff_id";
 
-$staff_result = MYSQL_QUERY($staff_query);
+$staff_result = $db->query($staff_query);
 $staffer = mysql_fetch_row($staff_result);
 
 $truncated_email = explode("@", $staffer[2]);

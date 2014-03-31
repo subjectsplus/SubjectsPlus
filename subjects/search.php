@@ -6,14 +6,16 @@
  *   @adapted by dzydlewski from a document created by adarby
  *   @date adapted feb 2012
  */
-use SubjectsPlus\Control\DBConnector;
-use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\AllHandler;
 
+use SubjectsPlus\Control\AllHandler;
+use SubjectsPlus\Control\Querier;
+
+    
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
-
+$db = new Querier;
+    
 $use_jquery = "";
 
 $page_title = _("Search Results for Resources by Title and Description");
@@ -28,8 +30,7 @@ $keywords = _("library, research, electronic journals, databases, electronic res
 
 
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -51,7 +52,7 @@ if (isset($_POST["searchterm"])) {
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-$rnew = mysql_query($qnew);
+$rnew = $db->query($qnew);
 
 $newlist = "<ul>\n";
 while ($myrow = mysql_fetch_array($rnew)) {

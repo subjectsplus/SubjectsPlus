@@ -15,6 +15,9 @@ require_once("functions.php");
     
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\BuildNav;
+use SubjectsPlus\Control\Querier;
+    
+$db = new Querier;
     
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
 if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FILE__) . '/config.php' ) < 10 )
@@ -38,6 +41,8 @@ session_start();
 
 //print_r($_SESSION);
 //added in order to redirect to proper page if cannot connect to database. Only check if $tryDB variable doesn't exists and says no
+    
+    /*
 if( !isset($tryDB) || $tryDB != 'no')
 {
 	try {
@@ -55,7 +60,7 @@ if( !isset($tryDB) || $tryDB != 'no')
 		exit();
 	}
 }
-
+*/
 //added in order to redirect to proper page if SubjectsPlus is not installed. Only check if $installCheck variable doesn't exists and says no
 if( !isset( $installCheck ) || $installCheck != 'no' )
 {

@@ -7,7 +7,9 @@
  *   @date march 2011
  *
  */
+    
 use SubjectsPlus\Control\Querier;
+$db = new Querier;
 
 $subsubcat = "";
 $subcat = "admin";
@@ -31,7 +33,7 @@ if (isset($_POST["add_collection"])) {
 		'" . mysql_real_escape_string(scrubData($_POST["new_coll_name"])) . "', ''
 		)";
 
-    $rInsert = mysql_query($qInsert);
+    $rInsert = $db->query($qInsert);
 
     if ($rInsert) {
         $feedback = _("Thy Will Be Done.  Updated.");
@@ -64,7 +66,7 @@ if (isset($_POST["update_collections"])) {
 		WHERE faqpage_id = " . scrubData($key, "integer");
 
         //print $qUp;
-        $rUp = mysql_query($qUp);
+        $rUp = $db->query($qUp);
 
         if (!$rUp) {
             $error = 1;
@@ -86,7 +88,7 @@ if (isset($_POST["update_collections"])) {
 
 $querierDept = new Querier();
 $q = "select faqpage_id, name from faqpage order by name";
-$resultArray = $querierDept->getResult($q);
+$resultArray = $querierDept->query($q);
 
 if ($resultArray) {
     foreach ($resultArray as $value) {

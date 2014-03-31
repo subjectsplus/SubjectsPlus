@@ -8,7 +8,9 @@
 *   @date
 *   @todo
 */
-
+use SubjectsPlus\Control\Querier;
+$db = new Querier;
+    
 include("../../control/includes/config.php");
 include("../../control/includes/functions.php");
 include("../control/includes/autoloader.php");
@@ -55,7 +57,7 @@ switch ($_GET["collection"]) {
 }
 //query the database
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
 $arr = array();
 

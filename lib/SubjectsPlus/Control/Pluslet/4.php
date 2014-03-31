@@ -34,7 +34,7 @@ class Pluslet_4 extends Pluslet {
 
         //print $qs;
 
-        $faqArray = $querier->getResult($qs);
+        $faqArray = $querier->query($qs);
 
 
         if ($faqArray) {

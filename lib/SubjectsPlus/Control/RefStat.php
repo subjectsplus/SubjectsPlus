@@ -63,7 +63,7 @@ class RefStat {
                 FROM uml_refstats_mode
                 ORDER BY label";
 
-        $this->_modes = $querier1->getResult($q1);
+        $this->_modes = $querier1->query($q1);
 
         $this->_debug .= "<p>Modes query: $q1";
 
@@ -77,7 +77,7 @@ class RefStat {
                 FROM uml_refstats_location
                 ORDER BY label";
 
-        $this->_locations = $querier2->getResult($q2);
+        $this->_locations = $querier2->query($q2);
 
         $this->_debug .= "<p>Locations query: $q2";
 
@@ -91,7 +91,7 @@ class RefStat {
                 FROM uml_refstats_type
                 ORDER BY label";
 
-        $this->_types = $querier3->getResult($q3);
+        $this->_types = $querier3->query($q3);
 
 
         $this->_debug .= "<p>" . ("Types query:") . " $q3";
@@ -178,7 +178,7 @@ echo "</form>";
     // if we're doing multiple identicals. we loop
       $x = 0;
       while ($x < $this->_submit_times_x ) {
-        $rInsert = mysql_query($qInsert);
+        $rInsert = $db->query($qInsert);
         $x++;
       }
       

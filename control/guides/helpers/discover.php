@@ -33,7 +33,7 @@ GROUP BY s.subject";
 
 //print $q2;
 
-$r3 = mysql_query($q3);
+$r3 = $db->query($q3);
 
 while($myrow = mysql_fetch_array($r3)) {
 	$sub_title = Truncate($myrow[1], 50, '');

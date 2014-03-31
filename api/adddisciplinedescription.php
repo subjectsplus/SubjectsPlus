@@ -1,5 +1,7 @@
 <?php
-use SubjectsPlus\Control\DBConnector;
+
+use SubjectsPlus\Control\Querier;
+$db = new Querier;
 include_once("../control/includes/config.php");
 include_once("../control/includes/functions.php");
 
@@ -10,7 +12,7 @@ $lstrQuery = "SELECT * FROM subject";
 
 $lobjQuerier = new Querier();
 
-$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 foreach($lobjResults as $lobjRow)
 {
@@ -35,12 +37,12 @@ foreach($lobjResults as $lobjRow)
 
 	$lstrQuery = "UPDATE subject SET description = 'This is a default description', extra = '$lstrExtra' WHERE subject_id = {$lobjRow['subject_id']}";
 
-	mysql_query($lstrQuery) or die("mysql_error no update");
+	$db->query($lstrQuery) or die("mysql_error no update");
 }
 
 $lstrQuery = "SELECT * FROM staff";
 
-$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 foreach($lobjResults as $lobjRow)
 {
@@ -60,7 +62,7 @@ foreach($lobjResults as $lobjRow)
 
 	$lstrQuery = "UPDATE staff SET extra = '$lstrExtra' WHERE staff_id = {$lobjRow['staff_id']}";
 
-	mysql_query($lstrQuery) or die("mysql_error no update");
+	$db->query($lstrQuery) or die("mysql_error no update");
 }
 
 echo "done updating staff and subject tables to include descriptions and disciplines";

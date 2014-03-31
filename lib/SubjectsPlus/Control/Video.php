@@ -65,7 +65,7 @@ class Video {
         $querier = new Querier();
         $q1 = "SELECT video_id, title, description, source, foreign_id, duration, date as vid_date, display, vtags
                     FROM video WHERE video_id = " . $this->_video_id;
-        $vidArray = $querier->getResult($q1);
+        $vidArray = $querier->query($q1);
 
         $this->_debug .= "<p>TB query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -256,7 +256,7 @@ $thumbnail
     // Delete the records from video table
     $q = "DELETE FROM video WHERE video_id = '" . $this->_video_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->query($q);
 
     $this->_debug = "<p>Del query: $q";
 
@@ -302,7 +302,7 @@ $thumbnail
       '" . mysql_real_escape_string(scrubData($this->_vtags, "text")) . "'
           )";
 
-    $rInsertVid = mysql_query($qInsertVid);
+    $rInsertVid = $db->query($qInsertVid);
 
     $this->_video_id = mysql_insert_id();
 
@@ -341,7 +341,7 @@ $thumbnail
       vtags = '" . mysql_real_escape_string(scrubData($this->_vtags, "text")) . "'
       WHERE video_id = " . scrubData($this->_video_id, "integer");
 
-    $rUpVid = mysql_query($qUpVid);
+    $rUpVid = $db->query($qUpVid);
 
     $this->_debug = "<p>1. update title: $qUpVid</p>";
     if (!$rUpVid) {

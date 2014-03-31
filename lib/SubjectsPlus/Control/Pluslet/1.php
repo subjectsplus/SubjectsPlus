@@ -66,7 +66,7 @@ class Pluslet_1 extends Pluslet {
 
         //print $q;
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         // set up some row colours
         $row_count = 0;
@@ -194,8 +194,8 @@ class Pluslet_1 extends Pluslet {
 
         //print $source_string;
 
-        $source_result = mysql_query($source_string);
-        $total_rows = mysql_num_rows($source_result);
+        $source_result = $db->query($source_string);
+        $total_rows = count($source_result);
 
         $num_per_row = ceil($total_rows / 3);
 

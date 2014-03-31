@@ -23,11 +23,7 @@ use SubjectsPlus\Control\MailMessage;
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 //print_r($_POST);
 
@@ -51,7 +47,7 @@ switch ($_POST["type"]) {
         // load list of sources
         $querierSource = new Querier();
         $qSource = "select source_id, source from source order by source";
-        $defsourceArray = $querierSource->getResult($qSource);
+        $defsourceArray = $querierSource->query($qSource);
 
         $sourceMe = new Dropdown("default_source_id", $defsourceArray, $_POST["our_source_id"]);
         $source_string = $sourceMe->display();

@@ -7,7 +7,7 @@
  *   @author adarby
  *   @date Nov, 2011
  */
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
@@ -24,11 +24,7 @@ $full_query = "";
 
 include("../includes/header.php");
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 $results = "<p>" . _("Please select a letter or tag to browse.") . "</p>";
 
@@ -59,23 +55,22 @@ if (isset($_GET["ctag"])) {
 
 $alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions ORDER BY initial";
 
-$alpha_result = MYSQL_QUERY($alpha_query);
+$alpha_result = $db->query($alpha_query);
 
 
-while ($myletter = mysql_fetch_array($alpha_result)) {
+foreach ($alpha_result as $myletter) {
 
     $atoz .="<a href=\""
             . "index.php?letter="
-            . $myletter[0]
+            . $myletter[0][0]
             . "\">"
-            . $myletter[0]
+            . $myletter[0][0]
             . "</a> &nbsp;";
 }
 
 $atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
 
 // gather ctags
-//$current_ctags = explode("|", $this->_ctags);
 
 $tag_list = "<span class=\"";
 if (isset($_GET["letter"]) && $_GET["letter"] == "restricted") {
@@ -117,7 +112,7 @@ foreach ($all_ctags as $value) {
 
 if ($alpha_id) {
 
-    $full_result = MYSQL_QUERY($full_query);
+    $full_result = $db->query($full_query);
 
     $row_count = 0;
     $colour1 = "oddrow";

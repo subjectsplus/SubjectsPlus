@@ -8,7 +8,7 @@
  * 	  @todo 
  */
 
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Video;
 
 $subcat = "video";
@@ -28,11 +28,7 @@ $no_form = "";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 
 // Test our record_id, if it exists; must be integer

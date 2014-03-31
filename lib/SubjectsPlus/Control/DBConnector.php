@@ -30,7 +30,7 @@ class DBConnector {
 
     // Make sure things are unicode-friendly
     $setup_q = "SET NAMES 'utf8'";
-    mysql_query($setup_q);
+    $db->query($setup_q);
 
       return $this->_connection;
     } else {

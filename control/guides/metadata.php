@@ -7,7 +7,7 @@
  *   @date Jan 2011
  * 	  @todo Add a delete button if a) it's one of the creators, or b) it's the admin
  */
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Dropdown;
 $subcat = "guides";
@@ -26,8 +26,7 @@ include("../includes/header.php");
 //$_SESSION["eresource_mgr"] = 1;
 // Connect to database
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 

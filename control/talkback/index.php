@@ -145,7 +145,7 @@ $qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(dat
 
 //print $qTBYES;
 
-$tbArrayYes = $querierTBYES->getResult($qTBYES);
+$tbArrayYes = $querierTBYES->query($qTBYES);
 
 $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
 

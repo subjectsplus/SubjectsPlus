@@ -8,7 +8,10 @@
  *   @date mar 2012
  *   @todo 
  */
-
+use SubjectsPlus\Control\Querier;
+$db = new Querier;
+    
+    
 $subcat = "";
 $header = "noshow";
 include("../includes/header.php");
@@ -64,7 +67,8 @@ emergency_contact_name AS 'Contact Name', emergency_contact_phone AS 'Contact Ph
   $and
   ORDER BY lname";
 
-$export = mysql_query ( $select ) or die ( "Sql error : " . mysql_error( ) );
+$export = $db = new Querier;
+$db->query ( $select ) or die ( "Sql error : " . mysql_error( ) );
 
 $fields = mysql_num_fields ( $export );
 

@@ -32,7 +32,7 @@ if ($postvar_type == "holding") {
 
 //print $q;
 
-  $r = MYSQL_QUERY($q);
+  $r = $db->query($q);
 
   $colour1 = "evenrow";
   $colour2 = "oddrow";
@@ -48,7 +48,7 @@ if ($postvar_type == "holding") {
 
     $q2 = "SELECT * FROM faq_faqpage ff, faq f WHERE  f.faq_id = ff.faq_id AND ff.faqpage_id = '$fp_id'";
     //print $q2;
-    $r2 = MYSQL_QUERY($q2);
+    $r2 = $db->query($q2);
 
     print "<ul>";
     while ($myrow2 = mysql_fetch_array($r2)) {
@@ -71,7 +71,7 @@ ORDER BY faq_id DESC";
 
   $q = "SELECT * FROM faq f, faq_subject fs, subject s WHERE f.faq_id = fs.faq_id AND s.subject_id = fs.subject_id GROUP BY subject";
 
-  $r = MYSQL_QUERY($q);
+  $r = $db->query($q);
 
   $colour1 = "evenrow";
   $colour2 = "oddrow";
@@ -86,7 +86,7 @@ ORDER BY faq_id DESC";
     print "<h3>$subject</h3>";
 
     $q2 = "SELECT * FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = '$sub_id'";
-    $r2 = MYSQL_QUERY($q2);
+    $r2 = $db->query($q2);
 
     print "<ul>";
     while ($myrow2 = mysql_fetch_array($r2)) {

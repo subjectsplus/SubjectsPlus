@@ -77,7 +77,7 @@ class FAQ {
         $querier = new Querier();
         $q1 = "SELECT faq_id, question, answer, keywords
                     FROM faq WHERE faq_id = " . $this->_faq_id;
-        $faqArray = $querier->getResult($q1);
+        $faqArray = $querier->query($q1);
 
         $this->_debug .= "<p>FAQ query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -101,7 +101,7 @@ class FAQ {
                 AND faq_subject.faq_id =" . $this->_faq_id . "
 		ORDER BY subject";
 
-        $this->_subjects = $querier2->getResult($q2);
+        $this->_subjects = $querier2->query($q2);
 
         $this->_debug .= "<p>Linked Subjects query: $q2";
 
@@ -117,7 +117,7 @@ class FAQ {
                 AND ff.faq_id = " . $this->_faq_id . "
 		ORDER BY name";
 
-        $this->_collections = $querier3->getResult($q3);
+        $this->_collections = $querier3->query($q3);
 
 
         $this->_debug .= "<p>" . ("Linked collections query:") . " $q3";
@@ -202,7 +202,7 @@ class FAQ {
     // All collections in array
     $querier4 = new Querier();
     $q4 = "SELECT faqpage_id, name FROM faqpage ORDER BY name";
-    $this->_all_collections = $querier4->getResult($q4);
+    $this->_all_collections = $querier4->query($q4);
     $collection_list = "";
 
     if ($this->_collections == FALSE) {
@@ -313,18 +313,18 @@ class FAQ {
     // Delete the records from faq and linked tables
     $q = "DELETE FROM faq WHERE faq_id = '" . $this->_faq_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->query($q);
 
     $this->_debug = "<p>Del query: $q";
 
     if (mysql_affected_rows() != 0) {
       //removed by david because new db referential integrity does this automatically
       //$q2 = "DELETE FROM faq_faqpage WHERE faq_id = '" . $this->_faq_id . "'";
-      //$delete_result2 = mysql_query($q2);
+      //$delete_result2 = $db->query($q2);
       //$this->_debug .= "<p>Del query 2: $q2";
 
       //$q3 = "DELETE FROM faq_subject WHERE faq_id = '" . $this->_faq_id . "'";
-      //$delete_result3 = mysql_query($q3);
+      //$delete_result3 = $db->query($q3);
       //$this->_debug .= "<p>Del query 2: $q3";
     } else {
       // message
@@ -367,7 +367,7 @@ class FAQ {
           '" . mysql_real_escape_string(scrubData($this->_keywords, "text")) . "'
           )";
 
-    $rInsert = mysql_query($qInsert);
+    $rInsert = $db->query($qInsert);
 
     $this->_faq_id = mysql_insert_id();
 
@@ -410,7 +410,7 @@ class FAQ {
 	  keywords = '" . mysql_real_escape_string(scrubData($this->_keywords, "text")) . "'
           WHERE faq_id = " . scrubData($this->_faq_id, "integer");
 
-    $rUpFAQ = mysql_query($qUpFAQ);
+    $rUpFAQ = $db->query($qUpFAQ);
 
     $this->_debug = "<p>1. update faq: $qUpFAQ</p>";
     if (!$rUpFAQ) {
@@ -424,7 +424,7 @@ class FAQ {
 
     $qClearSubs = "DELETE FROM faq_subject WHERE faq_id = " . $this->_faq_id;
 
-    $rClearSubs = mysql_query($qClearSubs);
+    $rClearSubs = $db->query($qClearSubs);
 
     $this->_debug .= "<p>2. clear rank: $qClearSubs</p>";
 
@@ -440,7 +440,7 @@ class FAQ {
 
     // wipe entry from intervening table
     $qClearColls = "DELETE FROM faq_faqpage WHERE faq_id = " . scrubData($this->_faq_id, "integer");
-    $rClearColls = mysql_query($qClearColls);
+    $rClearColls = $db->query($qClearColls);
 
     $this->_debug .= "<p>4. wipe faq_faqpage: $qClearColls</p>";
     if (!$rClearColls) {
@@ -470,7 +470,7 @@ class FAQ {
                 '" . scrubData($this->_faq_id, "integer") . "',
                 '" . scrubData($this->_subject[$i], "integer") . "')";
 
-      $rUpSub = mysql_query($qUpSub);
+      $rUpSub = $db->query($qUpSub);
 
       $this->_debug .= "<p>3. (update faq_subject loop) : $qUpSub</p>";
       if (!$rUpSub) {
@@ -485,7 +485,7 @@ class FAQ {
                 '" . scrubData($this->_faq_id, "integer") . "',
                 '" . scrubData($this->_collection[$i], "integer") . "')";
 
-      $rUpColl = mysql_query($qUpColl);
+      $rUpColl = $db->query($qUpColl);
 
       $this->_debug .= "<p>3. (update faq_faqpage loop) : $qUpColl</p>";
       if (!$rUpColl) {

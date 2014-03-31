@@ -175,7 +175,7 @@ dbCall($dbName);
 
 $q = "SELECT email FROM staff WHERE ptags LIKE '%newsletter%'";
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
 while($myrow =  mysql_fetch_array($r)) {
 
@@ -192,7 +192,7 @@ $sq2 = "SELECT ourtable, record_id, record_title, message, date_added, fname, ln
 
 // print $sq2;
 
-$sr2 = MYSQL_QUERY($sq2);
+$sr2 = $db->query($sq2);
 
 $row_count = 0;
 $colour1 = "oddrow";
