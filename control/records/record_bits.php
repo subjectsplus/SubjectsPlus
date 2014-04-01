@@ -19,6 +19,7 @@ use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
+use SubjectsPlus\Control\DBConnector;
 
 include("../includes/header.php");
 
