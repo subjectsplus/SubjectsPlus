@@ -9,7 +9,7 @@
  */
 
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
+
     
 $subsubcat = "";
 $subcat = "admin";
@@ -19,9 +19,9 @@ $feedback = "";
 //print_r($_POST);
 
 include("../includes/header.php");
-
+include("../includes/autoloader.php");
 // Connect to database
-
+$db = new Querier;
 
 if (isset($_POST["add_department"])) {
 
