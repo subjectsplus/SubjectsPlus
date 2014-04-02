@@ -422,6 +422,7 @@ function lastModded($table, $record_id, $zero_message = 1, $show_email = 1) {
         AND record_id = '$record_id'
         ORDER BY date_added DESC";
 //print $q;
+  $db = new Querier;
   $r = $db->query($q);
   $my_mod = $r;
 

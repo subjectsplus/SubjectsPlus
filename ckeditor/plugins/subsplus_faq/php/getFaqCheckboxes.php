@@ -61,7 +61,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 	$r = $db->query($q);
 
 	//go through all subjects and get the related faqs
-	while($myrow =  mysql_fetch_array($r))
+	foreach ($r as $myrow)
 	{
 
 		$sub_id = $myrow["subject_id"];
@@ -92,7 +92,7 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 	$r = $db->query($q);
 
 	//go through all collections and get the related faqs
-	while($myrow =  mysql_fetch_array($r)) {
+	foreach ($r as $myrow) {
 
 		$coll_id = $myrow["0"];
 		$collection = $myrow["1"];

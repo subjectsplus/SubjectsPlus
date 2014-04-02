@@ -104,7 +104,7 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
 
   $row_count = count($r);
 
-  while ($myrow = mysql_fetch_array($r, MYSQL_NUM)) {
+  foreach ($r as $myrow) {
     
     
     if ($recursion == 1) {

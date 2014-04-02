@@ -33,7 +33,7 @@ $subject_id = $_POST["this_subject_id"];
 $qs = "SELECT tab_id FROM tab WHERE subject_id = '$subject_id'";
 $drs = $db->query($qs);
 
-while($row = mysql_fetch_array($drs))
+foreach($drs as $row)
 {
 	$qd = "DELETE FROM pluslet_tab WHERE tab_id = '{$row[0]}'";
 	$dr = $db->query($qd);

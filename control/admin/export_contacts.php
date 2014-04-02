@@ -67,8 +67,8 @@ emergency_contact_name AS 'Contact Name', emergency_contact_phone AS 'Contact Ph
   $and
   ORDER BY lname";
 
-$export = $db = new Querier;
-$db->query ( $select ) or die ( "Sql error : " . mysql_error( ) );
+$db = new Querier;
+$export = $db->query($select);
 
 $fields = mysql_num_fields ( $export );
 
@@ -77,7 +77,7 @@ for ( $i = 0; $i < $fields; $i++ )
     $header .= mysql_field_name( $export , $i ) . "\t";
 }
 
-while( $row = mysql_fetch_row( $export ) )
+    foreach( $export as $row )
 {
     $line = '';
     foreach( $row as $value )

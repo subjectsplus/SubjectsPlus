@@ -62,7 +62,7 @@ $r = $db->query($q);
 $arr = array();
 
 $i = 0;
-while($myrow =  mysql_fetch_array($r)) {
+foreach ($r as $myrow){
   $arr[$i]['value'] = $myrow[0];
   $arr[$i]['label'] = $myrow[1];
   $i++;

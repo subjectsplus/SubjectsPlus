@@ -45,7 +45,7 @@ $r = $db->query($q);
 $row_count = 0;
 
 if (count($r) != 0) {
-	while($myrow =  mysql_fetch_array($r)) {
+	foreach ($r as $myrow){
 
 		$colour1 = "#fff";
 		$colour2 = "#F6E3E7";

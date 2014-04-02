@@ -177,7 +177,7 @@ $q = "SELECT email FROM staff WHERE ptags LIKE '%newsletter%'";
 
 $r = $db->query($q);
 
-while($myrow =  mysql_fetch_array($r)) {
+foreach($r as $myrow) {
 
 	$recipients .= $myrow[0] . ",";
 }
@@ -209,7 +209,7 @@ $talkback_count = 0;
 $updated_guider = array();
 $updated_recorder = array();
 
-while($myrow2 =  mysql_fetch_array($sr2)) {
+foreach($sr2 as $myrow2) {
 
 $message = $myrow2["3"];
 

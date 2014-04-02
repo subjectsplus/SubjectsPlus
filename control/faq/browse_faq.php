@@ -38,7 +38,7 @@ if ($postvar_type == "holding") {
   $colour2 = "oddrow";
   $row_count = 1;
 
-  while ($myrow = mysql_fetch_array($r)) {
+ foreach ($r as $myrow) {
     $fp_id = $myrow["0"];
     $name = $myrow["1"];
 
@@ -77,7 +77,7 @@ ORDER BY faq_id DESC";
   $colour2 = "oddrow";
   $row_count = 1;
 
-  while ($myrow = mysql_fetch_array($r)) {
+ foreach ($r as $myrow) {
     $sub_id = $myrow["subject_id"];
     $subject = $myrow["subject"];
 
