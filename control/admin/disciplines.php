@@ -29,7 +29,7 @@ if (isset($_POST["add_discipline"])) {
     ////////////////
 
     $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["discipline"])) . "')";
+		'" . $db->quote(scrubData($_POST["discipline"])) . "')";
 
     $rInsertdiscipline = $db->query($qInsertdiscipline);
 
@@ -61,7 +61,7 @@ if (isset($_POST["update_disciplines"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE discipline SET
-		discipline = '" . mysql_real_escape_string(scrubData($value)) . "', 
+		discipline = '" . $db->quote(scrubData($value)) . "', 
 		sort = '" . $row_count . "' 
 		WHERE discipline_id = " . scrubData($key, "integer");
 

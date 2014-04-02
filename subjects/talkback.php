@@ -156,7 +156,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 	}
 
   // Make a safe query
-	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `answer`, `tbtags`) VALUES ('%s', '%s', '%s', 'No', '', '%s')", mysql_real_escape_string($this_comment), mysql_real_escape_string($this_name), $todaycomputer, mysql_real_escape_string($set_filter));
+	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `answer`, `tbtags`) VALUES ('%s', '%s', '%s', 'No', '', '%s')", $db->quote($this_comment), $db->quote($this_name), $todaycomputer, $db->quote($set_filter));
   //print $query;
 	$db->query($query);
 
@@ -183,10 +183,10 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 		$message = "<html><body><h2>Talk Back!</h2>\n\n";
 		$message .= "<strong>Date Submitted</strong>: $month $mday, $year<br />\n\n";
 		$message .= "<strong>Name</strong>:  ";
-		$message .= mysql_real_escape_string($this_name);
+		$message .= $db->quote($this_name);
 		$message .= "<br />\n\n
 		<strong>Question</strong>:  ";
-		$message .= mysql_real_escape_string($this_comment);
+		$message .= $db->quote($this_comment);
 		$message .= "<br /><br />\n\n";
 		$message .= "</body></html>";
 

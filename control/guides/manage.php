@@ -136,10 +136,10 @@ if ($userFiles) {
 				ON s.subject_id = ss.subject_id
 				INNER JOIN staff st
 				ON ss.staff_id = st.staff_id
-				WHERE p.body LIKE '%" . mysql_real_escape_string($location_hint) . "/" . mysql_real_escape_string($shortName) . "%'
-                OR p.body LIKE '%" . mysql_real_escape_string($location_hint) . trim( " \\ " ) . mysql_real_escape_string($shortName) . "%'
-                OR p.body LIKE '%" . mysql_real_escape_string($location_hint) . trim( " \\ " ) . "image" . trim( " \\ " ) . mysql_real_escape_string($shortName) . "%'
-                OR p.body LIKE '%" . mysql_real_escape_string($location_hint) . "/image/" . mysql_real_escape_string($shortName) . "%'";;
+				WHERE p.body LIKE '%" . $db->quote($location_hint) . "/" . $db->quote($shortName) . "%'
+                OR p.body LIKE '%" . $db->quote($location_hint) . trim( " \\ " ) . $db->quote($shortName) . "%'
+                OR p.body LIKE '%" . $db->quote($location_hint) . trim( " \\ " ) . "image" . trim( " \\ " ) . $db->quote($shortName) . "%'
+                OR p.body LIKE '%" . $db->quote($location_hint) . "/image/" . $db->quote($shortName) . "%'";;
 
             $findGuidesResult = $querier->query($findGuidesQuery);
             $guides = array(); // for the list of guides in which the file appears

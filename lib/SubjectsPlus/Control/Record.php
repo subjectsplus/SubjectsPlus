@@ -8,6 +8,9 @@
  *   @date Nov 2010
  *   @todo better blunDer interaction, better message, maybe hide the blunder errors until the end
  */
+
+use SubjectsPlus\Control\Querier;
+
 class Record {
 
 	private $_record_id;
@@ -580,15 +583,16 @@ public function buildLocation() {
     ////////////////
     // Insert title table
     ////////////////
- 	$our_title = mysql_real_escape_string(scrubData($this->_title));
- 	$our_alternate_title = mysql_real_escape_string(scrubData($this->_alternate_title));
- 	$our_prefix = mysql_real_escape_string(scrubData($this->_prefix));
+    $db = new Querier;
+ 	$our_title = $db->quote(scrubData($this->_title));
+ 	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
+ 	$our_prefix = $db->quote(scrubData($this->_prefix));
 
  	$qInsertTitle = "INSERT INTO title (title, alternate_title, description, pre) VALUES (
- 		'" . $our_title . "',
- 		'" . $our_alternate_title . "',
- 		'" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "',
- 		'" . $our_prefix . "'
+ 		" . $our_title . ",
+ 		" . $our_alternate_title . ",
+ 		" . $db->quote(scrubData($this->_description, "richtext")) . ",
+ 		" . $our_prefix . "
  		)";
 
 $rInsertTitle = $db->query($qInsertTitle);
@@ -633,11 +637,11 @@ public function updateRecord($notrack = 0) {
     // update title table
     /////////////////////
 
-	$our_title = mysql_real_escape_string(scrubData($this->_title));
-	$our_alternate_title = mysql_real_escape_string(scrubData($this->_alternate_title));
-	$our_prefix = mysql_real_escape_string(scrubData($this->_prefix));
+	$our_title = $db->quote(scrubData($this->_title));
+	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
+	$our_prefix = $db->quote(scrubData($this->_prefix));
 
-	$qUpTitle = "UPDATE title SET title = '" . $our_title . "', alternate_title = '" . $our_alternate_title . "', description = '" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "', pre = '" . $our_prefix . "' WHERE title_id = " . scrubData($this->_title_id, "integer");
+	$qUpTitle = "UPDATE title SET title = '" . $our_title . "', alternate_title = '" . $our_alternate_title . "', description = '" . $db->quote(scrubData($this->_description, "richtext")) . "', pre = '" . $our_prefix . "' WHERE title_id = " . scrubData($this->_title_id, "integer");
 
 	$rUpTitle = $db->query($qUpTitle);
 
@@ -703,7 +707,7 @@ function modifyRank() {
 		$qUpRank .= scrubData($this->_subject[$i], "integer") != 0 ? "'" . scrubData($this->_subject[$i], "integer") . "'," : "NULL, ";
 		$qUpRank .= scrubData($this->_title_id, "integer") != 0 ? "'" . scrubData($this->_title_id, "integer") . "'," : "NULL, ";
 		$qUpRank .= scrubData($this->_source[$i], "integer") != 0 ? "'" . scrubData($this->_source[$i], "integer") . "'," : "NULL, ";
-		$qUpRank .= "'" . mysql_real_escape_string(scrubData($this->_description_override[$i], "richtext")) . "')";
+		$qUpRank .= "'" . $db->quote(scrubData($this->_description_override[$i], "richtext")) . "')";
 
 		$rUpRank = $db->query($qUpRank);
 
@@ -724,13 +728,13 @@ function modifyLocation() {
         // Blank location, do an insert
 			$qInsertLoc = "INSERT INTO location (format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide) VALUES (
 				'" . scrubData($this->_format[$key], "integer") . "',
-				'" . mysql_real_escape_string(scrubData($this->_call_number[$key])) . "',
-				'" . mysql_real_escape_string(scrubData($this->_location[$key])) . "',
+				'" . $db->quote(scrubData($this->_call_number[$key])) . "',
+				'" . $db->quote(scrubData($this->_location[$key])) . "',
 				'" . scrubData($this->_access_restrictions[$key], "integer") . "',
 				'" . scrubData($this->_eres_display[$key]) . "',
-				'" . mysql_real_escape_string(scrubData($this->_display_note[$key], "richtext")) . "',
-				'" . mysql_real_escape_string(scrubData($this->_ctags[$key])) . "',
-				'" . mysql_real_escape_string(scrubData($this->_helpguide[$key])) . "'
+				'" . $db->quote(scrubData($this->_display_note[$key], "richtext")) . "',
+				'" . $db->quote(scrubData($this->_ctags[$key])) . "',
+				'" . $db->quote(scrubData($this->_helpguide[$key])) . "'
 				)";
 
 $rInsertLoc = $db->query($qInsertLoc);
@@ -749,8 +753,8 @@ $current_location_id = mysql_insert_id();
 	"', access_restrictions = '" . scrubData($this->_access_restrictions[$key], "integer") .
 	"', eres_display = '" . scrubData($this->_eres_display[$key]) .
 	"', display_note = '" . scrubData($this->_display_note[$key], "richtext") .
-	"', ctags = '" . mysql_real_escape_string(scrubData($this->_ctags[$key])) .
-	"', helpguide = '" . mysql_real_escape_string(scrubData($this->_helpguide[$key])) .
+	"', ctags = '" . $db->quote(scrubData($this->_ctags[$key])) .
+	"', helpguide = '" . $db->quote(scrubData($this->_helpguide[$key])) .
 	"' WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
 
 	$rUpLoc = $db->query($qUpLoc);

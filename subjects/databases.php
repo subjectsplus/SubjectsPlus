@@ -8,7 +8,6 @@
  */
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\DbHandler;
 use SubjectsPlus\Control\CompleteMe;
     
 include("../control/includes/config.php");
@@ -124,7 +123,7 @@ $intro .= "<br class=\"clear-both\" />";
 
 // Create our table of databases object
 
-$our_items = new DbHandler();
+//$our_items = new DbHandler();
 
 // if we're showing the subject list, do so
 

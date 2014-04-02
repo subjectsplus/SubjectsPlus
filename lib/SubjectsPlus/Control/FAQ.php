@@ -360,22 +360,22 @@ class FAQ {
     /////////////////////
     // update tb table
     /////////////////////
-
+    $db = new Querier;
     $qInsert = "INSERT INTO faq (question, answer, keywords) VALUES (
-	  '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_answer, "richtext")) . "',
-          '" . mysql_real_escape_string(scrubData($this->_keywords, "text")) . "'
+	  '" . $db->quote(scrubData($this->_question, "text")) . "',
+	  '" . $db->quote(scrubData($this->_answer, "richtext")) . "',
+          '" . $db->quote(scrubData($this->_keywords, "text")) . "'
           )";
 
-    $rInsert = $db->query($qInsert);
-
+    $rInsert = $db->exec($qInsert);
+/*
     $this->_faq_id = mysql_insert_id();
 
     $this->_debug = "<p>1. insert: $qInsert</p>";
     if (!$rInsert) {
       echo blunDer("We have a problem with the tb query: $qInsert");
     }
-
+*/
     /////////////////////
     // insert into rank
     ////////////////////
@@ -405,9 +405,9 @@ class FAQ {
     // update faq table
     /////////////////////
 
-    $qUpFAQ = "UPDATE faq SET question = '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
-	  answer = '" . mysql_real_escape_string(scrubData($this->_answer, "richtext")) . "',
-	  keywords = '" . mysql_real_escape_string(scrubData($this->_keywords, "text")) . "'
+    $qUpFAQ = "UPDATE faq SET question = '" . $db->quote(scrubData($this->_question, "text")) . "',
+	  answer = '" . $db->quote(scrubData($this->_answer, "richtext")) . "',
+	  keywords = '" . $db->quote(scrubData($this->_keywords, "text")) . "'
           WHERE faq_id = " . scrubData($this->_faq_id, "integer");
 
     $rUpFAQ = $db->query($qUpFAQ);
@@ -465,6 +465,8 @@ class FAQ {
   }
 
   function modifySubjects() {
+    $db = new Querier;
+    
     for ($i = 0; $i < $this->_subject_count; $i++) {
       $qUpSub = "INSERT INTO faq_subject (faq_id, subject_id) VALUES (
                 '" . scrubData($this->_faq_id, "integer") . "',

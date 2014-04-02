@@ -50,12 +50,12 @@ switch ($_REQUEST["type"]) {
         // Do an update
         
         $qupdate = "UPDATE video 
-          SET title = '" . mysql_real_escape_string(scrubData($_POST["title"])) . "',
-          description = '" . mysql_real_escape_string(scrubData($_POST["description"], "richtext")) . "',
-          source = '" . mysql_real_escape_string(scrubData($_POST["source"])) . "',
-          foreign_id = '" . mysql_real_escape_string(scrubData($_POST["foreign_id"])) . "',
-          duration = '" . mysql_real_escape_string(scrubData($_POST["duration"])) . "',
-          date = '" . mysql_real_escape_string(scrubData($_POST["upload_date"])) . "'
+          SET title = '" . $db->quote(scrubData($_POST["title"])) . "',
+          description = '" . $db->quote(scrubData($_POST["description"], "richtext")) . "',
+          source = '" . $db->quote(scrubData($_POST["source"])) . "',
+          foreign_id = '" . $db->quote(scrubData($_POST["foreign_id"])) . "',
+          duration = '" . $db->quote(scrubData($_POST["duration"])) . "',
+          date = '" . $db->quote(scrubData($_POST["upload_date"])) . "'
           WHERE foreign_id = '" . $our_id . "'";
         
         $rupdate = $db->query($qupdate);

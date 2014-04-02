@@ -11,7 +11,8 @@
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
-    
+use SubjectsPlus\Control\Querier;
+
 $subcat = "records";
 $subsubcat = "index.php";
 $page_title = "Browse Items";
@@ -24,7 +25,7 @@ $full_query = "";
 
 include("../includes/header.php");
 
-
+$db = new Querier;
 
 $results = "<p>" . _("Please select a letter or tag to browse.") . "</p>";
 
@@ -54,6 +55,7 @@ if (isset($_GET["ctag"])) {
 // Create the A-Z header
 
 $alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions ORDER BY initial";
+
 
 $alpha_result = $db->query($alpha_query);
 
@@ -112,6 +114,7 @@ foreach ($all_ctags as $value) {
 
 if ($alpha_id) {
 
+
     $full_result = $db->query($full_query);
 
     $row_count = 0;
@@ -119,7 +122,7 @@ if ($alpha_id) {
     $colour2 = "evenrow";
 
     if ($full_result) {
-        while ($myrow = mysql_fetch_array($full_result)) {
+        foreach ($full_result as $my_row) {
 
             $label = $myrow[0];
             $url = $myrow[2];

@@ -65,10 +65,10 @@ switch ($_REQUEST["type"]) {
 
         if ($_GET["subject_id"] == "") {
             // INSERT
-            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . mysql_real_escape_string(scrubData($_GET["value"])) . "'";
+            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . $db->quote(scrubData($_GET["value"])) . "'";
         } else {
             // UPDATE
-            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . mysql_real_escape_string(scrubData($_GET["value"])) . "' AND subject_id != '" . mysql_real_escape_string(scrubData($_GET["subject_id"])) . "'";
+            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . $db->quote(scrubData($_GET["value"])) . "' AND subject_id != '" . $db->quote(scrubData($_GET["subject_id"])) . "'";
         }
 
         //print $qcheck;

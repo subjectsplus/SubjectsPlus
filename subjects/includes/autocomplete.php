@@ -19,21 +19,21 @@ $_GET["collection"] = "faq";
 
 switch ($_GET["collection"]) {
 	case "guides":
-	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE '%$param%'";
+	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE %$param%";
 
 	break;
 	case "records":
-	$q = "SELECT title_id, title FROM title WHERE title LIKE '%$param%'";
+	$q = "SELECT title_id, title FROM title WHERE title LIKE %$param%";
 
 	break;
 	case "faq":
-	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%$param%'";
+	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE %$param%";
 	break;
 	case "talkback":
-	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE '%$param%'";
+	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE %$param%";
 	break;
 	case "admin":
-	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE '%$param%') OR (lname LIKE '%$param%')";
+	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE %$param%) OR (lname LIKE %$param%)";
 	break;
 
 }

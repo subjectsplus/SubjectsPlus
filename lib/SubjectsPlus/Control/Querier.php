@@ -12,7 +12,7 @@ namespace SubjectsPlus\Control;
  */
 use PDO;
 
-class Querier {
+class Querier  {
 
     private $_query;
     private $_connection;
@@ -48,7 +48,7 @@ class Querier {
 
           foreach ($rows as $value) {
 
-          echo $value[0]['name'];
+          echo $value['name'];
 
           }
 
@@ -60,10 +60,20 @@ class Querier {
         }
 
         $connection = $this->_connection;
-        
-
-        $result = $connection->query($sql);
-        $rows = $result->fetchAll($fetch_style);
+    
+           $result = $connection->query($sql);
+        if (!$result) {
+            
+            echo "<p>Woah! There was a problem with that query. Maybe this will help:";
+            print_r($connection->errorInfo()[2]);
+            echo "</p>";
+            echo $sql;
+            
+            $rows = NULL;
+        } else {
+           $rows = $result->fetchAll($fetch_style);
+        }
+     
 
         return $rows;
     }
@@ -89,5 +99,11 @@ class Querier {
         return count($result);
     }
 
-    
+ 
+    public function quote($string) {
+        $connection = $this->_connection;
+        $quoted_string = $connection->quote($string);
+        return $quoted_string;
+        
+    }
 }

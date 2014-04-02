@@ -29,7 +29,7 @@ if (isset($_POST["add_source"])) {
     ////////////////
 
     $qInsertSource = "INSERT INTO source (source, rs) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["source"])) . "', 
+		'" . $db->quote(scrubData($_POST["source"])) . "', 
 		'0'
 		)";
 
@@ -63,7 +63,7 @@ if (isset($_POST["update_sources"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE source SET
-		source = '" . mysql_real_escape_string(scrubData($value)) . "', 
+		source = '" . $db->quote(scrubData($value)) . "', 
 		rs = '" . $row_count . "' 
 		WHERE source_id = " . scrubData($key, "integer");
 

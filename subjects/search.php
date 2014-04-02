@@ -164,7 +164,7 @@ function getTableOptions($selected, $subject_id = '') {
 
   //
 
-  $selection = "WHERE (title LIKE '%" . mysql_real_escape_string($selected) . "%' OR description LIKE '%" . mysql_real_escape_string($selected) . "%')";
+  $selection = "WHERE (title LIKE '%" . $db->quote($selected) . "%' OR description LIKE '%" . $db->quote($selected) . "%')";
 
 
   return $selection;

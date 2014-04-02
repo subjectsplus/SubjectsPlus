@@ -22,8 +22,7 @@ include("../../includes/header.php");
 
 //print_r($_POST);
 
-// Connect to database
-try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
+
 
 $lobjTabs = json_decode($_POST['tabs'], true);
 
@@ -46,11 +45,17 @@ $lintTabIndex = 0;
 
 foreach( $lobjTabs as $lobjTab )
 {
+    if (isset($lobjTab['external'])) {
+        
+    } else {
+        $lobjTab['external'] = NULL;
+    }
+    
 	$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}')";
 	//print $qi . "<br />";
 	$ir = $db->query($qi);
 
-	$lintTabId = mysql_insert_id($dbc->getConnection());
+	//$lintTabId = mysql_insert_id($dbc->getConnection());
 
 	$left_col = $lobjTab["left_data"];
 	$center_col = $lobjTab["center_data"];

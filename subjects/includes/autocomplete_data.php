@@ -33,25 +33,25 @@ if (isset($_REQUEST["term"])) {
 
 switch ($_GET["collection"]) {
 	case "guides":
-	$q = "SELECT shortform, subject FROM subject WHERE subject LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT shortform, subject FROM subject WHERE subject LIKE '%" . $db->quote($param) . "%'";
 
 	break;
 	case "records":
-	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $db->quote($param) . "%'";
 
 	break;
 	case "faq":
-	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . $db->quote($param) . "%'";
 	break;
   	case "databases":
 	$q = "SELECT location, title
     FROM title t, location_title lt, location l
     WHERE t.title_id = lt.title_id
     AND lt.location_id = l.location_id
-    AND title LIKE '%" . mysql_real_escape_string($param) . "%'";
+    AND title LIKE '%" . $db->quote($param) . "%'";
 	break;
 	case "talkback":
-	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE '%" . $db->quote($param) . "%'";
 	break;
 
 }

@@ -347,18 +347,18 @@ $headshot
         ////////////////
 
         $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio) VALUES (
-		'" . mysql_real_escape_string(scrubData($this->_fname)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_lname)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_title)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_tel)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_department_id, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_staff_sort, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_email, "email")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_user_type_id, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_password)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_ptags)) . "',
-                '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
-                '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "'
+		'" . $db->quote(scrubData($this->_fname)) . "',
+		'" . $db->quote(scrubData($this->_lname)) . "',
+		'" . $db->quote(scrubData($this->_title)) . "',
+		'" . $db->quote(scrubData($this->_tel)) . "',
+		'" . $db->quote(scrubData($this->_department_id, "integer")) . "',
+		'" . $db->quote(scrubData($this->_staff_sort, "integer")) . "',
+		'" . $db->quote(scrubData($this->_email, "email")) . "',
+		'" . $db->quote(scrubData($this->_user_type_id, "integer")) . "',
+		'" . $db->quote(scrubData($this->_password)) . "',
+		'" . $db->quote(scrubData($this->_ptags)) . "',
+                '" . $db->quote(scrubData($this->_active, "integer")) . "',
+                '" . $db->quote(scrubData($this->_bio, "richtext")) . "'
 		)";
 
         $rInsertStaff = $db->query($qInsertStaff);
@@ -403,17 +403,17 @@ $headshot
         /////////////////////
 
         $qUpStaff = "UPDATE staff SET
-	  fname = '" . mysql_real_escape_string(scrubData($this->_fname)) . "',
-	  lname = '" . mysql_real_escape_string(scrubData($this->_lname)) . "',
-	  title = '" . mysql_real_escape_string(scrubData($this->_title)) . "',
-	  tel = '" . mysql_real_escape_string(scrubData($this->_tel)) . "',
-	  department_id = '" . mysql_real_escape_string(scrubData($this->_department_id, "integer")) . "',
-	  staff_sort = '" . mysql_real_escape_string(scrubData($this->_staff_sort, "integer")) . "',
-	  email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "',
-	  user_type_id = '" . mysql_real_escape_string(scrubData($this->_user_type_id, "integer")) . "',
-	  ptags = '" . mysql_real_escape_string(scrubData($this->_ptags)) . "',
-          active = '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
-          bio = '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "'
+	  fname = '" . $db->quote(scrubData($this->_fname)) . "',
+	  lname = '" . $db->quote(scrubData($this->_lname)) . "',
+	  title = '" . $db->quote(scrubData($this->_title)) . "',
+	  tel = '" . $db->quote(scrubData($this->_tel)) . "',
+	  department_id = '" . $db->quote(scrubData($this->_department_id, "integer")) . "',
+	  staff_sort = '" . $db->quote(scrubData($this->_staff_sort, "integer")) . "',
+	  email = '" . $db->quote(scrubData($this->_email, "email")) . "',
+	  user_type_id = '" . $db->quote(scrubData($this->_user_type_id, "integer")) . "',
+	  ptags = '" . $db->quote(scrubData($this->_ptags)) . "',
+          active = '" . $db->quote(scrubData($this->_active, "integer")) . "',
+          bio = '" . $db->quote(scrubData($this->_bio, "richtext")) . "'
 	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
 
         $rUpStaff = $db->query($qUpStaff);
@@ -438,7 +438,7 @@ $headshot
 
     public function updatePassword($new_pass) {
 
-        $q = "UPDATE staff SET password = md5('" . mysql_real_escape_string(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
+        $q = "UPDATE staff SET password = md5('" . $db->quote(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
 
         $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
@@ -453,7 +453,7 @@ $headshot
 
     public function updateBio($new_bio) {
 
-        $q = "UPDATE staff SET bio = '" . mysql_real_escape_string(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
+        $q = "UPDATE staff SET bio = '" . $db->quote(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
 
         $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 

@@ -7,7 +7,7 @@
  *   @author adarby
  *   @date Dec 2012
  */
-
+use SubjectsPlus\Control\Querier;
 
 
 
@@ -49,8 +49,6 @@ if ($is_sidebar !== false) {
 }
 
 
-// Connect to database
-try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
 
 /////////////////////////
 // Route Request
@@ -97,7 +95,7 @@ switch ($_POST["flag"]) {
         // if it's a clone, note that
         $this_id = modifyDB("", "insert");
 
-        //print "this id = $this_id; our sub id = $our_subject_id<p>";
+        print "this id = $this_id; our sub id = $our_subject_id<p>";
         if ($this_id) {
             $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
             //print "obj = $obj<p>";
@@ -157,6 +155,7 @@ switch ($_POST["flag"]) {
 //////////////////
 
 function modifyDB($id, $type) {
+    $db = new Querier;
     /* print "<pre>";
       print_r($_POST);
       print "</pre>"; */
@@ -188,10 +187,11 @@ function modifyDB($id, $type) {
     }
     switch ($type) {
         case "insert":
-            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), mysql_real_escape_string($pluslet_extra), mysql_real_escape_string($pluslet_hide_titlebar), mysql_real_escape_string($pluslet_collapse_body),  mysql_real_escape_string($pluslet_supress_body), mysql_real_escape_string($pluslet_titlebar_styling));
-            $r = $db->query($q);
+            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body),  $db->quote($pluslet_supress_body), $db->quote($pluslet_titlebar_styling));
+            $db = new Querier;
+            $r = $db->exec($q);
             if ($r) {
-                $id = mysql_insert_id();
+                //$id = mysql_insert_id();
             	// If successful inserted, add link to plulset_staff table
             	// removed 2013 as unnecessary
             	/*
@@ -210,11 +210,11 @@ function modifyDB($id, $type) {
         case "update":
             // update pluslet table
             //print "$pluslet_extra";
-            //$q = sprintf("UPDATE pluslet set title = '%s', body = '%s', type = '%s', extra = '%s' WHERE pluslet_id = '$id'", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), $pluslet_extra);
+            //$q = sprintf("UPDATE pluslet set title = '%s', body = '%s', type = '%s', extra = '%s' WHERE pluslet_id = '$id'", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $pluslet_extra);
             $q = "UPDATE pluslet SET
-                title='" . mysql_real_escape_string($pluslet_title) . "',
-                body='" . mysql_real_escape_string($pluslet_body) . "',
-                type='" . mysql_real_escape_string($pluslet_type) . "',
+                title='" . $db->quote($pluslet_title) . "',
+                body='" . $db->quote($pluslet_body) . "',
+                type='" . $db->quote($pluslet_type) . "',
                 extra = '$pluslet_extra',
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',

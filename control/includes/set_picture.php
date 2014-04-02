@@ -11,8 +11,8 @@
     
 
 use SubjectsPlus\Control\Upload;
+use SubjectsPlus\Control\Querier;
     
-$subsubcat = "";
 $subcat = "";
 $page_title = "Set Picture";
 
@@ -49,10 +49,11 @@ if (is_numeric($_REQUEST["staff_id"])) {
 
 $staff_query = "select distinct lname, fname, email from staff WHERE staff_id = $staff_id";
 
-$staff_result = $db->query($staff_query);
-$staffer = mysql_fetch_row($staff_result);
+$db = new Querier;
+//$staff_result = $db->query($staff_query);
+$staffer = $db->query($staff_query);
 
-$truncated_email = explode("@", $staffer[2]);
+$truncated_email = explode("@", $staffer[0]["email"]);
 
 $test_file = $UserPath . "/_" . $truncated_email[0];
 
@@ -170,7 +171,7 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
 }
 
 print "<div id=\"maincontent\">
-<h2 class=\"bw_head\">" . _("Update Picture for ") . " $staffer[1] $staffer[0]</h2>";
+<h2 class=\"bw_head\">" . _("Update Picture for ") . $staffer[0]['fname'] . $staffer[0]['lname'] . "</h2>";
 print $upload_box;
 print $original_photo;
 print "</div>";

@@ -14,7 +14,7 @@
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
-
+use SubjectsPlus\Control\Querier;
 
 $subcat = "records";
 $page_title = "Edit Record";
@@ -79,11 +79,11 @@ if (isset($_POST["submit_record"])) {
     if ($_POST["title_id"] == "") {
 
         $querierDupe = new Querier();
-        $qDupe = "SELECT title_id, title FROM title WHERE title LIKE '" . mysql_real_escape_string($_POST["title"]) . "'";
+        $qDupe = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote($_POST["title"]) ;
         $dupetitleArray = $querierDupe->query($qDupe);
-
-        if ($dupetitleArray != "") {
-            echo _("There is already a record with this title: ") . "<a href=\"record.php?record_id=" . $dupetitleArray[0][0] . "\">" . $dupetitleArray[0][1] . "</a>.  " . _("Maybe do a search and make sure it doesn't already exist?");
+        print_r ($dupetitleArray);
+        if ($dupetitleArray) {
+            echo _("There is already a record with this title: ") . "<a href=\"record.php?record_id=" . $dupetitleArray[0] . "\">" . $dupetitleArray[1] . "</a>.  " . _("Maybe do a search and make sure it doesn't already exist?");
             return FALSE;
         }
     }

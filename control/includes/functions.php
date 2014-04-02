@@ -353,6 +353,7 @@ function getDBbySubBoxes($selected_sub) {
 }
 
 function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
+  $db = new Querier;
 
   global $dbName_SPlus;
 
@@ -363,7 +364,7 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
     $q = "insert into chchchanges (staff_id, ourtable, record_id, record_title, message)
         values(" . $staff_id . ", \"$table\", " . $item_id . ", \"" . $record_title . "\", \"$flag\")";
 
-    $r = $db->query($q);
+    $r = $db->exec($q);
     if ($r) {
       return true;
     } else {
@@ -384,7 +385,7 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
       $q = "insert into chchchanges (staff_id, ourtable, record_id, record_title, message)
             values(" . $staff_id . ", \"$table\", " . $item_id . ", \"" . $record_title . "\", \"$flag\")";
 
-      $r = $db->query($q);
+      $r = $db->exec($q);
       if ($r) {
         return true;
       } else {
@@ -404,7 +405,7 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
       }
 //print $q;
 
-      $r = $db->query($q);
+      $r = $db->exec($q);
       if ($r) {
         return true;
       } else {

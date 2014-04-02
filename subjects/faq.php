@@ -140,7 +140,7 @@ if ($displaytype == "search") {
 
     $full_query = "SELECT faq_id, question, answer, keywords
 	FROM `faq`
-	WHERE (question like '%" . mysql_real_escape_string($search_clause) . "%' OR answer like '%" . mysql_real_escape_string($search_clause) . "%' OR keywords like '%" . mysql_real_escape_string($search_clause) . "%')
+	WHERE (question like '%" . $db->quote($search_clause) . "%' OR answer like '%" . $db->quote($search_clause) . "%' OR keywords like '%" . $db->quote($search_clause) . "%')
 	Group BY question";
 
     $intro = "<p>Search for <strong>$search_clause</strong>.</p>";

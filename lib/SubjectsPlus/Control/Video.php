@@ -292,14 +292,14 @@ $thumbnail
     /////////////////////
 
     $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (
-	  '" . mysql_real_escape_string(scrubData($this->_title, "text")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_source, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_foreign_id, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_duration, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_date, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_vtags, "text")) . "'
+	  '" . $db->quote(scrubData($this->_title, "text")) . "',
+	  '" . $db->quote(scrubData($this->_description, "richtext")) . "',
+	  '" . $db->quote(scrubData($this->_source, "text")) . "',
+      '" . $db->quote(scrubData($this->_foreign_id, "text")) . "',
+      '" . $db->quote(scrubData($this->_duration, "text")) . "',
+      '" . $db->quote(scrubData($this->_date, "text")) . "',
+      '" . $db->quote(scrubData($this->_display, "integer")) . "',
+      '" . $db->quote(scrubData($this->_vtags, "text")) . "'
           )";
 
     $rInsertVid = $db->query($qInsertVid);
@@ -331,14 +331,14 @@ $thumbnail
     /////////////////////
 
     $qUpVid = "UPDATE video
-      SET title = '" . mysql_real_escape_string(scrubData($this->_title, "text")) . "',
-	  description = '" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "',
-	  source = '" . mysql_real_escape_string(scrubData($this->_source, "text")) . "',
-      foreign_id = '" . mysql_real_escape_string(scrubData($this->_foreign_id, "text")) . "',
-      duration = '" . mysql_real_escape_string(scrubData($this->_duration, "text")) . "',
-      date = '" . mysql_real_escape_string(scrubData($this->_date, "text")) . "',
-      display = '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      vtags = '" . mysql_real_escape_string(scrubData($this->_vtags, "text")) . "'
+      SET title = '" . $db->quote(scrubData($this->_title, "text")) . "',
+	  description = '" . $db->quote(scrubData($this->_description, "richtext")) . "',
+	  source = '" . $db->quote(scrubData($this->_source, "text")) . "',
+      foreign_id = '" . $db->quote(scrubData($this->_foreign_id, "text")) . "',
+      duration = '" . $db->quote(scrubData($this->_duration, "text")) . "',
+      date = '" . $db->quote(scrubData($this->_date, "text")) . "',
+      display = '" . $db->quote(scrubData($this->_display, "integer")) . "',
+      vtags = '" . $db->quote(scrubData($this->_vtags, "text")) . "'
       WHERE video_id = " . scrubData($this->_video_id, "integer");
 
     $rUpVid = $db->query($qUpVid);

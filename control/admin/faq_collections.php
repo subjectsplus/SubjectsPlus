@@ -30,7 +30,7 @@ if (isset($_POST["add_collection"])) {
     ////////////////
 
     $qInsert = "INSERT INTO faqpage (name, description) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["new_coll_name"])) . "', ''
+		'" . $db->quote(scrubData($_POST["new_coll_name"])) . "', ''
 		)";
 
     $rInsert = $db->query($qInsert);
@@ -62,7 +62,7 @@ if (isset($_POST["update_collections"])) {
 
     foreach ($result as $key => $value) {
         $qUp = "UPDATE faqpage SET
-		name = '" . mysql_real_escape_string(scrubData($value)) . "'
+		name = '" . $db->quote(scrubData($value)) . "'
 		WHERE faqpage_id = " . scrubData($key, "integer");
 
         //print $qUp;

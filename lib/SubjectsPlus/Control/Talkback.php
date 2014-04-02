@@ -316,14 +316,14 @@ class Talkback {
     /////////////////////
 
     $qInsertTB = "INSERT INTO talkback (question, q_from, date_submitted, answer, a_from, display, tbtags, cattags) VALUES (
-	  '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_q_from, "text")) . "',
+	  '" . $db->quote(scrubData($this->_question, "text")) . "',
+	  '" . $db->quote(scrubData($this->_q_from, "text")) . "',
       NOW(),
-	  '" . mysql_real_escape_string(scrubData($this->_answer, "richtext")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_a_from, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "'
-      '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
+	  '" . $db->quote(scrubData($this->_answer, "richtext")) . "',
+	  '" . $db->quote(scrubData($this->_a_from, "text")) . "',
+      '" . $db->quote(scrubData($this->_display, "integer")) . "',
+      '" . $db->quote(scrubData($this->_tbtags, "text")) . "'
+      '" . $db->quote(scrubData($this->_cattags, "text")) . "'
           )";
 
     $rInsertTB = $db->query($qInsertTB);
@@ -354,14 +354,14 @@ class Talkback {
     // update talkback table
     /////////////////////
 
-    $qUpTB = "UPDATE talkback SET question = '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
-	  q_from = '" . mysql_real_escape_string(scrubData($this->_q_from, "text")) . "',
-	  answer = '" . mysql_real_escape_string(scrubData($this->_answer, "richtext")) . "',";
+    $qUpTB = "UPDATE talkback SET question = '" . $db->quote(scrubData($this->_question, "text")) . "',
+	  q_from = '" . $db->quote(scrubData($this->_q_from, "text")) . "',
+	  answer = '" . $db->quote(scrubData($this->_answer, "richtext")) . "',";
   	  if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
-  	  else 	$qUpTB .= "a_from = '" . mysql_real_escape_string(scrubData($this->_a_from, "text")) . "',";
-  	  $qUpTB .= "display = '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      tbtags = '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "',
-      cattags = '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
+  	  else 	$qUpTB .= "a_from = '" . $db->quote(scrubData($this->_a_from, "text")) . "',";
+  	  $qUpTB .= "display = '" . $db->quote(scrubData($this->_display, "integer")) . "',
+      tbtags = '" . $db->quote(scrubData($this->_tbtags, "text")) . "',
+      cattags = '" . $db->quote(scrubData($this->_cattags, "text")) . "'
       WHERE talkback_id = " . scrubData($this->_talkback_id, "integer");
 
     $rUpTB = $db->query($qUpTB);

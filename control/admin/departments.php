@@ -28,13 +28,13 @@ if (isset($_POST["add_department"])) {
     ////////////////
     // Insert title table
     ////////////////
-
+    $db = new Querier;
     $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["department"])) . "', 
-		'" . mysql_real_escape_string(scrubData($_POST["telephone"])) . "', 
+		'" . $db->quote(scrubData($_POST["department"])) . "', 
+		'" . $db->quote(scrubData($_POST["telephone"])) . "', 
 		'0',
-        '" . mysql_real_escape_string(scrubData($_POST["email"])) . "', 
-        '" . mysql_real_escape_string(scrubData($_POST["url"])) . "'
+        '" . $db->quote(scrubData($_POST["email"])) . "', 
+        '" . $db->quote(scrubData($_POST["url"])) . "'
 		)";
 
     $rInsertDept = $db->query($qInsertDept);
@@ -86,11 +86,11 @@ if (isset($_POST["update_departments"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE department SET
-        name = '" . mysql_real_escape_string(scrubData($value[0])) . "',
-        telephone = '" . mysql_real_escape_string(scrubData($value[1])) . "',
+        name = '" . $db->quote(scrubData($value[0])) . "',
+        telephone = '" . $db->quote(scrubData($value[1])) . "',
         department_sort = '" . $row_count . "',
-        email = '" . mysql_real_escape_string(scrubData($value[2])) . "',
-        url = '" . mysql_real_escape_string(scrubData($value[3])) . "'
+        email = '" . $db->quote(scrubData($value[2])) . "',
+        url = '" . $db->quote(scrubData($value[3])) . "'
         WHERE department_id = " . scrubData($key, "integer");
 
         //print $qUpDept;

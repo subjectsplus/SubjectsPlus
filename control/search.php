@@ -22,7 +22,7 @@ $intro = _("<p>Please search for something with the box above.</p>");
 
 if (isset($_POST["searchterm"])) {
 
-    $searcher = mysql_real_escape_string(scrubData($_POST["searchterm"]));
+    $searcher = $db->quote(scrubData($_POST["searchterm"]));
 
     // Search all our categories
     // Guides, Records, Staff, FAQs, TalkBack
