@@ -7,6 +7,9 @@
  *   @date mar 2012
  *   @todo 
  */
+use SubjectsPlus\Control\Querier;
+
+
 $subsubcat = "";
 $subcat = "";
 $page_title = "View/Export Contact Information";
@@ -94,21 +97,20 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
   AND active = 1
   ORDER BY lname, fname";
   //print $q . "<br /><br />";
-
-  $r = MYSQL_QUERY($q);
+ 
+  $db = new Querier;
+  $r = $db->query($q);
   
   if( !$r ) return $data;
 
-  $row_count = mysql_num_rows($r);
+  $row_count = count($r);
 
-  while ($myrow = mysql_fetch_array($r, MYSQL_NUM)) {
+  foreach ($r as $myrow) {
     
     
     if ($recursion == 1) {
       $q2 = "select lname, staff_id from staff where staff_id = " . $myrow[9] . " ORDER BY lname, fname";
-      $r2 = MYSQL_QUERY($q2);
-
-      $supername = mysql_fetch_row($r2);
+      $supername = $db->query($q2);
 
       $superbits = explode("-", $super_chain);
 
@@ -187,7 +189,7 @@ for ( $i = 0; $i < $fields; $i++ )
     $header .= mysql_field_name( $export , $i ) . "\t";
 }
 
-while( $row = mysql_fetch_row( $export ) )
+foreach( $export as $row )
 {
     $line = '';
     foreach( $row as $value )

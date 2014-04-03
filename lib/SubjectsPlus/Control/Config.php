@@ -1,5 +1,5 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
 /**
  * sp_Config - this class handles all aspects of the configuration of SubjectsPlus
  *

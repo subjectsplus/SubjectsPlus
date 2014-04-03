@@ -8,8 +8,8 @@
  *   
  */
 
-use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Querier;
+
     
 $subsubcat = "";
 $subcat = "admin";
@@ -19,29 +19,25 @@ $feedback = "";
 //print_r($_POST);
 
 include("../includes/header.php");
-
+include("../includes/autoloader.php");
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+$db = new Querier;
 
 if (isset($_POST["add_department"])) {
 
     ////////////////
     // Insert title table
     ////////////////
-
+    $db = new Querier;
     $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["department"])) . "', 
-		'" . mysql_real_escape_string(scrubData($_POST["telephone"])) . "', 
+		'" . $db->quote(scrubData($_POST["department"])) . "', 
+		'" . $db->quote(scrubData($_POST["telephone"])) . "', 
 		'0',
-        '" . mysql_real_escape_string(scrubData($_POST["email"])) . "', 
-        '" . mysql_real_escape_string(scrubData($_POST["url"])) . "'
+        '" . $db->quote(scrubData($_POST["email"])) . "', 
+        '" . $db->quote(scrubData($_POST["url"])) . "'
 		)";
 
-    $rInsertDept = mysql_query($qInsertDept);
+    $rInsertDept = $db->query($qInsertDept);
 
     if ($rInsertDept) {
         $feedback = _("Thy Will Be Done.  Department list updated.");
@@ -90,15 +86,15 @@ if (isset($_POST["update_departments"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE department SET
-        name = '" . mysql_real_escape_string(scrubData($value[0])) . "',
-        telephone = '" . mysql_real_escape_string(scrubData($value[1])) . "',
+        name = '" . $db->quote(scrubData($value[0])) . "',
+        telephone = '" . $db->quote(scrubData($value[1])) . "',
         department_sort = '" . $row_count . "',
-        email = '" . mysql_real_escape_string(scrubData($value[2])) . "',
-        url = '" . mysql_real_escape_string(scrubData($value[3])) . "'
+        email = '" . $db->quote(scrubData($value[2])) . "',
+        url = '" . $db->quote(scrubData($value[3])) . "'
         WHERE department_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
-        $rUpDept = mysql_query($qUpDept);
+        $rUpDept = $db->query($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
@@ -127,7 +123,7 @@ if (isset($_POST["update_departments"])) {
 
 $querierDept = new Querier();
 $qDept = "select department_id, name, telephone, department_sort, email, url from department order by department_sort";
-$deptArray = $querierDept->getResult($qDept);
+$deptArray = $querierDept->query($qDept);
 $ourlist = "";
 
 foreach ($deptArray as $value) {

@@ -66,7 +66,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 		$this->mobjData[$this->mstrTag] = array();
 
@@ -265,7 +265,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 		if(!$lobjResults)
 		{
@@ -346,7 +346,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 		if(!$lobjResults)
 		{
@@ -382,7 +382,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 		if(!$lobjResults)
 		{
@@ -410,7 +410,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->getResult($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, true);
 
 		if(!$lobjResults)
 		{

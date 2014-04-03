@@ -43,7 +43,7 @@ class Pluslet_6 extends Pluslet {
 
         //print $qs;
 
-        $tocArray = $querier->getResult($qs);
+        $tocArray = $querier->query($qs);
 
         if ($tocArray) {
 

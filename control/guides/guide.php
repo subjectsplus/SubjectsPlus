@@ -15,9 +15,9 @@
  *   @todo Edit history not present
  *   @todo Make sure user is allowed to modify this guide (NOFUN not set)
  */
-use SubjectsPlus\Control\DBConnector;
-use SubjectsPlus\Control\Guide;
 
+use SubjectsPlus\Control\Guide;
+use SubjectsPlus\Control\Querier;
 
 if (!isset($_GET["subject_id"])) {
     header("location:index.php");
@@ -41,7 +41,7 @@ ob_start();
 
 include("../includes/header.php");
 
-try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
+
 
 $postvar_subject_id = scrubData($_GET['subject_id']);
 
@@ -53,8 +53,8 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
     $q = "SELECT staff_id from staff_subject WHERE subject_id = '$this_id'
     AND staff_id = '" . $_SESSION["staff_id"] . "'";
 
-    $r = mysql_query($q);
-    $num_rows = mysql_num_rows($r);
+    $r = $db->query($q);
+    $num_rows = count($r);
 
     if ($num_rows < 1) {
         $no_permission =  _("You do not have permission to edit this guide.  Ask the guide's creator to add you as a co-editor.");
@@ -73,9 +73,9 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] != 1) {
 if (isset($_GET["insert_pluslet"])) {
     $qa = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
     FROM pluslet p WHERE p.pluslet_id = '" . $_GET["insert_pluslet"] . "'";
-    $ra = mysql_query($qa);
+    $ra = $db->query($qa);
 
-    //$new_clone = mysql_fetch_row($ra);
+   
 }
 
 if (isset($this_id)) {
@@ -83,21 +83,19 @@ if (isset($this_id)) {
     // get name of quide
     $q = "SELECT subject, shortform, active, extra from subject where subject_id = '$subject_id'";
 
-    $r = mysql_query($q);
+    $r = $db->query($q);
 
     // If this guide doesn't exist, send them away
-    if (mysql_numrows($r) == 0) {
+    if (count($r) == 0) {
         header("location:index.php");
     }
 
 
+   
+    $subject_name = $r[0][0];
+    $shortform = $r[0][1];
 
-    $mysub = mysql_fetch_array($r);
-
-    $subject_name = $mysub["0"];
-    $shortform = $mysub["1"];
-
-    $jobj = json_decode($mysub["extra"]);
+    $jobj = json_decode($r[0]["extra"]);
 
     // In this section, we get the widths of the three columns, which add up to 12
     // We then do a little bit of math to get them into columns that add up to a bit under 100
@@ -176,9 +174,9 @@ $conditions = "";
 
 $q1 = "SELECT rank_id FROM rank WHERE subject_id = '$this_id'";
 
-$r1 = mysql_query($q1);
+$r1 = $db->query($q1);
 
-$num_resources = mysql_num_rows($r1);
+$num_resources = count($r1);
 
 if ($num_resources == 0) {
     $conditions = "AND pluslet_id != '1'";
@@ -190,9 +188,9 @@ WHERE type = 'Special'
 $conditions
 ";
 
-$r = mysql_query($q);
+$r = $db->query($q);
 
-while ($myrow = mysql_fetch_array($r)) {
+foreach ($r as $myrow) {
 	$lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
     $all_boxes .= "<li class=\"box-item draggable clone\" id=\"pluslet-id-" . $myrow[0] . "\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>\n";
     $all_boxes .= $myrow[1] . "</li>";

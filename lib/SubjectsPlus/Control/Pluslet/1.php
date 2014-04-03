@@ -66,15 +66,15 @@ class Pluslet_1 extends Pluslet {
 
         //print $q;
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         // set up some row colours
         $row_count = 0;
         $colour1 = "oddrow";
         $colour2 = "evenrow";
         $results = ""; // init
-        
-        while ($myrow = mysql_fetch_array($r)) {
+    
+        foreach ($r as $myrow) {
 
             
             $label = $myrow["title"];
@@ -194,14 +194,15 @@ class Pluslet_1 extends Pluslet {
 
         //print $source_string;
 
-        $source_result = mysql_query($source_string);
-        $total_rows = mysql_num_rows($source_result);
+        $source_result = $db->query($source_string);
+        $total_rows = count($source_result);
 
         $num_per_row = ceil($total_rows / 3);
 
         $row_count = 1;
 
-        while ($myrow = mysql_fetch_array($source_result)) {
+        foreach ($source_result as $myrow) {
+
 
             $source_id = $myrow["1"];
             $source_name = $myrow["0"];

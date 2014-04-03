@@ -110,7 +110,7 @@ class Staff {
       	/////////////
       	$querier = new  Querier();
       	$q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio from staff where email = '" . $this->_email . "'";
-      	$staffArray = $querier->getResult($q1);
+      	$staffArray = $querier->query($q1);
 
       	$this->_debug .= "<p class=\"debug\">Staff query: $q1";
       	// Test if these exist, otherwise go to plan B
@@ -140,7 +140,7 @@ class Staff {
         // Get staff table info
         // Don't call full record for regular log in
         /////////////
-        $querier = new  Querier();
+        $db = new Querier;
         if ($full_record == TRUE) {
         $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio
             , position_number, job_classification, room_number, supervisor_id, emergency_contact_name, emergency_contact_relation, emergency_contact_phone,
@@ -151,7 +151,7 @@ class Staff {
             FROM staff WHERE staff_id = " . $this->_staff_id;
         }
 
-        $staffArray = $querier->getResult($q1);
+        $staffArray = $db->query($q1);
 
         $this->_debug .= "<p class=\"debug\">Staff query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -216,7 +216,7 @@ class Staff {
 
     $querierDept = new  Querier();
     $qDept = "select department_id, name from department order by name";
-    $deptArray = $querierDept->getResult($qDept);
+    $deptArray = $querierDept->query($qDept);
 
     // create department dropdown
     $deptMe = new  Dropdown("department_id", $deptArray, $this->_department_id);
@@ -228,7 +228,7 @@ class Staff {
 
     $querierUserType = new  Querier();
     $qUserType = "select user_type_id, user_type from user_type order by user_type_id";
-    $userTypeArray = $querierUserType->getResult($qUserType);
+    $userTypeArray = $querierUserType->query($qUserType);
 
     // create type dropdown
     $typeMe = new  Dropdown("user_type_id", $userTypeArray, $this->_user_type_id);
@@ -240,7 +240,7 @@ class Staff {
 
     $querierSupervisor = new  Querier();
     $qSupervisor = "select staff_id, CONCAT( fname, ' ', lname ) AS fullname FROM staff WHERE ptags LIKE '%supervisor%' AND active = '1' ORDER BY lname";
-    $supervisorArray = $querierSupervisor->getResult($qSupervisor);
+    $supervisorArray = $querierSupervisor->query($qSupervisor);
 
     // create type dropdown
     $superviseMe = new  Dropdown("supervisor_id", $supervisorArray, $this->_supervisor_id, '', '* External Supervisor');
@@ -752,11 +752,11 @@ echo "</div>
     // Delete the records from staff table
     $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->exec($q);
 
     $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
-    if (mysql_affected_rows() != 0) {
+    if ($delete_result != 0) {
 
       // /////////////////////
       // Alter chchchanges table
@@ -775,7 +775,9 @@ echo "</div>
   }
 
   public function insertRecord() {
-
+    
+    $db = new Querier;
+           
     ////////////////
     // check and hash password
     ////////////////
@@ -808,7 +810,7 @@ echo "</div>
   		$department_id = "NULL";
   	}else
   	{
-  		$department_id = mysql_real_escape_string(scrubData($this->_department_id, "integer"));
+  		$department_id = $db->quote(scrubData($this->_department_id, "integer"));
   	}
 
   	if($this->_supervisor_id == '')
@@ -816,7 +818,7 @@ echo "</div>
   		$supervisor_id = "NULL";
   	}else
   	{
-  		$supervisor_id = mysql_real_escape_string(scrubData($this->_supervisor_id, "integer"));
+  		$supervisor_id = $db->quote(scrubData($this->_supervisor_id, "integer"));
   	}
 
   	if($this->_user_type_id == '')
@@ -824,7 +826,7 @@ echo "</div>
   		$user_type_id = "NULL";
   	}else
   	{
-  		$user_type_id = mysql_real_escape_string(scrubData($this->_user_type_id, "integer"));
+  		$user_type_id = $db->quote(scrubData($this->_user_type_id, "integer"));
   	}
 
     ////////////////
@@ -834,37 +836,37 @@ echo "</div>
     $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
       emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long) VALUES (
-		'" . mysql_real_escape_string(scrubData($this->_fname)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_lname)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_title)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_tel)) . "',
+		" . $db->quote(scrubData($this->_fname)) . ",
+		" . $db->quote(scrubData($this->_lname)) . ",
+		" . $db->quote(scrubData($this->_title)) . ",
+		" . $db->quote(scrubData($this->_tel)) . ",
 		" . $department_id . ",
-		'" . mysql_real_escape_string(scrubData($this->_staff_sort, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_email, "email")) . "',
+		" . $db->quote(scrubData($this->_staff_sort, "integer")) . ",
+		" . $db->quote(scrubData($this->_email, "email")) . ",
 		" . $user_type_id . ",
-		'" . mysql_real_escape_string(scrubData($this->_password)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_ptags)) . "',
-        '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
-        '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_position_number)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_job_classification)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_room_number)) . "',
+		" . $db->quote(scrubData($this->_password)) . ",
+		" . $db->quote(scrubData($this->_ptags)) . ",
+        " . $db->quote(scrubData($this->_active, "integer")) . ",
+        " . $db->quote(scrubData($this->_bio, "richtext")) . ",
+		" . $db->quote(scrubData($this->_position_number)) . ",
+		" . $db->quote(scrubData($this->_job_classification)) . ",
+		" . $db->quote(scrubData($this->_room_number)) . ",
 		" . $supervisor_id . ",
-		'" . mysql_real_escape_string(scrubData($this->_emergency_contact_name)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_emergency_contact_relation)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_emergency_contact_phone)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_street_address)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_city)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_state)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_zip)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_home_phone)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_cell_phone)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_fax)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_intercom)) . "',
-        '" . mysql_real_escape_string(scrubData($this->_lat_long)) . "'
+		" . $db->quote(scrubData($this->_emergency_contact_name)) . ",
+		" . $db->quote(scrubData($this->_emergency_contact_relation)) . ",
+		" . $db->quote(scrubData($this->_emergency_contact_phone)) . ",
+		" . $db->quote(scrubData($this->_street_address)) . ",
+		" . $db->quote(scrubData($this->_city)) . ",
+		" . $db->quote(scrubData($this->_state)) . ",
+		" . $db->quote(scrubData($this->_zip)) . ",
+		" . $db->quote(scrubData($this->_home_phone)) . ",
+		" . $db->quote(scrubData($this->_cell_phone)) . ",
+		" . $db->quote(scrubData($this->_fax)) . ",
+		" . $db->quote(scrubData($this->_intercom)) . ",
+        " . $db->quote(scrubData($this->_lat_long)) . "
 		)";
     //print $qInsertStaff;
-    $rInsertStaff = mysql_query($qInsertStaff);
+    $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
 
@@ -872,7 +874,7 @@ echo "</div>
       echo blunDer("We have a problem with the insert staff query: $qInsertStaff");
     }
 
-    $this->_staff_id = mysql_insert_id();
+    $this->_staff_id = $db->last_id();
 
     // create folder
 
@@ -900,6 +902,8 @@ echo "</div>
 
   public function updateRecord() {
 
+    $db = new Querier;
+      
   	////////////////
   	// check whether email is unique
   	///////////////
@@ -919,7 +923,7 @@ echo "</div>
   		$department_id = "NULL";
   	}else
   	{
-  		$department_id = mysql_real_escape_string(scrubData($this->_department_id, "integer"));
+  		$department_id = $db->quote(scrubData($this->_department_id, "integer"));
   	}
 
   	if($this->_supervisor_id == '')
@@ -927,7 +931,7 @@ echo "</div>
   		$supervisor_id = "NULL";
   	}else
   	{
-  		$supervisor_id = mysql_real_escape_string(scrubData($this->_supervisor_id, "integer"));
+  		$supervisor_id = $db->quote(scrubData($this->_supervisor_id, "integer"));
   	}
 
   	if($this->_user_type_id == '')
@@ -935,7 +939,7 @@ echo "</div>
   		$user_type_id = "NULL";
   	}else
   	{
-  		$user_type_id = mysql_real_escape_string(scrubData($this->_user_type_id, "integer"));
+  		$user_type_id = $db->quote(scrubData($this->_user_type_id, "integer"));
   	}
 
     /////////////////////
@@ -944,43 +948,36 @@ echo "</div>
     /////////////////////
 
     $qUpStaff = "UPDATE staff SET
-	  fname = '" . mysql_real_escape_string(scrubData($this->_fname)) . "',
-	  lname = '" . mysql_real_escape_string(scrubData($this->_lname)) . "',
-	  title = '" . mysql_real_escape_string(scrubData($this->_title)) . "',
-	  tel = '" . mysql_real_escape_string(scrubData($this->_tel)) . "',
+	  fname = " . $db->quote(scrubData($this->_fname)) . ",
+	  lname = " . $db->quote(scrubData($this->_lname)) . ",
+	  title = " . $db->quote(scrubData($this->_title)) . ",
+	  tel = " . $db->quote(scrubData($this->_tel)) . ",
 	  department_id = " . $department_id . ",
-	  staff_sort = '" . mysql_real_escape_string(scrubData($this->_staff_sort, "integer")) . "',
-	  email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "',
-	  user_type_id = " . mysql_real_escape_string(scrubData($this->_user_type_id, "integer")) . ",
-	  ptags = '" . mysql_real_escape_string(scrubData($this->_ptags)) . "',
-      active = '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
-      bio = '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "',
-	  position_number = '" . mysql_real_escape_string(scrubData($this->_position_number)) . "',
-	  job_classification = '" . mysql_real_escape_string(scrubData($this->_job_classification)) . "',
-	  room_number = '" . mysql_real_escape_string(scrubData($this->_room_number)) . "',
+	  staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . ",
+	  email = " . $db->quote(scrubData($this->_email, 'email')) . ",
+	  user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . ",
+	  ptags = " . $db->quote(scrubData($this->_ptags)) . ",
+      active = " . $db->quote(scrubData($this->_active, 'integer')) . ",
+      bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . ",
+	  position_number = " . $db->quote(scrubData($this->_position_number)) . ",
+	  job_classification = " . $db->quote(scrubData($this->_job_classification)) . ",
+	  room_number = " . $db->quote(scrubData($this->_room_number)) . ",
 	  supervisor_id = " . $supervisor_id . ",
-	  emergency_contact_name = '" . mysql_real_escape_string(scrubData($this->_emergency_contact_name)) . "',
-	  emergency_contact_relation = '" . mysql_real_escape_string(scrubData($this->_emergency_contact_relation)) . "',
-	  emergency_contact_phone = '" . mysql_real_escape_string(scrubData($this->_emergency_contact_phone)) . "',
-	  street_address = '" . mysql_real_escape_string(scrubData($this->_street_address)) . "',
-	  city = '" . mysql_real_escape_string(scrubData($this->_city)) . "',
-      state = '" . mysql_real_escape_string(scrubData($this->_state)) . "',
-	  zip = '" . mysql_real_escape_string(scrubData($this->_zip)) . "',
-	  home_phone = '" . mysql_real_escape_string(scrubData($this->_home_phone)) . "',
-	  cell_phone = '" . mysql_real_escape_string(scrubData($this->_cell_phone)) . "',
-      fax = '" . mysql_real_escape_string(scrubData($this->_fax)) . "',
-	  intercom = '" . mysql_real_escape_string(scrubData($this->_intercom)) . "',
-      lat_long = '" . mysql_real_escape_string(scrubData($this->_lat_long)) . "'
-	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
+	  emergency_contact_name = " . $db->quote(scrubData($this->_emergency_contact_name)) . ",
+	  emergency_contact_relation = " . $db->quote(scrubData($this->_emergency_contact_relation)) . ",
+	  emergency_contact_phone = " . $db->quote(scrubData($this->_emergency_contact_phone)) . ",
+	  street_address = " . $db->quote(scrubData($this->_street_address)) . ",
+	  city = " . $db->quote(scrubData($this->_city)) . ",
+      state = " . $db->quote(scrubData($this->_state)) . ",
+	  zip = " . $db->quote(scrubData($this->_zip)) . ",
+	  home_phone = " . $db->quote(scrubData($this->_home_phone)) . ",
+	  cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . ",
+      fax = " . $db->quote(scrubData($this->_fax)) . ",
+	  intercom = " . $db->quote(scrubData($this->_intercom)) . ",
+      lat_long = " . $db->quote(scrubData($this->_lat_long)) . "
+	  WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
-    $rUpStaff = mysql_query($qUpStaff);
-
-    $this->_debug = "<p class=\"debug\">Update query: $qUpStaff</p>";
-
-    if (!$rUpStaff) {
-      print "affected rows = " . mysql_affected_rows();
-      echo blunDer("We have a problem with the update staff query: $qUpStaff");
-    }
+    $rUpStaff = $db->exec($qUpStaff);
 
     // /////////////////////
     // Alter chchchanges table
@@ -995,11 +992,11 @@ echo "</div>
 
   public function updatePassword($new_pass) {
 
-    $q = "UPDATE staff SET password = md5('" . mysql_real_escape_string(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
+    $q = "UPDATE staff SET password = md5('" . $db->quote(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     if ($r) {
       $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "password update", $_SESSION['staff_id']);
@@ -1010,17 +1007,17 @@ echo "</div>
 
   public function updateBio($new_bio) {
 
-    $q = "UPDATE staff SET bio = '" . mysql_real_escape_string(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
+    $q = "UPDATE staff SET bio = '" . $db->quote(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
     // now our detailed version
-    $q2 = "UPDATE staff SET bio = '" . mysql_real_escape_string(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
+    $q2 = "UPDATE staff SET bio = '" . $db->quote(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug .= "<p class=\"debug\">Bio Update query: $q2</p>";
 
-    $r2 = MYSQL_QUERY($q2);
+    $r2 = $db->query($q2);
 
     if ($r) {
       $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "bio update", $_SESSION['staff_id']);
@@ -1124,21 +1121,22 @@ echo "</div>
   }
 
   function isEmailUnique($lstrType = "")
+    
   {
+    $db = new Querier;
   	switch (strtolower( $lstrType ))
   	{
   		case "insert":
-  			$lstrQuery = "SELECT email FROM staff WHERE email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "'";
+  			$lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email"));
   			break;
   		case "update":
-  			$lstrQuery = "SELECT email FROM staff WHERE email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "'
-  						  AND staff_id <> " . scrubData($this->_staff_id, "integer");
+  			$lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email")) . "AND staff_id <> " . scrubData($this->_staff_id, "integer");
   			break;
   		default:
   			return false;
   	}
-  	$lrscSQL = mysql_query($lstrQuery);
-  	$lintNumberOfRows = mysql_num_rows($lrscSQL);
+  	$lrscSQL = $db->query($lstrQuery);
+  	$lintNumberOfRows = count($lrscSQL);
   	if( $lintNumberOfRows > 0 ) return false;
   	return true;
   }

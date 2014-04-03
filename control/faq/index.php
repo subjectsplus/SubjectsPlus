@@ -6,7 +6,7 @@
  *   @author adarby
  *   @date march 2011
  */
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Querier;
     
 $subcat = "faq";
@@ -15,8 +15,7 @@ $page_title = "FAQ Admin";
 include("../includes/header.php");
 
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -37,7 +36,7 @@ $qFAQ = "SELECT faq_id, question, answer, keywords
 	ORDER BY faq_id DESC
 	$limit";
 
-$faqArray = $querierFAQ->getResult($qFAQ);
+$faqArray = $querierFAQ->query($qFAQ);
 
 $row_count1 = 0;
 $row_count2 = 0;

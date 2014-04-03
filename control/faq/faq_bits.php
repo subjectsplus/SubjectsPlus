@@ -2,7 +2,7 @@
 
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
-use SubjectsPlus\Control\DBConnector;
+
 
 /**
  *   @file faq_bits.php
@@ -20,11 +20,7 @@ $header = "noshow";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 //print_r($_POST);
 

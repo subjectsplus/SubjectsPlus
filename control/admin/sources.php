@@ -7,8 +7,9 @@
  *   @date feb 2011
  *   @todo
  */
-use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Staff;
+use SubjectsPlus\Control\Querier;
+
     
 $subsubcat = "";
 $subcat = "admin";
@@ -16,7 +17,7 @@ $page_title = "Admin Source Types";
 //print_r($_POST);
 
 include("../includes/header.php");
-
+$db = new Querier;
 //init
 $ourlist = "";
 $feedback = "";
@@ -28,11 +29,11 @@ if (isset($_POST["add_source"])) {
     ////////////////
 
     $qInsertSource = "INSERT INTO source (source, rs) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["source"])) . "', 
+		'" . $db->quote(scrubData($_POST["source"])) . "', 
 		'0'
 		)";
 
-    $rInsertSource = mysql_query($qInsertSource);
+    $rInsertSource = $db->query($qInsertSource);
 
     if ($rInsertSource) {
         $feedback = _("Thy Will Be Done.  Source list updated.");
@@ -62,12 +63,12 @@ if (isset($_POST["update_sources"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE source SET
-		source = '" . mysql_real_escape_string(scrubData($value)) . "', 
+		source = '" . $db->quote(scrubData($value)) . "', 
 		rs = '" . $row_count . "' 
 		WHERE source_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
-        $rUpDept = mysql_query($qUpDept);
+        $rUpDept = $db->query($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
@@ -91,7 +92,7 @@ if (isset($_POST["update_sources"])) {
 
 $querierDept = new Querier();
 $qSource = "select source_id, source, rs from source order by rs, source";
-$sourceArray = $querierDept->getResult($qSource);
+$sourceArray = $querierDept->query($qSource);
 
 foreach ($sourceArray as $value) {
 

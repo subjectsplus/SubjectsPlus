@@ -7,7 +7,7 @@
  *   @date mar 2011
  */
 
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
 
@@ -33,11 +33,7 @@ $sidebar_pluslets = "";
 $img_path = $PublicPath . "images";
 
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 // Generate list of acceptable user-submitted subjects
 //  WHERE active = '1'

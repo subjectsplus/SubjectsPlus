@@ -8,7 +8,9 @@
  *   @date mar 2011
  */
 
-use SubjectsPlus\Control\DBConnector;
+
+use SubjectsPlus\Control\Querier;
+
 
 $subcat = "guides";
 $page_title = "Modify Guides in SubjectsPlus";
@@ -22,8 +24,7 @@ $linkie_alt = _("Check Guide Links");
 $view_alt = _("View Guide on Public Site");
     
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -48,8 +49,8 @@ AND staff_subject.subject_id = subject.subject_id
 AND staff.staff_id = '$_SESSION[staff_id]'
 ORDER BY subject";
 
-$my_subs_result = MYSQL_QUERY($my_subs_query);
-$num_rows = mysql_num_rows($my_subs_result);
+$my_subs_result = $db->query($my_subs_query);
+$num_rows = count($my_subs_result);
 
 if ($num_rows > 0) {
 
@@ -59,10 +60,10 @@ if ($num_rows > 0) {
   $colour2 = "#F6E3E7";
   $colour3 = "highlight";
 
-  while ($myrow1 = mysql_fetch_array($my_subs_result)) {
-    $mysubs_id = $myrow1["0"];
-    $mysubs_name = stripslashes($myrow1["1"]);
-    $active = $myrow1["2"];
+  foreach ($my_subs_result as $myrow1) {
+    $mysubs_id = $myrow1[0];
+    $mysubs_name = stripslashes($myrow1[1]);
+    $active = $myrow1[2];
 
     $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 

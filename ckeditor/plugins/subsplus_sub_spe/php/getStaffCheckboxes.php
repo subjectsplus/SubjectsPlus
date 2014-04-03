@@ -1,5 +1,5 @@
 <?php
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Querier;
 
 //include subjectsplus config and functions files
@@ -10,8 +10,7 @@ include_once('../../../../control/includes/autoloader.php');
 global $AssetPath;
 
 try {
-	$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+	} catch (Exception $e) {
 	echo $e;
 }
 
@@ -21,7 +20,7 @@ if( isset($_COOKIE["our_guide"]) && isset($_COOKIE["our_guide_id"]) )
 {
 	$qs = "SELECT lname, fname, email, tel, title, s.staff_id from staff s, staff_subject ss WHERE s.staff_id = ss.staff_id and ss.subject_id = " . $_COOKIE["our_guide_id"] . " ORDER BY lname, fname";
 
-	$sugStaffArray = $querier->getResult($qs);
+	$sugStaffArray = $querier->query($qs);
 }
 
 $lobjStaffIds = array();
@@ -33,7 +32,7 @@ foreach( $sugStaffArray as $lobjStaff )
 
 $qs = "SELECT lname, fname, email, tel, title from staff s WHERE s.staff_id NOT IN ('" . implode( '\',\'', $lobjStaffIds ) . "')  ORDER BY lname, fname" ;
 
-$staffArray = $querier->getResult($qs);
+$staffArray = $querier->query($qs);
 
 if( count($sugStaffArray) > 0 )
 {

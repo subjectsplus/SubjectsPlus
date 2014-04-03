@@ -7,7 +7,9 @@
  *   @date march 2011
  *
  */
+    
 use SubjectsPlus\Control\Querier;
+
 
 $subsubcat = "";
 $subcat = "admin";
@@ -16,7 +18,7 @@ $page_title = "Admin FAQ Collections";
 //print_r($_POST);
 
 include("../includes/header.php");
-
+$db = new Querier;
 //init
 $ourlist = "";
 $feedback = "";
@@ -28,10 +30,10 @@ if (isset($_POST["add_collection"])) {
     ////////////////
 
     $qInsert = "INSERT INTO faqpage (name, description) VALUES (
-		'" . mysql_real_escape_string(scrubData($_POST["new_coll_name"])) . "', ''
+		'" . $db->quote(scrubData($_POST["new_coll_name"])) . "', ''
 		)";
 
-    $rInsert = mysql_query($qInsert);
+    $rInsert = $db->query($qInsert);
 
     if ($rInsert) {
         $feedback = _("Thy Will Be Done.  Updated.");
@@ -60,11 +62,11 @@ if (isset($_POST["update_collections"])) {
 
     foreach ($result as $key => $value) {
         $qUp = "UPDATE faqpage SET
-		name = '" . mysql_real_escape_string(scrubData($value)) . "'
+		name = '" . $db->quote(scrubData($value)) . "'
 		WHERE faqpage_id = " . scrubData($key, "integer");
 
         //print $qUp;
-        $rUp = mysql_query($qUp);
+        $rUp = $db->query($qUp);
 
         if (!$rUp) {
             $error = 1;
@@ -86,7 +88,7 @@ if (isset($_POST["update_collections"])) {
 
 $querierDept = new Querier();
 $q = "select faqpage_id, name from faqpage order by name";
-$resultArray = $querierDept->getResult($q);
+$resultArray = $querierDept->query($q);
 
 if ($resultArray) {
     foreach ($resultArray as $value) {

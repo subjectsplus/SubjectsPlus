@@ -14,18 +14,18 @@
  *   @author adarby
  *   @date update july 2012
  *   @todo
- */
-use SubjectsPlus\Control\DBConnector;
-    
+*/
+
+
+use SubjectsPlus\Control\Querier;
+
+
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+$db = new Querier;
+    
 
-try {
-	$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-	echo $e;
-}
 
 /* Set local variables */
 
@@ -156,9 +156,9 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 	}
 
   // Make a safe query
-	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `answer`, `tbtags`) VALUES ('%s', '%s', '%s', 'No', '', '%s')", mysql_real_escape_string($this_comment), mysql_real_escape_string($this_name), $todaycomputer, mysql_real_escape_string($set_filter));
+	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `answer`, `tbtags`) VALUES ('%s', '%s', '%s', 'No', '', '%s')", $db->quote($this_comment), $db->quote($this_name), $todaycomputer, $db->quote($set_filter));
   //print $query;
-	mysql_query($query);
+	$db->query($query);
 
 	if ($query) {
 		$stage_one = "ok";
@@ -183,10 +183,10 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 		$message = "<html><body><h2>Talk Back!</h2>\n\n";
 		$message .= "<strong>Date Submitted</strong>: $month $mday, $year<br />\n\n";
 		$message .= "<strong>Name</strong>:  ";
-		$message .= mysql_real_escape_string($this_name);
+		$message .= $db->quote($this_name);
 		$message .= "<br />\n\n
 		<strong>Question</strong>:  ";
-		$message .= mysql_real_escape_string($this_comment);
+		$message .= $db->quote($this_comment);
 		$message .= "<br /><br />\n\n";
 		$message .= "</body></html>";
 
@@ -225,8 +225,9 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 	$bonus_sql
 	AND YEAR(date_submitted) < '$this_year' 
 	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC ";
-
-	$our_result = MYSQL_QUERY($q_archived);
+    
+    $db = new Querier;
+	$our_result = $db->query($q_archived);
 
 	$comment_header = "<h2>" . _("Comments from Previous Years") . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\">" . _("See this year") . "</a></span></h2>";
 
@@ -239,8 +240,9 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 	$bonus_sql
 	AND YEAR(date_submitted) >= '$this_year' 
 	ORDER BY date_submitted DESC";
-
-	$our_result = MYSQL_QUERY($full_query);
+    
+    $db = new Querier;
+	$our_result = $db->query($full_query);
 
 	$comment_header = "<h2>" . _("Comments from ") . "$this_year <span style=\"font-size: 11px; font-weight: normal;\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _("See previous years") . "</a></span></h2>";
 
@@ -249,14 +251,14 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 
 /* Select all Records, either current or previous year*/
 
-$result_count = mysql_num_rows($our_result);
+$result_count = count($our_result);
 
 if ($result_count != 0) {
 
 	$row_count = 1;
 	$results = "";
 
-	while ($myrow = mysql_fetch_array($our_result)) {
+	foreach ($our_result as $myrow) {
 
 		$talkback_id = $myrow["0"];
 		$question = $myrow["1"];

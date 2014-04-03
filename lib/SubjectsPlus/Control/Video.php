@@ -65,7 +65,7 @@ class Video {
         $querier = new Querier();
         $q1 = "SELECT video_id, title, description, source, foreign_id, duration, date as vid_date, display, vtags
                     FROM video WHERE video_id = " . $this->_video_id;
-        $vidArray = $querier->getResult($q1);
+        $vidArray = $querier->query($q1);
 
         $this->_debug .= "<p>TB query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -256,7 +256,7 @@ $thumbnail
     // Delete the records from video table
     $q = "DELETE FROM video WHERE video_id = '" . $this->_video_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->query($q);
 
     $this->_debug = "<p>Del query: $q";
 
@@ -292,19 +292,19 @@ $thumbnail
     /////////////////////
 
     $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (
-	  '" . mysql_real_escape_string(scrubData($this->_title, "text")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_source, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_foreign_id, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_duration, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_date, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_vtags, "text")) . "'
+	  " . $db->quote(scrubData($this->_title, 'text')) . ",
+	  " . $db->quote(scrubData($this->_description, 'richtext')) . ",
+	  " . $db->quote(scrubData($this->_source, 'text')) . ",
+      " . $db->quote(scrubData($this->_foreign_id, 'text')) . ",
+      " . $db->quote(scrubData($this->_duration, 'text')) . "',
+      " . $db->quote(scrubData($this->_date, 'text')) . ",
+      " . $db->quote(scrubData($this->_display, 'integer')) . ",
+      " . $db->quote(scrubData($this->_vtags, 'text')) . "
           )";
 
-    $rInsertVid = mysql_query($qInsertVid);
+    $rInsertVid = $db->exec($qInsertVid);
 
-    $this->_video_id = mysql_insert_id();
+    $this->_video_id = $db->last_id();
 
     $this->_debug = "<p>1. insert: $qInsertVid</p>";
     if (!$rInsertVid) {
@@ -331,23 +331,19 @@ $thumbnail
     /////////////////////
 
     $qUpVid = "UPDATE video
-      SET title = '" . mysql_real_escape_string(scrubData($this->_title, "text")) . "',
-	  description = '" . mysql_real_escape_string(scrubData($this->_description, "richtext")) . "',
-	  source = '" . mysql_real_escape_string(scrubData($this->_source, "text")) . "',
-      foreign_id = '" . mysql_real_escape_string(scrubData($this->_foreign_id, "text")) . "',
-      duration = '" . mysql_real_escape_string(scrubData($this->_duration, "text")) . "',
-      date = '" . mysql_real_escape_string(scrubData($this->_date, "text")) . "',
-      display = '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      vtags = '" . mysql_real_escape_string(scrubData($this->_vtags, "text")) . "'
-      WHERE video_id = " . scrubData($this->_video_id, "integer");
+      SET title = " . $db->quote(scrubData($this->_title, 'text')) . ",
+	  description = " . $db->quote(scrubData($this->_description, 'richtext')) . ",
+	  source = " . $db->quote(scrubData($this->_source, 'text')) . ",
+      foreign_id = " . $db->quote(scrubData($this->_foreign_id, 'text')) . ",
+      duration = " . $db->quote(scrubData($this->_duration, 'text')) . ",
+      date = " . $db->quote(scrubData($this->_date, 'text')) . ",
+      display = " . $db->quote(scrubData($this->_display, 'integer')) . ",
+      vtags =  " . $db->quote(scrubData($this->_vtags, 'text')) . "
+      WHERE video_id = " . scrubData($this->_video_id, 'integer');
 
-    $rUpVid = mysql_query($qUpVid);
+    $rUpVid = $db->exec($qUpVid);
 
-    $this->_debug = "<p>1. update title: $qUpVid</p>";
-    if (!$rUpVid) {
-      print "affected rows = " . mysql_affected_rows();
-      echo blunDer("We have a problem with the video query: $qUpVid");
-    }
+
 
 
     // /////////////////////

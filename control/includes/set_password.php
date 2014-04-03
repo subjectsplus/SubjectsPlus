@@ -9,7 +9,7 @@
  *   @todo file uploader so staff can add their own pictures.
  */
     
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Staff;
     
 $subsubcat = "";
@@ -22,11 +22,7 @@ $no_header = "yes";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 // Make sure they have permission to change a password
 // needs to be either theirs, or they're an admin

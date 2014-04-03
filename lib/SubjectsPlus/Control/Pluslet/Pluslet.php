@@ -1,5 +1,5 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
 /**
  *   @file sp_Guide
  *   @brief manage guide metadata
@@ -53,7 +53,7 @@ class Pluslet {
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
         //print $q1;
-        $plusletArray = $querier->getResult($q1);
+        $plusletArray = $querier->query($q1);
 
         $this->_debug .= "<p>Pluslet query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -273,9 +273,9 @@ class Pluslet {
                     switch ($prefix) {
                         case "faq":
                             $query = "SELECT faq_id, question FROM `faq` WHERE faq_id IN(" . $fields[1] . ") ORDER BY question";
-                            $result = mysql_query($query);
+                            $result = $db->query($query);
                             $tokenized.= "<ul>";
-                            while ($myrow = mysql_fetch_row($result)) {
+                            foreach ($result as $myrow) {
                                 $tokenized.= "<li><a href=\"$FAQPath" . "?faq_id=$myrow[0]\" $target>" . stripslashes(htmlspecialchars_decode($myrow[1])) . "</a></li>";
                             }
                             $tokenized.= "</ul>";
@@ -346,9 +346,10 @@ class Pluslet {
                                     AND lt.title_id = t.title_id
                                     AND t.title_id = $fields[1]";
                             //print $query . "<br /><br />";
-                            $result = mysql_query($query);
+                            $result = $db->query($query);
 
-                            while ($myrow = mysql_fetch_row($result)) {
+                            foreach ($result as $myrow) {
+
                                 // eliminate final line breaks -- offset fixed 11/15/2011 agd
                                 $myrow[6] = preg_replace('/(<br \/>)+/', '', $myrow[6]);
                                 // See if it's a web format
@@ -378,8 +379,8 @@ class Pluslet {
                                         } elseif (isset($_GET["subject"])) {
                                             $q1 = "SELECT subject_id FROM subject WHERE shortform = '" . $_GET["subject"] . "'";
 
-                                            $r1 = mysql_query($q1);
-                                            $subject_id = mysql_fetch_row($r1);
+                                            $r1 = $db->query($q1);
+                                            $subject_id = $db->last_id($r1);
                                             $subject_id = $subject_id[0];
                                         }
 
@@ -429,7 +430,7 @@ class Pluslet {
 
                     		//print $qs;
 
-                    		$staffArray = $querier->getResult($qs);
+                    		$staffArray = $querier->query($qs);
 
                     		foreach ($staffArray as $value) {
 

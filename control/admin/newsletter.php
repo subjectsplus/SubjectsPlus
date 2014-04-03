@@ -175,9 +175,9 @@ dbCall($dbName);
 
 $q = "SELECT email FROM staff WHERE ptags LIKE '%newsletter%'";
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
-while($myrow =  mysql_fetch_array($r)) {
+foreach($r as $myrow) {
 
 	$recipients .= $myrow[0] . ",";
 }
@@ -192,7 +192,7 @@ $sq2 = "SELECT ourtable, record_id, record_title, message, date_added, fname, ln
 
 // print $sq2;
 
-$sr2 = MYSQL_QUERY($sq2);
+$sr2 = $db->query($sq2);
 
 $row_count = 0;
 $colour1 = "oddrow";
@@ -209,7 +209,7 @@ $talkback_count = 0;
 $updated_guider = array();
 $updated_recorder = array();
 
-while($myrow2 =  mysql_fetch_array($sr2)) {
+foreach($sr2 as $myrow2) {
 
 $message = $myrow2["3"];
 

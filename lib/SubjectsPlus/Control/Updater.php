@@ -257,7 +257,7 @@ class Updater
 	{
 		foreach($this->lobjNewTables as $lstrNQuery)
 		{
-			if( !mysql_query( $lstrNQuery ) )
+			if( !$db->query( $lstrNQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem creating new table." ) . "<br />$lstrNQuery" );
 				return FALSE;
@@ -266,7 +266,7 @@ class Updater
 
 		foreach($this->lobjInsertInto as $lstrIQuery)
 		{
-			if( !mysql_query( $lstrIQuery ) )
+			if( !$db->query( $lstrIQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem inserting new data into table." ) . "<br />$lstrIQuery" );
 				return FALSE;
@@ -282,7 +282,7 @@ class Updater
 
 		foreach($this->lobjAlterTables as $lstrAQuery)
 		{
-			if( !mysql_query( $lstrAQuery ) )
+			if( !$db->query( $lstrAQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
 				return FALSE;
@@ -351,7 +351,7 @@ class Updater
 
 		foreach($this->lobjFixData as $lstrFQuery)
 		{
-			if( !mysql_query( $lstrFQuery ) )
+			if( !$db->query( $lstrFQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem fixing existing data." ) . "<br />$lstrFQuery" );
 				return FALSE;
@@ -371,13 +371,13 @@ class Updater
 	{
 		$lstrQuery = "SHOW COLUMNS FROM `subject` LIKE 'keywords'";
 
-		$lrscResults = mysql_query( $lstrQuery );
+		$lrscResults = $db->query( $lstrQuery );
 
-		if( mysql_num_rows( $lrscResults ) > 0 )
+		if( count( $lrscResults ) > 0 )
 		{
 			$lstrQuery = "ALTER TABLE `subject` CHANGE COLUMN `keywords` `keywords_backup` VARCHAR(255) ";
 
-			if( !mysql_query( $lstrQuery ) )
+			if( !$db->query( $lstrQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem renaming existing keyword column." ) . "<br />$lstrQuery" );
 				return FALSE;
@@ -397,13 +397,13 @@ class Updater
 	{
 		$lstrQuery = "SHOW COLUMNS FROM `subject` LIKE 'keywords_backup'";
 
-		$lrscResults = mysql_query( $lstrQuery );
+		$lrscResults = $db->query( $lstrQuery );
 
-		if( mysql_num_rows( $lrscResults ) > 0 )
+		if( count( $lrscResults ) > 0 )
 		{
 			$lstrQuery = "ALTER TABLE `subject` DROP COLUMN `keywords`";
 
-			if( !mysql_query( $lstrQuery ) )
+			if( !$db->query( $lstrQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem droping for existing keyword column." ) . "<br />$lstrQuery" );
 				return FALSE;
@@ -411,7 +411,7 @@ class Updater
 
 			$lstrQuery = "ALTER TABLE `subject` CHANGE COLUMN `keywords_backup` `keywords` VARCHAR(255)";
 
-			if( !mysql_query( $lstrQuery ) )
+			if( !$db->query( $lstrQuery ) )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem renaming for existing keyword column." ) . "<br />$lstrQuery" );
 				return FALSE;

@@ -8,7 +8,7 @@
  *   @todo 
  */
 
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Staff;
     
 $subsubcat = "";
@@ -22,8 +22,7 @@ include("../includes/header.php");
 
 // Connect to database
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 

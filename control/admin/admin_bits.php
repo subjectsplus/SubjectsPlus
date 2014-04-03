@@ -1,7 +1,7 @@
 <?php
 
 use SubjectsPlus\Control\Querier;
-
+$db = new Querier;
 /**
  *   @file admin_bits.php
  *   @brief Inserting elements via .load into record.php, and updating staff table
@@ -24,6 +24,8 @@ $extra_q = "";
 $success = FALSE;
 $message = "";
 
+
+
 switch ($_REQUEST["action"]) {
   case "staff_mod":
 
@@ -34,7 +36,8 @@ switch ($_REQUEST["action"]) {
       // change the subject_id
       foreach ($_POST["selected"] as $value) {
         $q = "UPDATE staff_subject SET staff_id = " . $_POST["filter_key"] . " WHERE subject_id = $value";
-        $r = MYSQL_QUERY($q);
+        $r = $db->exec($q);
+          
         $extra_q .= $value . ",";
       }
 
@@ -63,7 +66,7 @@ switch ($_REQUEST["action"]) {
           // change the active field
           foreach ($_POST["selected"] as $value) {
             $q = "UPDATE subject SET active = '1' WHERE subject_id = $value";
-            $r = MYSQL_QUERY($q);
+            $r = $db->exec($q);
             $extra_q .= $value . ",";
           }
 
@@ -72,7 +75,7 @@ switch ($_REQUEST["action"]) {
           // change the active field
           foreach ($_POST["selected"] as $value) {
             $q = "UPDATE subject SET active = '0' WHERE subject_id = $value";
-            $r = MYSQL_QUERY($q);
+            $r = $db->exec($q);
             $extra_q .= $value . ",";
           }
 
@@ -81,7 +84,7 @@ switch ($_REQUEST["action"]) {
           // Here we're changing the type field in Subject table
           foreach ($_POST["selected"] as $value) {
             $q = "UPDATE subject SET type = '" . trim($_POST["filter_key"]) . "' WHERE subject_id = $value";
-            $r = MYSQL_QUERY($q);
+            $r = $db->exec($q);
             $extra_q .= $value . ",";
           }
 
@@ -133,11 +136,11 @@ switch ($_REQUEST["action"]) {
   case "update_permissions":
     // Update ptags for users.  Called by user.php?browse
     $qPtagger = "UPDATE staff set ptags = '" . scrubData($_POST["ptags"]) . "' WHERE staff_id = " . scrubData($_POST["update_id"], "integer");
-    $rPtagger = mysql_query($qPtagger);
+    $rPtagger = $db->exec($qPtagger);
 
     // @UM_only
     $qPtagger2 = "UPDATE staff set ptags = '" . scrubData($_POST["ptags"]) . "' WHERE staff_id = " . scrubData($_POST["update_id"], "integer");
-    $rPtagger2 = mysql_query($qPtagger2);
+    $rPtagger2 = $db->exec($qPtagger2);
 
     //print $qPtagger;
 
@@ -153,17 +156,17 @@ switch ($_REQUEST["action"]) {
     // Make sure no one is associated with this department
     $qChecker = "SELECT * FROM staff, department WHERE staff.department_id = department.department_id AND department.department_id = " . scrubData($_POST["delete_id"], "integer");
 
-    $rChecker = mysql_query($qChecker);
+    $rChecker = $db->query($qChecker);
 
     //print $qChecker;
 
-    if (mysql_affected_rows() != 0) {
+    if (count($rChecker) != 0) {
       print _("Your request cannot be completed:  There are one or more librarians associated with this subject");
     } else {
 
       $qDeleteDept = "DELETE FROM department WHERE department_id = " . scrubData($_POST["delete_id"], "integer");
 
-      $rDeleteDept = mysql_query($qDeleteDept);
+      $rDeleteDept = $db->exec($qDeleteDept);
 
       if (!$rDeleteDept) {
         echo blunDer("We have a problem with the clear rank query: $qDeleteDept");
@@ -179,17 +182,17 @@ switch ($_REQUEST["action"]) {
             WHERE f.faqpage_id = ff.faqpage_id
             AND f.faqpage_id = " . scrubData($_POST["delete_id"], "integer");
 
-    $rChecker = mysql_query($qChecker);
+    $rChecker = $db->query($qChecker);
 
     //print $qChecker;
 
-    if (mysql_affected_rows() != 0) {
+    if (count($rChecker) != 0) {
       print _("Your request cannot be completed:  There are one or more records linked to this item.");
     } else {
 
       $qDelete = "DELETE FROM faqpage WHERE faqpage_id = " . scrubData($_POST["delete_id"], "integer");
 
-      $rDelete = mysql_query($qDelete);
+      $rDelete = $db->exec($qDelete);
 
       if (!$rDelete) {
         echo blunDer("We have a problem with the delete source query: $qDelete");
@@ -204,17 +207,17 @@ switch ($_REQUEST["action"]) {
     // Make sure no one is associated with this source
     $qChecker = "SELECT * FROM rank, source WHERE rank.source_id = source.source_id AND source.source_id = " . scrubData($_POST["delete_id"], "integer");
 
-    $rChecker = mysql_query($qChecker);
+    $rChecker = $db->query($qChecker);
 
     //print $qChecker;
 
-    if (mysql_affected_rows() != 0) {
+    if (count($rChecker) != 0) {
       print _("Your request cannot be completed:  There are one or more records linked to this source");
     } else {
 
       $qDeleteSource = "DELETE FROM source WHERE source_id = " . scrubData($_POST["delete_id"], "integer");
 
-      $rDeleteSource = mysql_query($qDeleteSource);
+      $rDeleteSource = $db->query($qDeleteSource);
 
       if (!$rDeleteSource) {
         echo blunDer("We have a problem with the delete source query: $qDeleteSource");
@@ -231,17 +234,17 @@ switch ($_REQUEST["action"]) {
     $qChecker = "SELECT * FROM subject, subject_discipline WHERE subject.subject_id = subject_discipline.subject_id
     AND subject_discipline.discipline_id = " . scrubData($_POST["delete_id"], "integer");
 
-    $rChecker = mysql_query($qChecker);
+        $rChecker = $db->query($qChecker);
 
     //print $qChecker;
 
-    if (mysql_affected_rows() != 0) {
+    if (count($rChecker) != 0) {
       print _("Your request cannot be completed:  There are one or more records linked to this source");
     } else {
 
       $qDeleteD = "DELETE FROM discipline WHERE discipline_id = " . scrubData($_POST["delete_id"], "integer");
 
-      $rDeleteD = mysql_query($qDeleteD);
+      $rDeleteD = $db->exec($qDeleteD);
 
       if (!$rDeleteD) {
         echo blunDer("We have a problem with the delete source query: $qDeleteD");
@@ -278,7 +281,7 @@ $extra_q
 ORDER BY subject";
 
 $querier = new Querier();
-$subsArray = $querier->getResult($q);
+$subsArray = $querier->query($q);
 
 if (!empty($subsArray)) {
 

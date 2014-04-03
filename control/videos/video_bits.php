@@ -17,11 +17,7 @@ $header = "noshow";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 //print_r($_POST);
 
@@ -33,9 +29,9 @@ switch ($_REQUEST["type"]) {
       
       $qcheck = "SELECT video_id FROM video WHERE foreign_id = '" . $our_id . "'";
       //print $qcheck;
-      $rcheck = MYSQL_QUERY($qcheck);
+      $rcheck = $db->query($qcheck);
       
-      if (mysql_num_rows($rcheck) == 0) {
+      if (count($rcheck) == 0) {
         $qinsert = "INSERT INTO video (title, description, source, foreign_id, duration, date, display)
         values(\"" . $_POST["title"] . "\", \""  
         . $_POST["description"] . "\", \"" 
@@ -46,25 +42,25 @@ switch ($_REQUEST["type"]) {
           1                
         )";
         
-        $rinsert = MYSQL_QUERY($qinsert);
-        $video_id = mysql_insert_id();
+        $rinsert = $db->query($qinsert);
+        $video_id = $db->last_id();
         
         
       } else {
         // Do an update
         
         $qupdate = "UPDATE video 
-          SET title = '" . mysql_real_escape_string(scrubData($_POST["title"])) . "',
-          description = '" . mysql_real_escape_string(scrubData($_POST["description"], "richtext")) . "',
-          source = '" . mysql_real_escape_string(scrubData($_POST["source"])) . "',
-          foreign_id = '" . mysql_real_escape_string(scrubData($_POST["foreign_id"])) . "',
-          duration = '" . mysql_real_escape_string(scrubData($_POST["duration"])) . "',
-          date = '" . mysql_real_escape_string(scrubData($_POST["upload_date"])) . "'
+          SET title = '" . $db->quote(scrubData($_POST["title"])) . "',
+          description = '" . $db->quote(scrubData($_POST["description"], "richtext")) . "',
+          source = '" . $db->quote(scrubData($_POST["source"])) . "',
+          foreign_id = '" . $db->quote(scrubData($_POST["foreign_id"])) . "',
+          duration = '" . $db->quote(scrubData($_POST["duration"])) . "',
+          date = '" . $db->quote(scrubData($_POST["upload_date"])) . "'
           WHERE foreign_id = '" . $our_id . "'";
         
-        $rupdate = MYSQL_QUERY($qupdate);
-        $video_id = mysql_fetch_row($rcheck);
-        $video_id = $video_id[0];
+        $rupdate = $db->query($qupdate);
+        $video_id = $rupdate[0];
+          
       }
       // insert/update image
       

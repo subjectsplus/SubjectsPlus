@@ -7,7 +7,7 @@
  *   @author adarby, rgilmour
  *   @date mar 2013
  */
-use SubjectsPlus\Control\DBConnector;
+
 
 $subcat = "video";
 $page_title = "Video Admin";
@@ -15,8 +15,7 @@ $page_title = "Video Admin";
 include("../includes/header.php");
 
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -329,9 +328,9 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
     // check if this video is in place
     $qcheck = "SELECT title FROM video WHERE foreign_id = \"" . $this_vid_id . "\"";
     //print $qcheck;
-    $rcheck = MYSQL_QUERY($qcheck);
+    $rcheck = $db->query($qcheck);
 
-    if (mysql_num_rows($rcheck) == 0) {
+    if (count($rcheck) == 0) {
       $is_new = "";
       $add_string = "<a class=\"button add\" id=\"ingest---$this_vid_id\">" . _("INSERT Video Metadata") . "</a>";
     } else {
