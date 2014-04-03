@@ -902,6 +902,8 @@ echo "</div>
 
   public function updateRecord() {
 
+    $db = new Querier;
+      
   	////////////////
   	// check whether email is unique
   	///////////////
@@ -1125,11 +1127,10 @@ echo "</div>
   	switch (strtolower( $lstrType ))
   	{
   		case "insert":
-  			$lstrQuery = "SELECT email FROM staff WHERE email = '" . $db->quote(scrubData($this->_email, "email")) . "'";
+  			$lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email"));
   			break;
   		case "update":
-  			$lstrQuery = "SELECT email FROM staff WHERE email = '" . $db->quote(scrubData($this->_email, "email")) . "'
-  						  AND staff_id <> " . scrubData($this->_staff_id, "integer");
+  			$lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email")) . "AND staff_id <> " . scrubData($this->_staff_id, "integer");
   			break;
   		default:
   			return false;

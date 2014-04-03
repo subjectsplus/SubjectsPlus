@@ -95,7 +95,7 @@ switch ($_POST["flag"]) {
         // if it's a clone, note that
         $this_id = modifyDB("", "insert");
 
-        print "this id = $this_id; our sub id = $our_subject_id<p>";
+       
         if ($this_id) {
             $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
             //print "obj = $obj<p>";
@@ -167,7 +167,15 @@ function modifyDB($id, $type) {
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
     $pluslet_supress_body =  $_POST["boxsetting_suppress_body"];
-    $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];
+    
+    if (isset($_POST["boxsetting_titlebar_styling"])) {
+        
+        $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];
+
+    } else {
+        
+        $pluslet_titlebar_styling = null;
+    }
     
     // If clone isn't set, set to 0
     if (isset($_POST["clone"])) {
@@ -214,7 +222,7 @@ function modifyDB($id, $type) {
                 suppress_body = '$pluslet_supress_body',
                 titlebar_styling = '$pluslet_titlebar_styling'
                 WHERE pluslet_id ='$id'";
-            $r = $db->query($q);
+            $r = $db->exec($q);
             //print $q;
             if (!$r) {
                 print "<p>There was a problem with your insert:</p>";

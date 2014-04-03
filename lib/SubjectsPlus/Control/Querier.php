@@ -66,7 +66,7 @@ class Querier  {
            $result = $connection->query($sql);
         if (!$result) {
             
-            echo "<p>Woah! There was a problem with that query. Maybe this will help:";
+            echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
             print_r($connection->errorInfo()[2]);
             echo "</p>";
             echo $sql;

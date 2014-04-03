@@ -59,7 +59,7 @@ $alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restric
 
 $alpha_result = $db->query($alpha_query);
 
-    print_r($alpha_result);
+
     
 foreach ($alpha_result as $myletter) {
 
@@ -113,18 +113,17 @@ foreach ($all_ctags as $value) {
 //print $intro;
 
 
-if ($alpha_id) {
+if ($alpha_id & $full_query) {
 
-
+    
     $full_result = $db->query($full_query);
 
-    print_r($full_result);
     $row_count = 0;
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
     if ($full_result) {
-        foreach ($full_result as $my_row) {
+        foreach ($full_result as $myrow) {
 
             $label = $myrow[0];
             $url = $myrow[2];
@@ -138,11 +137,7 @@ if ($alpha_id) {
 
             $results .= "<div class=\"record-results\" class=\"$row_colour\">\n
         <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
-            /* not being used 
-        <span style=\"display: none;\" class=\"toggle\">$icons<br />\n
-        $blurb<br />\n 
-        <span class=\"smaller\">" . _("Location") . ": <a href=\"$url\">$url</a></span>\n
-        </span>\n*/
+   
         $results .= "</div>\n";
 
             $row_count++;
