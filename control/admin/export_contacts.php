@@ -70,7 +70,7 @@ emergency_contact_name AS 'Contact Name', emergency_contact_phone AS 'Contact Ph
 $db = new Querier;
 $export = $db->query($select);
 
-$fields = mysql_num_fields ( $export );
+$fields = count( $export );
 
 for ( $i = 0; $i < $fields; $i++ )
 {

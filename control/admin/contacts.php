@@ -110,9 +110,7 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
     
     if ($recursion == 1) {
       $q2 = "select lname, staff_id from staff where staff_id = " . $myrow[9] . " ORDER BY lname, fname";
-      $r2 = $db->query($q2);
-
-      $supername = mysql_fetch_row($r2);
+      $supername = $db->query($q2);
 
       $superbits = explode("-", $super_chain);
 

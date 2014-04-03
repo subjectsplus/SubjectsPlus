@@ -199,7 +199,7 @@ class LinkChecker {
 			<?php else:
 
 					$link_list = array();
-					while($box_result as $box_data)
+					foreach($box_result as $box_data)
 					{
 						?>
 						<h2>Checking "<?php print $box_data['title']; ?>" Box:</h2>
