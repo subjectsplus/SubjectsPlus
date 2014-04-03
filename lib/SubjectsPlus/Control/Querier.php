@@ -115,3 +115,4 @@ class Querier  {
         return $last_id;
     }
 }
+?>
