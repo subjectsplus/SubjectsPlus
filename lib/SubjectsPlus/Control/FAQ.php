@@ -317,23 +317,14 @@ class FAQ {
 
     $this->_debug = "<p>Del query: $q";
 
-    if (mysql_affected_rows() != 0) {
-      //removed by david because new db referential integrity does this automatically
-      //$q2 = "DELETE FROM faq_faqpage WHERE faq_id = '" . $this->_faq_id . "'";
-      //$delete_result2 = $db->query($q2);
-      //$this->_debug .= "<p>Del query 2: $q2";
-
-      //$q3 = "DELETE FROM faq_subject WHERE faq_id = '" . $this->_faq_id . "'";
-      //$delete_result3 = $db->query($q3);
-      //$this->_debug .= "<p>Del query 2: $q3";
+      if (count($delete_result) != 0) {
+  
     } else {
       // message
       $this->_message = _("There was a problem with your delete (stage 1 of 2).");
       return FALSE;
     }
 
-    //if ($delete_result2) {
-      // message
       if ($_GET["wintype"] == "pop") {
         $this->_message = _("Thy will be done.  Offending FAQ deleted.  Close window to continue.");
       } else {
@@ -362,20 +353,15 @@ class FAQ {
     /////////////////////
     $db = new Querier;
     $qInsert = "INSERT INTO faq (question, answer, keywords) VALUES (
-	  '" . $db->quote(scrubData($this->_question, "text")) . "',
-	  '" . $db->quote(scrubData($this->_answer, "richtext")) . "',
-          '" . $db->quote(scrubData($this->_keywords, "text")) . "'
+	  " . $db->quote(scrubData($this->_question, 'text')) . ",
+	  " . $db->quote(scrubData($this->_answer, 'richtext')) . ",
+          " . $db->quote(scrubData($this->_keywords, 'text')) . "
           )";
 
     $rInsert = $db->exec($qInsert);
-/*
-    $this->_faq_id = mysql_insert_id();
 
-    $this->_debug = "<p>1. insert: $qInsert</p>";
-    if (!$rInsert) {
-      echo blunDer("We have a problem with the tb query: $qInsert");
-    }
-*/
+    $this->_faq_id = $db->last_id();
+
     /////////////////////
     // insert into rank
     ////////////////////
@@ -405,18 +391,15 @@ class FAQ {
     // update faq table
     /////////////////////
 
-    $qUpFAQ = "UPDATE faq SET question = '" . $db->quote(scrubData($this->_question, "text")) . "',
-	  answer = '" . $db->quote(scrubData($this->_answer, "richtext")) . "',
-	  keywords = '" . $db->quote(scrubData($this->_keywords, "text")) . "'
-          WHERE faq_id = " . scrubData($this->_faq_id, "integer");
+    $qUpFAQ = "UPDATE faq SET question = " . $db->quote(scrubData($this->_question, "text")) . ",
+	  answer = " . $db->quote(scrubData($this->_answer, 'richtext')) . ",
+	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . ",
+          WHERE faq_id = " . scrubData($this->_faq_id, 'integer');
 
     $rUpFAQ = $db->query($qUpFAQ);
 
     $this->_debug = "<p>1. update faq: $qUpFAQ</p>";
-    if (!$rUpFAQ) {
-      print "affected rows = " . mysql_affected_rows();
-      echo blunDer("We have a problem with the update faq query: $qUpFAQ");
-    }
+   
 
     /////////////////////
     // clear faq_subject
@@ -469,8 +452,8 @@ class FAQ {
     
     for ($i = 0; $i < $this->_subject_count; $i++) {
       $qUpSub = "INSERT INTO faq_subject (faq_id, subject_id) VALUES (
-                '" . scrubData($this->_faq_id, "integer") . "',
-                '" . scrubData($this->_subject[$i], "integer") . "')";
+                " . scrubData($this->_faq_id, 'integer') . ",
+                " . scrubData($this->_subject[$i], 'integer') . ")";
 
       $rUpSub = $db->query($qUpSub);
 
@@ -511,4 +494,3 @@ class FAQ {
 }
 
 ?>
-

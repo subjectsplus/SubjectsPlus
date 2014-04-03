@@ -427,10 +427,11 @@ function lastModded($table, $record_id, $zero_message = 1, $show_email = 1) {
   $r = $db->query($q);
   $my_mod = $r;
 
+ 
   if ($my_mod) {
-    $val = $my_mod[1];
+                           $val = $my_mod[0]['last_modified'];
     if ($show_email == 1) {
-      $val .= ", " . $my_mod[0];
+      $val .= ", " . $my_mod[0]['email'];
     }
   } else {
     if ($zero_message == 1) {

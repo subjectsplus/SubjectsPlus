@@ -10,6 +10,24 @@ namespace SubjectsPlus\Control;
  *   @date
  *   @todo fix getQuery()
  */
+    
+// Fetch styles: http://www.php.net/manual/en/pdostatement.fetch.php
+// Example:
+    
+/*
+     
+     $q = new Querier;
+     $rows = $q->query('SELECT * FROM department');
+     print_r($rows);
+     
+     foreach ($rows as $value) {
+     
+     echo $value['name'];
+     
+     }
+     
+*/
+
 use PDO;
 
 class Querier  {
@@ -37,23 +55,7 @@ class Querier  {
     }
 
     public function query($sql, $fetch_style = NULL) {
-        // Fetch styles: http://www.php.net/manual/en/pdostatement.fetch.php
-        // Example:
-
-        /*
-
-          $q = new Querier;
-          $rows = $q->query('SELECT * FROM department');
-          print_r($rows);
-
-          foreach ($rows as $value) {
-
-          echo $value['name'];
-
-          }
-
-         */
-
+        
         // Default is numbered array
         if ($fetch_style === NULL) {
             $fetch_style = PDO::FETCH_BOTH;

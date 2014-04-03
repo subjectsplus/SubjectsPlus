@@ -1,5 +1,5 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
 /**
  * sp_Installer - this class handles the installation of SubjectsPlus
  *
@@ -359,6 +359,7 @@ class Installer
 	 */
 	public function install( )
 	{
+        $db = new Querier;
 		foreach($this->lobjCreateQueries as $lstrCQuery)
 		{
 			if( !$db->query( $lstrCQuery ) )

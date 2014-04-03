@@ -73,8 +73,8 @@ class Pluslet_1 extends Pluslet {
         $colour1 = "oddrow";
         $colour2 = "evenrow";
         $results = ""; // init
-        
-        while ($myrow = mysql_fetch_array($r)) {
+    
+        foreach ($r as $myrow) {
 
             
             $label = $myrow["title"];
@@ -201,7 +201,8 @@ class Pluslet_1 extends Pluslet {
 
         $row_count = 1;
 
-        while ($myrow = mysql_fetch_array($source_result)) {
+        foreach ($source_result as $myrow) {
+
 
             $source_id = $myrow["1"];
             $source_name = $myrow["0"];

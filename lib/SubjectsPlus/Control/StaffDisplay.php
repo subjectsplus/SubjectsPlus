@@ -39,7 +39,7 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $current_dept = "";
 
-        while ($myrow = mysql_fetch_array($r)) {
+        foreach ($r as $myrow) {
 
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -102,7 +102,7 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $current_dept = "";
 
-        while ($myrow = mysql_fetch_array($r)) {
+           foreach ($r as $myrow) {
 
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -185,7 +185,7 @@ class StaffDisplay {
         $colour1 = "oddrow";
         $colour2 = "evenrow";
 
-        while ($myrow = mysql_fetch_array($r)) {
+          foreach ($r as $myrow) {
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
           $items .= "<tr class=\"$row_colour\">\n
@@ -212,7 +212,7 @@ class StaffDisplay {
 
           $subrowcount = 0;
 
-          while ($subrow = mysql_fetch_array($sub_result)) {
+          foreach ($sub_result as $sub_row) {
 
             if ($mod_rewrite == 1) {
               $linky = $subrow[1];
@@ -254,7 +254,7 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $subrowsubject = "";
 
-        while ($myrow = mysql_fetch_array($r)) {
+    foreach ($r as $myrow) {
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
           $tel = $tel_prefix . $myrow["tel"];

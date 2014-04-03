@@ -8,7 +8,7 @@
  *   @todo 
  */
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
+
 
 $subsubcat = "";
 $subcat = "";
@@ -97,7 +97,8 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
   AND active = 1
   ORDER BY lname, fname";
   //print $q . "<br /><br />";
-
+ 
+  $db = new Querier;
   $r = $db->query($q);
   
   if( !$r ) return $data;

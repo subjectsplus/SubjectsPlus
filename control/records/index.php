@@ -59,7 +59,8 @@ $alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restric
 
 $alpha_result = $db->query($alpha_query);
 
-
+    print_r($alpha_result);
+    
 foreach ($alpha_result as $myletter) {
 
     $atoz .="<a href=\""
@@ -117,6 +118,7 @@ if ($alpha_id) {
 
     $full_result = $db->query($full_query);
 
+    print_r($full_result);
     $row_count = 0;
     $colour1 = "oddrow";
     $colour2 = "evenrow";

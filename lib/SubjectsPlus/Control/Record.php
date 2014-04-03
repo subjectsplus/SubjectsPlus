@@ -544,11 +544,11 @@ public function buildLocation() {
  	AND title.title_id = location_title.title_id
  	AND title.title_id = '" . $this->_record_id . "'";
 
- 	$delete_result = $db->query($q);
+ 	$delete_result = $db->exec($q);
 
  	$this->_debug = "<p>Del query: $q";
 
- 	if (mysql_affected_rows() != 0) {
+     if ($delete_result != 0) {
  		$q2 = "DELETE FROM rank WHERE title_id = '" . $this->_record_id . "'";
  		$delete_result2 = $db->query($q2);
  		$this->_debug .= "<p>Del query 2: $q2";
@@ -602,7 +602,7 @@ if (!$rInsertTitle) {
 	echo blunDer("We have a problem with the insert title query: $qInsertTitle");
 }
 
-$this->_record_id = mysql_insert_id();
+$this->_record_id = $db->last_id();
 $this->_title_id = $this->_record_id;
 
     /////////////////////
@@ -644,12 +644,6 @@ public function updateRecord($notrack = 0) {
 	$qUpTitle = "UPDATE title SET title = '" . $our_title . "', alternate_title = '" . $our_alternate_title . "', description = '" . $db->quote(scrubData($this->_description, "richtext")) . "', pre = '" . $our_prefix . "' WHERE title_id = " . scrubData($this->_title_id, "integer");
 
 	$rUpTitle = $db->query($qUpTitle);
-
-	$this->_debug = "<p>1. update title: $qUpTitle</p>";
-	if (!$rUpTitle) {
-		print "affected rows = " . mysql_affected_rows();
-		echo blunDer("We have a problem with the title query: $qUpTitle");
-	}
 
     /////////////////////
     // clear rank
@@ -744,7 +738,7 @@ if (!$rInsertLoc) {
 	echo blunDer("We have a problem with the insert locations query: $qInsertLoc");
 }
 
-$current_location_id = mysql_insert_id();
+$current_location_id = $db->last_id();
 } else {
         // Existing location, do an update
 	$qUpLoc = "UPDATE location SET format = '" . scrubData($this->_format[$key], "integer") .

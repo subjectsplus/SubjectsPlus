@@ -316,19 +316,19 @@ class Talkback {
     /////////////////////
 
     $qInsertTB = "INSERT INTO talkback (question, q_from, date_submitted, answer, a_from, display, tbtags, cattags) VALUES (
-	  '" . $db->quote(scrubData($this->_question, "text")) . "',
-	  '" . $db->quote(scrubData($this->_q_from, "text")) . "',
+	  " . $db->quote(scrubData($this->_question, "text")) . ",
+	  " . $db->quote(scrubData($this->_q_from, "text")) . ",
       NOW(),
-	  '" . $db->quote(scrubData($this->_answer, "richtext")) . "',
-	  '" . $db->quote(scrubData($this->_a_from, "text")) . "',
-      '" . $db->quote(scrubData($this->_display, "integer")) . "',
-      '" . $db->quote(scrubData($this->_tbtags, "text")) . "'
-      '" . $db->quote(scrubData($this->_cattags, "text")) . "'
+	  " . $db->quote(scrubData($this->_answer, "richtext")) . ",
+	  " . $db->quote(scrubData($this->_a_from, "text")) . ",
+      " . $db->quote(scrubData($this->_display, "integer")) . ",
+      " . $db->quote(scrubData($this->_tbtags, "text")) . ",
+      " . $db->quote(scrubData($this->_cattags, "text")) . "
           )";
 
-    $rInsertTB = $db->query($qInsertTB);
+    $rInsertTB = $db->exec($qInsertTB);
 
-    $this->_talkback_id = mysql_insert_id();
+    $this->_talkback_id = $db->last_id();
 
     $this->_debug = "<p>1. insert: $qInsertTB</p>";
     if (!$rInsertTB) {
@@ -354,23 +354,22 @@ class Talkback {
     // update talkback table
     /////////////////////
 
-    $qUpTB = "UPDATE talkback SET question = '" . $db->quote(scrubData($this->_question, "text")) . "',
-	  q_from = '" . $db->quote(scrubData($this->_q_from, "text")) . "',
-	  answer = '" . $db->quote(scrubData($this->_answer, "richtext")) . "',";
-  	  if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
-  	  else 	$qUpTB .= "a_from = '" . $db->quote(scrubData($this->_a_from, "text")) . "',";
-  	  $qUpTB .= "display = '" . $db->quote(scrubData($this->_display, "integer")) . "',
-      tbtags = '" . $db->quote(scrubData($this->_tbtags, "text")) . "',
-      cattags = '" . $db->quote(scrubData($this->_cattags, "text")) . "'
-      WHERE talkback_id = " . scrubData($this->_talkback_id, "integer");
+    $qUpTB = "UPDATE talkback SET question = '" . $db->quote(scrubData($this->_question, 'text')) . ",
+	  q_from = " . $db->quote(scrubData($this->_q_from, 'text')) . ",
+	  answer = " . $db->quote(scrubData($this->_answer, 'richtext')) . ",";
+        if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
+      
+        else 	$qUpTB .= "a_from = '" . $db->quote(scrubData($this->_a_from, 'text')) . ",";
+  	  
+      $qUpTB .= "display = '" . $db->quote(scrubData($this->_display, 'integer')) . ",
+      
+      tbtags = " . $db->quote(scrubData($this->_tbtags, 'text')) . ",
+      cattags = " . $db->quote(scrubData($this->_cattags, 'text')) . "
+      
+      WHERE talkback_id = " . scrubData($this->_talkback_id, 'integer');
 
-    $rUpTB = $db->query($qUpTB);
+    $rUpTB = $db->exec($qUpTB);
 
-    $this->_debug = "<p>1. update title: $qUpTB</p>";
-    if (!$rUpTB) {
-      print "affected rows = " . mysql_affected_rows();
-      echo blunDer("We have a problem with the talkback query: $qUpTB");
-    }
 
     // /////////////////////
     // Alter chchchanges table

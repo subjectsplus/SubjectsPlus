@@ -67,7 +67,7 @@ eres_display, display_note, pre, citation_guide, ctags
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    while ($myrow = mysql_fetch_array($r)) {
+    foreach ($r as $myrow) {
 
       $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 

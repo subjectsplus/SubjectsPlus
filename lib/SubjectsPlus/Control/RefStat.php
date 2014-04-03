@@ -182,7 +182,7 @@ echo "</form>";
         $x++;
       }
       
-    $this->_refstat_id = mysql_insert_id();
+    $this->_refstat_id = $db->last_id();
 
     $this->_debug = "<p>1. insert: $qInsert</p>";
     if (!$rInsert) {

@@ -312,11 +312,11 @@ $headshot
         // Delete the records from staff table
         $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
-        $delete_result = $db->query($q);
+        $delete_result = $db->exec($q);
 
         $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
-        if (mysql_affected_rows() != 0) {
+        if ($delete_result != 0) {
 
             // /////////////////////
             // Alter chchchanges table
@@ -339,7 +339,9 @@ $headshot
         ////////////////
         // hash password
         ////////////////
-
+        
+        $db = new Querier;
+        
         $this->_password = md5($this->_password);
 
         ////////////////
@@ -369,7 +371,7 @@ $headshot
             echo blunDer("We have a problem with the insert staff query: $qInsertStaff");
         }
 
-        $this->_staff_id = mysql_insert_id();
+        $this->_staff_id = $db->last_id();
 
         // create folder
 
@@ -403,27 +405,20 @@ $headshot
         /////////////////////
 
         $qUpStaff = "UPDATE staff SET
-	  fname = '" . $db->quote(scrubData($this->_fname)) . "',
-	  lname = '" . $db->quote(scrubData($this->_lname)) . "',
-	  title = '" . $db->quote(scrubData($this->_title)) . "',
-	  tel = '" . $db->quote(scrubData($this->_tel)) . "',
-	  department_id = '" . $db->quote(scrubData($this->_department_id, "integer")) . "',
-	  staff_sort = '" . $db->quote(scrubData($this->_staff_sort, "integer")) . "',
-	  email = '" . $db->quote(scrubData($this->_email, "email")) . "',
-	  user_type_id = '" . $db->quote(scrubData($this->_user_type_id, "integer")) . "',
-	  ptags = '" . $db->quote(scrubData($this->_ptags)) . "',
-          active = '" . $db->quote(scrubData($this->_active, "integer")) . "',
-          bio = '" . $db->quote(scrubData($this->_bio, "richtext")) . "'
-	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
+        fname = " . $db->quote(scrubData($this->_fname)) . ",
+        lname = " . $db->quote(scrubData($this->_lname)) . ",
+        title = " . $db->quote(scrubData($this->_title)) . ",
+        tel = " . $db->quote(scrubData($this->_tel)) . ",
+        department_id = " . $db->quote(scrubData($this->_department_id, 'integer')) . ",
+        staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . ",
+        email = " . $db->quote(scrubData($this->_email, 'email')) . ",
+        user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . ",
+        ptags = " . $db->quote(scrubData($this->_ptags)) . ",
+        active = " . $db->quote(scrubData($this->_active, 'integer')) . ",
+        bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . "
+        WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
-        $rUpStaff = $db->query($qUpStaff);
-
-        $this->_debug = "<p class=\"debug\">Update query: $qUpStaff</p>";
-        if (!$rUpStaff) {
-            print "affected rows = " . mysql_affected_rows();
-            echo blunDer("We have a problem with the update staff query: $qUpStaff");
-        }
-
+        $rUpStaff = $db->exec($qUpStaff);
 
         // /////////////////////
         // Alter chchchanges table

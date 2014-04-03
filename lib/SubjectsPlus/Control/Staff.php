@@ -752,11 +752,11 @@ echo "</div>
     // Delete the records from staff table
     $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
-    $delete_result = $db->query($q);
+    $delete_result = $db->exec($q);
 
     $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
-    if (mysql_affected_rows() != 0) {
+    if ($delete_result != 0) {
 
       // /////////////////////
       // Alter chchchanges table
@@ -775,7 +775,9 @@ echo "</div>
   }
 
   public function insertRecord() {
-
+    
+    $db = new Querier;
+           
     ////////////////
     // check and hash password
     ////////////////
@@ -872,7 +874,7 @@ echo "</div>
       echo blunDer("We have a problem with the insert staff query: $qInsertStaff");
     }
 
-    $this->_staff_id = mysql_insert_id();
+    $this->_staff_id = $db->last_id();
 
     // create folder
 
@@ -944,43 +946,36 @@ echo "</div>
     /////////////////////
 
     $qUpStaff = "UPDATE staff SET
-	  fname = '" . $db->quote(scrubData($this->_fname)) . "',
-	  lname = '" . $db->quote(scrubData($this->_lname)) . "',
-	  title = '" . $db->quote(scrubData($this->_title)) . "',
-	  tel = '" . $db->quote(scrubData($this->_tel)) . "',
+	  fname = " . $db->quote(scrubData($this->_fname)) . ",
+	  lname = " . $db->quote(scrubData($this->_lname)) . ",
+	  title = " . $db->quote(scrubData($this->_title)) . ",
+	  tel = " . $db->quote(scrubData($this->_tel)) . ",
 	  department_id = " . $department_id . ",
-	  staff_sort = '" . $db->quote(scrubData($this->_staff_sort, "integer")) . "',
-	  email = '" . $db->quote(scrubData($this->_email, "email")) . "',
-	  user_type_id = " . $db->quote(scrubData($this->_user_type_id, "integer")) . ",
-	  ptags = '" . $db->quote(scrubData($this->_ptags)) . "',
-      active = '" . $db->quote(scrubData($this->_active, "integer")) . "',
-      bio = '" . $db->quote(scrubData($this->_bio, "richtext")) . "',
-	  position_number = '" . $db->quote(scrubData($this->_position_number)) . "',
-	  job_classification = '" . $db->quote(scrubData($this->_job_classification)) . "',
-	  room_number = '" . $db->quote(scrubData($this->_room_number)) . "',
+	  staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . ",
+	  email = " . $db->quote(scrubData($this->_email, 'email')) . ",
+	  user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . ",
+	  ptags = " . $db->quote(scrubData($this->_ptags)) . ",
+      active = " . $db->quote(scrubData($this->_active, 'integer')) . ",
+      bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . ",
+	  position_number = " . $db->quote(scrubData($this->_position_number)) . ",
+	  job_classification = " . $db->quote(scrubData($this->_job_classification)) . ",
+	  room_number = " . $db->quote(scrubData($this->_room_number)) . ",
 	  supervisor_id = " . $supervisor_id . ",
-	  emergency_contact_name = '" . $db->quote(scrubData($this->_emergency_contact_name)) . "',
-	  emergency_contact_relation = '" . $db->quote(scrubData($this->_emergency_contact_relation)) . "',
-	  emergency_contact_phone = '" . $db->quote(scrubData($this->_emergency_contact_phone)) . "',
-	  street_address = '" . $db->quote(scrubData($this->_street_address)) . "',
-	  city = '" . $db->quote(scrubData($this->_city)) . "',
-      state = '" . $db->quote(scrubData($this->_state)) . "',
-	  zip = '" . $db->quote(scrubData($this->_zip)) . "',
-	  home_phone = '" . $db->quote(scrubData($this->_home_phone)) . "',
-	  cell_phone = '" . $db->quote(scrubData($this->_cell_phone)) . "',
-      fax = '" . $db->quote(scrubData($this->_fax)) . "',
-	  intercom = '" . $db->quote(scrubData($this->_intercom)) . "',
-      lat_long = '" . $db->quote(scrubData($this->_lat_long)) . "'
-	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
+	  emergency_contact_name = " . $db->quote(scrubData($this->_emergency_contact_name)) . ",
+	  emergency_contact_relation = " . $db->quote(scrubData($this->_emergency_contact_relation)) . ",
+	  emergency_contact_phone = " . $db->quote(scrubData($this->_emergency_contact_phone)) . ",
+	  street_address = " . $db->quote(scrubData($this->_street_address)) . ",
+	  city = " . $db->quote(scrubData($this->_city)) . ",
+      state = " . $db->quote(scrubData($this->_state)) . ",
+	  zip = " . $db->quote(scrubData($this->_zip)) . ",
+	  home_phone = " . $db->quote(scrubData($this->_home_phone)) . ",
+	  cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . ",
+      fax = " . $db->quote(scrubData($this->_fax)) . ",
+	  intercom = " . $db->quote(scrubData($this->_intercom)) . ",
+      lat_long = " . $db->quote(scrubData($this->_lat_long)) . "
+	  WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
-    $rUpStaff = $db->query($qUpStaff);
-
-    $this->_debug = "<p class=\"debug\">Update query: $qUpStaff</p>";
-
-    if (!$rUpStaff) {
-      print "affected rows = " . mysql_affected_rows();
-      echo blunDer("We have a problem with the update staff query: $qUpStaff");
-    }
+    $rUpStaff = $db->exec($qUpStaff);
 
     // /////////////////////
     // Alter chchchanges table

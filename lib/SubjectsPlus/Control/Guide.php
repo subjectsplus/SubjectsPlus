@@ -538,11 +538,11 @@ class Guide
         ON t.subject_id = s.subject_id
         WHERE p.type != 'Special' AND s.subject_id = '" . $this->_subject_id . "'";
 
-        $delete_result = $db->query($q);
+        $delete_result = $db->exec($q);
 
         $this->_debug = "<p>Del query: $q";
 
-        if (mysql_affected_rows() != 0) {
+        if ($delete_result != 0) {
             //delete subject
             $q2 = "DELETE subject,staff_subject FROM subject LEFT JOIN staff_subject ON subject.subject_id = staff_subject.subject_id WHERE subject.subject_id = '" . $this->_subject_id . "'";
             $delete_result2 = $db->query($q2);
@@ -612,7 +612,7 @@ class Guide
         $db = new Querier;
         $rInsertSubject = $db->exec($qInsertSubject);
 
-        //$this->_subject_id = mysql_insert_id();
+        $this->_subject_id = $db->last_insert();
 
 
         $this->_debug = "<p>1. insert subject: $qInsertSubject</p>";
@@ -713,11 +713,7 @@ class Guide
         $insert_parent->exec($parent_query);
 
 
-        $this->_debug = "<p>1. update title: $qUpSubject</p>";
-        if (!$rUpSubject) {
-            print "affected rows = " . mysql_affected_rows();
-            echo blunDer("We have a problem with the title query: $qUpSubject");
-        }
+       
 
         /////////////////////
         // clear staff_subject
@@ -896,7 +892,7 @@ class Guide
 
             $query = "select extra from subject where subject_id = '{$this->_subject_id}'";
             $result = $db->query($query);
-            //$sub = mysql_fetch_row($result);
+            
             //print_r ($result);
             $jobj = json_decode($result[0]["extra"]);
             $col_widths = explode("-", $jobj->{'maincol'});
@@ -1005,11 +1001,6 @@ class Guide
 
         $rUpExtra = $db->query($qUpExtra);
 
-        $this->_debug = "<p>1. update title: $qUpExtra</p>";
-        if (!$rUpExtra) {
-            print "affected rows = " . mysql_affected_rows();
-            echo blunDer("We have a problem with the title query: $qUpExtra");
-        }
     }
 
     function modifySS()
