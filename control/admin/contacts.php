@@ -189,7 +189,7 @@ for ( $i = 0; $i < $fields; $i++ )
     $header .= mysql_field_name( $export , $i ) . "\t";
 }
 
-while( $row = mysql_fetch_row( $export ) )
+foreach( $export as $row )
 {
     $line = '';
     foreach( $row as $value )

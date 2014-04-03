@@ -91,9 +91,10 @@ switch ($_REQUEST["type"]) {
                 AND ss.staff_id = st.staff_id
                 AND s.shortform = '" . $_POST["shortform"] . "'";
             //print $q;
+            $db = new Querier
             $r = $db->query($q);
 
-            while ($row = mysql_fetch_array($r)) {
+            foreach ($r as $row) {
 
                 $mail_to .= $row[1] . ",";
             }

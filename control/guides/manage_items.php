@@ -32,9 +32,9 @@ if (isset($_REQUEST["subject_id"])) {
 
     $q = "SELECT subject, shortform FROM subject WHERE subject_id = '$subject_id'";
 
-    $r = $db->query($q);
+    $mysub = $db->query($q);
 
-    $mysub = mysql_fetch_row($r);
+   
 
     $subject_name = $mysub[0];
     $shortform = $mysub[1];
@@ -71,7 +71,7 @@ $subs_result = $db->query($subs_query);
 // create the option
 $subs_option_boxes = "";
 
-while ($myrow = mysql_fetch_array($subs_result)) {
+foreach ($subs_result as $myrow) {
     $subs_id = $myrow["0"];
     $subs_name = $myrow["1"];
 
@@ -101,7 +101,7 @@ $ourlist = ""; // init
 
 if ($num_rows != "") {
     $row_count = 0;
-    while ($myrow = mysql_fetch_row($r)) {
+    foreach ($r as $myrow) {
 
         $this_source_id = $myrow[4];
 

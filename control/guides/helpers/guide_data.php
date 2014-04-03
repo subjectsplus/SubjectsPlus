@@ -127,10 +127,10 @@ switch ($_POST["flag"]) {
         $subject_id = scrubData($_POST["subject_id"], "int");
 
         $q = "DELETE FROM `pluslet` where pluslet_id = '$delete_id' AND type != 'Special'";
-        $r = $db->query($q);
+        $r = $db->exec($q);
 
     	//added by dgonzalez because if pluslet is special, no deletetion so need to manually delete relationship
-    	if( mysql_affected_rows() == 0 )
+    	if( count($r) == 0 )
     	{
     		$q2 = "DELETE pt FROM `pluslet_tab` pt INNER JOIN tab t
     				ON pt.tab_id = t.tab_id

@@ -119,17 +119,18 @@ $newlist .= "</ul>\n";
 // List guides function -- no other page uses it ? //
 
 function listGuides($search = "", $type="all") {
-
+    $db = new Querier();
+    
     $andclause = "";
     global $guide_path;
 
     if ($search != "") {
         $search = scrubData($search);
-        $andclause .= " AND subject LIKE '%" . mysql_escape_string($search) . "%'";
+        $andclause .= " AND subject LIKE '%" . $db->quote($search) . "%'";
     }
 
     if ($type != "all") {
-        $andclause .= " AND type='" . mysql_escape_string($type) . "'";
+        $andclause .= " AND type='" . $db->quote($type) . "'";
     }
 
     $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";

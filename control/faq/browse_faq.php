@@ -51,7 +51,8 @@ if ($postvar_type == "holding") {
     $r2 = $db->query($q2);
 
     print "<ul>";
-    while ($myrow2 = mysql_fetch_array($r2)) {
+     
+    foreach ($r2 as $myrow2) {
       print "<li><a class=\"showmedium\" href=\"faq.php?faq_id=" . $myrow2["faq_id"] . "&wintype=pop\">" . stripslashes(htmlspecialchars_decode($myrow2["question"])) . "</a></li>";
     }
     print "</ul>";
@@ -89,7 +90,7 @@ ORDER BY faq_id DESC";
     $r2 = $db->query($q2);
 
     print "<ul>";
-    while ($myrow2 = mysql_fetch_array($r2)) {
+    foreach ($r2 as $myrow2) {
       print "<li><a class=\"showmedium\" href=\"faq.php?faq_id=" . $myrow2["faq_id"] . "&wintype=pop\">" . stripslashes(htmlspecialchars_decode($myrow2["question"])) . "</a></li>";
     }
     print "</ul>";

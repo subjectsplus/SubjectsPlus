@@ -43,7 +43,7 @@ switch ($_REQUEST["type"]) {
         )";
         
         $rinsert = $db->query($qinsert);
-        $video_id = mysql_insert_id();
+        $video_id = $db->last_id();
         
         
       } else {
@@ -59,8 +59,8 @@ switch ($_REQUEST["type"]) {
           WHERE foreign_id = '" . $our_id . "'";
         
         $rupdate = $db->query($qupdate);
-        $video_id = mysql_fetch_row($rcheck);
-        $video_id = $video_id[0];
+        $video_id = $rupdate[0];
+          
       }
       // insert/update image
       

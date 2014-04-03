@@ -258,7 +258,7 @@ if ($result_count != 0) {
 	$row_count = 1;
 	$results = "";
 
-	while ($myrow = mysql_fetch_array($our_result)) {
+	foreach ($our_result as $myrow) {
 
 		$talkback_id = $myrow["0"];
 		$question = $myrow["1"];

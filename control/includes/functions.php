@@ -376,9 +376,9 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
         FROM `chchchanges`
         WHERE record_id = \"$item_id\" and ourtable = \"$table\" ORDER BY date_added DESC";
 
-    $rtest = $db->query($qtest);
+    $result = $db->query($qtest);
 
-    $result = mysql_fetch_row($rtest);
+    
 
 // If there are no results, we need to insert a record
     if (!$result) {
@@ -512,8 +512,8 @@ function blunDer($message, $type = 1) {
 
 function findDescOverride($subject_id, $title_id) {
   $query = "SELECT description_override FROM rank WHERE subject_id = '$subject_id' AND title_id = '$title_id'";
-  $result = $db->query($query);
-  $override_text = mysql_fetch_row($result);
+  $override_text = $db->query($query);
+ 
   if ($override_text[0] != "") {
     return $override_text[0];
   }
@@ -790,7 +790,7 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
     return;
   }
 
-  while ($myrow = mysql_fetch_array($r)) {
+  foreach ($r as $myrow) {
 
     if ($link_name == 1) {
       $email = $myrow["email"];

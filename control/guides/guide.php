@@ -75,7 +75,7 @@ if (isset($_GET["insert_pluslet"])) {
     FROM pluslet p WHERE p.pluslet_id = '" . $_GET["insert_pluslet"] . "'";
     $ra = $db->query($qa);
 
-    //$new_clone = mysql_fetch_row($ra);
+   
 }
 
 if (isset($this_id)) {

@@ -55,7 +55,7 @@ $qnew = "SELECT title, location, access_restrictions FROM title t, location_titl
 $rnew = $db->query($qnew);
 
 $newlist = "<ul>\n";
-while ($myrow = mysql_fetch_array($rnew)) {
+foreach ($rnew as $myrow)) {
   $db_url = "";
 
   // add proxy string if necessary

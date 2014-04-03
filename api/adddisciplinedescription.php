@@ -37,7 +37,7 @@ foreach($lobjResults as $lobjRow)
 
 	$lstrQuery = "UPDATE subject SET description = 'This is a default description', extra = '$lstrExtra' WHERE subject_id = {$lobjRow['subject_id']}";
 
-	$db->query($lstrQuery) or die("mysql_error no update");
+	$db->exec($lstrQuery);
 }
 
 $lstrQuery = "SELECT * FROM staff";
@@ -62,7 +62,7 @@ foreach($lobjResults as $lobjRow)
 
 	$lstrQuery = "UPDATE staff SET extra = '$lstrExtra' WHERE staff_id = {$lobjRow['staff_id']}";
 
-	$db->query($lstrQuery) or die("mysql_error no update");
+	$db->exec($lstrQuery);
 }
 
 echo "done updating staff and subject tables to include descriptions and disciplines";

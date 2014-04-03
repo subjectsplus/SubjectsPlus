@@ -74,7 +74,7 @@ $num_rows = count($r);
 if ($num_rows != 0) {
 
 
-  while ($myrow = mysql_fetch_array($r)) {
+  foreach ($r as $myrow) {
 
     $patterns = "/'|\"/";
     $replacements = "";

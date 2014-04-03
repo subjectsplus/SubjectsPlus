@@ -30,7 +30,7 @@ $row_count = 0;
 	if ($show_edit == 0) {$prefix = "coll"; } else {$prefix = "";}
 
 	//go through all results and print out checkbox
-	while($myrow2 =  mysql_fetch_array($results_array)) {
+	foreach($results_array as $myrow2) {
 	$row_colour = ($row_count % 2) ? $colour1 : $colour2;
 		print "<div style=\"clear: both; padding: 3px 5px;\" class=\"$row_colour\">
 		<input name=\"but\" type=\"checkbox\" value=\"$prefix$myrow2[0]\">" . stripslashes(htmlspecialchars_decode($myrow2[1]));

@@ -206,7 +206,7 @@ $results = "";
 	$index = '';
     $results = '';
 
-    while ($myrow = mysql_fetch_array($full_result)) {
+    foreach ($full_result as $myrow) {
 
         
         

@@ -38,7 +38,7 @@ if (isset($_POST["search_terms"]))
 	} else
 	{
 		//while rows exist
-		while ($myrow = mysql_fetch_array($r))
+		foreach ($r as $myrow)
 		{
 			$token = "";
 

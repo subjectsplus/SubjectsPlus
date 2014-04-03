@@ -25,7 +25,7 @@ $db = new Querier;
 $q = "SELECT email FROM staff WHERE user_type_id = '1'";
 $r = $db->query($q);
 
-while ($okemail = mysql_fetch_array($r)) {
+foreach ($r as $okemail) {
 
     $names = explode("@", $okemail[0]);
     $ok_names[] = $names[0];
@@ -60,9 +60,7 @@ GROUP BY s.lname";
 
 //print $qstaffer;
 
-$rstaffer = $db->query($qstaffer);
-
-$staffmem = mysql_fetch_row($rstaffer);
+$staffmem = $db->query($qstaffer);
 
 $tel = $tel_prefix . $staffmem[4];
 
@@ -106,7 +104,7 @@ if ($staffmem[8] != "") {
     $subject_listing = "<p class=\"clear-both\"><br /><strong>Subject Liaison for . . . </strong></p>
 <div style=\"float: left; width: 47%\">";
 
-    while ($mysubs = mysql_fetch_array($r)) {
+    foreach ($r as $mysubs) {
 
         if ($mod_rewrite == 1) {
             $linky = $mysubs[2];
