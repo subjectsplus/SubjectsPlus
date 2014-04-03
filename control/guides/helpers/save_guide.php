@@ -55,7 +55,7 @@ foreach( $lobjTabs as $lobjTab )
 	//print $qi . "<br />";
 	$ir = $db->query($qi);
 
-	//$lintTabId = mysql_insert_id($dbc->getConnection());
+	$lintTabId = $db->last_id();
 
 	$left_col = $lobjTab["left_data"];
 	$center_col = $lobjTab["center_data"];

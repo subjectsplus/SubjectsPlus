@@ -191,20 +191,13 @@ function modifyDB($id, $type) {
             $db = new Querier;
             $r = $db->exec($q);
             if ($r) {
-                //$id = mysql_insert_id();
-            	// If successful inserted, add link to plulset_staff table
-            	// removed 2013 as unnecessary
-            	/*
-                //print "INSERT ID = $id";
-                $staff_id = $_POST["staff_id"];
-                $q2 = "INSERT INTO pluslet_staff (pluslet_id, staff_id) VALUES ('$id', '$staff_id')";
-                //print $q2;
-                $r2 = $db->query($q2);
-                */
-            } else {
+                               $id = $db->last_id();
+                
+            	            } else {
                 print "<p>There was a problem with your insert:</p>";
                 print "<p>$q</p>";
-                $id = false;
+                
+                                $id = false;
             }
             break;
         case "update":

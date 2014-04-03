@@ -8,6 +8,7 @@ namespace SubjectsPlus\Control;
  * @date Jan 2011
  * @todo better blunDer interaction, better message, maybe hide the blunder errors until the end
  */
+
 class Guide
 {
 
@@ -895,9 +896,9 @@ class Guide
 
             $query = "select extra from subject where subject_id = '{$this->_subject_id}'";
             $result = $db->query($query);
-            $sub = mysql_fetch_row($result);
-
-            $jobj = json_decode($sub[0]);
+            //$sub = mysql_fetch_row($result);
+            //print_r ($result);
+            $jobj = json_decode($result[0]["extra"]);
             $col_widths = explode("-", $jobj->{'maincol'});
             $purified = ""; // init
 

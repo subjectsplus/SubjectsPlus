@@ -9,7 +9,7 @@
  */
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
+
     
 $subsubcat = "";
 $subcat = "admin";
@@ -17,7 +17,7 @@ $page_title = "Admin Source Types";
 //print_r($_POST);
 
 include("../includes/header.php");
-
+$db = new Querier;
 //init
 $ourlist = "";
 $feedback = "";

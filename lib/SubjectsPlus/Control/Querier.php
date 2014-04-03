@@ -106,4 +106,10 @@ class Querier  {
         return $quoted_string;
         
     }
+    
+    public function last_id() {
+        $connection = $this->_connection;
+        $last_id = $connection->lastInsertId();
+        return $last_id;
+    }
 }

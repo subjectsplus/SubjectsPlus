@@ -9,7 +9,7 @@
  */
     
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
+
 
 $subsubcat = "";
 $subcat = "admin";
@@ -18,7 +18,7 @@ $page_title = "Admin FAQ Collections";
 //print_r($_POST);
 
 include("../includes/header.php");
-
+$db = new Querier;
 //init
 $ourlist = "";
 $feedback = "";
