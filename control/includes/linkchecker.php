@@ -22,11 +22,7 @@ include("../includes/header.php");
 $shortie = scrubData($_REQUEST["shortform"]);
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 if (!isset($_POST["runcheck"])) {
     $linkReport = "<p>" . _("The link report can take a few minutes to run, depending on how many links you have on the page.  So be patient.") . "</p><br />

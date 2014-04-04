@@ -455,26 +455,49 @@ function setupSaveButton( lstrSelector )
 				var pitem_type = item_type[2];
 				var extra = {};
 
-				jQuery(lobjThis).find('input[name^=' + item_type[2] + '-extra]').each(function()
+                //parse text inputs to create extra fields
+				jQuery(lobjThis).find('input[name^=' + item_type[2] + '-extra][type=text]').each(function()
 				{
 					var name_split = jQuery(this).attr("name").split("-");
 
 					extra[name_split[2]] = jQuery(this).val();
 				});
 
+                //parse textareas to create extra fields
 				jQuery(lobjThis).find('textarea[name^=' + item_type[2] + '-extra]').each(function()
 				{
 					var name_split = jQuery(this).attr("name").split("-");
 
-					extra[name_split[2]] = jQuery(this).text();
+					extra[name_split[2]] = jQuery(this).val();
 				});
 
+                //parse selectboxes to create extra fields
 				jQuery(lobjThis).find('select[name^=' + item_type[2] + '-extra]').each(function()
 				{
 					var name_split = jQuery(this).attr("name").split("-");
 
 					extra[name_split[2]] = jQuery(this).val();
 				});
+
+                //parse radio inputs to create extra fields
+                jQuery(lobjThis).find('input[name^=' + item_type[2] + '-extra][type=radio]').each(function()
+                {
+                    var name_split = jQuery(this).attr("name").split("-");
+                    extra[name_split[2]] = typeof extra[name_split[2]] == 'undefined' ? '' : extra[name_split[2]];
+
+                    if( $(this).is(':checked') )
+                        extra[name_split[2]] = jQuery(this).val();
+                });
+
+                //parse checkboxe inputs to create extra fields
+                jQuery(lobjThis).find('input[name^=' + item_type[2] + '-extra][type=checkbox]').each(function()
+                {
+                    var name_split = jQuery(this).attr("name").split("-");
+                    extra[name_split[2]] = typeof extra[name_split[2]] == 'undefined' ? [] : extra[name_split[2]];
+
+                    if( $(this).is(':checked') )
+                        extra[name_split[2]].push( jQuery(this).val() );
+                });
 
 				var pspecial = jQuery.isEmptyObject( extra ) ? "" : JSON.stringify(extra);
 

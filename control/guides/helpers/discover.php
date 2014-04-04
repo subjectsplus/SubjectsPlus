@@ -33,9 +33,9 @@ GROUP BY s.subject";
 
 //print $q2;
 
-$r3 = mysql_query($q3);
+$r3 = $db->query($q3);
 
-while($myrow = mysql_fetch_array($r3)) {
+foreach($r3 as $myrow) {
 	$sub_title = Truncate($myrow[1], 50, '');
 	$all_subs .= "<option value=\"$myrow[0]\">$sub_title</option>";
 }

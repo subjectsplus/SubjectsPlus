@@ -7,26 +7,25 @@
  *   @date July 1, 2010
  *   @todo
  */
-use SubjectsPlus\Control\DBConnector;
-    
+
+use SubjectsPlus\Control\Querier;
+
+
 $page_title = "Library Staff Details";
 $subfolder = "services";
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+$db = new Querier;
+    
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
 // Get array of acceptable users
 
 $q = "SELECT email FROM staff WHERE user_type_id = '1'";
-$r = mysql_query($q);
+$r = $db->query($q);
 
-while ($okemail = mysql_fetch_array($r)) {
+foreach ($r as $okemail) {
 
     $names = explode("@", $okemail[0]);
     $ok_names[] = $names[0];
@@ -61,9 +60,7 @@ GROUP BY s.lname";
 
 //print $qstaffer;
 
-$rstaffer = mysql_query($qstaffer);
-
-$staffmem = mysql_fetch_row($rstaffer);
+$staffmem = $db->query($qstaffer);
 
 $tel = $tel_prefix . $staffmem[4];
 
@@ -95,9 +92,9 @@ if ($staffmem[8] != "") {
     $q = "SELECT s.subject_id, subject, shortform FROM staff_subject ss, subject s WHERE ss.subject_id = s.subject_id
 	AND ss.staff_id = '$staffmem[0]'  AND active = '1'  AND s.type = 'Subject' ORDER BY subject";
 
-    $r = mysql_query($q);
+    $r = $db->query($q);
 
-    $total_rows = mysql_num_rows($r);
+    $total_rows = count($r);
     $per_row = ceil($total_rows / 2);
 
     $row_count = 0;
@@ -107,7 +104,7 @@ if ($staffmem[8] != "") {
     $subject_listing = "<p class=\"clear-both\"><br /><strong>Subject Liaison for . . . </strong></p>
 <div style=\"float: left; width: 47%\">";
 
-    while ($mysubs = mysql_fetch_array($r)) {
+    foreach ($r as $mysubs) {
 
         if ($mod_rewrite == 1) {
             $linky = $mysubs[2];

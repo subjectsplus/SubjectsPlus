@@ -6,28 +6,21 @@
  *   @author adarby
  *   @date jan 2012
  */
-use SubjectsPlus\Control\DBConnector;
-use SubjectsPlus\Control\DbHandler;
+
+use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\CompleteMe;
-
-
+    
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-
+$db = new Querier;
+    
 $use_jquery = array("ui");
 
 $page_title = _("Database List");
 $description = _("An alphabetical list of the electronic resources available.");
 $keywords = _("library, research, electronic journals, databases, electronic resources, full text, online, magazine, articles, paper, assignment");
-
-
-try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-  echo $e;
-}
 
 // set a default if the letter isn't set
 if (!isset($_GET["letter"])) {
@@ -57,9 +50,9 @@ if ($_GET["letter"] == "bysub") {
     // add subject name to title
     $qt = "SELECT subject FROM subject WHERE subject_id=" . $clean_id . " LIMIT 0,1";
 
-    $rt = mysql_query($qt);
-    $myrow = mysql_fetch_row($rt);
-    $page_title .= ": " . $myrow[0];
+    
+    $myrow = $db->query($qt);
+    $page_title .= ": " . $myrow[0][0];
   }
 } else {
   $_GET["subject_id"] = "";
@@ -99,18 +92,18 @@ $alphabet = getLetters("databases", $_GET["letter"], "", FALSE);
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-$rnew = mysql_query($qnew);
+$rnew = $db->query($qnew);
 
 $newlist = "<ul>\n";
-while ($myrow = mysql_fetch_array($rnew)) {
+foreach ($rnew as $myrow) {
   $db_url = "";
 
   // add proxy string if necessary
-  if ($myrow[2] != 1) {
+  if ($myrow[0][2] != 1) {
     $db_url = $proxyURL;
   }
 
-  $newlist .= "<li><a href=\"$db_url$myrow[1]\">$myrow[0]</a></li>\n";
+  $newlist .= "<li><a href=\"$db_url$myrow[0][1]\">$myrow[0][0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
 
@@ -132,7 +125,7 @@ $intro .= "<br class=\"clear-both\" />";
 
 // Create our table of databases object
 
-$our_items = new DbHandler();
+//$our_items = new DbHandler();
 
 // if we're showing the subject list, do so
 

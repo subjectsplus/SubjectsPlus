@@ -7,8 +7,8 @@
  *   @author adarby
  *   @date Dec 2012
  */
+use SubjectsPlus\Control\Querier;
 
-use SubjectsPlus\Control\DBConnector;
 
 
 $subcat = "guides";
@@ -49,8 +49,6 @@ if ($is_sidebar !== false) {
 }
 
 
-// Connect to database
-try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
 
 /////////////////////////
 // Route Request
@@ -97,7 +95,7 @@ switch ($_POST["flag"]) {
         // if it's a clone, note that
         $this_id = modifyDB("", "insert");
 
-        //print "this id = $this_id; our sub id = $our_subject_id<p>";
+       
         if ($this_id) {
             $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
             //print "obj = $obj<p>";
@@ -129,10 +127,10 @@ switch ($_POST["flag"]) {
         $subject_id = scrubData($_POST["subject_id"], "int");
 
         $q = "DELETE FROM `pluslet` where pluslet_id = '$delete_id' AND type != 'Special'";
-        $r = mysql_query($q);
+        $r = $db->exec($q);
 
     	//added by dgonzalez because if pluslet is special, no deletetion so need to manually delete relationship
-    	if( mysql_affected_rows() == 0 )
+    	if( count($r) == 0 )
     	{
     		$q2 = "DELETE pt FROM `pluslet_tab` pt INNER JOIN tab t
     				ON pt.tab_id = t.tab_id
@@ -140,12 +138,12 @@ switch ($_POST["flag"]) {
     				ON t.subject_id = s.subject_id
     				WHERE pt.pluslet_id = '$delete_id' AND s.subject_id = '$subject_id'";
 
-    		$r2 = mysql_query($q2);
+    		$r2 = $db->query($q2);
     	}
 
     	//removed by david because new db referential integrity does this automatically
         //$q2 = "DELETE FROM `pluslet_subject` where pluslet_id = '$delete_id' AND subject_id = '$subject_id'";
-        //$r2 = mysql_query($q2);
+        //$r2 = $db->query($q2);
         //print $q2;
 
         print _("<script type='text/javascript'>$.growl({message: 'The box was removed.', title:'" . _("Box Removed") . "'})</script>");
@@ -157,6 +155,7 @@ switch ($_POST["flag"]) {
 //////////////////
 
 function modifyDB($id, $type) {
+    $db = new Querier;
     /* print "<pre>";
       print_r($_POST);
       print "</pre>"; */
@@ -168,7 +167,15 @@ function modifyDB($id, $type) {
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
     $pluslet_supress_body =  $_POST["boxsetting_suppress_body"];
-    $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];
+    
+    if (isset($_POST["boxsetting_titlebar_styling"])) {
+        
+        $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];
+
+    } else {
+        
+        $pluslet_titlebar_styling = null;
+    }
     
     // If clone isn't set, set to 0
     if (isset($_POST["clone"])) {
@@ -188,40 +195,34 @@ function modifyDB($id, $type) {
     }
     switch ($type) {
         case "insert":
-            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), mysql_real_escape_string($pluslet_extra), mysql_real_escape_string($pluslet_hide_titlebar), mysql_real_escape_string($pluslet_collapse_body),  mysql_real_escape_string($pluslet_supress_body), mysql_real_escape_string($pluslet_titlebar_styling));
-            $r = mysql_query($q);
+            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body),  $db->quote($pluslet_supress_body), $db->quote($pluslet_titlebar_styling));
+            $db = new Querier;
+            $r = $db->exec($q);
             if ($r) {
-                $id = mysql_insert_id();
-            	// If successful inserted, add link to plulset_staff table
-            	// removed 2013 as unnecessary
-            	/*
-                //print "INSERT ID = $id";
-                $staff_id = $_POST["staff_id"];
-                $q2 = "INSERT INTO pluslet_staff (pluslet_id, staff_id) VALUES ('$id', '$staff_id')";
-                //print $q2;
-                $r2 = mysql_query($q2);
-                */
-            } else {
+                               $id = $db->last_id();
+                
+            	            } else {
                 print "<p>There was a problem with your insert:</p>";
                 print "<p>$q</p>";
-                $id = false;
+                
+                                $id = false;
             }
             break;
         case "update":
             // update pluslet table
             //print "$pluslet_extra";
-            //$q = sprintf("UPDATE pluslet set title = '%s', body = '%s', type = '%s', extra = '%s' WHERE pluslet_id = '$id'", mysql_real_escape_string($pluslet_title), mysql_real_escape_string($pluslet_body), mysql_real_escape_string($pluslet_type), mysql_real_escape_string($pluslet_clone), $pluslet_extra);
+            //$q = sprintf("UPDATE pluslet set title = '%s', body = '%s', type = '%s', extra = '%s' WHERE pluslet_id = '$id'", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $pluslet_extra);
             $q = "UPDATE pluslet SET
-                title='" . mysql_real_escape_string($pluslet_title) . "',
-                body='" . mysql_real_escape_string($pluslet_body) . "',
-                type='" . mysql_real_escape_string($pluslet_type) . "',
+                title='" . $db->quote($pluslet_title) . "',
+                body='" . $db->quote($pluslet_body) . "',
+                type='" . $db->quote($pluslet_type) . "',
                 extra = '$pluslet_extra',
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
                 suppress_body = '$pluslet_supress_body',
                 titlebar_styling = '$pluslet_titlebar_styling'
                 WHERE pluslet_id ='$id'";
-            $r = mysql_query($q);
+            $r = $db->exec($q);
             //print $q;
             if (!$r) {
                 print "<p>There was a problem with your insert:</p>";
@@ -231,7 +232,7 @@ function modifyDB($id, $type) {
             break;
         case "delete":
             $q = "DELETE FROM pluslets WHERE pluslet_id = '$id'";
-            $r = mysql_query($q);
+            $r = $db->query($q);
             break;
     }
     return $id;

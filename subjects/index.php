@@ -6,9 +6,9 @@
  *   @author adarby
  *   @date mar 2011
  */
-use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
+
     
     
 $use_jquery = array("ui");
@@ -20,15 +20,6 @@ include("../control/includes/autoloader.php");
 $page_title = $resource_name;
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
-
-    /*
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
-
-     */
 
 $db = new Querier;
     
@@ -94,7 +85,7 @@ $suggestibles = trim($suggestibles, ', ');
 
 $q2 = "select subject, subject_id, shortform from subject where active = '1' order by subject_id DESC limit 0,5";
 
-//$r2 = MYSQL_QUERY($q2);
+//$r2 = $db->query($q2);
 
 $newest_guides = "<ul>\n";
 
@@ -110,7 +101,7 @@ $newest_guides .= "</ul>\n";
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-//$rnew = mysql_query($qnew);
+//$rnew = $db->query($qnew);
 
 $newlist = "<ul>\n";
     foreach ($db->query($qnew) as $myrow) {
@@ -128,21 +119,22 @@ $newlist .= "</ul>\n";
 // List guides function -- no other page uses it ? //
 
 function listGuides($search = "", $type="all") {
-
+    $db = new Querier();
+    
     $andclause = "";
     global $guide_path;
 
     if ($search != "") {
         $search = scrubData($search);
-        $andclause .= " AND subject LIKE '%" . mysql_escape_string($search) . "%'";
+        $andclause .= " AND subject LIKE '%" . $db->quote($search) . "%'";
     }
 
     if ($type != "all") {
-        $andclause .= " AND type='" . mysql_escape_string($type) . "'";
+        $andclause .= " AND type='" . $db->quote($type) . "'";
     }
 
     $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
-   // $r = MYSQL_QUERY($q);
+   // $r = $db->query($q);
     //print $q;
     $row_count = 0;
     $colour1 = "oddrow";

@@ -10,7 +10,6 @@
  *   @date Sep 17, 2009
  *   @todo Not sure how this page fits into the new version
  */
-use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Querier;
     
 $subsubcat = "";
@@ -20,8 +19,7 @@ $page_title = "Subject/Librarian Associations";
 include("../includes/header.php");
 
 // Connect to database
-try { $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-	} catch (Exception $e) { echo $e; }
+try { 	} catch (Exception $e) { echo $e; }
 
 ///////////////////
 // Browse View
@@ -35,7 +33,7 @@ $q = "SELECT s.subject_id, subject, fname, lname, st.staff_id, type, shortform, 
   ORDER BY subject";
 
 $querier = new Querier();
-$subsArray = $querier->getResult($q);
+$subsArray = $querier->query($q);
 
 	// set up striping
   $row_count = 0; $colour1 = "oddrow"; $colour2 = "evenrow";
@@ -64,7 +62,7 @@ WHERE ptags like '%records%'
 ORDER BY lname";
 
 $querier2 = new Querier();
-$staffArray = $querier2->getResult($q2);
+$staffArray = $querier2->query($q2);
 
 // Two dropdowns, one for viewing, one for dealing with ticked items
 $staff_drop_base = "<select name=\"filter_staff_id\" id=\"filter_by_staff\">\n

@@ -21,21 +21,21 @@ $param = scrubData($_REQUEST["term"]);
 
 switch ($_GET["collection"]) {
 	case "guides":
-	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE '%" . $db->quote($param) . "%'";
 
 	break;
 	case "records":
-	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $db->quote($param) . "%'";
 	
 	break;		
 	case "faq":
-	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . $db->quote($param) . "%'";
 	break;
 	case "talkback":
-	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE '%" . mysql_real_escape_string($param) . "%'";
+	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE '%" . $db->quote($param) . "%'";
 	break;	
 	case "admin":
-	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE '%" . mysql_real_escape_string($param) . "%') OR (lname LIKE '%" . mysql_real_escape_string($param) . "%')";
+	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE '%" . $db->quote($param) . "%') OR (lname LIKE '%" . $db->quote($param) . "%')";
 	break;
 	
 }
@@ -43,12 +43,12 @@ switch ($_GET["collection"]) {
 
 
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
 $arr = array();
 
 $i = 0;
-while($myrow =  mysql_fetch_array($r)) {
+foreach ($r as $myrow){
   $arr[$i]['value'] = $myrow[0];
   $arr[$i]['label'] = $myrow[1];
   $i++;

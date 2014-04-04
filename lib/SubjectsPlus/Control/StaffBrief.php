@@ -1,5 +1,7 @@
 <?php
-   namespace SubjectsPlus\Control;
+
+namespace SubjectsPlus\Control;
+
 /**
  *   @file Staff
  *   @brief manage staff
@@ -25,7 +27,7 @@ class Staff {
     private $_bio;
     private $_message;
 
-    public function __construct($staff_id="", $flag="") {
+    public function __construct($staff_id = "", $flag = "") {
 
         if ($flag == "" && $staff_id == "") {
             $flag = "empty";
@@ -69,7 +71,7 @@ class Staff {
                 /////////////
                 $querier = new Querier();
                 $q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio from staff where staff_id = " . $this->_staff_id;
-                $staffArray = $querier->getResult($q1);
+                $staffArray = $querier->query($q1);
 
                 $this->_debug .= "<p class=\"debug\">Staff query: $q1";
                 // Test if these exist, otherwise go to plan B
@@ -96,7 +98,7 @@ class Staff {
         }
     }
 
-    public function outputForm($wintype="") {
+    public function outputForm($wintype = "") {
 
         global $wysiwyg_desc;
         global $CKPath;
@@ -111,7 +113,7 @@ class Staff {
 
         $querierDept = new Querier();
         $qDept = "select department_id, name from department order by name";
-        $deptArray = $querierDept->getResult($qDept);
+        $deptArray = $querierDept->query($qDept);
 
         // create department dropdown
         $deptMe = new Dropdown("department_id", $deptArray, $this->_department_id);
@@ -123,7 +125,7 @@ class Staff {
 
         $querierUserType = new Querier();
         $qUserType = "select user_type_id, user_type from user_type order by user_type_id";
-        $userTypeArray = $querierUserType->getResult($qUserType);
+        $userTypeArray = $querierUserType->query($qUserType);
 
         // create type dropdown
         $typeMe = new Dropdown("user_type_id", $userTypeArray, $this->_user_type_id);
@@ -258,9 +260,8 @@ $headshot
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
                 <br /><strong>NOFUN</strong> means user can't modify other peoples' guides, or view records</p>
 </div>
-        	<div class=\"box\">"
-	<h2 class=\"bw_head\">" . _("Password") . "</h2>
-;
+        	<div class=\"box\">
+	<h2 class=\"bw_head\">" . _("Password") . "</h2>";
 
         if ($this->_staff_id != "") {
             echo "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
@@ -311,11 +312,11 @@ $headshot
         // Delete the records from staff table
         $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
-        $delete_result = mysql_query($q);
+        $delete_result = $db->exec($q);
 
         $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
-        if (mysql_affected_rows() != 0) {
+        if ($delete_result != 0) {
 
             // /////////////////////
             // Alter chchchanges table
@@ -338,7 +339,9 @@ $headshot
         ////////////////
         // hash password
         ////////////////
-
+        
+        $db = new Querier;
+        
         $this->_password = md5($this->_password);
 
         ////////////////
@@ -346,21 +349,21 @@ $headshot
         ////////////////
 
         $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio) VALUES (
-		'" . mysql_real_escape_string(scrubData($this->_fname)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_lname)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_title)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_tel)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_department_id, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_staff_sort, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_email, "email")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_user_type_id, "integer")) . "',
-		'" . mysql_real_escape_string(scrubData($this->_password)) . "',
-		'" . mysql_real_escape_string(scrubData($this->_ptags)) . "',
-                '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
-                '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "'
+		'" . $db->quote(scrubData($this->_fname)) . "',
+		'" . $db->quote(scrubData($this->_lname)) . "',
+		'" . $db->quote(scrubData($this->_title)) . "',
+		'" . $db->quote(scrubData($this->_tel)) . "',
+		'" . $db->quote(scrubData($this->_department_id, "integer")) . "',
+		'" . $db->quote(scrubData($this->_staff_sort, "integer")) . "',
+		'" . $db->quote(scrubData($this->_email, "email")) . "',
+		'" . $db->quote(scrubData($this->_user_type_id, "integer")) . "',
+		'" . $db->quote(scrubData($this->_password)) . "',
+		'" . $db->quote(scrubData($this->_ptags)) . "',
+                '" . $db->quote(scrubData($this->_active, "integer")) . "',
+                '" . $db->quote(scrubData($this->_bio, "richtext")) . "'
 		)";
 
-        $rInsertStaff = mysql_query($qInsertStaff);
+        $rInsertStaff = $db->query($qInsertStaff);
 
         $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
 
@@ -368,7 +371,7 @@ $headshot
             echo blunDer("We have a problem with the insert staff query: $qInsertStaff");
         }
 
-        $this->_staff_id = mysql_insert_id();
+        $this->_staff_id = $db->last_id();
 
         // create folder
 
@@ -380,7 +383,7 @@ $headshot
             // And copy over the generic headshot image and headshot_large.jpg
             $nufile = $path . "/headshot.jpg";
             $copier = copy("../../assets/images/headshot.jpg", $nufile);
-        	$copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
+            $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
         }
 
         // /////////////////////
@@ -402,27 +405,20 @@ $headshot
         /////////////////////
 
         $qUpStaff = "UPDATE staff SET
-	  fname = '" . mysql_real_escape_string(scrubData($this->_fname)) . "',
-	  lname = '" . mysql_real_escape_string(scrubData($this->_lname)) . "',
-	  title = '" . mysql_real_escape_string(scrubData($this->_title)) . "',
-	  tel = '" . mysql_real_escape_string(scrubData($this->_tel)) . "',
-	  department_id = '" . mysql_real_escape_string(scrubData($this->_department_id, "integer")) . "',
-	  staff_sort = '" . mysql_real_escape_string(scrubData($this->_staff_sort, "integer")) . "',
-	  email = '" . mysql_real_escape_string(scrubData($this->_email, "email")) . "',
-	  user_type_id = '" . mysql_real_escape_string(scrubData($this->_user_type_id, "integer")) . "',
-	  ptags = '" . mysql_real_escape_string(scrubData($this->_ptags)) . "',
-          active = '" . mysql_real_escape_string(scrubData($this->_active, "integer")) . "',
-          bio = '" . mysql_real_escape_string(scrubData($this->_bio, "richtext")) . "'
-	  WHERE staff_id = " . scrubData($this->_staff_id, "integer");
+        fname = " . $db->quote(scrubData($this->_fname)) . ",
+        lname = " . $db->quote(scrubData($this->_lname)) . ",
+        title = " . $db->quote(scrubData($this->_title)) . ",
+        tel = " . $db->quote(scrubData($this->_tel)) . ",
+        department_id = " . $db->quote(scrubData($this->_department_id, 'integer')) . ",
+        staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . ",
+        email = " . $db->quote(scrubData($this->_email, 'email')) . ",
+        user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . ",
+        ptags = " . $db->quote(scrubData($this->_ptags)) . ",
+        active = " . $db->quote(scrubData($this->_active, 'integer')) . ",
+        bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . "
+        WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
-        $rUpStaff = mysql_query($qUpStaff);
-
-        $this->_debug = "<p class=\"debug\">Update query: $qUpStaff</p>";
-        if (!$rUpStaff) {
-            print "affected rows = " . mysql_affected_rows();
-            echo blunDer("We have a problem with the update staff query: $qUpStaff");
-        }
-
+        $rUpStaff = $db->exec($qUpStaff);
 
         // /////////////////////
         // Alter chchchanges table
@@ -437,11 +433,11 @@ $headshot
 
     public function updatePassword($new_pass) {
 
-        $q = "UPDATE staff SET password = md5('" . mysql_real_escape_string(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
+        $q = "UPDATE staff SET password = md5('" . $db->quote(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
 
         $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         if ($r) {
             $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "password update", $_SESSION['staff_id']);
@@ -452,11 +448,11 @@ $headshot
 
     public function updateBio($new_bio) {
 
-        $q = "UPDATE staff SET bio = '" . mysql_real_escape_string(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
+        $q = "UPDATE staff SET bio = '" . $db->quote(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
 
         $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         if ($r) {
             $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "bio update", $_SESSION['staff_id']);
@@ -464,7 +460,7 @@ $headshot
         }
     }
 
-    public function getHeadshot($email, $pic_size="medium") {
+    public function getHeadshot($email, $pic_size = "medium") {
 
         global $AssetPath;
 
@@ -498,17 +494,17 @@ $headshot
         global $CKBasePath;
 
         if ($wysiwyg_desc == 1) {
-			include($CKPath);
-			global $BaseURL;
+            include($CKPath);
+            global $BaseURL;
 
-			$oCKeditor = new CKEditor($CKBasePath);
-			$oCKeditor->timestamp = time();
-			$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-			$config['height'] = '300';
-			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+            $oCKeditor = new CKEditor($CKBasePath);
+            $oCKeditor->timestamp = time();
+            $config['toolbar'] = 'Basic'; // Default shows a much larger set of toolbar options
+            $config['height'] = '300';
+            $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-			echo $oCKeditor->editor('bio', $this->_bio, $config);
-			echo "<br />";
+            echo $oCKeditor->editor('bio', $this->_bio, $config);
+            echo "<br />";
         } else {
             echo "<textarea name=\"answer\" rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
         }

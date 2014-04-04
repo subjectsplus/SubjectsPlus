@@ -1,5 +1,5 @@
 <?php
-use SubjectsPlus\Control\DBConnector;
+
 
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
@@ -19,8 +19,7 @@ if (isset($_POST["search_terms"]))
 
 	// Connect to database
 	try {
-		$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-	} catch (Exception $e) {
+			} catch (Exception $e) {
 		echo $e;
 	}
 
@@ -28,10 +27,10 @@ if (isset($_POST["search_terms"]))
 	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $searcher . "%' ORDER BY title";
 
 	//query results
-	$r = mysql_query($q);
+	$r = $db->query($q);
 
 	//total returned rows
-	$total_items = mysql_num_rows($r);
+	$total_items = count($r);
 
 	//return message if no results
 	if ($total_items == 0) {
@@ -39,7 +38,7 @@ if (isset($_POST["search_terms"]))
 	} else
 	{
 		//while rows exist
-		while ($myrow = mysql_fetch_array($r))
+		foreach ($r as $myrow)
 		{
 			$token = "";
 

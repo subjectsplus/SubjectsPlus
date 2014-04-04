@@ -10,7 +10,7 @@
  * @version $Id$
  * @access public
  */
-use SubjectsPlus\Control\DBConnector;
+
     
 class DatabaseWebService extends sp_WebService implements WebService
 {

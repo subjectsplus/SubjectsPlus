@@ -22,7 +22,7 @@ switch ($_POST["action"]) {
     $q = "DELETE FROM rank WHERE rank_id = '" . $_POST["delete_id"] . "'";
 
     //print $q;
-    $r = mysql_query($q);
+    $r = $db->query($q);
 
     if ($r) {
       print _("This item has been removed from your guide");
@@ -61,7 +61,7 @@ switch ($_POST["action"]) {
 
       $q = "UPDATE rank SET rank = '$count' WHERE rank.rank_id = '$rank_id'";
 
-      $r = mysql_query($q);
+      $r = $db->query($q);
 
       if (!$r) {
         $error .= $q . "<br />";

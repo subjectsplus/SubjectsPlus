@@ -44,7 +44,7 @@ if (isset($_GET["browse"])) {
     $q = "SELECT user_type_id, user_type FROM user_type ORDER BY user_type_id";
 
     $querier = new Querier();
-    $typeArray = $querier->getResult($q);
+    $typeArray = $querier->query($q);
 
     $staff_list = "";
     // Loop through user types
@@ -54,7 +54,7 @@ if (isset($_GET["browse"])) {
         
         $q2 = "SELECT staff_id, fname, lname, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
         $querier2 = new Querier();
-        $staffArray = $querier2->getResult($q2);
+        $staffArray = $querier2->query($q2);
 
         $staff_list .= "";
 

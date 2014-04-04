@@ -77,10 +77,12 @@ class LinkChecker {
 							"AND staff_subject.staff_id = $_SESSION[staff_id]";
 			}
 			$guide_select = "SELECT subject, subject.subject_id FROM $from $where ORDER BY subject ASC";
-			$guide_result = mysql_query($guide_select) or die("Cannot SELECT: " . mysql_error() . " SQL: " . $guide_select);
+            
+            $db = new Querier;
+                $guide_result = $db->query($guide_select);
 			$guide_list = array();
 
-			while( $guide_data = mysql_fetch_array($guide_result, MYSQL_ASSOC) )
+			foreach($guide_result as $guide_data)
 			{
 				$guide_list[] = array( $guide_data['subject_id'], $guide_data['subject'] );
 			}
@@ -144,10 +146,10 @@ class LinkChecker {
 								 "AND location.format = 1 " .
 								 "AND rank.subject_id = $lintSubjectID " .
 								 "ORDER BY source.rs ASC, source.source ASC, rank.rank ASC, title.title ASC";
-			$links_result = mysql_query($links_select) or die("Cannot SELECT: " . mysql_error() . " SQL: " . $links_select);
+			$links_result = $db->query($links_select);
 			?>
 			<h2 style="clear:both;">Checking "All Items By Source" Box:</h2>
-			<?php if(!mysql_num_rows($links_result)): ?>
+			<?php if(!count($links_result)): ?>
 				<p style="margin: 20px 0 40px 0;">This guide does not have an "All Items By Source" box.</p>
 			<?php else: ?>
 				<table class="striper" style="width: 100%; margin: 20px 0 40px 0;">
@@ -161,7 +163,7 @@ class LinkChecker {
 					<tbody>
 					<?php
 					$link_list = array();
-					while($links_data = mysql_fetch_array($links_result, MYSQL_ASSOC))
+					foreach($links_result as $links_data)
 					{
 						if($links_data['access_restrictions'] == 2)
 						{
@@ -179,6 +181,7 @@ class LinkChecker {
 					</tbody>
 				</table>
 			<?php endif;
+                $db = new Querier;
 		$box_select = "SELECT p.pluslet_id, p.title, p.body, p.type
 						FROM pluslet p INNER JOIN pluslet_tab pt
 						ON p.pluslet_id = pt.pluslet_id
@@ -189,14 +192,14 @@ class LinkChecker {
 						WHERE s.subject_id = $lintSubjectID
 						AND p.type IN('Basic','Feed')
 						ORDER BY pt.pcolumn ASC, pt.prow ASC";
-			$box_result = mysql_query($box_select) or die("Cannot SELECT: " . mysql_error() . " SQL: " . $box_select);
+			$box_result = $db->query($box_select);
 			?>
-			<?php if(!mysql_num_rows($box_result)): ?>
+			<?php if(!count($box_result)): ?>
 				<p style="margin: 20px 0 40px 0;">This guide does not have any other pluslets.</p>
 			<?php else:
 
 					$link_list = array();
-					while($box_data = mysql_fetch_array($box_result, MYSQL_ASSOC))
+					foreach($box_result as $box_data)
 					{
 						?>
 						<h2>Checking "<?php print $box_data['title']; ?>" Box:</h2>
@@ -265,10 +268,8 @@ class LinkChecker {
 	private function setShortForm( $lintSubjectID )
 	{
 		$query = "SELECT shortform FROM subject WHERE subject_id = $lintSubjectID";
-		$mysqlresult = mysql_query($query) or die("Cannot SELECT: " . mysql_error() . " SQL: " . $query);
-
-		$data = mysql_fetch_array($mysqlresult, MYSQL_ASSOC);
-		$this->_extra['shortform'] = $data['shortform'];
+		$shortform = $db->query($query);
+		$this->_extra['shortform'] = $shortform['shortform'];
 
 	}
 
@@ -304,10 +305,10 @@ class LinkChecker {
 								 "ON title.title_id = location_title.title_id " .
 								 "INNER JOIN location " .
 								 "ON location_title.location_id = location.location_id";
-			$links_result = mysql_query($links_select) or die("Cannot SELECT: " . mysql_error() . " SQL: " . $links_select);
+			$links_result = $db->query($links_select);
 			?>
 			<h2 style="clear:both;">Checking All Records:</h2>
-			<?php if(!mysql_num_rows($links_result)): ?>
+			<?php if(!count($links_result)): ?>
 				<p style="margin: 20px 0 40px 0;">No Record Locations Exist.</p>
 			<?php else: ?>
 				<table class="striper" style="width: 100%; margin: 20px 0 40px 0;">
@@ -321,7 +322,7 @@ class LinkChecker {
 					<tbody>
 					<?php
 					$link_list = array();
-					while($links_data = mysql_fetch_array($links_result, MYSQL_ASSOC))
+					foreach($links_result as $links_data)
 					{
 						if($links_data['access_restrictions'] == 2)
 						{

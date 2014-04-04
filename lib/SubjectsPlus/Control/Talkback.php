@@ -62,7 +62,7 @@ class Talkback {
         $querier = new Querier();
         $q1 = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_entered, answer, a_from, display, tbtags, cattags
                     FROM talkback WHERE talkback_id = " . $this->_talkback_id;
-        $guideArray = $querier->getResult($q1);
+        $guideArray = $querier->query($q1);
 
         $this->_debug .= "<p>TB query: $q1";
         // Test if these exist, otherwise go to plan B
@@ -88,7 +88,7 @@ class Talkback {
         $querier2 = new Querier();
         $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, talkback tb WHERE s.staff_id = tb.a_from AND tb.talkback_id = " . $this->_talkback_id;
 
-        $this->_staffers = $querier2->getResult($q2);
+        $this->_staffers = $querier2->query($q2);
 
         $this->_debug .= "<p>Staff query: $q2";
 
@@ -155,7 +155,7 @@ class Talkback {
     $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%talkback%' ORDER BY lname, fname";
 
     $querierStaff = new Querier();
-    $staffArray = $querierStaff->getResult($qStaff);
+    $staffArray = $querierStaff->query($qStaff);
 
     // put in a default user
     if ($this->_a_from == "") {
@@ -282,7 +282,7 @@ class Talkback {
     // Delete the records from talkback table
     $q = "DELETE FROM talkback WHERE talkback_id = '" . $this->_talkback_id . "'";
 
-    $delete_result = mysql_query($q);
+    $delete_result = $db->query($q);
 
     $this->_debug = "<p>Del query: $q";
 
@@ -316,19 +316,19 @@ class Talkback {
     /////////////////////
 
     $qInsertTB = "INSERT INTO talkback (question, q_from, date_submitted, answer, a_from, display, tbtags, cattags) VALUES (
-	  '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_q_from, "text")) . "',
+	  " . $db->quote(scrubData($this->_question, "text")) . ",
+	  " . $db->quote(scrubData($this->_q_from, "text")) . ",
       NOW(),
-	  '" . mysql_real_escape_string(scrubData($this->_answer, "richtext")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_a_from, "text")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "'
-      '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
+	  " . $db->quote(scrubData($this->_answer, "richtext")) . ",
+	  " . $db->quote(scrubData($this->_a_from, "text")) . ",
+      " . $db->quote(scrubData($this->_display, "integer")) . ",
+      " . $db->quote(scrubData($this->_tbtags, "text")) . ",
+      " . $db->quote(scrubData($this->_cattags, "text")) . "
           )";
 
-    $rInsertTB = mysql_query($qInsertTB);
+    $rInsertTB = $db->exec($qInsertTB);
 
-    $this->_talkback_id = mysql_insert_id();
+    $this->_talkback_id = $db->last_id();
 
     $this->_debug = "<p>1. insert: $qInsertTB</p>";
     if (!$rInsertTB) {
@@ -354,23 +354,22 @@ class Talkback {
     // update talkback table
     /////////////////////
 
-    $qUpTB = "UPDATE talkback SET question = '" . mysql_real_escape_string(scrubData($this->_question, "text")) . "',
-	  q_from = '" . mysql_real_escape_string(scrubData($this->_q_from, "text")) . "',
-	  answer = '" . mysql_real_escape_string(scrubData($this->_answer, "richtext")) . "',";
-  	  if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
-  	  else 	$qUpTB .= "a_from = '" . mysql_real_escape_string(scrubData($this->_a_from, "text")) . "',";
-  	  $qUpTB .= "display = '" . mysql_real_escape_string(scrubData($this->_display, "integer")) . "',
-      tbtags = '" . mysql_real_escape_string(scrubData($this->_tbtags, "text")) . "',
-      cattags = '" . mysql_real_escape_string(scrubData($this->_cattags, "text")) . "'
-      WHERE talkback_id = " . scrubData($this->_talkback_id, "integer");
+    $qUpTB = "UPDATE talkback SET question = '" . $db->quote(scrubData($this->_question, 'text')) . ",
+	  q_from = " . $db->quote(scrubData($this->_q_from, 'text')) . ",
+	  answer = " . $db->quote(scrubData($this->_answer, 'richtext')) . ",";
+        if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
+      
+        else 	$qUpTB .= "a_from = '" . $db->quote(scrubData($this->_a_from, 'text')) . ",";
+  	  
+      $qUpTB .= "display = '" . $db->quote(scrubData($this->_display, 'integer')) . ",
+      
+      tbtags = " . $db->quote(scrubData($this->_tbtags, 'text')) . ",
+      cattags = " . $db->quote(scrubData($this->_cattags, 'text')) . "
+      
+      WHERE talkback_id = " . scrubData($this->_talkback_id, 'integer');
 
-    $rUpTB = mysql_query($qUpTB);
+    $rUpTB = $db->exec($qUpTB);
 
-    $this->_debug = "<p>1. update title: $qUpTB</p>";
-    if (!$rUpTB) {
-      print "affected rows = " . mysql_affected_rows();
-      echo blunDer("We have a problem with the talkback query: $qUpTB");
-    }
 
     // /////////////////////
     // Alter chchchanges table

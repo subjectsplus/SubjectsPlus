@@ -22,7 +22,7 @@ $intro = _("<p>Please search for something with the box above.</p>");
 
 if (isset($_POST["searchterm"])) {
 
-    $searcher = mysql_real_escape_string(scrubData($_POST["searchterm"]));
+    $searcher = $db->quote(scrubData($_POST["searchterm"]));
 
     // Search all our categories
     // Guides, Records, Staff, FAQs, TalkBack
@@ -30,7 +30,7 @@ if (isset($_POST["searchterm"])) {
     if ($_SESSION["records"] == 1) {
         $querier1 = new Querier();
         $q1 = "SELECT title_id, title FROM title WHERE title LIKE '%" . $searcher . "%' ORDER BY title";
-        $recordsArray = $querier1->getResult($q1);
+        $recordsArray = $querier1->query($q1);
 
         $querier2 = new Querier();
 
@@ -53,28 +53,28 @@ if (isset($_POST["searchterm"])) {
         ORDER BY d.subject_id";
 
         
-        $guidesArray = $querier2->getResult($q2);
+        $guidesArray = $querier2->query($q2);
     }
 
     // Only for admins
     if ($_SESSION["admin"] == 1) {
         $querier3 = new Querier();
         $q3 = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE '%$searcher%') OR (lname LIKE '%$searcher%') ORDER BY lname";
-        $staffArray = $querier3->getResult($q3);
+        $staffArray = $querier3->query($q3);
     }
 
     // only for talkbackers
     if ($_SESSION["talkback"] == 1) {
         $querier4 = new Querier();
         $q4 = "SELECT talkback_id, LEFT(question, 300) FROM talkback WHERE (question LIKE '%$searcher%') OR (answer LIKE '%$searcher%') ORDER BY question";
-        $talkbackArray = $querier4->getResult($q4);
+        $talkbackArray = $querier4->query($q4);
     }
 
     // only for faqers
     if ($_SESSION["faq"] == 1) {
         $querier5 = new Querier();
         $q5 = "SELECT faq_id, LEFT(question, 300) FROM faq WHERE (question LIKE '%$searcher%') OR (answer LIKE '%$searcher%') OR (keywords LIKE '%$searcher%') ORDER BY question";
-        $faqArray = $querier5->getResult($q5);
+        $faqArray = $querier5->query($q5);
     }
 
     // Let's get started

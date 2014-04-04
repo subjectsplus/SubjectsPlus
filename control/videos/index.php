@@ -7,7 +7,7 @@
  *   @date march 2011
  */
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\DBConnector;
+
     
 $subcat = "video";
 $page_title = "Video Admin";
@@ -15,8 +15,7 @@ $page_title = "Video Admin";
 include("../includes/header.php");
 
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 
@@ -37,7 +36,7 @@ $qVid = "SELECT video_id, title, description, source, foreign_id, duration, date
 	ORDER BY video_id DESC
 	$limit";
 
-$vidArray = $querierVid->getResult($qVid);
+$vidArray = $querierVid->query($qVid);
 
 $row_count1 = 0;
 $row_count2 = 0;

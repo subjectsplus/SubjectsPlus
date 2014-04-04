@@ -37,7 +37,7 @@ class Pluslet_3 extends Pluslet {
 
     //print $qs;
 
-    $staffArray = $querier->getResult($qs);
+    $staffArray = $querier->query($qs);
 
     foreach ($staffArray as $value) {
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace SubjectsPlus\Control;
+
 /**
  *   @file
  *   @brief
@@ -9,114 +10,109 @@ namespace SubjectsPlus\Control;
  *   @date
  *   @todo fix getQuery()
  */
+    
+// Fetch styles: http://www.php.net/manual/en/pdostatement.fetch.php
+// Example:
+    
+/*
+     
+     $q = new Querier;
+     $rows = $q->query('SELECT * FROM department');
+     print_r($rows);
+     
+     foreach ($rows as $value) {
+     
+     echo $value['name'];
+     
+     }
+     
+*/
 
 use PDO;
-    
-class Querier {
-    
-	private $_query;
+
+class Querier  {
+
+    private $_query;
     private $_connection;
-    
-        function __construct() {
+
+    function __construct() {
         // This creates the connection by reading the credentials from a db.ini file
         $config = parse_ini_file(dirname(dirname(dirname(__DIR__))) . "/control/includes/db.ini", true);
-        
-        $dsn = 'mysql:dbname='. $config['database']['dbname'] . ';host=' . $config['database']['host'] . ';port=' . $config['database']['port'] . ';charset=' .$config['database']['charset'];
-            
+
+        $dsn = 'mysql:dbname=' . $config['database']['dbname'] . ';host=' . $config['database']['host'] . ';port=' . $config['database']['port'] . ';charset=' . $config['database']['charset'];
+
         $username = $config['database']['username'];
         $password = $config['database']['password'];
-         
-        try {
-        $this->_connection = new PDO($dsn, $username, $password, array(
-                       PDO::ATTR_PERSISTENT => true));
-        } catch (PDOException $e) {
-           
-         
-            echo 'Connection failed: ' . $e->getMessage();
-            
-        }
-        
-    }
-    
-    
-    public function query($sql, $fetch_style=NULL) {
-        // Fetch styles: http://www.php.net/manual/en/pdostatement.fetch.php
-        // Example:
 
-        /*
-         $q = new Querier;
-         $rows = $q->query('SELECT * FROM department');
-         print_r($rows);
-         */
+        try {
+            $this->_connection = new PDO($dsn, $username, $password, array(
+                PDO::ATTR_PERSISTENT => true));
+        } catch (PDOException $e) {
+
+
+            echo 'Connection failed: ' . $e->getMessage();
+        }
+    }
+
+    public function query($sql, $fetch_style = NULL) {
         
         // Default is numbered array
-        if ($fetch_style === NULL ){
-            $fetch_style = PDO::FETCH_NUM;
+        if ($fetch_style === NULL) {
+            $fetch_style = PDO::FETCH_BOTH;
         }
-        
+
         $connection = $this->_connection;
-        $result = $connection->query($sql);
-        $rows = $result->fetchAll($fetch_style);
-        
+    
+           $result = $connection->query($sql);
+        if (!$result) {
+            
+            echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
+            print_r($connection->errorInfo()[2]);
+            echo "</p>";
+            echo $sql;
+            
+            $rows = NULL;
+        } else {
+           $rows = $result->fetchAll($fetch_style);
+        }
+     
+
         return $rows;
+    }
+    
+    public function exec($sql) {
+        $connection = $this->_connection;
+        $result = $connection->exec($sql);
+        return $result;
         
     }
     
+    public function fetch($sql) {
+        $connection = $this->_connection;
+        $result = $connection->query($sql);
+        $fetch_row = $connection->fetchColumn();
+        return $fetch_row;
+        
+    }
+ 
     public function num_rows($sql) {
         $connection = $this->_connection;
         $result = $connection->query($sql);
         return count($result);
+    }
+
+ 
+    public function quote($string) {
+        $connection = $this->_connection;
+        $quoted_string = $connection->quote($string);
+        return $quoted_string;
         
     }
     
-    // Ye olde Querier
-    ///////////////////////////////////////////////////////
-	
-    public function getResult($query, $boolAssoc = false) {
-		$this->_query = $query;
-		$resultArray = array();
-		$result  = mysql_query($query);
-		if ($result) {
-
-			if($boolAssoc)
-			{
-				while ($row = mysql_fetch_assoc($result)) {
-					$resultArray[] = $row;
-				}
-			}else
-			{
-				while ($row = mysql_fetch_array($result)) {
-					$resultArray[] = $row;
-				}
-			}
-
-			if (mysql_num_rows($result) > 0) {
-				return $resultArray;
-			} else {
-				return FALSE;
-			}
-		} else {
-			throw new \Exception('Query failed: ' . mysql_error() . '\n');
-		}
+    public function last_id() {
+        $connection = $this->_connection;
+        $last_id = $connection->lastInsertId();
+        return $last_id;
     }
-    
-    
-    public function insertQuery($query) {
-        $this->_query = $query;
-		$resultArray = array();
-		$result  = mysql_query($query);
-        if ($result) {
-            
-		} else {
-			throw new \Exception('Query failed: ' . mysql_error() . '\n');
-		}
-	
-    }
-
-	public function getQuery() {
-		return $this->_query;
-	}
-
 }
-
 ?>

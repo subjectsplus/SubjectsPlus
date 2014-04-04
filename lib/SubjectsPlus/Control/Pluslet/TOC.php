@@ -45,7 +45,7 @@ class Pluslet_TOC extends Pluslet {
 
     //print $qs;
 
-    $this->_tocArray = $querier->getResult($qs);
+    $this->_tocArray = $querier->query($qs);
 
     // public vs. admin
     parent::establishView($view);
@@ -161,4 +161,3 @@ class Pluslet_TOC extends Pluslet {
 }
 
 ?>
-

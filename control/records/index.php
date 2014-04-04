@@ -7,11 +7,12 @@
  *   @author adarby
  *   @date Nov, 2011
  */
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
-    
+use SubjectsPlus\Control\Querier;
+
 $subcat = "records";
 $subsubcat = "index.php";
 $page_title = "Browse Items";
@@ -24,11 +25,7 @@ $full_query = "";
 
 include("../includes/header.php");
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+$db = new Querier;
 
 $results = "<p>" . _("Please select a letter or tag to browse.") . "</p>";
 
@@ -59,23 +56,24 @@ if (isset($_GET["ctag"])) {
 
 $alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions ORDER BY initial";
 
-$alpha_result = MYSQL_QUERY($alpha_query);
+
+$alpha_result = $db->query($alpha_query);
 
 
-while ($myletter = mysql_fetch_array($alpha_result)) {
+    
+foreach ($alpha_result as $myletter) {
 
     $atoz .="<a href=\""
             . "index.php?letter="
-            . $myletter[0]
+            . $myletter[0][0]
             . "\">"
-            . $myletter[0]
+            . $myletter[0][0]
             . "</a> &nbsp;";
 }
 
 $atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
 
 // gather ctags
-//$current_ctags = explode("|", $this->_ctags);
 
 $tag_list = "<span class=\"";
 if (isset($_GET["letter"]) && $_GET["letter"] == "restricted") {
@@ -115,16 +113,17 @@ foreach ($all_ctags as $value) {
 //print $intro;
 
 
-if ($alpha_id) {
+if ($alpha_id & $full_query) {
 
-    $full_result = MYSQL_QUERY($full_query);
+    
+    $full_result = $db->query($full_query);
 
     $row_count = 0;
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
     if ($full_result) {
-        while ($myrow = mysql_fetch_array($full_result)) {
+        foreach ($full_result as $myrow) {
 
             $label = $myrow[0];
             $url = $myrow[2];
@@ -138,11 +137,7 @@ if ($alpha_id) {
 
             $results .= "<div class=\"record-results\" class=\"$row_colour\">\n
         <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
-            /* not being used 
-        <span style=\"display: none;\" class=\"toggle\">$icons<br />\n
-        $blurb<br />\n 
-        <span class=\"smaller\">" . _("Location") . ": <a href=\"$url\">$url</a></span>\n
-        </span>\n*/
+   
         $results .= "</div>\n";
 
             $row_count++;

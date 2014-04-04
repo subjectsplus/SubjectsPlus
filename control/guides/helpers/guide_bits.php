@@ -11,7 +11,7 @@
 
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
-use SubjectsPlus\Control\DBConnector;
+
     
 $subsubcat = "";
 $subcat = "records";
@@ -22,11 +22,7 @@ $header = "noshow";
 include("../../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 //print_r($_POST);
 
@@ -69,16 +65,16 @@ switch ($_REQUEST["type"]) {
 
         if ($_GET["subject_id"] == "") {
             // INSERT
-            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . mysql_real_escape_string(scrubData($_GET["value"])) . "'";
+            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . $db->quote(scrubData($_GET["value"])) . "'";
         } else {
             // UPDATE
-            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . mysql_real_escape_string(scrubData($_GET["value"])) . "' AND subject_id != '" . mysql_real_escape_string(scrubData($_GET["subject_id"])) . "'";
+            $qcheck = "SELECT shortform FROM subject WHERE shortform = '" . $db->quote(scrubData($_GET["value"])) . "' AND subject_id != '" . $db->quote(scrubData($_GET["subject_id"])) . "'";
         }
 
         //print $qcheck;
-        $rcheck = MYSQL_QUERY($qcheck);
+        $rcheck = $db->query($qcheck);
 
-        if (mysql_num_rows($rcheck) == 0) {
+        if (count($rcheck) == 0) {
             echo "ok";
         } else {
             echo "dupe";
@@ -95,9 +91,10 @@ switch ($_REQUEST["type"]) {
                 AND ss.staff_id = st.staff_id
                 AND s.shortform = '" . $_POST["shortform"] . "'";
             //print $q;
-            $r = MYSQL_QUERY($q);
+            $db = new Querier
+            $r = $db->query($q);
 
-            while ($row = mysql_fetch_array($r)) {
+            foreach ($r as $row) {
 
                 $mail_to .= $row[1] . ",";
             }

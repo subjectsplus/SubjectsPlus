@@ -8,7 +8,7 @@
  *   @date mar 2014
  */
 
-use SubjectsPlus\Control\DBConnector;
+
 
 $subcat = "stats";
 $page_title = "Stats in SP";
@@ -18,8 +18,7 @@ include("../includes/header.php");
 
 
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 

@@ -1,7 +1,10 @@
 <?php
-use SubjectsPlus\Control\DBConnector;
 
+use SubjectsPlus\Control\Querier;
+ 
+include_once("autoloader.php");
 
+    
 //////////////////////////////
 // If gettext isn't installed
 // just return the string
@@ -56,8 +59,7 @@ function isCool($emailAdd="", $password="") {
 
 
   try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-  } catch (Exception $e) {
+      } catch (Exception $e) {
     echo $e;
   }
 
@@ -65,8 +67,9 @@ function isCool($emailAdd="", $password="") {
         FROM staff
         WHERE email = '" . scrubData($emailAdd, "email") . "' AND password = '" . scrubData($password) . "'";
 
-  $result = MYSQL_QUERY($query);
-  $numrows = mysql_num_rows($result);
+  $db = new Querier;
+  $result = $db->query($query);
+  $numrows = count($result);
 
   if ($debugger == "yes") {
     print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
@@ -74,8 +77,7 @@ function isCool($emailAdd="", $password="") {
 
   if ($numrows > 0) {
 
-    $user = mysql_fetch_row($result);
-
+    $user = $result;
     if (is_array($user)) {
 
 //set session variables
@@ -83,22 +85,22 @@ function isCool($emailAdd="", $password="") {
       session_regenerate_id();
 
 // Create session vars for the basic types
-      $_SESSION['checkit'] = md5($user[4]) . $salt;
-      $_SESSION['staff_id'] = $user[0];
-      $_SESSION['ok_ip'] = $user[1];
-      $_SESSION['fname'] = $user[2];
-      $_SESSION['lname'] = $user[3];
-      $_SESSION['email'] = $user[4];
-      $_SESSION['user_type_id'] = $user[5];
+      $_SESSION['checkit'] = md5($user[0][4]) . $salt;
+      $_SESSION['staff_id'] = $user[0][0];
+      $_SESSION['ok_ip'] = $user[0][1];
+      $_SESSION['fname'] = $user[0][2];
+      $_SESSION['lname'] = $user[0][3];
+      $_SESSION['email'] = $user[0][4];
+      $_SESSION['user_type_id'] = $user[0][5];
 
 // unpack our extra
-      if ($user[7] != NULL) {
-        $jobj = json_decode($user[7]);
+      if ($user[0][7] != NULL) {
+        $jobj = json_decode($user[0][7]);
         $_SESSION['css'] = $jobj->{'css'};
       }
 
 // unpack our ptags
-      $current_ptags = explode("|", $user[6]);
+      $current_ptags = explode("|", $user[0][6]);
 
       foreach ($current_ptags as $value) {
         $_SESSION[$value] = 1;
@@ -281,10 +283,10 @@ function getSubBoxes($prefix="", $trunc="", $all_subs=0) {
             ORDER BY type, subject";
   }
 
+  $db = new Querier;
+  $subs_result = $db->query($subs_query);
 
-  $subs_result = MYSQL_QUERY($subs_query);
-
-  $num_subs = mysql_num_rows($subs_result);
+  $num_subs = count($subs_result);
 
   if ($num_subs > 0) {
 
@@ -292,10 +294,10 @@ function getSubBoxes($prefix="", $trunc="", $all_subs=0) {
     $current_type = "";
     $subs_option_boxes = "";
 
-    while ($myrow = mysql_fetch_array($subs_result)) {
-      $subs_id = $myrow["0"];
-      $subs_name = $myrow["1"];
-      $subs_type = $myrow["2"];
+    foreach ($subs_result as $myrow) {
+      $subs_id = $myrow[0];
+      $subs_name = $myrow[1];
+      $subs_type = $myrow[2];
 
       if ($trunc) {
         $subs_name = Truncate($subs_name, $trunc, '');
@@ -316,19 +318,21 @@ function getSubBoxes($prefix="", $trunc="", $all_subs=0) {
 }
 
 function getDBbySubBoxes($selected_sub) {
-
+  $db = new Querier;
   $subs_option_boxes = "";
   $alphabet = "";
 
-  $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type = 'Subject' AND active = '1' ORDER BY subject";
-  $subs_result = MYSQL_QUERY($subs_query);
+  $subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE type = 'Subject' AND active = '1' ORDER BY subject";
+  $subs_result = $db->query($subs_query);
 
-  $num_subs = mysql_num_rows($subs_result);
+
+ 
+  $num_subs = count($subs_result);
 
   if ($num_subs > 0) {
-    while ($myrow = mysql_fetch_array($subs_result)) {
-      $subs_id = $myrow["0"];
-      $subs_name = $myrow["1"];
+    foreach ($subs_result as $myrow) {
+      $subs_id = $myrow[0];
+      $subs_name = $myrow[1];
 
       $subs_name = Truncate($subs_name, 50, '');
 
@@ -349,6 +353,7 @@ function getDBbySubBoxes($selected_sub) {
 }
 
 function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
+  $db = new Querier;
 
   global $dbName_SPlus;
 
@@ -359,7 +364,7 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
     $q = "insert into chchchanges (staff_id, ourtable, record_id, record_title, message)
         values(" . $staff_id . ", \"$table\", " . $item_id . ", \"" . $record_title . "\", \"$flag\")";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->exec($q);
     if ($r) {
       return true;
     } else {
@@ -371,16 +376,16 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
         FROM `chchchanges`
         WHERE record_id = \"$item_id\" and ourtable = \"$table\" ORDER BY date_added DESC";
 
-    $rtest = MYSQL_QUERY($qtest);
+    $result = $db->query($qtest);
 
-    $result = mysql_fetch_row($rtest);
+    
 
 // If there are no results, we need to insert a record
     if (!$result) {
       $q = "insert into chchchanges (staff_id, ourtable, record_id, record_title, message)
             values(" . $staff_id . ", \"$table\", " . $item_id . ", \"" . $record_title . "\", \"$flag\")";
 
-      $r = MYSQL_QUERY($q);
+      $r = $db->exec($q);
       if ($r) {
         return true;
       } else {
@@ -400,7 +405,7 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
       }
 //print $q;
 
-      $r = MYSQL_QUERY($q);
+      $r = $db->exec($q);
       if ($r) {
         return true;
       } else {
@@ -418,13 +423,15 @@ function lastModded($table, $record_id, $zero_message = 1, $show_email = 1) {
         AND record_id = '$record_id'
         ORDER BY date_added DESC";
 //print $q;
-  $r = MYSQL_QUERY($q);
-  $my_mod = mysql_fetch_row($r);
+  $db = new Querier;
+  $r = $db->query($q);
+  $my_mod = $r;
 
+ 
   if ($my_mod) {
-    $val = $my_mod[1];
+                           $val = $my_mod[0]['last_modified'];
     if ($show_email == 1) {
-      $val .= ", " . $my_mod[0];
+      $val .= ", " . $my_mod[0]['email'];
     }
   } else {
     if ($zero_message == 1) {
@@ -505,8 +512,8 @@ function blunDer($message, $type = 1) {
 
 function findDescOverride($subject_id, $title_id) {
   $query = "SELECT description_override FROM rank WHERE subject_id = '$subject_id' AND title_id = '$title_id'";
-  $result = mysql_query($query);
-  $override_text = mysql_fetch_row($result);
+  $override_text = $db->query($query);
+ 
   if ($override_text[0] != "") {
     return $override_text[0];
   }
@@ -655,10 +662,10 @@ function seeRecentChanges($staff_id, $limit=10) {
 
 
   //print $sq2;
+  $db = new Querier;
+  $sr2 = $db->query($sq2);
 
-  $sr2 = MYSQL_QUERY($sq2);
-
-  $num_rows = mysql_num_rows($sr2);
+  $num_rows = count($sr2);
 
   $row_count = 0;
   $colour1 = "oddrow";
@@ -666,7 +673,7 @@ function seeRecentChanges($staff_id, $limit=10) {
 
   if ($num_rows != 0) {
 
-    while ($myrow2 = mysql_fetch_array($sr2)) {
+    foreach ($sr2 as $myrow2) {
 
       $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -775,15 +782,15 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
 
   $q = "SELECT fname, lname, title, tel, email FROM staff WHERE email = '$email'";
 
-  $r = MYSQL_QUERY($q);
+  $r = $db->query($q);
 
-  $row_count = mysql_num_rows($r);
+  $row_count = count($r);
 
   if ($row_count == 0) {
     return;
   }
 
-  while ($myrow = mysql_fetch_array($r)) {
+  foreach ($r as $myrow) {
 
     if ($link_name == 1) {
       $email = $myrow["email"];
@@ -880,11 +887,11 @@ function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE)
     }
 
 //print $lq;
+    $db = new Querier;
+    $lr = $db->query($lq);
 
-    $lr = MYSQL_QUERY($lq);
-
-    while ($mylets = mysql_fetch_row($lr)) {
-      $letterz[] = $mylets[0];
+    foreach ($lr as $mylets) {
+      $letterz[] = $mylets[0][0];
     }
     if ($numbers == 1) {
       $letterz[] = "Num";
@@ -995,16 +1002,16 @@ function isInstalled()
 	global $dbName_SPlus;
 
 	try {
-		$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-	} catch (Exception $e) {
+			} catch (Exception $e) {
 		echo $e;
 	}
 
 	//does key SubjectsPlus tables exist query
 	$lstrQuery = 'SHOW TABLES LIKE \'staff%\'';
 
-	$rscResults = MYSQL_QUERY( $lstrQuery );
-	$lintRowCount = mysql_num_rows( $rscResults );
+    $db = new Querier;
+	$rscResults = $db->query( $lstrQuery );
+	$lintRowCount = count( $rscResults );
 
 	//no key SubjectsPlus tables exists
 	if( $lintRowCount == 0 ) return FALSE;
@@ -1025,16 +1032,15 @@ function isUpdated()
 	global $dbName_SPlus;
 
 	try {
-		$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-	} catch (Exception $e) {
+			} catch (Exception $e) {
 		echo $e;
 	}
 
 	//does key SubjectsPlus 2.0 tables exist query
 	$lstrQuery = 'SHOW TABLES LIKE \'discipline\'';
-
-	$rscResults = MYSQL_QUERY( $lstrQuery );
-	$lintRowCount = mysql_num_rows( $rscResults );
+    $db = new Querier;
+	$rscResults = count( $lstrQuery );
+	$lintRowCount = count( $rscResults );
 
 	//no key SubjectsPlus 2.0 tables exists
 	if( $lintRowCount == 0 ) return FALSE;
@@ -1192,4 +1198,18 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "") {
     </div>
   </div>";
 }
+            
+
+// Mod in_array to work with multidimensional arrays
+function in_array_r($needle, $haystack, $strict = false) {
+    foreach ($haystack as $item) {
+        if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+            
+
 ?>

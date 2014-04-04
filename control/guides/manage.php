@@ -101,7 +101,7 @@ if ($userFiles) {
                         p.body LIKE '%" . $shortName . "%'";
             print $findOwnersQuery;
 
-            $findOwnerResult = $querier->getResult($findOwnersQuery);
+            $findOwnerResult = $querier->query($findOwnersQuery);
             $owner = $findOwnerResult[0]['fname'] . " " . $findOwnerResult[0]['lname'];
 
             $findGuidesQuery = "SELECT s.subject, s.subject_id
@@ -112,7 +112,7 @@ if ($userFiles) {
                         p.body LIKE '%" . $location_hint . "/" . $shortName . "%'";
 
             //print $findGuidesQuery;
-            $findGuidesResult = $querier->getResult($findGuidesQuery);
+            $findGuidesResult = $querier->query($findGuidesQuery);
             $guides = array(); // for the list of guides in which the file appears
 
             if ($findGuidesResult) {
@@ -136,12 +136,12 @@ if ($userFiles) {
 				ON s.subject_id = ss.subject_id
 				INNER JOIN staff st
 				ON ss.staff_id = st.staff_id
-				WHERE p.body LIKE '%" . mysql_real_escape_string($location_hint) . "/" . mysql_real_escape_string($shortName) . "%'
-                OR p.body LIKE '%" . mysql_real_escape_string($location_hint) . trim( " \\ " ) . mysql_real_escape_string($shortName) . "%'
-                OR p.body LIKE '%" . mysql_real_escape_string($location_hint) . trim( " \\ " ) . "image" . trim( " \\ " ) . mysql_real_escape_string($shortName) . "%'
-                OR p.body LIKE '%" . mysql_real_escape_string($location_hint) . "/image/" . mysql_real_escape_string($shortName) . "%'";;
+				WHERE p.body LIKE '%" . $db->quote($location_hint) . "/" . $db->quote($shortName) . "%'
+                OR p.body LIKE '%" . $db->quote($location_hint) . trim( " \\ " ) . $db->quote($shortName) . "%'
+                OR p.body LIKE '%" . $db->quote($location_hint) . trim( " \\ " ) . "image" . trim( " \\ " ) . $db->quote($shortName) . "%'
+                OR p.body LIKE '%" . $db->quote($location_hint) . "/image/" . $db->quote($shortName) . "%'";;
 
-            $findGuidesResult = $querier->getResult($findGuidesQuery);
+            $findGuidesResult = $querier->query($findGuidesQuery);
             $guides = array(); // for the list of guides in which the file appears
 
             if ($findGuidesResult) {

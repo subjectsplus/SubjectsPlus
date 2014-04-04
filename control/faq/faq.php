@@ -7,7 +7,7 @@
  *   @date mar 2011
  *
  */
-use SubjectsPlus\Control\DBConnector;
+
 use SubjectsPlus\Control\FAQ;
 
 $subcat = "faq";
@@ -22,8 +22,7 @@ include("../includes/header.php");
 
 // Connect to database
 try {
-  $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
+  } catch (Exception $e) {
   echo $e;
 }
 

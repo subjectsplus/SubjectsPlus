@@ -69,3 +69,5 @@ control/includes/config.php
 subjects/includes/pgcache/*
 
 /assets/users/
+
+.idea/

@@ -8,7 +8,7 @@
  *   @date feb 2012
  *   @todo this is hopelessly redundant of set_picture.php
  */
-use SubjectsPlus\Control\DBConnector;
+
 
 $subsubcat = "";
 $subcat = "";
@@ -19,11 +19,7 @@ $no_header = "yes";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 // Make sure they have permission to change a picture
 // needs to be either theirs, or they're an admin

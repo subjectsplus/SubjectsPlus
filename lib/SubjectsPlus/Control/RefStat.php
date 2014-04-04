@@ -63,7 +63,7 @@ class RefStat {
                 FROM uml_refstats_mode
                 ORDER BY label";
 
-        $this->_modes = $querier1->getResult($q1);
+        $this->_modes = $querier1->query($q1);
 
         $this->_debug .= "<p>Modes query: $q1";
 
@@ -77,7 +77,7 @@ class RefStat {
                 FROM uml_refstats_location
                 ORDER BY label";
 
-        $this->_locations = $querier2->getResult($q2);
+        $this->_locations = $querier2->query($q2);
 
         $this->_debug .= "<p>Locations query: $q2";
 
@@ -91,7 +91,7 @@ class RefStat {
                 FROM uml_refstats_type
                 ORDER BY label";
 
-        $this->_types = $querier3->getResult($q3);
+        $this->_types = $querier3->query($q3);
 
 
         $this->_debug .= "<p>" . ("Types query:") . " $q3";
@@ -166,11 +166,11 @@ echo "</form>";
     /////////////////////
 
     $qInsert = "INSERT INTO uml_refstats (type_id, location_id, mode_id, date, note) VALUES (
-	  '" . mysql_real_escape_string(scrubData($this->_type_id, "integer")) . "',
-	  '" . mysql_real_escape_string(scrubData($this->_location_id, "integer")) . "',
-    '" . mysql_real_escape_string(scrubData($this->_mode_id, "integer")) . "',
-    '" . mysql_real_escape_string(scrubData($this->_date, "text")) . "',
-    '" . mysql_real_escape_string(scrubData($this->_note, "text")) . "'
+	  '" . $db->quote(scrubData($this->_type_id, "integer")) . "',
+	  '" . $db->quote(scrubData($this->_location_id, "integer")) . "',
+    '" . $db->quote(scrubData($this->_mode_id, "integer")) . "',
+    '" . $db->quote(scrubData($this->_date, "text")) . "',
+    '" . $db->quote(scrubData($this->_note, "text")) . "'
     )";
 
     //print $qInsert;
@@ -178,11 +178,11 @@ echo "</form>";
     // if we're doing multiple identicals. we loop
       $x = 0;
       while ($x < $this->_submit_times_x ) {
-        $rInsert = mysql_query($qInsert);
+        $rInsert = $db->query($qInsert);
         $x++;
       }
       
-    $this->_refstat_id = mysql_insert_id();
+    $this->_refstat_id = $db->last_id();
 
     $this->_debug = "<p>1. insert: $qInsert</p>";
     if (!$rInsert) {
@@ -209,4 +209,3 @@ echo "</form>";
 }
 
 ?>
-

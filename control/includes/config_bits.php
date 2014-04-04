@@ -8,7 +8,7 @@
  *   @date
  *   @todo scrub post vars
  */
-use SubjectsPlus\Control\DBConnector;
+
     
     
 $subsubcat = "";
@@ -20,11 +20,7 @@ $header = "noshow";
 include("../includes/header.php");
 
 // Connect to database
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 //print_r($_POST);
 
@@ -32,8 +28,8 @@ switch ($_POST["type"]) {
     case "set_css":
     // update the extra field or set a cookie or both
         $extra_stuff = "{\"css\": \"" . $_POST["css_file"] . "\"}";
-        $q = "UPDATE staff SET extra = '" . mysql_real_escape_string($extra_stuff) . "' WHERE staff_id = " . $_SESSION["staff_id"];
-        $r = MYSQL_QUERY($q);
+        $q = "UPDATE staff SET extra = '" . $db->quote($extra_stuff) . "' WHERE staff_id = " . $_SESSION["staff_id"];
+        $r = $db->query($q);
         $_SESSION['css'] = $_POST["css_file"];
         print "<script> jQuery.growl.notice({message:'', title:'" .  _("Background Updated!") . "'});</script>";
         break;

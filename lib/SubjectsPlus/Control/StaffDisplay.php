@@ -8,6 +8,10 @@
  *   @date
  *   @todo
  */
+    
+use PDO;
+    
+    
 class StaffDisplay {
 
   function writeTable($qualifier, $get_assoc_subs = 1, $print_display = 0) {
@@ -26,7 +30,7 @@ class StaffDisplay {
             AND ptags like '%librarian%'
 			order by lname, fname";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         $items = "<table width=\"98%\" class=\"item_listing\">";
 
@@ -35,7 +39,7 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $current_dept = "";
 
-        while ($myrow = mysql_fetch_array($r)) {
+        foreach ($r as $myrow) {
 
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -89,7 +93,7 @@ class StaffDisplay {
             AND active = 1
 			order by department_sort, d.name,  staff_sort desc, lname";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         $items = "<table width=\"98%\" class=\"item_listing\">";
 
@@ -98,7 +102,7 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $current_dept = "";
 
-        while ($myrow = mysql_fetch_array($r)) {
+           foreach ($r as $myrow) {
 
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -169,7 +173,7 @@ class StaffDisplay {
                 AND shortform != 'NewDatabases'
                 order by lname, fname";
 
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
 
         $items = "<table width=\"98%\" class=\"item_listing\">
 			<tr>
@@ -181,7 +185,7 @@ class StaffDisplay {
         $colour1 = "oddrow";
         $colour2 = "evenrow";
 
-        while ($myrow = mysql_fetch_array($r)) {
+          foreach ($r as $myrow) {
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
           $items .= "<tr class=\"$row_colour\">\n
@@ -200,15 +204,15 @@ class StaffDisplay {
 
           /* Select all active records (this is based on a db connection made above) */
 
-          $sub_result = MYSQL_QUERY($sub_query);
+          $sub_result = $db->query($sub_query);
 
-          $num_rows = (mysql_num_rows($sub_result) - 1);
+          $num_rows = (count($sub_result) - 1);
 
           // Loop through all items, sticking commas in between
 
           $subrowcount = 0;
 
-          while ($subrow = mysql_fetch_array($sub_result)) {
+          foreach ($sub_result as $sub_row) {
 
             if ($mod_rewrite == 1) {
               $linky = $subrow[1];
@@ -242,7 +246,7 @@ class StaffDisplay {
             AND shortform != 'NewDatabases'
 			order by subject, lname, fname";
         $head_fields = array("Subject", "Library Liaison", "Phone", "Email");
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
         $items = prepareTH($head_fields);
 
         $row_count = 0;
@@ -250,7 +254,7 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $subrowsubject = "";
 
-        while ($myrow = mysql_fetch_array($r)) {
+    foreach ($r as $myrow) {
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
           $tel = $tel_prefix . $myrow["tel"];
@@ -319,8 +323,8 @@ class StaffDisplay {
 
         $head_fields = array($hf1, $hf2, $hf3, $hf4);
 
-
-        $r = MYSQL_QUERY($q);
+        $db = new Querier;
+            $r = $db->query($q,PDO::FETCH_ASSOC);
 
         $items = prepareTH($head_fields);
 
@@ -328,7 +332,7 @@ class StaffDisplay {
         $colour1 = "oddrow";
         $colour2 = "evenrow";
 
-        while ($myrow = mysql_fetch_array($r)) {
+        foreach ($r as $myrow) {
 
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -407,10 +411,10 @@ class StaffDisplay {
               AND shortform != 'NewDatabases'
               ORDER BY subject";
       //print $q2;
+        $db = new Querier;
+      $r2 = $db->query($q2);
 
-      $r2 = MYSQL_QUERY($q2);
-
-      while ($myrow2 = mysql_fetch_array($r2)) {
+      foreach ($r2 as $myrow2) {
 
         if ($mod_rewrite == 1) {
           $link_to_guide = $myrow2[1];

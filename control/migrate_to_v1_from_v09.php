@@ -34,11 +34,7 @@ $page_title = "Migration script";
 
 include("includes/header.php");
 
-try {
-    $dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-} catch (Exception $e) {
-    echo $e;
-}
+
 
 // ALTER TABLE staff ADD ptags VARCHAR( 255 ) NULL DEFAULT NULL, ADD active INT( 1 ) NOT NULL DEFAULT '1', ADD extra VARCHAR( 255 ) NULL DEFAULT NULL, ADD bio TEXT NULL DEFAULT NULL
 // UPDATE `ithaca2_live2`.`staff` SET `ptags` = 'talkback|faq|records|eresource_mgr|admin' WHERE `staff`.`staff_id` =9;
@@ -51,7 +47,7 @@ if ($fixPermissions) {
 
     $querierUser = new Querier();
     $qUser = "SELECT staff_id, email, talkback, rxs, rxs_eres, admin, faq FROM staff WHERE user_type_id = 1";
-    $userArray = $querierUser->getResult($qUser);
+    $userArray = $querierUser->query($qUser);
 
 //print_r($userArray);
 
@@ -79,7 +75,7 @@ if ($fixPermissions) {
 
         //$querierUpdate = new sp_Querier();
         $q2 = "UPDATE staff SET ptags = '$new_permissions' WHERE staff_id = '" . $value["staff_id"] . "'";
-        $r = MYSQL_QUERY($q2);
+        $r = $db->query($q2);
 
         if ($r) {
             print "<p>Permissions fixed for $value[1]";
@@ -101,7 +97,7 @@ if ($removeOldPermissions) {
     DROP `admin` ,
     DROP `faq`";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
     if ($r) {
         print "<p>Obsolete fields removed from staff table.</p>";
     } else {
@@ -119,7 +115,7 @@ if ($addStaffDeets) {
         FROM staff s, staff_details sd
         WHERE s.staff_id = sd.staff_id
         ORDER BY s.staff_id";
-    $userArray = $querierUser->getResult($qUser);
+    $userArray = $querierUser->query($qUser);
 
 //print_r($userArray);
 
@@ -142,7 +138,7 @@ if ($addStaffDeets) {
         }
 
         $q = "UPDATE staff set bio = '" . $staff_deets . "' WHERE staff_id = " . $value[0];
-        $r = MYSQL_QUERY($q);
+        $r = $db->query($q);
     }
 }
 
@@ -152,7 +148,7 @@ if ($addStaffDeets) {
 
 if ($addCallnum) {
     $q = "ALTER TABLE `location` ADD `call_number` VARCHAR( 255 ) NULL DEFAULT NULL AFTER `format`";
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     if ($r) {
         print "<p>call_number field added to location table.</p>";
@@ -170,7 +166,7 @@ if ($updateCtags) {
 
     // Add ctags column first
     $q = "ALTER TABLE location ADD ctags VARCHAR( 255 ) NULL DEFAULT NULL";
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     if ($r) {
         print "<p>ctags field added to location table.</p>";
@@ -181,7 +177,7 @@ if ($updateCtags) {
     $querierLoc = new Querier();
     $qLoc = "SELECT location_id, article_linker, image_files, video_files, audio_files, fulltextCol
     FROM location";
-    $locArray = $querierLoc->getResult($qLoc);
+    $locArray = $querierLoc->query($qLoc);
 
 //print_r($locArray);
 
@@ -206,7 +202,7 @@ if ($updateCtags) {
 
         //$querierUpdate = new sp_Querier();
         $q2 = "UPDATE location SET ctags = '$new_permissions' WHERE location_id = '" . $value["location_id"] . "'";
-        $r = MYSQL_QUERY($q2);
+        $r = $db->query($q2);
 
         if ($r) {
             print "<p>Locations updated for $value[0]";
@@ -228,7 +224,7 @@ if ($removeOldLocations) {
     DROP `audio_files` ,
     DROP `fulltextCol`";
 
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
     if ($r) {
         print "<p>Obsolete fields removed from locations table.</p>";
     } else {
@@ -243,7 +239,7 @@ if ($removeOldLocations) {
 if ($updatePlusletTypes) {
 
     $q9 = "UPDATE pluslet SET type = 'Special' WHERE local_file != ''";
-    $r9 = MYSQL_QUERY($q9);
+    $r9 = $db->query($q9);
 
     if ($r9) {
         print "<p>Updated files to Special type.</p>";
@@ -252,7 +248,7 @@ if ($updatePlusletTypes) {
     }
 
     $q9a = "UPDATE pluslet SET extra = '' WHERE type = 'Special'";
-    $r9a = MYSQL_QUERY($q9a);
+    $r9a = $db->query($q9a);
 
     if ($r9a) {
         print "<p>Set extra to empty for type = Special.</p>";
@@ -261,7 +257,7 @@ if ($updatePlusletTypes) {
     }
 
     $q9b = "UPDATE pluslet SET extra = '', body = '' WHERE type = 'Heading'";
-    $r9b = MYSQL_QUERY($q9b);
+    $r9b = $db->query($q9b);
 
     if ($r9b) {
         print "<p>Empty out extra and body fields for type = Heading.</p>";
@@ -281,7 +277,7 @@ if ($updatePlusletTypes) {
 
 if ($addExtraFieldToPluslet) {
     $q = "ALTER TABLE `pluslet` CHANGE `extra` `extra` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL";
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     if ($r) {
         print "<p>Made extra field larger (255 chars).</p>";
@@ -301,7 +297,7 @@ if ($convertToJson) {
     $qextra = "SELECT pluslet_id, type, extra
     FROM `pluslet` 
     WHERE  type = 'deliciouslinks' OR type = 'flickr' OR type = 'rss' OR type = 'twitter'";
-    $extraArray = $querierExtra->getResult($qextra);
+    $extraArray = $querierExtra->query($qextra);
 
 //print_r($userArray);
 
@@ -339,7 +335,7 @@ if ($convertToJson) {
         //print "<p>json = " .$our_json . "<br />";
         //$querierUpdate = new sp_Querier();
         $q2 = "UPDATE pluslet SET extra = '$our_json' WHERE pluslet_id = '" . $value["pluslet_id"] . "'";
-        $r5 = MYSQL_QUERY($q2);
+        $r5 = $db->query($q2);
         if ($r5) {
             print "<p>success! new extra for " . $value["pluslet_id"] . " = $our_json</p>";
         } else {
@@ -357,7 +353,7 @@ if ($updateTypeCol) {
 
 
     $q4 = "UPDATE pluslet SET type = 'Feed' WHERE type = 'deliciouslinks' OR type = 'flickr' OR type = 'rss' OR type = 'twitter'";
-    $r4 = MYSQL_QUERY($q4);
+    $r4 = $db->query($q4);
 
     if ($r4) {
         print "<p>Updated files to Feed type.</p>";
@@ -366,7 +362,7 @@ if ($updateTypeCol) {
     }
 
     $q5 = "UPDATE pluslet SET type = 'Heading' WHERE type = 'heading'";
-    $r5 = MYSQL_QUERY($q5);
+    $r5 = $db->query($q5);
 
     if ($r5) {
         print "<p>Updated files to Heading type.</p>";
@@ -375,7 +371,7 @@ if ($updateTypeCol) {
     }
 
     $q6 = "UPDATE `pluslet` SET TYPE = 'Basic' WHERE TYPE = '' OR ISNULL(TYPE)";
-    $r6 = MYSQL_QUERY($q6);
+    $r6 = $db->query($q6);
 
     if ($r6) {
         print "<p>Updated all remaining files to Basic type.</p>";
@@ -387,7 +383,7 @@ if ($updateTypeCol) {
 if ($updateSubjectTable) {
 
     $q7 = "ALTER TABLE `subject` ADD `extra` VARCHAR( 255 ) NULL DEFAULT NULL ";
-    $r7 = MYSQL_QUERY($q7);
+    $r7 = $db->query($q7);
 
     if ($r7) {
         print "<p>Added 'extra' column to subject table.</p>";
@@ -400,10 +396,10 @@ if ($updateSubjectTable) {
 if ($updateTBTable) {
 
     $q8 = "UPDATE `talkback` SET display = 1 WHERE display = 'Yes'";
-    $r8 = MYSQL_QUERY($q8);
+    $r8 = $db->query($q8);
 
     $q9 = "UPDATE `talkback` SET display = 0 WHERE display = 'No'";
-    $r9 = MYSQL_QUERY($q9);
+    $r9 = $db->query($q9);
 
     if ($r8) {
         print "<p>Modify talkback table.</p>";

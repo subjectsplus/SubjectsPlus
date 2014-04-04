@@ -40,12 +40,12 @@ if (isset($_POST['shortform'])) {
 
  //print $q;
 
-$r = MYSQL_QUERY($q);
+$r = $db->query($q);
 
 $row_count = 0;
 
-if (mysql_num_rows($r) != 0) {
-	while($myrow =  mysql_fetch_array($r)) {
+if (count($r) != 0) {
+	foreach ($r as $myrow){
 
 		$colour1 = "#fff";
 		$colour2 = "#F6E3E7";
@@ -62,8 +62,8 @@ if (mysql_num_rows($r) != 0) {
 						INNER JOIN pluslet p
 						ON pt.pluslet_id = p.pluslet_id
 						WHERE p.pluslet_id = $myrow[0]";
-				$r2 = MYSQL_QUERY($q2);
-				$this_sub = mysql_fetch_row($r2);
+				$this_sub = $db->query($q2);
+				
 				$add_info = "<span style=\"font-size: 10px;\">($this_sub[0])</span>";
 			}
 		$results .= "<div style=\"background-color:$row_colour ; padding: 2px;\"><img src=\"$IconPath/list-add.png\" name=\"add-$myrow[0]-$myrow[2]\" border=\"0\" alt=\"add\" /> $myrow[1] $add_info</div>";

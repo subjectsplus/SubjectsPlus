@@ -37,7 +37,7 @@ $qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(dat
     ORDER BY date_submitted DESC
     $our_limit";
 
-$tbArrayYes = $querierTBYES->getResult($qTBYES);
+$tbArrayYes = $querierTBYES->query($qTBYES);
 
 $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
 
