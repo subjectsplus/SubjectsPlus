@@ -50,11 +50,11 @@ class Record {
 			case "post":
         // prepare record for insertion or update
         // data stored in title table
-			$this->_title_id = $_POST["title_id"];
-			$this->_prefix = $_POST["prefix"];
-			$this->_title = $_POST["title"];
-			$this->_alternate_title = $_POST["alternate_title"];
-			$this->_description = $_POST["description"];
+  			$this->_title_id = $_POST["title_id"];
+  			$this->_prefix = $_POST["prefix"];
+  			$this->_title = $_POST["title"];
+  			$this->_alternate_title = $_POST["alternate_title"];
+  			$this->_description = $_POST["description"];
 
         // data stored in location table
         $this->_location_id = $_POST["location_id"]; // array
@@ -163,18 +163,29 @@ class Record {
   		$action .= "&wintype=pop";
   	}
 
+    // set up
+    print "<div class=\"pure-g-r\">";
+
   	echo "
-  	<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
+  	<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
   	<input type=\"hidden\" name=\"title_id\" value=\"" . $this->_record_id . "\" />
-  	<div style=\"float: left; margin-right: 20px; \">
-  	<div class=\"box\">
-  	<span class=\"record_label\">" . _("Record Title") . "</span><br />
-  	<input type=\"text\" name=\"prefix\" id=\"prefix\" size=\"1\" value=\"" . $this->_prefix . "\" /><input type=\"text\" name=\"title\" id=\"record_title\" size=\"60\" class=\"required_field\" value=\"" . $this->_title . "\" />
-  	<br /><br />
-  	<span class=\"record_label\">" . _("Alternate Title") . "</span><br />
-  	<input type=\"text\" name=\"alternate_title\" id=\"alternate_record_title\" size=\"60\" value=\"" . $this->_alternate_title . "\" />
-  	<br /><br />
-  	<span class=\"record_label\">" . _("Description") . "</span><br />
+  	<div class=\"pure-u-1-3\">
+  	<div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Record") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
+        <label for=\"prefix\">" . _("Prefix") . "</label>
+      	<input type=\"text\" name=\"prefix\" id=\"prefix\" class=\"pure-input-1-4\" value=\"" . $this->_prefix . "\" />
+
+        <label for=\"record_title\">" . _("Record Title") . "</label>
+        <input type=\"text\" name=\"title\" id=\"record_title\" class=\"pure-input-1 required_field\" value=\"" . $this->_title . "\" />
+
+  	<label for=\"record_label\">" . _("Alternate Title") . "</label>
+  	<input type=\"text\" name=\"alternate_title\" id=\"alternate_record_title\" class=\"pure-input-1\" value=\"" . $this->_alternate_title . "\" />
+
+  	<label for=\"record_label\">" . _("Description") . "</label>
 
   	";
 
@@ -188,33 +199,36 @@ class Record {
   		$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
   		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-  		echo $oCKeditor->editor('description', $this->_description, $config);
+  		 $oCKeditor->editor('description', $this->_description, $config);
   		echo "<br />";
 	} else {
 		echo "<textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
 	}
 
-	echo "</div>
-	<!--<h2 class=\"bw_head\">" . _("Location") . "</h2>-->
-	";
+	echo "</div></div>"; // end pluslet_body, end pluslet
+  print "</div>"; // end 1/3 grid
+  print "<div class=\"pure-u-1-3\">";
 
-
-    // Loop through locations
+  // Loop through locations
 	self::buildLocation();
 
-	echo "
-	<div class=\"add_location\"><img src=\"$IconPath/list-add.png\" alt=\"add new location\"  border=\"0\" /> Add another location</div>
-	</div>
-	<!-- right hand column -->
-	<div style=\"float: left;min-width: 270px;\">
+	
+	$add_loc = "<div class=\"add_location\"><img src=\"$IconPath/list-add.png\" alt=\"add new location\"  border=\"0\" /> Add another location</div>";
+
+  print $add_loc;
+
+	echo "</div>
+	<!-- right hand column -->";
+  print "<div class=\"pure-u-1-3\">
+	
 	<div id=\"record_buttons\" class=\"box\">
-	<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Record Now") . "\" />";
+	<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
 	if ($this->_record_id != "") {
 		if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
-			echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\" />";
+			echo " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
 		} else {
-			echo "<input type=\"submit\" name=\"recommend_delete\" class=\"recommend_delete\" value=\"" . _("Recommend Delete") . "\" />";
+			echo " <input type=\"submit\" name=\"recommend_delete\" class=\"pure-button pure-button-warning\" value=\"" . _("Recommend Delete") . "\" />";
 		}
 	}
     // get edit history
@@ -233,11 +247,15 @@ class Record {
 	$sourceMe = new Dropdown("default_source_id", $defsourceArray, $this->_def_source[0][0]);
 	$source_string = $sourceMe->display();
 
-	echo " <div class=\"box\">
-	<h2 class=\"bw_head\"><img src=\"$IconPath/source_override.png\" alt=\"delete\" border=\"0\"> " . _("Default Source Type") . "</h2>
+	echo "<div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Default Source Type") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
 
 	$source_string
-	</div>";
+	</div></div>"; // end pluslet_body, end pluslet
 
     /////////////////
     // Subjects
@@ -263,8 +281,12 @@ class Record {
 	}
 
 	echo "
-      <div class=\"box no_overflow\">
-	<h2 class=\"bw_head\">" . _("Subjects") . "</h2>
+  <div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Subjects") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
 
 	<select name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
 	$subject_string
@@ -273,7 +295,7 @@ class Record {
 	</div>
 
 
-	</div>
+	</div></div>
 	</form>";
 }
 
@@ -410,20 +432,25 @@ public function buildLocation() {
  		break;
  	}
  	echo "
- 	<div class=\"box no_overflow location_box\">
- 	<span class=\"record_label\">$format_label_text</span><br />
+ 	<div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Location") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
+ 	<label for=\"location[]\">$format_label_text</label>
  	<input type=\"hidden\" value=\"{$this->_location_id}\" name=\"location_id[]\" />
- 	<input type=\"text\" class=\"record_location check_url required_field\" name=\"location[]\" size=\"60\" value=\"{$this->_location}\" />$checkurl_icon<br />
+ 	<input type=\"text\" class=\"record_location check_url pure-input-2-3 required_field \" name=\"location[]\" value=\"{$this->_location}\" />$checkurl_icon
  	<span class=\"smaller url_feedback\"></span>
  	<div class=\"$input_callnum_class\"><span class=\"record_label\">" . _("Call Number") . "</span><br /><input type=\"text\" value=\"{$this->_call_number}\" name=\"call_number[]\" size=\"20\" /></div>
  	<br class=\"clear-both\" />
- 	<div style=\"float: left; margin-right: 1em;\"><span class=\"record_label\">" . _("Format") . "</span><br />
+ 	<div style=\"float: left; margin-right: 1em;\"><label for=\"format[]\">" . _("Format") . "</label>
  	{$this->_formats}</div>
- 	<div style=\"float: left; margin-right: 1em;\"><span class=\"record_label\">" . _("Access Restrictions") . "</span><br />
+ 	<div style=\"float: left; margin-right: 1em;\"><label for=\"format[]\">" . _("Access Restrictions") . "</label>
  	{$this->_restrictions}<br /></div>";
 
  	if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
- 		echo "<div style=\"float: left; width: 33%;\"><br />";
+ 		echo "<div style=\"float: left;\"><br />";
 
       // A-Z DB List
  		$a_z_string = "<input type=\"hidden\" name=\"eres_display[]\" value=\"" . $this->_az_display . "\" />";
@@ -436,7 +463,7 @@ public function buildLocation() {
 
  		echo "
  		$a_z_string<br /></div>
- 		<div class=\"clear-both\"><br /><span class=\"record_label\">" . _("Display Note") . "</span><br />";
+ 		<label for=\"display_note[]\">" . _("Display Note") . "</label>";
 
  		if ($wysiwyg_desc == 1 && $this->_boxcount == 1) {
  			include ($CKPath);
@@ -453,18 +480,17 @@ public function buildLocation() {
     	echo "<textarea name=\"display_note[]\" rows=\"2\" cols=\"50\">" . stripslashes($this->_display_note) . "</textarea>";
     }
 
-    echo "</div>
-    <div class=\"clear-both\"><br /><span class=\"record_label\">" . _("Help Guide Location") . "</span>  <br /><input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" /></div>
+    echo "
+    <label for=\"helpguide[]\">" . _("Help Guide Location") . "</label>
+    <input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" />
     ";
  } else {
  	echo "<br /><br /><input type=\"hidden\" name=\"eres_display[]\" value=\"{$this->_az_display}\">
  	<input type=\"hidden\" name=\"display_note[]\" value=\"{$this->_note}\" />";
  }
 
- echo "<br />";
-
  echo "<input type=\"hidden\" name=\"ctags[]\" value=\"" . $this->_ctags . "\" />
- <span class=\"record_label\">ctags:</span> ";
+ <label for=\"ctags[]\">ctags:</label> ";
 
  $current_ctags = explode("|", $this->_ctags);
     $tag_count = 0; // added because if you have a lot of ctags, it just stretches the div forever
@@ -484,7 +510,7 @@ public function buildLocation() {
     }
 
     echo "<div class=\"delete_location\">" . _("X Delete this location") . "</div>
-    </div>";
+    </div></div>"; // end pluslet_body, end pluslet
  }
 
  public function outputSubject($value) {

@@ -85,9 +85,11 @@ if ($_GET["letter"] == "bytype") {
 }
 
 // Add a quick search
+$description_search = 0; // init to negative
 if (isset($_POST["searchterm"])) {
   $_GET["letter"] = "%" . $_POST["searchterm"];
   $page_title = _("Database List: Search Results");
+  $description_search = 1; // if you want to search descriptions, too, set to 1; otherwise to 0
 }
 
 $alphabet = getLetters("databases", $_GET["letter"], "", FALSE);
@@ -146,7 +148,7 @@ if ($show_subjects == TRUE) {
   }
 
   // otherwise display our results from the database list
-  $out = $our_items->writeTable($_GET["letter"], $clean_id);
+  $out = $our_items->writeTable($_GET["letter"], $clean_id, $description_search);
 }
 
 // Assemble the content for our main pluslet/box

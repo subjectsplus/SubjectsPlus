@@ -11,6 +11,7 @@
  */
 
 use SubjectsPlus\Control\DBConnector;
+use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;
@@ -19,8 +20,6 @@ use SubjectsPlus\Control\LinkChecker;
 $subcat = "records";
 $page_title = "Edit Record";
 $wintype = "";
-
-
 
 // Suppress header if it is to be shown in colorbox or popup window
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {

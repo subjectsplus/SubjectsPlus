@@ -14,6 +14,7 @@ $page_title = "Record Bits include";
 $header = "noshow";
 
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\Record;
 use SubjectsPlus\Control\LinkChecker;

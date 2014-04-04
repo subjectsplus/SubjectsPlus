@@ -12,7 +12,7 @@
 
 class DbHandler {
 
-  function writeTable($qualifier, $subject_id = '') {
+  function writeTable($qualifier, $subject_id = '', $description_search = 0) {
 
     global $IconPath;
     global $proxyURL;
@@ -54,8 +54,21 @@ class DbHandler {
         }
 
         break;
-      default:
+        case "search":
         $condition1 = "WHERE title LIKE '" . mysql_real_escape_string($selected) . "%'";
+        // If you uncomment the next line, it will search description field
+        $condition1 = "WHERE (title LIKE '" . mysql_real_escape_string($selected) . "%' OR description LIKE '" . mysql_real_escape_string($selected) . "%')";
+        $condition2 = "WHERE alternate_title LIKE '" . mysql_real_escape_string($selected) . "%'";
+
+        break;
+      default:
+      // This is the simple output by letter and also the search
+        $condition1 = "WHERE title LIKE '" . mysql_real_escape_string($selected) . "%'";
+        if ($description_search == 1) {
+          // If you uncomment the next line, it will search description field
+          $condition1 = "WHERE (title LIKE '" . mysql_real_escape_string($selected) . "%' OR description LIKE '" . mysql_real_escape_string($selected) . "%')";          
+        }
+
         $condition2 = "WHERE alternate_title LIKE '" . mysql_real_escape_string($selected) . "%'";
     }
 

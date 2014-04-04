@@ -1931,3 +1931,8 @@ display:none;
     background-color: #E488B6;
     color: #FFFFFF;
 }
+
+.pure-button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+    color: #FFFFFF;
+}
