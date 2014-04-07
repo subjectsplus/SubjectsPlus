@@ -253,6 +253,8 @@ class Pluslet {
         global $close_string_cn;
         global $open_string_bib;
 
+    	$db = new Querier();
+
         $icons = "";
         //$target = "target=\"_" . $target . "\"";
         $target = "";

@@ -34,10 +34,8 @@ if (isset($_REQUEST["subject_id"])) {
 
     $mysub = $db->query($q);
 
-   
-
-    $subject_name = $mysub[0];
-    $shortform = $mysub[1];
+    $subject_name = $mysub[0][0];
+    $shortform = $mysub[0][1];
 
     setcookie("our_guide", $subject_name);
     setcookie("our_guide_id", $postvar_subject_id);
@@ -57,10 +55,12 @@ ob_end_flush();
 $subs_query = "SELECT distinct s.subject_id, s.subject
 FROM subject s INNER JOIN tab t
 ON s.subject_id = t.subject_id
-INNER JOIN pluslet_tab pt
-ON t.tab_id = pt.tab_id
+INNER JOIN section sec
+ON t.tab_id = sec.tab_id
+INNER JOIN pluslet_section ps
+ON sec.section_id = ps.section_id
 INNER JOIN pluslet p
-ON pt.pluslet_id = p.pluslet_id
+ON ps.pluslet_id = p.pluslet_id
 WHERE p.type != 'Special'
 ORDER BY s.subject, s.type";
 

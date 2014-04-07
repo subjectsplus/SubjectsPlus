@@ -30,16 +30,18 @@ class Pluslet_6 extends Pluslet {
 
         // Get librarians associated with this guide
         $querier = new Querier();
-    	$qs = "SELECT p.pluslet_id, p.title, p.body, pt.pcolumn, p.type, p.extra
-				FROM pluslet p INNER JOIN pluslet_tab pt
-				ON p.pluslet_id = pt.pluslet_id
+    	$qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
+				FROM pluslet p INNER JOIN pluslet_section ps
+				ON p.pluslet_id = ps.pluslet_id
+				INNER JOIN section sec
+				ON ps.section_id = sec.section_id
 				INNER JOIN tab t
-				ON pt.tab_id = t.tab_id
+				ON sec.tab_id = t.tab_id
 				INNER JOIN subject s
 				ON t.subject_id = s.subject_id
 				WHERE s.subject_id = '$this->_subject_id'
 				AND p.pluslet_id != '$this->_pluslet_id'
-				ORDER BY pt.prow ASC";
+				ORDER BY ps.prow ASC";
 
         //print $qs;
 

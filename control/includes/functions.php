@@ -1,10 +1,10 @@
 <?php
 
 use SubjectsPlus\Control\Querier;
- 
+
 include_once("autoloader.php");
 
-    
+
 //////////////////////////////
 // If gettext isn't installed
 // just return the string
@@ -326,7 +326,7 @@ function getDBbySubBoxes($selected_sub) {
   $subs_result = $db->query($subs_query);
 
 
- 
+
   $num_subs = count($subs_result);
 
   if ($num_subs > 0) {
@@ -378,7 +378,7 @@ function changeMe($table, $flag, $item_id, $record_title, $staff_id) {
 
     $result = $db->query($qtest);
 
-    
+
 
 // If there are no results, we need to insert a record
     if (!$result) {
@@ -427,7 +427,7 @@ function lastModded($table, $record_id, $zero_message = 1, $show_email = 1) {
   $r = $db->query($q);
   $my_mod = $r;
 
- 
+
   if ($my_mod) {
                            $val = $my_mod[0]['last_modified'];
     if ($show_email == 1) {
@@ -511,11 +511,13 @@ function blunDer($message, $type = 1) {
 
 
 function findDescOverride($subject_id, $title_id) {
+  $db = new Querier();
+
   $query = "SELECT description_override FROM rank WHERE subject_id = '$subject_id' AND title_id = '$title_id'";
   $override_text = $db->query($query);
- 
-  if ($override_text[0] != "") {
-    return $override_text[0];
+
+  if (count($override_text) != 0) {
+    return $override_text[0][0];
   }
 }
 
@@ -1198,7 +1200,7 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "") {
     </div>
   </div>";
 }
-            
+
 
 // Mod in_array to work with multidimensional arrays
 function in_array_r($needle, $haystack, $strict = false) {
@@ -1207,9 +1209,9 @@ function in_array_r($needle, $haystack, $strict = false) {
             return true;
         }
     }
-    
+
     return false;
 }
-            
+
 
 ?>

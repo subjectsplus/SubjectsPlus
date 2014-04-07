@@ -14,10 +14,10 @@ class BuildNav {
     global $AssetPath;
     global $CpanelPath;
     global $subcat;
-      
+
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
-      
+
     print "
       <ul id=\"topnav\">
       <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
@@ -31,7 +31,7 @@ class BuildNav {
       </div>
       </li>
       ";
-    ///////////////  
+    ///////////////
     // RECORDS
     // records and guides use same authentication credential
     ///////////////
@@ -132,7 +132,7 @@ class BuildNav {
           <li><a href=\"$CpanelPath" . "stats/ref_stats.php\">" . _("Add Transaction") . "</a></li>
         </ul>
        </div></li>";
-    }    
+    }
 
     // Admin tab
     if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {
@@ -185,11 +185,10 @@ class BuildNav {
     }
 
     print "
-    <li class=\"nohover\">
-      <form class=\"pure-form\" id=\"sp_admin_search\">";
+    <li class=\"nohover\">";
         $input_box = new CompleteMe("sp_search", $CpanelPath . "search.php", $target_url, $input_text, $subcat, "", "private");
         $input_box->displayBox();
-      print "</form>
+      print "
     </li>";
 
 

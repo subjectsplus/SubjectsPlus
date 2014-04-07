@@ -299,25 +299,25 @@ class Installer
 					  `tab_index` int(11) NOT NULL DEFAULT '0',
 					  PRIMARY KEY (`tab_id`),
 					  KEY `fk_t_subject_id_idx` (`subject_id`)
-					) ENGINE=InnoDB AUTO_INCREMENT=1126 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `pluslet_tab` (
-					  `pluslet_tab_id` int(11) NOT NULL AUTO_INCREMENT,
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `pluslet_section` (
+					  `pluslet_section_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `pluslet_id` int(11) NOT NULL DEFAULT '0',
-					  `tab_id` int(11) NOT NULL,
+					  `section_id` int(11) NOT NULL,
 					  `pcolumn` int(11) NOT NULL,
 					  `prow` int(11) NOT NULL,
-					  PRIMARY KEY (`pluslet_tab_id`),
+					  PRIMARY KEY (`pluslet_section_id`),
 					  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
-					  KEY `fk_pt_tab_id_idx` (`tab_id`),
-					  CONSTRAINT `fk_pt_pluslet_id` FOREIGN KEY (`pluslet_id`) REFERENCES `pluslet` (`pluslet_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_pt_tab_id` FOREIGN KEY (`tab_id`) REFERENCES `tab` (`tab_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB AUTO_INCREMENT=8181 DEFAULT CHARSET=utf8"
+					  KEY `fk_pt_tab_id_idx` (`section_id`),
+					  CONSTRAINT `fk_pt_section_id` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 			);
 
 		//all the subjectqueries -- default data
 		$this->lobjInsertQueries = array(
 					"INSERT INTO `chchchanges` VALUES (1,1,'guide',1,'General','insert','2011-03-26 19:16:19'),(2,1,'record',1,'Sample Record','insert','2011-03-26 20:08:54')",
 					"INSERT INTO `subject` VALUES (1,'General',1,'general',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19','{\"maincol\": \"4-6-2\"}')",
+					"INSERT INTO `tab` VALUES (1,1,'Main',0)",
 					"INSERT INTO `pluslet` VALUES (1,'All Items by Source','','',0,'Special',''),(2,'Key to Icons','','',0,'Special',''),(3,'Subject Specialist','','',0,'Special',''),
 					(4,'FAQs','','',0,'Special',''),(5,'Books:  Use the Library Catalog','','',0,'Special',''),(6,'','','',0,'Reserved_for_Special',''),(7,'','','',0,'Reserved_for_Special',''),
 					(8,'','','',0,'Reserved_for_Special',''),(9,'','','',0,'Reserved_for_Special',''),(10,'','','',0,'Reserved_for_Special',''),(11,'','','',0,'Reserved_for_Special',''),

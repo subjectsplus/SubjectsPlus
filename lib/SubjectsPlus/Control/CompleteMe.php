@@ -36,7 +36,7 @@ class CompleteMe {
 
     global $CpanelPath;
     global $PublicPath;
-    
+
 
     //print "input_id = $this->input_id, action = $this->action, target_url = $this->target_url, collection = $this->collection";
     if ($this->display == "public") {
@@ -45,10 +45,10 @@ class CompleteMe {
       $data_location = $CpanelPath . "includes/autocomplete_data.php?collection=" . $this->collection;
     }
     echo "
-   <div class=\"autoC\">
+   <div id=\"autoC\" class=\"autoC\">
   		<form action=\"$this->action\" method=\"post\" class=\"pure-form\" id=\"sp_admin_search\">
  		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" placeholder=\"" . $this->default_text . "\" /><input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
-  		</form>   
+  		</form>
 	</div>";
 
     // now print out some variables for the js
@@ -57,10 +57,10 @@ class CompleteMe {
 
 	jQuery(document).ready(function(){
 
-	// Caching 
+	// Caching
 	var autoC = jQuery('#" . $this->input_id . "');
-	
-	
+
+
 	// Using jQuery UI's autocomplete widget:
 	autoC.autocomplete({
 		minLength	: 3,
@@ -69,7 +69,7 @@ class CompleteMe {
 			return;
 		},
 		select: function(event, ui) {
-            
+
 			location.href = startURL + ui.item.value;
 		}
 	});

@@ -7,8 +7,8 @@ namespace SubjectsPlus\Control;
  *   @author rgilmour, gspomer, dgonzalez
  *   @date Apr 2013
  */
-    
- 
+
+
 class LinkChecker {
 
 	private $_proxy;
@@ -77,7 +77,7 @@ class LinkChecker {
 							"AND staff_subject.staff_id = $_SESSION[staff_id]";
 			}
 			$guide_select = "SELECT subject, subject.subject_id FROM $from $where ORDER BY subject ASC";
-            
+
             $db = new Querier;
                 $guide_result = $db->query($guide_select);
 			$guide_list = array();
@@ -118,6 +118,8 @@ class LinkChecker {
 
 		global $AssetPath;
 		global $CpanelPath;
+
+		$db = new Querier();
 
 		$this->setShortForm( $lintSubjectID );
 
@@ -181,17 +183,18 @@ class LinkChecker {
 					</tbody>
 				</table>
 			<?php endif;
-                $db = new Querier;
 		$box_select = "SELECT p.pluslet_id, p.title, p.body, p.type
-						FROM pluslet p INNER JOIN pluslet_tab pt
-						ON p.pluslet_id = pt.pluslet_id
+						FROM pluslet p INNER JOIN pluslet_section ps
+						ON p.pluslet_id = ps.pluslet_id
+						INNER JOIN section sec
+						ON ps.section_id = sec.section_id
 						INNER JOIN tab t
-						ON pt.tab_id = t.tab_id
+						ON sec.tab_id = t.tab_id
 						INNER JOIN subject s
 						ON t.subject_id = s.subject_id
 						WHERE s.subject_id = $lintSubjectID
 						AND p.type IN('Basic','Feed')
-						ORDER BY pt.pcolumn ASC, pt.prow ASC";
+						ORDER BY ps.pcolumn ASC, ps.prow ASC";
 			$box_result = $db->query($box_select);
 			?>
 			<?php if(!count($box_result)): ?>
@@ -267,9 +270,10 @@ class LinkChecker {
 	 */
 	private function setShortForm( $lintSubjectID )
 	{
+		$db = new Querier();
 		$query = "SELECT shortform FROM subject WHERE subject_id = $lintSubjectID";
 		$shortform = $db->query($query);
-		$this->_extra['shortform'] = $shortform['shortform'];
+		$this->_extra['shortform'] = $shortform[0]['shortform'];
 
 	}
 
@@ -282,6 +286,8 @@ class LinkChecker {
 	{
 		global $AssetPath;
 		global $CpanelPath;
+
+		$db = new Querier();
 
 		?>
 		<script>

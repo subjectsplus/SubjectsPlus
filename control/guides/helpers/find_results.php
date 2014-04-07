@@ -20,10 +20,12 @@ $results = "";
 if (isset($_POST['shortform'])) {
 
 	$q = "SELECT DISTINCT p.pluslet_id, LEFT(p.title, 75), p.type
-			FROM pluslet p INNER JOIN pluslet_tab pt
-			ON p.pluslet_id = pt.pluslet_id
+			FROM pluslet p INNER JOIN pluslet_section ps
+			ON p.pluslet_id = ps.pluslet_id
+			INNER JOIN section sec
+			ON ps.section_id = sec.section_id
 			INNER JOIN tab t
-			ON pt.tab_id = t.tab_id
+			ON sec.tab_id = t.tab_id
 			INNER JOIN subject s
 			ON t.subject_id = s.subject_id
 			WHERE s.shortform = '" . $_POST["shortform"] . "'
@@ -36,6 +38,11 @@ if (isset($_POST['shortform'])) {
 	ORDER BY p.title
 	";
 
+}else
+{
+	$results = "<p>There were no results.  Drat!</p>";
+	print "<div style=\"clear: both; float: left; \">$results </div>";
+	exit;
 }
 
  //print $q;
@@ -57,14 +64,16 @@ if (count($r) != 0) {
 				$q2 = "SELECT s.subject
 						FROM subject s INNER JOIN tab t
 						ON s.subject_id = t.subject_id
-						INNER JOIN pluslet_tab pt
-						ON t.tab_id = pt.tab_id
+						INNER JOIN section sec
+						ON t.tab_id = sec.tab_id
+						INNER JOIN pluslet_section ps
+						ON sec.section_id = ps.section_id
 						INNER JOIN pluslet p
-						ON pt.pluslet_id = p.pluslet_id
+						ON ps.pluslet_id = p.pluslet_id
 						WHERE p.pluslet_id = $myrow[0]";
 				$this_sub = $db->query($q2);
-				
-				$add_info = "<span style=\"font-size: 10px;\">($this_sub[0])</span>";
+
+				$add_info = "<span style=\"font-size: 10px;\">({$this_sub[0][0]})</span>";
 			}
 		$results .= "<div style=\"background-color:$row_colour ; padding: 2px;\"><img src=\"$IconPath/list-add.png\" name=\"add-$myrow[0]-$myrow[2]\" border=\"0\" alt=\"add\" /> $myrow[1] $add_info</div>";
 

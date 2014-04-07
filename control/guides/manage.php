@@ -9,11 +9,11 @@
 
 use SubjectsPlus\Control\Querier;
 
-    
+
 $subsubcat = "";
 $subcat = "guides";
 $page_title = "Manage Files, Record Associations, etc.";
-    
+
 include("../includes/header.php");
 
 //init
@@ -123,23 +123,27 @@ if ($userFiles) {
                 }
             }
 */
+        	$db = new Querier();
+
 
             $findGuidesQuery = "
 				SELECT st.fname, st.lname, s.subject, s.subject_id
-				FROM pluslet p INNER JOIN pluslet_tab pt
-				ON p.pluslet_id = pt.pluslet_id
+				FROM pluslet p INNER JOIN pluslet_section ps
+				ON p.pluslet_id = ps.pluslet_id
+				INNER JOIN section sec
+				ON ps.section_id = sec.section_id
 				INNER JOIN tab t
-				ON pt.tab_id = t.tab_id
+				ON sec.tab_id = t.tab_id
 				INNER JOIN subject s
 				ON t.subject_id = s.subject_id
 				INNER JOIN staff_subject ss
 				ON s.subject_id = ss.subject_id
 				INNER JOIN staff st
 				ON ss.staff_id = st.staff_id
-				WHERE p.body LIKE '%" . $db->quote($location_hint) . "/" . $db->quote($shortName) . "%'
-                OR p.body LIKE '%" . $db->quote($location_hint) . trim( " \\ " ) . $db->quote($shortName) . "%'
-                OR p.body LIKE '%" . $db->quote($location_hint) . trim( " \\ " ) . "image" . trim( " \\ " ) . $db->quote($shortName) . "%'
-                OR p.body LIKE '%" . $db->quote($location_hint) . "/image/" . $db->quote($shortName) . "%'";;
+				WHERE p.body LIKE " . $db->quote('%' . $location_hint . "/" .$shortName. '%') . "
+                OR p.body LIKE " . $db->quote('%' . $location_hint . trim( " \\ " ) . $shortName. '%') . "
+                OR p.body LIKE " . $db->quote('%' . $location_hint . trim( " \\ " ) . "image" . trim( " \\ " ) . $shortName. '%') . "
+                OR p.body LIKE " . $db->quote('%' . $location_hint . "/image/" . $shortName. '%');
 
             $findGuidesResult = $querier->query($findGuidesQuery);
             $guides = array(); // for the list of guides in which the file appears

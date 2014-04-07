@@ -1,6 +1,6 @@
 <?php
    namespace SubjectsPlus\Control;
-     require_once("Pluslet.php"); 
+     require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_1
  *   @brief The number corresponds to the ID in the database.  Numbered pluslets are UNEDITABLE clones
@@ -8,7 +8,7 @@
  *
  *   @author agdarby
  *   @date Feb 2011
- *   @todo 
+ *   @todo
  */
 class Pluslet_1 extends Pluslet {
 
@@ -27,7 +27,7 @@ class Pluslet_1 extends Pluslet {
         } else {
             $this->_subject_id = 1;
         }
-        
+
         $this->_title = _("All Items by Source");
 
         $this->_pluslet_id_field = "pluslet-" . $this->_pluslet_id;
@@ -53,6 +53,8 @@ class Pluslet_1 extends Pluslet {
 
         $this->_body = $TOC;
 
+    	$db = new Querier();
+
         // Display all items for a subject, as tagged in Records tab
 
         $q = "select title, description, location, source, source.source_id, restrictions, location.format,
@@ -61,7 +63,7 @@ class Pluslet_1 extends Pluslet {
 		FROM title, restrictions, location, location_title, source, rank
 		WHERE title.title_id = location_title.title_id and location.location_id = location_title.location_id
 		AND restrictions_id = access_restrictions and rank.subject_id = '$this->_subject_id' and rank.title_id = title.title_id
-		AND source.source_id = rank.source_id 
+		AND source.source_id = rank.source_id
         ORDER BY source.rs asc, source.source, rank.rank asc, title.title, format";
 
         //print $q;
@@ -73,23 +75,23 @@ class Pluslet_1 extends Pluslet {
         $colour1 = "oddrow";
         $colour2 = "evenrow";
         $results = ""; // init
-    
+
         foreach ($r as $myrow) {
 
-            
+
             $label = $myrow["title"];
-            
+
             $url = $myrow["location"];
             $restrictions = $myrow["restrictions_id"];
             $display_note = $myrow["display_note"];
-            
+
             // Use description override if it exists
             if ($myrow["description_override"] != "") {
                 $blurb = $myrow["description_override"];
             } else {
                 $blurb = $myrow["description"];
             }
-            
+
             if (($restrictions == 2) OR ($restrictions == 3)) {
                 // Check if it is restricted to local students
                 $rest_icons = "restricted";
@@ -133,10 +135,10 @@ class Pluslet_1 extends Pluslet {
 
             // clean up blurb
             $blurb = stripslashes($blurb) . "<br />";
-            
+
             // Display results
-            
-            
+
+
             switch ($myrow["format"]) {
                 case "1": // web
                     $first_line = "<a style=\"text-decoration: underline\" href=\"$final_url\">$label</a> $pub_icons<br />";
@@ -146,11 +148,11 @@ class Pluslet_1 extends Pluslet {
                     $first_line = "<em>$label</em><br /><strong>" . _("Print Location:") . "</strong> $final_url $pub_icons<br />";
                     if ($myrow["8"] == $last_title_id) {
                         $blurb = "";
-                        $res_class = "dbresults-inset"; 
-                    } 
-                                       
+                        $res_class = "dbresults-inset";
+                    }
+
                     break;
-                
+
                 case "3": // print with url
                     $first_line = "<em>$label</em><br /><strong>" . _("Print Location:") . "</strong>
                     <a style=\"text-decoration: underline\" href=\"$final_url\">" . $myrow["call_number"] . "</a> $pub_icons<br />";
@@ -158,17 +160,17 @@ class Pluslet_1 extends Pluslet {
                         $blurb = "";
                         $res_class = "dbresults-inset";
                     }
-                    
+
                     break;
             }
-            
+
             $results .= "<div class=\"$res_class\">
                 $first_line
                 $blurb
                 $display_note_text
             </div>";
 
-            
+
             $last_title_id = $myrow["8"];
             $row_count++; // Add 1 to the row count, for the "even/odd" row striping
         }
@@ -185,11 +187,14 @@ class Pluslet_1 extends Pluslet {
     public function createTOC() {
         $toc = "<p class=\"clearboth\" font-size: 10px; text-align: center;\">Table of Contents</p>";
         $toc = "";
+
+    	$db = new Querier();
+
         $source_string = "select distinct source, source.source_id
 		FROM title, restrictions, location, location_title, source, rank
 		WHERE title.title_id = location_title.title_id and location.location_id = location_title.location_id
 		AND restrictions_id = access_restrictions and rank.subject_id = '$this->_subject_id' and rank.title_id = title.title_id
-		AND source.source_id = rank.source_id 
+		AND source.source_id = rank.source_id
         ORDER BY source.source asc";
 
         //print $source_string;

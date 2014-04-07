@@ -95,7 +95,7 @@ switch ($_POST["flag"]) {
         // if it's a clone, note that
         $this_id = modifyDB("", "insert");
 
-       
+
         if ($this_id) {
             $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
             //print "obj = $obj<p>";
@@ -123,6 +123,8 @@ switch ($_POST["flag"]) {
         break;
 
     case "delete":
+    	$db = new Querier();
+
         $delete_id = scrubData($_POST["delete_id"], "int");
         $subject_id = scrubData($_POST["subject_id"], "int");
 
@@ -132,8 +134,11 @@ switch ($_POST["flag"]) {
     	//added by dgonzalez because if pluslet is special, no deletetion so need to manually delete relationship
     	if( count($r) == 0 )
     	{
-    		$q2 = "DELETE pt FROM `pluslet_tab` pt INNER JOIN tab t
-    				ON pt.tab_id = t.tab_id
+    		$q2 = "DELETE ps FROM `pluslet_section` ps
+    				INNER JOIN section sec
+    				ON ps.section_id = sec.section_id
+    				INNER JOIN tab t
+    				ON sec.tab_id = t.tab_id
     				INNER JOIN subject s
     				ON t.subject_id = s.subject_id
     				WHERE pt.pluslet_id = '$delete_id' AND s.subject_id = '$subject_id'";
@@ -167,16 +172,16 @@ function modifyDB($id, $type) {
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
     $pluslet_supress_body =  $_POST["boxsetting_suppress_body"];
-    
+
     if (isset($_POST["boxsetting_titlebar_styling"])) {
-        
+
         $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];
 
     } else {
-        
+
         $pluslet_titlebar_styling = null;
     }
-    
+
     // If clone isn't set, set to 0
     if (isset($_POST["clone"])) {
         $pluslet_clone = $_POST["clone"];
@@ -200,11 +205,11 @@ function modifyDB($id, $type) {
             $r = $db->exec($q);
             if ($r) {
                                $id = $db->last_id();
-                
+
             	            } else {
                 print "<p>There was a problem with your insert:</p>";
                 print "<p>$q</p>";
-                
+
                                 $id = false;
             }
             break;

@@ -12,6 +12,7 @@ $subcat = "guides";
 $page_title = "Ajax mod include";
 $header = "noshow";
 
+use SubjectsPlus\Control\Querier;
 
 include("../../includes/header.php");
 
@@ -22,9 +23,9 @@ switch ($_POST["action"]) {
     $q = "DELETE FROM rank WHERE rank_id = '" . $_POST["delete_id"] . "'";
 
     //print $q;
-    $r = $db->query($q);
+    $r = $db->exec($q);
 
-    if ($r) {
+    if ($r !== FALSE ) {
       print _("This item has been removed from your guide");
     } else {
       print _("There was a problem with the delete");
@@ -61,9 +62,9 @@ switch ($_POST["action"]) {
 
       $q = "UPDATE rank SET rank = '$count' WHERE rank.rank_id = '$rank_id'";
 
-      $r = $db->query($q);
+      $r = $db->exec($q);
 
-      if (!$r) {
+      if ($r === FALSE) {
         $error .= $q . "<br />";
       }
 
@@ -72,7 +73,7 @@ switch ($_POST["action"]) {
     }
 
 
-    if ($r && $error == "") {
+    if ($r !== FALSE && $error == "") {
       print _("Thy will be done.  Ranks updated.");
     } else {
       print _("There was a problem with your update.");

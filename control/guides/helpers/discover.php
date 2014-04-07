@@ -27,8 +27,10 @@ if (isset($_GET["subject_id"])) {
 $q3 = "SELECT s.shortform, s.subject FROM subject s
 INNER JOIN tab t
 ON s.subject_id = t.subject_id
-INNER JOIN pluslet_tab pt
-ON t.tab_id = pt.tab_id
+INNER JOIN section sec
+ON t.tab_id = sec.tab_id
+INNER JOIN pluslet_section ps
+ON sec.section_id = ps.section_id
 GROUP BY s.subject";
 
 //print $q2;
@@ -48,7 +50,7 @@ print "
 <div style=\"float: left; width: 60%;\">
     <div class=\"box\">
     <h2>Browse</h2>
-	
+
 	<select name=\"all_subs\" id=\"all_subs\">
 	<option value=\"\" style=\"font-size: 9pt;\">" . _("- Browse Boxes -") . "</option>
 
@@ -60,7 +62,7 @@ print "
 <div style=\"float: left;  width: 35%; margin-left: 3%;\">
 	<div class=\"box\">
     <h2>Search</h2>
-	
+
 	 <input type=\"text\" id=\"search_terms\" name=\"search\" />
 	 <input type=\"submit\" value=\"" . _("Go!") . "\" name=\"searcher\" id=\"searcho\" />
 	 </div>

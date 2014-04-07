@@ -5,7 +5,7 @@
  *   @brief Save the contents of the guide.
  *   @description Called by guide.js, which passes in an array of all the pluslets for a guide
  *   and their position within the page (i.e., left, center or right column + row number).  The existing
- *   entries in the intervening pluslet_tab table are emptied out, and new ones are added.
+ *   entries in the intervening pluslet_section table are emptied out, and new ones are added.
  *
  *   @author agdarby, dgonzalez
  *   @date updated jul 2013
@@ -34,11 +34,14 @@ $drs = $db->query($qs);
 
 foreach($drs as $row)
 {
-	$qd = "DELETE FROM pluslet_tab WHERE tab_id = '{$row[0]}'";
-	$dr = $db->query($qd);
+	$qd = "DELETE ps, sec FROM pluslet_section ps
+			INNER JOIN section sec
+			ON ps.section_id = sec.section_id
+			WHERE sec.tab_id = '{$row[0]}'";
+	$dr = $db->exec($qd);
 
 	$qd = "DELETE FROM tab WHERE tab_id = '{$row[0]}'";
-	$dr = $db->query($qd);
+	$dr = $db->exec($qd);
 }
 
 $lintTabIndex = 0;
@@ -46,16 +49,23 @@ $lintTabIndex = 0;
 foreach( $lobjTabs as $lobjTab )
 {
     if (isset($lobjTab['external'])) {
-        
+
     } else {
         $lobjTab['external'] = NULL;
     }
-    
+
 	$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}')";
 	//print $qi . "<br />";
-	$ir = $db->query($qi);
+	$ir = $db->exec($qi);
 
 	$lintTabId = $db->last_id();
+
+	//insert section, as of now only one per tab
+	$qi = "INSERT INTO section (tab_id) VALUES ('$lintTabId')";
+	//print $qi . "<br />";
+	$ir = $db->exec($qi);
+
+	$lintSecId = $db->last_id();
 
 	$left_col = $lobjTab["left_data"];
 	$center_col = $lobjTab["center_data"];
@@ -82,7 +92,7 @@ foreach( $lobjTabs as $lobjTab )
 
 	foreach ($leftconts as $key => $value) {
 		if ($key != 0) {
-			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 0, '$key')";
+			$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 0, '$key')";
 			//print $qi . "<br />";
 			$ir = $db->query($qi);
 		}
@@ -90,7 +100,7 @@ foreach( $lobjTabs as $lobjTab )
 
 	foreach ($centerconts as $key => $value) {
 		if ($key != 0) {
-			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 1, '$key')";
+			$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 1, '$key')";
 			//print $qi . "<br />";
 			$ir = $db->query($qi);
 		}
@@ -98,7 +108,7 @@ foreach( $lobjTabs as $lobjTab )
 
 	foreach ($sidebarconts as $key => $value) {
 		if ($key != 0) {
-			$qi = "INSERT INTO pluslet_tab (pluslet_id, tab_id, pcolumn, prow) VALUES ('$value', '$lintTabId', 2, '$key')";
+			$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 2, '$key')";
 			//print $qi . "<br />";
 			$ir = $db->query($qi);
 		}

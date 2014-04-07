@@ -205,15 +205,15 @@ class Guide
             <div style=\"float: left; margin-right: 20px;\">
             <div class=\"box\">
             <h2 class=\"bw_head\">$guide_title_line</h2>
-            
+
             <span class=\"record_label\">" . _("Guide") . "</span><br />
             <input type=\"text\" name=\"subject\" id=\"record_title\" size=\"50\" class=\"required_field\" value=\"" . $this->_subject . "\">
-            
+
             <span class=\"record_label\">" . _("Short Form") . "</span><br />
             <input type=\"text\" name=\"shortform\" id=\"record_shortform\" size=\"20\" class=\"required_field\" value=\"" . $this->_shortform . "\">
             <br />
             <span class=\"smaller\">* " . _("Short label for subject--minus spaces, ampersands, etc.") . "</span>
-            
+
             <p>
             <span class=\"record_label\">" . _("Type of Guide") . "</span>
             ";
@@ -366,7 +366,7 @@ class Guide
 
 
         echo "
-    
+
     <br /><br />
     $is_live
     $screen_layout
@@ -445,14 +445,14 @@ class Guide
         echo "
     <div class=\"box no_overflow\" id=\"staff_menu\">
     <h2 class=\"bw_head\">" . _("Staff") . "</h2>
-    
+
     $staff_string
     <div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->
     </div>
     <div class=\"box\"  id=\"metadata_menu\">
     <h2 class=\"bw_head\">" . _("Metadata") . "</h2>
-    
-    
+
+
     <span class=\"record_label\">" . _("Description") . "</span><br />
     <textarea name=\"description\" id=\"record_description\" class=\"\" cols=\"35\" rows=\"2\">" . $this->_description . "</textarea>
     <br />
@@ -530,10 +530,12 @@ class Guide
 
         // Delete the records from pluslet that are associated with subject
         $q = "DELETE p
-        FROM pluslet p INNER JOIN pluslet_tab pt
-        ON p.pluslet_id = pt.pluslet_id
+        FROM pluslet p INNER JOIN pluslet_section ps
+        ON p.pluslet_id = ps.pluslet_id
+        INNER JOIN section sec
+        ON ps.section_id = sec.section_id
         INNER JOIN tab t
-        ON pt.tab_id = t.tab_id
+        ON sec.tab_id = t.tab_id
         INNER JOIN subject s
         ON t.subject_id = s.subject_id
         WHERE p.type != 'Special' AND s.subject_id = '" . $this->_subject_id . "'";
@@ -713,7 +715,7 @@ class Guide
         $insert_parent->exec($parent_query);
 
 
-       
+
 
         /////////////////////
         // clear staff_subject
@@ -742,11 +744,11 @@ class Guide
 
         /*
         $qClearSD = "DELETE FROM subject_discipline WHERE subject_id = " . $this->_subject_id;
-        
+
         $rClearSD = $db->query($qClearSD);
-        
+
         $this->_debug .= "<p>2. clear subject_discipline: $qClearSD</p>";
-        
+
         if (!$rClearSD) {
             echo blunDer("We have a problem with the clear subject_discipline query: $qClearSD");
         }
@@ -827,13 +829,15 @@ class Guide
     {
 
 
-        $qc = "SELECT p.pluslet_id, p.title, p.body, pt.pcolumn, p.type, p.extra, t.tab_index
+        $qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra, t.tab_index
         FROM subject s LEFT JOIN tab t
         ON s.subject_id = t.subject_id
-        LEFT JOIN pluslet_tab pt
-        ON pt.tab_id = t.tab_id
+        LEFT JOIN section sec
+        ON t.tab_id = sec.tab_id
+        LEFT JOIN pluslet_section ps
+        ON ps.section_id = sec.section_id
         LEFT JOIN pluslet p
-        ON p.pluslet_id = pt.pluslet_id
+        ON p.pluslet_id = ps.pluslet_id
         WHERE s.subject_id = '{$this->_subject_id}'
         AND t.tab_index = '$selected_tab'
         ORDER BY prow ASC";
@@ -892,7 +896,7 @@ class Guide
 
             $query = "select extra from subject where subject_id = '{$this->_subject_id}'";
             $result = $db->query($query);
-            
+
             //print_r ($result);
             $jobj = json_decode($result[0]["extra"]);
             $col_widths = explode("-", $jobj->{'maincol'});
@@ -1018,7 +1022,7 @@ class Guide
                 $rUpSS = $db->exec($qUpSS);
 
                 $this->_debug .= "<p>3. (insert staff_subject loop) : $qUpSS</p>";
-               
+
             }
         }
     }

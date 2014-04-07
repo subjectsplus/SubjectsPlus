@@ -1,16 +1,16 @@
 /* Position vacant for staff table */
 
-ALTER TABLE `staff` 
+ALTER TABLE `staff`
 ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`;
 
 
 
 /* And give it a header, for header switching (perhaps UM only) */
-ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra` 
+ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`
 
 /* Let the tab point to external url */
 
-ALTER TABLE `tab` 
+ALTER TABLE `tab`
 ADD COLUMN `external_url` VARCHAR(500) NULL AFTER `tab_index`;
 
 /* Changes to pluslet table to allow header tweaking */
@@ -18,7 +18,7 @@ ADD COLUMN `external_url` VARCHAR(500) NULL AFTER `tab_index`;
 ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
 ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
 ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
-ADD `titlebar_styling` VARCHAR( 100 ) NULL 
+ADD `titlebar_styling` VARCHAR( 100 ) NULL
 
 
 /* Associate subject guides with departments like CHC */
@@ -64,3 +64,64 @@ ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`;
 
 ALTER TABLE `subjectsplus`.`tab`
 ADD COLUMN `visibility` INT(11) NOT NULL DEFAULT 2 AFTER `external_url`;
+
+/* New Section table */
+CREATE  TABLE `subjectsplus`.`section` (
+
+  `section_id` INT(11) NOT NULL AUTO_INCREMENT ,
+
+  `section_index` INT(11) NOT NULL DEFAULT 0 ,
+
+  `layout` VARCHAR(255) NOT NULL DEFAULT '4-4-4' ,
+
+  `tab_id` INT(11) NOT NULL ,
+
+  PRIMARY KEY (`section_id`) ,
+
+  INDEX `fk_section_tab_idx` (`tab_id` ASC) ,
+
+  CONSTRAINT `fk_section_tab`
+
+    FOREIGN KEY (`tab_id` )
+
+    REFERENCES `subjectsplus`.`tab` (`tab_id` )
+
+    ON DELETE CASCADE
+
+    ON UPDATE CASCADE)
+
+ENGINE = InnoDB
+
+DEFAULT CHARACTER SET = utf8;
+
+/* Make an intial section per tab */
+INSERT INTO section (tab_id)
+SELECT tab_id FROM tab;
+
+/* Change tab_ids to newly created section_id related to that tab id (above) */
+SET FOREIGN_KEY_CHECKS = 0;
+
+UPDATE pluslet_tab pt INNER JOIN section s
+ON pt.tab_id = s.tab_id
+SET pt.tab_id = s.section_id;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+/* change pluslet_tab to pluslet_section */
+ALTER TABLE `subjectsplus`.`pluslet_tab` DROP FOREIGN KEY `fk_pt_tab_id` ;
+
+ALTER TABLE `subjectsplus`.`pluslet_tab` CHANGE COLUMN `tab_id` `section_id` INT(11) NOT NULL  ,
+
+  ADD CONSTRAINT `fk_pt_section_id`
+
+  FOREIGN KEY (`section_id` )
+
+  REFERENCES `subjectsplus`.`section` (`section_id` )
+
+  ON DELETE CASCADE
+
+  ON UPDATE CASCADE, RENAME TO  `subjectsplus`.`pluslet_section` ;
+
+/*  change column name */
+ALTER TABLE `subjectsplus`.`pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT  ;
+
