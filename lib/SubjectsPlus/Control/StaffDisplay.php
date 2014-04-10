@@ -93,6 +93,7 @@ class StaffDisplay {
             AND active = 1
 			order by department_sort, d.name,  staff_sort desc, lname";
 
+        $db = new Querier;
         $r = $db->query($q);
 
         $items = "<table width=\"98%\" class=\"item_listing\">";
@@ -172,7 +173,7 @@ class StaffDisplay {
                 AND user_type_id = '1'
                 AND shortform != 'NewDatabases'
                 order by lname, fname";
-
+        $db = new Querier;
         $r = $db->query($q);
 
         $items = "<table width=\"98%\" class=\"item_listing\">
@@ -212,7 +213,7 @@ class StaffDisplay {
 
           $subrowcount = 0;
 
-          foreach ($sub_result as $sub_row) {
+          foreach ($sub_result as $subrow) {
 
             if ($mod_rewrite == 1) {
               $linky = $subrow[1];
@@ -246,6 +247,7 @@ class StaffDisplay {
             AND shortform != 'NewDatabases'
 			order by subject, lname, fname";
         $head_fields = array("Subject", "Library Liaison", "Phone", "Email");
+        $db = new Querier;
         $r = $db->query($q);
         $items = prepareTH($head_fields);
 
