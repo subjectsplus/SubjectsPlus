@@ -246,8 +246,8 @@ class Guide
         $current_dept_query =
             "SELECT DISTINCT subject.subject, subject.subject_id, department.name, department.department_id, subject_department.date
     FROM subject_department
-    JOIN subject ON subject.subject_id = subject_department.subject_id
-    JOIN department ON department.department_id = subject_department.department_id
+    JOIN subject ON subject.subject_id = subject_department.id_subject
+    JOIN department ON department.department_id = subject_department.id_department
     WHERE subject.subject_id = '$this->_subject_id'
     ORDER BY date DESC
     LIMIT 1";
