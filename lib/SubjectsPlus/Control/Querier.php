@@ -3,12 +3,12 @@
 namespace SubjectsPlus\Control;
 
 /**
- *   @file
- *   @brief
+ *   @file Querier.php
+ *   @brief A class for database access
  *
- *   @author rgilmour, adarby, jlittle
- *   @date
- *   @todo fix getQuery()
+ *   @author jlittle
+ *   @date April, 2014
+ *   @todo
  */
     
 // Fetch styles: http://www.php.net/manual/en/pdostatement.fetch.php
@@ -45,11 +45,13 @@ class Querier  {
         $password = $config['database']['password'];
 
         try {
-            $this->_connection = new PDO($dsn, $username, $password, array(
-                PDO::ATTR_PERSISTENT => true));
-        } catch (PDOException $e) {
+            $this->_connection = new PDO($dsn, $username, $password, array(PDO::ATTR_PERSISTENT => true));
+        } catch (\PDOException $e) {
 
-
+            
+            echo "<h1>There was a problem connecting to the database.</h1>";
+            echo "<p>Have you set the database credentials in /control/includes/db.ini?</p>";
+            echo "<p>This is the detailed error:</p>";
             echo 'Connection failed: ' . $e->getMessage();
         }
     }
