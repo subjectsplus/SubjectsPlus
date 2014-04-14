@@ -218,9 +218,9 @@ function modifyDB($id, $type) {
             //print "$pluslet_extra";
             //$q = sprintf("UPDATE pluslet set title = '%s', body = '%s', type = '%s', extra = '%s' WHERE pluslet_id = '$id'", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $pluslet_extra);
             $q = "UPDATE pluslet SET
-                title='" . $db->quote($pluslet_title) . "',
-                body='" . $db->quote($pluslet_body) . "',
-                type='" . $db->quote($pluslet_type) . "',
+                title=" . $db->quote($pluslet_title) . ",
+                body=" . $db->quote($pluslet_body) . ",
+                type=" . $db->quote($pluslet_type) . ",
                 extra = '$pluslet_extra',
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
