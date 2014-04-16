@@ -47,10 +47,6 @@ function checkSession() {
 
 function isCool($emailAdd="", $password="") {
 
-  global $hname;
-  global $uname;
-  global $pword;
-  global $dbName_SPlus;
   global $subcat;
   global $CpanelPath;
   global $PublicPath;
@@ -999,10 +995,6 @@ function displayLogoOnlyHeader()
  */
 function isInstalled()
 {
-	global $hname;
-	global $uname;
-	global $pword;
-	global $dbName_SPlus;
 
 	try {
 			} catch (Exception $e) {
@@ -1028,11 +1020,6 @@ function isInstalled()
  */
 function isUpdated()
 {
-
-	global $hname;
-	global $uname;
-	global $pword;
-	global $dbName_SPlus;
 
 	try {
 			} catch (Exception $e) {
