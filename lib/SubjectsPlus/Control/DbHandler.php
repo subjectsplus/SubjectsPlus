@@ -1,6 +1,10 @@
 <?php
-   namespace SubjectsPlus\Control;
-/**
+namespace SubjectsPlus\Control;
+
+    
+    
+    
+    /**
  *   @file sp_DBHandler
  *   @brief display results of A-Z list
  *
@@ -10,10 +14,15 @@
  */
 ///////// Databases ///////////
 
+    
+use SubjectsPlus\Control\Querier;
+
 class DbHandler {
-
+  
+    
+    
   function writeTable($qualifier, $subject_id = '', $description_search = 0) {
-
+    $db = new Querier();
     global $IconPath;
     global $proxyURL;
 
@@ -41,35 +50,35 @@ class DbHandler {
           $condition1 = "WHERE subject_id = $subject_id";
           $condition2 = "WHERE subject_id = $subject_id";
         } else {
-          $condition1 = "WHERE title LIKE '%" . mysql_real_escape_string($selected) . "%'";
-          $condition2 = "WHERE alternate_title LIKE '%" . mysql_real_escape_string($selected) . "%'";
+          $condition1 = "WHERE title LIKE %" . $db->quote($selected) . "%";
+          $condition2 = "WHERE alternate_title LIKE %" . $db->quote($selected) . "%";
         }
         break;
       case "bytype":
 
         if (isset($_GET["type"])) {
-          $condition1 = "WHERE ctags LIKE '%" . mysql_real_escape_string(scrubData($_GET["type"])) . "%'";
-          $condition2 = "WHERE ctags LIKE '%" . mysql_real_escape_string(scrubData($_GET["type"])) . "%'";
+          $condition1 = "WHERE ctags LIKE %" . $db->quote(scrubData($_GET["type"])) . "%";
+          $condition2 = "WHERE ctags LIKE %" . $db->quote(scrubData($_GET["type"])) . "%";
           $condition3 = "and alternate_title NOT NULL";
         }
 
         break;
         case "search":
-        $condition1 = "WHERE title LIKE '" . mysql_real_escape_string($selected) . "%'";
+        $condition1 = "WHERE title LIKE " . $db->quote($selected) . "%";
         // If you uncomment the next line, it will search description field
-        $condition1 = "WHERE (title LIKE '" . mysql_real_escape_string($selected) . "%' OR description LIKE '" . mysql_real_escape_string($selected) . "%')";
-        $condition2 = "WHERE alternate_title LIKE '" . mysql_real_escape_string($selected) . "%'";
+        $condition1 = "WHERE (title LIKE " . $db->quote($selected) . "% OR description LIKE " . $db->quote($selected) . "%)";
+        $condition2 = "WHERE alternate_title LIKE " . $db->quote($selected) . "%";
 
         break;
       default:
       // This is the simple output by letter and also the search
-        $condition1 = "WHERE title LIKE '" . mysql_real_escape_string($selected) . "%'";
+        $condition1 = "WHERE title LIKE " . $db->quote($selected) . "%";
         if ($description_search == 1) {
           // If you uncomment the next line, it will search description field
-          $condition1 = "WHERE (title LIKE '" . mysql_real_escape_string($selected) . "%' OR description LIKE '" . mysql_real_escape_string($selected) . "%')";          
+          $condition1 = "WHERE (title LIKE " . $db->quote($selected) . "% OR description LIKE " . $db->quote($selected) . "%)";
         }
 
-        $condition2 = "WHERE alternate_title LIKE '" . mysql_real_escape_string($selected) . "%'";
+        $condition2 = "WHERE alternate_title LIKE " . $db->quote($selected) . "%";
     }
 
 
@@ -88,7 +97,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 		ORDER BY newtitle";
 
       //print $q1 . ";";
-     $r1 = MYSQL_QUERY($q1); 
+     $r1 = $db->query($q1); 
      
      
       $q2 = "INSERT INTO merge 
@@ -105,7 +114,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 		ORDER BY newtitle";
       
       //print $q2 . ";";
-      $r2 = MYSQL_QUERY($q2);
+      $r2 = $db->query($q2);
       
       $q = "SELECT * FROM merge WHERE newtitle != '' ORDER BY newtitle";
       
@@ -113,7 +122,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 
       
     // check row count for 0 returns
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
     $num_rows = mysql_num_rows($r);
 
     if ($num_rows == 0) {
@@ -127,7 +136,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    while ($myrow = mysql_fetch_array($r)) {
+    foreach ($r as $myrow) {
 
       $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -204,7 +213,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
   function displaySubjects() {
 
     $q = "SELECT subject, subject_id FROM subject WHERE active = '1' ORDER BY subject";
-    $r = MYSQL_QUERY($q);
+    $r = $db->query($q);
 
     // check row count for 0 returns
 
@@ -221,7 +230,7 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    while ($myrow = mysql_fetch_array($r)) {
+    foreach ($r as $myrow) {
 
       $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
