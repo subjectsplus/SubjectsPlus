@@ -1,10 +1,6 @@
 <?php
 namespace SubjectsPlus\Control;
-
-    
-    
-    
-    /**
+/**
  *   @file sp_DBHandler
  *   @brief display results of A-Z list
  *
@@ -18,14 +14,12 @@ namespace SubjectsPlus\Control;
 use SubjectsPlus\Control\Querier;
 
 class DbHandler {
-  
-    
     
   function writeTable($qualifier, $subject_id = '', $description_search = 0) {
-    $db = new Querier();
+    
     global $IconPath;
     global $proxyURL;
-
+    $db = new Querier;
     // sanitize submission
     $selected = scrubData($qualifier);
     $subject_id = scrubData($subject_id);
@@ -83,26 +77,25 @@ class DbHandler {
 
 
       
-    
-      $q1 = "CREATE TEMPORARY TABLE merge
-      SELECT distinct left(title,1) as initial, title as newtitle, description, location, access_restrictions, title.title_id as this_record,
-eres_display, display_note, pre, citation_guide, ctags, helpguide
+     
+      
+      $q1 = "SELECT distinct left(title,1) as initial, title as newtitle, description, location, access_restrictions, title.title_id as this_record,
+        eres_display, display_note, pre, citation_guide, ctags, helpguide
 		FROM title, restrictions, location, location_title, source, rank
 		$condition1
 		AND title.title_id = location_title.title_id
 		AND location.location_id = location_title.location_id
 		AND restrictions_id = access_restrictions
 		AND eres_display = 'Y'
-      AND rank.title_id = title.title_id AND source.source_id = rank.source_id
+        AND rank.title_id = title.title_id AND source.source_id = rank.source_id
 		ORDER BY newtitle";
 
       //print $q1 . ";";
      $r1 = $db->query($q1); 
+      
      
-     
-      $q2 = "INSERT INTO merge 
-     SELECT distinct left(alternate_title,1) as initial, alternate_title as newtitle, description, location, access_restrictions, title.title_id as this_record,
-eres_display, display_note, pre, citation_guide, ctags, helpguide
+      $q2 = "SELECT distinct left(alternate_title,1) as initial, alternate_title as newtitle, description, location, access_restrictions, title.title_id as this_record,
+        eres_display, display_note, pre, citation_guide, ctags, helpguide
 		FROM title, restrictions, location, location_title, source, rank 
 		$condition2
 		AND title.title_id = location_title.title_id
@@ -114,16 +107,9 @@ eres_display, display_note, pre, citation_guide, ctags, helpguide
 		ORDER BY newtitle";
       
       //print $q2 . ";";
-      $r2 = $db->query($q2);
       
-      $q = "SELECT * FROM merge WHERE newtitle != '' ORDER BY newtitle";
-      
-      //print $q;
-
-      
-    // check row count for 0 returns
-    $r = $db->query($q);
-    $num_rows = mysql_num_rows($r);
+    $r = $db->query($q2);
+    $num_rows = count($r);
 
     if ($num_rows == 0) {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";
