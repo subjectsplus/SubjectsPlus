@@ -75,7 +75,7 @@ if (isset($_GET["insert_pluslet"])) {
     FROM pluslet p WHERE p.pluslet_id = '" . $_GET["insert_pluslet"] . "'";
     $ra = $db->query($qa);
 
-   
+
 }
 
 if (isset($this_id)) {
@@ -91,7 +91,7 @@ if (isset($this_id)) {
     }
 
 
-   
+
     $subject_name = $r[0][0];
     $shortform = $r[0][1];
 
@@ -364,7 +364,7 @@ ob_end_flush();
         alert("doublclickitude!");
      })
 
-     
+
 });
 
 //setup jQuery UI tabs and dialogs
@@ -602,8 +602,6 @@ jQuery(function() {
                     		onClickHandlers.splice(0, 0, onClickHandlers.pop());
                     	});
 
-
-
                         tabCounter++;
                     }
                 });
@@ -684,7 +682,7 @@ jQuery(window).load(function(){
         </div>
         <div class="pure-control-group">
             <label for="tab_external_link"><?php print _("Redirect URL"); ?></label>
-            <input type="text" name="tab_external_link" id="tab_external link" />
+            <input type="text" name="tab_external_link" id="tab_external_link" />
         </div>
     </fieldset>
 </form>
