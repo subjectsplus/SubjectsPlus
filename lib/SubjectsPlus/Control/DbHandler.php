@@ -16,7 +16,7 @@ use SubjectsPlus\Control\Querier;
 class DbHandler {
     
   function writeTable($qualifier, $subject_id = '', $description_search = 0) {
-    
+          
     global $IconPath;
     global $proxyURL;
     $db = new Querier;
@@ -44,40 +44,38 @@ class DbHandler {
           $condition1 = "WHERE subject_id = $subject_id";
           $condition2 = "WHERE subject_id = $subject_id";
         } else {
-          $condition1 = "WHERE title LIKE %" . $db->quote($selected) . "%";
-          $condition2 = "WHERE alternate_title LIKE %" . $db->quote($selected) . "%";
+          $condition1 = "WHERE title LIKE " . $db->quote("%" . $selected . "%");
+          $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" . $selected . "%");
         }
         break;
       case "bytype":
 
         if (isset($_GET["type"])) {
-          $condition1 = "WHERE ctags LIKE %" . $db->quote(scrubData($_GET["type"])) . "%";
-          $condition2 = "WHERE ctags LIKE %" . $db->quote(scrubData($_GET["type"])) . "%";
+          $condition1 = "WHERE ctags LIKE " . $db->quote(scrubData($_GET["type"]));
+          $condition2 = "WHERE ctags LIKE " . $db->quote(scrubData($_GET["type"]));
           $condition3 = "and alternate_title NOT NULL";
         }
 
         break;
         case "search":
-        $condition1 = "WHERE title LIKE " . $db->quote($selected) . "%";
+        $condition1 = "WHERE title LIKE " . $db->quote("%" . $selected . "%");
         // If you uncomment the next line, it will search description field
-        $condition1 = "WHERE (title LIKE " . $db->quote($selected) . "% OR description LIKE " . $db->quote($selected) . "%)";
-        $condition2 = "WHERE alternate_title LIKE " . $db->quote($selected) . "%";
+        $condition1 = "WHERE (title LIKE " . $db->quote("%" . $selected . "%") . " OR description LIKE " . $db->quote("%" . $selected . "%");
+        $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $selected + "%");
 
         break;
+            
       default:
       // This is the simple output by letter and also the search
-        $condition1 = "WHERE title LIKE " . $db->quote($selected) . "%";
+        $condition1 = "WHERE title LIKE " . $db->quote("%" + $selected + "%");
         if ($description_search == 1) {
           // If you uncomment the next line, it will search description field
-          $condition1 = "WHERE (title LIKE " . $db->quote($selected) . "% OR description LIKE " . $db->quote($selected) . "%)";
+          $condition1 = "WHERE (title LIKE " . $db->quote("%" + $selected + "%") . " OR description LIKE " . $db->quote("%" + $selected + "%");
         }
 
-        $condition2 = "WHERE alternate_title LIKE " . $db->quote($selected) . "%";
+        $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $selected + "%");
     }
 
-
-      
-     
       
       $q1 = "SELECT distinct left(title,1) as initial, title as newtitle, description, location, access_restrictions, title.title_id as this_record,
         eres_display, display_note, pre, citation_guide, ctags, helpguide
@@ -90,8 +88,7 @@ class DbHandler {
         AND rank.title_id = title.title_id AND source.source_id = rank.source_id
 		ORDER BY newtitle";
 
-      //print $q1 . ";";
-     $r1 = $db->query($q1); 
+        $r1 = $db->query($q1);
       
      
       $q2 = "SELECT distinct left(alternate_title,1) as initial, alternate_title as newtitle, description, location, access_restrictions, title.title_id as this_record,
