@@ -23,8 +23,7 @@ class DbHandler {
     // sanitize submission
     
     $subject_id = scrubData($subject_id);
-
-     
+      
     // Prepare conditions
     $condition1 = "";
     $condition2 = "";
@@ -69,12 +68,11 @@ class DbHandler {
       default:
       // This is the simple output by letter and also the search
             
-        
+        $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
             
-        $condition1 = "WHERE title LIKE " . $db->quote("%" + $qualifier + "%");
-        if ($description_search == 1) {
+            if ($description_search == 1) {
           // If you uncomment the next line, it will search description field
-          $condition1 = "WHERE (title LIKE " . $db->quote("%" + $qualifier + "%") . " OR description LIKE " . $db->quote("%" + $qualifier + "%");
+          $condition1 = "WHERE (title LIKE " . $db->quote("%" . $qualifier . "%") . " OR description LIKE " . $db->quote("%" . $qualifier . "%");
         }
 
         $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $qualifier + "%");
@@ -92,7 +90,7 @@ class DbHandler {
         AND rank.title_id = title.title_id AND source.source_id = rank.source_id
 		ORDER BY newtitle";
 
-        $r1 = $db->query($q1);
+     
       
      
       $q2 = "SELECT distinct left(alternate_title,1) as initial, alternate_title as newtitle, description, location, access_restrictions, title.title_id as this_record,
@@ -108,12 +106,11 @@ class DbHandler {
 		ORDER BY newtitle";
       
       //print $q2 . ";";
+    
       
     $r = $db->query($q1);
     $num_rows = count($r);
 
-      
-     
       
     if ($num_rows == 0) {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";
