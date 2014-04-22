@@ -21,9 +21,10 @@ class DbHandler {
     global $proxyURL;
     $db = new Querier;
     // sanitize submission
-    $selected = scrubData($qualifier);
+    
     $subject_id = scrubData($subject_id);
 
+     
     // Prepare conditions
     $condition1 = "";
     $condition2 = "";
@@ -44,8 +45,8 @@ class DbHandler {
           $condition1 = "WHERE subject_id = $subject_id";
           $condition2 = "WHERE subject_id = $subject_id";
         } else {
-          $condition1 = "WHERE title LIKE " . $db->quote("%" . $selected . "%");
-          $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" . $selected . "%");
+          $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
+          $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" . $qualifier . "%");
         }
         break;
       case "bytype":
@@ -58,22 +59,25 @@ class DbHandler {
 
         break;
         case "search":
-        $condition1 = "WHERE title LIKE " . $db->quote("%" . $selected . "%");
+        $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
         // If you uncomment the next line, it will search description field
-        $condition1 = "WHERE (title LIKE " . $db->quote("%" . $selected . "%") . " OR description LIKE " . $db->quote("%" . $selected . "%");
-        $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $selected + "%");
+        $condition1 = "WHERE (title LIKE " . $db->quote("%" . $qualifier . "%") . " OR description LIKE " . $db->quote("%" . $qualifier . "%");
+        $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $qualifier + "%");
 
         break;
             
       default:
       // This is the simple output by letter and also the search
-        $condition1 = "WHERE title LIKE " . $db->quote("%" + $selected + "%");
+            
+        
+            
+        $condition1 = "WHERE title LIKE " . $db->quote("%" + $qualifier + "%");
         if ($description_search == 1) {
           // If you uncomment the next line, it will search description field
-          $condition1 = "WHERE (title LIKE " . $db->quote("%" + $selected + "%") . " OR description LIKE " . $db->quote("%" + $selected + "%");
+          $condition1 = "WHERE (title LIKE " . $db->quote("%" + $qualifier + "%") . " OR description LIKE " . $db->quote("%" + $qualifier + "%");
         }
 
-        $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $selected + "%");
+        $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $qualifier + "%");
     }
 
       
@@ -108,6 +112,9 @@ class DbHandler {
     $r = $db->query($q1);
     $num_rows = count($r);
 
+      
+     
+      
     if ($num_rows == 0) {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";
     }
