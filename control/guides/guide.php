@@ -582,11 +582,15 @@ jQuery(function() {
                     		tabs.tabs('select', 0);
                     	}
 
-                    	jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
+                    	if( $(li).attr('data-external-link') != '' )
                     	{
-                    		window.open($(this).parent('li').attr('data-external-link'), '_blank');
-                    		evt.stopImmediatePropagation();
-                    	});
+                    		jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
+	                    	{
+	                    		window.open($(this).parent('li').attr('data-external-link'), '_blank');
+	                    		evt.stopImmediatePropagation();
+	                    	});
+                    	}
+
 
                     	jQuery(li).children('a[href^="#tabs-"]').each(function() {
                     		var elementData = jQuery._data(this),
