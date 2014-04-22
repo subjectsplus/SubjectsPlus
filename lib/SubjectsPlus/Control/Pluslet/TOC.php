@@ -11,7 +11,7 @@
  */
 class Pluslet_TOC extends Pluslet {
 
-	protected $_ticked_items = "";
+	protected $_ticked_items = array();
 
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);

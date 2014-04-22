@@ -16,7 +16,7 @@ use SubjectsPlus\Control\Querier;
 class DbHandler {
     
   function writeTable($qualifier, $subject_id = '', $description_search = 0) {
-          
+      
     global $IconPath;
     global $proxyURL;
     $db = new Querier;
@@ -105,7 +105,7 @@ class DbHandler {
       
       //print $q2 . ";";
       
-    $r = $db->query($q2);
+    $r = $db->query($q1);
     $num_rows = count($r);
 
     if ($num_rows == 0) {
@@ -125,15 +125,17 @@ class DbHandler {
 
       $patterns = "/'|\"/";
       $replacements = "";
-
-      $item_title = $myrow["1"];
+        
+      
+        
+      $item_title = $myrow[1];
       if ($myrow["pre"] != "") {
         $item_title = $myrow["pre"] . " " . $item_title;
       }
       
       $safe_title = trim(preg_replace($patterns, $replacements, $item_title));
       $blurb = $myrow["description"];
-      $bib_id = $myrow["5"];
+      $bib_id = $myrow[5];
 
       /// CHECK RESTRICTIONS ///
 
@@ -167,7 +169,7 @@ class DbHandler {
       if ($myrow["display_note"] == NULL) {
         $display_note_text = "";
       } else {
-        $display_note_text = "<br /><strong>" . _("Note:") . " </strong>$myrow[display_note]";
+        $display_note_text = "<br /><strong>" . _("Note:") . " </strong>" . $myrow['display_note'];
       }
 
 
@@ -213,8 +215,9 @@ class DbHandler {
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    foreach ($r as $myrow) {
 
+    foreach ($r as $myrow) {
+     
       $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
       $items .= "
