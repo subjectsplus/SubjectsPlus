@@ -60,58 +60,66 @@ foreach( $lobjTabs as $lobjTab )
 
 	$lintTabId = $db->last_id();
 
-	//insert section, as of now only one per tab
-	$qi = "INSERT INTO section (tab_id) VALUES ('$lintTabId')";
-	//print $qi . "<br />";
-	$ir = $db->exec($qi);
+	$lintSectionIndex = 0;
 
-	$lintSecId = $db->last_id();
+	//insert sections
+	foreach( $lobjTab['sections'] as $lobjSection )
+	{
+		//insert section, as of now only one per tab
+		$qi = "INSERT INTO section (section_index, layout, tab_id) VALUES ('$lintSectionIndex', '{$lobjSection['layout']}', '$lintTabId')";
+		//print $qi . "<br />";
+		$ir = $db->exec($qi);
 
-	$left_col = $lobjTab["left_data"];
-	$center_col = $lobjTab["center_data"];
-	$sidebar = $lobjTab["sidebar_data"];
+		$lintSecId = $db->last_id();
 
-	//added by dgonzalez in order to separate by '&pluslet[]=' even if dropspot-left doesn't exist
-	$left_col = "&" . $left_col;
-	$center_col = "&" . $center_col;
-	$sidebar = "&" . $sidebar;
+		$left_col = $lobjSection["left_data"];
+		$center_col = $lobjSection["center_data"];
+		$sidebar = $lobjSection["sidebar_data"];
 
-	// remove the "drop here" non-content & get all our "real" contents into array
-	$left_col = str_replace("dropspot-left[]=1", "", $left_col);
-	$leftconts = explode("&pluslet[]=", $left_col);
+		//added by dgonzalez in order to separate by '&pluslet[]=' even if dropspot-left doesn't exist
+		$left_col = "&" . $left_col;
+		$center_col = "&" . $center_col;
+		$sidebar = "&" . $sidebar;
 
-	$center_col = str_replace("dropspot-center[]=1", "", $center_col);
-	$centerconts = explode("&pluslet[]=", $center_col);
+		// remove the "drop here" non-content & get all our "real" contents into array
+		$left_col = str_replace("dropspot-left[]=1", "", $left_col);
+		$leftconts = explode("&pluslet[]=", $left_col);
 
-	$sidebar = str_replace("dropspot-sidebar[]=1", "", $sidebar);
-	$sidebarconts = explode("&pluslet[]=", $sidebar);
+		$center_col = str_replace("dropspot-center[]=1", "", $center_col);
+		$centerconts = explode("&pluslet[]=", $center_col);
 
-	// CHECK IF THERE IS CONTENT
+		$sidebar = str_replace("dropspot-sidebar[]=1", "", $sidebar);
+		$sidebarconts = explode("&pluslet[]=", $sidebar);
 
-	// Now insert the appropriate entries
+		// CHECK IF THERE IS CONTENT
 
-	foreach ($leftconts as $key => $value) {
-		if ($key != 0) {
-			$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 0, '$key')";
-			//print $qi . "<br />";
-			$ir = $db->query($qi);
+		// Now insert the appropriate entries
+
+		foreach ($leftconts as $key => $value) {
+			if ($key != 0) {
+				$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 0, '$key')";
+				//print $qi . "<br />";
+				$ir = $db->query($qi);
+			}
 		}
-	}
 
-	foreach ($centerconts as $key => $value) {
-		if ($key != 0) {
-			$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 1, '$key')";
-			//print $qi . "<br />";
-			$ir = $db->query($qi);
+		foreach ($centerconts as $key => $value) {
+			if ($key != 0) {
+				$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 1, '$key')";
+				//print $qi . "<br />";
+				$ir = $db->query($qi);
+			}
 		}
-	}
 
-	foreach ($sidebarconts as $key => $value) {
-		if ($key != 0) {
-			$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 2, '$key')";
-			//print $qi . "<br />";
-			$ir = $db->query($qi);
+		foreach ($sidebarconts as $key => $value) {
+			if ($key != 0) {
+				$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 2, '$key')";
+				//print $qi . "<br />";
+				$ir = $db->query($qi);
+			}
 		}
+
+		$lintSectionIndex++;
 	}
 
 	$lintTabIndex++;

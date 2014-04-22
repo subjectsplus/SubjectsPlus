@@ -1944,3 +1944,9 @@ display:none;
 	position: inherit;
 	overflow: visible;
 }
+
+.sp_section
+{
+	border: dotted;
+	margin-top: 10px;
+}
