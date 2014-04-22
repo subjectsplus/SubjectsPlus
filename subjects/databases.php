@@ -12,9 +12,6 @@ use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\DbHandler;
     
     
-    
-    
-    
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
@@ -108,7 +105,7 @@ foreach ($rnew as $myrow) {
     $db_url = $proxyURL;
   }
 
-  $newlist .= "<li><a href=\"$db_url$myrow[0][1]\">$myrow[0][0]</a></li>\n";
+  $newlist .= "<li><a href=\"$db_url$myrow[0][1]\">$myrow[0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
 
@@ -132,10 +129,13 @@ $intro .= "<br class=\"clear-both\" />";
 
 $our_items = new DbHandler();
 
+
 // if we're showing the subject list, do so
 
 if ($show_subjects == TRUE) {
   $out = $our_items->displaySubjects();
+ 
+
 } elseif ($show_types == TRUE) {
 
   $out = $our_items->displayTypes();
@@ -146,6 +146,7 @@ if ($show_subjects == TRUE) {
   }
 
   // otherwise display our results from the database list
+   
   $out = $our_items->writeTable($_GET["letter"], $clean_id, $description_search);
 }
 
