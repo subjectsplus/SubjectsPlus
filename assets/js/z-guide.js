@@ -27,6 +27,8 @@ jQuery(document).ready(function(){
 
     setupTabs('a[id*=tab-]');
 
+	makeAddSection('a[id="add_section"]');
+
                        jQuery(".box-item").on('drag', function()
                                               {
                                               jQuery('#box_options').hide();
@@ -89,8 +91,8 @@ jQuery(lstrSelector).livequery(function() {
 						jQuery(props.draggable).children('.pluslet_body').show();
 						jQuery(props.draggable).children().children('.titlebar_text').show();
 						jQuery(props.draggable).children().children('.titlebar_options').show();
-                        
-						
+
+
                            jQuery(props.draggable).hide('slow', function()
 						{
 							jQuery(this).remove();
@@ -243,7 +245,7 @@ function makeSortable( lstrSelector )
 				jQuery(ui.item).children('.pluslet_body').show();
 				jQuery(ui.item).children().children('.titlebar_text').show();
 				jQuery(ui.item).children().children('.titlebar_options').show();
-                              
+
 			}
 		});
 	});
@@ -377,15 +379,15 @@ function setupSaveButton( lstrSelector )
 		var boxsetting_collapse_titlebar = Number(jQuery('input[id=start-collapsed-'+lintID+']').is(':checked'));
 		var boxsetting_suppress_body = Number(jQuery('input[id=nobody-'+lintID+']').is(':checked'));
 		var boxsetting_titlebar_styling = jQuery('select[id=titlebar-styling-'+lintID+']').val();
-        
-    
-        
-        
+
+
+
+
 		console.log (boxsetting_hide_titlebar);
         console.log (boxsetting_collapse_titlebar);
         console.log( boxsetting_suppress_body);
         console.log(boxsetting_titlebar_styling);
-        
+
 		//alert(lintID);
 		//alert(boxsetting_titlebar_styling);
 		//////////////////////////////////////////////////////////////////
@@ -400,14 +402,14 @@ function setupSaveButton( lstrSelector )
 		switch (item_type[2]) {
 			case "Basic":
                 if (typeof CKEDITOR != 'undefined') {
-                
+
                     var pbody = addslashes(CKEDITOR.instances[lstrInstance].getData());
 
                 } else {
-                    
+
                     var pbody = jQuery('#pluslet-' + lintID).find('.pluslet_body').html()
                 }
-                
+
 				var pitem_type = "Basic";
 				var pspecial = '';
 				break;
@@ -595,14 +597,24 @@ function setupSaveButton( lstrSelector )
 			var lobjTab = {};
 			lobjTab.name = lstrName;
 			lobjTab.external = lstrExternal;
+			lobjTab.sections = [];
 
-			jQuery('div#tabs-' + tab_id + ' div.portal-column-0').sortable();
-			jQuery('div#tabs-' + tab_id + ' div.portal-column-1').sortable();
-			jQuery('div#tabs-' + tab_id + ' div.portal-column-2').sortable();
+			jQuery('div#tabs-' + tab_id + ' div[id^="section_"').each(function()
+			{
+				var section_id = $(this).attr("id").split("section_")[1];
+				var lobjSection = {};
+				lobjSection.layout = '4-4-4';
 
-			lobjTab.left_data = jQuery('div#tabs-' + tab_id + ' div.portal-column-0').sortable('serialize');
-			lobjTab.center_data = jQuery('div#tabs-' + tab_id + ' div.portal-column-1').sortable('serialize');
-			lobjTab.sidebar_data = jQuery('div#tabs-' + tab_id + ' div.portal-column-2').sortable('serialize');
+				jQuery('div#section_' + section_id + ' div.portal-column-0').sortable();
+				jQuery('div#section_' + section_id + ' div.portal-column-1').sortable();
+				jQuery('div#section_' + section_id + ' div.portal-column-2').sortable();
+
+				lobjSection.left_data = jQuery('div#section_' + section_id +  ' div.portal-column-0').sortable('serialize');
+				lobjSection.center_data = jQuery('div#section_' + section_id +  ' div.portal-column-1').sortable('serialize');
+				lobjSection.sidebar_data = jQuery('div#section_' + section_id +  ' div.portal-column-2').sortable('serialize');
+
+				lobjTab.sections.push(lobjSection);
+			});
 
 			lobjTabs.push(lobjTab);
 		});
@@ -908,21 +920,21 @@ function setupMiscLiveQueries()
     jQuery('a[id*=settings-]').livequery('click', function(event) {
 
         jQuery(this).parent().next('.box_settings').toggle('slow');
-        
+
 
      });
 
     jQuery('.pure-checkbox').on('click',  function() {
-             
+
             var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
             console.log(pluslet_id);
             jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-Basic');
                                 console.log(jQuery(pluslet_id));
             jQuery("#save_guide").fadeIn();
-            
-                            
+
+
     });
-    
+
 }
 
 function setupMiscClickEvents()
@@ -1100,3 +1112,26 @@ function reLayout( lc, cc, rc)
 
 }
 
+///////////////
+// function to add section to current tab
+//////////////
+function makeAddSection( lstrSelector )
+{
+	jQuery( lstrSelector ).on( 'click', function()
+	{
+		var lintSelected = $(tabs).tabs('option', 'selected');
+
+		jQuery.ajax({
+			url: "helpers/create_section.php",
+			type: "GET",
+			data: {},
+			dataType: "html",
+			success: function(html) {
+				var lobjNewDiv = $('<div id="section_new" class="sp_section">' + html + '</div>');
+				$('div#tabs-' + lintSelected).append(lobjNewDiv);
+				var p = lobjNewDiv.position();
+				$(window).scrollTop(p.top);
+			}
+		});
+	});
+}

@@ -827,140 +827,152 @@ class Guide
 
     public function dropTabs($selected_tab = 0)
     {
+		//get all sections for current tab
+    	$q = "SELECT sec.*
+    		  FROM section sec
+    		  INNER JOIN tab t
+    		  ON sec.tab_id = t.tab_id
+    		  INNER JOIN subject s
+    		  ON t.subject_id = s.subject_id
+    		  WHERE t.tab_index = $selected_tab
+    		  AND s.subject_id = '{$this->_subject_id}'
+    		  ORDER BY section_index ASC";
+
+    	$db = new Querier;
+    	$lobjSections = $db->query($q);
+
+    	foreach( $lobjSections as $lobjSection )
+    	{
+    		print "<div id=\"section_{$lobjSection['section_id']}\" class=\"sp_section\">";
+
+    		$qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
+		           FROM pluslet p
+		           INNER JOIN pluslet_section ps
+		           ON p.pluslet_id = ps.pluslet_id
+		           INNER JOIN section sec
+		           ON ps.section_id = sec.section_id
+		           WHERE sec.section_id = {$lobjSection['section_id']}
+		           ORDER BY prow ASC";
+
+    		$rc = $db->query($qc);
+
+    		//init
+    		$left_col_pluslets = "";
+    		$main_col_pluslets = "";
+    		$sidebar_pluslets = "";
+
+    		foreach ($rc as $myrow) {
+
+    			// Get our guide type
+    			// Make sure it's not blank, as that will throw an error
+    			if ($myrow["type"] != "") {
+
+    				if ($myrow["type"] == "Special") {
+    					$obj = __NAMESPACE__ . "\Pluslet_" . $myrow[0];
+    				} else {
+    					$obj = __NAMESPACE__ . "\Pluslet_" . $myrow[4];
+    				}
 
 
-        $qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra, t.tab_index
-        FROM subject s LEFT JOIN tab t
-        ON s.subject_id = t.subject_id
-        LEFT JOIN section sec
-        ON t.tab_id = sec.tab_id
-        LEFT JOIN pluslet_section ps
-        ON ps.section_id = sec.section_id
-        LEFT JOIN pluslet p
-        ON p.pluslet_id = ps.pluslet_id
-        WHERE s.subject_id = '{$this->_subject_id}'
-        AND t.tab_index = '$selected_tab'
-        ORDER BY prow ASC";
-        $db = new Querier;
-        $rc = $db->query($qc);
+    				//global $obj;
+    				$record = new $obj($myrow[0], "", $this->_subject_id);
+    				$view = $this->_isAdmin ? "admin" : "public";
 
-        //init
-        $left_col_pluslets = "";
-        $main_col_pluslets = "";
-        $sidebar_pluslets = "";
+    				switch ($myrow[3]) {
+    					case 0:
+    						# code...
+    						$left_col_pluslets .= $record->output("view", $view);
+    						break;
+    					case 1:
+    					default:
+    						# code...
+    						$main_col_pluslets .= $record->output("view", $view);
+    						break;
+    					case 2:
+    						# code...
+    						$sidebar_pluslets .= $record->output("view", $view);
+    						break;
+    				}
 
-        foreach ($rc as $myrow) {
+    			}
+    			unset($record);
+    		}
 
-            // Get our guide type
-            // Make sure it's not blank, as that will throw an error
-            if ($myrow["type"] != "") {
+    		if ($this->_isAdmin) {
+    			print $this->dropBoxes(0, 'left', $left_col_pluslets);
+    			print $this->dropBoxes(1, 'center', $main_col_pluslets);
+    			print $this->dropBoxes(2, 'sidebar', $sidebar_pluslets);
+    			print '<div id="clearblock" style="clear:both;"></div> <!-- this just seems to allow the space to grow to fit dropbox areas -->';
+    		} else {
+    			global $is_responsive;
 
-                if ($myrow["type"] == "Special") {
-                    $obj = __NAMESPACE__ . "\Pluslet_" . $myrow[0];
-                } else {
-                    $obj = __NAMESPACE__ . "\Pluslet_" . $myrow[4];
-                }
+    			$query = "select extra from subject where subject_id = '{$this->_subject_id}'";
+    			$result = $db->query($query);
 
+    			//print_r ($result);
+    			$jobj = json_decode($result[0]["extra"]);
+    			$col_widths = explode("-", $jobj->{'maincol'});
+    			$purified = ""; // init
 
-                //global $obj;
-                $record = new $obj($myrow[0], "", $this->_subject_id);
-                $view = $this->_isAdmin ? "admin" : "public";
+    			if (isset($col_widths[0]) && $col_widths[0] > 0) {
+    				$purified = reduce($col_widths[0], 12);
+    				$pure_left = "pure-u-" . $purified[0] . "-" . $purified[1];
+    				$left_width = $col_widths[0];
+    			} else {
+    				$left_width = 0;
+    			}
 
-                switch ($myrow[3]) {
-                    case 0:
-                        # code...
-                        $left_col_pluslets .= $record->output("view", $view);
-                        break;
-                    case 1:
-                    default:
-                        # code...
-                        $main_col_pluslets .= $record->output("view", $view);
-                        break;
-                    case 2:
-                        # code...
-                        $sidebar_pluslets .= $record->output("view", $view);
-                        break;
-                }
+    			if (isset($col_widths[1])) {
+    				$purified = reduce($col_widths[1], 12);
+    				$pure_center = "pure-u-" . $purified[0] . "-" . $purified[1];
+    				$main_width = $col_widths[1];
+    			} else {
+    				$main_width = 0;
+    			}
 
-            }
-            unset($record);
-        }
+    			if (isset($col_widths[2]) && $col_widths[2] > 0) {
+    				$purified = reduce($col_widths[2], 12);
+    				$pure_right = "pure-u-" . $purified[0] . "-" . $purified[1];
+    				$side_width = $col_widths[2];
+    			} else {
+    				$side_width = 0;
+    			}
 
-        if ($this->_isAdmin) {
-            print $this->dropBoxes(0, 'left', $left_col_pluslets);
-            print $this->dropBoxes(1, 'center', $main_col_pluslets);
-            print $this->dropBoxes(2, 'sidebar', $sidebar_pluslets);
-            print '<div id="clearblock" style="clear:both;"></div> <!-- this just seems to allow the space to grow to fit dropbox areas -->';
-        } else {
-            global $is_responsive;
+    			// responsive or not?
+    			if (isset($is_responsive) && $is_responsive == TRUE) {
+    				// make sure they aren't 0
 
-            $query = "select extra from subject where subject_id = '{$this->_subject_id}'";
-            $result = $db->query($query);
+    				if ($left_width > 0) {
+    					/*print "<div class='span$left_width'>
+    					   $left_col_pluslets
+    					   </div>";*/
+    					print "<div class='$pure_left'>
+    					$left_col_pluslets
+    					</div>";
+    				}
 
-            //print_r ($result);
-            $jobj = json_decode($result[0]["extra"]);
-            $col_widths = explode("-", $jobj->{'maincol'});
-            $purified = ""; // init
+    				if ($main_width > 0) {
+    					print "<div class='$pure_center'>
+    					$main_col_pluslets
+    					</div>";
 
-            if (isset($col_widths[0]) && $col_widths[0] > 0) {
-                $purified = reduce($col_widths[0], 12);
-                $pure_left = "pure-u-" . $purified[0] . "-" . $purified[1];
-                $left_width = $col_widths[0];
-            } else {
-                $left_width = 0;
-            }
+    					/*print "<div class='span$main_width'>
+    					   $main_col_pluslets
+    					   </div>";*/
+    				}
 
-            if (isset($col_widths[1])) {
-                $purified = reduce($col_widths[1], 12);
-                $pure_center = "pure-u-" . $purified[0] . "-" . $purified[1];
-                $main_width = $col_widths[1];
-            } else {
-                $main_width = 0;
-            }
+    				if ($side_width > 0) {
+    					print "<div class='$pure_right'>
+    					$sidebar_pluslets
+    					</div>";
 
-            if (isset($col_widths[2]) && $col_widths[2] > 0) {
-                $purified = reduce($col_widths[2], 12);
-                $pure_right = "pure-u-" . $purified[0] . "-" . $purified[1];
-                $side_width = $col_widths[2];
-            } else {
-                $side_width = 0;
-            }
+    					/*print "<div class='span$side_width'>
+    					   $sidebar_pluslets
+    					   </div>";*/
+    				}
 
-            // responsive or not?
-            if (isset($is_responsive) && $is_responsive == TRUE) {
-                // make sure they aren't 0
-
-                if ($left_width > 0) {
-                    /*print "<div class='span$left_width'>
-                     $left_col_pluslets
-                     </div>";*/
-                    print "<div class='$pure_left'>
-                    $left_col_pluslets
-                    </div>";
-                }
-
-                if ($main_width > 0) {
-                    print "<div class='$pure_center'>
-                    $main_col_pluslets
-                    </div>";
-
-                    /*print "<div class='span$main_width'>
-                     $main_col_pluslets
-                     </div>";*/
-                }
-
-                if ($side_width > 0) {
-                    print "<div class='$pure_right'>
-                    $sidebar_pluslets
-                    </div>";
-
-                    /*print "<div class='span$side_width'>
-                     $sidebar_pluslets
-                     </div>";*/
-                }
-
-            } else {
-                print "<div id=\"leftcol\">
+    			} else {
+    				print "<div id=\"leftcol\">
 				$left_col_pluslets
 				</div>
 				<div id=\"maincol\">
@@ -969,8 +981,11 @@ class Guide
 				<div id=\"rightcol\">
 				$sidebar_pluslets
 				</div>";
-            }
-        }
+    			}
+    		}
+
+    		print "</div>";
+    	}
     }
 
     public function dropBoxes($i, $itext, $content)

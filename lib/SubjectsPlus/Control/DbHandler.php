@@ -68,7 +68,14 @@ class DbHandler {
       default:
       // This is the simple output by letter and also the search
             
-        $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
+            if (strlen($qualifier) == 1) {
+            
+                // Is like the first letter
+                $condition1 = "WHERE title LIKE " . $db->quote($qualifier . "%");
+                
+            } else {
+                      $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
+            }
             
             if ($description_search == 1) {
           // If you uncomment the next line, it will search description field
