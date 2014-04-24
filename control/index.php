@@ -66,7 +66,9 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
       ?>
     </div>
   </div>
+  <?php 
 
+  print makePluslet (_("Favourites"), "some faves"); ?>
   <div class="pluslet">
     <div class="titlebar">
       <div class="titlebar_text"><?php print _("Background Options"); ?></div>
