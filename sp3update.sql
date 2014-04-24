@@ -35,13 +35,13 @@ CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `departme
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-ALTER TABLE `subjectsplus`.`subject_department`
+ALTER TABLE `subject_department`
 ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`;
 
 /* Subject parent relationship */
 
 
-CREATE TABLE `subjectsplus`.`subject_subject` (
+CREATE TABLE `subject_subject` (
 `id_subject_subject` INT NOT NULL AUTO_INCREMENT,
 `subject_parent` BIGINT(20) NOT NULL,
 `subject_child` BIGINT(20) NOT NULL,
@@ -50,23 +50,23 @@ INDEX `fk_subject_parent_idx` (`subject_parent` ASC),
 INDEX `fk_subject_child_idx` (`subject_child` ASC),
 CONSTRAINT `fk_subject_parent`
 FOREIGN KEY (`subject_parent`)
-REFERENCES `subjectsplus`.`subject` (`subject_id`)
+REFERENCES `subject` (`subject_id`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION,
 CONSTRAINT `fk_subject_child`
 FOREIGN KEY (`subject_child`)
-REFERENCES `subjectsplus`.`subject` (`subject_id`)
+REFERENCES `subject` (`subject_id`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION);
 
-ALTER TABLE `subjectsplus`.`subject_subject`
+ALTER TABLE `subject_subject`
 ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`;
 
-ALTER TABLE `subjectsplus`.`tab`
+ALTER TABLE `tab`
 ADD COLUMN `visibility` INT(11) NOT NULL DEFAULT 2 AFTER `external_url`;
 
 /* New Section table */
-CREATE  TABLE `subjectsplus`.`section` (
+CREATE  TABLE `section` (
 
   `section_id` INT(11) NOT NULL AUTO_INCREMENT ,
 
@@ -84,7 +84,7 @@ CREATE  TABLE `subjectsplus`.`section` (
 
     FOREIGN KEY (`tab_id` )
 
-    REFERENCES `subjectsplus`.`tab` (`tab_id` )
+    REFERENCES `tab` (`tab_id` )
 
     ON DELETE CASCADE
 
@@ -108,20 +108,20 @@ SET pt.tab_id = s.section_id;
 SET FOREIGN_KEY_CHECKS = 1;
 
 /* change pluslet_tab to pluslet_section */
-ALTER TABLE `subjectsplus`.`pluslet_tab` DROP FOREIGN KEY `fk_pt_tab_id` ;
+ALTER TABLE `pluslet_tab` DROP FOREIGN KEY `fk_pt_tab_id` ;
 
-ALTER TABLE `subjectsplus`.`pluslet_tab` CHANGE COLUMN `tab_id` `section_id` INT(11) NOT NULL  ,
+ALTER TABLE `pluslet_tab` CHANGE COLUMN `tab_id` `section_id` INT(11) NOT NULL  ,
 
   ADD CONSTRAINT `fk_pt_section_id`
 
   FOREIGN KEY (`section_id` )
 
-  REFERENCES `subjectsplus`.`section` (`section_id` )
+  REFERENCES `section` (`section_id` )
 
   ON DELETE CASCADE
 
   ON UPDATE CASCADE, RENAME TO  `subjectsplus`.`pluslet_section` ;
 
 /*  change column name */
-ALTER TABLE `subjectsplus`.`pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT  ;
+ALTER TABLE `pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT  ;
 
