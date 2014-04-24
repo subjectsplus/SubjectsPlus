@@ -61,5 +61,3 @@
 
 
     echo $javascripts->dump();
-
-    ?>

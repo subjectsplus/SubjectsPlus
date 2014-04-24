@@ -87,5 +87,3 @@
     
     
     echo $css->dump();
-    
-    ?>
