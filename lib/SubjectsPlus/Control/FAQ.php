@@ -22,6 +22,8 @@ class FAQ {
   private $_message;
   private $_collections;
   private $_subjects;
+  private $_debug;
+
 
   public function __construct($faq_id="", $flag="") {
 
