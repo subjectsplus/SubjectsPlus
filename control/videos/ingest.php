@@ -7,7 +7,8 @@
  *   @author adarby, rgilmour
  *   @date mar 2013
  */
-
+    
+use SubjectsPlus\Control\Querier;
 
 $subcat = "video";
 $page_title = "Video Admin";
@@ -328,6 +329,8 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
     // check if this video is in place
     $qcheck = "SELECT title FROM video WHERE foreign_id = \"" . $this_vid_id . "\"";
     //print $qcheck;
+    $db = new Querier;
+                                                               
     $rcheck = $db->query($qcheck);
 
     if (count($rcheck) == 0) {
