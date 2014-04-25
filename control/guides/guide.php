@@ -642,7 +642,7 @@ jQuery(window).load(function(){
                     <?php print $all_boxes; ?>
                 </li>
                 <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
-                <li><a href=""><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
+                <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
                 <!--<li class="showrecord"><a href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></a></li>
                 <li class="showmeta"><a href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></a></li>
                 <li id="layoutbox" class="togglelayout" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><a href="#"><?php print _("Layout"); ?></a>

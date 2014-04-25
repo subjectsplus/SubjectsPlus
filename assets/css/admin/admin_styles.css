@@ -1943,4 +1943,14 @@ display:none;
 	opacity: inherit;
 	position: inherit;
 	overflow: visible;
+    background: none;
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+}
+
+.sp_section
+{
+	border: dotted;
+	margin-top: 10px;
 }

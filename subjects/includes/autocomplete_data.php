@@ -44,7 +44,7 @@ switch ($_GET["collection"]) {
 	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . $db->quote($param) . "%'";
 	break;
   	case "databases":
-	$q = "SELECT location, title
+	$q = "SELECT location, title, access_restrictions
     FROM title t, location_title lt, location l
     WHERE t.title_id = lt.title_id
     AND lt.location_id = l.location_id
@@ -62,12 +62,22 @@ $r = $db->query($q);
 $arr = array();
 
 $i = 0;
-foreach ($r as $myrow){
-  $arr[$i]['value'] = $myrow[0];
-  $arr[$i]['label'] = $myrow[1];
+while($myrow =  mysql_fetch_array($r)) {
+	// deal with records, which might need a proxy
+	if ($_GET["collection"] == "databases") {
+		if ($myrow[2] == 2) {
+			$arr[$i]['value'] = $proxyURL . $myrow[0];
+		} else {
+			$arr[$i]['value'] = $myrow[0];
+		}
+	} else {
+		$arr[$i]['value'] = $myrow[0];
+	}
+  
+  //$arr[$i]['label'] = $myrow[1];
+  $arr[$i]['label'] = html_entity_decode($myrow[1], ENT_QUOTES); 
   $i++;
 }
-
 //echo JSON to page
 
 $response = json_encode($arr);

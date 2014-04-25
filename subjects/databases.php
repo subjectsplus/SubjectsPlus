@@ -11,7 +11,6 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\DbHandler;
     
-    
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
@@ -127,7 +126,7 @@ $intro .= "<br class=\"clear-both\" />";
 
 // Create our table of databases object
 
-$our_items = new DbHandler();
+$our_items = new DbHandler();
 
 
 // if we're showing the subject list, do so

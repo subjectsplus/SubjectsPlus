@@ -8,8 +8,6 @@
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
-
-    
     
 $use_jquery = array("ui");
 
