@@ -29,6 +29,8 @@ jQuery(document).ready(function(){
 
 	makeAddSection('a[id="add_section"]');
 
+	makeSectionSlider('div[id^="slider_section"]');
+
                        jQuery(".box-item").on('drag', function()
                                               {
                                               jQuery('#box_options').hide();
@@ -599,11 +601,11 @@ function setupSaveButton( lstrSelector )
 			lobjTab.external = lstrExternal;
 			lobjTab.sections = [];
 
-			jQuery('div#tabs-' + tab_id + ' div[id^="section_"').each(function()
+			jQuery('div#tabs-' + tab_id + ' div[id^="section_"]').each(function()
 			{
 				var section_id = $(this).attr("id").split("section_")[1];
 				var lobjSection = {};
-				lobjSection.layout = '4-4-4';
+				lobjSection.layout = $(this).attr("data-layout");
 
 				jQuery('div#section_' + section_id + ' div.portal-column-0').sortable();
 				jQuery('div#section_' + section_id + ' div.portal-column-1').sortable();
@@ -1090,24 +1092,24 @@ function plantClone(clone_id, item_type) {
 ///////////////
 // function to correctly size layout of guide
 //////////////
-function reLayout( lc, cc, rc)
+function reLayout( lintSectionID, lc, cc, rc )
 {
 	if (parseInt(lc) == 0) {
-        jQuery('.sptab div#container-0').width(0);
-        jQuery('.sptab div#container-0').hide();
+        jQuery('div#section_' + lintSectionID + ' div#container-0').width(0);
+        jQuery('div#section_' + lintSectionID + ' div#container-0').hide();
     } else {
-        jQuery('.sptab div#container-0').show();
-        jQuery('.sptab div#container-0').width(lc);
+        jQuery('div#section_' + lintSectionID + ' div#container-0').show();
+        jQuery('div#section_' + lintSectionID + ' div#container-0').width(lc.toString() + '%');
     }
 
-    jQuery('.sptab div#container-1').width(cc);
+    jQuery('div#section_' + lintSectionID + ' div#container-1').width(cc.toString() + '%');
 
     if (parseInt(rc) == 0) {
-        jQuery('.sptab div#container-2').width(0);
-        jQuery('.sptab div#container-2').hide();
+        jQuery('div#section_' + lintSectionID + ' div#container-2').width(0);
+        jQuery('div#section_' + lintSectionID + ' div#container-2').hide();
     } else {
-        jQuery('.sptab div#container-2').show();
-        jQuery('.sptab div#container-2').width(rc);
+        jQuery('div#section_' + lintSectionID + ' div#container-2').show();
+        jQuery('div#section_' + lintSectionID + ' div#container-2').width(rc.toString() + '%');
     }
 
 }
@@ -1131,6 +1133,45 @@ function makeAddSection( lstrSelector )
 				$('div#tabs-' + lintSelected).append(lobjNewDiv);
 				var p = lobjNewDiv.position();
 				$(window).scrollTop(p.top);
+			}
+		});
+	});
+}
+
+////////////////
+// function to make section sliders
+///////////////
+function makeSectionSlider( lstrSelector )
+{
+	$( lstrSelector ).each(function()
+	{
+		//section id
+		var sec_id = $(this).attr('id').split('slider_section_')[1];
+		var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
+
+		$( this ).slider({
+			range: true,
+			min: 0,
+			max: 12,
+			step: 1,
+			values: [lobjLayout[0], parseInt(lobjLayout[0]) + parseInt(lobjLayout[1])],
+			slide: function( event, ui ) {
+				// figure out our vals
+				var left_col = ui.values[0];
+				var right_col = 12 - ui.values[1];
+				var center_col = 12 - (left_col + right_col);
+				var extra_val = left_col + "-" + center_col + "-" + right_col;
+
+				var lw = parseInt(left_col) * 8;
+	    		var mw = parseInt(center_col) * 8;
+	    		var sw = parseInt(right_col) * 8 - 3;
+
+				$( "div#section_" + sec_id ).attr( 'data-layout', extra_val);
+
+				reLayout(sec_id, lw, mw, sw);
+
+				//show save guide button
+				jQuery("#save_guide").fadeIn();
 			}
 		});
 	});

@@ -843,7 +843,8 @@ class Guide
 
     	foreach( $lobjSections as $lobjSection )
     	{
-    		print "<div id=\"section_{$lobjSection['section_id']}\" class=\"sp_section\">";
+    		print "<div id=\"slider_section_{$lobjSection['section_id']}\"></div>";
+    		print "<div id=\"section_{$lobjSection['section_id']}\" class=\"sp_section\" data-layout=\"{$lobjSection['layout']}\">";
 
     		$qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
 		           FROM pluslet p

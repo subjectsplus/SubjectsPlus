@@ -234,7 +234,20 @@ ob_end_flush();
 
     jQuery(document).ready(function(){
      jQuery("#box_options").hide();
-        reLayout(new_left_width, new_main_width, new_sidebar_width);
+
+    	//layout each section
+    	$('div[id^="section_"]').each(function()
+    	{
+    		//section id
+    		var sec_id = $(this).attr('id').split('section_')[1];
+    		var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
+
+    		var lw = parseInt(lobjLayout[0]) * 8;
+    		var mw = parseInt(lobjLayout[1]) * 8;
+    		var sw = parseInt(lobjLayout[2]) * 8 - 3;
+
+    		reLayout(sec_id, lw, mw, sw);
+    	});
 
         function addBoxy(){
             jQuery("#box_options").show();
@@ -335,29 +348,6 @@ ob_end_flush();
         jQuery("#save_layout").show();
         }
     });
-
-    jQuery('button[id=save_layout]').click(function(event) {
-        var ourcols = jQuery( "#extra" ).val();
-        new_layout = jQuery.ajax({
-            url: "helpers/save_layout.php",
-            type: "POST",
-            data: ({cols: ourcols, subject_id: subject_id}),
-            dataType: "html",
-            success: function(html) {
-                var ourval = jQuery( "#extra" ).val().split("-");
-
-                var lc = parseInt(ourval[0]) * 8;
-                lc = lc.toString() + "%"; //convert to string before concating
-                var cc = parseInt(ourval[1]) * 8;
-                cc = cc.toString() + "%";
-                var rc = (parseInt(ourval[2]) * 8 - 3);
-                rc = rc.toString() + "%";
-
-                reLayout(lc, cc, rc);
-            }
-        });
-    });
-
 
      jQuery("div#tabs ul li a").dblclick(function () {
 
@@ -557,17 +547,6 @@ jQuery(function() {
 
                         tabs.append( "<div id='" + id + "' class=\"sptab\">" + html
                          + "</div>" );
-
-                        var ourval = jQuery( "#extra" ).val().split("-");
-
-                        var lc = parseInt(ourval[0]) * 8;
-                        lc = lc.toString() + "%"; //convert to string before concating
-                        var cc = parseInt(ourval[1]) * 8;
-                        cc = cc.toString() + "%";
-                        var rc = (parseInt(ourval[2]) * 8 - 3);
-                        rc = rc.toString() + "%";
-
-                        reLayout(lc, cc, rc);
 
                         jQuery("#response").hide();
                         jQuery("#save_guide").fadeIn();
