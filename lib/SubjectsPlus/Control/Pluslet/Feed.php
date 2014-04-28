@@ -85,7 +85,7 @@ class Pluslet_Feed extends Pluslet {
             $this->_body = "<br /><input type=\"text\" name=\"$this_instance\" class=\"required_field\" value=\"$this->_body\" size=\"$title_input_size\" />
             $feed_type_dd
             <br />
-            " . _("Enter RSS feed or username/tag (for delicious)");
+            " . _("You can enter a URL to an RSS feed or use your username for Delicious or Tumblr.");
             $this->_body .= "
 
             <p style=\"font-size: 11px;padding-top: 3px;\">
