@@ -25,7 +25,7 @@ class Guide
     private $_all_tabs;
     private $_department;
     private $_parent;
-
+    private $_debug;
 
     public $_isAdmin;
 

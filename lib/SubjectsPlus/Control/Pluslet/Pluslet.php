@@ -27,7 +27,8 @@ class Pluslet {
     protected $_collapse_body;
     protected $_suppress_body;
     protected $_titlebar_styling;
-
+    protected $_debug;
+    
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
         $this->_pluslet_id = $pluslet_id;
