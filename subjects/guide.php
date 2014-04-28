@@ -67,7 +67,8 @@ if ($check_this) {
 
     $r = $db->query($q, PDO::FETCH_ASSOC);
   
-    print_r($r2);
+    print_r($r);
+    
     exit;
     // If this guide doesn't exist, send them away
     if (count($r) == 0) {

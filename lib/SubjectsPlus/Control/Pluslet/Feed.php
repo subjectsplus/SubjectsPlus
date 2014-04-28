@@ -77,7 +77,7 @@ class Pluslet_Feed extends Pluslet {
 
             // Generate our dropdown
             $dd_name = "feed_type-$current_id";
-            $dd_array = array("Delicious", "RSS", "Flickr", "Twitter");
+            $dd_array = array("RSS", "Delicious", "Tumblr");
 
             $typeMe = new Dropdown($dd_name, $dd_array, $feed_type);
             $feed_type_dd = $typeMe->display();
