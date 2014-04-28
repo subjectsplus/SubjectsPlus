@@ -17,12 +17,20 @@ class BuildNav {
 
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
-
+      
+      
+      if ($_SESSION["fname"]) {
+          $name = $_SESSION["fname"];
+          
+      } else {
+          $name = $_SESSION["email"];
+      }
+      
     print "
       <ul id=\"topnav\">
       <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
       <div>$headshot_lg
-      <p> Hi $_SESSION[fname] </p>
+      <p> Hi $name </p>
       <br style=\"clear: both\" />
       <ul>
       <li><a href=\"\">" . _("Edit Your Profile") . "</a></li>

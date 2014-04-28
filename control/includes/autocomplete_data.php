@@ -13,29 +13,27 @@ $header = "noshow";
 
 include("../includes/header.php");
 
-try {$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);} catch (Exception $e) { echo $e;}
-$orig = scrubData($_GET["collection"]);
-$param = scrubData($_REQUEST["term"]);
-
 //$_GET["collection"] = "records";
 
+$param = $_GET["q"];
+    
 switch ($_GET["collection"]) {
 	case "guides":
-	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $param . "%") ;
 
 	break;
 	case "records":
-	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $param . "%") ;
 	
 	break;		
 	case "faq":
-	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE " . $db->quote("%" . $param . "%") ;
 	break;
 	case "talkback":
-	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $db->quote("%" . $param . "%") ;
 	break;	
 	case "admin":
-	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE '%" . $db->quote($param) . "%') OR (lname LIKE '%" . $db->quote($param) . "%')";
+	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $db->quote("%" . $param . "%") . ") OR (lname LIKE " . $db->quote("%" . $param . "%") . ")";
 	break;
 	
 }
