@@ -614,7 +614,7 @@ class Guide
         $db = new Querier;
         $rInsertSubject = $db->exec($qInsertSubject);
 
-        $this->_subject_id = $db->last_insert();
+        $this->_subject_id = $db->last_id();
 
 
         $this->_debug = "<p>1. insert subject: $qInsertSubject</p>";
