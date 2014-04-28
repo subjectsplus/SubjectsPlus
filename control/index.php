@@ -31,18 +31,18 @@ $view_contact_info = "";
 if ($_SESSION['user_type_id'] == '1') {
   // allow user to update their own bio?
   if (isset($user_bio_update) && $user_bio_update == TRUE) {
-    $mod_bio = "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+    $mod_bio = "<p class=\"tight\"><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
   }
   // allow user to update their own photo?
  if (isset($user_photo_update) && $user_photo_update == TRUE) {
-    $mod_photo = "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+    $mod_photo = "<p class=\"tight\"><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
 
   }
 }
 
 // UM Only :  Now, export our contact information
 if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
-  $view_contact_info = "<p><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"admin/contacts.php\">" . _("View/Export Staff Contact Info") . "</a></p>";
+  $view_contact_info = "<p class=\"tight\"><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"admin/contacts.php\">" . _("View/Export Staff Contact Info") . "</a></p>";
 }
 
 ?>
@@ -57,8 +57,7 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
     <div class="pluslet_body">
 
     <?php print $headshot; ?>
-          <p><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password">Reset Password </a></p>
-
+          <p class="tight"><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password">Reset Password </a></p>
       <?php
       print $mod_bio;
       print $mod_photo;
@@ -67,8 +66,13 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
     </div>
   </div>
   <?php 
+  $our_faves = "<ul>
+  <li><a href=\"records/record.php\">" . _("Create New Record") . "</a></li>
+  <li><a href=\"guides/metadata.php\">" . _("Create New Guide") . "</a></li>
+  <li><a href=\"faq/fag.php\">" . _("Create New FAQ") . "</a></li>
+  </ul>";
 
-  print makePluslet (_("Favourites"), "some faves"); ?>
+  print makePluslet (_("Favourites"), $our_faves); ?>
   <div class="pluslet">
     <div class="titlebar">
       <div class="titlebar_text"><?php print _("Background Options"); ?></div>

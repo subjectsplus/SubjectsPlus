@@ -87,6 +87,7 @@ a:hover {
     color: #C03957;
 }
 
+p.tight { margin: .2em 0;}
 
 .wrapper {
 margin: 0 auto;
