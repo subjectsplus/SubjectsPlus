@@ -22,7 +22,7 @@ class BuildNav {
       <ul id=\"topnav\">
       <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
       <div>$headshot_lg
-      <p>" . _("Hi") . " Andrew.</p>
+      <p> Hi $_SESSION[fname] </p>
       <br style=\"clear: both\" />
       <ul>
       <li><a href=\"\">" . _("Edit Your Profile") . "</a></li>
