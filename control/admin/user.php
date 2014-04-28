@@ -52,7 +52,7 @@ if (isset($_GET["browse"])) {
         $staff_list .= "<div class=\"box\">";
         $staff_list .= "<h2>" . $value[1] . "</h2>";
         
-        $q2 = "SELECT staff_id, fname, lname, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
+        $q2 = "SELECT staff_id, fname, lname, email ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
         $querier2 = new Querier();
         $staffArray = $querier2->query($q2);
 
@@ -70,11 +70,11 @@ if (isset($_GET["browse"])) {
             $colour1 = "oddrow";
             $colour2 = "evenrow";
 
-            foreach ($staffArray as $value2) {
+            foreach ($staffArray as $staff) {
                 
                 // unpack the ptags
                 $these_tags = "";
-                $current_ptags = explode("|", $value2[3]);
+                $current_ptags = explode("|", $staff[3]);
                 foreach ($all_ptags as $value) {
                     if (in_array($value, $current_ptags)) {
                         $these_tags .= "<span class=\"ctag-on\" style=\"font-size: 11px;\">$value</span> ";
@@ -83,8 +83,20 @@ if (isset($_GET["browse"])) {
                     }
                 }
                 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$value2[0]\">$value2[2], $value2[1]</a></div> <div id=\"user-$value2[0]\" class=\"$row_colour striper\" class=\"float-left\">$these_tags <button id=\"save_changes-$value2[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
+                
+                if($staff[2] != "") {
+                
+                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$staff[0]\">$staff[2], $staff[1]</a></div> <div id=\"user-$staff[0]\" class=\"$row_colour striper\" class=\"float-left\">$these_tags <button id=\"save_changes-$staff[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
 </div></div>";
+                
+                
+                } else {
+                    $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$staff[0]\">$staff[3]</a></div> <div id=\"user-$staff[0]\" class=\"$row_colour striper\" class=\"float-left\">$these_tags <button id=\"save_changes-$staff[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
+                    </div></div>";
+                    
+                }
+                
+                
                 $row_count++;
             }
         }

@@ -6,9 +6,14 @@ include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
 include_once('../../../../control/includes/autoloader.php');
 
+use \SubjectsPlus\Control\Querier;
+
 //only do something if the search_terms is activated
 if (isset($_POST["search_terms"]))
 {
+	//initiate Querier
+	$db = new Querier();
+
 	$content = '<strong>Results</strong><br />';
 
 	if (get_magic_quotes_gpc()) {
