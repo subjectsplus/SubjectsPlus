@@ -827,6 +827,8 @@ class Guide
 
     public function dropTabs($selected_tab = 0)
     {
+    	global $IconPath;
+
 		//get all sections for current tab
     	$q = "SELECT sec.*
     		  FROM section sec
@@ -843,8 +845,11 @@ class Guide
 
     	foreach( $lobjSections as $lobjSection )
     	{
-    		print "<div id=\"slider_section_{$lobjSection['section_id']}\"></div>";
     		print "<div id=\"section_{$lobjSection['section_id']}\" class=\"sp_section\" data-layout=\"{$lobjSection['layout']}\">";
+    		print "<div class=\"sp_section_controls\">
+						<img src=\"$IconPath/drag_arrow.png\" id=\"sort\"/>
+						<div id=\"slider_section_{$lobjSection['section_id']}\"  class=\"sp_section_slider\"></div>
+				   </div>";
 
     		$qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
 		           FROM pluslet p

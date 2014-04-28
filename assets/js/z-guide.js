@@ -8,6 +8,7 @@ jQuery(document).ready(function(){
 	makeDropable(".cke");
 
     makeSortable(".sort-column");
+    makeSortable(".sptab", 'sections');
 
     makeDraggable(".draggable");
 
@@ -212,7 +213,7 @@ jQuery(lstrSelector).livequery(function() {
   });
 }
 
-function makeSortable( lstrSelector )
+function makeSortable( lstrSelector, lstrType )
 {
 
 	////////////////////////////
@@ -222,34 +223,61 @@ function makeSortable( lstrSelector )
 
 	jQuery(lstrSelector).livequery(function() {
 
-		jQuery(this).sortable({
+		if( lstrType == 'sections' )
+		{
+			jQuery(this).sortable({
+				opacity: 0.7,
+				cancel: '.unsortable',
+				handle: 'img#sort',
+				update: function(event, ui) {
+					jQuery("#response").hide();
+					jQuery("#save_guide").fadeIn();
 
-			connectWith :['.portal-column-0', '.portal-column-1', '.portal-column-2'],
-			opacity: 0.7,
-			tolerance: 'intersect',
-			cancel: '.unsortable',
-			handle: 'img#sort',
-			update: function(event, ui) {
-				jQuery("#response").hide();
-				jQuery("#save_guide").fadeIn();
+				},
+				start: function(event, ui)
+				{
+					jQuery(ui.item).find('.dropspotty').hide();
+					jQuery(ui.item).find('.pluslet').hide();
+					jQuery(ui.item).height('2em');
+					jQuery(ui.item).width('auto');
+				},
+				stop: function(event, ui)
+				{
+					jQuery(ui.item).find('.dropspotty').show();
+					jQuery(ui.item).find('.pluslet').show();
+				}
+			});
+		}else
+		{
+			jQuery(this).sortable({
 
-			},
-			start: function(event, ui)
-			{
-				jQuery(ui.item).children('.pluslet_body').hide();
-				jQuery(ui.item).children().children('.titlebar_text').hide();
-				jQuery(ui.item).children().children('.titlebar_options').hide();
-				jQuery(ui.item).height('2em');
-				jQuery(ui.item).width('auto');
-			},
-			stop: function(event, ui)
-			{
-				jQuery(ui.item).children('.pluslet_body').show();
-				jQuery(ui.item).children().children('.titlebar_text').show();
-				jQuery(ui.item).children().children('.titlebar_options').show();
+				connectWith :['.portal-column-0', '.portal-column-1', '.portal-column-2'],
+				opacity: 0.7,
+				tolerance: 'intersect',
+				cancel: '.unsortable',
+				handle: 'img#sort',
+				update: function(event, ui) {
+					jQuery("#response").hide();
+					jQuery("#save_guide").fadeIn();
 
-			}
-		});
+				},
+				start: function(event, ui)
+				{
+					jQuery(ui.item).children('.pluslet_body').hide();
+					jQuery(ui.item).children().children('.titlebar_text').hide();
+					jQuery(ui.item).children().children('.titlebar_options').hide();
+					jQuery(ui.item).height('2em');
+					jQuery(ui.item).width('auto');
+				},
+				stop: function(event, ui)
+				{
+					jQuery(ui.item).children('.pluslet_body').show();
+					jQuery(ui.item).children().children('.titlebar_text').show();
+					jQuery(ui.item).children().children('.titlebar_options').show();
+
+				}
+			});
+		}
 	});
 }
 
@@ -1129,9 +1157,7 @@ function makeAddSection( lstrSelector )
 			data: {},
 			dataType: "html",
 			success: function(html) {
-				var lobjNewDiv = $('<div id="section_new" class="sp_section">' + html + '</div>');
-				$('div#tabs-' + lintSelected).append(lobjNewDiv);
-				var p = lobjNewDiv.position();
+				$('div#tabs-' + lintSelected).append(html);
 				$(window).scrollTop(p.top);
 			}
 		});

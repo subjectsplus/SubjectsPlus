@@ -1563,7 +1563,7 @@ margin-top: .3em;
 
 }
 
-.pluslet img#sort
+img#sort
 {
     cursor: move;
     float: left;
@@ -1954,4 +1954,9 @@ display:none;
 {
 	border: dotted;
 	margin-top: 10px;
+}
+
+.sp_section_slider
+{
+	margin-left: 30px;
 }

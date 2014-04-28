@@ -538,7 +538,7 @@ jQuery(function() {
         tabs.find( ".ui-tabs-nav" ).append( li );
 
         var slim = jQuery.ajax({
-                    url: "helpers/create_tab.php",
+                    url: "helpers/create_section.php",
                     type: "GET",
                     data: {},
                     dataType: "html",
