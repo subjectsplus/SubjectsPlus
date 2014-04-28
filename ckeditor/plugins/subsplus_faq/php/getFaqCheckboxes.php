@@ -6,6 +6,8 @@ include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
 include_once('../../../../control/includes/autoloader.php');
 
+use SubjectsPlus\Control\Querier;
+
 //print out custom style for oddrow class
 print "<style type=\"text/css\">
 .oddrow {
@@ -50,6 +52,9 @@ try {
 	} catch (Exception $e) {
 	echo $e;
 }
+
+//querier initialize
+$db = new Querier();
 
 //if browsing by subject
 if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
