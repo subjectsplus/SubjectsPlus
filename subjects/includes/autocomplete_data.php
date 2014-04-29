@@ -33,15 +33,15 @@ if (isset($_REQUEST["term"])) {
 
 switch ($_GET["collection"]) {
 	case "guides":
-	$q = "SELECT shortform, subject FROM subject WHERE subject LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT shortform, subject FROM subject WHERE subject LIKE  . $db->quote($param) . "%'";
 
 	break;
 	case "records":
-	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote($param) . "%'";
 
 	break;
 	case "faq":
-	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE '%" . $db->quote($param) . "%'";
+	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE " . $db->quote($param) . "%'";
 	break;
   	case "databases":
 	$q = "SELECT location, title, access_restrictions
