@@ -47,7 +47,7 @@ class CompleteMe {
     echo "
    <div id=\"autoC\" class=\"autoC\">
   		<form action=\"$this->action\" method=\"post\" class=\"pure-form\" id=\"sp_admin_search\">
- 		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" placeholder=\"" . $this->default_text . "\" /><input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
+ 		<input type=\"text\" id=\"$this->input_id\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" /><input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
   		</form>
 	</div>";
 
@@ -74,6 +74,10 @@ class CompleteMe {
 		}
 	});
         //autoC.defaultText(defaultSearchText_" . $this->num . ");
+
+jQuery('#sp_search').attr('autocomplete', 'on');
+
+
 	});
 	</script>";
   }
