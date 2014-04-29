@@ -23,6 +23,13 @@ foreach ($items as $i) {
   echo "<a href=\"" . $i['link'] . "\">" . $i['title'] . "</a><br />";
 }
 
+// displays linked thumbnails from a Flickr feed
+foreach ($items as $i) {
+  echo "<a href=\"" . $item['link'] . "\"><img src=\"" .
+        $item["thumbnailURL"] . "\" height=\"" .
+        $item['thumbnailHeight'] . "\" width=\"" .
+        $item['thumbnailWidth'] . "\" /></a><br />";
+}
 
 
 
@@ -128,7 +135,7 @@ class PGFeed {
   private $newSummary;
   private $content;
   private $newContent;
-
+  private $isFlickr;
   private $isInDescription;
   private $isInMediaContent;
   private $isInMediaTitle;
@@ -244,7 +251,9 @@ class PGFeed {
 
   public function parse($source) {
 
-   
+    if (preg_match('/flickr/',$source)) {
+      $isFlickr = 1;
+    }
 
     if (!($this->report)) {
       error_reporting(0);
@@ -391,7 +400,102 @@ class PGFeed {
 	}
       }
 
-          // Atom
+      // Here begin some additional features for Flickr feeds (Media namespace)
+
+      // Media:content
+      else if ($name == "media:content" && $reader->nodeType == 1 && !($isAtom)) {
+	$isInMediaContent = 1;
+	// URL of full-size image
+	$reader->moveToAttribute("url");
+	$item["mediaContentURL"] = $reader->value;
+	$item["fullImageURL"] = $item["mediaContentURL"];
+	// Type (e.g., image/jpeg)
+	$reader->moveToAttribute("type");
+	$item["mediaContentType"] = $reader->value;
+	// Height of full-size image
+	$reader->moveToAttribute("height");
+	$item["mediaContentHeight"] = $reader->value;
+	$item["fullImageHeight"] = $item["mediaContentHeight"];
+	// Width of full-size image
+	$reader->moveToAttribute("width");
+	$item["mediaContentWidth"] = $reader->value;
+	$item["fullImageWidth"] = $item["mediaContentWidth"];
+      }
+
+      else if ($name == "media:content" && $reader->nodeType == 15 && !($isAtom)) {
+	$isInMediaContent = 0;
+      }
+
+      // Media:title
+      else if ($name == "media:title" && $reader->nodeType == 1 && !($isAtom)) {
+	$isInMediaTitle = 1;
+	$reader->read();
+	$item["mediaTitle"] = $reader->value;
+      }
+
+      else if ($name == "media:title" && $reader->nodeType == 15 && !($isAtom)) {
+	$isInMediaTitle = 0;
+      }
+
+      // Media:description
+      else if ($name == "media:description" && $reader->nodeType == 1 && !($isAtom)) {
+	$isInMediaDescription = 1;
+	$reader->read();
+	$item["mediaDescription"] = $reader->value;
+	$item["caption"] = $item["mediaDescription"];
+      }
+
+      else if ($name == "media:description" && $reader->nodeType == 15 && !($isAtom)) {
+	$isInMediaDescription = 0;
+      }
+
+      // Media:thumbnail
+      else if ($name == "media:thumbnail" && $reader->nodeType == 1 && !($isAtom)) {
+	$isInMediaThumbnail = 1;
+	// URL of square thumbnail
+	$reader->moveToAttribute("url");
+	$item["mediaThumbnailURL"] = $reader->value;
+	$item["squareThumbnailURL"] = $item["mediaThumbnailURL"];
+	// Dimensions of square thumbnail
+	$reader->moveToAttribute("height");
+	$item["mediaThumbnailHeight"] = $reader->value;
+	$item["squareThumbnailHeight"] = $item["mediaThumbnailHeight"];
+	$item["mediaThumbnailWidth"] = $item["mediaThumbnailHeight"];
+	$item["squareThumbnailWidth"] = $item["mediaThumbnailHeight"];
+	// URL of regular thumbnail
+	$item["thumbnailURL"] = preg_replace('/_s\.(png|jpg|gif)/','_t.$1',$item['mediaThumbnailURL']);
+	// Dimensions of regular thumbnail
+	if ($item["fullImageHeight"] > $item["fullImageWidth"]) {
+	  $item["thumbnailHeight"] = 100;
+	  $item["thumbnailWidth"] = round(100 * $item["fullImageWidth"] / $item["fullImageHeight"]);
+	} else if ($item["fullImageHeight"] < $item["fullImageWidth"]) {
+	  $item["thumbnailWidth"] = 100;
+	  $item["thumbnailHeight"] = round(100 * $item["fullImageHeight"] / $item["fullImageWidth"]);
+	} else {
+	  $item["thumbnailWidth"] = 100;
+	  $item["thumbnailHeight"] = 100;
+	}
+      }
+
+
+      else if ($name == "media:thumbnail" && $reader->nodeType == 15 && !($isAtom)) {
+	$isInMediaThumbnail = 0;
+      }
+
+
+      // Media:credit
+      else if ($name == "media:credit" && $reader->nodeType == 1 && !($isAtom)) {
+	$isInMediaCredit = 1;
+	$reader->read();
+	$item["mediaCredit"] = $reader->value;
+      }
+
+      else if ($name == "media:credit" && $reader->nodeType == 15 && !($isAtom)) {
+	$isInMediaCredit = 0;
+      }
+
+
+      // Atom
       // Atom children of feed (except title, link, generator, author, category)
       else if (in_array("$name",$this->feedElements) && $reader->nodeType == 1 && !($isInItem) && $isAtom) {
 	$reader->read();

@@ -55,30 +55,29 @@ class CompleteMe {
     echo "<script type=\"text/javascript\">
 	var startURL = '$this->target_url';
 
-	jQuery(document).ready(function(){
+
 
 	// Caching
-	var autoC = jQuery('#" . $this->input_id . "');
+	jQuery('#" . $this->input_id . "').autocomplete({
 
-
-	// Using jQuery UI's autocomplete widget:
-	autoC.autocomplete({
 		minLength	: 3,
 		source		: '" . $data_location . "',
 		focus: function(event, ui) {
+console.log('focused');
 			return;
 		},
 		select: function(event, ui) {
-
+console.log('selected');
 			location.href = startURL + ui.item.value;
-		}
+		
+                }
 	});
         //autoC.defaultText(defaultSearchText_" . $this->num . ");
 
-jQuery('#sp_search').attr('autocomplete', 'on');
 
 
-	});
+
+
 	</script>";
   }
 
