@@ -172,12 +172,18 @@ class BuildNav {
         break;
       case "guides";
         $input_text = _("Search guides");
-        $target_url = "guide.php?subject_id=";
+        $target_url = "/guides/guide.php?subject_id=";
         break;
       case "faq";
         $input_text = _("Search faqs");
         $target_url = "faq.php?faq_id=";
         break;
+	case "home":
+	 $input_text = _("Search guides");
+        $target_url = "../control/guides/guide.php?subject_id=";
+	
+	break;
+
       case "talkback";
         $input_text = _("Search talkback");
         $target_url = "talkback.php?talkback_id=";
