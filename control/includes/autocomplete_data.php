@@ -2,7 +2,7 @@
 
 /**
  *   @file 
- *   @brief create json listing of subject guides
+ *   @brief create json listing of subject guides in control
  *
  *   @author adarby
  *   @date 

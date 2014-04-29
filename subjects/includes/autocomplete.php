@@ -15,6 +15,9 @@ use SubjectsPlus\Control\Querier;
 include("./control/includes/autoloader.php");
 //include("./control/includes/header.php");
 
+
+$param = $_GET["term"]
+
 $_GET["collection"] = "faq";
 
 switch ($_GET["collection"]) {

@@ -17,6 +17,7 @@ include("../../control/includes/autoloader.php");
 
 $db = new Querier();
 
+/*
 if (isset($_GET["collection"])) {
   $orig = scrubData($_GET["collection"]);
 } else {
@@ -28,6 +29,9 @@ if (isset($_REQUEST["term"])) {
 } else {
   $param = "";
 }
+*/
+
+$param = $_GET["term"];
 
 //$_GET["collection"] = "records";
 

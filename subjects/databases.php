@@ -207,7 +207,7 @@ include("includes/header.php");
       <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
     </div>
     <div class="pluslet_body">
-      <form action="databases.php" method="post" autocomplete="off">
+      <form action="databases.php" method="post" autocomplete="on">
         <p>
           <?php
           $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "databases", 30);

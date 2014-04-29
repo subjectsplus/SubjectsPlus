@@ -169,7 +169,7 @@ include("includes/header.php");
         </div>
         <div class="pluslet_body">
             <p style="margin: 0;"><?php print _("Find the research guide of your dreams"); ?></p>
-            <form action="search.php"  method="post" autocomplete="off">
+            <form action="search.php"  method="post" autocomplete="on">
 <?php
 $input_box = new CompleteMe("quick_search", "search.php", "guide.php?subject=", "Quick Search", "guides", 40);
 $input_box->displayBox();
