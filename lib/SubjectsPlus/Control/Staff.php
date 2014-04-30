@@ -94,6 +94,7 @@ class Staff {
         $this->_fax = $_POST["fax"];
         $this->_intercom = $_POST["intercom"];
         $this->_lat_long = $_POST["lat_long"];
+        $this->_fullname = $_POST["fullname"];
 
         break;
       case "delete":
@@ -716,7 +717,30 @@ public function outputLatLongForm() {
     makePluslet (_("Save"), $saver, "no_overflow");
 
     print "</div>"; // close pure-1-3     
+
     // now let's add all our missing/hidden data  
+ 
+    print "<input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />";
+    print "<input type=\"hidden\" name=\"lname\" value=\"" . $this->_lname . "\" />";
+    print "<input type=\"hidden\" name=\"fname\" value=\"" . $this->_fname . "\" />";
+    print "<input type=\"hidden\" name=\"title\" value=\"" . $this->_title . "\" />";
+    print "<input type=\"hidden\" name=\"tel\" value=\"" . $this->_tel . "\" />";
+    print "<input type=\"hidden\" name=\"department_id\" value=\"" . $this->_department_id . "\" />";
+    print "<input type=\"hidden\" name=\"staff_sort\" value=\"" . $this->_staff_sort . "\" />";
+    print "<input type=\"hidden\" name=\"email\" value=\"" . $this->_email . "\" />";
+    print "<input type=\"hidden\" name=\"user_type_id\" value=\"" . $this->_user_type_id . "\" />";
+    print "<input type=\"hidden\" name=\"ptags\" value=\"" . $this->_ptags . "\" />";
+    print "<input type=\"hidden\" name=\"active\" value=\"" . $this->_active . "\" />";
+    print "<input type=\"hidden\" name=\"position_number\" value=\"" . $this->_position_number . "\" />";
+    print "<input type=\"hidden\" name=\"job_classification\" value=\"" . $this->_job_classification . "\" />";
+    print "<input type=\"hidden\" name=\"room_number\" value=\"" . $this->_room_number . "\" />";
+    print "<input type=\"hidden\" name=\"supervisor_id\" value=\"" . $this->_supervisor_id . "\" />";
+    print "<input type=\"hidden\" name=\"fax\" value=\"" . $this->_fax . "\" />";
+    print "<input type=\"hidden\" name=\"intercom\" value=\"" . $this->_intercom . "\" />";
+    print "<input type=\"hidden\" name=\"lat_long\" value=\"" . $this->_lat_long . "\" />";
+    print "<input type=\"hidden\" name=\"fullname\" value=\"" . $this->_fullname . "\" />";
+
+
     print "</form>"; // close form
     
     print "</div>"; // close pure
