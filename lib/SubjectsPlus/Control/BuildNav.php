@@ -18,6 +18,7 @@ class BuildNav {
 
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
+    $staff_page = $CpanelPath . "admin/profile.php";
       
       
       if ($_SESSION["fname"]) {
@@ -34,7 +35,7 @@ class BuildNav {
       <p> Hi $name </p>
       <br style=\"clear: both\" />
       <ul>
-      <li><a href=\"\">" . _("Edit Your Profile") . "</a></li>
+      <li><a href=\"$staff_page\">" . _("Edit Your Profile") . "</a></li>
       <li><a href=\"$CpanelPath" . "logout.php\">" . _("Log Out") . "</a></li>
       </ul>
       </div>
