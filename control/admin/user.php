@@ -46,13 +46,15 @@ if (isset($_GET["browse"])) {
     $querier = new Querier();
     $typeArray = $querier->query($q);
 
-    $staff_list = "";
+    print "<div class=\"pure-g-r\">
+  <div class=\"pure-u-1\">";
+
     // Loop through user types
     foreach ($typeArray as $value) {
-        $staff_list .= "<div class=\"box\">";
-        $staff_list .= "<h2>" . $value[1] . "</h2>";
-        
-        $q2 = "SELECT staff_id, fname, lname, email ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
+        $staff_list = "";
+        $staffArray = "";
+        $our_title = $value[1];
+        $q2 = "SELECT staff_id, fname, lname, email, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
         $querier2 = new Querier();
         $staffArray = $querier2->query($q2);
 
@@ -74,27 +76,28 @@ if (isset($_GET["browse"])) {
                 
                 // unpack the ptags
                 $these_tags = "";
-                $current_ptags = explode("|", $staff[3]);
-                foreach ($all_ptags as $value) {
-                    if (in_array($value, $current_ptags)) {
-                        $these_tags .= "<span class=\"ctag-on\" style=\"font-size: 11px;\">$value</span> ";
+                $current_ptags = explode("|", $staff[4]);
+
+                foreach ($all_ptags as $value2) {
+                    if (in_array($value2, $current_ptags)) {
+                        $these_tags .= "<span class=\"ctag-on\" style=\"\">$value2</span> ";
                     } else {
-                        $these_tags .= "<span class=\"ctag-off\" style=\"font-size: 11px;\">$value</span> ";
+                        $these_tags .= "<span class=\"ctag-off\" style=\"\">$value2</span> ";
                     }
                 }
                 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-                
-                if($staff[2] != "") {
-                
-                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$staff[0]\">$staff[2], $staff[1]</a></div> <div id=\"user-$staff[0]\" class=\"$row_colour striper\" class=\"float-left\">$these_tags <button id=\"save_changes-$staff[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
-</div></div>";
+   
+                $button = "<button id=\"save_changes-$staff[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button>"   ;         
+
                 
                 
-                } else {
-                    $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$staff[0]\">$staff[3]</a></div> <div id=\"user-$staff[0]\" class=\"$row_colour striper\" class=\"float-left\">$these_tags <button id=\"save_changes-$staff[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button><span></span>
-                    </div></div>";
-                    
-                }
+                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$staff[0]\">";
+                    // if there's no last name, we display email 
+                    if($staff[2] != "") { $staff_list .= "$staff[2], $staff[1]"; } else { $staff_list .= "$staff[3]"; }
+
+                $staff_list .= "</a></div>
+                <div id=\"user-$staff[0]\" class=\"$row_colour striper\">$these_tags $button<span></span>
+                </div>";
                 
                 
                 $row_count++;
@@ -102,10 +105,11 @@ if (isset($_GET["browse"])) {
         }
 
         $staff_list .= "";
+        makePluslet($value[1], $staff_list, "no_overflow");
     }
 
-    print "<br /><div class=\"staff-list-row\">";
-    print $staff_list;
+    
+    //print $staff_list;
     print "</div></div>";
     include("../includes/footer.php");
     ?>
