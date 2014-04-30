@@ -128,8 +128,6 @@ class Pluslet {
 
     	global $IconPath;
 
-        $this->_pluslet = "<a name=\"box-" . $this->_pluslet_id . "\"></a>";;
-
         // if we're using a simple pluslet, things are diff
         // we use $this->_visible_id to make sure this is only on the frontend
 
@@ -138,6 +136,7 @@ class Pluslet {
             // this div closed outside of if/else
         } else {
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
+			<a name=\"box-" . $this->_pluslet_id . "\"></a>
             <div class=\"titlebar\">";
         	//only if on admin side, display sort icon
         	if( $this->_visible_id != '' ) {
@@ -270,7 +269,7 @@ class Pluslet {
             foreach ($parts as $part) {
                 if (preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part)
                 	|| preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)
-                	|| preg_match('/^sss},\s?{[^}]*/', $part) ) { // $part is a properly formed token
+                	|| preg_match('/^sss},\s?{[^}]*/', $part) || preg_match('/^toc},\s?{[^}]*/', $part) ) { // $part is a properly formed token
                     $fields = preg_split('/},\s?{/', $part);
                     $prefix = substr($part, 0, 3);
                     switch ($prefix) {
@@ -449,6 +448,12 @@ class Pluslet {
                     			Tel: $tel_prefix $value[3]</p>\n</div>\n";
                     		}
                     		break;
+                    	case 'toc':
+                    		$lobjTocPluslet = new Pluslet_TOC('', '', $this->_subject_id);
+                    		$lobjTocPluslet->setTickedItems( explode(',', $fields[1]) );
+                    		$lobjTocPluslet->setHideTitleBar(1);
+                    		$tokenized .= $lobjTocPluslet->output();
+                    		break;
 
                     }
                 } elseif (preg_match('/{|}/', $part) && preg_match('/\bdab\b|\bfaq\b|\bcat\b|\bfil\b/', $part)) { // looks kinda like a token
@@ -512,14 +517,14 @@ class Pluslet {
 		} else {
 
 			// notitle hack
-			if ($this->_hide_titlebar == 1) { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
+			if ($this->_hide_titlebar == 1) { $this->_hide_titlebar = 1;} else {$this->_hide_titlebar = 0;}
 
 			$this->onViewOutput();
 
 			// Look for tokens, tokenize
 			$this->tokenizeText();
 
-			$this->assemblePluslet($hide_titlebar);
+			$this->assemblePluslet($this->_hide_titlebar);
 
 			return $this->_pluslet;
 		}
@@ -528,6 +533,11 @@ class Pluslet {
 	public function getBody()
 	{
 		return $this->_body;
+	}
+
+	public function setHideTitleBar( $lintHide )
+	{
+		$this->_hide_titlebar = $lintHide;
 	}
 
 	public static function getCkPluginName()

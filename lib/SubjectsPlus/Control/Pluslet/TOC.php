@@ -11,7 +11,7 @@
  */
 class Pluslet_TOC extends Pluslet {
 
-	protected $_ticked_items = array();
+  protected $_ticked_items = array();
 
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
@@ -97,9 +97,12 @@ class Pluslet_TOC extends Pluslet {
       self::generateTOC($action);
 
       // notitle hack
-      if (trim($this->_title) == "notitle") { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
+      if (!isset( $this->_hide_titlebar ))
+      {
+      	if(trim($this->_title) == "notitle") { $this->_hide_titlebar = 1;} else {$this->_hide_titlebar = 0;}
+      }
 
-      parent::assemblePluslet($hide_titlebar);
+      parent::assemblePluslet($this->_hide_titlebar);
 
       return $this->_pluslet;
     }
@@ -160,10 +163,18 @@ class Pluslet_TOC extends Pluslet {
     }
   }
 
-	public static function getCkPluginName()
-	{
-		return 'subsplus_toc';
-	}
+  public static function getCkPluginName()
+  {
+	return 'subsplus_toc';
+  }
+
+  public function setTickedItems( $lobjTicked )
+  {
+  	if( is_array( $lobjTicked ) )
+  	{
+  		$this->_ticked_items = $lobjTicked;
+  	}
+  }
 
 }
 
