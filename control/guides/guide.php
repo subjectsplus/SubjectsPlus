@@ -621,6 +621,46 @@ jQuery(window).load(function(){
                     <?php print $all_boxes; ?>
                 </li>
                 <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
+
+
+		<li class="find-guide-parent">
+		  <a class="find-guide">
+		  <?php print _("Find in Guide"); ?>
+		  </a>
+		  <input class="find-guide-input" type="text"></input>
+		</li>
+
+		<script>
+
+	var startURL = '../guides/guide.php?subject_id=';
+
+
+
+	// Caching
+	jQuery('.find-guide-input').autocomplete({
+
+		minLength	: 3,
+		source		: 'http://' + document.domain + '/sp/control/includes/autocomplete_data.php?collection=guide',
+		focus: function(event, ui) {
+		     console.log('focused');
+			return;
+
+		},
+		select: function(event, ui) {
+		console.log('selected');
+		jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
+		
+                }
+	});
+        //autoC.defaultText(defaultSearchText_1);
+
+
+
+
+
+	
+		</script>
+
                 <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
                 <!--<li class="showrecord"><a href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></a></li>
                 <li class="showmeta"><a href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></a></li>
