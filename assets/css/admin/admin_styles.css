@@ -1930,7 +1930,9 @@ display:none;
 
 .pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
     background-color: #E488B6;
+    background-color: #C03957;
     color: #FFFFFF;
+    font-weight: bold;
 }
 
 .pure-button-warning {

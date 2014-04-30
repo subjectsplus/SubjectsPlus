@@ -12,7 +12,6 @@
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\Querier;
   
-$subcat = "admin";
 $page_title = "Admin::Users";
 
 include("../includes/header.php");
