@@ -1,5 +1,6 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
+
 /**
  *   @file sp_CompleteMe
  *   @brief Another page calls sp_CompleteMe, passes in paramaters.
@@ -82,5 +83,3 @@ console.log('selected');
   }
 
 }
-
-?>

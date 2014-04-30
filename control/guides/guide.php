@@ -633,23 +633,29 @@ ob_end_flush();
 	  <script>
 
 	   var startURL = '../guides/guide.php?subject_id=';
+	   var sp_path = document.URL.split('/')[3];
 
 	   jQuery('.find-guide-input').autocomplete({
 
 	     minLength	: 3,
-	     source		: 'http://' + document.domain + '/sp/control/includes/autocomplete_data.php?collection=guide',
+	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide",
 	     focus: function(event, ui) {
-	       //console.log('focused');
+	      
 	       event.preventDefault();
-	       //$(".find-guide-input").val(ui.item.label)
+	    
 
 	     },
 	     select: function(event, ui) {
-	       console.log('selected');
-	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
+	    
+	      
 	       event.preventDefault();
 	       $(".find-guide-input").val(ui.item.label);
+	       
+	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
+	       
+	       jQuery('#tabs').tabs('select', in_tab);
 
+	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
              }
 	   });
 
