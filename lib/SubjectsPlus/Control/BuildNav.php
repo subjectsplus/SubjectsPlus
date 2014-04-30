@@ -1,5 +1,6 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
+
 /**
  *   @file sp_BuildNav
  *   @brief
@@ -172,7 +173,7 @@ class BuildNav {
         break;
       case "guides";
         $input_text = _("Search guides");
-        $target_url = "/guides/guide.php?subject_id=";
+        $target_url = "../guides/guide.php?subject_id=";
         break;
       case "faq";
         $input_text = _("Search faqs");
@@ -209,5 +210,3 @@ class BuildNav {
   }
 
 }
-
-?>
