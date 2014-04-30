@@ -122,10 +122,13 @@ class Pluslet_Feed extends Pluslet {
             $feed = trim($this->_body);
             $this->_body = "<p class=\"find_feed\" name=\"$feed|$num_items|$show_desc|$show_feed|$feed_type\">$vRSSLoading</p>";
 
-            // notitle hack
-            if (trim($this->_title) == "notitle") { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
+        	// notitle hack
+        	if (!isset( $this->_hide_titlebar ))
+        	{
+        		if(trim($this->_title) == "notitle") { $this->_hide_titlebar = 1;} else {$this->_hide_titlebar = 0;}
+        	}
 
-            parent::assemblePluslet($hide_titlebar);
+            parent::assemblePluslet($this->_hide_titlebar);
 
             return $this->_pluslet;
         }
