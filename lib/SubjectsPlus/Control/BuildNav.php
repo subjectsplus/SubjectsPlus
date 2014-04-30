@@ -1,5 +1,6 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
+
 /**
  *   @file sp_BuildNav
  *   @brief
@@ -17,6 +18,7 @@ class BuildNav {
 
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
+    $staff_page = $CpanelPath . "admin/profile.php";
       
       
       if ($_SESSION["fname"]) {
@@ -33,7 +35,7 @@ class BuildNav {
       <p> Hi $name </p>
       <br style=\"clear: both\" />
       <ul>
-      <li><a href=\"\">" . _("Edit Your Profile") . "</a></li>
+      <li><a href=\"$staff_page\">" . _("Edit Your Profile") . "</a></li>
       <li><a href=\"$CpanelPath" . "logout.php\">" . _("Log Out") . "</a></li>
       </ul>
       </div>
@@ -172,7 +174,7 @@ class BuildNav {
         break;
       case "guides";
         $input_text = _("Search guides");
-        $target_url = "/guides/guide.php?subject_id=";
+        $target_url = "../guides/guide.php?subject_id=";
         break;
       case "faq";
         $input_text = _("Search faqs");
@@ -209,5 +211,3 @@ class BuildNav {
   }
 
 }
-
-?>
