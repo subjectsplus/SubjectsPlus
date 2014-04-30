@@ -23,7 +23,11 @@ switch ($_GET["collection"]) {
   break;
   case "guides":
   $q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $param . "%") ;
-
+  
+  case "guide":
+  $q = "SELECT pluslet_id, title FROM pluslet WHERE body LIKE " . $db->quote("%" . $param . "%") ;
+  break;
+  
   break;
   case "records":
   $q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $param . "%") ;
