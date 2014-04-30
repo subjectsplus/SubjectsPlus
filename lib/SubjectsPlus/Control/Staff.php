@@ -4,8 +4,8 @@ namespace SubjectsPlus\Control;
  *   @file  Staff
  *   @brief manage staff
  *
- *   @author agdarby, rgilmour
- *   @date Jan 2011
+ *   @author agdarby, rgilmour, dgonzalez
+ *   @date april 2014
 
  */
 class Staff {
@@ -199,6 +199,7 @@ class Staff {
     }
   }
 
+
   public function outputForm($wintype="") {
 
     global $wysiwyg_desc;
@@ -297,22 +298,26 @@ class Staff {
       $action .= "&wintype=pop";
     }
 
-  	echo "
-<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
-<input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
-<div class=\"staff-info\">
-      <div class=\"box\">
-<h2 class=\"bw_head\">" . _("Staff Member") . "</h2>
+    // set up
+    print "<div class=\"pure-g-r\">";
 
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("First Name ") . "</span><br />
-<input type=\"text\" name=\"fname\" id=\"fname\" size=\"30\" class= value=\"" . $this->_fname . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Last Name ") . "</span><br />
-<input type=\"text\" name=\"lname\" id=\"lname\" size=\"30\"  value=\"" . $this->_lname . "\" />
-</div>
-<br class=\"clear-both\"/><br />";
+    // start form
+    print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
+<input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
+<div class=\"pure-u-1-3\">
+<div class=\"pluslet no_overflow\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Staff Member") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
+
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"fname\">" . _("First Name") . "</label>
+    <input type=\"text\" name=\"fname\" id=\"fname\" class=\"pure-input-1 $fname_required\" value=\"" . $this->_fname . "\" /></div>
+    <div style=\"float: left;\"><label for=\"lname\">" . _("Last Name") . "</label>
+    <input type=\"text\" name=\"lname\" id=\"lname\" class=\"pure-input-1 $lname_required\" value=\"" . $this->_lname . "\" /></div>
+    <br style=\"clear:both;\"/>";
+
 
   	//see which"Staff Member" columns and whether "Personal Information" section or "Emergency Contact" section are omitted
   	// added by dgonzalez
@@ -325,8 +330,7 @@ class Staff {
   	$isTelephoneOmitted = in_array( _( "tel" ) , $omit_user_columns );
   	$isdFaxOmitted = in_array( _( "fax" ) , $omit_user_columns );
   	$isIntercomOmitted = in_array( _( "intercom" ) , $omit_user_columns );
-  	$isRoomNumOmiited = in_array( _( "room_number" ) , $omit_user_columns );
-  	$isUserTypeOmitted = in_array( _( "user_type" ) , $omit_user_columns );
+  	$isRoomNumOmitted = in_array( _( "room_number" ) , $omit_user_columns );
   	$isPersonalOmitted = in_array( _( "personal_information" ) , $omit_user_columns );
   	$isEmergencyContactOmitted = in_array( _( "emergency_contact" ) , $omit_user_columns );
 
@@ -335,16 +339,13 @@ class Staff {
   	if ( $isTitleOmitted )
   	{
   		echo "<input type=\"hidden\" name=\"title\" id=\"title\" value=\"" . $this->_title . "\" />";
-  	}else
-  	{
-  		echo "
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Position Title") . "</span><br />
-<input type=\"text\" name=\"title\" id=\"title\" size=\"50\" class=\"";
-  		if ( in_array( _( 'title' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_title . "\" />
-</div>";
+  	} else {
+
+    print "<div style=\"float: left; margin-right: 1em;\"><label for=\"title\">" . _("Position Title") . "</label>
+    <input type=\"text\" name=\"title\" id=\"title\" class=\"pure-input-1";
+      if ( in_array( _( 'title' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_title . "\" /></div>";
+
   	}
 
   	if ( $isPositionNumOmitted )
@@ -352,14 +353,11 @@ class Staff {
   		echo "<input type=\"hidden\" name=\"position_number\" id=\"position_number\" value=\"" . $this->_position_number . "\" />";
   	}else
   	{
-  		echo "
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Postion #") . "</span><br />
-<input type=\"text\" name=\"position_number\" id=\"position_number\" size=\"5\" class=\"";
-  		if ( in_array( _( 'position_number' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_position_number . "\" />
-</div>";
+
+    print "<div style=\"float: left;\"><label for=\"position_number\">" . _("Position #") . "</label>
+    <input type=\"text\" name=\"position_number\" id=\"position_number\" class=\"pure-input-1-4";
+      if ( in_array( _( 'position_number' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_position_number . "\" /></div>";
   	}
 
   	if ( !( $isTitleOmitted && $isPositionNumOmitted) )
@@ -370,14 +368,12 @@ class Staff {
   	if ( $isClassificationOmitted )
   	{
   		echo "<input type=\"hidden\" name=\"job_classification\" id=\"job_classification\" value=\"" . $this->_job_classification . "\" />";
-  	}else
+  	} else
   	{
-  		echo "
-<span class=\"record_label\">" . _("Classification") . "</span><br />
-<input type=\"text\" name=\"job_classification\" id=\"job_classification\" size=\"40\" class=\"";
-  		if ( in_array( _( 'classification' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_job_classification . "\" /><br /><br />";
+    print "<label for=\"job_classification\">" . _("Job Classification") . "</label>
+    <input type=\"text\" name=\"job_classification\" id=\"job_classification\" class=\"pure-input-2-3";
+      if ( in_array( _( 'job_classification' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_job_classification . "\" />";
   	}
 
   	if ( $isDepartmentOmitted )
@@ -386,8 +382,7 @@ class Staff {
   	}else
   	{
   		echo "
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Department") . "</span><br />
+<div style=\"float: left; margin-right: 1em;\"><label for=\"department_id\">" . _("Department") . "</label>
 {$this->_departments}
 </div>";
   	}
@@ -397,14 +392,10 @@ class Staff {
   		echo "<input type=\"hidden\" name=\"staff_sort\" id=\"staff_sort\" value=\"" . $this->_staff_sort . "\" />";
   	}else
   	{
-  		echo "
-<div style=\"float: left;margin-left: 10px;\">
-<span class=\"record_label\">" . _("Priority") . "</span><br />
-<input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" size=\"2\" class=\"";
-  		if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_staff_sort . "\" />
-</div>";
+  		echo "<div style=\"float: left;\"><label for=\"staff_sort\">" . _("Display Priority") . "</label>
+    <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" class=\"pure-input-1-4";
+      if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_staff_sort . "\" /></div>";
   	}
 
   	if ( !( $isDepartmentOmitted && $isPriorityOmitted ) )
@@ -418,20 +409,20 @@ class Staff {
   	}else
   	{
   		echo "
-<span class=\"record_label\">" . _("Supervisor") . "</span><br />
+<label for=\"supervisor\">" . _("Supervisor") . "</label>
 {$this->_supervisors}
-<br /><br />";
+";
   	}
 
   	if ( $isTelephoneOmitted )
   	{
   		echo "<input id=\"tel\" type=\"hidden\" value=\"" . $this->_tel . "\" name=\"tel\">";
-  	}else{
-  		echo "
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Telephone") . "</span><br />
-$tel_line
-</div>";
+  	} else {
+
+    print "<div style=\"float: left; margin-right: 1em;\"><label for=\"tel\">" . _("Telephone") . "</label>
+    $tel_line
+    </div>";
+
   	}
 
   	if ( $isdFaxOmitted )
@@ -439,14 +430,12 @@ $tel_line
   		echo "<input type=\"hidden\" name=\"fax\" id=\"fax\" value=\"" . $this->_fax . "\" />";
   	}else
   	{
-  		echo "
-<div style=\"float: left;margin-left: 20px;\">
-<span class=\"record_label\">" . _("FAX") . "</span><br />
-<input type=\"text\" name=\"fax\" id=\"fax\" size=\"15\" class=\"";
-  		if ( in_array( _( 'fax' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_fax . "\" />
-</div>";
+
+    print "<div style=\"float: left;margin-right: 1em;\"><label for=\"fax\">" . _("FAX") . "</label>
+    <input type=\"text\" name=\"fax\" id=\"fax\" class=\"pure-input-1";
+      if ( in_array( _( 'fax' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_fax . "\" /></div>";
+         
   	}
 
   	if ( $isIntercomOmitted )
@@ -454,57 +443,42 @@ $tel_line
   		echo "<input type=\"hidden\" name=\"intercom\" id=\"intercom\" value=\"" . $this->_intercom . "\" />";
   	}else
   	{
-  		echo "
-<div style=\"float: left;margin-left: 20px;\">
-<span class=\"record_label\">" . _("Intercom") . "</span><br />
-<input type=\"text\" name=\"intercom\" id=\"intercom\" class=\"";
-  		if ( in_array( _( 'intercom' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" size=\"5\" value=\"" . $this->_intercom . "\" />
-</div>";
+
+    print "<div style=\"float: left; margin-right: 1em;\"><label for=\"intercom\">" . _("Intercom") . "</label>
+    <input type=\"text\" name=\"intercom\" id=\"intercom\" class=\"pure-input-1-4";
+      if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_intercom . "\" /></div>";
+
   	}
 
-  	if ( $isRoomNumOmiited )
+  	if ( $isRoomNumOmitted )
   	{
   		echo "<input type=\"hidden\" name=\"room_number\" id=\"room_number\" value=\"" . $this->_room_number . "\" />";
-  	}else
-  	{
-  		echo "
-<div style=\"float: left;margin-left: 20px;\">
-<span class=\"record_label\">" . _("Room #") . "</span><br />
-<input type=\"text\" name=\"room_number\" id=\"room_number\" class=\"";
-  		if ( in_array( _( 'room_number' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" size=\"5\" value=\"" . $this->_room_number . "\" />
-</div>";
+  	} else {
+
+    print "<div style=\"float: left;\"><label for=\"room_number\">" . _("Room #") . "</label>
+    <input type=\"text\" name=\"room_number\" id=\"room_number\" class=\"pure-input-1-3";
+      if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
+    print "\" value=\"" . $this->_room_number . "\" /></div>";
   	}
 
-  	if ( !( $isTelephoneOmitted && $isdFaxOmitted && $isIntercomOmitted && $isRoomNumOmiited ) )
+  	if ( !( $isTelephoneOmitted && $isdFaxOmitted && $isIntercomOmitted && $isRoomNumOmitted ) )
   	{
   		echo "<br class=\"clear-both\"/><br />";
   	}
 
-  	echo "
-<span class=\"record_label\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</span><br />
-<input type=\"text\" name=\"email\" id=\"email\" size=\"40\" class=\"required_field\" value=\"" . $this->_email . "\" />
-<br /><br />";
+    print "<label for=\"email\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</label>
+    <input type=\"text\" name=\"email\" id=\"email\" class=\"pure-input-1 required_field\" value=\"" . $this->_email . "\" />";
 
-  	if ( $isUserTypeOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"user_type_id\" id=\"user_type_id\" value=\"1\" />";
-  	}else
-  	{
+  		echo "<div style=\"float: left; margin-right: 1em;\"><label for=\"user_type\">" . _("User Type") . "</label>
+      {$this->_user_types}
+      </div>";
+
   		echo "
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("User Type") . "</span><br />
-{$this->_user_types}
-</div>";
-  	}
-  		echo "
-<div style=\"float: left;margin-left: 20px;\">
-<span class=\"record_label\">" . _("Active User?") . "</span><br />
-{$this->_active_or_not}
-</div><br /><br /></div>";
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"active\">" . _("Active User?") . "</label>
+    {$this->_active_or_not}
+    </div>
+    <br style=\"clear: both;\" /><br /></div></div>";
 
   	if ( $isPersonalOmitted )
   	{
@@ -518,65 +492,11 @@ $tel_line
 
   	}else
   	{
-  		echo "
-        <div class=\"box no_overflow\">
-<h2 class=\"bw_head\">" . _("Personal Information") . "</h2>
 
-<span class=\"record_label\">" . _("Street Address") . "</span><br />
-<input type=\"text\" name=\"street_address\" id=\"street_address\" size=\"50\" class=\"";
-  		if ( in_array( _( 'address' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_street_address . "\" />
-<br /><br />
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("City") . "</span><br />
-<input type=\"text\" name=\"city\" id=\"city\" size=\"20\" class=\"";
-  		if ( in_array( _( 'city' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_city . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("State") . "</span><br />
-<input type=\"text\" name=\"state\" id=\"state\" size=\"10\" class=\"";
-  		if ( in_array( _( 'state' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_state . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Zip") . "</span><br />
-<input type=\"text\" name=\"zip\" id=\"zip\" size=\"5\" class=\"";
-  		if ( in_array( _( 'zip' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" value=\"" . $this->_zip . "\" />
-</div>
-<br class=\"clear-both\"/><br />
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Home Phone") . "</span><br />
-<input type=\"text\" name=\"home_phone\" id=\"home_phone\" class=\"";
-  		if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" size=\"15\" value=\"" . $this->_home_phone . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Cell Phone") . "</span><br />
-<input type=\"text\" name=\"cell_phone\" id=\"cell_phone\" class=\"";
-  		if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" size=\"15\" value=\"" . $this->_cell_phone . "\" />
-</div>
-<br class=\"clear-both\"/><br />
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Latitude, Longitude") . "</span><br />
-<input type=\"text\" name=\"lat_long\" id=\"lat_long\" class=\"";
-  		if ( in_array( _( 'lat_long' ) , $require_user_columns ) ) echo 'required_field';
-  		echo "
-\" size=\"25\" value=\"" . $this->_lat_long . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Get Coordinates") . "</span><br />
-<span class=\"lookup_button\" value=\"$full_address\">look up now</span>
-</div>
-</div>";
+    self::outputPersonalInfoForm();
+
+    self::outputLatLongForm();
+
   	}
 
 	if ( $isEmergencyContactOmitted )
@@ -585,106 +505,221 @@ $tel_line
 		echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
 		echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
 
-	}else
-	{
-		echo "
-        <div class=\"box no_overflow\">
-<h2 class=\"bw_head\">" . _("Emergency Contact Information") . "</h2>
+	} else {
 
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Emergency Contact") . "</span><br />
-<input type=\"text\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" size=\"30\" class=\"";
-		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
-		echo "
-\" value=\"" . $this->_emergency_contact_name . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Relationship") . "</span><br />
-<input type=\"text\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" size=\"15\" class=\"";
-		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
-		echo "
-\" value=\"" . $this->_emergency_contact_relation . "\" />
-</div>
-<div class=\"staff-info\">
-<span class=\"record_label\">" . _("Phone") . "</span><br />
-<input type=\"text\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" size=\"15\" class=\"";
-		if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) echo 'required_field';
-		echo "
-\" value=\"" . $this->_emergency_contact_phone . "\" />
-</div>
-</div>";
+    self::outputEmergencyInfoForm();
+
 	}
 
-  	echo "
-<div class=\"box no_overflow\">
-      <h2 class=\"bw_head\">" . _("Photo") . "</h2>
-$headshot
-</div>
-      <div class=\"box no_overflow\">
-<h2 class=\"bw_head\">" . _("Biographical Details") . "</h2>
+  	echo "</div><div class=\"pure-u-1-3\">";
+
+    makePluslet(_("Photo"), $headshot, "no_overflow");
+
+
+print "<div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Staff Member") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
 <p>" . _("Please only include professional details.") . "</p><br />";
 
     self::outputBioForm();
 
-    echo "
-<br />
-</div>
-</div>
-<!-- right hand column -->
-<div style=\"float: left; max-width: 400px;\">
-      <div class=\"box\">
-<h2 class=\"bw_head\">" . _("Permissions") . "</h2>
+print "</div>"; // end pluslet body
+print "</div>"; // end pluslet
 
-";
+print "</div>"; // end pure 1-3
+
+print "<div class=\"pure-u-1-3\">";
+
 
 // Get our permission tags, or ptags
 
     $current_ptags = explode("|", $this->_ptags);
+    $our_ptags = "";
+
     foreach ($all_ptags as $value) {
       if (in_array($value, $current_ptags)) {
-        echo " <span class=\"ctag-on\">$value</span> ";
+        $our_ptags .= " <span class=\"ctag-on\">$value</span> ";
       } else {
-        echo " <span class=\"ctag-off\">$value</span> ";
+        $our_ptags .= " <span class=\"ctag-off\">$value</span> ";
       }
     }
 
-    echo "<input type=\"hidden\" name=\"ptags\" value=\"$this->_ptags\" /><br class=\"clear-both\" /><p style=\"font-size: smaller\">";
-    echo _("Select which parts of SubjectsPlus this user may access.
+    $our_ptags .= "<input type=\"hidden\" name=\"ptags\" value=\"$this->_ptags\" /><br class=\"clear-both\" /><p style=\"font-size: smaller\">";
+    $our_ptags .= _("Select which parts of SubjectsPlus this user may access.
                 <br /><strong>records</strong> allows access to both the Record and Guide tabs.
                 <br /><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
                 <br /><strong>supervisor</strong> means user shows up in list of _supervisors
                 <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.
                 <br /><strong>others</strong> are hopefully self-explanatory");
-echo "</div>
-           <div class=\"box\">
-	<h2 class=\"bw_head\">" . _("Password") . "</h2>
-	";
+
+    makePluslet("Permissions", $our_ptags, "no_overflow");
+
+    ///////////////
+    // Password
+    ///////////////
 
     if ($this->_staff_id != "") {
-      echo "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>
+      $our_password = "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>
         ";
     } else {
-      echo "<input type=\"password\" name=\"password\" size=\"20\" class=\"required_field\" /><br />
+      $our_password = "<input type=\"password\" name=\"password\" size=\"20\" class=\"required_field\" /><br />
 		<p style=\"font-size: smaller\">The password is stored as a hash in the database, but unless you have SSL travels clear text across the internet.</p>";
     }
 
-    echo "
-	</div>
-           <div id=\"record_buttons\" class=\"box\">
-	<h2 class=\"bw_head\">" . _("Save") . "</h2>
+    makePluslet("Password", $our_password, "no_overflow");
 
-		<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Record Now") . "\" />";
+    /////////////////
+    // Save/Delete Buttons
+    /////////////////
+
+    $our_buttons = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
     if ($this->_staff_id != "") {
-      echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\" />";
+      $our_buttons .= " <input style=\"margin-left: 1em;\" type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
     }
+
     // get edit history
     $last_mod = _("Last modified: ") . lastModded("staff", $this->_staff_id);
-    echo "<div id=\"last_edited\">$last_mod</div>
+    $our_buttons .= "<div id=\"last_edited\">$last_mod</div>";
 
-</div>
+    makePluslet("Save Changes", $our_buttons, "no_overflow");
+
+    print "</div></div>
 </form>";
+  }
+
+
+  public function outputPersonalInfoForm() {
+
+    global $require_user_columns;
+
+    // set up required fields based on fields in config
+    if ( in_array( _( 'address' ) , $require_user_columns ) ) { $street_address_required = "required_field"; } else {$street_address_required = "";}
+    if ( in_array( _( 'city' ) , $require_user_columns ) ) { $city_required = "required_field"; } else {$city_required = "";}
+    if ( in_array( _( 'state' ) , $require_user_columns ) ) { $state_required = "required_field"; } else {$state_required = "";}
+    if ( in_array( _( 'zip' ) , $require_user_columns ) ) { $zip_required = "required_field"; } else {$zip_required = "";}
+
+    $personal_info = "
+    <label for=\"record_title\">" . _("Street Address") . "</label>
+    <input type=\"text\" name=\"street_address\" id=\"street_address\" class=\"pure-input-1 $street_address_required\" value=\"" . $this->_street_address . "\" />
+    <br class=\"clear-both\" />
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"city\">" . _("City") . "</label>
+    <input type=\"text\" name=\"city\" id=\"city\" class=\"pure-input-1 $city_required\" value=\"" . $this->_city . "\" /></div>
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"state\">" . _("State") . "</label>
+    <input type=\"text\" name=\"state\" id=\"state\" class=\"pure-input-1 $state_required\" value=\"" . $this->_state . "\" /></div>
+    <div style=\"float: left;\"><label for=\"zip\">" . _("Zip") . "</label>
+    <input type=\"text\" name=\"zip\" id=\"zip\" class=\"pure-input-1 $zip_required\" value=\"" . $this->_zip . "\" /></div>
+    <br />
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"state\">" . _("Home Phone") . "</label>
+    <input type=\"text\" name=\"home_phone\" id=\"home_phone\" class=\"pure-input-1 $home_phone_required\" value=\"" . $this->_home_phone . "\" /></div>
+    <div style=\"float: left;\"><label for=\"cell_phone\">" . _("Cell Phone") . "</label>
+    <input type=\"text\" name=\"cell_phone\" id=\"cell_phone\" class=\"pure-input-1 $cell_phone_required\" value=\"" . $this->_cell_phone . "\" /></div>    
+    ";
+
+    makePluslet ($this->_fullname, $personal_info, "no_overflow");
+  }
+
+  public function outputEmergencyInfoForm() {
+
+    global $require_user_columns;
+
+    // set up required fields based on fields in config
+    if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) { $home_phone_required = "required_field"; } else {$home_phone_required = "";}
+    if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) { $cell_phone_required = "required_field"; } else {$cell_phone_required = "";}
+    if ( in_array( _( 'emergency_contact' ) , $require_user_columns ) ) { $emergency_contact_required = "required_field"; } else {$emergency_contact_required = "";}
+
+    $emergency_info = "
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"city\">" . _("Emergency Contact") . "</label>
+    <input type=\"text\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" class=\"pure-input-1 $emergency_contact_required\" value=\"" . $this->_emergency_contact_name . "\" /></div>
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"state\">" . _("Relationship") . "</label>
+    <input type=\"text\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" class=\"pure-input-1 $emergency_contact_required\" value=\"" . $this->_emergency_contact_relation . "\" /></div>
+    <div style=\"float: left;\"><label for=\"zip\">" . _("Phone") . "</label>
+    <input type=\"text\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" class=\"pure-input-1 $emergency_contact_required\" value=\"" . $this->_emergency_contact_phone . "\" /></div>
+    <br />
+    ";
+
+    makePluslet (_("Emergency Contact"), $emergency_info, "no_overflow");    
+  }
+
+public function outputLatLongForm() {
+
+    global $require_user_columns;
+
+    // set up required fields based on fields in config
+    if ( in_array( _( 'lat_long' ) , $require_user_columns ) ) { $lat_long_required = "required_field"; } else {$lat_long_required = "";}
+
+    $lat_long = "
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"city\">" . _("Latitude/Longitude") . "</label>
+    <input type=\"text\" name=\"lat_long\" id=\"lat_long\" class=\"pure-input-1 $lat_long_required\" value=\"" . $this->_lat_long . "\" /></div>
+
+    <div style=\"float: left; margin-right: 1em;\"><label for=\"city\">" . _("Get Coordinates") . "</label>
+    <span class=\"lookup_button\" value=\"$full_address\">look up now</span></div>
+    <br />
+    ";
+
+    makePluslet (_("Add to Map"), $lat_long, "no_overflow");   
+
+}
+
+  public function outputSelfEditForm() {
+    // This is just the information that a user can edit about themselves
+    // agd april 2014
+    
+    global $require_user_columns;
+    global $omit_user_columns;
+
+
+    $action = htmlentities($_SERVER['PHP_SELF']) . "?staff_id=" . $this->_staff_id;
+
+    // set up
+    print "<div class=\"pure-g-r\">";
+    // start form
+    print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
+    <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
+    <div class=\"pure-u-1-3\">
+    ";
+
+    self::outputPersonalInfoForm();
+
+    self::outputEmergencyInfoForm();
+
+    print "</div>"; // close pure-1-3
+
+    print "<div class=\"pure-u-1-3\">";
+
+    print "<div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Biographical Details") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">
+    <p>" . _("Please only include professional details.") . "</p><br />";
+
+    self::outputBioForm();
+
+    echo "</div></div>"; // end pluslet_body, end pluslet
+
+    print "</div>"; // close pure-1-3   
+
+    print "<div class=\"pure-u-1-3\">";
+
+    $password_update = "<p><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
+
+    makePluslet(_("Change Password?"), $password_update, "no_overflow");
+
+    $saver = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Update Now!") . "\" />";
+
+    makePluslet (_("Save"), $saver, "no_overflow");
+
+    print "</div>"; // close pure-1-3     
+    // now let's add all our missing/hidden data  
+    print "</form>"; // close form
+    
+    print "</div>"; // close pure
   }
 
   public function outputPasswordForm() {
