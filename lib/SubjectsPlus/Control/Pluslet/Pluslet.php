@@ -28,7 +28,7 @@ class Pluslet {
     protected $_suppress_body;
     protected $_titlebar_styling;
     protected $_debug;
-    
+
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
         $this->_pluslet_id = $pluslet_id;
@@ -137,7 +137,7 @@ class Pluslet {
             $this->_pluslet .= "<div class=\"pluslet_simple no_overflow\">" . htmlspecialchars_decode($this->_body);
             // this div closed outside of if/else
         } else {
-            $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
+            $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
             <div class=\"titlebar\">";
         	//only if on admin side, display sort icon
         	if( $this->_visible_id != '' ) {

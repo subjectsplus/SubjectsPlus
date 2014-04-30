@@ -924,8 +924,11 @@ function setupMiscLiveQueries()
     ///////////////////////////////
 
     jQuery('a[id*=boxid-]').livequery('click', function(event) {
-        var box_id = jQuery(this).attr("id").split("-");
-        var selected_box = "#pluslet-" + box_id[1];
+    	var tab_id = $(this).attr('id').split('-')[1];
+    	var box_id = $(this).attr('id').split('-')[2];
+        var selected_box = ".pluslet-" + box_id;
+
+    	$('#tabs').tabs('select', tab_id);
 
         jQuery(selected_box).effect("pulsate", {
             times:1

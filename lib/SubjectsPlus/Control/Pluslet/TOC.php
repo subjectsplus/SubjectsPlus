@@ -32,7 +32,7 @@ class Pluslet_TOC extends Pluslet {
 
     // Get pluslets associated with this
     $querier = new Querier();
-  	$qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
+  	$qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index
 			FROM pluslet p INNER JOIN pluslet_section ps
 			ON p.pluslet_id = ps.pluslet_id
 			INNER JOIN section sec
@@ -128,9 +128,9 @@ class Pluslet_TOC extends Pluslet {
           }
 
           if ($value[3] == 1) {
-            $left_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+            $left_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
           } else {
-            $right_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+            $right_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
           }
         }
       } else {
@@ -141,9 +141,9 @@ class Pluslet_TOC extends Pluslet {
           foreach ($this->_tocArray as $value) {
             if (in_array($value[0], $this->_ticked_items)) {
               if ($value[3] == 1) {
-                $left_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+                $left_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
               } else {
-                $right_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[0]\">$value[1]</a><br />\n";
+                $right_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
               }
             }
           }
@@ -159,6 +159,11 @@ class Pluslet_TOC extends Pluslet {
       $this->_body = _("There are no contents for this guide yet!");
     }
   }
+
+	public static function getCkPluginName()
+	{
+		return 'subsplus_toc';
+	}
 
 }
 
