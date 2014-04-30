@@ -1161,7 +1161,7 @@ function makeAddSection( lstrSelector )
 			dataType: "html",
 			success: function(html) {
 				$('div#tabs-' + lintSelected).append(html);
-				$(window).scrollTop(p.top);
+				$(document).scrollTop($('body').height());
 			}
 		});
 	});

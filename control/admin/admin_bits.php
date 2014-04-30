@@ -1,7 +1,6 @@
 <?php
-
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
+
 /**
  *   @file admin_bits.php
  *   @brief Inserting elements via .load into record.php, and updating staff table
@@ -13,8 +12,8 @@ $db = new Querier;
 $subsubcat = "";
 $page_title = "Admin Bits include";
 $header = "noshow";
-
 include("../includes/header.php");
+
 
 //print "<pre>";
 //print_r($_REQUEST);
@@ -312,4 +311,3 @@ print "<div class=\"box_feedback growl growl-default\">$message</div><br /><br /
 print $staff_list;
 
 include("../includes/footer.php");
-?>

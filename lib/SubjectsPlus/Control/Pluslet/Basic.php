@@ -77,13 +77,16 @@
 			return;
 		} else {
 
-            // notitle hack
-            if (trim($this->_title) == "notitle") { $hide_titlebar = 1;} else {$hide_titlebar = 0;}
+			// notitle hack
+			if (!isset( $this->_hide_titlebar ))
+			{
+				if(trim($this->_title) == "notitle") { $this->_hide_titlebar = 1;} else {$this->_hide_titlebar = 0;}
+			}
 
 			// Look for tokens, tokenize
 			parent::tokenizeText();
 
-			parent::assemblePluslet($hide_titlebar);
+			parent::assemblePluslet($this->_hide_titlebar);
 
 			return $this->_pluslet;
 		}
