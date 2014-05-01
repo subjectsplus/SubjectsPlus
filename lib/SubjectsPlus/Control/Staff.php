@@ -673,6 +673,8 @@ public function outputLatLongForm() {
     global $require_user_columns;
     global $omit_user_columns;
 
+    $isPersonalOmitted = in_array( _( "personal_information" ) , $omit_user_columns );
+    $isEmergencyContactOmitted = in_array( _( "emergency_contact" ) , $omit_user_columns );
 
     $action = htmlentities($_SERVER['PHP_SELF']) . "?staff_id=" . $this->_staff_id;
 
@@ -684,13 +686,34 @@ public function outputLatLongForm() {
     <div class=\"pure-u-1-3\">
     ";
 
-    self::outputPersonalInfoForm();
+    // Only display the update personal info if this isn't turned off
+    if (!$isPersonalOmitted) {
+        self::outputPersonalInfoForm();
+    } else {
+        echo "<input type=\"hidden\" name=\"street_address\" id=\"street_address\" value=\"" . $this->_street_address . "\" />\n";
+        echo "<input type=\"hidden\" name=\"city\" id=\"city\" value=\"" . $this->_city . "\" />\n";
+        echo "<input type=\"hidden\" name=\"state\" id=\"state\" value=\"" . $this->_state . "\" />\n";
+        echo "<input type=\"hidden\" name=\"zip\" id=\"zip\" value=\"" . $this->_zip . "\" />\n";
+        echo "<input type=\"hidden\" name=\"home_phone\" id=\"home_phone\" value=\"" . $this->_home_phone . "\" />\n";
+        echo "<input type=\"hidden\" name=\"cell_phone\" id=\"cell_phone\" value=\"" . $this->_cell_phone . "\" />\n";
+        echo "<input type=\"hidden\" name=\"lat_long\" id=\"lat_long\"value=\"" . $this->_lat_long . "\" />\n";
+    }
 
-    self::outputEmergencyInfoForm();
+    // Only display the emergency info if it isn't turned off
+    if (!$isEmergencyContactOmitted) {
+        self::outputEmergencyInfoForm();
+    } else {
+        echo "<input type=\"hidden\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" value=\"" . $this->_emergency_contact_name . "\" />";
+        echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
+        echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
+    }
+    
 
     print "</div>"; // close pure-1-3
 
     print "<div class=\"pure-u-1-3\">";
+
+
 
     print "<div class=\"pluslet\">
     <div class=\"titlebar\">

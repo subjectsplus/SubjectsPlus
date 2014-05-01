@@ -50,10 +50,8 @@ if (isset($_POST["submit_record"])) {
 /////////////////////
 // Start the record display
 ////////////////////
-print "okay record id = $ok_record_id";
 
 $record = new Staff($ok_record_id, '', TRUE);
-
 
 // show feedback if it isn't already set
 if (!$feedback) {
