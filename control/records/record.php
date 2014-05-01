@@ -164,6 +164,7 @@ if (win_type == "pop") {
             $(this).before('<div class="new_location"></div>');
             $(".new_location").load("record_bits.php", {type: 'location'});
 
+        	return false;
         });
 
         ///////////////////
@@ -174,7 +175,8 @@ if (win_type == "pop") {
             // make sure this isn't the only location first
             var numloc = $(".location_box").length;
             if (numloc >1) {
-                $(this).parent().remove();
+                $(this).parents('.new_location').remove();
+                $(this).parents('.location_box').remove();
             } else {
                 alert("Thwarted!  You must have at least one location for a record.");
             }

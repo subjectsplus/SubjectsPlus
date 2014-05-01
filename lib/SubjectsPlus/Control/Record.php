@@ -439,7 +439,7 @@ public function buildLocation() {
  		break;
  	}
  	echo "
- 	<div class=\"pluslet\">
+ 	<div class=\"pluslet location_box\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">" . _("Location") . "</div>
       <div class=\"titlebar_options\"></div>
@@ -447,7 +447,7 @@ public function buildLocation() {
     <div class=\"pluslet_body\">
  	<label for=\"location[]\">$format_label_text</label>
  	<input type=\"hidden\" value=\"{$this->_location_id}\" name=\"location_id[]\" />
- 	
+
   <input type=\"text\" class=\"record_location check_url pure-input-2-3 required_field \" name=\"location[]\" value=\"{$this->_location}\" />
   $checkurl_icon
  	<span class=\"smaller url_feedback\"></span>
@@ -543,7 +543,7 @@ public function buildLocation() {
  	}
 
  	$oursubjects = "
- 	<div class=\"pure-g\">
+ 	<div class=\"pure-g selected_item_wrapper\">
  	<div class=\"pure-u-1-2\">
  	<input name=\"subject[]\" value=\"$value[1]\" type=\"hidden\" />
  	<input name=\"rank[]\" value=\"$value[0]\" type=\"hidden\" />
@@ -665,7 +665,7 @@ $this->_message = _("Thy Will Be Done.  Record added.");
 public function updateRecord($notrack = 0) {
 
   $db  = new Querier;
-  
+
     // dupe check
     /////////////////////
     // update title table
@@ -739,7 +739,7 @@ function modifyRank() {
 		$qUpRank .= scrubData($this->_subject[$i], "integer") != 0 ? "'" . scrubData($this->_subject[$i], "integer") . "'," : "NULL, ";
 		$qUpRank .= scrubData($this->_title_id, "integer") != 0 ? "'" . scrubData($this->_title_id, "integer") . "'," : "NULL, ";
 		$qUpRank .= scrubData($this->_source[$i], "integer") != 0 ? "'" . scrubData($this->_source[$i], "integer") . "'," : "NULL, ";
-		$qUpRank .= "'" . $db->quote(scrubData($this->_description_override[$i], "richtext")) . "')";
+		$qUpRank .= $db->quote(scrubData($this->_description_override[$i], "richtext")) . ")";
 
 		$rUpRank = $db->exec($qUpRank);
 
