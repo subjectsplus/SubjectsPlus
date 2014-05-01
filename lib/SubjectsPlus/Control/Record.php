@@ -215,7 +215,7 @@ class Record {
   // Loop through locations
 	self::buildLocation();
 
-	
+
 	$add_loc = "<div class=\"add_location\"><img src=\"$IconPath/list-add.png\" alt=\"add new location\"  border=\"0\" /> Add another location</div>";
 
   print $add_loc;
@@ -223,7 +223,7 @@ class Record {
 	echo "</div>
 	<!-- right hand column -->";
   print "<div class=\"pure-u-1-3\">
-	
+
 	<div id=\"record_buttons\" class=\"box\">
 	<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
@@ -665,11 +665,13 @@ public function updateRecord($notrack = 0) {
     // update title table
     /////////////////////
 
+	$db = new Querier();
+
 	$our_title = $db->quote(scrubData($this->_title));
 	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
 	$our_prefix = $db->quote(scrubData($this->_prefix));
 
-	$qUpTitle = "UPDATE title SET title = '" . $our_title . "', alternate_title = '" . $our_alternate_title . "', description = '" . $db->quote(scrubData($this->_description, "richtext")) . "', pre = '" . $our_prefix . "' WHERE title_id = " . scrubData($this->_title_id, "integer");
+	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote(scrubData($this->_description, "richtext")) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData($this->_title_id, "integer");
 
 	$rUpTitle = $db->query($qUpTitle);
 
@@ -679,11 +681,11 @@ public function updateRecord($notrack = 0) {
 
 	$qClearRank = "DELETE FROM rank WHERE title_id = " . $this->_title_id;
 
-	$rClearRank = $db->query($qClearRank);
+	$rClearRank = $db->exec($qClearRank);
 
 	$this->_debug .= "<p>2. clear rank: $qClearRank</p>";
 
-	if (!$rClearRank) {
+	if ($rClearRank === FALSE) {
 		echo blunDer("We have a problem with the clear rank query: $qClearRank");
 	}
 
@@ -695,10 +697,10 @@ public function updateRecord($notrack = 0) {
 
     // wipe entry from intervening table, location_title
 	$qClearLoc = "DELETE FROM location_title WHERE title_id = " . scrubData($this->_title_id, "integer");
-	$rClearLoc = $db->query($qClearLoc);
+	$rClearLoc = $db->exec($qClearLoc);
 
 	$this->_debug .= "<p>4. wipe location_title: $qClearLoc</p>";
-	if (!$rClearLoc) {
+	if ($rClearLoc === FALSE) {
 		echo blunDer("We have a problem with the clear locations query: $qClearLoc");
 	}
 
@@ -722,6 +724,8 @@ public function updateRecord($notrack = 0) {
 }
 
 function modifyRank() {
+	$db = new Querier();
+
 	for ($i = 0; $i < $this->_subject_count; $i++) {
 		$qUpRank = "INSERT INTO rank (rank, subject_id, title_id, source_id, description_override) VALUES (
 			'" . scrubData($this->_rank[$i], "integer") . "', ";
@@ -731,10 +735,10 @@ function modifyRank() {
 		$qUpRank .= scrubData($this->_source[$i], "integer") != 0 ? "'" . scrubData($this->_source[$i], "integer") . "'," : "NULL, ";
 		$qUpRank .= "'" . $db->quote(scrubData($this->_description_override[$i], "richtext")) . "')";
 
-		$rUpRank = $db->query($qUpRank);
+		$rUpRank = $db->exec($qUpRank);
 
 		$this->_debug .= "<p>3. (update rank loop) : $qUpRank</p>";
-		if (!$rUpRank)
+		if ($rUpRank === FALSE)
 		{
 			echo blunDer("We have a problem with the rank query: $qUpRank");
 		}
@@ -742,6 +746,8 @@ function modifyRank() {
 }
 
 function modifyLocation() {
+	$db = new Querier();
+
 	foreach ($this->_location_id as $key => $value) {
       // wipe entry in location_title
 
@@ -759,7 +765,7 @@ function modifyLocation() {
 				'" . $db->quote(scrubData($this->_helpguide[$key])) . "'
 				)";
 
-$rInsertLoc = $db->query($qInsertLoc);
+$rInsertLoc = $db->exec($qInsertLoc);
 
 $this->_debug .= "<p>5a. insert location loop: $qInsertLoc</p>";
 if (!$rInsertLoc) {
@@ -775,14 +781,14 @@ $current_location_id = $db->last_id();
 	"', access_restrictions = '" . scrubData($this->_access_restrictions[$key], "integer") .
 	"', eres_display = '" . scrubData($this->_eres_display[$key]) .
 	"', display_note = '" . scrubData($this->_display_note[$key], "richtext") .
-	"', ctags = '" . $db->quote(scrubData($this->_ctags[$key])) .
-	"', helpguide = '" . $db->quote(scrubData($this->_helpguide[$key])) .
-	"' WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
+	"', ctags = " . $db->quote(scrubData($this->_ctags[$key])) .
+	", helpguide = " . $db->quote(scrubData($this->_helpguide[$key])) .
+	" WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
 
-	$rUpLoc = $db->query($qUpLoc);
+	$rUpLoc = $db->exec($qUpLoc);
 
 	$this->_debug .= "<p>5b. update location loop: $qUpLoc</p>";
-	if (!$rUpLoc) {
+	if ($rUpLoc === FALSE) {
 		echo blunDer("We have a problem with the update locations query: $qUpLoc");
 	}
 
@@ -797,7 +803,7 @@ $qInsertLocTitle = "INSERT INTO location_title (title_id, location_id) VALUES (
 	)";
 $this->_debug .= "<p>6. insert into location_title: $qInsertLocTitle</p>";
 ;
-$rInsertLocTitle = $db->query($qInsertLocTitle);
+$rInsertLocTitle = $db->exec($qInsertLocTitle);
 
 if (!$rInsertLocTitle) {
 	echo blunDer("We have a problem with the insert location_title query: $qInsertLocTitle");

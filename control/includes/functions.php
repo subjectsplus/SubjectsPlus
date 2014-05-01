@@ -491,6 +491,8 @@ function scrubData($string, $type="text") {
 
 // just to handle all the error messages
 function blunDer($message, $type = 1) {
+  global $administrator;
+
   print "<h2>" . _("Someone Has Blundered!") . "</h2>";
   if ($type == 0) {
     print "<p>" . _("(But probably not you.)") . "</p>";
@@ -779,7 +781,7 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
   global $mod_rewrite;
 
   $q = "SELECT fname, lname, title, tel, email FROM staff WHERE email = '$email'";
-  
+
   $db = new Querier;
   $r = $db->query($q);
 
