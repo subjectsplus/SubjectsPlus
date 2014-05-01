@@ -413,10 +413,10 @@ function setupSaveButton( lstrSelector )
 
 
 
-		console.log (boxsetting_hide_titlebar);
-        console.log (boxsetting_collapse_titlebar);
-        console.log( boxsetting_suppress_body);
-        console.log(boxsetting_titlebar_styling);
+//		console.log (boxsetting_hide_titlebar);
+//        console.log (boxsetting_collapse_titlebar);
+//        console.log( boxsetting_suppress_body);
+//        console.log(boxsetting_titlebar_styling);
 
 		//alert(lintID);
 		//alert(boxsetting_titlebar_styling);
@@ -673,11 +673,11 @@ function makeEditable( lstrSelector )
     // MODIFY PLUSLET -- on click of edit (pencil) icon
     ////////////////////////////////
 
-    console.log(lstrSelector);
+   // console.log(lstrSelector);
     jQuery(lstrSelector).livequery('click', function(event) {
 
         var edit_id = jQuery(this).attr("id").split("-");
-                                   console.log(edit_id);
+                                 //  console.log(edit_id);
         //alert(edit_id[1]);
         ////////////
         // Clone?
@@ -960,9 +960,9 @@ function setupMiscLiveQueries()
     jQuery('.pure-checkbox').on('click',  function() {
 
             var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
-            console.log(pluslet_id);
+            //console.log(pluslet_id);
             jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-Basic');
-                                console.log(jQuery(pluslet_id));
+                               // console.log(jQuery(pluslet_id));
             jQuery("#save_guide").fadeIn();
 
 
