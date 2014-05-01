@@ -49,7 +49,7 @@ if(!is_writable($lstrConfigFilePath))
 	*  hovering over '?' icon and if blank, no icon will appear
 	*/
 	$lobjConfigOptions = array(
-							"omit_user_columns" => array( _( "Columns To OMIT On User Form" ), _( "Tick the fields you would like to OMIT on the user form." ), "array", "right", "ticks", array( _( 'title' ),
+							"omit_user_columns" => array( _( "Columns To OMIT On User Form" ), _( "Tick the fields you would like to OMIT on the user form." ), "array", "right", "ticks", array( _( 'fname' ), _( 'lname' ), _( 'title' ),
 							_( 'department' ), _( 'position_number' ), _( 'classification' ), _( 'priority' ), _( 'supervisor' ), _( 'tel' ), _( 'fax' ), _( 'intercom' ), _( 'room_number' ), _( 'user_type' ),
 							_( 'personal_information' ), _( 'emergency_contact' ) ), _( "The 'User Form' controls who may access SubjectsPlus and what permissions they have.  Some fields are necessary for SubjectsPlus to work; these may be safely turned off if you don't want to capture or display this information." ) ),
 

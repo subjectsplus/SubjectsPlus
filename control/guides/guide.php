@@ -638,7 +638,7 @@ ob_end_flush();
 	   jQuery('.find-guide-input').autocomplete({
 
 	     minLength	: 3,
-	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide",
+	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
 	      
 	       event.preventDefault();

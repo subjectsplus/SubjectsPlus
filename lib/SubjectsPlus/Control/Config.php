@@ -1,5 +1,7 @@
 <?php
 namespace SubjectsPlus\Control;
+
+use PDO;
 /**
  * sp_Config - this class handles all aspects of the configuration of SubjectsPlus
  *
@@ -212,13 +214,13 @@ class Config
 	{
 		$lstrError = '';
 
-		try
-		{
-			@$lobjConnection = new DBConnector( $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], $this->lobjNewConfigValues['dbName_SPlus'], $this->lobjNewConfigValues['hname'] );
-		}
-		catch(\Exception $e)
-		{
-			$lstrError = $e->getMessage() . _( " Cofigurations were not saved." );
+		try {
+			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';charset=utf8';
+			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array(PDO::ATTR_PERSISTENT => true));
+		} catch (\PDOException $e) {
+			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
+			$lstrError .= "<p>This is the detailed error:</p>";
+			$lstrError .= 'Connection failed: ' . $e->getMessage();
 		}
 
 		return $lstrError;
