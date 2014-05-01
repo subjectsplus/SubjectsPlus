@@ -222,22 +222,24 @@ class Record {
 
 	echo "</div>
 	<!-- right hand column -->";
-  print "<div class=\"pure-u-1-3\">
+  print "<div class=\"pure-u-1-3\">";
 
-	<div id=\"record_buttons\" class=\"box\">
+
+	$content = "
 	<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
 	if ($this->_record_id != "") {
 		if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
-			echo " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+			$content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
 		} else {
-			echo " <input type=\"submit\" name=\"recommend_delete\" class=\"pure-button pure-button-warning\" value=\"" . _("Recommend Delete") . "\" />";
+			$content .= " <input type=\"submit\" name=\"recommend_delete\" class=\"pure-button pure-button-warning\" value=\"" . _("Recommend Delete") . "\" />";
 		}
 	}
     // get edit history
 	$last_mod = _("Last modified: ") . lastModded("record", $this->_record_id);
-	echo "<div id=\"last_edited\">$last_mod</div>
-	</div>";
+	$title = "<div id=\"last_edited\">$last_mod</div>";
+
+  makePluslet($title, $content, "no_overflow");
 
     /////////////////
     // Default Source
