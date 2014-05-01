@@ -141,6 +141,8 @@ CKEDITOR.dialog.add( 'subsplus_tocDialog', function( editor ) {
 
 			if( $('div#subsplus-toc-checkbox-list').find('input[name^="checkbox-"]:checked').length > 0 )
 			{
+				jQuery('#tabs').tabs('select', this.tab);
+
 				var lobjPluslets = [];
 
 				$('div#subsplus-toc-checkbox-list').find('input[name^="checkbox-"]:checked').each(function(index, checkbox)
@@ -155,10 +157,10 @@ CKEDITOR.dialog.add( 'subsplus_tocDialog', function( editor ) {
 				else
 					return false;
 
+				editor.focus();
+
 				if ( this.insertMode )
 					editor.insertElement( this.element );
-
-				jQuery('#tabs').tabs('select', this.tab);
 
 				setTimeout(function(){
 					$(window).scrollTop($(CKEDITOR.document.getActive().$).offset().top);
