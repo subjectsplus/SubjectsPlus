@@ -658,6 +658,8 @@ $this->_message = _("Thy Will Be Done.  Record added.");
 
 public function updateRecord($notrack = 0) {
 
+  $db  = new Querier;
+  
     // dupe check
     /////////////////////
     // update title table

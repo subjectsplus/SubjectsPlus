@@ -148,8 +148,9 @@ class FAQ {
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_faq_id . "\" />
-<div style=\"float: left; margin-right: 20px;\">
-      <div class=\"box\">
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">  
+
 <h2 class=\"bw_head\">$faq_title_line</h2>
 
 <span class=\"record_label\">" . _("Question") . "</span><br />
