@@ -9,7 +9,18 @@ class Autocomplete {
   private $param;
   private $collection;
   private $json;
+  private $subject_id;
+
   
+ public function setSubjectId($subject_id) {
+    $this->subject_id = $subject_id;
+  }
+
+  public function getSubjectId() {
+    return $this->subject_id;
+    
+  }
+
   public function setParam($param) {
     $this->param = $param;
   }
@@ -48,19 +59,21 @@ class Autocomplete {
 	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $this->param . "%") ;
 	
       case "guide":
-	//	$q = "SELECT pluslet_id, title FROM pluslet WHERE body LIKE " . $db->quote("%" . $this->param . "%") ;	
-	$q = "SELECT subject_id, title, body, p.pluslet_id FROM pluslet AS p
-	INNER JOIN pluslet_subject AS p_s ON p.pluslet_id = p_s.pluslet_id 
-    INNER JOIN pluslet_section AS p_sec ON p.pluslet_id = p_sec.pluslet_id
-    WHERE p.body LIKE " . $db->quote("%" . $this->param . "%") .
-"OR p.title LIKE " . $db->quote("%" . $this->param . "%") .
-    "AND subject_id = ".  $_GET['subject_id'] ;
-    
+	$q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.subject FROM pluslet AS p 
+	INNER JOIN pluslet_section AS ps 
+	ON ps.pluslet_id = p.pluslet_id
+	INNER JOIN section AS s 
+	ON ps.section_id = s.section_id
+	INNER JOIN tab AS t
+	ON s.tab_id = t.tab_id
+	INNER JOIN subject AS su 
+	ON su.subject_id = t.subject_id
+        WHERE p.body LIKE " . $db->quote("%" . $this->param . "%")   . 
+	" AND t.subject_id = " . $db->quote( $this->subject_id );
+
 	break;
-
-
-
       case "records":
+
 	$q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $this->param . "%") ;
 	break;		
       case "faq":
