@@ -64,11 +64,11 @@ class CompleteMe {
 		minLength	: 3,
 		source		: '" . $data_location . "',
 		focus: function(event, ui) {
-console.log('focused');
+//console.log('focused');
 			return;
 		},
 		select: function(event, ui) {
-console.log('selected');
+//console.log('selected');
 			location.href = startURL + ui.item.value;
 		
                 }

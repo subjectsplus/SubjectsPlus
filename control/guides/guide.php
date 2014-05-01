@@ -654,6 +654,7 @@ ob_end_flush();
 	       jQuery('#tabs').tabs('select', in_tab);
 
 	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
+	       jQuery('.pluslet-'+ ui.item.value).scrollTo();
              }
 	   });
 
