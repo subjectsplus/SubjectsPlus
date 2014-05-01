@@ -10,15 +10,17 @@
  */
     
 
-use SubjectsPlus\Control\Upload;
 use SubjectsPlus\Control\Querier;
-    
+   
+error_reporting(E_ALL);
+
 $subcat = "";
 $page_title = "Set Picture";
 
 $no_header = "yes";
 
 include("../includes/header.php");
+include("../includes/upload/class.upload.php");
 
 $feedback = "";
 $result = "";
@@ -87,10 +89,13 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
   // we create an instance of the class, giving as argument the PHP object
   // corresponding to the file field from the form
   // All the uploads are accessible from the PHP object $_FILES
-  $handle = new Upload($_FILES['my_field']);
+
+  $handle = new upload($_FILES['my_field']);
 
   // then we check if the file has been uploaded properly
   // in its *temporary* location in the server (often, it is /tmp)
+
+
   if ($handle->uploaded) {
 
   	//check width.
@@ -177,4 +182,3 @@ print $original_photo;
 print "</div>";
 
 include("../includes/footer.php");
-?>
