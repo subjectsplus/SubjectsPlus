@@ -68,8 +68,7 @@ if ($check_this) {
     $r = $db->query($q, PDO::FETCH_ASSOC);
   
 
-    
-    exit;
+
     // If this guide doesn't exist, send them away
     if (count($r) == 0) {
         header("location:index.php");

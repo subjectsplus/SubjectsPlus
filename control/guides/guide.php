@@ -660,7 +660,7 @@ ob_end_flush();
 
 	  </script>
 
-        <li class="selected"></li>
+        <!--<li class="selected"></li>-->
         </ul>
         </form>
       </div>
