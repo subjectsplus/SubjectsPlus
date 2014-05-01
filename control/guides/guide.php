@@ -614,20 +614,18 @@ ob_end_flush();
   <div class="pure-g-r">
     <div class="wrapper-full">
       <div class="pure-u-1-2">
-
+        <form class="pure-form" id="guide_search">
         <ul id="guide_nav">
           <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
           <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
             <?php print $all_boxes; ?>
           </li>
+          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
           <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
 
 
 	  <li class="find-guide-parent">
-	    <a class="find-guide">
-	      <?php print _("Find in Guide"); ?>
-	    </a>
-	    <input class="find-guide-input" type="text"></input>
+	    <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
 	  </li>
 
 	  <script>
@@ -660,25 +658,11 @@ ob_end_flush();
 	   });
 
 
-
-
-
-
-	   
 	  </script>
 
-          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
-          <!--<li class="showrecord"><a href="../records/record.php?wintype=pop&amp;caller_id=<?php print $subject_id; ?>"><?php print _("New Record"); ?></a></li>
-          <li class="showmeta"><a href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><?php print _("Metadata"); ?></a></li>
-          <li id="layoutbox" class="togglelayout" href="metadata.php?subject_id=<?php print $subject_id; ?>&amp;wintype=pop"><a href="#"><?php print _("Layout"); ?></a>
-          <div id="slider_options" style="display: none; width: 200px; padding: 1em;">
-          <p><?php print _("Adjust column sizes"); ?></p>
-          <div id="slider"></div>
-          <button id="save_layout" style="display:none;clear: left;margin-top: 1em;font-size: smaller;"><?php print _("SAVE CHANGES"); ?></button>
-          </div>-->
-</li>
-<li class="selected"></li>
+        <li class="selected"></li>
         </ul>
+        </form>
       </div>
       <div class="pure-u-1-2"> <h2>
         <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
