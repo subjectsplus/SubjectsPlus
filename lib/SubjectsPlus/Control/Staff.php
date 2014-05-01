@@ -94,7 +94,7 @@ class Staff {
         $this->_fax = $_POST["fax"];
         $this->_intercom = $_POST["intercom"];
         $this->_lat_long = $_POST["lat_long"];
-        $this->_fullname = $_POST["fullname"];
+        $this->_fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : $_POST["fname"] . " " . $_POST["lname"];
 
         break;
       case "delete":
@@ -286,9 +286,6 @@ class Staff {
       $headshot .= "<p>" . _("You can change the photo after saving.") . "</p>";
     }
 
-    // let's stick the address together for fun
-    $full_address = $this->_street_address . " " . $this->_city . " " . $this->_state . " " . $this->_zip;
-
     /////////////
     // Start the form
     /////////////
@@ -302,26 +299,11 @@ class Staff {
     // set up
     print "<div class=\"pure-g-r\">";
 
-    // start form
-    print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
-<input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
-<div class=\"pure-u-1-3\">
-<div class=\"pluslet no_overflow\">
-    <div class=\"titlebar\">
-      <div class=\"titlebar_text\">" . _("Staff Member") . "</div>
-      <div class=\"titlebar_options\"></div>
-    </div>
-    <div class=\"pluslet_body\">
-
-    <div style=\"float: left; margin-right: 1em;\"><label for=\"fname\">" . _("First Name") . "</label>
-    <input type=\"text\" name=\"fname\" id=\"fname\" class=\"pure-input-1 $fname_required\" value=\"" . $this->_fname . "\" /></div>
-    <div style=\"float: left;\"><label for=\"lname\">" . _("Last Name") . "</label>
-    <input type=\"text\" name=\"lname\" id=\"lname\" class=\"pure-input-1 $lname_required\" value=\"" . $this->_lname . "\" /></div>
-    <br style=\"clear:both;\"/>";
-
 
   	//see which"Staff Member" columns and whether "Personal Information" section or "Emergency Contact" section are omitted
   	// added by dgonzalez
+  	$isFnameOmitted = in_array( _( "fname" ) , $omit_user_columns );
+  	$isLnameOmitted = in_array( _( "lname" ) , $omit_user_columns );
   	$isTitleOmitted = in_array( _( "title" ) , $omit_user_columns );
   	$isPositionNumOmitted = in_array( _( "position_number" ) , $omit_user_columns );
   	$isClassificationOmitted = in_array( _( "classification" ) , $omit_user_columns );
@@ -331,12 +313,45 @@ class Staff {
   	$isTelephoneOmitted = in_array( _( "tel" ) , $omit_user_columns );
   	$isdFaxOmitted = in_array( _( "fax" ) , $omit_user_columns );
   	$isIntercomOmitted = in_array( _( "intercom" ) , $omit_user_columns );
+  	$isUserTypeOmitted = in_array( _( "user_type" ) , $omit_user_columns );
   	$isRoomNumOmitted = in_array( _( "room_number" ) , $omit_user_columns );
   	$isPersonalOmitted = in_array( _( "personal_information" ) , $omit_user_columns );
   	$isEmergencyContactOmitted = in_array( _( "emergency_contact" ) , $omit_user_columns );
 
+  	 // start form
+    print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
+<input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
+<div class=\"pure-u-1-3\">
+<div class=\"pluslet no_overflow\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Staff Member") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">";
+
   	//based on omitted columns write out html
   	// added by dgonzalez
+  	if ( $isFnameOmitted )
+  	{
+  		echo "<input type=\"hidden\" name=\"fname\" id=\"fname\" value=\"" . $this->_fname . "\" />";
+  	} else {
+
+  		print "<div style=\"float: left; margin-right: 1em;\"><label for=\"fname\">" . _("First Name") . "</label>
+    	<input type=\"text\" name=\"fname\" id=\"fname\" class=\"pure-input-1\" value=\"" . $this->_fname . "\" /></div>";
+
+  	}
+
+  	if ( $isLnameOmitted )
+  	{
+  		echo "<input type=\"hidden\" name=\"lname\" id=\"lname\" value=\"" . $this->_lname . "\" /><br style=\"clear:both;\"/>";
+  	} else {
+
+  		print "<div style=\"float: left;\"><label for=\"lname\">" . _("Last Name") . "</label>
+	    <input type=\"text\" name=\"lname\" id=\"lname\" class=\"pure-input-1\" value=\"" . $this->_lname . "\" /></div>
+	    <br style=\"clear:both;\"/>";
+
+  	}
+
   	if ( $isTitleOmitted )
   	{
   		echo "<input type=\"hidden\" name=\"title\" id=\"title\" value=\"" . $this->_title . "\" />";
@@ -436,7 +451,7 @@ class Staff {
     <input type=\"text\" name=\"fax\" id=\"fax\" class=\"pure-input-1";
       if ( in_array( _( 'fax' ) , $require_user_columns ) ) echo 'required_field';
     print "\" value=\"" . $this->_fax . "\" /></div>";
-         
+
   	}
 
   	if ( $isIntercomOmitted )
@@ -471,9 +486,15 @@ class Staff {
     print "<label for=\"email\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</label>
     <input type=\"text\" name=\"email\" id=\"email\" class=\"pure-input-1 required_field\" value=\"" . $this->_email . "\" />";
 
-  		echo "<div style=\"float: left; margin-right: 1em;\"><label for=\"user_type\">" . _("User Type") . "</label>
-      {$this->_user_types}
-      </div>";
+  	if ( $isUserTypeOmitted )
+   	{
+  		echo "<input type=\"hidden\" name=\"user_type_id\" id=\"user_type_id\" value=\"1\" />";
+	}else
+	{
+		echo "<div style=\"float: left; margin-right: 1em;\"><label for=\"user_type\">" . _("User Type") . "</label>
+	      {$this->_user_types}
+	      </div>";
+	}
 
   		echo "
     <div style=\"float: left; margin-right: 1em;\"><label for=\"active\">" . _("Active User?") . "</label>
@@ -603,6 +624,8 @@ print "<div class=\"pure-u-1-3\">";
     if ( in_array( _( 'city' ) , $require_user_columns ) ) { $city_required = "required_field"; } else {$city_required = "";}
     if ( in_array( _( 'state' ) , $require_user_columns ) ) { $state_required = "required_field"; } else {$state_required = "";}
     if ( in_array( _( 'zip' ) , $require_user_columns ) ) { $zip_required = "required_field"; } else {$zip_required = "";}
+  	if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) { $home_phone_required = "required_field"; } else {$home_phone_required = "";}
+  	if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) { $cell_phone_required = "required_field"; } else {$cell_phone_required = "";}
 
     $personal_info = "
     <label for=\"record_title\">" . _("Street Address") . "</label>
@@ -618,7 +641,7 @@ print "<div class=\"pure-u-1-3\">";
     <div style=\"float: left; margin-right: 1em;\"><label for=\"state\">" . _("Home Phone") . "</label>
     <input type=\"text\" name=\"home_phone\" id=\"home_phone\" class=\"pure-input-1 $home_phone_required\" value=\"" . $this->_home_phone . "\" /></div>
     <div style=\"float: left;\"><label for=\"cell_phone\">" . _("Cell Phone") . "</label>
-    <input type=\"text\" name=\"cell_phone\" id=\"cell_phone\" class=\"pure-input-1 $cell_phone_required\" value=\"" . $this->_cell_phone . "\" /></div>    
+    <input type=\"text\" name=\"cell_phone\" id=\"cell_phone\" class=\"pure-input-1 $cell_phone_required\" value=\"" . $this->_cell_phone . "\" /></div>
     ";
 
     makePluslet ($this->_fullname, $personal_info, "no_overflow");
@@ -643,12 +666,15 @@ print "<div class=\"pure-u-1-3\">";
     <br />
     ";
 
-    makePluslet (_("Emergency Contact"), $emergency_info, "no_overflow");    
+    makePluslet (_("Emergency Contact"), $emergency_info, "no_overflow");
   }
 
 public function outputLatLongForm() {
 
     global $require_user_columns;
+
+	// let's stick the address together for fun
+	$full_address = $this->_street_address . " " . $this->_city . " " . $this->_state . " " . $this->_zip;
 
     // set up required fields based on fields in config
     if ( in_array( _( 'lat_long' ) , $require_user_columns ) ) { $lat_long_required = "required_field"; } else {$lat_long_required = "";}
@@ -662,14 +688,14 @@ public function outputLatLongForm() {
     <br />
     ";
 
-    makePluslet (_("Add to Map"), $lat_long, "no_overflow");   
+    makePluslet (_("Add to Map"), $lat_long, "no_overflow");
 
 }
 
   public function outputSelfEditForm() {
     // This is just the information that a user can edit about themselves
     // agd april 2014
-    
+
     global $require_user_columns;
     global $omit_user_columns;
 
@@ -707,7 +733,7 @@ public function outputLatLongForm() {
         echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
         echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
     }
-    
+
 
     print "</div>"; // close pure-1-3
 
@@ -727,7 +753,7 @@ public function outputLatLongForm() {
 
     echo "</div></div>"; // end pluslet_body, end pluslet
 
-    print "</div>"; // close pure-1-3   
+    print "</div>"; // close pure-1-3
 
     print "<div class=\"pure-u-1-3\">";
 
@@ -739,10 +765,10 @@ public function outputLatLongForm() {
 
     makePluslet (_("Save"), $saver, "no_overflow");
 
-    print "</div>"; // close pure-1-3     
+    print "</div>"; // close pure-1-3
 
-    // now let's add all our missing/hidden data  
- 
+    // now let's add all our missing/hidden data
+
     print "<input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />";
     print "<input type=\"hidden\" name=\"lname\" value=\"" . $this->_lname . "\" />";
     print "<input type=\"hidden\" name=\"fname\" value=\"" . $this->_fname . "\" />";
@@ -765,7 +791,7 @@ public function outputLatLongForm() {
 
 
     print "</form>"; // close form
-    
+
     print "</div>"; // close pure
   }
 
@@ -857,9 +883,9 @@ public function outputLatLongForm() {
   }
 
   public function insertRecord() {
-    
+
     $db = new Querier;
-           
+
     ////////////////
     // check and hash password
     ////////////////
@@ -985,7 +1011,7 @@ public function outputLatLongForm() {
   public function updateRecord() {
 
     $db = new Querier;
-      
+
   	////////////////
   	// check whether email is unique
   	///////////////
@@ -1203,7 +1229,7 @@ public function outputLatLongForm() {
   }
 
   function isEmailUnique($lstrType = "")
-    
+
   {
     $db = new Querier;
   	switch (strtolower( $lstrType ))
