@@ -766,6 +766,8 @@ ul.ui-autocomplete li a{
     display: inline-block;
     width: 20px;
     cursor:pointer;
+    float:right;
+    margin-top: -2em;
 }
 
 .url_feedback {
@@ -1927,17 +1929,30 @@ display:none;
 
 }
 
+.pure-button {
+        color: #FFFFFF;
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
 
 .pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
     background-color: #E488B6;
     background-color: #C03957;
     color: #FFFFFF;
     font-weight: bold;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .pure-button-warning {
     background: rgb(223, 117, 20); /* this is an orange */
     color: #FFFFFF;
+}
+
+.pure-button-success {
+    background: rgb(66, 184, 221); /* this is a light blue */
+    color: #FFFFFF;
+    font
+
 }
 
 #topnav > li > div.autoC
@@ -1972,3 +1987,5 @@ padding-right: 5%;
 margin-left: 43px;
 
 }
+
+.icon_smaller {height: 20px !important;}

@@ -216,7 +216,7 @@ class Record {
 	self::buildLocation();
 
 
-	$add_loc = "<div class=\"add_location\"><img src=\"$IconPath/list-add.png\" alt=\"add new location\"  border=\"0\" /> Add another location</div>";
+	$add_loc = "<div class=\"add_location\"><button src=\"$IconPath/list-add.png\" alt=\"add new location\"  class=\"pure-button pure-button-success\" border=\"0\" /> Add another location</div>";
 
   print $add_loc;
 
@@ -245,6 +245,8 @@ class Record {
     // Default Source
     /////////////////
 
+  $source_icon = $IconPath . "/usb_on-26.png";
+
 	$querierSource = new Querier();
 	$qSource = "select source_id, source from source order by source";
 	$defsourceArray = $querierSource->query($qSource);
@@ -254,7 +256,7 @@ class Record {
 
 	echo "<div class=\"pluslet\">
     <div class=\"titlebar\">
-      <div class=\"titlebar_text\">" . _("Default Source Type") . "</div>
+      <div class=\"titlebar_text\"><img src=\"$source_icon\" class=\"icon_smaller\" /> " . _("Default Source Type") . "</div>
       <div class=\"titlebar_options\"></div>
     </div>
     <div class=\"pluslet_body\">
@@ -286,7 +288,7 @@ class Record {
 	}
 
 	echo "
-  <div class=\"pluslet\">
+  <div class=\"pluslet no_overflow\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">" . _("Subjects") . "</div>
       <div class=\"titlebar_options\"></div>
@@ -445,7 +447,9 @@ public function buildLocation() {
     <div class=\"pluslet_body\">
  	<label for=\"location[]\">$format_label_text</label>
  	<input type=\"hidden\" value=\"{$this->_location_id}\" name=\"location_id[]\" />
- 	<input type=\"text\" class=\"record_location check_url pure-input-2-3 required_field \" name=\"location[]\" value=\"{$this->_location}\" />$checkurl_icon
+ 	
+  <input type=\"text\" class=\"record_location check_url pure-input-2-3 required_field \" name=\"location[]\" value=\"{$this->_location}\" />
+  $checkurl_icon
  	<span class=\"smaller url_feedback\"></span>
  	<div class=\"$input_callnum_class\"><span class=\"record_label\">" . _("Call Number") . "</span><br /><input type=\"text\" value=\"{$this->_call_number}\" name=\"call_number[]\" size=\"20\" /></div>
  	<br class=\"clear-both\" />
@@ -526,31 +530,31 @@ public function buildLocation() {
 
     // check if the note override icon should be active or in
  	if ($value[5] != "") {
- 		$note_icon = "note_override.png";
+ 		$note_icon = "document-26.png";
  	} else {
- 		$note_icon = "note_override_inactive.png";
+ 		$note_icon = "file-26.png";
  	}
 
     // check if the source override icon should be active or in
  	if ($value[3] != $this->_def_source[0][0]) {
- 		$source_icon = "source_override.png";
+ 		$source_icon = "usb_on-26.png";
  	} else {
- 		$source_icon = "source_override_inactive.png";
+ 		$source_icon = "usb_off-26.png";
  	}
 
  	$oursubjects = "
- 	<div class=\"selected_item_wrapper\">
- 	<div class=\"selected_item\">
+ 	<div class=\"pure-g\">
+ 	<div class=\"pure-u-1-2\">
  	<input name=\"subject[]\" value=\"$value[1]\" type=\"hidden\" />
  	<input name=\"rank[]\" value=\"$value[0]\" type=\"hidden\" />
  	<input name=\"source[]\" value=\"$value[3]\" id=\"hidden_source-$value[1]-$value[3]\" type=\"hidden\" />
  	$subject_name <span class=\"small_extra\">$source_name</span><br />
  	<textarea style=\"display: none; clear: both;\" class=\"desc_override\" name=\"description_override[]\" rows=\"4\" cols=\"35\">$value[5]</textarea>
  	</div>
- 	<div class=\"selected_item_options\">
- 	<img src=\"$IconPath/delete.png\" class=\"delete_sub\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\" border=\"0\" />
- 	<img src=\"$IconPath/$source_icon\" class=\"source_override\" id=\"source_override-$value[1]-$value[3]\" alt=\"" . _("change source type") . "\" title=\"" . _("change source type") . "\" border=\"0\" />
- 	<img src=\"$IconPath/$note_icon\" class=\"note_override\" id=\"note_override-$value[1]-$value[3]\" alt=\"" . _("add description override") . "\" title=\"" . _("add description override") . "\" border=\"0\" />
+ 	<div class=\"pure-u-1-2\">
+ 	<img src=\"$IconPath/delete.png\" class=\"delete_sub icon_smaller\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\" border=\"0\" />
+ 	<img src=\"$IconPath/$source_icon\" class=\"source_override icon_smaller\" id=\"source_override-$value[1]-$value[3]\" alt=\"" . _("change source type") . "\" title=\"" . _("change source type") . "\" border=\"0\" />
+ 	<img src=\"$IconPath/$note_icon\" class=\"note_override icon_smaller\" id=\"note_override-$value[1]-$value[3]\" alt=\"" . _("add description override") . "\" title=\"" . _("add description override") . "\" border=\"0\" />
  	</div>
  	</div>";
 
