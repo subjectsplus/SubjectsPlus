@@ -41,7 +41,12 @@ class DbHandler {
       case "bysub":
 
         if (isset($subject_id)) {
+            //get title ids in pluslets' resource token connected to subject
+            $lobjGuide = new Guide($subject_id);
+            $lobjTitleIds = $lobjGuide->getRelatedTitles();
+
           $condition1 = "WHERE subject_id = $subject_id";
+          $condition1 .= count($lobjTitleIds) > 0 ? "\nOR t.title_id IN (" . implode( ',', $lobjTitleIds) . ")" : "";
           $condition2 = "WHERE subject_id = $subject_id";
         } else {
           $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
@@ -84,33 +89,39 @@ class DbHandler {
 
         $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $qualifier + "%");
     }
-
       
-      $q1 = "SELECT distinct left(title,1) as initial, title as newtitle, description, location, access_restrictions, title.title_id as this_record,
-        eres_display, display_note, pre, citation_guide, ctags, helpguide
-		FROM title, restrictions, location, location_title, source, rank
-		$condition1
-		AND title.title_id = location_title.title_id
-		AND location.location_id = location_title.location_id
-		AND restrictions_id = access_restrictions
-		AND eres_display = 'Y'
-        AND rank.title_id = title.title_id AND source.source_id = rank.source_id
-		ORDER BY newtitle";
+      $q1 = "SELECT distinct left(t.title,1) as initial, t.title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide
+            FROM title as t
+            INNER JOIN location_title as lt
+            ON t.title_id = lt.title_id
+            INNER JOIN location as l
+            ON lt.location_id = l.location_id
+            INNER JOIN restrictions as r
+            ON l.access_restrictions = r.restrictions_id
+            INNER JOIN rank as rk
+            ON rk.title_id = t.title_id
+            INNER JOIN source as s
+            ON rk.source_id = s.source_id
+            $condition1
+            AND l.eres_display = 'Y'
+            ORDER BY newtitle";
 
-     
-      
-     
-      $q2 = "SELECT distinct left(alternate_title,1) as initial, alternate_title as newtitle, description, location, access_restrictions, title.title_id as this_record,
-        eres_display, display_note, pre, citation_guide, ctags, helpguide
-		FROM title, restrictions, location, location_title, source, rank 
-		$condition2
-		AND title.title_id = location_title.title_id
-		AND location.location_id = location_title.location_id
-		AND restrictions_id = access_restrictions
-		AND eres_display = 'Y'
-     AND rank.title_id = title.title_id AND source.source_id = rank.source_id
-        $condition3
-		ORDER BY newtitle";
+      $q2 = "SELECT distinct left(t.alternate_title,1) as initial, t.alternate_title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide
+            FROM title as t
+            INNER JOIN location_title as lt
+            ON t.title_id = lt.title_id
+            INNER JOIN location as l
+            ON lt.location_id = l.location_id
+            INNER JOIN restrictions as r
+            ON l.access_restrictions = r.restrictions_id
+            INNER JOIN rank as rk
+            ON rk.title_id = t.title_id
+            INNER JOIN source as s
+            ON rk.source_id = s.source_id
+            $condition2
+		    AND eres_display = 'Y'
+            $condition3
+		    ORDER BY newtitle";
       
       //print $q2 . ";";
     
