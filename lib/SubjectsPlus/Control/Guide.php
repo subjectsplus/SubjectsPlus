@@ -200,11 +200,16 @@ class Guide
         }
 
         echo "
-            <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
+            <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
-            <div style=\"float: left; margin-right: 20px;\">
-            <div class=\"box\">
-            <h2 class=\"bw_head\">$guide_title_line</h2>
+            <div class=\"pure-g-r\">
+              <div class=\"pure-u-1-2\">  
+                <div class=\"pluslet\">
+                    <div class=\"titlebar\">
+                      <div class=\"titlebar_text\">$guide_title_line</div>
+                      <div class=\"titlebar_options\"></div>
+                    </div>
+                <div class=\"pluslet_body\">
 
             <span class=\"record_label\">" . _("Guide") . "</span><br />
             <input type=\"text\" name=\"subject\" id=\"record_title\" size=\"50\" class=\"required_field\" value=\"" . $this->_subject . "\">
@@ -316,18 +321,8 @@ class Guide
             ?>
         </select>
 
-
-
-
         <?php
 
-
-        //////////////////////
-        // Guide parent
-        //////////////////////
-
-        //echo "<span class='record_label'>" ._("Guide Parent") . "</span><br />";
-        // To-do: Add dropdown to chose guide parent?
 
 
         /////////////////////
@@ -347,22 +342,7 @@ class Guide
         $is_live .= " /> " . _("No") . "
     <br class=\"clear-both\" /><br />";
 
-        ///////////////////
-        // Screen layout
-        // /////////////
-
-        if (!empty($this->_extra)) {
-
-            $jobj = $this->_extra;
-            $main_col_size = $jobj['maincol'];
-
-        } else {
-            $main_col_size = "0-8-4";
-
-        }
-        $screen_layout = "<span class=\"record_label\">" . _("Column widths (add up to 12):") . " <span id=\"main_col_width\">$main_col_size</span></span><br />
-    <div id=\"slider\"></div>
-    <input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
+        $screen_layout = "<input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
 
 
         echo "
@@ -373,20 +353,24 @@ class Guide
     </div>
     </div>
     <!-- right hand column -->
-    <div style=\"float: left;min-width: 200px;\">
-	<div id=\"record_buttons\" class=\"box\">
-    <input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Now") . "\">";
+    <div class=\"pure-u-1-3\">";
+
+    $content = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
 
         // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
         // make sure they're allowed to delete
 
-        if ($this->_subject_id != "") {
+    if ($this->_subject_id != "") {
             if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
-                echo "<input type=\"submit\" name=\"delete_record\" class=\"button delete_button\" value=\"" . _("Delete Forever!") . "\">";
-            }
-            $last_mod = _("Last modified: ") . lastModded("guide", $this->_subject_id);
-            echo "<div id=\"last_edited\">$last_mod</div>";
-        }
+            $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+        } 
+    }
+    // get edit history
+    $last_mod = _("Last modified: ") . lastModded("record", $this->_subject_id);
+    $title = "<div id=\"last_edited\">$last_mod</div>";
+
+  makePluslet($title, $content, "no_overflow");
+
 
         echo "</div>";
 
