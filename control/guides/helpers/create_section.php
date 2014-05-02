@@ -25,7 +25,7 @@ $new_id = rand(1, 100000);
 
 print "<div id=\"section_new_$new_id\" class=\"sp_section\" data-layout=\"4-4-4\">";
 print "<div class=\"sp_section_controls\">
-			<img src=\"$IconPath/drag_arrow.png\" id=\"sort\"/>
+			<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\"/>
 			<div id=\"slider_section_new_$new_id\" class=\"sp_section_slider\"></div>
 	   </div>";
 

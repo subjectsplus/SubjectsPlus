@@ -228,7 +228,7 @@ function makeSortable( lstrSelector, lstrType )
 			jQuery(this).sortable({
 				opacity: 0.7,
 				cancel: '.unsortable',
-				handle: 'img#sort',
+				handle: 'img.section_sort',
 				update: function(event, ui) {
 					jQuery("#response").hide();
 					jQuery("#save_guide").fadeIn();
@@ -255,7 +255,7 @@ function makeSortable( lstrSelector, lstrType )
 				opacity: 0.7,
 				tolerance: 'intersect',
 				cancel: '.unsortable',
-				handle: 'img#sort',
+				handle: 'img.pluslet_sort',
 				update: function(event, ui) {
 					jQuery("#response").hide();
 					jQuery("#save_guide").fadeIn();

@@ -833,7 +833,7 @@ class Guide
 
             if ($this->_isAdmin) {
         		print "<div class=\"sp_section_controls\">
-    						<img src=\"$IconPath/hand_cursor-26.png\" id=\"sort\" class=\"section_sort\" />
+    						<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" />
     						<div id=\"slider_section_{$lobjSection['section_id']}\"  class=\"sp_section_slider\"></div>
     				   </div>";
             }
