@@ -31,12 +31,34 @@ $search->setSearch($_GET['q']);
 	  echo $result['matching_text'];
 	  echo "</p>";
 	
-	
-	  echo "<p>";
-	  echo "<a href='" . $result['id'] . "'/>View</a>";;
-	  echo "</p>";
+	  switch($result['content_type']) {
+	  
+ 	  case 'talkback':
+	      echo "<p>";
+	      echo "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>View</a>";;
+	      echo "</p>";
+	      echo "</div>";
+	      break;
 
-	  echo "</div>";
+	  case 'subject':
+	      echo "<p>";
+	      echo "<a href='guides/guide.php?subject_id=" . $result['id'] . "'/>View</a>";;
+	      echo "</p>";
+	      echo "</div>";
+	      break;
+
+	  case 'faq':
+	      echo "<p>";
+	      echo "<a href='faq/faq.php?faq_id=" . $result['id'] . "'/>View</a>";;
+	      echo "</p>";
+	      echo "</div>";
+	      break;
+
+
+
+
+	  }
+	  
 	}
 	?>
     
