@@ -46,7 +46,7 @@ class DbHandler {
             $lobjTitleIds = $lobjGuide->getRelatedTitles();
 
           $condition1 = "WHERE subject_id = $subject_id";
-          $condition1 .= count($lobjTitleIds) > 1 ? "\nOR t.title_id IN (" . implode( ',', $lobjTitleIds) . ")" : "";
+          $condition1 .= count($lobjTitleIds) > 0 ? "\nOR t.title_id IN (" . implode( ',', $lobjTitleIds) . ")" : "";
           $condition2 = "WHERE subject_id = $subject_id";
         } else {
           $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
