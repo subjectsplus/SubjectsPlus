@@ -612,7 +612,7 @@ ob_end_flush();
 
 <div id="guide_header">
   <div class="pure-g-r">
-    <div class="wrapper-full">
+    
       <div class="pure-u-1-2">
         <form class="pure-form" id="guide_search">
         <ul id="guide_nav">
@@ -672,7 +672,7 @@ ob_end_flush();
 
       </h2></div>
     </div>
-  </div>
+ 
 </div>
 
 
