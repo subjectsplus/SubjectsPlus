@@ -612,7 +612,6 @@ ob_end_flush();
 
 <div id="guide_header">
   <div class="pure-g-r">
-    <div class="wrapper-full">
       <div class="pure-u-1-2">
         <form class="pure-form" id="guide_search">
         <ul id="guide_nav">
@@ -664,16 +663,15 @@ ob_end_flush();
         <!--<li class="selected"></li>-->
         </ul>
         </form>
-      </div>
+      </div> <!-- end pure 1-2-->
       <div class="pure-u-1-2"> <h2>
         <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
         <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
         <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
 
-      </h2></div>
-    </div>
-  </div>
-</div>
+      </h2></div><!-- end pure 1-2-->
+  </div> <!-- end pure -->
+</div> <!-- end guide header-->
 
 
 <input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra" />
