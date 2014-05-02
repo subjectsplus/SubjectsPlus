@@ -18,7 +18,7 @@ use SubjectsPlus\Control\Querier;
 $chcGuides = array("superfun","chcmusic");
 
 
-//$use_jquery = array("ui", "ui_styles");
+$use_jquery = array("ui", "ui_styles");
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
