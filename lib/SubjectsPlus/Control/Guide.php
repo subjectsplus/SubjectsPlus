@@ -1116,6 +1116,34 @@ class Guide
         return $this->_subject_id;
     }
 
+    //returns title ids that are found in current guide
+    public function getRelatedTitles()
+    {
+        $db = new Querier();
+
+        //get title ids in pluslets' resource token connected to guide
+        $q = "SELECT p.body
+            FROM subject AS s
+            INNER JOIN tab AS tb ON s.subject_id = tb.subject_id
+            LEFT JOIN section AS sc ON tb.tab_id = sc.tab_id
+            LEFT JOIN pluslet_section AS ps ON sc.section_id = ps.section_id
+            LEFT JOIN pluslet AS p ON ps.pluslet_id = p.pluslet_id
+            WHERE p.body LIKE  '%{{dab}%'
+            AND s.subject_id = $this->_subject_id";
+
+        $lobjResults = $db->query($q);
+        $lobjMatches = array();
+        $lobjTitleIds = array();
+
+        foreach( $lobjResults as $lobjResult )
+        {
+            preg_match_all( '/\{\{dab\},\{([^}]*)\}/', $lobjResult['body'] , $lobjMatches );
+            $lobjTitleIds = array_merge($lobjTitleIds, $lobjMatches[1]);
+        }
+
+        return $lobjTitleIds;
+    }
+
     function deBug()
     {
         print $this->_debug;
