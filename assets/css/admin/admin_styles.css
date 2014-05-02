@@ -1984,12 +1984,9 @@ display:none;
 }
 
 #guide_search input {
-  line-height: 1.7em;
   font-size: 1em;
   padding: .2em .4em;
   margin-left: 1em;
-
-
 }
 
 .find-guide-parent {
