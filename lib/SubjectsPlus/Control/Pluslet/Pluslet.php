@@ -140,7 +140,7 @@ class Pluslet {
             <div class=\"titlebar\">";
         	//only if on admin side, display sort icon
         	if( $this->_visible_id != '' ) {
-        		$this->_pluslet .= "<img src=\"$IconPath/drag_arrow.png\" id=\"sort\" />";
+        		$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" id=\"sort\" class=\"pluslet_sort\" />";
             }
 
         	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>

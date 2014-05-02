@@ -463,8 +463,22 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-widget-overlay { background: #aaaaaa/*{bgColorOverlay}*/ url(images/ui-bg_flat_0_aaaaaa_40x100.png)/*{bgImgUrlOverlay}*/ 50%/*{bgOverlayXPos}*/ 50%/*{bgOverlayYPos}*/ repeat-x/*{bgOverlayRepeat}*/; opacity: .3;filter:Alpha(Opacity=30)/*{opacityOverlay}*/; }
 .ui-widget-shadow { margin: -8px/*{offsetTopShadow}*/ 0 0 -8px/*{offsetLeftShadow}*/; padding: 8px/*{thicknessShadow}*/; background: #aaaaaa/*{bgColorShadow}*/ url(images/ui-bg_flat_0_aaaaaa_40x100.png)/*{bgImgUrlShadow}*/ 50%/*{bgShadowXPos}*/ 50%/*{bgShadowYPos}*/ repeat-x/*{bgShadowRepeat}*/; opacity: .3;filter:Alpha(Opacity=30)/*{opacityShadow}*/; -moz-border-radius: 8px/*{cornerRadiusShadow}*/; -khtml-border-radius: 8px/*{cornerRadiusShadow}*/; -webkit-border-radius: 8px/*{cornerRadiusShadow}*/; border-radius: 8px/*{cornerRadiusShadow}*/; }
 
+/* agd */
 
-.ui-slider { margin-top: 1em; }
+.ui-widget-content {
+    background: transparent;
+    border: none;
+    color: #222222;
+}
+
+.ui-tabs .ui-tabs-panel {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-width: 0;
+    display: block;
+    padding: 1em 0;
+}
+
+.ui-slider { }
 .ui-slider-horizontal { height: 10px; background: #ddd; }
 .ui-slider-horizontal .ui-slider-handle { height: 18px; width: 14px; background: #E488B6; border: 1px solid rgba(0,0,0,0.6); margin-left: -8px; cursor: pointer; }
 .ui-slider-horizontal.green .ui-slider-handle { background: #afe32c;}
