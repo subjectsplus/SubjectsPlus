@@ -53,7 +53,41 @@ class Autocomplete {
 
     switch ($this->collection) {
       case "home":
-	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $this->param . "%") ;
+	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', 'Subject Guide' as 'content_type' FROM subject 
+WHERE description LIKE"  . $db->quote("%" . $this->param . "%") . "
+OR subject LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR keywords LIKE "  . $db->quote("%" . $this->param . "%"). "
+UNION 
+SELECT pluslet_id AS 'id', title AS 'matching_text', body as 'additional_text', 'Pluslet' AS 'content_type' FROM pluslet 
+WHERE title LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR body LIKE "  . $db->quote("%" . $this->param . "%") . "
+UNION
+SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','FAQ' as 'content_type' FROM faq 
+WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR answer LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR keywords LIKE "  . $db->quote("%" . $this->param . "%") . "
+UNION
+SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text', 'Talkback' as 'content_type' FROM talkback 
+WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR answer LIKE "  . $db->quote("%" . $this->param . "%") . "
+UNION
+SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text', 'Staff' as 'content_type' FROM staff 
+WHERE fname LIKE " .$db->quote("%" . $this->param . "%")  . "
+OR lname LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR email LIKE " . $db->quote("%" . $this->param . "%") . "
+OR tel LIKE " . $db->quote("%" . $this->param . "%") . "
+UNION
+SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text', 'Department' as 'content_type' FROM department 
+WHERE name LIKE " . $db->quote("%" . $this->param . "%") ."
+OR telephone LIKE  " . $db->quote("%" . $this->param . "%") . "
+UNION
+SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text', 'Video' as 'content_type' FROM video 
+WHERE title LIKE " .  $db->quote("%" . $this->param . "%") . "
+OR description LIKE " . $db->quote("%" . $this->param . "%") . "
+OR vtags LIKE " .  $db->quote("%" . $this->param . "%");
+ 
+
+
 	break;
       case "guides":
 	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $this->param . "%") ;
@@ -96,7 +130,10 @@ class Autocomplete {
     foreach ($result as $myrow){
       $arr[$i]['value'] = $myrow[0];
       $arr[$i]['label'] = $myrow[1];
-      $i++;
+if(isset($myrow[2])) {
+      $arr[$i]['category'] = $myrow[2];
+}      
+$i++;
     }
 
     $response = json_encode($arr);
