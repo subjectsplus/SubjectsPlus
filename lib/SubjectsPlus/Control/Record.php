@@ -302,8 +302,10 @@ class Record {
 	</div>
 
 
-	</div></div>
-	</form>";
+	</div>";
+
+  	$this->outputRelatedPluslets();
+  	print "</div></form>";
 }
 
 public function buildLocation() {
@@ -559,6 +561,38 @@ public function buildLocation() {
  	</div>";
 
  	return $oursubjects;
+ }
+
+ public function outputRelatedPluslets()
+ {
+ 	global $BaseURL;
+
+ 	$db = new Querier();
+
+ 	$q = "SELECT sub.subject_id, p.pluslet_id, t.tab_index, p.title, sub.subject
+			FROM pluslet p
+			INNER JOIN pluslet_section ps
+			ON p.pluslet_id = ps.pluslet_id
+			INNER JOIN section s
+			ON ps.section_id = s.section_id
+			INNER JOIN tab t
+			ON s.tab_id = t.tab_id
+			INNER JOIN subject sub
+			ON t.subject_id = sub.subject_id
+			WHERE p.body LIKE '%{{dab},{{$this->_record_id}}%'";
+
+ 	$lobjRows = $db->query($q);
+
+ 	$lstrBody = "";
+
+ 	foreach( $lobjRows as $lobjRow )
+ 	{
+ 		$lstrBody .= "<div><a href=\"{$BaseURL}control/guides/guide.php?subject_id={$lobjRow['subject_id']}#box-{$lobjRow['tab_index']}-{$lobjRow['pluslet_id']}\">
+						{$lobjRow['subject']} <span class=\"small_extra\">{$lobjRow['title']}</span>
+						</a></div>";
+ 	}
+
+ 	makePluslet( 'Referenced in Pluslets', $lstrBody, 'no-overflow' );
  }
 
  public function deleteRecord() {
