@@ -471,6 +471,10 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
     color: #222222;
 }
 
+.ui-dialog {
+	background-color: #fff !important;
+	border: 1px solid #ccc;
+}
 .ui-tabs .ui-tabs-panel {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-width: 0;
