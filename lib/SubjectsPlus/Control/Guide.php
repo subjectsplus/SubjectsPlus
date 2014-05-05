@@ -898,12 +898,8 @@ class Guide
     		} else {
     			global $is_responsive;
 
-    			$query = "select extra from subject where subject_id = '{$this->_subject_id}'";
-    			$result = $db->query($query);
 
-    			//print_r ($result);
-    			$jobj = json_decode($result[0]["extra"]);
-    			$col_widths = explode("-", $jobj->{'maincol'});
+    			$col_widths = explode("-", $lobjSection['layout']);
     			$purified = ""; // init
 
     			if (isset($col_widths[0]) && $col_widths[0] > 0) {
@@ -994,24 +990,6 @@ class Guide
             . '</div></div>';
 
         return $col;
-    }
-
-    function updateExtra()
-    {
-
-        // Encode our extra as json
-        $json_extra = json_encode($this->_extra);
-
-        /////////////////////
-        // update subject table
-        /////////////////////
-
-        $qUpExtra = "UPDATE subject
-        SET extra = '" . $db->quote($json_extra) . "'
-        WHERE subject_id = " . scrubData($this->_subject_id, "integer");
-
-        $rUpExtra = $db->query($qUpExtra);
-
     }
 
     function modifySS()
