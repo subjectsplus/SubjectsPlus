@@ -135,7 +135,7 @@ if ($alpha_id & $full_query) {
             // weed out extraneous P tags
             $blurb = stripP($blurb);
 
-            $results .= "<div class=\"record-results\" class=\"$row_colour\">\n
+            $results .= "<div class=\"record-results $row_colour\">\n
         <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
    
         $results .= "</div>\n";
@@ -144,26 +144,34 @@ if ($alpha_id & $full_query) {
         }
     }
 }
-print "<br /><br />
-<div class=\"ctag-list-box\">
-    <div class=\"box\">
-    <div align=\"center\">$atoz</div>
-    <div align=\"center\" class=\"ctag_list\">$tag_list</div>
-    <h2 align=\"center\">$alpha_id</h2>
-    </div>
-    <div class=\"box no_overflow\">$results</div>
-</div>
-<div class=\"new-record\">
-    <div class=\"box\">
-  <h2 class=\"bw_head\">" . _("New Record") . "</h2>
-  
+
+// let's put it together
+
+$letter_header_body = "<div align=\"center\" style=\"font-size: 1.2em;\">$atoz</div>\n
+<div align=\"center\" class=\"ctag_list\">$tag_list</div>
+<h2 align=\"center\">$alpha_id</h2>
+<div class=\"box no_overflow\">$results</div>
+
+";
+ $new_record_body = " 
   <ol>
     <li>" . _("Make sure the item doesn't already exist!") . "</li>
     <li><a href=\"record.php\">" . _("Create new item") . "</a></li>
-  </ol>
-  </div>
-</div>
-";
+  </ol>";
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">  
+  ";
+makePluslet(_("Browse Records"), $letter_header_body, "no_overflow");
+
+print "</div>"; // close pure-u-2-3
+print "<div class=\"pure-u-1-3\">";
+
+makePluslet(_("New Record"), $new_record_body, "no_overflow");
+
+print "</div>"; // close pure-u-1-3
+print "</div>"; // close pure-g-r
+
 
 include("../includes/footer.php");
 ?>

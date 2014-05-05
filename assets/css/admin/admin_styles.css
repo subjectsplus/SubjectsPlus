@@ -869,25 +869,19 @@ div.ctag_list a:hover {
   color: #fff;
 }
 
-.rec_delete_confirm {
-    text-align: right;
-    background-color: yellow;
-    margin: 5px;
-    padding:  2px 1em 2px 2px;
+/* FAQ layout */
 
-    top: 10px;
-position: absolute;
-right: 1%;
-padding: 1%;
-
-
+.faq_wrapper {
+    clear: both; float: left;  padding: 3px 5px; width: 98%;
 }
 
-.rec_delete_confirm a {
-    cursor: pointer;
-    text-decoration:underline;
+.faq_tools {
+    float: left; width: 64px; max-width: 10%;
 }
 
+.faq-question {
+    float: left; width: 90%;
+}
 
 /* Form Feedback */
 
@@ -1520,12 +1514,29 @@ color:whitesmoke;
 }
 
 
+.rec_delete_confirm {
+    text-align: right;
+    background-color: yellow;
+    margin: 5px;
+    padding:  2px 1em 2px 2px;
+  
+    position: relative;
+    right: 1.2em;
+    padding: 1%;
+
+
+}
+
+.rec_delete_confirm a {
+    cursor: pointer;
+    text-decoration:underline;
+}
+
 .rec_delete_confirm.growl {
     text-align: right;
     margin: 5px;
     padding:  2px 1em 2px 2px;
     top: 10px;
-    position: fixed;
     right: 1%;
     padding: 1%;
     opacity:1;
@@ -1929,7 +1940,7 @@ display:none;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
+.pure-button-primary, .pure-button-selected, .pure-button-topsearch, a.pure-button-primary, a.pure-button-selected {
     background-color: #E488B6;
     background-color: #C03957;
     color: #FFFFFF;
@@ -1946,6 +1957,12 @@ display:none;
     background: rgb(66, 184, 221); /* this is a light blue */
     color: #FFFFFF;
     font
+
+}
+
+.pure-button-topsearch {
+    font-weight: normal;
+    background-color: #E091B0;
 
 }
 

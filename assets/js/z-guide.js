@@ -745,8 +745,8 @@ function makeDeleteable( lstrSelector )
     jQuery(lstrSelector).livequery('click', function(event) {
 
         var delete_id = jQuery(this).attr("id").split("-");
-        jQuery(this).after('<div class="rec_delete_confirm growl growl-default">Are you sure?  <a class="button" id="confirm-yes-' + delete_id[1] + '">Yes</a>  <a class="button" id="confirm-no">No</a></div>');
-        //jQuery(this).after('<div class="rec_delete_confirm">Are you sure?  <a id="confirm-yes-' + delete_id[1] + '">Yes</a> | <a id="confirm-no">No</a></div>');
+        //jQuery(this).after('<div class="rec_delete_confirm growl growl-default">Are you sure?  <a class="button" id="confirm-yes-' + delete_id[1] + '">Yes</a>  <a class="button" id="confirm-no">No</a></div>');
+        jQuery(this).after('<div class="rec_delete_confirm">Are you sure?  <a id="confirm-yes-' + delete_id[1] + '">Yes</a> | <a id="confirm-no">No</a></div>');
         return false;
     });
 

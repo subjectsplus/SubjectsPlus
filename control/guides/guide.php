@@ -702,7 +702,7 @@ ob_end_flush();
 <input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra" />
 
 <!-- Save Button -->
-<p align="center" id="savour"><button class="button" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
+<p align="center" id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
 	 </div>
 	 <!-- end guide header -->
 

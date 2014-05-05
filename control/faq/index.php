@@ -55,12 +55,12 @@ if ($faqArray) {
     $last_revised_line = lastModded("faq", $value[0]);
 // Answered FAQs
     $faq_list .= "
-            <div class=\"striper faq-answered$row_colour1\">
-                <div class=\"faq-answered-child\">
+            <div class=\"striper faq_wrapper $row_colour1\">
+                <div class=\"faq_tools\">
                 <a href=\"faq.php?faq_id=$value[0]&amp;wintype=pop\" class=\"showmedium-reloader\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
                 &nbsp; &nbsp;<a href=\"" . $FAQPath . "?faq_id=$value[0]\" target=\"_blank\"><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
                 </div>
-                <div class=\"faq-short-question-wrap\">
+                <div class=\"faq_question\">
                  $short_question <span class=\"faq-short-question\">($last_revised_line)</span>
                 </div>
             </div>";
@@ -72,26 +72,20 @@ if ($faqArray) {
   $faq_list = "<p>" . _("No FAQs yet.  Why not dream one up?") . "</p>";
 }
 
+$faq_body = "<p><strong>$row_count1 " . _("FAQs visible");
+
+if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
+  $faq_body .= "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)</strong></p>";
+}
+
+$faq_body .= $faq_list;
+
 ?>
 <div class="pure-g-r">
   <div class="pure-u-2-3">  
-    <div class="pluslet">
-      <div class="titlebar">
-        <div class="titlebar_text"><?php print _("View FAQs"); ?></div>
-        <div class="titlebar_options"></div>
-      </div>
-      <div class="topimage"></div>
-      <div class="pluslet_body">
-        <p><strong><?php print $row_count1 . " " . _("FAQs visible"); ?></strong> 
-        <?php
-        if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
-          print "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
-        }
-        ?>
-        </p>
-        <?php echo $faq_list; ?>
-      </div>
-    </div>
+
+<?php makePluslet(_("View FAQs"), $faq_body, "no_overflow"); ?>
+
   </div>
   <div class="pure-u-1-3">  
     <div class="pluslet">
