@@ -952,7 +952,7 @@ function setupMiscLiveQueries()
 
      });
 
-    jQuery('.pure-checkbox input').on('change',  function() {
+    jQuery('.pure-checkbox input').livequery('change',  function() {
 
             var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
             //console.log(pluslet_id);
