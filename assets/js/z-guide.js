@@ -958,6 +958,7 @@ function setupMiscLiveQueries()
             //console.log(pluslet_id);
             jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-Basic');
                                // console.log(jQuery(pluslet_id));
+    	  	jQuery("#response").hide();
             jQuery("#save_guide").fadeIn();
 
 
@@ -1195,6 +1196,7 @@ function makeSectionSlider( lstrSelector )
 				reLayout(sec_id, lw, mw, sw);
 
 				//show save guide button
+				jQuery("#response").hide();
 				jQuery("#save_guide").fadeIn();
 			}
 		});
