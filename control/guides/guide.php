@@ -395,6 +395,28 @@ ob_end_flush();
    //preselect first
    tabs.tabs('select', 0);
 
+ 	//go to tab and pulsate pluslet if hash exists in url
+ 	if( window.location.hash )
+ 	{
+ 		setTimeout(function()
+ 		{
+	 		if( window.location.hash.split('-').length == 3  )
+	 		{
+		 		var tab_id = window.location.hash.split('-')[1];
+		 		var box_id = window.location.hash.split('-')[2];
+		 		var selected_box = ".pluslet-" + box_id;
+
+		 		$('#tabs').tabs('select', tab_id);
+
+		 		jQuery('html, body').animate({scrollTop:jQuery('a[name="box-' + box_id + '"]').offset().top}, 'slow');
+
+		 		jQuery(selected_box).effect("pulsate", {
+		 			times:1
+		 		}, 2000);
+	 		}
+ 		}, 500);
+ 	}
+
    // modal dialog init: custom buttons and a "close" callback reseting the form inside
    var dialog = $( "#dialog" ).dialog({
      autoOpen: false,
@@ -638,19 +660,19 @@ ob_end_flush();
 	     minLength	: 3,
 	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
-	      
+
 	       event.preventDefault();
-	    
+
 
 	     },
 	     select: function(event, ui) {
-	    
-	      
+
+
 	       event.preventDefault();
 	       $(".find-guide-input").val(ui.item.label);
-	       
+
 	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
-	       
+
 	       jQuery('#tabs').tabs('select', in_tab);
 
 	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
