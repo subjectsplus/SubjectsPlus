@@ -672,6 +672,7 @@ class Guide
         /////////////////////
         // update subject table
         /////////////////////
+	$db = new Querier();
 
         $qUpSubject = "UPDATE subject SET subject = '" . $db->quote(scrubData($this->_subject, "text")) . "',
         shortform = '" . $db->quote(scrubData($this->_shortform, "text")) . "',
@@ -683,7 +684,7 @@ class Guide
         extra = '" . $db->quote($json_extra) . "'
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
-        $rUpSubject = $db->query($qUpSubject);
+        $rUpSubject = $db->exec($qUpSubject);
 
 
         // Insert subject_department relationship
@@ -707,7 +708,7 @@ class Guide
 
         $qClearSS = "DELETE FROM staff_subject WHERE subject_id = " . $this->_subject_id;
 
-        $rClearSS = $db->query($qClearSS);
+        $rClearSS = $db->exec($qClearSS);
 
         $this->_debug .= "<p>2. clear staff_subject: $qClearSS</p>";
 
