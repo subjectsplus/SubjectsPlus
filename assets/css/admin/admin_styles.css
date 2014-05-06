@@ -885,15 +885,18 @@ div.ctag_list a:hover {
 
 /* Form Feedback */
 
+
+
 .feedback {
     position: relative;
     float: left;
     background-color: #DD647F;
     width: 100%;
     text-align: center;
-    display: block;
     font-weight: bold;
-    background: rgba(221, 100, 127, 1);
+    margin-top:0px;
+    padding: .5em 0;
+    display: none;
 }
 
 div.feedback a:link {
@@ -1105,7 +1108,12 @@ div.tooltip div
 }
 
 #response {
-    position: absolute; float: left; background-color: #DD647F; width: 100%; text-align:center; display: none;
+    position: absolute; 
+    float: left; 
+    background-color: #DD647F; 
+    width: 100%; 
+    text-align:center; 
+    display: none;
     margin-top:0px;
     padding: .5em 0;
 }
@@ -1785,10 +1793,19 @@ background: #C03957;
     padding: .5em .2em;
 }
 
+/* forms */
 /* jquery ui popup boxes */
 
 label {
     clear: left;
+    font-size: 1em;
+    color: #333;
+    font-weight: bold;
+    
+}
+
+.pure-form-stacked label {
+    margin-top: 1em;
 }
 
 /* guide tab editing zone

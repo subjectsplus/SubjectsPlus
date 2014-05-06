@@ -185,10 +185,10 @@ class Record {
         <label for=\"record_title\">" . _("Record Title") . "</label>
         <input type=\"text\" name=\"title\" id=\"record_title\" class=\"pure-input-1 required_field\" value=\"" . $this->_title . "\" />
 
-  	<label for=\"record_label\">" . _("Alternate Title") . "</label>
+  	<label for=\"alternate_record_title\">" . _("Alternate Title") . "</label>
   	<input type=\"text\" name=\"alternate_title\" id=\"alternate_record_title\" class=\"pure-input-1\" value=\"" . $this->_alternate_title . "\" />
 
-  	<label for=\"record_label\">" . _("Description") . "</label>
+  	<label for=\"description\">" . _("Description") . "</label>
 
   	";
 
@@ -493,7 +493,7 @@ public function buildLocation() {
 
     echo "
     <label for=\"helpguide[]\">" . _("Help Guide Location") . "</label>
-    <input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" size=\"60\" />
+    <input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" id=\"helpguide[]\"  size=\"60\" />
     ";
  } else {
  	echo "<br /><br /><input type=\"hidden\" name=\"eres_display[]\" value=\"{$this->_az_display}\">
