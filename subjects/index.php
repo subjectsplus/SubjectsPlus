@@ -225,6 +225,7 @@ include("includes/footer.php");
         // add rowstriping
         stripeR();
 
+/*
         $("[id*=show]").live("change", function() {
 
             var showtype_id = $(this).attr("id").split("-");
@@ -234,7 +235,7 @@ include("includes/footer.php");
             stripeR();
 
         });
-
+*/
         function stripeR() {
             $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
             $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
