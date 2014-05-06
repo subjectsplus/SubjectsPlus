@@ -122,7 +122,7 @@ function generatejQuery($use_jquery) {
   global $AssetPath;
 
 // Always load jQuery core, ui, livequery
-  $myjquery = "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\"></script>\n
+  $myjquery = "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\"></script>\n
 	<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n";
 
 // If there's not an array of values, send 'er back
@@ -140,7 +140,7 @@ function generatejQuery($use_jquery) {
   }
 
   if (in_array("ui", $use_jquery)) {
-    $myjquery .= "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js\"></script>";
+    $myjquery .= "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\"></script>";
   }
 
   if (in_array("ui_styles", $use_jquery)) {

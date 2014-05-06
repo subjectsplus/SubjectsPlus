@@ -58,16 +58,17 @@ class CompleteMe {
 
 $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
     _renderMenu: function( ul, items ) {
-      var that = this,
-        currentCategory = \"FAQs\";
-console.log(items);
+      var that = this;
+        currentCategory = \"\";
+
       $.each( items, function( index, item ) {
         if ( item.category != currentCategory ) {
+if (item.category != undefined) {
           ul.append( \"<li class='ui-autocomplete-category'>\" + item.category + \"</li>\" );
           currentCategory = item.category;
-        }
-console.log(item);
-console.log(ul);
+}        
+}
+
         that._renderItemData( ul, item );
       });
     }

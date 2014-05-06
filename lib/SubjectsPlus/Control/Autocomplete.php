@@ -109,11 +109,10 @@ $q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.su
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
         WHERE p.body LIKE " . $db->quote("%" . $this->param . "%")   . 
-					 " AND t.subject_id = " . $db->quote( $this->subject_id );
+" AND t.subject_id = " . $db->quote( $this->subject_id );
 
 break;
 case "records":
-
 $q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $this->param . "%") ;
 break;		
 case "faq":
@@ -123,7 +122,7 @@ case "talkback":
 $q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
 break;	
 case "admin":
-$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $db->quote("%" . $this->param . "%") . ") OR (lname LIKE " . $db->quote("%" . $param . "%") . ")";
+$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $db->quote("%" . $this->param . "%") . ") OR (lname LIKE " . $db->quote("%" . $this->param . "%") . ")";
 break;
 
 }
