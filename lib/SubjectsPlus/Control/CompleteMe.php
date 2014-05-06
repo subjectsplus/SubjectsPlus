@@ -54,21 +54,50 @@ class CompleteMe {
 
     // now print out some variables for the js
     echo "<script type=\"text/javascript\">
+
+
+$.widget(\"custom.catcomplete\", $.ui.autocomplete, {
+    _renderMenu: function( ul, items ) {
+      var that = this,
+        currentCategory = \"FAQs\";
+console.log(items);
+      $.each( items, function( index, item ) {
+        if ( item.category != currentCategory ) {
+          ul.append( \"<li class='ui-autocomplete-category'>\" + item.category + \"</li>\" );
+          currentCategory = item.category;
+        }
+console.log(item);
+console.log(ul);
+        that._renderItemData( ul, item );
+      });
+    }
+  });
+
+
 	var startURL = '$this->target_url';
 
 
-
 	// Caching
-	jQuery('#" . $this->input_id . "').autocomplete({
+	jQuery('#" . $this->input_id . "').catcomplete({
 
 		minLength	: 3,
 		source		: '" . $data_location . "',
 		focus: function(event, ui) {
-//console.log('focused');
-			return;
+
+   event.preventDefault();
+//	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
+
+
+
+
+
 		},
 		select: function(event, ui) {
-//console.log('selected');
+
+
+             event.preventDefault();
+	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
+
 			location.href = startURL + ui.item.value;
 		
                 }

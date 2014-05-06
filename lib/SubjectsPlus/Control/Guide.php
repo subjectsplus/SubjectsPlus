@@ -26,9 +26,9 @@ class Guide
     private $_department;
     private $_parent;
     private $_debug;
-     
+
     public $_ok_staff = array();
-  
+
     public $main_col_size;
 
     public $_isAdmin;
@@ -670,14 +670,14 @@ $main_col_size = null;
         /////////////////////
 	$db = new Querier();
 
-        $qUpSubject = "UPDATE subject SET subject = '" . $db->quote(scrubData($this->_subject, "text")) . "',
-        shortform = '" . $db->quote(scrubData($this->_shortform, "text")) . "',
-        description = '" . $db->quote(scrubData($this->_description, "text")) . "',
-        keywords = '" . $db->quote(scrubData($this->_keywords, "text")) . "',
-        redirect_url = '" . $db->quote(scrubData($this->_redirect_url, "text")) . "',
-        active = '" . $db->quote(scrubData($this->_active, "integer")) . "',
-        type = '" . $db->quote(scrubData($this->_type, "text")) . "',
-        extra = '" . $db->quote($json_extra) . "'
+    	$ $qUpSubject = "UPDATE subject SET subject = " . $db->quote(scrubData($this->_subject, "text")) . ",
+        shortform = " . $db->quote(scrubData($this->_shortform, "text")) . ",
+        description = " . $db->quote(scrubData($this->_description, "text")) . ",
+        keywords = " . $db->quote(scrubData($this->_keywords, "text")) . ",
+        redirect_url = " . $db->quote(scrubData($this->_redirect_url, "text")) . ",
+        active = " . $db->quote(scrubData($this->_active, "integer")) . ",
+        type = " . $db->quote(scrubData($this->_type, "text")) . ",
+        extra = " . $db->quote($json_extra) . "
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
         $rUpSubject = $db->exec($qUpSubject);

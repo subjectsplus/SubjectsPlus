@@ -664,6 +664,7 @@ ob_end_flush();
 	     focus: function(event, ui) {
 
 	       event.preventDefault();
+	       jQuery(".find-guide-input").val(ui.item.label);
 
 
 	     },
@@ -671,7 +672,7 @@ ob_end_flush();
 
 
 	       event.preventDefault();
-	       $(".find-guide-input").val(ui.item.label);
+	       jQuery(".find-guide-input").val(ui.item.label);
 
 	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
 

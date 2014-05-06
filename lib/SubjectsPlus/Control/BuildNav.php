@@ -19,15 +19,15 @@ class BuildNav {
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
     $staff_page = $CpanelPath . "admin/profile.php";
+    
+    
+    if ($_SESSION["fname"]) {
+      $name = $_SESSION["fname"];
       
-      
-      if ($_SESSION["fname"]) {
-          $name = $_SESSION["fname"];
-          
-      } else {
-          $name = $_SESSION["email"];
-      }
-      
+    } else {
+      $name = $_SESSION["email"];
+    }
+    
     print "
       <ul id=\"topnav\">
       <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
@@ -47,12 +47,12 @@ class BuildNav {
     ///////////////
     if (isset($_SESSION["records"]) && $_SESSION["records"] == 1) {
 
-        print "
+      print "
 	     <li";
-        if ($subcat == "records") {
-          print " class=\"selected\"";
-        }
-        print "><a href=\"$CpanelPath" . "records/\">" . _("Records") . "</a>
+      if ($subcat == "records") {
+        print " class=\"selected\"";
+      }
+      print "><a href=\"$CpanelPath" . "records/\">" . _("Records") . "</a>
         <div>
          <ul>
             <li><a href=\"$CpanelPath" . "records/record.php\">" . _("New Record") . "</a></li>
@@ -108,7 +108,7 @@ class BuildNav {
         print " class=\"selected\"";
       }
 
-    print "><a href=\"$CpanelPath" . "talkback/\">" . _("TalkBack") . "</a></li>";
+      print "><a href=\"$CpanelPath" . "talkback/\">" . _("TalkBack") . "</a></li>";
     }
 
     // Videos tab
@@ -151,7 +151,7 @@ class BuildNav {
       if ($subcat == "admin") {
         print " class=\"selected\"";
       }
-    print "><a href=\"$CpanelPath" . "admin/\">" . _("Admin") . "</a>
+      print "><a href=\"$CpanelPath" . "admin/\">" . _("Admin") . "</a>
       <div>
     		<ul>
     			<li><a href=\"$CpanelPath" . "admin/user.php\">" . _("Add New User") . "</a></li>
@@ -180,8 +180,8 @@ class BuildNav {
         $input_text = _("Search faqs");
         $target_url = "faq.php?faq_id=";
         break;
-	case "home":
-	 $input_text = _("Search all");
+      case "home":
+	$input_text = _("Search all");
         $target_url = "../control/guides/guide.php?subject_id=";
 	break;
       case "talkback";
@@ -200,9 +200,9 @@ class BuildNav {
 
     print "
     <li class=\"nohover\">";
-        $input_box = new CompleteMe("sp_search", $CpanelPath . "search.php", $target_url, $input_text, $subcat, "", "private");
-        $input_box->displayBox();
-      print "
+    $input_box = new CompleteMe("sp_search", $CpanelPath . "search.php", $target_url, $input_text, $subcat, "", "private");
+    $input_box->displayBox();
+    print "
     </li>";
 
 
