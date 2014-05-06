@@ -1191,6 +1191,20 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "") {
   </div>";
 }
 
+/**
+ * feedBack() is to wrap the feedback in some styling
+ *
+ * @return string
+ */
+
+function feedBack($message="") {
+  if ($message != "") {
+    return "<div id=\"response\">$message</div>";
+  } else {
+    return "";
+  }
+  
+}
 
 // Mod in_array to work with multidimensional arrays
 function in_array_r($needle, $haystack, $strict = false) {

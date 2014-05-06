@@ -111,7 +111,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   print "<div id=\"maincontent\">";
 }
 
-echo "<div class=\"feedback\">$feedback</div><br /><br />";
+feedBack($feedback);
 
 /////////////////////////
 // SHOW FORM

@@ -26,9 +26,9 @@ class Guide
     private $_department;
     private $_parent;
     private $_debug;
-     
+
     public $_ok_staff = array();
-  
+
     public $main_col_size;
 
     public $_isAdmin;
@@ -204,7 +204,7 @@ class Guide
         }
 
         echo "
-            <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form\" accept-charset=\"UTF-8\">
+            <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
             <div class=\"pure-g-r\">
               <div class=\"pure-u-1-2\">
@@ -215,16 +215,15 @@ class Guide
                     </div>
                 <div class=\"pluslet_body\">
 
-            <span class=\"record_label\">" . _("Guide") . "</span><br />
-            <input type=\"text\" name=\"subject\" id=\"record_title\" size=\"50\" class=\"required_field\" value=\"" . $this->_subject . "\">
+            <label for=\"record_title\">" . _("Guide") . "</label>
+            <input type=\"text\" name=\"subject\" id=\"record_title\" class=\"pure-input-1-2 required_field\" value=\"" . $this->_subject . "\">
 
-            <span class=\"record_label\">" . _("Short Form") . "</span><br />
-            <input type=\"text\" name=\"shortform\" id=\"record_shortform\" size=\"20\" class=\"required_field\" value=\"" . $this->_shortform . "\">
-            <br />
-            <span class=\"smaller\">* " . _("Short label for subject--minus spaces, ampersands, etc.") . "</span>
+            <label for=\"record_shortform\">" . _("Short Form") . "</label>
+            <input type=\"text\" name=\"shortform\" id=\"record_shortform\" size=\"20\" class=\"pure-input-1-4 required_field\" value=\"" . $this->_shortform . "\">
 
-            <p>
-            <span class=\"record_label\">" . _("Type of Guide") . "</span>
+            <span class=\"smaller\">* " . _("Short label that shows up in URL--don't use spaces, ampersands, etc.") . "</span>
+
+            <label for=\"type\">" . _("Type of Guide") . "</label>
             ";
 
         /////////////////////
@@ -264,8 +263,8 @@ class Guide
         $current_dept_array = $current_dept->query($current_dept_query);
 
         ?>
-        <p>
-            <span class="record_label"> Department </span>
+
+            <label for="department"> Department </label>
 
 
             <select name="department">
@@ -278,7 +277,6 @@ class Guide
                 ?>
 
             </select>
-        </p>
 
         <?php
 
@@ -305,7 +303,7 @@ class Guide
 
 
         ?>
-        <span class="record_label"> Parent Guide </span>
+        <label for="parent">Parent Guide </label>
         <select name="parent">
 
             <option value="<?php if ($current_parent_array) {
@@ -334,7 +332,7 @@ class Guide
         ////////////////////
 
 
-        $is_live = "<span class=\"record_label\">" . _("Publish Guide (publicly accessible)?") . "</span><br />
+        $is_live = "<label for=\"active\">" . _("Publish Guide (publicly accessible)?") . "</label>
     <input name=\"active\" type=\"radio\" value=\"1\"";
         if ($this->_active == 1) {
             $is_live .= " checked=\"checked\"";
@@ -343,8 +341,7 @@ class Guide
         if ($this->_active == 0) {
             $is_live .= " checked=\"checked\"";
         }
-        $is_live .= " /> " . _("No") . "
-    <br class=\"clear-both\" /><br />";
+        $is_live .= " /> " . _("No");
 if (isset($main_col_size)) {
 } else {
 $main_col_size = null;
@@ -354,13 +351,13 @@ $main_col_size = null;
 
         echo "
 
-    <br /><br />
     $is_live
     $screen_layout
     </div>
     </div>
+    </div>
     <!-- right hand column -->
-    <div class=\"pure-u-1-3\">";
+    <div class=\"pure-u-1-2\">";
 
     $content = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
 
@@ -376,10 +373,7 @@ $main_col_size = null;
     $last_mod = _("Last modified: ") . lastModded("record", $this->_subject_id);
     $title = "<div id=\"last_edited\">$last_mod</div>";
 
-  makePluslet($title, $content, "no_overflow");
-
-
-        echo "</div>";
+    makePluslet($title, $content, "no_overflow");
 
         /////////////////
         // Staffers
@@ -433,42 +427,37 @@ $main_col_size = null;
             $discipline_string = $disciplineMe->display();
         }
 
-        echo "
-    <div class=\"box no_overflow\" id=\"staff_menu\">
-    <h2 class=\"bw_head\">" . _("Staff") . "</h2>
+        $staff_box = "$staff_string <div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->";
 
-    $staff_string
-    <div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->
-    </div>
-    <div class=\"box\"  id=\"metadata_menu\">
-    <h2 class=\"bw_head\">" . _("Metadata") . "</h2>
+        makePluslet(_("Staff"), $staff_box, "no_overflow");
 
+        //////////////
+        // Metadata
+        //////////////
 
-    <span class=\"record_label\">" . _("Description") . "</span><br />
-    <textarea name=\"description\" id=\"record_description\" class=\"\" cols=\"35\" rows=\"2\">" . $this->_description . "</textarea>
-    <br />
-    <br />
-    <span class=\"record_label\">" . _("Keywords (separate with commas)") . "</span><br />
-    <input type=\"text\" name=\"keywords\" id=\"record_keywords\" size=\"40\" class=\"\" value=\"" . $this->_keywords . "\">
-    <br />
-    <br />
-    <span class=\"record_label\">" . _("Redirect Url") . "</span><br />
-    <input type=\"text\" name=\"redirect_url\" id=\"record_redirect_url\" size=\"40\" class=\"\" value=\"" . $this->_redirect_url . "\">
-    <br />
-    <br />";
+        $metadata_box = "
+        <label for=\"description\">" . _("Description") . "</label>
+        <textarea name=\"description\" id=\"record_description\" class=\"\" cols=\"35\" rows=\"2\">" . $this->_description . "</textarea>
+
+        <label for=\"keywords\">" . _("Keywords (separate with commas)") . "</label>
+        <input type=\"text\" name=\"keywords\" id=\"record_keywords\" size=\"40\" class=\"\" value=\"" . $this->_keywords . "\">
+        <label for=\"record_label\">" . _("Redirect Url (for non-SubjectsPlus content)") . "</label>
+        <input type=\"text\" name=\"redirect_url\" id=\"record_redirect_url\" size=\"40\" class=\"\" value=\"" . $this->_redirect_url . "\">        
+        ";
 
         if ($use_disciplines == TRUE) {
 
-            echo "<span class=\"record_label\">" . _("Parent Disciplines") . "</span><br />
+        $metadata_box .= "<label for=\"discipline_list\">" . _("Parent Disciplines") . "</span><br />
         $discipline_string
         <div id=\"discipline_list\">$discipliner_list</div> <!-- disciplines inserted here -->
         </div>";
 
         }
 
+        makePluslet(_("Metadata"), $metadata_box, "no_overflow");
 
-        echo "</div>
-    </form>";
+
+        echo "</div>\n</form>";
     }
 
     public function outputStaff($value)
@@ -681,14 +670,14 @@ $main_col_size = null;
         /////////////////////
 	$db = new Querier();
 
-        $qUpSubject = "UPDATE subject SET subject = '" . $db->quote(scrubData($this->_subject, "text")) . "',
-        shortform = '" . $db->quote(scrubData($this->_shortform, "text")) . "',
-        description = '" . $db->quote(scrubData($this->_description, "text")) . "',
-        keywords = '" . $db->quote(scrubData($this->_keywords, "text")) . "',
-        redirect_url = '" . $db->quote(scrubData($this->_redirect_url, "text")) . "',
-        active = '" . $db->quote(scrubData($this->_active, "integer")) . "',
-        type = '" . $db->quote(scrubData($this->_type, "text")) . "',
-        extra = '" . $db->quote($json_extra) . "'
+    	$ $qUpSubject = "UPDATE subject SET subject = " . $db->quote(scrubData($this->_subject, "text")) . ",
+        shortform = " . $db->quote(scrubData($this->_shortform, "text")) . ",
+        description = " . $db->quote(scrubData($this->_description, "text")) . ",
+        keywords = " . $db->quote(scrubData($this->_keywords, "text")) . ",
+        redirect_url = " . $db->quote(scrubData($this->_redirect_url, "text")) . ",
+        active = " . $db->quote(scrubData($this->_active, "integer")) . ",
+        type = " . $db->quote(scrubData($this->_type, "text")) . ",
+        extra = " . $db->quote($json_extra) . "
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
         $rUpSubject = $db->exec($qUpSubject);

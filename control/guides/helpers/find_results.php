@@ -73,7 +73,14 @@ if (count($r) != 0) {
 						WHERE p.pluslet_id = $myrow[0]";
 				$this_sub = $db->query($q2);
 
-				$add_info = "<span style=\"font-size: 10px;\">({$this_sub[0][0]})</span>";
+				if( isset($this_sub[0][0]) )
+				{
+					$add_info = "<span style=\"font-size: 10px;\">({$this_sub[0][0]})</span>";
+				}
+				else
+				{
+					$add_info = "<span style=\"font-size: 10px;\">(No Guide)</span>";
+				}
 			}
 		$results .= "<div style=\"background-color:$row_colour ; padding: 2px;\"><img src=\"$IconPath/list-add.png\" name=\"add-$myrow[0]-$myrow[2]\" border=\"0\" alt=\"add\" /> $myrow[1] $add_info</div>";
 
