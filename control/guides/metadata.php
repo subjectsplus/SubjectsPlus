@@ -15,7 +15,6 @@ $page_title = "Manage Guide Metadata";
 
 $use_jquery = array("ui_styles");
 
-$feedback = "";
 // Suppress header if it is to be shown in colorbox or popup window
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   $no_header = "yes";
@@ -56,11 +55,11 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
     $record->deleteRecord();
     //$record->deBug();
     // Show feedback
-    $feedback = "<div class=\"feedback\" style=\"display: block;\">" . $record->getMessage() . "</div>";
+    $feedback = $record->getMessage();
     // don't display the form again
     $no_form = TRUE;
   } else {
-    $feedback = "<div class=\"feedback\" style=\"display: block;\">" .  _("There is no record by that ID.") . "</div>";
+    $feedback = _("There is no record by that ID.");
   }
   //exit;
 }
@@ -94,7 +93,7 @@ if (isset($_POST["submit_record"])) {
   }
 
   // Show feedback
-  $feedback = "<div class=\"feedback\" style=\"display: block;\"> . $record->getMessage() . "</div>";
+  $feedback = $record->getMessage();
   // See all the queries?
   //$record->deBug();
 }
@@ -103,19 +102,16 @@ if (!isset($no_form)) {
   $record = new Guide($ok_record_id);
 }
 
-
+// show feedback if it isn't already set
+if (!isset($feedback)) {
+  $feedback = $record->getMessage();
+}
 
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   print "<div id=\"maincontent\">";
 }
 
-// show feedback if it isn't already set
-if (!isset($feedback)) {
-  $feedback = "<div class=\"feedback\" style=\"display: block;\"> . $record->getMessage() . "</div>";
-
-}
-
-echo $feedback;
+feedBack($feedback);
 
 /////////////////////////
 // SHOW FORM
