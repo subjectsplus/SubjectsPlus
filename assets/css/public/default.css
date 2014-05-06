@@ -321,6 +321,18 @@ div.pluslet form {
     cursor: pointer;
 }
 
+
+/* jQuery autocomplete search categories */
+
+.ui-autocomplete-category {
+  font-weight: bold;
+  padding: .2em .4em;
+  margin: .8em 0 .2em;
+  line-height: 1.5;
+}
+
+
+
 /* Search boxes on subjects/index.php */
 
 .main_search_box {
@@ -921,3 +933,5 @@ width:55px;
 .float-left {
     float:left;
 }
+
+
