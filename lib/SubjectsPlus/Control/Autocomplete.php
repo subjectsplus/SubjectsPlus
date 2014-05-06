@@ -12,7 +12,7 @@ class Autocomplete {
   private $subject_id;
 
   
- public function setSubjectId($subject_id) {
+  public function setSubjectId($subject_id) {
     $this->subject_id = $subject_id;
   }
 
@@ -85,15 +85,21 @@ SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_t
 WHERE title LIKE " .  $db->quote("%" . $this->param . "%") . "
 OR description LIKE " . $db->quote("%" . $this->param . "%") . "
 OR vtags LIKE " .  $db->quote("%" . $this->param . "%");
- 
 
 
-	break;
-      case "guides":
-	$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $this->param . "%") ;
-	
-      case "guide":
-	$q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.subject FROM pluslet AS p 
+
+break;
+case "guides":
+$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $this->param . "%") 
+											  . "OR shortform LIKE " . $db->quote("%" . $this->param . "%") 
+															     . "OR description LIKE " . $db->quote("%" . $this->param . "%") 
+																				  . "OR keywords LIKE " . $db->quote("%" . $this->param . "%") 
+																								    . "OR type LIKE " . $db->quote("%" . $this->param . "%") ;
+break;	
+
+
+case "guide":
+$q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.subject FROM pluslet AS p 
 	INNER JOIN pluslet_section AS ps 
 	ON ps.pluslet_id = p.pluslet_id
 	INNER JOIN section AS s 
@@ -103,43 +109,43 @@ OR vtags LIKE " .  $db->quote("%" . $this->param . "%");
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
         WHERE p.body LIKE " . $db->quote("%" . $this->param . "%")   . 
-	" AND t.subject_id = " . $db->quote( $this->subject_id );
+					 " AND t.subject_id = " . $db->quote( $this->subject_id );
 
-	break;
-      case "records":
+break;
+case "records":
 
-	$q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $this->param . "%") ;
-	break;		
-      case "faq":
-	$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
-	break;
-      case "talkback":
-	$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
-	break;	
-      case "admin":
-	$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $db->quote("%" . $this->param . "%") . ") OR (lname LIKE " . $db->quote("%" . $param . "%") . ")";
-	break;
-	
-    }
+$q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $this->param . "%") ;
+break;		
+case "faq":
+$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
+break;
+case "talkback":
+$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
+break;	
+case "admin":
+$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $db->quote("%" . $this->param . "%") . ") OR (lname LIKE " . $db->quote("%" . $param . "%") . ")";
+break;
+
+}
 
 
-    $result = $db->query($q);
-    $arr = array();
-    $i = 0;
+$result = $db->query($q);
+$arr = array();
+$i = 0;
 
-    foreach ($result as $myrow){
-      $arr[$i]['value'] = $myrow[0];
-      $arr[$i]['label'] = $myrow[1];
-if(isset($myrow[2])) {
-      $arr[$i]['category'] = $myrow[2];
-}      
-$i++;
-    }
+foreach ($result as $myrow){
+  $arr[$i]['value'] = $myrow[0];
+  $arr[$i]['label'] = $myrow[1];
+  if(isset($myrow[2])) {
+    $arr[$i]['category'] = $myrow[2];
+  }      
+  $i++;
+}
 
-    $response = json_encode($arr);
-    
-    //$this->setJSON($response);
-    return $response;
-  }
+$response = json_encode($arr);
+
+//$this->setJSON($response);
+return $response;
+}
 
 }

@@ -35,6 +35,8 @@ class Search {
 WHERE description LIKE" . $this->getSearch() . "
 OR subject LIKE " . $this->getSearch() . "
 OR keywords LIKE " . $this->getSearch() . "
+OR shortform LIKE " . $this->getSearch() . "
+OR type LIKE " . $this->getSearch() . "
 UNION 
 SELECT pluslet_id AS 'id', title AS 'matching_text', body as 'additional_text', 'Pluslet' AS 'content_type' FROM pluslet 
 WHERE title LIKE " . $this->getSearch() . "
