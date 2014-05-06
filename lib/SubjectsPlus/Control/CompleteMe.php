@@ -66,6 +66,7 @@ $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
 if (item.category != undefined) {
           ul.append( \"<li class='ui-autocomplete-category'>\" + item.category + \"</li>\" );
           currentCategory = item.category;
+console.log(item);
 }        
 }
 
@@ -86,11 +87,6 @@ if (item.category != undefined) {
 		focus: function(event, ui) {
 
    event.preventDefault();
-//	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
-
-
-
-
 
 		},
 		select: function(event, ui) {
@@ -100,7 +96,7 @@ if (item.category != undefined) {
 	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
 
 			location.href = startURL + ui.item.value;
-		
+		        
                 }
 	});
         //autoC.defaultText(defaultSearchText_" . $this->num . ");
