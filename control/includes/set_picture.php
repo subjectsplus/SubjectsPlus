@@ -25,12 +25,6 @@ include("../includes/upload/class.upload.php");
 $feedback = "";
 $result = "";
 
-// Connect to database
-try {
-  } catch (Exception $e) {
-  echo $e;
-}
-
 // Make sure they have permission to change a picture
 // needs to be either theirs, or they're an admin
 

@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 
 include('../includes/autoloader.php');
 use SubjectsPlus\Control\Autocomplete;
@@ -14,4 +15,3 @@ $auto_complete->setSubjectId($_GET["subject_id"]);
 
 }
 echo $auto_complete->search();
-use
