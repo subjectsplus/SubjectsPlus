@@ -442,7 +442,7 @@ $main_col_size = null;
         <label for=\"keywords\">" . _("Keywords (separate with commas)") . "</label>
         <input type=\"text\" name=\"keywords\" id=\"record_keywords\" size=\"40\" class=\"\" value=\"" . $this->_keywords . "\">
         <label for=\"record_label\">" . _("Redirect Url (for non-SubjectsPlus content)") . "</label>
-        <input type=\"text\" name=\"redirect_url\" id=\"record_redirect_url\" size=\"40\" class=\"\" value=\"" . $this->_redirect_url . "\">        
+        <input type=\"text\" name=\"redirect_url\" id=\"record_redirect_url\" size=\"40\" class=\"\" value=\"" . $this->_redirect_url . "\">
         ";
 
         if ($use_disciplines == TRUE) {
@@ -670,7 +670,7 @@ $main_col_size = null;
         /////////////////////
 	$db = new Querier();
 
-    	$ $qUpSubject = "UPDATE subject SET subject = " . $db->quote(scrubData($this->_subject, "text")) . ",
+    	$qUpSubject = "UPDATE subject SET subject = " . $db->quote(scrubData($this->_subject, "text")) . ",
         shortform = " . $db->quote(scrubData($this->_shortform, "text")) . ",
         description = " . $db->quote(scrubData($this->_description, "text")) . ",
         keywords = " . $db->quote(scrubData($this->_keywords, "text")) . ",
