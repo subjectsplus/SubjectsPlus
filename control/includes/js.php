@@ -1,4 +1,6 @@
 <?php
+header('Content-type: application/json');
+ 
     require_once(__DIR__ . "/functions.php");
     require_once(__DIR__ . DIRECTORY_SEPARATOR . "autoloader.php");
 
@@ -25,13 +27,13 @@
     // Creating a refernce to jQuery will allow us to put it first in the file
 
     $am->set('jquery', new AssetCache(
-             new FileAsset($assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR . 'jquery-1.8.2.min.js')
+             new FileAsset($assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR . 'jquery-1.11.1.min.js')
              ,new FilesystemCache($cache)
 
              ));
 
     $am->set('jquery_ui', new AssetCache(
-                                      new FileAsset($assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR . 'jquery-ui-1.8.23.min.js')
+                                      new FileAsset($assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR . 'jquery-ui-1.9.2.min.js')
                                       ,new FilesystemCache($cache)
 
                                       ));

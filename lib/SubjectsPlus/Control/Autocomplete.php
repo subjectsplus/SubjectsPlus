@@ -117,7 +117,7 @@ case "records":
 $q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $this->param . "%") ;
 break;		
 case "faq":
-$q = "SELECT faq_id, LEFT(question, 55) FROM faq WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
+$q = "SELECT faq_id, LEFT(question, 55), 'faq' as 'type'  FROM faq WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
 break;
 case "talkback":
 $q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
@@ -136,8 +136,8 @@ $i = 0;
 foreach ($result as $myrow){
   $arr[$i]['value'] = $myrow[0];
   $arr[$i]['label'] = $myrow[1];
-  if(isset($myrow[2])) {
-    $arr[$i]['category'] = $myrow[2];
+  if(isset($myrow[3])) {
+    $arr[$i]['category'] = $myrow[3];
   }      
   $i++;
 }
