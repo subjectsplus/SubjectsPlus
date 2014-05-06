@@ -91,7 +91,8 @@ switch ($_REQUEST["type"]) {
                 AND ss.staff_id = st.staff_id
                 AND s.shortform = '" . $_POST["shortform"] . "'";
             //print $q;
-            $db = new Querier
+
+            $db = new Querier;
             $r = $db->query($q);
 
             foreach ($r as $row) {

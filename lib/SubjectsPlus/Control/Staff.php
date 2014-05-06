@@ -154,7 +154,7 @@ class Staff {
 
         $staffArray = $db->query($q1);
 
-        $this->_debug .= "<p class=\"debug\">Staff query: $q1";
+      // $this->_debug .= "<p class=\"debug\">Staff query: $q1";
         // Test if these exist, otherwise go to plan B
         if ($staffArray == FALSE) {
           $this->_message = "There is no active record with that ID.  Why not create a new one?";

@@ -29,6 +29,7 @@ class Pluslet {
     protected $_titlebar_styling;
     protected $_debug;
 
+    protected $_pluslet;
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
         $this->_pluslet_id = $pluslet_id;
@@ -135,16 +136,23 @@ class Pluslet {
             $this->_pluslet .= "<div class=\"pluslet_simple no_overflow\">" . htmlspecialchars_decode($this->_body);
             // this div closed outside of if/else
         } else {
+
+    
+
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
 			<a name=\"box-" . $this->_pluslet_id . "\"></a>
             <div class=\"titlebar\">";
+
         	//only if on admin side, display sort icon
-        	if( $this->_visible_id != '' ) {
+
+        if( $this->_visible_id != '' ) {
         		$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
-            }
+	}            
+
 
         	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
-            <div class=\"titlebar_options\">$this->_icons</div>";
+        
+    <div class=\"titlebar_options\">$this->_icons</div>";
 
            if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options

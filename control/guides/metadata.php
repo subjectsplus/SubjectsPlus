@@ -222,12 +222,12 @@ include("../includes/footer.php");
     $("#new_record").submit( function () {
 
       // Check that there is at least one subject
-      var numsub = $(".selected_item_wrapper").length;
+     //    var numsub = $(".selected_item_wrapper").length;
 
-      if (numsub < 1) {
-        alert("<?php print _("You must have at least one subject."); ?>");
-        return false;
-      };
+     // if (numsub < 1) {
+     //   alert("<?php print _("You must have at least one subject."); ?>");
+      //  return false;
+     // };
 
       // check required fields
       // make sure the record isn't a dupe--check for title and location

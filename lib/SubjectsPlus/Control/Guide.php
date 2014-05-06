@@ -26,6 +26,10 @@ class Guide
     private $_department;
     private $_parent;
     private $_debug;
+     
+    public $_ok_staff = array();
+  
+    public $main_col_size;
 
     public $_isAdmin;
 
@@ -341,7 +345,10 @@ class Guide
         }
         $is_live .= " /> " . _("No") . "
     <br class=\"clear-both\" /><br />";
-
+if (isset($main_col_size)) {
+} else {
+$main_col_size = null;
+}
         $screen_layout = "<input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
 
 
@@ -706,6 +713,7 @@ class Guide
         // clear staff_subject
         /////////////////////
 
+/*
         $qClearSS = "DELETE FROM staff_subject WHERE subject_id = " . $this->_subject_id;
 
         $rClearSS = $db->exec($qClearSS);
@@ -716,6 +724,7 @@ class Guide
             echo blunDer("We have a problem with the clear staff_subject query: $qClearSS");
         }
 
+*/
         /////////////////////
         // insert into staff_subject
         ////////////////////
