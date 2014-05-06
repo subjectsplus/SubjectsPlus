@@ -18,6 +18,7 @@ $use_jquery = array("ui_styles");
 // Suppress header if it is to be shown in colorbox or popup window
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   $no_header = "yes";
+  $bonus_css = "relative";
 }
 
 include("../includes/header.php");
@@ -107,11 +108,8 @@ if (!isset($feedback)) {
   $feedback = $record->getMessage();
 }
 
-if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
-  print "<div id=\"maincontent\">";
-}
 
-feedBack($feedback);
+print feedBack($feedback, "relative");
 
 /////////////////////////
 // SHOW FORM
@@ -162,7 +160,7 @@ include("../includes/footer.php");
     // add staffer to list on dropdown
     ///////////////////////////////////
 
-    $('select[name*=staff_id]').live ('change', function() {
+    $('select[name*=staff_id]').livequery('change', function() {
       var our_item_id = $(this).val();
       var our_item_text = $('select[name*=staff_id] :selected').text();
       //var remove_me = ".box_no_overflow option[value=" + our_item_id = "]";
@@ -180,7 +178,7 @@ include("../includes/footer.php");
     // add discipline to list on dropdown
     ///////////////////////////////////
 
-    $('select[name*=discipline_id]').live ('change', function() {
+    $('select[name*=discipline_id]').livequery('change', function() {
       var our_item_id = $(this).val();
       var our_item_text = $('select[name*=discipline_id] :selected').text();
       var remove_me = $('#metadata_menu option[value='+our_item_id+']');

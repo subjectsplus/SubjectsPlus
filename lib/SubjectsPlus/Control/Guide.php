@@ -331,17 +331,22 @@ class Guide
         // Is Live
         ////////////////////
 
-
-        $is_live = "<label for=\"active\">" . _("Publish Guide (publicly accessible)?") . "</label>
+        $is_live .= "<label for=\"active\">" . _("Visibility") . "</label>
     <input name=\"active\" type=\"radio\" value=\"1\"";
         if ($this->_active == 1) {
             $is_live .= " checked=\"checked\"";
         }
-        $is_live .= " /> " . _("Yes") . " &nbsp;&nbsp;&nbsp; <input name=\"active\" type=\"radio\" value=\"0\"";
+        $is_live .= " /> " . _("Public:  Everyone can see") . " <br /> 
+        <input name=\"active\" type=\"radio\" value=\"0\"";
         if ($this->_active == 0) {
             $is_live .= " checked=\"checked\"";
         }
-        $is_live .= " /> " . _("No");
+        $is_live .= " /> " . _("Hidden:  Not listed, but visible if you have the URL") . " <br />
+        <input name=\"active\" type=\"radio\" value=\"2\"";
+        if ($this->_active == 2) {
+            $is_live .= " checked=\"checked\"";
+        }
+        $is_live .= " /> " . _("Suppressed:  Must be logged in to SP to view");
 if (isset($main_col_size)) {
 } else {
 $main_col_size = null;
