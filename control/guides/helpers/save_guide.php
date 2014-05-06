@@ -32,6 +32,23 @@ $subject_id = $_POST["this_subject_id"];
 $qs = "SELECT tab_id FROM tab WHERE subject_id = '$subject_id'";
 $drs = $db->query($qs);
 
+//list all pluslets associated with guide before save that aren't special
+$qp = "SELECT p.pluslet_id
+		FROM pluslet p
+		INNER JOIN pluslet_section ps
+		ON p.pluslet_id = ps.pluslet_id
+		INNER JOIN section sec
+		ON ps.section_id = sec.section_id
+		INNER JOIN tab t
+		ON sec.tab_id = t.tab_id
+		INNER JOIN subject s
+		ON t.subject_id = s.subject_id
+		WHERE s.subject_id = $subject_id
+		AND p.type != 'Special'";
+
+$lobjBeforePluslets = $db->query($qp);
+$lobjAfterPluslets = array(); //initiate list currently saving pluslets
+
 foreach($drs as $row)
 {
 	$qd = "DELETE ps, sec FROM pluslet_section ps
@@ -100,6 +117,8 @@ foreach( $lobjTabs as $lobjTab )
 				$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 0, '$key')";
 				//print $qi . "<br />";
 				$ir = $db->query($qi);
+
+				array_push( $lobjAfterPluslets, $value );
 			}
 		}
 
@@ -108,6 +127,8 @@ foreach( $lobjTabs as $lobjTab )
 				$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 1, '$key')";
 				//print $qi . "<br />";
 				$ir = $db->query($qi);
+
+				array_push( $lobjAfterPluslets, $value );
 			}
 		}
 
@@ -116,6 +137,8 @@ foreach( $lobjTabs as $lobjTab )
 				$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 2, '$key')";
 				//print $qi . "<br />";
 				$ir = $db->query($qi);
+
+				array_push( $lobjAfterPluslets, $value );
 			}
 		}
 
@@ -123,6 +146,21 @@ foreach( $lobjTabs as $lobjTab )
 	}
 
 	$lintTabIndex++;
+}
+
+//delete all pluslets that are not being used anymore to avoid orphans
+foreach( $lobjBeforePluslets as $lobjPluslet )
+{
+	if( !in_array( $lobjPluslet['pluslet_id'], $lobjAfterPluslets ) )
+	{
+		$q = "DELETE FROM pluslet WHERE pluslet_id = {$lobjPluslet['pluslet_id']}";
+
+		if( $db->exec($q) === FALSE)
+		{
+			print "Error could not remove pluslet orphans!";
+			exit;
+		}
+	}
 }
 
 /////////////////////

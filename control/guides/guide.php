@@ -499,6 +499,7 @@ ob_end_flush();
          }
 
          $( this ).dialog( "close" );
+       	 $("#response").hide();
          $('#save_guide').fadeIn();
        },
        "Delete" : function() {
@@ -510,6 +511,7 @@ ob_end_flush();
          tabs.tabs();
          tabCounter--;
          $( this ).dialog( "close" );
+   		 $("#response").hide();
          $('#save_guide').fadeIn();
        },
        Cancel: function() {
@@ -560,9 +562,9 @@ ob_end_flush();
      tabs.find( ".ui-tabs-nav" ).append( li );
 
      var slim = jQuery.ajax({
-       url: "helpers/create_section.php",
-       type: "GET",
-       data: {},
+       url: "helpers/section_data.php",
+       type: "POST",
+       data: { action : 'create' },
        dataType: "html",
        success: function(html) {
          tabs.tabs("destroy");

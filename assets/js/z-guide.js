@@ -17,6 +17,7 @@ jQuery(document).ready(function(){
     makeEditable('a[id*=edit]');
 
     makeDeleteable('a[id*=delete]');
+    makeDeleteable('.section_remove', 'sections');
 
     setupAllColorboxes();
 
@@ -660,6 +661,9 @@ function setupSaveButton( lstrSelector )
 		});
 
 	}
+
+	//make saveGuide global
+	window.saveGuide = saveGuide;
 }
 
 function makeEditable( lstrSelector )
@@ -735,51 +739,83 @@ function makeEditable( lstrSelector )
     });
 }
 
-function makeDeleteable( lstrSelector )
+function makeDeleteable( lstrSelector, lstrType )
 {
-	////////////////////////////
-    // DELETE PLUSLET
-    // removes pluslet from DOM; change must be saved to persist
-    /////////////////////////////
+	if( lstrType == 'sections' )
+	{
+		/////////////////////////////
+		// DELETE SECTION
+		/////////////////////////////
+		jQuery(lstrSelector).livequery('click', function(event) {
 
-    jQuery(lstrSelector).livequery('click', function(event) {
+			var delete_id = jQuery(this).parent().parent().attr("id").split("_")[1];
+			var element_deletion = this;
+			jQuery('<div class="delete_confirm" title="Are you sure?">All content in this section will be deleted.</div>').dialog({
+				autoOpen: true,
+				modal: true,
+				width: "auto",
+				height: "auto",
+				resizable: false,
+				buttons: {
+					"Yes": function() {
+						// Remove node
+						jQuery(element_deletion).parent().parent().remove();
+						jQuery("#response").hide();
+						window.saveGuide();
+						jQuery("#save_guide").fadeOut();
+						$( this ).dialog( "close" );
+						return false;
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+			return false;
+		});
+	}else
+	{
+		////////////////////////////
+		// DELETE PLUSLET
+		// removes pluslet from DOM; change must be saved to persist
+		/////////////////////////////
 
-        var delete_id = jQuery(this).attr("id").split("-");
-        //jQuery(this).after('<div class="rec_delete_confirm growl growl-default">Are you sure?  <a class="button" id="confirm-yes-' + delete_id[1] + '">Yes</a>  <a class="button" id="confirm-no">No</a></div>');
-        jQuery(this).after('<div class="rec_delete_confirm">Are you sure?  <a id="confirm-yes-' + delete_id[1] + '">Yes</a> | <a id="confirm-no">No</a></div>');
-        return false;
-    });
+		jQuery(lstrSelector).livequery('click', function(event) {
 
+			var delete_id = jQuery(this).attr("id").split("-")[1];
+			var element_deletion = this;
+			jQuery('<div class="delete_confirm" title="Are you sure?"></div>').dialog({
+				autoOpen: true,
+				modal: true,
+				width: "auto",
+				height: "auto",
+				resizable: false,
+				buttons: {
+					"Yes": function() {
+						// Delete pluslet from database
+						jQuery('#response').load("helpers/guide_data.php", {
+							delete_id: delete_id,
+							subject_id: subject_id,
+							flag: 'delete'
+						},
+						function() {
+							jQuery("#response").fadeIn();
 
-    jQuery('a[id*=confirm-yes]').livequery('click', function(event) {
-        var this_record_id = jQuery(this).attr("id").split("-");
+						});
 
-
-
-        // Delete pluslet from database
-        jQuery('#response').load("helpers/guide_data.php", {
-            delete_id: this_record_id[2],
-            subject_id: subject_id,
-            flag: 'delete'
-        },
-        function() {
-            jQuery("#response").fadeIn();
-
-        });
-
-        // Remove node
-        jQuery(this).parent().parent().parent().parent().remove();
-
-        return false;
-
-    });
-
-    jQuery('a[id*=confirm-no]').livequery('click', function(event) {
-
-        jQuery(this).parent().remove();
-
-        return false;
-    });
+						// Remove node
+						jQuery(element_deletion).parent().parent().parent().remove();
+						$( this ).dialog( "close" );
+						return false;
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+			return false;
+		});
+	}
 }
 
 function setupAllColorboxes()
@@ -1151,9 +1187,9 @@ function makeAddSection( lstrSelector )
 		var lintSelected = $(tabs).tabs('option', 'selected');
 
 		jQuery.ajax({
-			url: "helpers/create_section.php",
-			type: "GET",
-			data: {},
+			url: "helpers/section_data.php",
+			type: "POST",
+			data: { action : 'create' },
 			dataType: "html",
 			success: function(html) {
 				$('div#tabs-' + lintSelected).append(html);

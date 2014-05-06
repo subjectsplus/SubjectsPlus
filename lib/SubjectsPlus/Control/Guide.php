@@ -203,7 +203,7 @@ class Guide
             <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
             <div class=\"pure-g-r\">
-              <div class=\"pure-u-1-2\">  
+              <div class=\"pure-u-1-2\">
                 <div class=\"pluslet\">
                     <div class=\"titlebar\">
                       <div class=\"titlebar_text\">$guide_title_line</div>
@@ -363,7 +363,7 @@ class Guide
     if ($this->_subject_id != "") {
             if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
             $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
-        } 
+        }
     }
     // get edit history
     $last_mod = _("Last modified: ") . lastModded("record", $this->_subject_id);
@@ -835,6 +835,7 @@ class Guide
             if ($this->_isAdmin) {
         		print "<div class=\"sp_section_controls\">
     						<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" />
+    						<img src=\"$IconPath/delete.png\" class=\"section_remove\" />
     						<div id=\"slider_section_{$lobjSection['section_id']}\"  class=\"sp_section_slider\"></div>
     				   </div>";
             }
