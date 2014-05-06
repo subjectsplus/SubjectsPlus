@@ -83,11 +83,21 @@ console.log(ul);
 		minLength	: 3,
 		source		: '" . $data_location . "',
 		focus: function(event, ui) {
-//console.log('focused');
-			return;
+
+   event.preventDefault();
+//	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
+
+
+
+
+
 		},
 		select: function(event, ui) {
-//console.log('selected');
+
+
+             event.preventDefault();
+	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
+
 			location.href = startURL + ui.item.value;
 		
                 }
