@@ -661,7 +661,7 @@ public function buildLocation() {
  		" . $our_prefix . "
  		)";
 
-$rInsertTitle = $db->query($qInsertTitle);
+$rInsertTitle = $db->exec($qInsertTitle);
 
 $this->_debug .= "<p>1. insert title: $qInsertTitle</p>";
 if (!$rInsertTitle) {
@@ -713,7 +713,7 @@ public function updateRecord($notrack = 0) {
 
 	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote(scrubData($this->_description, "richtext")) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData($this->_title_id, "integer");
 
-	$rUpTitle = $db->query($qUpTitle);
+	$rUpTitle = $db->exec($qUpTitle);
 
     /////////////////////
     // clear rank
