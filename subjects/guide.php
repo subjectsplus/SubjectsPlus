@@ -39,21 +39,21 @@ $img_path = $PublicPath . "images";
 //  WHERE active = '1'
 
 $q = "SELECT shortform FROM subject";
-    
+
 $oksubs = $db->query($q);
-    
-    
+
+
     foreach ($oksubs as  $subject) {
-   
+
         if ($_GET['subject'] === $subject[0]) {
             $check_this = $_GET['subject'];
 
         } else {
-           
+
         }
-        
+
     }
- 
+
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
 
@@ -66,18 +66,18 @@ if ($check_this) {
     //$r = $db->query($q);
 
     $r = $db->query($q, PDO::FETCH_ASSOC);
-  
+
 
 
     // If this guide doesn't exist, send them away
     if (count($r) == 0) {
         header("location:index.php");
     }
-    
+
 
 
 	$redirect_url = $r[0]["redirect_url"];
-    
+
 	if( !is_null($redirect_url) && !empty($redirect_url)  )
 	{
 		header("Location:$redirect_url");
@@ -131,6 +131,12 @@ if ($check_this) {
     $lobjGuide = new Guide($this_id);
     $lobjGuide->_isAdmin = FALSE;
 
+	//processVisibility
+	if( !$lobjGuide->checkVisibility() )
+	{
+		exit();
+	}
+
     $all_tabs = $lobjGuide->getTabs();
 
 } else {
@@ -167,7 +173,7 @@ else
 ?>
 <div id="tabs" style="clear:both; position: relative; ">
 
-<?php 
+<?php
 
 // Only show tabs if there is more than one tab
 
@@ -226,7 +232,7 @@ include("includes/footer.php");
         findStuff();
     });
 
-<?php 
+<?php
 // this messes stuff up if it displays for tabless page
 
 if ($multi_tab == TRUE) { ?>
@@ -237,7 +243,7 @@ jQuery(function() {
     tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
     tabCounter = <?php echo ( count($all_tabs) ); ?>;
     var tabs = $( "#tabs" ).tabs();
-  
+
 });
 <?php } ?>
 

@@ -331,12 +331,12 @@ class Guide
         // Is Live
         ////////////////////
 
-        $is_live .= "<label for=\"active\">" . _("Visibility") . "</label>
+        $is_live = "<label for=\"active\">" . _("Visibility") . "</label>
     <input name=\"active\" type=\"radio\" value=\"1\"";
         if ($this->_active == 1) {
             $is_live .= " checked=\"checked\"";
         }
-        $is_live .= " /> " . _("Public:  Everyone can see") . " <br /> 
+        $is_live .= " /> " . _("Public:  Everyone can see") . " <br />
         <input name=\"active\" type=\"radio\" value=\"0\"";
         if ($this->_active == 0) {
             $is_live .= " checked=\"checked\"";
@@ -1131,6 +1131,36 @@ $main_col_size = null;
     {
         print $this->_debug;
     }
+
+	public function checkVisibility()
+	{
+		global $BaseURL;
+
+		switch( $this->_active )
+		{
+			case 0: //direct URL so return true for hidden or public
+			case 1:
+				return TRUE;
+				break;
+			case 2: //suppressed so check ptag guide and is logged in
+				session_start();
+
+				if( isset( $_SESSION['staff_id'] ) && isset( $_SESSION['records'] ) && $_SESSION['records'] == 1 )
+				{
+					return TRUE;
+				}else
+				{
+					$_SESSION['desired_page'] = $_SERVER["REQUEST_URI"];
+					header("location:{$BaseURL}control/login.php");
+					return FALSE;
+				}
+				break;
+			default: //not implemented to redirect to index page
+				header("location:{$BaseURL}subjects/index.php");
+				return FALSE;
+				break;
+		}
+	}
 
 }
 
