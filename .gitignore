@@ -71,3 +71,7 @@ subjects/includes/pgcache/*
 /assets/users/
 
 .idea/
+
+
+control/includes/db.ini
+db.ini
