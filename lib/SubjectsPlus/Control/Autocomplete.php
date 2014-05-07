@@ -1,4 +1,12 @@
 <?php
+/**
+ *   @file Autocomplete.php
+ *   @brief 
+ *
+ *   @author Jamie Little (little9)
+ *   @date may 2014
+ *   @todo 
+ */
 
 namespace SubjectsPlus\Control;
 
@@ -136,28 +144,29 @@ foreach ($result as $myrow){
 
   $arr[$i]['label'] = $myrow[1];
   if(isset($myrow[3])) {
+    $arr[$i]['shortform'] = $myrow[3];
     $arr[$i]['id'] = $myrow[0];
     $arr[$i]['value'] = $myrow[3];
     $arr[$i]['category'] = $myrow[4];
 
     switch($myrow[4]) {
       case "Subject Guide":
-	$arr[$i]['url'] = '/guides/guide.php?subject_id=' . $myrow[0];
+	$arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
 	break;
       case "FAQ":
-	$arr[$i]['url'] = '/faq/faq.php?faq_id=' . $myrow[0];
+	$arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow[0];
 	break;
       
       case "Pluslet":
-	$arr[$i]['url'] = '/guides/guide.php?subject_id=' . $myrow[0];
+	$arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
 	break;
 
       case "Talkback":
-	$arr[$i]['url'] = '/talkback/talkback.php?talkback_id=' . $myrow[0];
+	$arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow[0];
 	break;
       
       case "Staff":
-	$arr[$i]['url'] = '/admin/user.php?staff_id=' . $myrow[0];
+	$arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow[0];
 	break;
 
     }
