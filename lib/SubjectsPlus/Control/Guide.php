@@ -759,16 +759,30 @@ $main_col_size = null;
         $this->_message = _("Thy Will Be Done.  Guide updated.");
     }
 
-    public function getTabs()
+    public function getTabs( $lstrFilter = "" )
     {
-        if (isset($this->_all_tabs)) {
+        if (isset($this->_all_tabs) && $lstrFilter == "") {
             return $this->_all_tabs;
         }
 
         $db = new Querier;
 
-        // Find our existing tabs for this guide
-        $qtab = "SELECT DISTINCT tab_id, label, tab_index, external_url FROM tab WHERE subject_id = '{$this->_subject_id}' ORDER BY tab_index";
+    	switch( $lstrFilter )
+    	{
+    		case 'hidden':
+    			// Find our existing tabs for this guide that is hidden
+    			$qtab = "SELECT DISTINCT tab_id, label, tab_index, external_url, visibility FROM tab WHERE subject_id = '{$this->_subject_id}' AND visibility = 0 ORDER BY tab_index";
+    			break;
+    		case 'public':
+    			// Find our existing tabs for this guide that is public
+    			$qtab = "SELECT DISTINCT tab_id, label, tab_index, external_url, visibility FROM tab WHERE subject_id = '{$this->_subject_id}' AND visibility = 1 ORDER BY tab_index";
+    			break;
+    		default:
+    			// Find ALL our existing tabs for this guide
+    			$qtab = "SELECT DISTINCT tab_id, label, tab_index, external_url, visibility FROM tab WHERE subject_id = '{$this->_subject_id}' ORDER BY tab_index";
+    			break;
+    	}
+
         $rtab = $db->query($qtab);
 
         $all_tabs = array();
@@ -776,21 +790,25 @@ $main_col_size = null;
         foreach ($rtab as $myrow) {
             $tab['label'] = $myrow[1];
             $tab['external_url'] = $myrow[3];
+            $tab['visibility'] = $myrow[4];
 
-            $all_tabs[] = $tab;
+            $all_tabs[$myrow[2]] = $tab;
         }
 
         $this->_all_tabs = $all_tabs;
         return $this->_all_tabs;
     }
 
-    public function outputNavTabs()
+    public function outputNavTabs( $lstrFilter = "" )
     {
-        $all_tabs = $this->getTabs();
+        $all_tabs = $this->getTabs($lstrFilter);
 
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
-            $tabs .= "<li class=\"dropspotty\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
+        	$class = "dropspotty";
+        	$class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
+
+            $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
             $tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
         }
 
@@ -800,9 +818,9 @@ $main_col_size = null;
         echo $tabs;
     }
 
-    public function outputTabs()
+    public function outputTabs( $lstrFilter = "" )
     {
-        $all_tabs = $this->getTabs();
+        $all_tabs = $this->getTabs($lstrFilter);
 
         // Now loop through tab content
         foreach ($all_tabs as $key => $lobjTab) {

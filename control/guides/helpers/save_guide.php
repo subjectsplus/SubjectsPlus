@@ -71,7 +71,7 @@ foreach( $lobjTabs as $lobjTab )
         $lobjTab['external'] = NULL;
     }
 
-	$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}')";
+	$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url, visibility) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}', {$lobjTab['visibility']})";
 	//print $qi . "<br />";
 	$ir = $db->exec($qi);
 

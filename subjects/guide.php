@@ -123,7 +123,7 @@ if ($check_this) {
 		exit();
 	}
 
-    $all_tabs = $lobjGuide->getTabs();
+    $all_tabs = $lobjGuide->getTabs('public');
 
 } else {
     header("location:index.php");
@@ -164,10 +164,10 @@ else
 // Only show tabs if there is more than one tab
 
 if ($multi_tab === TRUE) {
-    $lobjGuide->outputNavTabs();
+    $lobjGuide->outputNavTabs('public');
 }
 
-$lobjGuide->outputTabs();
+$lobjGuide->outputTabs('public');
 ?>
 
 </div>
