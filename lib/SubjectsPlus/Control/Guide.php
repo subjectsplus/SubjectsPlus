@@ -1150,8 +1150,14 @@ $main_col_size = null;
 					return TRUE;
 				}else
 				{
-					$_SESSION['desired_page'] = $_SERVER["REQUEST_URI"];
-					header("location:{$BaseURL}control/login.php");
+					global $AssetPath;
+					$page_title = 'Guide Unavailable';
+
+					$body = 'This guide is currently unavailable. It may be under maintenance, or just resting.<br />';
+					$body .= '<a href="index.php">Find another guide.</a>';
+
+					include(dirname(dirname(dirname(dirname(__FILE__)))) . "/subjects/includes/header.php");
+					makePluslet('Guide Not Public', $body, "no_overflow");
 					return FALSE;
 				}
 				break;
