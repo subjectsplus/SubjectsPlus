@@ -32,27 +32,13 @@ $sidebar_pluslets = "";
 // special image path because of mod_rewrite issues when source types are included in URL
 $img_path = $PublicPath . "images";
 
-
-
-
-// Generate list of acceptable user-submitted subjects
-//  WHERE active = '1'
-
-$q = "SELECT shortform FROM subject";
-
-$oksubs = $db->query($q);
-
-
-    foreach ($oksubs as  $subject) {
-
-        if ($_GET['subject'] === $subject[0]) {
-            $check_this = $_GET['subject'];
-
-        } else {
-
-        }
-
-    }
+if( isset( $_GET['subject'] ) )
+{
+	$check_this = $_GET['subject'];
+}else
+{
+	$check_this = FALSE;
+}
 
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
@@ -137,10 +123,10 @@ if ($check_this) {
 		exit();
 	}
 
-    $all_tabs = $lobjGuide->getTabs();
+    $all_tabs = $lobjGuide->getTabs('public');
 
 } else {
-    //header("location:http://library.miami.edu/sp/subjects/");
+    header("location:index.php");
 }
 
 $page_title = $subject_name;
@@ -178,10 +164,10 @@ else
 // Only show tabs if there is more than one tab
 
 if ($multi_tab === TRUE) {
-    $lobjGuide->outputNavTabs();
+    $lobjGuide->outputNavTabs('public');
 }
 
-$lobjGuide->outputTabs();
+$lobjGuide->outputTabs('public');
 ?>
 
 </div>

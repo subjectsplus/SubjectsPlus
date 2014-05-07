@@ -19,7 +19,8 @@ class CompleteMe {
   public $action;
   public $target_url;
   public $default_text;
-
+  
+  
   public function __construct($input_id, $action, $target_url, $default_text = "Search", $collection = "guides", $box_size="", $display="public") {
 
     self::$_counter++;
@@ -37,7 +38,7 @@ class CompleteMe {
 
     global $CpanelPath;
     global $PublicPath;
-
+    $auto_complete_url = "";
 
     //print "input_id = $this->input_id, action = $this->action, target_url = $this->target_url, collection = $this->collection";
     if ($this->display == "public") {
@@ -45,6 +46,19 @@ class CompleteMe {
     } else {
       $data_location = $CpanelPath . "includes/autocomplete_data.php?collection=" . $this->collection;
     }
+
+
+    switch($this->display) {
+
+      case "public":
+	$auto_complete_url = $PublicPath;
+	break;
+      case "control":
+	$auto_complete_url = $CpanelPath;
+	break;
+    }
+
+
     echo "
    <div id=\"autoC\" class=\"autoC\">
   		<form action=\"$this->action\" method=\"post\" class=\"pure-form\" id=\"sp_admin_search\">
@@ -76,35 +90,25 @@ console.log(item);
   });
 
 
-	var startURL = '$this->target_url';
-
-
-	// Caching
+	var startURL = '$auto_complete_url';
+        
 	jQuery('#" . $this->input_id . "').catcomplete({
-
 		minLength	: 3,
 		source		: '" . $data_location . "',
 		focus: function(event, ui) {
 
-   event.preventDefault();
+                event.preventDefault();
+
 
 		},
 		select: function(event, ui) {
+ 
+	location.href = startURL + ui.item.url;
 
 
-             event.preventDefault();
-	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
-
-			location.href = startURL + ui.item.value;
-		        
-                }
+               }
 	});
-        //autoC.defaultText(defaultSearchText_" . $this->num . ");
-
-
-
-
-
+      
 	</script>";
   }
 

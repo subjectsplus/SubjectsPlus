@@ -618,11 +618,13 @@ function setupSaveButton( lstrSelector )
 		jQuery('a[href^="#tab"]').each(function(){
 			var lstrName = jQuery(this).text();
 			var lstrExternal = jQuery(this).parent('li').attr('data-external-link');
+			var lintVisibility = parseInt(jQuery(this).parent('li').attr('data-visibility'));
 			var tab_id = $(this).attr("href").split("tabs-")[1];
 
 			var lobjTab = {};
 			lobjTab.name = lstrName;
 			lobjTab.external = lstrExternal;
+			lobjTab.visibility = lintVisibility;
 			lobjTab.sections = [];
 
 			jQuery('div#tabs-' + tab_id + ' div[id^="section_"]').each(function()

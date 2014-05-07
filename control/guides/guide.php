@@ -455,6 +455,7 @@ ob_end_flush();
          var id = window.lastClickedTab.replace("#tabs-", "");
 
          $( 'a[href="#tabs-' + id + '"]' ).text( $('input[name="rename_tab_title"]').val() );
+         $( 'a[href="#tabs-' + id + '"]' ).parent('li').attr( 'data-visibility', $('select[name="visibility"]').val() );
 
          if( $( 'a[href="#tabs-' + id + '"]' ).parent('li').attr( 'data-external-link') != '' )
          {
@@ -498,6 +499,15 @@ ob_end_flush();
            });
          }
 
+		 //add/remove class based on tab visibility
+       	 if( $('select[name="visibility"]').val() == 1 )
+       	 {
+       	 	$( 'a[href="#tabs-' + id + '"]' ).parent('li').removeClass('hidden_tab');
+       	 }else
+       	 {
+			$( 'a[href="#tabs-' + id + '"]' ).parent('li').addClass('hidden_tab');
+       	 }
+
          $( this ).dialog( "close" );
        	 $("#response").hide();
          $('#save_guide').fadeIn();
@@ -521,6 +531,7 @@ ob_end_flush();
      open: function(event, ui) {
        var id = window.lastClickedTab.replace("#tabs-", "");
        $(this).find('input[name="rename_tab_title"]').val($( 'a[href="#tabs-' + id + '"]' ).text());
+       $(this).find('select[name="visibility"]').val($( 'a[href="#tabs-' + id + '"]' ).parent('li').attr('data-visibility'));
 
        //external url add text input unless first tab
        $(this).find('input[name="tab_external_url"]').val('');
@@ -559,6 +570,7 @@ ob_end_flush();
      li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
      tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
      $(li).attr('data-external-link', external_link);
+     $(li).attr('data-visibility', 1);
      tabs.find( ".ui-tabs-nav" ).append( li );
 
      var slim = jQuery.ajax({
@@ -587,13 +599,12 @@ ob_end_flush();
 
          if( $(li).attr('data-external-link') != '' )
          {
-           jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
-	                    			       {
-	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	     evt.stopImmediatePropagation();
-	   });
+         	jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
+         	{
+	     		window.open($(this).parent('li').attr('data-external-link'), '_blank');
+	     		evt.stopImmediatePropagation();
+	   		});
          }
-
 
          jQuery(li).children('a[href^="#tabs-"]').each(function() {
            var elementData = jQuery._data(this),
@@ -743,8 +754,7 @@ ob_end_flush();
                <div class="pure-control-group">
 		 <label><?php print _("Visibility"); ?></label>
 		 <select name="visibility">
-		   <option value="2">Public</option>
-		   <option value="1">Private (Login required)</option>
+		   <option value="1">Public</option>
 		   <option value="0">Hidden</option>
 		 </select>
                </div>

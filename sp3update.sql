@@ -125,3 +125,5 @@ ALTER TABLE `pluslet_tab` CHANGE COLUMN `tab_id` `section_id` INT(11) NOT NULL  
 /*  change column name */
 ALTER TABLE `pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT  ;
 
+/* add visibility column to tab */
+ALTER TABLE `tab` ADD COLUMN `visibility` INT(1) NOT NULL DEFAULT 1  AFTER `external_url` ;

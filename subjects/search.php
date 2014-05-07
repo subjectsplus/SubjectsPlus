@@ -52,10 +52,11 @@ if (isset($_POST["searchterm"])) {
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
+$db = new Querier;
 $rnew = $db->query($qnew);
 
 $newlist = "<ul>\n";
-foreach ($rnew as $myrow)) {
+foreach ($rnew as $myrow) {
   $db_url = "";
 
   // add proxy string if necessary
@@ -163,7 +164,7 @@ include("includes/header.php");
 function getTableOptions($selected, $subject_id = '') {
 
   //
-
+  $db = new Querier;
   $selection = "WHERE (title LIKE '%" . $db->quote($selected) . "%' OR description LIKE '%" . $db->quote($selected) . "%')";
 
 
