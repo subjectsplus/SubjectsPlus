@@ -49,7 +49,7 @@ eres_display, display_note, pre, citation_guide, ctags
     }
 
     //print $q;
-
+    $db = new Querier;
     $r = $db->query($q);
 
     // check row count for 0 returns
@@ -136,5 +136,3 @@ eres_display, display_note, pre, citation_guide, ctags
   }
 
 }
-
-?>

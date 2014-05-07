@@ -76,35 +76,25 @@ console.log(item);
   });
 
 
-	var startURL = '$this->target_url';
-
-
-	// Caching
+	var startURL = '$CpanelPath';
+        
 	jQuery('#" . $this->input_id . "').catcomplete({
-
 		minLength	: 3,
 		source		: '" . $data_location . "',
 		focus: function(event, ui) {
 
-   event.preventDefault();
+                event.preventDefault();
+
 
 		},
 		select: function(event, ui) {
+ 
+	location.href = startURL + ui.item.url;
 
 
-             event.preventDefault();
-	       	jQuery('#" . $this->input_id . "').val(ui.item.label);
-
-			location.href = startURL + ui.item.value;
-		        
-                }
+               }
 	});
-        //autoC.defaultText(defaultSearchText_" . $this->num . ");
-
-
-
-
-
+      
 	</script>";
   }
 
