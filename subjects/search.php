@@ -165,7 +165,7 @@ function getTableOptions($selected, $subject_id = '') {
 
   //
   $db = new Querier;
-  $selection = "WHERE (title LIKE '%" . $db->quote($selected) . "%' OR description LIKE '%" . $db->quote($selected) . "%')";
+  $selection = "WHERE (title LIKE " . $db->quote('%' . $selected . '%') . " OR description LIKE "  . $db->quote('%' . $selected . '%') . ")";
 
 
   return $selection;
