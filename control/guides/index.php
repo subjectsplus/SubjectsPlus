@@ -145,18 +145,6 @@ if ($num_rows > 0) {
   </div>
 </div>
 
-
-
-    <div class="pluslet">
-      <div class="titlebar">
-        <div class="titlebar_text"><?php print _("View Guides by Department"); ?></div>
-        <div class="titlebar_options"></div>
-      </div>
-      <div class="topimage"></div>
-      <div class="pluslet_body">
-      
-      </div>
-    </div>
   </div>
 </div>
 

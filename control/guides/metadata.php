@@ -109,7 +109,7 @@ if (!isset($feedback)) {
 }
 
 
-print feedBack($feedback, "relative");
+print feedBack($feedback, "feedback");
 
 /////////////////////////
 // SHOW FORM

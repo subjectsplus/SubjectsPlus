@@ -301,9 +301,9 @@ header {
 #maincontent {
   clear: both;
   text-align: left;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top:2%;
+  margin-left: 2.5em;
+  margin-right: 2.5em;
+  margin-top:0;
 }
 
 #maincontent h2  {
@@ -887,7 +887,7 @@ div.ctag_list a:hover {
 
 
 
-.feedback {
+.feedback, #feedback {
     position: relative;
     float: left;
     background-color: #DD647F;
@@ -1568,22 +1568,22 @@ img.tooltip  {
   border: 2px solid #ccc;
   border: none;
   clear:both;
-  background-color: #EFEFEF;
-  border: 2px solid #FFFFFF;
-
+   background-color: #fff;
+  border: 2px solid #efefef;
+  border-radius: 5px;
 }
 
 #controlpage div.pluslet > .titlebar {
   background-color: #858585;
   padding: .2em .5em;
   color: #fff;
-  background-color: #fff;
+ 
   color: #333;
   font-size: 1.1em;
   font-weight:700;
   height: 100%;
   min-height: 2em;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;background-color: #EFEFEF;
 }
 
 #controlpage .titlebar_text {
@@ -1952,6 +1952,12 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 #save_guide {
   display:none;
 
+}
+
+/* pure overrides */
+
+#maincontent .pure-g-r {
+    margin-top: 2em;
 }
 
 .pure-button {

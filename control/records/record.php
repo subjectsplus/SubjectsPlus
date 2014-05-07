@@ -120,7 +120,9 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
     $wintype = "pop";
 }
 
-echo "<div class=\"feedback\">$feedback</div><br /><br />";
+//echo "<div class=\"feedback\">$feedback</div><br /><br />";
+
+print feedBack($feedback);
 
 // output our record, which will be blank if there's no id
 

@@ -13,70 +13,68 @@ $page_title = "Admin SubjectsPlus";
 include("../includes/header.php");
 
 $recent_activity = seeRecentChanges("", 20);
-?>
 
-<br />
-<div style="float: left;  width: 30%;">
-<div class="box">
-    <h2 class="bw_head"><?php print _("Users"); ?></h2>
+$users_box = "<ul>
+            <li><a href=\"user.php?type=add\">" .  _("Add New User") . "</a></li>
+            <li><a href=\"user.php?browse\">" . _("Browse Users") . "</a></li>
+        </ul>";
 
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-1-3\">  
+  ";
+
+makePluslet(_("Users"), $users_box, "no_overflow");
+
+$map_box = "<p>" . _("Note:  This is potentially confidential stuff.") . "</p>
         <ul>
-            <li><a href="user.php?type=add"><?php print _("Add New User"); ?></a></li>
-            <li><a href="user.php?browse"><?php print _("Browse Users"); ?></a></li>
-        </ul>
-    </div>
- <div class="box">
-        <h2 class="bw_head">Staff Map</h2>
+            <li><a href=\"staff_map.php\">" . _("View Map of Staff Addresses") . "</a></li>
+        </ul>";
 
-      <p><?php print _("Note:  This is potentially confidential stuff."); ?></p>
-        <ul>
-            <!--<li><a href="export_contacts.php?type=all"><?php print _("Download All Contact Info"); ?></a></li>-->
-            <li><a href="staff_map.php"><?php print _("View Map of Staff Addresses"); ?></a></li>
-        </ul>
-    </div>
- <div class="box">
-    <h2 class="bw_head"><?php print _("Guides"); ?></h2>
+makepluslet(_("Staff Map"), $map_box, "no_overflow");
 
-        <ul>
-            <li><a href="manage_guides.php"><?php print _("Manage Guides"); ?></a></li>
-            <?php
+$guides_box = "<ul>
+            <li><a href=\"manage_guides.php\">" . _("Manage Guides") . "</a></li>";
+
             if ($use_disciplines == TRUE) {
-                print '<li><a href="disciplines.php">' .  _("Manage Disciplines") . '</a></li>';
+                $guides_box .= '<li><a href="disciplines.php">' .  _("Manage Disciplines") . '</a></li>';
             }
-            ?>
-        </ul>
-    </div>
-    <div class="box">
-    <h2 class="bw_head"><?php print _("Departments"); ?></h2>
 
-        <ul>
-            <li><a href="departments.php"><?php print _("Browse/Add New Department"); ?></a></li>
-        </ul>
-    </div>
-  <div class="box">
-    <h2 class="bw_head"><?php print _("Record Source Types"); ?></h2>
+        $guides_box .=  "</ul>";
 
-        <ul>
-            <li><a href="sources.php"><?php print _("Add New Source Type"); ?></a></li>
-            <li><a href="../guides/link_checker.php?type=records"><?php print _("Check All Records' Links"); ?></a></li>
-        </ul>
-    </div>
-<div class="box">
+makepluslet( _("Guides"), $guides_box, "no_overflow");
 
-    <h2 class="bw_head"><?php print _("FAQ Collections"); ?></h2>
-        <ul>
-            <li><a href="faq_collections.php"><?php print _("Browse/Add FAQ Collections"); ?></a></li>
-        </ul>
-    </div>
-</div>
+$departments_box = "
+<ul>
+    <li><a href=\"departments.php\">" . _("Browse/Add New Department") . "</a></li>
+</ul>";
+    
+makepluslet(_("Departments"), $departments_box, "no_overflow");
 
-<div style="float: left; width: 50%;margin-left: 10%; ">
-   <div class="box">
-<h2 class="bw_head"><?php print _("Recent Activity"); ?></h2>
+ $sources_box = "<ul>
+            <li><a href=\"sources.php\">" . _("Add New Source Type") . "</a></li>
+            <li><a href=\"../guides/link_checker.php?type=records\">" . _("Check All Records' Links") . "</a></li>
+        </ul>"; 
 
-        <?php print $recent_activity; ?>
-    </div>
-</div>
+
+makepluslet(_("Record Source Types"), $sources_box, "no_overflow");
+
+$faq_box = "<ul>
+            <li><a href=\"faq_collections.php\">" . _("Browse/Add FAQ Collections") . "</a></li>
+        </ul>";
+
+makepluslet( _("FAQ Collections"), $faq_box, "no_overflow");
+        
+
+print "</div>"; // close pure-u-1-3
+print "<div class=\"pure-u-2-3\">";
+
+makePluslet(_("Recent Activity"), $recent_activity, "no_overflow");
+
+print "</div>"; // close pure-u-2-3
+print "</div>"; // close pure
+
+?>
 
 
 <?php

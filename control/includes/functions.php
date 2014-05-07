@@ -1197,9 +1197,10 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "") {
  * @return string
  */
 
-function feedBack($message="", $classes="") {
-  if ($message) {
-    return "<div id=\"response\" class=\"$classes\">$message</div>";
+function feedBack($message="", $display="feedback") {
+  //print "HELLO our message is $message";
+  if ($message != "") {
+    print "<div id=\"$display\" class=\"$classes\" style=\"display:block;\">$message</div>";
   } else {
     return "";
   }

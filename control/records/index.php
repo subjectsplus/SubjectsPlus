@@ -150,7 +150,7 @@ if ($alpha_id & $full_query) {
 $letter_header_body = "<div align=\"center\" style=\"font-size: 1.2em;\">$atoz</div>\n
 <div align=\"center\" class=\"ctag_list\">$tag_list</div>
 <h2 align=\"center\">$alpha_id</h2>
-<div class=\"box no_overflow\">$results</div>
+$results
 
 ";
  $new_record_body = " 
