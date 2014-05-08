@@ -95,7 +95,7 @@ if (isset($_GET["wintype"])) {
   $_GET["wintype"] = "";
 }
 
-echo "<div class=\"feedback\">$feedback</div><br /><br />";
+echo feedBack($feedback);
 
 /////////////////////////
 // SHOW FORM
@@ -156,7 +156,7 @@ include("../includes/footer.php");
     //////////////////
     $('.recommend_delete').livequery('click', function(event) {
       $(this).next().load("faq_bits.php", {type: 'recommend_delete', our_id: '<?php print $ok_record_id; ?>'}).fadeIn(1600);
-            
+
       return false;
     });
 
@@ -235,7 +235,7 @@ include("../includes/footer.php");
     });
 
 
-        
+
   });
 
 

@@ -149,7 +149,7 @@ class FAQ {
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_faq_id . "\" />
 <div class=\"pure-g-r\">
-  <div class=\"pure-u-2-3\">  
+  <div class=\"pure-u-2-3\">
     <div class=\"pluslet\">
       <div class=\"titlebar\">
         <div class=\"titlebar_text\">$faq_title_line</div>
@@ -186,12 +186,12 @@ class FAQ {
 </div>
 </div>
 </div>
-<!-- right hand column -->    ";  
+<!-- right hand column -->    ";
 
 $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
       $title_save_box = "<div id=\"last_edited\">$last_mod</div>";
 
-  echo"<div class=\"pure-u-1-3\">  
+  echo"<div class=\"pure-u-1-3\">
     <div class=\"pluslet\">
       <div class=\"titlebar\">
         <div class=\"titlebar_text\">$title_save_box</div>
@@ -348,7 +348,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
     $this->_debug = "<p>Del query: $q";
 
       if (count($delete_result) != 0) {
-  
+
     } else {
       // message
       $this->_message = _("There was a problem with your delete (stage 1 of 2).");
@@ -420,16 +420,16 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
     /////////////////////
     // update faq table
     /////////////////////
-    
+  	$db = new Querier;
     $qUpFAQ = "UPDATE faq SET question = " . $db->quote(scrubData($this->_question, "text")) . ",
 	  answer = " . $db->quote(scrubData($this->_answer, 'richtext')) . ",
-	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . ",
+	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . "
           WHERE faq_id = " . scrubData($this->_faq_id, 'integer');
 
     $rUpFAQ = $db->query($qUpFAQ);
 
     $this->_debug = "<p>1. update faq: $qUpFAQ</p>";
-   
+
 
     /////////////////////
     // clear faq_subject
@@ -441,7 +441,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 
     $this->_debug .= "<p>2. clear rank: $qClearSubs</p>";
 
-    if (!$rClearSubs) {
+    if ($rClearSubs === FALSE) {
       echo blunDer("We have a problem with the clear faq-subs query: $qClearSubs");
     }
 
@@ -456,7 +456,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
     $rClearColls = $db->query($qClearColls);
 
     $this->_debug .= "<p>4. wipe faq_faqpage: $qClearColls</p>";
-    if (!$rClearColls) {
+    if ($rClearColls === FALSE) {
       echo blunDer("We have a problem with the clear locations query: $qClearColls");
     }
 
@@ -479,7 +479,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 
   function modifySubjects() {
     $db = new Querier;
-    
+
     for ($i = 0; $i < $this->_subject_count; $i++) {
       $qUpSub = "INSERT INTO faq_subject (faq_id, subject_id) VALUES (
                 " . scrubData($this->_faq_id, 'integer') . ",
@@ -488,7 +488,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
       $rUpSub = $db->query($qUpSub);
 
       $this->_debug .= "<p>3. (update faq_subject loop) : $qUpSub</p>";
-      if (!$rUpSub) {
+      if ($rUpSub === FALSE) {
         echo blunDer("We have a problem with the faq_subject query: $qUpSub");
       }
     }
@@ -503,7 +503,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
       $rUpColl = $db->query($qUpColl);
 
       $this->_debug .= "<p>3. (update faq_faqpage loop) : $qUpColl</p>";
-      if (!$rUpColl) {
+      if ($rUpColl === FALSE) {
         echo blunDer("We have a problem with the faq_faqpage query: $qUpColl");
       }
     }
