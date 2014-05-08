@@ -1577,7 +1577,7 @@ img.tooltip  {
   background-color: #858585;
   padding: .2em .5em;
   color: #fff;
- 
+
   color: #333;
   font-size: 1.1em;
   font-weight:700;
@@ -1957,7 +1957,8 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 /* pure overrides */
 
 #maincontent .pure-g-r {
-    margin-top: 2em;
+    padding-top: 2em;
+	clear: left;
 }
 
 .pure-button {
