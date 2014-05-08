@@ -48,8 +48,16 @@ class LinkChecker {
 			<?php
 		}
 		?>
-			<h2 style="max-width:940px;">Link Checker</h2>
-			<div class="box" style="float:left;width:470px;margin-right:20px;">
+
+		<div class="pure-g-r">
+  			<div class="pure-u-2-3">
+
+  			    <div class="pluslet">
+			      <div class="titlebar">
+			        <div class="titlebar_text"><?php print _("Link Checker"); ?></div>
+			        <div class="titlebar_options"></div>
+			      </div>
+			      <div class="pluslet_body">
 		<?php
 		if ($lstrType == 'record')
 		{
@@ -98,11 +106,24 @@ class LinkChecker {
 		}
 		?>
 				</form>
-			</div>
-			<div class="box" style="float:left;width:420px;">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="pure-u-1-3">
+    <div class="pluslet">
+      <div class="titlebar">
+        <div class="titlebar_text"><?php print _("All Guides"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="pluslet_body">
 				<img src="<?php echo $AssetPath; ?>images/icons/accept.png" /> = Link is good!<br /><br />
 				<img src="<?php echo $AssetPath; ?>images/icons/info2.png" /> = <i>Possible</i> problem with link; click on link to open in new window.<br />
 			</div>
+
+			    </div>
+  </div>
 		<?php
 	}
 
@@ -130,7 +151,15 @@ class LinkChecker {
 			$('#loading').html('<?php echo $this->getMailOptions();?>');
 		});
 		</script>
-		<div class="box" style="clear:both;max-width:940px;">
+
+				<div class="pure-g-r">
+  			<div class="pure-u-2-3">
+		  			    <div class="pluslet">
+			      <div class="titlebar">
+			        <div class="titlebar_text"><?php print _("Results"); ?></div>
+			        <div class="titlebar_options"></div>
+			      </div>
+			      <div class="pluslet_body">
 			<div id="loading" style="clear:both">
 				<p>Please wait while the links in your guide are being checked. This will vary depending on how many links are in your guide.</p>
 				<img src="<?php echo $AssetPath; ?>images/loading.gif" />
@@ -238,6 +267,7 @@ class LinkChecker {
 			endif; ?>
 			</div>
 		</div>
+		</div></div> <!-- close pure-u, close pure-g-r -->
 		<script type="text/javascript">
 		$(function (){
 

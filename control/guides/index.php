@@ -90,7 +90,6 @@ if ($num_rows > 0) {
         <div class="titlebar_text"><?php print _("Edit Your Guides"); ?></div>
         <div class="titlebar_options"></div>
       </div>
-      <div class="topimage"></div>
       <div class="pluslet_body">
         <p><?php print $myguides; ?></p>
       </div>
@@ -104,7 +103,6 @@ if ($num_rows > 0) {
         <div class="titlebar_text"><?php print _("All Guides"); ?></div>
         <div class="titlebar_options"></div>
       </div>
-      <div class="topimage"></div>
       <div class="pluslet_body">
         <p><?php print $dropdown_intro_text; ?></p>
         <br />
@@ -120,7 +118,6 @@ if ($num_rows > 0) {
         <div class="titlebar_text"><?php print _("Create"); ?></div>
         <div class="titlebar_options"></div>
       </div>
-      <div class="topimage"></div>
       <div class="pluslet_body">
         <ol>
           <li><?php print _("Make sure the guide doesn't already exist!"); ?></li>
@@ -134,7 +131,6 @@ if ($num_rows > 0) {
         <div class="titlebar_text"><?php print _("Tips"); ?></div>
         <div class="titlebar_options"></div>
       </div>
-      <div class="topimage"></div>
       <div class="pluslet_body">
         <p><img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>" class="icon" /> <?php print _("Edit Guide Metadata"); ?> </p>
         <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>" class="icon"/> <?php print _("View Guide on Public Site"); ?></p>
