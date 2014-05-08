@@ -18,7 +18,7 @@ class Autocomplete {
   private $collection;
   private $json;
   private $subject_id;
-
+  private $search_page; 
   
   public function setSubjectId($subject_id) {
     $this->subject_id = $subject_id;
@@ -26,6 +26,15 @@ class Autocomplete {
 
   public function getSubjectId() {
     return $this->subject_id;
+    
+  }
+  
+   public function setSearchPage($search_page) {
+    $this->search_page = $search_page;
+  }
+
+  public function getSearchPage() {
+    return $this->search_page;
     
   }
 
@@ -140,7 +149,9 @@ $result = $db->query($q);
 $arr = array();
 $i = 0;
 
-foreach ($result as $myrow){
+// This takes the results and creates an array that will be turned into JSON
+
+foreach ($result as $myrow)  {
 
   $arr[$i]['label'] = $myrow[1];
   if(isset($myrow[3])) {
@@ -150,31 +161,53 @@ foreach ($result as $myrow){
     $arr[$i]['category'] = $myrow[4];
 
     switch($myrow[4]) {
+    
       case "Subject Guide":
-	$arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
+        if ($this->getSearchPage() == "control") {
+	     $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
+        }   else {
+         $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3];   
+        }
+        
 	break;
-      case "FAQ":
-	$arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow[0];
+    
+    
+   case "FAQ":
+	    if ($this->getSearchPage() == "control") {
+        $arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow[0];
+    } else {
+        $arr[$i]['url'] = 'faq.php?page=all';    
+    }
 	break;
       
-      case "Pluslet":
+   case "Pluslet":
 	$arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
-	break;
+    break;
 
       case "Talkback":
-	$arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow[0];
-	break;
+        if ($this->getSearchPage() == "control") {
+	        $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow[0];
+	    } else {
+        $arr[$i]['url'] = 'talkback.php';    
+        }
+    break;
       
       case "Staff":
+      if ($this->getSearchPage() == "control") {
 	$arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow[0];
-	break;
-
+	
+    } else {
+    $arr[$i]['url'] = 'staff.php';
+    
+    }
+    break;
+  }
+    
+    } else {
+    $arr[$i]['value'] = $myrow[0];
     }
     
-  } else {
-    $arr[$i]['value'] = $myrow[0];
-    
-  } 
+  
   $i++;
 }
 
