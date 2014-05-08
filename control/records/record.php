@@ -340,6 +340,15 @@ if (win_type == "pop") {
             $(calling_link).attr("class", "source_override");
         });
 
+    	////////////////////
+    	/* On change of select of source override, click add_soruce*/
+    	///////////////////
+
+    	$( 'select[name="source_override[]"]' ).livequery( 'change', function()
+    	{
+    		$(this).siblings('.add_source')[0].click();
+    	});
+
         ////////////////////
         /* Note Override */
         ///////////////////

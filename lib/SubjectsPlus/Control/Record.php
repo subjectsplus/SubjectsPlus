@@ -796,13 +796,13 @@ function modifyLocation() {
         // Blank location, do an insert
 			$qInsertLoc = "INSERT INTO location (format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide) VALUES (
 				'" . scrubData($this->_format[$key], "integer") . "',
-				'" . $db->quote(scrubData($this->_call_number[$key])) . "',
-				'" . $db->quote(scrubData($this->_location[$key])) . "',
+				" . $db->quote(scrubData($this->_call_number[$key])) . ",
+				" . $db->quote(scrubData($this->_location[$key])) . ",
 				'" . scrubData($this->_access_restrictions[$key], "integer") . "',
 				'" . scrubData($this->_eres_display[$key]) . "',
-				'" . $db->quote(scrubData($this->_display_note[$key], "richtext")) . "',
-				'" . $db->quote(scrubData($this->_ctags[$key])) . "',
-				'" . $db->quote(scrubData($this->_helpguide[$key])) . "'
+				" . $db->quote(scrubData($this->_display_note[$key], "richtext")) . ",
+				" . $db->quote(scrubData($this->_ctags[$key])) . ",
+				" . $db->quote(scrubData($this->_helpguide[$key])) . "
 				)";
 
 $rInsertLoc = $db->exec($qInsertLoc);
