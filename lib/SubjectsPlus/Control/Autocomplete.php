@@ -29,7 +29,8 @@ class Autocomplete {
     
   }
   
-   public function setSearchPage($search_page) {
+
+  public function setSearchPage($search_page) {
     $this->search_page = $search_page;
   }
 
@@ -65,7 +66,11 @@ class Autocomplete {
   }
 
   public function search() {
-
+    /*
+    SELECT pluslet_id AS 'id', title AS 'matching_text', body as 'additional_text','' AS 'short_form', 'Pluslet' AS 'content_type' FROM pluslet 
+    WHERE title LIKE "  . $db->quote("%" . $this->param . "%") . "
+    OR body LIKE "  . $db->quote("%" . $this->param . "%") . "
+     */
     $db = new Querier;
 
     switch ($this->collection) {
@@ -75,9 +80,18 @@ WHERE description LIKE"  . $db->quote("%" . $this->param . "%") . "
 OR subject LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR keywords LIKE "  . $db->quote("%" . $this->param . "%"). "
 UNION 
-SELECT pluslet_id AS 'id', title AS 'matching_text', body as 'additional_text','' AS 'short_form', 'Pluslet' AS 'content_type' FROM pluslet 
-WHERE title LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR body LIKE "  . $db->quote("%" . $this->param . "%") . "
+SELECT p.pluslet_id, p.title, su.subject_id, su.shortform, 'Pluslet' AS 'content_type' FROM pluslet AS p 
+	INNER JOIN pluslet_section AS ps 
+	ON ps.pluslet_id = p.pluslet_id
+	INNER JOIN section AS s 
+	ON ps.section_id = s.section_id
+	INNER JOIN tab AS t
+	ON s.tab_id = t.tab_id
+	INNER JOIN subject AS su 
+	ON su.subject_id = t.subject_id
+WHERE p.body LIKE "  . $db->quote("%" . $this->param . "%") . "
+OR p.title LIKE "  . $db->quote("%" . $this->param . "%") . "
+
 UNION
 SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type' FROM faq 
 WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
@@ -126,7 +140,7 @@ $q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.su
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
         WHERE p.body LIKE " . $db->quote("%" . $this->param . "%")   . 
-" AND t.subject_id = " . $db->quote( $this->subject_id );
+					 " AND t.subject_id = " . $db->quote( $this->subject_id );
 
 break;
 case "records":
@@ -161,52 +175,57 @@ foreach ($result as $myrow)  {
     $arr[$i]['category'] = $myrow[4];
 
     switch($myrow[4]) {
-    
+      
       case "Subject Guide":
         if ($this->getSearchPage() == "control") {
-	     $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
-        }   else {
-         $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3];   
-        }
+	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
+      }   else {
+          $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3];   
+      }
         
 	break;
-    
-    
-   case "FAQ":
-	    if ($this->getSearchPage() == "control") {
-        $arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow[0];
-    } else {
-        $arr[$i]['url'] = 'faq.php?page=all';    
-    }
+      
+      
+      case "FAQ":
+	if ($this->getSearchPage() == "control") {
+          $arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow[0];
+      } else {
+          $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow[0];    
+      }
 	break;
       
-   case "Pluslet":
-	$arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
-    break;
+      case "Pluslet":
+	if ($this->getSearchPage() == "control") {
+	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
+      } else {
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3];
+	  
+      }
+	break;
 
       case "Talkback":
         if ($this->getSearchPage() == "control") {
-	        $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow[0];
-	    } else {
-        $arr[$i]['url'] = 'talkback.php';    
-        }
-    break;
+	  $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow[0];
+      } else {
+          $arr[$i]['url'] = 'talkback.php';    
+      }
+	break;
       
       case "Staff":
-      if ($this->getSearchPage() == "control") {
-	$arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow[0];
-	
-    } else {
-    $arr[$i]['url'] = 'staff.php';
-    
+	if ($this->getSearchPage() == "control") {
+	  $arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow[0];
+	  
+      } else {
+	  $arr[$i]['url'] = 'staff.php';
+	  
+      }
+	break;
     }
-    break;
-  }
     
-    } else {
+  } else {
     $arr[$i]['value'] = $myrow[0];
-    }
-    
+  }
+  
   
   $i++;
 }
