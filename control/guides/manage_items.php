@@ -135,9 +135,8 @@ if ($nocookies == "yes") {
 } else {
 
     $title_line =  _("Organize Resources for ") . "$subject_name";
-    $response = "<div id=\"response\" class=\"feedback\"></div>
-    <br />
-    <p id=\"savour\" align=\"center\"><button class=\"button\" id=\"save_guide\" class=\"button pure-button pure-button-primary\" style=\"display:none;\">" . _("SAVE CHANGES") . "</button></p>";
+    $response = "<div id=\"feedback\" class=\"feedback\"></div>
+    <p id=\"savour\" align=\"center\"><button id=\"save_guide\" class=\"button pure-button pure-button-primary\" style=\"display:none;\">" . _("SAVE CHANGES") . "</button></p>";
 }
 
 
@@ -205,7 +204,7 @@ include("../includes/footer.php");
                 placeholder: 'ui-state-highlight',
                 cursor: 'move',
                 update: function() {
-                    $("#response").hide();
+                    $("#feedback").hide();
                     $("#save_guide").fadeIn();
                 }
 
@@ -234,10 +233,10 @@ include("../includes/footer.php");
             $(this).parent().remove();
             $("#item-"+rank_id).remove();
 
-            $("#response").load("helpers/ajax_mod.php", {action: 'delete_rank', subject_id: subject_id, user_name: user_name, delete_id:rank_id},
+            $("#feedback").load("helpers/ajax_mod.php", {action: 'delete_rank', subject_id: subject_id, user_name: user_name, delete_id:rank_id},
             function() {
 
-                $("#response").fadeIn();
+                $("#feedback").fadeIn();
             });
 
             return false;
@@ -259,7 +258,7 @@ include("../includes/footer.php");
             // We're good, save the guide layout
             // insert a pause so the new pluslet is found
             //////////////////////
-            $("#response").hide();
+            $("#feedback").hide();
             $("#save_guide").fadeOut();
             //$("#savour").append('<span class="loader"><img src="images/loading_animated.gif" height="30" /></span>');
             setTimeout(saveGuide, 1000);
@@ -290,10 +289,10 @@ include("../includes/footer.php");
             our_data = our_data.join("&");
             // alert(our_data);
 
-            $("#response").load("helpers/ajax_mod.php", {action: 'update_rank', subject_id: subject_id, user_name: user_name, our_data:our_data},
+            $("#feedback").load("helpers/ajax_mod.php", {action: 'update_rank', subject_id: subject_id, user_name: user_name, our_data:our_data},
             function() {
 
-                $("#response").fadeIn();
+                $("#feedback").fadeIn();
             });
 
         }
