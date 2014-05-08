@@ -6,7 +6,7 @@ ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`;
 
 
 /* And give it a header, for header switching (perhaps UM only) */
-ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`
+ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`;
 
 /* Let the tab point to external url */
 
@@ -18,12 +18,12 @@ ADD COLUMN `external_url` VARCHAR(500) NULL AFTER `tab_index`;
 ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
 ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
 ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
-ADD `titlebar_styling` VARCHAR( 100 ) NULL
+ADD `titlebar_styling` VARCHAR( 100 ) NULL;
 
 
 /* Associate subject guides with departments like CHC */
 
-CREATE TABLE `subject_department` (
+CREATE TABLE IF NOT EXISTS `subject_department` (
 `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
 `id_subject` bigint(20) NOT NULL,
 `id_department` int(11) NOT NULL,
@@ -41,7 +41,7 @@ ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`;
 /* Subject parent relationship */
 
 
-CREATE TABLE `subject_subject` (
+CREATE TABLE IF NOT EXISTS`subject_subject` (
 `id_subject_subject` INT NOT NULL AUTO_INCREMENT,
 `subject_parent` BIGINT(20) NOT NULL,
 `subject_child` BIGINT(20) NOT NULL,
@@ -66,7 +66,7 @@ ALTER TABLE `tab`
 ADD COLUMN `visibility` INT(11) NOT NULL DEFAULT 2 AFTER `external_url`;
 
 /* New Section table */
-CREATE  TABLE `section` (
+CREATE TABLE IF NOT EXISTS `section` (
 
   `section_id` INT(11) NOT NULL AUTO_INCREMENT ,
 
