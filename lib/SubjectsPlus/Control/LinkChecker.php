@@ -62,15 +62,15 @@ class LinkChecker {
 		if ($lstrType == 'record')
 		{
 			?>
-			<span class="record_label">Records: (<em style="font-style: italic; font-size: smaller;"><?php echo _( "This may take a while. Be patient." ); ?></em>)</span><br />
+			<span class="record_label"><?php print _("Records"); ?>: (<em style="font-style: italic; font-size: smaller;"><?php echo _( "This may take a while. Be patient." ); ?></em>)</span><br />
 				<form method="post">
-					<input type="submit" class="button" name="LinkCheckRecords" value="Check Links In Records" />
+					<input type="submit" class="button" name="LinkCheckRecords" value="<?php print _("Check Links In Records"); ?>" />
 			<?php
 		}
 		if ($lstrType == 'subject')
 		{
 			?>
-			<span class="record_label">Select Guide:</span><br />
+			<span class="record_label"><?php print _("Select Guide"); ?>:</span><br />
 				<form method="post">
 			<?php
 			if($_SESSION['admin'] == 1)
@@ -99,9 +99,8 @@ class LinkChecker {
 			$lobjDropDown = new Dropdown( 'subject_id', $guide_list, $lintCurrentSubjectID, "50" );
 			echo $lobjDropDown->display();
 			?>
-					<br />
-					<br />
-					<input type="submit" value="Check Links In Guide" />
+					
+					<input type="submit" class="button pure-button pure-button-primary" value="<?php print _("Check Links In Guide"); ?>" />
 			<?php
 		}
 		?>
@@ -114,12 +113,12 @@ class LinkChecker {
   <div class="pure-u-1-3">
     <div class="pluslet">
       <div class="titlebar">
-        <div class="titlebar_text"><?php print _("All Guides"); ?></div>
+        <div class="titlebar_text"><?php print _("Legend"); ?></div>
         <div class="titlebar_options"></div>
       </div>
       <div class="pluslet_body">
-				<img src="<?php echo $AssetPath; ?>images/icons/accept.png" /> = Link is good!<br /><br />
-				<img src="<?php echo $AssetPath; ?>images/icons/info2.png" /> = <i>Possible</i> problem with link; click on link to open in new window.<br />
+				<img src="<?php echo $AssetPath; ?>images/icons/accept.png" /> = <?php print _("Link is good!"); ?><br /><br />
+				<img src="<?php echo $AssetPath; ?>images/icons/info2.png" /> = <?php print _("<i>Possible</i> problem with link; click on link to open in new window."); ?><br />
 			</div>
 
 			    </div>
@@ -161,7 +160,7 @@ class LinkChecker {
 			      </div>
 			      <div class="pluslet_body">
 			<div id="loading" style="clear:both">
-				<p>Please wait while the links in your guide are being checked. This will vary depending on how many links are in your guide.</p>
+				<p><?php print _("Please wait while the links in your guide are being checked. This will vary depending on how many links are in your guide."); ?></p>
 				<img src="<?php echo $AssetPath; ?>images/loading.gif" />
 			</div>
 			<div id="email_content">
@@ -179,16 +178,16 @@ class LinkChecker {
 								 "ORDER BY source.rs ASC, source.source ASC, rank.rank ASC, title.title ASC";
 			$links_result = $db->query($links_select);
 			?>
-			<h2 style="clear:both;">Checking "All Items By Source" Box:</h2>
+			<h3 style="clear:both;"><?php print _("Checking 'All Items By Source' Box:"); ?></h3>
 			<?php if(!count($links_result)): ?>
-				<p style="margin: 20px 0 40px 0;">This guide does not have an "All Items By Source" box.</p>
+				<p><?php print _("This guide does not have an 'All Items By Source' box."); ?></p>
 			<?php else: ?>
 				<table class="striper" style="width: 100%; margin: 20px 0 40px 0;">
 					<thead>
 						<tr>
-							<th style="width: 60%">Link</th>
-							<th>Status</th>
-							<th>&nbsp; HTTP Error Message</th>
+							<th style="width: 60%"><?php print _("Link"); ?></th>
+							<th><?php print _("Status"); ?></th>
+							<th>&nbsp; <?php print _("HTTP Error Message"); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -234,7 +233,7 @@ class LinkChecker {
 					foreach($box_result as $box_data)
 					{
 						?>
-						<h2>Checking "<?php print $box_data['title']; ?>" Box:</h2>
+						<h3><?php print _("Checking"); ?> "<?php print $box_data['title']; ?>" <?php print _("Box:"); ?></h3>
 						<?php
 
 						if($box_data['type'] == 'Basic')
@@ -251,9 +250,9 @@ class LinkChecker {
 						<table class="striper" style="width: 100%; margin: 20px 0 40px 0;">
 							<thead>
 								<tr>
-									<th style="width: 60%">Link</th>
-									<th>Status</th>
-									<th>&nbsp; HTTP Error Message</th>
+									<th style="width: 60%"><?php print _("Link"); ?></th>
+									<th><?php print _("Status"); ?></th>
+									<th>&nbsp; <?php print _("HTTP Error Message"); ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -275,7 +274,7 @@ class LinkChecker {
 
 				var shortform = "<?php print $this->_extra['shortform']; ?>";
 				var our_contents = $(this).attr("name");
-				var our_linkresults = '<style type="text/css" media="all">@import "http://dev-www.library.miami.edu/sp/assets/css/admin_styles.css";</style>'
+				var our_linkresults = '<style type="text/css" media="all"></style>'
 									+ '<div id="maincontent">'
 									+ $("#email_content").html()
 									+ '</div>';
@@ -328,7 +327,7 @@ class LinkChecker {
 		</script>
 		<div class="box" style="clear:both;max-width:940px;">
 			<div id="loading" style="clear:both">
-				<p>Please wait while the locations of all records are being checked. This will vary depending on how many locations there are.</p>
+				<p><?php print _("Please wait while the locations of all records are being checked. This will vary depending on how many locations there are."); ?></p>
 				<img src="<?php echo $AssetPath; ?>images/loading.gif" />
 			</div>
 			<div id="email_content">
@@ -343,16 +342,16 @@ class LinkChecker {
 								 "ON location_title.location_id = location.location_id";
 			$links_result = $db->query($links_select);
 			?>
-			<h2 style="clear:both;">Checking All Records:</h2>
+			<h2 style="clear:both;"><?php print _("Checking All Records"); ?>:</h2>
 			<?php if(!count($links_result)): ?>
-				<p style="margin: 20px 0 40px 0;">No Record Locations Exist.</p>
+				<p style="margin: 20px 0 40px 0;"><?php print _("No Record Locations Exist"); ?>.</p>
 			<?php else: ?>
 				<table class="striper" style="width: 100%; margin: 20px 0 40px 0;">
 					<thead>
 						<tr>
-							<th style="width: 60%">Link</th>
-							<th>Status</th>
-							<th>&nbsp; HTTP Error Message</th>
+									<th style="width: 60%"><?php print _("Link"); ?></th>
+									<th><?php print _("Status"); ?></th>
+									<th>&nbsp; <?php print _("HTTP Error Message"); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -384,7 +383,7 @@ class LinkChecker {
 			$("input[name*=send_report2]").livequery('click', function(event) {
 
 				var our_contents = $(this).attr("name");
-				var our_linkresults = '<style type="text/css" media="all">@import "http://dev-www.library.miami.edu/sp/assets/css/admin_styles.css";</style>'
+				var our_linkresults = '<style type="text/css" media="all"></style>'
 									+ '<div id="maincontent">'
 									+ $("#email_content").html()
 									+ '</div>';
@@ -509,11 +508,11 @@ class LinkChecker {
 				}
 				$this->LinkCheckerFlush();
 			}
-			if(!$lboolEchoed && $displaynolinks) print "<tr><td>This box does not contain any links.</td><td>N/A</td></tr>\n"; //print out something if nothing was echoed
+			if(!$lboolEchoed && $displaynolinks) print "<tr><td>" . _("This box does not contain any links") . "</td><td>" . _("N/A") . "</td></tr>\n"; //print out something if nothing was echoed
 		}
 		elseif( $displaynolinks )
 		{
-			print "<tr><td>This box does not contain any links.</td><td>N/A</td></tr>\n";
+			print "<tr><td>" . _("This box does not contain any links") . "</td><td>" . _("N/A") . "</td></tr>\n";
 		}
 	}
 
@@ -541,13 +540,13 @@ class LinkChecker {
 		if( !$onlyCurrent)
 		{
 			$mailReport = "<p>" ._("Would you like to mail this report to someone?") .
-				"</p><br /><input type=\"submit\" class=\"button\" name=\"send_report2owner\" value=\"" . _("Send report to: ")
-	        . $_SESSION["email"] . "\"> &nbsp; <input type=\"submit\" name=\"send_report2all\" value=\""
+				"</p><br /><input type=\"submit\" class=\"button pure-button pure-button-primary\" name=\"send_report2owner\" value=\"" . _("Send report to: ")
+	        . $_SESSION["email"] . "\"> &nbsp; <input type=\"submit\" class=\"button pure-button pure-button-primary\" name=\"send_report2all\" value=\""
 	        . _("Send report to All Guide Owners") . "\"><br /><br />";
 		}else
 		{
 			$mailReport = "<p>" ._("Would you like to mail this report to someone?") .
-				"</p><br /><input type=\"submit\" class=\"button\"  name=\"send_report2owner\" value=\"" . _("Send report to: ")
+				"</p><br /><input type=\"submit\" class=\"button pure-button pure-button-primary\"  name=\"send_report2owner\" value=\"" . _("Send report to: ")
 	        . $_SESSION["email"] . "\"><br /><br />";
 		}
 
