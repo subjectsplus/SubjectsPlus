@@ -203,38 +203,38 @@ $subs_option_boxes
 <input type=\"submit\" name=\"submit\" value=\"" . _("Submit") . "\" />
 </form>";
 
-print "<div id=\"response\" class=\"feedback\"></div>
-    <br />
-    <div class=\"manage-all-items\">
-    <div class=\"box\">
-    <h2>" . _("Manage All Items by Source") . "</h2>
-
-<p>" . _("Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box.") . "</p>
-    <br />
+$manage_all_box = "<p>" . _("Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box.") . "</p>
 $all_guides
 <br />
 <p><img src=\"$IconPath/pencil.png\" alt=\"" . _("pencil image") . "\" /> " . _("Note: You can also do this in a guide, by clicking on the pencil icon for an 'All Items by Source' box.") . "</p>
-<div id=\"test_url\"></div>
-</div>
-</div>";
+<div id=\"test_url\"></div>";
 
-
-print "<div class=\"manage-your-uploads\"><div class=\"box\">
-<h2>" . _("Manage your Uploads") . "</h2>
-
-<p>" . _("Highlighted items are orphans.  Pity the orphans!") . "</p>";
+// Uploads Box //
+$uploads_box = "<p>" . _("Highlighted items are orphans.  Pity the orphans!") . "</p>";
 
 // Allow admin to see all
 if ( isset( $_SESSION["admin"] ) && $_SESSION["admin"] == 1 ) {
-    print "<p>" . _("Admin Tip: add ?view=all to this page's URL to see all users' items.") . "</p>";
+    $uploads_box .= "<p>" . _("Admin Tip: add ?view=all to this page's URL to see all users' items.") . "</p>";
 }
 
-print "<br />
-$file_list
-</div>
-</div>
-";
+$uploads_box .= "<br />$file_list";
 
+// Print out //
+
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-1-2\">  
+  ";
+
+makePluslet(_("Manage your Uploads"), $uploads_box, "no_overflow");
+
+print "</div>"; // close pure-u-
+print "<div class=\"pure-u-1-2\">";
+
+makePluslet(_("Manage All Items by Source"), $manage_all_box, "no_overflow");
+
+print "</div>"; // close pure-u-
+print "</div>"; // close pure
 
 include("../includes/footer.php");
 

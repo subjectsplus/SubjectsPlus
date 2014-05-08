@@ -116,7 +116,7 @@ if ($num_rows != "") {
             $last_source_id = $this_source_id;
         }
 
-        $ourlist .= "<li id=\"item-$myrow[5]\" style=\"padding: 2px; margin: 4px; border: 1px dashed #ccc;\"><a id=\"delete-$myrow[5]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> $myrow[1]</li>";
+        $ourlist .= "<li id=\"item-$myrow[5]\" style=\"padding: 2px; margin: 4px; border: 1px dashed #ccc; list-style-type: none;\"><a id=\"delete-$myrow[5]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> $myrow[1]</li>";
 
         $row_count++;
     }
@@ -129,47 +129,54 @@ if ($num_rows != "") {
 // Display content
 /////////////////////////////////
 
-print "";
-
 if ($nocookies == "yes") {
 
-    $title_line = "<h2>" . _("Organize Resources") . "</h2>";
+    $title_line = _("Organize Resources");
 } else {
 
-    $title_line = "<h2>" . _("Organize Resources for ") . "$subject_name</h2>";
+    $title_line =  _("Organize Resources for ") . "$subject_name";
     $response = "<div id=\"response\" class=\"feedback\"></div>
-	<br />
-	<div id=\"savour\" style=\"clear: both;float:left; padding-left: 40%;  \"><button class=\"button\" id=\"save_guide\" style=\"display:none;\">" . _("SAVE CHANGES") . "</button></div>";
+    <br />
+    <p id=\"savour\" align=\"center\"><button class=\"button\" id=\"save_guide\" class=\"button pure-button pure-button-primary\" style=\"display:none;\">" . _("SAVE CHANGES") . "</button></p>";
 }
 
 
-    print "<div id=\"maincontent\">
-$response
-<div class=\"clearboth\"float: left; width: 600px;\">
-	<br class=\"clear-both\" />
-	$title_line
-	<div class=\"box no_overflow\">
-        <div id=\"res_content\">
-	$ourlist
-        </div>
-	</div>
-</div>";
+print $response;
+
+$org_box = "<p>" . _("You may drag items to rearrange their order") . $ourlist;
+
+// Print out //
+
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">  
+  ";
+
+makePluslet($title_line, $org_box, "no_overflow");
+
+
+print "</div>"; // close pure-u-
+print "<div class=\"pure-u-1-3\">";
 
 if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
   // don't include sidebar in popup
 } else {
-    print "<div style=\"float: left; margin-left: 1em; width: 300px;\">
-        <br />
-        <h2>" . _("View Guide") . "</h2>
-        <div class=\"box\">
+    $links_box = "
         <ul>
         <li><a href=\"guide.php?subject_id=$subject_id\">" . _("Admin guide") . "</a></li>
         <li><a href=\"$PublicPath" . "guide.php?subject=$shortform\">" . _("Public guide") . "</a></li>
-        </ul>
-</div>
-";
+        </ul>";
+
+   makePluslet(_("View Guide"), $links_box, "no_overflow");     
 
 }
+
+
+print "</div>"; // close pure-u-
+print "</div>"; // close pure
+
+
+
 
 include("../includes/footer.php");
 ?>

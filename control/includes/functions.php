@@ -1193,14 +1193,15 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "") {
 
 /**
  * feedBack() is to wrap the feedback in some styling
- *
+ * $display expects either "response" (from guides, which is positioned absolutely)
+ * or the default "feedback" (which is relative).  Look at css for these ids in admin_styles.css
  * @return string
  */
 
 function feedBack($message="", $display="feedback") {
   //print "HELLO our message is $message";
   if ($message != "") {
-    print "<div id=\"$display\" class=\"$classes\" style=\"display:block;\">$message</div>";
+    print "<div id=\"$display\" style=\"display:block;\">$message</div>";
   } else {
     return "";
   }
