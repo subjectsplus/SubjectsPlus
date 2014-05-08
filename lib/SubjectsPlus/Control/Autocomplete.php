@@ -75,12 +75,12 @@ class Autocomplete {
 
     switch ($this->collection) {
       case "home":
-	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type' FROM subject 
+	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'addtional_id' FROM subject 
 WHERE description LIKE"  . $db->quote("%" . $this->param . "%") . "
 OR subject LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR keywords LIKE "  . $db->quote("%" . $this->param . "%"). "
 UNION 
-SELECT p.pluslet_id, p.title, su.subject_id, su.shortform, 'Pluslet' AS 'content_type' FROM pluslet AS p 
+SELECT p.pluslet_id, p.title, su.subject_id, su.shortform, 'Pluslet' AS 'content_type', t.tab_index as 'addtional_id' FROM pluslet AS p 
 	INNER JOIN pluslet_section AS ps 
 	ON ps.pluslet_id = p.pluslet_id
 	INNER JOIN section AS s 
@@ -93,26 +93,26 @@ WHERE p.body LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR p.title LIKE "  . $db->quote("%" . $this->param . "%") . "
 
 UNION
-SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type' FROM faq 
+SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type', '' as 'addtional_id' FROM faq 
 WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR answer LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR keywords LIKE "  . $db->quote("%" . $this->param . "%") . "
 UNION
-SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type' FROM talkback 
+SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type', '' as 'addtional_id' FROM talkback 
 WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR answer LIKE "  . $db->quote("%" . $this->param . "%") . "
 UNION
-SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type' FROM staff 
+SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type', '' as 'addtional_id' FROM staff 
 WHERE fname LIKE " .$db->quote("%" . $this->param . "%")  . "
 OR lname LIKE "  . $db->quote("%" . $this->param . "%") . "
 OR email LIKE " . $db->quote("%" . $this->param . "%") . "
 OR tel LIKE " . $db->quote("%" . $this->param . "%") . "
 UNION
-SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type' FROM department 
+SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type', '' as 'addtional_id' FROM department 
 WHERE name LIKE " . $db->quote("%" . $this->param . "%") ."
 OR telephone LIKE  " . $db->quote("%" . $this->param . "%") . "
 UNION
-SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text','' AS 'short_form', 'Video' as 'content_type' FROM video 
+SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text','' AS 'short_form', 'Video' as 'content_type', '' as 'addtional_id' FROM video 
 WHERE title LIKE " .  $db->quote("%" . $this->param . "%") . "
 OR description LIKE " . $db->quote("%" . $this->param . "%") . "
 OR vtags LIKE " .  $db->quote("%" . $this->param . "%");
@@ -196,9 +196,10 @@ foreach ($result as $myrow)  {
       
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
+	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[2] . '#box-' . $myrow[5] . '-' . $myrow[0];
       } else {
-	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3];
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow[5] . '-' . $myrow[0];
+	  $arr[$i]['tab_index'] = $myrow[5];
 	  
       }
 	break;
