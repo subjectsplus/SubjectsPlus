@@ -229,7 +229,7 @@ function modifyDB($id, $type) {
                 WHERE pluslet_id ='$id'";
             $r = $db->exec($q);
             //print $q;
-            if (!$r) {
+            if ($r === FALSE) {
                 print "<p>There was a problem with your insert:</p>";
                 print "<p>$q</p>";
                 $id = false;

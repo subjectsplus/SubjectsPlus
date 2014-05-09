@@ -457,9 +457,9 @@ function setupSaveButton( lstrSelector )
 				//alert(pspecial);
 				break;
 			case "Feed":
-				var pbody = jQuery('input[name=' + lstrInstance + ']').attr('value');
-				var pfeed_type = jQuery('select[name=feed_type-'+lintID+']').attr('value');
-				var pnum_items = jQuery('input[name=displaynum-'+lintID+']').attr('value');
+				var pbody = jQuery('input[name=' + lstrInstance + ']').val();
+				var pfeed_type = jQuery('select[name=feed_type-'+lintID+']').val();
+				var pnum_items = jQuery('input[name=displaynum-'+lintID+']').val();
 				var pshow_desc = jQuery('input[name=showdesc-'+lintID+']:checked').val();
 				var pshow_feed = jQuery('input[name=showfeed-'+lintID+']:checked').val();
 
