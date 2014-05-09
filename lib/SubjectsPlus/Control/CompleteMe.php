@@ -80,9 +80,22 @@ $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
 if (item.category != undefined) {
           ul.append( \"<li class='ui-autocomplete-category'>\" + item.category + \"</li>\" );
           currentCategory = item.category;
-console.log(item);
-}        
 }
+
+
+     
+}
+
+
+
+if (item.category === 'Pluslet') {
+
+ul.append('<li class=\'autocomplete-parent-guide\'>' + item.parent + '</li>');
+
+} else {
+
+}
+   
 
         that._renderItemData( ul, item );
       });

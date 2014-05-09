@@ -72,12 +72,12 @@ class Autocomplete {
 
     switch ($this->collection) {
       case "home":
-	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id' FROM subject 
+	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id', '' as 'parent' FROM subject 
 WHERE description LIKE "  . $search_param . "
 OR subject LIKE "  . $search_param . "
 OR keywords LIKE "  . $search_param . "
 UNION 
-SELECT p.pluslet_id, p.title, su.subject_id, su.shortform, 'Pluslet' AS 'content_type', t.tab_index as 'additional_id' FROM pluslet AS p 
+SELECT p.pluslet_id, p.title, su.subject_id AS 'parent_id', su.shortform, 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p 
 	INNER JOIN pluslet_section AS ps 
 	ON ps.pluslet_id = p.pluslet_id
 	INNER JOIN section AS s 
@@ -90,26 +90,26 @@ WHERE p.body LIKE "  . $search_param . "
 OR p.title LIKE "  . $search_param . "
 
 UNION
-SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type', '' as 'additional_id' FROM faq 
+SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type', '' as 'additional_id', '' as 'parent' FROM faq 
 WHERE question LIKE "  . $search_param . "
 OR answer LIKE "  . $search_param . "
 OR keywords LIKE "  . $search_param . "
 UNION
-SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type', '' as 'additional_id' FROM talkback 
+SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type', '' as 'additional_id', '' as 'parent' FROM talkback 
 WHERE question LIKE "  . $search_param . "
 OR answer LIKE "  . $search_param . "
 UNION
-SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type', '' as 'additional_id' FROM staff 
+SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type', '' as 'additional_id', '' as 'parent' FROM staff 
 WHERE fname LIKE " .$search_param  . "
 OR lname LIKE "  . $search_param . "
 OR email LIKE " . $search_param . "
 OR tel LIKE " . $search_param . "
 UNION
-SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type', '' as 'additional_id' FROM department 
+SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type', '' as 'additional_id','' as 'parent' FROM department 
 WHERE name LIKE " . $search_param ."
 OR telephone LIKE  " . $search_param . "
 UNION
-SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text','' AS 'short_form', 'Video' as 'content_type', '' as 'additional_id' FROM video 
+SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text','' AS 'short_form', 'Video' as 'content_type', '' as 'additional_id', '' as 'parent' FROM video 
 WHERE title LIKE " .  $search_param . "
 OR description LIKE " . $search_param . "
 OR vtags LIKE " .  $search_param;
@@ -171,7 +171,9 @@ foreach ($result as $myrow)  {
     $arr[$i]['id'] = $myrow['id'];
     $arr[$i]['value'] = $myrow['short_form'];
     $arr[$i]['category'] = $myrow['content_type'];
-
+    $arr[$i]['parent'] = $myrow['parent'];
+    $arr[$i]['parent_id'] = $myrow[2];
+    
     switch($myrow[4]) {
       
       case "Subject Guide":
