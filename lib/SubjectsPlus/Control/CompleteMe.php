@@ -71,8 +71,11 @@ class CompleteMe {
 
 
 $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
-    _renderMenu: function( ul, items ) {
+_renderMenu: function( ul, items ) {
       var that = this;
+      pluslet_category = [];
+var parents = [];    
+ 
         currentCategory = \"\";
 
       $.each( items, function( index, item ) {
@@ -90,9 +93,22 @@ if (item.category != undefined) {
 
 if (item.category === 'Pluslet') {
 
-ul.append('<li class=\'autocomplete-parent-guide\'>' + item.parent + '</li>');
+if (parents.indexOf(item.parent) ===  0) {
+
+parents.push(item.parent);
 
 } else {
+
+ul.append('<li class=\'autocomplete-parent-guide\'>' + item.parent + '</li>');
+parents.push(item.parent);
+
+}
+var autocomplete_labels = jQuery('.autocomplete-parent-guide');
+ 
+console.log(jQuery.unique(autocomplete_labels));
+//console.log(item.parent);
+} else {
+
 
 }
    
