@@ -869,6 +869,11 @@ div.ctag_list a:hover {
   color: #fff;
 }
 
+.add_source
+{
+	display: none;
+}
+
 /* FAQ layout */
 
 .faq_wrapper {

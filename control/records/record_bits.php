@@ -50,10 +50,10 @@ switch ($_POST["type"]) {
         $qSource = "select source_id, source from source order by source";
         $defsourceArray = $querierSource->query($qSource);
 
-        $sourceMe = new Dropdown("default_source_id", $defsourceArray, $_POST["our_source_id"]);
+        $sourceMe = new Dropdown("source_override[]", $defsourceArray, $_POST["our_source_id"]);
         $source_string = $sourceMe->display();
 
-        echo "<span class=\"record-source-override\">" . _("Source Override") . "<br />$source_string <img src=\"$IconPath/list-add.png\" class=\"add_source\" id=\"add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("add source override") . "\" title=\"" . _("add source override") . "\" border=\"0\"> 
+        echo "<span class=\"record-source-override\">" . _("Source Override") . "<br />$source_string <img src=\"$IconPath/list-add.png\" class=\"add_source\" id=\"add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("add source override") . "\" title=\"" . _("add source override") . "\" border=\"0\">
         <img src=\"$IconPath/delete.png\" class=\"cancel_add_source\" id=\"cancel_add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("never mind") . "\" title=\"" . _("never mind") . "\" border=\"0\"></span>";
 
         break;

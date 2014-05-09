@@ -143,20 +143,26 @@ class FAQ {
 
 
     $faq_title_line = _("Edit FAQ") . " <span class=\"smallgrey\">{$this->_faq_id}</span>
-        <span style=\"float: right;font-size: 12px;\"><a href=\"" . $PublicPath . "faq.php?faq_id=$this->_faq_id\" target=\"_blank\">" . _("see live") . "</a></span>";
+        <div style=\"float: right; margin-left: 2em;font-size: 12px;\"><a href=\"" . $PublicPath . "faq.php?faq_id=$this->_faq_id\" target=\"_blank\">" . _("see live") . "</a></div>";
 
     echo "
-<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
+<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_faq_id . "\" />
 <div class=\"pure-g-r\">
-  <div class=\"pure-u-2-3\">  
+  <div class=\"pure-u-2-3\">
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">$faq_title_line</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
 
-<h2 class=\"bw_head\">$faq_title_line</h2>
 
-<span class=\"record_label\">" . _("Question") . "</span><br />
+
+<label for=\"question\">" . _("Question") . "</label>
 <textarea name=\"question\" rows=\"4\" cols=\"50\" class=\"required_field\">" . stripslashes($this->_question) . "</textarea>
-<br /><br />
-<span class=\"record_label\">" . _("Answer") . "</span><br />";
+
+<label for=\"answer\">" . _("Answer") . "</label>";
 
     if ($wysiwyg_desc == 1) {
 	   	include ($CKPath);
@@ -175,29 +181,38 @@ class FAQ {
     }
 
     echo "<br />
-<span class=\"record_label\">" . _("Keywords (comma separated please)") . "</span><br />
+<label for=\"keywords\">" . _("Keywords (comma separated please)") . "</label>
 <input type=\"text\" name=\"keywords\"  size=\"40\" value=\"" . $this->_keywords . "\" />
-<br />
 </div>
 </div>
-<!-- right hand column -->
-<div style=\"float: left;min-width: 50px;max-width: 400px\">
-	<div id=\"record_buttons\" class=\"box\">
-		<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Now") . "\" />";
+</div>
+<!-- right hand column -->    ";
+
+$last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
+      $title_save_box = "<div id=\"last_edited\">$last_mod</div>";
+
+  echo"<div class=\"pure-u-1-3\">
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">$title_save_box</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
+		<input type=\"submit\" name=\"submit_record\" class=\"button pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
 
     // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
     if ($this->_faq_id != "") {
       if (isset($_SESSION["admin"]) && $_SESSION["admin"] == "1") {
-        echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\" />";
+        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
       } else {
-        echo "<input type=\"submit\" name=\"recommend_delete\" class=\"recommend_delete\" value=\"" . _("Recommend Delete") . "\" />";
+        echo "<input type=\"submit\" name=\"recommend_delete\" class=\"button pure-button pure-button-warning\" value=\"" . _("Recommend Delete") . "\" />";
       }
 
-      $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
-      echo "<div id=\"last_edited\">$last_mod</div>";
+
+
     }
 
-    echo "</div>";
+    echo "</div></div>";
 
     /////////////////
     // Collections
@@ -248,23 +263,35 @@ class FAQ {
 
     $subject_string = getSubBoxes('', 50);
 
-    echo "
-        <div class=\"box no_overflow\">
-    <h2 class=\"bw_head\">" . _("Relevant Subjects") . "</h2>
 
-        <select name=\"subject_id[]\"><option value=\"\">-- Select --</option>
+    echo "
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">" . _("Relevant Subjects") . "</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
+
+        <select name=\"subject_id[]\"><option value=\"\">-- " . _("Select") . " --</option>
             $subject_string
         </select>
-	<div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
-    </div>
-        <div class=\"box no_overflow\">
-    <h2 class=\"bw_head\">" . _("Relevant Collections") . "</h2>
+	     <div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
+       <br />
+        </div></div>
 
-        <select name=\"collection_id[]\"><option value=\"\">-- Select --</option>
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">" . _("Relevant Collections") . "</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
+
+        <select name=\"collection_id[]\"><option value=\"\">-- " . _("Select") . " --</option>
             $collection_string
         </select>
         <div id=\"collection_list\">$collection_list</div> <!-- subjects inserted here -->
-    </div>
+        <br />
+    </div></div>
     </form>";
   }
 
@@ -321,7 +348,7 @@ class FAQ {
     $this->_debug = "<p>Del query: $q";
 
       if (count($delete_result) != 0) {
-  
+
     } else {
       // message
       $this->_message = _("There was a problem with your delete (stage 1 of 2).");
@@ -393,16 +420,16 @@ class FAQ {
     /////////////////////
     // update faq table
     /////////////////////
-
+  	$db = new Querier;
     $qUpFAQ = "UPDATE faq SET question = " . $db->quote(scrubData($this->_question, "text")) . ",
 	  answer = " . $db->quote(scrubData($this->_answer, 'richtext')) . ",
-	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . ",
+	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . "
           WHERE faq_id = " . scrubData($this->_faq_id, 'integer');
 
     $rUpFAQ = $db->query($qUpFAQ);
 
     $this->_debug = "<p>1. update faq: $qUpFAQ</p>";
-   
+
 
     /////////////////////
     // clear faq_subject
@@ -414,7 +441,7 @@ class FAQ {
 
     $this->_debug .= "<p>2. clear rank: $qClearSubs</p>";
 
-    if (!$rClearSubs) {
+    if ($rClearSubs === FALSE) {
       echo blunDer("We have a problem with the clear faq-subs query: $qClearSubs");
     }
 
@@ -429,7 +456,7 @@ class FAQ {
     $rClearColls = $db->query($qClearColls);
 
     $this->_debug .= "<p>4. wipe faq_faqpage: $qClearColls</p>";
-    if (!$rClearColls) {
+    if ($rClearColls === FALSE) {
       echo blunDer("We have a problem with the clear locations query: $qClearColls");
     }
 
@@ -452,7 +479,7 @@ class FAQ {
 
   function modifySubjects() {
     $db = new Querier;
-    
+
     for ($i = 0; $i < $this->_subject_count; $i++) {
       $qUpSub = "INSERT INTO faq_subject (faq_id, subject_id) VALUES (
                 " . scrubData($this->_faq_id, 'integer') . ",
@@ -461,7 +488,7 @@ class FAQ {
       $rUpSub = $db->query($qUpSub);
 
       $this->_debug .= "<p>3. (update faq_subject loop) : $qUpSub</p>";
-      if (!$rUpSub) {
+      if ($rUpSub === FALSE) {
         echo blunDer("We have a problem with the faq_subject query: $qUpSub");
       }
     }
@@ -476,7 +503,7 @@ class FAQ {
       $rUpColl = $db->query($qUpColl);
 
       $this->_debug .= "<p>3. (update faq_faqpage loop) : $qUpColl</p>";
-      if (!$rUpColl) {
+      if ($rUpColl === FALSE) {
         echo blunDer("We have a problem with the faq_faqpage query: $qUpColl");
       }
     }
