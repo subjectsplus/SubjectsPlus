@@ -8,8 +8,8 @@ $search->setSearch($_POST['searchterm']);
 <div id="main-content">
   <div class="pure-g-r">
     <div class="pure-u-1">
-      <div class="box">
-	<h2 class="bw_header">Search Results</h2>
+      <div class="pluslet">
+	<h2 class="bw_header pure-u-1-3">Search Results</h2>
       </div>
       <?php
 
@@ -17,7 +17,7 @@ $search->setSearch($_POST['searchterm']);
 
       foreach ($results as $result) {
 	
-	echo "<div class='box'>";
+	echo "<div class='pluslet pure-u-1-3'>";
 	
 
 	

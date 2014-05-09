@@ -24,21 +24,38 @@ include("includes/header.php");
 $search = new Search;
 $search->setSearch($_POST['searchterm']);
 ?>
+
 <div id="main-content">
   <div class="pure-g-r">
     <div class="pure-u-1">
-      <div class="box">
-	<h2 class="bw_header">Search Results</h2>
-      </div>
+  
       <?php
 
       $results = $search->getResults();
 
       foreach ($results as $result) {
 	
-	echo "<div class='box'>";
-	
+	echo "<div class='pluslet'>";
+    
+    switch ($result['content_type']) {
+	    
+        case 'Pluslet':
+            echo "<div class='titlebar'><div class='titlebar_text'>Content in Guide</div></div>";
+        break;
+    
+        default:
+            echo $result['content_type'];
+        break;
+        
+  
+        }
+    
+    
+	echo "<div class='pluslet_body'>";
 
+    
+    
+     
 	
 	switch($result['content_type']) {
 	  
@@ -76,17 +93,12 @@ $search->setSearch($_POST['searchterm']);
 	    break;
 	}
     
-    	echo "<p>";
-	echo $result['content_type'];
-	echo "</p>";  
-
-	
 
 	echo "<p>";
 	echo $result['additional_text'];
 	echo "</p>";
     
-    
+    	echo "</div>";
 	echo "</div>";
       }
       ?>      
