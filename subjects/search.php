@@ -22,7 +22,7 @@ include("includes/header.php");
 
 
 $search = new Search;
-$search->setSearch($_GET['q']);
+$search->setSearch($_POST['searchterm']);
 ?>
 <div id="main-content">
   <div class="pure-g-r">
@@ -35,7 +35,7 @@ $search->setSearch($_GET['q']);
       $results = $search->getResults();
 
       foreach ($results as $result) {
-	print_r($result);
+	
 	echo "<div class='box'>";
 	
 	echo "<p>";
@@ -61,7 +61,7 @@ $search->setSearch($_GET['q']);
 
 	  case 'Subject Guide':
 	    echo "<p>";
-	    echo "<a href='guide.php?subject=" . $result['shortform'] . "'/>View</a>";;
+	    echo "<a href='guide.php?subject=" . $result['id'] . "'/>View</a>";;
 	    echo "</p>";
 	    break;
 
