@@ -198,7 +198,7 @@ foreach ($result as $myrow)  {
 	if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
       } else {
-	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow['shortform'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	  $arr[$i]['tab_index'] = $myrow['additional_id'];
 	  
       }
