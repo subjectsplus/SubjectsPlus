@@ -31,37 +31,37 @@ class Search {
 
   public function getResults() {
 
-    $sql = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', 'Subject Guide' as 'content_type' FROM subject 
+    $sql = "SELECT subject_id AS 'id', shortform AS 'shortform',  subject AS 'matching_text', description as 'additional_text', 'Subject Guide' as 'content_type' FROM subject 
 WHERE description LIKE" . $this->getSearch() . "
 OR subject LIKE " . $this->getSearch() . "
 OR keywords LIKE " . $this->getSearch() . "
 OR shortform LIKE " . $this->getSearch() . "
 OR type LIKE " . $this->getSearch() . "
 UNION 
-SELECT pluslet_id AS 'id', title AS 'matching_text', body as 'additional_text', 'Pluslet' AS 'content_type' FROM pluslet 
+SELECT pluslet_id AS 'id', '' as 'shortform', title AS 'matching_text', body as 'additional_text', 'Pluslet' AS 'content_type' FROM pluslet 
 WHERE title LIKE " . $this->getSearch() . "
 OR body LIKE " . $this->getSearch() . "
 UNION
-SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','FAQ' as 'content_type' FROM faq 
+SELECT faq_id AS 'id', '' as 'shortform' ,  question AS 'matching_text', answer as 'additional_text','FAQ' as 'content_type' FROM faq 
 WHERE question LIKE " . $this->getSearch() . "
 OR answer LIKE " . $this->getSearch() . "
 OR keywords LIKE " . $this->getSearch() . "
 UNION
-SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text', 'Talkback' as 'content_type' FROM talkback 
+SELECT talkback_id AS 'id', '' as 'shortform',  question AS 'matching_text' , answer as 'additional_text', 'Talkback' as 'content_type' FROM talkback 
 WHERE question LIKE " . $this->getSearch() . "
 OR answer LIKE " . $this->getSearch() . "
 UNION
-SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text', 'Staff' as 'content_type' FROM staff 
+SELECT staff_id AS 'id',  '' as 'shortform', email AS 'matching_text' , fname as 'additional_text', 'Staff' as 'content_type' FROM staff 
 WHERE fname LIKE " . $this->getSearch() . "
 OR lname LIKE " . $this->getSearch() . "
 OR email LIKE " . $this->getSearch() . "
 OR tel LIKE " . $this->getSearch() . "
 UNION
-SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text', 'Department' as 'content_type' FROM department 
+SELECT department_id AS 'id', '' as 'shortform', name AS 'matching_text' , telephone as 'additional_text', 'Department' as 'content_type' FROM department 
 WHERE name LIKE " . $this->getSearch() . "
 OR telephone LIKE " . $this->getSearch() . "
 UNION
-SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text', 'Video' as 'content_type' FROM video 
+SELECT video_id AS 'id',  '' as 'shortform', title AS 'matching_text' , description as 'additional_text', 'Video' as 'content_type' FROM video 
 WHERE title LIKE " . $this->getSearch() . "
 OR description LIKE " . $this->getSearch() . "
 OR vtags LIKE " . $this->getSearch();

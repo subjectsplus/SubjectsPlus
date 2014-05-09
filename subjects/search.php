@@ -61,7 +61,7 @@ $search->setSearch($_POST['searchterm']);
 
 	  case 'Subject Guide':
 	    echo "<p>";
-	    echo "<a href='guide.php?subject=" . $result['id'] . "'/>View</a>";;
+	    echo "<a href='guide.php?subject=" . $result['shortform'] . "'/>View</a>";;
 	    echo "</p>";
 	    break;
 
