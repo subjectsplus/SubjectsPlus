@@ -61,6 +61,7 @@ $search->setSearch($_POST['searchterm']);
 	    echo "</p>";
 	    break;
 
+        
 	  case 'Pluslet':
 	    echo "<p>";
 	    echo "<a href='guide.php?subject=" . $result['shortform'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";

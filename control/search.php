@@ -1,4 +1,5 @@
 <?php
+$page_title = _("Search Results");
 include("includes/header.php");
 use SubjectsPlus\Control\Search;
 $search = new Search;
@@ -43,7 +44,7 @@ $search->setSearch($_POST['searchterm']);
 
 	  case 'Pluslet':
 	    echo "<p>";
-	    echo "<a href='faq/faq.php?subject=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+	    echo "<a href='guides/guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";
 	    echo "</p>";
 	    
 	    break;
@@ -54,6 +55,7 @@ $search->setSearch($_POST['searchterm']);
 	    
 	    break;
 	}
+    
     
     	echo "<p>";
 	echo $result['content_type'];
