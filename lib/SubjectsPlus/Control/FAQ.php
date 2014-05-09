@@ -175,12 +175,12 @@ class FAQ {
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);
-		echo "<br />";
+
     } else {
       echo "<textarea name=\"answer\" rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
     }
 
-    echo "<br />
+    echo "
 <label for=\"keywords\">" . _("Keywords (comma separated please)") . "</label>
 <input type=\"text\" name=\"keywords\"  size=\"40\" value=\"" . $this->_keywords . "\" />
 </div>
@@ -495,10 +495,11 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
   }
 
   function modifyCollections() {
+    $db = new Querier;
     for ($i = 0; $i < $this->_collection_count; $i++) {
       $qUpColl = "INSERT INTO faq_faqpage (faq_id, faqpage_id) VALUES (
-                '" . scrubData($this->_faq_id, "integer") . "',
-                '" . scrubData($this->_collection[$i], "integer") . "')";
+                " . scrubData($this->_faq_id, "integer") . ",
+                " . scrubData($this->_collection[$i], "integer") . ")";
 
       $rUpColl = $db->query($qUpColl);
 

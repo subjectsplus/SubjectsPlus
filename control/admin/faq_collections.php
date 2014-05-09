@@ -4,7 +4,7 @@
  *   @brief CRUD collections
  *
  *   @author adarby
- *   @date march 2011
+ *   @date 2011;  updated may 2014
  *
  */
     
@@ -15,7 +15,7 @@ $subsubcat = "";
 $subcat = "admin";
 $page_title = "Admin FAQ Collections";
 
-//print_r($_POST);
+// print_r($_POST);
 
 include("../includes/header.php");
 $db = new Querier;
@@ -28,14 +28,14 @@ if (isset($_POST["add_collection"])) {
     ////////////////
     // Insert title table
     ////////////////
-
+    
     $qInsert = "INSERT INTO faqpage (name, description) VALUES (
-		'" . $db->quote(scrubData($_POST["new_coll_name"])) . "', ''
+		" . $db->quote(scrubData($_POST["new_coll_name"])) . ", ''
 		)";
 
-    $rInsert = $db->query($qInsert);
+    $rInsert = $db->exec($qInsert);
 
-    if ($rInsert) {
+    if ($rInsert !== FALSE) {
         $feedback = _("Thy Will Be Done.  Updated.");
     } else {
         $feedback = _("Thwarted!  Something has gone wrong with the insert.  Contact the admin.");
@@ -62,7 +62,7 @@ if (isset($_POST["update_collections"])) {
 
     foreach ($result as $key => $value) {
         $qUp = "UPDATE faqpage SET
-		name = '" . $db->quote(scrubData($value)) . "'
+		name = " . $db->quote(scrubData($value)) . "
 		WHERE faqpage_id = " . scrubData($key, "integer");
 
         //print $qUp;
@@ -97,33 +97,39 @@ if ($resultArray) {
     }
 }
 
-print "
-<div class=\"feedback\">$feedback</div><br /><br />
-<form id=\"sources\" action=\"\" method=\"post\">
-<div id=\"savour\" style=\"clear: both;float:left; \">
-	<div id=\"save_zone\"  >
-		<button class=\"button\" id=\"save_guide\" name=\"update_collections\" >" . _("SAVE CHANGES") . "</button>
-	</div>
-
-</div>
-<br />
-<div class=\"box\" style=\"clear: both; float: left; min-width: 500px;\">
+$collection_box = "<form id=\"sources\" action=\"\" method=\"post\">
 <p>" . _("Edit label or delete collection.") . "</p>
-<br />
 $ourlist
-</form>
-</div>
-<div style=\"float: left; margin-left: 1em;\">
-<div class=\"box\">
-    <h2 class=\"bw_head\">" . _("Add Collection") . "</h2>
+</form>";
 
-<form id=\"new_collection\" action=\"\" method=\"post\">
+$add_collection_box = "<form id=\"new_collection\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Collection Name") . "</span><br />
 <input type=\"text\" name=\"new_coll_name\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
 <br /><br />
-<button class=\"button\" id=\"add_collection\" name=\"add_collection\">" . _("Add New Collection") . "</button>
+<button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\">" . _("Add New Collection") . "</button>
 </form>
 <div>";
+
+///////////////
+// Print 'er out
+///////////////
+
+echo feedBack($feedback);
+
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">  
+";
+
+makePluslet(_("Current Collections"), $collection_box, "no_overflow");
+
+print "</div>"; // close pure-u-2-3
+print "<div class=\"pure-u-1-3\">";
+
+makePluslet(_("Add Collection"), $add_collection_box, "no_overflow");
+
+print "</div>"; // close pure-u-1-3
+print "</div>"; // close pure-g-r
 
 
 include("../includes/footer.php");

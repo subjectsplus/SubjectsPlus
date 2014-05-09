@@ -1586,7 +1586,7 @@ img.tooltip  {
   color: #333;
   font-size: 1.1em;
   font-weight:700;
-  height: 100%;
+
   min-height: 2em;
   border-bottom: 1px solid #ccc;background-color: #EFEFEF;
 }

@@ -74,11 +74,11 @@ if ($faqArray) {
 
 $faq_body = "<p><strong>$row_count1 " . _("FAQs visible");
 
-if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
-  $faq_body .= "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)</strong></p>";
+if (!isset($limit) || $limit != "all") {
+  $faq_body .= " (<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
 }
 
-$faq_body .= $faq_list;
+$faq_body .= "</strong></p>" . $faq_list;
 
 ?>
 <div class="pure-g-r">
@@ -107,6 +107,9 @@ $faq_body .= $faq_list;
       <div class="pluslet_body">
         <p><img src="<?php print $IconPath; ?>/pencil.png" alt="<?php print _("Edit FAQ"); ?>" width="16" height="16" /> <?php print _("Edit FAQ"); ?></p>
         <p><img src="<?php print $IconPath; ?>/eye.png" alt="<?php print _("View FAQ"); ?>" width="16" height="16" /> <?php print _("View FAQ on Public Site"); ?></p>
+        <p><?php print _("FAQs may be assigned a subject or a collection.  FAQ collections are groupings that may show up on the sidebar of the public FAQ page:
+        for example, Library Catalog or InterLibrary Loan.  If you assign a subject, you can easily add all FAQs for that subject to a subject guide."); ?></p>
+        <p><?php print _("FAQ collections are created by the site administrator, or someone with the 'admin' privilege in SubjectsPlus."); ?></p>
       </div>
     </div>
   </div>

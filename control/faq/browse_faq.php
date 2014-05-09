@@ -21,12 +21,17 @@ if(isset($_GET['type']))
 
 include("../includes/header.php");
 
-print "<br /><br /><div style=\"float: left;  width: 70%;\">";
+// Print out //
+
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">  
+  ";
+
 
 if ($postvar_type == "holding") {
 
-  print "<div class=\"box no_overflow\">" . "<h2>" . _("Browse FAQs by Collection") . "</h2><p>"
-. _("If you wish to edit a FAQ, click the link.") . "</p>";
+  $browse_box = "<p>" . _("If you wish to edit a FAQ, click the link.") . "</p>";
 
   $q = "SELECT fp.faqpage_id, fp.name FROM faq f, faq_faqpage ff, faqpage fp WHERE f.faq_id = ff.faq_id AND fp.faqpage_id = ff.faqpage_id GROUP BY fp.name";
 
@@ -44,27 +49,28 @@ if ($postvar_type == "holding") {
 
     $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-    print "<h3>$name</h3>";
+    $browse_box .= "<h3>$name</h3>";
 
     $q2 = "SELECT * FROM faq_faqpage ff, faq f WHERE  f.faq_id = ff.faq_id AND ff.faqpage_id = '$fp_id'";
     //print $q2;
     $r2 = $db->query($q2);
 
-    print "<ul>";
+    $browse_box .= "<ul>";
      
     foreach ($r2 as $myrow2) {
-      print "<li><a class=\"showmedium\" href=\"faq.php?faq_id=" . $myrow2["faq_id"] . "&wintype=pop\">" . stripslashes(htmlspecialchars_decode($myrow2["question"])) . "</a></li>";
+      $browse_box .= "<li><a class=\"showmedium\" href=\"faq.php?faq_id=" . $myrow2["faq_id"] . "&wintype=pop\">" . stripslashes(htmlspecialchars_decode($myrow2["question"])) . "</a></li>";
     }
-    print "</ul>";
+
+    $browse_box .= "</ul>";
 
     $row_count++;
   }
+
+  makePluslet(_("Browse FAQs by Collection"), $browse_box, "no_overflow");
+
 } else {
 
-    print "<div class=\"box no_overflow\">". "<h2>" . _("Browse FAQs by Subject Area") . "</h2>
-
-<p>" . _("If you wish to edit a FAQ, click the link.") . "</p>
-    ";
+  $browse_subject_box = "<p>" . _("If you wish to edit a FAQ, click the link.") . "</p>";
 
   $q = "SELECT faq_id, question, answer, keywords, last_revised, last_revised_by
 FROM faq
@@ -84,21 +90,27 @@ ORDER BY faq_id DESC";
 
     $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-    print "<h3>$subject</h3>";
+    $browse_subject_box .= "<h3>$subject</h3>";
 
     $q2 = "SELECT * FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = '$sub_id'";
     $r2 = $db->query($q2);
 
-    print "<ul>";
+    $browse_subject_box .= "<ul>";
     foreach ($r2 as $myrow2) {
-      print "<li><a class=\"showmedium\" href=\"faq.php?faq_id=" . $myrow2["faq_id"] . "&wintype=pop\">" . stripslashes(htmlspecialchars_decode($myrow2["question"])) . "</a></li>";
+      $browse_subject_box .= "<li><a class=\"showmedium\" href=\"faq.php?faq_id=" . $myrow2["faq_id"] . "&wintype=pop\">" . stripslashes(htmlspecialchars_decode($myrow2["question"])) . "</a></li>";
     }
-    print "</ul>";
+
+    $browse_subject_box .= "</ul>";
 
     $row_count++;
   }
+
+  makePluslet(_("Browse FAQs by Subject Area"), $browse_subject_box, "no_overflow");
+
 }
-print "</div>
-    </div>";
+
+print "</div>"; // close pure-u-
+print "</div>"; // close pure
+
 include("../includes/footer.php");
 ?>

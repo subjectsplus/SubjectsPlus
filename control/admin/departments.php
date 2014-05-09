@@ -30,16 +30,16 @@ if (isset($_POST["add_department"])) {
     ////////////////
     $db = new Querier;
     $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
-		'" . $db->quote(scrubData($_POST["department"])) . "', 
-		'" . $db->quote(scrubData($_POST["telephone"])) . "', 
-		'0',
-        '" . $db->quote(scrubData($_POST["email"])) . "', 
-        '" . $db->quote(scrubData($_POST["url"])) . "'
+		" . $db->quote(scrubData($_POST["department"])) . ", 
+		" . $db->quote(scrubData($_POST["telephone"])) . ", 
+		0,
+        " . $db->quote(scrubData($_POST["email"])) . ", 
+        " . $db->quote(scrubData($_POST["url"])) . "
 		)";
 
     $rInsertDept = $db->query($qInsertDept);
 
-    if ($rInsertDept) {
+    if ($rInsertDept !== FALSE) {
         $feedback = _("Thy Will Be Done.  Department list updated.");
 
     } else {
@@ -86,11 +86,11 @@ if (isset($_POST["update_departments"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE department SET
-        name = '" . $db->quote(scrubData($value[0])) . "',
-        telephone = '" . $db->quote(scrubData($value[1])) . "',
-        department_sort = '" . $row_count . "',
-        email = '" . $db->quote(scrubData($value[2])) . "',
-        url = '" . $db->quote(scrubData($value[3])) . "'
+        name = " . $db->quote(scrubData($value[0])) . ",
+        telephone = " . $db->quote(scrubData($value[1])) . ",
+        department_sort = " . $row_count . ",
+        email = " . $db->quote(scrubData($value[2])) . ",
+        url = " . $db->quote(scrubData($value[3])) . "
         WHERE department_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
@@ -136,52 +136,60 @@ foreach ($deptArray as $value) {
   <input type=\"hidden\" name=\"dept_id[]\" value=\"$value[0]\" /></li>";
 }
 
-print "
-<div class=\"feedback\">$feedback</div><br /><br />
-<form id=\"departments\" action=\"\" method=\"post\">
-<div id=\"savour\" class=\"department-save\">
-	<div id=\"save_zone\">
-		<button id=\"save_guide\" name=\"update_departments\" >" . _("SAVE CHANGES") . "</button>
-	</div>
-	
-</div>
-<br />
-<div class=\"box department-box\">
-<p>" . _("Enter department name, telephone number, email, website url.  Drag departments to change display order.") . "</p>
-<br />
+$dept_box ="<p>" . _("Enter department name, telephone number, email, website url.  Drag departments to change display order.") . "</p>
+
 
 <ul id=\"sortable-\" class=\"sortable_list\">
 $ourlist
 </ul>
-</form>
-</div>
-<div class=\"add-department\"><div class=\"box\">
-<h2 class=\"bw_head\">" . _("Add Department") . "</h2>
-<form id=\"new_deptartment\" action=\"\" method=\"post\">
-<span class=\"record_label\">" . _("Department Name") . "</span><br />
-<input type=\"text\" name=\"department\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
-<br /><br />
-<span class=\"record_label\">" . _("Telephone") . "</span><br />
-<input type=\"text\" name=\"telephone\" id=\"\" size=\"10\" class=\"required_field\" value=\"\">
-<br /><br />
-<span class=\"record_label\">" . _("Email") . "</span><br />
-<input type=\"text\" name=\"email\" id=\"\" size=\"20\" class=\"required_field\" value=\"\">
-<br /><br />
-<span class=\"record_label\">" . _("Website") . "</span><br />
-<input type=\"text\" name=\"url\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
-<br /><br />
-<button id=\"add_dept\" name=\"add_department\" >" . _("Add New Department") . "</button>
-</form>
-</div>
+</form>";
 
-<div class=\"box\">
-<h2 class=\"bw_head\">" . _("View Live!") . "</h2>
-<ul>
+$add_dept_box = "<form id=\"new_department\" action=\"\" class=\"pure-form pure-form-stacked\" method=\"post\">
+<label for=\"department\">" . _("Department Name") . "</label>
+<input type=\"text\" name=\"department\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+
+<label for=\"telephone\">" . _("Telephone") . "</label>
+<input type=\"text\" name=\"telephone\" id=\"\" size=\"10\" class=\"required_field\" value=\"\">
+
+<label for=\"email\">" . _("Email") . "</label>
+<input type=\"text\" name=\"email\" id=\"\" size=\"20\" class=\"required_field\" value=\"\">
+
+<label for=\"url\">" . _("Website") . "</label>
+<input type=\"text\" name=\"url\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<p></p>
+<button class=\"button pure-button pure-button-primary\" id=\"add_dept\" name=\"add_department\" >" . _("Add New Department") . "</button>
+</form>";
+
+$view_depts_box = "<ul>
 <li><a href=\"$PublicPath" . "/staff.php?letter=By Department\" target=\"_blank\">" . _("Staff by Department") . "</a></li>
-</ul>
+</ul>";
+
+print feedBack($feedback);
+
+print "
+
+<form id=\"departments\" action=\"\" method=\"post\">
+
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">
+
+<div id=\"savour\" style=\"clear: both;float:left; \">
+<div id=\"save_zone\" style=\"\">
+<button id=\"save_guide\" name=\"update_departments\" >" . _("SAVE CHANGES") . "</button>
 </div>
 </div>";
 
+  makePluslet(_("Departments"), $dept_box, "no_overflow");
+
+print "</div>
+<div class=\"pure-u-1-3\">";
+
+makePluslet(_("Add Department"), $add_dept_box, "no_overflow");
+
+makePluslet(_("View Live!"), $view_depts_box, "no_overflow");
+
+print "</div>"; // close pure-u-
+print "</div>"; // close pure
 
 include("../includes/footer.php");
 ?>
@@ -205,7 +213,7 @@ include("../includes/footer.php");
                 cursor: 'move',
                 update: function() {
                     $("#response").hide();
-                    $("#save_zone").fadeIn();
+                    $("#savour").fadeIn();
                 }
 
 
