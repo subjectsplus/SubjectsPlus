@@ -66,21 +66,18 @@ class Autocomplete {
   }
 
   public function search() {
-    /*
-    SELECT pluslet_id AS 'id', title AS 'matching_text', body as 'additional_text','' AS 'short_form', 'Pluslet' AS 'content_type' FROM pluslet 
-    WHERE title LIKE "  . $db->quote("%" . $this->param . "%") . "
-    OR body LIKE "  . $db->quote("%" . $this->param . "%") . "
-     */
+      
     $db = new Querier;
+    $search_param = $db->quote("%" . $this->param . "%");
 
     switch ($this->collection) {
       case "home":
-	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'addtional_id' FROM subject 
-WHERE description LIKE"  . $db->quote("%" . $this->param . "%") . "
-OR subject LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR keywords LIKE "  . $db->quote("%" . $this->param . "%"). "
+	$q = "SELECT subject_id AS 'id', subject AS 'matching_text', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id', '' as 'parent' FROM subject 
+WHERE description LIKE "  . $search_param . "
+OR subject LIKE "  . $search_param . "
+OR keywords LIKE "  . $search_param . "
 UNION 
-SELECT p.pluslet_id, p.title, su.subject_id, su.shortform, 'Pluslet' AS 'content_type', t.tab_index as 'addtional_id' FROM pluslet AS p 
+SELECT p.pluslet_id, p.title, su.subject_id AS 'parent_id', su.shortform, 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p 
 	INNER JOIN pluslet_section AS ps 
 	ON ps.pluslet_id = p.pluslet_id
 	INNER JOIN section AS s 
@@ -89,43 +86,43 @@ SELECT p.pluslet_id, p.title, su.subject_id, su.shortform, 'Pluslet' AS 'content
 	ON s.tab_id = t.tab_id
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
-WHERE p.body LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR p.title LIKE "  . $db->quote("%" . $this->param . "%") . "
+WHERE p.body LIKE "  . $search_param . "
+OR p.title LIKE "  . $search_param . "
 
 UNION
-SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type', '' as 'addtional_id' FROM faq 
-WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR answer LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR keywords LIKE "  . $db->quote("%" . $this->param . "%") . "
+SELECT faq_id AS 'id', question AS 'matching_text', answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type', '' as 'additional_id', '' as 'parent' FROM faq 
+WHERE question LIKE "  . $search_param . "
+OR answer LIKE "  . $search_param . "
+OR keywords LIKE "  . $search_param . "
 UNION
-SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type', '' as 'addtional_id' FROM talkback 
-WHERE question LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR answer LIKE "  . $db->quote("%" . $this->param . "%") . "
+SELECT talkback_id AS 'id', question AS 'matching_text' , answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type', '' as 'additional_id', '' as 'parent' FROM talkback 
+WHERE question LIKE "  . $search_param . "
+OR answer LIKE "  . $search_param . "
 UNION
-SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type', '' as 'addtional_id' FROM staff 
-WHERE fname LIKE " .$db->quote("%" . $this->param . "%")  . "
-OR lname LIKE "  . $db->quote("%" . $this->param . "%") . "
-OR email LIKE " . $db->quote("%" . $this->param . "%") . "
-OR tel LIKE " . $db->quote("%" . $this->param . "%") . "
+SELECT staff_id AS 'id', email AS 'matching_text' , fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type', '' as 'additional_id', '' as 'parent' FROM staff 
+WHERE fname LIKE " .$search_param  . "
+OR lname LIKE "  . $search_param . "
+OR email LIKE " . $search_param . "
+OR tel LIKE " . $search_param . "
 UNION
-SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type', '' as 'addtional_id' FROM department 
-WHERE name LIKE " . $db->quote("%" . $this->param . "%") ."
-OR telephone LIKE  " . $db->quote("%" . $this->param . "%") . "
+SELECT department_id AS 'id', name AS 'matching_text' , telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type', '' as 'additional_id','' as 'parent' FROM department 
+WHERE name LIKE " . $search_param ."
+OR telephone LIKE  " . $search_param . "
 UNION
-SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text','' AS 'short_form', 'Video' as 'content_type', '' as 'addtional_id' FROM video 
-WHERE title LIKE " .  $db->quote("%" . $this->param . "%") . "
-OR description LIKE " . $db->quote("%" . $this->param . "%") . "
-OR vtags LIKE " .  $db->quote("%" . $this->param . "%");
+SELECT video_id AS 'id', title AS 'matching_text' , description as 'additional_text','' AS 'short_form', 'Video' as 'content_type', '' as 'additional_id', '' as 'parent' FROM video 
+WHERE title LIKE " .  $search_param . "
+OR description LIKE " . $search_param . "
+OR vtags LIKE " .  $search_param;
 
 
 
 break;
 case "guides":
-$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $db->quote("%" . $this->param . "%") 
-											  . "OR shortform LIKE " . $db->quote("%" . $this->param . "%") 
-															     . "OR description LIKE " . $db->quote("%" . $this->param . "%") 
-																				  . "OR keywords LIKE " . $db->quote("%" . $this->param . "%") 
-																								    . "OR type LIKE " . $db->quote("%" . $this->param . "%") ;
+$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $search_param 
+   . "OR shortform LIKE " . $search_param 
+   . "OR description LIKE " . $search_param 
+   . "OR keywords LIKE " . $search_param 
+   . "OR type LIKE " . $search_param ;
 break;	
 
 
@@ -139,21 +136,21 @@ $q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.su
 	ON s.tab_id = t.tab_id
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
-        WHERE p.body LIKE " . $db->quote("%" . $this->param . "%")   . 
-					 " AND t.subject_id = " . $db->quote( $this->subject_id );
+        WHERE p.body LIKE " . $search_param   . 
+     " AND t.subject_id = " . $db->quote( $this->subject_id );
 
 break;
 case "records":
-$q = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote("%" . $this->param . "%") ;
+$q = "SELECT title_id, title FROM title WHERE title LIKE " . $search_param ;
 break;		
 case "faq":
-$q = "SELECT faq_id, LEFT(question, 55), 'faq' as 'type'  FROM faq WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
+$q = "SELECT faq_id, LEFT(question, 55), 'faq' as 'type'  FROM faq WHERE question LIKE " . $search_param ;
 break;
 case "talkback":
-$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $db->quote("%" . $this->param . "%") ;
+$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $search_param ;
 break;	
 case "admin":
-$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $db->quote("%" . $this->param . "%") . ") OR (lname LIKE " . $db->quote("%" . $this->param . "%") . ")";
+$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
 break;
 
 }
@@ -167,20 +164,23 @@ $i = 0;
 
 foreach ($result as $myrow)  {
 
-  $arr[$i]['label'] = $myrow[1];
-  if(isset($myrow[3])) {
-    $arr[$i]['shortform'] = $myrow[3];
-    $arr[$i]['id'] = $myrow[0];
-    $arr[$i]['value'] = $myrow[3];
-    $arr[$i]['category'] = $myrow[4];
 
+  $arr[$i]['label'] = $myrow['matching_text'];
+  if(isset($myrow[3])) {
+    $arr[$i]['shortform'] = $myrow['short_form'];
+    $arr[$i]['id'] = $myrow['id'];
+    $arr[$i]['value'] = $myrow['short_form'];
+    $arr[$i]['category'] = $myrow['content_type'];
+    $arr[$i]['parent'] = $myrow['parent'];
+    $arr[$i]['parent_id'] = $myrow[2];
+    
     switch($myrow[4]) {
       
       case "Subject Guide":
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[0];
+	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['id'];
       }   else {
-          $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3];   
+          $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
       }
         
 	break;
@@ -188,25 +188,25 @@ foreach ($result as $myrow)  {
       
       case "FAQ":
 	if ($this->getSearchPage() == "control") {
-          $arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow[0];
+          $arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow['id'];
       } else {
-          $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow[0];    
+          $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];    
       }
 	break;
       
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow[2] . '#box-' . $myrow[5] . '-' . $myrow[0];
+	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
       } else {
-	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow[5] . '-' . $myrow[0];
-	  $arr[$i]['tab_index'] = $myrow[5];
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow['shortform'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+	  $arr[$i]['tab_index'] = $myrow['additional_id'];
 	  
       }
 	break;
 
       case "Talkback":
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow[0];
+	  $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow['id'];
       } else {
           $arr[$i]['url'] = 'talkback.php';    
       }
@@ -214,7 +214,7 @@ foreach ($result as $myrow)  {
       
       case "Staff":
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow[0];
+	  $arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow['id'];
 	  
       } else {
 	  $arr[$i]['url'] = 'staff.php';
@@ -224,7 +224,7 @@ foreach ($result as $myrow)  {
     }
     
   } else {
-    $arr[$i]['value'] = $myrow[0];
+    $arr[$i]['value'] = $myrow['id'];
   }
   
   

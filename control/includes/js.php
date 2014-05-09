@@ -1,6 +1,6 @@
 <?php
 header('Content-type: application/json');
- 
+
     require_once(__DIR__ . "/functions.php");
     require_once(__DIR__ . DIRECTORY_SEPARATOR . "autoloader.php");
 
@@ -45,16 +45,26 @@ header('Content-type: application/json');
 
              ));
 
+    //include guide.js if reffer is from guide.php
+	$lobjSplit = explode( '/', $_SERVER['HTTP_REFERER']);
+    if( strpos($lobjSplit[count($lobjSplit) - 1], 'guide.php') !== FALSE && $lobjSplit[count($lobjSplit) - 2] == 'guides' )
+    {
+    	$am->set('guidejs', new AssetCache(
+             new GlobAsset($assets . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR .  'guides' . DIRECTORY_SEPARATOR . '*.js')
+
+             ,new FilesystemCache($cache)
+
+             ));
+    }
 
     // Apply the JSMinPlus filter to all the files
     $jquery = new AssetCollection(array (new AssetReference($am, 'jquery')) );
     $jquery_ui = new AssetCollection(array (new AssetReference($am, 'jquery_ui')) );
-    $other_js = new AssetCollection(array (new AssetReference($am, 'otherjs'))  );
-
+    $other_js = $am->has('guidejs') ? new AssetCollection(array (new AssetReference($am, 'otherjs'), new AssetReference($am, 'guidejs')))
+    	: new AssetCollection(array (new AssetReference($am, 'otherjs')));
 
     // Place jQuery first in the final output
     $javascripts = new AssetCollection(array ($jquery, $jquery_ui, $other_js ));
-
 
     // Tell the browser that this is Javascript and that it should be cached
     header('Content-Type: text/javascript');
