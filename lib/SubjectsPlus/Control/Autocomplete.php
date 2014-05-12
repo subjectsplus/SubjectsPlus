@@ -66,7 +66,7 @@ class Autocomplete {
   }
 
   public function search() {
-      
+    
     $db = new Querier;
     $search_param = $db->quote("%" . $this->param . "%");
 
@@ -118,7 +118,7 @@ OR vtags LIKE " .  $search_param;
 
 break;
 case "guides":
-$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $search_param 
+$q = "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', shortform FROM subject WHERE subject LIKE " . $search_param 
    . "OR shortform LIKE " . $search_param 
    . "OR description LIKE " . $search_param 
    . "OR keywords LIKE " . $search_param 
@@ -141,7 +141,7 @@ $q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.su
 
 break;
 case "records":
-$q = "SELECT title_id AS 'id', title FROM title WHERE title LIKE " . $search_param ;
+$q = "SELECT title_id AS 'id', 'Record' as 'content_type', title FROM title WHERE title LIKE " . $search_param ;
 break;		
 case "faq":
 $q = "SELECT faq_id AS 'id', LEFT(question, 55), 'FAQ' as 'content_type'  FROM faq WHERE question LIKE " . $search_param ;
@@ -150,7 +150,7 @@ case "talkback":
 $q = "SELECT talkback_id AS 'id','Talkback' as content_type, LEFT(question, 55) FROM talkback WHERE question LIKE " . $search_param ;
 break;	
 case "admin":
-$q = "SELECT staff_id AS 'id','Staff' as content_type, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
+$q = "SELECT staff_id AS 'id','Staff' as 'content_type', CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
 break;
 
 }
@@ -162,8 +162,6 @@ $i = 0;
 
 // This takes the results and creates an array that will be turned into JSON
 
-//print_r($result);
-print_r ($result);
 foreach ($result as $myrow)  {
 
 
@@ -172,16 +170,27 @@ foreach ($result as $myrow)  {
   if(isset($myrow['content_type'])) {
     $arr[$i]['shortform'] = $myrow['short_form'];
     $arr[$i]['id'] = $myrow['id'];
-    $arr[$i]['value'] = $myrow[1];
+    $arr[$i]['value'] = $myrow['matching_text'];
     $arr[$i]['content_type'] = $myrow['content_type'];
     $arr[$i]['parent'] = $myrow['parent'];
-    $arr[$i]['parent_id'] = $myrow[2];
+    $arr[$i]['parent_id'] = $myrow['additional_id'];
     
-    switch($myrow[2]) {
-      
+    switch($myrow['content_type']) {
+
+      case "Record":
+	$arr[$i]['label'] = $myrow[2];
+
+        if ($this->getSearchPage() == "control") {
+	  $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
+      }   else {
+          $arr[$i]['url'] = 'record.php?record=' . $myrow['short_form'];   
+      }
+        
+	break;
+
       case "Subject Guide":
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['id'];
+	  $arr[$i]['url'] = 'guide.php?subject_id=' . $myrow['id'];
       }   else {
           $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
       }
@@ -191,9 +200,9 @@ foreach ($result as $myrow)  {
       
       case "FAQ":
 	if ($this->getSearchPage() == "control") {
-          $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow[0];
+          $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
       } else {
-          $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow[0];    
+          $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];    
       }
 	break;
       
@@ -208,18 +217,21 @@ foreach ($result as $myrow)  {
 	break;
 
       case "Talkback":
+	$arr[$i]['label'] = $myrow[2];
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow['id'];
+	  $arr[$i]['url'] = 'talkback.php?talkback_id=' . $myrow['id'];
       } else {
           $arr[$i]['url'] = 'talkback.php';    
       }
 	break;
       
       case "Staff":
-	if ($this->getSearchPage() == "control") {
+	$arr[$i]['label'] = $myrow[2];
 	
-	  $arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow['staff_id'];
-	    print_r($myrow);
+	if ($this->getSearchPage() == "control") {
+	  
+	  $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];
+	  
       } else {
 	  $arr[$i]['url'] = 'staff.php';
 	  
