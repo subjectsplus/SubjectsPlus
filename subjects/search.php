@@ -10,7 +10,7 @@
 use SubjectsPlus\Control\AllHandler;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Search;
-    
+
 
 $page_title = "Search Results";
 
@@ -28,7 +28,7 @@ $search->setSearch($_POST['searchterm']);
 <div id="main-content">
   <div class="pure-g-r">
     <div class="pure-u-1">
-  
+      
       <?php
 
       $results = $search->getResults();
@@ -36,29 +36,26 @@ $search->setSearch($_POST['searchterm']);
       foreach ($results as $result) {
 	
 	echo "<div class='pluslet'>";
-    
-    switch ($result['content_type']) {
+	
+	switch ($result['content_type']) {
 	    
-        case 'Pluslet':
+          case 'Pluslet':
             echo "<div class='titlebar'><div class='titlebar_text'>Content in Guide</div></div>";
-        break;
-    
-        default:
+            break;
+	    
+          default:
+	    echo "<div class='titlebar'><div class='titlebar_text'>";
             echo $result['content_type'];
-        break;
-        
-  
+	    echo "</div></div>";
+            break;
+            
+	    
         }
-    
-    
+	
 	echo "<div class='pluslet_body'>";
-
-    
-    
-     
 	
 	switch($result['content_type']) {
-	  
+	    
  	  case 'Talkback':
 	    echo "<p>";
 	    echo "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";
@@ -78,7 +75,7 @@ $search->setSearch($_POST['searchterm']);
 	    echo "</p>";
 	    break;
 
-        
+            
 	  case 'Pluslet':
 	    echo "<p>";
 	    echo "<a href='guide.php?subject=" . $result['shortform'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";
@@ -92,12 +89,12 @@ $search->setSearch($_POST['searchterm']);
 	    
 	    break;
 	}
-    
+	
 
 	echo "<p>";
 	echo $result['additional_text'];
 	echo "</p>";
-    
+	
     	echo "</div>";
 	echo "</div>";
       }

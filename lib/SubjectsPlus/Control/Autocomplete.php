@@ -137,7 +137,7 @@ $q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.su
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
         WHERE p.body LIKE " . $search_param   . 
-     " AND t.subject_id = " . $db->quote( $this->subject_id );
+" AND t.subject_id = " . $db->quote( $this->subject_id );
 
 break;
 case "records":
@@ -168,13 +168,30 @@ foreach ($result as $myrow)  {
   $arr[$i]['label'] = $myrow[1];
 
   if(isset($myrow['content_type'])) {
-    $arr[$i]['shortform'] = $myrow['short_form'];
     $arr[$i]['id'] = $myrow['id'];
-    $arr[$i]['value'] = $myrow['matching_text'];
-    $arr[$i]['content_type'] = $myrow['content_type'];
-    $arr[$i]['parent'] = $myrow['parent'];
-    $arr[$i]['parent_id'] = $myrow['additional_id'];
+
+    if (isset( $myrow['short_form'])) {
+      $arr[$i]['shortform'] =  $myrow['short_form'];
+    }
     
+    
+    if (isset($myrow['matching_text'])) {
+      $arr[$i]['value'] = $myrow['matching_text'];
+    }
+
+    
+    if (isset($myrow['content_type'])) {
+      $arr[$i]['content_type'] = $myrow['content_type'];
+      
+    }
+
+    if (isset( $myrow['parent'])) {
+      $arr[$i]['parent'] = $myrow['parent'];
+    }
+
+    if (isset( $myrow['additional_id'])) {
+      $arr[$i]['parent_id'] = $myrow['additional_id'];
+    }    
     switch($myrow['content_type']) {
 
       case "Record":
@@ -182,49 +199,49 @@ foreach ($result as $myrow)  {
 
         if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
-      }   else {
+	}   else {
           $arr[$i]['url'] = 'record.php?record=' . $myrow['short_form'];   
-      }
+	}
         
 	break;
 
       case "Subject Guide":
         if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'guide.php?subject_id=' . $myrow['id'];
-      }   else {
+	}   else {
           $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
-      }
+	}
         
 	break;
-      
-      
+	
+	
       case "FAQ":
 	if ($this->getSearchPage() == "control") {
           $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
-      } else {
+	} else {
           $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];    
-      }
+	}
 	break;
-      
+	
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
-      } else {
+	} else {
 	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	  $arr[$i]['tab_index'] = $myrow['additional_id'];
 	  
-      }
+	}
 	break;
 
       case "Talkback":
 	$arr[$i]['label'] = $myrow[2];
         if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'talkback.php?talkback_id=' . $myrow['id'];
-      } else {
+	} else {
           $arr[$i]['url'] = 'talkback.php';    
-      }
+	}
 	break;
-      
+	
       case "Staff":
 	$arr[$i]['label'] = $myrow[2];
 	
@@ -232,10 +249,10 @@ foreach ($result as $myrow)  {
 	  
 	  $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];
 	  
-      } else {
+	} else {
 	  $arr[$i]['url'] = 'staff.php';
 	  
-      }
+	}
 	break;
     }
     
