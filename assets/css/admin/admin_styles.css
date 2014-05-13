@@ -232,6 +232,13 @@ header {
   margin-left: .5em;
 }
 
+
+.ui-autocomplete {
+  max-height:500px;
+  overflow: auto;
+}
+
+
 #topnav > li#logospot img {
   float: left;
   margin: .5em 0 0 2.5em;
