@@ -157,8 +157,6 @@ class FAQ {
       </div>
       <div class=\"pluslet_body\">
 
-
-
 <label for=\"question\">" . _("Question") . "</label>
 <textarea name=\"question\" rows=\"4\" cols=\"50\" class=\"required_field\">" . stripslashes($this->_question) . "</textarea>
 

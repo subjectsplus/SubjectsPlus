@@ -118,19 +118,24 @@ class Talkback {
     $tb_title_line = _("Edit TalkBack");
 
     echo "
-<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
-<input type=\"hidden\" name=\"talkback_id\" value=\"" . $this->_talkback_id . "\" />
-<div style=\"float: left; margin-right: 20px;\">
-<div class=\"box\">
-      <h2 class=\"bw_head\">$tb_title_line</h2>
+<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
+<input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_talkback_id . "\" />
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">$tb_title_line</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
 
-<span class=\"record_label\">" . _("Question") . "</span><br />
-<textarea name=\"question\" rows=\"4\" cols=\"50\">" . stripslashes($this->_question) . "</textarea>
-<br /><br />
-<span class=\"record_label\">" . _("Question By") . "</span>  &nbsp;
+<label for=\"question\">" . _("Question") . "</label>
+<textarea name=\"question\" rows=\"4\" cols=\"50\" class=\"required_field\">" . stripslashes($this->_question) . "</textarea>
+
+<label for=\"a_from\">" . _("Question By") . "</label>
 <input type=\"text\" name=\"q_from\" size=\"20\" class=\"required_field\" value=\"" . $this->_q_from . "\">
-<br /><br />
-<span class=\"record_label\">" . _("Answer") . "</span><br />";
+
+<label for=\"answer\">" . _("Answer") . "</label>";
 
     if ($wysiwyg_desc == 1) {
     	include($CKPath);
@@ -167,14 +172,14 @@ class Talkback {
     $staffMe = new Dropdown("a_from", $staffArray, $selected_user, "50", "--Select--");
     $staff_string = $staffMe->display();
 
-    $answerer = "<span class=\"record_label\">" . _("Answered By") . "</span><br />
+    $answerer = "<label=\"record_label\"></label>
             $staff_string
         ";
 /////////////////////
 // Is Live
 ////////////////////
 
-    $is_live = "<span class=\"record_label\">" . _("Live?") . "</span><br />
+    $is_live = "<label=\"display\"></label>
 <input name=\"display\" type=\"radio\" value=\"1\"";
     if ($this->_display == 1) {
       $is_live .= " checked=\"checked\"";
@@ -191,7 +196,7 @@ class Talkback {
 ////////////////////
 
     $tb_tags = "<input type=\"hidden\" name=\"tbtags\" value=\"" . $this->_tbtags . "\" />
-			<span class=\"record_label\">Site Tags (Highlight relative library sites)</span><br />";
+			<label=\"record_label\"></label>";
 
     $current_tbtags = explode("|", $this->_tbtags);
 
@@ -217,7 +222,7 @@ class Talkback {
 ////////////////////
 
     $cat_tags = "<input type=\"hidden\" name=\"cattags\" value=\"" . $this->_cattags . "\" />
-			<span class=\"record_label\">Topic Tags (Highlight relative topics)</span><br />";
+			<label=\"record_label\"></label>";
 
     $current_cattags = explode("|", $this->_cattags);
 
@@ -241,33 +246,40 @@ class Talkback {
 
 </div>
 </div>
-<!-- right hand column -->
-<div style=\"float: left;min-width: 50px;\">
-	<div id=\"record_buttons\" class=\"box\">
-		<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Now") . "\">";
+</div>
+<!-- right hand column -->";
+
+$last_mod = _("Last modified: ") . lastModded("talkback", $this->_talkback_id);
+      $title_save_box = "<div id=\"last_edited\">$last_mod</div>";
+
+  echo"<div class=\"pure-u-1-3\">
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">$title_save_box</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
+    <input type=\"submit\" name=\"submit_record\" class=\"button pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
 
     // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
     if ($this->_talkback_id != "") {
       if (isset($_SESSION["admin"]) && $_SESSION["admin"] == "1") {
-        echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\">";
-      }
-      // get edit history
-      $last_mod = _("Last modified: ") . lastModded("talkback", $this->_talkback_id);
-      echo "<div id=\"last_edited\">$last_mod</div>
-";
+        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+      } 
+
     }
 
-    echo "</div>
-            <div class=\"box\">
-            $answerer
-            <br /><br />
-            $is_live
-            <div ctag-data=\"tbtags\">
-            $tb_tags
-            </div>
-            <div ctag-data=\"cattags\">
-            $cat_tags
-            </div>
+    echo "</div></div>";
+
+makePluslet(_("Answered By"), $answerer, "no_overflow");
+
+makePluslet(_("Is this guide live?"), $is_live, "no_overflow");
+
+makePluslet(_("Site Tags (relevant library sites)"), $tb_tags, "no_overflow");
+
+makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
+
+    echo "
             </div>
             </form>";
   }

@@ -149,36 +149,43 @@ $tbArrayYes = $querierTBYES->query($qTBYES);
 
 $tb_yes_answer = genTalkBacks($tbArrayYes, 1);
 
+///////////////
+// Prepare layout
+////////////////
+
+$tb_body = "
+  <p>" . _("Show:") . $show_links ."</p>
+  <p>" . _("Site Filter:") . $filters ."</p>
+  <p>" . _("Topic Filter:") . $cat_filters ."</p>
+  <br /><br />
+   $tb_yes_answer
+";
 
 /////////////////
 // Show Results
 ////////////////
-?>
 
-<br />
-<div style="float: left;  width: 70%;">
-<div class="box no_overflow">
-<h2 class="bw_head"><?php print _("View and Answer TalkBacks"); ?></h2>
-
-  <p><?php print _("Show:") . $show_links; ?> </p>
-  <p><?php print _("Site Filter:") . $filters; ?></p>
-  <p><?php print _("Topic Filter:") . $cat_filters; ?></p>
-  <br /><br />
-  <?php print $tb_yes_answer; ?>
-</div>
-</div>
-<div class="box" style="float: right; width: 28%;"><h2 class="bw_head"><?php print _("About TalkBack"); ?></h2>
-
-<p><?php print _("TalkBack questions come via the web form on the public TalkBack page. An email should be sent to the admin when a new one arrives, and they may be answered here."); ?></p>
+$about_tb_body = "
+<p>" . _("TalkBack questions come via the web form on the public TalkBack page. An email should be sent to the admin when a new one arrives, and they may be answered here.") . "</p>
 <br />
     <ul>
-    <li><a target="_blank" href="<?php print $TalkBackPath; ?>"><?php print _("TalkBack Public Page"); ?></a></li>
+    <li><a target=\"_blank\" href=\"$TalkBackPath\">" . _("TalkBack Public Page") ."</a></li>
 </ul>
-</div>
+";
 
-</div>
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">  
+  ";
+makePluslet(_("View and Answer TalkBacks"), $tb_body, "no_overflow");
 
-<?php
+print "</div>"; // close pure-u-2-3
+print "<div class=\"pure-u-1-3\">";
+
+makePluslet(_("About TalkBack"), $about_tb_body, "no_overflow");
+
+print "</div>"; // close pure-u-1-3
+print "</div>"; // close pure-g-r
 
 
 include("../includes/footer.php");
