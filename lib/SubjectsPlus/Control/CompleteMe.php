@@ -69,34 +69,29 @@ class CompleteMe {
     // now print out some variables for the js
 
 echo "<script type=\"text/javascript\">
+ var parents = [];
 
 $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
+  
 _renderMenu: function( ul, items ) {
       var that = this;
       pluslet_category = [];
-      
-      var parents = [];    
- 
+         
       currentCategory = \"\";
 
       $.each( items, function( index, item ) {
        
 if (item.content_type === 'Pluslet') {
 
-if (parents.indexOf(item.parent) ===  0) {
+if (parents.indexOf(item.parent) > -1) {
 
 } else {
-
-if (jQuery('.content-in').html() != undefined && jQuery('.content-in').html().indexOf(item.parent) != -1 && jQuery('.content-in').html().indexOf(item.parent) > 0 ) {
-console.log(jQuery('.content-in').html().indexOf(item.parent) );
-} else {
+parents.push(item.parent);
 
 ul.append('<li class=\'ui-autocomplete-category content-in\'>Content in ' + '\"' + item.parent + '\"' + '</li>');
 
 }
 
-
-}
 var autocomplete_labels = jQuery('.autocomplete-parent-guide');
 
 } else {
