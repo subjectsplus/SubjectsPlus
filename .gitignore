@@ -75,3 +75,6 @@ subjects/includes/pgcache/*
 
 control/includes/db.ini
 db.ini
+
+*.ini*
+*.db.ini*

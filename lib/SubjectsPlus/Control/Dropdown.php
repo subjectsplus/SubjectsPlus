@@ -29,9 +29,9 @@ class Dropdown {
     public function display() {
         $array_type = "";
 
-          
-            
-        if (isset($this->_optionsArray[0])) {
+
+
+        if (is_array($this->_optionsArray[0])) {
             $array_type = "multi";
         }
 

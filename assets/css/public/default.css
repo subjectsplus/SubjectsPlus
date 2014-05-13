@@ -336,6 +336,22 @@ div.pluslet form {
     display:none;
 }
 
+.autocomplete-parent-guide {
+    /*text-indent:1.5em;*/
+    font-weight:bold;
+    font-size:.9em;
+    text-indent:.8em;
+
+
+}
+
+
+.ui-autocomplete {
+max-height: 300px;
+overflow: auto;
+
+}
+
 /* Search boxes on subjects/index.php */
 
 .main_search_box {

@@ -67,32 +67,48 @@ class CompleteMe {
 	</div>";
 
     // now print out some variables for the js
-    echo "<script type=\"text/javascript\">
 
+echo "<script type=\"text/javascript\">
 
 $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
-    _renderMenu: function( ul, items ) {
+_renderMenu: function( ul, items ) {
       var that = this;
-        currentCategory = \"\";
+      pluslet_category = [];
+      
+      var parents = [];    
+ 
+      currentCategory = \"\";
 
       $.each( items, function( index, item ) {
-        if ( item.category != currentCategory ) {
-if (item.category != undefined) {
-          ul.append( \"<li class='ui-autocomplete-category'>\" + item.category + \"</li>\" );
-          currentCategory = item.category;
-}
+       
+if (item.content_type === 'Pluslet') {
 
-
-     
-}
-
-
-
-if (item.category === 'Pluslet') {
-
-ul.append('<li class=\'autocomplete-parent-guide\'>' + item.parent + '</li>');
+if (parents.indexOf(item.parent) ===  0) {
 
 } else {
+
+if (jQuery('.content-in').html() != undefined && jQuery('.content-in').html().indexOf(item.parent) != -1 && jQuery('.content-in').html().indexOf(item.parent) > 0 ) {
+console.log(jQuery('.content-in').html().indexOf(item.parent) );
+} else {
+
+ul.append('<li class=\'ui-autocomplete-category content-in\'>Content in ' + '\"' + item.parent + '\"' + '</li>');
+
+}
+
+
+}
+var autocomplete_labels = jQuery('.autocomplete-parent-guide');
+
+} else {
+
+if (item.content_type != undefined) {
+
+ if( item.content_type != jQuery('.ui-autocomplete-category').html()) {
+
+          ul.append( \"<li class='ui-autocomplete-category'>\" + item.content_type + \"</li>\" );
+}
+}
+
 
 }
    

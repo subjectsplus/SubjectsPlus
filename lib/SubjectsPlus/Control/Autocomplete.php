@@ -66,7 +66,7 @@ class Autocomplete {
   }
 
   public function search() {
-      
+    
     $db = new Querier;
     $search_param = $db->quote("%" . $this->param . "%");
 
@@ -118,7 +118,7 @@ OR vtags LIKE " .  $search_param;
 
 break;
 case "guides":
-$q = "SELECT subject_id, subject, shortform FROM subject WHERE subject LIKE " . $search_param 
+$q = "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', shortform FROM subject WHERE subject LIKE " . $search_param 
    . "OR shortform LIKE " . $search_param 
    . "OR description LIKE " . $search_param 
    . "OR keywords LIKE " . $search_param 
@@ -137,25 +137,25 @@ $q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.su
 	INNER JOIN subject AS su 
 	ON su.subject_id = t.subject_id
         WHERE p.body LIKE " . $search_param   . 
-     " AND t.subject_id = " . $db->quote( $this->subject_id );
+" AND t.subject_id = " . $db->quote( $this->subject_id );
 
 break;
 case "records":
-$q = "SELECT title_id, title FROM title WHERE title LIKE " . $search_param ;
+$q = "SELECT title_id AS 'id', 'Record' as 'content_type', title FROM title WHERE title LIKE " . $search_param ;
 break;		
 case "faq":
-$q = "SELECT faq_id, LEFT(question, 55), 'faq' as 'type'  FROM faq WHERE question LIKE " . $search_param ;
+$q = "SELECT faq_id AS 'id', LEFT(question, 55), 'FAQ' as 'content_type'  FROM faq WHERE question LIKE " . $search_param ;
 break;
 case "talkback":
-$q = "SELECT talkback_id, LEFT(question, 55) FROM talkback WHERE question LIKE " . $search_param ;
+$q = "SELECT talkback_id AS 'id','Talkback' as content_type, LEFT(question, 55) FROM talkback WHERE question LIKE " . $search_param ;
 break;	
 case "admin":
-$q = "SELECT staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
+$q = "SELECT staff_id AS 'id','Staff' as 'content_type', CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
 break;
 
 }
 
-
+//print_r ($q);
 $result = $db->query($q);
 $arr = array();
 $i = 0;
@@ -164,67 +164,107 @@ $i = 0;
 
 foreach ($result as $myrow)  {
 
+ // print_r($myrow);
 
-  $arr[$i]['label'] = $myrow['matching_text'];
-  if(isset($myrow[3])) {
-    $arr[$i]['shortform'] = $myrow['short_form'];
+  $arr[$i]['label'] = $myrow[1];
+
+  if(isset($myrow['content_type'])) {
+
     $arr[$i]['id'] = $myrow['id'];
-    $arr[$i]['value'] = $myrow['short_form'];
-    $arr[$i]['category'] = $myrow['content_type'];
-    $arr[$i]['parent'] = $myrow['parent'];
-    $arr[$i]['parent_id'] = $myrow[2];
+
+    if (isset( $myrow['short_form'])) {
+      $arr[$i]['shortform'] =  $myrow['short_form'];
+    }
     
-    switch($myrow[4]) {
+    
+    if (isset($myrow['matching_text'])) {
+      $arr[$i]['value'] = $myrow['matching_text'];
+    }
+
+    
+    if (isset($myrow['content_type'])) {
+      $arr[$i]['content_type'] = $myrow['content_type'];
       
-      case "Subject Guide":
+    }
+
+    if (isset( $myrow['parent'])) {
+      $arr[$i]['parent'] = $myrow['parent'];
+    }
+
+    if (isset( $myrow['additional_id'])) {
+      $arr[$i]['parent_id'] = $myrow['additional_id'];
+
+
+    }    
+
+
+
+    switch($myrow['content_type']) {
+
+      case "Record":
+	$arr[$i]['label'] = $myrow[2];
+
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['id'];
-      }   else {
-          $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
-      }
+	  $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
+	}   else {
+          $arr[$i]['url'] = 'record.php?record=' . $myrow['short_form'];   
+	}
         
 	break;
-      
-      
+
+      case "Subject Guide":
+        if ($this->getSearchPage() == "control") {
+	  $arr[$i]['url'] = 'guide.php?subject_id=' . $myrow['id'];
+	}   else {
+          $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
+	}
+        
+	break;
+	
+	
       case "FAQ":
 	if ($this->getSearchPage() == "control") {
-          $arr[$i]['url'] = 'faq/faq.php?faq_id=' . $myrow['id'];
-      } else {
+          $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
+	} else {
           $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];    
-      }
+	}
 	break;
-      
+	
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
-      } else {
-	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow['shortform'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+	} else {
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	  $arr[$i]['tab_index'] = $myrow['additional_id'];
 	  
-      }
+	}
 	break;
 
       case "Talkback":
+	$arr[$i]['label'] = $myrow[2];
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'talkback/talkback.php?talkback_id=' . $myrow['id'];
-      } else {
+	  $arr[$i]['url'] = 'talkback.php?talkback_id=' . $myrow['id'];
+	} else {
           $arr[$i]['url'] = 'talkback.php';    
-      }
+	}
 	break;
-      
+	
       case "Staff":
+	$arr[$i]['label'] = $myrow[2];
+	
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'admin/user.php?staff_id=' . $myrow['id'];
 	  
-      } else {
+	  $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];
+	  
+	} else {
 	  $arr[$i]['url'] = 'staff.php';
 	  
-      }
+	}
 	break;
     }
     
   } else {
-    $arr[$i]['value'] = $myrow['id'];
+    $arr[$i]['value'] = $myrow[0];
   }
   
   
