@@ -18,6 +18,7 @@ include("../control/includes/autoloader.php");
 $page_title = $resource_name;
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
+$noheadersearch = TRUE;
 
 $db = new Querier;
     
