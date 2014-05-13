@@ -155,7 +155,7 @@ break;
 
 }
 
-
+//print_r ($q);
 $result = $db->query($q);
 $arr = array();
 $i = 0;
@@ -164,10 +164,12 @@ $i = 0;
 
 foreach ($result as $myrow)  {
 
+ // print_r($myrow);
 
   $arr[$i]['label'] = $myrow[1];
 
   if(isset($myrow['content_type'])) {
+
     $arr[$i]['id'] = $myrow['id'];
 
     if (isset( $myrow['short_form'])) {
@@ -191,7 +193,12 @@ foreach ($result as $myrow)  {
 
     if (isset( $myrow['additional_id'])) {
       $arr[$i]['parent_id'] = $myrow['additional_id'];
+
+
     }    
+
+
+
     switch($myrow['content_type']) {
 
       case "Record":

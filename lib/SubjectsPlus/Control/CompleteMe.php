@@ -79,28 +79,16 @@ var parents = [];
         currentCategory = \"\";
 
       $.each( items, function( index, item ) {
-        if ( item.category != currentCategory ) {
-if (item.category != undefined) {
-          ul.append( \"<li class='ui-autocomplete-category'>\" + item.category + \"</li>\" );
-          currentCategory = item.category;
-}
+       
 
 
-     
-}
-
-
-
-if (item.category === 'Pluslet') {
+if (item.content_type === 'Pluslet') {
 
 if (parents.indexOf(item.parent) ===  0) {
 
-parents.push(item.parent);
-
 } else {
 
-ul.append('<li class=\'autocomplete-parent-guide\'>' + item.parent + '</li>');
-parents.push(item.parent);
+ul.append('<li class=\'ui-autocomplete-category\'>Content in ' + '\"' + item.parent + '\"' + '</li>');
 
 }
 var autocomplete_labels = jQuery('.autocomplete-parent-guide');
@@ -108,6 +96,12 @@ var autocomplete_labels = jQuery('.autocomplete-parent-guide');
 console.log(jQuery.unique(autocomplete_labels));
 //console.log(item.parent);
 } else {
+
+
+if (item.content_type != undefined) {
+          ul.append( \"<li class='ui-autocomplete-category'>\" + item.content_type + \"</li>\" );
+          currentCategory = item.content_type;
+}
 
 
 }
