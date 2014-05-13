@@ -156,7 +156,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 	}
 
   // Make a safe query
-	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `answer`, `tbtags`) VALUES ('%s', '%s', '%s', 'No', '', '%s')", $db->quote($this_comment), $db->quote($this_name), $todaycomputer, $db->quote($set_filter));
+	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `tbtags`, `answer`) VALUES (%s, %s, %s, 'No', %s, %s)", $db->quote($this_comment), $db->quote($this_name),$db->quote($todaycomputer), $db->quote($set_filter), $db->quote(""));
   //print $query;
 	$db->query($query);
 
