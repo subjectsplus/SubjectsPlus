@@ -234,6 +234,43 @@ jQuery(function() {
 <?php } ?>
 
 </script>
+
+
+<script>
+
+	   var startURL = '../guides/guide.php?subject_id=';
+	   var sp_path = document.URL.split('/')[3];
+
+	   jQuery('#sp_search').autocomplete({
+
+	     minLength	: 3,
+	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+	     focus: function(event, ui) {
+
+	       event.preventDefault();
+	       jQuery(".find-guide-input").val(ui.item.label);
+
+
+	     },
+	     select: function(event, ui) {
+
+
+	       event.preventDefault();
+	       jQuery(".find-guide-input").val(ui.item.label);
+
+	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
+
+	       jQuery('#tabs').tabs('select', in_tab);
+
+	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
+	       jQuery('.pluslet-'+ ui.item.value).scrollTo();
+             }
+	   });
+
+
+</script>
+
+
 <!--[if IE]>
 <style>
     #tabs .pluslet ul {

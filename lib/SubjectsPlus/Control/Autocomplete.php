@@ -127,7 +127,7 @@ break;
 
 
 case "guide":
-$q = "SELECT p.pluslet_id, p.title, ps.section_id, s.tab_id, t.subject_id, su.subject FROM pluslet AS p 
+$q = "SELECT p.pluslet_id as 'id',su.shortform as 'additional_text','Pluslet' as 'content_type', p.title, ps.section_id, s.tab_id AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p 
 	INNER JOIN pluslet_section AS ps 
 	ON ps.pluslet_id = p.pluslet_id
 	INNER JOIN section AS s 
@@ -232,13 +232,15 @@ foreach ($result as $myrow)  {
 	
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+	  $arr[$i]['url'] = 'guides/guide.php?subject=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	} else {
-	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	  $arr[$i]['tab_index'] = $myrow['additional_id'];
 	  
 	}
 	break;
+
+
 
       case "Talkback":
 	$arr[$i]['label'] = $myrow[2];
