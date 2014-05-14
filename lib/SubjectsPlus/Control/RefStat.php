@@ -165,12 +165,14 @@ echo "</form>";
     // update refstats table
     /////////////////////
 
+    $db = new Querier;
+
     $qInsert = "INSERT INTO uml_refstats (type_id, location_id, mode_id, date, note) VALUES (
-	  '" . $db->quote(scrubData($this->_type_id, "integer")) . "',
-	  '" . $db->quote(scrubData($this->_location_id, "integer")) . "',
-    '" . $db->quote(scrubData($this->_mode_id, "integer")) . "',
-    '" . $db->quote(scrubData($this->_date, "text")) . "',
-    '" . $db->quote(scrubData($this->_note, "text")) . "'
+	  " . $db->quote(scrubData($this->_type_id, "integer")) . ",
+	  " . $db->quote(scrubData($this->_location_id, "integer")) . ",
+    " . $db->quote(scrubData($this->_mode_id, "integer")) . ",
+    " . $db->quote(scrubData($this->_date, "text")) . ",
+    " . $db->quote(scrubData($this->_note, "text")) . "
     )";
 
     //print $qInsert;
