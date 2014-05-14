@@ -1127,6 +1127,35 @@ function getControlURL()
 	return $lstrURL;
 }
 
+
+function getSubjectsURL()
+{
+	$lstrURL = $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ];
+
+	$lobjSplit = explode( '/', $lstrURL );
+
+	for( $i=(count($lobjSplit) - 1); $i >=0; $i-- )
+	{
+		if($lobjSplit[$i] == 'subjects')
+		{
+			unset($lobjSplit[$i]);
+			$lstrURL = implode( '/' , $lobjSplit );
+			$lstrURL = 'http://' . $lstrURL . '/subjects/';
+			break;
+		}elseif($lobjSplit[$i] == 'control')
+		{
+			$lstrURL = implode( '/' , $lobjSplit );
+			$lstrURL = 'http://' . $lstrURL . '/';
+			break;
+		}else
+		{
+			unset($lobjSplit[$i]);
+		}
+	}
+
+	return $lstrURL;
+}
+
 /**
  * getRewriteBase() - this function will find the base for SubjectsPlus so that
  * a .htaccess file use the rewrite base

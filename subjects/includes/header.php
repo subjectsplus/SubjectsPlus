@@ -24,10 +24,11 @@ if (isset($use_jquery)) { print generatejQuery($use_jquery);
 }
 
 if (!isset ($noheadersearch)) { 
+    
     $search_form = '
             <div class="autoC" id="autoC">
-                <form id="sp_admin_search" class="pure-form" method="post" action="http://localhost/subjectsplus/control/search.php">
-                <input type="text" placeholder="Search this guide" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                <form id="sp_admin_search" class="pure-form" method="post" action="' . getSubjectsURL() . 'search.php">
+                <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
                 <input type="submit" alt="Search" name="submitsearch" id="topsearch_button" class="pure-button pure-button-topsearch" value="Go">
                 </form>
             </div>    ';
@@ -56,6 +57,7 @@ if (!isset ($noheadersearch)) {
     </div>
     </div>
 </div>
+
 
 <div class="pure-g-r">
     <div class="wrapper-full">
