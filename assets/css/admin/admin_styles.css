@@ -1056,8 +1056,8 @@ margin: .5em 0 ;
 }
 
 .tb_highlight {
-  background-color: yellow;
-  border: 1px dashed #333;
+  background-color: #f1c40f;
+  border: 1px solid #f39c12;
 }
 /* Splash page */
 
@@ -1777,6 +1777,10 @@ div.breather > h2 {
   display: none;
 }
 
+.box_settings label {
+  font-weight: normal;
+}
+
 .box-item {
   list-style-type: none;
 
@@ -2040,7 +2044,6 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
   float: left;
   margin-right: .5em;
   margin-top: 2px;
-  background-color: #fff;
   height: 20px;
   padding: 0.2em;
   width: 20px;

@@ -23,6 +23,8 @@ class Talkback {
 
   public function __construct($talkback_id="", $flag="") {
 
+    //print_r($_POST);
+
     if ($flag == "" && $talkback_id == "") {
       $flag = "empty";
     }
@@ -119,7 +121,7 @@ class Talkback {
 
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
-<input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_talkback_id . "\" />
+<input type=\"hidden\" name=\"talkback_id\" value=\"" . $this->_talkback_id . "\" />
 <div class=\"pure-g-r\">
   <div class=\"pure-u-2-3\">
     <div class=\"pluslet\">
@@ -144,13 +146,13 @@ class Talkback {
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-    	$config['height'] = '300';
+    	$config['height'] = '200';
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);
 		echo "<br />";
     } else {
-      echo "<textarea name=\"answer\" rows=\"4\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
+      echo "<textarea name=\"answer\" rows=\"3\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
     }
 
 /////////////////////
@@ -286,6 +288,8 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
 
   public function deleteRecord() {
 
+    $db = new Querier;
+
     // make sure they're allowed to delete
     if ($_SESSION["admin"] != "1") {
       return FALSE;
@@ -327,6 +331,8 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
     // update tb table
     /////////////////////
 
+    $db = new Querier;
+
     $qInsertTB = "INSERT INTO talkback (question, q_from, date_submitted, answer, a_from, display, tbtags, cattags) VALUES (
 	  " . $db->quote(scrubData($this->_question, "text")) . ",
 	  " . $db->quote(scrubData($this->_q_from, "text")) . ",
@@ -366,19 +372,23 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
     // update talkback table
     /////////////////////
 
-    $qUpTB = "UPDATE talkback SET question = '" . $db->quote(scrubData($this->_question, 'text')) . ",
+    $db = new Querier;
+
+    $qUpTB = "UPDATE talkback SET question = " . $db->quote(scrubData($this->_question, 'text')) . ",
 	  q_from = " . $db->quote(scrubData($this->_q_from, 'text')) . ",
 	  answer = " . $db->quote(scrubData($this->_answer, 'richtext')) . ",";
         if($this->_a_from == '') $qUpTB .= "a_from = NULL,";
       
-        else 	$qUpTB .= "a_from = '" . $db->quote(scrubData($this->_a_from, 'text')) . ",";
+        else 	$qUpTB .= "a_from = " . $db->quote(scrubData($this->_a_from, 'text')) . ",";
   	  
-      $qUpTB .= "display = '" . $db->quote(scrubData($this->_display, 'integer')) . ",
+      $qUpTB .= "display = " . $db->quote(scrubData($this->_display, 'integer')) . ",
       
       tbtags = " . $db->quote(scrubData($this->_tbtags, 'text')) . ",
       cattags = " . $db->quote(scrubData($this->_cattags, 'text')) . "
       
       WHERE talkback_id = " . scrubData($this->_talkback_id, 'integer');
+
+      //print $qUpTB;
 
     $rUpTB = $db->exec($qUpTB);
 
