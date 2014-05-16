@@ -41,15 +41,17 @@ $subsArray = $querier->query($q);
 
   foreach ($subsArray as $value) {
 
-	if ($value[7] != "1") { $active = " <span class=\"staff-list-inactive\">inactive</span>";} else { $active = ""; }
+if ($value[7] != "1") { $active = " <span style=\"font-size:smaller; color: #666;\">inactive</span>";} else { $active = ""; }
 
-	  $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-	  $staff_list .= "<div class=\"$row_colour striper staff-list-row\">
-          <input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"modify\" border=\"0\"></a> &nbsp;&nbsp;
-          <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><img src=\"$IconPath/eye.png\" alt=\"see live\" border=\"0\"></a> &nbsp;&nbsp; <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"check links\" border=\"0\"></a> &nbsp;&nbsp;<a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div>
-          <div class=\"$row_colour striper staff-list-row\">$value[2] $value[3]</div>
-          <div class=\"$row_colour striper staff-list-active-row\">$value[5]</div>";
-	  $row_count++;
+$row_colour = ($row_count % 2) ? $colour1 : $colour2;
+$staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 500px;\">
+<input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"modify\" border=\"0\"></a> 
+&nbsp;&nbsp; <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><img src=\"$IconPath/eye.png\" alt=\"see live\" border=\"0\"></a> 
+&nbsp;&nbsp; <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"check links\" border=\"0\"></a> 
+&nbsp;&nbsp; <a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div>
+<div class=\"$row_colour striper\" style=\"float: left; min-width: 100px;\">$value[2] $value[3]</div>
+<div class=\"$row_colour striper\" style=\"float: left; min-width: 75px;\">$value[5]</div>";
+$row_count++;
   }
 
 
@@ -104,22 +106,31 @@ $type_drop_close = "</select>\n";
 $type_dropdown = $type_drop_base . $type_drop_vals . $type_drop_close;
 $type_dropdown_ticks = $type_drop_ticks . $type_drop_vals . $type_drop_close;
 
+$mg_box = "
 
-
-print "<br /><div class=\"department-box\">
-<div class=\"box no_overflow\">
-<div class=\"tick-wrap\">
-<div class=\"tick-wrap-wrap\">
+<div class=\"tick-wrap\"  style=\"padding: 1em 10px;\">
 	<span class=\"filter\" id=\"ticked_label\">" . _("Ticked Guides") . "</span>
 	<span class=\"filter\">" . _("Show Guides By") . " $staff_dropdown</span>
 	<span class=\"filter\">" . _("Show") . " $type_dropdown</span>
 </div>
 
-<div id=\"tickzone\" class=\"tick-zone\"><span class=\"filter_ticks\" >" . _("Assign to ") . " $staff_dropdown_ticks</span><span class=\"filter_ticks\" > Change To $type_dropdown_ticks</span><span class=\"filter_ticks\" id=\"tick_forget\">Never Mind</span></div>
+
+<div id=\"tickzone\" style=\"display: none;padding: 1em 10px;\"><span class=\"filter_ticks\" >" . _("Assign to ") . " $staff_dropdown_ticks</span><span class=\"filter_ticks\" > Change To $type_dropdown_ticks</span><span class=\"filter_ticks\" id=\"tick_forget\">Never Mind</span></div>
 </div>
-<div id=\"listing_space\" class=\"listing-space\">
+<div id=\"listing_space\" style=\" \">
+$staff_list;
+</div>
+</div>
 ";
-print $staff_list;
+
+print "
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">";
+
+makePluslet(_("Manage Guides"), $mg_box, "no_overflow");    
+
+
+
 print "</div></div>";
 
 

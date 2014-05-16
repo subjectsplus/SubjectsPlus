@@ -28,7 +28,7 @@ if (isset($_POST["add_department"])) {
     ////////////////
     // Insert title table
     ////////////////
-    $db = new Querier;
+    
     $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
 		" . $db->quote(scrubData($_POST["department"])) . ", 
 		" . $db->quote(scrubData($_POST["telephone"])) . ", 
@@ -136,7 +136,9 @@ foreach ($deptArray as $value) {
   <input type=\"hidden\" name=\"dept_id[]\" value=\"$value[0]\" /></li>";
 }
 
-$dept_box ="<p>" . _("Enter department name, telephone number, email, website url.  Drag departments to change display order.") . "</p>
+$dept_box ="
+<p>" . _("Enter department name, telephone number, email, website url.  Drag departments to change display order.") . "</p>
+<button id=\"save_guide\" class=\"button pure-button pure-button-primary\" style=\"display: block;\" name=\"update_departments\" >" . _("SAVE CHANGES") . "</button>
 
 
 <ul id=\"sortable-\" class=\"sortable_list\">
@@ -172,12 +174,7 @@ print "
 
 <div class=\"pure-g-r\">
   <div class=\"pure-u-2-3\">
-
-<div id=\"savour\" style=\"clear: both;float:left; \">
-<div id=\"save_zone\" style=\"\">
-<button id=\"save_guide\" name=\"update_departments\" >" . _("SAVE CHANGES") . "</button>
-</div>
-</div>";
+";
 
   makePluslet(_("Departments"), $dept_box, "no_overflow");
 

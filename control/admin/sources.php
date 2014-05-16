@@ -17,7 +17,9 @@ $page_title = "Admin Source Types";
 //print_r($_POST);
 
 include("../includes/header.php");
+
 $db = new Querier;
+
 //init
 $ourlist = "";
 $feedback = "";
@@ -29,8 +31,8 @@ if (isset($_POST["add_source"])) {
     ////////////////
 
     $qInsertSource = "INSERT INTO source (source, rs) VALUES (
-		'" . $db->quote(scrubData($_POST["source"])) . "', 
-		'0'
+		" . $db->quote(scrubData($_POST["source"])) . ", 
+		0
 		)";
 
     $rInsertSource = $db->query($qInsertSource);
@@ -63,8 +65,8 @@ if (isset($_POST["update_sources"])) {
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE source SET
-		source = '" . $db->quote(scrubData($value)) . "', 
-		rs = '" . $row_count . "' 
+		source = " . $db->quote(scrubData($value)) . ", 
+		rs = " . $row_count . "
 		WHERE source_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
@@ -99,8 +101,53 @@ foreach ($sourceArray as $value) {
     $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
 }
 
+$source_box = "
+<form id=\"sources\" action=\"\" method=\"post\">
+<button class=\"button\" id=\"save_guide\"  class=\"button pure-button pure-button-primary\" style=\"display: block;\" name=\"update_sources\" >" . _("SAVE CHANGES") . "</button>
+
+<p>" . _("Enter source type label.  Drag sources to change sort order.") . "</p>
+<br />
+
+<ul id=\"sortable-\" class=\"sortable_list\">
+$ourlist
+</ul>
+</form>
+";
+
+$add_source_box = "
+<form id=\"new_source\" action=\"\" method=\"post\">
+<span class=\"record_label\">" . _("Source Name") . "</span><br />
+<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<br /><br />
+<button class=\"button\" id=\"add_source\" name=\"add_source\">" . _("Add New Source") . "</button>
+</form>";
+
+
+
+print feedBack($feedback);
+
 print "
-<div class=\"feedback\">$feedback</div><br /><br />
+
+<form id=\"sources\" action=\"\" method=\"post\">
+
+<div class=\"pure-g-r\">
+  <div class=\"pure-u-2-3\">
+";
+
+  makePluslet(_("Sources"), $source_box, "no_overflow");
+
+print "</div>
+<div class=\"pure-u-1-3\">";
+
+makePluslet(_("Add Source"), $add_source_box, "no_overflow");
+
+
+print "</div>"; // close pure-u-
+print "</div>"; // close pure
+
+
+print "
+
 <form id=\"sources\" action=\"\" method=\"post\">
 <div id=\"savour\" style=\"clear: both;float:left; \">
 	<div id=\"save_zone\"  >
