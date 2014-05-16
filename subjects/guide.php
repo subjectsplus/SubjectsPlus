@@ -258,8 +258,8 @@ jQuery(function() {
 	       event.preventDefault();
 	       jQuery(".find-guide-input").val(ui.item.label);
 
-	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
-
+	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().attr('id');
+console.log(in_tab);
 	       jQuery('#tabs').tabs('select', in_tab);
 
 	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');

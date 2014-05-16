@@ -10,15 +10,13 @@
  */
 
 require_once("autoloader.php");
-  
+
 require_once("functions.php");
-    
+
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\BuildNav;
 use SubjectsPlus\Control\Querier;
-    
-$db = new Querier;
-    
+
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
 if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FILE__) . '/config.php' ) < 10 )
 {
@@ -36,12 +34,14 @@ if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FIL
 
 require_once(dirname(__FILE__) . "/config.php");
 
+$db = new Querier;
+
 // start our session
 session_start();
 
 //print_r($_SESSION);
 //added in order to redirect to proper page if cannot connect to database. Only check if $tryDB variable doesn't exists and says no
-    
+
     /*
 if( !isset($tryDB) || $tryDB != 'no')
 {
@@ -156,14 +156,14 @@ mb_internal_encoding('UTF-8');
     <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
     <?php
     // this is for custom css, set by user and stored in database
-    
+
 
     if (isset($_SESSION['css'])) {
       print "<link id=\"css_choice\" href=\"$AssetPath" . "css/theme/" . $_SESSION['css'] . ".css\" rel=\"stylesheet\" type=\"text/css\"></link>";
     }
- 
-      
-        
+
+
+
     ?>
 
 <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
@@ -208,5 +208,5 @@ mb_internal_encoding('UTF-8');
       } else {
        print "<div id=\"maincontent\">";
 
-          
+
       }

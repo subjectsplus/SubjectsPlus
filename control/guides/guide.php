@@ -681,11 +681,13 @@ ob_end_flush();
 	     },
 	     select: function(event, ui) {
 
-
+console.log(ui.item);
 	       event.preventDefault();
 	       jQuery(".find-guide-input").val(ui.item.label);
 
 	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
+
+	       console.log(in_tab);
 
 	       jQuery('#tabs').tabs('select', in_tab);
 
