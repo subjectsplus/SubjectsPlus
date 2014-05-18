@@ -8,7 +8,7 @@
  *   @todo
  */
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
+
 
 $subsubcat = "";
 $subcat = "admin";
@@ -28,10 +28,9 @@ if (isset($_POST["add_discipline"])) {
     // Insert title table
     ////////////////
 
-    $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
-		'" . $db->quote(scrubData($_POST["discipline"])) . "')";
+    $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (" . $db->quote(scrubData($_POST["discipline"])) . ")";
 
-    $rInsertdiscipline = $db->query($qInsertdiscipline);
+    $rInsertdiscipline = $db->exec($qInsertdiscipline);
 
     if ($rInsertdiscipline) {
         $feedback = _("Thy Will Be Done.  Discipline list updated.");
@@ -66,7 +65,7 @@ if (isset($_POST["update_disciplines"])) {
 		WHERE discipline_id = " . scrubData($key, "integer");
 
         //print $qUpDept;
-        $rUpDept = $db->query($qUpDept);
+        $rUpDept = $db->exec($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
