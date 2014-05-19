@@ -99,7 +99,7 @@ foreach ($disciplineArray as $value) {
 
 
 $discipline_box = "
-<form id=\"sources\" action=\"\" method=\"post\">
+<form id=\"disciplines\" action=\"\" method=\"post\">
 <button class=\"button\" id=\"save_guide\"  class=\"button pure-button pure-button-primary\" style=\"display: block;\" name=\"update_disciplines\" >" . _("SAVE CHANGES") . "</button>
 
 <p>" . _("NOTE:  Disciplines were added to facilitate Serials Solution ingest of data.  This original set was provided by SerSol in Nov 2012. 
