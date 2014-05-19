@@ -973,7 +973,7 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_intercom)) . ","
          . $db->quote(scrubData($this->_lat_long)) . "
 		)";
-   
+    echo $qInsertStaff;
     $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
@@ -1082,9 +1082,10 @@ public function outputLatLongForm() {
 	  "cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . "," .
       "fax = " . $db->quote(scrubData($this->_fax)) . "," .
 	  "intercom = " . $db->quote(scrubData($this->_intercom)) . "," .
-      "lat_long = " . $db->quote(scrubData($this->_lat_long)) . "," .
-	  "WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
+      "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
+	  " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
+    // echo $qUpStaff;
     $rUpStaff = $db->exec($qUpStaff);
 
     // /////////////////////
@@ -1248,5 +1249,4 @@ public function outputLatLongForm() {
   	if( $lintNumberOfRows > 0 ) return false;
   	return true;
   }
-
 }
