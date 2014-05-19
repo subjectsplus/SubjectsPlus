@@ -973,7 +973,8 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_intercom)) . ","
          . $db->quote(scrubData($this->_lat_long)) . "
 		)";
-    echo $qInsertStaff;
+  //  echo $qInsertStaff;
+   
     $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
