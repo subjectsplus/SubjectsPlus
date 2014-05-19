@@ -170,7 +170,9 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
        $('a[id*=css-]').on('click', function(){
 
 	 var css_class = $(this).attr("id").split("-");
-	 var new_css = "<?php print $AssetPath; ?>css/" + css_class[1] + ".css";
+	 var new_css = "<?php print $AssetPath; ?>css/theme/" + css_class[1] + ".css";
+	 
+	 console.log(new_css);
 
 	 $("#css_choice" ).attr("href", new_css);
 	 $("#bg_feedback").load("includes/config_bits.php", {type: 'set_css', css_file: css_class[1]});
