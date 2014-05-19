@@ -51,7 +51,7 @@ class Querier  {
 
 
             echo "<h1>There was a problem connecting to the database.</h1>";
-            echo "<p>Have you set the database credentials in /control/includes/db.ini?</p>";
+            echo "<p>Are you sure that the database connection information is correct?</p>";
             echo "<p>This is the detailed error:</p>";
             echo 'Connection failed: ' . $e->getMessage();
         }
