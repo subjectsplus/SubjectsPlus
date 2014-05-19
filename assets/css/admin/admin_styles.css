@@ -130,6 +130,8 @@ header {
   margin: 0;
   padding: 0;
   vertical-align: middle;
+  background-color: #fff;
+  position:relative;
 }
 
 #topnav li {

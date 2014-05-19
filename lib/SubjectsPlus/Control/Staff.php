@@ -943,37 +943,37 @@ public function outputLatLongForm() {
 
     $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
-      emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long) VALUES (
-		" . $db->quote(scrubData($this->_fname)) . ",
-		" . $db->quote(scrubData($this->_lname)) . ",
-		" . $db->quote(scrubData($this->_title)) . ",
-		" . $db->quote(scrubData($this->_tel)) . ",
-		" . $department_id . ",
-		" . $db->quote(scrubData($this->_staff_sort, "integer")) . ",
-		" . $db->quote(scrubData($this->_email, "email")) . ",
-		" . $user_type_id . ",
-		" . $db->quote(scrubData($this->_password)) . ",
-		" . $db->quote(scrubData($this->_ptags)) . ",
-        " . $db->quote(scrubData($this->_active, "integer")) . ",
-        " . $db->quote(scrubData($this->_bio, "richtext")) . ",
-		" . $db->quote(scrubData($this->_position_number)) . ",
-		" . $db->quote(scrubData($this->_job_classification)) . ",
-		" . $db->quote(scrubData($this->_room_number)) . ",
-		" . $supervisor_id . ",
-		" . $db->quote(scrubData($this->_emergency_contact_name)) . ",
-		" . $db->quote(scrubData($this->_emergency_contact_relation)) . ",
-		" . $db->quote(scrubData($this->_emergency_contact_phone)) . ",
-		" . $db->quote(scrubData($this->_street_address)) . ",
-		" . $db->quote(scrubData($this->_city)) . ",
-		" . $db->quote(scrubData($this->_state)) . ",
-		" . $db->quote(scrubData($this->_zip)) . ",
-		" . $db->quote(scrubData($this->_home_phone)) . ",
-		" . $db->quote(scrubData($this->_cell_phone)) . ",
-		" . $db->quote(scrubData($this->_fax)) . ",
-		" . $db->quote(scrubData($this->_intercom)) . ",
-        " . $db->quote(scrubData($this->_lat_long)) . "
+      emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long) VALUES ( "
+		 . $db->quote(scrubData($this->_fname)) . ","
+		 . $db->quote(scrubData($this->_lname)) . ","
+		 . $db->quote(scrubData($this->_title)) . ","
+		 . $db->quote(scrubData($this->_tel)) . ","
+		 . $department_id . ","
+		 . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
+		 . $db->quote(scrubData($this->_email, "email")) . ","
+		 . $user_type_id . ","
+		 . $db->quote(scrubData($this->_password)) . ","
+		 . $db->quote(scrubData($this->_ptags)) . ","
+         . $db->quote(scrubData($this->_active, "integer")) . ","
+         . $db->quote(scrubData($this->_bio, "richtext")) . ","
+		 . $db->quote(scrubData($this->_position_number)) . ","
+		 . $db->quote(scrubData($this->_job_classification)) . ","
+		 . $db->quote(scrubData($this->_room_number)) . ","
+		 . $supervisor_id . ","
+		 . $db->quote(scrubData($this->_emergency_contact_name)) . ","
+		 . $db->quote(scrubData($this->_emergency_contact_relation)) . ","
+		 . $db->quote(scrubData($this->_emergency_contact_phone)) . ","
+		 . $db->quote(scrubData($this->_street_address)) . ","
+		 . $db->quote(scrubData($this->_city)) . ","
+		 . $db->quote(scrubData($this->_state)) . ","
+		 . $db->quote(scrubData($this->_zip)) . ","
+		 . $db->quote(scrubData($this->_home_phone)) . ","
+		 . $db->quote(scrubData($this->_cell_phone)) . ","
+		 . $db->quote(scrubData($this->_fax)) . ","
+		 . $db->quote(scrubData($this->_intercom)) . ","
+         . $db->quote(scrubData($this->_lat_long)) . "
 		)";
-    //print $qInsertStaff;
+    print $qInsertStaff;
     $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
@@ -1056,34 +1056,34 @@ public function outputLatLongForm() {
     /////////////////////
 
     $qUpStaff = "UPDATE staff SET
-	  fname = " . $db->quote(scrubData($this->_fname)) . ",
-	  lname = " . $db->quote(scrubData($this->_lname)) . ",
-	  title = " . $db->quote(scrubData($this->_title)) . ",
-	  tel = " . $db->quote(scrubData($this->_tel)) . ",
-	  department_id = " . $department_id . ",
-	  staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . ",
-	  email = " . $db->quote(scrubData($this->_email, 'email')) . ",
-	  user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . ",
-	  ptags = " . $db->quote(scrubData($this->_ptags)) . ",
-      active = " . $db->quote(scrubData($this->_active, 'integer')) . ",
-      bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . ",
-	  position_number = " . $db->quote(scrubData($this->_position_number)) . ",
-	  job_classification = " . $db->quote(scrubData($this->_job_classification)) . ",
-	  room_number = " . $db->quote(scrubData($this->_room_number)) . ",
-	  supervisor_id = " . $supervisor_id . ",
-	  emergency_contact_name = " . $db->quote(scrubData($this->_emergency_contact_name)) . ",
-	  emergency_contact_relation = " . $db->quote(scrubData($this->_emergency_contact_relation)) . ",
-	  emergency_contact_phone = " . $db->quote(scrubData($this->_emergency_contact_phone)) . ",
-	  street_address = " . $db->quote(scrubData($this->_street_address)) . ",
-	  city = " . $db->quote(scrubData($this->_city)) . ",
-      state = " . $db->quote(scrubData($this->_state)) . ",
-	  zip = " . $db->quote(scrubData($this->_zip)) . ",
-	  home_phone = " . $db->quote(scrubData($this->_home_phone)) . ",
-	  cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . ",
-      fax = " . $db->quote(scrubData($this->_fax)) . ",
-	  intercom = " . $db->quote(scrubData($this->_intercom)) . ",
-      lat_long = " . $db->quote(scrubData($this->_lat_long)) . "
-	  WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
+	  fname = " . $db->quote(scrubData($this->_fname)) . "," .
+	  "lname = " . $db->quote(scrubData($this->_lname)) . "," .
+	  "title = " . $db->quote(scrubData($this->_title)) . "," .
+	  "tel = " . $db->quote(scrubData($this->_tel)) . "," .
+	  "department_id = " . $department_id . "," .
+	  "staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . "," .
+	  "email = " . $db->quote(scrubData($this->_email, 'email')) . "," .
+	  "user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . "," .
+	  "ptags = " . $db->quote(scrubData($this->_ptags)) . "," .
+      "active = " . $db->quote(scrubData($this->_active, 'integer')) . "," .
+      "bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . "," .
+	  "position_number = " . $db->quote(scrubData($this->_position_number)) . "," .
+	  "job_classification = " . $db->quote(scrubData($this->_job_classification)) . "," .
+	  "room_number = " . $db->quote(scrubData($this->_room_number)) . "," .
+	  "supervisor_id = " . $supervisor_id . "," .
+	  "emergency_contact_name = " . $db->quote(scrubData($this->_emergency_contact_name)) . "," .
+	  "emergency_contact_relation = " . $db->quote(scrubData($this->_emergency_contact_relation)) . "," .
+	  "emergency_contact_phone = " . $db->quote(scrubData($this->_emergency_contact_phone)) . "," .
+	  "street_address = " . $db->quote(scrubData($this->_street_address)) . "," .
+	  "city = " . $db->quote(scrubData($this->_city)) . "," .
+      "state = " . $db->quote(scrubData($this->_state)) . "," .
+	  "zip = " . $db->quote(scrubData($this->_zip)) . "," .
+	  "home_phone = " . $db->quote(scrubData($this->_home_phone)) . "," .
+	  "cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . "," .
+      "fax = " . $db->quote(scrubData($this->_fax)) . "," .
+	  "intercom = " . $db->quote(scrubData($this->_intercom)) . "," .
+      "lat_long = " . $db->quote(scrubData($this->_lat_long)) . "," .
+	  "WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
     $rUpStaff = $db->exec($qUpStaff);
 
@@ -1100,7 +1100,7 @@ public function outputLatLongForm() {
 
   public function updatePassword($new_pass) {
 
-    $q = "UPDATE staff SET password = md5('" . $db->quote(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
+    $q = "UPDATE staff SET password = md5( " . $db->quote(scrubData($new_pass)) . " ) WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
@@ -1115,13 +1115,13 @@ public function outputLatLongForm() {
 
   public function updateBio($new_bio) {
 
-    $q = "UPDATE staff SET bio = '" . $db->quote(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
+    $q = "UPDATE staff SET bio = " . $db->quote(scrubData($new_bio, "richtext")) . " WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 
     $r = $db->query($q);
     // now our detailed version
-    $q2 = "UPDATE staff SET bio = '" . $db->quote(scrubData($new_bio, "richtext")) . "' WHERE staff_id = " . $this->_staff_id;
+    $q2 = "UPDATE staff SET bio = " . $db->quote(scrubData($new_bio, "richtext")) . " WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug .= "<p class=\"debug\">Bio Update query: $q2</p>";
 
