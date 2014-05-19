@@ -249,6 +249,7 @@ ob_end_flush();
 	 reLayout(sec_id, lw, mw, sw);
        } catch (e) {
 
+	 
 
        }   
 
@@ -645,9 +646,16 @@ ob_end_flush();
    });
  });
 
- jQuery(document).ready(function(){
+ jQuery(window).load(function(){
    // jQuery functions to initialize after the page has loaded.
-   refreshFeeds();
+   try {
+     refreshFeeds();
+   }catch(e) {
+
+     
+   }
+
+
  });
 </script>
 
@@ -687,13 +695,13 @@ ob_end_flush();
 	     },
 	     select: function(event, ui) {
 
-	      
+	       
 	       event.preventDefault();
 	       jQuery(".find-guide-input").val(ui.item.label);
 
 	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
 
-	      
+	       
 
 	       jQuery('#tabs').tabs('select', in_tab);
 
