@@ -238,16 +238,22 @@ ob_end_flush();
    //layout each section
    $('div[id^="section_"]').each(function()
     				 {
-     //section id
-     var sec_id = $(this).attr('id').split('section_')[1];
-     var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
+       //section id
+       var sec_id = $(this).attr('id').split('section_')[1];
+       var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
 
-     var lw = parseInt(lobjLayout[0]) * 8;
-     var mw = parseInt(lobjLayout[1]) * 8;
-     var sw = parseInt(lobjLayout[2]) * 8 - 3;
+       var lw = parseInt(lobjLayout[0]) * 8;
+       var mw = parseInt(lobjLayout[1]) * 8;
+       var sw = parseInt(lobjLayout[2]) * 8 - 3;
+       try {
+	 reLayout(sec_id, lw, mw, sw);
+       } catch (e) {
 
-     reLayout(sec_id, lw, mw, sw);
-   });
+
+       }   
+
+
+     });
 
    function addBoxy(){
      jQuery("#box_options").show();
@@ -368,54 +374,54 @@ ob_end_flush();
    //add click event for external url tabs
    jQuery('li[data-external-link]').each(function()
 					 {
-     if($(this).attr('data-external-link') != "")
-     {
-       jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
-						     {
-	 window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	 evt.stopImmediatePropagation();
-       });
+       if($(this).attr('data-external-link') != "")
+       {
+	 jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
+						       {
+	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
+	     evt.stopImmediatePropagation();
+	   });
 
-       jQuery(this).children('a[href^="#tabs-"]').each(function() {
-	 var elementData = jQuery._data(this),
-	 events = elementData.events;
+	 jQuery(this).children('a[href^="#tabs-"]').each(function() {
+	   var elementData = jQuery._data(this),
+	   events = elementData.events;
 
-	 var onClickHandlers = events['click'];
+	   var onClickHandlers = events['click'];
 
-	 // Only one handler. Nothing to change.
-			       if (onClickHandlers.length == 1) {
-	   return;
-	 }
+	   // Only one handler. Nothing to change.
+				 if (onClickHandlers.length == 1) {
+	     return;
+	   }
 
-	 onClickHandlers.splice(0, 0, onClickHandlers.pop());
-       });
-     }
-   });
+	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
+	 });
+       }
+     });
 
    //preselect first
    tabs.tabs('select', 0);
 
- 	//go to tab and pulsate pluslet if hash exists in url
- 	if( window.location.hash )
- 	{
- 		setTimeout(function()
+   //go to tab and pulsate pluslet if hash exists in url
+   if( window.location.hash )
+   {
+     setTimeout(function()
  		{
-	 		if( window.location.hash.split('-').length == 3  )
-	 		{
-		 		var tab_id = window.location.hash.split('-')[1];
-		 		var box_id = window.location.hash.split('-')[2];
-		 		var selected_box = ".pluslet-" + box_id;
+	 if( window.location.hash.split('-').length == 3  )
+	 {
+	   var tab_id = window.location.hash.split('-')[1];
+	   var box_id = window.location.hash.split('-')[2];
+	   var selected_box = ".pluslet-" + box_id;
 
-		 		$('#tabs').tabs('select', tab_id);
+	   $('#tabs').tabs('select', tab_id);
 
-		 		jQuery('html, body').animate({scrollTop:jQuery('a[name="box-' + box_id + '"]').offset().top}, 'slow');
+	   jQuery('html, body').animate({scrollTop:jQuery('a[name="box-' + box_id + '"]').offset().top}, 'slow');
 
-		 		jQuery(selected_box).effect("pulsate", {
-		 			times:1
-		 		}, 2000);
-	 		}
- 		}, 500);
- 	}
+	   jQuery(selected_box).effect("pulsate", {
+	     times:1
+	   }, 2000);
+	 }
+       }, 500);
+   }
 
    // modal dialog init: custom buttons and a "close" callback reseting the form inside
    var dialog = $( "#dialog" ).dialog({
@@ -480,9 +486,9 @@ ob_end_flush();
          {
            $( 'a[href="#tabs-' + id + '"]' ).on('click', function(evt)
               					{
-             window.open($(this).parent('li').attr('data-external-link'), '_blank');
-             evt.stopImmediatePropagation();
-           });
+               window.open($(this).parent('li').attr('data-external-link'), '_blank');
+               evt.stopImmediatePropagation();
+             });
 
            $( 'a[href="#tabs-' + id + '"]' ).each(function() {
              var elementData = jQuery._data(this),
@@ -499,13 +505,13 @@ ob_end_flush();
            });
          }
 
-		 //add/remove class based on tab visibility
+	 //add/remove class based on tab visibility
        	 if( $('select[name="visibility"]').val() == 1 )
        	 {
-       	 	$( 'a[href="#tabs-' + id + '"]' ).parent('li').removeClass('hidden_tab');
+       	   $( 'a[href="#tabs-' + id + '"]' ).parent('li').removeClass('hidden_tab');
        	 }else
        	 {
-			$( 'a[href="#tabs-' + id + '"]' ).parent('li').addClass('hidden_tab');
+	   $( 'a[href="#tabs-' + id + '"]' ).parent('li').addClass('hidden_tab');
        	 }
 
          $( this ).dialog( "close" );
@@ -521,7 +527,7 @@ ob_end_flush();
          tabs.tabs();
          tabCounter--;
          $( this ).dialog( "close" );
-   		 $("#response").hide();
+   	 $("#response").hide();
          $('#save_guide').fadeIn();
        },
        Cancel: function() {
@@ -599,11 +605,11 @@ ob_end_flush();
 
          if( $(li).attr('data-external-link') != '' )
          {
-         	jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
-         	{
-	     		window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	     		evt.stopImmediatePropagation();
-	   		});
+           jQuery(li).children('a[href^="#tabs-"]').on('click', function(evt)
+         					       {
+	       window.open($(this).parent('li').attr('data-external-link'), '_blank');
+	       evt.stopImmediatePropagation();
+	     });
          }
 
          jQuery(li).children('a[href^="#tabs-"]').each(function() {
@@ -639,7 +645,7 @@ ob_end_flush();
    });
  });
 
- jQuery(window).load(function(){
+ jQuery(document).ready(function(){
    // jQuery functions to initialize after the page has loaded.
    refreshFeeds();
  });
@@ -648,8 +654,8 @@ ob_end_flush();
 <div id="guide_header">
   <div class="pure-g-r">
 
-      <div class="pure-u-1-2">
-        <form class="pure-form" id="guide_search">
+    <div class="pure-u-1-2">
+      <form class="pure-form" id="guide_search">
         <ul id="guide_nav">
           <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
           <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
@@ -681,13 +687,13 @@ ob_end_flush();
 	     },
 	     select: function(event, ui) {
 
-console.log(ui.item);
+	      
 	       event.preventDefault();
 	       jQuery(".find-guide-input").val(ui.item.label);
 
 	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
 
-	       console.log(in_tab);
+	      
 
 	       jQuery('#tabs').tabs('select', in_tab);
 
@@ -699,17 +705,17 @@ console.log(ui.item);
 
 	  </script>
 
-        <!--<li class="selected"></li>-->
+          <!--<li class="selected"></li>-->
         </ul>
-        </form>
-      </div> <!-- end pure 1-2-->
-      <div class="pure-u-1-2"> <h2>
-        <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
-        <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-        <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+      </form>
+    </div> <!-- end pure 1-2-->
+    <div class="pure-u-1-2"> <h2>
+      <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
+      <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
+      <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
 
 
-      </h2></div><!-- end pure 1-2-->
+    </h2></div><!-- end pure 1-2-->
   </div> <!-- end pure -->
 </div> <!-- end guide header-->
 
