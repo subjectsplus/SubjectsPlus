@@ -707,7 +707,7 @@ $main_col_size = null;
         // clear staff_subject
         /////////////////////
 
-/*
+
         $qClearSS = "DELETE FROM staff_subject WHERE subject_id = " . $this->_subject_id;
 
         $rClearSS = $db->exec($qClearSS);
@@ -718,7 +718,7 @@ $main_col_size = null;
             echo blunDer("We have a problem with the clear staff_subject query: $qClearSS");
         }
 
-*/
+
         /////////////////////
         // insert into staff_subject
         ////////////////////
