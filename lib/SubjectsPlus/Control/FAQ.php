@@ -169,7 +169,7 @@ class FAQ {
     	// Create and output object
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
-    	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+    	$config['toolbar'] = 'SubsPlus_Narrow';// Default shows a much larger set of toolbar options
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);

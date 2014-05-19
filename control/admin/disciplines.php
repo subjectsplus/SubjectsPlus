@@ -29,7 +29,7 @@ if (isset($_POST["add_discipline"])) {
     ////////////////
 
     $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
-		'" . $db->quote(scrubData($_POST["discipline"])) . "')";
+		" . $db->quote(scrubData($_POST["discipline"])) . ")";
 
     $rInsertdiscipline = $db->query($qInsertdiscipline);
 

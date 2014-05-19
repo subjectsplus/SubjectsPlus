@@ -145,7 +145,7 @@ class Talkback {
 
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
-    	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+    	$config['toolbar'] = 'SubsPlus_Narrow';// Default shows a much larger set of toolbar options
     	$config['height'] = '200';
     	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 

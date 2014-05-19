@@ -1111,9 +1111,13 @@ div.tooltip div
 
 /* guides/index.php */
 
-#savour {
-  clear: both;float:left; margin-top: 5px; height: 30px; max-width: 250px;
+#savour,  {
+  clear: both;float:left; margin-top: 1em; height: 30px;  width: 100%;
 
+}
+
+.narrow {
+  mad-width: 300px;
 }
 
 #save_zone button {display: inline-block;} /* otherwise hidden by another declaration */

@@ -87,7 +87,7 @@ if (isset($_GET["wintype"]) && $_GET["wintype"]  == "pop") {
   $_GET["wintype"] = "";
 }
 
-echo "<div class=\"feedback\">$feedback</div><br /><br />";
+echo feedBack($feedback);
 
 /////////////////////////
 // SHOW FORM

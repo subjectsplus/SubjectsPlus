@@ -647,7 +647,7 @@ $main_col_size = null;
 
 
         // message
-        $this->_message = _("Thy Will Be Done.") . " <a href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("View Your Guide") . "</a>";
+        $this->_message = _("Thy Will Be Done.") . " <a href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
     }
 
     public function updateRecord()
