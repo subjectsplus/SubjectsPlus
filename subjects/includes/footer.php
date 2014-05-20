@@ -25,7 +25,6 @@ Powered by <a href="http://www.subjectsplus.com/">SubjectsPlus</a>
 </div>
 
 </body>
-<script src="<?php print $AssetPath; ?>jquery/bootstrap.js"></script>
 </html>
 
 

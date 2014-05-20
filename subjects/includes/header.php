@@ -7,11 +7,6 @@
 <meta name="Description" content="<?php if (isset($description)) {print $description;} ?>" />
 <meta name="Keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>" />
 <meta name="Author" content="" />
-<?php if (isset($is_responsive) && $is_responsive == TRUE) {
-    echo '<link type="text/css" media="all" rel="stylesheet" href="' . $AssetPath . 'css/bootstrapz.css">';
-}
-?>
-
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/default.css">
 <!-- <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/print.css"> -->
