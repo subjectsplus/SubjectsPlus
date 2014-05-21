@@ -127,3 +127,6 @@ ALTER TABLE `pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id
 
 /* add visibility column to tab */
 ALTER TABLE `tab` ADD COLUMN `visibility` INT(1) NOT NULL DEFAULT 1  AFTER `external_url` ;
+
+/* add background link column to subject table */
+ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified` ;
