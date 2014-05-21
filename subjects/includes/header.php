@@ -13,7 +13,7 @@
 ?>
 
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure.css">
-<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/default.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/v3.css">
 <!-- <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/print.css"> -->
 
 <?php // Load our jQuery libraries + some css
@@ -46,7 +46,7 @@ if (!isset ($noheadersearch)) {
     <div id="header_inner_wrap">
     <div class="pure-g-r">
         <div class="pure-u-3-4">
-            <h1><?php print $page_title; ?></h1>
+            <img src="../assets/images/public/logo.png" alt="Home Page" />
         </div>
 
         <div class="pure-u-1-4">
@@ -59,10 +59,10 @@ if (!isset ($noheadersearch)) {
 </div>
 
 
-<div class="pure-g-r">
+<div class="pure-g-r header2">
     <div class="wrapper-full">
         <div class="pure-u-1">
-
+        <h1><?php print $page_title; ?></h1>
 <!--
         </div>
     </div>

@@ -801,19 +801,28 @@ $main_col_size = null;
 
     public function outputNavTabs( $lstrFilter = "" )
     {
+        global $IconPath;
+
         $all_tabs = $this->getTabs($lstrFilter);
 
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
         	$class = "dropspotty";
         	$class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
+            if (!$this->_isAdmin && $key == 0) {
+            $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"hometab\"><img src=\"$IconPath/home-white.png\" /></a>";
 
+            } else {
             $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
+
+            }
             $tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
         }
 
         //$tabs .= "<li><a id=\"newtab\" href=\"#tabs-new\">{+}</a></li>";
         $tabs .= "</ul>"; // close out our tabs
+
+        $tabs .= $this->_isAdmin ? "" : "<div id=\"shadowkiller\"></div>"; // this div allows me to cover bottom of box-shadow on tabs.  crazy, bien sur
 
         echo $tabs;
     }
