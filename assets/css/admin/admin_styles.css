@@ -1588,6 +1588,8 @@ img.tooltip  {
    background-color: #fff;
   border: 2px solid #efefef;
   border-radius: 5px;
+  overflow: auto;
+  word-wrap: break-word;
 }
 
 #controlpage div.pluslet > .titlebar {

@@ -31,11 +31,11 @@ $AssetURL = getAssetURL();
    <head>
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-       <style type="text/css" media="all">@import "<?php print $AssetURL; ?>css/admin_styles.css";</style>
-       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/jquery.livequery.min.js"></script>
-       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/jquery.hoverIntent.js"></script>
-       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/shared.js"></script>
-       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/jquery.colorbox-min.js"></script>
+       <style type="text/css" media="all">@import "<?php print $AssetURL; ?>css/admin/admin_styles.css"</style>
+       <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.livequery.min.js"></script>
+       <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.hoverIntent.js"></script>
+       <script type="text/javascript" src="<?php print $AssetURL ?>js/shared.js"></script>
+       <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.colorbox-min.js"></script>
        <title>Setup Configuration Page</title>
    </head>
 
@@ -176,7 +176,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
 						if( !isInstalled() )
 						{
-							?> <div class="box" style="margin-right: auto; margin-left: auto; max-width: 800px;"><a href="install.php">Run the install!</a></div> <?php
+							?> <div class="box" style="margin-right: auto; margin-left: auto; max-width: 800px; text-align: center;"><a href="install.php">Run the install!</a></div> <?php
 						}
 						else
 						{

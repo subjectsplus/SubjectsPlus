@@ -864,5 +864,3 @@ function deBug() {
 }
 
 }
-
-?>
