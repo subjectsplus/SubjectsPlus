@@ -118,6 +118,9 @@ if( isInstalled() )
 					$lobjConfig->displayMessage( _( "Something went wrong and could not save configurations." ) );
 				}else
 				{
+					//include again if config variables have changed
+					include('includes/config.php');
+
 					//new installer instance and install and on success show complete page
 					$lobjInstaller = new Installer();
 					if( $lobjInstaller->install( ) )

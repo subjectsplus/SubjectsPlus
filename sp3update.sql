@@ -130,3 +130,5 @@ ALTER TABLE `tab` ADD COLUMN `visibility` INT(1) NOT NULL DEFAULT 1  AFTER `exte
 
 /* add background link column to subject table */
 ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified` ;
+
+drop table `pluslet_subject`;

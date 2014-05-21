@@ -35,7 +35,7 @@ jQuery(document).ready(function(){
     // Append an intital section
 
     if (jQuery('[id^=section]').length !== 0) {
-	
+
     } else {
 	jQuery.ajax({
 	    url: "helpers/section_data.php",
@@ -919,17 +919,6 @@ function setupAllColorboxes()
 
 function setupMiscLiveQueries()
 {
-    /////////////////////////
-    // SHOW PLUSLETS VIA SUBJECT DROPDOWN
-    /////////////////////////
-
-    jQuery('#all_subs').livequery('change', function(event) {
-        jQuery("#response").hide();
-        jQuery("#find-results2").load("helpers/find_pluslets.php", {
-            browse_subject_id: jQuery(this).val()
-        });
-    });
-
     /////////////////////////
     // HIDE NEW PLUSLETS DRAGGABLE SECTION
     /////////////////////////

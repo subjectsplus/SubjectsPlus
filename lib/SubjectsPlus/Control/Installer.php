@@ -21,6 +21,9 @@ class Installer
 
 	function __construct()
 	{
+		global $email_key;
+		$lstrEmailDomain = isset($email_key) && $email_key != '' ? $email_key : '@sp.edu';
+
 		//set random password and convert to md5 hash to store in database
 		$this->setRandomPassword();
 		$lstrHashPassword = md5( scrubData( $this->lstrRandomPassword ) );
@@ -28,37 +31,21 @@ class Installer
 		//all the table creation queries
 		$this->lobjCreateQueries = array(
 					"SET SQL_MODE=\"NO_AUTO_VALUE_ON_ZERO\"",
-					"CREATE TABLE `pluslet` (
-					  `pluslet_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `title` varchar(45) NOT NULL DEFAULT '',
-					  `body` longtext NOT NULL,
-					  `local_file` varchar(100) DEFAULT NULL,
-					  `clone` int(1) NOT NULL DEFAULT '0',
-					  `type` varchar(50) DEFAULT NULL,
-					  `extra` varchar(255) DEFAULT NULL,
-					  PRIMARY KEY (`pluslet_id`),
-					  KEY `INDEXSEARCHpluslet` (`body`(200))
-					) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `department` (
-					  `department_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `name` varchar(100) NOT NULL DEFAULT '',
-					  `department_sort` int(11) NOT NULL DEFAULT '0',
-					  `telephone` varchar(20) NOT NULL DEFAULT '0',
-					  `email` varchar(255) DEFAULT NULL,
-					  `url` varchar(255) DEFAULT NULL,
-					  PRIMARY KEY (`department_id`),
-					  KEY `INDEXSEARCHdepartment` (`name`)
-					) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `chchchanges` (
-					  `chchchanges_id` bigint(20) NOT NULL AUTO_INCREMENT,
-					  `staff_id` int(11) NOT NULL,
-					  `ourtable` varchar(50) CHARACTER SET latin1 NOT NULL,
-					  `record_id` int(11) NOT NULL,
-					  `record_title` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-					  `message` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
-					  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-					  PRIMARY KEY (`chchchanges_id`)
-					) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8",
+					"CREATE TABLE `user_type` (
+					  `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `user_type` varchar(100) NOT NULL,
+					  PRIMARY KEY (`user_type_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `uml_refstats_location` (
+					  `location_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `label` varchar(100) NOT NULL,
+					  PRIMARY KEY (`location_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `uml_refstats_type` (
+					  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `label` varchar(100) NOT NULL,
+					  PRIMARY KEY (`type_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `video` (
 					  `video_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `title` varchar(255) NOT NULL,
@@ -70,7 +57,103 @@ class Installer
 					  `display` int(1) NOT NULL DEFAULT '0',
 					  `vtags` varchar(255) DEFAULT NULL,
 					  PRIMARY KEY (`video_id`),
-					  KEY `INDEXSEARCHvideo` (`title`,`description`(200))
+					  KEY `INDEXSEARCH` (`title`,`description`(200))
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `chchchanges` (
+					  `chchchanges_id` bigint(20) NOT NULL AUTO_INCREMENT,
+					  `staff_id` int(11) NOT NULL,
+					  `ourtable` varchar(50) CHARACTER SET latin1 NOT NULL,
+					  `record_id` int(11) NOT NULL,
+					  `record_title` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+					  `message` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+					  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					  PRIMARY KEY (`chchchanges_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `discipline` (
+					  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
+					  `sort` int(11) NOT NULL,
+					  PRIMARY KEY (`discipline_id`),
+					  UNIQUE KEY `discipline` (`discipline`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v2'",
+					"CREATE TABLE `faqpage` (
+					  `faqpage_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `name` varchar(255) NOT NULL,
+					  `description` text NOT NULL,
+					  PRIMARY KEY (`faqpage_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `source` (
+					  `source_id` bigint(20) NOT NULL AUTO_INCREMENT,
+					  `source` varchar(255) DEFAULT NULL,
+					  `rs` int(10) DEFAULT NULL,
+					  PRIMARY KEY (`source_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `department` (
+					  `department_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `name` varchar(100) NOT NULL DEFAULT '',
+					  `department_sort` int(11) NOT NULL DEFAULT '0',
+					  `telephone` varchar(20) NOT NULL DEFAULT '0',
+					  `email` varchar(255) DEFAULT NULL,
+					  `url` varchar(255) DEFAULT NULL,
+					  PRIMARY KEY (`department_id`),
+					  KEY `INDEXSEARCHdepart` (`name`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `subject` (
+					  `subject_id` bigint(20) NOT NULL AUTO_INCREMENT,
+					  `subject` varchar(255) DEFAULT NULL,
+					  `active` int(1) NOT NULL DEFAULT '0',
+					  `shortform` varchar(50) NOT NULL DEFAULT '0',
+					  `redirect_url` varchar(255) DEFAULT NULL,
+					  `header` varchar(45) DEFAULT NULL,
+					  `description` varchar(255) DEFAULT NULL,
+					  `keywords` varchar(255) DEFAULT NULL,
+					  `type` varchar(20) DEFAULT NULL,
+					  `last_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					  `background_link` varchar(255) DEFAULT NULL,
+					  `extra` varchar(255) DEFAULT NULL,
+					  PRIMARY KEY (`subject_id`),
+					  KEY `INDEXSEARCHsubject` (`subject`,`shortform`,`description`,`keywords`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `pluslet` (
+					  `pluslet_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `title` varchar(100) NOT NULL DEFAULT '',
+					  `body` longtext NOT NULL,
+					  `local_file` varchar(100) DEFAULT NULL,
+					  `clone` int(1) NOT NULL DEFAULT '0',
+					  `type` varchar(50) DEFAULT NULL,
+					  `extra` varchar(255) DEFAULT NULL,
+					  `hide_titlebar` int(1) NOT NULL DEFAULT '0',
+					  `collapse_body` int(1) NOT NULL DEFAULT '0',
+					  `suppress_body` int(1) NOT NULL DEFAULT '0',
+					  `titlebar_styling` varchar(100) DEFAULT NULL,
+					  PRIMARY KEY (`pluslet_id`),
+					  KEY `INDEXSEARCHpluslet` (`body`(200))
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `uml_refstats` (
+					  `refstats_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `type_id` int(11) NOT NULL,
+					  `location_id` int(11) NOT NULL,
+					  `mode_id` int(11) NOT NULL,
+					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					  `note` varchar(1000) DEFAULT NULL,
+					  PRIMARY KEY (`refstats_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `format` (
+					  `format_id` bigint(20) NOT NULL AUTO_INCREMENT,
+					  `format` varchar(255) DEFAULT NULL,
+					  PRIMARY KEY (`format_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `faq` (
+					  `faq_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `question` varchar(255) NOT NULL,
+					  `answer` text NOT NULL,
+					  `keywords` varchar(255) NOT NULL,
+					  PRIMARY KEY (`faq_id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `restrictions` (
+					  `restrictions_id` int(10) NOT NULL AUTO_INCREMENT,
+					  `restrictions` text,
+					  PRIMARY KEY (`restrictions_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `title` (
 					  `title_id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -82,79 +165,76 @@ class Installer
 					  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					  PRIMARY KEY (`title_id`),
 					  KEY `INDEXSEARCHtitle` (`title`,`alternate_title`,`description`(200))
-					) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `subject` (
-					  `subject_id` bigint(20) NOT NULL AUTO_INCREMENT,
-					  `subject` varchar(255) DEFAULT NULL,
-					  `active` int(1) NOT NULL DEFAULT '0',
-					  `shortform` varchar(50) NOT NULL DEFAULT '0',
-					  `redirect_url` varchar(255) DEFAULT NULL,
-					  `description` varchar(255) DEFAULT NULL,
-					  `keywords` varchar(255) DEFAULT NULL,
-					  `type` varchar(20) DEFAULT NULL,
-					  `last_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-					  `extra` varchar(255) DEFAULT NULL,
-					  PRIMARY KEY (`subject_id`),
-					  KEY `INDEXSEARCHsubject` (`subject`,`shortform`,`description`,`keywords`)
-					) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `discipline` (
-					  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
-					  `sort` int(11) NOT NULL,
-					  PRIMARY KEY (`discipline_id`),
-					  UNIQUE KEY `discipline` (`discipline`)
-					) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `faq` (
-					  `faq_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `question` varchar(255) NOT NULL,
-					  `answer` text NOT NULL,
-					  `keywords` varchar(255) NOT NULL,
-					  PRIMARY KEY (`faq_id`),
-					  KEY `INDEXSEARCHfaq` (`question`,`answer`(255))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `faqpage` (
-					  `faqpage_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `name` varchar(255) NOT NULL,
-					  `description` text NOT NULL,
-					  PRIMARY KEY (`faqpage_id`)
+					"CREATE TABLE `uml_refstats_mode` (
+					  `mode_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `label` varchar(100) NOT NULL,
+					  PRIMARY KEY (`mode_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `format` (
-					  `format_id` bigint(20) NOT NULL AUTO_INCREMENT,
-					  `format` varchar(255) DEFAULT NULL,
-					  PRIMARY KEY (`format_id`)
-					) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `restrictions` (
-					  `restrictions_id` int(10) NOT NULL AUTO_INCREMENT,
-					  `restrictions` text,
-					  PRIMARY KEY (`restrictions_id`)
-					) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `user_type` (
-					  `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `user_type` varchar(100) NOT NULL,
-					  PRIMARY KEY (`user_type_id`)
-					) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8",
-					"CREATE TABLE `source` (
-					  `source_id` bigint(20) NOT NULL AUTO_INCREMENT,
-					  `source` varchar(255) DEFAULT NULL,
-					  `rs` int(10) DEFAULT NULL,
-					  PRIMARY KEY (`source_id`)
-					) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8",
+					"CREATE TABLE `rank` (
+					  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `rank` int(10) NOT NULL DEFAULT '0',
+					  `subject_id` bigint(20) DEFAULT NULL,
+					  `title_id` bigint(20) DEFAULT NULL,
+					  `source_id` bigint(20) DEFAULT NULL,
+					  `description_override` text,
+					  PRIMARY KEY (`rank_id`),
+					  KEY `fk_rank_subject_id_idx` (`subject_id`),
+					  KEY `fk_rank_title_id_idx` (`title_id`),
+					  KEY `fk_rank_source_id_idx` (`source_id`),
+					  CONSTRAINT `fk_rank_source_id` FOREIGN KEY (`source_id`) REFERENCES `source` (`source_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_rank_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `subject_department` (
+					  `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
+					  `id_subject` bigint(20) NOT NULL,
+					  `id_department` int(11) NOT NULL,
+					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					  PRIMARY KEY (`idsubject_department`),
+					  KEY `fk_subject_id_idx` (`id_subject`),
+					  KEY `fk_department_id_idx` (`id_department`),
+					  CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+					  CONSTRAINT `fk_subject_id` FOREIGN KEY (`id_subject`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `tab` (
+					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
+					  `label` varchar(20) NOT NULL DEFAULT 'Main',
+					  `tab_index` int(11) NOT NULL DEFAULT '0',
+					  `external_url` varchar(500) DEFAULT NULL,
+					  `visibility` int(1) NOT NULL DEFAULT '1',
+					  PRIMARY KEY (`tab_id`),
+					  KEY `fk_t_subject_id_idx` (`subject_id`),
+					  CONSTRAINT `fk_t_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `subject_subject` (
+					  `id_subject_subject` int(11) NOT NULL AUTO_INCREMENT,
+					  `subject_parent` bigint(20) NOT NULL,
+					  `subject_child` bigint(20) NOT NULL,
+					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					  PRIMARY KEY (`id_subject_subject`),
+					  KEY `fk_subject_parent_idx` (`subject_parent`),
+					  KEY `fk_subject_child_idx` (`subject_child`),
+					  CONSTRAINT `fk_subject_child` FOREIGN KEY (`subject_child`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+					  CONSTRAINT `fk_subject_parent` FOREIGN KEY (`subject_parent`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `staff` (
 					  `staff_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `lname` varchar(255) DEFAULT NULL,
-					  `fname` varchar(255) DEFAULT NULL,
-					  `title` varchar(255) DEFAULT NULL,
-					  `tel` varchar(10) DEFAULT NULL,
+					  `lname` varchar(765) DEFAULT NULL,
+					  `fname` varchar(765) DEFAULT NULL,
+					  `title` varchar(765) DEFAULT NULL,
+					  `tel` varchar(45) DEFAULT NULL,
 					  `department_id` int(11) DEFAULT NULL,
-					  `staff_sort` int(11) NOT NULL DEFAULT '0',
-					  `email` varchar(255) DEFAULT NULL,
-					  `ip` varchar(100) NOT NULL DEFAULT '',
-					  `access_level` int(11) NOT NULL DEFAULT '0',
+					  `staff_sort` int(11) DEFAULT NULL,
+					  `email` varchar(765) DEFAULT NULL,
+					  `ip` varchar(300) DEFAULT NULL,
+					  `access_level` int(11) DEFAULT NULL,
 					  `user_type_id` int(11) DEFAULT NULL,
-					  `password` varchar(64) DEFAULT NULL,
-					  `active` int(1) NOT NULL DEFAULT '1',
-					  `ptags` varchar(255) DEFAULT NULL,
-					  `extra` varchar(255) DEFAULT NULL,
+					  `password` varchar(192) DEFAULT NULL,
+					  `active` int(1) DEFAULT NULL,
+					  `ptags` varchar(765) DEFAULT NULL,
+					  `extra` varchar(765) DEFAULT NULL,
 					  `bio` blob,
 					  `position_number` varchar(30) DEFAULT NULL,
 					  `job_classification` varchar(255) DEFAULT NULL,
@@ -173,14 +253,14 @@ class Installer
 					  `intercom` varchar(30) DEFAULT NULL,
 					  `lat_long` varchar(75) DEFAULT NULL,
 					  PRIMARY KEY (`staff_id`),
-					  KEY `INDEXSEARCHstaff` (`lname`,`fname`),
 					  KEY `fk_supervisor_staff_id_idx` (`supervisor_id`),
 					  KEY `fk_staff_user_type_id_idx` (`user_type_id`),
 					  KEY `fk_staff_department_id_idx` (`department_id`),
+					  KEY `INDEXSEARCHstaff` (`lname`(255),`fname`(255)),
 					  CONSTRAINT `fk_supervisor_staff_id` FOREIGN KEY (`supervisor_id`) REFERENCES `staff` (`staff_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-					  CONSTRAINT `fk_staff_user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-					  CONSTRAINT `fk_staff_department_id` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE SET NULL ON UPDATE SET NULL
-					) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8",
+					  CONSTRAINT `fk_staff_department_id` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE SET NULL ON UPDATE SET NULL,
+					  CONSTRAINT `fk_staff_user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`) ON DELETE SET NULL ON UPDATE SET NULL
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `talkback` (
 					  `talkback_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `question` text NOT NULL,
@@ -197,50 +277,15 @@ class Installer
 					  KEY `fk_talkback_staff_id_idx` (`a_from`),
 					  CONSTRAINT `fk_talkback_staff_id` FOREIGN KEY (`a_from`) REFERENCES `staff` (`staff_id`) ON DELETE SET NULL ON UPDATE SET NULL
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `staff_subject` (
-					  `staff_id` int(11) NOT NULL DEFAULT '0',
-					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
-					  PRIMARY KEY (`staff_id`,`subject_id`),
-					  KEY `fk_ss_subject_id_idx` (`subject_id`),
-					  KEY `fk_ss_staff_id_idx` (`staff_id`),
-					  CONSTRAINT `fk_ss_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_ss_staff_id` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					"CREATE TABLE `section` (
+					  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `section_index` int(11) NOT NULL DEFAULT '0',
+					  `layout` varchar(255) NOT NULL DEFAULT '4-4-4',
+					  `tab_id` int(11) NOT NULL,
+					  PRIMARY KEY (`section_id`),
+					  KEY `fk_section_tab_idx` (`tab_id`),
+					  CONSTRAINT `fk_section_tab` FOREIGN KEY (`tab_id`) REFERENCES `tab` (`tab_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `pluslet_subject` (
-					  `pluslet_subject_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `pluslet_id` int(11) NOT NULL DEFAULT '0',
-					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
-					  `pcolumn` int(11) NOT NULL,
-					  `prow` int(11) NOT NULL,
-					  `local_title` varchar(45) DEFAULT NULL,
-					  PRIMARY KEY (`pluslet_subject_id`),
-					  KEY `fk_sp_pluslet_id_idx` (`pluslet_id`),
-					  KEY `fk_sp_subject_id_idx` (`subject_id`),
-					  CONSTRAINT `fk_sp_pluslet_id` FOREIGN KEY (`pluslet_id`) REFERENCES `pluslet` (`pluslet_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_sp_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `faq_subject` (
-					  `faq_subject_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `faq_id` int(11) NOT NULL,
-					  `subject_id` bigint(20) NOT NULL,
-					  PRIMARY KEY (`faq_subject_id`),
-					  KEY `fk_fs_faq_id_idx` (`faq_id`),
-					  KEY `fk_fs_subject_id_idx` (`subject_id`),
-					  CONSTRAINT `fk_fs_faq_id` FOREIGN KEY (`faq_id`) REFERENCES `faq` (`faq_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_fs_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `subject_discipline` (
-					  `subject_id` bigint(20) NOT NULL,
-					  `discipline_id` int(11) NOT NULL,
-					  PRIMARY KEY (`subject_id`,`discipline_id`),
-					  KEY `discipline_id` (`discipline_id`),
-					  KEY `fk_sd_subject_id_idx` (`subject_id`),
-					  KEY `fk_sd_discipline_id_idx` (`discipline_id`),
-					  KEY `fk_sd_subject_id_idx1` (`subject_id`),
-					  KEY `fk_sd_discipline_id_idx1` (`discipline_id`),
-					  CONSTRAINT `fk_sd_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_sd_discipline_id` FOREIGN KEY (`discipline_id`) REFERENCES `discipline` (`discipline_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v2'",
 					"CREATE TABLE `faq_faqpage` (
 					  `faq_faqpage_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `faq_id` int(11) NOT NULL,
@@ -248,24 +293,9 @@ class Installer
 					  PRIMARY KEY (`faq_faqpage_id`),
 					  KEY `fk_ff_faq_id_idx` (`faq_id`),
 					  KEY `fk_ff_faqpage_id_idx` (`faqpage_id`),
-					  CONSTRAINT `fk_ff_faq_id` FOREIGN KEY (`faq_id`) REFERENCES `faq` (`faq_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_ff_faqpage_id` FOREIGN KEY (`faqpage_id`) REFERENCES `faqpage` (`faqpage_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					  CONSTRAINT `fk_ff_faqpage_id` FOREIGN KEY (`faqpage_id`) REFERENCES `faqpage` (`faqpage_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_ff_faq_id` FOREIGN KEY (`faq_id`) REFERENCES `faq` (`faq_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `rank` (
-					  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `rank` int(10) NOT NULL DEFAULT '0',
-					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
-					  `title_id` bigint(20) NOT NULL DEFAULT '0',
-					  `source_id` bigint(20) NOT NULL DEFAULT '0',
-					  `description_override` text,
-					  PRIMARY KEY (`rank_id`),
-					  KEY `fk_rank_subject_id_idx` (`subject_id`),
-					  KEY `fk_rank_title_id_idx` (`title_id`),
-					  KEY `fk_rank_source_id_idx` (`source_id`),
-					  CONSTRAINT `fk_rank_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-					  CONSTRAINT `fk_rank_source_id` FOREIGN KEY (`source_id`) REFERENCES `source` (`source_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8",
 					"CREATE TABLE `location` (
 					  `location_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `format` bigint(20) DEFAULT NULL,
@@ -282,7 +312,17 @@ class Installer
 					  KEY `fk_location_restrictions_id_idx` (`access_restrictions`),
 					  CONSTRAINT `fk_location_format_id` FOREIGN KEY (`format`) REFERENCES `format` (`format_id`) ON DELETE SET NULL ON UPDATE SET NULL,
 					  CONSTRAINT `fk_location_restrictions_id` FOREIGN KEY (`access_restrictions`) REFERENCES `restrictions` (`restrictions_id`) ON DELETE SET NULL ON UPDATE SET NULL
-					) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8",
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `faq_subject` (
+					  `faq_subject_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `faq_id` int(11) NOT NULL,
+					  `subject_id` bigint(20) NOT NULL,
+					  PRIMARY KEY (`faq_subject_id`),
+					  KEY `fk_fs_faq_id_idx` (`faq_id`),
+					  KEY `fk_fs_subject_id_idx` (`subject_id`),
+					  CONSTRAINT `fk_fs_faq_id` FOREIGN KEY (`faq_id`) REFERENCES `faq` (`faq_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_fs_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `location_title` (
 					  `location_id` bigint(20) NOT NULL DEFAULT '0',
 					  `title_id` bigint(20) NOT NULL DEFAULT '0',
@@ -292,13 +332,26 @@ class Installer
 					  CONSTRAINT `fk_lt_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`) ON DELETE CASCADE ON UPDATE CASCADE,
 					  CONSTRAINT `fk_lt_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `tab` (
-					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `subject_id` int(11) NOT NULL DEFAULT '0',
-					  `label` varchar(20) NOT NULL DEFAULT 'Main',
-					  `tab_index` int(11) NOT NULL DEFAULT '0',
-					  PRIMARY KEY (`tab_id`),
-					  KEY `fk_t_subject_id_idx` (`subject_id`)
+					"CREATE TABLE `subject_discipline` (
+					  `subject_id` bigint(20) NOT NULL,
+					  `discipline_id` int(11) NOT NULL,
+					  PRIMARY KEY (`subject_id`,`discipline_id`),
+					  KEY `discipline_id` (`discipline_id`),
+					  KEY `fk_sd_subject_id_idx` (`subject_id`),
+					  KEY `fk_sd_discipline_id_idx` (`discipline_id`),
+					  KEY `fk_sd_subject_id_idx1` (`subject_id`),
+					  KEY `fk_sd_discipline_id_idx1` (`discipline_id`),
+					  CONSTRAINT `fk_sd_discipline_id` FOREIGN KEY (`discipline_id`) REFERENCES `discipline` (`discipline_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_sd_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v2'",
+					"CREATE TABLE `staff_subject` (
+					  `staff_id` int(11) NOT NULL DEFAULT '0',
+					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
+					  PRIMARY KEY (`staff_id`,`subject_id`),
+					  KEY `fk_ss_subject_id_idx` (`subject_id`),
+					  KEY `fk_ss_staff_id_idx` (`staff_id`),
+					  CONSTRAINT `fk_ss_staff_id` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+					  CONSTRAINT `fk_ss_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `pluslet_section` (
 					  `pluslet_section_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -310,18 +363,19 @@ class Installer
 					  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
 					  KEY `fk_pt_tab_id_idx` (`section_id`),
 					  CONSTRAINT `fk_pt_section_id` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8"
 			);
 
 		//all the subjectqueries -- default data
 		$this->lobjInsertQueries = array(
 					"INSERT INTO `chchchanges` VALUES (1,1,'guide',1,'General','insert','2011-03-26 19:16:19'),(2,1,'record',1,'Sample Record','insert','2011-03-26 20:08:54')",
-					"INSERT INTO `subject` VALUES (1,'General',1,'general',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19','{\"maincol\": \"4-6-2\"}')",
-					"INSERT INTO `tab` VALUES (1,1,'Main',0)",
-					"INSERT INTO `pluslet` VALUES (1,'All Items by Source','','',0,'Special',''),(2,'Key to Icons','','',0,'Special',''),(3,'Subject Specialist','','',0,'Special',''),
-					(4,'FAQs','','',0,'Special',''),(5,'Books:  Use the Library Catalog','','',0,'Special',''),(6,'','','',0,'Reserved_for_Special',''),(7,'','','',0,'Reserved_for_Special',''),
-					(8,'','','',0,'Reserved_for_Special',''),(9,'','','',0,'Reserved_for_Special',''),(10,'','','',0,'Reserved_for_Special',''),(11,'','','',0,'Reserved_for_Special',''),
-					(12,'','','',0,'Reserved_for_Special',''),(13,'','','',0,'Reserved_for_Special',''),(14,'','','',0,'Reserved_for_Special',''),(15,'','','',0,'Reserved_for_Special','')",
+					"INSERT INTO `subject` VALUES (1,'General',1,'general','',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19',NULL,'')",
+					"INSERT INTO `tab` VALUES (1,1,'Main',0,NULL,1)",
+					"INSERT INTO `section` VALUES (1,0,'4-6-2',1)",
+					"INSERT INTO `pluslet` VALUES (1,'All Items by Source','','',0,'Special','',0,0,0,NULL),(2,'Key to Icons','','',0,'Special','',0,0,0,NULL),(3,'Subject Specialist','','',0,'Special','',0,0,0,NULL),
+					(4,'FAQs','','',0,'Special','',0,0,0,NULL),(5,'Books:  Use the Library Catalog','','',0,'Special','',0,0,0,NULL),(6,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(7,'','','',0,'Reserved_for_Special','',0,0,0,NULL),
+					(8,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(9,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(10,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(11,'','','',0,'Reserved_for_Special','',0,0,0,NULL),
+					(12,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(13,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(14,'','','',0,'Reserved_for_Special','',0,0,0,NULL),(15,'','','',0,'Reserved_for_Special','',0,0,0,NULL)",
 					"INSERT INTO `format` VALUES (1,'Web'),(2,'Print'),(3,'Print w/ URL')",
 					"INSERT INTO `user_type` VALUES (1,'Staff'),(2,'Machine'),(3,'Student')",
 					"INSERT INTO `discipline` VALUES (1,'agriculture',1),(2,'anatomy &amp; physiology',2),(3,'anthropology',3),(4,'applied sciences',4),(5,'architecture',5),
@@ -344,11 +398,15 @@ class Installer
 					(30,'Audio Files',100),(31,'Organizations',100)",
 					"INSERT INTO `location` VALUES (1,1,'','http://www.subjectsplus.com/wiki/',1,'Y','',NULL,NULL,'')",
 					"INSERT INTO `department` VALUES (1,'Library Administration',1,'5555',NULL,NULL)",
-					"INSERT INTO `staff` VALUES (1,'Admin','Super','SubjectsPlus Admin','5555',1,0,'admin@sp.edu','',0,1,'{$lstrHashPassword}',1,'talkback|faq|records|eresource_mgr|videos|admin|librarian|supervisor','{\"css\": \"basic\"}',
+					"INSERT INTO `staff` VALUES (1,'Admin','Super','SubjectsPlus Admin','5555',1,0,'admin$lstrEmailDomain','',0,1,'{$lstrHashPassword}',1,'talkback|faq|records|eresource_mgr|videos|admin|librarian|supervisor','{\"css\": \"basic\"}',
 					'This is the default user with a SubjectsPlus v1.0 install.  You should delete me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
 					"INSERT INTO `location_title` VALUES (1,1)",
 					"INSERT INTO `rank` VALUES (1,0,1,1,1,'')",
-					"INSERT INTO `staff_subject` VALUES (1,1)"
+					"INSERT INTO `staff_subject` VALUES (1,1)",
+					"INSERT INTO `uml_refstats_location` VALUES (1,'Information Desk (Richter)'),(2,'Circulation Desk (Richter)'),(3,'Digital Media Lab'),(4,'Architecture'),(5,'Business'),(6,'CHC'),(7,'Music'),(8,'RSMAS'),(9,'Special Collections'),
+					(10,'Other (include ntoe)')",
+					"INSERT INTO `uml_refstats_type` VALUES (1,'Computer Hardware'),(2,'Computer Software'),(3,'Directional'),(4,'Printers/Copiers'),(5,'Reference')",
+					"INSERT INTO `uml_refstats_mode` VALUES (1,'In Person'),(2,'Phone'),(3,'Email'),(4,'IM')"
 			);
 	}
 
@@ -362,7 +420,7 @@ class Installer
         $db = new Querier;
 		foreach($this->lobjCreateQueries as $lstrCQuery)
 		{
-			if( !$db->query( $lstrCQuery ) )
+			if( $db->exec( $lstrCQuery ) === FALSE )
 			{
 				$this->displayInstallationErrorPage( _( "Problem creating new table." ) );
 				return FALSE;
@@ -371,7 +429,7 @@ class Installer
 
 		foreach($this->lobjInsertQueries as $lstrIQuery)
 		{
-			if( !$db->query( $lstrIQuery ) )
+			if( $db->exec( $lstrIQuery ) === FALSE )
 			{
 				$this->displayInstallationErrorPage( _( "Problem inserting new data into table." ) );
 				return FALSE;
@@ -394,13 +452,16 @@ class Installer
 	 */
 	public function displayInstallationCompletePage()
 	{
+		global $email_key;
+		$lstrEmailDomain = isset($email_key) && $email_key != '' ? $email_key : '@sp.edu';
+
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-<div class="box" name="error_page" align="center">
-			<h2 class="bw_head"><?php echo _( "Installation Complete" ); ?></h2>
+			<div class="box" name="error_page" align="center">
+				<h2 class="bw_head"><?php echo _( "Installation Complete" ); ?></h2>
 
 				<p><?php echo _( "SubjectsPlus installation complete. Please log in." ); ?></p>
-				<p><?php echo _( "<strong>Username: </strong> " ) . "admin@sp.edu"; ?></p>
+				<p><?php echo _( "<strong>Username: </strong> " ) . "admin$lstrEmailDomain"; ?></p>
 				<p><?php echo _( "<strong>Password: </strong> " ); echo htmlentities($this->lstrRandomPassword) ?></p>
 				<p><a href="login.php" target="_blank"><?php echo _( "Log In" ); ?></a></p>
 			</div>
