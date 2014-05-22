@@ -150,7 +150,7 @@ if ($show_subjects == TRUE) {
 }
 
 // Assemble the content for our main pluslet/box
-$display = $alphabet . $intro . $out;
+$display = $intro . $out;
 
 // Legend //
 // <img src=\"$IconPath/lock_unlock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Unrestricted Resource\"> = Free Resource <br />\n
@@ -164,28 +164,19 @@ $legend = "<p class=\"smaller\">\n<img src=\"$IconPath/lock.png\" width=\"13\" h
 <img src=\"$IconPath/sound.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes audio\"> = " . _("Audio files") . "<br />\n
 </p>\n";
 
-//////////////////////
-// To Respond or Not
-// Setup our columns
-if ($is_responsive == TRUE) {
-  $ldiv = "class=\"span8\"";
-  $rdiv = "class=\"span4\"";
-} else {
-  $ldiv = "id=\"leftcol\"";
-  $rdiv = "id=\"rightcol\"";
-}
-
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
 include("includes/header.php");
 ?>
+
 <div class="pure-g-r">
+<div class="pure-u-1"><form class="pure-form"><?php print $alphabet; ?></form></div>
 <div class="pure-u-2-3">
   <div class="pluslet">
     <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Databases"); ?></div>
+      <div class="titlebar_text"></div>
     </div>
     <div class="pluslet_body">
       <?php print $display; ?>

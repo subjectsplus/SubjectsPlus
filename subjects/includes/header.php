@@ -54,19 +54,10 @@ if (!isset ($noheadersearch)) {
 </div>
 
 
-<div class="pure-g-r header2">
+<div class="pure-g-r">
     <div class="wrapper-full">
         <div class="pure-u-1">
         <h1><?php print $page_title; ?></h1>
-<!--
-        </div>
-    </div>
-
-</div>
-
-<div class="container-fluid" id="main-content">
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="row-fluid">
-
-            -->
+        <div id="content_roof"></div> <!-- end content_roof -->
+        <div id="shadowkiller"></div>
+        <div id="body_inner_wrap">

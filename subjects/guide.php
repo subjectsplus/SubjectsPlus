@@ -157,7 +157,8 @@ else
 
 
 ?>
-<div id="tabs" style="clear:both; position: relative; ">
+
+<div id="tabs" style="clear:both; position: relative;">
 
 <?php
 
@@ -166,11 +167,18 @@ else
 if ($multi_tab === TRUE) {
     $lobjGuide->outputNavTabs('public');
 }
+?>
+
+
+
+<?php 
 
 $lobjGuide->outputTabs('public');
+
 ?>
 
 </div>
+
 
 <?php
 ///////////////////////////
