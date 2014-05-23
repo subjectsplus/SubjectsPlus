@@ -223,7 +223,7 @@ class Talkback {
 // cattags
 ////////////////////
 
-    $cat_tags = "<input type=\"hidden\" name=\"cattags\" value=\"" . $this->_cattags . "\" />
+    $cat_tags = "<input type=\"hidden\" class=\"cattag-data\" name=\"cattags\" value=\"" . $this->_cattags . "\" />
 			<label=\"record_label\"></label>";
 
     $current_cattags = explode("|", $this->_cattags);
@@ -281,9 +281,7 @@ makePluslet(_("Site Tags (relevant library sites)"), $tb_tags, "no_overflow");
 
 makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
 
-    echo "
-            </div>
-            </form>";
+
   }
 
   public function deleteRecord() {

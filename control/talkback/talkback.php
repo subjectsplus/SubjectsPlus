@@ -133,7 +133,7 @@ include("../includes/footer.php");
             // set new value to hidden form field
         	lstrName = $(this).parent().attr("ctag-data");
      console.log(lstrName);
-            $(this).parent().find("input[name*=" + lstrName + "]").val(all_tags);
+            $('.cattag-data').val(all_tags);
 
 
         });
