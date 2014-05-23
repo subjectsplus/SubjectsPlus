@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
-
 include('../includes/autoloader.php');
+include('../includes/config.php');
 use SubjectsPlus\Control\Autocomplete;
 use SubjectsPlus\Control\Search;
 
