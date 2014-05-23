@@ -19,6 +19,9 @@ below are just to display the different available public pages for SubjectsPlus.
 page take the user to the subject guides splash page.  Or put whatever you want here.</p>
 <br />
 <ul>
+
+
+
     <li><a href="subjects/index.php">Subject Guide splash page</a></li>
     <li><a href="subjects/databases.php">Databases page</a></li>
     <li><a href="subjects/faq.php">FAQs</a></li>
