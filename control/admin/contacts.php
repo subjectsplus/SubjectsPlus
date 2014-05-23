@@ -40,18 +40,18 @@ if (isset($show_reports) && $show_reports != "") {
   $show_reports = $table_init . $show_reports . $table_close;
   $download_reports = "<a href=\"export_contacts.php?type=direct\">Download to Excel</a>";
 } else {
-  $show_reports = "<p>Sorry, you do not have anyone registered as reporting to you.  If this is an error, please contact the library administration.</p>";
+  $show_reports = "<div class=\"pluslet-body\">Sorry, you do not have anyone registered as reporting to you.  If this is an error, please contact the library administration.</div>";
   $download_reports = "";
 }
 
 // Check for subreports
 $show_reports_hierarchical = checkReports($reporting_id, '', 1);
 if (isset($show_reports_hierarchical) && $show_reports_hierarchical != "") {
-    $show_reports_hierarchical = $table_init . $show_reports_hierarchical . $table_close;
-    $my_supers = implode(",", $all_supers);
+  $show_reports_hierarchical = $table_init . $show_reports_hierarchical . $table_close;
+  $my_supers = implode(",", $all_supers);
   $download_reports_hierarchical = "<a href=\"export_contacts.php?type=all_reports&ids=$my_supers\">Download to Excel</a>";
 } else {
-  $show_reports = "<p>Sorry, you do not have anyone registered as reporting to you.  If this is an error, please contact the library administration.</p>";
+  $show_reports = "<div class=\"pluslet-body\">Sorry, you do not have anyone registered as reporting to you.  If this is an error, please contact the library administration.</div>";
   $download_reports_hierarchical = "";  
 }
 // print_r($all_supers)
@@ -59,22 +59,24 @@ if (isset($show_reports_hierarchical) && $show_reports_hierarchical != "") {
 ?>
 
 <div style="float: left;  width: 100%;margin-top: 2em;">
- <div class="box">
-    <h2 class="bw_head">Emergency Contacts</h2>
+  <div class="pluslet">
+    <div class="titlebar">Emergency Contacts</div>
 
     <p>Use this page to view Emergency Contact information.  Unless you are an administrator, you should only be able to see information for people who report to you.</p>
     <?php print $intro; ?>
   </div>
- <div class="box">
-<h2 class="bw_head">Direct Reports for <?php print $_SESSION["fname"] . " " . $_SESSION["lname"] . " " . $download_reports; ?></h2>
-
-    <?php print $show_reports; ?>
+  <div class="pluslet">
+    <div class="titlebar">Direct Reports for <?php print $_SESSION["fname"] . " " . $_SESSION["lname"] . " " . $download_reports; ?></div>
+    <div class=\"pluslet_body\">
+      <?php print $show_reports; ?>
+    </div>  
   </div>
-<div class="box">
-  <h2 class="bw_head">All Reports for <?php print $_SESSION["fname"] . " " . $_SESSION["lname"] . " " . $download_reports_hierarchical; ?></h2>
+  <div class="pluslet">
+    <div class="titlebar">All Reports for <?php print $_SESSION["fname"] . " " . $_SESSION["lname"] . " " . $download_reports_hierarchical; ?></div>
 
-    <?php print $show_reports_hierarchical; ?>
-
+    <div class="pluslet_body">
+      <?php print $show_reports_hierarchical; ?>
+    </div>
   </div>
 </div>
 
@@ -97,7 +99,7 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
   AND active = 1
   ORDER BY lname, fname";
   //print $q . "<br /><br />";
- 
+  
   $db = new Querier;
   $r = $db->query($q);
   
@@ -147,7 +149,7 @@ function checkReports($staff_id, $super_chain = "", $recursion = 0) {
 }
 
 function makeTR ($myrow, $indent) {
-      $data = "<tr>
+  $data = "<tr>
   <td><span style=\"$indent\">$myrow[1]</span></td>
   <td>$myrow[2]</td>
   <td>$myrow[3]</td>
@@ -157,7 +159,7 @@ function makeTR ($myrow, $indent) {
   <td>$myrow[7]</td>
   <td>$myrow[8]</td>
   </tr>";
-      return $data;
+  return $data;
 
 }
 
@@ -165,52 +167,52 @@ function makeExcelData ($row) {
   $data = '';
   $line = '';
 
-    foreach( $row as $value )
-    {                                            
-        if ( ( !isset( $value ) ) || ( $value == "" ) )
-        {
-            $value = "\t";
-        }
-        else
-        {
-            $value = str_replace( '"' , '""' , $value );
-            $value = '"' . $value . '"' . "\t";
-        }
-        $line .= $value;
+  foreach( $row as $value )
+  {                                            
+    if ( ( !isset( $value ) ) || ( $value == "" ) )
+    {
+      $value = "\t";
     }
-    $data .= trim( $line ) . "\n";
-    return $data;
+    else
+    {
+      $value = str_replace( '"' , '""' , $value );
+      $value = '"' . $value . '"' . "\t";
+    }
+    $line .= $value;
+  }
+  $data .= trim( $line ) . "\n";
+  return $data;
 }
 
 exit; 
 
 for ( $i = 0; $i < $fields; $i++ )
 {
-    $header .= mysql_field_name( $export , $i ) . "\t";
+  $header .= mysql_field_name( $export , $i ) . "\t";
 }
 
 foreach( $export as $row )
 {
-    $line = '';
-    foreach( $row as $value )
-    {                                            
-        if ( ( !isset( $value ) ) || ( $value == "" ) )
-        {
-            $value = "\t";
-        }
-        else
-        {
-            $value = str_replace( '"' , '""' , $value );
-            $value = '"' . $value . '"' . "\t";
-        }
-        $line .= $value;
+  $line = '';
+  foreach( $row as $value )
+  {                                            
+    if ( ( !isset( $value ) ) || ( $value == "" ) )
+    {
+      $value = "\t";
     }
-    $data .= trim( $line ) . "\n";
+    else
+    {
+      $value = str_replace( '"' , '""' , $value );
+      $value = '"' . $value . '"' . "\t";
+    }
+    $line .= $value;
+  }
+  $data .= trim( $line ) . "\n";
 }
 $data = str_replace( "\r" , "" , $data );
 
 if ( $data == "" )
 {
-    $data = "\n(0) Records Found!\n";                        
+  $data = "\n(0) Records Found!\n";                        
 }
 ?>
