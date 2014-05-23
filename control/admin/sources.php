@@ -10,7 +10,7 @@
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\Querier;
 
-    
+
 $subsubcat = "";
 $subcat = "admin";
 $page_title = "Admin Source Types";
@@ -26,64 +26,61 @@ $feedback = "";
 
 if (isset($_POST["add_source"])) {
 
-    ////////////////
-    // Insert title table
-    ////////////////
+  ////////////////
+  // Insert title table
+  ////////////////
 
-    $qInsertSource = "INSERT INTO source (source, rs) VALUES (
+  $qInsertSource = "INSERT INTO source (source, rs) VALUES (
 		" . $db->quote(scrubData($_POST["source"])) . ", 
 		0
 		)";
 
-    $rInsertSource = $db->query($qInsertSource);
+  $rInsertSource = $db->query($qInsertSource);
 
-    if ($rInsertSource) {
-        $feedback = _("Thy Will Be Done.  Source list updated.");
-    } else {
-        $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
-    }
+  $feedback = _("Thy Will Be Done.  Source list updated.");
+  
 }
 
 if (isset($_POST["update_sources"])) {
 
-    //////////////////////////////////
-    // Get the source dept data + sort order
-    //////////////////////////////////
-    //////////////////////
-    // Create new array of results
-    /////////////////////
+  //////////////////////////////////
+  // Get the source dept data + sort order
+  //////////////////////////////////
+  //////////////////////
+  // Create new array of results
+  /////////////////////
 
-    $a = $_POST["source_id"];
-    $b = $_POST["source"];
+  $a = $_POST["source_id"];
+  $b = $_POST["source"];
 
-    $result = array_combine($a, $b);
+  $result = array_combine($a, $b);
 
-    // Loop through array, update departments table
+  // Loop through array, update departments table
 
-    $row_count = 1;
-    $error = "";
+  $row_count = 1;
+  $error = "";
 
-    foreach ($result as $key => $value) {
-        $qUpDept = "UPDATE source SET
+  foreach ($result as $key => $value) {
+    $qUpDept = "UPDATE source SET
 		source = " . $db->quote(scrubData($value)) . ", 
 		rs = " . $row_count . "
 		WHERE source_id = " . scrubData($key, "integer");
 
-        //print $qUpDept;
-        $rUpDept = $db->query($qUpDept);
+    //print $qUpDept;
+    $rUpDept = $db->query($qUpDept);
 
-        if (!$rUpDept) {
-            $error = 1;
-        }
-
-        $row_count++;
+    if (!$rUpDept) {
+      $error = 1;
     }
 
-    if ($error != 1) {
-        $feedback = _("Thy Will Be Done.  Source list updated.");
-    } else {
-        $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
-    }
+    $row_count++;
+  }
+
+  if ($error != 1) {
+    $feedback = _("Thy Will Be Done.  Source list updated.");
+  } else {
+    $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
+  }
 }
 
 
@@ -98,7 +95,7 @@ $sourceArray = $querierDept->query($qSource);
 
 foreach ($sourceArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
+  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
 }
 
 $source_box = "
@@ -134,7 +131,7 @@ print "
   <div class=\"pure-u-2-3\">
 ";
 
-  makePluslet(_("Sources"), $source_box, "no_overflow");
+makePluslet(_("Sources"), $source_box, "no_overflow");
 
 print "</div>
 <div class=\"pure-u-1-3\">";
@@ -145,107 +142,73 @@ makePluslet(_("Add Source"), $add_source_box, "no_overflow");
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-
-print "
-
-<form id=\"sources\" action=\"\" method=\"post\">
-<div id=\"savour\" style=\"clear: both;float:left; \">
-	<div id=\"save_zone\"  >
-		<button class=\"button\" id=\"save_guide\" name=\"update_sources\" >" . _("SAVE CHANGES") . "</button>
-	</div>
-	
-</div>
-<br />
-<div class=\"box\"  >
-<p>" . _("Enter source type label.  Drag sources to change sort order.") . "</p>
-<br />
-
-<ul id=\"sortable-\" class=\"sortable_list\">
-$ourlist
-</ul>
-</form>
-</div>
-    <div class=\"box\">
-<div  >
-
-    <h2 class=\"bw_head\">" . _("Add Source") . "</h2>
-
-<form id=\"new_source\" action=\"\" method=\"post\">
-<span class=\"record_label\">" . _("Source Name") . "</span><br />
-<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
-<br /><br />
-<button class=\"button\" id=\"add_source\" name=\"add_source\">" . _("Add New Source") . "</button>
-</form>
-<div>";
-
-
 include("../includes/footer.php");
 ?>
 <script type="text/javascript">
-    $(function() {
+ $(function() {
 
-        ////////////////////////////
-        // MAKE COLUMNS SORTABLE
-        // Make "Save Changes" button appear on sorting
-        ////////////////////////////
-        // connectWith: '.sort-column',
+   ////////////////////////////
+   // MAKE COLUMNS SORTABLE
+   // Make "Save Changes" button appear on sorting
+   ////////////////////////////
+   // connectWith: '.sort-column',
 
-        $('ul[id*=sortable-]').each(function() {
+   $('ul[id*=sortable-]').each(function() {
 
-            var update_id = $(this).attr("id").split("-");
+     var update_id = $(this).attr("id").split("-");
 
-            update_id = update_id[1];
+     update_id = update_id[1];
 
-            $("#sortable-"+update_id).sortable({
-                placeholder: 'ui-state-highlight',
-                cursor: 'move',
-                update: function() {
-                    $("#response").hide();
-                    $("#save_zone").fadeIn();
-                }
-
-
-            });
-        });
-
-        $('a[id*=delete-]').livequery('click', function(event) {
+     $("#sortable-"+update_id).sortable({
+       placeholder: 'ui-state-highlight',
+       cursor: 'move',
+       update: function() {
+         $("#response").hide();
+         $("#save_zone").fadeIn();
+       }
 
 
-            var delete_id = $(this).attr("id").split("-");
-            var item_id = delete_id[1];
+     });
+   });
 
-            var confirm_yes = "confirm-yes-" + item_id;
-
-            $("#item-"+item_id).after("<div class=\"confirmer\"><?php print $rusure; ?>  <a id=\"" + confirm_yes + "\"><?php print $textyes; ?></a> | <a id=\"confirm-no-"+item_id+"\"><?php print $textno; ?></a></div>");
-
-            return false;
-        });
+   $('a[id*=delete-]').livequery('click', function(event) {
 
 
-        $('a[id*=confirm-yes-]').livequery('click', function(event) {
+     var delete_id = $(this).attr("id").split("-");
+     var item_id = delete_id[1];
 
-            var delete_id = $(this).attr("id").split("-");
-            var this_id = delete_id[2];
+     var confirm_yes = "confirm-yes-" + item_id;
 
-            // Remove the confirm zone, and the row from the table
-            $(this).parent().remove();
-            $("#item-"+this_id).remove();
+     $("#item-"+item_id).after("<div class=\"confirmer\"><?php print $rusure; ?>  <a id=\"" + confirm_yes + "\"><?php print $textyes; ?></a> | <a id=\"confirm-no-"+item_id+"\"><?php print $textno; ?></a></div>");
 
-            $(".feedback").load("admin_bits.php", {action: 'delete_source', delete_id:this_id},
-            function() {
-
-                $(".feedback").fadeIn();
-            });
-
-            return false;
-        });
-
-        // Person doesn't wish to change/delete item; remove confirm zone.
-        $('a[id*=confirm-no-]').livequery('click', function(event) {
-            $(this).parent().remove();
-            return false;
-        });
+     return false;
+   });
 
 
-    });
+   $('a[id*=confirm-yes-]').livequery('click', function(event) {
+
+     var delete_id = $(this).attr("id").split("-");
+     var this_id = delete_id[2];
+
+     // Remove the confirm zone, and the row from the table
+     $(this).parent().remove();
+     $("#item-"+this_id).remove();
+
+     $(".feedback").load("admin_bits.php", {action: 'delete_source', delete_id:this_id},
+			 function() {
+
+         $(".feedback").fadeIn();
+       });
+
+     return false;
+   });
+
+   // Person doesn't wish to change/delete item; remove confirm zone.
+   $('a[id*=confirm-no-]').livequery('click', function(event) {
+     $(this).parent().remove();
+     return false;
+   });
+
+
+ });
 </script>
