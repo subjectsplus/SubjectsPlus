@@ -12,6 +12,7 @@ namespace SubjectsPlus\Control;
 
 use SubjectsPlus\Control\Querier;
 
+include('../../control/includes/functions.php');
 
 class Autocomplete {
   private $param;
@@ -164,9 +165,7 @@ $i = 0;
 
 foreach ($result as $myrow)  {
 
- //print_r($myrow);
-
-  $arr[$i]['label'] = $myrow[1];
+  $arr[$i]['label'] = $myrow[3];
 
   if(isset($myrow['content_type'])) {
 
@@ -214,7 +213,7 @@ foreach ($result as $myrow)  {
 
       case "Subject Guide":
         if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guide.php?subject_id=' . $myrow['id'];
+	  $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['id'];
 
 	}   else {
           $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
@@ -225,6 +224,7 @@ foreach ($result as $myrow)  {
 	
       case "FAQ":
 	if ($this->getSearchPage() == "control") {
+	  $arr[$i]['label']  = $myrow[1];
           $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
 	} else {
           $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];    
@@ -233,9 +233,9 @@ foreach ($result as $myrow)  {
 	
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['url'] = 'guides/guide.php?subject=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+	  $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 $arr[$i]['value'] = $myrow['id'];
-$arr[$i]['label'] = $myrow['title'];
+$arr[$i]['label'] = $myrow['short_form'];
 	} else {
 	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	  $arr[$i]['tab_index'] = $myrow['additional_id'];
