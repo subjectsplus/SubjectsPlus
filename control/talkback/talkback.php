@@ -125,12 +125,14 @@ include("../includes/footer.php");
             $(this).parent().find(".ctag-on").each(function(i) {
                 var this_ctag = $(this).text();
                 all_tags = all_tags + this_ctag + "|";
+                console.log(all_tags);
 
             });
             // strip off final pipe (|)
             all_tags = all_tags.replace( /[|]$/, "" );
             // set new value to hidden form field
         	lstrName = $(this).parent().attr("ctag-data");
+     console.log(lstrName);
             $(this).parent().find("input[name*=" + lstrName + "]").val(all_tags);
 
 
