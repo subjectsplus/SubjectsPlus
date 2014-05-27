@@ -132,7 +132,7 @@ if (item.content_type != undefined) {
 
                }
 	});
-      
+      console.log(parents);
 	</script>";
   }
 

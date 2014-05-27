@@ -54,7 +54,7 @@ class Pluslet {
         $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
-        //print $q1;
+     
         $plusletArray = $querier->query($q1);
 
         $this->_debug .= "<p>Pluslet query: $q1";

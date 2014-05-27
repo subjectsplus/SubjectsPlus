@@ -62,7 +62,7 @@ if ($vidArray) {
         }
     $vid_list .= "
             <div style=\"clear: both; float: left;  padding: 3px 5px; width: 98%;\" class=\"striper $row_colour1\">
-                <div style=\"float: left; width: 64px; max-width: 10%;\">
+                <div style=\"pluslet_body\">
                 <a  class=\"showmedium\" href=\"video.php?video_id=$value[0]&amp;wintype=pop\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
                 &nbsp; &nbsp;<a href=\"" . $VideoPath . "?video_id=$value[0]\" target=\"_blank\"><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
                 </div>
@@ -81,34 +81,37 @@ if ($vidArray) {
 
 print "<br />
 <div style=\"float: left;  width: 70%;\">
-    <div class=\"box no_overflow\" id=\"answered\">
-    <p><strong>$row_count1 " . _("Videos visible") . "</strong> ";
+    <div class=\"pluslet no_overflow\" id=\"answered\">
+    <p class=\"pluslet_body\"><strong>$row_count1 " . _("Videos visible") . "</strong> ";
 if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
   print "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
 }
 print "</p><br />
-    $vid_list
+<div class=\"pluslet_body\">    
+$vid_list
+</div>
     </div>
 
 </div>
 
 <div style=\"float: right; width: 28%;margin-left: 10px;\">
-        <div class=\"box\">
-    <h2 class=\"bw_head\">" . _("Ingest Video Metadata") . "</h2>
+        <div class=\"pluslet\">
+    <div class=\"titlebar\">" . _("Ingest Video Metadata") . "</div>
 
-    <p><a href=\"ingest.php\">" . _("FIND VIDEOS") . "</a></p>
+    <p class=\"pluslet_body\"><a href=\"ingest.php\">" . _("FIND VIDEOS") . "</a></p>
     </div>
-      <div class=\"box\">
-    <h2 class=\"bw_head\">" . _("Add Metadata by Hand") . "</h2>
+      <div class=\"pluslet\">
+    <div class=\"titlebar\">" . _("Add Metadata by Hand") . "</div>
   
-    <p><a href=\"video.php\">" . _("ENTER VIDEO") . "</a></p>
+    <p class=\"pluslet_body\"><a href=\"video.php\">" . _("ENTER VIDEO") . "</a></p>
     </div>
-    <div class=\"box\">
-    <h2 class=\"bw_head\">" . _("About Videos") . "</h2>
-    
+    <div class=\"pluslet\">
+    <div class=\"titlebar\">" . _("About Videos") . "</div>
+    <div class=\"pluslet_body\">
     <p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit Video Info") . "</p>
     <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View Video on Public Site") . "</p>
-    </div>
+</div>    
+</div>
 </div>
 ";
 

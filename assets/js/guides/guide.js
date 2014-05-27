@@ -990,19 +990,19 @@ function setupMiscLiveQueries()
     ////////////////////
     // Make titlebar options box clickable
     ///////////////////
-    jQuery('a[id*=settings-]').livequery('click', function(event) {
+    jQuery('a[id*=settings-]').on('click', function(event) {
 
         jQuery(this).parent().next('.box_settings').toggle('slow');
 
 
     });
 
-    jQuery('.pure-checkbox input').livequery('change',  function() {
+    jQuery('.pure-checkbox').on('change',  function() {
 
         var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
-        //console.log(pluslet_id);
+        console.log(pluslet_id);
         jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-Basic');
-        // console.log(jQuery(pluslet_id));
+        console.log(jQuery(pluslet_id));
     	jQuery("#response").hide();
         jQuery("#save_guide").fadeIn();
 

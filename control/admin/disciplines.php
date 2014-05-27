@@ -29,13 +29,15 @@ if (isset($_POST["add_discipline"])) {
     ////////////////
 
     $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
-		" . $db->quote(scrubData($_POST["discipline"])) . ")";
+		" . $db->quote(scrubData($_POST["source"])) . ")";
 
+     
     $rInsertdiscipline = $db->exec($qInsertdiscipline);
 
     if ($rInsertdiscipline) {
         $feedback = _("Thy Will Be Done.  Discipline list updated.");
     } else {
+     echo $qInsertdiscipline;
         $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
     }
 }
@@ -57,29 +59,22 @@ if (isset($_POST["update_disciplines"])) {
     // Loop through array, update departments table
 
     $row_count = 1;
-    $error = "";
-
+  
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE discipline SET
-		discipline = '" . $db->quote(scrubData($value)) . "', 
-		sort = '" . $row_count . "' 
+		discipline = " . $db->quote(scrubData($value)) . ", 
+		sort = " . $row_count . " 
 		WHERE discipline_id = " . scrubData($key, "integer");
-
-        //print $qUpDept;
+        
         $rUpDept = $db->exec($qUpDept);
-
-        if (!$rUpDept) {
-            $error = 1;
-        }
 
         $row_count++;
     }
 
-    if ($error != 1) {
+  
         $feedback = _("Thy Will Be Done.  discipline list updated.");
-    } else {
-        $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
-    }
+    
+   
 }
 
 
@@ -116,7 +111,7 @@ $ourlist
 $add_discipline_box = "
 <form id=\"new_discipline\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Source Name") . "</span><br />
-<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"\" value=\"\">
 <br /><br />
 <button class=\"button\" id=\"add_discipline\" name=\"add_discipline\">" . _("Add New Discipline") . "</button>
 </form>";
@@ -141,41 +136,6 @@ makePluslet(_("Add Discipline"), $add_discipline_box, "no_overflow");
 
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
-
-
-
-//////////////////
-print "
-
-<form id=\"disciplines\" action=\"\" method=\"post\">
-<div id=\"savour\" class=\"department-save\">
-	<div id=\"save_zone\">
-		<button id=\"save_guide\" name=\"update_disciplines\" >" . _("SAVE CHANGES") . "</button>
-	</div>
-	
-</div>
-<br />
-<div class=\"box disc-box\">
-<p>" . _("NOTE:  Disciplines were added to facilitate Serials Solution ingest of data.  This original set was provided by SerSol in Nov 2012. 
-    If you are a SerSol customer, you might not want to change these.  Sort may or may not be implemented in your version of SP.") . "</p>
-<p>" . _("Enter discipline type label.") . "</p>
-<br />
-
-<ul id=\"sortable-\" class=\"sortable_list\">
-$ourlist
-</ul>
-</form>
-</div>
-<div class=\"add-disc\">
-<h2 class=\"bw_head\">" . _("Add discipline") . "</h2>
-<div class=\"box\">
-<form id=\"new_discipline\" action=\"\" method=\"post\">
-<span class=\"record_label\">" . _("discipline Name") . "</span><br />
-<input type=\"text\" name=\"discipline\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
-<br /><br />
-<button id=\"add_discipline\" name=\"add_discipline\">" . _("Add New discipline") . "</button>
-</form>
-<div>";
 
 
 include("../includes/footer.php");

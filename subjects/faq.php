@@ -257,8 +257,8 @@ $collections_result = $db->query($collections_query);
 $coll_items = "<li><a href=\"faq.php?page=all\">All</a></li>";
 
 foreach ($collections_result as $myrow1) {
-    $coll_id = $myrow1[0][0];
-    $coll_name = $myrow1[1][0];
+    $coll_id = $myrow1[0];
+    $coll_name = $myrow1[1];
 
     $coll_items .= "<li><a href=\"faq.php?coll_id=$coll_id\">$coll_name</a></li>";
 }

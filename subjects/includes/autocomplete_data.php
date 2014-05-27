@@ -2,7 +2,7 @@
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Autocomplete;
-
+include('../../control/includes/config.php');
 include("../../control/includes/autoloader.php");
 
 $auto_complete = new Autocomplete();

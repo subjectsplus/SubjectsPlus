@@ -47,7 +47,7 @@ if ($check_this) {
 
 
     // get name of quide
-    $q = "select subject, subject_id, extra, description, keywords, redirect_url, header from subject where shortform = '$check_this'";
+    $q = "select subject, subject_id, extra, description, keywords, redirect_url, header from subject where shortform = " . $db->quote($check_this);
     //print $q;
     //$r = $db->query($q);
 

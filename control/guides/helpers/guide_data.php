@@ -161,7 +161,7 @@ switch ($_POST["flag"]) {
 
 function modifyDB($id, $type) {
     $db = new Querier;
-    /* print "<pre>";
+   /*  print "<pre>";
       print_r($_POST);
       print "</pre>"; */
     // Uses the data from the POST vars to update

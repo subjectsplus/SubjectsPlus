@@ -174,4 +174,3 @@ foreach( $lobjBeforePluslets as $lobjPluslet )
 //print "<script type='text/javascript'>$.growl.notice({message: 'The guide was updated successfully.', title:'" . _("Guide Updated.") . "'})</script>";
 
 print "<strong>" . _("Thy Will Be Done:  Guide Updated.") . "</strong>";
-?>
