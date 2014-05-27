@@ -174,14 +174,9 @@ include("includes/header.php");
 <div class="pure-g-r">
 <div class="pure-u-1"><form class="pure-form"><?php print $alphabet; ?></form></div>
 <div class="pure-u-2-3">
-  <div class="pluslet">
-    <div class="titlebar">
-      <div class="titlebar_text"></div>
-    </div>
-    <div class="pluslet_body">
+
       <?php print $display; ?>
-    </div>
-  </div>
+
 </div>
 <div  class="pure-u-1-3">
   <!-- start pluslet -->

@@ -894,19 +894,39 @@ function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE)
     foreach ($lr as $mylets) {
       $letterz[] = $mylets[0][0];
     }
+
+    // let's init an array of all letters
+    $azRange = range('A', 'Z');
+
     if ($numbers == 1) {
       $letterz[] = "Num";
+      $azRange[] = "Num";
     }
 
     $letterz[] = "All";
+    $azRange[] = "All";
 
     if (!$selected) {
       $selected = "ALL";
     }
   }
 
+  
   $alphabet = "<div id=\"letterhead\" align=\"center\">";
 
+  foreach ($azRange as $char) {
+    if (in_array($char, $letterz)) {
+          if ($char == $selected) {
+      $alphabet .= "<span id=\"selected_letter\">$char</span> ";
+    } else {
+      $alphabet .= "<a href=\"$abc_link?letter=$char\">$char</a> ";
+    }
+    } else {
+      $alphabet .= "<span class=\"inactive\">$char</span> ";
+    }
+}
+
+/*
   foreach ($letterz as $value) {
     if ($value == $selected) {
       $alphabet .= "<span id=\"selected_letter\">$value</span> ";
@@ -914,7 +934,7 @@ function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE)
       $alphabet .= "<a href=\"$abc_link?letter=$value\">$value</a>";
     }
   }
-
+*/
   if ($table == "databases") {
     $alphabet .= getDBbyTypeBoxes($selected_type, $show_formats);
     $alphabet .= getDBbySubBoxes($selected_subject);
