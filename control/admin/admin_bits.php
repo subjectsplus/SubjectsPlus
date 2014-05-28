@@ -228,7 +228,7 @@ switch ($_REQUEST["action"]) {
     break;
 
   case "delete_discipline":
-
+    
     // Make sure no one is associated with this discipline
     $qChecker = "SELECT * FROM subject, subject_discipline WHERE subject.subject_id = subject_discipline.subject_id
     AND subject_discipline.discipline_id = " . scrubData($_POST["delete_id"], "integer");

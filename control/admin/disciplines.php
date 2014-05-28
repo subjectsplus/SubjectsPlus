@@ -192,7 +192,7 @@ include("../includes/footer.php");
        jQuery(this).parent().remove();
        jQuery("#item-"+this_id).remove();
 
-       jQuery(".feedback").post("admin_bits.php", 
+       jQuery.post("admin_bits.php", 
 			   {
 	   action: 'delete_discipline', 
 	   delete_id:this_id
