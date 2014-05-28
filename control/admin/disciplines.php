@@ -160,14 +160,12 @@ include("../includes/footer.php");
          jQuery("#response").hide();
          jQuery("#save_zone").fadeIn();
        }
-
-
      });
    });
 
    jQuery('a[id*=delete-]').on('click', function(event) {
 
-     console.log('ahhh!');
+ 
      
      var delete_id = $(this).attr("id").split("-");
      var item_id = delete_id[1];

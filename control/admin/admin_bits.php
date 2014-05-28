@@ -167,11 +167,8 @@ switch ($_REQUEST["action"]) {
 
       $rDeleteDept = $db->exec($qDeleteDept);
 
-      if (!$rDeleteDept) {
-        echo blunDer("We have a problem with the clear rank query: $qDeleteDept");
-      } else {
         print _("Thy Will Be Done.  Department list updated.");
-      }
+      
     }
     return; // return early so we don't show the stuff that follows
     break;
@@ -216,7 +213,7 @@ switch ($_REQUEST["action"]) {
 
       $qDeleteSource = "DELETE FROM source WHERE source_id = " . scrubData($_POST["delete_id"], "integer");
 
-      $rDeleteSource = $db->query($qDeleteSource);
+      $rDeleteSource = $db->exec($qDeleteSource);
 
       if (!$rDeleteSource) {
         echo blunDer("We have a problem with the delete source query: $qDeleteSource");
