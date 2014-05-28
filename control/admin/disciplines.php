@@ -24,60 +24,58 @@ $feedback = "";
 
 if (isset($_POST["add_discipline"])) {
 
-    ////////////////
-    // Insert title table
-    ////////////////
+  ////////////////
+  // Insert title table
+  ////////////////
 
-    $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
+  $qInsertdiscipline = "INSERT INTO discipline (discipline) VALUES (
 		" . $db->quote(scrubData($_POST["source"])) . ")";
 
-     
-    $rInsertdiscipline = $db->exec($qInsertdiscipline);
+  
+  $rInsertdiscipline = $db->exec($qInsertdiscipline);
 
-    if ($rInsertdiscipline) {
-        $feedback = _("Thy Will Be Done.  Discipline list updated.");
-    } else {
-     echo $qInsertdiscipline;
-        $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
-    }
+  if ($rInsertdiscipline) {
+    $feedback = _("Thy Will Be Done.  Discipline list updated.");
+  } else {
+    echo $qInsertdiscipline;
+    $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
+  }
 }
 
 if (isset($_POST["update_disciplines"])) {
 
-    //////////////////////////////////
-    // Get the discipline dept data + sort order
-    //////////////////////////////////
-    //////////////////////
-    // Create new array of results
-    /////////////////////
+  //////////////////////////////////
+  // Get the discipline dept data + sort order
+  //////////////////////////////////
+  //////////////////////
+  // Create new array of results
+  /////////////////////
 
-    $a = $_POST["discipline_id"];
-    $b = $_POST["discipline"];
+  $a = $_POST["discipline_id"];
+  $b = $_POST["discipline"];
 
-    $result = array_combine($a, $b);
+  $result = array_combine($a, $b);
 
-    // Loop through array, update departments table
+  // Loop through array, update departments table
 
-    $row_count = 1;
+  $row_count = 1;
   
-    foreach ($result as $key => $value) {
-        $qUpDept = "UPDATE discipline SET
+  foreach ($result as $key => $value) {
+    $qUpDept = "UPDATE discipline SET
 		discipline = " . $db->quote(scrubData($value)) . ", 
 		sort = " . $row_count . " 
 		WHERE discipline_id = " . scrubData($key, "integer");
-        
-        $rUpDept = $db->exec($qUpDept);
+    
+    $rUpDept = $db->exec($qUpDept);
 
-        $row_count++;
-    }
+    $row_count++;
+  }
 
   
-        $feedback = _("Thy Will Be Done.  discipline list updated.");
-    
-   
+  $feedback = _("Thy Will Be Done.  discipline list updated.");
+  
+  
 }
-
-
 
 ///////////////
 // disciplines
@@ -89,7 +87,7 @@ $disciplineArray = $querierDept->query($qdiscipline);
 
 foreach ($disciplineArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item disc-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
+  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item disc-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
 }
 
 
@@ -126,7 +124,7 @@ print "
   <div class=\"pure-u-2-3\">
 ";
 
-  makePluslet(_("Disciplines"), $discipline_box, "no_overflow");
+makePluslet(_("Disciplines"), $discipline_box, "no_overflow");
 
 print "</div>
 <div class=\"pure-u-1-3\">";
@@ -141,70 +139,82 @@ print "</div>"; // close pure
 include("../includes/footer.php");
 ?>
 <script type="text/javascript">
-    $(function() {
+ jQuery(document).ready(function() {
 
-        ////////////////////////////
-        // MAKE COLUMNS SORTABLE
-        // Make "Save Changes" button appear on sorting
-        ////////////////////////////
-        // connectWith: '.sort-column',
+   ////////////////////////////
+   // MAKE COLUMNS SORTABLE
+   // Make "Save Changes" button appear on sorting
+   ////////////////////////////
+   // connectWith: '.sort-column',
 
-        $('ul[id*=sortable-]').each(function() {
+   jQuery('ul[id*=sortable-]').each(function() {
 
-            var update_id = $(this).attr("id").split("-");
+     var update_id = $(this).attr("id").split("-");
 
-            update_id = update_id[1];
+     update_id = update_id[1];
 
-            $("#sortable-"+update_id).sortable({
-                placeholder: 'ui-state-highlight',
-                cursor: 'move',
-                update: function() {
-                    $("#response").hide();
-                    $("#save_zone").fadeIn();
-                }
-
-
-            });
-        });
-
-        $('a[id*=delete-]').livequery('click', function(event) {
+     jQuery("#sortable-"+update_id).sortable({
+       placeholder: 'ui-state-highlight',
+       cursor: 'move',
+       update: function() {
+         jQuery("#response").hide();
+         jQuery("#save_zone").fadeIn();
+       }
 
 
-            var delete_id = $(this).attr("id").split("-");
-            var item_id = delete_id[1];
+     });
+   });
 
-            var confirm_yes = "confirm-yes-" + item_id;
+   jQuery('a[id*=delete-]').on('click', function(event) {
 
-            $("#item-"+item_id).after("<div class=\"confirmer\"><?php print $rusure; ?>  <a id=\"" + confirm_yes + "\"><?php print $textyes; ?></a> | <a id=\"confirm-no-"+item_id+"\"><?php print $textno; ?></a></div>");
+     console.log('ahhh!');
+     
+     var delete_id = $(this).attr("id").split("-");
+     var item_id = delete_id[1];
 
-            return false;
-        });
+     var confirm_yes = "confirm-yes-" + item_id;
 
-
-        $('a[id*=confirm-yes-]').livequery('click', function(event) {
-
-            var delete_id = $(this).attr("id").split("-");
-            var this_id = delete_id[2];
-
-            // Remove the confirm zone, and the row from the table
-            $(this).parent().remove();
-            $("#item-"+this_id).remove();
-
-            $(".feedback").load("admin_bits.php", {action: 'delete_discipline', delete_id:this_id},
-            function() {
-
-                $(".feedback").fadeIn();
-            });
-
-            return false;
-        });
-
-        // Person doesn't wish to change/delete item; remove confirm zone.
-        $('a[id*=confirm-no-]').livequery('click', function(event) {
-            $(this).parent().remove();
-            return false;
-        });
+     jQuery("#item-"+item_id).append("<div class=\"confirmer\"><?php print $rusure; ?><div class=\"confirm_yes button\"id=\"" + confirm_yes + "\"><?php print $textyes; ?></div> <div class=\"confirm_no button\" id=\"confirm-no-"+item_id+"\"><?php print $textno; ?></div></div>");
+     
+   });
 
 
-    });
+
+
+   jQuery('.pluslet_body').on('click', '.confirm_yes', 
+			function(event) {
+ 
+       console.log("ahhh!");
+       var delete_id = $(this).attr("id").split("-");
+       var this_id = delete_id[2];
+       
+       // Remove the confirm zone, and the row from the table
+       jQuery(this).parent().remove();
+       jQuery("#item-"+this_id).remove();
+
+       jQuery(".feedback").post("admin_bits.php", 
+			   {
+	   action: 'delete_discipline', 
+	   delete_id:this_id
+	 },
+			   
+			   function() {
+           jQuery(".feedback").fadeIn();
+	 });
+       
+       
+     });
+   
+   // Person doesn't wish to change/delete item; remove confirm zone.
+   jQuery('.pluslet_body').on('click', '.confirm_no' , function(event) {
+     jQuery(this).parent().remove();
+     
+   });
+
+
+
+   
+   
+   
+ });
 </script>
