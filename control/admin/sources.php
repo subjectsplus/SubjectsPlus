@@ -76,11 +76,9 @@ if (isset($_POST["update_sources"])) {
     $row_count++;
   }
 
-  if ($error != 1) {
+  
     $feedback = _("Thy Will Be Done.  Source list updated.");
-  } else {
-    $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
-  }
+  
 }
 
 
@@ -145,7 +143,7 @@ print "</div>"; // close pure
 include("../includes/footer.php");
 ?>
 <script type="text/javascript">
- $(function() {
+ jQuery(function() {
 
    ////////////////////////////
    // MAKE COLUMNS SORTABLE
@@ -153,62 +151,62 @@ include("../includes/footer.php");
    ////////////////////////////
    // connectWith: '.sort-column',
 
-   $('ul[id*=sortable-]').each(function() {
+   jQuery('ul[id*=sortable-]').each(function() {
 
      var update_id = $(this).attr("id").split("-");
 
      update_id = update_id[1];
 
-     $("#sortable-"+update_id).sortable({
+    jQuery("#sortable-"+update_id).sortable({
        placeholder: 'ui-state-highlight',
        cursor: 'move',
        update: function() {
-         $("#response").hide();
-         $("#save_zone").fadeIn();
+         jQuery("#response").hide();
+         jQuery("#save_zone").fadeIn();
        }
 
 
      });
    });
 
-   $('a[id*=delete-]').livequery('click', function(event) {
+   jQuery('a[id*=delete-]').on('click', function(event) {
 
 
-     var delete_id = $(this).attr("id").split("-");
+     var delete_id = jQuery(this).attr("id").split("-");
      var item_id = delete_id[1];
 
      var confirm_yes = "confirm-yes-" + item_id;
 
-     $("#item-"+item_id).after("<div class=\"confirmer\"><?php print $rusure; ?>  <a id=\"" + confirm_yes + "\"><?php print $textyes; ?></a> | <a id=\"confirm-no-"+item_id+"\"><?php print $textno; ?></a></div>");
+     jQuery("#item-"+item_id).after("<div class=\"confirmer\"><?php print $rusure; ?><a id=\"" + confirm_yes + "\"><?php print $textyes; ?></a> | <a id=\"confirm-no-"+item_id+"\"><?php print $textno; ?></a></div>");
 
      return false;
    });
 
 
-   $('a[id*=confirm-yes-]').livequery('click', function(event) {
+   jQuery('.pluslet_body').on('click','a[id*=confirm-yes-]', function(event) {
 
-     var delete_id = $(this).attr("id").split("-");
+     var delete_id = jQuery(this).attr("id").split("-");
      var this_id = delete_id[2];
 
      // Remove the confirm zone, and the row from the table
-     $(this).parent().remove();
-     $("#item-"+this_id).remove();
+     jQuery(this).parent().remove();
+     jQuery("#item-"+this_id).remove();
 
-     $(".feedback").load("admin_bits.php", {action: 'delete_source', delete_id:this_id},
-			 function() {
-
-         $(".feedback").fadeIn();
+     jQuery.post("admin_bits.php", {action: 'delete_source', delete_id:this_id},
+			 function(response) {
+	 console.log(response);
+	 $('#feedback').remove();
+	 jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
+         jQuery("#feedback").show();
        });
 
      return false;
    });
 
    // Person doesn't wish to change/delete item; remove confirm zone.
-   $('a[id*=confirm-no-]').livequery('click', function(event) {
-     $(this).parent().remove();
+   jQuery('.pluslet_body').on('click','a[id*=confirm-no-]', function(event) {
+     jQuery(this).parent().remove();
      return false;
    });
-
-
  });
 </script>
