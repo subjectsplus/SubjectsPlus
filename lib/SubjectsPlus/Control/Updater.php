@@ -21,10 +21,15 @@
 class Updater
 {
 	//class properties
-	private $lobjNewTables;
-	private $lobjInsertInto;
-	private $lobjFixData;
-	private $lobjAlterTables;
+	//make one for each version before current version
+	private $lobj1NewTables;
+	private $lobj2NewTables;
+	private $lobj1InsertInto;
+	private $lobj2InsertInto;
+	private $lobj1FixData;
+	private $lobj2FixData;
+	private $lobj1AlterTables;
+	private $lobj2AlterTables;
 
 	function __construct()
 	{
@@ -469,6 +474,36 @@ class Updater
 		}
 
 		return TRUE;
+	}
+
+	/**
+	 * Updater::getCurrentVersion() - this methods queries the database to return
+	 * what version of SP is currently being used
+	 *
+	 * @return string
+	 */
+	private function getCurrentVersion()
+	{
+		$db = new Querier;
+
+		//test whether current vesion is 3.x
+		$lstrQuery = 'SHOW TABLES LIKE \'section\'';
+		$rscResults = $db->query( $lstrQuery );
+		$lintRowCount = count( $rscResults );
+
+		//no key SubjectsPlus 3..0 tables exists
+		if( $lintRowCount != 0 ) return '3';
+
+		//test whether current vesion is 2.x
+		$lstrQuery = 'SHOW TABLES LIKE \'discipline\'';
+		$rscResults = $db->query( $lstrQuery );
+		$lintRowCount = count( $rscResults );
+
+		//no key SubjectsPlus 3..0 tables exists
+		if( $lintRowCount != 0 ) return '2';
+
+		//if none, version is 1.x
+		return '1';
 	}
 }
 

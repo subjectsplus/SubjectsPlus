@@ -911,7 +911,7 @@ function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE)
     }
   }
 
-  
+
   $alphabet = "<div id=\"letterhead\" align=\"center\">";
 
   foreach ($azRange as $char) {
@@ -1017,12 +1017,6 @@ function displayLogoOnlyHeader()
  */
 function isInstalled()
 {
-
-	try {
-			} catch (Exception $e) {
-		echo $e;
-	}
-
 	//does key SubjectsPlus tables exist query
 	$lstrQuery = 'SHOW TABLES LIKE \'staff%\'';
 
@@ -1042,16 +1036,10 @@ function isInstalled()
  */
 function isUpdated()
 {
-
-	try {
-			} catch (Exception $e) {
-		echo $e;
-	}
-
 	//does key SubjectsPlus 2.0 tables exist query
-	$lstrQuery = 'SHOW TABLES LIKE \'discipline\'';
+	$lstrQuery = 'SHOW TABLES LIKE \'section\'';
     $db = new Querier;
-	$rscResults = count( $lstrQuery );
+	$rscResults = $db->query( $lstrQuery );
 	$lintRowCount = count( $rscResults );
 
 	//no key SubjectsPlus 2.0 tables exists
@@ -1254,7 +1242,7 @@ function feedBack($message="", $display="feedback") {
   } else {
     return "";
   }
-  
+
 }
 
 // Mod in_array to work with multidimensional arrays

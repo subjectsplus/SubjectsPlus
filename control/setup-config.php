@@ -176,7 +176,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
 						if( !isInstalled() )
 						{
-							?> <div class="box" style="margin-right: auto; margin-left: auto; max-width: 800px; text-align: center;"><a href="install.php">Run the install!</a></div> <?php
+							?> <div class="box" style="margin-right: auto; margin-left: auto; max-width: 800px; text-align: center;">Please make sure you are not currently logged in on any installation of SubjectsPlus on current server.<br /><a href="install.php">Run the install!</a></div> <?php
 						}
 						else
 						{
