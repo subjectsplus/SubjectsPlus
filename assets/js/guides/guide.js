@@ -393,6 +393,17 @@ function setupSaveButton( lstrSelector )
 		var lstrInstance = "pluslet-update-body-" + lintID;
 		//Title of item
 		var lstrTitle = addslashes(jQuery("#pluslet-update-title-" + lintID).val());
+		console.log(lstrTitle);
+		console.log('ahhh!');
+		if (lstrTitle === "undefined") {
+		    console.log(lstrTitle);
+		    console.log('nooo!');
+		    lstrTitle =  jQuery(".pluslet-" + lintID).find('.titlebar_text').html();
+		    console.log(lstrTitle);
+
+		} else {
+		    
+		    		}
 		//Div Selector
 		var lstrDiv = "#pluslet-" + lintID;
 		//depending update_id
