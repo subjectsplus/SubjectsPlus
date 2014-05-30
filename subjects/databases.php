@@ -178,7 +178,7 @@ include("includes/header.php");
       <?php print $display; ?>
 
 </div>
-<div  class="pure-u-1-3">
+<div class="pure-u-1-3 database-page">
   <!-- start pluslet -->
   <div class="pluslet">
     <div class="titlebar">
@@ -236,7 +236,7 @@ include("includes/footer.php");
     stripeR();
 
 
-    $("[id*=show]").live("change", function() {
+    $("[id*=show]").livequery("change", function() {
 
       var showtype_id = $(this).attr("id").split("-");
       //alert("u clicked: " + showtype_id[1]);
@@ -247,7 +247,7 @@ include("includes/footer.php");
     });
 
     // show db details
-    $("img[id*=bib-]").live("click", function() {
+    $("span[id*=bib-]").livequery("click", function() {
       var bib_id = $(this).attr("id").split("-");
       $(this).parent().parent().find(".list_bonus").toggle()
     });

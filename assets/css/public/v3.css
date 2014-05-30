@@ -6,7 +6,8 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 /* fonts */
 
 p, body, html, table, .pluslet {
-    font-family: 'Lato',Helvetica,Arial,sans-serif !important;   
+    font-family: Helvetica,Arial,sans-serif !important;   
+
 }
 
 body {
@@ -24,7 +25,6 @@ body {
 .pluslet, table {
     font-size: 1.2em !important;
 }
-
 
 
 /* changed from #wrap to main-content per RG */
@@ -376,7 +376,7 @@ overflow: auto;
     background: none repeat scroll 0 0 #E67E22;
     color: #FFFFFF;
     
-    font-size: 22px;
+    
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
@@ -462,7 +462,8 @@ overflow: auto;
 }
 .zebra {
     padding: .5em 0 .5em .5em;
-    border-bottom: 2px solid #ecf0f1;
+    border-bottom: 1px solid #ecf0f1;
+    border: none;
 }
 /*
 .zebra:hover {
@@ -480,6 +481,26 @@ overflow: auto;
 .list_bonus {
     display: none;
     z-index: 200000;
+    margin-top: .5em;
+    color: #333;
+    font-size: 0.8em !important;
+}
+
+.list_bonus img { 
+    background-color: #79A4D4;
+    border-radius: 3px;
+    height: 15px;
+    padding: 3px;
+    width: 15px;
+}
+
+.toggleLink {
+    font-size: 13px; background-color: #ccc; border-radius: 3px; margin-left: 1em; color: #fff; padding: 1px 3px;
+    display: inline-block;
+}
+
+.togglelink:hover {
+    background-color: #E67E22 !important;
 }
 
 table {
@@ -487,7 +508,7 @@ table {
 }
 table.item_listing td, div.item_listing p {
     padding: .5em 0 .5em .5em;
-    
+    font-size: 1.3em;
     margin: 0;
 }
 table.item_listing th {
@@ -1033,4 +1054,4 @@ width:55px;
     float:left;
 }
 
-
+.curse_me {cursor: pointer;}

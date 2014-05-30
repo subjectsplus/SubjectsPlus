@@ -199,15 +199,19 @@ class DbHandler {
 
       if ($blurb != "") {
         $information = "<img src=\"$IconPath/information.png\" class=\"curse_me\" border=\"0\" alt=\"" . _("more information") . "\" title=\"" . _("more information") . "\"  id=\"bib-$bib_id\" />";
+        // This is new details link; you can use the one above if you prefer
+        $information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\">" . _("about") . "</span>";
+        
       } else {
         $information = "";
       }
 
       $items .= "
 	<tr class=\"zebra $row_colour\" valign=\"top\">
-		<td class=\"toggleLink\" style=\"width: 120px;\">$information $icons</td>
-		<td><a href=\"$url\">$item_title</a> $helpguide $display_note_text
-                    <div class=\"list_bonus\">$bonus</div></td>
+		
+		<td><a href=\"$url\">$item_title</a> $information $helpguide $display_note_text
+                    <div class=\"list_bonus\">$icons $bonus</div></td>
+                    
 	</tr>";
 
       $row_count++;
