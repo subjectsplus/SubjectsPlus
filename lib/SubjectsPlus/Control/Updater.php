@@ -203,7 +203,7 @@ class Updater
 		  	  SET pt.tab_id = s.section_id",
 			"SET FOREIGN_KEY_CHECKS = 1",
 			"ALTER TABLE `pluslet_tab` DROP FOREIGN KEY `fk_pt_tab_id`",
-			"DROP TABLE `pluslet_subject`;"
+			"DROP TABLE IF EXISTS `pluslet_subject`;"
 		);
 
 		//queries to change or drop columns, add referential integrity, add indexes
