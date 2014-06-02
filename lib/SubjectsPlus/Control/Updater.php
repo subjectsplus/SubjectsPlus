@@ -277,7 +277,6 @@ class Updater
 		$this->lobj2AlterTables = array(
 		"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
 		"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
-		"ALTER TABLE `tab` ADD COLUMN `external_url` VARCHAR(500) NULL AFTER `tab_index`",
 		"ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
 		  ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
 		  ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
@@ -291,7 +290,6 @@ class Updater
 		  ON DELETE CASCADE
 		  ON UPDATE CASCADE, RENAME TO `pluslet_section`",
 		"ALTER TABLE `pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT",
-		"ALTER TABLE `tab` ADD COLUMN `visibility` INT(1) NOT NULL DEFAULT 1  AFTER `external_url`",
 		"ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified`"
 		);
 	}
