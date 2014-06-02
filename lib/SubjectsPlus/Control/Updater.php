@@ -1,7 +1,7 @@
 <?php
    namespace SubjectsPlus\Control;
 /**
- * sp_Updater - this class handles the updating to SubjectsPlus 2.0
+ * sp_Updater - this class handles the updating to SubjectsPlus 3.0
  *
  * @package SubjectsPlus
  * @author dgonzalez
@@ -34,7 +34,7 @@ class Updater
 	function __construct()
 	{
 		//queries to add new tables
-		$this->lobjNewTables = array(
+		$this->lobj1NewTables = array(
 			"CREATE TABLE IF NOT EXISTS `discipline` (
 			  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
 			  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
@@ -64,8 +64,51 @@ class Updater
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v2'"
 		);
 
+		$this->lobj2NewTables = array(
+			"CREATE TABLE IF NOT EXISTS `subject_department` (
+			  `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
+			  `id_subject` bigint(20) NOT NULL,
+			  `id_department` int(11) NOT NULL,
+			  PRIMARY KEY (`idsubject_department`),
+			  KEY `fk_subject_id_idx` (`id_subject`),
+			  KEY `fk_department_id_idx` (`id_department`),
+			  CONSTRAINT `fk_subject_id` FOREIGN KEY (`id_subject`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+			  CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'",
+			"CREATE TABLE IF NOT EXISTS`subject_subject` (
+			  `id_subject_subject` INT NOT NULL AUTO_INCREMENT,
+			  `subject_parent` BIGINT(20) NOT NULL,
+			  `subject_child` BIGINT(20) NOT NULL,
+			  PRIMARY KEY (`id_subject_subject`),
+			  INDEX `fk_subject_parent_idx` (`subject_parent` ASC),
+			  INDEX `fk_subject_child_idx` (`subject_child` ASC),
+			  CONSTRAINT `fk_subject_parent` FOREIGN KEY (`subject_parent`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+			  CONSTRAINT `fk_subject_child` FOREIGN KEY (`subject_child`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+			  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'",
+			"CREATE TABLE `tab` (
+			  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
+			  `subject_id` bigint(20) NOT NULL DEFAULT '0',
+			  `label` varchar(20) NOT NULL DEFAULT 'Main',
+			  `tab_index` int(11) NOT NULL DEFAULT '0',
+			  `external_url` varchar(500) DEFAULT NULL,
+			  `visibility` int(1) NOT NULL DEFAULT '1',
+			  PRIMARY KEY (`tab_id`),
+			  KEY `fk_t_subject_id_idx` (`subject_id`),
+			  CONSTRAINT `fk_t_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+			"CREATE TABLE IF NOT EXISTS `section` (
+			  `section_id` INT(11) NOT NULL AUTO_INCREMENT,
+			  `section_index` INT(11) NOT NULL DEFAULT 0 ,
+			  `layout` VARCHAR(255) NOT NULL DEFAULT '4-4-4',
+			  `tab_id` INT(11) NOT NULL,
+			  PRIMARY KEY (`section_id`),
+			  INDEX `fk_section_tab_idx` (`tab_id` ASC),
+			  CONSTRAINT `fk_section_tab` FOREIGN KEY (`tab_id` ) REFERENCES `tab` (`tab_id` ) ON DELETE CASCADE ON UPDATE CASCADE
+			  ) ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'"
+		);
+
 		//queries to insert into new tables
-		$this->lobjInsertInto = array(
+		$this->lobj1InsertInto = array(
 			"INSERT INTO `discipline` (`discipline_id`,`discipline`,`sort`) VALUES (1,'agriculture',1),(2,'anatomy &amp; physiology',2),
 			(3,'anthropology',3),(4,'applied sciences',4),(5,'architecture',5),(6,'astronomy &amp; astrophysics',6),(7,'biology',7),
 			(8,'botany',8),(9,'business',9),(10,'chemistry',10),(11,'computer science',11),(12,'dance',12),(13,'dentistry',13),
@@ -82,8 +125,13 @@ class Updater
 			(57,'visual arts',57),(58,'women&#039;s studies',58),(59,'zoology',59)"
 		);
 
+		//queries to insert into new tables
+		$this->lobj2InsertInto = array(
+			"INSERT INTO section (tab_id) SELECT tab_id FROM tab"
+		);
+
 		//queries to fix data and columns
-		$this->lobjFixData = array(
+		$this->lobj1FixData = array(
 			"ALTER TABLE `rank` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NULL DEFAULT NULL, CHANGE COLUMN `title_id` `title_id` BIGINT(20) NULL DEFAULT NULL,
 			CHANGE COLUMN `source_id` `source_id` BIGINT(20) NULL DEFAULT NULL",
 			"UPDATE `talkback` SET `a_from` = NULL WHERE `a_from` REGEXP '[^0-9]'",
@@ -148,8 +196,18 @@ class Updater
 			"DROP TABLE `temp_chchchanges`"
 		);
 
+		$this->lobj2FixData = array(
+			"SET FOREIGN_KEY_CHECKS = 0",
+			"UPDATE pluslet_tab pt INNER JOIN section s
+		  	  ON pt.tab_id = s.tab_id
+		  	  SET pt.tab_id = s.section_id",
+			"SET FOREIGN_KEY_CHECKS = 1",
+			"ALTER TABLE `pluslet_tab` DROP FOREIGN KEY `fk_pt_tab_id`",
+			"DROP TABLE `pluslet_subject`;"
+		);
+
 		//queries to change or drop columns, add referential integrity, add indexes
-		$this->lobjAlterTables = array(
+		$this->lobj1AlterTables = array(
 			"DROP TABLE IF EXISTS `pluslet_staff`",
 			"ALTER TABLE `department` ADD COLUMN `email` VARCHAR(255) NULL DEFAULT NULL  AFTER `telephone`,
 			ADD COLUMN `url` VARCHAR(255) NULL DEFAULT NULL  AFTER `email`",
@@ -215,6 +273,27 @@ class Updater
 			"ALTER TABLE `talkback` ADD CONSTRAINT `fk_talkback_staff_id` FOREIGN KEY (`a_from` ) REFERENCES `staff` (`staff_id` ) ON DELETE SET NULL ON UPDATE SET NULL,
 			ADD INDEX `fk_talkback_staff_id_idx` (`a_from` ASC)"
 		);
+
+		$this->lobj2AlterTables = array(
+		"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
+		"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
+		"ALTER TABLE `tab` ADD COLUMN `external_url` VARCHAR(500) NULL AFTER `tab_index`",
+		"ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
+		  ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
+		  ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
+		  ADD `titlebar_styling` VARCHAR( 100 ) NULL",
+		"ALTER TABLE `subject_department` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`",
+		"ALTER TABLE `subject_subject` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`",
+		"ALTER TABLE `pluslet_tab` CHANGE COLUMN `tab_id` `section_id` INT(11) NOT NULL,
+		  ADD CONSTRAINT `fk_pt_section_id`
+		  FOREIGN KEY (`section_id` )
+		  REFERENCES `section` (`section_id` )
+		  ON DELETE CASCADE
+		  ON UPDATE CASCADE, RENAME TO `pluslet_section`",
+		"ALTER TABLE `pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT",
+		"ALTER TABLE `tab` ADD COLUMN `visibility` INT(1) NOT NULL DEFAULT 1  AFTER `external_url`",
+		"ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified`"
+		);
 	}
 
 	/**
@@ -228,20 +307,20 @@ class Updater
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
 	<div class="box" name="error_page">
-    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 2.0" ); ?></h2>
+    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 3.0" ); ?></h2>
 
 				<div align="center">
 					<p><?php echo _( "Welcome to the SubjectPlus Updater!" ); ?></p>
 					<br />
 					<p><?php echo _( "Before we begin, if you are currently running version 0.9, please run the <a href=\"migrate_to_v1_fromv09.php\">Migrator</a>." ); ?></p>
-					<p><?php echo _( "If you are running version 1.x, follow these steps to update to version 2.0." ); ?></p>
+					<p><?php echo _( "If you are running version 1.x, follow these steps to update to version 3.0." ); ?></p>
 				</div>
 				<br />
 				<ul>
 					<li>
 						<strong><?php echo _( "Backup your current SubjectsPlus database" ); ?></strong>
 						<br />
-						<em style="font-style: italic; font-size: smaller;"><?php echo _( "The updater will examine and update your data in order to word with 2.0. Also if error occurs, you may need to revert back to older database." ); ?></em>
+						<em style="font-style: italic; font-size: smaller;"><?php echo _( "The updater will examine and update your data in order to work with 3.0. Also if error occurs, you may need to revert back to older database." ); ?></em>
 					</li>
 					<li><?php echo _( "After <a href=\"?step=1\">Run Updater</a>" ); ?>
 						<br />
@@ -254,47 +333,91 @@ class Updater
 	}
 
 	/**
-	 * sp_Updater::update() - this method updates to SubjectPlus 2.0
+	 * sp_Updater::update() - this method updates to SubjectPlus 3.0
 	 *
 	 * @return boolean
 	 */
 	public function update()
 	{
-		foreach($this->lobjNewTables as $lstrNQuery)
+		$db = new Querier;
+
+		$lstrVersion = $this->getCurrentVersion();
+
+		switch( $lstrVersion )
 		{
-			if( !$db->query( $lstrNQuery ) )
-			{
-				$this->displayUpdaterErrorPage( _( "Problem creating new table." ) . "<br />$lstrNQuery" );
-				return FALSE;
-			}
+			case '1':
+				foreach($this->lobj1NewTables as $lstrNQuery)
+				{
+					if( $db->query( $lstrNQuery ) === FALSE )
+					{
+						$this->displayUpdaterErrorPage( _( "Problem creating new table." ) . "<br />$lstrNQuery" );
+						return FALSE;
+					}
+				}
+
+				foreach($this->lobj1InsertInto as $lstrIQuery)
+				{
+					if( $db->query( $lstrIQuery ) === FALSE )
+					{
+						$this->displayUpdaterErrorPage( _( "Problem inserting new data into table." ) . "<br />$lstrIQuery" );
+						return FALSE;
+					}
+				}
+
+				if( !$this->fix1ExistingData() )
+				{
+					return FALSE;
+				}
+
+				if( !$this->before1AlterQueries() ) return FALSE;
+
+				foreach($this->lobj1AlterTables as $lstrAQuery)
+				{
+					if( !$db->query( $lstrAQuery ) )
+					{
+						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+						return FALSE;
+					}
+				}
+
+				if( !$this->after1AlterQueries() ) return FALSE;
+
+			case '2':
+				foreach($this->lobj2NewTables as $lstrNQuery)
+				{
+					if( $db->query( $lstrNQuery ) === FALSE )
+					{
+						$this->displayUpdaterErrorPage( _( "Problem creating new table." ) . "<br />$lstrNQuery" );
+						return FALSE;
+					}
+				}
+
+				foreach($this->lobj2InsertInto as $lstrIQuery)
+				{
+					if( $db->query( $lstrIQuery ) === FALSE )
+					{
+						$this->displayUpdaterErrorPage( _( "Problem inserting new data into table." ) . "<br />$lstrIQuery" );
+						return FALSE;
+					}
+				}
+
+				if( !$this->fix2ExistingData() )
+				{
+					return FALSE;
+				}
+
+				foreach($this->lobj2AlterTables as $lstrAQuery)
+				{
+					if( $db->query( $lstrAQuery ) === FALSE )
+					{
+						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+						return FALSE;
+					}
+				}
+
+			default:
+				break;
 		}
-
-		foreach($this->lobjInsertInto as $lstrIQuery)
-		{
-			if( !$db->query( $lstrIQuery ) )
-			{
-				$this->displayUpdaterErrorPage( _( "Problem inserting new data into table." ) . "<br />$lstrIQuery" );
-				return FALSE;
-			}
-		}
-
-		if( !$this->fixExistingData() )
-		{
-			return FALSE;
-		}
-
-		if( !$this->beforeAlterQueries() ) return FALSE;
-
-		foreach($this->lobjAlterTables as $lstrAQuery)
-		{
-			if( !$db->query( $lstrAQuery ) )
-			{
-				$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
-				return FALSE;
-			}
-		}
-
-		if( !$this->afterAlterQueries() ) return FALSE;
 
 		if( !$this->updateRewriteBases() ) return FALSE;
 
@@ -314,7 +437,7 @@ class Updater
 	<div class="box" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Update Complete" ); ?></h2>
 
-				<p><?php echo _( "SubjectsPlus update to 2.0 complete. Please log in." ); ?></p>
+				<p><?php echo _( "SubjectsPlus update to 3.0 complete. Please log in." ); ?></p>
 				<br />
 				<p><a href="login.php"><?php echo _( "Log In" ); ?></a></p>
 				<br />
@@ -346,17 +469,18 @@ class Updater
 	}
 
 	/**
-	 * sp_Updater::fixExistingData() - this method fixes existing data in database by SQL
-	 * queries and other means
+	 * sp_Updater::fix1ExistingData() - this method fixes existing data in database by SQL
+	 * queries and other means from version 1
 	 *
 	 * @return boolean
 	 */
-	private function fixExistingData()
+	private function fix1ExistingData()
 	{
+		$db = new Querier;
 
-		foreach($this->lobjFixData as $lstrFQuery)
+		foreach($this->lobj1FixData as $lstrFQuery)
 		{
-			if( !$db->query( $lstrFQuery ) )
+			if( $db->query( $lstrFQuery ) === FALSE )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem fixing existing data." ) . "<br />$lstrFQuery" );
 				return FALSE;
@@ -367,13 +491,37 @@ class Updater
 	}
 
 	/**
-	 * sp_Updater::beforeAlterQueries() - this method executes custom queries before
-	 * the execution of the alter table queries
+	 * sp_Updater::fix2ExistingData() - this method fixes existing data in database by SQL
+	 * queries and other means from version 2
 	 *
 	 * @return boolean
 	 */
-	private function beforeAlterQueries()
+	private function fix2ExistingData()
 	{
+		$db = new Querier;
+
+		foreach($this->lobj2FixData as $lstrFQuery)
+		{
+			if( $db->query( $lstrFQuery ) === FALSE )
+			{
+				$this->displayUpdaterErrorPage( _( "Problem fixing existing data." ) . "<br />$lstrFQuery" );
+				return FALSE;
+			}
+		}
+
+		return TRUE;
+	}
+
+	/**
+	 * sp_Updater::before1AlterQueries() - this method executes custom queries before
+	 * the execution of the alter table queries from version 1
+	 *
+	 * @return boolean
+	 */
+	private function before1AlterQueries()
+	{
+		$db = new Querier;
+
 		$lstrQuery = "SHOW COLUMNS FROM `subject` LIKE 'keywords'";
 
 		$lrscResults = $db->query( $lstrQuery );
@@ -382,7 +530,7 @@ class Updater
 		{
 			$lstrQuery = "ALTER TABLE `subject` CHANGE COLUMN `keywords` `keywords_backup` VARCHAR(255) ";
 
-			if( !$db->query( $lstrQuery ) )
+			if( $db->query( $lstrQuery ) === FALSE )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem renaming existing keyword column." ) . "<br />$lstrQuery" );
 				return FALSE;
@@ -393,13 +541,15 @@ class Updater
 	}
 
 	/**
-	 * sp_Updater::afterAlterQueries() - this method executes custom queries after
-	 * the execution of the alter table queries
+	 * sp_Updater::after1AlterQueries() - this method executes custom queries after
+	 * the execution of the alter table queries from version 1
 	 *
 	 * @return boolean
 	 */
-	private function afterAlterQueries()
+	private function after1AlterQueries()
 	{
+		$db = new Querier;
+
 		$lstrQuery = "SHOW COLUMNS FROM `subject` LIKE 'keywords_backup'";
 
 		$lrscResults = $db->query( $lstrQuery );
@@ -408,7 +558,7 @@ class Updater
 		{
 			$lstrQuery = "ALTER TABLE `subject` DROP COLUMN `keywords`";
 
-			if( !$db->query( $lstrQuery ) )
+			if( $db->query( $lstrQuery ) === FALSE )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem droping for existing keyword column." ) . "<br />$lstrQuery" );
 				return FALSE;
@@ -416,7 +566,7 @@ class Updater
 
 			$lstrQuery = "ALTER TABLE `subject` CHANGE COLUMN `keywords_backup` `keywords` VARCHAR(255)";
 
-			if( !$db->query( $lstrQuery ) )
+			if( $db->query( $lstrQuery ) === FALSE )
 			{
 				$this->displayUpdaterErrorPage( _( "Problem renaming for existing keyword column." ) . "<br />$lstrQuery" );
 				return FALSE;

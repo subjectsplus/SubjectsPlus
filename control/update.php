@@ -2,9 +2,9 @@
 
 /**
  *   @file control/update.php
- *   @brief help updating to SubjectsPlus 2.0
+ *   @brief help updating to SubjectsPlus 3.0
  *   @description This file will help a user walk through basic steps to update
- * 	 to SubjectsPlus 2.0
+ * 	 to SubjectsPlus 3.0
  *
  *   @author dgonzalez
  *   @date Feb 2013
@@ -28,7 +28,7 @@ displayLogoOnlyHeader();
 //find what step we are in
 $lintStep = ( isset( $_GET['step'] ) ? (int) $_GET['step'] : 0 );
 
-//if at SubjectsPlus 2.0 already, display message and discontinue
+//if at SubjectsPlus 3.0 already, display message and discontinue
 if( isUpdated() )
 {
 	?>
@@ -36,7 +36,7 @@ if( isUpdated() )
 <div class="box required_field">
 		<h2 class="bw_head"><?php echo _( "Already Updated" ); ?></h2>
 
-			<p><?php echo _( 'Already at SubjectsPlus 2.0. No need to run updater.' ) ?></p>
+			<p><?php echo _( 'Already at SubjectsPlus 3.0. No need to run updater.' ) ?></p>
 			<p><a href="login.php"><?php echo _( 'Log In.' ) ?></a></p>
 		</div>
 	</div>
