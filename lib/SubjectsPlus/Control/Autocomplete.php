@@ -206,7 +206,8 @@ foreach ($result as $myrow)  {
         if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
 	}   else {
-          $arr[$i]['url'] = 'record.php?record=' . $myrow['short_form'];   
+print_r($arr);
+          $arr[$i]['url'] = 'record.php?record=' . $myrow[2];   
 	}
         
 	break;

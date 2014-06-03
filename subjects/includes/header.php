@@ -14,9 +14,7 @@
 
 <?php // Load our jQuery libraries + some css
 if (isset($use_jquery)) { print generatejQuery($use_jquery);
-?>
 
-<?php
 }
 
 if (!isset ($noheadersearch)) { 
@@ -46,7 +44,7 @@ if (!isset ($noheadersearch)) {
         </div>
 
         <div class="pure-u-1-4">
-        <?php print $search_form; ?>
+    
         </div>
 
     </div>
