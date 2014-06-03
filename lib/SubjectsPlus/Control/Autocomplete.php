@@ -224,7 +224,7 @@ foreach ($result as $myrow)  {
 	
       case "FAQ":
 	if ($this->getSearchPage() == "control") {
-	  $arr[$i]['label']  = $myrow[1];
+	  $arr[$i]['label']  = $myrow[3];
           $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
 	} else {
           $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];    
@@ -235,9 +235,11 @@ foreach ($result as $myrow)  {
 	if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 $arr[$i]['value'] = $myrow['id'];
-$arr[$i]['label'] = $myrow['short_form'];
+
+$arr[$i]['label'] = $myrow['additional_text'];
 	} else {
-	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+
+	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 	  $arr[$i]['tab_index'] = $myrow['additional_id'];
 	  
 	}

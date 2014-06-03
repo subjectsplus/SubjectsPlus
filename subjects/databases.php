@@ -196,7 +196,7 @@ include("includes/header.php");
       <form action="databases.php" method="post" autocomplete="on">
         <p>
           <?php
-          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "databases", 30);
+          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", 30);
           $input_box->displayBox();
           ?>
         </p>

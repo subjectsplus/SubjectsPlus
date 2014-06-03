@@ -58,6 +58,3 @@ $i = 0;
 
 $response = json_encode($arr);
 echo $response;
-
-
-?>
