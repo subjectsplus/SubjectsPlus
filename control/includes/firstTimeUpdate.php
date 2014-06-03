@@ -13,7 +13,7 @@ include("header.php");
 <div class="box" align="center">
     <h2 class="bw_head"><?php echo _( "First Time Update" ); ?></h2>
 
-			<p><?php echo _( "Welcome to version 2.0." ) ?></p>
+			<p><?php echo _( "Welcome to version 3.0." ) ?></p>
 			<div align="left">
 				<ul>
 					<li><?php echo _( 'Configure SubjectsPlus ' ) ?><a href="../edit-config.php" target="_blank"><?php echo _( 'here' ) ?></a>.</li>
@@ -23,7 +23,7 @@ include("header.php");
 						<li><?php echo _( 'Move over your previous /users/ folders to /assets/, i.e., _jsmith' ) ?></li>
 						<li><?php echo _( 'If you have styled the front end, move over default.css to assets/css/ and tweak as necessary.  See wiki for tips.' ) ?></li>
 					</ul>
-					<li><a href="http://www.subjectsplus.com/wiki/index.php?title=What%27s_New_in_2.0"><?php echo _( 'You can find out new features in 2.0 on the wiki.' ) ?></a></li>
+					<li><a href="http://www.subjectsplus.com/wiki/index.php?title=What%27s_New_in_3.0"><?php echo _( 'You can find out new features in 3.0 on the wiki.' ) ?></a></li>
 				</ul>
 			</div>
 		</div>
