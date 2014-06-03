@@ -117,5 +117,10 @@ class Querier  {
         $last_id = $connection->lastInsertId();
         return $last_id;
     }
+
+	public function errorInfo()
+	{
+		return $this->_connection->errorInfo();
+	}
 }
 ?>
