@@ -30,6 +30,7 @@ class Updater
 	private $lobj2FixData;
 	private $lobj1AlterTables;
 	private $lobj2AlterTables;
+	private $lobj2FixDataAfterAlter;
 
 	function __construct()
 	{
@@ -104,7 +105,18 @@ class Updater
 			  PRIMARY KEY (`section_id`),
 			  INDEX `fk_section_tab_idx` (`tab_id` ASC),
 			  CONSTRAINT `fk_section_tab` FOREIGN KEY (`tab_id` ) REFERENCES `tab` (`tab_id` ) ON DELETE CASCADE ON UPDATE CASCADE
-			  ) ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'"
+			) ENGINE = InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'",
+			"CREATE TABLE IF NOT EXISTS `pluslet_section` (
+			  `pluslet_section_id` int(11) NOT NULL AUTO_INCREMENT,
+			  `pluslet_id` int(11) NOT NULL DEFAULT '0',
+			  `section_id` int(11) NOT NULL,
+			  `pcolumn` int(11) NOT NULL,
+			  `prow` int(11) NOT NULL,
+			  PRIMARY KEY (`pluslet_section_id`),
+			  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
+			  KEY `fk_pt_tab_id_idx` (`section_id`),
+			  CONSTRAINT `fk_pt_section_id` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'"
 		);
 
 		//queries to insert into new tables
@@ -127,7 +139,17 @@ class Updater
 
 		//queries to insert into new tables
 		$this->lobj2InsertInto = array(
-			"INSERT INTO section (tab_id) SELECT tab_id FROM tab"
+			"INSERT INTO tab (subject_id) SELECT s.subject_id
+			  FROM subject as s LEFT OUTER JOIN tab as t
+			  ON s.subject_id = t.subject_id
+			  WHERE t.subject_id IS NULL
+			  GROUP BY s.subject_id",
+			"INSERT INTO section (tab_id) SELECT tab_id FROM tab",
+			"INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) SELECT ps.pluslet_id, s.section_id, ps.pcolumn, ps.prow
+			  FROM pluslet_subject as ps INNER JOIN tab as t
+			  ON ps.subject_id = t.subject_id
+			  INNER JOIN section as s
+			  ON t.tab_id = s.tab_id"
 		);
 
 		//queries to fix data and columns
@@ -197,13 +219,8 @@ class Updater
 		);
 
 		$this->lobj2FixData = array(
-			"SET FOREIGN_KEY_CHECKS = 0",
-			"UPDATE pluslet_tab pt INNER JOIN section s
-		  	  ON pt.tab_id = s.tab_id
-		  	  SET pt.tab_id = s.section_id",
-			"SET FOREIGN_KEY_CHECKS = 1",
-			"ALTER TABLE `pluslet_tab` DROP FOREIGN KEY `fk_pt_tab_id`",
-			"DROP TABLE IF EXISTS `pluslet_subject`;"
+			"DELETE ps FROM pluslet_subject as ps LEFT OUTER JOIN subject as s ON s.subject_id = ps.subject_id WHERE s.subject_id IS NULL",
+			"DROP TABLE IF EXISTS `pluslet_subject`"
 		);
 
 		//queries to change or drop columns, add referential integrity, add indexes
@@ -275,22 +292,15 @@ class Updater
 		);
 
 		$this->lobj2AlterTables = array(
-		"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
-		"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
-		"ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
-		  ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
-		  ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
-		  ADD `titlebar_styling` VARCHAR( 100 ) NULL",
-		"ALTER TABLE `subject_department` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`",
-		"ALTER TABLE `subject_subject` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`",
-		"ALTER TABLE `pluslet_tab` CHANGE COLUMN `tab_id` `section_id` INT(11) NOT NULL,
-		  ADD CONSTRAINT `fk_pt_section_id`
-		  FOREIGN KEY (`section_id` )
-		  REFERENCES `section` (`section_id` )
-		  ON DELETE CASCADE
-		  ON UPDATE CASCADE, RENAME TO `pluslet_section`",
-		"ALTER TABLE `pluslet_section` CHANGE COLUMN `pluslet_tab_id` `pluslet_section_id` INT(11) NOT NULL AUTO_INCREMENT",
-		"ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified`"
+			"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
+			"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
+			"ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
+			  ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
+			  ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
+			  ADD `titlebar_styling` VARCHAR( 100 ) NULL",
+			"ALTER TABLE `subject_department` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`",
+			"ALTER TABLE `subject_subject` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`",
+			"ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified`"
 		);
 	}
 
@@ -311,7 +321,7 @@ class Updater
 					<p><?php echo _( "Welcome to the SubjectPlus Updater!" ); ?></p>
 					<br />
 					<p><?php echo _( "Before we begin, if you are currently running version 0.9, please run the <a href=\"migrate_to_v1_fromv09.php\">Migrator</a>." ); ?></p>
-					<p><?php echo _( "If you are running version 1.x, follow these steps to update to version 3.0." ); ?></p>
+					<p><?php echo _( "If you are running version 1.x or higher, follow these steps to update to version 3.0." ); ?></p>
 				</div>
 				<br />
 				<ul>
@@ -371,7 +381,7 @@ class Updater
 
 				foreach($this->lobj1AlterTables as $lstrAQuery)
 				{
-					if( !$db->query( $lstrAQuery ) )
+					if( $db->query( $lstrAQuery ) === FALSE )
 					{
 						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
 						return FALSE;
