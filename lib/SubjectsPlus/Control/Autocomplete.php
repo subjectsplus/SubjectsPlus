@@ -165,7 +165,15 @@ $i = 0;
 
 foreach ($result as $myrow)  {
 
-  $arr[$i]['label'] = $myrow[3];
+  
+
+  if (isset($myrow[3])) {
+    $arr[$i]['label'] = $myrow[3];
+  } else {
+
+    $arr[$i]['label'] = $myrow[1];
+
+  }
 
   if(isset($myrow['content_type'])) {
 
@@ -206,7 +214,7 @@ foreach ($result as $myrow)  {
         if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
 	}   else {
-print_r($arr);
+	  print_r($arr);
           $arr[$i]['url'] = 'record.php?record=' . $myrow[2];   
 	}
         
@@ -235,9 +243,9 @@ print_r($arr);
       case "Pluslet":
 	if ($this->getSearchPage() == "control") {
 	  $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
-$arr[$i]['value'] = $myrow['id'];
+	  $arr[$i]['value'] = $myrow['id'];
 
-$arr[$i]['label'] = $myrow['additional_text'];
+	  $arr[$i]['label'] = $myrow['additional_text'];
 	} else {
 
 	  $arr[$i]['url'] = 'guide.php?subject=' . $myrow[3] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
