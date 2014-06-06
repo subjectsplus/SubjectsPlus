@@ -206,7 +206,21 @@
                             if ($this->getSearchPage() == "control") {
                                 $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
                             }   else {
-                                $arr[$i]['url'] = 'record.php?record=' . $myrow['short_form'];   
+                            
+                                $db = new Querier();
+                                $record_url_sql = "SELECT location.location, title.title_id FROM location, title INNER JOIN location_title ON title.title_id = " . $db->quote($myrow['id']);
+                                $record_url_result = $db->query($record_url_sql);
+
+                                if (isset($record_url_result[0]['location'])) {
+                                
+                                $arr[$i]['url'] = $record_url_result[0]['location'];
+                                } else {
+                                
+                                $arr[$i]['url'] = '';
+                                
+                                
+                                }
+                                
                             }
                             
                             break;
