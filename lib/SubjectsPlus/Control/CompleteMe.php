@@ -127,9 +127,17 @@ if (item.content_type != undefined) {
 		},
 		select: function(event, ui) {
  
-	location.href = startURL + ui.item.url;
+        if (ui.item.url.indexOf('http://') === 0) {
+            
+            location.href = ui.item.url;      
+            
+        } else {
+        
+	        location.href = startURL + ui.item.url;
+}   
 
-
+    
+    
                }
 	});
       console.log(parents);
