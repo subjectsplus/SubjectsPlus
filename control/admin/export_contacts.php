@@ -102,13 +102,17 @@ if ( $data == "" )
     $data = "\n(0) Records Found!\n";                        
 }
 
-header("Content-type: .xls application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=contacts.xls");
+header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Content-type:text/csv; charset=utf-8");
+header("Content-Disposition: attachment; filename=contacts.csv");
 header("Pragma: no-cache");
 header("Expires: 0");
+header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
 print "$header\n$data";
 
     
 
 exit; 
-?>
