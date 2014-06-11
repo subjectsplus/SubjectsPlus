@@ -84,7 +84,7 @@ class DbHandler {
             
             if ($description_search == 1) {
           // If you uncomment the next line, it will search description field
-          $condition1 = "WHERE (title LIKE " . $db->quote("%" . $qualifier . "%") . " OR description LIKE " . $db->quote("%" . $qualifier . "%");
+          $condition1 = "WHERE (title LIKE " . $db->quote("%" . $qualifier . "%") . " OR description LIKE " . $db->quote("%" . $qualifier . "%") . ")";
         }
 
         $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $qualifier + "%");
@@ -121,7 +121,7 @@ class DbHandler {
             $condition2
 		    AND eres_display = 'Y'
             $condition3
-		    ORDER BY newtitle";
+		   ) ORDER BY newtitle";
       
       //print $q2 . ";";
     

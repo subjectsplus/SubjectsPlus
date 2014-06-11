@@ -166,8 +166,9 @@ else
 
 if ($multi_tab === TRUE) {
     $lobjGuide->outputNavTabs('public');
-}
-?>
+}; ?>
+
+
 
 
 
@@ -246,7 +247,7 @@ jQuery(function() {
 
 <script>
 
-	   var startURL = '../guides/guide.php?subject_id=';
+	   var startURL = '/guide.php?subject_id=';
 	   var sp_path = document.URL.split('/')[3];
 
 	   jQuery('#sp_search').autocomplete({

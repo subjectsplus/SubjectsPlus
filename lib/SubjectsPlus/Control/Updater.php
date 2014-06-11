@@ -144,7 +144,10 @@ class Updater
 			  ON s.subject_id = t.subject_id
 			  WHERE t.subject_id IS NULL
 			  GROUP BY s.subject_id",
-			"INSERT INTO section (tab_id) SELECT tab_id FROM tab",
+			"INSERT INTO section (layout, tab_id) SELECT SUBSTR(s.extra,LOCATE( '\"', s.extra, LOCATE('\"maincol\":',s.extra)+10)+1,( LOCATE('\"',s.extra,LOCATE( '\"', s.extra, LOCATE('\"maincol\":',s.extra)+10)+1)
+			  - LOCATE( '\"', s.extra, LOCATE('\"maincol\":',s.extra)+10)) - 1), t.tab_id
+			  FROM tab t INNER JOIN subject s
+			  ON t.subject_id = s.subject_id",
 			"INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) SELECT ps.pluslet_id, s.section_id, ps.pcolumn, ps.prow
 			  FROM pluslet_subject as ps INNER JOIN tab as t
 			  ON ps.subject_id = t.subject_id
@@ -246,7 +249,8 @@ class Updater
 			ADD COLUMN `fax` VARCHAR(60) NULL DEFAULT NULL  AFTER `cell_phone` , ADD COLUMN `intercom` VARCHAR(30) NULL DEFAULT NULL  AFTER `fax`,
 			ADD COLUMN `lat_long` VARCHAR(75) NULL DEFAULT NULL  AFTER `intercom`",
 			"ALTER TABLE `staff_subject` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NOT NULL DEFAULT '0'",
-			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq` , DROP COLUMN `rss`,
+			"ALTER TABLE `subject` DROP COLUMN `rss`",
+			"ALTER TABLE `subject` DROP COLUMN `last_modified_by` , DROP COLUMN `created_by` , DROP COLUMN `use_faq` ,
 			ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`, ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`,
 			ADD COLUMN `keywords` VARCHAR(255) NULL DEFAULT NULL  AFTER `description`",
 			"ALTER TABLE `talkback` ADD COLUMN `tbtags` VARCHAR(255) NULL DEFAULT 'main'  AFTER `last_revised_by` , ADD COLUMN `cattags` VARCHAR(255) NULL DEFAULT NULL  AFTER `tbtags`",
@@ -294,6 +298,8 @@ class Updater
 		$this->lobj2AlterTables = array(
 			"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
 			"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
+			"ALTER IGNORE TABLE `subject` ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
+			"ALTER IGNORE TABLE `subject` ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
 			"ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
 			  ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
 			  ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
@@ -381,8 +387,14 @@ class Updater
 
 				foreach($this->lobj1AlterTables as $lstrAQuery)
 				{
-					if( $db->query( $lstrAQuery ) === FALSE )
+					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
+						//if rss doesn't exist, keep going. assume correct column
+						if( $db->errorInfo()[2] == 'Can\'t DROP \'rss\'; check that column/key exists' )
+						{
+							continue;
+						}
+
 						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
 						return FALSE;
 					}
@@ -416,8 +428,14 @@ class Updater
 
 				foreach($this->lobj2AlterTables as $lstrAQuery)
 				{
-					if( $db->query( $lstrAQuery ) === FALSE )
+					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
+						//if duplicate column, keep going. assume correct column
+						if( $db->errorInfo()[1] == '1060' )
+						{
+							continue;
+						}
+
 						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
 						return FALSE;
 					}
