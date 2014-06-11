@@ -140,20 +140,32 @@ function listGuides($search = "", $type="all") {
     $colour2 = "evenrow";
 
     $db = new Querier;
+    print "<table class=\"item_listing\" width=\"98%\">";
     foreach ($db->query($q) as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
         $guide_location = $guide_path . $myrow[0];
 
-        print "<div class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
-		 <div style=\"float: left; width: 83%;\"><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a></div>
-		 <div style=\"float: left; width: 15%;\">$myrow[2]</div>
-		 </div>\n";
+        print "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
+		 <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
+        <div class=\"list_bonus\"></div></td>
+        <td class=\"subject\">{$myrow[2]}</td>
+         </tr>\n";
         $row_count++; 
     }
-    
+    print "</table>";
 }
+
+$searchbox = '
+<div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
+    <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
+        <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
+        <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        <input type="submit" alt="Search" name="submitsearch" id="topsearch_button" class="pure-button pure-button-topsearch" value="Go">
+    </form>
+</div>
+';
 
 ////////////////////////////
 // Now we are finally read to display the page
@@ -162,34 +174,15 @@ function listGuides($search = "", $type="all") {
 include("includes/header.php");
 
 ?>
-<div class="pure-g-r">
-<div class="pure-u-2-3">
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Find Research Guides"); ?></div>
-        </div>
-        <div class="pluslet_body">
-            <p style="margin: 0;"><?php print _("Find the research guide of your dreams"); ?></p>
-            <form action="search.php"  method="post" autocomplete="on">
-<?php
-$input_box = new CompleteMe("quick_search", "search.php", "guide.php?subject=", "Quick Search", "home", 40);
-$input_box->displayBox();
-?>
-            </form>
-            <br />
-        </div>
-    </div>
-    <div class="pluslet" style="">
-        <div class="titlebar">
-            <div class="titlebar_text" style="width: 90%;"><?php print _("Browse Research Guides"); ?></div>
-        </div>
-        <div class="pluslet_body">
-            <div style="text-align: center;" id="letterhead">
-                <?php echo $tickboxes ?>
-            </div>
-            <?php listGuides($search, $view_type); ?>
-            </div>
-        </div>
+<div class="pure-g-r" id="guidesplash">
+<div class="pure-u-1-2">
+    <div id="letterhead"><?php echo $tickboxes ?></div>
+</div>
+<div class="pure-u-1-2"></div>
+<div class="pure-u-2-3" id="listguides">
+<br class="clear-both">
+<?php listGuides($search, $view_type); ?>
+
     </div>
 
     <div class="pure-u-1-3">

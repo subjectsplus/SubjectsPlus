@@ -1216,8 +1216,8 @@ function reduce($numerator,$denominator) {
  * @return string
  */
 
-function makePluslet ($title = "", $body = "", $bonus_styles = "") {
-  print "
+function makePluslet ($title = "", $body = "", $bonus_styles = "", $printout = TRUE) {
+  $pluslet = "
   <div class=\"pluslet $bonus_styles\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">$title</div>
@@ -1226,6 +1226,12 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "") {
     <div class=\"pluslet_body\">$body
     </div>
   </div>";
+
+  if ($printout == TRUE) {
+    print $pluslet;
+  } else {
+    return $pluslet;
+  }
 }
 
 /**
