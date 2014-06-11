@@ -192,6 +192,24 @@ img {
     color: #ccc;
 }
 
+#guide_nav_tools {
+    float: right !important; 
+    margin-bottom: 1em;
+}
+
+#guide_nav_tools img {
+    margin: 0 .25em;
+    opacity: .6;
+}
+
+#guide_nav_tools img:hover {
+    opacity: 1;
+}
+
+#sp_search {
+    margin-left: 1em;
+    margin-right: 2px;
+}
 
 
 /* This is for the pluslets */
@@ -927,6 +945,7 @@ div.video_thumb img {
 .wrapper-full {
     max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
 }
 
 /* these .ui class overrides tweak border and spacing of tab containers */

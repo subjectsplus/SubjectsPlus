@@ -157,9 +157,17 @@ else
 
 
 ?>
-
+<div id="guide_nav_tools">
+<form id="guide_search" class="pure-form"><!-- AddToAny BEGIN -->
+    <div class="a2a_kit"  style="float: left !important;">
+    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
+    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>
+    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
+</div>
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="Find in Guide" autocomplete="off"/></form></div>
 <div id="tabs" style="clear:both; position: relative;">
- <input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="Find in Guide" autocomplete="off"/>
 <?php
 
 // Only show tabs if there is more than one tab
