@@ -30,7 +30,6 @@ class Autocomplete {
     
   }
   
-  
   public function setSearchPage($search_page) {
     $this->search_page = $search_page;
   }
@@ -70,7 +69,8 @@ class Autocomplete {
     
     $db = new Querier;
     $search_param = $db->quote("%" . $this->param . "%");
-    
+    $subject_id = $db->quote( $this->subject_id );
+  
     switch ($this->collection) {
       case "home":
         $q = "SELECT subject_id AS 'id', subject AS 'matching_text',subject AS 'label', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id', '' as 'parent' FROM subject
@@ -119,7 +119,7 @@ class Autocomplete {
         
         break;
       case "guides":
-        $q = "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform FROM subject WHERE subject LIKE " . $search_param
+        $q = "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form' FROM subject WHERE subject LIKE " . $search_param
            . "OR shortform LIKE " . $search_param
            . "OR description LIKE " . $search_param
            . "OR keywords LIKE " . $search_param
@@ -128,7 +128,7 @@ class Autocomplete {
       
       
       case "guide":
-        $q = "SELECT p.pluslet_id as 'id',su.shortform as 'additional_text','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, s.tab_id AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
+        $q = "SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, s.tab_id AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
@@ -138,7 +138,8 @@ class Autocomplete {
                     INNER JOIN subject AS su
                     ON su.subject_id = t.subject_id
                     WHERE p.body LIKE " . $search_param   .
-             " AND t.subject_id = " . $db->quote( $this->subject_id );
+             " AND t.subject_id = " . $subject_id ;
+
         
         break;
       case "records":
@@ -230,6 +231,7 @@ class Autocomplete {
               $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['id'];
               
           }   else {
+
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'];   
           }
             
