@@ -159,7 +159,7 @@ else
 ?>
 
 <div id="tabs" style="clear:both; position: relative;">
-
+ <input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="Find in Guide" autocomplete="off"/>
 <?php
 
 // Only show tabs if there is more than one tab
@@ -253,7 +253,7 @@ jQuery(function() {
 	   jQuery('#sp_search').autocomplete({
 
 	     minLength	: 3,
-	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+	     source		: 'http://' + document.domain + "/" + sp_path + "/subjects/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
 
 	       event.preventDefault();
@@ -264,15 +264,20 @@ jQuery(function() {
 	     select: function(event, ui) {
 
 
+               
 	       event.preventDefault();
 	       jQuery(".find-guide-input").val(ui.item.label);
 
-	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().attr('id');
-console.log(in_tab);
-	       jQuery('#tabs').tabs('select', in_tab);
+	       var in_tab = $('.pluslet-' + ui.item.id).parent().parent().parent().attr('id');
+               in_tab = in_tab.split('-');
+                
 
-	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
-	       jQuery('.pluslet-'+ ui.item.value).scrollTo();
+               console.log(in_tab);
+          
+	       jQuery('#tabs').tabs({ active: in_tab[1] });
+
+	       jQuery('.pluslet-'+ ui.item.id).effect('pulsate');
+	       jQuery('.pluslet-'+ ui.item.id).scrollTo();
              }
 	   });
 
