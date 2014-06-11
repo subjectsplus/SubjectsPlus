@@ -778,15 +778,13 @@ form#tellus p {
     position: relative;
     float: left;
     display: inline-block;
-    background-image: url(../images/icons/comment_box.png);
+    background-image: url(../../images/icons/comment_box.png);
     width: 39px;
     height: 34px;
     margin-right: 1em;
     text-align: center;
     font-size: 1.4em;
     color: #fff;
-
-
 }
 .tellus_comment {
     background-color: #fff;

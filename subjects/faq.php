@@ -97,8 +97,11 @@ $q2 = "select distinct s.subject_id, s.subject
 
 $oursubs = $db->query($q2);
 
-$guideMe = new Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
-$guide_string = $guideMe->display();
+if ($oursubs) {
+    $guideMe = new Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
+    $guide_string = $guideMe->display();
+}
+
 
 /* Set local variables */
 $suggestion_text = '';
@@ -263,17 +266,6 @@ foreach ($collections_result as $myrow1) {
     $coll_items .= "<li><a href=\"faq.php?coll_id=$coll_id\">$coll_name</a></li>";
 }
 
-//////////////////////
-// To Respond or Not
-// Setup our columns
-if ($is_responsive == TRUE) {
-  $ldiv = "class=\"span8\"";
-  $rdiv = "class=\"span4\"";
-} else {
-  $ldiv = "id=\"leftcol\"";
-  $rdiv = "id=\"rightcol\"";  
-}
-
 ?>
 
 <div class="pure-g-r">
@@ -316,7 +308,10 @@ print $results; ?>
             </form>
         </div>
     </div>
-    <br />
+
+    <?php 
+    if (isset($guide_string)) { ?>
+
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Browse FAQs by Subject"); ?></div>
@@ -328,7 +323,10 @@ print $results; ?>
             </form>
         </div>
     </div>
-    <br />
+
+
+    <?php } ?>
+
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Browse FAQs by Collection"); ?></div>

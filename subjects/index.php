@@ -140,21 +140,23 @@ function listGuides($search = "", $type="all") {
     $colour2 = "evenrow";
 
     $db = new Querier;
-    print "<table class=\"item_listing\" width=\"98%\">";
+    $list_guides = "<table class=\"item_listing\" width=\"98%\">";
     foreach ($db->query($q) as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
         $guide_location = $guide_path . $myrow[0];
 
-        print "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
+        $list_guides .= "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
 		 <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
         <div class=\"list_bonus\"></div></td>
         <td class=\"subject\">{$myrow[2]}</td>
          </tr>\n";
         $row_count++; 
     }
-    print "</table>";
+    $list_guides .= "</table>";
+
+    return $list_guides;
 }
 
 $searchbox = '
@@ -167,25 +169,38 @@ $searchbox = '
 </div>
 ';
 
+// Add header now, because we need a value ($v2styles) from it
+
+include("includes/header.php");
+
+// put together our main result display
+
+$guide_results = listGuides($search, $view_type);
+
+if (isset ($v2styles) && $v2styles == 1) {
+  $our_results = "<div id=\"letterhead\">$tickboxes</div>
+  $guide_results";
+
+  $layout = makePluslet("", $our_results, "","",FALSE);
+
+} else {
+  print "version 3 styles not set up yet";
+}
+
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
-
 ?>
 <div class="pure-g-r" id="guidesplash">
-<div class="pure-u-1-2">
-    <div id="letterhead"><?php echo $tickboxes ?></div>
-</div>
-<div class="pure-u-1-2"></div>
 <div class="pure-u-2-3" id="listguides">
-<br class="clear-both">
-<?php listGuides($search, $view_type); ?>
+<?php print $layout; ?>
 
     </div>
 
     <div class="pure-u-1-3">
+
+    <?php print makePluslet(_("Find Guides"), "Put the search box here", "","",FALSE); ?>
         <div class="pluslet">
             <div class="titlebar">
                 <div class="titlebar_text"><?php print _("Newest Guides"); ?></div>
