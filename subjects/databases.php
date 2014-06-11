@@ -86,7 +86,7 @@ if (isset($_POST["searchterm"])) {
   $description_search = 1; // if you want to search descriptions, too, set to 1; otherwise to 0
 }
 
-$alphabet = getLetters("databases", $_GET["letter"], "", FALSE);
+$alphabet = getLetters("databases", $_GET["letter"], "", TRUE);
 
 
 // Get our newest databases
@@ -152,30 +152,31 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-// Legend //
-// <img src=\"$IconPath/lock_unlock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Unrestricted Resource\"> = Free Resource <br />\n
+include("includes/header.php");
 
-$legend = "<p class=\"smaller\">\n<img src=\"$IconPath/lock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Restricted Resource\"> =  " . _("Campus Faculty, Staff &amp; Students only") . "<br />\n
-<img src=\"$IconPath/help.gif\" width=\"13\" height=\"13\" border=\"0\" alt=\"Help guide\"> = " . _("Click for help guide (.pdf or .html)") . "<br />\n
-<img src=\"$IconPath/article_linker.gif\" width=\"30\" height=\"13\" border=\"0\" alt=\"ArticleLinker enabled\" /> = " . _("OpenURL Enabled") . "\n<br /><br />
-<img src=\"$IconPath/full_text.gif\" width=\"13\" height=\"13\" border=\"0\" alt=\"Some full text available\"> = " . _("Some full text") . "<br />\n
-<img src=\"$IconPath/camera.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes images\"> = " . _("Images") . "<br />\n
-<img src=\"$IconPath/television.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes video\"> = " . _("Video files") . "<br />\n
-<img src=\"$IconPath/sound.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes audio\"> = " . _("Audio files") . "<br />\n
-</p>\n";
+// Our version 2 vs version 3 styles choice
+
+if (isset ($v2styles) && $v2styles == 1) {
+  $db_results = "<form class=\"pure-form\">$alphabet</form>
+  $display";
+
+  $layout = makePluslet("", $db_results, "","",FALSE);
+} else {
+  print "version 3 styles not set up yet";
+}
+
 
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
 ?>
 
 <div class="pure-g-r">
-<div class="pure-u-1"><form class="pure-form"><?php print $alphabet; ?></form></div>
+<div class="pure-u-1 database-page-header"><?php //print $our_letter_nav; ?></div>
 <div class="pure-u-2-3">
 
-      <?php print $display; ?>
+      <?php print $layout; ?>
 
 </div>
 <div class="pure-u-1-3 database-page">
@@ -207,7 +208,7 @@ include("includes/header.php");
     <div class="titlebar">
       <div class="titlebar_text"><?php print _("Key to Icons"); ?></div>
     </div>
-    <div class="pluslet_body"> <?php print $legend; ?> </div>
+    <div class="pluslet_body"> <?php global $all_ctags; print showIcons($all_ctags, 1); ?></div>
   </div>
   <br />
 

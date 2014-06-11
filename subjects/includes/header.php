@@ -8,15 +8,12 @@
 <meta name="Keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>" />
 <meta name="Author" content="" />
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure.css">
-<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/v3.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/default.css">
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700|Roboto:400,700|Lato:400,700|Oswald|Raleway:400,700|Ubuntu:400,700' rel='stylesheet' type='text/css'>
 <!-- <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/print.css"> -->
 
 <?php // Load our jQuery libraries + some css
 if (isset($use_jquery)) { print generatejQuery($use_jquery);
-?>
-
-<?php
 }
 
 if (!isset ($noheadersearch)) { 
@@ -32,7 +29,8 @@ if (!isset ($noheadersearch)) {
     $search_form = '';
 }
 
-
+// We've got a variable for those who wish to keep the old styles
+$v2styles = TRUE;
 ?>
 </head>
 
@@ -41,12 +39,15 @@ if (!isset ($noheadersearch)) {
 <div id="header"> 
     <div id="header_inner_wrap">
     <div class="pure-g-r">
-        <div class="pure-u-3-4">
+        <div class="pure-u-1-5">
             <img src="../assets/images/public/logo.png" alt="Home Page" />
+            
         </div>
-
-        <div class="pure-u-1-4">
-        <?php print $search_form; ?>
+        <div class="pure-u-3-5">
+            <?php if (isset($v2styles)) { print "<h1>$page_title</h1>"; } ?>
+        </div>
+        <div class="pure-u-1-5">
+            <?php if (isset($show_header_search)) { print $search_form; } ?>
         </div>
 
     </div>
@@ -58,7 +59,7 @@ if (!isset ($noheadersearch)) {
 <div class="pure-g-r">
     <div class="wrapper-full">
         <div class="pure-u-1">
-        <h1><?php print $page_title; ?></h1>
+        <?php if (!isset($v2styles)) { print "<h1>$page_title</h1>"; } ?>
         <div id="content_roof"></div> <!-- end content_roof -->
         <div id="shadowkiller"></div>
         <div id="body_inner_wrap">

@@ -339,6 +339,15 @@ overflow: auto;
     margin-left: 0px;
 }
 
+
+#listguides {
+    font-size: 1.3em;
+}
+
+#listguides td.subject {
+    font-size: .8em;
+    color: #ccc;
+}
 /* Display for the "all items" pluslet */
 
 .leftcolheader {
@@ -360,7 +369,8 @@ overflow: auto;
     line-height: 12pt;
 }
 
-/* Databases Page */
+
+/* Databases Page, Guides listing page */
 
 #letterhead {
     margin: .3em 1em;
@@ -385,6 +395,7 @@ overflow: auto;
     padding: .4em .6em;
     text-decoration: none;
     margin: 0px;
+    display: inline;
 
 }
 
@@ -510,6 +521,12 @@ table.item_listing td, div.item_listing p {
     padding: .5em 0 .5em .5em;
     font-size: 1.3em;
     margin: 0;
+    background-color: #ECF0F1;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+table.item_listing td:hover {
+    background-color: #fff;
 }
 table.item_listing th {
     padding: .5em 0 .5em .5em;
