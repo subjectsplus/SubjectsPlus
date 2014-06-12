@@ -10,7 +10,7 @@
  */
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\StaffDisplay;
-
+use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
     
 $page_title = "Library Staff";
@@ -74,9 +74,15 @@ include("includes/header.php");
 <div class="pure-u-1-5">
     <div class="pluslet">
         <div class="titlebar">
-            <div class="titlebar_text">Other Information</div>
+            <div class="titlebar_text"><?php print _("Find People"); ?></div>
         </div>
-        <div class="pluslet_body"> Could go right here.</div>
+        <div class="pluslet_body">
+          <?php
+          $input_box = new CompleteMe("quick_search", "staff.php", "", "Quick Search", "admin", 20);
+          $input_box->displayBox();
+          ?>
+
+        </div>
     </div>
 
     <br />

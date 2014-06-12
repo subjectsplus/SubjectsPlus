@@ -166,7 +166,7 @@ else
 </div>
     <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
     <!-- AddToAny END -->
-<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="Find in Guide" autocomplete="off"/></form></div>
+<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="<?php print _("Find in Guide"); ?>" autocomplete="off"/></form></div>
 <div id="tabs" style="clear:both; position: relative;">
 <?php
 
