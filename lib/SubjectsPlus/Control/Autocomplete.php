@@ -252,7 +252,7 @@ class Autocomplete {
 
           case "Pluslet":
             if ($this->getSearchPage() == "control") {
-              $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['additional_text'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+              $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['subject_id'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['value'] = $myrow['id'];
 
               $arr[$i]['label'] = $myrow['label'];
