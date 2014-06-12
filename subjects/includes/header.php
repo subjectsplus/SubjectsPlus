@@ -40,7 +40,7 @@ $v2styles = TRUE;
     <div id="header_inner_wrap">
     <div class="pure-g-r">
         <div class="pure-u-1-5">
-            <img src="../assets/images/public/logo.png" alt="Home Page" />
+            <img src="<?php print $AssetPath; ?>/images/public/logo.png" alt="Home Page" />
             
         </div>
         <div class="pure-u-4-5">

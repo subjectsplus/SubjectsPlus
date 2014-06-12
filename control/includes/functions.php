@@ -869,6 +869,7 @@ function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE)
   if (is_array($table)) {
     $letterz = $table;
     $showsearch = 0;
+    $azRange = $table;
   } else {
 
     $shownew = 1;
