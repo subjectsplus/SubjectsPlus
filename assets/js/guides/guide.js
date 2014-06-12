@@ -402,7 +402,7 @@ function setupSaveButton( lstrSelector )
 		    console.log(lstrTitle);
 
 		} else {
-		    
+
 		    		}
 		//Div Selector
 		var lstrDiv = "#pluslet-" + lintID;
@@ -1001,7 +1001,7 @@ function setupMiscLiveQueries()
     ////////////////////
     // Make titlebar options box clickable
     ///////////////////
-    jQuery('a[id*=settings-]').on('click', function(event) {
+    jQuery(document).on('click', 'a[id*=settings-]', function(event) {
 
         jQuery(this).parent().next('.box_settings').toggle('slow');
 
