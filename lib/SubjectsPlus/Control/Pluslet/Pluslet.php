@@ -133,7 +133,8 @@ class Pluslet {
         // we use $this->_visible_id to make sure this is only on the frontend
 
         if (($hide_titlebar == 1 && $this->_visible_id == "" || $this->_title == "" && $this->_visible_id == "")) {
-            $this->_pluslet .= "<div class=\"pluslet_simple no_overflow\">" . htmlspecialchars_decode($this->_body);
+            $this->_pluslet .= "
+            <div class=\"pluslet_simple no_overflow\"><a name=\"box-" . $this->_pluslet_id . "\"></a>" . htmlspecialchars_decode($this->_body);
             // this div closed outside of if/else
         } else {
 
