@@ -295,7 +295,7 @@ print $results; ?>
             <div class="titlebar_text"><?php print _("Search FAQs"); ?></div>
         </div>
         <div class="pluslet_body" style="padding-right: 0; margin-right: 0;">
-            <form action="faq.php" method="post" autocomplete="on">
+            <form action="faq.php" method="post" autocomplete="on" class="pure-form">
                 <p>
                     <?php
                     $input_box = new CompleteMe("quick_search", "faq.php", "faq.php?faq_id=", "Quick Search", "faq", 40);
@@ -303,8 +303,6 @@ print $results; ?>
                     ?>
 
                     <br />
-                    <input type="checkbox" name="showsuggest" checked="checked" id="suggestornot" />
-                    show suggestions </p>
             </form>
         </div>
     </div>

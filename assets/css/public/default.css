@@ -78,7 +78,7 @@ h1 {
     font-size: 1.8em;
     font-weight: bold;
     padding: 0.5em 0 1em;
-  /*  text-shadow: 0 2px 3px #CCCCCC; */
+    text-shadow: 0 2px 3px #CCCCCC;
     margin-left: 2em;
 }
 

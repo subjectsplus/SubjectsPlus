@@ -183,27 +183,25 @@ if (isset ($v2styles) && $v2styles == 1) {
   <!-- start pluslet -->
   <div class="pluslet">
     <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Newest Databases"); ?></div>
+      <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
     </div>
-    <div class="pluslet_body"> <?php print $newlist; ?> </div>
+    <div class="pluslet_body">
+          <?php
+          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", 30);
+          $input_box->displayBox();
+          ?>
+    </div>
   </div>
   <!-- end pluslet -->
   <!-- start pluslet -->
   <div class="pluslet">
     <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
+      <div class="titlebar_text"><?php print _("Newest Databases"); ?></div>
     </div>
-    <div class="pluslet_body">
-      <form action="databases.php" method="post" autocomplete="on">
-        <p>
-          <?php
-          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", 30);
-          $input_box->displayBox();
-          ?>
-        </p>
-      </form></div>
+    <div class="pluslet_body"> <?php print $newlist; ?> </div>
   </div>
   <!-- end pluslet -->
+
   <div class="pluslet">
     <div class="titlebar">
       <div class="titlebar_text"><?php print _("Key to Icons"); ?></div>
