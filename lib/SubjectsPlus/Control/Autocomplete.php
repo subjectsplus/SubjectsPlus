@@ -128,7 +128,7 @@ class Autocomplete {
 
 
       case "guide":
-        $q = "SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, s.tab_id AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
+        $q = "SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
@@ -252,13 +252,14 @@ class Autocomplete {
 
           case "Pluslet":
             if ($this->getSearchPage() == "control") {
-              $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['subject_id'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
-              $arr[$i]['value'] = $myrow['id'];
+              $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+              $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 
               $arr[$i]['label'] = $myrow['label'];
           } else {
 
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+          	  $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['tab_index'] = $myrow['additional_id'];
 
           }

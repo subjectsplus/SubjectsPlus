@@ -180,7 +180,7 @@ if ($multi_tab === TRUE) {
 
 
 
-<?php 
+<?php
 
 $lobjGuide->outputTabs('public');
 
@@ -270,23 +270,17 @@ jQuery(function() {
 
 	     },
 	     select: function(event, ui) {
+	     	var tab_id = ui.item.hash.split('-')[1];
+	     	var box_id = ui.item.hash.split('-')[2];
+	     	var selected_box = ".pluslet-" + box_id;
 
+	     	$('#tabs').tabs('select', tab_id);
 
-               
-	       event.preventDefault();
-	       jQuery(".find-guide-input").val(ui.item.label);
-
-	       var in_tab = $('.pluslet-' + ui.item.id).parent().parent().parent().attr('id');
-               in_tab = in_tab.split('-');
-                
-
-               console.log(in_tab);
-          
-	       jQuery('#tabs').tabs({ active: in_tab[1] });
-
-	       jQuery('.pluslet-'+ ui.item.id).effect('shake', {times: 5});
-	       jQuery('.pluslet-'+ ui.item.id).scrollTo();
-             }
+	     	jQuery(selected_box).effect("pulsate", {
+	     		times:1
+	     	}, 2000);
+	     	window.location.hash = 'box-' + box_id;
+         }
 	   });
 
 

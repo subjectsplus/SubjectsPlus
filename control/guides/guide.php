@@ -249,9 +249,9 @@ ob_end_flush();
 	 reLayout(sec_id, lw, mw, sw);
        } catch (e) {
 
-	 
 
-       }   
+
+       }
 
 
      });
@@ -652,7 +652,7 @@ ob_end_flush();
      refreshFeeds();
    }catch(e) {
 
-     
+
    }
 
 
@@ -694,20 +694,18 @@ ob_end_flush();
 
 	     },
 	     select: function(event, ui) {
+	     	var tab_id = ui.item.hash.split('-')[1];
+	     	var box_id = ui.item.hash.split('-')[2];
+	     	var selected_box = ".pluslet-" + box_id;
 
-	       
-	       event.preventDefault();
-	       jQuery(".find-guide-input").val(ui.item.label);
+	     	$('#tabs').tabs('select', tab_id);
 
-	       var in_tab = $('.pluslet-'+ ui.item.value).parent().parent().parent().parent().attr('id');
+	     	jQuery(selected_box).effect("pulsate", {
+	     		times:1
+	     	}, 2000);
 
-	       
-
-	       jQuery('#tabs').tabs('select', in_tab);
-
-	       jQuery('.pluslet-'+ ui.item.value).effect('pulsate');
-	       jQuery('.pluslet-'+ ui.item.value).scrollTo();
-             }
+	     	window.location.hash = 'box-' + box_id;
+         }
 	   });
 
 
