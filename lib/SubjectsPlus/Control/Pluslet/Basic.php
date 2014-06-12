@@ -46,14 +46,14 @@
             if ($this->_pluslet_id) {
                 $this->_pluslet_id_field = "pluslet-" . $this->_pluslet_id;
                 $this->_pluslet_name_field = "";
-                $this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
+                $this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
                 $this_instance = "pluslet-update-body-$this->_pluslet_id";
             } else {
                 $new_id = rand(10000, 100000);
                 $this->_pluslet_bonus_classes = "unsortable";
                 $this->_pluslet_id_field = $new_id;
                 $this->_pluslet_name_field = "new-pluslet-Basic";
-                $this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
+                $this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
                 $this_instance = "pluslet-new-body-$new_id";
             }
 

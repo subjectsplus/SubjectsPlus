@@ -54,7 +54,7 @@ class Pluslet {
         $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
-     
+
         $plusletArray = $querier->query($q1);
 
         $this->_debug .= "<p>Pluslet query: $q1";
@@ -137,7 +137,7 @@ class Pluslet {
             // this div closed outside of if/else
         } else {
 
-    
+
 
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
 			<a name=\"box-" . $this->_pluslet_id . "\"></a>
@@ -147,11 +147,11 @@ class Pluslet {
 
         if( $this->_visible_id != '' ) {
         		$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
-	}            
+	}
 
 
         	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
-        
+
     <div class=\"titlebar_options\">$this->_icons</div>";
 
            if ($this->_visible_id != "") {
@@ -506,14 +506,14 @@ class Pluslet {
 			if ($this->_pluslet_id) {
 				$this->_pluslet_id_field = "pluslet-" . $this->_pluslet_id;
 				$this->_pluslet_name_field = "";
-				$this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
+				$this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
 				$this_instance = "pluslet-update-body-$this->_pluslet_id";
 			} else {
 				$new_id = rand(10000, 100000);
 				$this->_pluslet_bonus_classes = "unsortable";
 				$this->_pluslet_id_field = $new_id;
 				$this->_pluslet_name_field = "new-pluslet-HTML5Video";
-				$this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
+				$this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
 				$this_instance = "pluslet-new-body-$new_id";
 			}
 

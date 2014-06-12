@@ -34,7 +34,7 @@ if (isset($_POST['shortform'])) {
 } elseif ($_POST["search_terms"]) {
 
 	$q = "SELECT distinct p.pluslet_id, LEFT(p.title, 75), p.type FROM pluslet p
-	WHERE p.title LIKE '%" . addslashes($_POST["search_terms"]) .  "%' AND p.type != 'Special'
+	WHERE (p.title LIKE '%" . addslashes($_POST["search_terms"]) .  "%' OR p.body LIKE '%" . addslashes($_POST["search_terms"]) .  "%')AND p.type != 'Special'
 	ORDER BY p.title
 	";
 
@@ -82,6 +82,9 @@ if (count($r) != 0) {
 					$add_info = "<span style=\"font-size: 10px;\">(No Guide)</span>";
 				}
 			}
+		//add no title label if empty
+		$myrow[1] = empty($myrow[1]) ? '[no title]' : $myrow[1];
+
 		$results .= "<div style=\"background-color:$row_colour ; padding: 2px;\"><img src=\"$IconPath/list-add.png\" name=\"add-$myrow[0]-$myrow[2]\" border=\"0\" alt=\"add\" /> $myrow[1] $add_info</div>";
 
 		//$viewer .= "<div id=\"show-$myrow[0]\" style=\"display: none;\">$myrow[2]</div>";
