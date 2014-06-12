@@ -284,7 +284,7 @@ jQuery(function() {
           
 	       jQuery('#tabs').tabs({ active: in_tab[1] });
 
-	       jQuery('.pluslet-'+ ui.item.id).effect('pulsate');
+	       jQuery('.pluslet-'+ ui.item.id).effect('shake', {times: 5});
 	       jQuery('.pluslet-'+ ui.item.id).scrollTo();
              }
 	   });

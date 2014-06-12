@@ -364,7 +364,7 @@ class StaffDisplay {
 
           $items .= "
 		<tr class=\"zebra $row_colour\">
-			<td  class=\"toggleLink\" style=\"width: 25%\">";
+			<td  class=\"staff-name-row\">";
           
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\" class=\"no_link\">$full_name</a>";
@@ -373,9 +373,9 @@ class StaffDisplay {
           }
           
           $items .= "</td>
-			<td style=\"width: 35%\">$title $assoc_subjects</td>
-			<td style=\"width: 15%\">$tel &nbsp;</td>
-			<td style=\"width: 25%\"><a href=\"mailto:$email\">$email</a></td>
+			<td class=\"staff-title-row\">$title $assoc_subjects</td>
+			<td  class=\"staff-tel-row\">$tel &nbsp;</td>
+			<td  class=\"staff-email-row\"><a href=\"mailto:$email\">$email</a></td>
 		</tr>";
 
           $row_count++;

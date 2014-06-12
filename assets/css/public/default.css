@@ -229,7 +229,7 @@ img {
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     padding: .5em 1em;
-    margin-bottom: 1em;
+    margin: 1em;
 }
 .pluslet_simple ul, ol {
     margin: 1em;
