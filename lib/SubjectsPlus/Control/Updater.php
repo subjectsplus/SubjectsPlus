@@ -465,6 +465,14 @@ class Updater
 
 				<p><?php echo _( "SubjectsPlus update to 3.0 complete. Please log in." ); ?></p>
 				<br />
+				<p><?php echo _( "If you have any <strong>custom pluslets</strong>. please follow the following steps to successfully migrate over." ); ?></p>
+				<p><?php echo _( "Move custom pluslets from &#39;/control/includes/classes&#39; to &#39;/lib/SubjectsPlus/Control/Pluslet&#39;" ); ?></p>
+				<p><?php echo _( "Rename files to remove &#39;sp_Pluslet_&#39;. For example, rename &#39;sp_Pluslet_111.php&#39; to &#39;111.php&#39;" ); ?></p>
+				<p><?php echo _( "Edit each file to add the following lines to the top of the file:" ); ?></p>
+				<p><strong><?php echo _( "namespace SubjectsPlus\Control;" ); ?></strong></p>
+				<p><strong><?php echo _( "require_once(&quot;Pluslet.php&quot;);" ); ?></strong></p>
+				<p><?php echo _( "Edit each file to remove &#39;sp_&#39; from class declaration. For example, edit &#39;class sp_Pluslet_6 extends sp_Pluslet {&#39; to &#39;class Pluslet_6 extends Pluslet {&#39;" ); ?></p>
+				<br />
 				<p><a href="login.php"><?php echo _( "Log In" ); ?></a></p>
 				<br />
 				<em style="font-style: italic; font-size: smaller;"><?php echo _( "The first time you log in after update, you must use entire email address for user (e.g. admin@sp.edu)." ); ?></em>
