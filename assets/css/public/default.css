@@ -1015,3 +1015,15 @@ width:55px;
 .float-left {
     float:left;
 }
+
+.ts-blackwhite
+{
+	background-color:black;
+	color:white;
+}
+
+.ts-whiteblack
+{
+	background-color:white;
+	color:black;
+}

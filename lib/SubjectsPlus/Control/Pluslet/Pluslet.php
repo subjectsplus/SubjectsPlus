@@ -137,7 +137,7 @@ class Pluslet {
             // this div closed outside of if/else
         } else {
 
-
+			$this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
 
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
 			<a name=\"box-" . $this->_pluslet_id . "\"></a>

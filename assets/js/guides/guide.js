@@ -384,6 +384,8 @@ function setupSaveButton( lstrSelector )
 
     function preparePluslets( lstrType, lintID, lobjThis )
     {
+    	var lboolSettingsOnly = false;
+
 	//based on type set variables
 	switch( lstrType.toLowerCase() )
 	{
@@ -397,7 +399,7 @@ function setupSaveButton( lstrSelector )
 		    b = jQuery(".pluslet-" + lintID).find('.titlebar_text').clone();
 			b.children().remove();
 			lstrTitle = b.text().trim();
-			var lboolSettingsOnly = true;
+			lboolSettingsOnly = true;
 		}
 
 		//Div Selector
@@ -452,7 +454,7 @@ function setupSaveButton( lstrSelector )
 	// Loop through the box types
 	switch (item_type[2]) {
 	case "Basic":
-            if (typeof CKEDITOR != 'undefined') {
+            if (typeof CKEDITOR != 'undefined' && !lboolSettingsOnly) {
 
                 var pbody = addslashes(CKEDITOR.instances[lstrInstance].getData());
 
@@ -1011,6 +1013,14 @@ function setupMiscLiveQueries()
 	// on select change show save guide
 	///////////////////
 	jQuery(document).on('change', 'select[id^=titlebar-styling]', function(event) {
+		var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
+
+		if( jQuery('#' + pluslet_id).attr('name').indexOf('modified-pluslet-') == -1)
+		{
+			jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-' + jQuery('#' + pluslet_id).attr('name'));
+		}
+
+		jQuery("#response").hide();
 		jQuery("#save_guide").fadeIn();
 	});
 
@@ -1021,9 +1031,12 @@ function setupMiscLiveQueries()
     jQuery(document).on('change', '.pure-checkbox', function() {
 
         var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
-        console.log(pluslet_id);
-        jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-Basic');
-        console.log(jQuery(pluslet_id));
+
+    	if( jQuery('#' + pluslet_id).attr('name').indexOf('modified-pluslet-') == -1)
+    	{
+	    	jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-' + jQuery('#' + pluslet_id).attr('name'));
+    	}
+
     	jQuery("#response").hide();
         jQuery("#save_guide").fadeIn();
 
