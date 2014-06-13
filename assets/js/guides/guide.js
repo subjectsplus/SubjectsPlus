@@ -393,17 +393,13 @@ function setupSaveButton( lstrSelector )
 		var lstrInstance = "pluslet-update-body-" + lintID;
 		//Title of item
 		var lstrTitle = addslashes(jQuery("#pluslet-update-title-" + lintID).val());
-		console.log(lstrTitle);
-		console.log('ahhh!');
 		if (lstrTitle === "undefined") {
-		    console.log(lstrTitle);
-		    console.log('nooo!');
-		    lstrTitle =  jQuery(".pluslet-" + lintID).find('.titlebar_text').html();
-		    console.log(lstrTitle);
+		    b = jQuery(".pluslet-" + lintID).find('.titlebar_text').clone();
+			b.children().remove();
+			lstrTitle = b.text().trim();
+			var lboolSettingsOnly = true;
+		}
 
-		} else {
-
-		    		}
 		//Div Selector
 		var lstrDiv = "#pluslet-" + lintID;
 		//depending update_id
@@ -579,6 +575,12 @@ function setupSaveButton( lstrSelector )
 		var ourflag = 'update';
 		var isclone = 0;
 	    }
+
+		//only settings update
+		if(lboolSettingsOnly)
+		{
+			ourflag = 'settings';
+		}
 	}else
 	{
 	    var ourflag = 'insert';
@@ -618,7 +620,7 @@ function setupSaveButton( lstrSelector )
 		jQuery(lstrDiv).html(response);
 
 		// check if it's an insert or an update, and name div accordingly
-		if (ourflag == "update" || isclone == 1) {
+		if (ourflag == "update" || ourflag == "settings" || isclone == 1) {
 		    var this_div = '#pluslet-'+lintID;
 		} else {
 		    var this_div = '#'+lintID;
@@ -998,17 +1000,25 @@ function setupMiscLiveQueries()
 
     });
 
-    ////////////////////
-    // Make titlebar options box clickable
-    ///////////////////
+	////////////////////
+	// box-settings bind to show
+	///////////////////
     jQuery(document).on('click', 'a[id*=settings-]', function(event) {
-
         jQuery(this).parent().next('.box_settings').toggle('slow');
-
-
     });
 
-    jQuery('.pure-checkbox').on('change',  function() {
+	////////////////////
+	// on select change show save guide
+	///////////////////
+	jQuery(document).on('change', 'select[id^=titlebar-styling]', function(event) {
+		jQuery("#save_guide").fadeIn();
+	});
+
+
+	////////////////////
+    // Make titlebar options box clickable
+    ///////////////////
+    jQuery(document).on('change', '.pure-checkbox', function() {
 
         var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
         console.log(pluslet_id);

@@ -122,6 +122,16 @@ switch ($_POST["flag"]) {
 
         break;
 
+    case "settings":
+    	$this_id = modifyDB($_POST["update_id"], "settings");
+
+    	$obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
+    	//global $obj;
+    	$record = new $obj($_POST["update_id"], "", $our_subject_id);
+    	print $record->output("view", "admin");
+
+    	break;
+
     case "delete":
     	$db = new Querier();
 
@@ -165,10 +175,10 @@ function modifyDB($id, $type) {
       print_r($_POST);
       print "</pre>"; */
     // Uses the data from the POST vars to update
-    $pluslet_title = $_POST["pluslet_title"];
-    $pluslet_body = $_POST["pluslet_body"];
-    $pluslet_type = $_POST["item_type"];
-    $pluslet_extra = $_POST["special"];
+    $pluslet_title = isset($_POST["pluslet_title"]) ? $_POST["pluslet_title"] : '';
+    $pluslet_body = isset($_POST["pluslet_body"])? $_POST["pluslet_body"] : '';
+    $pluslet_type = isset($_POST["item_type"]) ? $_POST["item_type"] : '';
+    $pluslet_extra = isset($_POST["special"]) ? $_POST["special"] : '';
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
     $pluslet_supress_body =  $_POST["boxsetting_suppress_body"];
@@ -235,6 +245,22 @@ function modifyDB($id, $type) {
                 $id = false;
             }
             break;
+        case "settings":
+        	// update pluslet table for only settings
+        	$q = "UPDATE pluslet SET
+                hide_titlebar  = '$pluslet_hide_titlebar',
+                collapse_body = '$pluslet_collapse_body',
+                suppress_body = '$pluslet_supress_body',
+                titlebar_styling = '$pluslet_titlebar_styling'
+                WHERE pluslet_id ='$id'";
+        	$r = $db->exec($q);
+        	//print $q;
+        	if ($r === FALSE) {
+        		print "<p>There was a problem with your insert:</p>";
+        		print "<p>$q</p>";
+        		$id = false;
+        	}
+        	break;
         case "delete":
             $q = "DELETE FROM pluslets WHERE pluslet_id = '$id'";
             $r = $db->query($q);

@@ -21,7 +21,7 @@ a img { border: none; }
 
 /* jQuery UI overrides */
 .ui-widget {
-    
+
        font-family: sans-serif;
 }
 
@@ -193,7 +193,7 @@ img {
 }
 
 #guide_nav_tools {
-    float: right !important; 
+    float: right !important;
     margin-bottom: 1em;
 }
 
@@ -288,7 +288,7 @@ img {
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 0px;
-    padding: 5px 10px 0px;
+    padding: 5px 10px 5px;
     border:  none;
     color: #fff;
     /*color: #000;*/
@@ -296,7 +296,7 @@ img {
 
 }
 
-.titlebar_options { 
+.titlebar_options {
 
     display: none;
 
@@ -390,7 +390,7 @@ overflow: auto;
     margin-left: -5px;
     margin-right: -5px;
     background-color: #CFDAE6;
-}				
+}
 
 
 .note {
@@ -561,7 +561,7 @@ table.item_listing a:hover {
     font-size: 0.8em !important;
 }
 
-.list_bonus img { 
+.list_bonus img {
     background-color: #79A4D4;
     border-radius: 3px;
     height: 15px;
@@ -625,7 +625,7 @@ table.item_listing a:hover {
 	margin:1em;
 }
 
-/* The next few determine how peoples' names and pix appear in staff.php & staff_details.php 
+/* The next few determine how peoples' names and pix appear in staff.php & staff_details.php
 staff_photo2 is in the sidebar of the subject results page (which requires a float)*/
 
 .staff_photo {
@@ -702,7 +702,7 @@ h2.dept_header {
 #listing a:hover {
     text-decoration: underline;
 
-} 
+}
 
 #listing a   {
     text-decoration: none;
@@ -856,10 +856,10 @@ ul.ui-autocomplete li a{
 
 .vid_container {
   clear: both;
-  float: left; 
-  margin-right: 25px; 
-  margin-bottom: 2em; 
-  background-color: #333; 
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 2em;
+  background-color: #333;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -870,10 +870,10 @@ ul.ui-autocomplete li a{
 
 
 div.vid_container img {
-  float: left; 
-  margin-right: 20px; 
-  margin-bottom: 0px; 
-  background-color: #4F4E4E; 
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  background-color: #4F4E4E;
   width: 150px;
   cursor: pointer;
   list-style: none outside none;
@@ -911,10 +911,10 @@ div.vid_container a {
 div.vid_container p.runtime {margin-top: -10px; font-size: smaller;}
 
 .video_thumb {
-  float: left; 
-  margin-right: 25px; 
-  margin-bottom: 20px; 
-  background-color: #333; 
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  background-color: #333;
   cursor: pointer;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -1002,18 +1002,16 @@ width:55px;
 }
 
 .clearboth {
-    
+
     clear:both;
 }
 
 .clear-both-left {
     clear:both;
     float:left;
-    
+
 }
 
 .float-left {
     float:left;
 }
-
-

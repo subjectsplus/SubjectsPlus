@@ -126,8 +126,7 @@ class Pluslet {
     }
 
     protected function assemblePluslet($hide_titlebar=0) {
-
-    	global $IconPath;
+		global $IconPath;
 
         // if we're using a simple pluslet, things are diff
         // we use $this->_visible_id to make sure this is only on the frontend
@@ -145,15 +144,20 @@ class Pluslet {
             <div class=\"titlebar\">";
 
         	//only if on admin side, display sort icon
+	        if( $this->_visible_id != '' ) {
+	        	$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
+			}
 
-        if( $this->_visible_id != '' ) {
-        		$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
-	}
 
+        	//if public view, add selected style
+        	if( $this->_visible_id != '' ) {
+        		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>";
+        	}else
+        	{
+        		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title $this->_visible_id</div>";
+        	}
 
-        	$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
-
-    <div class=\"titlebar_options\">$this->_icons</div>";
+        	$this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
 
            if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
@@ -204,7 +208,6 @@ class Pluslet {
     protected function boxSettings() {
 
         global $titlebar_styles;
-        $titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
 
         // generate our titlebar styles
         $tb_styles = "";

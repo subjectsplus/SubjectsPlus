@@ -68,6 +68,8 @@ if(!is_writable($lstrConfigFilePath))
 
 							"all_cattags" => array( _( "Talkback Topic Tags" ), _( "These are the tags that a given talkback can have associated with it." ), "array", "right", "textarea", "", _("Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places.") ),
 
+							"titlebar_styles" => array( _( "Titlebar Styles" ), _( "These are the styles that can be issued to a pluslet titlebars." ), "aarray", "right", "large", "", _("This allows titlebars to have custom styles with custom keys for subject guide creator to make.") ),
+
 							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "textarea", "", _("") ),
 
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
