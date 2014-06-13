@@ -903,7 +903,7 @@ div.ctag_list a:hover {
 
 .feedback, #feedback {
  /* position: relative;*/
-  float: left;
+ /* float: left; */
   background-color: #DD647F;
   width: 100%;
   text-align: center;
@@ -911,9 +911,13 @@ div.ctag_list a:hover {
   
   padding: .5em 0;
   display: none;
+/*
   padding-left: 10%;
   margin-left: -5%;
   margin-top:0;
+  max-width: 3840px;
+  min-width: 100%;
+*/
 }
 
 div.feedback a:link {
