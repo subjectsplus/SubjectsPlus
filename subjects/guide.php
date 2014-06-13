@@ -17,7 +17,6 @@ use SubjectsPlus\Control\Querier;
 //$goodSPGuides = array("superfun", "gis", "MCY564", "chcmusic", "GTEST");
 $chcGuides = array("superfun","chcmusic");
 
-
 $use_jquery = array("ui", "ui_styles");
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet

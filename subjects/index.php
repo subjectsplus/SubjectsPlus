@@ -200,7 +200,19 @@ if (isset ($v2styles) && $v2styles == 1) {
 
     <div class="pure-u-1-3">
 
-    <?php print makePluslet(_("Find Guides"), "Put the search box here", "","",FALSE); ?>
+      <!-- start pluslet -->
+      <div class="pluslet">
+        <div class="titlebar">
+          <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
+        </div>
+        <div class="pluslet_body">
+              <?php
+              $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", 30);
+              $input_box->displayBox();
+              ?>
+        </div>
+      </div>
+      <!-- end pluslet -->
         <div class="pluslet">
             <div class="titlebar">
                 <div class="titlebar_text"><?php print _("Newest Guides"); ?></div>
