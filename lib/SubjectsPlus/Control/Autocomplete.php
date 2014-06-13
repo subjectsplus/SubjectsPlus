@@ -152,7 +152,7 @@ class Autocomplete {
         $q = "SELECT talkback_id AS 'id',question AS 'label','Talkback' as content_type, LEFT(question, 55) FROM talkback WHERE question LIKE " . $search_param ;
         break;
       case "admin":
-        $q = "SELECT staff_id AS 'id',email AS 'label','Staff' as 'content_type', CONCAT(fname, ' ', lname) as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
+        $q = "SELECT staff_id AS 'id',email AS 'label','Staff' as 'content_type', CONCAT(fname, ' ', lname, ' (', email, ')') as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
         break;
 
     }
@@ -277,14 +277,14 @@ class Autocomplete {
             break;
 
           case "Staff":
-            $arr[$i]['label'] = $myrow[2];
+            $arr[$i]['label'] = $myrow['fullname'];
 
             if ($this->getSearchPage() == "control") {
 
               $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];
 
           } else {
-              $arr[$i]['url'] = 'staff.php';
+              $arr[$i]['url'] = 'staff_details.php?name=' . $myrow['id'];
 
           }
             break;
