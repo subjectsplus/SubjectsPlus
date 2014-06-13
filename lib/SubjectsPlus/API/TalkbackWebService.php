@@ -10,7 +10,7 @@ namespace SubjectsPlus\API;
  * @version $Id$
  * @access public
  */
-class TalkbackWebService extends sp_WebService implements WebService
+class TalkbackWebService extends WebService implements InterfaceWebService
 {
 	/**
 	 * TalkbackWebService::__construct() - pass parameters to parent construct and

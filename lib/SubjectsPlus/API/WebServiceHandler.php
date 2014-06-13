@@ -1,6 +1,6 @@
 <?php
 namespace SubjectsPlus\API;
-include_once(dirname(dirname(__FILE__)) . '/interfaces/interface.WebService.php');
+use SubjectsPlus\Control\Querier;
 
 /**
  * sp_WebService - This class handles all web services using RESTful
@@ -13,7 +13,7 @@ include_once(dirname(dirname(__FILE__)) . '/interfaces/interface.WebService.php'
  * @access public
  */
 
-class sp_WebServiceHandler
+class WebServiceHandler
 {
 	protected $mstrMethod = '';
 	protected $mstrService = '';
@@ -56,7 +56,7 @@ class sp_WebServiceHandler
 		}
 
 		try {
-			$this->mobjDBConnector = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
+			$this->mobjDBConnector = new Querier();
 		} catch (Exception $e) {
 			die($e);
 		}
@@ -93,8 +93,7 @@ class sp_WebServiceHandler
 
 		if(file_exists(dirname(__FILE__) . '/' . $lstrClass . '.php'))
 		{
-			include_once(dirname(__FILE__) . '/' . $lstrClass . '.php');
-
+			$lstrClass = "SubjectsPlus\\API\\" . $lstrClass;
 			$lobjWebService = new $lstrClass($this->mobjUrlParams, $this->mobjDBConnector);
 		}else{
 			$this->displayDocumentation(true);

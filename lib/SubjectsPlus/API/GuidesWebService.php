@@ -1,5 +1,6 @@
 <?php
 namespace SubjectsPlus\API;
+use SubjectsPlus\Control\Querier;
 /**
  * GuidesWebService - this class represents guides web service
  *
@@ -28,7 +29,7 @@ namespace SubjectsPlus\API;
  * @version $Id$
  * @access public
  */
-class GuidesWebService extends sp_WebService implements WebService
+class GuidesWebService extends WebService implements InterfaceWebService
 {
 	/**
 	 * GuidesWebService::__construct() - pass parameters to parent construct and
@@ -66,7 +67,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		$this->mobjData[$this->mstrTag] = array();
 
@@ -265,7 +266,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		if(!$lobjResults)
 		{
@@ -346,7 +347,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		if(!$lobjResults)
 		{
@@ -382,7 +383,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		if(!$lobjResults)
 		{
@@ -410,7 +411,7 @@ class GuidesWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		if(!$lobjResults)
 		{

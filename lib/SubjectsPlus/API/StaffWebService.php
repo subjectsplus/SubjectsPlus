@@ -1,6 +1,8 @@
 <?php
 namespace SubjectsPlus\API;
-class StaffWebService extends sp_WebService implements WebService
+use SubjectsPlus\Control\Querier;
+
+class StaffWebService extends WebService implements InterfaceWebService
 {
 	/**
 	 * StaffWebService::__construct() - pass parameters to parent construct and
@@ -37,7 +39,7 @@ class StaffWebService extends sp_WebService implements WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		if(!$lobjResults) $lobjResults = array();
 

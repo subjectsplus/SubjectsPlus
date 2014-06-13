@@ -10,7 +10,7 @@ namespace SubjectsPlus\API;
  * @version $Id$
  * @access public
  */
-class FaqWebService extends sp_WebService implements WebService
+class FaqWebService extends WebService implements InterfaceWebService
 {
 	/**
 	 * FaqWebService::__construct() - pass parameters to parent construct and

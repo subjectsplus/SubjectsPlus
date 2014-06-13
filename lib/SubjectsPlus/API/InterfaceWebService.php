@@ -1,4 +1,5 @@
 <?php
+namespace SubjectsPlus\API;
 
 /**
  * WebService - this is an interface describing the methods a web service needs to
@@ -11,7 +12,7 @@
  * @date November 2012
  * @access public
  */
-interface WebService
+interface InterfaceWebService
 {
 	//construct must except defined parameters
 	public function __construct($lobjUrlParams, $lobjDBConnector);

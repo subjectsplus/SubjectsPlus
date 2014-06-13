@@ -11,8 +11,8 @@ namespace SubjectsPlus\API;
  * @access public
  */
 
-    
-class DatabaseWebService extends sp_WebService implements WebService
+
+class DatabaseWebService extends WebService implements InterfaceWebService
 {
 	/**
 	 * DatabaseWebService::__construct() - pass parameters to parent construct and

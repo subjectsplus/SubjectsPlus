@@ -1,5 +1,6 @@
 <?php
 namespace SubjectsPlus\API;
+use SubjectsPlus\Control\Querier;
 /**
  * sp_WebService - this class is the parent of all web services. Contains web service
  * properties and general methods that the children can use or override if necessary.
@@ -11,7 +12,7 @@ namespace SubjectsPlus\API;
  * @date November 2012
  * @access public
  */
-abstract class sp_WebService
+abstract class WebService
 {
 	protected $mobjData = array();
 	protected $mobjUrlParams = array();
@@ -54,7 +55,7 @@ abstract class sp_WebService
 
 		$lobjQuerier = new Querier();
 
-		$lobjResults = $lobjQuerier->query($lstrQuery, true);
+		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
 		if(!$lobjResults) $lobjResults = array();
 
