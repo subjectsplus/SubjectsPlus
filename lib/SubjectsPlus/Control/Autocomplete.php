@@ -284,7 +284,9 @@ class Autocomplete {
               $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];
 
           } else {
-              $arr[$i]['url'] = 'staff_details.php?name=' . $myrow['id'];
+
+	      $name = explode('@',$myrow['label']);
+              $arr[$i]['url'] = 'staff_details.php?name=' . $name[0];
 
           }
             break;
