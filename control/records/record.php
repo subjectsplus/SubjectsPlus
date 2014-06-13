@@ -26,6 +26,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
     $no_header = "yes";
 }
 
+$tertiary_nav = "yes";
 include("../includes/header.php");
 
 // The following is just for testing purposes, to turn on/off the delete functionality
@@ -56,7 +57,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
         $record = new Record($ok_record_id, "delete");
         $record->deleteRecord();
         //$record->deBug();
-        // Show feedback
+        // Show feedbck
         $feedback = $record->getMessage();
     } else {
         $feedback = "There is no record by that ID.";
@@ -115,6 +116,8 @@ if (!isset($feedback)) {
     $feedback = $record->getMessage();
 }
 
+print feedBack($feedback);
+
 if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
     print "<div id=\"maincontent\">";
     $wintype = "pop";
@@ -122,9 +125,15 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
 
 //echo "<div class=\"feedback\">$feedback</div><br /><br />";
 
-print feedBack($feedback);
+
 
 // output our record, which will be blank if there's no id
+
+?> 
+
+<div id="maincontent">
+
+<?php
 
 $record->outputForm($wintype);
 
