@@ -143,7 +143,7 @@ class Autocomplete {
 
         break;
       case "records":
-        $q = "SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', title FROM title WHERE title LIKE " . $search_param . " LIMIT 5";
+        $q = "SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', title FROM title WHERE title LIKE " . $search_param ;
         break;
       case "faq":
         $q = "SELECT faq_id AS 'id',question AS 'label', LEFT(question, 55), 'FAQ' as 'content_type'  FROM faq WHERE question LIKE " . $search_param ;
