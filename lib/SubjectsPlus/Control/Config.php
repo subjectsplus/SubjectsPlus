@@ -368,7 +368,7 @@ class Config
 		foreach( $this->lobjConfigOptions as $lstrKey => $lobjOption )
 		{
 			//span containing input label
-			$lstrHTML = "<span class=\"record_label\">{$lobjOption[0]}</span>\n";
+			$lstrHTML = "<label for=\"{$lobjOption[0]}\">{$lobjOption[0]} ";
 
 			//if there is a tooltip in the options
 			if( isset( $lobjOption[6] ) && $lobjOption[6] != '' )
@@ -378,8 +378,8 @@ class Config
 				$lstrHTML .= "&nbsp;<span class=\"tooltipcontainer\"><img class=\"tooltip\" src=\"../assets/images/icons/help.png\" data-notes=\"{$lstrTitle}\" /></span>\n";
 			}
 
-			$lstrHTML .= "<br />\n";
-			$lstrHTML .= "<p style=\"font-size: smaller; padding: 0px 0px 5px 0px;\">{$lobjOption[1]}</p>\n";
+			$lstrHTML .= "</label>\n";
+			$lstrHTML .= "<span style=\"font-size: smaller; padding: 0px 0px 5px 0px;\">{$lobjOption[1]}</span><br />\n";
 
 			//based on type, create HTML form inputs
 			switch( $lobjOption[2] )
@@ -447,7 +447,7 @@ class Config
 					//configurations
 					if( in_array( $lstrKey, array( 'all_tbtags' ) ) )
 					{
-						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
+						$lstrHTML .= " disabled />\n<span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
 										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Edit?" ) . "</a></span>\n";
 						break;
 					}
@@ -501,7 +501,7 @@ class Config
 					break;
 			}
 
-			$lstrHTML .= "<br /><br />\n";
+			$lstrHTML .= "\n";
 
 			//based on passed option, place on left, leftbottom or right box
 			if( strtolower( $lobjOption[3] ) == 'left' )
@@ -520,36 +520,63 @@ class Config
 		}
 
 		?>
-		<form id="config_form" action="edit-config.php" method="POST">
-			<div style="float: left; margin-right: 20px; max-width: 430px;">
-                <div class="box required_field">
-				<h2 class="bw_head"><?php echo _( "CORE Configurations" ); ?></h2>
+		<form id="config_form" class="pure-form pure-form-stacked" action="edit-config.php" method="POST">
 
-					<?php echo $lstrLeftHTML; ?>
+			<div class="pure-g-r">
+				<div class="pure-u-1-3">
+				    <div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Core Configurations"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $lstrLeftHTML; ?>
+				        </div>
+				    </div>
+				    <div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Institutional Configurations"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $lstrLeftBottomHTML; ?>
+				        </div>
+				    </div>
 				</div>
-                <div class="box">
-				<h2 class="bw_head"><?php echo _( "Institutional Configurations" ); ?></h2>
 
-					<?php echo $lstrLeftBottomHTML; ?>
-				</div>
-			</div>
-			<div style="float: left; margin-right: 20px; max-width: 450px;">
-	<div class="box" align="center">
-				<h2 class="bw_head"><?php echo _( "Save" ); ?></h2>
+				<div class="pure-u-1-3">
 
-					<input type="submit" class="button" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
-				</div>
-                	<div class="box">
-				<h2 class="bw_head"><?php echo _( "Other Configurations" ); ?></h2>
 
-					<?php echo $lstrRightHTML; ?>
-				</div>
-<div class="box">
 
-				<h2 class="bw_head"><?php echo _( "Catalog Connections" ); ?></h2>
-					<?php echo $lstrRightBottomHTML; ?>
+
+				    <div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Catalog Connections"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php echo $lstrRightBottomHTML; ?>
+				        </div>
+				    </div>				    				    
 				</div>
-			</div>
+
+				<div class="pure-u-1-3">
+				    <div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Save"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <input type="submit" class="button" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
+				        </div>
+				    </div>
+				    <div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Other Configurations"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php echo $lstrRightHTML; ?>
+				        </div>
+				    </div>
+				</div>
+				</div> <!-- end pure g-r -->
+
 		</form>
 		<?php
 	}

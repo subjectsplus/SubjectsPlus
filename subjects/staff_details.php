@@ -62,35 +62,35 @@ GROUP BY s.lname";
 
 $staffmem = $db->query($qstaffer);
 
-$tel = $tel_prefix . $staffmem[4];
+$tel = $tel_prefix . $staffmem[0][4];
 
-$fullname = $staffmem[2] . " " . $staffmem[1];
+$fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
-$info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: $staffmem[2] $staffmem[1]\"
-title=\"Picture: $staffmem[2] $staffmem[1]\"  align=\"left\" class=\"staff_photo\" />
+$info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"
+title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"  align=\"left\" class=\"staff_photo\" />
 <p style=\"margin-top; 0; padding-top: 0; font-size: larger;\"><strong>$fullname</strong><br />
-$staffmem[3]<br />
-<img src=\"../assets/images/icons/email.gif\" style=\"vertical-align: bottom;\" />  <a href=\"mailto:$staffmem[5]\">$staffmem[5]</a><br />
+{$staffmem[0][3]}<br />
+<img src=\"../assets/images/icons/email.gif\" style=\"vertical-align: bottom;\" />  <a href=\"mailto:$staffmem{[0][5]}\">{$staffmem[0][5]}</a><br />
 <img src=\"../assets/images/icons/telephone.gif\" style=\"vertical-align: bottom;\" />  $tel";
 
 
 $info .= "</p>";
 
-if ($staffmem[7] != "") {
-    $info .= "<br class=\"clear-both\" /><br />" . $staffmem[7];
+if ($staffmem[0][7] != "") {
+    $info .= "<br class=\"clear-both\" /><br />" . $staffmem[0][7];
 }
 
 
 // If it's a ref librarian, show their subjects
 $subject_listing = ""; // init in case they don't have subs
 
-if ($staffmem[8] != "") {
+if ($staffmem[0][8] != "") {
 
     // Get a list of subjects for this person
     // Maybe you could make a better query above to include this info
 
     $q = "SELECT s.subject_id, subject, shortform FROM staff_subject ss, subject s WHERE ss.subject_id = s.subject_id
-	AND ss.staff_id = '$staffmem[0]'  AND active = '1'  AND s.type = 'Subject' ORDER BY subject";
+	AND ss.staff_id = '" . $staffmem[0][0] . "'  AND active = '1'  AND s.type = 'Subject' ORDER BY subject";
 
     $r = $db->query($q);
 
@@ -116,7 +116,7 @@ if ($staffmem[8] != "") {
             $subject_listing .= "</div><div style=\"float: left; width: 47%\">";
         }
 
-        $subject_listing .= "<a href=\"$linky\">$mysubs[1]</a><br /> ";
+        $subject_listing .= "<a href=\"$linky\">{$mysubs[1]}</a><br /> ";
 
         $row_count++;
     }
