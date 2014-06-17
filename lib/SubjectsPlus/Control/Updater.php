@@ -432,7 +432,7 @@ class Updater
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
 						//if duplicate column, keep going. assume correct column
-						$lobjDBErrorInfo = $db->errorInfo()
+						$lobjDBErrorInfo = $db->errorInfo();
 						if( $lobjDBErrorInfo[1] == '1060' )
 						{
 							continue;
