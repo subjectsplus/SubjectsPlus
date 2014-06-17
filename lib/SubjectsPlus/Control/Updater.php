@@ -390,7 +390,8 @@ class Updater
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
 						//if rss doesn't exist, keep going. assume correct column
-						if( $db->errorInfo()[2] == 'Can\'t DROP \'rss\'; check that column/key exists' )
+						$lobjDBErrorInfo = $db->errorInfo();
+						if( $lobjDBErrorInfo[2] == 'Can\'t DROP \'rss\'; check that column/key exists' )
 						{
 							continue;
 						}
@@ -431,7 +432,8 @@ class Updater
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
 						//if duplicate column, keep going. assume correct column
-						if( $db->errorInfo()[1] == '1060' )
+						$lobjDBErrorInfo = $db->errorInfo()
+						if( $lobjDBErrorInfo[1] == '1060' )
 						{
 							continue;
 						}
