@@ -188,15 +188,6 @@ $lobjGuide->outputTabs('public');
 </div>
 
 
-<?php
-///////////////////////////
-// Load footer file
-///////////////////////////
-
-include("includes/footer.php");
-
-?>
-
 <script type="text/javascript" language="javascript">
 
     $(document).ready(function(){
@@ -283,8 +274,46 @@ jQuery(function() {
 	   });
 
 
-</script>
 
+  //setup jQuery UI tabs and dialogs
+ jQuery(function() {
+   var tabTitle = $( "#tab_title" ),
+   tabContent = $( "#tab_content" ),
+   tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
+   tabCounter = <?php echo ( count($all_tabs) ); ?>;
+   var tabs = $( "#tabs" ).tabs();
+
+   //add click event for external url tabs
+   jQuery('li[data-external-link]').each(function()
+					 {
+       if($(this).attr('data-external-link') != "")
+       {
+	 jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
+						       {
+	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
+	     evt.stopImmediatePropagation();
+	   });
+
+	 jQuery(this).children('a[href^="#tabs-"]').each(function() {
+	   var elementData = jQuery._data(this),
+	   events = elementData.events;
+
+	   var onClickHandlers = events['click'];
+
+	   // Only one handler. Nothing to change.
+				 if (onClickHandlers.length == 1) {
+	     return;
+	   }
+
+	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
+	 });
+       }
+     });
+
+});
+
+
+</script>
 
 <!--[if IE]>
 <style>
@@ -294,3 +323,17 @@ jQuery(function() {
 }
 </style>
 <![endif]-->
+
+
+
+<?php
+
+///////////////////////////
+// Load footer file
+///////////////////////////
+
+
+include("includes/footer.php");
+
+?>
+
