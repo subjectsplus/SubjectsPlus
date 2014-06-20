@@ -302,7 +302,6 @@ class Updater
 			"ALTER IGNORE TABLE `subject` ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
 			"ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
 			  ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
-			  ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
 			  ADD `titlebar_styling` VARCHAR( 100 ) NULL",
 			"ALTER TABLE `subject_department` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`",
 			"ALTER TABLE `subject_subject` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`",

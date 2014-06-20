@@ -9,8 +9,6 @@
  */
 use SubjectsPlus\Control\Querier;
 
-
-
 $subcat = "guides";
 $header = "noshow"; // authentication only
 
@@ -181,7 +179,6 @@ function modifyDB($id, $type) {
     $pluslet_extra = isset($_POST["special"]) ? $_POST["special"] : '';
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
-    $pluslet_supress_body =  $_POST["boxsetting_suppress_body"];
 
     if (isset($_POST["boxsetting_titlebar_styling"])) {
 
@@ -210,7 +207,7 @@ function modifyDB($id, $type) {
     }
     switch ($type) {
         case "insert":
-            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body),  $db->quote($pluslet_supress_body), $db->quote($pluslet_titlebar_styling));
+            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, titlebar_styling) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body), $db->quote($pluslet_titlebar_styling));
             $db = new Querier;
             $r = $db->exec($q);
             if ($r) {
@@ -234,7 +231,6 @@ function modifyDB($id, $type) {
                 extra = '$pluslet_extra',
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
-                suppress_body = '$pluslet_supress_body',
                 titlebar_styling = '$pluslet_titlebar_styling'
                 WHERE pluslet_id ='$id'";
             $r = $db->exec($q);
@@ -250,7 +246,6 @@ function modifyDB($id, $type) {
         	$q = "UPDATE pluslet SET
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
-                suppress_body = '$pluslet_supress_body',
                 titlebar_styling = '$pluslet_titlebar_styling'
                 WHERE pluslet_id ='$id'";
         	$r = $db->exec($q);

@@ -25,7 +25,6 @@ class Pluslet {
     // added v 3
     protected $_hide_titlebar;
     protected $_collapse_body;
-    protected $_suppress_body;
     protected $_titlebar_styling;
     protected $_debug;
 
@@ -51,7 +50,7 @@ class Pluslet {
         /////////////
 
         $querier = new Querier();
-        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, suppress_body, titlebar_styling
+        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
 
@@ -69,7 +68,6 @@ class Pluslet {
         	$this->_extra = $plusletArray[0]["extra"];
             $this->_hide_titlebar = $plusletArray[0]["hide_titlebar"];
             $this->_collapse_body = $plusletArray[0]["collapse_body"];
-            $this->_suppress_body = $plusletArray[0]["suppress_body"];
             $this->_titlebar_styling = $plusletArray[0]["titlebar_styling"];
         }
 
@@ -159,12 +157,20 @@ class Pluslet {
         	}else
         	{
         		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title $this->_visible_id</div>";
+
+                // since we're here, let's see if the body should be collapsed
+                if ($this->_collapse_body == 1) {
+                    $this->_pluslet_body_bonus_classes .= " noshow";
+
+                }
+
         	}
 
         	$this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
 
            if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
+
            }
 
 
@@ -236,13 +242,6 @@ class Pluslet {
                 if ($this->_collapse_body == 1) {$box_settings .= " checked";}
 
             $box_settings .= "> " . _("Hide box body by default (public site)") . "
-            </label>
-            <label for=\"nobody-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"nobody-$this->_pluslet_id\" type=\"checkbox\"";
-
-                if ($this->_suppress_body == 1) {$box_settings .= " checked";}
-
-            $box_settings .= "> " . _("Hide box body completely") . "
             </label>
             <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
                 <select id=\"titlebar-styling-$this->_pluslet_id\">

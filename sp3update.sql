@@ -17,7 +17,6 @@ ADD COLUMN `external_url` VARCHAR(500) NULL AFTER `tab_index`;
 
 ALTER TABLE `pluslet` ADD `hide_titlebar` INT( 1 ) NOT NULL DEFAULT '0',
 ADD `collapse_body` INT( 1 ) NOT NULL DEFAULT '0',
-ADD `suppress_body` INT( 1 ) NOT NULL DEFAULT '0',
 ADD `titlebar_styling` VARCHAR( 100 ) NULL;
 
 

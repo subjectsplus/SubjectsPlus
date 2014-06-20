@@ -124,7 +124,6 @@ class Installer
 					  `extra` varchar(255) DEFAULT NULL,
 					  `hide_titlebar` int(1) NOT NULL DEFAULT '0',
 					  `collapse_body` int(1) NOT NULL DEFAULT '0',
-					  `suppress_body` int(1) NOT NULL DEFAULT '0',
 					  `titlebar_styling` varchar(100) DEFAULT NULL,
 					  PRIMARY KEY (`pluslet_id`),
 					  KEY `INDEXSEARCHpluslet` (`body`(200))
