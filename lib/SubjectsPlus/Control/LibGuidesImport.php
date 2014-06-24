@@ -41,7 +41,7 @@ class LibGuidesImport {
         echo "Inserted '$subject[0]' \n";
 
       } else {
-
+        echo colorize("Error:", "FAILURE");
         echo  $db->errorInfo()[2] . "\n ";
 	
       }
@@ -60,8 +60,9 @@ class LibGuidesImport {
         
         $tab_index++; 
         
+        $clean_tab_name = $db->quote($tab->NAME);
         
-	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', '$tab->NAME', $tab_index)")) {
+	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index)")) {
 	  
 	  echo  colorize("Inserted tab '$tab->NAME'", "SUCCESS") ."\n";
 
@@ -72,6 +73,13 @@ class LibGuidesImport {
           echo "\t";
 	  echo colorize("Error:", "FAILURE");
 	  echo  $db->errorInfo()[2] . "\n ";
+          
+          /*
+          echo "\n";
+          echo "INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index)";
+          echo "\n";
+           */
+
 
 	}
 
@@ -86,7 +94,7 @@ class LibGuidesImport {
           
 
           if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
-            
+            echo colorize("Inserted section", "SUCCESS") . "\n";
           } else { 
             echo "Problem inserting this section. This section  may already exist in the database." . "\n";
             echo "\t";
@@ -103,63 +111,79 @@ class LibGuidesImport {
 
           foreach ( $pluslet->LINKS->LINK as $link )  {
             
+            
+            $description .= 
+            "<div class=\"links\">" . 
+                            "<a href=\"$link->URL\">$link->NAME</a>" . 
+                            "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
+                            "</div>";
            
-            $description .= "<div class=\"description\">$link->DESCRIPTION_SHORT</div>" . 
-                           "<div class=\"links\">" . 
-                           "<a href=\"$link->URL\">$link->NAME</a>" . 
-                           "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                            "<div class=\"media\">$pluslet->EMBEDDED_MEDIA_AND_WIDGETS->URL</div>" .
-                           "</div>";
-            echo($pluslet->description); 
             
           }
 
+          
+          foreach ( $pluslet->BOOKS->BOOK as $book )  {
+           // echo "BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK!";
+            
+            $description .= 
+            "<div class=\"books\">" . 
+                            "<a href=\"$book->URL\">$book->TITLE</a>" . 
+                            "<div class=\"book-description\">$link->DESCRIPTION</div>" .
+                            "</div>";
+            
+            
+          }
+          
+
           if ($description == null) {
-         
+            
           } else { 
 
           }
           
-          $description .= "<div class=\"description\">$pluslet_description->DESCRIPTION_SHORT</div><div class=\"media\"></div>"; 
+          //  print_r($pluslet);
+
+          $description .= "<div class=\"description\">$pluslet->DESCRIPTION</div><div class=\"media\"></div>"; 
           
         }
 
 
-          $clean_description = $db->quote($description);
+        $clean_description = $db->quote($description);
 
-          if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
+        if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
+          echo colorize("Inserted pluslet '$pluslet->NAME'", "SUCCESS") ."\n";
+          $clean_description = null;
 
-            $clean_description = null;
+        } else {
 
-          } else {
+	  //   echo "Problem inserting this pluslet. This pluslet may already exist in the database." . "\n";
+          echo "\t";
+          echo "\n";
+	  echo colorize("Error:", "FAILURE");
+	  echo  $db->errorInfo()[2] . "\n ";
 
-	 //   echo "Problem inserting this pluslet. This pluslet may already exist in the database." . "\n";
-            echo "\t";
-            echo "\n";
-	    echo colorize("Error:", "FAILURE");
-	    echo  $db->errorInfo()[2] . "\n ";
+          echo "\n";
 
-            echo "\n";
+          //echo "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID,'$pluslet->NAME', $clean_description , 'Basic')";
+        }
 
-            echo "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID,'$pluslet->NAME', $clean_description , 'Basic')";
-          }
+        
+        if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, 1)")) {
+          echo colorize("Inserted pluslet section relationship" , "SUCCESS") ."\n";
+          // This sticks the newly created pluslet into a section 
+        } else {
 
-          
-          if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, 1)")) {
-            // This sticks the newly created pluslet into a section 
-          } else {
+	  echo "Problem inserting pluslet_section. This pluslet section relationship may already exist in the database." . "\n";
+          echo "\t";
+	  echo colorize("Error:", "FAILURE");
+	  echo  $db->errorInfo()[2] . "\n ";
 
-	    echo "Problem inserting pluslet_section. This pluslet section relationship may already exist in the database." . "\n";
-            echo "\t";
-	    echo colorize("Error:", "FAILURE");
-	    echo  $db->errorInfo()[2] . "\n ";
-
-          }
-          
         }
         
       }
-
+      
     }
+
+  }
 
 }
