@@ -127,8 +127,8 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $name = $db->query($query);
     
 
-    $page_title = "FAQS: $name[0][0]";
-    $intro = stripslashes(htmlspecialchars_decode($name[1]));
+    $page_title = "FAQS: {$name[0][0]}";
+    $intro = stripslashes(htmlspecialchars_decode($name[0][1]));
 } elseif ($postvar_faq_id != "") {
     $displaytype = "single";
     $page_title = "Library FAQs";
@@ -143,7 +143,7 @@ if ($displaytype == "search") {
 
     $full_query = "SELECT faq_id, question, answer, keywords
 	FROM `faq`
-	WHERE (question like '%" . $db->quote($search_clause) . "%' OR answer like '%" . $db->quote($search_clause) . "%' OR keywords like '%" . $db->quote($search_clause) . "%')
+	WHERE (question like " . $db->quote("%" . $search_clause . "%") . " OR answer like " . $db->quote("%" . $search_clause . "%") . " OR keywords like " . $db->quote("%" . $search_clause . "%") . ")
 	Group BY question";
 
     $intro = "<p>Search for <strong>$search_clause</strong>.</p>";

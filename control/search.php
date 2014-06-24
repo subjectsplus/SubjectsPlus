@@ -1,5 +1,7 @@
 <?php
+
 $page_title = _("Search Results");
+
 include("includes/header.php");
 use SubjectsPlus\Control\Search;
 $search = new Search;
