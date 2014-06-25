@@ -778,7 +778,7 @@ function makeDeleteable( lstrSelector, lstrType )
 	/////////////////////////////
 	// DELETE SECTION
 	/////////////////////////////
-	jQuery(lstrSelector).livequery('click', function(event) {
+	jQuery('.guidewrapper').on('click', lstrSelector ,function(event) {
 
 	    var delete_id = jQuery(this).parent().parent().attr("id").split("_")[1];
 	    var element_deletion = this;
@@ -812,7 +812,7 @@ function makeDeleteable( lstrSelector, lstrType )
 	// removes pluslet from DOM; change must be saved to persist
 	/////////////////////////////
 
-	jQuery(lstrSelector).livequery('click', function(event) {
+	jQuery('.guidewrapper').on('click', lstrSelector ,function(event) {
 
 	    var delete_id = jQuery(this).attr("id").split("-")[1];
 	    var element_deletion = this;
