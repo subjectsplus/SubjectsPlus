@@ -250,6 +250,10 @@ class Record {
 	$querierSource = new Querier();
 	$qSource = "select source_id, source from source order by source";
 	$defsourceArray = $querierSource->query($qSource);
+  // let's not have an undefined offset
+  if (!isset($this->_def_source[0][0])) {
+    $this->_def_source[0][0] = "";
+  }
 
 	$sourceMe = new Dropdown("default_source_id", $defsourceArray, $this->_def_source[0][0]);
 	$source_string = $sourceMe->display();
@@ -603,7 +607,9 @@ public function buildLocation() {
  		return FALSE;
  	}
 
-    // Delete the location, location_title and title records
+  $db = new Querier;
+
+  // Delete the location, location_title and title records
  	$q = "DELETE location , location_title, title
  	FROM location,location_title, title
  	WHERE location.location_id = location_title.location_id
@@ -614,9 +620,11 @@ public function buildLocation() {
 
  	$this->_debug = "<p>Del query: $q";
 
-     if ($delete_result != 0) {
+  if (isset($delete_result)) {
  		$q2 = "DELETE FROM rank WHERE title_id = '" . $this->_record_id . "'";
- 		$delete_result2 = $db->query($q2);
+
+ 		$delete_result2 = $db->exec($q2);
+
  		$this->_debug .= "<p>Del query 2: $q2";
  	} else {
       // message
@@ -624,7 +632,7 @@ public function buildLocation() {
  		return FALSE;
  	}
 
- 	if ($delete_result2) {
+ 	if (isset($delete_result2)) {
       // message
  		$this->_message = _("Thy will be done.  Offending record deleted.");
 

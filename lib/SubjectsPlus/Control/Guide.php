@@ -513,6 +513,8 @@ $main_col_size = null;
             return FALSE;
         }
 
+        $db = new Querier;
+
         // Delete the records from pluslet that are associated with subject
         $q = "DELETE p
         FROM pluslet p INNER JOIN pluslet_section ps
@@ -526,13 +528,14 @@ $main_col_size = null;
         WHERE p.type != 'Special' AND s.subject_id = '" . $this->_subject_id . "'";
 
         $delete_result = $db->exec($q);
-
+        
         $this->_debug = "<p>Del query: $q";
 
-        if ($delete_result != 0) {
+        if (isset($delete_result)) {
             //delete subject
             $q2 = "DELETE subject,staff_subject FROM subject LEFT JOIN staff_subject ON subject.subject_id = staff_subject.subject_id WHERE subject.subject_id = '" . $this->_subject_id . "'";
-            $delete_result2 = $db->query($q2);
+            $delete_result2 = $db->exec($q2);
+       
             $this->_debug .= "<p>Del query 2: $q2";
         } else {
             // message
@@ -540,9 +543,9 @@ $main_col_size = null;
             return FALSE;
         }
 
-        if ($delete_result2) {
+        if (isset($delete_result2)) {
             // message
-            if ($_GET["wintype"] == "pop") {
+            if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
                 $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
             } else {
                 $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.");

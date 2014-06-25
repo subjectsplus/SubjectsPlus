@@ -338,14 +338,16 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
       return FALSE;
     }
 
+    $db = new Querier;
+
     // Delete the records from faq and linked tables
     $q = "DELETE FROM faq WHERE faq_id = '" . $this->_faq_id . "'";
-
-    $delete_result = $db->query($q);
+    
+    $delete_result = $db->exec($q);
 
     $this->_debug = "<p>Del query: $q";
 
-      if (count($delete_result) != 0) {
+    if (count($delete_result) != 0) {
 
     } else {
       // message
@@ -353,7 +355,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
       return FALSE;
     }
 
-      if ($_GET["wintype"] == "pop") {
+      if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
         $this->_message = _("Thy will be done.  Offending FAQ deleted.  Close window to continue.");
       } else {
         $this->_message = _("Thy will be done.  Offending FAQ deleted.");
