@@ -296,13 +296,13 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
     // Delete the records from talkback table
     $q = "DELETE FROM talkback WHERE talkback_id = '" . $this->_talkback_id . "'";
 
-    $delete_result = $db->query($q);
+    $delete_result = $db->exec($q);
 
     $this->_debug = "<p>Del query: $q";
 
-    if ($delete_result) {
+    if (isset($delete_result)) {
       // message
-      if ($_GET["wintype"] == "pop") {
+      if (isset(GET["wintype"]) && $_GET["wintype"] == "pop") {
         $this->_message = _("Thy will be done.  Offending Talkback deleted.  Close window to continue.");
       } else {
         $this->_message = _("Thy will be done.  Offending Talkback deleted.");
