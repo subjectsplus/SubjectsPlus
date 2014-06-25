@@ -266,7 +266,7 @@ $last_mod = _("Last modified: ") . lastModded("talkback", $this->_talkback_id);
     // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
     if ($this->_talkback_id != "") {
       if (isset($_SESSION["admin"]) && $_SESSION["admin"] == "1") {
-        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button delete_button  pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
       } 
 
     }
