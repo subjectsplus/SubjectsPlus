@@ -163,7 +163,7 @@ include("../includes/footer.php");
     //////////////////
     // Make sure that delete was intentional
     //////////////////
-    $('.delete_button').livequery('click', function(event) {
+    $('body').on('click', '.delete-button', function(event) {
 
       $(this).after('<div class="rec_delete_confirm"><?php print $rusure; ?>  <a id="confirm-yes-<?php print $ok_record_id; ?>"><?php print $textyes; ?></a> | <a id="confirm-no"><?php print $textno; ?></a></div>');
 

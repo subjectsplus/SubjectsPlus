@@ -990,7 +990,14 @@ public function outputLatLongForm() {
     if ($this->_staff_id) {
       $user_folder = explode("@", $this->_email);
       $path = "../../assets/users/_" . $user_folder[0];
+
+    try {
+    
       mkdir($path);
+    } catch(Exception $e) {
+       echo 'Error creating folder: ',  $e->getMessage(), "\n";
+
+    }
 
       // And copy over the generic headshot image and headshot_large image
       $nufile = $path . "/headshot.jpg";
