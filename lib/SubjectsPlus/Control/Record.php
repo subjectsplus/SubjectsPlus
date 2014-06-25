@@ -226,7 +226,7 @@ class Record {
 
 
 	$content = "
-	<input type=\"submit\" name=\"submit_record\" class=\"pure-button delete_button pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
+	<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
 	if ($this->_record_id != "") {
 		if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {

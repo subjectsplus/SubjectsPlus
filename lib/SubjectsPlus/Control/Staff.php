@@ -598,10 +598,10 @@ print "<div class=\"pure-u-1-3\">";
     // Save/Delete Buttons
     /////////////////
 
-    $our_buttons = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button delete_button delete_pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
+    $our_buttons = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button delete_pure-button-primary\" value=\"" . _("Save Record Now") . "\" />";
     // if it's not a new record, and we're authorized, show delete button
     if ($this->_staff_id != "") {
-      $our_buttons .= " <input style=\"margin-left: 1em;\" type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+      $our_buttons .= " <input style=\"margin-left: 1em;\" type=\"submit\" name=\"delete_record\" class=\"pure-button delete_button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
     }
 
     // get edit history
