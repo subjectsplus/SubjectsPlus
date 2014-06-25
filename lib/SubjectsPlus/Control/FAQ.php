@@ -196,12 +196,12 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
         <div class=\"titlebar_options\"></div>
       </div>
       <div class=\"pluslet_body\">
-		<input type=\"submit\" name=\"submit_record\" class=\"button pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
+		<input type=\"submit\" name=\"submit_record\" class=\"button pure-button pure-button-primary save-button\" value=\"" . _("Save Now") . "\" />";
 
     // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
     if ($this->_faq_id != "") {
       if (isset($_SESSION["admin"]) && $_SESSION["admin"] == "1") {
-        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button pure-button-warning delete-button\" value=\"" . _("Delete Forever!") . "\" />";
       } else {
         echo "<input type=\"submit\" name=\"recommend_delete\" class=\"button pure-button pure-button-warning\" value=\"" . _("Recommend Delete") . "\" />";
       }

@@ -28,7 +28,6 @@ class Guide
     private $_debug;
 
     public $_ok_staff = array();
-
     public $main_col_size;
 
     public $_isAdmin;
@@ -364,14 +363,14 @@ $main_col_size = null;
     <!-- right hand column -->
     <div class=\"pure-u-1-2\">";
 
-    $content = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
+    $content = "<input type=\"submit\" name=\"submit_record\"  class=\"pure-button pure-button-primary save-guide\" value=\"" . _("Save Now") . "\" />";
 
         // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
         // make sure they're allowed to delete
 
     if ($this->_subject_id != "") {
             if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
-            $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+            $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning delete-guide\" value=\"" . _("Delete Forever!") . "\" />";
         }
     }
     // get edit history

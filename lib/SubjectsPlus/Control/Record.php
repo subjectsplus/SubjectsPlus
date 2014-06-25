@@ -230,7 +230,7 @@ class Record {
     // if it's not a new record, and we're authorized, show delete button
 	if ($this->_record_id != "") {
 		if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
-			$content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
+			$content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button delete_button pure-button-warning\" value=\"" . _("Delete Forever!") . "\" />";
 		} else {
 			$content .= " <input type=\"submit\" name=\"recommend_delete\" class=\"pure-button pure-button-warning\" value=\"" . _("Recommend Delete") . "\" />";
 		}
