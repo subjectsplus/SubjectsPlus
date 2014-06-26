@@ -242,12 +242,9 @@ class Autocomplete {
 
 
           case "FAQ":
-            if ($this->getSearchPage() == "control") {
               $arr[$i]['label']  = $myrow['label'];
               $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
-          } else {
-              $arr[$i]['url'] = 'faq.php?page=all#faq-' .$myrow['id'];
-          }
+
             break;
 
           case "Pluslet":

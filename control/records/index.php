@@ -135,8 +135,7 @@ if ($alpha_id & $full_query) {
             // weed out extraneous P tags
             $blurb = stripP($blurb);
 
-            $results .= "<div class=\"record-results $row_colour\">\n
-        <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
+            $results .= "<div class=\"record-results $row_colour\">&nbsp;&nbsp;<img src=\"$IconPath/required.png\" alt=\"bullet\" /> <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
    
         $results .= "</div>\n";
 

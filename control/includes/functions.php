@@ -1308,3 +1308,244 @@ function colorize($text, $status) {
   }
     return chr(27) . "$out" . "$text" . chr(27) . "[0m";
 }
+
+/**
+ * tokenizeText() is used to convert tokens created via FCKeditor wysiwyg
+ * into something prettily output
+ *
+ * The original is in the Pluslet class, and these two should probably be made one
+ *
+ * @return string
+ */
+
+function tokenizeText($our_text, $our_subject_id = "") {
+        global $proxyURL;
+        global $PublicPath;
+        global $FAQPath;
+        global $UserPath;
+        global $IconPath;
+        global $open_string;
+        global $close_string;
+        global $open_string_kw;
+        global $close_string_kw;
+        global $open_string_cn;
+        global $close_string_cn;
+        global $open_string_bib;
+
+      $db = new Querier();
+
+        $icons = "";
+        //$target = "target=\"_" . $target . "\"";
+        $target = "";
+        $tokenized = "";
+
+        $parts = preg_split('/<span[^>]*>{{|}}<\/span>/', $our_text);
+
+      if( count($parts) == 1 )
+        $parts = preg_split('/{{|}}/', $our_text);
+
+        if (count($parts) > 1) { // there are tokens in $body
+            foreach ($parts as $part) {
+                if (preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part)
+                  || preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)
+                  || preg_match('/^sss},\s?{[^}]*/', $part) || preg_match('/^toc},\s?{[^}]*/', $part) ) { // $part is a properly formed token
+                    $fields = preg_split('/},\s?{/', $part);
+                    $prefix = substr($part, 0, 3);
+                    switch ($prefix) {
+                        case "faq":
+                            $query = "SELECT faq_id, question FROM `faq` WHERE faq_id IN(" . $fields[1] . ") ORDER BY question";
+                            $result = $db->query($query);
+                            $tokenized.= "<ul>";
+                            foreach ($result as $myrow) {
+                                $tokenized.= "<li><a href=\"$FAQPath" . "?faq_id=$myrow[0]\" $target>" . stripslashes(htmlspecialchars_decode($myrow[1])) . "</a></li>";
+                            }
+                            $tokenized.= "</ul>";
+                            break;
+                        case "fil":
+                            $ext = explode(".", $fields[1]);
+                            $i = count($ext)-1;
+                            $our_icon = showDocIcon($ext[$i]);
+                            $file = "$UserPath/$fields[1]";
+                            $tokenized.= "<a href=\"$file\" $target>$fields[2]</a> <img style=\"position:relative; top:.3em;\" src=\"$IconPath/$our_icon\" alt=\"$ext[$i]\" />";
+                            break;
+                        case "cat":
+                            $pretext = "";
+                            switch ($fields[3]) {
+                                case "subject":
+                                    $cat_url = $open_string . $fields[1] . $close_string;
+                                    $pretext = $fields[2] . " ";
+                                    $linktext = $fields[1];
+                                    break;
+                                case "keywords":
+                                    $cat_url = $open_string_kw . $fields[1] . $close_string_kw;
+                                    $linktext = $fields[2];
+                                    break;
+                                case "call_num":
+                                    $cat_url = $open_string_cn . $fields[1] . $close_string_cn;
+                                    $linktext = $fields[2];
+                                    break;
+                                case "bib":
+                                    $cat_url = $open_string_bib . $fields[1];
+                                    $linktext = $fields[2];
+                                    break;
+                            }
+                            $tokenized.= "$pretext<a href=\"$cat_url\" $target>$linktext</a>";
+                            break;
+                        case "dab":
+                            //print_r($fields);
+                            $description = "";
+                            ///////////////////
+                            // Check for icons or descriptions in fields[3]
+                            // 00 = neither; 10 = icons no desc; 01 = desc no icons; 11 = both
+                            ///////////////////
+                            if (isset($fields["3"])) {
+                                switch ($fields["3"]) {
+                                    case "00":
+                                        $show_icons = "";
+                                        $show_desc = "";
+                                        $show_rank = 0;
+                                        break;
+                                    case "10":
+                                        $show_icons = "yes";
+                                        $show_desc = "";
+                                        $show_rank = 0;
+                                        break;
+                                    case "01":
+                                        $show_icons = "";
+                                        $show_desc = 1;
+                                        $icons = "";
+                                        break;
+                                    case "11":
+                                        $show_icons = "yes";
+                                        $show_desc = 1;
+                                        break;
+                                }
+                            }
+                            $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title
+                                    FROM location l, location_title lt, title t
+                                    WHERE l.location_id = lt.location_id
+                                    AND lt.title_id = t.title_id
+                                    AND t.title_id = $fields[1]";
+                            //print $query . "<br /><br />";
+                            $result = $db->query($query);
+
+                            foreach ($result as $myrow) {
+
+                                // eliminate final line breaks -- offset fixed 11/15/2011 agd
+                                $myrow[6] = preg_replace('/(<br \/>)+/', '', $myrow[6]);
+                                // See if it's a web format
+                                if ($myrow[2] == 1) {
+                                    if ($myrow[1] == 1) {
+                                        $url = $myrow[0];
+                                        $rest_icons = "unrestricted";
+                                    } else {
+                                        $url = $proxyURL . $myrow[0];
+                                        $rest_icons = "restricted";
+                                    }
+
+                                    $current_ctags = explode("|", $myrow[3]);
+
+                                    // add our $rest_icons info to this array at the beginning
+                                    array_unshift($current_ctags, $rest_icons);
+
+                                    if ($show_icons == "yes") {
+                                        $icons = showIcons($current_ctags);
+                                    }
+
+                                    if ($show_desc == 1) {
+                                        // if we know the subject_id, good; for public, must look up
+                                      $subject_id = '';
+                                        if (isset($_GET["subject_id"])) {
+                                            $subject_id = $_GET["subject_id"];
+                                        } elseif (isset($_GET["subject"])) {
+                                            $q1 = "SELECT subject_id FROM subject WHERE shortform = '" . $_GET["subject"] . "'";
+
+                                            $r1 = $db->query($q1);
+                                            $subject_id = $db->last_id($r1);
+                                            $subject_id = $subject_id[0];
+                                        }
+
+                                        $override = findDescOverride($subject_id, $fields[1]);
+                                        // if they do want to display the description:
+                                        if ($override != "") {
+                                            // show the subject-specific "description_override" if it exists
+                                            $description = "<br />" . scrubData($override);
+                                        } else {
+                                            $description = "<br />" . scrubData($myrow[6]);
+                                        }
+                                        //$description = "<br />$myrow[9]";
+                                    }
+                                    $tokenized.= "<a href=\"$url\" $target>$myrow[8]</a> $icons $description";
+                                } else {
+                                    // It's print
+                                    $format = "other";
+                                    if ($show_icons == "yes") {
+                                        $icons = showIcons($current_ctags);
+                                    }
+                                    if ($show_desc != "") {
+                                        $description = "<br />$myrow[6]";
+                                    }
+
+                                    // Simple Print (2), or Print with URL (3)
+                                    if ($myrow[2] == 3) {
+                                        $tokenized.= "<em>$myrow[8]</em><br />" . _("") . "
+                                        <a href=\"$myrow[0]\" $target>$myrow[7]</a>
+                                        $icons $description";
+                                    } else {
+
+                                        // check if it's a url
+                                        if (preg_match('/^(https?|www)/', $myrow[0])) {
+                                            $tokenized.= "<a href=\"$myrow[0]\" $target>$myrow[8]</a> $icons $description";
+                                        } else {
+                                            $tokenized.= "$myrow[8] <em>$myrow[0]</em> $icons $description";
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                      case 'sss':
+                        global $tel_prefix;
+
+                        $querier = new Querier();
+                        $qs = "SELECT lname, fname, email, tel, title from staff WHERE email IN ('" . str_replace( ',', "','", $fields[1] ) . "') ORDER BY lname, fname";
+
+                        //print $qs;
+
+                        $staffArray = $querier->query($qs);
+
+                        foreach ($staffArray as $value) {
+
+                          // get username from email
+                          $truncated_email = explode("@", $value[2]);
+
+                          $staff_picture = $relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
+
+                          // Output Picture and Contact Info
+                          $tokenized .= "
+                          <div class=\"clearboth\"><img src=\"$staff_picture\" alt=\"Picture: $value[1] $value[0]\"  class=\"staff_photo2\" align=\"left\" style=\"margin-bottom: 5px;\" />
+                          <p><a href=\"mailto:$value[2]\">$value[1] $value[0]</a><br />$value[4]<br />
+                          Tel: $tel_prefix $value[3]</p>\n</div>\n";
+                        }
+                        break;
+                      case 'toc':
+                        $lobjTocPluslet = new Pluslet_TOC('', '', $our_subject_id);
+                        $lobjTocPluslet->setTickedItems( explode(',', $fields[1]) );
+                        $lobjTocPluslet->setHideTitleBar(1);
+                        $tokenized .= $lobjTocPluslet->output();
+                        break;
+
+                    }
+                } elseif (preg_match('/{|}/', $part) && preg_match('/\bdab\b|\bfaq\b|\bcat\b|\bfil\b/', $part)) { // looks kinda like a token
+                    $tokenized.= "<span style='background-color:yellow'>BROKEN TOKEN: " . $part . "</span>";
+                } else {
+                    $tokenized.= $part;
+                }
+            } // end foreach
+        } else {
+
+            $our_text = $our_text;
+            return;
+        }
+        $our_text = $tokenized;
+        return $our_text;
+    }

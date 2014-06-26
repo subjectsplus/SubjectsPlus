@@ -218,6 +218,7 @@ $results = "";
         $question = stripslashes(htmlspecialchars_decode($myrow["1"]));
         $answer = stripslashes(htmlspecialchars_decode($myrow["2"]));
         $answer = preg_replace('/<\/?div.*?>/ ', '', $answer);
+        $answer = tokenizeText($answer);
         $keywords = $myrow["3"];
 
         if ($result_count > 1) {

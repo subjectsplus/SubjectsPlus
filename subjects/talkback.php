@@ -264,6 +264,7 @@ if ($result_count != 0) {
 		$question = $myrow["1"];
 		$answer = $myrow["5"];
 		$answer = preg_replace('/<\/?div.*?>/ ', '', $answer);
+		$answer = tokenizeText($answer);
     // $answer = stripslashes(htmlspecialchars_decode($myrow["5"])); Louisa's proposed fix for messy answer @todo
 		$keywords = $myrow["3"];
 

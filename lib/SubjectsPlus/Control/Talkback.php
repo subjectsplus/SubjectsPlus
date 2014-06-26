@@ -302,7 +302,7 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
 
     if (isset($delete_result)) {
       // message
-      if (isset(GET["wintype"]) && $_GET["wintype"] == "pop") {
+      if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
         $this->_message = _("Thy will be done.  Offending Talkback deleted.  Close window to continue.");
       } else {
         $this->_message = _("Thy will be done.  Offending Talkback deleted.");
