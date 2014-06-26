@@ -50,6 +50,10 @@ SELECT p.pluslet_id AS 'id', su.shortform as 'shortform', p.title AS 'matching_t
 WHERE p.body LIKE "  . $this->getSearch() . "
 OR p.title LIKE "  . $this->getSearch() ."
 UNION
+SELECT title_id AS 'id', '' as 'shortform', title AS 'matching_text' , description as 'additional_text','' as 'tab_index',  '' AS 'parent_id', 'Record' as 'content_type' FROM title 
+WHERE title LIKE " . $this->getSearch() . "
+OR description LIKE " . $this->getSearch() . "
+UNION
 SELECT faq_id AS 'id', '' as 'shortform' ,  question AS 'matching_text', answer as 'additional_text','' as 'tab_index', '' AS 'parent_id', 'FAQ' as 'content_type' FROM faq 
 WHERE question LIKE " . $this->getSearch() . "
 OR answer LIKE " . $this->getSearch() . "

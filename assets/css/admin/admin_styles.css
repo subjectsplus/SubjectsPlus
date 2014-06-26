@@ -317,12 +317,10 @@ header {
 
 #maincontent h2  {
 
-  font-weight: 100;
-  margin-bottom: 25px;
+  font-weight: 400;
+  /* margin-bottom: 25px;
   margin-top: 5px;
-  font-size: 1.5em;
-
-
+  font-size: 1.5em; */
 }
 
 #maincontent h3 {
@@ -717,8 +715,6 @@ ul.ui-autocomplete li a{
 }
 
 .delete_button {
-  margin-left: 20px;
-  padding: 0 .1em;
 
 }
 
