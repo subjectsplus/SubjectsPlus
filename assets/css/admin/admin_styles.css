@@ -228,7 +228,7 @@ header {
 #topnav > li > div ul li:last-child, .last-item {border: none !important;}
 
 #sp_admin_search input {
-  line-height: 2em;
+  /*line-height: 2em;*/
   font-size: 1em;
   padding: .3em .4em;
   margin-left: .5em;

@@ -233,12 +233,28 @@ class Guide
         $guide_string = $guideMe->display();
         echo $guide_string;
 
-        ?>
+        /////////////////////
+        // Is Live
+        ////////////////////
 
+        $is_live = "<label for=\"active\">" . _("Visibility") . "</label>
+    <input name=\"active\" type=\"radio\" value=\"1\"";
+        if ($this->_active == 1) {
+            $is_live .= " checked=\"checked\"";
+        }
+        $is_live .= " /> " . _("Public:  Everyone can see") . " <br />
+        <input name=\"active\" type=\"radio\" value=\"0\"";
+        if ($this->_active == 0) {
+            $is_live .= " checked=\"checked\"";
+        }
+        $is_live .= " /> " . _("Hidden:  Not listed, but visible if you have the URL") . " <br />
+        <input name=\"active\" type=\"radio\" value=\"2\"";
+        if ($this->_active == 2) {
+            $is_live .= " checked=\"checked\"";
+        }
+        $is_live .= " /> " . _("Suppressed:  Must be logged in to SP to view");
 
-
-
-        <?php
+        print $is_live;
 
         /////////
         // Department dropdown
@@ -252,21 +268,33 @@ class Guide
         $current_dept = new Querier();
         $current_dept_query =
             "SELECT DISTINCT subject.subject, subject.subject_id, department.name, department.department_id, subject_department.date
-    FROM subject_department
-    JOIN subject ON subject.subject_id = subject_department.id_subject
-    JOIN department ON department.department_id = subject_department.id_department
-    WHERE subject.subject_id = '$this->_subject_id'
-    ORDER BY date DESC
-    LIMIT 1";
+            FROM subject_department
+            JOIN subject ON subject.subject_id = subject_department.id_subject
+            JOIN department ON department.department_id = subject_department.id_department
+            WHERE subject.subject_id = '$this->_subject_id'
+            ORDER BY date DESC
+            LIMIT 1";
 
         $current_dept_array = $current_dept->query($current_dept_query);
 
+        print "
+        </div>
+        </div>
+        <div class=\"pluslet\">
+                    <div class=\"titlebar\">
+                      <div class=\"titlebar_text\">" . _("Associations/Listings (optional)") . "</div>
+                      <div class=\"titlebar_options\"></div>
+                    </div>
+                <div class=\"pluslet_body\">
+                <span class=\"smaller\"> " . _("<strong>Department</strong> lets you group guides to provide a separate listing for a group of guides, say, Special Collections.  
+                <br /><strong>Parent Guide</strong> allows you to build a hierarchy for display.") . "</span>";
         ?>
 
             <label for="department"> Department </label>
 
 
             <select name="department">
+            <option value="">--<?php print _("none"); ?>--</option>
                 <?php
 
                 foreach ($deptArray as $dept) {
@@ -276,7 +304,7 @@ class Guide
                 ?>
 
             </select>
-
+            
         <?php
 
         ////////
@@ -299,12 +327,10 @@ class Guide
 
         $current_parent_array = $current_parent_querier->query($current_parent_query);
 
-
-
         ?>
         <label for="parent">Parent Guide </label>
         <select name="parent">
-
+        <option value="">--<?php print _("none"); ?>--</option>
             <option value="<?php if ($current_parent_array) {
                 echo $current_parent_array[0]['parent_id'];
             } ?>">
@@ -324,39 +350,17 @@ class Guide
 
         <?php
 
-
-
-        /////////////////////
-        // Is Live
-        ////////////////////
-
-        $is_live = "<label for=\"active\">" . _("Visibility") . "</label>
-    <input name=\"active\" type=\"radio\" value=\"1\"";
-        if ($this->_active == 1) {
-            $is_live .= " checked=\"checked\"";
+        // this is for legacy reasons, methinks
+        if (isset($main_col_size)) {
+        } else {
+        $main_col_size = null;
         }
-        $is_live .= " /> " . _("Public:  Everyone can see") . " <br />
-        <input name=\"active\" type=\"radio\" value=\"0\"";
-        if ($this->_active == 0) {
-            $is_live .= " checked=\"checked\"";
-        }
-        $is_live .= " /> " . _("Hidden:  Not listed, but visible if you have the URL") . " <br />
-        <input name=\"active\" type=\"radio\" value=\"2\"";
-        if ($this->_active == 2) {
-            $is_live .= " checked=\"checked\"";
-        }
-        $is_live .= " /> " . _("Suppressed:  Must be logged in to SP to view");
-if (isset($main_col_size)) {
-} else {
-$main_col_size = null;
-}
+
         $screen_layout = "<input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
 
 
         echo "
-
-    $is_live
-    $screen_layout
+        $screen_layout
     </div>
     </div>
     </div>
@@ -370,7 +374,7 @@ $main_col_size = null;
 
     if ($this->_subject_id != "") {
             if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
-            $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button pure-button-warning delete-guide\" value=\"" . _("Delete Forever!") . "\" />";
+            $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button delete_button pure-button-warning delete-guide\" value=\"" . _("Delete Forever!") . "\" />";
         }
     }
     // get edit history
@@ -458,7 +462,7 @@ $main_col_size = null;
 
         }
 
-        makePluslet(_("Metadata"), $metadata_box, "no_overflow");
+        makePluslet(_("Metadata (optional)"), $metadata_box, "no_overflow");
 
 
         echo "</div>\n</form>";
