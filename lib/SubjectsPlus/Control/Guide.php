@@ -317,7 +317,7 @@ class Guide
             </select>
             
         <?php
-             
+            
         ////////
         // Parent dropdown
         ////////
@@ -358,7 +358,7 @@ class Guide
             } ?>">
 
                 <?php if ($current_parent_array) {
-                    echo $current_parent_array[0]['parent_id'];
+                    echo $current_parent_array[0]['parent_subject'];
                 } ?> </option>
 
             <?php
