@@ -256,8 +256,6 @@ class Installer
 					  KEY `fk_staff_user_type_id_idx` (`user_type_id`),
 					  KEY `fk_staff_department_id_idx` (`department_id`),
 					  KEY `INDEXSEARCHstaff` (`lname`(255),`fname`(255)),
-					  CONSTRAINT `fk_supervisor_staff_id` FOREIGN KEY (`supervisor_id`) REFERENCES `staff` (`staff_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-					  CONSTRAINT `fk_staff_department_id` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE SET NULL ON UPDATE SET NULL,
 					  CONSTRAINT `fk_staff_user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`) ON DELETE SET NULL ON UPDATE SET NULL
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `talkback` (
