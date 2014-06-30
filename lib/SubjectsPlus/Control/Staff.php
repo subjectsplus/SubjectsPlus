@@ -888,8 +888,34 @@ public function outputLatLongForm() {
   public function insertRecord() {
 
     $db = new Querier;
-
-   
+                    
+                    ////////////////
+                    // check and hash password
+                    ////////////////
+                    
+                    if( $this->correctPassword($this->_password) )
+                    {
+                    $this->_password = md5($this->_password);
+                    }else
+                    {
+                    $this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
+                    
+                    return;
+                    
+                    }
+                    
+                    ////////////////
+                    // check whether email is unique
+                    ///////////////
+                    if( !$this->isEmailUnique( "insert" ) )
+                    {
+                    $this->_message = _("Email is not unique. Insert was not executed.");
+                   
+                    return;
+                    }
+                    
+                    
+                    
     $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
       emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long) VALUES ( "
@@ -897,14 +923,14 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_lname)) . ","
 		 . $db->quote(scrubData($this->_title)) . ","
 		 . $db->quote(scrubData($this->_tel)) . ","
-		 . $db->quote("1") . ","
+		 . $db->quote($this->_department_id) . ","
 		 . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
 		 . $db->quote(scrubData($this->_email, "email")) . ","
 		 . $db->quote(scrubData($this->_user_type_id, "integer")) . ","
 		 . $db->quote(scrubData($this->_password)) . ","
 		 . $db->quote(scrubData($this->_ptags)) . ","
-         . $db->quote(scrubData($this->_active, "integer")) . ","
-         . $db->quote(scrubData($this->_bio, "richtext")) . ","
+       . $db->quote(scrubData($this->_active, "integer")) . ","
+       . $db->quote(scrubData($this->_bio, "richtext")) . ","
 		 . $db->quote(scrubData($this->_position_number)) . ","
 		 . $db->quote(scrubData($this->_job_classification)) . ","
 		 . $db->quote(scrubData($this->_room_number)) . ","
@@ -920,13 +946,11 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_cell_phone)) . ","
 		 . $db->quote(scrubData($this->_fax)) . ","
 		 . $db->quote(scrubData($this->_intercom)) . ","
-         . $db->quote(scrubData($this->_lat_long)) . ")";
+       . $db->quote(scrubData($this->_lat_long)) . ")";
    
     $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
- 
-    print_r($rInsertStaff);
                                                                                                                                                       
                                                                                                                                                       
     $this->_staff_id = $db->last_id();
@@ -938,9 +962,9 @@ public function outputLatLongForm() {
       $path = "../../assets/users/_" . $user_folder[0];
 
     try {
-    
       mkdir($path);
     } catch(Exception $e) {
+                                                                                                                                                      
        echo 'Error creating folder: ',  $e->getMessage(), "\n";
 
     }
@@ -1138,7 +1162,7 @@ public function outputLatLongForm() {
     }
   }
 
-  function getMessage() {
+  public function getMessage() {
     return $this->_message;
   }
 

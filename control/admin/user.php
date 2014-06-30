@@ -212,13 +212,14 @@ if (isset($_POST["submit_record"])) {
     $feedback = $record->getMessage();
 
     // See query?
-    $record->deBug();
+    // $record->deBug();
 }
 
 /////////////////////
 // Start the record display
 ////////////////////
-
+print feedBack($feedback);
+    
 $record = (!isset($record)) ? new Staff($ok_record_id, '', TRUE) : $record;
 
 // show feedback if it isn't already set
