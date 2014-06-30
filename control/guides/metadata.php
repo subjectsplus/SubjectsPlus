@@ -66,7 +66,9 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 }
 
 if (isset($_POST["submit_record"])) {
-
+    //$feedback = $record->getMessage();
+   
+    
   // 1.  Make sure we have minimum non-dupe data
   // 1a. Make sure there is a title, location, and subject
   // we're using [staff_id][1] because the first value is an empty "--Select--"
@@ -96,7 +98,8 @@ if (isset($_POST["submit_record"])) {
   // Show feedback
   $feedback = $record->getMessage();
   // See all the queries?
-  //$record->deBug();
+ // $record->deBug();
+    print   "<div class=\"feedback\" style=\"display:block;\">" . $feedback . "</div>";
 }
 
 if (!isset($no_form)) {
@@ -109,14 +112,14 @@ if (!isset($feedback)) {
 }
 
 
-print feedBack($feedback, "feedback");
-
 
 /////////////////////////
 // SHOW FORM
 // If the form isn't suppressed, output it.  It will be blank if there's no id
 /////////////////////////
 
+
+    
 If (!isset($_REQUEST["wintype"])) {
   $_GET["wintype"] = "";
 }
@@ -127,6 +130,8 @@ if (!isset($no_form)) {
 
 //$record->deBug();
 
+ //   print $record->getMessage();
+    
 include("../includes/footer.php");
 ?>
 
@@ -329,4 +334,6 @@ include("../includes/footer.php");
 
 
 </script>
+
+
 
