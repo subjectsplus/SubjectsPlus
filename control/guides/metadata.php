@@ -98,7 +98,7 @@ if (isset($_POST["submit_record"])) {
   // Show feedback
   $feedback = $record->getMessage();
   // See all the queries?
-  $record->deBug();
+  //$record->deBug();
     print   "<div class=\"feedback\" style=\"display:block;\">" . $feedback . "</div>";
 }
 
@@ -128,7 +128,7 @@ if (!isset($no_form)) {
   $record->outputMetadataForm($_GET["wintype"]);
 }
 
-$record->deBug();
+//$record->deBug();
 
 print $record->getMessage();
     

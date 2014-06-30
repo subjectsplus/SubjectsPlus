@@ -276,11 +276,13 @@ class Guide
             LIMIT 1";
 
         $current_dept_array = $current_dept->query($current_dept_query);
-
+        
+      
         print "
         </div>
         </div>
         <div class=\"pluslet\">
+        
                     <div class=\"titlebar\">
                       <div class=\"titlebar_text\">" . _("Associations/Listings (optional)") . "</div>
                       <div class=\"titlebar_options\"></div>
@@ -294,19 +296,28 @@ class Guide
 
 
             <select name="department">
-            <option value="">--<?php print _("none"); ?>--</option>
-                <?php
 
-                foreach ($deptArray as $dept) {
-                    echo "<option value='" . $dept["department_id"] . "'>" . $dept["name"] . "</option>";
-                }
+<?php
+    if ($current_dept_array) {
+        foreach ($current_dept_array as $dept) {
+            echo "<option value='" . $dept["department_id"] . "'>" . $dept["name"] . "</option>";
+        }
+    } else {
+        
+        print "<option value='0'>--none--</option>";
+        
+        foreach ($deptArray as $dept) {
+            echo "<option value='" . $dept["department_id"] . "'>" . $dept["name"] . "</option>";
+        }
+    }
+    ?>
 
-                ?>
+
 
             </select>
             
         <?php
-
+             
         ////////
         // Parent dropdown
         ////////
@@ -327,10 +338,21 @@ class Guide
 
         $current_parent_array = $current_parent_querier->query($current_parent_query);
 
+
         ?>
         <label for="parent">Parent Guide </label>
+
         <select name="parent">
-        <option value="">--<?php print _("none"); ?>--</option>
+
+    <?php if ($current_parent_array) {
+        echo $current_parent_array[0]['child_parent']   ;
+    } else {
+        echo "<option value=''>--" . _('none') . "--</option>";
+    }
+    ?>
+
+
+
             <option value="<?php if ($current_parent_array) {
                 echo $current_parent_array[0]['parent_id'];
             } ?>">
@@ -641,9 +663,10 @@ class Guide
 
         // Insert subject_department relationship
         $insert_department = new Querier();
-        $dept_query = "INSERT INTO subject_department (subject_id, department_id) VALUES ('$this->_subject_id ', '$this->_department')";
+        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department')";
         $insert_department->exec($dept_query);
-
+        
+        print_r ($insert_department);
 
         // Insert parent guide relationship
 
