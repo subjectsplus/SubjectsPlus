@@ -317,7 +317,7 @@ include("../includes/footer.php");
 
    });
 
-   $('body').livequery('click','a[id*=confirm-no]', function(event) {
+   $('body').on('click','a[id*=confirm-no]', function(event) {
 
      $(this).parent().remove();
 
