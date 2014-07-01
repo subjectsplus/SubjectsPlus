@@ -41,7 +41,10 @@ class Staff {
   private $_intercom;
   private $_lat_long;
   private $_fullname;
-
+  private $_debug;
+    
+    
+ 
   public function __construct($staff_id="", $flag="", $full_record = FALSE) {
 
     if ($flag == "" && $staff_id == "") {
@@ -885,62 +888,34 @@ public function outputLatLongForm() {
   public function insertRecord() {
 
     $db = new Querier;
-
-    ////////////////
-    // check and hash password
-    ////////////////
-
-  	if( $this->correctPassword($this->_password) )
-  	{
-  		$this->_password = md5($this->_password);
-  	}else
-  	{
-  		$this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
-  		return;
-  	}
-
-  	////////////////
-  	// check whether email is unique
-  	///////////////
-  	if( !$this->isEmailUnique( "insert" ) )
-  	{
-  		$this->_message = _("Email is not unique. Insert was not executed.");
-  		return;
-  	}
-
-
-  	////////////////
-  	// alter values that are blank that need to be saved as NULL values
-  	////////////////
-
-  	if($this->_department_id == '')
-  	{
-  		$department_id = "NULL";
-  	}else
-  	{
-  		$department_id = $db->quote(scrubData($this->_department_id, "integer"));
-  	}
-
-  	if($this->_supervisor_id == '')
-  	{
-  		$supervisor_id = "NULL";
-  	}else
-  	{
-  		$supervisor_id = $db->quote(scrubData($this->_supervisor_id, "integer"));
-  	}
-
-  	if($this->_user_type_id == '')
-  	{
-  		$user_type_id = "NULL";
-  	}else
-  	{
-  		$user_type_id = $db->quote(scrubData($this->_user_type_id, "integer"));
-  	}
-
-    ////////////////
-    // Insert staff > full table
-    ////////////////
-
+                    
+                    ////////////////
+                    // check and hash password
+                    ////////////////
+                    
+                    if( $this->correctPassword($this->_password) )
+                    {
+                    $this->_password = md5($this->_password);
+                    }else
+                    {
+                    $this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
+                    
+                    return;
+                    
+                    }
+                    
+                    ////////////////
+                    // check whether email is unique
+                    ///////////////
+                    if( !$this->isEmailUnique( "insert" ) )
+                    {
+                    $this->_message = _("Email is not unique. Insert was not executed.");
+                   
+                    return;
+                    }
+                    
+                    
+                    
     $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
       emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long) VALUES ( "
@@ -948,18 +923,18 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_lname)) . ","
 		 . $db->quote(scrubData($this->_title)) . ","
 		 . $db->quote(scrubData($this->_tel)) . ","
-		 . $department_id . ","
+		 . $db->quote($this->_department_id) . ","
 		 . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
 		 . $db->quote(scrubData($this->_email, "email")) . ","
-		 . $user_type_id . ","
+		 . $db->quote(scrubData($this->_user_type_id, "integer")) . ","
 		 . $db->quote(scrubData($this->_password)) . ","
 		 . $db->quote(scrubData($this->_ptags)) . ","
-         . $db->quote(scrubData($this->_active, "integer")) . ","
-         . $db->quote(scrubData($this->_bio, "richtext")) . ","
+       . $db->quote(scrubData($this->_active, "integer")) . ","
+       . $db->quote(scrubData($this->_bio, "richtext")) . ","
 		 . $db->quote(scrubData($this->_position_number)) . ","
 		 . $db->quote(scrubData($this->_job_classification)) . ","
 		 . $db->quote(scrubData($this->_room_number)) . ","
-		 . $supervisor_id . ","
+		 . $db->quote($this->_supervisor_id) . ","
 		 . $db->quote(scrubData($this->_emergency_contact_name)) . ","
 		 . $db->quote(scrubData($this->_emergency_contact_relation)) . ","
 		 . $db->quote(scrubData($this->_emergency_contact_phone)) . ","
@@ -971,18 +946,14 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_cell_phone)) . ","
 		 . $db->quote(scrubData($this->_fax)) . ","
 		 . $db->quote(scrubData($this->_intercom)) . ","
-         . $db->quote(scrubData($this->_lat_long)) . "
-		)";
-    echo $qInsertStaff;
+     . $db->quote(scrubData($this->_lat_long)) . ")";
+
    
     $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
-
-    if (!$rInsertStaff) {
-      echo blunDer("We have a problem with the insert staff query: $qInsertStaff");
-    }
-
+                                                                                                                                                      
+                                                                                                                                                      
     $this->_staff_id = $db->last_id();
 
     // create folder
@@ -992,9 +963,9 @@ public function outputLatLongForm() {
       $path = "../../assets/users/_" . $user_folder[0];
 
     try {
-    
       mkdir($path);
     } catch(Exception $e) {
+                                                                                                                                                      
        echo 'Error creating folder: ',  $e->getMessage(), "\n";
 
     }
@@ -1005,12 +976,12 @@ public function outputLatLongForm() {
       $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
     }
 
-    // /////////////////////
+    ///////////////////////
     // Alter chchchanges table
     // table, flag, item_id, title, staff_id
     ////////////////////
 
-    $updateChangeTable = changeMe("staff", "insert", $this->_staff_id, $this->_email, $_SESSION['staff_id']);
+    //$updateChangeTable = changeMe("staff", "insert", $this->_staff_id, $this->_email, $_SESSION['staff_id']);
 
     // message
     $this->_message = _("Thy Will Be Done.  Added.");
@@ -1192,7 +1163,7 @@ public function outputLatLongForm() {
     }
   }
 
-  function getMessage() {
+  public function getMessage() {
     return $this->_message;
   }
 
@@ -1214,7 +1185,7 @@ public function outputLatLongForm() {
   }
 
   function deBug() {
-    print $this->_debug;
+    echo $this->_debug;
   }
 
   function correctPassword($lstrPassword)

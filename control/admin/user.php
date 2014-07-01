@@ -192,13 +192,18 @@ if (isset($_POST["submit_record"])) {
     // Submit form
     $record = new Staff($_POST["staff_id"], "post", TRUE);
 
+    
     //////////////////////////////////
     // Is this an insert or an update?
     //////////////////////////////////
 
     if ($_POST["staff_id"] == "") {
         $record->insertRecord();
+        
+        
         $ok_record_id = $record->getRecordId();
+        
+
     } else {
         $record->updateRecord();
     }
@@ -207,13 +212,14 @@ if (isset($_POST["submit_record"])) {
     $feedback = $record->getMessage();
 
     // See query?
-    //$record->deBug();
+    // $record->deBug();
 }
 
 /////////////////////
 // Start the record display
 ////////////////////
-
+print feedBack($feedback);
+    
 $record = (!isset($record)) ? new Staff($ok_record_id, '', TRUE) : $record;
 
 // show feedback if it isn't already set
