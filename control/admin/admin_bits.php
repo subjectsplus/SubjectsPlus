@@ -303,7 +303,7 @@ if (!empty($subsArray)) {
   $staff_list = _("Sorry, there were no results.");
 }
 
-print "<div class=\"box_feedback growl growl-default\">$message</div><br /><br />";
+print "<div class=\"box_feedback\">$message</div><br /><br />";
 
 print $staff_list;
 

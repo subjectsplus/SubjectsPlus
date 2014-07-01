@@ -171,6 +171,4 @@ foreach( $lobjBeforePluslets as $lobjPluslet )
 //$updateChangeTable = changeMe("guide", "update", $_COOKIE["our_guide_id"], $_COOKIE["our_guide"], $_SESSION['staff_id']);
 
 
-//print "<script type='text/javascript'>$.growl.notice({message: 'The guide was updated successfully.', title:'" . _("Guide Updated.") . "'})</script>";
-
 print "<strong>" . _("Thy Will Be Done:  Guide Updated.") . "</strong>";
