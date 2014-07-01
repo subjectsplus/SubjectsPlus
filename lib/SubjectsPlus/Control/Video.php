@@ -290,18 +290,19 @@ $thumbnail
     /////////////////////
     // add to vid table
     /////////////////////
+      $db = new Querier;
+      
+    $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (" .
+	  $db->quote(scrubData($this->_title, 'text')) . ","  .
+      $db->quote(scrubData($this->_description, 'richtext')) . "," .
+	  $db->quote(scrubData($this->_source, 'text')) . "," .
+      $db->quote(scrubData($this->_foreign_id, 'text')) . "," .
+      $db->quote(scrubData($this->_duration, 'text')) . "," .
+      $db->quote(scrubData($this->_date, 'text')) . "," .
+      $db->quote(scrubData($this->_display, 'integer')) . "," .
+      $db->quote(scrubData($this->_vtags, 'text')) . ")";
 
-    $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (
-	  $db->quote(scrubData($this->_title, 'text')) ,
-	  $db->quote(scrubData($this->_description, 'richtext')) ,
-	  $db->quote(scrubData($this->_source, 'text')) ,
-      $db->quote(scrubData($this->_foreign_id, 'text')) ,
-      $db->quote(scrubData($this->_duration, 'text')) ',
-      $db->quote(scrubData($this->_date, 'text')) ,
-      $db->quote(scrubData($this->_display, 'integer')),
-      $db->quote(scrubData($this->_vtags, 'text'))
-          )";
-
+            
     $rInsertVid = $db->exec($qInsertVid);
 
     $this->_video_id = $db->last_id();
