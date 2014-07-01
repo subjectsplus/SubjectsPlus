@@ -12,18 +12,22 @@ $subsubcat = "";
 $subcat = "videos";
 $page_title = "Video Bits include";
 $header = "noshow";
-
+    
+use SubjectsPlus\Control\Querier;
 
 include("../includes/header.php");
+
 
 // Connect to database
 
 
-//print_r($_POST);
+print_r($_POST);
 
 switch ($_REQUEST["type"]) {
 
     case "ingest":
+        $db = new Querier;
+        
       // check if we already have a record like this
       $our_id = scrubData($_REQUEST["foreign_id"]);
       
@@ -42,23 +46,29 @@ switch ($_REQUEST["type"]) {
           1                
         )";
         
-        $rinsert = $db->query($qinsert);
+          print_r ($qinsert);
+        $rinsert = $db->exec($qinsert);
         $video_id = $db->last_id();
         
         
       } else {
         // Do an update
+          $db = new Querier;
+
         
+          
         $qupdate = "UPDATE video 
-          SET title = '" . $db->quote(scrubData($_POST["title"])) . "',
-          description = '" . $db->quote(scrubData($_POST["description"], "richtext")) . "',
-          source = '" . $db->quote(scrubData($_POST["source"])) . "',
-          foreign_id = '" . $db->quote(scrubData($_POST["foreign_id"])) . "',
-          duration = '" . $db->quote(scrubData($_POST["duration"])) . "',
-          date = '" . $db->quote(scrubData($_POST["upload_date"])) . "'
-          WHERE foreign_id = '" . $our_id . "'";
-        
-        $rupdate = $db->query($qupdate);
+          SET title = $db->quote(scrubData($_POST['title'])),
+          description = $db->quote(scrubData($_POST['description'], 'richtext')) ,
+          source =  $db->quote(scrubData($_POST['source'])) ,
+          foreign_id = $db->quote(scrubData($_POST['foreign_id'])) ,
+          duration = $db->quote(scrubData($_POST['duration'])) ,
+          date = $db->quote(scrubData($_POST['upload_date'])) ,
+          WHERE foreign_id =  $our_id";
+         
+          print_r ($qupdate);
+    
+        $rupdate = $db->exec($qupdate);
         $video_id = $rupdate[0];
           
       }
@@ -83,4 +93,3 @@ switch ($_REQUEST["type"]) {
         break;
 
 }
-?>
