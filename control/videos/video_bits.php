@@ -21,7 +21,7 @@ include("../includes/header.php");
 // Connect to database
 
 
-print_r($_POST);
+//print_r($_POST);
 
 switch ($_REQUEST["type"]) {
 
@@ -46,7 +46,7 @@ switch ($_REQUEST["type"]) {
           1                
         )";
         
-          print_r ($qinsert);
+       //   print_r ($qinsert);
         $rinsert = $db->exec($qinsert);
         $video_id = $db->last_id();
         
@@ -58,15 +58,15 @@ switch ($_REQUEST["type"]) {
         
           
         $qupdate = "UPDATE video 
-          SET title = $db->quote(scrubData($_POST['title'])),
-          description = $db->quote(scrubData($_POST['description'], 'richtext')) ,
-          source =  $db->quote(scrubData($_POST['source'])) ,
-          foreign_id = $db->quote(scrubData($_POST['foreign_id'])) ,
-          duration = $db->quote(scrubData($_POST['duration'])) ,
-          date = $db->quote(scrubData($_POST['upload_date'])) ,
-          WHERE foreign_id =  $our_id";
+          SET title = " . $db->quote(scrubData($_POST['title'])) . ",
+          description = " . $db->quote(scrubData($_POST['description'], 'richtext')) . ",
+          source = " . $db->quote(scrubData($_POST['source'])) . " ,
+          foreign_id = " . $db->quote(scrubData($_POST['foreign_id'])) . ",
+          duration = " . $db->quote(scrubData($_POST['duration'])) . " ,
+          date = " .  $db->quote(scrubData($_POST['upload_date'])) . " ,
+          WHERE foreign_id = " . $our_id ;
          
-          print_r ($qupdate);
+          //print_r ($qupdate);
     
         $rupdate = $db->exec($qupdate);
         $video_id = $rupdate[0];
