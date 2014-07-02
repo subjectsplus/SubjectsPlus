@@ -290,18 +290,19 @@ $thumbnail
     /////////////////////
     // add to vid table
     /////////////////////
+      $db = new Querier;
+      
+    $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (" .
+	  $db->quote(scrubData($this->_title, 'text')) . ","  .
+      $db->quote(scrubData($this->_description, 'richtext')) . "," .
+	  $db->quote(scrubData($this->_source, 'text')) . "," .
+      $db->quote(scrubData($this->_foreign_id, 'text')) . "," .
+      $db->quote(scrubData($this->_duration, 'text')) . "," .
+      $db->quote(scrubData($this->_date, 'text')) . "," .
+      $db->quote(scrubData($this->_display, 'integer')) . "," .
+      $db->quote(scrubData($this->_vtags, 'text')) . ")";
 
-    $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (
-	  " . $db->quote(scrubData($this->_title, 'text')) . ",
-	  " . $db->quote(scrubData($this->_description, 'richtext')) . ",
-	  " . $db->quote(scrubData($this->_source, 'text')) . ",
-      " . $db->quote(scrubData($this->_foreign_id, 'text')) . ",
-      " . $db->quote(scrubData($this->_duration, 'text')) . "',
-      " . $db->quote(scrubData($this->_date, 'text')) . ",
-      " . $db->quote(scrubData($this->_display, 'integer')) . ",
-      " . $db->quote(scrubData($this->_vtags, 'text')) . "
-          )";
-
+            
     $rInsertVid = $db->exec($qInsertVid);
 
     $this->_video_id = $db->last_id();
@@ -326,21 +327,26 @@ $thumbnail
 
   public function updateRecord() {
 
+      $db = new Querier;
     /////////////////////
     // update video table
     /////////////////////
+   //   print "UPDATE RECORD!!!";
+      
+    $qUpVid = "UPDATE video SET title = " . $db->quote($this->_title) .
+	  
+      ", description = " . $db->quote(scrubData($this->_description, 'text')) . "," .
+      "source = " . $db->quote($this->_source) . "," .
+      "foreign_id = " . $db->quote($this->_foreign_id) . "," .
+      "duration = " . $db->quote($this->_duration) . "," .
+      "date =  " . $db->quote($this->_date) . "," .
+      "display = " . $db->quote($this->_display) . "," .
+      "vtags =  ". $db->quote($this->_vtags) .
+      
+      "WHERE video_id = " . $db->quote($this->_video_id);
 
-    $qUpVid = "UPDATE video
-      SET title = " . $db->quote(scrubData($this->_title, 'text')) . ",
-	  description = " . $db->quote(scrubData($this->_description, 'richtext')) . ",
-	  source = " . $db->quote(scrubData($this->_source, 'text')) . ",
-      foreign_id = " . $db->quote(scrubData($this->_foreign_id, 'text')) . ",
-      duration = " . $db->quote(scrubData($this->_duration, 'text')) . ",
-      date = " . $db->quote(scrubData($this->_date, 'text')) . ",
-      display = " . $db->quote(scrubData($this->_display, 'integer')) . ",
-      vtags =  " . $db->quote(scrubData($this->_vtags, 'text')) . "
-      WHERE video_id = " . scrubData($this->_video_id, 'integer');
-
+      //print $qUpVid;
+      
     $rUpVid = $db->exec($qUpVid);
 
 

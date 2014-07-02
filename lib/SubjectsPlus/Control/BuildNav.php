@@ -15,6 +15,7 @@ class BuildNav {
     global $AssetPath;
     global $CpanelPath;
     global $subcat;
+    global $is_um; 
 
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
@@ -129,6 +130,7 @@ class BuildNav {
     }
 
     // Stats tab
+if ($is_um == TRUE) {
     if (isset($_SESSION["records"]) && $_SESSION["records"] == 1) {
       print "
             <li><a href=\"$CpanelPath" . "stats/\"";
@@ -143,6 +145,7 @@ class BuildNav {
         </ul>
        </div></li>";
     }
+}
 
     // Admin tab
     if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1) {

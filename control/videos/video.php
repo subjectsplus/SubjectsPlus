@@ -18,7 +18,7 @@ $page_title = "Manage Video";
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
     $no_header = "yes";
 } else {
-  $_REQUEST["wintype"] = NULL;
+  // $_REQUEST["wintype"] = NULL;
 }
 
 // init
@@ -29,6 +29,7 @@ include("../includes/header.php");
 
 // Connect to database
 
+  //  print "AHH!";
 
 
 // Test our record_id, if it exists; must be integer
@@ -52,6 +53,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
         //$record->deBug();
         // Show feedback
         $feedback = $record->getMessage();
+        print $feedback;
         // don't display the form again
         $no_form = TRUE;
     } else {
@@ -65,6 +67,9 @@ if (isset($_POST["submit_record"])) {
 
     $record = new Video($_POST["video_id"], "post");
 
+    //print_r ($record);
+    
+    //print "Submitting record";
     //////////////////////////////////
     // Is this an Insert or an update?
     //////////////////////////////////
@@ -72,14 +77,17 @@ if (isset($_POST["submit_record"])) {
     if ($_POST["video_id"] == "") {
         $record->insertRecord();
         $ok_record_id = $record->getRecordId();
+      //  print "Inserting record";
     } else {
         $record->updateRecord();
+     //   print "Updating record";
     }
 
     // Show feedback
     $feedback = $record->getMessage();
+    print $feedback;
     // See all the queries?
-    //$record->deBug();
+   // $record->deBug();
 }
 
 $record = new Video($ok_record_id);
@@ -87,11 +95,12 @@ $record = new Video($ok_record_id);
 // show feedback if it isn't already set
 if (!$feedback) {
     $feedback = $record->getMessage();
+   // debug $feedback;
 }
 
-if ($_REQUEST["wintype"] == "pop") {
-    print "<div id=\"maincontent\">";
-}
+
+
+
 
 echo "<div class=\"feedback\">$feedback</div><br /><br />";
 
