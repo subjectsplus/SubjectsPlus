@@ -125,12 +125,15 @@ If (!isset($_REQUEST["wintype"])) {
 }
 
 if (!isset($no_form)) {
+  print "<div id=\"maincontent\">";
   $record->outputMetadataForm($_GET["wintype"]);
 }
 
 //$record->deBug();
 
 print $record->getMessage();
+
+print "</div>"; // end #maincontent
     
 include("../includes/footer.php");
 ?>

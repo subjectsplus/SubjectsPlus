@@ -139,6 +139,7 @@ $record->outputForm($wintype);
 
 //$record->deBug();
 
+print "</div>"; // close #maincontent
 include("../includes/footer.php");
 ?>
 
