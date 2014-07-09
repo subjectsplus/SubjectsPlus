@@ -134,7 +134,7 @@ if (!isset($no_form)) {
 print $record->getMessage();
 
 print "</div>"; // end #maincontent
-    
+
 include("../includes/footer.php");
 ?>
 
@@ -178,6 +178,24 @@ include("../includes/footer.php");
      $('#item_list').prepend('<div class="new_item-'+our_item_id+'"></div>');
      $('.new_item-'+our_item_id+'').hide().load("../guides/helpers/guide_bits.php",
                                                 {type: 'add_item', our_item_id: our_item_id, our_item_text: our_item_text}).fadeIn(1600);
+     // now remove from the dropdown
+     remove_me.remove();
+
+   });
+
+   ///////////////////////////////////
+   // add parent to list on dropdown
+   ///////////////////////////////////
+
+   $('select[name*=parent_id]').livequery('change', function() {
+     var our_item_id = $(this).val();
+     var our_item_text = $('select[name*=parent_id] :selected').text();
+     //var remove_me = ".box_no_overflow option[value=" + our_item_id = "]";
+     var remove_me = $('#parent_menu option[value='+our_item_id+']');
+
+     $('#parent_list').prepend('<div class="new_item-'+our_item_id+'"></div>');
+     $('.new_item-'+our_item_id+'').hide().load("../guides/helpers/guide_bits.php",
+                                                {type: 'add_parent', our_item_id: our_item_id, our_item_text: our_item_text}).fadeIn(1600);
      // now remove from the dropdown
      remove_me.remove();
 

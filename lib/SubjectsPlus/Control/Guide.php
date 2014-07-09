@@ -24,7 +24,7 @@ class Guide
     private $_message;
     private $_all_tabs;
     private $_department;
-    private $_parent;
+    private $_parents;
     private $_debug;
 
     public $_ok_staff = array();
@@ -66,7 +66,6 @@ class Guide
                 $this->_shortform = $_POST["shortform"];
                 $this->_extra = $_POST['extra'];
                 $this->_department = $_POST['department'];
-                $this->_parent = $_POST['parent'];
 
                 //add http to redirect url if not present
                 $this->_redirect_url = strpos($this->_redirect_url, "http://") === 0 || strpos($this->_redirect_url, "https://") === 0
@@ -75,6 +74,10 @@ class Guide
                 // data stored in staff_subject table
                 $this->_staff_id = $_POST["staff_id"]; // array
                 $this->_staff_count = count($this->_staff_id); // # of items in above array
+
+                // data stored in subject_subject table
+                $this->_parent_id = $_POST["parent_id"]; // array
+                $this->_parent_count = count($this->_parent_id); // # of items in above array                
 
                 if ($use_disciplines == TRUE) {
                     //data stored in subject_discipline table
@@ -129,6 +132,13 @@ class Guide
                 self::getAssociatedStaff();
 
                 ///////////////////
+                // Query subject_subject table
+                // used to get our set of subjects associated
+                // ////////////////
+
+                self::getAssociatedParents();
+
+                ///////////////////
                 // Query Discipline table
                 // used to get our set of disciplines associated
                 // ////////////////
@@ -153,6 +163,29 @@ class Guide
         }
 
         $this->_debug .= "<p>Staff query: $q2";
+    }
+
+
+    public function getAssociatedParents()
+    {
+
+        $current_parent_querier = new Querier();
+        $current_parent_query =
+        "SELECT DISTINCT parent.subject_id AS parent_id, parent.subject AS parent_subject,  child.subject AS child_subject, child.subject_id AS child_id,  has.date, has.subject_parent
+        FROM subject_subject AS has
+        JOIN subject as child ON child.subject_id = has.subject_child
+        JOIN subject as parent ON parent.subject_id = has.subject_parent
+        WHERE child.subject_id = '$this->_subject_id'
+        ORDER BY has.date DESC";
+
+        $this->_parents = $current_parent_querier->query($current_parent_query);
+
+        foreach ($this->_parents as $value) {
+            $this->_ok_parents[] = $value[0];
+        }
+
+        $this->_debug .= "<p>Parents query: $current_parent_query";
+
     }
 
     public function getAssociatedDisciplines()
@@ -312,65 +345,39 @@ class Guide
     }
     ?>
 
-
-
             </select>
             
         <?php
-            
+ 
+        ////////////////////////////
+        // Parenthood
+        ///////////////////////////
+
+        $parents_list = "";
+
+        if ($this->_parents == FALSE) {
+            // No results
+            $parents_list = "";
+        } else {
+            // loop through results
+            foreach ($this->_parents as $value) {
+
+                $parents_list .= self::outputParents($value);
+            }
+        }
+
         ////////
         // Parent dropdown
         ////////
 
         $querier = new Querier();
-        $subject_query = "SELECT subject_id, subject FROM subject;";
-        $subject_array = $querier->query($subject_query);
+        $subject_query = "SELECT subject_id, subject FROM subject WHERE subject_id != '$this->_subject_id'";
+        $subjectArray = $querier->query($subject_query);
 
-        $current_parent_querier = new Querier();
-        $current_parent_query =
-            "SELECT DISTINCT child.subject AS child_subject, child.subject_id AS child_id, parent.subject AS parent_subject, parent.subject_id AS parent_id, has.date, has.subject_parent
-    FROM subject_subject AS has
-    JOIN subject as child ON child.subject_id = has.subject_child
-    JOIN subject as parent ON parent.subject_id = has.subject_parent
-    WHERE child.subject_id = '$this->_subject_id'
-    ORDER BY has.date DESC
-    LIMIT 1";
+        $parentMe = new Dropdown("parent_id[]", $subjectArray, "", "50", "--Select--");
+        $parent_string = $parentMe->display();
 
-        $current_parent_array = $current_parent_querier->query($current_parent_query);
-
-
-        ?>
-        <label for="parent">Parent Guide </label>
-
-        <select name="parent">
-
-    <?php if ($current_parent_array) {
-        echo $current_parent_array[0]['child_parent']   ;
-    } else {
-        echo "<option value=''>--" . _('none') . "--</option>";
-    }
-    ?>
-
-
-
-            <option value="<?php if ($current_parent_array) {
-                echo $current_parent_array[0]['parent_id'];
-            } ?>">
-
-                <?php if ($current_parent_array) {
-                    echo $current_parent_array[0]['parent_subject'];
-                } ?> </option>
-
-            <?php
-            foreach ($subject_array as $subject) {
-                echo "<option value='" . $subject["subject_id"] . "'>" . $subject["subject"] . "</option>";
-
-
-            }
-            ?>
-        </select>
-
-        <?php
+        $parenthood = "$parent_string <div id=\"parent_list\">$parents_list</div> <!-- parent guides inserted here -->";
 
         // this is for legacy reasons, methinks
         if (isset($main_col_size)) {
@@ -382,6 +389,9 @@ class Guide
 
 
         echo "
+        <label for=\"parent\">" . _("Parent Guides") . "</label>
+        $parenthood
+
         $screen_layout
     </div>
     </div>
@@ -506,6 +516,24 @@ class Guide
         </div>";
 
         return $ourstaff;
+    }
+
+    public function outputParents($value)
+    {
+        global $IconPath;
+
+        $ourparents = "
+        <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item\">
+        <input name=\"parent_id[]\" value=\"$value[0]\" type=\"hidden\" />
+        $value[1]<br />
+        </div>
+        <div class=\"selected_item_options\">
+        <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
+        </div>
+        </div>";
+
+        return $ourparents;
     }
 
     public function outputDisciplines($value)
@@ -666,13 +694,13 @@ class Guide
         $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department')";
         $insert_department->exec($dept_query);
         
-        print_r ($insert_department);
+        //print_r ($insert_department);
 
-        // Insert parent guide relationship
+        /////////////////////
+        // insert into subject_subject for parent-child
+        ////////////////////
 
-        $insert_parent = new Querier();
-        $parent_query = "INSERT INTO subject_subject (subject_child, subject_parent) VALUES ('$this->_subject_id', '$this->_parent')";
-        $insert_parent->exec($parent_query);
+        self::modifySubSub();
 
 
         // message
@@ -681,6 +709,7 @@ class Guide
 
     public function updateRecord()
     {
+        global $use_disciplines;
 
         // Check to make sure the title or shortform haven't been changed to create dupes
         $is_dupe = self::dupeCheck();
@@ -702,7 +731,7 @@ class Guide
         /////////////////////
         // update subject table
         /////////////////////
-	$db = new Querier();
+	   $db = new Querier();
 
     	$qUpSubject = "UPDATE subject SET subject = " . $db->quote(scrubData($this->_subject, "text")) . ",
         shortform = " . $db->quote(scrubData($this->_shortform, "text")) . ",
@@ -721,16 +750,6 @@ class Guide
         $insert_department = new Querier();
         $dept_query = "INSERT INTO subject_department (subject_id, department_id) VALUES ('$this->_subject_id ', '$this->_department')";
         $insert_department->exec($dept_query);
-
-
-        // Insert parent guide relationship
-
-        $insert_parent = new Querier();
-        $parent_query = "INSERT INTO subject_subject (subject_child, subject_parent) VALUES ('$this->_subject_id', '$this->_parent')";
-        $insert_parent->exec($parent_query);
-
-
-
 
         /////////////////////
         // clear staff_subject
@@ -754,29 +773,53 @@ class Guide
 
         self::modifySS();
 
+
+        /////////////////////
+        // clear subject_subject -- for parent-child relationships
+        /////////////////////
+
+
+        $qClearSubS = "DELETE FROM subject_subject WHERE subject_child = " . $this->_subject_id;
+
+        $rClearSubS = $db->exec($qClearSubS);
+
+        $this->_debug .= "<p>2. clear subject_subject: $qClearSubS</p>";
+
+        if (!$rClearSubS) {
+            echo blunDer("We have a problem with the clear subject_subject query: $qClearSubS");
+        }
+
+
+        /////////////////////
+        // insert into subject_subject
+        ////////////////////
+
+        self::modifySubSub();
+
         /////////////////////
         // clear subject_discipline
         /////////////////////
 
+        if ($use_disciplines == TRUE) {
 
-        /*
-        $qClearSD = "DELETE FROM subject_discipline WHERE subject_id = " . $this->_subject_id;
+            $qClearSD = "DELETE FROM subject_discipline WHERE subject_id = " . $this->_subject_id;
 
-        $rClearSD = $db->query($qClearSD);
+            $rClearSD = $db->query($qClearSD);
 
-        $this->_debug .= "<p>2. clear subject_discipline: $qClearSD</p>";
+            $this->_debug .= "<p>2. clear subject_discipline: $qClearSD</p>";
 
-        if (!$rClearSD) {
-            echo blunDer("We have a problem with the clear subject_discipline query: $qClearSD");
+            if (!$rClearSD) {
+                echo blunDer("We have a problem with the clear subject_discipline query: $qClearSD");
+            }
+
+
+            /////////////////////
+            // insert into subject_discipline
+            ////////////////////
+
+            self::modifySD();
+
         }
-         */
-
-        /////////////////////
-        // insert into subject_discipline
-        ////////////////////
-
-        self::modifySD();
-
         // /////////////////////
         // Alter chchchanges table
         // table, flag, item_id, title, staff_id
@@ -1068,6 +1111,26 @@ class Guide
                 $rUpSS = $db->exec($qUpSS);
 
                 $this->_debug .= "<p>3. (insert staff_subject loop) : $qUpSS</p>";
+
+            }
+        }
+    }
+
+    function modifySubSub()
+    {
+
+        $de_duped = array_unique($this->_parent_id);
+
+        foreach ($de_duped as $value) {
+            if (is_numeric($value)) {
+                $db = new Querier;
+                $qUpSS = "INSERT INTO subject_subject (subject_child, subject_parent) VALUES (
+                " . scrubData($this->_subject_id, 'integer') . ",
+                " . scrubData($value, 'integer') . ")";
+                $db = new Querier;
+                $rUpSS = $db->exec($qUpSS);
+
+                $this->_debug .= "<p>3. (insert subject_subject loop) : $qUpSS</p>";
 
             }
         }
