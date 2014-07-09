@@ -762,11 +762,6 @@ class Guide
 
         $this->_debug .= "<p>2. clear staff_subject: $qClearSS</p>";
 
-        if (!$rClearSS) {
-            echo blunDer("We have a problem with the clear staff_subject query: $qClearSS");
-        }
-
-
         /////////////////////
         // insert into staff_subject
         ////////////////////
@@ -784,10 +779,6 @@ class Guide
         $rClearSubS = $db->exec($qClearSubS);
 
         $this->_debug .= "<p>2. clear subject_subject: $qClearSubS</p>";
-
-        if (!$rClearSubS) {
-            echo blunDer("We have a problem with the clear subject_subject query: $qClearSubS");
-        }
 
 
         /////////////////////
@@ -807,11 +798,6 @@ class Guide
             $rClearSD = $db->query($qClearSD);
 
             $this->_debug .= "<p>2. clear subject_discipline: $qClearSD</p>";
-
-            if (!$rClearSD) {
-                echo blunDer("We have a problem with the clear subject_discipline query: $qClearSD");
-            }
-
 
             /////////////////////
             // insert into subject_discipline
