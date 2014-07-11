@@ -69,6 +69,9 @@ class CompleteMe {
     // now print out some variables for the js
 
 echo "<script type=\"text/javascript\">
+
+jQuery(document).ready(function() {
+
  var parents = [];
 
 $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
@@ -140,8 +143,11 @@ if (item.content_type != undefined) {
     
                }
 	});
-      console.log(parents);
+
+});
+      
 	</script>";
-  }
+ 
+ }
 
 }

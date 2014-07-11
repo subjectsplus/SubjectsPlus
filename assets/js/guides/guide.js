@@ -34,9 +34,14 @@ jQuery(document).ready(function(){
 
     // Append an intital section
 
-    if (jQuery('[id^=section]').length !== 0) {
+    if (jQuery('[id^=section]').length) {
+
+            console.log("Looks like there is a section already.");
 
     } else {
+
+            console.log("Appending a section"); 
+
 	jQuery.ajax({
 	    url: "helpers/section_data.php",
 	    type: "POST",
@@ -44,11 +49,14 @@ jQuery(document).ready(function(){
 	    dataType: "html",
 	    success: function(html) {
 		$('div#tabs-0').append(html);
-		$(document).scrollTop($('body').height());
-	    }
+		//$(document).scrollTop($('body').height());
+	            
+            }
 	});
 
     }
+
+
     makeSectionSlider('div[id^="slider_section"]');
 
     jQuery(".box-item").on('drag', function()
