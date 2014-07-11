@@ -962,19 +962,28 @@ public function outputLatLongForm() {
       $user_folder = explode("@", $this->_email);
       $path = "../../assets/users/_" . $user_folder[0];
 
-    try {
-      mkdir($path);
-    } catch(Exception $e) {
-                                                                                                                                                      
-       echo 'Error creating folder: ',  $e->getMessage(), "\n";
+ 
+                
 
-    }
+           if(!@mkdir($path)) {
+  //  $mkdirErrorArray = error_get_last();
+   // throw new Exception('cant create directory ' .$mkdirErrorArray['message'], 1);
+      
+         // message
+    $this->_message = _("Couldn't create directory in /assets/users/. Please check this folder's permissions. ");
+      return;
 
+    }  else  {                                                                                                                    
       // And copy over the generic headshot image and headshot_large image
       $nufile = $path . "/headshot.jpg";
       $copier = copy("../../assets/images/headshot.jpg", $nufile);
       $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
+
+
+      // message
+      $this->_message = _("Thy Will Be Done.  Added.");
     }
+}
 
     ///////////////////////
     // Alter chchchanges table
@@ -983,8 +992,7 @@ public function outputLatLongForm() {
 
     //$updateChangeTable = changeMe("staff", "insert", $this->_staff_id, $this->_email, $_SESSION['staff_id']);
 
-    // message
-    $this->_message = _("Thy Will Be Done.  Added.");
+ 
   }
 
   public function updateRecord() {
