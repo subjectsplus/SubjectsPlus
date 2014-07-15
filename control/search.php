@@ -17,7 +17,7 @@ if (isset($_POST["searchterm"])) {
 		switch($result['content_type']) {
 
 	 	  case 'Record':
-	 	  	$records_results[] = "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
+	 	  	$records_results[] = "<a href='records/record.php?record_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
 		    break;
 
 	 	  case 'Talkback':

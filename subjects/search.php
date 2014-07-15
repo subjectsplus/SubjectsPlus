@@ -10,6 +10,7 @@
 use SubjectsPlus\Control\AllHandler;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Search;
+use SubjectsPlus\Control\CompleteMe;
 
 
 $page_title = "Search Results";
@@ -19,6 +20,8 @@ include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 include("includes/header.php");
 
+// Our search box
+$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60", "");
 
 if (isset($_POST["searchterm"])) {
 	$search = new Search;
@@ -32,26 +35,26 @@ if (isset($_POST["searchterm"])) {
 		switch($result['content_type']) {
 
 	 	  case 'Record':
-	 	  	$records_results[] = "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
+	 	  	$records_results[] = "<a href='databases.php?letter=%" . $result['matching_text'] . "%'/>" . $result['matching_text'] .  "</a>";	    
 		    break;
 
 	 	  case 'Talkback':
-	 	  	$talkback_results[] = "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
+	 	  	$talkback_results[] = "<a href='talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
 		    break;
 
 		  case 'Subject Guide':
-		    $guides_results[] = "<a href='guides/guide.php?subject_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+		    $guides_results[] = "<a href='guide.php?subject_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
 		    break;
 
 		  case 'FAQ':
-		    $faq_results[] = "<a href='faq/faq.php?faq_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+		    $faq_results[] = "<a href='faq.php?faq_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
 		    break;
 
 		  case 'Pluslet':
-		    $pluslets_results[] = "<a href='guides/guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
+		    $pluslets_results[] = "<a href='guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
 		    break;
 		  case 'Staff':
-		    $staff_results[] = "<a href='staff/staff.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
+		    $staff_results[] = "<a href='staff.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
 		    break;
 		}   
 	}
@@ -95,11 +98,21 @@ $subtitle = _("Search Results for ") . $_POST['searchterm'];
   <div class="pure-g-r">
     <div class="pure-u-1-2">
 
+  <div class="pluslet no_overflow">
+    <div class="titlebar">
+      <div class="titlebar_text"><?php print _("Search Subject Guides, Database Records, Staff List, FAQs, etc."); ?></div>
+      <div class="titlebar_options"></div>
+    </div>
+    <div class="pluslet_body">
+    <?php $input_box->displayBox(); ?>
+    </div>
+    </div>
+
 	<?php makePluslet($subtitle, $search_result, "no_overflow"); ?> 
 
     </div>
     <div class="pure-u-1-2">
-    <?php makePluslet(_("Search"), "probably should put a search box here", "no_overflow"); ?> 
+
     </div>
   </div>
 
