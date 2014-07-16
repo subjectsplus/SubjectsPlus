@@ -1088,11 +1088,13 @@ public function outputLatLongForm() {
 
   public function updatePassword($new_pass) {
 
+    $db = new Querier;
+
     $q = "UPDATE staff SET password = md5( " . $db->quote(scrubData($new_pass)) . " ) WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
-    $r = $db->query($q);
+    $r = $db->exec($q);
 
     if ($r) {
       $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "password update", $_SESSION['staff_id']);
@@ -1103,11 +1105,13 @@ public function outputLatLongForm() {
 
   public function updateBio($new_bio) {
 
+    $db = new Querier;
+
     $q = "UPDATE staff SET bio = " . $db->quote(scrubData($new_bio, "richtext")) . " WHERE staff_id = " . $this->_staff_id;
 
     $this->_debug = "<p class=\"debug\">Bio Update query: $q</p>";
 
-    $r = $db->query($q);
+    $r = $db->exec($q);
     // now our detailed version
     $q2 = "UPDATE staff SET bio = " . $db->quote(scrubData($new_bio, "richtext")) . " WHERE staff_id = " . $this->_staff_id;
 
