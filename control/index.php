@@ -57,7 +57,7 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
     <div class="pluslet_body">
 
     <?php print $headshot; ?>
-          <p class="tight"><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/> <a href="includes/set_password.php?staff_id="<?php echo $_SESSION['staff_id']; ?> id="reset_password">Reset Password </a></p>
+          <p class="tight"><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/> <a href="includes/set_password.php?staff_id=<?php print $_SESSION["staff_id"]; ?>" id="reset_password">Reset Password </a></p>
       <?php
       print $mod_bio;
       print $mod_photo;
