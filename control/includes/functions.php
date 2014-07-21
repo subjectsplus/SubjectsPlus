@@ -1006,7 +1006,7 @@ function displayLogoOnlyHeader()
 	//display logo only header
 	?>
 		<header id="header">
-		  <img src="<?php echo 'http://' .$lstrURL . '/assets/'; ?>images/admin/logo_small.png" />
+		  <img class="login-only-logo" src="<?php echo 'http://' .$lstrURL . '/assets/'; ?>images/admin/logo_small.png" />
 		</header>
 		<?php
 }

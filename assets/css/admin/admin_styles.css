@@ -67,7 +67,7 @@ body {
   text-align: left;
   line-height: 1.5em;
   color: #333;
-  background: #e3e1d9 url(../../assets/images/admin/mission_control_lg.jpg) no-repeat center center fixed;
+  background: #e3e1d9 url(../../images/admin/mission_control_lg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -1447,6 +1447,13 @@ img.tooltip  {
   float:left;
 }
 
+
+.logon-only-logo {
+
+float: left;
+margin: .5em 0 0 2.5em;
+
+}
 
 .pluslet_body object {
   margin: 3px 5px 3px 3px;
