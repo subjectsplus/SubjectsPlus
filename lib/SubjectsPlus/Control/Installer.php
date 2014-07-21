@@ -454,7 +454,7 @@ class Installer
 
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-			<div class="box" name="error_page" align="center">
+			<div class="install-pluslet" name="error_page" align="center">
 				<h2 class="bw_head"><?php echo _( "Installation Complete" ); ?></h2>
 
 				<p><?php echo _( "SubjectsPlus installation complete. Please log in." ); ?></p>
@@ -477,7 +477,7 @@ class Installer
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-	<div class="box" name="error_page" align="center">
+	<div class="install-pluslet" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Installation Error" ); ?></h2>
 
 				<p><?php echo $lstrReason; ?></p>
