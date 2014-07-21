@@ -315,7 +315,7 @@ class Updater
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-	<div class="box" name="error_page">
+	<div class="install-pluslet" name="error_page">
     <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 3.0" ); ?></h2>
 
 				<div align="center">
@@ -457,7 +457,7 @@ class Updater
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-	<div class="box" name="error_page" align="center">
+	<div class="install-pluslet" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Update Complete" ); ?></h2>
 
 				<p><?php echo _( "SubjectsPlus update to 3.0 complete. Please log in." ); ?></p>
@@ -489,7 +489,7 @@ class Updater
 	{
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-	<div class="box" name="error_page" align="center">
+	<div class="install-pluslet" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Updater Error" ); ?></h2>
 
 				<p><?php echo $lstrReason; ?></p>
