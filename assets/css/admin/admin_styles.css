@@ -1590,6 +1590,29 @@ img.tooltip  {
   margin-right: 10px;
 }
 
+.install-pluslet {
+
+padding: 1em 1em 1em 1em;
+margin: 1em 1em 1em 0;
+/* background-color: #fff; */
+/* border: 2px solid #ccc; */
+/* border: none; */
+clear: both;
+background-color: #fff;
+/* border: 2px solid #efefef; */
+border-radius: 5px;
+overflow: auto;
+word-wrap: break-word;
+
+/* former inline-styles */ 
+margin-right: auto; 
+margin-left: auto;
+max-width: 800px; 
+text-align: center;
+
+
+}
+
 
 #controlpage div.pluslet {
   padding: 0em 0em;

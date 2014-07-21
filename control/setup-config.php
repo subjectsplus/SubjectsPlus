@@ -176,11 +176,11 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
 						if( !isInstalled() )
 						{
-							?> <div class="box" style="margin-right: auto; margin-left: auto; max-width: 800px; text-align: center;">Please make sure you are not currently logged in on any installation of SubjectsPlus on current server.<br /><a href="install.php">Run the install!</a></div> <?php
+							?> <div class="install-pluslet">Please make sure you are not currently logged in on any installation of SubjectsPlus on current server.<br /><a href="install.php">Run the install!</a></div> <?php
 						}
 						else
 						{
-							?> <div class="box" style="margin-right: auto; margin-left: auto; max-width: 800px;"><a href="update.php">Update to 2.0!</a></div> <?php
+							?> <div class="install-pluslet"><a href="update.php">Update to 2.0!</a></div> <?php
 						}
 					}else
 					{
