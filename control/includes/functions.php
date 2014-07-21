@@ -1005,9 +1005,9 @@ function displayLogoOnlyHeader()
 
 	//display logo only header
 	?>
-		<div id="header">
-		   <div style="width: 100%; text-align: left;"><img src="<?php echo 'http://' .$lstrURL . '/assets/'; ?>images/admin/logo_small.png"  border="0" class="logo" width="136" height="28" /></div>
-		</div>
+		<header id="header">
+		  <img src="<?php echo 'http://' .$lstrURL . '/assets/'; ?>images/admin/logo_small.png" />
+		</header>
 		<?php
 }
 
