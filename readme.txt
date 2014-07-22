@@ -1,4 +1,4 @@
-// SubjectsPlus Version 2.0 //
+// SubjectsPlus Version 3.0 //
 
 SubjectsPlus is based on "Pirate Source," developed by the Joyner Library at East
 Carolina University.  No license was attached to the initial distribution of the

@@ -100,7 +100,9 @@ if (isset($this_id)) {
   // In this section, we get the widths of the three columns, which add up to 12
   // We then do a little bit of math to get them into columns that add up to a bit under 100
   // In order to convert to css %.  If this page were bootstrapped, this wouldn't be necessary.
+  if (isset($lobj) ) {
   $col_widths = explode("-", $jobj->{'maincol'});
+  }
 
   if (isset($col_widths[0]) && $col_widths[0] > 0) {
     $left_width = $col_widths[0] * 8;
@@ -276,35 +278,6 @@ ob_end_flush();
    };
 
    jQuery("#newbox").hoverIntent(boxyConfig);
-
-   // config our box for tabs
-   /*
-   function addTabOptionsBox(){
-   jQuery("#tabs_options").show();
-   return;
-
-   }
-
-   function removeTabOptionsBox(){
-   jQuery("#tabs_options").hide();
-   //alert ($( "#extra" ).val());
-   return;
-   }
-
-   var tabsOptionsConfig = {
-   interval: 50,
-   sensitivity: 4,
-   over: addTabOptionsBox,
-   timeout: 500,
-   out: removeTabOptionsBox
-   };
-
-   jQuery("#tabsbox").hoverIntent(tabsOptionsConfig);
-   jQuery("#tabsbox input[type='text']").change(function() {
-   jQuery("#save_tab").show();
-   });
-
-    */
 
    ///////////////////////////////////
    // config our box for layout slider
@@ -727,7 +700,14 @@ ob_end_flush();
 
 
 
-<input id="extra" type="hidden" size="1" value="<?php print $jobj->{'maincol'}; ?>" name="extra" />
+<input id="extra" type="hidden" size="1" value="<?php
+
+if (isset($lobj)) {
+ print $jobj->{'maincol'}; 
+
+}
+
+?>" name="extra" />
 
 <!-- Save Button -->
 <p align="center" id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
