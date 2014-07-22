@@ -119,7 +119,7 @@ if( isInstalled() )
 				}else
 				{
 					//include again if config variables have changed
-					include('includes/config.php');
+					include_once('includes/config.php');
 
 					//new installer instance and install and on success show complete page
 					$lobjInstaller = new Installer();
@@ -134,6 +134,6 @@ if( isInstalled() )
 	}
 }
 
-include("includes/footer.php");
+include_once("includes/footer.php");
 
 ?>
