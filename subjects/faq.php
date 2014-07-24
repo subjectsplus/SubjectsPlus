@@ -211,14 +211,12 @@ $results = "";
 
     foreach ($full_result as $myrow) {
 
-        
-        
         $show_row_count = "";
-        $faq_id = $myrow["0"];
-        $question = stripslashes(htmlspecialchars_decode($myrow["1"]));
-        $answer = stripslashes(htmlspecialchars_decode($myrow["2"]));
+        $faq_id = $myrow[0];
+        $question = stripslashes(htmlspecialchars_decode($myrow[1]));
+        $answer = stripslashes(htmlspecialchars_decode($myrow[2]));
         $answer = preg_replace('/<\/?div.*?>/ ', '', $answer);
-        $answer = tokenizeText($answer);
+       
         $keywords = $myrow["3"];
 
         if ($result_count > 1) {
@@ -227,10 +225,10 @@ $results = "";
         }
         $results .= "<a name=\"faq-$row_count\"></a>\n
 		<div class=\"pluslet_simple\">\n
-		<h2>$show_row_count$question</h2>\n
-
+		<h2 class=\"question\">$show_row_count$question</h2>\n
+                <p class=\"answer\">
 		$answer
-
+                </p>
 		</div>\n
 ";
 
