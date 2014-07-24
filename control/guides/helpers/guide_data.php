@@ -155,9 +155,11 @@ switch ($_POST["flag"]) {
     	}
 
     	//removed by david because new db referential integrity does this automatically
-        $q2 = "DELETE FROM `pluslet_subject` where pluslet_id = '$delete_id' AND subject_id = '$subject_id'";
+    /*    
+    $q2 = "DELETE FROM `pluslet_subject` where pluslet_id = '$delete_id' AND subject_id = '$subject_id'";
         $r2 = $db->query($q2);
-        //print $q2;
+*/      
+  //print $q2;
 
         print _("<div class=\"feedback\" style=\"display: block;\">Box Removed</div>");
         break;

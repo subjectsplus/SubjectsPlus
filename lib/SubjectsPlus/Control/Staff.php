@@ -859,7 +859,9 @@ public function outputLatLongForm() {
     if ($_SESSION["admin"] != "1") {
       return FALSE;
     }
-
+  
+  $db = new Querier;
+  
     // Delete the records from staff table
     $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 

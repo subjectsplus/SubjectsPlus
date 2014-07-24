@@ -1,8 +1,10 @@
 <?php
-header('Content-type: application/json');
+    header('Content-Type: text/javascript');
+    header('Cache-control: public');
+    header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 21600));
 
     require_once(__DIR__ . "/functions.php");
-    require_once(__DIR__ . DIRECTORY_SEPARATOR . "autoloader.php");
+    //require_once(__DIR__ . DIRECTORY_SEPARATOR . "autoloader.php");
 
 
 
@@ -46,6 +48,9 @@ header('Content-type: application/json');
              ));
 
     //include guide.js if reffer is from guide.php
+
+if (isset( $_SERVER['HTTP_REFERER'])) {
+
 	$lobjSplit = explode( '/', $_SERVER['HTTP_REFERER']);
     if( strpos($lobjSplit[count($lobjSplit) - 1], 'guide.php') !== FALSE && $lobjSplit[count($lobjSplit) - 2] == 'guides' )
     {
@@ -56,7 +61,7 @@ header('Content-type: application/json');
 
              ));
     }
-
+} else { }
     // Apply the JSMinPlus filter to all the files
     $jquery = new AssetCollection(array (new AssetReference($am, 'jquery')) );
     $jquery_ui = new AssetCollection(array (new AssetReference($am, 'jquery_ui')) );
@@ -67,9 +72,7 @@ header('Content-type: application/json');
     $javascripts = new AssetCollection(array ($jquery, $jquery_ui, $other_js ));
 
     // Tell the browser that this is Javascript and that it should be cached
-    header('Content-Type: text/javascript');
-    header('Cache-control: public');
-    header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 21600));
+
 
 
     echo $javascripts->dump();
