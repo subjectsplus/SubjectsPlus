@@ -599,7 +599,7 @@ class Guide
         if (isset($delete_result2)) {
             // message
             if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
-                $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue." . $q2);
+                $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
             } else {
                 $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.");
             }

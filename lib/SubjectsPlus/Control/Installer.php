@@ -366,7 +366,7 @@ class Installer
 		//all the subjectqueries -- default data
 		$this->lobjInsertQueries = array(
 					"INSERT INTO `chchchanges` VALUES (1,1,'guide',1,'General','insert','2011-03-26 19:16:19'),(2,1,'record',1,'Sample Record','insert','2011-03-26 20:08:54')",
-					"INSERT INTO `subject` VALUES (1,'General',1,'general','',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19',NULL,'')",
+					"INSERT INTO `subject` VALUES (1,'General',1,'general','',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19',NULL,'{\"maincol\":\"\"}')",
 					"INSERT INTO `tab` VALUES (1,1,'Main',0,NULL,1)",
 					"INSERT INTO `section` VALUES (1,0,'4-6-2',1)",
 					"INSERT INTO `pluslet` VALUES (1,'All Items by Source','','',0,'Special','',0,0,NULL),(2,'Key to Icons','','',0,'Special','',0,0,NULL),(3,'Subject Specialist','','',0,'Special','',0,0,NULL),
