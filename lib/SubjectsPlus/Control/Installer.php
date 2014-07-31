@@ -190,16 +190,12 @@ class Installer
 					  `id_subject` bigint(20) NOT NULL,
 					  `id_department` int(11) NOT NULL,
 					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-					  PRIMARY KEY (`idsubject_department`),
-					  KEY `fk_subject_id_idx` (`id_subject`),
-					  KEY `fk_department_id_idx` (`id_department`),
-					  CONSTRAINT `fk_department_id` FOREIGN KEY (`id_department`) REFERENCES `department` (`department_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-					  CONSTRAINT `fk_subject_id` FOREIGN KEY (`id_subject`) REFERENCES `subject` (`subject_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+					  PRIMARY KEY (`idsubject_department`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `tab` (
 					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
-					  `label` varchar(20) NOT NULL DEFAULT 'Main',
+					  `label` varchar(120) NOT NULL DEFAULT 'Main',
 					  `tab_index` int(11) NOT NULL DEFAULT '0',
 					  `external_url` varchar(500) DEFAULT NULL,
 					  `visibility` int(1) NOT NULL DEFAULT '1',
