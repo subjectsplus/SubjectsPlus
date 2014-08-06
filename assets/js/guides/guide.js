@@ -36,23 +36,27 @@ jQuery(document).ready(function(){
 
     if (jQuery('[id^=section]').length) {
 
-            console.log("Looks like there is a section already.");
+        //  console.log("Looks like there is a section already.");
 
     } else {
 
-            console.log("Appending a section"); 
-
-	jQuery.ajax({
-	    url: "helpers/section_data.php",
-	    type: "POST",
-	    data: { action : 'create' },
-	    dataType: "html",
-	    success: function(html) {
-		$('div#tabs-0').append(html);
-		//$(document).scrollTop($('body').height());
+        
+	if (document.URL.indexOf('guide.php') > 0) {
+	    
+	    console.log("Appending a section"); 
+	    
+	    jQuery.ajax({
+		url: "helpers/section_data.php",
+		type: "POST",
+		data: { action : 'create' },
+		dataType: "html",
+		success: function(html) {
+		    $('div#tabs-0').append(html);
+		    //$(document).scrollTop($('body').height());
 	            
-            }
-	});
+		}
+	    });
+	}
 
     }
 
@@ -405,9 +409,9 @@ function setupSaveButton( lstrSelector )
 		var lstrTitle = addslashes(jQuery("#pluslet-update-title-" + lintID).val());
 		if (lstrTitle === "undefined") {
 		    b = jQuery(".pluslet-" + lintID).find('.titlebar_text').clone();
-			b.children().remove();
-			lstrTitle = b.text().trim();
-			lboolSettingsOnly = true;
+		    b.children().remove();
+		    lstrTitle = b.text().trim();
+		    lboolSettingsOnly = true;
 		}
 
 		//Div Selector
@@ -584,11 +588,11 @@ function setupSaveButton( lstrSelector )
 		var isclone = 0;
 	    }
 
-		//only settings update
-		if(lboolSettingsOnly)
-		{
-			ourflag = 'settings';
-		}
+	    //only settings update
+	    if(lboolSettingsOnly)
+	    {
+		ourflag = 'settings';
+	    }
 	}else
 	{
 	    var ourflag = 'insert';
@@ -1007,30 +1011,30 @@ function setupMiscLiveQueries()
 
     });
 
-	////////////////////
-	// box-settings bind to show
-	///////////////////
+    ////////////////////
+    // box-settings bind to show
+    ///////////////////
     jQuery(document).on('click', 'a[id*=settings-]', function(event) {
         jQuery(this).parent().next('.box_settings').toggle('slow');
     });
 
-	////////////////////
-	// on select change show save guide
-	///////////////////
-	jQuery(document).on('change', 'select[id^=titlebar-styling]', function(event) {
-		var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
+    ////////////////////
+    // on select change show save guide
+    ///////////////////
+    jQuery(document).on('change', 'select[id^=titlebar-styling]', function(event) {
+	var pluslet_id = jQuery(this).parent().parent().parent().parent().attr('id') ;
 
-		if( jQuery('#' + pluslet_id).attr('name').indexOf('modified-pluslet-') == -1)
-		{
-			jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-' + jQuery('#' + pluslet_id).attr('name'));
-		}
+	if( jQuery('#' + pluslet_id).attr('name').indexOf('modified-pluslet-') == -1)
+	{
+	    jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-' + jQuery('#' + pluslet_id).attr('name'));
+	}
 
-		jQuery("#response").hide();
-		jQuery("#save_guide").fadeIn();
-	});
+	jQuery("#response").hide();
+	jQuery("#save_guide").fadeIn();
+    });
 
 
-	////////////////////
+    ////////////////////
     // Make titlebar options box clickable
     ///////////////////
     jQuery(document).on('change', '.pure-checkbox', function() {
@@ -1039,7 +1043,7 @@ function setupMiscLiveQueries()
 
     	if( jQuery('#' + pluslet_id).attr('name').indexOf('modified-pluslet-') == -1)
     	{
-	    	jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-' + jQuery('#' + pluslet_id).attr('name'));
+	    jQuery('#' + pluslet_id).attr('name', 'modified-pluslet-' + jQuery('#' + pluslet_id).attr('name'));
     	}
 
     	jQuery("#response").hide();
