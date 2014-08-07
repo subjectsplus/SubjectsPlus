@@ -42,7 +42,7 @@ class Config
 		$this->lboolChangeSalt = FALSE;
 		$this->lboolChangeAPIKey = FALSE;
 
-		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus' );
+		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port' );
 		$this->lobjSetupSiteKeys = array( 'resource_name', 'institution_name', 'administrator', 'administrator_email', 'email_key', 'tel_prefix' );
 	}
 
@@ -215,7 +215,7 @@ class Config
 		$lstrError = '';
 
 		try {
-			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';charset=utf8';
+			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $dbport . ';charset=utf8';
 			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array(PDO::ATTR_PERSISTENT => true));
 		} catch (\PDOException $e) {
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
@@ -982,11 +982,13 @@ class Config
 		global $uname;
 		global $pword;
 		global $dbName_SPlus;
+	        global $db_port;
 
 		$hname = $this->lobjNewConfigValues[ 'hname' ];
 		$uname = $this->lobjNewConfigValues[ 'uname' ];
 		$pword = $this->lobjNewConfigValues[ 'pword' ];
 		$dbName_SPlus = $this->lobjNewConfigValues[ 'dbName_SPlus' ];
+                $db_port =  $this->lobjNewConfigValues[ 'db_port' ];
 
 		//if installing, change the salt of the SubjectsPlus config file
 		if( $this->lboolChangeSalt )
