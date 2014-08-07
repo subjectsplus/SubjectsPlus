@@ -32,6 +32,8 @@ jQuery(document).ready(function(){
     makeAddSection('a[id="add_section"]');
 
 
+    
+
     // Append an intital section
 
     if (jQuery('[id^=section]').length) {
@@ -83,7 +85,13 @@ jQuery(document).ready(function(){
 	}
     });
 
+
+    
+    
+
+
 }); // End jQuery within document.ready
+
 
 
 
@@ -237,6 +245,9 @@ function makeDropable( lstrSelector )
 	});
 
     });
+
+
+
 }
 
 function makeSortable( lstrSelector, lstrType )
@@ -1229,6 +1240,9 @@ function reLayout( lintSectionID, lc, cc, rc )
 
 }
 
+
+
+
 ///////////////
 // function to add section to current tab
 //////////////
@@ -1282,6 +1296,20 @@ function makeSectionSlider( lstrSelector )
 				       $( "div#section_" + sec_id ).attr( 'data-layout', extra_val);
 
 				       reLayout(sec_id, lw, mw, sw);
+				       
+			
+				       
+				       
+				       // Hide or show the third column if needed 
+
+				       if (sw < 0) {
+					   jQuery('#container-2').hide();
+				       }
+
+				       if (sw > 0) {
+					   jQuery('#container-2').show();
+				       }
+				       
 
 				       //show save guide button
 				       jQuery("#response").hide();
@@ -1289,4 +1317,19 @@ function makeSectionSlider( lstrSelector )
 				   }
 			       });
 			   });
+
+
+
+    
+
 }
+
+window.onload = function() { 
+    // Wait until everything on the page has loaded then... 
+    // Hide the third column if it doesn't have any width
+    if (jQuery('#container-2').width() === 0) {	
+	jQuery('#container-2').hide();
+	
+    }
+
+};
