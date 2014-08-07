@@ -42,8 +42,17 @@ class Querier  {
     	global $uname;
     	global $pword;
     	global $dbName_SPlus;
+        global $db_port;
+    
+    if( isset($db_port) ) {
+      
+    } else {
 
-        $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';charset=utf8';
+      $db_port = "3306";
+    
+    }
+    
+        $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $dbport . ';charset=utf8';
 
         try {
             $this->_connection = new PDO($dsn, $uname, $pword, array(PDO::ATTR_PERSISTENT => true));
