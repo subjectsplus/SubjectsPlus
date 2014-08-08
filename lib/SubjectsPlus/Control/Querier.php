@@ -52,7 +52,7 @@ class Querier  {
     
     }
     
-        $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $dbport . ';charset=utf8';
+        $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $db_port . ';charset=utf8';
 
         try {
             $this->_connection = new PDO($dsn, $uname, $pword, array(PDO::ATTR_PERSISTENT => true));
