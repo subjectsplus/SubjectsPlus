@@ -19,6 +19,7 @@ class DbHandler {
       
     global $IconPath;
     global $proxyURL;
+
     $db = new Querier;
     // sanitize submission
     
@@ -206,10 +207,12 @@ class DbHandler {
         $information = "";
       }
 
+      $target = targetBlanker();    
+
       $items .= "
 	<tr class=\"zebra $row_colour\" valign=\"top\">
 		
-		<td><a href=\"$url\">$item_title</a> $information $helpguide $display_note_text
+		<td><a href=\"$url\" $target>$item_title</a> $information $helpguide $display_note_text
                     <div class=\"list_bonus\">$icons $bonus</div></td>
                     
 	</tr>";

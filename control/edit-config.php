@@ -81,7 +81,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"user_photo_update" => array( _( "Enable Users to Edit Headshot Photo" ), "", "boolean", "right", "small", "" , "" ),
 
-							"is_responsive" => array( _( "Use Responsive Design" ), "", "boolean", "right", "small", "" , "" ),
+							"target_blank" => array( _( "Have database links show in new tab" ), _("Affects display on databases.php and within subject guides"), "boolean", "right", "small", "" , "" ),
 
 							"mod_rewrite" => array( _( "Use URL rewrites" ), _( "Make links prettier." ), "boolean", "right", "small", "" , "" ),
 
