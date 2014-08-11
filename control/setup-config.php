@@ -1,4 +1,4 @@
-/ *   @todo
+/*   @todo
  *
  *
  * 	 write the config file
@@ -7,7 +7,7 @@
  *   @date Jan 2013
  *   @description This file will help a user walk through basic options, and
  *   @file control/setup-config.php
-/**
+*/
 <?php
 
 
