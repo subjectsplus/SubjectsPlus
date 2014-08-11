@@ -1,3 +1,5 @@
+/ *   @todo
+ *
  *
  * 	 write the config file
  *   @author dgonzalez
@@ -7,8 +9,7 @@
  *   @file control/setup-config.php
 /**
 <?php
- *   @todo
- */
+
 
 use SubjectsPlus\Control\Config;
 
