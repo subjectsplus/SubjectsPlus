@@ -112,7 +112,7 @@ if ($check_this) {
         $selected_tab = 0;
     }
 
-    //create new guide object and set admin view to true
+    //create new guide object and set admin view to false
     $lobjGuide = new Guide($this_id);
     $lobjGuide->_isAdmin = FALSE;
 
