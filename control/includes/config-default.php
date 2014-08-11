@@ -128,11 +128,10 @@ $pword = "password";
 $dbName_SPlus = "subjectsplus";
 
 //////////////////////
-// Responsive Layout?
-// This will add more css weight to page load
+// Open database links with a target=blank
 //////////////////////
 
-$is_responsive = TRUE;  // FALSE is off
+$target_blank = TRUE;
 
 //////////////////////
 // Mmm . . . delicious
