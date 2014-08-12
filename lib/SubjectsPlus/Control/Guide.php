@@ -986,8 +986,6 @@ class Guide
     			print $this->dropBoxes(2, 'sidebar', $sidebar_pluslets);
     			print '<div id="clearblock" style="clear:both;"></div> <!-- this just seems to allow the space to grow to fit dropbox areas -->';
     		} else {
-    			global $is_responsive;
-
 
     			$col_widths = explode("-", $lobjSection['layout']);
     			$purified = ""; // init
@@ -1016,8 +1014,6 @@ class Guide
     				$side_width = 0;
     			}
 
-    			// responsive or not?
-    			if (isset($is_responsive) && $is_responsive == TRUE) {
     				// make sure they aren't 0
 
     				if ($left_width > 0) {
@@ -1049,17 +1045,6 @@ class Guide
     					   </div>";*/
     				}
 
-    			} else {
-    				print "<div id=\"leftcol\">
-				$left_col_pluslets
-				</div>
-				<div id=\"maincol\">
-				$main_col_pluslets
-				</div>
-				<div id=\"rightcol\">
-				$sidebar_pluslets
-				</div>";
-    			}
     		}
 
     		print "</div>";
