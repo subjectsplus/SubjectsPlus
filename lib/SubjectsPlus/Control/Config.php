@@ -795,7 +795,7 @@ class Config
 				$lstrHTML .= "&nbsp;<span class=\"tooltipcontainer\"><img class=\"tooltip\" src=\"../assets/images/icons/help.png\" data-notes=\"{$lstrTitle}\" /></span>\n";
 			}
 
-			$lstrHTML .= "<br />\n";
+			//$lstrHTML .= "<br />\n";
 			$lstrHTML .= "<p style=\"font-size: smaller; padding: 0px 0px 5px 0px;\">{$lobjOption[1]}</p>\n";
 
 			//based on type, create HTML form inputs
