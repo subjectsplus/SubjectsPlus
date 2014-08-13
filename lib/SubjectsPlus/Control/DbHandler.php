@@ -46,8 +46,9 @@ class DbHandler {
             $lobjGuide = new Guide($subject_id);
             $lobjTitleIds = $lobjGuide->getRelatedTitles();
 
-          $condition1 = "WHERE subject_id = $subject_id";
+          $condition1 = "WHERE (subject_id = $subject_id";
           $condition1 .= count($lobjTitleIds) > 0 ? "\nOR t.title_id IN (" . implode( ',', $lobjTitleIds) . ")" : "";
+          $condition1 .= ")";
           $condition2 = "WHERE subject_id = $subject_id";
         } else {
           $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
@@ -90,7 +91,7 @@ class DbHandler {
 
         $condition2 = "WHERE alternate_title LIKE " . $db->quote("%" + $qualifier + "%");
     }
-      
+
       $q1 = "SELECT distinct left(t.title,1) as initial, t.title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide
             FROM title as t
             INNER JOIN location_title as lt
@@ -104,7 +105,7 @@ class DbHandler {
             INNER JOIN source as s
             ON rk.source_id = s.source_id
             $condition1
-            AND l.eres_display = 'Y'
+            AND eres_display = 'Y'
             ORDER BY newtitle";
 
       $q2 = "SELECT distinct left(t.alternate_title,1) as initial, t.alternate_title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide
@@ -120,11 +121,10 @@ class DbHandler {
             INNER JOIN source as s
             ON rk.source_id = s.source_id
             $condition2
-		    AND eres_display = 'Y'
+		        AND eres_display = 'Y'
             $condition3
-		   ) ORDER BY newtitle";
-      
-      //print $q2 . ";";
+		        ORDER BY newtitle";
+
     
       
     $r = $db->query($q1);
