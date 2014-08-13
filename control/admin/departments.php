@@ -43,7 +43,7 @@ if (isset($_POST["add_department"])) {
         $feedback = _("Thy Will Be Done.  Department list updated.");
 
     } else {
-        $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
+        $feedback = _("Thwarted!  Something has gone wrong with insert.  Contact the admin.");
     }
 }
 
@@ -93,8 +93,8 @@ if (isset($_POST["update_departments"])) {
         url = " . $db->quote(scrubData($value[3])) . "
         WHERE department_id = " . scrubData($key, "integer");
 
-        //print $qUpDept;
-        $rUpDept = $db->query($qUpDept);
+        print $qUpDept;
+        $rUpDept = $db->exec($qUpDept);
 
         if (!$rUpDept) {
             $error = 1;
@@ -106,7 +106,7 @@ if (isset($_POST["update_departments"])) {
     if ($error != 1) {
         $feedback = _("Thy Will Be Done.  Department list updated.");
     } else {
-        $feedback = _("Thwarted!  Something has gone wrong.  Contact the admin.");
+        $feedback = _("Thwarted!  Something has gone wrong with update.  Contact the admin.");
     }
 
     // Show feedback
@@ -139,7 +139,7 @@ foreach ($deptArray as $value) {
 $dept_box ="
 <p>" . _("Enter department name, telephone number, email, website url.  Drag departments to change display order.") . "</p>
 <button id=\"save_guide\" class=\"button pure-button pure-button-primary\" style=\"display: block;\" name=\"update_departments\" >" . _("SAVE CHANGES") . "</button>
-
+<form id=\"departments\" action=\"\" method=\"post\">
 
 <ul id=\"sortable-\" class=\"sortable_list\">
 $ourlist
@@ -148,16 +148,16 @@ $ourlist
 
 $add_dept_box = "<form id=\"new_department\" action=\"\" class=\"pure-form pure-form-stacked\" method=\"post\">
 <label for=\"department\">" . _("Department Name") . "</label>
-<input type=\"text\" name=\"department\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"department\" id=\"\" size=\"40\" value=\"\">
 
 <label for=\"telephone\">" . _("Telephone") . "</label>
-<input type=\"text\" name=\"telephone\" id=\"\" size=\"10\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"telephone\" id=\"\" size=\"10\" value=\"\">
 
 <label for=\"email\">" . _("Email") . "</label>
-<input type=\"text\" name=\"email\" id=\"\" size=\"20\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"email\" id=\"\" size=\"20\" value=\"\">
 
 <label for=\"url\">" . _("Website") . "</label>
-<input type=\"text\" name=\"url\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"url\" id=\"\" size=\"40\" value=\"\">
 <p></p>
 <button class=\"button pure-button pure-button-primary\" id=\"add_dept\" name=\"add_department\" >" . _("Add New Department") . "</button>
 </form>";
