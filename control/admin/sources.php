@@ -31,9 +31,9 @@ if (isset($_POST["add_source"])) {
   ////////////////
 
   $qInsertSource = "INSERT INTO source (source, rs) VALUES (
-		" . $db->quote(scrubData($_POST["source"])) . ", 
-		0
-		)";
+    " . $db->quote(scrubData($_POST["source"])) . ", 
+    0
+    )";
 
   $rInsertSource = $db->query($qInsertSource);
 
@@ -62,9 +62,9 @@ if (isset($_POST["update_sources"])) {
 
   foreach ($result as $key => $value) {
     $qUpDept = "UPDATE source SET
-		source = " . $db->quote(scrubData($value)) . ", 
-		rs = " . $row_count . "
-		WHERE source_id = " . scrubData($key, "integer");
+    source = " . $db->quote(scrubData($value)) . ", 
+    rs = " . $row_count . "
+    WHERE source_id = " . scrubData($key, "integer");
 
     //print $qUpDept;
     $rUpDept = $db->query($qUpDept);
@@ -112,7 +112,7 @@ $ourlist
 $add_source_box = "
 <form id=\"new_source\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Source Name") . "</span><br />
-<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"\" value=\"\">
 <br /><br />
 <button class=\"button\" id=\"add_source\" name=\"add_source\">" . _("Add New Source") . "</button>
 </form>";
@@ -193,10 +193,10 @@ include("../includes/footer.php");
      jQuery("#item-"+this_id).remove();
 
      jQuery.post("admin_bits.php", {action: 'delete_source', delete_id:this_id},
-			 function(response) {
-	 console.log(response);
-	 $('#feedback').remove();
-	 jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
+       function(response) {
+   console.log(response);
+   $('#feedback').remove();
+   jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
          jQuery("#feedback").show();
        });
 
