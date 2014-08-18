@@ -135,6 +135,12 @@ $dbName_SPlus = "subjectsplus";
 $is_responsive = TRUE;  // FALSE is off
 
 //////////////////////
+// Open database links with a target=blank
+//////////////////////
+
+$target_blank = FALSE;
+
+//////////////////////
 // Mmm . . . delicious
 //////////////////////
 
