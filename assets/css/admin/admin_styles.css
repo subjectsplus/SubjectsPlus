@@ -1,0 +1,2155 @@
+/*
+Document   : admin_styles.css
+Created on : updated Feb 2014
+Author     : agdarby
+Description: base stylesheet for backend of subjectsplus, i.e., /control/
+*/
+
+
+/* It seems possible you might need to fix the paths to this font */
+
+@font-face {
+  font-family: 'ChunkFiveRegular';
+  src: url('../../assets/css/admin/Chunkfive-webfont.eot');
+  src: url('../../assets/css/admin/Chunkfive-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/css/admin/Chunkfive-webfont.woff') format('woff'),
+  url('../../assets/css/admin/Chunkfive-webfont.ttf') format('truetype'),
+  url('../../assets/css/admin/Chunkfive-webfont.svg#ChunkFiveRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+table, td, th {
+  vertical-align:top;
+}
+
+button {
+  padding: 2px;
+
+}
+/* Remove annoying border on linked images. */
+a img {
+  border: none;
+}
+/* no's*/
+.no-border {
+  border: 0 !important
+}
+.no-margin {
+  margin: 0 !important
+}
+.no-bg {
+  background: none !important
+}
+.no-pad-left {
+  padding-left: 0 !important
+}
+.no-pad-right {
+  padding-right: 0 !important
+}
+
+/* Styles for the control panel /control/ */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: .9em;
+  text-align: left;
+  line-height: 1.5em;
+  color: #333;
+  background: #e3e1d9 url(../../assets/images/admin/mission_control_lg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+
+a:link {
+  color: #4977A4;
+}
+
+a:visited {
+  color: #4977A4;
+}
+a:hover {
+  color: #C03957;
+}
+
+p.tight { margin: .2em 0;}
+
+.wrapper {
+  margin: 0 auto;
+  text-align: left;
+  max-width: 1200px;
+}
+
+/* //////////////////////
+Header and nav/subnav stuff
+////////////////////// */
+
+/* note:  this is used for the nasa control room bg image; it gets turned on by choosing the nasa bg option in control/index.php */
+
+.background {
+  bottom: 0;
+  height: 1280px;
+  left: auto;
+  opacity: 0.2;
+  position: fixed;
+  right: 0;
+  top: auto;
+  width: 1920px;
+  z-index: -1;
+  display: none;
+}
+
+header {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #B7B7B7;
+  height: 2.9em;
+  line-height: 2.8em;
+}
+
+
+#topnav {
+  font-family: 'ChunkFiveRegular';
+  float: left;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  background-color: #fff;
+  position:relative;
+}
+
+#topnav li {
+  display: inline-block;
+}
+
+#topnav li a {
+
+
+  text-decoration: none;
+  padding: .5em 1em;
+  text-align: left;
+  font-size: 1.2em;
+  color: #333;
+  color: #858585;
+}
+
+#topnav li a.profile {padding-right: 0px;}
+
+#topnav li a.selected, #topnav li:hover, #topnav li.selected {
+  color: #E488B6;
+}
+
+#topnav li:hover {
+
+}
+
+#topnav li.selected a, #topnav li a:hover {
+  color: #E488B6 !important;
+}
+
+#topnav li.nohover {
+  background-color: transparent;
+}
+
+#topnav > li > div {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;/**/
+  -webkit-transition: all .3s ease .15s;
+  -moz-transition: all .3s ease .15s;
+  -o-transition: all .3s ease .15s;
+  -ms-transition: all .3s ease .15s;
+  transition: all .3s ease .15s;
+
+  background: none repeat scroll 0 0 #fff;
+
+  border-radius: 5px;
+  padding: 0px 0;
+  position: absolute;
+  border: 0px solid #9A9A9A;
+  top: 60px;
+  min-width: 200px;
+  max-width: 800px;
+  z-index: 1000;
+  -moz-box-shadow: 2px 2px 3px #9a9a9a;
+  -webkit-box-shadow: 2px 2px 3px #9a9a9a;
+  box-shadow: 2px 2px 3px #9a9a9a;
+
+}
+
+#topnav > li#logospot > div {
+  left: 3em;
+}
+#topnav > li:hover > div {
+  opacity: 1;
+  visibility: visible;
+  overflow: visible;
+}
+
+#topnav > li > div ul {
+  padding: 0;
+  margin: 2px;
+}
+#topnav > li > div ul li {
+  display: block;
+  border-bottom: 1px dashed #ccc;
+}
+
+#topnav > li > div ul li a, #topnav > li.selected > div ul li a {
+  color: #333 !important;
+}
+
+#topnav > li > div ul li:hover {
+  background-color: #fff;
+
+}
+
+#topnav > li > div ul li a:hover {
+  color: #E488B6;
+}
+
+#topnav > li > div ul li:last-child, .last-item {border: none !important;}
+
+#sp_admin_search input {
+  /*line-height: 2em;*/
+  font-size: 1em;
+  padding: .3em .4em;
+  margin-left: .5em;
+}
+
+
+.ui-autocomplete {
+  max-height:500px;
+  overflow: auto;
+}
+
+
+#topnav > li#logospot img {
+  float: left;
+  margin: .5em 0 0 2.5em;
+}
+
+#topnav > li#logospot div img {
+  float: left;
+  margin: .5em 1em 0 .5em;
+  border: 1px solid #9A9A9A;
+}
+
+/* old stuff? */
+
+.logo {
+  margin-top: 8px;
+  margin-left: 30px;
+  float:left;
+}
+
+#navcats {
+  float: left;
+  margin-left: 10px;
+  margin-top: 11px;
+}
+
+#navcats ul {
+
+}
+
+
+#navcats ul li  {
+  list-style-type: none;
+  padding: 0;
+  display: block;
+  float: left;
+  text-align: center;
+
+}
+
+
+#supersearch {
+  float: left;
+  margin-top: 11px;
+  margin-left: 20px;
+}
+
+#user {
+  color: #fff;
+  float: left;
+  margin-left: 20px;
+  margin-top: 11px;
+}
+
+#user ul li {
+  list-style-type: none;
+  padding: 0;
+  display: block;
+  float: left;
+  text-align: center;
+
+}
+
+
+/* Main content areas */
+
+
+#maincontent {
+  clear: both;
+  text-align: left;
+  margin-left: 2.5em;
+  margin-right: 2.5em;
+  margin-top:0;
+}
+
+#maincontent h2  {
+
+  font-weight: 400;
+  /* margin-bottom: 25px;
+  margin-top: 5px;
+  font-size: 1.5em; */
+}
+
+#maincontent h3 {
+  color: #333;
+  font-weight: bold;
+  font-size: 12pt;
+  margin: 5px 0;
+}
+
+#maincontent ol, #maincontent ul, #maincontent ol, #portal-column-1 ul, #portal-column-2 ul, #portal-column-1 ol, #portal-column-2 ol  {
+  padding-left: 2em;
+
+}
+
+.box {
+  margin-bottom: 1em;
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+
+  -moz-box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+
+}
+
+
+.no_overflow {
+  overflow:auto;
+}
+
+/* for our striped lists */
+
+div.striper img {
+  position: relative;
+  top: 3px;
+
+}
+
+img.icon {
+  height: 20px;
+}
+
+#footer {
+  margin-top: 20px;
+  border-top: 1px solid #999;
+  font-size: .8em;
+  color: #ccc;
+}
+
+#footer a:link {
+  color: #4977A4;
+  text-decoration:none;
+}
+#footer a:visited {
+  color: #4977A4;
+  text-decoration:none;
+}
+#footer a:hover {
+  color: #4977A4;
+  text-decoration:underline;
+
+}
+
+/* TABLES */
+
+table td {
+  padding: .3em;
+}
+
+table.striped_data {
+  background: #CFCFCF;
+}
+
+table td.odd {
+  background: #F6E3E7; /* #e0e0e0 */
+}
+
+table td.even {
+
+  background: #ffffff;
+
+}
+
+table td.subhead {
+  background: #333;
+  color: #fff;
+}
+
+.highlight {
+  background-color: #DD647F;
+  border-bottom: 1px solid #efefef;
+}
+
+
+.image_caption {
+  font-size: 11px;
+  color:#333333
+
+}
+
+
+.smaller {font-size: 12px;}
+
+.error {color: red;}
+
+.required {font-size: 12px; color: #C03957; font-style: italic;}
+
+.no_results {
+  padding-left: 15px;
+  background: url(../images/icon/required.png) no-repeat top left;
+  font-weight: 700;
+}
+
+/* Form stuff */
+
+div.dropdown_list select {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 3px;
+}
+
+div.dropdown_list option {
+  position: relative;
+  padding: 4px 2px 4px 8px;
+  top: 3px;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.coloured_form_input {
+
+  background-color: #EFE0E3;
+  color: #102132;
+  border: 1px solid #284279;
+  padding: 2px 2px 2px 5px;
+}
+
+.coloured_form_textarea {
+
+  background-color: #EFE0E3;
+  color: #102132;
+  border: 1px solid #284279;
+  padding: 5px 2px 2px 5px;
+}
+
+.staff_photo {
+  position: relative;
+  background: #efefef;
+  padding: 3px;
+  border: 1px solid #333;
+  margin-right: 20px;
+}
+
+
+
+.debugger {
+  text-align: left;
+  background: Yellow;
+  font-size: 12px;
+  margin: 15px;
+  padding: 5px;
+  border: 1px dashed #ccc;
+  overflow:auto;
+}
+
+.new_editable {
+
+  border-top: 1px solid #333;
+  font-size: 9px;
+  background-color: #EFD1D8;
+
+}
+
+.rec_floater {
+  float: left;
+  padding-top: 5px;
+}
+
+.odd_location {
+  border-top: 1px solid #e0e0e0;
+}
+
+/* tables */
+table.tablesorter {
+  font-family: sans-serif;
+  background-color: #CDCDCD;
+  margin:10px 0pt 15px;
+  font-size: 9pt;
+  width: 100%;
+  text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+  background-color: #e6EEEE;
+  border: 1px solid #FFF;
+  font-size: 9pt;
+  padding: 4px;
+}
+table.tablesorter thead tr .header {
+  background-image: url(../images/admin/bg.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+  cursor: pointer;
+}
+table.tablesorter tbody td {
+  color: #3D3D3D;
+  padding: 4px;
+  background-color: #FFF;
+  vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+  background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+  background-image: url(../images/admin/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+  background-image: url(../images/admin/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+  background-color: #8dbdd8;
+}
+
+tr.hover {
+  background-color: #000;
+}
+
+
+li.inactive {background-color: transparent;}
+
+li.active {background-color: #EFD1D8;}
+
+div.results {text-align:center;}
+
+/* used only on guides/manage.php i think */
+.striper {  margin: 3px 5px; }
+
+table.striper th {
+  font-weight: 700 !important;
+  border-bottom: 1px solid #333;
+}
+
+table.striper td {
+
+  border-bottom: 1px solid #efefef;
+}
+
+.oddrow {
+  background-color: #f6e3e7;
+  padding: 2px 5px;
+}
+
+.evenrow {
+  padding: 2px 5px;
+}
+
+.prev_next_button {
+  display: inline;
+  padding: 4px 6px;
+  border: 1px solid #999;
+  background-color: #434343;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+#record_notes a {
+  color: #999;
+
+}
+
+#record_notes a:hover {
+  color: #fff;
+
+}
+
+.confirmer {
+  background-color: yellow;
+  margin-left: 20px;
+}
+
+.confirmer a {
+
+  text-decoration:underline;
+  cursor: pointer;
+}
+
+/* For making a more desirable cursor on jquery pages */
+
+.pointer {cursor: pointer;}
+
+/* Used in guides/manage_items.php */
+
+#res_content {position: relative; float: left; padding-top: 10px;}
+#res_content .sortable { list-style-type: none; margin: 0; padding: 0;}
+#res_content li { margin: 0 5px 5px 5px; padding: 5px; height: 1.5em; }
+#res_content li:hover {cursor:move;}
+html>body #res_content li { height: 1.5em; line-height: 1.2em; }
+#res_content .ui-state-highlight { height: 1.5em; line-height: 1.2em; background-color: yellow; }
+#res_content .confirmer a {cursor:pointer;}
+
+/* Autocomplete Styles */
+
+/* From the themeroller */
+.ui-autocomplete { position: absolute; cursor: default; }
+
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+.ui-menu {
+  list-style:none;
+  padding: 5px;
+  margin: 0;
+  display:block;
+  float: left;
+
+  border: 1px solid #ccc;
+
+}
+
+/* Form input */
+
+.button {
+  position: relative;
+  margin-left: 1em;
+
+  font-size: 100%;
+  background-color: #C03957;
+  color: whitesmoke;
+  text-transform: none;
+  border:none;
+  margin-right: 1em;
+
+  padding: .5em 1em .5em 1em;
+
+  /* text-shadow: 0px 1px 3px #ccc; */
+}
+/* Styling the markup generated by the autocomplete jQuery UI widget */
+
+
+ul.ui-autocomplete{
+  width:250px;
+  background-color:#fff;
+  border:1px solid #fff;
+  outline:1px solid #ccc;
+
+}
+
+ul.ui-autocomplete li{
+  list-style:none;
+  border-bottom:1px solid #e0e0e0;
+  border-top:1px solid #fff;
+  text-align: left !important;
+}
+
+ul.ui-autocomplete li:first-child{
+  border-top:none;
+}
+
+
+ul.ui-autocomplete li:last-child{
+  border-bottom:none;
+}
+
+ul.ui-autocomplete li a{
+  color:#333;
+  border:none !important;
+  text-decoration:none !important;
+  padding:5px 10px;
+  display:block;
+}
+
+#ui-active-menuitem{
+  background-color:#F6E3E7;
+  color:#666;
+  cursor:pointer;
+}
+
+/* new records page */
+
+.record_buttons {
+
+}
+
+.save_button {
+
+  margin-left: 20px;
+  padding: 0 .1em;
+}
+
+.delete_button {
+
+}
+
+#last_edited {
+  clear: both;
+  margin-left: 20px;
+  font-size: 10px;
+}
+
+#subject_list {
+  position: relative;
+  clear: both;
+  margin-top: 1em;
+  margin-left: 2px;
+
+
+}
+
+.selected_item_wrapper {
+  clear: left;
+  padding: 5px !important;
+  margin-bottom: 10px !important;
+}
+
+.selected_item {
+
+  float: left;
+  min-width: 75%;
+  border-bottom: 1px solid #efefef;
+
+}
+
+.selected_item_options {
+  float: right;
+
+}
+
+#subject_list img{
+  cursor: pointer;
+
+}
+
+.small_extra {
+  font-size: 10px;
+  color: #8f8f8f;
+  font-style:italic
+}
+
+.call_num_box {
+  display: none;
+}
+
+.checkurl_img_wrapper {
+  display: inline-block;
+  width: 20px;
+  cursor:pointer;
+  float:right;
+  margin-top: -2em;
+}
+
+.url_feedback {
+  color: #C03957;
+}
+
+.record_label {
+  clear: both;
+  display:inherit;
+  font-size: 11px;
+  font-weight:900;
+}
+
+.add_location {
+  clear: both;
+  margin: 1em 0 1em 1em;
+  cursor: pointer;
+
+}
+
+.delete_location {
+  background-color: #fff;
+  font-size: 10px;
+  margin-top: 1em;
+  text-align:center;
+  cursor: pointer;
+}
+
+div.delete_location:hover {
+  background-color: #FFCFCF;
+}
+
+.unclickable {
+  opacity: 0.4;
+  cursor: default !important;
+}
+
+div.ctag_list {
+  padding: 10px 0 !important;
+}
+
+div.ctag_list a {
+  text-decoration: none;
+  color: #333;
+
+}
+
+div.ctag_list a:hover {
+  text-decoration: none;
+  color: #fff;
+
+}
+
+.ctag-on, .aztag-on, .lookup_button {
+  background-color: #C03957;
+  color: #fff;
+  margin: 0 2px;
+  padding: 1px 2px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  line-height: 2em;
+}
+
+.lookup_button {
+  background-color: #F37521;
+}
+.ctag-off, .aztag-off {
+  background-color: #ccc;
+  color: #333;
+  margin: 0 2px;
+  padding: 1px 2px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  line-height: 2em;
+}
+
+.ctag-on:hover, .ctag-off:hover, .aztag-on:hover, .aztag-off:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.ctag-on a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.ctag-off a {
+  text-decoration: none;
+  color: #333;
+}
+
+.ctag-off a:hover {
+  color: #fff;
+}
+
+.add_source
+{
+  display: none;
+}
+
+/* FAQ layout */
+
+.faq_wrapper {
+  clear: both; float: left;  padding: 3px 5px; width: 98%;
+}
+
+.faq_tools {
+  float: left; width: 64px; max-width: 10%;
+}
+
+.faq-question {
+  float: left; width: 90%;
+}
+
+/* Form Feedback */
+
+
+
+.feedback, #feedback {
+ /* position: relative;*/
+ /* float: left; */
+  background-color: #DD647F;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  
+  padding: .5em 0;
+  display: none;
+/*
+  padding-left: 10%;
+  margin-left: -5%;
+  margin-top:0;
+  max-width: 3840px;
+  min-width: 100%;
+*/
+}
+
+div.feedback a:link {
+  color: #fff !important;
+}
+
+.box_feedback {
+  position: relative;
+  float: left;
+  background-color: #DD647F;
+  min-width: 500px;
+  text-align: center;
+  display: block;
+  font-weight: bold;
+  background: rgba(221, 100, 127, 1);
+}
+
+/* Sortables */
+
+
+ul.sortable_list {
+  list-style-type: none;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+ul.unsortable_list {
+  display: inline;
+  list-style-type: none;
+}
+
+
+ul.sortable_list li  {
+  padding: 3px; margin: 4px;
+  border: 1px solid #fff;
+}
+
+ul.sortable_list li:hover  {
+  border: 1px solid #333;
+  cursor: move;
+}
+
+/* Save Guide Button/Feedback */
+
+#save_zone {
+  margin: 1em 0;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #999;
+  padding: 10px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
+}
+
+#feedback_zone {
+  margin: 1em 0;
+  background-color: #C03957;
+  color: #fff;
+  border: 1px solid #999;
+  padding: 10px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
+  -moz-box-shadow: 5px 5px 5px #ccc;
+  -webkit-box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+/* Guides -- Admin View
+
+.pluslet_body {
+padding: .5em;
+margin: .5em;
+overflow: auto;
+}
+
+.pluslet_body p {
+margin: .5em 0 ;
+}
+*/
+
+
+.leftcolheader {
+  background-color: #CFDAE6;
+  color: #000000;
+  font-size: 1em;
+  font-weight: 700;
+  padding: 2px;
+  text-align: center;
+}
+
+.filter {
+  background-color: #ccc;
+  color: #333;
+  margin: 0 2px;
+  padding: .5em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+}
+
+.filter_ticks {
+  background-color: #F6E3E7;
+  color: #333;
+  margin: 0 2px;
+  padding: .5em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #efefef;
+  cursor:pointer;
+}
+
+.debug { background-color: yellow; padding: 1em;}
+
+.hideme { display: none; }
+
+/* All Items by Source */
+
+.dbresults {
+  clear:both;
+  padding: 7px 0;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+/* Talkback */
+
+.toggle_unanswered, .toggle_answered {
+  text-decoration: underline;
+  color: #4977A4;
+  cursor: pointer;
+}
+
+.toggle_unanswered:hover, .toggle_answered:hover {
+  color: #C03957;
+}
+
+.tb_highlight {
+  background-color: #f1c40f;
+  border: 1px solid #f39c12;
+}
+/* Splash page */
+
+.faux_link {
+  text-decoration: underline;
+}
+
+.smallgrey { color: #CCCCCC; font-size: 11px; text-shadow: none;}
+
+/* Contacts */
+
+td.colhead {font-weight: bold; background-color: #ccc;}
+
+table.contact_table td {
+  border-bottom: 1px solid #efefef;
+}
+
+table.contact_table tr:hover {
+  background-color: #DF6F89;
+}
+
+/* Tooltip CSS */
+img.tooltip {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+
+div.tooltip
+{
+  min-width: 150px;
+  max-width: 300px;
+  min-height: 100px;
+  max-height: 300px;
+  position: absolute;
+  background-color: #F6E3E7;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #888888;
+  padding: .5em;
+  border: 1px dashed #e0e0e0;
+
+}
+
+div.tooltip div
+{
+  text-align: left;
+  padding: 5px;
+
+  overflow: auto;
+}
+
+/* guides/index.php */
+
+#savour,  {
+  clear: both;float:left; margin-top: 1em; height: 30px;  width: 100%;
+
+}
+
+.narrow {
+  mad-width: 300px;
+}
+
+#save_zone button {display: inline-block;} /* otherwise hidden by another declaration */
+
+#response {
+
+  position: absolute;
+  float: left;
+  background-color: #DD647F;
+  width: 100%;
+  text-align:center;
+  display: none;
+  margin-top:-15px;
+  padding: .5em 0;
+
+}
+ 
+
+
+}
+
+.clone {
+  z-index: 10;
+}
+
+.edit-your-guides {
+  float: left;  width: 50%;
+
+}
+
+.all-guides {
+  float: right; width: 45%;margin-left: 10px;
+}
+
+.all-guides-dropdown {
+  margin: 1em 0;
+}
+
+.create {
+  clear: right; float: right; width: 45%;margin-left: 10px;
+
+}
+
+.tips {
+
+  clear: right; float: right; width: 45%;margin-left: 10px;
+}
+
+/* GUIDE LAYOUT */
+
+#portal h2 {
+  padding: 0;
+  margin: 0;
+  padding-top: 5px;
+}
+
+
+#container-0 {
+  float: left;
+  width: 15%;
+  padding: 5px;
+}
+
+#container-0 h2 {
+  font-size: 16px;
+  margin: 1px;
+  background-color: none;
+  padding: 2px;
+}
+
+#container-0 h3 {
+  font-size: 14px;
+  margin: 1px;
+}
+
+#container-0 {
+  float: left;
+  padding: 10px;
+  background-color: transparent;
+}
+
+#container-1 {
+  float: left;
+  width: 60%;
+  padding: 10px;
+  background-color: transparent;
+}
+
+#container-2 {
+  float: left;
+  width: 35%;
+  padding: 10px;
+  background-color: transparent;
+}
+
+#all-results  {
+
+  clear: both;
+  padding: 0px 4px 4px 0px;
+  font-size: .92em;
+  background: rgba(51, 51, 51, .6);
+  margin-top: 0;
+}
+
+#closer {
+  float: left;
+  margin: 0 10px;
+  padding: 3px 5px 3px 5px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+#all-results ul li {
+  list-style-type: none;
+  margin: 0px 10px 0 0px;
+  display: block-inline;
+  float: left;
+  background-color: #fff;
+  color: #333;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  cursor: hand;
+  background-image: url(../images/icons/list-add.png);
+  background-repeat: no-repeat;
+  background-position: 3px 50%;
+  padding: 3px 5px 3px 20px;
+}
+
+.zoom a { transition: all 0.2s; }
+.guide-nav-item { transition: all 0.2s; }
+#box_options li { transition: all 0.2s; }
+
+
+/* guide.js, get_pluslets.php */
+
+.draggable {
+  cursor: move;
+}
+
+
+.dropspotty {
+  position: relative;
+  /*  margin-bottom: 10px;
+  background-color: #fff;
+  text-align: center;
+
+  z-index: 50;
+  border: 1px dashed #ccc;
+  padding: 0;*/
+  height: 50px;
+
+}
+
+li.dropspotty {
+  height: auto;
+}
+
+.drop-spot-box {
+  font-size: 2em;
+  margin-left: .2em;
+  margin-top: .3em;
+  margin-right: .2em;
+  vertical-align:sub;
+}
+
+
+#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {float: left; }
+
+/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
+
+#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: .7em; margin-left: 1em; vertical-align: text-bottom;}
+
+/* When you hover over one of the two drop spots, make em show */
+.drop_hover {background-color: #C03957; border: 1px solid #ccc;}
+
+.dropspot-text {
+  position: relative;
+  font-size: 14pt;
+  font-weight: bold;
+  color: #ccc;
+  color: #333;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+/* this might be used by the jquery ui plugin . . . */
+
+.ui-sortable-placeholder {
+
+  background-color: #F8F5F5;
+  border: 1px dotted #CC6699;
+  visibility: visible !important;
+  height: 50px !important;
+}
+
+/* For pluslet designated as a heading */
+div.type-heading {
+  width: 70%;
+  text-transform: uppercase;
+}
+
+/* guides/manage.php */
+
+.manage-your-uploads {
+  clear: both;float: left; min-width: 600px;
+}
+
+#test-url {
+
+  background-color: yellow;
+
+}
+
+.manage-all-items {
+  float: left; width: 600px;
+}
+
+/* delish_url.php */
+
+.generate-delicious {
+  float: left; width: 500px
+}
+
+.huh {
+
+  float: left; width: 400px; margin-left: 2em;
+}
+
+/* records/index.php */
+
+.ctag-list-box {
+
+  float: left; min-width: 700px;max-width: 75%;
+}
+
+.new-record {
+  float: left; margin-left: 20px;
+
+}
+
+.record-results {
+  clear: both; float: left; width: 98%; padding: 3px 5px;
+
+}
+
+.record-label {
+
+  color: #333;
+}
+
+.record-source-override {
+
+  display: block; clear: both; margin-left: 5px; color: red;
+}
+
+
+.desc-area {
+  display: none; clear: both;
+}
+
+/* control/search.php */
+
+.search-results {
+  float: left;  width: 50%;
+
+}
+
+/* control/update.php */
+.update-main {
+  max-width: 800px; margin-right: auto; margin-left: auto;
+}
+
+
+#add {
+  display:none;
+}
+
+.bullet {
+  /*height:55px;
+  width:55px;*/
+}
+
+
+
+img.tooltip  {
+  width:15px;
+}
+
+.staff-info {
+  float:left;
+}
+
+.clearboth {
+
+  clear:both;
+}
+
+.clear-both-left {
+  clear:both;
+  float:left;
+
+}
+
+.float-left {
+  float:left;
+}
+
+#logo a img {
+
+  float:left;
+}
+
+
+.login-only-logo {
+
+float: left;
+margin: .5em 0 0 2.5em;
+
+}
+
+.pluslet_body object {
+  margin: 3px 5px 3px 3px;
+}
+
+.unsortable {
+  cursor:default;
+}
+
+.resultsdiv { color: #fff; }
+
+.togglebase {margin-top: 0;}
+
+.sort_column {
+  background-color: #F8F5F5;
+}
+.portal_column {
+  background-color: #F8F5F5;
+}
+.ui-sortable {
+  background-color: #F8F5F5;
+}
+
+.staff_photo {
+  position: relative;
+  background: #efefef;
+  padding: 3px;
+  border: 1px solid #333;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.staff_photo2 {
+  position: relative;
+  float: left;
+  background: #efefef;
+  padding: 3px;
+  border: 1px solid #333;
+  margin: 0 10px 0 10px;
+}
+
+.smallgrey {
+  color: #CCCCCC; font-size: 11px; text-shadow: none;
+}
+
+
+
+.borderless {
+  border: none;
+}
+
+.toc {
+  float: left;
+  width: 30%;
+  margin: 0 1% 1em 1%;
+}
+
+
+
+.recent-activity {
+  clear: both;
+
+}
+
+.recent-activity-span {
+  color: #666;
+  font-size: 10px;
+}
+
+.recent-activity-link {
+  color: #333;
+}
+
+.fa-star {
+
+  margin:.2em;
+}
+
+
+.talkback {
+  float: right;
+  width: 28%;
+  margin-left: 10px;
+}
+
+
+img.tooltip  {
+  width:15px;
+}
+
+
+.delete_item {
+  width:15px;
+}
+
+.ui-widget-content a {
+  color:whitesmoke;
+}
+
+
+.rec_delete_confirm {
+  text-align: right;
+  background-color: yellow;
+  margin: 5px;
+  padding:  2px 1em 2px 2px;
+
+  position: relative;
+  right: 1.2em;
+  padding: 1%;
+
+
+}
+
+.rec_delete_confirm a {
+  cursor: pointer;
+  text-decoration:underline;
+}
+
+.rec_delete_confirm.growl {
+  text-align: right;
+  margin: 5px;
+  padding:  2px 1em 2px 2px;
+  top: 10px;
+  right: 1%;
+  padding: 1%;
+  opacity:1;
+  z-index:5000;
+}
+
+#add_tab {
+  cursor:pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.install-pluslet {
+
+padding: 1em 1em 1em 1em;
+margin: 1em 1em 1em 0;
+/* background-color: #fff; */
+/* border: 2px solid #ccc; */
+/* border: none; */
+clear: both;
+background-color: #fff;
+/* border: 2px solid #efefef; */
+border-radius: 5px;
+overflow: auto;
+word-wrap: break-word;
+
+/* former inline-styles */ 
+margin-right: auto; 
+margin-left: auto;
+max-width: 800px; 
+text-align: center;
+
+
+}
+
+
+#controlpage div.pluslet {
+  padding: 0em 0em;
+  margin: 1em 1em 1em 0;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border: none;
+  clear:both;
+  background-color: #fff;
+  border: 2px solid #efefef;
+  border-radius: 5px;
+  overflow: auto;
+  word-wrap: break-word;
+}
+
+#controlpage div.pluslet > .titlebar {
+  background-color: #858585;
+  padding: .2em .5em;
+  color: #fff;
+
+  color: #333;
+  font-size: 1.1em;
+  font-weight:700;
+
+  min-height: 2em;
+  border-bottom: 1px solid #ccc;background-color: #EFEFEF;
+}
+
+#controlpage .titlebar_text {
+  float: left;
+  margin-top: .3em;
+
+}
+
+#controlpage .titlebar_options {
+
+  float: right;
+  padding: .2em 0em .1em .5em;
+}
+
+#controlpage .titlebar_options img {
+
+  padding: .2em;
+  background-color: #E488B6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+
+#controlpage .pluslet_body {
+  clear: both;
+  padding: .5em;
+
+}
+
+div.breather > h2 {
+  background-color: #858585;
+  padding: .5em;
+  color: #fff;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+/* UI tabs */
+
+.ui-tabs .ui-tabs-nav li {
+
+  padding: .2em 1em 0 1em;
+
+}
+
+#tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+#tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
+
+/* Secondary Nav for Guides Creation */
+
+#guide_header {
+  width: 100%;
+  background-color: #333;
+  border-top: 2px solid #fff;
+  border-bottom: 1px solid #000;
+  height: 2.8em;
+  line-height: 2.8em;
+}
+
+#guide_header h2 {
+  margin: 0;
+}
+
+#guide_header h2 a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#guide_header img {
+  position: relative;
+  vertical-align: text-bottom;
+  margin-right: .5em;
+  margin-left: .5em;
+}
+
+.icon-view-guide {
+
+}
+
+#guide_header .icon-edit-guide {
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+#guide_header ul li a{
+
+  text-decoration: none;
+
+}
+
+#guide_header ul li a:hover{
+
+  text-decoration: underline;
+
+}
+
+#guide_nav {
+  float: left;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  color: #333;
+}
+
+#guide_nav li {
+  display: inline-block;
+  padding-top: .1em;
+}
+
+#guide_nav li a {
+
+  color: #777777;
+  text-decoration: none !important;
+  padding: 0em 1em;
+  text-align: left;
+  font-size: 1.2em;
+  color: #fff;
+
+
+}
+
+#hide_header {
+  background-color: #fff;
+  padding: 0em 0em;
+  padding-right: .5em;
+  top: 0;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+#hide_header img {
+  position:relative;
+  top: 2px;
+  margin-left: .5em;
+  margin-right: 0;
+}
+
+/* The draggable boxes from the admin guide header */
+
+#box_options {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC !important;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  float: left;
+  list-style-type: none;
+  margin: 0 10px 0 -12px !important;
+  padding: 0 5px 1px;
+  position: absolute;
+  top: 50px;
+  z-index: 1000 !important;
+
+}
+#box_options li {
+  border: 1px solid #CCCCCC !important;
+  clear: left !important;
+  display: block !important;
+  float: none !important;
+  margin: 0 !important;
+  line-height: 1.5em !important;
+  font-size: 1.1em !important;
+  padding: .2em .2em .2em .5em;
+}
+
+.box_settings {
+  clear: both;
+  border-top: 1px solid #E488B6;
+  padding: .5em 0;
+  text-transform: none;
+  font-size: 0.9em;
+  display: none;
+}
+
+.box_settings label {
+  font-weight: normal;
+}
+
+.box-item {
+  list-style-type: none;
+
+  max-width:200px;
+  background-color: #333;
+  cursor: pointer;
+  color:#fff;
+  border: 1px solid #CCCCCC !important;
+  clear: left !important;
+  display: block !important;
+  float: none !important;
+  margin: 0 !important;
+  line-height: 1.5em !important;
+  font-size: 1.1em !important;
+  padding: .2em .2em .2em .5em;
+}
+
+.box-item:hover {
+  background: #C03957;
+}
+
+#box_options li.box_note {
+  background-color: #FFFFFF !important;
+  border: 0 none #FFFFFF !important;
+  color: #333333;
+  cursor: text !important;
+  font-size: 0.9em !important;
+  padding: .5em .2em;
+}
+
+/* forms */
+/* jquery ui popup boxes */
+
+label {
+  clear: left;
+  font-size: 1em;
+  color: #333;
+  font-weight: bold;
+
+}
+
+.pure-form-stacked label {
+  margin-top: 1em;
+  clear: left;
+}
+
+/* guide tab editing zone
+background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
+*/
+
+.sptab {
+  background-color: #dfdfdf !important;
+
+}
+/* Override for V 3, multiple layouts */
+
+#portal-column-0, #portal-column-1, #portal-column-2, .portal-column-0, .portal-column-1, .portal-column-2   {
+  width: 100%;
+  background-color: transparent;
+}
+
+/* Layout dropdown in header */
+
+.inner-nav-content {
+
+  position:absolute;
+  display:none;
+
+
+}
+
+#slider_options, #tabs_options {
+  background-color: #FFFFFF;
+  clear: left;
+  list-style-type: none;
+  margin: 0 10px 0 -12px !important;
+  padding: 1%;
+  position: absolute;
+  top: 50px;
+  width: 250px;
+  z-index: 1000 !important;
+
+
+  -moz-box-shadow: 1px 1px 1px 1px #ccc;
+  -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+  box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+#slider_options p, #tabs_options p {
+  color: #333;
+  padding: .5em;
+  font-size: smaller;
+}
+
+.slider_options_guide {
+  display: none;
+  width: 200px;
+  padding: 1em;
+
+}
+
+
+#tabs {
+
+  clear:both;
+  position: relative;
+  width: 94%;
+  margin: 0 auto;
+  top:35px;
+}
+
+#tab_options {
+
+  display: none;
+  width: 200px;
+  padding: 1em;
+}
+
+#save_tab_options {
+  display:none;clear: left;margin-top: 1em;font-size: smaller;
+}
+
+#tabs_options input {
+  margin-bottom: 1em;
+  width: 100px;
+}
+
+#tab_wrapper {
+  margin-top: 0em;min-height: 600px;
+}
+
+#tab_header {
+
+}
+
+#tab_header ul {
+  margin-left: 2em;
+}
+
+#tab_header ul li {
+  list-style-type: none;
+  padding: 0px 5px 1px 5px;
+  margin: 0px 5px 0 5px;
+  display: block-inline;
+  float: left;
+  background-color: #cccc99;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  cursor: pointer;
+}
+
+#tab_header ul li.active {
+  background-color: orange;
+}
+
+#tab_header ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+#tabs li .ui-icon-wrench { float: left; margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+#tabs > .ui-widget-content {
+  background: none !important;
+  background-image: none !important
+}
+
+#tabs div.pluslet > .titlebar {
+  font-weight: 400;
+}
+
+#save_layout {
+  display:none;
+  clear: left;
+  margin-top: 1em;
+  font-size: smaller;
+
+}
+
+#save_guide {
+  display:none;
+
+}
+
+/* pure overrides */
+
+#maincontent .pure-g-r {
+  padding-top: 2em;
+  clear: left;
+}
+
+.pure-button {
+  color: #FFFFFF;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pure-button-primary, .pure-button-selected, .pure-button-topsearch, a.pure-button-primary, a.pure-button-selected {
+  background-color: #E488B6;
+  background-color: #C03957;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.pure-button-warning {
+  background: rgb(223, 117, 20); /* this is an orange */
+  color: #FFFFFF;
+}
+
+.pure-button-success {
+  background: rgb(66, 184, 221); /* this is a light blue */
+  color: #FFFFFF;
+  font
+
+}
+
+.pure-button-topsearch {
+  font-weight: normal;
+  background-color: #E091B0;
+
+}
+
+#topnav > li > div.autoC
+{
+  visibility: visible;
+  opacity: inherit;
+  position: inherit;
+  overflow: visible;
+  background: none;
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+}
+
+.sp_section
+{
+  border: 1px solid #fff;
+  margin-bottom: 2em;
+  border-radius: 5px;
+  background-color: #5F6C78;
+  background-color: #ccc;
+
+
+}
+
+.sp_section_controls {
+  border-bottom: 1px solid #333;
+  padding-bottom: 1em;
+  background-color: #fff;
+  padding-top: 1em;
+}
+
+.pluslet_sort {
+  cursor: move;
+  float: left;
+  margin-right: .5em;
+  margin-top: 2px;
+  height: 20px;
+  padding: 0.2em;
+  width: 20px;
+}
+
+
+.section_sort {
+  cursor: move;
+  float: left;
+  margin-top: -1em;
+  padding: 0.2em;
+
+}
+
+.section_remove
+{
+  cursor: pointer;
+  float: left;
+  margin-right: 1em;
+  margin-top: -1em;
+  padding: 0.2em;
+}
+
+.sp_section_slider
+{
+  margin-left: 4.5em;
+
+}
+
+#guide_search input {
+  font-size: 1em;
+  padding: .2em .4em;
+  margin-left: 1em;
+}
+
+.find-guide-parent {
+  margin: 0;
+  padding: 0;
+
+}
+
+.icon_smaller {height: 20px !important;}
+
+
+.ui-autocomplete-category {
+  font-weight: bold;
+  padding: .2em .4em;
+  margin: .8em 0 .2em;
+  line-height: 1.5;
+}
+
+/* override background if hidden */
+li.hidden_tab.ui-state-default
+{
+  background: #ABABAB;
+}
+
+/* Manage Guides, admin/manage_guides.php */
+
+#listing_space {
+  border-top: 1px solid #ccc;
+}
+
+#listing_space img {height: 20px;}
+
+#listing_space input {margin-right: 1em;}

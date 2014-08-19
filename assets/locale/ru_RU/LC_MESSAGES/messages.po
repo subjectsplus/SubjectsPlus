@@ -1,0 +1,1900 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: control/includes/classes/sp_Pluslet.php:295
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: 1.0\n"
+"POT-Creation-Date: 2012-11-21 13:45-0600\n"
+"PO-Revision-Date: 2012-11-21 13:45-0600\n"
+"Last-Translator: Stanislav Tsymbalov <delustas@gmail.com>\n"
+"Language-Team: Russian <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: control/login.php:37
+msgid "Please enter your <strong>login and password</strong> to proceed."
+msgstr "Пожалуйста, введите ваш <strong>логин и пароль</strong>, чтобы продолжить."
+
+#: control/login.php:44
+msgid "Login"
+msgstr "Логин"
+
+#: control/login.php:48 control/includes/classes/Staff.php:258
+msgid "Password"
+msgstr "Пароль"
+
+#: control/login.php:87
+msgid ""
+"Please check your login and password and try again.  (Note that login "
+"attempts are logged.)"
+msgstr "Пожалуйста, проверьте ваши логин и пароль и повторите попытку. (Заметим, что попытки входа заносятся в журнал.)"
+
+#: control/guides/metadata.php:55 control/admin/user.php:111
+msgid "There is no record by that ID."
+msgstr "Записи для данного ID не существует."
+
+#: control/guides/metadata.php:68
+msgid ""
+"You must have a title, shortform, type, and one associated staff member.  "
+"Please go back and fix these omissions.  And turn on JavaScript, for "
+"goodness sakes!"
+msgstr "Вы должны иметь название, короткую форму, тип, и одного ассоциированного штатного сотрудника. Пожалуйста, вернитесь назад и исправьте эти упущения. Также включите (если выключен) JavaScript в браузере для корректной работы."
+
+#: control/guides/metadata.php:169
+msgid "Thwarted! You must have at least one staff member for a guide."
+msgstr "Внимание! Вы должны иметь по крайней мере одного штатного сотрудника для руководства."
+
+#: control/guides/metadata.php:189 control/records/record.php:495
+msgid "You must have at least one subject."
+msgstr "Вы должны иметь по крайней мере один Предмет."
+
+#: control/guides/metadata.php:219 control/faq/faq.php:138
+#: control/records/record.php:525 control/talkback/talkback.php:138
+#: control/admin/user.php:240
+msgid "You must complete all required form fields."
+msgstr "Вы должны заполнить все необходимые поля формы."
+
+#: control/guides/metadata.php:246
+msgid "There is already a guide with that short form!  Try again."
+msgstr "Уже существует руководство с данной краткой формой! Попробуйте еще раз."
+
+#: control/guides/helpers/fck_get_tokens.php:35
+msgid "<strong>Search</strong> for a resource saved in SubjectsPlus"
+msgstr "<strong>Поиск</strong> ресурса сохранённого в SubjectsPlus"
+
+#: control/guides/helpers/fck_get_tokens.php:36
+msgid ""
+"<strong>Tick</strong> the button next to the desired resource and click OK "
+"(bottom)"
+msgstr "<strong>Отметьте</strong> кнопку рядом с нужным ресурсом и нажмите ОК (внизу)"
+
+#: control/guides/helpers/fck_get_tokens.php:42
+#: control/guides/helpers/discover.php:56
+msgid "Go!"
+msgstr "Вперёд!"
+
+#: control/guides/helpers/fck_get_tokens.php:43
+msgid "Include icons?"
+msgstr "Вставить иконки?"
+
+#: control/guides/helpers/fck_get_tokens.php:73
+#: control/guides/helpers/find_pluslets.php:50
+msgid "There were no results matching your query."
+msgstr "Результатов, соответствующих вашему запросу, не имеется."
+
+#: control/guides/helpers/fck_get_tokens.php:88
+#: control/guides/helpers/fck_get_assets.php:85
+msgid "Never mind"
+msgstr "Неважно"
+
+#: control/guides/helpers/fck_get_faqs.php:28
+#: control/includes/classes/sp_BuildNav.php:68
+msgid "Browse by Subject"
+msgstr "Просмотр по Предметам"
+
+#: control/guides/helpers/fck_get_faqs.php:28
+#: control/includes/classes/sp_BuildNav.php:69
+msgid "Browse by Collection"
+msgstr "Просмотр по коллекции"
+
+#: control/guides/helpers/fck_get_faqs.php:34
+msgid "Browse all FAQs by Subject"
+msgstr "Просмотр всех часто задаваемых вопросов по Предметам"
+
+#: control/guides/helpers/fck_get_faqs.php:35
+#: control/guides/helpers/fck_get_faqs.php:61
+#: control/guides/helpers/fck_get_faqs.php:97
+msgid ""
+"<strong>Tick</strong> the boxes of any FAQs you want to include in your "
+"pluslet and hit <strong>OK</strong>."
+msgstr "<strong>Отметьте галочками</strong> любые часто задаваемые вопросы, которые необходимо включить в ваш pluslet и нажмите <strong>OK</strong>."
+
+#: control/guides/helpers/fck_get_faqs.php:53
+#: control/guides/helpers/fck_get_faqs.php:80
+msgid "There are no results.  You'll need to try something different."
+msgstr "Результатов не имеется. Вам нужно попробовать что-то другое."
+
+#: control/guides/helpers/fck_get_faqs.php:60
+msgid "Browse all FAQs by Collection"
+msgstr "Просмотр всех часто задаваемых вопросов по коллекции"
+
+#: control/guides/helpers/fck_get_faqs.php:95
+msgid ""
+"You don't have any FAQs associated with this subject yet.  Maybe click "
+"Browse by Subject or Browse by Collection, above, to see what else is out "
+"there."
+msgstr "Вы ещё не имеете часто задаваемые вопросы, связанные с этим предметом. Выберите Обзор по Предметам или Поиск по Коллекциям, выше, чтобы посмотреть, что еще имеется."
+
+#: control/guides/helpers/guide_data.php:121
+msgid "<strong>Box removed</strong>"
+msgstr "<strong>Поле удалено</strong>"
+
+#: control/guides/helpers/discover.php:45
+msgid "- Browse Pluslets -"
+msgstr "- Просмотр Pluslets -"
+
+#: control/guides/helpers/save_guide.php:70
+msgid "Guide Updated."
+msgstr "Руководство обновлено."
+
+#: control/guides/helpers/ajax_mod.php:32
+msgid "This item has been removed from your guide"
+msgstr "Этот пункт был удален из вашего руководства"
+
+#: control/guides/helpers/ajax_mod.php:34
+msgid "There was a problem with the delete"
+msgstr "Существовала проблема с удалением"
+
+#: control/guides/helpers/ajax_mod.php:79
+msgid "Thy will be done.  Ranks updated."
+msgstr "Позиции обновлены."
+
+#: control/guides/helpers/ajax_mod.php:81
+msgid "There was a problem with your update."
+msgstr "Существовала проблема с обновлением."
+
+#: control/guides/helpers/fck_get_cat.php:46
+msgid ""
+"Select the type of link you wish to create, and click <em>Create Link</em>."
+msgstr "Выберите тип ссылки, которую вы хотите создать и нажмите <em>Создать ссылку</em>."
+
+#: control/guides/helpers/fck_get_cat.php:49
+msgid "A. Link to Subject Heading"
+msgstr "А.Сссылка на Предметную рубрику"
+
+#: control/guides/helpers/fck_get_cat.php:51
+msgid "Prefix text (optional)"
+msgstr "Приставка текста (необязательный)"
+
+#: control/guides/helpers/fck_get_cat.php:53
+msgid "LC Subject Heading"
+msgstr "LC Предметной рубрики"
+
+#: control/guides/helpers/fck_get_cat.php:54
+#: control/guides/helpers/fck_get_cat.php:67
+#: control/guides/helpers/fck_get_cat.php:76
+msgid "Create Link"
+msgstr "Создать ссылку"
+
+#: control/guides/helpers/fck_get_cat.php:56
+msgid ""
+"<strong>Examples</strong> (the unlinked text is from the optional Prefix "
+"text box):</p>\r\n"
+"\t<blockquote>\r\n"
+"\tPN 1997 - Screenplays - see <span class=\"linkie\">Motion picture plays</"
+"span><br />\r\n"
+"\tTR 899 <span class=\"linkie\">Motion Pictures--Editing<span>\r\n"
+"\t</blockquote>"
+msgstr "<strong>Примеры</strong> (несвязанный текст из необязательного текстового поля Prefix):</p>\r\n\t<blockquote>\r\n\tPN 1997 - Сценарии - см. <span class=\"linkie\">воспроизведение кинофильма</span><br />\r\n\tTR 899 <span class=\"linkie\">Редактирование Кинофильма</span>\r\n\t </blockquote>"
+
+#: control/guides/helpers/fck_get_cat.php:64
+msgid "B. Link to Keyword Search Results"
+msgstr "B. Ссылка на результаты поиска ключевых слов"
+
+#: control/guides/helpers/fck_get_cat.php:66
+msgid "E.g., fast cars"
+msgstr "Например, быстрые автомобили"
+
+#: control/guides/helpers/fck_get_cat.php:71
+msgid "C. Link to Call Number (DVDs and Reserves only in Voyager)"
+msgstr "C. Ссылка на идентификационный номер (DVD-диски и резервы только в Voyager)"
+
+#: control/guides/helpers/fck_get_cat.php:73
+msgid "E.g., DVD 3001"
+msgstr "Например, DVD 3001"
+
+#: control/guides/helpers/fck_get_cat.php:75
+msgid "Title or Link Text"
+msgstr "Название или связанный текст"
+
+#: control/guides/helpers/fck_get_cat.php:85
+msgid "2. Your Catalog Link (Subject Heading):"
+msgstr "2. Ссылка вашего каталога (предметная рубрика):"
+
+#: control/guides/helpers/fck_get_cat.php:95
+msgid "2. Your Catalog Link (Keywords):"
+msgstr "2. Ссылка вашего каталога (ключевые слова):"
+
+#: control/guides/helpers/fck_get_cat.php:97
+#: control/guides/helpers/fck_get_cat.php:108
+msgid ""
+"If the link looks good, hit the OK button to insert the token into the "
+"pluslet."
+msgstr "Если ссылка выглядит хорошо, нажмите ОК, чтобы вставить маркер в pluslet."
+
+#: control/guides/helpers/fck_get_cat.php:106
+msgid "2. Your Catalog Link (Call Number):"
+msgstr "2. Ссылка вашего каталога (идентификационный номер):"
+
+#: control/guides/helpers/guide_bits.php:68
+msgid "LinkChecker Results for "
+msgstr "Результаты LinkChecker для "
+
+#: control/guides/helpers/fck_get_assets.php:33
+msgid "<strong>Success.</strong>  Added file:"
+msgstr "<strong>Успешно.</strong> Добавлен файл:"
+
+#: control/guides/helpers/fck_get_assets.php:36
+msgid "There was a problem uploading your file."
+msgstr "Существовал проблема загрузки файла."
+
+#: control/guides/helpers/fck_get_assets.php:36
+msgid "Please try again, or contact the administrator"
+msgstr "Пожалуйста, повторите попытку или свяжитесь с администратором"
+
+#: control/guides/helpers/fck_get_assets.php:50
+msgid "<strong>A. Upload a file</strong> to your asset folder"
+msgstr "<strong>А. Загрузить файл</strong> в вашу личную папку"
+
+#: control/guides/helpers/fck_get_assets.php:53
+msgid "Upload"
+msgstr "Загрузить"
+
+#: control/guides/helpers/fck_get_assets.php:56
+msgid "<strong>B. Tick the item</strong> you want to insert into the pluslet"
+msgstr "<strong>B. Отметьте пункт</strong> который вы хотите вставить в pluslet"
+
+#: control/guides/helpers/fck_get_assets.php:96
+#: control/guides/helpers/fck_get_assets.php:100
+msgid ""
+"C. Add Link Text</strong> for your document.  (If you leave it blank, it "
+"will be the file name.)"
+msgstr "C. Добавьте связанный текст /strong> для вашего документа. (Если вы оставите это поле пустым, то это будет имя файла)."
+
+#: control/guides/delish_url.php:19
+msgid "Generate Delicious Display Page.  Yum."
+msgstr "Создать страницы отображения Delicious."
+
+#: control/guides/delish_url.php:21
+msgid "Use this tool to generate a page that display results from delicious."
+msgstr "Используйте этот инструмент для создания страниц, которые отображают результаты из delicious."
+
+#: control/guides/delish_url.php:24
+msgid "Folder"
+msgstr "Папка"
+
+#: control/guides/delish_url.php:25
+msgid "The delicious account name, e.g., thislibrary "
+msgstr "Имя учетной записи delicious, например, thislibrary"
+
+#: control/guides/delish_url.php:27
+msgid "Tag"
+msgstr "Тег"
+
+#: control/guides/delish_url.php:28
+msgid "Any subfolders you want displayed, can be more than one comma-separated"
+msgstr "Любые вложенные папки которые вы хотите видеть, может быть более одной через запятую"
+
+#: control/guides/delish_url.php:30
+msgid "Label"
+msgstr "Ярлык"
+
+#: control/guides/delish_url.php:31
+msgid "The title you want to appear at the top of your list"
+msgstr "Название будет отображаться в верхней части списка"
+
+#: control/guides/delish_url.php:34
+msgid "Notes"
+msgstr "Примечания"
+
+#: control/guides/delish_url.php:36 control/includes/header.php:68
+#: control/includes/classes/sp_Guide.php:164
+#: control/includes/classes/sp_Pluslet_Feed.php:59
+#: control/includes/classes/sp_Talkback.php:163
+msgid "Yes"
+msgstr "Да"
+
+#: control/guides/delish_url.php:37 control/includes/header.php:69
+#: control/includes/classes/sp_Guide.php:168
+#: control/includes/classes/sp_Pluslet_Feed.php:60
+#: control/includes/classes/sp_Talkback.php:167
+msgid "No"
+msgstr "Нет"
+
+#: control/guides/delish_url.php:41
+msgid "Generate Delicious URL"
+msgstr "Создание Delicious URL"
+
+#: control/guides/delish_url.php:51
+msgid ""
+"This is a way to generate a URL that displays data from your delicious "
+"account. You can point users to a\r\n"
+"    page of results that looks like a regular page of your website.  Or your "
+"SubjectsPlus installation, anyway."
+msgstr "Это способ создания URL, который отображает данные с вашего счета вкусно.Вы можете указать пользователей \r \n страницы результатов, которое выглядит как обычная страница вашего сайта.Или ваш SubjectsPlus установки, так или иначе."
+
+#: control/guides/delish_url.php:53
+msgid "The public delish feed page is located at sp/subjects/delish_feed.php ."
+msgstr "Общедоступная страница delish-канала находится в sp/subjects/delish_feed.php."
+
+#: control/guides/index.php:15
+msgid "Edit Guide Metadata"
+msgstr "Изменить метаданные Руководства"
+
+#: control/guides/index.php:16
+msgid "View Guide on Public Site"
+msgstr "Просмотр Руководства в публичном месте"
+
+#: control/guides/index.php:17
+msgid "Check Guide Links"
+msgstr "Проверьте ссылки Руководства"
+
+#: control/guides/index.php:30
+msgid "Please check with the guide's owner before modifying"
+msgstr "Пожалуйста, проверьте владельца Руководства, прежде чем изменять"
+
+#: control/guides/index.php:35
+msgid "-- Choose Guide --"
+msgstr "- Выберите Руководство -"
+
+#: control/guides/index.php:72
+msgid "unpublished"
+msgstr "неопубликованный"
+
+#: control/guides/index.php:78
+msgid "You don't have any guides yet.  Why not create one?"
+msgstr "Вы ещё не имеете ни одного руководства. Почему бы не создать один?"
+
+#: control/guides/index.php:82
+msgid "Edit Your Guides"
+msgstr "Изменить ваши Руководства"
+
+#: control/guides/index.php:90
+msgid "All Guides"
+msgstr "Все Руководства"
+
+#: control/guides/index.php:98
+msgid "Create"
+msgstr "Создавать"
+
+#: control/guides/index.php:101
+msgid "Make sure the guide doesn't already exist!"
+msgstr "Убедитесь, что руководство ещё не существует!"
+
+#: control/guides/index.php:102
+msgid "Create new guide"
+msgstr "Создать новое руководство"
+
+#: control/guides/index.php:106
+msgid "Tips"
+msgstr "Подсказки"
+
+#: control/guides/index.php:111
+msgid "Need to delete a guide?  Use the gear icon, and use the Delete button."
+msgstr "Нужно удалить Руководство? Используйте значок с изображением шестеренки, а также использовать кнопку Удалить."
+
+#: control/guides/guide.php:51
+msgid ""
+"You do not have permission to edit this guide.  Ask the guide's creator to "
+"add you as a co-editor."
+msgstr "У вас нет разрешения на изменение этого руководства. Спросите создателя руководства, чтобы добавить вас в качестве со-редактора."
+
+#: control/guides/guide.php:150
+msgid "Drag selection, then drop to right"
+msgstr "Перетащите выбранное, а затем оставьте справа"
+
+#: control/guides/guide.php:151
+msgid "Editable Box"
+msgstr "Редактируемое поле"
+
+#: control/guides/guide.php:152
+msgid "Heading"
+msgstr "Заголовок"
+
+#: control/guides/guide.php:153
+msgid "Delicious/RSS/Flickr/Twitter"
+msgstr "Delicious/RSS/Flickr/Twitter"
+
+#: control/guides/guide.php:276
+msgid "New Box"
+msgstr "Новое поле"
+
+#: control/guides/guide.php:296 control/guides/manage_items.php:137
+#: control/admin/faq_collections.php:102 control/admin/departments.php:132
+#: control/admin/sources.php:107
+msgid "SAVE CHANGES"
+msgstr "СОХРАНИТЬ ИЗМЕНЕНИЯ"
+
+#: control/guides/guide.php:301
+msgid "Drop Left"
+msgstr "Оставьте слева"
+
+#: control/guides/guide.php:308
+msgid "Drop Right"
+msgstr "Оставьте справа"
+
+#: control/guides/manage_items.php:80
+msgid "-- Choose a Different Guide --"
+msgstr "- Выбрать другое руководство -"
+
+#: control/guides/manage_items.php:120
+msgid ""
+"There do not seem to be any resources associated with this guide.  To add "
+"new resources, go to the Records tab, select that resource, and then add "
+"your subject."
+msgstr "Там, кажется, не имеются ресурсы, связанные с этим руководством. Для добавления новых ресурсов, перейдите на вкладку Записи, выберите этот ресурс, а затем добавьте предмет."
+
+#: control/guides/manage_items.php:131
+#: control/includes/classes/sp_BuildNav.php:53
+msgid "Organize Resources"
+msgstr "Организация ресурсов"
+
+#: control/guides/manage_items.php:134
+msgid "Organize Resources for "
+msgstr "Организация ресурсов для"
+
+#: control/faq/browse_faq.php:23 subjects/faq.php:278
+msgid "Просмотр FAQs by Collection"
+msgstr "Интересное ЧаВо по коллекции"
+
+#: control/faq/browse_faq.php:25 control/faq/browse_faq.php:57
+msgid "If you wish to edit a FAQ, click the link."
+msgstr "Если вы хотите изменить ЧаВо, нажмите на ссылку."
+
+#: control/faq/browse_faq.php:55
+msgid "Browse FAQs by Subject Area"
+msgstr "Просмотр ЧаВо по Предметной области"
+
+#: control/faq/index.php:65
+msgid "No FAQs yet.  Why not dream one up?"
+msgstr "ЧаВо ещё не существуют. Почему бы не создать один?"
+
+#: control/faq/index.php:72
+msgid "FAQs visible"
+msgstr "ЧаВо видимы"
+
+#: control/faq/index.php:74 control/talkback/index.php:144
+msgid "See All"
+msgstr "Смотреть все"
+
+#: control/faq/index.php:83
+msgid "Create FAQ"
+msgstr "Создать ЧаВо"
+
+#: control/faq/index.php:85
+msgid "CREATE FAQ"
+msgstr "Создать ЧаВо"
+
+#: control/faq/index.php:87
+msgid "About FAQs"
+msgstr "О ЧаВо"
+
+#: control/faq/index.php:89 control/includes/classes/sp_FAQ.php:128
+msgid "Edit FAQ"
+msgstr "Редактировать ЧаВо"
+
+#: control/faq/index.php:90
+msgid "View FAQ on Public Site"
+msgstr "Просмотр ЧаВо в публичном месте"
+
+#: control/faq/faq_bits.php:53 control/records/record_bits.php:98
+msgid "The following record is recommended for delete"
+msgstr "Следующая запись рекомендуется для удаления"
+
+#: control/faq/faq_bits.php:57
+msgid "SubjectsPlus: FAQ Delete Recommendation"
+msgstr "SubjectsPlus: ЧаВо удалить рекомендацию"
+
+#: control/faq/faq_bits.php:62 control/records/record_bits.php:107
+msgid "Delete request sent to "
+msgstr "Удалить запрос, отправленный на"
+
+#: control/index.php:33
+#, php-format
+msgid "Hello %s"
+msgstr "Привет %s"
+
+#: control/index.php:37
+msgid "Reset Password"
+msgstr "Сброс пароля"
+
+#: control/index.php:40
+msgid "Update Your Biographical Details"
+msgstr "Обновление ваших биографических данных"
+
+#: control/index.php:41
+msgid "Update Headshot"
+msgstr "Обновить фотографию"
+
+#: control/index.php:46 control/admin/index.php:58
+msgid "Recent Activity"
+msgstr "Последняя активность"
+
+#: control/index.php:48
+msgid "You have recently added or edited:"
+msgstr "Вы недавно добавили или отредактировали:"
+
+#: control/index.php:53
+msgid "Background Options"
+msgstr "Параметры фона"
+
+#: control/index.php:77
+msgid "Search Strings"
+msgstr "Поиск строк"
+
+#: control/search.php:24
+msgid "<p>Please search for something with the box above.</p>"
+msgstr "<p>Пожалуйста, ищите что-нибудь в поле выше. </p>"
+
+#: control/search.php:105
+msgid "Search Results"
+msgstr "Результаты поиска"
+
+#: control/includes/functions_legacy.php:50
+#: control/includes/functions_legacy.php:269
+msgid "required"
+msgstr "обязательный"
+
+#: control/includes/functions_legacy.php:332
+msgid "Are you sure you wish to <strong>delete this item forever</strong>?"
+msgstr "Вы уверены, что хотите <strong>удалить этот пункт навсегда</strong>?"
+
+#: control/includes/functions_legacy.php:333
+#: control/includes/classes/Staff.php:275
+#: control/includes/classes/sp_Record.php:180
+#: control/includes/classes/sp_FAQ.php:168
+#: control/includes/classes/sp_Guide.php:209
+#: control/includes/classes/sp_Talkback.php:183
+msgid "Delete Forever!"
+msgstr "Удалить навсегда!"
+
+#: control/includes/functions_legacy.php:334
+msgid "Use your browser's back button if you have reconsidered."
+msgstr "Используйте кнопку назад вашего браузера, если вы передумали."
+
+#: control/includes/functions_legacy.php:444
+msgid "Thy Will Be Done:  Deleted"
+msgstr "Да будет воля Твоя: Удаленно"
+
+#: control/includes/functions_legacy.php:448
+msgid "Thwarted!  Your Delete failed!  Contact the administrator."
+msgstr "Внимание! Ваше Удаление не удалось! Обратитесь к администратору."
+
+#: control/includes/functions_legacy.php:452
+msgid "Thy Will Be Done:  Updated"
+msgstr "Да будет воля Твоя: Обновлено"
+
+#: control/includes/functions_legacy.php:456
+msgid "Thwarted!  Your Update failed! Contact the administrator"
+msgstr "Внимание! Ваша обновление не удалось! Обратитесь к администратору"
+
+#: control/includes/functions_legacy.php:460
+msgid "Thy Will Be Done:  Added"
+msgstr "Да будет воля Твоя: Добавлено"
+
+#: control/includes/functions_legacy.php:464
+msgid "Thwarted!  Your Insert failed! Contact the administrator"
+msgstr "Внимание! Ваша добавление не удалось! Обратитесь к администратору"
+
+#: control/includes/functions_legacy.php:468
+msgid "You must select an audiofile and/or a question!"
+msgstr "Вы должны выбрать аудиофайл и/или вопрос!"
+
+#: control/includes/header.php:66
+msgid "Required"
+msgstr "Обязательный"
+
+#: control/includes/header.php:67
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+#: control/includes/classes/sp_Pluslet_4.php:21
+msgid "FAQs"
+msgstr "ЧаВо"
+
+#: control/includes/classes/sp_Pluslet_4.php:49
+msgid "There are no FAQs linked for this guide"
+msgstr "Не имеется ЧаВо, связанные с этим руководством"
+
+#: control/includes/classes/StaffDisplay.php:95
+msgid "Librarian"
+msgstr "Библиотекарь"
+
+#: control/includes/classes/StaffDisplay.php:96
+msgid "Subject Responsibilities"
+msgstr "Ответственный за Предмет"
+
+#: control/includes/classes/StaffDisplay.php:175
+msgid "Name"
+msgstr "Имя"
+
+#: control/includes/classes/StaffDisplay.php:176
+#: control/includes/classes/Staff.php:193
+msgid "Title"
+msgstr "Титул"
+
+#: control/includes/classes/StaffDisplay.php:177
+msgid "Phone"
+msgstr "Телефон"
+
+#: control/includes/classes/StaffDisplay.php:178
+msgid "Email"
+msgstr "Email"
+
+#: control/includes/classes/Staff.php:163
+msgid "Click to update photo"
+msgstr "Нажмите, чтобы обновить фотографию"
+
+#: control/includes/classes/Staff.php:165
+msgid "You can change the photo after saving."
+msgstr "Вы можете изменить фото после сохранения."
+
+#: control/includes/classes/Staff.php:182
+msgid "Staff Member"
+msgstr "Штатный сотрудник"
+
+#: control/includes/classes/Staff.php:185
+msgid "First Name "
+msgstr "Имя"
+
+#: control/includes/classes/Staff.php:189
+msgid "Last Name "
+msgstr "Фамилия"
+
+#: control/includes/classes/Staff.php:197
+msgid "Department"
+msgstr "Отдел"
+
+#: control/includes/classes/Staff.php:201
+msgid "Show First in Dept List?"
+msgstr "Показать первым в списке департаментов?"
+
+#: control/includes/classes/Staff.php:205 control/admin/departments.php:153
+msgid "Telephone"
+msgstr "Телефон"
+
+#: control/includes/classes/Staff.php:208
+msgid "Email (This is the username for logging in to SubjectsPlus)"
+msgstr "Email (Это имя пользователя для входа в SubjectsPlus)"
+
+#: control/includes/classes/Staff.php:212
+msgid "User Type"
+msgstr "Тип пользователя"
+
+#: control/includes/classes/Staff.php:216
+msgid "Active User?"
+msgstr "Активный пользователь?"
+
+#: control/includes/classes/Staff.php:221
+msgid "Photo"
+msgstr "Фото"
+
+#: control/includes/classes/Staff.php:225
+msgid "Biographical Details"
+msgstr "Биографические данные"
+
+#: control/includes/classes/Staff.php:227 control/includes/set_bio.php:71
+msgid "Please only include professional details."
+msgstr "Пожалуйста, включают только профессиональные данные."
+
+#: control/includes/classes/Staff.php:237
+msgid "Permissions"
+msgstr "Разрешения"
+
+#: control/includes/classes/Staff.php:262
+msgid "The password is hidden.  Reset?"
+msgstr "Пароль скрыт. Сброс?"
+
+#: control/includes/classes/Staff.php:270
+msgid "Save"
+msgstr "Сохранить"
+
+#: control/includes/classes/Staff.php:272
+#: control/includes/classes/sp_Record.php:176
+msgid "Save Record Now"
+msgstr "Сохранить запись сейчас"
+
+#: control/includes/classes/Staff.php:278
+#: control/includes/classes/sp_Record.php:186
+#: control/includes/classes/sp_FAQ.php:173
+#: control/includes/classes/sp_Guide.php:211
+#: control/includes/classes/sp_Talkback.php:186
+msgid "Last modified: "
+msgstr "Последнее изменение:"
+
+#: control/includes/classes/Staff.php:287
+msgid "Enter the new password.  Make it a good one!"
+msgstr "Введите новый пароль. Сделать это хорошо!"
+
+#: control/includes/classes/Staff.php:322
+msgid ""
+"Thy will be done.  Note that any subject guides associated with this user "
+"are now orphans."
+msgstr "Да будет воля Твоя. Обратите внимание, что любое предметное руководство связанное с этим пользователь теперь одинокое."
+
+#: control/includes/classes/Staff.php:326
+#: control/includes/classes/sp_Talkback.php:232
+msgid "There was a problem with your delete."
+msgstr "Существовал проблема с удалением."
+
+#: control/includes/classes/Staff.php:388
+msgid "Thy Will Be Done.  Added."
+msgstr "Да будет воля Твоя. Добавлено."
+
+#: control/includes/classes/Staff.php:429
+#: control/includes/classes/sp_FAQ.php:440
+#: control/includes/classes/sp_Talkback.php:304
+#: control/admin/faq_collections.php:38 control/admin/faq_collections.php:76
+msgid "Thy Will Be Done.  Updated."
+msgstr "Да будет воля Твоя. Обновлено."
+
+#: control/includes/classes/sp_Pluslet_3.php:23
+msgid "Subject Specialist"
+msgstr "Тематический специалист"
+
+#: control/includes/classes/sp_Record.php:143
+msgid "Record Title"
+msgstr "Заголовок записи"
+
+#: control/includes/classes/sp_Record.php:146
+msgid "Description"
+msgstr "Описание"
+
+#: control/includes/classes/sp_Record.php:163 control/records/index.php:127
+msgid "Location"
+msgstr "Местоположение"
+
+#: control/includes/classes/sp_Record.php:182
+#: control/includes/classes/sp_FAQ.php:170
+msgid "Recommend Delete"
+msgstr "Рекомендовать Удалить"
+
+#: control/includes/classes/sp_Record.php:202
+msgid "Default Source Type"
+msgstr "Тип источника по умолчанию"
+
+#: control/includes/classes/sp_Record.php:226
+msgid "Subjects"
+msgstr "Тематика"
+
+#: control/includes/classes/sp_Record.php:228
+msgid "-- Select --"
+msgstr "-- Выбрать --"
+
+#: control/includes/classes/sp_Record.php:337
+msgid "Location (URL)"
+msgstr "Местоположение (ссылка)"
+
+#: control/includes/classes/sp_Record.php:341
+msgid "Call Number"
+msgstr "Шифр"
+
+#: control/includes/classes/sp_Record.php:343
+msgid "Format"
+msgstr "Формат"
+
+#: control/includes/classes/sp_Record.php:345
+msgid "Access Restrictions"
+msgstr "Ограничения доступа"
+
+#: control/includes/classes/sp_Record.php:353
+msgid "A-Z DB List"
+msgstr "A-Z список баз дынных"
+
+#: control/includes/classes/sp_Record.php:362
+msgid "Display Note"
+msgstr "Отобрадить заметку"
+
+#: control/includes/classes/sp_Record.php:382
+msgid "X Delete this location"
+msgstr "X Удалить этом местоположение"
+
+#: control/includes/classes/sp_Record.php:416
+msgid "remove subject"
+msgstr "удалите предмет"
+
+#: control/includes/classes/sp_Record.php:417
+msgid "change source type"
+msgstr "изменить тип источника"
+
+#: control/includes/classes/sp_Record.php:418
+msgid "add description override"
+msgstr "добавить описание переопределения"
+
+#: control/includes/classes/sp_Record.php:449
+#: control/includes/classes/sp_FAQ.php:307
+#: control/includes/classes/sp_Guide.php:294
+msgid "There was a problem with your delete (stage 1 of 2)."
+msgstr "Существовал проблема с удалением (этап 1 из 2)."
+
+#: control/includes/classes/sp_Record.php:455
+msgid "Thy will be done.  Offending record deleted."
+msgstr "Да будет воля Твоя. Проблемная запись удалена."
+
+#: control/includes/classes/sp_Record.php:467
+#: control/includes/classes/sp_Guide.php:316
+msgid "There was a problem with your delete (stage 2 of 2)."
+msgstr "Существовал проблема с удалением (этап 2 из 2)."
+
+#: control/includes/classes/sp_Record.php:515
+msgid "Thy Will Be Done.  Record added."
+msgstr "Да будет воля Твоя. Запись добавлена."
+
+#: control/includes/classes/sp_Record.php:580
+msgid "Thy Will Be Done.  Record updated."
+msgstr "Да будет воля Твоя. Запись обновлена."
+
+#: control/includes/classes/sp_CompleteMe.php:52
+msgid "Go"
+msgstr "Сделать"
+
+#: control/includes/classes/sp_FAQ.php:69
+msgid "There is no active record with that ID.  Weird.  Why not make one?"
+msgstr "Не существует активной записи с этим ID. Странно. Почему бы не создать одну?"
+
+#: control/includes/classes/sp_FAQ.php:137
+#: control/includes/classes/sp_Talkback.php:119
+msgid "Question"
+msgstr "Вопрос"
+
+#: control/includes/classes/sp_FAQ.php:140
+#: control/includes/classes/sp_Talkback.php:125
+msgid "Answer"
+msgstr "Ответ"
+
+#: control/includes/classes/sp_FAQ.php:155
+msgid "Keywords (comma separated please)"
+msgstr "Ключевые слова (разделенные запятой)"
+
+#: control/includes/classes/sp_FAQ.php:163
+#: control/includes/classes/sp_Guide.php:202
+#: control/includes/classes/sp_Talkback.php:178
+msgid "Save Now"
+msgstr "Сохранить сейчас"
+
+#: control/includes/classes/sp_FAQ.php:228
+msgid "Relevant Subjects"
+msgstr "Релевантные предметы"
+
+#: control/includes/classes/sp_FAQ.php:235
+msgid "Relevant Collections"
+msgstr "Релевантные коллекции"
+
+#: control/includes/classes/sp_FAQ.php:314
+msgid "Thy will be done.  Offending FAQ deleted.  Close window to continue."
+msgstr "Да будет воля Твоя. Проблеммные ЧаВо удалены. Закройте окно, чтобы продолжить."
+
+#: control/includes/classes/sp_FAQ.php:316
+msgid "Thy will be done.  Offending FAQ deleted."
+msgstr "Да будет воля Твоя. Проблемные ЧаВо удалены."
+
+#: control/includes/classes/sp_FAQ.php:329
+msgid "There was a problem with your delete, stage 2 of 2."
+msgstr "Существовала проблема с удалением, этап 2 из 2."
+
+#: control/includes/classes/sp_FAQ.php:375
+#: control/includes/classes/sp_Guide.php:373 control/admin/admin_bits.php:48
+msgid "Thy Will Be Done."
+msgstr "Да будет воля Твоя."
+
+#: control/includes/classes/sp_Pluslet_1.php:30
+msgid "All Items by Source"
+msgstr "Все элементы по Источнику"
+
+#: control/includes/classes/sp_Pluslet_1.php:143
+#: control/includes/classes/sp_Pluslet_1.php:152
+msgid "Print Location:"
+msgstr "Печать местоположения:"
+
+#: control/includes/classes/sp_Pluslet_1.php:219
+msgid "Note:  Not all sources displayed."
+msgstr "Примечание: Не все источники отображаются."
+
+#: control/includes/classes/sp_Pluslet_1.php:227
+msgid "See all"
+msgstr "Смотреть все"
+
+#: control/includes/classes/sp_Pluslet.php:49
+msgid "There is no box with that ID.  Why not create a new one?"
+msgstr "Не существует поля с этим ID. Почему бы не создать новое?"
+
+#: control/includes/classes/sp_Pluslet.php:70
+msgid "Help"
+msgstr "Помощь"
+
+#: control/includes/classes/sp_Pluslet.php:71
+msgid "toggle me"
+msgstr "Переключить меня"
+
+#: control/includes/classes/sp_Pluslet.php:77
+#: control/includes/classes/sp_Pluslet.php:79
+msgid "Edit"
+msgstr "Редактировать"
+
+#: control/includes/classes/sp_Pluslet.php:83
+msgid "Remove item from this guide"
+msgstr "Удалить элемент из этого руководства"
+
+#: control/includes/classes/sp_DbHandler.php:45
+msgid "Sorry, there are no results at this time."
+msgstr "Извините, результатов нет на данный момент."
+
+#: control/includes/classes/sp_DbHandler.php:89
+msgid "Note:"
+msgstr "Примечание:"
+
+#: control/includes/classes/sp_DbHandler.php:95
+msgid "more information"
+msgstr "дополнительная информация"
+
+#: control/includes/classes/sp_Pluslet_5.php:23
+msgid "Book Search"
+msgstr "Поиск книг"
+
+#: control/includes/classes/sp_Guide.php:74
+msgid "There is no active record with that ID.  Why not create a new one?"
+msgstr "Не cуществует активной записи с этим ID. Почему бы не создать новую?"
+
+#: control/includes/classes/sp_Guide.php:125
+msgid "Edit Existing Guide Metadata"
+msgstr "Редактировать существующие метаданные руководства"
+
+#: control/includes/classes/sp_Guide.php:127
+msgid "Create New Guide"
+msgstr "Создать новое руководство"
+
+#: control/includes/classes/sp_Guide.php:136
+msgid "Guide"
+msgstr "Руководство"
+
+#: control/includes/classes/sp_Guide.php:139
+msgid "Short Form"
+msgstr "Краткая форма"
+
+#: control/includes/classes/sp_Guide.php:142
+msgid "Short label for subject--minus spaces, ampersands, etc."
+msgstr "Короткая метка для предмета (без пробелов, амперсандов и т.п.)"
+
+#: control/includes/classes/sp_Guide.php:145
+msgid "Type of Guide"
+msgstr "Тип руководства"
+
+#: control/includes/classes/sp_Guide.php:159
+msgid "Publish Guide (publicly accessible)?"
+msgstr "Опубликовать Руководство (доступное всем)?"
+
+#: control/includes/classes/sp_Guide.php:182
+msgid "Main column width:"
+msgstr "Ширина главной колонки:"
+
+#: control/includes/classes/sp_Guide.php:243
+msgid "Staff"
+msgstr "Персонал"
+
+#: control/includes/classes/sp_Guide.php:263 control/admin/admin_bits.php:238
+msgid "delete"
+msgstr "удалить"
+
+#: control/includes/classes/sp_Guide.php:277
+msgid "You do not have permission to delete this guide."
+msgstr "У вас нет разрешения на удаление этого руководства."
+
+#: control/includes/classes/sp_Guide.php:301
+msgid ""
+"Thy will be done.  Offending Guide (and associated boxes) deleted.  Close "
+"window to continue."
+msgstr "Да будет воля Твоя. Проблемное руководство (и связанные с ними поля) удалены. Закройте окно, чтобы продолжить."
+
+#: control/includes/classes/sp_Guide.php:303
+msgid "Thy will be done.  Offending Guide (and associated boxes) deleted."
+msgstr "Да будет воля Твоя. Проблемное руководство (и связанные с ними поля) удалены."
+
+#: control/includes/classes/sp_Guide.php:327
+#: control/includes/classes/sp_Guide.php:382
+msgid ""
+"There is already a guide with this SHORTFORM.  The shortform must be unique."
+msgstr "Уже существует руководство с этой Короткой формой. Короткая форма должна быть уникальной."
+
+#: control/includes/classes/sp_Guide.php:373
+msgid "View Your Guide"
+msgstr "Посмотреть ваше руководство"
+
+#: control/includes/classes/sp_Guide.php:438
+msgid "Thy Will Be Done.  Guide updated."
+msgstr "Да будет воля Твоя. Руководство обновлено."
+
+#: control/includes/classes/sp_Pluslet_Feed.php:61
+msgid "Display"
+msgstr "Показать"
+
+#: control/includes/classes/sp_Pluslet_Feed.php:62
+msgid "items<br />Show descriptions?"
+msgstr "элементов<br />Показать описания?"
+
+#: control/includes/classes/sp_Pluslet_Feed.php:75
+msgid "Enter RSS feed or username/tag (for delicious)"
+msgstr "Введите RSS канал или имя пользователя/теги (для delicious)"
+
+#: control/includes/classes/sp_Pluslet_Feed.php:108
+msgid "Loading ..."
+msgstr "Загрузка ..."
+
+#: control/includes/classes/sp_Pluslet_6.php:21
+msgid "Guide Outline"
+msgstr "Схема Руководства"
+
+#: control/includes/classes/sp_Pluslet_6.php:68
+msgid "There are no contents for this guide yet!"
+msgstr "Нет содержания для этого руководства!"
+
+#: control/includes/classes/sp_Pluslet_2.php:21 subjects/databases.php:99
+msgid "Key to Icons"
+msgstr "Ключ для Иконок"
+
+#: control/includes/classes/sp_Talkback.php:67
+msgid "There is no active record with that ID.  Weird."
+msgstr "Не cуществует активной записи с этим ID."
+
+#: control/includes/classes/sp_Talkback.php:111
+msgid "Edit TalkBack"
+msgstr "Изменить TalkBack"
+
+#: control/includes/classes/sp_Talkback.php:122
+msgid "Question By"
+msgstr "Вопрос по"
+
+#: control/includes/classes/sp_Talkback.php:151
+msgid "Answered By"
+msgstr "Отвечено по"
+
+#: control/includes/classes/sp_Talkback.php:158
+msgid "Live?"
+msgstr "Живой?"
+
+#: control/includes/classes/sp_Talkback.php:217
+msgid ""
+"Thy will be done.  Offending Talkback deleted.  Close window to continue."
+msgstr "Да будет воля Твоя. Проблемный Talkback удалён. Закройте окно, чтобы продолжить."
+
+#: control/includes/classes/sp_Talkback.php:219
+msgid "Thy will be done.  Offending Talkback deleted."
+msgstr "Да будет воля Твоя. Проблемный Talkback удалён."
+
+#: control/includes/classes/sp_MailMessage.php:25
+msgid "Library_No_Reply"
+msgstr "Library_No_Reply"
+
+#: control/includes/classes/sp_MailMessage.php:62
+msgid "This is an automatically generated email. Please do not respond."
+msgstr "Это автоматически сгенерированное электронное письмо. Пожалуйста, не отвечайте."
+
+#: control/includes/classes/sp_MailMessage.php:62
+msgid "Email sent: "
+msgstr "Email отправлено:"
+
+#: control/includes/classes/sp_BuildNav.php:33
+msgid "Records"
+msgstr "Записи"
+
+#: control/includes/classes/sp_BuildNav.php:35 control/records/index.php:145
+msgid "New Record"
+msgstr "Новая запись"
+
+#: control/includes/classes/sp_BuildNav.php:36
+msgid "Browse Items"
+msgstr "Просмотр элементов"
+
+#: control/includes/classes/sp_BuildNav.php:48 control/admin/index.php:34
+msgid "Guides"
+msgstr "Руководства"
+
+#: control/includes/classes/sp_BuildNav.php:50
+msgid "New Guide"
+msgstr "Новое руководство"
+
+#: control/includes/classes/sp_BuildNav.php:51
+msgid "Browse Guides"
+msgstr "Просмотр Руководства"
+
+#: control/includes/classes/sp_BuildNav.php:52
+msgid "Delicious Builder"
+msgstr "Конструктор Delicious"
+
+#: control/includes/classes/sp_BuildNav.php:67
+msgid "New FAQ"
+msgstr "Новые вопросы и ответы"
+
+#: control/includes/classes/sp_BuildNav.php:92
+msgid "Admin"
+msgstr "Админ"
+
+#: control/includes/classes/sp_BuildNav.php:94 control/admin/index.php:29
+msgid "Add New User"
+msgstr "Добавить нового пользователя"
+
+#: control/includes/classes/sp_BuildNav.php:95
+msgid "Manage Users"
+msgstr "Управление пользователями"
+
+#: control/includes/classes/sp_BuildNav.php:96 control/admin/index.php:37
+msgid "Manage Guides"
+msgstr "Управление языками"
+
+#: control/includes/classes/sp_BuildNav.php:97 control/admin/index.php:41
+msgid "Departments"
+msgstr "Отделы"
+
+#: control/includes/classes/sp_BuildNav.php:98
+msgid "Sources"
+msgstr "Источники"
+
+#: control/includes/classes/sp_BuildNav.php:99
+msgid "FAQ Collections"
+msgstr "FAQ Коллекции"
+
+#: control/includes/classes/sp_BuildNav.php:100
+msgid "Config Site"
+msgstr "Конфигурация сайта"
+
+#: control/includes/classes/sp_BuildNav.php:114
+msgid "Search records"
+msgstr "Поиск записей"
+
+#: control/includes/classes/sp_BuildNav.php:118
+msgid "Search guides"
+msgstr "Поиск руководств"
+
+#: control/includes/classes/sp_BuildNav.php:122
+msgid "Search faqs"
+msgstr "Поиск ЧаВо"
+
+#: control/includes/classes/sp_BuildNav.php:126
+msgid "Search talkback"
+msgstr "Поиск двусторонней связи"
+
+#: control/includes/classes/sp_BuildNav.php:130
+msgid "Search users"
+msgstr "Поиск пользователей"
+
+#: control/includes/classes/sp_BuildNav.php:134
+msgid "Search all"
+msgstr "Поиск всех"
+
+#: control/includes/classes/sp_BuildNav.php:148
+msgid "Hi"
+msgstr "Привет"
+
+#: control/includes/classes/sp_BuildNav.php:152
+msgid "My options"
+msgstr "Мои опции"
+
+#: control/includes/classes/sp_BuildNav.php:153
+msgid "{Logout}"
+msgstr "{Выход}"
+
+#: control/includes/config_bits.php:35
+msgid "Background Updated!"
+msgstr "Фон обновлён!"
+
+#: control/includes/functions.php:238
+msgid "Invalid file type: not on whitelist of ok file types"
+msgstr "Неверный тип файла: не в белом списке типов файлов"
+
+#: control/includes/functions.php:382
+msgid "Last modification date unknown."
+msgstr "дата последнего изменения неизвестна."
+
+#: control/includes/functions.php:431
+msgid "Someone Has Blundered!"
+msgstr "Кто-то ошибся!"
+
+#: control/includes/functions.php:433
+msgid "(But probably not you.)"
+msgstr "(Но, наверное, не вы.)"
+
+#: control/includes/functions.php:556
+msgid "Restricted Resource"
+msgstr "Ограниченные ресурсы"
+
+#: control/includes/functions.php:558
+msgid "Restricted resource"
+msgstr "Ограниченные ресурсы"
+
+#: control/includes/functions.php:562
+msgid "Unrestricted Resource"
+msgstr "Неограниченный ресурс"
+
+#: control/includes/functions.php:564
+msgid "Unrestricted resource"
+msgstr "Неограниченный ресурс"
+
+#: control/includes/functions.php:568
+msgid "Some full text available"
+msgstr "Некоторый Полный текст доступен"
+
+#: control/includes/functions.php:570 subjects/databases.php:73
+msgid "Some full text"
+msgstr "Некоторый Полный текст"
+
+#: control/includes/functions.php:576
+msgid "OpenURL enabled"
+msgstr "OpenURL включен"
+
+#: control/includes/functions.php:580
+msgid "Resource contains images"
+msgstr "Ресурс содержит изображения"
+
+#: control/includes/functions.php:582 control/includes/functions.php:814
+#: subjects/databases.php:74
+msgid "Images"
+msgstr "Изображения"
+
+#: control/includes/functions.php:586
+msgid "Resource contains video"
+msgstr "Ресурс содержит видео"
+
+#: control/includes/functions.php:588 subjects/databases.php:75
+msgid "Video files"
+msgstr "Видео файлы"
+
+#: control/includes/functions.php:592
+msgid "Resource contains audio"
+msgstr "Ресурс содержит аудио"
+
+#: control/includes/functions.php:594 subjects/databases.php:76
+msgid "Audio files"
+msgstr "Аудио файлы"
+
+#: control/includes/functions.php:647
+msgid "Research Guides"
+msgstr "Руководства исследования"
+
+#: control/includes/functions.php:651
+msgid "FAQ"
+msgstr "Часто задаваемые вопросы"
+
+#: control/includes/functions.php:655
+msgid "Talk Back"
+msgstr "TalkBack"
+
+#: control/includes/functions.php:661
+msgid "Research Guide created"
+msgstr "Руководство исследования создано"
+
+#: control/includes/functions.php:664
+msgid "Research Guide metadata"
+msgstr "Метаданные Руководства исследования"
+
+#: control/includes/functions.php:667
+msgid "Research Guide deleted"
+msgstr "Руководство исследования удалено"
+
+#: control/includes/functions.php:674
+msgid "Record"
+msgstr "Запись"
+
+#: control/includes/functions.php:678
+msgid "Staff Details updated."
+msgstr "Персонал Подробная информация обновляется."
+
+#: control/includes/functions.php:683
+msgid "New User Added"
+msgstr "Новый пользователь добавлен"
+
+#: control/includes/functions.php:687
+msgid "User Information updated"
+msgstr "Информация о пользователе обновлена"
+
+#: control/includes/functions.php:691
+msgid "User deleted"
+msgstr "Пользователь удалён"
+
+#: control/includes/functions.php:814
+msgid "Databases with Images"
+msgstr "Базы данных с изображениями"
+
+#: control/includes/functions.php:815
+msgid "Databases with Audio"
+msgstr "Базы данных с аудио"
+
+#: control/includes/functions.php:815
+msgid "Audio"
+msgstr "Аудио"
+
+#: control/includes/functions.php:816
+msgid "Databases with Video"
+msgstr "Базы данных с видео"
+
+#: control/includes/functions.php:816
+msgid "Video"
+msgstr "Видео"
+
+#: control/includes/set_bio.php:34 control/includes/set_password.php:34
+#: control/includes/set_picture.php:33
+msgid "You are not authorized to view this."
+msgstr "Вы не авторизованы для просмотра этого."
+
+#: control/includes/set_bio.php:41 control/includes/set_password.php:41
+#: control/includes/set_picture.php:40
+msgid "Perhaps you have come here by a funny path?"
+msgstr "Возможно, вы пришли сюда по неправильному пути?"
+
+#: control/includes/set_bio.php:55
+msgid "Bio updated.  Close window to continue."
+msgstr "Биография обновлена. Закройте окно, чтобы продолжить."
+
+#: control/includes/set_bio.php:57 control/includes/set_password.php:60
+msgid "There was a problem.  Contact the admin."
+msgstr "Существовала проблема. Связаться с администратором."
+
+#: control/includes/set_bio.php:67
+msgid "Update Biography for "
+msgstr "Обновить биографию для "
+
+#: control/includes/set_bio.php:78
+msgid "Update Bio"
+msgstr "Обновить биографию"
+
+#: control/includes/linkchecker.php:29
+msgid ""
+"The link report can take a few minutes to run, depending on how many links "
+"you have on the page.  So be patient."
+msgstr "Отчет ссылок может генерироваться несколько минут, в зависимости от того, сколько ссылок у вас на странице. Так что наберитесь терпения."
+
+#: control/includes/linkchecker.php:32
+msgid "Run Linkchecker Now"
+msgstr "Выполнить LinkChecker сейчас"
+
+#: control/includes/linkchecker.php:37 subjects/delish_feed.php:37
+msgid "Results"
+msgstr "Результаты"
+
+#: control/includes/linkchecker.php:69
+msgid "Wow, it appears that all your links are okay.  Good work!"
+msgstr "Ого, кажется, что все ваши ссылки в порядке. Хорошая работа!"
+
+#: control/includes/linkchecker.php:72
+msgid "Would you like to mail this report to someone?"
+msgstr "Хотели бы вы отправить этот отчет кому-нибудь?"
+
+#: control/includes/linkchecker.php:73
+msgid "Send report to: "
+msgstr "Отправить отчет:"
+
+#: control/includes/linkchecker.php:74
+msgid "Send report to All Guide Owners"
+msgstr "Отправить отчет всем владельцам руководства"
+
+#: control/includes/linkchecker.php:84
+msgid "Link Report for "
+msgstr "Отчёт ссылок для "
+
+#: control/includes/set_password.php:57
+msgid "Password updated.  Close this box to continue."
+msgstr "Пароль обновлён. Закрыть окно, чтобы продолжить."
+
+#: control/includes/set_password.php:63
+msgid ""
+"You cannot leave the password box blank.  Close this window if you don't "
+"want to change the password."
+msgstr "Вы не можете оставить поле пароля пустым. Закрыть это окно, если вы не хотите изменять пароль."
+
+#: control/includes/set_password.php:68
+msgid "Update Password for "
+msgstr "Обновить пароль для"
+
+#: control/includes/set_picture.php:63
+msgid "Current Picture . . . boooring."
+msgstr "Текущее изображение."
+
+#: control/includes/set_picture.php:69
+msgid ""
+"Upload the new you.  Once you click upload, the current image will be "
+"replaced.  <strong>Note:</strong>  Your image will be scaled to <strong>70px "
+"wide</strong>.  Using a square image is best."
+msgstr "Добавить новую фотографию. После нажатия на кнопку загрузки, текущее изображение будет заменено.<strong>Примечание:</strong> Ваше изображение будет масштабироваться до <strong>70px по ширине</strong>. Лучше использовать квадратное изображение."
+
+#: control/includes/set_picture.php:135
+msgid "Update Picture for "
+msgstr "Обновить изображение для"
+
+#: control/records/index.php:22
+msgid "Please select a letter or tag to browse."
+msgstr "Пожалуйста, выберите букву или тег для просмотра."
+
+#: control/records/index.php:148
+msgid "Make sure the item doesn't already exist!"
+msgstr "Убедитесь, что элемент не существует!"
+
+#: control/records/index.php:149
+msgid "Create new item"
+msgstr "Создать новый элемент"
+
+#: control/records/record.php:64
+msgid ""
+"You must have a title, location, and subject.  Please go back and fix these "
+"omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "У вас должно быть название, местоположение и предмет. Пожалуйста, вернитесь назад и исправьте эти упущения. И включите JavaScript в браузере для корректной работы."
+
+#: control/records/record.php:77
+msgid "There is already a record with this title: "
+msgstr "Запись с таким названием уже существует: "
+
+#: control/records/record.php:77
+msgid "Maybe do a search and make sure it doesn't already exist?"
+msgstr "Может быть сделать поиск и убедиться, что оно ещё не существует?"
+
+#: control/records/record_bits.php:53
+msgid "Source Override"
+msgstr "Источник перезаписан"
+
+#: control/records/record_bits.php:53
+msgid "add source override"
+msgstr "добавить источник и перезаписать"
+
+#: control/records/record_bits.php:53
+msgid "never mind"
+msgstr "неважно"
+
+#: control/records/record_bits.php:59
+msgid "Location (Enter URL)"
+msgstr "Место нахождения (введите URL)"
+
+#: control/records/record_bits.php:62
+msgid "Location (Enter Call Number)"
+msgstr "Расположение (введите шифр)"
+
+#: control/records/record_bits.php:65
+msgid "Location (Enter Persistent Catalog URL--include http://)"
+msgstr "Местоположение (введите постоянный URL каталога, включая http://)"
+
+#: control/records/record_bits.php:88
+msgid "This URL looks OK to me"
+msgstr "Этот URL выглядит нормально для меня"
+
+#: control/records/record_bits.php:91
+msgid "This URL looks dodgy; better check it"
+msgstr "Этот URL выглядит не очень хорошо, лучше проверить его"
+
+#: control/records/record_bits.php:102
+msgid "SubjectsPlus: Record Delete Recommendation"
+msgstr "SubjectsPlus: Рекомендуется удалить запись"
+
+#: control/talkback/index.php:55 control/talkback/index.php:94
+msgid "Anonymous"
+msgstr "Анонимный"
+
+#: control/talkback/index.php:72 control/talkback/index.php:124
+#: control/talkback/index.php:125
+msgid "Hooray, no unanswered TalkBacks."
+msgstr "Ура, нет неотвеченных TalkBack'ов."
+
+#: control/talkback/index.php:104
+msgid "--"
+msgstr "--"
+
+#: control/talkback/index.php:133
+msgid "Unanswered TalkBacks"
+msgstr "Неотвеченные TalkBack'и"
+
+#: control/talkback/index.php:140
+msgid "Answered TalkBacks"
+msgstr "Отвеченные TalkBacks'и"
+
+#: control/talkback/index.php:142
+msgid "TalkBacks visible"
+msgstr "TalkBacks видимы"
+
+#: control/talkback/index.php:146
+msgid "See 10 Most Recent"
+msgstr "Посмотреть 10 последних"
+
+#: control/talkback/index.php:155
+msgid "About TalkBack"
+msgstr "О TalkBack"
+
+#: control/talkback/index.php:157
+msgid ""
+"TalkBack questions come via the web form on the public TalkBack page. An "
+"email should be sent to the admin when a new one arrives, and they may be "
+"answered here."
+msgstr "TalkBack вопросы приходят через Веб-форму на общественной TalkBack странице. Письмо должно быть отправлено администратору, когда приходит новое, и они могут ответить здесь."
+
+#: control/talkback/index.php:160
+msgid "TalkBack Public Page"
+msgstr "Общественная TalkBack страница"
+
+#: control/admin/faq_collections.php:40
+msgid ""
+"Thwarted!  Something has gone wrong with the insert.  Contact the admin."
+msgstr "Внимание! Что-то пошло не так со вставкой. Свяжитесь с администратором."
+
+#: control/admin/faq_collections.php:78
+msgid ""
+"Thwarted!  Something has gone wrong with the update.  Contact the admin."
+msgstr "Внимание! Что-то пошло не так с обновлением. Свяжитесь с администратором."
+
+#: control/admin/faq_collections.php:108
+msgid "Edit label or delete collection."
+msgstr "Изменить метку или удалить коллекцию."
+
+#: control/admin/faq_collections.php:114
+msgid "Add Collection"
+msgstr "Добавить коллекцию"
+
+#: control/admin/faq_collections.php:117
+msgid "Collection Name"
+msgstr "Название коллекции"
+
+#: control/admin/faq_collections.php:120
+msgid "Add New Collection"
+msgstr "Добавить Новая коллекцию"
+
+#: control/admin/index.php:26
+msgid "Users"
+msgstr "Пользователи"
+
+#: control/admin/index.php:30
+msgid "Browse Users"
+msgstr "Обзор пользователей"
+
+#: control/admin/index.php:44
+msgid "Browse/Add New Department"
+msgstr "Просмотр/Добавление нового департамента"
+
+#: control/admin/index.php:48
+msgid "Record Source Types"
+msgstr "Типы Источников записей"
+
+#: control/admin/index.php:51
+msgid "Add New Source Type"
+msgstr "Добавить новый тип источника"
+
+#: control/admin/admin_bits.php:52 control/admin/admin_bits.php:102
+msgid "You must select something first."
+msgstr "Вы должны вначале выбрать что-нибудь."
+
+#: control/admin/admin_bits.php:98
+msgid "Thy Will Be Done.  Selected records now "
+msgstr "Да будет воля Твоя. Выбранные записи сейчас"
+
+#: control/admin/admin_bits.php:146
+msgid ""
+"Your request cannot be completed:  There are one or more librarians "
+"associated with this subject"
+msgstr "Ваш запрос не может быть выполнен: Есть один или несколько библиотекарей, связанные с этим предметом"
+
+#: control/admin/admin_bits.php:156 control/admin/departments.php:40
+#: control/admin/departments.php:101
+msgid "Thy Will Be Done.  Department list updated."
+msgstr "Да будет воля Твоя. Список отделов обновлён."
+
+#: control/admin/admin_bits.php:172
+msgid ""
+"Your request cannot be completed:  There are one or more records linked to "
+"this item."
+msgstr "Ваш запрос не может быть выполнен: Есть одна или несколько записей, связанные с этим элементом."
+
+#: control/admin/admin_bits.php:182
+msgid "Thy Will Be Done.  Offending item removed."
+msgstr "Да будет воля Твоя. Проблемный элемент удалён."
+
+#: control/admin/admin_bits.php:197
+msgid ""
+"Your request cannot be completed:  There are one or more records linked to "
+"this source"
+msgstr "Ваш запрос не может быть выполнен: Есть одна или несколько записей, связанные с этим источником"
+
+#: control/admin/admin_bits.php:207 control/admin/sources.php:39
+#: control/admin/sources.php:81
+msgid "Thy Will Be Done.  Source list updated."
+msgstr "Да будет воля Твоя. Спсиок Источников обновлён."
+
+#: control/admin/admin_bits.php:233
+msgid "inactive"
+msgstr "неактивный"
+
+#: control/admin/admin_bits.php:239
+msgid "see live"
+msgstr "смотреть онлайн"
+
+#: control/admin/admin_bits.php:244
+msgid "Sorry, there were no results."
+msgstr "К сожалению, результатов не имееется."
+
+#: control/admin/departments.php:43 control/admin/departments.php:103
+#: control/admin/sources.php:41 control/admin/sources.php:83
+msgid "Thwarted!  Something has gone wrong.  Contact the admin."
+msgstr "Внимание! Что-то пошло не так. Свяжитесь с администратором."
+
+#: control/admin/departments.php:138
+msgid ""
+"Enter department name and telephone number.  Drag departments to change "
+"display order."
+msgstr "Введите название отдела и номер телефона. Перетащите отдел, чтобы изменить порядок их отображения."
+
+#: control/admin/departments.php:147
+msgid "Add Department"
+msgstr "Добавить департамент"
+
+#: control/admin/departments.php:150
+msgid "Department Name"
+msgstr "Название отдела"
+
+#: control/admin/departments.php:156
+msgid "Add New Department"
+msgstr "Добавить новый департамент"
+
+#: control/admin/manage_guides.php:68 control/admin/manage_guides.php:86
+msgid "All"
+msgstr "Все"
+
+#: control/admin/manage_guides.php:71
+msgid "Select"
+msgstr "Выбирать"
+
+#: control/admin/manage_guides.php:90
+msgid "~~Guide Status~~"
+msgstr "~~ Статус руководства ~~"
+
+#: control/admin/manage_guides.php:91
+msgid "Active"
+msgstr "Активный"
+
+#: control/admin/manage_guides.php:92
+msgid "Inactive"
+msgstr "Неактивный"
+
+#: control/admin/manage_guides.php:93
+msgid "~~Guide Types~~"
+msgstr "~~ Типы руководста ~~"
+
+#: control/admin/manage_guides.php:110
+msgid "Ticked Guides"
+msgstr "Помеченные руководства"
+
+#: control/admin/manage_guides.php:111
+msgid "Show Guides By"
+msgstr "Показать руководства по"
+
+#: control/admin/manage_guides.php:112
+msgid "Show"
+msgstr "Показывать"
+
+#: control/admin/manage_guides.php:115
+msgid "Assign to "
+msgstr "Назначить "
+
+#: control/admin/sources.php:113
+msgid "Enter source type label.  Drag sources to change sort order."
+msgstr "Введите метку типа источника. Перетащите источники, чтобы изменить порядок сортировки."
+
+#: control/admin/sources.php:122
+msgid "Add Source"
+msgstr "Добавить источник"
+
+#: control/admin/sources.php:125
+msgid "Source Name"
+msgstr "Источник"
+
+#: control/admin/sources.php:128
+msgid "Add New Source"
+msgstr "Добавить новый источник"
+
+#: control/admin/user.php:56
+msgid ""
+"None registered.  Just as well.  They're going to rise up against us someday."
+msgstr "Никто не зарегистрирован."
+
+#: control/admin/user.php:59
+msgid "Click on a name to update details and privileges"
+msgstr "Нажмите на название, чтобы обновить информацию и привилегии"
+
+#: control/admin/user.php:160
+msgid ""
+"We're really going to miss that staff person.  Search above to delete "
+"someone else!"
+msgstr "Нам действительно будет не хватать этого человека. Ищите выше, чтобы удалить кого-то другого!"
+
+#: subjects/staff.php:64 subjects/staff_details.php:139
+msgid "Staff Listing"
+msgstr "Список персонала"
+
+#: subjects/databases.php:14
+msgid "Database List"
+msgstr "Список баз данных"
+
+#: subjects/databases.php:15
+msgid "An alphabetical list of the electronic resources available."
+msgstr "Алфавитный список доступных электронных ресурсов."
+
+#: subjects/databases.php:16
+msgid ""
+"library, research, electronic journals, databases, electronic resources, "
+"full text, online, magazine, articles, paper, assignment"
+msgstr "библиотека, исследование, электронные журналы, базы данных, электронные ресурсы, полный текст, онлайн, журнал, статьи, бумага, назначение"
+
+#: subjects/databases.php:55
+msgid "Click for more information about a database."
+msgstr "Нажмите для получения дополнительной информации о базе данных."
+
+#: subjects/databases.php:70
+msgid "Campus Faculty, Staff &amp; Students only"
+msgstr "Кампус только для преподавателей, сотрудников и студентов"
+
+#: subjects/databases.php:71
+msgid "Click for help guide (.pdf or .html)"
+msgstr "Нажмите для помощи по руководству (.pdf или .html)"
+
+#: subjects/databases.php:72
+msgid "OpenURL Enabled"
+msgstr "OpenURL доступен"
+
+#: subjects/databases.php:89
+msgid "Databases"
+msgstr "Базы данных"
+
+#: subjects/databases.php:106 subjects/index.php:190
+msgid "Newest Databases"
+msgstr "Новые Базы данных"
+
+#: subjects/index.php:151
+msgid "Find Research Guides"
+msgstr "Найти руководства исследований"
+
+#: subjects/index.php:154
+msgid "Find the research guide of your dreams"
+msgstr "Найти руководство исследований вашей мечты"
+
+#: subjects/index.php:162
+msgid "show suggestions"
+msgstr "показать предложения"
+
+#: subjects/index.php:169
+msgid "Browse Research Guides"
+msgstr "Просмотр руководств исследований"
+
+#: subjects/index.php:183
+msgid "Newest Guides"
+msgstr "Новые руководства"
+
+#: subjects/faq.php:25
+msgid ""
+"<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them "
+"<strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., "
+"different groupings of FAQs for different purposes/audiences), or browse the "
+"Basic FAQs, below.</p>"
+msgstr "<p>Вы можете <strong>искать</strong> часто задаваемые вопросы, <strong>просматривать</strong> их <strong>по предмету</strong>, просматировать <strong>коллекции</strong> ЧаВо (например, различные группы ЧаВо для различных целей/аудиторий), или просмотреть основные ЧаВо ниже. </p>"
+
+#: subjects/faq.php:195
+msgid "No Results"
+msgstr "Результатов не имеется"
+
+#: subjects/faq.php:197
+msgid "There were no FAQs found for this query."
+msgstr "По данному запросу ЧаВо не найдены."
+
+#: subjects/faq.php:236
+msgid "Note:  Not all FAQs displayed.  Search or browse for more "
+msgstr "Примечание: Не все вопросы и ответы отображаются. Найдите или просмотрите другие"
+
+#: subjects/faq.php:247
+msgid "Search FAQs"
+msgstr "Искать Часто задаваемые вопросы"
+
+#: subjects/faq.php:266
+msgid "Browse FAQs by Subject"
+msgstr "Просмотр Часто задаваемые вопросы по теме"
+
+#: subjects/delish_feed.php:164
+msgid "image created with"
+msgstr "изображение созданно с"
+
+#: subjects/guide.php:131
+msgid "No Guide"
+msgstr "Нет руководства"
+
+#: subjects/talkback.php:29
+msgid "Thanks"
+msgstr "Спасибо"
+
+#: subjects/talkback.php:31
+msgid ""
+"Thank you for your feedback.  We will try to post a response within the next "
+"three business days."
+msgstr "Спасибо за обратную связь. Мы постараемся разместить ответ в течение трех рабочих дней."
+
+#: subjects/talkback.php:38
+msgid "Oh dear."
+msgstr "Ах, боже мой."
+
+#: subjects/talkback.php:40
+msgid "There was a problem with your submission.  Please try again."
+msgstr "Существовала проблема с вашей загрузкой. Пожалуйста, попробуйте еще раз."
+
+#: subjects/talkback.php:49
+msgid "TalkBack"
+msgstr "TalkBack"
+
+#: subjects/talkback.php:51
+msgid "Share your comments and suggestions about the library"
+msgstr "Отправить ваши замечания и предложения о библиотеке"
+
+#: subjects/talkback.php:52
+msgid "library, comments, suggestions, complaints"
+msgstr "библиотека, комментарии, предложения, жалобы"
+
+#: subjects/talkback.php:55
+msgid "What is five times five?"
+msgstr "Сколько будет пятью пять?"
+
+#: subjects/talkback.php:211
+msgid "Hmm, That Was a Tricky Bit of Math"
+msgstr "Хм, это было небольшая хитрость математики"
+
+#: subjects/talkback.php:213
+msgid ""
+"Sorry, you must answer the Skill Testing Question correctly.  It's an anti-"
+"spam measure . . . ."
+msgstr "Извините, но вы должны ответить на вопрос тестирования навыков правильно. Это анти-спам меры...."
+
+#: subjects/talkback.php:232
+msgid ""
+"<p><strong>Talk Back</strong> is where you can <strong>ask a question</"
+"strong> or <strong>make a suggestion</strong> about library services.</p>\r\n"
+"\r\n"
+"        <p>So, please let us know what you think, and we will post your "
+"suggestion and an answer from one of our helpful staff members</p>"
+msgstr "<p><strong>TalkBack</strong> - это где вы можете <strong>задать вопрос</strong> или <strong>сделать предложение</strong> об услугах библиотеки.</p>\r\n\r\n        <p>Поэтому, пожалуйста, сообщите нам, что вы думаете, и мы разместим ваше предложение и ответ от одного из наших сотрудникаов</p>"
+
+#: subjects/talkback.php:243
+msgid "Tell Us What You Think"
+msgstr "Расскажите, что вы думаете"
+
+#: subjects/talkback.php:245
+msgid "Wait!  Do you need help right now?"
+msgstr "Подождите! Вам нужно помочь прямо сейчас?"
+
+#: subjects/talkback.php:245
+msgid "Visit the Research Desk!"
+msgstr "Посетите кафедру исследований!"
+
+#: subjects/talkback.php:248
+msgid "your name (optional):"
+msgstr "ваше имя (необязательно):"
+
+#: subjects/talkback.php:251
+msgid "comment:"
+msgstr "комментарии:"
+
+#: subjects/talkback.php:255
+msgid "Enter Number:"
+msgstr "Введите код:"
+
+#: subjects/talkback.php:257
+msgid "Submit"
+msgstr "Отправить"
+
+#: subjects/includes/footer.php:13
+msgid "Revised: "
+msgstr "Пересмотренный:"
+
+#: subjects/includes/footer.php:15
+msgid "This page maintained by: "
+msgstr "Эта страница поддерживается: "

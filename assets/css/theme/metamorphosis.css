@@ -1,0 +1,11 @@
+/* 
+    Document   : metamorphosis
+    Created on : 13-Mar-2011, 1:34:28 PM
+    Author     : agdarby
+    Description:  One of the backgrounds for SubjectdPlus
+*/
+
+
+body {
+    background: url(../../images/admin/bug_bg.jpg) repeat;
+}
