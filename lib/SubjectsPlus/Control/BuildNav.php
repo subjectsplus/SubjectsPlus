@@ -37,7 +37,7 @@ class BuildNav {
       <br style=\"clear: both\" />
       <ul>
       <li><a href=\"$staff_page\">" . _("Edit Your Profile") . "</a></li>
-      <li><a href=\"$CpanelPath" . "logout.php\">" . _("Log Out") . "</a></li>
+      <li><a href='https://griffin.library.miami.edu/Shibboleth.sso/Logout?return=https://cas.cgcent.miami.edu/idp/logoutIDP.jsp'>" . _("Log Out") . "</a></li>
       </ul>
       </div>
       </li>
