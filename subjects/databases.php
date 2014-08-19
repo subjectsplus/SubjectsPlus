@@ -109,6 +109,12 @@ foreach ($rnew as $myrow) {
 $newlist .= "</ul>\n";
 
 // Intro text
+
+$intro = "<p><img src=\"$IconPath/information.png\" border=\"0\" alt=\"more information icon\" /> " . _("Click for more information about a database.") . "</p>
+<br class=\"clear-both\" />";
+
+
+// Intro text
 $intro = "";
 
 if (isset($_POST["searchterm"])) {
@@ -116,32 +122,31 @@ if (isset($_POST["searchterm"])) {
   $intro .= "<p style=\"background-color: #eee; padding: .3em; border: 1px solid #ccc; width: 75%;\">Search results for <strong>$selected</strong></p><br />";
 }
 
-$intro .= "<br class=\"clear-both\" />
-<div style=\"float: right; padding: 0 1.5em .5em 0;\"><a id=\"expander\" style=\"cursor: pointer;\">expand all descriptions</a></div>";
+$intro .= "<br class=\"clear-both\" />";
 
 // Create our table of databases object
 
 $our_items = new DbHandler();
 
-$out = "";
 
 // if we're showing the subject list, do so
 
 if ($show_subjects == TRUE) {
-  $out .= $our_items->displaySubjects();
+  $out = $our_items->displaySubjects();
+ 
 
 } elseif ($show_types == TRUE) {
 
-  $out .= $our_items->displayTypes();
+  $out = $our_items->displayTypes();
 } else {
   // if it's the type type, show filter tip
   if (isset($clean_type) && $clean_type != "") {
-    $out .= "<div class=\"faq_filter\">displaying databases filtered by $clean_type >> <a href=\"databases.php?letter=bytype\">view all types</a></div>";
+    $out = "<div class=\"faq_filter\">displaying databases filtered by $clean_type >> <a href=\"databases.php?letter=bytype\">view all types</a></div>";
   }
 
   // otherwise display our results from the database list
    
-  $out .= $our_items->writeTable($_GET["letter"], $clean_id, $description_search);
+  $out = $our_items->writeTable($_GET["letter"], $clean_id, $description_search);
 }
 
 // Assemble the content for our main pluslet/box
@@ -245,11 +250,6 @@ include("includes/footer.php");
       var bib_id = $(this).attr("id").split("-");
       $(this).parent().parent().find(".list_bonus").toggle()
     });
-
-    // show all db details
-    $("#expander").click(function() {
-      $(".list_bonus").toggle()
-    })
 
     function stripeR(container) {
       $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
