@@ -1549,19 +1549,3 @@ function tokenizeText($our_text, $our_subject_id = "") {
         $our_text = $tokenized;
         return $our_text;
     }
-
-// This just returns whether or not you want an anchor target to open in new window
-// made this puppy a function in case people want to use it elsewhere
-    
-function targetBlanker() {
-  global $target_blank;
-
-  if (isset($target_blank) && $target_blank == TRUE) {
-     $target = "target=\"blank\"";
-  } else {
-     $target = "";
-  }  
-
-  return $target;
-
-}
