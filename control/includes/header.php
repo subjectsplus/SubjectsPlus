@@ -17,6 +17,10 @@ use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\BuildNav;
 use SubjectsPlus\Control\Querier;
 
+
+isCool($_SERVER['mail'],"", true);
+   
+
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
 if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FILE__) . '/config.php' ) < 10 )
 {
@@ -37,30 +41,11 @@ require_once(dirname(__FILE__) . "/config.php");
 $db = new Querier;
 
 // start our session
-session_start();
+//session_start();
 
 //print_r($_SESSION);
 //added in order to redirect to proper page if cannot connect to database. Only check if $tryDB variable doesn't exists and says no
 
-    /*
-if( !isset($tryDB) || $tryDB != 'no')
-{
-	try {
-		@$dbc = new DBConnector($uname, $pword, $dbName_SPlus, $hname);
-	} catch (Exception $e) {
-		$lstrURL = getControlURL();
-
-		if ( strstr( $e->getMessage() , 'Could not choose database.' ) )
-		{
-			header("location:{$lstrURL}includes/configErrorPage.php?error=database");
-		}else
-		{
-			header("location:{$lstrURL}includes/configErrorPage.php?error=connection");
-		}
-		exit();
-	}
-}
-*/
 //added in order to redirect to proper page if SubjectsPlus is not installed. Only check if $installCheck variable doesn't exists and says no
 if( !isset( $installCheck ) || $installCheck != 'no' )
 {
@@ -89,51 +74,13 @@ if( !isset( $updateCheck ) || $updateCheck != 'no' )
 	}
 }
 
-//added in order to redirect to proper page if user has not logged in. Only check if $sessionCheck variable doesn't exists and says no
-if( !isset($sessionCheck) || $sessionCheck != 'no' )
-{
-	$sessionCheck = checkSession();
 
-	if ($sessionCheck == "failure" ) {
-
-		// set a cookie for the page they wanted to visit
-		session_regenerate_id();
-        if(!isset($_SESSION))
-        {
-		session_start();
-        }
-		$_SESSION['desired_page'] = $_SERVER["REQUEST_URI"];
-		// Send to login page for pword
-		$login_page = $CpanelPath . "login.php";
-		header("location:$login_page");
-		exit();
-	}
-
-	// Now, check if they have access to the records or admin modules.
-	if( !isset($subcat) ) $subcat = '';
-
-	if ($subcat == "admin" && $_SESSION["admin"] != 1) {
-		header("location:$CpanelPath");
-	}
-
-	if ($subcat == "guides" && $_SESSION["records"] != 1) {
-		header("location:$CpanelPath");
-	}
-
-	if ($subcat == "records" && $_SESSION["records"] != 1) {
-		header("location:$CpanelPath");
-	}
-
-	if ($subcat == "records" && isset($_SESSION["NOFUN"])) {
-		header("location:$CpanelPath");
-	}
-
-	if (isset($header) && $header == "noshow") {
+if (isset($header) && $header == "noshow") {
 		// used when we want authentication, but don't need to show the header stuff
 		return;
 		exit;
 	}
-}
+
 
 // a translation or two. . .
 $required_text = _("Required");
@@ -207,6 +154,4 @@ mb_internal_encoding('UTF-8');
 
       } else {
        print "<div id=\"maincontent\">";
-
-
       }
