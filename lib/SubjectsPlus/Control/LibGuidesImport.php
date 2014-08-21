@@ -3,6 +3,7 @@ namespace SubjectsPlus\Control;
 
 class LibGuidesImport {
 
+
   private $_guide_id;
   private $_libguides_xml; 
   private $_guide_owner;
@@ -33,9 +34,47 @@ class LibGuidesImport {
     return $this->_guide_id; 
   }
 
+  public function download_images($url) {
+    // This method creates a folder for a guide image in assets, downloads the image , and then returns the new URL for that image
+    
+    global $AssetPath;
+    
+    // Download the image with CURL 
+
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    // Create a path for the iamge 
+    $dir_name =  dirname(dirname(dirname(dirname(__FILE__)))) . "/assets/images/" . $this->_guide_id . "/";
+    
+
+    // Make the guide's asset directory if needed 
+    if (!is_dir($dir_name))
+    {
+      mkdir($dir_name, 0777, true);
+    }
+
+
+    // Write the file 
+    $file_name = substr( $url, strrpos( $url, '/' )+1 );
+    $file = fopen( $dir_name .  $file_name, 'w+');
+    fwrite($file, $data); 
+    fclose($file);
+    
+
+    // Return the new URL 
+    $img_path = $AssetPath . "/images/" . $this->_guide_id . "/" . $file_name;
+
+    return $img_path; 
+
+  }
 
   public function getStaffID ($email_address) {
-
     // This method takes an email address and returns the subjectsplus staff id for the user 
 
     $db = new Querier; 
@@ -107,8 +146,6 @@ class LibGuidesImport {
 			  $libguides_xml->xpath("//GUIDE[$guide_id]/TAGS")
 
 			  );
-
-    
     
     return $subject_values; 
 
@@ -127,25 +164,22 @@ class LibGuidesImport {
     
     $db = new Querier;
 
-    
-    
-
     foreach (  $link_values as $link ) {
 
       if ($db->exec("INSERT INTO location (location, format, access_restrictions) VALUES (" . $db->quote($link->URL) . " , 1, 1)")  ) {
 	
-	//	error_log ( "Inserted location \n"; );
+	error_log("Inserted location");
 	$location_id = $db->last_id(); 
 
 	
       } else {
-
-	//		error_log ("Error inserting location:", "FAILURE");
+	
+	error_log ("Error inserting location:");
 	error_log(  $db->errorInfo()[2] );
       } 
 
       if( $db->exec("INSERT INTO title (title) VALUES (" . $db->quote($link->NAME) . ")") ) {
-	error_log( "Inserted title ");
+	error_log( "Inserted title");
 	$title_id = $db->last_id();
 
       } else {
@@ -178,10 +212,6 @@ class LibGuidesImport {
 
       // Remove the apostrophes and spaces from the shortform 
 
-
-
-      
-
       $shortform = preg_replace('/\s+/','_', str_replace("'", "", $subject[0] ));
       
       // Escape the apostrophes in the guide name 
@@ -198,22 +228,23 @@ class LibGuidesImport {
 
         } else {
           print_r ($subject[0]);
-	  //    echo colorize("Error inserting subject:", "FAILURE");
-	  //   echo  $db->errorInfo()[2] . "\n ";
+
+	  error_log( "Error inserting subject:");
+	  error_log ( $db->errorInfo()[2] ); 
 	  
         }
 
 	if ($this->getGuideOwner() != null) {
 	  $staff_id = $this->getStaffID( $this->getGuideOwner());
 	  
-	  // echo ("Staff ID: " . $staff_id  );
+	  error_log ("Staff ID: " . $staff_id );
 	  
 	  if($db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
-	    // echo colorize("Inserted staff: '$staff_id' \n", "SUCCESS");
+	    error_log ("Inserted staff: '$staff_id'");
 	    
 	  } else {
 
-	    // echo colorize("Error inserting staff. ", "FAILURE");
+	    error_log("Error inserting staff. ");
 	    
 	  }
 	  
@@ -243,15 +274,15 @@ class LibGuidesImport {
         
 	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index)")) {
 	  
-	  // echo  colorize("Inserted tab '$tab->NAME'", "SUCCESS") ."\n";
+	  error_log ("Inserted tab '$tab->NAME'");
 
 	} else {
 
-          //  echo "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database.". "\n";
+          error_log( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
 	  
-          //  echo "\t";
-	  //  echo colorize("Error inserting tab:", "FAILURE");
-	  //  echo  $db->errorInfo()[2] . "\n ";
+          
+	  error_log ("Error inserting tab:");
+	  error_log ($db->errorInfo()[2]);
 
 	}
         $row = 0;
@@ -267,12 +298,12 @@ class LibGuidesImport {
           
 
           if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
-            echo error_log("Inserted section");
+            error_log("Inserted section");
           } else { 
-            echo error_log("Problem inserting this section. This section  may already exist in the database.");
+            error_log("Problem inserting this section. This section  may already exist in the database.");
             
-	    echo error_log("Error inserting section:");
-	    echo error_log($db->errorInfo()[2] );
+	    error_log("Error inserting section:");
+	    error_log($db->errorInfo()[2] );
             
           }
           
@@ -281,26 +312,31 @@ class LibGuidesImport {
         foreach ($tab->BOXES->BOX as $pluslet) {
           // This imports each LibGuide's boxes as pluslets 
           $description = null; 
-
-	  
-
-
-	  $description .= "<div class=\"description\">$pluslet->DESCRIPTION</div>";
 	  
 	  // Import images and replace the old urls with new urls
 	  $doc = new \DOMDocument();
 
-	  $doc->loadHTML($pluslet->DESCRIPTION);
+	  $doc->loadHTML(mb_convert_encoding($pluslet->DESCRIPTION, 'HTML-ENTITIES', 'UTF-8'));
 	  
-	  error_log (rawurlencode($doc));
-	  
-	  foreach( $doc->getElementsByTagName("img") as $node ) {
+	  $nodes = $doc->getElementsByTagName("img");
 
-	    error_log ( addslashes($node->getAttribute('href')) ); 
+	  foreach( $nodes as $node ) {
+
+	    foreach ($node->attributes as $attr) {
+	      $test = strpos($attr->value, "http://");
+	      
+	      if ($test !== false) { 
+		error_log( $attr->value);
+		
+		$attr->value = $this->download_images($attr->value);
+		
+
+	      }
+	    }
 	    
+	    $description .= "<div class=\"description\">".  $doc->saveHTML() . "</div>";
+
 	  }
-
-
 
           foreach ( $pluslet->LINKS->LINK as $link )  {
             
@@ -326,32 +362,29 @@ class LibGuidesImport {
             
           }
           
-	  
-
-          
           $description .= "<div class=\"media\">" . $pluslet->EMBEDDED_MEDIA_AND_WIDGETS->URL . "</div>";  
           
-          
-
           $clean_description = $db->quote($description);
 
           if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
-            error_log("Inserted pluslet '$pluslet->NAME'");
+            
+	    error_log("Inserted pluslet '$pluslet->NAME'");
             $clean_description = null;
 
           } else {
 
-            // echo "\t";
-            // echo "\n";
-	     error_log("Error inserting pluslet:");
-	    // echo  $db->errorInfo()[2] . "\n ";
-            // echo "\n";
+	    
+	    error_log("Error inserting pluslet:");
+	    error_log($db->errorInfo()[2]);
+	    
 
           }
           
           if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, $row)")) {
             error_log("Inserted pluslet section relationship");
-            // This sticks the newly created pluslet into a section 
+            
+
+	    // This sticks the newly created pluslet into a section 
           } else {
 
 	    
