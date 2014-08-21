@@ -51,14 +51,14 @@ class LibGuidesImport {
     $guide_names = $libguides_xml->xpath("/LIBGUIDES[1]/GUIDES[1]/GUIDE/NAME");
     
     $id_count = 1; 
- 
+    
 
     echo "<select class=\"guides\" >"; 
     
     foreach ($guide_names as $guide) {
-  
-     echo "<option value=\"$id_count\">$guide[0]</option>";
-     $id_count++;
+      
+      echo "<option value=\"$id_count\">$guide[0]</option>";
+      $id_count++;
 
     }
     
@@ -76,7 +76,7 @@ class LibGuidesImport {
     $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '$guide_id'");
     
     return $guide;     
-  
+    
   }
   
   public function load_libguides_xml($lib_guides_xml_path) {
@@ -115,59 +115,39 @@ class LibGuidesImport {
   }
 
 
-
-
   public function load_libguides_links_xml($lib_guides_xml_path) {
     $guide_id = $this->getGuideID();
     
-
     $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
     
     $link_values = $libguides_xml->xpath("//GUIDE[$guide_id]//LINKS/LINK");
     
     $db = new Querier;
 
-    
-    
-
     foreach (  $link_values as $link ) {
 
       if ($db->exec("INSERT INTO location (location, format, access_restrictions) VALUES (" . $db->quote($link->URL) . " , 1, 1)")  ) {
 	
-//	echo "Inserted location \n";
 	$location_id = $db->last_id(); 
-//	echo "\n";
-	
       } else {
 
-//	echo colorize("Error inserting location:", "FAILURE");
-//	echo  $db->errorInfo()[2] . "\n ";
       } 
 
       if( $db->exec("INSERT INTO title (title) VALUES (" . $db->quote($link->NAME) . ")") ) {
-//	echo "Inserted title  \n"; 
+
 	$title_id = $db->last_id();
 
 	echo "\n";
       } else {
-//	echo colorize("Error inserting title:", "FAILURE");
-//	echo  $db->errorInfo()[2] . "\n ";
+
       }
 
       if( $db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
-//	echo "Inserted location_title  \n"; 
-	
-//	echo "\n";
+
       } else {
-//	echo colorize("Error inserting location_title:", "FAILURE");
-//	echo  $db->errorInfo()[2] . "\n ";
 
-//	echo "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)";
       }
-
-
     }    
-
   }
 
 
@@ -179,10 +159,6 @@ class LibGuidesImport {
 
       // Remove the apostrophes and spaces from the shortform 
 
-
-
-      
-
       $shortform = preg_replace('/\s+/','_', str_replace("'", "", $subject[0] ));
       
       // Escape the apostrophes in the guide name 
@@ -193,38 +169,31 @@ class LibGuidesImport {
         
         if($db->exec("INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')")) {
 
-         echo $subject[1];
+          echo $subject[1];
 
-	
+	  
 
         } else {
           print_r ($subject[0]);
-      //    echo colorize("Error inserting subject:", "FAILURE");
-       //   echo  $db->errorInfo()[2] . "\n ";
+	  
 	  
         }
 
 	if ($this->getGuideOwner() != null) {
 	  $staff_id = $this->getStaffID( $this->getGuideOwner());
 	  
-	 // echo ("Staff ID: " . $staff_id  );
+
 	  
 	  if($db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
-	   // echo colorize("Inserted staff: '$staff_id' \n", "SUCCESS");
+
 	    
 	  } else {
-
-	   // echo colorize("Error inserting staff. ", "FAILURE");
-	    
-	  }
-	  
+ 
+	  } 
 	}
-
-
       }
       
       else {
-        
       }
 
       $subject_page = $subject[4];
@@ -243,17 +212,11 @@ class LibGuidesImport {
         $clean_tab_name = $db->quote($tab->NAME);
         
 	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index)")) {
-	  
-	 // echo  colorize("Inserted tab '$tab->NAME'", "SUCCESS") ."\n";
+	 
 
 	} else {
 
-        //  echo "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database.". "\n";
-	  
-        //  echo "\t";
-	//  echo colorize("Error inserting tab:", "FAILURE");
-	//  echo  $db->errorInfo()[2] . "\n ";
-
+	 
 	}
         $row = 0;
         $column = 0;
@@ -268,12 +231,8 @@ class LibGuidesImport {
           
 
           if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
-          //  echo colorize("Inserted section", "SUCCESS") . "\n";
+	    
           } else { 
-          //  echo "Problem inserting this section. This section  may already exist in the database." . "\n";
-          //  echo "\t";
-	  //  echo colorize("Error inserting section:", "FAILURE");
-	  //  echo  $db->errorInfo()[2] . "\n \n";
             
           }
           
@@ -293,9 +252,7 @@ class LibGuidesImport {
             "<div class=\"links\">" . 
                             "<a href=\"$link->URL\">$link->NAME</a>" . 
                             "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                            "</div>";
-            
-            
+                            "</div>";    
           }
 
           
@@ -310,9 +267,6 @@ class LibGuidesImport {
             
           }
           
-	  
-
-          
           $description .= "<div class=\"media\">" . $pluslet->EMBEDDED_MEDIA_AND_WIDGETS->URL . "</div>";  
           
           
@@ -320,27 +274,18 @@ class LibGuidesImport {
           $clean_description = $db->quote($description);
 
           if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
-           // echo colorize("Inserted pluslet '$pluslet->NAME'", "SUCCESS") ."\n";
+            
             $clean_description = null;
 
           } else {
 
-           // echo "\t";
-           // echo "\n";
-	   // echo colorize("Error inserting pluslet:", "FAILURE");
-	   // echo  $db->errorInfo()[2] . "\n ";
-           // echo "\n";
-
+	    
           }
           
           if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, $row)")) {
-          //  echo colorize("Inserted pluslet section relationship" , "SUCCESS") ."\n";
-            // This sticks the newly created pluslet into a section 
-          } else {
-
 	    
-	   // echo colorize("Error inserting pluslet_section:", "FAILURE");
-	   // echo  $db->errorInfo()[2] . "\n ";
+          } else {	    
+
 
           }
 
