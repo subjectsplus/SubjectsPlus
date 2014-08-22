@@ -1,0 +1,795 @@
+/* CSS Document for SubjectsPlus, public display (i.e., subjects/ folder ) */
+
+/* reset - blueprint mod */
+* {padding: 0; margin: 0;}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}
+body {line-height: 1.5;}
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align:top; }
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+/* no's*/
+.no-border{border: 0 !important}
+.no-margin{margin: 0 !important}
+.no-bg{background: none !important}
+.no-pad-left{padding-left: 0 !important}
+.no-pad-right{padding-right: 0 !important}
+
+body {
+    margin: 0 0 0 5px;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 0.8125em;
+    text-align: left;
+    line-height: 1.5em;
+    color: #000;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #E1E1DB;
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/greydient.png");
+    background-repeat: repeat-x;
+    border-top: 3px solid #FFFFFF;   
+}
+
+.nav_highlight {
+    background-color: #F37421 !important;
+    border-left: 4px solid #fff;
+}
+
+a {
+    color: #40659B;
+}
+
+a:link {
+    color: #40659B;
+}
+
+a:visited {
+    color: #551A8B;
+}
+
+a:hover {
+    color: #cc6666;
+}
+
+
+h1 {
+color: #333333;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 1.6em;
+    font-weight: normal;
+    padding: 0.2em 0 0.2em 1em;
+    text-shadow: 0 2px 3px #CCCCCC;
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/h1_bg_green.png");
+    background-repeat: repeat-x;
+    background-color: #d3d78e;
+    text-shadow: 0 1px 3px #EFEFEF;
+    margin-top: 5px;
+    margin-left: 0;
+    line-height: 40px;
+}
+
+h2 {
+    font-family:sans-serif;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: #333;
+
+}
+
+h3 {
+    font-family:sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    color: #6F6F6F;
+}
+
+em {font-style: italic;}
+
+
+img {
+    height: auto !important;
+    max-width: 100%;
+}
+
+.clearboth {
+    clear: both;
+}
+
+#header-content {
+    max-width: 1100px; 
+    margin: 0 auto;    
+    background-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    /* height: 70px; */
+    margin: 0 auto;
+    padding: 3px;
+    position: relative;
+    text-align: left;
+    margin-top: 1em;
+}
+
+html>body #header-content {
+
+}
+
+#header-content img {
+    float: left;
+}
+#header-content .header-text {
+      float: left;
+  padding: 2px 4px;
+  background-color: #fff;
+
+  color: #333;
+  line-height: 16px;
+  font-size: 12px;
+  margin: 3px 0 0 7px;
+  text-align: left;
+
+}
+
+#header-content a {
+    color: #333;
+    text-decoration: none;
+}
+
+#header-content a:hover {
+    color: #F37421;
+}
+
+#menu_button {
+    display: none;
+}
+
+/* Header Search */
+
+#search_container {
+    float: right;
+    margin-top: 2px;
+}
+#searchy {
+    background-color: #d1d688;
+    border: 0 none;
+    float: left;
+}
+#searchy2 {
+    background-color: #d1d688;
+    border: 0 none;
+    float: left;
+}
+#topsearch_button2 {
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    color: #fe6518;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 0;
+    height: 16px;
+    margin: auto 0;
+    overflow: hidden;
+    position: relative;
+    right: 2px;
+    top: 2px;
+    width: 19px;
+}
+#searchzone {
+    background-color: #d1d688;
+    border: 1px solid #a2ad00;
+    border-radius: 5px;
+    height: 16px;
+    padding: 2px 2px 3px;
+}
+#search_options {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #d1d688;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-color: -moz-use-text-color #a2ad00 #a2ad00;
+    border-image: none;
+    border-right: 1px solid #a2ad00;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    display: none;
+    font-size: 12px !important;
+    margin: 0;
+    padding: 2px 0 0;
+    position: absolute;
+    right: 1em;
+    text-align: left;
+    top: 35px;
+    width: 150px;
+    z-index: 2000;
+}
+#search_options ul {
+    margin: 0;
+    padding: 0;
+}
+#search_options li {
+    border-bottom: 1px solid #a2ad00;
+    color: #333;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    margin: 0 !important;
+    min-width: 135px;
+    padding: 0.2em 0 !important;
+    position: relative;
+    text-align: left;
+    vertical-align: middle;
+}
+#search_options li:hover, #search_options li.active {
+    background-color: #a2ad00;
+    color: #fff;
+}
+#search_options li input {
+    margin: 0 1em;
+}
+#search_options li.active {
+}
+
+/* Mega Menus! */
+
+ul#nav_menu div {
+    display: none;
+    text-align: left;
+    z-index: 2000;
+}
+#nav_menu.skip {
+    font-size: 0;
+    text-decoration: none;
+}
+#nav_menu li a.selected_href {
+    color: #f37421;
+}
+#nav_menu li.last-child a.selected_href {
+    color: #fff;
+}
+#nav_menu li.research {
+    margin-left: 5em;
+}
+ul#nav_menu li.hovering div {
+    display: block;
+}
+div.mega_child {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #e1e1db;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-color: -moz-use-text-color #fff #fff;
+    border-image: none;
+    border-right: 4px solid #fff;
+    border-style: none solid solid;
+    border-width: medium 4px 4px;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.5);
+    color: #333 !important;
+    font-family: Arial,Helvetica,sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: -5px;
+    text-align: left;
+    text-transform: none !important;
+    top: 32px;
+    width: 500px;
+    z-index: 10001 !important;
+}
+div.mega_child ul {
+    float: left;
+    margin-top: 0.5em !important;
+    text-align: left !important;
+}
+div.mega_child ul li {
+    border-bottom: 1px solid #fff;
+    display: block !important;
+    font-family: Arial,Helvetica,sans-serif !important;
+    font-weight: 400 !important;
+    list-style: none outside none;
+    margin: 10px !important;
+    padding: 0 !important;
+    text-transform: none !important;
+}
+div.mega_child ul li.mega_header {
+    border-bottom: 2px solid #fff;
+    color: #333;
+    font-size: 1.3em !important;
+    font-weight: bold;
+    padding: 0.5em 0 !important;
+}
+div.mega_child ul li.last {
+    border: medium none;
+}
+div.mega_child ul li a:hover {
+    background-color: #f37421 !important;
+    color: #fff !important;
+}
+div.mega_child ul li a {
+    background-color: transparent !important;
+    border: 0 none !important;
+    color: #333 !important;
+    display: block;
+    font-size: 1.1em !important;
+    margin: 0 !important;
+    max-width: 175px;
+    min-width: 150px !important;
+    padding: 0.3em 0.1em !important;
+    position: relative;
+    text-transform: none !important;
+}
+.wider {
+    width: 300px;
+}
+div.mega_child p {
+    font-size: 1.2em !important;
+}
+div.mega_child.clear {
+    clear: left;
+}
+div.mega_feature {
+    background-color: transparent;
+    border: medium none;
+    display: block;
+    float: left;
+    line-height: 1.2em;
+    margin: 1em 1em 0 2em;
+    min-height: 100px;
+    padding: 1em;
+    position: relative;
+    text-align: center;
+    width: 100px !important;
+}
+div.mega_feature img {
+    background-color: #efefef;
+    border: 4px solid #ffffff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    padding: 0.3em;
+}
+div.megasearchzone {
+    background-color: transparent;
+    border: medium none;
+    display: block;
+    float: left;
+    line-height: 1.2em;
+    margin: 1em;
+    min-height: 20px;
+    padding: 0 1em;
+    position: relative;
+}
+div.megasearchzone > form {
+    font-size: 1.2em;
+    padding: 5px 0;
+}
+div.megasearchzone > p {
+    padding: 0.8em;
+}
+ul.mega_spotlight {
+    background-color: transparent;
+    border: 4px solid #ffffff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    line-height: 1.4em;
+    padding-top: 1em !important;
+    text-align: center;
+    width: 150px;
+}
+div ul.mega_spotlight li {
+    border: medium none !important;
+}
+div ul.mega_spotlight li img {
+    background-color: #efefef;
+    border: 1px solid #666;
+    padding: 0.3em;
+}
+div.mega_intro {
+    background-color: #f37421;
+    background-repeat: repeat-x;
+    border-bottom: 1px dotted #666;
+    clear: both;
+    color: #fff;
+    font-size: 1.2em !important;
+    font-weight: bold;
+    padding: 5px 1em !important;
+}
+div.mega_more {
+    background-color: #fff;
+    border-top: 1px dotted #666;
+    clear: both;
+    margin: 0 !important;
+    padding: 0.3em 1em 0.3em 3em !important;
+    text-transform: none !important;
+}
+div.mega_more a, div.mega_feature a {
+    color: #f37421 !important;
+    font-size: 1em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-decoration: underline !important;
+}
+
+#spum_nav {
+    background-color: #333;
+    border-top: 0 none;
+    color: #fff;
+    margin-top: 1em;
+    padding-top: 0.5em;
+    text-align: center;
+}
+#spum_nav ul {
+    margin-left: 0;
+    margin-top: 2px;
+    text-align: left;
+    min-height: 2.15em;
+}
+#spum_nav a {
+    background-color: transparent;
+    color: #fff;
+    font-family: Arial,Helvetica,Verdana;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    padding: 10px;
+    text-decoration: none;
+}
+#spum_nav a:hover {
+    color: #f37421;
+}
+
+#nav {
+  position: relative;
+  float: left;
+  background-color: #333;
+  color: #fff;
+  margin: 0px;
+  padding: 4px 4px;
+  border: 4px solid #fff;
+  width: 944px;
+}
+
+
+ul.nav > a {
+  text-decoration: none;
+  color: #fff;
+  padding: 5px;
+
+}
+
+ul.nav > a:hover {
+  color: #f37421;
+}
+
+ul {
+  margin-left: 1em;
+}
+
+ul.nav > li {
+  position: relative;
+  display: inline-block;
+  text-transform: none;
+  /* IE hack */
+  zoom: 1;
+  *display:inline;
+}
+
+#menu_button {display:none;}
+
+#menu_button a {
+    color: #fff;
+}
+
+/* make 'er wide for better clickability */
+ul.nav > a {
+  margin: 2px 0;
+  font-size: 14px;
+  margin-right: 20px;
+  font-family: Arial, Helvetica, Verdana;
+  font-weight: normal;
+
+}
+
+li.last-child {
+    float: right;
+}
+
+/* page wrapper */
+
+.wrapper-full {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#guide_nav_tools {
+    display: none;
+}
+
+/* Guide tabs */
+
+#main-content {
+    
+    width: 100%;
+    background-color: #fff;
+    margin-top: 6.5em;
+    min-height: 650px;
+    position: relative;
+    text-align: left;    
+    border: 2px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+#tab-container {
+    background-color: transparent;
+    position: absolute;
+    top: -1.9em;
+    left: 0;
+
+}
+
+#tab-body {
+    padding: 1em 3px 1em 3px;
+        background-color: #fff;
+
+
+}
+
+#tabs {
+    clear: both;
+    position: relative;
+    top: -3em;
+    background-color: transparent;
+}
+#tabs ul {
+    margin-bottom: 2em;
+    margin-left: 2em;
+}
+#tabs li {
+    display: inline-block;
+    margin-bottom: 1.05em;
+}
+#tabs li a {
+
+    background-color: #e8d3a2;
+    border-color: #ffffff;
+    border-image: none;
+    border-style: solid solid none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-width: 2px 2px medium;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    color: #333;
+    font-size: 1.15em;
+    margin: 0.5em 0.5em 0.5em 0;
+    padding: 0.3em 0.6em;
+    text-decoration: none;
+}
+#tabs li a:hover {
+    background-color: #f37421;
+    color: #fff;
+}
+#tabs li.ui-state-active > a {
+    background-color: #fff;
+    color: #333;
+}
+#tabs .pluslet li {
+    display: list-item;
+}
+
+#tabs .pluslet li a {
+    background-color: transparent;
+    border: medium none;
+    box-shadow: none;
+    color: #40659b;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+#tabs .pluslet li a:hover {
+    color: #cc6666;
+    text-decoration: underline;
+}
+#tabs .pluslet ul {
+    margin-bottom: 0.5em;
+}
+
+
+/* these .ui class overrides tweak border and spacing of tab containers */
+.ui-widget-content {
+    border: none !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em !important;
+}
+
+.ui-state-active {
+    //background-color: #79A4D4 !important;
+}
+.hometab {
+    padding: 4px 3px 0px 3px !important;
+}
+
+/* PLUSLETS */
+
+.pluslet {
+        border: 1px solid #ccc;
+    box-shadow: 5px 5px 7px #e0e0e0;
+    position: relative;
+    clear: both;
+    background: #fff;
+    margin-bottom: 10px;
+    cursor: auto;
+    z-index: 50;
+    border: 1px solid #ccc;
+    padding: 0px;
+    font-size: 10pt;
+    -moz-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin: 0 .7em 1em .7em;
+}
+
+.pluslet_simple {
+    position: relative;
+    clear: both;
+    cursor: auto;
+    z-index: 1;
+    overflow: visible;
+    border: 1px solid #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    padding: .5em 1em;
+    margin: 1em;
+}
+.pluslet_simple ul, ol {
+    margin: 1em;
+}
+
+
+.titlebar {
+    color: #333;
+    position: relative;
+    height: 2em;
+    padding: 0px 0;
+    margin: 0;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    border-bottom: 1px solid #B3B9BF;
+
+    background-color: #f0f0f0;
+}
+
+.titlebar_text {
+    font: 1em Arial, sans-serif;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    padding: 5px 10px 0px;
+    border:  none;
+    color: #fff;
+    /*color: #000;*/
+    background-color: transparent;
+    background-color: #E8D3A2;
+        color: #000000;
+    
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 16px;
+    padding-bottom: 5px;
+    text-shadow: 0 1px 2px rgba(100, 100, 100, 0.35);
+    word-wrap: break-word;
+}
+
+/* Next lines override the regular pluslet to create a heading */
+.plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase; border: none;font-weight: bold;}
+div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0; border: none;}
+div.type-heading .titlebar { background-color: transparent;border: none;}
+
+.pluslet_body {
+    background-color: #fff;
+    padding: .5em;
+    margin: .5em;
+    text-align: left;
+    overflow: auto;}
+
+div.pluslet form {
+    padding-top: -10px;
+    margin: 0;
+}
+
+.staff_photo2 {
+    background: none repeat scroll 0 0 #efefef;
+    border: 1px solid #333;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 3px;
+    position: relative;
+}
+
+/* FOOTER */
+
+#footer {
+    position: relative;
+    clear: both;
+    margin: 0;
+    padding: 10px 0 0px 0;
+    width: 70%;
+    font-size: .8em;
+    color: #333;
+    border-top: 1px dotted #efefef;
+}
+
+#footer p {
+    margin: 0;
+    line-height: 1.4em;
+}
+
+#footer a {
+    color: #888;
+}
+
+#footer a:hover {
+    color: #ccc;
+}
+
+#wide_footer {
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/footer_bg.jpg") no-repeat scroll center center #FFFFFF;
+    border-top: 1px solid #CCCCCC;
+    clear: both;
+    color: #333;
+    float: left;
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-top: 2em;
+    min-height: 9em;
+    padding-top: 1em;
+    position: relative;
+    width: 100%;
+
+}
+
+/* jquery ui wipeouts 
+Preferred is to turn off jquery ui in array at top of subjects/guide.php
+note that you need to tweak #tab-container to top: -3.3em if you keep jquery ui turned on
+*/
+
+.ui-widget {
+
+       font-family: sans-serif;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: transparent !important;
+    border: 0 !important;
+    color: #333;
+    font-weight: normal;
+}
+
+.ui-widget-header {
+    background: transparent !important;
+    border: none !important;
+    color: #222222;
+    font-weight: bold;
+
