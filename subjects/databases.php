@@ -167,14 +167,13 @@ if (isset ($v2styles) && $v2styles == 1) {
 
 ?>
 
-<div class="pure-g-r">
-<div class="pure-u-1 database-page-header"><?php //print $our_letter_nav; ?></div>
-<div class="pure-u-2-3">
+<div class="pure-g">
+<div class="pure-u-1 pure-u-md-2-3">
 
       <?php print $layout; ?>
 
 </div>
-<div class="pure-u-1-3 database-page">
+<div class="pure-u-1 pure-u-md-1-3 database-page">
   <!-- start pluslet -->
   <div class="pluslet">
     <div class="titlebar">

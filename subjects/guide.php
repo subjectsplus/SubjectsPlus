@@ -4,29 +4,21 @@
  *   @brief Display the subject guides
  *
  *   @author adarby
- *   @date mar 2011
+ *   @date rev aug 2014 and beyond...
  */
 
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
 
-// Is it a BarfGuide?  Check our whitelist of SP guides first
-// Need to add a param to SP for this
-
-//$goodSPGuides = array("superfun", "gis", "MCY564", "chcmusic", "GTEST");
-$chcGuides = array("superfun","chcmusic");
-
-$use_jquery = array("ui", "ui_styles");
+$use_jquery = array("ui", "ui_styles");  // don't want the UI styles?  remove ui_styles from array
+//$use_jquery = array("ui"); //um don't want no ui_styles
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-$db = new Querier;
-// init
 
-$main_col_pluslets = "";
-$sidebar_pluslets = "";
+$db = new Querier;
 
 // special image path because of mod_rewrite issues when source types are included in URL
 $img_path = $PublicPath . "images";
@@ -41,6 +33,22 @@ if( isset( $_GET['subject'] ) )
 
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
+
+// Add This + Search //
+
+$social_and_search = '
+<div id="guide_nav_tools">
+<form id="guide_search" class="pure-form"><!-- AddToAny BEGIN -->
+    <div class="a2a_kit"  style="float: left !important;">
+    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
+    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
+    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
+</div>
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="' . _("Find in Guide") . '" autocomplete="off"/></form>
+</div>
+';
 
 if ($check_this) {
 
@@ -130,6 +138,20 @@ if ($check_this) {
 
 $page_title = $subject_name;
 
+// Do we have an alternate header?
+if (isset ($header_type) && $header_type != 'default') {
+    if( file_exists("includes/header_$header_type.php") )
+    {
+        include("includes/header_$header_type.php");
+    }
+    else
+    {
+        include("includes/header.php");
+    }
+} else {
+    include("includes/header.php");
+}
+
 /*if (in_array($_REQUEST["subject"], $chcGuides)) {
     include("includes/header_chc.php");
     $our_site="chc";
@@ -145,47 +167,32 @@ if (count($all_tabs) > 1) {
     $multi_tab = FALSE;
 }
 
-if( file_exists("includes/header_$header_type.php") )
-{
-	include("includes/header_$header_type.php");
-}
-else
-{
-	include("includes/header.php");
-}
-
+print $social_and_search;
 
 ?>
-<div id="guide_nav_tools">
-<form id="guide_search" class="pure-form"><!-- AddToAny BEGIN -->
-    <div class="a2a_kit"  style="float: left !important;">
-    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
-    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
-    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
-</div>
-    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->
-<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="<?php print _("Find in Guide"); ?>" autocomplete="off"/></form></div>
+
+
 <div id="tabs" style="clear:both; position: relative;">
+    <div id="main-content">
+        <div id="tab-container">
 <?php
 
 // Only show tabs if there is more than one tab
 
 if ($multi_tab == TRUE) {
     $lobjGuide->outputNavTabs('public');
-}; ?>
+}; 
+?>
 
-
-
-
-
+        </div> <!-- end tab-container -->
+        <div id="tab-body">
 <?php
-
 $lobjGuide->outputTabs('public');
 
 ?>
-
-</div>
+        </div> <!-- end tab-body -->
+    </div> <!-- end main-content -->
+</div> <!-- end tabs -->
 
 
 <script type="text/javascript" language="javascript">
@@ -266,10 +273,6 @@ jQuery(function() {
 
 });
 
-
-
-
-
 <?php } ?>
 
 </script>
@@ -305,11 +308,6 @@ jQuery(function() {
          }
 	   });
 
-
-
-
-
-
 </script>
 
 <!--[if IE]>
@@ -329,6 +327,17 @@ jQuery(function() {
 // Load footer file
 ///////////////////////////
 
-
-include("includes/footer.php");
+// Do we have an alternate footer?
+if (isset ($header_type) && $header_type != 'default') {
+    if( file_exists("includes/footer_$header_type.php") )
+    {
+        include("includes/footer_$header_type.php");
+    }
+    else
+    {
+        include("includes/footer.php");
+    }
+} else {
+    include("includes/footer.php");
+}
 ?>

@@ -46,14 +46,11 @@ body {
     text-align: left;
     padding: 0;
     margin: 0px auto;
-    width: 95%;
-    /*min-width: 550px;*/
-    max-width: 1100px;
     background-color: transparent;
 }
 
 html>body #main-content {
-    width: 95%;
+   
 }
 
 a {
@@ -79,7 +76,8 @@ h1 {
     font-weight: bold;
     padding: 0.5em 0 1em;
     text-shadow: 0 2px 3px #CCCCCC;
-    margin-left: 2em;
+    margin: .5em 0 1em 0em;
+    
 }
 
 h2 {
@@ -108,7 +106,7 @@ img {
 #header {
     background: #fff;
     height: 3em;
-    padding: 1em 3em;
+    padding: 1em 1em;
     margin: 0 0 2em 0;
     /*border-bottom: 1px solid #ccc;*/
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
@@ -120,7 +118,6 @@ img {
     padding: 0;
     margin: 0px auto;
     width: 100%;
-    min-width: 550px;
     background-color: transparent;
 }
 /* Main content areas */
@@ -194,8 +191,8 @@ img {
 }
 
 #guide_nav_tools {
-    float: right !important;
-    margin-bottom: 1em;
+    float: left;
+    margin: 2em 0 1em 1em;
 }
 
 #guide_nav_tools img {
@@ -252,7 +249,7 @@ img {
     background: #fff;
     margin-bottom: 10px;
     cursor: auto;
-    z-index: 50;
+    /*z-index: 50;*/
     border: 1px solid #ccc;
     padding: 0px;
     font-size: 10pt;
@@ -263,6 +260,34 @@ img {
     margin: 1em;
 
 }
+
+.pluslet ul {
+    margin-left: 2em;
+}
+
+.pluslet li {
+    display: list-item;
+}
+
+.pluslet li a {
+    background-color: transparent;
+    border: medium none;
+    box-shadow: none;
+    color: #40659b;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.pluslet li a:hover {
+    color: #cc6666;
+    text-decoration: underline;
+}
+#tabs .pluslet ul {
+    margin-bottom: 0.5em;
+}
+
+
 .titlebar {
     color: #333;
     position: relative;
@@ -642,12 +667,12 @@ staff_photo2 is in the sidebar of the subject results page (which requires a flo
 }
 
 .staff_photo2 {
-    position: relative;
-    float: left;
-    background: #efefef;
-    padding: 3px;
+    background: none repeat scroll 0 0 #efefef;
     border: 1px solid #333;
-    margin: 0 10px 0 10px;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 3px;
+    position: relative;
 }
 
 .staff_contact {
@@ -1033,3 +1058,37 @@ width:55px;
 }
 
 .noshow {display: none;}
+
+/*  Media Queries */
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+
+}
+
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+
+    h1 {
+        clear: left;
+        margin-top: 0;
+        
+
+    }
+
+    #guide_nav_tools {
+        float: right !important;
+        margin-top: 0;
+    }
+}
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+
+}
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+
+}

@@ -134,6 +134,14 @@ $dbName_SPlus = "subjectsplus";
 $target_blank = TRUE;
 
 //////////////////////
+// Header switcher
+// This allows SP to mimic the style of different sites,
+// e.g., for a differently-branded branch library
+//////////////////////
+
+$guide_headers = array( 'default' );
+
+//////////////////////
 // Mmm . . . delicious
 //////////////////////
 
