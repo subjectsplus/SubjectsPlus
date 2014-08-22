@@ -112,7 +112,7 @@ $ourlist
 $add_source_box = "
 <form id=\"new_source\" action=\"\" method=\"post\">
 <span class=\"record_label\">" . _("Source Name") . "</span><br />
-<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"\" value=\"\">
 <br /><br />
 <button class=\"button\" id=\"add_source\" name=\"add_source\">" . _("Add New Source") . "</button>
 </form>";
