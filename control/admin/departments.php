@@ -37,9 +37,9 @@ if (isset($_POST["add_department"])) {
         " . $db->quote(scrubData($_POST["url"])) . "
 		)";
 
-    $rInsertDept = $db->query($qInsertDept);
+    $rInsertDept = $db->exec($qInsertDept);
 
-    if ($rInsertDept !== FALSE) {
+    if ($rInsertDept) {
         $feedback = _("Thy Will Be Done.  Department list updated.");
 
     } else {
@@ -82,7 +82,7 @@ if (isset($_POST["update_departments"])) {
     // Loop through array, update departments table
 
     $row_count = 1;
-    $error = "";
+    $error = FALSE;
 
     foreach ($result as $key => $value) {
         $qUpDept = "UPDATE department SET
@@ -93,22 +93,13 @@ if (isset($_POST["update_departments"])) {
         url = " . $db->quote(scrubData($value[3])) . "
         WHERE department_id = " . scrubData($key, "integer");
 
-        print $qUpDept;
         $rUpDept = $db->exec($qUpDept);
 
-        if (!$rUpDept) {
-            $error = 1;
-        }
-
         $row_count++;
+
     }
 
-    if ($error != 1) {
-        $feedback = _("Thy Will Be Done.  Department list updated.");
-    } else {
-        $feedback = _("Thwarted!  Something has gone wrong with update.  Contact the admin.");
-    }
-
+    $feedback = _("Thy Will Be Done.  Department list order updated.");
     // Show feedback
     //$feedback = $record->getMessage();
     // See all the queries?
