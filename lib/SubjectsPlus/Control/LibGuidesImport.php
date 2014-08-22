@@ -166,7 +166,7 @@ class LibGuidesImport {
 
     foreach (  $link_values as $link ) {
 
-      if ($db->exec("INSERT INTO location (location, format, access_restrictions) VALUES (" . $db->quote($link->URL) . " , 1, 1)")  ) {
+      if ($db->exec("INSERT INTO location (location, format, access_restrictions, description) VALUES (" . $db->quote($link->URL) . " , 1, 1, " . $db->quote($link->DESCRIPTION) .  ")" )) {
 	
 	error_log("Inserted location");
 	$location_id = $db->last_id(); 
@@ -178,7 +178,7 @@ class LibGuidesImport {
 	error_log(  $db->errorInfo()[2] );
       } 
 
-      if( $db->exec("INSERT INTO title (title) VALUES (" . $db->quote($link->NAME) . ")") ) {
+      if( $db->exec("INSERT INTO title (title, description) VALUES (" . $db->quote($link->NAME) . ","  . $db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
 	error_log( "Inserted title");
 	$title_id = $db->last_id();
 
