@@ -155,6 +155,10 @@ class LibGuidesImport {
 
 
   public function load_libguides_links_xml($lib_guides_xml_path) {
+
+    $db = new Querier;
+    
+    
     $guide_id = $this->getGuideID();
     
 
@@ -165,6 +169,13 @@ class LibGuidesImport {
     $db = new Querier;
 
     foreach (  $link_values as $link ) {
+
+      $record_check = $db->query("SELECT COUNT(*) FROM sp.location WHERE location = " .  $db->quote($link->URL));
+      error_log ( $record_check) ;
+      error_log ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
+      error_log($record_check[0][0]);
+
+      if ($record_check[0][0] == 0) {
 
       if ($db->exec("INSERT INTO location (location, format, access_restrictions) VALUES (" . $db->quote($link->URL) . " , 1, 1 )" )) {
 	
@@ -196,8 +207,10 @@ class LibGuidesImport {
 	error_log(  $db->errorInfo()[2]  );
 
 	error_log( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
-      }
+	}
 
+    
+      }
 
     }    
 
