@@ -44,9 +44,7 @@ jQuery(document).ready(function(){
 
         
 	if (document.URL.indexOf('guide.php') > 0) {
-	    
-	    console.log("Appending a section"); 
-	    
+
 	    jQuery.ajax({
 		url: "helpers/section_data.php",
 		type: "POST",
@@ -1258,6 +1256,9 @@ function makeAddSection( lstrSelector )
 				       data: { action : 'create' },
 				       dataType: "html",
 				       success: function(html) {
+					   console.log("response:");
+					   console.log(html);
+					   console.log(lintSelected);
 					   $('div#tabs-' + lintSelected).append(html);
 					   $(document).scrollTop($('body').height());
 				       }

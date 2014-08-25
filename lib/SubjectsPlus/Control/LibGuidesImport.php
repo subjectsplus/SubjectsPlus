@@ -166,7 +166,7 @@ class LibGuidesImport {
 
     foreach (  $link_values as $link ) {
 
-      if ($db->exec("INSERT INTO location (location, format, access_restrictions, description) VALUES (" . $db->quote($link->URL) . " , 1, 1, " . $db->quote($link->DESCRIPTION) .  ")" )) {
+      if ($db->exec("INSERT INTO location (location, format, access_restrictions) VALUES (" . $db->quote($link->URL) . " , 1, 1 )" )) {
 	
 	error_log("Inserted location");
 	$location_id = $db->last_id(); 
@@ -219,8 +219,10 @@ class LibGuidesImport {
       $guide_name = str_replace("'", "''",$subject[0]);
       
       if ($subject[0] != null) {
-        
-        if($db->exec("INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')")) {
+      
+
+
+        if($db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
 
           echo $subject[1];
 
@@ -228,9 +230,12 @@ class LibGuidesImport {
 
         } else {
           print_r ($subject[0]);
-
+ 
+	  $query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')";
+        
 	  error_log( "Error inserting subject:");
-	  error_log ( $db->errorInfo()[2] ); 
+	error_log ($query);
+          error_log ( $db->errorInfo()[2] ); 
 	  
         }
 
@@ -272,7 +277,7 @@ class LibGuidesImport {
         
         $clean_tab_name = $db->quote($tab->NAME);
         
-	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index)")) {
+	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1)")) {
 	  
 	  error_log ("Inserted tab '$tab->NAME'");
 
