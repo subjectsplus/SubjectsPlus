@@ -346,13 +346,28 @@ class LibGuidesImport {
           foreach ( $pluslet->LINKS->LINK as $link )  {
             
             
+               $db = new Querier;
+	    $record = $db->query("SELECT * FROM sp.location WHERE location = " .  $db->quote($link->URL));
+
+	    $record_title = $db->query("SELECT title.title,title.title_id, location.location  FROM 
+location_title 
+JOIN title ON title.title_id = location_title.title_id
+JOIN location on location.location_id = location_title.location_id
+WHERE location.location_id = " . $record[0]['location_id']);
+
+
+
             $description .= 
             "<div class=\"links\">" . 
-                            "<a href=\"$link->URL\">$link->NAME</a>" . 
+                            "{{dab},{" . $record[0]['location_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}" . 
                             "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
                             "</div>";
             
-            
+
+                error_log ("REEECCCCCORRDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                error_log($record_title); 
+                error_log("SELECT * FROM sp.location WHERE location = " .  $db->quote($link->URL));
+
           }
 
           
