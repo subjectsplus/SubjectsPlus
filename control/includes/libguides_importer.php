@@ -61,6 +61,7 @@ jQuery('.import_guide').on('click', function() {
 	 jQuery('.pluslet_body').append("<p class='import-feedback'>There was problem importing this guide</p>"); 
 
        } else {
+	 console.log(selected_guide_name);
 	 jQuery('.pluslet_body').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data +  "'>" + selected_guide_name  + "</a></p>" ); 
        }
 
