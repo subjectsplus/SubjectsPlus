@@ -7,7 +7,8 @@
 <meta name="Description" content="<?php if (isset($description)) {print $description;} ?>" />
 <meta name="Keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>" />
 <meta name="Author" content="" />
-<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure-min.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/grids-responsive-min.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um.css">
 <!-- <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700|Roboto:400,700|Lato:400,700|Oswald|Raleway:400,700|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
 <!-- <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/print.css"> -->
@@ -64,19 +65,21 @@ $v2styles = TRUE;
 <body>
 
 <div id="header-content"> 
-    <div class="pure-g-r">
-    <div class="pure-u-1-5" style="padding-top: .5em;text-align: left;">
-      <a href="/index.php"><img src="http://library.miami.edu/wp-content/themes/umiami/images/logo.png" alt="University of Miami Libraries" border="0" /></a><span id="menu_button"><a class="btn btn-inverse">Menu</a></span></div>
-      <div class="pure-u-1-5">&nbsp;</div>
-      <div class="pure-u-1-5" style="padding-top: .5em;">
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-5" style="padding-top: .5em;text-align: left;">
+          <a href="/index.php"><img src="http://library.miami.edu/wp-content/themes/umiami/images/logo.png" alt="University of Miami Libraries" border="0" /></a>
+          <span id="menu_button"><a class="pure-button button-menu" href="#">Menu</a></span>
+        </div>
+      <div class="pure-u-1 pure-u-md-1-5">&nbsp;</div>
+      <div class="pure-u-1 pure-u-md-1-5 visible-desktop" style="padding-top: .5em;">
       <img src="http://library.miami.edu/wp-content/themes/umiami/images/question_green.png" alt="ask a librarian" />
           <span class="header-text"><a href="http://library.miami.edu/ask-a-librarian/">Ask a Librarian</a></span>
       </div>      
-      <div class="pure-u-1-5"  style="padding-top: .5em;">
+      <div class="pure-u-1 pure-u-md-1-5 visible-desktop"  style="padding-top: .5em;">
       <img src="http://library.miami.edu/wp-content/themes/umiami/images/talk_bubble_green.png" alt="talk back" />
           <span class="header-text"><a href="<?php print PATH_TO_SP; ?>subjects/talkback.php" title="Make a comment">Comments</a></span>
       </div>
-      <div class="pure-u-1-5"  style="padding-top: .5em;">
+      <div class="pure-u-1 pure-u-md-1-5 visible-desktop"  style="padding-top: .5em;">
         <form id="head_search" action="<?php print THEME_BASE_DIR; ?>resolver.php" method="post">
           <div id="search_container">
             <fieldset style="" id="searchzone">
@@ -333,7 +336,7 @@ $v2styles = TRUE;
 
 
 
-<div class="pure-g-r">
+<div class="pure-g">
     <div class="wrapper-full">
         <div class="pure-u-1">
 
