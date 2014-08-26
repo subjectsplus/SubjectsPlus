@@ -36,11 +36,11 @@ switch ($our_site) {
 
 <div id="wide_footer">
 	<div class="container-fluid" style="max-width: 1100px; margin: 0 auto; text-align: left;">
-	    <div class="pure-g-r">
-	        <div class="pure-u-1-3">
+	    <div class="pure-g">
+	        <div class="pure-u-1 pure-u-md-1-3">
 				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
           </div>
-				  <div class="pure-u-1-3">
+				  <div class="pure-u-1 pure-u-md-1-3">
             <p style=""><?php print $library_address; ?><br />
             <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
             <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
@@ -48,7 +48,7 @@ switch ($our_site) {
             <a href="/support-the-libraries/">Make a Gift</a>
             </p>
         	</div>
-				  <div class="pure-u-1-3">
+				  <div class="pure-u-1 pure-u-md-1-3">
 					       <?php print $social_icons; ?>
 				  </div>
 	     </div> <!-- end pure-g-r -->
@@ -105,7 +105,38 @@ switch ($our_site) {
     out: removeMega
   };
 
+// Only want hoverintent to fire if window is a certain size
+var $window = $(window);
+
+function checkWidth() {
+  windowsize = $window.width();
+
+  if (windowsize >= 1028) {
+    $("li.mega").hoverIntent(megaConfig);
+  }
+}
+
+$(window).resize(checkWidth).resize();
+
+// end hoverintent loader by window size
+
+/*
+if (jQuery("body").width() >= 1024) {
   $("li.mega").hoverIntent(megaConfig);
+}
+
+$(window).on('resize', function(e){
+  var win = $(this); //this = window
+  if (win.width() >= 1024) { 
+      $("li.mega").hoverIntent(megaConfig);
+  } else {
+      $("li.mega").addClass("offer").removeClass("mega");
+  }
+
+});
+
+*/
+
 
 $(".mega_child select").mouseout(function(e) {
         e.stopPropagation();
