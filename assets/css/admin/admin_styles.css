@@ -2153,3 +2153,18 @@ li.hidden_tab.ui-state-default
 #listing_space img {height: 20px;}
 
 #listing_space input {margin-right: 1em;}
+
+
+/* Keep search bar in control from overlapping tabs */
+
+#guide_header .pure-g-r {
+background:#333;
+}
+
+#tabs {
+
+}
+
+#guide_header {
+height:auto;​
+}

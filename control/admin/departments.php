@@ -30,12 +30,12 @@ if (isset($_POST["add_department"])) {
     ////////////////
     
     $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
-		" . $db->quote(scrubData($_POST["department"])) . ", 
-		" . $db->quote(scrubData($_POST["telephone"])) . ", 
-		0,
+        " . $db->quote(scrubData($_POST["department"])) . ", 
+        " . $db->quote(scrubData($_POST["telephone"])) . ", 
+        0,
         " . $db->quote(scrubData($_POST["email"])) . ", 
         " . $db->quote(scrubData($_POST["url"])) . "
-		)";
+        )";
 
     $rInsertDept = $db->exec($qInsertDept);
 
@@ -75,7 +75,7 @@ if (isset($_POST["update_departments"])) {
         $result[$key] = $t;
     }
 
-    /* 	print "<pre>";
+    /*  print "<pre>";
       print_r($result);
       print "</pre>"; */
 
