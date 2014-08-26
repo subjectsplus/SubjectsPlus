@@ -44,10 +44,11 @@ jQuery('.guides').select2();
 jQuery('.import_guide').on('click', function() {
 
    
+   
    var selected_guide = jQuery('.guides').select2("val"); 
    var selected_guide_name = jQuery('.guides option:selected').text(); 
 
-   console.log(selected_guide); 
+  // Progress needed!
 
    jQuery.ajax({
      type: "POST",
