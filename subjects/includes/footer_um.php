@@ -115,7 +115,7 @@ function checkWidth() {
     $("li.mega").hoverIntent(megaConfig);
   }
 
-  if (windowsize <= 1028) {
+  if (windowsize < 1028) {
        $("li.mega").unbind();
      }
 }
