@@ -4,7 +4,7 @@
 </div>
 </div>
 <?php
-if (!isset($our_site)) {$our_site="um";}// just in case
+if (!isset($our_site)) {$our_site="chc";}// just in case
 
 switch ($our_site) {
   case "chc":
