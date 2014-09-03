@@ -181,11 +181,15 @@ print $social_and_search;
 
 if ($multi_tab == TRUE) {
     $lobjGuide->outputNavTabs('public');
-}; 
+    $bonus_class= "";
+} else {
+    $bonus_class = "no-tabs";
+}
+
 ?>
 
         </div> <!-- end tab-container -->
-        <div id="tab-body">
+        <div id="tab-body" class="<?php print $bonus_class; ?>">
 <?php
 $lobjGuide->outputTabs('public');
 
