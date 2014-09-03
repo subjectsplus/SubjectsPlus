@@ -129,7 +129,7 @@ function listGuides($search = "", $type="all") {
     }
 
     if ($type != "all") {
-        $andclause .= " AND type='" . $db->quote($type) . "'";
+        $andclause .= " AND type=" . $db->quote($type) . "";
     }
 
     $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
