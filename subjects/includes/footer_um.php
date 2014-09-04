@@ -51,7 +51,7 @@ switch ($our_site) {
 				  <div class="pure-u-1 pure-u-md-1-3">
 					       <?php print $social_icons; ?>
 				  </div>
-	     </div> <!-- end pure-g-r -->
+	     </div> <!-- end pure-g -->
       </div> <!-- end container-fluid -->
 </div> <!-- end wide-footer -->
 </body>

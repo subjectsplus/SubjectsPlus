@@ -300,7 +300,7 @@ class Staff {
     }
 
     // set up
-    print "<div class=\"pure-g-r\">";
+    print "<div class=\"pure-g\">";
 
 
   	//see which"Staff Member" columns and whether "Personal Information" section or "Emergency Contact" section are omitted
@@ -708,7 +708,7 @@ public function outputLatLongForm() {
     $action = htmlentities($_SERVER['PHP_SELF']) . "?staff_id=" . $this->_staff_id;
 
     // set up
-    print "<div class=\"pure-g-r\">";
+    print "<div class=\"pure-g\">";
     // start form
     print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
     <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />

@@ -147,7 +147,7 @@ $org_box = "<p>" . _("You may drag items to rearrange their order") . $ourlist;
 // Print out //
 
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">  
   ";
 

@@ -124,16 +124,12 @@ $staff_list;
 ";
 
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">";
 
 makePluslet(_("Manage Guides"), $mg_box, "no_overflow");    
 
-
-
 print "</div></div>";
-
-
 
 include("../includes/footer.php");
 
