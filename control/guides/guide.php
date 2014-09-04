@@ -634,7 +634,7 @@ ob_end_flush();
 </script>
 
 <div id="guide_header">
-  <div class="pure-g-r">
+  <div class="pure-g">
 
     <div class="pure-u-1-2">
       <form class="pure-form" id="guide_search">
@@ -643,8 +643,8 @@ ob_end_flush();
           <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
             <?php print $all_boxes; ?>
           </li>
-          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><?php print _("New Section"); ?></a></li>
-          <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><?php print _("Find Box"); ?></a></li>
+          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
+          <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
 
 
 	  <li class="find-guide-parent">

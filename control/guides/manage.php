@@ -222,7 +222,7 @@ $uploads_box .= "<br />$file_list";
 // Print out //
 
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-1-2\">  
   ";
 

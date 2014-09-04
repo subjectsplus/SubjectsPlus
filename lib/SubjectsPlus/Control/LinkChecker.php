@@ -49,7 +49,7 @@ class LinkChecker {
 		}
 		?>
 
-		<div class="pure-g-r">
+		<div class="pure-g">
   			<div class="pure-u-2-3">
 
   			    <div class="pluslet">
@@ -151,7 +151,7 @@ class LinkChecker {
 		});
 		</script>
 
-				<div class="pure-g-r">
+				<div class="pure-g">
   			<div class="pure-u-2-3">
 		  			    <div class="pluslet">
 			      <div class="titlebar">
@@ -266,7 +266,7 @@ class LinkChecker {
 			endif; ?>
 			</div>
 		</div>
-		</div></div> <!-- close pure-u, close pure-g-r -->
+		</div></div> <!-- close pure-u, close pure-g -->
 		<script type="text/javascript">
 		$(function (){
 
