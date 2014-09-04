@@ -148,7 +148,7 @@ class FAQ {
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"faq_id\" value=\"" . $this->_faq_id . "\" />
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">
     <div class=\"pluslet\">
       <div class=\"titlebar\">

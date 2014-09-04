@@ -174,7 +174,7 @@ $about_tb_body = "
 ";
 
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">  
   ";
 makePluslet(_("View and Answer TalkBacks"), $tb_body, "no_overflow");
@@ -185,7 +185,7 @@ print "<div class=\"pure-u-1-3\">";
 makePluslet(_("About TalkBack"), $about_tb_body, "no_overflow");
 
 print "</div>"; // close pure-u-1-3
-print "</div>"; // close pure-g-r
+print "</div>"; // close pure-g
 
 
 include("../includes/footer.php");

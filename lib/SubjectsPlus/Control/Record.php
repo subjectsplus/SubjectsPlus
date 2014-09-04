@@ -167,7 +167,7 @@ class Record {
   	}
 
     // set up
-    print "<div class=\"pure-g-r\">";
+    print "<div class=\"pure-g\">";
 
   	echo "
   	<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
