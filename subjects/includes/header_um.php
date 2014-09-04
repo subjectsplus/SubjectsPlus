@@ -331,7 +331,7 @@ $v2styles = TRUE;
       <div class="pure-u-1">
       <h1><?php print $page_title; ?></h1>
       </div>
-    </div> <!-- end pure-g-r -->
+    </div> <!-- end pure-g -->
     </div> <!-- end header-content -->
 
 

@@ -158,7 +158,7 @@ $results
     <li><a href=\"record.php\">" . _("Create new item") . "</a></li>
   </ol>";
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">  
   ";
 makePluslet(_("Browse Records"), $letter_header_body, "no_overflow");
@@ -169,7 +169,7 @@ print "<div class=\"pure-u-1-3\">";
 makePluslet(_("New Record"), $new_record_body, "no_overflow");
 
 print "</div>"; // close pure-u-1-3
-print "</div>"; // close pure-g-r
+print "</div>"; // close pure-g
 
 
 include("../includes/footer.php");

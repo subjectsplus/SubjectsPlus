@@ -83,7 +83,7 @@ if ($num_rows > 0) {
 }
 ?>
 
-<div class="pure-g-r">
+<div class="pure-g">
   <div class="pure-u-1-3">
     <div class="pluslet">
       <div class="titlebar">

@@ -125,7 +125,7 @@ print "
 
 <form id=\"sources\" action=\"\" method=\"post\">
 
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">
 ";
 

@@ -95,7 +95,7 @@ $subtitle = _("Search Results for ") . $_POST['searchterm'];
 }
 ?>
 
-  <div class="pure-g-r">
+  <div class="pure-g">
     <div class="pure-u-1-2">
 
   <div class="pluslet no_overflow">
