@@ -117,7 +117,7 @@ function checkWidth() {
   }
 
   if (windowsize < 1028) {
-      $("#spum_nav").show();
+      $("#spum_nav").hide();
        $("li.mega").unbind();
      }
 }
