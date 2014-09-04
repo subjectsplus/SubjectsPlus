@@ -2015,7 +2015,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 /* pure overrides */
 
-#maincontent .pure-g-r {
+#maincontent .pure-g {
   padding-top: 2em;
   clear: left;
 }
@@ -2157,7 +2157,7 @@ li.hidden_tab.ui-state-default
 
 /* Keep search bar in control from overlapping tabs */
 
-#guide_header .pure-g-r {
+#guide_header .pure-g {
 background:#333;
 }
 
@@ -2168,3 +2168,5 @@ background:#333;
 #guide_header {
 height:auto;​
 }
+
+.desktop {display: none;}

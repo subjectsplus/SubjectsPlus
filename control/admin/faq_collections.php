@@ -117,7 +117,7 @@ $add_collection_box = "<form id=\"new_collection\" action=\"\" method=\"post\">
 echo feedBack($feedback);
 
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">  
 ";
 
@@ -129,7 +129,7 @@ print "<div class=\"pure-u-1-3\">";
 makePluslet(_("Add Collection"), $add_collection_box, "no_overflow");
 
 print "</div>"; // close pure-u-1-3
-print "</div>"; // close pure-g-r
+print "</div>"; // close pure-g
 
 
 include("../includes/footer.php");

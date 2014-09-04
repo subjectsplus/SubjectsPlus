@@ -242,7 +242,7 @@ class Guide
         echo "
             <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
-            <div class=\"pure-g-r\">
+            <div class=\"pure-g\">
               <div class=\"pure-u-1-2\">
                 <div class=\"pluslet\">
                     <div class=\"titlebar\">
