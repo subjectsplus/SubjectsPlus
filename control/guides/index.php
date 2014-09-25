@@ -34,7 +34,7 @@ $dropdown_intro_text = _("Please check with the guide's owner before modifying")
 
 $all_guides = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
-<select name=\"item\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
+<select name=\"item\" id=\"guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
 <option value=\"\">" . _("-- Choose Guide --") . "</option>
 $subs_option_boxes
 </select>
@@ -83,6 +83,25 @@ if ($num_rows > 0) {
 }
 ?>
 
+<link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
+
+<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
+<style>
+.select2-container {
+width: 65%;
+margin-right: 3%;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+
+$('#guides').select2();
+
+});
+</script>
+
+
 <div class="pure-g">
   <div class="pure-u-1-3">
     <div class="pluslet">
@@ -113,6 +132,7 @@ if ($num_rows > 0) {
 
 
   <div class="pure-u-1-3">
+
     <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Create"); ?></div>
@@ -128,6 +148,17 @@ if ($num_rows > 0) {
 
     <div class="pluslet">
       <div class="titlebar">
+        <div class="titlebar_text"><?php print _("Import LibGuides"); ?></div>
+        <div class="titlebar_options"></div>
+      </div>
+      <div class="pluslet_body">
+       <p>You can use this feature to import LibGuides</p>
+       <a href="../includes/libguides_importer.php"><?php print _("Import LibGuides"); ?></a>
+        
+      </div>
+	  </div>
+   <div class="pluslet">
+      <div class="titlebar">
         <div class="titlebar_text"><?php print _("Tips"); ?></div>
         <div class="titlebar_options"></div>
       </div>
@@ -138,6 +169,10 @@ if ($num_rows > 0) {
         <p><?php echo _("Need to delete a guide?  Use the gear icon, and use the Delete button."); ?></p>
       </div>
     </div>
+
+
+
+ 
   </div>
 </div>
 
