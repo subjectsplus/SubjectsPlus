@@ -4,6 +4,12 @@ namespace SubjectsPlus\Control;
 class LibGuidesImport {
 
 
+
+
+
+
+
+
   private $_guide_id;
   private $_libguides_xml; 
   private $_guide_owner;
@@ -52,7 +58,6 @@ class LibGuidesImport {
     // Create a path for the iamge 
     $dir_name =  dirname(dirname(dirname(dirname(__FILE__)))) . "/assets/images/" . $this->_guide_id . "/";
     
-
     // Make the guide's asset directory if needed 
     if (!is_dir($dir_name))
     {
@@ -170,7 +175,7 @@ class LibGuidesImport {
 
     foreach (  $link_values as $link ) {
 
-      $record_check = $db->query("SELECT COUNT(*) FROM sp.location WHERE location = " .  $db->quote($link->URL));
+      $record_check = $db->query("SELECT COUNT(*) FROM location WHERE location = " .  $db->quote($link->URL));
       error_log ( $record_check) ;
       error_log ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
       error_log($record_check[0][0]);
@@ -186,7 +191,7 @@ class LibGuidesImport {
       } else {
 	
 	error_log ("Error inserting location:");
-	error_log(  $db->errorInfo()[2] );
+
       } 
 
       if( $db->exec("INSERT INTO title (title, description) VALUES (" . $db->quote($link->NAME) . ","  . $db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
@@ -195,7 +200,7 @@ class LibGuidesImport {
 
       } else {
 	error_log("Error inserting title:" );
-	error_log(  $db->errorInfo()[2] );
+	error_log(  $db->errorInfo() );
       }
 
       if( $db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
@@ -204,7 +209,7 @@ class LibGuidesImport {
 
       } else {
 	error_log( "Error inserting location_title:");
-	error_log(  $db->errorInfo()[2]  );
+	error_log(  $db->errorInfo()  );
 
 	error_log( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
 	}
@@ -248,7 +253,7 @@ class LibGuidesImport {
         
 	  error_log( "Error inserting subject:");
 	error_log ($query);
-          error_log ( $db->errorInfo()[2] ); 
+          error_log ( $db->errorInfo() ); 
 	  
         }
 
@@ -300,7 +305,7 @@ class LibGuidesImport {
 	  
           
 	  error_log ("Error inserting tab:");
-	  error_log ($db->errorInfo()[2]);
+	  error_log ($db->errorInfo());
 
 	}
         $row = 0;
@@ -321,7 +326,7 @@ class LibGuidesImport {
             error_log("Problem inserting this section. This section  may already exist in the database.");
             
 	    error_log("Error inserting section:");
-	    error_log($db->errorInfo()[2] );
+	    error_log($db->errorInfo() );
             
           }
           
@@ -360,7 +365,7 @@ class LibGuidesImport {
             
             
                $db = new Querier;
-	    $record = $db->query("SELECT * FROM sp.location WHERE location = " .  $db->quote($link->URL));
+	    $record = $db->query("SELECT * FROM location WHERE location = " .  $db->quote($link->URL));
 
 	    $record_title = $db->query("SELECT title.title,title.title_id, location.location  FROM 
 location_title 
@@ -379,7 +384,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
                 error_log ("REEECCCCCORRDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 error_log($record_title); 
-                error_log("SELECT * FROM sp.location WHERE location = " .  $db->quote($link->URL));
+                error_log("SELECT * FROM location WHERE location = " .  $db->quote($link->URL));
 
           }
 
@@ -408,7 +413,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 	    
 	    error_log("Error inserting pluslet:");
-	    error_log($db->errorInfo()[2]);
+	    error_log($db->errorInfo());
 	    
 
           }
@@ -422,7 +427,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 	    
 	    error_log("Error inserting pluslet_section:");
-	    error_log( $db->errorInfo()[2] );
+	    error_log( $db->errorInfo());
 
           }
 
