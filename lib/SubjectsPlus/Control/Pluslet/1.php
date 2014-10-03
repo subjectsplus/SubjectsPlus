@@ -230,6 +230,12 @@ class Pluslet_1 extends Pluslet {
         //$toc .= "<br />";
         return $toc;
     }
+    
+    
+      static function getMenuName()
+  {
+  	return _('All Items by Source');
+  }
 
 }
 
