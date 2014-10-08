@@ -81,7 +81,7 @@ class Pluslet_HTML5Video extends Pluslet {
   		$lobjSplit = explode('watch?v=', $this->_extra['youtube']);
 
         if (isset ( $lobjSplit[1])) {
-  		$this->_body .= "<div class='video-container'>" . "<iframe src='http://www.youtube.com/embed/" .
+  		$this->_body .= "<div class='video-container'>" . "<iframe src='//www.youtube.com/embed/" .
   			$lobjSplit[1] .  "' frameborder='0' width='560' height='315'></iframe></div>";
         } else {
             $this->_body .= "<p class='video-error'>There was a problem creating the YouTube embed. The URL should look like: http://www.youtube.com/watch?v=abc1234 </p>";
