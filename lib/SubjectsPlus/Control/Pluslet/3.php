@@ -64,6 +64,12 @@ class Pluslet_3 extends Pluslet {
 	{
 		return 'subsplus_sub_spe';
 	}
+	
+	
+	static function getMenuName()
+  {
+  	return _('Subject Specialist');
+  }
 
 }
 
