@@ -562,7 +562,7 @@ ob_end_flush();
        success: function(html) {
          tabs.tabs("destroy");
 
-         tabs.append( "<div id='" + id + "' class=\"sptab\">" + html
+         tabs.append( "<div id='" + id + "' class=\"sptab ui-tabs-hide\">" + html
                       + "</div>" );
 
          jQuery("#response").hide();
@@ -659,7 +659,7 @@ ob_end_flush();
 	   jQuery('.find-guide-input').autocomplete({
 
 	     minLength	: 3,
-	     source		: 'http://' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+	     source		: '//' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
 
 	       event.preventDefault();
