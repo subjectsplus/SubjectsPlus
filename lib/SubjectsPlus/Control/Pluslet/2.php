@@ -45,6 +45,12 @@ class Pluslet_2 extends Pluslet {
 
         return $this->_pluslet;
     }
+    
+    
+      static function getMenuName()
+  {
+  	return _('Key to Icons');
+  }
 
 }
 
