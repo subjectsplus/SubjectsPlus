@@ -123,9 +123,10 @@ class DbHandler {
             $condition2
 		        AND eres_display = 'Y'
             $condition3
+
 		        ORDER BY newtitle";
 
-    
+   
       
     $r = $db->query($q1);
     $num_rows = count($r);
@@ -210,10 +211,17 @@ class DbHandler {
       $target = targetBlanker();    
 
       $items .= "
+<<<<<<< HEAD
 	<tr class=\"zebra $row_colour\" valign=\"top\">
 		
 		<td><a href=\"$url\" $target>$item_title</a> $information $helpguide $display_note_text
                     <div class=\"list_bonus\">$icons $bonus</div></td>
+=======
+  <tr class=\"zebra $row_colour\" valign=\"top\">
+    
+    <td><a href=\"$url\" $target>$item_title</a> $information $helpguide $display_note_text
+        <div class=\"list_bonus\">$icons $bonus</div></td>
+>>>>>>> 0f7d54ed5ce6e46dee5a3aa72c120f6533f5fa7d
                     
 	</tr>";
 
