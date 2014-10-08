@@ -158,6 +158,7 @@ $view_depts_box = "<ul>
 </ul>";
 
 print feedBack($feedback);
+print "<div class=\"sort_feedback\"></div>";
 
 print "
 
@@ -231,10 +232,10 @@ include("../includes/footer.php");
             $(this).parent().remove();
             $("#item-"+this_id).remove();
 
-            $(".feedback").load("admin_bits.php", {action: 'delete_department', delete_id:this_id},
+            $(".sort_feedback").load("admin_bits.php", {action: 'delete_department', delete_id:this_id},
             function() {
 
-                $(".feedback").fadeIn();
+            $(".sort_feedback").fadeIn();
             });
 
             return false;
