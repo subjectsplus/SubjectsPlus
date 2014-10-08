@@ -3,7 +3,6 @@ namespace SubjectsPlus\Control;
 
 class LibGuidesImport {
 
-
   private $_guide_id;
   private $_libguides_xml; 
   private $_guide_owner;
@@ -52,7 +51,6 @@ class LibGuidesImport {
     // Create a path for the iamge 
     $dir_name =  dirname(dirname(dirname(dirname(__FILE__)))) . "/assets/images/" . $this->_guide_id . "/";
     
-
     // Make the guide's asset directory if needed 
     if (!is_dir($dir_name))
     {
@@ -110,9 +108,25 @@ class LibGuidesImport {
     
     $guide_id = $this->getGuideID();
 
+
     $db = new Querier; 
     
     $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '$guide_id'");
+    
+    return $guide;     
+    
+  }
+  
+  
+  
+    public function guide_dupe($guide_title) {
+    
+    $guide_id = $this->getGuideID();
+
+	
+    $db = new Querier; 
+    
+    $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject = '$guide_title'");
     
     return $guide;     
     
@@ -170,43 +184,75 @@ class LibGuidesImport {
 
     foreach (  $link_values as $link ) {
 
-      $record_check = $db->query("SELECT COUNT(*) FROM sp.location WHERE location = " .  $db->quote($link->URL));
-      error_log ( $record_check) ;
-      error_log ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
-      error_log($record_check[0][0]);
+      $record_check = $db->query("SELECT COUNT(*) FROM location WHERE location = " .  $db->quote($link->URL));
+      //error_log ( $record_check) ;
+      //error_log ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
+      //error_log($record_check[0][0]);
 
       if ($record_check[0][0] == 0) {
 
-      if ($db->exec("INSERT INTO location (location, format, access_restrictions) VALUES (" . $db->quote($link->URL) . " , 1, 1 )" )) {
+      if ($db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $db->quote($link->URL) . " , 1, 1, 'N' )" )) {
 	
-	error_log("Inserted location");
+	//error_log("Inserted location");
 	$location_id = $db->last_id(); 
 
 	
       } else {
 	
-	error_log ("Error inserting location:");
-	error_log(  $db->errorInfo()[2] );
-      } 
+	//error_log ("Error inserting location:");
 
+		//
+      }
+
+	  
+	// When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field 
+	
+	  
+	$matches = array();
+	preg_match("/^\b(the|a|an|la|les|el|las|los)\b/i", $link->NAME, $matches);
+
+	
+	// If there isn't an article in the title
+	if (empty($maches[0])) {
+	
       if( $db->exec("INSERT INTO title (title, description) VALUES (" . $db->quote($link->NAME) . ","  . $db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
-	error_log( "Inserted title");
+	//error_log( "Inserted title");
 	$title_id = $db->last_id();
 
       } else {
-	error_log("Error inserting title:" );
-	error_log(  $db->errorInfo()[2] );
+	//error_log("Error inserting title:" );
+	//error_log(  $db->errorInfo() );
       }
+  
+	}
+	
+	// If there is an article in the title
+	
+	if(isset($matches[0])) {
+	
+	$clean_link_name = preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME);
+	
+	   if( $db->exec("INSERT INTO title (title, description, pre) VALUES (" . $db->quote($clean_link_name) . ","  . $db->quote($link->DESCRIPTION_SHORT) . "," . $db->quote($matches[0]) . ")") ) {
+	//error_log( "Inserted title");
+	$title_id = $db->last_id();
 
+      } else {
+	//error_log("Error inserting title:" );
+	//error_log(  $db->errorInfo() );
+      }
+	
+	}
+	
+	
       if( $db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
-	error_log( "Inserted location_title"); 
+	//error_log( "Inserted location_title"); 
 	
 
       } else {
-	error_log( "Error inserting location_title:");
-	error_log(  $db->errorInfo()[2]  );
+	//error_log( "Error inserting location_title:");
+	//error_log(  $db->errorInfo()  );
 
-	error_log( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
+	//error_log( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
 	}
 
     
@@ -218,9 +264,12 @@ class LibGuidesImport {
 
 
   public function import_libguides($subject_values) {
-
+  
+  
     $db = new Querier;
-
+	$subject_id = $subject_values[0][1]->__toString();
+	
+	
     foreach($subject_values as $subject) { 
 
       // Remove the apostrophes and spaces from the shortform 
@@ -242,27 +291,27 @@ class LibGuidesImport {
 	  
 
         } else {
-          print_r ($subject[0]);
+         echo $subject[1][0];
  
 	  $query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')";
         
-	  error_log( "Error inserting subject:");
-	error_log ($query);
-          error_log ( $db->errorInfo()[2] ); 
+	  //error_log( "Error inserting subject:");
+	//error_log ($query);
+          //error_log ( $db->errorInfo() ); 
 	  
         }
 
 	if ($this->getGuideOwner() != null) {
 	  $staff_id = $this->getStaffID( $this->getGuideOwner());
 	  
-	  error_log ("Staff ID: " . $staff_id );
+	  //error_log ("Staff ID: " . $staff_id );
 	  
 	  if($db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
-	    error_log ("Inserted staff: '$staff_id'");
+	    //error_log ("Inserted staff: '$staff_id'");
 	    
 	  } else {
 
-	    error_log("Error inserting staff. ");
+	    //error_log("Error inserting staff. ");
 	    
 	  }
 	  
@@ -292,15 +341,15 @@ class LibGuidesImport {
         
 	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1)")) {
 	  
-	  error_log ("Inserted tab '$tab->NAME'");
+	  //error_log ("Inserted tab '$tab->NAME'");
 
 	} else {
 
-          error_log( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
+          //error_log( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
 	  
           
-	  error_log ("Error inserting tab:");
-	  error_log ($db->errorInfo()[2]);
+	  //error_log ("Error inserting tab:");
+	  //error_log ($db->errorInfo());
 
 	}
         $row = 0;
@@ -316,12 +365,12 @@ class LibGuidesImport {
           
 
           if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
-            error_log("Inserted section");
+            //error_log("Inserted section");
           } else { 
-            error_log("Problem inserting this section. This section  may already exist in the database.");
+            //error_log("Problem inserting this section. This section  may already exist in the database.");
             
-	    error_log("Error inserting section:");
-	    error_log($db->errorInfo()[2] );
+	    //error_log("Error inserting section:");
+	    //error_log($db->errorInfo() );
             
           }
           
@@ -334,7 +383,7 @@ class LibGuidesImport {
 	  // Import images and replace the old urls with new urls
 	  $doc = new \DOMDocument();
 
-	  $doc->loadHTML(mb_convert_encoding($pluslet->DESCRIPTION, 'HTML-ENTITIES', 'UTF-8'));
+	  $doc->loadHTML(mb_convert_encoding($pluslet->DESCRIPTION, 'UTF-8'));
 	  
 	  $nodes = $doc->getElementsByTagName("img");
 
@@ -344,7 +393,7 @@ class LibGuidesImport {
 	      $test = strpos($attr->value, "http://");
 	      
 	      if ($test !== false) { 
-		error_log( $attr->value);
+		//error_log( $attr->value);
 		
 		$attr->value = $this->download_images($attr->value);
 		
@@ -352,7 +401,7 @@ class LibGuidesImport {
 	      }
 	    }
 	    
-	    $description .= "<div class=\"description\">".  $doc->saveHTML() . "</div>";
+	    $description .= "<div class=\"description\">".  htmlspecialchars($doc->saveHTML()) . "</div>";
 
 	  }
 
@@ -360,7 +409,7 @@ class LibGuidesImport {
             
             
                $db = new Querier;
-	    $record = $db->query("SELECT * FROM sp.location WHERE location = " .  $db->quote($link->URL));
+	    $record = $db->query("SELECT * FROM location WHERE location = " .  $db->quote($link->URL),NULL,TRUE);
 
 	    $record_title = $db->query("SELECT title.title,title.title_id, location.location  FROM 
 location_title 
@@ -368,18 +417,28 @@ JOIN title ON title.title_id = location_title.title_id
 JOIN location on location.location_id = location_title.location_id
 WHERE location.location_id = " . $record[0]['location_id']);
 
+				
+			if ($record_title[0]["title"] == "") {
+			
+				$description .=    "<div class=\"links\">" . 
+							"<span class=\"link_title\"> $link->NAME </span>" .
+                            "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
+                            "</div>";
+			} 
 
-
+			if ($record_title[0][title]) {
+			
             $description .= 
             "<div class=\"links\">" . 
                             "{{dab},{" . $record[0]['location_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}" . 
                             "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
                             "</div>";
             
-
-                error_log ("REEECCCCCORRDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                error_log($record_title); 
-                error_log("SELECT * FROM sp.location WHERE location = " .  $db->quote($link->URL));
+				}
+				
+                //error_log ("REEECCCCCORRDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                //error_log($record_title); 
+                //error_log("SELECT * FROM location WHERE location = " .  $db->quote($link->URL));
 
           }
 
@@ -395,43 +454,38 @@ WHERE location.location_id = " . $record[0]['location_id']);
             
           }
           
-          $description .= "<div class=\"media\">" . $pluslet->EMBEDDED_MEDIA_AND_WIDGETS->URL . "</div>";  
+          $description .= "<div class=\"media\">" . $pluslet->DESCRIPTION . "</div>";  
           
           $clean_description = $db->quote($description);
 
           if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
             
-	    error_log("Inserted pluslet '$pluslet->NAME'");
+	    //error_log("Inserted pluslet '$pluslet->NAME'");
             $clean_description = null;
 
           } else {
 
 	    
-	    error_log("Error inserting pluslet:");
-	    error_log($db->errorInfo()[2]);
+	    //error_log("Error inserting pluslet:");
+	    //error_log($db->errorInfo());
 	    
 
           }
           
           if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, $row)")) {
-            error_log("Inserted pluslet section relationship");
+            //error_log("Inserted pluslet section relationship");
             
 
 	    // This sticks the newly created pluslet into a section 
           } else {
 
 	    
-	    error_log("Error inserting pluslet_section:");
-	    error_log( $db->errorInfo()[2] );
+	    //error_log("Error inserting pluslet_section:");
+	    //error_log( $db->errorInfo());
 
           }
-
-        }
-        
-      }
-      
+        } 
+      } 
     }
-
   }
-
 }
