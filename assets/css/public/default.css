@@ -598,6 +598,20 @@ table.item_listing a:hover {
     width: 15px;
 }
 
+.db_icons {
+    float: right;
+    font-size: 0.8em !important;
+    margin-right: 1em;
+}
+
+.db_icons img {
+    background-color: #79A4D4;
+    border-radius: 3px;
+    height: 15px;
+    width: 15px;
+    padding: 3px;
+}
+
 .toggleLink {
     font-size: 13px; background-color: #ccc; border-radius: 3px; margin-left: 1em; color: #666; padding: 1px 3px;
     display: inline-block;

@@ -157,7 +157,7 @@ switch ($_REQUEST["action"]) {
 
     $rChecker = $db->query($qChecker);
 
-    //print $qChecker;
+   //print $qChecker;
 
     if (count($rChecker) != 0) {
       print _("Your request cannot be completed:  There are one or more librarians associated with this subject");
@@ -166,6 +166,7 @@ switch ($_REQUEST["action"]) {
       $qDeleteDept = "DELETE FROM department WHERE department_id = " . scrubData($_POST["delete_id"], "integer");
 
       $rDeleteDept = $db->exec($qDeleteDept);
+
 
         print _("Thy Will Be Done.  Department list updated.");
       
