@@ -574,7 +574,9 @@ if ($ctags != "") {
   foreach ($ctags as $value) {
     switch ($value) {
       case "restricted":
-        $icons .= "<img src=\"$IconPath/lock.png\" border=\"0\" alt=\"" . _("Restricted Resource") . "\" title=\"" . _("Restricted Resource") . "\" /> ";
+        //$icons .= "<img src=\"$IconPath/lock.png\" border=\"0\" alt=\"" . _("Restricted Resource") . "\" title=\"" . _("Restricted Resource") . "\" /> ";
+        $icons .= "<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"" . _("Restricted Resource") . "\" title=\"" . _("Restricted Resource") . "\" /> ";
+
         if ($showtext == 1) {
           $icons .= " = " . _("Restricted resource") . "<br />";
         }
@@ -586,31 +588,40 @@ if ($ctags != "") {
         }
         break;
       case "full_text":
-        $icons.= " <img src=\"$IconPath/document-26.png\" border=\"0\" alt=\"" . _("Some full text available") . "\" title=\"" . _("Some full text available") . "\" />";
+        //$icons.= " <img src=\"$IconPath/document-26.png\" border=\"0\" alt=\"" . _("Some full text available") . "\" title=\"" . _("Some full text available") . "\" />";
+        $icons.= " <img src=\"$IconPath/full_text.gif\" border=\"0\" alt=\"" . _("Some full text available") . "\" title=\"" . _("Some full text available") . "\" />";
+
         if ($showtext == 1) {
           $icons .= " = " . _("Some full text") . "<br />";
         }
         break;
       case "openurl":
-        $icons .= "<img src=\"$IconPath/link-26.png\" border=\"0\" alt=\"openURL\" title=\"openURL\" /> ";
+        //$icons .= "<img src=\"$IconPath/link-26.png\" border=\"0\" alt=\"openURL\" title=\"openURL\" /> ";
+        $icons .= "<img src=\"$IconPath/article_linker.gif\" border=\"0\" alt=\"openURL\" title=\"openURL\" /> ";
         if ($showtext == 1) {
           $icons .= " = " . _("OpenURL enabled") . "<br /><br />";
         }
         break;
       case "images":
-        $icons.= " <img src=\"$IconPath/image_file-26.png\" border=\"0\" alt=\"" . _("Resource contains images") . "\" title=\"" . _("Resource contains images") . "\" />";
+        //$icons.= " <img src=\"$IconPath/image_file-26.png\" border=\"0\" alt=\"" . _("Resource contains images") . "\" title=\"" . _("Resource contains images") . "\" />";
+        $icons.= " <img src=\"$IconPath/camera.gif\" border=\"0\" alt=\"" . _("Resource contains images") . "\" title=\"" . _("Resource contains images") . "\" />";
+
         if ($showtext == 1) {
           $icons .= " = " . _("Images") . "<br />";
         }
         break;
       case "video":
-        $icons.= " <img src=\"$IconPath/video_file-26.png\"  border=\"0\" alt=\"" . _("Resource contains video") . "\" title=\"" . _("Resource contains video") . "\" />";
+        //$icons.= " <img src=\"$IconPath/video_file-26.png\"  border=\"0\" alt=\"" . _("Resource contains video") . "\" title=\"" . _("Resource contains video") . "\" />";
+        $icons.= " <img src=\"$IconPath/television.gif\"  border=\"0\" alt=\"" . _("Resource contains video") . "\" title=\"" . _("Resource contains video") . "\" />";
+
         if ($showtext == 1) {
           $icons .= " = " . _("Video files") . "<br />";
         }
         break;
       case "audio":
-        $icons.= " <img src=\"$IconPath/audio_file-26.png\" border=\"0\" alt=\"" . _("Resource contains audio") . "\" title=\"" . _("Resource contains audio") . "\" />";
+        //$icons.= " <img src=\"$IconPath/audio_file-26.png\" border=\"0\" alt=\"" . _("Resource contains audio") . "\" title=\"" . _("Resource contains audio") . "\" />";
+        $icons.= " <img src=\"$IconPath/sound.gif\" border=\"0\" alt=\"" . _("Resource contains audio") . "\" title=\"" . _("Resource contains audio") . "\" />";
+
         if ($showtext == 1) {
           $icons .= " = " . _("Audio files") . "<br />";
         }
