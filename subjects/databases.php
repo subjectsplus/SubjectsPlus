@@ -15,6 +15,8 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
+include("themes/um/databases.php");
+exit;
 $db = new Querier;
     
 $use_jquery = array("ui");
