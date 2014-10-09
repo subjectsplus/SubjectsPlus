@@ -200,7 +200,7 @@ class DbHandler {
       $bonus = "$blurb<br />";
 
       if ($blurb != "") {
-        $information1 = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><img src=\"$IconPath/information.png\" border=\"0\" alt=\"" . _("more information") . "\" title=\"" . _("more information") . "\" /></span>";
+        $information = "<img src=\"$IconPath/information.png\" class=\"curse_me\" border=\"0\" alt=\"" . _("more information") . "\" title=\"" . _("more information") . "\"  id=\"bib-$bib_id\" />";
         // This is new details link; you can use the one above if you prefer
         $information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\">" . _("about") . "</span>";
         
@@ -210,29 +210,19 @@ class DbHandler {
 
       $target = targetBlanker();    
 
-      $items .= self::generateLayout($row_colour,$url,$target,$item_title,$information,$information1,$icons,$helpguide,$display_note_text,$bonus);
+      $items .= "
+  <tr class=\"zebra $row_colour\" valign=\"top\">
+    
+    <td><a href=\"$url\" $target>$item_title</a> $information $helpguide $display_note_text
+        <div class=\"list_bonus\">$icons $bonus</div></td>
+                    
+  </tr>";
 
       $row_count++;
     }
 
     $items .= "</table>";
     return $items;
-  }
-
-  function generateLayout($row_colour,$url,$target,$item_title,$information,$information1,$icons,$helpguide,$display_note_text,$bonus) {
-    $onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
-      <td><a href=\"$url\" $target>$item_title</a> $information <span class=\"db_icons\">$icons</span> $helpguide $display_note_text
-        <div class=\"list_bonus\">$icons $bonus</div>
-      </td>  
-    </tr>";
-    $onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
-      <td style=\"width: 120px\">$information1 <span class=\"db_icons\">$icons</span></td><td><a href=\"$url\" $target>$item_title</a>  $helpguide $display_note_text
-        <div class=\"list_bonus\">$bonus</div>
-      </td>  
-    </tr>";
-
-    return $onerow;
-
   }
 
   function displaySubjects() {
