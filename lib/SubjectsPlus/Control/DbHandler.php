@@ -121,9 +121,12 @@ class DbHandler {
             INNER JOIN source as s
             ON rk.source_id = s.source_id
             $condition2
-            AND eres_display = 'Y'
+		        AND eres_display = 'Y'
             $condition3
-            ORDER BY newtitle";    
+
+		        ORDER BY newtitle";
+
+   
       
     $r = $db->query($q1);
     $num_rows = count($r);
@@ -133,7 +136,7 @@ class DbHandler {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";
     }
 
-    // prepare  header
+    // prepare 	header
     $items = "<table width=\"98%\" class=\"item_listing\">";
 
     $row_count = 0;
@@ -245,7 +248,7 @@ class DbHandler {
       return "<div class=\"no_results\">" . _("Sorry, there are no results at this time.") . "</div>";
     }
 
-    // prepare  header
+    // prepare 	header
     $items = "<table width=\"98%\" class=\"item_listing\">";
 
     $row_count = 0;
@@ -258,9 +261,9 @@ class DbHandler {
       $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
       $items .= "
-  <tr class=\"zebra $row_colour\" valign=\"top\">
-    <td><a href=\"databases.php?letter=bysub&subject_id=$myrow[1]\">$myrow[0]</a></td>
-  </tr>";
+	<tr class=\"zebra $row_colour\" valign=\"top\">
+		<td><a href=\"databases.php?letter=bysub&subject_id=$myrow[1]\">$myrow[0]</a></td>
+	</tr>";
 
       $row_count++;
     }
@@ -273,16 +276,16 @@ class DbHandler {
     global $all_ctags;
     sort($all_ctags);
 
-    // prepare  header
+    // prepare 	header
     $items = "<table width=\"98%\" class=\"item_listing\">";
 
     foreach ($all_ctags as $value) {
     
       $pretty_type = ucwords(preg_replace('/_/', ' ', $value));
       $items .= "
-  <tr class=\"zebra\" valign=\"top\">
-    <td><a href=\"databases.php?letter=bytype&type=$value\">" . $pretty_type . "</a></td>
-  </tr>";
+	<tr class=\"zebra\" valign=\"top\">
+		<td><a href=\"databases.php?letter=bytype&type=$value\">" . $pretty_type . "</a></td>
+	</tr>";
     }
     $items .= "</table>";
     return $items;

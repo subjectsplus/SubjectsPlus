@@ -1,7 +1,7 @@
 <?php
 
 use SubjectsPlus\Control\Querier;
-
+include_once("config.php");
 include_once("autoloader.php");
 
 
@@ -24,28 +24,9 @@ if (!function_exists("gettext")) {
 
 function checkSession() {
 
-  global $salt;
 
-  if (isset($_SESSION['checkit'])) {
-
-    if (md5($_SESSION['email']) . $salt == $_SESSION['checkit']) {
-      $result = "ok";
-    } else {
-      $result = "failure";
-    }
-  } else {
-    $result = "failure";
-  }
-
-  return $result;
-}
-
-/////////////////////
-// Gets info about the user, based on IP or .htaccess, according to your config file
-// This is called by control/includes/header.php, and control/login.php
-/////////////////////////
-
-function isCool($emailAdd="", $password="") {
+  $db = new Querier;
+  
 
   global $subcat;
   global $CpanelPath;
@@ -59,26 +40,30 @@ function isCool($emailAdd="", $password="") {
     echo $e;
   }
 
-  $query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
-        FROM staff
-        WHERE email = '" . scrubData($emailAdd, "email") . "' AND password = '" . scrubData($password) . "'";
 
-  $db = new Querier;
+
+  if($shibboleth) {
+    $query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+        FROM staff
+        WHERE email = '" . scrubData($emailAdd, "email") . "'";   
+  }
+ 
   $result = $db->query($query);
   $numrows = count($result);
 
-  if ($debugger == "yes") {
-    print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
-  }
 
+    //print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
+ 
+  
   if ($numrows > 0) {
 
     $user = $result;
     if (is_array($user)) {
 
+ 
 //set session variables
-      session_start();
-      session_regenerate_id();
+session_start();
+session_regenerate_id();
 
 // Create session vars for the basic types
       $_SESSION['checkit'] = md5($user[0][4]) . $salt;
@@ -1017,7 +1002,9 @@ function displayLogoOnlyHeader()
 	//display logo only header
 	?>
 		<header id="header">
-		  <img class="login-only-logo" src="<?php echo 'http://' .$lstrURL . '/assets/'; ?>images/admin/logo_small.png" />
+
+		  <img class="login-only-logo" src="<?php echo '//' .$lstrURL . '/assets/'; ?>images/admin/logo_small.png" />
+
 		</header>
 		<?php
 }
@@ -1110,7 +1097,9 @@ function getAssetURL()
 		}
 	}
 
-	return 'http://' . $lstrURL . '/assets/';
+
+	return '//' . $lstrURL . '/assets/';
+
 }
 
 /**
@@ -1131,12 +1120,12 @@ function getControlURL()
 		{
 			unset($lobjSplit[$i]);
 			$lstrURL = implode( '/' , $lobjSplit );
-			$lstrURL = 'http://' . $lstrURL . '/control/';
+			$lstrURL = '//' . $lstrURL . '/control/';
 			break;
 		}elseif($lobjSplit[$i] == 'control')
 		{
 			$lstrURL = implode( '/' , $lobjSplit );
-			$lstrURL = 'http://' . $lstrURL . '/';
+			$lstrURL = '//' . $lstrURL . '/';
 			break;
 		}else
 		{
@@ -1160,12 +1149,16 @@ function getSubjectsURL()
 		{
 			unset($lobjSplit[$i]);
 			$lstrURL = implode( '/' , $lobjSplit );
-			$lstrURL = 'http://' . $lstrURL . '/subjects/';
+
+			$lstrURL = '//' . $lstrURL . '/subjects/';
+
 			break;
 		}elseif($lobjSplit[$i] == 'control')
 		{
 			$lstrURL = implode( '/' , $lobjSplit );
-			$lstrURL = 'http://' . $lstrURL . '/';
+
+			$lstrURL = '//' . $lstrURL . '/';
+
 			break;
 		}else
 		{
@@ -1319,6 +1312,89 @@ function colorize($text, $status) {
   }
     return chr(27) . "$out" . "$text" . chr(27) . "[0m";
 }
+
+
+
+/////////////////////
+// Gets info about the user, based on IP or .htaccess, according to your config file
+// This is called by control/includes/header.php, and control/login.php
+/////////////////////////
+
+function isCool($emailAdd="", $password="", $shibboleth=false) {
+
+  $db = new Querier;
+  
+
+  global $subcat;
+  global $CpanelPath;
+  global $PublicPath;
+  global $debugger;
+  global $salt;
+
+
+  try {
+      } catch (Exception $e) {
+    echo $e;
+  }
+
+
+
+  if($shibboleth) {
+    $query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+        FROM staff
+        WHERE email = '" . scrubData($emailAdd, "email") . "'";   
+  }
+ 
+  $result = $db->query($query);
+  $numrows = count($result);
+
+
+    //print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
+ 
+  
+  if ($numrows > 0) {
+
+    $user = $result;
+    if (is_array($user)) {
+
+ 
+//set session variables
+session_start();
+session_regenerate_id();
+
+// Create session vars for the basic types
+      $_SESSION['checkit'] = md5($user[0][4]) . $salt;
+      $_SESSION['staff_id'] = $user[0][0];
+      $_SESSION['ok_ip'] = $user[0][1];
+      $_SESSION['fname'] = $user[0][2];
+      $_SESSION['lname'] = $user[0][3];
+      $_SESSION['email'] = $user[0][4];
+      $_SESSION['user_type_id'] = $user[0][5];
+
+// unpack our extra
+      if ($user[0][7] != NULL) {
+        $jobj = json_decode($user[0][7]);
+        $_SESSION['css'] = $jobj->{'css'};
+      }
+
+// unpack our ptags
+      $current_ptags = explode("|", $user[0][6]);
+
+      foreach ($current_ptags as $value) {
+        $_SESSION[$value] = 1;
+      }
+
+      $result = "success";
+    }
+  } else {
+
+    $result = "failure";
+  }
+
+  return $result;
+}
+
+
 
 /**
  * tokenizeText() is used to convert tokens created via FCKeditor wysiwyg

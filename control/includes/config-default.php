@@ -129,9 +129,12 @@ $dbName_SPlus = "subjectsplus";
 
 //////////////////////
 // Open database links with a target=blank
+$target_blank = TRUE;
 //////////////////////
 
-$target_blank = TRUE;
+
+
+
 
 //////////////////////
 // Header switcher
@@ -140,12 +143,6 @@ $target_blank = TRUE;
 //////////////////////
 
 $guide_headers = array( 'default' );
-
-//////////////////////
-// Open database links with a target=blank
-//////////////////////
-
-$target_blank = FALSE;
 
 //////////////////////
 // Mmm . . . delicious
