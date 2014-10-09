@@ -1,7 +1,7 @@
 <?php
 
 use SubjectsPlus\Control\Querier;
-include_once("config.php");
+
 include_once("autoloader.php");
 
 
@@ -24,9 +24,28 @@ if (!function_exists("gettext")) {
 
 function checkSession() {
 
+  global $salt;
 
-  $db = new Querier;
-  
+  if (isset($_SESSION['checkit'])) {
+
+    if (md5($_SESSION['email']) . $salt == $_SESSION['checkit']) {
+      $result = "ok";
+    } else {
+      $result = "failure";
+    }
+  } else {
+    $result = "failure";
+  }
+
+  return $result;
+}
+
+/////////////////////
+// Gets info about the user, based on IP or .htaccess, according to your config file
+// This is called by control/includes/header.php, and control/login.php
+/////////////////////////
+
+function isCool($emailAdd="", $password="") {
 
   global $subcat;
   global $CpanelPath;
@@ -40,30 +59,26 @@ function checkSession() {
     echo $e;
   }
 
-
-
-  if($shibboleth) {
-    $query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+  $query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
         FROM staff
-        WHERE email = '" . scrubData($emailAdd, "email") . "'";   
-  }
- 
+        WHERE email = '" . scrubData($emailAdd, "email") . "' AND password = '" . scrubData($password) . "'";
+
+  $db = new Querier;
   $result = $db->query($query);
   $numrows = count($result);
 
+  if ($debugger == "yes") {
+    print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
+  }
 
-    //print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
- 
-  
   if ($numrows > 0) {
 
     $user = $result;
     if (is_array($user)) {
 
- 
 //set session variables
-session_start();
-session_regenerate_id();
+      session_start();
+      session_regenerate_id();
 
 // Create session vars for the basic types
       $_SESSION['checkit'] = md5($user[0][4]) . $salt;
@@ -1120,12 +1135,15 @@ function getControlURL()
 		{
 			unset($lobjSplit[$i]);
 			$lstrURL = implode( '/' , $lobjSplit );
+
 			$lstrURL = '//' . $lstrURL . '/control/';
+
 			break;
 		}elseif($lobjSplit[$i] == 'control')
 		{
 			$lstrURL = implode( '/' , $lobjSplit );
 			$lstrURL = '//' . $lstrURL . '/';
+
 			break;
 		}else
 		{
