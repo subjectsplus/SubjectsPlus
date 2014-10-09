@@ -139,12 +139,7 @@ include("../includes/footer.php");
 ?>
 
 <script type="text/javascript">
-$(document).ready(function () { 
 
-window.deleted = "no";
-console.log(window.deleted); 
-
-});
  $(function (){
    var ov = $( "#extra" ).val();
 
@@ -342,15 +337,7 @@ console.log(window.deleted);
 
      var delete_url = "metadata.php?subject_id=" + this_record_id[2] + "&delete_record=true&wintype=" + pop_status;
 
-     window.deleted = "yes";
-
      window.location.replace(delete_url);
-
-
-     
-
-
-
 
      return false;
 
