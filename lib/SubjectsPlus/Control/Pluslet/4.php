@@ -54,6 +54,11 @@ class Pluslet_4 extends Pluslet {
 
         return $this->_pluslet;
     }
+    
+    static function getMenuName()
+  {
+  	return _('FAQs');
+  }
 
 }
 

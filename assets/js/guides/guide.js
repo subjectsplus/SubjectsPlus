@@ -44,9 +44,7 @@ jQuery(document).ready(function(){
 
         
 	if (document.URL.indexOf('guide.php') > 0) {
-	    
-	  //  console.log("Appending a section"); 
-	    
+
 	    jQuery.ajax({
 		url: "helpers/section_data.php",
 		type: "POST",
@@ -904,14 +902,14 @@ function setupAllColorboxes()
     ////////////////
 
     jQuery(".showmeta").colorbox({
-        iframe: true ,
+        iframe: true,
         innerWidth:960,
         innerHeight:600,
-	fastIframe:false,
 
         onClosed:function() {
-	   // Refresh or else you'll be editing a zombie guide
-           location.reload();
+            //reload window to show changes
+
+            //window.location.href = window.location.href;
 
         }
     });
@@ -923,13 +921,14 @@ function setupAllColorboxes()
     ////////////////
 
     jQuery(".showrecord").colorbox({
-        iframe: false,
+        iframe: true,
         innerWidth:"80%",
         innerHeight:"90%",
 
         onClosed:function() {
-
             //change title potentially & shortform for link
+
+
         }
     });
 
@@ -940,12 +939,11 @@ function setupAllColorboxes()
     ////////////////
 
     jQuery(".arrange_records").colorbox({
-        iframe: false,
+        iframe: true,
         innerWidth:"80%",
         innerHeight:"90%",
 
         onClosed:function() {
-	
             //reload window to show changes
             //window.location.href = window.location.href;
         }
@@ -1258,6 +1256,9 @@ function makeAddSection( lstrSelector )
 				       data: { action : 'create' },
 				       dataType: "html",
 				       success: function(html) {
+					   console.log("response:");
+					   console.log(html);
+					   console.log(lintSelected);
 					   $('div#tabs-' + lintSelected).append(html);
 					   $(document).scrollTop($('body').height());
 				       }

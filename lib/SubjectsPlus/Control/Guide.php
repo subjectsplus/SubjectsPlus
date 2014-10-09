@@ -615,11 +615,7 @@ class Guide
         if (isset($delete_result2)) {
             // message
             if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
-	   // $this->_message = "<div class=\"feedback\">"; 
-
-            $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
-	    
-	   // $this->_message += "</div>"; 
+                $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
             } else {
                 $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.");
             }
