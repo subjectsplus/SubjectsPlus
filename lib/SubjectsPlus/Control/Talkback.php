@@ -275,7 +275,7 @@ $last_mod = _("Last modified: ") . lastModded("talkback", $this->_talkback_id);
 
 makePluslet(_("Answered By"), $answerer, "no_overflow");
 
-makePluslet(_("Is this guide live?"), $is_live, "no_overflow");
+makePluslet(_("Is this comment live?"), $is_live, "no_overflow");
 
 makePluslet(_("Site Tags (relevant library sites)"), $tb_tags, "no_overflow");
 

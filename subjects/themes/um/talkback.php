@@ -18,17 +18,6 @@
 
 use SubjectsPlus\Control\Querier;
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-$subjects_theme = "um";
-
-if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/talkback.php");
-  exit; 
-}
-
 $db = new Querier;
     
 /* Set local variables */
@@ -47,6 +36,8 @@ $show_talkback_face = 1;
 $form_action = "talkback.php"; // this can be overriden below
 $bonus_sql = ""; // ditto
 $set_filter = ""; // tritto
+$tb_bonus_css = ""; //fritto
+$cat_filters = ""; // hawaii five-o
 
 /////////////////////////
 // Deal with multiple talkback instances
@@ -90,6 +81,29 @@ if (isset($all_tbtags)) {
 
   } else {
 
+  }
+}
+
+///////////////////////
+// Our Topic Filters
+///////////////////////
+
+if (isset($all_cattags)) {
+  
+  foreach ($all_cattags as $value) {
+    if (isset($_GET["c"]) && $value == $_GET["c"]) {
+      $tag_class = "ctag-on";
+      $cat_filter = $value;
+    } else {
+      $tag_class = "";
+    }
+    $cat_filters .= " <a href=\"talkback.php?tbtag=$set_filter&c=$value\" class=\"$tag_class\">$value</a>";
+  }
+}
+
+if (isset($_GET['c'])) {
+  if (in_array($_GET['c'], $all_cattags)) {
+    $bonus_sql .= " AND cattags LIKE '%" . $_GET['c'] . "%'";
   }
 }
 
@@ -252,7 +266,6 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 
 }
 
-
 /* Select all Records, either current or previous year*/
 
 $result_count = count($our_result);
@@ -320,47 +333,46 @@ if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 }
 
 
-include("includes/header.php");
+include("includes/header_um.php");
 
 ?>
 <br />
 <div class="pure-g">
 <div class="pure-u-1 pure-u-md-2-3">
+<div class="breather" style="max-width: 650px;">
 	<?php print $feedback . $stk_message; ?>
-	<div class="pluslet_simple no_overflow">
 
 		<?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
 			
 
 		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members</p>"); ?>
-	</div>
-	<div class="pluslet_simple no_overflow">
+
+		<div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
 		<?php print $comment_header . $results; ?>
-	</div>  
+
 </div>
-<div class="pure-u-1 pure-u-md-1-3">
-	<!-- start pluslet -->
-	<div class="pluslet">
-		<div class="titlebar"><div class="titlebar_text"><?php print _("Tell Us What You Think"); ?></div></div>
-		<div class="pluslet_body">
-			<p><span class="comment_num">!</span><strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
-			<br />
-			<form id="tellus" action="talkback.php" method="post">
-				<p class="zebra oddrow"><strong><?php print _("your name (optional):"); ?></strong><br />
-					<input type="text" name="name" size="20" value="<?php print $this_name; ?>" /></p>
+</div>
+<div class="pure-u-1 pure-u-md-1-3 database-page"  style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_stairwell.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
+    <div class="breather" style="max-width: 300px;">
+      <br />
+      <form id="tellus" action="<?php print $form_action; ?>" method="post">
+        <p class="talkback_form <?php print $tb_bonus_css; ?>">
+          Need help <strong>now</strong>?  <a href="/ask-a-librarian/">Ask a Librarian</a>.<br /><br />
+          <strong><?php print _("Your comment:"); ?></strong><br />
 
-					<p class="zebra evenrow"><strong><?php print _("comment:"); ?></strong><br />
-						<textarea name="the_suggestion" cols="25" rows="4"><?php print $this_comment; ?></textarea></p>
+          <textarea name="the_suggestion" cols="26" rows="6"><?php print $this_comment; ?></textarea><br /><br />
+          <strong><?php print _("Your name (optional):"); ?></strong><br />
+          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" />
+          <br /><br />
+          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" />
+          <br /><br />
+          <input type="submit" name="submit_comment" value="<?php print _("Submit"); ?>" />
+          <br /></p>
+      </form>
 
-						<p class="zebra oddrow"><strong><?php print $stk; ?></strong><br />
-							<?php print _("Enter Number:"); ?> <input type="text" name="skill" size="2" /></p>
+      <br /><br />
 
-							<p class="zebra evenrow"><input type="submit" class="button" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
-						</form>
-					</div>
-				</div>
-				<!-- end pluslet -->
-				<br />
+    </div>
 
 </div>
 </div>
@@ -371,6 +383,6 @@ include("includes/header.php");
 // Load footer file
 ///////////////////////////
 
-			include("includes/footer.php");
+			include("includes/footer_um.php");
 
 			?>

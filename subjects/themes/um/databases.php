@@ -1,26 +1,15 @@
 <?php
 /**
- *   @file databases.php
- *   @brief Display the databases A-Z page
+ *   @file databases.php 
+ *   @brief themed override of db a-z page for U Miami
  *
  *   @author adarby
- *   @date jan 2012
+ *   @date oct 2014
  */
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\CompleteMe;
-use SubjectsPlus\Control\DbHandler;    
-
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-$subjects_theme = "um";
-
-if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/databases.php");
-  exit; 
-}
+use SubjectsPlus\Control\DbHandler;
 
 $db = new Querier;
     
@@ -100,7 +89,9 @@ $alphabet = getLetters("databases", $_GET["letter"], "", TRUE);
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-$rnew = $db->query($qnew);
+$newlist = "";
+
+if ($rnew = $db->query($qnew)) {
 
 $newlist = "<ul>\n";
 foreach ($rnew as $myrow) {
@@ -114,6 +105,10 @@ foreach ($rnew as $myrow) {
   $newlist .= "<li><a href=\"$db_url$myrow[0]\">$myrow[0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
+
+}
+
+
 
 // Intro text
 $intro = "";
@@ -154,7 +149,7 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-include("includes/header.php");
+include("includes/header_um.php");
 
 // Our version 2 vs version 3 styles choice
 
@@ -167,48 +162,98 @@ if (isset ($v2styles) && $v2styles == 1) {
   print "version 3 styles not set up yet";
 }
 
+// Trial Databases //
+// UM trial databases--requires DB_Trials in ctags field
+
+$qtrial = "select distinct title, location, access_restrictions, title.title_id as this_record
+        FROM title, location, location_title
+        WHERE ctags LIKE '%Database_Trial%'
+        AND title.title_id = location_title.title_id
+        AND location.location_id = location_title.location_id
+        ORDER BY title";
+
+$trial_list = "";
+
+if ($rtrial = $db->query($qtrial)) {
+$trial_list = "<ul>\n";
+  foreach ($rtrial as $myrow) {
+
+    // add proxy string if necessary
+    if ($myrow[2] != 1) {
+      $db_url = $proxyURL;
+    }
+
+    $trial_list .= "<li><a href=\"$db_url$myrow[1]\">$myrow[0]</a></li>\n";
+
+  }
+
+$trial_list .= "</ul>\n";
+
+} else {
+  $trial_list = "No trials at this time.";
+}
+
+
+// Legend //
+// <img src=\"$IconPath/lock_unlock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Unrestricted Resource\"> = Free Resource <br />\n
+
+$legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted Resource\"> =  " . _("Campus Faculty, Staff &amp; Students only") . "\n<br />
+<img src=\"$IconPath/information.png\" border=\"0\" alt=\"more information icon\" /> = " . _("Click for more information") . "<br /><br />
+<!--<img src=\"$IconPath/full_text.gif\" width=\"13\" height=\"13\" border=\"0\" alt=\"Some full text available\"> = " . _("Some full text") . "<br />\n-->
+<img src=\"$IconPath/camera.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes images\"> = " . _("Images") . "<br />\n
+<img src=\"$IconPath/television.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes video\"> = " . _("Video files") . "<br />\n
+<img src=\"$IconPath/sound.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes audio\"> = " . _("Audio files") . "<br />\n
+</p>\n";
 
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
 ?>
-
+<br />
 <div class="pure-g">
-<div class="pure-u-1 pure-u-md-2-3">
-
-      <?php print $layout; ?>
-
-</div>
-<div class="pure-u-1 pure-u-md-1-3 database-page">
-  <!-- start pluslet -->
-  <div class="pluslet">
-    <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
+  <div class="pure-u-1 pure-u-md-3-4">
+    <div class="breather">
+          <?php print $db_results; ?>
     </div>
-    <div class="pluslet_body">
+  </div>
+<div class="pure-u-1 pure-u-md-1-4 database-page"  style="background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg'); min-height: 500px; background-repeat: no-repeat;">
+
+  <!-- start tip -->
+  <div class="tip">
+      <h2><?php print _("Search Databases"); ?></h2>
           <?php
-          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", 30);
+          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", '');
           $input_box->displayBox();
           ?>
-    </div>
   </div>
-  <!-- end pluslet -->
-  <!-- start pluslet -->
-  <div class="pluslet">
-    <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Newest Databases"); ?></div>
-    </div>
-    <div class="pluslet_body"> <?php print $newlist; ?> </div>
-  </div>
-  <!-- end pluslet -->
+  <div class="tipend"> </div>
+  <!-- end tip -->
 
-  <div class="pluslet">
-    <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Key to Icons"); ?></div>
+      <?php if ($newlist) { ?>
+      <div class="tip">
+        <h2>5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
+        <?php print $newlist; ?>
+      </div>
+      <div class="tipend"></div>
+    <?php } ?>
+
+    <?php if ($trial_list) { ?>
+      <div class="tip">
+        <h2>Database Trials</h2>
+        <?php print $trial_list; ?>
+        <br />
+        <p style="line-height: 1.3em;">Trial demonstrations of fee-based subscription services under consideration.
+          Feedback:  <a href="mailto:d.roose@miami.edu">d.roose@miami.edu</a></p>
+      </div>
+      <div class="tipend"></div>
+    <?php } ?>
+    <div class="tip">
+      <h2>Key to Icons</h2>
+      <?php print $legend; ?>
     </div>
-    <div class="pluslet_body"> <?php global $all_ctags; print showIcons($all_ctags, 1); ?></div>
-  </div>
+    <div class="tipend"></div>
+
   <br />
 
 </div>
@@ -221,7 +266,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include("includes/um_footer.php");
 ?>
 
 <script type="text/javascript" language="javascript">

@@ -13,14 +13,20 @@ use SubjectsPlus\Control\StaffDisplay;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
     
-$page_title = "Library Staff";
-$description = "Library contact list.";
-$keywords = "staff list, librarians, contacts";
-
-
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+
+$subjects_theme = "um";
+
+if (isset($subjects_theme)) {
+  include("themes/$subjects_theme/staff.php");
+  exit; 
+}
+
+$page_title = "Library Staff";
+$description = "Library contact list.";
+$keywords = "staff list, librarians, contacts";
 
 $use_jquery = array("ui", "ui_styles");
 

@@ -447,7 +447,7 @@ class Config
 					//configurations
 					if( in_array( $lstrKey, array( 'all_tbtags' ) ) )
 					{
-						$lstrHTML .= " disabled />\n<span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
+						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
 										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Edit?" ) . "</a></span>\n";
 						break;
 					}
