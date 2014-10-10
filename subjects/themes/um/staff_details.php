@@ -1,30 +1,20 @@
 <?php
 /**
  *   @file services/staff_details.php
- *   @brief
+ *   @brief  this is the um child theme
  *
  *   @author adarby
- *   @date July 1, 2010
+ *   @date 2014
  *   @todo
  */
 
 use SubjectsPlus\Control\Querier;
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-$subjects_theme = "um";
-
-if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/staff.php");
-  exit; 
-}
+$page_title = "Library Staff Details";
+$subfolder = "services";
 
 $db = new Querier;
     
-$page_title = "Library Staff Details";
-$subfolder = "services";
 
 // Get array of acceptable users
 
