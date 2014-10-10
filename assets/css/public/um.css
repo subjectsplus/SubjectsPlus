@@ -42,6 +42,7 @@ a {
 
 a:link {
     color: #40659B;
+    text-decoration: none;
 }
 
 a:visited {
@@ -66,7 +67,7 @@ color: #333333;
     font-weight: normal;
     padding: 0.2em 0 0.2em 1em;
     text-shadow: 0 2px 3px #CCCCCC;
-    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/h1_bg_green.png");
+    background-image: url("//library.miami.edu/wp-content/themes/umiami/images/h1_bg_green.png");
     background-repeat: repeat-x;
     background-color: #d3d78e;
     text-shadow: 0 1px 3px #EFEFEF;
@@ -80,7 +81,9 @@ h2 {
     font-size: 1.2em;
     letter-spacing: 1px;
     color: #333;
-
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.3em;
+    margin: 1em 0;
 }
 
 h3 {
@@ -303,6 +306,8 @@ ul#nav_menu div {
 .wrapper-full {
     max-width: 1100px;
     margin: 0 auto;
+    font-size: 1.1em;
+    line-height: 1.8em;
 }
 
 #guide_nav_tools {
@@ -467,6 +472,11 @@ ul.ui-autocomplete li a{
   cursor:pointer;
 }
 
+.ui-helper-hidden-accessible {
+    display: none;
+
+}
+
 /* Autocomplete Styles */
 
 /* From the themeroller */
@@ -588,6 +598,47 @@ div.pluslet form {
     margin: 0 1em 1em 0;
     padding: 3px;
     position: relative;
+}
+
+/* TalkBack */
+
+.talkback_form {
+    background-color: #d1d688;
+    border: 1px solid #a2ad00;
+    border-radius: 5px;
+    margin-right: 1em;
+    padding: 1em;
+}
+.talkback_form_music {
+    background-color: #c9d6e0;
+    border: 1px solid #7c98ae;
+}
+.tellus_item {
+    background-color: #fff;
+    border-bottom: 1px dashed #c8c7bc;
+    clear: both;
+    display: block;
+    float: left;
+    margin: 1em 0;
+    min-width: 95%;
+    padding: 0.5em;
+}
+.comment_num {
+    background-image: url("//library.miami.edu/wp-content/themes//umiami/images/comment_box.png");
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-size: 14pt;
+    height: 34px;
+    margin-right: 1em;
+    position: relative;
+    text-align: center;
+    width: 39px;
+}
+.tellus_comment {
+    background-color: #fff;
+    margin: 0;
+    padding: 0.5em;
 }
 
 /* FOOTER */
@@ -841,6 +892,12 @@ table.item_listing th {
 table.istem_listing h2 {
     background-color: #fff;
     border: medium none;
+}
+
+.faq_filter {
+    font-size: 0.8em;
+    margin: 1em;
+    text-align: center;
 }
 
 /* //////////////////
