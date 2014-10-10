@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file faq.php
- *   @brief Display faqs
+ *   @brief Display faqs -- UM theme
  *
  *   @author adarby
  *   @date Sep 28, 2009
@@ -11,17 +11,6 @@
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
-
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-$subjects_theme = "um";
-
-if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/faq.php");
-  exit; 
-}
 
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
@@ -144,7 +133,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "Library FAQs";
 }
 
-include("includes/header.php");
+include("includes/header_um.php");
 
 if ($displaytype == "search") {
 
@@ -280,73 +269,65 @@ foreach ($collections_result as $myrow1) {
 //$num_faqs = $row_count - 1;
 // print "<p style=\"background-color: #ffffcf;\"><strong>Note:</strong>  $num_faqs FAQs displayed.  Search <strong>all FAQs</strong> with the boxes to the right.</p><br />";
 
+if (isset($_GET["page"]) && $_GET["page"] == "all") {
+  print "<div class=\"faq_filter\">" . _("All FAQs displayed.  Search or browse to limit ") . " &raquo;</div>";
+} else {
+  print "<div class=\"faq_filter\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</div>";
+}
 
-if (isset($index)) {
+if (isset($index) && $index != "") {
 
-    print "
-		<div class=\"pluslet_simple\">
-
-		<div class=\"faq_filter\"><a href=\"#rdiv\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</a></div>
-		$index\n";
-    print "</div><br /><br />";
+    print "$index<br /><br />";
 }
 
 
 print $results; ?>
 </div>
-<div class="pure-u-1  pure-u-md-1-3">
+<div class="pure-u-1  pure-u-md-1-3 database-page" style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
   <a name="rdiv"></a>
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Search FAQs"); ?></div>
-        </div>
-        <div class="pluslet_body" style="padding-right: 0; margin-right: 0;">
+    <div class="tip">
+            <h2><?php print _("Search FAQs"); ?></h2>
             <form action="faq.php" method="post" autocomplete="on" class="pure-form">
                 <p>
                     <?php
-                    $input_box = new CompleteMe("quick_search", "faq.php", "faq.php?faq_id=", "Quick Search", "faq", 40);
+                    $input_box = new CompleteMe("quick_search", "faq.php", "faq.php?faq_id=", "Quick Search", "faq", '');
                     $input_box->displayBox();
                     ?>
 
                     <br />
             </form>
-        </div>
     </div>
-
+    <div class="tipend"> </div>
     <?php 
     if (isset($guide_string)) { ?>
 
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Browse FAQs by Subject"); ?></div>
-        </div>
-        <div class="pluslet_body" style="padding-right: 0; margin-right: 0;">
+    <div class="tip">
+            <h2><?php print _("Browse FAQs by Subject"); ?></h2>
             <form action="faq.php" method="post">
 <?php print $guide_string; ?>
                 <input type="submit" value="go" class="form_button button" />
             </form>
-        </div>
-    </div>
-
+    </tip>
+    <div class="tipend"> </div>
 
     <?php } ?>
 
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Browse FAQs by Collection"); ?></div>
-        </div>
-        <div class="pluslet_body">
+    <div class="tip">
+            <h2><?php print _("Browse FAQs by Collection"); ?></h2>
+
             <ul>
 <?php print $coll_items; ?>
             </ul>
         </div>
+        <div class="tipend"> </div>
+
     </div>
 
 </div>
 </div>
 <?php
 
-include("includes/footer.php");
+include("includes/footer_um.php");
 
 ?>
 <script type="text/javascript">
