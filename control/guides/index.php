@@ -83,8 +83,6 @@ if ($num_rows > 0) {
 }
 ?>
 
-<<<<<<< HEAD
-=======
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
 
 <script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
@@ -103,8 +101,6 @@ $('#guides').select2();
 });
 </script>
 
-
->>>>>>> 0f7d54ed5ce6e46dee5a3aa72c120f6533f5fa7d
 <div class="pure-g">
   <div class="pure-u-1-3">
     <div class="pluslet">
