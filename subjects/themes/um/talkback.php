@@ -19,6 +19,8 @@
 use SubjectsPlus\Control\Querier;
 
 $db = new Querier;
+
+$use_jquery = array();
     
 /* Set local variables */
 
