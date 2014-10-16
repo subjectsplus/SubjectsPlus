@@ -266,7 +266,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 // Load footer file
 ///////////////////////////
 
-include("includes/um_footer.php");
+include("includes/footer_um.php");
 ?>
 
 <script type="text/javascript" language="javascript">
