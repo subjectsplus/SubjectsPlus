@@ -4,41 +4,41 @@ namespace SubjectsPlus\Control;
 class LibGuidesImport {
 
   private $_guide_id;
-  private $_libguides_xml; 
+  private $_libguides_xml;
   private $_guide_owner;
-  
+
 
   public function setGuideOwner($guide_owner) {
-    $this->_guide_owner = $guide_owner; 
+    $this->_guide_owner = $guide_owner;
   }
   public function getGuideOwner() {
 
-    return $this->_guide_owner; 
+    return $this->_guide_owner;
   }
 
   public function setLibGuidesXML($libguides_xml) {
-    $this->_libguides_xml = $libguides_xml; 
+    $this->_libguides_xml = $libguides_xml;
   }
 
   public function getLibGuidesXML() {
     $this->_libguides_xml;
   }
-  
+
   public function setGuideID($guide_id) {
-    $this->_guide_id = $guide_id;     
+    $this->_guide_id = $guide_id;
   }
-  
+
   public function getGuideID() {
 
-    return $this->_guide_id; 
+    return $this->_guide_id;
   }
 
   public function download_images($url) {
     // This method creates a folder for a guide image in assets, downloads the image , and then returns the new URL for that image
-    
+
     global $AssetPath;
-    
-    // Download the image with CURL 
+
+    // Download the image with CURL
 
     $ch = curl_init();
     $timeout = 5;
@@ -48,90 +48,91 @@ class LibGuidesImport {
     $data = curl_exec($ch);
     curl_close($ch);
 
-    // Create a path for the iamge 
+    // Create a path for the iamge
     $dir_name =  dirname(dirname(dirname(dirname(__FILE__)))) . "/assets/images/" . $this->_guide_id . "/";
-    
-    // Make the guide's asset directory if needed 
+
+    // Make the guide's asset directory if needed
     if (!is_dir($dir_name))
     {
       mkdir($dir_name, 0777, true);
     }
 
 
-    // Write the file 
+    // Write the file
     $file_name = substr( $url, strrpos( $url, '/' )+1 );
     $file = fopen( $dir_name .  $file_name, 'w+');
-    fwrite($file, $data); 
+    fwrite($file, $data);
     fclose($file);
-    
 
-    // Return the new URL 
+
+    // Return the new URL
     $img_path = $AssetPath . "/images/" . $this->_guide_id . "/" . $file_name;
 
-    return $img_path; 
+    return $img_path;
 
   }
 
   public function getStaffID ($email_address) {
-    // This method takes an email address and returns the subjectsplus staff id for the user 
+    // This method takes an email address and returns the subjectsplus staff id for the user
 
-    $db = new Querier; 
-    $staff_id = $db->query("SELECT staff_id FROM staff WHERE email = '$email_address'"); 
-    
+    $db = new Querier;
+    $staff_id = $db->query("SELECT staff_id FROM staff WHERE email = '$email_address'");
+
     return $staff_id[0][0];
-    
+
   }
 
   public function output_guides($lib_guides_xml_path) {
-    
+
     $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
     $guide_names = $libguides_xml->xpath("/LIBGUIDES[1]/GUIDES[1]/GUIDE/NAME");
-    
-    $id_count = 1; 
-    
 
-    echo "<select class=\"guides\" >"; 
-    
+    $id_count = 1;
+
+
+    echo "<select class=\"guides\" >";
+
     foreach ($guide_names as $guide) {
-      
+
       echo "<option value=\"$id_count\">$guide[0]</option>";
       $id_count++;
 
     }
-    
-    echo "<select>"; 
+
+    echo "<select>";
 
   }
 
 
   public function guide_imported() {
-    
+
     $guide_id = $this->getGuideID();
 
 
-    $db = new Querier; 
-    
+    $db = new Querier;
+
+
+
     $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '$guide_id'");
-    
-    return $guide;     
-    
-  }
-  
-  
-  
-    public function guide_dupe($guide_title) {
-    
-    $guide_id = $this->getGuideID();
 
-	
-    $db = new Querier; 
-    
-    $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject = '$guide_title'");
-    
-    return $guide;     
-    
+    return $guide;
+
   }
-  
+
+
+
+    public function guide_dupe($guide_name) {
+
+
+
+
+    $db = new Querier;
+    $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject = '$guide_name'");
+
+    return $guide;
+
+  }
+
   public function load_libguides_xml($lib_guides_xml_path) {
 
 
@@ -140,28 +141,28 @@ class LibGuidesImport {
     $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
 
     // zip combines arrays in fancy way
-    // From the python docs: "This function returns a list of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables. The returned list is truncated in length to the length of the shortest argument sequence." 
+    // From the python docs: "This function returns a list of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables. The returned list is truncated in length to the length of the shortest argument sequence."
 
     $guide_id = $this->getGuideID();
 
-    //Get the guide owner's email address   
-    $guide_owner_id = $libguides_xml->xpath("//GUIDE[$guide_id]/OWNER_ACCOUNT_ID");
-    $guide_owner_email = $libguides_xml->xpath("//ACCOUNT_ID[.=\"$guide_owner_id[0]\"]/following-sibling::EMAIL");
-    $this->setGuideOwner($guide_owner_email[0]); 
+          //Get the guide owner's email address
+          $guide_owner_id = $libguides_xml->xpath("//GUIDE[$guide_id]/OWNER_ACCOUNT_ID");
+          $guide_owner_email = $libguides_xml->xpath("//ACCOUNT_ID[.=\"$guide_owner_id[0]\"]/following-sibling::EMAIL");
+          $this->setGuideOwner($guide_owner_email[0]);
 
 
-    $subject_values = zip($libguides_xml->xpath("//GUIDE[$guide_id]/NAME"), 
-			  $libguides_xml->xpath("//GUIDE[$guide_id]/GUIDE_ID"), 
-			  $libguides_xml->xpath("//GUIDE[$guide_id]/LAST_UPDATE"), 
-			  $libguides_xml->xpath("//GUIDE[$guide_id]/DESCRIPTION"), 
-			  $libguides_xml->xpath("//GUIDE[$guide_id]/PAGES"),
-                          $libguides_xml->xpath("//GUIDE[$guide_id]/PAGES//LINKS"),
-			  $libguides_xml->xpath("//GUIDE[$guide_id]/OWNER_ACCOUNT_ID"),
-			  $libguides_xml->xpath("//GUIDE[$guide_id]/TAGS")
+              $subject_values = zip($libguides_xml->xpath("//GUIDE[$guide_id]/NAME"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/GUIDE_ID"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/LAST_UPDATE"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/DESCRIPTION"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/PAGES"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/PAGES//LINKS"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/OWNER_ACCOUNT_ID"),
+              $libguides_xml->xpath("//GUIDE[$guide_id]/TAGS")
 
-			  );
-    
-    return $subject_values; 
+          );
+
+          return $subject_values;
 
   }
 
@@ -172,13 +173,10 @@ class LibGuidesImport {
 
     $db = new Querier;
     
-    
-    $guide_id = $this->getGuideID();
-    
 
     $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
     
-    $link_values = $libguides_xml->xpath("//GUIDE[$guide_id]//LINKS/LINK");
+    $link_values = $libguides_xml->xpath("//GUIDE[$this->_guide_id]//LINKS/LINK");
     
     $db = new Querier;
 
@@ -267,7 +265,14 @@ class LibGuidesImport {
   
   
     $db = new Querier;
-	$subject_id = $subject_values[0][1]->__toString();
+    $subject_id = $subject_values[0][1]->__toString();
+
+
+
+    if ($this->guide_imported()[0][0] != 0) {
+
+        exit;
+    }
 	
 	
     foreach($subject_values as $subject) { 
@@ -279,7 +284,13 @@ class LibGuidesImport {
       // Escape the apostrophes in the guide name 
 
       $guide_name = str_replace("'", "''",$subject[0]);
-      
+      $guide_check = $this->guide_dupe($guide_name);
+
+        if ($guide_check[0][0] != 0) {
+            $dupe_message = "It looks like this guide has already been imported.";
+            return $dupe_message;
+        }
+
       if ($subject[0] != null) {
       
 
@@ -362,7 +373,7 @@ class LibGuidesImport {
           $section_uniqid = $section_index . rand();
           
           $section_index++;
-          
+
 
           if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
             //error_log("Inserted section");

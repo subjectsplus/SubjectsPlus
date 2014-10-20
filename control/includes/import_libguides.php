@@ -10,32 +10,35 @@ include('../includes/functions.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LibGuidesImport;
 
-/*
-$libguides_importer = new LibGuidesImport;
-
-$libguides_importer->setGuideID($_POST['libguide']);
-
-
-$libguides_xml = $libguides_importer->load_libguides_xml('libguides.xml');
-$libguides_importer->import_libguides($libguides_xml);
-
-$libguides_xml = $libguides_importer->load_libguides_links_xml('libguides.xml');
-
-*/
-
 
 $libguides_importer = new LibGuidesImport;
 
+
+// Set the guide id 
 $libguides_importer->setGuideID($_POST['libguide']);
 
+
+// Load all the links from the XML
 $libguides_xml = $libguides_importer->load_libguides_links_xml('libguides.xml');
 
-//echo "Guide Imported: " . $libguides_importer->guide_imported()[0][0]; 
-
-
-
+// Load the XML
 $libguides_xml = $libguides_importer->load_libguides_xml('libguides.xml');
+
+
+// Import the guides with the XML you just loaded
 $libguides_importer->import_libguides($libguides_xml);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
