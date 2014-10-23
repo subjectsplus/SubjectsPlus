@@ -2,9 +2,10 @@
 
 /* reset - blueprint mod */
 * {padding: 0; margin: 0;}
+
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}
-body {line-height: 1.5;}
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table { border-collapse: separate; border-spacing: 0; }
 caption, th, td { text-align: left; font-weight: normal; }
@@ -13,29 +14,29 @@ table, td, th { vertical-align:top; }
 a img { border: none; }
 
 /* no's*/
-.no-border{border: 0 !important}
-.no-margin{margin: 0 !important}
-.no-bg{background: none !important}
-.no-pad-left{padding-left: 0 !important}
-.no-pad-right{padding-right: 0 !important}
+.no-border{border: 0 !important;}
+.no-margin{margin: 0 !important;}
+.no-bg{background: none !important;}
+.no-pad-left{padding-left: 0 !important;}
+.no-pad-right{padding-right: 0 !important;}
 
 body {
-    margin: 0 0 0 5px;
+    margin: 0 auto;
     padding: 0;
     font-family: sans-serif;
     font-size: 0.8125em;
     text-align: left;
     line-height: 1.5em;
     color: #000;
-    margin-left: auto;
-    margin-right: auto;
     background-color: #E1E1DB;
     background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/greydient.png");
     background-repeat: repeat-x;
     border-top: 3px solid #FFFFFF;   
 }
 
-.visible-desktop {display: none;}
+
+.visible-desktop {display: none;  /* Hide on responsive mode */ }
+
 a {
     color: #40659B;
 }
@@ -49,19 +50,14 @@ a:visited {
     color: #551A8B;
 }
 
-a:hover {
+a:hover,
+a:active,
+a:focus {
     color: #cc6666;
 }
 
-.button-menu {
-    color: #fff !important;
-    background-color: #333;
-     border-radius: 4px;
-     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
 h1 {
-color: #333333;
+    color: #333333;
     font-family: Helvetica,Arial,sans-serif;
     font-size: 1.6em;
     font-weight: normal;
@@ -78,7 +74,6 @@ color: #333333;
 
 h2 {
     font-family:sans-serif;
-    font-size: 1.2em;
     letter-spacing: 1px;
     color: #333;
     border-bottom: 1px solid #e0e0e0;
@@ -112,30 +107,29 @@ img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    /* height: 70px; */
-    margin: 1em auto;
+    margin: 1em auto 0 auto;
     padding: 3px;
     text-align: left;
 }
 
-html>body #header-content {
-
+.header-content {
+    padding: 20px 15px 15px 15px;
 }
+
 
 #header-content img {
     float: left;
 }
+
 #header-content .header-text {
-      float: left;
-  padding: 2px 4px;
-  background-color: #fff;
-
-  color: #333;
-  line-height: 16px;
-  font-size: 12px;
-  margin: 3px 0 0 7px;
-  text-align: left;
-
+    float: left;
+    padding: 2px 4px;
+    background-color: #fff;
+    color: #333;
+    line-height: 16px;
+    font-size: 12px;
+    margin: 3px 0 0 7px;
+    text-align: left;
 }
 
 #header-content a {
@@ -147,42 +141,20 @@ html>body #header-content {
     color: #F37421;
 }
 
-#menu_button {
-    display: none;
+.button-menu {      /* Visible on responsive mode only */
+    color: #fff !important;
+    background-color: #333;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Header Search */
 
 #search_container {
-    float: right;
-    margin-top: 2px;
-}
-#searchy {
-    background-color: #d1d688;
-    border: 0 none;
-    float: left;
-}
-#searchy2 {
-    background-color: #d1d688;
-    border: 0 none;
-    float: left;
-}
-#topsearch_button2 {
-    background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    border: 0 none;
-    color: #fe6518;
-    cursor: pointer;
-    display: block;
-    float: left;
-    font-size: 0;
-    height: 16px;
-    margin: auto 0;
-    overflow: hidden;
+    text-align: right;
     position: relative;
-    right: 2px;
-    top: 2px;
-    width: 19px;
 }
+
 #searchzone {
     background-color: #d1d688;
     border: 1px solid #a2ad00;
@@ -190,27 +162,43 @@ html>body #header-content {
     height: 16px;
     padding: 2px 2px 3px;
 }
+
+#searchy {
+    background-color: #d1d688;
+    border: 0 none;
+    float: left;
+}
+
+#topsearch_button2 {
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: none;
+    color: #fe6518;
+    cursor: pointer;
+    display: block;    
+    height: 16px;
+    font-size: 0;
+    margin: auto 0;
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    width: 19px;
+}
+
 #search_options {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: none repeat scroll 0 0 #d1d688;
+    background-color: #d1d688;
     border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-color: -moz-use-text-color #a2ad00 #a2ad00;
-    border-image: none;
+    border-bottom-right-radius: 3px;   
+    border-left: 1px solid #a2ad00;
     border-right: 1px solid #a2ad00;
-    border-style: none solid solid;
-    border-width: medium 1px 1px;
+    border-bottom: 1px solid #a2ad00;    
     display: none;
     font-size: 12px !important;
     margin: 0;
-    padding: 2px 0 0;
-    position: absolute;
-    right: 1em;
+    padding: 2px 0 0;    
     text-align: left;
-    top: 35px;
+    position: absolute;
+    left: 0.25em;
+    top: 24px;
     width: 150px;
     z-index: 2000;
 }
@@ -227,10 +215,14 @@ html>body #header-content {
     margin: 0 !important;
     min-width: 135px;
     padding: 0.2em 0 !important;
-    position: relative;
     text-align: left;
     vertical-align: middle;
 }
+
+#search_options li.list-last {
+    border: none;
+}
+
 #search_options li:hover, #search_options li.active {
     background-color: #a2ad00;
     color: #fff;
@@ -238,26 +230,29 @@ html>body #header-content {
 #search_options li input {
     margin: 0 1em;
 }
-#search_options li.active {
-}
+
 
 /* menu button; toggles in the spum_nav area */
 
 #menu_button {
     display: block;
-    float: right;
-    margin-right: 20px;
+    float: right; 
+    text-align: right;   
 }
+
+#menu_button a {
+        color: #fff;
+        text-transform: uppercase;
+    }
 
 /* black nav bar, spum_nav */
 
 #spum_nav {
     background-color: #333;
-    border-top: 0 none;
+    border: none;
     color: #fff;
     margin-top: 1em;
     padding-top: 0.5em;
-    text-align: center;
     display: none;
 }
 #spum_nav ul {
@@ -286,17 +281,18 @@ html>body #header-content {
     color: #f37421;
 }
 
-.nav_highlight {
-    background-color: transparent !important;
-    border: medium none;
+.nav_highlight { /* Fake orange button on nav - hidden on small */
+    background-color: none;
+    border: none;
+    text-transform: uppercase;
 }
 
 /* No mega menus for little screens, ever */
-ul#nav_menu div {
+ul#nav_menu.nav li div {
     display: none;
 }
 
-.mega_child {
+ul#nav_menu.nav li div.mega_child {
     display: none;
 }
 
@@ -308,6 +304,8 @@ ul#nav_menu div {
     margin: 0 auto;
     font-size: 1.1em;
     line-height: 1.8em;
+    background-color: #FFF;
+    padding: 5px;
 }
 
 #guide_nav_tools {
@@ -719,16 +717,6 @@ line-height: 24px;
     display: none;
 }
 
-#header-content {
-  margin-bottom: 0;
-}
-
-.wrapper-full {
-  background-color: #fff;
-  padding: 5px;
-
-}
-
 #letterhead {
     font-size: 14px;
     font-weight: normal;
@@ -900,6 +888,7 @@ table.istem_listing h2 {
     text-align: center;
 }
 
+
 /* //////////////////
 //  Media Queries 
 ////////////////// */
@@ -914,86 +903,26 @@ table.istem_listing h2 {
 
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) {
-
-}
-
-/* ≥ 1024px     .pure-u-lg-* */
-@media screen and (min-width: 64em) {
+    #menu_button {display:none;}
 
     .visible-desktop {display: inline-block;}
 
-    #spum_nav {
-        display: inline-block;
-    }
+    #spum_nav {display: inline-block;}
+
     /* override for shrunken menu */
     #spum_nav ul li {
      border-bottom: none;
      padding: 0;
+     list-style-type: none;
     }
 
-
-    #nav {
-      position: relative;
-      float: left;
-      background-color: #333;
-      color: #fff;
-      margin: 0px;
-      padding: 4px 4px;
-      border: 4px solid #fff;
-      width: 944px;
-    }
-
-
-    ul.nav > a {
-      text-decoration: none;
-      color: #fff;
-      padding: 5px;
-
-    }
-
-    ul.nav > a:hover {
-      color: #f37421;
-    }
-
-    .nav_highlight {
-        background-color: #F37421 !important;
-        border-left: 4px solid #fff;
-    }
-
-    ul {
-      margin-left: 1em;
-    }
-
-    ul.nav > li {
-      position: relative;
-      display: inline-block;
-      text-transform: none;
-      /* IE hack */
-      zoom: 1;
-      *display:inline;
-    }
-
-    #menu_button {display:none;}
-
-    #menu_button a {
-        color: #fff;
-    }
-
-    /* make 'er wide for better clickability */
-    ul.nav > a {
-      margin: 2px 0;
-      font-size: 14px;
-      margin-right: 20px;
-      font-family: Arial, Helvetica, Verdana;
-      font-weight: normal;
-
-    }
-
-    li.last-child {
-        float: right;
+    #spum_nav a {    
+    padding: 10px 5px;    
     }
 
     /* Mega Menus! */
+
+    ul#nav_menu {padding-left: 0;}
 
     ul#nav_menu div {
         display: none;
@@ -1004,31 +933,43 @@ table.istem_listing h2 {
         font-size: 0;
         text-decoration: none;
     }
+
+    #nav_menu li {float: left;}
+
+    #nav_menu li.mega {
+        position: relative;
+        display: inline;
+    }
+    
     #nav_menu li a.selected_href {
         color: #f37421;
     }
-    #nav_menu li.last-child a.selected_href {
+
+    #nav_menu li.last-child a.selected_href,
+    #nav_menu li.last-child a:link,
+    #nav_menu li.last-child a:visited {
         color: #fff;
     }
+
+
+    #nav_menu li.last-child a:hover {
+        color: #333;
+    }
+
+
     #nav_menu li.research {
-        margin-left: 5em;
+        margin-left: 0;
     }
     ul#nav_menu li.hovering div {
         display: block;
     }
     div.mega_child {
-        -moz-border-bottom-colors: none;
-        -moz-border-left-colors: none;
-        -moz-border-right-colors: none;
-        -moz-border-top-colors: none;
+        border-right: 4px solid #fff;
+        border-left: 4px solid #fff;
+        border-bottom: 1px solid #fff;
         background-color: #e1e1db;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
-        border-color: -moz-use-text-color #fff #fff;
-        border-image: none;
-        border-right: 4px solid #fff;
-        border-style: none solid solid;
-        border-width: medium 4px 4px;
         box-shadow: 0 5px 3px rgba(0, 0, 0, 0.5);
         color: #333 !important;
         font-family: Arial,Helvetica,sans-serif !important;
@@ -1038,25 +979,45 @@ table.istem_listing h2 {
         overflow: hidden;
         padding: 0;
         position: absolute;
-        right: -5px;
+        top: 31px;
         text-align: left;
-        text-transform: none !important;
-        top: 32px;
-        width: 500px;
         z-index: 10001 !important;
     }
+
+    div.mega_child.mega-right {
+         right: -200px;         
+    }
+
+     div.mega_child.mega-right-special,
+     div.mega_child.mega-right-special2 {
+         right: 0px;         
+    }
+
+    div.mega_child.mega-left {
+         left: 0;
+    }
+
+    div.mega_child.mega-left-special {
+        left: -50px;
+    }
+    
+    div.mega_child.mega-sm {width: 350px;}
+    div.mega_child.mega-md {width: 380px;}
+    div.mega_child.mega-lg {width: 535px;}
+
+
     div.mega_child ul {
         float: left;
         margin-top: 0.5em !important;
         text-align: left !important;
     }
-    div.mega_child ul li {
+    #spum_nav div.mega_child ul  li {
         border-bottom: 1px solid #fff;
         display: block !important;
         font-family: Arial,Helvetica,sans-serif !important;
         font-weight: 400 !important;
         list-style: none outside none;
-        margin: 10px !important;
+        margin: 10px 10px 0 10px;
         padding: 0 !important;
         text-transform: none !important;
     }
@@ -1067,8 +1028,8 @@ table.istem_listing h2 {
         font-weight: bold;
         padding: 0.5em 0 !important;
     }
-    div.mega_child ul li.last {
-        border: medium none;
+    #spum_nav div.mega_child ul li.last {
+        border: none;
     }
     div.mega_child ul li a:hover {
         background-color: #f37421 !important;
@@ -1098,15 +1059,14 @@ table.istem_listing h2 {
     }
     div.mega_feature {
         background-color: transparent;
-        border: medium none;
+        border: none;
         display: block;
         float: left;
         line-height: 1.2em;
         margin: 1em 1em 0 2em;
         min-height: 100px;
         padding: 1em;
-        position: relative;
-        text-align: center;
+        text-align: left;
         width: 100px !important;
     }
     div.mega_feature img {
@@ -1114,6 +1074,8 @@ table.istem_listing h2 {
         border: 4px solid #ffffff;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
         padding: 0.3em;
+        margin-bottom: 10px;
+        display: block;
     }
     div.megasearchzone {
         background-color: transparent;
@@ -1124,14 +1086,13 @@ table.istem_listing h2 {
         margin: 1em;
         min-height: 20px;
         padding: 0 1em;
-        position: relative;
     }
     div.megasearchzone > form {
         font-size: 1.2em;
         padding: 5px 0;
     }
     div.megasearchzone > p {
-        padding: 0.8em;
+        padding: 0.8em 0;
     }
     ul.mega_spotlight {
         background-color: transparent;
@@ -1177,6 +1138,96 @@ table.istem_listing h2 {
     }
 
     /* end mega */
+
+    .megasearchzone form select {font-size: 12px; height: 24px;} 
+    .megasearchzone form input[type] {
+        font-size: 12px; 
+        text-align: center;
+        cursor: default;
+        border-radius: 4px;
+        padding: 0 5px;
+        border: 1px solid #999;
+        box-shadow: none;
+        background-color: #f2f2f2;
+        height: 22px;
+        vertical-align: middle; }
+
+    #nav_menu li.last-child {
+        float: right;        
+    }
+
+     .nav_highlight { /* Fake orange button on nav - display */
+        background-color: #F37421 !important;
+        text-transform: none;        
+    }
+    
+}
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+   
+    ul#nav_menu {padding-left: 20px;}
+
+   div.mega_child.mega-right,
+   div.mega_child.mega-right-special {
+         left: -100px;
+    }
+
+    div.mega_child.mega-left-special {
+        left: 0;
+    }
+
+    #spum_nav a {    
+    padding: 10px;    
+    }
+
+    #nav_menu li.research {
+        margin-left: 5em;
+    }
+
+    .nav_highlight { /* Fake orange button on nav - display */
+        border-left: 4px solid #FFF;
+    }
+
+    #nav {
+      position: relative;
+      float: left;
+      background-color: #333;
+      color: #fff;
+      margin: 0px;
+      padding: 4px 4px;
+      border: 4px solid #fff;
+      width: 944px;
+    }
+
+
+    ul.nav > a {
+      text-decoration: none; /* make 'er wide for better clickability */
+      color: #fff;
+      padding: 5px;
+      margin: 2px 20px 2px 0;
+      font-size: 14px;
+      font-family: Arial, Helvetica, Verdana;
+      font-weight: normal;
+    }
+
+    ul.nav > a:hover {
+      color: #f37421;
+    }
+
+    
+    ul.nav > li {
+      position: relative;
+      display: inline-block;
+      text-transform: none;
+      /* IE hack */
+      zoom: 1;
+      *display:inline;
+    }
+
+    ul {
+      margin-left: 1em;
+    }
 
     .tip {
         width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
