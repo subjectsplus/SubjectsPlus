@@ -1,8 +1,9 @@
 
-</div>
-</div>
-</div>
-</div>
+</div> <!--end #body_inner_wrap-->
+</div> <!--end .pure-u-1-->
+</div> <!--end .pure-g -->
+</div> <!--end .wrapper-full-->
+
 <?php
 if (!isset($our_site)) {$our_site="um";}// just in case
 
@@ -54,6 +55,7 @@ switch ($our_site) {
 	     </div> <!-- end pure-g -->
       </div> <!-- end container-fluid -->
 </div> <!-- end wide-footer -->
+
 </body>
 </html>
 <script type="text/javascript" language="javascript">
@@ -111,12 +113,12 @@ var $window = $(window);
 function checkWidth() {
   windowsize = $window.width();
 
-  if (windowsize >= 1028) {
+  if (windowsize >= 600) {
     $("#spum_nav").show();
     $("li.mega").hoverIntent(megaConfig);
   }
 
-  if (windowsize < 1028) {
+  if (windowsize < 600) {
       $("#spum_nav").hide();
        $("li.mega").unbind();
      }
