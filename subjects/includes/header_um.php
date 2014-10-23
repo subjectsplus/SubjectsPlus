@@ -159,7 +159,7 @@ $v2styles = TRUE;
                           <input type="hidden" value="ContentType,Newspaper Article, true" name="s.fvf[]" />
                           <input type="hidden" value="ContentType,Book Review, true" name="s.fvf[]" />
                           <input type="hidden" value="ContentType,Trade Publication Article, true" name="s.fvf[]" />
-                          <input name="s.q" value="" size="35" />
+                          <input name="s.q" value="" size="30" />
                           <input type="submit" value="Go" /> 
                         </form>
                       </div>
@@ -199,7 +199,7 @@ $v2styles = TRUE;
 
                         <input type="hidden" name="SORT" id="SORT" value="D" />
 
-                        <input maxlength="75" name="searcharg" size="20"  style="" /><br /><br />
+                        <input maxlength="75" name="searcharg" size="15"  style="" /><br /><br />
 
                            <span style="font-size:12px;">limit to:</span> 
                          <select id="label4" name="searchscope">
