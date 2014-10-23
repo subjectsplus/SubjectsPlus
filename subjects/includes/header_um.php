@@ -178,7 +178,7 @@ $v2styles = TRUE;
               <!--CDSs/DVDs-->
               <li class="mega"><a href="http://library.miami.edu/media/">CD / DVDs</a>
                   <!-- begin cdz mega menu -->
-                  <div class="mega_child mega-md mega-left">
+                  <div class="mega_child mega-lg mega-left">
                     <div class="megasearchzone">
                     <p>Looking for Music or Movies? Use the Catalog:</p>
                       <form action="http://catalog.library.miami.edu/search/" method="get" name="search" id="search">
@@ -215,6 +215,13 @@ $v2styles = TRUE;
                         <input type="hidden" id="iiiFormHandle_1"/>
                         <input name="Search" type="submit" id="Search" value="Search" />
                       </form>
+                      
+
+                  </div>
+                  <div class="mega_feature">
+                        <a href="http://library.miami.edu/udvd/">
+                        <img alt="Try UDVD for your DVD Needs" title="Try UDVD for your DVD Needs" src="https://library.miami.edu/wp-content/themes/umiami/images/udvd_square.png">
+                        </a>
                   </div>
                   <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/media/">CD/DVDs Overview</a>, <a href="http://library.miami.edu/musiclib/">Music Library</a></div>
                 </div>
@@ -238,7 +245,7 @@ $v2styles = TRUE;
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/scholarly-communications/">Scholarly Communications &amp; Publishing</a></li>
                       </ul>
                       <div class="mega_feature">
-                        <img src="<?php print THEME_BASE_DIR; ?>/assets/images/headshot.jpg" alt="Librarian headshot" />
+                        <img src="http://library.miami.edu/sp/assets/users/_djui/headshot.jpg" alt="Librarian headshot" />
                         Need Help?  <a href="<?php print PATH_FROM_ROOT; ?>/ask-a-librarian/">Ask a Librarian</a>
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/research/">Research Overview</a></div>
@@ -263,11 +270,12 @@ $v2styles = TRUE;
                             <li><a href="http://www.library.miami.edu/chc/">Cuban Heritage Collection</a></li>
                             <li><a href="http://www.library.miami.edu/specialcollections/">Special Collections</a></li>
                             <li><a href="http://merrick.library.miami.edu/">UM Digital Collections</a></li>
+                            <li><a href="http://library.miami.edu/oral-histories/">UM Oral Histories</a></li>
                             <li><a href="http://scholarlyrepository.miami.edu/">UM Scholarly Repository</a></li>
                             <li class="last"><a href="http://www.library.miami.edu/universityarchives/">University Archives</a></li>
                         </ul>
                       <div class="mega_feature">
-                        <img src="<?php print THEME_BASE_DIR; ?>/images/rsmas.jpg" alt="RSMAS" />
+                        <img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" alt="RSMAS" />
                         <p style="align-right"><a href="http://www.library.miami.edu/rsmaslib/">RSMAS Library</a></p>
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>,
@@ -296,7 +304,7 @@ $v2styles = TRUE;
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-a-room/">Reserve a Room</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>
                       </ul>
 
                         <div class="mega_more">See also <a href="<?php print PATH_TO_SP; ?>subjects/staff.php">Staff List</a>,
@@ -339,15 +347,17 @@ $v2styles = TRUE;
                         <span style="display: inline-block; width: 160px;">Information for</span>
                       </div>
                       <ul>
-                        <li><a href="http://ibisweb.miami.edu:2082/patroninfo">MyLibrary</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/undergrad/">Undergraduate</a></li>
+                        <li><a href="http://ibisweb.miami.edu:2082/patroninfo">MyLibrary</a></li>                        
                         <li><a href="https://www.courses.miami.edu/webapps/login/">Blackboard</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/grad/">Graduate Student</a></li>
                         <li><a href="https://triton.library.miami.edu/">ILLiad (Interlibrary Loan)</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/faculty/">Faculty</a></li>
                         <li><a href="http://illweb.library.miami.edu/aeon/logon.html">Aeon</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/alumnus/">Alumnus</a></li>
                         <li class="last"><a href="https://myum.miami.edu/">MyUM</a></li>
+                      </ul>
+                      <ul>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/undergrad/">Undergraduate</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/grad/">Graduate Student</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/faculty/">Faculty</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/alumnus/">Alumnus</a></li>
                         <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/patron/visitor/">Visitor</a></li>
                       </ul>
                   </div>
