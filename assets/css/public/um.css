@@ -934,11 +934,12 @@ table.istem_listing h2 {
         text-decoration: none;
     }
 
-    #nav_menu li {float: left;}
+    #nav_menu li {}
 
     #nav_menu li.mega {
         position: relative;
         display: inline;
+        float: left;
     }
     
     #nav_menu li a.selected_href {
@@ -1011,7 +1012,7 @@ table.istem_listing h2 {
         margin-top: 0.5em !important;
         text-align: left !important;
     }
-    #spum_nav div.mega_child ul  li {
+    #spum_nav div.mega_child ul li {
         border-bottom: 1px solid #fff;
         display: block !important;
         font-family: Arial,Helvetica,sans-serif !important;
