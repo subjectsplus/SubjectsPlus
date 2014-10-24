@@ -141,14 +141,8 @@ img {
     color: #F37421;
 }
 
-.button-menu {      /* Visible on responsive mode only */
-    color: #fff !important;
-    background-color: #333;
-    border-radius: 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
 
-/* Header Search */
+/* -- Header Search-- */
 
 #search_container {
     text-align: right;
@@ -231,6 +225,14 @@ img {
     margin: 0 1em;
 }
 
+/* -- Menu Button Responsive-- */
+
+.button-menu {      /* Visible on responsive mode only */
+    color: #fff !important;
+    background-color: #333;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
 
 /* menu button; toggles in the spum_nav area */
 
@@ -245,6 +247,8 @@ img {
         text-transform: uppercase;
     }
 
+
+/* -- MAIN NAV-- */
 /* black nav bar, spum_nav */
 
 #spum_nav {
@@ -287,6 +291,7 @@ img {
     text-transform: uppercase;
 }
 
+
 /* No mega menus for little screens, ever */
 ul#nav_menu.nav li div {
     display: none;
@@ -297,6 +302,7 @@ ul#nav_menu.nav li div.mega_child {
 }
 
 
+/* -- MAIN CONTENT AREA-- */
 /* page wrapper */
 
 .wrapper-full {
@@ -311,6 +317,7 @@ ul#nav_menu.nav li div.mega_child {
 #guide_nav_tools {
     display: none;
 }
+
 
 /* Guide tabs */
 
@@ -641,6 +648,28 @@ div.pluslet form {
 
 /* FOOTER */
 
+.footer-container {
+    margin-top: 2em;
+    background-color: #FFF;
+    border-top: 1px solid #CCCCCC;
+}
+
+#wide_footer {
+    max-width: 1100px; 
+    margin: 0 auto; 
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/footer_bg.jpg") no-repeat scroll top left #FFFFFF;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5em; 
+    padding-top: 26px;
+    min-height: 200px;
+}
+
+.footer-adj {
+    padding: 0 0 10px 10px;
+}
+
+
 #footer {
     position: relative;
     clear: both;
@@ -665,21 +694,7 @@ div.pluslet form {
     color: #ccc;
 }
 
-#wide_footer {
-    background: url("http://library.miami.edu/wp-content/themes/umiami/images/footer_bg.jpg") no-repeat scroll center center #FFFFFF;
-    border-top: 1px solid #CCCCCC;
-    clear: both;
-    color: #333;
-    float: left;
-    font-size: 1em;
-    line-height: 1.5em;
-    margin-top: 2em;
-    min-height: 9em;
-    padding-top: 1em;
-    position: relative;
-    width: 100%;
 
-}
 
 /* jquery ui wipeouts 
 Preferred is to turn off jquery ui in array at top of subjects/guide.php
@@ -1161,6 +1176,12 @@ table.istem_listing h2 {
         background-color: #F37421 !important;
         text-transform: none;        
     }
+
+    .footer-adj {
+        padding: 0;
+    }
+
+    #umiami_logo {padding-left: 10px;}
     
 }
 
