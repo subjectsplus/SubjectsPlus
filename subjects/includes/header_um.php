@@ -21,8 +21,8 @@ if ($_SERVER['HTTP_HOST'] != "localhost") {
     define("THEME_FOLDER", "//library.miami.edu/wp-content/themes/");
     define("THEME_BASE_DIR", "//library.miami.edu/wp-content/themes/umiami/");
 } else {
-    define("PATH_FROM_ROOT", "/dev-wp");
-    define("THEME_BASE_DIR", "http://localhost/dev-www2/wp-content/themes/umiami/");
+    define("PATH_FROM_ROOT", "/richter");
+    define("THEME_BASE_DIR", "http://localhost/richter/wp-content/themes/umiami/");
 }
 
 // Load our jQuery libraries + some css
@@ -235,12 +235,13 @@ $v2styles = TRUE;
                       <ul>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/research/getting-started/">Getting Started</a></li>
                           <li><a href="http://libguides.miami.edu/">Research Guides</a></li>
-                          <li><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z">Subject Librarians</a></li>
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/research/consultations/">Research Consultations</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/research/consultations/">Research Consultations</a></li>
+                         <li><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z">Subject Librarians</a></li>
+                         <li  class="last"><a href="<?php print PATH_FROM_ROOT; ?>/citation/">Citation Help</a></li>
                       </ul>
-                      <ul>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/citation/">Citation Help</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/workshops-tutorials/">Workshops &amp; Tutorials</a></li>
+                      <ul>                          
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/workshops-tutorials/">Workshops</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/tutorials/">Tutorials</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/copyright/">Copyright</a></li>
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/scholarly-communications/">Scholarly Communications &amp; Publishing</a></li>
                       </ul>
@@ -279,7 +280,7 @@ $v2styles = TRUE;
                         <p style="align-right"><a href="http://www.library.miami.edu/rsmaslib/">RSMAS Library</a></p>
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>,
-                        <a href="<?php print PATH_FROM_ROOT; ?>/sp/subjects/new_acquisitions.php">New Acquisitions</a>,
+                        <a href="<?php print PATH_TO_SP; ?>/subjects/new_acquisitions.php">New Acquisitions</a>,
                         <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Suggest a Purchase</a></div>
                   </div>
                   <!-- end lib/cols mega menu -->
@@ -288,25 +289,25 @@ $v2styles = TRUE;
                 <!--SERVICES-->
                 <li class="services mega"><a href="http://library.miami.edu/services/">SERVICES</a>
                   <!-- begin services mega menu -->
-                    <div class="mega_child mega-sm mega-right-special">
+                    <div class="mega_child mega-md mega-right-special">
                       <ul>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/borrowing/">Access &amp; Borrowing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/ada/">ADA/Disability Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/course-reserves/">Course Reserves</a></li>
-
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/interlibrary-loan/">Interlibrary Loan</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
+                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>
                       </ul>
-
-                      <ul>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>
+                       <ul>                          
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-a-room/">Reserve a Room</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>sp/subjects/gis/">GIS Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>
-                      </ul>
-
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/graduate-study/">Graduate Study Room</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li>
+                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>
+                        </ul>
+                     
                         <div class="mega_more">See also <a href="<?php print PATH_TO_SP; ?>subjects/staff.php">Staff List</a>,
                           <a href="<?php print PATH_FROM_ROOT; ?>/patron/">Information by Patron Type</a></div>
                     </div>
