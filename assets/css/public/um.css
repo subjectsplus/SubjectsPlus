@@ -312,6 +312,9 @@ ul#nav_menu.nav li div.mega_child {
     line-height: 1.8em;
     background-color: #FFF;
     padding: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 3px -3px rgba(0, 0, 0, 0.2);
 }
 
 #guide_nav_tools {
@@ -323,37 +326,35 @@ ul#nav_menu.nav li div.mega_child {
 
 #main-content {
     position: relative;
-    width: 100%;
-    
+    width: 100%;    
     margin-top: 4.5em;
     min-height: 650px;
-
-    text-align: left;    
-
+    text-align: left; 
 }
 
 #tab-container {
     background-color: transparent;
     display: inline-block;
     height: auto;
-
 }
 
 #tab-body {
     padding: 1em 3px 1em 3px;
-        background-color: #fff;
-        display: block;
+    background-color: #fff;
+    display: block;
     border: 2px solid #fff;
     border-radius: 5px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     margin-top: -0.5em;
 }
 
-/* if no tabs are being rendered, let's adjust our margins */
-.no-tabs {
-    margin-top: -2em !important;
-
-
+/* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
+#tab-body.no-tabs { 
+    margin-top: -20px !important;
+    background-color: #FFF;
+    border: none;
+    border-radius: none;
+    box-shadow: none;
 }
 
 #tabs {
@@ -504,15 +505,11 @@ ul.ui-autocomplete li a{
 /* PLUSLETS */
 
 .pluslet {
-        border: 1px solid #ccc;
+    border: 1px solid #ccc;
     box-shadow: 5px 5px 7px #e0e0e0;
-    position: relative;
-    clear: both;
     background: #fff;
-    margin-bottom: 10px;
     cursor: auto;
     z-index: 50;
-    border: 1px solid #ccc;
     padding: 0px;
     font-size: 10pt;
     -moz-border-radius: 2px;
@@ -548,14 +545,10 @@ ul.ui-autocomplete li a{
     color: #333;
     position: relative;
     height: 2em;
-    padding: 0px 0;
+    padding: 0;
     margin: 0;
-    top: 0px;
-    right: 0px;
-    width: 100%;
     border-bottom: 1px solid #B3B9BF;
-
-    background-color: #f0f0f0;
+    background-color: #e8d3a2;
 }
 
 .titlebar_text {
