@@ -215,13 +215,13 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 <div class="panel-container">
 
 <div class="pure-g">
-  <div class="pure-u-1 pure-u-md-3-4 panel-adj">
+  <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
       <div class="breather">
             <?php print $db_results; ?>
       </div>
   </div> <!--end 3/4 main area column-->
 
-  <div class="pure-u-1 pure-u-md-1-4 database-page"  style="background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg'); min-height: 500px; background-repeat: no-repeat;">
+  <div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
 
       <!-- start tip -->
       <div class="tip">
