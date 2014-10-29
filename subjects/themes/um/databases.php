@@ -210,25 +210,29 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 ////////////////////////////
 
 ?>
-<br />
-<div class="pure-g">
-  <div class="pure-u-1 pure-u-md-3-4">
-    <div class="breather">
-          <?php print $db_results; ?>
-    </div>
-  </div>
-<div class="pure-u-1 pure-u-md-1-4 database-page"  style="background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg'); min-height: 500px; background-repeat: no-repeat;">
 
-  <!-- start tip -->
-  <div class="tip">
-      <h2><?php print _("Search Databases"); ?></h2>
-          <?php
-          $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", '');
-          $input_box->displayBox();
-          ?>
-  </div>
-  <div class="tipend"> </div>
-  <!-- end tip -->
+
+<div class="panel-container">
+
+<div class="pure-g">
+  <div class="pure-u-1 pure-u-md-3-4 panel-adj">
+      <div class="breather">
+            <?php print $db_results; ?>
+      </div>
+  </div> <!--end 3/4 main area column-->
+
+  <div class="pure-u-1 pure-u-md-1-4 database-page"  style="background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg'); min-height: 500px; background-repeat: no-repeat;">
+
+      <!-- start tip -->
+      <div class="tip">
+          <h2><?php print _("Search Databases"); ?></h2>
+              <?php
+              $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", '');
+              $input_box->displayBox();
+              ?>
+      </div>
+      <div class="tipend"> </div>
+      <!-- end tip -->
 
       <?php if ($newlist) { ?>
       <div class="tip">
@@ -236,9 +240,9 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
         <?php print $newlist; ?>
       </div>
       <div class="tipend"></div>
-    <?php } ?>
+      <?php } ?>
 
-    <?php if ($trial_list) { ?>
+      <?php if ($trial_list) { ?>
       <div class="tip">
         <h2>Database Trials</h2>
         <?php print $trial_list; ?>
@@ -247,17 +251,18 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
           Feedback:  <a href="mailto:d.roose@miami.edu">d.roose@miami.edu</a></p>
       </div>
       <div class="tipend"></div>
-    <?php } ?>
-    <div class="tip">
-      <h2>Key to Icons</h2>
-      <?php print $legend; ?>
-    </div>
-    <div class="tipend"></div>
+      <?php } ?>
+      <div class="tip">
+        <h2>Key to Icons</h2>
+        <?php print $legend; ?>
+      </div>
+      <div class="tipend"></div>
 
-  <br />
+      <br />
 
-</div>
-</div>
+  </div> <!--end 1/4 column sidebar-->
+</div> <!--end pure-g-->
+</div> <!--end panel-container-->
 
 
 
