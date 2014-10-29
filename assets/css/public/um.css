@@ -850,35 +850,33 @@ line-height: 24px;
     background-color: transparent;
     background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
     border: 1px solid #fff;
-    border-radius: 5px 5px 0;
-    float: right;
-    margin: 2em -34px 2em 1em;
+    border-radius: 5px 5px 5px 5px;    
+    margin: 0 10px 15px 10px;
     padding: 1em;
-    position: relative;
-    
+    position: relative;    
 }
-div .tip h2 {
+
+.tip ul {
+    margin-left: 12px;
+}
+
+div.tip h2 {
     border-bottom: 1px dashed #a2ad00;
     font-size: 1em;
     font-weight: bold;
     margin: -12px -12px 12px;
     padding: 0.2em 1em;
 }
-div .tip a {
+div.tip a {
     color: #333;
     text-decoration: underline;
 }
-div .tip a:hover {
+div.tip a:hover {
     text-decoration: none;
 }
 .tipend {
-    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/bottom_right_green.png");
-    clear: right;
-    float: right;
-    height: 14px;
-    margin-right: -34px;
-    margin-top: -2em;
-    width: 24px;
+    background-image: none;
+    display: none;
 }
 
 .zebra {
@@ -922,10 +920,16 @@ table.istem_listing h2 {
     border: medium none;
 }
 
+table.item_listing {width: 98%;}
+
 .faq_filter {
     font-size: 0.8em;
     text-align: center;
 }
+
+.breather {
+        padding: 0 10px;
+    }
 
 
 /* //////////////////
@@ -1215,6 +1219,12 @@ table.istem_listing h2 {
     .footer-container {
         height: 160px;
     }
+
+   .sidebar-bkg {
+        background: none; 
+   }
+
+    
     
 }
 
@@ -1285,15 +1295,40 @@ table.istem_listing h2 {
     }
 
     .tip {
-        width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
+        background-color: transparent;
+        background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
+        border: 1px solid #fff;
+        border-radius: 5px 5px 0;
+        float: right;
+        margin: 2em -25px 1em 1em;
+        padding: 1em;
+        position: relative;
+        width: 230px; /* we set this here so it doesn't overlay the other content on smaller screens */
     }
 
-    .breather {
-        margin: 0 .5em 0 1em;
-    }
+    .tipend {
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/bottom_right_green.png");
+    clear: right;
+    float: right;
+    height: 14px;
+    margin-right: -25px;
+    margin-top: -16px;
+    width: 24px;
+    display: block;
+}
+
+    .sidebar-bkg {
+   background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg') top left; 
+   min-height: 500px; 
+   background-repeat: no-repeat;
+   }
+
+    
 }
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
-
+ .tip {
+        width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
+    }
 }
