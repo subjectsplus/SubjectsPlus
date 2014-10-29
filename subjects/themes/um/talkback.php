@@ -338,47 +338,51 @@ if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 include("includes/header_um.php");
 
 ?>
-<br />
+
+
+<div class="panel-container">
 <div class="pure-g">
-<div class="pure-u-1 pure-u-md-2-3">
-<div class="breather" style="max-width: 650px;">
-	<?php print $feedback . $stk_message; ?>
+	
+	<div class="pure-u-1 pure-u-md-2-3 panel-adj">
+		<div class="breather" style="max-width: 650px;">
+				<?php print $feedback . $stk_message; ?>
 
-		<?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
+				<?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>			
+
+				<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members</p>"); ?>
+
+				<div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
+				<?php print $comment_header . $results; ?>
+
+		</div>
+	</div> <!--end 2/3 main area column-->
+
+	<div class="pure-u-1 pure-u-md-1-3 database-page"  style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_stairwell.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
+    	
+    	<div class="breather" style="max-width: 300px;">
+	      	  <br />
+		      <form id="tellus" action="<?php print $form_action; ?>" method="post">
+			        <p class="talkback_form <?php print $tb_bonus_css; ?>">
+			          Need help <strong>now</strong>?  <a href="/ask-a-librarian/">Ask a Librarian</a>.<br /><br />
+			          <strong><?php print _("Your comment:"); ?></strong><br />
+
+			          <textarea name="the_suggestion" cols="26" rows="6"><?php print $this_comment; ?></textarea><br /><br />
+			          <strong><?php print _("Your name (optional):"); ?></strong><br />
+			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" />
+			          <br /><br />
+			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" />
+			          <br /><br />
+			          <input type="submit" name="submit_comment" value="<?php print _("Submit"); ?>" />
+			          <br /></p>
+		      </form>
+	      	  <br /><br />
+    	</div>
+	</div><!--end 1/3 sidebar column-->
+
+</div> <!--end pure-g-->
+</div> <!--end panel-container-->
+
 			
-
-		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members</p>"); ?>
-
-		<div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
-		<?php print $comment_header . $results; ?>
-
-</div>
-</div>
-<div class="pure-u-1 pure-u-md-1-3 database-page"  style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_stairwell.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
-    <div class="breather" style="max-width: 300px;">
-      <br />
-      <form id="tellus" action="<?php print $form_action; ?>" method="post">
-        <p class="talkback_form <?php print $tb_bonus_css; ?>">
-          Need help <strong>now</strong>?  <a href="/ask-a-librarian/">Ask a Librarian</a>.<br /><br />
-          <strong><?php print _("Your comment:"); ?></strong><br />
-
-          <textarea name="the_suggestion" cols="26" rows="6"><?php print $this_comment; ?></textarea><br /><br />
-          <strong><?php print _("Your name (optional):"); ?></strong><br />
-          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" />
-          <br /><br />
-          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" />
-          <br /><br />
-          <input type="submit" name="submit_comment" value="<?php print _("Submit"); ?>" />
-          <br /></p>
-      </form>
-
-      <br /><br />
-
-    </div>
-
-</div>
-</div>
-			<!-- END BODY CONTENT -->
 			<?php
 
 ///////////////////////////

@@ -262,9 +262,12 @@ foreach ($collections_result as $myrow1) {
 }
 
 ?>
-<br />
+
+
+
+<div class="panel-container">
 <div class="pure-g">
-<div class="pure-u-1 pure-u-md-2-3">
+<div class="pure-u-1 pure-u-md-2-3 panel-adj">
 <?php
 //$num_faqs = $row_count - 1;
 // print "<p style=\"background-color: #ffffcf;\"><strong>Note:</strong>  $num_faqs FAQs displayed.  Search <strong>all FAQs</strong> with the boxes to the right.</p><br />";
@@ -282,9 +285,10 @@ if (isset($index) && $index != "") {
 
 
 print $results; ?>
-</div>
+</div> <!--end 2/3 main area column-->
+
 <div class="pure-u-1  pure-u-md-1-3 database-page" style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
-  <a name="rdiv"></a>
+    <a name="rdiv"></a>
     <div class="tip">
             <h2><?php print _("Search FAQs"); ?></h2>
             <form action="faq.php" method="post" autocomplete="on" class="pure-form">
@@ -304,10 +308,10 @@ print $results; ?>
     <div class="tip">
             <h2><?php print _("Browse FAQs by Subject"); ?></h2>
             <form action="faq.php" method="post">
-<?php print $guide_string; ?>
+    <?php print $guide_string; ?>
                 <input type="submit" value="go" class="form_button button" />
             </form>
-    </tip>
+    </div>
     <div class="tipend"> </div>
 
     <?php } ?>
@@ -316,15 +320,17 @@ print $results; ?>
             <h2><?php print _("Browse FAQs by Collection"); ?></h2>
 
             <ul>
-<?php print $coll_items; ?>
+    <?php print $coll_items; ?>
             </ul>
-        </div>
-        <div class="tipend"> </div>
-
     </div>
+    <div class="tipend"> </div>
 
-</div>
-</div>
+</div> <!--end 1/3 sidebar column-->
+
+
+</div> <!--end pure-g-->
+</div> <!--end panel-container-->
+
 <?php
 
 include("includes/footer_um.php");
