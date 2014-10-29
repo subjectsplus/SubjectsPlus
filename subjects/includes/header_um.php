@@ -66,6 +66,7 @@ $v2styles = TRUE;
 </head>
 
 <body>
+<div id="wrap">
 
 <div id="header-content"> 
     <div class="pure-g header-content">

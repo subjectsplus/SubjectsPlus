@@ -4,6 +4,9 @@
 </div> <!--end .pure-g -->
 </div> <!--end .wrapper-full-->
 
+<div id="push"></div>
+</div><!--end #wrap-->
+
 <?php
 if (!isset($our_site)) {$our_site="um";}// just in case
 
@@ -76,7 +79,7 @@ switch ($our_site) {
     // tweak the size of the footer area so it extends to bottom of page
     var extra_height = (win_height - 800) + "px";
     //alert(extra_height);
-    $("#wide_footer").css("min-height", extra_height);
+    //$("#wide_footer").css("min-height", extra_height);
   }
 
   $("#menu_button").click(function() {

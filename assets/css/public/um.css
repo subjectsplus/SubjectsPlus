@@ -34,6 +34,12 @@ body {
     border-top: 3px solid #FFFFFF;   
 }
 
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
 
 .visible-desktop {display: none;  /* Hide on responsive mode */ }
 
@@ -305,17 +311,41 @@ ul#nav_menu.nav li div.mega_child {
 /* -- MAIN CONTENT AREA-- */
 /* page wrapper */
 
-.wrapper-full {
-    max-width: 1100px;
-    margin: 0 auto;
+.wrapper-full { 
+    max-width: 1110px;
+    margin: 0 auto;      
+    padding: 0;    
+    
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -300px;
+}
+
+#push, .footer-container {
+        height: 300px;
+    }
+
+#body_inner_wrap {    
     font-size: 1.1em;
-    line-height: 1.8em;
-    background-color: #FFF;
-    padding: 5px;
+    line-height: 1.8em;  
+}
+
+.panel-container {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     box-shadow: 0 0 3px -3px rgba(0, 0, 0, 0.2);
+    background-color: #FFF;
+    min-height: 650px;
 }
+
+.panel-adj {padding: 30px 0;}
+
 
 #guide_nav_tools {
     display: none;
@@ -324,57 +354,56 @@ ul#nav_menu.nav li div.mega_child {
 
 /* Guide tabs */
 
+#tabs {    
+    background-color: transparent;
+}
+
 #main-content {
     position: relative;
-    width: 100%;    
-    margin-top: 4.5em;
+    width: 100%;
     min-height: 650px;
     text-align: left; 
 }
 
 #tab-container {
-    background-color: transparent;
-    display: inline-block;
-    height: auto;
+    background-color: transparent;    
+    padding:0;
+    margin:0;    
 }
 
 #tab-body {
-    padding: 1em 3px 1em 3px;
+    padding: 20px 3px 1em 3px;
     background-color: #fff;
-    display: block;
-    border: 2px solid #fff;
-    border-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    margin-top: -0.5em;
+    min-height: 650px;
+    margin-top: -3px;
 }
 
 /* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
 #tab-body.no-tabs { 
-    margin-top: -20px !important;
-    background-color: #FFF;
-    border: none;
-    border-radius: none;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
     box-shadow: none;
+    min-height: 650px;
+    margin-top: 0;
 }
 
-#tabs {
-    clear: both;
-    position: relative;
-    top: -3em;
-    background-color: transparent;
-}
+
 #tabs ul {
-    margin-left: 2em;
+    margin: 14px 30px 0 30px;
     
 }
 
-#tabs li {
+#tabs ul li {
     display: inline-block;
-
-    /* margin-bottom: 1.05em; */
 }
 #tabs li a {
-
     background-color: #e8d3a2;
     border-color: #ffffff;
     border-image: none;
@@ -384,9 +413,9 @@ ul#nav_menu.nav li div.mega_child {
     border-width: 2px 2px medium;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     color: #333;
-    font-size: 1.15em;
-    margin: 0em 0.5em 0.2em 0;
-    padding: 0.3em 0.6em;
+    font-size: 14.95px;
+    margin: 0em 0.5em 0.15em 0;
+    padding: 0.3em  0.6em;
     text-decoration: none;
 }
 #tabs li a:hover {
@@ -582,7 +611,9 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
     padding: .5em;
     margin: .5em;
     text-align: left;
-    overflow: auto;}
+    overflow-y: auto;
+    overflow-x: hidden !important;
+}
 
 div.pluslet form {
     padding-top: -10px;
@@ -622,7 +653,7 @@ div.pluslet form {
     padding: 0.5em;
 }
 .comment_num {
-    background-image: url("//library.miami.edu/wp-content/themes//umiami/images/comment_box.png");
+    background-image: url("http://library.miami.edu/wp-content/themes//umiami/images/comment_box.png");
     color: #fff;
     display: inline-block;
     float: left;
@@ -641,6 +672,7 @@ div.pluslet form {
 
 /* FOOTER */
 
+
 .footer-container {
     margin-top: 2em;
     background-color: #FFF;
@@ -655,7 +687,7 @@ div.pluslet form {
     font-size: 1em;
     line-height: 1.5em; 
     padding-top: 26px;
-    min-height: 200px;
+    min-height: 134px;
 }
 
 .footer-adj {
@@ -892,7 +924,6 @@ table.istem_listing h2 {
 
 .faq_filter {
     font-size: 0.8em;
-    margin: 1em;
     text-align: center;
 }
 
@@ -1175,6 +1206,15 @@ table.istem_listing h2 {
     }
 
     #umiami_logo {padding-left: 10px;}
+
+    #wrap {
+        margin: 0 auto -160px;
+    }
+
+    #push,
+    .footer-container {
+        height: 160px;
+    }
     
 }
 
