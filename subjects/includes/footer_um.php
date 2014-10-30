@@ -4,6 +4,9 @@
 </div> <!--end .pure-g -->
 </div> <!--end .wrapper-full-->
 
+<div id="push"></div>
+</div><!--end #wrap-->
+
 <?php
 if (!isset($our_site)) {$our_site="um";}// just in case
 
@@ -34,27 +37,26 @@ switch ($our_site) {
 
   }
     ?>
-
-<div id="wide_footer">
-	<div class="container-fluid" style="max-width: 1100px; margin: 0 auto; text-align: left;">
-	    <div class="pure-g">
-	        <div class="pure-u-1 pure-u-md-1-3">
-				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
-          </div>
-				  <div class="pure-u-1 pure-u-md-1-3">
-            <p style=""><?php print $library_address; ?><br />
-            <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
-            <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
-            <a href="/report-website-issue/">Report Site Issue</a> |
-            <a href="/support-the-libraries/">Make a Gift</a>
-            </p>
-        	</div>
-				  <div class="pure-u-1 pure-u-md-1-3">
-					       <?php print $social_icons; ?>
-				  </div>
-	     </div> <!-- end pure-g -->
-      </div> <!-- end container-fluid -->
-</div> <!-- end wide-footer -->
+<div class="footer-container">
+  <div id="wide_footer">	
+  	    <div class="pure-g">
+    	        <div class="pure-u-1 pure-u-md-1-5 footer-adj">
+    				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
+              </div>
+    				  <div class="pure-u-1 pure-u-md-3-5 footer-adj">
+                <p style=""><?php print $library_address; ?><br />
+                <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
+                <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
+                <a href="/report-website-issue/">Report Site Issue</a> |
+                <a href="/support-the-libraries/">Make a Gift</a>
+                </p>
+            	</div>
+    				  <div class="pure-u-1 pure-u-md-1-5 footer-adj">
+    					       <?php print $social_icons; ?>
+    				  </div>
+  	     </div> <!-- end pure-g -->     
+  </div> <!-- end wide-footer -->
+</div> <!--footer-container-->
 
 </body>
 </html>
@@ -77,7 +79,7 @@ switch ($our_site) {
     // tweak the size of the footer area so it extends to bottom of page
     var extra_height = (win_height - 800) + "px";
     //alert(extra_height);
-    $("#wide_footer").css("min-height", extra_height);
+    //$("#wide_footer").css("min-height", extra_height);
   }
 
   $("#menu_button").click(function() {
@@ -113,12 +115,12 @@ var $window = $(window);
 function checkWidth() {
   windowsize = $window.width();
 
-  if (windowsize >= 600) {
+  if (windowsize >= 768) {
     $("#spum_nav").show();
     $("li.mega").hoverIntent(megaConfig);
   }
 
-  if (windowsize < 600) {
+  if (windowsize <= 747) {
       $("#spum_nav").hide();
        $("li.mega").unbind();
      }
