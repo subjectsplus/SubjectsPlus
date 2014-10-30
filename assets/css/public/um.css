@@ -34,6 +34,12 @@ body {
     border-top: 3px solid #FFFFFF;   
 }
 
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
 
 .visible-desktop {display: none;  /* Hide on responsive mode */ }
 
@@ -141,14 +147,8 @@ img {
     color: #F37421;
 }
 
-.button-menu {      /* Visible on responsive mode only */
-    color: #fff !important;
-    background-color: #333;
-    border-radius: 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
 
-/* Header Search */
+/* -- Header Search-- */
 
 #search_container {
     text-align: right;
@@ -231,6 +231,14 @@ img {
     margin: 0 1em;
 }
 
+/* -- Menu Button Responsive-- */
+
+.button-menu {      /* Visible on responsive mode only */
+    color: #fff !important;
+    background-color: #333;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
 
 /* menu button; toggles in the spum_nav area */
 
@@ -245,6 +253,8 @@ img {
         text-transform: uppercase;
     }
 
+
+/* -- MAIN NAV-- */
 /* black nav bar, spum_nav */
 
 #spum_nav {
@@ -287,6 +297,7 @@ img {
     text-transform: uppercase;
 }
 
+
 /* No mega menus for little screens, ever */
 ul#nav_menu.nav li div {
     display: none;
@@ -297,76 +308,102 @@ ul#nav_menu.nav li div.mega_child {
 }
 
 
+/* -- MAIN CONTENT AREA-- */
 /* page wrapper */
 
-.wrapper-full {
-    max-width: 1100px;
-    margin: 0 auto;
-    font-size: 1.1em;
-    line-height: 1.8em;
-    background-color: #FFF;
-    padding: 5px;
+.wrapper-full { 
+    max-width: 1110px;
+    margin: 0 auto;      
+    padding: 0;    
+    
 }
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -300px;
+}
+
+#push, .footer-container {
+        height: 300px;
+    }
+
+#body_inner_wrap {    
+    font-size: 1.1em;
+    line-height: 1.8em;  
+}
+
+.panel-container {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 3px -3px rgba(0, 0, 0, 0.2);
+    background-color: #FFF;
+    min-height: 650px;
+}
+
+.panel-adj {padding: 30px 0;}
+
 
 #guide_nav_tools {
     display: none;
 }
 
+
 /* Guide tabs */
+
+#tabs {    
+    background-color: transparent;
+}
 
 #main-content {
     position: relative;
     width: 100%;
-    
-    margin-top: 4.5em;
     min-height: 650px;
-
-    text-align: left;    
-
+    text-align: left; 
 }
 
 #tab-container {
-    background-color: transparent;
-    display: inline-block;
-    height: auto;
-
+    background-color: transparent;    
+    padding:0;
+    margin:0;    
 }
 
 #tab-body {
-    padding: 1em 3px 1em 3px;
-        background-color: #fff;
-        display: block;
-    border: 2px solid #fff;
-    border-radius: 5px;
+    padding: 20px 3px 1em 3px;
+    background-color: #fff;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    margin-top: -0.5em;
+    min-height: 650px;
+    margin-top: -3px;
 }
 
-/* if no tabs are being rendered, let's adjust our margins */
-.no-tabs {
-    margin-top: -2em !important;
-
-
+/* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
+#tab-body.no-tabs { 
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    box-shadow: none;
+    min-height: 650px;
+    margin-top: 0;
 }
 
-#tabs {
-    clear: both;
-    position: relative;
-    top: -3em;
-    background-color: transparent;
-}
+
 #tabs ul {
-    margin-left: 2em;
+    margin: 14px 30px 0 30px;
     
 }
 
-#tabs li {
+#tabs ul li {
     display: inline-block;
-
-    /* margin-bottom: 1.05em; */
 }
 #tabs li a {
-
     background-color: #e8d3a2;
     border-color: #ffffff;
     border-image: none;
@@ -376,9 +413,9 @@ ul#nav_menu.nav li div.mega_child {
     border-width: 2px 2px medium;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     color: #333;
-    font-size: 1.15em;
-    margin: 0em 0.5em 0.2em 0;
-    padding: 0.3em 0.6em;
+    font-size: 14.95px;
+    margin: 0em 0.5em 0.15em 0;
+    padding: 0.3em  0.6em;
     text-decoration: none;
 }
 #tabs li a:hover {
@@ -497,15 +534,11 @@ ul.ui-autocomplete li a{
 /* PLUSLETS */
 
 .pluslet {
-        border: 1px solid #ccc;
+    border: 1px solid #ccc;
     box-shadow: 5px 5px 7px #e0e0e0;
-    position: relative;
-    clear: both;
     background: #fff;
-    margin-bottom: 10px;
     cursor: auto;
     z-index: 50;
-    border: 1px solid #ccc;
     padding: 0px;
     font-size: 10pt;
     -moz-border-radius: 2px;
@@ -541,14 +574,10 @@ ul.ui-autocomplete li a{
     color: #333;
     position: relative;
     height: 2em;
-    padding: 0px 0;
+    padding: 0;
     margin: 0;
-    top: 0px;
-    right: 0px;
-    width: 100%;
     border-bottom: 1px solid #B3B9BF;
-
-    background-color: #f0f0f0;
+    background-color: #e8d3a2;
 }
 
 .titlebar_text {
@@ -582,7 +611,9 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
     padding: .5em;
     margin: .5em;
     text-align: left;
-    overflow: auto;}
+    overflow-y: auto;
+    overflow-x: hidden !important;
+}
 
 div.pluslet form {
     padding-top: -10px;
@@ -622,7 +653,7 @@ div.pluslet form {
     padding: 0.5em;
 }
 .comment_num {
-    background-image: url("//library.miami.edu/wp-content/themes//umiami/images/comment_box.png");
+    background-image: url("http://library.miami.edu/wp-content/themes//umiami/images/comment_box.png");
     color: #fff;
     display: inline-block;
     float: left;
@@ -640,6 +671,29 @@ div.pluslet form {
 }
 
 /* FOOTER */
+
+
+.footer-container {
+    margin-top: 2em;
+    background-color: #FFF;
+    border-top: 1px solid #CCCCCC;
+}
+
+#wide_footer {
+    max-width: 1100px; 
+    margin: 0 auto; 
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/footer_bg.jpg") no-repeat scroll top left #FFFFFF;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5em; 
+    padding-top: 26px;
+    min-height: 134px;
+}
+
+.footer-adj {
+    padding: 0 0 10px 10px;
+}
+
 
 #footer {
     position: relative;
@@ -665,21 +719,7 @@ div.pluslet form {
     color: #ccc;
 }
 
-#wide_footer {
-    background: url("http://library.miami.edu/wp-content/themes/umiami/images/footer_bg.jpg") no-repeat scroll center center #FFFFFF;
-    border-top: 1px solid #CCCCCC;
-    clear: both;
-    color: #333;
-    float: left;
-    font-size: 1em;
-    line-height: 1.5em;
-    margin-top: 2em;
-    min-height: 9em;
-    padding-top: 1em;
-    position: relative;
-    width: 100%;
 
-}
 
 /* jquery ui wipeouts 
 Preferred is to turn off jquery ui in array at top of subjects/guide.php
@@ -810,35 +850,33 @@ line-height: 24px;
     background-color: transparent;
     background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
     border: 1px solid #fff;
-    border-radius: 5px 5px 0;
-    float: right;
-    margin: 2em -34px 2em 1em;
+    border-radius: 5px 5px 5px 5px;    
+    margin: 0 10px 15px 10px;
     padding: 1em;
-    position: relative;
-    
+    position: relative;    
 }
-div .tip h2 {
+
+.tip ul {
+    margin-left: 12px;
+}
+
+div.tip h2 {
     border-bottom: 1px dashed #a2ad00;
     font-size: 1em;
     font-weight: bold;
     margin: -12px -12px 12px;
     padding: 0.2em 1em;
 }
-div .tip a {
+div.tip a {
     color: #333;
     text-decoration: underline;
 }
-div .tip a:hover {
+div.tip a:hover {
     text-decoration: none;
 }
 .tipend {
-    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/bottom_right_green.png");
-    clear: right;
-    float: right;
-    height: 14px;
-    margin-right: -34px;
-    margin-top: -2em;
-    width: 24px;
+    background-image: none;
+    display: none;
 }
 
 .zebra {
@@ -882,11 +920,16 @@ table.istem_listing h2 {
     border: medium none;
 }
 
+table.item_listing {width: 98%;}
+
 .faq_filter {
     font-size: 0.8em;
-    margin: 1em;
     text-align: center;
 }
+
+.breather {
+        padding: 0 10px;
+    }
 
 
 /* //////////////////
@@ -1161,6 +1204,27 @@ table.istem_listing h2 {
         background-color: #F37421 !important;
         text-transform: none;        
     }
+
+    .footer-adj {
+        padding: 0;
+    }
+
+    #umiami_logo {padding-left: 10px;}
+
+    #wrap {
+        margin: 0 auto -160px;
+    }
+
+    #push,
+    .footer-container {
+        height: 160px;
+    }
+
+   .sidebar-bkg {
+        background: none; 
+   }
+
+    
     
 }
 
@@ -1231,15 +1295,40 @@ table.istem_listing h2 {
     }
 
     .tip {
-        width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
+        background-color: transparent;
+        background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
+        border: 1px solid #fff;
+        border-radius: 5px 5px 0;
+        float: right;
+        margin: 2em -25px 1em 1em;
+        padding: 1em;
+        position: relative;
+        width: 230px; /* we set this here so it doesn't overlay the other content on smaller screens */
     }
 
-    .breather {
-        margin: 0 .5em 0 1em;
-    }
+    .tipend {
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/bottom_right_green.png");
+    clear: right;
+    float: right;
+    height: 14px;
+    margin-right: -25px;
+    margin-top: -16px;
+    width: 24px;
+    display: block;
+}
+
+    .sidebar-bkg {
+   background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg') top left; 
+   min-height: 500px; 
+   background-repeat: no-repeat;
+   }
+
+    
 }
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
-
+ .tip {
+        width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
+    }
 }

@@ -172,29 +172,31 @@ print $social_and_search;
 ?>
 
 
-<div id="tabs" style="clear:both; position: relative;">
+<div id="tabs">
     <div id="main-content">
+        
         <div id="tab-container">
-<?php
+                <?php
 
-// Only show tabs if there is more than one tab
+                // Only show tabs if there is more than one tab
 
-if ($multi_tab == TRUE) {
-    $lobjGuide->outputNavTabs('public');
-    $bonus_class= "";
-} else {
-    $bonus_class = "no-tabs";
-}
+                if ($multi_tab == TRUE) {
+                    $lobjGuide->outputNavTabs('public');
+                    $bonus_class= "";
+                } else {
+                    $bonus_class = "no-tabs";
+                }
 
-?>
-
+                ?>
         </div> <!-- end tab-container -->
+        
         <div id="tab-body" class="<?php print $bonus_class; ?>">
-<?php
-$lobjGuide->outputTabs('public');
+                <?php
+                $lobjGuide->outputTabs('public');
 
-?>
+                ?>
         </div> <!-- end tab-body -->
+    
     </div> <!-- end main-content -->
 </div> <!-- end tabs -->
 
