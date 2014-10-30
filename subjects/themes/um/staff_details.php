@@ -132,29 +132,33 @@ $page_title = _("Staff Listing: ") . $fullname;
 include("includes/header.php");
 
 ?>
+
+<div class="panel-container panel-adj">
 <div class="pure-g">
-<div class="pure-u-2-3">
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"></div>
-        </div>
-        <div class="pluslet_body">
-<?php print $display; ?>
-        </div>
-    </div>
-</div>
-<div class="pure-u-1-3">
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text">Other Information</div>
-        </div>
-        <div class="pluslet_body"> Could go right here.</div>
+
+    <div class="pure-u-2-3">
+            <div class="pluslet">
+                <div class="titlebar">
+                    <div class="titlebar_text"></div>
+                </div>
+                <div class="pluslet_body">
+        <?php print $display; ?>
+                </div>
+            </div>
     </div>
 
-    <br />
+    <div class="pure-u-1-3">
+            <div class="pluslet">
+                <div class="titlebar">
+                    <div class="titlebar_text">Other Information</div>
+                </div>
+                <div class="pluslet_body"> Could go right here.</div>
+            </div>
+            <br />
+    </div>
 
-</div>
-</div>
+</div> <!--end pure-g-->
+</div> <!--end panel-container-->
 
 <?php
 ////////////
