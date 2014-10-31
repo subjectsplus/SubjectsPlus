@@ -184,7 +184,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 						}
 						else
 						{
-							?> <div class="install-pluslet"><a href="update.php">Update to 2.0!</a></div> <?php
+							?> <div class="install-pluslet"><a href="update.php">Update SubjectsPlus!</a></div> <?php
 						}
 					}else
 					{
