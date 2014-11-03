@@ -943,6 +943,16 @@ table.item_listing {width: 100%;}
     padding: 3px;
     position: relative;
 }
+.staff_photo_large {
+    background:#efefef;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 3px;
+    width: 225px;
+    height: 225px;
+    position: relative;
+}
 
 
 
