@@ -216,7 +216,7 @@ $results = "";
         $keywords = $myrow["3"];
 
         if ($result_count > 1) {
-            $index .= "<div class=\"zebra\" style=\"min-height: 1.5em; width: 97%;\"><a href=\"#faq-$row_count\">$question</a></div>\n";
+            $index .= "<div class=\"zebra\" style=\"min-height: 1.5em;\"><a href=\"#faq-$row_count\">$question</a></div>\n";
             $show_row_count = $row_count . ". ";
         }
         $results .= "<a name=\"faq-$row_count\"></a>\n
@@ -267,27 +267,28 @@ foreach ($collections_result as $myrow1) {
 
 <div class="panel-container">
 <div class="pure-g">
-<div class="pure-u-1 pure-u-md-2-3 panel-adj">
-<?php
-//$num_faqs = $row_count - 1;
-// print "<p style=\"background-color: #ffffcf;\"><strong>Note:</strong>  $num_faqs FAQs displayed.  Search <strong>all FAQs</strong> with the boxes to the right.</p><br />";
+<div class="pure-u-1 pure-u-lg-3-4 panel-adj">    
+        <?php
+        //$num_faqs = $row_count - 1;
+        // print "<p style=\"background-color: #ffffcf;\"><strong>Note:</strong>  $num_faqs FAQs displayed.  Search <strong>all FAQs</strong> with the boxes to the right.</p><br />";
 
-if (isset($_GET["page"]) && $_GET["page"] == "all") {
-  print "<div class=\"faq_filter\">" . _("All FAQs displayed.  Search or browse to limit ") . " &raquo;</div>";
-} else {
-  print "<div class=\"faq_filter\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</div>";
-}
+        if (isset($_GET["page"]) && $_GET["page"] == "all") {
+          print "<div class=\"breather\"><div class=\"faq_filter\">" . _("All FAQs displayed.  Search or browse to limit ") . " &raquo;</div></div>";
+        } else {
+          print "<div class=\"breather\"><div class=\"faq_filter\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</div></div>";
+        }
 
-if (isset($index) && $index != "") {
+        if (isset($index) && $index != "") {
 
-    print "$index<br /><br />";
-}
+            print "$index<br />";
+        }
 
 
-print $results; ?>
-</div> <!--end 2/3 main area column-->
+        print $results; ?>
+    
+</div> <!--end 3/4 main area column-->
 
-<div class="pure-u-1  pure-u-md-1-3 database-page" style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
+<div class="pure-u-1  pure-u-lg-1-4 database-page sidebar-bkg">
     <a name="rdiv"></a>
     <div class="tip">
             <h2><?php print _("Search FAQs"); ?></h2>
@@ -325,7 +326,7 @@ print $results; ?>
     </div>
     <div class="tipend"> </div>
 
-</div> <!--end 1/3 sidebar column-->
+</div> <!--end 1/4 sidebar column-->
 
 
 </div> <!--end pure-g-->
