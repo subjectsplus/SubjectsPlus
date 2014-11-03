@@ -212,11 +212,11 @@ class Autocomplete {
           }   else {
 
               $db = new Querier();
-              $record_url_sql = "SELECT location.location, title.title_id 
-              FROM location, title, location_title 
-              WHERE location.location_id = location_title.location_id
-              AND location_title.title_id = title.title_id
-              AND title.title_id = " . $db->quote($myrow['id']) . " LIMIT 0,50";
+              $record_url_sql = "SELECT location, title
+				FROM location l, title t, location_title lt 
+				WHERE  t.title_id = lt.title_id
+				AND l.location_id = lt.location_id AND t.title_id = " . $db->quote($myrow['id']) . " ";
+            
 
               $record_url_result = $db->query($record_url_sql);
 
