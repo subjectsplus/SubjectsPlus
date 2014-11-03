@@ -920,7 +920,7 @@ table.istem_listing h2 {
     border: medium none;
 }
 
-table.item_listing {width: 98%;}
+table.item_listing {width: 100%;}
 
 .faq_filter {
     font-size: 0.8em;
@@ -931,8 +931,12 @@ table.item_listing {width: 98%;}
         padding: 0 20px;
     }
 
+.breather-single {
+        padding: 0 20px;
+    }
+
 .staff_photo {
-    background: #FFF repeat scroll 0 0;
+    background:#efefef;
     border: 1px solid #333;
     margin-bottom: 20px;
     margin-right: 20px;
@@ -1332,6 +1336,10 @@ table.item_listing {width: 98%;}
    min-height: 500px; 
    background-repeat: no-repeat;
    }
+
+   .breather {
+        padding: 0 40px 0 20px;
+    }
 
     
 }
