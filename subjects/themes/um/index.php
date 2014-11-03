@@ -8,18 +8,7 @@
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
-
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-$subjects_theme = "um";
-
-if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/index.php");
-  exit; 
-}
-   
+    
 $use_jquery = array("ui");
 
 $page_title = $resource_name;
@@ -121,6 +110,10 @@ $newlist = "<ul>\n";
     $newlist .= "<li><a href=\"$db_url$myrow[1][0]\">$myrow[0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
+
+// List guides function -- no other page uses it ? //
+
+
 
 $searchbox = '
 <div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
