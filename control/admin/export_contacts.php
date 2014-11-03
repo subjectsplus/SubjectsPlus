@@ -9,12 +9,12 @@
  *   @todo 
  */
 use SubjectsPlus\Control\Querier;
-$db = new Querier;
-    
-    
 $subcat = "";
 $header = "noshow";
+
 include("../includes/header.php");
+
+$db = new Querier;
 
 switch ($_GET["type"]) {
   case "all_staff":
@@ -67,15 +67,19 @@ emergency_contact_name AS 'Contact Name', emergency_contact_phone AS 'Contact Ph
   $and
   ORDER BY lname";
 
+
 $db = new Querier;
 $export = $db->query($select);
 
 $fields = count( $export );
 
-for ( $i = 0; $i < $fields; $i++ )
-{
-    $header .= mysql_field_name( $export , $i ) . "\t";
+// yes, i cheated.  couldn't figure out how to get this with pdo from $select query
+$header_fields = array("Last Name", "First Name", "Work Phone #", "Cell Phone #", "Home Phone", "Contact Name", "Contact Phone #", "Relationship", "Department", "Street Address", "City", "State", "Zip", "Super_ID", "Supervisor Lname", "Supervisor Fname");
+
+foreach ($header_fields as $key => $value) {
+  $header .= $value  . "\t";
 }
+
 
     foreach( $export as $row )
 {
@@ -101,7 +105,7 @@ if ( $data == "" )
 {
     $data = "\n(0) Records Found!\n";                        
 }
-
+/*
 header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Content-type:text/csv; charset=utf-8");
@@ -110,6 +114,14 @@ header("Pragma: no-cache");
 header("Expires: 0");
 header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+*/
+
+header("Content-type: .xls application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=contacts.xls");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+print "$header\n$data";
 
 print "$header\n$data";
 
