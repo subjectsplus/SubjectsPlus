@@ -928,8 +928,18 @@ table.item_listing {width: 98%;}
 }
 
 .breather {
-        padding: 0 10px;
+        padding: 0 20px;
     }
+
+.staff_photo {
+    background: #FFF repeat scroll 0 0;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 3px;
+    position: relative;
+}
+
 
 
 /* //////////////////
