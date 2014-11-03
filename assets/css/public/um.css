@@ -548,22 +548,12 @@ ul.ui-autocomplete li a{
     margin: 0 .7em 1em .7em;
 }
 
-.pluslet_simple {
-    position: relative;
-    clear: both;
+.pluslet_simple {    
     cursor: auto;
     z-index: 1;
-    overflow: visible;
-    border: 1px solid #fff;
-    background-color: #fff;
-    border-radius: 5px;
-    -moz-border-radius: 10px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    overflow: visible;   
     padding: .5em 1em;
-    margin: 1em;
+    margin: 0 20px 1em 20px;
 }
 .pluslet_simple ul, ol {
     margin: 1em;
@@ -632,12 +622,18 @@ div.pluslet form {
 /* TalkBack */
 
 .talkback_form {
-    background-color: #d1d688;
     border: 1px solid #a2ad00;
     border-radius: 5px;
-    margin-right: 1em;
+    margin: 0 10px 20px 10px;
     padding: 1em;
+    background-color: transparent;
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
 }
+
+.form-item {border-radius: 4px; box-shadow: none; border: 1px solid #CCC; padding: 4px;}
+
+
+
 .talkback_form_music {
     background-color: #c9d6e0;
     border: 1px solid #7c98ae;
@@ -881,7 +877,9 @@ div.tip a:hover {
 
 .zebra {
     border-bottom: 1px solid #ccc;
-    padding: 0.5em 0 0.5em 0.5em;
+    padding: 0.5em 20px;
+    margin: 0 20px 0 20px;
+    background-color: #FF0;
 }
 .evenrow, .even {
     background-color: #efefef;
@@ -952,6 +950,11 @@ table.item_listing {width: 100%;}
     width: 225px;
     height: 225px;
     position: relative;
+}
+
+.pure-button-topsearch {
+    background-color: #666;
+    color: #fff;
 }
 
 
@@ -1350,6 +1353,10 @@ table.item_listing {width: 100%;}
    .breather {
         padding: 0 40px 0 20px;
     }
+
+    .zebra {    
+    margin: 0 40px 0 20px;
+}
 
     
 }

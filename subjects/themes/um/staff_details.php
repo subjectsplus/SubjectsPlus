@@ -13,6 +13,8 @@ use SubjectsPlus\Control\Querier;
 $page_title = "Library Staff Details";
 $subfolder = "services";
 
+$use_jquery = array();
+
 $db = new Querier;
     
 
@@ -64,10 +66,10 @@ $fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
 $info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"
 title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"  align=\"left\" class=\"staff_photo_large\" />
-<p style=\"margin-top; 0; padding-top: 0; font-size: larger;\"><strong>$fullname</strong><br />
+<p style=\"margin-top; 0; padding-top: 0;\"><strong>$fullname</strong><br />
 {$staffmem[0][3]}<br />
-<img src=\"../../assets/images/icons/email.gif\" style=\"vertical-align: middle;\" />  <a href=\"mailto:$staffmem{[0][5]}\">{$staffmem[0][5]}</a><br />
-<img src=\"../../assets/images/icons/telephone.gif\" style=\"vertical-align: middle;\" />  $tel";
+<img src=\"../assets/images/icons/email.gif\" style=\"vertical-align: middle;\" />  <a href=\"mailto:$staffmem{[0][5]}\">{$staffmem[0][5]}</a><br />
+<img src=\"../assets/images/icons/telephone.gif\" style=\"vertical-align: middle;\" />  $tel";
 
 
 $info .= "</p>";
@@ -122,7 +124,7 @@ if ($staffmem[0][8] != "") {
         $row_count++;
     }
 
-    $subject_listing .= "</div><br style=\"clear:both\" />";
+    $subject_listing .= "</div><br />";
 }
 
 // Assemble the content for our main pluslet
