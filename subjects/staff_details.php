@@ -17,7 +17,7 @@ include("../control/includes/autoloader.php");
 $subjects_theme = "um";
 
 if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/staff.php");
+  include("themes/$subjects_theme/staff_details.php");
   exit; 
 }
 
