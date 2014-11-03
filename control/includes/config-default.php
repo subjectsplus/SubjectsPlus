@@ -132,9 +132,12 @@ $dbName_SPlus = "subjectsplus";
 $target_blank = TRUE;
 //////////////////////
 
-
-
-
+/////////////////////
+// Use an override theme
+// this should correspond to a folder under subjects/theme/
+// and in this folder you put the override files
+$subjects_theme = "";
+/////////////////////
 
 //////////////////////
 // Header switcher
