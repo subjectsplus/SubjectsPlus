@@ -138,7 +138,7 @@ include("includes/header_um.php");
 
       ?>
       <div class="pure-u-1">
-          <div class="breather">
+          <div class="breather-single">
              <?php print $out;  ?> 
           </div>
       </div>
