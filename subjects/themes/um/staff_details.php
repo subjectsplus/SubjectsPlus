@@ -63,11 +63,11 @@ $tel = $tel_prefix . $staffmem[0][4];
 $fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
 $info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"
-title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"  align=\"left\" class=\"staff_photo\" />
+title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"  align=\"left\" class=\"staff_photo_large\" />
 <p style=\"margin-top; 0; padding-top: 0; font-size: larger;\"><strong>$fullname</strong><br />
 {$staffmem[0][3]}<br />
-<img src=\"../assets/images/icons/email.gif\" style=\"vertical-align: bottom;\" />  <a href=\"mailto:$staffmem{[0][5]}\">{$staffmem[0][5]}</a><br />
-<img src=\"../assets/images/icons/telephone.gif\" style=\"vertical-align: bottom;\" />  $tel";
+<img src=\"../../assets/images/icons/email.gif\" style=\"vertical-align: middle;\" />  <a href=\"mailto:$staffmem{[0][5]}\">{$staffmem[0][5]}</a><br />
+<img src=\"../../assets/images/icons/telephone.gif\" style=\"vertical-align: middle;\" />  $tel";
 
 
 $info .= "</p>";
@@ -138,16 +138,8 @@ include("includes/header_um.php");
 
     <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
             <div class="breather">
-                <div class="pluslet">
-                    <div class="titlebar">
-                        <div class="titlebar_text"></div>
-                    </div>
-                    <div class="pluslet_body">
-                        <?php print $display; ?>
-                    </div>
-                </div>
-            </div>
-            
+                <?php print $display; ?>
+            </div>            
     </div>
 
     <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
