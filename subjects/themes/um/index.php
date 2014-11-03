@@ -127,73 +127,69 @@ $searchbox = '
 
 // Add header now, because we need a value ($v2styles) from it
 
-include("includes/header.php");
+include("includes/header_um.php");
 
 // put together our main result display
 
 $guide_results = listGuides($search, $view_type);
 
-if (isset ($v2styles) && $v2styles == 1) {
   $our_results = "<div id=\"letterhead\">$tickboxes</div>
   $guide_results";
 
-  $layout = makePluslet("", $our_results, "","",FALSE);
+  //$layout = makePluslet("", $our_results, "","",FALSE);
 
-} else {
-  print "version 3 styles not set up yet";
-}
+
 
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
 ?>
-<br />
+<div class="panel-container">
 <div class="pure-g" id="guidesplash">
-<div class="pure-u-1 pure-u-md-2-3" id="listguides">
-<?php print $layout; ?>
-
+    <div class="pure-u-1 pure-u-md-2-3" id="listguides">
+        <div class="breather">
+        <br />
+        <?php print $our_results; ?>
+        </div> <!-- end breather -->
+        <br /><br />
     </div>
 
     <div class="pure-u-1 pure-u-md-1-3">
 
-      <!-- start pluslet -->
-      <div class="pluslet">
-        <div class="titlebar">
-          <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
-        </div>
-        <div class="pluslet_body">
+      <!-- start tip -->
+      <div class="tip">
+        <h2><?php print _("Search Databases"); ?></h2>
               <?php
-              $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", 30);
+              $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
               $input_box->displayBox();
               ?>
-        </div>
       </div>
-      <!-- end pluslet -->
-        <div class="pluslet">
-            <div class="titlebar">
-                <div class="titlebar_text"><?php print _("Newest Guides"); ?></div>
-            </div>
-            <div class="pluslet_body"> <?php print $newest_guides; ?> </div>
+      <!-- end tip -->
+      <!-- start tip -->
+        <div class="tip">
+            <h2><?php print _("Newest Guides"); ?></h2>
+            <?php print $newest_guides; ?>
         </div>
-        <!-- start pluslet -->
-        <div class="pluslet">
-            <div class="titlebar">
-                <div class="titlebar_text"><?php print _("Newest Databases"); ?></div>
-            </div>
-            <div class="pluslet_body"> <?php print $newlist; ?> </div>
+    <!-- end tip -->
+
+        <!-- start tip -->
+        <div class="tip">
+            <h2><?php print _("Newest Databases"); ?></h2>
+            <?php print $newlist; ?>
         </div>
-        <!-- end pluslet -->
+        <!-- end tip -->
         <br />
 
     </div>
-</div>
+</div> <!--end pure-g-->
+</div> <!--end panel-container-->
 <?php
 ///////////////////////////
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include("includes/footer_um.php");
 
 ?>
 
