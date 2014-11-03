@@ -79,6 +79,7 @@ if ($staffmem[0][7] != "") {
 
 // If it's a ref librarian, show their subjects
 $subject_listing = ""; // init in case they don't have subs
+$li_subject_listing = "";
 
 if ($staffmem[0][8] != "") {
 
@@ -108,6 +109,10 @@ if ($staffmem[0][8] != "") {
             $linky = "guide.php?subject=" . $mysubs[2];
         }
 
+        // li subject listing
+        $li_subject_listing .= "<li><a href=\"$linky\">$mysubs[1]</a></li>";
+
+        // two col listing
         if ($row_count == $per_row) {
             $subject_listing .= "</div><div style=\"float: left; width: 47%\">";
         }
@@ -121,7 +126,7 @@ if ($staffmem[0][8] != "") {
 }
 
 // Assemble the content for our main pluslet
-$display = $info . $subject_listing;
+$display = $info; 
 
 $page_title = _("Staff Profile: ") . $fullname;
 
@@ -152,14 +157,15 @@ include("includes/header_um.php");
 
     <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
 
-      <!-- start tip -->
-      <div class="tip">
-          <h2>Other Information</h2>
-              <p>Could go right here.</p>
-      </div>
-      <div class="tipend"> </div>
-      
-      <!-- end tip -->
+    <?php if ($li_subject_listing != "") { ?>
+    <div class="tip">
+      <h2>Subject Areas</h2>
+      <ul>
+        <?php print $li_subject_listing; ?>
+      </ul>
+    </div>
+    <div class="tipend"></div>
+    <?php } ?>
             
 
 </div> <!--end pure-g-->
