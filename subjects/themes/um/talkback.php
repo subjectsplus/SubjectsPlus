@@ -343,8 +343,8 @@ include("includes/header_um.php");
 <div class="panel-container">
 <div class="pure-g">
 	
-	<div class="pure-u-1 pure-u-md-2-3 panel-adj">
-		<div class="breather" style="max-width: 650px;">
+	<div class="pure-u-1 pure-u-lg-3-4 panel-adj">
+		<div class="breather">
 				<?php print $feedback . $stk_message; ?>
 
 				<?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>			
@@ -355,29 +355,25 @@ include("includes/header_um.php");
 				<?php print $comment_header . $results; ?>
 
 		</div>
-	</div> <!--end 2/3 main area column-->
+	</div> <!--end 3/4 main area column-->
 
-	<div class="pure-u-1 pure-u-md-1-3 database-page"  style="background: url('//library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_stairwell.jpg') top right; min-height: 500px; background-repeat: no-repeat;">
-    	
-    	<div class="breather" style="max-width: 300px;">
-	      	  <br />
+	<div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">	      	 
 		      <form id="tellus" action="<?php print $form_action; ?>" method="post">
 			        <p class="talkback_form <?php print $tb_bonus_css; ?>">
 			          Need help <strong>now</strong>?  <a href="/ask-a-librarian/">Ask a Librarian</a>.<br /><br />
 			          <strong><?php print _("Your comment:"); ?></strong><br />
 
-			          <textarea name="the_suggestion" cols="26" rows="6"><?php print $this_comment; ?></textarea><br /><br />
+			          <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
 			          <strong><?php print _("Your name (optional):"); ?></strong><br />
-			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" />
+			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
 			          <br /><br />
-			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" />
+			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" />
 			          <br /><br />
-			          <input type="submit" name="submit_comment" value="<?php print _("Submit"); ?>" />
+			          <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" />
 			          <br /></p>
 		      </form>
-	      	  <br /><br />
-    	</div>
-	</div><!--end 1/3 sidebar column-->
+	      	  
+	</div><!--end 1/4 sidebar column-->
 
 </div> <!--end pure-g-->
 </div> <!--end panel-container-->
