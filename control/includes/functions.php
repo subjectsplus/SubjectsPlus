@@ -1572,6 +1572,48 @@ function tokenizeText($our_text, $our_subject_id = "") {
         return $our_text;
     }
 
+function listGuides($search = "", $type="all") {
+    $db = new Querier();
+    
+    $andclause = "";
+    global $guide_path;
+
+    if ($search != "") {
+        $search = scrubData($search);
+        $andclause .= " AND subject LIKE '%" . $db->quote($search) . "%'";
+    }
+
+    if ($type != "all") {
+        $andclause .= " AND type=" . $db->quote($type) . "";
+    }
+
+    $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
+   // $r = $db->query($q);
+    //print $q;
+    $row_count = 0;
+    $colour1 = "oddrow";
+    $colour2 = "evenrow";
+
+    $db = new Querier;
+    $list_guides = "<table class=\"item_listing\" width=\"98%\">";
+    foreach ($db->query($q) as $myrow) {
+
+        $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+
+        $guide_location = $guide_path . $myrow[0];
+
+        $list_guides .= "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
+     <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
+        <div class=\"list_bonus\"></div></td>
+        <td class=\"subject\">{$myrow[2]}</td>
+         </tr>\n";
+        $row_count++; 
+    }
+    $list_guides .= "</table>";
+
+    return $list_guides;
+}
+
 // This just returns whether or not you want an anchor target to open in new window
 // made this puppy a function in case people want to use it elsewhere
     
