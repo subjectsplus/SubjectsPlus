@@ -123,39 +123,44 @@ if ($staffmem[0][8] != "") {
 // Assemble the content for our main pluslet
 $display = $info . $subject_listing;
 
-$page_title = _("Staff Listing: ") . $fullname;
+$page_title = _("Staff Profile: ") . $fullname;
 
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
+include("includes/header_um.php");
 
 ?>
 
-<div class="panel-container panel-adj">
+<div class="panel-container">
 <div class="pure-g">
 
-    <div class="pure-u-2-3">
-            <div class="pluslet">
-                <div class="titlebar">
-                    <div class="titlebar_text"></div>
-                </div>
-                <div class="pluslet_body">
-        <?php print $display; ?>
+    <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
+            <div class="breather">
+                <div class="pluslet">
+                    <div class="titlebar">
+                        <div class="titlebar_text"></div>
+                    </div>
+                    <div class="pluslet_body">
+                        <?php print $display; ?>
+                    </div>
                 </div>
             </div>
+            
     </div>
 
-    <div class="pure-u-1-3">
-            <div class="pluslet">
-                <div class="titlebar">
-                    <div class="titlebar_text">Other Information</div>
-                </div>
-                <div class="pluslet_body"> Could go right here.</div>
-            </div>
-            <br />
-    </div>
+    <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
+
+      <!-- start tip -->
+      <div class="tip">
+          <h2>Other Information</h2>
+              <p>Could go right here.</p>
+      </div>
+      <div class="tipend"> </div>
+      
+      <!-- end tip -->
+            
 
 </div> <!--end pure-g-->
 </div> <!--end panel-container-->
@@ -165,5 +170,5 @@ include("includes/header.php");
 // Footer
 ///////////
 
-include("includes/footer.php");
+include("includes/footer_um.php");
 ?>
