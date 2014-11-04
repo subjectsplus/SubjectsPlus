@@ -21,7 +21,6 @@ if(isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != ""){
     header("Location: $redirect");
 }
 
-// Some constants, previously in the config.php
 
 if ($_SERVER['HTTP_HOST'] != "localhost") {
     define("PATH_FROM_ROOT", "//library.miami.edu");
@@ -52,7 +51,7 @@ if (!isset ($noheadersearch)) {
 // We've got a variable for those who wish to keep the old styles
 $v2styles = TRUE;
 ?>
-<!--
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -66,7 +65,7 @@ $v2styles = TRUE;
   })();
 
 </script>
--->
+
 <style>
 
 </style>
@@ -288,7 +287,7 @@ $v2styles = TRUE;
                         <p style="align-right"><a href="http://www.library.miami.edu/rsmaslib/">RSMAS Library</a></p>
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>,
-                        <a href="<?php print PATH_TO_SP; ?>/subjects/new_acquisitions.php">New Acquisitions</a>,
+                        <a href="<?php print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a>,
                         <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Suggest a Purchase</a></div>
                   </div>
                   <!-- end lib/cols mega menu -->
