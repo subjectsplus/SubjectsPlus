@@ -128,7 +128,7 @@ include("includes/header_um.php");
           </div>
       </div> <!--end 3/4 main area-->
 
-      <div class="pure-u-1 pure-u-lg-1-4">
+      <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
               <!-- start tip -->
               <div class="tip">
                   <h2><?php print _("Feature Films"); ?></h2>
@@ -164,7 +164,7 @@ include("includes/footer_um.php");
 
 
     // show db details
-    $(".details_details").live("click", function() {
+    $(".details_details").on("click", function() {
       
       $(this).parent().find(".list_bonus").toggle()
     });
