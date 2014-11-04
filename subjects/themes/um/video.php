@@ -17,8 +17,8 @@ $keywords = _("library, research, videos, instruction");
 
 $extra_sql = "";
 // Intro text
-$intro = "<p>A collection of videos produced by the University of Miami Libraries..</p>";
-$display = "<br class=\"clear\" />";
+$intro = "<p>A collection of videos produced by the University of Miami Libraries.</p>";
+$display = "<br />";
 
 try {
   } catch (Exception $e) {
@@ -118,33 +118,38 @@ if ($num_rows != 0) {
 
 include("includes/header_um.php");
 ?>
+
 <div class="panel-container">
 <div class="pure-g">
-  <div class="pure-u-1 pure-u-md-2-3 panel-adj">
-      <div class="breather">
-      <?php print $intro; ?>
-      <br />
-      <?php print $display; ?>
+      <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
+          <div class="breather">
+          <?php print $intro; ?>
+          <?php print $display; ?>
+          </div>
+      </div> <!--end 3/4 main area-->
 
-    </div>
-</div>
-<div class="pure-u-1 pure-u-md-1-3">
-    <div class="tip">
-        <h2><?php print _("Feature Films"); ?></h2>
-        <p>  Looking for movies to check out?  See <a href="http://library.miami.edu/media/">CDs/DVDs</a> or <a href="http://library.miami.edu/udvd/">UDVD</a>.</p>
-    </div>
-    <!-- start tip -->
-    <div class="tip">
-        <h2><?php print _("Browse by Tag"); ?></h2>
-        <?php print $vtag_items; ?>
-    </div>
-    <!-- end tip -->
-    <br />
+      <div class="pure-u-1 pure-u-lg-1-4">
+              <!-- start tip -->
+              <div class="tip">
+                  <h2><?php print _("Feature Films"); ?></h2>
+                  <p>  Looking for movies to check out?  See <a href="http://library.miami.edu/media/">CDs/DVDs</a> or <a href="http://library.miami.edu/udvd/">UDVD</a>.</p>
+              </div>
+              <!-- end tip -->
+              <div class="tipend"> </div>
 
-</div>
-</div>
+              <!-- start tip -->
+              <div class="tip">
+                  <h2><?php print _("Browse by Tag"); ?></h2>
+                  <?php print $vtag_items; ?>
+              </div>
+              <!-- end tip -->
+              <div class="tipend"> </div>
+
+      </div> <!--end 1/4 sidebar column-->
+
+</div><!--end pure=g-->
 </div> <!-- end panel-container -->
-<br />
+
 
 <?php
 ///////////////////////////
