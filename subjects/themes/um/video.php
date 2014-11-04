@@ -8,14 +8,7 @@
  */
 
 use SubjectsPlus\Control\Querier;
-
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)) { include("themes/$subjects_theme/video.php"); exit;}
-
+    
 $use_jquery = array("colorbox");
 
 $page_title = _("Library Videos");
@@ -24,7 +17,7 @@ $keywords = _("library, research, videos, instruction");
 
 $extra_sql = "";
 // Intro text
-$intro = "<p>A collection of videos produced at this library.</p>";
+$intro = "<p>A collection of videos produced by the University of Miami Libraries..</p>";
 $display = "<br class=\"clear\" />";
 
 try {
@@ -123,42 +116,34 @@ if ($num_rows != 0) {
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
+include("includes/header_um.php");
 ?>
-<br />
+<div class="panel-container">
 <div class="pure-g">
-<div class="pure-u-1 pure-u-md-2-3">
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print $page_title; ?></div>
-        </div>
-        <div class="pluslet_body">
-            <br />
+  <div class="pure-u-1 pure-u-md-2-3 panel-adj">
+      <div class="breather">
       <?php print $intro; ?>
       <br />
       <?php print $display; ?>
-        </div>
+
     </div>
 </div>
 <div class="pure-u-1 pure-u-md-1-3">
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Feature Films"); ?></div>
-        </div>
-        <div class="pluslet_body"><p>  Looking for movies to check out?  See <a href="">The Place Where We List Movies</a>.</p></div>
+    <div class="tip">
+        <h2><?php print _("Feature Films"); ?></h2>
+        <p>  Looking for movies to check out?  See <a href="http://library.miami.edu/media/">CDs/DVDs</a> or <a href="http://library.miami.edu/udvd/">UDVD</a>.</p>
     </div>
-    <!-- start pluslet -->
-    <div class="pluslet">
-        <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Browse by Tag"); ?></div>
-        </div>
-        <div class="pluslet_body"><?php print $vtag_items; ?></div>
+    <!-- start tip -->
+    <div class="tip">
+        <h2><?php print _("Browse by Tag"); ?></h2>
+        <?php print $vtag_items; ?>
     </div>
-    <!-- end pluslet -->
+    <!-- end tip -->
     <br />
 
 </div>
 </div>
+</div> <!-- end panel-container -->
 <br />
 
 <?php
@@ -166,7 +151,7 @@ include("includes/header.php");
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include("includes/footer_um.php");
 ?>
 
 <script type="text/javascript" language="javascript">
