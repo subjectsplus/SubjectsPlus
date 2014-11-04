@@ -908,6 +908,9 @@ div.tip a:hover {
 .list_bonus {
     display: none;
     z-index: 200000;
+    float: left;
+    padding: 10px 20px;
+    clear: both;
 }
 table {
     border: 1px solid #ccc;
@@ -998,7 +1001,8 @@ div.vid_container {
   width: 100%;
   color: #fff;
   float: left;
-  margin: 0 0 20px 0;
+  margin: 0 0 25px 0;
+  padding-bottom: 10px;
 }
 
 
