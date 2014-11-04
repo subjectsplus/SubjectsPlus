@@ -630,7 +630,7 @@ div.pluslet form {
     background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
 }
 
-.form-item {border-radius: 4px; box-shadow: none; border: 1px solid #CCC; padding: 4px;}
+.form-item {border-radius: 4px; box-shadow: none; border: 1px solid #CCC; padding: 4px; max-width: auto;}
 
 
 
@@ -769,6 +769,8 @@ line-height: 24px;
     margin: 0.5em 0.5em 0.5em 0;
     padding: 0 0.6em;
 }
+#letterhead ul {margin:0; text-align: center;}
+
 #letterhead a, #letterhead li {
     background-color: #eee;
     border: 1px solid #ccc;
@@ -957,6 +959,20 @@ table.item_listing {width: 100%;}
     color: #fff;
 }
 
+.subject {
+    font-size: 12px;
+    text-align: right;
+   padding-right: 20px !important;
+   color: #999;
+}
+
+.pure-form input:not([type]), .pure-form input[type="text"], .pure-form input[type="password"], .pure-form input[type="email"], .pure-form input[type="url"], .pure-form input[type="date"], .pure-form input[type="month"], .pure-form input[type="time"], .pure-form input[type="datetime"], .pure-form input[type="datetime-local"], .pure-form input[type="week"], .pure-form input[type="number"], .pure-form input[type="search"], .pure-form input[type="tel"], .pure-form input[type="color"], .pure-form label {
+    display: inline-block;
+}
+
+#quick_search {
+    width: 160px;
+}
 
 
 /* //////////////////
