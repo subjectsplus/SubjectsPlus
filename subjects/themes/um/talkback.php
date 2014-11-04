@@ -116,18 +116,18 @@ if (isset($_GET['c'])) {
 $feedback = "";
 
 $submission_feedback = "
-<div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\"  >" . _("Thanks") . "</div></div>\n
-<div class=\"pluslet_body\">\n
+<div class=\"talkback-message talkback-success\">\n
+<h2>" . _("Thanks") . "</h2>\n
+<div class=\"talkback-message-body\">\n
 <p>" . _("Thank you for your feedback.  We will try to post a response within the next three business days.") . "</p>\n
 </div>\n
 </div>\n
 ";
 
 $submission_failure_feedback = "
-<div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\"  >" . _("Oh dear.") . "</div></div>\n
-<div class=\"pluslet_body\">\n
+<div class=\"talkback-message talkback-error\">\n
+<h2>" . _("Oh dear.") . "</h2>\n
+<div class=\"talkback-message-body\">\n
 <p>" . _("There was a problem with your submission.  Please try again.") . "</p>
 <p>" . _("If you continue to get an error, please contact the <a href=\"mailto:$administrator_email\">administrator</a>") . "
 </div>\n
@@ -357,21 +357,23 @@ include("includes/header_um.php");
 		</div>
 	</div> <!--end 3/4 main area column-->
 
-	<div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">	      	 
-		      <form id="tellus" action="<?php print $form_action; ?>" method="post">
-			        <p class="talkback_form <?php print $tb_bonus_css; ?>">
-			          Need help <strong>now</strong>?  <a href="/ask-a-librarian/">Ask a Librarian</a>.<br /><br />
-			          <strong><?php print _("Your comment:"); ?></strong><br />
-
+	<div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
+			 <div class="tip">
+				<h2>Need help <strong>now</strong>? <br /><a href="/ask-a-librarian/">Ask a Librarian</a>.</h2>
+		      		<form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
+			        <div class="talkback_form <?php print $tb_bonus_css; ?>">			          
+			          <p><strong><?php print _("Your comment:"); ?></strong><br />
 			          <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
 			          <strong><?php print _("Your name (optional):"); ?></strong><br />
 			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
 			          <br /><br />
 			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" />
 			          <br /><br />
-			          <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" />
-			          <br /></p>
+			          <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" /></p>
+			        </div>
 		      </form>
+		    </div>
+		    <div class="tipend"> </div>
 	      	  
 	</div><!--end 1/4 sidebar column-->
 
