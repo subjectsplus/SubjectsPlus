@@ -16,12 +16,8 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-$subjects_theme = "um";
-
-if (isset($subjects_theme)) {
-  include("themes/$subjects_theme/faq.php");
-  exit; 
-}
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)) { include("themes/$subjects_theme/faq.php"); exit;}
 
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
