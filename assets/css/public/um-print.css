@@ -88,7 +88,8 @@ ul#nav_menu div,
 #wide_footer,
 .pluslet_body form,
 #colorbox,
-#cboxContent {display: none; visibility: hidden; height: 0;}
+#cboxContent,
+#cboxOverlay {display: none !important; visibility: hidden; height: 0; background: transparent;}
 
 
 .pluslet .pluslet_body a {color: #000; text-decoration: none; border-bottom: none;}
