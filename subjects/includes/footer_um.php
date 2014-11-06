@@ -188,3 +188,31 @@ $(".mega_child select").mouseout(function(e) {
   // End Search Dropdown zone //
 });
 </script>
+<script>
+function printView() {
+    var visible_tab;
+
+    $('#tab-body').children().each(function () {
+  if ($(this).is(":visible")) {
+      visible_tab = $(this);
+      
+  } else {
+      $(this).show();
+      
+  }
+
+
+    });
+    window.print();
+    
+    
+    $('#tab-body').children().each(function () {
+  $(this).hide(); 
+  
+    });
+    
+    $(visible_tab).show();
+    
+}
+
+</script>
