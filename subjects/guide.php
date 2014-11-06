@@ -324,7 +324,7 @@ jQuery(function() {
          }
 	   });
 
-       $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\">Choose from the print options below:<br /><br /><ul><li><a onclick=\"window.print();\">Print Current Tab</a></li><li><a onclick=\"printView();\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
+       $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\"><ul><li><a onclick=\"window.print();\" class=\"pure-button pure-button-topsearch\">Print Current Tab</a></li><li><a onclick=\"printView();\" class=\"pure-button pure-button-topsearch\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
 
        $('.printer_no_tabs').click(function(){ window.print(); });       
 
