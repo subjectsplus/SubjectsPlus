@@ -86,7 +86,9 @@ ul#nav_menu div,
 #tab-container,
 .footer-container,
 #wide_footer,
-.pluslet_body form {display: none; visibility: hidden; height: 0;}
+.pluslet_body form,
+#colorbox,
+#cboxContent {display: none; visibility: hidden; height: 0;}
 
 
 .pluslet .pluslet_body a {color: #000; text-decoration: none; border-bottom: none;}

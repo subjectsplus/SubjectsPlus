@@ -11,7 +11,7 @@
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
 
-$use_jquery = array("ui", "ui_styles");  // don't want the UI styles?  remove ui_styles from array
+$use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array("ui"); //um don't want no ui_styles
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
@@ -175,19 +175,29 @@ print $social_and_search;
 <div id="tabs">
     <div id="main-content">
         
-        <div id="tab-container">
+        <div id="tab-container"> 
+
+
                 <?php
+
+                $printer_tabs ='<div class="printer_tabs print-img">&nbsp;</div>'; 
+                $printer_no_tabs ='<div class="printer_no_tabs print-img">&nbsp;</div>';
+
 
                 // Only show tabs if there is more than one tab
 
                 if ($multi_tab == TRUE) {
                     $lobjGuide->outputNavTabs('public');
                     $bonus_class= "";
+                    print $printer_tabs;
+                    
                 } else {
                     $bonus_class = "no-tabs";
+                    print $printer_no_tabs;                    
                 }
 
                 ?>
+                
         </div> <!-- end tab-container -->
         
         <div id="tab-body" class="<?php print $bonus_class; ?>">
@@ -196,7 +206,7 @@ print $social_and_search;
 
                 ?>
         </div> <!-- end tab-body -->
-    
+
     </div> <!-- end main-content -->
 </div> <!-- end tabs -->
 
@@ -313,6 +323,10 @@ jQuery(function() {
 	     	window.location.hash = 'box-' + box_id;
          }
 	   });
+
+       $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\">Choose from the print options below:<br /><br /><ul><li><a onclick=\"window.print();\">Print Current Tab</a></li><li><a onclick=\"printView();\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
+
+       $('.printer_no_tabs').click(function(){ window.print(); });       
 
 </script>
 
