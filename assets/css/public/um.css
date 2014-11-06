@@ -352,6 +352,52 @@ ul#nav_menu.nav li div.mega_child {
 }
 
 
+
+/* Print Dialog */
+
+div.printer_tabs { /* Print button on guide with tabs */
+    margin: 0;  
+    background-color: transparent;
+    position: absolute;
+    top:0;
+    right: 4px;
+     width: 28px;
+
+}
+
+div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: 0;  
+    background-color: #FFF; 
+    text-align: right;
+    width: 100%;
+}
+
+.print-img { 
+    background-image: url("../../images/printer-um.png");
+    background-repeat: no-repeat;
+    background-position: 99.5% 0;
+    cursor: pointer;
+}
+
+div.printer_tabs.print-img { 
+    background-image: url("../../images/printer-um.png");
+}
+
+.printDialog {
+    margin: 10px;
+    padding: 10px;
+    background-color: #F2f2f2;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.printDialog ul li {margin-bottom: 15px; font-size: 14px;}
+
+
+
+
+
+
 /* Guide tabs */
 
 #tabs {    
@@ -395,8 +441,11 @@ ul#nav_menu.nav li div.mega_child {
 }
 
 
+
+
+
 #tabs ul {
-    margin: 14px 30px 0 30px;
+    margin: 14px 90px 0 30px;
     
 }
 
