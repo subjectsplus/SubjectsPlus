@@ -359,37 +359,38 @@ div.printer_tabs { /* Print button on guide with tabs */
     margin: 0;  
     background-color: transparent;
     position: absolute;
-    top:0;
+    top:-10px !important;
     right: 4px;
 }
 
 div.printer_no_tabs { /* Print button on guide with NO tabs */
     margin: 0;  
     background-color: #FFF; 
-    padding-right: 4px;
+    padding-right: 8px;
     text-align: right;
-    padding-top: 8px;
 
 }
 
 .print-img-tabs, .print-img-tabs:hover { 
-    background-image: url("../../images/printer.png");
+    background-image: url("../../images/printer-um.png");
     background-repeat: no-repeat;
-    background-position: 10% 50%;
+    background-position: 50% 65%;
     cursor: pointer;    
-    padding: 4px 10px 4px 30px;
-    font-size: 14px;   
-    background-color: #333 !important; 
+    padding: 2px 6px;
+    background-color: #FFF !important; 
+    border-radius: 50%;
+    border: 2px solid #a2ad00;
 }
 
 .print-img-no-tabs, .print-img-no-tabs:hover { 
-    background-image: url("../../images/printer.png");
+    background-image: url("../../images/printer-um.png");
     background-repeat: no-repeat;
-    background-position: 12% 50%;
+    background-position: 50% 65%;
     cursor: pointer;    
-    padding: 8px 10px 4px 32px;
-    font-size: 14px;   
-    background-color: #333 !important; 
+    padding: 2px 6px;
+    background-color: transparent !important; 
+    border-radius: 50%;
+    border: 2px solid #a2ad00;
 }
 
 .printDialog {
