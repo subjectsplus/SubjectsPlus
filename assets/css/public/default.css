@@ -192,7 +192,7 @@ img {
 
 #guide_nav_tools {
     float: left;
-    margin: 2em 0 1em 1em;
+    margin: 2em 0 1em 40px;
 }
 
 #guide_nav_tools img {
@@ -339,20 +339,19 @@ img {
 
 
 div.printer_tabs { /* Print button on guide with tabs */
-    margin: 0;  
+    margin: 0 0 0 0;  
     background-color: transparent;
     position: absolute;
-    top:-55px !important;
-    right: 290px;
+    top:-29px !important;
+    width: 36px;
 }
 
 div.printer_no_tabs { /* Print button on guide with NO tabs */
     margin: 0 0 0 5px;  
      background-color: transparent;
     position: absolute;
-    top: 0 !important;
-    right: 290px;
-
+    top: 25px !important;
+    width: 36px;
 
 }
 
@@ -1169,7 +1168,25 @@ width:55px;
 
     #guide_nav_tools {
         float: right !important;
-        margin-top: 0;
+        margin: 0 0 0 0;
+    }
+
+    div.printer_tabs { /* Print button on guide with tabs */
+        margin: 0 0 0 0;  
+        background-color: transparent;
+        position: absolute;
+        top:-54px !important;
+        right: 305px;
+        width: 36px;
+    }
+
+    div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: 0 0 0 5px;  
+     background-color: transparent;
+    position: absolute;
+    top: 0 !important;
+    right: 305px !important;
+    width: 36px;
     }
 }
 
