@@ -180,8 +180,8 @@ print $social_and_search;
 
                 <?php
 
-                $printer_tabs ='<div class="printer_tabs print-img">&nbsp;</div>'; 
-                $printer_no_tabs ='<div class="printer_no_tabs print-img">&nbsp;</div>';
+                $printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs">Print</div></div>'; 
+                $printer_no_tabs ='<div class="printer_no_tabs"><div class="pure-button pure-button-topsearch print-img-no-tabs">Print</div></div>';
 
 
                 // Only show tabs if there is more than one tab
