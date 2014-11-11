@@ -672,6 +672,15 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
     overflow-x: hidden !important;
 }
 
+.pluslet_body a,
+.pluslet_body a:link {text-decoration: underline; color: #40659b;}
+
+.pluslet_body a:visited {text-decoration: underline; color: #551A8B;}
+
+.pluslet_body a:hover,
+.pluslet_body a:active,
+.pluslet_body a:focus {text-decoration: underline; color: #cc6666;}
+
 div.pluslet form {
     padding-top: -10px;
     margin: 0;
