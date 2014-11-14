@@ -54,7 +54,8 @@ text-decoration: underline;
 }
 
 
-p a[href^="http://"]:after, a[href^="http://"]:after {
+p a[href^="http://"]:after, a[href^="http://"]:after,
+p a[href^="https://"]:after, a[href^="https://"]:after {
 content: " (" attr(href) ")";
 font-size: 80%;
 text-decoration: underline;
@@ -94,7 +95,9 @@ ul#nav_menu div,
 #cboxContent,
 #cboxOverlay,
 #letterhead,
-.list_bonus {display: none !important; visibility: hidden; height: 0; background: transparent;}
+.list_bonus,
+#autoC,
+.tipend {display: none !important; visibility: hidden; height: 0; background: transparent;}
 
 
 .pluslet .pluslet_body a {color: #000; text-decoration: none; border-bottom: none;}
@@ -104,6 +107,10 @@ ul#nav_menu div,
     margin-bottom: 20px;
 }
 
+.tip {
+    margin: 20px 0 0 0;
+}
+
 
 /* Styling for index.php */
 
@@ -111,12 +118,23 @@ ul#nav_menu div,
     font-size: 12px;
 }
 
-.item_listing td a:after {
-content: " <br>(" attr(href) ")<br >";
-font-size: 80%;
+#listguides .item_listing td a:after {
+display: none;
 }
 
-.item_listing td a {text-decoration: none;}
+#listguides .item_listing td a {text-decoration: none;}
+
+.tip ul li a {
+  text-decoration: none;
+}
+
+.tip ul li a:after {
+      content: " (" attr(href) ")";
+      font-size: 80%;
+      display: block;
+      clear: both;
+      text-decoration: underline;
+}
 
 
 
@@ -335,38 +353,12 @@ note that you need to tweak #tab-container to top: -3.3em if you keep jquery ui 
     padding: 0.1em 0;
 }
 
-.tip {
-    background-color: transparent;
-    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
-    border: 1px solid #fff;
-    border-radius: 5px 5px 5px 5px;    
-    margin: 0 10px 15px 10px;
-    padding: 1em;
-    position: relative;    
-}
 
-.tip ul {
-    margin-left: 12px;
-}
 
-div.tip h2 {
-    border-bottom: 1px dashed #a2ad00;
-    font-size: 1em;
-    font-weight: bold;
-    margin: -12px -12px 12px;
-    padding: 0.2em 1em;
-}
-div.tip a {
-    color: #333;
-    text-decoration: underline;
-}
-div.tip a:hover {
-    text-decoration: none;
-}
-.tipend {
-    background-image: none;
-    display: none;
-}
+
+
+
+
 
 
 .highlight {
@@ -497,28 +489,7 @@ div.video_thumb img {
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
 
-    .tip {
-        background-color: transparent;
-        background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
-        border: 1px solid #fff;
-        border-radius: 5px 5px 0;
-        float: right;
-        margin: 2em -25px 1em 1em;
-        padding: 1em;
-        position: relative;
-        width: 230px; /* we set this here so it doesn't overlay the other content on smaller screens */
-    }
-
-    .tipend {
-    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/bottom_right_green.png");
-    clear: right;
-    float: right;
-    height: 14px;
-    margin-right: -25px;
-    margin-top: -16px;
-    width: 24px;
-    display: block;
-}
+    
 
    
 
@@ -532,9 +503,7 @@ div.video_thumb img {
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
- .tip {
-        width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
-    }
+ 
 
     .form-item {width: 260px;}
 }
