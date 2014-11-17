@@ -1,50 +1,60 @@
 /* 
     Document   : prints.css
     Created on : 
-    Author     : agdarby
-    Description: print stylesheet for public site; needs updating
+    Author     : agdarby, pvillanueva
+    Description: print stylesheet for public site
 */
 
 @media print {
 
+body { 
+    background: #FFFFFF; 
+    font-size: 12pt; 
+    font-family:"Times New Roman";
+    color: #000000;
+    line-height: 1.2;
+    width: 100%;
+} 
 
-body {
+h1 {font-size: 20pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h2 {font-size: 16pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h3 {font-size: 14pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h4 {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h5 {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+p {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
 
-	background-color: #fff; 	
-	font-family: "Helvetica Neue", "Helvetica", sans-serif;
-	font-size: 10pt;
+div { 
+    width: 100%; 
+    border: none;     
+    margin: 0 ;     
+    padding: 0;
+    box-shadow: none; 
+    border-radius: none;  
+    background: white;
+    text-align: left;
+    font-family: inherit;
+    font-size: 12pt; 
+} 
 
+img {
+border: none;
 }
 
-#rapper {
-	width: auto; 
-	padding: 0; 
-	border: 0;
-	text-align: left;
+ul, ol {margin: 0 0 0 30px;}
 
+a,
+a:link, 
+a:visited { 
+    color: #333;
+    text-decoration: underline; 
+    border: none;
 }
 
-html>body #rapper {
-	width: 100%;
 
-}
 
-a {
-	color: #333;
 
-}
 
-a:link {
-	color: #333;
-}
 
-a:visited {
-	color: #333;
-}
-
-a:hover {
-	color: #333;
-}
 
 
 
@@ -335,4 +345,4 @@ display: none;
 
 
 
-}
+} /*Close media print */
