@@ -236,7 +236,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 
       <?php if ($newlist) { ?>
       <div class="tip">
-        <h2>5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
+        <h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
         <?php print $newlist; ?>
       </div>
       <div class="tipend"></div>
