@@ -174,7 +174,7 @@ include("includes/footer.php");
 
 
     // show db details
-    $(".details_details").live("click", function() {
+    $(".details_details").on("click", function() {
       
       $(this).parent().find(".list_bonus").toggle()
     });

@@ -26,6 +26,7 @@ include("../control/includes/autoloader.php");
 if (isset($subjects_theme)) { include("themes/$subjects_theme/talkback.php"); exit;}
 
 $db = new Querier;
+$use_jquery = array();
     
 /* Set local variables */
 
