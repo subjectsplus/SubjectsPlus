@@ -284,7 +284,7 @@ if (isset($index)) {
 
 		<div class=\"faq_filter\"><a href=\"#rdiv\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</a></div>
 		$index\n";
-    print "</div><br /><br />";
+    print "</div>";
 }
 
 

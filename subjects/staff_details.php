@@ -18,6 +18,9 @@ include("../control/includes/autoloader.php");
 if (isset($subjects_theme)) { include("themes/$subjects_theme/staff_details.php"); exit;}
 
 $db = new Querier;
+
+$use_jquery = array();
+
     
 $page_title = "Library Staff Details";
 $subfolder = "services";
