@@ -15,6 +15,8 @@ use SubjectsPlus\Control\CompleteMe;
 
 $page_title = "Search Results";
 
+$use_jquery = array("ui"); 
+
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
