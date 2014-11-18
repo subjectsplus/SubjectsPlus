@@ -66,9 +66,6 @@ $v2styles = TRUE;
 
 </script>
 
-<style>
-
-</style>
 </head>
 
 <body>
