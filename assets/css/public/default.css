@@ -2,9 +2,10 @@
 
 /* reset - blueprint mod */
 * {padding: 0; margin: 0;}
+
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}
-body {line-height: 1.5;}
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table { border-collapse: separate; border-spacing: 0; }
 caption, th, td { text-align: left; font-weight: normal; }
@@ -26,38 +27,25 @@ a img { border: none; }
 }
 
 body {
-    margin: 0 0 0 5px;
+    margin: 0 auto;
     padding: 0;
     font-family: sans-serif;
     font-size: 0.8125em;
     text-align: left;
     line-height: 1.5em;
     color: #000;
-    margin-left: auto;
-    margin-right: auto;
     background: url("../../images/grid.png") repeat scroll 0 0 #FFFFFF;
 }
 
-
-/* changed from #wrap to main-content per RG */
-
-#main-content {
-    position: relative;
-    text-align: left;
-    padding: 0;
-    margin: 0px auto;
-    background-color: transparent;
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
 }
 
-html>body #main-content {
-   
-}
 
-a {
-    color: #40659B;
-}
-
-a:link {
+a,
+a:link  {
     color: #40659B;
 }
 
@@ -76,8 +64,7 @@ h1 {
     font-weight: bold;
     padding: 0.5em 0 1em;
     text-shadow: 0 2px 3px #CCCCCC;
-    margin: .5em 0 1em 0em;
-    
+    margin: .5em 0 1em 0em;    
 }
 
 h2 {
@@ -85,7 +72,7 @@ h2 {
     font-size: 1.2em;
     letter-spacing: 1px;
     color: #333;
-
+    font-size: 1.3em;
 }
 
 h3 {
@@ -103,24 +90,68 @@ img {
     max-width: 100%;
 }
 
+.clearboth {
+    clear:both;
+}
+
+.clear-both-left {
+    clear:both;
+    float:left;
+}
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -45px;
+}
+
+#push, #footer {
+        height: 45px;
+    }
+
+
+
+/* Header area */
+
 #header {
     background: #fff;
     height: 3em;
-    padding: 1em 1em;
+    padding: 1em;
     margin: 0 0 2em 0;
-    /*border-bottom: 1px solid #ccc;*/
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 #header_inner_wrap {
+    text-align: left;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #transparent;
+    height: 3em;
+    max-width: 1400px;
+}
+
+
+
+/* Main content areas */
+
+.wrapper-full {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#main-content { /* changed from #wrap to main-content per RG */
     position: relative;
     text-align: left;
     padding: 0;
-    margin: 0px auto;
-    width: 100%;
+    margin: 0 auto;
     background-color: transparent;
 }
-/* Main content areas */
+
 
 
 #leftcol {
@@ -167,11 +198,8 @@ img {
 /* Footer */
 
 #footer {
-    position: relative;
-    clear: both;
     margin: 0;
     padding: 10px 0 0px 0;
-    width: 70%;
     font-size: .8em;
     color: #333;
     border-top: 1px dotted #efefef;
@@ -180,15 +208,18 @@ img {
 #footer p {
     margin: 0;
     line-height: 1.4em;
+    text-align: center;
 }
 
-#footer a {
+#footer a, #footer a:link, #footer a:visited {
     color: #888;
 }
 
 #footer a:hover {
     color: #ccc;
 }
+
+/* Guide Tools */
 
 #guide_nav_tools {
     float: left;
@@ -331,7 +362,7 @@ img {
     padding: 50px 0 0 0;
 }
 
-#tab-container {margin: 50px 0 0 0; padding: 0;}
+#tab-container {margin: 60px 0 0 0; padding: 0;}
 
 
 
@@ -342,7 +373,7 @@ div.printer_tabs { /* Print button on guide with tabs */
     margin: 0 0 0 0;  
     background-color: transparent;
     position: absolute;
-    top:-29px !important;
+    top:-38px !important;
     width: 36px;
 }
 
@@ -1055,19 +1086,12 @@ div.video_thumb img {
 */
 
 
-#header_inner_wrap {
-    max-width: 1400px;
-    margin: 0 auto;
-}
 
-.wrapper-full {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-}
+
+
 
 /* these .ui class overrides tweak border and spacing of tab containers */
-.ui-widget-content {
+.ui-content {
     border: none !important;
 }
 
@@ -1119,16 +1143,7 @@ width:55px;
     float:left;
 }
 
-.clearboth {
 
-    clear:both;
-}
-
-.clear-both-left {
-    clear:both;
-    float:left;
-
-}
 
 .float-left {
     float:left;
@@ -1148,6 +1163,8 @@ width:55px;
 
 .noshow {display: none;}
 
+
+
 /*  Media Queries */
 
 /* ≥ 568px  .pure-u-sm-* */
@@ -1162,8 +1179,6 @@ width:55px;
     h1 {
         clear: left;
         margin-top: 0;
-        
-
     }
 
     #guide_nav_tools {
@@ -1175,7 +1190,7 @@ width:55px;
         margin: 0 0 0 0;  
         background-color: transparent;
         position: absolute;
-        top:-54px !important;
+        top:-64px !important;
         right: 305px;
         width: 36px;
     }
