@@ -342,7 +342,7 @@ include("includes/header.php");
 		<div class="pluslet_body">
 			<p><span class="comment_num">!</span><strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
 			<br />
-			<form id="tellus" action="talkback.php" method="post">
+			<form id="tellus" action="talkback.php" method="post" class="pure-form">
 				<p class="zebra oddrow"><strong><?php print _("your name (optional):"); ?></strong><br />
 					<input type="text" name="name" size="20" value="<?php print $this_name; ?>" /></p>
 
@@ -352,7 +352,7 @@ include("includes/header.php");
 						<p class="zebra oddrow"><strong><?php print $stk; ?></strong><br />
 							<?php print _("Enter Number:"); ?> <input type="text" name="skill" size="2" /></p>
 
-							<p class="zebra evenrow"><input type="submit" class="button" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
+							<p class="zebra evenrow"><input type="submit" class="pure-button pure-button-topsearch" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
 						</form>
 					</div>
 				</div>
