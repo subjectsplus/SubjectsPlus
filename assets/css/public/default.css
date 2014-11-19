@@ -22,8 +22,11 @@ a img { border: none; }
 
 /* jQuery UI overrides */
 .ui-widget {
-
        font-family: sans-serif;
+}
+
+.ui-widget-header {
+       background: #cccccc !important;
 }
 
 body {
@@ -146,10 +149,9 @@ img {
 
 #main-content { /* changed from #wrap to main-content per RG */
     position: relative;
-    text-align: left;
-    padding: 0;
-    margin: 0 auto;
+    text-align: left;    
     background-color: transparent;
+    width: 100%;
 }
 
 
@@ -249,17 +251,13 @@ img {
     cursor: auto;
     z-index: 1;
     overflow: visible;
-    border: 1px solid #fff;
+    border: 1px solid #ccc;
     background-color: #fff;
-    border-radius: 5px;
-    -moz-border-radius: 10px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    padding: .5em 1em;
+    border-radius: 5px;    
+     padding: .5em 1em;
     margin: 1em;
 }
+
 .pluslet_simple ul, ol {
     margin: 1em;
 }
@@ -277,15 +275,13 @@ img {
 .pluslet {
     position: relative;
     clear: both;
-    background: #fff;    
-    cursor: auto;
-    /*z-index: 50;*/
+    background: #fff; 
     border: 1px solid #ccc;
     padding: 0;
     font-size: 10pt;   
     border-radius: 5px;
-    margin: 1em 1em;
-
+    margin: 1em 1em;    
+    box-shadow: 5px 5px 7px #e0e0e0;
 }
 
 .pluslet ul {
@@ -314,15 +310,21 @@ img {
     margin-bottom: 0.5em;
 }
 
+.pluslet_body {
+    background-color: #fff;
+    padding: .5em;
+    margin: .5em;
+    text-align: left;
+    overflow: auto;
+}
+
 
 .titlebar {
     color: #333;
     position: relative;
     height: 2em;
-    padding: 0px 0;
+    padding: 0;
     margin: 0;
-    top: 0px;
-    right: 0px;
     width: 100%;
     border-bottom: 1px solid #B3B9BF;
     -webkit-border-top-left-radius: 5px;
@@ -332,11 +334,9 @@ img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-color: #333;
-
 }
 
 .titlebar_text {
-
     font: 1em sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
@@ -344,26 +344,33 @@ img {
     padding: 5px 10px 5px;
     border:  none;
     color: #fff;
-    /*color: #000;*/
     background-color: transparent;
 
 }
 
 .titlebar_options {
-
     display: none;
-
 }
 
 
 /* Tabs */
-#tab-body.no-tabs { 
-    margin: 0;
-    padding: 50px 0 0 0;
+
+#tabs {    
+    background-color: transparent;
 }
 
 #tab-container {margin: 60px 0 0 0; padding: 0;}
 
+/* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
+#tab-body.no-tabs { 
+    margin: -60px 0 0 0 ;
+    padding: 50px 0 0 0;
+}
+
+#tabs ul {
+     margin: 5px 5px 0 5px;
+     padding: 10px 30px 0 2px;
+}
 
 
 /* Print Dialog */
@@ -429,7 +436,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 }
 
 .pure-button-topsearch {
-    background-color: #666;
+    background-color: #333;
     color: #fff;
 }
 
@@ -438,12 +445,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 .plusheading, .type-heading { background-color: #9F3E3B; width: 70%; padding: 0; text-transform:uppercase;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
 
-.pluslet_body {
-    background-color: #fff;
-    padding: .5em;
-    margin: .5em;
-    text-align: left;
-    overflow: auto;}
+
 
 div.pluslet form {
     padding-top: -10px;
@@ -491,8 +493,6 @@ div.pluslet form {
     font-weight:bold;
     font-size:.9em;
     text-indent:.8em;
-
-
 }
 
 
@@ -945,13 +945,15 @@ form#tellus p {
     position: relative;
     float: left;
     display: inline-block;
-    background-image: url(../../images/icons/comment_box.png);
+    background-image: url('../../images/icons/comment_box.png');
+    background-repeat: no-repeat;
     width: 39px;
     height: 34px;
     margin-right: 1em;
     text-align: center;
     font-size: 1.4em;
     color: #fff;
+    padding-top: 5px;
 }
 .tellus_comment {
     background-color: #fff;
@@ -1003,25 +1005,22 @@ ul.ui-autocomplete li a{
 /* Videos page */
 
 
-.vid_container {
-  clear: both;
-  float: left;
-  margin-right: 25px;
-  margin-bottom: 2em;
+div.vid_container {
   background-color: #333;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 10px;
-  width: 550px;
+  width: 100%;
+  float: left;
+  margin: 0 0 25px 0;
+  padding-bottom: 10px;
   color: #fff;
 }
 
 
 div.vid_container img {
   float: left;
-  margin-right: 20px;
-  margin-bottom: 0px;
+  margin: 10px 20px 10px 10px;
   background-color: #4F4E4E;
   width: 150px;
   cursor: pointer;
@@ -1042,7 +1041,7 @@ div.vid_container img {
 div.vid_container h3 {
   font-size: 1.3em;
   color: #B0CBE8 !important;
-  margin-top: 0;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -1057,7 +1056,7 @@ div.vid_container a {
   cursor: pointer;
 }
 
-div.vid_container p.runtime {margin-top: -10px; font-size: smaller;}
+div.vid_container p.runtime {font-size: smaller; margin-bottom: 15px;}
 
 .video_thumb {
   float: left;
@@ -1073,19 +1072,11 @@ div.vid_container p.runtime {margin-top: -10px; font-size: smaller;}
 
 div.video_thumb img {
   float: left;
-  margin-left: 10px;
 
 }
 .video_list {
   clear: both; float: left; width: 500px;
 }
-
-/* Override Made Easy
- * The following styles are commonly overridden to make simple colour customizations
- * I did a couple to get ya started
-*/
-
-
 
 
 
@@ -1106,28 +1097,9 @@ div.video_thumb img {
     padding: 4px 3px 0px 3px !important;
 }
 
-.pluslet {
-    border: 1px solid #ccc;
-    box-shadow: 5px 5px 7px #e0e0e0;
-}
-
-
-.pluslet_simple {
-    border: 1px solid #ccc;
-}
-
-.titlebar {
-
-}
-
-.titlebar_text {
-
-}
 
 /* Next lines override the regular pluslet to create a heading */
 .plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase;}
-div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
-div.type-heading .titlebar {}
 
 .evenrow {
     background-color: #E3E1D9;
@@ -1202,6 +1174,10 @@ width:55px;
     top: 0 !important;
     right: 305px !important;
     width: 36px;
+    }
+
+    .ui-widget-header {
+       background: url("../shared/images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll top left #cccccc !important;
     }
 }
 
