@@ -31,7 +31,7 @@ switch ($our_site) {
       <a href=\"http://m.library.miami.edu\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mobile.png\"  alt=\"View Mobile Website\" title=\"View Mobile Website\" /></a>
       <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
       <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
-      <a href=\"" . PATH_TO_SP . "subjects/video.php\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/youtube.png\"  alt=\"View Library Produced Videos\" title=\"View Library Produced Videos\" /></a><br />
+     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a><br />
         <a href=\"http://library.miami.edu/50/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/50_banner_footer.png\"  alt=\"Richter 50th Anniversary\" title=\"Richter 50th Anniversary\" style=\"margin-top: 5px;\" /></a>
     </p>";
 
