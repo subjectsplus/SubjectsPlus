@@ -804,6 +804,13 @@ div.pluslet form {
     color: #ccc;
 }
 
+#social_icons_small {text-align: left;}
+
+#social_icons_small img {
+    margin-right: 0.5em;
+    margin-left: 0;
+}
+
 
 
 /* jquery ui wipeouts 
@@ -1434,6 +1441,13 @@ div.video_thumb img {
    .sidebar-bkg {
         background: none; 
    }
+
+   #social_icons_small {text-align: right;}
+
+   #social_icons_small img {
+    margin-left: 0.5em;
+    margin-right: 0;
+}
 
     
     
