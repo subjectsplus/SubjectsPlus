@@ -32,7 +32,7 @@ switch ($our_site) {
       <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
       <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
      <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a><br />
-        <a href=\"http://library.miami.edu/50/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/50_banner_footer.png\"  alt=\"Richter 50th Anniversary\" title=\"Richter 50th Anniversary\" style=\"margin-top: 5px;\" /></a>
+        <a href=\"http://library.miami.edu/support-the-libraries/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/support-uml.png\"  alt=\"Support UML\" title=\"Support UML\" style=\"margin-top: 5px;\" /></a><a href=\"http://library.miami.edu/uml-news-2014/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/uml-news.png\"  alt=\"UML in the News\" title=\"UML in the News\" style=\"margin-top: 5px;\" /></a>
     </p>";
 
   }
