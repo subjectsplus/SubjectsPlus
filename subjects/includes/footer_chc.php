@@ -1,8 +1,13 @@
 
-</div>
-</div>
-</div>
-</div>
+</div> <!--end #body_inner_wrap-->
+</div> <!--end .pure-u-1-->
+</div> <!--end .pure-g -->
+</div> <!--end .wrapper-full-->
+
+<div id="push"></div>
+</div><!--end #wrap-->
+
+
 <?php
 if (!isset($our_site)) {$our_site="chc";}// just in case
 
@@ -12,48 +17,51 @@ switch ($our_site) {
         (305) 284-4900<br />
         Email:  <a href=\"mailto:chc@miami.edu\">chc@miami.edu</a>";
     $social_icons = "<p id=\"social_icons_small\">
-  <a href=\"" . PATH_TO_CHILD . "/feed/\"><img src=\"" . THEME_BASE_DIR . "/images/rss_26.png\"  alt=\"Visit the CHC Blog\" title=\"Visit the CHC Blog\" /></a>
-  <a href=\"" . PATH_TO_CHILD . "/community/subscribe/\"><img src=\"" . THEME_BASE_DIR . "/images/mailing_list.png\"  alt=\"Join our Mailing List\" title=\"Join our Mailing List\" /></a>
-      <a href=\"http://www.facebook.com/umchc\"><img src=\"" . THEME_BASE_DIR . "/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
-    <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"" . THEME_BASE_DIR . "/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
-    <a href=\"http://vimeo.com/umchc\"><img src=\"" . THEME_BASE_DIR . "/images/vimeo.png\"  alt=\"Find Us on Vimeo\" title=\"Find Us on Vimeo\" /></a>
-      <a href=\"http://www.flickr.com/photos/umdigital/collections/72157623554504931/\" border=\"0\"><img src=\"" . THEME_BASE_DIR . "/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
+  <a href=\"" . PATH_TO_CHILD . "/feed/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/rss_26.png\"  alt=\"Visit the CHC Blog\" title=\"Visit the CHC Blog\" /></a>
+  <a href=\"" . PATH_TO_CHILD . "/community/subscribe/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mailing_list.png\"  alt=\"Join our Mailing List\" title=\"Join our Mailing List\" /></a>
+      <a href=\"http://www.facebook.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
+    <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
+    <a href=\"http://vimeo.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/vimeo.png\"  alt=\"Find Us on Vimeo\" title=\"Find Us on Vimeo\" /></a>
+      <a href=\"http://www.flickr.com/photos/umdigital/collections/72157623554504931/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
     </p>";
   break;
   default:
     $library_address = "<strong>UM Libraries</strong> 1300 Memorial Drive<br />Coral Gables, Florida 33124-0320<br />
         (305) 284-3233";
     $social_icons = "<p id=\"social_icons_small\">
-      <a href=\"http://m.library.miami.edu\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mobile.png\"  alt=\"View Mobile Website\" title=\"View Mobile Website\" /></a>
+       <a href=\"http://m.library.miami.edu\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mobile.png\"  alt=\"View Mobile Website\" title=\"View Mobile Website\" /></a>
       <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
       <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
-      <a href=\"" . PATH_TO_SP . "subjects/video.php\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/youtube.png\"  alt=\"View Library Produced Videos\" title=\"View Library Produced Videos\" /></a><br />
-        <a href=\"http://library.miami.edu/50/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/50_banner_footer.png\"  alt=\"Richter 50th Anniversary\" title=\"Richter 50th Anniversary\" style=\"margin-top: 5px;\" /></a>
+     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a><br />
+        <a href=\"http://library.miami.edu/support-the-libraries/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/support-uml.png\"  alt=\"Support UML\" title=\"Support UML\" style=\"margin-top: 5px;\" /></a><a href=\"http://library.miami.edu/uml-news-2014/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/uml-news.png\"  alt=\"UML in the News\" title=\"UML in the News\" style=\"margin-top: 5px;\" /></a>
     </p>";
 
   }
     ?>
 
-<div id="wide_footer">
-	<div class="container-fluid" style="max-width: 1100px; margin: 0 auto; text-align: left;">
-	    <div class="pure-g">
-	        <div class="pure-u-1 pure-u-md-1-3">
-				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
-          </div>
-				  <div class="pure-u-1 pure-u-md-1-3">
-            <p style=""><?php print $library_address; ?><br />
-            <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
-            <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
-            <a href="/report-website-issue/">Report Site Issue</a> |
-            <a href="/support-the-libraries/">Make a Gift</a>
-            </p>
-        	</div>
-				  <div class="pure-u-1 pure-u-md-1-3">
-					       <?php print $social_icons; ?>
-				  </div>
+
+<div class="footer-container">
+  <div id="wide_footer">
+		    <div class="pure-g">
+    	        <div class="pure-u-1 pure-u-md-1-5 footer-adj">
+    				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
+              </div>
+    				  <div class="pure-u-1 pure-u-md-2-5 footer-adj">
+                  <p style=""><?php print $library_address; ?><br />
+                  <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
+                  <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
+                  <a href="/report-website-issue/">Report Site Issue</a> |
+                  <a href="/support-the-libraries/">Make a Gift</a>
+                  </p>
+            	</div>
+    				  <div class="pure-u-1 pure-u-md-2-5 footer-adj">
+    					       <?php print $social_icons; ?>
+    				  </div>
 	     </div> <!-- end pure-g -->
-      </div> <!-- end container-fluid -->
-</div> <!-- end wide-footer -->
+  </div> <!-- end wide-footer -->
+</div> <!--footer-container-->
+
+
 </body>
 </html>
 <script type="text/javascript" language="javascript">
@@ -75,7 +83,7 @@ switch ($our_site) {
     // tweak the size of the footer area so it extends to bottom of page
     var extra_height = (win_height - 800) + "px";
     //alert(extra_height);
-    $("#wide_footer").css("min-height", extra_height);
+    //$("#wide_footer").css("min-height", extra_height);
   }
 
   $("#menu_button").click(function() {
@@ -111,13 +119,13 @@ var $window = $(window);
 function checkWidth() {
   windowsize = $window.width();
 
-  if (windowsize >= 1028) {
+  if (windowsize >= 768) {
     $("#spum_nav").show();
     $("li.mega").hoverIntent(megaConfig);
   }
 
-  if (windowsize < 1028) {
-      $("#spum_nav").show();
+  if (windowsize < 747) {
+      $("#spum_nav").hide();
        $("li.mega").unbind();
      }
 }
@@ -183,4 +191,32 @@ $(".mega_child select").mouseout(function(e) {
 
   // End Search Dropdown zone //
 });
+</script>
+<script>
+function printView() {
+    var visible_tab;
+
+    $('#tab-body').children().each(function () {
+  if ($(this).is(":visible")) {
+      visible_tab = $(this);
+      
+  } else {
+      $(this).show();
+      
+  }
+
+
+    });
+    window.print();
+    
+    
+    $('#tab-body').children().each(function () {
+  $(this).hide(); 
+  
+    });
+    
+    $(visible_tab).show();
+    
+}
+
 </script>
