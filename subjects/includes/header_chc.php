@@ -79,6 +79,7 @@ a:hover {text-decoration: underline;}
 
 h1 {
     background-image: url("http://library.miami.edu/chc/wp-content/themes/um-chc/images/h1_bg_blue-blue.png");
+    background-color: #cee8eb !important;
 }
 
 .print-img-tabs, .print-img-tabs:hover {
