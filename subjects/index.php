@@ -25,7 +25,12 @@ $noheadersearch = TRUE;
 
 $db = new Querier;
     
-$guide_path = "guide.php?subject=";
+// let's use our Pretty URLs if mod_rewrite = TRUE or 1
+if ($mod_rewrite == 1) {
+   $guide_path = "";
+} else {
+   $guide_path = "guide.php?subject=";
+}
 
 if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
 
