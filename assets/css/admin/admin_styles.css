@@ -336,7 +336,6 @@ header {
 }
 
 .box {
-  margin-bottom: 1em;
   background-color: #fff;
   color: #333;
   padding: 10px;
@@ -780,8 +779,7 @@ ul.ui-autocomplete li a{
 }
 
 .record_label {
-  clear: both;
-  display:inherit;
+  display:inline;
   font-size: 11px;
   font-weight:900;
 }
