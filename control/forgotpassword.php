@@ -78,27 +78,32 @@ if(!isset($_GET['id']))
 		}
 	}
 }
+
+$logo = "<img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" border=\"0\" />\n
+<br />";
+
+// assemble
+$our_form = $introtext . "<br />" . $lstrForm;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <style type="text/css" media="all">@import "<?php print $AssetPath; ?>css/admin_styles.css";</style>
-        <title>Login</title>
+        <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
+        <style type="text/css" media="all">@import "<?php print $AssetPath; ?>css/admin/admin_styles.css";</style>
+        <title><?php print _("Forgot Password"); ?></title>
     </head>
 
-    <body>
-        <div id="header">
-            <div style="width: 100%; text-align: left;"><img src="<?php print $AssetPath; ?>images/admin/logo_small.png"  border="0" class="logo" width="136" height="28" /></div>
-        </div>
+
+    <body id="controlpage">
+
+    <div style="margin: 4em auto; width: 350px;">
 <?php
-print "<div class=\"box\" style=\"width: 300px; margin: 2em auto;\">
-$introtext
-<br />
-$lstrForm
-<br />
-<!--<span class=\"smaller\">Darn it, I forgot my password!</span>-->
-</div>";
+
+makePluslet($logo, $our_form,"");
 ?>
+
+</div>
+
     </body>
 </html>
