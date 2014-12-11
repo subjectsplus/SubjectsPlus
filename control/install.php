@@ -61,7 +61,7 @@ if( isInstalled() )
 		"all_vtags" => array( _( "Video Tags" ), _( "These are the tags that a given video can have associated with it. These are used for the videos module." ), "array", "right", "large", "", "" ),
 
 		"all_tbtags" => array( _( "Talkback" ), _( "These are the tags associated with TalkBack entries. The default is to email all talkbacks to administrator email. Edit only if you want to change that or add a branch." ),
-		"aarray", "right", "large", "", _( "e.g. To make a main branch sending to admin email and branch1 branch sent to specified email -> 'main=,branch1=example@branch1.edu'" ) ),
+		"array", "right", "large", "", _( "e.g. To make a main branch sending to admin email and branch1 branch sent to specified email -> 'main=,branch1=example@branch1.edu'" ) ),
 
 		"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 		_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),
