@@ -171,42 +171,36 @@ print $social_and_search;
 
 ?>
 
-
 <div id="tabs">
     <div id="main-content">
         
-        <div id="tab-container"> 
+        <div id="tab-container">
+            <?php
+			
+			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>'; 
+            $printer_no_tabs ='<div class="printer_no_tabs"><div class="pure-button pure-button-topsearch print-img-no-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>';
+			
+            // Only show tabs if there is more than one tab
 
+            if ($multi_tab == TRUE) {
+                $lobjGuide->outputNavTabs('public');
+                $bonus_class= "";
+                print $printer_tabs;
+            } else {
+                $bonus_class = "no-tabs";
+				print $printer_no_tabs;
+            }
 
-                <?php
-                
-                $printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>'; 
-                $printer_no_tabs ='<div class="printer_no_tabs"><div class="pure-button pure-button-topsearch print-img-no-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>';
+            ?>
 
-
-                // Only show tabs if there is more than one tab
-
-                if ($multi_tab == TRUE) {
-                    $lobjGuide->outputNavTabs('public');
-                    $bonus_class= "";
-                    print $printer_tabs;
-                    
-                } else {
-                    $bonus_class = "no-tabs";
-                    print $printer_no_tabs;                    
-                }
-
-                ?>
-                
         </div> <!-- end tab-container -->
         
         <div id="tab-body" class="<?php print $bonus_class; ?>">
-                <?php
-                $lobjGuide->outputTabs('public');
+            <?php
+            $lobjGuide->outputTabs('public');
 
-                ?>
+            ?>
         </div> <!-- end tab-body -->
-
     </div> <!-- end main-content -->
 </div> <!-- end tabs -->
 
@@ -259,7 +253,7 @@ jQuery(function() {
    tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
    tabCounter = <?php echo ( count($all_tabs) ); ?>;
    var tabs = $( "#tabs" ).tabs();
-
+console.log(tabs);
    //add click event for external url tabs
    jQuery('li[data-external-link]').each(function()
 					 {
@@ -267,8 +261,10 @@ jQuery(function() {
        {
 	 jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
 						       {
+								console.log(evt);
 	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	     evt.stopImmediatePropagation();
+	     //evt.stopImmediatePropagation
+		 
 	   });
 
 	 jQuery(this).children('a[href^="#tabs-"]').each(function() {
@@ -281,7 +277,8 @@ jQuery(function() {
 				 if (onClickHandlers.length == 1) {
 	     return;
 	   }
-
+	
+		console.log("ahh");
 	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
 	 });
        }
@@ -323,11 +320,32 @@ jQuery(function() {
 	     	window.location.hash = 'box-' + box_id;
          }
 	   });
+	   
+	   $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\"><ul><li><a onclick=\"window.print();\" class=\"pure-button pure-button-topsearch\">Print Current Tab</a></li><li><a onclick=\"printView();\" class=\"pure-button pure-button-topsearch\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
 
-       $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\"><ul><li><a onclick=\"window.print();\" class=\"pure-button pure-button-topsearch\">Print Current Tab</a></li><li><a onclick=\"printView();\" class=\"pure-button pure-button-topsearch\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
+       $('.print-img-no-tabs').click(function(){ window.print(); });   
 
-       $('.print-img-no-tabs').click(function(){ window.print(); });       
+	jQuery(document).ready(function() {
+	
+	   jQuery('a[href*="#tabs-"]').on('click', function(event, ui) {
+	     	event.preventDefault();
+			console.log(event);
+			var tab_id = event.target.hash.split('-')[1];
+	     	var box_id = event.target.hash.split('-')[2];
+	     	var selected_box = ".pluslet-" + box_id;
 
+	     	$('#tabs').tabs('select', tab_id);
+
+	     	jQuery(selected_box).effect("pulsate", {
+	     		times:1
+	     	}, 2000);
+	     	window.location.hash = 'box-' + box_id;
+         });
+		 });
+		 
+		 
+	   
+	   
 </script>
 
 <!--[if IE]>
@@ -360,4 +378,3 @@ if (isset ($header_type) && $header_type != 'default') {
 } else {
     include("includes/footer.php");
 }
-?>
