@@ -14,6 +14,10 @@ class Pluslet_HTML5Video extends Pluslet {
 
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
+
+     $this->_type = "HTML5Video";
+
+
   }
 
   protected function onEditOutput()
