@@ -12,6 +12,7 @@
 
 use SubjectsPlus\Control\Config;
 use SubjectsPlus\Control\Installer;
+use SubjectsPlus\Control\Querier;
 
 //set varirables needed in header
 $subcat = "install";
@@ -123,10 +124,17 @@ if( isInstalled() )
 					//include again if config variables have changed
 					include_once('includes/config.php');
 
+		                        
 					//new installer instance and install and on success show complete page
 					$lobjInstaller = new Installer();
 					if( $lobjInstaller->install( ) )
 					{
+		                              
+		                                $administrator_email = $_POST['administrator_email'];
+
+		                                $db = new Querier; 
+		                                $db->exec("UPDATE staff SET staff.email=". $db->quote($administrator_email) . " WHERE staff.staff_id = 1");
+
 						$lobjInstaller->displayInstallationCompletePage();
 						$_SESSION['firstInstall'] = 1;
 					}
@@ -137,5 +145,3 @@ if( isInstalled() )
 }
 
 include_once("includes/footer.php");
-
-?>
