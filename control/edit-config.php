@@ -104,6 +104,8 @@ if(!is_writable($lstrConfigFilePath))
 							"tel_prefix" => array( _( "Telephone Prefix" ), _( "Prefix to prepend to telephone number for staff. Usually area code." ), "string", "left-bottom", "small", "" , _( "Allows you to put short (non-prefixed) version of phone number on pages where space is limited." ) ),
 
 							"hname" => array( _( "MySQL Hostname" ), _( "This is the ip or url to your MySQL database." ), "string", "left", "medium", "" , _( "host help?" ) ),
+	  
+	  "db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL database uses." ), "string", "left", "medium", "" , _( "" ) ),
 
 							"uname" => array( _( "MySQL Username" ), _( "This is the username to your MySQL database." ), "string", "left", "medium", "" ,"" ),
 
