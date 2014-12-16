@@ -61,13 +61,14 @@ if (isset($show_reports_hierarchical) && $show_reports_hierarchical != "") {
 <div style="float: left;  width: 100%;margin-top: 2em;">
   <div class="pluslet">
     <div class="titlebar">Emergency Contacts</div>
-
+      <div class="pluslet_body">
     <p>Use this page to view Emergency Contact information.  Unless you are an administrator, you should only be able to see information for people who report to you.</p>
     <?php print $intro; ?>
+    </div>
   </div>
   <div class="pluslet">
     <div class="titlebar">Direct Reports for <?php print $_SESSION["fname"] . " " . $_SESSION["lname"] . " " . $download_reports; ?></div>
-    <div class=\"pluslet_body\">
+    <div class="pluslet_body">
       <?php print $show_reports; ?>
     </div>  
   </div>
