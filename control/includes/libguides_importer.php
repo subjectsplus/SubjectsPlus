@@ -1,4 +1,8 @@
 <?php
+
+// For instruction on how to use this please see the follwing page on the wiki:
+// http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer
+
 header("Content-Type: text/html");
 error_reporting(1);
 ini_set('display_errors', 1);
@@ -10,8 +14,23 @@ include('../includes/header.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LibGuidesImport;
 
-$libguides_importer = new LibGuidesImport;
+
 ?>
+
+<div class="pluslet"> 
+  <div class="titlebar">
+  <div class="titlebar_text">Instructions</div>
+  </div>
+  <div class="pluslet_body"> 
+    For instructions on how to use this view the <a href="http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer">documentation</a> on the SubjectsPlus wiki.
+  </div>
+ 
+</div>
+
+<?php 
+
+$libguides_importer = new LibGuidesImport;
+ ?>
 
 <div class="pluslet"> 
   <div class="titlebar">
@@ -21,6 +40,7 @@ $libguides_importer = new LibGuidesImport;
 
 
 <?php  
+
 $libguides_importer->output_guides('libguides.xml');
 ?>
     <button class="import_guide">Import Guide</button>
