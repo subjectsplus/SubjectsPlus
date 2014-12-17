@@ -10,7 +10,7 @@ class Mailer {
   	ini_set("sendmail_from", $administrator_email);
   }
 
-  public function send(sp_MailMessage $m) {
+  public function send(MailMessage $m) {
     if (mail($m->getTo(), $m->getSubjectLine(), $m->getContent(), $m->getHeader())) {
       return true;
     } else {
