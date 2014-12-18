@@ -299,7 +299,7 @@ console.log(tabs);
 	   jQuery('#sp_search').autocomplete({
 
 	     minLength	: 3,
-	     source		: '//' + document.domain + "/" + sp_path + "/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+	     source		: '//' + document.domain + "/" + sp_path + "/subjects/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
 
 	       event.preventDefault();
