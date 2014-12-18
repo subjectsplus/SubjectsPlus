@@ -17,7 +17,7 @@ include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)) { include("themes/$subjects_theme/faq.php"); exit;}
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/faq.php"); exit;}
 
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";

@@ -188,7 +188,7 @@ CKEDITOR.dialog.add( 'subsplus_cat_linkDialog', function( editor ) {
 							alert(html_entity_decode(editor.lang['subsplus_cat_link.Tab3ValidateLabel']));
 						}else{
 							//create token
-							var lstrToken = " {{cat}, {" + lstrCallNum + "},{" + lstrLabel + "},{call_num}} ";
+							var lstrToken = "{{cat}, {" + lstrCallNum + "},{" + lstrLabel + "},{call_num}}";
 
 							// Finally, inserts the element at the editor caret position.
 							editor.insertHtml( '&nbsp;<span class="subsplus_cat_link" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
