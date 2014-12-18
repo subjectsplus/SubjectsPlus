@@ -360,13 +360,14 @@ img {
     width: 100%;
     float: left;
     clear: both;
+    margin-top: 45px;
 }
 
-#tab-container {margin: 10px 0 0 0; padding: 0;}
+#tab-container {margin: -40px 0 0 0; padding: 0;}
 
 /* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
 #tab-body.no-tabs { 
-    margin: -60px 0 0 0 ;
+    margin: -50px 0 0 0 ;
     padding: 50px 0 0 0;
 }
 
@@ -388,10 +389,10 @@ div.printer_tabs { /* Print button on guide with tabs */
 }
 
 div.printer_no_tabs { /* Print button on guide with NO tabs */
-    margin: 0 0 0 5px;  
+    margin: -41px 0 0 5px;  
      background-color: transparent;
     position: absolute;
-    top: 25px !important;
+    top: 0 !important;
     width: 36px;
 
 }
@@ -1171,7 +1172,7 @@ width:55px;
     }
 
     div.printer_no_tabs { /* Print button on guide with NO tabs */
-    margin: 0 0 0 5px;  
+    margin: -28px 0 0 5px;  
      background-color: transparent;
     position: absolute;
     top: 0 !important;
