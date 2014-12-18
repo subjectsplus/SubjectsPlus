@@ -357,9 +357,12 @@ img {
 
 #tabs {    
     background-color: transparent;
+    width: 100%;
+    float: left;
+    clear: both;
 }
 
-#tab-container {margin: 60px 0 0 0; padding: 0;}
+#tab-container {margin: 10px 0 0 0; padding: 0;}
 
 /* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
 #tab-body.no-tabs { 
@@ -380,7 +383,7 @@ div.printer_tabs { /* Print button on guide with tabs */
     margin: 0 0 0 0;  
     background-color: transparent;
     position: absolute;
-    top:-38px !important;
+    top:-60px !important;
     width: 36px;
 }
 
@@ -1162,7 +1165,7 @@ width:55px;
         margin: 0 0 0 0;  
         background-color: transparent;
         position: absolute;
-        top:-64px !important;
+        top:-46px !important;
         right: 305px;
         width: 36px;
     }
