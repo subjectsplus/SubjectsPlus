@@ -144,7 +144,7 @@ $('#guides').select2();
         </ol>
       </div>
     </div>
-
+<!--
     <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Import LibGuides"); ?></div>
@@ -156,6 +156,8 @@ $('#guides').select2();
         
       </div>
 	  </div>
+
+    -->
    <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Tips"); ?></div>

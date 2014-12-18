@@ -131,7 +131,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 						"pword" => array( _( "MySQL Password" ), _( "This is the password for your MySQL user." ), "string", "left", "medium", "" ,"" ),
 
 
-						"db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL server uses. (Default: 3006)." ), "string", "left", "medium", "" ,"" ),
+						"db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL server uses. (Default: 3306)." ), "string", "left", "medium", "" ,"" ),
 
 
 						"dbName_SPlus" => array( _( "MySQL SubjectsPlus Database" ), _( "Name of the SubjectsPlus database" ), "string", "left", "" , _( "database help?" ) ),

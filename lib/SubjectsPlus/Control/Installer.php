@@ -21,8 +21,9 @@ class Installer
 
 	function __construct()
 	{
-		global $email_key;
-		$lstrEmailDomain = isset($email_key) && $email_key != '' ? $email_key : '@sp.edu';
+                // Put in a filler email domain to be overwritten later after user provides one
+                
+		$lstrEmailDomain = '@sp.edu';
 
 		//set random password and convert to md5 hash to store in database
 		$this->setRandomPassword();
@@ -392,7 +393,7 @@ class Installer
 					"INSERT INTO `location` VALUES (1,1,'','http://www.subjectsplus.com/wiki/',1,'Y','',NULL,NULL,'')",
 					"INSERT INTO `department` VALUES (1,'Library Administration',1,'5555',NULL,NULL)",
 					"INSERT INTO `staff` VALUES (1,'Admin','Super','SubjectsPlus Admin','5555',1,0,'admin$lstrEmailDomain','',0,1,'{$lstrHashPassword}',1,'talkback|faq|records|eresource_mgr|videos|admin|librarian|supervisor','{\"css\": \"basic\"}',
-					'This is the default user with a SubjectsPlus v1.0 install.  You should delete me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
+					'This is the default user with a SubjectsPlus install.  You should delete or rename me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
 					"INSERT INTO `location_title` VALUES (1,1)",
 					"INSERT INTO `rank` VALUES (1,0,1,1,1,'')",
 					"INSERT INTO `staff_subject` VALUES (1,1)",
@@ -445,8 +446,9 @@ class Installer
 	 */
 	public function displayInstallationCompletePage()
 	{
-		global $email_key;
-		$lstrEmailDomain = isset($email_key) && $email_key != '' ? $email_key : '@sp.edu';
+	global $administrator_email;
+    $db = new Querier; 
+    $db->exec("UPDATE staff SET staff.email=". $db->quote($administrator_email) . " WHERE staff.staff_id = 1");
 
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
@@ -454,7 +456,7 @@ class Installer
 				<h2 class="bw_head"><?php echo _( "Installation Complete" ); ?></h2>
 
 				<p><?php echo _( "SubjectsPlus installation complete. Please log in." ); ?></p>
-				<p><?php echo _( "<strong>Username: </strong> " ) . "admin$lstrEmailDomain"; ?></p>
+				<p><?php echo _( "<strong>Username: </strong> " ) . "$administrator_email"; ?></p>
 				<p><?php echo _( "<strong>Password: </strong> " ); echo htmlentities($this->lstrRandomPassword) ?></p>
 				<p><a href="login.php" target="_blank"><?php echo _( "Log In" ); ?></a></p>
 			</div>
