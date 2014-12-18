@@ -311,8 +311,13 @@ console.log(tabs);
 	     	var tab_id = ui.item.hash.split('-')[1];
 	     	var box_id = ui.item.hash.split('-')[2];
 	     	var selected_box = ".pluslet-" + box_id;
-
-	     	$('#tabs').tabs('select', tab_id);
+     
+                console.log(selected_box);
+     if ($('#tabs-1').text()) {
+       	$('#tabs').tabs('select', tab_id);
+     }
+     
+	     
 
 	     	jQuery(selected_box).effect("pulsate", {
 	     		times:1
@@ -329,13 +334,13 @@ console.log(tabs);
 	
 	   jQuery('a[href*="#tabs-"]').on('click', function(event, ui) {
 	     	event.preventDefault();
-			console.log(event);
+		
 			var tab_id = event.target.hash.split('-')[1];
 	     	var box_id = event.target.hash.split('-')[2];
 	     	var selected_box = ".pluslet-" + box_id;
-
+ if ($('#tabs-1').text()) {
 	     	$('#tabs').tabs('select', tab_id);
-
+}
 	     	jQuery(selected_box).effect("pulsate", {
 	     		times:1
 	     	}, 2000);
