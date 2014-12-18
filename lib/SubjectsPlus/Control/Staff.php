@@ -577,9 +577,9 @@ print "<div class=\"pure-u-1-3\">";
                 <br /><strong>records</strong> allows access to both the Record and Guide tabs.
                 <br /><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
-                <br /><strong>supervisor</strong> means user shows up in list of _supervisors
-                <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.
-                <br /><strong>others</strong> are hopefully self-explanatory");
+                <br /><strong>librarian</strong> means user shows up in lists of librarians.
+                <br /><strong>supervisor</strong> means user shows up in list of supervisors
+                <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.");
 
     makePluslet("Permissions", $our_ptags, "no_overflow");
 
