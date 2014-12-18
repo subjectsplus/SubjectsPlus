@@ -120,8 +120,10 @@ $tel_prefix_short = "";
 $hname = "127.0.0.1";
 
 /* MySQL username and password */
-$uname = "username";
-$pword = "password";
+$uname = "";
+$pword = "";
+
+$db_port = "3306";
 
 /* Name of the SubjectsPlus database, i.e., subsplus.  May have a
    prefix on a shared host, i.e., yoursite_subsplus. */
