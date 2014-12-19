@@ -715,7 +715,7 @@ table.item_listing a:hover {
 }
 
 .db_icons img {
-    background-color: #79A4D4;
+    /* background-color: #79A4D4; */
     border-radius: 3px;
     height: 15px;
     width: 15px;
@@ -723,7 +723,7 @@ table.item_listing a:hover {
 }
 
 .toggleLink {
-    font-size: 13px; background-color: #ccc; border-radius: 3px; margin-left: 1em; color: #666; padding: 1px 3px;
+    font-size: 13px; border-radius: 3px; margin-left: 1em; color: #666; padding: 1px 3px;
     display: inline-block;
     cursor: pointer;
 }
