@@ -236,6 +236,7 @@ include("../includes/footer.php");
             function() {
 
             $(".sort_feedback").fadeIn();
+
             });
 
             return false;
