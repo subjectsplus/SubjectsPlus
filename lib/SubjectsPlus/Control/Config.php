@@ -982,13 +982,13 @@ class Config
 		global $uname;
 		global $pword;
 		global $dbName_SPlus;
-	        global $db_port;
+	    global $db_port;
 
 		$hname = $this->lobjNewConfigValues[ 'hname' ];
 		$uname = $this->lobjNewConfigValues[ 'uname' ];
 		$pword = $this->lobjNewConfigValues[ 'pword' ];
 		$dbName_SPlus = $this->lobjNewConfigValues[ 'dbName_SPlus' ];
-                $db_port =  $this->lobjNewConfigValues[ 'db_port' ];
+        $db_port =  $this->lobjNewConfigValues[ 'db_port' ];
 
 		//if installing, change the salt of the SubjectsPlus config file
 		if( $this->lboolChangeSalt )
