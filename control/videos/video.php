@@ -18,7 +18,7 @@ $page_title = "Manage Video";
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
     $no_header = "yes";
 } else {
-  // $_REQUEST["wintype"] = NULL;
+  $_REQUEST["wintype"] = NULL;
 }
 
 // init
@@ -53,7 +53,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
         //$record->deBug();
         // Show feedback
         $feedback = $record->getMessage();
-        print $feedback;
+        //print $feedback;
         // don't display the form again
         $no_form = TRUE;
     } else {
@@ -85,7 +85,7 @@ if (isset($_POST["submit_record"])) {
 
     // Show feedback
     $feedback = $record->getMessage();
-    print $feedback;
+    //print $feedback;
     // See all the queries?
    // $record->deBug();
 }
@@ -102,7 +102,7 @@ if (!$feedback) {
 
 
 
-echo "<div class=\"feedback\">$feedback</div><br /><br />";
+print feedBack($feedback);
 
 /////////////////////////
 // SHOW FORM
