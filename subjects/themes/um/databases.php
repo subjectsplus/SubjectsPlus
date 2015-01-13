@@ -82,7 +82,7 @@ if (isset($_POST["searchterm"])) {
   $description_search = 1; // if you want to search descriptions, too, set to 1; otherwise to 0
 }
 
-$alphabet = getLetters("databases", $_GET["letter"], "", TRUE);
+$alphabet = getLetters("databases", $_GET["letter"], 1, TRUE);
 
 
 // Get our newest databases
@@ -188,9 +188,11 @@ $trial_list = "<ul>\n";
   }
 
 $trial_list .= "</ul>\n";
+$trials = TRUE;
 
 } else {
   $trial_list = "No trials at this time.";
+  $trials = FALSE;
 }
 
 
@@ -236,13 +238,13 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 
       <?php if ($newlist) { ?>
       <div class="tip">
-        <h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
+        <h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bysub&subject_id=76">see all</a>)</h2>
         <?php print $newlist; ?>
       </div>
       <div class="tipend"></div>
       <?php } ?>
 
-      <?php if ($trial_list) { ?>
+      <?php if ($trials) { ?>
       <div class="tip">
         <h2>Database Trials</h2>
         <?php print $trial_list; ?>
