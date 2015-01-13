@@ -321,17 +321,21 @@ class StaffDisplay {
             AND active = 1
 			ORDER BY s.lname, s.fname";
 
-        $hf1 = _("Name");
-        $hf2 = _("Title");
-        $hf3 = _("Phone");
-        $hf4 = _("Email");
+        $hf1 = array("label"=>"Name","hide"=>false,"nosort"=>false);
+        $hf2 = array("label"=>"Title","hide"=>true,"nosort"=>false);
+        $hf3 = array("label"=>"Phone","hide"=>false,"nosort"=>true);
+        $hf4 = array("label"=>"Email","hide"=>true,"nosort"=>true);
 
         $head_fields = array($hf1, $hf2, $hf3, $hf4);
+
+
 
         $db = new Querier;
             $r = $db->query($q,PDO::FETCH_ASSOC);
 
-        $items = prepareTH($head_fields);
+        $items = prepareTHUM($head_fields);
+
+
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -367,7 +371,7 @@ class StaffDisplay {
 
           $items .= "
 		<tr class=\"zebra $row_colour\">
-			<td  class=\"staff-name-row\">";
+			<td class=\"staff-name-row\">";
           
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\" class=\"no_link\">$full_name</a>";
