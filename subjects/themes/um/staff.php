@@ -102,8 +102,8 @@ $alphabet = getLetters($our_cats, $selected_letter);
 
 
 if ($selected_letter == "A-Z") {
-  $intro = "<p><img src=\"$IconPath/information.png\" alt=\"icon\" /> Click on a name for more information.</p>
-<br />";
+  $intro = "<p><img src=\"$IconPath/information.png\" alt=\"icon\" /> Click on a name for more information.</p><br />
+<form class=\"pure-form\"><strong>Search:</strong> <input type=\"text\" placeholder=\"by name or title\" id=\"filter\" class=\"filter-status\"> <span class=\"clear-filter\"><button class=\"clear-filter-icon\">X</button> Clear</span></form><br />";
 }
 
 $staff_data = new StaffDisplay();
@@ -138,13 +138,45 @@ include("includes/header_um.php");
 
       ?>
       <div class="pure-u-1">
-          <div class="breather-single">
-             <?php print $out;  ?> 
+          <div class="breather-single">            
+             <?php print $out;  ?>             
           </div>
       </div>
 
 </div><!--end pure-g-->
 </div> <!--end panel-container-->
+
+
+<!--Data Table-->
+<link type="text/css" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/footable.core.css">
+<script src="<?php print $AssetPath; ?>js/footable.js" type="text/javascript"></script>
+<script src="<?php print $AssetPath; ?>js/footable.sort.js" type="text/javascript"></script>
+<script src="<?php print $AssetPath; ?>js/footable.filter.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  $(function () {
+    $('.footable').footable({
+    breakpoints: {
+        mid: 600,
+        phone:480
+    }
+  });
+
+$('.footable').trigger('footable_expand_first_row');
+
+$('.footable').bind('footable_breakpoint', function() {
+    $('.footable').trigger('footable_expand_first_row');
+});
+
+$('.clear-filter').click(function (e) {
+      e.preventDefault();
+      $('.filter-status').val('');
+      $('.footable').trigger('footable_clear_filter');
+    });
+
+});
+</script>
+
 <?php
 
 ////////////
