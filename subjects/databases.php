@@ -89,7 +89,7 @@ if (isset($_POST["searchterm"])) {
   $description_search = 1; // if you want to search descriptions, too, set to 1; otherwise to 0
 }
 
-$alphabet = getLetters("databases", $_GET["letter"], "", TRUE);
+$alphabet = getLetters("databases", $_GET["letter"], 1, TRUE);
 
 
 // Get our newest databases
