@@ -154,27 +154,45 @@ include("includes/header_um.php");
 <script src="<?php print $AssetPath; ?>js/footable.filter.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-  $(function () {
+  
+    
     $('.footable').footable({
-    breakpoints: {
-        mid: 600,
-        phone:480
-    }
-  });
+        breakpoints: {
+            mid: 600,
+            phone:480
+        }
+      });
 
-$('.footable').trigger('footable_expand_first_row');
+      $('.footable').trigger('footable_expand_first_row');
 
-$('.footable').bind('footable_breakpoint', function() {
-    $('.footable').trigger('footable_expand_first_row');
-});
+      $('.footable').bind('footable_breakpoint', function() {
+          $('.footable').trigger('footable_expand_first_row');
+      });
 
-$('.clear-filter').click(function (e) {
-      e.preventDefault();
-      $('.filter-status').val('');
-      $('.footable').trigger('footable_clear_filter');
-    });
+      $('.clear-filter').click(function (e) {
+            e.preventDefault();
+            $('.filter-status').val('');
+            $('.footable').trigger('footable_clear_filter');
+          });
 
-});
+      $rowcolor = $(".footable-row-detail").prev(".evenrow");
+
+      $rowcolor.each(function() {
+          if ($rowcolor = true){
+            $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+          }
+          
+      });
+
+      $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
+        
+        if ($rowcolor = true){
+            $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+          }
+          
+
+      });
+
 </script>
 
 <?php
