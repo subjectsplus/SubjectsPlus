@@ -1061,7 +1061,11 @@ table.item_listing {width: 100%;}
 
 .clear-filter {    
     cursor: pointer;
+<<<<<<< HEAD
     color: #666;    
+=======
+    color: #333;    
+>>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
     margin-left: 15px;
 }
 
@@ -1070,8 +1074,12 @@ table.item_listing {width: 100%;}
     background: none repeat scroll 0 0 #CCC;
     border: none;
     border-radius: 50%;  
+<<<<<<< HEAD
     padding:4px 8px;
     color: #333;
+=======
+    padding:4px 8px;  
+>>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
 }
 
 #filter {        
