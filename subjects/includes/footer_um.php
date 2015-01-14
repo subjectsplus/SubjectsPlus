@@ -112,6 +112,8 @@ switch ($our_site) {
 // Only want hoverintent to fire if window is a certain size
 var $window = $(window);
 
+var $rowcolor = $(".footable-row-detail").prev(".evenrow");
+
 function checkWidth() {
   windowsize = $window.width();
 
@@ -122,7 +124,7 @@ function checkWidth() {
 
   if (windowsize <= 747) {
       $("#spum_nav").hide();
-       $("li.mega").unbind();
+       $("li.mega").unbind();   
      }
 }
 
