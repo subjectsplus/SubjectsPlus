@@ -166,6 +166,7 @@ include("includes/header_um.php");
       $('.footable').trigger('footable_expand_first_row');
 
       $('.footable').bind('footable_breakpoint', function() {
+<<<<<<< HEAD
 
           $('.footable').trigger('footable_expand_first_row');
 
@@ -181,6 +182,9 @@ include("includes/header_um.php");
           });
 
 
+=======
+          $('.footable').trigger('footable_expand_first_row');
+>>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
       });
 
       $('.clear-filter').click(function (e) {
@@ -199,7 +203,11 @@ include("includes/header_um.php");
       });
 
       $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
         if ($rowcolor = true){
             $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
           }
