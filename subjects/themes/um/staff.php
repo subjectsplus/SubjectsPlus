@@ -166,7 +166,21 @@ include("includes/header_um.php");
       $('.footable').trigger('footable_expand_first_row');
 
       $('.footable').bind('footable_breakpoint', function() {
+
           $('.footable').trigger('footable_expand_first_row');
+
+          $(".footable-row-detail").addClass("evenrow");
+
+          $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
+
+              if ($rowcolor = true){
+                  $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+              }
+
+
+          });
+
+
       });
 
       $('.clear-filter').click(function (e) {
@@ -185,7 +199,7 @@ include("includes/header_um.php");
       });
 
       $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
-        
+
         if ($rowcolor = true){
             $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
           }
