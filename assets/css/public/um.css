@@ -1055,9 +1055,9 @@ table.item_listing {width: 100%;}
 
 .footable th {padding-top:5px; padding-bottom:5px;}
 
-.footable .zebra td{padding-top:10px; padding-bottom:10px;}
+.footable .zebra td{padding-top:10px;}
 
-.footable-row-detail-cell {padding-top:5px;}
+.footable .footable-row-detail-cell {padding-left:15px !important; padding-bottom: 5px;}
 
 .clear-filter {    
     cursor: pointer;
@@ -1076,6 +1076,8 @@ table.item_listing {width: 100%;}
 #filter {        
     width:45%;
 }
+
+
 
 
 
