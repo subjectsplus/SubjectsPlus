@@ -1,0 +1,1631 @@
+/* CSS Document for SubjectsPlus, public display (i.e., subjects/ folder ) */
+
+/* reset - blueprint mod */
+* {padding: 0; margin: 0;}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align:top; }
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+/* no's*/
+.no-border{border: 0 !important;}
+.no-margin{margin: 0 !important;}
+.no-bg{background: none !important;}
+.no-pad-left{padding-left: 0 !important;}
+.no-pad-right{padding-right: 0 !important;}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 0.8125em;
+    text-align: left;
+    line-height: 1.5em;
+    color: #000;
+    background-color: #E1E1DB;
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/greydient.png");
+    background-repeat: repeat-x;
+    border-top: 3px solid #FFFFFF;   
+}
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+
+.visible-desktop {display: none;  /* Hide on responsive mode */ }
+
+a {
+    color: #40659B;
+}
+
+a:link {
+    color: #40659B;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #551A8B;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #cc6666;
+}
+
+h1 {
+    color: #333333;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 1.6em;
+    font-weight: normal;
+    padding: 0.2em 0 0.2em 1em;
+    text-shadow: 0 2px 3px #CCCCCC;
+    background-image: url("//library.miami.edu/wp-content/themes/umiami/images/h1_bg_green.png");
+    background-repeat: repeat-x;
+    background-color: #d3d78e;
+    text-shadow: 0 1px 3px #EFEFEF;
+    margin-top: 5px;
+    margin-left: 0;
+    line-height: 40px;
+}
+
+h2 {
+    font-family:sans-serif;
+    letter-spacing: 1px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.3em;
+    margin: 1em 0;
+}
+
+h3 {
+    font-family:sans-serif;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    color: #6F6F6F;
+}
+
+em {font-style: italic;}
+
+
+img {
+    height: auto !important;
+    max-width: 100%;
+}
+
+.clearboth {
+    clear: both;
+}
+
+#header-content {
+    max-width: 1100px; 
+    background-color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    margin: 1em auto 0 auto;
+    padding: 3px;
+    text-align: left;
+}
+
+.header-content {
+    padding: 15px 15px 5px 15px;
+}
+
+
+#header-content img {
+    float: left;
+}
+
+#header-content .header-text {
+    float: left;
+    padding: 2px 4px;
+    background-color: #fff;
+    color: #333;
+    line-height: 16px;
+    font-size: 12px;
+    margin: 3px 0 0 7px;
+    text-align: left;
+}
+
+#header-content a {
+    color: #333;
+    text-decoration: none;
+}
+
+#header-content a:hover {
+    color: #F37421;
+}
+
+
+/* -- Header Search-- */
+
+#search_container {
+    text-align: right;
+    position: relative;
+}
+
+#searchzone {
+    background-color: #d1d688;
+    border: 1px solid #a2ad00;
+    border-radius: 5px;
+    height: 16px;
+    padding: 2px 2px 3px;
+}
+
+#searchy {
+    background-color: #d1d688;
+    border: 0 none;
+    float: left;
+}
+
+#topsearch_button2 {
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: none;
+    color: #fe6518;
+    cursor: pointer;
+    display: block;    
+    height: 16px;
+    font-size: 0;
+    margin: auto 0;
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    width: 19px;
+}
+
+#search_options {
+    background-color: #d1d688;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;   
+    border-left: 1px solid #a2ad00;
+    border-right: 1px solid #a2ad00;
+    border-bottom: 1px solid #a2ad00;    
+    display: none;
+    font-size: 12px !important;
+    margin: 0;
+    padding: 2px 0 0;    
+    text-align: left;
+    position: absolute;
+    left: 0.25em;
+    top: 24px;
+    width: 150px;
+    z-index: 2000;
+}
+#search_options ul {
+    margin: 0;
+    padding: 0;
+}
+#search_options li {
+    border-bottom: 1px solid #a2ad00;
+    color: #333;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    margin: 0 !important;
+    min-width: 135px;
+    padding: 0.2em 0 !important;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#search_options li.list-last {
+    border: none;
+}
+
+#search_options li:hover, #search_options li.active {
+    background-color: #a2ad00;
+    color: #fff;
+}
+#search_options li input {
+    margin: 0 1em;
+}
+
+/* -- Menu Button Responsive-- */
+
+.button-menu {      /* Visible on responsive mode only */
+    color: #fff !important;
+    background-color: #333;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* menu button; toggles in the spum_nav area */
+
+#menu_button {
+    display: block;
+    float: right; 
+    text-align: right;   
+}
+
+#menu_button a {
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+
+/* -- MAIN NAV-- */
+/* black nav bar, spum_nav */
+
+#spum_nav {
+    background-color: #333;
+    border: none;
+    color: #fff;
+    margin-top: 1em;
+    padding-top: 0.5em;
+    display: none;
+}
+#spum_nav ul {
+    margin-left: 0;
+    margin-top: 2px;
+    text-align: left;
+    min-height: 2.15em;
+}
+
+#spum_nav ul li {
+ border-bottom: 1px solid #ddd;
+ padding: 0.3em 0;
+}
+
+#spum_nav a {
+    background-color: transparent;
+    color: #fff;
+    font-family: Arial,Helvetica,Verdana;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    padding: 10px;
+    text-decoration: none;
+}
+#spum_nav a:hover {
+    color: #f37421;
+}
+
+.nav_highlight { /* Fake orange button on nav - hidden on small */
+    background-color: none;
+    border: none;
+    text-transform: uppercase;
+}
+
+
+/* No mega menus for little screens, ever */
+ul#nav_menu.nav li div {
+    display: none;
+}
+
+ul#nav_menu.nav li div.mega_child {
+    display: none;
+}
+
+
+/* -- MAIN CONTENT AREA-- */
+/* page wrapper */
+
+.wrapper-full { 
+    max-width: 1110px;
+    margin: 0 auto;      
+    padding: 0;    
+    
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -300px;
+}
+
+#push, .footer-container {
+        height: 300px;
+    }
+
+#body_inner_wrap {    
+    font-size: 1.1em;
+    line-height: 1.8em;  
+}
+
+.panel-container {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 3px -3px rgba(0, 0, 0, 0.2);
+    background-color: #FFF;
+    min-height: 650px;
+}
+
+.panel-adj {padding: 30px 0;}
+
+
+#guide_nav_tools {
+    display: none;
+}
+
+
+
+/* Print Dialog */
+
+div.printer_tabs { /* Print button on guide with tabs */
+    margin: 0;  
+    background-color: transparent;
+    position: absolute;
+    top:-10px !important;
+    right: 4px;
+}
+
+div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: 0;  
+    background-color: #FFF; 
+    padding-right: 8px;
+    text-align: right;
+
+}
+
+.print-img-tabs, .print-img-tabs:hover { 
+    background-image: url("../../images/printer-um.png");
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    cursor: pointer;    
+    padding: 2px 6px;
+    background-color: #FFF !important; 
+    border-radius: 50%;
+    border: 2px solid #a2ad00;
+}
+
+.print-img-no-tabs, .print-img-no-tabs:hover { 
+    background-image: url("../../images/printer-um.png");
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    cursor: pointer;    
+    padding: 2px 6px;
+    background-color: transparent !important; 
+    border-radius: 50%;
+    border: 2px solid #a2ad00;
+}
+
+.printDialog {
+    margin: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.printDialog ul {margin: 0; padding: 0; list-style-type: none;}
+
+.printDialog ul li {margin-bottom: 15px; font-size: 14px; }
+
+.printDialog ul li a.pure-button-topsearch,
+.printDialog ul li a.pure-button-topsearch:link,
+.printDialog ul li a.pure-button-topsearch:hover {
+    color: #fff;
+    width: 150px; 
+    padding-top: 10px;
+}
+
+
+
+
+
+
+/* Guide tabs */
+
+#tabs {    
+    background-color: transparent;
+}
+
+#main-content {
+    position: relative;
+    width: 100%;
+    min-height: 650px;
+    text-align: left; 
+}
+
+#tab-container {
+    background-color: transparent;    
+    padding:0;
+    margin:0;    
+}
+
+#tab-body {
+    padding: 20px 3px 1em 3px;
+    background-color: #fff;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    min-height: 650px;
+    margin-top: -3px;
+}
+
+/* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
+#tab-body.no-tabs { 
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    box-shadow: none;
+    min-height: 650px;
+    margin-top: 0;
+}
+
+
+
+
+
+#tabs ul {
+     margin: 14px 30px 0 10px;
+    
+}
+
+#tabs ul li {
+    display: inline-block;
+}
+#tabs li a {
+    background-color: #e8d3a2;
+    border-color: #ffffff;
+    border-image: none;
+    border-style: solid solid none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-width: 2px 2px medium;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    color: #333;
+    font-size: 14.95px;
+    margin: 0em 0.5em 0.15em 0;
+    padding: 0.3em  0.6em;
+    text-decoration: none;
+}
+#tabs li a:hover {
+    background-color: #f37421;
+    color: #fff;
+}
+#tabs li.ui-state-active > a {
+    background-color: #fff;
+    color: #333;
+}
+#tabs .pluslet li {
+    display: list-item;
+}
+
+#tabs .pluslet li a {
+    background-color: transparent;
+    border: medium none;
+    box-shadow: none;
+    color: #40659b;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+#tabs .pluslet li a:hover {
+    color: #cc6666;
+    text-decoration: underline;
+}
+#tabs .pluslet ul {
+    margin-bottom: 0.5em;
+}
+
+
+/* these .ui class overrides tweak border and spacing of tab containers */
+.ui-widget-content {
+    border: none !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em !important;
+}
+
+.ui-state-active {
+    //background-color: #79A4D4 !important;
+}
+.hometab {
+    padding: 4px 3px 0px 3px !important;
+}
+
+/* Styling the markup generated by the autocomplete jQuery UI widget */
+
+
+ul.ui-autocomplete{
+  width:220px;
+  background-color:#fff;
+  border:1px solid #fff;
+  outline:1px solid #ccc;
+  font-size: 0.9em;
+
+}
+
+ul.ui-autocomplete li{
+  list-style:none;
+  border-bottom:1px solid #e0e0e0;
+  border-top:1px solid #fff;
+  text-align: left !important;
+}
+
+ul.ui-autocomplete li:first-child{
+  border-top:none;
+}
+
+
+ul.ui-autocomplete li:last-child{
+  border-bottom:none;
+}
+
+ul.ui-autocomplete li a{
+  color:#333;
+  border:none !important;
+  text-decoration:none !important;
+  padding:5px 10px;
+  display:block;
+}
+
+#ui-active-menuitem{
+  background-color:#F37421;
+  color:#fff;
+  cursor:pointer;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+
+}
+
+/* Autocomplete Styles */
+
+/* From the themeroller */
+.ui-autocomplete { position: absolute; cursor: default; }
+
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+.ui-menu {
+  list-style:none;
+  padding: 5px;
+  margin: 0;
+  display:block;
+  float: left;
+
+  border: 1px solid #ccc;
+
+}
+
+
+/* PLUSLETS */
+
+.pluslet {
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 7px #e0e0e0;
+    background: #fff;
+    cursor: auto;
+    z-index: 50;
+    padding: 0px;
+    font-size: 10pt;
+    -moz-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin: 0 .7em 1em .7em;
+}
+
+.pluslet_simple {    
+    cursor: auto;
+    z-index: 1;
+    overflow: visible;   
+    padding: .5em 1em;
+    margin: 0 20px 1em 20px;
+}
+.pluslet_simple ul, ol {
+    margin: 1em;
+}
+
+
+.titlebar {
+    color: #333;
+    position: relative;
+    height: 2em;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #B3B9BF;
+    background-color: #e8d3a2;
+}
+
+.titlebar_text {
+    font: 1em Arial, sans-serif;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    padding: 5px 10px 0px;
+    border:  none;
+    color: #fff;
+    /*color: #000;*/
+    background-color: transparent;
+    background-color: #E8D3A2;
+        color: #000000;
+    
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 16px;
+    padding-bottom: 5px;
+    text-shadow: 0 1px 2px rgba(100, 100, 100, 0.35);
+    word-wrap: break-word;
+}
+
+/* Next lines override the regular pluslet to create a heading */
+.plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase; border: none;font-weight: bold;}
+div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0; border: none;}
+div.type-heading .titlebar { background-color: transparent;border: none;}
+
+.pluslet_body {
+    background-color: #fff;
+    padding: .5em;
+    margin: .5em;
+    text-align: left;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+}
+
+.pluslet_body a,
+.pluslet_body a:link {text-decoration: underline; color: #40659b;}
+
+.pluslet_body a:visited {text-decoration: underline; color: #551A8B;}
+
+.pluslet_body a:hover,
+.pluslet_body a:active,
+.pluslet_body a:focus {text-decoration: underline; color: #cc6666;}
+
+div.pluslet form {
+    padding-top: -10px;
+    margin: 0;
+}
+
+.staff_photo2 {
+    background: none repeat scroll 0 0 #efefef;
+    border: 1px solid #333;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 3px;
+    position: relative;
+}
+
+/* TalkBack */
+
+.talkback_form {
+    padding: 10px 10px;    
+}
+
+.form-item {width: auto;}
+
+.talkback_form_music {
+    background-color: #c9d6e0;
+    border: 1px solid #7c98ae;
+}
+.tellus_item {
+    background-color: #fff;
+    border-bottom: 1px dashed #c8c7bc;
+    clear: both;
+    display: block;
+    float: left;
+    margin: 1em 0;
+    min-width: 95%;
+    padding: 0.5em;
+}
+.comment_num {
+    background-image: url("http://library.miami.edu/wp-content/themes//umiami/images/comment_box.png");
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-size: 14pt;
+    height: 34px;
+    margin-right: 1em;
+    position: relative;
+    text-align: center;
+    width: 39px;
+}
+.tellus_comment {
+    background-color: #fff;
+    margin: 0;
+    padding: 0.5em;
+}
+
+.talkback-message {
+    border: 1px solid #999;    
+    padding: 0px 10px 20px 10px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    margin: 0 10px 30px 10px;    
+}
+.talkback-message-body {font-size: 14px;}
+
+.talkback-success {background-color: #efefef; color:#47651b;}
+.talkback-error { background-color: rgba(255,0,0, 0.2); color:#ff0000; }
+
+.talkback-success h2 {letter-spacing: 0; border-bottom: 1px solid #999; color:#47651b;}
+
+.talkback-error h2 {letter-spacing: 0; border-bottom: 1px solid #999; color:#ff0000;}
+
+
+
+/* FOOTER */
+
+
+.footer-container {
+    margin-top: 2em;
+    background-color: #FFF;
+    border-top: 1px solid #CCCCCC;
+}
+
+#wide_footer {
+    max-width: 1100px; 
+    margin: 0 auto; 
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/footer_bg.jpg") no-repeat scroll top left #FFFFFF;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5em; 
+    padding-top: 26px;
+    min-height: 134px;
+}
+
+.footer-adj {
+    padding: 0 0 10px 10px;
+}
+
+
+#footer {
+    position: relative;
+    clear: both;
+    margin: 0;
+    padding: 10px 0 0px 0;
+    width: 70%;
+    font-size: .8em;
+    color: #333;
+    border-top: 1px dotted #efefef;
+}
+
+#footer p {
+    margin: 0;
+    line-height: 1.4em;
+}
+
+#footer a {
+    color: #888;
+}
+
+#footer a:hover {
+    color: #ccc;
+}
+
+#social_icons_small {text-align: left;}
+
+#social_icons_small img {
+    margin-right: 0.5em;
+    margin-left: 0;
+}
+
+
+
+/* jquery ui wipeouts 
+Preferred is to turn off jquery ui in array at top of subjects/guide.php
+note that you need to tweak #tab-container to top: -3.3em if you keep jquery ui turned on
+*/
+
+.ui-widget {
+
+       font-family: sans-serif;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: transparent !important;
+    border: 0 !important;
+    color: #333;
+    font-weight: normal;
+}
+
+.ui-widget-header {
+    background: transparent !important;
+    border: none !important;
+    color: #222222;
+    font-weight: bold;
+}
+
+/* some small tweaks to line up with UM site */
+
+#letterhead a, #letterhead li, #selected_letter {
+font-size: 1em;
+line-height: 24px;
+    }
+
+
+#letterhead .inactive {
+    display: none;
+}
+
+#letterhead {
+    font-size: 14px;
+    font-weight: normal;
+    list-style-type: none;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+#selected_letter {
+    background-color: #f37421;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    margin: 0.5em 0.5em 0.5em 0;
+    padding: 0 0.6em;
+}
+#letterhead ul {margin:0; text-align: center;}
+
+#letterhead a, #letterhead li {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    display: inline-block;
+    margin: 0.5em 0.5em 0.5em 0;
+    padding: 0 0.6em;
+    text-decoration: none;
+}
+#letterhead a:hover {
+    background-color: #f37421;
+    color: #fff;
+}
+#letterhead input {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    font-size: 1em;
+    margin: 0.5em 0.5em 0 0;
+    padding: 0.2em 0.6em;
+}
+#letterhead select {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333 !important;
+    font-size: 1em;
+    margin: 0.5em 0.5em 0 0;
+    padding: 0.1em 0;
+}
+#letterhead option {
+}
+#letterhead_small {
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 0.2em;
+    padding-bottom: 0.2em;
+}
+#letterhead_small a {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    display: inline-block;
+    list-style-type: none;
+    margin: 0.2em 0.5em 0.2em 0;
+    min-width: 1em;
+    padding: 0 0.6em;
+    text-decoration: none;
+}
+#letterhead_small a:hover, #letterhead_small a.ctag-on {
+    background-color: #f37421;
+    color: #fff;
+}
+#letterhead_small input {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1.2em;
+    margin: 0.4em 0.5em 0 0;
+    padding: 0.2em 0.6em;
+}
+#letterhead_small select {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1em;
+    margin: 0.5em 0.5em 0 0;
+    padding: 0.1em 0;
+}
+
+.tip {
+    background-color: transparent;
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
+    border: 1px solid #fff;
+    border-radius: 5px 5px 5px 5px;    
+    margin: 0 10px 15px 10px;
+    padding: 1em;
+    position: relative;    
+}
+
+.tip ul {
+    margin-left: 12px;
+}
+
+div.tip h2 {
+    border-bottom: 1px dashed #a2ad00;
+    font-size: 1em;
+    font-weight: bold;
+    margin: -12px -12px 12px;
+    padding: 0.2em 1em;
+}
+div.tip a {
+    color: #333;
+    text-decoration: underline;
+}
+div.tip a:hover {
+    text-decoration: none;
+}
+.tipend {
+    background-image: none;
+    display: none;
+}
+
+.zebra {
+    border-bottom: 1px solid #ccc;
+    padding: 0.5em 20px;
+    margin: 0 20px 0 20px;
+    background-color: #FF0;
+}
+.evenrow, .even {
+    background-color: #efefef;
+}
+.oddrow, .odd {
+    background-color: #fff;
+}
+.highlight {
+    font-weight: bold;
+}
+.list_bonus {
+    display: none;
+    z-index: 200000;
+    float: left;
+    padding: 10px 20px 10px 0;
+    clear: both;
+}
+table {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1em;
+    padding: 0em;
+}
+table.item_listing td, div.item_listing p {
+    border-bottom: 1px solid #cccccc;
+    margin: 0;
+    padding:5px;
+}
+
+.staff-heading {background-color: #CCC;}  
+
+
+table.istem_listing h2 {
+    background-color: #fff;
+    border: medium none;
+}
+
+table.item_listing {width: 100%;}
+
+.faq_filter {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.breather {
+        padding: 0 20px;
+    }
+
+.breather-single {
+        padding: 0 20px;
+    }
+
+.staff_photo {
+    background:#efefef;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 3px;
+    position: relative;
+}
+.staff_photo_large {
+    background:#efefef;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 3px;
+    width: 225px;
+    height: 225px;
+    position: relative;
+}
+
+
+
+.footable td, .footable th {padding-left: 10px;}
+
+.footable th {padding-top:5px; padding-bottom:5px;}
+
+.footable .zebra td{padding-top:10px;}
+
+.footable .footable-row-detail-cell {padding-left:15px !important; padding-bottom: 5px;}
+
+.clear-filter {    
+    cursor: pointer;
+<<<<<<< HEAD
+    color: #666;    
+=======
+    color: #333;    
+>>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
+    margin-left: 15px;
+}
+
+.clear-filter-icon {
+    display: inline-block;
+    background: none repeat scroll 0 0 #CCC;
+    border: none;
+    border-radius: 50%;  
+<<<<<<< HEAD
+    padding:4px 8px;
+    color: #333;
+=======
+    padding:4px 8px;  
+>>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
+}
+
+#filter {        
+    width:45%;
+}
+
+
+
+
+
+.pure-button-topsearch {
+    background-color: #666;
+    color: #fff;
+}
+
+.subject {
+    font-size: 12px;
+    text-align: right;
+   padding-right: 20px !important;
+   color: #999;
+}
+
+.pure-form input:not([type]), .pure-form input[type="text"], .pure-form input[type="password"], .pure-form input[type="email"], .pure-form input[type="url"], .pure-form input[type="date"], .pure-form input[type="month"], .pure-form input[type="time"], .pure-form input[type="datetime"], .pure-form input[type="datetime-local"], .pure-form input[type="week"], .pure-form input[type="number"], .pure-form input[type="search"], .pure-form input[type="tel"], .pure-form input[type="color"], .pure-form label {
+    display: inline-block;
+}
+
+#quick_search {
+    width: 160px;
+}
+
+/* Videos page */
+
+
+div.vid_container {
+  background-color: #333;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
+  color: #fff;
+  float: left;
+  margin: 0 0 25px 0;
+  padding-bottom: 10px;
+}
+
+
+div.vid_container img {
+  float: left;  
+  background-color: #4F4E4E;
+  width: 150px;
+  cursor: pointer;
+  list-style: none outside none;
+  padding: 7px;
+  position: relative;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin: 10px 20px 10px 10px;
+  min-height: 90px;
+}
+
+
+
+div.vid_container h3 {
+  font-size: 1.3em;
+  color: #F37421;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+div.vid_container p {
+  font-size: 1em;
+  color: #fff;
+  margin-top: 0;
+}
+
+div.vid_container a {
+  color: #F37421;
+  cursor: pointer;
+}
+
+div.vid_container p.runtime {margin-top: -5px; font-size: smaller; margin-bottom: 15px;}
+
+.video_thumb {
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  background-color: #333;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+div.video_thumb img {
+  float: left;
+}
+
+.video_list {
+  clear: both; float: left; width: 500px;
+}
+
+
+/* //////////////////
+//  Media Queries 
+////////////////// */
+
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+#filter {        
+    width:auto;
+}
+    
+    
+
+}
+
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+    #menu_button {display:none;}
+
+    .visible-desktop {display: inline-block;}
+
+    #spum_nav {display: inline-block;}
+
+    /* override for shrunken menu */
+    #spum_nav ul li {
+     border-bottom: none;
+     padding: 0;
+     list-style-type: none;
+    }
+
+    #spum_nav a {    
+    padding: 10px 5px;    
+    }
+
+    /* Mega Menus! */
+
+    ul#nav_menu {padding-left: 0;}
+
+    ul#nav_menu div {
+        display: none;
+        text-align: left;
+        z-index: 2000;
+    }
+    #nav_menu.skip {
+        font-size: 0;
+        text-decoration: none;
+    }
+
+    #nav_menu li {}
+
+    #nav_menu li.mega {
+        position: relative;
+        display: inline;
+        float: left;
+    }
+    
+    #nav_menu li a.selected_href {
+        color: #f37421;
+    }
+
+    #nav_menu li.last-child a.selected_href,
+    #nav_menu li.last-child a:link,
+    #nav_menu li.last-child a:visited {
+        color: #fff;
+    }
+
+
+    #nav_menu li.last-child a:hover {
+        color: #333;
+    }
+
+
+    #nav_menu li.research {
+        margin-left: 0;
+    }
+    ul#nav_menu li.hovering div {
+        display: block;
+    }
+    div.mega_child {
+        border-right: 4px solid #fff;
+        border-left: 4px solid #fff;
+        border-bottom: 1px solid #fff;
+        background-color: #e1e1db;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        box-shadow: 0 5px 3px rgba(0, 0, 0, 0.5);
+        color: #333 !important;
+        font-family: Arial,Helvetica,sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        top: 31px;
+        text-align: left;
+        z-index: 10001 !important;
+    }
+
+    div.mega_child.mega-right {
+         right: -200px;         
+    }
+
+     div.mega_child.mega-right-special,
+     div.mega_child.mega-right-special2 {
+         right: 0px;         
+    }
+
+    div.mega_child.mega-left {
+         left: 0;
+    }
+
+    div.mega_child.mega-left-special {
+        left: -50px;
+    }
+    
+    div.mega_child.mega-sm {width: 350px;}
+    div.mega_child.mega-md {width: 380px;}
+    div.mega_child.mega-lg {width: 535px;}
+
+
+    div.mega_child ul {
+        float: left;
+        margin-top: 0.5em !important;
+        text-align: left !important;
+    }
+    #spum_nav div.mega_child ul li {
+        border-bottom: 1px solid #fff;
+        display: block !important;
+        font-family: Arial,Helvetica,sans-serif !important;
+        font-weight: 400 !important;
+        list-style: none outside none;
+        margin: 10px 10px 0 10px;
+        padding: 0 !important;
+        text-transform: none !important;
+    }
+    div.mega_child ul li.mega_header {
+        border-bottom: 2px solid #fff;
+        color: #333;
+        font-size: 1.3em !important;
+        font-weight: bold;
+        padding: 0.5em 0 !important;
+    }
+    #spum_nav div.mega_child ul li.last {
+        border: none;
+    }
+    div.mega_child ul li a:hover {
+        background-color: #f37421 !important;
+        color: #fff !important;
+    }
+    div.mega_child ul li a {
+        background-color: transparent !important;
+        border: 0 none !important;
+        color: #333 !important;
+        display: block;
+        font-size: 1.1em !important;
+        margin: 0 !important;
+        max-width: 175px;
+        min-width: 150px !important;
+        padding: 0.3em 0.1em !important;
+        position: relative;
+        text-transform: none !important;
+    }
+    .wider {
+        width: 300px;
+    }
+    div.mega_child p {
+        font-size: 1.2em !important;
+    }
+    div.mega_child.clear {
+        clear: left;
+    }
+    div.mega_feature {
+        background-color: transparent;
+        border: none;
+        display: block;
+        float: left;
+        line-height: 1.2em;
+        margin: 1em 1em 0 2em;
+        min-height: 100px;
+        padding: 1em;
+        text-align: left;
+        width: 100px !important;
+    }
+    div.mega_feature img {
+        background-color: #efefef;
+        border: 4px solid #ffffff;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        padding: 0.3em;
+        margin-bottom: 10px;
+        display: block;
+    }
+    div.megasearchzone {
+        background-color: transparent;
+        border: medium none;
+        display: block;
+        float: left;
+        line-height: 1.2em;
+        margin: 1em;
+        min-height: 20px;
+        padding: 0 1em;
+    }
+    div.megasearchzone > form {
+        font-size: 1.2em;
+        padding: 5px 0;
+    }
+    div.megasearchzone > p {
+        padding: 0.8em 0;
+    }
+    ul.mega_spotlight {
+        background-color: transparent;
+        border: 4px solid #ffffff;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        line-height: 1.4em;
+        padding-top: 1em !important;
+        text-align: center;
+        width: 150px;
+    }
+    div ul.mega_spotlight li {
+        border: medium none !important;
+    }
+    div ul.mega_spotlight li img {
+        background-color: #efefef;
+        border: 1px solid #666;
+        padding: 0.3em;
+    }
+    div.mega_intro {
+        background-color: #f37421;
+        background-repeat: repeat-x;
+        border-bottom: 1px dotted #666;
+        clear: both;
+        color: #fff;
+        font-size: 1.2em !important;
+        font-weight: bold;
+        padding: 5px 1em !important;
+    }
+    div.mega_more {
+        background-color: #fff;
+        border-top: 1px dotted #666;
+        clear: both;
+        margin: 0 !important;
+        padding: 0.3em 1em 0.3em 3em !important;
+        text-transform: none !important;
+    }
+    div.mega_more a, div.mega_feature a {
+        color: #f37421 !important;
+        font-size: 1em !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-decoration: underline !important;
+    }
+
+    /* end mega */
+
+    .megasearchzone form select {font-size: 12px; height: 24px;} 
+    .megasearchzone form input[type] {
+        font-size: 12px; 
+        text-align: center;
+        cursor: default;
+        border-radius: 4px;
+        padding: 0 5px;
+        border: 1px solid #999;
+        box-shadow: none;
+        background-color: #f2f2f2;
+        height: 22px;
+        vertical-align: middle; }
+
+    #nav_menu li.last-child {
+        float: right;        
+    }
+
+     .nav_highlight { /* Fake orange button on nav - display */
+        background-color: #F37421 !important;
+        text-transform: none;        
+    }
+
+    .footer-adj {
+        padding: 0;
+    }
+
+    #umiami_logo {padding-left: 10px;}
+
+    #wrap {
+        margin: 0 auto -160px;
+    }
+
+    #push,
+    .footer-container {
+        height: 160px;
+    }
+
+   .sidebar-bkg {
+        background: none; 
+   }
+
+   #social_icons_small {text-align: right;}
+
+   #social_icons_small img {
+    margin-left: 0.3em;
+    margin-right: 0;
+}
+
+table.item_listing th {
+        
+       color: #333;
+        font-weight: bold;    
+        text-align: left;
+        visibility:visible;
+        line-height:26px;
+       
+    }
+
+   table.item_listing td {
+        border-bottom: 1px solid #cccccc;
+        margin: 0;
+        padding:5px;
+    }
+
+    table.item_listing td.staff-email-row {overflow:hidden; word-wrap: break-word;}
+
+      
+    
+}
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+   
+    ul#nav_menu {padding-left: 20px;}
+
+   div.mega_child.mega-right,
+   div.mega_child.mega-right-special {
+         left: -100px;
+    }
+
+    div.mega_child.mega-left-special {
+        left: 0;
+    }
+
+    #spum_nav a {    
+    padding: 10px;    
+    }
+
+    #nav_menu li.research {
+        margin-left: 5em;
+    }
+
+    .nav_highlight { /* Fake orange button on nav - display */
+        border-left: 4px solid #FFF;
+    }
+
+    #nav {
+      position: relative;
+      float: left;
+      background-color: #333;
+      color: #fff;
+      margin: 0px;
+      padding: 4px 4px;
+      border: 4px solid #fff;
+      width: 944px;
+    }
+
+
+    ul.nav > a {
+      text-decoration: none; /* make 'er wide for better clickability */
+      color: #fff;
+      padding: 5px;
+      margin: 2px 20px 2px 0;
+      font-size: 14px;
+      font-family: Arial, Helvetica, Verdana;
+      font-weight: normal;
+    }
+
+    ul.nav > a:hover {
+      color: #f37421;
+    }
+
+    
+    ul.nav > li {
+      position: relative;
+      display: inline-block;
+      text-transform: none;
+      /* IE hack */
+      zoom: 1;
+      *display:inline;
+    }
+
+    ul {
+      margin-left: 1em;
+    }
+
+    .tip {
+        background-color: transparent;
+        background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/onepixel_green.png");
+        border: 1px solid #fff;
+        border-radius: 5px 5px 0;
+        float: right;
+        margin: 2em -25px 1em 1em;
+        padding: 1em;
+        position: relative;
+        width: 230px; /* we set this here so it doesn't overlay the other content on smaller screens */
+    }
+
+    .tipend {
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/bottom_right_green.png");
+    clear: right;
+    float: right;
+    height: 14px;
+    margin-right: -25px;
+    margin-top: -16px;
+    width: 24px;
+    display: block;
+}
+
+    .sidebar-bkg {
+   background: url('http://library.miami.edu/wp-content/themes/umiami/images/sidebar_bg_richter_outside2.jpg') top left; 
+   min-height: 500px; 
+   background-repeat: no-repeat;
+   }
+
+   .breather {
+        padding: 0 40px 0 20px;
+    }
+
+    .zebra {    
+        margin: 0 40px 0 20px;
+    }
+
+    .form-item {width: 200px;}
+
+
+    
+}
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+ .tip {
+        width: 275px; /* we set this here so it doesn't overlay the other content on smaller screens */
+    }
+
+    .form-item {width: 260px;}
+}

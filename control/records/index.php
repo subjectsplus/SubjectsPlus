@@ -5,7 +5,7 @@
  *   @brief Browse view of records / splash screen
  *
  *   @author adarby
- *   @date Nov, 2011
+ *   @date Nov, 2011; last mod dec 2014
  */
 
 use SubjectsPlus\Control\Dropdown;
@@ -27,14 +27,42 @@ include("../includes/header.php");
 
 $db = new Querier;
 
+// Where to start?
+// Choose initial letter to display
+
+$alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions ORDER BY initial";
+
+$alpha_result = $db->query($alpha_query);
+
+$count = 0;
+$firstletter = "A";
+    
+foreach ($alpha_result as $myletter) {
+
+    if ($count == 0) { $firstletter = $myletter[0][0];}
+
+    $atoz .="<a href=\""
+            . "index.php?letter="
+            . $myletter[0][0]
+            . "\">"
+            . $myletter[0][0]
+            . "</a> &nbsp;";
+
+    $count++;
+}
+
+$atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
+
+// end A-Z header for now
+
 $results = "<p>" . _("Please select a letter or tag to browse.") . "</p>";
 
 if (isset($_GET["ctag"])) {
     $alpha_id = $_GET["ctag"];
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and ctags like '%$alpha_id%' order by title.title";
 } elseif (!isset($_GET['letter'])) {
-    $alpha_id = "A";
-    //$full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$alpha_id%' order by title.title";
+    $alpha_id = $firstletter;
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$firstletter%' order by title.title";
     //$alpha_id = FALSE;
 } elseif ($_GET['letter'] == "all") {
     $alpha_id = "All Records";
@@ -52,27 +80,8 @@ if (isset($_GET["ctag"])) {
 }
 
 // print $full_query;
-// Create the A-Z header
 
-$alpha_query = "SELECT  distinct left(title,1) as 'initial' FROM  title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions ORDER BY initial";
-
-
-$alpha_result = $db->query($alpha_query);
-
-
-    
-foreach ($alpha_result as $myletter) {
-
-    $atoz .="<a href=\""
-            . "index.php?letter="
-            . $myletter[0][0]
-            . "\">"
-            . $myletter[0][0]
-            . "</a> &nbsp;";
-}
-
-$atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
-
+// Now we continue to make our 
 // gather ctags
 
 $tag_list = "<span class=\"";
@@ -158,7 +167,7 @@ $results
     <li><a href=\"record.php\">" . _("Create new item") . "</a></li>
   </ol>";
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">  
   ";
 makePluslet(_("Browse Records"), $letter_header_body, "no_overflow");
@@ -169,7 +178,7 @@ print "<div class=\"pure-u-1-3\">";
 makePluslet(_("New Record"), $new_record_body, "no_overflow");
 
 print "</div>"; // close pure-u-1-3
-print "</div>"; // close pure-g-r
+print "</div>"; // close pure-g
 
 
 include("../includes/footer.php");

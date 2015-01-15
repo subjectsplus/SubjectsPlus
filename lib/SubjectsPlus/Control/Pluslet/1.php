@@ -136,12 +136,14 @@ class Pluslet_1 extends Pluslet {
             // clean up blurb
             $blurb = stripslashes($blurb) . "<br />";
 
+            // let's set our targets
+            $target = targetBlanker();
             // Display results
 
 
             switch ($myrow["format"]) {
                 case "1": // web
-                    $first_line = "<a style=\"text-decoration: underline\" href=\"$final_url\">$label</a> $pub_icons<br />";
+                    $first_line = "<a style=\"text-decoration: underline\" href=\"$final_url\" $target>$label</a> $pub_icons<br />";
 
                     break;
                 case "2": // print
@@ -155,7 +157,7 @@ class Pluslet_1 extends Pluslet {
 
                 case "3": // print with url
                     $first_line = "<em>$label</em><br /><strong>" . _("Print Location:") . "</strong>
-                    <a style=\"text-decoration: underline\" href=\"$final_url\">" . $myrow["call_number"] . "</a> $pub_icons<br />";
+                    <a style=\"text-decoration: underline\" href=\"$final_url\" $target>" . $myrow["call_number"] . "</a> $pub_icons<br />";
                     if ($myrow["8"] == $last_title_id) {
                         $blurb = "";
                         $res_class = "dbresults-inset";
@@ -228,6 +230,12 @@ class Pluslet_1 extends Pluslet {
         //$toc .= "<br />";
         return $toc;
     }
+    
+    
+      static function getMenuName()
+  {
+  	return _('All Items by Source');
+  }
 
 }
 

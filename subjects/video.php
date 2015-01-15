@@ -9,12 +9,13 @@
 
 use SubjectsPlus\Control\Querier;
 
-    
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-    
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/video.php"); exit;}
+
 $use_jquery = array("colorbox");
 
 $page_title = _("Library Videos");
@@ -124,8 +125,9 @@ if ($num_rows != 0) {
 
 include("includes/header.php");
 ?>
-<div class="pure-g-r">
-<div class="pure-u-2-3">
+<br />
+<div class="pure-g">
+<div class="pure-u-1 pure-u-md-2-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print $page_title; ?></div>
@@ -138,7 +140,7 @@ include("includes/header.php");
         </div>
     </div>
 </div>
-<div class="pure-u-1-3">
+<div class="pure-u-1 pure-u-md-1-3">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Feature Films"); ?></div>
@@ -172,7 +174,7 @@ include("includes/footer.php");
 
 
     // show db details
-    $(".details_details").live("click", function() {
+    $(".details_details").on("click", function() {
       
       $(this).parent().find(".list_bonus").toggle()
     });

@@ -30,12 +30,12 @@ if (isset($_POST["add_department"])) {
     ////////////////
     
     $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
-        " . $db->quote(scrubData($_POST["department"])) . ", 
-        " . $db->quote(scrubData($_POST["telephone"])) . ", 
-        0,
+		" . $db->quote(scrubData($_POST["department"])) . ", 
+		" . $db->quote(scrubData($_POST["telephone"])) . ", 
+		0,
         " . $db->quote(scrubData($_POST["email"])) . ", 
         " . $db->quote(scrubData($_POST["url"])) . "
-        )";
+		)";
 
     $rInsertDept = $db->exec($qInsertDept);
 
@@ -75,7 +75,7 @@ if (isset($_POST["update_departments"])) {
         $result[$key] = $t;
     }
 
-    /*  print "<pre>";
+    /* 	print "<pre>";
       print_r($result);
       print "</pre>"; */
 
@@ -164,7 +164,7 @@ print "
 
 <form id=\"departments\" action=\"\" method=\"post\">
 
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">
 ";
 
@@ -235,7 +235,8 @@ include("../includes/footer.php");
             $(".sort_feedback").load("admin_bits.php", {action: 'delete_department', delete_id:this_id},
             function() {
 
-                $(".sort_feedback").fadeIn();
+            $(".sort_feedback").fadeIn();
+
             });
 
             return false;

@@ -25,6 +25,7 @@ class Guide
     private $_all_tabs;
     private $_department;
     private $_parents;
+    private $_header;
     private $_debug;
 
     public $_ok_staff = array();
@@ -66,6 +67,7 @@ class Guide
                 $this->_shortform = $_POST["shortform"];
                 $this->_extra = $_POST['extra'];
                 $this->_department = $_POST['department'];
+                $this->_header = $_POST['header'];
 
                 //add http to redirect url if not present
                 $this->_redirect_url = strpos($this->_redirect_url, "http://") === 0 || strpos($this->_redirect_url, "https://") === 0
@@ -106,7 +108,7 @@ class Guide
                 /////////////
 
                 $db = new Querier();
-                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra from subject where subject_id = " . $this->_subject_id;
+                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra, header from subject where subject_id = " . $this->_subject_id;
                 $guideArray = $db->query($q1);
 
                 $this->_debug .= "<p>Subject query: $q1";
@@ -122,6 +124,7 @@ class Guide
                     $this->_active = $guideArray[0]["active"];
                     $this->_type = $guideArray[0]["type"];
                     $this->_extra = json_decode($guideArray[0]["extra"], true);
+                    $this->_header = $guideArray[0]["header"];
                 }
 
                 ///////////////////
@@ -219,6 +222,7 @@ class Guide
         global $wysiwyg_desc;
         global $IconPath;
         global $guide_types;
+        global $guide_headers;
         global $use_disciplines;
 
         //print "<pre>";print_r($this->_staffers); print "</pre>";
@@ -238,7 +242,7 @@ class Guide
         echo "
             <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
-            <div class=\"pure-g-r\">
+            <div class=\"pure-g\">
               <div class=\"pure-u-1-2\">
                 <div class=\"pluslet\">
                     <div class=\"titlebar\">
@@ -265,6 +269,18 @@ class Guide
         $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
         $guide_string = $guideMe->display();
         echo $guide_string;
+
+        echo "<label for=\"header\">" . _("Header Type") . "</label>";
+
+        /////////////////////
+        // Header switcher dropdown
+        /////////////////////
+
+        $headerMe = new Dropdown("header", $guide_headers, $this->_header, "50");
+        $header_string = $headerMe->display();
+        echo $header_string;
+
+        echo "<span class=\"smaller\">* " . _("If you're not sure, stick with default") . "</span>";
 
         /////////////////////
         // Is Live
@@ -599,11 +615,7 @@ class Guide
         if (isset($delete_result2)) {
             // message
             if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
-	   // $this->_message = "<div class=\"feedback\">"; 
-
-            $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
-	    
-	   // $this->_message += "</div>"; 
+                $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
             } else {
                 $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.");
             }
@@ -645,7 +657,7 @@ class Guide
         // update subject table
         /////////////////////
 
-        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, extra) VALUES (
+        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, header, extra) VALUES (
         " . $db->quote(scrubData($this->_subject, "text")) . ",
         " . $db->quote(scrubData($this->_shortform, "text")) . ",
         " . $db->quote(scrubData($this->_description, "text")) . ",
@@ -653,6 +665,7 @@ class Guide
         " . $db->quote(scrubData($this->_redirect_url, "text")) . ",
         " . $db->quote(scrubData($this->_active, "integer")) . ",
         " . $db->quote(scrubData($this->_type, "text")) . ",
+        " . $db->quote(scrubData($this->_header, "text")) . ",
         " . $db->quote($json_extra) . "
         )";
 
@@ -744,6 +757,7 @@ class Guide
         redirect_url = " . $db->quote(scrubData($this->_redirect_url, "text")) . ",
         active = " . $db->quote(scrubData($this->_active, "integer")) . ",
         type = " . $db->quote(scrubData($this->_type, "text")) . ",
+        header = " . $db->quote(scrubData($this->_header, "text")) . ",
         extra = " . $db->quote($json_extra) . "
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
@@ -864,6 +878,16 @@ class Guide
     public function outputNavTabs( $lstrFilter = "" )
     {
         global $IconPath;
+        global $HomeTabText;
+        $HomeTabText = "Main";
+
+        if (isset($HomeTabText)) {
+            $home_tab_text = $HomeTabText;
+            $home_tab_class = "";
+        } else {
+            $home_tab_text = "<img src=\"$IconPath/home-white.png\" />";
+            $home_tab_class = "hometab";
+        }
 
         $all_tabs = $this->getTabs($lstrFilter);
 
@@ -872,7 +896,7 @@ class Guide
         	$class = "dropspotty";
         	$class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
             if (!$this->_isAdmin && $key == 0) {
-            $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"hometab\"><img src=\"$IconPath/home-white.png\" /></a>";
+            $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"$home_tab_class\">$home_tab_text</a>";
 
             } else {
             $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
@@ -990,15 +1014,13 @@ class Guide
     			print $this->dropBoxes(2, 'sidebar', $sidebar_pluslets);
     			print '<div id="clearblock" style="clear:both;"></div> <!-- this just seems to allow the space to grow to fit dropbox areas -->';
     		} else {
-    			global $is_responsive;
-
 
     			$col_widths = explode("-", $lobjSection['layout']);
     			$purified = ""; // init
 
     			if (isset($col_widths[0]) && $col_widths[0] > 0) {
     				$purified = reduce($col_widths[0], 12);
-    				$pure_left = "pure-u-" . $purified[0] . "-" . $purified[1];
+    				$pure_left = "pure-u-1 pure-u-md-" . $purified[0] . "-" . $purified[1];
     				$left_width = $col_widths[0];
     			} else {
     				$left_width = 0;
@@ -1006,7 +1028,7 @@ class Guide
 
     			if (isset($col_widths[1])) {
     				$purified = reduce($col_widths[1], 12);
-    				$pure_center = "pure-u-" . $purified[0] . "-" . $purified[1];
+    				$pure_center = "pure-u-1 pure-u-md-" . $purified[0] . "-" . $purified[1];
     				$main_width = $col_widths[1];
     			} else {
     				$main_width = 0;
@@ -1014,14 +1036,12 @@ class Guide
 
     			if (isset($col_widths[2]) && $col_widths[2] > 0) {
     				$purified = reduce($col_widths[2], 12);
-    				$pure_right = "pure-u-" . $purified[0] . "-" . $purified[1];
+    				$pure_right = "pure-u-1 pure-u-md-" . $purified[0] . "-" . $purified[1];
     				$side_width = $col_widths[2];
     			} else {
     				$side_width = 0;
     			}
 
-    			// responsive or not?
-    			if (isset($is_responsive) && $is_responsive == TRUE) {
     				// make sure they aren't 0
 
     				if ($left_width > 0) {
@@ -1053,17 +1073,6 @@ class Guide
     					   </div>";*/
     				}
 
-    			} else {
-    				print "<div id=\"leftcol\">
-				$left_col_pluslets
-				</div>
-				<div id=\"maincol\">
-				$main_col_pluslets
-				</div>
-				<div id=\"rightcol\">
-				$sidebar_pluslets
-				</div>";
-    			}
     		}
 
     		print "</div>";

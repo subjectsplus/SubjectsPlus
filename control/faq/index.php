@@ -81,7 +81,7 @@ if (!isset($limit) || $limit != "all") {
 $faq_body .= "</strong></p>" . $faq_list;
 
 ?>
-<div class="pure-g-r">
+<div class="pure-g">
   <div class="pure-u-2-3">  
 
 <?php makePluslet(_("View FAQs"), $faq_body, "no_overflow"); ?>
