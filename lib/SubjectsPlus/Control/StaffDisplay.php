@@ -182,11 +182,8 @@ class StaffDisplay {
         $db = new Querier;
         $r = $db->query($q);
 
-        $items = "<table width=\"98%\" class=\"item_listing\">
-			<tr>
-                            <th width=\"300\">" . _("Librarian") . "</th>
-                            <th>" . _("Subject Responsibilities") . "</th>
-			</tr>";
+        $items = "<table class=\"footable foo3\">
+        <thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th>Librarian</th><th data-sort-ignore=\"true\" data-hide=\"phone,mid\">Subject Responsibilities</th></tr></thead>";
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -196,7 +193,7 @@ class StaffDisplay {
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
           $items .= "<tr class=\"$row_colour\">\n
-					<td width=\"400\">";
+					<td>";
           $items .= showStaff($myrow[4], '', '', 1);
           $items .= "</td>\n";
           $items .= "<td>";
