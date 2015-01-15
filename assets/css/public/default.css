@@ -2,9 +2,10 @@
 
 /* reset - blueprint mod */
 * {padding: 0; margin: 0;}
+
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}
-body {line-height: 1.5;}
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table { border-collapse: separate; border-spacing: 0; }
 caption, th, td { text-align: left; font-weight: normal; }
@@ -21,46 +22,33 @@ a img { border: none; }
 
 /* jQuery UI overrides */
 .ui-widget {
-
        font-family: sans-serif;
 }
 
+.ui-widget-header {
+       background: #cccccc !important;
+}
+
 body {
-    margin: 0 0 0 5px;
+    margin: 0 auto;
     padding: 0;
     font-family: sans-serif;
     font-size: 0.8125em;
     text-align: left;
     line-height: 1.5em;
     color: #000;
-    margin-left: auto;
-    margin-right: auto;
     background: url("../../images/grid.png") repeat scroll 0 0 #FFFFFF;
 }
 
-
-/* changed from #wrap to main-content per RG */
-
-#main-content {
-    position: relative;
-    text-align: left;
-    padding: 0;
-    margin: 0px auto;
-    width: 95%;
-    /*min-width: 550px;*/
-    max-width: 1100px;
-    background-color: transparent;
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
 }
 
-html>body #main-content {
-    width: 95%;
-}
 
-a {
-    color: #40659B;
-}
-
-a:link {
+a,
+a:link  {
     color: #40659B;
 }
 
@@ -79,7 +67,7 @@ h1 {
     font-weight: bold;
     padding: 0.5em 0 1em;
     text-shadow: 0 2px 3px #CCCCCC;
-    margin-left: 2em;
+    margin: .5em 0 1em 0em;    
 }
 
 h2 {
@@ -87,7 +75,7 @@ h2 {
     font-size: 1.2em;
     letter-spacing: 1px;
     color: #333;
-
+    font-size: 1.3em;
 }
 
 h3 {
@@ -105,25 +93,67 @@ img {
     max-width: 100%;
 }
 
+.clearboth {
+    clear:both;
+}
+
+.clear-both-left {
+    clear:both;
+    float:left;
+}
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -45px;
+}
+
+#push, #footer {
+        height: 45px;
+    }
+
+
+
+/* Header area */
+
 #header {
     background: #fff;
     height: 3em;
-    padding: 1em 3em;
+    padding: 1em;
     margin: 0 0 2em 0;
-    /*border-bottom: 1px solid #ccc;*/
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 #header_inner_wrap {
-    position: relative;
     text-align: left;
     padding: 0;
-    margin: 0px auto;
+    margin: 0 auto;
     width: 100%;
-    min-width: 550px;
-    background-color: transparent;
+    background-color: #transparent;
+    height: 3em;
+    max-width: 1400px;
 }
+
+
+
 /* Main content areas */
+
+.wrapper-full {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#main-content { /* changed from #wrap to main-content per RG */
+    position: relative;
+    text-align: left;    
+    background-color: transparent;
+    width: 100%;
+}
+
 
 
 #leftcol {
@@ -170,11 +200,8 @@ img {
 /* Footer */
 
 #footer {
-    position: relative;
-    clear: both;
     margin: 0;
     padding: 10px 0 0px 0;
-    width: 70%;
     font-size: .8em;
     color: #333;
     border-top: 1px dotted #efefef;
@@ -183,9 +210,10 @@ img {
 #footer p {
     margin: 0;
     line-height: 1.4em;
+    text-align: center;
 }
 
-#footer a {
+#footer a, #footer a:link, #footer a:visited {
     color: #888;
 }
 
@@ -193,9 +221,11 @@ img {
     color: #ccc;
 }
 
+/* Guide Tools */
+
 #guide_nav_tools {
-    float: right !important;
-    margin-bottom: 1em;
+    float: left;
+    margin: 2em 0 1em 40px;
 }
 
 #guide_nav_tools img {
@@ -221,17 +251,13 @@ img {
     cursor: auto;
     z-index: 1;
     overflow: visible;
-    border: 1px solid #fff;
+    border: 1px solid #ccc;
     background-color: #fff;
-    border-radius: 5px;
-    -moz-border-radius: 10px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    padding: .5em 1em;
+    border-radius: 5px;    
+     padding: .5em 1em;
     margin: 1em;
 }
+
 .pluslet_simple ul, ol {
     margin: 1em;
 }
@@ -249,28 +275,56 @@ img {
 .pluslet {
     position: relative;
     clear: both;
-    background: #fff;
-    margin-bottom: 10px;
-    cursor: auto;
-    z-index: 50;
+    background: #fff; 
     border: 1px solid #ccc;
-    padding: 0px;
-    font-size: 10pt;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    padding: 0;
+    font-size: 10pt;   
     border-radius: 5px;
-    margin: 1em;
-
+    margin: 1em 1em;    
+    box-shadow: 5px 5px 7px #e0e0e0;
 }
+
+.pluslet ul {
+    margin-left: 2em;
+}
+
+.pluslet li {
+    display: list-item;
+}
+
+.pluslet li a {
+    background-color: transparent;
+    border: medium none;
+    box-shadow: none;
+    color: #40659b;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.pluslet li a:hover {
+    color: #cc6666;
+    text-decoration: underline;
+}
+#tabs .pluslet ul {
+    margin-bottom: 0.5em;
+}
+
+.pluslet_body {
+    background-color: #fff;
+    padding: .5em;
+    margin: .5em;
+    text-align: left;
+    overflow: auto;
+}
+
+
 .titlebar {
     color: #333;
     position: relative;
     height: 2em;
-    padding: 0px 0;
+    padding: 0;
     margin: 0;
-    top: 0px;
-    right: 0px;
     width: 100%;
     border-bottom: 1px solid #B3B9BF;
     -webkit-border-top-left-radius: 5px;
@@ -280,11 +334,9 @@ img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-color: #333;
-
 }
 
 .titlebar_text {
-
     font: 1em sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
@@ -292,27 +344,112 @@ img {
     padding: 5px 10px 5px;
     border:  none;
     color: #fff;
-    /*color: #000;*/
     background-color: transparent;
 
 }
 
 .titlebar_options {
-
     display: none;
+}
+
+
+/* Tabs */
+
+#tabs {    
+    background-color: transparent;
+    width: 100%;
+    float: left;
+    clear: both;
+    margin-top: 45px;
+}
+
+#tab-container {margin: -40px 0 0 0; padding: 0;}
+
+/* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
+#tab-body.no-tabs { 
+    margin: -50px 0 0 0 ;
+    padding: 50px 0 0 0;
+}
+
+#tabs ul {
+     margin: 5px 5px 0 5px;
+     padding: 10px 30px 0 2px;
+}
+
+
+/* Print Dialog */
+
+
+div.printer_tabs { /* Print button on guide with tabs */
+    margin: 0 0 0 0;  
+    background-color: transparent;
+    position: absolute;
+    top:-60px !important;
+    width: 36px;
+}
+
+div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: -41px 0 0 5px;  
+     background-color: transparent;
+    position: absolute;
+    top: 0 !important;
+    width: 36px;
 
 }
+
+.print-img-tabs, .print-img-tabs:hover { 
+    background-image: url("../../images/printer-default.png");
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    cursor: pointer;    
+    padding: 2px 5px;
+    background-color: #333 !important; 
+    border-radius: 8px;
+    border: none;
+    opacity: .6;
+}
+
+.print-img-no-tabs, .print-img-no-tabs:hover { 
+    background-image: url("../../images/printer-default.png");
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    cursor: pointer;    
+    padding: 2px 6px;
+    background-color: #333 !important; 
+    border-radius: 8px;
+    border: none;
+    opacity: .6;
+}
+
+.printDialog {
+    margin: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.printDialog ul {margin: 0; padding: 0; list-style-type: none;}
+
+.printDialog ul li {margin-bottom: 15px; font-size: 14px; }
+
+.printDialog ul li a.pure-button-topsearch,
+.printDialog ul li a.pure-button-topsearch:link,
+.printDialog ul li a.pure-button-topsearch:hover {
+    color: #fff;
+    width: 150px; 
+    padding-top: 10px;
+}
+
+.pure-button-topsearch {
+    background-color: #333;
+    color: #fff;
+}
+
 
 /* Next lines override the regular pluslet to create a heading */
 .plusheading, .type-heading { background-color: #9F3E3B; width: 70%; padding: 0; text-transform:uppercase;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
 
-.pluslet_body {
-    background-color: #fff;
-    padding: .5em;
-    margin: .5em;
-    text-align: left;
-    overflow: auto;}
+
 
 div.pluslet form {
     padding-top: -10px;
@@ -360,8 +497,6 @@ div.pluslet form {
     font-weight:bold;
     font-size:.9em;
     text-indent:.8em;
-
-
 }
 
 
@@ -573,8 +708,22 @@ table.item_listing a:hover {
     width: 15px;
 }
 
+.db_icons {
+    float: right;
+    font-size: 0.8em !important;
+    margin-right: 1em;
+}
+
+.db_icons img {
+    /* background-color: #79A4D4; */
+    border-radius: 3px;
+    height: 15px;
+    width: 15px;
+    padding: 3px;
+}
+
 .toggleLink {
-    font-size: 13px; background-color: #ccc; border-radius: 3px; margin-left: 1em; color: #666; padding: 1px 3px;
+    font-size: 13px; border-radius: 3px; margin-left: 1em; color: #666; padding: 1px 3px;
     display: inline-block;
     cursor: pointer;
 }
@@ -642,12 +791,12 @@ staff_photo2 is in the sidebar of the subject results page (which requires a flo
 }
 
 .staff_photo2 {
-    position: relative;
-    float: left;
-    background: #efefef;
-    padding: 3px;
+    background: none repeat scroll 0 0 #efefef;
     border: 1px solid #333;
-    margin: 0 10px 0 10px;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 3px;
+    position: relative;
 }
 
 .staff_contact {
@@ -800,13 +949,15 @@ form#tellus p {
     position: relative;
     float: left;
     display: inline-block;
-    background-image: url(../../images/icons/comment_box.png);
+    background-image: url('../../images/icons/comment_box.png');
+    background-repeat: no-repeat;
     width: 39px;
     height: 34px;
     margin-right: 1em;
     text-align: center;
     font-size: 1.4em;
     color: #fff;
+    padding-top: 5px;
 }
 .tellus_comment {
     background-color: #fff;
@@ -858,25 +1009,22 @@ ul.ui-autocomplete li a{
 /* Videos page */
 
 
-.vid_container {
-  clear: both;
-  float: left;
-  margin-right: 25px;
-  margin-bottom: 2em;
+div.vid_container {
   background-color: #333;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 10px;
-  width: 550px;
+  width: 100%;
+  float: left;
+  margin: 0 0 25px 0;
+  padding-bottom: 10px;
   color: #fff;
 }
 
 
 div.vid_container img {
   float: left;
-  margin-right: 20px;
-  margin-bottom: 0px;
+  margin: 10px 20px 10px 10px;
   background-color: #4F4E4E;
   width: 150px;
   cursor: pointer;
@@ -897,7 +1045,7 @@ div.vid_container img {
 div.vid_container h3 {
   font-size: 1.3em;
   color: #B0CBE8 !important;
-  margin-top: 0;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -912,7 +1060,7 @@ div.vid_container a {
   cursor: pointer;
 }
 
-div.vid_container p.runtime {margin-top: -10px; font-size: smaller;}
+div.vid_container p.runtime {font-size: smaller; margin-bottom: 15px;}
 
 .video_thumb {
   float: left;
@@ -928,32 +1076,17 @@ div.vid_container p.runtime {margin-top: -10px; font-size: smaller;}
 
 div.video_thumb img {
   float: left;
-  margin-left: 10px;
 
 }
 .video_list {
   clear: both; float: left; width: 500px;
 }
 
-/* Override Made Easy
- * The following styles are commonly overridden to make simple colour customizations
- * I did a couple to get ya started
-*/
 
 
-#header_inner_wrap {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.wrapper-full {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-}
 
 /* these .ui class overrides tweak border and spacing of tab containers */
-.ui-widget-content {
+.ui-content {
     border: none !important;
 }
 
@@ -968,28 +1101,9 @@ div.video_thumb img {
     padding: 4px 3px 0px 3px !important;
 }
 
-.pluslet {
-    border: 1px solid #ccc;
-    box-shadow: 5px 5px 7px #e0e0e0;
-}
-
-
-.pluslet_simple {
-    border: 1px solid #ccc;
-}
-
-.titlebar {
-
-}
-
-.titlebar_text {
-
-}
 
 /* Next lines override the regular pluslet to create a heading */
 .plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase;}
-div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
-div.type-heading .titlebar {}
 
 .evenrow {
     background-color: #E3E1D9;
@@ -1005,16 +1119,7 @@ width:55px;
     float:left;
 }
 
-.clearboth {
 
-    clear:both;
-}
-
-.clear-both-left {
-    clear:both;
-    float:left;
-
-}
 
 .float-left {
     float:left;
@@ -1033,3 +1138,59 @@ width:55px;
 }
 
 .noshow {display: none;}
+
+
+
+/*  Media Queries */
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+
+}
+
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+
+    h1 {
+        clear: left;
+        margin-top: 0;
+    }
+
+    #guide_nav_tools {
+        float: right !important;
+        margin: 0 0 0 0;
+    }
+
+    div.printer_tabs { /* Print button on guide with tabs */
+        margin: 0 0 0 0;  
+        background-color: transparent;
+        position: absolute;
+        top:-46px !important;
+        right: 305px;
+        width: 36px;
+    }
+
+    div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: -28px 0 0 5px;  
+     background-color: transparent;
+    position: absolute;
+    top: 0 !important;
+    right: 305px !important;
+    width: 36px;
+    }
+
+    .ui-widget-header {
+       background: url("../shared/images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll top left #cccccc !important;
+    }
+}
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+
+}
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+
+}

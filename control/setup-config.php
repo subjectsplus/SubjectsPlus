@@ -1,15 +1,14 @@
 <?php
-
-//   @todo
-//
-//
-//   write the config file
-//   @author dgonzalez
-//   @brief create the config file
-//   @date Jan 2013
-//   @description This file will help a user walk through basic options, and
-//   @file control/setup-config.php
-
+/**
+ *   @file control/setup-config.php
+ *   @brief create the config file
+ *   @description This file will help a user walk through basic options, and
+ * 	 write the config file
+ *
+ *   @author dgonzalez
+ *   @date Jan 2013
+ *   @todo
+ */
 
 use SubjectsPlus\Control\Config;
 
@@ -32,7 +31,7 @@ $AssetURL = getAssetURL();
    <head>
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-       <style type="text/css" media="all">@import "<?php print $AssetURL; ?>css/admin/admin_styles.css"</style>
+       <style type="text/css" media="all">@import "<?php print $AssetURL; ?>css/admin/admin_styles.css";></style>
        <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.livequery.min.js"></script>
        <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.hoverIntent.js"></script>
        <script type="text/javascript" src="<?php print $AssetURL ?>js/shared.js"></script>
@@ -130,7 +129,10 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 						"uname" => array( _( "MySQL Username" ), _( "This is the username to your MySQL database." ), "string", "left", "medium", "" ,"" ),
 
 						"pword" => array( _( "MySQL Password" ), _( "This is the password for your MySQL user." ), "string", "left", "medium", "" ,"" ),
-	"db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL server uses. (Default: 3306)." ), "string", "left", "medium", "" ,"" ),
+
+
+						"db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL server uses. (Default: 3306)." ), "string", "left", "medium", "" ,"" ),
+
 
 						"dbName_SPlus" => array( _( "MySQL SubjectsPlus Database" ), _( "Name of the SubjectsPlus database" ), "string", "left", "" , _( "database help?" ) ),
 
@@ -182,7 +184,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 						}
 						else
 						{
-							?> <div class="install-pluslet"><a href="update.php">Update to 2.0!</a></div> <?php
+							?> <div class="install-pluslet"><a href="update.php">Update SubjectsPlus!</a></div> <?php
 						}
 					}else
 					{

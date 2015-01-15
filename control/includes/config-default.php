@@ -120,25 +120,34 @@ $tel_prefix_short = "";
 $hname = "127.0.0.1";
 
 /* MySQL username and password */
-$uname = "username";
-$pword = "password";
+$uname = "";
+$pword = "";
+
+$db_port = "3306";
 
 /* Name of the SubjectsPlus database, i.e., subsplus.  May have a
    prefix on a shared host, i.e., yoursite_subsplus. */
 $dbName_SPlus = "subjectsplus";
 
 //////////////////////
-// Responsive Layout?
-// This will add more css weight to page load
-//////////////////////
-
-$is_responsive = TRUE;  // FALSE is off
-
-//////////////////////
 // Open database links with a target=blank
+$target_blank = TRUE;
 //////////////////////
 
-$target_blank = FALSE;
+/////////////////////
+// Use an override theme
+// this should correspond to a folder under subjects/theme/
+// and in this folder you put the override files
+$subjects_theme = "";
+/////////////////////
+
+//////////////////////
+// Header switcher
+// This allows SP to mimic the style of different sites,
+// e.g., for a differently-branded branch library
+//////////////////////
+
+$guide_headers = array( 'default' );
 
 //////////////////////
 // Mmm . . . delicious

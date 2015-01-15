@@ -300,7 +300,7 @@ class Staff {
     }
 
     // set up
-    print "<div class=\"pure-g-r\">";
+    print "<div class=\"pure-g\">";
 
 
   	//see which"Staff Member" columns and whether "Personal Information" section or "Emergency Contact" section are omitted
@@ -577,9 +577,9 @@ print "<div class=\"pure-u-1-3\">";
                 <br /><strong>records</strong> allows access to both the Record and Guide tabs.
                 <br /><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.
                 <br /><strong>admin</strong> allows access to the overall admin of the site.
-                <br /><strong>supervisor</strong> means user shows up in list of _supervisors
-                <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.
-                <br /><strong>others</strong> are hopefully self-explanatory");
+                <br /><strong>librarian</strong> means user shows up in lists of librarians.
+                <br /><strong>supervisor</strong> means user shows up in list of supervisors
+                <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.");
 
     makePluslet("Permissions", $our_ptags, "no_overflow");
 
@@ -708,7 +708,7 @@ public function outputLatLongForm() {
     $action = htmlentities($_SERVER['PHP_SELF']) . "?staff_id=" . $this->_staff_id;
 
     // set up
-    print "<div class=\"pure-g-r\">";
+    print "<div class=\"pure-g\">";
     // start form
     print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
     <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />

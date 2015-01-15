@@ -122,7 +122,7 @@ class Talkback {
     echo "
 <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"talkback_id\" value=\"" . $this->_talkback_id . "\" />
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">
     <div class=\"pluslet\">
       <div class=\"titlebar\">
@@ -275,7 +275,7 @@ $last_mod = _("Last modified: ") . lastModded("talkback", $this->_talkback_id);
 
 makePluslet(_("Answered By"), $answerer, "no_overflow");
 
-makePluslet(_("Is this guide live?"), $is_live, "no_overflow");
+makePluslet(_("Is this comment live?"), $is_live, "no_overflow");
 
 makePluslet(_("Site Tags (relevant library sites)"), $tb_tags, "no_overflow");
 

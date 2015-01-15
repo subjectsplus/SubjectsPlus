@@ -1,338 +1,226 @@
 /* 
     Document   : prints.css
     Created on : 
-    Author     : agdarby
-    Description: print stylesheet for public site; needs updating
+    Author     : agdarby, pvillanueva
+    Description: print stylesheet for public site
 */
 
 @media print {
 
-
-body {
-
-	background-color: #fff; 	
-	font-family: "Helvetica Neue", "Helvetica", sans-serif;
-	font-size: 10pt;
-
-}
-
-#rapper {
-	width: auto; 
-	padding: 0; 
-	border: 0;
-	text-align: left;
-
-}
-
-html>body #rapper {
-	width: 100%;
-
-}
-
-a {
-	color: #333;
-
-}
-
-a:link {
-	color: #333;
-}
-
-a:visited {
-	color: #333;
-}
-
-a:hover {
-	color: #333;
-}
-
-
-
-#header {
-display: none;
-}
-
-#header2 {
-	padding: 5px 0;
-	height:1.5em;
-	border: none;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	text-align: center;
-}
-
-#header2 h1 {
-	padding: 0;
-	margin-top:0;
-	font-size: 14pt;
-	font-weight:bold;
-
-}
-
-#header-tools {
-	display: none;
-}
-/* Main-body basically constrains the content div at 70% */
-#main-body {
-
-	background: transparent;
-	clear: both;
-}
-
-/*  The content div contains the main white section underneath the header*/
-#content {
-
-	background: transparent;
-	width: 100%;
-
-}
-
-#content h1 {
-	padding-top: 5px;
-	padding-bottom: 5px;
-	letter-spacing: 2px;
-}
-
-#content a:link:after, #content a:visited:after {
-   font-size: 90%;
-	 font-weight:normal;
-	 text-decoration: none;
-
-   }
-
-
-#sidebar {
-
-	background: transparent;
-	clear: both;
-	float: left;
-	width: 100%;
-	
-}
-
-#sidebar a:link:after, #sidebar a:visited:after {
-   font-size: 90%;
-   }
-
-/* Footer */
-
-#footer {
-
-	display: none;
-
-}
-
-/* This is for the pluslets */
-
-.pluslet {
-margin-bottom: 2em;
-}
-
-/* This hides the "All Items by Source" titlebar */
-#pluslet-1 .titlebar {
-display: none;
-}
-
-/* This wipes out the legend */
-#pluslet-2 {display: none;}
-
-
-.titlebar_text {
-	font-size: larger;
-	font-weight: bold;
-	border-bottom: 1px dashed #333;
-
-	}
-	
-.titlebar_options { 
-
-	display: none; 
-
-}
-
-.pluslet_body {background-color: #fff; width: 100%;}
-
-/* Search boxes on subjects/index.php */
-
-.main_search_box {
-	text-align: left; 
-	margin-left: 0px;
-}
-
-/* Display for the "all items" pluslet */
-
-.toc { display: none; }
-	
-.leftcolheader {font-weight: bold; font-size: larger; padding: 2px;}		
-
-
-/* The next three classes are used for even/odd striped tables of data/results */
-.striped_data {
-	font-size: 100%;
-	margin: 2px;
-	background-color: #ccc;
-}
-
-table td.odd {
-	background: #e0e0e0;
-}
-
-table td.even {
-	background: #ffffff;
-}
-
-table td.subhead {
-	background: #EFF8CE;
-	font-size: 12pt;
-}
-
-table p {
-	margin-bottom: 5px;
-	line-height: 1.4em;
-}
-
-/* This is for debugger results, if $debugger variable is turned on in file */
-.debugger {
-display: none;
-}
-
-/* For subjects/faq.php results */
-
-.faq_item {
-	background: url("../images/left_top_corner.gif") no-repeat;
-}
-
-.faq_item_q { /*background: #333; color: #fff;
-	*/
-	padding-left: 15px;
-	margin-bottom: 2px;
-	padding-bottom: 2px;
-	font-weight: bold;
-	padding-top: 9px;
-}
-
-.faq_item_a {
-	padding-left: 15px;
-	padding-bottom: 5px;
-}
-
-/* The next few determine how peoples' names and pix appear in staff.php & staff_details.php 
-staff_photo2 is in the sidebar of the subject results page (which requires a float)*/
-
-.staff_photo {
-	position: relative;
-	background: #efefef;
-	padding: 3px;
-	border: 1px solid #333;
-	margin-right: 20px;
-	margin-bottom: 10px;
-}
-
-.staff_photo2 {
-	position: relative;
-	float: left;
-	background: #efefef;
-	padding: 3px;
-	border: 1px solid #333;
-	margin: 0 10px 0 10px;
-}
-
-.staff_contact {
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 1em;
-	padding: 0;
-}
-
-span.staff_contact a:link {
-
-color: #000;
-text-decoration: underline;
-}
-span.staff_contact a:visited {
-
-color: #000;
-text-decoration: underline;
-}
-
-span.staff_contact a:hover {
-
-text-decoration: none;
-color: #cc6666;
-
-}
-
-span.staff_contact a {
-
-color: #000;
-text-decoration: underline;
-}
-
-
-
-/* This is for the search box on subjects/display.php & subjects/faq.php */
-
-.search_smaller {
-	font-size: 10px;
-	margin: 0px;
-	padding: 0px;
-}
-
-/* Stuff for Talkback.  First class encloses the Q and A for each record */
-
-.talkback { 
-	float: none;
-	margin: 0 0 5px 5px;
-	border-bottom: 1px dotted #e0e0e0;
-	background-color: #ffffff;
-	padding: 2px;
-	color: #333;
-}
-
-.initial {
-	font-size: 22pt;
-	font-weight: 700;
-	font-family: verdana;
-	color: #333;
-	line-height: 24pt;
-}
-			
-.smallred {
-	color: #0397D6;
-	font-size: 10pt;
-}
-
-/* Used throughout for print that is um smaller  */
-.smaller {font-size: 8pt; }
-
-#listing a:hover {
-text-decoration: underline;
-
+body { 
+    background: #FFFFFF; 
+    font-size: 12pt; 
+    font-family: "Times New Roman" !important;
+    color: #000000;
+    line-height: 1.2;
+    width: 100%;
 } 
 
-#listing a   {
-text-decoration: none;
+h1 {font-size: 20pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h2 {font-size: 16pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h3 {font-size: 14pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h4 {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h5 {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+p {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+
+div { 
+    width: 100% !important; 
+    border: none;     
+    margin: 0 ;     
+    padding: 0;
+    box-shadow: none; 
+    border-radius: none;  
+    background: white;
+    text-align: left;
+    font-family: "Times New Roman";
+    font-size: 12pt; 
+} 
+
+img {
+border: none; float: none !important;
 }
 
-.oddrow { background-color: #e0e0e0; }
-.evenrow { }
+ul, ol {margin: 0 0 0 30px;}
 
+a,
+a:link, 
+a:visited { 
+    color: #333;
+    text-decoration: underline; 
+    border: none;
+}
 
+p a[href^="http://"]:after, 
+p a[href^="https://"]:after {
+content: " (" attr(href) ")";
+font-size: 80%;
+text-decoration: underline;
+}
 
+a[href^="http://"]:after,
+a[href^="https://"]:after {
+  content: " (" attr(href) ")";
+  font-size: 80%;
+  text-decoration: underline;
+}
 
-#gnav {
+p a[href^="#"]:after, a[href^="#"]:after {
 display: none;
 }
 
-* { overflow: visible !important }
-
-/* IC Styles */ 
-#skipnav { display: none; }
-#global_nav { display: none; }
-#navheader { display: none; }
-#footer { display: none; }
-#shortfooter {display: none; }
-
-
-
+a[href^="#"] {
+text-decoration: none;
 }
+
+a[name] {display: none;}
+
+a[name]:after {
+display: none;
+}
+
+p a {
+word-wrap: break-word;
+}
+
+em {font-style: italic;}
+
+
+
+#header_inner_wrap img,
+#header_inner_wrap a,
+#guide_nav_tools,
+form,
+.pure-form,
+#tab-container,
+.pluslet_body form,
+#colorbox,
+#cboxContent,
+#cboxOverlay, 
+#footer,
+.ui-autocomplete,
+#expander,
+#letterhead,
+#letterhead_small,
+.faq_filter,
+.striper img,
+#autoC,
+div.vid_container img {display: none !important; visibility: hidden; height: 0; background: transparent;}
+
+
+
+.pluslet {display:block !important; clear: both !important; margin-bottom: 20px;}
+
+.pluslet .pluslet_body a {color: #000; text-decoration: none; border-bottom: none;}
+
+.titlebar_text {font-size: 15pt; font-weight: bold; font-family: inherit !important;}
+
+.clearboth,
+.clear-both {
+    clear: both;
+    margin-bottom: 20px;
+}
+
+
+/* Styling for databases.php */
+
+.list_bonus {display: block !important; margin-bottom: 15px;}
+
+.item_listing {margin-bottom: 15px;}
+
+.item_listing td a[href^="http://"]:after,
+.item_listing td a[href^="https://"]:after {
+      content: " (" attr(href) ")";
+      font-size: 80%;
+      display: block;
+      clear: both;
+      text-decoration: underline;
+}
+
+.pluslet .pluslet_body ul li a {
+  text-decoration: none;
+}
+
+.pluslet .pluslet_body ul li a[href^="http://"]:after,
+.pluslet .pluslet_body ul li a[href^="https://"]:after,  {
+      content: " (" attr(href) ")";
+      font-size: 80%;
+      display: block !important;
+      clear: both !important;
+      text-decoration: underline;
+}
+
+/* Styling for index.php */
+
+.subject {
+    font-size: 12px;
+}
+
+/* Styling for faq.php */
+
+.zebra a {text-decoration: none;}
+
+.pluslet_simple {margin-bottom: 15px;}
+
+.pluslet_simple a {text-decoration: none;}
+
+
+/* Styling for search.php and results */
+
+.striper {background: #FFF !important; padding-bottom: 10px !important;}
+
+.striper a:before{content: "- ";}
+
+
+/* Styling for staff.php */
+
+.item_listing .staff-name-row a:after,
+.item_listing .staff-title-row a:after,
+.item_listing .staff-email-row a:after {display: none !important;}
+
+.staff_photo_large {
+    border: 1px solid #333;
+    margin-right: 10px;
+}
+
+.item_listing .staff_contact a:after {display: none !important;}
+
+
+.staff_photo,
+.staff_photo2 {
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    margin-right: 50px;
+}
+
+/* Styling for talkback.php */
+
+.tellus_item {
+    border-bottom: 1px dashed #333;
+    margin: 15px 0;
+}
+
+.comment_num {    
+    color: #000;    
+    font-size: 14pt;
+    margin-right: 10px;
+}
+
+/* Styling for video.php */
+
+div.vid_container {
+   margin: 0 0 15px 0; 
+}
+
+
+div.vid_container h3[href^="http://"]:after {
+  content: " (" attr(href) ")";
+  display: block;
+  clear: both;
+  text-decoration: underline;
+  font-size: 80%;
+  font-weight: normal;
+  padding: 0;
+}
+
+
+} /*Close media print */

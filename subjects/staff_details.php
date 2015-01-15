@@ -10,15 +10,20 @@
 
 use SubjectsPlus\Control\Querier;
 
-
-$page_title = "Library Staff Details";
-$subfolder = "services";
-
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/staff_details.php"); exit;}
+
 $db = new Querier;
+
+$use_jquery = array();
+
     
+$page_title = "Library Staff Details";
+$subfolder = "services";
 
 // Get array of acceptable users
 
@@ -136,7 +141,7 @@ $page_title = _("Staff Listing: ") . $fullname;
 include("includes/header.php");
 
 ?>
-<div class="pure-g-r">
+<div class="pure-g">
 <div class="pure-u-2-3">
     <div class="pluslet">
         <div class="titlebar">

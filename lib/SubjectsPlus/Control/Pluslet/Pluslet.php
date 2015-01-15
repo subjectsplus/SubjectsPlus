@@ -386,6 +386,8 @@ class Pluslet {
 
                                     if ($show_icons == "yes") {
                                         $icons = showIcons($current_ctags);
+                                    } else {
+                                        $icons = "";
                                     }
 
                                     if ($show_desc == 1) {
@@ -397,8 +399,9 @@ class Pluslet {
                                             $q1 = "SELECT subject_id FROM subject WHERE shortform = '" . $_GET["subject"] . "'";
 
                                             $r1 = $db->query($q1);
-                                            $subject_id = $db->last_id($r1);
-                                            $subject_id = $subject_id[0];
+                                            //$subject_id = $db->last_id($r1);
+                                            //$subject_id = $subject_id[0];
+                                            $subject_id = $r1[0]["subject_id"];  
                                         }
 
                                         $override = findDescOverride($subject_id, $fields[1]);
@@ -415,12 +418,41 @@ class Pluslet {
                                 } else {
                                     // It's print
                                     $format = "other";
+
+                                    $current_ctags = explode("|", $myrow[3]);
+                                    
                                     if ($show_icons == "yes") {
                                         $icons = showIcons($current_ctags);
+                                    } else {
+                                        $icons = "";
                                     }
-                                    if ($show_desc != "") {
-                                        $description = "<br />$myrow[6]";
+
+                                    // added Diane Z fall 2014
+
+                                    if ($show_desc == 1) {
+                                        // if we know the subject_id, good; for public, must look up
+                                        $subject_id = '';
+                                        if (isset($_GET["subject_id"])) {
+                                            $subject_id = $_GET["subject_id"];
+                                        } elseif (isset($_GET["subject"])) {
+                                            $q1 = "SELECT subject_id FROM subject WHERE shortform = '" . $_GET["subject"] . "'";
+
+                                            $r1 = $db->query($q1);
+                                          $subject_id = $r1[0]["subject_id"];    
+                                        }
+
+                                        $override = findDescOverride($subject_id, $fields[1]);
+                                        // if they do want to display the description:
+                                        if ($override != "") {
+                                            // show the subject-specific "description_override" if it exists
+                                            $description = "<br />" . $override;
+                                        } else {
+                                            $description = "<br />" . $myrow[6];
+                                        }
+                                        //$description = "<br />$myrow[9]";
+                                    
                                     }
+                                    // end diane fall 2014
 
                                     // Simple Print (2), or Print with URL (3)
                                     if ($myrow[2] == 3) {
@@ -520,6 +552,7 @@ class Pluslet {
 				$this->_pluslet_bonus_classes = "unsortable";
 				$this->_pluslet_id_field = $new_id;
 				$this->_pluslet_name_field = "new-pluslet-" . $this->_type;	
+
 				$this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
 				$this_instance = "pluslet-new-body-$new_id";
 			}
