@@ -96,7 +96,7 @@ class StaffDisplay {
         $db = new Querier;
         $r = $db->query($q);
 
-        $items = "<table width=\"98%\" class=\"item_listing\">";
+        $items = "<table class=\"footable\"><thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th>Name</th><th>Title</th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\">Phone</th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\">Email</th></tr></thead>";
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -136,14 +136,18 @@ class StaffDisplay {
           }
 
           if ($current_dept != $dept_id) {
-            $items .= "<tr><td align=\"center\" colspan=\"4\"><a name=\"$dept_id\"></a><h2 class=\"dept_header\">$dept_name&nbsp; &nbsp;" . $tel_prefix . $dept_tel . "</h2></td></tr>";
+            $items .= "<tr><td class=\"dept_label\" colspan=\"5\"><a name=\"$dept_id\"></a><h2 class=\"dept_header\">$dept_name&nbsp; &nbsp;" . $tel_prefix . $dept_tel . "</h2></td></tr>";
           }
 
           $items .= "<tr class=\"$row_colour\">
-		<td style=\"width: 20%\" align=\"left\" class=\"$row_colour\"><span class=\"staff_contact\">";
-          
+          <td class=\"$row_colour staffpic\">";
+
           // Here we stick in their headshot; comment out if you don't want; maybe later this should be an admin parameter
           $items .= getHeadshot($email, '');
+
+          $items .= "</td>
+		      <td class=\"$row_colour\"><span class=\"staff_contact\">";
+          
 
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
@@ -152,9 +156,9 @@ class StaffDisplay {
           }
           
           $items .= "</span></td>
-			<td style=\"width: 40%\" align=\"left\" class=\"$row_colour\">$title $assoc_subjects</td>
-			<td align=\"left\" class=\"$row_colour\">$tel_prefix$tel </td>
-			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
+    			<td style=\"width: 40%\" align=\"left\" class=\"$row_colour\">$title $assoc_subjects</td>
+    			<td align=\"left\" class=\"$row_colour\">$tel_prefix$tel </td>
+    			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
           $current_dept = $dept_id;
