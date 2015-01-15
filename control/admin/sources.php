@@ -31,9 +31,9 @@ if (isset($_POST["add_source"])) {
   ////////////////
 
   $qInsertSource = "INSERT INTO source (source, rs) VALUES (
-    " . $db->quote(scrubData($_POST["source"])) . ", 
-    0
-    )";
+		" . $db->quote(scrubData($_POST["source"])) . ", 
+		0
+		)";
 
   $rInsertSource = $db->query($qInsertSource);
 
@@ -62,9 +62,9 @@ if (isset($_POST["update_sources"])) {
 
   foreach ($result as $key => $value) {
     $qUpDept = "UPDATE source SET
-    source = " . $db->quote(scrubData($value)) . ", 
-    rs = " . $row_count . "
-    WHERE source_id = " . scrubData($key, "integer");
+		source = " . $db->quote(scrubData($value)) . ", 
+		rs = " . $row_count . "
+		WHERE source_id = " . scrubData($key, "integer");
 
     //print $qUpDept;
     $rUpDept = $db->query($qUpDept);
@@ -125,7 +125,7 @@ print "
 
 <form id=\"sources\" action=\"\" method=\"post\">
 
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">
 ";
 
@@ -193,10 +193,10 @@ include("../includes/footer.php");
      jQuery("#item-"+this_id).remove();
 
      jQuery.post("admin_bits.php", {action: 'delete_source', delete_id:this_id},
-       function(response) {
-   console.log(response);
-   $('#feedback').remove();
-   jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
+			 function(response) {
+	 console.log(response);
+	 $('#feedback').remove();
+	 jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
          jQuery("#feedback").show();
        });
 

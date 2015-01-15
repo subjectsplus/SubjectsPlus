@@ -1,0 +1,256 @@
+/* SubjectsPlus UM Print Stylesheet */
+@media print {
+
+body { 
+    background: white; 
+    font-size: 12pt; 
+    font-family:"Times New Roman";
+    color: black;
+    line-height: 1.2;
+    width: 100%;
+} 
+
+h1 {font-size: 20pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h2 {font-size: 16pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h3 {font-size: 14pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h4 {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+h5 {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+p {font-size: 12pt; margin: 0; padding: 0 0 5px 0; font-family: inherit;}
+
+.titlebar .titlebar_text {font-size: 16pt; margin: 10px 0 0 0; padding: 0 0 5px 0; font-family:"Times New Roman"; font-weight: bold;}
+.pluslet .pluslet_body {font-size: 12pt; margin: 0 0 10px 0; padding: 0 0 5px 0; font-family:"Times New Roman";}
+
+div { 
+    width: 100%; 
+    border: none;     
+    margin: 0 ;     
+    padding: 0;
+    box-shadow: none; 
+    border-radius: none;  
+    background: white;
+    text-align: left;
+    font-family: inherit;
+    font-size: 12pt; 
+} 
+
+img {
+border: none;
+}
+
+ul, ol {margin: 0 0 0 30px;}
+
+a,
+a:link, 
+a:visited { 
+    color: #000;
+    text-decoration: underline; 
+    border: none;
+}
+
+
+p a[href^="http://"]:after, 
+p a[href^="https://"]:after {
+content: " (" attr(href) ")";
+font-size: 80%;
+text-decoration: underline;
+}
+
+a[href^="http://"]:after,
+a[href^="https://"]:after {
+  content: " (" attr(href) ")";
+  font-size: 80%;
+  text-decoration: underline;
+}
+
+p a[href^="#"]:after, a[href^="#"]:after {
+display: none;
+}
+
+a[href^="#"] {
+text-decoration: none;
+}
+
+a[name] {display: none;}
+
+a[name]:after {
+display: none;
+}
+
+p a {
+word-wrap: break-word;
+}
+
+em {font-style: italic;}
+
+
+
+#menu_button,
+.visible-desktop,
+.header-content img,
+.header-content a,
+.header-text,
+#search_options,
+#spum_nav,
+#nav_menu, 
+ul#nav_menu div,
+#guide_nav_tools,
+#tab-container,
+.footer-container,
+#wide_footer,
+.pluslet_body form,
+#colorbox,
+#cboxContent,
+#cboxOverlay,
+#letterhead,
+#letterhead_small,
+#autoC,
+.tipend,
+.faq_filter,
+form,
+.pure-form,
+#expander,
+div.vid_container img,
+.rss_button,
+.item .syn-img  {display: none !important; visibility: hidden; height: 0; background: transparent;}
+
+
+.pluslet .pluslet_body a {color: #000; text-decoration: none; border-bottom: none;}
+
+.clearboth,
+.clear-both
+ {
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.tip {
+    margin: 20px 0 0 0;
+}
+
+
+.item_listing {margin-bottom: 15px;}
+
+/* Styling for index.php */
+
+.subject {
+    font-size: 12px;
+}
+
+#listguides .item_listing td a:after {
+display: none;
+}
+
+#listguides .item_listing td a {text-decoration: none;}
+
+.tip ul li a {
+  text-decoration: none;
+}
+
+.tip ul li a[href^="http://"]:after,
+.tip ul li a[href^="https://"]:after,  {
+      content: " (" attr(href) ")";
+      font-size: 80%;
+      display: block !important;
+      clear: both !important;
+      text-decoration: underline;
+}
+
+
+/* Styling for faq.php */
+
+.zebra a {text-decoration: none;}
+
+.pluslet_simple {margin-bottom: 15px;}
+
+.pluslet_simple a {text-decoration: none;}
+
+
+/* Styling for databases.php */
+
+.list_bonus {display: block !important; margin-bottom: 15px;}
+
+.item_listing td a[href^="http://"]:after,
+.item_listing td a[href^="https://"]:after {
+      content: " (" attr(href) ")";
+      font-size: 80%;
+      display: block;
+      clear: both;
+      text-decoration: underline;
+}
+
+.see-all-db a:after {display: none;}
+
+
+/* Styling for staff.php */
+
+.item_listing .staff-name-row a:after,
+.item_listing .staff-title-row a:after,
+.item_listing .staff-email-row a:after {display: none !important;}
+
+.staff_photo_large {
+    border: 1px solid #333;
+    margin-right: 10px;
+}
+
+.item_listing .staff_contact a:after {display: none !important;}
+
+.dept_header {text-align: left;}
+
+.staff_photo,
+.staff_photo2 {
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    margin-right: 50px;
+}
+
+
+/* Styling for talkback.php */
+
+.tellus_item {
+    border-bottom: 1px dashed #333;
+    margin: 15px 0;
+}
+
+.comment_num {    
+    color: #000;    
+    font-size: 14pt;
+    margin-right: 10px;
+}
+
+.talkback-message {
+    border: 1px solid #999;    
+    padding: 0px 10px 20px 10px;
+    margin: 0 0 15px 0;    
+}
+
+.talkback-error { color:#ff0000;}
+
+.talkback-error h2 {color:#ff0000;}
+
+
+
+/* Styling for video.php */
+
+div.vid_container {
+   margin: 0 0 15px 0; 
+}
+
+
+div.vid_container h3[href^="http://"]:after {
+  content: " (" attr(href) ")";
+  display: block;
+  clear: both;
+  text-decoration: underline;
+  font-size: 80%;
+  font-weight: normal;
+  padding: 0;
+}
+
+/* Styling for new_acquisitions.php detail page */
+
+.item {width: 100% !important; height: auto !important;}
+
+.item-link a {text-decoration: none;}
+
+
+} /*Close media print */

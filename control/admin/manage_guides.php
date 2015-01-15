@@ -118,22 +118,18 @@ $mg_box = "
 <div id=\"tickzone\" style=\"display: none;padding: 1em 10px;\"><span class=\"filter_ticks\" >" . _("Assign to ") . " $staff_dropdown_ticks</span><span class=\"filter_ticks\" > Change To $type_dropdown_ticks</span><span class=\"filter_ticks\" id=\"tick_forget\">Never Mind</span></div>
 </div>
 <div id=\"listing_space\" style=\" \">
-$staff_list;
+$staff_list
 </div>
 </div>
 ";
 
 print "
-<div class=\"pure-g-r\">
+<div class=\"pure-g\">
   <div class=\"pure-u-2-3\">";
 
 makePluslet(_("Manage Guides"), $mg_box, "no_overflow");    
 
-
-
 print "</div></div>";
-
-
 
 include("../includes/footer.php");
 

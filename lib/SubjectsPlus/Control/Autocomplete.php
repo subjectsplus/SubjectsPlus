@@ -212,7 +212,12 @@ class Autocomplete {
           }   else {
 
               $db = new Querier();
-              $record_url_sql = "SELECT location.location, title.title_id FROM location, title INNER JOIN location_title ON title.title_id = " . $db->quote($myrow['id']);
+              $record_url_sql = "SELECT location, title
+				FROM location l, title t, location_title lt 
+				WHERE  t.title_id = lt.title_id
+				AND l.location_id = lt.location_id AND t.title_id = " . $db->quote($myrow['id']) . " ";
+            
+
               $record_url_result = $db->query($record_url_sql);
 
               if (isset($record_url_result[0]['location'])) {

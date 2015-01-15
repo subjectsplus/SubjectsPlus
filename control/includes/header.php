@@ -178,7 +178,7 @@ mb_internal_encoding('UTF-8');
     ?>
 
 <header id="header">
-    <div class="pure-g-r">
+    <div class="pure-g">
         <div class="pure-u-1">
     		<div class="wrapper-full">
 

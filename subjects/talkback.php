@@ -12,21 +12,22 @@
  *   In version 2.x of SP, there are now filters to add different talkback instances
  *
  *   @author adarby
- *   @date update july 2012
+ *   @date update aug 2014
  *   @todo
 */
 
-
 use SubjectsPlus\Control\Querier;
-
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/talkback.php"); exit;}
+
 $db = new Querier;
+$use_jquery = array();
     
-
-
 /* Set local variables */
 
 $page_title = _("Talk Back");
@@ -267,6 +268,11 @@ if ($result_count != 0) {
 		$answer = tokenizeText($answer);
     // $answer = stripslashes(htmlspecialchars_decode($myrow["5"])); Louisa's proposed fix for messy answer @todo
 		$keywords = $myrow["3"];
+		$responder_email = $myrow["9"];
+
+		// Let's link back to the staff page
+		$name_id = explode("@", $responder_email);
+  		$lib_page = "staff_details.php?name=" . $name_id[0];
 
 		$results .= "
 		<div class=\"tellus_item oddrow\">\n
@@ -278,7 +284,7 @@ if ($result_count != 0) {
 			$results .= getHeadshot($myrow[9]);
 		}
 		$results .= $answer;
-		$results .= "<p style=\"clear: both;font-size: 11px;\">Answered by $myrow[7] $myrow[8], $myrow[10]</p></div>\n";
+		$results .= "<p style=\"clear: both;font-size: 11px;\">Answered by <a href=\"$lib_page\">$myrow[7] $myrow[8]</a>, $myrow[10]</p></div>\n";
 
     // Add 1 to the row count, for the "even/odd" row striping
 
@@ -314,8 +320,9 @@ if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 include("includes/header.php");
 
 ?>
-<div class="pure-g-r">
-<div class="pure-u-2-3">
+<br />
+<div class="pure-g">
+<div class="pure-u-1 pure-u-md-2-3">
 	<?php print $feedback . $stk_message; ?>
 	<div class="pluslet_simple no_overflow">
 
@@ -326,17 +333,16 @@ include("includes/header.php");
 	</div>
 	<div class="pluslet_simple no_overflow">
 		<?php print $comment_header . $results; ?>
-
 	</div>  
 </div>
-<div class="pure-u-1-3">
+<div class="pure-u-1 pure-u-md-1-3">
 	<!-- start pluslet -->
 	<div class="pluslet">
 		<div class="titlebar"><div class="titlebar_text"><?php print _("Tell Us What You Think"); ?></div></div>
 		<div class="pluslet_body">
 			<p><span class="comment_num">!</span><strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
 			<br />
-			<form id="tellus" action="talkback.php" method="post">
+			<form id="tellus" action="talkback.php" method="post" class="pure-form">
 				<p class="zebra oddrow"><strong><?php print _("your name (optional):"); ?></strong><br />
 					<input type="text" name="name" size="20" value="<?php print $this_name; ?>" /></p>
 
@@ -346,7 +352,7 @@ include("includes/header.php");
 						<p class="zebra oddrow"><strong><?php print $stk; ?></strong><br />
 							<?php print _("Enter Number:"); ?> <input type="text" name="skill" size="2" /></p>
 
-							<p class="zebra evenrow"><input type="submit" class="button" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
+							<p class="zebra evenrow"><input type="submit" class="pure-button pure-button-topsearch" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
 						</form>
 					</div>
 				</div>

@@ -8,12 +8,15 @@
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
-    
-$use_jquery = array("ui");
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index.php"); exit;}
+   
+$use_jquery = array("ui");
 
 $page_title = $resource_name;
 $description = "The best stuff for your research.  No kidding.";
@@ -22,7 +25,12 @@ $noheadersearch = TRUE;
 
 $db = new Querier;
     
-$guide_path = "guide.php?subject=";
+// let's use our Pretty URLs if mod_rewrite = TRUE or 1
+if ($mod_rewrite == 1) {
+   $guide_path = "";
+} else {
+   $guide_path = "guide.php?subject=";
+}
 
 if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
 
@@ -115,50 +123,6 @@ $newlist = "<ul>\n";
 }
 $newlist .= "</ul>\n";
 
-// List guides function -- no other page uses it ? //
-
-function listGuides($search = "", $type="all") {
-    $db = new Querier();
-    
-    $andclause = "";
-    global $guide_path;
-
-    if ($search != "") {
-        $search = scrubData($search);
-        $andclause .= " AND subject LIKE '%" . $db->quote($search) . "%'";
-    }
-
-    if ($type != "all") {
-        $andclause .= " AND type='" . $db->quote($type) . "'";
-    }
-
-    $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
-   // $r = $db->query($q);
-    //print $q;
-    $row_count = 0;
-    $colour1 = "oddrow";
-    $colour2 = "evenrow";
-
-    $db = new Querier;
-    $list_guides = "<table class=\"item_listing\" width=\"98%\">";
-    foreach ($db->query($q) as $myrow) {
-
-        $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-
-        $guide_location = $guide_path . $myrow[0];
-
-        $list_guides .= "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
-		 <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
-        <div class=\"list_bonus\"></div></td>
-        <td class=\"subject\">{$myrow[2]}</td>
-         </tr>\n";
-        $row_count++; 
-    }
-    $list_guides .= "</table>";
-
-    return $list_guides;
-}
-
 $searchbox = '
 <div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
     <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
@@ -192,13 +156,14 @@ if (isset ($v2styles) && $v2styles == 1) {
 ////////////////////////////
 
 ?>
-<div class="pure-g-r" id="guidesplash">
-<div class="pure-u-2-3" id="listguides">
+<br />
+<div class="pure-g" id="guidesplash">
+<div class="pure-u-1 pure-u-md-2-3" id="listguides">
 <?php print $layout; ?>
 
     </div>
 
-    <div class="pure-u-1-3">
+    <div class="pure-u-1 pure-u-md-1-3">
 
       <!-- start pluslet -->
       <div class="pluslet">
