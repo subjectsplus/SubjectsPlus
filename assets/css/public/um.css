@@ -1032,13 +1032,9 @@ table.item_listing {width: 100%;}
 
 .staff_photo {
     background:#efefef;
-    border: 1px solid #333;
-    margin-bottom: 20px;
+    border: 1px solid #333;   
     padding: 3px;
-    position: relative;
-    width:70px;
-    height: 70px;
-   
+    
 }
 .staff_photo_large {
     background:#efefef;
@@ -1050,8 +1046,6 @@ table.item_listing {width: 100%;}
     height: 225px;
     position: relative;
 }
-
-
 
 .footable td, .footable th {padding-left: 10px;}
 
@@ -1081,10 +1075,13 @@ table.item_listing {width: 100%;}
 }
 
 .footable .dept_label {text-align:center; padding-left:0;}
+.foo2 .dept_label span.footable-toggle {display: none !important;}
 
 .dept_header {letter-spacing: 0;font-family: Helvetica,Arial,sans-serif; font-size:1.2em;}
 
-.footable .staffpic {}
+
+
+.foo2 td {padding-top:10px; padding-bottom: 10px;}
 
 
 .pure-button-topsearch {
