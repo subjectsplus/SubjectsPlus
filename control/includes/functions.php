@@ -782,7 +782,7 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
       break;
   }
 
-  $headshot .= " class=\"$class\" align=\"left\" />";
+  $headshot .= " class=\"$class\" />";
   return $headshot;
 }
 
@@ -979,7 +979,7 @@ function prepareTH($array) {
 
 function prepareTHUM($array) {
    $th = "
-    <table class=\"footable\" data-filter=\"#filter\">
+    <table class=\"footable foo1\" data-filter=\"#filter\">
       <thead>
         <tr class=\"staff-heading\">";
     

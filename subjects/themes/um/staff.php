@@ -155,6 +155,8 @@ include("includes/header_um.php");
 
 <script type="text/javascript">  
     
+
+    //set breakpoints 
     $('.footable').footable({
         breakpoints: {
             mid: 600,
@@ -162,9 +164,10 @@ include("includes/header_um.php");
         }
     });
 
-    $rowcolor = $(".footable-row-detail").prev(".evenrow");
+    //A-Z list scripts
+    $rowcolor = $(".foo1 .footable-row-detail").prev(".evenrow");
 
-    $('.footable').trigger('footable_expand_first_row');
+    $('.foo1').trigger('footable_expand_first_row');
 
     $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
               if ($rowcolor = true){
@@ -175,10 +178,10 @@ include("includes/header_um.php");
     $(".footable-row-detail").addClass("evenrow");
 
 
+    //Bind functions for responsive/resizing
+    $('.foo1').bind('footable_breakpoint', function() {
 
-    $('.footable').bind('footable_breakpoint', function() {
-
-          $('.footable').trigger('footable_expand_first_row');          
+          $('.foo1').trigger('footable_expand_first_row');          
 
           $(".footable-row-detail").addClass("evenrow");
 
@@ -190,12 +193,32 @@ include("includes/header_um.php");
 
     });
      
+    //Clear filter
+    $('.clear-filter').click(function (e) {
+      e.preventDefault();
+      $('.filter-status').val('');
+      $('.footable').trigger('footable_clear_filter');
+    });  
 
-      $('.clear-filter').click(function (e) {
-            e.preventDefault();
-            $('.filter-status').val('');
-            $('.footable').trigger('footable_clear_filter');
-          });     
+    //Department scripts
+    $rowcolor2 = $(".foo2 .footable-row-detail").prev(".evenrow");
+
+    $( ".foo2 .evenrow, .foo2 .evenrow td, .foo2 .footable-toggle").on("click", function() {
+        if ($rowcolor2 = true){
+            $(".foo2 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+        }
+    });  
+
+    $('.foo2').bind('footable_breakpoint', function() {        
+
+          $(".foo2 .footable-row-detail").addClass("evenrow");
+
+          $( ".foo2 .evenrow, .foo2 .evenrow td, .foo2 .footable-toggle").on("click", function() {
+              if ($rowcolor2 = true){
+                  $(".foo2 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+              }
+          }); 
+    });
 
 </script>
 
