@@ -13,14 +13,16 @@ use SubjectsPlus\Control\StaffDisplay;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
     
-$page_title = "Library Staff";
-$description = "Library contact list.";
-$keywords = "staff list, librarians, contacts";
-
-
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
+
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/staff.php"); exit;}
+
+$page_title = "Library Staff";
+$description = "Library contact list.";
+$keywords = "staff list, librarians, contacts";
 
 $use_jquery = array("ui", "ui_styles");
 
@@ -59,8 +61,8 @@ $display = $alphabet . $intro . $out;
 include("includes/header.php");
 
 ?>
-<div class="pure-g-r">
-<div class="pure-u-4-5">
+<div class="pure-g">
+<div class="pure-u-1 pure-u-md-4-5">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Staff Listing"); ?></div>
@@ -70,7 +72,7 @@ include("includes/header.php");
         </div>
     </div>
 </div>
-<div class="pure-u-1-5">
+<div class="pure-u-1 pure-u-md-1-5">
     <div class="pluslet">
         <div class="titlebar">
             <div class="titlebar_text"><?php print _("Find People"); ?></div>

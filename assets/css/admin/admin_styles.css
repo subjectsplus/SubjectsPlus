@@ -336,7 +336,6 @@ header {
 }
 
 .box {
-  margin-bottom: 1em;
   background-color: #fff;
   color: #333;
   padding: 10px;
@@ -780,8 +779,7 @@ ul.ui-autocomplete li a{
 }
 
 .record_label {
-  clear: both;
-  display:inherit;
+  display:inline;
   font-size: 11px;
   font-weight:900;
 }
@@ -1706,6 +1704,7 @@ div.breather > h2 {
 
 #guide_header h2 {
   margin: 0;
+  font-size: 1.2em;
 }
 
 #guide_header h2 a {
@@ -2015,7 +2014,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 /* pure overrides */
 
-#maincontent .pure-g-r {
+#maincontent .pure-g {
   padding-top: 2em;
   clear: left;
 }
@@ -2155,9 +2154,10 @@ li.hidden_tab.ui-state-default
 #listing_space input {margin-right: 1em;}
 
 
+
 /* Keep search bar in control from overlapping tabs */
 
-#guide_header .pure-g-r {
+#guide_header .pure-g {
 background:#333;
 }
 
@@ -2167,4 +2167,21 @@ background:#333;
 
 #guide_header {
 height:auto;​
+}
+
+.desktop {display: none;}
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+ 
+}
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+ 
+}
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+.desktop {display: inline-block;}
 }

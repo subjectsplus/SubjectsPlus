@@ -7,12 +7,14 @@
 <meta name="Description" content="<?php if (isset($description)) {print $description;} ?>" />
 <meta name="Keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>" />
 <meta name="Author" content="" />
-<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure.css">
-<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/default.css">
-<!-- <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700|Roboto:400,700|Lato:400,700|Oswald|Raleway:400,700|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
-<!-- <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/print.css"> -->
 
-<?php // Load our jQuery libraries + some css
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure-min.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/grids-responsive-min.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/default.css">
+<link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/print.css">
+
+<?php 
+// Load our jQuery libraries + some css
 if (isset($use_jquery)) { print generatejQuery($use_jquery);
 }
 
@@ -35,28 +37,27 @@ $v2styles = TRUE;
 </head>
 
 <body>
+<div id="wrap">
 
 <div id="header"> 
     <div id="header_inner_wrap">
-    <div class="pure-g-r">
-        <div class="pure-u-1-5">
-            <a href="<?php print $PublicPath; ?>"><img src="<?php print $AssetPath; ?>images/public/logo.png" alt="Home Page" /></a>
-            
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-5">
+                <a href="<?php print $PublicPath; ?>"><img src="<?php print $AssetPath; ?>images/public/logo.png" alt="Home Page" /></a>
+                
+            </div>
+            <div class="pure-u-1 pure-u-md-4-5">
+                <?php if (isset($v2styles)) { print "<h1>$page_title</h1>"; } ?>
+            </div>
         </div>
-        <div class="pure-u-4-5">
-            <?php if (isset($v2styles)) { print "<h1>$page_title</h1>"; } ?>
-        </div>
-
     </div>
-    </div>
-    </div>
-</div>
+</div> <!--end #header-->
 
-
-<div class="pure-g-r">
-    <div class="wrapper-full">
+<div class="wrapper-full">
+    <div class="pure-g">
         <div class="pure-u-1">
-        <?php if (!isset($v2styles)) { print "<h1>$page_title</h1>"; } ?>
-        <div id="content_roof"></div> <!-- end content_roof -->
-        <div id="shadowkiller"></div>
-        <div id="body_inner_wrap">
+            <?php if (!isset($v2styles)) { print "<h1>$page_title</h1>"; } ?>
+            <div id="content_roof"></div> <!-- end #content_roof -->
+            <div id="shadowkiller"></div> <!--end #shadowkiller-->
+        
+            <div id="body_inner_wrap">

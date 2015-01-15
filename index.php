@@ -12,7 +12,7 @@ $keywords = "research, databases, subjects, search, find, suggestion box, talkba
 include("subjects/includes/header.php");
 
 ?>
-<div class="pure-g-r">
+<div class="pure-g">
 <div class="pure-u-2-3">
 <p><strong>Note</strong>:  You should uncomment the redirect in the code for this page; the links
 below are just to display the different available public pages for SubjectsPlus.  Better to have this

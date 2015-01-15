@@ -5,7 +5,7 @@
  *   @description
  *
  *   @author adarby
- *   @date Jan 2011
+ *   @date Jan 2011; last rev dec 2014
  *   @todo
  */
     
@@ -46,8 +46,8 @@ if (isset($_GET["browse"])) {
     $querier = new Querier();
     $typeArray = $querier->query($q);
 
-    print "<div class=\"pure-g-r\">
-  <div class=\"pure-u-1\">";
+    print "<div class=\"pure-g\">
+  <div class=\"pure-u-2-3\">";
 
     // Loop through user types
     foreach ($typeArray as $value) {
@@ -110,7 +110,21 @@ if (isset($_GET["browse"])) {
 
     
     //print $staff_list;
-    print "</div></div>";
+    print "</div>
+    <div class=\"pure-u-1-3\">";
+    // time to give some help
+    $privs_blurb = _("Select which parts of SubjectsPlus this user may access.
+                <p><strong>records</strong> allows access to both the Record and Guide tabs.
+                <p><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.
+                <p><strong>admin</strong> allows access to the overall admin of the site.
+                <p><strong>librarian</strong> means user shows up in lists of librarians.
+                <p><strong>supervisor</strong> means user shows up in list of supervisors
+                <p><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.  Might not be implemented on your site; check wiki for help.
+                ");
+
+    makePluslet(_("On Privilege"), $privs_blurb, "no_overflow");
+
+    print "</div>";
     include("../includes/footer.php");
     ?>
 
@@ -325,11 +339,11 @@ include("../includes/footer.php");
 
         });
 
-    	//////////////////
-    	// Add red star to labels of required inputs
-    	//////////////////
+        //////////////////
+        // Add red star to labels of required inputs
+        //////////////////
 
-    	$("*[class*=required_field]").prevUntil('div', 'span').append('<span style="color: red;">*</span>');
+        $("*[class*=required_field]").prevUntil('div', 'span').append('<span style="color: red;">*</span>');
 
         //////////////////
         // Make sure that delete was intentional

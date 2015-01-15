@@ -15,6 +15,8 @@ use SubjectsPlus\Control\CompleteMe;
 
 $page_title = "Search Results";
 
+$use_jquery = array("ui"); 
+
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
@@ -95,7 +97,7 @@ $subtitle = _("Search Results for ") . $_POST['searchterm'];
 }
 ?>
 
-  <div class="pure-g-r">
+  <div class="pure-g">
     <div class="pure-u-1-2">
 
   <div class="pluslet no_overflow">

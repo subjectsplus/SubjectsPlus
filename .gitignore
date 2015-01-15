@@ -72,9 +72,11 @@ subjects/includes/pgcache/*
 
 .idea/
 
+/assets/users/*
 
 control/includes/db.ini
 db.ini
 
 *.ini*
 *.db.ini*
+new_acquisitions.php

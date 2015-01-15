@@ -1,10 +1,13 @@
 <?php
+
+use SubjectsPlus\Control\Querier;
+
 $subsubcat = "";
 $subcat = "admin";
 $page_title = "Staff Map";
 
 // You must set this to your own coords:
-
+// This is Coral Gables, FL
 $map_center = "25.71828,-80.27875";
 
 include("../includes/header.php");
@@ -12,6 +15,7 @@ include("../includes/header.php");
 //check if they have the view_map permission
 if (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) {
   //okey
+
 } else {
   // shouldn't be here
   echo "<br /><br /><p class=\"box\">" . _("You are not authorized to view this.") . "</p>";
@@ -22,7 +26,8 @@ if (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) {
 $querier = new Querier();
 $q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
 FROM staff
-WHERE lat_long != ""';
+WHERE lat_long != ""
+AND active = 1' ;
 
 if (isset($_GET["fac_only"])  && $_GET["fac_only"] == 1 ) {
   $q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
@@ -31,15 +36,16 @@ WHERE lat_long != ""
 AND ptags LIKE "%librarian%"';
 }
 
-$staffArray = $querier->query($q1);
 
-//print_r($staffArray);
+  $db = new Querier;
+  $staffArray = $db->query($q1);
+
 ?>
 <div id="map" style="width: 100%; height: 800px; border: 1px solid #333;"></div>
 
 <?php include("../includes/footer.php"); ?>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
   
   google.maps.event.addDomListener(window, 'load', function() {

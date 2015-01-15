@@ -4,29 +4,21 @@
  *   @brief Display the subject guides
  *
  *   @author adarby
- *   @date mar 2011
+ *   @date rev aug 2014 and beyond...
  */
 
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
 
-// Is it a BarfGuide?  Check our whitelist of SP guides first
-// Need to add a param to SP for this
-
-//$goodSPGuides = array("superfun", "gis", "MCY564", "chcmusic", "GTEST");
-$chcGuides = array("superfun","chcmusic");
-
-$use_jquery = array("ui", "ui_styles");
+$use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
+//$use_jquery = array("ui"); //um don't want no ui_styles
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-$db = new Querier;
-// init
 
-$main_col_pluslets = "";
-$sidebar_pluslets = "";
+$db = new Querier;
 
 // special image path because of mod_rewrite issues when source types are included in URL
 $img_path = $PublicPath . "images";
@@ -41,6 +33,22 @@ if( isset( $_GET['subject'] ) )
 
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
+
+// Add This + Search //
+
+$social_and_search = '
+<div id="guide_nav_tools">
+<form id="guide_search" class="pure-form"><!-- AddToAny BEGIN -->
+    <div class="a2a_kit"  style="float: left !important;">
+    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
+    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
+    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
+</div>
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="' . _("Find in Guide") . '" autocomplete="off"/></form>
+</div>
+';
 
 if ($check_this) {
 
@@ -112,7 +120,7 @@ if ($check_this) {
         $selected_tab = 0;
     }
 
-    //create new guide object and set admin view to true
+    //create new guide object and set admin view to false
     $lobjGuide = new Guide($this_id);
     $lobjGuide->_isAdmin = FALSE;
 
@@ -130,6 +138,20 @@ if ($check_this) {
 
 $page_title = $subject_name;
 
+// Do we have an alternate header?
+if (isset ($header_type) && $header_type != 'default') {
+    if( file_exists("includes/header_$header_type.php") )
+    {
+        include("includes/header_$header_type.php");
+    }
+    else
+    {
+        include("includes/header.php");
+    }
+} else {
+    include("includes/header.php");
+}
+
 /*if (in_array($_REQUEST["subject"], $chcGuides)) {
     include("includes/header_chc.php");
     $our_site="chc";
@@ -145,47 +167,42 @@ if (count($all_tabs) > 1) {
     $multi_tab = FALSE;
 }
 
-if( file_exists("includes/header_$header_type.php") )
-{
-	include("includes/header_$header_type.php");
-}
-else
-{
-	include("includes/header.php");
-}
-
-
-?>
-<div id="guide_nav_tools">
-<form id="guide_search" class="pure-form"><!-- AddToAny BEGIN -->
-    <div class="a2a_kit"  style="float: left !important;">
-    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
-    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
-    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
-</div>
-    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->
-<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="<?php print _("Find in Guide"); ?>" autocomplete="off"/></form></div>
-<div id="tabs" style="clear:both; position: relative;">
-<?php
-
-// Only show tabs if there is more than one tab
-
-if ($multi_tab == TRUE) {
-    $lobjGuide->outputNavTabs('public');
-}; ?>
-
-
-
-
-
-<?php
-
-$lobjGuide->outputTabs('public');
+print $social_and_search;
 
 ?>
 
-</div>
+<div id="tabs">
+    <div id="main-content">
+        
+        <div id="tab-container">
+            <?php
+			
+			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>'; 
+            $printer_no_tabs ='<div class="printer_no_tabs"><div class="pure-button pure-button-topsearch print-img-no-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>';
+			
+            // Only show tabs if there is more than one tab
+
+            if ($multi_tab == TRUE) {
+                $lobjGuide->outputNavTabs('public');
+                $bonus_class= "";
+                print $printer_tabs;
+            } else {
+                $bonus_class = "no-tabs";
+				print $printer_no_tabs;
+            }
+
+            ?>
+
+        </div> <!-- end tab-container -->
+        
+        <div id="tab-body" class="<?php print $bonus_class; ?>">
+            <?php
+            $lobjGuide->outputTabs('public');
+
+            ?>
+        </div> <!-- end tab-body -->
+    </div> <!-- end main-content -->
+</div> <!-- end tabs -->
 
 
 <script type="text/javascript" language="javascript">
@@ -236,7 +253,7 @@ jQuery(function() {
    tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
    tabCounter = <?php echo ( count($all_tabs) ); ?>;
    var tabs = $( "#tabs" ).tabs();
-
+console.log(tabs);
    //add click event for external url tabs
    jQuery('li[data-external-link]').each(function()
 					 {
@@ -244,8 +261,10 @@ jQuery(function() {
        {
 	 jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
 						       {
+								console.log(evt);
 	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	     evt.stopImmediatePropagation();
+	     //evt.stopImmediatePropagation
+		 
 	   });
 
 	 jQuery(this).children('a[href^="#tabs-"]').each(function() {
@@ -258,17 +277,14 @@ jQuery(function() {
 				 if (onClickHandlers.length == 1) {
 	     return;
 	   }
-
+	
+		console.log("ahh");
 	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
 	 });
        }
      });
 
 });
-
-
-
-
 
 <?php } ?>
 
@@ -283,7 +299,7 @@ jQuery(function() {
 	   jQuery('#sp_search').autocomplete({
 
 	     minLength	: 3,
-	     source		: 'http://' + document.domain + "/" + sp_path + "/subjects/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+	     source		: '//' + document.domain + "/" + sp_path + "/subjects/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
 
 	       event.preventDefault();
@@ -295,8 +311,13 @@ jQuery(function() {
 	     	var tab_id = ui.item.hash.split('-')[1];
 	     	var box_id = ui.item.hash.split('-')[2];
 	     	var selected_box = ".pluslet-" + box_id;
-
-	     	$('#tabs').tabs('select', tab_id);
+     
+                console.log(selected_box);
+     if ($('#tabs-1').text()) {
+       	$('#tabs').tabs('select', tab_id);
+     }
+     
+	     
 
 	     	jQuery(selected_box).effect("pulsate", {
 	     		times:1
@@ -304,12 +325,32 @@ jQuery(function() {
 	     	window.location.hash = 'box-' + box_id;
          }
 	   });
+	   
+	   $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\"><ul><li><a onclick=\"window.print();\" class=\"pure-button pure-button-topsearch\">Print Current Tab</a></li><li><a onclick=\"printView();\" class=\"pure-button pure-button-topsearch\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
 
+       $('.print-img-no-tabs').click(function(){ window.print(); });   
 
-
-
-
-
+	jQuery(document).ready(function() {
+	
+	   jQuery('a[href*="#tabs-"]').on('click', function(event, ui) {
+	     	event.preventDefault();
+		
+			var tab_id = event.target.hash.split('-')[1];
+	     	var box_id = event.target.hash.split('-')[2];
+	     	var selected_box = ".pluslet-" + box_id;
+ if ($('#tabs-1').text()) {
+	     	$('#tabs').tabs('select', tab_id);
+}
+	     	jQuery(selected_box).effect("pulsate", {
+	     		times:1
+	     	}, 2000);
+	     	window.location.hash = 'box-' + box_id;
+         });
+		 });
+		 
+		 
+	   
+	   
 </script>
 
 <!--[if IE]>
@@ -329,6 +370,16 @@ jQuery(function() {
 // Load footer file
 ///////////////////////////
 
-
-include("includes/footer.php");
-?>
+// Do we have an alternate footer?
+if (isset ($header_type) && $header_type != 'default') {
+    if( file_exists("includes/footer_$header_type.php") )
+    {
+        include("includes/footer_$header_type.php");
+    }
+    else
+    {
+        include("includes/footer.php");
+    }
+} else {
+    include("includes/footer.php");
+}

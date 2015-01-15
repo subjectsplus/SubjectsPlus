@@ -142,6 +142,9 @@ class StaffDisplay {
           $items .= "<tr class=\"$row_colour\">
 		<td style=\"width: 20%\" align=\"left\" class=\"$row_colour\"><span class=\"staff_contact\">";
           
+          // Here we stick in their headshot; comment out if you don't want; maybe later this should be an admin parameter
+          $items .= getHeadshot($email, '');
+
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
           } else {
