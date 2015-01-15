@@ -149,9 +149,9 @@ include("includes/header_um.php");
 
 <!--Data Table-->
 <link type="text/css" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/footable.core.css">
-<script src="<?php print $AssetPath; ?>js/footable.js" type="text/javascript"></script>
-<script src="<?php print $AssetPath; ?>js/footable.sort.js" type="text/javascript"></script>
-<script src="<?php print $AssetPath; ?>js/footable.filter.js" type="text/javascript"></script>
+<script src="themes/um/js/footable.js" type="text/javascript"></script>
+<script src="themes/um/js/footable.sort.js" type="text/javascript"></script>
+<script src="themes/um/js/footable.filter.js" type="text/javascript"></script>
 
 <script type="text/javascript">  
     
@@ -162,9 +162,23 @@ include("includes/header_um.php");
         }
     });
 
+    $rowcolor = $(".footable-row-detail").prev(".evenrow");
+
+    $('.footable').trigger('footable_expand_first_row');
+
+    $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
+              if ($rowcolor = true){
+                  $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+              }
+          });
+
+    $(".footable-row-detail").addClass("evenrow");
+
+
+
     $('.footable').bind('footable_breakpoint', function() {
 
-          $('.footable').trigger('footable_expand_first_row');
+          $('.footable').trigger('footable_expand_first_row');          
 
           $(".footable-row-detail").addClass("evenrow");
 
@@ -175,26 +189,13 @@ include("includes/header_um.php");
           });
 
     });
+     
 
       $('.clear-filter').click(function (e) {
             e.preventDefault();
             $('.filter-status').val('');
             $('.footable').trigger('footable_clear_filter');
-          });
-
-      $rowcolor = $(".footable-row-detail").prev(".evenrow");
-
-      $rowcolor.each(function() {
-          if ($rowcolor = true){
-            $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
-          }          
-      });
-
-      $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
-        if ($rowcolor = true){
-            $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
-          } 
-      });
+          });     
 
 </script>
 
