@@ -1080,9 +1080,12 @@ table.item_listing {width: 100%;}
 
 .dept_header {letter-spacing: 0;font-family: Helvetica,Arial,sans-serif; font-size:1.2em;}
 
+.foo2 td, .foo3 td {padding-top:10px; padding-bottom: 10px;}
+.foo2 th {padding:0; margin:0;}
 
+.foo3 .footable-row-detail td {padding-bottom: 10px;}
 
-.foo2 td {padding-top:10px; padding-bottom: 10px;}
+.foo3 .staff_photo {display:inline-block;}
 
 
 .pure-button-topsearch {
