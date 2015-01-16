@@ -96,7 +96,7 @@ class StaffDisplay {
         $db = new Querier;
         $r = $db->query($q);
 
-        $items = "<table class=\"footable foo2\"><thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th data-sort-ignore=\"true\">Name</th><th data-sort-ignore=\"true\" data-hide=\"phone,mid\">Title</th><th data-sort-ignore=\"true\" data-hide=\"phone\">Phone</th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\">Email</th></tr></thead>";
+        $items = "<table class=\"footable foo2\"><thead><tr><th data-sort-ignore=\"true\">&nbsp;</th><th data-sort-ignore=\"true\">&nbsp;</th><th data-sort-ignore=\"true\" data-hide=\"phone,mid\">&nbsp;</th><th data-sort-ignore=\"true\" data-hide=\"phone\">&nbsp;</th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\">&nbsp;</th></tr></thead>";
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -182,8 +182,8 @@ class StaffDisplay {
         $db = new Querier;
         $r = $db->query($q);
 
-        $items = "<table class=\"footable foo3\">
-        <thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th>Librarian</th><th data-sort-ignore=\"true\" data-hide=\"phone,mid\">Subject Responsibilities</th></tr></thead>";
+        $items = "<table class=\"footable foo3\" width=\"100%\">
+        <thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th><strong>" . _("Librarian") . "</strong></th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\"><strong>" . _("Subject Responsibilities") . "</strong></th></tr></thead>";
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -192,10 +192,9 @@ class StaffDisplay {
           foreach ($r as $myrow) {
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-          $items .= "<tr class=\"$row_colour\">\n
-					<td>";
+          $items .= "<tr class=\"$row_colour\">\n";
           $items .= showStaff($myrow[4], '', '', 1);
-          $items .= "</td>\n";
+          
           $items .= "<td>";
 
           $sub_query = "select subject, shortform from subject, staff_subject
@@ -239,6 +238,7 @@ class StaffDisplay {
 
         $items .= "</table>";
         break;
+
       case "Librarians by Subject Specialty":
         $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
                     staff, staff_subject, subject
