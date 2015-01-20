@@ -32,7 +32,7 @@ class StaffDisplay {
 
         $r = $db->query($q);
 
-        $items = "<table width=\"98%\" class=\"item_listing\">";
+        $items = "<table width=\"100%\" class=\"footable\">";
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -65,8 +65,12 @@ class StaffDisplay {
             $link_to_details = "staff_details.php?name=" . $name_id[0];
           }
 
-          $items .= "<tr class=\"$row_colour\">
-		<td style=\"width: 20%\" align=\"left\" class=\"$row_colour\"><span class=\"staff_contact\">";
+          $items .= "<thead><tr><th data-sort-ignore=\"true\">&nbsp;</th>
+          <th data-sort-ignore=\"true\" data-hide=\"phone,mid\">&nbsp;</th>
+          <th data-sort-ignore=\"true\">&nbsp;</th>
+          <th data-sort-ignore=\"true\" data-hide=\"phone,\">&nbsp;</th></tr></thead>
+          <tr class=\"$row_colour\">
+		      <td class=\"$row_colour\"><span class=\"staff_contact\">";
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
           } else {
@@ -74,8 +78,8 @@ class StaffDisplay {
           }
           
           $items .= "</span></td>
-			<td style=\"width: 40%\" align=\"left\" class=\"$row_colour\">$title $assoc_subjects</td>
-			<td align=\"left\" class=\"$row_colour\">$tel_prefix$tel </td>
+			<td class=\"$row_colour\">$title $assoc_subjects</td>
+			<td class=\"$row_colour\">$tel_prefix$tel </td>
 			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
@@ -249,10 +253,17 @@ class StaffDisplay {
             AND subject.active = 1
             AND shortform != 'NewDatabases'
 			order by subject, lname, fname";
-        $head_fields = array("Subject", "Library Liaison", "Phone", "Email");
+        
+        $hf1 = array("label"=>"Subject","hide"=>false,"nosort"=>false);
+        $hf2 = array("label"=>"Library Liaison","hide"=>false,"nosort"=>false);
+        $hf3 = array("label"=>"Phone","hide"=>true,"nosort"=>true);
+        $hf4 = array("label"=>"Email","hide"=>true,"nosort"=>true);
+
+        $head_fields = array($hf1, $hf2, $hf3, $hf4);
         $db = new Querier;
         $r = $db->query($q);
-        $items = prepareTH($head_fields);
+        
+        $items = prepareTHUM($head_fields);
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -260,6 +271,9 @@ class StaffDisplay {
         $subrowsubject = "";
 
     foreach ($r as $myrow) {
+          
+          $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
           $tel = $tel_prefix . $myrow["tel"];
@@ -269,16 +283,16 @@ class StaffDisplay {
           if ($subrowsubject == $myrow["subject"]) {
             //$psubject = " ";
             $psubject = $myrow["subject"];
-            $row_count--;
+            
           } else {
             $subrowsubject = $myrow["subject"];
             $psubject = $myrow["subject"];
             $shortsub = $myrow["shortform"];
           }
 
-          $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+          
 
-          $items .= "<tr class=\"$row_colour\">\n
+          $items .= "<tr class=\"zebra $row_colour\">
 					<td>";
 
           if ($mod_rewrite == 1) {
@@ -287,7 +301,7 @@ class StaffDisplay {
             $linky = "guide.php?subject=" . $shortsub;
           }
           $items .= "<a href=\"$linky\">$psubject</a>";
-          $items .= "</td>\n";
+          $items .= "</td>";
           $items .= "<td>";
 
           if ($mod_rewrite == 1) {
@@ -299,10 +313,10 @@ class StaffDisplay {
           $items .= "<a href=\"$linky\">$full_name</a></td>";
           $items .= "<td>";
           $items .= $tel;
-          $items .= "</td>\n";
+          $items .= "</td>";
           $items .= "<td>";
           $items .= "<a href=\"mailto:$email\">$email</a>";
-          $items .= "</td>\n
+          $items .= "</td>
 					</tr>";
 
           $row_count++;
