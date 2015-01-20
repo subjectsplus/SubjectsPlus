@@ -1101,6 +1101,30 @@ div.video_thumb img {
     padding: 4px 3px 0px 3px !important;
 }
 
+/* DZ's fixes to  make the home icon work properly */
+/* DZ when on another tab */
+
+.ui-state-default .hometab {
+    padding: 4px 3px 0px 3px !important;
+    background: url(../../images/icons/home-active.png) no-repeat center center !important;
+}
+
+ 
+/* DZ - When hovering on this tab */
+.ui-state-hover .hometab
+
+{
+    padding: 4px 3px 0px 3px !important;
+    background: url(../../images/icons/home-hover.png) no-repeat center center !important;
+}
+
+/* DZ -  When on this tab */
+.ui-state-active .hometab, .ui-state-focus .hometab {
+    padding: 4px 3px 0px 3px !important;
+    background: url(../../images/icons/home-white.png) no-repeat center center !important;
+    background-color: #668BB7 !important;
+}
+
 
 /* Next lines override the regular pluslet to create a heading */
 .plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase;}

@@ -879,13 +879,12 @@ class Guide
     {
         global $IconPath;
         global $HomeTabText;
-        $HomeTabText = "Main";
 
         if (isset($HomeTabText)) {
             $home_tab_text = $HomeTabText;
             $home_tab_class = "";
         } else {
-            $home_tab_text = "<img src=\"$IconPath/home-white.png\" />";
+            $home_tab_text = "<img src=\"$IconPath/home_spacer.png\" alt=\"Home\" title=\"Home\" />";
             $home_tab_class = "hometab";
         }
 
