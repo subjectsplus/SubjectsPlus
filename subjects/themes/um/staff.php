@@ -174,14 +174,12 @@ include("includes/header_um.php");
               }
           });
 
-    $(".foo1 .footable-row-detail").addClass("evenrow");
+    
 
     //Bind functions for responsive/resizing A-Z
     $('.foo1').bind('footable_breakpoint', function() {
 
           $('.foo1').trigger('footable_expand_first_row');
-          
-          $(".foo1 .footable-row-detail").addClass("evenrow");
 
            $( ".foo1 .zebra.evenrow, .foo1 .zebra.evenrow td, .foo1 .footable-toggle").on("click", function() {
               if ($rowcolor = true){
