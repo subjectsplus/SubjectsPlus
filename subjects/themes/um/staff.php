@@ -149,12 +149,13 @@ include("includes/header_um.php");
 
 <!--Data Table-->
 <link type="text/css" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/footable.core.css">
-<script src="<?php print $AssetPath; ?>js/footable.js" type="text/javascript"></script>
-<script src="<?php print $AssetPath; ?>js/footable.sort.js" type="text/javascript"></script>
-<script src="<?php print $AssetPath; ?>js/footable.filter.js" type="text/javascript"></script>
+<script src="themes/um/js/footable.js" type="text/javascript"></script>
+<script src="themes/um/js/footable.sort.js" type="text/javascript"></script>
+<script src="themes/um/js/footable.filter.js" type="text/javascript"></script>
 
-<script type="text/javascript">  
-    
+<script type="text/javascript">     
+
+    //set breakpoints 
     $('.footable').footable({
         breakpoints: {
             mid: 600,
@@ -162,39 +163,93 @@ include("includes/header_um.php");
         }
     });
 
-    $('.footable').bind('footable_breakpoint', function() {
+    //A-Z list scripts
+    $rowcolor = $(".foo1 .footable-row-detail").prev(".evenrow");
 
-          $('.footable').trigger('footable_expand_first_row');
+    $('.foo1').trigger('footable_expand_first_row').addClass("evenrow");
 
-          $(".footable-row-detail").addClass("evenrow");
-
-          $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
+    $( ".foo1 .zebra.evenrow, .foo1 .zebra.evenrow td, .foo1 .footable-toggle").on("click", function() {
               if ($rowcolor = true){
-                  $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+                  $(".foo1 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+              }
+          });
+
+    
+
+    //Bind functions for responsive/resizing A-Z
+    $('.foo1').bind('footable_breakpoint', function() {
+
+          $('.foo1').trigger('footable_expand_first_row');
+          
+          $(".foo1 .footable-row-detail").addClass("evenrow");
+
+           $( ".foo1 .zebra.evenrow, .foo1 .zebra.evenrow td, .foo1 .footable-toggle").on("click", function() {
+              if ($rowcolor = true){
+                  $(".foo1 .footable-row-detail .footable-row-detail-cell");
               }
           });
 
     });
+     
+    //Clear filter A-Z
+    $('.clear-filter').click(function (e) {
+      e.preventDefault();
+      $('.filter-status').val('');
+      $('.footable').trigger('footable_clear_filter');
+    });  
 
-      $('.clear-filter').click(function (e) {
-            e.preventDefault();
-            $('.filter-status').val('');
-            $('.footable').trigger('footable_clear_filter');
+    
+
+    //Department scripts
+    $rowcolor2 = $(".foo2 .footable-row-detail").prev(".evenrow");
+
+    $( ".foo2 .evenrow, .foo2 .evenrow td, .foo2 .footable-toggle").on("click", function() {
+        if ($rowcolor2 = true){
+            $(".foo2 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+        }
+    });  
+
+    $('.foo2').bind('footable_breakpoint', function() {        
+
+          $(".foo2 .footable-row-detail").addClass("evenrow");
+
+          $( ".foo2 .evenrow, .foo2 .evenrow td, .foo2 .footable-toggle").on("click", function() {
+              if ($rowcolor2 = true){
+                  $(".foo2 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+              }
+          }); 
+    });
+
+
+    //Subject Librarians A-Z scripts
+    $rowcolor3 = $(".foo3 .footable-row-detail").prev(".evenrow");
+
+    $('.foo3').trigger('footable_expand_first_row');
+
+    $( ".foo3 .evenrow, .foo3 .evenrow td, .foo3 .footable-toggle").on("click", function() {
+        if ($rowcolor3 = true){
+            $(".foo3 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+        }
+    });
+
+
+
+    $('.foo3').bind('footable_breakpoint', function() {
+
+          $('.foo3').trigger('footable_expand_first_row');          
+
+          $(".foo3 .footable-row-detail").addClass("evenrow");
+
+          $( ".foo3 .zebra.evenrow, .foo3 .zebra.evenrow td, .foo3 .footable-toggle").on("click", function() {
+              if ($rowcolor = true){
+                  $(".foo3 .footable-row-detail .footable-row-detail-cell").addClass("evenrow");
+              }
           });
 
-      $rowcolor = $(".footable-row-detail").prev(".evenrow");
+    });  
 
-      $rowcolor.each(function() {
-          if ($rowcolor = true){
-            $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
-          }          
-      });
 
-      $( ".footable .zebra.evenrow, .footable .zebra.evenrow td, .footable-toggle").on("click", function() {
-        if ($rowcolor = true){
-            $(".footable-row-detail .footable-row-detail-cell").addClass("evenrow");
-          } 
-      });
+
 
 </script>
 
