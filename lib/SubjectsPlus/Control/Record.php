@@ -813,36 +813,37 @@ function modifyLocation() {
 				" . $db->quote(scrubData($this->_helpguide[$key])) . "
 				)";
 
-$rInsertLoc = $db->exec($qInsertLoc);
+      $rInsertLoc = $db->exec($qInsertLoc);
 
-$this->_debug .= "<p>5a. insert location loop: $qInsertLoc</p>";
-if (!$rInsertLoc) {
-	echo blunDer("We have a problem with the insert locations query: $qInsertLoc");
-}
+      $this->_debug .= "<p>5a. insert location loop: $qInsertLoc</p>";
+      if (!$rInsertLoc) {
+      	echo blunDer("We have a problem with the insert locations query: $qInsertLoc");
+      }
 
-$current_location_id = $db->last_id();
-} else {
+      $current_location_id = $db->last_id();
+
+    } else {
         // Existing location, do an update
-	$qUpLoc = "UPDATE location SET format = '" . scrubData($this->_format[$key], "integer") .
-	"', call_number = '" . scrubData($this->_call_number[$key]) .
-	"', location = '" . scrubData($this->_location[$key]) .
-	"', access_restrictions = '" . scrubData($this->_access_restrictions[$key], "integer") .
-	"', eres_display = '" . scrubData($this->_eres_display[$key]) .
-	"', display_note = '" . scrubData($this->_display_note[$key], "richtext") .
-	"', ctags = " . $db->quote(scrubData($this->_ctags[$key])) .
-	", helpguide = " . $db->quote(scrubData($this->_helpguide[$key])) .
-	" WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
+    	$qUpLoc = "UPDATE location SET format = '" . scrubData($this->_format[$key], "integer") .
+    	"', call_number = '" . scrubData($this->_call_number[$key]) .
+    	"', location = '" . scrubData($this->_location[$key]) .
+    	"', access_restrictions = '" . scrubData($this->_access_restrictions[$key], "integer") .
+    	"', eres_display = '" . scrubData($this->_eres_display[$key]) .
+    	"', display_note = '" . scrubData($this->_display_note[$key], "richtext") .
+    	"', ctags = " . $db->quote(scrubData($this->_ctags[$key])) .
+    	", helpguide = " . $db->quote(scrubData($this->_helpguide[$key])) .
+    	" WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
 
-	$rUpLoc = $db->exec($qUpLoc);
+    	$rUpLoc = $db->exec($qUpLoc);
 
-	$this->_debug .= "<p>5b. update location loop: $qUpLoc</p>";
-	if ($rUpLoc === FALSE) {
-		echo blunDer("We have a problem with the update locations query: $qUpLoc");
-	}
+    	$this->_debug .= "<p>5b. update location loop: $qUpLoc</p>";
+      	if ($rUpLoc === FALSE) {
+      		echo blunDer("We have a problem with the update locations query: $qUpLoc");
+      	}
 
-	$current_location_id = scrubData($this->_location_id[$key]);
-	$this->_debug .= "<p>current loc id = $current_location_id";
-}
+    	$current_location_id = scrubData($this->_location_id[$key]);
+    	$this->_debug .= "<p>current loc id = $current_location_id";
+    }
       // If/else over, now do an insert to location_title
 
 $qInsertLocTitle = "INSERT INTO location_title (title_id, location_id) VALUES (

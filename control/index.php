@@ -69,7 +69,7 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
   $our_faves = "<ul>
   <li><a href=\"records/record.php\">" . _("Create New Record") . "</a></li>
   <li><a href=\"guides/metadata.php\">" . _("Create New Guide") . "</a></li>
-  <li><a href=\"faq/fag.php\">" . _("Create New FAQ") . "</a></li>
+  <li><a href=\"faq/faq.php\">" . _("Create New FAQ") . "</a></li>
   </ul>";
 
   print makePluslet (_("Favourites"), $our_faves); ?>
