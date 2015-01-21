@@ -42,8 +42,8 @@
   font-variant: normal;
   text-transform: none;
   -webkit-font-smoothing: antialiased;
-  padding-right: 5px;
-  font-size: 14px;
+  padding-right: 10px;
+  font-size: 10px;
   color: #888888;
 }
 .footable.breakpoint > tbody > tr > td > span.footable-toggle:before {

@@ -331,6 +331,7 @@ ul#nav_menu.nav li div.mega_child {
         height: 300px;
     }
 
+
 #body_inner_wrap {    
     font-size: 1.1em;
     line-height: 1.8em;  
@@ -1032,11 +1033,9 @@ table.item_listing {width: 100%;}
 
 .staff_photo {
     background:#efefef;
-    border: 1px solid #333;
-    margin-bottom: 20px;
-    margin-right: 20px;
+    border: 1px solid #333;   
     padding: 3px;
-    position: relative;
+    
 }
 .staff_photo_large {
     background:#efefef;
@@ -1049,23 +1048,17 @@ table.item_listing {width: 100%;}
     position: relative;
 }
 
-
-
 .footable td, .footable th {padding-left: 10px;}
 
 .footable th {padding-top:5px; padding-bottom:5px;}
 
-.footable .zebra td{padding-top:10px;}
+.footable .zebra td{padding-top:10px; padding-bottom: 10px;}
 
 .footable .footable-row-detail-cell {padding-left:15px !important; padding-bottom: 5px;}
 
 .clear-filter {    
     cursor: pointer;
-<<<<<<< HEAD
-    color: #666;    
-=======
-    color: #333;    
->>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
+    color: #666; 
     margin-left: 15px;
 }
 
@@ -1074,20 +1067,25 @@ table.item_listing {width: 100%;}
     background: none repeat scroll 0 0 #CCC;
     border: none;
     border-radius: 50%;  
-<<<<<<< HEAD
     padding:4px 8px;
     color: #333;
-=======
-    padding:4px 8px;  
->>>>>>> 2c2b284ebd2a4526576b9a0adf0e5ed44708c984
 }
 
 #filter {        
     width:45%;
 }
 
+.footable .dept_label {text-align:center; padding-left:0;}
+.foo2 .dept_label span.footable-toggle {display: none !important;}
 
+.dept_header {letter-spacing: 0;font-family: Helvetica,Arial,sans-serif; font-size:1.2em;}
 
+.foo2 td, .foo3 td {padding-top:10px; padding-bottom: 10px;}
+.foo2 th {padding:0; margin:0;}
+
+.foo3 .footable-row-detail td {padding-bottom: 10px;}
+
+.foo3 .staff_photo {display:inline-block;}
 
 
 .pure-button-topsearch {
@@ -1184,6 +1182,19 @@ div.video_thumb img {
 
 .video_list {
   clear: both; float: left; width: 500px;
+}
+
+.search404 {
+    background-color: #f2f2f2;
+    border: 1px solid #999;
+    border-radius: 4px;
+    box-shadow: none;
+    cursor: default;
+    font-size: 12px;
+    height: 22px;
+    padding: 0 5px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 
@@ -1508,7 +1519,9 @@ table.item_listing th {
 
     table.item_listing td.staff-email-row {overflow:hidden; word-wrap: break-word;}
 
-      
+    .staff_photo {
+    
+        }  
     
 }
 
