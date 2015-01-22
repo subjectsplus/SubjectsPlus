@@ -567,6 +567,7 @@ ul.ui-autocomplete li a{
   text-decoration:none !important;
   padding:5px 10px;
   display:block;
+  cursor: pointer;
 }
 
 #ui-active-menuitem{
@@ -1035,7 +1036,7 @@ table.item_listing {width: 100%;}
     background:#efefef;
     border: 1px solid #333;   
     padding: 3px;
-    
+    margin-right: 30px;
 }
 .staff_photo_large {
     background:#efefef;
@@ -1087,6 +1088,9 @@ table.item_listing {width: 100%;}
 
 .foo3 .staff_photo {display:inline-block;}
 
+.staff-tel-row {min-width: 120px;}
+
+.staff-name-row {font-weight: bold;}
 
 .pure-button-topsearch {
     background-color: #666;
