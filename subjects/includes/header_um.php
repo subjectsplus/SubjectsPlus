@@ -75,7 +75,7 @@ $v2styles = TRUE;
     <div class="pure-g header-content">
 
         <div class="pure-u-1 pure-u-md-1-5">
-          <a href="/index.php"><img src="//library.miami.edu/wp-content/themes/umiami/images/logo.png" alt="University of Miami Libraries" /></a>
+          <a href="<?php print PATH_FROM_ROOT; ?>/index.php"><img src="//library.miami.edu/wp-content/themes/umiami/images/logo.png" alt="University of Miami Libraries" /></a>
           <span id="menu_button"><a class="pure-button button-menu" href="#">Menu</a></span>          
         </div>        
         
@@ -305,7 +305,7 @@ $v2styles = TRUE;
                       </ul>
                        <ul>                          
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>sp/subjects/gis/">GIS Services</a></li>
+                          <li><a href="<?php print PATH_TO_SP; ?>subjects/gis/">GIS Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/graduate-study/">Graduate Study Room</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li>
