@@ -163,7 +163,7 @@ $guide_results = listGuides($search, $view_type);
 
           <!-- start tip -->
           <div class="tip">
-            <h2><?php print _("Search Databases"); ?></h2>
+            <h2><?php print _("Search Guides"); ?></h2>
                   <?php
                   $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
                   $input_box->displayBox();

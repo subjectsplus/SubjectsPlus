@@ -169,7 +169,7 @@ class Autocomplete {
       //add no title label if empty
       $myrow['label'] = empty($myrow['label']) ? '[no title]' : $myrow['label'];
 
-      $arr[$i]['label'] = $myrow['label'];
+      $arr[$i]['label'] = html_entity_decode($myrow['label']);
 
       if(isset($myrow['content_type'])) {
 
@@ -205,7 +205,7 @@ class Autocomplete {
         switch($myrow['content_type']) {
 
           case "Record":
-            $arr[$i]['label'] = $myrow['label'];
+            $arr[$i]['label'] = html_entity_decode($myrow['label']);
 
             if ($this->getSearchPage() == "control") {
               $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
@@ -213,9 +213,9 @@ class Autocomplete {
 
               $db = new Querier();
               $record_url_sql = "SELECT location, title
-				FROM location l, title t, location_title lt 
-				WHERE  t.title_id = lt.title_id
-				AND l.location_id = lt.location_id AND t.title_id = " . $db->quote($myrow['id']) . " ";
+        FROM location l, title t, location_title lt 
+        WHERE  t.title_id = lt.title_id
+        AND l.location_id = lt.location_id AND t.title_id = " . $db->quote($myrow['id']) . " ";
             
 
               $record_url_result = $db->query($record_url_sql);
@@ -247,7 +247,7 @@ class Autocomplete {
 
 
           case "FAQ":
-              $arr[$i]['label']  = $myrow['label'];
+              $arr[$i]['label']  = html_entity_decode($myrow['label']);
               $arr[$i]['url'] = 'faq.php?faq_id=' . $myrow['id'];
 
             break;
@@ -257,11 +257,11 @@ class Autocomplete {
               $arr[$i]['url'] = getControlURL() . 'guides/guide.php?subject_id=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 
-              $arr[$i]['label'] = $myrow['label'];
+              $arr[$i]['label'] = html_entity_decode($myrow['label']);
           } else {
 
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
-          	  $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
+              $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['tab_index'] = $myrow['additional_id'];
 
           }
@@ -270,7 +270,7 @@ class Autocomplete {
 
 
           case "Talkback":
-            $arr[$i]['label'] = $myrow['label'];
+            $arr[$i]['label'] = html_entity_decode($myrow['label']);
             if ($this->getSearchPage() == "control") {
               $arr[$i]['url'] = 'talkback.php?talkback_id=' . $myrow['id'];
           } else {
@@ -287,7 +287,7 @@ class Autocomplete {
 
           } else {
 
-	      $name = explode('@',$myrow['label']);
+        $name = explode('@',$myrow['label']);
               $arr[$i]['url'] = 'staff_details.php?name=' . $name[0];
 
           }
