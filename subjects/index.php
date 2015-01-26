@@ -168,7 +168,7 @@ if (isset ($v2styles) && $v2styles == 1) {
       <!-- start pluslet -->
       <div class="pluslet">
         <div class="titlebar">
-          <div class="titlebar_text"><?php print _("Search Databases"); ?></div>
+          <div class="titlebar_text"><?php print _("Search Guides"); ?></div>
         </div>
         <div class="pluslet_body">
               <?php
