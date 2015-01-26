@@ -321,11 +321,10 @@ if ($result_count != 0) {
 if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 
 	$stk_message = "
-	<div class=\"pluslet\">\n
-	<div class=\"titlebar\"><div class=\"titlebar_text\"  >" ._("Hmm, That Was a Tricky Bit of Math") . "</div></div>\n
-	<div class=\"pluslet_body\">\n
-	<p><strong>" . _("Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . .") . "</strong></p>
-	</ul>\n
+	<div class=\"talkback-message talkback-error\">\n
+	<h2>" ._("Hmm, That Was a Tricky Bit of Math") . "</h2>\n
+	<div class=\"talkback-message-body\">\n
+	<p>" . _("Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . .") . "</p>
 	</div>\n
 	</div>\n
 	";

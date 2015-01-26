@@ -1627,16 +1627,13 @@ text-align: center;
 }
 
 #controlpage div.pluslet > .titlebar {
-  background-color: #858585;
   padding: .2em .5em;
-  color: #fff;
-
   color: #333;
   font-size: 1.1em;
   font-weight:700;
-
   min-height: 2em;
-  border-bottom: 1px solid #ccc;background-color: #EFEFEF;
+  border-bottom: 1px solid #ccc;
+  background-color: #D5D5D5;
 }
 
 #controlpage .titlebar_text {

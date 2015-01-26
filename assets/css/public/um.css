@@ -567,6 +567,7 @@ ul.ui-autocomplete li a{
   text-decoration:none !important;
   padding:5px 10px;
   display:block;
+  cursor: pointer;
 }
 
 #ui-active-menuitem{
@@ -978,7 +979,6 @@ div.tip a:hover {
     border-bottom: 1px solid #ccc;
     padding: 0.5em 20px;
     margin: 0 20px 0 20px;
-    background-color: #FF0;
 }
 .evenrow, .even {
     background-color: #efefef;
@@ -1035,7 +1035,8 @@ table.item_listing {width: 100%;}
     background:#efefef;
     border: 1px solid #333;   
     padding: 3px;
-    
+    margin-right: 15px;
+    width: 70px !important;
 }
 .staff_photo_large {
     background:#efefef;
@@ -1087,6 +1088,13 @@ table.item_listing {width: 100%;}
 
 .foo3 .staff_photo {display:inline-block;}
 
+.staff-tel-row {min-width: 120px;}
+
+.staff-name-row {font-weight: bold;  min-width: 150px;}
+
+.staffpic {min-width:115px;}
+
+*[id^='bib-'] img, .db_icons img {cursor: pointer;}
 
 .pure-button-topsearch {
     background-color: #666;

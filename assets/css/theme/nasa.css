@@ -9,3 +9,7 @@
 .background {display: block;}
 
 h1 { color: #efefef;}
+
+#maincontent h2 {
+    color: #fff;
+}
