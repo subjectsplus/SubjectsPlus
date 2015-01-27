@@ -47,8 +47,8 @@ switch ($our_site) {
                 <p style=""><?php print $library_address; ?><br />
                 <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
                 <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
-                <a href="/report-website-issue/">Report Site Issue</a> |
-                <a href="/support-the-libraries/">Make a Gift</a>
+                <a href="<?php print PATH_FROM_ROOT; ?>/report-website-issue/">Report Site Issue</a> |
+                <a href="<?php print PATH_FROM_ROOT; ?>/support-the-libraries/">Make a Gift</a>
                 </p>
             	</div>
     				  <div class="pure-u-1 pure-u-md-1-5 footer-adj">
