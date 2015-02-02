@@ -24,7 +24,7 @@ $use_jquery = array();
     
 /* Set local variables */
 
-$page_title = _("Talk Back");
+$page_title = _("Comments");
 $page_description = _("Share your comments and suggestions about the library");
 $page_keywords = _("library, comments, suggestions, complaints");
 
@@ -346,9 +346,11 @@ include("includes/header_um.php");
 		<div class="breather">
 				<?php print $feedback . $stk_message; ?>
 
-				<?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>			
+				<?php print _("<p>Please use this page <strong>make a comment or suggestion</strong> about library services.</p>
+ 
+        <p>We will post your suggestion as well as a response.</p>
 
-				<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members</p>"); ?>
+        <p class=\"response-link\"><a href=\"#tellus\">Submit your response</a></p>"); ?>
 
 				<div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
 				<?php print $comment_header . $results; ?>

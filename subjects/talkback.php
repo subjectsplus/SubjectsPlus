@@ -327,9 +327,7 @@ include("includes/header.php");
 	<div class="pluslet_simple no_overflow">
 
 		<?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
-			
-
-		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members</p>"); ?>
+		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>"); ?>
 	</div>
 	<div class="pluslet_simple no_overflow">
 		<?php print $comment_header . $results; ?>

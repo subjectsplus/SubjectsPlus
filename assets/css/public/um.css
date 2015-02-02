@@ -755,6 +755,7 @@ div.pluslet form {
 
 .talkback-error h2 {letter-spacing: 0; border-bottom: 1px solid #999; color:#ff0000;}
 
+.response-link {display:inline-block; margin: 15px 0px; font-size: 1.1em;} 
 
 
 /* FOOTER */
@@ -906,6 +907,7 @@ line-height: 24px;
 #letterhead_small {
     font-size: 12px;
     font-weight: normal;
+    margin-top:0.5em;
     margin-bottom: 0.2em;
     padding-bottom: 0.2em;
 }
@@ -1527,9 +1529,9 @@ table.item_listing th {
 
     table.item_listing td.staff-email-row {overflow:hidden; word-wrap: break-word;}
 
-    .staff_photo {
-    
-        }  
+    .staff_photo {  }  
+
+   .response-link {display:none;}
     
 }
 
@@ -1638,7 +1640,7 @@ table.item_listing th {
 
     .form-item {width: 200px;}
 
-
+    
     
 }
 
