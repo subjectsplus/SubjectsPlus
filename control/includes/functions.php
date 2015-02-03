@@ -1657,7 +1657,7 @@ function targetBlanker() {
   global $target_blank;
 
   if (isset($target_blank) && $target_blank == TRUE) {
-     $target = "target=\"blank\"";
+     $target = "target=\"_blank\"";
   } else {
      $target = "";
   }  
