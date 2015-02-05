@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  *   @file login.php
  *   @brief Where you login--or not.

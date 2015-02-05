@@ -121,7 +121,13 @@ class Pluslet {
                 $this->_visible_id = "";
 
                 // get our relative path to the legacy fixed_pluslet folder
-                $this->_relative_asset_path = "../assets/";
+                // I don't know why this needs to be relative, but this conks out the location of the subject specialists otherwise (if mod_rewrite is used)
+
+                if (strpos($_SERVER['REQUEST_URI'], "guide.php") !== false ) {
+                    $this->_relative_asset_path = "../../assets/";
+                } else {
+                    $this->_relative_asset_path = "../assets/";
+                }
 
                 break;
         }
