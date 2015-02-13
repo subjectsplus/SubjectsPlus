@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  *   @file login.php
  *   @brief Where you login--or not.
@@ -163,18 +165,13 @@ if (($postvar_username != "") AND (isset($postvar_password))) {
 // try this against the db
 // Note that passwords are hashed in the database
 
-$emailAdd = $postvar_username;
-$password = md5($postvar_password);
+    $emailAdd = $postvar_username;
+    $password = md5($postvar_password);
 
+    $checker = isCool($emailAdd, $password);
 
-
-
-$checker = isCool($emailAdd, "", true);
-  
-
-
-if ($checker == "success") {
-  if (isset($_SESSION["desired_page"])) {
+    if ($checker == "success") {
+        if (isset($_SESSION["desired_page"])) {
             $loc = $_SESSION["desired_page"];
             header("location:$loc");
             exit();
