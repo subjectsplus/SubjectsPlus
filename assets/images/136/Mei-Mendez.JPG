@@ -1,0 +1,59 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>LibGuides</title>
+		<style>	
+			html { height: 100%;}
+			a {text-decoration:none; color:#ff8811}
+			a:hover {color:#0b2372;}	
+			body {
+			height: 100%;
+			margin: 0;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background: #cbccc8;
+			background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#cbccc8));
+			background: -moz-linear-gradient(top,  #fff,  #cbccc8);
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#cbccc8');	
+			}
+			#msg {
+			font-size:50px;
+			font-family:Arial, Helvetica, sans-serif;
+			color: #878787;
+			font-weight:900;
+			text-align:center;
+			width:100%;
+			padding-top:200px;
+			text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;	
+			}
+			#tagline {
+			font-size:30px;
+			line-height:1.4em;
+			font-family:Arial, Helvetica, sans-serif;
+			color: #617fe0;
+			font-weight:700;
+			text-align:left;
+			width:900px;
+			margin:40px auto;
+			ssstext-shadow: rgba(255,255,255,0.5) 0px 2px 2px;	
+			}
+			#links { margin-top:20px; text-align:left; }
+		</style>
+	</head>
+	
+	<body>	
+		<div id="msg">
+        	The requested page could not be found.        </div>
+		<div id="tagline">
+			This could be because the link you clicked was not formed properly or because the page has been deleted.
+		<div id="links">
+			<li><a href="/">Return to the Homepage</a></li>
+			<li><a href="/search.php">Visit the Search Page</a></li>
+			<li><a href="/support.php">Contact the Site Administrator for Assistance</a></li>
+			<li><a href="#" onclick="history.back(); return false;">&lt; Go Back</a></li>
+		</div>		</div>
+	</body>
+</html>
