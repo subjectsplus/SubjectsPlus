@@ -58,8 +58,8 @@ class DbHandler {
       case "bytype":
 
         if (isset($_GET["type"])) {
-          $condition1 = "WHERE ctags LIKE " . $db->quote(scrubData($_GET["type"]));
-          $condition2 = "WHERE ctags LIKE " . $db->quote(scrubData($_GET["type"]));
+          $condition1 = "WHERE ctags LIKE " . $db->quote(scrubData("%" . $_GET["type"] . "%"));
+          $condition1 = "WHERE ctags LIKE " . $db->quote(scrubData("%" . $_GET["type"] . "%"));
           $condition3 = "and alternate_title NOT NULL";
         }
 
