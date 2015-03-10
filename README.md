@@ -38,3 +38,19 @@ If you run into any missing/weird functionality, check that the following extens
 ## Installation
 
 Check the readme.txt file, or look at the [wiki](http://www.subjectsplus.com/wiki).
+
+## Testing
+
+[http://codeception.com/](Codeception) is a php based testing framework that can be used for acceptance and other kinds of testing. 
+
+To run the codeception tests, you'll need to [http://codeception.com/codecept.phar](download Codeception) to the root directory of the repo.
+
+Then you'll need to [http://phantomjs.org/download.html](download phantomjs) and start it in webdriver mode:
+
+    phantomjs --webdriver=4444
+
+With that up and running you may need to edit details in codeception.yml file to suit your environment and you should switch your database to a testing database.
+
+To run the tests go to the root directory of the repo use the following command:
+    
+    php codecept.phar run acceptance --steps  
