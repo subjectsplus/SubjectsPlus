@@ -562,7 +562,7 @@ ob_end_flush();
        success: function(html) {
          tabs.tabs("destroy");
 
-         tabs.append( "<div id='" + id + "' class=\"sptab ui-tabs-hide\">" + html
+         tabs.append( "<div id='" + id + "' class=\"sptab\">" + html
                       + "</div>" );
 
          jQuery("#response").hide();

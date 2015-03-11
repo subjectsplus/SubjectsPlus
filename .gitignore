@@ -80,3 +80,5 @@ db.ini
 *.ini*
 *.db.ini*
 new_acquisitions.php
+
+tests/_output/*
