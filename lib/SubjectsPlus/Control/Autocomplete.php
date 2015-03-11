@@ -123,7 +123,8 @@ class Autocomplete {
            . "OR shortform LIKE " . $search_param
            . "OR description LIKE " . $search_param
            . "OR keywords LIKE " . $search_param
-           . "OR type LIKE " . $search_param ;
+           . "OR type LIKE " . $search_param 
+           . "AND active = '1';
         break;
 
 
