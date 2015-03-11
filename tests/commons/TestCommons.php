@@ -1,7 +1,7 @@
 <?php 
 class TestCommons
 {
-    public static $username = 'j.little@miami.edu';
+    public static $username = 'admin@admin.edu';
     public static $password = 'password';
 
     public static function logMeIn($I)
@@ -12,4 +12,13 @@ class TestCommons
         $I->fillField('Password', self::$password);
         $I->click('Submit');
     }
+    
+    public static function findElement($xpath)
+    {
+        $webDriver = $this->getModule('WebDriver')->webDriver;
+        $elem = $webDriver->findElement(\WebDriverBy::xpath($selector));
+        
+        return $elem;
+    }
+
 }
