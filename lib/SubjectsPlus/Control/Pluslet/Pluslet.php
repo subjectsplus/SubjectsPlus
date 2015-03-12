@@ -351,19 +351,14 @@ class Pluslet {
                             // Check for icons or descriptions in fields[3]
                             // 00 = neither; 10 = icons no desc; 01 = desc no icons; 11 = both
                             ///////////////////
-                        
-
-
+                       
                             if (isset($fields["3"])) {
                                 // Transform the number into an array of values
                                 $options = str_split($fields["3"]);
-                               
-                                // Go over that array and set options accordingly
-                              
-                                    
+
                                 $show_icon_option = $options[0];
                                 $show_desc_option = $options[1];
-                                $show_note_option = $options[2];                               
+                                
                                 
                                 if ($show_icon_option == 1) {
                                     $show_icons = "yes";
@@ -378,15 +373,21 @@ class Pluslet {
                                 } else {
                                     $show_desc = "";
                                 }
-                                
-                                if ($show_note_option == 1) {
-                                    $show_note  =  1;   
-                                } else {
-                                    $show_note = "";
+
+                                // This option was not in previous version so it needs to be checked
+                                if(isset($options[2])) {
+
+                                    $show_note_option = $options[2];                               
+
+                                    if ($show_note_option == 1) {
+                                        $show_note  =  1;   
+                                    } else {
+                                        $show_note = "";
+                                    }       
                                 }
                                 
-                            
-                                
+                                                       
+                                                            
                             }
 
                             $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title
@@ -638,5 +639,3 @@ class Pluslet {
     }
 
 }
-
-?>
