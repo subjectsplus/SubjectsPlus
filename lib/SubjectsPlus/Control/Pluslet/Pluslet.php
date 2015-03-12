@@ -288,11 +288,22 @@ class Pluslet {
 
         if (count($parts) > 1) { // there are tokens in $body
             foreach ($parts as $part) {
-                if (preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part)
-                	|| preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)
-                	|| preg_match('/^sss},\s?{[^}]*/', $part) || preg_match('/^toc},\s?{[^}]*/', $part) ) { // $part is a properly formed token
+                
+            
+
+                if (
+                           preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{3}$/', $part) 
+                        || preg_match('/^dab},\s?{\d+},\s?{.+},\s?{[01]{2}$/', $part) 
+                        || preg_match('/^faq},\s?{(\d+,)*\d+$/', $part)
+                	|| preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part) 
+                        || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)
+                	|| preg_match('/^sss},\s?{[^}]*/', $part) 
+                        || preg_match('/^toc},\s?{[^}]*/', $part) ) { // $part is a properly formed token
                     $fields = preg_split('/},\s?{/', $part);
                     $prefix = substr($part, 0, 3);
+
+                    //print_r($fields);
+                    
                     switch ($prefix) {
                         case "faq":
                             $query = "SELECT faq_id, question FROM `faq` WHERE faq_id IN(" . $fields[1] . ") ORDER BY question";
@@ -334,51 +345,62 @@ class Pluslet {
                             $tokenized.= "$pretext<a href=\"$cat_url\" $target>$linktext</a>";
                             break;
                         case "dab":
-                            //print_r($fields);
+                            
                             $description = "";
                             ///////////////////
                             // Check for icons or descriptions in fields[3]
                             // 00 = neither; 10 = icons no desc; 01 = desc no icons; 11 = both
                             ///////////////////
+                        
+
+
                             if (isset($fields["3"])) {
-                                switch ($fields["3"]) {
-                                    case "00":
-                                        $show_icons = "";
-                                        $show_desc = "";
-                                        $show_rank = 0;
-                                        break;
-                                    case "10":
-                                        $show_icons = "yes";
-                                        $show_desc = "";
-                                        $show_rank = 0;
-                                        break;
-                                    case "01":
-                                        $show_icons = "";
-                                        $show_desc = 1;
-                                        $icons = "";
-                                        break;
-                                    case "11":
-                                        $show_icons = "yes";
-                                        $show_desc = 1;
-                                        break;
-                                    case "111":
-                                        $show_icons = "yes";
-                                        $show_desc = 1;
-                                        $show_note = 1;
-                                        break;                                        
+                                // Transform the number into an array of values
+                                $options = str_split($fields["3"]);
+                               
+                                // Go over that array and set options accordingly
+                              
+                                    
+                                $show_icon_option = $options[0];
+                                $show_desc_option = $options[1];
+                                $show_note_option = $options[2];                               
+                                
+                                if ($show_icon_option == 1) {
+                                    $show_icons = "yes";
+                                    $show_rank = 0;
+                                } else {
+                                    $show_icons = "";
                                 }
+                                
+                                if ($show_desc_option == 1) {
+                                    $show_desc = 1;
+                                    $show_rank = 0;
+                                } else {
+                                    $show_desc = "";
+                                }
+                                
+                                if ($show_note_option == 1) {
+                                    $show_note  =  1;   
+                                } else {
+                                    $show_note = "";
+                                }
+                                
+                            
+                                
                             }
+
                             $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title
                                     FROM location l, location_title lt, title t
                                     WHERE l.location_id = lt.location_id
                                     AND lt.title_id = t.title_id
                                     AND t.title_id = $fields[1]";
-                            //print $query . "<br /><br />";
+                           
                             $result = $db->query($query);
 
                             foreach ($result as $myrow) {
 
-                                // eliminate final line breaks -- offset fixed 11/15/2011 agd
+                               
+               // eliminate final line breaks -- offset fixed 11/15/2011 agd
                                 $myrow[6] = preg_replace('/(<br \/>)+/', '', $myrow[6]);
                                 // See if it's a web format
                                 if ($myrow[2] == 1) {
@@ -399,6 +421,7 @@ class Pluslet {
                                         $icons = showIcons($current_ctags);
                                     } else {
                                         $icons = "";
+                                        echo "No icons :(";
                                     }
 
                                     if ($show_desc == 1) {
@@ -514,8 +537,6 @@ class Pluslet {
                     		break;
 
                     }
-                } elseif (preg_match('/{|}/', $part) && preg_match('/\bdab\b|\bfaq\b|\bcat\b|\bfil\b/', $part)) { // looks kinda like a token
-                    $tokenized.= "<span style='background-color:yellow'>BROKEN TOKEN: " . $part . "</span>";
                 } else {
                     $tokenized.= $part;
                 }
