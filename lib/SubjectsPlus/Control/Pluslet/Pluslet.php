@@ -422,7 +422,7 @@ class Pluslet {
                                         $icons = showIcons($current_ctags);
                                     } else {
                                         $icons = "";
-                                        echo "No icons :(";
+                                        
                                     }
 
                                     if ($show_desc == 1) {
