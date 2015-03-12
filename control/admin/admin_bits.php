@@ -61,7 +61,7 @@ switch ($_REQUEST["action"]) {
       $extra_q = "WHERE s.subject_id IN (";
 
       switch ($_POST["filter_key"]) {
-        case "Active":
+        case "Public":
           // change the active field
           foreach ($_POST["selected"] as $value) {
             $q = "UPDATE subject SET active = '1' WHERE subject_id = $value";
@@ -70,7 +70,16 @@ switch ($_REQUEST["action"]) {
           }
 
           break;
-        case "Inactive":
+        case "Suppressed":
+          // change the active field
+          foreach ($_POST["selected"] as $value) {
+            $q = "UPDATE subject SET active = '2' WHERE subject_id = $value";
+            $r = $db->exec($q);
+            $extra_q .= $value . ",";
+          }
+
+          break;
+        case "Hidden":
           // change the active field
           foreach ($_POST["selected"] as $value) {
             $q = "UPDATE subject SET active = '0' WHERE subject_id = $value";
@@ -109,11 +118,14 @@ switch ($_REQUEST["action"]) {
       case "All":
         $extra_q = "";
         break;
-      case "Active":
+      case "Public":
         $extra_q = "WHERE s.active = '1' ";
         break;
-      case "Inactive":
-        $extra_q = "WHERE s.active != '1' ";
+      case "Hidden":
+        $extra_q = "WHERE s.active = '0' ";
+        break;
+      case "Suppressed":
+        $extra_q = "WHERE s.active = '2' ";
         break;
       default:
         $extra_q = "WHERE type = '" . trim($_POST["filter_key"]) . "' ";

@@ -93,8 +93,9 @@ $type_drop_ticks = "<select name=\"filter_type_id\" id=\"filter_by_type_ticked\"
 
 $type_drop_vals = "
 <option value=\"\" class=\"guide-status\">" . _("~~Guide Status~~") . "</option>\n
-<option value=\"Active\">" . _("Active") . "</option>\n
-<option value=\"Inactive\">" . _("Inactive") . "</option>\n
+<option value=\"Public\">" . _("Public") . "</option>\n
+<option value=\"Hidden\">" . _("Hidden") . "</option>\n
+<option value=\"Suppressed\">" . _("Suppressed") . "</option>\n
 <option value=\"\" class=\"guide-status\">" . _("~~Guide Types~~") . "</option>\n";
 
   foreach ($guide_types as $key=>$value) {
