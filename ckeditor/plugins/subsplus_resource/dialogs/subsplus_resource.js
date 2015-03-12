@@ -51,6 +51,7 @@ function generateDABToken( dialog, editor )
 		var lstrToken = jQuery('input[name="but"]:checked').val();
 		var lboolIcons = dialog.getValueOf( 'tab-main' , 'check-icons');
 		var lboolDesc = dialog.getValueOf( 'tab-main' , 'check-desc');
+		var lboolNote = dialog.getValueOf( 'tab-main' , 'check-note');
 
 		//if no radio button chosen, alert error
 		if(typeof lstrToken == 'undefined')
@@ -74,6 +75,15 @@ function generateDABToken( dialog, editor )
 
 		//1 if description, 0 is no description
 		if(lboolDesc)
+		{
+			lstrToken = lstrToken + '1';
+		}else
+		{
+			lstrToken = lstrToken + '0';
+		}
+
+		//1 if note, 0 is no note
+		if(lboolNote)
 		{
 			lstrToken = lstrToken + '1}}';
 		}else
@@ -208,6 +218,20 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 								this.setValue( true );
 						}
 					},
+					{
+						//checkbox for include notes
+						type: 'checkbox',
+						id: 'check-note',
+						label: html_entity_decode(editor.lang['subsplus_resource.NoteCheckbox']),
+						className: 'clear-after-close',
+						setup: function( element )
+						{
+							var lobjToken = element.getText().split(/{{|}}|}[^{]*{/);
+
+							if( lobjToken[4].charAt(2) == '1' )
+								this.setValue( true );
+						}
+					},					
 					{
 						//html to add radio list
 						type: 'html',

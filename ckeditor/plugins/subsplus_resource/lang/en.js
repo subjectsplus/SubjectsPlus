@@ -10,4 +10,5 @@ CKEDITOR.lang['en']['subsplus_resource.Instructions2'] = 'the button next to the
 CKEDITOR.lang['en']['subsplus_resource.Button'] = 'Search';
 CKEDITOR.lang['en']['subsplus_resource.IconsCheckbox'] = 'Include icons?'
 CKEDITOR.lang['en']['subsplus_resource.DescCheckbox'] = 'Include description?'
+CKEDITOR.lang['en']['subsplus_resource.NoteCheckbox'] = 'Include note?'
 CKEDITOR.lang['en']['subsplus_resource.ValidateRadio'] = 'No Resource chosen!';

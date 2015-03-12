@@ -10,4 +10,5 @@ CKEDITOR.lang['es']['subsplus_resource.Instructions2'] = 'el bot&ograven junto a
 CKEDITOR.lang['es']['subsplus_resource.Button'] = 'Buscar';
 CKEDITOR.lang['es']['subsplus_resource.IconsCheckbox'] = 'Incluye iconos?'
 CKEDITOR.lang['es']['subsplus_resource.DescCheckbox'] = 'Incluye la descripci&ograven?'
+CKEDITOR.lang['en']['subsplus_resource.NoteCheckbox'] = 'Incluye la nota?'
 CKEDITOR.lang['es']['subsplus_resource.ValidateRadio'] = 'Ning&ugraven recurso elegido!';

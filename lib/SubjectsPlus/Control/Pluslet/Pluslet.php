@@ -361,6 +361,11 @@ class Pluslet {
                                         $show_icons = "yes";
                                         $show_desc = 1;
                                         break;
+                                    case "111":
+                                        $show_icons = "yes";
+                                        $show_desc = 1;
+                                        $show_note = 1;
+                                        break;                                        
                                 }
                             }
                             $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title
