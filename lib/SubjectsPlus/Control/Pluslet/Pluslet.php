@@ -390,7 +390,7 @@ class Pluslet {
                                                             
                             }
 
-                            $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title
+                            $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title, display_note
                                     FROM location l, location_title lt, title t
                                     WHERE l.location_id = lt.location_id
                                     AND lt.title_id = t.title_id
@@ -448,8 +448,20 @@ class Pluslet {
                                             $description = "<br />" . scrubData($myrow[6]);
                                         }
                                         //$description = "<br />$myrow[9]";
+
+
                                     }
-                                    $tokenized.= "<a href=\"$url\" $target>$myrow[8]</a> $icons $description";
+
+                                    if (isset($show_note) && $show_note == 1) {
+                                        if ($myrow[9] != "") {
+                                            $note = "<br />" ._("Note: ") . $myrow[9];
+                                        }
+                                      
+                                      } else {
+                                      $note = "";
+                                    }
+
+                                    $tokenized.= "<a href=\"$url\" $target>$myrow[8]</a> $icons $description $note";
                                 } else {
                                     // It's print
                                     $format = "other";
@@ -489,6 +501,15 @@ class Pluslet {
                                     }
                                     // end diane fall 2014
 
+                                    if (isset($show_note) && $show_note == 1) {
+                                        if ($myrow[9] != "") {
+                                            $note = "<br />" ._("Note: ") . $myrow[9];
+                                        }
+                                      
+                                      } else {
+                                      $note = "";
+                                    }
+
                                     // Simple Print (2), or Print with URL (3)
                                     if ($myrow[2] == 3) {
                                         $tokenized.= "<em>$myrow[8]</em><br />" . _("") . "
@@ -498,9 +519,9 @@ class Pluslet {
 
                                         // check if it's a url
                                         if (preg_match('/^(https?|www)/', $myrow[0])) {
-                                            $tokenized.= "<a href=\"$myrow[0]\" $target>$myrow[8]</a> $icons $description";
+                                            $tokenized.= "<a href=\"$myrow[0]\" $target>$myrow[8]</a> $icons $description $note";
                                         } else {
-                                            $tokenized.= "$myrow[8] <em>$myrow[0]</em> $icons $description";
+                                            $tokenized.= "$myrow[8] <em>$myrow[0]</em> $icons $description $note";
                                         }
                                     }
                                 }
@@ -636,6 +657,10 @@ class Pluslet {
 
     function deBug() {
         print $this->_debug;
+    }
+
+    function getNote() {
+
     }
 
 }
