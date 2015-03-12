@@ -56,6 +56,27 @@ CKEDITOR.dialog.add( 'subsplus_faqDialog', function( editor ) {
 					{
 						// Insert html to show instructions
 						type: 'html',
+						html: '<span style="color: blue; cursor: pointer; text-decoration:underline;">'+ editor.lang['subsplus_faq.AllLink'] + '</span>',
+						onLoad: function()
+						{
+							var element = this.getInputElement().getId();
+
+							jQuery('#' + element).click(function()
+							{
+								getFaqsCheckboxList( 'all' , function( lstrHTML )
+								{
+									var elements = this.CKEDITOR.dialog.getCurrent().getElement().getElementsByTag('div');
+
+									var element = elements.getItem(4);
+
+									element.setHtml(lstrHTML);
+								});
+							});
+						}
+					},				
+					{
+						// Insert html to show instructions
+						type: 'html',
 						html: '<span style="color: blue; cursor: pointer; text-decoration:underline;">'+ editor.lang['subsplus_faq.BySubjectLink'] + '</span>',
 						onLoad: function()
 						{

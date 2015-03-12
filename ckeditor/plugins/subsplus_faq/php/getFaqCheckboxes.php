@@ -35,7 +35,7 @@ $row_count = 0;
 	foreach($results_array as $myrow2) {
 	$row_colour = ($row_count % 2) ? $colour1 : $colour2;
 		print "<div style=\"clear: both; padding: 3px 5px;\" class=\"$row_colour\">
-		<input name=\"but\" type=\"checkbox\" value=\"$prefix$myrow2[0]\">" . stripslashes(htmlspecialchars_decode($myrow2[1]));
+		<input name=\"but\" type=\"checkbox\" value=\"$prefix$myrow2[0]\">&nbsp;&nbsp;" . stripslashes(htmlspecialchars_decode($myrow2[1]));
 			if ($show_edit == 1) {
 				print " <a target=\"blank\" href=\"{$BaseURL}control/faq/faq.php?faq_id=$myrow2[0]\">edit</a>";
 			}
@@ -116,6 +116,24 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 		}
 
 	}
+
+} elseif (isset($_GET["browse"]) && $_GET["browse"] == "all") { //if browsing by all
+
+	print "<br /><h2>" . _("<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>.") . "</h2>";
+
+	//sql for all FAQs
+	$q = "SELECT faq_id, question FROM faq";
+
+	$r = $db->query($q);
+
+		//go through all results to print out checkboxes
+		$rc = innerLoop(1, $r, 1);
+
+		if ($rc == 0) {
+			print "<p>" . _("There are no results.  You'll need to try something different.") . "</p>";
+		}
+
+
 
 } elseif(isset($_COOKIE["our_guide"]) && isset($_COOKIE["our_guide_id"])){ //get for current guide based on cookie
 

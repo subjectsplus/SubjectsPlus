@@ -40,7 +40,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbar_SubsPlus_Narrow =
 	[
 
-	['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','-','Image','-', 'PasteText','PasteFromWord','-', 'Source'],
+	['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','Anchor','-','Image','-', 'PasteText','PasteFromWord','-', 'HorizontalRule','-','RemoveFormat', '-','Styles','-','Source'],
 
 	'/',
 
