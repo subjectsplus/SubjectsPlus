@@ -23,4 +23,4 @@ $I->fillField('#emergency_contact_relation', 'Co-Tester');
 $I->fillField('//*[@id="emergency_contact_phone"]', '555-5555');
 $I->fillField('//*[@id="new_record"]/div[3]/div[2]/div[2]/input', '55445$%$5grggrg5Ff');
 $I->click('Save Record Now');
-$I->see('Thy');
+$I->seeElement('#feedback');
