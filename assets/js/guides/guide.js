@@ -2,38 +2,29 @@ $(document).ready(function(){
 
     makeDropable(".dropspotty");
     makeDropable(".cke");
-
     makeSortable(".sort-column");
     makeSortable(".sptab", 'sections');
-
     makeDraggable(".draggable");
 
     setupSaveButton('#save_guide');
 
     makeEditable('a[id*=edit]');
-
     makeDeleteable('a[id*=delete]');
     makeDeleteable('.section_remove', 'sections');
 
     setupAllColorboxes();
-
     setupMiscEvents();
-
     setupMiscClickEvents();
 
     makeHelpable("img[class*=help-]");
-
     setupTabs('a[id*=tab-]');
-
     makeAddSection('a[id="add_section"]');
-    
 
     // Append an intital section
 
     if ($('[id^=section]').length) {
 
     } else {
-
         
 	if (document.URL.indexOf('guide.php') > 0) {
 
@@ -49,7 +40,6 @@ $(document).ready(function(){
 	}
 
     }
-
 
     makeSectionSlider('div[id^="slider_section"]');
 
@@ -72,16 +62,8 @@ $(document).ready(function(){
 
 	}
     });
-
-
-    
-    
-
-
-}); // End $ within document.ready
-
-
-
+}); 
+// End $ within document.ready
 
 function makeDropable( lstrSelector )
 {
@@ -97,7 +79,7 @@ function makeDropable( lstrSelector )
     var drag_id;
     var drop_tab;
     var pluslet_title;
-  
+    
     dropspot.droppable({
 
 	iframeFix: true,
@@ -125,8 +107,12 @@ function makeDropable( lstrSelector )
                         $(props.draggable).hide('slow', function()
 						{
 						    $(this).remove();
+                                                    console.log($(this));
+                                                    console.log(drop_tab);
 						    $(drop_tab).children('a[href^="#tabs-"]').click();
-						    $('.portal-column-1:visible').prepend(this);
+						    $('.portal-column-1:visible').first().prepend(this);
+
+                                                    console.log("Drop tab drop tab!");
 						    $(this).height("auto");
 						    $(this).width("auto");
 						    $(this).show("slow");
@@ -147,7 +133,7 @@ function makeDropable( lstrSelector )
 
 		drop_id = $(this).attr("id");
 		drag_id = $(props.draggable).attr("id");
-		//alert(drag_id);
+		
 		pluslet_title = $(props.draggable).html();
 		if( $(this).hasClass('cke') )
 		{
@@ -163,14 +149,14 @@ function makeDropable( lstrSelector )
 		    // if there can only be one, could remove from list items
 		    drop_id = $(this).attr("id");
 		    drag_id = $(props.draggable).attr("id");
-		    //alert(drag_id);
+		    
 		    pluslet_title = $(props.draggable).html();
 
 		    // Create new node below, using a random number
 
 		    var randomnumber=Math.floor(Math.random()*1000001);
 		    $(this).next('div').prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
-		    //alert (drag_id + " drop: " + drop_id);
+		    
 
 		    // Load new data, on success (or failure!) change class of container to "pluslet", and thus draggable in theory
 		    $("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
@@ -187,7 +173,7 @@ function makeDropable( lstrSelector )
 								      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
 								      var cnt = $("#new-" + randomnumber).contents();
 								      $("#new-" + randomnumber).replaceWith(cnt);
-								      //alert($(this).attr("id"));
+								      
 								      $(this).addClass("unsortable");
 
 								      $("#response").hide();
@@ -235,11 +221,6 @@ function makeDropable( lstrSelector )
 	    }
 	}
     });
-
-    
-
-
-
 }
 
 function makeSortable( lstrSelector, lstrType )
@@ -307,7 +288,6 @@ function makeSortable( lstrSelector, lstrType )
 	    }
 	});
     }
-
 }
 
 function makeDraggable( lstrSelector )
@@ -419,7 +399,9 @@ function setupSaveButton( lstrSelector )
 		lstrInstance = "pluslet-update-body-" + lintID;
 		//Title of item
 		lstrTitle = addslashes($("#pluslet-update-title-" + lintID).val());
-		if (lstrTitle === "undefined") {
+                console.log(lstrTitle);
+                console.log("Title modified!");
+		if (lstrTitle === undefined) {
 		    b = $(".pluslet-" + lintID).find('.titlebar_text').clone();
 		    b.children().remove();
 		    lstrTitle = b.text().trim();
@@ -481,21 +463,22 @@ function setupSaveButton( lstrSelector )
 	    pspecial = '';
 	    break;
 	case "Heading":
-	     pbody = ""; // headings have no body
-	     pitem_type = "Heading";
+	    pbody = ""; // headings have no body
+	    pitem_type = "Heading";
 
 	    break;
 	case "TOC":
-	     pbody = "";
-	     pitem_type = "TOC";
+	    pbody = "";
+	    pitem_type = "TOC";
 	    var tickedBoxes = [];
 	    $('input[name=checkbox-'+lintID+']:checked').each(function() {
-		// alert(this.value);
+	        
 		tickedBoxes.push(this.value);
 
 	    });
+
 	    pspecial = '{"ticked":"' + tickedBoxes + '"}';
-	    //alert(pspecial);
+	    
 	    break;
 	case "Feed":
 	    pbody = $('input[name=' + lstrInstance + ']').val();
@@ -505,20 +488,20 @@ function setupSaveButton( lstrSelector )
 	    var pshow_feed = $('input[name=showfeed-'+lintID+']:checked').val();
 
 	    pspecial = '{"num_items":'
-		    + pnum_items +
-		    ',  "show_desc":'
-		    + pshow_desc +
-		    ', "show_feed": '
-		    + pshow_feed +
-		    ', "feed_type": "'
-		    + pfeed_type +
-		    '"}';
+		+ pnum_items +
+		',  "show_desc":'
+		+ pshow_desc +
+		', "show_feed": '
+		+ pshow_feed +
+		', "feed_type": "'
+		+ pfeed_type +
+		'"}';
 
 	    pitem_type = "Feed";
-	    //pitems = " +pnum_items + " pshow_desc = " + pshow_desc + " pshow_feed = " +pshow_feed
-	    //alert ("Feed update:" + pspecial );
 	    break;
+
 	default:
+
 	    pbody = $('#' + item_type[2] + '-body').html();
 	    pbody = pbody === undefined ? ""  : pbody;
 	    pitem_type = item_type[2];
@@ -528,7 +511,6 @@ function setupSaveButton( lstrSelector )
 	    $(lobjThis).find('input[name^=' + item_type[2] + '-extra][type=text]').each(function()
 											{
 											    var name_split = $(this).attr("name").split("-");
-
 											    extra[name_split[2]] = $(this).val();
 											});
 
@@ -536,7 +518,6 @@ function setupSaveButton( lstrSelector )
 	    $(lobjThis).find('textarea[name^=' + item_type[2] + '-extra]').each(function()
 										{
 										    var name_split = $(this).attr("name").split("-");
-
 										    extra[name_split[2]] = $(this).val();
 										});
 
@@ -544,7 +525,6 @@ function setupSaveButton( lstrSelector )
 	    $(lobjThis).find('select[name^=' + item_type[2] + '-extra]').each(function()
 									      {
 										  var name_split = $(this).attr("name").split("-");
-
 										  extra[name_split[2]] = $(this).val();
 									      });
 
@@ -553,7 +533,7 @@ function setupSaveButton( lstrSelector )
 											 {
 											     var name_split = $(this).attr("name").split("-");
 											     extra[name_split[2]] = typeof extra[name_split[2]] === 'undefined' ? '' : extra[name_split[2]];
-
+                                                                                             
 											     if( $(this).is(':checked') )
 												 extra[name_split[2]] = $(this).val();
 											 });
@@ -586,7 +566,7 @@ function setupSaveButton( lstrSelector )
 	    if (clone.indexOf("clone") !== -1) {
 		ourflag = 'insert';
 		isclone = 1;
-		//alert("it's a clone!");
+	        
 	    } else {
 		ourflag = 'update';
 		isclone = 0;
@@ -646,7 +626,7 @@ function setupSaveButton( lstrSelector )
 		// 2. put the contents of the div into a variable
 		// 3.  replace parent div (i.e., id="xxxxxx") with the content made by loaded file
 		var cnt = $(this_div).contents();
-		//alert(cnt);
+		
 		$(this_div).replaceWith(cnt);
 	    },
 	    async: false
@@ -667,7 +647,11 @@ function setupSaveButton( lstrSelector )
 	    var lstrExternal = $(this).parent('li').attr('data-external-link');
 	    var lintVisibility = parseInt($(this).parent('li').attr('data-visibility'));
 	    var tab_id = $(this).attr("href").split("tabs-")[1];
-
+            var subject_id;
+            var user_name;
+            var lstrTabs;
+            
+            
 	    var lobjTab = {};
 	    lobjTab.name = lstrName;
 	    lobjTab.external = lstrExternal;
@@ -678,6 +662,10 @@ function setupSaveButton( lstrSelector )
 								  {
 								      var section_id = $(this).attr("id").split("section_")[1];
 								      var lobjSection = {};
+                                                                      lobjSection.center_data = "";
+                                                                      lobjSection.left_data = "";
+                                                                      lobjSection.sidebar_data = "";
+
 								      lobjSection.layout = $(this).attr("data-layout");
 
 								      $('div#section_' + section_id + ' div.portal-column-0').sortable();
@@ -685,7 +673,12 @@ function setupSaveButton( lstrSelector )
 								      $('div#section_' + section_id + ' div.portal-column-2').sortable();
 
 								      lobjSection.left_data = $('div#section_' + section_id +  ' div.portal-column-0').sortable('serialize');
+
+
 								      lobjSection.center_data = $('div#section_' + section_id +  ' div.portal-column-1').sortable('serialize');
+                                                                      console.log(section_id);
+                                                                      console.log(lobjSection.center_data);
+
 								      lobjSection.sidebar_data = $('div#section_' + section_id +  ' div.portal-column-2').sortable('serialize');
 
 								      lobjTab.sections.push(lobjSection);
@@ -695,7 +688,7 @@ function setupSaveButton( lstrSelector )
 	});
 
 	lstrTabs = JSON.stringify(lobjTabs);
-
+        console.log(lstrTabs);
 	$("#response").load("helpers/save_guide.php", {
 	    this_subject_id: subject_id,
 	    user_name: user_name,
@@ -705,7 +698,6 @@ function setupSaveButton( lstrSelector )
 
 				$("#response").fadeIn();
 				refreshFeeds();
-				//$(".sort-column").sortable();
 
 			    });
 
@@ -725,7 +717,7 @@ function makeEditable( lstrSelector )
     $(document.body).on('click', lstrSelector, function(event) {
         var isclone;
         var edit_id = $(this).attr("id").split("-");
-   
+        
         ////////////
         // Clone?
         ////////////
@@ -881,7 +873,7 @@ function setupAllColorboxes()
         innerHeight:500,
 
         onClosed:function() {
-            //alert("parent says item = " + window.addItem);
+            
             // add item to page
 
             if (window.addItem !== 0) {
@@ -980,9 +972,7 @@ function setupMiscEvents()
     //////////////////////////////
 
     $(document.body).on('click','.togglenew', function(event) {
-        //$('#find-results').hide();
-        //$('#all-results').fadeIn();
-        //$("#all-results").load("get_pluslets.php", {base: 1 });
+ 
         $("#all-results").fadeIn(2000);
 
     });
@@ -1181,8 +1171,7 @@ function plantClone(clone_id, item_type) {
 
     var randomnumber=Math.floor(Math.random()*1000001);
     $(".portal-column-1:visible").prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
-    //alert (drag_id + " drop: " + drop_id);
-    //alert(clone_id);
+    
 
     // cloneid is used to tell us this is a clone
     var new_id = "pluslet-cloneid-" + clone_id;
