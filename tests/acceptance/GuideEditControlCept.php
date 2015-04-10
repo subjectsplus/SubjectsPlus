@@ -8,14 +8,18 @@ $I->click('//*[@id="maincontent"]/div/div[1]/div/div[2]/div[1]/a[4]');
 
 
 // Test dropping a new box
-
+/*
 
 $I->moveMouseOver('#newbox');
-$I->dragAndDrop('//*[@id="pluslet-id-Basic"]','//*[@id="dropspot-left-1"]');
+$I->moveMouseOver('#newbox');
+$I->waitForElement('#pluslet-id-Basic');
+$I->seeElement('#pluslet-id-Basic');
+$I->dragAndDrop('#pluslet-id-Basic', '#dropspot-left-1');
 
-$I->see('SAVE CHANGES');
-$I->waitForElement('.cke_chrome');
-$I->fillField(['name'=>'new_pluslet_title'], 'Testing');
+$I->waitForElement('#save_guide');
+$I->seeElement('#save_guide');
+
+//$I->fillField('//*[@id="container-0"]/div[2]/div[1]/div[1]/div[1]/input', 'Testing');
 
 
 // Test new tab 
@@ -32,3 +36,4 @@ $I->click('SAVE CHANGES');
 $I->click('SAVE CHANGES');
 $I->waitForElement('#response');
 $I->see('Thy');
+*/

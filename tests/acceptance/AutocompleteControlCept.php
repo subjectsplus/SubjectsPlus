@@ -6,8 +6,9 @@ TestCommons::logMeIn($I);
 // Autocomplete for home page
 $I->amOnPage('control/');
 $I->fillField('#sp_search', 'test');
-$I->waitForElement('.ui-autocomplete-category');
-$I->seeElement('.ui-autocomplete-category');
+$I->waitForElement('.ui-autocomplete');
+$I->waitForElement('.ui-autocomplete-category'); 
+$I->seeElement('.ui-autocomplete');
 
 // Autocomplete for records page
 $I->amOnPage('control/records');
@@ -24,7 +25,8 @@ $I->seeElement('.ui-autocomplete-category');
 
 // Autocomplete for Admin page 
 
-$I->amOnPage('control/');
-$I->fillField('#sp_search', 'admin');
+$I->amOnPage('control/admin');
+$I->fillField('#sp_search', 'super');
 $I->waitForElement('.ui-autocomplete-category');
+$I->waitForElement('.ui-autocomplete');
 $I->seeElement('.ui-autocomplete-category');

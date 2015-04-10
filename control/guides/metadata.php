@@ -337,7 +337,7 @@ include("../includes/footer.php");
 
      var delete_url = "metadata.php?subject_id=" + this_record_id[2] + "&delete_record=true&wintype=" + pop_status;
 
-     window.location.replace(delete_url);
+     top.location.href = delete_url;
 
      return false;
 

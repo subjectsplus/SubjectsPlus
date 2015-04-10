@@ -172,7 +172,7 @@ if (isset ($v2styles) && $v2styles == 1) {
         </div>
         <div class="pluslet_body">
               <?php
-              $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", 30);
+              $input_box = new CompleteMe("quick_search", "search.php", $proxyURL, "Quick Search", "guides", 30);
               $input_box->displayBox();
               ?>
         </div>
