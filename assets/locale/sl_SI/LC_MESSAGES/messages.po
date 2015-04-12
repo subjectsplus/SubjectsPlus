@@ -1,0 +1,1847 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: SubjectsPlus\n"
+"Language: sl\n"
+
+#: control/login.php:37
+msgid "Please enter your <strong>login and password</strong> to proceed."
+msgstr "Prosimo, pred nadaljevanjem vnesite vaše <strong>uporabniško ime in geslo</strong>."
+
+#: control/login.php:44
+msgid "Login"
+msgstr "Prijava"
+
+#: control/login.php:48 control/includes/classes/Staff.php:258
+msgid "Password"
+msgstr "Geslo"
+
+#: control/login.php:87
+msgid "Please check your login and password and try again.  (Note that login attempts are logged.)"
+msgstr "Prosimo, preverite vaše uporabniško ime in geslo ter poskusite znova. (Vsak poskus prijave se beleži)"
+
+#: control/guides/metadata.php:55 control/admin/user.php:111
+msgid "There is no record by that ID."
+msgstr "Noben zapis s tem ID ne obstaja."
+
+#: control/guides/metadata.php:68
+msgid "You must have a title, shortform, type, and one associated staff member.  Please go back and fix these omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "Morate imeti naslov, kratki opis, vrsto in enega povezanega zaposlenega. Prosimo, pojdite nazaj in dopolnite manjkajoče stvari. Ter vklopite JavaScript!"
+
+#: control/guides/metadata.php:169
+msgid "Thwarted!  You must have at least one staff member for a guide."
+msgstr "Zavrnjeno! Imeti morate vsaj enega zaposlenega za vodič."
+
+#: control/guides/metadata.php:189 control/records/record.php:495
+msgid "You must have at least one subject."
+msgstr "Imeti morate vsaj eno temo."
+
+#: control/guides/metadata.php:219 control/faq/faq.php:138
+#: control/records/record.php:525 control/talkback/talkback.php:138
+#: control/admin/user.php:240
+msgid "You must complete all required form fields."
+msgstr "Izpolniti morate vsa zahtevana polja."
+
+#: control/guides/metadata.php:246
+msgid "There is already a guide with that short form!  Try again."
+msgstr "Vodič s takšnim kratkim opisom že obstaja! Poskusite znova."
+
+#: control/guides/helpers/fck_get_tokens.php:35
+msgid "<strong>Search</strong> for a resource saved in SubjectsPlus"
+msgstr "<strong>Poiščite</strong> vir, shranjen v SubjectsPlus"
+
+#: control/guides/helpers/fck_get_tokens.php:36
+msgid "<strong>Tick</strong> the button next to the desired resource and click OK (bottom)"
+msgstr "<strong>Izberite</strong> gumb zraven želenega vira in kliknite OK (spodaj)"
+
+#. Išči?
+#: control/guides/helpers/fck_get_tokens.php:42
+#: control/guides/helpers/discover.php:56
+#, fuzzy
+msgid "Go!"
+msgstr "Pojdi!"
+
+#: control/guides/helpers/fck_get_tokens.php:43
+msgid "Include icons?"
+msgstr "Vključiti ikone?"
+
+#: control/guides/helpers/fck_get_tokens.php:73
+#: control/guides/helpers/find_pluslets.php:50
+msgid "There were no results matching your query."
+msgstr "Ni bilo nobenih zadetkov, ki bi se ujemali z vašo zahtevo."
+
+#: control/guides/helpers/fck_get_tokens.php:88
+#: control/guides/helpers/fck_get_assets.php:85
+msgid "Never mind"
+msgstr "Ni važno"
+
+#. Tu gre za spustni meni FAQ v Admini...brska se lahko po FAQ vprašanjih združenimi pod posameznimi vodiči in po zbirkah, ki jih ustvarimo.
+#: control/guides/helpers/fck_get_faqs.php:28
+#: control/includes/classes/sp_BuildNav.php:68
+msgid "Browse by Subject"
+msgstr "Vprašanja po vodičih"
+
+#. Tu gre za spustni meni FAQ v Admini...brska se lahko po FAQ vprašanjih združenimi pod posameznimi vodiči in po zbirkah, ki jih ustvarimo.
+#: control/guides/helpers/fck_get_faqs.php:28
+#: control/includes/classes/sp_BuildNav.php:69
+msgid "Browse by Collection"
+msgstr "Vprašanja po zbirkah"
+
+#: control/guides/helpers/fck_get_faqs.php:34
+msgid "Browse all FAQs by Subject"
+msgstr "Brskaj po vseh Pogostih vprašanjih glede na temo."
+
+#. Izberite sem spremenil v označite, da ni 2x beseda s korenom izberi
+#: control/guides/helpers/fck_get_faqs.php:35
+#: control/guides/helpers/fck_get_faqs.php:61
+#: control/guides/helpers/fck_get_faqs.php:97
+msgid "<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>."
+msgstr "<strong>Označite</strong> izbirnike za vsa Pogosta vprašanja, ki jih želite vključiti v vaš pluslet in kliknite <strong>OK</strong>."
+
+#: control/guides/helpers/fck_get_faqs.php:53
+#: control/guides/helpers/fck_get_faqs.php:80
+msgid "There are no results.  You'll need to try something different."
+msgstr "Ni rezultatov. Poskusiti boste morali nekaj drugega."
+
+#: control/guides/helpers/fck_get_faqs.php:60
+msgid "Browse all FAQs by Collection"
+msgstr "Brskajte po Pogostih vprašanjih glede na zbirko."
+
+#. subject = tema?
+#. Collection = zbirka? Zbirka?
+#: control/guides/helpers/fck_get_faqs.php:95
+msgid "You don't have any FAQs associated with this subject yet.  Maybe click Browse by Subject or Browse by Collection, above, to see what else is out there."
+msgstr "Nimate Pogostih vprašanj povezanih s to temo. Morda lahko zgoraj kliknete Brskaj po temi ali Brskaj po zbirki, da vidite, kaj je še tam."
+
+#. Box = ? Škatla? Okvir?
+#: control/guides/helpers/guide_data.php:121
+msgid "<strong>Box removed</strong>"
+msgstr "<strong>Okvir odstranjen</strong>"
+
+#: control/guides/helpers/discover.php:45
+msgid "- Browse Pluslets -"
+msgstr "- Brskaj po Plusletih"
+
+#: control/guides/helpers/save_guide.php:70
+msgid "Guide Updated."
+msgstr "Vodič je posodobljen."
+
+#: control/guides/helpers/ajax_mod.php:32
+msgid "This item has been removed from your guide"
+msgstr "Ta vsebina je bila odstranjena iz vašega vodiča"
+
+#: control/guides/helpers/ajax_mod.php:34
+msgid "There was a problem with the delete"
+msgstr "Pojavila se je težava z vašim izbrisom"
+
+#: control/guides/helpers/ajax_mod.php:79
+msgid "Thy will be done.  Ranks updated."
+msgstr "To bo narejeno. Razvrstitev je posodobljena."
+
+#: control/guides/helpers/ajax_mod.php:81
+msgid "There was a problem with your update."
+msgstr "Pojavila se je težava z vašo posodobitvijo."
+
+#: control/guides/helpers/fck_get_cat.php:46
+msgid "Select the type of link you wish to create, and click <em>Create Link</em>."
+msgstr "Izberite vrsto povezave, ki jo želite ustvariti, in kliknite <em>Ustvari povezavo</ em>."
+
+#. subject heading? naslov predmeta?
+#: control/guides/helpers/fck_get_cat.php:49
+msgid "A. Link to Subject Heading"
+msgstr "A. Povezava na predmetno oznako."
+
+#: control/guides/helpers/fck_get_cat.php:51
+msgid "Prefix text (optional)"
+msgstr "Predpona (izbirno)"
+
+#: control/guides/helpers/fck_get_cat.php:53
+msgid "LC Subject Heading"
+msgstr "Predmetna oznaka Kongresne knjižnice (ZDA)"
+
+#: control/guides/helpers/fck_get_cat.php:54
+#: control/guides/helpers/fck_get_cat.php:67
+#: control/guides/helpers/fck_get_cat.php:76
+msgid "Create Link"
+msgstr "Ustvari povezavo"
+
+#: control/guides/helpers/fck_get_cat.php:56
+msgid "<strong>Examples</strong> (the unlinked text is from the optional Prefix text box):</p>\r\n"
+"\t<blockquote>\r\n"
+"\tPN 1997 - Screenplays - see <span class=\"linkie\">Motion picture plays</span><br />\r\n"
+"\tTR 899 <span class=\"linkie\">Motion Pictures--Editing<span>\r\n"
+"\t</blockquote>"
+msgstr "<strong>Primeri</ strong> (nepovezano besedilo je iz polja dodatne predpone): </p>\r\n"
+"<blockquote>\r\n"
+"PN 1997 - Screenplays - glej <span class = \"linkie\"> Filmska igra</span><br/>\r\n"
+"TR 899 <span class = \"linkie\">Motion Pictures--Editing<span>\r\n"
+"</blockquote>"
+
+#: control/guides/helpers/fck_get_cat.php:64
+msgid "B. Link to Keyword Search Results"
+msgstr "B. Povezava na zadetke iskanja po ključnih besedah."
+
+#: control/guides/helpers/fck_get_cat.php:66
+msgid "E.g., fast cars"
+msgstr "Prim.: hitri avtomobili"
+
+#: control/guides/helpers/fck_get_cat.php:71
+msgid "C. Link to Call Number (DVDs and Reserves only in Voyager)"
+msgstr "C. Povezava na signaturo"
+
+#: control/guides/helpers/fck_get_cat.php:73
+msgid "E.g., DVD 3001"
+msgstr "Prim.: DVD 3001"
+
+#: control/guides/helpers/fck_get_cat.php:75
+msgid "Title or Link Text"
+msgstr "Besedilo naslova ali povezave"
+
+#: control/guides/helpers/fck_get_cat.php:85
+msgid "2. Your Catalog Link (Subject Heading):"
+msgstr "2. povezava na vaš katalog (predmetna oznaka):"
+
+#: control/guides/helpers/fck_get_cat.php:95
+msgid "2. Your Catalog Link (Keywords):"
+msgstr "2. povezava na vaš katalog (ključna beseda):"
+
+#: control/guides/helpers/fck_get_cat.php:97
+#: control/guides/helpers/fck_get_cat.php:108
+msgid "If the link looks good, hit the OK button to insert the token into the pluslet."
+msgstr "Če je povezava v redu, kliknite gumb OK za vstavljanje žetona v pluslet."
+
+#: control/guides/helpers/fck_get_cat.php:106
+msgid "2. Your Catalog Link (Call Number):"
+msgstr "2. povezava na vaš katalog (signatura):"
+
+#. LinkChecker - PreverjanjePovezav ??
+#: control/guides/helpers/guide_bits.php:68
+msgid "LinkChecker Results for "
+msgstr "Preverjanje delovanja povezav - Zadetki za "
+
+#: control/guides/helpers/fck_get_assets.php:33
+msgid "<strong>Success.</strong>  Added file:"
+msgstr "<strong>Uspešno izvedeno.</strong>  Dodana datoteka:"
+
+#: control/guides/helpers/fck_get_assets.php:36
+msgid "There was a problem uploading your file."
+msgstr "Prišlo je do napake pri nalaganju datoteke."
+
+#: control/guides/helpers/fck_get_assets.php:36
+msgid "Please try again, or contact the administrator"
+msgstr "Poskusite znova ali pa se obrnite na administratorja."
+
+#: control/guides/helpers/fck_get_assets.php:50
+msgid "<strong>A. Upload a file</strong> to your asset folder"
+msgstr "<strong>A. Naloži datoteko</strong> v uporabniško mapo na serverju"
+
+#: control/guides/helpers/fck_get_assets.php:53
+msgid "Upload"
+msgstr "Naloži"
+
+#: control/guides/helpers/fck_get_assets.php:56
+msgid "<strong>B. Tick the item</strong> you want to insert into the pluslet"
+msgstr "<strong>B. Označite predmet</strong>, ki ga želite vstaviti v pluslet"
+
+#: control/guides/helpers/fck_get_assets.php:96
+#: control/guides/helpers/fck_get_assets.php:100
+msgid "C. Add Link Text</strong> for your document.  (If you leave it blank, it will be the file name.)"
+msgstr "C. Dodajte besedilo hiperpovezave</strong> za vaš dokument.  (Če pustite polje prazno, bo prikazano ime datoteke.)"
+
+#. A je to kaj z Delicious?
+#: control/guides/delish_url.php:19
+msgid "Generate Delicious Display Page.  Yum."
+msgstr "Ustvarite Delicious prikazno stran."
+
+#: control/guides/delish_url.php:21
+msgid "Use this tool to generate a page that display results from delicious."
+msgstr "Uporabite orodje za izdelavo strani, ki prikazuje rezultate iz Delicious."
+
+#: control/guides/delish_url.php:24
+msgid "Folder"
+msgstr "Mapa"
+
+#: control/guides/delish_url.php:25
+msgid "The delicious account name, e.g., thislibrary "
+msgstr "Delicious uporabniško ime, prim.: nasaknjiznica "
+
+#: control/guides/delish_url.php:27
+msgid "Tag"
+msgstr "Značka"
+
+#: control/guides/delish_url.php:28
+msgid "Any subfolders you want displayed, can be more than one comma-separated"
+msgstr "Vse mape, ki jih želite prikazati, so lahko ločene z več kot eno vejico."
+
+#: control/guides/delish_url.php:30
+msgid "Label"
+msgstr "Oznaka"
+
+#: control/guides/delish_url.php:31
+msgid "The title you want to appear at the top of your list"
+msgstr "Naslov, ki ga želite na vrhu seznama"
+
+#: control/guides/delish_url.php:34
+msgid "Notes"
+msgstr "Zapiski"
+
+#: control/guides/delish_url.php:36 control/includes/header.php:68
+#: control/includes/classes/sp_Guide.php:164
+#: control/includes/classes/sp_Pluslet_Feed.php:59
+#: control/includes/classes/sp_Talkback.php:163
+msgid "Yes"
+msgstr "Da"
+
+#: control/guides/delish_url.php:37 control/includes/header.php:69
+#: control/includes/classes/sp_Guide.php:168
+#: control/includes/classes/sp_Pluslet_Feed.php:60
+#: control/includes/classes/sp_Talkback.php:167
+msgid "No"
+msgstr "Ne"
+
+#: control/guides/delish_url.php:41
+msgid "Generate Delicious URL"
+msgstr "Ustvari Delicious URL"
+
+#: control/guides/delish_url.php:51
+msgid "This is a way to generate a URL that displays data from your delicious account. You can point users to a\r\n"
+"    page of results that looks like a regular page of your website.  Or your SubjectsPlus installation, anyway."
+msgstr "Na ta način lahko ustvarite URL, ki prikazuje podatke iz vašega Delicious računa. Uporabnike lahko usmerite na a\r stran z rezultati, ki izgleda enako kot vaše druge strani. Ali pa kot vaš"
+
+#: control/guides/delish_url.php:53
+msgid "The public delish feed page is located at sp/subjects/delish_feed.php ."
+msgstr "Javna stran Delicous je na sp/subjects/delish_feed.php"
+
+#: control/guides/index.php:15
+msgid "Edit Guide Metadata"
+msgstr "Urejanje metapodatkov vodiča"
+
+#: control/guides/index.php:16
+msgid "View Guide on Public Site"
+msgstr "Ogled vodiča ja javni strani"
+
+#: control/guides/index.php:17
+msgid "Check Guide Links"
+msgstr "Preveri linke v vodiču"
+
+#: control/guides/index.php:30
+msgid "Please check with the guide's owner before modifying"
+msgstr "Pred urejanjem vprašajte avtorja vodiča za dovoljenje"
+
+#: control/guides/index.php:35
+msgid "-- Choose Guide --"
+msgstr "-- Izberite vodič --"
+
+#: control/guides/index.php:72
+msgid "unpublished"
+msgstr "neobjavljen"
+
+#: control/guides/index.php:78
+msgid "You don't have any guides yet.  Why not create one?"
+msgstr "Nimate še nobenega vodiča. Zakaj ne bi enega ustvarili sedaj?"
+
+#: control/guides/index.php:82
+msgid "Edit Your Guides"
+msgstr "Urejajte svoje vodiče"
+
+#: control/guides/index.php:90
+msgid "All Guides"
+msgstr "Vsi vodiči"
+
+#: control/guides/index.php:98
+msgid "Create"
+msgstr "Ustvari"
+
+#: control/guides/index.php:101
+msgid "Make sure the guide doesn't already exist!"
+msgstr "Prepričajte se, da tak vodič še ne obstaja!"
+
+#: control/guides/index.php:102
+msgid "Create new guide"
+msgstr "UStvari nov vodič"
+
+#: control/guides/index.php:106
+msgid "Tips"
+msgstr "Nasveti"
+
+#: control/guides/index.php:111
+msgid "Need to delete a guide?  Use the gear icon, and use the Delete button."
+msgstr "Želite izbrisati vodič? Kliknite na ikono zobnika in uporabite gumb \"Izbriši\"."
+
+#: control/guides/guide.php:51
+msgid "You do not have permission to edit this guide.  Ask the guide's creator to add you as a co-editor."
+msgstr "Nimate dovoljenja za urejanje tega vodiča. Prosite avtorja vodiča, da vas doda kot sourednika"
+
+#: control/guides/guide.php:150
+msgid "Drag selection, then drop to right"
+msgstr "Potegnite želeno vsebino in jo spustite na eno od polj"
+
+#: control/guides/guide.php:151
+msgid "Editable Box"
+msgstr "Osnovni okvir za urejanje"
+
+#: control/guides/guide.php:152
+msgid "Heading"
+msgstr "Naslov"
+
+#: control/guides/guide.php:153
+msgid "Delicious/RSS/Flickr/Twitter"
+msgstr "RSS vir/Delicious/Twitter/Flicker"
+
+#: control/guides/guide.php:276
+msgid "New Box"
+msgstr "Nov okvir"
+
+#: control/guides/guide.php:296 control/guides/manage_items.php:137
+#: control/admin/faq_collections.php:102 control/admin/departments.php:132
+#: control/admin/sources.php:107
+msgid "SAVE CHANGES"
+msgstr "SHRANI SPREMEMBE"
+
+#: control/guides/guide.php:301
+msgid "Drop Left"
+msgstr "Spusti na levo"
+
+#: control/guides/guide.php:308
+msgid "Drop Right"
+msgstr "Spusti na desno"
+
+#: control/guides/manage_items.php:80
+msgid "-- Choose a Different Guide --"
+msgstr "-- Izberite drug vodič --"
+
+#: control/guides/manage_items.php:120
+msgid "There do not seem to be any resources associated with this guide.  To add new resources, go to the Records tab, select that resource, and then add your subject."
+msgstr "Kaže, da ni noben vir povezan s tem vodičem. Za dodajanje novih virov pojdite na zavihek Zapisi, izberite želeni vir in v njem dodajte vaš vodič."
+
+#: control/guides/manage_items.php:131
+#: control/includes/classes/sp_BuildNav.php:53
+msgid "Organize Resources"
+msgstr "Uredi vire"
+
+#: control/guides/manage_items.php:134
+msgid "Organize Resources for "
+msgstr "Uredi vire za␣"
+
+#: control/faq/browse_faq.php:23 subjects/faq.php:278
+msgid "Browse FAQs by Collection"
+msgstr "Brskajte po pogostih vprašanjih glede na zbirko"
+
+#: control/faq/browse_faq.php:25 control/faq/browse_faq.php:57
+msgid "If you wish to edit a FAQ, click the link."
+msgstr "Če želite urejati pogosto vprašanje, kliknite na povezavo"
+
+#: control/faq/browse_faq.php:55
+msgid "Browse FAQs by Subject Area"
+msgstr "Brskajte po pogostih vprašanjih glede na področje"
+
+#: control/faq/index.php:65
+msgid "No FAQs yet.  Why not dream one up?"
+msgstr "Nimate še pogostih vprašanj. Zakaj ne bi pripravili kakšnega?"
+
+#: control/faq/index.php:72
+msgid "FAQs visible"
+msgstr "Vidna pogosta vprašanja"
+
+#: control/faq/index.php:74 control/talkback/index.php:144
+msgid "See All"
+msgstr "Poglej vse"
+
+#: control/faq/index.php:83
+msgid "Create FAQ"
+msgstr "Ustvari pogosto vprašanje"
+
+#: control/faq/index.php:85
+msgid "CREATE FAQ"
+msgstr "USTVARI POGOSTO VPRAŠANJE"
+
+#: control/faq/index.php:87
+msgid "About FAQs"
+msgstr "O pogostih vprašanjih"
+
+#: control/faq/index.php:89 control/includes/classes/sp_FAQ.php:128
+msgid "Edit FAQ"
+msgstr "Uredi pogosto vprašanje"
+
+#: control/faq/index.php:90
+msgid "View FAQ on Public Site"
+msgstr "Oglejte si pogosto vprašanje na javni strani"
+
+#: control/faq/faq_bits.php:53 control/records/record_bits.php:98
+msgid "The following record is recommended for delete"
+msgstr "Ta zapis je priporočen za izbris"
+
+#: control/faq/faq_bits.php:57
+msgid "SubjectsPlus: FAQ Delete Recommendation"
+msgstr "SubjectsPlus: pogosto vprašanje predlagano za izbris"
+
+#: control/faq/faq_bits.php:62 control/records/record_bits.php:107
+msgid "Delete request sent to "
+msgstr "Izbris poslan v potrditev "
+
+#: control/index.php:33
+msgid "Hello %s"
+msgstr "Pozdravljeni, %s"
+
+#: control/index.php:37
+msgid "Reset Password"
+msgstr "Ponastavitev gesla"
+
+#: control/index.php:40
+msgid "Update Your Biographical Details"
+msgstr "Posodobite svoje osebne podatke"
+
+#: control/index.php:41
+msgid "Update Headshot"
+msgstr "Posodobite sliko"
+
+#: control/index.php:46 control/admin/index.php:58
+msgid "Recent Activity"
+msgstr "Nedavna dejavnost"
+
+#: control/index.php:48
+msgid "You have recently added or edited:"
+msgstr "Pred kratkim ste dodali ali urejali:"
+
+#: control/index.php:53
+msgid "Background Options"
+msgstr "Izbira ozadja"
+
+#: control/index.php:77
+msgid "Search Strings"
+msgstr "Iskalni ukazi"
+
+#: control/search.php:24
+msgid "<p>Please search for something with the box above.</p>"
+msgstr "<p>Prosimo nekaj poiščite v okvirju zgoraj.</p>"
+
+#: control/search.php:105
+msgid "Search Results"
+msgstr "Rezultati iskanja"
+
+#: control/includes/functions_legacy.php:50
+#: control/includes/functions_legacy.php:269
+msgid "required"
+msgstr "zahtevano"
+
+#: control/includes/functions_legacy.php:332
+msgid "Are you sure you wish to <strong>delete this item forever</strong>?"
+msgstr "Ste prepričani, da želite <strong>trajno izbrisati to enoto</strong>?"
+
+#: control/includes/functions_legacy.php:333
+#: control/includes/classes/Staff.php:275
+#: control/includes/classes/sp_Record.php:180
+#: control/includes/classes/sp_FAQ.php:168
+#: control/includes/classes/sp_Guide.php:209
+#: control/includes/classes/sp_Talkback.php:183
+msgid "Delete Forever!"
+msgstr "Trajno izbriši!"
+
+#: control/includes/functions_legacy.php:334
+msgid "Use your browser's back button if you have reconsidered."
+msgstr "Če ste si premislili uporabite gumb \"Nazaj\" v vašem internetnem brskalniku."
+
+#: control/includes/functions_legacy.php:444
+msgid "Thy Will Be Done:  Deleted"
+msgstr "Uspešno izbrisano"
+
+#: control/includes/functions_legacy.php:448
+msgid "Thwarted!  Your Delete failed!  Contact the administrator."
+msgstr "Zavrnjeno! Izbris ni uspel. Obrnite se na administratorja."
+
+#: control/includes/functions_legacy.php:452
+msgid "Thy Will Be Done:  Updated"
+msgstr "Uspešno posodobljeno"
+
+#: control/includes/functions_legacy.php:456
+msgid "Thwarted!  Your Update failed! Contact the administrator"
+msgstr "Zavrnjeno! Posodobitev ni bila shranjena. Obrnite se na administratorja."
+
+#: control/includes/functions_legacy.php:460
+msgid "Thy Will Be Done:  Added"
+msgstr "Uspešno dodano"
+
+#: control/includes/functions_legacy.php:464
+msgid "Thwarted!  Your Insert failed! Contact the administrator"
+msgstr "Zavrnjeno! Vstavitev ni bila izvedena. Obrnite se na administratorja."
+
+#: control/includes/functions_legacy.php:468
+msgid "You must select an audiofile and/or a question!"
+msgstr "Izbrati morate zvočno datoteko in/ali vprašanje!"
+
+#: control/includes/header.php:66
+msgid "Required"
+msgstr "Zahtevano"
+
+#: control/includes/header.php:67
+msgid "Are you sure?"
+msgstr "Ste prepričani?"
+
+#: control/includes/classes/sp_Pluslet_4.php:21
+msgid "FAQs"
+msgstr "Pogosta vprašanja"
+
+#: control/includes/classes/sp_Pluslet_4.php:49
+msgid "There are no FAQs linked for this guide"
+msgstr "Nobeno pogosto vprašanje ni povezano s tem vodičem"
+
+#: control/includes/classes/StaffDisplay.php:95
+msgid "Librarian"
+msgstr "Knjižničar"
+
+#: control/includes/classes/StaffDisplay.php:96
+#, fuzzy
+msgid "Subject Responsibilities"
+msgstr "Odgovorni za Predmet"
+
+#: control/includes/classes/StaffDisplay.php:175
+msgid "Name"
+msgstr "Ime"
+
+#: control/includes/classes/StaffDisplay.php:176
+#: control/includes/classes/Staff.php:193
+msgid "Title"
+msgstr "Naziv"
+
+#: control/includes/classes/StaffDisplay.php:177
+msgid "Phone"
+msgstr "Telefon"
+
+#: control/includes/classes/StaffDisplay.php:178
+msgid "Email"
+msgstr "E-pošta"
+
+#: control/includes/classes/Staff.php:163
+msgid "Click to update photo"
+msgstr "Kliknite za dodajanje fotografije"
+
+#: control/includes/classes/Staff.php:165
+msgid "You can change the photo after saving."
+msgstr "Po shranjevanju lahko sliko spremenite."
+
+#: control/includes/classes/Staff.php:182
+msgid "Staff Member"
+msgstr "Član osebja"
+
+#: control/includes/classes/Staff.php:185
+msgid "First Name "
+msgstr "Ime "
+
+#: control/includes/classes/Staff.php:189
+msgid "Last Name "
+msgstr "Priimek "
+
+#: control/includes/classes/Staff.php:197
+msgid "Department"
+msgstr "Oddelek"
+
+#: control/includes/classes/Staff.php:201
+msgid "Show First in Dept List?"
+msgstr "Prikaži kot prvo enoto na oddelčnem seznamu?"
+
+#: control/includes/classes/Staff.php:205 control/admin/departments.php:153
+msgid "Telephone"
+msgstr "Telefon"
+
+#: control/includes/classes/Staff.php:208
+msgid "Email (This is the username for logging in to SubjectsPlus)"
+msgstr "E-pošta (po je uporabniško ime pri prijavi v SubjectsPlus)"
+
+#: control/includes/classes/Staff.php:212
+msgid "User Type"
+msgstr "Vrsta uporabnika"
+
+#: control/includes/classes/Staff.php:216
+msgid "Active User?"
+msgstr "Aktivni uporabnik"
+
+#: control/includes/classes/Staff.php:221
+msgid "Photo"
+msgstr "Slika"
+
+#: control/includes/classes/Staff.php:225
+msgid "Biographical Details"
+msgstr "Osebni podatki"
+
+#: control/includes/classes/Staff.php:227 control/includes/set_bio.php:71
+msgid "Please only include professional details."
+msgstr "Navedite le poklicne podatke."
+
+#: control/includes/classes/Staff.php:237
+msgid "Permissions"
+msgstr "Dovoljenja"
+
+#: control/includes/classes/Staff.php:262
+msgid "The password is hidden.  Reset?"
+msgstr "Geslo je prikrito. Ga želite ponastaviti?"
+
+#: control/includes/classes/Staff.php:270
+msgid "Save"
+msgstr "Shrani"
+
+#: control/includes/classes/Staff.php:272
+#: control/includes/classes/sp_Record.php:176
+msgid "Save Record Now"
+msgstr "Shrani zapis"
+
+#: control/includes/classes/Staff.php:278
+#: control/includes/classes/sp_Record.php:186
+#: control/includes/classes/sp_FAQ.php:173
+#: control/includes/classes/sp_Guide.php:211
+#: control/includes/classes/sp_Talkback.php:186
+msgid "Last modified: "
+msgstr "Zadnja posodobitev: "
+
+#: control/includes/classes/Staff.php:287
+msgid "Enter the new password.  Make it a good one!"
+msgstr "Vnesite novo geslo. Poskrbite, da bo varno!"
+
+#: control/includes/classes/Staff.php:322
+msgid "Thy will be done.  Note that any subject guides associated with this user are now orphans."
+msgstr "Uporabnik bo izbrisan. Vsi vodiči povezani s tem uporabnikom bodo sedaj osiroteli."
+
+#: control/includes/classes/Staff.php:326
+#: control/includes/classes/sp_Talkback.php:232
+msgid "There was a problem with your delete."
+msgstr "Pri brisanju je prišlo do težav."
+
+#: control/includes/classes/Staff.php:388
+msgid "Thy Will Be Done.  Added."
+msgstr "Uspešno dodano"
+
+#: control/includes/classes/Staff.php:429
+#: control/includes/classes/sp_FAQ.php:440
+#: control/includes/classes/sp_Talkback.php:304
+#: control/admin/faq_collections.php:38 control/admin/faq_collections.php:76
+msgid "Thy Will Be Done.  Updated."
+msgstr "Uspešno posodobljeno"
+
+#. Kontaktna oseba se mi zdi najbolj splošno. MF uporablja npr. Skrbnik vodiča...
+#: control/includes/classes/sp_Pluslet_3.php:23
+msgid "Subject Specialist"
+msgstr "Kontaktna oseba"
+
+#: control/includes/classes/sp_Record.php:143
+msgid "Record Title"
+msgstr "Ime zapisa"
+
+#: control/includes/classes/sp_Record.php:146
+msgid "Description"
+msgstr "Opis"
+
+#: control/includes/classes/sp_Record.php:163 control/records/index.php:127
+msgid "Location"
+msgstr "Lokacija"
+
+#: control/includes/classes/sp_Record.php:182
+#: control/includes/classes/sp_FAQ.php:170
+msgid "Recommend Delete"
+msgstr "Priporočite izbris"
+
+#. Bolj razumljivo se mi zdi samo vrsta vira, kot npr. privzeta vrsta vira.
+#: control/includes/classes/sp_Record.php:202
+msgid "Default Source Type"
+msgstr "Vrsta vira"
+
+#: control/includes/classes/sp_Record.php:226
+msgid "Subjects"
+msgstr "Vodiči"
+
+#: control/includes/classes/sp_Record.php:228
+msgid "-- Select --"
+msgstr "-- Izberite --"
+
+#. V obrazcu za dodajanje zapisa (records) se to polje nanaša na URL zapis, piše pa location. Bolje se mi zdi povezava v SLO.
+#: control/includes/classes/sp_Record.php:337
+msgid "Location (URL)"
+msgstr "Povezava (URL)"
+
+#: control/includes/classes/sp_Record.php:341
+msgid "Call Number"
+msgstr "Signatura"
+
+#: control/includes/classes/sp_Record.php:343
+msgid "Format"
+msgstr "Format"
+
+#: control/includes/classes/sp_Record.php:345
+msgid "Access Restrictions"
+msgstr "Omejitve dostopa"
+
+#: control/includes/classes/sp_Record.php:353
+msgid "A-Z DB List"
+msgstr "A-Z seznam virov"
+
+#: control/includes/classes/sp_Record.php:362
+msgid "Display Note"
+msgstr "Opombe vira"
+
+#: control/includes/classes/sp_Record.php:382
+msgid "X Delete this location"
+msgstr "X Izbriši to lokacijo"
+
+#: control/includes/classes/sp_Record.php:416
+msgid "remove subject"
+msgstr "odstrani povezavo z vodičem"
+
+#: control/includes/classes/sp_Record.php:417
+msgid "change source type"
+msgstr "spremeni vrsto vira"
+
+#. Gre za opis, ki se pojavlja samo na izbranem vodiču (in zamenja osnovnega)
+#: control/includes/classes/sp_Record.php:418
+msgid "add description override"
+msgstr "dodaj opis, s katerim nadomestite osnovnega"
+
+#: control/includes/classes/sp_Record.php:449
+#: control/includes/classes/sp_FAQ.php:307
+#: control/includes/classes/sp_Guide.php:294
+msgid "There was a problem with your delete (stage 1 of 2)."
+msgstr "Pri brisanju je prišlo do težav (korak 1 od 2)"
+
+#. Tega v SP nisem še nikdar videl...nisem prepričan, da se res nanaša na "žaljive" vsebine, zapise...
+#: control/includes/classes/sp_Record.php:455
+msgid "Thy will be done.  Offending record deleted."
+msgstr "Izbran zapis uspešno izbrisan."
+
+#: control/includes/classes/sp_Record.php:467
+#: control/includes/classes/sp_Guide.php:316
+msgid "There was a problem with your delete (stage 2 of 2)."
+msgstr "Pri brisanju je prišlo do težav (korak 2 od 2)"
+
+#: control/includes/classes/sp_Record.php:515
+msgid "Thy Will Be Done.  Record added."
+msgstr "Zapis uspešno dodan"
+
+#: control/includes/classes/sp_Record.php:580
+msgid "Thy Will Be Done.  Record updated."
+msgstr "Zapis uspešno posodobljen"
+
+#: control/includes/classes/sp_CompleteMe.php:52
+msgid "Go"
+msgstr "Pojdi"
+
+#: control/includes/classes/sp_FAQ.php:69
+msgid "There is no active record with that ID.  Weird.  Why not make one?"
+msgstr "Aktiven zapis s tem ID ne obstaja. Zakaj ga ne bi ustvarili?"
+
+#: control/includes/classes/sp_FAQ.php:137
+#: control/includes/classes/sp_Talkback.php:119
+msgid "Question"
+msgstr "Vprašanje"
+
+#: control/includes/classes/sp_FAQ.php:140
+#: control/includes/classes/sp_Talkback.php:125
+msgid "Answer"
+msgstr "Odgovor"
+
+#: control/includes/classes/sp_FAQ.php:155
+msgid "Keywords (comma separated please)"
+msgstr "Ključne besede (ločene naj bodo z vejicami)"
+
+#: control/includes/classes/sp_FAQ.php:163
+#: control/includes/classes/sp_Guide.php:202
+#: control/includes/classes/sp_Talkback.php:178
+msgid "Save Now"
+msgstr "Shrani zdaj"
+
+#: control/includes/classes/sp_FAQ.php:228
+msgid "Relevant Subjects"
+msgstr "Relevantni vodiči"
+
+#: control/includes/classes/sp_FAQ.php:235
+msgid "Relevant Collections"
+msgstr "Relevantne zbirke"
+
+#: control/includes/classes/sp_FAQ.php:314
+msgid "Thy will be done.  Offending FAQ deleted.  Close window to continue."
+msgstr "Izbran zapis uspešno izbrisan. Za nadaljevanje zaprite okno."
+
+#: control/includes/classes/sp_FAQ.php:316
+msgid "Thy will be done.  Offending FAQ deleted."
+msgstr "Izbran zapis uspešno izbrisan."
+
+#: control/includes/classes/sp_FAQ.php:329
+msgid "There was a problem with your delete, stage 2 of 2."
+msgstr "Pri brisanju je prišlo do težav (korak 2 od 2)"
+
+#: control/includes/classes/sp_FAQ.php:375
+#: control/includes/classes/sp_Guide.php:373 control/admin/admin_bits.php:48
+msgid "Thy Will Be Done."
+msgstr "Uspešno izvedeno."
+
+#. Nanaša se na okvirček, ki ga potegnemo v vodič. V njem so vsi zapisi virov, ki so povezani s tem vodičem.
+#: control/includes/classes/sp_Pluslet_1.php:30
+msgid "All Items by Source"
+msgstr "Informacijski viri"
+
+#: control/includes/classes/sp_Pluslet_1.php:143
+#: control/includes/classes/sp_Pluslet_1.php:152
+msgid "Print Location:"
+msgstr "Postavitev:"
+
+#: control/includes/classes/sp_Pluslet_1.php:219
+msgid "Note:  Not all sources displayed."
+msgstr "Opomba: vsi viri niso prikazani."
+
+#: control/includes/classes/sp_Pluslet_1.php:227
+msgid "See all"
+msgstr "Poglej vse"
+
+#. šklatla?
+#: control/includes/classes/sp_Pluslet.php:49
+msgid "There is no box with that ID.  Why not create a new one?"
+msgstr "Okvir s tem ID ne obstaja. Zakaj ne bi ustvarili novega?"
+
+#: control/includes/classes/sp_Pluslet.php:70
+msgid "Help"
+msgstr "Pomoč"
+
+#: control/includes/classes/sp_Pluslet.php:71
+msgid "toggle me"
+msgstr "izberi možnost"
+
+#: control/includes/classes/sp_Pluslet.php:77
+#: control/includes/classes/sp_Pluslet.php:79
+msgid "Edit"
+msgstr "Urejaj"
+
+#: control/includes/classes/sp_Pluslet.php:83
+msgid "Remove item from this guide"
+msgstr "Odstrani iz tega vodiča"
+
+#: control/includes/classes/sp_DbHandler.php:45
+msgid "Sorry, there are no results at this time."
+msgstr "Oprostite, trenutno ni nobenega zadetka."
+
+#: control/includes/classes/sp_DbHandler.php:89
+msgid "Note:"
+msgstr "Opomba:"
+
+#: control/includes/classes/sp_DbHandler.php:95
+msgid "more information"
+msgstr "več informacij"
+
+#: control/includes/classes/sp_Pluslet_5.php:23
+msgid "Book Search"
+msgstr "Iskanje knjig"
+
+#: control/includes/classes/sp_Guide.php:74
+msgid "There is no active record with that ID.  Why not create a new one?"
+msgstr "Zapis s tem ID ne obstaja. Zakaj ne bi ustvarili novega?"
+
+#: control/includes/classes/sp_Guide.php:125
+msgid "Edit Existing Guide Metadata"
+msgstr "Urejajte obstoječe metapodatke vodiča"
+
+#: control/includes/classes/sp_Guide.php:127
+msgid "Create New Guide"
+msgstr "Ustvari nov vodič"
+
+#: control/includes/classes/sp_Guide.php:136
+msgid "Guide"
+msgstr "Vodič"
+
+#: control/includes/classes/sp_Guide.php:139
+msgid "Short Form"
+msgstr "Kratka oblika"
+
+#: control/includes/classes/sp_Guide.php:142
+msgid "Short label for subject--minus spaces, ampersands, etc."
+msgstr "Kratka oznaka predmeta--brez presledkov ali posebnih znakov."
+
+#: control/includes/classes/sp_Guide.php:145
+msgid "Type of Guide"
+msgstr "Vrsta Vodiča"
+
+#: control/includes/classes/sp_Guide.php:159
+msgid "Publish Guide (publicly accessible)?"
+msgstr "Objavi vodič? (Postal bo javno dostopen)"
+
+#: control/includes/classes/sp_Guide.php:182
+msgid "Main column width:"
+msgstr "Širina glavnega stolpca:"
+
+#: control/includes/classes/sp_Guide.php:243
+msgid "Staff"
+msgstr "Zaposleni"
+
+#: control/includes/classes/sp_Guide.php:263 control/admin/admin_bits.php:238
+msgid "delete"
+msgstr "izbriši"
+
+#: control/includes/classes/sp_Guide.php:277
+msgid "You do not have permission to delete this guide."
+msgstr "Nimate dovoljenja za izbris tega vodiča."
+
+#. okvir?
+#: control/includes/classes/sp_Guide.php:301
+msgid "Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue."
+msgstr "Opravljeno. Izbran vodič (in povezani okvirji) zbrisan. Za nadaljevanje zaprite okno."
+
+#: control/includes/classes/sp_Guide.php:303
+msgid "Thy will be done.  Offending Guide (and associated boxes) deleted."
+msgstr "Opravljeno. Izbran vodič (in povezani okvirji) zbrisan."
+
+#: control/includes/classes/sp_Guide.php:327
+#: control/includes/classes/sp_Guide.php:382
+msgid "There is already a guide with this SHORTFORM.  The shortform must be unique."
+msgstr "Vodič s to KRATKO OBLIKO že obstaja. Kratka oblika mora biti unikatna."
+
+#: control/includes/classes/sp_Guide.php:373
+msgid "View Your Guide"
+msgstr "Oglejte si vaš Vodič"
+
+#: control/includes/classes/sp_Guide.php:438
+msgid "Thy Will Be Done.  Guide updated."
+msgstr "Opravljeno. Vodič osvežen."
+
+#: control/includes/classes/sp_Pluslet_Feed.php:61
+msgid "Display"
+msgstr "Prikaži"
+
+#: control/includes/classes/sp_Pluslet_Feed.php:62
+msgid "items<br />Show descriptions?"
+msgstr "vsebine<br />Prikaži opise?"
+
+#: control/includes/classes/sp_Pluslet_Feed.php:75
+msgid "Enter RSS feed or username/tag (for delicious)"
+msgstr "Vnesi RSS naslov ali uporabniško ime/značko (za delicious)"
+
+#: control/includes/classes/sp_Pluslet_Feed.php:108
+msgid "Loading ..."
+msgstr "Nalagam..."
+
+#. Outline - izgled?
+#: control/includes/classes/sp_Pluslet_6.php:21
+msgid "Guide Outline"
+msgstr "Izgled Vodiča"
+
+#: control/includes/classes/sp_Pluslet_6.php:68
+msgid "There are no contents for this guide yet!"
+msgstr "Ni še nobenih vsebin za ta vodič!"
+
+#: control/includes/classes/sp_Pluslet_2.php:21 subjects/databases.php:99
+msgid "Key to Icons"
+msgstr "Ključ za ikone"
+
+#: control/includes/classes/sp_Talkback.php:67
+msgid "There is no active record with that ID.  Weird."
+msgstr "Noben aktivni zapis s tem ID ne obstaja. Čudno."
+
+#. TalkBack => Pogovor?
+#: control/includes/classes/sp_Talkback.php:111
+msgid "Edit TalkBack"
+msgstr "Urejaj pogovor"
+
+#: control/includes/classes/sp_Talkback.php:122
+msgid "Question By"
+msgstr "Vprašal"
+
+#: control/includes/classes/sp_Talkback.php:151
+msgid "Answered By"
+msgstr "Odgovoril"
+
+#: control/includes/classes/sp_Talkback.php:158
+msgid "Live?"
+msgstr "Aktivno?"
+
+#: control/includes/classes/sp_Talkback.php:217
+msgid "Thy will be done.  Offending Talkback deleted.  Close window to continue."
+msgstr "Izbran pogovor uspešno izbrisan. Za nadaljevanje zaprite okno."
+
+#: control/includes/classes/sp_Talkback.php:219
+msgid "Thy will be done.  Offending Talkback deleted."
+msgstr "Izbran pogovor uspešno izbrisan."
+
+#: control/includes/classes/sp_MailMessage.php:25
+msgid "Library_No_Reply"
+msgstr "Knjižnica_Ne_odgovarjaj"
+
+#: control/includes/classes/sp_MailMessage.php:62
+msgid "This is an automatically generated email. Please do not respond."
+msgstr "To je avtomatsko ustvarjena pošta. Prosimo, ne odgovarjajte na ta naslov."
+
+#: control/includes/classes/sp_MailMessage.php:62
+msgid "Email sent: "
+msgstr "E-pošta poslana: "
+
+#: control/includes/classes/sp_BuildNav.php:33
+msgid "Records"
+msgstr "Zapisi"
+
+#: control/includes/classes/sp_BuildNav.php:35 control/records/index.php:145
+msgid "New Record"
+msgstr "Nov zapis"
+
+#: control/includes/classes/sp_BuildNav.php:36
+msgid "Browse Items"
+msgstr "Brskaj"
+
+#: control/includes/classes/sp_BuildNav.php:48 control/admin/index.php:34
+msgid "Guides"
+msgstr "Vodiči"
+
+#: control/includes/classes/sp_BuildNav.php:50
+msgid "New Guide"
+msgstr "Nov vodič"
+
+#: control/includes/classes/sp_BuildNav.php:51
+msgid "Browse Guides"
+msgstr "Brskaj po vodičih"
+
+#: control/includes/classes/sp_BuildNav.php:52
+msgid "Delicious Builder"
+msgstr "Izdelava Delicious"
+
+#: control/includes/classes/sp_BuildNav.php:67
+msgid "New FAQ"
+msgstr "Nova pogosta vprašanja"
+
+#: control/includes/classes/sp_BuildNav.php:92
+msgid "Admin"
+msgstr "Upravljalec"
+
+#: control/includes/classes/sp_BuildNav.php:94 control/admin/index.php:29
+msgid "Add New User"
+msgstr "Dodaj novega uporabnika"
+
+#: control/includes/classes/sp_BuildNav.php:95
+msgid "Manage Users"
+msgstr "Upravljaj z uporabniki"
+
+#: control/includes/classes/sp_BuildNav.php:96 control/admin/index.php:37
+msgid "Manage Guides"
+msgstr "Upravljaj vodiče"
+
+#: control/includes/classes/sp_BuildNav.php:97 control/admin/index.php:41
+msgid "Departments"
+msgstr "Oddelki"
+
+#: control/includes/classes/sp_BuildNav.php:98
+msgid "Sources"
+msgstr "Viri"
+
+#: control/includes/classes/sp_BuildNav.php:99
+msgid "FAQ Collections"
+msgstr "Zbirka pogostih vprašanj"
+
+#: control/includes/classes/sp_BuildNav.php:100
+msgid "Config Site"
+msgstr "Upravljanje strani"
+
+#: control/includes/classes/sp_BuildNav.php:114
+msgid "Search records"
+msgstr "Išči zapise"
+
+#: control/includes/classes/sp_BuildNav.php:118
+msgid "Search guides"
+msgstr "Išči vodiče"
+
+#: control/includes/classes/sp_BuildNav.php:122
+msgid "Search faqs"
+msgstr "Išči pogosta vprašanja"
+
+#: control/includes/classes/sp_BuildNav.php:126
+msgid "Search talkback"
+msgstr "Išči pogovor"
+
+#: control/includes/classes/sp_BuildNav.php:130
+msgid "Search users"
+msgstr "Išči uporabnike"
+
+#: control/includes/classes/sp_BuildNav.php:134
+msgid "Search all"
+msgstr "Išči vse"
+
+#: control/includes/classes/sp_BuildNav.php:148
+msgid "Hi"
+msgstr "Pozdravljeni"
+
+#: control/includes/classes/sp_BuildNav.php:152
+msgid "My options"
+msgstr "Moje izbire"
+
+#: control/includes/classes/sp_BuildNav.php:153
+msgid "{Logout}"
+msgstr "{Odjava}"
+
+#: control/includes/config_bits.php:35
+msgid "Background Updated!"
+msgstr "Ozadje osveženo!"
+
+#: control/includes/functions.php:238
+msgid "Invalid file type: not on whitelist of ok file types"
+msgstr "Neveljavna vrsta dototeke: ni na seznamu dovoljenih vrst"
+
+#: control/includes/functions.php:382
+msgid "Last modification date unknown."
+msgstr "Datum zadnje spremembe ni znan."
+
+#: control/includes/functions.php:431
+msgid "Someone Has Blundered!"
+msgstr "Nekdo je zamočil!"
+
+#: control/includes/functions.php:433
+msgid "(But probably not you.)"
+msgstr "(Verjetno ne vi.)"
+
+#: control/includes/functions.php:556
+msgid "Restricted Resource"
+msgstr "Dostop za člane knjižnice"
+
+#: control/includes/functions.php:558
+msgid "Restricted resource"
+msgstr "Dostop za člane knjižnice"
+
+#: control/includes/functions.php:562
+msgid "Unrestricted Resource"
+msgstr "Dostop brez omejitev"
+
+#: control/includes/functions.php:564
+msgid "Unrestricted resource"
+msgstr "Dostop brez omejitev"
+
+#: control/includes/functions.php:568
+msgid "Some full text available"
+msgstr "Vsebuje tudi polna besedila"
+
+#: control/includes/functions.php:570 subjects/databases.php:73
+msgid "Some full text"
+msgstr "Vsebuje tudi polna besedila"
+
+#: control/includes/functions.php:576
+msgid "OpenURL enabled"
+msgstr "Podpira OpenURL"
+
+#: control/includes/functions.php:580
+msgid "Resource contains images"
+msgstr "Vir vsebuje slike"
+
+#: control/includes/functions.php:582 control/includes/functions.php:814
+#: subjects/databases.php:74
+msgid "Images"
+msgstr "Slike"
+
+#: control/includes/functions.php:586
+msgid "Resource contains video"
+msgstr "Vir vsebuje video"
+
+#: control/includes/functions.php:588 subjects/databases.php:75
+msgid "Video files"
+msgstr "Video datoteke"
+
+#: control/includes/functions.php:592
+msgid "Resource contains audio"
+msgstr "Vir vsebuje zvok"
+
+#: control/includes/functions.php:594 subjects/databases.php:76
+msgid "Audio files"
+msgstr "Zvočne datoteke"
+
+#: control/includes/functions.php:647
+msgid "Research Guides"
+msgstr "Raziskovalni vodiči"
+
+#: control/includes/functions.php:651
+msgid "FAQ"
+msgstr "Pogosta vprašanja"
+
+#: control/includes/functions.php:655
+msgid "Talk Back"
+msgstr "Pogovor"
+
+#: control/includes/functions.php:661
+msgid "Research Guide created"
+msgstr "Raziskovalni vodič ustvarjen"
+
+#: control/includes/functions.php:664
+msgid "Research Guide metadata"
+msgstr "Metapodatki raziskovalnega vodiča"
+
+#: control/includes/functions.php:667
+msgid "Research Guide deleted"
+msgstr "Raziskovalni vodič izbrisan"
+
+#: control/includes/functions.php:674
+msgid "Record"
+msgstr "Zapis"
+
+#: control/includes/functions.php:678
+msgid "Staff Details updated."
+msgstr "Podatki o članu osebja posodobljeni."
+
+#: control/includes/functions.php:683
+msgid "New User Added"
+msgstr "Dodan je nov uporabnik."
+
+#: control/includes/functions.php:687
+msgid "User Information updated"
+msgstr "Podatki o uporabniku so posodobljeni."
+
+#: control/includes/functions.php:691
+msgid "User deleted"
+msgstr "Uporabnik izbrisan"
+
+#: control/includes/functions.php:814
+msgid "Databases with Images"
+msgstr "Podatkovne zbirke s slikami"
+
+#: control/includes/functions.php:815
+msgid "Databases with Audio"
+msgstr "Podatkovne zbirke z zvočnimi datotekami"
+
+#: control/includes/functions.php:815
+msgid "Audio"
+msgstr "Zvok"
+
+#: control/includes/functions.php:816
+msgid "Databases with Video"
+msgstr "Podatkovne zbirke z videi"
+
+#: control/includes/functions.php:816
+msgid "Video"
+msgstr "Video"
+
+#: control/includes/set_bio.php:34 control/includes/set_password.php:34
+#: control/includes/set_picture.php:33
+msgid "You are not authorized to view this."
+msgstr "Niste pooblaščeni za ogled tega."
+
+#: control/includes/set_bio.php:41 control/includes/set_password.php:41
+#: control/includes/set_picture.php:40
+msgid "Perhaps you have come here by a funny path?"
+msgstr "Le kako ste se znašli tukaj?"
+
+#: control/includes/set_bio.php:55
+msgid "Bio updated.  Close window to continue."
+msgstr "Osebni podatki posodobljeni. Zaprite okno za nadaljevanje."
+
+#: control/includes/set_bio.php:57 control/includes/set_password.php:60
+msgid "There was a problem.  Contact the admin."
+msgstr "Prišlo je do težav. Obrnite se na skrbnika."
+
+#: control/includes/set_bio.php:67
+msgid "Update Biography for "
+msgstr "Posodobi osebne podatke za "
+
+#: control/includes/set_bio.php:78
+msgid "Update Bio"
+msgstr "Posodobi osebne podatke"
+
+#: control/includes/linkchecker.php:29
+msgid "The link report can take a few minutes to run, depending on how many links you have on the page.  So be patient."
+msgstr "Izdelava poročila o delovanju linkov lahko vzame nekaj minut, odvisno koliko linkov imate v vodiču. Bodite potrpežljivi."
+
+#: control/includes/linkchecker.php:32
+msgid "Run Linkchecker Now"
+msgstr "Začni s preverjanjem delovanja povezav"
+
+#: control/includes/linkchecker.php:37 subjects/delish_feed.php:37
+msgid "Results"
+msgstr "Rezultati"
+
+#: control/includes/linkchecker.php:69
+msgid "Wow, it appears that all your links are okay.  Good work!"
+msgstr "Kaže, da vsi vaši linki delujejo!"
+
+#: control/includes/linkchecker.php:72
+msgid "Would you like to mail this report to someone?"
+msgstr "Želite poročilo komu poslati?"
+
+#: control/includes/linkchecker.php:73
+msgid "Send report to: "
+msgstr "Prejemnik poročila: "
+
+#: control/includes/linkchecker.php:74
+msgid "Send report to All Guide Owners"
+msgstr "Pošlji poročilo vsem avtorjem vodičev"
+
+#: control/includes/linkchecker.php:84
+msgid "Link Report for "
+msgstr "Poročilo o delovanju linkov za "
+
+#: control/includes/set_password.php:57
+msgid "Password updated.  Close this box to continue."
+msgstr "Geslo je spremenjeno. Za nadaljevanje zaprite okno."
+
+#: control/includes/set_password.php:63
+msgid "You cannot leave the password box blank.  Close this window if you don't want to change the password."
+msgstr "Polje za geslo ne sme biti prazno.  Zaprite okno, če ne želite spremeniti gesla."
+
+#: control/includes/set_password.php:68
+msgid "Update Password for "
+msgstr "Posodobi geslo za "
+
+#: control/includes/set_picture.php:63
+msgid "Current Picture . . . boooring."
+msgstr "Trenutna slika . . ."
+
+#: control/includes/set_picture.php:69
+msgid "Upload the new you.  Once you click upload, the current image will be replaced.  <strong>Note:</strong>  Your image will be scaled to <strong>70px wide</strong>.  Using a square image is best."
+msgstr "Naložite svojo novo sliko.  Po kliku na Naloži bo trenutna slika zamenjana.  <strong>Opomba:</strong>  Vaša slika bo spremenjena <strong> na 70pixlov širine</strong>.  Kvadratne slike so najboljše."
+
+#: control/includes/set_picture.php:135
+msgid "Update Picture for "
+msgstr "Posodobi sliko za "
+
+#: control/records/index.php:22
+msgid "Please select a letter or tag to browse."
+msgstr "Za brskanje izberite začetnico ali oznako."
+
+#: control/records/index.php:148
+msgid "Make sure the item doesn't already exist!"
+msgstr "Prepričajte se, da zapis še ne obstaja."
+
+#: control/records/index.php:149
+msgid "Create new item"
+msgstr "Ustvari nov "
+
+#: control/records/record.php:64
+msgid "You must have a title, location, and subject.  Please go back and fix these omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "Imeti morate naslov, lokacijo in vsebino. Prosimo, pojdite nazaj in dopolnite, kar manjka. In vključite JavaScript!"
+
+#: control/records/record.php:77
+msgid "There is already a record with this title: "
+msgstr "Zapis s tem naslovom že obstaja: "
+
+#: control/records/record.php:77
+msgid "Maybe do a search and make sure it doesn't already exist?"
+msgstr "Morda lahko izvedete iskanje, da se prepričate, da še ne obstaja."
+
+#: control/records/record_bits.php:53
+msgid "Source Override"
+msgstr "Vir, s katerim nadomestite osnovnega"
+
+#: control/records/record_bits.php:53
+msgid "add source override"
+msgstr "dodaj vir, s katerim nadomestite osnovnega"
+
+#: control/records/record_bits.php:53
+msgid "never mind"
+msgstr "Ni važno"
+
+#: control/records/record_bits.php:59
+msgid "Location (Enter URL)"
+msgstr "URL"
+
+#: control/records/record_bits.php:62
+msgid "Location (Enter Call Number)"
+msgstr "Signatura"
+
+#: control/records/record_bits.php:65
+msgid "Location (Enter Persistent Catalog URL--include http://)"
+msgstr "Trajna URL povezava na katalog"
+
+#: control/records/record_bits.php:88
+msgid "This URL looks OK to me"
+msgstr "URL izgleda v redu"
+
+#: control/records/record_bits.php:91
+msgid "This URL looks dodgy; better check it"
+msgstr "Ta URL izgleda sumljiv"
+
+#: control/records/record_bits.php:102
+msgid "SubjectsPlus: Record Delete Recommendation"
+msgstr "SubjectsPlus: Priporočilo za izbris zapisa"
+
+#: control/talkback/index.php:55 control/talkback/index.php:94
+msgid "Anonymous"
+msgstr "Anonimno"
+
+#. Note to myself: poenoti
+#: control/talkback/index.php:72 control/talkback/index.php:124
+#: control/talkback/index.php:125
+msgid "Hooray, no unanswered TalkBacks."
+msgstr "Juhej, ni neobravnavanih pogovorov."
+
+#: control/talkback/index.php:104
+msgid "--"
+msgstr "--"
+
+#: control/talkback/index.php:133
+msgid "Unanswered TalkBacks"
+msgstr "Neobravnavani pogovori"
+
+#: control/talkback/index.php:140
+msgid "Answered TalkBacks"
+msgstr "Obravnavani pogovori"
+
+#: control/talkback/index.php:142
+msgid "TalkBacks visible"
+msgstr "Vidni pogovori"
+
+#: control/talkback/index.php:146
+msgid "See 10 Most Recent"
+msgstr "Zadnjih 10"
+
+#: control/talkback/index.php:155
+msgid "About TalkBack"
+msgstr "O pogovorih"
+
+#: control/talkback/index.php:157
+msgid "TalkBack questions come via the web form on the public TalkBack page. An email should be sent to the admin when a new one arrives, and they may be answered here."
+msgstr "V pogovore se stekajo vprašanja preko obrazca na javni strani pogovorov. Administrator bi moral prejeti e-pošto vedno, ko kdo začne nov pogovor. Na pogovore se odgovarja tukaj."
+
+#: control/talkback/index.php:160
+msgid "TalkBack Public Page"
+msgstr "Javna stran pogovorov"
+
+#: control/admin/faq_collections.php:40
+msgid "Thwarted!  Something has gone wrong with the insert.  Contact the admin."
+msgstr "Zavrnjeno! Prišlo je do napake pri vstavljanju v tabelo. Obrnite se na administratorja."
+
+#: control/admin/faq_collections.php:78
+msgid "Thwarted!  Something has gone wrong with the update.  Contact the admin."
+msgstr "Zavrnjeno! Prišlo je do napake pri posodabljanju. Obrnite se na administratorja."
+
+#: control/admin/faq_collections.php:108
+msgid "Edit label or delete collection."
+msgstr "Urejaj oznake ali izbriši zbirko"
+
+#: control/admin/faq_collections.php:114
+msgid "Add Collection"
+msgstr "Dodaj zbirko"
+
+#: control/admin/faq_collections.php:117
+msgid "Collection Name"
+msgstr "Ime zbirke"
+
+#: control/admin/faq_collections.php:120
+msgid "Add New Collection"
+msgstr "Dodaj novo zbirko"
+
+#: control/admin/index.php:26
+msgid "Users"
+msgstr "Uporabniki"
+
+#: control/admin/index.php:30
+msgid "Browse Users"
+msgstr "Brskaj med uporabniki"
+
+#: control/admin/index.php:44
+msgid "Browse/Add New Department"
+msgstr "Prebrskaj/dodaj nov oddelek"
+
+#: control/admin/index.php:48
+msgid "Record Source Types"
+msgstr "Vrste zapisov virov"
+
+#: control/admin/index.php:51
+msgid "Add New Source Type"
+msgstr "Dodaj novo vrsto vira"
+
+#: control/admin/admin_bits.php:52 control/admin/admin_bits.php:102
+msgid "You must select something first."
+msgstr "Najprej morate nekaj izbrati."
+
+#: control/admin/admin_bits.php:98
+msgid "Thy Will Be Done.  Selected records now "
+msgstr "Izbrani zapisi so zdaj "
+
+#: control/admin/admin_bits.php:146
+msgid "Your request cannot be completed:  There are one or more librarians associated with this subject"
+msgstr "Vaša zahteva ne more biti izvedena: Eden ali več knjižničarjev je povezanih s tem vodičem"
+
+#: control/admin/admin_bits.php:156 control/admin/departments.php:40
+#: control/admin/departments.php:101
+msgid "Thy Will Be Done.  Department list updated."
+msgstr "Seznam oddelkov uspešno posodobljen."
+
+#: control/admin/admin_bits.php:172
+msgid "Your request cannot be completed:  There are one or more records linked to this item."
+msgstr "Vaša zahteva ne more biti izvedena: Eden ali več zapisov je povezanih s to enoto."
+
+#: control/admin/admin_bits.php:182
+msgid "Thy Will Be Done.  Offending item removed."
+msgstr "Izbran zapis uspešno izbrisan."
+
+#: control/admin/admin_bits.php:197
+msgid "Your request cannot be completed:  There are one or more records linked to this source"
+msgstr "Vaša zahteva ne more biti izvedena: Eden ali več zapisov je povezanih s tem virom "
+
+#: control/admin/admin_bits.php:207 control/admin/sources.php:39
+#: control/admin/sources.php:81
+msgid "Thy Will Be Done.  Source list updated."
+msgstr "Seznam virov uspešno posodobljen."
+
+#: control/admin/admin_bits.php:233
+msgid "inactive"
+msgstr "neaktiven"
+
+#: control/admin/admin_bits.php:239
+msgid "see live"
+msgstr "oglejte si v živo"
+
+#: control/admin/admin_bits.php:244
+msgid "Sorry, there were no results."
+msgstr "Žal ni bilo rezultatov."
+
+#: control/admin/departments.php:43 control/admin/departments.php:103
+#: control/admin/sources.php:41 control/admin/sources.php:83
+msgid "Thwarted!  Something has gone wrong.  Contact the admin."
+msgstr "Zavrnjeno! Nekaj je šlo narobe. Obrnite se na administratorja."
+
+#: control/admin/departments.php:138
+msgid "Enter department name and telephone number.  Drag departments to change display order."
+msgstr "Vnesite ime oddelka in telefonsko številko. Povlecite oddelke za spremembo vrstnega reda prikaza."
+
+#: control/admin/departments.php:147
+msgid "Add Department"
+msgstr "Dodaj oddelek"
+
+#: control/admin/departments.php:150
+msgid "Department Name"
+msgstr "Ime oddelka"
+
+#: control/admin/departments.php:156
+msgid "Add New Department"
+msgstr "Dodaj nov oddelek"
+
+#: control/admin/manage_guides.php:68 control/admin/manage_guides.php:86
+msgid "All"
+msgstr "Vse"
+
+#: control/admin/manage_guides.php:71
+msgid "Select"
+msgstr "Izberi"
+
+#: control/admin/manage_guides.php:90
+msgid "~~Guide Status~~"
+msgstr "~~Status vodiča~~"
+
+#: control/admin/manage_guides.php:91
+msgid "Active"
+msgstr "Aktiven"
+
+#: control/admin/manage_guides.php:92
+msgid "Inactive"
+msgstr "Neaktiven"
+
+#: control/admin/manage_guides.php:93
+msgid "~~Guide Types~~"
+msgstr "~~Vrsta vodiča~~"
+
+#: control/admin/manage_guides.php:110
+msgid "Ticked Guides"
+msgstr "Izbrani vodiči"
+
+#: control/admin/manage_guides.php:111
+msgid "Show Guides By"
+msgstr "Prikaži vodiče od"
+
+#: control/admin/manage_guides.php:112
+msgid "Show"
+msgstr "Prikaži"
+
+#: control/admin/manage_guides.php:115
+msgid "Assign to "
+msgstr "Dodeli "
+
+#: control/admin/sources.php:113
+msgid "Enter source type label.  Drag sources to change sort order."
+msgstr "Vnesite oznako tipa vira. "
+
+#: control/admin/sources.php:122
+msgid "Add Source"
+msgstr "Dodaj vir"
+
+#: control/admin/sources.php:125
+msgid "Source Name"
+msgstr "Ime vira"
+
+#: control/admin/sources.php:128
+msgid "Add New Source"
+msgstr "Dodaj nov vir"
+
+#: control/admin/user.php:56
+msgid "None registered.  Just as well.  They're going to rise up against us someday."
+msgstr "Ni uporabnikov"
+
+#: control/admin/user.php:59
+msgid "Click on a name to update details and privileges"
+msgstr "Kliknite na ime za osvežitev podatkov in privilegijev"
+
+#: control/admin/user.php:160
+msgid "We're really going to miss that staff person.  Search above to delete someone else!"
+msgstr "Pogrešali bomo to osebo. Poiščite zgoraj za izbris še koga!"
+
+#: subjects/staff.php:64 subjects/staff_details.php:139
+msgid "Staff Listing"
+msgstr "Seznam zaposlenih"
+
+#: subjects/databases.php:14
+msgid "Database List"
+msgstr "Seznam podatkovnih zbirk"
+
+#: subjects/databases.php:15
+msgid "An alphabetical list of the electronic resources available."
+msgstr "Abecedni seznam dostopnih elektronskih virov"
+
+#: subjects/databases.php:16
+msgid "library, research, electronic journals, databases, electronic resources, full text, online, magazine, articles, paper, assignment"
+msgstr "knjižnica, raziskovanje, e-revije, podatkovne zbirke, e-viri, polni tekst, na spletu, revija, članki, članek, naloga"
+
+#: subjects/databases.php:55
+msgid "Click for more information about a database."
+msgstr "Kliknite za več informacij glede podatkovne zbirke."
+
+#: subjects/databases.php:70
+msgid "Campus Faculty, Staff &amp; Students only"
+msgstr "Samo za profesorje, zaposlene in študente"
+
+#: subjects/databases.php:71
+msgid "Click for help guide (.pdf or .html)"
+msgstr "Kliknite za pomoč (.pdf ali .html)"
+
+#: subjects/databases.php:72
+msgid "OpenURL Enabled"
+msgstr "Omogočen OpenURL"
+
+#: subjects/databases.php:89
+msgid "Databases"
+msgstr "Podatkovne zbirke"
+
+#: subjects/databases.php:106 subjects/index.php:190
+msgid "Newest Databases"
+msgstr "Najnovejše podatkovne zbirke"
+
+#: subjects/index.php:151
+msgid "Find Research Guides"
+msgstr "Poišči Raziskovalni vodič"
+
+#: subjects/index.php:154
+msgid "Find the research guide of your dreams"
+msgstr "Poiščite raziskovalni vodič"
+
+#: subjects/index.php:162
+msgid "show suggestions"
+msgstr "prikaži predloge"
+
+#: subjects/index.php:169
+msgid "Browse Research Guides"
+msgstr "Brskaj po raziskovalnih vodičih"
+
+#: subjects/index.php:183
+msgid "Newest Guides"
+msgstr "Najnovejši vodiči"
+
+#: subjects/faq.php:25
+msgid "<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them <strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., different groupings of FAQs for different purposes/audiences), or browse the Basic FAQs, below.</p>"
+msgstr "<p>Lahko <strong>iščete</strong> pogosta vprašanja, <strong>brskate po temi</strong>, gledate <strong>zbirke</strong> Pogostih vprašanj (različne skupine Pogostih vprašanj za različne namene/občinstvo, ali brskate osnovna Pogosta vprašanja spodaj.</p> "
+
+#: subjects/faq.php:195
+msgid "No Results"
+msgstr "Ni zadetkov"
+
+#: subjects/faq.php:197
+msgid "There were no FAQs found for this query."
+msgstr "Ni nobenih Pogostih vprašanj za to iskalno zahtevo."
+
+#: subjects/faq.php:236
+msgid "Note:  Not all FAQs displayed.  Search or browse for more "
+msgstr "Pozor: niso prikazana vsa pogosta vprašanja. Iščite ali brskajte za več "
+
+#: subjects/faq.php:247
+msgid "Search FAQs"
+msgstr "Išči pogosta vprašanja"
+
+#: subjects/faq.php:266
+msgid "Browse FAQs by Subject"
+msgstr "Brskaj pogosta vprašanja glede na predmet"
+
+#: subjects/delish_feed.php:164
+msgid "image created with"
+msgstr "slika ustvarjena z"
+
+#: subjects/guide.php:131
+msgid "No Guide"
+msgstr "Ni Vodiča"
+
+#: subjects/talkback.php:29
+msgid "Thanks"
+msgstr "Hvala"
+
+#: subjects/talkback.php:31
+msgid "Thank you for your feedback.  We will try to post a response within the next three business days."
+msgstr "Hvala za vaše vprašanje. Poskusili bomo odgovoriti v naslednjih treh delovnih dneh"
+
+#: subjects/talkback.php:38
+msgid "Oh dear."
+msgstr "Ojej."
+
+#: subjects/talkback.php:40
+msgid "There was a problem with your submission.  Please try again."
+msgstr "Pojavila se je težava z vašim vnosom. Prosimo poskusite znova."
+
+#: subjects/talkback.php:49
+msgid "TalkBack"
+msgstr "Pogovor"
+
+#: subjects/talkback.php:51
+msgid "Share your comments and suggestions about the library"
+msgstr "Delite vaše komentarje in predloge knjižnici z drugimi"
+
+#: subjects/talkback.php:52
+msgid "library, comments, suggestions, complaints"
+msgstr "knjižnica, komentarji, predlogi, pritožbe"
+
+#: subjects/talkback.php:55
+msgid "What is five times five?"
+msgstr "Koliko je pet krat pet?"
+
+#: subjects/talkback.php:211
+msgid "Hmm, That Was a Tricky Bit of Math"
+msgstr "Hmm, tole je bila težka matematika"
+
+#: subjects/talkback.php:213
+msgid "Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . ."
+msgstr "Oprostite, na vprašanje morate odgovoriti točno. Gre za sistem proti spam-u..."
+
+#: subjects/talkback.php:232
+msgid "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>\r\n"
+"\r\n"
+"        <p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members</p>"
+msgstr "<p>V <strong>Pogovoru</strong> lahko <strong>zastavite vprašanje</strong> ali <strong> podajte predlog</strong> o storitvah knjižnice.</p>\r\n"
+"\r\n"
+"        <p>Torej, prosimo, sporočite nam, kaj si mislite in vaš predlog in odgovor našega knjižničarja bomo objavili</p> "
+
+#: subjects/talkback.php:243
+msgid "Tell Us What You Think"
+msgstr "Povejte nam, kaj si mislite"
+
+#: subjects/talkback.php:245
+msgid "Wait!  Do you need help right now?"
+msgstr "Počakajte! Potrebujete pomoč takoj zdaj?"
+
+#: subjects/talkback.php:245
+msgid "Visit the Research Desk!"
+msgstr "Obiščite informacije!"
+
+#: subjects/talkback.php:248
+msgid "your name (optional):"
+msgstr "vaše ime (izbirno):"
+
+#: subjects/talkback.php:251
+msgid "comment:"
+msgstr "komentar:"
+
+#: subjects/talkback.php:255
+msgid "Enter Number:"
+msgstr "Vpišite številko:"
+
+#: subjects/talkback.php:257
+msgid "Submit"
+msgstr "Oddaj"
+
+#: subjects/includes/footer.php:13
+msgid "Revised: "
+msgstr "Osveženo: "
+
+#: subjects/includes/footer.php:15
+msgid "This page maintained by: "
+msgstr "To stran ureja: "
+
