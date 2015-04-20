@@ -279,6 +279,7 @@ class Pluslet {
         $icons = "";
         //$target = "target=\"_" . $target . "\"";
         $target = "";
+        $target = targetBlanker();   
         $tokenized = "";
 
         $parts = preg_split('/<span[^>]*>{{|}}<\/span>/', $this->_body);
