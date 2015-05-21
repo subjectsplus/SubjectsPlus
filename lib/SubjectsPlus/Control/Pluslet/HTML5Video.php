@@ -117,7 +117,7 @@ class Pluslet_HTML5Video extends Pluslet {
             }
   	}
 
-        if( $this->_extra['mp4'] != "" AND $this->_extra['ogg'] != "" ) {
+        if( $this->_extra['mp4'] != "" || $this->_extra['ogg'] != "" ) {
 
             $mp4 = $this->_extra['mp4'];
             $ogg = $this->_extra['ogg'];
