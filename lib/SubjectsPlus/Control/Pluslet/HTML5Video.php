@@ -87,7 +87,7 @@ class Pluslet_HTML5Video extends Pluslet {
 
             if (isset ( $lobjSplit[1])) {
   		$this->_body .= "<div class='video-container'>" . "<iframe src='//www.youtube.com/embed/" .
-  			        $lobjSplit[1] .  "' frameborder='0' width='560' height='315'></iframe></div>";
+  			        $lobjSplit[1] .  "' frameborder='0' width='560' height='315' webkitallowfullscreen mozallowfullscreen allowfullscreen>></iframe></div>";
 
             }  elseif(isset($shortFormSplit[0])) {
                 
