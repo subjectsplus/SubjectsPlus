@@ -109,7 +109,7 @@ class Pluslet_HTML5Video extends Pluslet {
 
             if (isset ( $lobjSplit[3])) {
   		$this->_body .= "<div class='video-container'>" . "<iframe src='//player.vimeo.com/video/" .
-                                $lobjSplit[3] .  "' frameborder='0' width='560' height='315'></iframe></div>";
+                                $lobjSplit[3] .  "' frameborder='0' width='560' height='315' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>";
             } else {
                 $this->_body .= "<p class='video-error'>There was a problem creating the Vimeo embed. The URL should look like: http://vimeo.com/0137581375135 </p>";
 
