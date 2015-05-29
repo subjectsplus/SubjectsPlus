@@ -181,13 +181,18 @@ class LibGuidesImport {
     $db = new Querier;
 
     foreach (  $link_values as $link ) {
+      // Remove the proxy url from the link URL
+      $noproxy_url = str_replace("https://iiiprxy.library.miami.edu/login?url=", "",$link->URL); 
+      $noproxy_url = $db->quote($noproxy_url);
+      $title =  $db->quote($link->NAME);
 
-      $record_check = $db->query("SELECT COUNT(*) FROM location WHERE location = " .  $db->quote($link->URL));
+      $record_check = $db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
+      $title_check = $db->query("SELECT COUNT(*) FROM title WHERE title = $title");
       //error_log ( $record_check) ;
       //error_log ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
       //error_log($record_check[0][0]);
 
-      if ($record_check[0][0] == 0) {
+      if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
 
       if ($db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $db->quote($link->URL) . " , 1, 1, 'N' )" )) {
 	
@@ -269,9 +274,9 @@ class LibGuidesImport {
 
 
 
-    if ($this->guide_imported()[0][0] != 0) {
+    if ($this->guide_imported() != 0) {
 
-        exit;
+        //exit;
     }
 	
 	
