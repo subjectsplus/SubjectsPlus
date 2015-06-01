@@ -6,7 +6,13 @@ class LibGuidesImport {
   private $_guide_id;
   private $_libguides_xml;
   private $_guide_owner;
+  
 
+  public function importLog($log_text) {
+    
+    file_put_contents("../../../import_log.txt", $log_text);
+    
+  }
 
   public function setGuideOwner($guide_owner) {
     $this->_guide_owner = $guide_owner;
@@ -31,6 +37,43 @@ class LibGuidesImport {
   public function getGuideID() {
 
     return $this->_guide_id;
+  }
+
+
+  public function strip_word_html($text, $allowed_tags = '<b><i><sup><sub><em><strong><u><br>')
+  {
+    // From https://gist.github.com/dave1010/674071
+    mb_regex_encoding('UTF-8');
+    //replace MS special characters first
+    $search = array('/&lsquo;/u', '/&rsquo;/u', '/&ldquo;/u', '/&rdquo;/u', '/&mdash;/u');
+    $replace = array('\'', '\'', '"', '"', '-');
+    $text = preg_replace($search, $replace, $text);
+    //make sure _all_ html entities are converted to the plain ascii equivalents - it appears
+    //in some MS headers, some html entities are encoded and some aren't
+    $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+    //try to strip out any C style comments first, since these, embedded in html comments, seem to
+    //prevent strip_tags from removing html comments (MS Word introduced combination)
+    if(mb_stripos($text, '/*') !== FALSE){
+      $text = mb_eregi_replace('#/\*.*?\*/#s', '', $text, 'm');
+    }
+    //introduce a space into any arithmetic expressions that could be caught by strip_tags so that they won't be
+    //'<1' becomes '< 1'(note: somewhat application specific)
+    $text = preg_replace(array('/<([0-9]+)/'), array('< $1'), $text);
+    $text = strip_tags($text, $allowed_tags);
+    //eliminate extraneous whitespace from start and end of line, or anywhere there are two or more spaces, convert it to one
+    $text = preg_replace(array('/^\s\s+/', '/\s\s+$/', '/\s\s+/u'), array('', '', ' '), $text);
+    //strip out inline css and simplify style tags
+    $search = array('#<(strong|b)[^>]*>(.*?)</(strong|b)>#isu', '#<(em|i)[^>]*>(.*?)</(em|i)>#isu', '#<u[^>]*>(.*?)</u>#isu');
+    $replace = array('<b>$2</b>', '<i>$2</i>', '<u>$1</u>');
+    $text = preg_replace($search, $replace, $text);
+    //on some of the ?newer MS Word exports, where you get conditionals of the form 'if gte mso 9', etc., it appears
+    //that whatever is in one of the html comments prevents strip_tags from eradicating the html comment that contains
+    //some MS Style Definitions - this last bit gets rid of any leftover comments */
+    $num_matches = preg_match_all("/\<!--/u", $text, $matches);
+    if($num_matches){
+      $text = preg_replace('/\<!--(.)*--\>/isu', '', $text);
+    }
+    return $text;
   }
 
   public function download_images($url) {
@@ -83,23 +126,69 @@ class LibGuidesImport {
   }
 
   public function output_guides($lib_guides_xml_path) {
+    // Outputs a select box for guides 
 
     $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
-    $guide_names = $libguides_xml->xpath("/LIBGUIDES[1]/GUIDES[1]/GUIDE/NAME");
+    
+    
+    $owners = $libguides_xml->xpath("//OWNER");
+    $owner_names = array();
+    $owner_email = array();
+    $owner_profile = array();
 
-    $id_count = 1;
+    foreach ($owners as $owner) {
+      if(!in_array((string) $owner->NAME, $owner_names)) {
+
+	array_push($owner_names, (string) $owner->NAME);
+      }
+    }
 
 
-    echo "<select class=\"guides\" >";
+    foreach ($owners as $owner) {
+      if(!in_array((string) $owner->EMAIL_ADDRESS, $owner_email)) {
 
-    foreach ($guide_names as $guide) {
+	array_push($owner_email, (string) $owner->EMAIL_ADDRESS);
+      }
+    }
 
-      echo "<option value=\"$id_count\">$guide[0]</option>";
-      $id_count++;
+    
+    $owners_combined = zip($owner_names, $owner_email);
+
+    foreach ($owners_combined as $owner) {
+      
+      echo "<h1>" . $owner[0] . "</h1>";
+      
+      
+      $guide_names = $libguides_xml->xpath("//OWNER/NAME[text() = '$owner[0]']/ancestor::GUIDE");
+      
+      // $id_count = 1;
+
+
+      echo "<select class=\"guides\" >";
+
+      foreach ($guide_names as $guide) {
+
+	echo "<option value=\"$guide->GUIDE_ID\">$guide->NAME</option>";
+	// $id_count++;
+
+      }
+
+      echo "<select>";
+      echo  " <button class='import_guide'>Import Guide</button>";
+
+
+/*
+      $dupe = $this->guide_dupe($guide->NAME);
+      if ($dupe[0][0]) {
+	echo "<p>";
+	echo "Already Imported: " . $guide->NAME;
+	echo "</p>";
+      }
+*/
 
     }
 
-    echo "<select>";
+    
 
   }
 
@@ -121,10 +210,7 @@ class LibGuidesImport {
 
 
 
-    public function guide_dupe($guide_name) {
-
-
-
+  public function guide_dupe($guide_name) {
 
     $db = new Querier;
     $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject = '$guide_name'");
@@ -135,6 +221,7 @@ class LibGuidesImport {
 
   public function load_libguides_xml($lib_guides_xml_path) {
 
+    
 
     $section_index = 0;
 
@@ -145,24 +232,29 @@ class LibGuidesImport {
 
     $guide_id = $this->getGuideID();
 
-          //Get the guide owner's email address
-          $guide_owner_id = $libguides_xml->xpath("//GUIDE[$guide_id]/OWNER_ACCOUNT_ID");
-          $guide_owner_email = $libguides_xml->xpath("//ACCOUNT_ID[.=\"$guide_owner_id[0]\"]/following-sibling::EMAIL");
-          $this->setGuideOwner($guide_owner_email[0]);
+    
+    
+    //Get the guide owner's email address
+    $guide_owner_id = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/following-sibling::OWNER_ACCOUNT_ID");
+    $guide_owner_email = $libguides_xml->xpath("//ACCOUNT_ID[.=\"$guide_owner_id[0]\"]/following-sibling::EMAIL");
+    $this->setGuideOwner($guide_owner_email[0]);
 
 
-              $subject_values = zip($libguides_xml->xpath("//GUIDE[$guide_id]/NAME"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/GUIDE_ID"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/LAST_UPDATE"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/DESCRIPTION"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/PAGES"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/PAGES//LINKS"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/OWNER_ACCOUNT_ID"),
-              $libguides_xml->xpath("//GUIDE[$guide_id]/TAGS")
+    $subject_values = zip($libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/following-sibling::NAME"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/GUIDE_ID"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/LAST_UPDATE"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/DESCRIPTION"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/PAGES"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/PAGES//LINKS"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/OWNER_ACCOUNT_ID"),
+			  $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/TAGS")
 
-          );
+			  );
 
-          return $subject_values;
+    
+
+    return $subject_values;
+
 
   }
 
@@ -173,10 +265,9 @@ class LibGuidesImport {
 
     $db = new Querier;
     
-
     $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
     
-    $link_values = $libguides_xml->xpath("//GUIDE[$this->_guide_id]//LINKS/LINK");
+    $link_values = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=[$this->_guide_id]//LINKS/LINK");
     
     $db = new Querier;
 
@@ -188,77 +279,77 @@ class LibGuidesImport {
 
       $record_check = $db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
       $title_check = $db->query("SELECT COUNT(*) FROM title WHERE title = $title");
-      //error_log ( $record_check) ;
-      //error_log ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
-      //error_log($record_check[0][0]);
+      $this->importLog ( $record_check) ;
+      $this->importLog ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
+      $this->importLog($record_check[0][0]);
 
       if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
 
-      if ($db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $db->quote($link->URL) . " , 1, 1, 'N' )" )) {
-	
-	//error_log("Inserted location");
-	$location_id = $db->last_id(); 
-
-	
-      } else {
-	
-	//error_log ("Error inserting location:");
-
-		//
-      }
+	if ($db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $db->quote($link->URL) . " , 1, 1, 'N' )" )) {
+	  
+	  $this->importLog("Inserted location");
+	  $location_id = $db->last_id(); 
 
 	  
+	} else {
+	  
+	  $this->importLog ("Error inserting location:");
+
+	  
+	}
+
+	
 	// When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field 
 	
-	  
+	
 	$matches = array();
 	preg_match("/^\b(the|a|an|la|les|el|las|los)\b/i", $link->NAME, $matches);
 
 	
 	// If there isn't an article in the title
 	if (empty($maches[0])) {
-	
-      if( $db->exec("INSERT INTO title (title, description) VALUES (" . $db->quote($link->NAME) . ","  . $db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
-	//error_log( "Inserted title");
-	$title_id = $db->last_id();
+	  
+	  if( $db->exec("INSERT INTO title (title, description) VALUES (" . $db->quote($link->NAME) . ","  . $db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
+	    $this->importLog( "Inserted title");
+	    $title_id = $db->last_id();
 
-      } else {
-	//error_log("Error inserting title:" );
-	//error_log(  $db->errorInfo() );
-      }
-  
+	  } else {
+	    $this->importLog("Error inserting title:" );
+	    $this->importLog(  $db->errorInfo() );
+	  }
+	  
 	}
 	
 	// If there is an article in the title
 	
 	if(isset($matches[0])) {
-	
-	$clean_link_name = preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME);
-	
-	   if( $db->exec("INSERT INTO title (title, description, pre) VALUES (" . $db->quote($clean_link_name) . ","  . $db->quote($link->DESCRIPTION_SHORT) . "," . $db->quote($matches[0]) . ")") ) {
-	//error_log( "Inserted title");
-	$title_id = $db->last_id();
+	  
+	  $clean_link_name = preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME);
+	  
+	  if( $db->exec("INSERT INTO title (title, description, pre) VALUES (" . $db->quote($clean_link_name) . ","  . $db->quote($link->DESCRIPTION_SHORT) . "," . $db->quote($matches[0]) . ")") ) {
+	    $this->importLog( "Inserted title");
+	    $title_id = $db->last_id();
 
-      } else {
-	//error_log("Error inserting title:" );
-	//error_log(  $db->errorInfo() );
-      }
-	
+	  } else {
+	    $this->importLog("Error inserting title:" );
+	    $this->importLog(  $db->errorInfo() );
+	  }
+	  
 	}
 	
 	
-      if( $db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
-	//error_log( "Inserted location_title"); 
-	
+	if( $db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
+	  $this->importLog( "Inserted location_title"); 
+	  
 
-      } else {
-	//error_log( "Error inserting location_title:");
-	//error_log(  $db->errorInfo()  );
+	} else {
+	  $this->importLog( "Error inserting location_title:");
+	  $this->importLog(  $db->errorInfo()  );
 
-	//error_log( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
+	  $this->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
 	}
 
-    
+	
       }
 
     }    
@@ -267,8 +358,9 @@ class LibGuidesImport {
 
 
   public function import_libguides($subject_values) {
-  
-  
+    
+    //echo ($subject_values);
+    
     $db = new Querier;
     $subject_id = $subject_values[0][1]->__toString();
 
@@ -276,10 +368,10 @@ class LibGuidesImport {
 
     if ($this->guide_imported() != 0) {
 
-        //exit;
+      //exit;
     }
-	
-	
+    
+    
     foreach($subject_values as $subject) { 
 
       // Remove the apostrophes and spaces from the shortform 
@@ -291,13 +383,13 @@ class LibGuidesImport {
       $guide_name = str_replace("'", "''",$subject[0]);
       $guide_check = $this->guide_dupe($guide_name);
 
-        if ($guide_check[0][0] != 0) {
-            $dupe_message = "It looks like this guide has already been imported.";
-            return $dupe_message;
-        }
+      if ($guide_check[0][0] != 0) {
+        $dupe_message = "It looks like this guide has already been imported.";
+        return $dupe_message;
+      }
 
       if ($subject[0] != null) {
-      
+	
 
 
         if($db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
@@ -307,27 +399,27 @@ class LibGuidesImport {
 	  
 
         } else {
-         echo $subject[1][0];
- 
+          echo $subject[1][0];
+	  
 	  $query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')";
-        
-	  //error_log( "Error inserting subject:");
-	//error_log ($query);
-          //error_log ( $db->errorInfo() ); 
+          
+	  $this->importLog( "Error inserting subject:");
+	  $this->importLog ($query);
+          $this->importLog ( $db->errorInfo() ); 
 	  
         }
 
 	if ($this->getGuideOwner() != null) {
 	  $staff_id = $this->getStaffID( $this->getGuideOwner());
 	  
-	  //error_log ("Staff ID: " . $staff_id );
+	  $this->importLog ("Staff ID: " . $staff_id );
 	  
 	  if($db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
-	    //error_log ("Inserted staff: '$staff_id'");
+	    $this->importLog ("Inserted staff: '$staff_id'");
 	    
 	  } else {
 
-	    //error_log("Error inserting staff. ");
+	    $this->importLog("Error inserting staff. ");
 	    
 	  }
 	  
@@ -357,15 +449,15 @@ class LibGuidesImport {
         
 	if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1)")) {
 	  
-	  //error_log ("Inserted tab '$tab->NAME'");
+	  $this->importLog ("Inserted tab '$tab->NAME'");
 
 	} else {
 
-          //error_log( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
+          $this->importLog( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
 	  
           
-	  //error_log ("Error inserting tab:");
-	  //error_log ($db->errorInfo());
+	  $this->importLog ("Error inserting tab:");
+	  $this->importLog ($db->errorInfo());
 
 	}
         $row = 0;
@@ -381,12 +473,12 @@ class LibGuidesImport {
 
 
           if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
-            //error_log("Inserted section");
+            $this->importLog("Inserted section");
           } else { 
-            //error_log("Problem inserting this section. This section  may already exist in the database.");
+            $this->importLog("Problem inserting this section. This section  may already exist in the database.");
             
-	    //error_log("Error inserting section:");
-	    //error_log($db->errorInfo() );
+	    $this->importLog("Error inserting section:");
+	    $this->importLog($db->errorInfo() );
             
           }
           
@@ -401,6 +493,9 @@ class LibGuidesImport {
 
 	  $doc->loadHTML(mb_convert_encoding($pluslet->DESCRIPTION, 'UTF-8'));
 	  
+
+	  // Download images 
+
 	  $nodes = $doc->getElementsByTagName("img");
 
 	  foreach( $nodes as $node ) {
@@ -409,7 +504,7 @@ class LibGuidesImport {
 	      $test = strpos($attr->value, "http://");
 	      
 	      if ($test !== false) { 
-		//error_log( $attr->value);
+		$this->importLog( $attr->value);
 		
 		$attr->value = $this->download_images($attr->value);
 		
@@ -417,91 +512,123 @@ class LibGuidesImport {
 	      }
 	    }
 	    
-	    $description .= "<div class=\"description\">".  htmlspecialchars($doc->saveHTML()) . "</div>";
+	    
+	    // Create html for the description
+
+	    $description .= "<div class=\"description\">".  $this->strip_word_html(htmlspecialchars($doc->saveHTML())) . "</div>";
 
 	  }
+
+
+
+	  // Go throught the links in the box and check to see if they are OK
+
+	// Links in Boxes
 
           foreach ( $pluslet->LINKS->LINK as $link )  {
             
             
-               $db = new Querier;
+            $db = new Querier;
 	    $record = $db->query("SELECT * FROM location WHERE location = " .  $db->quote($link->URL),NULL,TRUE);
 
-	    $record_title = $db->query("SELECT title.title,title.title_id, location.location  FROM 
+
+	    if ($record[0]['location_id']) {
+
+	      $record_title = $db->query("SELECT title.title,title.title_id, location.location  FROM 
 location_title 
 JOIN title ON title.title_id = location_title.title_id
 JOIN location on location.location_id = location_title.location_id
 WHERE location.location_id = " . $record[0]['location_id']);
 
-				
-			if ($record_title[0]["title"] == "") {
-			
-				$description .=    "<div class=\"links\">" . 
-							"<span class=\"link_title\"> $link->NAME </span>" .
-                            "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                            "</div>";
-			} 
+} else {
 
-			if ($record_title[0][title]) {
-			
-            $description .= 
-            "<div class=\"links\">" . 
-                            "{{dab},{" . $record[0]['location_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}" . 
-                            "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                            "</div>";
-            
-				}
-				
-                //error_log ("REEECCCCCORRDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //error_log($record_title); 
-                //error_log("SELECT * FROM location WHERE location = " .  $db->quote($link->URL));
+}
 
-          }
+if ($record_title[0]["title"] == "") {
+  
+  $description .=    "<div class=\"links\">" . 
+		     "<span class=\"link_title\"> $link->NAME </span>" .
+                     "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
+                     "</div>";
+} 
 
-          
-          foreach ( $pluslet->BOOKS->BOOK as $book )  {
-            
-            $description .= 
-            "<div class=\"books\">" . 
-                            "<a href=\"$book->URL\">$book->TITLE</a>" . 
-                            "<div class=\"book-description\">$link->DESCRIPTION</div>" .
-                            "</div>";
-            
-            
-          }
-          
-          $description .= "<div class=\"media\">" . $pluslet->DESCRIPTION . "</div>";  
-          
-          $clean_description = $db->quote($description);
+if ($record_title[0][title]) {
+  
+  $description .= 
+  "<div class=\"links\">" . 
+                  "{{dab},{" . $record[0]['location_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}" . 
+                  "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
+                  "</div>";
+  
+}
 
-          if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
-            
-	    //error_log("Inserted pluslet '$pluslet->NAME'");
-            $clean_description = null;
+$this->importLog ("Insert record:");
+$this->importLog($record_title); 
+$this->importLog("SELECT * FROM location WHERE location = " .  $db->quote($link->URL));
 
-          } else {
+}
 
-	    
-	    //error_log("Error inserting pluslet:");
-	    //error_log($db->errorInfo());
-	    
+// Box type: Books
 
-          }
-          
-          if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, $row)")) {
-            //error_log("Inserted pluslet section relationship");
-            
+foreach ( $pluslet->BOOKS->BOOK as $book )  {
+  
+  $description .= 
+  "<div class=\"books\">" . 
+                  "<a href=\"$book->URL\">$book->TITLE</a>" . 
+                  "<div class=\"book-description\">$link->DESCRIPTION</div>" .
+                  "</div>";
+  
+  
+}
 
-	    // This sticks the newly created pluslet into a section 
-          } else {
+//Box type: Media & Widgets
 
-	    
-	    //error_log("Error inserting pluslet_section:");
-	    //error_log( $db->errorInfo());
+foreach ( $pluslet->EMBEDDED_MEDIA_AND_WIDGETS->URL as $media )  {
+  
+  $description .= 
+  "<div class=\"embedded_media_widgets\">" . 
+                  "<div class=\"book-description\">$media->URL</div>" .
+                  "</div>";
+  
+  
+}
 
-          }
-        } 
-      } 
-    }
-  }
+
+
+
+
+$description .= "<div class=\"media\">" . $pluslet->DESCRIPTION . "</div>";  
+
+$clean_description = $db->quote($description);
+
+if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($pluslet->BOX_ID, '$pluslet->NAME', $clean_description, 'Basic')")) {
+  
+  $this->importLog("Inserted pluslet '$pluslet->NAME'");
+  $clean_description = null;
+
+} else {
+
+  
+  $this->importLog("Error inserting pluslet:");
+  $this->importLog($db->errorInfo());
+  
+
+}
+
+if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet->BOX_ID', '$section_uniqid', $column, $row)")) {
+  $this->importLog("Inserted pluslet section relationship");
+  
+
+  // This sticks the newly created pluslet into a section 
+} else {
+
+  
+  $this->importLog("Error inserting pluslet_section:");
+  $this->importLog( $db->errorInfo());
+
+}
+}
+}
+}
+}
 }

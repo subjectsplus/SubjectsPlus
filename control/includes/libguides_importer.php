@@ -43,7 +43,6 @@ $libguides_importer = new LibGuidesImport;
 
 $libguides_importer->output_guides('libguides.xml');
 ?>
-    <button class="import_guide">Import Guide</button>
   </div>
  
 </div>
@@ -59,21 +58,29 @@ margin-right: 3%;
 </style>
 <script>
 
-jQuery('.guides').select2();
+//jQuery('.guides').select2();
  
 jQuery('.import_guide').on('click', function() {
 
+   console.log();
    
-   
-   var selected_guide = jQuery('.guides').select2("val"); 
-   var selected_guide_name = jQuery('.guides option:selected').text(); 
+//   var selected_guide = jQuery('.guides').select2("val"); 
+   var selected_guide_name = jQuery(this).prev().find('option:selected').text(); 
+   var selected_guide_id = jQuery(this).prev().find('option:selected').val(); 
+
+   var guide = [ selected_guide_id, selected_guide_name ];
+
+   console.log(selected_guide_id);
+  
+
+   console.log(selected_guide_name);
 
   // Progress needed!
 
    jQuery.ajax({
-     type: "POST",
+     type: "GET",
      url: "import_libguides.php",
-     data: "libguide=" + selected_guide,
+     data: "libguide=" + selected_guide_id,
      success:  function(data) {
        console.log("Success"); 
        console.log(data);
@@ -89,6 +96,7 @@ jQuery('.import_guide').on('click', function() {
      }
 
    });
+
 
 });
 
