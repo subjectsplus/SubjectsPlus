@@ -41,7 +41,9 @@ $libguides_importer = new LibGuidesImport;
 
 <?php  
 
-$libguides_importer->output_guides('libguides.xml');
+$libguides_with_owners = $libguides_importer->output_guides('libguides.xml');
+
+
 ?>
   </div>
  
@@ -60,42 +62,63 @@ margin-right: 3%;
 
 //jQuery('.guides').select2();
  
+ function importGuides(selected_guide_id, selected_guide_name, url) {
+
+	   var guide = [ selected_guide_id, selected_guide_name ];
+
+	   console.log(selected_guide_id);
+	   console.log(selected_guide_name);
+
+	  // Progress needed!
+
+	   jQuery.ajax({
+	     type: "GET",
+	     url: url,
+	     data: "libguide=" + selected_guide_id,
+	     success:  function(data) {
+	       console.log("Success"); 
+	       console.log(data);
+
+	       if (!data) {
+		 jQuery('.pluslet_body').append("<p class='import-feedback'>There was problem importing this guide</p>"); 
+
+	       } else {
+		 console.log(selected_guide_name);
+		 jQuery('.pluslet_body').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data +  "'>" + selected_guide_name  + "</a></p>" ); 
+	       }
+
+	     }
+
+	   });
+ }
+ 
+ jQuery('.import_links').on('click', function() {
+	 
+	 var selected_guide_name = jQuery(this).prev().find('option:selected').text(); 
+	 var selected_guide_id = jQuery(this).prev().find('option:selected').val(); 
+
+	 console.log(jQuery(this).prev().prev());
+	 
+	 
+	 console.log(selected_guide_name);
+	 console.log(selected_guide_id);
+	 
+	 importGuides(selected_guide_name, selected_guide_id, "import_libguides_links.php");
+	 
+	 
+ });
+ 
 jQuery('.import_guide').on('click', function() {
 
-   console.log();
-   
-//   var selected_guide = jQuery('.guides').select2("val"); 
-   var selected_guide_name = jQuery(this).prev().find('option:selected').text(); 
-   var selected_guide_id = jQuery(this).prev().find('option:selected').val(); 
+	 var selected_guide_name = jQuery(this).prev().prev().find('option:selected').text(); 
+	 var selected_guide_id = jQuery(this).prev().prev().find('option:selected').val(); 
 
-   var guide = [ selected_guide_id, selected_guide_name ];
-
-   console.log(selected_guide_id);
-  
-
-   console.log(selected_guide_name);
-
-  // Progress needed!
-
-   jQuery.ajax({
-     type: "GET",
-     url: "import_libguides.php",
-     data: "libguide=" + selected_guide_id,
-     success:  function(data) {
-       console.log("Success"); 
-       console.log(data);
-
-       if (!data) {
-	 jQuery('.pluslet_body').append("<p class='import-feedback'>There was problem importing this guide</p>"); 
-
-       } else {
+	 console.log(jQuery(this));
+	 
 	 console.log(selected_guide_name);
-	 jQuery('.pluslet_body').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data +  "'>" + selected_guide_name  + "</a></p>" ); 
-       }
-
-     }
-
-   });
+	 console.log(selected_guide_id);
+	 
+	 importGuides(selected_guide_id, selected_guide_name, "import_libguides.php");
 
 
 });
