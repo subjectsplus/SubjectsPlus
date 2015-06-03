@@ -424,26 +424,30 @@ public function output_guides($lib_guides_xml_path) {
   $owners_combined = zip($owner_names, $owner_email);
 
   foreach ($owners_combined as $owner) {
-    
+    echo "<section class=\"import-block\">";
     echo "<h1>" . $owner[0] . "</h1>";
     
     
     $guide_names = $libguides_xml->xpath("//OWNER/NAME[text() = '$owner[0]']/ancestor::GUIDE");
     
-    echo "<select class=\"guides\" >";
+    echo "<select class=\"guides $owner_email[0]\" >";
 
     foreach ($guide_names as $guide) {
 
-      echo "<option value=\"$guide->GUIDE_ID\">$guide->NAME</option>";
+      echo "<option value=\"$guide->GUIDE_ID\">$guide->NAME - $guide->STATUS</option>";
 
     }
 
     echo "<select>";
-    echo  "<button class='import_links'>Import Links</button>";
-    echo  " <button class='import_guide'>Import Guide</button>";
-  
+    
+    echo "<div class=\"import-controls\">";
+    echo "<h2>First import your links:</h2>";
+    echo  "<button class='import_links pure-button pure-button-primary'>Import Links</button>";
+    echo "<h2>Then import your guides:</h2>";
+    echo  "<button class='import_guide pure-button pure-button-primary'>Import Guide</button>";
+    echo "</div>";
   	
-
+	echo "</section>";	
   }
 
   

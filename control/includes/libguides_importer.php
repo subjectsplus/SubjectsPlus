@@ -19,10 +19,10 @@ use SubjectsPlus\Control\LibGuidesImport;
 
 <div class="pluslet"> 
   <div class="titlebar">
-  <div class="titlebar_text">Instructions</div>
+  <div class="titlebar_text">Setup Instructions</div>
   </div>
   <div class="pluslet_body"> 
-    For instructions on how to use this view the <a href="http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer">documentation</a> on the SubjectsPlus wiki.
+    For instructions on how to set this up please view the <a href="http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer">documentation</a> on the SubjectsPlus wiki.
   </div>
  
 </div>
@@ -32,11 +32,25 @@ use SubjectsPlus\Control\LibGuidesImport;
 $libguides_importer = new LibGuidesImport;
  ?>
 
+ <div class="pluslet" >
+ <div class="titlebar">
+  <div class="titlebar_text">Importing a Guide</div>
+ </div>
+   
+  <div class="pluslet_body">
+<p>Importing your LibGuide is a two step process. First you'll import your links in SubjectsPlus. 
+When they are in SubjectsPlus, you'll be able to view them in the records area.
+</p>
+<p>Secondly, you'll import your guides.</p>
+</div>
+</div>
+ 
 <div class="pluslet"> 
   <div class="titlebar">
   <div class="titlebar_text">Select a Guide to Import</div>
   </div>
   <div class="pluslet_body"> 
+
 
 
 <?php  
@@ -83,7 +97,7 @@ margin-right: 3%;
 		 jQuery('.pluslet_body').append("<p class='import-feedback'>There was problem importing this guide</p>"); 
 
 	       } else {
-		 console.log(selected_guide_name);
+		 
 		 jQuery('.pluslet_body').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data +  "'>" + selected_guide_name  + "</a></p>" ); 
 	       }
 
@@ -94,29 +108,25 @@ margin-right: 3%;
  
  jQuery('.import_links').on('click', function() {
 	 
-	 var selected_guide_name = jQuery(this).prev().find('option:selected').text(); 
-	 var selected_guide_id = jQuery(this).prev().find('option:selected').val(); 
+	 var selected_guide_name = jQuery(this).parent().parent().find('option:selected').text(); 
+	 var selected_guide_id = jQuery(this).parent().parent().find('option:selected').val(); 
 
-	 console.log(jQuery(this).prev().prev());
+	 console.log(jQuery(this).parent());
 	 
 	 
 	 console.log(selected_guide_name);
 	 console.log(selected_guide_id);
 	 
-	 importGuides(selected_guide_name, selected_guide_id, "import_libguides_links.php");
+	 importGuides(selected_guide_id, selected_guide_name,  "import_libguides_links.php");
 	 
 	 
  });
  
 jQuery('.import_guide').on('click', function() {
 
-	 var selected_guide_name = jQuery(this).prev().prev().find('option:selected').text(); 
-	 var selected_guide_id = jQuery(this).prev().prev().find('option:selected').val(); 
+	 var selected_guide_name = jQuery(this).parent().parent().find('option:selected').text(); 
+	 var selected_guide_id = jQuery(this).parent().parent().find('option:selected').val(); 
 
-	 console.log(jQuery(this));
-	 
-	 console.log(selected_guide_name);
-	 console.log(selected_guide_id);
 	 
 	 importGuides(selected_guide_id, selected_guide_name, "import_libguides.php");
 
