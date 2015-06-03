@@ -53,7 +53,7 @@ use SubjectsPlus\Control\LibGuidesImport;
 
 <?php 
 
-$libguides_importer = new LibGuidesImport;
+$libguides_importer = new LibGuidesImport('libguides.xml');
  ?>
 
  
@@ -67,7 +67,7 @@ $libguides_importer = new LibGuidesImport;
 
 <?php  
 
-$libguides_with_owners = $libguides_importer->output_guides('libguides.xml');
+$libguides_with_owners = $libguides_importer->output_guides($_GET["email"]);
 
 
 ?>

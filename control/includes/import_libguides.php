@@ -11,7 +11,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LibGuidesImport;
 
 
-$libguides_importer = new LibGuidesImport;
+$libguides_importer = new LibGuidesImport('libguides.xml');
 
 
 // Set the guide id 
@@ -22,11 +22,11 @@ $libguides_importer->setGuideID($_GET['libguide']);
 //$libguides_xml = $libguides_importer->load_libguides_links_xml('libguides.xml');
 
 // Load the XML
-$libguides_xml = $libguides_importer->load_libguides_xml('libguides.xml');
+//$libguides_xml = $libguides_importer->load_libguides_xml('libguides.xml');
 
 
 // Import the guides with the XML you just loaded
-echo $libguides_importer->import_libguides($libguides_xml);
+echo $libguides_importer->import_libguides();
 
 
 

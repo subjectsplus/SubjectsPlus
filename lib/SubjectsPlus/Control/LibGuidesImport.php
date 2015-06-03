@@ -8,6 +8,16 @@ class LibGuidesImport {
   private $_guide_owner;
   
   
+  public function __construct($lib_guides_xml_path) {
+  	$libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
+  	
+  	$this->libguidesxml = $libguides_xml;
+  	
+  	$db = new Querier;
+  	$this->db = $db;
+  	
+  }
+  
   public function importLog($log_text) {
     
   	
@@ -25,12 +35,7 @@ class LibGuidesImport {
     return $this->_guide_owner;
 
   }
-  public function setLibGuidesXML($libguides_xml) {
-    $this->_libguides_xml = $libguides_xml;
-  }
-  public function getLibGuidesXML() {
-    $this->_libguides_xml;
-  }
+ 
   public function setGuideID($guide_id) {
     $this->_guide_id = $guide_id;
   }
@@ -392,13 +397,58 @@ public function getStaffID ($email_address) {
 
 }
 
-public function output_guides($lib_guides_xml_path) {
+public function output_owners() {
+
+	$libguides_xml= $this->libguidesxml;
+	
+	$owners = $libguides_xml->xpath("//OWNER");
+	$owner_names = array();
+	$owner_email = array();
+	$owner_profile = array();
+	
+	foreach ($owners as $owner) {
+		if(!in_array((string) $owner->NAME, $owner_names)) {
+	
+			array_push($owner_names, (string) $owner->NAME);
+		}
+	}
+	
+	
+	foreach ($owners as $owner) {
+		if(!in_array((string) $owner->EMAIL_ADDRESS, $owner_email)) {
+	
+			array_push($owner_email, (string) $owner->EMAIL_ADDRESS);
+		}
+	}
+	
+	
+	$owners_combined = zip($owner_names, $owner_email);
+
+	echo "<select name=\"email\" class=\"owners\" >";
+	
+	foreach ($owners_combined as $owner) {
+	
+		
+		
+		
+			echo "<option value=\"$owner[1]\">$owner[0]</option>";
+		
+		
+	
+		
+	}
+	echo "<select>";
+	
+	
+}
+
+public function output_guides($email_address) {
   // Outputs a select box for guides 
 
-  $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
+  $libguides_xml= $this->libguidesxml;
   
   
-  $owners = $libguides_xml->xpath("//OWNER");
+  $owners = $libguides_xml->xpath("//OWNER/EMAIL_ADDRESS[.='$email_address']/..");
   $owner_names = array();
   $owner_email = array();
   $owner_profile = array();
@@ -421,14 +471,14 @@ public function output_guides($lib_guides_xml_path) {
   
   $owners_combined = zip($owner_names, $owner_email);
 
-  foreach ($owners_combined as $owner) {
+ foreach ($owners_combined as $owner) {
     echo "<section class=\"import-block\">";
     echo "<h1>" . $owner[0] . "</h1>";
     
     
     $guide_names = $libguides_xml->xpath("//OWNER/NAME[text() = '$owner[0]']/ancestor::GUIDE");
     
-    echo "<select class=\"guides $owner_email[0]\" >";
+    echo "<select class=\"guides\" >";
 
     foreach ($guide_names as $guide) {
 
@@ -480,11 +530,11 @@ public function guide_dupe($guide_name) {
 
 }
 
-public function load_libguides_xml($lib_guides_xml_path) {
+public function load_libguides_xml() {
 		
   $section_index = 0;
 
-  $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
+  $libguides_xml= $this->libguidesxml;
 
   // zip combines arrays in fancy way
   // From the python docs: "This function returns a list of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables. The returned list is truncated in length to the length of the shortest argument sequence."
@@ -517,7 +567,7 @@ public function load_libguides_xml($lib_guides_xml_path) {
 }
 
 
-public function load_libguides_links_xml($lib_guides_xml_path) {
+public function load_libguides_links_xml() {
 
   $db = new Querier;
 
@@ -529,7 +579,7 @@ public function load_libguides_links_xml($lib_guides_xml_path) {
   
   $guide_id = $this->getGuideID();
     
-  $libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
+  $libguides_xml= $this->libguidesxml;
   
   $link_values = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/..//LINKS/LINK");
    
@@ -650,8 +700,8 @@ public function load_libguides_links_xml($lib_guides_xml_path) {
 }
 
 
-public function import_libguides($subject_values) {
-  
+public function import_libguides() {
+  $subject_values = $this->load_libguides_xml();
  
   $db = new Querier;
   $subject_id = (string) $subject_values[0][1];
