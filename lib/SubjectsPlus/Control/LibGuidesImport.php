@@ -148,10 +148,7 @@ public function insert_linked_box($box, $section_id) {
 		$this->importLog( $db->errorInfo());
 		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)");
 	}
-
-
-
-
+	
 }
 
   
@@ -220,7 +217,7 @@ public function import_box($box, $section_id) {
   	
   $description = null;
   
-  $description .= "<div class=\"Box Type\">$box->BOX_TYPE</div>";       
+  //$description .= "<div class=\"Box Type\">$box->BOX_TYPE</div>";       
 
   // Import images and replace the old urls with new urls
   $doc = new \DOMDocument();
@@ -318,7 +315,8 @@ public function import_box($box, $section_id) {
   break;
  
   case "User Submitted Links":
-    
+  
+  
   case "User Feedback":
     
   case "Google Search":
@@ -443,6 +441,7 @@ public function output_guides($lib_guides_xml_path) {
     echo "<div class=\"import-controls\">";
     echo "<h2>First import your links:</h2>";
     echo  "<button class='import_links pure-button pure-button-primary'>Import Links</button>";
+    echo "<div class=\"loading\"></div>";
     echo "<h2>Then import your guides:</h2>";
     echo  "<button class='import_guide pure-button pure-button-primary'>Import Guide</button>";
     echo "</div>";
@@ -656,7 +655,7 @@ public function import_libguides($subject_values) {
  
   $db = new Querier;
   $subject_id = (string) $subject_values[0][1];
-
+  $response = array();
 
 
   if ($this->guide_imported() != 0) {
@@ -683,13 +682,16 @@ public function import_libguides($subject_values) {
       if($db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
 
       
+      	$response = array("imported_guide" => $subject[1] );
       	
-        echo $subject[1];
-
+       
 	
 
       } else {
-        echo $subject[1][0];
+       // echo $subject[1][0];
+       
+      	$response = array("imported_guide" => $subject[1][0] );
+      	 
 	
 	$query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')";
         
@@ -783,13 +785,19 @@ public function import_libguides($subject_values) {
 	$this->import_box($pluslet, $section_uniqid);
 	
 
-	// Go throught the links in the box and check to see if they are OK
-
-	// Links in Boxes
+	$box_names['box_name'] = $pluslet->NAME;
+	$box_types['box_type'] = $pluslet->BOX_TYPE;
+	$boxes = array($box_names, $boy_types);
+	array_push($response, array("box" => $boxes ));
+	
+	
 
 	
       }
     }
   }
-}
+  return json_encode($response);
+  
+ } 
+ 
 }

@@ -27,23 +27,35 @@ use SubjectsPlus\Control\LibGuidesImport;
  
 </div>
 
+<div class="pluslet"> 
+  <div class="titlebar">
+  <div class="titlebar_text">Import Output</div>
+  </div>
+  <div class="pluslet_body import-output"> 
+
+  
+ 
+  <table class="link_results pure-table">
+  <caption>Link Import Results</caption>
+  <tr><th>Title</th><th>Status</th><th>URL</th><th>Working Link?</th></tr>
+  </table>	
+  </div>
+ 
+  <table class="guide_results pure-table">
+  <caption>Guide Import Results</caption>
+  <tr><th>Box Name</th><th>Box Type</th></tr>
+  </table>	
+  </div>
+  
+ 
+ 
+</div>
+
 <?php 
 
 $libguides_importer = new LibGuidesImport;
  ?>
 
- <div class="pluslet" >
- <div class="titlebar">
-  <div class="titlebar_text">Importing a Guide</div>
- </div>
-   
-  <div class="pluslet_body">
-<p>Importing your LibGuide is a two step process. First you'll import your links in SubjectsPlus. 
-When they are in SubjectsPlus, you'll be able to view them in the records area.
-</p>
-<p>Secondly, you'll import your guides.</p>
-</div>
-</div>
  
 <div class="pluslet"> 
   <div class="titlebar">
@@ -76,6 +88,46 @@ margin-right: 3%;
 
 //jQuery('.guides').select2();
  
+ 
+ function guidesHandler(guides) {
+
+	 console.log(guides[0]);
+	 
+	 for(var i=0; i<guides.length; i++) {
+
+		 var guide = guides[i];
+
+		 console.log(guide[0]);
+		
+		 var table_data = "<tr>" +
+		 	              "<td>" + guide[0].box[0].box_name + "</td>" +
+		 	              "<td>" + guide[0].box[1].box_type + "</td>";
+		 	          
+		 
+		 jQuery('.guide_results').append(table_data);
+		 
+	 }
+ }
+
+ function linksHandler (titles) {
+
+	 for(var i=0; i<titles.length; i++) {
+
+		 var title = titles[i];
+
+		
+		 var table_data = "<tr>" +
+		 	              "<td>" + title[0].title + "</td>" +
+		 	              "<td>" + title[1].status + "</td>" +
+		 	              "<td>" + title[2].url + "</td>" +
+		 	              "<td>" + title[3].working_link + "</td>";
+		 
+		 jQuery('.link_results').append(table_data);
+		 jQuery('.loading').remove();
+	      
+ }
+ }
+ 
  function importGuides(selected_guide_id, selected_guide_name, url) {
 
 	   var guide = [ selected_guide_id, selected_guide_name ];
@@ -90,17 +142,26 @@ margin-right: 3%;
 	     url: url,
 	     data: "libguide=" + selected_guide_id,
 	     success:  function(data) {
-	       console.log("Success"); 
 	       console.log(data);
 
 	       if (!data) {
-		 jQuery('.pluslet_body').append("<p class='import-feedback'>There was problem importing this guide</p>"); 
+		 jQuery('.import-output').append("<p class='import-feedback'>There was problem importing this guide</p>"); 
+           		 	jQuery('.loading').remove();
+           		 	
+	       } 
 
-	       } else {
+	       if (data.titles) {
+
+	    	   linksHandler(data.titles)
+		   } 
+
+		   if (data.imported_guide) {
+		 console.log(data);
+		 guidesHandler(data);
 		 
-		 jQuery('.pluslet_body').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data +  "'>" + selected_guide_name  + "</a></p>" ); 
+		 jQuery('.import-output').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data.imported_guide[0] +  "'>" + selected_guide_name  + "</a></p>" ); 
+		 jQuery('.loading').remove();
 	       }
-
 	     }
 
 	   });
@@ -111,11 +172,8 @@ margin-right: 3%;
 	 var selected_guide_name = jQuery(this).parent().parent().find('option:selected').text(); 
 	 var selected_guide_id = jQuery(this).parent().parent().find('option:selected').val(); 
 
-	 console.log(jQuery(this).parent());
-	 
-	 
-	 console.log(selected_guide_name);
-	 console.log(selected_guide_id);
+
+	 jQuery('.import-output').append("<p class=\"loading\">Loading...</p>");
 	 
 	 importGuides(selected_guide_id, selected_guide_name,  "import_libguides_links.php");
 	 
@@ -127,9 +185,10 @@ jQuery('.import_guide').on('click', function() {
 	 var selected_guide_name = jQuery(this).parent().parent().find('option:selected').text(); 
 	 var selected_guide_id = jQuery(this).parent().parent().find('option:selected').val(); 
 
-	 
+     
 	 importGuides(selected_guide_id, selected_guide_name, "import_libguides.php");
-
+	 jQuery('.import-output').append("<p class=\"loading\">Loading...</p>");
+	 
 
 });
 

@@ -1,5 +1,5 @@
 <?php  
-//header("Content-Type: text/plain");
+header("Content-Type: application/json");
 error_reporting(1);
 ini_set('display_errors', 1);
 include('../includes/autoloader.php');
@@ -26,7 +26,7 @@ $libguides_xml = $libguides_importer->load_libguides_xml('libguides.xml');
 
 
 // Import the guides with the XML you just loaded
-$libguides_importer->import_libguides($libguides_xml);
+echo $libguides_importer->import_libguides($libguides_xml);
 
 
 
