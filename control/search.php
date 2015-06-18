@@ -36,7 +36,7 @@ if (isset($_POST["searchterm"])) {
 		    $pluslets_results[] = "<a href='guides/guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
 		    break;
 		  case 'Staff':
-		    $staff_results[] = "<a href='staff/staff.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
+		    $staff_results[] = "<a href='admin/user.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
 		    break;
 		}   
 	}
