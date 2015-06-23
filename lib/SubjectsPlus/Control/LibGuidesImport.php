@@ -6,6 +6,9 @@ class LibGuidesImport {
   private $_guide_id;
   private $_libguides_xml;
   private $_guide_owner;
+  private $_row = 0;
+  private $_column = 0;
+  
   
   
   public function __construct($lib_guides_xml_path) {
@@ -43,14 +46,44 @@ class LibGuidesImport {
     return $this->_guide_id;
   }
 
- 
-  public function insert_basic_pluslet($box, $section_id, $description) {
-	$db = new Querier;
+
+  public function setRow($row) {
+  	$this->_row = $row;
+  }
+  
+  public function getRow() {
+  	$this->_row++;
+  	if ($this->_row > 2) {
+  		$this->_row = 0;
+  	}
+  	return $this->_row;
+  	
+  }
+  
+  
+  
+  public function setColumn($column) {
+  	$this->_column = $column;
+  }
+  
+  public function getColumn() {
+  	$this->_column++;
+  	if ($this->_column > 2) {
+  		$this->_column = 0;
+  	}
+  	return $this->_column; 
+  }
+  
+  
+  public function insertBasicPluslet($box, $section_id, $description) {
 	
-	$row = 0;
-	$column = 0;
-		
-	if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, '$box->NAME', '$description', 'Basic')")) {
+	
+  	$row = $this->getRow();
+  	$column = $this->getColumn();
+
+	$description_clean = $this->db->quote($description);
+	
+	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, '$box->NAME', $description_clean, 'Basic')")) {
 	
 		$this->importLog("Inserted pluslet '$box->NAME'");
 		$clean_description = null;
@@ -59,12 +92,15 @@ class LibGuidesImport {
 	
 	
 		$this->importLog("Error inserting pluslet:");
-		$this->importLog($db->errorInfo());
+		ob_start();
+		var_dump($this->db->errorInfo(ob_get_clean()));
+		
+		$this->importLog();
 	
 	}
 	
 	
-	if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)")) {
+	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)")) {
 		$this->importLog("Inserted pluslet section relationship");
 	
 	
@@ -73,35 +109,37 @@ class LibGuidesImport {
 	
 	
 		$this->importLog("Error inserting pluslet_section:");
-		$this->importLog( $db->errorInfo());
+		$this->importLog( $this->db->errorInfo());
 		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)");
 	}
 }
 
-public function insert_subject_specialist($box, $section_id) {
+
+
+public function insertSubjectSpecialist($box, $section_id) {
 	
-	$db = new Querier;
-	$row = 0;
-	$column = 0;
+	$row = $this->getRow();
+	$column = $this->getColumn();
 	
-	if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('3', '$section_id', $column, $row)")) {
+	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES (3, $section_id, $column, $row)")) {
 		$this->importLog("Inserted pluslet section subject specialist");
-	
+		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES (3, $section_id, $column, $row)");
 		// This sticks the newly created pluslet into a section
 	} else {
 	
 		$this->importLog("Couldn't insert pluslet section subject specialist");
+		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES (3, $section_id, $column, $row)");
 		
 	}
 
 }
 
-public function insert_rss_pluslet($box, $section_id, $feed_url) {
-	$db = new Querier;
-	$row = 0;
-	$column = 0;
+public function insertRSSPluslet($box, $section_id, $feed_url) {
 	
-	if($db->exec("INSERT INTO pluslet (pluslet_id, title, body, type, extra) VALUES ($box->BOX_ID, '$box->NAME', '$feed_url', 'Feed', '{\"num_items\":5,  \"show_desc\":1, \"show_feed\": 1, \"feed_type\": \"RSS\"}' )")) {
+	$row = $this->getRow();
+	$column = $this->getColumn();
+	
+	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type, extra) VALUES ($box->BOX_ID, '$box->NAME', '$feed_url', 'Feed', '{\"num_items\":5,  \"show_desc\":1, \"show_feed\": 1, \"feed_type\": \"RSS\"}' )")) {
 	
 		$this->importLog("Inserted RSS pluslet '$box->NAME'");
 		$clean_description = null;
@@ -111,12 +149,12 @@ public function insert_rss_pluslet($box, $section_id, $feed_url) {
 		$this->importLog("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ('$box->BOX_ID', '$box->NAME', '$feed_url', 'Feed', '' )");
 		
 		$this->importLog("RSS RSSS RSS Error inserting pluslet:");
-		$this->importLog($db->errorInfo());
+		$this->importLog($this->db->errorInfo());
 	
 	}
 	
 	
-	if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)")) {
+	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)")) {
 		$this->importLog("Inserted pluslet section relationship");
 	
 	
@@ -125,7 +163,7 @@ public function insert_rss_pluslet($box, $section_id, $feed_url) {
 	
 	
 		$this->importLog("RSS Error inserting pluslet_section:");
-		$this->importLog( $db->errorInfo());
+		$this->importLog( $this->db->errorInfo());
 		$this->importLog("RSS INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)");
 	}
 	
@@ -135,13 +173,13 @@ public function insert_rss_pluslet($box, $section_id, $feed_url) {
 }
 
 
-public function insert_linked_box($box, $section_id) {
-	$db = new Querier;
-
-	$row = 0;
-	$column = 0;
+public function insertLinkedBox($box, $section_id) {
 	
-	if($db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)")) {
+
+    $row = $this->getRow();
+	$column = $this->getColumn();
+	
+	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)")) {
 		$this->importLog("Inserted linked box");
 
 
@@ -150,7 +188,7 @@ public function insert_linked_box($box, $section_id) {
 
 
 		$this->importLog("Error inserting pluslet_section:");
-		$this->importLog( $db->errorInfo());
+		$this->importLog( $this->db->errorInfo());
 		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)");
 	}
 	
@@ -158,20 +196,20 @@ public function insert_linked_box($box, $section_id) {
 
   
 
-  public function import_box_links($box) {
+  public function importBoxLinks($box) {
 
   	$description = "";	
     
     foreach ( $box->LINKS->LINK as $link )  {
       
       
-      $db = new Querier;
-      $record = $db->query("SELECT * FROM location WHERE location = " .  $db->quote($link->URL),NULL,TRUE);
+      
+      $record = $this->db->query("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL),NULL,TRUE);
 
 
       if ($record[0]['location_id']) {
 
-	$record_title = $db->query("SELECT title.title,title.title_id, location.location  FROM 
+	$record_title = $this->db->query("SELECT title.title,title.title_id, location.location  FROM 
 location_title 
 JOIN title ON title.title_id = location_title.title_id
 JOIN location on location.location_id = location_title.location_id
@@ -194,15 +232,14 @@ if ($record_title[0][title]) {
   
   $description .= 
   "<div class=\"links\">" . 
-                  "{{dab},{" . $record[0]['location_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}" . 
-                  "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
+                  "<span class=\"link_title\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>" . 
                   "</div>";
   
 }
 
 $this->importLog ("Insert record:");
 $this->importLog($record_title); 
-$this->importLog("SELECT * FROM location WHERE location = " .  $db->quote($link->URL));
+$this->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL));
 
     }
     
@@ -210,15 +247,14 @@ $this->importLog("SELECT * FROM location WHERE location = " .  $db->quote($link-
 
 }
 
-public function import_box($box, $section_id) {
+public function importBox($box, $section_id) {
 	
-  $row = 0;
-  $column = 0;		
-	
-  $db = new Querier;	
+  $row = $this->getRow();
+  $column = $this->getColumn();	
+		
   $wc = new WordCleaner();
   
-  $db->exec("SET NAMES utf-8" );
+  $this->db->exec("SET NAMES utf-8" );
   	
   $description = null;
   
@@ -242,7 +278,7 @@ public function import_box($box, $section_id) {
   		if ($test !== false) {
   	  $this->importLog( $attr->value);
   	   
-  	  $attr->value = $this->download_images($attr->value);
+  	  $attr->value = $this->downloadImages($attr->value);
   	   
   	  $this->importLog($attr->value);
   
@@ -250,6 +286,10 @@ public function import_box($box, $section_id) {
   		}
   	}
   }
+  
+  
+  
+
   
   // Create html for the description
 
@@ -263,18 +303,18 @@ public function import_box($box, $section_id) {
 
   case "Text Box":
     
-   $this->insert_basic_pluslet($box, $section_id, $description); 	
+   $this->insertBasicPluslet($box, $section_id, $description); 	
     break;
   case "Basic Links":
 
-    $description .= $this->import_box_links($box);
-    $this->insert_basic_pluslet($box, $section_id, $description);
+    $description .= $this->importBoxLinks($box);
+    $this->insertBasicPluslet($box, $section_id, $description);
     break;
     
   case "Complex Links":
 
-   $description .= $this->import_box_links($box);
-   $this->insert_basic_pluslet($box, $section_id, $description);
+   $description .= $this->importBoxLinks($box);
+   $this->insertBasicPluslet($box, $section_id, $description);
     break;
 
   case "Embedded Media & Widgets":
@@ -288,18 +328,18 @@ public function import_box($box, $section_id) {
                       "</div>";
   }
 
-  	$this->insert_basic_pluslet($box, $section_id, $description);
+  	$this->insertBasicPluslet($box, $section_id, $description);
   break;
  
   case "Linked Box":
   	
-    		         $this->insert_linked_box($box, $section_id);
+    		         $this->insertLinkedBox($box, $section_id);
     		          
     	break;	         
     	
   case "RSS Feeds & Podcasts":
   	$feed_url = $box->RSS_FEED->URL;
-  	$this->insert_rss_pluslet($box, $section_id, $feed_url);
+  	$this->insertRSSPluslet($box, $section_id, $feed_url);
   	
   	break;
 
@@ -308,14 +348,20 @@ public function import_box($box, $section_id) {
 
     foreach ( $box->BOOKS->BOOK as $book )  {
       
+    	 
+    	 
+    	
       $description .= 
-      "<div class=\"books\">" . 
-		      "<a href=\"$book->URL\">$book->TITLE</a>" . 
+      "<div class=\"book\">" . 
+      		"<div class=\"book-cover-art\"><img class=\"cover-image\" src=\"$book->COVER_ART\"></div>" .
+		      "<a class=\"book-title\" href=\"$book->URL\">$book->TITLE</a>" . 
+		      "<div class=\"book-author\">$book->AUTHOR</div>" .
+		      "<div class=\"book-call-number\">$book->CALL_NUMBER</div>" .
 		      "<div class=\"book-description\">$book->DESCRIPTION</div>" .
 		      "</div>";
   }
 
-  $this->insert_basic_pluslet($box, $section_id, $description);
+  $this->insertBasicPluslet($box, $section_id, $description);
   
   break;
  
@@ -335,7 +381,7 @@ public function import_box($box, $section_id) {
   case "Guide Links":
     
   case "User Profile":
-   $this->insert_subject_specialist($box, $section_id);
+   $this->insertSubjectSpecialist($box, $section_id);
    
   case "Google Scholar":
    
@@ -346,7 +392,15 @@ public function import_box($box, $section_id) {
 
 }
 
-public function download_images($url) {
+
+public function insertChildTab($tab) {
+	 
+	
+	 
+}
+
+
+public function downloadImages($url) {
   // This method creates a folder for a guide image in assets, downloads the image , and then returns the new URL for that image
 
   global $AssetPath;
@@ -390,14 +444,14 @@ public function download_images($url) {
 public function getStaffID ($email_address) {
   // This method takes an email address and returns the subjectsplus staff id for the user
 
-  $db = new Querier;
-  $staff_id = $db->query("SELECT staff_id FROM staff WHERE email = '$email_address'");
+  
+  $staff_id = $this->db->query("SELECT staff_id FROM staff WHERE email = '$email_address'");
 
   return $staff_id[0][0];
 
 }
 
-public function output_owners() {
+public function outputOwners() {
 
 	$libguides_xml= $this->libguidesxml;
 	
@@ -423,26 +477,22 @@ public function output_owners() {
 	
 	
 	$owners_combined = zip($owner_names, $owner_email);
-
+    $owners_sorted = array_multisort($owners_combined);
 	echo "<select name=\"email\" class=\"owners\" >";
 	
 	foreach ($owners_combined as $owner) {
 	
 		
-		
-		
 			echo "<option value=\"$owner[1]\">$owner[0]</option>";
 		
-		
-	
-		
+			
 	}
 	echo "<select>";
 	
 	
 }
 
-public function output_guides($email_address) {
+public function outputGuides($email_address) {
   // Outputs a select box for guides 
 
   $libguides_xml= $this->libguidesxml;
@@ -470,67 +520,98 @@ public function output_guides($email_address) {
 
   
   $owners_combined = zip($owner_names, $owner_email);
-
- foreach ($owners_combined as $owner) {
-    echo "<section class=\"import-block\">";
-    echo "<h1>" . $owner[0] . "</h1>";
-    
-    
-    $guide_names = $libguides_xml->xpath("//OWNER/NAME[text() = '$owner[0]']/ancestor::GUIDE");
-    
-    echo "<select class=\"guides\" >";
-
-    foreach ($guide_names as $guide) {
-
-      echo "<option value=\"$guide->GUIDE_ID\">$guide->NAME - $guide->STATUS</option>";
-
-    }
-
-    echo "<select>";
-    
-    echo "<div class=\"import-controls\">";
-    echo "<h2>First import your links:</h2>";
-    echo  "<button class='import_links pure-button pure-button-primary'>Import Links</button>";
-    echo "<div class=\"loading\"></div>";
-    echo "<h2>Then import your guides:</h2>";
-    echo  "<button class='import_guide pure-button pure-button-primary'>Import Guide</button>";
-    echo "</div>";
-  	
-	echo "</section>";	
-  }
-
+ $previously_imported = array();
   
+
+  foreach ($owners_combined as $owner) {
+  //  echo "<section class=\"import-block\">";
+  //  echo "<h3>Please select a guide below.</h3>";
+
+    
+    
+ //   echo "<p>If you are looking for a specific guide enter it's name after clicking below.</p>";
+    echo "<h3>" . $owner[0] . "'s Guides</h3>";
+     
+  	$guide_names = $libguides_xml->xpath("//OWNER/NAME[text() = '$owner[0]']/ancestor::GUIDE");
+  
+  	echo "<select class=\"guides\" >";
+  
+  	foreach ($guide_names as $guide) {
+  	
+  	    $prexisting_guide = $this->db->query("SELECT * FROM subject WHERE subject_id = $guide->GUIDE_ID");
+  	    var_dump ($prexisting_guide);
+  	    
+  		if (!$prexisting_guide) {
+  		
+  		echo "<option value=\"$guide->GUIDE_ID\">$guide->NAME - $guide->STATUS</option>";
+
+  		
+  		
+  		
+  		} else {
+  			
+  			
+  		}
+  	}
+  	
+  
+  
+  	echo "</select>";
+  
+  	foreach ($guide_names as $guide) {
+  	
+  		$guide_imported_count = $this->db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '{$guide->GUIDE_ID}'");
+  		
+  		
+  		if ($guide_imported_count[0][0]  == "1") {
+  			array_push($previously_imported,array("guide_name" => (string) $guide->NAME, "guide_id" => (string) $guide->GUIDE_ID));
+  		}
+  	
+  	}
+  	
+  	echo "<script>";
+  	echo "var previously_imported = " . json_encode($previously_imported) . ";";
+  	echo "</script>";
+  	echo "</section>";
+  }
+  
+  
+  
+  
+  return $owners_combined;
 
 }
 
 
-public function guide_imported() {
+public function guideImported() {
 
   $guide_id = $this->getGuideID();
 
 
-  $db = new Querier;
+  
 
 
 
-  $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '$guide_id'");
-
-  return $guide;
-
-}
-
-
-
-public function guide_dupe($guide_name) {
-
-  $db = new Querier;
-  $guide = $db->query("SELECT COUNT(*) FROM subject WHERE subject = '$guide_name'");
+  $guide = $this->db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '$guide_id'");
 
   return $guide;
 
 }
 
-public function load_libguides_xml() {
+
+
+public function guideDupe($guide_url) {
+	
+  
+  $guide = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $guide_url");
+
+
+  
+  return $guide[0][0];
+
+}
+
+public function loadLibGuidesXML() {
 		
   $section_index = 0;
 
@@ -554,6 +635,7 @@ public function load_libguides_xml() {
   		    $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/STATUS"),	
 			$libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/PAGES//LINKS"),
 			$libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/OWNER_ACCOUNT_ID"),
+  		    $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/OWNER/EMAIL_ADDRESS"),
 			$libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/parent::GUIDE/TAGS")
 			);
 
@@ -566,11 +648,36 @@ public function load_libguides_xml() {
   
 }
 
+public function insertChildren() {
+	
+	$tabs = $this->db->query("SELECT * FROM tab");
+	
+	foreach ($tabs as $tab) {
+		$tab_id = $tab['tab_id'];
+		
+		if ($tab['parent'] == '') {
+			
+			$child_ids = array();
+			
+			$children =	$this->db->query("SELECT * FROM tab WHERE parent = $tab_id");
+					
+			foreach ($children as $child) {
+			
+				array_push($child_ids, array( "child" => $child['tab_id']));
+			
+			}
+			
+			$children_json = json_encode($child_ids);
+			$this->db->exec("UPDATE tab SET children='$children_json' WHERE tab_id='$tab_id'");
+		}
+	}
+	
+	
+	
+}
 
-public function load_libguides_links_xml() {
-
-  $db = new Querier;
-
+public function loadLibGuidesLinksXML() {
+	
   $all_titles = array();
   $titles = array();
   $dupes = array();
@@ -584,26 +691,27 @@ public function load_libguides_links_xml() {
   $link_values = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/..//LINKS/LINK");
    
   foreach (  $link_values as $link ) {
-  	error_reporting('E_ALL');
-  	ini_set('display_errors',1);
-  	
+ 	
     // Remove the proxy url from the link URL
     $noproxy_url = str_replace("https://iiiprxy.library.miami.edu/login?url=", "",$link->URL); 
-    $noproxy_url = $db->quote($noproxy_url);
+    $noproxy_url = $this->db->quote($noproxy_url);
     
     $clean_url =  str_replace("'","", $noproxy_url);
     
     array_push($urls, array("url" => $clean_url));
     
+    /*
     $ch = @curl_init($clean_url);
     @curl_setopt($ch, CURLOPT_HEADER, TRUE);
     @curl_setopt($ch, CURLOPT_NOBODY, TRUE);
     @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
     @curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $status = array();
-    preg_match('/HTTP\/.* ([0-9]+) .*/', @curl_exec($ch) , $status);
+    */
+    //preg_match('/HTTP\/.* ([0-9]+) .*/', @curl_exec($ch) , $status);
     
-    
+    		
+    /*
     if ($status[1] == 200) {
     	array_push($link_status, array("working_link" => "true"));
     	
@@ -611,23 +719,30 @@ public function load_libguides_links_xml() {
     	array_push($link_status, array("working_link" => "false"));
     	
     }
-    
-    $title =  $db->quote($link->NAME);
+    */
+   
+    		
+    $title =  $this->db->quote($link->NAME);
 	array_push($titles, array("title" => $title));
 	
 	
-    $record_check = $db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
-    $title_check = $db->query("SELECT COUNT(*) FROM title WHERE title = $title");
+    $record_check = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
+    $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
+    
+    
     $this->importLog ( $record_check) ;
     $this->importLog ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
     $this->importLog($record_check[0][0]);
 
     if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
 
-      if ($db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $db->quote($link->URL) . " , 1, 1, 'N' )" )) {
+      if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $this->db->quote($link->URL) . " , 1, 1, 'N' )" )) {
 	
+      	array_push($dupes, array("status" => "New Record Created"));
+      	 
+      	
 	$this->importLog("Inserted location");
-	$location_id = $db->last_id(); 
+	$location_id = $this->db->last_id(); 
 		
       } else {
 
@@ -643,13 +758,13 @@ public function load_libguides_links_xml() {
       // If there isn't an article in the title
       if (empty($maches[0])) {
 	
-	if( $db->exec("INSERT INTO title (title, description) VALUES (" . $db->quote($link->NAME) . ","  . $db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
+	if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote($link->NAME) . ","  . $this->db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
 	  $this->importLog( "Inserted title");
-	  $title_id = $db->last_id();
+	  $title_id = $this->db->last_id();
 
 	} else {
 	  $this->importLog("Error inserting title:" );
-	  $this->importLog(  $db->errorInfo() );
+	  $this->importLog(  $this->db->errorInfo() );
 	}
 	
       }
@@ -660,39 +775,41 @@ public function load_libguides_links_xml() {
 	
 	$clean_link_name = preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME);
 	
-	if( $db->exec("INSERT INTO title (title, description, pre) VALUES (" . $db->quote($clean_link_name) . ","  . $db->quote($link->DESCRIPTION_SHORT) . "," . $db->quote($matches[0]) . ")") ) {
+	if( $this->db->exec("INSERT INTO title (title, description, pre) VALUES (" . $this->db->quote($clean_link_name) . ","  . $this->db->quote($link->DESCRIPTION_SHORT) . "," . $this->db->quote($matches[0]) . ")") ) {
 	  $this->importLog( "Inserted title");
-	  $title_id = $db->last_id();
+	  $title_id = $this->db->last_id();
 
 	} else {
 	  $this->importLog("Error inserting title:" );
-	  $this->importLog(  $db->errorInfo() );
+	  $this->importLog(  $this->db->errorInfo() );
 	}
 	
       }
       
       
-      if( $db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
+      if( $this->db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
 	$this->importLog( "Inserted location_title"); 
 	
 
       } else {
 	$this->importLog( "Error inserting location_title:");
-	$this->importLog(  $db->errorInfo()  );
+	$this->importLog(  $this->db->errorInfo()  );
 
 	$this->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
       }
 
       
     } else {
-    
-    	array_push($dupes, array("status" => "Duplicate entry" ));
+    	array_push($dupes, array("status" => "Link Already Imported Into Records" ));
     	
     }
 
+    
+
+    
   }
   
-  $all_titles['titles'] = zip($titles, $dupes, $urls, $link_status);
+  $all_titles['titles'] = zip($titles, $dupes, $urls);
   
   $return_titles = json_encode($all_titles);
   
@@ -700,15 +817,15 @@ public function load_libguides_links_xml() {
 }
 
 
-public function import_libguides() {
-  $subject_values = $this->load_libguides_xml();
+public function importLibGuides() {
+  $subject_values = $this->loadLibGuidesXML();
  
-  $db = new Querier;
+  
   $subject_id = (string) $subject_values[0][1];
   $response = array();
 
 
-  if ($this->guide_imported() != 0) {
+  if ($this->guideImported() != 0) {
 
     //exit;
   }
@@ -729,7 +846,7 @@ public function import_libguides() {
       
 
 
-      if($db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
+      if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
 
       
       	$response = array("imported_guide" => $subject[1] );
@@ -747,16 +864,19 @@ public function import_libguides() {
         
 	$this->importLog( "Error inserting subject:");
 	$this->importLog ($query);
-        $this->importLog ( $db->errorInfo() ); 
+        $this->importLog ( $this->db->errorInfo() ); 
 	
       }
 
       if ($this->getGuideOwner() != null) {
-	$staff_id = $this->getStaffID( $this->getGuideOwner());
+      	
+      	$guide_owner = 
+      	
+	$staff_id = $this->getStaffID( $subject[8] );
 	
 	$this->importLog ("Staff ID: " . $staff_id );
 	
-	if($db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
+	if($this->db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
 	  $this->importLog ("Inserted staff: '$staff_id'");
 	  
 	} else {
@@ -778,19 +898,51 @@ public function import_libguides() {
 
     $tab_index = 0; 
     
+    $tab_children = array();
     
     foreach ($subject_page->PAGE as $tab) {
 
 
+    	try {
+    		
+    		$this->db->exec("ALTER TABLE `tab` ADD COLUMN `parent` VARCHAR(500) NULL AFTER `visibility`");
+    		$this->db->exec("ALTER TABLE `tab` ADD COLUMN `children` VARCHAR(500) NULL AFTER `parent`");
+    		
+    	} catch(Exception $e) {
+    	
+    		$this->importLog($e);	
+    		
+    	}
+    	
       // LibGuide's pages are tabs so make a new tab
 
-      
       $tab_index++; 
+      $visibility = 1;
+      $current_parent;
       
-      $clean_tab_name = $db->quote($tab->NAME);
+      $clean_tab_name = $this->db->quote($tab->NAME);
       
-      if($db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1)")) {
-	
+
+
+        $parent_id =  $tab->PARENT_PAGE_ID;
+        $tab_id = $tab->PAGE_ID;
+	    $external_url = $tab->EXTERNAL_LINK;
+	    
+     
+      
+      if($this->db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index,visibility, parent,children,extra,external_url) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1, $visibility, '','','','$external_url')")) {
+      	
+      	if ($parent_id != '') {
+      	    $this->db->exec("UPDATE tab SET parent='$parent_id' WHERE tab_id='$tab_id'");
+      	} else {
+      		
+      		
+      		
+      	}
+      		
+         
+      	
+      	
 	$this->importLog ("Inserted tab '$tab->NAME'");
 
       } else {
@@ -799,11 +951,19 @@ public function import_libguides() {
 	
         
 	$this->importLog ("Error inserting tab:");
-	$this->importLog ($db->errorInfo());
+	$this->importLog ($this->db->errorInfo());
 
       }
      
+      
+      
+     
+      
+      
+      
       $section_index = null;
+      
+      
       foreach ($tab->BOXES as $section) {
 
         // LibGuide's box parents into sections
@@ -813,13 +973,13 @@ public function import_libguides() {
         $section_index++;
 
 
-        if($db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
+        if($this->db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
           $this->importLog("Inserted section");
         } else { 
           $this->importLog("Problem inserting this section. This section  may already exist in the database.");
           
 	  $this->importLog("Error inserting section:");
-	  $this->importLog($db->errorInfo() );
+	  $this->importLog($this->db->errorInfo() );
           
         }
         
@@ -832,7 +992,7 @@ public function import_libguides() {
       	$this->importLog((string) $pluslet);
       		$this->importLog("\n");
  	
-	$this->import_box($pluslet, $section_uniqid);
+	$this->importBox($pluslet, $section_uniqid);
 	
 
 	$box_names['box_name'] = $pluslet->NAME;
@@ -845,7 +1005,13 @@ public function import_libguides() {
 	
       }
     }
+    
+    
+    
+    
   }
+  $this->insertChildren();
+  
   return json_encode($response);
   
  } 

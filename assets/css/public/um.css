@@ -1644,6 +1644,41 @@ table.item_listing th {
     
 }
 
+.book {
+	display: inline-block;
+    line-height:1.3em;
+    	font-size:.8em;
+}
+
+.book-cover-art {
+    float:left;
+    width: 30%;
+    margin-right: 3%;
+	clear:both;
+}
+
+.book-title {
+
+}
+.book-author {
+	font-style:italic;
+	
+
+}
+.book-call-number {
+
+	
+}
+.book-description {
+
+}
+
+.link-description {
+	
+	line-height:1.5em;
+	margin-top:1em;
+}
+
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
  .tip {

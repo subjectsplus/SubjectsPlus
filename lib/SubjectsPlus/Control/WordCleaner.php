@@ -4,7 +4,7 @@ namespace SubjectsPlus\Control;
 class WordCleaner {
 	
 
-	public function strip_word_html($text, $allowed_tags = '<a><b><i><sup><sub><em><strong><u><br><img>')
+	public function strip_word_html($text, $allowed_tags = '<a><b><i><sup><sub><u><br><img><p><br>')
 	{
 		// From https://gist.github.com/dave1010/674071
 		mb_regex_encoding('UTF-8');

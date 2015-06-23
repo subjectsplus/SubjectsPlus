@@ -10,8 +10,6 @@ include('../includes/header.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LibGuidesImport;
 
-
-
 ?>
 
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
@@ -25,7 +23,8 @@ use SubjectsPlus\Control\LibGuidesImport;
   <div class="titlebar_text">Select Your Name</div>
   </div>
   <div class="pluslet_body"> 
-
+<p>Please select your name below to being importing your guides.</p>
+<p>After selecting your name, you'll be able to choose which guide you want to import.</p>
 <form action="libguides_importer.php" method="GET">
 <?php 
 $libguides_importer = new LibGuidesImport('libguides.xml');
@@ -39,5 +38,5 @@ $libguides_with_owners = $libguides_importer->OutputOwners();
 </div>
 </div>
 <script type="text/javascript">
-$('select').select2();
+$('select').select2({'width':'500px'});
 </script>

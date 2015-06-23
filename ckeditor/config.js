@@ -29,6 +29,12 @@ CKEDITOR.editorConfig = function( config ) {
 	{ name: 'subjectsplus', groups: [ 'subsplus_resource', 'subsplus_asset' , 'subsplus_faq', 'subsplus_cat_link' ] },
 	{ name: 'about' }
 	];
+	
+	var roxyFileman = '../../ckeditor/fileman/index.html'; 
+
+	config.filebrowserBrowseUrl = roxyFileman;
+    config.filebrowserImageBrowseUrl = roxyFileman+'?type=image';
+    config.removeDialogTabs = 'link:upload;image:upload';
 
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.

@@ -18,7 +18,7 @@ $libguides_importer->setGuideID($_GET['libguide']);
 
 
 // Load all the links from the XML
-$libguides_links = $libguides_importer->load_libguides_links_xml();
+$libguides_links = $libguides_importer->loadLibGuidesLinksXML();
 
 echo $libguides_links;
 

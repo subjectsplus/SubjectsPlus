@@ -2,12 +2,48 @@
  * 
  */
 
+jQuery('.guides').select2({"width" : "75%"});
 
-//jQuery('.guides').select2();
- 
- 
- function guidesHandler(guides) {
+jQuery('.import_guide').prop("disabled", true);
 
+
+
+$('.dropspotty').each(function() { 
+
+	try {
+		
+var data_children =	$(this).attr('data-children'); 
+var childs = data_children.split();
+
+childs.forEach(function(data) {
+	
+	var split_ids = data.split(',');
+	console.log(split_ids);
+	split_ids.forEach(function(data) {
+		
+		$('#' + data ).hide();
+console.log(data);
+	})
+
+});
+
+
+	} catch(e) {
+		
+	}
+
+});
+
+
+$('.guides').on("change", function() {
+	
+	jQuery('.import_guide').prop("disabled", true);
+
+});
+
+ 
+function guidesHandler(guides) {
+	 
 	 console.log(guides[0]);
 	 
 	 for(var i=0; i<guides.length; i++) {
@@ -45,9 +81,12 @@
 	      
  }
 	 jQuery('.link-results-body').empty().append(table_data);
-	 jQuery('.link_results').show();
+	 //jQuery('.link_results').show();
+     jQuery('.import-output').append("<h1 class=\"links-success\">" + "Links Imported Successfully" + "</h1>");
+
 	 jQuery('.loading').remove();
-	 
+	 jQuery('.import_guide').prop("disabled",false);
+	 jQuery('.view-links-results').prop("disabled",false);
  }
  
  function importGuides(selected_guide_id, selected_guide_name, url) {
@@ -64,7 +103,7 @@
 	     error: function(data) {
 	         
 	         jQuery('.import-output').append("<p class='import-feedback'> There was an error importing this guide.</p>");
-	         jQuery('.import-output').append("<p>" + data.responseText + "</p>");
+	         jQuery('.import-output').append("<p class='import-error'>" + data.responseText + "</p>");
 	    	 console.log(data);
 	    	 
 	     },
@@ -94,7 +133,12 @@
 		 console.log(data);
 		 guidesHandler(data);
 		 
-		 jQuery('.import-output').append( "<p class='import-feedback'>Sucessfully Imported <a href='../guides/guide.php?subject_id=" + data.imported_guide[0] +  "'>" + selected_guide_name  + "</a></p>" ); 
+		 jQuery('.import-output').append( "<h1 class='import-feedback'>Sucessfully Imported <a target=\"_blank\" href='../guides/guide.php?subject_id=" + data.imported_guide[0] +  "'>" + selected_guide_name  + "</a></h1>" ); 
+		 jQuery('.import-output').append( "<p class='import-feedback'>You can compare your guide with it's <a target=\"_blank\" href='http://libguides.miami.edu/content.php?pid=" + data.imported_guide[0] +  "'>original LibGuide</a>.</p>" ); 
+
+		 jQuery('.import-output').append( "<p class='import-feedback'>Click here to view all your <a target=\"_blank\" href='../guides'> SubjectsPlus guides</a></p>" ); 
+
+
 		 jQuery('.loading').remove();
 	       }
 	     }
@@ -106,7 +150,7 @@
 	 
 	 var selected_guide_name = jQuery(this).parent().parent().find('option:selected').text(); 
 	 var selected_guide_id = jQuery(this).parent().parent().find('option:selected').val(); 
-
+//	 jQuery(this).parent().parent().find('option:selected').remove();
 
 	 jQuery('.import-output').append("<div class=\"loading loader\">Loading... </div>");
 	 
@@ -126,3 +170,12 @@ jQuery('.import_guide').on('click', function() {
 	 
 
 });
+
+
+jQuery('.view-links-results').on('click', function(){
+
+	jQuery('.link_results').toggle();
+	
+})
+
+

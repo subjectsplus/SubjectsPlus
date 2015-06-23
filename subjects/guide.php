@@ -10,6 +10,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array("ui"); //um don't want no ui_styles
@@ -132,6 +133,8 @@ if ($check_this) {
 
     $all_tabs = $lobjGuide->getTabs('public');
 
+    
+    
 } else {
     header("location:index.php");
 }
@@ -184,6 +187,12 @@ print $social_and_search;
 
             if ($multi_tab == TRUE) {
                 $lobjGuide->outputNavTabs('public');
+                
+                
+                
+                
+                
+                
                 $bonus_class= "";
                 print $printer_tabs;
             } else {
@@ -362,7 +371,97 @@ console.log(tabs);
 </style>
 <![endif]-->
 
+<style>
+  .ui-tabs-vertical { width: 55em; }
+  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
+  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+  </style>
+  
+<script>
 
+$('.dropspotty').each(function() { 
+
+	try {
+		
+var data_children =	$(this).attr('data-children'); 
+var childs = data_children.split();
+
+childs.forEach(function(data) {
+	
+	var split_ids = data.split(',');
+	console.log(split_ids);
+	split_ids.forEach(function(data) {
+		
+		$('#' + data ).hide();
+console.log(data);
+	})
+
+});
+
+
+	} catch(e) {
+		
+	}
+
+});
+
+
+$('.dropspotty').each(function() {
+
+	if ($(this).attr('data-children')) {
+
+		$(this).find('a').append(' ▾');
+		
+	} else {
+	}
+	
+});
+	
+
+$('.dropspotty').click(function() {
+
+	if ($(this).attr('data-children')) {
+
+		
+		
+		var children = $(this).attr('data-children').split(',');
+	console.log(children);
+	    children.forEach(function(data){
+	           $('#' + data).addClass("child-tab");
+
+	           $('#' + data ).addClass( "ui-tabs-vertical ui-helper-clearfix" );
+	           
+	           $('#' + data).toggle();
+
+	          
+	           
+		    });
+	}
+
+});
+
+</script>
+
+<style>
+ #tabs .child-tab a  {
+   
+    border-color: #ffffff;
+    border-image: none;
+    border-style: solid solid none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-width: 2px 2px medium;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    color: #333;
+    font-size: 14.95px;
+    margin: 0em 0.5em 0.15em 0;
+    padding: 0.3em 0.6em;
+    text-decoration: none;
+ }
+  </style>
 
 <?php
 

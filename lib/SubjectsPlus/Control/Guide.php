@@ -1,5 +1,6 @@
 <?php
 namespace SubjectsPlus\Control;
+use Assetic\Exception\Exception;
 /**
  * @file sp_Guide
  * @brief manage guide metadata
@@ -36,6 +37,8 @@ class Guide
     public function __construct($subject_id = "", $flag = "")
     {
 
+    		$this->db = new Querier;
+    	
         global $use_disciplines;
 
         if ($flag == "" && $subject_id == "") {
@@ -620,7 +623,7 @@ class Guide
                 $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.");
             }
 
-            // /////////////////////
+            ///////////////////////
             // Alter chchchanges table
             // table, flag, item_id, title, staff_id
             ////////////////////
@@ -867,7 +870,7 @@ class Guide
             $tab['label'] = $myrow[1];
             $tab['external_url'] = $myrow[3];
             $tab['visibility'] = $myrow[4];
-
+            $tab['tab_id'] = $myrow[0];
             $all_tabs[$myrow[2]] = $tab;
         }
 
@@ -889,26 +892,76 @@ class Guide
         }
 
         $all_tabs = $this->getTabs($lstrFilter);
-
+        $main_tabs = $this->db->query("SELECT tab_id FROM tab WHERE parent = '' AND children =  '[]'");
+        
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
-        	$class = "dropspotty";
-        	$class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
-            if (!$this->_isAdmin && $key == 0) {
-            $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"$home_tab_class\">$home_tab_text</a>";
-
-            } else {
-            $tabs .= "<li class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
-
-            }
-            $tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
+        
+        	$children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTab['tab_id']}");
+        $child_ids = array();
+        	 
+        foreach($children as $child) {
+           $decoded_children = json_decode($child[0]); 	
+           if ($decoded_children) {
+       	   foreach($decoded_children as $decoded_child) {
+       	  
+       	   	$child_id = $decoded_child->child; 
+       	     array_push($child_ids, $child_id);
+          	  	   	
+       	   		}
+       	   
+           	}	
+           
         }
+        
 
+        $childs = implode($child_ids, ',');
+        
+        	// Modded to handle tab children
+        	
+        	
+        $class = "dropspotty";
+        $class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
+        if (!$this->_isAdmin && $key == 0) {
+        	// Home tab
+        	
+        	$tabs .= "<li id=\"{$lobjTab['tab_id']}\" class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"$home_tab_class\">$home_tab_text</a>";
+        
+        } else {
+        	
+        	
+      
+        	if (array_search($lobjTab['tab_id'], $main_tabs)) {
+        		$tabs .= "<li id=\"{$lobjTab['tab_id']}\" data-children=\"$childs\"  class=\"$class main-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
+        		
+        	} else {
+        		
+        		if (!empty($childs)) {
+        			// Parents
+        			$tabs .= "<li id=\"{$lobjTab['tab_id']}\" data-children=\"$childs\"  class=\"$class parent-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
+        			 
+        		} else {
+        			// Children 
+        			$tabs .= "<li id=\"{$lobjTab['tab_id']}\" data-children=\"$childs\"  class=\"$class child-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
+        			 
+        		}
+        		
+        		 
+        		
+        		
+        		}
+        	
+        }
+        $tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
+        }
+        
         //$tabs .= "<li><a id=\"newtab\" href=\"#tabs-new\">{+}</a></li>";
         $tabs .= "</ul>"; // close out our tabs
-
+        
         $tabs .= $this->_isAdmin ? "" : "<div id=\"shadowkiller\"></div>"; // this div allows me to cover bottom of box-shadow on tabs.  crazy, bien sur
-
+        
+        	
+        
         echo $tabs;
     }
 

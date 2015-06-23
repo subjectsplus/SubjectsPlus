@@ -2166,6 +2166,24 @@ background:#333;
 height:auto;​
 }
 
+
+
+/* Added to style tabs for importer */
+#tabs li.child-tab {
+	
+	
+}
+
+#tabs li.parent-tab {
+background:bisque;
+}
+
+#tabs li.main-tab {
+	
+
+}
+
+
 .desktop {display: none;}
 
 /* ≥ 768px  .pure-u-md-* */
