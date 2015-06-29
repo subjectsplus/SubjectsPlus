@@ -102,7 +102,7 @@ function guidesHandler(guides) {
 	     data: "libguide=" + selected_guide_id,
 	     error: function(data) {
 	         
-	         jQuery('.import-output').append("<p class='import-feedback'> There was an error importing this guide.</p>");
+	         jQuery('.import-output').append("<p class='import-feedback'>There was an error importing this guide. You may be trying to import a guide that has already been imported.</p>");
 	         jQuery('.import-output').append("<p class='import-error'>" + data.responseText + "</p>");
 	    	 console.log(data);
 	    	 
@@ -133,11 +133,11 @@ function guidesHandler(guides) {
 		 console.log(data);
 		 guidesHandler(data);
 		 
-		 jQuery('.import-output').append( "<h1 class='import-feedback'>Sucessfully Imported <a target=\"_blank\" href='../guides/guide.php?subject_id=" + data.imported_guide[0] +  "'>" + selected_guide_name  + "</a></h1>" ); 
-		 jQuery('.import-output').append( "<p class='import-feedback'>You can compare your guide with it's <a target=\"_blank\" href='http://libguides.miami.edu/content.php?pid=" + data.imported_guide[0] +  "'>original LibGuide</a>.</p>" ); 
+		 jQuery('.import-output').append("<h1 class='import-feedback'>Sucessfully Imported <a target=\"_blank\" href='../guides/guide.php?subject_id=" + data.imported_guide[0] +  "'>" + selected_guide_name  + "</a></h1>" ); 
+		 jQuery('.import-output').append("<p class='import-feedback'>You can compare your guide with its <a target=\"_blank\" href='http://libguides.miami.edu/content.php?pid=" + data.imported_guide[0] +  "'>original LibGuide</a>.</p>" ); 
 
-		 jQuery('.import-output').append( "<p class='import-feedback'>Click here to view all your <a target=\"_blank\" href='../guides'> SubjectsPlus guides</a></p>" ); 
-
+		 jQuery('.import-output').append("<p class='import-feedback'>Click here to view all your <a target=\"_blank\" href='../guides'> SubjectsPlus guides</a></p>" ); 
+         jQuery('.previously-imported').append("<li><a target=\"_blank\" href='../guides/guide.php?subject_id=" + data.imported_guide[0] +  "'>" + selected_guide_name  + "</a></li>");
 
 		 jQuery('.loading').remove();
 	       }

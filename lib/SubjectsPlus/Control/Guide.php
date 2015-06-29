@@ -942,7 +942,7 @@ class Guide
         			 
         		} else {
         			// Children 
-        			$tabs .= "<li id=\"{$lobjTab['tab_id']}\" data-children=\"$childs\"  class=\"$class child-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
+        			$tabs .= "<li id=\"{$lobjTab['tab_id']}\"  class=\"$class child-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
         			 
         		}
         		
@@ -1339,5 +1339,3 @@ class Guide
 	}
 
 }
-
-?>

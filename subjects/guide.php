@@ -155,6 +155,13 @@ if (isset ($header_type) && $header_type != 'default') {
     include("includes/header.php");
 }
 
+/*if (in_array($_REQUEST["subject"], $chcGuides)) {
+    include("includes/header_chc.php");
+    $our_site="chc";
+} else {
+    include("includes/header_um.php");
+    $our_site="um";
+}*/
 
 // do we have more than one tab?
 if (count($all_tabs) > 1) {

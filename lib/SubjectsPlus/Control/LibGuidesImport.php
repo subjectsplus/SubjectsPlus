@@ -367,6 +367,20 @@ public function importBox($box, $section_id) {
  
   case "User Submitted Links":
   
+  case "Files":
+  
+  	foreach ( $box->FILES as $files )  {
+  	
+  		foreach ($files->FILE as $file) {
+  			$description .= "<div class=\"file\">" .
+    		    "<div class=\"file-title\">" . $file->NAME . "</div>"
+    		    . "<div class=\"file-description\">" . $file->DESCRIPTION . "</div>" 
+    		    . "<div class=\"file-path-name\">" .$file->FILE_NAME . "</div>"
+   		    . "</div>";
+  		}
+  	}
+  	
+  	$this->insertBasicPluslet($box, $section_id, $description);
   
   case "User Feedback":
     
