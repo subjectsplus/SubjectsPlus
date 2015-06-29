@@ -155,13 +155,6 @@ if (isset ($header_type) && $header_type != 'default') {
     include("includes/header.php");
 }
 
-/*if (in_array($_REQUEST["subject"], $chcGuides)) {
-    include("includes/header_chc.php");
-    $our_site="chc";
-} else {
-    include("includes/header_um.php");
-    $our_site="um";
-}*/
 
 // do we have more than one tab?
 if (count($all_tabs) > 1) {
@@ -445,23 +438,7 @@ $('.dropspotty').click(function() {
 
 </script>
 
-<style>
- #tabs .child-tab a  {
-   
-    border-color: #ffffff;
-    border-image: none;
-    border-style: solid solid none;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-width: 2px 2px medium;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-    color: #333;
-    font-size: 14.95px;
-    margin: 0em 0.5em 0.15em 0;
-    padding: 0.3em 0.6em;
-    text-decoration: none;
- }
-  </style>
+
 
 <?php
 
