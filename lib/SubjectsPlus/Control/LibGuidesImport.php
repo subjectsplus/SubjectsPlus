@@ -371,11 +371,17 @@ public function importBox($box, $section_id) {
   
   	foreach ( $box->FILES as $files )  {
   	
+  		
+  		
+  		
   		foreach ($files->FILE as $file) {
+
+  		//	$downloaded_file = $this->downloadFile("http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID");
+  			
   			$description .= "<div class=\"file\">" .
-    		    "<div class=\"file-title\">" . $file->NAME . "</div>"
+    		    "<div class=\"file-title\"><a href=\"http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID\">$file->NAME</a></div>"
     		    . "<div class=\"file-description\">" . $file->DESCRIPTION . "</div>" 
-    		    . "<div class=\"file-path-name\">" .$file->FILE_NAME . "</div>"
+    		    
    		    . "</div>";
   		}
   	}
@@ -454,6 +460,46 @@ public function downloadImages($url) {
   return $img_path;
 
 }
+
+
+public function downloadFile($url) {
+
+	global $AssetPath;
+
+	$ch = curl_init();
+	$timeout = 5;
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+	$data = curl_exec($ch);
+	curl_close($ch);
+
+	// Create a path for the iamge
+	$dir_name =  dirname(dirname(dirname(dirname(__FILE__)))) . "/assets/imported_files/" . $this->_guide_id . "/";
+
+	// Make the guide's asset directory if needed
+	if (!is_dir($dir_name))
+	{
+		mkdir($dir_name, 0777, true);
+	}
+
+
+	// Write the file
+	$file_name = substr( $url, strrpos( $url, '/' )+1 );
+	$file = fopen( $dir_name .  $file_name, 'w+');
+	fwrite($file, $data);
+	fclose($file);
+
+
+	// Return the new URL
+	$file_path = $AssetPath . "/imported_files/" . $this->_guide_id . "/" . $file_name;
+
+	$this->importLog($file_path);
+
+	return $file_path;
+
+}
+
 
 public function getStaffID ($email_address) {
   // This method takes an email address and returns the subjectsplus staff id for the user
