@@ -31,6 +31,8 @@ class Pluslet_HTML5Video extends Pluslet {
   	    $this->_extra['vimeo'] = "";
   	    $this->_extra['mp4'] = "";
   	    $this->_extra['ogg'] = "";
+  	    $this->_extra['kaltura'] = "";
+  	    
   	}else
   	{
   	    $this->_extra = json_decode( $this->_extra, true );
@@ -40,6 +42,7 @@ class Pluslet_HTML5Video extends Pluslet {
 
   	ob_start();
   	include __DIR__ . '/views/HTML5Video.html';
+
   	$view = ob_get_clean();
 
   	$this->_body = $view;
@@ -125,9 +128,32 @@ class Pluslet_HTML5Video extends Pluslet {
             $this->_body .= "<div id='video_markup'><video class='video_display' controls><source class='video_display' src='" . $mp4 . "' type='video/mp4'><source class='video_display' src='" . $ogg . "' type='video/ogg'>Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href='videofile.ogg'>download it</a> and watch it with your favorite video player! </video></div>";
 
         }
+        
+        if( $this->_extra['kaltura'] != "" ) {
+        	 
+        	$lobjSplit = explode('/', $this->_extra['kaltura']);
+        	 
+        	if (isset($lobjSplit[5])) {
+        		$kaltura_ref_id = $lobjSplit[5];
+        	} else {
+        		$kaltura_ref_id = $this->_extra['kaltura'];
+        
+        	}
+   
+        
+        	$this->_body .= "<div id='video_markup'><div id='kaltura-player'>" .
+        			 
+        			"<iframe src=\"//cdnapi.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/25208101/partner_id/1332041?iframeembed=true&playerId=kplayer&entry_id={$kaltura_ref_id}&flashvars[streamerType]=auto\""
+        			. "width=\"100%\" height=\"480px\" allowfullscreen webkitallowfullscreen mozAllowFullScreen frameborder=\"0\"></iframe>"
+        					. "</div></div>";
+        	 
+        }
+        
+        
+        
+        }        
 
 
-    }
 
     static function getMenuName()
     {
