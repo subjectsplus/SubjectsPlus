@@ -40,10 +40,8 @@ class Pluslet_HTML5Video extends Pluslet {
 
   	// Create and output object
 
-  	ob_start();
-  	include __DIR__ . '/views/HTML5Video.html';
 
-  	$view = ob_get_clean();
+  	$view = $this->loadHtml(__DIR__ . '/views/HTML5Video.html' );
 
   	$this->_body = $view;
     }
