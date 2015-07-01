@@ -53,24 +53,32 @@ password as you will need this information later.
 	on a copy of the data, rather than the original.  For the updater, your MySQL user will need SELECT, INSERT,
 UPDATE, ALTER, DELETE, CREATE and DROP privileges.
 
-3. Visit the SubjectsPlus Control Panel with your browser.
+3.  Set these folder permissions are okay.
 
-	Go to the root of the control folder (with your browser).  It will be something
-	like www.mysite.edu/sp/control/ and follow the instructions
+/control/includes/config-default.php     --- readable by webserver to make config.php
+/control/includes/                       --- writable by webserver to write config.php
+/subjects/.htaccess                      --- writable by webserver to write .htaccess
+/api/.htaccess                      	 --- writable by webserver to write .htaccess
+/assets/users/                         	 --- writable by webserver to write .htaccess
 
-	Once you are done, you should be dropped into the login page.
+    In a Linux+Apache environment, you can usually make a directory or file writable by the webserver by changing the 
+    permissions group to 'apache':
+      chgrp apache [directory or filename]
+    e.g.:
+      chgrp apache control/includes/
 
-4. In the Control Panel, visit admin > config site and see if anything needs tweaking.  For instance, there is now
+
+4. Visit the SubjectsPlus Control Panel with your browser.
+
+    Go to the root of the control folder (with your browser).  It will be something
+    like www.mysite.edu/sp/control/ and follow the instructions.
+
+    Once you are done, you will be given a login username and password; make a note of this password and follow 
+    the link to the login page to get started.
+
+
+5. In the Control Panel, visit admin > config site and see if anything needs tweaking.  For instance, there is now
 an enlarged set of info about staff users; you might want to cut it back and/or decide which fields are required.
-
-5.  Everything went okay?  Hooray!  Now make sure these folder permissions are okay.  (The first two probably were OK 
-or else the installer would have conked out.)
-
-/control/includes/config-default.php     --- readable by php to make config.php
-/control/includes/                       --- writable by php to write config.php
-/subjects/.htaccess                      --- writable by php to write .htaccess
-/api/.htaccess                      	 --- writable by php to write .htaccess
-/assests/users/                          --- writable by php to make new user folders
 
 6. You will need to customize some of the Special pluslet types to match your
 local environment:
