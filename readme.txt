@@ -59,6 +59,7 @@ UPDATE, ALTER, DELETE, CREATE and DROP privileges.
 /control/includes/                       --- writable by webserver to write config.php
 /subjects/.htaccess                      --- writable by webserver to write .htaccess
 /api/.htaccess                      	 --- writable by webserver to write .htaccess
+/assets/users/                         	 --- writable by webserver to write .htaccess
 
     In a Linux+Apache environment, you can usually make a directory or file writable by the webserver by changing the 
     permissions group to 'apache':
