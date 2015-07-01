@@ -29,6 +29,10 @@ class Pluslet {
     protected $_debug;
 
     protected $_pluslet;
+
+    // added v4
+    protected $_favorite_box;
+    
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
         $this->_pluslet_id = $pluslet_id;
