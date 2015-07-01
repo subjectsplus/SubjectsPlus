@@ -114,11 +114,12 @@ Header and nav/subnav stuff
   display: none;
 }
 
+
 header {
   width: 100%;
   background-color: #fff;
   border-bottom: 1px solid #B7B7B7;
-  height: 2.9em;
+  min-height: 2.9em;
   line-height: 2.8em;
 }
 
@@ -139,32 +140,23 @@ header {
 }
 
 #topnav li a {
-
-
   text-decoration: none;
-  padding: .5em 1em;
+  padding: .5em 0.7em;
   text-align: left;
   font-size: 1.2em;
-  color: #333;
   color: #858585;
 }
 
 #topnav li a.profile {padding-right: 0px;}
 
-#topnav li a.selected, #topnav li:hover, #topnav li.selected {
-  color: #E488B6;
-}
-
-#topnav li:hover {
-
-}
-
-#topnav li.selected a, #topnav li a:hover {
+#topnav li a.selected, #topnav li:hover, #topnav li a:hover, #topnav li.selected, #topnav li.selected a {
   color: #E488B6 !important;
 }
 
 #topnav li.nohover {
   background-color: transparent;
+  float: right;
+  margin: 0 15px 8px 0;
 }
 
 #topnav > li > div {
@@ -184,7 +176,7 @@ header {
   padding: 0px 0;
   position: absolute;
   border: 0px solid #9A9A9A;
-  top: 60px;
+  top: 44px;
   min-width: 200px;
   max-width: 800px;
   z-index: 1000;
@@ -252,6 +244,12 @@ header {
   border: 1px solid #9A9A9A;
 }
 
+#topnav li:nth-last-child(3), #topnav li:nth-last-child(2) { position: relative; }
+
+#topnav li:nth-last-child(3) div, #topnav li:nth-last-child(2) div {
+  right:10px;
+}
+
 /* old stuff? */
 
 .logo {
@@ -266,9 +264,7 @@ header {
   margin-top: 11px;
 }
 
-#navcats ul {
-
-}
+#navcats ul {}
 
 
 #navcats ul li  {
@@ -277,7 +273,6 @@ header {
   display: block;
   float: left;
   text-align: center;
-
 }
 
 
@@ -304,8 +299,49 @@ header {
 }
 
 
-/* Main content areas */
+/* Page structure - added by PV */
 
+.guide-parent-wrap {margin: 0 0 0 0;}
+
+.panel-wrap {background-color: #333; float: left; width:60px; height:100%;}
+
+.guide-wrap {
+  background-color: transparent; 
+  float: left;
+  width: -moz-calc(100% - 60px);
+  width: -webkit-calc(100% - 60px);
+  width: calc(100% - 60px);
+  height:100%;
+}
+
+#savour  {
+  height: 60px; width: 100%;
+  text-align: center;
+}
+
+#save_guide {
+  display:none;
+  margin: 8px 0;
+}
+
+
+.top-panel-options {background-color:#333; position:absolute; height: 100%;  color: #fff; width:60px;}
+
+.top-panel-options-list {list-style: none outside none; margin:45px 0 0 0; padding:0; }
+
+.top-panel-options-list li {display:block; margin:0; padding:0; text-align:center; padding:12px 0; position: relative; background-color: transparent; border-bottom: 1px solid #ccc;}
+
+.top-panel-options-list li:first-child {}
+
+.top-panel-options-list li a {
+  text-decoration: none !important;
+  text-align: center;
+  font-size: 0.8em;
+  color: #fff;
+}
+
+
+/* Main content areas */
 
 #maincontent {
   clear: both;
@@ -1113,11 +1149,6 @@ div.tooltip div
 
 /* guides/index.php */
 
-#savour,  {
-  clear: both;float:left; margin-top: 1em; height: 30px;  width: 100%;
-
-}
-
 .narrow {
   mad-width: 300px;
 }
@@ -1125,14 +1156,14 @@ div.tooltip div
 #save_zone button {display: inline-block;} /* otherwise hidden by another declaration */
 
 #response {
-
   position: absolute;
+  top:45px;
   float: left;
   background-color: #DD647F;
   width: 100%;
   text-align:center;
   display: none;
-  margin-top:-15px;
+  margin-top:0;
   padding: .5em 0;
 
 }
@@ -1688,14 +1719,17 @@ div.breather > h2 {
 
 #tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
 
+
+
 /* Secondary Nav for Guides Creation */
 
 #guide_header {
-  width: 100%;
+  width:100%;
   background-color: #333;
-  border-top: 2px solid #fff;
-  border-bottom: 1px solid #000;
-  height: 2.8em;
+  margin:2px 0 0 0;
+  /* border-top: 2px solid #fff;
+  border-bottom: 1px solid #000; */
+  height: 3em;
   line-height: 2.8em;
 }
 
@@ -1765,35 +1799,32 @@ div.breather > h2 {
 
 #hide_header {
   background-color: #fff;
-  padding: 0em 0em;
-  padding-right: .5em;
-  top: 0;
+  padding: 7px 0;
   font-size: 1.2em;
   cursor: pointer;
+  text-align:center;
+  margin: 2px 0 0;
 }
 
 #hide_header img {
-  position:relative;
-  top: 2px;
-  margin-left: .5em;
-  margin-right: 0;
+  
+  
+  
 }
 
 /* The draggable boxes from the admin guide header */
 
 #box_options {
-  background-color: #FFFFFF;
-  border: 1px solid #CCCCCC !important;
-  border-radius: 5px;
+  background-color: #444444;
   cursor: pointer;
   display: none;
-  float: left;
-  list-style-type: none;
-  margin: 0 10px 0 -12px !important;
-  padding: 0 5px 1px;
+  margin: 0;
+  padding: 5px;
   position: absolute;
-  top: 50px;
-  z-index: 1000 !important;
+  top: 0;
+  left:60px;
+  z-index: 9999999 !important;
+  width:200px;
 
 }
 #box_options li {
@@ -1923,12 +1954,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 
 #tabs {
-
-  clear:both;
-  position: relative;
-  width: 94%;
-  margin: 0 auto;
-  top:35px;
+  margin: 0 55px 0 10px;
 }
 
 #tab_options {
@@ -2004,10 +2030,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 }
 
-#save_guide {
-  display:none;
 
-}
 
 /* pure overrides */
 
@@ -2152,19 +2175,9 @@ li.hidden_tab.ui-state-default
 
 
 
-/* Keep search bar in control from overlapping tabs */
 
-#guide_header .pure-g {
-background:#333;
-}
 
-#tabs {
 
-}
-
-#guide_header {
-height:auto;​
-}
 
 
 
@@ -2186,17 +2199,55 @@ background:bisque;
 
 .desktop {display: none;}
 
+
+
+/*///////////////////////////////////////////
+   // Responsive - PV
+   ////////////////////////////////////////////*/
+
+
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) {
+
+
+
  
 }
+
+
+
+
+
 
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
  
+#topnav li a {padding: .5em 0.8em;}
+
+#topnav li.nohover {
+  background-color: transparent;
+  float: none;
+  margin: 0 0 0 0;
 }
+
+#topnav li:nth-last-child(3) div, #topnav li:nth-last-child(2) div {left:0;}
+
+
+
+}
+
+
+
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
+
 .desktop {display: inline-block;}
+
+#topnav li a {padding: .5em 1em;}
+
+
+
+
 }
+
