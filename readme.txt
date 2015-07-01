@@ -60,6 +60,13 @@ UPDATE, ALTER, DELETE, CREATE and DROP privileges.
 /subjects/.htaccess                      --- writable by webserver to write .htaccess
 /api/.htaccess                      	 --- writable by webserver to write .htaccess
 
+    In a Linux+Apache environment, you can usually make a directory or file writable by the webserver by changing the 
+    permissions group to 'apache':
+      chgrp apache [directory or filename]
+    e.g.:
+      chgrp apache control/includes/
+
+
 4. Visit the SubjectsPlus Control Panel with your browser.
 
     Go to the root of the control folder (with your browser).  It will be something
