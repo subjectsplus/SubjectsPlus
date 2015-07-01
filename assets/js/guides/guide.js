@@ -437,6 +437,7 @@ function setupSaveButton( lstrSelector )
 	var boxsetting_hide_titlebar = Number($('input[id=notitle-'+lintID+']').is(':checked'));
 	var boxsetting_collapse_titlebar = Number($('input[id=start-collapsed-'+lintID+']').is(':checked'));
 	var boxsetting_titlebar_styling = $('select[id=titlebar-styling-'+lintID+']').val();
+        var favorite_box = Number($('input[id=favorite_box-'+lintID+']').is(':checked'));
 
 
 	//////////////////////////////////////////////////////////////////
@@ -605,7 +606,8 @@ function setupSaveButton( lstrSelector )
 		this_subject_id: subject_id,
 		boxsetting_hide_titlebar: boxsetting_hide_titlebar,
 		boxsetting_collapse_titlebar: boxsetting_collapse_titlebar,
-		boxsetting_titlebar_styling: boxsetting_titlebar_styling
+		boxsetting_titlebar_styling: boxsetting_titlebar_styling,
+        favorite_box: favorite_box
 
 	    },
 	    type: "POST",
