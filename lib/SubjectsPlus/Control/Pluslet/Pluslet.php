@@ -32,7 +32,7 @@ class Pluslet {
 
     // added v4
     protected $_favorite_box;
-    
+
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
         $this->_pluslet_id = $pluslet_id;
@@ -54,7 +54,7 @@ class Pluslet {
         /////////////
 
         $querier = new Querier();
-        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling
+        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
 
@@ -73,6 +73,10 @@ class Pluslet {
             $this->_hide_titlebar = $plusletArray[0]["hide_titlebar"];
             $this->_collapse_body = $plusletArray[0]["collapse_body"];
             $this->_titlebar_styling = $plusletArray[0]["titlebar_styling"];
+
+
+            $this->_favorite_box = $plusletArray[0]["favorite_box"];
+
         }
 
 
@@ -257,6 +261,14 @@ class Pluslet {
                 <select id=\"titlebar-styling-$this->_pluslet_id\">
                     $tb_styles
                 </select>
+
+                <label for=\"favorite_box-$this->_pluslet_id\" class=\"pure-checkbox\">
+                <input id=\"favorite_box-$this->_pluslet_id\" type=\"checkbox\"";
+
+        if ($this->_favorite_box == 1) {$box_settings .= " checked";}
+
+        $box_settings .= "> " . _("Favorite Box") . "
+            </label>
             </form>
             </div>";
 
