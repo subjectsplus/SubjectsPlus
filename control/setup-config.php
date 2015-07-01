@@ -136,7 +136,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
 						"dbName_SPlus" => array( _( "MySQL SubjectsPlus Database" ), _( "Name of the SubjectsPlus database" ), "string", "left", "" , _( "database help?" ) ),
 
-						"upload_whitelist" => array( _( "List of accepted uploads' file extentions" ), _( "This option contains the coma-separated list of accepted file extensions for file uploads via CKEditor." ), "array", "right", "large", "" , _("If a file isn't in this list, it should not be uploaded.  File uploads only occur via the admin backend, using CKEditor, but this is to stop a user from doing something, uh, foolish.") ),
+						"upload_whitelist" => array( _( "List of accepted uploads' file extentions" ), _( "This option contains the comma-separated list of accepted file extensions for file uploads via CKEditor." ), "array", "right", "large", "" , _("If a file isn't in this list, it should not be uploaded.  File uploads only occur via the admin backend, using CKEditor, but this is to stop a user from doing something, uh, foolish.") ),
 
 						"proxyURL" => array( _( "Proxy URL" ), _( "String which should be prepended if you use a proxy server" ), "string", "right", "large", "" , _( "In the Records tab of SP, if you flag an item as 'restricted,' the proxy string will be prepended." ) ),
 
