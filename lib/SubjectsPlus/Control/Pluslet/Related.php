@@ -12,8 +12,8 @@ class Pluslet_Related extends Pluslet {
 		$this->db = new Querier ();
 	}
 	protected function onEditOutput() {
-		$output = $this->outputRelatedGuides ();
-		$this->_body = "<div>$output</div>";
+		
+		$this->_body = "<div>This pluslet automatically links to any child guides that you have assigned to this guide.</div>";
 	}
 	public function outputRelatedGuides() {
 		$output = "";
