@@ -633,90 +633,128 @@ ob_end_flush();
  });
 </script>
 
-<div id="guide_header">
-  <div class="pure-g">
 
-    <div class="pure-u-1-2">
-      <form class="pure-form" id="guide_search">
-        <ul id="guide_nav">
-          <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
-          <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
-            <?php print $all_boxes; ?>
-          </li>
-          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
-          <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
+<!-- ///////////////////////////////////
+   // Structure for Guide Backend - PV
+   ///////////////////////////////////-->
+
+<div class="guide-parent-wrap"> 
+  
+      <div class="panel-wrap">
+        <div id="hide_header">
+          <img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" />
+        </div>
+        
+        <div class="top-panel-options">
+          <ul class="top-panel-options-list">
+              <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><br /><?php print _("New Box");?></a>
+              <?php print $all_boxes; ?></li>
+              
+              <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
+          </ul>
+        </div>
+      </div><!--end .panel-wrap-->
+      
+      
+      <div class="guide-wrap">
+          
+          <!--GUIDE HEADER CONTAINER-->
+          <div id="guide_header">
+              <div class="pure-g">
+                <div class="pure-u-1-2">
+                    <form class="pure-form" id="guide_search">
+                      <ul id="guide_nav">
+                        <li><h2>
+                  <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
+                  <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
+                  <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+                  </h2></li>
+                        <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
+
+                        <li class="find-guide-parent">
+                          <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
+                        </li>
 
 
-	  <li class="find-guide-parent">
-	    <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
-	  </li>
+    <script>
 
-	  <script>
+     var startURL = '../guides/guide.php?subject_id=';
+     var sp_path = document.URL.split('/')[3];
 
-	   var startURL = '../guides/guide.php?subject_id=';
-	   var sp_path = document.URL.split('/')[3];
+     jQuery('.find-guide-input').autocomplete({
 
-	   jQuery('.find-guide-input').autocomplete({
+       minLength  : 3,
+       source   : '//' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+       focus: function(event, ui) {
 
-	     minLength	: 3,
-	     source		: '//' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
-	     focus: function(event, ui) {
-
-	       event.preventDefault();
-	       jQuery(".find-guide-input").val(ui.item.label);
+         event.preventDefault();
+         jQuery(".find-guide-input").val(ui.item.label);
 
 
-	     },
-	     select: function(event, ui) {
-	     	var tab_id = ui.item.hash.split('-')[1];
-	     	var box_id = ui.item.hash.split('-')[2];
-	     	var selected_box = ".pluslet-" + box_id;
+       },
+       select: function(event, ui) {
+        var tab_id = ui.item.hash.split('-')[1];
+        var box_id = ui.item.hash.split('-')[2];
+        var selected_box = ".pluslet-" + box_id;
 
-	     	$('#tabs').tabs('select', tab_id);
+        $('#tabs').tabs('select', tab_id);
 
-	     	jQuery(selected_box).effect("pulsate", {
-	     		times:1
-	     	}, 2000);
+        jQuery(selected_box).effect("pulsate", {
+          times:1
+        }, 2000);
 
-	     	window.location.hash = 'box-' + box_id;
+        window.location.hash = 'box-' + box_id;
          }
-	   });
+     });
+
+    </script>
+
+                      <!--<li class="selected"></li>-->
+                      </ul>
+                    </form>
+                </div> <!-- end pure 1-2-->
+              
+                <div class="pure-u-1-2"> 
+                  <h2>
+                  <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
+                  <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
+                  <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+                  </h2>
+                </div><!-- end pure 1-2-->
+              </div> <!-- end pure -->
+          </div> <!-- end guide header-->
+
+          <input id="extra" type="hidden" size="1" value="<?php
+
+            if (isset($lobj)) {
+             print $jobj->{'maincol'}; 
+
+            }
+
+            ?>" name="extra" />
+
+          <!-- Save Button -->
+          <p id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
 
 
-	  </script>
+          <!--GUIDE BUILDER CONTAINER-->
+          <div class="guidewrapper">
+               <div id="tabs">
 
-          <!--<li class="selected"></li>-->
-        </ul>
-      </form>
-    </div> <!-- end pure 1-2-->
-    <div class="pure-u-1-2"> <h2>
-      <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
-      <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-      <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+                 <?php $lobjGuide->outputNavTabs(); ?>
 
+                 <?php
+                 $lobjGuide->outputTabs();
+                 ?>
 
-    </h2></div><!-- end pure 1-2-->
-  </div> <!-- end pure -->
-</div> <!-- end guide header-->
+               </div>
+          </div>
 
-
-
-<input id="extra" type="hidden" size="1" value="<?php
-
-if (isset($lobj)) {
- print $jobj->{'maincol'}; 
-
-}
-
-?>" name="extra" />
-
-<!-- Save Button -->
-<p align="center" id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
-	 </div>
-	 <!-- end guide header -->
-
-	 <!-- Feedback -->
-	 <div id="response"></div>
+      </div><!--end .guide-wrap-->
+  
+      <!-- Feedback -->
+      <div id="response"></div>
+	 
 
 	 <!-- new tab form (suppressed until wrench clicked) -->
 	 <div id="dialog" title="Tab data">
@@ -756,6 +794,7 @@ if (isset($lobj)) {
              </fieldset>
 	   </form>
 	 </div>
+
 	 <script>
 	  //make tabs sortable
 	  jQuery(function() {
@@ -776,22 +815,10 @@ if (isset($lobj)) {
               }
 	    });
 	  });
-
-
-
-
  
 	 </script>
 
-	 <div class="guidewrapper">
-	   <div id="tabs">
+	 
+</div> <!--end .guide-parent-wrap-->
 
-	     <?php $lobjGuide->outputNavTabs(); ?>
-
-	     <?php
-	     $lobjGuide->outputTabs();
-	     ?>
-
-	   </div>
-	 </div>
-	 <?php include("../includes/footer.php"); ?>
+<?php include("../includes/footer.php"); ?>
