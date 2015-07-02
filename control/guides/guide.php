@@ -212,9 +212,6 @@ ob_end_flush();
 ?>
 
 
-
-
-
 <script type="text/javascript">
  // We're just setting up a few vars that we'll need
  var user_id = "<?php print $_SESSION["staff_id"]; ?>";
@@ -638,21 +635,12 @@ ob_end_flush();
    // Structure for Guide Backend - PV
    ///////////////////////////////////-->
 
-<div class="guide-parent-wrap"> 
+<div class="guide-parent-wrap" id ="guide-parent-wrap">
   
       <div class="panel-wrap">
         <div id="hide_header">
           <img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" />
-        </div>
-        
-        <div class="top-panel-options">
-          <ul class="top-panel-options-list">
-              <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><br /><?php print _("New Box");?></a>
-              <?php print $all_boxes; ?></li>
-              
-              <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
-          </ul>
-        </div>
+        </div>         
       </div><!--end .panel-wrap-->
       
       
@@ -818,7 +806,50 @@ ob_end_flush();
  
 	 </script>
 
-	 
-</div> <!--end .guide-parent-wrap-->
+</div> <!--end .guide-parent-wrap-->  
+
+
+<!-- FLYOUT PANEL-->
+<div id="main-options">
+
+  <!--Flyout trigger-->
+  <div class="trigger-main-options">
+    open
+  </div>
+
+  <div class="top-panel-options">          
+      <ul class="top-panel-options-list">
+          <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><br /><?php print _("New Box");?></a>
+          <?php print $all_boxes; ?></li>
+          
+          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
+          <li><a href="#" id="main-options-close">Close</a></li>
+      </ul>
+  </div>
+
+</div><!--end #main-options-->
+
+<script>
+jQuery(function() {
+  
+
+
+  var mainslider = $('#main-options').slideReveal({
+    trigger: $(".trigger-main-options"),
+    push:false,
+    width: 90
+  }); 
+
+  $( "#main-options-close" ).click(function() {
+      mainslider.slideReveal("hide");
+  });
+
+ 
+
+
+});
+</script>
+
 
 <?php include("../includes/footer.php"); ?>
+ 

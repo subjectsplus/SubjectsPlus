@@ -301,9 +301,11 @@ header {
 
 /* Page structure - added by PV */
 
+html,body { height:100%; }
+
 .guide-parent-wrap {margin: 0 0 0 0;}
 
-.panel-wrap {background-color: #333; float: left; width:60px; height:100%;}
+.panel-wrap {background-color: transparent; float: left; width:60px; height:100%;}
 
 .guide-wrap {
   background-color: transparent; 
@@ -325,19 +327,39 @@ header {
 }
 
 
-.top-panel-options {background-color:#333; position:absolute; height: 100%;  color: #fff; width:60px;}
+.top-panel-options {background-color:#333; height: 100%; color: #fff; width:90px; margin:0 0 0 0;}
 
-.top-panel-options-list {list-style: none outside none; margin:45px 0 0 0; padding:0; }
+.top-panel-options-list {list-style: none outside none; padding:130px 0 0 0; margin:0;  }
 
-.top-panel-options-list li {display:block; margin:0; padding:0; text-align:center; padding:12px 0; position: relative; background-color: transparent; border-bottom: 1px solid #ccc;}
+.top-panel-options-list li {display:block; margin:0; padding:0; text-align:center; padding:12px 0; position: relative; background-color: transparent; border-bottom: 1px solid #111; border-top: 1px solid #555;}
 
-.top-panel-options-list li:first-child {}
+.top-panel-options-list li:first-child {border-top: none;}
+.top-panel-options-list li:last-child {border-bottom: none;}
 
 .top-panel-options-list li a {
   text-decoration: none !important;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #fff;
+}
+
+.guidewrapper {margin: 0 75px 0 40px;}
+
+#tabs {
+  margin:0;
+  padding: 0;
+}
+
+#main-options .trigger-main-options {
+    background-color: #333;
+    cursor: pointer;
+    right: -60px;
+    padding: 8px 0;
+    position: absolute;
+    top: 3em;
+    width: 60px;
+    text-align: center;
+    color: #FFF;
 }
 
 
@@ -1726,7 +1748,7 @@ div.breather > h2 {
 #guide_header {
   width:100%;
   background-color: #333;
-  margin:2px 0 0 0;
+  margin:0 0 0 0;
   /* border-top: 2px solid #fff;
   border-bottom: 1px solid #000; */
   height: 3em;
@@ -1774,7 +1796,7 @@ div.breather > h2 {
 #guide_nav {
   float: left;
   list-style: none outside none;
-  margin: 0;
+  margin: 0 0 0 20px;
   padding: 0;
   vertical-align: middle;
   color: #333;
@@ -1803,7 +1825,7 @@ div.breather > h2 {
   font-size: 1.2em;
   cursor: pointer;
   text-align:center;
-  margin: 2px 0 0;
+  margin: 0 0 0;
 }
 
 #hide_header img {
@@ -1822,7 +1844,7 @@ div.breather > h2 {
   padding: 5px;
   position: absolute;
   top: 0;
-  left:60px;
+  left:90px;
   z-index: 9999999 !important;
   width:200px;
 
@@ -1953,9 +1975,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 }
 
 
-#tabs {
-  margin: 0 55px 0 10px;
-}
+
 
 #tab_options {
 
