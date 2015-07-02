@@ -359,6 +359,18 @@ function setupSaveButton( lstrSelector )
 	    preparePluslets("new", insert_id, this);
 	});
 
+	////////////////////////
+	// Now the cloned (unchangeable) pluslets
+	////////////////////////
+
+	$('div[name*=cloned-pluslet]').each(function() {
+
+	    var insert_id = $(this).attr("id"); // just a random gen number
+
+	    //prepare pluslets for saving
+	    preparePluslets("cloned", insert_id, this);
+	});
+
 	//////////////////////
 	// We're good, save the guide layout
 	// insert a pause so the new pluslet is found
@@ -385,7 +397,7 @@ function setupSaveButton( lstrSelector )
         var lstrDiv;
         var lintUID;
         var pbody;
-	var pitem_type;
+				var pitem_type;
         var pspecial; 
         var ourflag;
         var isclone; 
@@ -426,6 +438,14 @@ function setupSaveButton( lstrSelector )
 		lintUID = '';
 		break;
 	    }
+	case "cloned":
+		{
+			lstrInstance = ""; //empty, because we'll use the body contents from master in database
+			lstrTitle = addslashes($("#pluslet-new-title-" + lintID).val());
+			lstrDiv = "#" + lintID; // Div selector -- whatever this means
+			lintUID = '';
+			break;			
+		}
 	}
 
 	///////////////////////////////////////////////////////////////
@@ -438,6 +458,7 @@ function setupSaveButton( lstrSelector )
 	var boxsetting_collapse_titlebar = Number($('input[id=start-collapsed-'+lintID+']').is(':checked'));
 	var boxsetting_titlebar_styling = $('select[id=titlebar-styling-'+lintID+']').val();
 
+	//var boxsetting_mymastersid = Number($('input[id=mymastersid-'+lintID+']').is(':checked'));
 
 	//////////////////////////////////////////////////////////////////
 	// Check the pluslet's "name" value to see if there is a number
@@ -499,7 +520,9 @@ function setupSaveButton( lstrSelector )
 
 	    pitem_type = "Feed";
 	    break;
+	case "Clone":
 
+	break;
 	default:
 
 	    pbody = $('#' + item_type[2] + '-body').html();
@@ -1171,30 +1194,7 @@ function plantClone(clone_id, item_type, clone_type) {
 	// See if this is a copy or a clone
 	console.log(clone_id + " - " + item_type + " - " + clone_type);
 
-	if (clone_type == "clone") {
-		// this is the exact copy clone; put down an uneditable instance
-		$(".portal-column-1:visible").prepend("<div class=\"dropspotty\" id=\"new-" + clone_id + "\"></div>");
-		var new_id = "pluslet-masterid-" + clone_id;
-		    $("#new-" + clone_id).fadeIn("slow").load("helpers/guide_data.php", {
-        from: new_id,
-        flag: 'drop',
-        item_type: item_type
-    },
-						  function() {
 
-						      // 1.  remove the wrapper
-						      // 2. put the contents of the div into a variable
-						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
-						      var cnt = $("#new-" + clone_id).contents();
-						      $("#new-" + clone_id).replaceWith(cnt);
-
-						      $("#response").hide();
-						      //Make save button appear, since there has been a change to the page
-						      $("#save_guide").fadeIn();
-
-						  });
-
-	} else {
 		// this is just a copy; essentially, a new box
 
     // Create new node below, using a random number
@@ -1202,9 +1202,15 @@ function plantClone(clone_id, item_type, clone_type) {
     var randomnumber=Math.floor(Math.random()*1000001);
     $(".portal-column-1:visible").prepend("<div class=\"dropspotty\" id=\"new-" + randomnumber + "\"></div>");
     
-
-    // cloneid is used to tell us this is a clone
+	if (clone_type == "clone") {
+		// this is the exact copy clone; put down an uneditable instance, but with new number
+		var new_id = "pluslet-masterid-" + clone_id;
+	} else {
+    // cloneid is used to tell us this is a clone (but not an exact one)
     var new_id = "pluslet-cloneid-" + clone_id;
+
+	}
+
     // Load new data, on success (or failure!) change class of container to "pluslet", and thus draggable in theory
 
     $("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
@@ -1225,7 +1231,7 @@ function plantClone(clone_id, item_type, clone_type) {
 						      $("#save_guide").fadeIn();
 
 						  });
-	}
+
 
 }
 

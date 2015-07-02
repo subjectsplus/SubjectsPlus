@@ -110,25 +110,6 @@ $(document).ready(function(){
 		return false;
 	});
 
-// Copy and clone content.  This adds some "onclose" commands to colourbox, which gets picked up in the setupAllColorboxes()
-// function of guide.js
-	$("button[name*=copy-]").livequery('click', function(event) {
-		var item_id = $(this).attr("name").split("-");
-		// make these vars available to the parent file, guide.php
-		parent.addItem = item_id[1];
-		parent.addItemType = item_id[2];
-		parent.jQuery.colorbox.close();
-		return false;
-	});
-
-		$("button[name*=clone-]").livequery('click', function(event) {
-		var item_id = $(this).attr("name").split("-");
-		// make these vars available to the parent file, guide.php
-		parent.addItem = item_id[1];
-		parent.addItemType = item_id[2];
-		parent.jQuery.colorbox.close();
-		return false;
-	});
 
 });
 </script>
