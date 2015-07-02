@@ -54,11 +54,7 @@ class Pluslet_HTML5Video extends Pluslet {
 	}
 
 	
-	if (!isset($this->_extra["kalutra"])) {
-		
-		$this->_extra["kaltura"] = "";
-		
-	}
+
 	
   	$this->_body = " <style>
         .html5_video input {
@@ -135,6 +131,9 @@ class Pluslet_HTML5Video extends Pluslet {
 
         }
         
+        
+       try {
+        
         if( $this->_extra['kaltura'] != "" ) {
         	 
         	$lobjSplit = explode('/', $this->_extra['kaltura']);
@@ -155,7 +154,9 @@ class Pluslet_HTML5Video extends Pluslet {
         	 
         }
         
-        
+        } catch (Exception $e) {
+        	
+        }
         
         }        
 
