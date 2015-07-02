@@ -27,6 +27,8 @@ class Pluslet {
     protected $_collapse_body;
     protected $_titlebar_styling;
     protected $_debug;
+    // added v4
+    protected $_master;
 
     protected $_pluslet;
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
@@ -225,6 +227,29 @@ class Pluslet {
 
         global $titlebar_styles;
 
+        // agd 2015 Clone status
+        $master_box = TRUE;
+        if ($master_box == TRUE) {
+            // Find any children boxes
+            $our_kids = ""; 
+            $db = new Querier();
+            $qkids = "SELECT s.subject, p.pluslet_id, p.title, p.extra
+                FROM pluslet p
+                INNER JOIN pluslet_section ps ON p.pluslet_id = ps.pluslet_id
+                INNER JOIN section sec ON ps.section_id = sec.section_id
+                INNER JOIN tab t ON sec.tab_id = t.tab_id
+                INNER JOIN subject s ON t.subject_id = s.subject_id
+                WHERE p.extra LIKE '%\"master_box\": 16%'";
+            $rkids = $db->query($qkids);
+            foreach ($rkids as $myrow) {
+                $our_kids .= $myrow[0] . ",";
+            }
+            $our_kids = rtrim($our_kids, ",");
+
+            // select all from pluslet where extra like 'masterbox'
+            $master_info = "<p>" . _("Master Box with children in: ") . "$our_kids<p>";
+        }  
+
         // generate our titlebar styles
         $tb_styles = "";
         foreach ($titlebar_styles as $key => $value) {
@@ -234,6 +259,7 @@ class Pluslet {
         }
 
             $box_settings = "<div class=\"box_settings\">
+            $master_info
             <form class=\"pure-form pure-form-aligned\">
             <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
                 <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
@@ -252,7 +278,9 @@ class Pluslet {
             <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
                 <select id=\"titlebar-styling-$this->_pluslet_id\">
                     $tb_styles
-                </select>
+                </select>";
+
+            $box_settings .= "
             </form>
             </div>";
 

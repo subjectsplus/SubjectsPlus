@@ -57,7 +57,7 @@ switch ($_POST["flag"]) {
 
         // post[from] could be: pluslet-cloneid-1481
         $box_type = explode("-", $_POST["from"]);
-
+print_r($box_type);
         // New or Clone or Special?
         // TODO special type
         if ($box_type[1] == "cloneid") {
@@ -65,6 +65,11 @@ switch ($_POST["flag"]) {
             $our_type = $_POST["item_type"];
             $our_id = $box_type[2];
             //print "Okay, it's a clone! <p>";
+
+        } elseif ($box_type[1] == "masterid") {
+            $isclone = 2;
+            $our_type = $_POST["item_type"];
+            $our_id = $box_type[2];  
         } else {
             $isclone = 0;
             $our_type = $box_type[2];
@@ -74,7 +79,13 @@ switch ($_POST["flag"]) {
         $obj = "SubjectsPlus\Control\Pluslet_" . $our_type;
         //global $obj;
         $record = new $obj($our_id, "", $our_subject_id, $isclone);
-        print $record->output("edit", "admin");
+
+        // If it's a master, don't make editable
+        if ($box_type[1] == "masterid") {
+            print $record->output("view", "admin");
+        } else {
+            print $record->output("edit", "admin");
+        }
 
 
         break;

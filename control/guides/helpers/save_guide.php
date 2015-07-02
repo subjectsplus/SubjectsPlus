@@ -20,7 +20,7 @@ $header = "noshow";
 
 include("../../includes/header.php");
 
-//print_r($_POST);
+print_r($_POST);
 
 
 

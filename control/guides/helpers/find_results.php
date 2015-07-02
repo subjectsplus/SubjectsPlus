@@ -19,7 +19,7 @@ $results = "";
 
 if (isset($_POST['shortform'])) {
 
-	$q = "SELECT DISTINCT p.pluslet_id, LEFT(p.title, 75), p.type
+	$q = "SELECT DISTINCT p.pluslet_id, LEFT(p.title, 75), p.type, p.extra
 			FROM pluslet p INNER JOIN pluslet_section ps
 			ON p.pluslet_id = ps.pluslet_id
 			INNER JOIN section sec
@@ -33,7 +33,7 @@ if (isset($_POST['shortform'])) {
 
 } elseif ($_POST["search_terms"]) {
 
-	$q = "SELECT distinct p.pluslet_id, LEFT(p.title, 75), p.type FROM pluslet p
+	$q = "SELECT distinct p.pluslet_id, LEFT(p.title, 75), p.type, p.extra FROM pluslet p
 	WHERE (p.title LIKE '%" . addslashes($_POST["search_terms"]) .  "%' OR p.body LIKE '%" . addslashes($_POST["search_terms"]) .  "%')AND p.type != 'Special'
 	ORDER BY p.title
 	";
@@ -85,7 +85,12 @@ if (count($r) != 0) {
 		//add no title label if empty
 		$myrow[1] = empty($myrow[1]) ? '[no title]' : $myrow[1];
 
-		$results .= "<div style=\"background-color:$row_colour ; padding: 2px;\"><img src=\"$IconPath/list-add.png\" name=\"add-$myrow[0]-$myrow[2]\" border=\"0\" alt=\"add\" /> $myrow[1] $add_info</div>";
+		// agd 2015 check if there's a master; if so, don't display?
+
+		$results .= "<div style=\"background-color:$row_colour ; padding: 2px;\"><!--<img src=\"$IconPath/list-add.png\"  border=\"0\" alt=\"add\" />-->
+
+		 <button type=\"button\" name=\"add-$myrow[0]-$myrow[2]-copy\">" . _("Copy") . "</button>
+		 <button type=\"button\" name=\"add-$myrow[0]-$myrow[2]-clone\">" . _("Clone") . "</button>  $myrow[1] $add_info</div>";
 
 		//$viewer .= "<div id=\"show-$myrow[0]\" style=\"display: none;\">$myrow[2]</div>";
 		$row_count++;
@@ -95,7 +100,8 @@ if (count($r) != 0) {
 	$results = "<p>There were no results.  Drat!</p>";
 }
 
-print "<div style=\"clear: both; float: left; \">$results </div>";
+print "<div style=\"clear: both; float: left; \">Copy = Copy the content into a NEW box<br />
+Clone = Copy the box--its content will replicate any changes to the master box<br /><br />$results </div>";
 ?>
 
 

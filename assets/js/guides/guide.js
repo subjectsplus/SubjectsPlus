@@ -877,7 +877,7 @@ function setupAllColorboxes()
             // add item to page
 
             if (window.addItem !== 0) {
-                plantClone(window.addItem, window.addItemType);
+                plantClone(window.addItem, window.addItemType, window.addCloneType);
                 window.addItem = 0;
             }
         }
@@ -1164,8 +1164,38 @@ function refreshFeeds() {
 }
 
 ///////
+// agd 2015 added a new clone_type
 
-function plantClone(clone_id, item_type) {
+function plantClone(clone_id, item_type, clone_type) {
+
+	// See if this is a copy or a clone
+	console.log(clone_id + " - " + item_type + " - " + clone_type);
+
+	if (clone_type == "clone") {
+		// this is the exact copy clone; put down an uneditable instance
+		$(".portal-column-1:visible").prepend("<div class=\"dropspotty\" id=\"new-" + clone_id + "\"></div>");
+		var new_id = "pluslet-masterid-" + clone_id;
+		    $("#new-" + clone_id).fadeIn("slow").load("helpers/guide_data.php", {
+        from: new_id,
+        flag: 'drop',
+        item_type: item_type
+    },
+						  function() {
+
+						      // 1.  remove the wrapper
+						      // 2. put the contents of the div into a variable
+						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
+						      var cnt = $("#new-" + clone_id).contents();
+						      $("#new-" + clone_id).replaceWith(cnt);
+
+						      $("#response").hide();
+						      //Make save button appear, since there has been a change to the page
+						      $("#save_guide").fadeIn();
+
+						  });
+
+	} else {
+		// this is just a copy; essentially, a new box
 
     // Create new node below, using a random number
 
@@ -1195,6 +1225,8 @@ function plantClone(clone_id, item_type) {
 						      $("#save_guide").fadeIn();
 
 						  });
+	}
+
 }
 
 ///////////////
