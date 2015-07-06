@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	var clone_pluslet_id;
+	
     makeDropable(".dropspotty");
     makeDropable(".cke");
     makeSortable(".sort-column");
@@ -1067,6 +1069,30 @@ function setupMiscClickEvents()
     $('#hide_header').click(function(event) {
         $("#header, #subnavcontainer").toggle('slow');
     });
+    
+    $(".box-item").click(function(event) {
+        var edit_id = $(this).attr("id").split("-");
+        plantClone('', edit_id[2], '');
+
+    });
+    
+    $('body').on('click', '.clone-button',function() {
+    	
+   // 	var clone_id = Math.floor(Math.random()*1000001);
+    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
+    	
+    	console.log("Testing clone button");
+    	plantClone('','Clone',origin_id);
+    	
+   
+    });
+    
+    
+}
+
+function setCloneValue(input) {
+	$(input).val("testing");
+	
 }
 
 function makeHelpable( lstrSelector )
@@ -1165,7 +1191,7 @@ function refreshFeeds() {
 
 ///////
 
-function plantClone(clone_id, item_type) {
+function plantClone(clone_id, item_type, origin_id) {
 
     // Create new node below, using a random number
 
@@ -1188,8 +1214,16 @@ function plantClone(clone_id, item_type) {
 						      // 2. put the contents of the div into a variable
 						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
 						      var cnt = $("#new-" + randomnumber).contents();
+						      
+						      
+						      
+						      cnt.find('input.clone-input').val(origin_id);
+						      
+						      
 						      $("#new-" + randomnumber).replaceWith(cnt);
 
+						      
+						      
 						      $("#response").hide();
 						      //Make save button appear, since there has been a change to the page
 						      $("#save_guide").fadeIn();

@@ -9,6 +9,8 @@ class Pluslet_Clone extends Pluslet {
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone="") {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone="");
   
+    $this->db = new Querier;
+    
     $this->_type = "Clone";
 
   }
@@ -17,11 +19,11 @@ class Pluslet_Clone extends Pluslet {
   {
   	if ($this->_extra != "") {
   		$master = json_decode($this->_extra);
-  		$this->_body =  "<input required aria-required=\"true\" type=\"text\" id=\"master\" name=\"Clone-extra-master\" value=\"{$master->master}\"></input>";
+  		$this->_body =  "<input class\"clone-input\" required aria-required=\"true\" type=\"text\" name=\"Clone-extra-master\" value=\"{$master->master}\"></input>";
   		
   	} else {
-  		
-  		$this->_body =  '<input required aria-required="true" type="text" id="master" name="Clone-extra-master" value=""></input>';
+  		$this->_body = "<p>Your pluslet has been cloned. You'll need to save and refresh to view the pluslet on the page.</p>";
+  		$this->_body .=  '<input class="clone-input" required aria-required="true" type="text" name="Clone-extra-master" value=""></input>';
   		
   	}
   	
@@ -43,6 +45,23 @@ class Pluslet_Clone extends Pluslet {
   
   }
 
+  public function getSubjects() {
+  	
+  	$subjects = $this->db->query("SELECT s.shortform, s.subject FROM subject s
+  	INNER JOIN tab t
+  	ON s.subject_id = t.subject_id
+  	INNER JOIN section sec
+  	ON t.tab_id = sec.tab_id
+  	INNER JOIN pluslet_section ps
+  	ON sec.section_id = ps.section_id
+  	GROUP BY s.subject ");
+  	
+  	return $subjects;
+  	
+  }
+  
+  
+  
   static function getMenuName()
   {
     return _('Clone');
