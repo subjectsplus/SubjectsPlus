@@ -1081,7 +1081,6 @@ function setupMiscClickEvents()
    // 	var clone_id = Math.floor(Math.random()*1000001);
     	var origin_id = $(this).parent().attr('data-pluslet-id');   	
     	
-    	console.log("Testing clone button");
     	plantClone('','Clone',origin_id);
     	
    
@@ -1191,6 +1190,36 @@ function refreshFeeds() {
 
 ///////
 
+function loadCloneMenu() {
+	
+		$.get("http://development.library.miami.edu/dev-non-svn/rails_projects/SubjectsPlus/control/includes/autocomplete_data.php?collection=guides&term=", function(data) { 
+
+			for(var i = 0; i<data.length;i++) {
+		        var subject_id = data[i].id;
+				$('.guide-list').append("<option data-subject-id='" + subject_id + "' class=\"guide-listing\">" + data[i].label + "</li>");
+
+			}
+
+		});
+
+		$('.guide-list').on('change', function(data) {
+			var subject_id = $("option:selected", this).attr('data-subject-id');
+
+			$('.pluslet-list').empty();
+
+			$.get("http://development.library.miami.edu/dev-non-svn/rails_projects/SubjectsPlus/control/includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
+					,function(data) {
+
+					for(var i = 0; i<data.length;i++) {
+						$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><button class=\"clone-button\">Clone</button><button class=\"copy-button\">Copy</button>" + data[i].label + "</li>");
+			
+					}
+			});	
+			
+		});
+
+}
+
 function plantClone(clone_id, item_type, origin_id) {
 
     // Create new node below, using a random number
@@ -1214,12 +1243,9 @@ function plantClone(clone_id, item_type, origin_id) {
 						      // 2. put the contents of the div into a variable
 						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
 						      var cnt = $("#new-" + randomnumber).contents();
-						      
-						      
-						      
+						      		      
 						      cnt.find('input.clone-input').val(origin_id);
-						      
-						      
+
 						      $("#new-" + randomnumber).replaceWith(cnt);
 
 						      
