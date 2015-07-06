@@ -1224,7 +1224,7 @@ function loadCloneMenu() {
 					,function(data) {
 
 					for(var i = 0; i<data.length;i++) {
-						$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><button class=\"clone-button\">Clone</button><button class=\"copy-button\">Copy</button>" + data[i].label + "</li>");
+						$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\">"  + data[i].label + "<button class=\"clone-button pure-button pure-button-primary\">Clone</button><button class=\"copy-button pure-button pure-button-primary\">Copy</button></li>");
 			
 					}
 			});	
