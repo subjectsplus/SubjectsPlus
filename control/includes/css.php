@@ -58,6 +58,11 @@
                                         new FileAsset($assets .'/css/admin/override.css')
                                         ,new FilesystemCache($cache)
                                         ));
+
+    $am->set('font_awesome', new AssetCache(
+                                            new FileAsset($assets .'/css/shared/font-awesome.min.css')
+                                            ,new FilesystemCache($cache)
+                                            ));
     
     // Glob all the rest of the CSS files together
     
@@ -74,6 +79,7 @@
     $colorbox = new AssetCollection(array (new AssetReference($am, 'colorbox')));
     $override = new AssetCollection(array (new AssetReference($am, 'override')));
     $admin_styles = new AssetCollection(array (new AssetReference($am, 'admin_styles')));
+    $font_awesome = new AssetCollection(array (new AssetReference($am, 'font_awesome')));
     
     //$css_files = new AssetCollection(array (new AssetReference($am, 'css')));
     
@@ -83,7 +89,7 @@
     // Step 3.
     // Create an AssetCollection that uses the newly minified css
     //$css = new AssetCollection(array ($pure, $colorbox, $guide,  $jqueryui,  $css_files) );
-    $css = new AssetCollection(array ($pure, $pure_grid, $colorbox, $admin_styles, $jqueryui, $override) );
+    $css = new AssetCollection(array ($pure, $pure_grid, $colorbox, $admin_styles, $jqueryui, $override, $font_awesome) );
     
     // Tell the browser that this is CSS and that it should be cached
     
