@@ -1091,8 +1091,9 @@ function setupMiscClickEvents()
     	
     	   // 	var clone_id = Math.floor(Math.random()*1000001);
     	    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	    	
-    	    	plantClone(origin_id,'Basic');
+    	    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+
+    	    	plantClone(origin_id,'Basic', origin_title);
     	    
     	});
     
@@ -1259,9 +1260,14 @@ function plantClone(clone_id, item_type, origin_id, clone_title) {
 						      if (cnt.find('input.clone-input')) {
 						    	  
 						      cnt.find('input.clone-input').val(origin_id);
-						      cnt.find("[id^=pluslet-new-title]").val(clone_title);
 						      
 						      }
+						      
+						      if (clone_title) {
+							      cnt.find("[id^=pluslet-new-title]").val(clone_title);
+
+						      }
+
 						      
 						      $("#new-" + randomnumber).replaceWith(cnt);
 
