@@ -230,6 +230,7 @@ class Pluslet {
 
         // agd 2015 Master/Clone status
         $master_info = "";
+        $our_master_id = "";
         $db = new Querier();
         // See if this box has any children; if so, it's a master_box
         $master_box = FALSE;
