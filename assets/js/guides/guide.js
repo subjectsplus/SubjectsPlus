@@ -1203,7 +1203,7 @@ function refreshFeeds() {
 
 function loadCloneMenu() {
 	
-		$.get("http://development.library.miami.edu/dev-non-svn/rails_projects/SubjectsPlus/control/includes/autocomplete_data.php?collection=guides&term=", function(data) { 
+		$.get("../includes/autocomplete_data.php?collection=guides&term=", function(data) { 
 
 			for(var i = 0; i<data.length;i++) {
 		        var subject_id = data[i].id;
@@ -1218,7 +1218,7 @@ function loadCloneMenu() {
 
 			$('.pluslet-list').empty();
 
-			$.get("http://development.library.miami.edu/dev-non-svn/rails_projects/SubjectsPlus/control/includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
+			$.get("../includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
 					,function(data) {
 
 					for(var i = 0; i<data.length;i++) {
