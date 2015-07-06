@@ -1080,8 +1080,9 @@ function setupMiscClickEvents()
     	
    // 	var clone_id = Math.floor(Math.random()*1000001);
     	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	
-    	plantClone('','Clone',origin_id);
+    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+
+    	plantClone('','Clone',origin_id, origin_title);
     	
    
     });
@@ -1231,7 +1232,7 @@ function loadCloneMenu() {
 
 }
 
-function plantClone(clone_id, item_type, origin_id) {
+function plantClone(clone_id, item_type, origin_id, clone_title) {
 
     // Create new node below, using a random number
 
@@ -1254,9 +1255,14 @@ function plantClone(clone_id, item_type, origin_id) {
 						      // 2. put the contents of the div into a variable
 						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
 						      var cnt = $("#new-" + randomnumber).contents();
-						      		      
+						      
+						      if (cnt.find('input.clone-input')) {
+						    	  
 						      cnt.find('input.clone-input').val(origin_id);
-
+						      cnt.find("[id^=pluslet-new-title]").val(clone_title);
+						      
+						      }
+						      
 						      $("#new-" + randomnumber).replaceWith(cnt);
 
 						      
