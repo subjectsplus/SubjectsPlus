@@ -1086,6 +1086,17 @@ function setupMiscClickEvents()
    
     });
     
+    $('body').on('click', '.copy-button',function() {
+    	
+    	   // 	var clone_id = Math.floor(Math.random()*1000001);
+    	    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
+    	    	
+    	    	plantClone(origin_id,'Basic');
+    	    
+    	});
+    
+    
+    
     
 }
 
