@@ -19,11 +19,11 @@ class Pluslet_Clone extends Pluslet {
   {
   	if ($this->_extra != "") {
   		$master = json_decode($this->_extra);
-  		$this->_body = "<p>This pluslet was cloned from another pluslet.</p>";
+  		$this->_body = "<p>" . _('This pluslet was cloned from another pluslet.') . "</p>";
   		$this->_body .=  "<input class=\"clone-input\" required aria-required=\"true\" type=\"text\" name=\"Clone-extra-master\" value=\"{$master->master}\"></input>";
   		
   	} else {
-  		$this->_body = "<p>Your pluslet has been cloned. You'll need to save the page to view its contents.</p>";
+  		$this->_body = "<p>" . _('Your pluslet has been cloned. You will need to save the page to view its contents.') . "</p>";
   		$this->_body .=  '<input class="clone-input" required aria-required="true" type="text" name="Clone-extra-master" value=""></input>';
   		
   	}
