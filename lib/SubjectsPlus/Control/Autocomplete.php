@@ -280,8 +280,11 @@ class Autocomplete {
             break;
 
           case "Staff":
+          	if ($myrow['fullname'] != null) {
             $arr[$i]['label'] = $myrow['fullname'];
-
+          	} else {
+          		$arr[$i]['label'] = "";
+          	}
             if ($this->getSearchPage() == "control") {
 
               $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];
