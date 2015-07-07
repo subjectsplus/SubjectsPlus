@@ -21,10 +21,16 @@
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
     }
 
-   	static function getMenuName()
+   	static function getMenuIcon()
    	{
-   		return _('Editable Box');
+   		$icon="<i class=\"fa fa-external-link\" title=\"Editable Box\" ></i>";
+        return $icon;
    	}
+
+    static function getMenuName()
+    {
+        return _('Editable Box');
+    }
 
     public function output($action="", $view) {
 

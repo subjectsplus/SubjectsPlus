@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     $(".box-item").on('drag', function()
 		      {
-    			  $('#box_options').hide();
+    			  //$('#box_options').hide();
 		      });
 
     $(".draggable").draggable({
@@ -1067,7 +1067,7 @@ function setupMiscClickEvents()
     ///////////////////////////////////
 
     $('#hide_header').click(function(event) {
-        $("#header, #subnavcontainer").toggle('slow');
+        $("#header, #subnavcontainer").toggle();
     });
     
     $(".box-item").click(function(event) {
@@ -1224,7 +1224,7 @@ function loadCloneMenu() {
 					,function(data) {
 
 					for(var i = 0; i<data.length;i++) {
-						$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\">"  + data[i].label + "<button class=\"clone-button pure-button pure-button-primary\">Clone</button><button class=\"copy-button pure-button pure-button-primary\">Copy</button></li>");
+						$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><div class=\"pure-g\"><div class=\"pure-u-3-5\">"  + data[i].label + "</div><div class=\"pure-u-2-5\" style=\"text-align:right;\"><button class=\"clone-button pure-button pure-button-primary\">Clone</button>&nbsp;<button class=\"copy-button pure-button pure-button-primary\">Copy</button></div></div></li>");
 			
 					}
 			});	
