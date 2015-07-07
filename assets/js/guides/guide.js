@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-	var clone_pluslet_id;
-	
     makeDropable(".dropspotty");
     makeDropable(".cke");
     makeSortable(".sort-column");
@@ -1236,6 +1234,7 @@ function loadCloneMenu() {
 		});
 
 }
+
 function activateFindboxSearch() {
 $('.findbox-search').keypress(function(data) {
 
