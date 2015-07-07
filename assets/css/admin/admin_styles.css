@@ -37,6 +37,10 @@ button {
 
 }
 /* Remove annoying border on linked images. */
+a, a:focus {
+   outline: 0;
+}
+
 a img {
   border: none;
 }
@@ -141,7 +145,7 @@ header {
 
 #topnav li a {
   text-decoration: none;
-  padding: .5em 0.7em;
+  padding: .5em 0.5em;
   text-align: left;
   font-size: 1.2em;
   color: #858585;
@@ -299,7 +303,9 @@ header {
 }
 
 
-/* Page structure - added by PV */
+/*--------------------------- 
+Page structure - added by PV 
+---------------------------*/
 
 html,body { height:100%; }
 
@@ -316,14 +322,78 @@ html,body { height:100%; }
   height:100%;
 }
 
-#savour  {
-  height: 60px; width: 100%;
-  text-align: center;
+/* Nav for Guides Creation */
+
+#guide_header {
+  height: 3.1em;
 }
 
-#save_guide {
-  display:none;
-  margin: 8px 0;
+.guide-title-area {background-color: #333; height: 3.1em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+
+.guide-options-area {background-color: #f2f2f2; height: 3.1em; text-align: center; overflow: hidden;}
+
+.guide-commands-area {background-color: #333; height: 3.1em;overflow: hidden; text-align: right;}
+
+.guide-title-area h2 {
+  margin: 12px 0 0 40px;
+  font-size: 1.3em;
+}
+
+.guide-title-area h2 a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#guide_nav {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+#guide_nav li {
+  display: inline-block;
+  padding-top: 0.5em;
+}
+
+#guide_nav li a {
+  text-decoration: none !important;
+  padding: 0.5em 5px;
+  font-size: 26px;
+  color: #333;
+}
+
+#guide_nav li a:hover {text-decoration: underline;}
+
+
+#guide_header .icon-edit-guide {
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+
+#hide_header {
+  background-color: #fff;
+  padding: 7px 0;
+  font-size: 1.2em;
+  cursor: pointer;
+  text-align:center;
+  margin: 0 0 0;
+}
+
+#savour,
+#savour2  {
+  margin:0;
+  display:inline-block;
+}
+
+#savour{ padding: 0.5em 5px 0 5px;}
+
+#savour2  {padding: 0.5em 20px 0 5px; }
+
+#save_guide, #save_template {
+ display:none;
+  margin: 0 !important;
 }
 
 
@@ -342,25 +412,127 @@ html,body { height:100%; }
   font-size: 0.9em;
   color: #fff;
 }
+.top-panel-options-list li a i{
+  font-size: 40px;
+}
 
-.guidewrapper {margin: 0 75px 0 40px;}
+.guidewrapper {margin: 6px 75px 0 40px;}
 
 #tabs {
   margin:0;
   padding: 0;
 }
 
+#main-options {background-color:transparent;}
+
 #main-options .trigger-main-options {
     background-color: #333;
     cursor: pointer;
-    right: -60px;
+    right: -40px;
     padding: 8px 0;
     position: absolute;
-    top: 3em;
-    width: 60px;
+    top: 6.3em;
+    width: 40px;
     text-align: center;
     color: #FFF;
 }
+
+#main-options .trigger-main-options i {font-size:20px;}
+
+#find-in-guide-container{margin: 0; padding: 0; height:41px; z-index:999999;}
+
+.find-guide-parent {text-align: center; }
+
+#guide_search {background-color: #444; color: #FFF; display: none;}
+
+#guide_search input {
+  font-size: 1em;
+  padding: .2em .4em;
+  margin: 0.6em 0;
+  width:94%;
+}
+
+.second-level-options { 
+  width: 300px; 
+  height: 100%;
+  background-color: #444;
+  color: #fff;
+  position:absolute;
+  top: 3.1em;
+  left: 90px;
+}
+
+.second-level-container {padding: 1em;}
+
+.second-level-content {background-color: transparent;}
+
+.panel-active {display:block;}
+.panel-inactive {display:none;}
+
+/* The draggable boxes from the admin guide header */
+
+#box_options {
+  cursor: pointer;
+  display: block;
+  margin: 0;
+  padding: 0;  
+  width: 100%;
+}
+
+#box_options li {
+  border: 1px solid #CCCCCC !important;
+  clear: left !important;
+  display: block !important;
+  float: none !important;
+  margin: 0 !important;
+  line-height: 1.5em !important;
+  font-size: 1.1em !important;
+  padding: .2em .2em .2em .5em;
+}
+
+.box_settings {
+  clear: both;
+  border-top: 1px solid #E488B6;
+  padding: .5em 0;
+  text-transform: none;
+  font-size: 0.9em;
+  display: none;
+}
+
+.box_settings label {
+  font-weight: normal;
+}
+
+.box-item {
+  list-style-type: none;
+
+  max-width:200px;
+  background-color: #333;
+  cursor: pointer;
+  color:#fff;
+  border: 1px solid #CCCCCC !important;
+  clear: left !important;
+  display: block !important;
+  float: none !important;
+  margin: 0 !important;
+  line-height: 1.5em !important;
+  font-size: 1.1em !important;
+  padding: .2em .2em .2em .5em;
+}
+
+.box-item:hover {
+  background: #C03957;
+}
+
+#box_options li.box_note {
+  background-color: #FFFFFF !important;
+  border: 0 none #FFFFFF !important;
+  color: #333333;
+  cursor: text !important;
+  font-size: 0.9em !important;
+  padding: .5em .2em;
+}
+
 
 
 /* Main content areas */
@@ -954,22 +1126,12 @@ div.ctag_list a:hover {
 
 
 .feedback, #feedback {
- /* position: relative;*/
- /* float: left; */
   background-color: #DD647F;
   width: 100%;
   text-align: center;
   font-weight: bold;
-  
-  padding: .5em 0;
+  padding: 0;
   display: none;
-/*
-  padding-left: 10%;
-  margin-left: -5%;
-  margin-top:0;
-  max-width: 3840px;
-  min-width: 100%;
-*/
 }
 
 div.feedback a:link {
@@ -1187,7 +1349,7 @@ div.tooltip div
   display: none;
   margin-top:0;
   padding: .5em 0;
-
+  z-index: -1;
 }
  
 
@@ -1743,165 +1905,9 @@ div.breather > h2 {
 
 
 
-/* Secondary Nav for Guides Creation */
-
-#guide_header {
-  width:100%;
-  background-color: #333;
-  margin:0 0 0 0;
-  /* border-top: 2px solid #fff;
-  border-bottom: 1px solid #000; */
-  height: 3em;
-  line-height: 2.8em;
-}
-
-#guide_header h2 {
-  margin: 0;
-  font-size: 1.2em;
-}
-
-#guide_header h2 a {
-  text-decoration: none;
-  color: #fff;
-}
-
-#guide_header img {
-  position: relative;
-  vertical-align: text-bottom;
-  margin-right: .5em;
-  margin-left: .5em;
-}
-
-.icon-view-guide {
-
-}
-
-#guide_header .icon-edit-guide {
-  height: 20px;
-  margin-bottom: 4px;
-}
-
-#guide_header ul li a{
-
-  text-decoration: none;
-
-}
-
-#guide_header ul li a:hover{
-
-  text-decoration: underline;
-
-}
-
-#guide_nav {
-  float: left;
-  list-style: none outside none;
-  margin: 0 0 0 20px;
-  padding: 0;
-  vertical-align: middle;
-  color: #333;
-}
-
-#guide_nav li {
-  display: inline-block;
-  padding-top: .1em;
-}
-
-#guide_nav li a {
-
-  color: #777777;
-  text-decoration: none !important;
-  padding: 0em 1em;
-  text-align: left;
-  font-size: 1.2em;
-  color: #fff;
 
 
-}
 
-#hide_header {
-  background-color: #fff;
-  padding: 7px 0;
-  font-size: 1.2em;
-  cursor: pointer;
-  text-align:center;
-  margin: 0 0 0;
-}
-
-#hide_header img {
-  
-  
-  
-}
-
-/* The draggable boxes from the admin guide header */
-
-#box_options {
-  background-color: #444444;
-  cursor: pointer;
-  display: none;
-  margin: 0;
-  padding: 5px;
-  position: absolute;
-  top: 0;
-  left:90px;
-  z-index: 9999999 !important;
-  width:200px;
-
-}
-#box_options li {
-  border: 1px solid #CCCCCC !important;
-  clear: left !important;
-  display: block !important;
-  float: none !important;
-  margin: 0 !important;
-  line-height: 1.5em !important;
-  font-size: 1.1em !important;
-  padding: .2em .2em .2em .5em;
-}
-
-.box_settings {
-  clear: both;
-  border-top: 1px solid #E488B6;
-  padding: .5em 0;
-  text-transform: none;
-  font-size: 0.9em;
-  display: none;
-}
-
-.box_settings label {
-  font-weight: normal;
-}
-
-.box-item {
-  list-style-type: none;
-
-  max-width:200px;
-  background-color: #333;
-  cursor: pointer;
-  color:#fff;
-  border: 1px solid #CCCCCC !important;
-  clear: left !important;
-  display: block !important;
-  float: none !important;
-  margin: 0 !important;
-  line-height: 1.5em !important;
-  font-size: 1.1em !important;
-  padding: .2em .2em .2em .5em;
-}
-
-.box-item:hover {
-  background: #C03957;
-}
-
-#box_options li.box_note {
-  background-color: #FFFFFF !important;
-  border: 0 none #FFFFFF !important;
-  color: #333333;
-  cursor: text !important;
-  font-size: 0.9em !important;
-  padding: .5em .2em;
-}
 
 /* forms */
 /* jquery ui popup boxes */
@@ -2155,17 +2161,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 }
 
-#guide_search input {
-  font-size: 1em;
-  padding: .2em .4em;
-  margin-left: 1em;
-}
 
-.find-guide-parent {
-  margin: 0;
-  padding: 0;
-
-}
 
 .icon_smaller {height: 20px !important;}
 
@@ -2230,7 +2226,6 @@ background:bisque;
 @media screen and (min-width: 48em) {
 
 
-
  
 }
 
@@ -2252,7 +2247,9 @@ background:bisque;
 
 #topnav li:nth-last-child(3) div, #topnav li:nth-last-child(2) div {left:0;}
 
-
+#guide_nav li a {
+  padding: 0.5em 0.17em;
+}
 
 }
 
@@ -2266,7 +2263,9 @@ background:bisque;
 
 #topnav li a {padding: .5em 1em;}
 
-
+#guide_nav li a {
+  padding: 0.5em 0.5em;
+}
 
 
 }
