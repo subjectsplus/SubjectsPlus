@@ -1,6 +1,5 @@
 <?php
    namespace SubjectsPlus\Control;
-
    require_once("Pluslet.php");
 
 /**
@@ -11,9 +10,6 @@
  *   @date Feb 2011
  *   @todo
  */
-
-
-
 
     class Pluslet_Basic extends Pluslet {
 
@@ -76,7 +72,7 @@
 			print parent::finishPluslet();
 
 			return;
-		} else {
+		} else { // View
 
 			// notitle hack
 			if (!isset( $this->_hide_titlebar ))

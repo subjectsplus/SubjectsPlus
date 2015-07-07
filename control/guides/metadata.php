@@ -4,8 +4,7 @@
  *   @brief Create the metadata for a guide (and thus, the guide); also update and delete
  *
  *   @author adarby
- *   @date Jan 2011
- * 	  @todo Add a delete button if a) it's one of the creators, or b) it's the admin
+ *   @date Jan 2011; updated 2015 (and surely in the interim)
  */
 
 use SubjectsPlus\Control\Guide;
@@ -202,7 +201,25 @@ include("../includes/footer.php");
    });
 
    ///////////////////////////////////
+   // add department to list on dropdown
+   ///////////////////////////////////
+
+   $('select[name*=department_id]').livequery('change', function() {
+     var our_item_id = $(this).val();
+     var our_item_text = $('select[name*=department_id] :selected').text();
+     var remove_me = $('#department_menu option[value='+our_item_id+']');
+     //alert(our_item_text);
+     $('#department_list').prepend('<div class="new_item-'+our_item_id+'"></div>');
+     $('.new_item-'+our_item_id+'').hide().load("../guides/helpers/guide_bits.php",
+                                                {type: 'add_department', our_item_id: our_item_id, our_item_text: our_item_text}).fadeIn(1600);
+     // now remove from the dropdown
+     remove_me.remove();
+
+   });
+
+   ///////////////////////////////////
    // add discipline to list on dropdown
+   // this is for sersol; might not be used for your lib
    ///////////////////////////////////
 
    $('select[name*=discipline_id]').livequery('change', function() {

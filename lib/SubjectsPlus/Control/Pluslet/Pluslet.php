@@ -27,6 +27,8 @@ class Pluslet {
     protected $_collapse_body;
     protected $_titlebar_styling;
     protected $_debug;
+    // added v4
+    protected $_master;
 
     protected $_pluslet;
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
@@ -50,7 +52,7 @@ class Pluslet {
         /////////////
 
         $querier = new Querier();
-        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling
+        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling, master
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
 
@@ -69,6 +71,7 @@ class Pluslet {
             $this->_hide_titlebar = $plusletArray[0]["hide_titlebar"];
             $this->_collapse_body = $plusletArray[0]["collapse_body"];
             $this->_titlebar_styling = $plusletArray[0]["titlebar_styling"];
+            $this->_master = $plusletArray[0]["master"];
         }
 
 
@@ -225,6 +228,54 @@ class Pluslet {
 
         global $titlebar_styles;
 
+        // agd 2015 Master/Clone status
+        $master_info = "";
+        $our_master_id = "";
+        $db = new Querier();
+        // See if this box has any children; if so, it's a master_box
+        $master_box = FALSE;
+        // See if this box is a clone
+        if (isset($this->_master) && $this->_master != "") {
+            
+            $qmaster = "SELECT s.subject_id, s.subject, p.title
+                FROM pluslet p
+                INNER JOIN pluslet_section ps ON p.pluslet_id = ps.pluslet_id
+                INNER JOIN section sec ON ps.section_id = sec.section_id
+                INNER JOIN tab t ON sec.tab_id = t.tab_id
+                INNER JOIN subject s ON t.subject_id = s.subject_id
+                WHERE p.pluslet_id = '" . $this->_master . "'";
+                //print $qmaster;
+            $rmaster = $db->query($qmaster);           
+            foreach ($rmaster as $myrow) { $our_master_id = $myrow[0]; $our_master = $myrow[1]; $our_master_name = $myrow[2]; }
+            $master_info = "<p>" . _("Clone Box.  Master is <em>") . $our_master_name . _("</em> in ") . "<a href=\"guide.php?subject_id=$our_master_id\">$our_master</a><p>";
+        } else {
+            // See if this box is a master
+            // Find any children boxes
+            $our_kids = ""; 
+            $qkids = "SELECT s.subject, p.pluslet_id, p.title, p.extra, p.master
+                FROM pluslet p
+                INNER JOIN pluslet_section ps ON p.pluslet_id = ps.pluslet_id
+                INNER JOIN section sec ON ps.section_id = sec.section_id
+                INNER JOIN tab t ON sec.tab_id = t.tab_id
+                INNER JOIN subject s ON t.subject_id = s.subject_id
+                WHERE p.master = '" . $this->_pluslet_id . "'";
+            $rkids = $db->query($qkids);
+            
+            if ($rkids) {
+                foreach ($rkids as $myrow) {
+                    $our_kids .= $myrow[0] . ",";
+                }
+
+                $our_kids = rtrim($our_kids, ",");
+
+                // select all from pluslet where extra like 'masterbox'
+                $master_info = "<p>" . _("Master Box with children in: ") . "$our_kids<p>";                
+            } 
+
+
+        }
+
+
         // generate our titlebar styles
         $tb_styles = "";
         foreach ($titlebar_styles as $key => $value) {
@@ -234,7 +285,10 @@ class Pluslet {
         }
 
             $box_settings = "<div class=\"box_settings\">
+            $master_info
             <form class=\"pure-form pure-form-aligned\">
+            <input id=\"mymastersid-$this->_pluslet_id\" type=\"hidden\" value=\"\" />
+
             <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
                 <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
 
@@ -252,7 +306,9 @@ class Pluslet {
             <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
                 <select id=\"titlebar-styling-$this->_pluslet_id\">
                     $tb_styles
-                </select>
+                </select>";
+
+            $box_settings .= "
             </form>
             </div>";
 

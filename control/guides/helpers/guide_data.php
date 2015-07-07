@@ -18,7 +18,7 @@ $location = "";
 $is_sidebar = "";
 $our_subject_id = "";
 
-//print_r($_POST);
+print_r($_POST);
 
 ///////////////////////////
 // Determine Column (main or sidebar)
@@ -57,7 +57,7 @@ switch ($_POST["flag"]) {
 
         // post[from] could be: pluslet-cloneid-1481
         $box_type = explode("-", $_POST["from"]);
-
+print_r($box_type);
         // New or Clone or Special?
         // TODO special type
         if ($box_type[1] == "cloneid") {
@@ -65,6 +65,12 @@ switch ($_POST["flag"]) {
             $our_type = $_POST["item_type"];
             $our_id = $box_type[2];
             //print "Okay, it's a clone! <p>";
+
+        } elseif ($box_type[1] == "masterid") {
+            $isclone = 2;
+            $our_type = "Clone";
+            $our_master_id = $box_type[2];  
+            $our_id = "";
         } else {
             $isclone = 0;
             $our_type = $box_type[2];
@@ -73,8 +79,14 @@ switch ($_POST["flag"]) {
 
         $obj = "SubjectsPlus\Control\Pluslet_" . $our_type;
         //global $obj;
-        $record = new $obj($our_id, "", $our_subject_id, $isclone);
-        print $record->output("edit", "admin");
+        $record = new $obj($our_id, "", $our_subject_id, $isclone, $our_master_id);
+
+        // If it's a master, don't make editable
+        if ($box_type[1] == "masterid") {
+            print $record->output("view", "admin");
+        } else {
+            print $record->output("edit", "admin");
+        }
 
 
         break;
@@ -171,9 +183,9 @@ switch ($_POST["flag"]) {
 
 function modifyDB($id, $type) {
     $db = new Querier;
-   /*  print "<pre>";
+     print "<pre>";
       print_r($_POST);
-      print "</pre>"; */
+      print "</pre>"; /**/
     // Uses the data from the POST vars to update
     $pluslet_title = isset($_POST["pluslet_title"]) ? $_POST["pluslet_title"] : '';
     $pluslet_body = isset($_POST["pluslet_body"])? $_POST["pluslet_body"] : '';
@@ -181,6 +193,7 @@ function modifyDB($id, $type) {
     $pluslet_extra = isset($_POST["special"]) ? $_POST["special"] : '';
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
+    $pluslet_master = $_POST["master"];
 
     if (isset($_POST["boxsetting_titlebar_styling"])) {
 
@@ -209,7 +222,7 @@ function modifyDB($id, $type) {
     }
     switch ($type) {
         case "insert":
-            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, titlebar_styling) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body), $db->quote($pluslet_titlebar_styling));
+            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, titlebar_styling, master) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body), $db->quote($pluslet_titlebar_styling),$db->quote($pluslet_master));
             $db = new Querier;
             $r = $db->exec($q);
             if ($r) {
@@ -233,7 +246,8 @@ function modifyDB($id, $type) {
                 extra = '$pluslet_extra',
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
-                titlebar_styling = '$pluslet_titlebar_styling'
+                titlebar_styling = '$pluslet_titlebar_styling',
+                master = '$pluslet_master'
                 WHERE pluslet_id ='$id'";
             $r = $db->exec($q);
             //print $q;

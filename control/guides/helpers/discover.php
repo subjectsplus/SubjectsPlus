@@ -45,6 +45,7 @@ foreach($r3 as $myrow) {
 
 print "
 <div id=\"maincontent\">
+<br /><br />
 <form action=\"discover.php\" method=\"post\" id=\"target\">
 
 <div style=\"float: left; width: 60%;\">
@@ -92,12 +93,19 @@ $(document).ready(function(){
 	  	return false;
 	});
 
-
-	$("img[name*=add-]").livequery('click', function(event) {
+// this might be obsolete, in place of copy and clone
+	$("button[name*=add-]").livequery('click', function(event) {
 		var item_id = $(this).attr("name").split("-");
+
 		// make these vars available to the parent file, guide.php
 		parent.addItem = item_id[1];
 		parent.addItemType = item_id[2];
+		parent.addCloneType = item_id[3];
+		if (item_id[3] == 'clone') {
+			alert("Holy crap it's a clone");
+		} else {
+			alert("Holy crap it's a copy");
+		}
 		parent.jQuery.colorbox.close();
 		return false;
 	});
