@@ -2,10 +2,10 @@
 namespace SubjectsPlus\Control;
 require_once("Pluslet.php");
 /**
- *   @file sp_Pluslet_HTML5Video
- *   @brief
+ *   @file HTML5Video
+ *   @brief A pluslet to display various video formats
  *
- *   @author agdarby, jlittle
+ *   @author jlittle
  *   @date Dec 2013
  *   @todo
  */
@@ -53,6 +53,9 @@ class Pluslet_HTML5Video extends Pluslet {
 	    $this->_extra = json_decode( $this->_extra, true );
 	}
 
+	
+
+	
   	$this->_body = " <style>
         .html5_video input {
 
@@ -128,6 +131,9 @@ class Pluslet_HTML5Video extends Pluslet {
 
         }
         
+        
+       try {
+        
         if( $this->_extra['kaltura'] != "" ) {
         	 
         	$lobjSplit = explode('/', $this->_extra['kaltura']);
@@ -148,7 +154,9 @@ class Pluslet_HTML5Video extends Pluslet {
         	 
         }
         
-        
+        } catch (Exception $e) {
+        	
+        }
         
         }        
 

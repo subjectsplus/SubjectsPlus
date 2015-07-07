@@ -152,6 +152,15 @@ global $pluslets_activated;
 
 $all_boxes = "
 <ul id=\"box_options\">
+		
+		<div class=\"guides-display\">
+<select class=\"guide-list\">
+<option>Please select a guide</option>
+</select>
+<ul class=\"pluslet-list\">
+</ul>
+</div>
+
 <li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
 
 foreach( $pluslets_activated as $lstrPluslet )
@@ -212,9 +221,6 @@ ob_end_flush();
 ?>
 
 
-
-
-
 <script type="text/javascript">
  // We're just setting up a few vars that we'll need
  var user_id = "<?php print $_SESSION["staff_id"]; ?>";
@@ -236,7 +242,7 @@ ob_end_flush();
 
 
  jQuery(document).ready(function(){
-   jQuery("#box_options").hide();
+   //jQuery("#box_options").hide();
 
    //layout each section
    $('div[id^="section_"]').each(function()
@@ -260,13 +266,13 @@ ob_end_flush();
      });
 
    function addBoxy(){
-     jQuery("#box_options").show();
+     //jQuery("#box_options").show();
      return;
 
    }
 
    function removeBoxy(){
-     jQuery("#box_options").hide();
+     //jQuery("#box_options").hide();
      return;
    }
 
@@ -492,6 +498,7 @@ ob_end_flush();
          $( this ).dialog( "close" );
        	 $("#response").hide();
          $('#save_guide').fadeIn();
+         $('#save_template').fadeIn();
        },
        "Delete" : function() {
          var id = window.lastClickedTab.replace("#tabs-", "");
@@ -504,6 +511,7 @@ ob_end_flush();
          $( this ).dialog( "close" );
    	 $("#response").hide();
          $('#save_guide').fadeIn();
+         $('#save_template').fadeIn();
        },
        Cancel: function() {
          $( this ).dialog( "close" );
@@ -567,6 +575,7 @@ ob_end_flush();
 
          jQuery("#response").hide();
          jQuery("#save_guide").fadeIn();
+         jQuery("#save_template").fadeIn();
 
          tabs.tabs();
 
@@ -638,21 +647,12 @@ ob_end_flush();
    // Structure for Guide Backend - PV
    ///////////////////////////////////-->
 
-<div class="guide-parent-wrap"> 
+<div class="guide-parent-wrap" id ="guide-parent-wrap">
   
       <div class="panel-wrap">
         <div id="hide_header">
           <img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" />
-        </div>
-        
-        <div class="top-panel-options">
-          <ul class="top-panel-options-list">
-              <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><br /><?php print _("New Box");?></a>
-              <?php print $all_boxes; ?></li>
-              
-              <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
-          </ul>
-        </div>
+        </div>         
       </div><!--end .panel-wrap-->
       
       
@@ -661,23 +661,38 @@ ob_end_flush();
           <!--GUIDE HEADER CONTAINER-->
           <div id="guide_header">
               <div class="pure-g">
-                <div class="pure-u-1-2">
-                    <form class="pure-form" id="guide_search">
-                      <ul id="guide_nav">
-                        <li><h2>
-                  <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
-                  <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-                  <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
-                  </h2></li>
-                        <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
+                <div class="pure-u-2-5 pure-u-md-1-3 pure-u-lg-1-2 pure-u-xl-5-8 guide-title-area">
+                    <h2><?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?></h2>
+                </div> <!-- end pure 5-8-->
 
-                        <li class="find-guide-parent">
-                          <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
-                        </li>
+                <div class="pure-u-2-5 pure-u-md-1-2 pure-u-lg-3-8 pure-u-xl-1-4 guide-commands-area">
+                    <!-- Save Button -->
+                    <div id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></div>
+                    <div id="savour2"><button class="button pure-button pure-button-primary" id="save_template"><?php print _("SAVE TEMPLATE"); ?></button></div>
+                </div> <!-- end pure 1-4-->                
+              
+                <div class="pure-u-1-5 pure-u-md-1-6 pure-u-lg-1-8 pure-u-xl-1-8 guide-options-area">
 
+                  <ul id="guide_nav">
+                    <li><a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><i class="fa fa-eye" title="<?php print _("View Guide"); ?>"></i></a></li>
+                    <li><a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><i class="fa fa-cog" title="<?php print _("Edit Guide Metadata"); ?>"></i></a></li>
+                    <li><a href="#" id="find-trigger"><i class="fa fa-search" title="<?php print _("Find in Guide"); ?>"></i></a></li>
+                  </ul>              
+                </div><!-- end pure 1-8-->
+              </div> <!-- end pure -->
+          </div> <!-- end guide header-->
 
-    <script>
-
+          <div id="find-in-guide-container">
+            <div class="pure-g">
+                <div class="pure-u-5-6 pure-u-lg-7-8">&nbsp;</div>
+                <div class="pure-u-1-6 pure-u-lg-1-8 find-guide-parent">
+                    <form class="pure-form" id="guide_search">    
+                        <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
+                    </form>
+                </div>
+            </div>
+          </div>
+<script>
      var startURL = '../guides/guide.php?subject_id=';
      var sp_path = document.URL.split('/')[3];
 
@@ -689,8 +704,6 @@ ob_end_flush();
 
          event.preventDefault();
          jQuery(".find-guide-input").val(ui.item.label);
-
-
        },
        select: function(event, ui) {
         var tab_id = ui.item.hash.split('-')[1];
@@ -705,24 +718,12 @@ ob_end_flush();
 
         window.location.hash = 'box-' + box_id;
          }
+
+
      });
+</script>     
 
-    </script>
-
-                      <!--<li class="selected"></li>-->
-                      </ul>
-                    </form>
-                </div> <!-- end pure 1-2-->
-              
-                <div class="pure-u-1-2"> 
-                  <h2>
-                  <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
-                  <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-                  <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
-                  </h2>
-                </div><!-- end pure 1-2-->
-              </div> <!-- end pure -->
-          </div> <!-- end guide header-->
+          
 
           <input id="extra" type="hidden" size="1" value="<?php
 
@@ -731,10 +732,7 @@ ob_end_flush();
 
             }
 
-            ?>" name="extra" />
-
-          <!-- Save Button -->
-          <p id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
+            ?>" name="extra" />         
 
 
           <!--GUIDE BUILDER CONTAINER-->
@@ -811,14 +809,154 @@ ob_end_flush();
             	  $(tabs).tabs('select', 0);
             	  jQuery("#response").hide();
                   jQuery("#save_guide").fadeIn();
+                  jQuery("#save_template").fadeIn();
 		}
               }
 	    });
 	  });
+
+	  
  
 	 </script>
 
+</div> <!--end .guide-parent-wrap-->  
+
+
+<!-- FLYOUT PANEL-->
+<div id="main-options">
+
+  <!--Flyout trigger-->
+  <div class="trigger-main-options">
+    <i id="trigger-pointer" class="fa fa-chevron-right"></i>
+  </div>
+
+  <!-- Top level -->
+  <div class="top-panel-options">          
+      <ul class="top-panel-options-list">
+          <!--<li id="newbox" class="togglenewz"><a href="#"><img src="<?php //print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><br /><?php //print _("Boxes");?></a>            
+          </li>-->
+
+          <li id="show_box_options"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" title="<?php print _("Boxes"); ?>" /><br /><?php print _("Boxes");?></a>            
+          </li>
+          
+          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li> 
+
+          <li id="show_layout_options"><a href="#"><i class="fa fa-columns" title="<?php print _("Layout"); ?>" /></i><br /><?php print _("Layout"); ?></a></li>         
+
+          <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><br /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
+
+          <li id="show_dblist_options"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
+
+          <li id="show_analytics_options"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
+
+          <li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
+      </ul>
+
+  </div>
+  
+  <!-- Second-level-->
+  <div class="second-level-options">
+      
+      <div class="second-level-container">
+          I am cool content<br />
+          
+          <!--boxes-->
+          <div id="box_options_content" class="second-level-content panel-active">
+            <?php print $all_boxes; ?>
+          </div>
+
+          <!--layout-->
+          <div id="layout_options_content" class="second-level-content panel-inactive">
+            Layout options
+          </div>
+
+          <!--custom database list-->
+          <div id="dblist_options_content" class="second-level-content panel-inactive">
+            Custom Database List options
+          </div>
+
+          <!--analytics-->
+          <div id="analytics_options_content" class="second-level-content panel-inactive">
+            Analytics options
+          </div>
+
+
+      </div>
+  </div>
+
+</div><!--end #main-options-->
+
+<script>
+
+jQuery(function() {
+  
+//Top Level Panel Flyout 
+  var mainslider = $('#main-options').slideReveal({
+    trigger: $(".trigger-main-options"),
+    push:false,
+    width: 390,
+    shown: function(slider, trigger){
+      $("#trigger-pointer").addClass("fa-chevron-left");
+      $("#trigger-pointer").removeClass("fa-chevron-right");
+    },
+    hidden: function(slider, trigger){
+      $("#trigger-pointer").addClass("fa-chevron-right");
+      $("#trigger-pointer").removeClass("fa-chevron-left");
+    }
+  }); 
+
+  $( "#main-options-close" ).click(function() {
+      mainslider.slideReveal("hide");
+  });
+
+
+//Top level Panel Open by default
+window.onload = function() {
+  mainslider.slideReveal("show");
+};
+
+
+// Show/Hide "Find in Guide" form
+$( "#find-trigger" ).click(function() {
+      $("#guide_search").toggle("fade", 700 );
+  });
+
+
+// Show "Boxes" options
+$( "#show_box_options" ).click(function() {
+      $("#box_options_content").addClass( "panel-active", 700 );
+  });
+
+
+// Show "Layout" options
+$( "#show_layout_options" ).click(function() {
+      $("#layout_options_content").addClass( "panel-active", 700 );
+  });
+
+
+// Show "Custom DB List" options
+$( "#show_dblist_options" ).click(function() {
+      $("#dblist_options_content").addClass( "panel-active", 700 );
+  });
+
+
+// Show "Analytics" options
+$( "#show_analytics_options" ).click(function() {
+      $("#analytics_options_content").addClass( "panel-active", 700 );
+  });
+
+ 
+
+
+});
+</script>
+
+	 <script>
+	 loadCloneMenu();
+	 </script>
+	 
 	 
 </div> <!--end .guide-parent-wrap-->
 
 <?php include("../includes/footer.php"); ?>
+ 
