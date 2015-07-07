@@ -637,7 +637,7 @@ class Pluslet {
 	{
 		return $this->_body;
 	}
-
+	
 	public function setHideTitleBar( $lintHide )
 	{
 		$this->_hide_titlebar = $lintHide;
@@ -664,4 +664,16 @@ class Pluslet {
 
     }
 
+    public function loadHtml($path) {
+    	
+    	ob_start();
+    	include $path;
+    	$external_html = ob_get_contents();
+    	ob_end_clean();
+    	
+    	return $external_html;
+    	
+    }
+    
+    
 }

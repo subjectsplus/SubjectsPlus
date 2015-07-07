@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	var clone_pluslet_id;
+	
     makeDropable(".dropspotty");
     makeDropable(".cke");
     makeSortable(".sort-column");
@@ -1067,6 +1069,42 @@ function setupMiscClickEvents()
     $('#hide_header').click(function(event) {
         $("#header, #subnavcontainer").toggle('slow');
     });
+    
+    $(".box-item").click(function(event) {
+        var edit_id = $(this).attr("id").split("-");
+        plantClone('', edit_id[2], '');
+
+    });
+    
+    $('body').on('click', '.clone-button',function() {
+    	
+   // 	var clone_id = Math.floor(Math.random()*1000001);
+    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
+    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+
+    	plantClone('','Clone',origin_id, origin_title);
+    	
+   
+    });
+    
+    $('body').on('click', '.copy-button',function() {
+    	
+    	   // 	var clone_id = Math.floor(Math.random()*1000001);
+    	    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
+    	    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+
+    	    	plantClone(origin_id,'Basic', origin_title);
+    	    
+    	});
+    
+    
+    
+    
+}
+
+function setCloneValue(input) {
+	$(input).val("testing");
+	
 }
 
 function makeHelpable( lstrSelector )
@@ -1165,7 +1203,37 @@ function refreshFeeds() {
 
 ///////
 
-function plantClone(clone_id, item_type) {
+function loadCloneMenu() {
+	
+		$.get("../includes/autocomplete_data.php?collection=guides&term=", function(data) { 
+
+			for(var i = 0; i<data.length;i++) {
+		        var subject_id = data[i].id;
+				$('.guide-list').append("<option data-subject-id='" + subject_id + "' class=\"guide-listing\">" + data[i].label + "</li>");
+
+			}
+
+		});
+
+		$('.guide-list').on('change', function(data) {
+			var subject_id = $("option:selected", this).attr('data-subject-id');
+
+			$('.pluslet-list').empty();
+
+			$.get("../includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
+					,function(data) {
+
+					for(var i = 0; i<data.length;i++) {
+						$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\">"  + data[i].label + "<button class=\"clone-button pure-button pure-button-primary\">Clone</button><button class=\"copy-button pure-button pure-button-primary\">Copy</button></li>");
+			
+					}
+			});	
+			
+		});
+
+}
+
+function plantClone(clone_id, item_type, origin_id, clone_title) {
 
     // Create new node below, using a random number
 
@@ -1188,8 +1256,23 @@ function plantClone(clone_id, item_type) {
 						      // 2. put the contents of the div into a variable
 						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
 						      var cnt = $("#new-" + randomnumber).contents();
+						      
+						      if (cnt.find('input.clone-input')) {
+						    	  
+						      cnt.find('input.clone-input').val(origin_id);
+						      
+						      }
+						      
+						      if (clone_title) {
+							      cnt.find("[id^=pluslet-new-title]").val(clone_title);
+
+						      }
+
+						      
 						      $("#new-" + randomnumber).replaceWith(cnt);
 
+						      
+						      
 						      $("#response").hide();
 						      //Make save button appear, since there has been a change to the page
 						      $("#save_guide").fadeIn();

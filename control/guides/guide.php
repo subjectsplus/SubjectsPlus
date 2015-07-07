@@ -152,6 +152,15 @@ global $pluslets_activated;
 
 $all_boxes = "
 <ul id=\"box_options\">
+		
+		<div class=\"guides-display\">
+<select class=\"guide-list\">
+<option>Please select a guide</option>
+</select>
+<ul class=\"pluslet-list\">
+</ul>
+</div>
+
 <li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
 
 foreach( $pluslets_activated as $lstrPluslet )
@@ -805,6 +814,8 @@ ob_end_flush();
               }
 	    });
 	  });
+
+	  
  
 	 </script>
 
@@ -942,6 +953,12 @@ $( "#show_analytics_options" ).click(function() {
 });
 </script>
 
+	 <script>
+	 loadCloneMenu();
+	 </script>
+	 
+	 
+</div> <!--end .guide-parent-wrap-->
 
 <?php include("../includes/footer.php"); ?>
  
