@@ -153,6 +153,9 @@ global $pluslets_activated;
 $all_boxes = "
 <ul id=\"box_options\">
 		
+		<input class=\"findbox-search\" type=\"text\"></input>
+		<div class=\"findbox-searchresults\"></div>
+		
 		<div class=\"guides-display\">
 <select class=\"guide-list\">
 <option>Please select a guide</option>
