@@ -934,6 +934,8 @@ $( "#show_analytics_options" ).click(function() {
       $("#analytics_options_content").addClass( "panel-active", 700 );
   });
 
+// Show options content for selected item and 
+
  
 
 
