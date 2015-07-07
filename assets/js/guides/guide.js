@@ -1080,8 +1080,11 @@ function setupMiscClickEvents()
     	
    // 	var clone_id = Math.floor(Math.random()*1000001);
     	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+       	
+    	var origin_title = $(this).parent().text().replace("CloneCopy","");
 
+    	
+    	
     	plantClone('','Clone',origin_id, origin_title);
     	
    
@@ -1091,7 +1094,7 @@ function setupMiscClickEvents()
     	
     	   // 	var clone_id = Math.floor(Math.random()*1000001);
     	    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+    	    	var origin_title = $(this).parent().text().replace("CloneCopy","");
 
     	    	plantClone(origin_id,'Basic', origin_title);
     	    
