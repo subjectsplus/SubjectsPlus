@@ -4,7 +4,7 @@ require_once("Pluslet.php");
 
 class Pluslet_Clone extends Pluslet {
 
-  private $_master;
+  protected $_master;
 	
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone="") {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone="");
