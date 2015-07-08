@@ -363,7 +363,7 @@ html,body { height:100%; }
   color: #333;
 }
 
-#guide_nav li a:hover {text-decoration: underline;}
+#guide_nav li a:hover {text-decoration: none; color: #e488b6;}
 
 
 #guide_header .icon-edit-guide {
@@ -392,7 +392,7 @@ html,body { height:100%; }
 #savour2  {padding: 0.5em 20px 0 5px; }
 
 #save_guide, #save_template {
- display:none;
+  display:none;
   margin: 0 !important;
 }
 
@@ -409,12 +409,20 @@ html,body { height:100%; }
 .top-panel-options-list li a {
   text-decoration: none !important;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #fff;
 }
 .top-panel-options-list li a i{
   font-size: 40px;
 }
+
+.top-panel-options-list li:hover, 
+.top-panel-options-list li.active-item {
+  color: #fff;
+  background-color: #C03957;
+}
+
+.top-panel-option-item {} /* Used in selectedPanelDisplay() function - don't delete by PV */
 
 .guidewrapper {margin: 6px 75px 0 40px;}
 
@@ -426,7 +434,7 @@ html,body { height:100%; }
 #main-options {background-color:transparent;}
 
 #main-options .trigger-main-options {
-    background-color: #333;
+    background-color: #c03957;
     cursor: pointer;
     right: -40px;
     padding: 8px 0;
@@ -443,7 +451,7 @@ html,body { height:100%; }
 
 .find-guide-parent {text-align: center; }
 
-#guide_search {background-color: #444; color: #FFF; display: none;}
+#guide_search {background-color: #c03957; color: #FFF; display: none;}
 
 #guide_search input {
   font-size: 1em;
@@ -453,9 +461,12 @@ html,body { height:100%; }
 }
 
 .second-level-options { 
-  width: 300px; 
+  width: 350px; 
   height: 100%;
   background-color: #444;
+  box-shadow: 0px 0px 15px rgba(54,51,51,0.7) inset;
+ -moz-box-shadow: 0px 0px 15px rgba(54,51,51,0.7) inset;
+ -webkit-box-shadow: 0px 0px 15px rgba(54,51,51,0.7) inset;
   color: #fff;
   position:absolute;
   top: 3.1em;
@@ -464,10 +475,9 @@ html,body { height:100%; }
 
 .second-level-container {padding: 1em;}
 
-.second-level-content {background-color: transparent;}
+.second-level-content {background-color: transparent; padding:5px;}
 
-.panel-active {display:block;}
-.panel-inactive {display:none;}
+
 
 /* The draggable boxes from the admin guide header */
 
@@ -477,17 +487,19 @@ html,body { height:100%; }
   margin: 0;
   padding: 0;  
   width: 100%;
+  list-style: outside none none;
 }
 
 #box_options li {
-  border: 1px solid #CCCCCC !important;
-  clear: left !important;
-  display: block !important;
-  float: none !important;
-  margin: 0 !important;
+  display: inline-block;
+  margin: 0 5px 10px 10px;
   line-height: 1.5em !important;
-  font-size: 1.1em !important;
-  padding: .2em .2em .2em .5em;
+  padding: 10px 0;
+  width: 50px;
+  font-size: 24px;
+  overflow: hidden;
+  border-radius: 2px;
+  text-align: center;
 }
 
 .box_settings {
@@ -503,36 +515,68 @@ html,body { height:100%; }
   font-weight: normal;
 }
 
-.box-item {
-  list-style-type: none;
-
-  max-width:200px;
-  background-color: #333;
-  cursor: pointer;
-  color:#fff;
-  border: 1px solid #CCCCCC !important;
-  clear: left !important;
-  display: block !important;
-  float: none !important;
-  margin: 0 !important;
-  line-height: 1.5em !important;
-  font-size: 1.1em !important;
-  padding: .2em .2em .2em .5em;
+.box-item {  
+  background-color: #d5d5d5;
+  color:#333;
 }
 
 .box-item:hover {
   background: #C03957;
+  color:#FFF;
 }
 
-#box_options li.box_note {
-  background-color: #FFFFFF !important;
-  border: 0 none #FFFFFF !important;
-  color: #333333;
-  cursor: text !important;
-  font-size: 0.9em !important;
-  padding: .5em .2em;
+#box_options_content h3 {margin: 0 0 0.75em 0;}
+
+/* Find Boxes Tabs */
+
+#find-box-tabs {
+   background: #484848;
+   border-right: 1px solid #525252;
+   border-bottom: 1px solid #525252;
+   border-left: 1px solid #3e3e3e;
+   border-top: 1px solid #3e3e3e; 
+   border-radius: 4px;
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+   margin: 0 0 20px 0;
 }
 
+.find-box-tab-list {padding:0 !important; background: none !important; border: none !important;}
+
+.find-box-tab-list li {margin: 0 1px 1px 0 !important; border: none !important; background: #e5e4e4 !important;}
+.find-box-tab-list li a {padding: 0.25em 0.75em !important; color: #999 !important; font-size: 0.9em !important;}
+
+.find-box-tab-list li.ui-tabs-active {background: #d5d5d5 !important; color: #FFF !important;}
+.find-box-tab-list li.ui-tabs-active a {color: #333 !important;}
+
+.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; overflow:auto; max-height:540px;}
+
+.guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+
+.guides-display .guide-list option {width: 100%;}
+
+.pluslet-list {list-style: inside none none; margin: 0 0 0 0; background-color: #f2f2f2; padding:0;}
+
+.pluslet-list .pluslet-listing {padding:5px;}
+
+.clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
+
+.findbox-search {width:96%;}
+
+.pure-button-secondary, 
+a.pure-button-secondary {
+  background-color: #d5d5d5;
+  color: #666 !important;
+  font-weight: bold;
+  text-shadow: none !important;
+}
+
+.pure-button-secondary:hover, 
+a.pure-button-secondary:hover {
+  background-color: rgba(228,136,182, 0.8);
+  box-shadow: none;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;  
+}
 
 
 /* Main content areas */
@@ -1348,7 +1392,7 @@ div.tooltip div
   text-align:center;
   display: none;
   margin-top:0;
-  padding: .5em 0;
+  padding: 0.65em 0;
   z-index: -1;
 }
  

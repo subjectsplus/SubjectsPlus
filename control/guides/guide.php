@@ -150,21 +150,10 @@ if (isset($this_id)) {
 ///////////////////////////
 global $pluslets_activated;
 
-$all_boxes = "
-<ul id=\"box_options\">
-		
-		<input class=\"findbox-search\" type=\"text\"></input>
-		<div class=\"findbox-searchresults\"></div>
-		
-		<div class=\"guides-display\">
-<select class=\"guide-list\">
-<option>Please select a guide</option>
-</select>
-<ul class=\"pluslet-list\">
-</ul>
-</div>
 
-<li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
+$all_boxes = "<p>" . _("Drag box selection, then drop it to the right") . "</p>
+
+<ul id=\"box_options\">";
 
 foreach( $pluslets_activated as $lstrPluslet )
 {
@@ -172,9 +161,9 @@ foreach( $pluslets_activated as $lstrPluslet )
   {
     $lstrObj = "SubjectsPlus\Control\Pluslet_" . $lstrPluslet;
 
-    if( method_exists( $lstrObj, 'getMenuName' ) )
+    if( method_exists( $lstrObj, 'getMenuIcon' ) )
     {
-      $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuName' )) . "</li>";
+      $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
     }else
     {
       $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . $lstrPluslet . "</li>";
@@ -654,7 +643,7 @@ ob_end_flush();
   
       <div class="panel-wrap">
         <div id="hide_header">
-          <img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" />
+          <img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("Show/Hide Header"); ?>" alt="<?php print _("Show/Hide Header"); ?>" />
         </div>         
       </div><!--end .panel-wrap-->
       
@@ -836,21 +825,16 @@ ob_end_flush();
   <!-- Top level -->
   <div class="top-panel-options">          
       <ul class="top-panel-options-list">
-          <!--<li id="newbox" class="togglenewz"><a href="#"><img src="<?php //print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><br /><?php //print _("Boxes");?></a>            
-          </li>-->
-
-          <li id="show_box_options"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" title="<?php print _("Boxes"); ?>" /><br /><?php print _("Boxes");?></a>            
-          </li>
           
-          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li> 
+          <li id="show_box_options" class="top-panel-option-item active-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" title="<?php print _("Boxes"); ?>" /><br /><?php print _("Boxes");?></a></li>
+          
+          <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li> 
 
-          <li id="show_layout_options"><a href="#"><i class="fa fa-columns" title="<?php print _("Layout"); ?>" /></i><br /><?php print _("Layout"); ?></a></li>         
+          <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layout"); ?>" /></i><br /><?php print _("Layout"); ?></a></li>
 
-          <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><br /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
+          <li id="show_dblist_options" class="top-panel-option-item"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
 
-          <li id="show_dblist_options"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
-
-          <li id="show_analytics_options"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
+          <li id="show_analytics_options" class="top-panel-option-item"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
 
           <li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
       </ul>
@@ -861,25 +845,47 @@ ob_end_flush();
   <div class="second-level-options">
       
       <div class="second-level-container">
-          I am cool content<br />
-          
+
           <!--boxes-->
-          <div id="box_options_content" class="second-level-content panel-active">
-            <?php print $all_boxes; ?>
+          <div id="box_options_content" class="second-level-content">
+
+              <h3><i class="fa fa-search" title="<?php print _("Find Boxes"); ?>" /></i> <?php print _("Find Boxes"); ?></h3>
+              <!--Find Box Tabs-->
+              <div id="find-box-tabs">
+                  <ul class="find-box-tab-list">
+                    <li><a href="#browse-tab"><?php print _("Browse"); ?></a></li>
+                    <li><a href="#search-tab"><?php print _("Search"); ?></a></li>
+                  </ul>
+                  <div id="browse-tab" class="find-box-tab-list-content">
+                        <div class="guides-display">
+                            <select class="guide-list">
+                                <option>Please select a guide</option>
+                            </select>
+                            <ul class="pluslet-list"></ul>                          
+                        </div>
+                  </div>
+                  <div id="search-tab" class="find-box-tab-list-content">
+                        <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>"></input>
+                        <div class="findbox-searchresults"></div>
+                  </div>
+              </div>
+
+              <h3><i class="fa fa-external-link" title="<?php print _("Add Boxes"); ?>" /></i> <?php print _("Add Boxes"); ?></h3>
+              <?php print $all_boxes; ?>
           </div>
 
           <!--layout-->
-          <div id="layout_options_content" class="second-level-content panel-inactive">
+          <div id="layout_options_content" class="second-level-content" style="display:none;">
             Layout options
           </div>
 
           <!--custom database list-->
-          <div id="dblist_options_content" class="second-level-content panel-inactive">
+          <div id="dblist_options_content" class="second-level-content" style="display:none;">
             Custom Database List options
           </div>
 
           <!--analytics-->
-          <div id="analytics_options_content" class="second-level-content panel-inactive">
+          <div id="analytics_options_content" class="second-level-content" style="display:none;">
             Analytics options
           </div>
 
@@ -897,7 +903,7 @@ jQuery(function() {
   var mainslider = $('#main-options').slideReveal({
     trigger: $(".trigger-main-options"),
     push:false,
-    width: 390,
+    width: 440,
     shown: function(slider, trigger){
       $("#trigger-pointer").addClass("fa-chevron-left");
       $("#trigger-pointer").removeClass("fa-chevron-right");
@@ -927,36 +933,58 @@ $( "#find-trigger" ).click(function() {
 
 // Show "Boxes" options
 $( "#show_box_options" ).click(function() {
-      $("#box_options_content").addClass( "panel-active", 700 );
+      selectedPanelDisplay();
+      $("#box_options_content").show();
+      $(this).addClass("active-item");
   });
 
 
 // Show "Layout" options
 $( "#show_layout_options" ).click(function() {
-      $("#layout_options_content").addClass( "panel-active", 700 );
+      selectedPanelDisplay();
+      $("#layout_options_content").show();
+      $(this).addClass("active-item");
   });
 
 
 // Show "Custom DB List" options
-$( "#show_dblist_options" ).click(function() {
-      $("#dblist_options_content").addClass( "panel-active", 700 );
+$( "#show_dblist_options" ).click(function() {      
+      selectedPanelDisplay(); 
+      $("#dblist_options_content").show();
+      $(this).addClass("active-item");
   });
 
 
 // Show "Analytics" options
-$( "#show_analytics_options" ).click(function() {
-      $("#analytics_options_content").addClass( "panel-active", 700 );
+$( "#show_analytics_options" ).click(function() {      
+      selectedPanelDisplay();    
+      $("#analytics_options_content").show(); 
+      $(this).addClass("active-item");
   });
 
+
+// Select ONLY Active Panel for coresponding Top Level Item
+function selectedPanelDisplay(){
+     $('.second-level-content').not(this).each(function(){
+         $(this).hide();        
+       });
+     $('.top-panel-option-item').not(this).each(function(){
+         $(this).removeClass("active-item");        
+       });
+   }
+
  
+ //Find Box Tabs - Browse and Search
+ $( "#find-box-tabs" ).tabs();
+
+ 
+ //Load Clone Menu
+ loadCloneMenu();
 
 
 });
 </script>
 
-	 <script>
-	 loadCloneMenu();
-	 </script>
 	 
 	 
 </div> <!--end .guide-parent-wrap-->
