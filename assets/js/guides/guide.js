@@ -1094,8 +1094,8 @@ function setupMiscClickEvents()
     $('body').on('click', '.copy-button',function() {
     	
     	   // 	var clone_id = Math.floor(Math.random()*1000001);
-    	    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	    	var origin_title = $(this).parent().text().replace("CloneCopy","");
+    	    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	
+    	    	var origin_title = $(this).parent().parent().parent().text().replace("CloneCopy","");
 
     	    	plantClone(origin_id,'Basic', origin_title);
     	    
