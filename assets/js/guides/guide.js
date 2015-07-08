@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-	var clone_pluslet_id;
-	
     makeDropable(".dropspotty");
     makeDropable(".cke");
     makeSortable(".sort-column");
@@ -22,6 +20,7 @@ $(document).ready(function(){
     setupTabs('a[id*=tab-]');
     makeAddSection('a[id="add_section"]');
 
+    activateFindboxSearch();
     // Append an intital section
 
     if ($('[id^=section]').length) {
@@ -1079,9 +1078,14 @@ function setupMiscClickEvents()
     $('body').on('click', '.clone-button',function() {
     	
    // 	var clone_id = Math.floor(Math.random()*1000001);
-    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+    	console.log($(this).parent().parent().parent().attr('data-pluslet-id'));
+    	
+    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	
+       	
+    	var origin_title = $(this).parent().parent().parent().text().replace("CloneCopy","");
 
+    	
+    	
     	plantClone('','Clone',origin_id, origin_title);
     	
    
@@ -1091,7 +1095,7 @@ function setupMiscClickEvents()
     	
     	   // 	var clone_id = Math.floor(Math.random()*1000001);
     	    	var origin_id = $(this).parent().attr('data-pluslet-id');   	
-    	    	var origin_title = $(this).parent()[0].innerText.replace("CloneCopy","");
+    	    	var origin_title = $(this).parent().text().replace("CloneCopy","");
 
     	    	plantClone(origin_id,'Basic', origin_title);
     	    
@@ -1232,6 +1236,32 @@ function loadCloneMenu() {
 		});
 
 }
+
+function activateFindboxSearch() {
+$('.findbox-search').keypress(function(data) {
+
+	$('.findbox-searchresults').empty();
+	var search_term = $('.findbox-search').val(); 
+   
+ $.get('http://development.library.miami.edu/dev-non-svn/rails_projects/SubjectsPlus/control/includes/autocomplete_data.php?collection=home&term=' +  search_term, function(data) {
+
+	 if(data.length != 0) {
+		for(var i = 0; i < data.length; i++) {
+
+			if (data[i]['content_type'] == "Pluslet") {
+
+			$('.findbox-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\">"  + data[i].label + "<button class=\"clone-button pure-button pure-button-primary\">Clone</button><button class=\"copy-button pure-button pure-button-primary\">Copy</button></li>");
+			
+			}
+				
+		}
+} else {
+	$('.findbox-searchresults').html("<span class=\"no-box-results\">No Results</span>");
+	   }
+ });
+});
+}
+
 
 function plantClone(clone_id, item_type, origin_id, clone_title) {
 

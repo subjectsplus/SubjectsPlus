@@ -1,0 +1,72 @@
+<div class="catalog-search">
+<form action="http://catalog.library.miami.edu/search/" method="get" name="search" id="search">
+<input type="hidden" id="iiiFormHandle_1">
+<!-- Optional legend:
+<fieldset>
+<legend>Type the search term you want to find.</legend>-->
+<div class="formEntryArea">
+
+<select name="searchtype" id="searchtype" style="vertical-align:middle; font-size: 18px;">
+<option value="X" selected="selected">Keyword</option>
+<option value="t">Title</option>
+<option value="a">Author</option>
+<option value="d">Subject</option>
+<option value="c">LC Call Number</option>
+
+<option value="l">Local Call Number</option>
+<option value="g">SuDocs Number</option>
+<option value="i">ISSN . ISBN Number</option>
+<option value="o">OCLC Number</option>
+<option value="m">Music Publisher Number</option>
+</select>
+&nbsp;&nbsp;FOR<br><br>
+<input type="hidden" name="SORT" id="SORT" value="D">
+
+<input maxlength="75" name="searcharg" size="20" style="width:625px; height:25px; font-size: 20px;">&nbsp;&nbsp;
+<script language="javascript">
+function iiiDoSubmit_1()
+{
+//getFormHandleForm() is in common.js
+var obj = getFormHandleForm(1);
+obj.submit();
+}
+
+</script>
+<input type="hidden" id="iiiFormHandle_1">
+<input name="Search" type="submit" id="Search" value="SEARCH">
+<br>
+<table width="720" border="0" cellspacing="0" cellpadding="2">
+<tbody><tr>
+<td>
+<p><em>Limit search to:</em>&nbsp;&nbsp;&nbsp;&nbsp;
+  <select name="searchscope" id="searchscope">
+    <option value="10"> Architecture Library</option>
+        <option value="14"> Audiobooks</option>
+        <option value="12"> Books (Print)</option>
+        <option value="7"> Cuban Heritage Collection</option>
+        <option value="17"> DVDs/Videos </option>
+        <option value="13"> E-Books</option>
+        <option value="4"> Government Documents &amp; Maps</option>
+        <option value="2"> Internet Resources</option>
+        <option value="1"> Journals &amp; Other Serials</option>
+        <option value="9"> Marine Science Library</option>
+        <option value="15"> Music CDs</option>
+        <option value="8"> Music Library</option>
+        <option value="16"> Music Recordings</option>
+        <option value="3"> Richter Reference</option>
+        <option value="18"> Music Scores</option>
+        <option value="6"> Special Collections &amp; UM Archives</option>
+        <option value="19"> E-Music/E-Audio/E-Video</option>
+        <option value="11" selected="selected"> View Entire Collection</option>
+  </select>
+</p>
+</td>
+<td align="right" nowrap="">
+<a href="http://catalog.library.miami.edu/search/X">Advanced Search</a>
+</td>
+</tr>
+</tbody></table>
+</div><!-- formEntryArea -->
+<!--</fieldset> optional-->
+</form>
+</div>

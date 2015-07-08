@@ -177,8 +177,6 @@ $('#guides').select2();
   </div>
 </div>
 
-  </div>
-</div>
 
 
 <?php

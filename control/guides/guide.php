@@ -150,6 +150,7 @@ if (isset($this_id)) {
 ///////////////////////////
 global $pluslets_activated;
 
+
 $all_boxes = "<p>" . _("Drag box selection, then drop it to the right") . "</p>
 
 <ul id=\"box_options\">";
