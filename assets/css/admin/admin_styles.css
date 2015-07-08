@@ -548,7 +548,7 @@ html,body { height:100%; }
 .find-box-tab-list li.ui-tabs-active {background: #d5d5d5 !important; color: #FFF !important;}
 .find-box-tab-list li.ui-tabs-active a {color: #333 !important;}
 
-.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em;}
+.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; overflow:auto; max-height:540px;}
 
 .guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
 
@@ -558,9 +558,26 @@ html,body { height:100%; }
 
 .pluslet-list .pluslet-listing {padding:5px;}
 
-.clone-button, .copy-button {background-color: #ff0; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:12px !important;}
+.clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
 
 .findbox-search {width:96%;}
+
+.pure-button-secondary, 
+a.pure-button-secondary {
+  background-color: #d5d5d5;
+  color: #666 !important;
+  font-weight: bold;
+  text-shadow: none !important;
+}
+
+.pure-button-secondary:hover, 
+a.pure-button-secondary:hover {
+  background-color: rgba(228,136,182, 0.8);
+  box-shadow: none;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;  
+}
+
 
 /* Main content areas */
 
