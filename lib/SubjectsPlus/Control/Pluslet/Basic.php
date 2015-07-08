@@ -23,7 +23,7 @@
 
    	static function getMenuIcon()
    	{
-   		$icon="<i class=\"fa fa-external-link\" title=\"Editable Box\" ></i>";
+   		$icon="<i class=\"fa fa-pencil-square-o\" title=\"Editable Box\" ></i>";
         return $icon;
    	}
 

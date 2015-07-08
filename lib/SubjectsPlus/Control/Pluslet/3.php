@@ -71,6 +71,12 @@ class Pluslet_3 extends Pluslet {
   	return _('Subject Specialist');
   }
 
+  static function getMenuIcon()
+    {
+        $icon="<i class=\"fa fa-user\" title=\"Subject Specialist\" ></i>";
+        return $icon;
+    }
+
 }
 
 ?>

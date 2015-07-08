@@ -26,6 +26,12 @@ class Pluslet_TOC extends Pluslet {
 	return _('Table of Contents');
   }
 
+  static function getMenuIcon()
+    {
+      $icon="<i class=\"fa fa-list-alt\" title=\"Table of Contents\" ></i>";
+        return $icon;
+    }
+
   public function output($action="", $view="public") {
 
     global $title_input_size; // alter size based on column

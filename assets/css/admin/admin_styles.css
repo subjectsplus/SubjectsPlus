@@ -471,20 +471,21 @@ html,body { height:100%; }
   position:absolute;
   top: 3.1em;
   left: 90px;
+  z-index: 99999;
 }
 
 .second-level-container {padding: 1em;}
 
 .second-level-content {background-color: transparent; padding:5px;}
 
-
+.second-level-content h3 {margin: 0 0 0.75em 0;}
 
 /* The draggable boxes from the admin guide header */
 
 #box_options {
   cursor: pointer;
   display: block;
-  margin: 0;
+  margin: 0 0 30px 0;
   padding: 0;  
   width: 100%;
   list-style: outside none none;
@@ -493,10 +494,9 @@ html,body { height:100%; }
 #box_options li {
   display: inline-block;
   margin: 0 5px 10px 10px;
-  line-height: 1.5em !important;
   padding: 10px 0;
   width: 50px;
-  font-size: 24px;
+  font-size: 30px;
   overflow: hidden;
   border-radius: 2px;
   text-align: center;
@@ -525,7 +525,7 @@ html,body { height:100%; }
   color:#FFF;
 }
 
-#box_options_content h3 {margin: 0 0 0.75em 0;}
+#show_findbox_options i {font-size: 32px;}
 
 /* Find Boxes Tabs */
 
@@ -550,7 +550,7 @@ html,body { height:100%; }
 
 .find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; overflow:auto; max-height:540px;}
 
-.guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+.guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important;}
 
 .guides-display .guide-list option {width: 100%;}
 
@@ -560,7 +560,7 @@ html,body { height:100%; }
 
 .clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
 
-.findbox-search {width:96%;}
+#search-tab .findbox-search {width:96%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;}
 
 .pure-button-secondary, 
 a.pure-button-secondary {
@@ -576,6 +576,29 @@ a.pure-button-secondary:hover {
   box-shadow: none;
   color: #FFFFFF !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;  
+}
+
+.custom-icon{width:36px; height:36px;}
+
+.fav-boxes-content {
+  background: #484848;
+   border-right: 1px solid #525252;
+   border-bottom: 1px solid #525252;
+   border-left: 1px solid #3e3e3e;
+   border-top: 1px solid #3e3e3e; 
+   border-radius: 4px;
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+   margin: 0;
+   overflow: auto; max-height:350px;
+}
+
+.fav-boxes-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
+
+.fav-box-item:before {
+  font-family: FontAwesome;
+  content:"\f005";
+  color: #333; font-size:20px;
+  padding: 0 6px 0 0;
 }
 
 
@@ -1908,7 +1931,6 @@ text-align: center;
 }
 
 #controlpage .titlebar_options img {
-
   padding: .2em;
   background-color: #E488B6;
   -webkit-border-radius: 5px;
@@ -1917,6 +1939,20 @@ text-align: center;
   height: 15px;
   width: 15px;
   cursor: pointer;
+}
+
+#controlpage .titlebar_options i {
+  padding: .2em;
+  background-color: #E488B6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  position: relative;
+  top: -3px;
+  text-align: center;
 }
 
 #controlpage .pluslet_body {
@@ -2191,12 +2227,12 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 }
 
 .section_remove
-{
-  cursor: pointer;
+{  cursor: pointer;
   float: left;
   margin-right: 1em;
-  margin-top: -1em;
-  padding: 0.2em;
+  margin-top: -20px;
+  padding: 0.15em;
+  font-size: 30px !important;
 }
 
 .sp_section_slider
