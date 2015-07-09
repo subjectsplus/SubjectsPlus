@@ -18,10 +18,7 @@ $header = "noshow";
 
 include("../../includes/header.php");
 
-//print_r($_POST);
-
 $oSaveLayout = new Guide($_POST["subject_id"]);
-//$oSaveLayout->addExtra("maincol", $_POST["cols"]);
-//$oSaveLayout->updateExtra();
+
 
 ?>

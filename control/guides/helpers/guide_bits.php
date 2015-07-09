@@ -61,6 +61,24 @@ switch ($_REQUEST["type"]) {
         </div>
     </div>";
 
+    break;
+
+    case "add_department":
+
+        $item_name = scrubData($_POST["our_item_text"]);
+        $item_id = scrubData($_POST["our_item_id"], 'integer');
+
+        echo "
+    <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item\">
+            <input name=\"parent_id[]\" value=\"$item_id\" type=\"hidden\" />
+            $item_name<br />
+        </div>
+        <div class=\"selected_item_options\">
+            <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+        </div>
+    </div>";
+
         break;        
     case "add_discipline":
         $item_name = scrubData($_POST["our_item_text"]);
