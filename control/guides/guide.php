@@ -196,8 +196,7 @@ $r = $db->query($q);
 
 foreach ($r as $myrow) {
   $lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
-  $all_boxes .= "<li class=\"box-item draggable clone\" id=\"pluslet-id-" . $myrow[0] . "\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>\n";
-  $all_boxes .= $myrow[1] . "</li>";
+  $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
 }
 
 $all_boxes .= "</ul>";
@@ -234,8 +233,7 @@ ob_end_flush();
 
 
  jQuery(document).ready(function(){
-   //jQuery("#box_options").hide();
-
+   
    //layout each section
    $('div[id^="section_"]').each(function()
     				 {
@@ -257,23 +255,10 @@ ob_end_flush();
 
      });
 
-   function addBoxy(){
-     //jQuery("#box_options").show();
-     return;
-
-   }
-
-   function removeBoxy(){
-     //jQuery("#box_options").hide();
-     return;
-   }
-
    var boxyConfig = {
      interval: 50,
      sensitivity: 4,
-     over: addBoxy,
-     timeout: 500,
-     out: removeBoxy
+     timeout: 500
    };
 
    jQuery("#newbox").hoverIntent(boxyConfig);
@@ -826,11 +811,14 @@ ob_end_flush();
   <div class="top-panel-options">          
       <ul class="top-panel-options-list">
           
-          <li id="show_box_options" class="top-panel-option-item active-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" title="<?php print _("Boxes"); ?>" /><br /><?php print _("Boxes");?></a></li>
-          
-          <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><br /><span class="desktop"><?php print _("New Section"); ?></span></a></li> 
+          <li id="show_box_options" class="top-panel-option-item active-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/boxes1.svg" title="<?php print _("Boxes"); ?>" class="custom-icon" /><br /><?php print _("Boxes");?></a></li>
 
-          <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layout"); ?>" /></i><br /><?php print _("Layout"); ?></a></li>
+          <li id="show_findbox_options" class="top-panel-option-item"><a href="#"><i class="fa fa-search" title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
+
+          <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
+          
+          <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section1.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /><br />
+            <?php print _("New Section"); ?></a></li>           
 
           <li id="show_dblist_options" class="top-panel-option-item"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
 
@@ -848,8 +836,26 @@ ob_end_flush();
 
           <!--boxes-->
           <div id="box_options_content" class="second-level-content">
+              <h3><?php print _("Add Boxes"); ?></h3>
+              <?php print $all_boxes; ?>
+              
+              <h3><?php print _("Favorite Boxes"); ?></h3>
+              <div class="fav-boxes-content">
+                  <ul class="fav-boxes-list">
+                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
+                      <li class="fav-box-item">My favorite box</li>
+                      <li class="fav-box-item">My favorite box</li>
+                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
+                      <li class="fav-box-item">My favorite box</li>
+                      <li class="fav-box-item">My favorite box</li>
+                  </ul>
+              </div>
+          </div>
 
-              <h3><i class="fa fa-search" title="<?php print _("Find Boxes"); ?>" /></i> <?php print _("Find Boxes"); ?></h3>
+          
+          <!--find boxes-->
+          <div id="findbox_options_content" class="second-level-content" style="display:none;">
+              <h3><?php print _("Find Boxes"); ?></h3>
               <!--Find Box Tabs-->
               <div id="find-box-tabs">
                   <ul class="find-box-tab-list">
@@ -869,23 +875,28 @@ ob_end_flush();
                         <div class="findbox-searchresults"></div>
                   </div>
               </div>
-
-              <h3><i class="fa fa-external-link" title="<?php print _("Add Boxes"); ?>" /></i> <?php print _("Add Boxes"); ?></h3>
-              <?php print $all_boxes; ?>
           </div>
 
+          
           <!--layout-->
           <div id="layout_options_content" class="second-level-content" style="display:none;">
+            <h3><?php print _("Choose Layout"); ?></h3>
             Layout options
+
+            <h3><?php print _("My templates"); ?></h3>
           </div>
 
+          
           <!--custom database list-->
           <div id="dblist_options_content" class="second-level-content" style="display:none;">
+            <h3><?php print _("Create List"); ?></h3>
             Custom Database List options
           </div>
 
+          
           <!--analytics-->
           <div id="analytics_options_content" class="second-level-content" style="display:none;">
+            <h3><?php print _("Analytics"); ?></h3>
             Analytics options
           </div>
 
@@ -938,6 +949,13 @@ $( "#show_box_options" ).click(function() {
       $(this).addClass("active-item");
   });
 
+// Show "Find Boxes" options
+$( "#show_findbox_options" ).click(function() {
+      selectedPanelDisplay();
+      $("#findbox_options_content").show();
+      $(this).addClass("active-item");
+  });
+
 
 // Show "Layout" options
 $( "#show_layout_options" ).click(function() {
@@ -980,6 +998,21 @@ function selectedPanelDisplay(){
  
  //Load Clone Menu
  loadCloneMenu();
+
+
+ //Truncate Favorite Boxes Names    
+    $(".fav-box-item").each(function() {
+        var $this = $(this);
+        var text = $this.text();
+
+          if (text.length > 39) {
+              $this.text(text.substr(0, 38) + "...");
+          }      
+    });
+
+
+
+
 
 
 });

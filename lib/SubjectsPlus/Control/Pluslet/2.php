@@ -52,6 +52,17 @@ class Pluslet_2 extends Pluslet {
   	return _('Key to Icons');
   }
 
+  static function getMenuIcon()
+    {
+        $icon="<i class=\"fa fa-info\" title=\"Key to Icons\" ></i>";
+        return $icon;
+    }
+
+  
+
+
 }
+
+
 
 ?>

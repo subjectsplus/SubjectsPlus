@@ -20,6 +20,12 @@ class Pluslet_Heading extends Pluslet {
         $this->_body = "";
     }
 
+    static function getMenuIcon()
+    {
+        $icon="<i class=\"fa fa-header\" title=\"Heading\" ></i>";
+        return $icon;
+    }
+
     public function output($action="", $view="public") {
         
         global $title_input_size;

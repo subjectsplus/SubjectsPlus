@@ -22,6 +22,12 @@ class Pluslet_Feed extends Pluslet {
 		return _('RSS');
 	}
 
+    static function getMenuIcon()
+    {
+        $icon="<i class=\"fa fa-rss\" title=\"RSS\" ></i>";
+        return $icon;
+    }
+
     public function output($action="", $view="public") {
 
         // public vs. admin

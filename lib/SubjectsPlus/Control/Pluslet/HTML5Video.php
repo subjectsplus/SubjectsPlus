@@ -20,6 +20,12 @@ class Pluslet_HTML5Video extends Pluslet {
 
     }
 
+    static function getMenuIcon()
+    {
+      $icon="<i class=\"fa fa-file-video-o\" title=\"Video File\" ></i>";
+        return $icon;
+    }
+
     protected function onEditOutput()
     {
   	// make an editable body and title type

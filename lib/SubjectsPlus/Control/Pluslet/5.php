@@ -62,6 +62,17 @@ class Pluslet_5 extends Pluslet {
         return $this->_pluslet;
     }
 
+    static function getMenuName()
+  {
+    return _('Books: Use the Library Catalog');
+  }
+
+  static function getMenuIcon()
+    {
+        $icon="<i class=\"fa fa-book\" title=\"Books: Use the Library Catalog\" ></i>";
+        return $icon;
+    }
+
 }
 
 ?>
