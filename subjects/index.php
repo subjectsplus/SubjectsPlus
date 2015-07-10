@@ -151,6 +151,25 @@ if (isset ($v2styles) && $v2styles == 1) {
   print "version 3 styles not set up yet";
 }
 
+// Guides by Department
+// Set up here for CHC
+if (isset($_GET["d"])) {
+    $guide_results = "";
+    $guide_results = listGuideCollections($_GET["d"]);
+  
+  
+} else {
+  // Default dubious guide listing
+  $intro = "<p> These guides identify key resources in specific areas. Check out our <a href=\"http://libguides.miami.edu/\">complete list of interactive library subject guides</a>, tabbed for easy reference. You can also chat with our resource librarians or leave them a message.</p>";
+  //$guide_list = listGuides($search, $view_type);
+  $guide_results = listGuides($search, $view_type);
+}
+
+$layout = makePluslet("", $guide_results, "","",FALSE);
+
+// End CHC hack
+
+
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////

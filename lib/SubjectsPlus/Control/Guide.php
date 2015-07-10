@@ -538,6 +538,15 @@ class Guide
 
         makePluslet(_("Metadata (optional)"), $metadata_box, "no_overflow");
 
+        ////////////////
+        // Thumbnail Option
+        ////////////////
+
+        $thumbnail_box = _("If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server.");
+        $thumbnail_box .= "<p>" . _("E.g., musichistory.jpg, if your shortform is \"musichistory\".");
+        $thumbnail_box .= "<p>" . _("Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus.");
+
+        makePluslet(_("Thumbnail (VERY optional)"), $thumbnail_box, "no_overflow");
 
         echo "</div>\n</form>";
     }
