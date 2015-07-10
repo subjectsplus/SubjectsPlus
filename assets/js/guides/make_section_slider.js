@@ -16,7 +16,7 @@ function makeSectionSlider( lstrSelector )
 				   max: 12,
 				   step: 1,
 				   values: [lobjLayout[0], parseInt(lobjLayout[0]) + parseInt(lobjLayout[1])],
-				   slide: function( event, ui ) {
+				   change: function( event, ui ) {
 				       // figure out our vals
 				       var left_col = ui.values[0];
 				       var right_col = 12 - ui.values[1];
@@ -52,8 +52,9 @@ function makeSectionSlider( lstrSelector )
 			       });
 			   });
 
-
-
+    // Hide the first section's controls
+    
+   $('.sp_section_controls').first().hide();
     
 
 }
