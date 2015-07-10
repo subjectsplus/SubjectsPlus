@@ -817,8 +817,8 @@ ob_end_flush();
 
           <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
           
-          <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section1.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /><br />
-            <?php print _("New Section"); ?></a></li>           
+          <!--<li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php //print $AssetPath; ?>images/icons/section1.svg" title="<?php //print _("New Section"); ?>" class="custom-icon" /><br />
+            <?php //print _("New Section"); ?></a></li>-->           
 
           <li id="show_dblist_options" class="top-panel-option-item"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
 
@@ -873,19 +873,42 @@ ob_end_flush();
                   <div id="search-tab" class="find-box-tab-list-content">
                         <div class="searchbox-results-display">
                             <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>"></input>
-                            <ul class="findbox-searchresults"></div>
+                            <ul class="findbox-searchresults"></ul>
                         </div>
                   </div>
               </div>
           </div>
 
           
-          <!--layout-->
+          <!--layout-->          
           <div id="layout_options_content" class="second-level-content" style="display:none;">
             <h3><?php print _("Choose Layout"); ?></h3>
-            Layout options
+            
+                <ul class="layout_options">
+                  <li class="layout-icon active-layout-icon" id="col-single" title="<?php print _("1 Column"); ?>"></li>
+                  <li class="layout-icon" id="col-double" title="<?php print _("2 Columns"); ?>"></li>
+                  <li class="layout-icon" id="col-48" title="<?php print _("Sidebar + Column"); ?>"></li>
+                  <li class="layout-icon" id="col-84" title="<?php print _("Column + Sidebar"); ?>"></li>
+                  <li class="layout-icon" id="col-triple" title="<?php print _("3 Columns"); ?>"></li>
+                  <li class="layout-icon" id="col-363" title="<?php print _("2 Sidebars"); ?>"></li>
+                </ul>
+
+            <h3><?php print _("Add New Section"); ?></h3>
+                <ul class="layout_options">
+                  <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section2.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
+                </ul>
 
             <h3><?php print _("My templates"); ?></h3>
+            <div class="fav-templates-content">
+                  <ul class="fav-templates-list">
+                      <li class="fav-template-item">My favorite template Lorem ipsum dolor sit amet</li>
+                      <li class="fav-template-item">My favorite template</li>
+                      <li class="fav-template-item">My favorite template</li>
+                      <li class="fav-template-item">My favorite template Lorem ipsum dolor sit amet, </li>
+                      <li class="fav-template-item">My favorite template</li>
+                      <li class="fav-template-item">Biology template</li>
+                  </ul>
+              </div>
           </div>
 
           
@@ -901,6 +924,7 @@ ob_end_flush();
             <h3><?php print _("Analytics"); ?></h3>
             Analytics options
           </div>
+       
 
 
       </div>
@@ -1011,6 +1035,17 @@ function selectedPanelDisplay(){
               $this.text(text.substr(0, 38) + "...");
           }      
     });
+
+//Truncate Favorite Template Names    
+$(".fav-template-item").each(function() {
+    var $this = $(this);
+    var text = $this.text();
+
+      if (text.length > 39) {
+          $this.text(text.substr(0, 38) + "...");
+      }      
+});
+
 
 
 
