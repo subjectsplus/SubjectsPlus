@@ -186,18 +186,17 @@ if ($num_resources == 0) {
   $conditions = "AND pluslet_id != '1'";
 }
 
-$q = "SELECT distinct pluslet_id, title, body
-FROM pluslet
-WHERE type = 'Special'
-$conditions
-";
+//$q = "SELECT distinct pluslet_id, title, body
+//FROM pluslet
+//WHERE type = 'Special'
+//";
 
-$r = $db->query($q);
+//$r = $db->query($q);
 
-foreach ($r as $myrow) {
-  $lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
-  $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
-}
+//foreach ($r as $myrow) {
+ // $lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
+ // $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
+//}
 
 $all_boxes .= "</ul>";
 
@@ -1045,6 +1044,33 @@ $(".fav-template-item").each(function() {
           $this.text(text.substr(0, 38) + "...");
       }      
 });
+
+//Change layout click events
+$( "#col-single" ).click(function() {      
+      changeLayout(0, 12);
+  });
+
+$( "#col-double" ).click(function() {      
+      changeLayout(6, 12);
+  });
+
+$( "#col-48" ).click(function() {      
+      changeLayout(4, 24);
+  });
+
+$( "#col-84" ).click(function() {      
+      changeLayout(8, 12);
+  });
+
+$( "#col-triple" ).click(function() {      
+      changeLayout(4, 8);
+  });
+
+$( "#col-363" ).click(function() {      
+      changeLayout(3, 9);
+  });
+
+
 
 
 
