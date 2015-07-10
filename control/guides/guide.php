@@ -871,8 +871,10 @@ ob_end_flush();
                         </div>
                   </div>
                   <div id="search-tab" class="find-box-tab-list-content">
-                        <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>"></input>
-                        <div class="findbox-searchresults"></div>
+                        <div class="searchbox-results-display">
+                            <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>"></input>
+                            <ul class="findbox-searchresults"></div>
+                        </div>
                   </div>
               </div>
           </div>

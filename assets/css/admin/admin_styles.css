@@ -554,9 +554,10 @@ html,body { height:100%; }
 
 .guides-display .guide-list option {width: 100%;}
 
-.pluslet-list {list-style: inside none none; margin: 0 0 0 0; background-color: #f2f2f2; padding:0;}
+.pluslet-list, .findbox-searchresults {list-style: inside none none; margin: 0 0 0 0; background-color: #f2f2f2; padding:0;}
 
-.pluslet-list .pluslet-listing {padding:5px;}
+.pluslet-list .pluslet-listing,
+.findbox-searchresults .pluslet-listing{padding:5px;}
 
 .clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
 
