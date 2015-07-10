@@ -1048,31 +1048,77 @@ $(".fav-template-item").each(function() {
 //Change layout click events
 $( "#col-single" ).click(function() {      
       changeLayout(0, 12);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
   });
 
 $( "#col-double" ).click(function() {      
       changeLayout(6, 12);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
   });
 
 $( "#col-48" ).click(function() {      
       changeLayout(4, 24);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
   });
 
 $( "#col-84" ).click(function() {      
       changeLayout(8, 12);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
   });
 
 $( "#col-triple" ).click(function() {      
       changeLayout(4, 8);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
   });
 
 $( "#col-363" ).click(function() {      
       changeLayout(3, 9);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
   });
 
 
 
+// Highlight ONLY Selected/Active Layout 
+function selectedLayout(){
+      $('.layout-icon').not(this).each(function(){
+         $(this).removeClass("active-layout-icon");        
+       });
+   }
 
+
+//Check section data-layout on pageLoad and hide empty containers
+function checkDataLayout() {
+
+ // $("div.sp_section").each(function() {
+      //var sec_id=$(this).attr('id').split('section_')[1];
+ //     var layoutnum = $(this).attr('data-layout');
+ //     console.log(layoutnum);
+ // }); 
+
+  var dataLayoutConfig =  $("div.sp_section").attr('data-layout');
+
+  if (dataLayoutConfig === "0-12-0") {
+    $(".sp_section #container-2").hide();
+  }
+  else if (dataLayoutConfig === "6-6-0") {
+    $(".sp_section #container-2").hide();
+  }
+  else if (dataLayoutConfig === "4-8-0") {
+    $(".sp_section #container-2").hide();
+  }
+  else if (dataLayoutConfig === "8-4-0") {
+    $(".sp_section #container-2").hide();
+  }
+}
+
+ //Load checkDataLayout
+checkDataLayout();
 
 
 
