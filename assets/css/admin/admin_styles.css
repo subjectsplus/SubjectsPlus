@@ -2335,7 +2335,7 @@ background:bisque;
 }
 
 
-
+.box-search-label { width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {

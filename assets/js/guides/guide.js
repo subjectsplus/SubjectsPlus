@@ -23,7 +23,7 @@ $(document).ready(function(){
     makeAddSection('a[id="add_section"]');
 
     
-    activateFindboxSearch() 
+    activateFindboxSearch();
     
     // Append an intital section
 
@@ -67,5 +67,17 @@ $(document).ready(function(){
 
 	}
     });
+    
+    
+    
+    
 }); 
+
+
+
+
+
+
+
+
 // End $ within document.ready

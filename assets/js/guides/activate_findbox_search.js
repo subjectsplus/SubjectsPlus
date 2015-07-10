@@ -13,7 +13,7 @@ $('.findbox-search').keypress(function(data) {
 
 			if (data[i]['content_type'] == "Pluslet") {
 
-			$('.findbox-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><div class=\"pure-g\"><div class=\"pure-u-3-5\">"  + data[i].label + "</div><div class=\"pure-u-2-5\" style=\"text-align:right;\"><button class=\"clone-button pure-button pure-button-secondary\">Clone</button>&nbsp;<button class=\"copy-button pure-button pure-button-secondary\">Copy</button></div></div></li>");
+			$('.findbox-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><div class=\"pure-g\"><div class=\"pure-u-3-5 box-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div><div class=\"pure-u-2-5\" style=\"text-align:right;\"><button class=\"clone-button pure-button pure-button-secondary\">Clone</button>&nbsp;<button class=\"copy-button pure-button pure-button-secondary\">Copy</button></div></div></li>");
 			
 			}
 				
