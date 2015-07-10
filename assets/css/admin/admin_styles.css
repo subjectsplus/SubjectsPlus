@@ -478,7 +478,7 @@ html,body { height:100%; }
 
 .second-level-content {background-color: transparent; padding:5px;}
 
-.second-level-content h3 {margin: 0 0 0.75em 0;}
+.second-level-content h3 {margin: 0 0 0.75em 0 !important;}
 
 /* The draggable boxes from the admin guide header */
 
@@ -581,7 +581,7 @@ a.pure-button-secondary:hover {
 
 .custom-icon{width:36px; height:36px;}
 
-.fav-boxes-content {
+.fav-boxes-content, .fav-templates-content {
   background: #484848;
    border-right: 1px solid #525252;
    border-bottom: 1px solid #525252;
@@ -593,14 +593,67 @@ a.pure-button-secondary:hover {
    overflow: auto; max-height:350px;
 }
 
-.fav-boxes-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
+.fav-boxes-list, .fav-templates-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
 
-.fav-box-item:before {
+.fav-box-item:before, .fav-template-item:before {
   font-family: FontAwesome;
   content:"\f005";
   color: #333; font-size:20px;
   padding: 0 6px 0 0;
 }
+
+.clone-input {display:none;}
+
+
+/* Layouts Icons */
+
+.layout_options {
+  cursor: pointer;
+  display: block;
+  margin: 0 0 30px 0;
+  padding: 0;  
+  width: 100%;
+  list-style: outside none none;
+}
+
+.layout_options li {
+  display: inline-block;
+  margin: 0 5px 10px 10px;
+  border-radius: 2px;
+}
+
+.layout-icon {
+  background-color:#d5d5d5;
+  background-position: 50% 50%;
+  background-size: 56px 42px;
+  background-repeat: no-repeat;
+  width: 80px;
+  height: 60px;
+}
+
+.layout-icon:hover, .layout-icon.active-layout-icon {background-color:#C03957; }
+
+#col-single {background-image: url(images/icons/col1-icon.svg);}
+#col-single:hover, #col-single.active-layout-icon {background-image: url(images/icons/col1-iconw.svg);}
+
+#col-double {background-image: url(images/icons/col2-icon.svg);}
+#col-double:hover, #col-double.active-layout-icon {background-image: url(images/icons/col2-iconw.svg);}
+
+#col-48 {background-image: url(images/icons/col2-48-icon.svg);}
+#col-48:hover, #col-48.active-layout-icon {background-image: url(images/icons/col2-48-iconw.svg);}
+
+#col-84 {background-image: url(images/icons/col2-84-icon.svg);}
+#col-84:hover, #col-84.active-layout-icon {background-image: url(images/icons/col2-84-iconw.svg);}
+
+#col-triple {background-image: url(images/icons/col3-icon.svg);}
+#col-triple:hover, #col-triple.active-layout-icon {background-image: url(images/icons/col3-iconw.svg);}
+
+#col-363 {background-image: url(images/icons/col3-363-icon.svg);}
+#col-363:hover, #col-363.active-layout-icon {background-image: url(images/icons/col3-363-iconw.svg);}
+
+.layout_options .top-panel-option-item {padding:1em;background-color:#d5d5d5;}
+.layout_options .top-panel-option-item:hover {background-color:#C03957;}
+
 
 
 /* Main content areas */
