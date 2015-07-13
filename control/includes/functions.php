@@ -1650,6 +1650,59 @@ function listGuides($search = "", $type="all") {
     return $list_guides;
 }
 
+
+function listGuideCollections($dept_id) {
+    $db = new Querier();
+    
+    $andclause = "";
+    global $guide_path;
+    global $AssetPath;
+
+
+    $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
+   // $r = $db->query($q);
+    $q = "SELECT DISTINCT  shortform, subject, type, description 
+            FROM subject_department
+            JOIN subject ON subject.subject_id = subject_department.id_subject
+            WHERE subject_department.id_department = '$dept_id'
+            AND active = '1'
+            ORDER BY subject";
+    
+    $row_count = 0;
+    $colour1 = "oddrow";
+    $colour2 = "evenrow";
+
+    $db = new Querier;
+    $list_guides = "<table class=\"item_listing\" width=\"98%\">";
+    foreach ($db->query($q) as $myrow) {
+
+        $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+
+        $guide_location = $guide_path . $myrow[0];
+        $thumbnail = $AssetPath . "images/guide_thumbs/$myrow[0].jpg";
+        $thumbnail_default = "$AssetPath/images/guide_thumbs/chc.jpg";
+
+        //check if appropriate image exists; otherwise use the default one
+        if (!@getimagesize($thumbnail)) {
+          $thumbnail = $thumbnail_default;
+        } else {
+
+        }
+
+        $list_guides .= "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
+     <td><img class=\"staff_photo\" align=\"left\" style=\"margin-bottom: 20px;\" title=\"" . $myrow[1] . "\" alt=\"" . $myrow[1] . 
+     "\" src=\"$thumbnail\" />
+     <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
+        <div style=\"font-size: .9em;\">{$myrow[3]}</div></td>
+        
+         </tr>\n";
+        $row_count++; 
+    }
+    $list_guides .= "</table>";
+
+    return $list_guides;
+}
+
 // This just returns whether or not you want an anchor target to open in new window
 // made this puppy a function in case people want to use it elsewhere
     

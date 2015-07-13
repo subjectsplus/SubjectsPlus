@@ -124,7 +124,7 @@ class Autocomplete {
            . "OR description LIKE " . $search_param
            . "OR keywords LIKE " . $search_param
            . "OR type LIKE " . $search_param 
-           . "AND active = '1';
+           . "AND active = '1'";
         break;
 
 
@@ -280,8 +280,11 @@ class Autocomplete {
             break;
 
           case "Staff":
+          	if ($myrow['fullname'] != null) {
             $arr[$i]['label'] = $myrow['fullname'];
-
+          	} else {
+          		$arr[$i]['label'] = "";
+          	}
             if ($this->getSearchPage() == "control") {
 
               $arr[$i]['url'] = 'user.php?staff_id=' . $myrow['id'];

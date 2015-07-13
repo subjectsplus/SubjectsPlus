@@ -152,12 +152,10 @@ if (isset($this_id)) {
 global $pluslets_activated;
 
 
+$all_boxes = "<p>" . _("Drag box selection, then drop it to the right") . "</p>
 
+<ul id=\"box_options\">";
 
-$all_boxes = "
-<ul id=\"box_options\">
-
-<li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
 
 foreach( $pluslets_activated as $lstrPluslet )
 {
@@ -165,9 +163,9 @@ foreach( $pluslets_activated as $lstrPluslet )
   {
     $lstrObj = "SubjectsPlus\Control\Pluslet_" . $lstrPluslet;
 
-    if( method_exists( $lstrObj, 'getMenuName' ) )
+    if( method_exists( $lstrObj, 'getMenuIcon' ) )
     {
-      $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuName' )) . "</li>";
+      $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
     }else
     {
       $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . $lstrPluslet . "</li>";
@@ -190,19 +188,17 @@ if ($num_resources == 0) {
   $conditions = "AND pluslet_id != '1'";
 }
 
-$q = "SELECT distinct pluslet_id, title, body
-FROM pluslet
-WHERE type = 'Special'
-$conditions
-";
+//$q = "SELECT distinct pluslet_id, title, body
+//FROM pluslet
+//WHERE type = 'Special'
+//";
 
-$r = $db->query($q);
+//$r = $db->query($q);
 
-foreach ($r as $myrow) {
-  $lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
-  $all_boxes .= "<li class=\"box-item draggable clone\" id=\"pluslet-id-" . $myrow[0] . "\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>\n";
-  $all_boxes .= $myrow[1] . "</li>";
-}
+//foreach ($r as $myrow) {
+ // $lstrObj = "SubjectsPlus\Control\Pluslet_" . $myrow[0];
+ // $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
+//}
 
 $all_boxes .= "</ul>";
 
@@ -217,6 +213,7 @@ ob_end_flush();
 ?>
 
 
+
 <script>
 
     var staff_id = <?php echo $_SESSION["staff_id"]; ?>
@@ -229,8 +226,7 @@ ob_end_flush();
         success: function(data) {
 
             $.each(data, function(idx, obj) {
-                console.log(obj.title);
-                $("#box_options").append( "<li>" + obj.title + "</li>");
+                $("#fav-boxes-list").append( "<li class='fav-box-item'>" + obj.title + "</li>");
             });
         }
     });
@@ -260,8 +256,7 @@ ob_end_flush();
 
 
  jQuery(document).ready(function(){
-   jQuery("#box_options").hide();
-
+   
    //layout each section
    $('div[id^="section_"]').each(function()
     				 {
@@ -283,23 +278,10 @@ ob_end_flush();
 
      });
 
-   function addBoxy(){
-     jQuery("#box_options").show();
-     return;
-
-   }
-
-   function removeBoxy(){
-     jQuery("#box_options").hide();
-     return;
-   }
-
    var boxyConfig = {
      interval: 50,
      sensitivity: 4,
-     over: addBoxy,
-     timeout: 500,
-     out: removeBoxy
+     timeout: 500
    };
 
    jQuery("#newbox").hoverIntent(boxyConfig);
@@ -516,6 +498,7 @@ ob_end_flush();
          $( this ).dialog( "close" );
        	 $("#response").hide();
          $('#save_guide').fadeIn();
+         $('#save_template').fadeIn();
        },
        "Delete" : function() {
          var id = window.lastClickedTab.replace("#tabs-", "");
@@ -528,6 +511,7 @@ ob_end_flush();
          $( this ).dialog( "close" );
    	 $("#response").hide();
          $('#save_guide').fadeIn();
+         $('#save_template').fadeIn();
        },
        Cancel: function() {
          $( this ).dialog( "close" );
@@ -591,6 +575,7 @@ ob_end_flush();
 
          jQuery("#response").hide();
          jQuery("#save_guide").fadeIn();
+         jQuery("#save_template").fadeIn();
 
          tabs.tabs();
 
@@ -657,6 +642,7 @@ ob_end_flush();
  });
 </script>
 
+<<<<<<< HEAD
 <div id="guide_header">
   <div class="pure-g">
 
@@ -676,73 +662,119 @@ ob_end_flush();
 	  <li class="find-guide-parent">
 	    <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
 	  </li>
+=======
+>>>>>>> 575fa0f807ea9e4fd27df8c6176cc6953f35b401
 
-	  <script>
+<!-- ///////////////////////////////////
+   // Structure for Guide Backend - PV
+   ///////////////////////////////////-->
 
-	   var startURL = '../guides/guide.php?subject_id=';
-	   var sp_path = document.URL.split('/')[3];
+<div class="guide-parent-wrap" id ="guide-parent-wrap">
+  
+      <div class="panel-wrap">
+        <div id="hide_header">
+          <img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("Show/Hide Header"); ?>" alt="<?php print _("Show/Hide Header"); ?>" />
+        </div>         
+      </div><!--end .panel-wrap-->
+      
+      
+      <div class="guide-wrap">
+          
+          <!--GUIDE HEADER CONTAINER-->
+          <div id="guide_header">
+              <div class="pure-g">
+                <div class="pure-u-2-5 pure-u-md-1-3 pure-u-lg-1-2 pure-u-xl-5-8 guide-title-area">
+                    <h2><?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?></h2>
+                </div> <!-- end pure 5-8-->
 
-	   jQuery('.find-guide-input').autocomplete({
+                <div class="pure-u-2-5 pure-u-md-1-2 pure-u-lg-3-8 pure-u-xl-1-4 guide-commands-area">
+                    <!-- Save Button -->
+                    <div id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></div>
+                    <div id="savour2"><button class="button pure-button pure-button-primary" id="save_template"><?php print _("SAVE TEMPLATE"); ?></button></div>
+                </div> <!-- end pure 1-4-->                
+              
+                <div class="pure-u-1-5 pure-u-md-1-6 pure-u-lg-1-8 pure-u-xl-1-8 guide-options-area">
 
-	     minLength	: 3,
-	     source		: '//' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
-	     focus: function(event, ui) {
+                  <ul id="guide_nav">
+                    <li><a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><i class="fa fa-eye" title="<?php print _("View Guide"); ?>"></i></a></li>
+                    <li><a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><i class="fa fa-cog" title="<?php print _("Edit Guide Metadata"); ?>"></i></a></li>
+                    <li><a href="#" id="find-trigger"><i class="fa fa-search" title="<?php print _("Find in Guide"); ?>"></i></a></li>
+                  </ul>              
+                </div><!-- end pure 1-8-->
+              </div> <!-- end pure -->
+          </div> <!-- end guide header-->
 
-	       event.preventDefault();
-	       jQuery(".find-guide-input").val(ui.item.label);
+          <div id="find-in-guide-container">
+            <div class="pure-g">
+                <div class="pure-u-5-6 pure-u-lg-7-8">&nbsp;</div>
+                <div class="pure-u-1-6 pure-u-lg-1-8 find-guide-parent">
+                    <form class="pure-form" id="guide_search">    
+                        <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
+                    </form>
+                </div>
+            </div>
+          </div>
+<script>
+     var startURL = '../guides/guide.php?subject_id=';
+     var sp_path = document.URL.split('/')[3];
 
+     jQuery('.find-guide-input').autocomplete({
 
-	     },
-	     select: function(event, ui) {
-	     	var tab_id = ui.item.hash.split('-')[1];
-	     	var box_id = ui.item.hash.split('-')[2];
-	     	var selected_box = ".pluslet-" + box_id;
+       minLength  : 3,
+       source   : '//' + document.domain + "/" + sp_path + "/control/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+       focus: function(event, ui) {
 
-	     	$('#tabs').tabs('select', tab_id);
+         event.preventDefault();
+         jQuery(".find-guide-input").val(ui.item.label);
+       },
+       select: function(event, ui) {
+        var tab_id = ui.item.hash.split('-')[1];
+        var box_id = ui.item.hash.split('-')[2];
+        var selected_box = ".pluslet-" + box_id;
 
-	     	jQuery(selected_box).effect("pulsate", {
-	     		times:1
-	     	}, 2000);
+        $('#tabs').tabs('select', tab_id);
 
-	     	window.location.hash = 'box-' + box_id;
+        jQuery(selected_box).effect("pulsate", {
+          times:1
+        }, 2000);
+
+        window.location.hash = 'box-' + box_id;
          }
-	   });
 
 
-	  </script>
+     });
+</script>     
 
-          <!--<li class="selected"></li>-->
-        </ul>
-      </form>
-    </div> <!-- end pure 1-2-->
-    <div class="pure-u-1-2"> <h2>
-      <?php print "<a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">$subject_name</a>"; ?>
-      <a href="<?php print $PublicPath . "guide.php?subject=$shortform"; ?>" target="_blank"><img class="icon-view-guide" src="<?php print $AssetPath; ?>images/icons/visible-white-26.png" title="<?php print _("View Guide"); ?>" /></a>
-      <a class="showmeta" href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><img class="icon-edit-guide" src="<?php print $AssetPath; ?>images/icons/settings-white-26.png" title="<?php print _("Edit Guide Metadata"); ?>" /></a>
+          
 
+          <input id="extra" type="hidden" size="1" value="<?php
 
-    </h2></div><!-- end pure 1-2-->
-  </div> <!-- end pure -->
-</div> <!-- end guide header-->
+            if (isset($lobj)) {
+             print $jobj->{'maincol'}; 
+
+            }
+
+            ?>" name="extra" />         
 
 
+          <!--GUIDE BUILDER CONTAINER-->
+          <div class="guidewrapper">
+               <div id="tabs">
 
-<input id="extra" type="hidden" size="1" value="<?php
+                 <?php $lobjGuide->outputNavTabs(); ?>
 
-if (isset($lobj)) {
- print $jobj->{'maincol'}; 
+                 <?php
+                 $lobjGuide->outputTabs();
+                 ?>
 
-}
+               </div>
+          </div>
 
-?>" name="extra" />
-
-<!-- Save Button -->
-<p align="center" id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></p>
-	 </div>
-	 <!-- end guide header -->
-
-	 <!-- Feedback -->
-	 <div id="response"></div>
+      </div><!--end .guide-wrap-->
+  
+      <!-- Feedback -->
+      <div id="response"></div>
+	 
 
 	 <!-- new tab form (suppressed until wrench clicked) -->
 	 <div id="dialog" title="Tab data">
@@ -782,6 +814,7 @@ if (isset($lobj)) {
              </fieldset>
 	   </form>
 	 </div>
+
 	 <script>
 	  //make tabs sortable
 	  jQuery(function() {
@@ -798,26 +831,356 @@ if (isset($lobj)) {
             	  $(tabs).tabs('select', 0);
             	  jQuery("#response").hide();
                   jQuery("#save_guide").fadeIn();
+                  jQuery("#save_template").fadeIn();
 		}
               }
 	    });
 	  });
 
-
-
-
+	  
  
 	 </script>
 
-	 <div class="guidewrapper">
-	   <div id="tabs">
+</div> <!--end .guide-parent-wrap-->  
 
-	     <?php $lobjGuide->outputNavTabs(); ?>
 
-	     <?php
-	     $lobjGuide->outputTabs();
-	     ?>
+<!-- FLYOUT PANEL-->
+<div id="main-options">
 
-	   </div>
-	 </div>
-	 <?php include("../includes/footer.php"); ?>
+  <!--Flyout trigger-->
+  <div class="trigger-main-options">
+    <i id="trigger-pointer" class="fa fa-chevron-right"></i>
+  </div>
+
+  <!-- Top level -->
+  <div class="top-panel-options">          
+      <ul class="top-panel-options-list">
+          
+          <li id="show_box_options" class="top-panel-option-item active-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/boxes1.svg" title="<?php print _("Boxes"); ?>" class="custom-icon" /><br /><?php print _("Boxes");?></a></li>
+
+          <li id="show_findbox_options" class="top-panel-option-item"><a href="#"><i class="fa fa-search" title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
+
+          <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
+          
+          <!--<li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php //print $AssetPath; ?>images/icons/section1.svg" title="<?php //print _("New Section"); ?>" class="custom-icon" /><br />
+            <?php //print _("New Section"); ?></a></li>-->           
+
+          <li id="show_dblist_options" class="top-panel-option-item"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
+
+          <li id="show_analytics_options" class="top-panel-option-item"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
+
+          <li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
+      </ul>
+
+  </div>
+  
+  <!-- Second-level-->
+  <div class="second-level-options">
+      
+      <div class="second-level-container">
+
+          <!--boxes-->
+          <div id="box_options_content" class="second-level-content">
+              <h3><?php print _("Add Boxes"); ?></h3>
+              <?php print $all_boxes; ?>
+              
+              <h3><?php print _("Favorite Boxes"); ?></h3>
+              <div class="fav-boxes-content">
+                  <ul class="fav-boxes-list">
+                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
+                      <li class="fav-box-item">My favorite box</li>
+                      <li class="fav-box-item">My favorite box</li>
+                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
+                      <li class="fav-box-item">My favorite box</li>
+                      <li class="fav-box-item">My favorite box</li>
+                  </ul>
+              </div>
+          </div>
+
+          
+          <!--find boxes-->
+          <div id="findbox_options_content" class="second-level-content" style="display:none;">
+              <h3><?php print _("Find Boxes"); ?></h3>
+              <!--Find Box Tabs-->
+              <div id="find-box-tabs">
+                  <ul class="find-box-tab-list">
+                    <li><a href="#browse-tab"><?php print _("Browse"); ?></a></li>
+                    <li><a href="#search-tab"><?php print _("Search"); ?></a></li>
+                  </ul>
+                  <div id="browse-tab" class="find-box-tab-list-content">
+                        <div class="guides-display">
+                            <select class="guide-list">
+                                <option>Please select a guide</option>
+                            </select>
+                            <ul class="pluslet-list"></ul>                          
+                        </div>
+                  </div>
+                  <div id="search-tab" class="find-box-tab-list-content">
+                        <div class="searchbox-results-display">
+                            <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>"></input>
+                            <ul class="findbox-searchresults"></ul>
+                        </div>
+                  </div>
+              </div>
+          </div>
+
+          
+          <!--layout-->          
+          <div id="layout_options_content" class="second-level-content" style="display:none;">
+            <h3><?php print _("Choose Layout"); ?></h3>
+            
+                <ul class="layout_options">
+                  <li class="layout-icon" id="col-single" title="<?php print _("1 Column"); ?>"></li>
+                  <li class="layout-icon" id="col-double" title="<?php print _("2 Columns"); ?>"></li>
+                  <li class="layout-icon" id="col-48" title="<?php print _("Sidebar + Column"); ?>"></li>
+                  <li class="layout-icon" id="col-84" title="<?php print _("Column + Sidebar"); ?>"></li>
+                  <li class="layout-icon" id="col-triple" title="<?php print _("3 Columns"); ?>"></li>
+                  <li class="layout-icon" id="col-363" title="<?php print _("2 Sidebars"); ?>"></li>
+                </ul>
+
+            <h3><?php print _("Add New Section"); ?></h3>
+                <ul class="layout_options">
+                  <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section2.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
+                </ul>
+
+            <h3><?php print _("My templates"); ?></h3>
+            <div class="fav-templates-content">
+                  <ul class="fav-templates-list">
+                      <li class="fav-template-item">My favorite template Lorem ipsum dolor sit amet</li>
+                      <li class="fav-template-item">My favorite template</li>
+                      <li class="fav-template-item">My favorite template</li>
+                      <li class="fav-template-item">My favorite template Lorem ipsum dolor sit amet, </li>
+                      <li class="fav-template-item">My favorite template</li>
+                      <li class="fav-template-item">Biology template</li>
+                  </ul>
+              </div>
+          </div>
+
+          
+          <!--custom database list-->
+          <div id="dblist_options_content" class="second-level-content" style="display:none;">
+            <h3><?php print _("Create List"); ?></h3>
+            Custom Database List options
+          </div>
+
+          
+          <!--analytics-->
+          <div id="analytics_options_content" class="second-level-content" style="display:none;">
+            <h3><?php print _("Analytics"); ?></h3>
+            Analytics options
+          </div>
+       
+
+
+      </div>
+  </div>
+
+</div><!--end #main-options-->
+
+<script>
+
+jQuery(function() {
+  
+//Top Level Panel Flyout 
+  var mainslider = $('#main-options').slideReveal({
+    trigger: $(".trigger-main-options"),
+    push:false,
+    width: 440,
+    shown: function(slider, trigger){
+      $("#trigger-pointer").addClass("fa-chevron-left");
+      $("#trigger-pointer").removeClass("fa-chevron-right");
+    },
+    hidden: function(slider, trigger){
+      $("#trigger-pointer").addClass("fa-chevron-right");
+      $("#trigger-pointer").removeClass("fa-chevron-left");
+    }
+  }); 
+
+  $( "#main-options-close" ).click(function() {
+      mainslider.slideReveal("hide");
+  });
+
+
+//Top level Panel Open by default
+window.onload = function() {
+  mainslider.slideReveal("show");
+};
+
+
+// Show/Hide "Find in Guide" form
+$( "#find-trigger" ).click(function() {
+      $("#guide_search").toggle("fade", 700 );
+  });
+
+
+// Show "Boxes" options
+$( "#show_box_options" ).click(function() {
+      selectedPanelDisplay();
+      $("#box_options_content").show();
+      $(this).addClass("active-item");
+  });
+
+// Show "Find Boxes" options
+$( "#show_findbox_options" ).click(function() {
+      selectedPanelDisplay();
+      $("#findbox_options_content").show();
+      $(this).addClass("active-item");
+  });
+
+
+// Show "Layout" options
+$( "#show_layout_options" ).click(function() {
+      selectedPanelDisplay();
+      $("#layout_options_content").show();
+      $(this).addClass("active-item");
+  });
+
+
+// Show "Custom DB List" options
+$( "#show_dblist_options" ).click(function() {      
+      selectedPanelDisplay(); 
+      $("#dblist_options_content").show();
+      $(this).addClass("active-item");
+  });
+
+
+// Show "Analytics" options
+$( "#show_analytics_options" ).click(function() {      
+      selectedPanelDisplay();    
+      $("#analytics_options_content").show(); 
+      $(this).addClass("active-item");
+  });
+
+
+// Select ONLY Active Panel for coresponding Top Level Item
+function selectedPanelDisplay(){
+     $('.second-level-content').not(this).each(function(){
+         $(this).hide();        
+       });
+     $('.top-panel-option-item').not(this).each(function(){
+         $(this).removeClass("active-item");        
+       });
+   }
+
+ 
+ //Find Box Tabs - Browse and Search
+ $( "#find-box-tabs" ).tabs();
+
+ 
+ //Load Clone Menu
+ loadCloneMenu();
+
+
+ //Truncate Favorite Boxes Names    
+    $(".fav-box-item").each(function() {
+        var $this = $(this);
+        var text = $this.text();
+
+          if (text.length > 39) {
+              $this.text(text.substr(0, 38) + "...");
+          }      
+    });
+
+//Truncate Favorite Template Names    
+$(".fav-template-item").each(function() {
+    var $this = $(this);
+    var text = $this.text();
+
+      if (text.length > 39) {
+          $this.text(text.substr(0, 38) + "...");
+      }      
+});
+
+//Change layout click events
+$( "#col-single" ).click(function() {      
+      changeLayout(0, 12);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
+  });
+
+$( "#col-double" ).click(function() {      
+      changeLayout(6, 12);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
+  });
+
+$( "#col-48" ).click(function() {      
+      changeLayout(4, 24);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
+  });
+
+$( "#col-84" ).click(function() {      
+      changeLayout(8, 12);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
+  });
+
+$( "#col-triple" ).click(function() {      
+      changeLayout(4, 8);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
+  });
+
+$( "#col-363" ).click(function() {      
+      changeLayout(3, 9);
+      selectedLayout();
+      $(this).addClass("active-layout-icon");
+  });
+
+
+
+// Highlight ONLY Selected/Active Layout 
+function selectedLayout(){
+      $('.layout-icon').not(this).each(function(){
+         $(this).removeClass("active-layout-icon");        
+       });
+   }
+
+
+//Check section data-layout on pageLoad and hide empty containers
+// Highlight "current/active" layout
+function checkDataLayout() {
+
+   var dataLayoutConfig =  $("div.sp_section").attr('data-layout');
+
+  if (dataLayoutConfig === "0-12-0") {
+    $(".sp_section #container-2").hide();
+    $( "#col-single" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "6-6-0") {
+    $(".sp_section #container-2").hide();
+    $( "#col-double" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "4-8-0") {
+    $(".sp_section #container-2").hide();
+    $( "#col-48" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "8-4-0") {
+    $(".sp_section #container-2").hide();
+    $( "#col-84" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "4-4-4") {
+    $( "#col-triple" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "3-6-3") {
+    $( "#col-363" ).addClass("active-layout-icon");
+  }
+}
+
+ //Load checkDataLayout
+checkDataLayout();
+
+
+
+
+
+});
+</script>
+
+	 
+	 
+</div> <!--end .guide-parent-wrap-->
+
+<?php include("../includes/footer.php"); ?>
+ 

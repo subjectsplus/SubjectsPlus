@@ -268,5 +268,3 @@ function modifyDB($id, $type) {
     }
     return $id;
 }
-
-?>

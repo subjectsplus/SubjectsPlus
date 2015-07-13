@@ -114,7 +114,7 @@ class Pluslet {
                     }
                 }
                 // Everyone gets a delete button in the admin
-                $this->_icons .= " <a id=\"delete-$this->_pluslet_id\"><img class=\"pluslet-icon\"  src=\"$IconPath/delete.png\"" . _("Remove item from this guide") . "\" title=\"" . _("Remove item from this guide") . "\" border=\"0\" /></i></a>";
+                $this->_icons .= " <a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a>";
 
                 // Show the item id --it's handy for debugging
                 $this->_visible_id = "<span class=\"pluslet_id smallgrey\">$this->_pluslet_id</span>";
@@ -653,7 +653,7 @@ class Pluslet {
 	{
 		return $this->_body;
 	}
-
+	
 	public function setHideTitleBar( $lintHide )
 	{
 		$this->_hide_titlebar = $lintHide;
@@ -680,4 +680,16 @@ class Pluslet {
 
     }
 
+    public function loadHtml($path) {
+    	
+    	ob_start();
+    	include $path;
+    	$external_html = ob_get_contents();
+    	ob_end_clean();
+    	
+    	return $external_html;
+    	
+    }
+    
+    
 }

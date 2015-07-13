@@ -36,7 +36,16 @@ class Pluslet_Related extends Pluslet {
 		$output = $this->outputRelatedGuides ();
 		$this->_body = "<div>$output</div>";
 	}
+
+	static function getMenuIcon()
+   	{
+   		$icon="<i class=\"fa fa-files-o\" title=\"Related Guides\" ></i>";
+        return $icon;
+   	}
+
 	static function getMenuName() {
 		return _ ( 'Related' );
 	}
+
+	
 }

@@ -165,7 +165,8 @@ mb_internal_encoding('UTF-8');
 
 
     ?>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
 <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
   </head>
   <body id="controlpage">
@@ -177,21 +178,25 @@ mb_internal_encoding('UTF-8');
     }
     ?>
 
-<header id="header">
-    <div class="pure-g">
-        <div class="pure-u-1">
-    		<div class="wrapper-full">
 
-        <?php
-        // Our Nav is built here:
-        $b_box = new BuildNav();
-        $b_box->displayNav();
-        ?>
+<!-- ///////////////////////////////////////////
+   // Structure for Guide Backend (Header) - PV
+   ////////////////////////////////////////////-->
 
-    		</div> <!-- end nav wrapper -->
+	<header id="header">
+	    <div class="pure-g">
+	        <div class="pure-u-1">	    		
+
+	        <?php
+	        // Our Nav is built here:
+	        $b_box = new BuildNav();
+	        $b_box->displayNav();
+	        ?>
+	    		
+			</div>
 		</div>
-	</div>
-</header>
+	</header>
+
       <?php
       // This is used in control/records to link to the public site -- you probably don't need to change
       if (isset($_COOKIE["sub_shortform"])) {
