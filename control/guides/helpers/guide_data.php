@@ -183,6 +183,7 @@ function modifyDB($id, $type) {
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
     $pluslet_favorite_box = $_POST["favorite_box"];
 
+
     if (isset($_POST["boxsetting_titlebar_styling"])) {
 
         $pluslet_titlebar_styling = $_POST["boxsetting_titlebar_styling"];

@@ -214,27 +214,6 @@ ob_end_flush();
 
 
 
-<script>
-
-    var staff_id = <?php echo $_SESSION["staff_id"]; ?>
-
-    jQuery.ajax({
-        url: "/control/guides/helpers/favorite_pluslets_data.php",
-        type: "GET",
-        dataType: "json",
-        data: {staff_id: staff_id},
-        success: function(data) {
-
-            $.each(data, function(idx, obj) {
-                $("#fav-boxes-list").append( "<li class='fav-box-item'>" + obj.title + "</li>");
-            });
-        }
-    });
-
-
-</script>
-
-
 <script type="text/javascript">
  // We're just setting up a few vars that we'll need
  var user_id = "<?php print $_SESSION["staff_id"]; ?>";
@@ -642,28 +621,7 @@ ob_end_flush();
  });
 </script>
 
-<<<<<<< HEAD
-<div id="guide_header">
-  <div class="pure-g">
 
-    <div class="pure-u-1-2">
-      <form class="pure-form" id="guide_search">
-        <ul id="guide_nav">
-          <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
-          <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
-            <?php print $all_boxes; ?>
-
-
-          </li>
-          <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
-          <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
-
-
-	  <li class="find-guide-parent">
-	    <input class="find-guide-input" type="text" placeholder="<?php print _("Find in Guide"); ?>"></input>
-	  </li>
-=======
->>>>>>> 575fa0f807ea9e4fd27df8c6176cc6953f35b401
 
 <!-- ///////////////////////////////////
    // Structure for Guide Backend - PV
@@ -886,17 +844,35 @@ ob_end_flush();
               
               <h3><?php print _("Favorite Boxes"); ?></h3>
               <div class="fav-boxes-content">
+
                   <ul class="fav-boxes-list">
-                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
-                      <li class="fav-box-item">My favorite box</li>
-                      <li class="fav-box-item">My favorite box</li>
-                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
-                      <li class="fav-box-item">My favorite box</li>
-                      <li class="fav-box-item">My favorite box</li>
+
                   </ul>
+
               </div>
           </div>
 
+          <script>
+
+
+              var staff_id = <?php echo $_SESSION["staff_id"]; ?>
+
+                  jQuery.ajax({
+                      url: "/control/guides/helpers/favorite_pluslets_data.php",
+                      type: "GET",
+                      dataType: "json",
+                      data: {staff_id: staff_id},
+                      success: function(data) {
+
+                          $.each(data, function(idx, obj) {
+                              $(".fav-boxes-list").append( "<li class='fav-box-item'>" + obj.title + "</li>");
+
+                          });
+                      }
+                  });
+
+
+          </script>
           
           <!--find boxes-->
           <div id="findbox_options_content" class="second-level-content" style="display:none;">
@@ -1178,8 +1154,7 @@ checkDataLayout();
 });
 </script>
 
-	 
-	 
+
 </div> <!--end .guide-parent-wrap-->
 
 <?php include("../includes/footer.php"); ?>

@@ -21,7 +21,9 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 		//used to get contents of CKeditor box
 		lstrInstance = "pluslet-update-body-" + lintID;
 		//Title of item
-		lstrTitle = addslashes($("#pluslet-update-title-" + lintID).val());
+
+        lstrTitle = addslashes($("#pluslet-update-title-" + lintID).val());
+
 		console.log(lstrTitle);
 		console.log("Title modified!");
 		if (lstrTitle === undefined) {
@@ -62,6 +64,9 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 			'input[id=start-collapsed-' + lintID + ']').is(':checked'));
 	var boxsetting_titlebar_styling = $(
 			'select[id=titlebar-styling-' + lintID + ']').val();
+
+    var favorite_box = Number($('input[id=favorite_box-' + lintID + ']')
+        .is(':checked'));
 
 	//////////////////////////////////////////////////////////////////
 	// Check the pluslet's "name" value to see if there is a number
@@ -227,7 +232,8 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 					this_subject_id : subject_id,
 					boxsetting_hide_titlebar : boxsetting_hide_titlebar,
 					boxsetting_collapse_titlebar : boxsetting_collapse_titlebar,
-					boxsetting_titlebar_styling : boxsetting_titlebar_styling
+					boxsetting_titlebar_styling : boxsetting_titlebar_styling,
+                    favorite_box : favorite_box
 
 				},
 				type : "POST",
