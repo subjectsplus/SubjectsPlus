@@ -581,7 +581,7 @@ a.pure-button-secondary:hover {
 
 .custom-icon{width:36px; height:36px;}
 
-.fav-boxes-content, .fav-templates-content {
+.fav-boxes-content, .fav-templates-content, .db-list-content {
   background: #484848;
    border-right: 1px solid #525252;
    border-bottom: 1px solid #525252;
@@ -601,6 +601,8 @@ a.pure-button-secondary:hover {
   color: #F5D76E; font-size:16px;
   padding: 0 8px 0 0;
 }
+
+.fav-box-item, .fav-template-item { width: 275px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
 .clone-input {display:none;}
 
@@ -654,6 +656,21 @@ a.pure-button-secondary:hover {
 .layout_options .top-panel-option-item {padding:1em;background-color:#d5d5d5;}
 .layout_options .top-panel-option-item:hover {background-color:#C03957;}
 
+
+/* Custom DB List */
+.dblist-display .customdb-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important; margin-bottom: 20px;}
+
+.dblist-display .customdb-list option {width: 100%;}
+
+.db-list-content {padding:8px;}
+
+.db-list-content h4 {margin: 0 0 10px 0;}
+
+.db-list-results {list-style: inside none square; margin: 0 0 0 0; padding: 6px; background-color:#f2f2f2;}
+
+.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; color: #333;}
+
+.dblist-button {margin-top:20px;}
 
 
 /* Main content areas */
