@@ -848,21 +848,16 @@ ob_end_flush();
               
               <h3><?php print _("Favorite Boxes"); ?></h3>
               <div class="fav-boxes-content">
-
-                  <ul class="fav-boxes-list">
-
-                  </ul>
-
+                  <ul class="fav-boxes-list"></ul>
               </div>
           </div>
 
           <script>
 
-
-              var staff_id = <?php echo $_SESSION["staff_id"]; ?>
+              var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
 
                   jQuery.ajax({
-                      url: "/control/guides/helpers/favorite_pluslets_data.php",
+                      url: "helpers/favorite_pluslets_data.php?",
                       type: "GET",
                       dataType: "json",
                       data: {staff_id: staff_id},
@@ -874,7 +869,6 @@ ob_end_flush();
                           });
                       }
                   });
-
 
           </script>
           
@@ -970,7 +964,7 @@ ob_end_flush();
                           <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
                       </ul>  
                   </div>
-                  <button class="pure-button pure-button-primary dblist-button">Create List Box</button>
+                  <button class="pure-button pure-button-secondary dblist-button">Create List Box</button>
                                           
               </div>
           </div>
