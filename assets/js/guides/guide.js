@@ -68,16 +68,7 @@ $(document).ready(function(){
 	}
     });
     
-    
-    
-    
-}); 
 
-
-
-
-
-
-
+});
 
 // End $ within document.ready

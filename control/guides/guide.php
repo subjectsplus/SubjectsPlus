@@ -18,6 +18,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\FavoritePluslet;
 
 if (!isset($_GET["subject_id"])) {
   header("location:index.php");
@@ -155,6 +156,7 @@ $all_boxes = "<p>" . _("Drag box selection, then drop it to the right") . "</p>
 
 <ul id=\"box_options\">";
 
+
 foreach( $pluslets_activated as $lstrPluslet )
 {
   if( file_exists( dirname(dirname(__DIR__)) . "/lib/SubjectsPlus/Control/Pluslet/$lstrPluslet.php" ) )
@@ -209,6 +211,7 @@ setcookie("our_shortform", $shortform, 0, '/', $_SERVER['HTTP_HOST']);
 ob_end_flush();
 
 ?>
+
 
 
 <script type="text/javascript">
@@ -619,6 +622,7 @@ ob_end_flush();
 </script>
 
 
+
 <!-- ///////////////////////////////////
    // Structure for Guide Backend - PV
    ///////////////////////////////////-->
@@ -844,17 +848,35 @@ ob_end_flush();
               
               <h3><?php print _("Favorite Boxes"); ?></h3>
               <div class="fav-boxes-content">
+
                   <ul class="fav-boxes-list">
-                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
-                      <li class="fav-box-item">My favorite box</li>
-                      <li class="fav-box-item">My favorite box</li>
-                      <li class="fav-box-item">My favorite box Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam leo, maximus a urna ac, sagittis rutrum lectus. Aliquam erat erat, pretium id ultricies ac, scelerisque quis felis. Quisque dictum a sem sit amet luctus. Sed tincidunt eros at ante condimentum ornare</li>
-                      <li class="fav-box-item">My favorite box</li>
-                      <li class="fav-box-item">My favorite box</li>
+
                   </ul>
+
               </div>
           </div>
 
+          <script>
+
+
+              var staff_id = <?php echo $_SESSION["staff_id"]; ?>
+
+                  jQuery.ajax({
+                      url: "/control/guides/helpers/favorite_pluslets_data.php",
+                      type: "GET",
+                      dataType: "json",
+                      data: {staff_id: staff_id},
+                      success: function(data) {
+
+                          $.each(data, function(idx, obj) {
+                              $(".fav-boxes-list").append( "<li class='fav-box-item'>" + obj.title + "</li>");
+
+                          });
+                      }
+                  });
+
+
+          </script>
           
           <!--find boxes-->
           <div id="findbox_options_content" class="second-level-content" style="display:none;">
@@ -1145,8 +1167,7 @@ fixFlashFOUC();
 });
 </script>
 
-	 
-	 
+
 </div> <!--end .guide-parent-wrap-->
 
 <?php include("../includes/footer.php"); ?>
