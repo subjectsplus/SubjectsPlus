@@ -21,8 +21,17 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 		//used to get contents of CKeditor box
 		lstrInstance = "pluslet-update-body-" + lintID;
 		//Title of item
+        if($("#pluslet-update-title-" + lintID).val() == null) {
+            b = $(".pluslet-" + lintID).find('.titlebar_text').clone();
+            b.children().remove();
+            lstrTitle = b.text().trim();
+        } else {
+            lstrTitle = addslashes($("#pluslet-update-title-" + lintID).val());
+        }
 
-        lstrTitle = addslashes($("#pluslet-update-title-" + lintID).val());
+
+
+
 
 		console.log(lstrTitle);
 		console.log("Title modified!");
