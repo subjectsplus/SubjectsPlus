@@ -869,7 +869,7 @@ ob_end_flush();
                       success: function(data) {
 
                           $.each(data, function(idx, obj) {
-                              $(".fav-boxes-list").append( "<li class='fav-box-item'>" + obj.title + "</li>");
+                              $(".fav-boxes-list").append( "<li class='fav-box-item' title='" + obj.title + "'>" + obj.title + "</li>");
 
                           });
                       }
