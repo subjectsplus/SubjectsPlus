@@ -939,8 +939,40 @@ ob_end_flush();
           
           <!--custom database list-->
           <div id="dblist_options_content" class="second-level-content" style="display:none;">
-            <h3><?php print _("Create List"); ?></h3>
-            Custom Database List options
+              <h3><?php print _("Create Database List Box"); ?></h3>
+              <div class="dblist-display">
+                  <select class="customdb-list">
+                      <option>Please select a database</option>
+                  </select>
+                  <div class="db-list-content">
+                      <h4>Databases Selected:</h4>
+                      <ul class="db-list-results">
+                          <li class="db-list-item">American Bibliography of Slavic and East European Studies</li>
+                          <li class="db-list-item">American Film Institute</li>
+                          <li class="db-list-item">Frances G. Spencer Collection of American Sheet Music</li>
+                          <li class="db-list-item">Cambridge Companions to Music</li>
+                          <li class="db-list-item">Catalog of Art Museum Images Online</li>
+                          <li class="db-list-item">Chopin, Frederic: Early Editions</li>
+                          <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
+                          <li class="db-list-item">American Bibliography of Slavic and East European Studies</li>
+                          <li class="db-list-item">American Film Institute</li>
+                          <li class="db-list-item">Frances G. Spencer Collection of American Sheet Music</li>
+                          <li class="db-list-item">Cambridge Companions to Music</li>
+                          <li class="db-list-item">Catalog of Art Museum Images Online</li>
+                          <li class="db-list-item">Chopin, Frederic: Early Editions</li>
+                          <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
+                          <li class="db-list-item">American Bibliography of Slavic and East European Studies</li>
+                          <li class="db-list-item">American Film Institute</li>
+                          <li class="db-list-item">Frances G. Spencer Collection of American Sheet Music</li>
+                          <li class="db-list-item">Cambridge Companions to Music</li>
+                          <li class="db-list-item">Catalog of Art Museum Images Online</li>
+                          <li class="db-list-item">Chopin, Frederic: Early Editions</li>
+                          <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
+                      </ul>  
+                  </div>
+                  <button class="pure-button pure-button-primary dblist-button">Create List Box</button>
+                                          
+              </div>
           </div>
 
           
@@ -1051,27 +1083,7 @@ function selectedPanelDisplay(){
  loadCloneMenu();
 
 
- //Truncate Favorite Boxes Names    
-    $(".fav-box-item").each(function() {
-        var $this = $(this);
-        var text = $this.text();
-
-          if (text.length > 39) {
-              $this.text(text.substr(0, 38) + "...");
-          }      
-    });
-
-//Truncate Favorite Template Names    
-$(".fav-template-item").each(function() {
-    var $this = $(this);
-    var text = $this.text();
-
-      if (text.length > 39) {
-          $this.text(text.substr(0, 38) + "...");
-      }      
-});
-
-//Change layout click events
+ //Change layout click events
 $( "#col-single" ).click(function() {      
       changeLayout(0, 12);
       selectedLayout();
@@ -1147,7 +1159,6 @@ function checkDataLayout() {
     $( "#col-363" ).addClass("active-layout-icon");
   }
 
-  //$(".guidewrapper").css("display", "block");
 }
 
  //Load checkDataLayout
