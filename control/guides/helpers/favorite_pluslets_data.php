@@ -11,9 +11,8 @@ require_once("../../includes/config.php");
 
 use SubjectsPlus\Control\FavoritePluslet;
 
-$staff_id = $_GET['staff_id'];
-
 $objFavPluslets = new FavoritePluslet();
+$staff_id = $objFavPluslets->setStaffId($_GET['staff_id']);
 $favorites = $objFavPluslets->getFavoritePluslets($staff_id);
 
 echo json_encode($favorites);

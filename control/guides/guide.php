@@ -541,7 +541,8 @@ ob_end_flush();
      $(li).attr('data-visibility', 1);
      tabs.find( ".ui-tabs-nav" ).append( li );
 
-     var slim = jQuery.ajax({
+     var slim = jQuery.ajax
+     ({
        url: "helpers/section_data.php",
        type: "POST",
        data: { action : 'create' },
@@ -859,10 +860,11 @@ ob_end_flush();
           <script>
 
 
-              var staff_id = <?php echo $_SESSION["staff_id"]; ?>
+              var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
+                  //console.log(staff_id);
 
                   jQuery.ajax({
-                      url: "/control/guides/helpers/favorite_pluslets_data.php",
+                      url: "helpers/favorite_pluslets_data.php?staff_id=" +staff_id,
                       type: "GET",
                       dataType: "json",
                       data: {staff_id: staff_id},
