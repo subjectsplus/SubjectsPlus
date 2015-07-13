@@ -18,6 +18,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\FavoritePluslet;
 
 if (!isset($_GET["subject_id"])) {
   header("location:index.php");
@@ -150,8 +151,12 @@ if (isset($this_id)) {
 ///////////////////////////
 global $pluslets_activated;
 
+
+
+
 $all_boxes = "
 <ul id=\"box_options\">
+
 <li class=\"box_note box-item\">" . _("Drag selection, then drop to right") . "</li>";
 
 foreach( $pluslets_activated as $lstrPluslet )
@@ -212,7 +217,26 @@ ob_end_flush();
 ?>
 
 
+<script>
 
+    var staff_id = <?php echo $_SESSION["staff_id"]; ?>
+
+    jQuery.ajax({
+        url: "/control/guides/helpers/favorite_pluslets_data.php",
+        type: "GET",
+        dataType: "json",
+        data: {staff_id: staff_id},
+        success: function(data) {
+
+            $.each(data, function(idx, obj) {
+                console.log(obj.title);
+                $("#box_options").append( "<li>" + obj.title + "</li>");
+            });
+        }
+    });
+
+
+</script>
 
 
 <script type="text/javascript">
@@ -642,6 +666,8 @@ ob_end_flush();
           <li id="hide_header"><img src="<?php print $AssetPath; ?>images/icons/menu-26.png" title="<?php print _("show/hide header"); ?>" /></li>
           <li id="newbox" class="togglenewz"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/down_circular-white-26.png" alt="" /><?php print _("New Box");?></a>
             <?php print $all_boxes; ?>
+
+
           </li>
           <li><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section-white.png" title="<?php print _("New Section"); ?>" /><span class="desktop"><?php print _("New Section"); ?></span></a></li>
           <li><a class="showdisco" href="helpers/discover.php"><img src="<?php print $AssetPath; ?>images/icons/find-white.png" title="<?php print _("Find Box"); ?>" /><span class="desktop"><?php print _("Find Box"); ?></span></a></li>
