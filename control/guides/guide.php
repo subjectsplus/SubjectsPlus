@@ -884,7 +884,7 @@ ob_end_flush();
             <h3><?php print _("Choose Layout"); ?></h3>
             
                 <ul class="layout_options">
-                  <li class="layout-icon active-layout-icon" id="col-single" title="<?php print _("1 Column"); ?>"></li>
+                  <li class="layout-icon" id="col-single" title="<?php print _("1 Column"); ?>"></li>
                   <li class="layout-icon" id="col-double" title="<?php print _("2 Columns"); ?>"></li>
                   <li class="layout-icon" id="col-48" title="<?php print _("Sidebar + Column"); ?>"></li>
                   <li class="layout-icon" id="col-84" title="<?php print _("Column + Sidebar"); ?>"></li>
@@ -1093,27 +1093,32 @@ function selectedLayout(){
 
 
 //Check section data-layout on pageLoad and hide empty containers
+// Highlight "current/active" layout
 function checkDataLayout() {
 
- // $("div.sp_section").each(function() {
-      //var sec_id=$(this).attr('id').split('section_')[1];
- //     var layoutnum = $(this).attr('data-layout');
- //     console.log(layoutnum);
- // }); 
-
-  var dataLayoutConfig =  $("div.sp_section").attr('data-layout');
+   var dataLayoutConfig =  $("div.sp_section").attr('data-layout');
 
   if (dataLayoutConfig === "0-12-0") {
     $(".sp_section #container-2").hide();
+    $( "#col-single" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "6-6-0") {
     $(".sp_section #container-2").hide();
+    $( "#col-double" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "4-8-0") {
     $(".sp_section #container-2").hide();
+    $( "#col-48" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "8-4-0") {
     $(".sp_section #container-2").hide();
+    $( "#col-84" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "4-4-4") {
+    $( "#col-triple" ).addClass("active-layout-icon");
+  }
+  else if (dataLayoutConfig === "3-6-3") {
+    $( "#col-363" ).addClass("active-layout-icon");
   }
 }
 
