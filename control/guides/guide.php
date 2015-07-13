@@ -1124,8 +1124,7 @@ function checkDataLayout() {
   else if (dataLayoutConfig === "3-6-3") {
     $( "#col-363" ).addClass("active-layout-icon");
   }
-
-  //$(".guidewrapper").css("display", "block");
+    
 }
 
  //Load checkDataLayout

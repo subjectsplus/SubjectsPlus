@@ -598,8 +598,8 @@ a.pure-button-secondary:hover {
 .fav-box-item:before, .fav-template-item:before {
   font-family: FontAwesome;
   content:"\f005";
-  color: #333; font-size:20px;
-  padding: 0 6px 0 0;
+  color: #F5D76E; font-size:16px;
+  padding: 0 8px 0 0;
 }
 
 .clone-input {display:none;}
