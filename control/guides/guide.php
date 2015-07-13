@@ -623,6 +623,10 @@ ob_end_flush();
    // Structure for Guide Backend - PV
    ///////////////////////////////////-->
 
+<style>
+.guidewrapper, #main-options {display:none;}
+</style>
+
 <div class="guide-parent-wrap" id ="guide-parent-wrap">
   
       <div class="panel-wrap">
@@ -1120,13 +1124,22 @@ function checkDataLayout() {
   else if (dataLayoutConfig === "3-6-3") {
     $( "#col-363" ).addClass("active-layout-icon");
   }
+
+  //$(".guidewrapper").css("display", "block");
 }
 
  //Load checkDataLayout
 checkDataLayout();
 
 
+//Fix for FOUC
+function fixFlashFOUC() {
+  $(".guidewrapper").css("display", "block");
+  $("#main-options").css("display", "block");
+}
 
+//Load Fix for FOUC
+fixFlashFOUC();
 
 
 });
