@@ -666,9 +666,16 @@ a.pure-button-secondary:hover {
 
 .db-list-content h4 {margin: 0 0 10px 0;}
 
-.db-list-results {list-style: inside none disc; margin: 0 0 0 0; padding: 6px;}
+.db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px;}
 
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+
+.db-list-item:before {
+  font-family: FontAwesome;
+  content:"\f00c";
+  color: #90C695; font-size:16px;
+  padding: 0 8px 0 0;
+}
 
 .dblist-button {margin-top:20px; font-size: 0.8em;}
 

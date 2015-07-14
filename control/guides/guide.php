@@ -867,8 +867,11 @@ ob_end_flush();
                               $(".fav-boxes-list").append( "<li class='fav-box-item'>" + obj.title + "</li>");
 
                           });
+                          
                       }
                   });
+
+
 
           </script>
           
