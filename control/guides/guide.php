@@ -964,7 +964,7 @@ ob_end_flush();
                           <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
                       </ul>  
                   </div>
-                  <button class="pure-button pure-button-secondary dblist-button">Create List Box</button>
+                  <button class="pure-button pure-button-primary dblist-button">Create List Box</button>
                                           
               </div>
           </div>

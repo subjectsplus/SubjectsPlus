@@ -666,11 +666,11 @@ a.pure-button-secondary:hover {
 
 .db-list-content h4 {margin: 0 0 10px 0;}
 
-.db-list-results {list-style: inside none square; margin: 0 0 0 0; padding: 6px; background-color:#f2f2f2;}
+.db-list-results {list-style: inside none disc; margin: 0 0 0 0; padding: 6px;}
 
-.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; color: #333;}
+.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
-.dblist-button {margin-top:20px;}
+.dblist-button {margin-top:20px; font-size: 0.8em;}
 
 
 /* Main content areas */
