@@ -682,6 +682,15 @@ a.pure-button-secondary:hover {
 .pluslet_id {display: none; /* hide pluslet id on admin view */}
 
 
+/* Catalog Pluslet Display Admin */
+.catalog-search {width:100%;}
+
+.catalog-search input[name='searcharg'] {width:50% !important;}
+
+.catalog-search table {width:100% !important;}
+.catalog-search table td #searchscope {width:50% !important;}
+
+
 /* Main content areas */
 
 #maincontent {
