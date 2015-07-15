@@ -1208,6 +1208,23 @@ div.video_thumb img {
 }
 
 
+/* Catalog Pluslet Display - Front-end */
+
+.catalog-search {width:100%;}
+
+.catalog-search input[name='searcharg'] {width:50% !important;}
+
+.catalog-search table {width:100% !important; border: none;}
+.catalog-search table td #searchscope {width:50% !important;}
+
+.catalog-search #searchtype{font-size:1em !important;}
+
+
+/* WorldCat Pluslet Display - Front-end */
+#wc_searchbox #div-search.lightcolor {width:100% !important; height: auto !important;}
+#wc_searchbox iframe {width:100% !important;}
+
+
 /* //////////////////
 //  Media Queries 
 ////////////////// */
