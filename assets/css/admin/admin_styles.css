@@ -679,6 +679,8 @@ a.pure-button-secondary:hover {
 
 .dblist-button {margin-top:20px; font-size: 0.8em;}
 
+.pluslet_id {display: none; /* hide pluslet id on admin view */}
+
 
 /* Main content areas */
 
