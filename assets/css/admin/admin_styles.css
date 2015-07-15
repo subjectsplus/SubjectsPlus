@@ -1635,15 +1635,7 @@ div.tooltip div
 
 .dropspotty {
   position: relative;
-  /*  margin-bottom: 10px;
-  background-color: #fff;
-  text-align: center;
-
-  z-index: 50;
-  border: 1px dashed #ccc;
-  padding: 0;*/
   height: 50px;
-
 }
 
 li.dropspotty {
@@ -1659,7 +1651,9 @@ li.dropspotty {
 }
 
 
-#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {float: left; }
+#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {
+  float: left; 
+  width: 100%; }
 
 /* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
 
