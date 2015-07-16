@@ -30,12 +30,10 @@ function setupMiscClickEvents()
    // 	var clone_id = Math.floor(Math.random()*1000001);
     	console.log($(this).parent().parent().parent().attr('data-pluslet-id'));
     	
-    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	
-       	
-    	var origin_title = $(this).parent().parent().parent().text().replace("CloneCopy","");
+    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	       	
+    	var origin_title = $(this).parent().parent().find('.box-search-label').text();
 
-    	
-    	
+
     	plantClone('','Clone',origin_id, origin_title);
     	
    
@@ -45,7 +43,7 @@ function setupMiscClickEvents()
     	
     	   // 	var clone_id = Math.floor(Math.random()*1000001);
     	    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	
-    	    	var origin_title = $(this).parent().parent().parent().text().replace("CloneCopy","");
+    	    	var origin_title = $(this).parent().parent().parent().text().replace(" /Clone Copy/g","");
 
     	    	plantClone(origin_id,'Basic', origin_title);
     	    
