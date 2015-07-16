@@ -855,19 +855,13 @@ ob_end_flush();
 
           <script>
 
-<<<<<<< HEAD
-              var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
 
-                  jQuery.ajax({
-                      url: "helpers/favorite_pluslets_data.php?",
-=======
 
               var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
                   //console.log(staff_id);
 
                   jQuery.ajax({
                       url: "helpers/favorite_pluslets_data.php?staff_id=" +staff_id,
->>>>>>> 40ad30618c84c0bc8a74ecd0bf2ab8eafa2d0e6c
                       type: "GET",
                       dataType: "json",
                       data: {staff_id: staff_id},
