@@ -27,7 +27,7 @@ class Pluslet_Related extends Pluslet {
 		$children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE subject_parent = ' . $this->_subject_id );
 		
 		foreach ( $children as $child ) {
-			echo "SELECT * FROM subject WHERE subject_id = {$child['subject_child']} ";
+		
 			$child_info = $this->db->query ( "SELECT * FROM subject WHERE subject_id = {$child['subject_child']} " );
 			
 			$output .= "<li><a href=\"../../subjects/guide.php?subject={$child_info[0]['shortform']}\">{$child_info[0]['subject']}</a></li>";
