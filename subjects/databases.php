@@ -19,7 +19,8 @@ include("../control/includes/autoloader.php");
 if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/databases.php"); exit;}
 
 $db = new Querier;
-    
+$connection = $db->getConnection();
+
 $use_jquery = array("ui");
 
 $page_title = _("Database List");
@@ -51,12 +52,15 @@ if ($_GET["letter"] == "bysub") {
     $show_subjects = TRUE;
   } else {
     $show_subjects = FALSE;
-    // add subject name to title
-    $qt = "SELECT subject FROM subject WHERE subject_id=" . $clean_id . " LIMIT 0,1";
+	  // add subject name to title
 
-    
-    $myrow = $db->query($qt);
-    $page_title .= ": " . $myrow[0][0];
+	  $statement = $connection->prepare("SELECT subject FROM subject WHERE subject_id = :id");
+	  $statement->bindParam(":id", $clean_id);
+	  $statement->execute();
+	  $myrow = $statement->fetchAll();
+	  
+
+        $page_title .= ": " . $myrow[0][0];
   }
 } else {
   $_GET["subject_id"] = "";

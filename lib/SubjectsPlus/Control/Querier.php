@@ -121,6 +121,11 @@ class Querier  {
 
     }
 
+	public function getConnection() {
+		$connection = $this->_connection;
+		return $connection;
+	}
+
     public function last_id() {
         $connection = $this->_connection;
         $last_id = $connection->lastInsertId();

@@ -91,14 +91,19 @@ if(isset($_POST['searchterm']))
 ///////////////
 
 $db= new Querier();
-$q2 = "select distinct s.subject_id, s.subject
+
+
+$connection = $db->getConnection();
+$statement = $connection->prepare("select distinct s.subject_id, s.subject
     from faq f, faq_subject fs, subject s 
     WHERE f.faq_id = fs.faq_id 
     AND fs.subject_id = s.subject_id
     AND active = '1'
-    ORDER BY subject";
+    ORDER BY subject");
+$statement->execute();
 
-$oursubs = $db->query($q2);
+
+$oursubs = $statement->fetchAll();
 
 if ($oursubs) {
     $guideMe = new Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
@@ -123,7 +128,8 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
 } elseif ($postvar_coll_id != "") {
     $displaytype = "collection";
 
-    // Get the name of the collection
+	// Get the name of the collection
+	
     $query = "SELECT name, description FROM faqpage WHERE faqpage_id = '$postvar_coll_id'";
    
     $db = new Querier;
@@ -144,63 +150,84 @@ include("includes/header.php");
 
 if ($displaytype == "search") {
 
-    $full_query = "SELECT faq_id, question, answer, keywords
+
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT faq_id, question, answer, keywords
 	FROM `faq`
-	WHERE (question like " . $db->quote("%" . $search_clause . "%") . " OR answer like " . $db->quote("%" . $search_clause . "%") . " OR keywords like " . $db->quote("%" . $search_clause . "%") . ")
-	Group BY question";
+	WHERE question like '%:search_clause1%' OR answer like %:search_clause2% OR keywords like %:search_clause3% Group BY question");
+	
+	$statement->bindParam(":seach_clause1", $search_clause);
+	$statement->bindParam(":seach_clause2", $search_clause);
+	$statement->bindParam(":seach_clause3", $search_clause);
+	
+	$statement->execute();
+	
+   
 
     $intro = "<p>Search for <strong>$search_clause</strong>.</p>";
 } elseif ($displaytype == "all") {
 
-    $full_query = "SELECT distinct faq_id, question, answer, keywords
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT distinct faq_id, question, answer, keywords
 	FROM `faq`
-	ORDER BY question";
+	ORDER BY question");
+	$statement->execute();
+	
 
     $intro = "";
 } elseif ($displaytype == "bysubject") {
-
-    $full_query = "SELECT f.faq_id, question, answer, f.keywords, subject
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("
+        SELECT f.faq_id, question, answer, f.keywords, subject
 	FROM `faq` f, faq_subject fs, subject s
 	WHERE f.faq_id = fs.faq_id
 	AND fs.subject_id = s.subject_id
-	AND s.subject_id = '$postvar_subject_id'
-	ORDER BY question";
-
-    $intro = "";
+	AND s.subject_id = :post_var_subject_id
+	ORDER BY question");
+	$statement->bindParam(':post_var_subject_id', $post_var_subject_id);
+	$statement->execute();
+	
+       $intro = "";
 } elseif ($displaytype == "single") {
-
-    $full_query = "SELECT faq_id, question, answer, keywords
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT faq_id, question, answer, keywords
 	FROM `faq`
-	WHERE faq_id = '$postvar_faq_id'";
+	WHERE faq_id = ':postvar_faq_id'");
+	$statement->execute();
 
-    $intro = "";
+        $intro = "";
 } elseif ($displaytype == "collection") {
-
-    $full_query = "SELECT f.faq_id, question, answer, keywords
+	$connection = $db->getConnection();
+	$statement = $connection->prepare( "SELECT f.faq_id, question, answer, keywords
 	FROM faq f, faq_faqpage ff, faqpage fp
 	WHERE f.faq_id = ff.faq_id
 	AND fp.faqpage_id = ff.faqpage_id
-	AND fp.faqpage_id = '$postvar_coll_id'
-	ORDER BY fp.name, question";
+	AND fp.faqpage_id = :postvar_coll_id
+	ORDER BY fp.name, question");
+	$statement->bindParam(':postvar_coll_id',$postvar_collid);
+	$statement->execture();
 
     $intro = "";
 } else {
 
     // This is the default
-
-    $full_query = "SELECT f.faq_id, question, answer, keywords
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT f.faq_id, question, answer, keywords
 	FROM faq f, faq_faqpage ff, faqpage fp
 	WHERE f.faq_id = ff.faq_id
 	AND fp.faqpage_id = ff.faqpage_id
-	AND fp.faqpage_id = '$default_faqpage_id'
-	ORDER BY f.question";
+	AND fp.faqpage_id = :default_faqpage_id
+	ORDER BY f.question");
+
+	$statement->bindParam(":deafult_faqpage_id", $deafult_faqpage_id);
+	$statement->execute();
 }
 
 if (isset($debugger) && $debugger == "yes") {
     print "<p class=\"debugger\">$full_query<br /><strong>from</strong> this file</p>";
 }
 
-$full_result = $db->query($full_query);
+$full_result = $statement->fetchAll();
 
 $result_count = count($full_result);
 
