@@ -129,11 +129,12 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $displaytype = "collection";
 
 	// Get the name of the collection
-	
-    $query = "SELECT name, description FROM faqpage WHERE faqpage_id = '$postvar_coll_id'";
-   
     $db = new Querier;
-    $name = $db->query($query);
+    $connection = $db->getConnection();
+    $statement = $connection->prepare("SELECT name, description FROM faqpage WHERE faqpage_id = :postvar_coll_id");
+    $statement->bindParam(":postvar_coll_id", $postvar_coll_id);
+    $statement->execute();
+    $name = $statement->fetchAll();
     
 
     $page_title = "FAQS: {$name[0][0]}";
@@ -193,6 +194,7 @@ if ($displaytype == "search") {
 	$statement = $connection->prepare("SELECT faq_id, question, answer, keywords
 	FROM `faq`
 	WHERE faq_id = ':postvar_faq_id'");
+    $statement->bindParam(':postvar_faq_id',$postvar_faq_id);
 	$statement->execute();
 
         $intro = "";
@@ -204,7 +206,7 @@ if ($displaytype == "search") {
 	AND fp.faqpage_id = ff.faqpage_id
 	AND fp.faqpage_id = :postvar_coll_id
 	ORDER BY fp.name, question");
-	$statement->bindParam(':postvar_coll_id',$postvar_collid);
+	$statement->bindParam(':postvar_coll_id',$postvar_coll_id);
 	$statement->execture();
 
     $intro = "";
@@ -281,9 +283,9 @@ FROM faqpage f, faq_faqpage ff
 WHERE f.faqpage_id = ff.faqpage_id
 GROUP BY name";
 
-// print $collections_query;
-
-$collections_result = $db->query($collections_query);
+$statement = $connection->prepare($collections_query);
+$statement->execute();
+$collections_result = $statement->fetchAll();
 
 // create the option
 $coll_items = "<li><a href=\"faq.php?page=all\">All</a></li>";
