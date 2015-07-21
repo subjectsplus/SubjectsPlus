@@ -17,6 +17,7 @@ $keywords = "research, databases, subjects, search, find";
 $noheadersearch = TRUE;
 
 $db = new Querier;
+$connection = $db->getConnection();
 
 // let's use our Pretty URLs if mod_rewrite = TRUE or 1
 if ($mod_rewrite == 1) {
@@ -60,12 +61,14 @@ $suggestibles = "";  // init
 
 $q = "select subject, shortform from subject where active = '1' order by subject";
 
-
+$statement = $connection->prepare($q);
+$statement->execute();
+$r = $statement->fetchAll();
 
 //initialize $suggestibles
 $suggestibles = '';
 
-foreach ($db->query($q) as $myrow) {
+foreach ($r as $myrow) {
     $item_title = trim($myrow[0][0]);
 
 
@@ -85,11 +88,15 @@ $suggestibles = trim($suggestibles, ', ');
 
 $q2 = "select subject, subject_id, shortform from subject where active = '1' order by subject_id DESC limit 0,5";
 
-//$r2 = $db->query($q2);
+
+$statement = $connection->prepare($q2);
+$statement->execute();
+$r2 = $statement->fetchAll();
+
 
 $newest_guides = "<ul>\n";
 
-foreach ($db->query($q2) as $myrow2 ) {
+foreach ($r2 as $myrow2 ) {
     $guide_location = $guide_path . $myrow2[2];
     $newest_guides .= "<li><a href=\"$guide_location\">" . trim($myrow2[0]) . "</a></li>\n";
 }
@@ -101,10 +108,13 @@ $newest_guides .= "</ul>\n";
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-//$rnew = $db->query($qnew);
+
+$statement = $connection->prepare($qnew);
+$statement->execute();
+$rnew = $statement->fetchAll();
 
 $newlist = "<ul>\n";
-    foreach ($db->query($qnew) as $myrow) {
+    foreach ($rnew as $myrow) {
     $db_url = "";
 
     // add proxy string if necessary
