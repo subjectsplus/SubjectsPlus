@@ -77,11 +77,11 @@ class Querier  {
 
            $result = $connection->query($sql);
         if (!$result) {
-
-            echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
-            print_r($connection->errorInfo());
-            echo "</p>";
-            echo $sql;
+ 	       exit;
+          //  echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
+          //  print_r($connection->errorInfo());
+          //  echo "</p>";
+          //  echo $sql;
 
             $rows = NULL;
         } else {
