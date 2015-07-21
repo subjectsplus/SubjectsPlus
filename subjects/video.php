@@ -46,50 +46,57 @@ $vtag_items .= "</ul>";
 
 // Clean up user submission
 if (isset($_GET["video_id"])) {
-  $video_id = scrubData($_GET["video_id"], "integer");
-		
-  $db = new Querier; 
-  $connection = $db->getConnection();
-  $statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
+	$video_id = scrubData($_GET["video_id"], "integer");
+
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
         FROM video
         WHERE display = '1'
 	    and video_id = :video_id
   		ORDER BY date");
-  
-   $statement->bindParam(":video_id", $video_id);
-   $statement->execute();
-   $r = $statement->fetchAll();  
+
+	$statement->bindParam(":video_id", $video_id);
+	$statement->execute();
+	$r = $statement->fetchAll();
 }
 
 if (isset($_GET["tag"])) {
-  if (in_array($_GET["tag"], $all_vtags)) {
-  	 	
-    $pretty_tag = "%" . ucfirst($_GET["tag"]) . "%";
-    
-    $db = new Querier;
-    $connection = $db->getConnection();
-    $statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
+	if (in_array($_GET["tag"], $all_vtags)) {
+			
+		$pretty_tag = "%" . ucfirst($_GET["tag"]) . "%";
+
+		$db = new Querier;
+		$connection = $db->getConnection();
+		$statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
         FROM video
         WHERE display = '1'
 	    and vtags like :tag
   		ORDER BY date");
-    
-    $video_id = scrubData($_GET["video_id"], "integer");
-    $statement->bindParam(":tag", $pretty_tag);
-    $statement->execute();
-    $r = $statement->fetchAll();
- 
-    }
+
+		$statement->bindParam(":tag", $pretty_tag);
+		$statement->execute();
+		$r = $statement->fetchAll();
+
+	}
 }
 
+if (empty($_GET)) {
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
+        FROM video
+        WHERE display = '1'
+  		ORDER BY date");
+	
+	$statement->execute();
+	$r = $statement->fetchAll();
+}
 
-
-// check row count for 0 returns
-    
-    
 $num_rows = count($r);
 
-if ($num_rows != 0) {
+
+if ($num_rows) {
 
 
   foreach ($r as $myrow) {
