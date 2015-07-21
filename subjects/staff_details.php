@@ -18,6 +18,7 @@ include("../control/includes/autoloader.php");
 if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/staff_details.php"); exit;}
 
 $db = new Querier;
+$connection = $db->getConnection();
 
 $use_jquery = array();
 
@@ -28,7 +29,11 @@ $subfolder = "services";
 // Get array of acceptable users
 
 $q = "SELECT email FROM staff WHERE user_type_id = '1'";
-$r = $db->query($q);
+
+$statement = $connection->prepare($q);
+$statement->execute();
+$r = $statement->fetchAll();
+
 
 foreach ($r as $okemail) {
 
@@ -56,16 +61,15 @@ if (isset($_GET['name']) && in_array(($_GET['name']), $ok_names)) {
 // $staffpath is necessary because of mod_rewriting screwing up paths
 $StaffPath = $PublicPath . "staff.php";
 
-$qstaffer = "SELECT s.staff_id, lname, fname, title, tel, s.email, d.name, bio, subject_id
+$statement = $connection->prepare("SELECT s.staff_id, lname, fname, title, tel, s.email, d.name, bio, subject_id
 FROM staff s
 LEFT JOIN department d on s.department_id = d.department_id
 LEFT JOIN staff_subject ss ON s.staff_id = ss.staff_id
-WHERE s.email LIKE '$check_this@%'
-GROUP BY s.lname";
+WHERE s.email LIKE ?
+GROUP BY s.lname");
 
-//print $qstaffer;
-
-$staffmem = $db->query($qstaffer);
+$statement->execute(array("$check_this@%"));
+$staffmem = $statement->fetchAll();
 
 $tel = $tel_prefix . $staffmem[0][4];
 
@@ -94,10 +98,18 @@ if ($staffmem[0][8] != "") {
     // Get a list of subjects for this person
     // Maybe you could make a better query above to include this info
 
-    $q = "SELECT s.subject_id, subject, shortform FROM staff_subject ss, subject s WHERE ss.subject_id = s.subject_id
-	AND ss.staff_id = '" . $staffmem[0][0] . "'  AND active = '1'  AND s.type = 'Subject' ORDER BY subject";
+    $statement = $connection->prepare("SELECT s.subject_id, subject, shortform
+                                        FROM staff_subject ss, subject s
+                                        WHERE ss.subject_id = s.subject_id
+	                                    AND ss.staff_id = :staff_id
+	                                    AND active = '1'
+	                                    AND s.type = 'Subject'
+	                                    ORDER BY subject");
 
-    $r = $db->query($q);
+    $statement->bindParam(":staff_id", $staffmem[0][0]);
+    $statement->execute();
+    $r = $statement->fetchAll();
+
 
     $total_rows = count($r);
     $per_row = ceil($total_rows / 2);
