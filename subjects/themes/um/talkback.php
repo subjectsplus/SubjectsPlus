@@ -53,12 +53,11 @@ if (isset($all_tbtags)) {
   $set_filter = key($all_tbtags); 
 
 // And set our default bonus sql
-//  $bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
+  $bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
 
 // determine branch/filter
   if (isset($_REQUEST["v"])) {
   	$set_filter = scrubData(lcfirst($_REQUEST["v"]));
-  	$bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
 
     // Quick'n'dirty setup email recipients
   	switch ($set_filter) {
@@ -72,17 +71,17 @@ if (isset($all_tbtags)) {
   		$form_action = "talkback.php?v=$set_filter";
   		break;
   		default:
+  	    $set_filter = "richter";
         // nothing, we just use the $administrator email on file (config.php)
   		$form_action = "talkback.php";
-  	}
-
+  	} 
     // override our admin email
   	if (isset($all_tbtags[$set_filter]) && $all_tbtags[$set_filter] != "") {
   		$administrator_email = $all_tbtags[$set_filter];
   	}
 
   } else {
-
+     $set_filter = "richter";
   }
 }
 
@@ -99,7 +98,7 @@ if (isset($all_cattags)) {
     } else {
       $tag_class = "";
     }
-    $cat_filters .= " <a href=\"talkback.php?tbtag=$set_filter&c=$value\" class=\"$tag_class\">$value</a>";
+    $cat_filters .= " <a href=\"talkback.php?v=$set_filter&c=$value\" class=\"$tag_class\">$value</a>";
   }
 }
 
@@ -250,14 +249,27 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 	FROM talkback LEFT JOIN staff 
 	ON talkback.a_from = staff.staff_id 
 	WHERE (display ='1' OR display ='Yes') 
-	
+	AND tbtags LIKE :tbtags
+    AND cattags LIKE :ctags
 	AND YEAR(date_submitted) < :year 
 	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC");
 	
 	$statement->bindParam(":year", $this_year);
+	
+	
+	
 	$filter = '%' . $set_filter . '%';
-	//AND tbtags LIKE :tbtags
-	//$statement->bindParam(":tbtags", $filter);
+
+	if (isset($_GET['c'])) {
+		$cat_tags = '%' . scrubData($_GET['c']) . '%';
+	
+	} else {
+		$cat_tags = "%%";
+	
+	}
+	
+	$statement->bindParam(":tbtags", $filter);
+	$statement->bindParam(":cattags", $cat_tags);
     $statement->execute();
     
     
@@ -275,14 +287,23 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 	FROM talkback LEFT JOIN staff
 	ON talkback.a_from = staff.staff_id
 	WHERE (display ='1' OR display ='Yes')
-	
+    AND tbtags LIKE :tbtags
+	AND cattags LIKE :ctags
 	AND YEAR(date_submitted) >= :year
 	ORDER BY date_submitted DESC");
 	
 	$statement->bindParam(":year", $this_year);
 	$filter = '%' . $set_filter . '%';
+	if (isset($_GET['c'])) {
+		$cat_tags = '%' . scrubData($_GET['c']) . '%';
+		
+	} else {
+		$cat_tags = "%%";
+		
+	}
 	//AND tbtags LIKE :tbtags
-	//$statement->bindParam(":tbtags", $filter);
+	$statement->bindParam(":tbtags", $filter);
+	$statement->bindParam(":ctags", $cat_tags);
 	$statement->execute();
 	
 	
