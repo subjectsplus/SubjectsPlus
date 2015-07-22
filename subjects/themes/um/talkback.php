@@ -53,7 +53,7 @@ if (isset($all_tbtags)) {
   $set_filter = key($all_tbtags); 
 
 // And set our default bonus sql
-  $bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
+//  $bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
 
 // determine branch/filter
   if (isset($_REQUEST["v"])) {
@@ -176,16 +176,22 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 	}
 
   // Make a safe query
-	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `tbtags`, `answer`) VALUES (%s, %s, %s, 'No', %s, %s)", $db->quote($this_comment), $db->quote($this_name),$db->quote($todaycomputer), $db->quote($set_filter), $db->quote(""));
-  //print $query;
-	$db->query($query);
+  $connection = $db->getConnection();
+  $statement = $connection->prepare("INSERT INTO talkback ('question', 'q_from', 'date_submitted', 'display', 'tbtags', 'answer') 
+			VALUES (:question, :q_from, :date_submitted, 'No', :tbtags, '')");
+	
+  		$statement->bindParam(":question", $this_comment);
+  		$statement->bindParam(":q_from", $this_name);
+  		$statement->bindParam(":date_submitted", $todaycomputer);
+  		$statement->bindParam(":tbtags", $set_filter);
+ 
 
-	if ($query) {
+  	    $statement->execute();
 		$stage_one = "ok";
-	}
+	
 
 	if (isset($debugger) && $debugger == "yes") {
-		print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
+	//	print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
 	}
 
   // Send an email if this is turned on
@@ -237,33 +243,53 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 ////////////////////
 
 if (isset($_GET["t"]) && $_GET["t"] == "prev") {
-	$q_archived = "  SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate, 
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate, 
 	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
 	FROM talkback LEFT JOIN staff 
 	ON talkback.a_from = staff.staff_id 
 	WHERE (display ='1' OR display ='Yes') 
-	$bonus_sql
-	AND YEAR(date_submitted) < '$this_year' 
-	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC ";
+	
+	AND YEAR(date_submitted) < :year 
+	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC");
+	
+	$statement->bindParam(":year", $this_year);
+	$filter = '%' . $set_filter . '%';
+	//AND tbtags LIKE :tbtags
+	//$statement->bindParam(":tbtags", $filter);
+    $statement->execute();
     
-    $db = new Querier;
-	$our_result = $db->query($q_archived);
+    
+	$our_result = $statement->fetchAll(); 
 
 	$comment_header = "<h2>" . _("Comments from Previous Years") . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\">" . _("See this year") . "</a></span></h2>";
 
 } else {
   // New ones //
-	$full_query = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate, answer, a_from, fname, lname, email, staff.title 
-	FROM talkback LEFT JOIN staff 
-	ON talkback.a_from = staff.staff_id 
-	WHERE (display ='1' OR display ='Yes') 
-	$bonus_sql
-	AND YEAR(date_submitted) >= '$this_year' 
-	ORDER BY date_submitted DESC";
-    
-    $db = new Querier;
-	$our_result = $db->query($full_query);
 
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
+	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
+	FROM talkback LEFT JOIN staff
+	ON talkback.a_from = staff.staff_id
+	WHERE (display ='1' OR display ='Yes')
+	
+	AND YEAR(date_submitted) >= :year
+	ORDER BY date_submitted DESC");
+	
+	$statement->bindParam(":year", $this_year);
+	$filter = '%' . $set_filter . '%';
+	//AND tbtags LIKE :tbtags
+	//$statement->bindParam(":tbtags", $filter);
+	$statement->execute();
+	
+	
+	$our_result = $statement->fetchAll();
+	
+	
+	
 	$comment_header = "<h2>" . _("Comments from ") . "$this_year <span style=\"font-size: 11px; font-weight: normal;\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _("See previous years") . "</a></span></h2>";
 
 }
