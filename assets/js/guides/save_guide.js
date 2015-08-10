@@ -64,6 +64,8 @@
 
 				$("#response").fadeIn();
 				refreshFeeds();
+				//update favorite box list in flyout panel - js/get_user_favorite_boxes.js
+				get_user_favorite_boxes(user_id);
 
 			    });
 
