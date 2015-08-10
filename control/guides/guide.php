@@ -853,32 +853,8 @@ ob_end_flush();
               </div>
           </div>
 
-          <script>
+       
 
-
-
-              var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
-                  //console.log(staff_id);
-
-                  jQuery.ajax({
-                      url: "helpers/favorite_pluslets_data.php?staff_id=" +staff_id,
-                      type: "GET",
-                      dataType: "json",
-                      data: {staff_id: staff_id},
-                      success: function(data) {
-
-                          $.each(data, function(idx, obj) {
-                              $(".fav-boxes-list").append( "<li data-pluslet-id='" + obj.id +"' class='clone-favorite fav-box-item' title='" + obj.title + "'>" + obj.title + "</li>");
-
-                          });
-                          
-                      }
-                  });
-
-
-
-          </script>
-          
           <!--find boxes-->
           <div id="findbox_options_content" class="second-level-content" style="display:none;">
               <h3><?php print _("Find Boxes"); ?></h3>
@@ -1064,6 +1040,11 @@ $( "#show_analytics_options" ).click(function() {
       $(this).addClass("active-item");
   });
 
+
+
+//show user favorite boxes
+  var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
+  get_user_favorite_boxes(staff_id);
 
 // Select ONLY Active Panel for coresponding Top Level Item
 function selectedPanelDisplay(){
