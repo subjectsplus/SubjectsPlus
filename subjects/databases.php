@@ -95,9 +95,7 @@ if (isset($_POST["searchterm"])) {
 
 $alphabet = getLetters("databases", $_GET["letter"], 1, TRUE);
 
-
 // Get our newest databases
-
 
 $connection = $db->getConnection();
 $statement = $connection->prepare("SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5");
