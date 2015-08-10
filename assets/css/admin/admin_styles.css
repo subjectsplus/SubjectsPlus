@@ -727,23 +727,75 @@ a.pure-button-secondary:hover {
 .catalog-search table td #searchscope {width:50% !important;}
 
 
+
 /*TABS Container Area */
 
 #tabs.ui-tabs {border-radius: 0 !important;} /* container */
 
 #tabs.ui-tabs .ui-tabs-nav  {
   padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: none;
+  border: 0 none;  
 } /* list */
 
 
 #tabs.ui-tabs .ui-tabs-nav li {
-  padding: .2em 1em 0 1em;
+  padding: 3px 18px;
+  line-height: 1.05em;
+  margin: 0;
+  top: 0;
+  border-radius: 0;
+  background-color: #d5d5d5;
+  background-image: none;
+  border-right: 1px solid #b3b2b2;
+  border-left: 1px solid #FFF;
+  border-top:none;
 } /* list item */
+
+
+#tabs.ui-tabs .ui-tabs-nav li:first-child {border-left: none;}
+#tabs.ui-tabs .ui-tabs-nav li:last-child {border-right: none;}
+
+#add_tab {
+  cursor:pointer;
+  margin:0;
+  padding: 11px 16px !important;
+  background-color: #CCC !important;
+  background-image: none;
+  border-top:none;
+  color: #333;
+}
+
+#add_tab.ui-button-text-only .ui-button-text {  
+  padding: 0;
+  font-size: 1em;
+  line-height: 1.05em;
+}
+
+#add_tab:hover {background-color: #858585 !important;color: #FFF;}
+
+
+/* Added to style tabs for importer -don't delete JL*/
+#tabs li.child-tab { }
+  
+#tabs li.parent-tab {background:#999;}
+
+#tabs li.main-tab { }
+
+
+#tabs.ui-tabs .ui-tabs-nav li a {color:#333;}
+
+#tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active,
+#tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover {background-color: #C03957;}
+
+#tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active a,
+#tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #FFF;}
 
 #tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
 
 #tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
-
 
 
 
@@ -2002,12 +2054,7 @@ img.tooltip  {
   z-index:5000;
 }
 
-#add_tab {
-  cursor:pointer;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
+
 
 .install-pluslet {
 
@@ -2406,20 +2453,7 @@ li.hidden_tab.ui-state-default
 
 
 
-/* Added to style tabs for importer */
-#tabs li.child-tab {
-	
-	
-}
 
-#tabs li.parent-tab {
-background:bisque;
-}
-
-#tabs li.main-tab {
-	
-
-}
 
 
 .desktop {display: none;}
