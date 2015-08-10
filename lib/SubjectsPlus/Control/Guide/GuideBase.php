@@ -1,5 +1,11 @@
 <?php
-
+/**
+ *   @file manage.php
+ *   @brief This class allows you to load a guide as an object and save it as an object. It could be used to make the Guide more object-oriented. 
+ *
+ *   @author little9 (Jamie Little)
+ *   @date Auguest 2015
+ */
 namespace SubjectsPlus\Control\Guide;
 
 use SubjectsPlus\Control\Querier;
@@ -22,7 +28,6 @@ class GuideBase {
 	private $_sections = array ();
 	private $_pluslets = array ();
 	private $_tabs = array ();
-	
 	public function __construct($subject_id, Querier $db) {
 		$this->_subject_id = $subject_id;
 		$this->db = $db;
@@ -71,6 +76,9 @@ class GuideBase {
 			$this->_type = $result ['type'];
 			$this->_extra = $result ['extra'];
 			$this->_active = $result ['active'];
+			// $this->_messages = $result['messages'];
+			// $this->_all_tabs = $result['all_tabs'];
+			// $this->_departments = $result['departments'];
 			$this->_header = $result ['header'];
 		}
 	}
@@ -100,16 +108,21 @@ class GuideBase {
 			$statement->bindParam ( ":external_url", $subject_guide ['external_url'] );
 			$statement->bindParam ( ":visibility", $subject_guide ['visibility'] );
 			$statement->execute ();
+			// var_dump( $statement->errorInfo());
 			
 			$tab_insert_id = $this->db->last_id ();
+			// echo $tab_insert_id;
 			
 			$statement = $connection->prepare ( "INSERT INTO section (`tab_id`, `layout`, `section_index`) VALUES (:tab_id, :layout, :section_index)" );
+			// echo $tab_insert_id;
 			$statement->bindParam ( ":tab_id", $tab_insert_id );
 			$statement->bindParam ( ":layout", $subject_guide ['layout'] );
 			$statement->bindParam ( ":section_index", $subject_guide ['section_index'] );
 			$statement->execute ();
 			$section_insert_id = $this->db->last_id ();
-						
+			
+			// var_dump($subject_guide['layout']);
+			
 			$pluslet_statement = $connection->prepare ( "
 			    		INSERT INTO pluslet (`title`, `body`, `type`, `extra`, `hide_titlebar`,`collapse_body`, `titlebar_styling`, `favorite_box`)
 			    		VALUES (:title, :body, :type, :extra, :hide_titlebar, :collapse_body, :titlebar_styling, :favorite_box) " );
@@ -123,6 +136,7 @@ class GuideBase {
 			$pluslet_statement->bindParam ( ':titlebar_styling', $subject_guide ['titlebar_styling'] );
 			$pluslet_statement->bindParam ( ':favorite_box', $subject_guide ['favorite_box'] );
 			$pluslet_statement->execute ();
+			// var_dump( $pluslet_statement->errorInfo());
 			
 			$pluslet_last_id = $this->db->last_id ();
 			$statement = $connection->prepare ( "INSERT INTO pluslet_section (`section_id`, `pluslet_id`, `pcolumn`, `prow` ) VALUES (:section_id, :pluslet_id, :pcolumn, :prow) " );
@@ -131,7 +145,10 @@ class GuideBase {
 			$statement->bindParam ( ":pcolumn", $subject_guide ['pcolumn'] );
 			$statement->bindParam ( ":prow", $subject_guide ['prow'] );
 			$statement->execute ();
+			// var_dump( $statement->errorInfo());
 		}
+		
+		return $subject_insert_id;
 	}
 	public function toArray() {
 		return get_object_vars ( $this );
@@ -140,5 +157,3 @@ class GuideBase {
 		return json_encode ( get_object_vars ( $this ) );
 	}
 }
-	
-
