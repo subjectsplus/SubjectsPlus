@@ -382,6 +382,7 @@ class DbHandler {
 				// This is new details link; you can use the one above if you prefer
 				$information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\">" . _ ( "about" ) . "</span>";
 			} else {
+				$information1 = "";
 				$information = "";
 			}
 			
