@@ -19,6 +19,20 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-style: normal;
 }
 
+
+/* Unicode Font - Noto Sans  */
+
+@font-face {
+  font-family: 'NotoSansBold';
+  src: url('../../assets/css/admin/font/NotoSans-Bold.eot');
+  src: url('../../assets/css/admin/font/NotoSans-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/css/admin/font/NotoSans-Bold.woff') format('woff'),
+  url('../../assets/css/admin/font/NotoSans-Bold.ttf') format('truetype'),
+  url('../../assets/css/admin/font/NotoSans-Bold.svg#NotoSansBold') format('svg');
+  font-weight: 700;
+  font-style: bold;
+}
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
   border-collapse: separate;
@@ -129,7 +143,7 @@ header {
 
 
 #topnav {
-  font-family: 'ChunkFiveRegular';
+  font-family: 'NotoSansBold'; /*'ChunkFiveRegular'*/
   float: left;
   list-style: none outside none;
   margin: 0;
@@ -210,6 +224,7 @@ header {
 
 #topnav > li > div ul li a, #topnav > li.selected > div ul li a {
   color: #333 !important;
+  font-size:1.1em;
 }
 
 #topnav > li > div ul li:hover {
@@ -495,7 +510,7 @@ html,body { height:100%; }
   display: inline-block;
   margin: 0 5px 10px 10px;
   padding: 10px 0;
-  width: 50px;
+  width: 110px;
   font-size: 30px;
   overflow: hidden;
   border-radius: 2px;
@@ -524,6 +539,27 @@ html,body { height:100%; }
   background: #C03957;
   color:#FFF;
 }
+
+.box-item .icon-text {
+  font-size: 13px !important;
+  line-height: 0.9em;
+  padding-top: 4px;
+  display: block;
+}
+
+#pluslet-id-WorldCat {
+  background-image: url(images/icons/world-cat-grey.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px;  
+}
+
+#pluslet-id-WorldCat:hover {
+  background-image: url(images/icons/world-cat-white.svg);  
+}
+
+.worldcat-text {margin-top: 30px;}
 
 #show_findbox_options i {font-size: 32px;}
 
