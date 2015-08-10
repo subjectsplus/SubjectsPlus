@@ -727,6 +727,26 @@ a.pure-button-secondary:hover {
 .catalog-search table td #searchscope {width:50% !important;}
 
 
+/*TABS Container Area */
+
+#tabs.ui-tabs {border-radius: 0 !important;} /* container */
+
+#tabs.ui-tabs .ui-tabs-nav  {
+  padding: 0;
+} /* list */
+
+
+#tabs.ui-tabs .ui-tabs-nav li {
+  padding: .2em 1em 0 1em;
+} /* list item */
+
+#tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
+
+#tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
+
+
+
+
 /* Main content areas */
 
 #maincontent {
@@ -2090,17 +2110,7 @@ div.breather > h2 {
   display: inline-block;
 }
 
-/* UI tabs */
 
-.ui-tabs .ui-tabs-nav li {
-
-  padding: .2em 1em 0 1em;
-
-}
-
-#tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
-
-#tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
 
 
 

@@ -22,7 +22,7 @@ class Pluslet_HTML5Video extends Pluslet {
 
     static function getMenuIcon()
     {
-      $icon="<i class=\"fa fa-file-video-o\" title=\"Video File\" ></i><span class=\"icon-text\">Video File</span>";
+      $icon="<i class=\"fa fa-file-video-o\" title=\"" . _("Video File") . "\" ></i><span class=\"icon-text\">" . _("Video File") . "</span>";
         return $icon;
     }
 

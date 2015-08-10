@@ -24,7 +24,7 @@ class Pluslet_Feed extends Pluslet {
 
     static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-rss\" title=\"RSS\" ></i><span class=\"icon-text\">RSS </span>";
+        $icon="<i class=\"fa fa-rss\" title=\"" . _("RSS") . "\" ></i><span class=\"icon-text\">"  . _("RSS") . "</span>";
         return $icon;
     }
 
