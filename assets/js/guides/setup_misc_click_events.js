@@ -48,8 +48,20 @@ function setupMiscClickEvents()
     	    	plantClone(origin_id,'Basic', origin_title);
     	    
     	});
-    
-    
-    
+
+
+
+    $('body').on('click', '.clone-favorite',function() {
+
+        var origin_id = $(this).attr('data-pluslet-id');
+        var origin_title = $(this).html();
+
+        //console.log( $(this).attr('data-pluslet-id'));
+        //console.log(origin_title);
+
+        plantClone('','Clone',origin_id, origin_title);
+
+    });
+
     
 }

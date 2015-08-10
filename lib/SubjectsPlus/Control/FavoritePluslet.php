@@ -48,31 +48,6 @@ class FavoritePluslet {
     }
 
 
-    public function getUserFavoritePluslets($staff_id = null) {
-
-        $staff_id = 1;
-
-        $querier = new Querier();
-        $sql = "SELECT * FROM staff NATURAL JOIN staff_subject WHERE staff_id =".$staff_id;
-
-        $subjects = array();
-        $subjects = $querier->query($sql);
-
-        $sub_ids = array();
-        foreach($subjects as $sub):
-            $subject_id = $sub["subject_id"];
-
-            $sql2 = "SELECT * FROM tab where subject_id = ".$subject_id;
-            $tabs = $querier->query($sql2);
-
-            foreach($tabs as $tab):
-            endforeach;
-
-        endforeach;
-
-
-        return $sub_ids;
-    }
 
 
     /**
