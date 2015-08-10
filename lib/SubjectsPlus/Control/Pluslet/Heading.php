@@ -22,7 +22,7 @@ class Pluslet_Heading extends Pluslet {
 
     static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-header\" title=\"Heading\" ></i><span class=\"icon-text\">Heading</span>";
+        $icon="<i class=\"fa fa-header\" title=\"" . _("Heading") . "\" ></i><span class=\"icon-text\">" . _("Heading") . "</span>";
         return $icon;
     }
 

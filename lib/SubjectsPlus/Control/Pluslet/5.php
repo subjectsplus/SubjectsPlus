@@ -69,7 +69,7 @@ class Pluslet_5 extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-book\" title=\"Books: Use the Library Catalog\" ></i><span class=\"icon-text\">Book Search</span>";
+        $icon="<i class=\"fa fa-book\" title=\"" . _(" Books: Use the Library Catalog") . "\" ></i><span class=\"icon-text\">". _(" Book Search") . "</span>";
         return $icon;
     }
 
