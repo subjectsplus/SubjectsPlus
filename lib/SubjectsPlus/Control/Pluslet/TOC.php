@@ -28,7 +28,7 @@ class Pluslet_TOC extends Pluslet {
 
   static function getMenuIcon()
     {
-      $icon="<i class=\"fa fa-list-alt\" title=\"Table of Contents\" ></i>";
+      $icon="<i class=\"fa fa-list-alt\" title=\"Table of Contents\" ></i><span class=\"icon-text\">TOC</span>";
         return $icon;
     }
 

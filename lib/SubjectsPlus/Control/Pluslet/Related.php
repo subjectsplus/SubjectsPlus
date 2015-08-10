@@ -44,7 +44,7 @@ class Pluslet_Related extends Pluslet {
 
 	static function getMenuIcon()
    	{
-   		$icon="<i class=\"fa fa-files-o\" title=\"Related Guides\" ></i>";
+   		$icon="<i class=\"fa fa-files-o\" title=\"Related Guides\" ></i><span class=\"icon-text\">Related Guides</span>";
         return $icon;
    	}
 

@@ -31,7 +31,7 @@ class Pluslet_Catalog extends Pluslet {
 
   static function getMenuIcon()
     {
-      $icon="<i class=\"fa fa-book\" title=\"Catalog Search\" ></i>";
+      $icon="<i class=\"fa fa-book\" title=\"Catalog Search\" ></i><span class=\"icon-text\">Catalog Search</span>";
         return $icon;
     }
 
