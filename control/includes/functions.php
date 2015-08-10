@@ -318,7 +318,7 @@ function getDBbySubBoxes($selected_sub) {
   $subs_option_boxes = "";
   $alphabet = "";
 
-  $subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE type = 'Subject' AND active = '1' ORDER BY subject";
+  $subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE type = ('Subject' or 'Placeholder') AND active = '1' ORDER BY subject";
   $subs_result = $db->query($subs_query);
 
 
@@ -1623,7 +1623,7 @@ function listGuides($search = "", $type="all") {
         $andclause .= " AND type=" . $db->quote($type) . "";
     }
 
-    $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
+    $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " AND type != 'Placeholder' ORDER BY subject";
    // $r = $db->query($q);
     //print $q;
     $row_count = 0;
