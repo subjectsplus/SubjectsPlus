@@ -97,7 +97,7 @@ class StaffDisplay {
 			FROM department d, staff
 			WHERE d.department_id = staff.department_id
 			AND user_type_id = '1'
-            AND active = 1
+      AND active = 1
 			order by department_sort, d.name,  staff_sort desc, lname";
 
         $db = new Querier;
@@ -184,7 +184,7 @@ class StaffDisplay {
                 AND type = 'Subject'
                 AND su.active = '1'
                 AND user_type_id = '1'
-                AND shortform != 'NewDatabases'
+                AND su.type != 'Placeholder'
                 order by lname, fname";
         $db = new Querier;
         $r = $db->query($q);
@@ -209,7 +209,7 @@ class StaffDisplay {
                     AND staff_id =  '$myrow[5]'
                     AND type = 'Subject'
                     AND active = '1'
-                    AND shortform != 'NewDatabases'
+                    AND type != 'Placeholder'
                     ORDER BY subject";
 
           /* Select all active records (this is based on a db connection made above) */
@@ -252,9 +252,9 @@ class StaffDisplay {
 			where staff.staff_id = staff_subject.staff_id
 			AND staff_subject.subject_id = subject.subject_id
 			AND type = 'Subject'
-            AND staff.active = 1
-            AND subject.active = 1
-            AND shortform != 'NewDatabases'
+      AND staff.active = 1
+      AND subject.active = 1
+      AND type != 'Placeholder'
 			order by subject, lname, fname";
         
         $hf1 = array("label"=>"Subject","hide"=>false,"nosort"=>false);
@@ -335,7 +335,7 @@ class StaffDisplay {
 			FROM staff s
 			LEFT JOIN department d on s.department_id = d.department_id
 			WHERE user_type_id = '1'
-            AND active = 1
+      AND active = 1
 			ORDER BY s.lname, s.fname";
 
         $hf1 = array("label"=>"Name","hide"=>false,"nosort"=>false);
@@ -434,7 +434,7 @@ class StaffDisplay {
               WHERE subject.subject_id = staff_subject.subject_id
               AND staff_subject.staff_id = $staff_id
               AND subject.active = 1
-              AND shortform != 'NewDatabases'
+              AND type != 'Placeholder'
               ORDER BY subject";
       //print $q2;
         $db = new Querier;

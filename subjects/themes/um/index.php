@@ -59,7 +59,7 @@ $tickboxes .= "</ul>";
 // Get the subjects for jquery autocomplete
 $suggestibles = "";  // init
 
-$q = "select subject, shortform from subject where active = '1' order by subject";
+$q = "select subject, shortform from subject where active = '1' AND type != 'Placeholder' order by subject";
 
 $statement = $connection->prepare($q);
 $statement->execute();
@@ -86,7 +86,7 @@ $suggestibles = trim($suggestibles, ', ');
 
 // Get our newest guides
 
-$q2 = "select subject, subject_id, shortform from subject where active = '1' order by subject_id DESC limit 0,5";
+$q2 = "select subject, subject_id, shortform from subject where active = '1' AND type != 'Placeholder' order by subject_id DESC limit 0,5";
 
 
 $statement = $connection->prepare($q2);
