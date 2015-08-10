@@ -313,12 +313,15 @@ function getSubBoxes($prefix="", $trunc="", $all_subs=0) {
   return $subs_option_boxes;
 }
 
-function getDBbySubBoxes($selected_sub) {
+function getDBbySubBoxes($selected_sub, $additionaltype = "Placeholder") {
   $db = new Querier;
   $subs_option_boxes = "";
   $alphabet = "";
+  $morequery = "";
 
-  $subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE type = 'Subject' AND active = '1' ORDER BY subject";
+  if ($additionaltype != "") { $morequery = "OR type = '" . $additionaltype . "'";}
+
+  $subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE (type = 'Subject' " . $morequery . ") AND active = '1' ORDER BY subject";
   $subs_result = $db->query($subs_query);
 
 
