@@ -156,14 +156,20 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 		$this_name = "Anonymous";
 	}
 
-  // Make a safe query
-	$query = sprintf("INSERT INTO talkback (`question`, `q_from`, `date_submitted`, `display`, `tbtags`, `answer`) VALUES (%s, %s, %s, 'No', %s, %s)", $db->quote($this_comment), $db->quote($this_name),$db->quote($todaycomputer), $db->quote($set_filter), $db->quote(""));
-  //print $query;
-	$db->query($query);
-
-	if ($query) {
-		$stage_one = "ok";
-	}
+	// Make a safe query
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("INSERT INTO talkback ('question', 'q_from', 'date_submitted', 'display', 'tbtags', 'answer')
+			VALUES (:question, :q_from, :date_submitted, 'No', :tbtags, '')");
+	
+	$statement->bindParam(":question", $this_comment);
+	$statement->bindParam(":q_from", $this_name);
+	$statement->bindParam(":date_submitted", $todaycomputer);
+	$statement->bindParam(":tbtags", $set_filter);
+	
+	
+	$statement->execute();
+	$stage_one = "ok";
+	
 
 	if (isset($debugger) && $debugger == "yes") {
 		print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
@@ -218,37 +224,78 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 ////////////////////
 
 if (isset($_GET["t"]) && $_GET["t"] == "prev") {
-	$q_archived = "  SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate, 
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
 	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
-	FROM talkback LEFT JOIN staff 
-	ON talkback.a_from = staff.staff_id 
-	WHERE (display ='1' OR display ='Yes') 
-	$bonus_sql
-	AND YEAR(date_submitted) < '$this_year' 
-	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC ";
-    
-    $db = new Querier;
-	$our_result = $db->query($q_archived);
+	FROM talkback LEFT JOIN staff
+	ON talkback.a_from = staff.staff_id
+	WHERE (display ='1' OR display ='Yes')
+	AND tbtags LIKE :tbtags
+    AND cattags LIKE :ctags
+	AND YEAR(date_submitted) < :year
+	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC");
+
+	$statement->bindParam(":year", $this_year);
+
+
+
+	$filter = '%' . $set_filter . '%';
+
+	if (isset($_GET['c'])) {
+		$cat_tags = '%' . scrubData($_GET['c']) . '%';
+
+	} else {
+		$cat_tags = "%%";
+
+	}
+
+	$statement->bindParam(":tbtags", $filter);
+	$statement->bindParam(":cattags", $cat_tags);
+	$statement->execute();
+
+
+	$our_result = $statement->fetchAll();
 
 	$comment_header = "<h2>" . _("Comments from Previous Years") . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\">" . _("See this year") . "</a></span></h2>";
 
 } else {
-  // New ones //
-	$full_query = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate, answer, a_from, fname, lname, email, staff.title 
-	FROM talkback LEFT JOIN staff 
-	ON talkback.a_from = staff.staff_id 
-	WHERE (display ='1' OR display ='Yes') 
-	$bonus_sql
-	AND YEAR(date_submitted) >= '$this_year' 
-	ORDER BY date_submitted DESC";
-    
-    $db = new Querier;
-	$our_result = $db->query($full_query);
+	// New ones //
+
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
+	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
+	FROM talkback LEFT JOIN staff
+	ON talkback.a_from = staff.staff_id
+	WHERE (display ='1' OR display ='Yes')
+    AND tbtags LIKE :tbtags
+	AND cattags LIKE :ctags
+	AND YEAR(date_submitted) >= :year
+	ORDER BY date_submitted DESC");
+
+	$statement->bindParam(":year", $this_year);
+	$filter = '%' . $set_filter . '%';
+	if (isset($_GET['c'])) {
+		$cat_tags = '%' . scrubData($_GET['c']) . '%';
+
+	} else {
+		$cat_tags = "%%";
+
+	}
+	//AND tbtags LIKE :tbtags
+	$statement->bindParam(":tbtags", $filter);
+	$statement->bindParam(":ctags", $cat_tags);
+	$statement->execute();
+
+
+	$our_result = $statement->fetchAll();
+
+
 
 	$comment_header = "<h2>" . _("Comments from ") . "$this_year <span style=\"font-size: 11px; font-weight: normal;\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _("See previous years") . "</a></span></h2>";
 
 }
-
 
 /* Select all Records, either current or previous year*/
 
@@ -266,13 +313,13 @@ if ($result_count != 0) {
 		$answer = $myrow["5"];
 		$answer = preg_replace('/<\/?div.*?>/ ', '', $answer);
 		$answer = tokenizeText($answer);
-    // $answer = stripslashes(htmlspecialchars_decode($myrow["5"])); Louisa's proposed fix for messy answer @todo
+		// $answer = stripslashes(htmlspecialchars_decode($myrow["5"])); Louisa's proposed fix for messy answer @todo
 		$keywords = $myrow["3"];
 		$responder_email = $myrow["9"];
 
 		// Let's link back to the staff page
 		$name_id = explode("@", $responder_email);
-  		$lib_page = "staff_details.php?name=" . $name_id[0];
+		$lib_page = "staff_details.php?name=" . $name_id[0];
 
 		$results .= "
 		<div class=\"tellus_item oddrow\">\n
@@ -286,7 +333,7 @@ if ($result_count != 0) {
 		$results .= $answer;
 		$results .= "<p style=\"clear: both;font-size: 11px;\">Answered by <a href=\"$lib_page\">$myrow[7] $myrow[8]</a>, $myrow[10]</p></div>\n";
 
-    // Add 1 to the row count, for the "even/odd" row striping
+		// Add 1 to the row count, for the "even/odd" row striping
 
 		$row_count++;
 	}

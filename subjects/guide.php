@@ -53,14 +53,11 @@ $social_and_search = '
 
 if ($check_this) {
 
-
-    // get name of quide
-    $q = "select subject, subject_id, extra, description, keywords, redirect_url, header from subject where shortform = " . $db->quote($check_this);
-    //print $q;
-    //$r = $db->query($q);
-
-    $r = $db->query($q, PDO::FETCH_ASSOC);
-
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT subject, subject_id, extra, description, keywords, redirect_url, header FROM subject where shortform = :value");
+	$statement->bindParam(':value', $check_this);
+	$statement->execute();
+	$r = $statement->fetchAll();
 
 
     // If this guide doesn't exist, send them away

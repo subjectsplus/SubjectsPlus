@@ -68,15 +68,17 @@ class Autocomplete {
   public function search() {
 
     $db = new Querier;
-    $search_param = $db->quote("%" . $this->param . "%");
-    $subject_id = $db->quote( $this->subject_id );
+    $connection = $db->getConnection();
+    
+    $search_param = "%" . $this->param . "%";
+    $subject_id = $this->subject_id;
 
     switch ($this->collection) {
       case "home":
-        $q = "SELECT subject_id AS 'id', subject AS 'matching_text',subject AS 'label', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id', '' as 'parent' FROM subject
-                    WHERE description LIKE "  . $search_param . "
-                    OR subject LIKE "  . $search_param . "
-                    OR keywords LIKE "  . $search_param . "
+      	$statement = $connection->prepare("SELECT subject_id AS 'id', subject AS 'matching_text',subject AS 'label', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id', '' as 'parent' FROM subject
+                    WHERE description LIKE :search_term
+                    OR subject LIKE :search_term
+                    OR keywords LIKE :search_term
                     UNION
                     SELECT p.pluslet_id, p.title,p.title AS 'label', su.subject_id AS 'parent_id', su.shortform, 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
@@ -87,49 +89,50 @@ class Autocomplete {
                     ON s.tab_id = t.tab_id
                     INNER JOIN subject AS su
                     ON su.subject_id = t.subject_id
-                    WHERE p.body LIKE "  . $search_param . "
-                    OR p.title LIKE "  . $search_param . "
-
+                    WHERE p.body LIKE :search_term
+                    OR p.title LIKE :search_term
                     UNION
                     SELECT faq_id AS 'id', question AS 'matching_text',question AS 'label',  answer as 'additional_text','' AS 'short_form','FAQ' as 'content_type', '' as 'additional_id', '' as 'parent' FROM faq
-                    WHERE question LIKE "  . $search_param . "
-                    OR answer LIKE "  . $search_param . "
-                    OR keywords LIKE "  . $search_param . "
+                    WHERE question LIKE :search_term
+                    OR answer LIKE :search_term
+                    OR keywords LIKE :search_term
                     UNION
                     SELECT talkback_id AS 'id', question AS 'matching_text' ,question AS 'label', answer as 'additional_text','' AS 'short_form', 'Talkback' as 'content_type', '' as 'additional_id', '' as 'parent' FROM talkback
-                    WHERE question LIKE "  . $search_param . "
-                    OR answer LIKE "  . $search_param . "
+                    WHERE question LIKE :search_term
+                    OR answer LIKE :search_term
                     UNION
                     SELECT staff_id AS 'id', email AS 'matching_text' ,email AS 'label', fname as 'additional_text','' AS 'short_form', 'Staff' as 'content_type', '' as 'additional_id', '' as 'parent' FROM staff
-                    WHERE fname LIKE " .$search_param  . "
-                    OR lname LIKE "  . $search_param . "
-                    OR email LIKE " . $search_param . "
-                    OR tel LIKE " . $search_param . "
+                    WHERE fname LIKE :search_term
+                    OR lname LIKE :search_term
+                    OR email LIKE :search_term
+                    OR tel LIKE :search_term
                     UNION
                     SELECT department_id AS 'id', name AS 'matching_text' , name AS 'label', telephone as 'additional_text','' AS 'short_form', 'Department' as 'content_type', '' as 'additional_id','' as 'parent' FROM department
-                    WHERE name LIKE " . $search_param ."
-                    OR telephone LIKE  " . $search_param . "
+                    WHERE name LIKE :search_term
+                    OR telephone LIKE  :search_term
                     UNION
                     SELECT video_id AS 'id', title AS 'matching_text' ,title AS 'label', description as 'additional_text','' AS 'short_form', 'Video' as 'content_type', '' as 'additional_id', '' as 'parent' FROM video
-                    WHERE title LIKE " .  $search_param . "
-                    OR description LIKE " . $search_param . "
-                    OR vtags LIKE " .  $search_param;
+                    WHERE title LIKE :search_term
+                    OR description LIKE :search_term
+                    OR vtags LIKE :search_term");
+      	
 
 
 
         break;
       case "guides":
-        $q = "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form' FROM subject WHERE subject LIKE " . $search_param
-           . "OR shortform LIKE " . $search_param
-           . "OR description LIKE " . $search_param
-           . "OR keywords LIKE " . $search_param
-           . "OR type LIKE " . $search_param 
-           . "AND active = '1'";
+      	$statement = $connection->prepare(
+       "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form' FROM subject WHERE subject LIKE :search_term
+           OR shortform LIKE :search_term
+           OR description LIKE :search_term
+           OR keywords LIKE :search_term
+           OR type LIKE :search_term
+           AND active = '1'");
         break;
 
 
       case "guide":
-        $q = "SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
+      	$statement = $connection->prepare("SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
@@ -138,28 +141,41 @@ class Autocomplete {
                     ON s.tab_id = t.tab_id
                     INNER JOIN subject AS su
                     ON su.subject_id = t.subject_id
-                    WHERE p.body LIKE " . $search_param   .
-             " AND t.subject_id = " . $subject_id ;
-
+                    WHERE p.body LIKE :search_term
+      			    AND t.subject_id = :subject_id");
+      	$statement->bindParam(":subject_id", $subject_id);
+      	 
 
         break;
       case "records":
-        $q = "SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', title FROM title WHERE title LIKE " . $search_param ;
+       $statement = $connection->prepare("SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', 
+       		title FROM title WHERE title LIKE :search_term");
         break;
       case "faq":
-        $q = "SELECT faq_id AS 'id',question AS 'label', LEFT(question, 55), 'FAQ' as 'content_type'  FROM faq WHERE question LIKE " . $search_param ;
+        $statement = $connection->prepare("SELECT faq_id AS 'id',question AS 'label', LEFT(question, 55), 
+        		'FAQ' as 'content_type'  FROM faq WHERE question LIKE :search_term" );
         break;
       case "talkback":
-        $q = "SELECT talkback_id AS 'id',question AS 'label','Talkback' as content_type, LEFT(question, 55) FROM talkback WHERE question LIKE " . $search_param ;
+       $statement = $connection->prepare("SELECT talkback_id AS 'id',question AS 'label','Talkback' 
+        		as content_type, LEFT(question, 55) FROM talkback WHERE question LIKE :search_term") ;
         break;
       case "admin":
-        $q = "SELECT staff_id AS 'id',email AS 'label','Staff' as 'content_type', CONCAT(fname, ' ', lname, ' (', email, ')') as fullname FROM staff WHERE (fname LIKE " . $search_param . ") OR (lname LIKE " . $search_param . ")";
+       $statement = $connection->prepare("SELECT staff_id AS 'id',email AS 'label','Staff' 
+        		as 'content_type', CONCAT(fname, ' ', lname, ' (', email, ')') as fullname 
+        		FROM staff WHERE (fname LIKE :search_term) OR (lname LIKE :search_term)");
         break;
 
     }
 
     //print_r ($q);
-    $result = $db->query($q);
+    
+    $statement->bindParam(":search_term", $search_param);
+    	 
+
+    $statement->execute();
+    
+
+    $result = $statement->fetchAll();
     $arr = array();
     $i = 0;
 

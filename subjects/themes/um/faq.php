@@ -84,6 +84,8 @@ if(isset($_POST['searchterm']))
 ///////////////
 
 $db= new Querier();
+$connection = $db->getConnection();
+
 $q2 = "select distinct s.subject_id, s.subject
     from faq f, faq_subject fs, subject s 
     WHERE f.faq_id = fs.faq_id 
@@ -91,7 +93,11 @@ $q2 = "select distinct s.subject_id, s.subject
     AND active = '1'
     ORDER BY subject";
 
-$oursubs = $db->query($q2);
+$statement = $connection->prepare($q2);
+$statement->execute();
+$oursubs = $statement->fetchAll();
+
+
 
 if ($oursubs) {
     $guideMe = new Dropdown("subject_id", $oursubs, $postvar_subject_id, "40");
@@ -117,11 +123,12 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $displaytype = "collection";
 
     // Get the name of the collection
-    $query = "SELECT name, description FROM faqpage WHERE faqpage_id = '$postvar_coll_id'";
-   
     $db = new Querier;
-    $name = $db->query($query);
-    
+    $connection = $db->getConnection();
+    $statement = $connection->prepare("SELECT name, description FROM faqpage WHERE faqpage_id = :postvar_coll_id");
+    $statement->bindParam(":postvar_coll_id", $postvar_coll_id);
+    $statement->execute();
+    $name = $statement->fetchAll();
 
     $page_title = "FAQS: {$name[0][0]}";
     $intro = stripslashes(htmlspecialchars_decode($name[0][1]));
@@ -137,64 +144,84 @@ include("includes/header_um.php");
 
 if ($displaytype == "search") {
 
-    $full_query = "SELECT faq_id, question, answer, keywords
-	FROM `faq`
-	WHERE (question like " . $db->quote("%" . $search_clause . "%") . " OR answer like " . $db->quote("%" . $search_clause . "%") . " OR keywords like " . $db->quote("%" . $search_clause . "%") . ")
-	Group BY question";
+    $statement = $connection->prepare("SELECT faq_id, question, answer, keywords
+	FROM faq
+	WHERE (question like ? OR answer like ? OR keywords like ?)
+	Group BY question");
+
+    $search_clause = "%" . $search_clause . "%";
+
+    $statement->bindParam(":search_clause", $search_clause);
+
+    $statement->execute();
 
     $intro = "<p>Search for <strong>$search_clause</strong>.</p>";
 } elseif ($displaytype == "all") {
 
-    $full_query = "SELECT distinct faq_id, question, answer, keywords
-	FROM `faq`
-	ORDER BY question";
+    $statement = $connection->prepare("SELECT distinct faq_id, question, answer, keywords
+	FROM faq
+	ORDER BY question");
+
+    $statement->execute();
 
     $intro = "";
 } elseif ($displaytype == "bysubject") {
 
-    $full_query = "SELECT f.faq_id, question, answer, f.keywords, subject
-	FROM `faq` f, faq_subject fs, subject s
+    $statement = $connection->prepare("SELECT f.faq_id, question, answer, f.keywords, subject
+	FROM faq f, faq_subject fs, subject s
 	WHERE f.faq_id = fs.faq_id
 	AND fs.subject_id = s.subject_id
-	AND s.subject_id = '$postvar_subject_id'
-	ORDER BY question";
+	AND s.subject_id = :postvar_subject_id
+	ORDER BY question");
+
+    $statement->bindParam(":postvar_subject_id", $postvar_subject_id);
+    $statement->execute();
 
     $intro = "";
 } elseif ($displaytype == "single") {
 
-    $full_query = "SELECT faq_id, question, answer, keywords
-	FROM `faq`
-	WHERE faq_id = '$postvar_faq_id'";
+    $statement = $connection->prepare("SELECT faq_id, question, answer, keywords
+	FROM faq
+	WHERE faq_id = :postvar_faq_id");
+
+    $statement->bindParam(":postvar_faq_id", $postvar_faq_id);
+    $statement->execute();
 
     $intro = "";
 } elseif ($displaytype == "collection") {
 
-    $full_query = "SELECT f.faq_id, question, answer, keywords
+    $statement = $connection->prepare("SELECT f.faq_id, question, answer, keywords
 	FROM faq f, faq_faqpage ff, faqpage fp
 	WHERE f.faq_id = ff.faq_id
 	AND fp.faqpage_id = ff.faqpage_id
-	AND fp.faqpage_id = '$postvar_coll_id'
-	ORDER BY fp.name, question";
+	AND fp.faqpage_id = :postvar_coll_id
+	ORDER BY fp.name, question");
+
+    $statement->bindParam(":postvar_coll_id", $postvar_coll_id);
+    $statement->execute();
 
     $intro = "";
 } else {
 
     // This is the default
-
-    $full_query = "SELECT f.faq_id, question, answer, keywords
+    $statement = $connection->prepare("SELECT f.faq_id, question, answer, keywords
 	FROM faq f, faq_faqpage ff, faqpage fp
 	WHERE f.faq_id = ff.faq_id
 	AND fp.faqpage_id = ff.faqpage_id
-	AND fp.faqpage_id = '$default_faqpage_id'
-	ORDER BY f.question";
+	AND fp.faqpage_id = :default_faqpage_id
+	ORDER BY f.question");
+
+    $statement->bindParam(":default_faqpage_id", $default_faqpage_id);
+    $statement->execute();
+
 }
 
 if (isset($debugger) && $debugger == "yes") {
     print "<p class=\"debugger\">$full_query<br /><strong>from</strong> this file</p>";
 }
 
-$full_result = $db->query($full_query);
-
+//fetch results
+$full_result = $statement->fetchAll();
 $result_count = count($full_result);
 
 if ($result_count != 0) {
@@ -242,14 +269,15 @@ $results = "";
 </div>\n";
 }
 
+
 $collections_query = "SELECT f.faqpage_id, name
 FROM faqpage f, faq_faqpage ff
 WHERE f.faqpage_id = ff.faqpage_id
 GROUP BY name";
 
-// print $collections_query;
-
-$collections_result = $db->query($collections_query);
+$statement = $connection->prepare($collections_query);
+$statement->execute();
+$collections_result = $statement->fetchAll();
 
 // create the option
 $coll_items = "<li><a href=\"faq.php?page=all\">All</a></li>";
