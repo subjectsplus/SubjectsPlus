@@ -62,7 +62,7 @@ class Pluslet_4 extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-question-circle\" title=\"FAQs\" ></i>";
+        $icon="<i class=\"fa fa-question-circle\" title=\"FAQs\" ></i><span class=\"icon-text\">FAQs</span>";
         return $icon;
     }
 

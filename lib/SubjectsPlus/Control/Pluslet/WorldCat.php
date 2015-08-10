@@ -33,7 +33,7 @@ class Pluslet_WorldCat extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-map-marker\" title=\"WorldCat Search\" ></i>";
+        $icon="<span class=\"icon-text worldcat-text\">WorldCat Search</span>";
         return $icon;
     }
 
