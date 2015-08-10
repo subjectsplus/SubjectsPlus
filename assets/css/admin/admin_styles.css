@@ -603,6 +603,15 @@ a.pure-button-secondary:hover {
 }
 
 .fav-box-item, .fav-template-item { width: 275px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+.clone-favorite.fav-box-item {
+  font-size:12px !important;
+  cursor:pointer;
+}
+
+li.fav-box-item:hover {
+
+  background-color: #ccc;
+}
 
 .clone-input {display:none;}
 
