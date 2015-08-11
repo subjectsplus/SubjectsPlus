@@ -556,13 +556,13 @@ class Guide
         global $IconPath;
 
         $ourstaff = "
-        <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item_wrapper staffwrapper\">
         <div class=\"selected_item\">
         <input name=\"staff_id[]\" value=\"$value[0]\" type=\"hidden\" />
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
+        <img src=\"$IconPath/delete.png\" class=\"delete_item delete_staff\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
         </div>
         </div>";
 
@@ -574,13 +574,13 @@ class Guide
         global $IconPath;
 
         $ourparents = "
-        <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item_wrapper parentwrapper\">
         <div class=\"selected_item\">
         <input name=\"parent_id[]\" value=\"$value[0]\" type=\"hidden\" />
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
+        <img src=\"$IconPath/delete.png\" class=\"delete_item delete_parent\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
         </div>
         </div>";
 
@@ -592,13 +592,13 @@ class Guide
         global $IconPath;
 
         $ourdepartments = "
-        <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item_wrapper departmentwrapper\">
         <div class=\"selected_item\">
         <input name=\"department_id[]\" value=\"$value[0]\" type=\"hidden\" />
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
+        <img src=\"$IconPath/delete.png\" class=\"delete_item delete_department\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
         </div>
         </div>";
 
@@ -610,13 +610,13 @@ class Guide
         global $IconPath;
 
         $ourdisciplines = "
-        <div class=\"selected_item_wrapper\">
+        <div class=\"selected_item_wrapper disciplinewrapper\">
         <div class=\"selected_item\">
         <input name=\"discipline_id[]\" value=\"$value[0]\" type=\"hidden\" />
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
+        <img src=\"$IconPath/delete.png\" class=\"delete_item delete_discipline\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
         </div>
         </div>";
 
@@ -857,7 +857,7 @@ class Guide
         /////////////////////
 
 
-        $qClearSubD = "DELETE FROM subject_department WHERE id_department = " . $this->_subject_id;
+        $qClearSubD = "DELETE FROM subject_department WHERE id_subject = " . $this->_subject_id;
 
         $rClearSubD = $db->exec($qClearSubD);
 
@@ -865,7 +865,7 @@ class Guide
 
 
         /////////////////////
-        // insert into subject_subject
+        // insert into subject_departnebt
         ////////////////////
 
         self::modifySubDept();
@@ -1233,7 +1233,7 @@ class Guide
     function modifySubDept()
     {
 
-        $de_duped = array_unique($this->_parent_id);
+        $de_duped = array_unique($this->_department_id);
 
         foreach ($de_duped as $value) {
             if (is_numeric($value)) {

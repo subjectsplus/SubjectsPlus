@@ -78,7 +78,7 @@ if (isset($_POST["submit_record"])) {
 
     exit;
   }
-
+//print_r($_POST);exit;
   // Submit form
 
   $record = new Guide($_POST["subject_id"], "post");
@@ -236,13 +236,14 @@ include("../includes/footer.php");
    });
 
    ///////////////////
-   // delete a subject from dropdown
+   // delete a staffmember
    ///////////////////
 
-   $(".delete_item").livequery('click', function() {
+   $(".delete_staff").livequery('click', function() {
 
      // make sure this isn't the only location first
-     var numsub = $(".selected_item_wrapper").length;
+     var numsub = $(".staffwrapper").length;
+
      if (numsub >1) {
 
        $(this).parent().parent().remove();
@@ -250,11 +251,31 @@ include("../includes/footer.php");
        alert("<?php print _("Thwarted!  You must have at least one staff member for a guide."); ?>");
      }
 
-
    });
 
+   ///////////////////
+   // delete a department
+   ///////////////////
 
+   $(".delete_department").livequery('click', function() {
+       $(this).parent().parent().remove();
+   });
 
+   ///////////////////
+   // delete a parent
+   ///////////////////
+
+   $(".delete_parent").livequery('click', function() {
+       $(this).parent().parent().remove();
+   });
+
+   ///////////////////
+   // delete a discipline
+   ///////////////////
+
+   $(".delete_discipline").livequery('click', function() {
+       $(this).parent().parent().remove();
+   });
 
    ////////////////
    // Check Submit
