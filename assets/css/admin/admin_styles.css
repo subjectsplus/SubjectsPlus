@@ -2488,3 +2488,17 @@ background:bisque;
 
 }
 
+
+
+/***********************************/
+/*** toggle pluslet body **********/
+.pluslet_body_open {
+  display: block;
+}
+
+.pluslet_body_closed {
+  display: none;
+}
+
+
+
