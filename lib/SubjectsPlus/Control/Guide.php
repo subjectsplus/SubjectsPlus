@@ -956,7 +956,7 @@ class Guide
         $all_tabs = $this->getTabs($lstrFilter);
         $main_tabs = $this->db->query("SELECT tab_id FROM tab WHERE parent = '' AND children =  '[]'");
         
-        $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\">+</li>" : "<ul>"; // init tabs (in header of body of guide)
+        $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\"><i class=\"fa fa-plus\"></i></li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
         
         	$children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTab['tab_id']}");
@@ -1017,7 +1017,7 @@ class Guide
         $tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
         }
         
-        //$tabs .= "<li><a id=\"newtab\" href=\"#tabs-new\">{+}</a></li>";
+        $tabs .= "<li id=\"expand_tab\"><i class=\"fa fa-chevron-down\"></i></li>"; //place collapse/expand trigger here
         $tabs .= "</ul>"; // close out our tabs
         
         $tabs .= $this->_isAdmin ? "" : "<div id=\"shadowkiller\"></div>"; // this div allows me to cover bottom of box-shadow on tabs.  crazy, bien sur

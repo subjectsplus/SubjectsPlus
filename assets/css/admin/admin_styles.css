@@ -751,16 +751,17 @@ li.fav-box-item:hover {
 
 
 #tabs.ui-tabs .ui-tabs-nav li {
-  padding: 3px 18px;
+  padding: 3px 18px 0 18px;
   line-height: 1.05em;
   margin: 0;
   top: 0;
   border-radius: 0;
-  background-color: #d5d5d5;
+  background-color: #f2f2f2; /*d5d5d5*/
   background-image: none;
-  border-right: 1px solid #b3b2b2;
+  border-right: 1px solid #d5d5d5; /*b3b2b2*/
   border-left: 1px solid #FFF;
   border-top:none;
+  border-bottom: 3px solid transparent !important;
 } /* list item */
 
 
@@ -770,7 +771,7 @@ li.fav-box-item:hover {
 #add_tab {
   cursor:pointer;
   margin:0;
-  padding: 11px 16px !important;
+  padding: 7px 16px !important;
   background-color: #CCC !important;
   background-image: none;
   border-top:none;
@@ -779,11 +780,13 @@ li.fav-box-item:hover {
 
 #add_tab.ui-button-text-only .ui-button-text {  
   padding: 0;
-  font-size: 1em;
+  font-size: 18px;
   line-height: 1.05em;
+  padding: 1px 0 0 0;
 }
 
 #add_tab:hover {background-color: #858585 !important;color: #FFF;}
+#tabs.ui-tabs .ui-tabs-nav li#add_tab.ui-state-hover {border-bottom: 3px solid #444 !important;}
 
 
 /* Added to style tabs for importer -don't delete JL*/
@@ -797,15 +800,24 @@ li.fav-box-item:hover {
 #tabs.ui-tabs .ui-tabs-nav li a {color:#333;}
 
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active,
-#tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover {background-color: #C03957;}
+#tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover {border-bottom: 3px solid #C03957 !important;}
 
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active a,
-#tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #FFF;}
+#tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #333;}
 
 #tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
 
 #tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
 
+#tabs.ui-tabs .ui-tabs-nav li#expand_tab {
+  cursor:pointer; 
+  padding: 9px 16px !important;
+  background-color: #CCC !important;
+  color: #333;
+  border-bottom: 4px solid #CCC !important;
+}
+
+#tabs.ui-tabs .ui-tabs-nav li#expand_tab:hover {border-bottom: 4px solid #444 !important; color: #FFF; background-color: #858585 !important;}
 
 
 /* Main content areas */
