@@ -645,9 +645,11 @@ a.pure-button-secondary:hover {
 }
 
 li.fav-box-item:hover {
-
-  background-color: #ccc;
+  background-color: #d5d5d5; 
+  color:#333;
 }
+
+li.fav-box-item:hover::before {color: #C03957;}
 
 .clone-input {display:none;}
 
