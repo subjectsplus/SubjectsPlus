@@ -55,7 +55,7 @@ foreach ($guide_list_output as $guide) {
 </div>
 
 
-<button class="button pure-button pure-button-primary create-guide">Create Guide</button>
+<button class="button pure-button pure-button-primary create-guide">Copy Guide</button>
 
 </div>
 </div>
@@ -84,6 +84,11 @@ $('.create-guide').on('click', function() {
 .select2-container {
 width: 65%;
 margin-right: 3%;
+}
+
+.create-guide {
+margin-top: 1.5%;
+margin-left: 0.5%;
 }
 </style>
 
