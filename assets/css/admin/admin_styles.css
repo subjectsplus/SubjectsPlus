@@ -739,7 +739,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 
-/*TABS Container Area */
+/*TABS Items Area --where the individual tabs go */
 
 #tabs.ui-tabs {border-radius: 0 !important;} /* container */
 
@@ -807,10 +807,6 @@ li.fav-box-item:hover::before {color: #C03957;}
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active a,
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #333;}
 
-#tabs li .alter_tab { margin: 0.6em 0.2em 0 0; cursor: pointer; }
-
-#tabs li img {height: 16px; margin-left: .5em; margin-top: .5em;}
-
 #tabs.ui-tabs .ui-tabs-nav li#expand_tab {
   cursor:pointer; 
   padding: 9px 16px !important;
@@ -820,6 +816,124 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 #tabs.ui-tabs .ui-tabs-nav li#expand_tab:hover {border-bottom: 4px solid #444 !important; color: #FFF; background-color: #858585 !important;}
+
+#tabs li .alter_tab { 
+    color: #858585;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin: 8px 0 0 20px;
+}
+
+#tabs li .alter_tab:hover { 
+    color: #C03957;
+}
+
+
+
+/*TABS Containers Area --where the pluslets go */
+
+.sptab {
+  background: none !important;
+}
+
+/*TABS Section --where the pluslets go */
+
+.sp_section {
+  background-color: none;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 2em;
+}
+
+.sp_section_controls {
+  border-bottom: 1px solid #333;
+  padding-bottom: 1em;
+  background-color: #fff;
+  padding-top: 1em;
+}
+
+
+.pluslet_sort {
+  cursor: move;
+  float: left;
+  margin-right: .5em;
+  margin-top: 2px;
+  height: 20px;
+  padding: 0.2em;
+  width: 20px;
+}
+
+
+.section_sort {
+  cursor: move;
+  float: left;
+  margin-top: -1em;
+  padding: 0.2em;
+
+}
+
+.section_remove
+{  cursor: pointer;
+  float: left;
+  margin-right: 1em;
+  margin-top: -20px;
+  padding: 0.15em;
+  font-size: 30px !important;
+}
+
+.sp_section_slider
+{
+  margin-left: 4.5em;
+
+}
+
+
+#container-0, 
+#container-1,
+#container-2 {
+  float: left;
+  margin: 5px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+}
+
+#container-1 {
+  width: 60%;
+}
+
+#container-2 {
+  width: 35%;
+}
+
+#container-0 h2 {
+  font-size: 16px;
+  margin: 1px;
+  background-color: none;
+  padding: 2px;
+}
+
+#container-0 h3 {
+  font-size: 14px;
+  margin: 1px;
+}
+
+.drop_area {
+  border: 1px dashed #858585;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: rgba(255,255,255,0.6);
+  text-align: center;
+}
+
+.dropspot-text {
+  font-family:'NotoSansBold';
+  color: #858585;
+  margin-top:10px;
+  display: inline-block;
+}
+
 
 
 /* Main content areas */
@@ -1679,43 +1793,7 @@ div.tooltip div
 }
 
 
-#container-0 {
-  float: left;
-  width: 15%;
-  padding: 5px;
-}
 
-#container-0 h2 {
-  font-size: 16px;
-  margin: 1px;
-  background-color: none;
-  padding: 2px;
-}
-
-#container-0 h3 {
-  font-size: 14px;
-  margin: 1px;
-}
-
-#container-0 {
-  float: left;
-  padding: 10px;
-  background-color: transparent;
-}
-
-#container-1 {
-  float: left;
-  width: 60%;
-  padding: 10px;
-  background-color: transparent;
-}
-
-#container-2 {
-  float: left;
-  width: 35%;
-  padding: 10px;
-  background-color: transparent;
-}
 
 #all-results  {
 
@@ -1804,15 +1882,7 @@ li.dropspotty {
 /* When you hover over one of the two drop spots, make em show */
 .drop_hover {background-color: #C03957; border: 1px solid #ccc;}
 
-.dropspot-text {
-  position: relative;
-  font-size: 14pt;
-  font-weight: bold;
-  color: #ccc;
-  color: #333;
-  margin-right: 1em;
-  margin-bottom: 1em;
-}
+
 
 /* this might be used by the jquery ui plugin . . . */
 
@@ -2208,10 +2278,7 @@ label {
 background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 */
 
-.sptab {
-  background-color: #dfdfdf !important;
 
-}
 /* Override for V 3, multiple layouts */
 
 #portal-column-0, #portal-column-1, #portal-column-2, .portal-column-0, .portal-column-1, .portal-column-2   {
@@ -2316,12 +2383,9 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
   color: #333;
 }
 
-#tabs li .ui-icon-wrench { float: left; margin: 0.6em 0.2em 0 0; cursor: pointer; }
 
-#tabs > .ui-widget-content {
-  background: none !important;
-  background-image: none !important
-}
+
+
 
 #tabs div.pluslet > .titlebar {
   font-weight: 400;
@@ -2388,57 +2452,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
   box-shadow: none;
 }
 
-.sp_section
-{
-  border: 1px solid #fff;
-  margin-bottom: 2em;
-  border-radius: 5px;
-  background-color: #5F6C78;
-  background-color: #ccc;
 
-
-}
-
-.sp_section_controls {
-  border-bottom: 1px solid #333;
-  padding-bottom: 1em;
-  background-color: #fff;
-  padding-top: 1em;
-}
-
-.pluslet_sort {
-  cursor: move;
-  float: left;
-  margin-right: .5em;
-  margin-top: 2px;
-  height: 20px;
-  padding: 0.2em;
-  width: 20px;
-}
-
-
-.section_sort {
-  cursor: move;
-  float: left;
-  margin-top: -1em;
-  padding: 0.2em;
-
-}
-
-.section_remove
-{  cursor: pointer;
-  float: left;
-  margin-right: 1em;
-  margin-top: -20px;
-  padding: 0.15em;
-  font-size: 30px !important;
-}
-
-.sp_section_slider
-{
-  margin-left: 4.5em;
-
-}
 
 
 

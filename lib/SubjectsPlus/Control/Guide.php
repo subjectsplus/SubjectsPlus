@@ -1014,7 +1014,7 @@ class Guide
         		}
         	
         }
-        $tabs .= $this->_isAdmin ? "<span class='ui-icon ui-icon-wrench alter_tab' role='presentation'>Remove Tab</span></li>" : "</li>";
+        $tabs .= $this->_isAdmin ? "<span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>" : "</li>";
         }
         
         $tabs .= "<li id=\"expand_tab\"><i class=\"fa fa-chevron-down\"></i></li>"; //place collapse/expand trigger here
@@ -1199,9 +1199,8 @@ class Guide
         global $AssetPath;
         global $IconPath;
         $col = "<div id=\"container-" . $i . "\" style=\"position: relative; float: left; width: 30%;\">
-        <div class=\"dropspotty unsortable\" id=\"dropspot-" . $itext . "-1\">
-        <img src=\"$IconPath/air_force-26.png\"  alt=\"" . _('Drop Content Here') . "\" />
-        <span class=\"dropspot-text\">" . _('Drop Here') . "</span>
+        <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
+        <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
         </div>
         <div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
             $content . "<div><br /></div>"

@@ -327,7 +327,7 @@ ob_end_flush();
  jQuery(function() {
    var tabTitle = $( "#tab_title" ),
    tabContent = $( "#tab_content" ),
-   tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-wrench' role='presentation'>Remove Tab</span></li>",
+   tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
    tabCounter = <?php echo ( count($all_tabs) ); ?>;
    var tabs = $( "#tabs" ).tabs();
 
@@ -477,7 +477,7 @@ ob_end_flush();
          $( this ).dialog( "close" );
        	 $("#response").hide();
          $('#save_guide').fadeIn();
-         $('#save_template').fadeIn();
+         //$('#save_template').fadeIn();
        },
        "Delete" : function() {
          var id = window.lastClickedTab.replace("#tabs-", "");
@@ -490,7 +490,7 @@ ob_end_flush();
          $( this ).dialog( "close" );
    	 $("#response").hide();
          $('#save_guide').fadeIn();
-         $('#save_template').fadeIn();
+         //$('#save_template').fadeIn();
        },
        Cancel: function() {
          $( this ).dialog( "close" );
@@ -555,7 +555,7 @@ ob_end_flush();
 
          jQuery("#response").hide();
          jQuery("#save_guide").fadeIn();
-         jQuery("#save_template").fadeIn();
+         //jQuery("#save_template").fadeIn();
 
          tabs.tabs();
 
@@ -601,7 +601,7 @@ ob_end_flush();
    });
 
    // edit icon: removing or renaming tab on click
-   tabs.delegate( "span.ui-icon-wrench", "click", function(lobjClicked) {
+   tabs.delegate( "span.alter_tab", "click", function(lobjClicked) {
      var List = $(this).parent().children("a");
      var Tab = List[0];
      window.lastClickedTab = $(Tab).attr("href");
@@ -653,7 +653,7 @@ ob_end_flush();
                 <div class="pure-u-2-5 pure-u-md-1-2 pure-u-lg-3-8 pure-u-xl-1-4 guide-commands-area">
                     <!-- Save Button -->
                     <div id="savour"><button class="button pure-button pure-button-primary" id="save_guide"><?php print _("SAVE CHANGES"); ?></button></div>
-                    <div id="savour2"><button class="button pure-button pure-button-primary" id="save_template"><?php print _("SAVE TEMPLATE"); ?></button></div>
+                    <!--<div id="savour2"><button class="button pure-button pure-button-primary" id="save_template"><?php //print _("SAVE TEMPLATE"); ?></button></div>-->
                 </div> <!-- end pure 1-4-->                
               
                 <div class="pure-u-1-5 pure-u-md-1-6 pure-u-lg-1-8 pure-u-xl-1-8 guide-options-area">
@@ -739,7 +739,7 @@ ob_end_flush();
       <div id="response"></div>
 	 
 
-	 <!-- new tab form (suppressed until wrench clicked) -->
+	 <!-- new tab form (suppressed until tab gears clicked) -->
 	 <div id="dialog" title="Tab data">
 	   <form class="pure-form pure-form-aligned">
 	     <fieldset class="ui-helper-reset">
@@ -755,7 +755,7 @@ ob_end_flush();
 	   </form>
 	 </div>
 
-	 <!-- edit tab form (suppressed until wrench clicked) -->
+	 <!-- edit tab form (suppressed until tab gears clicked) -->
 	 <div id="dialog_edit" title="Tab edit">
 	   <form class="pure-form pure-form-aligned">
              <fieldset class="ui-helper-reset">
@@ -794,7 +794,7 @@ ob_end_flush();
             	  $(tabs).tabs('select', 0);
             	  jQuery("#response").hide();
                   jQuery("#save_guide").fadeIn();
-                  jQuery("#save_template").fadeIn();
+                  //jQuery("#save_template").fadeIn();
 		}
               }
 	    });
