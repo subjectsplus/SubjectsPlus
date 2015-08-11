@@ -900,6 +900,11 @@ ob_end_flush();
                   <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section2.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
                 </ul>
 
+            <h3><?php print _('Collapse Pluslets'); ?></h3>
+            <div>
+              <button id="toggle_all_pluslets_btn">Toggle Pluslets</button>
+            </div>
+
             <h3><?php print _("My templates"); ?></h3>
             <div class="fav-templates-content">
                   <ul class="fav-templates-list">

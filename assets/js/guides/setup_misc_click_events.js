@@ -63,5 +63,10 @@ function setupMiscClickEvents()
 
     });
 
+    $("#toggle_all_pluslets_btn").on('click', function() {
+        $('.pluslet_body').toggle();
+    });
+
+
     
 }
