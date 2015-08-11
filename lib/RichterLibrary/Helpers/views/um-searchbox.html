@@ -1,0 +1,96 @@
+<form id="head_search" action="http://library.miami.edu/" method="GET">
+	<div id="search_container">
+		<fieldset style="" id="searchzone">
+			<input type="text" name="s" id="searchy" autocomplete="off">
+			<input type="submit" value="Search" id="topsearch_button2"
+				name="submit" alt="Search"> <input type="hidden"
+				name="searchtype" value="X"> <input id="summonsearch"
+				type="hidden" name="s.q" value=""> <input id="searcharg"
+				type="hidden" name="searcharg" value=""> <input
+				id="searcharg" type="hidden" name="searchscope" value="11">
+			<input type="hidden" name="CISOOP1" value="all"> <input
+				type="hidden" name="CISOFIELD1" value="CISOSEARCHALL"> <input
+				id="cdmsearch" type="hidden" name="CISOBOX1" value=""> <input
+				type="hidden" name="CISOROOT" value="all">
+
+		</fieldset>
+
+		<fieldset id="search_options" style="opacity: 1; display: none;">
+			<ul>
+				<li class="active"><input type="radio" class="search_type"
+					name="search_selection" value="website" checked="checked">website</li>
+				<li><input type="radio" class="search_type"
+					name="search_selection" value="catalog_keyword">catalog</li>
+				<li><input type="radio" class="search_type"
+					name="search_selection" value="article">articles+</li>
+				<li style="border: none;"><input type="radio"
+					class="search_type" name="search_selection" value="digital">digital
+					collections</li>
+			</ul>
+		</fieldset>
+	</div>
+</form>
+<script type="text/javascript">
+	function searchTypeChange() {
+
+		$('#searchy').bind('input', function() {
+			var search_value = $(this).val();
+
+			$('#searcharg').attr("value", $(this).val());
+			$('#summonsearch').attr("value", $(this).val());
+			$('#cdmsearch').attr("value", $(this).val());
+
+		});
+
+		$("#search_options li").click(function() {
+			$("#search_options li").removeClass("active");
+			$(this).children().attr('checked', 'checked');
+			$(this).addClass("active");
+			//searchTypeChangeClick();	 	
+			console.log($(this).children().first());
+			searchTypeChangeClick($(this).children().first());
+		});
+
+		$('.search_type').on('change', function() {
+			searchTypeChangeClick($(this));
+		});
+
+	}
+
+	function searchTypeChangeClick(element) {
+
+		var search = $('#searchy').val();
+		if (element.attr('value') === 'website') {
+			$('#head_search').attr("action", "http://library.miami.edu/");
+
+		}
+
+		if (element.attr('value') === 'catalog_keyword') {
+
+			$('#head_search').attr("action",
+					"http://catalog.library.miami.edu/search/");
+			$('#searcharg').attr("value", search);
+		}
+
+		if (element.attr('value') === 'article') {
+
+			$('#head_search').attr("action",
+					"http://miami.summon.serialssolutions.com/search");
+			$('#summonsearch').attr("value", search);
+
+		}
+
+		if (element.attr('value') === 'digital') {
+
+			$('#head_search').attr("action",
+					"http://merrick.library.miami.edu/cdm4/results.php");
+			$('#cdmsearch').attr("value", search);
+
+		}
+
+	}
+
+	$(document).ready(function() {
+		searchTypeChange();
+	});
+</script>
