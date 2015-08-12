@@ -1,19 +1,19 @@
 <?php
 /**
- *   @file WorldCat.php
+ *   @file ArticlesPlus.php
  *   @brief
  *   @author little9 (Jamie Little)
- *   @date June 2015
+ *   @date Auguest 2015
  */
 namespace SubjectsPlus\Control;
 require_once("Pluslet.php");
 
-class Pluslet_WorldCat extends Pluslet {
+class Pluslet_ArticlesPlus extends Pluslet {
 
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
   
-    $this->_type = "WorldCat";
+    $this->_type = "ArticlesPlus";
   }
 
   protected function onEditOutput()
@@ -26,7 +26,7 @@ class Pluslet_WorldCat extends Pluslet {
   protected function onViewOutput()
   {
 
-  $output = $this->loadHtml(__DIR__ . '/views/WorldCat.html');
+  $output = $this->loadHtml(__DIR__ . '/views/ArticlesPlus.html');
   	
   $this->_body = "<p>$output</p>";
 
@@ -34,12 +34,12 @@ class Pluslet_WorldCat extends Pluslet {
 
   static function getMenuName()
   {
-    return _('WorldCat Search');
+    return _('Articles+ Search');
   }
 
   static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text worldcat-text\">" . _("WorldCat Search") . "</span>";
+        $icon="<span class=\"icon-text articlesplus-text\">" . _("Articles+ Search") . "</span>";
         return $icon;
     }
 
