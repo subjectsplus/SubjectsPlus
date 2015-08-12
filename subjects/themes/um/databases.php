@@ -93,7 +93,22 @@ $alphabet = getLetters("databases", $_GET["letter"], 1, TRUE);
 
 // Get our newest databases
 $connection = $db->getConnection();
-$statement = $connection->prepare("SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5");
+$statement = $connection->prepare("SELECT DISTINCT title, location, access_restrictions
+           FROM title as t
+           INNER JOIN location_title as lt
+           ON t.title_id = lt.title_id
+           INNER JOIN location as l
+           ON lt.location_id = l.location_id
+           INNER JOIN restrictions as r
+           ON l.access_restrictions = r.restrictions_id
+           INNER JOIN rank as rk
+           ON rk.title_id = t.title_id
+           INNER JOIN source as s
+           ON rk.source_id = s.source_id
+WHERE l.ctags LIKE '%New_Databases%'
+           AND eres_display = 'Y'
+ORDER BY t.title
+ASC limit 0,5");
 $statement->execute();
 
 $newlist = "";
