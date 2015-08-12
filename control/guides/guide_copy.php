@@ -55,7 +55,7 @@ foreach ($guide_list_output as $guide) {
 </div>
 
 
-<button class="button pure-button pure-button-primary create-guide">Copy Guide</button>
+<button class="button pure-button pure-button-primary create-guide"> <?php echo _('Copy Guide'); ?></button>
 
 </div>
 </div>
@@ -99,7 +99,3 @@ $('#guides').select2();
 
 });
 </script>
-
-
-
-
