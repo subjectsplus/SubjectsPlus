@@ -1,4 +1,12 @@
 <?php
+
+/**
+ *   @file Catalog.php
+ *   @brief
+ *   @author little9 (Jamie Little)
+ *   @date June 2015
+ */
+
 namespace SubjectsPlus\Control;
 require_once("Pluslet.php");
 

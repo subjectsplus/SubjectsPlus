@@ -1,4 +1,5 @@
 <?php
+
 /**
  *   @file manage.php
  *   @brief This class allows you to load a guide as an object and save it as an object. It could be used to make the Guide more object-oriented. 
@@ -33,6 +34,7 @@ class GuideBase {
 		$this->db = $db;
 	}
 	public function loadGuide() {
+		// This method loads a guide from the database
 		$connection = $this->db->getConnection ();
 		$statement = $connection->prepare ( "SELECT * FROM subject WHERE subject_id = :subject_id" );
 		$statement->bindParam ( ":subject_id", $this->_subject_id );
@@ -76,9 +78,6 @@ class GuideBase {
 			$this->_type = $result ['type'];
 			$this->_extra = $result ['extra'];
 			$this->_active = $result ['active'];
-			// $this->_messages = $result['messages'];
-			// $this->_all_tabs = $result['all_tabs'];
-			// $this->_departments = $result['departments'];
 			$this->_header = $result ['header'];
 		}
 	}
@@ -97,10 +96,13 @@ class GuideBase {
 		$statement->bindParam ( ':extra', $this->_extra );
 		
 		$statement->execute ();
-		
+		$sds = array ();
 		$subject_insert_id = $this->db->last_id ();
-		
-		foreach ( $this->_pluslets as $subject_guide ) {
+
+		$tabs_ids = array ();
+		foreach ( $this->_tabs as $subject_guide ) {
+			// Insert tabs
+			
 			$statement = $connection->prepare ( "INSERT INTO tab (`subject_id`, `label`, `tab_index`, `external_url`, `visibility`) VALUES (:subject_id, :label, :tab_index, :external_url, :visibility )" );
 			$statement->bindParam ( ":subject_id", $subject_insert_id );
 			$statement->bindParam ( ":label", $subject_guide ['label'] );
@@ -108,44 +110,71 @@ class GuideBase {
 			$statement->bindParam ( ":external_url", $subject_guide ['external_url'] );
 			$statement->bindParam ( ":visibility", $subject_guide ['visibility'] );
 			$statement->execute ();
-			// var_dump( $statement->errorInfo());
 			
 			$tab_insert_id = $this->db->last_id ();
-			// echo $tab_insert_id;
+			$tabs_ids [] = array (
+					$subject_guide ['tab_id'] => $tab_insert_id 
+			);
+		}
+		
+		$index = 0;
+		foreach ( $this->_sections as $subject_guide ) {
+			$index ++;
+			$tab_id_key = ( int ) $subject_guide ['tab_id'];
 			
-			$statement = $connection->prepare ( "INSERT INTO section (`tab_id`, `layout`, `section_index`) VALUES (:tab_id, :layout, :section_index)" );
-			// echo $tab_insert_id;
-			$statement->bindParam ( ":tab_id", $tab_insert_id );
-			$statement->bindParam ( ":layout", $subject_guide ['layout'] );
-			$statement->bindParam ( ":section_index", $subject_guide ['section_index'] );
-			$statement->execute ();
-			$section_insert_id = $this->db->last_id ();
-			
-			// var_dump($subject_guide['layout']);
-			
-			$pluslet_statement = $connection->prepare ( "
+			foreach ( $tabs_ids as $tds ) {
+				
+				if (isset ( $tds [$tab_id_key] ) && $tds [$tab_id_key] != NULL) {
+										
+					$statement = $connection->prepare ( "INSERT INTO section (`tab_id`, `layout`, `section_index`) VALUES (:tab_id, :layout, :section_index)" );
+					$statement->bindParam ( ":tab_id", $tds [$tab_id_key] );
+					$statement->bindParam ( ":layout", $subject_guide ['layout'] );
+					$statement->bindParam ( ":section_index", $subject_guide ['section_index'] );
+					$statement->execute ();
+					
+					$section_insert_id = $this->db->last_id ();
+					
+					array_shift ( $this->_sections );
+					
+					$section_id_key = ( int ) $subject_guide ['section_id'];
+					$sds [] = array (
+							$subject_guide ['section_id'] => $section_insert_id 
+					);
+					
+					foreach ( $this->_pluslets as $subject_guide ) {
+						
+						// Insert pluslets
+						$pluslet_statement = $connection->prepare ( "
 			    		INSERT INTO pluslet (`title`, `body`, `type`, `extra`, `hide_titlebar`,`collapse_body`, `titlebar_styling`, `favorite_box`)
 			    		VALUES (:title, :body, :type, :extra, :hide_titlebar, :collapse_body, :titlebar_styling, :favorite_box) " );
-			
-			$pluslet_statement->bindParam ( ':title', $subject_guide ['title'] );
-			$pluslet_statement->bindParam ( ':body', $subject_guide ['body'] );
-			$pluslet_statement->bindParam ( ':type', $subject_guide ['type'] );
-			$pluslet_statement->bindParam ( ':extra', $subject_guide ['extra'] );
-			$pluslet_statement->bindParam ( ':hide_titlebar', $subject_guide ['hide_titlebar'] );
-			$pluslet_statement->bindParam ( ':collapse_body', $subject_guide ['collapse_body'] );
-			$pluslet_statement->bindParam ( ':titlebar_styling', $subject_guide ['titlebar_styling'] );
-			$pluslet_statement->bindParam ( ':favorite_box', $subject_guide ['favorite_box'] );
-			$pluslet_statement->execute ();
-			// var_dump( $pluslet_statement->errorInfo());
-			
-			$pluslet_last_id = $this->db->last_id ();
-			$statement = $connection->prepare ( "INSERT INTO pluslet_section (`section_id`, `pluslet_id`, `pcolumn`, `prow` ) VALUES (:section_id, :pluslet_id, :pcolumn, :prow) " );
-			$statement->bindParam ( ":section_id", $section_insert_id );
-			$statement->bindParam ( ":pluslet_id", $pluslet_last_id );
-			$statement->bindParam ( ":pcolumn", $subject_guide ['pcolumn'] );
-			$statement->bindParam ( ":prow", $subject_guide ['prow'] );
-			$statement->execute ();
-			// var_dump( $statement->errorInfo());
+						
+						$pluslet_statement->bindParam ( ':title', $subject_guide ['title'] );
+						$pluslet_statement->bindParam ( ':body', $subject_guide ['body'] );
+						$pluslet_statement->bindParam ( ':type', $subject_guide ['type'] );
+						$pluslet_statement->bindParam ( ':extra', $subject_guide ['extra'] );
+						$pluslet_statement->bindParam ( ':hide_titlebar', $subject_guide ['hide_titlebar'] );
+						$pluslet_statement->bindParam ( ':collapse_body', $subject_guide ['collapse_body'] );
+						$pluslet_statement->bindParam ( ':titlebar_styling', $subject_guide ['titlebar_styling'] );
+						$pluslet_statement->bindParam ( ':favorite_box', $subject_guide ['favorite_box'] );
+						$pluslet_statement->execute ();
+						
+						$pluslet_last_id = $this->db->last_id ();
+						foreach ( $sds as $section_id ) {
+							
+							if (isset ( $section_id [$section_id_key] ) && $section_id [$section_id_key] != NULL && $subject_guide ['section_id'] == $section_id_key) {
+								
+								// Insert pluslet sections
+								$statement = $connection->prepare ( "INSERT INTO pluslet_section (`section_id`, `pluslet_id`, `pcolumn`, `prow` ) VALUES (:section_id, :pluslet_id, :pcolumn, :prow) " );
+								$statement->bindParam ( ":section_id", $section_id [$section_id_key] );
+								$statement->bindParam ( ":pluslet_id", $pluslet_last_id );
+								$statement->bindParam ( ":pcolumn", $subject_guide ['pcolumn'] );
+								$statement->bindParam ( ":prow", $subject_guide ['prow'] );
+								$statement->execute ();
+							}
+						}
+					}
+				}
+			}
 		}
 		
 		return $subject_insert_id;
