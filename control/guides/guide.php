@@ -1165,9 +1165,10 @@ fixFlashFOUC();
 //Expand/Collapse Trigger CSS for all Pluslets on a Tab
 
   $( "#expand_tab" ).click(function() { 
-    $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up');      
+    $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up');
+    $('.pluslet_body').toggle();
+    $('.pluslet_body').toggleClass('pluslet_body_closed');
   });
-
 
 
 });
