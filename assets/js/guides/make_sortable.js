@@ -50,7 +50,12 @@ function makeSortable(lstrSelector, lstrType) {
 				$(ui.item).width('auto');
 			},
 			stop : function(event, ui) {
-				$(ui.item).children('.pluslet_body').show();
+
+				if ($('div').hasClass('pluslet_body_closed')) {
+					$(ui.item).children('.pluslet_body').hide();
+				} else {
+					$(ui.item).children('.pluslet_body').show();
+				}
 				$(ui.item).children().children('.titlebar_text').show();
 				$(ui.item).children().children('.titlebar_options').show();
 
