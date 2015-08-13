@@ -245,6 +245,18 @@ class Guide
         $this->_debug .= "<p>Disciplines query: $q3";
     }
 
+    public function getRelatedGuides()
+    {
+        $db  = new Querier();
+        $children = $db->query ( 'SELECT * FROM subject
+                          INNER JOIN subject_subject
+                          ON subject.subject_id = subject_subject.subject_child
+                          WHERE subject_parent = ' . $this->_subject_id );
+
+        return $children;
+    }
+
+
     public function addExtra($key, $value)
     {
         if ($key != '') {
