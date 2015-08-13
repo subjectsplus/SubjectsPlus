@@ -151,6 +151,17 @@ if (isset($this_id)) {
 ///////////////////////////
 global $pluslets_activated;
 
+//get related guides
+$related_guides = $lobjGuide->getRelatedGuides();
+
+$related_guides = array_filter($related_guides);
+// if none exist then do not display related guide pluslet icon
+if(empty($related_guides)) {
+  if(($key = array_search('Related', $pluslets_activated)) !== false) {
+    unset($pluslets_activated[$key]);
+  }
+
+}
 
 $all_boxes = "<p>" . _("Drag box selection, then drop it to the right") . "</p>
 
