@@ -56,17 +56,8 @@ function setupMiscClickEvents()
         var origin_id = $(this).attr('data-pluslet-id');
         var origin_title = $(this).html();
 
-        //console.log( $(this).attr('data-pluslet-id'));
-        //console.log(origin_title);
-
         plantClone('','Clone',origin_id, origin_title);
 
     });
 
-    $("#toggle_all_pluslets_btn").on('click', function() {
-        $('.pluslet_body').toggle();
-    });
-
-
-    
 }
