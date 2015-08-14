@@ -12,6 +12,7 @@
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um.css">
 <!-- <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700|Roboto:400,700|Lato:400,700|Oswald|Raleway:400,700|Ubuntu:400,700' rel='stylesheet' type='text/css'> -->
 <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um-print.css">
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/font-awesome.min.css">
 
 <?php 
 // Some constants, previously in the config.php
@@ -142,6 +143,10 @@ div.mega_child.mega-md {width: 400px !important;}
     text-align: right; 
     margin-top: 10px;  
 }
+
+#social_media_accounts ul li a { color: rgba(51,51,51,0.7) !important;}
+#social_media_accounts ul li a:hover { color: #f1722e !important;}
+
 
 @media screen and (min-width: 48em) {
     #menu_button {display:none !important;}

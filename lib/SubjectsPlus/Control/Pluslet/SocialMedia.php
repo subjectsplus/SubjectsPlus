@@ -23,7 +23,7 @@ class Pluslet_SocialMedia extends Pluslet {
 
     static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-user\" title=\"" . _("Social Media") . "\" ></i><span class=\"icon-text\">" . _("Social Media") . "</span>";
+        $icon="<i class=\"fa fa-share-alt-square\" title=\"" . _("Social Media") . "\" ></i><span class=\"icon-text\">" . _("Social Media") . "</span>";
         return $icon;
     }
 
@@ -63,17 +63,17 @@ class Pluslet_SocialMedia extends Pluslet {
 
         if( $this->_extra['facebook'] != "" )
         {
-            $this->_body .= '<li><a href="http://facebook.com/'.$this->_extra['facebook'].'"><i class="fa fa-facebook"></i></a></li>';
+            $this->_body .= '<li><a href="http://facebook.com/'.$this->_extra['facebook'].'"><i class="fa fa-facebook-square"></i></a></li>';
         }
 
         if( $this->_extra['twitter'] != "" )
         {
-            $this->_body .= '<li><a href="http://twitter.com/'.$this->_extra['twitter'].'"><i class="fa fa-twitter"></i></a></li>';
+            $this->_body .= '<li><a href="http://twitter.com/'.$this->_extra['twitter'].'"><i class="fa fa-twitter-square"></i></a></li>';
         }
 
         if( $this->_extra['pinterest'] != "" )
         {
-            $this->_body .= '<li><a href="http://pinterest.com/'.$this->_extra['pinterest'].'"><i class="fa fa-pinterest-p"></i></a></li>';
+            $this->_body .= '<li><a href="http://pinterest.com/'.$this->_extra['pinterest'].'"><i class="fa fa-pinterest-square"></i></a></li>';
         }
 
 

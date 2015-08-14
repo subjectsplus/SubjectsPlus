@@ -919,6 +919,9 @@ li.fav-box-item:hover::before {color: #C03957;}
   margin: 1px;
 }
 
+
+/* Dropspot Areas */
+
 .drop_area {
   border: 1px dashed #858585;
   width: 100%;
@@ -933,6 +936,20 @@ li.fav-box-item:hover::before {color: #C03957;}
   margin-top:10px;
   display: inline-block;
 }
+
+
+
+/* Pluslet Styles */
+/* -------------- */
+
+
+/* Social Media Pluslet */
+#social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
+
+#social_media_accounts ul li { display: inline; }
+
+#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em; font-size: 26px;}
+
 
 
 

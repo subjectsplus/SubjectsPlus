@@ -1225,6 +1225,18 @@ div.video_thumb img {
 #wc_searchbox iframe {width:100% !important;}
 
 
+/* Social Media Pluslet - Front-end*/
+#social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
+
+#social_media_accounts ul li { display: inline !important; }
+
+#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em !important; font-size: 26px !important;}
+
+
+/* Hide Expand/Collapse Pluslets - Front-end*/
+#expand_tab {display: none !important;}
+
+
 /* //////////////////
 //  Media Queries 
 ////////////////// */
