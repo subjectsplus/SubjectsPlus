@@ -1165,6 +1165,19 @@ width:55px;
 
 
 
+/* Social Media Pluslet - Front-end*/
+#social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
+
+#social_media_accounts ul li { display: inline; }
+
+#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em; font-size: 26px; color: rgba(51,51,51,0.7);}
+#social_media_accounts ul li a:hover { color: rgba(51,51,51,1);}
+
+
+/* Hide Expand/Collapse Pluslets - Front-end*/
+#expand_tab {display: none !important;}
+
+
 /*  Media Queries */
 
 /* ≥ 568px  .pure-u-sm-* */
