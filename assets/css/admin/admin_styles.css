@@ -33,6 +33,8 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-style: bold;
 }
 
+
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
   border-collapse: separate;
@@ -897,6 +899,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 2px;
+  min-height: 400px;
 }
 
 #container-1 {
@@ -935,6 +938,23 @@ li.fav-box-item:hover::before {color: #C03957;}
   color: #858585;
   margin-top:10px;
   display: inline-block;
+}
+
+
+#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {
+  float: left; 
+  width: 100%; }
+
+
+/* When you hover over one of the two drop spots, make em show */
+.drop_hover {background-color: rgba(192,57,87, 0.8); border: 1px dashed #FFF; color:#FFF;}
+.drop_hover .dropspot-text {color:#FFF;}
+
+
+#portal-column-0, #portal-column-1, #portal-column-2, 
+.portal-column-0, .portal-column-1, .portal-column-2   {
+  width: 100%;
+  background-color: #FF0;
 }
 
 
@@ -1888,16 +1908,6 @@ li.dropspotty {
 }
 
 
-#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {
-  float: left; 
-  width: 100%; }
-
-/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
-
-#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: .7em; margin-left: 1em; vertical-align: text-bottom;}
-
-/* When you hover over one of the two drop spots, make em show */
-.drop_hover {background-color: #C03957; border: 1px solid #ccc;}
 
 
 
@@ -2296,12 +2306,6 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 */
 
 
-/* Override for V 3, multiple layouts */
-
-#portal-column-0, #portal-column-1, #portal-column-2, .portal-column-0, .portal-column-1, .portal-column-2   {
-  width: 100%;
-  background-color: transparent;
-}
 
 /* Layout dropdown in header */
 

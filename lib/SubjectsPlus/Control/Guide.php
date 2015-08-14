@@ -1211,11 +1211,12 @@ class Guide
         global $AssetPath;
         global $IconPath;
         $col = "<div id=\"container-" . $i . "\" style=\"position: relative; float: left; width: 30%;\">
-        <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
-        <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
-        </div>
-        <div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
-            $content . "<div><br /></div>"
+            <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
+            <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
+            </div>
+        
+            <div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
+            $content . "<div></div>"
             . '</div></div>';
 
         return $col;

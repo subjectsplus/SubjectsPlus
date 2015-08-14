@@ -39,7 +39,7 @@ class Pluslet_ArticlesPlus extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-file-text-o\" title=\"" . _("Articles+ Search") . "\" ></i><span class=\"icon-text articles-plus-text\">" . _("Articles+ Search") . "</span>";
+        $icon="<i class=\"fa fa-file-text-o\" title=\"" . _("Articles+ Search") . "\" ></i><span class=\"icon-text articlesplus-text\">" . _("Articles+ Search") . "</span>";
         return $icon;
     }
 
