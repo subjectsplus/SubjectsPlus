@@ -921,30 +921,18 @@ ob_end_flush();
                   <select class="customdb-list">
                       <option>Please select a database</option>
                   </select>
+                  
+                  <div class="databases-results-display">
+                            <input class="databases-search" type="text" placeholder="<?php print _("Enter database title..."); ?>"></input>
+                            <ul class="databases-searchresults"></ul>
+                        </div>
+                        
                   <div class="db-list-content">
+                   
+                 
                       <h4>Databases Selected:</h4>
                       <ul class="db-list-results">
-                          <li class="db-list-item">American Bibliography of Slavic and East European Studies</li>
-                          <li class="db-list-item">American Film Institute</li>
-                          <li class="db-list-item">Frances G. Spencer Collection of American Sheet Music</li>
-                          <li class="db-list-item">Cambridge Companions to Music</li>
-                          <li class="db-list-item">Catalog of Art Museum Images Online</li>
-                          <li class="db-list-item">Chopin, Frederic: Early Editions</li>
-                          <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
-                          <li class="db-list-item">American Bibliography of Slavic and East European Studies</li>
-                          <li class="db-list-item">American Film Institute</li>
-                          <li class="db-list-item">Frances G. Spencer Collection of American Sheet Music</li>
-                          <li class="db-list-item">Cambridge Companions to Music</li>
-                          <li class="db-list-item">Catalog of Art Museum Images Online</li>
-                          <li class="db-list-item">Chopin, Frederic: Early Editions</li>
-                          <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
-                          <li class="db-list-item">American Bibliography of Slavic and East European Studies</li>
-                          <li class="db-list-item">American Film Institute</li>
-                          <li class="db-list-item">Frances G. Spencer Collection of American Sheet Music</li>
-                          <li class="db-list-item">Cambridge Companions to Music</li>
-                          <li class="db-list-item">Catalog of Art Museum Images Online</li>
-                          <li class="db-list-item">Chopin, Frederic: Early Editions</li>
-                          <li class="db-list-item">Codices Electronici Sangallenses Virtual Library</li>
+                         
                       </ul>  
                   </div>
                   <button class="pure-button pure-button-primary dblist-button">Create List Box</button>
