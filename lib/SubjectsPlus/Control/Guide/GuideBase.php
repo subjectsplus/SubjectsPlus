@@ -70,11 +70,11 @@ class GuideBase {
 		$this->_pluslets = $pluslets_statement->fetchAll ();
 		
 		foreach ( $results as $result ) {
-			$this->_subject = $result ['subject'];
-			$this->_shortform = $result ['shortform'];
+			$this->_subject = $result ['subject'] . " – " .date('Y-m-d H:i:s');
+			$this->_shortform = $result ['shortform'] . date('Y-m-dH:i:s');
 			$this->_description = $result ['description'];
 			$this->_keyswords = $result ['keywords'];
-			$this->_redirect_url = $result ['active'];
+			//$this->_redirect_url = $result ['active'];
 			$this->_type = $result ['type'];
 			$this->_extra = $result ['extra'];
 			$this->_active = $result ['active'];
@@ -83,12 +83,12 @@ class GuideBase {
 	}
 	public function saveGuide() {
 		$connection = $this->db->getConnection ();
-		$statement = $connection->prepare ( "INSERT INTO subject (`subject`, `active`, `shortform`, `redirect_url`,`header`, `description`, `keywords`, `type`, `extra`  ) VALUES (:subject, :active, :shortform, :redirect_url, :header, :description, :keywords, :type, :extra)" );
+		$statement = $connection->prepare ( "INSERT INTO subject (`subject`, `active`, `shortform`,`header`, `description`, `keywords`, `type`, `extra`  ) VALUES (:subject, :active, :shortform, :header, :description, :keywords, :type, :extra)" );
 		
 		$statement->bindParam ( ':subject', $this->_subject );
 		$statement->bindParam ( ':active', $this->_active );
 		$statement->bindParam ( ':shortform', $this->_shortform );
-		$statement->bindParam ( ':redirect_url', $this->_redirect_url );
+		//$statement->bindParam ( ':redirect_url', $this->_redirect_url );
 		$statement->bindParam ( ':header', $this->_header );
 		$statement->bindParam ( ':description', $this->_description );
 		$statement->bindParam ( ':keywords', $this->_keywords );

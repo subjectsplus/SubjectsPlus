@@ -1,11 +1,11 @@
 <?php
+namespace SubjectsPlus\Control\Databases;
 /**
  *   @file AzList.php
  *   @brief 
  *   @author little9 (Jamie Little)
  *   @date Auguest 2015
  */
-namespace SubjectsPlus\Control\Databases;
 
 use SubjectsPlus\Control\Querier;
 use PDO;

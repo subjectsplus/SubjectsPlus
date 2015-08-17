@@ -1,4 +1,3 @@
-/*
 Document   : admin_styles.css
 Created on : updated Feb 2014
 Author     : agdarby
@@ -717,12 +716,18 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
+.db-list-item-draggable {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; color: #555;}
+
+
+
+/*
 .db-list-item:before {
   font-family: FontAwesome;
   content:"\f00c";
   color: #90C695; font-size:16px;
   padding: 0 8px 0 0;
 }
+*/
 
 .dblist-button {margin-top:20px; font-size: 0.8em;}
 
