@@ -98,8 +98,10 @@ class Pluslet {
 
 				if(strtolower($this->_type) != 'special')
 				{
-					$this->_icons = "
-		                <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
+					$this->_icons = "		                
+                        <a id=\"move-$this->_pluslet_id\"><img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" alt=\"" . _("move") . "\" /></img></a>
+                        <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
+
 		                <!--<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img>
 		                <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>-->";
 				}
@@ -160,9 +162,9 @@ class Pluslet {
             <div class=\"titlebar\">";
 
         	//only if on admin side, display sort icon
-            if( $this->_visible_id != '' ) {
-                $this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
-            }
+            //if( $this->_visible_id != '' ) {
+            //    $this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
+            //}
 
 
 
@@ -183,7 +185,7 @@ class Pluslet {
 
             //only if on admin side, display sort icon
             if( $this->_visible_id != '' ) {
-                $this->_pluslet .= "\n<div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>";
+                $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
             }
 
         	

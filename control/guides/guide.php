@@ -1141,14 +1141,23 @@ function checkDataLayout() {
   else if (dataLayoutConfig === "6-6-0") {
     $(".sp_section #container-2").hide();
     $( "#col-double" ).addClass("active-layout-icon");
+
+    $(".sp_section #container-0").css("width", "46%");
+    $(".sp_section #container-1").css("width", "46%");
   }
   else if (dataLayoutConfig === "4-8-0") {
     $(".sp_section #container-2").hide();
     $( "#col-48" ).addClass("active-layout-icon");
+
+    $(".sp_section #container-0").css("width", "31%");
+    $(".sp_section #container-1").css("width", "61%");
   }
   else if (dataLayoutConfig === "8-4-0") {
     $(".sp_section #container-2").hide();
     $( "#col-84" ).addClass("active-layout-icon");
+
+    $(".sp_section #container-0").css("width", "61%");
+    $(".sp_section #container-1").css("width", "31%");
   }
   else if (dataLayoutConfig === "4-4-4") {
     $( "#col-triple" ).addClass("active-layout-icon");
