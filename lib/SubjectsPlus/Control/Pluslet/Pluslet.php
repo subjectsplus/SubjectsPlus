@@ -157,17 +157,20 @@ class Pluslet {
 
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
 			<a name=\"box-" . $this->_pluslet_id . "\"></a>
-            <div class=\"titlebar pure-g\">";
+            <div class=\"titlebar\">";
 
-        	
+        	//only if on admin side, display sort icon
+	        if( $this->_visible_id != '' ) {
+	        	$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
+			}
 
 
         	//if public view, add selected style
         	if( $this->_visible_id != '' ) {
-        		$this->_pluslet .= "<div class=\"titlebar_text pure-u-2-3\">$this->_title $this->_visible_id</div>";
+        		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>";
         	}else
         	{
-        		$this->_pluslet .= "<div class=\"titlebar_text pure-u-1 {$this->_titlebar_styling}\">$this->_title $this->_visible_id</div>";
+        		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title $this->_visible_id</div>";
 
                 // since we're here, let's see if the body should be collapsed
                 if ($this->_collapse_body == 1) {
@@ -177,12 +180,7 @@ class Pluslet {
 
         	}
 
-            //only if on admin side, display sort icon
-            if( $this->_visible_id != '' ) {
-                $this->_pluslet .= "\n<div class=\"titlebar_options pure-u-1-3\">$this->_icons <img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" /></div>";
-            }
-
-        	
+        	$this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
 
            if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
@@ -214,9 +212,9 @@ class Pluslet {
 
         echo "
         <div class=\"pluslet $this->_pluslet_bonus_classes\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
-            <div class=\"titlebar pure-g\">
-                <div class=\"titlebar_text pure-u-2-3\">$this->_title $this->_visible_id</div>
-                <div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>
+            <div class=\"titlebar\">
+                <div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
+                <div class=\"titlebar_options\">$this->_icons</div>
             ";
 
         echo self::boxSettings(); // add in our hidden div full of box config options
@@ -243,7 +241,7 @@ class Pluslet {
             $tb_styles .= ">$key</option>";
         }
 
-            $box_settings = "<div class=\"box_settings pure-u-1\">
+            $box_settings = "<div class=\"box_settings\">
             <form class=\"pure-form pure-form-aligned\">
             <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
                 <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
