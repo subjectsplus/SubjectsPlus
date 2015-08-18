@@ -757,7 +757,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 #tabs.ui-tabs .ui-tabs-nav li {
   padding: 3px 18px 0 18px;
   line-height: 1.05em;
-  margin: 0 0 1px 0;
+  margin: 0;
   top: 0;
   border-radius: 0;
   background-color: #f2f2f2; /*d5d5d5*/
@@ -954,121 +954,13 @@ li.fav-box-item:hover::before {color: #C03957;}
 #portal-column-0, #portal-column-1, #portal-column-2, 
 .portal-column-0, .portal-column-1, .portal-column-2   {
   width: 100%;
-  background-color: transparent;
+  background-color: #FF0;
 }
-
-.sort_column, .portal_column, .ui-sortable { background-color: transparent;} /*old --> #F8F5F5*/
-
 
 
 
 /* Pluslet Styles */
 /* -------------- */
-
-.basic-pluslet {
-  padding: 10px;
-  margin: 1em 0;
-  background-color: #fff;
-  border: 2px solid #f2f2f2;
-  clear:both;  
-  border-radius: 2px;
-  overflow: auto;
-  word-wrap: break-word;
-}
-
-
-
-
-
-
-
-/* Pluslet - All Admin Panels */
-/* -------------- */
-
-#controlpage div.pluslet {
-  padding: 10px;
-  margin: 1em 0;
-  background-color: #fff;
-  border: 2px solid #f2f2f2;
-  clear:both;  
-  border-radius: 2px;
-  overflow: auto;
-  word-wrap: break-word;
-}
-
-div.pluslet a {color: #333;}
-
-#controlpage div.pluslet > .titlebar {
-  padding: 0;
-  color: #333;
-  font-size: 1.1em;
-  font-weight:400;
-  border-bottom: 1px solid #d5d5d5;
-  background-color: transparent;
-}
-
-#controlpage .titlebar_text { margin-bottom: 6px; }
-
-#controlpage .titlebar_options {text-align: right; }
-
-#controlpage .titlebar_options img {
-  padding: .2em;
-  background-color: #E488B6;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  height: 15px;
-  width: 15px;
-  cursor: pointer;
-}
-
-#controlpage .titlebar_options i {
-  padding: .2em;
-  background-color: #E488B6;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  height: 15px;
-  width: 15px;
-  cursor: pointer;
-  position: relative;
-  top: -3px;
-  text-align: center;
-}
-
-
-
-.pluslet_body {
-padding: .5em;
-margin: .5em;
-overflow: auto;
-}
-
-.pluslet_body p {
-margin: .5em 0 ;
-}
-
-.pluslet_body object {
-  margin: 3px 5px 3px 3px;
-}
-
-
-#controlpage .pluslet_body {
-  clear: both;
-  padding: .5em;
-
-}
-
-
-
-/*** toggle pluslet body - CBR**********/
-.pluslet_body_open {
-  display: block;
-}
-
-.pluslet_body_closed {
-  display: none;
-}
 
 
 /* Social Media Pluslet */
@@ -1751,7 +1643,18 @@ ul.sortable_list li:hover  {
   box-shadow: 5px 5px 5px #ccc;
 }
 
-/* Guides -- Admin View */
+/* Guides -- Admin View
+
+.pluslet_body {
+padding: .5em;
+margin: .5em;
+overflow: auto;
+}
+
+.pluslet_body p {
+margin: .5em 0 ;
+}
+*/
 
 
 .leftcolheader {
@@ -2143,7 +2046,9 @@ margin: .5em 0 0 2.5em;
 
 }
 
-
+.pluslet_body object {
+  margin: 3px 5px 3px 3px;
+}
 
 .unsortable {
   cursor:default;
@@ -2153,7 +2058,15 @@ margin: .5em 0 0 2.5em;
 
 .togglebase {margin-top: 0;}
 
-
+.sort_column {
+  background-color: #F8F5F5;
+}
+.portal_column {
+  background-color: #F8F5F5;
+}
+.ui-sortable {
+  background-color: #F8F5F5;
+}
 
 .staff_photo {
   position: relative;
@@ -2228,7 +2141,7 @@ img.tooltip  {
 }
 
 .ui-widget-content a {
-  color: #333;
+  color:whitesmoke;
 }
 
 
@@ -2287,7 +2200,72 @@ text-align: center;
 }
 
 
+#controlpage div.pluslet {
+  padding: 0em 0em;
+  margin: 1em 1em 1em 0;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border: none;
+  clear:both;
+  background-color: #fff;
+  border: 2px solid #efefef;
+  border-radius: 5px;
+  overflow: auto;
+  word-wrap: break-word;
+}
 
+#controlpage div.pluslet > .titlebar {
+  padding: .2em .5em;
+  color: #333;
+  font-size: 1.1em;
+  font-weight:700;
+  min-height: 2em;
+  border-bottom: 1px solid #ccc;
+  background-color: #D5D5D5;
+}
+
+#controlpage .titlebar_text {
+  float: left;
+  margin-top: .3em;
+
+}
+
+#controlpage .titlebar_options {
+
+  float: right;
+  padding: .2em 0em .1em .5em;
+}
+
+#controlpage .titlebar_options img {
+  padding: .2em;
+  background-color: #E488B6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+
+#controlpage .titlebar_options i {
+  padding: .2em;
+  background-color: #E488B6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+  position: relative;
+  top: -3px;
+  text-align: center;
+}
+
+#controlpage .pluslet_body {
+  clear: both;
+  padding: .5em;
+
+}
 
 div.breather > h2 {
   background-color: #858585;
@@ -2430,7 +2408,9 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 
 
-
+#tabs div.pluslet > .titlebar {
+  font-weight: 400;
+}
 
 #save_layout {
   display:none;
@@ -2590,4 +2570,18 @@ li.hidden_tab.ui-state-default
 
 
 }
+
+
+
+/***********************************/
+/*** toggle pluslet body **********/
+.pluslet_body_open {
+  display: block;
+}
+
+.pluslet_body_closed {
+  display: none;
+}
+
+
 
