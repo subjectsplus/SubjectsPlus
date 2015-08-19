@@ -43,8 +43,6 @@ ob_start();
 include("../includes/header.php");
 
 
-
-
 $postvar_subject_id = scrubData($_GET['subject_id']);
 
 $this_id = $_GET["subject_id"];
@@ -93,36 +91,9 @@ if (isset($this_id)) {
   }
 
 
-
   $subject_name = $r[0][0];
   $shortform = $r[0][1];
 
-  $jobj = json_decode($r[0]["extra"]);
-
-  // In this section, we get the widths of the three columns, which add up to 12
-  // We then do a little bit of math to get them into columns that add up to a bit under 100
-  // In order to convert to css %.  If this page were bootstrapped, this wouldn't be necessary.
-  if (isset($lobj) ) {
-  $col_widths = explode("-", $jobj->{'maincol'});
-  }
-
-  if (isset($col_widths[0]) && $col_widths[0] > 0) {
-    $left_width = $col_widths[0] * 8;
-  } else {
-    $left_width = 0;
-  }
-
-  if (isset($col_widths[1])) {
-    $main_width = $col_widths[1] * 8;
-  } else {
-    $main_width = 0;
-  }
-
-  if (isset($col_widths[2]) && $col_widths[2] > 0) {
-    $side_width = ($col_widths[2] * 8) - 3; // we make this a squidgen narrower so it doesn't wrap nastily
-  } else {
-    $side_width = 0;
-  }
 
   // Is there a selected tab?
   if (isset($_GET["t"]) && $_GET["t"] != "") {
@@ -231,11 +202,6 @@ ob_end_flush();
  var user_name = "<?php print $_SESSION["fname"] . " " . $_SESSION["lname"]; ?>";
  var subject_id = "<?php print $postvar_subject_id; ?>";
  var cloned_guide = "<?php print $clone; ?>";
- var l_c = "<?php print $left_width; ?>";
- var new_left_width = "<?php print $left_width; ?>%";
- var new_main_width = "<?php print $main_width; ?>%";
- var r_c = "<?php print $side_width; ?>";
- var new_sidebar_width = "<?php print $side_width; ?>%";
 
  // This will be changed by using the Find button, and selecting a clone to insert
  window.addItem = 0;
@@ -254,9 +220,12 @@ ob_end_flush();
        var sec_id = $(this).attr('id').split('section_')[1];
        var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
 
-       var lw = parseInt(lobjLayout[0]) * 8;
-       var mw = parseInt(lobjLayout[1]) * 8;
-       var sw = parseInt(lobjLayout[2]) * 8 - 3;
+       var lw = parseInt(lobjLayout[0]) * 7;
+       var mw = parseInt(lobjLayout[1]) * 7;
+       var sw = parseInt(lobjLayout[2]) * 7 - 3;
+
+       console.log(lw, mw, sw);
+       
        try {
 	 reLayout(sec_id, lw, mw, sw);
        } catch (e) {
@@ -1071,7 +1040,7 @@ function selectedPanelDisplay(){
 
  //Change layout click events
 $( "#col-single" ).click(function() {      
-      changeLayout(0, 12);
+      changeLayout(0, 14);
       selectedLayout();
       $(this).addClass("active-layout-icon");
   });
