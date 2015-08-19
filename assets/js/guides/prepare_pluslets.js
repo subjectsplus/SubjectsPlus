@@ -16,6 +16,9 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 	var isclone;
 
 	//based on type set variables
+	
+	console.log(lstrType.toLowerCase());
+	
 	switch (lstrType.toLowerCase()) {
 	case "modified": {
 		//used to get contents of CKeditor box
@@ -33,6 +36,7 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 
 
 
+        console.log(lintID);
 		console.log(lstrTitle);
 		console.log("Title modified!");
 		if (lstrTitle === undefined) {
@@ -198,8 +202,10 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 		// If it's a clone, add a new entry to DB
 		/////////////////////
 
+		console.log(lintID);
 		var clone = $("#pluslet-" + lintID).attr("class");
 
+		console.log(clone);
 		if (clone.indexOf("clone") !== -1) {
 			ourflag = 'insert';
 			isclone = 1;
@@ -226,8 +232,7 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 	// asynchronously so that setTimeout to save guide is no longer needed.
 	////////////////////////
 
-	$
-			.ajax({
+	$.ajax({
 				url : "helpers/guide_data.php",
 				data : {
 					update_id : lintUID,
