@@ -275,6 +275,8 @@ class Pluslet {
 
         if ($this->_favorite_box == 1) {$box_settings .= " checked";}
 
+
+        
         $box_settings .= "> " . _("Favorite Box") . "
             </label>
             </form>
