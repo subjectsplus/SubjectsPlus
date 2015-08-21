@@ -164,6 +164,19 @@ class Autocomplete {
         		as 'content_type', CONCAT(fname, ' ', lname, ' (', email, ')') as fullname 
         		FROM staff WHERE (fname LIKE :search_term) OR (lname LIKE :search_term)");
         break;
+      case "pluslet":
+      	$statement = $connection->prepare("SELECT p.pluslet_id, p.title,p.title AS 'label', su.subject_id AS 'id', su.shortform as 'short_form', 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p
+                    INNER JOIN pluslet_section AS ps
+                    ON ps.pluslet_id = p.pluslet_id
+                    INNER JOIN section AS s
+                    ON ps.section_id = s.section_id
+                    INNER JOIN tab AS t
+                    ON s.tab_id = t.tab_id
+                    INNER JOIN subject AS su
+                    ON su.subject_id = t.subject_id
+                    WHERE p.title LIKE :search_term");
+      break;
+                    		
 
     }
 
@@ -190,7 +203,13 @@ class Autocomplete {
 
       if(isset($myrow['content_type'])) {
 
-        $arr[$i]['id'] = $myrow['id'];
+      	
+      	if (isset($myrow['id'])) {
+      		$arr[$i]['id'] = $myrow['id'];
+      		
+      	}
+      	
+      	
 
         if (isset( $myrow['short_form'])) {
           $arr[$i]['shortform'] =  $myrow['short_form'];

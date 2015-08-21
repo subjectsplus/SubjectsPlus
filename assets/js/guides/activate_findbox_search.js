@@ -6,7 +6,7 @@ $('.findbox-search').keypress(function(data) {
 	$('.findbox-searchresults').empty();
 	var search_term = $('.findbox-search').val(); 
    
- $.get('../includes/autocomplete_data.php?collection=home&term=' +  search_term, function(data) {
+ $.get('../includes/autocomplete_data.php?collection=pluslet&term=' +  search_term, function(data) {
 
 	 if(data.length != 0) {
 		for(var i = 0; i < data.length; i++) {
