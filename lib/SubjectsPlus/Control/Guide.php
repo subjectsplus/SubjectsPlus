@@ -936,6 +936,7 @@ class Guide
     			break;
     	}
 
+    	
         $rtab = $db->query($qtab);
 
         $all_tabs = array();
