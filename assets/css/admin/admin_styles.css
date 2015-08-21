@@ -1,4 +1,4 @@
-Document   : admin_styles.css
+/*Document   : admin_styles.css
 Created on : updated Feb 2014
 Author     : agdarby
 Description: base stylesheet for backend of subjectsplus, i.e., /control/
@@ -762,7 +762,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 #tabs.ui-tabs .ui-tabs-nav li {
   padding: 3px 18px 0 18px;
   line-height: 1.05em;
-  margin: 0;
+  margin: 0 0 1px;
   top: 0;
   border-radius: 0;
   background-color: #f2f2f2; /*d5d5d5*/
@@ -978,11 +978,11 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-0 .pluslet .titlebar, 
 .portal-column-1 .pluslet .titlebar, 
 .portal-column-2 .pluslet .titlebar {
-  padding: 10px 0;
+  padding: 0;
   color: #333;
   font-size: 1.1em;
   font-weight:400;
-  min-height: 40px;
+  height: 64px;
   border-bottom: 1px solid #d5d5d5;
   background-color: transparent;
   width:100%;
@@ -992,19 +992,22 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-1 .pluslet .titlebar_text, 
 .portal-column-2 .pluslet .titlebar_text {
   margin: 0;
-  width: 65%;
+  width: 70%;
   background-color: transparent;
-  padding: 0 0 0 0.5em;
+  padding: 0;
+  height:60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .portal-column-0 .pluslet .titlebar_options, 
 .portal-column-1 .pluslet .titlebar_options, 
 .portal-column-2 .pluslet .titlebar_options {
-  float: left;
   padding: 0;
   text-align: right;
-  width:30%;
-  border-left: 1px dashed #CCC;
+  width:25%;
+  float:right;
+  height: 60px;
 }
 
 .pluslet_sort { cursor: move !important; }
@@ -1016,15 +1019,17 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-1 .pluslet .titlebar_options i,
 .portal-column-2 .pluslet .titlebar_options i {
   padding: 6px;
-  background-color: #E488B6;
+  background-color: transparent;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
   height: 20px;
   width: 20px;
   cursor: pointer;
-  float:left;
   margin: 0;
+  float:right;
+  clear: both;
+  color: #c03957;
 }
 
 
@@ -1098,6 +1103,15 @@ li.fav-box-item:hover::before {color: #C03957;}
   margin: 3px 5px 3px 3px;
 }
 
+
+
+/* Pluslet Show/Hide Settings (before guide is saved) to avoid conflicts */
+/* -------------- */
+
+div[name^="new-"] .titlebar_options #settings- {display:none;}
+
+.titlebar_options a[id^="settings-"],
+.titlebar_options a[id^="delete-"] {display:none;}
 
 
 
@@ -2589,6 +2603,8 @@ li.hidden_tab.ui-state-default
   padding: 0.5em 0.17em;
 }
 
+
+
 }
 
 
@@ -2604,6 +2620,14 @@ li.hidden_tab.ui-state-default
 #guide_nav li a {
   padding: 0.5em 0.5em;
 }
+
+.portal-column-0 .pluslet .titlebar_text, 
+.portal-column-1 .pluslet .titlebar_text, 
+.portal-column-2 .pluslet .titlebar_text {  
+  overflow: visible;   
+}
+
+
 
 
 }
