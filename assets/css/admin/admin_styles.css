@@ -32,6 +32,8 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-style: bold;
 }
 
+
+
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
   border-collapse: separate;
@@ -859,17 +861,6 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 
-.pluslet_sort {
-  cursor: move;
-  float: left;
-  margin-right: .5em;
-  margin-top: 2px;
-  height: 20px;
-  padding: 0.2em;
-  width: 20px;
-}
-
-
 .section_sort {
   cursor: move;
   float: left;
@@ -902,14 +893,15 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: 5px;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 2px;
+  min-height: 400px;
 }
 
 #container-1 {
-  width: 60%;
+  /*width: 60%;*/
 }
 
 #container-2 {
-  width: 35%;
+  /*width: 35%; */
 }
 
 #container-0 h2 {
@@ -943,9 +935,101 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 
+#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {
+  float: left; 
+  width: 100%; }
+
+
+/* When you hover over one of the two drop spots, make em show */
+.drop_hover {background-color: rgba(192,57,87, 0.8); border: 1px dashed #FFF; color:#FFF;}
+.drop_hover .dropspot-text {color:#FFF;}
+
+
+#portal-column-0, #portal-column-1, #portal-column-2, 
+.portal-column-0, .portal-column-1, .portal-column-2   {
+  width: 100%;
+  background-color: transparent;
+}
+
+.sort_column, .portal_column, .ui-sortable{background-color: transparent;} /*original --> #F8F5F5 */
+
+
 
 /* Pluslet Styles */
 /* -------------- */
+
+.portal-column-0 .pluslet, 
+.portal-column-1 .pluslet, 
+.portal-column-2 .pluslet {
+  padding: 0;
+  margin: 1em 0;
+  background-color: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 2px; 
+  width:100%; 
+}
+
+.portal-column-0 .pluslet a, 
+.portal-column-1 .pluslet a, 
+.portal-column-2 .pluslet a {
+  color: #333;
+}
+
+.portal-column-0 .pluslet .titlebar, 
+.portal-column-1 .pluslet .titlebar, 
+.portal-column-2 .pluslet .titlebar {
+  padding: 10px 0;
+  color: #333;
+  font-size: 1.1em;
+  font-weight:400;
+  min-height: 40px;
+  border-bottom: 1px solid #d5d5d5;
+  background-color: transparent;
+  width:100%;
+}
+
+.portal-column-0 .pluslet .titlebar_text, 
+.portal-column-1 .pluslet .titlebar_text, 
+.portal-column-2 .pluslet .titlebar_text {
+  margin: 0;
+  width: 65%;
+  background-color: transparent;
+  padding: 0 0 0 0.5em;
+}
+
+.portal-column-0 .pluslet .titlebar_options, 
+.portal-column-1 .pluslet .titlebar_options, 
+.portal-column-2 .pluslet .titlebar_options {
+  float: left;
+  padding: 0;
+  text-align: right;
+  width:30%;
+  border-left: 1px dashed #CCC;
+}
+
+.pluslet_sort { cursor: move !important; }
+
+.portal-column-0 .pluslet .titlebar_options img,
+.portal-column-1 .pluslet .titlebar_options img,
+.portal-column-2 .pluslet .titlebar_options img,
+.portal-column-0 .pluslet .titlebar_options i,
+.portal-column-1 .pluslet .titlebar_options i,
+.portal-column-2 .pluslet .titlebar_options i {
+  padding: 6px;
+  background-color: #E488B6;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  float:left;
+  margin: 0;
+}
+
+
+
+
 
 
 /* Social Media Pluslet */
@@ -954,6 +1038,65 @@ li.fav-box-item:hover::before {color: #C03957;}
 #social_media_accounts ul li { display: inline; }
 
 #social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em; font-size: 26px;}
+
+
+/*** toggle pluslet body --CBR */
+.pluslet_body_open {
+  display: block;
+}
+
+.pluslet_body_closed {
+  display: none;
+}
+
+
+
+/* Pluslet Admin ALL Styles */
+/* -------------- */
+
+.pluslet {
+  padding: 0em 0em;
+  margin: 1em 0.5em;
+  background-color: #fff;
+  border: 2px solid #efefef;
+  clear:both;
+  border-radius: 5px;
+  overflow: auto;
+  word-wrap: break-word;
+}
+
+.titlebar {
+  padding: .2em .5em;
+  color: #333;
+  font-size: 1.1em;
+  font-weight:700;
+  min-height: 2em;
+  border-bottom: 1px solid #ccc;
+  background-color: #D5D5D5;
+}
+
+.titlebar_text {
+  float: left;
+  margin-top: .3em;
+}
+
+.titlebar_options {
+  float: right;
+  padding: .2em 0em .1em .5em;
+}
+
+
+
+#controlpage .pluslet_body {
+  clear: both;
+  padding: .5em;
+
+}
+
+
+.pluslet_body object {
+  margin: 3px 5px 3px 3px;
+}
 
 
 
@@ -1628,18 +1771,6 @@ ul.sortable_list li:hover  {
   box-shadow: 5px 5px 5px #ccc;
 }
 
-/* Guides -- Admin View
-
-.pluslet_body {
-padding: .5em;
-margin: .5em;
-overflow: auto;
-}
-
-.pluslet_body p {
-margin: .5em 0 ;
-}
-*/
 
 
 .leftcolheader {
@@ -1893,16 +2024,6 @@ li.dropspotty {
 }
 
 
-#dropspot-left-1, #dropspot-center-1, #dropspot-sidebar-1 {
-  float: left; 
-  width: 100%; }
-
-/* Moves the dropspot text down a smidgen (8 smidgens, to be precise) */
-
-#dropspot-left-1 img, #dropspot-center-1 img, #dropspot-sidebar-1 img { margin-top: .7em; margin-left: 1em; vertical-align: text-bottom;}
-
-/* When you hover over one of the two drop spots, make em show */
-.drop_hover {background-color: #C03957; border: 1px solid #ccc;}
 
 
 
@@ -2041,9 +2162,7 @@ margin: .5em 0 0 2.5em;
 
 }
 
-.pluslet_body object {
-  margin: 3px 5px 3px 3px;
-}
+
 
 .unsortable {
   cursor:default;
@@ -2053,15 +2172,7 @@ margin: .5em 0 0 2.5em;
 
 .togglebase {margin-top: 0;}
 
-.sort_column {
-  background-color: #F8F5F5;
-}
-.portal_column {
-  background-color: #F8F5F5;
-}
-.ui-sortable {
-  background-color: #F8F5F5;
-}
+
 
 .staff_photo {
   position: relative;
@@ -2135,9 +2246,7 @@ img.tooltip  {
   width:15px;
 }
 
-.ui-widget-content a {
-  color:whitesmoke;
-}
+
 
 
 .rec_delete_confirm {
@@ -2195,72 +2304,7 @@ text-align: center;
 }
 
 
-#controlpage div.pluslet {
-  padding: 0em 0em;
-  margin: 1em 1em 1em 0;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border: none;
-  clear:both;
-  background-color: #fff;
-  border: 2px solid #efefef;
-  border-radius: 5px;
-  overflow: auto;
-  word-wrap: break-word;
-}
 
-#controlpage div.pluslet > .titlebar {
-  padding: .2em .5em;
-  color: #333;
-  font-size: 1.1em;
-  font-weight:700;
-  min-height: 2em;
-  border-bottom: 1px solid #ccc;
-  background-color: #D5D5D5;
-}
-
-#controlpage .titlebar_text {
-  float: left;
-  margin-top: .3em;
-
-}
-
-#controlpage .titlebar_options {
-
-  float: right;
-  padding: .2em 0em .1em .5em;
-}
-
-#controlpage .titlebar_options img {
-  padding: .2em;
-  background-color: #E488B6;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  height: 15px;
-  width: 15px;
-  cursor: pointer;
-}
-
-#controlpage .titlebar_options i {
-  padding: .2em;
-  background-color: #E488B6;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  height: 15px;
-  width: 15px;
-  cursor: pointer;
-  position: relative;
-  top: -3px;
-  text-align: center;
-}
-
-#controlpage .pluslet_body {
-  clear: both;
-  padding: .5em;
-
-}
 
 div.breather > h2 {
   background-color: #858585;
@@ -2301,12 +2345,6 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 */
 
 
-/* Override for V 3, multiple layouts */
-
-#portal-column-0, #portal-column-1, #portal-column-2, .portal-column-0, .portal-column-1, .portal-column-2   {
-  width: 100%;
-  background-color: transparent;
-}
 
 /* Layout dropdown in header */
 
@@ -2409,9 +2447,7 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 
 
-#tabs div.pluslet > .titlebar {
-  font-weight: 400;
-}
+
 
 #save_layout {
   display:none;
@@ -2571,18 +2607,4 @@ li.hidden_tab.ui-state-default
 
 
 }
-
-
-
-/***********************************/
-/*** toggle pluslet body **********/
-.pluslet_body_open {
-  display: block;
-}
-
-.pluslet_body_closed {
-  display: none;
-}
-
-
 

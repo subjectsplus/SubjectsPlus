@@ -98,8 +98,10 @@ class Pluslet {
 
 				if(strtolower($this->_type) != 'special')
 				{
-					$this->_icons = "
-		                <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
+					$this->_icons = "		                
+                        <a id=\"move-$this->_pluslet_id\"><img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" alt=\"" . _("move") . "\" /></img></a>
+                        <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
+
 		                <!--<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img>
 		                <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>-->";
 				}
@@ -160,9 +162,10 @@ class Pluslet {
             <div class=\"titlebar\">";
 
         	//only if on admin side, display sort icon
-	        if( $this->_visible_id != '' ) {
-	        	$this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
-			}
+            //if( $this->_visible_id != '' ) {
+            //    $this->_pluslet .= "<img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" />";
+            //}
+
 
 
         	//if public view, add selected style
@@ -180,7 +183,12 @@ class Pluslet {
 
         	}
 
-        	$this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
+            //only if on admin side, display sort icon
+            if( $this->_visible_id != '' ) {
+                $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
+            }
+
+        	
 
            if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
@@ -212,9 +220,9 @@ class Pluslet {
 
         echo "
         <div class=\"pluslet $this->_pluslet_bonus_classes\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
-            <div class=\"titlebar\">
-                <div class=\"titlebar_text\">$this->_title $this->_visible_id</div>
-                <div class=\"titlebar_options\">$this->_icons</div>
+            <div class=\"titlebar pure-g\">
+                <div class=\"titlebar_text pure-u-2-3\">$this->_title $this->_visible_id</div>
+                <div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>
             ";
 
         echo self::boxSettings(); // add in our hidden div full of box config options
