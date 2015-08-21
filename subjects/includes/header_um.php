@@ -14,6 +14,11 @@
 <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um-print.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/font-awesome.min.css">
 
+<img src="<?php print $PublicPath; ?>/track.php?subject=<?php echo $_GET['subject']; ?>&page_title=<?php echo $page_title; ?>"/>
+
+
+<?php var_dump($_ENV); ?>
+
 <?php 
 
 // Turn off https with a redirect on front end pages 
@@ -377,6 +382,22 @@ $v2styles = TRUE;
       </div> <!-- end #spum_nav -->
     </div>
 
+
+<script>
+
+$('body').on('click','.ui-tabs-anchor' , function() { 
+     var tab_name = $(this).text();
+
+	$.get("<?php print $PublicPath; ?>/track.php?subject=<?php echo $_GET['subject']; ?>&page_title=<?php echo $page_title; ?>&event_type=tab_click&tab_name=" + tab_name, function(data) {
+
+	console.log("Tracking tab click");
+	});
+
+	
+});
+
+
+</script>
     <!-- PAGE HEADER-->
     <div class="pure-g">
         <div class="pure-u-1">

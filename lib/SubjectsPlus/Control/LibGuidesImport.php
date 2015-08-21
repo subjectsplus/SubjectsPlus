@@ -220,6 +220,14 @@ location_title
 JOIN title ON title.title_id = location_title.title_id
 JOIN location on location.location_id = location_title.location_id
 WHERE location.location_id = " . $record[0]['location_id']);
+	
+	
+	echo "SELECT title.title,title.title_id, location.location  FROM 
+location_title 
+JOIN title ON title.title_id = location_title.title_id
+JOIN location on location.location_id = location_title.location_id
+WHERE location.location_id = " . $record[0]['location_id'];
+	
 
 } else {
 
@@ -234,7 +242,7 @@ if ($record_title[0]["title"] == "") {
 
 } 
 
-if ($record_title[0][title]) {
+if ($record_title[0]['title']) {
   
   $description .= 
   "<div class=\"links\">" . 
@@ -912,7 +920,7 @@ public function importLibGuides() {
       
 
 
-      if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
+      if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
 
       
       	$response = array("imported_guide" => $subject[1] );
@@ -926,7 +934,7 @@ public function importLibGuides() {
       	$response = array("imported_guide" => $subject[1][0] );
       	 
 	
-	$query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]')";
+	$query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]','{\"maincol:\"\"}')";
         
 	$this->importLog( "Error inserting subject:");
 	$this->importLog ($query);
@@ -1063,7 +1071,7 @@ public function importLibGuides() {
 
 	$box_names['box_name'] = $pluslet->NAME;
 	$box_types['box_type'] = $pluslet->BOX_TYPE;
-	$boxes = array($box_names, $boy_types);
+	$boxes = array($box_names, $box_types);
 	array_push($response, array("box" => $boxes ));
 	
 	

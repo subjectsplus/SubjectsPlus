@@ -29,6 +29,9 @@ $use_jquery = array("ui_styles");
 
 // clear out existing cookies
 
+ini_set('display_errors',1);
+error_reporting(E_ALL|E_STRICT);
+ini_set('log_errors','On');
 
 setcookie("our_guide", "", 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_guide_id", "", 0, '/', $_SERVER['HTTP_HOST']);
@@ -135,8 +138,11 @@ if (isset($this_id)) {
   $lobjGuide = new Guide($this_id);
   $lobjGuide->_isAdmin = TRUE;
 
+
+  
   $all_tabs = $lobjGuide->getTabs();
 
+  
 } else {
   print "no guide";
 }
@@ -302,7 +308,7 @@ ob_end_flush();
 
    jQuery("#layoutbox").hoverIntent(sliderConfig);
 
-   var ov = '<?php //print $jobj->{'maincol'}; ?>';
+   var ov = '<?php print $jobj->{'maincol'}; ?>';
    var ourval = ov.split("-");
    var lc = parseInt(ourval[0]);
    var cc = parseInt(ourval[1]);
@@ -960,7 +966,35 @@ ob_end_flush();
           <!--analytics-->
           <div id="analytics_options_content" class="second-level-content" style="display:none;">
             <h3><?php print _("Analytics"); ?></h3>
-            Analytics options
+            
+            <div class="analytics_display">
+          
+            <span class="total-views-header">Total Views:</span><span class="total-views-count"></span>
+           </br>
+            <span class="tab-click-header">Clicks on Tabs:</span>
+            <ul class="tab-clicks">
+            
+            </ul>
+            </div>
+            
+            <script>
+				$.get("./helpers/stats_data.php?short_form=Classics", function(data) {
+
+					console.log(data);
+					console.log(data.total_views);
+				$(".total-views-count").html(data.total_views);
+
+				
+				for (key in data.tab_clicks) {
+
+					$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
+					
+				}
+
+				});
+            </script>
+            
+            
           </div>
        
 

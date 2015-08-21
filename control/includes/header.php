@@ -165,8 +165,7 @@ mb_internal_encoding('UTF-8');
 
 
     ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+
 <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
   </head>
   <body id="controlpage">
