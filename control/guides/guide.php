@@ -947,7 +947,7 @@ ob_end_flush();
             </div>
             
             <script>               
-				$.get("./helpers/stats_data.php?short_form=<?php echo $_COOKIE['our_shortform']; ?>", function(data) {
+				$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
 
 					console.log(data);
 					console.log(data.total_views);
