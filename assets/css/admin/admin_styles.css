@@ -1029,6 +1029,13 @@ li.fav-box-item:hover::before {color: #C03957;}
   margin: 0;
   float:right;
   clear: both;
+  color: #858585;
+}
+
+.portal-column-0 .pluslet .titlebar_options i:hover,
+.portal-column-1 .pluslet .titlebar_options i:hover,
+.portal-column-2 .pluslet .titlebar_options i:hover {
+  
   color: #c03957;
 }
 
