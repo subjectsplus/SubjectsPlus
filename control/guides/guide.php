@@ -946,8 +946,8 @@ ob_end_flush();
             </ul>
             </div>
             
-            <script>
-				$.get("./helpers/stats_data.php?short_form=Classics", function(data) {
+            <script>               
+				$.get("./helpers/stats_data.php?short_form=<?php echo $_COOKIE['our_shortform']; ?>", function(data) {
 
 					console.log(data);
 					console.log(data.total_views);
@@ -956,7 +956,7 @@ ob_end_flush();
 				
 				for (key in data.tab_clicks) {
 
-					$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
+					$(".tab-clicks").html("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
 					
 				}
 
