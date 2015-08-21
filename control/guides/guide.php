@@ -228,7 +228,7 @@ ob_end_flush();
 
        var lw = parseInt(lobjLayout[0]) * 7;
        var mw = parseInt(lobjLayout[1]) * 7;
-       var sw = parseInt(lobjLayout[2]) * 7 - 3;
+       var sw = parseInt(lobjLayout[2]) * 7;
 
        console.log(lw, mw, sw);
        

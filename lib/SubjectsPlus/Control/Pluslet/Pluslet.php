@@ -110,9 +110,9 @@ class Pluslet {
                 if ($this->_editable == TRUE) {
                     // Deal with All Items by Source type (#1 in db)
                     if ($this->_pluslet_id == 1) {
-                        $this->_icons .= " <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><img class=\"pluslet-icon\"  src=\"$IconPath/pencil.png\"  alt=\"" . _("Edit") . "\" title=\"" . _("Edit") . "\" /> </img> </a>";
+                        $this->_icons .= " <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><i class=\"fa fa-cog\" title=\"" . _("Edit") . "\" /></i></a>";
                     } else {
-                        $this->_icons .= " <a id=\"edit-$this->_pluslet_id-$this->_type\"><img class=\"pluslet-icon\"  src=\"$IconPath/pencil.png\" alt=\"" . _("Edit") . "\" title=\"" . _("Edit") . "\" /></img></a>";
+                        $this->_icons .= " <a id=\"edit-$this->_pluslet_id-$this->_type\"><i class=\"fa fa-cog\" title=\"" . _("Edit") . "\" /></i></a>";
                     }
                 }
                 // Everyone gets a delete button in the admin
