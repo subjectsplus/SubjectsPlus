@@ -14,6 +14,7 @@
 <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/print.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/font-awesome.min.css">
 
+<img src="<?php print $PublicPath; ?>/track.php?subject=<?php echo scrubData($_GET['subject']); ?>&page_title=<?php $page_title; ?>"/>
 
 
 <?php 
