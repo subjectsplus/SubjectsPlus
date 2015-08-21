@@ -222,12 +222,6 @@ JOIN location on location.location_id = location_title.location_id
 WHERE location.location_id = " . $record[0]['location_id']);
 	
 	
-	echo "SELECT title.title,title.title_id, location.location  FROM 
-location_title 
-JOIN title ON title.title_id = location_title.title_id
-JOIN location on location.location_id = location_title.location_id
-WHERE location.location_id = " . $record[0]['location_id'];
-	
 
 } else {
 

@@ -308,7 +308,7 @@ ob_end_flush();
 
    jQuery("#layoutbox").hoverIntent(sliderConfig);
 
-   var ov = '<?php print $jobj->{'maincol'}; ?>';
+   var ov = '<?php // print $jobj->{'maincol'}; ?>';
    var ourval = ov.split("-");
    var lc = parseInt(ourval[0]);
    var cc = parseInt(ourval[1]);
