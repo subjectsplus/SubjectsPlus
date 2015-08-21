@@ -46,7 +46,6 @@ $(document).ready(function () {
 		
 		$( ".customdb-list option:selected" ).each(function() {
 		
-			console.log($(this).val());
 			
 			$('.db-list-results').append("<li class='db-list-item' value='" + $(this).val() +"'>"+ $(this).html() +"</li>")
 			$('.db-list-results').sortable();
@@ -65,19 +64,15 @@ $(document).ready(function () {
             if (window.CKEDITOR) {
                clearInterval(waitCKEDITOR);
                
-            //   var token_string = "<ul class='token-list'>";
             	   var token_string = "";
                $('.db-list-item-draggable').each(function(data){
-            	   console.log($(this).html());
             	   var title = $(this).text()
                    var record_id = $(this).val();
             	   if ($(this).text()) {
             	   token_string += "<p class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + "" + databaseOptions.include_icons + databaseOptions.include_description + databaseOptions.display_note + "}}<p>";
             	   }
-                   console.log(token_string);
                });
                
-           //    token_string += "</ul>";
                
                CKEDITOR.instances[Object.keys(CKEDITOR.instances)[click_count]].setData(token_string);
 
@@ -100,7 +95,6 @@ $(document).ready(function () {
 			 if(data.length != 0) {
 				for(var i = 0; i < data.length; i++) {
 
-					console.log(data);
 					if (data[i]['content_type'] == "Record") {
 
 					$('.databases-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
@@ -131,7 +125,6 @@ $(document).ready(function () {
 				$(this).toggleClass("active");
 				$(this).children().toggle();
 				databaseToken.database_options.include_description = $(this).hasClass('active') | 0;
-				console.log(databaseToken);
 
 			});
 			$('body').on("click", ".show-icons-toggle", function(data) { 
@@ -139,7 +132,6 @@ $(document).ready(function () {
 				$(this).toggleClass("active");
 				$(this).children().toggle();
 				databaseToken.database_options.include_icons = $(this).hasClass('active') | 0;
-				console.log(databaseToken);
 				
 			});
 			$('body').on("click", ".include-note-toggle", function(data) { 
@@ -147,7 +139,6 @@ $(document).ready(function () {
 				$(this).toggleClass("active");
 				$(this).children().toggle();
 				databaseToken.database_options.display_note = $(this).hasClass('active') | 0;
-				console.log(databaseToken);
 
 			});
 			
@@ -157,7 +148,6 @@ $(document).ready(function () {
 		    $('.db-list-results').disableSelection();
 			$('.fa-check').hide();
 
-			console.log(list);
 		})
 		
 	
