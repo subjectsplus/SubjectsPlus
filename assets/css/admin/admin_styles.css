@@ -524,7 +524,7 @@ html,body { height:100%; }
   padding: .5em 0;
   text-transform: none;
   font-size: 0.9em;
-  display: none;
+  /*display: none; */
 }
 
 .box_settings label {
@@ -961,12 +961,14 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-0 .pluslet, 
 .portal-column-1 .pluslet, 
 .portal-column-2 .pluslet {
-  padding: 0;
+  padding: 5px;
   margin: 1em 0;
   background-color: #fff;
   border: 1px solid #d5d5d5;
   border-radius: 2px; 
-  width:100%; 
+  width: -moz-calc(100% - 10px);
+  width: -webkit-calc(100% - 10px);
+  width: calc(100% - 10px);
 }
 
 .portal-column-0 .pluslet a, 
@@ -978,14 +980,14 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-0 .pluslet .titlebar, 
 .portal-column-1 .pluslet .titlebar, 
 .portal-column-2 .pluslet .titlebar {
-  padding: 0;
+  padding: 0 0 5px 0;
   color: #333;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight:400;
-  height: 64px;
   border-bottom: 1px solid #d5d5d5;
   background-color: transparent;
   width:100%;
+  display: inline-block;
 }
 
 .portal-column-0 .pluslet .titlebar_text, 
@@ -995,9 +997,15 @@ li.fav-box-item:hover::before {color: #C03957;}
   width: 70%;
   background-color: transparent;
   padding: 0;
-  height:60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.portal-column-0 .pluslet .titlebar_text img,
+.portal-column-1 .pluslet .titlebar_text img,
+.portal-column-2 .pluslet .titlebar_text img {
+  width:16px;
+  height:16px;
+  margin: 0;
+  padding: 0;
 }
 
 .portal-column-0 .pluslet .titlebar_options, 
@@ -1006,8 +1014,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: 0;
   text-align: right;
   width:25%;
-  float:right;
-  height: 60px;
+  float:right;  
 }
 
 .pluslet_sort { cursor: move !important; }
@@ -1034,13 +1041,16 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .portal-column-0 .pluslet .titlebar_options i:hover,
 .portal-column-1 .pluslet .titlebar_options i:hover,
-.portal-column-2 .pluslet .titlebar_options i:hover {
-  
+.portal-column-2 .pluslet .titlebar_options i:hover {  
   color: #c03957;
 }
 
 
-
+.portal-column-0 .pluslet .pluslet_body,
+.portal-column-1 .pluslet .pluslet_body,
+.portal-column-2 .pluslet .pluslet_body {
+  padding: 10px 0;
+}
 
 
 
@@ -1097,14 +1107,10 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: .2em 0em .1em .5em;
 }
 
-
-
-#controlpage .pluslet_body {
+.pluslet_body {
   clear: both;
   padding: .5em;
-
 }
-
 
 .pluslet_body object {
   margin: 3px 5px 3px 3px;
@@ -2627,13 +2633,6 @@ li.hidden_tab.ui-state-default
 #guide_nav li a {
   padding: 0.5em 0.5em;
 }
-
-.portal-column-0 .pluslet .titlebar_text, 
-.portal-column-1 .pluslet .titlebar_text, 
-.portal-column-2 .pluslet .titlebar_text {  
-  overflow: visible;   
-}
-
 
 
 
