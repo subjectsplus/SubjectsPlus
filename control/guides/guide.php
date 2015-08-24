@@ -1071,6 +1071,25 @@ function selectedPanelDisplay(){
  //Load Clone Menu
  loadCloneMenu();
 
+  //identify pluslets marked as favorites and addClass favorite_pluslet
+  var $favBoxes = $("input.favorite_pluslet_input:checked")
+
+  $favBoxes.each(function() {
+    $(this).parent().parent().parent().parent().find(".titlebar_text").addClass('favorite_pluslet');
+
+  })
+
+  //identify pluslets marked as linked aka cloned and addClass linked_pluslet
+  var $linkedBoxes = $("div.pluslet[name='Clone']");
+  $linkedBoxes.each(function() {
+    $(this).children(".titlebar").children(".titlebar_text").addClass('linked_pluslet');
+
+  })
+
+
+
+
+
 
  //Change layout click events
 $( "#col-single" ).click(function() {      
