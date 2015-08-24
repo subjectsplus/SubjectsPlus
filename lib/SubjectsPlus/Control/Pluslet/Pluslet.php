@@ -164,8 +164,15 @@ class Pluslet {
 			$this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
 
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
-			<a name=\"box-" . $this->_pluslet_id . "\"></a>
-            <div class=\"titlebar\">";
+			<a name=\"box-" . $this->_pluslet_id . "\"></a>";
+
+
+            if ($this->_visible_id != "") {
+                $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
+
+            }
+
+            $this->_pluslet .= "<div class=\"titlebar\">";
 
         	//only if on admin side, display sort icon
             //if( $this->_visible_id != '' ) {
@@ -196,10 +203,6 @@ class Pluslet {
 
         	
 
-           if ($this->_visible_id != "") {
-                $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
-
-           }
 
 
             $this->_pluslet .= "</div>";
@@ -277,10 +280,12 @@ class Pluslet {
                 </select>
 
                 <label for=\"favorite_box-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"favorite_box-$this->_pluslet_id\" type=\"checkbox\"";
+                <input class=\"favorite_pluslet_input\" id=\"favorite_box-$this->_pluslet_id\" type=\"checkbox\"";
 
         if ($this->_favorite_box == 1) {$box_settings .= " checked";}
 
+
+        
         $box_settings .= "> " . _("Favorite Box") . "
             </label>
             </form>

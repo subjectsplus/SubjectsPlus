@@ -652,6 +652,21 @@ li.fav-box-item:hover {
 
 li.fav-box-item:hover::before {color: #C03957;}
 
+
+/* favorite pluslets styles cgb **/
+.favorite_pluslet:before {
+  content: "F";
+
+}
+
+/* linked pluslets styles cgb **/
+.linked_pluslet:before {
+  content: "L";
+
+}
+
+
+
 .clone-input {display:none;}
 
 
