@@ -832,6 +832,9 @@ ob_end_flush();
           <div id="box_options_content" class="second-level-content">
               <h3><?php print _("Add Boxes"); ?></h3>
               <?php print $all_boxes; ?>
+
+
+            <a class="remove_pluslets" href="#">Remove Boxes from Current Tab</a>
               
               <h3><?php print _("Favorite Boxes"); ?></h3>
               <div class="fav-boxes-content">
@@ -885,11 +888,6 @@ ob_end_flush();
                 <ul class="layout_options">
                   <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section2.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
                 </ul>
-
-            <h3><?php print _('Collapse Pluslets'); ?></h3>
-            <div>
-              <button id="toggle_all_pluslets_btn">Toggle Pluslets</button>
-            </div>
 
             <h3><?php print _("My templates"); ?></h3>
             <div class="fav-templates-content">
@@ -1087,6 +1085,22 @@ function selectedPanelDisplay(){
   })
 
 
+//remove boxes from dom and ui from current tab panel
+  $("#tabs").tabs({
+    beforeActivate: function (event, ui) {
+      var currPanel = ui.newPanel.attr('id');
+      console.log(ui.newPanel.attr('id'));
+
+      //remove all pluslets from current tab
+      $('a.remove_pluslets').on('click', function() {
+        $("#" + currPanel).find('.pluslet').remove();
+        $("#save_guide").fadeIn();
+      });
+
+
+
+    }
+  });
 
 
 
