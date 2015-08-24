@@ -99,14 +99,13 @@ class Pluslet {
 				if(strtolower($this->_type) != 'special')
 				{
 					$this->_icons = "		                
-                        <a id=\"move-$this->_pluslet_id\"><img src=\"$IconPath/hand_cursor-26.png\" class=\"pluslet_sort\" alt=\"" . _("move") . "\" /></img></a>
                         <a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
 
 		                <!--<img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img>
 		                <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>-->";
 				}
 
-                // If editable, give the pencil icon
+                // If editable, give the pencil --> gear icon
                 if ($this->_editable == TRUE) {
                     // Deal with All Items by Source type (#1 in db)
                     if ($this->_pluslet_id == 1) {
@@ -115,6 +114,13 @@ class Pluslet {
                         $this->_icons .= " <a id=\"edit-$this->_pluslet_id-$this->_type\"><i class=\"fa fa-cog\" title=\"" . _("Edit") . "\" /></i></a>";
                     }
                 }
+                else {
+                    //Use gear button to access delete options
+                    $this->_icons .= " <a><i class=\"fa fa-cog\" title=\"" . _("Settings") . "\" /></i></a>";
+    
+                }
+
+               
                 // Everyone gets a delete button in the admin
                 $this->_icons .= " <a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a>";
 
@@ -170,7 +176,7 @@ class Pluslet {
 
         	//if public view, add selected style
         	if( $this->_visible_id != '' ) {
-        		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>";
+        		$this->_pluslet .= "<div class=\"titlebar_text\"><img src=\"$IconPath/hand_cursor-20.png\" class=\"pluslet_sort\" /> $this->_title $this->_visible_id</div>";
         	}else
         	{
         		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title $this->_visible_id</div>";
