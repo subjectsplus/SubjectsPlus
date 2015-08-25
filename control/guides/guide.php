@@ -832,6 +832,9 @@ ob_end_flush();
           <div id="box_options_content" class="second-level-content">
               <h3><?php print _("Add Boxes"); ?></h3>
               <?php print $all_boxes; ?>
+
+
+            <a class="remove_pluslets" href="#">Remove Boxes from Current Tab</a>
               
               <h3><?php print _("Favorite Boxes"); ?></h3>
               <div class="fav-boxes-content">
@@ -885,11 +888,6 @@ ob_end_flush();
                 <ul class="layout_options">
                   <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section2.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
                 </ul>
-
-            <h3><?php print _('Collapse Pluslets'); ?></h3>
-            <div>
-              <button id="toggle_all_pluslets_btn">Toggle Pluslets</button>
-            </div>
 
             <h3><?php print _("My templates"); ?></h3>
             <div class="fav-templates-content">
@@ -946,7 +944,11 @@ ob_end_flush();
             </ul>
             </div>
             
-            <script>               
+            
+            <script>             
+
+                $('.tab-clicks').empty();
+                     
 				$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
 
 					console.log(data);
@@ -956,7 +958,9 @@ ob_end_flush();
 				
 				for (key in data.tab_clicks) {
 
-					$(".tab-clicks").html("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
+					console.log(key);
+					
+					$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
 					
 				}
 
@@ -1088,10 +1092,24 @@ function selectedPanelDisplay(){
 
   })
 
+
   //close box settings panel
   $( ".close-settings" ).click(function() { 
       $(this).parent(".box_settings").hide();
   });
+
+
+
+    //remove all pluslets from current tab
+    $('a.remove_pluslets').on('click', function() {
+        var currPanel = $("#tabs").tabs('option', 'active');
+        $("#tabs-" + currPanel).find('.pluslet').remove();
+        $("#save_guide").fadeIn();
+    });
+
+
+
+
 
 
  //Change layout click events
