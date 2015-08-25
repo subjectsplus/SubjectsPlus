@@ -725,15 +725,15 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .dblist-display .customdb-list option {width: 100%;}
 
-.db-list-content {padding:8px;}
+.db-list-content {padding:8px;display:none;}
 
 .db-list-content h4 {margin: 0 0 10px 0;}
 
-.db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px;}
+.db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; }
 
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
-.db-list-item-draggable {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; color: #555;}
+.db-list-item-draggable {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; }
 
 
 
@@ -746,7 +746,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 */
 
-.dblist-button {margin-top:20px; font-size: 0.8em;}
+.dblist-button {margin-top:20px; font-size: 0.8em; display:none;}
 
 .pluslet_id {display: none; /* hide pluslet id on admin view */}
 
