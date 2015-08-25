@@ -1085,22 +1085,14 @@ function selectedPanelDisplay(){
   })
 
 
-//remove boxes from dom and ui from current tab panel
-  $("#tabs").tabs({
-    beforeActivate: function (event, ui) {
-      var currPanel = ui.newPanel.attr('id');
-      console.log(ui.newPanel.attr('id'));
 
-      //remove all pluslets from current tab
-      $('a.remove_pluslets').on('click', function() {
-        $("#" + currPanel).find('.pluslet').remove();
+    //remove all pluslets from current tab
+    $('a.remove_pluslets').on('click', function() {
+        var currPanel = $("#tabs").tabs('option', 'active');
+        $("#tabs-" + currPanel).find('.pluslet').remove();
         $("#save_guide").fadeIn();
-      });
+    });
 
-
-
-    }
-  });
 
 
 
