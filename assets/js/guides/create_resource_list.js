@@ -1,5 +1,17 @@
 $(document).ready(function () {
-
+/*
+ * This assumes you have some markup that looks like this:
+ * 
+ * <ul class="db-list-results ui-sortable">     
+ <li class="db-list-item-draggable" value="253">Record Title
+ <div><span class="show-description-toggle"><i class="fa fa-check" style="display: none;"></i>
+  Show Description  </span><span class="show-icons-toggle"> <i class="fa fa-check" style="display: none;">
+  </i>Show Icons </span><span class="include-note-toggle"><i class="fa fa-check" style="display: none;">
+  </i> Include Note </span></div></li></ul>
+ */
+	
+	
+	
 	$('#show_dblist_options').on("click", function() {
 	
 		$('.fa-check').hide();
@@ -7,52 +19,15 @@ $(document).ready(function () {
 		
 	});
 	
-	var databaseOptions = {
-			
-			"include_icons" : 0,
-			"include_description" : 0,
-			"display_note" : 0
-			
-	}
-	
+
 	var DatabaseToken = {
 			
 			"label" : "",
 			"record_id" : "",
-			"database_options" : Object.create(databaseOptions),
 			"token_string" : ""
 			
 			
 	}
-
-	
-
-	
-	$.get("../../subjects/json/db_json.php", function(data) {
-	
-		$('.db-list-results').empty();
-		
-		for(var i=0; i < data['databases'].length; i++) {
-			
-			$('.customdb-list').append("<option value='" + data['databases'][i].this_record + "'>" + data['databases'][i].newtitle + "</option>");
-
-		}
-		
-		
-	});
-	
-	
-	$('.customdb-list').on("change", function() {
-		
-		$( ".customdb-list option:selected" ).each(function() {
-		
-			
-			$('.db-list-results').append("<li class='db-list-item' value='" + $(this).val() +"'>"+ $(this).html() +"</li>")
-			$('.db-list-results').sortable();
-		    $('.db-list-results').disableSelection();
-
-	});		
-	});
 	
 	$('.customdb-list').hide();
 	
@@ -64,20 +39,34 @@ $(document).ready(function () {
             if (window.CKEDITOR) {
                clearInterval(waitCKEDITOR);
                
-            	   var token_string = "";
+            	   var token_string = "<ul class='token-list'>";
                $('.db-list-item-draggable').each(function(data){
             	   var title = $(this).text()
                    var record_id = $(this).val();
+            	   
+            	   console.log($(this).data());
+            	   
+            	   // Grab the options
+            	   var display_options = $(this).data().display_options;
+       
+
+            	   // If these are undefined, make them 0
+            	   include_description = (typeof include_description === 'undefined') ? 0 : include_description;
+            	   include_icons = (typeof include_icons === 'undefined') ? 0 : include_icons;
+            	   display_note = (typeof display_note === 'undefined') ? 0 : display_note;
+
             	   if ($(this).text()) {
-            	   token_string += "<p class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + "" + databaseOptions.include_icons + databaseOptions.include_description + databaseOptions.display_note + "}}<p>";
+            	   token_string += "<li class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}<li>";
             	   }
                });
                
                
+               token_string += "</ul>";
                CKEDITOR.instances[Object.keys(CKEDITOR.instances)[click_count]].setData(token_string);
 
                click_count++;
   
+               $('.db-list-content').empty();
             }
         }, 100);
         
@@ -93,15 +82,14 @@ $(document).ready(function () {
 		 $.get('../includes/autocomplete_data.php?collection=records&term=' +  search_term, function(data) {
 
 			 if(data.length != 0) {
-				for(var i = 0; i < data.length; i++) {
+				for(var i = 0; i < 10; i++) {
 
 					if (data[i]['content_type'] == "Record") {
 
 					$('.databases-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
 							"<div class=\"pure-g\"><div class=\"pure-u-3-5 box-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
 									"<div class=\"pure-u-2-5\" style=\"text-align:right;\">" +
-									"<button data-label='" + data[i].label + "' value='" + data[i].id  + "' class=\"add-to-list-button pure-button pure-button-secondary\">Add to List</button></div></div></li>");
-					
+									"<button data-label='" + data[i].label + "' value='" + data[i].id  + "' class=\"add-to-list-button pure-button pure-button-secondary\">Add to List</button></div></div></li>");				
 					}
 						
 				}
@@ -111,46 +99,51 @@ $(document).ready(function () {
 		 });
 		});
 	
-		var list = [];
-
 		$('body').on("click", '.add-to-list-button', function() {
-		
-		
+			
+			$('.dblist-button').show();
+			$('.db-list-content').show();
+			
 			var databaseToken = Object.create(DatabaseToken);
-			databaseToken.label = $(this).attr('data-label');;
+			databaseToken.label = $(this).attr('data-label');
 			databaseToken.record_id = $(this).val();
 			
-			$('body').on("click", ".show-description-toggle", function(data) { 
-				
-				$(this).toggleClass("active");
-				$(this).children().toggle();
-				databaseToken.database_options.include_description = $(this).hasClass('active') | 0;
-
-			});
-			$('body').on("click", ".show-icons-toggle", function(data) { 
-				
-				$(this).toggleClass("active");
-				$(this).children().toggle();
-				databaseToken.database_options.include_icons = $(this).hasClass('active') | 0;
-				
-			});
-			$('body').on("click", ".include-note-toggle", function(data) { 
-				
-				$(this).toggleClass("active");
-				$(this).children().toggle();
-				databaseToken.database_options.display_note = $(this).hasClass('active') | 0;
-
-			});
-			
 			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'>"+ databaseToken.label +"<div><span class='show-description-toggle'><i class='fa fa-check'></i> Show Description  </span><span class='show-icons-toggle'> <i class='fa fa-check'></i>Show Icons </span><span class='include-note-toggle'><i class='fa fa-check'></i> Include Note </span></div></li>");
-			list.push(databaseToken);
 			$('.db-list-results').sortable();
 		    $('.db-list-results').disableSelection();
 			$('.fa-check').hide();
-
-		})
 		
+		});
+		
+		
+		$('body').on("click", ".show-description-toggle", function(data) { 
+			toggleOptions($(this));
+		});
+		$('body').on("click", ".show-icons-toggle", function(data) { 
+			
+			toggleOptions($(this));
+		});
+		$('body').on("click", ".include-note-toggle", function(data) { 
+			toggleOptions($(this));
+		});
 	
-	
+	function toggleOptions(toggleElement) {
+		    toggleElement.find('.fa-check').toggle();
+
+			toggleElement.toggleClass("active");
+			toggleElement.children().find('.fa-check').toggle();
+		
+		    include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0; 
+		    include_icons = toggleElement.parent().find('.show-icons-toggle').hasClass('active') | 0;
+		    display_note = toggleElement.parent().find('.include-note-toggle').hasClass('active') | 0; 
+			
+			var display_options = ''+include_description +  ''+include_icons + ''+display_note +"";
+		    toggleElement.parent().parent().data({'display_options' : display_options});
+
+	}
 	
 });
+
+
+
+
