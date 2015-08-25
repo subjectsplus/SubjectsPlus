@@ -19,6 +19,8 @@ function makeEditable(lstrSelector) {
 			isclone = 0;
 		}
 
+
+
 		/////////////////////////////////////
 		// Load the form elements for editing
 		/////////////////////////////////////
@@ -57,6 +59,15 @@ function makeEditable(lstrSelector) {
 			}
 
 			makeHelpable("img[class*=help-]");
+
+			//display box_settings for editable pluslet
+			$('#' + 'pluslet-' + edit_id[1]).find('.box_settings').delay(500).show();
+
+			//close box settings panel
+			$( ".close-settings" ).click(function() {      
+			      $('#' + 'pluslet-' + edit_id[1]).find('.box_settings').hide();
+			  });
+
 
 		});
 

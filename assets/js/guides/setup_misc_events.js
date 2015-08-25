@@ -67,12 +67,14 @@ function setupMiscEvents()
     });
 
     ////////////////////
-    // box-settings bind to show
+    // box-settings bind to show when clicking on gear or edit icon.
     ///////////////////
     $(document).on('click', 'a[id*=settings-]', function(event) {
-        $(this).parent().next('.box_settings').toggle('slow');
+        $(this).parent().parent().parent().find('.box_settings').toggle();
     });
 
+     
+    
     ////////////////////
     // on select change show save guide
     ///////////////////

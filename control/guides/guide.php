@@ -1071,6 +1071,8 @@ function selectedPanelDisplay(){
  //Load Clone Menu
  loadCloneMenu();
 
+  
+
   //identify pluslets marked as favorites and addClass favorite_pluslet
   var $favBoxes = $("input.favorite_pluslet_input:checked")
 
@@ -1086,9 +1088,10 @@ function selectedPanelDisplay(){
 
   })
 
-
-
-
+  //close box settings panel
+  $( ".close-settings" ).click(function() { 
+      $(this).parent(".box_settings").hide();
+  });
 
 
  //Change layout click events
