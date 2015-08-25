@@ -36,7 +36,7 @@ function makeSortable(lstrSelector, lstrType) {
 			opacity : 0.7,
 			tolerance : 'intersect',
 			cancel : '.unsortable',
-			handle : 'img.pluslet_sort',
+			handle : 'div.pluslet_sort',
 			update : function(event, ui) {
 				$("#response").hide();
 				$("#save_guide").fadeIn();
