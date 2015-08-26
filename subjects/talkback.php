@@ -158,14 +158,13 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 
 	// Make a safe query
 	$connection = $db->getConnection();
-	$statement = $connection->prepare("INSERT INTO talkback ('question', 'q_from', 'date_submitted', 'display', 'tbtags', 'answer')
+	$statement = $connection->prepare("INSERT INTO talkback (question, q_from, date_submitted, display, tbtags, answer)
 			VALUES (:question, :q_from, :date_submitted, 'No', :tbtags, '')");
 	
 	$statement->bindParam(":question", $this_comment);
 	$statement->bindParam(":q_from", $this_name);
 	$statement->bindParam(":date_submitted", $todaycomputer);
 	$statement->bindParam(":tbtags", $set_filter);
-	
 	
 	$statement->execute();
 	$stage_one = "ok";
