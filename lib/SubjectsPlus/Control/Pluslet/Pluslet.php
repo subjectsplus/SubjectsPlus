@@ -167,10 +167,6 @@ class Pluslet {
 			<a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
 
-            if ($this->_visible_id != "") {
-                $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
-
-            }
 
             $this->_pluslet .= "<div class=\"titlebar\">";
 
@@ -201,8 +197,12 @@ class Pluslet {
                 $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
             }
 
-        	
 
+
+            if ($this->_visible_id != "") {
+                $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
+
+            }
 
 
             $this->_pluslet .= "</div>";
