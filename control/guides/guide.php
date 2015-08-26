@@ -832,14 +832,17 @@ ob_end_flush();
           <div id="box_options_content" class="second-level-content">
               <h3><?php print _("Add Boxes"); ?></h3>
               <?php print $all_boxes; ?>
-
-
-            <a class="remove_pluslets" href="#">Remove Boxes from Current Tab</a>
               
               <h3><?php print _("Favorite Boxes"); ?></h3>
               <div class="fav-boxes-content">
                   <ul class="fav-boxes-list"></ul>
               </div>
+
+              <h3><?php print _("Remove Boxes"); ?></h3>
+              <div class="remove_boxes_content">
+                <a class="remove_pluslets" href="#"><?php print _("Remove Boxes from Current Tab"); ?></a>
+              </div>            
+              
           </div>
 
        
@@ -887,19 +890,7 @@ ob_end_flush();
             <h3><?php print _("Add New Section"); ?></h3>
                 <ul class="layout_options">
                   <li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php print $AssetPath; ?>images/icons/section2.svg" title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
-                </ul>
-
-            <h3><?php print _("My templates"); ?></h3>
-            <div class="fav-templates-content">
-                  <ul class="fav-templates-list">
-                      <li class="fav-template-item">My favorite template Lorem ipsum dolor sit amet</li>
-                      <li class="fav-template-item">My favorite template</li>
-                      <li class="fav-template-item">My favorite template</li>
-                      <li class="fav-template-item">My favorite template Lorem ipsum dolor sit amet, </li>
-                      <li class="fav-template-item">My favorite template</li>
-                      <li class="fav-template-item">Biology template</li>
-                  </ul>
-              </div>
+                </ul>           
           </div>
 
           
