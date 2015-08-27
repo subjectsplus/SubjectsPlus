@@ -24,17 +24,15 @@ function setupMiscClickEvents()
         plantClone('', edit_id[2], '');
 
     });
-    
+
+
     $('body').on('click', '.clone-button',function() {
-    	
 
     	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	       	
     	var origin_title = $(this).parent().parent().find('.box-search-label').text();
 
-
     	plantClone('','Clone',origin_id, origin_title);
-    	
-   
+
     });
     
     $('body').on('click', '.copy-button',function() {

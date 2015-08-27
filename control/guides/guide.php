@@ -944,7 +944,11 @@ ob_end_flush();
             </ul>
             </div>
             
-            <script>               
+            
+            <script>             
+
+                $('.tab-clicks').empty();
+                     
 				$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
 
 					console.log(data);
@@ -954,7 +958,9 @@ ob_end_flush();
 				
 				for (key in data.tab_clicks) {
 
-					$(".tab-clicks").html("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
+					console.log(key);
+					
+					$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
 					
 				}
 
@@ -1069,6 +1075,8 @@ function selectedPanelDisplay(){
  //Load Clone Menu
  loadCloneMenu();
 
+  
+
   //identify pluslets marked as favorites and addClass favorite_pluslet
   var $favBoxes = $("input.favorite_pluslet_input:checked")
 
@@ -1085,6 +1093,12 @@ function selectedPanelDisplay(){
   })
 
 
+  //close box settings panel
+  $( ".close-settings" ).click(function() { 
+      $(this).parent(".box_settings").hide();
+  });
+
+
 
     //remove all pluslets from current tab
     $('a.remove_pluslets').on('click', function() {
@@ -1092,6 +1106,7 @@ function selectedPanelDisplay(){
         $("#tabs-" + currPanel).find('.pluslet').remove();
         $("#save_guide").fadeIn();
     });
+
 
 
 
