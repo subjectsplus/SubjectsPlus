@@ -1,5 +1,5 @@
 ////////////////////////////////
-// MODIFY PLUSLET -- on click of edit (pencil) icon
+// MODIFY PLUSLET -- on click of edit (gear) icon
 ////////////////////////////////
 
 function makeEditable(lstrSelector) {
@@ -67,6 +67,11 @@ function makeEditable(lstrSelector) {
 			$( ".close-settings" ).click(function() {      
 			      $('#' + 'pluslet-' + edit_id[1]).find('.box_settings').hide();
 			  });
+
+			// Hide options from box settings options based on TYPE
+			   $(".pluslet.type-heading").find(".body_set").addClass("hide-settings");
+
+
 
 
 		});

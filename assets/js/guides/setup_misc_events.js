@@ -93,7 +93,7 @@ function setupMiscEvents()
     ////////////////////
     // Make titlebar options box clickable
     ///////////////////
-    $(document).on('change', '.pure-checkbox', function() {
+    $(document).on('change', '.onoffswitch-checkbox', function() {
 
         var pluslet_id = $(this).parent().parent().parent().parent().attr('id') ;
 
@@ -104,8 +104,6 @@ function setupMiscEvents()
 
     	$("#response").hide();
         $("#save_guide").fadeIn();
-
-
     });
 
 }
