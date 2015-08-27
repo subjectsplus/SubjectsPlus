@@ -41,7 +41,7 @@ $(document).ready(function () {
                
             	   var token_string = "<ul class='token-list'>";
                $('.db-list-item-draggable').each(function(data){
-            	   var title = $(this).text()
+            	   var title = $(this).find('.db-list-label').text()
                    var record_id = $(this).val();
             	   
             	   console.log($(this).data());
@@ -51,9 +51,8 @@ $(document).ready(function () {
        
 
             	   // If these are undefined, make them 0
-            	   include_description = (typeof include_description === 'undefined') ? 0 : include_description;
-            	   include_icons = (typeof include_icons === 'undefined') ? 0 : include_icons;
-            	   display_note = (typeof display_note === 'undefined') ? 0 : display_note;
+            	   display_options = (typeof display_options === 'undefined') ? "000" : display_options;
+            	  
 
             	   if ($(this).text()) {
             	   token_string += "<li class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}<li>";
@@ -62,17 +61,27 @@ $(document).ready(function () {
                
                
                token_string += "</ul>";
-               CKEDITOR.instances[Object.keys(CKEDITOR.instances)[click_count]].setData(token_string);
+               console.log(token_string);
+               
+               
+              
+               
+               CKEDITOR.instances[Object.keys(CKEDITOR.instances)[click_count]].setData(token_string.trim());
 
                click_count++;
   
-               $('.db-list-content').empty();
+               $('.db-list-results').empty();
             }
         }, 100);
         
 	});
 	
 	
+	
+	$('.dblist-reset-button').on("click", function() {
+        $('.db-list-results').empty();
+
+	});
 	
 		$('.databases-search').keypress(function(data) {
 
@@ -101,14 +110,16 @@ $(document).ready(function () {
 	
 		$('body').on("click", '.add-to-list-button', function() {
 			
-			$('.dblist-button').show();
+			$('.db-list-buttons').show();
 			$('.db-list-content').show();
 			
 			var databaseToken = Object.create(DatabaseToken);
-			databaseToken.label = $(this).attr('data-label');
+			databaseToken.label = $(this).attr('data-label').trim();
 			databaseToken.record_id = $(this).val();
 			
-			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'>"+ databaseToken.label +"<div><span class='show-description-toggle'><i class='fa fa-check'></i> Show Description  </span><span class='show-icons-toggle'> <i class='fa fa-check'></i>Show Icons </span><span class='include-note-toggle'><i class='fa fa-check'></i> Include Note </span></div></li>");
+			
+			
+			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'><span class='db-list-label'>"+ databaseToken.label +"</span><div><span class='show-description-toggle db-list-toggle'><i class='fa fa-check'></i> Show Description  </span><span class='show-icons-toggle db-list-toggle'> <i class='fa fa-check'></i>Show Icons </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-check'></i> Include Note </span></div></li>");
 			$('.db-list-results').sortable();
 		    $('.db-list-results').disableSelection();
 			$('.fa-check').hide();
