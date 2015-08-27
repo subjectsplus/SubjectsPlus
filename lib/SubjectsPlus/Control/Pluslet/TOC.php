@@ -114,78 +114,12 @@ class Pluslet_TOC extends Pluslet {
     }
   }
 
-  function getTabs() {
-
-    $db = new Querier();
-
-    $tabs = $db->query("SELECT tab_index, label FROM tab WHERE subject_id = {$this->_subject_id}");
-
-    return $tabs;
-
-  }
-
-  function recursive_append_children($arr, $children){
-    foreach($arr as $key => $page)
-      if(isset($children[$key]))
-        $arr[$key]['children'] = recursive_append_children($children[$key], $children);
-    return $arr;
-  }
-
-  function getPluslets() {
-
-    $querier = new Querier();
-    $qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index, t.label
-			FROM pluslet p INNER JOIN pluslet_section ps
-			ON p.pluslet_id = ps.pluslet_id
-			INNER JOIN section sec
-			ON ps.section_id = sec.section_id
-			INNER JOIN tab t
-			ON sec.tab_id = t.tab_id
-			INNER JOIN subject s
-			ON t.subject_id = s.subject_id
-			WHERE s.subject_id = '$this->_subject_id'
-			AND p.type != 'TOC'
-			ORDER BY ps.prow ASC";
-
-    //print $qs;
-
-    return $querier->query($qs);
-
-  }
-
-
-  function makeNested($source) {
-    $nested = array();
-
-    foreach ( $source as &$s ) {
-      if ( is_null($s['tab_index']) ) {
-        // no parent_id so we put it in the root of the array
-        $nested[] = &$s;
-      }
-      else {
-        $pid = $s['tab_index'];
-        if ( isset($source[$pid]) ) {
-          // If the parent ID exists in the source array
-          // we add it to the 'children' array of the parent after initializing it.
-
-          if ( !isset($source[$pid]['children']) ) {
-            $source[$pid]['children'] = array();
-          }
-
-          $source[$pid]['children'][] = &$s;
-        }
-      }
-    }
-    return $nested;
-  }
-
-
 
   function generateTOC($action) {
     $left_col = "";
     $right_col = "";
-
     if ($this->_tocArray) {
+
 
 
       $pluslets = $this->getPluslets();
@@ -199,12 +133,9 @@ class Pluslet_TOC extends Pluslet {
 
 
 
-
       // Edit
       if ($action == "edit") {
-
         foreach ($this->_tocArray as $value) {
-
           if (isset($this->_ticked_items)) {
             // show ticked items as pre-ticked
             if (!in_array($value[0], $this->_ticked_items)) {
@@ -215,7 +146,6 @@ class Pluslet_TOC extends Pluslet {
           } else {
             $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$value[0]\" checked=\"checked\" />";
           }
-
           if ($value[3] == 1) {
             $left_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents smaller\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
           } else {
@@ -223,7 +153,6 @@ class Pluslet_TOC extends Pluslet {
           }
         }
       } else {
-
         // View
         // display only ticked items
         if ($this->_ticked_items) {
@@ -238,12 +167,14 @@ class Pluslet_TOC extends Pluslet {
           }
         }else
         {
-        	return 'No items ticked. Please edit.';
+          return 'No items ticked. Please edit.';
         }
       }
 
+
       $this->_body .= "<div class=\"pure-g\"><div class=\"pure-u-1-2\">$left_col</div>
                 <div class=\"pure-u-1-2\">$right_col</div></div>";
+
     } else {
       $this->_body = _("There are no contents for this guide yet!");
     }

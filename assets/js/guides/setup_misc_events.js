@@ -48,7 +48,6 @@ function setupMiscEvents()
         var selected_box = ".pluslet-" + box_id;
 
     	$('#tabs').tabs('select', tab_id);
-
         $(selected_box).effect("pulsate", {
             times:1
         }, 2000);

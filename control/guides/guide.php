@@ -902,7 +902,7 @@ ob_end_flush();
                       <option>Please select a database</option>
                   </select>
                   
-                  <div class="databases-results-display">
+                  <div class="databases-results-display pure-form">
                             <input class="databases-search" type="text" placeholder="<?php print _("Enter database title..."); ?>"></input>
                             <ul class="databases-searchresults"></ul>
                         </div>
@@ -915,8 +915,10 @@ ob_end_flush();
                          
                       </ul>  
                   </div>
-                  <button class="pure-button pure-button-primary dblist-button">Create List Box</button>
-                                          
+                  <div class="db-list-buttons">
+                  <button class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
+                  <button class="pure-button pure-button-primary dblist-reset-button"><?php print _("Reset List Box"); ?></button>
+                   </div>                       
               </div>
           </div>
 
