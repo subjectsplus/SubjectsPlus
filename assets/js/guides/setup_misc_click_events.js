@@ -19,22 +19,20 @@ function setupMiscClickEvents()
         $("#header, #subnavcontainer").toggle();
     });
     
-    $(".box-item").click(function(event) {
+    $(".box-item").dblclick('click', function(event) {
         var edit_id = $(this).attr("id").split("-");
         plantClone('', edit_id[2], '');
 
     });
-    
+
+
     $('body').on('click', '.clone-button',function() {
-    	
 
     	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	       	
     	var origin_title = $(this).parent().parent().find('.box-search-label').text();
 
-
     	plantClone('','Clone',origin_id, origin_title);
-    	
-   
+
     });
     
     $('body').on('click', '.copy-button',function() {
@@ -48,7 +46,8 @@ function setupMiscClickEvents()
 
 
 
-    $('body').on('click', '.clone-favorite',function() {
+    $('body').on('dblclick', '.clone-favorite', function() {
+        console.log('fav clicked');
 
         var origin_id = $(this).attr('data-pluslet-id');
         var origin_title = $(this).html();

@@ -42,8 +42,8 @@
 
 
 								      lobjSection.center_data = $('div#section_' + section_id +  ' div.portal-column-1').sortable('serialize');
-                                                                      console.log(section_id);
-                                                                      console.log(lobjSection.center_data);
+                                                                      //console.log(section_id);
+                                                                      //console.log(lobjSection.center_data);
 
 								      lobjSection.sidebar_data = $('div#section_' + section_id +  ' div.portal-column-2').sortable('serialize');
 
@@ -54,7 +54,7 @@
 	});
 
 	lstrTabs = JSON.stringify(lobjTabs);
-        console.log(lstrTabs);
+        //console.log(lstrTabs);
 	$("#response").load("helpers/save_guide.php", {
 	    this_subject_id: subject_id,
 	    user_name: user_name,

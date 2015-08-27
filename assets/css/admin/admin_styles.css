@@ -716,6 +716,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 
+.pluslet_id {display: none; /* hide pluslet id on admin view */}
+
+
 /* Catalog Pluslet Display Admin */
 .catalog-search {width:100%;}
 
@@ -1044,6 +1047,29 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: 10px 0;
 }
 
+.box_settings {
+  padding: 10px;
+  text-transform: none;
+  font-size: 0.9em;
+  display: none; 
+  position:absolute;
+  z-index: 999999;
+  top: 0;
+  left: 100%;
+  min-height: -moz-calc(100% - 20px);
+  min-height: -webkit-calc(100% - 20px);
+  min-height: calc(100% - 20px);
+  background-color: #f2f2f2;
+    box-shadow: 0 0 2px rgba(54, 51, 51, 0.4) inset;
+  color: #fff;
+ 
+  width: 250px;
+}
+
+.box_settings label {
+  font-weight: normal;
+}
+
 
 /* Pluslet Flyout Box Settings */
 /* -------------- */
@@ -1256,12 +1282,21 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
+
+.titlebar_options a[id^="delete-"] {display:none;}
+
 /* Hide dialog boxes on guide page that were left over */
 #dialog, #dialog_edit {display: none; }
 
 
 /* Colorbox -index overides */
 #colorbox, #cboxOverlay, #cboxWrapper {z-index: 99998;}
+
+
+
+
+/* Hide dialog boxes on guide page that were left over */
+#dialog, #dialog_edit {display: none; }
 
 
 
