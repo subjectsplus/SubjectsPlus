@@ -5,22 +5,40 @@
         $inputShowPhoto = "<input type='checkbox' name='SubjectSpecialist-extra-showPhoto'/>";
     }
 
+    if($this->_extra['showTitle'][0] == "on") {
+        $inputShowTitle = "<input type='checkbox' name='SubjectSpecialist-extra-showTitle' checked/>";
+    } else {
+        $inputShowTitle = "<input type='checkbox' name='SubjectSpecialist-extra-showTitle'/>";
+    }
+
+    if($this->_extra['showPhone'][0] == "on") {
+        $inputShowPhone = "<input type='checkbox' name='SubjectSpecialist-extra-showPhone' checked/>";
+    } else {
+        $inputShowPhone = "<input type='checkbox' name='SubjectSpecialist-extra-showPhone'/>";
+    }
+
+    if($this->_extra['showEmail'][0] == "on") {
+        $inputShowEmail = "<input type='checkbox' name='SubjectSpecialist-extra-showEmail' checked/>";
+    } else {
+        $inputShowEmail = "<input type='checkbox' name='SubjectSpecialist-extra-showEmail'/>";
+    }
+
 ?>
 
 
 <form class="pure-form pure-form-stacked">
-    <label>Show Photo</label>
-    <?php echo $inputShowPhoto; ?>
 
-    <label>Show Title</label>
-    <input type="checkbox"
-           name="SubjectSpecialist-extra-showTitle"
-           value="1"/>
+    <?php echo $inputShowPhoto; ?> <label style="display:inline;"> Show Photo </label>
 
-    <label>Show Phone</label>
-    <input type="checkbox"
-           name="SubjectSpecialist-extra-showPhone"
-           value="1"/>
+    <br>
+    <?php echo $inputShowTitle; ?> <label style="display:inline;"> Show Title</label>
+
+    <br>
+    <?php echo $inputShowPhone; ?> <label style="display:inline;"> Show Phone</label>
+
+    <br>
+    <?php echo $inputShowEmail; ?> <label style="display:inline;"> Show Email</label>
+    <br>
 
     <label>Facebook</label>
     <input required aria-required="true"

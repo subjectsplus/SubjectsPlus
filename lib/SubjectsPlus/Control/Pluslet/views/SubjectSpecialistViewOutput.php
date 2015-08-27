@@ -1,25 +1,32 @@
 <div id="subjectSpecialistPluslet">
 
-    <?php
-
-    foreach ($this->staffArray as $value) {
-
-        // get username from email
-        $truncated_email = explode("@", $value[2]);
-
-        $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
-
-        // Output Picture and Contact Info
-        $this->_body .= "
-        <div class=\"clearboth\"><img src=\"$staff_picture\" alt=\"Picture: $value[1] $value[0]\"  class=\"staff_photo2\" align=\"left\" />
-        <p><a href=\"mailto:$value[2]\">$value[1] $value[0]</a><br />$value[4]<br />
-        Tel: $this->tel_prefix $value[3]</p>\n</div>\n";
-    }
+    <?php if($this->staffPhoto != "off") {
+        echo  "<span id='staffPhoto'>{$this->staffPhoto}</span>";
+    } ?>
 
 
 
-    ?>
+    <ul>
+        <li><?php echo $this->staffName; ?></li>
 
+        <?php if($this->staffTitle != "off") {
+            echo "<li>".$this->staffTitle."</li>";
+        } ?>
+
+        <?php if($this->staffEmail != "off") {
+            echo "<li><a href='mailto:{$this->staffEmail}'>{$this->staffEmail}</a></li>";
+        } ?>
+
+        <?php if($this->staffPhone != "off") {
+            echo "<li>{$this->staffPhone}</li>";
+        } ?>
+
+    </ul>
+    <ul>
+        <li><a href='http://facebook.com/<?php echo $this->staffFacebook; ?>'><i class='fa fa-facebook-square fa-3x'></i></a></li>
+        <li><a href='http://twitter.com/<?php echo $this->staffTwitter; ?>'><i class='fa fa-twitter-square fa-3x'></i></a></li>
+        <li><a href='http://pinterest.com/<?php echo $this->staffPinterest; ?>'><i class='fa fa-pinterest-square fa-3x'></i></a></li>
+    </ul>
 
 
 </div>
