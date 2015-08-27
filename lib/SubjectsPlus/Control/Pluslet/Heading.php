@@ -15,7 +15,6 @@ class Pluslet_Heading extends Pluslet {
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
         $this->_pluslet_bonus_classes = "type-heading";
-        //$this->_pluslet_body_bonus_classes = "hideme";
 
         $this->_body = "";
     }
@@ -38,13 +37,13 @@ class Pluslet_Heading extends Pluslet {
             if ($this->_pluslet_id) {
                 $this->_pluslet_id_field = "pluslet-" . $this->_pluslet_id;
                 $this->_pluslet_name_field = "";
-                $this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
+                $this->_title = "<input type=\"text\" class=\"required_field edit-input\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
             } else {
                 $new_id = rand(10000, 100000);
                 $this->_pluslet_bonus_classes = "unsortable";
                 $this->_pluslet_id_field = $new_id;
                 $this->_pluslet_name_field = "new-pluslet-Heading";
-                $this->_title = "<input type=\"text\" class=\"required_field\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
+                $this->_title = "<input type=\"text\" class=\"required_field edit-input\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
             }
 
             global $title_input_size; // alter size based on column

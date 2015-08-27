@@ -16,7 +16,7 @@ class Pluslet_TOC extends Pluslet {
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
-    $this->_editable = TRUE;
+    //$this->_editable = TRUE;
     $this->_subject_id = $subject_id;
     $this->_pluslet_bonus_classes = "no_overflow";
   }
@@ -192,7 +192,7 @@ class Pluslet_TOC extends Pluslet {
       //var_dump($pluslets);
 
       foreach($pluslets as $key => $value):
-        var_dump($key);
+        //var_dump($key);
 
 
       endforeach;
@@ -242,8 +242,8 @@ class Pluslet_TOC extends Pluslet {
         }
       }
 
-      $this->_body .= "<div style=\"float: left; margin-right: 2em; overflow: none;\">$left_col</div>
-                <div class=\"float-left\">$right_col</div>";
+      $this->_body .= "<div class=\"pure-g\"><div class=\"pure-u-1-2\">$left_col</div>
+                <div class=\"pure-u-1-2\">$right_col</div></div>";
     } else {
       $this->_body = _("There are no contents for this guide yet!");
     }

@@ -1073,6 +1073,8 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .box_settings label {
   font-weight: normal;
+  font-size: 0.9em;
+  color: #858585;
 }
 
 .delete-trigger {text-align: right;}
@@ -1084,7 +1086,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 /* box settings switc on/off */
 .onoffswitch {
-    position: relative; width: 45px;
+    position: relative; width: 45px; margin: 10px 0;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
 .onoffswitch-checkbox {
@@ -1106,7 +1108,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .onoffswitch-inner:before {
     content: "";
     padding-left: 10px;
-    background-color: #C03957; color: #FFFFFF;
+    background-color: rgba(192,57,87, 0.9); color: #FFFFFF;
 }
 .onoffswitch-inner:after {
     content: "";
@@ -1139,10 +1141,25 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
     margin: 0 5px;
     position: absolute;
     top: 0;
-    width: 150px;
+    width: 180px;
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #858585;
 }
 
+.edit-input {width:100%;}
 
+.hide-settings {display:none;}
+
+
+/* titlebar styling */
+.titlebar-styling-section {display: inline-block;}
+
+.titlebar-styling-label {width:110px; float:left;}
+
+.titlebar-styling-select {width:120px; float:left;}
+
+.titlebar-styling-select select {font-size: 0.9em !important; width: 100%; border-radius: 5px; box-shadow: none; border: 1px solid #CCCCCC; padding:2px; color: #858585;}
 
 
 

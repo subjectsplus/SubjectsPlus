@@ -93,7 +93,7 @@ class Pluslet {
 
         switch ($view) {
             case "admin":                
-                $settingstext = _("Box Settings");
+                $delete_text = _("Remove item from this guide");
 
                 //If type is NOT Special
 				if(strtolower($this->_type) != 'special')
@@ -111,8 +111,8 @@ class Pluslet {
                     }
                 }
                 else {
-                    //If not editable, use gear icon to access settings 
-                    $this->_icons .= " <a id=\"settings-$this->_pluslet_id\"><i class=\"fa fa-cog\" title=\"$settingstext\" /></i></a>";
+                    //If not editable, show only delete icon 
+                    $this->_icons .= "<a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"$delete_text\" /></i></a>";
     
                 }
 
@@ -147,45 +147,63 @@ class Pluslet {
         // if we're using a simple pluslet, things are diff
         // we use $this->_visible_id to make sure this is only on the frontend
 
+        
+        //when TITLEBAR is HIDDEN - PV
         if (($hide_titlebar == 1 && $this->_visible_id == "" || $this->_title == "" && $this->_visible_id == "")) {
+            
             $this->_pluslet .= "
-            <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple no_overflow $this->_pluslet_id_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>" . htmlspecialchars_decode($this->_body);
+            <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple no_overflow $this->_pluslet_id_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>";
+
+            // since we're here, let's see if the body should be collapsed
+            if ($this->_collapse_body == 1) {
+                $this->_pluslet_body_bonus_classes .= "noshow";
+            }
+
+            if ($this->_body != "") {
+                $this->_pluslet .= "<div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">
+                            " . htmlspecialchars_decode($this->_body) . "
+                    </div>";
+            }
+
+
+
+
             // this div closed outside of if/else
+
         } else {
+            //when TITLEBAR is SHOWN - PV
 
 			$this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
 
             $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
-			<a name=\"box-" . $this->_pluslet_id . "\"></a>";
+			     <a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
 
-            if ($this->_visible_id != "") {
+                if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
-
-            }
+                }
 
             $this->_pluslet .= "<div class=\"titlebar pluslet_sort\">";
 
         	
-        	//if public view, add selected style
-        	if( $this->_visible_id != '' ) {
-        		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title</div>";
-        	}else
-        	{
-        		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title</div>";
+            	//if public view, add selected style
+            	if( $this->_visible_id != '' ) {
+            		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title</div>";
+            	}else
+            	{
+            		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title</div>";
 
-                // since we're here, let's see if the body should be collapsed
-                if ($this->_collapse_body == 1) {
-                    $this->_pluslet_body_bonus_classes .= " noshow";
+                    // since we're here, let's see if the body should be collapsed
+                    if ($this->_collapse_body == 1) {
+                        $this->_pluslet_body_bonus_classes .= "noshow";
+                    }
 
+            	}
+
+                //only if on admin side, display sort icon
+                if( $this->_visible_id != '' ) {
+                    $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
                 }
-
-        	}
-
-            //only if on admin side, display sort icon
-            if( $this->_visible_id != '' ) {
-                $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
-            }
 
         	
             $this->_pluslet .= "</div>";
@@ -219,12 +237,8 @@ class Pluslet {
             <div class=\"titlebar pure-g\">
                 <div class=\"titlebar_text pure-u-2-3\">$this->_title</div>
                 <div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>
-            ";
-
-        
-
-        echo "</div>
-        <div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">";
+            </div>
+            <div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">";
     }
 
     protected function finishPluslet() {
@@ -255,45 +269,60 @@ class Pluslet {
                 <div class=\"pure-u-1-2 delete-trigger\"><a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a></div>
             </div> 
             
-            <form class=\"pure-form box-settings-form\">
+            <form class=\"pure-form box-settings-form\">                
+                <div class=\"titlebar-styling-section\">
+                        <div class=\"titlebar-styling-label\">
+                            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
+                        </div>
+                        <div class=\"titlebar-styling-select\">
+                            <select id=\"titlebar-styling-$this->_pluslet_id\">
+                                $tb_styles
+                            </select>
+                        </div>
+                </div>                
+
+                <div class=\"onoffswitch titlebar_set\">
+                        <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"notitle-$this->_pluslet_id\"";
+                        
+                        if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
+
+                        $box_settings .= ">                    
+                        <label class=\"onoffswitch-label\" for=\"notitle-$this->_pluslet_id\">
+                            <span class=\"onoffswitch-inner\"></span>
+                            <span class=\"onoffswitch-switch\"></span>
+                        </label>";        
+
+                        $box_settings .= "<span class=\"settings-label-text\">" . _("Hide Titlebar") . "</span>
+                </div>
+
+                <div class=\"onoffswitch body_set\">
+                        <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"start-collapsed-$this->_pluslet_id\"";
+                        
+                        if ($this->_collapse_body == 1) {$box_settings .= " checked";}
+
+                        $box_settings .= ">                    
+                        <label class=\"onoffswitch-label\" for=\"start-collapsed-$this->_pluslet_id\">
+                            <span class=\"onoffswitch-inner\"></span>
+                            <span class=\"onoffswitch-switch\"></span>
+                        </label>";        
+
+                        $box_settings .= "<span class=\"settings-label-text\">" . _("Hide Box Content") . "</span>
+                </div>
+
                 <div class=\"onoffswitch\">
-                    <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"notitle-$this->_pluslet_id\"";
-                    
-                    if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
+                        <input type=\"checkbox\" class=\"onoffswitch-checkbox favorite_pluslet_input\" id=\"favorite_box-$this->_pluslet_id\"";
+                        
+                        if ($this->_favorite_box == 1) {$box_settings .= " checked";}
 
-                    $box_settings .= ">                    
-                    <label class=\"onoffswitch-label\" for=\"notitle-$this->_pluslet_id\">
-                        <span class=\"onoffswitch-inner\"></span>
-                        <span class=\"onoffswitch-switch\"></span>
-                    </label>";        
+                        $box_settings .= ">                    
+                        <label class=\"onoffswitch-label\" for=\"favorite_box-$this->_pluslet_id\">
+                            <span class=\"onoffswitch-inner\"></span>
+                            <span class=\"onoffswitch-switch\"></span>
+                        </label>";        
 
-                    $box_settings .= "<span class=\"settings-label-text\">" . _("Hide titlebar") . "</span></div>
+                        $box_settings .= "<span class=\"settings-label-text\">" . _("Favorite Box") . "</span>
+                </div>
 
-
-
-
-            
-            <label for=\"start-collapsed-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"start-collapsed-$this->_pluslet_id\" type=\"checkbox\"";
-
-                if ($this->_collapse_body == 1) {$box_settings .= " checked";}
-
-            $box_settings .= "> " . _("Hide box body by default (public site)") . "
-            </label>
-            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
-                <select id=\"titlebar-styling-$this->_pluslet_id\">
-                    $tb_styles
-                </select>
-
-                <label for=\"favorite_box-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input class=\"favorite_pluslet_input\" id=\"favorite_box-$this->_pluslet_id\" type=\"checkbox\"";
-
-        if ($this->_favorite_box == 1) {$box_settings .= " checked";}
-
-
-        
-        $box_settings .= "> " . _("Favorite Box") . "
-            </label>
             </form>
             <div class=\"pure-g pluslet-metadata\">
                 <div class=\"pure-u-1-2 pluslet_id\">ID $this->_visible_id</div>

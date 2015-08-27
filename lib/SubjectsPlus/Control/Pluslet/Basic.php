@@ -54,14 +54,14 @@
                 $this->_pluslet_bonus_classes = "basic-pluslet";
                 $this->_pluslet_name_field = "";
                 $clean_title = addslashes(htmlentities($this->_title));
-                $this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$clean_title\" size=\"$title_input_size\" />";
+                $this->_title = "<input type=\"text\" class=\"edit-input\" id=\"pluslet-update-title-$this->_pluslet_id\" value=\"$clean_title\" size=\"$title_input_size\" />";
                 $this_instance = "pluslet-update-body-$this->_pluslet_id";
             } else {
                 $new_id = rand(10000, 100000);
                 $this->_pluslet_bonus_classes = "unsortable basic-pluslet";
                 $this->_pluslet_id_field = $new_id;
                 $this->_pluslet_name_field = "new-pluslet-Basic";
-                $this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
+                $this->_title = "<input type=\"text\" class=\"edit-input\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"$this->_title\" size=\"$title_input_size\" />";
                 $this_instance = "pluslet-new-body-$new_id";
             }
 
