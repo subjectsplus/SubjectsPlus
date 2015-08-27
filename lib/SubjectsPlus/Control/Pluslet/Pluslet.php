@@ -92,36 +92,32 @@ class Pluslet {
         global $IconPath;
 
         switch ($view) {
-            case "admin":
-                $helptext = _("Help");
+            case "admin":                
                 $settingstext = _("Box Settings");
 
+                //If type is NOT Special
 				if(strtolower($this->_type) != 'special')
 				{
-					$this->_icons = "		                
-                        <!--<a id=\"settings-$this->_pluslet_id\"><img src=\"$IconPath/settings-26.png\" border=\"0\" title=\"$settingstext\" class=\"pluslet-icon\" alt=\"" . _("help") . "\" /></img></a>
-
-		                <img src=\"$IconPath/help.png\" border=\"0\" title=\"$helptext\" class=\"pluslet-icon help-$this->_type\" alt=\"" . _("help") . "\" /></img>
-		                <a class=\"togglebody\"><img class=\"pluslet-icon\"  src=\"$IconPath/toggle_small.png\"  alt=\"" . _("toggle me") . "\" title=\"" . _("toggle me") . "\" /></img></a>-->";
+					$this->_icons = "";
 				}
 
-                // If editable, give the pencil --> gear icon
+                // If editable, use gear icon to access edit mode and settings
                 if ($this->_editable == TRUE) {
                     // Deal with All Items by Source type (#1 in db)
                     if ($this->_pluslet_id == 1) {
-                        $this->_icons .= " <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><i class=\"fa fa-cog\" title=\"" . _("Edit") . "\" /></i></a>";
+                        $this->_icons .= "<a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><i class=\"fa fa-cog\" title=\"" . _("Edit & Box Settings") . "\" /></i></a>";
                     } else {
-                        $this->_icons .= " <a id=\"edit-$this->_pluslet_id-$this->_type\"><i class=\"fa fa-cog\" title=\"" . _("Edit") . "\" /></i></a>";
+                        $this->_icons .= "<a id=\"edit-$this->_pluslet_id-$this->_type\"><i class=\"fa fa-cog\" title=\"" . _("Edit & Box Settings") . "\" /></i></a>";
                     }
                 }
                 else {
-                    //Use gear button to access delete options
-                    $this->_icons .= " <a id=\"settings-$this->_pluslet_id\"><i class=\"fa fa-cog\" title=\"" . _("Settings") . "\" /></i></a>";
+                    //If not editable, use gear icon to access settings 
+                    $this->_icons .= " <a id=\"settings-$this->_pluslet_id\"><i class=\"fa fa-cog\" title=\"$settingstext\" /></i></a>";
     
                 }
 
                 // Show the item id --it's handy for debugging
-                $this->_visible_id = "<span class=\"pluslet_id smallgrey\">$this->_pluslet_id</span>";
+                $this->_visible_id = "$this->_pluslet_id";
 
                 // get our relative path to the legacy fixed_pluslet folder
                 $this->_relative_asset_path = "../../assets/";
@@ -173,10 +169,10 @@ class Pluslet {
         	
         	//if public view, add selected style
         	if( $this->_visible_id != '' ) {
-        		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title $this->_visible_id</div>";
+        		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title</div>";
         	}else
         	{
-        		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title $this->_visible_id</div>";
+        		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title</div>";
 
                 // since we're here, let's see if the body should be collapsed
                 if ($this->_collapse_body == 1) {
@@ -221,7 +217,7 @@ class Pluslet {
 
         echo "
             <div class=\"titlebar pure-g\">
-                <div class=\"titlebar_text pure-u-2-3\">$this->_title $this->_visible_id</div>
+                <div class=\"titlebar_text pure-u-2-3\">$this->_title</div>
                 <div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>
             ";
 
@@ -241,8 +237,12 @@ class Pluslet {
 
         global $titlebar_styles;
 
+        global $IconPath;
+
         // generate our titlebar styles
         $tb_styles = "";
+        $helptext = _("Help: About this box");
+
         foreach ($titlebar_styles as $key => $value) {
             $tb_styles .= "<option value=\"$value\" style=\"$value\"";
                 if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
@@ -250,21 +250,29 @@ class Pluslet {
         }
 
             $box_settings = "<div class=\"box_settings pure-u-1\">
-            <h3>Settings</h3>
+            <div class=\"pure-g\">
+                <div class=\"pure-u-1-2\"><a class=\"close-settings\"><i class=\"fa fa-times\" title=\"" . _("Close Settings Panel") . "\" /></i></a></div>
+                <div class=\"pure-u-1-2 delete-trigger\"><a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a></div>
+            </div> 
+            
+            <form class=\"pure-form box-settings-form\">
+                <div class=\"onoffswitch\">
+                    <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"notitle-$this->_pluslet_id\"";
+                    
+                    if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
+
+                    $box_settings .= ">                    
+                    <label class=\"onoffswitch-label\" for=\"notitle-$this->_pluslet_id\">
+                        <span class=\"onoffswitch-inner\"></span>
+                        <span class=\"onoffswitch-switch\"></span>
+                    </label>";        
+
+                    $box_settings .= "<span class=\"settings-label-text\">" . _("Hide titlebar") . "</span></div>
+
+
+
 
             
-            <a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a>
-
-            <a class=\"close-settings\"><i class=\"fa fa-times\" title=\"" . _("Close Settings Panel") . "\" /></i></a>
-            
-            <form class=\"pure-form pure-form-aligned\">
-            <label for=\"notitle-$this->_pluslet_id\" class=\"pure-checkbox\">
-                <input id=\"notitle-$this->_pluslet_id\" type=\"checkbox\"";
-
-                if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
-
-            $box_settings .= "> " . _("Hide titlebar") . "
-            </label>
             <label for=\"start-collapsed-$this->_pluslet_id\" class=\"pure-checkbox\">
                 <input id=\"start-collapsed-$this->_pluslet_id\" type=\"checkbox\"";
 
@@ -287,6 +295,10 @@ class Pluslet {
         $box_settings .= "> " . _("Favorite Box") . "
             </label>
             </form>
+            <div class=\"pure-g pluslet-metadata\">
+                <div class=\"pure-u-1-2 pluslet_id\">ID $this->_visible_id</div>
+                <div class=\"pure-u-1-2 pluslet-help\"><img src=\"$IconPath/info-circle.png\" border=\"0\" title=\"$helptext\" class=\"help-$this->_type\" alt=\"" . _("help") . "\" /></img></div>
+            </div>            
             </div>";
 
             return $box_settings;
