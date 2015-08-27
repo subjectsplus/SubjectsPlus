@@ -122,15 +122,6 @@ class Pluslet_TOC extends Pluslet {
 
 
 
-      $pluslets = $this->getPluslets();
-      //var_dump($pluslets);
-
-      foreach($pluslets as $key => $value):
-        //var_dump($key);
-
-
-      endforeach;
-
 
 
       // Edit
