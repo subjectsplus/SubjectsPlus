@@ -487,7 +487,7 @@ html,body { height:100%; }
   position:absolute;
   top: 3.1em;
   left: 90px;
-  z-index: 99999;
+  z-index: 99997;
 }
 
 .second-level-container {padding: 1em;}
@@ -613,8 +613,8 @@ a.pure-button-secondary:hover {
    border-top: 1px solid #3e3e3e; 
    border-radius: 4px;
    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-   margin: 0;
-   overflow: auto; max-height:350px;
+   margin: 0 0 20px 0;
+   overflow: auto; max-height:275px;
 }
 
 .fav-boxes-list, .fav-templates-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
@@ -638,20 +638,6 @@ li.fav-box-item:hover {
 }
 
 li.fav-box-item:hover::before {color: #C03957;}
-
-
-/* favorite pluslets styles cgb **/
-.favorite_pluslet:before {
-  content: "F";
-
-}
-
-/* linked pluslets styles cgb **/
-.linked_pluslet:before {
-  content: "L";
-
-}
-
 
 
 .clone-input {display:none;}
@@ -734,6 +720,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 */
 
 .dblist-button {margin-top:20px; font-size: 0.8em; display:none;}
+
 
 .pluslet_id {display: none; /* hide pluslet id on admin view */}
 
@@ -1090,6 +1077,110 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 
+/* Pluslet Flyout Box Settings */
+/* -------------- */
+
+.box_settings {
+  padding: 10px;
+  text-transform: none;
+  font-size: 0.9em;
+  display: none; 
+  position:absolute;
+  z-index: 99998;
+  top: 0;
+  left: 100%;
+  min-height: -moz-calc(100% - 20px);
+  min-height: -webkit-calc(100% - 20px);
+  min-height: calc(100% - 20px);
+  background-color: #f2f2f2;
+  box-shadow: 0 0 2px rgba(54, 51, 51, 0.4) inset;
+  width: 250px;
+}
+
+.box_settings label {
+  font-weight: normal;
+}
+
+.delete-trigger {text-align: right;}
+
+a[id^="delete-"], a.close-settings  {cursor: pointer; width:18px; height:18px; color: #858585 !important;}
+a[id^="delete-"] i, a.close-settings i {font-size: 18px;}
+a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
+
+
+/* box settings switc on/off */
+.onoffswitch {
+    position: relative; width: 45px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #CCCCCC; border-radius: 5px; margin: 0 !important;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 18px; padding: 0; line-height: 18px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "";
+    padding-left: 10px;
+    background-color: #C03957; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "";
+    padding-right: 10px;
+    background-color: #D5D5D5; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 16px; margin: 4px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 17px;
+    border: 2px solid #CCCCCC; border-radius: 5px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+
+/* box settings form */
+.box-settings-form {margin-top:10px;}
+
+.settings-label-text {
+    display:inline-block; 
+    left: 100%;
+    margin: 0 5px;
+    position: absolute;
+    top: 0;
+    width: 150px;
+}
+
+
+
+
+
+/* pluslet metadata */
+.pluslet-metadata {margin-top:20px;}
+
+.pluslet_id {color: #CCCCCC; font-size: 11px;}
+
+.pluslet-help {text-align:right;}
+.pluslet-help img:hover {cursor: pointer;}
+
+
 
 /* Social Media Pluslet */
 #social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
@@ -1108,6 +1199,43 @@ li.fav-box-item:hover::before {color: #C03957;}
   display: none;
 }
 
+/* Remove boxes from current tab */
+.remove_boxes_content {margin-bottom: 15px;}
+
+.remove_pluslets {color: #d5d5d5 !important; text-decoration:none;}
+.remove_pluslets:hover {color: #EF4836 !important; text-decoration:underline;}
+
+.remove_pluslets:before {
+  font-family: FontAwesome;
+  content:"\f071";
+  color: #EF4836; font-size:16px;
+  padding: 0 8px 0 0;
+}
+
+
+/* Favorite pluslets box styles cgb **/
+.favorite_pluslet:before {
+  font-family: FontAwesome;
+  content:"\f005";
+  color: #C03957; font-size:16px;
+  padding: 0 8px 0 0;
+}
+
+/* Linked pluslets box styles cgb **/
+.linked_pluslet:before {
+  font-family: FontAwesome;
+  content:"\f0c1";
+  color: #C03957; font-size:16px;
+  padding: 0 8px 0 0;
+}
+
+/* Favorite AND Linked pluslet box style */
+.favorite_pluslet.linked_pluslet:before {
+  font-family: FontAwesome;
+  content:"\f005 \00a0 \f0c1";
+  color: #C03957; font-size:16px;
+  padding: 0 8px 0 0;
+}
 
 
 /* Pluslet Admin ALL Styles */
@@ -1157,11 +1285,19 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 /* Pluslet Show/Hide Settings (before guide is saved) to avoid conflicts */
 /* -------------- */
-
 div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
+
 .titlebar_options a[id^="delete-"] {display:none;}
+
+/* Hide dialog boxes on guide page that were left over */
+#dialog, #dialog_edit {display: none; }
+
+
+/* Colorbox -index overides */
+#colorbox, #cboxOverlay, #cboxWrapper {z-index: 99998;}
+
 
 
 
