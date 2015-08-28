@@ -1192,6 +1192,11 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .pluslet-help img:hover {cursor: pointer;}
 
 
+/* TOC Pluslet */
+.table-of-contents:before {
+
+}
+
 
 /* Social Media Pluslet */
 #social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
@@ -1299,9 +1304,6 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
-
-.titlebar_options a[id^="delete-"] {display:none;}
-
 /* Hide dialog boxes on guide page that were left over */
 #dialog, #dialog_edit {display: none; }
 
@@ -1311,9 +1313,6 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
 
-
-/* Hide dialog boxes on guide page that were left over */
-#dialog, #dialog_edit {display: none; }
 
 
 
