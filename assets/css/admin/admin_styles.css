@@ -1035,6 +1035,13 @@ li.fav-box-item:hover::before {color: #C03957;}
   font-size: 0.9em;
 }
 
+.portal-column-0 .pluslet .pluslet_body ul,
+.portal-column-1 .pluslet .pluslet_body ul,
+.portal-column-2 .pluslet .pluslet_body ul{
+  padding: 0 0 0 10px;
+  list-style-position: inside;
+}
+
 .box_settings {
   padding: 10px;
   text-transform: none;
@@ -1182,16 +1189,12 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .pluslet-help img:hover {cursor: pointer;}
 
 
-/* TOC Pluslet */
-.table-of-contents:before {
-  font-family: FontAwesome;
-  content:"\f111";
-  color: #333; font-size:8px;
-  padding: 0 8px 0 0;
-}
 
-.table-of-contents { font-size: 1em; text-decoration:none;}
-.table-of-contents:hover {text-decoration:underline;}
+/* TOC Pluslet */
+.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0 0 0 10px;}
+
+.table-of-contents-edit { font-size: 0.9em; padding: 0 0 5px 0;}
+
 
 
 /* Catalog Pluslet Display Admin */
@@ -1210,6 +1213,11 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 #social_media_accounts ul li { display: inline; }
 
 #social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em; font-size: 26px;}
+
+
+/*  Clone Pluslet */
+.clone-alert {background-color: rgba(192,57,87, 0.3);}
+.clone-warning {background-color: rgba(245, 215, 110, 0.3);}
 
 
 /*** toggle pluslet body --CBR */
@@ -2119,13 +2127,15 @@ div.tooltip div
   position: absolute;
   top:45px;
   float: left;
-  background-color: #DD647F;
+  background-color: rgba(192,57,87, 0.8);
   width: 100%;
   text-align:center;
   display: none;
   margin-top:0;
   padding: 0.65em 0;
   z-index: -1;
+  color:#FFF;
+  font-family:'NotoSansBold';
 }
  
 
