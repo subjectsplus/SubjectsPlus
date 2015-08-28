@@ -44,5 +44,8 @@ function plantClone(clone_id, item_type, origin_id, clone_title) {
 						      //Make save button appear, since there has been a change to the page
 						      $("#save_guide").fadeIn();
 
+						      //Close main flyout when a pluslet is dropped
+						      $('#main-options').slideReveal("hide");
+
 						  });
 }
