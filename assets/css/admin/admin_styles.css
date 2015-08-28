@@ -716,19 +716,6 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 
-
-
-
-/* Catalog Pluslet Display Admin */
-.catalog-search {width:100%;}
-
-.catalog-search input[name='searcharg'] {width:50% !important;}
-
-.catalog-search table {width:100% !important;}
-.catalog-search table td #searchscope {width:50% !important;}
-
-
-
 /*TABS Items Area --where the individual tabs go */
 
 #tabs.ui-tabs {border-radius: 0 !important;} /* container */
@@ -977,7 +964,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-2 .pluslet .titlebar {
   padding: 0 0 5px 0;
   color: #333;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight:400;
   border-bottom: 1px solid #d5d5d5;
   background-color: transparent;
@@ -1045,6 +1032,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 .portal-column-1 .pluslet .pluslet_body,
 .portal-column-2 .pluslet .pluslet_body {
   padding: 10px 0;
+  font-size: 0.9em;
 }
 
 .box_settings {
@@ -1104,7 +1092,9 @@ a[id^="delete-"] i, a.close-settings i {font-size: 18px;}
 a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
+
 /* box settings switc on/off */
+
 .onoffswitch {
     position: relative; width: 45px; margin: 10px 0;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -1194,8 +1184,24 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 /* TOC Pluslet */
 .table-of-contents:before {
-
+  font-family: FontAwesome;
+  content:"\f111";
+  color: #333; font-size:8px;
+  padding: 0 8px 0 0;
 }
+
+.table-of-contents { font-size: 1em; text-decoration:none;}
+.table-of-contents:hover {text-decoration:underline;}
+
+
+/* Catalog Pluslet Display Admin */
+.catalog-search {width:100%;}
+
+.catalog-search input[name='searcharg'] {width:50% !important;}
+
+.catalog-search table {width:100% !important;}
+.catalog-search table td #searchscope {width:50% !important;}
+
 
 
 /* Social Media Pluslet */
@@ -1214,6 +1220,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .pluslet_body_closed {
   display: none;
 }
+
 
 /* Remove boxes from current tab */
 .remove_boxes_content {margin-bottom: 15px;}
@@ -1246,7 +1253,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 }
 
 /* Favorite AND Linked pluslet box style */
-.favorite_pluslet.linked_pluslet:before {
+.favorite_pluslet.linked_pluslet:before, .linked_pluslet.favorite_pluslet:before {
   font-family: FontAwesome;
   content:"\f005 \00a0 \f0c1";
   color: #C03957; font-size:16px;
