@@ -114,13 +114,13 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
 
     static function getMenuIcon() {
-        $icon="<i class=\"fa fa-user\" title=\"" . _("SubjectSpecialist") . "\" ></i><span class=\"icon-text\">" . _("SubjectSpecialist") ."</span>";
+        $icon="<i class=\"fa fa-user\" title=\"" . _("Subject Specialist") . "\" ></i><span class=\"icon-text\">" . _("Subject Specialist") ."</span>";
         return $icon;
     }
 
 
     static function getMenuName() {
-        return _('SubjectSpecialist');
+        return _('Subject Specialist');
     }
 
 

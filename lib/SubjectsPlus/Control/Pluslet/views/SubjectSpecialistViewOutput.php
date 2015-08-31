@@ -1,12 +1,16 @@
-<div id="subjectSpecialistPluslet">
+<div id="subjectSpecialistPluslet" class="pure-g">
 
 
     <?php if($this->staffPhoto != "off") {
-        echo  "<img id='staffPhoto' src='{$this->staffPhoto}' />";
-    } ?>
+        echo  "<div class=\"pure-u-1-2\"><span id='staffPhoto'>{$this->staffPhoto}</span></div>
+               <div class=\"pure-u-1-2\">";
+    }
+    else {
+        echo  "<div class=\"pure-u-1\">";
+    }
+    ?>
 
-
-
+    
     <ul>
         <li><?php echo $this->staffName; ?></li>
 
@@ -41,7 +45,6 @@
         } ?>
 
     </ul>
-
 
 
 </div>

@@ -1081,12 +1081,12 @@ function selectedPanelDisplay(){
 
 
 
-    //remove all pluslets from current tab
-    $('a.remove_pluslets').on('click', function() {
-        var currPanel = $("#tabs").tabs('option', 'active');
-        $("#tabs-" + currPanel).find('.pluslet').remove();
-        $("#save_guide").fadeIn();
-    });
+//remove all pluslets from current tab
+  $('a.remove_pluslets').on('click', function() {
+      var currPanel = $("#tabs").tabs('option', 'active');
+      $("#tabs-" + currPanel).find('.pluslet').remove();
+      $("#save_guide").fadeIn();
+  });
 
 
 

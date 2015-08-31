@@ -127,6 +127,9 @@ function makeDropable( lstrSelector )
 
 								      makeHelpable("img[class*=help-]");
 
+								      //Close main flyout when a pluslet is dropped
+						              $('#main-options').slideReveal("hide");
+
 								  });
 		}
 	    }
