@@ -66,7 +66,7 @@ function makeDeleteable( lstrSelector, lstrType )
 					    });
 
 			// Remove node
-			$(element_deletion).parent().parent().parent().remove();
+			$(element_deletion).parent().parent().parent().parent().remove();
 			$( this ).dialog( "close" );
 			return false;
 		    },
