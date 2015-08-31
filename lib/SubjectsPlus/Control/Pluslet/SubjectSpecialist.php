@@ -73,16 +73,22 @@ class Pluslet_SubjectSpecialist extends Pluslet {
             if( $this->_extra['facebook'] != "" )
             {
                 $this->staffFacebook = $this->_extra['facebook'];
+            } else {
+                $this->staffFacebook = "";
             }
 
             if( $this->_extra['twitter'] != "" )
             {
                 $this->staffTwitter = $this->_extra['twitter'];
+            } else {
+                $this->staffTwitter = "";
             }
 
             if( $this->_extra['pinterest'] != "" )
             {
                 $this->staffPinterest = $this->_extra['pinterest'];
+            } else {
+                $this->staffPinterest = "";
             }
 
             // Output Picture and Contact Info
