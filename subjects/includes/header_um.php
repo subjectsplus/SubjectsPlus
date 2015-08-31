@@ -309,9 +309,11 @@ $v2styles = TRUE;
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/interlibrary-loan/">Interlibrary Loan</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>
+                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/instruction-tour-request-form/">Instruction/Tour Request</a></li>
+                          
                       </ul>
-                       <ul>                          
+                       <ul>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>                          
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
                           <li><a href="<?php print PATH_TO_SP; ?>subjects/gis/">GIS Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
