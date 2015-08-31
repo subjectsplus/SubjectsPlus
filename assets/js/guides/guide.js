@@ -22,7 +22,11 @@ $(document).ready(function(){
     setupTabs('a[id*=tab-]');
     makeAddSection('a[id="add_section"]');
 
-    
+
+    mark_as_linked();
+
+    mark_as_favorite();
+
     activateFindboxSearch();
     
     // Append an intital section
