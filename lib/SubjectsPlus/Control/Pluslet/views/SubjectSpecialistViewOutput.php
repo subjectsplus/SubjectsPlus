@@ -2,7 +2,7 @@
 
 
     <?php if($this->staffPhoto != "off") {
-        echo  "<div class=\"pure-u-1-2\"><span id='staffPhoto'>{$this->staffPhoto}</span></div>
+        echo  "<div class=\"pure-u-1-2\"><img id='staffPhoto' src='{$this->staffPhoto}' /></div>
                <div class=\"pure-u-1-2\">";
     }
     else {
@@ -10,7 +10,7 @@
     }
     ?>
 
-    
+
     <ul>
         <li><?php echo $this->staffName; ?></li>
 
@@ -29,22 +29,24 @@
     </ul>
 
     <ul>
-        <?php if($this->staffFacebook) {
+        <?php if($this->staffFacebook != "") {
 
             echo "<li><a href='http://facebook.com/{$this->staffFacebook}'><i class='fa fa-facebook-square fa-3x'></i></a></li>";
         } ?>
 
-        <?php if($this->staffTwitter) {
+        <?php if($this->staffTwitter != "") {
 
             echo "<li><a href='http://twitter.com/{$this->staffTwitter}'><i class='fa fa-twitter-square fa-3x'></i></a></li>";
         } ?>
 
-        <?php if($this->staffPinterest) {
+        <?php if($this->staffPinterest != "") {
 
             echo "<li><a href='http://pinterest.com/{$this->staffPinterest}'><i class='fa fa-pinterest-square fa-3x'></i></a></li>";
         } ?>
 
     </ul>
+
+    </div>
 
 
 </div>
