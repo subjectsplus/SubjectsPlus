@@ -41,17 +41,13 @@ class Pluslet_SubjectSpecialist extends Pluslet {
             // get username from email
             $truncated_email = explode("@", $value[2]);
 
+
             if(!empty($this->_extra['showPhoto'][0])) {
 
-                $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
-                if(!file_exists($staff_picture)) {
-                    $this->staffPhoto = "<i class='fa fa-user fa-5x'></i>";
-                } else {
-                    $this->staffPhoto = $staff_picture;
-                }
+                $this->staffPhoto = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
 
             } else {
-                $this->staffPhoto = "off";
+                $this->staffPhoto = "http://lorempixel.com/70/70";
             }
 
             $this->staffName  = $value['fname']." " .$value['lname'];
@@ -100,6 +96,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
     protected function onEditOutput() {
         // make an editable body and title type
+
         if($this->_extra == "")
         {
             $this->_extra = array();
