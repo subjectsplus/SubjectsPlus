@@ -1084,8 +1084,10 @@ function selectedPanelDisplay(){
 //remove all pluslets from current tab
   $('a.remove_pluslets').on('click', function() {
       var currPanel = $("#tabs").tabs('option', 'active');
-      $("#tabs-" + currPanel).find('.pluslet').remove();
-      $("#save_guide").fadeIn();
+      if(confirm('Are you sure you want to remove all boxes?')) {
+        $("#tabs-" + currPanel).find('.pluslet').remove();
+        $("#save_guide").fadeIn();
+      }
   });
 
 
