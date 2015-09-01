@@ -1923,7 +1923,7 @@ div.ctag_list a:hover {
 
 
 .feedback, #feedback {
-  background-color: #DD647F;
+  background-color: rgba(192,57,87, 0.8);;
   width: 100%;
   text-align: center;
   font-weight: bold;

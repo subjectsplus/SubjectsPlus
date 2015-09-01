@@ -168,9 +168,9 @@ $v2styles = TRUE;
                       <div class="megasearchzone">
                       <p>Search for Articles across many databases:</p>
                         <form action="http://miami.summon.serialssolutions.com/search" method="GET" id="summon_search">
-                          <input type="hidden" value="ContentType,Newspaper Article, true" name="s.fvf[]" />
-                          <input type="hidden" value="ContentType,Book Review, true" name="s.fvf[]" />
-                          <input type="hidden" value="ContentType,Trade Publication Article, true" name="s.fvf[]" />
+                          <input type="hidden" value="ContentType,Newspaper Article, true" name="" />
+                          <input type="hidden" value="ContentType,Book Review, true" name="" />
+                          <input type="hidden" value="ContentType,Trade Publication Article, true" name="" />
                           <input name="s.q" value="" size="30" />
                           <input type="submit" value="Go" /> 
                         </form>
