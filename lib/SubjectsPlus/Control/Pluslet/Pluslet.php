@@ -93,7 +93,7 @@ class Pluslet {
 
         switch ($view) {
 
-            case "admin":                
+            case "admin":
                 $delete_text = _("Remove item from this guide");
 
 
@@ -115,7 +115,7 @@ class Pluslet {
                 else {
 
                     //If not editable, show only delete icon 
-                    $this->_icons .= "<a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"$delete_text\" /></i></a>";  
+                    $this->_icons .= "<a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"$delete_text\" /></i></a>";
 
                 }
 
@@ -150,10 +150,10 @@ class Pluslet {
         // if we're using a simple pluslet, things are diff
         // we use $this->_visible_id to make sure this is only on the frontend
 
-        
+
         //when TITLEBAR is HIDDEN - PV
         if (($hide_titlebar == 1 && $this->_visible_id == "" || $this->_title == "" && $this->_visible_id == "")) {
-            
+
             $this->_pluslet .= "
             <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple no_overflow $this->_pluslet_id_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
@@ -182,33 +182,33 @@ class Pluslet {
 			     <a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
 
-                if ($this->_visible_id != "") {
+            if ($this->_visible_id != "") {
                 $this->_pluslet .= self::boxSettings(); // add in our hidden div full of box config options
-                }
+            }
 
             $this->_pluslet .= "<div class=\"titlebar pluslet_sort\">";
 
 
-        	
-            	//if public view, add selected style
-            	if( $this->_visible_id != '' ) {
-            		$this->_pluslet .= "<div class=\"titlebar_text\">$this->_title</div>";
-            	}else
-            	{
-            		$this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title</div>";
 
-                    // since we're here, let's see if the body should be collapsed
-                    if ($this->_collapse_body == 1) {
-                        $this->_pluslet_body_bonus_classes .= "noshow";
-                    }
+            //if public view, add selected style
+            if( $this->_visible_id != '' ) {
+                $this->_pluslet .= "<div class=\"titlebar_text\">$this->_title</div>";
+            }else
+            {
+                $this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title</div>";
 
-
-            	}
-
-                //only if on admin side, display sort icon
-                if( $this->_visible_id != '' ) {
-                    $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
+                // since we're here, let's see if the body should be collapsed
+                if ($this->_collapse_body == 1) {
+                    $this->_pluslet_body_bonus_classes .= "noshow";
                 }
+
+
+            }
+
+            //only if on admin side, display sort icon
+            if( $this->_visible_id != '' ) {
+                $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
+            }
 
 
             $this->_pluslet .= "</div>";
@@ -290,45 +290,45 @@ class Pluslet {
 
                 <div class=\"onoffswitch titlebar_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"notitle-$this->_pluslet_id\"";
-                        
-                        if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
 
-                        $box_settings .= ">                    
+        if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
+
+        $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"notitle-$this->_pluslet_id\">
                             <span class=\"onoffswitch-inner\"></span>
                             <span class=\"onoffswitch-switch\"></span>
-                        </label>";        
+                        </label>";
 
-                        $box_settings .= "<span class=\"settings-label-text\">" . _("Hide Titlebar") . "</span>
+        $box_settings .= "<span class=\"settings-label-text\">" . _("Hide Titlebar") . "</span>
                 </div>
 
                 <div class=\"onoffswitch body_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"start-collapsed-$this->_pluslet_id\"";
-                        
-                        if ($this->_collapse_body == 1) {$box_settings .= " checked";}
 
-                        $box_settings .= ">                    
+        if ($this->_collapse_body == 1) {$box_settings .= " checked";}
+
+        $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"start-collapsed-$this->_pluslet_id\">
                             <span class=\"onoffswitch-inner\"></span>
                             <span class=\"onoffswitch-switch\"></span>
-                        </label>";        
+                        </label>";
 
-                        $box_settings .= "<span class=\"settings-label-text\">" . _("Hide Box Content") . "</span>
+        $box_settings .= "<span class=\"settings-label-text\">" . _("Hide Box Content") . "</span>
                 </div>
 
 
                 <div class=\"onoffswitch\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox favorite_pluslet_input\" id=\"favorite_box-$this->_pluslet_id\"";
-                        
-                        if ($this->_favorite_box == 1) {$box_settings .= " checked";}
 
-                        $box_settings .= ">                    
+        if ($this->_favorite_box == 1) {$box_settings .= " checked";}
+
+        $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"favorite_box-$this->_pluslet_id\">
                             <span class=\"onoffswitch-inner\"></span>
                             <span class=\"onoffswitch-switch\"></span>
-                        </label>";        
+                        </label>";
 
-                        $box_settings .= "<span class=\"settings-label-text\">" . _("Favorite Box") . "</span>
+        $box_settings .= "<span class=\"settings-label-text\">" . _("Favorite Box") . "</span>
                 </div>
 
 

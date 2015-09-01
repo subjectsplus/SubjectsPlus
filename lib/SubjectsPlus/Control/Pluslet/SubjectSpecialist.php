@@ -47,7 +47,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 $this->staffPhoto = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
 
             } else {
-                $this->staffPhoto = "http://lorempixel.com/70/70";
+                $this->staffPhoto = "/assets/images/headshot.jpg";
             }
 
             $this->staffName  = $value['fname']." " .$value['lname'];
