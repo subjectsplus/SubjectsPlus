@@ -55,7 +55,7 @@ $(document).ready(function () {
             	  
 
             	   if ($(this).text()) {
-            	   token_string += "<li class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}<li>";
+            	   token_string += "<li class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}</li>";
             	   }
                });
                
