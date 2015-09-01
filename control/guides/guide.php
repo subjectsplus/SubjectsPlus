@@ -898,12 +898,13 @@ ob_end_flush();
           <div id="dblist_options_content" class="second-level-content" style="display:none;">
               <h3><?php print _("Create Database List Box"); ?></h3>
               <div class="dblist-display">
-                  <select class="customdb-list">
-                      <option>Please select a database</option>
-                  </select>
-                  
+                
+                
                   <div class="databases-results-display pure-form">
-                            <input class="databases-search" type="text" placeholder="<?php print _("Enter database title..."); ?>"></input>
+                          <input class="databases-search" type="text" placeholder="<?php print _("Enter database title..."); ?>"></input>
+			  <label for="limit-az" class="pure-checkbox">Limit to AZ List
+				  <input id="limit-az" type="checkbox"></input>
+				  </label>
                             <ul class="databases-searchresults"></ul>
                         </div>
                         

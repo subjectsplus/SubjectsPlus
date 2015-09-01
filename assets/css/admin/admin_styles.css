@@ -714,8 +714,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .add-to-list-button { font-size: 0.8em; }
 .databases-searchresults { padding: 0; }
 
+.db-list-toggle { font-size:0.8em; }
 
-
+label .pure-checkbox { color:#fff; }
 /*TABS Items Area --where the individual tabs go */
 
 #tabs.ui-tabs {border-radius: 0 !important;} /* container */
