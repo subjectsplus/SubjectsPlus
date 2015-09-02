@@ -922,7 +922,7 @@ label .pure-checkbox { color:#fff; }
   background-color: transparent;
 }
 
-.sort_column, .portal_column, .ui-sortable{background-color: transparent;} /*original --> #F8F5F5 */
+.sort_column, .portal_column, .ui-sortable{background-color: transparent; display: block; min-height: 80px;} /*original --> #F8F5F5 */
 
 
 /* Used by the jquery ui plugin  */
