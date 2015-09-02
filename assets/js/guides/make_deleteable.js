@@ -62,11 +62,12 @@ function makeDeleteable( lstrSelector, lstrType )
 			},
 					    function() {
 						$("#response").fadeIn();
+						$("#save_guide").fadeIn();
 
 					    });
 
 			// Remove node
-			$(element_deletion).parent().parent().parent().parent().remove();
+			$(element_deletion).parents(".pluslet").remove();
 			$( this ).dialog( "close" );
 			return false;
 		    },
