@@ -14,6 +14,7 @@ class Pluslet_WorldCat extends Pluslet {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
   
     $this->_type = "WorldCat";
+    $this->_pluslet_bonus_classes = "type-worldcat";
   }
 
   protected function onEditOutput()

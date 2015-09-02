@@ -70,6 +70,7 @@ function makeEditable(lstrSelector) {
 
 			// Hide options from box settings options based on TYPE
 			   $(".pluslet.type-heading").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-worldcat").find(".body_set").addClass("hide-settings");
 
 
 
