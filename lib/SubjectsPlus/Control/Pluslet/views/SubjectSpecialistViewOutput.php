@@ -1,17 +1,17 @@
-<div id="subjectSpecialistPluslet" class="pure-g">
+<div id="subjectSpecialistPluslet" class="subjectSpecialistPluslet">
 
 
     <?php if($this->staffPhoto != "off") {
-        echo  "<div class=\"pure-u-1-2\"><img id='staffPhoto' src='{$this->staffPhoto}' /></div>
-               <div class=\"pure-u-1-2\">";
+        echo  "<div class=\"staff-image\"><img id='staffPhoto' class=\"staff-photo\" src='{$this->staffPhoto}' /></div>
+               <div class=\"staff-content\">";
     }
     else {
-        echo  "<div class=\"pure-u-1\">";
+        echo  "<div>";
     }
     ?>
 
 
-    <ul>
+    <ul class="staff-details">
         <li><?php echo $this->staffName; ?></li>
 
         <?php if($this->staffTitle != "off") {
@@ -28,20 +28,20 @@
 
     </ul>
 
-    <ul>
+    <ul class="staff-social">
         <?php if($this->staffFacebook != "") {
 
-            echo "<li><a href='http://facebook.com/{$this->staffFacebook}'><i class='fa fa-facebook-square fa-3x'></i></a></li>";
+            echo "<li><a href='http://facebook.com/{$this->staffFacebook}'><i class='fa fa-facebook-square'></i></a></li>";
         } ?>
 
         <?php if($this->staffTwitter != "") {
 
-            echo "<li><a href='http://twitter.com/{$this->staffTwitter}'><i class='fa fa-twitter-square fa-3x'></i></a></li>";
+            echo "<li><a href='http://twitter.com/{$this->staffTwitter}'><i class='fa fa-twitter-square'></i></a></li>";
         } ?>
 
         <?php if($this->staffPinterest != "") {
 
-            echo "<li><a href='http://pinterest.com/{$this->staffPinterest}'><i class='fa fa-pinterest-square fa-3x'></i></a></li>";
+            echo "<li><a href='http://pinterest.com/{$this->staffPinterest}'><i class='fa fa-pinterest-square'></i></a></li>";
         } ?>
 
     </ul>

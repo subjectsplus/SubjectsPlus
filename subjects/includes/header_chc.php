@@ -150,6 +150,20 @@ div.mega_child.mega-md {width: 400px !important;}
 #social_media_accounts ul li a { color: rgba(51,51,51,0.7) !important;}
 #social_media_accounts ul li a:hover { color: #f1722e !important;}
 
+.staff-social li  a {color: rgba(51,51,51,0.7) !important;}
+.staff-social li a:hover { color: #f1722e !important;}
+
+
+/* Front-end pluslet customization colors for titlebar - PV */
+.ts-whiteblack {
+    background-color: #cee8eb !important;
+    color: #333 !important;
+}
+
+.titlebar {border-bottom: none !important;}
+
+
+
 
 @media screen and (min-width: 48em) {
     #menu_button {display:none !important;}

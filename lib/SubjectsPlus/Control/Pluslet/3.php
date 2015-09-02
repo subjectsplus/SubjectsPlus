@@ -48,9 +48,11 @@ class Pluslet_3 extends Pluslet {
 
         // Output Picture and Contact Info
         $this->_body .= "
-        <div class=\"clearboth\"><img src=\"$staff_picture\" alt=\"Picture: $value[1] $value[0]\"  class=\"staff_photo2\" align=\"left\" />
-        <p><a href=\"mailto:$value[2]\">$value[1] $value[0]</a><br />$value[4]<br />
-        Tel: $tel_prefix $value[3]</p>\n</div>\n";
+        <div class=\"subjectSpecialistPluslet\">
+          <div class=\"staff-image\"><img src=\"$staff_picture\" alt=\"Picture: $value[1] $value[0]\"  class=\"staff_photo2\" /></div>
+          <div class=\"staff-content\"><p><a href=\"mailto:$value[2]\">$value[1] $value[0]</a><br />$value[4]<br />
+             Tel: $tel_prefix $value[3]</p></div>
+        </div>\n";
     }
 
 
@@ -73,7 +75,7 @@ class Pluslet_3 extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-user\" title=\"" . _("Subject Specialist") . "\" ></i><span class=\"icon-text\">" . _("Subject Specialist") ."</span>";
+        $icon="<i class=\"fa fa-users\" title=\"" . _("Subject Specialists") . "\" ></i><span class=\"icon-text\">" . _("Subject Specialists") ."</span>";
         return $icon;
     }
 

@@ -1249,11 +1249,36 @@ div.video_thumb img {
 
 #social_media_accounts ul li { display: inline !important; }
 
-#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em !important; font-size: 26px !important;}
+#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important;}
 
 
 /* Hide Expand/Collapse Pluslets - Front-end*/
 #expand_tab {display: none !important;}
+
+
+
+/* Subject Specialist Pluslet - NEW - Front-end*/
+.subjectSpecialistPluslet {margin: 0 0 12px 0; display: block; overflow: hidden;}
+.staff-image {width: 90px; float:left; display: inline-block; margin-right: 20px; }
+
+.staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
+
+.staff-content {
+  float:left; 
+  display: inline-block;
+  width: calc(100% - 110px);
+  width: -moz-calc(100% - 110px);
+  width: -webkit-calc(100% - 110px);
+}
+
+.staff-details {list-style-type: none; margin: 0 !important; padding: 0; }
+.staff-details li {margin: 0; display: block !important;}
+
+.staff-social {list-style-type: none; margin: 0 !important; padding: 0;}
+.staff-social li {display: inline !important;}
+.staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important;}
+
+
 
 
 /* //////////////////
