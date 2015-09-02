@@ -47,7 +47,7 @@ class Pluslet_4 extends Pluslet {
 
             $this->_body .= "</ul>";
         } else {
-            $this->_body = _("There are no FAQs linked for this guide");
+            $this->_body = "<p class=\"faq-alert\">" . _("There are no FAQs linked for this guide") . "</p>";
         }
 
         parent::assemblePluslet();

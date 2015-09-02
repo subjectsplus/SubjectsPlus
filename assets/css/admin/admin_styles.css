@@ -511,7 +511,7 @@ html,body { height:100%; }
   display: inline-block;
   margin: 0 5px 10px 10px;
   padding: 10px 0;
-  width: 110px;
+  width: 113px;
   font-size: 30px;
   overflow: hidden;
   border-radius: 2px;
@@ -1213,12 +1213,54 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 #social_media_accounts ul li { display: inline; }
 
-#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.5em; font-size: 26px;}
+#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.3em .2em 0; font-size: 26px;}
+
 
 
 /*  Clone Pluslet */
 .clone-alert {background-color: rgba(192,57,87, 0.3);}
 .clone-warning {background-color: rgba(245, 215, 110, 0.3);}
+
+
+
+/*  Subject Specialist Pluslet - NEW */
+.subjectSpecialistPluslet {display: block; overflow: hidden; margin: 0 0 12px 0;}
+
+.staff-image {width: 90px; float:left; display: inline-block; }
+
+.staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
+
+.staff-content {
+  float:left; 
+  display: inline-block;
+  width: calc(100% - 90px);
+  width: -moz-calc(100% - 90px);
+  width: -webkit-calc(100% - 90px);
+}
+
+.staff-details {list-style-type: none; margin: 0; padding: 0; }
+.staff-details li {margin: 0 0 2px 0; }
+
+.staff-social {list-style-type: none; margin: 6px 0 0 0; padding: 0;}
+.staff-social li {display: inline;}
+.staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0; font-size: 26px;}
+
+
+
+/*  Subject Specialist - OLD */
+.staff_photo, .staff_photo2 {
+  background: #efefef;
+  padding: 3px;
+  border: 1px solid #d5d5d5;
+}
+
+.staff-content p {margin:0;}
+
+
+
+/* FAQs Pluslet ==4 */
+.faq-alert {background-color: rgba(192,57,87, 0.3);}
+
 
 
 /*** toggle pluslet body --CBR */
@@ -1497,13 +1539,7 @@ div.dropdown_list option {
   padding: 5px 2px 2px 5px;
 }
 
-.staff_photo {
-  position: relative;
-  background: #efefef;
-  padding: 3px;
-  border: 1px solid #333;
-  margin-right: 20px;
-}
+
 
 
 
@@ -1929,6 +1965,7 @@ div.ctag_list a:hover {
   font-weight: bold;
   padding: 0;
   display: none;
+  color: #fff;
 }
 
 div.feedback a:link {
@@ -2399,23 +2436,7 @@ margin: .5em 0 0 2.5em;
 
 
 
-.staff_photo {
-  position: relative;
-  background: #efefef;
-  padding: 3px;
-  border: 1px solid #333;
-  margin-right: 20px;
-  margin-bottom: 10px;
-}
 
-.staff_photo2 {
-  position: relative;
-  float: left;
-  background: #efefef;
-  padding: 3px;
-  border: 1px solid #333;
-  margin: 0 10px 0 10px;
-}
 
 .smallgrey {
   color: #CCCCCC; font-size: 11px; text-shadow: none;
