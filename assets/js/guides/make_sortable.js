@@ -44,10 +44,10 @@ function makeSortable(lstrSelector, lstrType) {
 			},
 			start : function(event, ui) {
 				$(ui.item).children('.pluslet_body').hide();
-				$(ui.item).children().children('.titlebar_text').hide();
+				$(ui.item).children().children('.titlebar_text').show();
 				$(ui.item).children().children('.titlebar_options').hide();
 				$(ui.item).height('2em');
-				$(ui.item).width('auto');
+				$(ui.item).width('90%');
 			},
 			stop : function(event, ui) {
 
