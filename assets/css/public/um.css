@@ -1243,6 +1243,27 @@ div.video_thumb img {
 #wc_searchbox #div-search.lightcolor {width:100% !important; height: auto !important;}
 #wc_searchbox iframe {width:100% !important;}
 
+.lightcolor { background: #f6f6f6; }
+.darkcolor { background: #999999; }
+body {font: 14px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif; }
+#div-search .search-for { font-weight: bold; padding: 0 2px; vertical-align: middle; }
+#div-search .search-query { padding: 0 2px; vertical-align: middle; }
+#div-search .search-button { padding-right: 15px; vertical-align: middle; }
+#div-search .search-button input.button-search { color: #fff }
+#div-search .search-advanced { font-size: 11px; vertical-align: middle; white-space: nowrap; }
+
+/* tab style */
+.shadetabs{padding: 3px 0; margin-left: 0; margin-top: 1px; margin-bottom: 0; font: bold 12px Verdana; list-style-type: none; text-align: left;}
+.shadetabs li{display: inline; margin: 0; font-size: 11px;}
+.shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border-top: 1px solid #A5A2A5; border-left: 1px solid #A5A2A5; border-right: 1px solid #A5A2A5;color: #a0a0a0; cursor:pointer;}
+.shadetabs li a:visited{color: #a0a0a0;}
+.shadetabs li a:hover{text-decoration: underline; color: #a0a0a0;}
+.shadetabs li a.selected{position: relative; top: 1px; color: #000; background: #f6f6f6; cursor:text;}
+.shadetabs li a.selected:hover{text-decoration: none;}
+
+
+
+
 
 /* Social Media Pluslet - Front-end*/
 #social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
