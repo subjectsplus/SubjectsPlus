@@ -86,9 +86,17 @@ $(document).ready(function () {
 		$('.databases-search').keypress(function(data) {
 
 			$('.databases-searchresults').empty();
+			var search_url;
 			var search_term = $('.databases-search').val(); 
-		   
-		 $.get('../includes/autocomplete_data.php?collection=records&term=' +  search_term, function(data) {
+			var limit_az = $('#limit-az').prop("checked");
+			
+			if(limit_az) {
+			 	search_url = "../includes/autocomplete_data.php?collection=azrecords&term=";
+			} else {
+				search_url = "../includes/autocomplete_data.php?collection=records&term=";
+			}
+			
+		 $.get(search_url +  search_term, function(data) {
 
 			 if(data.length != 0) {
 				for(var i = 0; i < 10; i++) {
