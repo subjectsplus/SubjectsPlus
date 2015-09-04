@@ -16,6 +16,7 @@ class Pluslet_Catalog extends Pluslet {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
   
     $this->_type = "Catalog";
+    $this->_pluslet_bonus_classes = "type-catalog";
   }
 
   protected function onEditOutput()

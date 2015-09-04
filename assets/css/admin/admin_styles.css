@@ -1258,8 +1258,10 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
 
-/* FAQs Pluslet ==4 */
+/* FAQs Pluslet = 4 */
 .faq-alert {background-color: rgba(192,57,87, 0.3);}
+
+
 
 
 
@@ -1287,6 +1289,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 }
 
 
+
 /* Favorite pluslets box styles cgb **/
 .favorite_pluslet:before {
   font-family: FontAwesome;
@@ -1310,6 +1313,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
   color: #C03957; font-size:16px;
   padding: 0 8px 0 0;
 }
+
 
 
 /* Pluslet Admin ALL Styles */

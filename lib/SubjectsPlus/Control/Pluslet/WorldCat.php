@@ -29,7 +29,7 @@ class Pluslet_WorldCat extends Pluslet {
 
   $output = $this->loadHtml(__DIR__ . '/views/WorldCat.html');
   	
-  $this->_body = "<p>$output</p>";
+  $this->_body = "$output";
 
   }
 
