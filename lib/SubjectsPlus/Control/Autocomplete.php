@@ -151,6 +151,16 @@ class Autocomplete {
        $statement = $connection->prepare("SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', 
        		title FROM title WHERE title LIKE :search_term");
         break;
+        
+        
+     case "azrecords":
+        	$statement = $connection->prepare("SELECT DISTINCT t.title_id AS 'id', 'Record' as 'content_type',t.title AS 'label'
+        FROM location l, title t, location_title lt 
+        WHERE  t.title_id = lt.title_id
+        AND l.eres_display = 'Y'
+		AND t.title LIKE :search_term");
+        	break;
+        
       case "faq":
         $statement = $connection->prepare("SELECT faq_id AS 'id',question AS 'label', LEFT(question, 55), 
         		'FAQ' as 'content_type'  FROM faq WHERE question LIKE :search_term" );
