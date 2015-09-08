@@ -903,7 +903,7 @@ ob_end_flush();
                   <div class="databases-results-display pure-form">
                           <input class="databases-search" type="text" placeholder="<?php print _("Enter database title..."); ?>"></input>
 			  <label for="limit-az" class="pure-checkbox">Limit to AZ List
-				  <input id="limit-az" type="checkbox"></input>
+				  <input id="limit-az" type="checkbox" checked></input>
 				  </label>
                             <ul class="databases-searchresults"></ul>
                         </div>
