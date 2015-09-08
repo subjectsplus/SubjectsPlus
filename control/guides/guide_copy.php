@@ -74,7 +74,9 @@ $('.create-guide').on('click', function() {
 		console.log(data);
 		$('.metadata-url').show();
 		$('.metadata-url').attr('href', "metadata.php?subject_id=" + data);
-	
+
+		window.location.href = "<?php echo getControlURL(); ?>" + "/guides/metadata.php?subject_id=" + data;
+		
 	});
 	
 });
