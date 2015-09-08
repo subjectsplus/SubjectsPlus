@@ -1095,7 +1095,6 @@ function selectedPanelDisplay(){
 
 
 
-
  //Change layout click events
 $( "#col-single" ).click(function() {      
       changeLayout(0, 14);
