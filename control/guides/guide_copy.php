@@ -9,17 +9,21 @@ include ("../includes/autoloader.php");
 include ("../includes/config.php");
 
 
+
 if (isset($_POST['subject_id'])) {
+session_start();
 $db = new Querier;
 $subject_id = (int) $_POST['subject_id'];
-$guide_base = new GuideBase($subject_id, $db);
+$guide_base = new GuideBase($subject_id, $_SESSION['email'], $db);
 $guide_base->loadGuide();
 echo $guide_base->saveGuide();
+
 exit;
 } else {
 	include("../includes/header.php");
 	
 }
+
 
 
 $db = new Querier;

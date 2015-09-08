@@ -14,6 +14,7 @@ use SubjectsPlus\Control\Querier;
 class GuideBase {
 	private $_subject_id;
 	private $_subject;
+	private $_staff;
 	private $_shortform;
 	private $_description;
 	private $_keywords;
@@ -29,8 +30,10 @@ class GuideBase {
 	private $_sections = array ();
 	private $_pluslets = array ();
 	private $_tabs = array ();
-	public function __construct($subject_id, Querier $db) {
+	
+	public function __construct($subject_id, $staff, Querier $db) {
 		$this->_subject_id = $subject_id;
+		$this->_staff = $staff;
 		$this->db = $db;
 	}
 	public function loadGuide() {
@@ -83,6 +86,11 @@ class GuideBase {
 	}
 	public function saveGuide() {
 		$connection = $this->db->getConnection ();
+		$statement = $connection->prepare("SELECT staff_id FROM staff WHERE email = :email");
+		$statement->bindParam(":email", $this->_staff);
+		$statement->execute();
+	    $staff_id = $statement->fetchAll(); 
+		
 		$statement = $connection->prepare ( "INSERT INTO subject (`subject`, `active`, `shortform`,`header`, `description`, `keywords`, `type`, `extra`  ) VALUES (:subject, :active, :shortform, :header, :description, :keywords, :type, :extra)" );
 		
 		$statement->bindParam ( ':subject', $this->_subject );
@@ -177,6 +185,11 @@ class GuideBase {
 			}
 		}
 		
+	$statement = $connection->prepare("INSERT INTO staff_subject (`staff_id`, `subject_id`) VALUES (:staff_id, :subject_id)");
+    $statement->bindParam(":staff_id", $staff_id[0]['staff_id']);
+    $statement->bindParam(":subject_id", $subject_insert_id);
+    $statement->execute();
+
 		return $subject_insert_id;
 	}
 	public function toArray() {

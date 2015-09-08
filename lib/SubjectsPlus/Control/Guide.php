@@ -299,7 +299,8 @@ class Guide
                     </div>
                 <div class=\"pluslet_body\">
 
-            <label for=\"record_title\">" . _("Guide") . "</label>
+                <a href='guide_copy.php'>" . _("Copy an Existing Guide") . "</a>" .
+            "<label for=\"record_title\">" . _("Guide") . "</label>
             <input type=\"text\" name=\"subject\" id=\"record_title\" class=\"pure-input-1-2 required_field\" value=\"" . $this->_subject . "\">
 
             <label for=\"record_shortform\">" . _("Short Form") . "</label>
