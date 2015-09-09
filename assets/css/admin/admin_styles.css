@@ -1204,12 +1204,9 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
 /* Catalog Pluslet Display Admin */
-.catalog-search {width:100%;}
+.catalog-search {width:100%; margin: 0 10px;}
 
-.catalog-search input[name='searcharg'] {width:50% !important;}
-
-.catalog-search table {width:100% !important;}
-.catalog-search table td #searchscope {width:50% !important;}
+.catalog-search .adv-prompt a{font-size: 0.8em;}
 
 
 
@@ -1287,9 +1284,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
     .shadetabs li a.selected:hover{text-decoration: none;}
 
 
-#journalsearch {margin-top: 10px;}
-
-.wcat-label {font-weight: normal; font-size: 0.9em;}
+.wcat-label {font-weight: normal; font-size: 0.9em; margin: 0.5em 0 0.2em 0;}
 
 #bottomdiv {
   padding: 0.2em 0 0.2em 10px; 
@@ -1409,38 +1404,46 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
 
-/* Pure Form overrides - PV */
-.pure-form input,
-.pure-form select,
-.pure-form textarea {
+/* Pure Form overrides for guide page - PV */
+.portal-column .pure-form input,
+.portal-column .pure-form select,
+.portal-column .pure-form textarea {
   border-radius: 2px !important;
   border: 1px solid #bcbbbb !important;
   box-shadow: none !important;
   padding: 4px !important;
+  font-size: 1em;
+  margin-bottom: 6px;
+  width: 35%;
 }
 
-.pure-button-pluslet, 
-a.pure-button-pluslet {
+.portal-column .pure-button-pluslet, 
+.portal-column a.pure-button-pluslet {
   background-color: rgba(192,57,87, 0.8);
   box-shadow: none;
   color: #FFFFFF !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
 }
 
-.pure-form input.pure-button-pluslet {padding: 4px 10px !important;}
+.portal-column .pure-form input.pure-button-pluslet {padding: 4px 10px !important; width: auto;}
 
-.pure-button-pluslet:hover, 
-a.pure-button-pluslet:hover {
+.portal-column .pure-button-pluslet:hover, 
+.portal-column a.pure-button-pluslet:hover {
   background-color: rgba(192,57,87, 1);
 }
 
-.pure-form legend {
+.portal-column .pure-form legend {
     border-bottom: none;
     color: #858585;
     font-weight: bold;
     font-style: italic;
     width: 94%;
 }
+
+input[type="checkbox"], input[type="radio"] {width: auto !important;}
+
+
+
 
 /* Main content areas */
 
@@ -2366,12 +2369,6 @@ li.dropspotty {
 
 
 
-
-/* For pluslet designated as a heading */
-div.type-heading {
-  width: 70%;
-  text-transform: uppercase;
-}
 
 /* guides/manage.php */
 

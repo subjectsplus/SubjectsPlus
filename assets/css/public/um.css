@@ -286,7 +286,7 @@ img {
     margin-left: 0;
     margin-top: 2px;
     text-align: left;
-    min-height: 26px;
+    min-height: 28px;
 }
 
 #spum_nav ul li {
@@ -513,6 +513,8 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 }
 #tabs .pluslet li, #tabs .pluslet_simple li {
     display: list-item;
+    line-height: 1.4em;
+    margin-bottom: 6px;
 }
 
 #tabs .pluslet li a, #tabs .pluslet_simple li a {
@@ -678,7 +680,7 @@ ul.ui-autocomplete li a{
 }
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase; border: none;font-weight: bold;}
+.plusheading, .type-heading { padding: 0; text-transform:normal; border: none;font-weight: bold;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0; border: none;}
 div.type-heading .titlebar { background-color: transparent;border: none;}
 
@@ -689,9 +691,12 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
     text-align: left;
     overflow-y: auto;
     overflow-x: hidden !important;
+    line-height:1.4em;
 }
 
 .pluslet_simple .pluslet_body {font-size: 10pt; margin: 0 0 0 -15px; padding: 0;}
+
+..pluslet_body p {line-height:1.4em;}
 
 .pluslet_body a,
 .pluslet_body a:link {text-decoration: underline; color: #40659b;}
@@ -1227,42 +1232,15 @@ div.video_thumb img {
 }
 
 
+/* TOC Pluslet - Front-end */
+.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0;}
+
+
 /* Catalog Pluslet Display - Front-end */
 
-.catalog-search {width:100%;}
+.catalog-search {width:100%; margin: 0 10px;}
 
-.catalog-search input[name='searcharg'] {width:50% !important;}
-
-.catalog-search table {width:100% !important; border: none;}
-.catalog-search table td #searchscope {width:50% !important;}
-
-.catalog-search #searchtype{font-size:1em !important;}
-
-
-/* WorldCat Pluslet Display - Front-end */
-#wc_searchbox #div-search.lightcolor {width:100% !important; height: auto !important;}
-#wc_searchbox iframe {width:100% !important;}
-
-.lightcolor { background: #f6f6f6; }
-.darkcolor { background: #999999; }
-body {font: 14px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif; }
-#div-search .search-for { font-weight: bold; padding: 0 2px; vertical-align: middle; }
-#div-search .search-query { padding: 0 2px; vertical-align: middle; }
-#div-search .search-button { padding-right: 15px; vertical-align: middle; }
-#div-search .search-button input.button-search { color: #fff }
-#div-search .search-advanced { font-size: 11px; vertical-align: middle; white-space: nowrap; }
-
-/* tab style */
-.shadetabs{padding: 3px 0; margin-left: 0; margin-top: 1px; margin-bottom: 0; font: bold 12px Verdana; list-style-type: none; text-align: left;}
-.shadetabs li{display: inline; margin: 0; font-size: 11px;}
-.shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border-top: 1px solid #A5A2A5; border-left: 1px solid #A5A2A5; border-right: 1px solid #A5A2A5;color: #a0a0a0; cursor:pointer;}
-.shadetabs li a:visited{color: #a0a0a0;}
-.shadetabs li a:hover{text-decoration: underline; color: #a0a0a0;}
-.shadetabs li a.selected{position: relative; top: 1px; color: #000; background: #f6f6f6; cursor:text;}
-.shadetabs li a.selected:hover{text-decoration: none;}
-
-
-
+.catalog-search .adv-prompt a{font-size: 0.8em;}
 
 
 /* Social Media Pluslet - Front-end*/
@@ -1271,6 +1249,7 @@ body {font: 14px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif; }
 #social_media_accounts ul li { display: inline !important; }
 
 #social_media_accounts ul li a { text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important;}
+
 
 
 /* Hide Expand/Collapse Pluslets - Front-end*/
@@ -1338,6 +1317,8 @@ body {font: 14px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif; }
   border: 1px solid #bcbbbb !important;
   box-shadow: none !important;
   padding: 4px !important;
+  margin-bottom: 6px;
+  width: 50%;
 }
 
 .pure-button-pluslet, 
@@ -1348,7 +1329,7 @@ a.pure-button-pluslet {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
 }
 
-.pure-form input.pure-button-pluslet {padding: 4px 10px !important;}
+.pure-form input.pure-button-pluslet {padding: 4px 10px !important; width: auto;}
 
 .pure-button-pluslet:hover, 
 a.pure-button-pluslet:hover {
@@ -1692,6 +1673,12 @@ table.item_listing th {
     .staff_photo {  }  
 
    .response-link {display:none;}
+
+   .pure-form input,
+    .pure-form select,
+    .pure-form textarea {
+      width: 65%;
+    }
     
 }
 
@@ -1800,9 +1787,15 @@ table.item_listing th {
 
     .form-item {width: 200px;}
 
-    
+    .pure-form input,
+    .pure-form select,
+    .pure-form textarea {
+      width: 55%;
+    }
     
 }
+
+
 
 .book {
 	display: inline-block;
@@ -1839,6 +1832,8 @@ table.item_listing th {
 	margin-top:1em;
 }
 
+
+
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
  .tip {
@@ -1846,4 +1841,6 @@ table.item_listing th {
     }
 
     .form-item {width: 260px;}
+
+    
 }

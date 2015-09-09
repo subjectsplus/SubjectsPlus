@@ -446,7 +446,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { background-color: #9F3E3B; width: 70%; padding: 0; text-transform:uppercase;}
+.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: normal;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
 
 
@@ -1127,8 +1127,6 @@ div.video_thumb img {
 
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase;}
-
 .evenrow {
     background-color: #E3E1D9;
 }
@@ -1162,6 +1160,14 @@ width:55px;
 }
 
 .noshow {display: none;}
+
+
+
+/* Catalog Pluslet Display - Front-end */
+
+.catalog-search {width:100%; margin: 0;}
+
+.catalog-search .adv-prompt a{font-size: 0.8em;}
 
 
 
@@ -1204,7 +1210,7 @@ width:55px;
 .staff-social li a:hover { color: rgba(51,51,51,1);}
 
 
-/* WorldCat Pluslet - Front-end*/
+/* WorldCat Pluslet - Front-end */
 #div-search { width: 100%;}
 
 #wcfw p {margin:0 0 0.5em 0;}
@@ -1241,6 +1247,8 @@ width:55px;
   border: 1px solid #bcbbbb !important;
   box-shadow: none !important;
   padding: 4px !important;
+  margin-bottom: 6px;
+  width: 50%;
 }
 
 .pure-button-pluslet, 
@@ -1251,7 +1259,7 @@ a.pure-button-pluslet {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
 }
 
-.pure-form input.pure-button-pluslet {padding: 4px 10px !important;}
+.pure-form input.pure-button-pluslet {padding: 4px 10px !important; width: auto;}
 
 .pure-button-pluslet:hover, 
 a.pure-button-pluslet:hover {
@@ -1311,10 +1319,24 @@ a.pure-button-pluslet:hover {
     .ui-widget-header {
        background: url("../shared/images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll top left #cccccc !important;
     }
+
+    .pure-form input,
+    .pure-form select,
+    .pure-form textarea {
+      width: 65%;
+    }
+
+
 }
 
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
+
+    .pure-form input,
+    .pure-form select,
+    .pure-form textarea {
+      width: 55%;
+    }
 
 }
 
