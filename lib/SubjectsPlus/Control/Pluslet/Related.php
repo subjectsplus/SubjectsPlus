@@ -14,12 +14,13 @@ class Pluslet_Related extends Pluslet {
 		
 		$this->_subject_id = $subject_id;
 		$this->_type = "Related";
+		$this->_pluslet_bonus_classes = "type-relguide";
 		
 		$this->db = new Querier ();
 	}
 	protected function onEditOutput() {
 		
-		$this->_body = "<div>" . _("This pluslet automatically links to any child guides that you have assigned to this guide.") . "</div>";
+		$this->_body = "<div class=\"faq-alert\">" . _("This pluslet automatically links to any child guides that you have assigned to this guide.") . "</div>";
 	}
 	public function outputRelatedGuides() {
 		
