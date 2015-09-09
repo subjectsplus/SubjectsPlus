@@ -574,7 +574,7 @@ html,body { height:100%; }
 
 .find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; overflow:auto; max-height:540px;}
 
-.guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important;}
+.guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important; border: 1px solid #bcbbbb;padding: 4px;}
 
 .guides-display .guide-list option {width: 100%;}
 
@@ -585,7 +585,7 @@ html,body { height:100%; }
 
 .clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
 
-#search-tab .findbox-search {width:96%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;}
+#search-tab .findbox-search {width:96%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; border: 1px solid #bcbbbb; border-radius: 2px; padding: 4px;}
 
 .pure-button-secondary, 
 a.pure-button-secondary {
@@ -1268,6 +1268,34 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
 
+/* WorldCat Search Pluslet */
+#div-search { width: 100%;}
+
+#wcfw p {margin:0 0 0.5em 0;}
+
+#wcfw #box {margin: 0 10px 0 10px;}
+
+#wcfw input {margin-bottom: 4px;}
+
+/* tab style */
+    .shadetabs {padding: 3px 0; font: bold 0.9em; list-style-type: none; text-align: left; margin: 10px 0 0 0;}
+    .shadetabs li {display: inline-block; margin: 0 0 12px 0; font-size: 0.9em;}
+    .shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border: 1px solid #CCC; color: #333; cursor:pointer; border-radius: 2px;}
+    .shadetabs li a:visited{color: #333;}
+    .shadetabs li a:hover{text-decoration: underline; color: #000;}
+    .shadetabs li a.selected{position: relative; top: 1px; color: #333; background: #d5d5d5; cursor:text;}
+    .shadetabs li a.selected:hover{text-decoration: none;}
+
+
+#journalsearch {margin-top: 10px;}
+
+.wcat-label {font-weight: normal; font-size: 0.9em;}
+
+#bottomdiv {
+  padding: 0.2em 0 0.2em 10px; 
+  background: url(https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus) 98% bottom no-repeat;}
+
+#bottomdiv a {font-size: 0.8em;}
 
 
 /*** toggle pluslet body --CBR */
@@ -1381,7 +1409,38 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
 
+/* Pure Form overrides - PV */
+.pure-form input,
+.pure-form select,
+.pure-form textarea {
+  border-radius: 2px !important;
+  border: 1px solid #bcbbbb !important;
+  box-shadow: none !important;
+  padding: 4px !important;
+}
 
+.pure-button-pluslet, 
+a.pure-button-pluslet {
+  background-color: rgba(192,57,87, 0.8);
+  box-shadow: none;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
+}
+
+.pure-form input.pure-button-pluslet {padding: 4px 10px !important;}
+
+.pure-button-pluslet:hover, 
+a.pure-button-pluslet:hover {
+  background-color: rgba(192,57,87, 1);
+}
+
+.pure-form legend {
+    border-bottom: none;
+    color: #858585;
+    font-weight: bold;
+    font-style: italic;
+    width: 94%;
+}
 
 /* Main content areas */
 

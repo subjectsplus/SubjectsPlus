@@ -286,7 +286,7 @@ img {
     margin-left: 0;
     margin-top: 2px;
     text-align: left;
-    min-height: 2.15em;
+    min-height: 26px;
 }
 
 #spum_nav ul li {
@@ -1243,6 +1243,27 @@ div.video_thumb img {
 #wc_searchbox #div-search.lightcolor {width:100% !important; height: auto !important;}
 #wc_searchbox iframe {width:100% !important;}
 
+.lightcolor { background: #f6f6f6; }
+.darkcolor { background: #999999; }
+body {font: 14px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif; }
+#div-search .search-for { font-weight: bold; padding: 0 2px; vertical-align: middle; }
+#div-search .search-query { padding: 0 2px; vertical-align: middle; }
+#div-search .search-button { padding-right: 15px; vertical-align: middle; }
+#div-search .search-button input.button-search { color: #fff }
+#div-search .search-advanced { font-size: 11px; vertical-align: middle; white-space: nowrap; }
+
+/* tab style */
+.shadetabs{padding: 3px 0; margin-left: 0; margin-top: 1px; margin-bottom: 0; font: bold 12px Verdana; list-style-type: none; text-align: left;}
+.shadetabs li{display: inline; margin: 0; font-size: 11px;}
+.shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border-top: 1px solid #A5A2A5; border-left: 1px solid #A5A2A5; border-right: 1px solid #A5A2A5;color: #a0a0a0; cursor:pointer;}
+.shadetabs li a:visited{color: #a0a0a0;}
+.shadetabs li a:hover{text-decoration: underline; color: #a0a0a0;}
+.shadetabs li a.selected{position: relative; top: 1px; color: #000; background: #f6f6f6; cursor:text;}
+.shadetabs li a.selected:hover{text-decoration: none;}
+
+
+
+
 
 /* Social Media Pluslet - Front-end*/
 #social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
@@ -1277,6 +1298,72 @@ div.video_thumb img {
 .staff-social {list-style-type: none; margin: 0 !important; padding: 0;}
 .staff-social li {display: inline !important;}
 .staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important;}
+
+
+
+/* WorldCat Pluslet - Front-end*/
+#div-search { width: 100%;}
+
+#wcfw p {margin:0 0 0.5em 0;}
+
+#wcfw #box {margin: 0 10px 0 0;}
+
+#wcfw input {margin-bottom: 4px;}
+
+/* tab style */
+#tabs .pluslet ul.shadetabs {padding: 3px 0; font-size: 1em !important; font-weight: normal !important; list-style-type: none; text-align: left; margin: 10px 0 0 0;}
+#tabs .pluslet ul.shadetabs li {display: inline-block; margin: 0 0 12px 0; font-size: 0.9em;}
+#tabs .pluslet ul.shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border: 1px solid #CCC; color: #333; cursor:pointer; border-radius: 2px;}
+#tabs .pluslet ul.shadetabs li a:visited{color: #333;}
+#tabs .pluslet ul.shadetabs li a:hover{text-decoration: underline; color: #000;}
+#tabs .pluslet ul.shadetabs li a.selected{position: relative; top: 1px; color: #333; background: #d5d5d5; cursor:text;}
+#tabs .pluslet ul.shadetabs li a.selected:hover{text-decoration: none;}
+
+
+#journalsearch {margin-top: 0;}
+
+.wcat-label {font-weight: normal; font-size: 0.9em; margin: 0 !important;}
+
+#bottomdiv {
+  padding: 0.2em 0 0.2em 10px; 
+  background: url(https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus) 98% bottom no-repeat;}
+
+#bottomdiv a {font-size: 0.8em;}
+
+/* Pure Form overrides - PV */
+.pure-form input,
+.pure-form select,
+.pure-form textarea {
+  border-radius: 2px !important;
+  border: 1px solid #bcbbbb !important;
+  box-shadow: none !important;
+  padding: 4px !important;
+}
+
+.pure-button-pluslet, 
+a.pure-button-pluslet {
+  background-color: rgba(209,214,136, 0.8);
+  box-shadow: none;
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
+}
+
+.pure-form input.pure-button-pluslet {padding: 4px 10px !important;}
+
+.pure-button-pluslet:hover, 
+a.pure-button-pluslet:hover {
+  background-color: rgba(209,214,136, 1);
+}
+
+.pure-form legend {
+    border-bottom: none;
+    color: #333;
+    font-style: italic;
+    width: 94%;
+    margin:0;
+    padding: 0;
+}
+
 
 
 
