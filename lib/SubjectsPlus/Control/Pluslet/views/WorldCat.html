@@ -26,9 +26,9 @@ ddtabcontent.prototype={
         this.currentTabId=subcontentid;
         var journalid = document.getElementById("journalsearch");
         var bottomdiv = document.getElementById("bottomdiv");
-        var journalid_html = '<label for="source" style="font: 11px \'Arial Unicode MS\', Arial, Helvetica, Verdana, sans-serif;">Limit to journal/magazine: </label>' +
-                             '<input style="border: 1px solid #999; background: #fff;" type="text" size="25" name="source" id="source" value="" />' +
-                             '<img src="https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus" width="104" height="16" hspace="15" align="absmiddle" alt="Search with WorldCat" title="Search with WorldCat" />';
+        var journalid_html = '<label for="source" class="wcat-label">Limit to journal/magazine: </label><br />' +
+                             '<input type="text" name="source" id="source" value="" /><br />' +
+                             '<img src="https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus" width="104" height="16" align="absmiddle" alt="Search with WorldCat" title="Search with WorldCat" />';
         if (subcontentid =="arts") {
           if (journalid) {
             journalid.style.display = "block";
@@ -109,54 +109,23 @@ function checkSearchForm() {
             </ul>
 
             <div id="box">
-                <input type="text" name="q" id="q" size="26" maxlength="80">
+                <input type="text" name="q" id="q" maxlength="80">
                 <input type="submit" value="Go" name="wcsbtn2w" id="wcsbtn2w" alt="Go" title="Go" class="pure-button pure-button-pluslet">                  
-                <div id="journalsearch" style="padding-top: 3px; display: none;"></div>
+                <div id="journalsearch" style="display: none;"></div>
             </div>
 
+            <div id="bottomdiv" align="left" style="display: block;">
+                <a href="/advancedsearch">Advanced Search</a>
+            </div>
+
+            <script type="text/javascript">
+                var searchtypes=new ddtabcontent("searchtabs");
+                searchtypes.init();
+            </script>
+
         </fieldset>
-    
-    
 
-
-
-
-    <table cellspacing="0" celllpadding="0">
-    <tbody>
-    <tr>
-    <td>
-        
-        <table cellspacing="0" cellpadding="0" width="480">
-        <tbody><tr><td align="center">
-        <div id="box" style="padding-top:8px; border:1px solid #A5A2A5; width:480px;">
-            <table cellspacing="0" cellpadding="0" width="100%">
-            <tbody><tr>
-            <td align="center" style="padding: 0 0.5em 0.5em 0.5em">
-                <input type="text" name="q" id="q" size="26" maxlength="80" style="border: 1px solid #999; background: #fff; font: 15px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif;">
-
-                <input type="submit" value="Go" name="wcsbtn2w" id="wcsbtn2w" alt="Go" title="Go" class="darkcolor" style="height: 26px; font-size: 15px; font-weight: bold;  color: #fff">
-                  
-                    <div id="journalsearch" style="padding-top: 3px; display: none;"></div>
-
-            </td>
-            </tr>
-
-            </tbody></table>
-        </div><!-- /div box-->
-        <div id="bottomdiv" align="left" style="padding: 0.2em 0.4em 0.4em 0.8em; display: block; background: url(https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus) 100% 50% no-repeat;">
-            <a href="/advancedsearch" style="font: 11px 'Arial Unicode MS', Arial, Helvetica, Verdana, sans-serif; color: #000">Advanced Search</a>
-        </div>
-        <script type="text/javascript">
-            var searchtypes=new ddtabcontent("searchtabs");
-            searchtypes.init();
-        </script>
-        </td></tr>
-        </tbody></table>
-
-    </td>
-    </tr>
-    </tbody></table>
     </form>
     
-</div>
+</div> <!--end div-search-->
 </div> <!--end WorldCat section-->
