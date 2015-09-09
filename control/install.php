@@ -135,6 +135,9 @@ if( isInstalled() )
 		                                $db = new Querier; 
 		                                $db->exec("UPDATE staff SET staff.email=". $db->quote($administrator_email) . " WHERE staff.staff_id = 1");
 
+		                                $lobjInstaller->updateToFour(); 
+		                                
+		                                
 						$lobjInstaller->displayInstallationCompletePage();
 						$_SESSION['firstInstall'] = 1;
 					}

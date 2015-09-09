@@ -122,10 +122,14 @@ class Installer
 					  `local_file` varchar(100) DEFAULT NULL,
 					  `clone` int(1) NOT NULL DEFAULT '0',
 					  `type` varchar(50) DEFAULT NULL,
-					  `extra` varchar(255) DEFAULT NULL,
+					  `extra` MEDIUMTEXT DEFAULT NULL,
 					  `hide_titlebar` int(1) NOT NULL DEFAULT '0',
 					  `collapse_body` int(1) NOT NULL DEFAULT '0',
 					  `titlebar_styling` varchar(100) DEFAULT NULL,
+					  `favorite_box`​ int(1) NULL DEFAULT '0',
+				      ​`master`​ int(1) NULL DEFAULT '0' ,
+				`target_blank_links`​ INT NULL DEFAULT '0',	
+				
 					  PRIMARY KEY (`pluslet_id`),
 					  KEY `INDEXSEARCHpluslet` (`body`(200))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
@@ -138,6 +142,21 @@ class Installer
 					  `note` varchar(1000) DEFAULT NULL,
 					  PRIMARY KEY (`refstats_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+				"CREATE TABLE ​`stats`​ (
+ ​`stats_id`​ int(11) NOT NULL AUTO_INCREMENT,
+ ​`http_referer`​ varchar(200) DEFAULT NULL,
+ ​`query_string`​ varchar(200) DEFAULT NULL,
+ ​`remote_address`​ varchar(200) DEFAULT NULL,
+ ​`guide_page`​ varchar(200) DEFAULT NULL,
+ ​`date`​ int(11) DEFAULT NULL,
+ ​`page_title`​ varchar(200) DEFAULT NULL,
+ ​`user_agent`​ varchar(200) DEFAULT NULL,
+ ​`subject_short_form`​ varchar(200) DEFAULT NULL,
+ ​`event_type`​ varchar(200) DEFAULT NULL,
+ ​`tab_name`​ varchar(200) DEFAULT NULL,
+ PRIMARY KEY (​`stats_id`​)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+				
 					"CREATE TABLE `format` (
 					  `format_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `format` varchar(255) DEFAULT NULL,
@@ -200,6 +219,11 @@ class Installer
 					  `tab_index` int(11) NOT NULL DEFAULT '0',
 					  `external_url` varchar(500) DEFAULT NULL,
 					  `visibility` int(1) NOT NULL DEFAULT '1',
+				      `parent` TEXT NOT NULL DEFAULT '' ,
+					  `children` TEXT NOT NULL DEFAULT '',
+				      `extra` VARCHAR(255) NULL,
+				   	  
+				      
 					  PRIMARY KEY (`tab_id`),
 					  KEY `fk_t_subject_id_idx` (`subject_id`),
 					  CONSTRAINT `fk_t_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -353,6 +377,7 @@ class Installer
 					  `section_id` int(11) NOT NULL,
 					  `pcolumn` int(11) NOT NULL,
 					  `prow` int(11) NOT NULL,
+				    
 					  PRIMARY KEY (`pluslet_section_id`),
 					  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
 					  KEY `fk_pt_tab_id_idx` (`section_id`),
@@ -416,6 +441,7 @@ class Installer
 		{
 			if( $db->exec( $lstrCQuery ) === FALSE )
 			{
+				var_dump($db->errorInfo());
 				$this->displayInstallationErrorPage( _( "Problem creating new table." ) );
 				return FALSE;
 			}
@@ -520,6 +546,50 @@ class Installer
 
 			$lstrRandomString = substr_replace( $lstrRandomString, '', $lintPosition, 1 );
 		}
+	}
+	
+	public function updateToFour() {
+
+		/*
+		$db = new Querier;
+		$dbc = $db->getConnection();
+		
+		$statement = $statement = $dbc->prepare("ALTER TABLE ​tab​ ADD ​`parent`​ TEXT NOT NULL ADD ​`children`​ TEXT NOT NULL");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​​pluslet​ ADD COLUMN ​`favorite_box`​ INT NULL DEFAULT 0 AFTER ​`titlebar_styling`​");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ ADD ​`master`​ INT NULL DEFAULT NULL COMMENT 'added v4'");
+		$statement->execute();
+		$statement = $dbc->prepare("CREATE TABLE ​stats​ (
+ ​stats_id​ int(11) NOT NULL AUTO_INCREMENT,
+ http_referer​ varchar(200) DEFAULT NULL,
+ query_string varchar(200) DEFAULT NULL,
+ ​remote_address​ varchar(200) DEFAULT NULL,
+ ​guide_page varchar(200) DEFAULT NULL,
+ ​`date`​ int(11) DEFAULT NULL,
+ ​page_title​ varchar(200) DEFAULT NULL,
+ ​user_agent varchar(200) DEFAULT NULL,
+ ​subject_short_form​ varchar(200) DEFAULT NULL,
+ ​event_type​ varchar(200) DEFAULT NULL,
+ ​tab_name varchar(200) DEFAULT NULL,
+ PRIMARY KEY (​stats_id​)
+) ENGINE=MyISAM AUTO_INCREMENT=157 DEFAULT CHARSET=utf8");
+		
+		$statement->execute();
+		var_dump($statement->errorInfo());
+		
+		$statement = $dbc->prepare("ALTER TABLE tab ADD COLUMN `extra` VARCHAR(255) NULL AFTER `children`");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ ADD COLUMN ​`target_blank_links`​ INT NULL DEFAULT 0 AFTER ​`favorite_box`​)");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ CHANGE COLUMN ​extra​ ​extra​ MEDIUMTEXT NULL DEFAULT NULL");
+		$statement->execute();
+		
+		
+
+		var_dump($statement->errorInfo());
+		
+		*/
 	}
 
 	/**
