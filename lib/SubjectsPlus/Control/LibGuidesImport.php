@@ -7,6 +7,10 @@
  */
 namespace SubjectsPlus\Control;
 
+require_once (__DIR__ . "../../../HTMLPurifier/HTMLPurifier.auto.php");
+
+
+
 class LibGuidesImport {
 
   private $_guide_id;
@@ -27,12 +31,14 @@ class LibGuidesImport {
   	
   }
   
-  public function importLog($log_text) {
+  public function importLog($log_text="") {
     
-  	
-  	$formatted_text = "<p>" . $log_text . "</p>";
-  	
-    file_put_contents("../../../import_log.html", $formatted_text, FILE_APPEND);
+
+    	$formatted_text = "<p>" . $log_text . "</p>";
+    	 
+    	file_put_contents("../../../import_log.html", $formatted_text, FILE_APPEND);
+   
+
     
   }
 
@@ -101,7 +107,6 @@ class LibGuidesImport {
 		ob_start();
 		var_dump($this->db->errorInfo(ob_get_clean()));
 		
-		$this->importLog();
 	
 	}
 	
@@ -212,6 +217,7 @@ public function insertLinkedBox($box, $section_id) {
       
       $record = $this->db->query("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL),NULL,TRUE);
 
+      if (isset($record[0])) {
 
       if ($record[0]['location_id']) {
 
@@ -251,6 +257,8 @@ $this->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote(
 
     }
     
+    }
+    
     return $description;
 
 }
@@ -261,7 +269,6 @@ public function importBox($box, $section_id) {
   $column = $this->getColumn();	
 		
   $wc = new WordCleaner();
-  
   $this->db->exec("SET NAMES utf-8" );
   	
   $description = null;
@@ -269,9 +276,26 @@ public function importBox($box, $section_id) {
   //$description .= "<div class=\"Box Type\">$box->BOX_TYPE</div>";       
 
   // Import images and replace the old urls with new urls
+     
+  $config = \HTMLPurifier_Config::createDefault();
+  $config->set('Core.Encoding', 'ISO-8859-1');
+  $config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
+  $config->set('HTML.TidyLevel', 'heavy');
+  $config->set('Core.ConvertDocumentToFragment',true);
+  $config->set('HTML.Allowed', 'a[href|title],em,p,blockquote,img');
+  
+  
+  $purifier = new \HTMLPurifier($config);
+  
+  $pure_html =  $purifier->purify($box->DESCRIPTION);
+  
+  // Import images and replace the old urls with new urls
   $doc = new \DOMDocument();
-
-  $doc->loadHTML(mb_convert_encoding($box->DESCRIPTION, 'HTML-ENTITIES', 'UTF-8'));
+  
+ // $doc->loadHTML(mb_convert_encoding($pure_html, 'HTML-ENTITIES', 'UTF-8'));
+ 
+  if ($pure_html) {
+  $doc->loadHTML($pure_html);
   
   
   // Download images
@@ -293,6 +317,7 @@ public function importBox($box, $section_id) {
   
   		}
   	}
+  }
   }
   
   
@@ -512,10 +537,15 @@ public function downloadFile($url) {
 public function getStaffID ($email_address) {
   // This method takes an email address and returns the subjectsplus staff id for the user
 
+  $staff_id = 1; 
   
-  $staff_id = $this->db->query("SELECT staff_id FROM staff WHERE email = '$email_address'");
+  $staff_id_query = $this->db->query("SELECT staff_id FROM staff WHERE email = '$email_address'");
 
-  return $staff_id[0][0];
+  if (isset($staff_id[0][0])) {
+  	$staff_id = $staff_id_query[0][0];
+  }
+  
+  return $staff_id;
 
 }
 
@@ -798,7 +828,7 @@ public function loadLibGuidesLinksXML() {
     $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
     
     
-    $this->importLog ( $record_check) ;
+    $this->importLog ( serialize($record_check)) ;
     $this->importLog ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
     $this->importLog($record_check[0][0]);
 
@@ -832,7 +862,7 @@ public function loadLibGuidesLinksXML() {
 
 	} else {
 	  $this->importLog("Error inserting title:" );
-	  $this->importLog(  $this->db->errorInfo() );
+	  $this->importLog(  serialize($this->db->errorInfo()) );
 	}
 	
       }
@@ -849,7 +879,7 @@ public function loadLibGuidesLinksXML() {
 
 	} else {
 	  $this->importLog("Error inserting title:" );
-	  $this->importLog(  $this->db->errorInfo() );
+	  $this->importLog(  serialize($this->db->errorInfo()) );
 	}
 	
       }
@@ -861,7 +891,7 @@ public function loadLibGuidesLinksXML() {
 
       } else {
 	$this->importLog( "Error inserting location_title:");
-	$this->importLog(  $this->db->errorInfo()  );
+	$this->importLog(  serialize($this->db->errorInfo())  );
 
 	$this->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
       }
@@ -914,7 +944,7 @@ public function importLibGuides() {
       
 
 
-      if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]')")) {
+      if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]','{\"maincol:\"\"}')")) {
 
       
       	$response = array("imported_guide" => $subject[1] );
@@ -928,18 +958,16 @@ public function importLibGuides() {
       	$response = array("imported_guide" => $subject[1][0] );
       	 
 	
-	$query = "INSERT INTO subject (subject, subject_id, shortform, last_modified, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[2]', '$subject[3]', '$subject[7]','{\"maincol:\"\"}')";
+	$query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[7]','{\"maincol:\"\"}')";
         
 	$this->importLog( "Error inserting subject:");
 	$this->importLog ($query);
-        $this->importLog ( $this->db->errorInfo() ); 
+        $this->importLog ( serialize($this->db->errorInfo()) ); 
 	
       }
 
       if ($this->getGuideOwner() != null) {
-      	
-      	$guide_owner = 
-      	
+      	      	
 	$staff_id = $this->getStaffID( $subject[8] );
 	
 	$this->importLog ("Staff ID: " . $staff_id );
@@ -1019,7 +1047,7 @@ public function importLibGuides() {
 	
         
 	$this->importLog ("Error inserting tab:");
-	$this->importLog ($this->db->errorInfo());
+	$this->importLog (serialize($this->db->errorInfo()));
 
       }
      

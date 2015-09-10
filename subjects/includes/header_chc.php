@@ -162,7 +162,16 @@ div.mega_child.mega-md {width: 400px !important;}
 
 .titlebar {border-bottom: none !important;}
 
+.pure-button-pluslet, 
+a.pure-button-pluslet {
+  background-color: #f1722e;
+  color: #FFF !important;  
+}
 
+.pure-button-pluslet:hover, 
+a.pure-button-pluslet:hover {
+  background-color: #999;  
+}
 
 
 @media screen and (min-width: 48em) {
