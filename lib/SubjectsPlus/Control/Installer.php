@@ -122,10 +122,13 @@ class Installer
 					  `local_file` varchar(100) DEFAULT NULL,
 					  `clone` int(1) NOT NULL DEFAULT '0',
 					  `type` varchar(50) DEFAULT NULL,
-					  `extra` varchar(255) DEFAULT NULL,
+					  `extra` MEDIUMTEXT DEFAULT NULL,
 					  `hide_titlebar` int(1) NOT NULL DEFAULT '0',
 					  `collapse_body` int(1) NOT NULL DEFAULT '0',
 					  `titlebar_styling` varchar(100) DEFAULT NULL,
+					  `favorite_box` int(1) NOT NULL DEFAULT '0',
+				      `master` int(1) NOT NULL DEFAULT '0',
+				      `target_blank_links` int(1) NOT NULL DEFAULT '0',
 					  PRIMARY KEY (`pluslet_id`),
 					  KEY `INDEXSEARCHpluslet` (`body`(200))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
@@ -200,6 +203,9 @@ class Installer
 					  `tab_index` int(11) NOT NULL DEFAULT '0',
 					  `external_url` varchar(500) DEFAULT NULL,
 					  `visibility` int(1) NOT NULL DEFAULT '1',
+					  `parent` varchar(500) DEFAULT NULL,
+					  `children` varchar(500) DEFAULT NULL,
+					  `extra` varchar(500) DEFAULT NULL,
 					  PRIMARY KEY (`tab_id`),
 					  KEY `fk_t_subject_id_idx` (`subject_id`),
 					  CONSTRAINT `fk_t_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -357,19 +363,45 @@ class Installer
 					  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
 					  KEY `fk_pt_tab_id_idx` (`section_id`),
 					  CONSTRAINT `fk_pt_section_id` FOREIGN KEY (`section_id`) REFERENCES `section` (`section_id`) ON DELETE CASCADE ON UPDATE CASCADE
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8"
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8", 
+				"CREATE TABLE `stats` (
+  `stats_id` int(11) NOT NULL AUTO_INCREMENT,
+  `http_referer` varchar(200) DEFAULT NULL,
+  `query_string` varchar(200) DEFAULT NULL,
+  `remote_address` varchar(200) DEFAULT NULL,
+  `guide_page` varchar(200) DEFAULT NULL,
+  `date` int(11) DEFAULT NULL,
+  `page_title` varchar(200) DEFAULT NULL,
+  `user_agent` varchar(200) DEFAULT NULL,
+  `subject_short_form` varchar(200) DEFAULT NULL,
+  `event_type` varchar(200) DEFAULT NULL,
+  `tab_name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`stats_id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8"
 			);
 
 		//all the subjectqueries -- default data
 		$this->lobjInsertQueries = array(
 					"INSERT INTO `chchchanges` VALUES (1,1,'guide',1,'General','insert','2011-03-26 19:16:19'),(2,1,'record',1,'Sample Record','insert','2011-03-26 20:08:54')",
 					"INSERT INTO `subject` VALUES (1,'General',1,'general','',NULL,NULL,NULL,'Subject','2011-03-26 19:16:19',NULL,'{\"maincol\":\"\"}')",
-					"INSERT INTO `tab` VALUES (1,1,'Main',0,NULL,1)",
+					"INSERT INTO `tab` VALUES (1,1,'Main',0,NULL,1,NULL,NULL,NULL)",
 					"INSERT INTO `section` VALUES (1,0,'4-6-2',1)",
-					"INSERT INTO `pluslet` VALUES (1,'All Items by Source','','',0,'Special','',0,0,NULL),(2,'Key to Icons','','',0,'Special','',0,0,NULL),(3,'Subject Specialist','','',0,'Special','',0,0,NULL),
-					(4,'FAQs','','',0,'Special','',0,0,NULL),(5,'Books:  Use the Library Catalog','','',0,'Special','',0,0,NULL),(6,'','','',0,'Reserved_for_Special','',0,0,NULL),(7,'','','',0,'Reserved_for_Special','',0,0,NULL),
-					(8,'','','',0,'Reserved_for_Special','',0,0,NULL),(9,'','','',0,'Reserved_for_Special','',0,0,NULL),(10,'','','',0,'Reserved_for_Special','',0,0,NULL),(11,'','','',0,'Reserved_for_Special','',0,0,NULL),
-					(12,'','','',0,'Reserved_for_Special','',0,0,NULL),(13,'','','',0,'Reserved_for_Special','',0,0,NULL),(14,'','','',0,'Reserved_for_Special','',0,0,NULL),(15,'','','',0,'Reserved_for_Special','',0,0,NULL)",
+					"INSERT INTO `pluslet` VALUES 
+				(1,'All Items by Source','','',0,'Special','',0,0,NULL,0,NULL,0),
+				(2,'Key to Icons','','',0,'Special','',0,0,NULL,0,NULL,0),
+				(3,'Subject Specialist','','',0,'Special','',0,0,NULL,0,NULL,0),
+				(4,'FAQs','','',0,'Special','',0,0,NULL,0,NULL,0),
+				(5,'Books:  Use the Library Catalog','','',0,'Special','',0,0,NULL,0,NULL,0),
+				(6,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(7,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(8,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(9,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(10,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(11,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(12,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(13,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(14,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0),
+				(15,'','','',0,'Reserved_for_Special','',0,0,NULL,0,NULL,0)",
 					"INSERT INTO `format` VALUES (1,'Web'),(2,'Print'),(3,'Print w/ URL')",
 					"INSERT INTO `user_type` VALUES (1,'Staff'),(2,'Machine'),(3,'Student')",
 					"INSERT INTO `discipline` VALUES (1,'agriculture',1),(2,'anatomy &amp; physiology',2),(3,'anthropology',3),(4,'applied sciences',4),(5,'architecture',5),
@@ -416,6 +448,7 @@ class Installer
 		{
 			if( $db->exec( $lstrCQuery ) === FALSE )
 			{
+				var_dump($db->errorInfo());
 				$this->displayInstallationErrorPage( _( "Problem creating new table." ) );
 				return FALSE;
 			}
@@ -426,6 +459,12 @@ class Installer
 			if( $db->exec( $lstrIQuery ) === FALSE )
 			{
 				$this->displayInstallationErrorPage( _( "Problem inserting new data into table." ) );
+				$error_info = $db->errorInfo();
+				if (count_chars($error_info[2]) > 0) {
+					var_dump($db->errorInfo());
+					echo $lstrIQuery;
+				}
+				
 				return FALSE;
 			}
 		}
@@ -520,6 +559,50 @@ class Installer
 
 			$lstrRandomString = substr_replace( $lstrRandomString, '', $lintPosition, 1 );
 		}
+	}
+	
+	public function updateToFour() {
+
+		/*
+		$db = new Querier;
+		$dbc = $db->getConnection();
+		
+		$statement = $statement = $dbc->prepare("ALTER TABLE ​tab​ ADD ​`parent`​ TEXT NOT NULL ADD ​`children`​ TEXT NOT NULL");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​​pluslet​ ADD COLUMN ​`favorite_box`​ INT NULL DEFAULT 0 AFTER ​`titlebar_styling`​");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ ADD ​`master`​ INT NULL DEFAULT NULL COMMENT 'added v4'");
+		$statement->execute();
+		$statement = $dbc->prepare("CREATE TABLE ​stats​ (
+ ​stats_id​ int(11) NOT NULL AUTO_INCREMENT,
+ http_referer​ varchar(200) DEFAULT NULL,
+ query_string varchar(200) DEFAULT NULL,
+ ​remote_address​ varchar(200) DEFAULT NULL,
+ ​guide_page varchar(200) DEFAULT NULL,
+ ​`date`​ int(11) DEFAULT NULL,
+ ​page_title​ varchar(200) DEFAULT NULL,
+ ​user_agent varchar(200) DEFAULT NULL,
+ ​subject_short_form​ varchar(200) DEFAULT NULL,
+ ​event_type​ varchar(200) DEFAULT NULL,
+ ​tab_name varchar(200) DEFAULT NULL,
+ PRIMARY KEY (​stats_id​)
+) ENGINE=MyISAM AUTO_INCREMENT=157 DEFAULT CHARSET=utf8");
+		
+		$statement->execute();
+		var_dump($statement->errorInfo());
+		
+		$statement = $dbc->prepare("ALTER TABLE tab ADD COLUMN `extra` VARCHAR(255) NULL AFTER `children`");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ ADD COLUMN ​`target_blank_links`​ INT NULL DEFAULT 0 AFTER ​`favorite_box`​)");
+		$statement->execute();
+		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ CHANGE COLUMN ​extra​ ​extra​ MEDIUMTEXT NULL DEFAULT NULL");
+		$statement->execute();
+		
+		
+
+		var_dump($statement->errorInfo());
+		
+		*/
 	}
 
 	/**
