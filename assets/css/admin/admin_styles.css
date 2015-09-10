@@ -715,6 +715,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   color:#333;
   margin: 0;
   font-weight: normal;
+  font-size: 0.9em;
 }
 
 .databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 0;}
@@ -2067,7 +2068,7 @@ div.ctag_list a:hover {
 
 
 .feedback, #feedback {
-  background-color: rgba(192,57,87, 0.8);;
+  
   width: 100%;
   text-align: center;
   font-weight: bold;
