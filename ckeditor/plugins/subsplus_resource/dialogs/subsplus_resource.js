@@ -255,10 +255,11 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 			    element = element.getAscendant( 'span', true );
 
 			if ( !element || element.getName() != 'span' || element.data( 'cke-realelement' ) ) {
-			    element = editor.document.createElement( 'span' );
-				element.addClass('subsplus_resource');
-				element.setStyle('background', '#E488B6');
-				element.setAttribute('contentEditable', 'false');
+			    element = editor.document.createElement( 'li' );
+			    element.addClass('token-list-item');
+				//element.addClass('subsplus_resource');
+				//element.setStyle('background', '#E488B6');
+				//element.setAttribute('contentEditable', 'false');
 			    this.insertMode = true;
 			}
 			else

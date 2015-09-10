@@ -24,6 +24,8 @@ body
 	line-height: 1.6;
 }
 
+.cke_editable .token-list-item {background-color: rgba(192, 57, 87, 0.3);}
+
 blockquote
 {
 	font-style: italic;

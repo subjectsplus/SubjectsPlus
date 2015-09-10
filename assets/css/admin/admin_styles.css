@@ -1482,8 +1482,17 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 
 
+/* CKE Dialog Box */
+.cke_dialog {
+    visibility: visible;
+    z-index: 99998 !important;
+}
+
+
+
 
 /* Main content areas */
+/* ------ not updated by PV ------ */
 
 #maincontent {
   clear: both;
