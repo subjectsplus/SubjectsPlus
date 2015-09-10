@@ -694,32 +694,57 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 /* Custom DB List */
-.dblist-display .customdb-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important; margin-bottom: 20px;}
+.dblist-display {
+  background-color: #d5d5d5;
+  padding: 5px;
+  border-radius: 4px;
+}
 
-.dblist-display .customdb-list option {width: 100%;}
+.databases-results-display {overflow: auto; max-height:475px;}
 
-.db-list-content {padding:8px;display:none;}
+.databases-search {
+  border: 1px solid #bcbbbb;
+  border-radius: 2px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  padding: 4px;
+  width: 96%;
+  margin-bottom: 10px;
+}
+
+.databases-results-display label {
+  color:#333;
+  margin: 0;
+  font-weight: normal;
+}
+
+.databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 0;}
+
+.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 8px 5px 0 5px; 
+  color: #333; font-size: 14px; line-height: 1.3em;}
+
+.box-search-label { width: 205px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+
+.add-to-list-button { font-size: 0.9em; padding: 4px; }
+
+.no-box-results {color: #333; padding: 6px 2px; display: block;}
+
+.db-list-content {padding:8px;display:none; margin: 20px 0;}
 
 .db-list-content h4 {margin: 0 0 10px 0;}
 
 .db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; }
 
-.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+.db-list-item-draggable {width: 270px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: move; padding: 8px 0; 
+  color:#FFF;  font-size: 1em; line-height: 1.3em; border-bottom: 1px dotted #858585;}
 
-.db-list-item-draggable {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; }
+.db-list-toggle { font-size:0.8em; cursor:pointer; padding-right: 5px;}
+
+.active .fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
+
+.fa-minus { color: #ef4836; font-size:16px; padding: 0 2px 0 0; }
 
 .db-list-buttons { font-size: 0.8em; display:none;}
 
-.active .fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
-.add-to-list-button { font-size: 0.8em; }
-.databases-searchresults { padding: 0; }
-
-.db-list-toggle { font-size:0.8em; }
-
-
-.databases-results-display label {
-  color:#eee;
-}
 
 
 /*TABS Items Area --where the individual tabs go */
@@ -2917,7 +2942,7 @@ li.hidden_tab.ui-state-default
 }
 
 
-.box-search-label { width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
