@@ -29,7 +29,7 @@ class Pluslet_ArticlesPlus extends Pluslet {
 
   $output = $this->loadHtml(__DIR__ . '/views/ArticlesPlus.html');
   	
-  $this->_body = "<p>$output</p>";
+  $this->_body = "$output";
 
   }
 

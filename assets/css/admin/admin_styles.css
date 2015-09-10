@@ -1182,7 +1182,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 .titlebar-styling-select {width:120px; float:left;}
 
-.titlebar-styling-select select {font-size: 0.9em !important; width: 100%; border-radius: 5px; box-shadow: none; border: 1px solid #CCCCCC; padding:2px; color: #858585;}
+.titlebar-styling-select select {font-size: 0.9em !important; width: 100% !important; border-radius: 5px; box-shadow: none; border: 1px solid #CCCCCC; padding:2px; color: #858585;}
 
 
 
@@ -1293,6 +1293,17 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 #bottomdiv a {font-size: 0.8em;}
 
 
+
+/* Articles+ Search Pluslet */
+.articlesplus-search {margin: 0 10px;}
+
+
+
+
+/* Book Search Pluslet- default */
+.book-search {margin: 0 10px;}
+
+
 /*** toggle pluslet body --CBR */
 .pluslet_body_open {
   display: block;
@@ -1301,6 +1312,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .pluslet_body_closed {
   display: none;
 }
+
 
 
 /* Remove boxes from current tab */
