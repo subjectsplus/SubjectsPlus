@@ -10,26 +10,13 @@ $(document).ready(function () {
   </i> Include Note </span></div></li></ul>
  */
 	
-	
-	
-	$('#show_dblist_options').on("click", function() {
-	
-		$('.fa-check').hide();
+	var DatabaseToken = {	
 
-		
-	});
-	
-
-	var DatabaseToken = {
-			
 			"label" : "",
 			"record_id" : "",
 			"token_string" : ""
 			
-			
-	}
-	
-	$('.customdb-list').hide();
+	}	
 	
 	var click_count = 0;
 	
@@ -80,6 +67,7 @@ $(document).ready(function () {
 	
 	$('.dblist-reset-button').on("click", function() {
         $('.db-list-results').empty();
+        $('.databases-search').val("");
 
 	});
 	
@@ -104,9 +92,9 @@ $(document).ready(function () {
 					if (data[i]['content_type'] == "Record") {
 
 					$('.databases-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
-							"<div class=\"pure-g\"><div class=\"pure-u-3-5 box-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
-									"<div class=\"pure-u-2-5\" style=\"text-align:right;\">" +
-									"<button data-label='" + data[i].label + "' value='" + data[i].id  + "' class=\"add-to-list-button pure-button pure-button-secondary\">Add to List</button></div></div></li>");				
+							"<div class=\"pure-g\"><div class=\"pure-u-4-5 box-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
+									"<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +
+									"<button data-label='" + data[i].label + "' value='" + data[i].id  + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div></li>");				
 					}
 						
 				}
@@ -127,7 +115,7 @@ $(document).ready(function () {
 			
 			
 			
-			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'><span class='db-list-label'>"+ databaseToken.label +"</span><div><span class='show-description-toggle db-list-toggle'><i class='fa fa-check'></i> Show Description  </span><span class='show-icons-toggle db-list-toggle'> <i class='fa fa-check'></i>Show Icons </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-check'></i> Include Note </span></div></li>");
+			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'><span class='db-list-label'>"+ databaseToken.label +"</span><div><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i> Description  </span><span class='show-icons-toggle db-list-toggle'> <i class='fa fa-check'></i> Icons </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-check'></i> Note </span></div></li>");
 			$('.db-list-results').sortable();
 		    $('.db-list-results').disableSelection();
 			$('.fa-check').hide();
@@ -147,9 +135,12 @@ $(document).ready(function () {
 		});
 	
 	function toggleOptions(toggleElement) {
-		    toggleElement.find('.fa-check').toggle();
+		    toggleElement.find('.fa-minus').toggle();
 
 			toggleElement.toggleClass("active");
+			
+			toggleElement.children().find('.fa-minus').toggle();
+
 			toggleElement.children().find('.fa-check').toggle();
 		
 		    include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0; 
