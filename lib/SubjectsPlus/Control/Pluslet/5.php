@@ -31,6 +31,7 @@ class Pluslet_5 extends Pluslet {
         parent::establishView($view);
         // example form action:  http://icarus.ithaca.edu/cgi-bin/Pwebrecon.cgi?
         $this->_body = '
+            <div class="book-search">
             <form action="" method="get" name="querybox" id="querybox" class="pure-form">
             <fieldset>
             <input type="hidden" value="local" name="DB" />
@@ -55,6 +56,7 @@ class Pluslet_5 extends Pluslet {
             <input type="hidden" value="25" name="CNT" />
             </fieldset>
             </form>
+            </div>
             ';
 
 
