@@ -545,6 +545,10 @@ class Pluslet {
                                         $note = "";
                                     }
 
+                                    if (!isset($note)) {
+                                    	$note = "";
+                                    }
+                                    
                                     $tokenized.= "<a href=\"$url\" $target>$myrow[8]</a> $icons $description $note";
                                 } else {
                                     // It's print
