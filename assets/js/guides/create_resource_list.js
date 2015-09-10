@@ -115,7 +115,11 @@ $(document).ready(function () {
 			
 			
 			
-			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'><span class='db-list-label'>"+ databaseToken.label +"</span><div><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i> Description  </span><span class='show-icons-toggle db-list-toggle'> <i class='fa fa-check'></i> Icons </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-check'></i> Note </span></div></li>");
+			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'><span class='db-list-label'>"+ databaseToken.label +
+					"</span><div><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
+					" Description  </span><span class='show-icons-toggle db-list-toggle'><i class='fa fa-minus'></i> <i class='fa fa-check'></i>" +
+					" Icons </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
+					" Note </span></div></li>");
 			$('.db-list-results').sortable();
 		    $('.db-list-results').disableSelection();
 			$('.fa-check').hide();
@@ -136,13 +140,13 @@ $(document).ready(function () {
 	
 	function toggleOptions(toggleElement) {
 		    toggleElement.find('.fa-minus').toggle();
+		    toggleElement.find('.fa-check').toggle();
 
 			toggleElement.toggleClass("active");
 			
 			toggleElement.children().find('.fa-minus').toggle();
 
-			toggleElement.children().find('.fa-check').toggle();
-		
+			
 		    include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0; 
 		    include_icons = toggleElement.parent().find('.show-icons-toggle').hasClass('active') | 0;
 		    display_note = toggleElement.parent().find('.include-note-toggle').hasClass('active') | 0; 
