@@ -126,10 +126,9 @@ class Installer
 					  `hide_titlebar` int(1) NOT NULL DEFAULT '0',
 					  `collapse_body` int(1) NOT NULL DEFAULT '0',
 					  `titlebar_styling` varchar(100) DEFAULT NULL,
-					  `favorite_box`​ int(1) NULL DEFAULT '0',
-				      ​`master`​ int(1) NULL DEFAULT '0' ,
-				`target_blank_links`​ INT NULL DEFAULT '0',	
-				
+`favorite_box`​ int(1) NOT NULL DEFAULT,
+`​master`​ int(1) NOT NULL DEFAULT '0' ,
+				`target_blank_links​` int(1) NOT NULL DEFAULT 0,
 					  PRIMARY KEY (`pluslet_id`),
 					  KEY `INDEXSEARCHpluslet` (`body`(200))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
@@ -142,7 +141,7 @@ class Installer
 					  `note` varchar(1000) DEFAULT NULL,
 					  PRIMARY KEY (`refstats_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-				"CREATE TABLE ​`stats`​ (
+				"CREATE TABLE ​stats​ (
  ​`stats_id`​ int(11) NOT NULL AUTO_INCREMENT,
  ​`http_referer`​ varchar(200) DEFAULT NULL,
  ​`query_string`​ varchar(200) DEFAULT NULL,
@@ -150,13 +149,13 @@ class Installer
  ​`guide_page`​ varchar(200) DEFAULT NULL,
  ​`date`​ int(11) DEFAULT NULL,
  ​`page_title`​ varchar(200) DEFAULT NULL,
- ​`user_agent`​ varchar(200) DEFAULT NULL,
+ ​`User_agent`​ varchar(200) DEFAULT NULL,
  ​`subject_short_form`​ varchar(200) DEFAULT NULL,
  ​`event_type`​ varchar(200) DEFAULT NULL,
  ​`tab_name`​ varchar(200) DEFAULT NULL,
  PRIMARY KEY (​`stats_id`​)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-				
+
 					"CREATE TABLE `format` (
 					  `format_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `format` varchar(255) DEFAULT NULL,
@@ -221,9 +220,7 @@ class Installer
 					  `visibility` int(1) NOT NULL DEFAULT '1',
 				      `parent` TEXT NOT NULL DEFAULT '' ,
 					  `children` TEXT NOT NULL DEFAULT '',
-				      `extra` VARCHAR(255) NULL,
-				   	  
-				      
+				      `extra` VARCHAR(255)
 					  PRIMARY KEY (`tab_id`),
 					  KEY `fk_t_subject_id_idx` (`subject_id`),
 					  CONSTRAINT `fk_t_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -377,7 +374,6 @@ class Installer
 					  `section_id` int(11) NOT NULL,
 					  `pcolumn` int(11) NOT NULL,
 					  `prow` int(11) NOT NULL,
-				    
 					  PRIMARY KEY (`pluslet_section_id`),
 					  KEY `fk_pt_pluslet_id_idx` (`pluslet_id`),
 					  KEY `fk_pt_tab_id_idx` (`section_id`),
