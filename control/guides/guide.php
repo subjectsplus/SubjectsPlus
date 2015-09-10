@@ -914,11 +914,12 @@ ob_end_flush();
               <div class="db-list-content">               
                  
                       <h4>Databases Selected:</h4>
-                      <ul class="db-list-results">
-                         
+                      <ul class="db-list-results">                         
                       </ul>  
-                  </div>
-                  <div class="db-list-buttons">
+              </div>
+              
+              <!--buttons-->
+              <div class="db-list-buttons">
                   <button class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
                   <button class="pure-button pure-button-primary dblist-reset-button"><?php print _("Reset List Box"); ?></button>
               </div>
