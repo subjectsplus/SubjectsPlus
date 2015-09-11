@@ -32,6 +32,7 @@ class Pluslet {
 
     // added v4
     protected $_favorite_box;
+    protected $_target_blank_links;
 
     public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
 
@@ -54,7 +55,7 @@ class Pluslet {
         /////////////
 
         $querier = new Querier();
-        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box
+        $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box, target_blank_links
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 
 
@@ -76,6 +77,7 @@ class Pluslet {
 
 
             $this->_favorite_box = $plusletArray[0]["favorite_box"];
+            $this->_target_blank_links = $plusletArray[0]["target_blank_links"];
 
         }
 
@@ -114,7 +116,7 @@ class Pluslet {
                 }
                 else {
 
-                    //If not editable, show only delete icon 
+                    //If not editable, show only delete icon
                     $this->_icons .= "<a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"$delete_text\" /></i></a>";
 
                 }
@@ -157,6 +159,10 @@ class Pluslet {
             $this->_pluslet .= "
             <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple no_overflow $this->_pluslet_id_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
+            if($this->_target_blank_links == 1) {
+                $this->_pluslet_body_bonus_classes .= "target_blank_links";
+            }
+
             // since we're here, let's see if the body should be collapsed
             if ($this->_collapse_body == 1) {
                 $this->_pluslet_body_bonus_classes .= "noshow";
@@ -189,6 +195,9 @@ class Pluslet {
             $this->_pluslet .= "<div class=\"titlebar pluslet_sort\">";
 
 
+            if($this->_target_blank_links == 1) {
+                $this->_pluslet_body_bonus_classes .= "target_blank_links";
+            }
 
             //if public view, add selected style
             if( $this->_visible_id != '' ) {
@@ -270,13 +279,13 @@ class Pluslet {
         }
 
         $box_settings = "<div class=\"box_settings pure-u-1\">
-            <div class=\"pure-g\">
+             <div class=\"pure-g\">
                 <div class=\"pure-u-1-2\"><a class=\"close-settings\"><i class=\"fa fa-times\" title=\"" . _("Close Settings Panel") . "\" /></i></a></div>
                 <div class=\"pure-u-1-2 delete-trigger\"><a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a></div>
-            </div> 
-            
+            </div>
 
-            <form class=\"pure-form box-settings-form\">                
+            <form class=\"pure-form box-settings-form\">
+
                 <div class=\"titlebar-styling-section\">
                         <div class=\"titlebar-styling-label\">
                             <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
@@ -329,6 +338,20 @@ class Pluslet {
                         </label>";
 
         $box_settings .= "<span class=\"settings-label-text\">" . _("Favorite Box") . "</span>
+                </div>
+
+                <div class=\"onoffswitch\">
+                        <input type=\"checkbox\" class=\"onoffswitch-checkbox target_blank_links\" id=\"target_blank_links-$this->_pluslet_id\"";
+
+        if ($this->_target_blank_links == 1) {$box_settings .= " checked";}
+
+        $box_settings .= ">
+                        <label class=\"onoffswitch-label\" for=\"target_blank_links-$this->_pluslet_id\">
+                            <span class=\"onoffswitch-inner\"></span>
+                            <span class=\"onoffswitch-switch\"></span>
+                        </label>";
+
+        $box_settings .= "<span class=\"settings-label-text\">" . _("Open All Links in New Tab") . "</span>
                 </div>
 
 
