@@ -286,7 +286,7 @@ img {
     margin-left: 0;
     margin-top: 2px;
     text-align: left;
-    min-height: 2.15em;
+    min-height: 28px;
 }
 
 #spum_nav ul li {
@@ -513,6 +513,8 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 }
 #tabs .pluslet li, #tabs .pluslet_simple li {
     display: list-item;
+    line-height: 1.4em;
+    margin-bottom: 6px;
 }
 
 #tabs .pluslet li a, #tabs .pluslet_simple li a {
@@ -678,7 +680,7 @@ ul.ui-autocomplete li a{
 }
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase; border: none;font-weight: bold;}
+.plusheading, .type-heading { padding: 0; text-transform:normal; border: none;font-weight: bold;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0; border: none;}
 div.type-heading .titlebar { background-color: transparent;border: none;}
 
@@ -689,9 +691,12 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
     text-align: left;
     overflow-y: auto;
     overflow-x: hidden !important;
+    line-height:1.4em;
 }
 
 .pluslet_simple .pluslet_body {font-size: 10pt; margin: 0 0 0 -15px; padding: 0;}
+
+..pluslet_body p {line-height:1.4em;}
 
 .pluslet_body a,
 .pluslet_body a:link {text-decoration: underline; color: #40659b;}
@@ -1227,21 +1232,15 @@ div.video_thumb img {
 }
 
 
+/* TOC Pluslet - Front-end */
+.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0;}
+
+
 /* Catalog Pluslet Display - Front-end */
 
-.catalog-search {width:100%;}
+.catalog-search {width:100%; margin: 0;}
 
-.catalog-search input[name='searcharg'] {width:50% !important;}
-
-.catalog-search table {width:100% !important; border: none;}
-.catalog-search table td #searchscope {width:50% !important;}
-
-.catalog-search #searchtype{font-size:1em !important;}
-
-
-/* WorldCat Pluslet Display - Front-end */
-#wc_searchbox #div-search.lightcolor {width:100% !important; height: auto !important;}
-#wc_searchbox iframe {width:100% !important;}
+.catalog-search .adv-prompt a{font-size: 0.8em;}
 
 
 /* Social Media Pluslet - Front-end*/
@@ -1250,6 +1249,7 @@ div.video_thumb img {
 #social_media_accounts ul li { display: inline !important; }
 
 #social_media_accounts ul li a { text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important;}
+
 
 
 /* Hide Expand/Collapse Pluslets - Front-end*/
@@ -1277,6 +1277,74 @@ div.video_thumb img {
 .staff-social {list-style-type: none; margin: 0 !important; padding: 0;}
 .staff-social li {display: inline !important;}
 .staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important;}
+
+
+
+/* WorldCat Pluslet - Front-end*/
+#div-search { width: 100%;}
+
+#wcfw p {margin:0 0 0.5em 0;}
+
+#wcfw #box {margin: 0 10px 0 0;}
+
+#wcfw input {margin-bottom: 4px;}
+
+/* tab style */
+#tabs .pluslet ul.shadetabs {padding: 3px 0; font-size: 1em !important; font-weight: normal !important; list-style-type: none; text-align: left; margin: 10px 0 0 0;}
+#tabs .pluslet ul.shadetabs li {display: inline-block; margin: 0 0 12px 0; font-size: 0.9em;}
+#tabs .pluslet ul.shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border: 1px solid #CCC; color: #333; cursor:pointer; border-radius: 2px;}
+#tabs .pluslet ul.shadetabs li a:visited{color: #333;}
+#tabs .pluslet ul.shadetabs li a:hover{text-decoration: underline; color: #000;}
+#tabs .pluslet ul.shadetabs li a.selected{position: relative; top: 1px; color: #333; background: #d5d5d5; cursor:text;}
+#tabs .pluslet ul.shadetabs li a.selected:hover{text-decoration: none;}
+
+
+#journalsearch {margin-top: 0;}
+
+.wcat-label {font-weight: normal; font-size: 0.9em; margin: 0 !important;}
+
+#bottomdiv {
+  padding: 0.2em 0 0.2em 10px; 
+  background: url(https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus) 98% bottom no-repeat;}
+
+#bottomdiv a {font-size: 0.8em;}
+
+/* Pure Form overrides - PV */
+.pure-form input,
+.pure-form select,
+.pure-form textarea {
+  border-radius: 2px !important;
+  border: 1px solid #bcbbbb !important;
+  box-shadow: none !important;
+  padding: 4px !important;
+  margin-bottom: 6px;
+  width: 50%;
+}
+
+.pure-button-pluslet, 
+a.pure-button-pluslet {
+  background-color: rgba(209,214,136, 0.8);
+  box-shadow: none;
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
+}
+
+.pure-form input.pure-button-pluslet {padding: 4px 10px !important; width: auto;}
+
+.pure-button-pluslet:hover, 
+a.pure-button-pluslet:hover {
+  background-color: rgba(209,214,136, 1);
+}
+
+.pure-form legend {
+    border-bottom: none;
+    color: #333;
+    font-style: italic;
+    width: 94%;
+    margin:0;
+    padding: 0;
+}
+
 
 
 
@@ -1605,6 +1673,12 @@ table.item_listing th {
     .staff_photo {  }  
 
    .response-link {display:none;}
+
+   .pure-form input,
+    .pure-form select,
+    .pure-form textarea {
+      width: 65%;
+    }
     
 }
 
@@ -1713,9 +1787,15 @@ table.item_listing th {
 
     .form-item {width: 200px;}
 
-    
+    .pure-form input,
+    .pure-form select,
+    .pure-form textarea {
+      width: 55%;
+    }
     
 }
+
+
 
 .book {
 	display: inline-block;
@@ -1752,6 +1832,8 @@ table.item_listing th {
 	margin-top:1em;
 }
 
+
+
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
  .tip {
@@ -1759,4 +1841,6 @@ table.item_listing th {
     }
 
     .form-item {width: 260px;}
+
+    
 }

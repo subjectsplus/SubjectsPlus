@@ -72,9 +72,8 @@ function makeEditable(lstrSelector) {
 			   $(".pluslet.type-heading").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-worldcat").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-catalog").find(".body_set").addClass("hide-settings");
-
-
-
+			   $(".pluslet.type-relguide").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-articleplus").find(".body_set").addClass("hide-settings");
 
 		});
 

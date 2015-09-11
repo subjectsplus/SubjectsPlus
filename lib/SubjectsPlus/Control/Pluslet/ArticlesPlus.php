@@ -14,12 +14,13 @@ class Pluslet_ArticlesPlus extends Pluslet {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
   
     $this->_type = "ArticlesPlus";
+    $this->_pluslet_bonus_classes = "type-articleplus";
   }
 
   protected function onEditOutput()
   {
   	
-    $this->_body = "<p>" . _("Click 'Save' to view your search box.") . "</p>";
+    $this->_body = "<p class=\"faq-alert\">" . _("Click 'Save' to view your Articles+ search box.") . "</p>";
    
   }
 
@@ -28,7 +29,7 @@ class Pluslet_ArticlesPlus extends Pluslet {
 
   $output = $this->loadHtml(__DIR__ . '/views/ArticlesPlus.html');
   	
-  $this->_body = "<p>$output</p>";
+  $this->_body = "$output";
 
   }
 

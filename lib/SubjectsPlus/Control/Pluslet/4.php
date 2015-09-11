@@ -24,6 +24,7 @@ class Pluslet_4 extends Pluslet {
 
     public function output($action="", $view="public") {
         global $PublicPath;
+        global $CpanelPath;
 
         // public vs. admin
         parent::establishView($view);
@@ -47,7 +48,7 @@ class Pluslet_4 extends Pluslet {
 
             $this->_body .= "</ul>";
         } else {
-            $this->_body = "<p class=\"faq-alert\">" . _("There are no FAQs linked for this guide") . "</p>";
+            $this->_body = "<p class=\"faq-alert\">" . _("There are no FAQs linked for this guide") . "</p><p><i class=\"fa fa-plus-square\"></i> <a href=\"$CpanelPath" . "faq/faq.php\">Add New FAQ</a></p>";
         }
 
         parent::assemblePluslet();
