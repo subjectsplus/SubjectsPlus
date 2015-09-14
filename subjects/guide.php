@@ -440,6 +440,15 @@ $('.dropspotty').click(function() {
 
 });
 
+
+
+var $target_blank_links = $(".target_blank_links");
+$target_blank_links.each(function() {
+    $(this).find('a').attr('target', '_blank');
+
+});
+
+
 </script>
 
 
