@@ -13,10 +13,10 @@ use SubjectsPlus\Control\Querier;
     
 $subsubcat = "";
 $subcat = "admin";
-$page_title = "Admin Departments";
+$page_title = "Admin Guide Collections";
 $feedback = "";
 
-var_dump($_POST);
+//var_dump($_POST);
 
 include("../includes/header.php");
 include("../includes/autoloader.php");
@@ -26,24 +26,20 @@ $db = new Querier;
 
 if (isset($_POST["add_collection"])) {
 
-print "Yes, let's add a collection!";
-exit;
     ////////////////
     // Insert title table
     ////////////////
     
-    $qInsertDept = "INSERT INTO department (name, telephone, department_sort, email, url) VALUES (
-		" . $db->quote(scrubData($_POST["department"])) . ", 
-		" . $db->quote(scrubData($_POST["telephone"])) . ", 
-		0,
-        " . $db->quote(scrubData($_POST["email"])) . ", 
-        " . $db->quote(scrubData($_POST["url"])) . "
+    $qInsertGuideCollection = "INSERT INTO collection (title, description, shortform) VALUES (
+		" . $db->quote(scrubData($_POST["title"])) . ", 
+		" . $db->quote(scrubData($_POST["description"])) . ", 
+        " . $db->quote(scrubData($_POST["shortform"])) . "
 		)";
 
-    $rInsertDept = $db->exec($qInsertDept);
+    $rInsertGuideCollection = $db->exec($qInsertGuideCollection);
 
-    if ($rInsertDept) {
-        $feedback = _("Thy Will Be Done.  Department list updated.");
+    if ($rInsertGuideCollection) {
+        $feedback = _("Thy Will Be Done.  Guide Collection list updated.");
 
     } else {
         $feedback = _("Thwarted!  Something has gone wrong with insert.  Contact the admin.");
@@ -52,70 +48,50 @@ exit;
 
 if (isset($_POST["update_collections"])) {
 
-print "Let's update the collections!";
-
 // get our vars and tidy them
-//$our_collection_id = scrubData($_POST)
-// remove all assocations for this collection + this buject
+$our_collection_id = scrubData($_POST["update_collections"]);
 
-//$q = "DELETE * FROM collection_subject WHERE collection_id ="
+// remove all assocations for this collection + this suject
 
-return;
-    //////////////////////////////////
-    // Get the new associated subjects + sort order
-    //////////////////////////////////
-    // wipe out existing departments
-    //////////////////////
-    // Create new array of results
-    /////////////////////
+$qEmpty = "DELETE FROM collection_subject WHERE collection_id = '$our_collection_id'";
+//print $qEmpty;
+$rEmpty = $db->exec($qEmpty);
 
-    $a = $_POST["dept_id"];
-    $b = $_POST["dept"];
-    $c = $_POST["tel"];
-    $d = $_POST["email"];
-    $e = $_POST["url"];
+// insert the new subs and sort order
 
+foreach ($_POST["subject_id"] as $key => $value) {
+    $our_subject_id = scrubData($value);
 
-    $result = array();
-    $values = array($b, $c, $d, $e);
+    $qInsert = "INSERT INTO collection_subject (collection_id, subject_id, sort) VALUES ($our_collection_id, $our_subject_id, $key)";
+    //print $qInsert . "<br />";
+    $rInsert = $db->exec($qInsert);
+}
 
-    foreach ($a as $index => $key) {
-        $t = array();
-        foreach ($values as $value) {
-            $t[] = $value[$index];
-        }
-        $result[$key] = $t;
-    }
-
-    /* 	print "<pre>";
-      print_r($result);
-      print "</pre>"; */
-
-    // Loop through array, update departments table
-
-    $row_count = 1;
-    $error = FALSE;
-
-    foreach ($result as $key => $value) {
-        $qUpDept = "UPDATE department SET
-        name = " . $db->quote(scrubData($value[0])) . ",
-        telephone = " . $db->quote(scrubData($value[1])) . ",
-        department_sort = " . $row_count . ",
-        email = " . $db->quote(scrubData($value[2])) . ",
-        url = " . $db->quote(scrubData($value[3])) . "
-        WHERE department_id = " . scrubData($key, "integer");
-
-        $rUpDept = $db->exec($qUpDept);
-
-        $row_count++;
-
-    }
-
-    $feedback = _("Thy Will Be Done.  Department list order updated.");
+    $feedback = _("Thy Will Be Done.  Guide Collections updated.");
     // Show feedback
     //$feedback = $record->getMessage();
     // See all the queries?
     //$record->deBug();
+}
+
+///////////////
+// Delete Collection
+///////////////
+
+if (isset($_GET["delete_id"])) {
+    $our_collection_id = scrubData($_GET["delete_id"], "integer");
+
+    // delete associations in collection_subject
+    $qEmpty = "DELETE FROM collection_subject WHERE collection_id = '$our_collection_id'";
+    //print $qEmpty;
+    $rEmpty = $db->exec($qEmpty);
+
+    // delete item from collection; leave the subjects alone!
+    $qDeleteColl = "DELETE FROM collection WHERE collection_id = '$our_collection_id'";
+    //print $qEmpty;
+    $rDeleteColl = $db->exec($qDeleteColl);    
+
+print "delete a collection, yikes";
 }
 
 ///////////////
@@ -137,8 +113,7 @@ $subs_option_boxes
 
 $querierColl = new Querier();
 $qColl = "select c.collection_id, c.title, c.description, c.shortform 
-FROM collection c INNER JOIN collection_subject cs ON c.collection_id = cs.collection_id INNER JOIN subject s 
-ON cs.subject_id = s.subject_id 
+FROM collection c
 group by c.title";
 $CollArray = $querierColl->query($qColl);
 
@@ -152,12 +127,12 @@ $ourlist .= "
   <div class=\"pluslet no_overflow\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">$value[1]</div>
-      <div class=\"titlebar_options\"></div>
+      <div class=\"titlebar_options\"><a href=\"guide_collections.php?delete_id={$value[0]}\">delete</a></div>
     </div>
     <div class=\"pluslet_body\">
 <p><em>$value[2]</em></p>
 $all_guides
-<form id=\" collections\" action=\"\" method=\"post\">
+<form id=\"collections$value[0]\" action=\"\" method=\"post\">
 <ul id=\"sortable-$value[0]\" class=\"sortable_list\">
 ";
 
@@ -169,7 +144,7 @@ $all_guides
 
     foreach ($subjectArray as $value2) {
         $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item collection-sortable-$value2[0]\">$value2[1] <a id=\"delete-$value[0]_$value2[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a>
-         <input type=\"hidden\" name=\"collection_id[]\" value=\"$value2[0]\" />
+         <input type=\"hidden\" name=\"subject_id[]\" value=\"$value2[0]\" />
         </li>";
     }
 $ourlist .="
@@ -188,15 +163,15 @@ $add_collection_box = "<form id=\"new_collection\" action=\"\" class=\"pure-form
 <label for=\"department\">" . _("Collection Name") . "</label>
 <input type=\"text\" name=\"title\" id=\"\" size=\"40\" value=\"\">
 <label for=\"description\">" . _("Description") . "</label>
- <textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"70\"></textarea>
+ <textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"50\"></textarea>
  <label for=\"url\">" . _("Shortform") . "</label>
-<input type=\"text\" name=\"url\" id=\"\" size=\"20\" value=\"\">
+<input type=\"text\" name=\"shortform\" id=\"\" size=\"20\" value=\"\">
 <p></p>
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>";
 
 $view_Colls_box = "<ul>
-<li><a href=\"$PublicPath" . "/collection.php\" target=\"_blank\">" . _("Guide Collections") . "</a></li>
+<li><a href=\"$PublicPath" . "collection.php\" target=\"_blank\">" . _("Guide Collections") . "</a></li>
 </ul>";
 
 print feedBack($feedback);
@@ -292,15 +267,18 @@ include("../includes/footer.php");
 
             var our_subject = $(this).parent().find(":selected").text();
             var our_id = $(this).parent().find(":selected").val();
-            var our_collection_id = $(this).next('ul').attr('id').split("-");
-
-            //alert(our_collection_id[1]);
+            var our_collection_id = $(this).parent().find('ul').attr('id').split("-");
+            /*
+            alert(our_subject);
+            alert(our_id);
+            alert(our_collection_id[1]);
+            */
 
             var our_string = '<li id="item-' + our_collection_id[1] + '_' + our_id + '" class="sortable_item collection-sortable-' 
-            + our_id + '">' + our_subject + ' <a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png"></a><input type="hidden" value="' + our_id + '" name="collection_id-' + our_collection_id[1] + '[]"></li>';
+            + our_id + '">' + our_subject + ' <a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png"></a><input type="hidden" value="' + our_id + '" name="subject_id[]"></li>';
 
             // add in a new subject to the dom
-            $(this).next('ul').append(our_string);
+            $(this).parent().find('ul').append(our_string);
 
         });
 
