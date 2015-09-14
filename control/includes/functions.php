@@ -1673,21 +1673,20 @@ function listCollections($search = "") {
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    $list_collections = "<table class=\"item_listing\" width=\"98%\">";
+    $list_collections = "";
     foreach ($db->query($q) as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-        $guide_location = $guide_path . $myrow[3];
+        $guide_location = "collection.php?d=" . $myrow[3];
 
-        $list_collections .= "<tr class=\"zebra $row_colour\" style=\"height: 1.5em;\">
-     <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
-        <div style=\"font-size: .9em;\">$myrow[2]</div></td>
+        $list_collections .= "<div style=\"clear: both;\">
+        <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a><br />
+        $myrow[2]
         
-         </tr>\n";
+         </div>\n";
         $row_count++; 
     }
-    $list_collections .= "</table>";
 
     return $list_collections;
 }

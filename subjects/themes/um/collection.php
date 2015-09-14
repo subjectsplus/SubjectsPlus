@@ -8,13 +8,6 @@
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
-
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
-
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/collection.php"); exit;}
    
 $use_jquery = array("ui");
 
@@ -32,7 +25,6 @@ if ($mod_rewrite == 1) {
 } else {
    $guide_path = "guide.php?subject=";
 }
-
 
 ///////////////////////
 // Have they done a search?
@@ -121,7 +113,7 @@ $searchbox = '
 
 // Add header now 
 
-include("includes/header.php");
+include("includes/header_um.php");
 
 // put together our main result display
 
@@ -136,9 +128,10 @@ if (isset($_GET["d"])) {
   $intro = "<p></p>";
   //$guide_list = listGuides($search, $view_type);
   $guide_results = listCollections($search);
+  $guide_results = makePluslet("", $guide_results, "","",FALSE);
 }
 
-$layout = makePluslet("", $guide_results, "","",FALSE);
+//$layout = makePluslet("", $guide_results, "","",FALSE);
 
 // End CHC hack
 
@@ -148,54 +141,59 @@ $layout = makePluslet("", $guide_results, "","",FALSE);
 ////////////////////////////
 
 ?>
-<br />
+
+<div class="panel-container">
 <div class="pure-g" id="guidesplash">
-<div class="pure-u-1 pure-u-md-2-3" id="listguides">
-<?php print $layout; ?>
+    
+    <div class="pure-u-1 pure-u-lg-3-4 panel-adj" id="listguides">
+        <div class="breather">     
+            <?php print $guide_results; ?>
+        </div> <!-- end breather -->
+    </div><!--end 3/4 main area-->
 
-    </div>
+    <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
 
-    <div class="pure-u-1 pure-u-md-1-3">
-
-      <!-- start pluslet -->
-      <div class="pluslet">
-        <div class="titlebar">
-          <div class="titlebar_text"><?php print _("Search Guides"); ?></div>
-        </div>
-        <div class="pluslet_body">
-              <?php
-              $input_box = new CompleteMe("quick_search", "search.php", $proxyURL, "Quick Search", "guides", 30);
-              $input_box->displayBox();
-              ?>
-        </div>
-      </div>
-      <!-- end pluslet -->
-        <div class="pluslet">
-            <div class="titlebar">
-                <div class="titlebar_text"><?php print _("Newest Guides"); ?></div>
+          <!-- start tip -->
+          <div class="tip">
+            <h2><?php print _("Search Guides"); ?></h2>
+                  <?php
+                  $input_box = new CompleteMe("quick_search", "search_results.php", $proxyURL, "Quick Search", "guides", '');
+                  $input_box->displayBox();
+                  ?>
+          </div>
+          <!-- end tip -->
+          <div class="tipend"> </div>
+          
+          <!-- start tip -->
+            <div class="tip">
+                <h2><?php print _("Newest Guides"); ?></h2>
+                <?php print $newest_guides; ?>
             </div>
-            <div class="pluslet_body"> <?php print $newest_guides; ?> </div>
-        </div>
-        <!-- start pluslet -->
-        <div class="pluslet">
-            <div class="titlebar">
-                <div class="titlebar_text"><?php print _("Newest Databases"); ?></div>
-            </div>
-            <div class="pluslet_body"> <?php print $newlist; ?> </div>
-        </div>
-        <!-- end pluslet -->
-        <br />
+            <!-- end tip -->
+            <div class="tipend"> </div>
 
-    </div>
-</div>
+        <!-- start tip -->
+        <div class="tip">
+            <h2><?php print _("Newest Databases"); ?></h2>
+            <?php print $newlist; ?>
+        </div>
+        <!-- end tip -->
+        <div class="tipend"> </div>
+        
+
+    </div><!--end 1/4 sidebar-->
+
+</div> <!--end pure-g-->
+</div> <!--end panel-container-->
 <?php
 ///////////////////////////
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include("includes/footer_um.php");
 
 ?>
+
 
 <script type="text/javascript" language="javascript">
     $(document).ready(function(){
