@@ -33,8 +33,8 @@ if(isset($_GET['page_title'])) {
 	$stats->setPageTitle($_GET['page_title']);
 }
 
-if(isset($_SERVER['USER_AGENT'])) {
-	$stats->setRemoteAddress($_SERVER['USER_AGENT']);
+if(isset($_SERVER['HTTP_USER_AGENT'])) {
+	$stats->setUserAgent($_SERVER['HTTP_USER_AGENT']);
 }
 
 if(isset($_GET['subject'])) {

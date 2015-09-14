@@ -1,10 +1,10 @@
 <?php
 /**
- *   @file departments.php
- *   @brief CRUD departments
+ *   @file guide_collections.php
+ *   @brief CRUD collections of guides for display on public page
  *
  *   @author adarby
- *   @date feb 2011
+ *   @date Aug 2015
  *   
  */
 
@@ -16,7 +16,7 @@ $subcat = "admin";
 $page_title = "Admin Departments";
 $feedback = "";
 
-print_r($_POST);
+var_dump($_POST);
 
 include("../includes/header.php");
 include("../includes/autoloader.php");
@@ -53,6 +53,13 @@ exit;
 if (isset($_POST["update_collections"])) {
 
 print "Let's update the collections!";
+
+// get our vars and tidy them
+//$our_collection_id = scrubData($_POST)
+// remove all assocations for this collection + this buject
+
+//$q = "DELETE * FROM collection_subject WHERE collection_id ="
+
 return;
     //////////////////////////////////
     // Get the new associated subjects + sort order
@@ -125,21 +132,21 @@ $subs_option_boxes
 <input type=\"button\" name=\"add_subject\" class=\"add_subject\" value=\"" . _("Add Guide to this Collection") . "\" />";
 
 ///////////////
-// Departments
+// Collections
 ///////////////
 
-$querierDept = new Querier();
-$qDept = "select c.collection_id, c.title, c.description, c.shortform 
+$querierColl = new Querier();
+$qColl = "select c.collection_id, c.title, c.description, c.shortform 
 FROM collection c INNER JOIN collection_subject cs ON c.collection_id = cs.collection_id INNER JOIN subject s 
 ON cs.subject_id = s.subject_id 
 group by c.title";
-$deptArray = $querierDept->query($qDept);
+$CollArray = $querierColl->query($qColl);
 
-$ourlist = "<form id=\"departments\" action=\"\" method=\"post\">";
+$ourlist = "";
 
 // Loop through all of the collections, putting each in a pluslet
 
-foreach ($deptArray as $value) {
+foreach ($CollArray as $value) {
 
 $ourlist .= "
   <div class=\"pluslet no_overflow\">
@@ -150,6 +157,7 @@ $ourlist .= "
     <div class=\"pluslet_body\">
 <p><em>$value[2]</em></p>
 $all_guides
+<form id=\" collections\" action=\"\" method=\"post\">
 <ul id=\"sortable-$value[0]\" class=\"sortable_list\">
 ";
 
@@ -160,21 +168,21 @@ $all_guides
     $subjectArray = $querierSubject->query($qSubject);
 
     foreach ($subjectArray as $value2) {
-        $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item department-sortable-$value2[0]\">$value2[1] <a id=\"delete-$value[0]_$value2[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a>
-         <input type=\"hidden\" name=\"subject_id-$value[0][]\" value=\"$value2[0]\" />
+        $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item collection-sortable-$value2[0]\">$value2[1] <a id=\"delete-$value[0]_$value2[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a>
+         <input type=\"hidden\" name=\"collection_id[]\" value=\"$value2[0]\" />
         </li>";
     }
 $ourlist .="
 </ul>
 <p>" . _("Drag guides within collections to change display order.") . "</p>
 
-<button value=\"$value[0]\" class=\"button pure-button pure-button-primary\" name=\"update_collections\" style=\"display: block;\" >" . _("SAVE CHANGES") . "</button>
-
+<button class=\"button pure-button pure-button-primary\" name=\"update_collections\" value=\"$value[0]\" style=\"display: block;\" >" . _("SAVE CHANGES") . "</button>
+</form>
 </div></div>";
 
 }
 
-$ourlist .= "</form>";
+$ourlist .= "";
 
 $add_collection_box = "<form id=\"new_collection\" action=\"\" class=\"pure-form pure-form-stacked\" method=\"post\">
 <label for=\"department\">" . _("Collection Name") . "</label>
@@ -187,7 +195,7 @@ $add_collection_box = "<form id=\"new_collection\" action=\"\" class=\"pure-form
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>";
 
-$view_depts_box = "<ul>
+$view_Colls_box = "<ul>
 <li><a href=\"$PublicPath" . "/collection.php\" target=\"_blank\">" . _("Guide Collections") . "</a></li>
 </ul>";
 
@@ -202,14 +210,14 @@ print "
   <div class=\"pure-u-2-3\">
 ";
 print $ourlist;
-  //makePluslet(_("Departments"), $dept_box, "no_overflow");
+  //makePluslet(_("Departments"), $Coll_box, "no_overflow");
 
 print "</div>
 <div class=\"pure-u-1-3\">";
 
 makePluslet(_("Collection"), $add_collection_box, "no_overflow");
 
-makePluslet(_("View Live!"), $view_depts_box, "no_overflow");
+makePluslet(_("View Live!"), $view_Colls_box, "no_overflow");
 
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
@@ -288,8 +296,8 @@ include("../includes/footer.php");
 
             //alert(our_collection_id[1]);
 
-            var our_string = '<li id="item-' + our_collection_id[1] + '_' + our_id + '" class="sortable_item department-sortable-' 
-            + our_id + '">' + our_subject + ' <a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png"></a><input type="hidden" value="' + our_id + '" name="subject_id-' + our_collection_id[1] + '[]"></li>';
+            var our_string = '<li id="item-' + our_collection_id[1] + '_' + our_id + '" class="sortable_item collection-sortable-' 
+            + our_id + '">' + our_subject + ' <a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png"></a><input type="hidden" value="' + our_id + '" name="collection_id-' + our_collection_id[1] + '[]"></li>';
 
             // add in a new subject to the dom
             $(this).next('ul').append(our_string);
