@@ -160,6 +160,7 @@ if ($is_um == TRUE) {
     			<li><a href=\"$CpanelPath" . "admin/user.php\">" . _("Add New User") . "</a></li>
           <li><a href=\"$CpanelPath" . "admin/user.php?browse\">" . _("Manage Users") . "</a></li>
     			<li><a href=\"$CpanelPath" . "admin/manage_guides.php\">" . _("Manage Guides") . "</a></li>
+          <li><a href=\"$CpanelPath" . "admin/guide_collections.php\">" . _("Guide Collections") . "</a></li>
     			<li><a href=\"$CpanelPath" . "admin/departments.php\">" . _("Departments") . "</a></li>
     			<li><a href=\"$CpanelPath" . "admin/sources.php\">" . _("Sources") . "</a></li>
           <li><a href=\"$CpanelPath" . "admin/faq_collections.php\">" . _("FAQ Collections") . "</a></li>

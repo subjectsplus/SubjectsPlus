@@ -18,9 +18,9 @@ if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subject
    
 $use_jquery = array("ui");
 
-$page_title = $resource_name;
-$description = "The best stuff for your research.  No kidding.";
-$keywords = "research, databases, subjects, search, find";
+$page_title = _("Research Guide Collections");
+$description = _("The best stuff for your research.  No kidding.");
+$keywords = _("research, databases, subjects, search, find");
 $noheadersearch = TRUE;
 
 $db = new Querier;
@@ -129,7 +129,7 @@ include("includes/header.php");
 
 if (isset($_GET["d"])) {
 
-    $guide_results = listGuideCollections2($_GET["d"]);
+    $guide_results = listGuideCollections($_GET["d"]);
   
 } else {
   // Default collection listing

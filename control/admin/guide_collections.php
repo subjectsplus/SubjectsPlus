@@ -105,7 +105,7 @@ $all_guides = "
 <option value=\"\">" . _("-- Choose Guide --") . "</option>
 $subs_option_boxes
 </select>
-<input type=\"button\" name=\"add_subject\" class=\"add_subject\" value=\"" . _("Add Guide to this Collection") . "\" />";
+<input type=\"button\" name=\"add_subject\" class=\"add_subject\" value=\"" . _("Add") . "\" />";
 
 ///////////////
 // Collections
@@ -127,7 +127,7 @@ $ourlist .= "
   <div class=\"pluslet no_overflow\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">$value[1]</div>
-      <div class=\"titlebar_options\"><a href=\"guide_collections.php?delete_id={$value[0]}\">delete</a></div>
+      <div class=\"titlebar_options\"><a href=\"guide_collections.php?delete_id={$value[0]}\"><i class=\"fa fa-trash-o\" title=\"Remove item from this guide\"></i></a></div>
     </div>
     <div class=\"pluslet_body\">
 <p><em>$value[2]</em></p>
@@ -143,14 +143,12 @@ $all_guides
     $subjectArray = $querierSubject->query($qSubject);
 
     foreach ($subjectArray as $value2) {
-        $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item collection-sortable-$value2[0]\">$value2[1] <a id=\"delete-$value[0]_$value2[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a>
+        $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item collection-sortable-$value2[0]\"><a id=\"delete-$value[0]_$value2[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" style=\"height: 1em; width: 1em;\" /></a> $value2[1] 
          <input type=\"hidden\" name=\"subject_id[]\" value=\"$value2[0]\" />
         </li>";
     }
 $ourlist .="
 </ul>
-<p>" . _("Drag guides within collections to change display order.") . "</p>
-
 <button class=\"button pure-button pure-button-primary\" name=\"update_collections\" value=\"$value[0]\" style=\"display: block;\" >" . _("SAVE CHANGES") . "</button>
 </form>
 </div></div>";
@@ -158,6 +156,10 @@ $ourlist .="
 }
 
 $ourlist .= "";
+
+$add_help_box =  _("<p>You can create 'collections' as a way of grouping together similar guides, and presenting them separately from the 
+    full list of guides.  E.g., you want guides only for your music library.</p><p>You can add a new collection below, and then add guides
+    to your collection via the dropdown list.  You can rearrange the order of guides within a collection by dragging them.</p>");
 
 $add_collection_box = "<form id=\"new_collection\" action=\"\" class=\"pure-form pure-form-stacked\" method=\"post\">
 <label for=\"department\">" . _("Collection Name") . "</label>
@@ -189,6 +191,8 @@ print $ourlist;
 
 print "</div>
 <div class=\"pure-u-1-3\">";
+
+makePluslet(_("Instructions/Help"), $add_help_box, "no_overflow");
 
 makePluslet(_("Collection"), $add_collection_box, "no_overflow");
 
@@ -275,11 +279,12 @@ include("../includes/footer.php");
             */
 
             var our_string = '<li id="item-' + our_collection_id[1] + '_' + our_id + '" class="sortable_item collection-sortable-' 
-            + our_id + '">' + our_subject + ' <a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png"></a><input type="hidden" value="' + our_id + '" name="subject_id[]"></li>';
+            + our_id + '"><a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png" style="height: 1em; width: 1em;"></a><input type="hidden" value="' + our_id + '" name="subject_id[]"> ' + our_subject + ' </li>';
 
             // add in a new subject to the dom
             $(this).parent().find('ul').append(our_string);
-
+            // show save button
+            //$("button[name*=update_collections").show();
         });
 
     });
