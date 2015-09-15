@@ -11,9 +11,9 @@ use SubjectsPlus\Control\Querier;
    
 $use_jquery = array("ui");
 
-$page_title = $resource_name;
-$description = "The best stuff for your research.  No kidding.";
-$keywords = "research, databases, subjects, search, find";
+$page_title = _("Research Guide Collections");
+$description = _("The best stuff for your research.  No kidding.");
+$keywords = _("research, databases, subjects, search, find");
 $noheadersearch = TRUE;
 
 $db = new Querier;
@@ -121,14 +121,14 @@ include("includes/header_um.php");
 
 if (isset($_GET["d"])) {
 
-    $guide_results = listGuideCollections2($_GET["d"]);
+    $guide_results = listGuideCollections($_GET["d"]);
   
 } else {
   // Default collection listing
   $intro = "<p></p>";
   //$guide_list = listGuides($search, $view_type);
   $guide_results = listCollections($search);
-  $guide_results = makePluslet("", $guide_results, "","",FALSE);
+
 }
 
 //$layout = makePluslet("", $guide_results, "","",FALSE);

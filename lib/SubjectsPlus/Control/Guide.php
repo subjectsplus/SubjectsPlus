@@ -24,7 +24,6 @@ class Guide
     private $_extra;
     private $_message;
     private $_all_tabs;
-    private $_departments;
     private $_parents;
     private $_header;
     private $_debug;
@@ -81,11 +80,7 @@ class Guide
 
                 // data stored in subject_subject table
                 $this->_parent_id = $_POST["parent_id"]; // array
-                $this->_parent_count = count($this->_parent_id); // # of items in above array                
-
-                // data stored in subject_department table
-                $this->_department_id = $_POST["department_id"]; // array
-                $this->_department_count = count($this->_department_id); // # of items in above array      
+                $this->_parent_count = count($this->_parent_id); // # of items in above array                   
 
                 if ($use_disciplines == TRUE) {
                     //data stored in subject_discipline table
@@ -141,13 +136,6 @@ class Guide
                 self::getAssociatedStaff();
 
                 ///////////////////
-                // Query subject_department table
-                // used to get our set of subjects associated
-                // ////////////////
-
-                self::getAssociatedDepartments();
-
-                ///////////////////
                 // Query subject_subject table
                 // used to get our set of subjects associated
                 // ////////////////
@@ -201,29 +189,6 @@ class Guide
         }
 
         $this->_debug .= "<p>Parents query: $current_parent_query";
-
-    }
-
-
-    public function getAssociatedDepartments()
-    {
-
-        $current_department_querier = new Querier();
-        $current_department_query =
-        "SELECT DISTINCT  department.department_id,department.name
-            FROM subject_department
-            JOIN subject ON subject.subject_id = subject_department.id_subject
-            JOIN department ON department.department_id = subject_department.id_department
-            WHERE subject.subject_id = '$this->_subject_id'
-            ORDER BY date DESC";
-
-        $this->_departments = $current_department_querier->query($current_department_query);
-
-        foreach ($this->_departments as $value) {
-            $this->_ok_departments[] = $value[0];
-        }
-
-        $this->_debug .= "<p>departments query: $current_department_query";
 
     }
 
@@ -354,56 +319,6 @@ class Guide
 
         print $is_live;
 
-        /////////
-        // Department dropdown
-        ////////        
-      
-        print "
-        </div>
-        </div>
-        <div class=\"pluslet\">
-        
-                    <div class=\"titlebar\">
-                      <div class=\"titlebar_text\">" . _("Associations/Listings (optional)") . "</div>
-                      <div class=\"titlebar_options\"></div>
-                    </div>
-                <div class=\"pluslet_body\">
-                <span class=\"smaller\"> " . _("<strong>Department</strong> lets you group guides to provide a separate listing for a group of guides, say, Special Collections.  
-                <br /><strong>Parent Guide</strong> allows you to build a hierarchy for display.") . "</span>
-
-                <label for=\"department\">" . _("Department Guides") . "</label>";
- 
-        ////////////////////////////
-        // Departmenthood
-        ///////////////////////////
-        $departments_list = "";
-
-        if ($this->_departments == FALSE) {
-            // No results
-            $departments_list = "";
-        } else {
-            // loop through results
-            foreach ($this->_departments as $dvalue) {
-
-                $departments_list .= self::outputDepartments($dvalue);
-            }
-        }
-
-        ////////
-        // Dept dropdown
-        ////////
-
-        $querier = new Querier();
-        $department_query = "SELECT department_id, name FROM department";
-        $departmentArray = $querier->query($department_query);
-
-        $departmentMe = new Dropdown("department_id[]", $departmentArray, "", "50", "--Select--");
-        $department_string = $departmentMe->display();
-
-        $departmenthood = "$department_string <div id=\"department_list\">$departments_list</div> <!-- department guides inserted here --><br />";
-
-        print $departmenthood;
-
         ////////////////////////////
         // Parenthood
         ///////////////////////////
@@ -446,7 +361,8 @@ class Guide
         echo "
         <label for=\"parent\">" . _("Parent Guides") . "</label>
         $parenthood
-
+        <br style=\"clear: both;\" />
+        <span class=\"smaller\">* " . _("Parent guides allow you to create a hierarchy") . "</span>
         $screen_layout
     </div>
     </div>
@@ -598,24 +514,6 @@ class Guide
         </div>";
 
         return $ourparents;
-    }
-
-    public function outputDepartments($value)
-    {
-        global $IconPath;
-
-        $ourdepartments = "
-        <div class=\"selected_item_wrapper departmentwrapper\">
-        <div class=\"selected_item\">
-        <input name=\"department_id[]\" value=\"$value[0]\" type=\"hidden\" />
-        $value[1]<br />
-        </div>
-        <div class=\"selected_item_options\">
-        <img src=\"$IconPath/delete.png\" class=\"delete_item delete_department\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\" border=\"0\">
-        </div>
-        </div>";
-
-        return $ourdepartments;
     }
 
     public function outputDisciplines($value)
@@ -771,14 +669,6 @@ class Guide
 
         $updateChangeTable = changeMe("guide", "insert", $this->_subject_id, $this->_subject, $_SESSION['staff_id']);
 
-
-        // Insert subject_department relationship
-        $insert_department = new Querier();
-        $dept_query = "INSERT INTO subject_department (id_subject, id_department) VALUES ('$this->_subject_id ', '$this->_department_id')";
-        $insert_department->exec($dept_query);
-        
-        //print_r ($insert_department);
-
         /////////////////////
         // insert into subject_subject for parent-child
         ////////////////////
@@ -863,25 +753,6 @@ class Guide
         ////////////////////
 
         self::modifySubSub();
-
-
-        /////////////////////
-        // clear subject_department -- for clustered item relationships
-        /////////////////////
-
-
-        $qClearSubD = "DELETE FROM subject_department WHERE id_subject = " . $this->_subject_id;
-
-        $rClearSubD = $db->exec($qClearSubD);
-
-        $this->_debug .= "<p>2. clear subject_department: $qClearSubD</p>";
-
-
-        /////////////////////
-        // insert into subject_departnebt
-        ////////////////////
-
-        self::modifySubDept();
 
         /////////////////////
         // clear subject_discipline
@@ -1239,26 +1110,6 @@ class Guide
                 $rUpSS = $db->exec($qUpSS);
 
                 $this->_debug .= "<p>3. (insert staff_subject loop) : $qUpSS</p>";
-
-            }
-        }
-    }
-
-    function modifySubDept()
-    {
-
-        $de_duped = array_unique($this->_department_id);
-
-        foreach ($de_duped as $value) {
-            if (is_numeric($value)) {
-                $db = new Querier;
-                $qUpSD = "INSERT INTO subject_department (id_subject, id_department) VALUES (
-                " . scrubData($this->_subject_id, 'integer') . ",
-                " . scrubData($value, 'integer') . ")";
-                $db = new Querier;
-                $rUpSD = $db->exec($qUpSD);
-
-                $this->_debug .= "<p>3. (insert subject_department loop) : $qUpSD</p>";
 
             }
         }
