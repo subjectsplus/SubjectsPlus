@@ -378,7 +378,23 @@ class Installer
   `tab_name` varchar(200) DEFAULT NULL,
   `link_url` varchar(200) DEAFULT NULL,
   PRIMARY KEY (`stats_id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8"
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8",
+				
+				"CREATE TABLE ​`collection`​ (
+ ​`collection_id`​ int(11) NOT NULL AUTO_INCREMENT,
+ ​`title`​ text CHARACTER SET latin1 NOT NULL,
+ ​`description`​ text CHARACTER SET latin1 NOT NULL,
+ ​`shortform`​ text CHARACTER SET latin1 NOT NULL,
+ PRIMARY KEY (​`collection_id`​)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
+				
+				"CREATE TABLE ​`collection_subject`​ (
+						​`collection_subject_id`​ int(11) NOT NULL AUTO_INCREMENT,
+						​`collection_id`​ int(11) NOT NULL,
+						​`subject_id`​ int(11) NOT NULL,
+						PRIMARY KEY (​`collection_subject_id`​)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8"
+				
 			);
 
 		//all the subjectqueries -- default data
