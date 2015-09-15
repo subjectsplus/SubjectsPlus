@@ -189,13 +189,6 @@ class Installer
 					  CONSTRAINT `fk_rank_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
 					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `subject_department` (
-					  `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
-					  `id_subject` bigint(20) NOT NULL,
-					  `id_department` int(11) NOT NULL,
-					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-					  PRIMARY KEY (`idsubject_department`)
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `tab` (
 					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
