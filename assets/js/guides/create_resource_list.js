@@ -92,7 +92,7 @@ $(document).ready(function () {
 					if (data[i]['content_type'] == "Record") {
 
 					$('.databases-searchresults').append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
-							"<div class=\"pure-g\"><div class=\"pure-u-4-5 box-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
+							"<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
 									"<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +
 									"<button data-label='" + data[i].label + "' value='" + data[i].id  + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div></li>");				
 					}
