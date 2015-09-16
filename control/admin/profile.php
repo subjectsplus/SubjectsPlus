@@ -63,6 +63,7 @@ echo "<div class=\"feedback\">$feedback</div><br /><br />";
 
 $record->outputSelfEditForm();
 
+
 //$record->deBug();
 
 include("../includes/footer.php");

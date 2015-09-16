@@ -99,6 +99,10 @@ class Staff {
         $this->_lat_long = $_POST["lat_long"];
         $this->_fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : $_POST["fname"] . " " . $_POST["lname"];
 
+        //new sp4
+        $this->_extra = $this->setExtraDataPost();
+
+
         break;
       case "delete":
         // kind of redundant, but just set up to delete appropriate tables?
@@ -288,6 +292,12 @@ class Staff {
     } else {
       $headshot .= "<p>" . _("You can change the photo after saving.") . "</p>";
     }
+
+
+    //////////////////
+    // Social Media //
+    //////////////////
+    //$socialMedia  = self::outputSocialMediaForm();
 
     /////////////
     // Start the form
@@ -541,6 +551,11 @@ class Staff {
     makePluslet(_("Photo"), $headshot, "no_overflow");
 
 
+    $socialMediaForm = self::outputSocialMediaForm();
+    makePluslet(_("Social Media"), $socialMediaForm, "no_overflow");
+
+
+
 print "<div class=\"pluslet\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">" . _("Staff Member") . "</div>
@@ -755,6 +770,20 @@ public function outputLatLongForm() {
     self::outputBioForm();
 
     echo "</div></div>"; // end pluslet_body, end pluslet
+
+    print "<div class=\"pluslet\">
+    <div class=\"titlebar\">
+      <div class=\"titlebar_text\">" . _("Social Media Accounts") . "</div>
+      <div class=\"titlebar_options\"></div>
+    </div>
+    <div class=\"pluslet_body\">";
+
+    echo self::outputSocialMediaForm();
+
+    echo "</div></div>"; // end pluslet_body, end pluslet
+
+
+
 
     print "</div>"; // close pure-1-3
 
@@ -1071,6 +1100,7 @@ public function outputLatLongForm() {
 	  "cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . "," .
       "fax = " . $db->quote(scrubData($this->_fax)) . "," .
 	  "intercom = " . $db->quote(scrubData($this->_intercom)) . "," .
+        "extra = " . $db->quote(scrubData($this->_extra)) . "," .
       "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
 	  " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
@@ -1176,6 +1206,56 @@ public function outputLatLongForm() {
       echo "<textarea name=\"answer\" rows=\"6\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
     }
   }
+
+  function outputSocialMediaForm() {
+    $socialMediaForm = "";
+
+    $extra = $this->getExtraDataArray();
+
+    $objSM = new SocialMedia();
+    $smAccounts = $objSM->toArray();
+
+    foreach($smAccounts as $account):
+      $accountName = strtolower($account['name']);
+
+      $socialMediaForm .= "<label for='extra-{$accountName}'>{$account['name']}</label>";
+      $socialMediaForm .= "<input type='text' name='extra-{$accountName}' value='{$extra[$accountName]}' />";
+    endforeach;
+
+    return $socialMediaForm;
+  }
+
+
+  protected function getExtraDataArray() {
+
+    $querier = new  Querier();
+    $q1 = "select extra from staff where staff_id = '" . $this->_staff_id . "'";
+    $staffArray = $querier->query($q1);
+
+    $extra = array();
+    $json = html_entity_decode($staffArray[0]['extra']);
+    $extra = json_decode($json, true);
+
+    return $extra;
+  }
+
+  protected function setExtraDataPost() {
+
+    $data = array();
+    foreach($_POST as $key => $value):
+      $account_key = explode('-', $key);
+
+      if(!empty($account_key[1])) {
+        $post_value_name = 'extra-'.$account_key[1];
+        $data[$account_key[1]] = $_POST[$post_value_name] ;
+      }
+    endforeach;
+
+    $data = json_encode($data);
+    return $data;
+  }
+
+
 
   public function getMessage() {
     return $this->_message;

@@ -1,7 +1,7 @@
-<div id="subjectSpecialistPluslet" class="subjectSpecialistPluslet">
+<div class="subjectSpecialistPluslet">
 
 
-    <?php if($this->staffPhoto != "off") {
+    <?php if ( isset($this->staffPhoto) ) {
         echo  "<div class=\"staff-image\"><img id='staffPhoto' class=\"staff-photo\" src='{$this->staffPhoto}' /></div>
                <div class=\"staff-content\">";
     }
@@ -12,41 +12,47 @@
 
 
     <ul class="staff-details">
-        <li><?php echo $this->staffName; ?></li>
+        <?php if( isset($this->staffName) ) {
+            echo "<li>".$this->staffName."</li>";
+        } ?>
 
-        <?php if($this->staffTitle != "off") {
+
+        <?php if( isset($this->staffTitle) ) {
             echo "<li>".$this->staffTitle."</li>";
         } ?>
 
-        <?php if($this->staffEmail != "off") {
+        <?php if( isset($this->staffEmail) ) {
             echo "<li><a href='mailto:{$this->staffEmail}'>{$this->staffEmail}</a></li>";
         } ?>
 
-        <?php if($this->staffPhone != "off") {
+        <?php if( isset($this->staffPhone) ) {
             echo "<li>{$this->staffPhone}</li>";
         } ?>
 
     </ul>
 
     <ul class="staff-social">
-        <?php if($this->staffFacebook != "") {
+        <?php if( isset($this->staffFacebook) ) {
 
             echo "<li><a href='http://facebook.com/{$this->staffFacebook}'><i class='fa fa-facebook-square'></i></a></li>";
         } ?>
 
-        <?php if($this->staffTwitter != "") {
+        <?php if( isset($this->staffTwitter) ) {
 
             echo "<li><a href='http://twitter.com/{$this->staffTwitter}'><i class='fa fa-twitter-square'></i></a></li>";
         } ?>
 
-        <?php if($this->staffPinterest != "") {
+        <?php if( isset($this->staffPinterest) ) {
 
             echo "<li><a href='http://pinterest.com/{$this->staffPinterest}'><i class='fa fa-pinterest-square'></i></a></li>";
         } ?>
 
+        <?php if( isset($this->staffInstagram) ) {
+
+            echo "<li><a href='http://instagram.com/{$this->staffInstagram}'><i class='fa fa-instagram'></i></a></li>";
+        } ?>
     </ul>
 
-    </div>
-
+</div>
 
 </div>

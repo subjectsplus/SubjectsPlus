@@ -1,64 +1,93 @@
-<?php
-    if($this->_extra['showPhoto'][0] == "on") {
-        $inputShowPhoto = "<input type='checkbox' name='SubjectSpecialist-extra-showPhoto' checked/>";
-    } else {
-        $inputShowPhoto = "<input type='checkbox' name='SubjectSpecialist-extra-showPhoto'/>";
-    }
+<form class="pure-form pure-form-stacked" id="subjectSpecialistForm">
 
-    if($this->_extra['showTitle'][0] == "on") {
-        $inputShowTitle = "<input type='checkbox' name='SubjectSpecialist-extra-showTitle' checked/>";
-    } else {
-        $inputShowTitle = "<input type='checkbox' name='SubjectSpecialist-extra-showTitle'/>";
-    }
+    <?php
 
-    if($this->_extra['showPhone'][0] == "on") {
-        $inputShowPhone = "<input type='checkbox' name='SubjectSpecialist-extra-showPhone' checked/>";
-    } else {
-        $inputShowPhone = "<input type='checkbox' name='SubjectSpecialist-extra-showPhone'/>";
-    }
-
-    if($this->_extra['showEmail'][0] == "on") {
-        $inputShowEmail = "<input type='checkbox' name='SubjectSpecialist-extra-showEmail' checked/>";
-    } else {
-        $inputShowEmail = "<input type='checkbox' name='SubjectSpecialist-extra-showEmail'/>";
-    }
-
-?>
+    foreach($this->_staffArray as $staffMember):
+        $staffId = $staffMember['staff_id'];
+        $staffData = $this->getStaffMember($staffId);
 
 
-<form class="pure-form pure-form-stacked">
+        if ($staffData[0]['extra'] != "") {
+            $staffSocialMedia = json_decode(html_entity_decode( $staffData[0]['extra'] ), true);
+            //var_dump($staffSocialMedia);
+            $array_keys = $this->_array_keys;
 
-    <?php echo $inputShowPhoto; ?> <label style="display:inline;"> Show Photo </label>
+            if($staffSocialMedia['instagram'] == '') {
+                $pos = array_search('Instagram', $array_keys);
+                unset($array_keys[$pos]);
+            }
 
-    <br>
-    <?php echo $inputShowTitle; ?> <label style="display:inline;"> Show Title</label>
+            if($staffSocialMedia['facebook'] == '') {
+                $pos = array_search('Facebook', $array_keys);
+                unset($array_keys[$pos]);
+            }
 
-    <br>
-    <?php echo $inputShowPhone; ?> <label style="display:inline;"> Show Phone</label>
+            if($staffSocialMedia['twitter'] == '') {
+                $pos = array_search('Twitter', $array_keys);
+                unset($array_keys[$pos]);
+            }
 
-    <br>
-    <?php echo $inputShowEmail; ?> <label style="display:inline;"> Show Email</label>
-    <br>
+            if($staffSocialMedia['pinterest'] == '') {
+                $pos = array_search('Pinterest', $array_keys);
+                unset($array_keys[$pos]);
+            }
 
-    <label>Facebook</label>
-    <input required aria-required="true"
-           type="text"
-           id="facebook"
-           name="SubjectSpecialist-extra-facebook"
-           placeholder="username only"
-           value="<?php echo $this->_extra['facebook']; ?>"/>
-    <label>Twitter</label>
-    <input required aria-required="true"
-           type="text"
-           id="twitter"
-           name="SubjectSpecialist-extra-twitter"
-           placeholder="username only - no @"
-           value="<?php echo $this->_extra['twitter']; ?>"/>
-    <label>Pinterest</label>
-    <input required aria-required="true"
-           type='text'
-           id='pinterest'
-           name="SubjectSpecialist-extra-pinterest"
-           placeholder="username only"
-           value="<?php echo $this->_extra['pinterest']; ?>"/>
+        }
+
+        //var_dump($array_keys);
+
+        $this->_body .= "<h4>{$staffMember['fname']} {$staffMember['lname']}</h4>";
+
+        $this->_body .= "<input type='text' name='SubjectSpecialist-extra-staffId{$staffId}' value='{$staffId}' style='display:none;' />";
+
+        foreach($array_keys as $item):
+
+            if(array_key_exists("show{$item}{$staffId}", $this->_extra)) {
+
+                $key = 'show'.$item.$staffId;
+                $key_trimmed = rtrim($key, ' 0123456789');
+
+                $this->_body .= "<input class='checkbox_ss' type='checkbox' name='SubjectSpecialist-extra-show{$item}{$staffId}' value='{$this->_extra[$key][0]}' /><label style='display:inline;'> Show {$item}</label><br>";
+
+            } else {
+                $this->_body .= "<input class='checkbox_ss' type='checkbox' name='SubjectSpecialist-extra-show{$item}{$staffId}' value='No' /><label style='display:inline;'> Show {$item}</label><br>";
+            }
+
+        endforeach;
+
+    endforeach;
+    ?>
+
 </form>
+
+
+<script>
+
+    $(document).ready(function(){
+
+        $(".checkbox_ss").each(function() {
+
+            if( $(this, "input").val() == "Yes") {
+
+                $(this, "input").prop("checked", true);
+            }
+        });
+
+
+        $(".checkbox_ss").on('click', function() {
+            //var value = $(this).attr('value');
+
+            if( ($(this).attr('value') == "No") || $(this).attr('value') == "" ) {
+                $(this).attr('value', 'Yes');
+                $(this, "input").prop("checked", true);
+            } else {
+                $(this).attr('value', 'No');
+                $(this, "input").prop("checked", false);
+            }
+        });
+
+
+    });
+
+
+</script>
