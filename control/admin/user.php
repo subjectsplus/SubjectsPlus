@@ -41,6 +41,19 @@ if ($check_id == TRUE) {
 ///////////////////
 if (isset($_GET["browse"])) {
 
+//Do we want to show inactive users?
+    if (isset($_GET["show"]) && $_GET["show"] == "all") {
+        $active_inactive = _("Show only active users"); 
+        $active_inactive_url = "";
+        $wantactive = "";
+        $about_that_star = "<br />" . _("* = inactive user");
+    } else {
+        $active_inactive = _("Show inactive users"); 
+        $active_inactive_url = "&show=all";
+        $wantactive = "AND active = '1'";
+        $about_that_star = "";
+    }
+
     $q = "SELECT user_type_id, user_type FROM user_type ORDER BY user_type_id";
 
     $querier = new Querier();
@@ -54,7 +67,7 @@ if (isset($_GET["browse"])) {
         $staff_list = "";
         $staffArray = "";
         $our_title = $value[1];
-        $q2 = "SELECT staff_id, fname, lname, email, ptags FROM staff WHERE user_type_id = " . $value[0] . " ORDER BY lname, fname";
+        $q2 = "SELECT staff_id, fname, lname, email, ptags, active FROM staff WHERE user_type_id = " . $value[0] . " $wantactive ORDER BY lname, fname";
         $querier2 = new Querier();
         $staffArray = $querier2->query($q2);
 
@@ -65,7 +78,7 @@ if (isset($_GET["browse"])) {
             $staff_list .= "<p>" . _("None registered.  Just as well.  They're going to rise up against us someday.") . "</p>";
         } else {
 
-            $staff_list .= "<p>" . _("Click on a name to update details and privileges") . "</p>";
+            $staff_list .= "<p>" . _("Click on a name to update details and privileges.") . " $about_that_star</p>";
 
             // set up striping
             $row_count = 0;
@@ -74,6 +87,7 @@ if (isset($_GET["browse"])) {
 
             foreach ($staffArray as $staff) {
                 
+                $bonus_style = "";
                 // unpack the ptags
                 $these_tags = "";
                 $current_ptags = explode("|", $staff[4]);
@@ -89,15 +103,18 @@ if (isset($_GET["browse"])) {
    
                 $button = "<button id=\"save_changes-$staff[0]\" rel=\"\" style=\"display: none;\">" . _("Update Permissions") . "</button>"   ;         
 
+                // put star if inactive
+                $inactive_clue = "";
+                if ($staff[5] != 1) { $inactive_clue = " * ";}
                 
-                
-                $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\"><a href=\"user.php?staff_id=$staff[0]\">";
+                $staff_list .= "<div class=\"staff_container\"><div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 200px;\">
+                $inactive_clue<a href=\"user.php?staff_id=$staff[0]\">";
                     // if there's no last name, we display email 
                     if($staff[2] != "") { $staff_list .= "$staff[2], $staff[1]"; } else { $staff_list .= "$staff[3]"; }
 
                 $staff_list .= "</a></div>
                 <div id=\"user-$staff[0]\" class=\"$row_colour striper\">$these_tags $button<span></span>
-                </div>";
+                </div></div>";
                 
                 
                 $row_count++;
@@ -112,6 +129,22 @@ if (isset($_GET["browse"])) {
     //print $staff_list;
     print "</div>
     <div class=\"pure-u-1-3\">";
+
+    // config
+    $config_box2 = "<div class=\"onoffswitch\">
+    <input id=\"active_inactive\" class=\"onoffswitch-checkbox2\" type=\"checkbox\" checked>
+    <label class=\"onoffswitch-label\" for=\"active_inactive\">
+    <span class=\"onoffswitch-inner\"></span>
+    <span class=\"onoffswitch-switch\"></span>
+    </label>
+    <span class=\"settings-label-text\" style=\"color: #333; font-weight: bold;\">Hide Inactive Users</span>
+    </div>";
+
+    
+    $config_box = "<p><a href=\"user.php?browse$active_inactive_url\">$active_inactive</a></p>";
+
+    makePluslet(_("Options"), $config_box, "no_overflow");
+
     // time to give some help
     $privs_blurb = _("Select which parts of SubjectsPlus this user may access.
                 <p><strong>records</strong> allows access to both the Record and Guide tabs.
@@ -172,6 +205,12 @@ if (isset($_GET["browse"])) {
             $(this).hide();
             $(this).next().load("admin_bits.php", {action: 'update_permissions', ptags: new_vals, update_id: row_id[1]});
             //alert(new_vals);
+        });
+
+                // Show inactive users
+        $(document).on('click', '.onoffswitch-checkbox2', function() {
+            alert("boo"); //staff_container
+            ('.staff_container').css('display: block;');
         });
   });
 </script>
@@ -371,6 +410,8 @@ include("../includes/footer.php");
 
             return false;
         });
+
+
 
          ///////////////
         /* Coord Lookup */

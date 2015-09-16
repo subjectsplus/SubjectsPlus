@@ -1654,58 +1654,101 @@ function listGuides($search = "", $type="all") {
     return $list_guides;
 }
 
-
-function listGuideCollections($dept_id) {
+function listCollections($search = "") {
     $db = new Querier();
     
-    $andclause = "";
+    $whereclause = "";
     global $guide_path;
-    global $AssetPath;
+
+    if ($search != "") {
+        $search = scrubData($search);
+        $whereclause .= " WHERE subject LIKE '%" . $db->quote($search) . "%'";
+    }
 
 
-    $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " ORDER BY subject";
+    $q = "SELECT collection_id, title, description, shortform FROM $whereclause collection ORDER BY title";
    // $r = $db->query($q);
-    $q = "SELECT DISTINCT  shortform, subject, type, description 
-            FROM subject_department
-            JOIN subject ON subject.subject_id = subject_department.id_subject
-            WHERE subject_department.id_department = '$dept_id'
-            AND active = '1'
-            ORDER BY subject";
-    
+    //print $q;
     $row_count = 0;
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
-    $db = new Querier;
-    $list_guides = "<table class=\"item_listing\" width=\"98%\">";
+    $list_collections = "<table class=\"item_listing\" width=\"98%\">";
+
     foreach ($db->query($q) as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-        $guide_location = $guide_path . $myrow[0];
-        $thumbnail = $AssetPath . "images/guide_thumbs/$myrow[0].jpg";
-        $thumbnail_default = "$AssetPath/images/guide_thumbs/chc.jpg";
+        $guide_location = "collection.php?d=" . $myrow[3];
 
-        //check if appropriate image exists; otherwise use the default one
-        if (!@getimagesize($thumbnail)) {
-          $thumbnail = $thumbnail_default;
-        } else {
+        $list_collections .= "<tr class=\"zebra $row_colour\" style=\"height: 1.5em;\">
+        <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+        <div style=\"font-size: .9em;\">$myrow[2]</div></td></tr>\n";
 
-        }
-
-        $list_guides .= "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
-     <td><img class=\"staff_photo\" align=\"left\" style=\"margin-bottom: 20px;\" title=\"" . $myrow[1] . "\" alt=\"" . $myrow[1] . 
-     "\" src=\"$thumbnail\" />
-     <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
-        <div style=\"font-size: .9em;\">{$myrow[3]}</div></td>
-        
-         </tr>\n";
         $row_count++; 
     }
-    $list_guides .= "</table>";
 
-    return $list_guides;
+    $list_collections .= "</table>";
+    
+    return $list_collections;
 }
+
+function listGuideCollections($collection_shortform) {
+
+global $guide_path;
+global $AssetPath;
+
+$db = new Querier();
+
+$collection_shortform = scrubData($collection_shortform, "text");
+
+$qCollection = "SELECT c.collection_id, c.title, c.description, s.subject, s.shortform, s.redirect_url, s.description, s.keywords, s.type, s.last_modified 
+FROM collection c, collection_subject cs, subject s
+WHERE c.collection_id = cs.collection_id
+AND cs.subject_id = s.subject_id
+AND c.shortform = '$collection_shortform'
+AND s.active = '1'
+ORDER BY cs.sort";
+
+$rCollection = $db->query($qCollection);
+
+// prepare striping
+$colour1 = "oddrow";
+$colour2 = "evenrow";
+
+$list_guides = "<table class=\"item_listing\" width=\"98%\">";
+
+  foreach ($rCollection as $key => $value) {
+
+    $row_colour = ($key % 2) ? $colour1 : $colour2;
+
+    $guide_location = $guide_path . $value[4];
+    $thumbnail = $AssetPath . "images/guide_thumbs/$value[3].jpg";
+    $thumbnail_default = "$AssetPath/images/guide_thumbs/chc.jpg";
+
+          
+    //check if appropriate image exists; otherwise use the default one
+    if (!@getimagesize($thumbnail)) { $thumbnail = $thumbnail_default; }
+
+    // Stick in the title if it's the first row
+    if ($key == 0) {
+      $list_guides .= "<tr><td><h3>$value[1]</h3></td></tr>";
+    }
+
+    $list_guides .= "<tr class=\"zebra $row_colour\" style=\"height: 1.5em;\">
+    <td><img class=\"staff_photo\" align=\"left\" style=\"margin-bottom: 20px;\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . 
+     "\" src=\"$thumbnail\" />
+     <a href=\"$guide_location\">" . htmlspecialchars_decode($value[3]) . "</a> 
+        <div style=\"font-size: .9em;\">{$value[6]}</div></td></tr>";
+
+
+  }
+
+$list_guides .= "</table>";
+
+return $list_guides;
+}
+
 
 // This just returns whether or not you want an anchor target to open in new window
 // made this puppy a function in case people want to use it elsewhere

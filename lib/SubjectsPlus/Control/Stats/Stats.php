@@ -18,6 +18,8 @@ class Stats implements OutputInterface {
 	private $subject_short_form;
 	private $event_type;
 	private $tab_name;
+	private $link_url;
+	
 	
 	public function __construct(Querier $db) {
 		$this->db = $db; 
@@ -81,6 +83,14 @@ class Stats implements OutputInterface {
 		$this->tab_name = $tab_name;
 		return $this;
 	}
+	
+	public function getLinkUrl() {
+		return $this->link_url;
+	}
+	public function setLinkUrl($link_url) {
+		$this->link_url = $link_url;
+		return $this;
+	}
 					
 	
 	public function loadStats($short_form) {
@@ -98,7 +108,7 @@ class Stats implements OutputInterface {
 	public function saveStats() {
 		
 		$connection = $this->db->getConnection();
-		$statement = $connection->prepare("INSERT INTO stats (http_referer, remote_address, date, page_title, user_agent, subject_short_form, event_type,tab_name) VALUES (:http_referer, :remote_address, :date, :page_title, :user_agent, :subject_short_form, :event_type, :tab_name)");
+		$statement = $connection->prepare("INSERT INTO stats (http_referer, remote_address, date, page_title, user_agent, subject_short_form, event_type,tab_name,link_url) VALUES (:http_referer, :remote_address, :date, :page_title, :user_agent, :subject_short_form, :event_type, :tab_name, :link_url)");
 		$statement->bindParam(":http_referer", $this->http_referer);
 		$statement->bindParam(":remote_address", $this->remote_address);
 		$statement->bindParam(":date", $this->date);
@@ -108,7 +118,7 @@ class Stats implements OutputInterface {
 		$statement->bindParam(":subject_short_form", $this->subject_short_form);
 		$statement->bindParam(":event_type", $this->event_type);
 		$statement->bindParam(":tab_name", $this->tab_name);
-		
+		$statement->bindParam(":link_url", $this->link_url);
 		
 		$statement->execute();
 
@@ -120,6 +130,8 @@ class Stats implements OutputInterface {
 	public function toJSON() {
 		return json_encode ( get_object_vars ( $this ) );
 	}
+	
+	
 	
 	
 	

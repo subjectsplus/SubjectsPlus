@@ -2,8 +2,6 @@
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Stats\Stats;
 
-
-
 header('Content-Type: image/gif');
 header("Cache-Control: private, no-cache, no-cache=Set-Cookie, proxy-revalidate");
 header("Expires: Wed, 11 Jan 2000 12:59:00 GMT");
@@ -52,5 +50,8 @@ if(isset($_GET['tab_name'])) {
 	$stats->setTabName($_GET['tab_name']);
 }
 
+if(isset($_GET['link_url'])) {
+	$stats->setLinkUrl($_GET['link_url']);
+}
 
 $stats->saveStats();

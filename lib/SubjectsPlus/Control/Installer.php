@@ -189,13 +189,6 @@ class Installer
 					  CONSTRAINT `fk_rank_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`) ON DELETE CASCADE ON UPDATE CASCADE,
 					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `subject_department` (
-					  `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
-					  `id_subject` bigint(20) NOT NULL,
-					  `id_department` int(11) NOT NULL,
-					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-					  PRIMARY KEY (`idsubject_department`)
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `tab` (
 					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
@@ -376,8 +369,25 @@ class Installer
   `subject_short_form` varchar(200) DEFAULT NULL,
   `event_type` varchar(200) DEFAULT NULL,
   `tab_name` varchar(200) DEFAULT NULL,
+  `link_url` varchar(200) DEAFULT NULL,
   PRIMARY KEY (`stats_id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8"
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8",
+				
+				"CREATE TABLE ​`collection`​ (
+ ​`collection_id`​ int(11) NOT NULL AUTO_INCREMENT,
+ ​`title`​ text CHARACTER SET latin1 NOT NULL,
+ ​`description`​ text CHARACTER SET latin1 NOT NULL,
+ ​`shortform`​ text CHARACTER SET latin1 NOT NULL,
+ PRIMARY KEY (​`collection_id`​)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
+				
+				"CREATE TABLE ​`collection_subject`​ (
+						​`collection_subject_id`​ int(11) NOT NULL AUTO_INCREMENT,
+						​`collection_id`​ int(11) NOT NULL,
+						​`subject_id`​ int(11) NOT NULL,
+						PRIMARY KEY (​`collection_subject_id`​)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8"
+				
 			);
 
 		//all the subjectqueries -- default data
