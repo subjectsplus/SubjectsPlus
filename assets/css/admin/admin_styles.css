@@ -549,6 +549,7 @@ html,body { height:100%; }
 .box-item {  
   background-color: #d5d5d5;
   color:#333;
+  list-style: outside none none !important;
 }
 
 .box-item:hover {
@@ -610,6 +611,8 @@ html,body { height:100%; }
 
 .pluslet-list .pluslet-listing,
 .findbox-searchresults .pluslet-listing{padding:5px;}
+
+.box-search-label { width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } 
 
 .clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
 
@@ -748,10 +751,10 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 0;}
 
-.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 8px 5px 0 5px; 
-  color: #333; font-size: 14px; line-height: 1.3em;}
+.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 4px 5px 0 5px; 
+  color: #333; font-size: 14px; line-height: 1.3em; display:inline-block; margin: 0;} 
 
-.box-search-label { width: 205px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+.list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
 
 .add-to-list-button { font-size: 0.9em; padding: 4px; }
 
@@ -770,7 +773,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .active .fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
 
-.fa-minus { color: #ef4836; font-size:16px; padding: 0 2px 0 0; }
+.fa-minus { color: #D24D57; font-size:16px; padding: 0 2px 0 0; }
 
 .db-list-buttons { font-size: 0.8em; display:none;}
 
@@ -1380,12 +1383,12 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .remove_boxes_content {margin-bottom: 15px;}
 
 .remove_pluslets {color: #d5d5d5 !important; text-decoration:none;}
-.remove_pluslets:hover {color: #EF4836 !important; text-decoration:underline;}
+.remove_pluslets:hover {color: #D24D57 !important; text-decoration:underline;}
 
 .remove_pluslets:before {
   font-family: FontAwesome;
   content:"\f071";
-  color: #EF4836; font-size:16px;
+  color: #D24D57; font-size:16px;
   padding: 0 8px 0 0;
 }
 
