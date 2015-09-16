@@ -238,13 +238,13 @@ class Config
 		if( $lstrMessage == '' )
 		{
 			?>
-		<div class="feedback" >
+		<div class="master-feedback" >
 		</div><br /><br />
 		<?php
 		}else
 		{
 			?>
-		<div class="feedback" style="display: block;" >
+		<div class="master-feedback" style="display: block;" >
 			<strong><?php echo $lstrMessage ?></strong>
 		</div><br /><br />
 		<?php
