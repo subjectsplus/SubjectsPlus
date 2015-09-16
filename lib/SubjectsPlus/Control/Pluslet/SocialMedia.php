@@ -30,20 +30,27 @@ class Pluslet_SocialMedia extends Pluslet {
 
     protected function onEditOutput()
     {
+        $objSM = new SocialMedia();
+        $smAccounts = $objSM->toArray();
+
         // make an editable body and title type
         if($this->_extra == "")
         {
-            $this->_extra = array();
-            $this->_extra['facebook'] = "";
-            $this->_extra['twitter'] = "";
-            $this->_extra['pinterest'] = "";
+            foreach($smAccounts as $account):
+                $accountName = strtolower($account['name']);
+                $this->_extra[$accountName] = "";
+            endforeach;
+
         }else
         {
             $this->_extra = json_decode( $this->_extra, true );
         }
 
+        //pass view SocialMedia() data
+        $this->smAccounts = $smAccounts;
+
         // Create and output object
-        $view = $this->loadHtml(__DIR__ . '/views/SocialMedia.html' );
+        $view = $this->loadHtml(__DIR__ . '/views/SocialMedia.php' );
 
         $this->_body = $view;
     }
@@ -76,6 +83,10 @@ class Pluslet_SocialMedia extends Pluslet {
             $this->_body .= '<li><a href="http://pinterest.com/'.$this->_extra['pinterest'].'"><i class="fa fa-pinterest-square"></i></a></li>';
         }
 
+        if( $this->_extra['instagram'] != "" )
+        {
+            $this->_body .= '<li><a href="http://instagram.com/'.$this->_extra['instagram'].'"><i class="fa fa-instagram"></i></a></li>';
+        }
 
         $this->_body .= "</ul>";
         $this->_body .= "</div>";

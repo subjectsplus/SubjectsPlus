@@ -44,10 +44,15 @@ function setupMiscEvents()
 
     $(document.body).on('click','a[id*=boxid-]', function(event) {
     	var tab_id = $(this).attr('id').split('-')[1];
+        console.log(tab_id);
     	var box_id = $(this).attr('id').split('-')[2];
+        console.log(box_id);
+
         var selected_box = ".pluslet-" + box_id;
+        console.log($(selected_box));
 
     	$('#tabs').tabs('select', tab_id);
+
         $(selected_box).effect("pulsate", {
             times:1
         }, 2000);
@@ -72,7 +77,6 @@ function setupMiscEvents()
         $(this).parent().parent().parent().find('.box_settings').toggle();
     });
 
-     
     
     ////////////////////
     // on select change show save guide
