@@ -5,12 +5,24 @@
     foreach($this->_staffArray as $staffMember):
         $staffId = $staffMember['staff_id'];
         $staffData = $this->getStaffMember($staffId);
+        $array_keys = $this->_array_keys;
 
+        if ($staffData[0]['extra'] == '') {
 
-        if ($staffData[0]['extra'] != "") {
+            $pos = array_search('Instagram', $array_keys);
+            unset($array_keys[$pos]);
+
+            $pos = array_search('Facebook', $array_keys);
+            unset($array_keys[$pos]);
+
+            $pos = array_search('Twitter', $array_keys);
+            unset($array_keys[$pos]);
+
+            $pos = array_search('Pinterest', $array_keys);
+            unset($array_keys[$pos]);
+
+        } else {
             $staffSocialMedia = json_decode(html_entity_decode( $staffData[0]['extra'] ), true);
-            //var_dump($staffSocialMedia);
-            $array_keys = $this->_array_keys;
 
             if($staffSocialMedia['instagram'] == '') {
                 $pos = array_search('Instagram', $array_keys);
@@ -33,8 +45,6 @@
             }
 
         }
-
-        //var_dump($array_keys);
 
         $this->_body .= "<h4>{$staffMember['fname']} {$staffMember['lname']}</h4>";
 
