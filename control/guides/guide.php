@@ -1149,10 +1149,20 @@ function selectedPanelDisplay(){
   });
 
 
+// open links in new tab if box_setting target_blank_links is checked.
+  //this is for admin side, user view also has function in /subjects/guide.php
+  var $target_blank_links = $(".target_blank_links");
+  $target_blank_links.each(function() {
+    if( $("input:checked") ) {
+      $(this).find('a').attr('target', '_blank');
+    }
+  });
 
 
 
- //Change layout click events
+
+
+  //Change layout click events
 $( "#col-single" ).click(function() {      
       changeLayout(0, 14);
       selectedLayout();
