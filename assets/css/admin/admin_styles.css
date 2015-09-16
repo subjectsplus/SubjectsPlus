@@ -1138,7 +1138,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
     position: relative; width: 45px; margin: 10px 0;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
-.onoffswitch-checkbox {
+.onoffswitch-checkbox, .onoffswitch-checkbox2  {
     display: none;
 }
 .onoffswitch-label {
@@ -1177,6 +1177,13 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+
+.onoffswitch-checkbox2:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox2:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
 
