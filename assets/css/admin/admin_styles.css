@@ -1529,6 +1529,20 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 
 
+/* Master Feedback displayed on all other pages */
+.master-feedback {
+  background-color: rgba(192,57,87, 0.8);
+  text-align:center;
+  display: none;
+  margin:0 -2.5em !important;
+  padding: 0.65em 0;
+  color:#FFF;
+  font-family:'NotoSansBold';
+  font-weight: bold;
+}
+
+
+
 /* Main content areas */
 /* ------ not updated by PV ------ */
 
@@ -2114,14 +2128,14 @@ div.ctag_list a:hover {
 
 
 
-.feedback, #feedback {
-  
+.feedback, #feedback {  
   width: 100%;
   text-align: center;
   font-weight: bold;
-  padding: 0;
   display: none;
   color: #fff;
+  padding: 0.65em 0;
+  background-color: rgba(192,57,87, 0.8);
 }
 
 div.feedback a:link {
@@ -2332,9 +2346,17 @@ div.tooltip div
   font-family:'NotoSansBold';
 }
  
-
-
+#response .feedback {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+  color: #fff;
+  padding: 0;
+  background-color: transparent;
 }
+
+
 
 .clone {
   z-index: 10;
