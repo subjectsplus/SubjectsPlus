@@ -182,6 +182,7 @@ function modifyDB($id, $type) {
     $pluslet_hide_titlebar = $_POST["boxsetting_hide_titlebar"];
     $pluslet_collapse_body = $_POST["boxsetting_collapse_titlebar"];
     $pluslet_favorite_box = $_POST["favorite_box"];
+    $pluslet_target_blank_links = $_POST['boxsetting_target_blank_links'];
 
 
     if (isset($_POST["boxsetting_titlebar_styling"])) {
@@ -211,7 +212,7 @@ function modifyDB($id, $type) {
     }
     switch ($type) {
         case "insert":
-            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body), $db->quote($pluslet_titlebar_styling), $db->quote($pluslet_favorite_box));
+            $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box, target_blank_links) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body), $db->quote($pluslet_titlebar_styling), $db->quote($pluslet_favorite_box), $db->quote($pluslet_target_blank_links));
             $db = new Querier;
             $r = $db->exec($q);
             if ($r) {
@@ -236,7 +237,8 @@ function modifyDB($id, $type) {
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
                 titlebar_styling = '$pluslet_titlebar_styling',
-                favorite_box = '$pluslet_favorite_box'
+                favorite_box = '$pluslet_favorite_box',
+                target_blank_links = '$pluslet_target_blank_links'
                 WHERE pluslet_id ='$id'";
             $r = $db->exec($q);
             //print $q;
@@ -252,7 +254,8 @@ function modifyDB($id, $type) {
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
                 titlebar_styling = '$pluslet_titlebar_styling',
-                favorite_box = '$pluslet_favorite_box'
+                favorite_box = '$pluslet_favorite_box',
+                target_blank_links = '$pluslet_target_blank_links'
                 WHERE pluslet_id ='$id'";
         	$r = $db->exec($q);
         	//print $q;

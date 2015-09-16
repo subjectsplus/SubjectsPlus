@@ -81,6 +81,9 @@ function preparePluslets(lstrType, lintID, lobjThis) {
     var favorite_box = Number($('input[id=favorite_box-' + lintID + ']')
         .is(':checked'));
 
+	var boxsetting_target_blank_links = Number($('input[id=target_blank_links-' + lintID + ']')
+		.is(':checked'));
+
 	//////////////////////////////////////////////////////////////////
 	// Check the pluslet's "name" value to see if there is a number
 	// --If it is numeric, it's a "normal" item with a ckeditor instance
@@ -247,7 +250,8 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 					boxsetting_hide_titlebar : boxsetting_hide_titlebar,
 					boxsetting_collapse_titlebar : boxsetting_collapse_titlebar,
 					boxsetting_titlebar_styling : boxsetting_titlebar_styling,
-                    favorite_box : favorite_box
+                    favorite_box : favorite_box,
+					boxsetting_target_blank_links: boxsetting_target_blank_links
 
 				},
 				type : "POST",
