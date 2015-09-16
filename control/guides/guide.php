@@ -818,6 +818,8 @@ ob_end_flush();
 
           <li id="show_analytics_options" class="top-panel-option-item"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
 
+          <li id="show_my_guides" class="top-panel-option-item"><a href="#"><i class="fa fa-file" title="<?php print _("My Guides"); ?>" /></i><br /><?php print _("My Guides"); ?></a></li>
+
           <li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
       </ul>
 
@@ -966,7 +968,53 @@ ob_end_flush();
             
             
           </div>
-       
+
+
+
+        <!--my guides-->
+        <div id="my_guides_content" class="second-level-content" style="display:none;">
+          <h3><?php print _("My Guides"); ?></h3>
+
+          <div class="user_guides_display">
+            <button class="pure-button pure-button-primary"><a href="./metadata.php">Create New Guide</a> </button>
+            <ul class="user-guides panel-list">
+
+            </ul>
+          </div>
+
+
+          <script>
+
+            $("#show_my_guides").on('click', function() {
+                get_user_guides();
+            });
+
+            function get_user_guides() {
+
+              $(".user-guides").empty();
+              var request_guides = jQuery.ajax({
+                url: "./helpers/user_guides.php?staff_id=<?php echo scrubData($_SESSION['staff_id']); ?>",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+
+                  if(!data.guides.length) {
+                    //no results
+                    $(".user-guides").append( "<li  class='panel-list-item'>You have not created a guide.</li>");
+
+                  }
+
+                  $.each(data.guides, function(idx, obj) {
+                    $(".user-guides").append( "<li class='panel-list-item' title='" + obj.subject + "'><a href='./guide.php?subject_id=" + obj.subject_id + "'>" +obj.subject + "</li>");
+                  });
+                }
+              });
+
+            }
+
+          </script>
+
+        </div>
 
 
       </div>
@@ -1049,6 +1097,12 @@ $( "#show_analytics_options" ).click(function() {
   });
 
 
+// Show "My Guides" options
+  $( "#show_my_guides" ).click(function() {
+    selectedPanelDisplay();
+    $("#my_guides_content").show();
+    $(this).addClass("active-item");
+  });
 
 //show user favorite boxes
   var staff_id = '<?php echo $_SESSION["staff_id"]; ?>';
