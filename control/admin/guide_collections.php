@@ -35,7 +35,7 @@ if (isset($_POST["add_collection"])) {
 		" . $db->quote(scrubData($_POST["description"])) . ", 
         " . $db->quote(scrubData($_POST["shortform"])) . "
 		)";
-    print $qInsertGuideCollection;
+    //print $qInsertGuideCollection;
 
     $rInsertGuideCollection = $db->exec($qInsertGuideCollection);
 
@@ -64,7 +64,7 @@ foreach ($_POST["subject_id"] as $key => $value) {
     $our_subject_id = scrubData($value);
 
     $qInsert = "INSERT INTO collection_subject (collection_id, subject_id, sort) VALUES ($our_collection_id, $our_subject_id, $key)";
-    print $qInsert . "<br />";
+    //print $qInsert . "<br />";
     $rInsert = $db->exec($qInsert);
 }
 
@@ -164,12 +164,12 @@ $add_help_box =  _("<p>You can create 'collections' as a way of grouping togethe
     to your collection via the dropdown list.  You can rearrange the order of guides within a collection by dragging them.</p>");
 
 $add_collection_box = "<form id=\"new_collection\" action=\"\" class=\"pure-form pure-form-stacked\" method=\"post\">
-<label for=\"department\">" . _("Collection Name") . "</label>
-<input type=\"text\" name=\"title\" id=\"\" size=\"40\" value=\"\">
+<label for=\"title\">" . _("Collection Name") . "</label>
+<input type=\"text\" name=\"title\"size=\"40\" class=\"required_field\">
 <label for=\"description\">" . _("Description") . "</label>
  <textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"50\"></textarea>
  <label for=\"url\">" . _("Shortform") . "</label>
-<input type=\"text\" name=\"shortform\" id=\"\" size=\"20\" value=\"\">
+<input type=\"text\" name=\"shortform\" size=\"20\"  class=\"required_field\">
 <p></p>
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>";
@@ -182,8 +182,6 @@ print feedBack($feedback);
 print "<div class=\"sort_feedback\"></div>";
 
 print "
-
-<form id=\"departments\" action=\"\" method=\"post\">
 
 <div class=\"pure-g\">
   <div class=\"pure-u-2-3\">
@@ -288,6 +286,41 @@ include("../includes/footer.php");
             // show save button
             //$("button[name*=update_collections").show();
         });
+
+        ////////////////
+        // Check Submit
+        // When the form has been submitted, check required fields
+        ////////////////
+
+        $("#new_collection").submit( function () {
+
+            // If a required field is empty, set zonk to 1, and change the bg colour
+            // of the offending field
+            var alerter = 0;
+
+            $("*[class*=required_field]").each(function() {
+                // get contents of string, trim off whitespace
+                var our_contents = $(this).val();
+                var our_contents  = jQuery.trim(our_contents );
+
+                if (our_contents  == '') {
+                    $(this).attr("style", "background-color:#FFDFDF");
+                    alerter = 1;
+                } else {
+                    $(this).attr("style", "background-color:none");
+                }
+
+                return alerter;
+
+            });
+
+            // Popup warning if required fields not complete
+            if (alerter == 1) {
+                alert("<?php print _("You must complete all required form fields."); ?>");
+                return false;
+            }
+
+        });        
 
     });
 </script>
