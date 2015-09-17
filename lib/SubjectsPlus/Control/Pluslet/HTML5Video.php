@@ -16,6 +16,7 @@ class Pluslet_HTML5Video extends Pluslet {
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
         $this->_type = "HTML5Video";
+        $this->_pluslet_bonus_classes = "type-video";
 
 
     }
