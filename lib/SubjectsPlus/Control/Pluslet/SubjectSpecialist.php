@@ -19,20 +19,14 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         global $tel_prefix;
         $this->tel_prefix = $tel_prefix;
 
-
-        if( isset($_REQUEST['our_guide_id']) ) {
-
-            $subject_id = $_REQUEST['our_guide_id'];
-
-        } elseif( isset($_REQUEST['this_subject_id']) ) {
-
-            $subject_id = $_REQUEST['this_subject_id'];
-
-        } 
-
         $this->_subject_id = $subject_id;
 
         $this->_array_keys = array('Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
+
+
+    }
+
+    protected function onViewOutput() {
 
         // Get librarians associated with this guide
         $querier = new Querier();
@@ -43,13 +37,10 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 ORDER BY lname, fname";
 
         $this->_staffArray = $querier->query($qs);
-    }
 
-    protected function onViewOutput() {
 
         if ($this->_extra != "") {
             $this->_extra = json_decode($this->_extra, true);
-
 
             foreach($this->_staffArray as $staffMember):
 
@@ -135,6 +126,17 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
 
     protected function onEditOutput() {
+        // Get librarians associated with this guide
+        $querier = new Querier();
+        $qs = "SELECT *
+                FROM staff s, staff_subject ss
+                WHERE s.staff_id = ss.staff_id
+                AND ss.subject_id = " . $this->_subject_id . "
+                ORDER BY lname, fname";
+
+        $this->_staffArray = $querier->query($qs);
+
+
         // make an editable body and title type
         if ($this->_extra != "") {
             $this->_extra = json_decode($this->_extra, true);
