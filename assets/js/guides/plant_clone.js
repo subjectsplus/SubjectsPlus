@@ -2,6 +2,7 @@
 
 function plantClone(clone_id, item_type, origin_id, clone_title) {
 
+	var subject_id = getParameterByName('subject_id');
     // Create new node below, using a random number
 
     var randomnumber=Math.floor(Math.random()*1000001);
@@ -15,6 +16,7 @@ function plantClone(clone_id, item_type, origin_id, clone_title) {
     $("#new-" + randomnumber).fadeIn("slow").load("helpers/guide_data.php", {
         from: new_id,
         flag: 'drop',
+		this_subject_id: subject_id,
         item_type: item_type
     },
 						  function() {
@@ -48,4 +50,12 @@ function plantClone(clone_id, item_type, origin_id, clone_title) {
 						      $('#main-options').slideReveal("hide");
 
 						  });
+}
+
+
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
