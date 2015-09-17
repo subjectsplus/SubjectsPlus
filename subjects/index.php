@@ -53,6 +53,9 @@ if (isset($_POST["search"])) {
 // set up our checkboxes for guide types
 $tickboxes = "<ul>";
 
+// We don't want our placeholder
+if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
+
 foreach ($guide_types as $key) {
     $tickboxes .= "<li><input type=\"checkbox\" id=\"show-" . ucfirst($key) . "\" name=\"show$key\"";
     if ($view_type == "all" || $view_type == $key) {

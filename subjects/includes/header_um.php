@@ -382,32 +382,7 @@ $v2styles = TRUE;
     </div>
 
 
-<script>
-$(document).ready(function() {
-	
 
-$('body').on('click','.ui-tabs-anchor' , function() { 
-     var tab_name = $(this).text();
-
-	$.get("<?php print $PublicPath; ?>/track.php?subject=<?php echo scrubData($_GET['subject']); ?>&page_title=<?php echo scrubData($page_title); ?>&event_type=tab_click&tab_name=" + tab_name, function(data) {
-
-	console.log("Tracking tab click");
-	});
-
-	
-});
-
-$('a').each(function(){
-	$(this).addClass('track-me');
-});
-
-$('body').on('click', '.track-me', function() {
-	$.get('<?php print $PublicPath; ?>/track.php', {'event_type':'link', 'link_url':$(this).attr('href'),'subject': "<?php echo scrubData($_GET['subject']); ?>" });	
-});
-
-});
-
-</script>
     <!-- PAGE HEADER-->
     <div class="pure-g">
         <div class="pure-u-1">

@@ -50,11 +50,10 @@ $(document).ready(function () {
                token_string += "</ul>";
                console.log(token_string);
                
-               
               
-               
-               CKEDITOR.instances[Object.keys(CKEDITOR.instances)[click_count]].setData(token_string.trim());
-
+               var ck_index = Object.keys(CKEDITOR.instances).length - 1;
+               CKEDITOR.instances[Object.keys(CKEDITOR.instances)[ck_index]].setData(token_string.trim());
+              
                click_count++;
   
                $('.db-list-results').empty();

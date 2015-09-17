@@ -818,7 +818,7 @@ ob_end_flush();
 
           <li id="show_analytics_options" class="top-panel-option-item"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
 
-          <li id="show_my_guides" class="top-panel-option-item"><a href="#"><i class="fa fa-file" title="<?php print _("My Guides"); ?>" /></i><br /><?php print _("My Guides"); ?></a></li>
+          <li id="show_my_guides" class="top-panel-option-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/myguides.svg" title="<?php print _("My Guides"); ?>" class="custom-icon" /><br /><?php print _("My Guides"); ?></a></li>
 
           <li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
       </ul>
@@ -973,48 +973,46 @@ ob_end_flush();
 
         <!--my guides-->
         <div id="my_guides_content" class="second-level-content" style="display:none;">
-          <h3><?php print _("My Guides"); ?></h3>
+            <h3><?php print _("My Guides"); ?></h3>
 
-          <div class="user_guides_display">
-            <button class="pure-button pure-button-primary"><a href="./metadata.php">Create New Guide</a> </button>
-            <ul class="user-guides panel-list">
+            <div class="user_guides_display">            
+              <ul class="user-guides panel-list">
+              </ul>
+            </div>
+            <a class="pure-button pure-button-primary myguide-button" href="./metadata.php">Create New Guide</a>
 
-            </ul>
-          </div>
+              <script>
 
+                $("#show_my_guides").on('click', function() {
+                    get_user_guides();
+                });
 
-          <script>
+                function get_user_guides() {
 
-            $("#show_my_guides").on('click', function() {
-                get_user_guides();
-            });
+                  $(".user-guides").empty();
+                  var request_guides = jQuery.ajax({
+                    url: "./helpers/user_guides.php?staff_id=<?php echo scrubData($_SESSION['staff_id']); ?>",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
 
-            function get_user_guides() {
+                      if(!data.guides.length) {
+                        //no results
+                        $(".user-guides").append( "<li  class='panel-list-item'>You have not created a guide.</li>");
 
-              $(".user-guides").empty();
-              var request_guides = jQuery.ajax({
-                url: "./helpers/user_guides.php?staff_id=<?php echo scrubData($_SESSION['staff_id']); ?>",
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
+                      }
 
-                  if(!data.guides.length) {
-                    //no results
-                    $(".user-guides").append( "<li  class='panel-list-item'>You have not created a guide.</li>");
-
-                  }
-
-                  $.each(data.guides, function(idx, obj) {
-                    $(".user-guides").append( "<li class='panel-list-item' title='" + obj.subject + "'><a href='./guide.php?subject_id=" + obj.subject_id + "'>" +obj.subject + "</li>");
+                      $.each(data.guides, function(idx, obj) {
+                        $(".user-guides").append( "<li class='panel-list-item' title='" + obj.subject + "'><a href='./guide.php?subject_id=" + obj.subject_id + "'>" +obj.subject + "</li>");
+                      });
+                    }
                   });
+
                 }
-              });
 
-            }
+              </script>
 
-          </script>
-
-        </div>
+        </div><!--end my guides-->
 
 
       </div>
@@ -1267,7 +1265,6 @@ fixFlashFOUC();
 
 });
 </script>
-
 
 </div> <!--end .guide-parent-wrap-->
 

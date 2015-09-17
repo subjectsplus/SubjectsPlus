@@ -39,11 +39,11 @@ if (isset($_REQUEST["this_subject_id"])) {
 if ($is_sidebar !== false) {
     $cols = 30;
     $rows = 4;
-    $title_input_size = "30";
+    $title_input_size = "";
 } else {
     $cols = 50;
     $rows = 4;
-    $title_input_size = "40";
+    $title_input_size = "";
 }
 
 

@@ -43,8 +43,12 @@ if (isset($_POST["search"])) {
     $search = scrubData($_POST["search"]);
 }
 
+
 // set up our checkboxes for guide types
 $tickboxes = "<ul>";
+
+// We don't want our placeholder
+if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
 
 foreach ($guide_types as $key) {
     $tickboxes .= "<li><input type=\"checkbox\" id=\"show-" . ucfirst($key) . "\" name=\"show$key\"";
@@ -146,72 +150,11 @@ include("includes/header_um.php");
 
 // put together our main result display
 
-//$guide_results = listGuides($search, $view_type);
-
-// This is the hack for CHC grouped guides; should be superceded in future //
-
-// Guides by Department
-// Set up here for CHC
-if (isset($_GET["d"])) {
-    $guide_results = "";
-  switch ($_GET["d"]) {
-    case "CHC":
-
-    $chc_guides = array(
-    array(
-        "title" => "Cuban Heritage Collection",
-        "description" => "An introduction to doing research at the Cuban Heritage Collection, including information about our services and accessing our materials.",
-        "url" => "http://libguides.miami.edu/chc?hs=a",
-        "image" => "chc-mural_75x75.jpg"
-    ),
-    array(
-        "title" => "CHC Music Guide",
-        "description" => "A guide to the music collections at the Cuban Heritage Collection.  Includes a spreadsheet with information about music scores in non-music collections.",
-        "url" => "http://sp.library.miami.edu/subjects/guide.php?subject=chcmusic",
-        "image" => "chc_beny_more.jpg"
-    ),
-    array(
-        "title" => "CHC Theater Guide",
-        "description" => "A guide to the theater collections at the Cuban Heritage Collection.  Includes links to archival and print materials related to our theater holdings.",
-        "url" => "http://sp.library.miami.edu/subjects/guide.php?subject=chctheater",
-        "image" => "chc_theater.jpg"
-    ),
-    array(
-        "title" => "2014 US-Cuba Policy Change Research Guide",
-        "description" => "A guide to resources collected by the Cuban Heritage Collection on the 17 December 2014 US-Cuba policy change announcement.  Includes visualizations of Twitter data captured during the announcement.",
-        "url" => "http://sp.library.miami.edu/subjects/guide.php?subject=cubapolicy2014",
-        "image" => "cuba_policy.png"
-
-    ),
-    array(
-        "title" => "Operation Pedro Pan Collections Guide",
-        "description" => "A guide to the collections related to the Pedro Pan exodus.  Contains links to oral histories of Pedro Pan children.",
-        "url" => "http://sp.library.miami.edu/subjects/guide.php?subject=pedropan",
-        "image" => "chc-mural_75x75.jpg"
-    )
-    );
-      $page_title = $page_title . ": Cuban Heritage Collection";
-      $intro = "";
-
-      foreach ($chc_guides as $key => $value) {
-        $guide_results .= "<div style=\"clear: both;\">
-          <img class=\"staff_photo\" align=\"left\" style=\"margin-bottom: 20px;\" title=\"" . $value["title"] . "\" alt=\"" . $value["title"] . "\" src=\"themes/um/chc-images/" . $value["image"] . "\" />
-          <a href=\"{$value["url"]}\">{$value["title"]}</a><br />
-          {$value["description"]}
-          <br style=\"\">
-          </div>"
-          ;
-      }
-
-
-    break;
-  }
-} else {
   // Default dubious guide listing
   $intro = "<p> These guides identify key resources in specific areas. Check out our <a href=\"http://libguides.miami.edu/\">complete list of interactive library subject guides</a>, tabbed for easy reference. You can also chat with our resource librarians or leave them a message.</p>";
   //$guide_list = listGuides($search, $view_type);
   $guide_results = listGuides($search, $view_type);
-}
+
 
 // End CHC hack
 
