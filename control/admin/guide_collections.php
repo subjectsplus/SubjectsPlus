@@ -35,6 +35,7 @@ if (isset($_POST["add_collection"])) {
 		" . $db->quote(scrubData($_POST["description"])) . ", 
         " . $db->quote(scrubData($_POST["shortform"])) . "
 		)";
+    print $qInsertGuideCollection;
 
     $rInsertGuideCollection = $db->exec($qInsertGuideCollection);
 
@@ -63,7 +64,7 @@ foreach ($_POST["subject_id"] as $key => $value) {
     $our_subject_id = scrubData($value);
 
     $qInsert = "INSERT INTO collection_subject (collection_id, subject_id, sort) VALUES ($our_collection_id, $our_subject_id, $key)";
-    //print $qInsert . "<br />";
+    print $qInsert . "<br />";
     $rInsert = $db->exec($qInsert);
 }
 
@@ -91,7 +92,8 @@ if (isset($_GET["delete_id"])) {
     //print $qEmpty;
     $rDeleteColl = $db->exec($qDeleteColl);    
 
-print "delete a collection, yikes";
+    $feedback = _("Thy Will Be Done.  Collection deleted.");
+
 }
 
 ///////////////

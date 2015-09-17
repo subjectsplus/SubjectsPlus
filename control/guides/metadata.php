@@ -140,29 +140,6 @@ include("../includes/footer.php");
 <script type="text/javascript">
 
  $(function (){
-   var ov = $( "#extra" ).val();
-
-   var ourval = ov.split("-");
-   var lc = parseInt(ourval[0]);
-   var cc = parseInt(ourval[1]);
-   var rc = lc + cc;
-
-   $( "#slider" ).slider({
-     range: true,
-     min: 0,
-     max: 12,
-     step: 1,
-     values: [lc, rc],
-     slide: function( event, ui ) {
-       // figure out our vals
-       var left_col = ui.values[0];
-       var right_col = 12 - ui.values[1];
-       var center_col = 12 - (left_col + right_col);
-       var extra_val = left_col + "-" + center_col + "-" + right_col;
-       $( "#extra" ).val(extra_val);
-       $( "#main_col_width" ).html(left_col + "-" + center_col + "-" + right_col);
-     }
-   });
 
    ///////////////////////////////////
    // add staffer to list on dropdown
