@@ -64,7 +64,7 @@ foreach ($_POST["subject_id"] as $key => $value) {
     $our_subject_id = scrubData($value);
 
     $qInsert = "INSERT INTO collection_subject (collection_id, subject_id, sort) VALUES ($our_collection_id, $our_subject_id, $key)";
-    //print $qInsert . "<br />";
+    print $qInsert . "<br />";
     $rInsert = $db->exec($qInsert);
 }
 

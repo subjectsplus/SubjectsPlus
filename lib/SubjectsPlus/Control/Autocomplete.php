@@ -175,7 +175,7 @@ class Autocomplete {
         		FROM staff WHERE (fname LIKE :search_term) OR (lname LIKE :search_term)");
         break;
       case "pluslet":
-      	$statement = $connection->prepare("SELECT p.pluslet_id, p.title,p.title AS 'label', su.subject_id AS 'id', su.shortform as 'short_form', 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p
+      	$statement = $connection->prepare("SELECT p.pluslet_id AS pluslet_id, p.title,p.title AS 'label', su.subject_id AS 'id', su.shortform as 'short_form', 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
@@ -304,13 +304,14 @@ class Autocomplete {
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 
               $arr[$i]['label'] = html_entity_decode($myrow['label']);
+              $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
           } else {
 
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['tab_index'] = $myrow['additional_id'];
-
-          }
+                $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
+            }
             break;
 
 
