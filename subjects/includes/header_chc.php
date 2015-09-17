@@ -187,14 +187,14 @@ div.mega_child.mega-md {width: 400px !important;}
 
 .titlebar {border-bottom: none !important;}
 
-.pure-button-pluslet, 
-a.pure-button-pluslet {
+.pluslet_body .pure-button-pluslet, 
+.pluslet_body a.pure-button-pluslet {
   background-color: #f1722e;
   color: #FFF !important;  
 }
 
-.pure-button-pluslet:hover, 
-a.pure-button-pluslet:hover {
+.pluslet_body .pure-button-pluslet:hover, 
+.pluslet_body a.pure-button-pluslet:hover {
   background-color: #999;  
 }
 
