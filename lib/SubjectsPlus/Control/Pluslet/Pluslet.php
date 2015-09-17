@@ -340,7 +340,7 @@ class Pluslet {
         $box_settings .= "<span class=\"settings-label-text\">" . _("Favorite Box") . "</span>
                 </div>
 
-                <div class=\"onoffswitch\">
+                <div class=\"onoffswitch links_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox target_blank_links\" id=\"target_blank_links-$this->_pluslet_id\"";
 
         if ($this->_target_blank_links == 1) {$box_settings .= " checked";}

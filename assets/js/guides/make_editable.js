@@ -68,12 +68,20 @@ function makeEditable(lstrSelector) {
 			      $('#' + 'pluslet-' + edit_id[1]).find('.box_settings').hide();
 			  });
 
-			// Hide options from box settings options based on TYPE
+			// Hide body-content option from box settings options based on TYPE
 			   $(".pluslet.type-heading").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-worldcat").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-catalog").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-relguide").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-articleplus").find(".body_set").addClass("hide-settings");
+
+			// Hide links-new-tab option from box settings options based on TYPE
+				$(".pluslet.type-heading").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-video").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-worldcat").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-catalog").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-relguide").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-articleplus").find(".links_set").addClass("hide-settings");
 
 		});
 

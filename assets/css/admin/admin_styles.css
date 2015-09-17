@@ -1343,7 +1343,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 /* tab style */
     .shadetabs {padding: 3px 0; font: bold 0.9em; list-style-type: none; text-align: left; margin: 10px 0 0 0;}
     .shadetabs li {display: inline-block; margin: 0 0 12px 0; font-size: 0.9em;}
-    .shadetabs li a{text-decoration: none; position: relative; z-index: 1; padding: 3px 7px; margin-right: 3px; border: 1px solid #CCC; color: #333; cursor:pointer; border-radius: 2px;}
+    .shadetabs li a{text-decoration: none; position: relative; z-index: 0; padding: 3px 7px; margin-right: 3px; border: 1px solid #CCC; color: #333; cursor:pointer; border-radius: 2px;}
     .shadetabs li a:visited{color: #333;}
     .shadetabs li a:hover{text-decoration: underline; color: #000;}
     .shadetabs li a.selected{position: relative; top: 1px; color: #333; background: #d5d5d5; cursor:text;}
