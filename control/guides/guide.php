@@ -1268,7 +1268,6 @@ fixFlashFOUC();
 });
 </script>
 
-
 </div> <!--end .guide-parent-wrap-->
 
 <?php include("../includes/footer.php"); ?>
