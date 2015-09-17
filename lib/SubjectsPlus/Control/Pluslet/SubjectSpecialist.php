@@ -19,7 +19,21 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         global $tel_prefix;
         $this->tel_prefix = $tel_prefix;
 
-        $this->_subject_id = $_REQUEST['our_guide_id'];
+
+        if( isset($_REQUEST['our_guide_id']) ) {
+
+            $subject_id = $_REQUEST['our_guide_id'];
+
+        } elseif( isset($_REQUEST['this_subject_id']) ) {
+
+            $subject_id = $_REQUEST['this_subject_id'];
+
+        } else {
+
+            $subject_id = $_GET['subject_id'];
+        }
+
+        $this->_subject_id = $subject_id;
 
         $this->_array_keys = array('Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
 
