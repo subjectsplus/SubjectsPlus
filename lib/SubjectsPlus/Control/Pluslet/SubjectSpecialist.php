@@ -28,10 +28,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
             $subject_id = $_REQUEST['this_subject_id'];
 
-        } else {
-
-            $subject_id = $_GET['subject_id'];
-        }
+        } 
 
         $this->_subject_id = $subject_id;
 
