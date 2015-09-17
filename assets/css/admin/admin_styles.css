@@ -115,30 +115,40 @@ p.tight { margin: .2em 0;}
 }
 
 
-/* panel list styles added cbrownroberts 09-16-2015 */
+/* panel list styles added cbrownroberts 09-16-2015 - GENERIC styles for regular lists inside flyout panels */
 .panel-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
 
-.panel-list-item { width: 275px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
-.panel-list-item {
-  font-size:12px !important;
-  cursor:pointer;
+.panel-list-item { 
+  width: 275px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  font-size: 12px !important;
+  cursor:pointer; 
 }
 
-li.panel-list-item:hover {
+.panel-list-item a:before {
+    content:"\f0c8";
+    font-family: FontAwesome;
+    font-size: 0.6em;
+    padding: 0 4px 0 4px;
+}
+
+.panel-list-item a {display: block;}
+
+.panel-list-item a:link,
+.panel-list-item a:visited {
+  text-decoration: none;
+  color: #FFF;   
+}
+
+.panel-list-item a:hover {
   background-color: #d5d5d5;
-  color: #C03957;
+  color: #333;   
 }
 
-li.panel-list-item a:link,
-li.panel-list-item a:visited {
-  text-decoration: none;
-  color: #ffffff;
-}
 
-li.panel-list-item a:hover {
-  text-decoration: none;
-  color: #C03957;
-}
+
 
 
 
@@ -776,6 +786,32 @@ li.fav-box-item:hover::before {color: #C03957;}
 .fa-minus { color: #D24D57; font-size:16px; padding: 0 2px 0 0; }
 
 .db-list-buttons { font-size: 0.8em; display:none;}
+
+
+
+/* My Guides Panel */
+.user_guides_display {
+  background: #484848 none repeat scroll 0 0;
+    border-color: #3e3e3e #525252 #525252 #3e3e3e;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0 0 20px;
+    max-height: 385px;
+    overflow: auto;
+}
+
+.myguide-button {font-size:0.8em;}
+
+.user_guides_display .panel-list-item a:before {
+    content:"\f15b";
+    font-size: 12px;
+    padding: 0 8px 0 4px;
+}
+
+.user_guides_display .panel-list-item a:hover::before {color: #C03957;}
+
 
 
 
