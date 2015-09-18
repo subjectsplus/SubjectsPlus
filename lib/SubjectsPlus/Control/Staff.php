@@ -106,6 +106,8 @@ class Staff {
 
         if(isset($this->_extra)) {
           $this->_extra = $_POST['extra'];
+        } else {
+          $this->_extra = "";
         }
 
 
