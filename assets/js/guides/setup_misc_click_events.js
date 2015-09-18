@@ -28,7 +28,8 @@ function setupMiscClickEvents()
 
     $('body').on('click', '.clone-button',function() {
 
-    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');   	       	
+
+    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');
     	var origin_title = $(this).parent().parent().find('.box-search-label').text();
 
     	plantClone('','Clone',origin_id, origin_title);
@@ -47,7 +48,6 @@ function setupMiscClickEvents()
 
 
     $('body').on('dblclick', '.clone-favorite', function() {
-        console.log('fav clicked');
 
         var origin_id = $(this).attr('data-pluslet-id');
         var origin_title = $(this).html();
