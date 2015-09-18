@@ -306,7 +306,10 @@ AND title.title LIKE :search_term");
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 
               $arr[$i]['label'] = html_entity_decode($myrow['label']);
+              
+              if (isset($arr[$i]['pluslet_id'])) {
               $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
+              }
           } else {
 
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
