@@ -38,9 +38,13 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         $this->_staffArray = $querier->query($qs);
 
+        $array_keys = $this->_array_keys;
+
 
         if ($this->_extra != "") {
             $this->_extra = json_decode($this->_extra, true);
+
+
 
             foreach($this->_staffArray as $staffMember):
 
@@ -49,14 +53,53 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 $this->staffId = $staffId;
 
                 $staffData = $this->getStaffMember($staffId);
+
+                if ($staffData[0]['social_media'] == '') {
+
+                    $pos = array_search('Instagram', $array_keys);
+                    unset($array_keys[$pos]);
+
+                    $pos = array_search('Facebook', $array_keys);
+                    unset($array_keys[$pos]);
+
+                    $pos = array_search('Twitter', $array_keys);
+                    unset($array_keys[$pos]);
+
+                    $pos = array_search('Pinterest', $array_keys);
+                    unset($array_keys[$pos]);
+
+                } else {
+                    $staffSocialMedia = json_decode(html_entity_decode( $staffData[0]['social_media'] ), true);
+
+                    if($staffSocialMedia['instagram'] == '') {
+                        $pos = array_search('Instagram', $array_keys);
+                        unset($array_keys[$pos]);
+                    }
+
+                    if($staffSocialMedia['facebook'] == '') {
+                        $pos = array_search('Facebook', $array_keys);
+                        unset($array_keys[$pos]);
+                    }
+
+                    if($staffSocialMedia['twitter'] == '') {
+                        $pos = array_search('Twitter', $array_keys);
+                        unset($array_keys[$pos]);
+                    }
+
+                    if($staffSocialMedia['pinterest'] == '') {
+                        $pos = array_search('Pinterest', $array_keys);
+                        unset($array_keys[$pos]);
+                    }
+
+                }
                 //var_dump($staffData);
 
                 $truncated_email = explode("@", $staffData[0]['email']);
 
                 $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
 
-                if ($staffData[0]['extra'] != "") {
-                    $data = html_entity_decode($staffData[0]['extra']);
+                if ($staffData[0]['social_media'] != "") {
+                    $data = html_entity_decode($staffData[0]['social_media']);
                     $staffSocialMedia = json_decode($data, true);
                 }
 
@@ -65,7 +108,8 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
 
                 $this->_body .= "<ul class='staff-details'>";
-                foreach($this->_array_keys as $item):
+                foreach($array_keys as $item):
+
 
                     if(array_key_exists("show{$item}{$staffId}", $this->_extra)) {
 
@@ -73,14 +117,16 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                         $value = $this->_extra[$key];
 
                         if( !empty($value[0]) ) {
-
                             $key_trimmed = rtrim($key, ' 0123456789');
 
+
                             if($key_trimmed == 'showPhoto' && $value[0] == "Yes") {
+
                                 $this->_body .= "<div style='float:left;'><img id='staffPhoto' class=\"staff-photo\" src='{$staff_picture}' /></div>";
                             }
 
                             if($key_trimmed == 'showTitle' && $value[0] == "Yes") {
+
                                 $this->_body .= "<li>".$staffData[0]['title']."</li>";
                             }
 
@@ -160,7 +206,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
 
         $querier = new Querier();
-        $qs = "SELECT lname, fname, email, tel, title, extra
+        $qs = "SELECT lname, fname, email, tel, title, extra, social_media
                 FROM staff
                 WHERE staff_id = {$staffId}";
 

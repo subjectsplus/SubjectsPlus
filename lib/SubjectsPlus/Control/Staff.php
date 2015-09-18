@@ -100,7 +100,7 @@ class Staff {
         $this->_fullname = isset($_POST["fullname"]) ? $_POST["fullname"] : $_POST["fname"] . " " . $_POST["lname"];
 
         //new sp4
-        $this->_extra = $this->setExtraDataPost();
+        $this->_social_media = $this->setSocialMediaDataPost();
 
 
         break;
@@ -152,7 +152,7 @@ class Staff {
         if ($full_record == TRUE) {
         $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio
             , position_number, job_classification, room_number, supervisor_id, emergency_contact_name, emergency_contact_relation, emergency_contact_phone,
-            street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long
+            street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media
             FROM staff WHERE staff_id = " . $this->_staff_id;
         } else {
         $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, ptags, active, bio
@@ -200,6 +200,9 @@ class Staff {
           $this->_fax = $staffArray[0]['fax'];
           $this->_intercom = $staffArray[0]['intercom'];
           $this->_lat_long = $staffArray[0]['lat_long'];
+
+            //new for sp4
+            $this->_social_media = $staffArray[0]['social_media'];
           }
         }
 
@@ -949,7 +952,7 @@ public function outputLatLongForm() {
                     
     $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
-      emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long) VALUES ( "
+      emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media) VALUES ( "
 		 . $db->quote(scrubData($this->_fname)) . ","
 		 . $db->quote(scrubData($this->_lname)) . ","
 		 . $db->quote(scrubData($this->_title)) . ","
@@ -977,7 +980,8 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_cell_phone)) . ","
 		 . $db->quote(scrubData($this->_fax)) . ","
 		 . $db->quote(scrubData($this->_intercom)) . ","
-     . $db->quote(scrubData($this->_lat_long)) . ")";
+         . $db->quote(scrubData($this->_lat_long)) . ","
+         . $db->quote(scrubData($this->_social_media)) . ")";
 
    
     $rInsertStaff = $db->exec($qInsertStaff);
@@ -1101,6 +1105,7 @@ public function outputLatLongForm() {
       "fax = " . $db->quote(scrubData($this->_fax)) . "," .
 	  "intercom = " . $db->quote(scrubData($this->_intercom)) . "," .
         "extra = " . $db->quote(scrubData($this->_extra)) . "," .
+        "social_media = " . $db->quote(scrubData($this->_social_media)) . "," .
       "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
 	  " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
@@ -1210,7 +1215,7 @@ public function outputLatLongForm() {
   function outputSocialMediaForm() {
     $socialMediaForm = "";
 
-    $extra = $this->getExtraDataArray();
+    $extra = $this->getSocialMediaDataArray();
 
     $objSM = new SocialMedia();
     $smAccounts = $objSM->toArray();
@@ -1218,35 +1223,35 @@ public function outputLatLongForm() {
     foreach($smAccounts as $account):
       $accountName = strtolower($account['name']);
 
-      $socialMediaForm .= "<label for='extra-{$accountName}'>{$account['name']}</label>";
-      $socialMediaForm .= "<input type='text' name='extra-{$accountName}' value='{$extra[$accountName]}' />";
+      $socialMediaForm .= "<label for='social-{$accountName}'>{$account['name']}</label>";
+      $socialMediaForm .= "<input type='text' name='social-{$accountName}' value='{$extra[$accountName]}' />";
     endforeach;
 
     return $socialMediaForm;
   }
 
 
-  protected function getExtraDataArray() {
+  protected function getSocialMediaDataArray() {
 
     $querier = new  Querier();
-    $q1 = "select extra from staff where staff_id = '" . $this->_staff_id . "'";
+    $q1 = "select social_media from staff where staff_id = '" . $this->_staff_id . "'";
     $staffArray = $querier->query($q1);
 
     $extra = array();
-    $json = html_entity_decode($staffArray[0]['extra']);
+    $json = html_entity_decode($staffArray[0]['social_media']);
     $extra = json_decode($json, true);
 
     return $extra;
   }
 
-  protected function setExtraDataPost() {
+  protected function setSocialMediaDataPost() {
 
     $data = array();
     foreach($_POST as $key => $value):
       $account_key = explode('-', $key);
 
       if(!empty($account_key[1])) {
-        $post_value_name = 'extra-'.$account_key[1];
+        $post_value_name = 'social-'.$account_key[1];
         $data[$account_key[1]] = $_POST[$post_value_name] ;
       }
     endforeach;

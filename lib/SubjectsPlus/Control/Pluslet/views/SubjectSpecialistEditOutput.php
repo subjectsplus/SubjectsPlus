@@ -7,7 +7,7 @@
         $staffData = $this->getStaffMember($staffId);
         $array_keys = $this->_array_keys;
 
-        if ($staffData[0]['extra'] == '') {
+        if ($staffData[0]['social_media'] == '') {
 
             $pos = array_search('Instagram', $array_keys);
             unset($array_keys[$pos]);
@@ -22,7 +22,7 @@
             unset($array_keys[$pos]);
 
         } else {
-            $staffSocialMedia = json_decode(html_entity_decode( $staffData[0]['extra'] ), true);
+            $staffSocialMedia = json_decode(html_entity_decode( $staffData[0]['social_media'] ), true);
 
             if($staffSocialMedia['instagram'] == '') {
                 $pos = array_search('Instagram', $array_keys);
