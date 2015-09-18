@@ -1216,6 +1216,7 @@ function checkDataLayout() {
   if (dataLayoutConfig === "0-12-0") {
     $(".sp_section #container-2").hide();
     $( "#col-single" ).addClass("active-layout-icon");
+    console.log("I hide you");
   }
   else if (dataLayoutConfig === "6-6-0") {
     $(".sp_section #container-2").hide();
