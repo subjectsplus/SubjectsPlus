@@ -101,6 +101,7 @@ class Staff {
 
         //new sp4
         $this->_social_media = $this->setSocialMediaDataPost();
+        $this->_extra = $_POST['extra'];
 
 
         break;
@@ -117,7 +118,7 @@ class Staff {
       	// Get staff table info
       	/////////////
       	$querier = new  Querier();
-      	$q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio from staff where email = '" . $this->_email . "'";
+      	$q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio, social_media from staff where email = '" . $this->_email . "'";
       	$staffArray = $querier->query($q1);
 
       	$this->_debug .= "<p class=\"debug\">Staff query: $q1";
@@ -139,6 +140,7 @@ class Staff {
       		$this->_ptags = $staffArray[0]['ptags'];
       		$this->_active = $staffArray[0]['active'];
       		$this->_bio = $staffArray[0]['bio'];
+          $this->_social_media = $staffArray[0]['social_media'];
       	}
       	break;
       default:
@@ -152,10 +154,10 @@ class Staff {
         if ($full_record == TRUE) {
         $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio
             , position_number, job_classification, room_number, supervisor_id, emergency_contact_name, emergency_contact_relation, emergency_contact_phone,
-            street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media
+            street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media, extra
             FROM staff WHERE staff_id = " . $this->_staff_id;
         } else {
-        $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, ptags, active, bio
+        $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, ptags, active, bio, social_media
             FROM staff WHERE staff_id = " . $this->_staff_id;
         }
 
@@ -203,6 +205,7 @@ class Staff {
 
             //new for sp4
             $this->_social_media = $staffArray[0]['social_media'];
+            $this->_extra = $staffArray[0]['extra'];
           }
         }
 
