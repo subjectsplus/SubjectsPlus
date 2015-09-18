@@ -83,6 +83,9 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-relguide").find(".links_set").addClass("hide-settings");
 				$(".pluslet.type-articleplus").find(".links_set").addClass("hide-settings");
 
+			// Hide titlebar option from box settings options based on TYPE
+				$(".pluslet.type-heading").find(".titlebar_set").addClass("hide-settings");
+
 		});
 
 		//Make save button appear, since there has been a change to the page
