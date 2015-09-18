@@ -20,7 +20,7 @@ class Pluslet_Related extends Pluslet {
 	}
 	protected function onEditOutput() {
 		
-		$this->_body = "<div class=\"faq-alert\">" . _("This pluslet automatically links to any child guides that you have assigned to this guide.") . "</div>";
+		$this->_body = "<div class=\"faq-alert\">" . _("This box automatically links to any child guides that you have assigned to this guide.") . "</div>";
 	}
 	public function outputRelatedGuides() {
 		
