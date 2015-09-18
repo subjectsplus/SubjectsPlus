@@ -97,9 +97,11 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 $truncated_email = explode("@", $staffData[0]['email']);
 
                 if(isset($_GET['subject'])) {
-                    $staff_picture = "../users/_" . $truncated_email[0] . "/headshot.jpg";
-                } elseif($_GET['subject_id']) {
+                    $staff_picture = "../assets/users/_" . $truncated_email[0] . "/headshot.jpg";
+
+                } elseif(isset($_GET['subject_id'])) {
                     $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
+
                 } else {
                     $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
                 }
