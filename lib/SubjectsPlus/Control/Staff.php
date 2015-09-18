@@ -1241,8 +1241,11 @@ public function outputLatLongForm() {
     $staffArray = $querier->query($q1);
 
     $extra = array();
-    $json = html_entity_decode($staffArray[0]['social_media']);
-    $extra = json_decode($json, true);
+
+    if($staffArray[0]['social_media'] != ""){
+      $json = html_entity_decode($staffArray[0]['social_media']);
+      $extra = json_decode($json, true);
+    }
 
     return $extra;
   }
