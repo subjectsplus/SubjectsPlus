@@ -43,7 +43,9 @@ class Staff {
   private $_fullname;
   private $_debug;
     
-    
+    //new sp4
+  private $_social_media;
+  private $_extra;
  
   public function __construct($staff_id="", $flag="", $full_record = FALSE) {
 
@@ -101,7 +103,11 @@ class Staff {
 
         //new sp4
         $this->_social_media = $this->setSocialMediaDataPost();
-        $this->_extra = $_POST['extra'];
+
+        if(isset($this->_extra)) {
+          $this->_extra = $_POST['extra'];
+        }
+
 
 
         break;
