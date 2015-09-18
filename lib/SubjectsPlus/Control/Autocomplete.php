@@ -154,11 +154,13 @@ class Autocomplete {
         
         
      case "azrecords":
-        	$statement = $connection->prepare("SELECT DISTINCT t.title_id AS 'id', 'Record' as 'content_type',t.title AS 'label'
-        FROM location l, title t, location_title lt 
-        WHERE  t.title_id = lt.title_id
-        AND l.eres_display = 'Y'
-		AND t.title LIKE :search_term");
+        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', title.title as 'label' FROM title
+INNER JOIN location_title 
+ON title.title_id = location_title.title_id
+INNER JOIN location
+ON location.location_id = location_title.location_id
+AND eres_display = 'Y'
+AND title.title LIKE :search_term");
         	break;
         
       case "faq":
