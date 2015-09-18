@@ -33,7 +33,7 @@ require_once("Pluslet.php");
 
 			 
   			 $master = json_decode($this->_extra);
-  			 $this->_body = "<p class=\"clone-alert\">" . _('This box is linked to another pluslet.') . "</p>";
+  			 $this->_body = "<p class=\"clone-alert\">" . _('This box is linked to another box.') . "</p>";
   			 $this->_body .=  "<input class=\"clone-input\" required aria-required=\"true\" type=\"text\" name=\"Clone-extra-master\" value=\"{$master->master}\"></input>";
 			 
   			 if (isset($parent_guide[0]['subject_id'])){
