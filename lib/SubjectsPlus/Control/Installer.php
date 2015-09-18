@@ -37,16 +37,6 @@ class Installer
 					  `user_type` varchar(100) NOT NULL,
 					  PRIMARY KEY (`user_type_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `uml_refstats_location` (
-					  `location_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `label` varchar(100) NOT NULL,
-					  PRIMARY KEY (`location_id`)
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `uml_refstats_type` (
-					  `type_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `label` varchar(100) NOT NULL,
-					  PRIMARY KEY (`type_id`)
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `video` (
 					  `video_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `title` varchar(255) NOT NULL,
@@ -132,15 +122,6 @@ class Installer
 					  PRIMARY KEY (`pluslet_id`),
 					  KEY `INDEXSEARCHpluslet` (`body`(200))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `uml_refstats` (
-					  `refstats_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `type_id` int(11) NOT NULL,
-					  `location_id` int(11) NOT NULL,
-					  `mode_id` int(11) NOT NULL,
-					  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-					  `note` varchar(1000) DEFAULT NULL,
-					  PRIMARY KEY (`refstats_id`)
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `format` (
 					  `format_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `format` varchar(255) DEFAULT NULL,
@@ -168,11 +149,6 @@ class Installer
 					  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 					  PRIMARY KEY (`title_id`),
 					  KEY `INDEXSEARCHtitle` (`title`,`alternate_title`,`description`(200))
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
-					"CREATE TABLE `uml_refstats_mode` (
-					  `mode_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `label` varchar(100) NOT NULL,
-					  PRIMARY KEY (`mode_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `rank` (
 					  `rank_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -247,6 +223,7 @@ class Installer
 					  `fax` varchar(60) DEFAULT NULL,
 					  `intercom` varchar(30) DEFAULT NULL,
 					  `lat_long` varchar(75) DEFAULT NULL,
+					  `social_media` MEDIUMTEXT DEFAULT NULL,
 					  PRIMARY KEY (`staff_id`),
 					  KEY `fk_supervisor_staff_id_idx` (`supervisor_id`),
 					  KEY `fk_staff_user_type_id_idx` (`user_type_id`),
@@ -369,25 +346,26 @@ class Installer
   `subject_short_form` varchar(200) DEFAULT NULL,
   `event_type` varchar(200) DEFAULT NULL,
   `tab_name` varchar(200) DEFAULT NULL,
-  `link_url` varchar(200) DEAFULT NULL,
+  `link_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`stats_id`)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8",
+			
+				"CREATE TABLE IF NOT EXISTS `collection` (
+						`collection_id` int(11) NOT NULL AUTO_INCREMENT,
+						`title` text NOT NULL,
+						`description` text NOT NULL,
+						`shortform` text NOT NULL,
+						PRIMARY KEY (`collection_id`)
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
 				
-				"CREATE TABLE ​`collection`​ (
- ​`collection_id`​ int(11) NOT NULL AUTO_INCREMENT,
- ​`title`​ text CHARACTER SET latin1 NOT NULL,
- ​`description`​ text CHARACTER SET latin1 NOT NULL,
- ​`shortform`​ text CHARACTER SET latin1 NOT NULL,
- PRIMARY KEY (​`collection_id`​)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
-				
-				"CREATE TABLE ​`collection_subject`​ (
-						​`collection_subject_id`​ int(11) NOT NULL AUTO_INCREMENT,
-						​`collection_id`​ int(11) NOT NULL,
-						​`subject_id`​ int(11) NOT NULL,
-						PRIMARY KEY (​`collection_subject_id`​)
+				"CREATE TABLE IF NOT EXISTS `collection_subject` (
+						`collection_subject_id` int(11) NOT NULL AUTO_INCREMENT,
+						`collection_id` int(11) NOT NULL,
+						`subject_id` int(11) NOT NULL,
+						`sort` int(11) NOT NULL,
+						PRIMARY KEY (`collection_subject_id`)
 				) ENGINE=InnoDB  DEFAULT CHARSET=utf8"
-				
+			
 			);
 
 		//all the subjectqueries -- default data
@@ -435,14 +413,10 @@ class Installer
 					"INSERT INTO `location` VALUES (1,1,'','http://www.subjectsplus.com/wiki/',1,'Y','',NULL,NULL,'')",
 					"INSERT INTO `department` VALUES (1,'Library Administration',1,'5555',NULL,NULL)",
 					"INSERT INTO `staff` VALUES (1,'Admin','Super','SubjectsPlus Admin','5555',1,0,'admin$lstrEmailDomain','',0,1,'{$lstrHashPassword}',1,'talkback|faq|records|eresource_mgr|videos|admin|librarian|supervisor','{\"css\": \"basic\"}',
-					'This is the default user with a SubjectsPlus install.  You should delete or rename me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
+					'This is the default user with a SubjectsPlus install.  You should delete or rename me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
 					"INSERT INTO `location_title` VALUES (1,1)",
 					"INSERT INTO `rank` VALUES (1,0,1,1,1,'')",
-					"INSERT INTO `staff_subject` VALUES (1,1)",
-					"INSERT INTO `uml_refstats_location` VALUES (1,'Information Desk (Richter)'),(2,'Circulation Desk (Richter)'),(3,'Digital Media Lab'),(4,'Architecture'),(5,'Business'),(6,'CHC'),(7,'Music'),(8,'RSMAS'),(9,'Special Collections'),
-					(10,'Other (include ntoe)')",
-					"INSERT INTO `uml_refstats_type` VALUES (1,'Computer Hardware'),(2,'Computer Software'),(3,'Directional'),(4,'Printers/Copiers'),(5,'Reference')",
-					"INSERT INTO `uml_refstats_mode` VALUES (1,'In Person'),(2,'Phone'),(3,'Email'),(4,'IM')"
+					"INSERT INTO `staff_subject` VALUES (1,1)"
 			);
 	}
 
