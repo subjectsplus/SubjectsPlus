@@ -39,6 +39,8 @@ $firstletter = "A";
     
 foreach ($alpha_result as $myletter) {
 
+	if (isset($myletter[0][0])) {
+	
     if ($count == 0) { $firstletter = $myletter[0][0];}
 
     $atoz .="<a href=\""
@@ -49,6 +51,8 @@ foreach ($alpha_result as $myletter) {
             . "</a> &nbsp;";
 
     $count++;
+    
+	}
 }
 
 $atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
