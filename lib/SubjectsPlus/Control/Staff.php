@@ -1242,9 +1242,14 @@ public function outputLatLongForm() {
 
     $extra = array();
 
-    if($staffArray[0]['social_media'] != ""){
+    if($staffArray != null){
       $json = html_entity_decode($staffArray[0]['social_media']);
       $extra = json_decode($json, true);
+    } else {
+      $extra['facebook'] = "";
+      $extra['twitter'] = "";
+      $extra['pinterest'] = "";
+      $extra['instagram'] = "";
     }
 
     return $extra;
