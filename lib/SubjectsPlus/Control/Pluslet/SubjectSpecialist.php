@@ -96,19 +96,15 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
                 $truncated_email = explode("@", $staffData[0]['email']);
 
-
-
-
-
-                if(file_exists("../../users/_" . $truncated_email[0] . "/headshot.jpg")) {
-                    $staff_picture = "../../users/_" . $truncated_email[0] . "/headshot.jpg";
-
-                } elseif(file_exists("../users/_" . $truncated_email[0] . "/headshot.jpg")) {
+                if(isset($_GET['subject'])) {
                     $staff_picture = "../users/_" . $truncated_email[0] . "/headshot.jpg";
-
+                } elseif($_GET['subject_id']) {
+                    $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
                 } else {
                     $staff_picture = $this->_relative_asset_path . "users/_" . $truncated_email[0] . "/headshot.jpg";
                 }
+
+
 
                 if ($staffData[0]['social_media'] != "") {
                     $data = html_entity_decode($staffData[0]['social_media']);
