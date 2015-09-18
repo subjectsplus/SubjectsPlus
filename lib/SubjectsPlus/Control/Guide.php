@@ -780,8 +780,15 @@ class Guide
 
         $updateChangeTable = changeMe("guide", "update", $this->_subject_id, $this->_subject, $_SESSION['staff_id']);
 
-        // message
-        $this->_message = _("Thy Will Be Done.  Guide updated.");
+        if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
+        	$this->_message = _("Thy Will Be Done.  Guide updated.");
+        	 
+        } else 
+        { 
+        	
+        	$this->_message = _("Thy Will Be Done.") . " <a href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
+        }
+        
     }
 
     public function getTabs( $lstrFilter = "" )
