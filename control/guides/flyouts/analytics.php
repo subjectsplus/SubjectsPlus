@@ -32,26 +32,26 @@ font-size: 2em;
 
 	<script>             
 
-                $('.tab-clicks').empty();
-                     
-				$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
+	    $('.tab-clicks').empty();
+	         
+		$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
 
-					console.log(data);
-					console.log(data.total_views);
-				$(".total-views-count").html(data.total_views);
+			console.log(data);
+			console.log(data.total_views);
+		$(".total-views-count").html(data.total_views);
 
 
-				if (data.tab_clicks[key]) {
-$('.tab-click-header').show();
-								for (key in data.tab_clicks) {
+		if (data.tab_clicks[key]) {
+			$('.tab-click-header').show();
+						for (key in data.tab_clicks) {
 
-					console.log(key);
-					
-					$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
-					
-				}
+			console.log(key);
+			
+			$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
+			
+		}
 
-				}
+		}
 
-				});
-            </script>
+		});
+	</script>
