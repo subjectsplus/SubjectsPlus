@@ -63,7 +63,10 @@
                     $key = 'show'.$item.$staffId;
                     $key_trimmed = rtrim($key, ' 0123456789');
 
-                    $this->_body .= "<input class='checkbox_ss' type='checkbox' name='SubjectSpecialist-extra-show{$item}{$staffId}' value='{$this->_extra[$key][0]}' /><label style='display:inline;'> Show {$item}</label><br>";
+                    if($this->_extra[$key] != null) {
+                        $this->_body .= "<input class='checkbox_ss' type='checkbox' name='SubjectSpecialist-extra-show{$item}{$staffId}' value='{$this->_extra[$key][0]}' /><label style='display:inline;'> Show {$item}</label><br>";
+                    }
+
 
                 } else {
                     $this->_body .= "<input class='checkbox_ss' type='checkbox' name='SubjectSpecialist-extra-show{$item}{$staffId}' value='No' /><label style='display:inline;'> Show {$item}</label><br>";

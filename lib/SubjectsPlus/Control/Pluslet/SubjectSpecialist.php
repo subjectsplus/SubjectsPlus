@@ -127,12 +127,12 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                         $value = $this->_extra[$key];
 
                         if( !empty($value[0]) ) {
-                            $key_trimmed = rtrim($key, ' 0123456789');
+                            $key_trimmed = rtrim($key, '0123456789');
 
 
                             if($key_trimmed == 'showPhoto' && $value[0] == "Yes") {
 
-                                $this->_body .= "<div style='float:left;'><img id='staffPhoto' class=\"staff-photo\" src='{$staff_picture}' /></div>";
+                                $this->_body .= "<div style='float:left;'><img id='staffPhoto{$this->staffId}' class=\"staff-photo\" src='{$staff_picture}' /></div>";
                             }
 
                             if($key_trimmed == 'showTitle' && $value[0] == "Yes") {
