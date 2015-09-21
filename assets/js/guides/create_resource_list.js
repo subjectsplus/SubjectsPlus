@@ -70,7 +70,7 @@ $(document).ready(function () {
 
 	});
 	
-		$('.databases-search').keypress(function(data) {
+		$('.databases-search').keyup(function(data) {
 
 			$('.databases-searchresults').empty();
 			var search_url;
@@ -83,6 +83,15 @@ $(document).ready(function () {
 				search_url = "../includes/autocomplete_data.php?collection=records&term=";
 			}
 			
+			
+			if($(this).val() === "") {
+				$('.databases-searchresults').html("<li><span class=\"no-box-results\">No Results</span></li>");
+
+			}
+
+			
+			if(search_term  != "" ) {
+	     // Don't search if there is no search term -- this is needed so that when a user removes the term results won't pop up
 		 $.get(search_url +  search_term, function(data) {
 
 			 if(data.length != 0) {
@@ -101,6 +110,12 @@ $(document).ready(function () {
 			$('.databases-searchresults').html("<li><span class=\"no-box-results\">No Results</span></li>");
 			   }
 		 });
+		 
+			} else {
+				$('.databases-searchresults').html("<li><span class=\"no-box-results\">No Results</span></li>");
+
+			}
+		 
 		});
 	
 		$('body').on("click", '.add-to-list-button', function() {
