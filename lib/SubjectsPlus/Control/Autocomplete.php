@@ -154,11 +154,13 @@ class Autocomplete {
         
         
      case "azrecords":
-        	$statement = $connection->prepare("SELECT DISTINCT t.title_id AS 'id', 'Record' as 'content_type',t.title AS 'label'
-        FROM location l, title t, location_title lt 
-        WHERE  t.title_id = lt.title_id
-        AND l.eres_display = 'Y'
-		AND t.title LIKE :search_term");
+        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', title.title as 'label' FROM title
+INNER JOIN location_title 
+ON title.title_id = location_title.title_id
+INNER JOIN location
+ON location.location_id = location_title.location_id
+AND eres_display = 'Y'
+AND title.title LIKE :search_term");
         	break;
         
       case "faq":
@@ -175,7 +177,7 @@ class Autocomplete {
         		FROM staff WHERE (fname LIKE :search_term) OR (lname LIKE :search_term)");
         break;
       case "pluslet":
-      	$statement = $connection->prepare("SELECT p.pluslet_id AS pluslet_id, p.title,p.title AS 'label', su.subject_id AS 'id', su.shortform as 'short_form', 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p
+      	$statement = $connection->prepare("SELECT p.pluslet_id AS 'pluslet_id', p.title,p.title AS 'label', p.pluslet_id AS 'id', su.shortform as 'short_form', 'Pluslet' AS 'content_type', t.tab_index as 'additional_id',su.subject as 'parent' FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
@@ -184,7 +186,9 @@ class Autocomplete {
                     ON s.tab_id = t.tab_id
                     INNER JOIN subject AS su
                     ON su.subject_id = t.subject_id
-                    WHERE p.title LIKE :search_term");
+                    WHERE p.title LIKE :search_term
+      				AND p.type = 'Basic'
+      				");
       break;
                     		
 
@@ -304,7 +308,10 @@ class Autocomplete {
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 
               $arr[$i]['label'] = html_entity_decode($myrow['label']);
+              
+              if (isset($arr[$i]['pluslet_id'])) {
               $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
+              }
           } else {
 
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
