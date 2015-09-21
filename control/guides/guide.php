@@ -1228,7 +1228,10 @@ function checkDataLayout() {
   }
   else if (dataLayoutConfig === "8-4-0") {
     $(".sp_section #container-2").hide();
-    $( "#col-84" ).addClass("active-layout-icon");    
+    $( "#col-84" ).addClass("active-layout-icon");
+
+
+
   }
   else if (dataLayoutConfig === "4-4-4") {
     $( "#col-triple" ).addClass("active-layout-icon");
@@ -1242,6 +1245,7 @@ function checkDataLayout() {
  //Load checkDataLayout
 checkDataLayout();
 
+  
 
 //Fix for FOUC
 function fixFlashFOUC() {
