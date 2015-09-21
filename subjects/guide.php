@@ -91,7 +91,9 @@ if ($check_this) {
     // In this section, we get the widths of the three columns, which add up to 12
     // We then do a little bit of math to get them into columns that add up to a bit under 100
     // In order to convert to css %.  If this page were bootstrapped, this wouldn't be necessary.
+    if (isset($lobj->{'maincol'})) {
     $col_widths = explode("-", $jobj->{'maincol'});
+    }
     //print_r($col_widths);
     if (isset($col_widths[0]) && $col_widths[0] > 0) {
         $left_width = $col_widths[0] * 8;
