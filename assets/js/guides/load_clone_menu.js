@@ -14,6 +14,7 @@ function loadCloneMenu() {
 
 		$('.guide-list').on('change', function(data) {
 			var subject_id = $("option:selected", this).attr('data-subject-id');
+			console.log(subject_id);
 
 			$('.pluslet-list').empty();
 
