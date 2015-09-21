@@ -2,7 +2,7 @@
 
 
     <?php if ( isset($this->staffPhoto) ) {
-        echo  "<div class=\"staff-image\"><img id='staffPhoto' class=\"staff-photo\" src='{$this->staffPhoto}' /></div>
+        echo  "<div class=\"staff-image\"><img id='staffPhoto{$this->staffId}' class=\"staff-photo\" src='{$this->staffPhoto}' /></div>
                <div class=\"staff-content\">";
     }
     else {
