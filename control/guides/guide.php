@@ -897,74 +897,14 @@ ob_end_flush();
 
           
           <!--custom database list-->
-          <div id="dblist_options_content" class="second-level-content" style="display:none;">
-              <h3><?php print _("Create Database List Box"); ?></h3>
-              
-              <!--display db results list-->
-              <div class="dblist-display">                
-                
-                  <div class="databases-results-display">
-                      <input class="databases-search" type="text" placeholder="<?php print _("Enter database title..."); ?>"></input>
-              			  <label for="limit-az">
-              				  <input id="limit-az" type="checkbox" checked></input> Limit to AZ List
-              				</label>
-                      <ul class="databases-searchresults"></ul>
-                  </div> 
-              </div>
-
-              <!--display results selected-->
-              <div class="db-list-content">               
-                 
-                      <h4>Databases Selected:</h4>
-                      <ul class="db-list-results">                         
-                      </ul>  
-              </div>
-              
-              <!--buttons-->
-              <div class="db-list-buttons">
-                  <button class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
-                  <button class="pure-button pure-button-primary dblist-reset-button"><?php print _("Reset List Box"); ?></button>
-              </div>
-
-          </div>
-
+          
+          <?php include_once('flyouts/create_database_list.php'); ?>
+          
           
           <!--analytics-->
-          <div id="analytics_options_content" class="second-level-content" style="display:none;">
-            <h3><?php print _("Analytics"); ?></h3>
+          <?php include_once('flyouts/analytics.php'); ?>
             
-            <div class="analytics_display">
-          
-            <span class="total-views-header">Total Views:</span><span class="total-views-count"></span>
-           </br>
-            <span class="tab-click-header">Clicks on Tabs:</span>
-            <ul class="tab-clicks">
-            
-            </ul>
-            </div>
-            
-            
-            <script>             
-
-                $('.tab-clicks').empty();
-                     
-				$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
-
-					console.log(data);
-					console.log(data.total_views);
-				$(".total-views-count").html(data.total_views);
-
-				
-				for (key in data.tab_clicks) {
-
-					console.log(key);
-					
-					$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
-					
-				}
-
-				});
-            </script>
+           
             
             
           </div>

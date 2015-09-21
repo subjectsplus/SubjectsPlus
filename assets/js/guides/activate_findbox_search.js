@@ -1,11 +1,13 @@
 // Handles the autocomplete for the box search
 
 function activateFindboxSearch() {
-$('.findbox-search').keypress(function(data) {
+$('.findbox-search').keyup(function(data) {
 
 	$('.findbox-searchresults').empty();
 	var search_term = $('.findbox-search').val(); 
-   
+
+	
+	
  $.get('../includes/autocomplete_data.php?collection=pluslet&term=' +  search_term, function(data) {
 
 	 if(data.length != 0) {
