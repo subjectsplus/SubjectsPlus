@@ -1141,6 +1141,13 @@ li.fav-box-item:hover::before {color: #C03957;}
   list-style-position: inside;
 }
 
+.portal-column-0 .pluslet .pluslet_body img,
+.portal-column-1 .pluslet .pluslet_body img,
+.portal-column-2 .pluslet .pluslet_body img{
+  height: auto !important;
+  max-width: 100%;
+}
+
 .box_settings {
   padding: 10px;
   text-transform: none;
