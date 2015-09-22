@@ -32,7 +32,7 @@ class Pluslet_5 extends Pluslet {
         // example form action:  http://icarus.ithaca.edu/cgi-bin/Pwebrecon.cgi?
         $this->_body = '
             <div class="book-search">
-            <form action="" method="get" name="querybox" id="querybox" class="pure-form">
+            <form action="" method="get" name="querybox" id="querybox" class="pure-form" target="_blank">
             <fieldset>
             <input type="hidden" value="local" name="DB" />
             <select name="Search_Code" class="search_smaller">
