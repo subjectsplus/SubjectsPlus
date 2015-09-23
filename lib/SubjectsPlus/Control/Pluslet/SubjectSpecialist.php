@@ -113,7 +113,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                     $staffSocialMedia = json_decode($data, true);
                 }
 
-                $this->_body .= "<div>";
+                $this->_body .= "<div class=\"subjectSpecialistPluslet\">";
 
                 $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
 

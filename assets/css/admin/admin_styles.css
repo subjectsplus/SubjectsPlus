@@ -660,6 +660,13 @@ a.pure-button-secondary:hover {
 
 .fav-boxes-list, .fav-templates-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
 
+.fav-boxes-list li {margin-bottom: 6px;}
+
+.fav-box-item {
+  font-size:12px !important;
+  cursor:pointer;
+}
+
 .fav-box-item:before, .fav-template-item:before {
   font-family: FontAwesome;
   content:"\f005";
@@ -667,7 +674,8 @@ a.pure-button-secondary:hover {
   padding: 0 8px 0 0;
 }
 
-.fav-box-item, .fav-template-item { width: 275px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+.fav-box-item, .fav-template-item { width: 175px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+
 .clone-favorite.fav-box-item {
   font-size:12px !important;
   cursor:pointer;
@@ -1335,7 +1343,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
 /*  Subject Specialist Pluslet - NEW */
-.subjectSpecialistPluslet {display: block; overflow: hidden; margin: 0 0 12px 0;}
+.subjectSpecialistPluslet {display: block; overflow: hidden; margin: 0 0 12px 0; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
 
 .staff-image {width: 90px; float:left; display: inline-block; }
 
