@@ -1,4 +1,6 @@
 <div class="subjectSpecialistPluslet">
+    <div id="subjectSpecialistPluslet" class="pure-g">
+
 
 
     <?php if ( isset($this->staffPhoto) ) {
