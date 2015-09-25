@@ -113,13 +113,13 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                     $staffSocialMedia = json_decode($data, true);
                 }
 
-                $this->_body .= "<div class=\"subjectSpecialistPluslet\">";
+                $this->_body .= "<div class=\"subjectSpecialistPluslet\">"; 
 
-                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
+                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";               
 
-                $this->_body .= "<ul class='staff-details'>";
-                foreach($array_keys as $item):
+                $this->_body .= "<ul class='staff-details'>";                
 
+                foreach($array_keys as $item):                  
 
                     if(array_key_exists("show{$item}{$staffId}", $this->_extra)) {
 
@@ -132,41 +132,39 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
                             if($key_trimmed == 'showPhoto' && $value[0] == "Yes") {
 
-                                $this->_body .= "<div style='float:left;'><img id='staffPhoto{$this->staffId}' class=\"staff-photo\" src='{$staff_picture}' /></div>";
+                                $this->_body .= "<div class='staff-image'><img id='staffPhoto{$this->staffId}' class=\"staff-photo\" src='{$staff_picture}' /></div>";
                             }
 
                             if($key_trimmed == 'showTitle' && $value[0] == "Yes") {
 
-                                $this->_body .= "<li>".$staffData[0]['title']."</li>";
+                                $this->_body .= "<li class='staff-content'>".$staffData[0]['title']."</li>";
                             }
 
                             if($key_trimmed == 'showEmail' && $value[0] == "Yes") {
-                                $this->_body .= "<li><a href='mailto:".$staffData[0]['email']."'>".$staffData[0]['email']."</a></li>";
+                                $this->_body .= "<li class='staff-content'><a href='mailto:".$staffData[0]['email']."'>".$staffData[0]['email']."</a></li>";
                             }
 
                             if($key_trimmed == 'showPhone' && $value[0] == "Yes") {
-                                $this->_body .= "<li>".$this->tel_prefix.' - '.$staffData[0]['tel']."</li>";
+                                $this->_body .= "<li class='staff-content'>".$this->tel_prefix.' - '.$staffData[0]['tel']."</li>";
                             }
 
-                            $this->_body .= "<li style='float:left; padding-right:8px;'>";
 
                             if($key_trimmed == 'showFacebook' && $value[0] == "Yes") {
-                                $this->_body .= "<span><a href='http://facebook.com/{$staffSocialMedia['facebook']}'><i class='fa fa-facebook-square fa-2x'></i></a></span>";
+                                $this->_body .= "<span class='staff-social'><a href='http://facebook.com/{$staffSocialMedia['facebook']}'><i class='fa fa-facebook-square'></i></a></span>";
                             }
 
                             if($key_trimmed == 'showTwitter' && $value[0] == "Yes") {
-                                $this->_body .= "<span><a href='http://twitter.com/{$staffSocialMedia['twitter']}'><i class='fa fa-twitter-square fa-2x'></i></a></span>";
+                                $this->_body .= "<span class='staff-social'><a href='http://twitter.com/{$staffSocialMedia['twitter']}'><i class='fa fa-twitter-square'></i></a></span>";
                             }
 
                             if($key_trimmed == 'showPinterest' && $value[0] == "Yes") {
-                                $this->_body .= "<span><a href='http://pinterest.com/{$staffSocialMedia['pinterest']}'><i class='fa fa-pinterest-square fa-2x'></i></a></span>";
-                            }
+                                $this->_body .= "<span class='staff-social'><a href='http://pinterest.com/{$staffSocialMedia['pinterest']}'><i class='fa fa-pinterest-square'></i></a></span>";
+                            }    
+
 
                             if($key_trimmed == 'showInstagram' && $value[0] == "Yes") {
-                                $this->_body .= "<span><a href='http://instagram.com/{$staffSocialMedia['instagram']}'><i class='fa fa-instagram fa-2x'></i></a></span>";
+                                $this->_body .= "<span class='staff-social'><a href='http://instagram.com/{$staffSocialMedia['instagram']}'><i class='fa fa-instagram'></i></a></span>";
                             }
-                            $this->_body .= "</li>";
-
                         }
                     }
 
@@ -174,7 +172,6 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 $this->_body .= "</ul>";
                 $this->_body .= '</div>';
 
-                $this->_body .= "<span class='clear' style='clear:both; padding:8px;'><hr style='clear:both;'></span>";
             endforeach;
 
         }

@@ -1345,25 +1345,26 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 /*  Subject Specialist Pluslet - NEW */
 .subjectSpecialistPluslet {display: block; overflow: hidden; margin: 0 0 12px 0; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
 
-.staff-image {width: 90px; float:left; display: inline-block; }
+.subjectSpecialistPluslet h4 {margin:0 0 10px 0 !important;}
 
+.staff-details {list-style-type: none; margin: 0; padding: 0 !important;}
+.staff-details li {margin: 0 0 2px 0; }
+
+.staff-image {width: 90px; float:left; display: inline-block; height:100px;}
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
+
 
 .staff-content {
   float:left; 
   display: inline-block;
+  width: -webkit-calc(100% - 90px); 
+  width: -moz-calc(100% - 90px); 
   width: calc(100% - 90px);
-  width: -moz-calc(100% - 90px);
-  width: -webkit-calc(100% - 90px);
 }
 
-.staff-details {list-style-type: none; margin: 0; padding: 0; }
-.staff-details li {margin: 0 0 2px 0; }
+.staff-social {padding: .2em 0.3em .2em 0; font-size: 26px; float: right; display: inline-block;}
 
-.staff-social {list-style-type: none; margin: 6px 0 0 0; padding: 0;}
-.staff-social li {display: inline;}
-.staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0; font-size: 26px;}
-
+[class~='staff-social']:first-of-type {clear: left; background-color: #FF0; }
 
 
 /*  Subject Specialist - OLD */
