@@ -660,6 +660,13 @@ a.pure-button-secondary:hover {
 
 .fav-boxes-list, .fav-templates-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
 
+.fav-boxes-list li {margin-bottom: 6px;}
+
+.fav-box-item {
+  font-size:12px !important;
+  cursor:pointer;
+}
+
 .fav-box-item:before, .fav-template-item:before {
   font-family: FontAwesome;
   content:"\f005";
@@ -667,7 +674,8 @@ a.pure-button-secondary:hover {
   padding: 0 8px 0 0;
 }
 
-.fav-box-item, .fav-template-item { width: 275px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+.fav-box-item, .fav-template-item { width: 175px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+
 .clone-favorite.fav-box-item {
   font-size:12px !important;
   cursor:pointer;
@@ -1141,6 +1149,13 @@ li.fav-box-item:hover::before {color: #C03957;}
   list-style-position: inside;
 }
 
+.portal-column-0 .pluslet .pluslet_body img,
+.portal-column-1 .pluslet .pluslet_body img,
+.portal-column-2 .pluslet .pluslet_body img{
+  height: auto !important;
+  max-width: 100%;
+}
+
 .box_settings {
   padding: 10px;
   text-transform: none;
@@ -1328,27 +1343,28 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
 /*  Subject Specialist Pluslet - NEW */
-.subjectSpecialistPluslet {display: block; overflow: hidden; margin: 0 0 12px 0;}
+.subjectSpecialistPluslet {display: block; overflow: hidden; margin: 0 0 12px 0; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
 
-.staff-image {width: 90px; float:left; display: inline-block; }
+.subjectSpecialistPluslet h4 {margin:0 0 10px 0 !important;}
 
+.staff-details {list-style-type: none; margin: 0; padding: 0 !important;}
+.staff-details li {margin: 0 0 2px 0; }
+
+.staff-image {width: 90px; float:left; display: inline-block; height:100px;}
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
+
 
 .staff-content {
   float:left; 
   display: inline-block;
+  width: -webkit-calc(100% - 90px); 
+  width: -moz-calc(100% - 90px); 
   width: calc(100% - 90px);
-  width: -moz-calc(100% - 90px);
-  width: -webkit-calc(100% - 90px);
 }
 
-.staff-details {list-style-type: none; margin: 0; padding: 0; }
-.staff-details li {margin: 0 0 2px 0; }
+.staff-social {padding: .2em 0.3em .2em 0; font-size: 26px; float: right; display: inline-block;}
 
-.staff-social {list-style-type: none; margin: 6px 0 0 0; padding: 0;}
-.staff-social li {display: inline;}
-.staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0; font-size: 26px;}
-
+[class~='staff-social']:first-of-type {clear: left; background-color: #FF0; }
 
 
 /*  Subject Specialist - OLD */

@@ -21,10 +21,11 @@ function get_user_favorite_boxes(staff_id) {
             }
 
             $.each(data, function(idx, obj) {
-                $(".fav-boxes-list").append( "<li data-pluslet-id='" + obj.id +"' class='clone-favorite fav-box-item' title='" + obj.title + "'>" + obj.title + "</li>");
+                $(".fav-boxes-list").append( "<li data-pluslet-id='" + obj.id +"'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" + obj.title + "</div><div class='pure-u-2-5' style='text-align:right;'><button class='clone-button pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-button pure-button pure-button-secondary'>Copy</button></div></div></li>");
 
             });
         }
     });
 
 }
+

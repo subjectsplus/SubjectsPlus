@@ -909,7 +909,7 @@ class Guide
         $tabs .= $this->_isAdmin ? "<span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>" : "</li>";
         }
         
-        $tabs .= "<li id=\"expand_tab\"><i class=\"fa fa-chevron-down\"></i></li>"; //place collapse/expand trigger here
+        $tabs .= "<li id=\"expand_tab\"><i class=\"fa fa-chevron-up\"></i></li>"; //place collapse/expand trigger here
         $tabs .= "</ul>"; // close out our tabs
         
         $tabs .= $this->_isAdmin ? "" : "<div id=\"shadowkiller\"></div>"; // this div allows me to cover bottom of box-shadow on tabs.  crazy, bien sur
