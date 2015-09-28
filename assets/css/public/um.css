@@ -1808,7 +1808,7 @@ table.item_listing th {
     
 }
 
-
+/* For Imported Guides */
 
 .book {
 	display: inline-block;
@@ -1845,7 +1845,9 @@ table.item_listing th {
 	margin-top:1em;
 }
 
-
+.links {
+    margin-bottom:5%;
+}
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {

@@ -264,35 +264,31 @@ $this->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote(
 }
 
 public function importBox($box, $section_id) {
-	
-  $row = $this->getRow();
-  $column = $this->getColumn();	
 		
   $wc = new WordCleaner();
   $this->db->exec("SET NAMES utf-8" );
   	
   $description = null;
   
-  //$description .= "<div class=\"Box Type\">$box->BOX_TYPE</div>";       
+   
 
   // Import images and replace the old urls with new urls
      
   $config = \HTMLPurifier_Config::createDefault();
-  $config->set('Core.Encoding', 'ISO-8859-1');
-  $config->set('HTML.Doctype', 'XHTML 1.0 Transitional');
+  $config->set('Core.Encoding', 'UTF-8');
   $config->set('HTML.TidyLevel', 'heavy');
-  $config->set('Core.ConvertDocumentToFragment',true);
-  $config->set('HTML.Allowed', 'a[href|title],em,p,blockquote,img');
-  
+
+  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe'));
+  $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
+  $config->set('HTML.SafeIframe', true);
+  $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/|www.khanacademy.org/embed_video)%');
   
   $purifier = new \HTMLPurifier($config);
   
-  $pure_html =  $purifier->purify($box->DESCRIPTION);
+  $pure_html =  $purifier->purify(html_entity_decode(str_replace("\xc2\xa0",' ',$box->DESCRIPTION)),ENT_QUOTES, UTF-8);
   
   // Import images and replace the old urls with new urls
   $doc = new \DOMDocument();
-  
- // $doc->loadHTML(mb_convert_encoding($pure_html, 'HTML-ENTITIES', 'UTF-8'));
  
   if ($pure_html) {
   $doc->loadHTML($pure_html);
@@ -329,7 +325,7 @@ public function importBox($box, $section_id) {
   $raw_description = $doc->saveHTML();
   $clean_description = $wc->strip_word_html($raw_description);
   
-  $description .= "<div class=\"description\">".  $wc->strip_word_html($clean_description)  . "</div>";
+  $description .= "<div class=\"description\">".  $raw_description  . "</div>";
 
   
   switch ($box->BOX_TYPE) {      
@@ -820,7 +816,7 @@ public function loadLibGuidesLinksXML() {
     */
    
     		
-    $title =  $this->db->quote($link->NAME);
+    $title =  $this->db->quote(strip_tags($link->NAME));
 	array_push($titles, array("title" => $title));
 	
 	
@@ -850,13 +846,13 @@ public function loadLibGuidesLinksXML() {
       // When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field 
       
       $matches = array();
-      preg_match("/^\b(the|a|an|la|les|el|las|los)\b/i", $link->NAME, $matches);
+      preg_match("/^\b(the|a|an|la|les|el|las|los)\b/i", strip_tags($link->NAME), $matches);
 
       
       // If there isn't an article in the title
       if (empty($maches[0])) {
 	
-	if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote($link->NAME) . ","  . $this->db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
+	if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote(strip_tags($link->NAME)) . ","  . $this->db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
 	  $this->importLog( "Inserted title");
 	  $title_id = $this->db->last_id();
 
@@ -871,7 +867,7 @@ public function loadLibGuidesLinksXML() {
       
       if(isset($matches[0])) {
 	
-	$clean_link_name = preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME);
+	$clean_link_name = strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME));
 	
 	if( $this->db->exec("INSERT INTO title (title, description, pre) VALUES (" . $this->db->quote($clean_link_name) . ","  . $this->db->quote($link->DESCRIPTION_SHORT) . "," . $this->db->quote($matches[0]) . ")") ) {
 	  $this->importLog( "Inserted title");
