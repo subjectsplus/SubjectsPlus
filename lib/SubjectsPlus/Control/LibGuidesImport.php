@@ -94,8 +94,9 @@ class LibGuidesImport {
   	$column = $this->getColumn();
 
 	$description_clean = $this->db->quote($description);
+	$box_name = $this->db->quote($box->NAME);
 	
-	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, '$box->NAME', $description_clean, 'Basic')")) {
+	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, $description_clean, 'Basic')")) {
 	
 		$this->importLog("Inserted pluslet '$box->NAME'");
 		$clean_description = null;
@@ -125,6 +126,16 @@ class LibGuidesImport {
 	}
 }
 
+public function insertPluslet($box, $section_id, $pluslet_type, $pluslet_title) {
+	$row = $this->getRow();
+	$column = $this->getColumn();
+	
+	$this->db->exec("INSERT INTO pluslet(title, type,body) VALUES ('$pluslet_title', '$pluslet_type','')");
+	
+	$pluslet_id = $this->db->last_id();
+	
+	$this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet_id', $section_id, $column, $row)");
+}
 
 
 public function insertSubjectSpecialist($box, $section_id) {
@@ -205,9 +216,7 @@ public function insertLinkedBox($box, $section_id) {
 	
 }
 
-  
-
-  public function importBoxLinks($box) {
+public function importBoxLinks($box) {
 
   	$description = "";	
     
@@ -315,18 +324,14 @@ public function importBox($box, $section_id) {
   	}
   }
   }
-  
-  
-  
-
-  
+    
   // Create html for the description
 
   $raw_description = $doc->saveHTML();
-  $clean_description = $wc->strip_word_html($raw_description);
   
+  if ($raw_description != null) {  
   $description .= "<div class=\"description\">".  $raw_description  . "</div>";
-
+  }	
   
   switch ($box->BOX_TYPE) {      
 
@@ -347,8 +352,7 @@ public function importBox($box, $section_id) {
     break;
 
   case "Embedded Media & Widgets":
-    //Box type: Media & Widgets
-
+   
     foreach ( $box->EMBEDDED_MEDIA_AND_WIDGETS as $media )  {
       
       $description .= 
@@ -399,10 +403,7 @@ public function importBox($box, $section_id) {
   case "Files":
   
   	foreach ( $box->FILES as $files )  {
-  	
-  		
-  		
-  		
+
   		foreach ($files->FILE as $file) {
 
   		//	$downloaded_file = $this->downloadFile("http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID");
@@ -420,11 +421,14 @@ public function importBox($box, $section_id) {
   case "User Feedback":
     
   case "Google Search":
-   
+  	
+    $this->insertPluslet($box, $section_id, "GoogleSearch", "Google Search");
+ 	
   case "Poll":
    
   case "Google Books":
- 
+  	$this->insertPluslet($box, $section_id, "GoogleBooks", "Google Books");
+  	 
   case "Events":
    
   case "Guide Links":
@@ -433,7 +437,9 @@ public function importBox($box, $section_id) {
    $this->insertSubjectSpecialist($box, $section_id);
    
   case "Google Scholar":
-   
+  	
+   $this->insertPluslet($box, $section_id, "GoogleScholar", "Google Scholar");
+  	
 
 }
 
@@ -680,12 +686,6 @@ public function outputGuides($email_address) {
 public function guideImported() {
 
   $guide_id = $this->getGuideID();
-
-
-  
-
-
-
   $guide = $this->db->query("SELECT COUNT(*) FROM subject WHERE subject_id = '$guide_id'");
 
   return $guide;
@@ -693,13 +693,9 @@ public function guideImported() {
 }
 
 
-
 public function guideDupe($guide_url) {
-	
-  
+	  
   $guide = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $guide_url");
-
-
   
   return $guide[0][0];
 
@@ -794,27 +790,8 @@ public function loadLibGuidesLinksXML() {
     
     array_push($urls, array("url" => $clean_url));
     
-    /*
-    $ch = @curl_init($clean_url);
-    @curl_setopt($ch, CURLOPT_HEADER, TRUE);
-    @curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-    @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
-    @curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $status = array();
-    */
-    //preg_match('/HTTP\/.* ([0-9]+) .*/', @curl_exec($ch) , $status);
     
-    		
-    /*
-    if ($status[1] == 200) {
-    	array_push($link_status, array("working_link" => "true"));
-    	
-    } else {
-    	array_push($link_status, array("working_link" => "false"));
-    	
-    }
-    */
-   
+    
     		
     $title =  $this->db->quote(strip_tags($link->NAME));
 	array_push($titles, array("title" => $title));
@@ -1093,12 +1070,8 @@ public function importLibGuides() {
 	array_push($response, array("box" => $boxes ));
 	
 	
-
-	
       }
     }
-    
-    
     
     
   }
