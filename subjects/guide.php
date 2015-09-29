@@ -366,7 +366,7 @@ console.log(tabs);
            var tab_index = $(this).data("tab_index");
            var pluslet_id = $(this).data("pluslet_id");
            var box_id = $(this).attr("id");
-           console.log(box_id);
+           //console.log(box_id);
 
            $('#tabs').tabs('select', tab_index);
 
