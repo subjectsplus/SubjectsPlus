@@ -434,8 +434,8 @@ public function importBox($box, $section_id) {
   case "Guide Links":
     
   case "User Profile":
-   $this->insertSubjectSpecialist($box, $section_id);
-   
+   $this->insertPluslet($box, $section_id, "SubjectSpecialist", "Subject Specialist");
+  	
   case "Google Scholar":
   	
    $this->insertPluslet($box, $section_id, "GoogleScholar", "Google Scholar");
