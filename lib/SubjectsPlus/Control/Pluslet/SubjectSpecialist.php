@@ -206,7 +206,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $this_instance = "pluslet-update-body-$this->_pluslet_id";
 
         // Create and output object
-        $this->_body .= $oCKeditor->editor($this_instance, $this->_body, $config);
+        //$this->_body .= $oCKeditor->editor($this_instance, $this->_body, $config);
 
 
         // make an editable body and title type
