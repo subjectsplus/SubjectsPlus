@@ -150,7 +150,7 @@ class Pluslet_TOC extends Pluslet {
 
         if( !empty($item)) {
 
-          $this->_body .= "<h4>". $item['parent']['name'] . "</h4>";
+          $this->_body .= "<h4 class=\"toc-heading\">". $item['parent']['name'] . "</h4>";
           $parent_id = $item['parent']['parent_id'];
 
           // Edit
