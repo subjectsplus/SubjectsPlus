@@ -366,13 +366,14 @@ console.log(tabs);
            var tab_index = $(this).data("tab_index");
            var pluslet_id = $(this).data("pluslet_id");
            var box_id = $(this).attr("id");
+           console.log(box_id);
 
            $('#tabs').tabs('select', tab_index);
 
-           jQuery(box_id).effect("pulsate", {
+           jQuery("#pluslet-" + pluslet_id).effect("pulsate", {
                times:2
            }, 2000);
-           window.location.hash = 'box-' + box_id;
+           window.location.hash = 'box-' + pluslet_id;
 
        });
 
