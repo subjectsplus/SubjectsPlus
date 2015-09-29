@@ -1188,7 +1188,8 @@ width:55px;
 
 
 /* Subject Specialist Pluslet - NEW - Front-end*/
-.subjectSpecialistPluslet {margin: 0 0 12px 0; display: block; overflow: hidden;}
+.subjectSpecialistPlusletOld {margin: 0 0 12px 0; display: block; padding-bottom: 10px;}
+.subjectSpecialistPluslet {margin: 0 0 12px 0; display: block; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
 .staff-image {width: 90px; float:left; display: inline-block; margin-right: 10px; }
 
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
@@ -1202,12 +1203,12 @@ width:55px;
 }
 
 .staff-details {list-style-type: none; margin: 0 !important; padding: 0; }
-.staff-details li {margin: 0; display: block !important;}
+.staff-details li {margin: 0 !important; display: block !important; white-space: pre-wrap;   white-space: -moz-pre-wrap;   
+   white-space: -o-pre-wrap;  word-wrap: break-word; }
 
-.staff-social {list-style-type: none; margin: 0 !important; padding: 0;}
-.staff-social li {display: inline !important;}
-.staff-social li  a {text-decoration: none; padding: .2em 0.3em .2em 0 !important; font-size: 26px !important; color: rgba(51,51,51,0.7);}
-.staff-social li a:hover { color: rgba(51,51,51,1);}
+.staff-social {padding: .2em 0.2em .2em 0; font-size: 26px; display: inline-block;}
+.staff-social  a {text-decoration: none; color: rgba(51,51,51,0.7) !important;}
+.staff-social a:hover { color: rgba(51,51,51,1) !important;}
 
 
 /* WorldCat Pluslet - Front-end */

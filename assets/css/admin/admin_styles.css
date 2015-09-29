@@ -1350,7 +1350,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .staff-details {list-style-type: none; margin: 0; padding: 0 !important;}
 .staff-details li {margin: 0 0 2px 0; }
 
-.staff-image {width: 90px; float:left; display: inline-block; height:100px;}
+.staff-image {width: 90px; float:left; display: inline-block; min-height:125px;}
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
 
 
@@ -1362,9 +1362,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
   width: calc(100% - 90px);
 }
 
-.staff-social {padding: .2em 0.3em .2em 0; font-size: 26px; float: right; display: inline-block;}
-
-[class~='staff-social']:first-of-type {clear: left; background-color: #FF0; }
+.staff-social {padding: .2em 0.3em .2em 0; font-size: 26px; display: inline-block;}
 
 
 /*  Subject Specialist - OLD */

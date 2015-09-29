@@ -48,7 +48,7 @@ class Pluslet_3 extends Pluslet {
 
         // Output Picture and Contact Info
         $this->_body .= "
-        <div class=\"subjectSpecialistPluslet\">
+        <div class=\"subjectSpecialistPlusletOld\">
           <div class=\"staff-image\"><img src=\"$staff_picture\" alt=\"Picture: $value[1] $value[0]\"  class=\"staff_photo2\" /></div>
           <div class=\"staff-content\"><p><a href=\"mailto:$value[2]\">$value[1] $value[0]</a><br />$value[4]<br />
              Tel: $tel_prefix $value[3]</p></div>
