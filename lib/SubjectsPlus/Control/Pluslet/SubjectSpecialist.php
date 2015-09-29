@@ -190,6 +190,25 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $this->_staffArray = $querier->query($qs);
 
 
+        global $CKPath;
+        global $CKBasePath;
+
+        include ($CKPath);
+        global $BaseURL;
+
+
+        $oCKeditor = new CKEditor($CKBasePath);
+        $oCKeditor->timestamp = time();
+        $config['toolbar'] = 'SubsPlus_Narrow';
+        $config['height'] = '300';
+        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+
+        $this_instance = "pluslet-update-body-$this->_pluslet_id";
+
+        // Create and output object
+        //$this->_body .= $oCKeditor->editor($this_instance, $this->_body, $config);
+
+
         // make an editable body and title type
         if ($this->_extra != "") {
             $this->_extra = json_decode($this->_extra, true);

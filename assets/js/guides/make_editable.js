@@ -74,6 +74,7 @@ function makeEditable(lstrSelector) {
 			   $(".pluslet.type-catalog").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-relguide").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-articleplus").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-toc").find(".body_set").addClass("hide-settings");
 
 			// Hide links-new-tab option from box settings options based on TYPE
 				$(".pluslet.type-heading").find(".links_set").addClass("hide-settings");
@@ -82,9 +83,11 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-catalog").find(".links_set").addClass("hide-settings");
 				$(".pluslet.type-relguide").find(".links_set").addClass("hide-settings");
 				$(".pluslet.type-articleplus").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-toc").find(".links_set").addClass("hide-settings");
 
 			// Hide titlebar option from box settings options based on TYPE
 				$(".pluslet.type-heading").find(".titlebar_set").addClass("hide-settings");
+				$(".pluslet.type-toc").find(".titlebar_set").addClass("hide-settings");
 
 		});
 
