@@ -38,7 +38,7 @@ class Pluslet_TOC extends Pluslet {
 
     // Get pluslets associated with this
     $querier = new Querier();
-  	$qs = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index
+  	$qs = "SELECT p.pluslet_id AS id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index AS parent_id, t.label AS name
 			FROM pluslet p INNER JOIN pluslet_section ps
 			ON p.pluslet_id = ps.pluslet_id
 			INNER JOIN section sec
@@ -73,6 +73,7 @@ class Pluslet_TOC extends Pluslet {
 
       if ($this->_pluslet_id) {
         $this->_current_id = $this->_pluslet_id;
+        $this->_pluslet_bonus_classes = "type-toc ";
         $this->_pluslet_id_field = "pluslet-" . $this->_pluslet_id;
         $this->_pluslet_name_field = "";
         $this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-update-title-$this->_current_id\" value=\"$this->_title\" size=\"$title_input_size\" />";
@@ -80,14 +81,12 @@ class Pluslet_TOC extends Pluslet {
       } else {
         $new_id = rand(10000, 100000);
         $this->_current_id = $new_id;
-        $this->_pluslet_bonus_classes = "unsortable no_overflow";
+        $this->_pluslet_bonus_classes = "type-toc unsortable no_overflow";
         $this->_pluslet_id_field = $new_id;
         $this->_pluslet_name_field = "new-pluslet-TOC";
         $this->_title = "<input type=\"text\" class=\"\" id=\"pluslet-new-title-$new_id\" name=\"new_pluslet_title\" value=\"" . ("Table of Contents") . "\" size=\"$title_input_size\" />";
         $this_instance = "pluslet-new-body-$new_id";
       }
-
-
 
 
       self::generateTOC($action);
@@ -115,56 +114,100 @@ class Pluslet_TOC extends Pluslet {
   }
 
 
-  function generateTOC($action) {
-    $left_col = "";
-    $right_col = "";
-    if ($this->_tocArray) {
+  function buildTree(array $source, $parent_id = 0) {
 
+    $items = array();
+    foreach($source as $item):
 
+      if($item['parent_id'] == $parent_id) {
 
+        $items['parent'] = array( 'parent_id' => $item['parent_id'], "name" => $item['name']);
+        $items['children'][] =  array( "id" => $item['id'], "title" => $item['title'], "pcolumn" => $item['pcolumn'], "type" => $item['type']);
 
-
-      // Edit
-      if ($action == "edit") {
-        foreach ($this->_tocArray as $value) {
-          if (isset($this->_ticked_items)) {
-            // show ticked items as pre-ticked
-            if (!in_array($value[0], $this->_ticked_items)) {
-              $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$value[0]\" />";
-            } else {
-              $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$value[0]\" checked=\"checked\" />";
-            }
-          } else {
-            $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$value[0]\" checked=\"checked\" />";
-          }
-          if ($value[3] == 1) {
-            $left_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents-edit\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
-          } else {
-            $right_col .= "$checkbox <a href=\"#box-$value[0]\" class=\"table-of-contents-edit\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a><br />\n";
-          }
-        }
-      } else {
-        // View
-        // display only ticked items
-        if ($this->_ticked_items) {
-          foreach ($this->_tocArray as $value) {
-            if (in_array($value[0], $this->_ticked_items)) {
-              if ($value[3] == 1) {
-                $left_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a>\n";
-              } else {
-                $right_col .= "<a href=\"#box-$value[0]\" class=\"table-of-contents\" id=\"boxid-$value[6]-$value[0]\">$value[1]</a>\n";
-              }
-            }
-          }
-        }else
-        {
-          return 'No items ticked. Please edit.';
-        }
       }
 
+    endforeach;
 
-      $this->_body .= "<div class=\"pure-g\"><div class=\"pure-u-1-2\">$left_col</div>
-                <div class=\"pure-u-1-2\">$right_col</div></div>";
+    return $items;
+  }
+
+  function generateTOC($action) {
+    if ($this->_tocArray) {
+
+      $tab_index_array = array();
+      foreach($this->_tocArray as $tab):
+        $tab_index_array[] = $tab['parent_id'];
+      endforeach;
+
+      $tab_index_array =  array_unique($tab_index_array );
+
+      $items = array();
+      foreach($tab_index_array as $tab):
+        $items[] = $this->buildTree($this->_tocArray, $tab);
+      endforeach;
+
+      foreach($items as $item):
+
+        if( !empty($item)) {
+
+          $this->_body .= "<h4>". $item['parent']['name'] . "</h4>";
+          $parent_id = $item['parent']['parent_id'];
+
+          // Edit
+          if ($action == "edit") {
+
+                foreach( $item['children'] as $child):
+                  $child_title = $child['title'];
+
+                  $child_id = $child['id'];
+                  $p_column = $child['pcolumn'];
+
+                  if (isset($this->_ticked_items)) {
+                    // show ticked items as pre-ticked
+                    if (!in_array($child_id, $this->_ticked_items)) {
+                      $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$child_id\" />";
+                    } else {
+                      $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$child_id\" checked=\"checked\" />";
+                    }
+                  } else {
+                    $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$child_id\" checked=\"checked\" />";
+                  }
+                  if ($p_column == 1) {
+                    $this->_body .= "$checkbox <a href=\"#box-$child_id\" class=\"table-of-contents-edit\" id=\"boxid-$parent_id-$child_id\">$child_title</a><br />\n";
+                  } else {
+                    $this->_body .= "$checkbox <a href=\"#box-$child_id\" class=\"table-of-contents-edit\" id=\"boxid-$parent_id-$child_id\">$child_title</a><br />\n";
+                  }
+
+                endforeach;
+
+          } else {
+            // View
+            // display only ticked items
+            if ($this->_ticked_items) {
+              foreach ($item['children'] as $child) {
+
+                $child_title = $child['title'];
+                $child_id = $child['id'];
+
+                if (in_array($child_id, $this->_ticked_items)) {
+
+                 $this->_body .= "<a href=\"#box-$child_id\"
+                                     class=\"table-of-contents\"
+                                     data-tab_index=\"$parent_id\"
+                                     data-pluslet_id=\"$child_id\"
+                                     id=\"boxid-$parent_id-$child_id\">$child_title</a>\n";
+
+                }
+              }
+            }else
+            {
+              return 'No items ticked. Please edit.';
+            }
+          }
+
+        }
+
+      endforeach;
 
     } else {
       $this->_body = _("There are no contents for this guide yet!");
