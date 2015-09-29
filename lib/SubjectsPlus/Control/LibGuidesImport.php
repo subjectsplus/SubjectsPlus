@@ -1,104 +1,77 @@
 <?php
+
 /**
  *   @file LibGuidesImport.php
  *   @brief
  *   @author little9 (Jamie Little)
- *   @date Auguest 2015
+ *   @date June 2014
  */
 namespace SubjectsPlus\Control;
 
 require_once (__DIR__ . "../../../HTMLPurifier/HTMLPurifier.auto.php");
 
-
-
 class LibGuidesImport {
-
-  private $_guide_id;
-  private $_libguides_xml;
-  private $_guide_owner;
-  private $_row = 0;
-  private $_column = 0;
-  
-  
-  
-  public function __construct($lib_guides_xml_path) {
-  	$libguides_xml= new \SimpleXMLElement(file_get_contents($lib_guides_xml_path,'r'));
-  	
-  	$this->libguidesxml = $libguides_xml;
-  	
-  	$db = new Querier;
-  	$this->db = $db;
-  	
-  }
-  
-  public function importLog($log_text="") {
-    
-
-    	$formatted_text = "<p>" . $log_text . "</p>";
-    	 
-    	file_put_contents("../../../import_log.html", $formatted_text, FILE_APPEND);
-   
-
-    
-  }
-
-  public function setGuideOwner($guide_owner) {
-    $this->_guide_owner = $guide_owner;
-  }
-  public function getGuideOwner() {
-
-    return $this->_guide_owner;
-
-  }
- 
-  public function setGuideID($guide_id) {
-    $this->_guide_id = $guide_id;
-  }
-  public function getGuideID() {
-    return $this->_guide_id;
-  }
-
-
-  public function setRow($row) {
-  	$this->_row = $row;
-  }
-  
-  public function getRow() {
-  	$this->_row++;
-  	if ($this->_row > 2) {
-  		$this->_row = 0;
-  	}
-  	return $this->_row;
-  	
-  }
-  
-  
-  
-  public function setColumn($column) {
-  	$this->_column = $column;
-  }
-  
-  public function getColumn() {
-  	$this->_column++;
-  	if ($this->_column > 2) {
-  		$this->_column = 0;
-  	}
-  	return $this->_column; 
-  }
-  
-  
-  public function insertBasicPluslet($box, $section_id, $description) {
-	
-	
-  	$row = $this->getRow();
-  	$column = $this->getColumn();
-
-	$description_clean = $this->db->quote($description);
-	$box_name = $this->db->quote($box->NAME);
-	
-	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, $description_clean, 'Basic')")) {
-	
-		$this->importLog("Inserted pluslet '$box->NAME'");
+	private $_guide_id;
+	private $_libguides_xml;
+	private $_guide_owner;
+	private $_row = 0;
+	private $_column = 0;
+		
+	public function __construct($lib_guides_xml_path) {
+		$libguides_xml = new \SimpleXMLElement ( file_get_contents ( $lib_guides_xml_path, 'r' ) );
+		
+		$this->libguidesxml = $libguides_xml;
+		
+		$db = new Querier ();
+		$this->db = $db;
+	}
+	public function setGuideOwner($guide_owner) {
+		$this->_guide_owner = $guide_owner;
+	}
+	public function getGuideOwner() {
+		return $this->_guide_owner;
+	}
+	public function setGuideID($guide_id) {
+		$this->_guide_id = $guide_id;
+	}
+	public function getGuideID() {
+		return $this->_guide_id;
+	}
+	public function setRow($row) {
+		$this->_row = $row;
+	}
+	public function getRow() {
+		$this->_row ++;
+		if ($this->_row > 2) {
+			$this->_row = 0;
+		}
+		return $this->_row;
+	}
+	public function setColumn($column) {
+		$this->_column = $column;
+	}
+	public function getColumn() {
+		$this->_column ++;
+		if ($this->_column > 2) {
+			$this->_column = 0;
+		}
+		return $this->_column;
+	}
+	public function importLog($log_text = "") {
+		$formatted_text = "<p>" . $log_text . "</p>";
+		
+		file_put_contents ( "../../../import_log.html", $formatted_text, FILE_APPEND );
+	}
+	public function insertBasicPluslet($box, $section_id, $description) {
+		$row = $this->getRow ();
+		$column = $this->getColumn ();
+		
+		$description_clean = $this->db->quote ( $description );
+		$box_name = $this->db->quote ( $box->NAME );
+		
+		if ($this->db->exec ( "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, $description_clean, 'Basic')" )) {
+			
+			$this->importLog("Inserted pluslet '$box->NAME'");
 		$clean_description = null;
 	
 	} else {
@@ -137,25 +110,6 @@ public function insertPluslet($box, $section_id, $pluslet_type, $pluslet_title) 
 	$this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet_id', $section_id, $column, $row)");
 }
 
-
-public function insertSubjectSpecialist($box, $section_id) {
-	
-	$row = $this->getRow();
-	$column = $this->getColumn();
-	
-	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES (3, $section_id, $column, $row)")) {
-		$this->importLog("Inserted pluslet section subject specialist");
-		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES (3, $section_id, $column, $row)");
-		// This sticks the newly created pluslet into a section
-	} else {
-	
-		$this->importLog("Couldn't insert pluslet section subject specialist");
-		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES (3, $section_id, $column, $row)");
-		
-	}
-
-}
-
 public function insertRSSPluslet($box, $section_id, $feed_url) {
 	
 	$row = $this->getRow();
@@ -164,7 +118,6 @@ public function insertRSSPluslet($box, $section_id, $feed_url) {
 	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type, extra) VALUES ($box->BOX_ID, '$box->NAME', '$feed_url', 'Feed', '{\"num_items\":5,  \"show_desc\":1, \"show_feed\": 1, \"feed_type\": \"RSS\"}' )")) {
 	
 		$this->importLog("Inserted RSS pluslet '$box->NAME'");
-		$clean_description = null;
 	
 	} else {
 	
@@ -294,7 +247,7 @@ public function importBox($box, $section_id) {
   
   $purifier = new \HTMLPurifier($config);
   
-  $pure_html =  $purifier->purify(html_entity_decode(str_replace("\xc2\xa0",' ',$box->DESCRIPTION)),ENT_QUOTES, UTF-8);
+  $pure_html =  $purifier->purify(html_entity_decode(str_replace("\xc2\xa0",' ',$box->DESCRIPTION)),ENT_QUOTES, 'UTF-8');
   
   // Import images and replace the old urls with new urls
   $doc = new \DOMDocument();
@@ -380,10 +333,7 @@ public function importBox($box, $section_id) {
     // Box type: Books
 
     foreach ( $box->BOOKS->BOOK as $book )  {
-      
-    	 
-    	 
-    	
+         	
       $description .= 
       "<div class=\"book\">" . 
       		"<div class=\"book-cover-art\"><img class=\"cover-image\" src=\"$book->COVER_ART\"></div>" .
@@ -446,14 +396,6 @@ public function importBox($box, $section_id) {
 
 
 }
-
-
-public function insertChildTab($tab) {
-	 
-	
-	 
-}
-
 
 public function downloadImages($url) {
   // This method creates a folder for a guide image in assets, downloads the image , and then returns the new URL for that image
@@ -558,7 +500,7 @@ public function outputOwners() {
 	$owners = $libguides_xml->xpath("//OWNER");
 	$owner_names = array();
 	$owner_email = array();
-	$owner_profile = array();
+
 	
 	foreach ($owners as $owner) {
 		if(!in_array((string) $owner->NAME, $owner_names)) {
@@ -577,7 +519,7 @@ public function outputOwners() {
 	
 	
 	$owners_combined = zip($owner_names, $owner_email);
-    $owners_sorted = array_multisort($owners_combined);
+
 	echo "<select name=\"email\" class=\"owners\" >";
 	
 	foreach ($owners_combined as $owner) {
@@ -601,7 +543,6 @@ public function outputGuides($email_address) {
   $owners = $libguides_xml->xpath("//OWNER/EMAIL_ADDRESS[.='$email_address']/..");
   $owner_names = array();
   $owner_email = array();
-  $owner_profile = array();
 
   foreach ($owners as $owner) {
     if(!in_array((string) $owner->NAME, $owner_names)) {
@@ -624,12 +565,7 @@ public function outputGuides($email_address) {
   
 
   foreach ($owners_combined as $owner) {
-  //  echo "<section class=\"import-block\">";
-  //  echo "<h3>Please select a guide below.</h3>";
 
-    
-    
- //   echo "<p>If you are looking for a specific guide enter it's name after clicking below.</p>";
     echo "<h3>" . $owner[0] . "'s Guides</h3>";
      
   	$guide_names = $libguides_xml->xpath("//OWNER/NAME[text() = '$owner[0]']/ancestor::GUIDE");
@@ -702,8 +638,6 @@ public function guideDupe($guide_url) {
 }
 
 public function loadLibGuidesXML() {
-		
-  $section_index = 0;
 
   $libguides_xml= $this->libguidesxml;
 
@@ -771,7 +705,6 @@ public function loadLibGuidesLinksXML() {
   $all_titles = array();
   $titles = array();
   $dupes = array();
-  $link_status = array();
   $urls = array();
   
   $guide_id = $this->getGuideID();
@@ -824,10 +757,10 @@ public function loadLibGuidesLinksXML() {
       
       $matches = array();
       preg_match("/^\b(the|a|an|la|les|el|las|los)\b/i", strip_tags($link->NAME), $matches);
-
+      
       
       // If there isn't an article in the title
-      if (empty($maches[0])) {
+      if (empty($matches[0])) {
 	
 	if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote(strip_tags($link->NAME)) . ","  . $this->db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
 	  $this->importLog( "Inserted title");
@@ -891,8 +824,6 @@ public function loadLibGuidesLinksXML() {
 public function importLibGuides() {
   $subject_values = $this->loadLibGuidesXML();
  
-  
-  $subject_id = (string) $subject_values[0][1];
   $response = array();
 
 
@@ -967,7 +898,7 @@ public function importLibGuides() {
 
     $tab_index = 0; 
     
-    $tab_children = array();
+   
     
     foreach ($subject_page->PAGE as $tab) {
 
@@ -987,7 +918,7 @@ public function importLibGuides() {
 
       $tab_index++; 
       $visibility = 1;
-      $current_parent;
+
       
       $clean_tab_name = $this->db->quote($tab->NAME);
       
@@ -1063,7 +994,9 @@ public function importLibGuides() {
  	
 	$this->importBox($pluslet, $section_uniqid);
 	
-
+    $box_names = array();
+    $box_types = array(); 
+    
 	$box_names['box_name'] = $pluslet->NAME;
 	$box_types['box_type'] = $pluslet->BOX_TYPE;
 	$boxes = array($box_names, $box_types);
