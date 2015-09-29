@@ -841,7 +841,7 @@ class Guide
             $home_tab_text = $HomeTabText;
             $home_tab_class = "";
         } else {
-            $home_tab_text = "<img src=\"$IconPath/home_spacer.png\" alt=\"Home\" title=\"Home\" />";
+            //$home_tab_text = "<img src=\"$IconPath/home_spacer.png\" alt=\"Home\" title=\"Home\" />";
             $home_tab_class = "hometab";
         }
 
@@ -879,7 +879,7 @@ class Guide
         if (!$this->_isAdmin && $key == 0) {
         	// Home tab
         	
-        	$tabs .= "<li id=\"{$lobjTab['tab_id']}\" class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"$home_tab_class\">$home_tab_text</a>";
+        	$tabs .= "<li id=\"{$lobjTab['tab_id']}\" class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"$home_tab_class\">{$lobjTab['label']}</a>";
         
         } else {
         	
