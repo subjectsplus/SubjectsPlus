@@ -149,7 +149,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                             }
 
 
-                            if($key_trimmed == 'showFacebook' && $value[0] == "Yes") {
+                             if($key_trimmed == 'showFacebook' && $value[0] == "Yes") {
                                 $this->_body .= "<span class='staff-social'><a href='http://facebook.com/{$staffSocialMedia['facebook']}'><i class='fa fa-facebook-square'></i></a></span>";
                             }
 
@@ -165,6 +165,9 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                             if($key_trimmed == 'showInstagram' && $value[0] == "Yes") {
                                 $this->_body .= "<span class='staff-social'><a href='http://instagram.com/{$staffSocialMedia['instagram']}'><i class='fa fa-instagram'></i></a></span>";
                             }
+
+                           
+                            
                         }
                     }
 
