@@ -57,30 +57,68 @@ require_once("Pluslet.php");
 
 	 protected function onViewOutput()
 	 {
-
 		 $master = json_decode($this->_extra);
 		 
 		 if (is_object($master)) {
-		 $db = new Querier;
-		 
-		 
-		 $output = $db->query("SELECT body from pluslet WHERE pluslet_id = '{$master->master}'");
-		 
-		 if (isset($output[0]['body'])) {
-		 $this->_body = "<p>{$output[0]['body']}</p>";
-		 } else {
-		 	
-		 	$this->_body = "";
-		 	
-		 }
-		 	
-		 
+
+			 $pluslet_type = $this->getPlusletType($master->master);
+
+			 $cloned_body = $this->getPlusletCloneBody($pluslet_type, $master->master, $this->_subject_id);
+
+			 $this->_body .= $cloned_body;
+
 		 } else {
 		 	
 		 }
 		 
 	 }
 
+
+	 public function getPlusletType($pluslet_id) {
+
+		 $db = new Querier();
+		 $pluslet_type = $db->query("SELECT type from pluslet WHERE pluslet_id = '{$pluslet_id}'");
+
+		 $type = $pluslet_type[0]['type'];
+		 return $type;
+	 }
+
+	 public function getPlusletCloneBody($type, $master, $subject_id) {
+
+		 $cloned_pluslet = "";
+
+		 switch($type) {
+
+			 case "HTML5Video":
+				 $cloned_pluslet = new Pluslet_HTML5Video($master, null, $subject_id, 1);
+				 break;
+
+			 case "TOC":
+				 $cloned_pluslet = new Pluslet_TOC($master, null, $subject_id, 1);
+				 break;
+
+			 case "Feed":
+				 $cloned_pluslet = new Pluslet_Feed($master, null, $subject_id, 1);
+				 break;
+
+			 case "SocialMedia":
+				 $cloned_pluslet = new Pluslet_SocialMedia($master, null, $subject_id, 1);
+				 break;
+
+			 case "SubjectSpecialist":
+				 $cloned_pluslet = new Pluslet_SubjectSpecialist($master, null, $subject_id, 1);
+				 break;
+
+			 case "Basic":
+				 $cloned_pluslet = new Pluslet_Basic($master, null, $subject_id, 1);
+				 break;
+		 }
+
+		 $cloned_pluslet->_isclone = 1;
+		 $cloned_pluslet->_hide_titlebar = 1;
+		 $cloned_pluslet = $cloned_pluslet->output(null, 'admin');
+		 return $cloned_pluslet;
+	 }
 	 
 	 
 	 static function getMenuName()
