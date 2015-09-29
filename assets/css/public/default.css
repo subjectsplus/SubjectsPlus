@@ -1095,18 +1095,18 @@ div.video_thumb img {
 }
 
 .ui-state-active {
-    background-color: #79A4D4 !important;
+    background: #79A4D4 !important;
 }
 .hometab {
-    padding: 4px 3px 0px 3px !important;
+    
 }
 
 /* DZ's fixes to  make the home icon work properly */
 /* DZ when on another tab */
 
 .ui-state-default .hometab {
-    padding: 4px 3px 0px 3px !important;
-    background: url(../../images/icons/home-active.png) no-repeat center center !important;
+    
+    /*background: url(../../images/icons/home-active.png) no-repeat center center !important;*/
 }
 
  
@@ -1114,17 +1114,20 @@ div.video_thumb img {
 .ui-state-hover .hometab
 
 {
-    padding: 4px 3px 0px 3px !important;
-    background: url(../../images/icons/home-hover.png) no-repeat center center !important;
+    
+    /*background: url(../../images/icons/home-hover.png) no-repeat center center !important;*/
 }
 
 /* DZ -  When on this tab */
 .ui-state-active .hometab, .ui-state-focus .hometab {
-    padding: 4px 3px 0px 3px !important;
-    background: url(../../images/icons/home-white.png) no-repeat center center !important;
-    background-color: #668BB7 !important;
+    
+   /* background: url(../../images/icons/home-white.png) no-repeat center center !important;*/
+    background-color: rgba(51, 51, 51, 0.7) !important;
+    color: #FFF !important;
 }
 
+.dropspotty.ui-state-active {background-color: rgba(51, 51, 51, 0.7) !important; color: #FFF !important;}
+.dropspotty.ui-state-active a {color: #FFF !important;}
 
 /* Next lines override the regular pluslet to create a heading */
 .evenrow {
@@ -1288,6 +1291,10 @@ width:55px;
     margin:0;
     padding: 0;
 }
+
+/* TOC Pluslet - Front-end */
+h4.toc-heading {margin: 6px 0; font-weight: bold;}
+.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0;}
 
 
 
