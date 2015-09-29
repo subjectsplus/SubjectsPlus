@@ -70,7 +70,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"titlebar_styles" => array( _( "Titlebar Styles" ), _( "These are the styles that can be issued to a pluslet titlebars." ), "array", "right", "large", "", _("This allows titlebars to have custom styles with custom keys for subject guide creator to make.") ),
 
-							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array(_('1'), _('2'), _('3'), _('4'), _('5'), 'Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video', 'WorldCat', 'Catalog', 'Related', 'ArticlesPlus', 'SocialMedia', 'SubjectSpecialist' ), _("") ),
+							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array(_('1'), _('2'), _('3'), _('4'), _('5'), 'Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video', 'WorldCat', 'Catalog', 'Related', 'ArticlesPlus', 'SocialMedia', 'SubjectSpecialist','GoogleSearch','GoogleScholar' ), _("") ),
 
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 							_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),
