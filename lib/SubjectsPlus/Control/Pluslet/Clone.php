@@ -37,7 +37,7 @@ require_once("Pluslet.php");
   			 $this->_body .=  "<input class=\"clone-input\" required aria-required=\"true\" type=\"text\" name=\"Clone-extra-master\" value=\"{$master->master}\"></input>";
 			 
   			 if (isset($parent_guide[0]['subject_id'])){
-  			 	$this->_body .= "<p>" . _('It can be found on this guide: ') . "<a href='./guide.php?subject_id={$parent_guide[0]['subject_id']}'>" . $parent_guide[0]['subject'] . "</a></p>";
+  			 	$this->_body .= "<p>" . _('It can be found on this guide: ') . "<a href='./guide.php?subject_id={$parent_guide[0]['subject_id']}' target='_blank'>" . $parent_guide[0]['subject'] . "</a></p>";
   			 		
   			 }else {
   			 	$this->_body .= "<p class=\"clone-warning\">" . _("There was a problem locating its original source. It's possible that the original guide has been deleted.") . "</p>";

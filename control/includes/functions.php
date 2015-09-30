@@ -1307,7 +1307,7 @@ function makePluslet ($title = "", $body = "", $bonus_styles = "", $printout = T
 function feedBack($message="", $display="feedback") {
   //print "HELLO our message is $message";
   if ($message != "") {
-    print "<div id=\"$display\" style=\"display:block;\">$message</div>";
+    print "<div class=\"master-feedback\" style=\"display:block;\">$message</div>";
   } else {
     return "";
   }

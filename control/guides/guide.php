@@ -996,10 +996,6 @@ function selectedPanelDisplay(){
 
   
 
-
-
-
-
   //close box settings panel
   $( ".close-settings" ).click(function() { 
       $(this).parent(".box_settings").hide();

@@ -68,7 +68,7 @@ foreach ($_POST["subject_id"] as $key => $value) {
     $rInsert = $db->exec($qInsert);
 }
 
-    $feedback = _("Thy Will Be Done.  Guide Collections updated.");
+    $feedback = _("Thy Will Be Done.  Guide Collections Updated.");
     // Show feedback
     //$feedback = $record->getMessage();
     // See all the queries?
@@ -92,7 +92,7 @@ if (isset($_GET["delete_id"])) {
     //print $qEmpty;
     $rDeleteColl = $db->exec($qDeleteColl);    
 
-    $feedback = _("Thy Will Be Done.  Collection deleted.");
+    $feedback = _("Thy Will Be Done.  Collection Deleted.");
 
 }
 
@@ -132,11 +132,12 @@ $ourlist .= "
       <div class=\"titlebar_options\"><a href=\"guide_collections.php?delete_id={$value[0]}\"><i class=\"fa fa-trash-o\" title=\"Remove item from this guide\"></i></a></div>
     </div>
     <div class=\"pluslet_body\">
-<p><em>$value[2]</em></p>
-$all_guides
-<form id=\"collections$value[0]\" action=\"\" method=\"post\">
-<ul id=\"sortable-$value[0]\" class=\"sortable_list\">
-";
+    <p>(Note: Guide must be public to display on the list)</p>
+    <p><em><strong>$value[2]</strong></em></p>
+    $all_guides
+    <form id=\"collections$value[0]\" action=\"\" method=\"post\">
+    <ul id=\"sortable-$value[0]\" class=\"sortable_list\">
+    ";
 
     // now get our subjects
     $querierSubject = new Querier();
@@ -170,7 +171,6 @@ $add_collection_box = "<form id=\"new_collection\" action=\"\" class=\"pure-form
  <textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"50\"></textarea>
  <label for=\"url\">" . _("Shortform") . "</label>
 <input type=\"text\" name=\"shortform\" size=\"20\"  class=\"required_field\">
-<p></p>
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>";
 
