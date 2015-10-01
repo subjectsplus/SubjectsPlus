@@ -89,6 +89,14 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-heading").find(".titlebar_set").addClass("hide-settings");
 				$(".pluslet.type-toc").find(".titlebar_set").addClass("hide-settings");
 
+			// Hide make favorite option from box settings options based on TYPE
+				$(".pluslet.type-worldcat").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-catalog").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-articleplus").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-relguide").find(".fav_set").addClass("hide-settings");
+
+			
+
 		});
 
 		//Make save button appear, since there has been a change to the page

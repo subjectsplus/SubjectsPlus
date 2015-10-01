@@ -326,7 +326,7 @@ class Pluslet {
                 </div>
 
 
-                <div class=\"onoffswitch\">
+                <div class=\"onoffswitch fav_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox favorite_pluslet_input\" id=\"favorite_box-$this->_pluslet_id\"";
 
         if ($this->_favorite_box == 1) {$box_settings .= " checked";}
