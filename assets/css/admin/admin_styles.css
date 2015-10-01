@@ -588,6 +588,58 @@ html,body { height:100%; }
 
 .worldcat-text {margin-top: 30px;}
 
+
+#pluslet-id-GoogleScholar {
+  background-image: url(images/icons/gscholar.png);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px;  
+}
+
+#pluslet-id-GoogleScholar:hover {
+  background-image: url(images/icons/gscholar-white.png);  
+}
+
+#pluslet-id-GoogleBooks {
+  background-image: url(images/icons/gbooks.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px;  
+}
+
+#pluslet-id-GoogleBooks:hover {
+  background-image: url(images/icons/gbooks-white.svg);  
+}
+
+#pluslet-id-GoogleSearch {
+  background-image: url(images/icons/gsearch.png);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px;  
+}
+
+#pluslet-id-GoogleSearch:hover {
+  background-image: url(images/icons/gsearch-white.png);  
+}
+
+.googlescholar-text {margin-top: 30px;}
+
+#pluslet-id-1{
+  background-image: url(images/icons/all-items.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px;  
+}
+
+#pluslet-id-1:hover {
+  background-image: url(images/icons/all-items-white.svg);  
+}
+
+
 #show_findbox_options i {font-size: 32px;}
 
 /* Find Boxes Tabs */
@@ -1416,10 +1468,20 @@ h4.toc-heading {margin: 6px 0;}
 .articlesplus-search {margin: 0 10px;}
 
 
-
-
 /* Book Search Pluslet- default */
 .book-search {margin: 0 10px;}
+
+
+/* Google Search Pluslet */
+.google-search {margin: 0 10px;}
+
+.google-attribution {
+  padding: 0.5em 0 0.2em 10px; 
+  background: url(images/icons/powered_by_google_on_white.png) 98% bottom no-repeat;
+  display: block;
+  height: 15px; 
+  background-size: 35% auto; 
+}
 
 
 /*** toggle pluslet body --CBR */

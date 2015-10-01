@@ -20,7 +20,7 @@ class Pluslet_GoogleSearch extends Pluslet {
   protected function onEditOutput()
   {
   	
-    $this->_body = "<p>" . _("Click 'Save' to view your search box.") . "</p>";
+    $this->_body = "<p class=\"faq-alert\">" . _("Click 'Save' to view your search box.") . "</p>";
    
   }
 
@@ -40,7 +40,7 @@ class Pluslet_GoogleSearch extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text googlesearh-text\">" . _("Google Search") . "</span>";
+        $icon="<span class=\"icon-text googlescholar-text\">" . _("Google Search") . "</span>";
         return $icon;
     }
 
