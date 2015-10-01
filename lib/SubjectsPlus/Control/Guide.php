@@ -579,9 +579,9 @@ class Guide
         if (isset($delete_result2)) {
             // message
             if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
-                $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.  Close window to continue.");
+                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a></div>";
             } else {
-                $this->_message = _("Thy will be done.  Offending Guide (and associated boxes) deleted.");
+                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a></div>";
             }
 
             ///////////////////////
@@ -677,7 +677,7 @@ class Guide
 
 
         // message
-        $this->_message = _("Thy Will Be Done.") . " <a href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
+        $this->_message = _("Thy Will Be Done.") . " <a class=\"master-feedback-link\" href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
     }
 
     public function updateRecord()
