@@ -98,7 +98,7 @@ if (isset($_POST["submit_record"])) {
   $feedback = $record->getMessage();
   // See all the queries?
   //$record->deBug();
-    print   "<div class=\"feedback\" style=\"display:block;\">" . $feedback . "</div>";
+    print   "<div class=\"master-feedback\" style=\"display:block;\">" . $feedback . "</div>";
 }
 
 if (!isset($no_form)) {
