@@ -809,10 +809,7 @@ ob_end_flush();
 
           <li id="show_findbox_options" class="top-panel-option-item"><a href="#"><i class="fa fa-search" title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
 
-          <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
-          
-          <!--<li class="top-panel-option-item"><a id="add_section" href="#"><img src="<?php //print $AssetPath; ?>images/icons/section1.svg" title="<?php //print _("New Section"); ?>" class="custom-icon" /><br />
-            <?php //print _("New Section"); ?></a></li>-->           
+          <li id="show_layout_options" class="top-panel-option-item"><a href="#"><i class="fa fa-columns" title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li> 
 
           <li id="show_dblist_options" class="top-panel-option-item"><a href="#"><i class="fa fa-list" title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
 

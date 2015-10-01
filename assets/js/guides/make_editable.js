@@ -75,6 +75,10 @@ function makeEditable(lstrSelector) {
 			   $(".pluslet.type-relguide").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-articleplus").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-toc").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-googlebooks").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-googlescholar").find(".body_set").addClass("hide-settings");
+			   
+			   
 
 			// Hide links-new-tab option from box settings options based on TYPE
 				$(".pluslet.type-heading").find(".links_set").addClass("hide-settings");
@@ -84,16 +88,25 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-relguide").find(".links_set").addClass("hide-settings");
 				$(".pluslet.type-articleplus").find(".links_set").addClass("hide-settings");
 				$(".pluslet.type-toc").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-googlebooks").find(".links_set").addClass("hide-settings");
+				$(".pluslet.type-googlescholar").find(".links_set").addClass("hide-settings");
+
+
 
 			// Hide titlebar option from box settings options based on TYPE
 				$(".pluslet.type-heading").find(".titlebar_set").addClass("hide-settings");
 				$(".pluslet.type-toc").find(".titlebar_set").addClass("hide-settings");
+
 
 			// Hide make favorite option from box settings options based on TYPE
 				$(".pluslet.type-worldcat").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-catalog").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-articleplus").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-relguide").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-googlebooks").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-googlescholar").find(".fav_set").addClass("hide-settings");
+
+
 
 			
 

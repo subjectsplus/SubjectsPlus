@@ -237,6 +237,12 @@ class Pluslet_1 extends Pluslet {
   	return _('All Items by Source');
   }
 
+  static function getMenuIcon()
+    {
+        $icon="<span class=\"icon-text worldcat-text\">" . _("All Items by Source") . "</span>";
+        return $icon;
+    }
+
 }
 
 ?>

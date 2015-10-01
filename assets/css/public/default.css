@@ -1297,6 +1297,17 @@ h4.toc-heading {margin: 6px 0; font-weight: bold;}
 .table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0;}
 
 
+/* Google Search Pluslet - Front-end */
+
+.google-attribution {
+  padding: 0.5em 0 0.2em 10px; 
+  background: url("../../images/icons/powered_by_google_on_white.png") 98% bottom no-repeat;
+  display: block;
+  height: 15px;
+  background-size: 35% auto;
+}
+
+
 
 /*  Media Queries */
 
