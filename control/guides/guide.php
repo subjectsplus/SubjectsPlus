@@ -141,7 +141,7 @@ if(empty($related_guides)) {
 }
 
 $all_boxes = "<p>" . _("Drag box selection, then drop it to the right") . "</p>
-
+<div class=\"box_options_container\">
 <ul id=\"box_options\">";
 
 
@@ -188,7 +188,7 @@ if ($num_resources == 0) {
  // $all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func(array( $lstrObj, 'getCkPluginName' )) . "'>" . call_user_func(array( $lstrObj, 'getMenuIcon' )) . "</li>";
 //}
 
-$all_boxes .= "</ul>";
+$all_boxes .= "</div></ul>";
 
 // END DRAGGABLE //
 // print_r($_SESSION);

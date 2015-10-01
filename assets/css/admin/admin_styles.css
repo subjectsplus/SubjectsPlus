@@ -534,7 +534,21 @@ html,body { height:100%; }
 
 .second-level-content h3 {margin: 0 0 0.75em 0 !important;}
 
-/* The draggable boxes from the admin guide header */
+
+
+/* The draggable boxes from the admin guide flyout */
+
+.box_options_container {
+  background: #484848;
+   border-right: 1px solid #525252;
+   border-bottom: 1px solid #525252;
+   border-left: 1px solid #3e3e3e;
+   border-top: 1px solid #3e3e3e; 
+   border-radius: 4px;   
+   margin: 0 0 20px 0;
+  overflow: auto; max-height:385px;
+  padding:10px 0;
+}
 
 #box_options {
   cursor: pointer;
