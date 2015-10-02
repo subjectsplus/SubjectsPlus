@@ -43,7 +43,7 @@ if (isset($_POST["searchterm"])) {
 
 	// Now build our display
 
-	$search_types = array("records", "guides", "plulsets", "faq", "staff", "talkback");
+	$search_types = array("records", "guides", "pluslets", "faq", "staff", "talkback");
 
 	    $colour1 = "#fff";
 	    $colour2 = "#F6E3E7";
