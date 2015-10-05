@@ -115,19 +115,19 @@ class Autocomplete {
                     WHERE title LIKE :search_term
                     OR description LIKE :search_term
                     OR vtags LIKE :search_term");
-      	
-
-
 
         break;
       case "guides":
       	$statement = $connection->prepare(
-       "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form' FROM subject WHERE subject LIKE :search_term
+       "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form' 
+       FROM subject 
+       WHERE active = '1'
+       AND (subject LIKE :search_term
            OR shortform LIKE :search_term
            OR description LIKE :search_term
            OR keywords LIKE :search_term
-           OR type LIKE :search_term
-           AND active = '1'");
+           OR type LIKE :search_term)
+           ");
         break;
 
 
