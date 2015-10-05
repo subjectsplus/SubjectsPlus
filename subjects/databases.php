@@ -225,12 +225,15 @@ include("includes/footer.php");
 ?>
 
 <script type="text/javascript" language="javascript">
-  $(document).ready(function(){
-    $(".trackContainer a").click(function() {
-      //_gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
-      alert($(this).text());
-    });
 
+  $(document).ready(function(){
+  
+/*  We use this at UM to track database clicks as events in GA
+    $(".trackContainer a").click(function() {
+      _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
+      // alert($(this).text());
+    });
+*/
     var stripeholder = ".zebra";
     // add rowstriping
     stripeR();
