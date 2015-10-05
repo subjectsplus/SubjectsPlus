@@ -460,7 +460,7 @@ class DbHandler {
 		sort ( $all_ctags );
 		
 		// prepare header
-		$items = "<table width=\"98%\" class=\"item_listing\">";
+		$items = "<table width=\"98%\" class=\"item_listing trackContainer\">";
 		
 		foreach ( $all_ctags as $value ) {
 			
