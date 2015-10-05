@@ -302,8 +302,8 @@ include("includes/footer_um.php");
 <script type="text/javascript" language="javascript">
 $(document).ready(function(){
 	$(".trackContainer a").click(function() {
-		//_gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
-		alert($(this).text());
+		_gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
+		//alert($(this).text());
 	});
 
 	var stripeholder = ".zebra";

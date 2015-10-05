@@ -209,7 +209,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 		$message .= "<strong>Name</strong>:  ";
 		$message .= $db->quote($this_name);
 		$message .= "<br />\n\n
-		<strong>Question</strong>:  ";
+		            <strong>Question</strong>:  ";
 		$message .= $db->quote($this_comment);
 		$message .= "<br /><br />\n\n";
 		$message .= "</body></html>";
