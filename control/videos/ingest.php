@@ -257,8 +257,8 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
 
     case "YouTube":
       // API endpoint
-      $api_endpoint = 'http://gdata.youtube.com/feeds/api/users/' . $vid_user_name;
-      $vid_data = $api_endpoint . '/uploads?max-results=50&start-index=' . $start_index;
+      $api_endpoint = 'https://www.youtube.com/feeds/videos.xml?user=' . $vid_user_name;
+      $vid_data = $api_endpoint;
       $base = "entry";
       break;
   }
@@ -299,28 +299,15 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
         $this_vid_duration = $video->duration;
         break;
       case "YouTube":
-        // code bits from http://www.ibm.com/developerworks/xml/library/x-youtubeapi/
-        // get nodes in media: namespace for media information
-        $media = $video->children('http://search.yahoo.com/mrss/');
-        $this_vid_title = $media->group->title;
-        $this_vid_description = $media->group->description;
-        $this_vid_owner = $video->author->name;
-        $this_vid_full_id = $video->id;
-        $this_vid_date = $video->published;
-        $boom = explode("/", $this_vid_full_id);
-        $this_vid_id = $boom[6]; // hopefully this won't change!
-        // get url
-        $attrs = $media->group->player->attributes();
-        $this_vid_url = $attrs['url'];
-        // get video thumbnail
-        $attrs = $media->group->thumbnail[1]->attributes();
-        $this_vid_thumbnail_small = $attrs['url'];
-        $attrs2 = $media->group->thumbnail[0]->attributes();
-        $this_vid_thumbnail_medium = $attrs['url'];
-        // get <yt:duration> node for video length
-        $yt = $media->children('http://gdata.youtube.com/schemas/2007');
-        $attrs = $yt->duration->attributes();
-        $this_vid_duration = $attrs['seconds'];
+      	$this_vid_id = $video->id;
+      	$this_vid_url = $video->url;
+      	$this_vid_thumbnail_small = $video->thumbnail_small;
+      	$this_vid_thumbnail_medium = $video->thumbnail_medium;
+      	$this_vid_title = $video->title;
+      	$this_vid_description = $video->description;
+      	$this_vid_owner = $video->user_name;
+      	$this_vid_date = $video->upload_date;
+      	$this_vid_duration = $video->duration;
         break;
     }
   
