@@ -70,6 +70,7 @@ subjects/includes/pgcache/*
 
 /assets/users/
 /assets/images
+/assets/images/video_thumbs/
 
 .idea/
 
