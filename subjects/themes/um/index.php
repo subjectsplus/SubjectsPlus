@@ -248,14 +248,6 @@ $('.foo3').trigger('footable_expand_first_row').addClass("evenrow");
 
   }); 
 
-// change color when checkbox is checked
-$('#show-Subject').change(function(){
-    if ($(this).is(':checked')) {
-        $(this).parent().addClass("checked-type");
-    }
-});
-
-
 </script>
 
 <?php
@@ -294,6 +286,24 @@ include("includes/footer_um.php");
             $(".zebra").removeClass("evenrow");
             $(".zebra").removeClass("oddrow");
         }
+
+
+        // change color when checkbox is checked
+        function checkedGuideTypeColor() {
+
+        if ($("#show-Subject").is(':checked')) {
+            $(this).parent().addClass("checked-type");
+        }
+        else {
+           $(this).parent().addClass("unchecked-type");
+        }
+
+        }
+
+        checkedGuideTypeColor();
+
+        
+
 
     });
 </script>
