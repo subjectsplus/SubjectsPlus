@@ -1373,6 +1373,17 @@ h4.toc-heading {margin: 6px 0; font-weight: bold;}
 
 
 
+
+/* Revised Index - Front-end */
+#filter-guides {width: 100%;}
+
+.guide-types {text-align: left !important; margin: 15px 0 0 0 !important;}
+
+.guide-types li {font-size: 0.9em !important;}
+
+.checked-type {background-color: #FF0 !important;}
+
+
 /* //////////////////
 //  Media Queries 
 ////////////////// */
@@ -1383,6 +1394,8 @@ h4.toc-heading {margin: 6px 0; font-weight: bold;}
 #filter {        
     width:auto;
 }
+
+#filter-guides {width: 80%;}
     
     
 
@@ -1703,6 +1716,8 @@ table.item_listing th {
     .pluslet_body .pure-form textarea {
       width: 65%;
     }
+
+    #filter-guides {width: 50%;}
     
 }
 
