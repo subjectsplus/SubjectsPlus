@@ -17,6 +17,7 @@ $page_title = "Set Picture";
 $no_header = "yes";
 
 include("../includes/header.php");
+include("../includes/upload/class.upload.php");
 
 // Connect to database
 
@@ -83,7 +84,7 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
           $handle->image_x = 200;
         }
         $handle->image_convert = 'jpg';
-        $handle->file_new_name_body = $_POST["video_id"];
+        $handle->file_new_name_body = $_POST["video_id"]."_medium";
         $handle->file_overwrite = true;
         $handle->file_auto_rename = false;
         $handle->dir_auto_chmod = true;
