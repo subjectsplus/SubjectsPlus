@@ -253,10 +253,12 @@ $thumbnail
       return FALSE;
     }
 
+    $db = new Querier;
+
     // Delete the records from video table
     $q = "DELETE FROM video WHERE video_id = '" . $this->_video_id . "'";
 
-    $delete_result = $db->query($q);
+    $delete_result = $db->exec($q);
 
     $this->_debug = "<p>Del query: $q";
 
