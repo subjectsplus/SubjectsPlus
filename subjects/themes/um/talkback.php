@@ -199,20 +199,131 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 
 		/* here the subject and header are assembled */
 
-		$subject = "Talk Back";
+		$subject = _("New Comment via Talkback");
 		$header = "Return-Path: $sent_from\n";
 		$header .= "From:  $sent_from\n";
 		$header .= "Content-Type: text/html; charset=iso-8859-1;\n\n";
 
-		$message = "<html><body><h2>Talk Back!</h2>\n\n";
-		$message .= "<strong>Date Submitted</strong>: $month $mday, $year<br />\n\n";
-		$message .= "<strong>Name</strong>:  ";
+		$message = "<html><body style=\"margin:0;\">
+					<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#d4d4d4\" style=\"height: 100%;\">
+						<tr>
+						<td valign=\"top\" align=\"center\">
+						<table cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#FFFFFF\" style=\"width:600px; height:auto;\" border=\"0\">
+						  <tr>
+						     <td width=\"600\" height=\"40\" valign=\"top\" bgcolor=\"#d4d4d4\">&nbsp;</td>
+						  </tr>
+						  <tr>
+						     <td width=\"600\" height=\"120\" valign=\"middle\" align=\"center\" bgcolor=\"#FFFFFF\">                
+						          <p style=\"font-size:28px; color:#444; font-family:Helvetica, sans-serif;\">" . _("New Comment Awaits Response") . "</p>
+						      </td>
+						  </tr>     
+						  <tr>
+							   <td width=\"600\" height=\"60\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
+						        <table width=\"600\" height=\"40\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
+						            <tr>
+						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <img src=\"http://sp.library.miami.edu/assets/images/email/calendar.jpg\" width=\"40\" height=\"40\" border=\"0\">
+						              </td>
+						              <td width=\"150\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Received:") . "</p>
+						              </td>
+						               <td width=\"380\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <p style=\"font-size:22px; color:#858585; font-family:Helvetica, sans-serif;\">$month $mday, $year</p>
+						              </td>
+						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						            </tr>
+						          </table>
+						      </td>
+						  </tr>   
+						  <tr>
+						     <td width=\"600\" height=\"60\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
+						        <table width=\"600\" height=\"40\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
+						            <tr>
+						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <img src=\"http://sp.library.miami.edu/assets/images/email/contact.jpg\" width=\"40\" height=\"40\" border=\"0\">
+						              </td>
+						              <td width=\"150\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Contact:") . "</p>
+						              </td>
+						               <td width=\"380\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <p style=\"font-size:22px; color:#858585; font-family:Helvetica, sans-serif;\">";
 		$message .= $db->quote($this_name);
-		$message .= "<br />\n\n
-		            <strong>Question</strong>:  ";
-		$message .= $db->quote($this_comment);
-		$message .= "<br /><br />\n\n";
-		$message .= "</body></html>";
+
+		$message .= "</p></td>
+						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						            </tr>
+						          </table>
+						      </td>
+						  </tr>  
+						  <tr>
+						     <td width=\"600\" height=\"65\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
+						        <table width=\"600\" height=\"40\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
+						            <tr>
+						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <img src=\"http://sp.library.miami.edu/assets/images/email/comment.jpg\" width=\"40\" height=\"40\" border=\"0\">
+						              </td>
+						              <td width=\"530\" valign=\"middle\" height=\"40\" bgcolor=\"#FFFFFF\">
+						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Comment:") . "</p>
+						              </td>              
+						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						            </tr>
+						          </table>
+						      </td>
+						  </tr> 						  
+						  <tr>
+						     <td width=\"600\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
+						        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
+						            <tr>
+						              <td width=\"60\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>              
+						              <td width=\"530\" valign=\"top\" bgcolor=\"#FFFFFF\">
+						                  <p style=\"font-size:20px; color:#858585; font-family:Helvetica, sans-serif;\">";
+
+		$message .= $db->quote($this_comment);				                  
+		$message .= "</p>
+						              </td>              
+						              <td width=\"10\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						            </tr>
+						          </table>
+						      </td>
+						  </tr> 
+						  <tr>
+						     <td width=\"600\" height=\"60\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						  </tr>      
+						  <tr>
+						     <td width=\"600\" height=\"50\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
+						        <table width=\"600\" height=\"50\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
+						            <tr>
+						              <td width=\"175\" height=\"50\" valign=\"middle\" bgcolor=\"#FFFFFF\">&nbsp;</td>              
+						              <td width=\"250\" height=\"50\" valign=\"middle\" align=\"center\" bgcolor=\"#858585\">
+						                  <p style=\"font-size:28px; color:#FFF; font-family:Helvetica, sans-serif;\"><a href=\"http://sp.library.miami.edu/control/talkback\" target=\"_blank\" style=\"color: #FFF; text-decoration:none;\"><span style=\"color: #FFF; text-decoration:none;\">" . _("Reply Now") . "</span></a></p>
+						              </td>              
+						              <td width=\"175\" height=\"50\" valign=\"middle\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						            </tr>
+						          </table>
+						      </td>
+						  </tr>
+						  <tr>
+						     <td width=\"600\"  height=\"30\" valign=\"bottom\" align=\"center\" bgcolor=\"#FFFFFF\">
+						     	<p style=\"font-size:14px; color:#858585; font-family:Helvetica, sans-serif;\">" . _("You will be required to log in") . "</p>
+						     </td>
+						  </tr>      
+						  <tr>
+						     <td width=\"600\"  height=\"100\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>
+						  </tr>       
+						  <tr>
+						     <td width=\"600\" height=\"70\" valign=\"middle\" align=\"center\" bgcolor=\"#FFFFFF\">
+						        <img src=\"http://sp.library.miami.edu/assets/images/email/subjectsplus-footer.jpg\" width=\"276\" height=\"40\" border=\"0\">
+						      </td>
+						  </tr>
+						</table>            
+						</td>
+						</tr>
+						</table>
+						</body>
+						</html>";
 
     // begin assembling actual message
 

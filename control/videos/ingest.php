@@ -243,7 +243,7 @@ include("../includes/footer.php");
 <?php
 
 function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
-
+	libxml_use_internal_errors(true);	
   switch ($source) {
     case "Vimeo":
       // API endpoint
@@ -262,10 +262,15 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
       $base = "entry";
       break;
   }
-
+  
   $videos = simplexml_load_string(curl_get($vid_data));
 
-
+  if ($videos == NULL) {
+  	echo _("Error loading the video feed. It's possible there is no channel by that name.");
+  	exit;
+  }
+  	
+  
 // Load the user info and clips
 //$user = simplexml_load_string(curl_get($api_endpoint . '/info.xml'));
   /*
@@ -299,15 +304,33 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
         $this_vid_duration = $video->duration;
         break;
       case "YouTube":
-      	$this_vid_id = $video->id;
-      	$this_vid_url = $video->url;
-      	$this_vid_thumbnail_small = $video->thumbnail_small;
-      	$this_vid_thumbnail_medium = $video->thumbnail_medium;
-      	$this_vid_title = $video->title;
-      	$this_vid_description = $video->description;
-      	$this_vid_owner = $video->user_name;
-      	$this_vid_date = $video->upload_date;
-      	$this_vid_duration = $video->duration;
+        // code bits from http://www.ibm.com/developerworks/xml/library/x-youtubeapi/
+        // get nodes in media: namespace for media information
+    	
+   	
+        $media = $video->children('http://search.yahoo.com/mrss/');
+        $this_vid_title = $video->title;
+        $this_vid_description = $media->group->description;
+        $this_vid_owner = $video->author->name;
+        $this_vid_full_id = $video->id;
+        $this_vid_date = $video->published;
+        $boom = explode(":", $this_vid_full_id);
+        $this_vid_id = $boom[2]; // hopefully this won't change!
+        // get url
+        $attrs = $media->group->content->attributes();
+ 
+        $this_vid_url = $attrs['url'];
+        
+        
+        // get video thumbnail
+        $attrs = $media->group->thumbnail->attributes();     
+       // print_r($media->group->thumbnail->attributes());
+        
+        $this_vid_thumbnail_small = $attrs['url'];
+        $attrs2 = $media->group->thumbnail[0]->attributes();
+        $this_vid_thumbnail_medium = $attrs['url'];
+        
+        $this_vid_duration = "";
         break;
     }
   
