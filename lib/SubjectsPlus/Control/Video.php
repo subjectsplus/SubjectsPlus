@@ -109,16 +109,21 @@ class Video {
     $vid_title_line = _("Edit Video Info");
 
     echo "
-<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\">
+<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
 <input type=\"hidden\" name=\"video_id\" value=\"" . $this->_video_id . "\" />
-<div style=\"float: left; margin-right: 20px;\">
-      <div class=\"box\">
-<h2 class=\"bw_head\">$vid_title_line</h2>
+<div class=\"pure-g\">
+  <div class=\"pure-u-2-3\">
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">$vid_title_line</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
 
-<span class=\"record_label\">" . _("title") . "</span><br />
+<label for=\"title\">" . _("Title") . "</label>
 <textarea name=\"title\" rows=\"2\" cols=\"50\">" . stripslashes($this->_title) . "</textarea>
-<br /><br />
-<span class=\"record_label\">" . _("description") . "</span><br />";
+
+<label for=\"description\">" . _("Description") . "</label>";
 
     if ($wysiwyg_desc == 1) {
 		include($CKPath);
@@ -140,17 +145,16 @@ class Video {
         $guideMe = new Dropdown("source", $video_storage_types, $this->_source, "50");
         $guide_string = $guideMe->display();
 
-    echo "<br /><br />
-<span class=\"record_label\">" . _("video file storage location") . "</span><br />
+    echo "
+    <label for=\"source\">" . _("Video file storage location") . "</label>
 $guide_string
-  <br /><br />
-<span class=\"record_label\">" . _("foreign ID") . "</span><br />
+
+<label for=\"foreign_id\">" . _("Foreign ID") . "</label>
 <input name=\"foreign_id\" value=\"" . stripslashes($this->_foreign_id) . "\" size=\"15\" />
-  <br />
-  <span class=\"smaller\">* " . ("Enter the embed code id for youtube or vimeo") . "</span><br /><br />
-  <span class=\"record_label\">" . _("duration in seconds") . "</span><br />
+  <span class=\"smaller\">* " . ("Enter the embed code id for youtube or vimeo") . "</span><br />
+<label for=\"duration\">" . _("Duration in seconds") . "</label>
 <input name=\"duration\" value=\"" . stripslashes($this->_duration) . "\" size=\"5\" />
-  <br /><br />";
+<br />";
 
 /////////////////////
 // Tags
@@ -183,7 +187,7 @@ $guide_string
 // Is Live
 ////////////////////
 
-    $is_live = "<span class=\"record_label\">" . _("Live?") . "</span><br />
+    $is_live = "<label for=\"display\">" . _("Live?") . "</label>
 <input name=\"display\" type=\"radio\" value=\"1\"";
     if ($this->_display == 1) {
       $is_live .= " checked=\"checked\"";
@@ -213,37 +217,44 @@ $guide_string
     echo "
 
 </div>
-      <div class=\"box no_overflow\">
-<h2 class=\"bw_head\">" . _("Thumbnail (Medium)") . "</h2>
+</div>
+</div>
+<!-- right hand column -->";
 
-$thumbnail
-</div>
-</div>
-<!-- right hand column -->
-<div style=\"float: left;min-width: 50px;\">
-	<div id=\"record_buttons\" class=\"box\">
-		<input type=\"submit\" name=\"submit_record\" class=\"button save_button\" value=\"" . _("Save Now") . "\">";
+$last_mod = _("Last modified: ") . lastModded("video", $this->_video_id);
+$title_save_box = "<div id=\"last_edited\">$last_mod</div>";
+print "<div class=\"pure-u-1-3\">
+    <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\">$title_save_box</div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
+    <input type=\"submit\" name=\"submit_record\" class=\"button pure-button pure-button-primary\" value=\"" . _("Save Now") . "\" />";
 
     // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
     if ($this->_video_id != "") {
       if ($_SESSION["admin"] == "1" || $_SESSION["eresource_mgr"] == "1") {
-        echo "<input type=\"submit\" name=\"delete_record\" class=\"delete_button\" value=\"" . _("Delete Forever!") . "\">";
+        echo "<input type=\"submit\" name=\"delete_record\" class=\"button pure-button delete_button pure-button-warning\" value=\"" . _("Delete Forever!") . "\">";
       }
-      // get edit history
-      $last_mod = _("Last modified: ") . lastModded("video", $this->_video_id);
-      echo "<div id=\"last_edited\">$last_mod</div>
-";
     }
 
-    echo "</div>
-            <div class=\"box\">
-            <span class=\"record_label\">" . _("create date") . "</span><br />
-            <input type=\"text\" name=\"date\" value=\"" . $this->_date . "\" /> <br />
+    echo "</div></div>
+        <div class=\"pluslet\">
+      <div class=\"titlebar\">
+        <div class=\"titlebar_text\"></div>
+        <div class=\"titlebar_options\"></div>
+      </div>
+      <div class=\"pluslet_body\">
+            <label for=\"date\">" . _("Create Date") . "</label>
+            <input type=\"text\" name=\"date\" value=\"" . $this->_date . "\" />
             <span class=\"smaller\">" . ("YYYY-MM-DD") . "</span>
             <br /><br />
             $is_live
-            </div>
+            </div></div>
             </form>";
+
+    makePluslet(_("Thumbnail"), $thumbnail, "no_overflow");
   }
 
   public function deleteRecord() {
