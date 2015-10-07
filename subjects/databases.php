@@ -115,6 +115,44 @@ foreach ($rnew as $myrow) {
 }
 $newlist .= "</ul>\n";
 
+// Featured Databases //
+
+  $featured_list = "";
+  $featured = FALSE;
+  
+// requires featured in ctags field in control/includes/config.php
+$connection = $db->getConnection();
+$featured_statement = $connection->prepare("select distinct title, location, access_restrictions, title.title_id as this_record
+        FROM title, location, location_title
+        WHERE ctags LIKE '%featured%'
+        AND title.title_id = location_title.title_id
+        AND location.location_id = location_title.location_id
+        ORDER BY title");
+$featured_statement->execute();
+
+$featured_list = "";
+
+if ($rfeatured = $featured_statement->fetchAll()) {
+  $featured_list = "<ul>\n";
+  foreach ($rfeatured as $myrow) {
+
+    // add proxy string if necessary
+    if ($myrow[2] != 1) {
+      $db_url = $proxyURL;
+    } else {
+      $db_url = "";
+    }
+
+    $featured_list .= "<li><a href=\"" . $db_url . $myrow[1] . "\">$myrow[0]</a></li>\n";
+
+  }
+
+  $featured_list .= "</ul>\n";
+  $featured = TRUE;
+
+} 
+
+
 // Intro text
 $intro = "";
 
@@ -194,6 +232,18 @@ if (isset ($v2styles) && $v2styles == 1) {
     </div>
   </div>
   <!-- end pluslet -->
+
+  <?php if ($featured) { ?>
+  <!-- start pluslet -->
+  <div class="pluslet">
+    <div class="titlebar">
+      <div class="titlebar_text"><?php print _("Featured Databases"); ?></div>
+    </div>
+    <div class="pluslet_body"> <?php print $featured_list; ?> </div>
+  </div>
+  <!-- end pluslet -->
+  <?php } ?>  
+
   <!-- start pluslet -->
   <div class="pluslet">
     <div class="titlebar">
