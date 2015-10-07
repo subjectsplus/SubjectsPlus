@@ -180,6 +180,13 @@ class Pluslet_1 extends Pluslet {
 
         $this->_body .= $results;
 
+        if ($view =="admin") {
+            
+            $this->_body = "<p><i class=\"fa fa-list\"></i> <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\">" . _("Organize Resources") . "</a></p>";
+            $this->_body .= $results;
+        }
+
+        
 
         parent::assemblePluslet();
 
@@ -239,7 +246,7 @@ class Pluslet_1 extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text worldcat-text\">" . _("All Items by Source") . "</span>";
+        $icon="<span class=\"icon-text worldcat-text\">" . _("All Items / Source") . "</span>";
         return $icon;
     }
 

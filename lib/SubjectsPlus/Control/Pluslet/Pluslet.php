@@ -109,7 +109,7 @@ class Pluslet {
                 if ($this->_editable == TRUE) {
                     // Deal with All Items by Source type (#1 in db)
                     if ($this->_pluslet_id == 1) {
-                        $this->_icons .= "<a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\"><i class=\"fa fa-cog\" title=\"" . _("Edit & Box Settings") . "\" /></i></a>";
+                        $this->_icons .= "<a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"$delete_text\" /></i></a>";
                     } else {
                         $this->_icons .= "<a id=\"edit-$this->_pluslet_id-$this->_type\"><i class=\"fa fa-cog\" title=\"" . _("Edit & Box Settings") . "\" /></i></a>";
                     }
