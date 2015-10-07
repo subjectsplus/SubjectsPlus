@@ -1,6 +1,6 @@
 <?php
 
-$page_title = _("Search Results");
+$page_title = "Search Results";
 
 include("includes/header.php");
 use SubjectsPlus\Control\Search;
