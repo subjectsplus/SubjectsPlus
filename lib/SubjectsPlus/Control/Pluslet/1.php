@@ -182,7 +182,7 @@ class Pluslet_1 extends Pluslet {
 
         if ($view =="admin") {
             
-            $this->_body = "<p><i class=\"fa fa-list\"></i> <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\">" . _("Organize Resources") . "</a></p>";
+            $this->_body = "<p class=\"admin-prompt\"><i class=\"fa fa-list\"></i> <a class=\"showmedium\" href=\"manage_items.php?subject_id=$this->_subject_id&amp;wintype=pop\">" . _("Organize Resources") . "</a></p>";
             $this->_body .= $results;
         }
 
