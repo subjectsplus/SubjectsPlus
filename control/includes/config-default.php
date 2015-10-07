@@ -322,4 +322,8 @@ $api_key = "a5h&vv5$#45";
 
 define("PATH_TO_SP", $BaseURL);
 
+// Do you want to point to some other guide as the splash page?
+// If yes, enter the short form
+$guide_index_page = "";
+
 ?>

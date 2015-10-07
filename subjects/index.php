@@ -15,23 +15,30 @@ include("../control/includes/autoloader.php");
 
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
 if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index.php"); exit;}
-   
-$use_jquery = array("ui");
 
-$page_title = $resource_name;
-$description = "The best stuff for your research.  No kidding.";
-$keywords = "research, databases, subjects, search, find";
-$noheadersearch = TRUE;
-
-$db = new Querier;
-$connection = $db->getConnection();
-    
 // let's use our Pretty URLs if mod_rewrite = TRUE or 1
 if ($mod_rewrite == 1) {
    $guide_path = "";
 } else {
    $guide_path = "guide.php?subject=";
 }
+
+// Now, check if they want to use an SP guide as the splash page
+if (isset($guide_index_page) && $guide_index_page != "") { 
+  header("Location:" . $guide_path . $guide_index_page); 
+}
+
+$use_jquery = array("ui");
+
+$page_title = $resource_name;
+$description = _("The best stuff for your research.  No kidding.");
+$keywords = _("research, databases, subjects, search, find");
+$noheadersearch = TRUE;
+
+$db = new Querier;
+$connection = $db->getConnection();
+    
+
 
 if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
 

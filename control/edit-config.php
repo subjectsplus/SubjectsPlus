@@ -87,6 +87,8 @@ if(!is_writable($lstrConfigFilePath))
 
 							"subjects_theme" => array( _( "Use a theme" ), _("Use a child theme to override the default theme.  Enter the directory name that you've created under subjects/themes/"), "string", "right", "small", "" , "" ), 
 
+							"guide_index_page" => array( _( "Use a Guide as your index page" ), _("If you want one of your guides to be the splash page at /subjects/ , enter the short form"), "string", "right", "medium", "" , "" ), 
+
 							"mod_rewrite" => array( _( "Use URL rewrites" ), _( "Make links prettier." ), "boolean", "right", "small", "" , "" ),
 
 							"BaseURL" => array( _( "Base URL of your SubjectsPlus Installation" ), _( "e.g. 'http://www.yoursite.edu/library/sp/.' Make sure to include the trailing slash! <strong>If changed, you will need to log back in.</strong>" ), "string", "left", "large", "" ,"" ),
