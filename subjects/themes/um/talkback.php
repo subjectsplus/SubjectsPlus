@@ -199,7 +199,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 
 		/* here the subject and header are assembled */
 
-		$subject = _("New Comment via Talkback");
+		$subject = _("New Comment via SubjectsPlus");
 		$header = "Return-Path: $sent_from\n";
 		$header .= "From:  $sent_from\n";
 		$header .= "Content-Type: text/html; charset=iso-8859-1;\n\n";
@@ -522,8 +522,10 @@ include("includes/header_um.php");
 			        <div class="talkback_form <?php print $tb_bonus_css; ?>">			          
 			          <p><strong><?php print _("Your comment:"); ?></strong><br />
 			          <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
-			          <strong><?php print _("Your name (optional):"); ?></strong><br />
+			          <strong><?php print _("Your email (optional):"); ?></strong><br />
 			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
+			          <br />
+			          <?php print _("(In case we need to contact you)"); ?>
 			          <br /><br />
 			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" />
 			          <br /><br />

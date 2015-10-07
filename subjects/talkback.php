@@ -181,7 +181,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 
 		/* here the subject and header are assembled */
 
-		$subject = _("New Comment via Talkback");
+		$subject = _("New Comment via SubjectsPlus");
 		$header = "Return-Path: $sent_from\n";
 		$header .= "From:  $sent_from\n";
 		$header .= "Content-Type: text/html; charset=iso-8859-1;\n\n";
