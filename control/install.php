@@ -136,7 +136,7 @@ if( isInstalled() )
 		        $db->exec("UPDATE staff SET staff.email=". $db->quote($administrator_email) . " WHERE staff.staff_id = 1");
 
 		        // create folder for this user (if it's not admin)
-						$user_folder = explode("@", $this->_email);
+						$user_folder = explode("@",$administrator_email);
 
 						if ($user_folder[0] != "admin") {
 	      			$path = "../assets/users/_" . $user_folder[0];	
