@@ -21,7 +21,7 @@ class Pluslet_NewDBs extends Pluslet {
   }
   protected function onEditOutput() {
     
-    $this->_body = "<div class=\"faq-alert\">" . _("This box will show the databased flagged as 'new.'") . "</div>";
+    $this->_body = "<div class=\"faq-alert\">" . _("This box will show the databases flagged as 'new.'") . "</div>";
   }
   public function outputNewDBs() {
   
