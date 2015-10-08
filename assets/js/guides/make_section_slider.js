@@ -51,10 +51,4 @@ function makeSectionSlider( lstrSelector )
 				   }
 			       });
 			   });
-
-    // Hide the first section's controls
-    
-   $('.sp_section_controls').first().hide();
-    
-
 }
