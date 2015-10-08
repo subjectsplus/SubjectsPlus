@@ -15,6 +15,7 @@ font-size: 2em;
 }
 </style>
 
+
 <div id="analytics_options_content" class="second-level-content"
 	style="display: none;">
 	<h3><?php print _("Analytics"); ?></h3>
@@ -31,17 +32,18 @@ font-size: 2em;
 	</div>
 
 	<script>             
-
+$(document).ready(function() {
 	    $('.tab-clicks').empty();
-	         
-		$.get("./helpers/stats_data.php?short_form=<?php echo scrubData($_COOKIE['our_shortform']); ?>", function(data) {
+	    var short_form = $('#shortform').data();
+	    console.log(short_form);
+		$.get("./helpers/stats_data.php?short_form=" + short_form.shortform, function(data) {
 
 			console.log(data);
 			console.log(data.total_views);
 		$(".total-views-count").html(data.total_views);
 
 
-		if (data.tab_clicks[key]) {
+		if (data.tab_clicks != "") {
 			$('.tab-click-header').show();
 						for (key in data.tab_clicks) {
 
@@ -54,4 +56,5 @@ font-size: 2em;
 		}
 
 		});
+});
 	</script>
