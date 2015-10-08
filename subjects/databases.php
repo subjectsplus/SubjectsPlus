@@ -111,7 +111,7 @@ foreach ($rnew as $myrow) {
     $db_url = $proxyURL;
   }
 
-  $newlist .= "<li><a href=\"$db_url$myrow[0]\">$myrow[0]</a></li>\n";
+  $newlist .= "<li><a href=\"$db_url$myrow[1]\">$myrow[0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
 

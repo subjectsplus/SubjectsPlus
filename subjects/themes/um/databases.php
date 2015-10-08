@@ -220,6 +220,7 @@ if ($rtrial = $statement->fetchAll()) {
 	$trials = FALSE;
 }
 
+/*
 // Featured Databases //
 // requires featured in ctags field in control/includes/config.php
 $connection = $db->getConnection();
@@ -255,6 +256,7 @@ if ($rfeatured = $featured_statement->fetchAll()) {
 	$featured_list = "";
 	$featured = FALSE;
 }
+*/
 
 // Legend //
 // <img src=\"$IconPath/lock_unlock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Unrestricted Resource\"> = Free Resource <br />\n
