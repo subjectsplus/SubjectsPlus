@@ -73,6 +73,10 @@ class Talkback {
         } else {
           $this->_question = $guideArray[0]["question"];
           $this->_q_from = $guideArray[0]["q_from"];
+
+            // Let's set an anonymous for empty asker
+            if ($this->_q_from == "") {$this->_q_from  = _("Anonymous");}
+
           $this->_date_submitted = $guideArray[0]["date_submitted"];
           $this->_answer = $guideArray[0]["answer"];
           $this->_date_entered = $guideArray[0]["date_entered"];

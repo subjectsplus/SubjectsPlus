@@ -130,12 +130,38 @@ if( isInstalled() )
 					if( $lobjInstaller->install( ) )
 					{
 		                              
-		                                $administrator_email = $_POST['administrator_email'];
+		        $administrator_email = $_POST['administrator_email'];
 
-		                                $db = new Querier; 
-		                                $db->exec("UPDATE staff SET staff.email=". $db->quote($administrator_email) . " WHERE staff.staff_id = 1");
+		        $db = new Querier; 
+		        $db->exec("UPDATE staff SET staff.email=". $db->quote($administrator_email) . " WHERE staff.staff_id = 1");
 
-		                                $lobjInstaller->updateToFour(); 
+		        // create folder for this user (if it's not admin)
+						$user_folder = explode("@",$administrator_email);
+
+						if ($user_folder[0] != "admin") {
+	      			$path = "../assets/users/_" . $user_folder[0];	
+
+	           	if(!@mkdir($path)) {
+		  					//  $mkdirErrorArray = error_get_last();
+		   					// throw new Exception('cant create directory ' .$mkdirErrorArray['message'], 1);
+
+		    				//print _("Couldn't create directory in /assets/users/. Please check this folder's permissions. ");
+		     				return;
+
+	    				}  else  {                                                                                                                    
+					      // And copy over the generic headshot image and headshot_large image
+					      $nufile = $path . "/headshot.jpg";
+					      $copier = copy("../assets/images/headshot.jpg", $nufile);
+					      $copier = copy("../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
+
+					      // message
+					      //print _("Thy Will Be Done.  Added.");
+	    				}  
+
+						}
+    			
+
+		        $lobjInstaller->updateToFour(); 
 		                                
 		                                
 						$lobjInstaller->displayInstallationCompletePage();

@@ -84,7 +84,7 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
       <ul>
       <?php
       foreach ($all_bgs as $value) {
-        print "<li><a id=\"css-$value\" href=\"\">" . ucfirst($value) . "</a></li>";
+        print "<li><a id=\"css-$value\" href=\"index.php\">" . ucfirst($value) . "</a></li>";
       }
       ?>
       </ul>
@@ -160,25 +160,22 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
     ?>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-     var headshot_location = "<?php print $user->getHeadshotLoc(); ?>";
+var headshot_location = "<?php print $user->getHeadshotLoc(); ?>";
 
-     $(document).ready(function(){
+  $(document).ready(function(){
 
+    $('a[id*=css-]').on('click', function(){
 
-       $('a[id*=css-]').on('click', function(){
+  	 var css_class = $(this).attr("id").split("-");
+  	 var new_css = "<?php print $AssetPath; ?>css/theme/" + css_class[1] + ".css";
 
-	 var css_class = $(this).attr("id").split("-");
-	 var new_css = "<?php print $AssetPath; ?>css/theme/" + css_class[1] + ".css";
-	 
-	 console.log(new_css);
+  	 $("#css_choice" ).attr("href", new_css);
+  	 $("#bg_feedback").load("includes/config_bits.php", {type: 'set_css', css_file: css_class[1]});
+  	 return false;
 
-	 $("#css_choice" ).attr("href", new_css);
-	 $("#bg_feedback").load("includes/config_bits.php", {type: 'set_css', css_file: css_class[1]});
-	 return false;
+    });
 
-       });
-
-     });
-    </script>
+  });
+</script>

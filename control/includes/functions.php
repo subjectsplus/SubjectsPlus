@@ -1635,14 +1635,20 @@ function listGuides($search = "", $type="all") {
     $colour2 = "evenrow";
 
     $db = new Querier;
-    $list_guides = "<table class=\"item_listing\" width=\"98%\">";
+    $list_guides = "<table class=\"footable foo3\" width=\"98%\" data-filter=#filter-guides>
+                    <thead>
+                      <tr class=\"staff-heading\">
+                        <th data-sort-ignore=\"false\">Name</th>
+                        <th data-hide=\"phone,mid\" data-sort-ignore=\"true\">Type</th>
+                      </tr>
+                    </thead>";
     foreach ($db->query($q) as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
         $guide_location = $guide_path . $myrow[0];
 
-        $list_guides .= "<tr class=\"zebra $row_colour type-$myrow[2]\" style=\"height: 1.5em;\">
+        $list_guides .= "<tr class=\"zebra type-$myrow[2]\" style=\"height: 1.5em;\">
      <td><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a> 
         <div class=\"list_bonus\"></div></td>
         <td class=\"subject\">{$myrow[2]}</td>

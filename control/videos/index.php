@@ -78,10 +78,20 @@ if ($vidArray) {
   $vid_list = "<p>" . _("No Videos yet.  Grab your camera.") . "</p>";
 }
 
+$ingest_body_text = "<a href=\"ingest.php\">" . _("FIND VIDEOS") . "</a>";
+$add_metadata_text = "<a href=\"video.php\">" . _("ENTER VIDEO") . "</a>";
+$about_videos_text = "<p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit Video Info") . "</p>
+    <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View Video on Public Site") . "</p>";
+
+
 
 print "<br />
-<div style=\"float: left;  width: 70%;\">
+
+<div class=\"pure-g\">
+  <div class=\"pure-u-2-3\">  
+
     <div class=\"pluslet no_overflow\" id=\"answered\">
+    <div class=\"titlebar\">" . _("Collected Videos") . "</div>
     <p class=\"pluslet_body\"><strong>$row_count1 " . _("Videos visible") . "</strong> ";
 if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
   print "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
@@ -90,30 +100,19 @@ print "</p><br />
 <div class=\"pluslet_body\">    
 $vid_list
 </div>
-    </div>
+</div>";
 
-</div>
+print "</div>"; // close pure-u-2-3
+print "<div class=\"pure-u-1-3\">";
 
-<div style=\"float: right; width: 28%;margin-left: 10px;\">
-        <div class=\"pluslet\">
-    <div class=\"titlebar\">" . _("Ingest Video Metadata") . "</div>
+makePluslet(_("Ingest Video Metadata"), $ingest_body_text, "no_overflow");
 
-    <p class=\"pluslet_body\"><a href=\"ingest.php\">" . _("FIND VIDEOS") . "</a></p>
-    </div>
-      <div class=\"pluslet\">
-    <div class=\"titlebar\">" . _("Add Metadata by Hand") . "</div>
-  
-    <p class=\"pluslet_body\"><a href=\"video.php\">" . _("ENTER VIDEO") . "</a></p>
-    </div>
-    <div class=\"pluslet\">
-    <div class=\"titlebar\">" . _("About Videos") . "</div>
-    <div class=\"pluslet_body\">
-    <p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit Video Info") . "</p>
-    <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View Video on Public Site") . "</p>
-</div>    
-</div>
-</div>
-";
+makePluslet(_("Add Metadata by Hand"), $add_metadata_text, "no_overflow");
+
+makePluslet(_("About Videos"), $about_videos_text, "no_overflow");
+
+print "</div>"; // close pure-u-1-3
+print "</div>"; // close pure-g
 
 
 include("../includes/footer.php");

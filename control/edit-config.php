@@ -70,7 +70,8 @@ if(!is_writable($lstrConfigFilePath))
 
 							"titlebar_styles" => array( _( "Titlebar Styles" ), _( "These are the styles that can be issued to a pluslet titlebars." ), "array", "right", "large", "", _("This allows titlebars to have custom styles with custom keys for subject guide creator to make.") ),
 
-							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array(_('1'), _('2'), _('3'), _('4'), _('5'), 'Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video', 'WorldCat', 'Catalog', 'Related', 'ArticlesPlus', 'SocialMedia', 'SubjectSpecialist','GoogleSearch','GoogleScholar','GoogleBooks' ), _("") ),
+
+							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array(_('1'), _('2'), _('3'), _('4'), _('5'), 'Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video', 'WorldCat', 'Catalog', 'Related', 'ArticlesPlus', 'SocialMedia', 'SubjectSpecialist','GoogleSearch','GoogleScholar','GoogleBooks', 'GuideSearch', 'NewDBs', 'NewGuides' ), _("") ),
 
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 							_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),
@@ -86,6 +87,8 @@ if(!is_writable($lstrConfigFilePath))
 							"guide_headers" => array( _( "Header Switcher" ), _("Have more than one header choice for a guide"), "array", "right", "large", "" , _("Enter a comma separated list of headers.  The header name you put here will correspond to a header file on the server.  E.g., 'chc' would point to subjects/includes/header_chc.php") ),
 
 							"subjects_theme" => array( _( "Use a theme" ), _("Use a child theme to override the default theme.  Enter the directory name that you've created under subjects/themes/"), "string", "right", "small", "" , "" ), 
+
+							"guide_index_page" => array( _( "Use a Guide as your index page" ), _("If you want one of your guides to be the splash page at /subjects/ , enter the short form"), "string", "right", "medium", "" , "" ), 
 
 							"mod_rewrite" => array( _( "Use URL rewrites" ), _( "Make links prettier." ), "boolean", "right", "small", "" , "" ),
 

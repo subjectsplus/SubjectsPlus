@@ -45,7 +45,7 @@ if (isset($_POST["search"])) {
 
 
 // set up our checkboxes for guide types
-$tickboxes = "<ul>";
+$tickboxes = "<ul class=\"guide-types\">";
 
 // We don't want our placeholder
 if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
@@ -159,7 +159,8 @@ include("includes/header_um.php");
 // End CHC hack
 
 
-  $our_results = "<div id=\"letterhead\">$tickboxes</div>  
+  $our_results = "<form class=\"pure-form\"><input type=\"text\" placeholder=\"Find Guides\" id=\"filter-guides\"></form>
+  <div id=\"letterhead\">$tickboxes</div>  
   $guide_results";
 
   //$layout = makePluslet("", $our_results, "","",FALSE);
@@ -181,18 +182,6 @@ include("includes/header_um.php");
     </div><!--end 3/4 main area-->
 
     <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
-
-          <!-- start tip -->
-          <div class="tip">
-            <h2><?php print _("Search Guides"); ?></h2>
-                  <?php
-                  $input_box = new CompleteMe("quick_search", "search_results.php", $proxyURL, "Quick Search", "guides", '');
-                  $input_box->displayBox();
-                  ?>
-          </div>
-          <!-- end tip -->
-          <div class="tipend"> </div>
-
           
           <!-- start tip -->
             <div class="tip">
@@ -216,6 +205,50 @@ include("includes/header_um.php");
 </div> <!--end pure-g-->
 </div> <!--end panel-container-->
 
+
+<!--Data Table-->
+<link type="text/css" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/footable.core.css">
+<script src="http://sp.library.miami.edu/subjects/themes/um/js/footable.js" type="text/javascript"></script>
+<script src="http://sp.library.miami.edu/subjects/themes/um/js/footable.sort.js" type="text/javascript"></script>
+<script src="http://sp.library.miami.edu/subjects/themes/um/js/footable.filter.js" type="text/javascript"></script>
+
+<script type="text/javascript">     
+
+    //set breakpoints 
+    $('.footable').footable({
+        breakpoints: {
+            mid: 600,
+            phone:480
+        }
+    });
+
+ //Clear filter A-Z
+    $('.clear-filter').click(function (e) {
+      e.preventDefault();
+      $('.filter-status').val('');
+      $('.footable').trigger('footable_clear_filter');
+    }); 
+
+
+$('.foo3').trigger('footable_expand_first_row').addClass("evenrow"); 
+
+    $('.foo3').bind('footable_breakpoint', function() {
+
+          $("tr").on("click", function () {
+          if ($(this).hasClass("evenrow")) {
+      
+              $(this).next(".footable-row-detail").addClass("evenrow");
+      
+          } else if ($(this).hasClass("oddrow")) {
+      
+              $(this).next(".footable-row-detail").addClass("oddrow");
+      
+          }
+      });   
+
+  }); 
+
+</script>
 
 <?php
 ///////////////////////////
@@ -253,7 +286,24 @@ include("includes/footer_um.php");
             $(".zebra").removeClass("evenrow");
             $(".zebra").removeClass("oddrow");
         }
-       
+
+
+        // change color when checkbox is checked
+        function checkedGuideTypeColor() {
+
+        if ($("#show-Subject").is(':checked')) {
+            $(this).parent().addClass("checked-type");
+        }
+        else {
+           $(this).parent().addClass("unchecked-type");
+        }
+
+        }
+
+        checkedGuideTypeColor();
+
+        
+
 
     });
 </script>

@@ -204,6 +204,8 @@ if ($rtrial = $statement->fetchAll()) {
 		// add proxy string if necessary
 		if ($myrow[2] != 1) {
 			$db_url = $proxyURL;
+		} else {
+			$db_url = "";
 		}
 
 		$trial_list .= "<li><a href=\"" . $db_url . $myrow[1] . "\">$myrow[0]</a></li>\n";
@@ -218,6 +220,43 @@ if ($rtrial = $statement->fetchAll()) {
 	$trials = FALSE;
 }
 
+/*
+// Featured Databases //
+// requires featured in ctags field in control/includes/config.php
+$connection = $db->getConnection();
+$featured_statement = $connection->prepare("select distinct title, location, access_restrictions, title.title_id as this_record
+        FROM title, location, location_title
+        WHERE ctags LIKE '%featured%'
+        AND title.title_id = location_title.title_id
+        AND location.location_id = location_title.location_id
+        ORDER BY title");
+$featured_statement->execute();
+
+$featured_list = "";
+
+if ($rfeatured = $featured_statement->fetchAll()) {
+	$featured_list = "<ul>\n";
+	foreach ($rfeatured as $myrow) {
+
+		// add proxy string if necessary
+		if ($myrow[2] != 1) {
+			$db_url = $proxyURL;
+		} else {
+			$db_url = "";
+		}
+
+		$featured_list .= "<li><a href=\"" . $db_url . $myrow[1] . "\">$myrow[0]</a></li>\n";
+
+	}
+
+	$featured_list .= "</ul>\n";
+	$featured = TRUE;
+
+} else {
+	$featured_list = "";
+	$featured = FALSE;
+}
+*/
 
 // Legend //
 // <img src=\"$IconPath/lock_unlock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Unrestricted Resource\"> = Free Resource <br />\n
@@ -258,6 +297,15 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 			</div>
 			<div class="tipend"> </div>
 			<!-- end tip -->
+
+			<?php if ($featured) { ?>
+				<div class="tip">
+					<h2><?php print _("Featured Databases"); ?></h2>
+					<?php print $featured_list; ?>
+					<br />
+				</div>
+				<div class="tipend"></div>
+			<?php } ?>
 
 			<?php if ($newlist) { ?>
 				<div class="tip">
