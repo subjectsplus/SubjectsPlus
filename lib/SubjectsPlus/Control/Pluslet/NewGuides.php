@@ -23,7 +23,7 @@ class Pluslet_NewGuides extends Pluslet {
     
     $this->_body = "<div class=\"faq-alert\">" . _("This box will show the most recently created guides") . "</div>";
   }
-  public function outputNewDBs() {
+  public function outputNewGuides() {
 
   global $mod_rewrite;
   global $PublicPath;
@@ -52,13 +52,13 @@ class Pluslet_NewGuides extends Pluslet {
   }
 
   protected function onViewOutput() {
-    $output = $this->outputNewDBs ();
+    $output = $this->outputNewGuides ();
     $this->_body = "<div>$output</div>";
   }
 
   static function getMenuIcon()
     {
-      $icon="<i class=\"fa fa-files-o\" title=\""  . _("New Guides") . "\" ></i><span class=\"icon-text\">" . _("New Guides") . "</span>";
+      $icon="<i class=\"fa fa-plus\" title=\""  . _("New Guides") . "\" ></i><span class=\"icon-text\">" . _("New Guides") . "</span>";
         return $icon;
     }
 

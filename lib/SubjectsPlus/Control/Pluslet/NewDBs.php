@@ -55,7 +55,7 @@ class Pluslet_NewDBs extends Pluslet {
 
   static function getMenuIcon()
     {
-      $icon="<i class=\"fa fa-files-o\" title=\""  . _("New DBs") . "\" ></i><span class=\"icon-text\">" . _("New DBs") . "</span>";
+      $icon="<i class=\"fa fa-database\" title=\""  . _("New DBs") . "\" ></i><span class=\"icon-text\">" . _("New DBs") . "</span>";
         return $icon;
     }
 
