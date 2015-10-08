@@ -1022,74 +1022,107 @@ function selectedPanelDisplay(){
 
 
 
+  function hideTabsFirstSectionSlider() {
+
+    var current_tab = $('#tabs').tabs('option', 'selected');
+    var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+    $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
+
+    $('#tabs').on('click', function() {
+      // Hide the first section's controls
+      var current_tab = $('#tabs').tabs('option', 'selected');
+      var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+      $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
+    });
+
+  }
+
+  hideTabsFirstSectionSlider();
 
   //Change layout click events
-$( "#col-single" ).click(function() {      
-      changeLayout(0, 14);
-      selectedLayout();
-      $(this).addClass("active-layout-icon");
+$( "#col-single" ).click(function() {
+
+    changeLayout(0, 14);
+    checkDataLayout();
+    moveColumnContent(0, 1);
+    moveColumnContent(2, 1);
+    selectedLayout();
+    $(this).addClass("active-layout-icon");
+});
+
+$( "#col-double" ).click(function() {
+
+    changeLayout(6, 12);
+    checkDataLayout();
+    moveColumnContent(2, 1);
+    selectedLayout();
+    $(this).addClass("active-layout-icon");
+});
+
+$( "#col-48" ).click(function() {
+    changeLayout(4, 24);
+    checkDataLayout();
+    moveColumnContent(2, 1);
+    selectedLayout();
+    $(this).addClass("active-layout-icon");
   });
 
-$( "#col-double" ).click(function() {      
-      changeLayout(6, 12);
-      selectedLayout();
-      $(this).addClass("active-layout-icon");
+$( "#col-84" ).click(function() {
+    changeLayout(8, 12);
+    checkDataLayout();
+    moveColumnContent(2, 1);
+    selectedLayout();
+    $(this).addClass("active-layout-icon");
   });
 
-$( "#col-48" ).click(function() {      
-      changeLayout(4, 24);
-      selectedLayout();
-      $(this).addClass("active-layout-icon");
+$( "#col-triple" ).click(function() {
+    changeLayout(4, 8);
+    checkDataLayout();
+    selectedLayout();
+    $(this).addClass("active-layout-icon");
   });
 
-$( "#col-84" ).click(function() {      
-      changeLayout(8, 12);
-      selectedLayout();
-      $(this).addClass("active-layout-icon");
-  });
-
-$( "#col-triple" ).click(function() {      
-      changeLayout(4, 8);
-      selectedLayout();
-      $(this).addClass("active-layout-icon");
-  });
-
-$( "#col-363" ).click(function() {      
-      changeLayout(3, 9);
-      selectedLayout();
-      $(this).addClass("active-layout-icon");
+$( "#col-363" ).click(function() {
+    changeLayout(3, 9);
+    checkDataLayout();
+    selectedLayout();
+    $(this).addClass("active-layout-icon");
   });
 
 
 
 // Highlight ONLY Selected/Active Layout 
-function selectedLayout(){
-      $('.layout-icon').not(this).each(function(){
-         $(this).removeClass("active-layout-icon");        
-       });
-   }
+function selectedLayout() {
+  $('.layout-icon').not(this).each(function(){
+    $(this).removeClass("active-layout-icon");
+  });
+}
+
+
 
 
 //Check section data-layout on pageLoad and hide empty containers
 // Highlight "current/active" layout
 function checkDataLayout() {
 
-   var dataLayoutConfig =  $("div.sp_section").attr('data-layout');
+  var current_tab = $('#tabs').tabs('option', 'selected');
+  var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+  var dataLayoutConfig =  $("#" + slider_section_id).attr('data-layout');
 
   if (dataLayoutConfig === "0-12-0") {
-    $(".sp_section #container-2").hide();
+    $("#" + slider_section_id + " #container-2").hide();
     $( "#col-single" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "6-6-0") {
-    $(".sp_section #container-2").hide();
+    $("#" + slider_section_id + " #container-2").hide();
     $( "#col-double" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "4-8-0") {
-    $(".sp_section #container-2").hide();
+    $("#" + slider_section_id + " #container-2").hide();
     $( "#col-48" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "8-4-0") {
-    $(".sp_section #container-2").hide();
+    $("#" + slider_section_id + " #container-2").hide();
     $( "#col-84" ).addClass("active-layout-icon");
   }
   else if (dataLayoutConfig === "4-4-4") {
@@ -1104,7 +1137,18 @@ function checkDataLayout() {
  //Load checkDataLayout
 checkDataLayout();
 
-  
+
+
+  function moveColumnContent(source_column, target_column) {
+
+    var current_tab = $('#tabs').tabs('option', 'selected');
+    var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+    var content = $("#" + slider_section_id + " #container-" + source_column + " .portal-column").children();
+
+    $("#" + slider_section_id + "  #container-" + target_column + " .portal-column").append(content);
+  }
+
+
 
 //Fix for FOUC
 function fixFlashFOUC() {
