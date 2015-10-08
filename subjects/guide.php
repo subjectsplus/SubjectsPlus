@@ -305,13 +305,11 @@ console.log(tabs);
 
 <script>
 
-	   var startURL = '/guide.php?subject_id=';
-	   var sp_path = document.URL.split('/')[3];
-
+	
 	   jQuery('#sp_search').autocomplete({
 
 	     minLength	: 3,
-	     source		: '//' + document.domain + "/" + sp_path + "/subjects/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
+	     source		: "<?php echo getSubjectsURL(); ?>" + "/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
 	     focus: function(event, ui) {
 
 	       event.preventDefault();
