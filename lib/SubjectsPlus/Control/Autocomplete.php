@@ -194,8 +194,6 @@ AND title.title LIKE :search_term");
 
     }
 
-    //print_r ($q);
-    
     $statement->bindParam(":search_term", $search_param);
     	 
 
