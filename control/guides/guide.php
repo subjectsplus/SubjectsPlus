@@ -1135,7 +1135,6 @@ fixFlashFOUC();
 });
 </script>
 
-// Get the shortform
 <?php 
 $postvar_subject_id = scrubData($_GET['subject_id']);
 $db = new Querier;
