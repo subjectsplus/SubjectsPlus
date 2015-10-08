@@ -37,6 +37,9 @@ setcookie("our_guide", "", 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_guide_id", "", 0, '/', $_SERVER['HTTP_HOST']);
 setcookie("our_shortform", "", 0, '/', $_SERVER['HTTP_HOST']);
 
+
+
+
 $subcat = "guides";
 $page_title = "Modify Guide";
 $tertiary_nav = "yes";
@@ -47,8 +50,10 @@ include("../includes/header.php");
 
 
 $postvar_subject_id = scrubData($_GET['subject_id']);
-
 $this_id = $_GET["subject_id"];
+
+
+
 $clone = 0;
 
 // See if they have permission to edit this guide
@@ -117,7 +122,6 @@ if (isset($this_id)) {
 } else {
   print "no guide";
 }
-
 
 
 
@@ -1130,6 +1134,15 @@ fixFlashFOUC();
 
 });
 </script>
+
+// Get the shortform
+<?php 
+$postvar_subject_id = scrubData($_GET['subject_id']);
+$db = new Querier;
+$sform = $db->query("SELECT shortform FROM subject WHERE subject_id = '$postvar_subject_id'");
+$short_form = $sform[0];
+echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
+?>
 
 </div> <!--end .guide-parent-wrap-->
 
