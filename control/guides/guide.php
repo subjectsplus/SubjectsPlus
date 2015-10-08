@@ -1136,6 +1136,7 @@ fixFlashFOUC();
 </script>
 
 <?php 
+// Get the shortform
 $postvar_subject_id = scrubData($_GET['subject_id']);
 $db = new Querier;
 $sform = $db->query("SELECT shortform FROM subject WHERE subject_id = '$postvar_subject_id'");
