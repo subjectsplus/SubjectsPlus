@@ -548,6 +548,7 @@ html,body { height:100%; }
    margin: 0 0 20px 0;
   overflow: auto; max-height:385px;
   padding:10px 0;
+  width: 100% !important;
 }
 
 #box_options {
@@ -722,6 +723,7 @@ a.pure-button-secondary:hover {
    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
    margin: 0 0 20px 0;
    overflow: auto; max-height:275px;
+   width: 100% !important;
 }
 
 .fav-boxes-list, .fav-templates-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
@@ -740,7 +742,7 @@ a.pure-button-secondary:hover {
   padding: 0 8px 0 0;
 }
 
-.fav-box-item, .fav-template-item { width: 175px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+.fav-box-item, .fav-template-item { width: 165px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
 .clone-favorite.fav-box-item {
   font-size:12px !important;
@@ -1694,6 +1696,45 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 /* Pluslet ID 1 */
 .admin-prompt {margin: 0 5px 10px 0; text-align: right; font-size: 0.9em;}
+
+
+
+/* JS Scrollbar styles */
+.track {
+    width: 8px;
+    background-clip: padding-box;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 16px;
+}
+
+.track.dragging, .track:hover { }
+    
+.track:active {    
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                        inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.handle {
+    width: 8px;
+    background-clip: padding-box;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 16px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.handle:hover {
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.dragging .handle, .handle:active { }
+    
 
 
 
