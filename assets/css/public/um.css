@@ -1367,8 +1367,9 @@ h4.toc-heading {margin: 6px 0; font-weight: bold;}
   padding: 0.5em 0 0.2em 10px; 
   background: url("../../images/icons/powered_by_google_on_white.png") 98% bottom no-repeat;
   display: block;
-  height: 15px;
-  background-size: 40% auto;
+  height: 15px;  
+  max-width: 110px;
+  background-size:contain;
 }
 
 
