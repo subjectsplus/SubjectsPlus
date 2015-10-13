@@ -108,6 +108,19 @@ a:hover {
 
 p.tight { margin: .2em 0;}
 
+.star-class {
+  margin: .2em 0 .2em 0;
+}
+
+.star-class:before {
+  content:"\f005";
+  font-family: FontAwesome;
+  font-size: 0.9em;
+  padding: 0 4px 0 0;
+}
+
+.index_staff_photo {margin-bottom: 10px;}
+
 .wrapper {
   margin: 0 auto;
   text-align: left;
@@ -639,7 +652,7 @@ html,body { height:100%; }
   background-image: url(images/icons/gsearch-white.png);  
 }
 
-.googlescholar-text {margin-top: 30px;}
+.googlescholar-text, .guidesearch-text {margin-top: 30px;}
 
 #pluslet-id-1{
   background-image: url(images/icons/all-items.svg);
@@ -651,6 +664,18 @@ html,body { height:100%; }
 
 #pluslet-id-1:hover {
   background-image: url(images/icons/all-items-white.svg);  
+}
+
+#pluslet-id-GuideSearch {
+  background-image: url(images/icons/guide-search.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-GuideSearch:hover {
+  background-image: url(images/icons/guide-search-white.svg);  
 }
 
 
@@ -3211,6 +3236,52 @@ li.hidden_tab.ui-state-default
 
 
 
+
+/* For Imported Guides - JL */
+
+
+.book {
+  display: inline-block;
+    line-height:1.3em;
+      font-size:.8em;
+}
+
+.book-cover-art {
+    float:left;
+    width: 30%;
+    margin-right: 3%;
+  clear:both;
+}
+
+.book-title {
+
+}
+.book-author {
+  font-style:italic;
+  
+
+}
+.book-call-number {
+
+  
+}
+.book-description {
+
+}
+
+.link-description {
+  
+  line-height:1.5em;
+  margin-top:1em;
+}
+
+.links {
+    margin-bottom:5%;
+}
+
+
+
+
 /*///////////////////////////////////////////
    // Responsive - PV
    ////////////////////////////////////////////*/
@@ -3245,50 +3316,10 @@ li.hidden_tab.ui-state-default
   padding: 0.5em 0.17em;
 }
 
+.star-class { margin: .2em 0 .2em 8px;}
+.star-class:before { padding: 0 4px 0 8px;}
 
 
-}
-
-/* For Imported Guides */
-
-
-.book {
-	display: inline-block;
-    line-height:1.3em;
-    	font-size:.8em;
-}
-
-.book-cover-art {
-    float:left;
-    width: 30%;
-    margin-right: 3%;
-	clear:both;
-}
-
-.book-title {
-
-}
-.book-author {
-	font-style:italic;
-	
-
-}
-.book-call-number {
-
-	
-}
-.book-description {
-
-}
-
-.link-description {
-	
-	line-height:1.5em;
-	margin-top:1em;
-}
-
-.links {
-    margin-bottom:5%;
 }
 
 
@@ -3304,7 +3335,5 @@ li.hidden_tab.ui-state-default
   padding: 0.5em 0.5em;
 }
 
-
-
-}
+} /* end last responsive block */
 

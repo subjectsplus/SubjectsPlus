@@ -21,7 +21,7 @@ class Pluslet_GuideSearch extends Pluslet {
   protected function onEditOutput()
   {
   	
-    $this->_body = "<p>" . _("Click 'Save' to view your search box.") . "</p>";
+    $this->_body = "<p class=\"faq-alert\">" . _("Click 'Save' to view your search box.") . "</p>";
    
   }
 
@@ -35,7 +35,7 @@ class Pluslet_GuideSearch extends Pluslet {
   	//$input_box = new CompleteMe("quick_search", "search.php", '', "Quick Search", "guides", '');
     $this->_body = '<div class="autoC">
   			<form action="search.php" method="post" class="pure-form sp_admin_search">
- 			<input type="text" size="" name="searchterm" autocomplete="off" placeholder="Quick Search" class="ui-autocomplete-input quick_search"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> <input type="submit" value="Go" class="pure-button pure-button-topsearch" name="submitsearch" alt="Search">
+ 			<input type="text" size="" name="searchterm" autocomplete="off" placeholder="Find Guides" class="ui-autocomplete-input quick_search"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> <input type="submit" value="Search" class="pure-button pure-button-pluslet" name="submitsearch" alt="Search">
   			</form>
 		</div>';
     
