@@ -8,11 +8,12 @@
  *   @date august, 2010
  *   @todo
  */
+
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\StaffDisplay;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
-    
+
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
