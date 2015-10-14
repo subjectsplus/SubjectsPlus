@@ -1373,6 +1373,11 @@ h4.toc-heading {margin: 6px 0; font-weight: bold;}
 }
 
 
+/* Guide Select Pluslet  - Front-end */
+h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
+.pluslet_container .pure-form select {width:200px !important;}
+
+
 
 
 /* Revised Index - Front-end */

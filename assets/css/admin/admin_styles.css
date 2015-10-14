@@ -678,6 +678,18 @@ html,body { height:100%; }
   background-image: url(images/icons/guide-search-white.svg);  
 }
 
+#pluslet-id-NewGuides {
+  background-image: url(images/icons/new-guides.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-NewGuides:hover {
+  background-image: url(images/icons/new-guides-white.svg);  
+}
+
 
 #show_findbox_options i {font-size: 32px;}
 
@@ -1526,6 +1538,17 @@ h4.toc-heading {margin: 6px 0;}
   max-width: 125px;
   background-size:contain;
 }
+
+
+
+/* Guide Select Pluslet */
+.pluslet_container {width:100%; margin: 0 10px;}
+
+h4.guide-select-heading {margin: 6px 0;}
+
+.pluslet_container .pure-form select {width:200px !important;}
+
+
 
 
 /*** toggle pluslet body --CBR */

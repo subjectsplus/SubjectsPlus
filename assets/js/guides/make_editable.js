@@ -81,7 +81,7 @@ function makeEditable(lstrSelector) {
 			   $(".pluslet.type-guideselect").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-newdbs").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-guidesearch").find(".body_set").addClass("hide-settings");
-			   
+			   $(".pluslet.type-newguides").find(".body_set").addClass("hide-settings");			   
 			   
 			   
 
@@ -117,6 +117,7 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-guideselect").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-newdbs").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-guidesearch").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-newguides").find(".fav_set").addClass("hide-settings");
 
 
 
