@@ -883,9 +883,8 @@ class Guide
         
         } else {
         	
-        	
-      
-        	if (array_search($lobjTab['tab_id'], $main_tabs)) {
+        	if ($this->recursive_array_search($lobjTab['tab_id'], $main_tabs)) {
+        		
         		$tabs .= "<li id=\"{$lobjTab['tab_id']}\" data-children=\"$childs\"  class=\"$class main-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
         		
         	} else {
@@ -1256,6 +1255,16 @@ class Guide
     {
         print $this->_debug;
     }
+    
+    public  function recursive_array_search($needle,$haystack) {
+    foreach($haystack as $key=>$value) {
+        $current_key=$key;
+        if($needle===$value OR (is_array($value) && $this->recursive_array_search($needle,$value) !== false)) {
+            return $current_key;
+        }
+    }
+    return false;
+}
 
 	public function checkVisibility()
 	{
