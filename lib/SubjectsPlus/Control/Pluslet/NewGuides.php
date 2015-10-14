@@ -58,7 +58,7 @@ class Pluslet_NewGuides extends Pluslet {
 
   static function getMenuIcon()
     {
-      $icon="<i class=\"fa fa-plus\" title=\""  . _("New Guides") . "\" ></i><span class=\"icon-text\">" . _("New Guides") . "</span>";
+      $icon="<span class=\"icon-text guidesearch-text\">" . _("New Guides") . "</span>";
         return $icon;
     }
 

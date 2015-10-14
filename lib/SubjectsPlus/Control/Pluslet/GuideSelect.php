@@ -59,7 +59,7 @@ class Pluslet_GuideSelect extends Pluslet {
 
     static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text googlescholar-text\">" . _("Guide Select") . "</span>";
+        $icon="<i class=\"fa fa-check-square-o\" title=\""  . _("Guide Select") . "\" ></i><span class=\"icon-text\">" . _("Guide Select") . "</span>";
         return $icon;
     }
 
