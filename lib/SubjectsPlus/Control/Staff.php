@@ -46,8 +46,10 @@ class Staff {
     //new sp4
   private $_social_media;
   private $_extra;
+  public $_ok_departments = array();
  
   public function __construct($staff_id="", $flag="", $full_record = FALSE) {
+    //var_dump($_POST);
 
     if ($flag == "" && $staff_id == "") {
       $flag = "empty";
@@ -67,7 +69,7 @@ class Staff {
         $this->_fname = $_POST["fname"];
         $this->_title = $_POST["title"];
         $this->_tel = $_POST["tel"];
-        $this->_department_id = $_POST["department_id"];
+        //$this->_department_id = $_POST["department_id"];
         $this->_staff_sort = $_POST["staff_sort"];
         $this->_email = $_POST["email"];
         $this->_user_type_id = $_POST["user_type_id"];
@@ -104,6 +106,10 @@ class Staff {
         //new sp4
         $this->_social_media = $this->setSocialMediaDataPost();
 
+        // data stored in staff_department table
+        $this->_department_id = $_POST["department_id"]; // array
+        $this->_department_count = count($this->_department_id); // # of items in above array
+
         if(isset($this->_extra)) {
           $this->_extra = $_POST['extra'];
         } else {
@@ -115,8 +121,10 @@ class Staff {
         break;
       case "delete":
         // kind of redundant, but just set up to delete appropriate tables?
-        // title_id only needed?
+
         $this->_staff_id = $staff_id;
+
+        self::getAssociatedDepartments();
 
         break;
       case "forgot":
@@ -181,7 +189,7 @@ class Staff {
           $this->_fullname = $this->_fname . " " . $this->_lname;
           $this->_title = $staffArray[0]['title'];
           $this->_tel = $staffArray[0]['tel'];
-          $this->_department_id = $staffArray[0]['department_id'];
+          //$this->_department_id = $staffArray[0]['department_id'];
           $this->_staff_sort = $staffArray[0]['staff_sort'];
           $this->_email = $staffArray[0]['email'];
           $this->_ip = $staffArray[0]['ip'];
@@ -212,8 +220,19 @@ class Staff {
           $this->_lat_long = $staffArray[0]['lat_long'];
 
             //new for sp4
+
             $this->_social_media = $staffArray[0]['social_media'];
             $this->_extra = $staffArray[0]['extra'];
+
+            ///////////////////
+            // Query Departments table
+            // used to get our set of departments associated
+            // ////////////////
+
+            self::getAssociatedDepartments();
+            $this->_department_id = $this->_ok_departments;
+
+
           }
         }
 
@@ -242,7 +261,7 @@ class Staff {
     $deptArray = $querierDept->query($qDept);
 
     // create department dropdown
-    $deptMe = new  Dropdown("department_id", $deptArray, $this->_department_id);
+    $deptMe = new  Dropdown("department_id[]", $deptArray, $this->_department_id, "","","","multi");
     $this->_departments = $deptMe->display();
 
     ///////////////
@@ -421,7 +440,7 @@ class Staff {
 
   	if ( $isDepartmentOmitted )
   	{
-  		echo "<input type=\"hidden\" name=\"department_id\" id=\"department_id\" value=\"\" />";
+  		echo "<input type=\"hidden\" name=\"department_id[]\" id=\"department_id\" value=\"\" />";
   	}else
   	{
   		echo "
@@ -912,7 +931,21 @@ public function outputLatLongForm() {
 
     $this->_debug = "<p class=\"debug\">Delete from staff table(s) query: $q";
 
-    if ($delete_result != 0) {
+    
+    if (isset($delete_result)) {
+      //delete department associations
+      $q2 = "DELETE FROM staff_department sd WHERE sd.staff_id = '" . $this->_staff_id . "'";
+      $delete_result2 = $db->exec($q2);
+       
+      $this->_debug .= "<p>Del query 2: $q2";
+    
+    } else {
+      // message
+      $this->_message = _("There was a problem with your delete (stage 1 of 2).");
+      return FALSE;
+    }
+
+    if (isset($delete_result2)) {
 
       // /////////////////////
       // Alter chchchanges table
@@ -921,7 +954,7 @@ public function outputLatLongForm() {
 
       $updateChangeTable = changeMe("staff", "delete", $this->_staff_id, $this->_title, $_SESSION['staff_id']);
 
-      $this->_message = _("Thy will be done.  Note that any subject guides associated with this user are now orphans.");
+      $this->_message = _("Thy will be done.  Note that any subject guides associated with this user are now orphans.  Pity the orphans.");
       return false;
     } else {
       // message
@@ -968,7 +1001,7 @@ public function outputLatLongForm() {
 		 . $db->quote(scrubData($this->_lname)) . ","
 		 . $db->quote(scrubData($this->_title)) . ","
 		 . $db->quote(scrubData($this->_tel)) . ","
-		 . $db->quote($this->_department_id) . ","
+		 . $db->quote("") . ","
 		 . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
 		 . $db->quote(scrubData($this->_email, "email")) . ","
 		 . $db->quote(scrubData($this->_user_type_id, "integer")) . ","
@@ -1001,6 +1034,12 @@ public function outputLatLongForm() {
                                                                                                                                                       
                                                                                                                                                       
     $this->_staff_id = $db->last_id();
+
+    /////////////////////
+    // insert into staff_department
+    ////////////////////
+
+    self::modifySD();
 
     // create folder
 
@@ -1088,12 +1127,13 @@ public function outputLatLongForm() {
     // NOTE:  we don't update the password here; it's updated separately
     /////////////////////
 
+    // oct 2015 removed department_id from this update, since it now has a table in v4 agd
+
     $qUpStaff = "UPDATE staff SET
 	  fname = " . $db->quote(scrubData($this->_fname)) . "," .
 	  "lname = " . $db->quote(scrubData($this->_lname)) . "," .
 	  "title = " . $db->quote(scrubData($this->_title)) . "," .
 	  "tel = " . $db->quote(scrubData($this->_tel)) . "," .
-	  "department_id = " . $department_id . "," .
 	  "staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . "," .
 	  "email = " . $db->quote(scrubData($this->_email, 'email')) . "," .
 	  "user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . "," .
@@ -1122,6 +1162,22 @@ public function outputLatLongForm() {
 
     // echo $qUpStaff;
     $rUpStaff = $db->exec($qUpStaff);
+
+      /////////////////////
+      // clear staff_department
+      /////////////////////
+
+      $qClearSD = "DELETE FROM staff_department WHERE staff_id = " . $this->_staff_id;
+
+      $rClearSD = $db->exec($qClearSD);
+
+      $this->_debug .= "<p>2. clear staff_department: $qClearSD</p>";
+
+        /////////////////////
+        // insert into staff_department
+        ////////////////////
+
+        self::modifySD();
 
     // /////////////////////
     // Alter chchchanges table
@@ -1279,7 +1335,41 @@ public function outputLatLongForm() {
     return $data;
   }
 
+    public function getAssociatedDepartments()
+    {
 
+        $db = new Querier();
+        $q2 = "SELECT d.department_id FROM department d, staff_department sd 
+        WHERE d.department_id = sd.department_id AND sd.staff_id = " . $this->_staff_id;
+
+        $this->_departmenters = $db->query($q2);
+
+        foreach ($this->_departmenters as $value) {
+            $this->_ok_departments[] = $value[0];
+        }
+
+        $this->_debug .= "<p>Department query: $q2";
+    }
+
+    function modifySD()
+    {
+
+        $de_duped = array_unique($this->_department_id);
+
+        foreach ($de_duped as $value) {
+            if (is_numeric($value)) {
+                $db = new Querier;
+                $qUpSD = "INSERT INTO staff_department (staff_id, department_id) VALUES (
+        " . scrubData($this->_staff_id, 'integer') . ",
+        " . scrubData($value, 'integer') . ")";
+                $db = new Querier;
+                $rUpSD = $db->exec($qUpSD);
+
+                $this->_debug .= "<p>3. (insert staff_department loop) : $qUpSD</p>";
+
+            }
+        }
+    }
 
   public function getMessage() {
     return $this->_message;
