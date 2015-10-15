@@ -983,17 +983,23 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 /* Added to style tabs for importer -don't delete JL*/
-#tabs li.child-tab { }
+#tabs li.child-tab { background:#fff !important;}
   
-#tabs li.parent-tab {background:#999;}
+#tabs li.parent-tab {background:#eee !important;}
 
-#tabs li.main-tab { }
+#tabs li.main-tab { background:#eee !important;}
+
+#tabs li.home-tab { background:#ff0 !important;}
+
 
 
 #tabs.ui-tabs .ui-tabs-nav li a {color:#333;}
 
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active,
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover {border-bottom: 3px solid #C03957 !important;}
+
+#tabs.ui-tabs .ui-tabs-nav li.child-tab.ui-state-default.ui-state-hover,
+#tabs.ui-tabs .ui-tabs-nav li.child-tab.ui-tabs-active.ui-state-active {border-bottom: 3px solid #858585 !important;}
 
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active a,
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #333;}
