@@ -898,9 +898,7 @@ class Guide
         			$tabs .= "<li id=\"{$lobjTab['tab_id']}\"  class=\"$class child-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
         			 
         		}
-        		
-        		 
-        		
+        		        		
         		
         		}
         	
