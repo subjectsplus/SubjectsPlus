@@ -42,11 +42,10 @@ class Staff {
   private $_lat_long;
   private $_fullname;
   private $_debug;
-    
     //new sp4
   private $_social_media;
   private $_extra;
- 
+
   public function __construct($staff_id="", $flag="", $full_record = FALSE) {
 
     if ($flag == "" && $staff_id == "") {
@@ -120,37 +119,37 @@ class Staff {
 
         break;
       case "forgot":
-      	$this->_email = $_POST['email'];
+        $this->_email = $_POST['email'];
 
-      	/////////////
-      	// Get staff table info
-      	/////////////
-      	$querier = new  Querier();
-      	$q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio, social_media from staff where email = '" . $this->_email . "'";
-      	$staffArray = $querier->query($q1);
+        /////////////
+        // Get staff table info
+        /////////////
+        $querier = new  Querier();
+        $q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio, social_media from staff where email = '" . $this->_email . "'";
+        $staffArray = $querier->query($q1);
 
-      	$this->_debug .= "<p class=\"debug\">Staff query: $q1";
-      	// Test if these exist, otherwise go to plan B
-      	if ($staffArray == FALSE) {
-      		$this->_message = "There is no active record with that email.";
-      	} else {
-      		$this->_staff_id = $staffArray[0]['staff_id'];
-      		$this->_lname = $staffArray[0]['lname'];
-      		$this->_fname = $staffArray[0]['fname'];
-      		$this->_fullname = $this->_fname . " " . $this->_lname;
-      		$this->_title = $staffArray[0]['title'];
-      		$this->_tel = $staffArray[0]['tel'];
-      		$this->_department_id = $staffArray[0]['department_id'];
-      		$this->_staff_sort = $staffArray[0]['staff_sort'];
-      		$this->_ip = $staffArray[0]['ip'];
-      		$this->_user_type_id = $staffArray[0]['user_type_id'];
-      		$this->_password = $staffArray[0]['password'];
-      		$this->_ptags = $staffArray[0]['ptags'];
-      		$this->_active = $staffArray[0]['active'];
-      		$this->_bio = $staffArray[0]['bio'];
+        $this->_debug .= "<p class=\"debug\">Staff query: $q1";
+        // Test if these exist, otherwise go to plan B
+        if ($staffArray == FALSE) {
+          $this->_message = "There is no active record with that email.";
+        } else {
+          $this->_staff_id = $staffArray[0]['staff_id'];
+          $this->_lname = $staffArray[0]['lname'];
+          $this->_fname = $staffArray[0]['fname'];
+          $this->_fullname = $this->_fname . " " . $this->_lname;
+          $this->_title = $staffArray[0]['title'];
+          $this->_tel = $staffArray[0]['tel'];
+          $this->_department_id = $staffArray[0]['department_id'];
+          $this->_staff_sort = $staffArray[0]['staff_sort'];
+          $this->_ip = $staffArray[0]['ip'];
+          $this->_user_type_id = $staffArray[0]['user_type_id'];
+          $this->_password = $staffArray[0]['password'];
+          $this->_ptags = $staffArray[0]['ptags'];
+          $this->_active = $staffArray[0]['active'];
+          $this->_bio = $staffArray[0]['bio'];
           $this->_social_media = $staffArray[0]['social_media'];
-      	}
-      	break;
+        }
+        break;
       default:
         $this->_staff_id = $staff_id;
 
@@ -160,18 +159,18 @@ class Staff {
         /////////////
         $db = new Querier;
         if ($full_record == TRUE) {
-        $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio
+          $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio
             , position_number, job_classification, room_number, supervisor_id, emergency_contact_name, emergency_contact_relation, emergency_contact_phone,
             street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media, extra
             FROM staff WHERE staff_id = " . $this->_staff_id;
         } else {
-        $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, ptags, active, bio, social_media
+          $q1 = "SELECT staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, ptags, active, bio, social_media
             FROM staff WHERE staff_id = " . $this->_staff_id;
         }
 
         $staffArray = $db->query($q1);
 
-      // $this->_debug .= "<p class=\"debug\">Staff query: $q1";
+        // $this->_debug .= "<p class=\"debug\">Staff query: $q1";
         // Test if these exist, otherwise go to plan B
         if ($staffArray == FALSE) {
           $this->_message = "There is no active record with that ID.  Why not create a new one?";
@@ -191,25 +190,25 @@ class Staff {
           $this->_bio = $staffArray[0]['bio'];
 
           if ($full_record == TRUE) {
-          $this->_password = $staffArray[0]['password'];
+            $this->_password = $staffArray[0]['password'];
 
-          //New for UM
-          $this->_position_number = $staffArray[0]['position_number'];
-          $this->_job_classification = $staffArray[0]['job_classification'];
-          $this->_room_number = $staffArray[0]['room_number'];
-          $this->_supervisor_id = $staffArray[0]['supervisor_id'];
-          $this->_emergency_contact_name = $staffArray[0]['emergency_contact_name'];
-          $this->_emergency_contact_relation = $staffArray[0]['emergency_contact_relation'];
-          $this->_emergency_contact_phone = $staffArray[0]['emergency_contact_phone'];
-          $this->_street_address = $staffArray[0]['street_address'];
-          $this->_city = $staffArray[0]['city'];
-          $this->_state = $staffArray[0]['state'];
-          $this->_zip = $staffArray[0]['zip'];
-          $this->_home_phone = $staffArray[0]['home_phone'];
-          $this->_cell_phone = $staffArray[0]['cell_phone'];
-          $this->_fax = $staffArray[0]['fax'];
-          $this->_intercom = $staffArray[0]['intercom'];
-          $this->_lat_long = $staffArray[0]['lat_long'];
+            //New for UM
+            $this->_position_number = $staffArray[0]['position_number'];
+            $this->_job_classification = $staffArray[0]['job_classification'];
+            $this->_room_number = $staffArray[0]['room_number'];
+            $this->_supervisor_id = $staffArray[0]['supervisor_id'];
+            $this->_emergency_contact_name = $staffArray[0]['emergency_contact_name'];
+            $this->_emergency_contact_relation = $staffArray[0]['emergency_contact_relation'];
+            $this->_emergency_contact_phone = $staffArray[0]['emergency_contact_phone'];
+            $this->_street_address = $staffArray[0]['street_address'];
+            $this->_city = $staffArray[0]['city'];
+            $this->_state = $staffArray[0]['state'];
+            $this->_zip = $staffArray[0]['zip'];
+            $this->_home_phone = $staffArray[0]['home_phone'];
+            $this->_cell_phone = $staffArray[0]['cell_phone'];
+            $this->_fax = $staffArray[0]['fax'];
+            $this->_intercom = $staffArray[0]['intercom'];
+            $this->_lat_long = $staffArray[0]['lat_long'];
 
             //new for sp4
             $this->_social_media = $staffArray[0]['social_media'];
@@ -230,8 +229,8 @@ class Staff {
     global $IconPath;
     global $all_ptags;
     global $tel_prefix;
-  	global $omit_user_columns;
-  	global $require_user_columns;
+    global $omit_user_columns;
+    global $require_user_columns;
 
     ///////////////
     // Departments
@@ -286,13 +285,13 @@ class Staff {
     /////////////
 
     if ($tel_prefix != "") {
-    	$tel_line = "<input type=\"text\" readonly=\"readonly\" size=\"4\" value=\"$tel_prefix\" name=\"unedit_tel_prefix\" /><input type=\"text\" name=\"tel\" id=\"tel\" size=\"10\" class=\"";
-    	if ( in_array( _( 'tel' ) , $require_user_columns ) ) $tel_line .= 'required_field';
-    	$tel_line .= "\" value=\"" . $this->_tel . "\" />";
+      $tel_line = "<input type=\"text\" readonly=\"readonly\" size=\"4\" value=\"$tel_prefix\" name=\"unedit_tel_prefix\" /><input type=\"text\" name=\"tel\" id=\"tel\" size=\"10\" class=\"";
+      if ( in_array( _( 'tel' ) , $require_user_columns ) ) $tel_line .= 'required_field';
+      $tel_line .= "\" value=\"" . $this->_tel . "\" />";
     } else {
-    	$tel_line = "<input type=\"text\" name=\"tel\" id=\"tel\" size=\"15\" class=\"";
-    	if ( in_array( _( 'tel' ) , $require_user_columns ) ) $tel_line .= 'required_field';
-    	$tel_line .= "\" value=\"" . $this->_tel . "\" />";
+      $tel_line = "<input type=\"text\" name=\"tel\" id=\"tel\" size=\"15\" class=\"";
+      if ( in_array( _( 'tel' ) , $require_user_columns ) ) $tel_line .= 'required_field';
+      $tel_line .= "\" value=\"" . $this->_tel . "\" />";
     }
 
     //////////////////
@@ -327,25 +326,25 @@ class Staff {
     print "<div class=\"pure-g\">";
 
 
-  	//see which"Staff Member" columns and whether "Personal Information" section or "Emergency Contact" section are omitted
-  	// added by dgonzalez
-  	$isFnameOmitted = in_array( _( "fname" ) , $omit_user_columns );
-  	$isLnameOmitted = in_array( _( "lname" ) , $omit_user_columns );
-  	$isTitleOmitted = in_array( _( "title" ) , $omit_user_columns );
-  	$isPositionNumOmitted = in_array( _( "position_number" ) , $omit_user_columns );
-  	$isClassificationOmitted = in_array( _( "classification" ) , $omit_user_columns );
-  	$isDepartmentOmitted = in_array( _( "department" ) , $omit_user_columns );
-  	$isPriorityOmitted = in_array( _( "priority" ) , $omit_user_columns );
-  	$isSupervisorOmitted = in_array( _( "supervisor" ) , $omit_user_columns );
-  	$isTelephoneOmitted = in_array( _( "tel" ) , $omit_user_columns );
-  	$isdFaxOmitted = in_array( _( "fax" ) , $omit_user_columns );
-  	$isIntercomOmitted = in_array( _( "intercom" ) , $omit_user_columns );
-  	$isUserTypeOmitted = in_array( _( "user_type" ) , $omit_user_columns );
-  	$isRoomNumOmitted = in_array( _( "room_number" ) , $omit_user_columns );
-  	$isPersonalOmitted = in_array( _( "personal_information" ) , $omit_user_columns );
-  	$isEmergencyContactOmitted = in_array( _( "emergency_contact" ) , $omit_user_columns );
+    //see which"Staff Member" columns and whether "Personal Information" section or "Emergency Contact" section are omitted
+    // added by dgonzalez
+    $isFnameOmitted = in_array( _( "fname" ) , $omit_user_columns );
+    $isLnameOmitted = in_array( _( "lname" ) , $omit_user_columns );
+    $isTitleOmitted = in_array( _( "title" ) , $omit_user_columns );
+    $isPositionNumOmitted = in_array( _( "position_number" ) , $omit_user_columns );
+    $isClassificationOmitted = in_array( _( "classification" ) , $omit_user_columns );
+    $isDepartmentOmitted = in_array( _( "department" ) , $omit_user_columns );
+    $isPriorityOmitted = in_array( _( "priority" ) , $omit_user_columns );
+    $isSupervisorOmitted = in_array( _( "supervisor" ) , $omit_user_columns );
+    $isTelephoneOmitted = in_array( _( "tel" ) , $omit_user_columns );
+    $isdFaxOmitted = in_array( _( "fax" ) , $omit_user_columns );
+    $isIntercomOmitted = in_array( _( "intercom" ) , $omit_user_columns );
+    $isUserTypeOmitted = in_array( _( "user_type" ) , $omit_user_columns );
+    $isRoomNumOmitted = in_array( _( "room_number" ) , $omit_user_columns );
+    $isPersonalOmitted = in_array( _( "personal_information" ) , $omit_user_columns );
+    $isEmergencyContactOmitted = in_array( _( "emergency_contact" ) , $omit_user_columns );
 
-  	 // start form
+    // start form
     print "<form action=\"" . $action . "\" method=\"post\" id=\"new_record\" accept-charset=\"UTF-8\" class=\"pure-form pure-form-stacked\">
 <input type=\"hidden\" name=\"staff_id\" value=\"" . $this->_staff_id . "\" />
 <div class=\"pure-u-1-3\">
@@ -356,211 +355,211 @@ class Staff {
     </div>
     <div class=\"pluslet_body\">";
 
-  	//based on omitted columns write out html
-  	// added by dgonzalez
-  	if ( $isFnameOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"fname\" id=\"fname\" value=\"" . $this->_fname . "\" />";
-  	} else {
+    //based on omitted columns write out html
+    // added by dgonzalez
+    if ( $isFnameOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"fname\" id=\"fname\" value=\"" . $this->_fname . "\" />";
+    } else {
 
-  		print "<div style=\"float: left; margin-right: 1em;\"><label for=\"fname\">" . _("First Name") . "</label>
+      print "<div style=\"float: left; margin-right: 1em;\"><label for=\"fname\">" . _("First Name") . "</label>
     	<input type=\"text\" name=\"fname\" id=\"fname\" class=\"pure-input-1\" value=\"" . $this->_fname . "\" /></div>";
 
-  	}
+    }
 
-  	if ( $isLnameOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"lname\" id=\"lname\" value=\"" . $this->_lname . "\" /><br style=\"clear:both;\"/>";
-  	} else {
+    if ( $isLnameOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"lname\" id=\"lname\" value=\"" . $this->_lname . "\" /><br style=\"clear:both;\"/>";
+    } else {
 
-  		print "<div style=\"float: left;\"><label for=\"lname\">" . _("Last Name") . "</label>
+      print "<div style=\"float: left;\"><label for=\"lname\">" . _("Last Name") . "</label>
 	    <input type=\"text\" name=\"lname\" id=\"lname\" class=\"pure-input-1\" value=\"" . $this->_lname . "\" /></div>
 	    <br style=\"clear:both;\"/>";
 
-  	}
+    }
 
-  	if ( $isTitleOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"title\" id=\"title\" value=\"" . $this->_title . "\" />";
-  	} else {
+    if ( $isTitleOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"title\" id=\"title\" value=\"" . $this->_title . "\" />";
+    } else {
 
-    print "<div style=\"float: left; margin-right: 1em;\"><label for=\"title\">" . _("Position Title") . "</label>
+      print "<div style=\"float: left; margin-right: 1em;\"><label for=\"title\">" . _("Position Title") . "</label>
     <input type=\"text\" name=\"title\" id=\"title\" class=\"pure-input-1";
       if ( in_array( _( 'title' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_title . "\" /></div>";
+      print "\" value=\"" . $this->_title . "\" /></div>";
 
-  	}
+    }
 
-  	if ( $isPositionNumOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"position_number\" id=\"position_number\" value=\"" . $this->_position_number . "\" />";
-  	}else
-  	{
+    if ( $isPositionNumOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"position_number\" id=\"position_number\" value=\"" . $this->_position_number . "\" />";
+    }else
+    {
 
-    print "<div style=\"float: left;\"><label for=\"position_number\">" . _("Position #") . "</label>
+      print "<div style=\"float: left;\"><label for=\"position_number\">" . _("Position #") . "</label>
     <input type=\"text\" name=\"position_number\" id=\"position_number\" class=\"pure-input-1-4";
       if ( in_array( _( 'position_number' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_position_number . "\" /></div>";
-  	}
+      print "\" value=\"" . $this->_position_number . "\" /></div>";
+    }
 
-  	if ( !( $isTitleOmitted && $isPositionNumOmitted) )
-  	{
-  		echo "<br class=\"clear-both\"/><br />";
-  	}
+    if ( !( $isTitleOmitted && $isPositionNumOmitted) )
+    {
+      echo "<br class=\"clear-both\"/><br />";
+    }
 
-  	if ( $isClassificationOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"job_classification\" id=\"job_classification\" value=\"" . $this->_job_classification . "\" />";
-  	} else
-  	{
-    print "<label for=\"job_classification\">" . _("Job Classification") . "</label>
+    if ( $isClassificationOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"job_classification\" id=\"job_classification\" value=\"" . $this->_job_classification . "\" />";
+    } else
+    {
+      print "<label for=\"job_classification\">" . _("Job Classification") . "</label>
     <input type=\"text\" name=\"job_classification\" id=\"job_classification\" class=\"pure-input-2-3";
       if ( in_array( _( 'job_classification' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_job_classification . "\" />";
-  	}
+      print "\" value=\"" . $this->_job_classification . "\" />";
+    }
 
-  	if ( $isDepartmentOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"department_id\" id=\"department_id\" value=\"\" />";
-  	}else
-  	{
-  		echo "
+    if ( $isDepartmentOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"department_id\" id=\"department_id\" value=\"\" />";
+    }else
+    {
+      echo "
 <div style=\"float: left; margin-right: 1em;\"><label for=\"department_id\">" . _("Department") . "</label>
 {$this->_departments}
 </div>";
-  	}
+    }
 
-  	if ( $isPriorityOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"staff_sort\" id=\"staff_sort\" value=\"" . $this->_staff_sort . "\" />";
-  	}else
-  	{
-  		echo "<div style=\"float: left;\"><label for=\"staff_sort\">" . _("Display Priority") . "</label>
+    if ( $isPriorityOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"staff_sort\" id=\"staff_sort\" value=\"" . $this->_staff_sort . "\" />";
+    }else
+    {
+      echo "<div style=\"float: left;\"><label for=\"staff_sort\">" . _("Display Priority") . "</label>
     <input type=\"text\" name=\"staff_sort\" id=\"staff_sort\" class=\"pure-input-1-4";
       if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_staff_sort . "\" /></div>";
-  	}
+      print "\" value=\"" . $this->_staff_sort . "\" /></div>";
+    }
 
-  	if ( !( $isDepartmentOmitted && $isPriorityOmitted ) )
-  	{
-  		echo "<br class=\"clear-both\" /><br />";
-  	}
+    if ( !( $isDepartmentOmitted && $isPriorityOmitted ) )
+    {
+      echo "<br class=\"clear-both\" /><br />";
+    }
 
-  	if ( $isSupervisorOmitted )
-  	{
-  		echo "<input type=\"hidden\" id=\"supervisor_id\" name=\"supervisor_id\" value=\"\" />";
-  	}else
-  	{
-  		echo "
+    if ( $isSupervisorOmitted )
+    {
+      echo "<input type=\"hidden\" id=\"supervisor_id\" name=\"supervisor_id\" value=\"\" />";
+    }else
+    {
+      echo "
 <label for=\"supervisor\">" . _("Supervisor") . "</label>
 {$this->_supervisors}
 ";
-  	}
+    }
 
-  	if ( $isTelephoneOmitted )
-  	{
-  		echo "<input id=\"tel\" type=\"hidden\" value=\"" . $this->_tel . "\" name=\"tel\">";
-  	} else {
+    if ( $isTelephoneOmitted )
+    {
+      echo "<input id=\"tel\" type=\"hidden\" value=\"" . $this->_tel . "\" name=\"tel\">";
+    } else {
 
-    print "<div style=\"float: left; margin-right: 1em;\"><label for=\"tel\">" . _("Telephone") . "</label>
+      print "<div style=\"float: left; margin-right: 1em;\"><label for=\"tel\">" . _("Telephone") . "</label>
     $tel_line
     </div>";
 
-  	}
+    }
 
-  	if ( $isdFaxOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"fax\" id=\"fax\" value=\"" . $this->_fax . "\" />";
-  	}else
-  	{
+    if ( $isdFaxOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"fax\" id=\"fax\" value=\"" . $this->_fax . "\" />";
+    }else
+    {
 
-    print "<div style=\"float: left;margin-right: 1em;\"><label for=\"fax\">" . _("FAX") . "</label>
+      print "<div style=\"float: left;margin-right: 1em;\"><label for=\"fax\">" . _("FAX") . "</label>
     <input type=\"text\" name=\"fax\" id=\"fax\" class=\"pure-input-1";
       if ( in_array( _( 'fax' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_fax . "\" /></div>";
+      print "\" value=\"" . $this->_fax . "\" /></div>";
 
-  	}
+    }
 
-  	if ( $isIntercomOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"intercom\" id=\"intercom\" value=\"" . $this->_intercom . "\" />";
-  	}else
-  	{
+    if ( $isIntercomOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"intercom\" id=\"intercom\" value=\"" . $this->_intercom . "\" />";
+    }else
+    {
 
-    print "<div style=\"float: left; margin-right: 1em;\"><label for=\"intercom\">" . _("Intercom") . "</label>
+      print "<div style=\"float: left; margin-right: 1em;\"><label for=\"intercom\">" . _("Intercom") . "</label>
     <input type=\"text\" name=\"intercom\" id=\"intercom\" class=\"pure-input-1-4";
       if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_intercom . "\" /></div>";
+      print "\" value=\"" . $this->_intercom . "\" /></div>";
 
-  	}
+    }
 
-  	if ( $isRoomNumOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"room_number\" id=\"room_number\" value=\"" . $this->_room_number . "\" />";
-  	} else {
+    if ( $isRoomNumOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"room_number\" id=\"room_number\" value=\"" . $this->_room_number . "\" />";
+    } else {
 
-    print "<div style=\"float: left;\"><label for=\"room_number\">" . _("Room #") . "</label>
+      print "<div style=\"float: left;\"><label for=\"room_number\">" . _("Room #") . "</label>
     <input type=\"text\" name=\"room_number\" id=\"room_number\" class=\"pure-input-1-3";
       if ( in_array( _( 'priority' ) , $require_user_columns ) ) echo 'required_field';
-    print "\" value=\"" . $this->_room_number . "\" /></div>";
-  	}
+      print "\" value=\"" . $this->_room_number . "\" /></div>";
+    }
 
-  	if ( !( $isTelephoneOmitted && $isdFaxOmitted && $isIntercomOmitted && $isRoomNumOmitted ) )
-  	{
-  		echo "<br class=\"clear-both\"/><br />";
-  	}
+    if ( !( $isTelephoneOmitted && $isdFaxOmitted && $isIntercomOmitted && $isRoomNumOmitted ) )
+    {
+      echo "<br class=\"clear-both\"/><br />";
+    }
 
     print "<label for=\"email\">" . _("Email (This is the username for logging in to SubjectsPlus)") . "</label>
     <input type=\"text\" name=\"email\" id=\"email\" class=\"pure-input-1 required_field\" value=\"" . $this->_email . "\" />";
 
-  	if ( $isUserTypeOmitted )
-   	{
-  		echo "<input type=\"hidden\" name=\"user_type_id\" id=\"user_type_id\" value=\"1\" />";
-	}else
-	{
-		echo "<div style=\"float: left; margin-right: 1em;\"><label for=\"user_type\">" . _("User Type") . "</label>
+    if ( $isUserTypeOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"user_type_id\" id=\"user_type_id\" value=\"1\" />";
+    }else
+    {
+      echo "<div style=\"float: left; margin-right: 1em;\"><label for=\"user_type\">" . _("User Type") . "</label>
 	      {$this->_user_types}
 	      </div>";
-	}
+    }
 
-  		echo "
+    echo "
     <div style=\"float: left; margin-right: 1em;\"><label for=\"active\">" . _("Active User?") . "</label>
     {$this->_active_or_not}
     </div>
     <br style=\"clear: both;\" /><br /></div></div>";
 
-  	if ( $isPersonalOmitted )
-  	{
-  		echo "<input type=\"hidden\" name=\"street_address\" id=\"street_address\" value=\"" . $this->_street_address . "\" />\n";
-  		echo "<input type=\"hidden\" name=\"city\" id=\"city\" value=\"" . $this->_city . "\" />\n";
-  		echo "<input type=\"hidden\" name=\"state\" id=\"state\" value=\"" . $this->_state . "\" />\n";
-  		echo "<input type=\"hidden\" name=\"zip\" id=\"zip\" value=\"" . $this->_zip . "\" />\n";
-  		echo "<input type=\"hidden\" name=\"home_phone\" id=\"home_phone\" value=\"" . $this->_home_phone . "\" />\n";
-  		echo "<input type=\"hidden\" name=\"cell_phone\" id=\"cell_phone\" value=\"" . $this->_cell_phone . "\" />\n";
-  		echo "<input type=\"hidden\" name=\"lat_long\" id=\"lat_long\"value=\"" . $this->_lat_long . "\" />\n";
+    if ( $isPersonalOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"street_address\" id=\"street_address\" value=\"" . $this->_street_address . "\" />\n";
+      echo "<input type=\"hidden\" name=\"city\" id=\"city\" value=\"" . $this->_city . "\" />\n";
+      echo "<input type=\"hidden\" name=\"state\" id=\"state\" value=\"" . $this->_state . "\" />\n";
+      echo "<input type=\"hidden\" name=\"zip\" id=\"zip\" value=\"" . $this->_zip . "\" />\n";
+      echo "<input type=\"hidden\" name=\"home_phone\" id=\"home_phone\" value=\"" . $this->_home_phone . "\" />\n";
+      echo "<input type=\"hidden\" name=\"cell_phone\" id=\"cell_phone\" value=\"" . $this->_cell_phone . "\" />\n";
+      echo "<input type=\"hidden\" name=\"lat_long\" id=\"lat_long\"value=\"" . $this->_lat_long . "\" />\n";
 
-  	}else
-  	{
+    }else
+    {
 
-    self::outputPersonalInfoForm();
+      self::outputPersonalInfoForm();
 
-    self::outputLatLongForm();
+      self::outputLatLongForm();
 
-  	}
+    }
 
-	if ( $isEmergencyContactOmitted )
-	{
-		echo "<input type=\"hidden\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" value=\"" . $this->_emergency_contact_name . "\" />";
-		echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
-		echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
+    if ( $isEmergencyContactOmitted )
+    {
+      echo "<input type=\"hidden\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" value=\"" . $this->_emergency_contact_name . "\" />";
+      echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
+      echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
 
-	} else {
+    } else {
 
-    self::outputEmergencyInfoForm();
+      self::outputEmergencyInfoForm();
 
-	}
+    }
 
-  	echo "</div><div class=\"pure-u-1-3\">";
+    echo "</div><div class=\"pure-u-1-3\">";
 
     makePluslet(_("Photo"), $headshot, "no_overflow");
 
@@ -570,7 +569,7 @@ class Staff {
 
 
 
-print "<div class=\"pluslet\">
+    print "<div class=\"pluslet\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">" . _("Staff Member") . "</div>
       <div class=\"titlebar_options\"></div>
@@ -580,12 +579,12 @@ print "<div class=\"pluslet\">
 
     self::outputBioForm();
 
-print "</div>"; // end pluslet body
-print "</div>"; // end pluslet
+    print "</div>"; // end pluslet body
+    print "</div>"; // end pluslet
 
-print "</div>"; // end pure 1-3
+    print "</div>"; // end pure 1-3
 
-print "<div class=\"pure-u-1-3\">";
+    print "<div class=\"pure-u-1-3\">";
 
 
 // Get our permission tags, or ptags
@@ -656,8 +655,8 @@ print "<div class=\"pure-u-1-3\">";
     if ( in_array( _( 'city' ) , $require_user_columns ) ) { $city_required = "required_field"; } else {$city_required = "";}
     if ( in_array( _( 'state' ) , $require_user_columns ) ) { $state_required = "required_field"; } else {$state_required = "";}
     if ( in_array( _( 'zip' ) , $require_user_columns ) ) { $zip_required = "required_field"; } else {$zip_required = "";}
-  	if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) { $home_phone_required = "required_field"; } else {$home_phone_required = "";}
-  	if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) { $cell_phone_required = "required_field"; } else {$cell_phone_required = "";}
+    if ( in_array( _( 'home_phone' ) , $require_user_columns ) ) { $home_phone_required = "required_field"; } else {$home_phone_required = "";}
+    if ( in_array( _( 'cell_phone' ) , $require_user_columns ) ) { $cell_phone_required = "required_field"; } else {$cell_phone_required = "";}
 
     $personal_info = "
     <label for=\"record_title\">" . _("Street Address") . "</label>
@@ -701,12 +700,12 @@ print "<div class=\"pure-u-1-3\">";
     makePluslet (_("Emergency Contact"), $emergency_info, "no_overflow");
   }
 
-public function outputLatLongForm() {
+  public function outputLatLongForm() {
 
     global $require_user_columns;
 
-	// let's stick the address together for fun
-	$full_address = $this->_street_address . " " . $this->_city . " " . $this->_state . " " . $this->_zip;
+    // let's stick the address together for fun
+    $full_address = $this->_street_address . " " . $this->_city . " " . $this->_state . " " . $this->_zip;
 
     // set up required fields based on fields in config
     if ( in_array( _( 'lat_long' ) , $require_user_columns ) ) { $lat_long_required = "required_field"; } else {$lat_long_required = "";}
@@ -722,7 +721,7 @@ public function outputLatLongForm() {
 
     makePluslet (_("Add to Map"), $lat_long, "no_overflow");
 
-}
+  }
 
   public function outputSelfEditForm() {
     // This is just the information that a user can edit about themselves
@@ -746,24 +745,24 @@ public function outputLatLongForm() {
 
     // Only display the update personal info if this isn't turned off
     if (!$isPersonalOmitted) {
-        self::outputPersonalInfoForm();
+      self::outputPersonalInfoForm();
     } else {
-        echo "<input type=\"hidden\" name=\"street_address\" id=\"street_address\" value=\"" . $this->_street_address . "\" />\n";
-        echo "<input type=\"hidden\" name=\"city\" id=\"city\" value=\"" . $this->_city . "\" />\n";
-        echo "<input type=\"hidden\" name=\"state\" id=\"state\" value=\"" . $this->_state . "\" />\n";
-        echo "<input type=\"hidden\" name=\"zip\" id=\"zip\" value=\"" . $this->_zip . "\" />\n";
-        echo "<input type=\"hidden\" name=\"home_phone\" id=\"home_phone\" value=\"" . $this->_home_phone . "\" />\n";
-        echo "<input type=\"hidden\" name=\"cell_phone\" id=\"cell_phone\" value=\"" . $this->_cell_phone . "\" />\n";
-        echo "<input type=\"hidden\" name=\"lat_long\" id=\"lat_long\"value=\"" . $this->_lat_long . "\" />\n";
+      echo "<input type=\"hidden\" name=\"street_address\" id=\"street_address\" value=\"" . $this->_street_address . "\" />\n";
+      echo "<input type=\"hidden\" name=\"city\" id=\"city\" value=\"" . $this->_city . "\" />\n";
+      echo "<input type=\"hidden\" name=\"state\" id=\"state\" value=\"" . $this->_state . "\" />\n";
+      echo "<input type=\"hidden\" name=\"zip\" id=\"zip\" value=\"" . $this->_zip . "\" />\n";
+      echo "<input type=\"hidden\" name=\"home_phone\" id=\"home_phone\" value=\"" . $this->_home_phone . "\" />\n";
+      echo "<input type=\"hidden\" name=\"cell_phone\" id=\"cell_phone\" value=\"" . $this->_cell_phone . "\" />\n";
+      echo "<input type=\"hidden\" name=\"lat_long\" id=\"lat_long\"value=\"" . $this->_lat_long . "\" />\n";
     }
 
     // Only display the emergency info if it isn't turned off
     if (!$isEmergencyContactOmitted) {
-        self::outputEmergencyInfoForm();
+      self::outputEmergencyInfoForm();
     } else {
-        echo "<input type=\"hidden\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" value=\"" . $this->_emergency_contact_name . "\" />";
-        echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
-        echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
+      echo "<input type=\"hidden\" name=\"emergency_contact_name\" id=\"emergency_contact_name\" value=\"" . $this->_emergency_contact_name . "\" />";
+      echo "<input type=\"hidden\" name=\"emergency_contact_relation\" id=\"emergency_contact_relation\" value=\"" . $this->_emergency_contact_relation . "\" />\n";
+      echo "<input type=\"hidden\" name=\"emergency_contact_phone\" id=\"emergency_contact_phone\" value=\"" . $this->_emergency_contact_phone . "\" />\n";
     }
 
 
@@ -857,7 +856,7 @@ public function outputLatLongForm() {
 
   public function outputEmailForm()
   {
-	$lstrBox = "<div align=\"center\">\n
+    $lstrBox = "<div align=\"center\">\n
 			<form action=\"forgotpassword.php\" method=\"post\" style=\"font-size: 1em;\">\n
 			<table cellpadding=\"7\" cellspacing=\"0\" border=\"0\" class=\"striped_data\">\n
 			<tr>\n
@@ -871,11 +870,11 @@ public function outputLatLongForm() {
 			</div>\n
 			</div>\n";
 
-	return $lstrBox;
+    return $lstrBox;
   }
 
   public function outputResetPasswordForm() {
-  	$box = "<div align=\"center\" style=\"width: 310px\">\n
+    $box = "<div align=\"center\" style=\"width: 310px\">\n
   			<form action=\"{$_SERVER['REQUEST_URI']}\" method=\"post\" style=\"font-size: 1em;\">\n
   			<table cellpadding=\"7\" cellspacing=\"0\" border=\"0\" class=\"striped_data\">\n
   			<tr>\n
@@ -893,8 +892,8 @@ public function outputLatLongForm() {
 			</div>\n
 			</div>\n";
 
-	return $box;
-}
+    return $box;
+  }
 
   public function deleteRecord() {
 
@@ -902,9 +901,9 @@ public function outputLatLongForm() {
     if ($_SESSION["admin"] != "1") {
       return FALSE;
     }
-  
-  $db = new Querier;
-  
+
+    $db = new Querier;
+
     // Delete the records from staff table
     $q = "DELETE staff FROM staff WHERE staff.staff_id = '" . $this->_staff_id . "'";
 
@@ -933,73 +932,73 @@ public function outputLatLongForm() {
   public function insertRecord() {
 
     $db = new Querier;
-                    
-                    ////////////////
-                    // check and hash password
-                    ////////////////
-                    
-                    if( $this->correctPassword($this->_password) )
-                    {
-                    $this->_password = md5($this->_password);
-                    }else
-                    {
-                    $this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
-                    
-                    return;
-                    
-                    }
-                    
-                    ////////////////
-                    // check whether email is unique
-                    ///////////////
-                    if( !$this->isEmailUnique( "insert" ) )
-                    {
-                    $this->_message = _("Email is not unique. Insert was not executed.");
-                   
-                    return;
-                    }
-                    
-                    
-                    
+
+    ////////////////
+    // check and hash password
+    ////////////////
+
+    if( $this->correctPassword($this->_password) )
+    {
+      $this->_password = md5($this->_password);
+    }else
+    {
+      $this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
+
+      return;
+
+    }
+
+    ////////////////
+    // check whether email is unique
+    ///////////////
+    if( !$this->isEmailUnique( "insert" ) )
+    {
+      $this->_message = _("Email is not unique. Insert was not executed.");
+
+      return;
+    }
+
+
+
     $qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
       emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media) VALUES ( "
-		 . $db->quote(scrubData($this->_fname)) . ","
-		 . $db->quote(scrubData($this->_lname)) . ","
-		 . $db->quote(scrubData($this->_title)) . ","
-		 . $db->quote(scrubData($this->_tel)) . ","
-		 . $db->quote($this->_department_id) . ","
-		 . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
-		 . $db->quote(scrubData($this->_email, "email")) . ","
-		 . $db->quote(scrubData($this->_user_type_id, "integer")) . ","
-		 . $db->quote(scrubData($this->_password)) . ","
-		 . $db->quote(scrubData($this->_ptags)) . ","
-       . $db->quote(scrubData($this->_active, "integer")) . ","
-       . $db->quote(scrubData($this->_bio, "richtext")) . ","
-		 . $db->quote(scrubData($this->_position_number)) . ","
-		 . $db->quote(scrubData($this->_job_classification)) . ","
-		 . $db->quote(scrubData($this->_room_number)) . ","
-		 . $db->quote($this->_supervisor_id) . ","
-		 . $db->quote(scrubData($this->_emergency_contact_name)) . ","
-		 . $db->quote(scrubData($this->_emergency_contact_relation)) . ","
-		 . $db->quote(scrubData($this->_emergency_contact_phone)) . ","
-		 . $db->quote(scrubData($this->_street_address)) . ","
-		 . $db->quote(scrubData($this->_city)) . ","
-		 . $db->quote(scrubData($this->_state)) . ","
-		 . $db->quote(scrubData($this->_zip)) . ","
-		 . $db->quote(scrubData($this->_home_phone)) . ","
-		 . $db->quote(scrubData($this->_cell_phone)) . ","
-		 . $db->quote(scrubData($this->_fax)) . ","
-		 . $db->quote(scrubData($this->_intercom)) . ","
-         . $db->quote(scrubData($this->_lat_long)) . ","
-         . $db->quote(scrubData($this->_social_media)) . ")";
+        . $db->quote(scrubData($this->_fname)) . ","
+        . $db->quote(scrubData($this->_lname)) . ","
+        . $db->quote(scrubData($this->_title)) . ","
+        . $db->quote(scrubData($this->_tel)) . ","
+        . $db->quote($this->_department_id) . ","
+        . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
+        . $db->quote(scrubData($this->_email, "email")) . ","
+        . $db->quote(scrubData($this->_user_type_id, "integer")) . ","
+        . $db->quote(scrubData($this->_password)) . ","
+        . $db->quote(scrubData($this->_ptags)) . ","
+        . $db->quote(scrubData($this->_active, "integer")) . ","
+        . $db->quote(scrubData($this->_bio, "richtext")) . ","
+        . $db->quote(scrubData($this->_position_number)) . ","
+        . $db->quote(scrubData($this->_job_classification)) . ","
+        . $db->quote(scrubData($this->_room_number)) . ","
+        . $db->quote($this->_supervisor_id) . ","
+        . $db->quote(scrubData($this->_emergency_contact_name)) . ","
+        . $db->quote(scrubData($this->_emergency_contact_relation)) . ","
+        . $db->quote(scrubData($this->_emergency_contact_phone)) . ","
+        . $db->quote(scrubData($this->_street_address)) . ","
+        . $db->quote(scrubData($this->_city)) . ","
+        . $db->quote(scrubData($this->_state)) . ","
+        . $db->quote(scrubData($this->_zip)) . ","
+        . $db->quote(scrubData($this->_home_phone)) . ","
+        . $db->quote(scrubData($this->_cell_phone)) . ","
+        . $db->quote(scrubData($this->_fax)) . ","
+        . $db->quote(scrubData($this->_intercom)) . ","
+        . $db->quote(scrubData($this->_lat_long)) . ","
+        . $db->quote(scrubData($this->_social_media)) . ")";
 
-   
+
     $rInsertStaff = $db->exec($qInsertStaff);
 
     $this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
-                                                                                                                                                      
-                                                                                                                                                      
+
+
     $this->_staff_id = $db->last_id();
 
     // create folder
@@ -1008,28 +1007,28 @@ public function outputLatLongForm() {
       $user_folder = explode("@", $this->_email);
       $path = "../../assets/users/_" . $user_folder[0];
 
- 
-                
-
-           if(!@mkdir($path)) {
-  //  $mkdirErrorArray = error_get_last();
-   // throw new Exception('cant create directory ' .$mkdirErrorArray['message'], 1);
-      
-         // message
-    $this->_message = _("Couldn't create directory in /assets/users/. Please check this folder's permissions. ");
-      return;
-
-    }  else  {                                                                                                                    
-      // And copy over the generic headshot image and headshot_large image
-      $nufile = $path . "/headshot.jpg";
-      $copier = copy("../../assets/images/headshot.jpg", $nufile);
-      $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
 
 
-      // message
-      $this->_message = _("Thy Will Be Done.  Added.");
+
+      if(!@mkdir($path)) {
+        //  $mkdirErrorArray = error_get_last();
+        // throw new Exception('cant create directory ' .$mkdirErrorArray['message'], 1);
+
+        // message
+        $this->_message = _("Couldn't create directory in /assets/users/. Please check this folder's permissions. ");
+        return;
+
+      }  else  {
+        // And copy over the generic headshot image and headshot_large image
+        $nufile = $path . "/headshot.jpg";
+        $copier = copy("../../assets/images/headshot.jpg", $nufile);
+        $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
+
+
+        // message
+        $this->_message = _("Thy Will Be Done.  Added.");
+      }
     }
-}
 
     ///////////////////////
     // Alter chchchanges table
@@ -1038,50 +1037,50 @@ public function outputLatLongForm() {
 
     //$updateChangeTable = changeMe("staff", "insert", $this->_staff_id, $this->_email, $_SESSION['staff_id']);
 
- 
+
   }
 
   public function updateRecord() {
 
     $db = new Querier;
 
-  	////////////////
-  	// check whether email is unique
-  	///////////////
-  	if( !$this->isEmailUnique( "update" ) )
-  	{
-  		// message
-  		$this->_message = _("Email is not unique. Update was not executed.");
-  		return;
-  	}
+    ////////////////
+    // check whether email is unique
+    ///////////////
+    if( !$this->isEmailUnique( "update" ) )
+    {
+      // message
+      $this->_message = _("Email is not unique. Update was not executed.");
+      return;
+    }
 
-  	////////////////
-  	// alter values that are blank that need to be saved as NULL values
-  	////////////////
+    ////////////////
+    // alter values that are blank that need to be saved as NULL values
+    ////////////////
 
-  	if($this->_department_id == '')
-  	{
-  		$department_id = "NULL";
-  	}else
-  	{
-  		$department_id = $db->quote(scrubData($this->_department_id, "integer"));
-  	}
+    if($this->_department_id == '')
+    {
+      $department_id = "NULL";
+    }else
+    {
+      $department_id = $db->quote(scrubData($this->_department_id, "integer"));
+    }
 
-  	if($this->_supervisor_id == '')
-  	{
-  		$supervisor_id = "NULL";
-  	}else
-  	{
-  		$supervisor_id = $db->quote(scrubData($this->_supervisor_id, "integer"));
-  	}
+    if($this->_supervisor_id == '')
+    {
+      $supervisor_id = "NULL";
+    }else
+    {
+      $supervisor_id = $db->quote(scrubData($this->_supervisor_id, "integer"));
+    }
 
-  	if($this->_user_type_id == '')
-  	{
-  		$user_type_id = "NULL";
-  	}else
-  	{
-  		$user_type_id = $db->quote(scrubData($this->_user_type_id, "integer"));
-  	}
+    if($this->_user_type_id == '')
+    {
+      $user_type_id = "NULL";
+    }else
+    {
+      $user_type_id = $db->quote(scrubData($this->_user_type_id, "integer"));
+    }
 
     /////////////////////
     // update staff table -- Full
@@ -1090,35 +1089,35 @@ public function outputLatLongForm() {
 
     $qUpStaff = "UPDATE staff SET
 	  fname = " . $db->quote(scrubData($this->_fname)) . "," .
-	  "lname = " . $db->quote(scrubData($this->_lname)) . "," .
-	  "title = " . $db->quote(scrubData($this->_title)) . "," .
-	  "tel = " . $db->quote(scrubData($this->_tel)) . "," .
-	  "department_id = " . $department_id . "," .
-	  "staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . "," .
-	  "email = " . $db->quote(scrubData($this->_email, 'email')) . "," .
-	  "user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . "," .
-	  "ptags = " . $db->quote(scrubData($this->_ptags)) . "," .
-      "active = " . $db->quote(scrubData($this->_active, 'integer')) . "," .
-      "bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . "," .
-	  "position_number = " . $db->quote(scrubData($this->_position_number)) . "," .
-	  "job_classification = " . $db->quote(scrubData($this->_job_classification)) . "," .
-	  "room_number = " . $db->quote(scrubData($this->_room_number)) . "," .
-	  "supervisor_id = " . $supervisor_id . "," .
-	  "emergency_contact_name = " . $db->quote(scrubData($this->_emergency_contact_name)) . "," .
-	  "emergency_contact_relation = " . $db->quote(scrubData($this->_emergency_contact_relation)) . "," .
-	  "emergency_contact_phone = " . $db->quote(scrubData($this->_emergency_contact_phone)) . "," .
-	  "street_address = " . $db->quote(scrubData($this->_street_address)) . "," .
-	  "city = " . $db->quote(scrubData($this->_city)) . "," .
-      "state = " . $db->quote(scrubData($this->_state)) . "," .
-	  "zip = " . $db->quote(scrubData($this->_zip)) . "," .
-	  "home_phone = " . $db->quote(scrubData($this->_home_phone)) . "," .
-	  "cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . "," .
-      "fax = " . $db->quote(scrubData($this->_fax)) . "," .
-	  "intercom = " . $db->quote(scrubData($this->_intercom)) . "," .
+        "lname = " . $db->quote(scrubData($this->_lname)) . "," .
+        "title = " . $db->quote(scrubData($this->_title)) . "," .
+        "tel = " . $db->quote(scrubData($this->_tel)) . "," .
+        "department_id = " . $department_id . "," .
+        "staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . "," .
+        "email = " . $db->quote(scrubData($this->_email, 'email')) . "," .
+        "user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . "," .
+        "ptags = " . $db->quote(scrubData($this->_ptags)) . "," .
+        "active = " . $db->quote(scrubData($this->_active, 'integer')) . "," .
+        "bio = " . $db->quote(scrubData($this->_bio, 'richtext')) . "," .
+        "position_number = " . $db->quote(scrubData($this->_position_number)) . "," .
+        "job_classification = " . $db->quote(scrubData($this->_job_classification)) . "," .
+        "room_number = " . $db->quote(scrubData($this->_room_number)) . "," .
+        "supervisor_id = " . $supervisor_id . "," .
+        "emergency_contact_name = " . $db->quote(scrubData($this->_emergency_contact_name)) . "," .
+        "emergency_contact_relation = " . $db->quote(scrubData($this->_emergency_contact_relation)) . "," .
+        "emergency_contact_phone = " . $db->quote(scrubData($this->_emergency_contact_phone)) . "," .
+        "street_address = " . $db->quote(scrubData($this->_street_address)) . "," .
+        "city = " . $db->quote(scrubData($this->_city)) . "," .
+        "state = " . $db->quote(scrubData($this->_state)) . "," .
+        "zip = " . $db->quote(scrubData($this->_zip)) . "," .
+        "home_phone = " . $db->quote(scrubData($this->_home_phone)) . "," .
+        "cell_phone = " . $db->quote(scrubData($this->_cell_phone)) . "," .
+        "fax = " . $db->quote(scrubData($this->_fax)) . "," .
+        "intercom = " . $db->quote(scrubData($this->_intercom)) . "," .
         "extra = " . $db->quote(scrubData($this->_extra)) . "," .
         "social_media = " . $db->quote(scrubData($this->_social_media)) . "," .
-      "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
-	  " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
+        "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
+        " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
     // echo $qUpStaff;
     $rUpStaff = $db->exec($qUpStaff);
@@ -1207,17 +1206,17 @@ public function outputLatLongForm() {
     global $CKBasePath;
 
     if ($wysiwyg_desc == 1) {
-    	include($CKPath);
-    	global $BaseURL;
+      include($CKPath);
+      global $BaseURL;
 
-    	$oCKeditor = new CKEditor($CKBasePath);
-    	$oCKeditor->timestamp = time();
-    	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-    	$config['height'] = '300';
-    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+      $oCKeditor = new CKEditor($CKBasePath);
+      $oCKeditor->timestamp = time();
+      $config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+      $config['height'] = '300';
+      $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-    	echo $oCKeditor->editor('bio', $this->_bio, $config);
-    	echo "<br />";
+      echo $oCKeditor->editor('bio', $this->_bio, $config);
+      echo "<br />";
     } else {
       echo "<textarea name=\"answer\" rows=\"6\" cols=\"70\">" . stripslashes($this->_answer) . "</textarea>";
     }
@@ -1308,18 +1307,18 @@ public function outputLatLongForm() {
 
   function correctPassword($lstrPassword)
   {
-  	if( strlen( $lstrPassword ) < 6 ) return false;
+    if( strlen( $lstrPassword ) < 6 ) return false;
 
     $lstrExpression = '/^.*(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*]).*$/';
 
     $lintMatch = preg_match($lstrExpression, $lstrPassword);
 
-	if($lintMatch > 0)
-	{
-		return true;
-	}
+    if($lintMatch > 0)
+    {
+      return true;
+    }
 
-	return false;
+    return false;
   }
 
   function getCoordinates() {
@@ -1330,20 +1329,20 @@ public function outputLatLongForm() {
 
   {
     $db = new Querier;
-  	switch (strtolower( $lstrType ))
-  	{
-  		case "insert":
-  			$lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email"));
-  			break;
-  		case "update":
-  			$lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email")) . "AND staff_id <> " . scrubData($this->_staff_id, "integer");
-  			break;
-  		default:
-  			return false;
-  	}
-  	$lrscSQL = $db->query($lstrQuery);
-  	$lintNumberOfRows = count($lrscSQL);
-  	if( $lintNumberOfRows > 0 ) return false;
-  	return true;
+    switch (strtolower( $lstrType ))
+    {
+      case "insert":
+        $lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email"));
+        break;
+      case "update":
+        $lstrQuery = "SELECT email FROM staff WHERE email = " . $db->quote(scrubData($this->_email, "email")) . "AND staff_id <> " . scrubData($this->_staff_id, "integer");
+        break;
+      default:
+        return false;
+    }
+    $lrscSQL = $db->query($lstrQuery);
+    $lintNumberOfRows = count($lrscSQL);
+    if( $lintNumberOfRows > 0 ) return false;
+    return true;
   }
 }
