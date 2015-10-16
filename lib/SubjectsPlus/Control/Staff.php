@@ -441,12 +441,11 @@ class Staff {
   	if ( $isDepartmentOmitted )
   	{
   		echo "<input type=\"hidden\" name=\"department_id[]\" id=\"department_id\" value=\"\" />";
-  	}else
-  	{
+  	} else {
   		echo "
-<div style=\"float: left; margin-right: 1em;\"><label for=\"department_id\">" . _("Department") . "</label>
-{$this->_departments}
-</div>";
+      <div style=\"float: left; margin-right: 1em; clear:both;\"><label for=\"department_id\">" . _("Department") . "</label>
+      {$this->_departments}
+      </div>";
   	}
 
   	if ( $isPriorityOmitted )
