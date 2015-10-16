@@ -1049,7 +1049,9 @@ li.fav-box-item:hover::before {color: #C03957;}
   background-color: #fff;
   padding-top: 1em;
 }
-
+.sp_section:nth-child(1) .sp_section_controls {
+  display:none;
+}
 
 .section_sort {
   cursor: move;
