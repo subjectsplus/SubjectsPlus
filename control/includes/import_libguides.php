@@ -1,7 +1,7 @@
 <?php  
 header("Content-Type: application/json");
-error_reporting(1);
-ini_set('display_errors', 1);
+
+
 include('../includes/autoloader.php');
 include('../includes/config.php');
 include('../includes/functions.php');
