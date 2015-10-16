@@ -31,18 +31,18 @@ $view_contact_info = "";
 if ($_SESSION['user_type_id'] == '1') {
   // allow user to update their own bio?
   if (isset($user_bio_update) && $user_bio_update == TRUE) {
-    $mod_bio = "<p class=\"tight\"><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+    $mod_bio = "<p class=\"star-class\"><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
   }
   // allow user to update their own photo?
  if (isset($user_photo_update) && $user_photo_update == TRUE) {
-    $mod_photo = "<p class=\"tight\"><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+    $mod_photo = "<p class=\"star-class\"><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
 
   }
 }
 
 // UM Only :  Now, export our contact information
 if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
-  $view_contact_info = "<p class=\"tight\"><img src=\"$IconPath/required.png\"  class=\"bullet\" alt=\"bullet\" /> <a href=\"admin/contacts.php\">" . _("View/Export Staff Contact Info") . "</a></p>";
+  $view_contact_info = "<p class=\"star-class\"><a href=\"admin/contacts.php\">" . _("View/Export Staff Contact Info") . "</a></p>";
 }
 
 ?>
@@ -56,13 +56,20 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
     <div class="topimage"></div>
     <div class="pluslet_body">
 
-    <?php print $headshot; ?>
-          <p class="tight"><img src="<?php echo $IconPath; ?>/required.png"  class="bullet" alt="bullet"/> <a href="includes/set_password.php?staff_id=<?php print $_SESSION["staff_id"]; ?>" id="reset_password">Reset Password </a></p>
-      <?php
-      print $mod_bio;
-      print $mod_photo;
-      print $view_contact_info;
-      ?>
+        <div class="pure-g" style="padding-top:0;">
+            <div class="pure-u-1 pure-u-lg-1-4 pure-u-xl-1-5 index_staff_photo">
+                <?php print $headshot; ?>
+            </div>
+            <div class="pure-u-1 pure-u-lg-3-4 pure-u-xl-4-5">
+                <p class="star-class"><a href="includes/set_password.php?staff_id=<?php print $_SESSION["staff_id"]; ?>" id="reset_password">Reset Password </a></p>
+                <?php
+                print $mod_bio;
+                print $mod_photo;
+                print $view_contact_info;
+                ?>
+            </div>
+        </div>
+         
     </div>
   </div>
   <?php 

@@ -93,12 +93,13 @@ class StaffDisplay {
 
         break;
       case "By Department":
-        $q = "select distinct d.department_sort, staff.staff_sort, name, lname, fname, title, staff.tel, staff.email, d.department_id, d.telephone, staff.staff_id, staff.ptags
-			FROM department d, staff
-			WHERE d.department_id = staff.department_id
-			AND user_type_id = '1'
-      AND active = 1
-			order by department_sort, d.name,  staff_sort desc, lname";
+        $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, s.staff_id, s.ptags
+        FROM staff s, staff_department sd, department d
+        WHERE s.staff_id = sd.staff_id
+        AND sd.department_id = d.department_id
+        AND user_type_id = '1'
+        AND active =1
+        ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
         $db = new Querier;
         $r = $db->query($q);

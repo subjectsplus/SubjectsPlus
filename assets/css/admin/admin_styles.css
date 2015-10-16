@@ -108,6 +108,19 @@ a:hover {
 
 p.tight { margin: .2em 0;}
 
+.star-class {
+  margin: .2em 0 .2em 0;
+}
+
+.star-class:before {
+  content:"\f005";
+  font-family: FontAwesome;
+  font-size: 0.9em;
+  padding: 0 4px 0 0;
+}
+
+.index_staff_photo {margin-bottom: 10px;}
+
 .wrapper {
   margin: 0 auto;
   text-align: left;
@@ -548,10 +561,10 @@ html,body { height:100%; }
    margin: 0 0 20px 0;
   overflow: auto; max-height:385px;
   padding:10px 0;
+  width: 100% !important;
 }
 
 #box_options {
-  cursor: pointer;
   display: block;
   margin: 0 0 30px 0;
   padding: 0;  
@@ -639,7 +652,7 @@ html,body { height:100%; }
   background-image: url(images/icons/gsearch-white.png);  
 }
 
-.googlescholar-text {margin-top: 30px;}
+.googlescholar-text, .guidesearch-text {margin-top: 30px;}
 
 #pluslet-id-1{
   background-image: url(images/icons/all-items.svg);
@@ -651,6 +664,30 @@ html,body { height:100%; }
 
 #pluslet-id-1:hover {
   background-image: url(images/icons/all-items-white.svg);  
+}
+
+#pluslet-id-GuideSearch {
+  background-image: url(images/icons/guide-search.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-GuideSearch:hover {
+  background-image: url(images/icons/guide-search-white.svg);  
+}
+
+#pluslet-id-NewGuides {
+  background-image: url(images/icons/new-guides.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-NewGuides:hover {
+  background-image: url(images/icons/new-guides-white.svg);  
 }
 
 
@@ -677,7 +714,9 @@ html,body { height:100%; }
 .find-box-tab-list li.ui-tabs-active {background: #d5d5d5 !important; color: #FFF !important;}
 .find-box-tab-list li.ui-tabs-active a {color: #333 !important;}
 
-.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; overflow:auto; max-height:540px;}
+.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; max-height:540px; }
+
+.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:524px;}
 
 .guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important; border: 1px solid #bcbbbb;padding: 4px;}
 
@@ -722,6 +761,7 @@ a.pure-button-secondary:hover {
    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
    margin: 0 0 20px 0;
    overflow: auto; max-height:275px;
+   width: 100% !important;
 }
 
 .fav-boxes-list, .fav-templates-list {list-style: inside none none; margin: 0 0 0 0; padding:0.75em 0.5em;}
@@ -740,7 +780,7 @@ a.pure-button-secondary:hover {
   padding: 0 8px 0 0;
 }
 
-.fav-box-item, .fav-template-item { width: 175px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
+.fav-box-item, .fav-template-item { width: 165px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
 .clone-favorite.fav-box-item {
   font-size:12px !important;
@@ -815,7 +855,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   border-radius: 4px;
 }
 
-.databases-results-display {overflow: auto; max-height:475px;}
+.databases-results-display {max-height:475px;}
 
 .databases-search {
   border: 1px solid #bcbbbb;
@@ -833,7 +873,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   font-size: 0.9em;
 }
 
-.databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 0;}
+.databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 0; overflow: auto; max-height:415px; width: 98% !important;}
 
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 4px 5px 0 5px; 
   color: #333; font-size: 14px; line-height: 1.3em; display:inline-block; margin: 0;} 
@@ -844,11 +884,11 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .no-box-results {color: #333; padding: 6px 2px; display: block;}
 
-.db-list-content {padding:8px;display:none; margin: 20px 0;}
+.db-list-content {padding:8px;display:none; margin: 20px 0; width: 295px !important; overflow: hidden !important;}
 
 .db-list-content h4 {margin: 0 0 10px 0;}
 
-.db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; }
+.db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; overflow: auto; max-height:230px; width: 281px !important;}
 
 .db-list-item-draggable {width: 270px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: move; padding: 8px 0; 
   color:#FFF;  font-size: 1em; line-height: 1.3em; border-bottom: 1px dotted #858585;}
@@ -874,6 +914,7 @@ li.fav-box-item:hover::before {color: #C03957;}
     margin: 0 0 20px;
     max-height: 385px;
     overflow: auto;
+    width: 98% !important;
 }
 
 .myguide-button {font-size:0.8em;}
@@ -1494,8 +1535,20 @@ h4.toc-heading {margin: 6px 0;}
   background: url(images/icons/powered_by_google_on_white.png) 98% bottom no-repeat;
   display: block;
   height: 15px; 
-  background-size: 35% auto; 
+  max-width: 125px;
+  background-size:contain;
 }
+
+
+
+/* Guide Select Pluslet */
+.pluslet_container {width:100%; margin: 0 10px;}
+
+h4.guide-select-heading {margin: 6px 0;}
+
+.pluslet_container .pure-form select {width:200px !important;}
+
+
 
 
 /*** toggle pluslet body --CBR */
@@ -1694,6 +1747,85 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 /* Pluslet ID 1 */
 .admin-prompt {margin: 0 5px 10px 0; text-align: right; font-size: 0.9em;}
+
+
+
+/* JS Scrollbar styles  - on dark background*/
+.track {
+    width: 6px;
+    background-clip: padding-box;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 16px;
+}
+
+.track.dragging, .track:hover { }
+    
+.track:active {    
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                        inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.handle {
+    width: 6px;
+    background-clip: padding-box;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 16px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    cursor: grab;
+}
+
+.handle:hover {
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.dragging .handle, .handle:active { }
+
+
+/* JS Scrollbar styles  - on light background*/
+.track2 {
+    width: 8px;
+    background-clip: padding-box;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+}
+
+
+.track2:active {    
+    background: rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                        inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.handle2 {
+    width: 8px;
+    background-clip: padding-box;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    cursor: grab;
+}
+
+.handle2:hover {
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+    
 
 
 
@@ -3127,6 +3259,52 @@ li.hidden_tab.ui-state-default
 
 
 
+
+/* For Imported Guides - JL */
+
+
+.book {
+  display: inline-block;
+    line-height:1.3em;
+      font-size:.8em;
+}
+
+.book-cover-art {
+    float:left;
+    width: 30%;
+    margin-right: 3%;
+  clear:both;
+}
+
+.book-title {
+
+}
+.book-author {
+  font-style:italic;
+  
+
+}
+.book-call-number {
+
+  
+}
+.book-description {
+
+}
+
+.link-description {
+  
+  line-height:1.5em;
+  margin-top:1em;
+}
+
+.links {
+    margin-bottom:5%;
+}
+
+
+
+
 /*///////////////////////////////////////////
    // Responsive - PV
    ////////////////////////////////////////////*/
@@ -3161,50 +3339,10 @@ li.hidden_tab.ui-state-default
   padding: 0.5em 0.17em;
 }
 
+.star-class { margin: .2em 0 .2em 8px;}
+.star-class:before { padding: 0 4px 0 8px;}
 
 
-}
-
-/* For Imported Guides */
-
-
-.book {
-	display: inline-block;
-    line-height:1.3em;
-    	font-size:.8em;
-}
-
-.book-cover-art {
-    float:left;
-    width: 30%;
-    margin-right: 3%;
-	clear:both;
-}
-
-.book-title {
-
-}
-.book-author {
-	font-style:italic;
-	
-
-}
-.book-call-number {
-
-	
-}
-.book-description {
-
-}
-
-.link-description {
-	
-	line-height:1.5em;
-	margin-top:1em;
-}
-
-.links {
-    margin-bottom:5%;
 }
 
 
@@ -3220,7 +3358,5 @@ li.hidden_tab.ui-state-default
   padding: 0.5em 0.5em;
 }
 
-
-
-}
+} /* end last responsive block */
 

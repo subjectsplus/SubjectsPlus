@@ -79,6 +79,9 @@ function makeEditable(lstrSelector) {
 			   $(".pluslet.type-googlescholar").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-googlesearch").find(".body_set").addClass("hide-settings");
 			   $(".pluslet.type-guideselect").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-newdbs").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-guidesearch").find(".body_set").addClass("hide-settings");
+			   $(".pluslet.type-newguides").find(".body_set").addClass("hide-settings");			   
 			   
 			   
 
@@ -94,6 +97,7 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-googlescholar").find(".links_set").addClass("hide-settings");
 				$(".pluslet.type-googlesearch").find(".links_set").addClass("hide-settings");
 			    $(".pluslet.type-guideselect").find(".links_set").addClass("hide-settings");
+			    $(".pluslet.type-guidesearch").find(".links_set").addClass("hide-settings");
 
 
 
@@ -111,6 +115,9 @@ function makeEditable(lstrSelector) {
 				$(".pluslet.type-googlescholar").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-googlesearch").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-guideselect").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-newdbs").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-guidesearch").find(".fav_set").addClass("hide-settings");
+				$(".pluslet.type-newguides").find(".fav_set").addClass("hide-settings");
 
 
 
