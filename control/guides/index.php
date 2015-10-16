@@ -144,7 +144,7 @@ $('#guides').select2();
         </ol>
       </div>
     </div>
-<!--
+
     <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Import LibGuides"); ?></div>
@@ -152,12 +152,11 @@ $('#guides').select2();
       </div>
       <div class="pluslet_body">
        <p>You can use this feature to import LibGuides</p>
-       <a href="../includes/libguides_importer.php"><?php print _("Import LibGuides"); ?></a>
+       <a href="../includes/libguides_importer_user.php"><?php print _("Import LibGuides"); ?></a>
         
       </div>
 	  </div>
 
-    -->
    <div class="pluslet">
       <div class="titlebar">
         <div class="titlebar_text"><?php print _("Tips"); ?></div>

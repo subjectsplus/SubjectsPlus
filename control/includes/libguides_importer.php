@@ -6,6 +6,11 @@
 header("Content-Type: text/html");
 error_reporting(1);
 ini_set('display_errors', 1);
+
+$subcat = "guides";
+$page_title = "LibGuides Importer Stage 2";
+
+
 include('../includes/autoloader.php');
 include('../includes/config.php');
 include('../includes/functions.php');
