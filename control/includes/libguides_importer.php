@@ -11,9 +11,6 @@ $subcat = "guides";
 $page_title = "LibGuides Importer Stage 2";
 
 
-include('../includes/autoloader.php');
-include('../includes/config.php');
-include('../includes/functions.php');
 include('../includes/header.php');
 
 use SubjectsPlus\Control\Querier;

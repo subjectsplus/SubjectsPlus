@@ -1,14 +1,10 @@
 <?php
 header("Content-Type: text/html");
-error_reporting(1);
-ini_set('display_errors', 1);
 
 $subcat = "guides";
 $page_title = "LibGuides Importer Stage 1";
 
-include('../includes/autoloader.php');
-include('../includes/config.php');
-include('../includes/functions.php');
+
 include('../includes/header.php');
 
 use SubjectsPlus\Control\Querier;
