@@ -4,8 +4,6 @@
 // http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer
 
 header("Content-Type: text/html");
-error_reporting(1);
-ini_set('display_errors', 1);
 
 $subcat = "guides";
 $page_title = "LibGuides Importer Stage 2";
@@ -144,11 +142,8 @@ console.log(previously_imported);
   </table>	
 </div>
   
-
-<link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
-
-<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>";
+<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
 <style>
 .select2-container {
 width: 20%;
