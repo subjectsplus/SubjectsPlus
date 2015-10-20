@@ -837,7 +837,9 @@ public function importLibGuides() {
 
     // Remove the apostrophes and spaces from the shortform 
 
-    $shortform = preg_replace('/\s+/','_', str_replace("'", "", $subject[0] ));
+   
+    $shortform = preg_replace("/[^[:alnum:]]/", '', $subject[0]);
+    
     
     // Escape the apostrophes in the guide name 
 
