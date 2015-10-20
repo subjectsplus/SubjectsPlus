@@ -59,11 +59,12 @@ $omit_user_columns = array( );
 $require_user_columns = array( "title", "classification", "tel", "address", "city", "state", "zip", "emergency_contact");
 
 //used to declare which pluslets are activated in new box drop-down
-$pluslets_activated = array( "Basic", "Heading", "Feed", "TOC", "HTML5Video", "2", "4", "WorldCat", "Catalog", "Related", "ArticlesPlus", "SocialMedia", "SubjectSpecialist", "GoogleBooks", "GoogleScholar", "GoogleSearch", "1", "GuideSearch", "GuideSelect", "NewDBs", "NewGuides”);
+$pluslets_activated = array( "Basic", "Heading", "Feed", "TOC", "HTML5Video", "2", "4", "WorldCat", "Catalog", "Related", "ArticlesPlus", "SocialMedia", "SubjectSpecialist", "GoogleBooks", "GoogleScholar", "GoogleSearch", "1", "GuideSearch", "GuideSelect", "NewDBs", "NewGuides"));
 
-// These are used to allow the admin to set different "themes" for the pluslet titlebar
+// These are used to allow the admin to set different 'themes' for the pluslet titlebar
 // which the guide author may choose from
-$titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
+
+$titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite"));
 
 
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
