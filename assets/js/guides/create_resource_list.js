@@ -130,9 +130,9 @@ $(document).ready(function () {
 			
 			
 			$('.db-list-results').append("<li class='db-list-item-draggable' value='" + databaseToken.record_id +"'><span class='db-list-label'>"+ databaseToken.label +
-					"</span><div><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
-					" Description  </span><span class='show-icons-toggle db-list-toggle'><i class='fa fa-minus'></i> <i class='fa fa-check'></i>" +
-					" Icons </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
+					"</span><div><span class='show-icons-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
+					" Icons  </span><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i> <i class='fa fa-check'></i>" +
+					" Description </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
 					" Note </span></div></li>");
 			$('.db-list-results').sortable();
 		    $('.db-list-results').disableSelection();
@@ -161,11 +161,11 @@ $(document).ready(function () {
 			toggleElement.children().find('.fa-minus').toggle();
 
 			
-		    include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0; 
-		    include_icons = toggleElement.parent().find('.show-icons-toggle').hasClass('active') | 0;
+		    include_icons = toggleElement.parent().find('.show-icons-toggle').hasClass('active') | 0; 
+		    include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0;
 		    display_note = toggleElement.parent().find('.include-note-toggle').hasClass('active') | 0; 
 			
-			var display_options = ''+include_description +  ''+include_icons + ''+display_note +"";
+			var display_options = ''+include_icons +  ''+include_description + ''+display_note +"";
 		    toggleElement.parent().parent().data({'display_options' : display_options});
 
 	}
