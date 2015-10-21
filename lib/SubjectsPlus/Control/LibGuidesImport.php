@@ -16,7 +16,9 @@ class LibGuidesImport {
 	private $_guide_owner;
 	private $_row = 0;
 	private $_column = 0;
-		
+	private $_staff_id; 
+	
+	
 	public function __construct($lib_guides_xml_path) {
 		$libguides_xml = new \SimpleXMLElement ( file_get_contents ( $lib_guides_xml_path, 'r' ) );
 		
@@ -37,6 +39,15 @@ class LibGuidesImport {
 	public function getGuideID() {
 		return $this->_guide_id;
 	}
+	
+	
+	public function setStaffID($staff_id) {
+		$this->_staff_id = $staff_id;
+	}
+	public function getStaffID() {
+		return $this->_staff_id;
+	}
+	
 	public function setRow($row) {
 		$this->_row = $row;
 	}
@@ -57,11 +68,30 @@ class LibGuidesImport {
 		}
 		return $this->_column;
 	}
+	
+	
+	
+	
+	
+	
 	public function importLog($log_text = "") {
+
+		
 		$formatted_text = "<p>" . $log_text . "</p>";
 		
-		file_put_contents ( "../../../import_log.html", $formatted_text, FILE_APPEND );
+		$log_directory = getControlPath() . "logs/";
+		$log_file = $log_directory . "import_log.html";
+
+		
+		$f = file_put_contents ($log_file, $formatted_text, FILE_APPEND );
+		
+		if ($f) {
+		}
+		
 	}
+	
+	
+	
 	public function insertBasicPluslet($box, $section_id, $description) {
 		$row = $this->getRow ();
 		$column = $this->getColumn ();
@@ -72,7 +102,6 @@ class LibGuidesImport {
 		if ($this->db->exec ( "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, $description_clean, 'Basic')" )) {
 			
 			$this->importLog("Inserted pluslet '$box->NAME'");
-		$clean_description = null;
 	
 	} else {
 	
@@ -243,7 +272,7 @@ public function importBox($box, $section_id) {
   $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe'));
   $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
   $config->set('HTML.SafeIframe', true);
-  $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/|www.khanacademy.org/embed_video)%');
+  $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
   
   $purifier = new \HTMLPurifier($config);
   
@@ -278,12 +307,12 @@ public function importBox($box, $section_id) {
   }
   }
     
-  // Create html for the description
-
-  $raw_description = $doc->saveHTML();
   
-  if ($raw_description != null) {  
-  $description .= "<div class=\"description\">".  $raw_description  . "</div>";
+  // Create html for the description
+  $description = $doc->saveHTML();
+  
+  if ($description != null) {  
+  $description .= "<div class=\"description\">". $description  . "</div>";
   }	
   
   switch ($box->BOX_TYPE) {      
@@ -390,7 +419,6 @@ public function importBox($box, $section_id) {
   	
    $this->insertPluslet($box, $section_id, "GoogleScholar", "Google Scholar");
   	
-
 }
 
 
@@ -477,21 +505,6 @@ public function downloadFile($url) {
 
 }
 
-
-public function getStaffID ($email_address) {
-  // This method takes an email address and returns the subjectsplus staff id for the user
-
-  $staff_id = 1; 
-  
-  $staff_id_query = $this->db->query("SELECT staff_id FROM staff WHERE email = '$email_address'");
-
-  if (isset($staff_id[0][0])) {
-  	$staff_id = $staff_id_query[0][0];
-  }
-  
-  return $staff_id;
-
-}
 
 public function outputOwners() {
 
@@ -874,7 +887,7 @@ public function importLibGuides() {
 
       if ($this->getGuideOwner() != null) {
       	      	
-	$staff_id = $this->getStaffID( $subject[8] );
+	$staff_id = $this->getStaffID();
 	
 	$this->importLog ("Staff ID: " . $staff_id );
 	

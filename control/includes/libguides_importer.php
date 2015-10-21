@@ -117,7 +117,6 @@ console.log(previously_imported);
     </div>
     </div>
   
-   
 
 
 <div class="pluslet"> 
@@ -150,4 +149,7 @@ width: 20%;
 margin-right: 3%;
 }
 </style>
+
+
+<span class="staff-id" data-staff_id="<?php echo $_SESSION['staff_id']; ?>"/>
 <script src="libguides_importer.js"></script>

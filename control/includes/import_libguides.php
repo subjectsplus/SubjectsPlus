@@ -16,7 +16,7 @@ $libguides_importer = new LibGuidesImport('libguides.xml');
 
 // Set the guide id 
 $libguides_importer->setGuideID($_GET['libguide']);
-
+$libguides_importer->setStaffID($_GET['staff_id']);
 
 // Import the guides with the XML you just loaded
 echo $libguides_importer->importLibGuides();
