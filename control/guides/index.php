@@ -152,7 +152,7 @@ $('#guides').select2();
       </div>
       <div class="pluslet_body">
        <p>You can use this feature to import LibGuides</p>
-       <a href="./lgimporter/lg_importer.php"><?php print _("Import LibGuides"); ?></a>
+       <a href="./lgimporter/lg_importer_user_selection.php"><?php print _("Import LibGuides"); ?></a>
         
       </div>
 	  </div>

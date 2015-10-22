@@ -16,27 +16,18 @@ include('../../includes/functions.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
+
 $db = new Querier;
 $log = new Logger;
 
-$libguides_importer = new LGImport('libguides.xml',$log,$db);
+$lg_importer = new LGImport('libguides.xml',$log,$db);
 
-
-// Set the guide id 
-$libguides_importer->setGuideID($_GET['libguide']);
-$libguides_importer->setStaffID($_GET['staff_id']);
+// Set the guide id
+$lg_importer->setGuideID($_GET['libguide']);
+$lg_importer->setStaffID($_GET['staff_id']);
 
 // Import the guides with the XML you just loaded
-echo $libguides_importer->importLibGuides();
-
-
-
-
-
-
-
-
-
+echo $lg_importer->importLibGuides();
 
 
 
