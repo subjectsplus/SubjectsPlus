@@ -173,7 +173,7 @@ $('.import_links').on(
 					"<div class=\"loading loader\">Loading... </div>");
 
 			importGuides(selected_guide_id, selected_guide_name,
-					"import_libguides_links.php");
+					"lg_importer_links_json.php");
 
 		});
 
@@ -187,7 +187,7 @@ $('.import_guide').on(
 					'option:selected').val();
 
 			importGuides(selected_guide_id, selected_guide_name,
-					"import_libguides.php");
+					"lg_importer_json.php");
 			$('.import-output').append(
 					"<div class=\"loading loader\">Loading...</div>");
 

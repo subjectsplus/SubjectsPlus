@@ -9,7 +9,7 @@
 namespace SubjectsPlus\Control;
 
 require_once (__DIR__ . "../../../HTMLPurifier/HTMLPurifier.auto.php");
-class LibGuidesImport {
+class LGImport {
 	private $_guide_id;
 	private $_libguides_xml;
 	private $_guide_owner;

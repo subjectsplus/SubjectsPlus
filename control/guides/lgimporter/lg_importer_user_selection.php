@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file libguides_importer_user.php
- *   @brief
+ *   @brief On this page the user chooses who's guides they would like to import. 
  *   @author little9 (Jamie Little)
  *   @date June 2014
  */
@@ -14,7 +14,7 @@ $page_title = "LibGuides Importer Stage 1";
 include('../../includes/header.php');
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\LibGuidesImport;
+use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
 ?>
 
@@ -37,7 +37,7 @@ use SubjectsPlus\Control\Logger;
 $db = new Querier;
 $log = new Logger;
 
-$libguides_importer = new LibGuidesImport('libguides.xml',$log,$db);
+$libguides_importer = new LGImport('libguides.xml',$log,$db);
 $libguides_importer->OutputOwners();
 
 ?>
