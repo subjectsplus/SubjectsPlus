@@ -37,7 +37,7 @@ if (isset($_POST["submit_record"])) {
         $record->insertRecord();
         $ok_record_id = $record->getRecordId();
     } else {
-        $record->updateRecord();
+        $record->updateRecord("brief");
     }
 
     // Show feedback
