@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file GoogleScholar.php
- *   @brief
+ *   @brief A Google Scholar search box
  *   @author little9 (Jamie Little)
  *   @date September 2015
  */
