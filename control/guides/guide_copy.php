@@ -1,4 +1,10 @@
 <?php
+/**
+ *   @file guide_copy.php
+ *   @brief This page takes a subject id and creates a copy of the that guide. It includes a form for selecting which guide to copy. 
+ *   @author little9 (Jamie Little)
+ *   @date July 2015
+ */
 global $AssetPath;
 
 use SubjectsPlus\Control\Querier;

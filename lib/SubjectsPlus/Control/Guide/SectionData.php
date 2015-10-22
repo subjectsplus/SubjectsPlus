@@ -1,7 +1,16 @@
 <?php
+/**
+ *   @file SaveGuide.php
+ *   @brief This class is used to write a section to the database.
+ *
+ *   @author little9 (Jamie Little)
+ *   @date Auguest 2015
+ */
 
 namespace SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Guide;
+
+
 
 class SectionData {
 	

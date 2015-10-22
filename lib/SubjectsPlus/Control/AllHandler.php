@@ -1,5 +1,5 @@
 <?php
-    namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
 /**
  *   @file
  *   @brief
