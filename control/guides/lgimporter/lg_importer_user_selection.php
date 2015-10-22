@@ -31,7 +31,7 @@ use SubjectsPlus\Control\Logger;
   <div class="pluslet_body"> 
 <p>Please select your name below to being importing your guides.</p>
 <p>After selecting your name, you'll be able to choose which guide you want to import.</p>
-<form action="libguides_importer.php" method="GET">
+<form action="lg_importer.php" method="GET">
 <?php 
 
 $db = new Querier;
