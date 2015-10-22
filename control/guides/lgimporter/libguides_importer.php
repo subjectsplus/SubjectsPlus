@@ -1,5 +1,11 @@
 <?php
-
+/**
+ *   @file libguides_impoter_user.php
+ *   @brief
+ *   @author little9 (Jamie Little)
+ *   @date June 2014
+ */
+ 
 // For instruction on how to use this please see the follwing page on the wiki:
 // http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer
 
@@ -9,10 +15,11 @@ $subcat = "guides";
 $page_title = "LibGuides Importer Stage 2";
 
 
-include('../includes/header.php');
+include('../../includes/header.php');
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LibGuidesImport;
+use SubjectsPlus\Control\Logger;
 
 
 ?>
@@ -41,8 +48,10 @@ display:none;
 
 <?php 
 
-$libguides_importer = new LibGuidesImport('libguides.xml');
+$db = new Querier;
+$log = new Logger;
 
+$libguides_importer = new LibGuidesImport('libguides.xml',$log,$db);
 ?>
 
 <div class="pure-g">
@@ -107,7 +116,7 @@ console.log(previously_imported);
  if (previously_imported) { 
 	 for (var i = 0; i < previously_imported.length; i++) { 
 	    console.log(previously_imported[i]); 
-	    $('.previously-imported').append("<li><a target=\"_blank\" href=../guides/guide.php?subject_id=" + previously_imported[i].guide_id + ">" + previously_imported[i].guide_name + "</li>"); 
+	    $('.previously-imported').append("<li><a target=\"_blank\" href=../guide.php?subject_id=" + previously_imported[i].guide_id + ">" + previously_imported[i].guide_name + "</li>"); 
 	    
 	 }
  }
