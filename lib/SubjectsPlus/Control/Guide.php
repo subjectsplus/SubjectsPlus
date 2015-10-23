@@ -402,7 +402,7 @@ class Guide
             }
         }
 
-        $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' ORDER BY lname, fname";
+        $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' AND active = '1' ORDER BY lname, fname";
 
         $querierStaff = new Querier();
         $staffArray = $querierStaff->query($qStaff);
