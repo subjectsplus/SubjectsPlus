@@ -497,7 +497,7 @@ include("includes/header.php");
 		<div class="pluslet_body">
 			<p><span class="comment_num">!</span><strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
 			<br />
-				<?php print "stage = " . $stage_two; if (isset($stage_two)) { 
+				<?php if (isset($stage_two)) { 
 					print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
 				} else {  ?>
 
