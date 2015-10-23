@@ -497,18 +497,25 @@ include("includes/header.php");
 		<div class="pluslet_body">
 			<p><span class="comment_num">!</span><strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
 			<br />
-			<form id="tellus" action="talkback.php" method="post" class="pure-form">
-				<p class="zebra oddrow"><strong><?php print _("your name (optional):"); ?></strong><br />
-					<input type="text" name="name" size="20" value="<?php print $this_name; ?>" /></p>
+				<?php if (isset($stage_two) && $stage_two == "ok") { 
+					print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
+				} else {  ?>
 
-					<p class="zebra evenrow"><strong><?php print _("comment:"); ?></strong><br />
-						<textarea name="the_suggestion" cols="25" rows="4"><?php print $this_comment; ?></textarea></p>
-
-						<p class="zebra oddrow"><strong><?php print $stk; ?></strong><br />
-							<?php print _("Enter Number:"); ?> <input type="text" name="skill" size="2" /></p>
-
-							<p class="zebra evenrow"><input type="submit" class="pure-button pure-button-topsearch" name="submit_comment" value="<?php print _("Submit"); ?>" /></p>
-						</form>
+		      		<form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
+			        <div class="talkback_form">			          
+			          <p><strong><?php print _("Your comment:"); ?></strong><br />
+			          <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
+			          <strong><?php print _("Your email (optional):"); ?></strong><br />
+			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
+			          <br />
+			          <?php print _("(In case we need to contact you)"); ?>
+			          <br /><br />
+			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" />
+			          <br /><br />
+			          <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" /></p>
+			        </div>
+		      </form>
+		      <?php  } ?>
 					</div>
 				</div>
 				<!-- end pluslet -->
