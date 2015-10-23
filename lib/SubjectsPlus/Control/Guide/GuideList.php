@@ -1,9 +1,13 @@
 <?php
-
+/**
+ *   @file GuideList.php
+ *   @brief Return a list of subjects guides as an array and json
+ *
+ *   @author little9 (Jamie Little)
+ *   @date Auguest 2015
+ */
 
 namespace SubjectsPlus\Control\Guide;
-
-
 
 use SubjectsPlus\Control\Interfaces\OutputInterface;
 use SubjectsPlus\Control\Querier;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  *   @file LibGuidesImport.php
  *   @brief
@@ -9,22 +8,19 @@
 namespace SubjectsPlus\Control;
 
 require_once (__DIR__ . "../../../HTMLPurifier/HTMLPurifier.auto.php");
-
-class LibGuidesImport {
+class LGImport {
 	private $_guide_id;
 	private $_libguides_xml;
 	private $_guide_owner;
 	private $_row = 0;
 	private $_column = 0;
-	private $_staff_id; 
-	
-	
-	public function __construct($lib_guides_xml_path) {
+	private $_staff_id;
+	private $log;
+	public function __construct($lib_guides_xml_path, Logger $log, Querier $db) {
 		$libguides_xml = new \SimpleXMLElement ( file_get_contents ( $lib_guides_xml_path, 'r' ) );
 		
 		$this->libguidesxml = $libguides_xml;
-		
-		$db = new Querier ();
+		$this->log = $log;
 		$this->db = $db;
 	}
 	public function setGuideOwner($guide_owner) {
@@ -39,15 +35,12 @@ class LibGuidesImport {
 	public function getGuideID() {
 		return $this->_guide_id;
 	}
-	
-	
 	public function setStaffID($staff_id) {
 		$this->_staff_id = $staff_id;
 	}
 	public function getStaffID() {
 		return $this->_staff_id;
 	}
-	
 	public function setRow($row) {
 		$this->_row = $row;
 	}
@@ -68,30 +61,6 @@ class LibGuidesImport {
 		}
 		return $this->_column;
 	}
-	
-	
-	
-	
-	
-	
-	public function importLog($log_text = "") {
-
-		
-		$formatted_text = "<p>" . $log_text . "</p>";
-		
-		$log_directory = getControlPath() . "logs/";
-		$log_file = $log_directory . "import_log.html";
-
-		
-		$f = file_put_contents ($log_file, $formatted_text, FILE_APPEND );
-		
-		if ($f) {
-		}
-		
-	}
-	
-	
-	
 	public function insertBasicPluslet($box, $section_id, $description) {
 		$row = $this->getRow ();
 		$column = $this->getColumn ();
@@ -101,42 +70,34 @@ class LibGuidesImport {
 		
 		if ($this->db->exec ( "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, $description_clean, 'Basic')" )) {
 			
-			$this->importLog("Inserted pluslet '$box->NAME'");
-	
-	} else {
-	
-	
-		$this->importLog("Error inserting pluslet:");
-		ob_start();
-		var_dump($this->db->errorInfo(ob_get_clean()));
+			$this->log->importLog ( "Inserted pluslet '$box->NAME'" );
+		} else {
+			
+			$this->log->importLog ( "Error inserting pluslet:" );
+			ob_start ();
+			var_dump ( $this->db->errorInfo ( ob_get_clean () ) );
+		}
 		
-	
+		if ($this->db->exec ( "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)" )) {
+			$this->log->importLog ( "Inserted pluslet section relationship" );
+			
+			// This sticks the newly created pluslet into a section
+		} else {
+			
+			$this->log->importLog ( "Error inserting pluslet_section:" );
+			$this->log->importLog ( $this->db->errorInfo () );
+			$this->log->importLog ( "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)" );
+		}
 	}
-	
-	
-	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)")) {
-		$this->importLog("Inserted pluslet section relationship");
-	
-	
-		// This sticks the newly created pluslet into a section
-	} else {
-	
-	
-		$this->importLog("Error inserting pluslet_section:");
-		$this->importLog( $this->db->errorInfo());
-		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)");
-	}
-}
-
-public function insertPluslet($box, $section_id, $pluslet_type, $pluslet_title) {
-	$row = $this->getRow();
-	$column = $this->getColumn();
-	
-	$this->db->exec("INSERT INTO pluslet(title, type,body) VALUES ('$pluslet_title', '$pluslet_type','')");
-	
-	$pluslet_id = $this->db->last_id();
-	
-	$this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet_id', $section_id, $column, $row)");
+	public function insertPluslet($box, $section_id, $pluslet_type, $pluslet_title) {
+		$row = $this->getRow ();
+		$column = $this->getColumn ();
+		
+		$this->db->exec ( "INSERT INTO pluslet(title, type,body) VALUES ('$pluslet_title', '$pluslet_type','')" );
+		
+		$pluslet_id = $this->db->last_id ();
+		
+		$this->db->exec ( "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet_id', $section_id, $column, $row)");
 }
 
 public function insertRSSPluslet($box, $section_id, $feed_url) {
@@ -146,29 +107,29 @@ public function insertRSSPluslet($box, $section_id, $feed_url) {
 	
 	if($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type, extra) VALUES ($box->BOX_ID, '$box->NAME', '$feed_url', 'Feed', '{\"num_items\":5,  \"show_desc\":1, \"show_feed\": 1, \"feed_type\": \"RSS\"}' )")) {
 	
-		$this->importLog("Inserted RSS pluslet '$box->NAME'");
+		$this->log->importLog("Inserted RSS pluslet '$box->NAME'");
 	
 	} else {
 	
-		$this->importLog("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ('$box->BOX_ID', '$box->NAME', '$feed_url', 'Feed', '' )");
+		$this->log->importLog("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ('$box->BOX_ID', '$box->NAME', '$feed_url', 'Feed', '' )");
 		
-		$this->importLog("RSS RSSS RSS Error inserting pluslet:");
-		$this->importLog($this->db->errorInfo());
+		$this->log->importLog("RSS RSSS RSS Error inserting pluslet:");
+		$this->log->importLog($this->db->errorInfo());
 	
 	}
 	
 	
 	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)")) {
-		$this->importLog("Inserted pluslet section relationship");
+		$this->log->importLog("Inserted pluslet section relationship");
 	
 	
 		// This sticks the newly created pluslet into a section
 	} else {
 	
 	
-		$this->importLog("RSS Error inserting pluslet_section:");
-		$this->importLog( $this->db->errorInfo());
-		$this->importLog("RSS INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)");
+		$this->log->importLog("RSS Error inserting pluslet_section:");
+		$this->log->importLog( $this->db->errorInfo());
+		$this->log->importLog("RSS INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->BOX_ID', '$section_id', $column, $row)");
 	}
 	
 	
@@ -184,16 +145,16 @@ public function insertLinkedBox($box, $section_id) {
 	$column = $this->getColumn();
 	
 	if($this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)")) {
-		$this->importLog("Inserted linked box");
+		$this->log->importLog("Inserted linked box");
 
 
 		// This sticks the newly created pluslet into a section
 	} else {
 
 
-		$this->importLog("Error inserting pluslet_section:");
-		$this->importLog( $this->db->errorInfo());
-		$this->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)");
+		$this->log->importLog("Error inserting pluslet_section:");
+		$this->log->importLog( $this->db->errorInfo());
+		$this->log->importLog("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$box->LINKED_BOX_ID', '$section_id', $column, $row)");
 	}
 	
 }
@@ -242,9 +203,9 @@ if ($record_title[0]['title']) {
   
 }
 
-$this->importLog ("Insert record:");
-$this->importLog($record_title); 
-$this->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL));
+$this->log->importLog ("Insert record:");
+$this->log->importLog($record_title); 
+$this->log->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL));
 
     }
     
@@ -256,7 +217,6 @@ $this->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote(
 
 public function importBox($box, $section_id) {
 		
-  $wc = new WordCleaner();
   $this->db->exec("SET NAMES utf-8" );
   	
   $description = null;
@@ -295,11 +255,11 @@ public function importBox($box, $section_id) {
   		$test = strpos($attr->value, "http://");
   
   		if ($test !== false) {
-  	  $this->importLog( $attr->value);
+  	  $this->log->importLog( $attr->value);
   	   
   	  $attr->value = $this->downloadImages($attr->value);
   	   
-  	  $this->importLog($attr->value);
+  	  $this->log->importLog($attr->value);
   
   
   		}
@@ -384,8 +344,6 @@ public function importBox($box, $section_id) {
   	foreach ( $box->FILES as $files )  {
 
   		foreach ($files->FILE as $file) {
-
-  		//	$downloaded_file = $this->downloadFile("http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID");
   			
   			$description .= "<div class=\"file\">" .
     		    "<div class=\"file-title\"><a href=\"http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID\">$file->NAME</a></div>"
@@ -460,51 +418,11 @@ public function downloadImages($url) {
   // Return the new URL
   $img_path = $AssetPath . "/images/" . $this->_guide_id . "/" . $file_name;
 
-  $this->importLog($img_path);
+  $this->log->importLog($img_path);
   
   return $img_path;
 
 }
-
-
-public function downloadFile($url) {
-
-	global $AssetPath;
-
-	$ch = curl_init();
-	$timeout = 5;
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$data = curl_exec($ch);
-	curl_close($ch);
-
-	// Create a path for the iamge
-	$dir_name =  dirname(dirname(dirname(dirname(__FILE__)))) . "/assets/imported_files/" . $this->_guide_id . "/";
-
-	// Make the guide's asset directory if needed
-	if (!is_dir($dir_name))
-	{
-		mkdir($dir_name, 0777, true);
-	}
-
-
-	// Write the file
-	$file_name = substr( $url, strrpos( $url, '/' )+1 );
-	$file = fopen( $dir_name .  $file_name, 'w+');
-	fwrite($file, $data);
-	fclose($file);
-
-
-	// Return the new URL
-	$file_path = $AssetPath . "/imported_files/" . $this->_guide_id . "/" . $file_name;
-
-	$this->importLog($file_path);
-
-	return $file_path;
-
-}
-
 
 public function outputOwners() {
 
@@ -677,7 +595,7 @@ public function loadLibGuidesXML() {
 			);
 
   $test = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/following-sibling::NAME");
-  $this->importLog($test);
+  $this->log->importLog($test);
  
   
   
@@ -747,9 +665,9 @@ public function loadLibGuidesLinksXML() {
     $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
     
     
-    $this->importLog ( serialize($record_check)) ;
-    $this->importLog ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
-    $this->importLog($record_check[0][0]);
+    $this->log->importLog ( serialize($record_check)) ;
+    $this->log->importLog ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
+    $this->log->importLog($record_check[0][0]);
 
     if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
 
@@ -758,12 +676,12 @@ public function loadLibGuidesLinksXML() {
       	array_push($dupes, array("status" => "New Record Created"));
       	 
       	
-	$this->importLog("Inserted location");
+	$this->log->importLog("Inserted location");
 	$location_id = $this->db->last_id(); 
 		
       } else {
 
-	$this->importLog ("Error inserting location:");
+	$this->log->importLog ("Error inserting location:");
       }
       
       // When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field 
@@ -776,12 +694,12 @@ public function loadLibGuidesLinksXML() {
       if (empty($matches[0])) {
 	
 	if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote(strip_tags($link->NAME)) . ","  . $this->db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
-	  $this->importLog( "Inserted title");
+	  $this->log->importLog( "Inserted title");
 	  $title_id = $this->db->last_id();
 
 	} else {
-	  $this->importLog("Error inserting title:" );
-	  $this->importLog(  serialize($this->db->errorInfo()) );
+	  $this->log->importLog("Error inserting title:" );
+	  $this->log->importLog(  serialize($this->db->errorInfo()) );
 	}
 	
       }
@@ -793,26 +711,26 @@ public function loadLibGuidesLinksXML() {
 	$clean_link_name = strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME));
 	
 	if( $this->db->exec("INSERT INTO title (title, description, pre) VALUES (" . $this->db->quote($clean_link_name) . ","  . $this->db->quote($link->DESCRIPTION_SHORT) . "," . $this->db->quote($matches[0]) . ")") ) {
-	  $this->importLog( "Inserted title");
+	  $this->log->importLog( "Inserted title");
 	  $title_id = $this->db->last_id();
 
 	} else {
-	  $this->importLog("Error inserting title:" );
-	  $this->importLog(  serialize($this->db->errorInfo()) );
+	  $this->log->importLog("Error inserting title:" );
+	  $this->log->importLog(  serialize($this->db->errorInfo()) );
 	}
 	
       }
       
       
       if( $this->db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
-	$this->importLog( "Inserted location_title"); 
+	$this->log->importLog( "Inserted location_title"); 
 	
 
       } else {
-	$this->importLog( "Error inserting location_title:");
-	$this->importLog(  serialize($this->db->errorInfo())  );
+	$this->log->importLog( "Error inserting location_title:");
+	$this->log->importLog(  serialize($this->db->errorInfo())  );
 
-	$this->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
+	$this->log->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
       }
 
       
@@ -879,9 +797,9 @@ public function importLibGuides() {
 	
 	$query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[7]','{\"maincol:\"\"}')";
         
-	$this->importLog( "Error inserting subject:");
-	$this->importLog ($query);
-        $this->importLog ( serialize($this->db->errorInfo()) ); 
+	$this->log->importLog( "Error inserting subject:");
+	$this->log->importLog ($query);
+        $this->log->importLog ( serialize($this->db->errorInfo()) ); 
 	
       }
 
@@ -889,14 +807,14 @@ public function importLibGuides() {
       	      	
 	$staff_id = $this->getStaffID();
 	
-	$this->importLog ("Staff ID: " . $staff_id );
+	$this->log->importLog ("Staff ID: " . $staff_id );
 	
 	if($this->db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
-	  $this->importLog ("Inserted staff: '$staff_id'");
+	  $this->log->importLog ("Inserted staff: '$staff_id'");
 	  
 	} else {
 
-	  $this->importLog("Error inserting staff. ");
+	  $this->log->importLog("Error inserting staff. ");
 	  
 	}
 	
@@ -925,7 +843,7 @@ public function importLibGuides() {
     		
     	} catch(Exception $e) {
     	
-    		$this->importLog($e);	
+    		$this->log->importLog($e);	
     		
     	}
     	
@@ -958,15 +876,15 @@ public function importLibGuides() {
          
       	
       	
-	$this->importLog ("Inserted tab '$tab->NAME'");
+	$this->log->importLog ("Inserted tab '$tab->NAME'");
 
       } else {
 
-        $this->importLog( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
+        $this->log->importLog( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
 	
         
-	$this->importLog ("Error inserting tab:");
-	$this->importLog (serialize($this->db->errorInfo()));
+	$this->log->importLog ("Error inserting tab:");
+	$this->log->importLog (serialize($this->db->errorInfo()));
 
       }
      
@@ -989,12 +907,12 @@ public function importLibGuides() {
 
 
         if($this->db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
-          $this->importLog("Inserted section");
+          $this->log->importLog("Inserted section");
         } else { 
-          $this->importLog("Problem inserting this section. This section  may already exist in the database.");
+          $this->log->importLog("Problem inserting this section. This section  may already exist in the database.");
           
-	  $this->importLog("Error inserting section:");
-	  $this->importLog($this->db->errorInfo() );
+	  $this->log->importLog("Error inserting section:");
+	  $this->log->importLog($this->db->errorInfo() );
           
         }
         
@@ -1003,9 +921,9 @@ public function importLibGuides() {
       foreach ($tab->BOXES->BOX as $pluslet) {
         // This imports each LibGuide's boxes as pluslets 
 
-      		$this->importLog("\n");
-      	$this->importLog((string) $pluslet);
-      		$this->importLog("\n");
+      		$this->log->importLog("\n");
+      	$this->log->importLog((string) $pluslet);
+      		$this->log->importLog("\n");
  	
 	$this->importBox($pluslet, $section_uniqid);
 	

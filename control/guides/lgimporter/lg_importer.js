@@ -134,7 +134,7 @@ function importGuides(selected_guide_id, selected_guide_name, url) {
 
 						$('.import-output')
 								.append(
-										"<h1 class='import-feedback'>Sucessfully Imported <a target=\"_blank\" href='../guides/guide.php?subject_id="
+										"<h1 class='import-feedback'>Sucessfully Imported <a target=\"_blank\" href='../guide.php?subject_id="
 												+ data.imported_guide[0]
 												+ "'>"
 												+ selected_guide_name
@@ -147,9 +147,9 @@ function importGuides(selected_guide_id, selected_guide_name, url) {
 
 						$('.import-output')
 								.append(
-										"<p class='import-feedback'>Click here to view all your <a target=\"_blank\" href='../guides'> SubjectsPlus guides</a></p>");
+										"<p class='import-feedback'>Click here to view all your <a target=\"_blank\" href='../../'> SubjectsPlus guides</a></p>");
 						$('.previously-imported').append(
-								"<li><a target=\"_blank\" href='../guides/guide.php?subject_id="
+								"<li><a target=\"_blank\" href='../guide.php?subject_id="
 										+ data.imported_guide[0] + "'>"
 										+ selected_guide_name + "</a></li>");
 
@@ -173,7 +173,7 @@ $('.import_links').on(
 					"<div class=\"loading loader\">Loading... </div>");
 
 			importGuides(selected_guide_id, selected_guide_name,
-					"import_libguides_links.php");
+					"lg_importer_links_json.php");
 
 		});
 
@@ -187,7 +187,7 @@ $('.import_guide').on(
 					'option:selected').val();
 
 			importGuides(selected_guide_id, selected_guide_name,
-					"import_libguides.php");
+					"lg_importer_json.php");
 			$('.import-output').append(
 					"<div class=\"loading loader\">Loading...</div>");
 

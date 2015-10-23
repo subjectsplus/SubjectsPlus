@@ -1,4 +1,11 @@
 <?php
+/**
+ *   @file SaveGuide.php
+ *   @brief This class takes a JSON encoded guide and saves it to the database.
+ *
+ *   @author little9 (Jamie Little)
+ *   @date Auguest 2015
+ */
 namespace SubjectsPlus\Control\Guide;
 
 use SubjectsPlus\Control\Querier;

@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file WorldCat.php
- *   @brief
+ *   @brief A worldcat search box
  *   @author little9 (Jamie Little)
  *   @date June 2015
  */
