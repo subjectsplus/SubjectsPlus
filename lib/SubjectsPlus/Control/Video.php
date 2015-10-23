@@ -1,5 +1,5 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
 /**
  *   @file sp_Video
  *   @brief manage video metadata submissions (called by video/index.php)

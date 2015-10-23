@@ -7,7 +7,8 @@
  */
 namespace SubjectsPlus\Control\Databases;
 
-class AzListTypes implements AzListInterface {
+use SubjectsPlus\Control\Interfaces\OutputInterface;
+class AzListTypes implements OutputInterface {
 
 	public function toArray() {
 		$all_types = array();

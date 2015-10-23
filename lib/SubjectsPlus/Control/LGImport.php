@@ -1,5 +1,4 @@
 <?php
-
 /**
  *   @file LibGuidesImport.php
  *   @brief
@@ -9,7 +8,7 @@
 namespace SubjectsPlus\Control;
 
 require_once (__DIR__ . "../../../HTMLPurifier/HTMLPurifier.auto.php");
-class LibGuidesImport {
+class LGImport {
 	private $_guide_id;
 	private $_libguides_xml;
 	private $_guide_owner;
@@ -218,7 +217,6 @@ $this->log->importLog("SELECT * FROM location WHERE location = " .  $this->db->q
 
 public function importBox($box, $section_id) {
 		
-  $wc = new WordCleaner();
   $this->db->exec("SET NAMES utf-8" );
   	
   $description = null;

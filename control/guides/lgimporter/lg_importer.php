@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file libguides_importer.php
- *   @brief
+ *   @brief The main LGImporter page. This is where users will choose which guide to import and see import results. 
  *   @author little9 (Jamie Little)
  *   @date June 2014
  */
@@ -16,7 +16,7 @@ $page_title = "LibGuides Importer Stage 2";
 include ('../../includes/header.php');
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\LibGuidesImport;
+use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
 
 ?>
@@ -49,7 +49,7 @@ use SubjectsPlus\Control\Logger;
 $db = new Querier ();
 $log = new Logger ();
 
-$libguides_importer = new LibGuidesImport ( 'libguides.xml', $log, $db );
+$libguides_importer = new LGImport ( 'libguides.xml', $log, $db );
 ?>
 
 <div class="pure-g">
@@ -184,4 +184,4 @@ console.log(previously_imported);
 
 <span class="staff-id"
 	data-staff_id="<?php echo $_SESSION['staff_id']; ?>" />
-<script src="libguides_importer.js"></script>
+<script src="lg_importer.js"></script>

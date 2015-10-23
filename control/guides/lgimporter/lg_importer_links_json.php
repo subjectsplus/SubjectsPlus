@@ -1,7 +1,7 @@
 <?php  
 /**
  *   @file import_libguides_links.php
- *   @brief
+ *   @brief This send the libguides importer an id, imports those links into the database, and gives a JSON response indicating sucess or failure, along with more detailed results.
  *   @author little9 (Jamie Little)
  *   @date June 2014
  */
@@ -14,13 +14,13 @@ include('../../includes/functions.php');
 
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\LibGuidesImport;
+use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
 
 $db = new Querier;
 $log = new Logger;
 
-$libguides_importer = new LibGuidesImport('libguides.xml',$log,$db);
+$libguides_importer = new LGImport('libguides.xml',$log,$db);
 
 
 // Set the guide id 
