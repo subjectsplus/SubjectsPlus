@@ -21,7 +21,7 @@ $(document).ready(function () {
 	var click_count = 0;
 	
 	$(".dblist-button").on("click", function() {
-        plantClone('', 'Basic', '');        
+        dropPluslet('', 'Basic', '');        
         var waitCKEDITOR = setInterval(function() {
             if (window.CKEDITOR) {
                clearInterval(waitCKEDITOR);
