@@ -21,7 +21,7 @@ function setupMiscClickEvents()
     
     $(".box-item").dblclick('click', function(event) {
         var edit_id = $(this).attr("id").split("-");
-        plantClone('', edit_id[2], '');
+        dropPluset('', edit_id[2], '');
 
     });
 
@@ -32,7 +32,7 @@ function setupMiscClickEvents()
     	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');
     	var origin_title = $(this).parent().parent().find('.box-search-label').text();
 
-    	plantClone('','Clone',origin_id, origin_title);
+    	dropPluset('','Clone',origin_id, origin_title);
 
     });
     
@@ -41,7 +41,10 @@ function setupMiscClickEvents()
     	    	var origin_id = $(this).parent().parent().parent().attr('data-pluslet-id');       	    	
     	    	var origin_title = $(this).parent().parent().parent().text().replace(" /Clone Copy/g","");
 
-    	    	plantClone(origin_id,'Basic', origin_title);
+    	    	
+    	    	// Get the type and pass it to the dropPluset function
+    	    	var type = $("#pluslet-" + origin_id).attr('name');
+    	    	dropPluset(origin_id, type, origin_title);
     	    
     	});
 
@@ -52,7 +55,7 @@ function setupMiscClickEvents()
         var origin_id = $(this).attr('data-pluslet-id');
         var origin_title = $(this).html();
 
-        plantClone('','Clone',origin_id, origin_title);
+        dropPluset('','Clone',origin_id, origin_title);
 
     });
 

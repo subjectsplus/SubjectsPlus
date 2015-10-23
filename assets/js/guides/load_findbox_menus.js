@@ -18,7 +18,7 @@ function loadCloneMenu() {
 
 			$('.pluslet-list').empty();
 
-			$.get("../includes/autocomplete_data.php?collection=all_guides&subject_id=" + subject_id + " &term="
+			$.get("../includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
 					,function(data) {
 
 					for(var i = 0; i<data.length;i++) {
