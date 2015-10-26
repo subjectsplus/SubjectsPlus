@@ -1,10 +1,12 @@
 <?php
-/*
- * Plugin Name: UM Search Box
-* Description: Provides functions to display search box
-* Version: 0.1
-* Author: Jamie
-*/
+/**
+ *   @file SearchBox.php
+ *   @brief	Outputs a UM Library search box 
+ *
+ *   @author little9 (Jamie Little)
+ *   @date June 2015
+ *   
+ */
 
 namespace RichterLibrary\Helpers;
 

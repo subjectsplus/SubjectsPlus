@@ -1,7 +1,6 @@
 <?php
-
 /**
- *   @file manage.php
+ *   @file GuideBase.php
  *   @brief This class allows you to load a guide as an object and save it as an object. It could be used to make the Guide more object-oriented. 
  *
  *   @author little9 (Jamie Little)

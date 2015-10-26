@@ -9,8 +9,9 @@ namespace SubjectsPlus\Control\Databases;
 
 use SubjectsPlus\Control\Querier;
 use PDO;
+use SubjectsPlus\Control\Interfaces\OutputInterface;
 
-class AzList implements AzListInterface {
+class AzList implements OutputInterface {
 	protected $db;
 	protected $connection;
 	protected $default_fetch;

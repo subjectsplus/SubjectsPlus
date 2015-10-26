@@ -1,6 +1,6 @@
 // Places a pluslet on the guide page
 
-function plantClone(clone_id, item_type, origin_id, clone_title) {
+function dropPluslet(clone_id, item_type, origin_id, clone_title) {
 
 	var subject_id = getParameterByName('subject_id');
     // Create new node below, using a random number
@@ -24,25 +24,28 @@ function plantClone(clone_id, item_type, origin_id, clone_title) {
 						      // 1.  remove the wrapper
 						      // 2. put the contents of the div into a variable
 						      // 3.  replace parent div (i.e., id="new-xxxxxx") with the content made by loaded file
-						      var cnt = $("#new-" + randomnumber).contents();
-						      
-						      if (cnt.find('input.clone-input')) {
+						      var content = $("#new-" + randomnumber).contents();
+						      console.log(content);
+						      if (content.find('input.clone-input')) {
 						    	  
-						      cnt.find('input.clone-input').val(origin_id);
-						      
+						      content.find('input.clone-input').val(origin_id);
+						      console.log(						      content.find('input.clone-input').val(origin_id) );
 						      }
 						      
 						      if (clone_title) {
-							      cnt.find("[id^=pluslet-new-title]").val(clone_title);
+							      content.find("[id^=pluslet-new-title]").val(clone_title);
 
 						      }
 
 						      
-						      $("#new-" + randomnumber).replaceWith(cnt);
+						      $("#new-" + randomnumber).replaceWith(content);
 
 						      
 						      
+						      
 						      $("#response").hide();
+						      
+						      
 						      //Make save button appear, since there has been a change to the page
 						      $("#save_guide").fadeIn();
 

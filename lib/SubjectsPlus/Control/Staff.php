@@ -843,6 +843,7 @@ class Staff {
     print "<input type=\"hidden\" name=\"title\" value=\"" . $this->_title . "\" />";
     print "<input type=\"hidden\" name=\"tel\" value=\"" . $this->_tel . "\" />";
     print "<input type=\"hidden\" name=\"department_id\" value=\"" . $this->_department_id . "\" />";
+    //print "<input type=\"hidden\" value=\"{$this->_department_id}\" name=\"department_id[]\" />";
     print "<input type=\"hidden\" name=\"staff_sort\" value=\"" . $this->_staff_sort . "\" />";
     print "<input type=\"hidden\" name=\"email\" value=\"" . $this->_email . "\" />";
     print "<input type=\"hidden\" name=\"user_type_id\" value=\"" . $this->_user_type_id . "\" />";
@@ -1085,7 +1086,7 @@ class Staff {
 
   }
 
-  public function updateRecord() {
+  public function updateRecord($type="full") {
 
     $db = new Querier;
 
@@ -1108,8 +1109,11 @@ class Staff {
       $department_id = "NULL";
     }else
     {
-      $department_id = $db->quote(scrubData($this->_department_id, "integer"));
+      //$department_id = $db->quote(scrubData($this->_department_id, "integer"));
+      $department_id = $this->_department_id;
+
     }
+
 
     if($this->_supervisor_id == '')
     {
@@ -1139,7 +1143,6 @@ class Staff {
         "lname = " . $db->quote(scrubData($this->_lname)) . "," .
         "title = " . $db->quote(scrubData($this->_title)) . "," .
         "tel = " . $db->quote(scrubData($this->_tel)) . "," .
-        "department_id = " . $department_id . "," .
         "staff_sort = " . $db->quote(scrubData($this->_staff_sort, 'integer')) . "," .
         "email = " . $db->quote(scrubData($this->_email, 'email')) . "," .
         "user_type_id = " . $db->quote(scrubData($this->_user_type_id, 'integer')) . "," .
@@ -1167,8 +1170,10 @@ class Staff {
         "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
         " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
-    // echo $qUpStaff;
+    //echo $qUpStaff;
     $rUpStaff = $db->exec($qUpStaff);
+
+    if ($type == "full") {
 
       /////////////////////
       // clear staff_department
@@ -1182,9 +1187,11 @@ class Staff {
 
         /////////////////////
         // insert into staff_department
+        // but only for full record
         ////////////////////
 
         self::modifySD();
+    }
 
     // /////////////////////
     // Alter chchchanges table
@@ -1339,6 +1346,7 @@ class Staff {
     endforeach;
 
     $data = json_encode($data);
+    
     return $data;
   }
 

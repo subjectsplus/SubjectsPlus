@@ -1,7 +1,7 @@
 <?php
 /**
- *   @file WorldCat.php
- *   @brief
+ *   @file GuideSearch.php
+ *   @brief A Pluslet that searches guides
  *   @author little9 (Jamie Little)
  *   @date June 2015
  */

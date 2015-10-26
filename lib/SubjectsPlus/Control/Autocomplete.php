@@ -129,6 +129,18 @@ class Autocomplete {
            OR type LIKE :search_term)
            ");
         break;
+        
+        case "all_guides":
+        	$statement = $connection->prepare(
+        	"SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form'
+       FROM subject
+       WHERE (subject LIKE :search_term
+           OR shortform LIKE :search_term
+           OR description LIKE :search_term
+           OR keywords LIKE :search_term
+           OR type LIKE :search_term)
+           ");
+        	break;
 
 
       case "guide":

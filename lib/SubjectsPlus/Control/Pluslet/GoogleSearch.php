@@ -1,7 +1,7 @@
 <?php
 /**
  *   @file GoogleSearch.php
- *   @brief
+ *   @brief A Google search box
  *   @author little9 (Jamie Little)
  *   @date September 2015
  */

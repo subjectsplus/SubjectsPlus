@@ -402,7 +402,7 @@ class Guide
             }
         }
 
-        $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' ORDER BY lname, fname";
+        $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' AND active = '1' ORDER BY lname, fname";
 
         $querierStaff = new Querier();
         $staffArray = $querierStaff->query($qStaff);
@@ -851,7 +851,11 @@ class Guide
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\"><i class=\"fa fa-plus\"></i></li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
         
-        	$children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTab['tab_id']}");
+        
+        	
+        	
+        	
+        $children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTab['tab_id']}");
         $child_ids = array();
         	 
         foreach($children as $child) {
@@ -876,18 +880,15 @@ class Guide
         	
         $class = "dropspotty";
         $class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
+        
+        // Output the tabs
+        
         if (!$this->_isAdmin && $key == 0) {
         	// Home tab
         	
         	$tabs .= "<li id=\"{$lobjTab['tab_id']}\" class=\"$class\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\" class=\"$home_tab_class\">{$lobjTab['label']}</a>";
         
         } else {
-        	
-        	if ($this->recursive_array_search($lobjTab['tab_id'], $main_tabs)) {
-        		
-        		$tabs .= "<li id=\"{$lobjTab['tab_id']}\" data-children=\"$childs\"  class=\"$class main-tab\" style=\"height: auto;\" data-external-link=\"{$lobjTab['external_url']}\" data-visibility=\"{$lobjTab['visibility']}\"><a href=\"#tabs-$key\">{$lobjTab['label']}</a>";
-        		
-        	} else {
         		
         		if (!empty($childs)) {
         			// Parents
@@ -900,7 +901,6 @@ class Guide
         		}
         		        		
         		
-        		}
         	
         }
         $tabs .= $this->_isAdmin ? "<span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>" : "</li>";
