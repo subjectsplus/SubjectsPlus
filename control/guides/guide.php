@@ -820,6 +820,10 @@ ob_end_flush();
           <li id="show_analytics_options" class="top-panel-option-item"><a href="#"><i class="fa fa-pie-chart" title="<?php print _("Analytics"); ?>" /></i><br /><?php print _("Analytics"); ?></a></li>
 
           <li id="show_my_guides" class="top-panel-option-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/myguides.svg" title="<?php print _("My Guides"); ?>" class="custom-icon" /><br /><?php print _("My Guides"); ?></a></li>
+			
+		  <li id="show_image_gallery" class="top-panel-option-item"><a href="#"><img src="<?php print $AssetPath; ?>images/icons/myguides.svg" title="<?php print _("Image Gallery"); ?>" class="custom-icon" /><br /><?php print _("Image Gallery"); ?></a></li>
+		
+
 
           <li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
       </ul>
@@ -885,6 +889,8 @@ ob_end_flush();
     <!--my_guides_list-->
     <?php include_once('flyouts/my_guides_list.php'); ?>
 
+<!--  Image Gallery -->
+<?php include_once('flyouts/image_gallery.php')?>
 
   </div>
   </div>
@@ -970,6 +976,14 @@ $( "#show_analytics_options" ).click(function() {
   $( "#show_my_guides" ).click(function() {
     selectedPanelDisplay();
     $("#my_guides_content").show();
+    $(this).addClass("active-item");
+  });
+
+
+//Show "Image Gallery" options
+  $( "#show_image_gallery" ).click(function() {
+    selectedPanelDisplay();
+    $("#image_gallery").show();
     $(this).addClass("active-item");
   });
 
