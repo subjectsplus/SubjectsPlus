@@ -1,16 +1,32 @@
 <?php
-include("../includes/autoloader.php");
-include("../includes/upload/class.upload.php");
-
 use SubjectsPlus\Control\Querier;
 
 
+require_once("../includes/autoloader.php");
+require_once("../includes/upload/class.upload.php");
+require_once("../includes/config.php");
+
 $handle = new upload($_FILES['file']['tmp_name']);
 
-$filename = basename($_FILES['file']['name']);
+
+// Find out the name and location for this person's picture
+
+$staff_id = $_POST['staff_id'];
 
 
-$dir_dest = "../../assets/images/" . $filename;
+$staff_query = "select distinct lname, fname, email from staff WHERE staff_id = $staff_id";
+
+$db = new Querier;
+//$staff_result = $db->query($staff_query);
+$staffer = $db->query($staff_query);
+
+$truncated_email = explode("@", $staffer[0]["email"]);
+
+
+// set variables
+//$dir_dest = (isset($_GET['dir']) ? $_GET['dir'] : 'test');
+$dir_dest = "../../assets/users/_" . $truncated_email[0];
+
 
 
 if ($handle->uploaded) {

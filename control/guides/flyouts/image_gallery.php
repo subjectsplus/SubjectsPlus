@@ -1,4 +1,5 @@
 <div id="image_gallery">
+
 <style>
 .dropzone {
     background: #484848 none repeat scroll 0 0;
@@ -15,5 +16,12 @@
     padding-top: 10%;
 }
 </style>
-<form action="../includes/image_gallery_upload.php" class="dropzone dz-clickable user_guides_display"><div class="dz-default dz-message"><span>Drop files here to upload</span></div></form>
+
+
+
+<form action="../includes/image_gallery_upload.php" class="dropzone dz-clickable user_guides_display">
+<div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+
+<input type="hidden" name="staff_id" value="<?php echo $_SESSION['staff_id']; ?>" />
+</form>
 </div>
