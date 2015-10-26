@@ -1,4 +1,4 @@
-<div id="image_gallery">
+<div id="image_gallery" class="second-level-content" style="display:none;">
 
 <style>
 .dropzone {
@@ -50,6 +50,8 @@ $(document).ready(function() {
 Dropzone.options.imagezone = {
 		  init: function() {
 		    this.on("success", function(file) { $('.dz-success-mark').show(); });
+		    this.on("error", function(file) { $('.dz-error-mark').show(); });
+		    
 		  }
 		};
 });

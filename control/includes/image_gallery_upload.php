@@ -54,5 +54,7 @@ if ($handle->uploaded) {
 	
 	// we delete the temporary files
 	$handle->Clean();
+} else {
+	http_response_code(500);
 }
 
