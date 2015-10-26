@@ -31,7 +31,7 @@ $(document).ready(function() {
 
 	    mark_as_favorite();
 
-	    activateFindboxSearch();
+	  //  activateFindboxSearch();
 	    
 	    // Append an intital section
 

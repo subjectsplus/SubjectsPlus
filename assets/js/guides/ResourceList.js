@@ -1,16 +1,14 @@
 $(document).ready(function () {
-    /*
-     * This assumes you have some markup that looks like this:
-     * 
-     * <ul class="db-list-results ui-sortable">     
-     <li class="db-list-item-draggable" value="253">Record Title
-     <div><span class="show-description-toggle"><i class="fa fa-check" style="display: none;"></i>
-      Show Description  </span><span class="show-icons-toggle"> <i class="fa fa-check" style="display: none;">
-      </i>Show Icons </span><span class="include-note-toggle"><i class="fa fa-check" style="display: none;">
-      </i> Include Note </span></div></li></ul>
-     */
 
     var DatabaseToken = {
+    		/**
+    		 * Object that represents a SubjectsPlus resource token.
+    		 *
+    		 * 
+    		 * @author little9 (Jamie Little)
+    		 * 
+    		 */
+
 
         "label": "",
         "record_id": "",
@@ -20,7 +18,16 @@ $(document).ready(function () {
     };
 
     var s, ResourceList = {
+    		/**
+    		 * Object that encompasses the functionality of the custom list flyout.
+    		 *
+    		 * 
+    		 * @author little9 (Jamie Little)
+    		 * 
+    		 */
+
         settings: {
+			/** This contains configuration details like URLs and sets up any jQuery selectors that will be used in the object.  **/			
 
             autoCompleteUrl: "../includes/autocomplete_data.php?collection=records&term=",
             autoCompleteUrlAzList: "../includes/autocomplete_data.php?collection=azrecords&term=",
@@ -45,6 +52,8 @@ $(document).ready(function () {
         },
 
         strings: {
+			/** This contains any long strings that need to be used in the object or bits of HTML markup. **/
+
             noResults: "<li><span class=\"no-box-results\">No Results</span></li>",
             displayToggles: "<div><span class='show-icons-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
                              " Icons  </span><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i> <i class='fa fa-check'></i>" +
@@ -53,6 +62,8 @@ $(document).ready(function () {
         },
 
         init: function () {
+    		/** This function does inital setup for the object. It should call the bindUiActions function */
+
             s = this.settings;
             strings = this.strings;
             this.bindUiActions();
@@ -62,6 +73,8 @@ $(document).ready(function () {
 
 
         bindUiActions: function () {
+    		/**  Used to bind the object's UI actions. Like 'click' or 'hover'. */
+
             this.addToList();
             this.resetList();
             this.toggleIcons();
@@ -75,6 +88,7 @@ $(document).ready(function () {
         },
 
         addToList: function () {
+        	/** This function adds the selected result to the list of database tokens. **/
             $('body').on("click", '.add-to-list-button', function () {
 
                 s.dbListButtons.show();
@@ -97,6 +111,8 @@ $(document).ready(function () {
         },
 
         resetList: function () {
+        	/** This function resets the list of database tokens. **/
+
             s.dbListResetButton.on("click", function () {
                 s.dbListResults.empty();
                 s.dbSearchBox.val("");
@@ -105,6 +121,9 @@ $(document).ready(function () {
 
         toggleOptions: function (toggleElement) {
             {
+            	
+            	/** This function toggles the display options for a database token . **/
+
                 toggleElement.find('.fa-minus').toggle();
                 toggleElement.find('.fa-check').toggle();
 
@@ -125,6 +144,8 @@ $(document).ready(function () {
 
         toggleIcons: function () {
 
+        	/** This function toggles the icons for the toggle options **/
+        	
             $('body').on("click", ".show-description-toggle", function (data) {
                 ResourceList.toggleOptions($(this));
             });
@@ -140,6 +161,7 @@ $(document).ready(function () {
 
 
         databaseSearch: function () {
+        	/** This function posts a string to the Autocomplete class to create a list of results. **/
             s.dbSearchBox.keyup(function (data) {
 
                 s.dbSearchResults.empty();
@@ -193,6 +215,7 @@ $(document).ready(function () {
         },
 
         addListToPage: function () {
+        	/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
             s.dbListButton.on("click", function () {
                 dropPluslet('', 'Basic', '');
                 var waitCKEDITOR = setInterval(function () {
@@ -236,7 +259,3 @@ $(document).ready(function () {
 
     ResourceList.init();
 });
-
-
-
-
