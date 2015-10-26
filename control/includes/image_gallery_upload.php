@@ -51,22 +51,8 @@ if ($handle->uploaded) {
 
 
 	}
-		
-		// everything was fine ! Close the modal window
-		?>
-      <?php
-
-    } else {
-      // one error occured
-      echo '<fieldset>';
-      echo '  <legend>' . _("File not uploaded to the specified location") . '</legend>';
-      echo '  Error: ' . $handle->error . '';
-      echo '</fieldset>';
-    }
-
-    // we delete the temporary files
-    $handle->Clean();
-
-
-
+	
+	// we delete the temporary files
+	$handle->Clean();
+}
 
