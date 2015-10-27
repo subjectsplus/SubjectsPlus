@@ -207,11 +207,7 @@ ob_end_flush();
 
 
 <script type="text/javascript">
- // We're just setting up a few vars that we'll need
- var user_id = "<?php print $_SESSION["staff_id"]; ?>";
- var user_name = "<?php print $_SESSION["fname"] . " " . $_SESSION["lname"]; ?>";
- var subject_id = "<?php print $postvar_subject_id; ?>";
- var cloned_guide = "<?php print $clone; ?>";
+
 
  // This will be changed by using the Find button, and selecting a clone to insert
  window.addItem = 0;
