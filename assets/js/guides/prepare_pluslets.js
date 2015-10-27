@@ -3,7 +3,7 @@
 // called to prepare all the pluslets before saving them
 ///////////////////////
 
-function preparePluslets(lstrType, lintID, lobjThis) {
+function preparePluslets(lstrType, lintID, lobjThis, staffId, subjectId) {
 	var lboolSettingsOnly = false;
 	var lstrInstance;
 	var lstrTitle;
@@ -14,7 +14,9 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 	var pspecial;
 	var ourflag;
 	var isclone;
-
+	var staff_id = staffId;
+	var subject_id = subjectId;
+	
 	//based on type set variables
 	
 	//console.log(lstrType.toLowerCase());
@@ -242,7 +244,7 @@ function preparePluslets(lstrType, lintID, lobjThis) {
 					pluslet_title : lstrTitle,
 					pluslet_body : pbody,
 					flag : ourflag,
-					staff_id : user_id,
+					staff_id : staff_id,
 					item_type : pitem_type,
 					clone : isclone,
 					special : pspecial,

@@ -14,6 +14,8 @@
 		     var drag_id;
 		     var drop_tab;
 		     var pluslet_title;
+		     var subject_id = $('#guide-parent-wrap').data().subjectId;
+		   
 		     console.log(dropspot);
 		     dropspot.droppable({
 

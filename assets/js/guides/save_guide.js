@@ -12,10 +12,9 @@ function saveGuide() {
         var lstrExternal = $(this).parent('li').attr('data-external-link');
         var lintVisibility = parseInt($(this).parent('li').attr('data-visibility'));
         var tab_id = $(this).attr("href").split("tabs-")[1];
-        var subject_id;
-        var user_name;
+      
         var lstrTabs;
-
+ 
 
         var lobjTab = {};
         lobjTab.name = lstrName;
@@ -54,8 +53,8 @@ function saveGuide() {
     lstrTabs = JSON.stringify(lobjTabs);
     //console.log(lstrTabs);
     $("#response").load("helpers/save_guide.php", {
-            this_subject_id: subject_id,
-            user_name: user_name,
+            this_subject_id: $('#guide-parent-wrap').data().subjectId,
+            user_name: $('#guide-parent-wrap').data().staffId,
             tabs: lstrTabs
         },
         function () {

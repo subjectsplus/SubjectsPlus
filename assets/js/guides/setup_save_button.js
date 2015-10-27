@@ -6,9 +6,13 @@
 function setupSaveButton( lstrSelector )
 {
 
+	
 
     $(document.body).on('click',lstrSelector, function(event) {
 
+    var staff_id = $('#guide-parent-wrap').data.staffId;
+    var subject_id = $('#guide-parent-wrap').data.SubjectId;
+    
 	// make sure our required fields have values before continuing
 	var test_req = checkRequired();
 
@@ -33,7 +37,7 @@ function setupSaveButton( lstrSelector )
 	    var this_id = update_id[1];
 
 	    //prepare the pluslets for saving
-	    preparePluslets("modified", this_id, this);
+	    preparePluslets("modified", this_id, this, staff_id, subject_id);
 	});
 
 	////////////////////////
@@ -45,7 +49,7 @@ function setupSaveButton( lstrSelector )
 	    var insert_id = $(this).attr("id"); // just a random gen number
 
 	    //prepare pluslets for saving
-	    preparePluslets("new", insert_id, this);
+	    preparePluslets("new", insert_id, this, staff_id, subject_id);
 	});
 
 	//////////////////////

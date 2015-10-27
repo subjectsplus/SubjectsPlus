@@ -1,31 +1,16 @@
-$(document).ready(function () {
-
-    var DatabaseToken = {
-    		/**
-    		 * Object that represents a SubjectsPlus resource token.
-    		 *
-    		 * 
-    		 * @author little9 (Jamie Little)
-    		 * 
-    		 */
-
-
-        "label": "",
-        "record_id": "",
-        "token_string": ""
-
-
-    };
-
-    var s, ResourceList = {
-    		/**
-    		 * Object that encompasses the functionality of the custom list flyout.
-    		 *
-    		 * 
-    		 * @author little9 (Jamie Little)
-    		 * 
-    		 */
-
+function getResourceList() {
+	
+	/**
+	* Object that encompasses the functionality of the custom list flyout.
+	* 
+	* @namespace ResourceList
+	* @author little9 (Jamie Little)
+	* 
+	*/
+	    	
+	
+var ResourceList = {
+	
         settings: {
 			/** This contains configuration details like URLs and sets up any jQuery selectors that will be used in the object.  **/			
 
@@ -35,6 +20,7 @@ $(document).ready(function () {
             dbListButtons: $(".db-list-buttons"),
             dbListContent: $('.db-list-content'),
             dbListResults: $('.db-list-results'),
+            dbListDraggable : $(".db-list-item-draggable"),
             dbListResetButton: $('.dblist-reset-button'),
             dbSearchResults: $('.databases-searchresults'),
             dbSearchBox: $('.databases-search'),
@@ -62,13 +48,16 @@ $(document).ready(function () {
         },
 
         init: function () {
-    		/** This function does inital setup for the object. It should call the bindUiActions function */
+        	 /**
+             * @memberof ResourceList
+             */
+    		/** @method
+    		 * This function does inital setup for the object. It should call the bindUiActions function 
+    		 **/
 
-            s = this.settings;
-            strings = this.strings;
+       
             this.bindUiActions();
-
-
+            return this;
         },
 
 
@@ -88,11 +77,11 @@ $(document).ready(function () {
         },
 
         addToList: function () {
-        	/** This function adds the selected result to the list of database tokens. **/
+        	/** This function adds the selected result to the list of database tokens. */
             $('body').on("click", '.add-to-list-button', function () {
 
-                s.dbListButtons.show();
-                s.dbListContent.show();
+            	ResourceList.settings.dbListButtons.show();
+            	ResourceList.settings.dbListContent.show();
 
                 var databaseToken = Object.create(DatabaseToken);
                 databaseToken.label = $(this).attr('data-label').trim();
@@ -100,10 +89,10 @@ $(document).ready(function () {
 
 
 
-                s.dbListResults.append("<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-                        "</span>" + strings.displayToggles);
-                s.dbListResults.sortable();
-                s.dbListResults.disableSelection();
+                ResourceList.settings.dbListResults.append("<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
+                        "</span>" + ResourceList.strings.displayToggles);
+                ResourceList.settings.dbListResults.sortable();
+                ResourceList.settings.dbListResults.disableSelection();
 
                 $('.fa-check').hide();
 
@@ -113,9 +102,10 @@ $(document).ready(function () {
         resetList: function () {
         	/** This function resets the list of database tokens. **/
 
-            s.dbListResetButton.on("click", function () {
-                s.dbListResults.empty();
-                s.dbSearchBox.val("");
+        	
+        	this.settings.dbListResetButton.on("click", function () {
+        	this.settings.dbListResults.empty();
+        	this.settings.dbSearchBox.val("");
             });
         },
 
@@ -162,27 +152,27 @@ $(document).ready(function () {
 
         databaseSearch: function () {
         	/** This function posts a string to the Autocomplete class to create a list of results. **/
-            s.dbSearchBox.keyup(function (data) {
+        	ResourceList.settings.dbSearchBox.keyup(function (data) {
 
-                s.dbSearchResults.empty();
+                ResourceList.settings.dbSearchResults.empty();
                 var search_url;
-                var search_term = s.dbSearchBox.val();
-                var limit_az = s.limitAz.prop("checked");
+                var search_term = ResourceList.settings.dbSearchBox.val();
+                var limit_az = ResourceList.settings.limitAz.prop("checked");
 
                 if (limit_az) {
-                    search_url = s.autoCompleteUrl;
+                    search_url = ResourceList.settings.autoCompleteUrl;
                 } else {
-                    search_url = s.autoCompleteUrlAzList;
+                    search_url = ResourceList.settings.autoCompleteUrlAzList;
                 }
 
 
                 if ($(this).val() === "") {
-                    s.dbSearchResults.html(strings.noResults);
+                	ResourceList.settings.dbSearchResults.html(ResourceList.strings.noResults);
 
                 }
 
 
-                if (search_term.length > s.searchTermMinimumLength) {
+                if (search_term.length > ResourceList.settings.searchTermMinimumLength) {
 
                     $.get(search_url + search_term, function (data) {
 
@@ -191,7 +181,7 @@ $(document).ready(function () {
                                 try {
                                     if (data[i]['content_type'] == "Record") {
 
-                                        s.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
+                                    	ResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
                                                 "<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
                                                         "<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +
                                                         "<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div></li>");
@@ -202,12 +192,12 @@ $(document).ready(function () {
                                 }
                             }
                         } else {
-                            s.dbSearchResults.html(strings.noResults);
+                        	ResourceList.settings.dbSearchResults.html(ResourceList.strings.noResults);
                         }
                     });
 
                 } else {
-                    s.dbSearchResults.html(strings.noResults);
+                	ResourceList.settings.dbSearchResults.html(ResourceList.strings.noResults);
 
                 }
 
@@ -216,7 +206,7 @@ $(document).ready(function () {
 
         addListToPage: function () {
         	/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
-            s.dbListButton.on("click", function () {
+        	ResourceList.settings.dbListButton.on("click", function () {
                 dropPluslet('', 'Basic', '');
                 var waitCKEDITOR = setInterval(function () {
                     if (window.CKEDITOR) {
@@ -224,7 +214,7 @@ $(document).ready(function () {
 
                         var token_string = "<ul class='token-list'>";
 
-                        $(".db-list-item-draggable").each(function (data) {
+                        ResourceList.settings.dbListDraggable.each(function (data) {
 
                             var title = $(this).find('.db-list-label').text();
                             var record_id = $(this).val();
@@ -249,13 +239,12 @@ $(document).ready(function () {
                         var ck_index = Object.keys(CKEDITOR.instances).length - 1;
                         CKEDITOR.instances[Object.keys(CKEDITOR.instances)[ck_index]].setData(token_string.trim());
 
-                        s.click_count++;
-                        s.dbListResults.empty();
+                        ResourceList.settings.click_count++;
+                        ResourceList.settings.dbListResults.empty();
                     }
                 }, 100);
             });
         }
     };
-
-    ResourceList.init();
-});
+return ResourceList; 
+};

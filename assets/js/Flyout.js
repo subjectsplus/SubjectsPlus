@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+function getFlyout() {
+	
+	var Flyout = { 
+	
+	};
+}

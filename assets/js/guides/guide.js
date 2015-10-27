@@ -33,6 +33,15 @@ $(document).ready(function() {
 
 	  //  activateFindboxSearch();
 	    
+	    var rs = getResourceList();
+	    rs.init();
+	    var fdbx = getFindBoxSearch();
+	    fdbx.init();
+	    var guide = getGuideBase();
+	    guide.init();
+	    
+
+	    
 	    // Append an intital section
 
 	    if ($('[id^=section]').length) {
