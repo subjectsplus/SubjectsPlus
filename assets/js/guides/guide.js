@@ -8,17 +8,16 @@ $(document).ready(function () {
     guide.init();
     var rs = getResourceList();
     rs.init();
-    
     var fly = getFlyout();
     fly.init();
-    
+    var layout = getLayout();
+    layout.init();
 
     var clone_pluslet_id;
 
     var subjectId = $("#guide-parent-wrap").data().subjectId;
     
     makeDropable(".dropspotty");
-    console.log('make droppable');
     makeDropable(".cke");
     makeSortable(".sort-column");
     makeSortable(".sptab", 'sections');
@@ -35,7 +34,6 @@ $(document).ready(function () {
     setupMiscClickEvents();
 
     makeHelpable("img[class*=help-]");
-    setupTabs('a[id*=tab-]');
     makeAddSection('a[id="add_section"]');
 
 
@@ -64,7 +62,6 @@ $(document).ready(function () {
 
     }
 
-    makeSectionSlider('div[id^="slider_section"]');
 
     $(".box-item").on('drag', function () {
         //$('#box_options').hide();
@@ -97,11 +94,6 @@ $(document).ready(function () {
     });
     
     
-    //Load Clone Menu
-    loadCloneMenu();
-
-     
-
      //close box settings panel
      $( ".close-settings" ).click(function() { 
          $(this).parent(".box_settings").hide();

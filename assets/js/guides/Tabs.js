@@ -5,7 +5,6 @@ function getTabs() {
             tabContent: $("#tab_content"),
             tabCounter: $('#tabs').data().tabCount,
             tabs: $("#tabs").tabs(),
-
             dialog: $("#dialog").dialog,
             externalLink: 'input[name="tab_external_link"]',
             dataExternalLink: 'li[data-external-link]',
@@ -14,7 +13,8 @@ function getTabs() {
             findBoxTabs: $("#find-box-tabs")
         },
         strings: {
-            tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>"
+            tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
+            confirmPrompt: "Are you sure you want to remove all boxes?"
         },
         bindUiActions: function () {
             Tabs.removePlusletsFromCurrentTab();
@@ -30,8 +30,7 @@ function getTabs() {
             //Find Box Tabs - Browse and Search
             $( "#find-box-tabs" ).tabs();
 
-            //Load Clone Menu
-            loadCloneMenu();
+        
         },
         setupTabs: function () {
 
@@ -315,7 +314,7 @@ function getTabs() {
             //remove all pluslets from current tab
             $('a.remove_pluslets').on('click', function () {
                 var currPanel = $("#tabs").tabs('option', 'active');
-                if (confirm('Are you sure you want to remove all boxes?')) {
+                if (confirm(Tabs.strings.confirmPrompt)) {
                     $("#tabs-" + currPanel).find('.pluslet').remove();
                     $("#save_guide").fadeIn();
                 }

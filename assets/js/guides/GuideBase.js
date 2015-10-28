@@ -31,10 +31,8 @@ function getGuideBase() {
         init: function () {
             // Hides the global nav on load
             GuideBase.settings.globalHeader.hide();
-            GuideBase.layoutSections();
             GuideBase.settings.newBox.hoverIntent(GuideBase.hoverIntentConfig);
             GuideBase.hoverIntentLayoutBox();
-            GuideBase.checkDataLayout();
             GuideBase.fixFlashFOUC();
             GuideBase.loadGuideSearch();
             GuideBase.expandCollapseCSS();
@@ -42,29 +40,7 @@ function getGuideBase() {
             GuideBase.refreshFeeds();
 
         },
-        layoutSections: function () {
-            GuideBase.settings.sections.each(function () {
-                //section id
-                var sec_id = $(this).attr('id').split('section_')[1];
-                var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
-
-                var lw = parseInt(lobjLayout[0]) * 7;
-                var mw = parseInt(lobjLayout[1]) * 7;
-                var sw = parseInt(lobjLayout[2]) * 7;
-
-                console.log(lw, mw, sw);
-
-                try {
-                    reLayout(sec_id, lw, mw, sw);
-                } catch (e) {
-
-
-
-                }
-
-
-            });
-        },
+        
         hoverIntentConfig: {
             interval: 50,
             sensitivity: 4,
@@ -97,7 +73,7 @@ function getGuideBase() {
                         var box_id = window.location.hash.split('-')[2];
                         var selected_box = ".pluslet-" + box_id;
 
-                        $('#tabs').tabs('select', tab_id);
+                        GuideBase.settings.tabs('select', tab_id);
 
                         $('html, body').animate({ scrollTop: jQuery('a[name="box-' + box_id + '"]').offset().top }, 'slow');
 
@@ -114,45 +90,7 @@ function getGuideBase() {
         setupAutoCompleteBox: function () {
 
         },
-        checkDataLayout: function () {
-            //Check section data-layout on pageLoad and hide empty containers
-            // Highlight "current/active" layout
-        
-            // Highlight ONLY Selected/Active Layout 
-            function selectedLayout() {
-                $('.layout-icon').not(this).each(function () {
-                    $(this).removeClass("active-layout-icon");
-                });
-            }
-
-
-            var current_tab = $('#tabs').tabs('option', 'selected');
-            var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
-            var dataLayoutConfig = $("#" + slider_section_id).attr('data-layout');
-
-            if (dataLayoutConfig === "0-12-0") {
-                $("#" + slider_section_id + " #container-2").hide();
-                $("#col-single").addClass("active-layout-icon");
-            }
-            else if (dataLayoutConfig === "6-6-0") {
-                $("#" + slider_section_id + " #container-2").hide();
-                $("#col-double").addClass("active-layout-icon");
-            }
-            else if (dataLayoutConfig === "4-8-0") {
-                $("#" + slider_section_id + " #container-2").hide();
-                $("#col-48").addClass("active-layout-icon");
-            }
-            else if (dataLayoutConfig === "8-4-0") {
-                $("#" + slider_section_id + " #container-2").hide();
-                $("#col-84").addClass("active-layout-icon");
-            }
-            else if (dataLayoutConfig === "4-4-4") {
-                $("#col-triple").addClass("active-layout-icon");
-            }
-            else if (dataLayoutConfig === "3-6-3") {
-                $("#col-363").addClass("active-layout-icon");
-            }
-        },
+       
         fixFlashFOUC: function () {
             $(".guidewrapper").css("display", "block");
             $("#main-options").css("display", "block");

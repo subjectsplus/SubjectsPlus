@@ -44,12 +44,9 @@ function setupMiscEvents()
 
     $(document.body).on('click','a[id*=boxid-]', function(event) {
     	var tab_id = $(this).attr('id').split('-')[1];
-        console.log(tab_id);
     	var box_id = $(this).attr('id').split('-')[2];
-        console.log(box_id);
 
         var selected_box = ".pluslet-" + box_id;
-        console.log($(selected_box));
 
     	$('#tabs').tabs('select', tab_id);
 
@@ -66,7 +63,7 @@ function setupMiscEvents()
     $(document.body).on('click','a[id*=tab-]', function(event) {
         var tab_id = $(this).attr("id").split("-");
         //var selected_tab = "#pluslet-" + box_id[1];
-        setupTabs(tab_id[1]);
+       // setupTabs(tab_id[1]);
 
     });
 

@@ -18,7 +18,8 @@ function getFindBoxSearch() {
 			findBoxSearchBox: $('.findbox-search'),
 			findBoxSearchResults: $('.findbox-searchresults'),
 			autoCompleteUrl: '../includes/autocomplete_data.php?collection=pluslet&term=',
-			closeButton : $(".close-settings")
+			closeButton : $(".close-settings"),
+			allGuidesAutoCompleteUrl : "../includes/autocomplete_data.php?collection=all_guides&term="
 		},
 
 		/**
@@ -53,7 +54,7 @@ function getFindBoxSearch() {
 		bindUiActions: function () {
 
 			this.activateFindBoxSearch();
-
+			this.loadCloneMenu();
 		},
 
 		/**
@@ -62,13 +63,11 @@ function getFindBoxSearch() {
 		 *         found.
 		 */
 		search: function (search_term) {
-			$
-				.get(
+			$.get(
 					FindBoxSearch.settings.autoCompleteUrl
 					+ search_term,
 					function (data) {
 
-						console.log(data);
 
 						if (data.length != 0) {
 
@@ -115,6 +114,33 @@ function getFindBoxSearch() {
 			//close box settings panel
 			FindBoxSearch.settings.closeButton.click(function () {
 				$(this).parent(".box_settings").hide();
+			});
+		}, loadCloneMenu : function() {
+			
+			$.get(FindBoxSearch.settings.allGuidesAutoCompleteUrl, function(data) { 
+
+				for(var i = 0; i<data.length;i++) {
+			        var subject_id = data[i].id;
+					$('.guide-list').append("<option data-subject-id='" + subject_id + "' class=\"guide-listing\">" + data[i].label + "</li>");
+
+				}
+
+			});
+
+			$('.guide-list').on('change', function(data) {
+				var subject_id = $("option:selected", this).attr('data-subject-id');
+
+				$('.pluslet-list').empty();
+
+				$.get("../includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
+						,function(data) {
+
+						for(var i = 0; i<data.length;i++) {
+							$('.pluslet-list').append("<li data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><div class=\"pure-g\"><div class=\"pure-u-3-5 box-search-label\" title=\""+ data[i].label + "\">"  + data[i].label + "</div><div class=\"pure-u-2-5\" style=\"text-align:right;\"><button class=\"clone-button pure-button pure-button-secondary\">Link</button>&nbsp;<button class=\"copy-button pure-button pure-button-secondary\">Copy</button></div></div></li>");
+				
+						}
+				});	
+				
 			});
 		}
 

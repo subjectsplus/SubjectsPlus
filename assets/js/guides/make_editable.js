@@ -19,8 +19,6 @@ function makeEditable(lstrSelector, subjectId) {
 			isclone = 0;
 		}
 
-
-
 		/////////////////////////////////////
 		// Load the form elements for editing
 		/////////////////////////////////////
@@ -118,10 +116,6 @@ function makeEditable(lstrSelector, subjectId) {
 				$(".pluslet.type-newdbs").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-guidesearch").find(".fav_set").addClass("hide-settings");
 				$(".pluslet.type-newguides").find(".fav_set").addClass("hide-settings");
-
-
-
-			
 
 		});
 

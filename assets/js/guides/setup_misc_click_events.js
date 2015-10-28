@@ -51,7 +51,6 @@ function setupMiscClickEvents()
 
 
     $('body').on('dblclick', '.clone-favorite', function() {
-        console.log('fav clicked');
 
         var origin_id = $(this).attr('data-pluslet-id');
         var origin_title = $(this).html();

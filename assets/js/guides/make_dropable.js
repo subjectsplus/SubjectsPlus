@@ -16,7 +16,6 @@
 		     var pluslet_title;
 		     var subject_id = $('#guide-parent-wrap').data().subjectId;
 		   
-		     console.log(dropspot);
 		     dropspot.droppable({
 
 		 	iframeFix: true,
@@ -44,12 +43,9 @@
 		                         $(props.draggable).hide('slow', function()
 		 						{
 		 						    $(this).remove();
-		                                                     console.log($(this));
-		                                                     console.log(drop_tab);
-		 						    $(drop_tab).children('a[href^="#tabs-"]').click();
+		                            $(drop_tab).children('a[href^="#tabs-"]').click();
 		 						    $('.portal-column-1:visible').first().prepend(this);
 
-		                                                     console.log("Drop tab drop tab!");
 		 						    $(this).height("auto");
 		 						    $(this).width("auto");
 		 						    $(this).show("slow");

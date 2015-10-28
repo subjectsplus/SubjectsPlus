@@ -40,7 +40,6 @@ function getFlyout() {
 
 			for (flyoutButton in Flyout.flyOutPanels) {
 				{
-					console.log(flyoutButton);
 					Flyout.activateFlyoutButton(flyoutButton,
 							Flyout.flyOutPanels[flyoutButton]);
 				}
