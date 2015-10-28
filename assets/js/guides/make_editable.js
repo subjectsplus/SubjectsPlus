@@ -2,7 +2,7 @@
 // MODIFY PLUSLET -- on click of edit (gear) icon
 ////////////////////////////////
 
-function makeEditable(lstrSelector) {
+function makeEditable(lstrSelector, subjectId) {
 
 	$(document.body).on('click', lstrSelector, function(event) {
 		var isclone;
@@ -30,7 +30,7 @@ function makeEditable(lstrSelector) {
 			clone : isclone,
 			flag : 'modify',
 			type : edit_id[2],
-			this_subject_id : subject_id
+			this_subject_id : subjectId
 		}, function() {
 			///////////////////////////////////////////////
 			// 1.  remove the wrapper

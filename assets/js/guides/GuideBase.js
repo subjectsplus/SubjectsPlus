@@ -14,8 +14,12 @@ function getGuideBase() {
             tabTitle: $("#tab_title"),
             tabContent: $("#tab_content"),
             tabExteralDataLink: $('li[data-external-link]'),
-            autoCompletebox: $('.find-guide-input')
-
+            autoCompletebox: $('.find-guide-input'),
+            startURL: '../guides/guide.php?subject_id=',
+            spPath: document.URL.split('/')[3],
+            subjectId: $('#guide-parent-wrap').data().subjectId,
+            staffId: $('#guide-parent-wrap').data().staffId,
+            autoCompleteUrl: "../includes/autocomplete_data.php?collection=guide&subject_id="
         },
         strings: {
             tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
@@ -30,7 +34,12 @@ function getGuideBase() {
             GuideBase.layoutSections();
             GuideBase.settings.newBox.hoverIntent(GuideBase.hoverIntentConfig);
             GuideBase.hoverIntentLayoutBox();
-
+            GuideBase.checkDataLayout();
+            GuideBase.fixFlashFOUC();
+            GuideBase.loadGuideSearch();
+            GuideBase.expandCollapseCSS();
+            GuideBase.getUserFavoriteBoxes(GuideBase.staffId);
+            GuideBase.refreshFeeds();
 
         },
         layoutSections: function () {
@@ -104,7 +113,131 @@ function getGuideBase() {
         },
         setupAutoCompleteBox: function () {
 
+        },
+        checkDataLayout: function () {
+            //Check section data-layout on pageLoad and hide empty containers
+            // Highlight "current/active" layout
+        
+            // Highlight ONLY Selected/Active Layout 
+            function selectedLayout() {
+                $('.layout-icon').not(this).each(function () {
+                    $(this).removeClass("active-layout-icon");
+                });
+            }
+
+
+            var current_tab = $('#tabs').tabs('option', 'selected');
+            var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+            var dataLayoutConfig = $("#" + slider_section_id).attr('data-layout');
+
+            if (dataLayoutConfig === "0-12-0") {
+                $("#" + slider_section_id + " #container-2").hide();
+                $("#col-single").addClass("active-layout-icon");
+            }
+            else if (dataLayoutConfig === "6-6-0") {
+                $("#" + slider_section_id + " #container-2").hide();
+                $("#col-double").addClass("active-layout-icon");
+            }
+            else if (dataLayoutConfig === "4-8-0") {
+                $("#" + slider_section_id + " #container-2").hide();
+                $("#col-48").addClass("active-layout-icon");
+            }
+            else if (dataLayoutConfig === "8-4-0") {
+                $("#" + slider_section_id + " #container-2").hide();
+                $("#col-84").addClass("active-layout-icon");
+            }
+            else if (dataLayoutConfig === "4-4-4") {
+                $("#col-triple").addClass("active-layout-icon");
+            }
+            else if (dataLayoutConfig === "3-6-3") {
+                $("#col-363").addClass("active-layout-icon");
+            }
+        },
+        fixFlashFOUC: function () {
+            $(".guidewrapper").css("display", "block");
+            $("#main-options").css("display", "block");
+        },
+        autoCompleteSettings: {
+            minLength: 3,
+            source: "", //GuideBase.settings.autoCompleteUrl  + GuideBase.settings.subjectId, 
+            focus: function (event, ui) {
+
+                event.preventDefault();
+                jQuery(".find-guide-input").val(ui.item.label);
+            },
+            select: function (event, ui) {
+                var tab_id = ui.item.hash.split('-')[1];
+                var box_id = ui.item.hash.split('-')[2];
+                var selected_box = ".pluslet-" + box_id;
+
+                $('#tabs').tabs('select', tab_id);
+
+                jQuery(selected_box).effect("pulsate", {
+                    times: 1
+                }, 2000);
+
+                window.location.hash = 'box-' + box_id;
+            }
+
+
+        },
+        loadGuideSearch: function () {
+            $('.find-guide-input').autocomplete(GuideBase.autoCompleteSettings);
+        },
+        expandCollapseCSS: function () {
+            //Expand/Collapse Trigger CSS for all Pluslets on a Tab
+
+            $("#expand_tab").click(function () {
+                $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+                $('.pluslet_body').toggle();
+                $('.pluslet_body').toggleClass('pluslet_body_closed');
+        		  });
+
+
+        },
+        getUserFavoriteBoxes: function (staff_id) {
+            $(".fav-boxes-list").empty();
+            jQuery.ajax({
+                url: "helpers/favorite_pluslets_data.php?staff_id=" + staff_id,
+                type: "GET",
+                dataType: "json",
+                data: { staff_id: staff_id },
+                success: function (data) {
+
+                    if (!data.length) {
+                        //no results
+                        $(".fav-boxes-list").append("<li>No boxes have been marked as a favorite. To do so, click the gears button on the box you wish to mark as a Favorite and activate the Favorite toggle switch.</li>");
+
+
+                    }
+
+                    $.each(data, function (idx, obj) {
+                        $(".fav-boxes-list").append("<li data-pluslet-id='" + obj.id + "'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" + obj.title + "</div><div class='pure-u-2-5' style='text-align:right;'><button class='clone-button pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-button pure-button pure-button-secondary'>Copy</button></div></div></li>");
+
+                    });
+                }
+            });
+
+        },
+        refreshFeeds: function () {
+            /////////////////////
+            // refreshFeeds
+            // --loads the various feeds after the page has loaded
+            /////////////////////
+
+            $(".find_feed").each(function (n) {
+                var feed = $(this).attr("name").split("|");
+                $(this).load("../../subjects/includes/feedme.php", {
+                    type: feed[4],
+                    feed: feed[0],
+                    count: feed[1],
+                    show_desc: feed[2],
+                    show_feed: feed[3]
+                });
+            });
+
         }
+
     };
 
     return GuideBase;

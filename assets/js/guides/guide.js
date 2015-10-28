@@ -1,15 +1,22 @@
 $(document).ready(function () {
-    var guide = getGuideBase();
-    guide.init();
+	
+	var fdbx = getFindBoxSearch();
+    fdbx.init();
     var tabs = getTabs();
     tabs.init();
+    var guide = getGuideBase();
+    guide.init();
     var rs = getResourceList();
     rs.init();
-    var fdbx = getFindBoxSearch();
-    fdbx.init();
+    
+    var fly = getFlyout();
+    fly.init();
+    
 
     var clone_pluslet_id;
 
+    var subjectId = $("#guide-parent-wrap").data().subjectId;
+    
     makeDropable(".dropspotty");
     console.log('make droppable');
     makeDropable(".cke");
@@ -19,7 +26,7 @@ $(document).ready(function () {
 
     setupSaveButton('#save_guide');
 
-    makeEditable('a[id*=edit]');
+    makeEditable('a[id*=edit]', subjectId);
     makeDeleteable('a[id*=delete]');
     makeDeleteable('.section_remove', 'sections');
 
@@ -88,5 +95,27 @@ $(document).ready(function () {
         makeSortable(".sptab", 'sections');
         makeDraggable(".draggable");
     });
+    
+    
+    //Load Clone Menu
+    loadCloneMenu();
+
+     
+
+     //close box settings panel
+     $( ".close-settings" ).click(function() { 
+         $(this).parent(".box_settings").hide();
+     });
+
+
+
+   //Expand/Collapse Trigger CSS for all Pluslets on a Tab
+
+     $( "#expand_tab" ).click(function() { 
+       $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+       $('.pluslet_body').toggle();
+       $('.pluslet_body').toggleClass('pluslet_body_closed');
+     });
+  
 
 });

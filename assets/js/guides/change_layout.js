@@ -1,3 +1,13 @@
+function moveColumnContent(source_column, target_column) {
+
+    var current_tab = $('#tabs').tabs('option', 'selected');
+    var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+    var content = $("#" + slider_section_id + " #container-" + source_column + " .portal-column").children();
+
+    $("#" + slider_section_id + "  #container-" + target_column + " .portal-column").append(content);
+ }
+
+
 function changeLayout(first_column, second_column) {
 
 	var current_tab = $('#tabs').tabs('option', 'selected');

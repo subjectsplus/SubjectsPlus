@@ -1,24 +1,37 @@
-function getTabs() { 
-   var Tabs = {
+function getTabs() {
+    var Tabs = {
         settings: {
-            tabTitle : $("#tab_title"),
-            tabContent : $("#tab_content"),
-            tabCounter : $('#tabs').data().tabCount,
+            tabTitle: $("#tab_title"),
+            tabContent: $("#tab_content"),
+            tabCounter: $('#tabs').data().tabCount,
             tabs: $("#tabs").tabs(),
-            
+
             dialog: $("#dialog").dialog,
             externalLink: 'input[name="tab_external_link"]',
             dataExternalLink: 'li[data-external-link]',
             saveButton: $("#save_guide"),
-            tabExternalUrl: 'input[name="tab_external_url"]'
+            tabExternalUrl: 'input[name="tab_external_url"]',
+            findBoxTabs: $("#find-box-tabs")
         },
         strings: {
             tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>"
         },
         bindUiActions: function () {
+            Tabs.removePlusletsFromCurrentTab();
         },
         init: function () {
             Tabs.setupTabs();
+            Tabs.hideTabsFirstSectionSlider();
+            Tabs.bindUiActions();
+            Tabs.targetBlankLinks();
+            //Find Box Tabs - Browse and Search
+           
+
+            //Find Box Tabs - Browse and Search
+            $( "#find-box-tabs" ).tabs();
+
+            //Load Clone Menu
+            loadCloneMenu();
         },
         setupTabs: function () {
 
@@ -63,7 +76,7 @@ function getTabs() {
                         if ($('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link') != '') {
                             $('a[href="#tabs-' + id + '"]').each(function () {
                                 var elementData = $._data(this),
-                                events = elementData.events;
+                                    events = elementData.events;
 
                                 var onClickHandlers = events['click'];
 
@@ -86,7 +99,7 @@ function getTabs() {
 
                             $('a[href="#tabs-' + id + '"]').each(function () {
                                 var elementData = $._data(this),
-                                events = elementData.events;
+                                    events = elementData.events;
 
                                 var onClickHandlers = events['click'];
 
@@ -158,7 +171,7 @@ function getTabs() {
 
                     $(this).children('a[href^="#tabs-"]').each(function () {
                         var elementData = $._data(this),
-                        events = elementData.events;
+                            events = elementData.events;
 
                         var onClickHandlers = events['click'];
 
@@ -195,11 +208,11 @@ function getTabs() {
 
             // actual addTab function: adds new tab using the input from the form above
             function addTab() {
-             var label = Tabs.settings.tabTitle.val() || "Tab " + Tabs.settings.tabCounter,
-                 external_link = $('input#tab_external_link').val(),
-                 id = "tabs-" + Tabs.settings.tabCounter,
-                 li = $(Tabs.strings.tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
-                tabContentHtml = Tabs.settings.tabContent.val() || "Tab " + Tabs.settings.tabCounter + " content.";
+                var label = Tabs.settings.tabTitle.val() || "Tab " + Tabs.settings.tabCounter,
+                    external_link = $('input#tab_external_link').val(),
+                    id = "tabs-" + Tabs.settings.tabCounter,
+                    li = $(Tabs.strings.tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+                    tabContentHtml = Tabs.settings.tabContent.val() || "Tab " + Tabs.settings.tabCounter + " content.";
                 $(li).attr('data-external-link', external_link);
                 $(li).attr('data-visibility', 1);
                 Tabs.settings.tabs.find(".ui-tabs-nav").append(li);
@@ -226,54 +239,54 @@ function getTabs() {
                 });
 
 
-              $.ajax
-                ({
-                    url: "helpers/section_data.php",
-                    type: "POST",
-                    data: { action: 'create' },
-                    dataType: "html",
-                    success: function (html) {
-                        Tabs.settings.tabDestroy;
+                $.ajax
+                    ({
+                        url: "helpers/section_data.php",
+                        type: "POST",
+                        data: { action: 'create' },
+                        dataType: "html",
+                        success: function (html) {
+                            Tabs.settings.tabDestroy;
 
-                        Tabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
-                                     + "</div>");
+                            Tabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
+                                + "</div>");
 
-                        $("#response").hide();
-                        Tabs.settings.saveButton.fadeIn();
-                       
+                            $("#response").hide();
+                            Tabs.settings.saveButton.fadeIn();
 
-                        Tabs.settings.tabs();
 
-                        if (external_link == '') {
-                            Tabs.settings.tabs('select', Tabs.settings.tabCounter);
-                        } else {
-                            Tabs.settings.tabs('select', 0);
-                        }
+                            Tabs.settings.tabs();
 
-                        if ($(li).attr('data-external-link') != '') {
-                            $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
-                                window.open($(this).parent('li').attr('data-external-link'), '_blank');
-                                evt.stopImmediatePropagation();
-                            });
-                        }
-
-                        $(li).children('a[href^="#tabs-"]').each(function () {
-                            var elementData = $._data(this),
-                            events = elementData.events;
-
-                            var onClickHandlers = events['click'];
-
-                            // Only one handler. Nothing to change.
-                            if (onClickHandlers.length == 1) {
-                                return;
+                            if (external_link == '') {
+                                Tabs.settings.tabs('select', Tabs.settings.tabCounter);
+                            } else {
+                                Tabs.settings.tabs('select', 0);
                             }
 
-                            onClickHandlers.splice(0, 0, onClickHandlers.pop());
-                        });
+                            if ($(li).attr('data-external-link') != '') {
+                                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                                    evt.stopImmediatePropagation();
+                                });
+                            }
 
-                        Tabs.settings.tabCounter++;
-                    }
-                });
+                            $(li).children('a[href^="#tabs-"]').each(function () {
+                                var elementData = $._data(this),
+                                    events = elementData.events;
+
+                                var onClickHandlers = events['click'];
+
+                                // Only one handler. Nothing to change.
+                                if (onClickHandlers.length == 1) {
+                                    return;
+                                }
+
+                                onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                            });
+
+                            Tabs.settings.tabCounter++;
+                        }
+                    });
 
 
 
@@ -283,6 +296,40 @@ function getTabs() {
                     event.preventDefault();
                 });
             }
+        },
+            hideTabsFirstSectionSlider: function() {
+                var current_tab = $('#tabs').tabs('option', 'selected');
+                var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+                $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
+
+                $('#tabs').on('click', function () {
+                    // Hide the first section's controls
+                    var current_tab = $('#tabs').tabs('option', 'selected');
+                    var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
+                    $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
+                });
+            },
+
+   
+        removePlusletsFromCurrentTab: function () {
+            //remove all pluslets from current tab
+            $('a.remove_pluslets').on('click', function () {
+                var currPanel = $("#tabs").tabs('option', 'active');
+                if (confirm('Are you sure you want to remove all boxes?')) {
+                    $("#tabs-" + currPanel).find('.pluslet').remove();
+                    $("#save_guide").fadeIn();
+                }
+            });
+        },
+        targetBlankLinks: function () {
+            // open links in new tab if box_setting target_blank_links is checked.
+            //this is for admin side, user view also has function in /subjects/guide.php
+            var $target_blank_links = $(".target_blank_links");
+            $target_blank_links.each(function () {
+                if ($("input:checked")) {
+                    $(this).find('a').attr('target', '_blank');
+                }
+            });
         }
     }
     return Tabs;
