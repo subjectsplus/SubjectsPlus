@@ -1,3 +1,11 @@
+/**
+ * Object that sets up the click events and options associated with pluslets.
+ * 
+ * @constructor Pluslet
+ * 
+ * 
+ */
+
 function Pluslet() {
 	var myPluslet = {
 			settings : {

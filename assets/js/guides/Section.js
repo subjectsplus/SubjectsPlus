@@ -2,6 +2,9 @@
  * 
  * 
  * 
+ * @constructor Section
+ * 
+ * 
  */
 
 function Section() {

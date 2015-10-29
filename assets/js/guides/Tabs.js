@@ -1,3 +1,11 @@
+/**
+ * Set ups click events and tabs functionality on the guide page.
+ *  
+ * @constructor Tabs
+ * 
+ * 
+ */
+
 function Tabs() {
     var myTabs = {
         settings: {

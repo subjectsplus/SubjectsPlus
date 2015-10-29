@@ -1,4 +1,12 @@
- function Help() {
+/**
+ * Activates the help buttons on pluslets
+ *  
+ * @constructor Tabs
+ * 
+ * 
+ */
+
+function Help() {
  
  	var myHelp = {
  	

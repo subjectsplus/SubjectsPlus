@@ -1,3 +1,11 @@
+/**
+ * Sets up the clone and copy buttons used in the flyout.
+ *  
+ * @constructor Tabs
+ * @author little9 (Jamie Little)
+ * 
+ */
+
 function CopyClone() {
 
 	var myCopyClone = {

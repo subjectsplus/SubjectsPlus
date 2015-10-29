@@ -1,12 +1,13 @@
+/**
+ * Object that encompasses the functionality of the custom list flyout.
+ * 
+ * @constructor ResourceList
+ * @author little9 (Jamie Little)
+ * 
+ */
+
 function ResourceList() {
 
-	/**
-	 * Object that encompasses the functionality of the custom list flyout.
-	 * 
-	 * @namespace ResourceList
-	 * @author little9 (Jamie Little)
-	 * 
-	 */
 
 	var myDatabaseToken = {
 
@@ -143,14 +144,14 @@ function ResourceList() {
 
 				/** This function toggles the icons for the toggle options **/
 
-				$('body').on("click", ".show-description-toggle", function (data) {
+				$('body').on("click", ".show-description-toggle", function () {
 					myResourceList.toggleOptions($(this));
 				});
-				$('body').on("click", ".show-icons-toggle", function (data) {
+				$('body').on("click", ".show-icons-toggle", function () {
 
 					myResourceList.toggleOptions($(this));
 				});
-				$('body').on("click", ".include-note-toggle", function (data) {
+				$('body').on("click", ".include-note-toggle", function () {
 					myResourceList.toggleOptions($(this));
 				});
 			},
@@ -159,7 +160,7 @@ function ResourceList() {
 
 			databaseSearch: function () {
 				/** This function posts a string to the Autocomplete class to create a list of results. **/
-				myResourceList.settings.dbSearchBox.keyup(function (data) {
+				myResourceList.settings.dbSearchBox.keyup(function () {
 
 					myResourceList.settings.dbSearchResults.empty();
 					var search_url;

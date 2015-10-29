@@ -1,3 +1,11 @@
+/**
+ * Sets up drag & drop features across the guide interface.
+ *  
+ * @constructor Tabs
+ * @author little9 (Jamie Little)
+ * 
+ */
+
 function Drag() {
     var myDrag = {
            init : function() {

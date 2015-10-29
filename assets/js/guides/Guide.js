@@ -3,7 +3,7 @@
 * 
 * 
 * @class Guide
-* @author little9 (Jamie Little)
+* 
 *  
 **/
 

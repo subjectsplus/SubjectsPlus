@@ -1,3 +1,11 @@
+/**
+ * Sets up the click events for saving a guide and functions for actually saving the guide to the database. 
+ *  
+ * @constructor SaveSetup
+ *
+ * 
+ */
+
 function SaveSetup() {
 
 	var mySaveSetup = {

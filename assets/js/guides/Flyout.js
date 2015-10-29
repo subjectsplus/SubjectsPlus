@@ -1,6 +1,11 @@
 /**
+ * Object that sets up the behaviour of the flyout menu.
+ * 
+ * @constructor Flyout
+ * @author little9 (Jamie Little)
  * 
  */
+
 function Flyout() {
 
 	var myFlyout = {

@@ -1,4 +1,8 @@
 /**
+ * Provides the click events for the the layouts section in the flyout. 
+ *  
+ * @constructor Layout
+ * 
  * 
  */
 function Layout() {

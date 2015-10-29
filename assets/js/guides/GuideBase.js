@@ -1,3 +1,12 @@
+/**
+ * Sets up some basic functonality related to the guide interface. If you see something that would be more appropriate 
+ * in its own module feel free to move it.
+ * 
+ * @constructor GuideBase
+ * 
+ * 
+ */
+
 function GuideBase() {
     var myGuideBase = {
         settings: {
@@ -182,6 +191,5 @@ function GuideBase() {
         }
 
     };
-
     return myGuideBase;
 }

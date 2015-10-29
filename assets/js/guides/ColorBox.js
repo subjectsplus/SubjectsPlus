@@ -1,4 +1,6 @@
 /**
+ * @constructor ColorBox
+ * 
  * 
  */ 
  function ColorBox() {
