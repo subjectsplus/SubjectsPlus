@@ -18,11 +18,12 @@ function GuideBase() {
             startURL: '../guides/guide.php?subject_id=',
             spPath: document.URL.split('/')[3],
             subjectId: $('#guide-parent-wrap').data().subjectId,
-            staffId: $('#guide-parent-wrap').data().staffId,
-            autoCompleteUrl: "../includes/autocomplete_data.php?collection=guide&subject_id="
+            autoCompleteUrl: "../includes/autocomplete_data.php?collection=guide&subject_id=",
+            favoritesUrl : "helpers/favorite_pluslets_data.php?staff_id="
         },
         strings: {
             tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
+            noFavoritesText : "<li>No boxes have been marked as a favorite. To do so, click the gears button on the box you wish to mark as a Favorite and activate the Favorite toggle switch.</li>""
 
         },
         bindUiActions: function () {
@@ -36,7 +37,7 @@ function GuideBase() {
             myGuideBase.fixFlashFOUC();
             myGuideBase.loadGuideSearch();
             myGuideBase.expandCollapseCSS();
-            myGuideBase.getUserFavoriteBoxes(myGuideBase.staffId);
+            myGuideBase.getUserFavoriteBoxes();
             myGuideBase.refreshFeeds();
 
         },
@@ -133,18 +134,22 @@ function GuideBase() {
 
 
         },
-        getUserFavoriteBoxes: function (staff_id) {
+        getUserFavoriteBoxes: function () {
+        	
+        	var g = Guide();
+        	var staffId = g.getStaffId();
+        	
             $(".fav-boxes-list").empty();
             jQuery.ajax({
-                url: "helpers/favorite_pluslets_data.php?staff_id=" + staff_id,
+                url: myGuideBase.settings.favoritesUrl + staffId,
                 type: "GET",
                 dataType: "json",
-                data: { staff_id: staff_id },
+                data: { staff_id: staffId },
                 success: function (data) {
 
                     if (!data.length) {
                         //no results
-                        $(".fav-boxes-list").append("<li>No boxes have been marked as a favorite. To do so, click the gears button on the box you wish to mark as a Favorite and activate the Favorite toggle switch.</li>");
+                        $(".fav-boxes-list").append(myGuideBase.settings.noFavoritesText);
 
 
                     }

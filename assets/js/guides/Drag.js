@@ -181,8 +181,9 @@ function Drag() {
 		 									  maxWidth: "1100px",
 		 									  maxHeight: "800px"
 		 								      });
-
-		 								      makeHelpable("img[class*=help-]");
+		 								      
+		 								      var h = Help();
+		 								      h.makeHelpable("img[class*=help-]");
 
 		 								      //Close main flyout when a pluslet is dropped
 		 						              $('#main-options').slideReveal("hide");

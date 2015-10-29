@@ -16,7 +16,7 @@ function Flyout() {
 
 		activateFlyoutButton : function(FlyoutButton, FlyoutPanel) {
 			$(FlyoutButton).click(function() {
-				myFlyoutselectedPanelDisplay();
+				myFlyout.selectedPanelDisplay();
 				$(FlyoutPanel).show();
 				$(FlyoutButton).addClass("active-item");
 			});
@@ -50,8 +50,9 @@ function Flyout() {
 
 			//Top level Panel Open by default
 
-			this.mainSlider();
-			this.bindUiActions();
+			myFlyout.mainSlider();
+			myFlyout.bindUiActions()
+			myFlyout.setScrollBar();
 		},
 		mainSlider : function() {
 			var s = myFlyout.settings;
@@ -90,7 +91,24 @@ function Flyout() {
 				$(this).removeClass("active-item");
 			});
 
+		},
+		setScrollBar : function() {
+
+			$('.box_options_container, .fav-boxes-content, .db-list-results, .user_guides_display').enscroll({
+			    verticalTrackClass: 'track',
+			    verticalHandleClass: 'handle',
+			    minScrollbarLength: 28
+			});
+
+
+			$('.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults, .databases-searchresults').enscroll({
+			    verticalTrackClass: 'track2',
+			    verticalHandleClass: 'handle2',
+			    minScrollbarLength: 28
+			});
+
 		}
+		
 
 	};
 

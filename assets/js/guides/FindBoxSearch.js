@@ -1,13 +1,14 @@
-function FindBoxSearch() {
+/**
+ * Object that encompasses the functionality of the find box search
+ * in the 'Find Boxes' flyout.
+ * 
+ * @constructor FindBoxSearch
+ * @author little9 (Jamie Little)
+ * 
+ */
 
-	/**
-	 * Object literal that encompasses the functionality of the find box search
-	 * in the 'Find Boxes' flyout.
-	 * 
-	 * @class FindBoxSearch
-	 * @author little9 (Jamie Little)
-	 * 
-	 */
+
+function FindBoxSearch() {
 	var myFindBoxSearch = {
 
 		/**

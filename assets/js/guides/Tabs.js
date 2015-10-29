@@ -18,6 +18,8 @@ function Tabs() {
         },
         bindUiActions: function () {
             myTabs.removePlusletsFromCurrentTab();
+            myTabs.makeTabsClickable();
+       
         },
         init: function () {
             myTabs.setupTabs();
@@ -29,6 +31,9 @@ function Tabs() {
 
             //Find Box Tabs - Browse and Search
             $( "#find-box-tabs" ).tabs();
+            
+			var sec = Section();
+			sec.makeAddSection('a[id="add_section"]');
 
         
         },
@@ -328,6 +333,17 @@ function Tabs() {
                 if ($("input:checked")) {
                     $(this).find('a').attr('target', '_blank');
                 }
+            });
+        }, 
+        makeTabsClickable : function() {
+            ////////////////////
+            // Make page tabs clickable
+            ///////////////////
+            $(document.body).on('click','a[id*=tab-]', function(event) {
+                var tab_id = $(this).attr("id").split("-");
+                //var selected_tab = "#pluslet-" + box_id[1];
+               // setupTabs(tab_id[1]);
+
             });
         }
     }
