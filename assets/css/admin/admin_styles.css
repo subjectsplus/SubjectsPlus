@@ -7,17 +7,6 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
 
 /* It seems possible you might need to fix the paths to this font */
 
-@font-face {
-  font-family: 'ChunkFiveRegular';
-  src: url('../../assets/css/admin/Chunkfive-webfont.eot');
-  src: url('../../assets/css/admin/Chunkfive-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../../assets/css/admin/Chunkfive-webfont.woff') format('woff'),
-  url('../../assets/css/admin/Chunkfive-webfont.ttf') format('truetype'),
-  url('../../assets/css/admin/Chunkfive-webfont.svg#ChunkFiveRegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
 
 /* Unicode Font - Noto Sans  */
 
@@ -30,9 +19,7 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   url('../../assets/css/admin/font/NotoSans-Bold.svg#NotoSansBold') format('svg');
   font-weight: 700;
   font-style: bold;
-}
-
-
+},
 
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
