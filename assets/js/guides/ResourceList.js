@@ -1,4 +1,4 @@
-function getResourceList() {
+function ResourceList() {
 
 	/**
 	 * Object that encompasses the functionality of the custom list flyout.
@@ -8,7 +8,7 @@ function getResourceList() {
 	 * 
 	 */
 
-	var DatabaseToken = {
+	var myDatabaseToken = {
 
 			"label": "",
 			"record_id": "",
@@ -16,7 +16,7 @@ function getResourceList() {
 
 
 	};	
-	var ResourceList = {
+	var myResourceList = {
 
 			settings: {
 				/** This contains configuration details like URLs and sets up any jQuery selectors that will be used in the object.  **/			
@@ -87,19 +87,19 @@ function getResourceList() {
 				/** This function adds the selected result to the list of database tokens. */
 				$('body').on("click", '.add-to-list-button', function () {
 
-					ResourceList.settings.dbListButtons.show();
-					ResourceList.settings.dbListContent.show();
+					myResourceList.settings.dbListButtons.show();
+					myResourceList.settings.dbListContent.show();
 
-					var databaseToken = Object.create(DatabaseToken);
+					var databaseToken = Object.create(myDatabaseToken);
 					databaseToken.label = $(this).attr('data-label').trim();
 					databaseToken.record_id = $(this).val();
 
 
 
-					ResourceList.settings.dbListResults.append("<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-							"</span>" + ResourceList.strings.displayToggles);
-					ResourceList.settings.dbListResults.sortable();
-					ResourceList.settings.dbListResults.disableSelection();
+					myResourceList.settings.dbListResults.append("<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
+							"</span>" + myResourceList.strings.displayToggles);
+					myResourceList.settings.dbListResults.sortable();
+					myResourceList.settings.dbListResults.disableSelection();
 
 					$('.fa-check').hide();
 
@@ -144,14 +144,14 @@ function getResourceList() {
 				/** This function toggles the icons for the toggle options **/
 
 				$('body').on("click", ".show-description-toggle", function (data) {
-					ResourceList.toggleOptions($(this));
+					myResourceList.toggleOptions($(this));
 				});
 				$('body').on("click", ".show-icons-toggle", function (data) {
 
-					ResourceList.toggleOptions($(this));
+					myResourceList.toggleOptions($(this));
 				});
 				$('body').on("click", ".include-note-toggle", function (data) {
-					ResourceList.toggleOptions($(this));
+					myResourceList.toggleOptions($(this));
 				});
 			},
 
@@ -159,27 +159,27 @@ function getResourceList() {
 
 			databaseSearch: function () {
 				/** This function posts a string to the Autocomplete class to create a list of results. **/
-				ResourceList.settings.dbSearchBox.keyup(function (data) {
+				myResourceList.settings.dbSearchBox.keyup(function (data) {
 
-					ResourceList.settings.dbSearchResults.empty();
+					myResourceList.settings.dbSearchResults.empty();
 					var search_url;
-					var search_term = ResourceList.settings.dbSearchBox.val();
-					var limit_az = ResourceList.settings.limitAz.prop("checked");
+					var search_term = myResourceList.settings.dbSearchBox.val();
+					var limit_az = myResourceList.settings.limitAz.prop("checked");
 
 					if (limit_az) {
-						search_url = ResourceList.settings.autoCompleteUrl;
+						search_url = myResourceList.settings.autoCompleteUrl;
 					} else {
-						search_url = ResourceList.settings.autoCompleteUrlAzList;
+						search_url = myResourceList.settings.autoCompleteUrlAzList;
 					}
 
 
 					if ($(this).val() === "") {
-						ResourceList.settings.dbSearchResults.html(ResourceList.strings.noResults);
+						myResourceList.settings.dbSearchResults.html(myResourceList.strings.noResults);
 
 					}
 
 
-					if (search_term.length > ResourceList.settings.searchTermMinimumLength) {
+					if (search_term.length > myResourceList.settings.searchTermMinimumLength) {
 
 						$.get(search_url + search_term, function (data) {
 
@@ -188,7 +188,7 @@ function getResourceList() {
 									try {
 										if (data[i]['content_type'] == "Record") {
 
-											ResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
+											myResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
 													"<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
 													"<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +
 													"<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div></li>");
@@ -199,12 +199,12 @@ function getResourceList() {
 									}
 								}
 							} else {
-								ResourceList.settings.dbSearchResults.html(ResourceList.strings.noResults);
+								myResourceList.settings.dbSearchResults.html(myResourceList.strings.noResults);
 							}
 						});
 
 					} else {
-						ResourceList.settings.dbSearchResults.html(ResourceList.strings.noResults);
+						myResourceList.settings.dbSearchResults.html(myResourceList.strings.noResults);
 
 					}
 
@@ -213,7 +213,7 @@ function getResourceList() {
 
 			addListToPage: function () {
 				/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
-				ResourceList.settings.dbListButton.on("click", function () {
+				myResourceList.settings.dbListButton.on("click", function () {
 					dropPluslet('', 'Basic', '');
 					var waitCKEDITOR = setInterval(function () {
 						if (window.CKEDITOR) {
@@ -245,12 +245,12 @@ function getResourceList() {
 							var ck_index = Object.keys(CKEDITOR.instances).length - 1;
 							CKEDITOR.instances[Object.keys(CKEDITOR.instances)[ck_index]].setData(token_string.trim());
 
-							ResourceList.settings.click_count++;
-							ResourceList.settings.dbListResults.empty();
+							myResourceList.settings.click_count++;
+							myResourceList.settings.dbListResults.empty();
 						}
 					}, 100);
 				});
 			}
 	};
-	return ResourceList; 
+	return myResourceList; 
 };

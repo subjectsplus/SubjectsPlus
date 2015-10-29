@@ -1,4 +1,4 @@
-function getFindBoxSearch() {
+function FindBoxSearch() {
 
 	/**
 	 * Object literal that encompasses the functionality of the find box search
@@ -8,7 +8,7 @@ function getFindBoxSearch() {
 	 * @author little9 (Jamie Little)
 	 * 
 	 */
-	var FindBoxSearch = {
+	var myFindBoxSearch = {
 
 		/**
 		 * This contains configuration details like URLs and sets up any jQuery
@@ -64,7 +64,7 @@ function getFindBoxSearch() {
 		 */
 		search: function (search_term) {
 			$.get(
-					FindBoxSearch.settings.autoCompleteUrl
+					myFindBoxSearch.settings.autoCompleteUrl
 					+ search_term,
 					function (data) {
 
@@ -75,7 +75,7 @@ function getFindBoxSearch() {
 
 								if (data[i]['content_type'] == "Pluslet") {
 
-									FindBoxSearch.settings.findBoxSearchResults
+									myFindBoxSearch.settings.findBoxSearchResults
 										.append("<li data-pluslet-id='"
 											+ data[i].id
 											+ "' class=\"pluslet-listing\">"
@@ -85,13 +85,13 @@ function getFindBoxSearch() {
 											+ "\">"
 											+ data[i].label
 											+ "</div>"
-											+ FindBoxSearch.strings.findBoxSearchButtons);
+											+ myFindBoxSearch.strings.findBoxSearchButtons);
 
 								}
 
 							}
 						} else {
-							FindBoxSearch.settings.findBoxSearchResults
+							myFindBoxSearch.settings.findBoxSearchResults
 								.html("<li><span class=\"no-box-results\">No Results</span></li>");
 						}
 					});
@@ -101,23 +101,23 @@ function getFindBoxSearch() {
 		/** @member {Object} A function to bind the keyup event to the searchbox. * */
 		activateFindBoxSearch: function () {
 
-			FindBoxSearch.settings.findBoxSearchBox
+			myFindBoxSearch.settings.findBoxSearchBox
 				.keyup(function (data) {
-					FindBoxSearch.settings.findBoxSearchResults.empty();
-					var search_term = FindBoxSearch.settings.findBoxSearchBox
+					myFindBoxSearch.settings.findBoxSearchResults.empty();
+					var search_term = myFindBoxSearch.settings.findBoxSearchBox
 						.val();
-					FindBoxSearch.search(search_term);
+					myFindBoxSearch.search(search_term);
 
 				});
 		},
 		activateBoxSettingsCloseButton: function () {
 			//close box settings panel
-			FindBoxSearch.settings.closeButton.click(function () {
+			myFindBoxSearch.settings.closeButton.click(function () {
 				$(this).parent(".box_settings").hide();
 			});
 		}, loadCloneMenu : function() {
 			
-			$.get(FindBoxSearch.settings.allGuidesAutoCompleteUrl, function(data) { 
+			$.get(myFindBoxSearch.settings.allGuidesAutoCompleteUrl, function(data) { 
 
 				for(var i = 0; i<data.length;i++) {
 			        var subject_id = data[i].id;
@@ -148,6 +148,6 @@ function getFindBoxSearch() {
 
 
 
-	return FindBoxSearch;
+	return myFindBoxSearch;
 
 };

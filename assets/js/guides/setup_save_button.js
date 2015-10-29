@@ -1,11 +1,11 @@
+
+
+function setupSaveButton( lstrSelector )
+{
 ////////////////////////////
 // SAVE GUIDE'S LAYOUT
 // -- this saves everything on page
 ////////////////////////////
-
-function setupSaveButton( lstrSelector )
-{
-
 	
 
     $(document.body).on('click',lstrSelector, function(event) {

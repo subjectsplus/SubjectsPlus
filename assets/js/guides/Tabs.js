@@ -1,5 +1,5 @@
-function getTabs() {
-    var Tabs = {
+function Tabs() {
+    var myTabs = {
         settings: {
             tabTitle: $("#tab_title"),
             tabContent: $("#tab_content"),
@@ -17,13 +17,13 @@ function getTabs() {
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
         bindUiActions: function () {
-            Tabs.removePlusletsFromCurrentTab();
+            myTabs.removePlusletsFromCurrentTab();
         },
         init: function () {
-            Tabs.setupTabs();
-            Tabs.hideTabsFirstSectionSlider();
-            Tabs.bindUiActions();
-            Tabs.targetBlankLinks();
+            myTabs.setupTabs();
+            myTabs.hideTabsFirstSectionSlider();
+            myTabs.bindUiActions();
+            myTabs.targetBlankLinks();
             //Find Box Tabs - Browse and Search
            
 
@@ -47,11 +47,11 @@ function getTabs() {
                     }
                 },
                 open: function () {
-                    $(this).find(Tabs.settings.externalLink).hide();
-                    $(this).find(Tabs.settings.externalLink).prev().hide();
-                    if (Tabs.settings.tabCounter > 0) {
-                        $(this).find(Tabs.settings.externalLink).show();
-                        $(this).find(Tabs.settings.externalLink).prev().show();
+                    $(this).find(myTabs.settings.externalLink).hide();
+                    $(this).find(myTabs.settings.externalLink).prev().hide();
+                    if (myTabs.settings.tabCounter > 0) {
+                        $(this).find(myTabs.settings.externalLink).show();
+                        $(this).find(myTabs.settings.externalLink).prev().show();
                     }
                 },
                 close: function () {
@@ -88,9 +88,9 @@ function getTabs() {
                             });
                         }
 
-                        $('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link', $(Tabs.settings.tabExternalUrl).val());
+                        $('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link', $(myTabs.settings.tabExternalUrl).val());
 
-                        if ($(Tabs.settings.tabExternalUrl).val() != '') {
+                        if ($(myTabs.settings.tabExternalUrl).val() != '') {
                             $('a[href="#tabs-' + id + '"]').on('click', function (evt) {
                                 window.open($(this).parent('li').attr('data-external-link'), '_blank');
                                 evt.stopImmediatePropagation();
@@ -128,9 +128,9 @@ function getTabs() {
 
                         $('a[href="#tabs-' + id + '"]').parent().remove();
                         $('div#tabs-' + id).remove();
-                        Tabs.settings.tabs("destroy");
-                        Tabs.settings.tabs.tabs();
-                        Tabs.settings.tabCounter--;
+                        myTabs.settings.tabs("destroy");
+                        myTabs.settings.tabs.tabs();
+                        myTabs.settings.tabCounter--;
                         $(this).dialog("close");
                         $("#response").hide();
                         $('#save_guide').fadeIn();
@@ -146,13 +146,13 @@ function getTabs() {
                     $(this).find('select[name="visibility"]').val($('a[href="#tabs-' + id + '"]').parent('li').attr('data-visibility'));
 
                     //external url add text input unless first tab
-                    $(this).find(Tabs.settings.tabExternalUrl).val('');
-                    $(this).find(Tabs.settings.tabExternalUrl).hide();
-                    $(this).find(Tabs.settings.tabExternalUrl).prev().hide();
-                    $(this).find(Tabs.settings.tabExternalUrl).val($('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link'));
+                    $(this).find(myTabs.settings.tabExternalUrl).val('');
+                    $(this).find(myTabs.settings.tabExternalUrl).hide();
+                    $(this).find(myTabs.settings.tabExternalUrl).prev().hide();
+                    $(this).find(myTabs.settings.tabExternalUrl).val($('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link'));
                     if (id != '0') {
-                        $(this).find(Tabs.settings.tabExternalUrl).show();
-                        $(this).find(Tabs.settings.tabExternalUrl).prev().show();
+                        $(this).find(myTabs.settings.tabExternalUrl).show();
+                        $(this).find(myTabs.settings.tabExternalUrl).prev().show();
                     }
                 },
                 close: function () {
@@ -161,7 +161,7 @@ function getTabs() {
             });
 
             //add click event for external url tabs
-            $(Tabs.settings.dataExternalLink).each(function () {
+            $(myTabs.settings.dataExternalLink).each(function () {
                 if ($(this).attr('data-external-link') != "") {
                     $(this).children('a[href^="#tabs-"]').on('click', function (evt) {
                         window.open($(this).parent('li').attr('data-external-link'), '_blank');
@@ -185,7 +185,7 @@ function getTabs() {
             });
 
             // edit icon: removing or renaming tab on click
-            Tabs.settings.tabs.delegate("span.alter_tab", "click", function (lobjClicked) {
+            myTabs.settings.tabs.delegate("span.alter_tab", "click", function (lobjClicked) {
                 var List = $(this).parent().children("a");
                 var Tab = List[0];
                 window.lastClickedTab = $(Tab).attr("href");
@@ -207,14 +207,14 @@ function getTabs() {
 
             // actual addTab function: adds new tab using the input from the form above
             function addTab() {
-                var label = Tabs.settings.tabTitle.val() || "Tab " + Tabs.settings.tabCounter,
+                var label = myTabs.settings.tabTitle.val() || "Tab " + myTabs.settings.tabCounter,
                     external_link = $('input#tab_external_link').val(),
-                    id = "tabs-" + Tabs.settings.tabCounter,
-                    li = $(Tabs.strings.tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
-                    tabContentHtml = Tabs.settings.tabContent.val() || "Tab " + Tabs.settings.tabCounter + " content.";
+                    id = "tabs-" + myTabs.settings.tabCounter,
+                    li = $(myTabs.strings.tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+                    tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
                 $(li).attr('data-external-link', external_link);
                 $(li).attr('data-visibility', 1);
-                Tabs.settings.tabs.find(".ui-tabs-nav").append(li);
+                myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
 
 
                 //make tabs sortable
@@ -245,21 +245,21 @@ function getTabs() {
                         data: { action: 'create' },
                         dataType: "html",
                         success: function (html) {
-                            Tabs.settings.tabDestroy;
+                            myTabs.settings.tabDestroy;
 
-                            Tabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
+                            myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
                                 + "</div>");
 
                             $("#response").hide();
-                            Tabs.settings.saveButton.fadeIn();
+                            myTabs.settings.saveButton.fadeIn();
 
 
-                            Tabs.settings.tabs();
+                            myTabs.settings.tabs();
 
                             if (external_link == '') {
-                                Tabs.settings.tabs('select', Tabs.settings.tabCounter);
+                                myTabs.settings.tabs('select', myTabs.settings.tabCounter);
                             } else {
-                                Tabs.settings.tabs('select', 0);
+                                myTabs.settings.tabs('select', 0);
                             }
 
                             if ($(li).attr('data-external-link') != '') {
@@ -283,7 +283,7 @@ function getTabs() {
                                 onClickHandlers.splice(0, 0, onClickHandlers.pop());
                             });
 
-                            Tabs.settings.tabCounter++;
+                            myTabs.settings.tabCounter++;
                         }
                     });
 
@@ -314,7 +314,7 @@ function getTabs() {
             //remove all pluslets from current tab
             $('a.remove_pluslets').on('click', function () {
                 var currPanel = $("#tabs").tabs('option', 'active');
-                if (confirm(Tabs.strings.confirmPrompt)) {
+                if (confirm(myTabs.strings.confirmPrompt)) {
                     $("#tabs-" + currPanel).find('.pluslet').remove();
                     $("#save_guide").fadeIn();
                 }
@@ -331,5 +331,5 @@ function getTabs() {
             });
         }
     }
-    return Tabs;
+    return myTabs;
 }

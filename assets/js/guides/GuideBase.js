@@ -1,5 +1,5 @@
-function getGuideBase() {
-    var GuideBase = {
+function GuideBase() {
+    var myGuideBase = {
         settings: {
             globalHeader: $("#header, #subnavcontainer"),
             sections: $('div[id^="section_"]'),
@@ -30,14 +30,14 @@ function getGuideBase() {
         },
         init: function () {
             // Hides the global nav on load
-            GuideBase.settings.globalHeader.hide();
-            GuideBase.settings.newBox.hoverIntent(GuideBase.hoverIntentConfig);
-            GuideBase.hoverIntentLayoutBox();
-            GuideBase.fixFlashFOUC();
-            GuideBase.loadGuideSearch();
-            GuideBase.expandCollapseCSS();
-            GuideBase.getUserFavoriteBoxes(GuideBase.staffId);
-            GuideBase.refreshFeeds();
+            myGuideBase.settings.globalHeader.hide();
+            myGuideBase.settings.newBox.hoverIntent(myGuideBase.hoverIntentConfig);
+            myGuideBase.hoverIntentLayoutBox();
+            myGuideBase.fixFlashFOUC();
+            myGuideBase.loadGuideSearch();
+            myGuideBase.expandCollapseCSS();
+            myGuideBase.getUserFavoriteBoxes(myGuideBase.staffId);
+            myGuideBase.refreshFeeds();
 
         },
         
@@ -54,13 +54,13 @@ function getGuideBase() {
             out: this.removeSlider
         },
         hoverIntentLayoutBox: function () {
-            GuideBase.settings.layoutBox.hoverIntent(this.hoverIntentSliderConfig);
+            myGuideBase.settings.layoutBox.hoverIntent(this.hoverIntentSliderConfig);
         },
         addSlider: function () {
-            GuideBase.settings.sliderOptions.show();
+            myGuideBase.settings.sliderOptions.show();
         },
         removeSlider: function () {
-            GuideBase.settings.sliderOptions.hide();
+            myGuideBase.settings.sliderOptions.hide();
 
 
         },
@@ -73,7 +73,7 @@ function getGuideBase() {
                         var box_id = window.location.hash.split('-')[2];
                         var selected_box = ".pluslet-" + box_id;
 
-                        GuideBase.settings.tabs('select', tab_id);
+                        myGuideBase.settings.tabs('select', tab_id);
 
                         $('html, body').animate({ scrollTop: jQuery('a[name="box-' + box_id + '"]').offset().top }, 'slow');
 
@@ -97,7 +97,7 @@ function getGuideBase() {
         },
         autoCompleteSettings: {
             minLength: 3,
-            source: "", //GuideBase.settings.autoCompleteUrl  + GuideBase.settings.subjectId, 
+            source: "", //myGuideBase.settings.autoCompleteUrl  + myGuideBase.settings.subjectId, 
             focus: function (event, ui) {
 
                 event.preventDefault();
@@ -120,7 +120,7 @@ function getGuideBase() {
 
         },
         loadGuideSearch: function () {
-            $('.find-guide-input').autocomplete(GuideBase.autoCompleteSettings);
+            $('.find-guide-input').autocomplete(myGuideBase.autoCompleteSettings);
         },
         expandCollapseCSS: function () {
             //Expand/Collapse Trigger CSS for all Pluslets on a Tab
@@ -178,5 +178,5 @@ function getGuideBase() {
 
     };
 
-    return GuideBase;
+    return myGuideBase;
 }

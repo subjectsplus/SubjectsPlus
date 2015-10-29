@@ -1,13 +1,73 @@
-		 // SET UP DROP SPOTS
+function Drag() {
+    var myDrag = {
+           init : function() {
+            
+               
+            myDrag.makeDropable(".dropspotty");
+            myDrag.makeDropable(".cke");
+            myDrag.makeSortable(".sort-column");
+            myDrag.makeSortable(".sptab", 'sections');
+            myDrag.makeDraggable(".draggable");
+
+               $(".box-item").mousedown(function () {
+        myDrag.makeDropable(".dropspotty");
+        myDrag.makeDropable(".cke");
+        myDrag.makeSortable(".sort-column");
+        myDrag.makeSortable(".sptab", 'sections');
+        myDrag.makeDraggable(".draggable");
+
+
+         $(".box-item").on('drag', function () {
+        //$('#box_options').hide();
+    });
+
+    $(".draggable").draggable({
+        helper: 'clone', // Use a cloned helper
+        appendTo: 'body', // Append helper to body so you can hide the parent
+        start: function () {
+            // Make the original transparent to avoid re-flowing of the elements
+            // This makes the illusion of dragging the original item
+            $(this).css({ opacity: 0 });
+        },
+        stop: function () {
+            // Show original after dragging stops
+            $(this).css({ opacity: 1 });
+
+        }
+    });
+
+
+    });
+
+           },
+            makeDraggable : function ( lstrSelector )
+		 {
+		     ////////////////////////////////
+		     // SET UP DRAGGABLE
+		     // --makes anyting with class of "draggable" draggable
+		     ////////////////////////////////
+
+		     var draggable_element = $(lstrSelector);
+
+		     draggable_element.draggable({
+		 	ghosting:	true,
+		 	opacity:	0.5,
+		 	revert: true,
+		 	fx: 300,
+		 	cursor: 'pointer',
+		 	helper: 'clone',
+		 	zIndex: 350
+		     });
+		     
+		 },
+
+		  makeDropable : function ( lstrSelector )
+		 {
+	     // SET UP DROP SPOTS
 		 // --makes divs with class of "dropspotty" droppables
 		 // accepts things with class of "draggable"
 		 //
 		 ////////////////////////////////
-
-
-		 function makeDropable( lstrSelector )
-		 {
-
 
 		     var dropspot = $(lstrSelector);
 		     var drop_id;
@@ -157,5 +217,72 @@
 		 	    }
 		 	}
 		     });
-		 }
-		    
+		 },
+		  makeSortable : function(lstrSelector, lstrType) {
+////////////////////////////
+// MAKE COLUMNS SORTABLE
+// Make "Save Changes" button appear on sorting
+////////////////////////////
+	var sortable_element = $(lstrSelector);
+
+	if (lstrType === 'sections') {
+		sortable_element.sortable({
+			opacity : 0.7,
+			cancel : '.unsortable',
+			handle : 'img.section_sort',
+			update : function(event, ui) {
+				$("#response").hide();
+				$("#save_guide").fadeIn();
+
+			},
+			start : function(event, ui) {
+				$(ui.item).find('.dropspotty').hide();
+				$(ui.item).find('.pluslet').hide();
+				$(ui.item).height('2em');
+				$(ui.item).width('auto');
+			},
+			stop : function(event, ui) {
+				$(ui.item).find('.dropspotty').show();
+				$(ui.item).find('.pluslet').show();
+			}
+		});
+	} else {
+		sortable_element.sortable({
+
+			connectWith : [ '.portal-column-0', '.portal-column-1',
+					'.portal-column-2' ],
+			opacity : 0.7,
+			tolerance : 'intersect',
+			cancel : '.unsortable',
+			handle : 'div.pluslet_sort',
+			update : function(event, ui) {
+				$("#response").hide();
+				$("#save_guide").fadeIn();
+
+			},
+			start : function(event, ui) {
+				$(ui.item).children('.pluslet_body').hide();
+				$(ui.item).children().children('.titlebar_text').show();
+				$(ui.item).children().children('.titlebar_options').hide();
+				$(ui.item).height('2em');
+				$(ui.item).width('90%');
+			},
+			stop : function(event, ui) {
+
+				if ($('div').hasClass('pluslet_body_closed')) {
+					$(ui.item).children('.pluslet_body').hide();
+				} else {
+					$(ui.item).children('.pluslet_body').show();
+				}
+				$(ui.item).children().children('.titlebar_text').show();
+				$(ui.item).children().children('.titlebar_options').show();
+
+			}
+		});
+	}
+ }
+    }
+
+
+    return myDrag;
+}

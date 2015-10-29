@@ -1,9 +1,9 @@
 /**
  * 
  */
-function getLayout() {
+function Layout() {
 
-	var Layout = {
+	var myLayout = {
 			settings : {
 
 			},
@@ -14,59 +14,81 @@ function getLayout() {
 
 				$( "#col-single" ).click(function() {
 
-					Layout.changeLayout(0, 14);
-					Layout.checkDataLayout(Layout.layouts);
-					Layout.moveColumnContent(0, 1);
-					Layout.moveColumnContent(2, 1);
-					Layout.selectedLayout();
+					myLayout.changeLayout(0, 14);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(0, 1);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
 					$(this).addClass("active-layout-icon");
 				});
 
 				$( "#col-double" ).click(function() {
 
-					Layout.changeLayout(6, 12);
-					Layout.checkDataLayout(Layout.layouts);
-					Layout.moveColumnContent(2, 1);
-					Layout.selectedLayout();
+					myLayout.changeLayout(6, 12);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
 					$(this).addClass("active-layout-icon");
 				});
 
 				$( "#col-48" ).click(function() {
-					Layout.changeLayout(4, 24);
-					Layout.checkDataLayout(Layout.layouts);
-					Layout.moveColumnContent(2, 1);
-					Layout.selectedLayout();
+					myLayout.changeLayout(4, 24);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
 					$(this).addClass("active-layout-icon");
 				});
 
 				$( "#col-84" ).click(function() {
-					Layout.changeLayout(8, 12);
-					Layout.checkDataLayout(Layout.layouts);
-					Layout.moveColumnContent(2, 1);
-					Layout.selectedLayout();
+					myLayout.changeLayout(8, 12);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
 					$(this).addClass("active-layout-icon");
 				});
 
 				$( "#col-triple" ).click(function() {
-					Layout.changeLayout(4, 8);
-					Layout.checkDataLayout(Layout.layouts);
-					Layout.selectedLayout();
+					myLayout.changeLayout(4, 8);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.selectedLayout();
 					$(this).addClass("active-layout-icon");
 				});
 
 				$( "#col-363" ).click(function() {
-					Layout.changeLayout(3, 9);
-					Layout.checkDataLayout(Layout.layouts);
-					Layout.selectedLayout();
+					myLayout.changeLayout(3, 9);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.selectedLayout();
 					$(this).addClass("active-layout-icon");
 				});
 
 			},
 			init : function() {
-				Layout.bindUiActions();
-				Layout.selectedLayout();
-				Layout.checkDataLayout();
-				Layout.makeSectionSlider();
+				myLayout.bindUiActions();
+				myLayout.selectedLayout();
+				myLayout.checkDataLayout();
+				myLayout.makeSectionSlider();
+
+				  // Append an intital section
+    if ($('[id^=section]').length) {
+
+    } else {
+
+        if (document.URL.indexOf('guide.php') > 0) {
+
+            $.ajax({
+                url: "helpers/section_data.php",
+                type: "POST",
+                data: { action: 'create' },
+                dataType: "html",
+                success: function (html) {
+                    $('div#tabs-0').append(html);
+                }
+            });
+        }
+
+    }
+
+
 			},
 			layouts : {
 				"0-12-0": "#col-single",
@@ -100,7 +122,7 @@ function getLayout() {
 				// Check section data-layout on pageLoad and hide empty containers
 				// Highlight "current/active" layout
 
-				Layout.selectedLayout();
+				myLayout.selectedLayout();
 
 				var current_tab = $('#tabs').tabs('option', 'selected');
 				var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
@@ -157,7 +179,7 @@ function getLayout() {
 
 
 	                try {
-	                    Layout.reLayout(sec_id, lw, mw, sw);
+	                    myLayout.reLayout(sec_id, lw, mw, sw);
 	                } catch (e) {
 
 	                	console.log("Error:" + e);
@@ -194,7 +216,7 @@ function getLayout() {
 
 	      				       $( "div#section_" + sec_id ).attr( 'data-layout', extra_val);
 
-	      				       Layout.reLayout(sec_id, lw, mw, sw);
+	      				       myLayout.reLayout(sec_id, lw, mw, sw);
         	      				         				       
 	      				       // Hide or show the third column if needed 
 
@@ -215,5 +237,5 @@ function getLayout() {
 	      			   });
 	        }
 	}
-	return Layout;
+	return myLayout;
 };

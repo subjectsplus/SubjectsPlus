@@ -1,9 +1,9 @@
 /**
  * 
  */
-function getFlyout() {
+function Flyout() {
 
-	var Flyout = {
+	var myFlyout = {
 		settings : {
 			mainOptions : $('#main-options'),
 			triggerMainOptions : $(".trigger-main-options"),
@@ -16,7 +16,7 @@ function getFlyout() {
 
 		activateFlyoutButton : function(FlyoutButton, FlyoutPanel) {
 			$(FlyoutButton).click(function() {
-				Flyout.selectedPanelDisplay();
+				myFlyoutselectedPanelDisplay();
 				$(FlyoutPanel).show();
 				$(FlyoutButton).addClass("active-item");
 			});
@@ -38,10 +38,10 @@ function getFlyout() {
 		bindUiActions : function() {
 			// Show/Hide "Find in Guide" form
 
-			for (flyoutButton in Flyout.flyOutPanels) {
+			for (flyoutButton in myFlyout.flyOutPanels) {
 				{
-					Flyout.activateFlyoutButton(flyoutButton,
-							Flyout.flyOutPanels[flyoutButton]);
+					myFlyout.activateFlyoutButton(flyoutButton,
+							myFlyout.flyOutPanels[flyoutButton]);
 				}
 
 			}
@@ -54,7 +54,7 @@ function getFlyout() {
 			this.bindUiActions();
 		},
 		mainSlider : function() {
-			var s = Flyout.settings;
+			var s = myFlyout.settings;
 
 			var mainslider = s.mainOptions.slideReveal({
 				trigger : s.triggerMainOptions,
@@ -94,5 +94,5 @@ function getFlyout() {
 
 	};
 
-	return Flyout;
+	return myFlyout;
 };

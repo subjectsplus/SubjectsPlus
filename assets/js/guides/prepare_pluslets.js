@@ -1,8 +1,3 @@
-///////////////////////
-// preparePluslets FUNCTION
-// called to prepare all the pluslets before saving them
-///////////////////////
-
 function preparePluslets(lstrType, lintID, lobjThis, staffId, subjectId) {
 	var lboolSettingsOnly = false;
 	var lstrInstance;
@@ -18,9 +13,11 @@ function preparePluslets(lstrType, lintID, lobjThis, staffId, subjectId) {
 	var subject_id = subjectId;
 	
 	//based on type set variables
-	
-	//console.log(lstrType.toLowerCase());
-	
+	///////////////////////
+    // preparePluslets FUNCTION
+    // called to prepare all the pluslets before saving them
+    ///////////////////////
+
 	switch (lstrType.toLowerCase()) {
 	case "modified": {
 		//used to get contents of CKeditor box
