@@ -5,20 +5,22 @@
  * 
  * 
  */
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function Tabs() {
+	"use strict";
     var myTabs = {
         settings: {
-            tabTitle: $("#tab_title"),
-            tabContent: $("#tab_content"),
+            tabTitle: $('#tab_title'),
+            tabContent: $('#tab_content'),
             tabCounter: $('#tabs').data().tabCount,
-            tabs: $("#tabs").tabs(),
-            dialog: $("#dialog").dialog,
-            externalLink: 'input[name="tab_external_link"]',
+            tabs: $('#tabs').tabs(),
+            dialog: $('#dialog').dialog,
+            externalLink: 'input[name=\'tab_external_link\']',
             dataExternalLink: 'li[data-external-link]',
-            saveButton: $("#save_guide"),
-            tabExternalUrl: 'input[name="tab_external_url"]',
-            findBoxTabs: $("#find-box-tabs")
+            saveButton: $('#save_guide'),
+            tabExternalUrl: 'input[name=\'tab_external_url\']',
+            findBoxTabs: $('#find-box-tabs')
         },
         strings: {
             tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
@@ -85,7 +87,7 @@ function Tabs() {
                         $('a[href="#tabs-' + id + '"]').text($('input[name="rename_tab_title"]').val());
                         $('a[href="#tabs-' + id + '"]').parent('li').attr('data-visibility', $('select[name="visibility"]').val());
 
-                        if ($('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link') != '') {
+                        if ($('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link') !== '') {
                             $('a[href="#tabs-' + id + '"]').each(function () {
                                 var elementData = $._data(this),
                                     events = elementData.events;
@@ -93,7 +95,7 @@ function Tabs() {
                                 var onClickHandlers = events['click'];
 
                                 // Only one handler. Nothing to change.
-                                if (onClickHandlers.length == 1) {
+                                if (onClickHandlers.length === 1) {
                                     return;
                                 }
 
@@ -103,7 +105,7 @@ function Tabs() {
 
                         $('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link', $(myTabs.settings.tabExternalUrl).val());
 
-                        if ($(myTabs.settings.tabExternalUrl).val() != '') {
+                        if ($(myTabs.settings.tabExternalUrl).val() !== '') {
                             $('a[href="#tabs-' + id + '"]').on('click', function (evt) {
                                 window.open($(this).parent('li').attr('data-external-link'), '_blank');
                                 evt.stopImmediatePropagation();
@@ -116,7 +118,7 @@ function Tabs() {
                                 var onClickHandlers = events['click'];
 
                                 // Only one handler. Nothing to change.
-                                if (onClickHandlers.length == 1) {
+                                if (onClickHandlers.length === 1) {
                                     return;
                                 }
 
@@ -125,7 +127,7 @@ function Tabs() {
                         }
 
                         //add/remove class based on tab visibility
-                        if ($('select[name="visibility"]').val() == 1) {
+                        if ($('select[name="visibility"]').val() === 1) {
                             $('a[href="#tabs-' + id + '"]').parent('li').removeClass('hidden_tab');
                         } else {
                             $('a[href="#tabs-' + id + '"]').parent('li').addClass('hidden_tab');
@@ -163,7 +165,7 @@ function Tabs() {
                     $(this).find(myTabs.settings.tabExternalUrl).hide();
                     $(this).find(myTabs.settings.tabExternalUrl).prev().hide();
                     $(this).find(myTabs.settings.tabExternalUrl).val($('a[href="#tabs-' + id + '"]').parent('li').attr('data-external-link'));
-                    if (id != '0') {
+                    if (id !== '0') {
                         $(this).find(myTabs.settings.tabExternalUrl).show();
                         $(this).find(myTabs.settings.tabExternalUrl).prev().show();
                     }
@@ -175,7 +177,7 @@ function Tabs() {
 
             //add click event for external url tabs
             $(myTabs.settings.dataExternalLink).each(function () {
-                if ($(this).attr('data-external-link') != "") {
+                if ($(this).attr('data-external-link') !== "") {
                     $(this).children('a[href^="#tabs-"]').on('click', function (evt) {
                         window.open($(this).parent('li').attr('data-external-link'), '_blank');
                         evt.stopImmediatePropagation();
@@ -188,7 +190,7 @@ function Tabs() {
                         var onClickHandlers = events['click'];
 
                         // Only one handler. Nothing to change.
-                        if (onClickHandlers.length == 1) {
+                        if (onClickHandlers.length === 1) {
                             return;
                         }
 
@@ -235,7 +237,7 @@ function Tabs() {
                     $(tabs).find(".ui-tabs-nav").sortable({
                         axis: "x",
                         stop: function (event, ui) {
-                            if ($(ui.item).attr("id") == 'add_tab' || $(ui.item).parent().children(':first').attr("id") != 'add_tab' || $(ui.item).attr('data-external-link') != '')
+                            if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
                                 $(tabs).find(".ui-tabs-nav").sortable("cancel");
                             else {
                                 // $(tabs).tabs( "refresh" );
@@ -269,13 +271,13 @@ function Tabs() {
 
                             myTabs.settings.tabs();
 
-                            if (external_link == '') {
+                            if (external_link === '') {
                                 myTabs.settings.tabs('select', myTabs.settings.tabCounter);
                             } else {
                                 myTabs.settings.tabs('select', 0);
                             }
 
-                            if ($(li).attr('data-external-link') != '') {
+                            if ($(li).attr('data-external-link') !== '') {
                                 $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
                                     window.open($(this).parent('li').attr('data-external-link'), '_blank');
                                     evt.stopImmediatePropagation();
@@ -289,7 +291,7 @@ function Tabs() {
                                 var onClickHandlers = events['click'];
 
                                 // Only one handler. Nothing to change.
-                                if (onClickHandlers.length == 1) {
+                                if (onClickHandlers.length === 1) {
                                     return;
                                 }
 

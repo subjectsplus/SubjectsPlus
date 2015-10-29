@@ -5,20 +5,22 @@
  * 
  * 
  */
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function Help() {
- 
+	"use strict";
+
  	var myHelp = {
  	
  	settings : {
- 		popUrl : "helpers/popup_help.php?type="
+ 		popUrl : 'helpers/popup_help.php?type='
  	},
  	strings : {
  	},
  	bindUiActions : function() {
  	},
  	init : function() {
- 		myHelp.makeHelpable("img[class*=help-]");
+ 		myHelp.makeHelpable('img[class*=help-]');
  	},
 
 
@@ -29,16 +31,16 @@ function Help() {
  		 ////////////////
  	$(lstrSelector).unbind('click');
  	$(lstrSelector).on('click', function() {
- 		var help_type = $(this).attr("class").split("-");
+ 		var help_type = $(this).attr('class').split('-');
  		myHelp.settings.popUrl = myHelp.settings.popUrl + help_type[1];
 
  		$(this).colorbox({
  			href : myHelp.settings.popUrl,
  			iframe : true,
- 			innerWidth : "600px",
- 			innerHeight : "60%",
- 			maxWidth : "1100px",
- 			maxHeight : "800px"
+ 			innerWidth : '600px',
+ 			innerHeight : '60%',
+ 			maxWidth : '1100px',
+ 			maxHeight : '800px'
  		});
  	});
  }

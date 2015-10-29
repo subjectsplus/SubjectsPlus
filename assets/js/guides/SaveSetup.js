@@ -7,6 +7,7 @@
  */
 
 function SaveSetup() {
+	"use strict";
 
 	var mySaveSetup = {
 

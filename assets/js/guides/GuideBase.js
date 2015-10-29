@@ -8,6 +8,8 @@
  */
 
 function GuideBase() {
+	"use strict";
+
     var myGuideBase = {
         settings: {
             globalHeader: $("#header, #subnavcontainer"),

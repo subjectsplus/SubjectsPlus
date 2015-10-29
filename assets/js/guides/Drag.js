@@ -5,8 +5,11 @@
  * @author little9 (Jamie Little)
  * 
  */
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function Drag() {
+	"use strict";
+
     var myDrag = {
            init : function() {
             

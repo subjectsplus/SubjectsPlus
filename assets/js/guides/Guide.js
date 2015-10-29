@@ -6,13 +6,15 @@
 * 
 *  
 **/
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function Guide() {
- 
+	"use strict";
+
  	var myGuide = {
  	
  	settings : {
- 		guideData : $("#guide-parent-wrap").data()
+ 		guideData : $('#guide-parent-wrap').data()
  	},
  	strings : {
  	},

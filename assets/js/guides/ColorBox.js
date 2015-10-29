@@ -3,12 +3,15 @@
  * 
  * 
  */ 
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
  function ColorBox() {
- 
+	"use strict";
+
  	var myColorBox = {
  	
  	settings : {
- 		colorBoxes : [".showmeta",".showrecord",".arrange_records"]
+ 		colorBoxes : ['.showmeta','.showrecord','.arrange_records']
  	},
  	strings : {
  	},
@@ -23,8 +26,8 @@
  			var colorBox = myColorBox.settings.colorBoxes[key];
  			$(colorBox).colorbox({
  	 	        iframe: true,
- 	 	        innerWidth:"80%",
- 	 	        innerHeight:"90%",
+ 	 	        innerWidth:'80%',
+ 	 	        innerHeight:'90%',
 
  	 	        onClosed:function() {
  	 	        }

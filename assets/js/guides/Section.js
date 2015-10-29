@@ -6,8 +6,10 @@
  * 
  * 
  */
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function Section() {
+	"use strict";
 
 	var mySection = {
 

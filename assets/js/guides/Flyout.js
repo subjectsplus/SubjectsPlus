@@ -5,15 +5,17 @@
  * @author little9 (Jamie Little)
  * 
  */
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function Flyout() {
+	"use strict";
 
 	var myFlyout = {
 		settings : {
 			mainOptions : $('#main-options'),
-			triggerMainOptions : $(".trigger-main-options"),
-			triggerPointer : $("#trigger-pointer"),
-			mainOptionsClose : $("#main-options-close")
+			triggerMainOptions : $('.trigger-main-options'),
+			triggerPointer : $('#trigger-pointer'),
+			mainOptionsClose : $('#main-options-close')
 		},
 		strings : {
 
@@ -23,7 +25,7 @@ function Flyout() {
 			$(FlyoutButton).click(function() {
 				myFlyout.selectedPanelDisplay();
 				$(FlyoutPanel).show();
-				$(FlyoutButton).addClass("active-item");
+				$(FlyoutButton).addClass('active-item');
 			});
 		},
 		flyOutPanels : {
@@ -32,18 +34,18 @@ function Flyout() {
 			// If you add another button and flyout content to the page, add them to 
 			// this object to activate them 
 			
-			"#show_box_options" : "#box_options_content",
-			"#show_findbox_options" : "#findbox_options_content",
-			"#show_layout_options" : "#layout_options_content",
-			"#show_dblist_options" : "#dblist_options_content",
-			"#show_analytics_options" : "#analytics_options_content",
-			"#show_my_guides" : "#my_guides_content",
-			"#show_image_gallery" : "#image_gallery"
+			'#show_box_options' : '#box_options_content',
+			'#show_findbox_options' : '#findbox_options_content',
+			'#show_layout_options' : '#layout_options_content',
+			'#show_dblist_options' : '#dblist_options_content',
+			'#show_analytics_options' : '#analytics_options_content',
+			'#show_my_guides' : '#my_guides_content',
+			'#show_image_gallery' : '#image_gallery'
 		},
 		bindUiActions : function() {
-			// Show/Hide "Find in Guide" form
+			// Show/Hide 'Find in Guide' form
 
-			for (flyoutButton in myFlyout.flyOutPanels) {
+			for (var flyoutButton in myFlyout.flyOutPanels) {
 				{
 					myFlyout.activateFlyoutButton(flyoutButton,
 							myFlyout.flyOutPanels[flyoutButton]);
@@ -67,22 +69,22 @@ function Flyout() {
 				push : false,
 				width : 440,
 				shown : function(slider, trigger) {
-					s.triggerPointer.addClass("fa-chevron-left");
-					s.mainOptionsClose.removeClass("fa-chevron-right");
+					s.triggerPointer.addClass('fa-chevron-left');
+					s.mainOptionsClose.removeClass('fa-chevron-right');
 				},
 				hidden : function(slider, trigger) {
-					s.triggerPointer.addClass("fa-chevron-right");
-					s.triggerPointer.removeClass("fa-chevron-left");
+					s.triggerPointer.addClass('fa-chevron-right');
+					s.triggerPointer.removeClass('fa-chevron-left');
 				}
 			});
 
 			s.mainOptionsClose.click(function() {
-				mainslider.slideReveal("hide");
+				mainslider.slideReveal('hide');
 			});
 
 			//Top Level Panel Flyout 
 			window.onload = function() {
-				mainslider.slideReveal("show");
+				mainslider.slideReveal('show');
 			};
 
 		},
@@ -93,7 +95,7 @@ function Flyout() {
 				$(this).hide();
 			});
 			$('.top-panel-option-item').not(this).each(function() {
-				$(this).removeClass("active-item");
+				$(this).removeClass('active-item');
 			});
 
 		},

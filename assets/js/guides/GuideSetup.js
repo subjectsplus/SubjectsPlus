@@ -6,7 +6,11 @@
 * @author little9 (Jamie Little)
 * 
 */
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function GuideSetup() {
+	"use strict";
+
 	var myGuideSetup = {
 			settings : {
 				
@@ -16,7 +20,7 @@ function GuideSetup() {
 			                  SaveSetup, CopyClone,ColorBox],
 			init : function() {
 				
-				for (func in myGuideSetup.setupFunctions) {
+				for (var func in myGuideSetup.setupFunctions) {
 					
 					var setupFunc = myGuideSetup.setupFunctions[func]();
 					setupFunc.init();

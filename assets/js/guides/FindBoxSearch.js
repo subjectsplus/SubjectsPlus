@@ -6,8 +6,8 @@
  * @author little9 (Jamie Little)
  * 
  */
-
-
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
 function FindBoxSearch() {
 	var myFindBoxSearch = {
 
