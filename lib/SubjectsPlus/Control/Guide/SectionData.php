@@ -45,7 +45,7 @@ class SectionData {
 					print '</div>';
 					print '<script type="text/javascript">';
 					
-					print "makeSectionSlider('div[id=\"" . "slider_section_new_{$new_id}" . "\"]');";
+					print "Section().makeSectionSlider('div[id=\"" . "slider_section_new_{$new_id}" . "\"]');";
 					print "</script>";
 					break;
 				case 'delete' :

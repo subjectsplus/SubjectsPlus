@@ -15,7 +15,9 @@ function Tabs() {
             tabContent: $('#tab_content'),
             tabCounter: $('#tabs').data().tabCount,
             tabs: $('#tabs').tabs(),
+            tabsDialog : $("#dialog"),
             dialog: $('#dialog').dialog,
+            editTabDialog : $("#dialog_edit"),
             externalLink: 'input[name=\'tab_external_link\']',
             dataExternalLink: 'li[data-external-link]',
             saveButton: $('#save_guide'),
@@ -40,8 +42,10 @@ function Tabs() {
            
 
             //Find Box Tabs - Browse and Search
-            $( "#find-box-tabs" ).tabs();
+            myTabs.settings.findBoxTabs.tabs();
             
+            $(tabs).tabs('select', 0);
+
 			var sec = Section();
 			sec.makeAddSection('a[id="add_section"]');
 
@@ -49,7 +53,7 @@ function Tabs() {
         },
         setupTabs: function () {
 
-            var myDialog = $("#dialog").dialog({
+            var myDialog = myTabs.settings.tabsDialog.dialog({
                 autoOpen: false,
                 modal: true,
                 buttons: {
@@ -75,7 +79,7 @@ function Tabs() {
             });
 
             //setup dialog to edit tab
-            var editTabDialog = $("#dialog_edit").dialog({
+            var editTabDialog = myTabs.settings.editTabDialog.dialog({
                 autoOpen: false,
                 modal: true,
                 width: "auto",
@@ -83,7 +87,7 @@ function Tabs() {
                 buttons: {
                     "Save": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
-
+                        console.log(window.lastClickedTab);
                         $('a[href="#tabs-' + id + '"]').text($('input[name="rename_tab_title"]').val());
                         $('a[href="#tabs-' + id + '"]').parent('li').attr('data-visibility', $('select[name="visibility"]').val());
 
@@ -93,7 +97,7 @@ function Tabs() {
                                     events = elementData.events;
 
                                 var onClickHandlers = events['click'];
-
+                                console.log(onClickHandlers);
                                 // Only one handler. Nothing to change.
                                 if (onClickHandlers.length === 1) {
                                     return;
@@ -135,15 +139,16 @@ function Tabs() {
 
                         $(this).dialog("close");
                         $("#response").hide();
+                        console.log('save guide fade in');
                         $('#save_guide').fadeIn();
-                        //$('#save_template').fadeIn();
+                        
                     },
                     "Delete": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
 
                         $('a[href="#tabs-' + id + '"]').parent().remove();
                         $('div#tabs-' + id).remove();
-                        myTabs.settings.tabs("destroy");
+                        myTabs.settings.tabs.tabs("destroy");
                         myTabs.settings.tabs.tabs();
                         myTabs.settings.tabCounter--;
                         $(this).dialog("close");
@@ -222,16 +227,22 @@ function Tabs() {
 
             // actual addTab function: adds new tab using the input from the form above
             function addTab() {
-                var label = myTabs.settings.tabTitle.val() || "Tab " + myTabs.settings.tabCounter,
+                var tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+
+                var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
                     external_link = $('input#tab_external_link').val(),
-                    id = "tabs-" + myTabs.settings.tabCounter,
-                    li = $(myTabs.strings.tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+                    id = "tabs-" + $('#tabs').data().tabCount,
+                   
+                    li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+                     
                     tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
                 $(li).attr('data-external-link', external_link);
+                console.log(id);
                 $(li).attr('data-visibility', 1);
+                console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
-
-
+                console.log($(li));
+                
                 //make tabs sortable
                 $(function () {
                     $(tabs).find(".ui-tabs-nav").sortable({
@@ -240,13 +251,12 @@ function Tabs() {
                             if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
                                 $(tabs).find(".ui-tabs-nav").sortable("cancel");
                             else {
-                                // $(tabs).tabs( "refresh" );
+                                $(tabs).tabs( "refresh" );
                                 $(tabs).tabs("destroy");
                                 $(tabs).tabs();
                                 $(tabs).tabs('select', 0);
                                 $("#response").hide();
                                 $("#save_guide").fadeIn();
-                                //$("#save_template").fadeIn();
                             }
                         }
                     });
@@ -265,16 +275,18 @@ function Tabs() {
                             myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
                                 + "</div>");
 
-                            $("#response").hide();
+                            
                             myTabs.settings.saveButton.fadeIn();
 
 
-                            myTabs.settings.tabs();
+                            myTabs.settings.tabs.tabs();
 
                             if (external_link === '') {
-                                myTabs.settings.tabs('select', myTabs.settings.tabCounter);
+                                $(tabs).tabs("refresh");
+                                $(tabs).tabs('select', $('#tabs').data().tabCount);
                             } else {
-                                myTabs.settings.tabs('select', 0);
+                             
+                                myTabs.settings.tabs.tabs('select', 0);
                             }
 
                             if ($(li).attr('data-external-link') !== '') {
@@ -284,21 +296,23 @@ function Tabs() {
                                 });
                             }
 
-                            $(li).children('a[href^="#tabs-"]').each(function () {
-                                var elementData = $._data(this),
-                                    events = elementData.events;
+                            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                                var events = $._data(data, "events");
+                                  
+                                if (events) {
+                                    console.log(events);
+                                    var onClickHandlers = events['click'];
 
-                                var onClickHandlers = events['click'];
+                                    // Only one handler. Nothing to change.
+                                    if (onClickHandlers.length === 1) {
+                                        return;
+                                    }
 
-                                // Only one handler. Nothing to change.
-                                if (onClickHandlers.length === 1) {
-                                    return;
+                                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
                                 }
-
-                                onClickHandlers.splice(0, 0, onClickHandlers.pop());
-                            });
-
-                            myTabs.settings.tabCounter++;
+                                });
+                            
+                            $('#tabs').data().tabCount++;
                         }
                     });
 
@@ -351,8 +365,8 @@ function Tabs() {
             ///////////////////
             $(document.body).on('click','a[id*=tab-]', function(event) {
                 var tab_id = $(this).attr("id").split("-");
-                //var selected_tab = "#pluslet-" + box_id[1];
-               // setupTabs(tab_id[1]);
+               var selected_tab = "#pluslet-" + box_id[1];
+               myTabs.setupTabs(tab_id[1]);
 
             });
         }

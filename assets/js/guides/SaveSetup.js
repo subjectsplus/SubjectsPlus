@@ -438,7 +438,7 @@ function SaveSetup() {
 		        var lstrExternal = $(this).parent('li').attr('data-external-link');
 		        var lintVisibility = parseInt($(this).parent('li').attr('data-visibility'));
 		        var tab_id = $(this).attr("href").split("tabs-")[1];
-		      
+		        console.log("Tab ids:" + tab_id);
 		        var lobjTab = {};
 		        lobjTab.name = lstrName;
 		        lobjTab.external = lstrExternal;
@@ -446,7 +446,9 @@ function SaveSetup() {
 		        lobjTab.sections = [];
 
 		        $('div#tabs-' + tab_id + ' div[id^="section_"]').each(function () {
+		            console.log("Selector:" + 'div#tabs-' + tab_id + ' div[id^="section_"]');
 		            var section_id = $(this).attr("id").split("section_")[1];
+		            console.log("Section ID:" + section_id);
 		            var lobjSection = {};
 		            lobjSection.center_data = "";
 		            lobjSection.left_data = "";
@@ -473,7 +475,7 @@ function SaveSetup() {
 		    });
 
 		    lstrTabs = JSON.stringify(lobjTabs);
-		    //console.log(lstrTabs);
+		    console.log(lstrTabs);
 		    $("#response").load("helpers/save_guide.php", {
 		            this_subject_id: $('#guide-parent-wrap').data().subjectId,
 		            user_name: $('#guide-parent-wrap').data().staffId,
