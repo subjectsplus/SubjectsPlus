@@ -431,6 +431,7 @@ function SaveSetup() {
 			// called at end of previous section
 			//////////////////////
 		    var lobjTabs = [];
+		    var lstrTabs; 
 
 		    $('a[href^="#tab"]').each(function () {
 		        var lstrName = $(this).text();
@@ -438,9 +439,6 @@ function SaveSetup() {
 		        var lintVisibility = parseInt($(this).parent('li').attr('data-visibility'));
 		        var tab_id = $(this).attr("href").split("tabs-")[1];
 		      
-		        var lstrTabs;
-		 
-
 		        var lobjTab = {};
 		        lobjTab.name = lstrName;
 		        lobjTab.external = lstrExternal;
@@ -464,8 +462,7 @@ function SaveSetup() {
 
 
 		            lobjSection.center_data = $('div#section_' + section_id + ' div.portal-column-1').sortable('serialize');
-		            //console.log(section_id);
-		            //console.log(lobjSection.center_data);
+		         
 
 		            lobjSection.sidebar_data = $('div#section_' + section_id + ' div.portal-column-2').sortable('serialize');
 
@@ -483,9 +480,11 @@ function SaveSetup() {
 		            tabs: lstrTabs
 		        },
 		        function () {
-
+		            
 		            $("#response").fadeIn();
 		            //refreshFeeds();
+
+
 		            //update favorite box list in flyout panel - js/get_user_favorite_boxes.js
 		            //get_user_favorite_boxes(user_id);
 
