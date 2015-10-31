@@ -17,8 +17,8 @@ function Layout() {
 	            fourEightColumnButton: $('#col-48'),
 	            threeColumnButton: $('#col-triple'),
 	            eightFourColumnButton: $('#col-84'),
-                bigMiddleThreeColumnButton : $('#col-363') 
-
+                bigMiddleThreeColumnButton : $('#col-363'), 
+	            sectionDataUrl : 'helpers/section_data.php'
 			},
 			strings : {
 
@@ -33,11 +33,13 @@ function Layout() {
 			    myLayout.initialLayout();
 			    myLayout.selectedLayout();
 			    myLayout.layoutSections();
+			    myLayout.bindUiActions();
 			    document.addEventListener("DOMContentLoaded", function () {
 			        myLayout.checkDataLayout(myLayout.layouts);
+			        myLayout.activateLayoutButtons();
 			    });
 				
-                myLayout.bindUiActions();
+                
 
 			},
 			initialLayout : function() {
@@ -45,7 +47,7 @@ function Layout() {
 			    if ($('[id^=section]').length == 0) {
 			        console.log("append the section!");
 			        $.ajax({
-			            url: 'helpers/section_data.php',
+			            url: myLayout.settings.sectionDataUrl,
 			            type: 'POST',
 			            data: { action: 'create' },
 			            dataType: 'html',
@@ -65,9 +67,7 @@ function Layout() {
 				'4-4-4':  '#col-triple',
 				'3-6-3':  '#col-363'
 			},
-			layoutOffsets : {
-
-			},
+		
 
 			moveColumnContent : function(source_column, target_column) {
 
@@ -117,42 +117,40 @@ function Layout() {
 				// function to correctly size layout of guide
 				//////////////
 
-
-				if (parseInt(lc) === 0) {
+			    console.log(lc + " " + cc + " " + rc);
+				if (parseInt(lc) < 0) {
 					$('div#section_' + lintSectionID + ' div#container-0').width(0);
 					$('div#section_' + lintSectionID + ' div#container-0').hide();
 				} else {
 					$('div#section_' + lintSectionID + ' div#container-0').show();
-					$('div#section_' + lintSectionID + ' div#container-0').width(lc.toString() - 2 + '%');
+					$('div#section_' + lintSectionID + ' div#container-0').width(lc.toString()  + '%');
 				}
 
-				$('div#section_' + lintSectionID + ' div#container-1').width(cc.toString() - 2 + '%');
+				$('div#section_' + lintSectionID + ' div#container-1').width(cc.toString()  + '%');
 
-				if (parseInt(rc) === 0) {
+				if (parseInt(rc) < 0) {
 					$('div#section_' + lintSectionID + ' div#container-2').width(0);
 					$('div#section_' + lintSectionID + ' div#container-2').hide();
 				} else {
 					$('div#section_' + lintSectionID + ' div#container-2').show();
-					$('div#section_' + lintSectionID + ' div#container-2').width(rc.toString() - 2 + '%');
+					$('div#section_' + lintSectionID + ' div#container-2').width(rc.toString()  + '%');
 				}
 
 
 			}, layoutSections: function () {
-				$('div[id^=\'section_\']').each(function () {
-	              
-				    var sec_id = $(this).attr('id').split('section_')[1];
-				 
-				    var lobjLayout = $(this).data().layout.split('-');
 
-	                var lw = parseInt(lobjLayout[0]) * 7;
-	                var mw = parseInt(lobjLayout[1]) * 7;
-	                var sw = parseInt(lobjLayout[2]) * 7;
-
-
-	             
-	                    myLayout.reLayout(sec_id, lw, mw, sw);
-	                    console.log(sec_id + " " + lw + mw + sw);
-
+			    //layout each section
+			    $('div[id^="section_"]').each(function () {
+			        //section id
+			        var sec_id = $(this).attr('id').split('section_')[1];
+			        var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
+			        var lw = parseInt(lobjLayout[0]) * 8;
+			        var mw = parseInt(lobjLayout[1]) * 8;
+			        var sw = parseInt(lobjLayout[2]) * 8 - 3;
+			        try {
+			            myLayout.reLayout(sec_id, lw, mw, sw);
+			        } catch (e) {
+			        }
 
 
 	            });
@@ -160,7 +158,7 @@ function Layout() {
 
 			activateLayoutButtons: function () {
                  myLayout.settings.singleColumnButton.on('click',function () {
-
+                    
 					myLayout.changeLayout(0, 14);
 					myLayout.checkDataLayout(myLayout.layouts);
 					myLayout.moveColumnContent(0, 1);
@@ -171,7 +169,7 @@ function Layout() {
 				});
 
 				myLayout.settings.twoColumnButton.on('click',function() {
-
+				
 					myLayout.changeLayout(6, 12);
 					myLayout.checkDataLayout(myLayout.layouts);
 					myLayout.moveColumnContent(2, 1);
