@@ -16,7 +16,7 @@ function GuideSetup() {
 				
 			},
 			setupFunctions : [FindBoxSearch, Tabs, GuideBase, ResourceList, 
-			                  Flyout, Pluslet, Layout, Drag, Help, 
+			                  Flyout, Pluslet,Section, Layout, Drag, Help, 
 			                  SaveSetup, CopyClone,ColorBox],
 			init : function() {
 				

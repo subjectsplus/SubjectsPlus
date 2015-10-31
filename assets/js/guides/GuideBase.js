@@ -151,7 +151,7 @@ function GuideBase() {
         	var staffId = g.getStaffId();
         	
             $(".fav-boxes-list").empty();
-            jQuery.ajax({
+            $.ajax({
                 url: myGuideBase.settings.favoritesUrl + staffId,
                 type: "GET",
                 dataType: "json",
@@ -159,10 +159,7 @@ function GuideBase() {
                 success: function (data) {
 
                     if (!data.length) {
-                        //no results
-                        $(".fav-boxes-list").append(myGuideBase.settings.noFavoritesText);
-
-
+                        $(".fav-boxes-list").append(myGuideBase.strings.noFavoritesText);
                     }
 
                     $.each(data, function (idx, obj) {

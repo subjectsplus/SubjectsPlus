@@ -19,7 +19,9 @@ function Section() {
 		strings : {},
 		bindUiActions : function() {
 		},
-		init : function() {
+		init: function () {
+		    
+		    mySection.makeSectionSlider()
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -56,7 +58,7 @@ function Section() {
 		        //section id
 		        var sec_id = $(this).attr('id').split('slider_section_')[1];
 		        var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
-
+		        console.log("Make section slider");
 		        $(this).slider({
 		            range: true,
 		            min: 0,

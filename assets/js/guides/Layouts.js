@@ -11,7 +11,13 @@ function Layout() {
 	"use strict";
 
 	var myLayout = {
-			settings : {
+	        settings: {
+	            singleColumnButton: $('#col-single'),
+	            twoColumnButton: $('#col-double'),
+	            fourEightColumnButton: $('#col-48'),
+	            threeColumnButton: $('#col-triple'),
+	            eightFourColumnButton: $('#col-84'),
+                bigMiddleThreeColumnButton : $('#col-363') 
 
 			},
 			strings : {
@@ -19,81 +25,37 @@ function Layout() {
 			},
 			bindUiActions : function () {
 
-				$( '#col-single' ).click(function() {
-
-					myLayout.changeLayout(0, 14);
-					myLayout.checkDataLayout(myLayout.layouts);
-					myLayout.moveColumnContent(0, 1);
-					myLayout.moveColumnContent(2, 1);
-					myLayout.selectedLayout();
-					$(this).addClass('active-layout-icon');
-				});
-
-				$( '#col-double' ).click(function() {
-
-					myLayout.changeLayout(6, 12);
-					myLayout.checkDataLayout(myLayout.layouts);
-					myLayout.moveColumnContent(2, 1);
-					myLayout.selectedLayout();
-					$(this).addClass('active-layout-icon');
-				});
-
-				$( '#col-48' ).click(function() {
-					myLayout.changeLayout(4, 24);
-					myLayout.checkDataLayout(myLayout.layouts);
-					myLayout.moveColumnContent(2, 1);
-					myLayout.selectedLayout();
-					$(this).addClass('active-layout-icon');
-				});
-
-				$( '#col-84' ).click(function() {
-					myLayout.changeLayout(8, 12);
-					myLayout.checkDataLayout(myLayout.layouts);
-					myLayout.moveColumnContent(2, 1);
-					myLayout.selectedLayout();
-					$(this).addClass('active-layout-icon');
-				});
-
-				$( '#col-triple' ).click(function() {
-					myLayout.changeLayout(4, 8);
-					myLayout.checkDataLayout(myLayout.layouts);
-					myLayout.selectedLayout();
-					$(this).addClass('active-layout-icon');
-				});
-
-				$( '#col-363' ).click(function() {
-					myLayout.changeLayout(3, 9);
-					myLayout.checkDataLayout(myLayout.layouts);
-					myLayout.selectedLayout();
-					$(this).addClass('active-layout-icon');
-				});
+			    myLayout.activateLayoutButtons();
 
 			},
 			init : function() {
-				myLayout.bindUiActions();
-				myLayout.selectedLayout();
-				myLayout.checkDataLayout();
-				  // Append an intital section
-    if ($('[id^=section]').length) {
+				
+			    myLayout.initialLayout();
+			    myLayout.selectedLayout();
+			    myLayout.layoutSections();
+			    document.addEventListener("DOMContentLoaded", function () {
+			        myLayout.checkDataLayout(myLayout.layouts);
+			    });
+				
+                myLayout.bindUiActions();
 
-    } else {
+			},
+			initialLayout : function() {
+			    // Append an intital section
+			    if ($('[id^=section]').length == 0) {
+			        console.log("append the section!");
+			        $.ajax({
+			            url: 'helpers/section_data.php',
+			            type: 'POST',
+			            data: { action: 'create' },
+			            dataType: 'html',
+			            success: function (html) {
+			                $('div#tabs-0').append(html);
+			            }
+			        });
 
-        if (document.URL.indexOf('guide.php') > 0) {
-
-            $.ajax({
-                url: 'helpers/section_data.php',
-                type: 'POST',
-                data: { action: 'create' },
-                dataType: 'html',
-                success: function (html) {
-                    $('div#tabs-0').append(html);
-                }
-            });
-        }
-
-    }
-
-
+			       
+			    }
 			},
 			layouts : {
 				'0-12-0': '#col-single',
@@ -120,6 +82,9 @@ function Layout() {
 				var current_tab = $('#tabs').tabs('option', 'selected');
 				var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
 
+				console.log(current_tab);
+				console.log(slider_section_id);
+				$('#slider_' + slider_section_id).slider();
 				$('#slider_' + slider_section_id).slider('values',0, first_column);
 				$('#slider_' + slider_section_id).slider('values',1, second_column );
 			},
@@ -127,19 +92,19 @@ function Layout() {
 				// Check section data-layout on pageLoad and hide empty containers
 				// Highlight 'current/active' layout
 
-				myLayout.selectedLayout();
-
+			
 				var current_tab = $('#tabs').tabs('option', 'selected');
 				var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
-				var dataLayoutConfig = $('#' + slider_section_id).attr('data-layout');
-
+				console.log("Slider ID:" + slider_section_id)
+				var dataLayoutConfig = $('#' + slider_section_id).data().layout;
+				
 				for (var layout in layouts) {
 					if (dataLayoutConfig === layout) {
-						$('#' + slider_section_id + ' #container-2').hide();
 						$(layouts[layout]).addClass('active-layout-icon');
 					}
 				}
 
+				myLayout.layoutSections();
 
 			},
 			selectedLayout : function () {
@@ -174,26 +139,81 @@ function Layout() {
 
 			}, layoutSections: function () {
 				$('div[id^=\'section_\']').each(function () {
-	                //section id
-	                var sec_id = $(this).attr('id').split('section_')[1];
-	                var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
+	              
+				    var sec_id = $(this).attr('id').split('section_')[1];
+				 
+				    var lobjLayout = $(this).data().layout.split('-');
 
 	                var lw = parseInt(lobjLayout[0]) * 7;
 	                var mw = parseInt(lobjLayout[1]) * 7;
 	                var sw = parseInt(lobjLayout[2]) * 7;
 
 
-	                try {
+	             
 	                    myLayout.reLayout(sec_id, lw, mw, sw);
-	                } catch (e) {
+	                    console.log(sec_id + " " + lw + mw + sw);
 
-	                	console.log('Error:' + e);
-
-	                }
 
 
 	            });
-	        }
+			},
+
+			activateLayoutButtons: function () {
+                 myLayout.settings.singleColumnButton.on('click',function () {
+
+					myLayout.changeLayout(0, 14);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(0, 1);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
+					$(this).addClass('active-layout-icon');
+					myLayout.layoutSections();
+				});
+
+				myLayout.settings.twoColumnButton.on('click',function() {
+
+					myLayout.changeLayout(6, 12);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
+					$(this).addClass('active-layout-icon');
+					myLayout.layoutSections();
+				});
+
+				myLayout.settings.fourEightColumnButton.on('click',function() {
+					myLayout.changeLayout(4, 24);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
+					$(this).addClass('active-layout-icon');
+					myLayout.layoutSections();
+				});
+
+				myLayout.settings.eightFourColumnButton.on('click',function () {
+					myLayout.changeLayout(8, 12);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.moveColumnContent(2, 1);
+					myLayout.selectedLayout();
+					$(this).addClass('active-layout-icon');
+					myLayout.layoutSections();
+				});
+
+				myLayout.settings.threeColumnButton.on('click', function () {
+					myLayout.changeLayout(4, 8);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.selectedLayout();
+					$(this).addClass('active-layout-icon');
+					myLayout.layoutSections();
+				});
+
+				myLayout.settings.bigMiddleThreeColumnButton.on('click',function () {
+					myLayout.changeLayout(3, 9);
+					myLayout.checkDataLayout(myLayout.layouts);
+					myLayout.selectedLayout();
+					$(this).addClass('active-layout-icon');
+					myLayout.layoutSections();
+				});
+			}
 	        
 	          
 	}
