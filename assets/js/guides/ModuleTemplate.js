@@ -1,3 +1,14 @@
+/**
+* Something something.
+* 
+* 
+* @constructor Thing
+* 
+*  
+**/
+/*jslint browser: true*/
+/*global $, jQuery, alert*/
+
 /*
  
  
@@ -19,3 +30,5 @@
  }
 
 */
+
+

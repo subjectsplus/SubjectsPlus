@@ -484,8 +484,8 @@ function SaveSetup() {
 		        function () {
 		            
 		            $("#response").fadeIn();
-		            //refreshFeeds();
-
+		            mySaveSetup.refreshFeeds();
+		          
 
 		            //update favorite box list in flyout panel - js/get_user_favorite_boxes.js
 		            //get_user_favorite_boxes(user_id);
@@ -496,6 +496,24 @@ function SaveSetup() {
 
 
 		        });
+		},
+		refreshFeeds: function () {
+		    /////////////////////
+		    // refreshFeeds
+		    // --loads the various feeds after the page has loaded
+		    /////////////////////
+
+		    $(".find_feed").each(function (n) {
+		        var feed = $(this).attr("name").split("|");
+		        $(this).load("../../subjects/includes/feedme.php", {
+		            type: feed[4],
+		            feed: feed[0],
+		            count: feed[1],
+		            show_desc: feed[2],
+		            show_feed: feed[3]
+		        });
+		    });
+
 		}
 	};
 	return mySaveSetup;

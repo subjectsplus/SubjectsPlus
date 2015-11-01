@@ -42,6 +42,7 @@ function Layout() {
                 
 
 			},
+		
 			initialLayout : function() {
 			    // Append an intital section
 			    if ($('[id^=section]').length == 0) {
@@ -117,23 +118,24 @@ function Layout() {
 				// function to correctly size layout of guide
 				//////////////
 
-			    console.log(lc + " " + cc + " " + rc);
+			    var sectionSelector = 'div#section_' + lintSectionID + ' div#container-';
+
 				if (parseInt(lc) < 0) {
-					$('div#section_' + lintSectionID + ' div#container-0').width(0);
-					$('div#section_' + lintSectionID + ' div#container-0').hide();
+					$(sectionSelector + '0').width(0);
+					$(sectionSelector + '0').hide();
 				} else {
-					$('div#section_' + lintSectionID + ' div#container-0').show();
-					$('div#section_' + lintSectionID + ' div#container-0').width(lc.toString()  + '%');
+				    $(sectionSelector + '0').show();
+				    $(sectionSelector + '0').width(lc.toString() + '%');
 				}
 
-				$('div#section_' + lintSectionID + ' div#container-1').width(cc.toString()  + '%');
+				$(sectionSelector + '1').width(cc.toString() + '%');
 
 				if (parseInt(rc) < 0) {
-					$('div#section_' + lintSectionID + ' div#container-2').width(0);
-					$('div#section_' + lintSectionID + ' div#container-2').hide();
+				    $(sectionSelector + '2').width(0);
+				    $(sectionSelector + '2').hide();
 				} else {
-					$('div#section_' + lintSectionID + ' div#container-2').show();
-					$('div#section_' + lintSectionID + ' div#container-2').width(rc.toString()  + '%');
+				    $(sectionSelector + '2').show();
+				    $(sectionSelector + '2').width(rc.toString() + '%');
 				}
 
 
@@ -157,7 +159,8 @@ function Layout() {
 			},
 
 			activateLayoutButtons: function () {
-                 myLayout.settings.singleColumnButton.on('click',function () {
+			 
+			    myLayout.settings.singleColumnButton.on('click', function () {
                     
 					myLayout.changeLayout(0, 14);
 					myLayout.checkDataLayout(myLayout.layouts);
@@ -212,7 +215,7 @@ function Layout() {
 					myLayout.layoutSections();
 				});
 			}
-	        
+	       
 	          
 	}
 	return myLayout;

@@ -15,9 +15,9 @@ function GuideSetup() {
 			settings : {
 				
 			},
-			setupFunctions : [FindBoxSearch, Tabs, GuideBase, ResourceList, 
+			setupFunctions : [FindBoxSearch, Tabs, Style, ResourceList, 
 			                  Flyout, Pluslet,Section, Layout, Drag, Help, 
-			                  SaveSetup, CopyClone,ColorBox],
+			                  SaveSetup, CopyClone, ColorBox, FavoriteBox, GuideSearch ],
 			init : function() {
 				
 				for (var func in myGuideSetup.setupFunctions) {
