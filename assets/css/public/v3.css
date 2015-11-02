@@ -5,10 +5,7 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 
 /* fonts */
 
-p, body, html, table, .pluslet {
-    font-family: Helvetica,Arial,sans-serif !important;   
 
-}
 
 body {
     margin: 0 0 0 5px;
@@ -1072,3 +1069,14 @@ width:55px;
 }
 
 .curse_me {cursor: pointer;}
+
+.find_feed {
+   margin-left:1em !important;
+}
+.rss-list {
+    margin-left:1em;
+}
+
+.rss-list-item {
+    margin-bottom:1em;
+}

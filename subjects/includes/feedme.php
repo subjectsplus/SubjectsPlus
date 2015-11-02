@@ -60,7 +60,7 @@
 
         case "Delicious":
 
-            print "<ul>";
+            print "<ul class='rss-list'>";
 
             // prints the linked title for each item
             foreach ($items as $i) {
@@ -91,11 +91,11 @@
 
 
         default:
-            echo $source;
-            print "<ul>";
+            //echo $source;
+            print "<ul class='rss-list'>";
             // prints the linked title for each item
             foreach ($items as $i) {
-                print "<li><a href=\"" . $i['link'] . "\" target=\"_blank\">" . $i['title'] . "</a>";
+                print "<li class='rss-list-item'><a href=\"" . $i['link'] . "\" target=\"_blank\">" . $i['title'] . "</a>";
                 if ($show_desc == 1) {
                     print "<br />" . $i['description'];
                 }

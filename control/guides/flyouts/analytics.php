@@ -30,31 +30,10 @@ font-size: 2em;
 
 		</ul>
 	</div>
-
-	<script>             
-$(document).ready(function() {
-	    $('.tab-clicks').empty();
-	    var short_form = $('#shortform').data();
-	    console.log(short_form);
-		$.get("./helpers/stats_data.php?short_form=" + short_form.shortform, function(data) {
-
-			console.log(data);
-			console.log(data.total_views);
-		$(".total-views-count").html(data.total_views);
-
-
-		if (data.tab_clicks != "") {
-			$('.tab-click-header').show();
-						for (key in data.tab_clicks) {
-
-			console.log(key);
-			
-			$(".tab-clicks").append("<li class='tab-click'>" + key + " : " + data.tab_clicks[key] + "</li>");
-			
-		}
-
-		}
-
-		});
-});
+	<script>
+	  document.addEventListener("DOMContentLoaded", function(event) {
+	var a = Analytics();
+	a.init();
+	  });
+	  
 	</script>

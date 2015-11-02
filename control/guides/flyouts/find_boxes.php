@@ -18,7 +18,7 @@
                   <div id="search-tab" class="find-box-tab-list-content">
                         <div class="searchbox-results-display">
                             <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>"></input>
-                            <ul class="findbox-searchresults"></ul>
+                            <ul id="findbox-searchresults" class="findbox-searchresults"></ul>
                         </div>
                   </div>
               </div>
