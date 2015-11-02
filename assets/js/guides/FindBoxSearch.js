@@ -76,18 +76,19 @@ function FindBoxSearch() {
 
 								if (data[i]['content_type'] == "Pluslet") {
 
-									myFindBoxSearch.settings.findBoxSearchResults
-										.append("<li data-pluslet-id='"
-											+ data[i].id
-											+ "' class=\"pluslet-listing\">"
-											+ "<div class=\"pure-g\">"
-											+ "<div class=\"pure-u-3-5 box-search-label\" title=\""
-											+ data[i].label
-											+ "\">"
-											+ data[i].label
-											+ "</div>"
-											+ myFindBoxSearch.strings.findBoxSearchButtons);
-
+									var listItem = "<li data-pluslet-id='"
+										+ data[i].id
+										+ "' class=\"pluslet-listing\">"
+										+ "<div class=\"pure-g\">"
+										+ "<div class=\"pure-u-3-5 box-search-label\" title=\""
+										+ data[i].label
+										+ "\">"
+										+ data[i].label
+										+ "</div>" + myFindBoxSearch.strings.findBoxSearchButtons;
+									
+										myFindBoxSearch.settings.findBoxSearchResults.append(listItem);
+									
+								
 								}
 
 							}
@@ -144,6 +145,8 @@ function FindBoxSearch() {
 				
 			});
 		}
+
+		
 
 	};
 
