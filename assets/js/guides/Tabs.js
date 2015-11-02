@@ -323,6 +323,9 @@ function Tabs() {
                     $(this).parent().parent().find('span:contains("Rename")').click();
                     event.preventDefault();
                 });
+                
+                // Move the expand tab to the end
+                $('#expand_tab').appendTo('.ui-tabs-nav')
             }
         },
             hideTabsFirstSectionSlider: function() {
