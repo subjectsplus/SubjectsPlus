@@ -135,7 +135,7 @@ function Layout() {
 				    $(sectionSelector + '2').hide();
 				} else {
 				    $(sectionSelector + '2').show();
-				    $(sectionSelector + '2').width(rc.toString() + '%');
+				    $(sectionSelector + '2').width(rc.toString + '%');
 				}
 
 
@@ -146,11 +146,11 @@ function Layout() {
 			        //section id
 			        var sec_id = $(this).attr('id').split('section_')[1];
 			        var lobjLayout = $('div#section_' + sec_id).attr('data-layout').split('-');
-			        var lw = parseInt(lobjLayout[0]) * 8;
-			        var mw = parseInt(lobjLayout[1]) * 8;
-			        var sw = parseInt(lobjLayout[2]) * 8 - 3;
+			        var lw = parseInt(lobjLayout[0]) * 6 ;
+			        var mw = parseInt(lobjLayout[1]) * 6 ;
+			        var sw = parseInt(lobjLayout[2]) * 6 ;
 			        try {
-			            myLayout.reLayout(sec_id, lw, mw, sw);
+			            myLayout.reLayout(sec_id, lw -2 , mw-2, sw-2);
 			        } catch (e) {
 			        }
 

@@ -15,7 +15,7 @@ function GuideSearch() {
 
         settings: {
             subjectId: $('#guide-parent-wrap').data().subjectId,
-            autoCompleteUrl: "../includes/autocomplete_data.php?collection=guide&subject_id=",
+            autoCompleteUrl: "../includes/autocomplete_data.php?collection=guide&subject_id="
         },
         strings: {
         },

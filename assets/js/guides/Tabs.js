@@ -270,7 +270,7 @@ function Tabs() {
                         data: { action: 'create' },
                         dataType: "html",
                         success: function (html) {
-                            myTabs.settings.tabDestroy;
+                            
 
                             myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
                                 + "</div>");

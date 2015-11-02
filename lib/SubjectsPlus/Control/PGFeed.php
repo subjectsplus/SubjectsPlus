@@ -371,7 +371,8 @@ class PGFeed {
 	$reader->read();
 	$description = $reader->value;
 	if ($this->strip) {
-	  $newDescription = preg_replace("/<.+?>/","",$description);
+	  /* $newDescription = preg_replace("/<.+?>/","",$description); */
+	  $newDescription = $description;
 	}
 	else {
 	  $newDescription = $description;
@@ -699,8 +700,9 @@ class PGFeed {
 	}
 	$reader->read();
 	$content = $reader->value;
+	
 	if ($this->strip) {
-	  $newContent = preg_replace("/<.+?>/","",$content);
+	 /* $newContent = preg_replace("/<.+?>/","",$content);*/
 	}
 	else {
 	  $newContent = $content;
@@ -715,6 +717,7 @@ class PGFeed {
       }
 
       // CDATA
+	  /*
       else if ($reader->nodeType == 4 && $isInDescription) {
 	$cdata = $reader->value;
 	if ($this->strip) {
@@ -723,11 +726,9 @@ class PGFeed {
 	$item["content"] = $cdata;
 	$item["description"] = $item["content"];
       }
-
+*/
       $reader->close;
     }
   }
 
 }
-
-?>

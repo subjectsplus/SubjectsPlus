@@ -70,7 +70,19 @@ function CopyClone() {
 
 		},
 		init : function() {
-			myCopyClone.bindUiActions();
+		    myCopyClone.bindUiActions();
+		    myCopyClone.markAsLinked();
+		},
+		markAsLinked: function () {
+		    /**
+             * Created by cbrownroberts on 8/28/15.
+             */
+		    //identify pluslets marked as linked aka cloned and addClass linked_pluslet
+		    var linkedBoxes = $('div.pluslet[name=\'Clone\']');
+		    linkedBoxes.each(function () {
+		        $(this).children('.titlebar').children('.titlebar_text').addClass('linked_pluslet');
+		    });
+
 		}
 	};
 

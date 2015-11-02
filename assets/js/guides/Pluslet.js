@@ -26,8 +26,6 @@ function Pluslet() {
 				var guide = Guide();
 				var subjectId = guide.getSubjectId();
 				
-				myPluslet.markAsLinked();
-				myPluslet.markAsFavorite();
 				myPluslet.bindUiActions();
 				myPluslet.makeEditable('a[id*=edit]', subjectId);
 				myPluslet.makeDeleteable('a[id*=delete]');
@@ -123,6 +121,7 @@ function Pluslet() {
 					//Close main flyout when a pluslet is dropped
 					$('#main-options').slideReveal('hide');
 
+					
 				});
 			}, 
 			getParameterByName : function(name) {
@@ -131,32 +130,8 @@ function Pluslet() {
 				results = regex.exec(location.search);
 				return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 			},
-			markAsLinked : function() {
-				/**
-				 * Created by cbrownroberts on 8/28/15.
-				 */
-				//identify pluslets marked as linked aka cloned and addClass linked_pluslet
-				var linkedBoxes = $('div.pluslet[name=\'Clone\']');
-				linkedBoxes.each(function() {
-					$(this).children('.titlebar').children('.titlebar_text').addClass('linked_pluslet');
-				});      
+			
 
-			},
-			markAsFavorite : function () {
-
-				/**
-				 * Created by cbrownroberts on 8/28/15.
-				 */
-
-				//identify pluslets marked as favorites and addClass favorite_pluslet
-				var $favBoxes = $('input.favorite_pluslet_input:checked')
-
-				$favBoxes.each(function() {
-					$(this).parent().parent().parent().parent().find('.titlebar_text').addClass('favorite_pluslet');
-
-				});
-
-			},
 			expandPluslet : function() {
 				//Expand/Collapse Trigger CSS for all Pluslets on a Tab
 				$( '#expand_tab' ).click(function() { 

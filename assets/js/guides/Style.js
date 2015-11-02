@@ -11,7 +11,7 @@ function Style() {
 
     var myStyle = {
         settings: {
-            globalHeader: $("#header, #subnavcontainer"),         
+            globalHeader: $("#header, #subnavcontainer")       
         },
         strings: {
         },
@@ -28,7 +28,7 @@ function Style() {
         fixFlashFOUC: function () {
             $(".guidewrapper").css("display", "block");
             $("#main-options").css("display", "block");
-        },
+        }
    
        
         

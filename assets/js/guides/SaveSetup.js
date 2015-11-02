@@ -485,14 +485,11 @@ function SaveSetup() {
 		            
 		            $("#response").fadeIn();
 		            mySaveSetup.refreshFeeds();
-		          
+		         
+		            FavoriteBox().getUserFavoriteBoxes(Guide().getStaffId());
+		            FavoriteBox().markAsFavorite();
+		            CopyClone().markAsLinked();
 
-		            //update favorite box list in flyout panel - js/get_user_favorite_boxes.js
-		            //get_user_favorite_boxes(user_id);
-
-		            //mark_as_favorite();
-
-		            //mark_as_linked();
 
 
 		        });
