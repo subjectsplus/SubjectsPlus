@@ -480,9 +480,5 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 </div>
 <!--end .guide-parent-wrap-->
-<script>
-	// Initialize the guide interface 
-	var guideSetup = GuideSetup();
-	guideSetup.init();
-</script>
-<?php include("../includes/footer.php"); ?>
+
+<?php include("../includes/guide_footer.php"); ?>

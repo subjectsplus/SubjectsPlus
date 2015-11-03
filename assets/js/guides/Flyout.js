@@ -40,7 +40,7 @@ function Flyout() {
 			'#show_dblist_options' : '#dblist_options_content',
 			'#show_analytics_options' : '#analytics_options_content',
 			'#show_my_guides' : '#my_guides_content',
-			'#show_asset_manager' : '#asset_manager'
+			'#show_image_gallery' : '#image_gallery'
 		},
 		bindUiActions : function() {
 			// Show/Hide 'Find in Guide' form
@@ -69,12 +69,12 @@ function Flyout() {
 				push : false,
 				width : 440,
 				shown : function(slider, trigger) {
-					s.triggerPointer.addClass('fa-chevron-left');
-					s.mainOptionsClose.removeClass('fa-chevron-right');
+					 $('#trigger-pointer').addClass('fa-chevron-left');
+					 $('#trigger-pointer').removeClass('fa-chevron-right');
 				},
 				hidden : function(slider, trigger) {
-					s.triggerPointer.addClass('fa-chevron-right');
-					s.triggerPointer.removeClass('fa-chevron-left');
+					 $('#trigger-pointer').addClass('fa-chevron-right');
+					 $('#trigger-pointer').removeClass('fa-chevron-left');
 				}
 			});
 
