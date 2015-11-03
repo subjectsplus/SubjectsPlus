@@ -31,13 +31,14 @@ class SectionData {
 					// print section and slider div
 					$new_id = rand ( 1, 100000 );
 					
-					print "<div id=\"section_new_$new_id\" class=\"sp_section\" data-layout=\"4-4-4\">";
+					print "<div id=\"section_new_$new_id\" class=\"sp_section pure-g\" >";
+					/*
 					print "<div class=\"sp_section_controls\">
 				<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" title=\"Move Section\"/>
 				<i class=\"fa fa-trash-o section_remove\" title=\"Delete Section\"></i>
 				<div id=\"slider_section_new_$new_id\" class=\"sp_section_slider\"></div>
 				</div>";
-					
+					*/
 					print $lobjGuide->dropBoxes ( 0, 'left', "" );
 					print $lobjGuide->dropBoxes ( 1, 'center', "" );
 					print $lobjGuide->dropBoxes ( 2, 'sidebar', "" );

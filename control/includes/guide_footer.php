@@ -6,6 +6,8 @@
 
 
 </body>
+<script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
+
 <script>
 	// Initialize the guide interface 
 	var guideSetup = GuideSetup();
