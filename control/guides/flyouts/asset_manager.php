@@ -46,13 +46,9 @@ display:none;
 
 
 <script>
-$(document).ready(function() {
-Dropzone.options.imagezone = {
-		  init: function() {
-		    this.on("success", function(file) { $('.dz-success-mark').show(); });
-		    this.on("error", function(file) { $('.dz-error-mark').show(); });
-		    
-		  }
-		};
+document.addEventListener("DOMContentLoaded", function() {
+
+	AssetManager().init();
+
 });
 </script>

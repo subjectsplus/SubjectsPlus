@@ -24,7 +24,6 @@ $truncated_email = explode("@", $staffer[0]["email"]);
 
 
 // set variables
-//$dir_dest = (isset($_GET['dir']) ? $_GET['dir'] : 'test');
 $dir_dest = "../../assets/users/_" . $truncated_email[0];
 
 
@@ -38,7 +37,6 @@ if ($handle->uploaded) {
 	$handle->image_ratio_y = false;
 	$handle->image_convert = 'jpg';
 	$handle->file_overwrite = true;
-	$handle->file_auto_rename = false;
 	$handle->dir_auto_chmod = true;
 
 	// now, we start the upload 'process'. That is, to copy the uploaded file
