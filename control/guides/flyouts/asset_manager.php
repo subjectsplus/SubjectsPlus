@@ -1,4 +1,4 @@
-<div id="image_gallery" class="second-level-content" style="display:none;">
+<div id="asset_manager" class="second-level-content" style="display:none;">
 
 <style>
 .dropzone {
@@ -37,7 +37,7 @@ display:none;
 
 
 
-<form id="imagezone" action="../includes/image_gallery_upload.php" class="dropzone dz-clickable user_guides_display">
+<form id="imagezone" action="../includes/asset_manager_upload.php" class="dropzone dz-clickable user_guides_display">
 <div class="dz-default dz-message"><span class="dropzone-text">Drop files here to upload</span></div>
 
 <input type="hidden" name="staff_id" value="<?php echo $_SESSION['staff_id']; ?>" />
