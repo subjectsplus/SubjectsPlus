@@ -69,9 +69,9 @@ if ($num_rows > 0) {
 
 
     $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp;
-        <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"$gear_alt\" title=\"$gear_alt\" border=\"0\" class=\"icon\" /></a> &nbsp;&nbsp;
-        <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><img src=\"$IconPath/eye.png\" alt=\"$view_alt\" title=\"$view_alt\" border=\"0\" class=\"icon\" /></a> &nbsp;&nbsp;
-        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"$linkie_alt\" title=\"$linkie_alt\" border=\"0\" class=\"icon\" /></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
+        <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><i class=\"fa fa-gear fa-lg\" alt=\"$gear_alt\" title=\"$gear_alt\"></i></a> &nbsp;&nbsp;
+        <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><i class=\"fa fa-eye fa-lg\" alt=\"$view_alt\" title=\"$view_alt\"></i></a> &nbsp;&nbsp;
+        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><i class=\"fa fa-globe fa-lg\" alt=\"$linkie_alt\" title=\"$linkie_alt\"></i></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
     if ($active != "1") {
       $myguides .= " <span style=\"color: #666;\">" . _("unpublished") . "</span>";
     }

@@ -57,8 +57,8 @@ if ($faqArray) {
     $faq_list .= "
             <div class=\"striper faq_wrapper $row_colour1\">
                 <div class=\"faq_tools\">
-                <a href=\"faq.php?faq_id=$value[0]&amp;wintype=pop\" class=\"showmedium-reloader\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
-                &nbsp; &nbsp;<a href=\"" . $FAQPath . "?faq_id=$value[0]\" target=\"_blank\"><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
+                <a href=\"faq.php?faq_id=$value[0]&amp;wintype=pop\" class=\"showmedium-reloader\"><i class=\"fa fa-pencil fa-lg\" alt=\"" . _("Edit") . "\"></i></a>
+                &nbsp; &nbsp;<a href=\"" . $FAQPath . "?faq_id=$value[0]\" target=\"_blank\"><i class=\"fa fa-eye fa-lg\" alt=\"" . _("View Live") . "\"></i></a>
                 </div>
                 <div class=\"faq_question\">
                  $short_question <span class=\"faq-short-question\">($last_revised_line)</span>
@@ -105,8 +105,8 @@ $faq_body .= "</strong></p>" . $faq_list;
       </div>
       <div class="topimage"></div>
       <div class="pluslet_body">
-        <p><img src="<?php print $IconPath; ?>/pencil.png" alt="<?php print _("Edit FAQ"); ?>" width="16" height="16" /> <?php print _("Edit FAQ"); ?></p>
-        <p><img src="<?php print $IconPath; ?>/eye.png" alt="<?php print _("View FAQ"); ?>" width="16" height="16" /> <?php print _("View FAQ on Public Site"); ?></p>
+        <p><i class="fa fa-pencil fa-lg" alt=" <?php print _("Edit"); ?>"></i> <?php print _("Edit FAQ"); ?></p>
+        <p><i class="fa fa-eye fa-lg" alt=" <?php print _("View"); ?>"></i> <?php print _("View FAQ on Public Site"); ?></p>
         <p><?php print _("FAQs may be assigned a subject or a collection.  FAQ collections are groupings that may show up on the sidebar of the public FAQ page:
         for example, Library Catalog or InterLibrary Loan.  If you assign a subject, you can easily add all FAQs for that subject to a subject guide."); ?></p>
         <p><?php print _("FAQ collections are created by the site administrator, or someone with the 'admin' privilege in SubjectsPlus."); ?></p>
