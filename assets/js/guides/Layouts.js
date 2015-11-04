@@ -34,17 +34,17 @@ function Layout() {
 			myLayout.selectedLayout();
 			myLayout.layoutSections();
 			myLayout.bindUiActions();
-
+		
 			document.addEventListener("DOMContentLoaded", function() {
-				myLayout.checkDataLayout(myLayout.layouts);
 				myLayout.activateLayoutButtons();
+				myLayout.initialSelectedLayout();
 			});
 
 		},
 
 		initialLayout : function() {
 			/**
-			 * This append an initial section when you are adding a new tab.
+			 * This appends an initial section when you are adding a new tab.
 			 */
 			if ($('[id^=section]').length == 0) {
 				console.log("append the section!");
@@ -80,10 +80,18 @@ function Layout() {
 				$(this).removeClass('active-layout-icon');
 			});
 		},
+		
 		layouts : {
+			/** 
+			 * This object stores the layouts as they stored in the database as keys,
+			 * the selectors for the buttons that are used to change the layout,
+			 * and the pure css classes that are appended to the columns. 
+			 */
+			
 			'0-12-0' : {
 				selector : '#col-single',
-				pureClasses : [ 'hidden-column', 'pure-u-1', 'hidden-column' ]
+				pureClasses : [ 'hidden-column', 'pure-u-1', 'hidden-column' ],
+				
 			},
 			'6-6-0' : {
 				selector : '#col-double',
@@ -105,6 +113,17 @@ function Layout() {
 				selector : '#col-363',
 				pureClasses : [ 'pure-u-1-3', 'pure-u-1-2', 'pure-u-1-3' ]
 			}
+		},
+		initialSelectedLayout : function() {
+			var dataLayout = $('.sp_section').first().data().layout;
+			var initialSectionId = $('.sp_section').attr('id');
+			for (var k in myLayout.layouts) {
+				if (dataLayout === k) {
+					$(myLayout.layouts[k].selector).addClass('active-layout-icon');
+				}
+			  
+			}
+			
 		},
 		layoutSection : function(sectionId, layout) {
 			/** This function lays out the columns in a section.  
@@ -155,28 +174,26 @@ function Layout() {
 		},
 
 		activateLayoutButtons : function() {
-
+			/**
+			 * This function goes through the layouts object and binds a click event to 
+			 * each of the button selectors. Each button is also given a data attribute 
+			 * with the layout selection that is passed to the layoutSection function and
+			 * added to the section as a data attribute that is persisted in the database
+			 */
 			for ( var k in myLayout.layouts) {
 				var selector = myLayout.layouts[k].selector;
 				$(selector).data('layout', k);
 				console.log($(selector).data());
 
-				$(selector)
-						.on(
-								'click',
-								function() {
-
-									$('.layout-icon').removeClass(
-											'active-layout-icon');
-									$(this).addClass('active-layout-icon');
-									console.log($(this).data().layout);
-									// Just doing the first section during initial testing, before buttons have been added.
-									myLayout.layoutSection($('.sp_section')
-											.first().attr('id').split('_')[1],
-											$(this).data().layout)
-									$("#save_guide").fadeIn();
-
-								});
+				$(selector).on('click', function() {
+					$('.layout-icon').removeClass('active-layout-icon');
+					$(this).addClass('active-layout-icon');
+					console.log($(this).data().layout);
+					// Just doing the first section during initial testing, before buttons have been added.
+					myLayout.layoutSection($('.sp_section').first().attr('id').split('_')[1],
+					$(this).data().layout)
+				    $("#save_guide").fadeIn();
+			    });
 			}
 		}
 	}
