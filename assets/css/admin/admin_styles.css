@@ -2285,11 +2285,12 @@ ul.ui-autocomplete li a{
 }
 
 .checkurl_img_wrapper {
-  display: inline-block;
+  display: block;
   width: 20px;
   cursor:pointer;
   float:right;
-  margin-top: -2em;
+  margin-top: -2.5em;
+  margin-right: 1em;
 }
 
 .url_feedback {
@@ -3359,3 +3360,8 @@ li.hidden_tab.ui-state-default
 
 } /* end last responsive block */
 
+.fa-inactive {color: #ccc;}
+
+.clickable {cursor: pointer;}
+
+.alert-colour {color: #d24d57;}
