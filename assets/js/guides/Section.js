@@ -57,6 +57,11 @@ function Section() {
 			});
 		},
 		chooseSectionForLayouts : function () {
+			
+			/**
+			 * If you click on the section controls, the section controls that you clicked on will be 
+			 * hightlighted and the layouts control will effect that section. 
+			 */
 			$('.sp_section_controls').on('click', function() {
 				$('.sp_section_controls').removeClass('sp_section_selected');
 				$('#layout_options_content').data('selected-section', '');
@@ -66,6 +71,7 @@ function Section() {
 				console.log(selectedSectionId);
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				Layout().activateLayoutButtons();
+				Layout().highlightLayout($(this).parent())
 				
 			});
 		},
