@@ -54,7 +54,7 @@ switch ($_POST["type"]) {
         $source_string = $sourceMe->display();
 
         echo "<span class=\"record-source-override\">" . _("Source Override") . "<br />$source_string <img src=\"$IconPath/list-add.png\" class=\"add_source\" id=\"add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("add source override") . "\" title=\"" . _("add source override") . "\" border=\"0\">
-        <img src=\"$IconPath/delete.png\" class=\"cancel_add_source\" id=\"cancel_add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("never mind") . "\" title=\"" . _("never mind") . "\" border=\"0\"></span>";
+        <i class=\"fa fa-times clickable cancel_add_source\" id=\"cancel_add_source_id-" . $_POST["our_subject_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"" . _("never mind") . "\" title=\"" . _("never mind") . "\" border=\"0\"></i></span>";
 
         break;
     case "new_record_label":
@@ -87,10 +87,10 @@ switch ($_POST["type"]) {
 
         if ($lobjError['message'] == "") {
             $feedback = _("This URL looks OK to me");
-            print "<img src=\"$IconPath/accept.png\" alt=\"check url\" border=\"0\" id=\"check_url\" alt=\"$feedback\" title=\"$feedback\" >";
+            print "<i class=\"fa fa-check fa-2x\" alt=\"check url\" border=\"0\" id=\"check_url\" alt=\"$feedback\" title=\"$feedback\" ></i> ";
         } else {
             $feedback = _("This URL looks dodgy; better check it");
-            print "<img src=\"$IconPath/exclamation_octagon_fram.png\" alt=\"check url\" border=\"0\" id=\"check_url\" alt=\"$feedback\" title=\"$feedback\" />";
+            print "<i class=\"fa fa-exclamation-triangle fa-2x alert-colour\" alt=\"check url\" border=\"0\" id=\"check_url\" alt=\"$feedback\" title=\"$feedback\" /></i> ";
         }
 
         break;

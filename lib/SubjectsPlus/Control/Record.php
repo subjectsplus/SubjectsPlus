@@ -245,8 +245,6 @@ class Record {
     // Default Source
     /////////////////
 
-  $source_icon = $IconPath . "/usb_on-26.png";
-
 	$querierSource = new Querier();
 	$qSource = "select source_id, source from source order by source";
 	$defsourceArray = $querierSource->query($qSource);
@@ -260,7 +258,7 @@ class Record {
 
 	echo "<div class=\"pluslet\">
     <div class=\"titlebar\">
-      <div class=\"titlebar_text\"><img src=\"$source_icon\" class=\"icon_smaller\" /> " . _("Default Source Type") . "</div>
+      <div class=\"titlebar_text\"><i class=\"fa fa-book\"></i> " . _("Default Source Type") . "</div>
       <div class=\"titlebar_options\"></div>
     </div>
     <div class=\"pluslet_body\">
@@ -427,7 +425,8 @@ public function buildLocation() {
  	}
 
  	// do we want the checkurl image?
- 	$checkurl_icon = "<span class=\"checkurl_img_wrapper\"><img src=\"$IconPath/linkcheck.png\" alt=\"check url\" title=\"check url\" border=\"0\" class=\"checkurl_img\" /></span>";
+  $checkurl_text = _("Check URL");
+ 	$checkurl_icon = "<span class=\"checkurl_img_wrapper\"><i alt=\"$checkurl_text\" title=\"$checkurl_text\" border=\"0\" class=\"fa fa-globe fa-2x clickable\" /></i></span>";
 
    // get appropriate text for format box title line
    $format_label_text = _("Location (Enter URL)");  // default for new record
@@ -536,16 +535,18 @@ public function buildLocation() {
 
     // check if the note override icon should be active or in
  	if ($value[5] != "") {
- 		$note_icon = "document-26.png";
+ 		$note_fa = "";
  	} else {
- 		$note_icon = "file-26.png";
+ 		$note_fa = "fa-inactive";
  	}
 
     // check if the source override icon should be active or in
  	if ($value[3] != $this->_def_source[0][0]) {
- 		$source_icon = "usb_on-26.png";
+    //on
+ 		$source_fa = "";
  	} else {
- 		$source_icon = "usb_off-26.png";
+    //off
+ 		$source_fa = "fa-inactive";
  	}
 
  	$oursubjects = "
@@ -558,9 +559,9 @@ public function buildLocation() {
  	<textarea style=\"display: none; clear: both;\" class=\"desc_override\" name=\"description_override[]\" rows=\"4\" cols=\"35\">$value[5]</textarea>
  	</div>
  	<div class=\"pure-u-1-2\">
- 	<img src=\"$IconPath/delete.png\" class=\"delete_sub icon_smaller\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\" border=\"0\" />
- 	<img src=\"$IconPath/$source_icon\" class=\"source_override icon_smaller\" id=\"source_override-$value[1]-$value[3]\" alt=\"" . _("change source type") . "\" title=\"" . _("change source type") . "\" border=\"0\" />
- 	<img src=\"$IconPath/$note_icon\" class=\"note_override icon_smaller\" id=\"note_override-$value[1]-$value[3]\" alt=\"" . _("add description override") . "\" title=\"" . _("add description override") . "\" border=\"0\" />
+ 	<i class=\"fa fa-lg fa-trash delete_sub clickable\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\" border=\"0\" /></i>
+ 	<i class=\"fa fa-lg fa-book $source_fa source_override clickable\" id=\"source_override-$value[1]-$value[3]\" alt=\"" . _("change source type") . "\" title=\"" . _("change source type") . "\" border=\"0\" /></i>
+ 	<i class=\"fa fa-lg fa-file-text-o $note_fa note_override clickable\" id=\"note_override-$value[1]-$value[3]\" alt=\"" . _("add description override") . "\" title=\"" . _("add description override") . "\" border=\"0\" /></i>
  	</div>
  	</div>";
 
