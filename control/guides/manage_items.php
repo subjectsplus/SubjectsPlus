@@ -116,7 +116,7 @@ if ($num_rows != "") {
             $last_source_id = $this_source_id;
         }
 
-        $ourlist .= "<li id=\"item-$myrow[5]\" style=\"padding: 2px; margin: 4px; border: 1px dashed #ccc; list-style-type: none;\"><a id=\"delete-$myrow[5]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> $myrow[1]</li>";
+        $ourlist .= "<li id=\"item-$myrow[5]\" style=\"padding: 2px; margin: 4px; border: 1px dashed #ccc; list-style-type: none;\"> &nbsp; <a id=\"delete-$myrow[5]\"><i class=\"fa fa-trash fa-lg\" alt=\"" . _("Delete Item") . "\"></i></a>&nbsp; $myrow[1]</li>";
 
         $row_count++;
     }

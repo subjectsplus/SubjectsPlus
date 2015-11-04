@@ -174,7 +174,7 @@ if ($userFiles) {
             }
 
             $file_list .= "</td>
-            <td><a id=\"delete-$rowcount\" name=\"file-$rowcount-$location_hint-" . urlencode($shortName) . "\"><img src=\"$IconPath" . "/delete.png\" alt=\"delete\" /></a></td></tr>";
+            <td><a id=\"delete-$rowcount\" name=\"file-$rowcount-$location_hint-" . urlencode($shortName) . "\"><i class=\"fa fa-trash fa-lg\" alt=\"" . _("Delete Item") . "\"></i></a></td></tr>";
         }
         $rowcount++;
     }
@@ -206,7 +206,7 @@ $subs_option_boxes
 $manage_all_box = "<p>" . _("Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box.") . "</p>
 $all_guides
 <br />
-<p><img src=\"$IconPath/pencil.png\" alt=\"" . _("pencil image") . "\" /> " . _("Note: You can also do this in a guide, by clicking on the pencil icon for an 'All Items by Source' box.") . "</p>
+<p><i class=\"fa fa-pencil fa-lg\" alt=\"" . _("Edit icon") . "\"></i> " . _("Note: You can also do this in a guide, by clicking on the pencil icon for an 'All Items by Source' box.") . "</p>
 <div id=\"test_url\"></div>";
 
 // Uploads Box //
