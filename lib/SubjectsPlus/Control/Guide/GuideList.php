@@ -19,7 +19,7 @@ class GuideList implements OutputInterface {
 	public function __construct(Querier $db) {
 		$this->db = $db;
 		$connection = $this->db->getConnection();
-		$statement = $connection->prepare("SELECT subject_id, subject FROM subject");
+		$statement = $connection->prepare("SELECT subject_id, subject, active FROM subject");
 		$statement->execute();
 		$this->_guide_list = $statement->fetchAll();
 	}
