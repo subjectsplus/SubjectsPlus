@@ -331,13 +331,13 @@ function Tabs() {
             hideFirstSectionSlider: function() {
                 var current_tab = $('#tabs').tabs('option', 'selected');
                 var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
-                $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
+               // $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
 
                 $('#tabs').on('click', function () {
                     // Hide the first section's controls
                     var current_tab = $('#tabs').tabs('option', 'selected');
                     var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
-                    $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
+              //      $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
                 });
             },
 

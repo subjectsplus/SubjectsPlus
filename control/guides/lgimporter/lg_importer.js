@@ -169,8 +169,7 @@ $('.import_links').on(
 			var selected_guide_id = $(this).parent().parent().find(
 					'option:selected').val();
 
-			$('.import-output').append(
-					"<div class=\"loading loader\">Loading... </div>");
+			$('.import-output').append("<div class=\"loading loader\">Loading... <i class=\"fa fa-spinner fa-spin\"></i></div>");
 
 			importGuides(selected_guide_id, selected_guide_name,
 					"lg_importer_links_json.php");

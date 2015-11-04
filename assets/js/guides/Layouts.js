@@ -180,18 +180,23 @@ function Layout() {
 			 * with the layout selection that is passed to the layoutSection function and
 			 * added to the section as a data attribute that is persisted in the database
 			 */
+		
 			for ( var k in myLayout.layouts) {
 				var selector = myLayout.layouts[k].selector;
+				
 				$(selector).data('layout', k);
 				console.log($(selector).data());
 
 				$(selector).on('click', function() {
+					var selectedSection = $('#layout_options_content').data().selectedSection;
+
+					console.log(selectedSection);
+
 					$('.layout-icon').removeClass('active-layout-icon');
 					$(this).addClass('active-layout-icon');
 					console.log($(this).data().layout);
-					// Just doing the first section during initial testing, before buttons have been added.
-					myLayout.layoutSection($('.sp_section').first().attr('id').split('_')[1],
-					$(this).data().layout)
+
+					myLayout.layoutSection(selectedSection,$(this).data().layout)
 				    $("#save_guide").fadeIn();
 			    });
 			}

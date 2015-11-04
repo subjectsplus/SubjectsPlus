@@ -18,10 +18,12 @@ function Section() {
 		},
 		strings : {},
 		bindUiActions : function() {
+			mySection.chooseSectionForLayouts();
 		},
 		init: function () {
 		    
-		    mySection.makeSectionSlider()
+		    mySection.makeSectionSlider();
+		    mySection.bindUiActions();
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -34,10 +36,12 @@ function Section() {
 				var lintSelected = $(tabs).tabs('option', 'selected');
 
 				$.ajax({
+					
 					url : mySection.settings.sectionDataPath,
 					type : "POST",
 					data : {
-						action : 'create'
+					action : 'create'
+					
 					},
 					dataType : "html",
 					success : function(html) {
@@ -52,9 +56,21 @@ function Section() {
 				});
 			});
 		},
+		chooseSectionForLayouts : function () {
+			$('.sp_section_controls').on('click', function() {
+				$('.sp_section_controls').removeClass('sp_section_selected');
+				$('#layout_options_content').data('selected-section', '');
 
-		makeSectionSlider: function () {
-		 
+				$(this).toggleClass('sp_section_selected');
+				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
+				console.log(selectedSectionId);
+				$('#layout_options_content').data('selected-section', selectedSectionId);
+				Layout().activateLayoutButtons();
+				
+			});
+		},
+		makeSectionSlider : function () {
+			
 		}
 	};
 

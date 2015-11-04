@@ -32,22 +32,18 @@ class SectionData {
 					$new_id = rand ( 1, 100000 );
 					
 					print "<div id=\"section_new_$new_id\" class=\"sp_section pure-g\" data-layout='3-3-3'>";
-					/*
-					print "<div class=\"sp_section_controls\">
-				<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" title=\"Move Section\"/>
-				<i class=\"fa fa-trash-o section_remove\" title=\"Delete Section\"></i>
-				<div id=\"slider_section_new_$new_id\" class=\"sp_section_slider\"></div>
-				</div>";
-					*/
+					print "<div class=\"sp_section_controls\">";
+					print "<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" title=\"Move Section\"/>
+					<i class=\"fa fa-trash-o section_remove\" title=\"Delete Section\"></i>
+					</div>";
+			
+					
 					print $lobjGuide->dropBoxes ( 0, 'left', "" );
 					print $lobjGuide->dropBoxes ( 1, 'center', "" );
 					print $lobjGuide->dropBoxes ( 2, 'sidebar', "" );
 					print '<div id="clearblock" style="clear:both;"></div> <!-- this just seems to allow the space to grow to fit dropbox areas -->';
 					print '</div>';
-					print '<script type="text/javascript">';
-					
-					print "Section().makeSectionSlider('div[id=\"" . "slider_section_new_{$new_id}" . "\"]');";
-					print "</script>";
+				
 					break;
 				case 'delete' :
 					if (isset ( $_POST ['section_id'] )) {

@@ -991,6 +991,8 @@ li.fav-box-item:hover::before {color: #C03957;}
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #333;}
 
 #tabs.ui-tabs .ui-tabs-nav li#expand_tab {
+	
+	
   cursor:pointer; 
   padding: 9px 16px !important;
   background-color: #CCC !important;
@@ -1035,13 +1037,20 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 .sp_section_controls {
-  border-bottom: 1px solid #333;
+  border-bottom: 3px solid #555;
   padding-bottom: 1em;
   background-color: #fff;
   padding-top: 1em;
+
 }
+
+.sp_section_selected {
+	
+	border-bottom: 3px solid #C03957;
+}
+
 .sp_section:nth-child(1) .sp_section_controls {
-  display:none;
+	display:block;
 }
 
 .section_sort {
