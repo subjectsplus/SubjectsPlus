@@ -949,7 +949,7 @@ class Guide
 
     	foreach( $lobjSections as $lobjSection )
     	{
-    		print "<div id=\"section_{$lobjSection['section_id']}\" class=\"sp_section\" data-layout=\"{$lobjSection['layout']}\">";
+    		print "<div id=\"section_{$lobjSection['section_id']}\" class=\"sp_section pure-g\" data-layout=\"{$lobjSection['layout']}\">";
 
             if ($this->_isAdmin) {
         		print "<div class=\"sp_section_controls\">
@@ -1087,7 +1087,7 @@ class Guide
     {
         global $AssetPath;
         global $IconPath;
-        $col = "<div id=\"container-" . $i . "\" style=\"position: relative; float: left; width: 30%;\">
+        $col = "<div id=\"container-" . $i . "\" \">
             <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
             <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
             </div>

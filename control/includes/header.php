@@ -154,6 +154,8 @@ mb_internal_encoding('UTF-8');
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
+    <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
+    
     <?php
     // this is for custom css, set by user and stored in database
 
@@ -166,7 +168,6 @@ mb_internal_encoding('UTF-8');
 
     ?>
 
-<script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
   </head>
   <body id="controlpage">
 

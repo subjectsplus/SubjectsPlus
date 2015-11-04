@@ -55,7 +55,19 @@ display:none;
 foreach ($guide_list_output as $guide) {
 	$subject_id = $guide["subject_id"];
 	$subject = $guide["subject"];
-	echo "<option class='guide-option' value='{$subject_id}'>{$subject}</option>";
+	$status = $guide["active"];
+	
+	if ($status == 0) {
+		$status_text = " - Hidden";
+	}
+	if ($status == 1) {
+		$status_text = " - Published";
+	}
+	if ($status == 2) {
+		$status_text = " - Suppressed";
+	}
+	
+	echo "<option class='guide-option' value='{$subject_id}'>{$subject}  $status_text</option>";
 	
 }
 ?>

@@ -1067,6 +1067,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 }
 
+/* Default CSS for the columns in a section */
 
 #container-0, 
 #container-1,
@@ -1097,6 +1098,10 @@ li.fav-box-item:hover::before {color: #C03957;}
 #container-0 h3 {
   font-size: 14px;
   margin: 1px;
+}
+
+.hidden-column {
+	display:none;
 }
 
 

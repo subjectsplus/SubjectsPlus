@@ -454,7 +454,7 @@ function SaveSetup() {
 		            lobjSection.left_data = "";
 		            lobjSection.sidebar_data = "";
 
-		            lobjSection.layout = $(this).attr("data-layout");
+		            lobjSection.layout = $(this).data('layout');
 
 		            $('div#section_' + section_id + ' div.portal-column-0').sortable();
 		            $('div#section_' + section_id + ' div.portal-column-1').sortable();

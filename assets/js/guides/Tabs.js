@@ -35,7 +35,7 @@ function Tabs() {
         },
         init: function () {
             myTabs.setupTabs();
-            myTabs.hideTabsFirstSectionSlider();
+            myTabs.hideFirstSectionSlider();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
             //Find Box Tabs - Browse and Search
@@ -328,7 +328,7 @@ function Tabs() {
                 $('#expand_tab').appendTo('.ui-tabs-nav')
             }
         },
-            hideTabsFirstSectionSlider: function() {
+            hideFirstSectionSlider: function() {
                 var current_tab = $('#tabs').tabs('option', 'selected');
                 var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
                 $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
