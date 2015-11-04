@@ -325,7 +325,7 @@ function Tabs() {
                 });
                 
                 // Move the expand tab to the end
-                $('#expand_tab').appendTo('.ui-tabs-nav')
+                $('#expand_tab').appendTo('#tabs .ui-tabs-nav')
             }
         },
             hideFirstSectionSlider: function() {
