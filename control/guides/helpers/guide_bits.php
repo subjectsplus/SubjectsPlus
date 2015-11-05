@@ -34,15 +34,15 @@ switch ($_REQUEST["type"]) {
         $item_id = scrubData($_POST["our_item_id"], 'integer');
 
         echo "
-	<div class=\"selected_item_wrapper\">
+        <div style=\"margin-bottom: 10px !important;padding: 5px !important;\">
 		<div class=\"selected_item\">
 			<input name=\"staff_id[]\" value=\"$item_id\" type=\"hidden\" />
 			$item_name<br />
 		</div>
 		<div class=\"selected_item_options\">
-			<i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
+            <i class=\"fa fa-times delete_item delete_staff pointer\"  alt=\"delete\" title=\"remove\"></i>
 		</div>
-	</div>";
+        </div>";
 
         break;
     case "add_parent":
@@ -57,7 +57,7 @@ switch ($_REQUEST["type"]) {
             $item_name<br />
         </div>
         <div class=\"selected_item_options\">
-            <i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
+            <i class=\"fa fa-times delete_item pointer\" alt=\"delete\" title=\"remove\"></i>
         </div>
     </div>";
 
@@ -75,7 +75,7 @@ switch ($_REQUEST["type"]) {
             $item_name<br />
         </div>
         <div class=\"selected_item_options\">
-            <i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
+            <i class=\"fa fa-times delete_item pointer\" alt=\"delete\" title=\"remove\"></i>
         </div>
     </div>";
 
@@ -91,7 +91,7 @@ switch ($_REQUEST["type"]) {
             $item_name<br />
         </div>
         <div class=\"selected_item_options\">
-            <i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
+            <i class=\"fa fa-times delete_item pointer\" alt=\"delete\" title=\"remove\"></i>
         </div>
     </div>";
 

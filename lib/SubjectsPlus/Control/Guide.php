@@ -491,7 +491,7 @@ class Guide
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <i class=\"fa fa-times\" class=\"delete_item delete_staff\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
+        <i class=\"fa fa-times delete_item delete_staff pointer\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
         </div>
         </div>";
 
@@ -509,7 +509,7 @@ class Guide
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <i class=\"fa fa-times\" class=\"delete_item delete_parent\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
+        <i class=\"fa fa-times pointer delete_item delete_parent\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
         </div>
         </div>";
 
@@ -527,7 +527,7 @@ class Guide
         $value[1]<br />
         </div>
         <div class=\"selected_item_options\">
-        <i class=\"fa fa-times\" class=\"delete_item delete_discipline\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
+        <i class=\"fa fa-times pointer delete_item delete_discipline\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
         </div>
         </div>";
 
