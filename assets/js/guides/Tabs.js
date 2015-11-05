@@ -35,7 +35,6 @@ function Tabs() {
         },
         init: function () {
             myTabs.setupTabs();
-            myTabs.hideFirstSectionSlider();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
             //Find Box Tabs - Browse and Search
@@ -313,6 +312,8 @@ function Tabs() {
                                 });
                             
                             $('#tabs').data().tabCount++;
+                            console.log(html);
+                           // Layout().layoutSection(sectionId, layout);
                         }
                     });
 
@@ -327,21 +328,7 @@ function Tabs() {
                 // Move the expand tab to the end
                 $('#expand_tab').appendTo('#tabs .ui-tabs-nav')
             }
-        },
-            hideFirstSectionSlider: function() {
-                var current_tab = $('#tabs').tabs('option', 'selected');
-                var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
-               // $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
-
-                $('#tabs').on('click', function () {
-                    // Hide the first section's controls
-                    var current_tab = $('#tabs').tabs('option', 'selected');
-                    var slider_section_id = $('#tabs-' + parseInt(current_tab)).children().attr('id');
-              //      $('#tabs-' + parseInt(current_tab) + ' div#' + slider_section_id + ' .sp_section_controls').first().hide();
-                });
-            },
-
-   
+        }, 
         removePlusletsFromCurrentTab: function () {
             //remove all pluslets from current tab
             $('a.remove_pluslets').on('click', function () {

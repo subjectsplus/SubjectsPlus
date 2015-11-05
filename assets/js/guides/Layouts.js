@@ -47,7 +47,6 @@ function Layout() {
 			 * This appends an initial section when you are adding a new tab.
 			 */
 			if ($('[id^=section]').length == 0) {
-				console.log("append the section!");
 				$.ajax({
 					url : myLayout.settings.sectionDataUrl,
 					type : 'POST',
@@ -62,21 +61,28 @@ function Layout() {
 
 			}
 		},
-		moveColumnContent : function(sourceColumn, targetColumn) {
+		moveColumnContent : function(moveColumns, sectionId) {
 			/**
 			 * 
 			 * This function takes content from one column and moves it to another. 
 			 * 
 			 */
-			var currentTab = $('#tabs').tabs('option', 'selected');
-			var SectionId = $('#tabs-' + parseInt(currentTab)).children().attr(
-					'id');
-			var content = $(
-					'#' + slider_section_id + ' #container-' + source_column
-							+ ' .portal-column').children();
-			$(
-					'#' + SectionId + '  #container-' + target_column
-							+ ' .portal-column').append(content);
+			for (var k in moveColumns) {
+				
+				var sourceColumn = moveColumns[k][0];
+				var targetColumn = moveColumns[k][1];
+				console.log(sourceColumn);
+				
+				var content = $('#section_' + sectionId + ' #container-' + sourceColumn + ' .portal-column').children();
+				console.log('#' + sectionId + ' #container-' + sourceColumn + ' .portal-column');
+				console.log('#' + sectionId + ' #container-' + targetColumn + ' .portal-column')
+				$('#section_' + sectionId + '  #container-' + targetColumn + ' .portal-column').append(content);
+				
+			}
+		
+			
+			
+
 
 		},
 
@@ -96,33 +102,33 @@ function Layout() {
 			'0-12-0' : {
 				selector : '#col-single',
 				pureClasses : [ 'hidden-column', 'pure-u-1', 'hidden-column' ],
-				moveColumns : []
+				moveColumns : {firstToSecond : [0,1], thirdToSecond : [2,1]} 
 				
 			},
 			'6-6-0' : {
 				selector : '#col-double',
 				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ],
-				moveColumns : []
+				moveColumns : {thirdToSecond : [2,1]}
 			},
 			'4-8-0' : {
 				selector : '#col-48',
 				pureClasses : [ 'pure-u-1-4', 'pure-u-3-4', 'hidden-column' ],
-				moveColumns : []
+				moveColumns : {thirdToSecond : [2,1]}
 			},
 			'8-4-0' : {
 				selector : '#col-84',
 				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ],
-				moveColumns : []
+				moveColumns : {thirdToSecond : [2,1]}
 			},
 			'4-4-4' : {
 				selector : '#col-triple',
 				pureClasses : [ 'pure-u-1-3', 'pure-u-1-3', 'pure-u-1-3' ],
-				moveColumns : []
+				moveColumns : {}
 			},
 			'3-6-3' : {
 				selector : '#col-363',
 				pureClasses : [ 'pure-u-1-3', 'pure-u-1-2', 'pure-u-1-3' ],
-				moveColumns : []
+				moveColumns : {}
 			}
 		},
 		highlightLayout : function(sectionSelector) {
@@ -151,7 +157,7 @@ function Layout() {
 			 * layouts object. That object stores the pure classes that need to 
 			 * appended to change the layout. 
 			 * 
-			 * */
+			 */
 			var firstColumn = 'div#section_' + sectionId + ' div#container-0';
 			var secondColumn = 'div#section_' + sectionId + ' div#container-1';
 			var thirdColumn = 'div#section_' + sectionId + ' div#container-2';
@@ -160,17 +166,19 @@ function Layout() {
 
 			for ( var k in myLayout.layouts) {
 				if (layout === k) {
-					console.log(firstColumn);
+
 
 					$(firstColumn).attr('class', '');
 					$(secondColumn).attr('class', '');
 					$(thirdColumn).attr('class', '');
 
 					$(firstColumn).addClass(myLayout.layouts[k].pureClasses[0]);
-					$(secondColumn)
-							.addClass(myLayout.layouts[k].pureClasses[1]);
+					$(secondColumn).addClass(myLayout.layouts[k].pureClasses[1]);
 					$(thirdColumn).addClass(myLayout.layouts[k].pureClasses[2]);
 
+					
+					myLayout.moveColumnContent(myLayout.layouts[k].moveColumns, sectionId);
+					
 					$(section).data('layout', k)
 
 				}
@@ -184,7 +192,7 @@ function Layout() {
 			 * The layout key/id is persisted in the database and available 
 			 * from a data attribute.
 			 */
-			$('div[id^="section_"]').each(function() {
+			$('div[id^="section_"],div[id^="section_new"]').each(function() {
 				var sectionId = $(this).attr('id').split('section_')[1];
 				var layout = $('div#section_' + sectionId).data('layout');
 
@@ -195,6 +203,7 @@ function Layout() {
 
 		activateLayoutButtons : function() {
 			/**
+			 *  
 			 * This function goes through the layouts object and binds a click event to 
 			 * each of the button selectors. Each button is also given a data attribute 
 			 * with the layout selection that is passed to the layoutSection function and
@@ -205,16 +214,13 @@ function Layout() {
 				var selector = myLayout.layouts[k].selector;
 				
 				$(selector).data('layout', k);
-				console.log($(selector).data());
+
 
 				$(selector).on('click', function() {
 					var selectedSection = $('#layout_options_content').data().selectedSection;
 
-					console.log(selectedSection);
-
 					$('.layout-icon').removeClass('active-layout-icon');
 					$(this).addClass('active-layout-icon');
-					console.log($(this).data().layout);
 
 					myLayout.layoutSection(selectedSection,$(this).data().layout)
 				    $("#save_guide").fadeIn();
