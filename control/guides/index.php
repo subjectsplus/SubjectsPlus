@@ -163,9 +163,9 @@ $('#guides').select2();
         <div class="titlebar_options"></div>
       </div>
       <div class="pluslet_body">
-        <p><img src="<?php echo $IconPath; ?>/emblem-system.png"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>" class="icon" /> <?php print _("Edit Guide Metadata"); ?> </p>
-        <p><img src="<?php echo $IconPath; ?>/eye.png"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>" class="icon"/> <?php print _("View Guide on Public Site"); ?></p>
-        <p><img src="<?php echo $IconPath; ?>/linkcheck.png"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>" class="icon" /> <?php print _("Check Guide Links"); ?></p>
+        <p><i class="fa fa-gear fa-lg"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"></i> <?php print _("Edit Guide Metadata"); ?> </p>
+        <p><i class="fa fa-eye fa-lg"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"></i> <?php print _("View Guide on Public Site"); ?></p>
+        <p><i class="fa fa-globe fa-lg"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"></i> <?php print _("Check Guide Links"); ?></p>
         <p><?php echo _("Need to delete a guide?  Use the gear icon, and use the Delete button."); ?></p>
       </div>
     </div>
