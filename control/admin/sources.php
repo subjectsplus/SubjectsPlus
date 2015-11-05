@@ -93,7 +93,7 @@ $sourceArray = $querierDept->query($qSource);
 
 foreach ($sourceArray as $value) {
 
-  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
+  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
 }
 
 $source_box = "

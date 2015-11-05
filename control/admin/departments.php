@@ -119,7 +119,7 @@ $ourlist = "";
 
 foreach ($deptArray as $value) {
 
-    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item department-sortable\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a>
+    $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item department-sortable\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a>
   &nbsp; <input type=\"text\" size=\"40\" name=\"dept[]\" value=\"$value[1]\" /> 
   &nbsp; <input type=\"text\" size=\"10\" name=\"tel[]\" value=\"$value[2]\" /> 
   &nbsp; <input type=\"text\" size=\"20\" name=\"email[]\" value=\"$value[4]\" />

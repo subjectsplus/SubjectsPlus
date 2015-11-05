@@ -117,8 +117,8 @@ class LinkChecker {
         <div class="titlebar_options"></div>
       </div>
       <div class="pluslet_body">
-				<img src="<?php echo $AssetPath; ?>images/icons/accept.png" /> = <?php print _("Link is good!"); ?><br /><br />
-				<img src="<?php echo $AssetPath; ?>images/icons/info2.png" /> = <?php print _("<i>Possible</i> problem with link; click on link to open in new window."); ?><br />
+				<i class="fa fa-check" title="<?php print _("Image: OK") ?>\"></i> = <?php print _("Link is good!"); ?><br /><br />
+				<i class="fa fa-exclamation-triangle" title="<?php print _("Image: Uh oh") ?>\"></i> = <?php print _("<i>Possible</i> problem with link; click on link to open in new window."); ?><br />
 			</div>
 
 			    </div>
@@ -447,12 +447,12 @@ class LinkChecker {
 			{
 				$error['message'] = 'No response from server.';
 			}
-			$error['img_src'] = $AssetPath . 'images/icons/info2.png';
+			$error['img_src'] = "<i class=\"fa fa-exclamation-triangle fa-lg\" title=\"" . _("Possible error") . "\"></i>";
 			$error['row_style'] = ' style="background: #ffff33;"';
 		}
 		else
 		{
-			$error['img_src'] = $AssetPath . 'images/icons/accept.png';
+			$error['img_src'] = "<i class=\"fa fa-check fa-lg\" title=\"" . _("Looks okay") . "\"></i>";
 		}
 
 		curl_close($rscCurl);
@@ -498,11 +498,11 @@ class LinkChecker {
 					if( $isrecord )
 					{
 						echo "<a href=\"{$CpanelPath}records/record.php?record_id={$this->_extra['title_id']}\" title=\"Edit this record in new window\" target=\"_blank\">";
-						echo "<img src=\"../../assets/images/icons/pencil.png\" /></a>&nbsp;";
+						echo "<i class=\"fa fa-pencil fa-lg\" title=\"" . _("Edit") . "\"></i></a>&nbsp;";
 					}
 
 					echo "<a href=\"$link[1]\" target=\"_blank\">$link[2]</a></td>\n" .
-							"<td><img src=\"$error[img_src]\" /></td>\n" .
+							"<td>$error[img_src]</td>\n" .
 							"<td>$error[message]</td>\n";
 					echo "</tr>\n";
 				}

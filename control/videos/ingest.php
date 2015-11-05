@@ -266,7 +266,8 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
   $videos = simplexml_load_string(curl_get($vid_data));
 
   if ($videos == NULL) {
-  	echo _("Error loading the video feed. It's possible there is no channel by that name.");
+  	$message = _("Error loading the video feed. It's possible there is no channel by that name.");
+    print "<div class=\"master-feedback\" style=\"display:block;\">$message</div>";
   	exit;
   }
   	
