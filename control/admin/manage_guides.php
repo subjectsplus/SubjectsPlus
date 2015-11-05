@@ -39,15 +39,19 @@ $subsArray = $querier->query($q);
   $row_count = 0; $colour1 = "oddrow"; $colour2 = "evenrow";
   $staff_list = "";
 
+$edit_text = _("Modify");
+$view_text = _("View Live");
+$linkcheck_text = _("Check Links");
+
   foreach ($subsArray as $value) {
 
 if ($value[7] != "1") { $active = " <span style=\"font-size:smaller; color: #666;\">inactive</span>";} else { $active = ""; }
 
 $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 $staff_list .= "<div class=\"$row_colour striper\" style=\"clear: both; float: left; min-width: 500px;\">
-<input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/emblem-system.png\" alt=\"modify\" border=\"0\"></a> 
-&nbsp;&nbsp; <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><img src=\"$IconPath/eye.png\" alt=\"see live\" border=\"0\"></a> 
-&nbsp;&nbsp; <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$value[0]&wintype=pop\"><img src=\"$IconPath/linkcheck.png\" alt=\"check links\" border=\"0\"></a> 
+<input type=\"checkbox\" name=\"guide-$value[0]\" value=\"$value[0]\"><a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$value[0]&wintype=pop\"><i class=\"fa fa-pencil fa-lg\" title=\"$edit_text\" alt=\"$edit_text\"></i></a> 
+&nbsp;&nbsp; <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$value[6]\"><i class=\"fa fa-eye fa-lg\" title=\"$view_text\" alt=\"$view_text\"></i></a> 
+&nbsp;&nbsp; <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$value[0]&wintype=pop\"><i class=\"fa fa-globe fa-lg\" title=\"$linkcheck_text\" alt=\"$linkcheck_text\"></i></a> 
 &nbsp;&nbsp; <a href=\"../guides/guide.php?subject_id=$value[0]\">$value[1]</a> $active</div>
 <div class=\"$row_colour striper\" style=\"float: left; min-width: 100px;\">$value[2] $value[3]</div>
 <div class=\"$row_colour striper\" style=\"float: left; min-width: 75px;\">$value[5]</div>";

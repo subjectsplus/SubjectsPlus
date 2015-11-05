@@ -93,7 +93,7 @@ $resultArray = $querierDept->query($q);
 if ($resultArray) {
     foreach ($resultArray as $value) {
 
-        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" /></a> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
+        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
     }
 }
 

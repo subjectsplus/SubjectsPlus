@@ -163,7 +163,7 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
     $links_box = "
         <ul>
         <li><a href=\"guide.php?subject_id=$subject_id\">" . _("Admin guide") . "</a></li>
-        <li><a href=\"$PublicPath" . "guide.php?subject=$shortform\">" . _("Public guide") . "</a></li>
+        <li><a target=\"_blank\" href=\"$PublicPath" . "guide.php?subject=$shortform\">" . _("Public guide") . "</a></li>
         </ul>";
 
    makePluslet(_("View Guide"), $links_box, "no_overflow");     

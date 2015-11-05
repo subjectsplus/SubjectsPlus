@@ -63,8 +63,8 @@ if ($vidArray) {
     $vid_list .= "
             <div style=\"clear: both; float: left;  padding: 3px 5px; width: 98%;\" class=\"striper $row_colour1\">
                 <div style=\"pluslet_body\">
-                <a  class=\"showmedium\" href=\"video.php?video_id=$value[0]&amp;wintype=pop\"><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
-                &nbsp; &nbsp;<a href=\"" . $VideoPath . "?video_id=$value[0]\" target=\"_blank\"><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /></a>
+                <a  class=\"showmedium\" href=\"video.php?video_id=$value[0]&amp;wintype=pop\"><i class=\"fa fa-pencil fa-lg\" alt=\"" . _("Edit") . "\"></i></a>
+                &nbsp; &nbsp;<a href=\"" . $VideoPath . "?video_id=$value[0]\" target=\"_blank\"><i class=\"fa fa-eye fa-lg\" alt=\"" . _("View") . "\"></i></a>
                 </div>
                 <div style=\"float: left; width: 90%;\">
                  $short_title <span style=\"color: #666; font-size: 10px;\">($last_revised_line)</span> $activity
@@ -80,8 +80,8 @@ if ($vidArray) {
 
 $ingest_body_text = "<a href=\"ingest.php\">" . _("FIND VIDEOS") . "</a>";
 $add_metadata_text = "<a href=\"video.php\">" . _("ENTER VIDEO") . "</a>";
-$about_videos_text = "<p><img src=\"$IconPath/pencil.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("Edit Video Info") . "</p>
-    <p><img src=\"$IconPath/eye.png\" alt=\"edit\" width=\"16\" height=\"16\" /> = " . _("View Video on Public Site") . "</p>";
+$about_videos_text = "<p><i class=\"fa fa-pencil fa-lg\" alt=\"" . _("Edit") . "\"></i> = " . _("Edit") . "</p>
+    <p><i class=\"fa fa-eye fa-lg\" alt=\"" . _("View") . "\"></i> = " . _("View Video on Public Site") . "</p>";
 
 
 

@@ -172,17 +172,19 @@ switch ($_REQUEST["action"]) {
    //print $qChecker;
 
     if (count($rChecker) != 0) {
-      print _("Your request cannot be completed:  There are one or more librarians associated with this subject");
+      $message = _("Your request cannot be completed:  There are one or more librarians associated with this subject");
     } else {
 
       $qDeleteDept = "DELETE FROM department WHERE department_id = " . scrubData($_POST["delete_id"], "integer");
 
       $rDeleteDept = $db->exec($qDeleteDept);
 
-
-        print _("Thy Will Be Done.  Department list updated.");
+      $message = _("Thy Will Be Done.  Department list updated.");
       
     }
+
+    print "<div class=\"master-feedback\" style=\"display:block;\">$message</div>";
+
     return; // return early so we don't show the stuff that follows
     break;
   case "delete_collection":

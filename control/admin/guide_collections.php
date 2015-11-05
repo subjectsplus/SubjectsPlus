@@ -64,7 +64,7 @@ foreach ($_POST["subject_id"] as $key => $value) {
     $our_subject_id = scrubData($value);
 
     $qInsert = "INSERT INTO collection_subject (collection_id, subject_id, sort) VALUES ($our_collection_id, $our_subject_id, $key)";
-    print $qInsert . "<br />";
+    //print $qInsert . "<br />";
     $rInsert = $db->exec($qInsert);
 }
 
@@ -146,7 +146,7 @@ $ourlist .= "
     $subjectArray = $querierSubject->query($qSubject);
 
     foreach ($subjectArray as $value2) {
-        $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item collection-sortable-$value2[0]\"><a id=\"delete-$value[0]_$value2[0]\"><img src=\"$IconPath/delete.png\" class=\"pointer\" style=\"height: 1em; width: 1em;\" /></a> $value2[1] 
+        $ourlist .= "<li id=\"item-$value[0]_$value2[0]\" class=\"sortable_item collection-sortable-$value2[0]\"><a id=\"delete-$value[0]_$value2[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> $value2[1] 
          <input type=\"hidden\" name=\"subject_id[]\" value=\"$value2[0]\" />
         </li>";
     }
@@ -279,7 +279,7 @@ include("../includes/footer.php");
             */
 
             var our_string = '<li id="item-' + our_collection_id[1] + '_' + our_id + '" class="sortable_item collection-sortable-' 
-            + our_id + '"><a id="delete-' + our_collection_id[1] + '_' + our_id + '"><img class="pointer" src="../../assets/images/icons/delete.png" style="height: 1em; width: 1em;"></a><input type="hidden" value="' + our_id + '" name="subject_id[]"> ' + our_subject + ' </li>';
+            + our_id + '"><a id="delete-' + our_collection_id[1] + '_' + our_id + '"><i class="fa fa-times" title="<?php print _("Remove") ?>"></i></a><input type="hidden" value="' + our_id + '" name="subject_id[]"> ' + our_subject + ' </li>';
 
             // add in a new subject to the dom
             $(this).parent().find('ul').append(our_string);
