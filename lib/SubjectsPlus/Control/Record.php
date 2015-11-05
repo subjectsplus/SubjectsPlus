@@ -216,7 +216,7 @@ class Record {
 	self::buildLocation();
 
 
-	$add_loc = "<div class=\"add_location\"><button src=\"$IconPath/list-add.png\" alt=\"add new location\"  class=\"pure-button pure-button-success\" border=\"0\" /> Add another location</div>";
+	$add_loc = "<div class=\"add_location\"><button alt=\"add new location\"  class=\"pure-button pure-button-success\" border=\"0\" /> Add another location</div>";
 
   print $add_loc;
 
