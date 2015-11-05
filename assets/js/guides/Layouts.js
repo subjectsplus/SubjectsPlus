@@ -37,7 +37,7 @@ function Layout() {
 		
 			document.addEventListener("DOMContentLoaded", function() {
 				myLayout.activateLayoutButtons();
-				myLayout.initialSelectedLayout();
+				myLayout.highlightLayout($('.sp_section'));
 			});
 
 		},
@@ -63,6 +63,11 @@ function Layout() {
 			}
 		},
 		moveColumnContent : function(sourceColumn, targetColumn) {
+			/**
+			 * 
+			 * This function takes content from one column and moves it to another. 
+			 * 
+			 */
 			var currentTab = $('#tabs').tabs('option', 'selected');
 			var SectionId = $('#tabs-' + parseInt(currentTab)).children().attr(
 					'id');
@@ -91,42 +96,57 @@ function Layout() {
 			'0-12-0' : {
 				selector : '#col-single',
 				pureClasses : [ 'hidden-column', 'pure-u-1', 'hidden-column' ],
+				moveColumns : []
 				
 			},
 			'6-6-0' : {
 				selector : '#col-double',
-				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ]
+				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ],
+				moveColumns : []
 			},
 			'4-8-0' : {
 				selector : '#col-48',
-				pureClasses : [ 'pure-u-1-4', 'pure-u-3-4', 'hidden-column' ]
+				pureClasses : [ 'pure-u-1-4', 'pure-u-3-4', 'hidden-column' ],
+				moveColumns : []
 			},
 			'8-4-0' : {
 				selector : '#col-84',
-				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ]
+				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ],
+				moveColumns : []
 			},
 			'4-4-4' : {
 				selector : '#col-triple',
-				pureClasses : [ 'pure-u-1-3', 'pure-u-1-3', 'pure-u-1-3' ]
+				pureClasses : [ 'pure-u-1-3', 'pure-u-1-3', 'pure-u-1-3' ],
+				moveColumns : []
 			},
 			'3-6-3' : {
 				selector : '#col-363',
-				pureClasses : [ 'pure-u-1-3', 'pure-u-1-2', 'pure-u-1-3' ]
+				pureClasses : [ 'pure-u-1-3', 'pure-u-1-2', 'pure-u-1-3' ],
+				moveColumns : []
 			}
 		},
-		initialSelectedLayout : function() {
-			var dataLayout = $('.sp_section').first().data().layout;
-			var initialSectionId = $('.sp_section').attr('id');
-			for (var k in myLayout.layouts) {
+		highlightLayout : function(sectionSelector) {
+			/**
+			 * This function highlights the icon for the currently selected layout 
+			 * 
+			 */
+			var dataLayout = sectionSelector.first().data().layout;
+			for (var k in myLayout.layouts) {	
 				if (dataLayout === k) {
+					
 					$(myLayout.layouts[k].selector).addClass('active-layout-icon');
-				}
+				} else {
+					$(myLayout.layouts[k].selector).removeClass('active-layout-icon');
+
+				} 
+				
 			  
 			}
 			
 		},
 		layoutSection : function(sectionId, layout) {
-			/** This function lays out the columns in a section.  
+			/** 
+			 * This function lays out the columns in a section.  
 			 * It takes a section id and a layout (three digits seperated by a hyphen) that is used as a key for the 
 			 * layouts object. That object stores the pure classes that need to 
 			 * appended to change the layout. 
