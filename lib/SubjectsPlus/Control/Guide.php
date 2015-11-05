@@ -1087,7 +1087,7 @@ class Guide
     {
         global $AssetPath;
         global $IconPath;
-        $col = "<div id=\"container-" . $i . "\" \">
+        $col = "<div id=\"container-" . $i . "\" class='pure-u-1-3'  \">
             <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
             <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
             </div>

@@ -157,7 +157,7 @@ function Layout() {
 			 * layouts object. That object stores the pure classes that need to 
 			 * appended to change the layout. 
 			 * 
-			 * */
+			 */
 			var firstColumn = 'div#section_' + sectionId + ' div#container-0';
 			var secondColumn = 'div#section_' + sectionId + ' div#container-1';
 			var thirdColumn = 'div#section_' + sectionId + ' div#container-2';
@@ -192,7 +192,7 @@ function Layout() {
 			 * The layout key/id is persisted in the database and available 
 			 * from a data attribute.
 			 */
-			$('div[id^="section_"]').each(function() {
+			$('div[id^="section_"],div[id^="section_new"]').each(function() {
 				var sectionId = $(this).attr('id').split('section_')[1];
 				var layout = $('div#section_' + sectionId).data('layout');
 
@@ -203,6 +203,7 @@ function Layout() {
 
 		activateLayoutButtons : function() {
 			/**
+			 *  
 			 * This function goes through the layouts object and binds a click event to 
 			 * each of the button selectors. Each button is also given a data attribute 
 			 * with the layout selection that is passed to the layoutSection function and
