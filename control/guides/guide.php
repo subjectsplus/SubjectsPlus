@@ -458,7 +458,7 @@ ob_end_flush ();
           
           
           <!--analytics-->
-          <?php include_once('flyouts/tabs.php'); ?>
+          <?php include_once('flyouts/analytics.php'); ?>
 
           </div>
 
@@ -467,6 +467,10 @@ ob_end_flush ();
 
 <!--  Image Gallery -->
 <?php include_once('flyouts/asset_manager.php')?>
+
+
+          <!--tabs-->
+          <?php include_once('flyouts/tabs.php'); ?>
 
   </div>
 </div>
