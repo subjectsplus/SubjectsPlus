@@ -559,7 +559,7 @@ public function buildLocation() {
  	<textarea style=\"display: none; clear: both;\" class=\"desc_override\" name=\"description_override[]\" rows=\"4\" cols=\"35\">$value[5]</textarea>
  	</div>
  	<div class=\"pure-u-1-2\">
- 	<i class=\"fa fa-lg fa-trash delete_sub clickable\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\" border=\"0\" /></i>
+ 	<i class=\"fa fa-lg fa-trash delete_sub clickable\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\"></i>
  	<i class=\"fa fa-lg fa-book $source_fa source_override clickable\" id=\"source_override-$value[1]-$value[3]\" alt=\"" . _("change source type") . "\" title=\"" . _("change source type") . "\" border=\"0\" /></i>
  	<i class=\"fa fa-lg fa-file-text-o $note_fa note_override clickable\" id=\"note_override-$value[1]-$value[3]\" alt=\"" . _("add description override") . "\" title=\"" . _("add description override") . "\" border=\"0\" /></i>
  	</div>

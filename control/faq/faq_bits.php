@@ -32,7 +32,7 @@ switch ($_POST["type"]) {
         echo "<div class=\"selected_item_wrapper\"><div class=\"selected_item\">
             <input type=\"hidden\" name=\"collection[]\" value=\"" . $_POST["our_sub_id"] . "\" />
             " . $subject_name . "</div>
-        <div class=\"selected_item_options\"><img src=\"$IconPath/delete.png\" class=\"delete_sub\" alt=\"delete\" border=\"0\">
+        <div class=\"selected_item_options\"><i class=\"fa fa-times\" class=\"delete_sub\" alt=\"delete\" border=\"0\"></i>
         </div></div>";
 
         break;
@@ -43,7 +43,7 @@ switch ($_POST["type"]) {
         echo "<div class=\"selected_item_wrapper\"><div class=\"selected_item\" \">
             <input type=\"hidden\" name=\"subject[]\" value=\"" . $_POST["our_sub_id"] . "\" />
             " . $subject_name . "</div>
-        <div class=\"selected_item_options\"><img src=\"$IconPath/delete.png\" class=\"delete_sub\" alt=\"delete\" border=\"0\">
+        <div class=\"selected_item_options\"><i class=\"fa fa-times\" class=\"delete_sub\" alt=\"delete\" border=\"0\"></i>
         </div></div>";
 
         break;

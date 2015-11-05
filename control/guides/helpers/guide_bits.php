@@ -40,7 +40,7 @@ switch ($_REQUEST["type"]) {
 			$item_name<br />
 		</div>
 		<div class=\"selected_item_options\">
-			<img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+			<i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
 		</div>
 	</div>";
 
@@ -57,7 +57,7 @@ switch ($_REQUEST["type"]) {
             $item_name<br />
         </div>
         <div class=\"selected_item_options\">
-            <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+            <i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
         </div>
     </div>";
 
@@ -75,7 +75,7 @@ switch ($_REQUEST["type"]) {
             $item_name<br />
         </div>
         <div class=\"selected_item_options\">
-            <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+            <i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
         </div>
     </div>";
 
@@ -91,7 +91,7 @@ switch ($_REQUEST["type"]) {
             $item_name<br />
         </div>
         <div class=\"selected_item_options\">
-            <img src=\"$IconPath/delete.png\" class=\"delete_item\" alt=\"delete\" title=\"remove\" border=\"0\">
+            <i class=\"fa fa-times\" class=\"delete_item\" alt=\"delete\" title=\"remove\"></i>
         </div>
     </div>";
 

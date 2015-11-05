@@ -40,7 +40,11 @@ switch ($_POST["type"]) {
         $subject_name = Truncate($_POST["our_sub_text"], 25, '');
         $source_name = Truncate($_POST["our_source_text"], 15, '');
 
-        echo "<div class=\"selected_item_wrapper\"><div class=\"selected_item\" id=\"root-" . $_POST["our_source_id"] . "\"><input type=\"hidden\" name=\"rank[]\" value=\"0\" /><input type=\"hidden\" name=\"subject[]\" value=\"" . $_POST["our_sub_id"] . "\" /><input type=\"hidden\" id=\"hidden_source-" . $_POST["our_sub_id"] . "-" . $_POST["our_source_id"] . "\" name=\"source[]\" value=\"" . $_POST["our_source_id"] . "\" />" . $subject_name . "<span class=\"small_extra\"> " . $source_name . " </span><br /><textarea class=\"desc_override desc-area\" name=\"description_override[]\" rows=\"4\" cols=\"35\"></textarea></div><div class=\"selected_item_options\"><img src=\"$IconPath/delete.png\" class=\"delete_sub\" alt=\"delete\" border=\"0\"> <img src=\"$IconPath/source_override_inactive.png\" class=\"source_override\" id=\"source_override-" . $_POST["our_sub_id"] . "-" . $_POST["our_source_id"] . "\" alt=\"add source\" border=\"0\"> <img src=\"$IconPath/note_override_inactive.png\" class=\"note_override\" alt=\"delete\" border=\"0\"></div></div>";
+        echo "<div class=\"selected_item_wrapper\"><div class=\"selected_item\" id=\"root-" . $_POST["our_source_id"] . "\"><input type=\"hidden\" name=\"rank[]\" value=\"0\" /><input type=\"hidden\" name=\"subject[]\" value=\"" . $_POST["our_sub_id"] . "\" /><input type=\"hidden\" id=\"hidden_source-" . $_POST["our_sub_id"] . "-" . $_POST["our_source_id"] . "\" name=\"source[]\" value=\"" . $_POST["our_source_id"] . "\" />" . $subject_name . "<span class=\"small_extra\"> " . $source_name . " </span><br />
+        <textarea class=\"desc_override desc-area\" name=\"description_override[]\" rows=\"4\" cols=\"35\"></textarea></div>
+        <div class=\"selected_item_options\"><i class=\"fa fa-lg fa-trash delete_sub clickable\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\"></i>
+        <i class=\"fa fa-book fa-lg\"></i>
+        <i class=\"fa fa-lg fa-file-text-o source_override clickable\" id=\"source_override-" . $_POST["our_sub_id"] . "-" . $_POST["our_source_id"] . "\"></i> </div></div>";
 
         break;
     case "source_override":

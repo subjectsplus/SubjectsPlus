@@ -305,7 +305,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
                 $subject_name
             </div>
             <div class=\"selected_item_options\">
-                <img src=\"$IconPath/delete.png\" class=\"delete_sub\" alt=\"" . ("delete") . "\" title=\"" . ("remove subject") . "\" border=\"0\">
+                <i class=\"fa fa-times\" class=\"delete_sub\" alt=\"" . ("delete") . "\" title=\"" . ("remove subject") . "\"></i>
             </div>
         </div>";
 
@@ -324,7 +324,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
                 $collection_name
             </div>
             <div class=\"selected_item_options\">
-                <img src=\"$IconPath/delete.png\" class=\"delete_sub\" alt=\"" . ("delete") . "\" title=\"" . ("remove subject") . "\" border=\"0\">
+                <i class=\"fa fa-times\" class=\"delete_sub\" alt=\"" . ("delete") . "\" title=\"" . ("remove subject") . "\"></i>
             </div>
         </div>";
 
