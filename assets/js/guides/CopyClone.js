@@ -16,7 +16,7 @@ function CopyClone() {
 			cloneButton : '.clone-button',
 			copyButton : '.copy-button',
 			cloneFavoriteButton : '.clone-favorite',
-			plusletIdSelector : 'data-pluslet-id'
+		
 		},
 		strings : {},
 		bindUiActions : function() {
@@ -42,16 +42,13 @@ function CopyClone() {
 					myCopyClone.settings.copyButton,
 					function() {
 
-						var origin_id = $(this).parent().parent().parent()
-								.attr(myCopyClone.settings.plusletIdSelector);
+					    var origin_id = $(this).parent().parent().parent().data().plusletId;
 						var origin_title = $(this).parent().parent().parent()
 								.text().replace(" /Clone Copy/g", "");
+						var origin_type = $(this).parent().parent().parent().data().plusletType;
+					
 
-						// Get the type and pass it to the dropPluset function
-						
-						var type = $("#pluslet-" + origin_id).attr('name');
-
-						ps.dropPluslet(origin_id, type, origin_title);
+						ps.dropPluslet(origin_id, origin_type, origin_title);
 
 					});
 
