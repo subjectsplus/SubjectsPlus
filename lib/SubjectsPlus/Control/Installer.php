@@ -364,7 +364,12 @@ class Installer
 						`subject_id` int(11) NOT NULL,
 						`sort` int(11) NOT NULL,
 						PRIMARY KEY (`collection_subject_id`)
-				) ENGINE=InnoDB  DEFAULT CHARSET=utf8"
+				) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
+
+				"CREATE TABLE IF NOT EXISTS `staff_department` (
+  					`staff_id` int(11) NOT NULL,
+  					`department_id` int(11) NOT NULL
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'"
 			
 			);
 
