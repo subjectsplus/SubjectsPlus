@@ -242,7 +242,7 @@ ob_end_flush ();
 							target="_blank"><i class="fa fa-eye"
 								title="<?php print _("View Guide"); ?>"></i></a></li>
 						<li><a class="showmeta"
-							href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><i
+							href="<?php print $CpanelPath . "guides/metadata.php?iframe=true&subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><i
 								class="fa fa-cog"
 								title="<?php print _("Edit Guide Metadata"); ?>"></i></a></li>
 						<li><a href="#" id="find-trigger"><i class="fa fa-search"
@@ -379,10 +379,15 @@ ob_end_flush ();
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("My Guides"); ?>" class="custom-icon" /><br /><?php print _("My Guides"); ?></a></li>
 
-			<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
+<!--		<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("Image Gallery"); ?>" class="custom-icon" /><br /><?php print _("Assets"); ?></a></li>
 					
+					-->
+					
+      
+      
+      
 		<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>

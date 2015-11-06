@@ -76,7 +76,7 @@ function FindBoxSearch() {
 
 								if (data[i]['content_type'] == "Pluslet") {
 
-									var listItem = "<li data-pluslet-id='"
+								    var listItem = "<li data-pluslet-type='" +data[i].type + "' data-pluslet-id='"
 										+ data[i].id
 										+ "' class=\"pluslet-listing\">"
 										+ "<div class=\"pure-g\">"
@@ -87,8 +87,9 @@ function FindBoxSearch() {
 										+ "</div>" + myFindBoxSearch.strings.findBoxSearchButtons;
 									
 										myFindBoxSearch.settings.findBoxSearchResults.append(listItem);
-									
-								
+										console.log();
+
+								    
 								}
 
 							}

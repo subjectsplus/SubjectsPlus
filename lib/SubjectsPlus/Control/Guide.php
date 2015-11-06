@@ -245,9 +245,14 @@ class Guide
         if ($wintype != "") {
             $action .= "&wintype=pop";
         }
-
+		if ($wintype == "pop") {
+		$copy_guide = "";
+		} else {
+		$copy_guide = "<a href='guide_copy.php'>" . _("Copy an Existing Guide") . "</a>";
+		}
         if ($this->_subject_id) {
             $guide_title_line = _("Edit Existing Guide Metadata");
+			
         } else {
             $guide_title_line = _("Create New Guide");
         }
@@ -263,9 +268,8 @@ class Guide
                       <div class=\"titlebar_options\"></div>
                     </div>
                 <div class=\"pluslet_body\">
-
-                <a href='guide_copy.php'>" . _("Copy an Existing Guide") . "</a>" .
-            "<label for=\"record_title\">" . _("Guide") . "</label>
+				$copy_guide
+			<label for=\"record_title\">" . _("Guide") . "</label>
             <input type=\"text\" name=\"subject\" id=\"record_title\" class=\"pure-input-1-2 required_field\" value=\"" . $this->_subject . "\">
 
             <label for=\"record_shortform\">" . _("Short Form") . "</label>
