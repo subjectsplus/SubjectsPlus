@@ -21,7 +21,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         $this->_subject_id = $subject_id;
 
-        $this->_array_keys = array('Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
+        $this->_array_keys = array('', 'Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
 
 
     }
@@ -113,13 +113,13 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                     $staffSocialMedia = json_decode($data, true);
                 }
 
-                $this->_body .= "<div class=\"subjectSpecialistPluslet\">"; 
+                $this->_body .= "<div class=\"subjectSpecialistPluslet\">";
 
-                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";               
+                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
 
-                $this->_body .= "<ul class='staff-details'>";                
+                $this->_body .= "<ul class='staff-details'>";
 
-                foreach($array_keys as $item):                  
+                foreach($array_keys as $item):
 
                     if(array_key_exists("show{$item}{$staffId}", $this->_extra)) {
 
@@ -159,15 +159,15 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
                             if($key_trimmed == 'showPinterest' && $value[0] == "Yes") {
                                 $this->_body .= "<span class='staff-social'><a href='http://pinterest.com/{$staffSocialMedia['pinterest']}'><i class='fa fa-pinterest-square'></i></a></span>";
-                            }    
+                            }
 
 
                             if($key_trimmed == 'showInstagram' && $value[0] == "Yes") {
                                 $this->_body .= "<span class='staff-social'><a href='http://instagram.com/{$staffSocialMedia['instagram']}'><i class='fa fa-instagram'></i></a></span>";
                             }
 
-                           
-                            
+
+
                         }
                     }
 
