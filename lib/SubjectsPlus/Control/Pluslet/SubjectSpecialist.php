@@ -21,9 +21,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         $this->_subject_id = $subject_id;
 
-        $this->_array_keys = array('', 'Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
-
-
+        $this->_array_keys = array('', 'Name', 'Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
     }
 
     protected function onViewOutput() {
@@ -40,11 +38,8 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         $array_keys = $this->_array_keys;
 
-
         if ($this->_extra != "") {
             $this->_extra = json_decode($this->_extra, true);
-
-
 
             foreach($this->_staffArray as $staffMember):
 
@@ -92,7 +87,6 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                     }
 
                 }
-                //var_dump($staffData);
 
                 $truncated_email = explode("@", $staffData[0]['email']);
 
@@ -115,7 +109,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
                 $this->_body .= "<div class=\"subjectSpecialistPluslet\">";
 
-                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
+                //$this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
 
                 $this->_body .= "<ul class='staff-details'>";
 
@@ -129,6 +123,11 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                         if( !empty($value[0]) ) {
                             $key_trimmed = rtrim($key, '0123456789');
 
+
+                            if($key_trimmed == 'showName' && $value[0] == "Yes") {
+
+                                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
+                            }
 
                             if($key_trimmed == 'showPhoto' && $value[0] == "Yes") {
 
@@ -177,6 +176,8 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
             endforeach;
 
+            $this->_body .= "<script>$('ul.staff-details:empty').parent('div').hide();</script>";
+
         }
     }
 
@@ -193,23 +194,6 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $this->_staffArray = $querier->query($qs);
 
 
-        global $CKPath;
-        global $CKBasePath;
-
-        include ($CKPath);
-        global $BaseURL;
-
-
-        $oCKeditor = new CKEditor($CKBasePath);
-        $oCKeditor->timestamp = time();
-        $config['toolbar'] = 'SubsPlus_Narrow';
-        $config['height'] = '300';
-        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
-
-        $this_instance = "pluslet-update-body-$this->_pluslet_id";
-
-        // Create and output object
-        //$this->_body .= $oCKeditor->editor($this_instance, $this->_body, $config);
 
 
         // make an editable body and title type
