@@ -275,7 +275,7 @@ class Pluslet {
         foreach ($titlebar_styles as $key => $value) {
             $tb_styles .= "<option value=\"$value\" style=\"$value\"";
             if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
-            $tb_styles .= ">$key</option>";
+            $tb_styles .= ">$value</option>";
         }
 
         $box_settings = "<div class=\"box_settings pure-u-1\">
@@ -284,19 +284,8 @@ class Pluslet {
                 <div class=\"pure-u-1-2 delete-trigger\"><a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"" . _("Remove item from this guide") . "\" /></i></a></div>
             </div>
 
-            <form class=\"pure-form box-settings-form\">
-
-                <div class=\"titlebar-styling-section\">
-                        <div class=\"titlebar-styling-label\">
-                            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Box Styling") . "</label>
-                        </div>
-                        <div class=\"titlebar-styling-select\">
-                            <select id=\"titlebar-styling-$this->_pluslet_id\">
-                                $tb_styles
-                            </select>
-                        </div>
-                </div>                
-
+            <form class=\"pure-form box-settings-form\">               
+            <h3>" . _("Settings") . "</h3>
                 <div class=\"onoffswitch titlebar_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"notitle-$this->_pluslet_id\"";
 
@@ -353,8 +342,20 @@ class Pluslet {
 
         $box_settings .= "<span class=\"settings-label-text\">" . _("Open All Links in New Tab") . "</span>
                 </div>
+                <h3>" . _("Styles") . "</h3>
+                <div class=\"titlebar-styling-section\">
+                        <div class=\"titlebar-styling-select\">
+                            <select id=\"titlebar-styling-$this->_pluslet_id\">
+                                $tb_styles
+                            </select>
+                        </div>   
+                                  
+                        <div class=\"titlebar-styling-label\">
+                            <!--   <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Box Styling") . "</label>-->
+                        </div>
+                        
 
-
+                </div> 
             </form>
             <div class=\"pure-g pluslet-metadata\">
                 <div class=\"pure-u-1-2 pluslet_id\">ID $this->_visible_id</div>
