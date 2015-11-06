@@ -40,7 +40,8 @@ function Flyout() {
 			'#show_dblist_options' : '#dblist_options_content',
 			'#show_analytics_options' : '#analytics_options_content',
 			'#show_my_guides' : '#my_guides_content',
-			'#show_image_gallery' : '#image_gallery'
+			'#show_image_gallery' : '#image_gallery',
+			'#show_tabs' : '#tabs_options'
 		},
 		bindUiActions : function() {
 			// Show/Hide 'Find in Guide' form
