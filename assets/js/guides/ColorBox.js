@@ -23,15 +23,14 @@
  	setupAllColorboxes : function()
  	{
  		for (var key in myColorBox.settings.colorBoxes) {
- 			var colorBox = myColorBox.settings.colorBoxes[key];
- 			$(colorBox).colorbox({
- 	 	        iframe: true,
- 	 	        innerWidth:'80%',
- 	 	        innerHeight:'90%',
-
- 	 	        onClosed:function() {
- 	 	        }
- 	 	    });
+ 		    var colorBox = myColorBox.settings.colorBoxes[key];
+ 		        $(colorBox).colorbox({
+ 		            iframe: true,
+ 		            innerWidth: 960,
+ 		            innerHeight: 600,
+ 		            fastIframe: true,
+ 		        });
+ 		
  		} 
  	}
  };

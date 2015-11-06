@@ -242,7 +242,7 @@ ob_end_flush ();
 							target="_blank"><i class="fa fa-eye"
 								title="<?php print _("View Guide"); ?>"></i></a></li>
 						<li><a class="showmeta"
-							href="<?php print $CpanelPath . "guides/metadata.php?subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><i
+							href="<?php print $CpanelPath . "guides/metadata.php?iframe=true&subject_id=$subject_id" . "&amp;wintype=pop"; ?>"><i
 								class="fa fa-cog"
 								title="<?php print _("Edit Guide Metadata"); ?>"></i></a></li>
 						<li><a href="#" id="find-trigger"><i class="fa fa-search"
