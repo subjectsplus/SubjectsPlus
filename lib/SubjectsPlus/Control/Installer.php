@@ -367,8 +367,9 @@ class Installer
 				) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
 
 				"CREATE TABLE IF NOT EXISTS `staff_department` (
-  					`staff_id` int(11) NOT NULL,
-  					`department_id` int(11) NOT NULL
+  					`staff_id` int(11) NOT NULL AUTO_INCREMENT,
+  					`department_id` int(11) NOT NULL,
+  					PRIMARY KEY (`staff_id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'"
 			
 			);
