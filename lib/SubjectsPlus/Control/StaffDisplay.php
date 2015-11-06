@@ -82,7 +82,7 @@ class StaffDisplay {
           
           $items .= "</span></td>
 			<td class=\"$row_colour\">$title $assoc_subjects</td>
-			<td class=\"$row_colour staff-tel-row\">$tel_prefix$tel </td>
+			<td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
 			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
@@ -144,7 +144,7 @@ class StaffDisplay {
           }
 
           if ($current_dept != $dept_id) {
-            $items .= "<tr><td class=\"dept_label\" colspan=\"5\"><a name=\"$dept_id\"></a><h2 class=\"dept_header\">$dept_name&nbsp; &nbsp;" . $tel_prefix . $dept_tel . "</h2></td></tr>";
+            $items .= "<tr><td class=\"dept_label\" colspan=\"5\"><a name=\"$dept_id\"></a><h2 class=\"dept_header\">$dept_name&nbsp; &nbsp;" . $tel_prefix . " " . $dept_tel . "</h2></td></tr>";
           }
 
           $items .= "<tr class=\"$row_colour\">
@@ -164,7 +164,7 @@ class StaffDisplay {
           
           $items .= "</span></td>
     			<td class=\"$row_colour\">$title $assoc_subjects</td>
-    			<td class=\"$row_colour staff-tel-row\">$tel_prefix$tel </td>
+    			<td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
     			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
@@ -280,7 +280,7 @@ class StaffDisplay {
 
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
-          $tel = $tel_prefix . $myrow["tel"];
+          $tel = $tel_prefix . " " . $myrow["tel"];
           $email = $myrow["email"];
           $name_id = explode("@", $email);
 
@@ -366,7 +366,7 @@ class StaffDisplay {
           $staff_id = $myrow["staff_id"];
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
-          $tel = $tel_prefix . $myrow["tel"];
+          $tel = $tel_prefix . " " . $myrow["tel"];
           $email = $myrow["email"];
           $name_id = explode("@", $email);
           $department = $myrow["name"];
