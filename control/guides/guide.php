@@ -385,6 +385,9 @@ ob_end_flush ();
 					
 					-->
 					
+      
+      
+      
 		<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
