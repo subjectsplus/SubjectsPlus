@@ -194,14 +194,21 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $this->_staffArray = $querier->query($qs);
 
 
+        //this should rarely happen, only on pull from libguides xml does it occur
+        if(empty($this->_staffArray)) {
 
+            $this->_body = "There is no staff member associated with this guide. Please select a user for this guide.";
 
-        // make an editable body and title type
-        if ($this->_extra != "") {
-            $this->_extra = json_decode($this->_extra, true);
+        } else {
+
+            // make an editable body and title type
+            if ($this->_extra != "") {
+                $this->_extra = json_decode($this->_extra, true);
+            }
+
+            $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistEditOutput.php' );
         }
 
-        $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistEditOutput.php' );
     }
 
 
