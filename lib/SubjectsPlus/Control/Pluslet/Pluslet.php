@@ -288,7 +288,7 @@ class Pluslet {
 
                 <div class=\"titlebar-styling-section\">
                         <div class=\"titlebar-styling-label\">
-                            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Titlebar Styling") . "</label>
+                            <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Box Styling") . "</label>
                         </div>
                         <div class=\"titlebar-styling-select\">
                             <select id=\"titlebar-styling-$this->_pluslet_id\">
