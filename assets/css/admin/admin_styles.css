@@ -1674,7 +1674,9 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 #colorbox, #cboxOverlay, #cboxWrapper {z-index: 99998;}
 
 
-
+/* Remove blue outline on colorboxes */
+#colorbox:focus {outline:none !important;}
+#cboxWrapper:focus {outline:none !important;}
 
 /* Pure Form overrides for guide page - PV */
 .portal-column .pure-form input,
