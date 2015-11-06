@@ -16,8 +16,7 @@ font-size: 2em;
 </style>
 
 
-<div id="analytics_options_content" class="second-level-content"
-	style="display: none;">
+<div id="analytics_options_content" class="second-level-content" style="display: none;">
 	<h3><?php print _("Analytics"); ?></h3>
 
 	<div class="analytics_display">

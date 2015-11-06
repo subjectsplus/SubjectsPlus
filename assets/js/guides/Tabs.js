@@ -76,6 +76,23 @@ function Tabs() {
                     form[0].reset();
                 }
             });
+            
+            $('#tabs').find(".ui-tabs-nav").sortable({
+                axis: "y",
+                stop: function (event, ui) {
+                    if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
+                        $(tabs).find(".ui-tabs-nav").sortable("cancel");
+                    else {
+                        $(tabs).tabs( "refresh" );
+                        $(tabs).tabs("destroy");
+                        $(tabs).tabs();
+                        $(tabs).tabs('select', 0);
+                        $("#response").hide();
+                        $("#save_guide").fadeIn();
+                    }
+                }
+            });
+                
 
             //setup dialog to edit tab
             var editTabDialog = myTabs.settings.editTabDialog.dialog({
@@ -312,7 +329,7 @@ function Tabs() {
                                 });
                             
                             $('#tabs').data().tabCount++;
-                            console.log(html);
+                            console.log(html)
                            // Layout().layoutSection(sectionId, layout);
                         }
                     });

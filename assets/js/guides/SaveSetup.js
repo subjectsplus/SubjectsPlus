@@ -386,7 +386,7 @@ function SaveSetup() {
 							item_type : pitem_type,
 							clone : isclone,
 							special : pspecial,
-							this_subject_id : subject_id,
+							this_subject_id : Guide().getSubjectId(),
 							boxsetting_hide_titlebar : boxsetting_hide_titlebar,
 							boxsetting_collapse_titlebar : boxsetting_collapse_titlebar,
 							boxsetting_titlebar_styling : boxsetting_titlebar_styling,

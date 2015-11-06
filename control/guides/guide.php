@@ -382,7 +382,10 @@ ob_end_flush ();
 			<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("Image Gallery"); ?>" class="custom-icon" /><br /><?php print _("Assets"); ?></a></li>
-
+					
+		<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
+					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
+					title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
 
 
 			<li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
@@ -452,6 +455,10 @@ ob_end_flush ();
           
           <!--analytics-->
           <?php include_once('flyouts/analytics.php'); ?>
+          
+          
+          <!--analytics-->
+          <?php include_once('flyouts/analytics.php'); ?>
 
           </div>
 
@@ -460,6 +467,10 @@ ob_end_flush ();
 
 <!--  Image Gallery -->
 <?php include_once('flyouts/asset_manager.php')?>
+
+
+          <!--tabs-->
+          <?php include_once('flyouts/tabs.php'); ?>
 
   </div>
 </div>
