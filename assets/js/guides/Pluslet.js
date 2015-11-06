@@ -83,7 +83,7 @@ function Pluslet() {
 			},
 			dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
 				
-				var subjectId = Guide().getSubjectId(); 
+				var subjectId = Guide().getSubjectId();
 			    // Create new node below, using a random number
 
 				var randomnumber=Math.floor(Math.random()*1000001);
@@ -96,7 +96,7 @@ function Pluslet() {
 				$('#new-' + randomnumber).fadeIn('slow').load('helpers/guide_data.php', {
 					from: new_id,
 					flag: 'drop',
-					this_subject_id: subjectId,
+					this_subject_id:  Guide().getSubjectId(),
 					item_type: item_type
 				},
 				function() {
@@ -212,24 +212,24 @@ function Pluslet() {
 
 						// Hide body-content option from box settings options based on TYPE
 
-						for (key in myPluslet.settings.hideBodyContent) {
+						for (var key in myPluslet.settings.hideBodyContent) {
 							var plusletType = myPluslet.settings.hideBodyContent[key];
 							$(plusletType).find('.body_set').addClass('hide-settings');
 						}
 
-						for (key in myPluslet.settings.hideLinksNewTab) {
+						for (var key in myPluslet.settings.hideLinksNewTab) {
 							var plusletType = myPluslet.settings.hideLinksNewTab[key];
 							$(plusletType).find('.links_set').addClass('hide-settings');
 						}
 
-						for (key in myPluslet.settings.hideTitleBar) {
+						for (var key in myPluslet.settings.hideTitleBar) {
 							var plusletType = myPluslet.settings.hideTitleBar[key];
 							$(plusletType).find('.titlebar_set').addClass('hide-settings');
 						}
 
 						// Hide make favorite option from box settings options based on TYPE
 
-						for (key in myPluslet.settings.hideMarkFavorite) {
+						for (var key in myPluslet.settings.hideMarkFavorite) {
 							var plusletType = myPluslet.settings.hideMarkFavorite[key];
 							$(plusletType).find('.fav_set').addClass('hide-settings');
 						}
