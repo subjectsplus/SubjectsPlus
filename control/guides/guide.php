@@ -379,9 +379,11 @@ ob_end_flush ();
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("My Guides"); ?>" class="custom-icon" /><br /><?php print _("My Guides"); ?></a></li>
 
-			<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
+<!--		<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("Image Gallery"); ?>" class="custom-icon" /><br /><?php print _("Assets"); ?></a></li>
+					
+					-->
 					
 		<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
