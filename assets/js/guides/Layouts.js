@@ -161,7 +161,7 @@ function Layout() {
 			var firstColumn = 'div#section_' + sectionId + ' div#container-0';
 			var secondColumn = 'div#section_' + sectionId + ' div#container-1';
 			var thirdColumn = 'div#section_' + sectionId + ' div#container-2';
-			;
+		
 			var section = 'div#section_' + sectionId;
 
 			for ( var k in myLayout.layouts) {
@@ -201,6 +201,9 @@ function Layout() {
 			});
 		},
 
+		
+		
+		
 		activateLayoutButtons : function() {
 			/**
 			 *  
