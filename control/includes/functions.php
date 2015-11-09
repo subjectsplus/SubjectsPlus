@@ -1612,7 +1612,7 @@ function tokenizeText($our_text, $our_subject_id = "") {
         return $our_text;
     }
 
-function listGuides($search = "", $type="all") {
+function listGuides($search = "", $type="all", $display="default") {
     $db = new Querier();
     
     $andclause = "";
@@ -1630,11 +1630,16 @@ function listGuides($search = "", $type="all") {
     $q = "SELECT shortform, subject, type FROM subject WHERE active = '1' " . $andclause . " AND type != 'Placeholder' ORDER BY subject";
    // $r = $db->query($q);
     //print $q;
+
     $row_count = 0;
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
     $db = new Querier;
+
+    switch ($display) {
+      case "default":
+
     $list_guides = "<table class=\"footable foo3\" width=\"98%\" data-filter=#filter-guides>
                     <thead>
                       <tr class=\"staff-heading\">
@@ -1656,6 +1661,40 @@ function listGuides($search = "", $type="all") {
         $row_count++; 
     }
     $list_guides .= "</table>";
+      break;
+      case "2col":
+
+        $col_1 = "<div class=\"pure-u-1-2\">";
+        $col_2 = "<div class=\"pure-u-1-2\">";
+
+        foreach ($db->query($q) as $myrow) {
+
+        $guide_location = $guide_path . $myrow[0];
+
+        $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+        <div class=\"list_bonus\">$myrow[2]</div>
+        </li>";
+
+          if ($row_count & 1) {
+            // odd
+            $col_2 .= $our_item;
+          } else {
+            // even
+            $col_1 .= $our_item;
+          }
+
+        $row_count++;
+        }
+
+        $col_1 .= "</div>";
+        $col_2 .= "</div>";
+
+
+        $list_guides = "<div class=\"pure-g guide_list\">" . $col_1 . $col_2 . "</div>";
+
+      break;
+    }
+
 
     return $list_guides;
 }
