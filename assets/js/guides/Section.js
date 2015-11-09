@@ -23,7 +23,12 @@ function Section() {
 		init: function () {
 		    
 		    mySection.makeSectionSlider();
+		  
 		    mySection.bindUiActions();
+		    
+			document.addEventListener("DOMContentLoaded", function() {
+				mySection.clickInitialSection();
+			});
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -52,6 +57,10 @@ function Section() {
 						// Make sure that the new section can accept drops
 						var drop = new Drag();
 						drop.makeDropable(".dropspotty");
+						
+						$("#save_guide").fadeIn();
+						$('.sp_section_controls').first().show();
+
 					}
 				});
 			});
@@ -71,11 +80,19 @@ function Section() {
 				console.log(selectedSectionId);
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				Layout().activateLayoutButtons();
+				console.log($(this).parent());
 				Layout().highlightLayout($(this).parent())
 				
 			});
 		},
 		makeSectionSlider : function () {
+			
+		},
+		clickInitialSection : function() {
+			
+			$('.sp_section_controls').first().trigger('click');
+			$('.sp_section_controls').first().hide();
+
 			
 		}
 	};
