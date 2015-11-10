@@ -379,6 +379,10 @@ ob_end_flush ();
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("My Guides"); ?>" class="custom-icon" /><br /><?php print _("My Guides"); ?></a></li>
 
+			<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
+							src="<?php print $AssetPath; ?>images/icons/myguides.svg"
+							title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
+
 <!--		<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("Image Gallery"); ?>" class="custom-icon" /><br /><?php print _("Assets"); ?></a></li>
@@ -457,13 +461,18 @@ ob_end_flush ();
           <!--analytics-->
           <?php include_once('flyouts/analytics.php'); ?>
 
+
+
           </div>
 
 		<!--my_guides_list-->
-    <?php include_once('flyouts/my_guides_list.php'); ?>
+		<?php include_once('flyouts/my_guides_list.php'); ?>
 
-<!--  Image Gallery -->
-<?php include_once('flyouts/asset_manager.php')?>
+		<!-- reorder tabs -->
+		<?php include_once('flyouts/tabs.php'); ?>
+
+		<!--  Image Gallery -->
+		<?php include_once('flyouts/asset_manager.php')?>
 
 
 
