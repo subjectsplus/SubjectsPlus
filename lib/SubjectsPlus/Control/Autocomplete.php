@@ -144,7 +144,7 @@ class Autocomplete {
 
 
       case "guide":
-      	$statement = $connection->prepare("SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
+      	$statement = $connection->prepare("SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type',p.type as 'type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
@@ -259,9 +259,7 @@ AND title.title LIKE :search_term");
 
 
         }
-
-
-
+	
         switch($myrow['content_type']) {
 
           case "Record":
@@ -318,7 +316,11 @@ AND title.title LIKE :search_term");
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
 
               $arr[$i]['label'] = html_entity_decode($myrow['label']);
-               $arr[$i]['type'] = $myrow['type'];
+              
+              if (isset($myrow['type'])) {
+              	$arr[$i]['type'] = $myrow['type'];
+              	 
+              }
 
               if (isset($arr[$i]['pluslet_id'])) {
               $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
