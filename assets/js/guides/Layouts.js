@@ -136,10 +136,19 @@ function Layout() {
 			 * This function highlights the icon for the currently selected layout 
 			 * 
 			 */
-			var dataLayout = sectionSelector.first().data().layout;
+			
+			if (typeof sectionSelector.data() != 'undefined' ) {
+				var dataLayout = sectionSelector.first().data().layout;
+
+			} else {
+				var dataLayout = '3-3-3';
+
+
+			}
+
 			for (var k in myLayout.layouts) {	
 				if (dataLayout === k) {
-					
+					console.log("Adding active...");
 					$(myLayout.layouts[k].selector).addClass('active-layout-icon');
 				} else {
 					$(myLayout.layouts[k].selector).removeClass('active-layout-icon');

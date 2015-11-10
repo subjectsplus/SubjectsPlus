@@ -16,13 +16,10 @@ function CopyClone() {
 			cloneButton : '.clone-button',
 			copyButton : '.copy-button',
 			cloneFavoriteButton : '.clone-favorite',
-			
 		
 		},
 		strings : {
-			
-			noLinkNotice : 'I\'m sorry, but you can\'t link a linked box.'
-			
+			noLinking : "I'm sorry, but you cannot link a linked box"
 		},
 		bindUiActions : function() {
 
@@ -38,12 +35,13 @@ function CopyClone() {
 						var origin_title = $(this).parent().parent().find(
 								'.box-search-label').text();
 						var origin_type = $(this).parent().parent().parent().data().plusletType;
-						console.log(origin_type);
 
-						ps.dropPluslet('', origin_type, origin_id, origin_title);
-
+						if (origin_type === 'Clone') {
+						alert(myCopyClone.strings.noLinking);	
 						
-						
+						} else {
+						ps.dropPluslet('', 'Clone', origin_id, origin_title);
+						}
 					});
 
 			$('body').on(
@@ -55,13 +53,9 @@ function CopyClone() {
 						var origin_title = $(this).parent().parent().parent()
 								.text().replace(" /Clone Copy/g", "");
 						var origin_type = $(this).parent().parent().parent().data().plusletType;
-						console.log(origin_type);
-						if (origin_type == 'Clone') {	
-							alert(myCopyClone.strings.noLinkNotice);
-						} else {
-							ps.dropPluslet(origin_id, origin_type, origin_title);
+					
 
-						}
+						ps.dropPluslet(origin_id, origin_type, origin_title);
 
 					});
 
