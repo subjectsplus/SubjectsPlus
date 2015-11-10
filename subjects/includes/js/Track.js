@@ -3,6 +3,10 @@
  * @constructor Track
  * @author little9 (Jamie Little)
  * 
+ * This sets up the events that are tracked by the SP analytics
+ * scripts 
+ * 
+ * 
  */
 
 var Track = {

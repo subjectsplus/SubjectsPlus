@@ -2,6 +2,9 @@
  * @constructor Hash
  * @author Jamie Little (little9)
  * 
+ * Object used to do things with the hashes contained in Urls. This should allow you
+ * to link to a specific pluslet or tab.
+ * 
  */
 
 var Hash = {
