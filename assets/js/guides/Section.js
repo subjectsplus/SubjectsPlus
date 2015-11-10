@@ -74,9 +74,12 @@ function Section() {
 			 */
 			$('body').on('click','.sp_section_controls', function() {
 				$('.sp_section_controls').removeClass('sp_section_selected');
+				$('.sp_section').removeClass('section_selected_area');
+
 				$('#layout_options_content').data('selected-section', '');
 
 				$(this).toggleClass('sp_section_selected');
+				$(this).parent().toggleClass('section_selected_area');
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				Layout().activateLayoutButtons();
@@ -101,6 +104,7 @@ function Section() {
 				// Hide the first section because the user may not use sections.
 
 				$('.sp_section_controls').first().hide();
+				$('.sp_section').first().removeClass('section_selected_area');
 			
 			}
 

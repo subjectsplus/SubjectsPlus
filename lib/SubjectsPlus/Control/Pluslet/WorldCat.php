@@ -20,7 +20,7 @@ class Pluslet_WorldCat extends Pluslet {
   protected function onEditOutput()
   {
   	
-    $this->_body = "<p>" . _("Click 'Save' to view your search box.") . "</p>";
+    $this->_body = "<p class=\"faq-alert\">" . _("Click 'Save' to view your search box.") . "</p>";
    
   }
 
