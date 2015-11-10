@@ -25,7 +25,6 @@ class Pluslet_SubjectSpecialist extends Pluslet {
     }
 
     protected function onViewOutput() {
-
         // Get librarians associated with this guide
         $querier = new Querier();
         $qs = "SELECT *
@@ -37,6 +36,8 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $this->_staffArray = $querier->query($qs);
 
         $array_keys = $this->_array_keys;
+
+        $body_content = "";
 
         if ($this->_extra != "") {
             $this->_extra = json_decode($this->_extra, true);
@@ -101,17 +102,15 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 }
 
 
-
                 if ($staffData[0]['social_media'] != "") {
                     $data = html_entity_decode($staffData[0]['social_media']);
                     $staffSocialMedia = json_decode($data, true);
                 }
 
-                $this->_body .= "<div class=\"subjectSpecialistPluslet\">";
 
-                //$this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
+                $body_content .= "<div class=\"subjectSpecialistPluslet\">";
 
-                $this->_body .= "<ul class='staff-details'>";
+                $body_content .= "<ul class='staff-details'>";
 
                 foreach($array_keys as $item):
 
@@ -123,60 +122,69 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                         if( !empty($value[0]) ) {
                             $key_trimmed = rtrim($key, '0123456789');
 
-
                             if($key_trimmed == 'showName' && $value[0] == "Yes") {
 
-                                $this->_body .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
+                                $body_content .= "<h4>{$staffData[0]['fname']} {$staffData[0]['lname']}</h4>";
                             }
 
                             if($key_trimmed == 'showPhoto' && $value[0] == "Yes") {
 
-                                $this->_body .= "<div class='staff-image'><img id='staffPhoto{$this->staffId}' class=\"staff-photo\" src='{$staff_picture}' /></div>";
+                                $body_content .= "<div class='staff-image'><img id='staffPhoto{$this->staffId}' class=\"staff-photo\" src='{$staff_picture}' /></div>";
                             }
 
                             if($key_trimmed == 'showTitle' && $value[0] == "Yes") {
 
-                                $this->_body .= "<li class='staff-content'>".$staffData[0]['title']."</li>";
+                                $body_content .= "<li class='staff-content'>".$staffData[0]['title']."</li>";
                             }
 
                             if($key_trimmed == 'showEmail' && $value[0] == "Yes") {
-                                $this->_body .= "<li class='staff-content'><a href='mailto:".$staffData[0]['email']."'>".$staffData[0]['email']."</a></li>";
+                                $body_content .= "<li class='staff-content'><a href='mailto:".$staffData[0]['email']."'>".$staffData[0]['email']."</a></li>";
                             }
 
                             if($key_trimmed == 'showPhone' && $value[0] == "Yes") {
-                                $this->_body .= "<li class='staff-content'>".$this->tel_prefix.' - '.$staffData[0]['tel']."</li>";
+                                $body_content .= "<li class='staff-content'>".$this->tel_prefix.' - '.$staffData[0]['tel']."</li>";
                             }
 
-
-                             if($key_trimmed == 'showFacebook' && $value[0] == "Yes") {
-                                $this->_body .= "<span class='staff-social'><a href='http://facebook.com/{$staffSocialMedia['facebook']}'><i class='fa fa-facebook-square'></i></a></span>";
+                            if($key_trimmed == 'showFacebook' && $value[0] == "Yes") {
+                                $body_content .= "<span class='staff-social'><a href='http://facebook.com/{$staffSocialMedia['facebook']}'><i class='fa fa-facebook-square'></i></a></span>";
                             }
 
                             if($key_trimmed == 'showTwitter' && $value[0] == "Yes") {
-                                $this->_body .= "<span class='staff-social'><a href='http://twitter.com/{$staffSocialMedia['twitter']}'><i class='fa fa-twitter-square'></i></a></span>";
+                                $body_content .= "<span class='staff-social'><a href='http://twitter.com/{$staffSocialMedia['twitter']}'><i class='fa fa-twitter-square'></i></a></span>";
                             }
 
                             if($key_trimmed == 'showPinterest' && $value[0] == "Yes") {
-                                $this->_body .= "<span class='staff-social'><a href='http://pinterest.com/{$staffSocialMedia['pinterest']}'><i class='fa fa-pinterest-square'></i></a></span>";
+                                $body_content .= "<span class='staff-social'><a href='http://pinterest.com/{$staffSocialMedia['pinterest']}'><i class='fa fa-pinterest-square'></i></a></span>";
                             }
-
 
                             if($key_trimmed == 'showInstagram' && $value[0] == "Yes") {
-                                $this->_body .= "<span class='staff-social'><a href='http://instagram.com/{$staffSocialMedia['instagram']}'><i class='fa fa-instagram'></i></a></span>";
+                                $body_content .= "<span class='staff-social'><a href='http://instagram.com/{$staffSocialMedia['instagram']}'><i class='fa fa-instagram'></i></a></span>";
                             }
-
-
-
                         }
                     }
 
                 endforeach;
-                $this->_body .= "</ul>";
-                $this->_body .= '</div>';
+                $body_content .= "</ul>";
+                $body_content .= '</div>';
 
             endforeach;
 
-            $this->_body .= "<script>$('ul.staff-details:empty').parent('div').hide();</script>";
+            if($this->_pluslet_id != '') {
+
+                $qry = "SELECT body FROM pluslet WHERE pluslet_id = {$this->_pluslet_id}";
+                $qry_result = $querier->query($qry);
+                $body_content .= "<div class='pluslet_body_content'>". $qry_result[0]['body']."</div>";
+
+            } else {
+
+                $body_content .= "";
+            }
+
+            $body_content .= "<script>$('.pluslet_body_content').appendTo($('.subjectSpecialistPluslet:first-child'));</script>";
+
+            $body_content .= "<script>$('ul.staff-details:empty').parent('div').hide();</script>";
+
+            $this->_body = $body_content;
 
         }
     }
@@ -192,6 +200,18 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 ORDER BY lname, fname";
 
         $this->_staffArray = $querier->query($qs);
+
+
+        if($this->_pluslet_id != '') {
+
+            $qry = "SELECT body FROM pluslet WHERE pluslet_id = {$this->_pluslet_id}";
+            $qry_result = $querier->query($qry);
+            $this->_body_content = $qry_result;
+
+        } else {
+
+            $this->_body_content = "";
+        }
 
 
         //this should rarely happen, only on pull from libguides xml does it occur

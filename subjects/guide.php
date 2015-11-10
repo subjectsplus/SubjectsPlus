@@ -170,17 +170,17 @@ if (count($all_tabs) > 1) {
 }
 
 // Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "/track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title . "\" />";
+$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title . "\" />";
 
 print $tracking_image;
 print $social_and_search;
 
 ?>
 
-<div id="tabs">
-    <div id="main-content">
-        
-        <div id="tab-container">
+<div id="tabs" class="hide-tabs-fouc">
+	<div id="main-content" data-subject="<?php echo scrubData($_GET['subject']); ?>" data-url="<?php echo getSubjectsURL(); ?>" data-subject-id="<?php echo $this_id; ?>">
+
+		<div id="tab-container">
             <?php
 			
 			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>'; 
@@ -205,16 +205,20 @@ print $social_and_search;
 
             ?>
 
-        </div> <!-- end tab-container -->
-        
-        <div id="tab-body" class="<?php print $bonus_class; ?>">
+        </div>
+		<!-- end tab-container -->
+
+		<div id="tab-body" class="<?php print $bonus_class; ?>">
             <?php
             $lobjGuide->outputTabs('public');
 
             ?>
-        </div> <!-- end tab-body -->
-    </div> <!-- end main-content -->
-</div> <!-- end tabs -->
+        </div>
+		<!-- end tab-body -->
+	</div>
+	<!-- end main-content -->
+</div>
+<!-- end tabs -->
 
 
 <script type="text/javascript" language="javascript">
@@ -222,7 +226,7 @@ print $social_and_search;
     $(document).ready(function(){
 
         // .togglebody makes the body of a pluslet show or disappear
-        $('.titlebar_text').livequery('click', function(event) {
+        $('body').on('click','.titlebar_text', function(event) {
 
             $(this).parent().next('.pluslet_body').toggle('slow');
         });
@@ -241,7 +245,7 @@ print $social_and_search;
     });
 
     $(window).load(function(){
-        // jQuery functions to initialize after the page has loaded.
+        // $ functions to initialize after the page has loaded.
 
         function findStuff() {
             $(".find_feed").each(function(n) {
@@ -258,29 +262,27 @@ print $social_and_search;
 // this messes stuff up if it displays for tabless page
 
 if ($multi_tab == TRUE) { ?>
-//setup jQuery UI tabs and dialogs
-jQuery(function() {
+//setup $ UI tabs and dialogs
+$(function() {
    var tabTitle = $( "#tab_title" ),
    tabContent = $( "#tab_content" ),
    tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
    tabCounter = <?php echo ( count($all_tabs) ); ?>;
    var tabs = $( "#tabs" ).tabs();
-console.log(tabs);
    //add click event for external url tabs
-   jQuery('li[data-external-link]').each(function()
+   $('li[data-external-link]').each(function()
 					 {
        if($(this).attr('data-external-link') != "")
        {
-	 jQuery(this).children('a[href^="#tabs-"]').on('click', function(evt)
+	 $(this).children('a[href^="#tabs-"]').on('click', function(evt)
 						       {
-								console.log(evt);
 	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
 	     //evt.stopImmediatePropagation
 		 
 	   });
 
-	 jQuery(this).children('a[href^="#tabs-"]').each(function() {
-	   var elementData = jQuery._data(this),
+	 $(this).children('a[href^="#tabs-"]').each(function() {
+	   var elementData = $._data(this),
 	   events = elementData.events;
 
 	   var onClickHandlers = events['click'];
@@ -290,7 +292,6 @@ console.log(tabs);
 	     return;
 	   }
 	
-		console.log("ahh");
 	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
 	 });
        }
@@ -303,86 +304,6 @@ console.log(tabs);
 </script>
 
 
-<script>
-
-	
-	   jQuery('#sp_search').autocomplete({
-
-	     minLength	: 3,
-	     source		: "<?php echo getSubjectsURL(); ?>" + "/includes/autocomplete_data.php?collection=guide&subject_id=" + <?php echo $this_id; ?> ,
-	     focus: function(event, ui) {
-
-	       event.preventDefault();
-	       jQuery(".find-guide-input").val(ui.item.label);
-
-
-	     },
-	     select: function(event, ui) {
-	     	var tab_id = ui.item.hash.split('-')[1];
-	     	var box_id = ui.item.hash.split('-')[2];
-	     	var selected_box = ".pluslet-" + box_id;
-     
-                console.log(selected_box);
-     if ($('#tabs-1').text()) {
-       	$('#tabs').tabs('select', tab_id);
-     }
-     
-	     
-
-	     	jQuery(selected_box).effect("pulsate", {
-	     		times:1
-	     	}, 2000);
-	     	window.location.hash = 'box-' + box_id;
-         }
-	   });
-	   
-	   $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\"><ul><li><a onclick=\"window.print();\" class=\"pure-button pure-button-topsearch\">Print Current Tab</a></li><li><a onclick=\"printView();\" class=\"pure-button pure-button-topsearch\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
-
-       $('.print-img-no-tabs').click(function(){ window.print(); });   
-
-    jQuery(document).ready(function() {
-
-       jQuery('a[href*="#tabs-"]').on('click', function(event, ui) {
-           event.preventDefault();
-
-           var tab_id = event.target.hash.split('-')[1];
-           var box_id = event.target.hash.split('-')[2];
-           var selected_box = ".pluslet-" + box_id;
-           if ($('#tabs-1').text()) {
-               $('#tabs').tabs('select', tab_id);
-           }
-           jQuery(selected_box).effect("pulsate", {
-               times:1
-           }, 2000);
-           window.location.hash = 'box-' + box_id;
-       });
-
-
-       $('.table-of-contents').on('click', function(e){
-
-           e.preventDefault();
-           var tab_index = $(this).data("tab_index");
-           var pluslet_id = $(this).data("pluslet_id");
-           var box_id = $(this).attr("id");
-           //console.log(box_id);
-
-           $('#tabs').tabs('select', tab_index);
-
-           jQuery("#pluslet-" + pluslet_id).effect("pulsate", {
-               times:2
-           }, 2000);
-           window.location.hash = 'box-' + pluslet_id;
-
-       });
-
-
-
-    });
-
-		 
-	   
-	   
-</script>
 
 <!--[if IE]>
 <style>
@@ -394,78 +315,45 @@ console.log(tabs);
 <![endif]-->
 
 <style>
-  .ui-tabs-vertical { width: 55em; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-  </style>
-  
+.ui-tabs-vertical {
+	width: 55em;
+}
+
+.ui-tabs-vertical .ui-tabs-nav {
+	padding: .2em .1em .2em .2em;
+	float: left;
+	width: 12em;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li {
+	clear: left;
+	width: 100%;
+	border-bottom-width: 1px !important;
+	border-right-width: 0 !important;
+	margin: 0 -1px .2em 0;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li a {
+	display: block;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+	padding-bottom: 0;
+	padding-right: .1em;
+	border-right-width: 1px;
+}
+
+.ui-tabs-vertical .ui-tabs-panel {
+	padding: 1em;
+	float: right;
+	width: 40em;
+}
+</style>
+
+
+
+
 <script>
-
-$('.dropspotty').each(function() { 
-
-	try {
-		
-var data_children =	$(this).attr('data-children'); 
-var childs = data_children.split();
-
-childs.forEach(function(data) {
-	
-	var split_ids = data.split(',');
-	console.log(split_ids);
-	split_ids.forEach(function(data) {
-		
-		$('#' + data ).hide();
-console.log(data);
-	})
-
-});
-
-
-	} catch(e) {
-		
-	}
-
-});
-
-
-$('.dropspotty').each(function() {
-
-	if ($(this).attr('data-children')) {
-
-		$(this).find('a').append(' ▾');
-		
-	} else {
-	}
-	
-});
-	
-
-$('.dropspotty').click(function() {
-
-	if ($(this).attr('data-children')) {
-
-		
-		
-		var children = $(this).attr('data-children').split(',');
-	console.log(children);
-	    children.forEach(function(data){
-	           $('#' + data).addClass("child-tab");
-
-	           $('#' + data ).addClass( "ui-tabs-vertical ui-helper-clearfix" );
-	           
-	           $('#' + data).toggle();
-
-	          
-	           
-		    });
-	}
-
-});
-
-
 
 var $target_blank_links = $(".target_blank_links");
 $target_blank_links.each(function() {
@@ -473,37 +361,8 @@ $target_blank_links.each(function() {
 
 });
 
-
 </script>
 
-<script>
-//Tab / Link tracking scripts
-
-$(document).ready(function() {
-	
- 
-$('body').on('click','.ui-tabs-anchor' , function() { 
-     var tab_name = $(this).text();
-
-	$.get("<?php global $PublicPath; print $PublicPath; ?>/track.php?subject=<?php echo scrubData($_GET['subject']); ?>&page_title=<?php echo scrubData($page_title); ?>&event_type=tab_click&tab_name=" + tab_name, function(data) {
-
-	console.log("Tracking tab click");
-	});
-
-	
-});
-
-$('a').each(function(){
-	$(this).addClass('track-me');
-});
-
-$('body').on('click', '.track-me', function() {
-	$.get('<?php print $PublicPath; ?>/track.php', {'event_type':'link', 'link_url':$(this).attr('href'),'subject': "<?php echo scrubData($_GET['subject']); ?>" });	
-});
-
-});
-
-</script>
 
 
 

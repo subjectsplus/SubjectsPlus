@@ -1,3 +1,4 @@
+
 <form class="pure-form pure-form-stacked" id="subjectSpecialistForm">
 
     <?php
@@ -81,16 +82,28 @@
 
         endforeach;
 
-
     endforeach;
+
+    if(isset($this->_body_content[0]['body'])) {
+        $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'>{$this->_body_content[0]['body']}</textarea>";
+    } else {
+        $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'></textarea>";
+    }
+
+
     ?>
 
 </form>
 
-
+<?php global $BaseURL; ?>
+<script src="<?php echo $BaseURL ?>ckeditor/ckeditor.js"></script>
 <script>
 
     $(document).ready(function(){
+
+        CKEDITOR.replace( 'editor1', {
+            height: 250
+        } );
 
         $(".checkbox_ss").each(function() {
 

@@ -3168,7 +3168,8 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 }
 
-#slider_options, #tabs_options {
+
+#slider_options {
   background-color: #FFFFFF;
   clear: left;
   list-style-type: none;
@@ -3185,11 +3186,13 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
   box-shadow: 1px 1px 1px 1px #ccc;
 }
 
-#slider_options p, #tabs_options p {
+#slider_options p {
   color: #333;
   padding: .5em;
   font-size: smaller;
 }
+
+
 
 .slider_options_guide {
   display: none;

@@ -138,14 +138,17 @@ function Layout() {
 			 */
 			
 			if (typeof sectionSelector.data() != 'undefined' ) {
-				var dataLayout = sectionSelector.first().data().layout;
-
+				
+				var dataLayout = sectionSelector.first().attr('data-layout');
 			} else {
-				var dataLayout = '3-3-3';
+				var dataLayout = '6-6-0';
 
 
 			}
 
+			console.log(dataLayout);
+
+			
 			for (var k in myLayout.layouts) {	
 				if (dataLayout === k) {
 					console.log("Adding active...");

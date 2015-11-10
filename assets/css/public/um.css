@@ -1261,6 +1261,8 @@ h4.toc-heading {margin: 6px 0; font-weight: bold;}
 /* Subject Specialist Pluslet - NEW - Front-end*/
 .subjectSpecialistPlusletOld {margin: 0 0 12px 0; display: block; padding-bottom: 10px;}
 .subjectSpecialistPluslet {margin: 0 0 12px 0; display: inline-block; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
+
+
 .staff-image {width: 90px; float:left; display: inline-block; margin-right: 20px; }
 
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}

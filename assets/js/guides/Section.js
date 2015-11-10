@@ -21,14 +21,16 @@ function Section() {
 			mySection.chooseSectionForLayouts();
 		},
 		init: function () {
-		    
-		    mySection.makeSectionSlider();
-		  
+		     
 		    mySection.bindUiActions();
 		    
-			document.addEventListener("DOMContentLoaded", function() {
-				mySection.clickInitialSection();
-			});
+		    
+		    $(window).bind("load", function() {
+		    	// Click the first section after everything has loaded.
+			    mySection.clickInitialSection();
+
+		    });
+			
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -61,6 +63,12 @@ function Section() {
 						// When you add a section fade in the save button 
 						$("#save_guide").fadeIn();
 						$('.sp_section_controls').first().show();
+						
+						var newSection = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
+						newSection.trigger('click');
+
+						Layout().highlightLayout(newSection.parent());
+					    
 
 					}
 				});
@@ -90,9 +98,6 @@ function Section() {
 
 				
 			});
-		},
-		makeSectionSlider : function () {
-			
 		},
 		clickInitialSection : function() {
 			
