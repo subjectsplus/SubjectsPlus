@@ -23,7 +23,12 @@ function Section() {
 		init: function () {
 		    
 		    mySection.makeSectionSlider();
+		  
 		    mySection.bindUiActions();
+		    
+			document.addEventListener("DOMContentLoaded", function() {
+				mySection.clickInitialSection();
+			});
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -33,7 +38,7 @@ function Section() {
 
 			$(lstrSelector).on('click', function() {
 
-				var lintSelected = $(tabs).tabs('option', 'selected');
+				var selectedTab = $(tabs).tabs('option', 'selected');
 
 				$.ajax({
 					
@@ -46,12 +51,17 @@ function Section() {
 					dataType : "html",
 					success : function(html) {
 
-						$('div#tabs-' + lintSelected).append(html);
+						$('div#tabs-' + selectedTab).append(html);
 						$(document).scrollTop($('body').height());
 
 						// Make sure that the new section can accept drops
 						var drop = new Drag();
 						drop.makeDropable(".dropspotty");
+						
+						// When you add a section fade in the save button 
+						$("#save_guide").fadeIn();
+						$('.sp_section_controls').first().show();
+
 					}
 				});
 			});
@@ -68,14 +78,32 @@ function Section() {
 
 				$(this).toggleClass('sp_section_selected');
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
-				console.log(selectedSectionId);
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				Layout().activateLayoutButtons();
+				// Highlight the layout that is associated with the section. 
 				Layout().highlightLayout($(this).parent())
+				// Show the initial section. Now you are using sections so you will need the section contorls.
+				$('.sp_section_controls').first().show();
+
 				
 			});
 		},
 		makeSectionSlider : function () {
+			
+		},
+		clickInitialSection : function() {
+			
+			// Click the first section to mark it as active 
+			$('.sp_section_controls').first().trigger('click');
+			
+			if ($('.sp_section_controls').size() >= 1) {
+				// If there are already sections on the page don't hide the first section
+				// Hide the first section because the user may not use sections.
+
+				$('.sp_section_controls').first().hide();
+			
+			}
+
 			
 		}
 	};

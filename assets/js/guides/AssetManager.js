@@ -25,7 +25,7 @@
  		myAssetManager.activateDropZone();
  	},
  	activateDropZone : function() {
- 		
+ 		/*
  		Dropzone.options.imagezone = {
  				  init: function() {
  				    this.on("success", function(file) { $('.dz-success-mark').show(); });
@@ -33,6 +33,7 @@
  				    
  				  }
  				};
+ 				*/
  	}
  };
  

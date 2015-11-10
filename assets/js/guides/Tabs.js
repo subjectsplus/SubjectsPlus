@@ -26,11 +26,17 @@ function Tabs() {
         },
         strings: {
             tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
+            reorderTabString: "<li  class='panel-list-item'>Please save all changes before sorting tabs.</li>",
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
         bindUiActions: function () {
             myTabs.removePlusletsFromCurrentTab();
             myTabs.makeTabsClickable();
+
+            myTabs.reorderTabsFlyout();
+            myTabs.fetchTabsFlyout();
+            myTabs.sortTabsFlyout();
+
        
         },
         init: function () {
@@ -47,6 +53,7 @@ function Tabs() {
 
 			var sec = Section();
 			sec.makeAddSection('a[id="add_section"]');
+
 
         
         },
@@ -376,6 +383,73 @@ function Tabs() {
                myTabs.setupTabs(tab_id[1]);
 
             });
+        },
+        fetchTabsFlyout : function(subjectId) {
+
+            $(".flyout-tabs").empty();
+
+            jQuery.ajax({
+                url: "./helpers/fetch_tabs.php?subject_id=" + subjectId,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+
+                    if(!data.tabs.length) {
+                        //no results
+                        $(".flyout-tabs").append( "<li  class='panel-list-item'>You do not have any tabs.</li>");
+                    }
+
+                    $.each(data.tabs, function(idx, obj) {
+                        $(".flyout-tabs").append( "<li id='item_"+ obj.tab_id +"' class='panel-list-item' title='" + obj.label + "'><i class='fa fa-bars'></i> " +obj.label + "</li>");
+                    });
+                }
+            });
+        },
+        sortTabsFlyout : function() {
+
+            $("#flayout-tab-list").sortable({connectWith: "#flayout-tab-list"});
+
+            $('#save_tab_order_btn').on('click', function () {
+
+                var data = $("#flayout-tab-list").sortable('serialize');
+
+                $.post('./helpers/save_tab_order.php', {"data": data}, function(d){
+
+                }).done(function() {
+
+                    location.reload();
+
+                });
+
+            });
+
+        },
+        reorderTabsFlyout : function() {
+            document.addEventListener("DOMContentLoaded", function() {
+
+                var subjectId = Guide().getSubjectId();
+
+                $('#show_tabs').on('click', function() {
+
+                    if( $("#save_guide").is(':visible') ) {
+
+                        $(".flyout-tabs").append( myTabs.strings.reorderTabString);
+
+                        $("#save_tab_order_btn").hide();
+
+                    } else {
+
+                        myTabs.fetchTabsFlyout(subjectId);
+
+                        myTabs.sortTabsFlyout();
+
+                        $("#save_tab_order_btn").show();
+                    }
+
+                });
+
+            });
+
         }
     }
     return myTabs;
