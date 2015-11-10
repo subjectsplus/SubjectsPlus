@@ -18,7 +18,10 @@ function Analytics() {
 			statsDataUrl : './helpers/stats_data.php?short_form='
 
 		},
-		strings : {},
+		strings : {
+			
+		
+		},
 		bindUiActions : function() {
 		},
 		init : function() {
@@ -31,7 +34,13 @@ function Analytics() {
 			$.get(myAnalytics.settings.statsDataUrl
 					+ $('#shortform').data().shortform, function(data) {
 
-				$('.total-views-count').html(data.total_views);
+				if (data.total_views != null) {
+					console.log(data.total_views)
+					$('.no-analytics').hide();
+					$('.total-views-count').show();
+					$('.total-views-count').html(data.total_views);
+
+				}
 
 				if (data.tab_clicks != "") {
 					$('.tab-click-header').show();

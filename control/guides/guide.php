@@ -384,14 +384,6 @@ ob_end_flush ();
 					title="<?php print _("Image Gallery"); ?>" class="custom-icon" /><br /><?php print _("Assets"); ?></a></li>
 					
 					-->
-					
-      
-      
-      
-		<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
-					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
-					title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
-
 
 			<li><a href="#" id="main-options-close"><?php print _("Close"); ?></a></li>
 		</ul>
@@ -474,8 +466,6 @@ ob_end_flush ();
 <?php include_once('flyouts/asset_manager.php')?>
 
 
-          <!--tabs-->
-          <?php include_once('flyouts/tabs.php'); ?>
 
   </div>
 </div>
