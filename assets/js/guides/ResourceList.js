@@ -66,20 +66,20 @@ function ResourceList() {
 				 **/
 
 
-				this.bindUiActions();
-				return this;
+				myResourceList.bindUiActions();
+				return myResourceList;
 			},
 
 
 			bindUiActions: function () {
 				/**  Used to bind the object's UI actions. Like 'click' or 'hover'. */
 
-				this.addToList();
-				this.resetList();
-				this.toggleIcons();
+				myResourceList.addToList();
+				myResourceList.resetList();
+				myResourceList.toggleIcons();
 
-				this.databaseSearch();
-				this.addListToPage();
+				myResourceList.databaseSearch();
+				myResourceList.addListToPage();
 
 
 
@@ -113,9 +113,9 @@ function ResourceList() {
 				/** This function resets the list of database tokens. **/
 
 
-				this.settings.dbListResetButton.on("click", function () {
-					this.settings.dbListResults.empty();
-					this.settings.dbSearchBox.val("");
+				myResourceList.settings.dbListResetButton.on("click", function () {
+					myResourceList.settings.dbListResults.empty();
+					myResourceList.settings.dbSearchBox.val("");
 				});
 			},
 
@@ -132,9 +132,9 @@ function ResourceList() {
 					toggleElement.children().find('.fa-minus').toggle();
 
 
-					include_icons = toggleElement.parent().find('.show-icons-toggle').hasClass('active') | 0;
-					include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0;
-					display_note = toggleElement.parent().find('.include-note-toggle').hasClass('active') | 0;
+					var include_icons = toggleElement.parent().find('.show-icons-toggle').hasClass('active') | 0;
+					var include_description = toggleElement.parent().find('.show-description-toggle').hasClass('active') | 0;
+					var display_note = toggleElement.parent().find('.include-note-toggle').hasClass('active') | 0;
 
 					var display_options = '' + include_icons + '' + include_description + '' + display_note + "";
 					toggleElement.parent().parent().data({ 'display_options': display_options });
