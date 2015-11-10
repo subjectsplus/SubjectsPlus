@@ -31,7 +31,7 @@ class SectionData {
 					// print section and slider div
 					$new_id = rand ( 1, 100000 );
 					
-					print "<div id=\"section_$new_id\" class=\"sp_section pure-g\" data-layout='3-3-3'>";
+					print "<div id=\"section_$new_id\" class=\"sp_section pure-g\" data-layout='4-4-4'>";
 					print "<div class=\"sp_section_controls\">";
 					print "<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" title=\"Move Section\"/>
 					<i class=\"fa fa-trash-o section_remove\" title=\"Delete Section\"></i>
