@@ -323,7 +323,7 @@ AND title.title LIKE :search_term");
               }
 
               if (isset($arr[$i]['pluslet_id'])) {
-              $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
+              $arr[$i]['pluslet_id'] = $myrow['id'];
 			 
               }
           } else {
@@ -331,7 +331,7 @@ AND title.title LIKE :search_term");
               $arr[$i]['url'] = 'guide.php?subject=' . $myrow['short_form'] . '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['hash'] = '#box-' . $myrow['additional_id'] . '-' . $myrow['id'];
               $arr[$i]['tab_index'] = $myrow['additional_id'];
-                $arr[$i]['pluslet_id'] = $myrow['pluslet_id'];
+                $arr[$i]['pluslet_id'] = $myrow['id'];
             }
             break;
 
