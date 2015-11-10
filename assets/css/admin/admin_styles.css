@@ -19,7 +19,16 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   url('../../assets/css/admin/font/NotoSans-Bold.svg#NotoSansBold') format('svg');
   font-weight: 700;
   font-style: bold;
-},
+}
+
+@font-face {
+  font-family: 'NotoSansRegular';
+  src: url('../../assets/css/admin/font/NotoSans-Regular.eot');
+  src: url('../../assets/css/admin/font/NotoSans-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/css/admin/font/NotoSans-Regular.woff') format('woff'),
+  url('../../assets/css/admin/font/NotoSans-Regular.ttf') format('truetype'),
+  url('../../assets/css/admin/font/NotoSans-Regular.svg#NotoSansRegular') format('svg');
+}
 
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
@@ -46,6 +55,11 @@ a, a:focus {
 a img {
   border: none;
 }
+
+:focus {
+    border-color: #e091b0 !important;
+}
+
 /* no's*/
 .no-border {
   border: 0 !important
@@ -68,10 +82,10 @@ a img {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: .9em;
+  font-family: 'NotoSansRegular'; /* before--> Helvetica Neue",Helvetica,Arial,sans-serif*/
+  font-size: 14px;
   text-align: left;
-  line-height: 1.5em;
+  line-height: 20px;
   color: #333;
   background: #e3e1d9 url(../../assets/images/admin/mission_control_lg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -200,7 +214,7 @@ header {
   text-decoration: none;
   padding: .5em 0.5em;
   text-align: left;
-  font-size: 1.2em;
+  font-size: 1.25em;
   color: #858585;
 }
 
@@ -263,7 +277,7 @@ header {
 
 #topnav > li > div ul li a, #topnav > li.selected > div ul li a {
   color: #333 !important;
-  font-size:1.1em;
+  font-size:1.075em;
 }
 
 #topnav > li > div ul li:hover {
@@ -363,6 +377,10 @@ Page structure - added by PV
 
 html,body { height:100%; }
 
+html, button, input, select, textarea {
+    font-family: 'NotoSansRegular'; /* before -> sans-serif*/
+}
+
 .guide-parent-wrap {margin: 0 0 0 0;}
 
 .panel-wrap {background-color: transparent; float: left; width:60px; height:100%;}
@@ -390,7 +408,8 @@ html,body { height:100%; }
 
 .guide-title-area h2 {
   margin: 12px 0 0 40px;
-  font-size: 1.3em;
+  font-size: 1.375em;
+  font-family: 'NotoSansBold';
 }
 
 .guide-title-area h2 a {
@@ -428,7 +447,7 @@ html,body { height:100%; }
 
 #hide_header {
   background-color: #fff;
-  padding: 7px 0;
+  padding: 7px 0 6px 0;
   font-size: 1.2em;
   cursor: pointer;
   text-align:center;
@@ -463,7 +482,7 @@ html,body { height:100%; }
 .top-panel-options-list li a {
   text-decoration: none !important;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.825em;
   color: #fff;
 }
 .top-panel-options-list li a i{
@@ -532,10 +551,11 @@ html,body { height:100%; }
 
 .second-level-content {background-color: transparent; padding:5px;}
 
-.second-level-content h3 {margin: 0 0 0.75em 0 !important;}
+.second-level-content h3 {margin: 0 0 0.75em 0 !important; font-size: 1.15em; font-family: 'NotoSansBold';}
 
 
 
+/* Boxes Panel */
 /* The draggable boxes from the admin guide flyout */
 
 .box_options_container {
@@ -582,7 +602,7 @@ html,body { height:100%; }
 }
 
 .box-item .icon-text {
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 0.9em;
   padding-top: 4px;
   display: block;
@@ -680,7 +700,9 @@ html,body { height:100%; }
 
 #show_findbox_options i {font-size: 32px;}
 
-/* Find Boxes Tabs */
+
+
+/* Find Boxes Panel - done in Tabs */
 
 #find-box-tabs {
    background: #484848;
@@ -689,23 +711,23 @@ html,body { height:100%; }
    border-left: 1px solid #3e3e3e;
    border-top: 1px solid #3e3e3e; 
    border-radius: 4px;
-   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+   font-family: "NotoSansRegular";
    margin: 0 0 20px 0;
 }
 
 .find-box-tab-list {padding:0 !important; background: none !important; border: none !important;}
 
 .find-box-tab-list li {margin: 0 1px 1px 0 !important; border: none !important; background: #e5e4e4 !important;}
-.find-box-tab-list li a {padding: 0.25em 0.75em !important; color: #999 !important; font-size: 0.9em !important;}
+.find-box-tab-list li a {padding: 0.25em 0.75em !important; color: #999 !important; font-size: 0.85em !important;}
 
 .find-box-tab-list li.ui-tabs-active {background: #d5d5d5 !important; color: #FFF !important;}
 .find-box-tab-list li.ui-tabs-active a {color: #333 !important;}
 
-.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 14px; line-height: 1.3em; max-height:540px; }
+.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 0.85em; line-height: 1.3em; max-height:540px; }
 
 .find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:524px;}
 
-.guides-display .guide-list {width: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #666 !important; border: 1px solid #bcbbbb;padding: 4px;}
+.guides-display .guide-list {width: 100%; font-family: "NotoSansRegular"; color: #666 !important; border: 1px solid #bcbbbb;padding: 4px;}
 
 .guides-display .guide-list option {width: 100%;}
 
@@ -714,17 +736,17 @@ html,body { height:100%; }
 .pluslet-list .pluslet-listing,
 .findbox-searchresults .pluslet-listing{padding:5px;}
 
-.box-search-label { width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } 
+.box-search-label { width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: "NotoSansRegular" !important; 
+font-size: 0.85em;} 
 
-.clone-button, .copy-button {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
+.clone-button, .copy-button {font-family: 'NotoSansBold' !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
 
-#search-tab .findbox-search {width:96%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; border: 1px solid #bcbbbb; border-radius: 2px; padding: 4px;}
+#search-tab .findbox-search {width:96%; font-family: 'NotoSansRegular' !important; border: 1px solid #bcbbbb; border-radius: 2px; padding: 4px;}
 
 .pure-button-secondary, 
 a.pure-button-secondary {
   background-color: #d5d5d5;
   color: #666 !important;
-  font-weight: bold;
   text-shadow: none !important;
 }
 
@@ -745,7 +767,7 @@ a.pure-button-secondary:hover {
    border-left: 1px solid #3e3e3e;
    border-top: 1px solid #3e3e3e; 
    border-radius: 4px;
-   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+   font-family: 'NotoSansRegular';
    margin: 0 0 20px 0;
    overflow: auto; max-height:275px;
    width: 100% !important;
@@ -758,6 +780,7 @@ a.pure-button-secondary:hover {
 .fav-box-item {
   font-size:12px !important;
   cursor:pointer;
+  font-family: 'NotoSansRegular' !important;
 }
 
 .fav-box-item:before, .fav-template-item:before {
@@ -785,7 +808,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .clone-input {display:none;}
 
 
-/* Layouts Icons */
+
+
+/* Layouts Icons Panel */
 
 .layout_options {
   cursor: pointer;
@@ -835,7 +860,10 @@ li.fav-box-item:hover::before {color: #C03957;}
 .layout_options .top-panel-option-item:hover {background-color:#C03957;}
 
 
-/* Custom DB List */
+
+
+/* Custom DB List Panel */
+
 .dblist-display {
   background-color: #d5d5d5;
   padding: 5px;
@@ -847,7 +875,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 .databases-search {
   border: 1px solid #bcbbbb;
   border-radius: 2px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-family: 'NotoSansRegular' !important;
   padding: 4px;
   width: 96%;
   margin-bottom: 10px;
@@ -860,10 +888,10 @@ li.fav-box-item:hover::before {color: #C03957;}
   font-size: 0.9em;
 }
 
-.databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 0; overflow: auto; max-height:415px; width: 98% !important;}
+.databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 5px 0 0 0; overflow: auto; max-height:415px; width: 98% !important;}
 
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 4px 5px 0 5px; 
-  color: #333; font-size: 14px; line-height: 1.3em; display:inline-block; margin: 0;} 
+  color: #333; font-size: 0.95em; line-height: 1.3em; display:inline-block; margin: 0;} 
 
 .list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
 
@@ -873,7 +901,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .db-list-content {padding:8px;display:none; margin: 20px 0; width: 295px !important; overflow: hidden !important;}
 
-.db-list-content h4 {margin: 0 0 10px 0;}
+.db-list-content h4 {margin: 0; font-family: 'NotoSansBold';}
 
 .db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; overflow: auto; max-height:230px; width: 281px !important;}
 
@@ -886,25 +914,35 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .fa-minus { color: #D24D57; font-size:16px; padding: 0 2px 0 0; }
 
-.db-list-buttons { font-size: 0.8em; display:none;}
+.db-list-buttons { font-size: 0.825em; display:none;}
+
+.db-list-buttons .dblist-button, 
+.db-list-buttons .dblist-reset-button {font-family:'NotoSansBold';}
+
+.dblist-reset-button {
+    background-color: #d5d5d5;
+    color: #666;
+    text-shadow: none;
+}
 
 
 
 /* My Guides Panel */
+
 .user_guides_display {
   background: #484848 none repeat scroll 0 0;
     border-color: #3e3e3e #525252 #525252 #3e3e3e;
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'NotoSansRegular';
     margin: 0 0 20px;
     max-height: 385px;
     overflow: auto;
     width: 98% !important;
 }
 
-.myguide-button {font-size:0.8em;}
+.myguide-button {font-size:0.825em; font-family:'NotoSansBold';}
 
 .user_guides_display .panel-list-item a:before {
     content:"\f15b";
@@ -916,8 +954,40 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 
+/*Analytics Panel */
+
+.analytics_display {}
+
+.master-counter {
+  background: #f2f2f2 none repeat scroll 0 0;
+  border-color: #3e3e3e #525252 #525252 #3e3e3e;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0 0 20px;
+  padding: 10px;
+}
+
+.total-views-header { font-family:'NotoSansBold'; font-size: 1.4em; margin: 0; line-height: 1.6em; color: #858585;}
+.total-views-count {font-size: 1.1em; color: #e488b6;}
+
+.tab-click-header {display:none; margin:0;}
+
+.tab-click:before {
+  font-family: 'FontAwesome';
+  content: "\f245";
+  font-size: 12px;
+  padding: 0 8px 0 4px;
+}
+
+.tab-click {font-size:12px;}
+
+
+
+
 
 /*TABS Items Area --where the individual tabs go */
+/******** Guide TABS ******/
 
 #tabs.ui-tabs {border-radius: 0 !important;} /* container */
 
@@ -1021,32 +1091,40 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 
+
 /*TABS Containers Area --where the pluslets go */
 
 .sptab {
   background: none !important;
 }
 
+
 /*TABS Section --where the pluslets go */
 
 .sp_section {
   background-color: none;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0;
-  margin-bottom: 2em;
+  margin-bottom: 3.5em;
+  position: relative;
 }
+
+.section_selected_area {border: 1px solid rgba(192,57,87, 0.8);}
+
 
 .sp_section_controls {
-  border-bottom: 3px solid #555;
-  padding-bottom: 1em;
-  background-color: #fff;
-  padding-top: 1em;
+  padding: 6px;
+  background-color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  bottom:100%;
+  left:0;
+  width:52px;
+  border-radius: 2px 2px 0 0;
 
 }
 
-.sp_section_selected {
-	
-	border-bottom: 3px solid #C03957;
+.sp_section_selected {	
+	background-color: rgba(192,57,87, 0.8);
 }
 
 .sp_section:nth-child(1) .sp_section_controls {
@@ -1055,25 +1133,22 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .section_sort {
   cursor: move;
-  float: left;
-  margin-top: -1em;
-  padding: 0.2em;
-
+  margin: 0 15px 0 0;
+  font-size: 20px !important;
+  color: #858585;
 }
 
 .section_remove
-{  cursor: pointer;
-  float: left;
-  margin-right: 1em;
-  margin-top: -20px;
-  padding: 0.15em;
-  font-size: 30px !important;
+{  cursor: pointer;  
+   font-size: 20px !important;
+   color: #858585;
 }
+
+.sp_section_selected .section_sort, .sp_section_selected .section_remove {color: #FFF;}
 
 .sp_section_slider
 {
   margin-left: 4.5em;
-
 }
 
 /* Default CSS for the columns in a section */
@@ -1081,21 +1156,20 @@ li.fav-box-item:hover::before {color: #C03957;}
 #container-0, 
 #container-1,
 #container-2 {
-  float: left;
-  margin: 5px;
-  padding: 5px;
+  float: left;  
+  min-height: 400px;
+}
+
+.container-area {
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 2px;
   min-height: 400px;
 }
 
-#container-1 {
-  /*width: 60%;*/
-}
+#container-0 .container-area {margin:0 5px 0 0; padding:0 5px 10px 5px;}
+#container-1 .container-area {margin:0 5px 0 5px; padding:0 5px 10px 5px; }
+#container-2 .container-area {margin:0 0 0 5px; padding:0 5px 10px 5px; }
 
-#container-2 {
-  /*width: 35%; */
-}
 
 #container-0 h2 {
   font-size: 16px;
@@ -1120,6 +1194,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   border: 1px dashed #858585;
   width: 100%;
   margin-bottom: 10px;
+  margin-top: 5px;
   background-color: rgba(255,255,255,0.6);
   text-align: center;
 }
@@ -1159,6 +1234,8 @@ li.fav-box-item:hover::before {color: #C03957;}
   visibility: visible !important;
   height: 50px !important;
 }
+
+.ui-sortable-helper {width:35% !important; background-color: #858585 !important;}
 
 
 
@@ -1563,6 +1640,13 @@ h4.guide-select-heading {margin: 6px 0;}
 
 
 
+/* HTML5 Video Pluslet */
+.video-container {margin-bottom: 10px;}
+
+
+
+
+
 
 /*** toggle pluslet body --CBR */
 .pluslet_body_open {
@@ -1709,7 +1793,9 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
   background-color: rgba(192,57,87, 0.8);
   box-shadow: none;
   color: #FFFFFF !important;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+  font-family: "NotoSansBold" !important;
+  font-size: 0.9em !important;   
 }
 
 .portal-column .pure-form input.pure-button-pluslet {padding: 4px 10px !important; width: auto;}
@@ -1838,6 +1924,12 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 }
 
 
+
+
+
+
+/* jQuery UI Override - PV */
+.ui-widget {font-family: 'NotoSansRegular' !important;}
 
 
     
@@ -3378,6 +3470,8 @@ li.hidden_tab.ui-state-default
 }
 
 } /* end last responsive block */
+
+
 
 .fa-inactive {color: #ccc;}
 

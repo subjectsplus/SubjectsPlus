@@ -957,7 +957,7 @@ class Guide
 
             if ($this->_isAdmin) {
         		print "<div class=\"sp_section_controls\">
-    						<img src=\"$IconPath/hand_cursor-26.png\" class=\"section_sort\" title=\"Move Section\" />
+    						<i class=\"fa fa-arrows section_sort\" title=\"Move Section\"></i>
                             <i class=\"fa fa-trash-o section_remove\" title=\"Delete Section\"></i>
 
     						<div id=\"slider_section_{$lobjSection['section_id']}\"  class=\"sp_section_slider\"></div>
@@ -1092,13 +1092,14 @@ class Guide
         global $AssetPath;
         global $IconPath;
         $col = "<div id=\"container-" . $i . "\" class='pure-u-1-3'  \">
-            <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
-            <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
-            </div>
+            <div class=\"container-area\">
+                <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
+                    <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
+                </div>
         
-            <div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
-            $content . "<div></div>"
-            . '</div></div>';
+                <div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
+                $content . "<div></div>"
+            . '</div></div></div>';
 
         return $col;
     }
