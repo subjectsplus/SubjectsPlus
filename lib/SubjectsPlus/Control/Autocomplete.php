@@ -245,11 +245,6 @@ AND title.title LIKE :search_term");
         }
 
 
-        if (isset($myrow['content_type'])) {
-          $arr[$i]['content_type'] = $myrow['content_type'];
-
-        }
-
         if (isset( $myrow['parent'])) {
           $arr[$i]['parent'] = $myrow['parent'];
         }
