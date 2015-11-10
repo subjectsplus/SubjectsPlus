@@ -178,9 +178,9 @@ print $social_and_search;
 ?>
 
 <div id="tabs">
-    <div id="main-content">
-        
-        <div id="tab-container">
+	<div id="main-content">
+
+		<div id="tab-container">
             <?php
 			
 			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>'; 
@@ -205,16 +205,20 @@ print $social_and_search;
 
             ?>
 
-        </div> <!-- end tab-container -->
-        
-        <div id="tab-body" class="<?php print $bonus_class; ?>">
+        </div>
+		<!-- end tab-container -->
+
+		<div id="tab-body" class="<?php print $bonus_class; ?>">
             <?php
             $lobjGuide->outputTabs('public');
 
             ?>
-        </div> <!-- end tab-body -->
-    </div> <!-- end main-content -->
-</div> <!-- end tabs -->
+        </div>
+		<!-- end tab-body -->
+	</div>
+	<!-- end main-content -->
+</div>
+<!-- end tabs -->
 
 
 <script type="text/javascript" language="javascript">
@@ -345,6 +349,8 @@ console.log(tabs);
        jQuery('a[href*="#tabs-"]').on('click', function(event, ui) {
            event.preventDefault();
 
+           
+           
            var tab_id = event.target.hash.split('-')[1];
            var box_id = event.target.hash.split('-')[2];
            var selected_box = ".pluslet-" + box_id;
@@ -354,7 +360,7 @@ console.log(tabs);
            jQuery(selected_box).effect("pulsate", {
                times:1
            }, 2000);
-           window.location.hash = 'box-' + box_id;
+           window.location.hash = 'tab-' + tab_id;
        });
 
 
@@ -394,14 +400,41 @@ console.log(tabs);
 <![endif]-->
 
 <style>
-  .ui-tabs-vertical { width: 55em; }
-  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-  .ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
-  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-  </style>
-  
+.ui-tabs-vertical {
+	width: 55em;
+}
+
+.ui-tabs-vertical .ui-tabs-nav {
+	padding: .2em .1em .2em .2em;
+	float: left;
+	width: 12em;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li {
+	clear: left;
+	width: 100%;
+	border-bottom-width: 1px !important;
+	border-right-width: 0 !important;
+	margin: 0 -1px .2em 0;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li a {
+	display: block;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+	padding-bottom: 0;
+	padding-right: .1em;
+	border-right-width: 1px;
+}
+
+.ui-tabs-vertical .ui-tabs-panel {
+	padding: 1em;
+	float: right;
+	width: 40em;
+}
+</style>
+
 <script>
 
 $('.dropspotty').each(function() { 
