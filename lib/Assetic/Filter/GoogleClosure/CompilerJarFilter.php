@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ namespace Assetic\Filter\GoogleClosure;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
+use Assetic\Util\FilesystemUtils;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
@@ -60,13 +61,13 @@ class CompilerJarFilter extends BaseCompilerFilter
         }
 
         if (null !== $this->jsExterns) {
-            $cleanup[] = $externs = tempnam(sys_get_temp_dir(), 'assetic_google_closure_compiler');
+            $cleanup[] = $externs = FilesystemUtils::createTemporaryFile('google_closure');
             file_put_contents($externs, $this->jsExterns);
             $pb->add('--externs')->add($externs);
         }
 
         if (null !== $this->externsUrl) {
-            $cleanup[] = $externs = tempnam(sys_get_temp_dir(), 'assetic_google_closure_compiler');
+            $cleanup[] = $externs = FilesystemUtils::createTemporaryFile('google_closure');
             file_put_contents($externs, file_get_contents($this->externsUrl));
             $pb->add('--externs')->add($externs);
         }
@@ -95,7 +96,7 @@ class CompilerJarFilter extends BaseCompilerFilter
             $pb->add('--flagfile')->add($this->flagFile);
         }
 
-        $pb->add('--js')->add($cleanup[] = $input = tempnam(sys_get_temp_dir(), 'assetic_google_closure_compiler'));
+        $pb->add('--js')->add($cleanup[] = $input = FilesystemUtils::createTemporaryFile('google_closure'));
         file_put_contents($input, $asset->getContent());
 
         $proc = $pb->getProcess();
