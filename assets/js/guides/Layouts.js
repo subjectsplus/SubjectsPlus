@@ -117,7 +117,7 @@ function Layout() {
 			},
 			'8-4-0' : {
 				selector : '#col-84',
-				pureClasses : [ 'pure-u-1-2', 'pure-u-1-2', 'hidden-column' ],
+				pureClasses : [ 'pure-u-3-4', 'pure-u-1-4', 'hidden-column' ],
 				moveColumns : {thirdToSecond : [2,1]}
 			},
 			'4-4-4' : {
@@ -127,7 +127,7 @@ function Layout() {
 			},
 			'3-6-3' : {
 				selector : '#col-363',
-				pureClasses : [ 'pure-u-1-3', 'pure-u-1-2', 'pure-u-1-3' ],
+				pureClasses : [ 'pure-u-1-4', 'pure-u-1-2', 'pure-u-1-4' ],
 				moveColumns : {}
 			}
 		},
