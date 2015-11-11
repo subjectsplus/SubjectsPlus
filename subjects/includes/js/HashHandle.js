@@ -37,10 +37,7 @@ var Hash = {
 					$('#tabs').tabs('select', tabIndex);
 				});
 			};
-			
-			
 
-			
 		},
 		
 		processPlusletHash : function () {
@@ -65,14 +62,18 @@ var Hash = {
 					 $("#pluslet-" + plusletIndex).effect("pulsate", {
 			               times:2
 			           }, 2000);
-					 
-					 
-					 
+
 				});
 			}
 			
 		},
 		addTabHash : function() {
+			/**
+			 * 
+			 * This ads the hash to the url when you click on a tab
+			 * to surface the hash links
+			 * 
+			 */
 		   
 			$('a[href*="#tabs-"]').on('click', function(event, ui) {
 		           event.preventDefault();
@@ -91,6 +92,11 @@ var Hash = {
 		},
 		
 		tocHashClick : function() {
+			/**
+			 * This addes the click events to TOC boxes that move you
+			 * to specific boxes. 
+			 * 
+			 */
 		$('.table-of-contents').on('click', function(e){
 	           e.preventDefault();
 	           var tabIndex = $(this).data("tab_index");

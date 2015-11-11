@@ -9,7 +9,8 @@ namespace SubjectsPlus\Control;
 
 class Logger {
 	public function importLog($log_text = "") {
-		$formatted_text = "<p>" . $log_text . "</p>";
+	
+		$formatted_text = "<p>" . json_encode($log_text) . "</p>";
 		
 		$log_directory = getControlPath () . "logs/";
 		$log_file = $log_directory . "import_log.html";
