@@ -454,8 +454,8 @@ ob_end_flush ();
           <?php include_once('flyouts/create_database_list.php'); ?>
           
           
-          <!--analytics-->
-          <?php include_once('flyouts/analytics.php'); ?>
+          <!--tabs-->
+          <?php include_once('flyouts/tabs.php'); ?>
           
           
           <!--analytics-->
