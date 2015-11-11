@@ -30,7 +30,7 @@ function Pluslet() {
 				myPluslet.makeEditable('a[id*=edit]', subjectId);
 				myPluslet.makeDeleteable('a[id*=delete]');
 				myPluslet.makeDeleteable('.section_remove', 'sections');
-				myPluslet.expandCollapseCSS();
+
 			},
 			bindUiActions : function() {
 				myPluslet.expandPluslet();
@@ -134,11 +134,17 @@ function Pluslet() {
 
 			expandPluslet : function() {
 				//Expand/Collapse Trigger CSS for all Pluslets on a Tab
-				$( '#expand_tab' ).click(function() { 
-					$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
-					$('.pluslet_body').toggle();
-					$('.pluslet_body').toggleClass('pluslet_body_closed');
+				document.addEventListener("DOMContentLoaded", function() {
+
+					$( '#expand_tab' ).click(function() {
+						console.log('expand');
+						$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+						$('.pluslet_body').toggle();
+						$('.pluslet_body').toggleClass('pluslet_body_closed');
+					});
+
 				});
+
 			},
 
 
@@ -340,12 +346,13 @@ function Pluslet() {
 			
 			expandCollapseCSS: function () {
 			    //Expand/Collapse Trigger CSS for all Pluslets on a Tab
-
-			    $("#expand_tab").click(function () {
-			        $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
-			        $('.pluslet_body').toggle();
-			        $('.pluslet_body').toggleClass('pluslet_body_closed');
-			    });
+				document.addEventListener("DOMContentLoaded", function() {
+					$("#expand_tab").click(function () {
+						$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+						$('.pluslet_body').toggle();
+						$('.pluslet_body').toggleClass('pluslet_body_closed');
+					});
+				});
 			}
 
         
