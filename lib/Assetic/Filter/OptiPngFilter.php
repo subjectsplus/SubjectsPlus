@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * Runs assets through OptiPNG.
@@ -52,10 +53,10 @@ class OptiPngFilter extends BaseProcessFilter
             $pb->add('-o')->add($this->level);
         }
 
-        $pb->add('-out')->add($output = tempnam(sys_get_temp_dir(), 'assetic_optipng'));
+        $pb->add('-out')->add($output = FilesystemUtils::createTemporaryFile('optipng_out'));
         unlink($output);
 
-        $pb->add($input = tempnam(sys_get_temp_dir(), 'assetic_optipng'));
+        $pb->add($input = FilesystemUtils::createTemporaryFile('optinpg_in'));
         file_put_contents($input, $asset->getContent());
 
         $proc = $pb->getProcess();

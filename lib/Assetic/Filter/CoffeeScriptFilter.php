@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * Compiles CoffeeScript into Javascript.
@@ -27,6 +28,7 @@ class CoffeeScriptFilter extends BaseNodeFilter
 
     // coffee options
     private $bare;
+    private $noHeader;
 
     public function __construct($coffeeBin = '/usr/bin/coffee', $nodeBin = null)
     {
@@ -39,9 +41,14 @@ class CoffeeScriptFilter extends BaseNodeFilter
         $this->bare = $bare;
     }
 
+    public function setNoHeader($noHeader)
+    {
+        $this->noHeader = $noHeader;
+    }
+
     public function filterLoad(AssetInterface $asset)
     {
-        $input = tempnam(sys_get_temp_dir(), 'assetic_coffeescript');
+        $input = FilesystemUtils::createTemporaryFile('coffee');
         file_put_contents($input, $asset->getContent());
 
         $pb = $this->createProcessBuilder($this->nodeBin
@@ -52,6 +59,10 @@ class CoffeeScriptFilter extends BaseNodeFilter
 
         if ($this->bare) {
             $pb->add('--bare');
+        }
+
+        if ($this->noHeader) {
+            $pb->add('--no-header');
         }
 
         $pb->add($input);
