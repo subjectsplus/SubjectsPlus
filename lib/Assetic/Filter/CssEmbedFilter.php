@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,6 +14,7 @@ namespace Assetic\Filter;
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
 use Assetic\Factory\AssetFactory;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * CSSEmbed filter
@@ -120,7 +121,7 @@ class CssEmbedFilter extends BaseProcessFilter implements DependencyExtractorInt
         }
 
         // input
-        $pb->add($input = tempnam(sys_get_temp_dir(), 'assetic_cssembed'));
+        $pb->add($input = FilesystemUtils::createTemporaryFile('cssembed'));
         file_put_contents($input, $asset->getContent());
 
         $proc = $pb->getProcess();

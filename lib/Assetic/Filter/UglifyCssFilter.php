@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * UglifyCss filter.
@@ -31,7 +32,7 @@ class UglifyCssFilter extends BaseNodeFilter
 
     /**
      * @param string $uglifycssBin Absolute path to the uglifycss executable
-     * @param string $nodeBin       Absolute path to the folder containg node.js executable
+     * @param string $nodeBin      Absolute path to the folder containg node.js executable
      */
     public function __construct($uglifycssBin = '/usr/bin/uglifycss', $nodeBin = null)
     {
@@ -97,7 +98,7 @@ class UglifyCssFilter extends BaseNodeFilter
         }
 
         // input and output files
-        $input = tempnam(sys_get_temp_dir(), 'input');
+        $input = FilesystemUtils::createTemporaryFile('uglifycss');
 
         file_put_contents($input, $asset->getContent());
         $pb->add($input);

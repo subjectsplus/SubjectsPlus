@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,6 +14,7 @@ namespace Assetic\Filter\Yui;
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
 use Assetic\Filter\BaseProcessFilter;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * Base YUI compressor filter.
@@ -86,9 +87,9 @@ abstract class BaseCompressorFilter extends BaseProcessFilter
         }
 
         // input and output files
-        $tempDir = realpath(sys_get_temp_dir());
-        $input = tempnam($tempDir, 'YUI-IN-');
-        $output = tempnam($tempDir, 'YUI-OUT-');
+        $tempDir = FilesystemUtils::getTemporaryDirectory();
+        $input = tempnam($tempDir, 'assetic_yui_input');
+        $output = tempnam($tempDir, 'assetic_yui_output');
         file_put_contents($input, $content);
         $pb->add('-o')->add($output)->add('--type')->add($type)->add($input);
 

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,6 +14,7 @@ namespace Assetic\Filter;
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
 use Assetic\Factory\AssetFactory;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * Loads STYL files.
@@ -92,7 +93,7 @@ EOF;
 
         $pb = $this->createProcessBuilder();
 
-        $pb->add($this->nodeBin)->add($input = tempnam(sys_get_temp_dir(), 'assetic_stylus'));
+        $pb->add($this->nodeBin)->add($input = FilesystemUtils::createTemporaryFile('stylus'));
         file_put_contents($input, sprintf($format,
             json_encode($asset->getContent()),
             json_encode($parserOptions),

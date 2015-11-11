@@ -3,7 +3,7 @@
 /*
  * This file is part of the Assetic package, an OpenSky project.
  *
- * (c) 2010-2013 OpenSky Project Inc
+ * (c) 2010-2014 OpenSky Project Inc
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ namespace Assetic\Filter;
 
 use Assetic\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
+use Assetic\Util\FilesystemUtils;
 
 /**
  * Runs assets through jpegtran.
@@ -86,7 +87,7 @@ class JpegtranFilter extends BaseProcessFilter
             $pb->add('-restart')->add($this->restart);
         }
 
-        $pb->add($input = tempnam(sys_get_temp_dir(), 'assetic_jpegtran'));
+        $pb->add($input = FilesystemUtils::createTemporaryFile('jpegtran'));
         file_put_contents($input, $asset->getContent());
 
         $proc = $pb->getProcess();

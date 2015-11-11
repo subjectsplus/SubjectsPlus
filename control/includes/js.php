@@ -2,15 +2,8 @@
     header('Content-Type: text/javascript');
     header('Cache-control: private');
     header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 21600));
-
-//header('Cache-Control: no-cache, no-store, must-revalidate'); // HTTP 1.1.
-//header('Pragma: no-cache'); // HTTP 1.0.
-//header('Expires: 0'); // Proxies.
-
+    
     require_once(__DIR__ . "/functions.php");
-    //require_once(__DIR__ . DIRECTORY_SEPARATOR . "autoloader.php");
-
-
 
     use Assetic\Asset\FileAsset;
     use Assetic\Asset\GlobAsset;
@@ -51,32 +44,24 @@
 
              ));
 
-    //include guide.js if reffer is from guide.php
 
-//if (isset( $_SERVER['HTTP_REFERER'])) {
-
-//	$lobjSplit = explode( '/', $_SERVER['HTTP_REFERER']);
-  //  if( strpos($lobjSplit[count($lobjSplit) - 1], 'guide.php') !== FALSE && $lobjSplit[count($lobjSplit) - 2] == 'guides' )
-    //{
     	$am->set('guidejs', new AssetCache(
              new GlobAsset($assets . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR .  'guides' . DIRECTORY_SEPARATOR . '*.js')
 
              ,new FilesystemCache($cache)
 
             ));
- //   }
-//} else { }
-    // Apply the JSMinPlus filter to all the files
-    $jquery = new AssetCollection(array (new AssetReference($am, 'jquery')) );
-    $jquery_ui = new AssetCollection(array (new AssetReference($am, 'jquery_ui')) );
-    $other_js = $am->has('guidejs') ? new AssetCollection(array (new AssetReference($am, 'otherjs'), new AssetReference($am, 'guidejs')))
-    	: new AssetCollection(array (new AssetReference($am, 'otherjs')));
+    	
 
-    // Place jQuery first in the final output
-    $javascripts = new AssetCollection(array ($jquery, $jquery_ui, $other_js ));
+    	$js = new AssetCollection(
+    			 
+    			array(new AssetReference($am, 'jquery'),
+    					new AssetReference($am, 'jquery_ui'),
+    					new AssetReference($am,'otherjs'),
+    					new AssetReference($am, 'guidejs'))
+    			 
+    	);
+    	
+   echo $js->dump();
 
-
-
-
-
-    echo $javascripts->dump();
+ 
