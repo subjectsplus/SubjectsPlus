@@ -1,26 +1,26 @@
 /**
- * @constructor Hash
- * @author Jamie Little (little9)
+ * 
+ *  @author Jamie Little (little9)
  * 
  * Object used to do things with the hashes contained in Urls. This should allow you
  * to link to a specific pluslet or tab.
  * 
  */
 
-var Hash = {
+var hash = {
 		
 		init : function() {
 			
-			Hash.bindUiActions();
-			Hash.processTabHash();
-			Hash.processPlusletHash();
+			hash.bindUiActions();
+			hash.processTabHash();
+			hash.processPlusletHash();
 		
 		},
 		
 		bindUiActions : function() {
 		
-			Hash.addTabHash();
-			Hash.tocHashClick();
+			hash.addTabHash();
+			hash.tocHashClick();
 			
 		},
 		processTabHash : function() {

@@ -221,7 +221,7 @@ function resourceList() {
 			addListToPage: function () {
 				/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
 				myResourceList.settings.dbListButton.on("click", function () {
-					var ps = Pluslet();
+					var ps = pluslet();
 					ps.dropPluslet('', 'Basic', '');
 					var waitCKEDITOR = setInterval(function () {
 						if (window.CKEDITOR) {

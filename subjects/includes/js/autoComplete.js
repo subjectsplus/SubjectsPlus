@@ -1,19 +1,19 @@
 /**
- * @constructor AutoComplete
+ * 
  * @author little9 (Jamie Little)
  * 
  * Activates the autocomplete search box  
  * 
  */
 
-var AutoComplete = {
+var autoComplete = {
 	
 		init : function() {
-			AutoComplete.bindUiActions();
+			autoComplete.bindUiActions();
 		},
 		
 		bindUiActions : function() {
-			AutoComplete.activateAutoComplete();
+			autoComplete.activateAutoComplete();
 		},
 		
 		settings : {
@@ -25,7 +25,7 @@ var AutoComplete = {
 			  $('#sp_search').autocomplete({
 
 				     minLength	: 3,
-				     source		: AutoComplete.settings.subjectsUrl + AutoComplete.settings.autoCompletePath + AutoComplete.settings.subjectId,
+				     source		: autoComplete.settings.subjectsUrl + autoComplete.settings.autoCompletePath + autoComplete.settings.subjectId,
 				     focus: function(event, ui) {
 
 				       event.preventDefault();
