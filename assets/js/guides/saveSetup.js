@@ -511,9 +511,9 @@ function saveSetup() {
 		         
 		            var g = guide();
 		            
-		            FavoriteBox().getUserFavoriteBoxes(g.getStaffId());
-		            FavoriteBox().markAsFavorite();
-		            CopyClone().markAsLinked();
+		            favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+		            favoriteBox().markAsFavorite();
+		            copyClone().markAsLinked();
 
 
 
