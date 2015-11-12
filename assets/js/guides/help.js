@@ -1,13 +1,11 @@
 /**
  * Activates the help buttons on pluslets
  *  
- * @constructor Tabs
- * 
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Help() {
+function help() {
 	"use strict";
 
  	var myHelp = {

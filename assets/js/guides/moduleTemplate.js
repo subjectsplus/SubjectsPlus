@@ -2,8 +2,6 @@
 * Something something.
 * 
 * 
-* @constructor Thing
-* 
 *  
 **/
 /*jslint browser: true*/
@@ -12,7 +10,7 @@
 /*
  
  
- function Thing() {
+ function thing() {
  
  	var myThing = {
  	

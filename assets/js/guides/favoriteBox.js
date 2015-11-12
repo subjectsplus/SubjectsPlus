@@ -2,13 +2,13 @@
 * Setup for the favorite box that appears on the inital flyout.
 * 
 * 
-* @constructor FavoriteBox
+* favoriteBox
 * 
 *  
 **/
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function FavoriteBox() {
+function favoriteBox() {
 
     var myFavoriteBox = {
 
@@ -23,12 +23,16 @@ function FavoriteBox() {
         bindUiActions: function () {
         },
         init: function () {
+      	  document.addEventListener("DOMContentLoaded", function(event) {
+
             myFavoriteBox.getUserFavoriteBoxes();
+            
+      	  });
             myFavoriteBox.markAsFavorite();
         },
         getUserFavoriteBoxes: function () {
 
-            var g = Guide();
+            var g = guide();
             var staffId = g.getStaffId();
 
             myFavoriteBox.settings.favoriteBoxList.empty();
