@@ -2,13 +2,13 @@
  * Object that encompasses the functionality of the find box search
  * in the 'Find Boxes' flyout.
  * 
- * @constructor FindBoxSearch
+ * findBoxSearch
  * @author little9 (Jamie Little)
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function FindBoxSearch() {
+function findBoxSearch() {
 	var myFindBoxSearch = {
 
 		/**
@@ -38,9 +38,7 @@ function FindBoxSearch() {
 
 		/**
 		 * This function does inital setup for the object. It should call the
-		 * bindUiActions function
-		 * 
-		 * @constructs
+		 * bindUiActions functions
 		 */
 		init: function () {
 

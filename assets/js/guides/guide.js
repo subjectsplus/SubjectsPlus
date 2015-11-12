@@ -1,14 +1,11 @@
 /**
 * Object to get details related to the current guide.
 * 
-* 
-* @class Guide
-* 
 *  
 **/
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Guide() {
+function guide() {
 	"use strict";
 
  	var myGuide = {

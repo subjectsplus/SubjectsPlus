@@ -1,13 +1,13 @@
 /**
  * Sets up the clone and copy buttons used in the flyout.
  *  
- * @constructor Tabs
+ * 
  * @author little9 (Jamie Little)
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function CopyClone() {
+function copyClone() {
 	"use strict";
 
 	var myCopyClone = {
@@ -23,7 +23,7 @@ function CopyClone() {
 		},
 		bindUiActions : function() {
 
-			var ps = Pluslet();
+			var ps = pluslet();
 
 			$('body').on(
 					'click',

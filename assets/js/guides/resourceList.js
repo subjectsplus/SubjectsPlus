@@ -1,13 +1,13 @@
 /**
  * Object that encompasses the functionality of the custom list flyout.
  * 
- * @constructor ResourceList
+ * 
  * @author little9 (Jamie Little)
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function ResourceList() {
+function resourceList() {
 
 	"use strict";
 
@@ -65,8 +65,12 @@ function ResourceList() {
 				 * This function does inital setup for the object. It should call the bindUiActions function 
 				 **/
 
+				document.addEventListener("DOMContentLoaded", function(event) { 
 
 				myResourceList.bindUiActions();
+
+				});
+				
 				return myResourceList;
 			},
 
@@ -190,7 +194,7 @@ function ResourceList() {
 								for (var i = 0; i < 10; i++) {
 									try {
 										if (data[i]['content_type'] == "Record") {
-
+											
 											myResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
 													"<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
 													"<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +

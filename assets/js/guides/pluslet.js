@@ -1,13 +1,10 @@
 /**
  * Object that sets up the click events and options associated with pluslets.
  * 
- * @constructor Pluslet
- * 
- * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Pluslet() {
+function pluslet() {
 	"use strict";
 
 	var myPluslet = {
@@ -23,8 +20,8 @@ function Pluslet() {
 			},
 			init : function() {
 				
-				var guide = Guide();
-				var subjectId = guide.getSubjectId();
+				var g = guide();
+				var subjectId = g.getSubjectId();
 				
 				myPluslet.bindUiActions();
 				myPluslet.makeEditable('a[id*=edit]', subjectId);

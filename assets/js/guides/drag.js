@@ -7,7 +7,7 @@
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Drag() {
+function drag() {
 	"use strict";
 
     var myDrag = {

@@ -1,12 +1,12 @@
 /**
  * Style changes that are triggered with js. 
  * 
- * @constructor Style
+ * @constructor style
  * 
  * 
  */
 
-function Style() {
+function style() {
 	"use strict";
 
     var myStyle = {

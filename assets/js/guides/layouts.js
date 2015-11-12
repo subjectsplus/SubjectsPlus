@@ -1,13 +1,13 @@
 /**
  * Provides the click events for the the layouts section in the flyout. 
  *  
- * @constructor Layout
+ *
  * @author little9 (Jamie Little)
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Layout() {
+function layout() {
 	"use strict";
 
 	var myLayout = {

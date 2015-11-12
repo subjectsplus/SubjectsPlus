@@ -2,14 +2,14 @@
 * Autocomplete search triggered by the magnifying glass icon on the guide page. 
 * 
 * 
-* @constructor GuideSearch
+* guideSearch
 * 
 *  
 **/
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
 
-function GuideSearch() {
+function guideSearch() {
 
     var myGuideSearch = {
 

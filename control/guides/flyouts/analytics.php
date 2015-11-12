@@ -16,7 +16,7 @@
 
 <script>
 	  document.addEventListener("DOMContentLoaded", function(event) {
-	var a = Analytics();
+	var a = analytics();
 	a.init();
 	  });
 	  

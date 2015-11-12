@@ -5,7 +5,7 @@
  */ 
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
- function ColorBox() {
+ function colorBox() {
 	"use strict";
 
  	var myColorBox = {

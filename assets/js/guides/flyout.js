@@ -1,13 +1,13 @@
 /**
  * Object that sets up the behaviour of the flyout menu.
  * 
- * @constructor Flyout
+ * 
  * @author little9 (Jamie Little)
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Flyout() {
+function flyout() {
 	"use strict";
 
 	var myFlyout = {
