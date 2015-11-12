@@ -79,8 +79,8 @@ function pluslet() {
 
 			},
 			dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
-				
-				var subjectId = Guide().getSubjectId();
+				var g = guide();
+				var subjectId = g.getSubjectId();
 			    // Create new node below, using a random number
 
 				var randomnumber=Math.floor(Math.random()*1000001);
@@ -93,7 +93,7 @@ function pluslet() {
 				$('#new-' + randomnumber).fadeIn('slow').load('helpers/guide_data.php', {
 					from: new_id,
 					flag: 'drop',
-					this_subject_id:  Guide().getSubjectId(),
+					this_subject_id:  subjectId,
 					item_type: item_type
 				},
 				function() {
@@ -301,8 +301,8 @@ function pluslet() {
 					/////////////////////////////
 
 					$('.guidewrapper').on('click', lstrSelector ,function(event) {
-
-						var subjectId = Guide().getSubjectId();
+						var g = guide();
+						var subjectId = g.getSubjectId();
 						var deleteId = $(this).attr('id').split('-')[1];
 						var elementDeletion = this;
 						$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
