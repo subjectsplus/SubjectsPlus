@@ -1,21 +1,21 @@
 /**
  * 
- * @constructor TabDropdown
+ * 
  * @author little9 (Jamie Little)
  * 
  * Creates the tab dropdown interface from imported legacy guides 
  *  
  */
 
-var TabDropdown = {
+var tabDropdown = {
 		
 		init : function() {
-			TabDropdown.hideChildren();
-			TabDropdown.addDropdownSymbol();
-			TabDropdown.bindUiActions();
+			tabDropdown.hideChildren();
+			tabDropdown.addDropdownSymbol();
+			tabDropdown.bindUiActions();
 		},
 		bindUiActions : function(){
-			TabDropdown.parentTabClick();
+			tabDropdown.parentTabClick();
 		},
 		
 		

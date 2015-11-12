@@ -55,15 +55,15 @@
 </script>
 
 <script>
-<?php include('./includes/js/HashHandle.js'); ?>
-<?php include('./includes/js/Track.js'); ?>
-<?php include('./includes/js/TabDropdown.js'); ?>
-<?php include('./includes/js/AutoComplete.js'); ?>
+<?php include('./includes/js/hash.js'); ?>
+<?php include('./includes/js/track.js'); ?>
+<?php include('./includes/js/tabDropdown.js'); ?>
+<?php include('./includes/js/autoComplete.js'); ?>
 <?php include('./includes/js/jquery.scrollTo.js'); ?>
-Hash.init();
-Track.init();
-TabDropdown.init();
-AutoComplete.init();
+hash.init();
+track.init();
+tabDropdown.init();
+autoComplete.init();
 </script>
 </body>
 </html>
