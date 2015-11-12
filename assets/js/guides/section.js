@@ -37,7 +37,8 @@ function section() {
 		{
 
 			$(lstrSelector).on('click', function() {
-
+				
+				$(tabs).tabs();
 				var selectedTab = $(tabs).tabs('option', 'selected');
 
 				$.ajax({
@@ -55,7 +56,7 @@ function section() {
 						$(document).scrollTop($('body').height());
 
 						// Make sure that the new section can accept drops
-						var drop = new Drag();
+						var drop = drag();
 						drop.makeDropable(".dropspotty");
 						
 						// When you add a section fade in the save button 
