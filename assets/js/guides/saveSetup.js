@@ -509,9 +509,11 @@ function saveSetup() {
 		            $("#response").fadeIn();
 		            mySaveSetup.refreshFeeds();
 		         
-		            FavoriteBox().getUserFavoriteBoxes(Guide().getStaffId());
-		            FavoriteBox().markAsFavorite();
-		            CopyClone().markAsLinked();
+		            var g = guide();
+		            
+		            favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+		            favoriteBox().markAsFavorite();
+		            copyClone().markAsLinked();
 
 
 
