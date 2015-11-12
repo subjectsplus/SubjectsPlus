@@ -14,9 +14,9 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-family: 'NotoSansRegular';
   src: url('../../assets/css/admin/font/NotoSans-Regular-webfont.eot');
   src: url('../../assets/css/admin/font/NotoSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/css/admin/font/NotoSans-Regular-webfont.svg#NotoSansRegular') format('svg'),
   url('../../assets/css/admin/font/NotoSans-Regular-webfont.woff') format('woff'),
-  url('../../assets/css/admin/font/NotoSans-Regular-webfont.ttf') format('truetype'),
-  url('../../assets/css/admin/font/NotoSans-Regular-webfont.svg#NotoSansRegular') format('svg');
+  url('../../assets/css/admin/font/NotoSans-Regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,9 +25,9 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-family: 'NotoSansBold';
   src: url('../../assets/css/admin/font/NotoSans-Bold-webfont.eot');
   src: url('../../assets/css/admin/font/NotoSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/css/admin/font/NotoSans-Bold-webfont.svg#NotoSansBold') format('svg'),
   url('../../assets/css/admin/font/NotoSans-Bold-webfont.woff') format('woff'),
-  url('../../assets/css/admin/font/NotoSans-Bold-webfont.ttf') format('truetype'),
-  url('../../assets/css/admin/font/NotoSans-Bold-webfont.svg#NotoSansBold') format('svg');
+  url('../../assets/css/admin/font/NotoSans-Bold-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -36,9 +36,9 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-family: 'NotoSansRegItalic';
   src: url('../../assets/css/admin/font/NotoSans-Italic-webfont.eot');
   src: url('../../assets/css/admin/font/NotoSans-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/css/admin/font/NotoSans-Italic-webfont.svg#NotoSansRegItalic') format('svg'),
   url('../../assets/css/admin/font/NotoSans-Italic-webfont.woff') format('woff'),
-  url('../../assets/css/admin/font/NotoSans-Italic-webfont.ttf') format('truetype'),
-  url('../../assets/css/admin/font/NotoSans-Italic-webfont.svg#NotoSansRegItalic') format('svg');
+  url('../../assets/css/admin/font/NotoSans-Italic-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -46,10 +46,10 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
 @font-face {
   font-family: 'NotoSansBoldItalic';
   src: url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.eot');
-  src: url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+  src: url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),  
+  url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.svg#NotoSansBoldItalic') format('svg'),
   url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.woff') format('woff'),
-  url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.ttf') format('truetype'),
-  url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.svg#NotoSansBoldItalic') format('svg');
+  url('../../assets/css/admin/font/NotoSans-BoldItalic-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -110,6 +110,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'NotoSansRegular'; /* before--> Helvetica Neue",Helvetica,Arial,sans-serif*/
+  font-weight: normal;
+  font-style: normal;
   font-size: 14px;
   text-align: left;
   line-height: 20px;
@@ -223,7 +225,9 @@ header {
 
 
 #topnav {
-  font-family: 'NotoSansBold'; /*'ChunkFiveRegular'*/
+  font-family: 'NotoSansBold'; 
+  font-weight: normal;
+  font-style: normal;
   float: left;
   list-style: none outside none;
   margin: 0;
@@ -241,7 +245,7 @@ header {
   text-decoration: none;
   padding: .5em 0.5em;
   text-align: left;
-  font-size: 1.25em;
+  font-size: 17px;
   color: #858585;
 }
 
@@ -304,7 +308,7 @@ header {
 
 #topnav > li > div ul li a, #topnav > li.selected > div ul li a {
   color: #333 !important;
-  font-size:1.075em;
+  font-size:15px;
 }
 
 #topnav > li > div ul li:hover {
@@ -401,7 +405,6 @@ header {
 /*--------------------------- 
 Page structure - added by PV 
 ---------------------------*/
-
 html,body { height:100%; }
 
 html, button, input, select, textarea {
@@ -435,13 +438,14 @@ html, button, input, select, textarea {
 
 .guide-title-area h2 {
   margin: 12px 0 0 40px;
-  font-size: 1.375em;
+  font-size: 19px;
   font-family: 'NotoSansBold';
 }
 
 .guide-title-area h2 a {
   text-decoration: none;
   color: #fff;
+  font-weight: normal;
 }
 
 #guide_nav {
@@ -509,7 +513,7 @@ html, button, input, select, textarea {
 .top-panel-options-list li a {
   text-decoration: none !important;
   text-align: center;
-  font-size: 0.825em;
+  font-size: 11px;
   color: #fff;
 }
 .top-panel-options-list li a i{
@@ -578,7 +582,7 @@ html, button, input, select, textarea {
 
 .second-level-content {background-color: transparent; padding:5px;}
 
-.second-level-content h3 {margin: 0 0 0.75em 0 !important; font-size: 1.15em; font-family: 'NotoSansBold';}
+.second-level-content h3 {margin: 0 0 0.75em 0 !important; font-size: 16px; font-family: 'NotoSansBold'; font-weight: normal;}
 
 
 
@@ -745,12 +749,12 @@ html, button, input, select, textarea {
 .find-box-tab-list {padding:0 !important; background: none !important; border: none !important;}
 
 .find-box-tab-list li {margin: 0 1px 1px 0 !important; border: none !important; background: #e5e4e4 !important;}
-.find-box-tab-list li a {padding: 0.25em 0.75em !important; color: #999 !important; font-size: 0.85em !important;}
+.find-box-tab-list li a {padding: 0.25em 0.75em !important; color: #999 !important; font-size: 13px !important;}
 
 .find-box-tab-list li.ui-tabs-active {background: #d5d5d5 !important; color: #FFF !important;}
 .find-box-tab-list li.ui-tabs-active a {color: #333 !important;}
 
-.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 0.85em; line-height: 1.3em; max-height:540px; }
+.find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 13px; line-height: 1.3em; max-height:540px; }
 
 .find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:524px;}
 
@@ -764,9 +768,9 @@ html, button, input, select, textarea {
 .findbox-searchresults .pluslet-listing{padding:5px;}
 
 .box-search-label { width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: "NotoSansRegular" !important; 
-font-size: 0.85em;} 
+font-size: 12px;} 
 
-.clone-button, .copy-button {font-family: 'NotoSansBold' !important; padding: 0.5em 0.75em !important; font-size:10px !important;}
+.clone-button, .copy-button {font-family: 'NotoSansBold' !important; padding: 0.5em 0.75em !important; font-size:10px !important; font-weight: normal !important;}
 
 #search-tab .findbox-search {width:96%; font-family: 'NotoSansRegular' !important; border: 1px solid #bcbbbb; border-radius: 2px; padding: 4px;}
 
@@ -807,7 +811,7 @@ a.pure-button-secondary:hover {
 .fav-box-item {
   font-size:12px !important;
   cursor:pointer;
-  font-family: 'NotoSansRegular' !important;
+  font-family: 'NotoSansRegular'!important;
 }
 
 .fav-box-item:before, .fav-template-item:before {
@@ -919,13 +923,14 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: 4px;
   width: 96%;
   margin-bottom: 10px;
+  font-size:13px;
 }
 
 .databases-results-display label {
   color:#333;
   margin: 0;
   font-weight: normal;
-  font-size: 0.9em;
+  font-size: 12px;
 }
 
 .databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 5px 0 0 0; overflow: auto; max-height:415px; width: 98% !important;}
@@ -937,11 +942,11 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .add-to-list-button { font-size: 0.9em; padding: 4px; }
 
-.no-box-results {color: #333; padding: 6px 2px; display: block;}
+.no-box-results {color: #333; padding: 6px 2px; display: block; font-size: 12px;}
 
 .db-list-content {padding:8px;display:none; margin: 20px 0; width: 295px !important; overflow: hidden !important;}
 
-.db-list-content h4 {margin: 0; font-family: 'NotoSansBold';}
+.db-list-content h4 {margin: 0; font-family: 'NotoSansBold'; font-weight: normal;}
 
 .db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; overflow: auto; max-height:230px; width: 281px !important;}
 
@@ -954,10 +959,10 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .fa-minus { color: #D24D57; font-size:16px; padding: 0 2px 0 0; }
 
-.db-list-buttons { font-size: 0.825em; display:none;}
+.db-list-buttons { font-size: 12px; display:none;}
 
 .db-list-buttons .dblist-button, 
-.db-list-buttons .dblist-reset-button {font-family:'NotoSansBold';}
+.db-list-buttons .dblist-reset-button {font-family:'NotoSansBold'; font-weight: normal;}
 
 .dblist-reset-button {
     background-color: #d5d5d5;
@@ -982,7 +987,7 @@ li.fav-box-item:hover::before {color: #C03957;}
     width: 98% !important;
 }
 
-.myguide-button {font-size:0.825em; font-family:'NotoSansBold';}
+.myguide-button {font-size:12px; font-family:'NotoSansBold'; font-weight: normal;}
 
 .user_guides_display .panel-list-item a:before {
     content:"\f15b";
@@ -1008,10 +1013,10 @@ li.fav-box-item:hover::before {color: #C03957;}
   padding: 10px;
 }
 
-.total-views-header { font-family:'NotoSansBold'; font-size: 1.4em; margin: 0; line-height: 1.6em; color: #858585;}
-.total-views-count {font-size: 1.1em; color: #e488b6;}
+.total-views-header { font-family:'NotoSansBold'; font-size: 19px; margin: 0; line-height: 1.6em; color: #858585; font-weight: normal;}
+.total-views-count {font-size: 21px; color: #e488b6;}
 
-.tab-click-header {display:none; margin:0;}
+.tab-click-header {display:none; margin:0; font-weight: normal;}
 
 .tab-click:before {
   font-family: 'FontAwesome';
@@ -1023,6 +1028,23 @@ li.fav-box-item:hover::before {color: #C03957;}
 .tab-click {font-size:12px;}
 
 
+
+
+/*Tab Rearrange Panel */
+#save_tab_order_btn {font-family:'NotoSansBold'; font-weight: normal; font-size:12px;}
+
+.flyout-tabs {
+    background: #484848 none repeat scroll 0 0;
+    border-color: #3e3e3e #525252 #525252 #3e3e3e;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0 0 20px;
+    max-height: 385px;
+    width: 98% !important;
+}
+
+.flyout-tabs li i {font-size:14px; margin-right:8px;}
 
 
 
@@ -1089,7 +1111,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 #tabs li.home-tab { background:#ff0 !important;}
 
 
-#tabs.ui-tabs .ui-tabs-nav li a {color:#333;}
+#tabs.ui-tabs .ui-tabs-nav li a {color:#333; font-size:15px; font-weight: normal;}
 
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active,
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover {border-bottom: 3px solid #C03957 !important;}
@@ -1244,6 +1266,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   color: #858585;
   margin-top:10px;
   display: inline-block;
+  font-size:16px;
 }
 
 
@@ -1835,6 +1858,7 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
   color: #FFFFFF !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
   font-family: "NotoSansBold" !important;
+  font-weight: normal !important;
   font-size: 0.9em !important;   
 }
 
@@ -1969,7 +1993,7 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 
 /* jQuery UI Override - PV */
-.ui-widget {font-family: 'NotoSansRegular' !important;}
+.ui-widget {font-family: 'NotoSansRegular' !important; font-weight: normal;}
 
 
     
@@ -1988,16 +2012,10 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 }
 
 #maincontent h2  {
-
-  font-weight: 400;
-  /* margin-bottom: 25px;
-  margin-top: 5px;
-  font-size: 1.5em; */
 }
 
 #maincontent h3 {
   color: #333;
-  font-weight: bold;
   font-size: 12pt;
   margin: 5px 0;
 }
@@ -3183,7 +3201,7 @@ label {
   clear: left;
   font-size: 1em;
   color: #333;
-  font-weight: bold;
+  font-family: "NotoSansBold";
 
 }
 
@@ -3323,15 +3341,15 @@ background: url("../images/grid.png") repeat scroll 0 50% #666 !important;
 
 .pure-button {
   color: #FFFFFF;
-  font-weight: bold;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-weight: normal;
 }
 
 .pure-button-primary, .pure-button-selected, .pure-button-topsearch, a.pure-button-primary, a.pure-button-selected {
   background-color: #E488B6;
   background-color: #C03957;
   color: #FFFFFF;
-  font-weight: bold;
+  font-weight: normal;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 

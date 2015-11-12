@@ -397,7 +397,7 @@ function tabs() {
                     }
 
                     $.each(data.tabs, function(idx, obj) {
-                        $(".flyout-tabs").append( "<li id='item_"+ obj.tab_id +"' class='panel-list-item' title='" + obj.label + "'><i class='fa fa-bars'></i> " +obj.label + "</li>");
+                        $(".flyout-tabs").append( "<li id='item_"+ obj.tab_id +"' class='panel-list-item' title='" + obj.label + "'><i class='fa fa-sort'></i> " +obj.label + "</li>");
                     });
                 }
             });
