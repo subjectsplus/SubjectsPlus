@@ -226,14 +226,15 @@ AND title.title LIKE :search_term");
       $arr[$i]['label'] = html_entity_decode($myrow['label']);
 
       if(isset($myrow['content_type'])) {
-
+          
       	
       	if (isset($myrow['id'])) {
       		$arr[$i]['id'] = $myrow['id'];
       		
       	}
       	
-      	
+
+      	$arr[$i]['content_type'] = $myrow['content_type'];
 
         if (isset( $myrow['short_form'])) {
           $arr[$i]['shortform'] =  $myrow['short_form'];
