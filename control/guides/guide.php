@@ -363,6 +363,10 @@ ob_end_flush ();
 				href="#"><i class="fa fa-search"
 					title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
 
+			<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
+							src="<?php print $AssetPath; ?>images/icons/myguides.svg"
+							title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
+
 			<li id="show_layout_options" class="top-panel-option-item"><a
 				href="#"><i class="fa fa-columns"
 					title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
@@ -379,9 +383,7 @@ ob_end_flush ();
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
 					title="<?php print _("My Guides"); ?>" class="custom-icon" /><br /><?php print _("My Guides"); ?></a></li>
 
-			<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
-							src="<?php print $AssetPath; ?>images/icons/myguides.svg"
-							title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
+
 
 <!--		<li id="show_asset_manager" class="top-panel-option-item"><a href="#"><img
 					src="<?php print $AssetPath; ?>images/icons/myguides.svg"
@@ -418,7 +420,10 @@ ob_end_flush ();
 
 			<!--find boxes-->
 	<?php include_once('flyouts/find_boxes.php'); ?>
-          
+
+
+			<!-- reorder tabs -->
+			<?php include_once('flyouts/tabs.php'); ?>
           
           <!--layout-->
 			<div id="layout_options_content" class="second-level-content"
@@ -453,10 +458,7 @@ ob_end_flush ();
           
           <?php include_once('flyouts/create_database_list.php'); ?>
           
-          
-          <!--tabs-->
-          <?php include_once('flyouts/tabs.php'); ?>
-          
+
           
           <!--analytics-->
           <?php include_once('flyouts/analytics.php'); ?>
@@ -468,8 +470,7 @@ ob_end_flush ();
 		<!--my_guides_list-->
 		<?php include_once('flyouts/my_guides_list.php'); ?>
 
-		<!-- reorder tabs -->
-		<?php include_once('flyouts/tabs.php'); ?>
+
 
 		<!--  Image Gallery -->
 		<?php include_once('flyouts/asset_manager.php')?>
