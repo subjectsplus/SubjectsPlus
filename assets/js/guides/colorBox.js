@@ -1,6 +1,6 @@
 /**
- * @constructor ColorBox
- * 
+ * colorbox
+ * This sets up a list of elements that will be viewed with a colorbox.
  * 
  */ 
 /*jslint browser: true*/
