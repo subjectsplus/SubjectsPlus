@@ -1,13 +1,11 @@
 /**
+ * 
  * Set ups click events and tabs functionality on the guide page.
- *  
- * @constructor Tabs
- * 
- * 
+ *   
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Tabs() {
+function tabs() {
 	"use strict";
     var myTabs = {
         settings: {
@@ -49,9 +47,8 @@ function Tabs() {
             //Find Box Tabs - Browse and Search
             myTabs.settings.findBoxTabs.tabs();
             
-            $(tabs).tabs('select', 0);
 
-			var sec = Section();
+			var sec = section();
 			sec.makeAddSection('a[id="add_section"]');
 
 
@@ -427,7 +424,8 @@ function Tabs() {
         reorderTabsFlyout : function() {
             document.addEventListener("DOMContentLoaded", function() {
 
-                var subjectId = Guide().getSubjectId();
+            	var g = guide();
+                var subjectId = g.getSubjectId();
 
                 $('#show_tabs').on('click', function() {
 

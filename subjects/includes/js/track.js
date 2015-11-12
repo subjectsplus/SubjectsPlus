@@ -1,6 +1,4 @@
 /**
- * 
- * @constructor Track
  * @author little9 (Jamie Little)
  * 
  * This sets up the events that are tracked by the SP analytics
@@ -9,11 +7,11 @@
  * 
  */
 
-var Track = {
+var track = {
 		
 		init : function() {
-			Track.addLinkTracker();
-			Track.bindUiActions();
+			track.addLinkTracker();
+			track.bindUiActions();
 		},
 		settings : {
 			trackUrl : './track.php'
@@ -29,8 +27,8 @@ var Track = {
 			// Get subject shortform from data attribute on #main-content
 			var subject = $('#main-content').data().subject;
 			
-			Track.trackLinks(subject);
-			Track.trackTabs(subject);
+			track.trackLinks(subject);
+			track.trackTabs(subject);
 		},
 		trackLinks : function (subject) {
 			
@@ -41,7 +39,7 @@ var Track = {
 			});
 
 			$('body').on('click', '.track-me', function() {
-				$.get(Track.settings.trackUrl, 
+				$.get(track.settings.trackUrl, 
 						{'event_type':'link', 'link_url':$(this).attr('href'),'subject': subject});	
 			});
 			
@@ -55,7 +53,7 @@ var Track = {
 			     
 			     // Capture tab clicks 
 			     
-				$.get(Track.settings.trackUrl,{'subject' : subject  , 
+				$.get(track.settings.trackUrl,{'subject' : subject  , 
 					'page_title' : document.title , 
 					'event_type' : 'tab_click',
 					'tab_name' : tab_name}, function(data) {

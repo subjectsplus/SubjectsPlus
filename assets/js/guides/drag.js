@@ -7,7 +7,7 @@
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Drag() {
+function drag() {
 	"use strict";
 
     var myDrag = {
@@ -241,7 +241,7 @@ function Drag() {
 		sortable_element.sortable({
 			opacity : 0.7,
 			cancel : '.unsortable',
-			handle : 'img.section_sort',
+			handle : '.section_sort',
 			update : function(event, ui) {
 				$("#response").hide();
 				$("#save_guide").fadeIn();

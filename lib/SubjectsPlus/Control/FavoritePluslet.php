@@ -28,7 +28,7 @@ class FavoritePluslet {
         }
 
         $querier = new Querier();
-        $sql = "SELECT p.pluslet_id as 'id', p.title AS 'title' FROM pluslet AS p
+        $sql = "SELECT p.pluslet_id as 'id', p.title AS 'title', p.type AS 'type', t.tab_index AS 'tab_index' FROM pluslet AS p
                    INNER JOIN pluslet_section AS ps
                    ON ps.pluslet_id = p.pluslet_id
                    INNER JOIN section AS s

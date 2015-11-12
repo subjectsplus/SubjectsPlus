@@ -2,7 +2,7 @@
 * Asset manager flyout functionality
 * 
 * 
-* @constructor AssetManager
+* assetManager
 * 
 *  
 **/
@@ -11,7 +11,7 @@
 
 
  
- function AssetManager() {
+ function assetManager() {
  
  	var myAssetManager = {
  	

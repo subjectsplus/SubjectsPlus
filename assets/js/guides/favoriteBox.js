@@ -2,13 +2,13 @@
 * Setup for the favorite box that appears on the inital flyout.
 * 
 * 
-* @constructor FavoriteBox
+* favoriteBox
 * 
 *  
 **/
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function FavoriteBox() {
+function favoriteBox() {
 
     var myFavoriteBox = {
 
@@ -17,18 +17,23 @@ function FavoriteBox() {
             favoriteBoxList: $(".fav-boxes-list")
         },
         strings: {
+            copyButton: "<div class='pure-u-2-5' style='text-align:right;'><button class='copy-button pure-button pure-button-secondary'>Copy</button></div></div></li>",
             copyCloneButtons: "<div class='pure-u-2-5' style='text-align:right;'><button class='clone-button pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-button pure-button pure-button-secondary'>Copy</button></div></div></li>",
             noFavoritesText: "<li>No boxes have been marked as a favorite. To do so, click the gears button on the box you wish to mark as a Favorite and activate the Favorite toggle switch.</li>"
         },
         bindUiActions: function () {
         },
         init: function () {
+      	  document.addEventListener("DOMContentLoaded", function(event) {
+
             myFavoriteBox.getUserFavoriteBoxes();
+            
+      	  });
             myFavoriteBox.markAsFavorite();
         },
         getUserFavoriteBoxes: function () {
 
-            var g = Guide();
+            var g = guide();
             var staffId = g.getStaffId();
 
             myFavoriteBox.settings.favoriteBoxList.empty();
@@ -44,7 +49,21 @@ function FavoriteBox() {
                     }
 
                     $.each(data, function (idx, obj) {
-                        myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" + obj.title + "</div>" + myFavoriteBox.strings.copyCloneButtons);
+                        if(obj.type == 'Clone') {
+                            myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" +
+                                "<a href='#box-" + obj.id + "'" +
+                                "data-tab='" + obj.tab_index + "'" +
+                                "data-pluslet_id='" + obj.id + "'" +
+                                "id='boxid-" + obj.tab_index + "-" + obj.id + "'>" + obj.title + "</a></div>" + myFavoriteBox.strings.copyButton);
+                        } else {
+                            myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" +
+                                "<a href='#box-" + obj.id + "'" +
+                                "data-tab='" + obj.tab_index + "'" +
+                                "data-pluslet_id='" + obj.id + "'" +
+                                "id='boxid-" + obj.tab_index + "-" + obj.id + "'>" + obj.title + "</div>" + myFavoriteBox.strings.copyCloneButtons);
+                        }
+
+
 
                     });
                 }

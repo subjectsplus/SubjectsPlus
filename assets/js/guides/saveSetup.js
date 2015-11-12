@@ -1,12 +1,10 @@
 /**
  * Sets up the click events for saving a guide and functions for actually saving the guide to the database. 
  *  
- * @constructor SaveSetup
- *
  * 
  */
 
-function SaveSetup() {
+function saveSetup() {
 	"use strict";
 
 	var mySaveSetup = {
@@ -411,7 +409,7 @@ function SaveSetup() {
 							item_type : pitem_type,
 							clone : isclone,
 							special : pspecial,
-							this_subject_id : Guide().getSubjectId(),
+							this_subject_id : guide().getSubjectId(),
 							boxsetting_hide_titlebar : boxsetting_hide_titlebar,
 							boxsetting_collapse_titlebar : boxsetting_collapse_titlebar,
 							boxsetting_titlebar_styling : boxsetting_titlebar_styling,
@@ -511,9 +509,11 @@ function SaveSetup() {
 		            $("#response").fadeIn();
 		            mySaveSetup.refreshFeeds();
 		         
-		            FavoriteBox().getUserFavoriteBoxes(Guide().getStaffId());
-		            FavoriteBox().markAsFavorite();
-		            CopyClone().markAsLinked();
+		            var g = guide();
+		            
+		            favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+		            favoriteBox().markAsFavorite();
+		            copyClone().markAsLinked();
 
 
 

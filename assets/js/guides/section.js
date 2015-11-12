@@ -1,14 +1,12 @@
 /**
  * 
- * 
- * 
- * @constructor Section
- * 
+ * Object that allows you to add new sections and handle events related to the sections.
+ *
  * 
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
-function Section() {
+function section() {
 	"use strict";
 
 	var mySection = {
@@ -39,7 +37,8 @@ function Section() {
 		{
 
 			$(lstrSelector).on('click', function() {
-
+				
+				$(tabs).tabs();
 				var selectedTab = $(tabs).tabs('option', 'selected');
 
 				$.ajax({
@@ -57,7 +56,7 @@ function Section() {
 						$(document).scrollTop($('body').height());
 
 						// Make sure that the new section can accept drops
-						var drop = new Drag();
+						var drop = drag();
 						drop.makeDropable(".dropspotty");
 						
 						// When you add a section fade in the save button 
@@ -67,7 +66,8 @@ function Section() {
 						var newSection = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 						newSection.trigger('click');
 
-						Layout().highlightLayout(newSection.parent());
+						var l = layout();
+						l.highlightLayout(newSection.parent());
 					    
 
 					}
@@ -81,6 +81,7 @@ function Section() {
 			 * hightlighted and the layouts control will effect that section. 
 			 */
 			$('body').on('click','.sp_section_controls', function() {
+				var l = layout();
 				$('.sp_section_controls').removeClass('sp_section_selected');
 				$('.sp_section').removeClass('section_selected_area');
 
@@ -90,9 +91,9 @@ function Section() {
 				$(this).parent().toggleClass('section_selected_area');
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
 				$('#layout_options_content').data('selected-section', selectedSectionId);
-				Layout().activateLayoutButtons();
+				l.activateLayoutButtons();
 				// Highlight the layout that is associated with the section. 
-				Layout().highlightLayout($(this).parent())
+				l.highlightLayout($(this).parent())
 				// Show the initial section. Now you are using sections so you will need the section contorls.
 				$('.sp_section_controls').first().show();
 

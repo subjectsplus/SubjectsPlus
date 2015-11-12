@@ -823,6 +823,19 @@ a.pure-button-secondary:hover {
 
 .fav-box-item, .fav-template-item { width: 165px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default;}
 
+.fav-box-item a:link,
+.fav-box-item a:visited {
+  color:#fff;
+  text-decoration:none;
+}
+
+.fav-box-item a:hover,
+.fav-box-item a:active {
+  color:#fff;
+  text-decoration:underline;
+}
+
+
 .clone-favorite.fav-box-item {
   font-size:12px !important;
   cursor:pointer;

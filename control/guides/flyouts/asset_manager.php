@@ -48,7 +48,7 @@ display:none;
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
-	AssetManager().init();
+	//assetManager().init();
 
 });
 </script>

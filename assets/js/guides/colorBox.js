@@ -1,11 +1,11 @@
 /**
- * @constructor ColorBox
- * 
+ * colorbox
+ * This sets up a list of elements that will be viewed with a colorbox.
  * 
  */ 
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
- function ColorBox() {
+ function colorBox() {
 	"use strict";
 
  	var myColorBox = {
