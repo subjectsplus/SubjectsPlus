@@ -264,7 +264,7 @@ function drag() {
 			connectWith : [ '.portal-column-0', '.portal-column-1',
 					'.portal-column-2' ],
 			opacity : 0.7,
-			tolerance : 'intersect',
+			tolerance : 'pointer',
 			cancel : '.unsortable',
 			handle : 'div.pluslet_sort',
 			update : function(event, ui) {
