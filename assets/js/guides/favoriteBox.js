@@ -17,8 +17,8 @@ function favoriteBox() {
             favoriteBoxList: $(".fav-boxes-list")
         },
         strings: {
-            copyButton: "<span class='pure-u-2-5' style='text-align:right;'><button class='copy-favorite pure-button pure-button-secondary'>Copy</button></span></div></li>",
-            copyCloneButtons: "<span class='pure-u-2-5' style='text-align:right;'><button class='clone-favorite pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-favorite pure-button pure-button-secondary'>Copy</button></span></div></li>",
+            copyButton: "<span class='pure-u-2-5' style='text-align:right;'><button class='copy-favorite favorite-button pure-button pure-button-secondary'>Copy</button></span></div></li>",
+            copyCloneButtons: "<span class='pure-u-2-5' style='text-align:right;'><button class='clone-favorite favorite-button pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-favorite favorite-button pure-button pure-button-secondary'>Copy</button></span></div></li>",
             noFavoritesText: "<li>No boxes have been marked as a favorite. To do so, click the gears button on the box you wish to mark as a Favorite and activate the Favorite toggle switch.</li>"
         },
         bindUiActions: function () {

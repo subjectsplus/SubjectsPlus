@@ -850,6 +850,14 @@ li.fav-box-item:hover {
 li.fav-box-item:hover::before {color: #C03957;}
 
 
+.favorite-button {
+  font-family: 'NotoSansBold' !important;
+  padding: 0.5em 0.75em !important;
+  font-size: 10px !important;
+  font-weight: normal !important;
+}
+
+
 .clone-input {display:none;}
 
 
