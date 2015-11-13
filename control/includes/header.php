@@ -151,8 +151,7 @@ mb_internal_encoding('UTF-8');
 <html>
   <head>
     <title><?php print $page_title; ?></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    <meta charset="utf-8">
     <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
     <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
     

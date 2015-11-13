@@ -8,7 +8,7 @@
 
 // For instruction on how to use this please see the follwing page on the wiki:
 // http://www.subjectsplus.com/wiki/index.php?title=Libguides_Importer
-header ( "Content-Type: text/html" );
+header('Content-Type:text/html; charset=UTF-8');
 
 $subcat = "guides";
 $page_title = "LibGuides Importer Stage 2";
