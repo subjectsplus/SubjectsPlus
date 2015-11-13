@@ -35,7 +35,7 @@ function section() {
 			$('.sptab').each(function() { 
 				 if($(this).children().size() > 1) {
 					 $(this).children().find('.sp_section_controls').show();
-					 $(this).children().find('.sp_section_controls').first().addClass('sp_section_selected');
+					 
 				 } 
 				});
 		},
@@ -92,7 +92,7 @@ function section() {
 			 */
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
-				$('.sp_section_controls').removeClass('section_selected_area');
+				$('.sp_section_controls').removeClass('sp_section_selected');
 				$('.sp_section').removeClass('section_selected_area');
 
 				$('#layout_options_content').data('selected-section', '');
@@ -118,7 +118,7 @@ function section() {
 			
 			// Hide the first section control in each of the tabs:
 			$('.sp_section:first-child .sp_section_controls').hide();
-		//	$('.sp_section').removeClass('section_selected_area');
+			//$('.sp_section').removeClass('section_selected_area');
 			
 				$('.ui-tabs-nav li').on('click', function() {
 			    // When you click another tab, hide the controls for the first section 
@@ -126,7 +126,12 @@ function section() {
 				var tab = $(this).attr('aria-controls');
 				var tabChildren = $('#' + tab).children();
 				tabChildren.find('.sp_section_controls').first().trigger('click');
-				//$('.sp_section').removeClass('section_selected_area');
+				if (tabChildren.find('.sp_section').size() < 1) {
+					console.log("Hide highlight");
+					tabChildren.find('.sp_section').removeClass('section_selected_area');
+				}
+				
+				
 
 			});
 			
