@@ -283,11 +283,11 @@ ob_end_flush ();
 		<!--GUIDE BUILDER CONTAINER-->
 		<div class="guidewrapper">
 
-			<div class="guide-wrap-width-var">
+			<div id="guide-container-width">
 
-				<?php global $guide_wrap_width_var; ?>
+				<?php global $guide_container_width; ?>
 				<script>
-					$('.guide-wrap-width-var').css('width', '<?php echo $guide_wrap_width_var; ?>');
+					$('#guide-container-width').css('width', '<?php echo $guide_container_width[0]; ?>');
 
 				</script>
 
