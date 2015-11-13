@@ -54,8 +54,8 @@ Description: base stylesheet for backend of subjectsplus, i.e., /control/
   font-style: normal;
 }
 
-em {font-family: 'NotoSansRegItalic';}
-strong {font-family: 'NotoSansBold';}
+em {font-family: 'NotoSansRegItalic'; font-weight: normal;}
+strong {font-family: 'NotoSansBold'; font-weight: normal;}
 
 /* Tables still need 'cellspacing="0"' in the markup. */
 table {
@@ -491,13 +491,17 @@ html, button, input, select, textarea {
   display:inline-block;
 }
 
-#savour{ padding: 0.5em 5px 0 5px;}
+#savour{ padding: 5px 5px 0 5px;}
 
 #savour2  {padding: 0.5em 20px 0 5px; }
 
 #save_guide, #save_template {
   display:none;
   margin: 0 !important;
+  font-family: 'NotoSansBold';
+  font-weight: normal;
+  font-size:14px;
+  padding: 5px 10px;
 }
 
 
@@ -947,7 +951,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 4px 5px 0 5px; 
   color: #333; font-size: 12px; line-height: 1.3em; display:inline-block; margin: 0;} 
 
-.list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular'; font-weight: normal; }  
+.list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular' !important; font-weight: normal; }  
 
 .add-to-list-button { font-size: 0.9em; padding: 4px; }
 
@@ -961,6 +965,8 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .db-list-item-draggable {width: 270px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: move; padding: 8px 0; 
   color:#FFF;  font-size: 1em; line-height: 1.3em; border-bottom: 1px dotted #858585; font-size: 12px; font-family: 'NotoSansRegular'; font-weight: normal;}
+
+.db-list-label {display: inline-block; margin-bottom: 6px;}
 
 .db-list-toggle { font-size:11px; cursor:pointer; padding-right: 5px; font-family: 'NotoSansRegular'; font-weight: normal;}
 
@@ -1054,6 +1060,10 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 .flyout-tabs li i {font-size:14px; margin-right:8px;}
+
+.flyout-tabs li {border-bottom: 1px dotted #858585; padding: 5px 0;}
+.flyout-tabs li:last-child {border-bottom: none;}
+
 
 
 
@@ -1284,6 +1294,16 @@ li.fav-box-item:hover::before {color: #C03957;}
   width: 100%; }
 
 
+
+.dropspotty {position: relative;  } /* general */
+
+#tabs_options .dropspotty, 
+.db-list-results .dropspotty {height: 50px;}
+
+.dropspotty.drop_area {height: 50px;}
+
+
+
 /* When you hover over one of the two drop spots, make em show */
 .drop_hover {background-color: rgba(192,57,87, 0.8); border: 1px dashed #FFF; color:#FFF;}
 .drop_hover .dropspot-text {color:#FFF;}
@@ -1298,16 +1318,21 @@ li.fav-box-item:hover::before {color: #C03957;}
 .sort_column, .portal_column, .ui-sortable{background-color: transparent; display: block; min-height: 80px;} /*original --> #F8F5F5 */
 
 
+
 /* Used by the jquery ui plugin  */
 .ui-sortable-placeholder {
   background-color: rgba(192,57,87, 0.8) !important; 
   border: 1px dashed #FFF !important; 
   color:#FFF !important;  
   visibility: visible !important;
-  height: 50px !important;
+  height: 50px;
 }
 
-.ui-sortable-helper {width:35% !important; background-color: #858585 !important;}
+.ui-sortable-helper {width:25% !important; background-color: #858585 !important;}
+
+#tabs_options .ui-sortable-helper, 
+.db-list-results .ui-sortable-helper {width:275px !important;}
+
 
 
 
@@ -1540,7 +1565,9 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 
 /* box settings form */
-.box-settings-form {margin-top:10px;}
+.box-settings-form {margin-top:10px; font-family: 'NotoSansRegular'; font-weight: normal !important;}
+
+.box-settings-form h3 {color: #858585; font-weight: normal !important; font-family: 'NotoSansBold'; font-size:14px;}
 
 .settings-label-text {
     display:inline-block; 
@@ -1550,7 +1577,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
     top: 0;
     width: 180px;
     font-weight: normal;
-    font-size: 0.9em;
+    font-size: 12px;
     color: #858585;
 }
 
@@ -1565,8 +1592,8 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .titlebar-styling-label {width:110px; float:left;}
 
 .titlebar-styling-select {width:120px; float:left;}
+/* override for select goes under primary slect class */
 
-.titlebar-styling-select select {font-size: 0.9em !important; width: 120px !important; border-radius: 5px; box-shadow: none; border: 1px solid #CCCCCC; padding:2px; color: #858585; white-space: nowrap;}
 
 .titlebar-styling-select select option{white-space: nowrap; width: auto;}
 
@@ -1834,6 +1861,12 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 #colorbox:focus {outline:none !important;}
 #cboxWrapper:focus {outline:none !important;}
 
+
+/* Pop up boxes - index overides */
+.ui-dialog {z-index: 999999 !important;}
+
+
+
 /* Pure Form overrides for guide page - PV */
 .portal-column .pure-form input,
 .portal-column .pure-form select,
@@ -1859,6 +1892,10 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 }
 
 .portal-column .pure-form select option {white-space: nowrap; width: auto;}
+
+
+.portal-column .pure-form.titlebar-styling-select select {font-size: 0.9em !important; width: 120px !important; border-radius: 5px !important; box-shadow: none; padding:2px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; }
+
 
 .portal-column .pure-button-pluslet, 
 .portal-column a.pure-button-pluslet {
@@ -1907,11 +1944,27 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
   margin:0 -2.5em !important;
   padding: 0.65em 0;
   color:#FFF;
-  font-family:'NotoSansBold';
-  font-weight: bold;
+  font-family:'NotoSansBold' !important;
+  font-weight: normal !important;
 }
 
 .master-feedback-link {color: #FFF !important;}
+
+
+.feedback, #feedback {  
+  width: 100%;
+  text-align: center;
+  font-weight: normal !important;
+  font-family: 'NotoSansBold' !important;
+  display: none;
+  color: #fff;
+  padding: 0.65em 0;
+  background-color: rgba(192,57,87, 0.8);
+}
+
+div.feedback a:link {
+  color: #fff !important;
+}
 
 
 
@@ -1921,6 +1974,8 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 /* Pluslet ID 1 */
 .admin-prompt {margin: 0 5px 10px 0; text-align: right; font-size: 0.9em;}
+
+
 
 
 
@@ -1962,6 +2017,7 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 .dragging .handle, .handle:active { }
 
 
+
 /* JS Scrollbar styles  - on light background*/
 .track2 {
     width: 8px;
@@ -2000,7 +2056,6 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 
 
-
 /* jQuery UI Override - PV */
 .ui-widget {font-family: 'NotoSansRegular' !important; font-weight: normal;}
 
@@ -2010,7 +2065,7 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
 
 
 /* Main content areas */
-/* ------ not updated by PV ------ */
+/* ------ section below not updated by PV ------ */
 
 #maincontent {
   clear: both;
@@ -2589,19 +2644,7 @@ div.ctag_list a:hover {
 
 
 
-.feedback, #feedback {  
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
-  display: none;
-  color: #fff;
-  padding: 0.65em 0;
-  background-color: rgba(192,57,87, 0.8);
-}
 
-div.feedback a:link {
-  color: #fff !important;
-}
 
 .box_feedback {
   position: relative;
@@ -2804,13 +2847,15 @@ div.tooltip div
   padding: 0.65em 0;
   z-index: -1;
   color:#FFF;
-  font-family:'NotoSansBold';
+  font-family:'NotoSansRegular' !important;
+  font-weight: normal !important;
 }
  
 #response .feedback {
   width: 100%;
   text-align: center;
-  font-weight: bold;
+  font-weight: normal !important;
+  font-family: 'NotoSansRegular' !important;
   display: none;
   color: #fff;
   padding: 0;
@@ -2915,14 +2960,7 @@ div.tooltip div
 }
 
 
-.dropspotty {
-  position: relative;
-  height: 50px;
-}
 
-li.dropspotty {
-  height: auto;
-}
 
 .drop-spot-box {
   font-size: 2em;
@@ -3198,11 +3236,6 @@ div.breather > h2 {
 
 
 
-
-
-
-
-
 /* forms */
 /* jquery ui popup boxes */
 
@@ -3424,21 +3457,13 @@ li.hidden_tab.ui-state-default
 
 
 
-
-
-
-
-
-
-
-
-
 .desktop {display: none;}
 
 
 
-
-/* For Imported Guides - JL */
+/*///////////////////////////////////////////
+For Imported Guides - JL 
+////////////////////////////////////////////*/
 
 
 .book {
@@ -3482,6 +3507,38 @@ li.hidden_tab.ui-state-default
 
 
 
+/*///////////////////////////////////////////
+Additional Helper Classes - AGD 
+////////////////////////////////////////////*/
+
+.fa-inactive {color: #ccc;}
+
+.clickable {cursor: pointer;}
+
+.alert-colour {color: #d24d57;}
+
+.striper .fa { color: #333;}
+
+.guide_list_header { 
+  font-size: 1.5em;
+  padding-bottom: .5em;
+  }
+
+.guide_list li {
+
+    font-size: 1.2em !important;
+    padding: .5em;
+    list-style: none;
+}
+
+.guide_list li a {
+    text-decoration: none;
+}
+
+.list_bonus { font-size: .8em; color: #ccc;}
+
+
+
 
 /*///////////////////////////////////////////
    // Responsive - PV
@@ -3494,10 +3551,6 @@ li.hidden_tab.ui-state-default
 
  
 }
-
-
-
-
 
 
 /* ≥ 1024px     .pure-u-lg-* */
@@ -3538,30 +3591,3 @@ li.hidden_tab.ui-state-default
 
 } /* end last responsive block */
 
-
-
-.fa-inactive {color: #ccc;}
-
-.clickable {cursor: pointer;}
-
-.alert-colour {color: #d24d57;}
-
-.striper .fa { color: #333;}
-
-.guide_list_header { 
-  font-size: 1.5em;
-  padding-bottom: .5em;
-  }
-
-.guide_list li {
-
-    font-size: 1.2em !important;
-    padding: .5em;
-    list-style: none;
-}
-
-.guide_list li a {
-    text-decoration: none;
-}
-
-.list_bonus { font-size: .8em; color: #ccc;}

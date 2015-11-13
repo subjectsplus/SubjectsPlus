@@ -393,7 +393,7 @@ function tabs() {
 
                     if(!data.tabs.length) {
                         //no results
-                        $(".flyout-tabs").append( "<li  class='panel-list-item'>You do not have any tabs.</li>");
+                        $(".flyout-tabs").append( "<li  class='panel-list-item'>Tab sorting not available.</li>");
                     }
 
                     $.each(data.tabs, function(idx, obj) {
