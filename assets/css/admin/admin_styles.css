@@ -1198,7 +1198,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   background-color: rgba(255, 255, 255, 0.6);
   position: absolute;
   bottom:100%;
-  left:0;
+  right:0;
   width:52px;
   border-radius: 2px 2px 0 0;
 
@@ -1592,7 +1592,9 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 .titlebar-styling-label {width:110px; float:left;}
 
 .titlebar-styling-select {width:120px; float:left;}
+
 /* override for select goes under primary slect class */
+.titlebar-styling-select select.box-setting-select {font-size: 0.9em !important; width: 120px !important; border-radius: 5px !important; box-shadow: none; padding:2px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; }
 
 
 .titlebar-styling-select select option{white-space: nowrap; width: auto;}
@@ -1892,10 +1894,6 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 }
 
 .portal-column .pure-form select option {white-space: nowrap; width: auto;}
-
-
-.portal-column .pure-form.titlebar-styling-select select {font-size: 0.9em !important; width: 120px !important; border-radius: 5px !important; box-shadow: none; padding:2px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; }
-
 
 .portal-column .pure-button-pluslet, 
 .portal-column a.pure-button-pluslet {
