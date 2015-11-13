@@ -92,7 +92,7 @@ function section() {
 			 */
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
-				$('.sp_section_controls').removeClass('sp_section_selected');
+				$('.sp_section_controls').removeClass('section_selected_area');
 				$('.sp_section').removeClass('section_selected_area');
 
 				$('#layout_options_content').data('selected-section', '');
