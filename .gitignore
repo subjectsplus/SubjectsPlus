@@ -129,3 +129,5 @@ local.properties
 
 
 php_errors.log
+
+tests/_output/*
