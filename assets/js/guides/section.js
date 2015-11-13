@@ -26,9 +26,18 @@ function section() {
 		    $(window).bind("load", function() {
 		    	// Click the first section after everything has loaded.
 			    mySection.clickInitialSection();
-
+			    mySection.viewSectionControls();
 		    });
 			
+		},
+		viewSectionControls : function() {
+			
+			$('.sptab').each(function() { 
+				 if($(this).children().size() > 1) {
+					 $(this).children().find('.sp_section_controls').show();
+					 $(this).children().find('.sp_section_controls').first().addClass('sp_section_selected');
+				 } 
+				});
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -38,9 +47,9 @@ function section() {
 
 			$(lstrSelector).on('click', function() {
 				
-				$(tabs).tabs();
-				var selectedTab = $(tabs).tabs('option', 'selected');
-
+				//$(tabs).tabs();
+				var selectedTab = $('#tabs').tabs('option', 'selected');
+				console.log(selectedTab);
 				$.ajax({
 					
 					url : mySection.settings.sectionDataPath,
@@ -63,6 +72,7 @@ function section() {
 						$("#save_guide").fadeIn();
 						$('.sp_section_controls').first().show();
 						
+						$('div#tabs-' + selectedTab)
 						var newSection = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 						newSection.trigger('click');
 
@@ -82,7 +92,7 @@ function section() {
 			 */
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
-				$('.sp_section_controls').removeClass('sp_section_selected');
+				$('.sp_section_controls').removeClass('section_selected_area');
 				$('.sp_section').removeClass('section_selected_area');
 
 				$('#layout_options_content').data('selected-section', '');
@@ -103,17 +113,23 @@ function section() {
 		clickInitialSection : function() {
 			
 			// Click the first section to mark it as active 
+			
 			$('.sp_section_controls').first().trigger('click');
 			
-			if ($('.sp_section_controls').size() >= 1) {
-				// If there are already sections on the page don't hide the first section
-				// Hide the first section because the user may not use sections.
-
-				$('.sp_section_controls').first().hide();
-				$('.sp_section').first().removeClass('section_selected_area');
+			// Hide the first section control in each of the tabs:
+			$('.sp_section:first-child .sp_section_controls').hide();
+		//	$('.sp_section').removeClass('section_selected_area');
 			
-			}
+				$('.ui-tabs-nav li').on('click', function() {
+			    // When you click another tab, hide the controls for the first section 
+			    // and mark that tab as active
+				var tab = $(this).attr('aria-controls');
+				var tabChildren = $('#' + tab).children();
+				tabChildren.find('.sp_section_controls').first().trigger('click');
+				//$('.sp_section').removeClass('section_selected_area');
 
+			});
+			
 			
 		}
 	};

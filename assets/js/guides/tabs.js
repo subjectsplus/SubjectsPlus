@@ -82,7 +82,7 @@ function tabs() {
             });
             
             $('#tabs').find(".ui-tabs-nav").sortable({
-                axis: "y",
+                axis: "x",
                 stop: function (event, ui) {
                     if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
                         $(tabs).find(".ui-tabs-nav").sortable("cancel");

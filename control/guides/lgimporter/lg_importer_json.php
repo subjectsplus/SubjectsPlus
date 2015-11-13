@@ -5,7 +5,8 @@
  *   @author little9 (Jamie Little)
  *   @date June 2014
  */
-header("Content-Type: application/json");
+header("Content-Type: application/json; charset=UTF-8");
+
 
 
 include('../../includes/autoloader.php');

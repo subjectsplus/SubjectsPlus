@@ -854,6 +854,14 @@ li.fav-box-item:hover {
 li.fav-box-item:hover::before {color: #C03957;}
 
 
+.favorite-button {
+  font-family: 'NotoSansBold' !important;
+  padding: 0.5em 0.75em !important;
+  font-size: 10px !important;
+  font-weight: normal !important;
+}
+
+
 .clone-input {display:none;}
 
 
@@ -3511,6 +3519,24 @@ Additional Helper Classes - AGD
 
 .striper .fa { color: #333;}
 
+.guide_list_header { 
+  font-size: 1.5em;
+  padding-bottom: .5em;
+  }
+
+.guide_list li {
+
+    font-size: 1.2em !important;
+    padding: .5em;
+    list-style: none;
+}
+
+.guide_list li a {
+    text-decoration: none;
+}
+
+.list_bonus { font-size: .8em; color: #ccc;}
+
 
 
 
@@ -3564,3 +3590,4 @@ Additional Helper Classes - AGD
 }
 
 } /* end last responsive block */
+

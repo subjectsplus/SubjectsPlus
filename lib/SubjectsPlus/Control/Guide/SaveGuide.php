@@ -161,6 +161,6 @@ AND p.type != 'Special'";
 		
 		// $updateChangeTable = changeMe("guide", "update", $_COOKIE["our_guide_id"], $_COOKIE["our_guide"], $_SESSION['staff_id']);
 		
-		print "<strong>" . _ ( "Thy Will Be Done:  Guide Updated." ) . "</strong>";
+		print  _( "Thy Will Be Done:  Guide Updated." ) ;
 	}
 }

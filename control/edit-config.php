@@ -57,6 +57,8 @@ if(!is_writable($lstrConfigFilePath))
 							array( _( 'title' ), _( 'position_number' ), _( 'classification' ), _( 'priority' ), _( 'tel' ), _( 'fax' ), _( 'intercom' ), _( 'room_number' ), _( 'address' ), _( 'city' ),
 							_( 'state' ), _( 'zip' ), _( 'home_phone' ), _( 'cell_phone' ), _( 'lat_long' ), _( 'emergency_contact' ) ), _( "These fields may be required, i.e., the form cannot be submitted until they are completed." ) ),
 
+							"guide_container_width" => array( _( "Guide Container Width" ), _( "Assign a width in pixels for your guides. For example, 960px." ), "array", "right", "small", "", _("For example, 960px or 1160px.") ),
+
 							"guide_types" => array( _( "Guide Types" ), _( "These are the different ways you may organize your guides." ), "array", "right", "large", "", _("You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query.") ),
 
 							"all_ctags" => array( _( "Record Tags" ), _( "These are the tags that a given record location can have associated with it." ), "array", "right", "textarea", "", _("Record tags are a way of slicing and dicing the total set of records.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places.") ),

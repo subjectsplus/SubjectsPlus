@@ -280,8 +280,8 @@ function pluslet() {
 									// Remove node
 									$(element_deletion).parent().parent().remove();
 									$('#response').hide();
-									var saveSetup = SaveSetup(); 
-									saveSetup.saveGuide();
+									var save = saveSetup(); 
+									save.saveGuide();
 									$('#save_guide').fadeOut();
 									$( this ).dialog( 'close' );
 									return false;

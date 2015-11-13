@@ -40,6 +40,7 @@ class Pluslet_GuideList extends Pluslet {
 
   global $mod_rewrite;
   global $PublicPath;
+  global $guide_types;
 
     // let's use our Pretty URLs if mod_rewrite = TRUE or 1
     if ($mod_rewrite == 1) {
@@ -48,28 +49,46 @@ class Pluslet_GuideList extends Pluslet {
        $guide_path = $PublicPath . "guide.php?subject=";
     }
 
-  // Get our newest guides
-  $guides = $this->db->query("select subject_id, subject, shortform from subject where active = '1' and type != 'Placeholder' order by subject");
+    $layout = ""; //init
+
+    // loop through our source types
+    foreach ($guide_types as $key => $value) {
+
+      $query ="select subject_id, subject, shortform, type, description, keywords 
+      FROM subject where active = '1' and type != 'Placeholder' and type = '" . $value .  "' order by subject";
+
+      $guides = $this->db->query($query);
+
+      $total_rows = count($guides); // total number of guides
+      $switch_row = round($total_rows / 2);
+
+      if ($total_rows > 0) {
 
         $col_1 = "<div class=\"pure-u-1-2\">";
         $col_2 = "<div class=\"pure-u-1-2\">";
 
-        $row_count = 0;
+        $row_count = 1;
 
         foreach ($guides as $myrow) {
 
         $guide_location = $guide_path . $myrow[0];
+        $list_bonus = "";
+
+        if ($myrow[4] != "") {$list_bonus .= $myrow[4] . "<br />"; } // add description
+        if ($myrow[5] != "") {$list_bonus .= $myrow[5] . "<br />"; } // add keywords
+        $list_bonus .= $myrow[3] . "<br />";
 
         $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
-        <div class=\"list_bonus\">$myrow[2]</div>
+        <div class=\"list_bonus\">$list_bonus</div>
         </li>";
 
-          if ($row_count & 1) {
-            // odd
-            $col_2 .= $our_item;
+          if ($row_count <= $switch_row) {
+            // first col
+            $col_1 .= $our_item;
+            
           } else {
             // even
-            $col_1 .= $our_item;
+            $col_2 .= $our_item;
           }
 
         $row_count++;
@@ -78,8 +97,18 @@ class Pluslet_GuideList extends Pluslet {
         $col_1 .= "</div>";
         $col_2 .= "</div>";
 
+        $layout .= "<div class=\"pure-u-1 guide_list_header\">$value</div>" . $col_1 . $col_2;
 
-        $list_guides = "<div class=\"pure-g guide_list\">" . $col_1 . $col_2 . "</div>";
+        $list_guides = "<div class=\"pure-g guide_list\">$layout</div>";
+      }
+
+    }
+  // Get our newest guides
+
+
+  
+
+
 
 
   return $list_guides;
