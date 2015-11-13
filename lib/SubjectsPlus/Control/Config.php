@@ -245,7 +245,7 @@ class Config
 		{
 			?>
 		<div class="master-feedback" style="display: block;" >
-			<strong><?php echo $lstrMessage ?></strong>
+			<?php echo $lstrMessage ?>
 		</div><br /><br />
 		<?php
 		}
