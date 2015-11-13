@@ -343,9 +343,10 @@ class Pluslet {
         $box_settings .= "<span class=\"settings-label-text\">" . _("Open All Links in New Tab") . "</span>
                 </div>
                 <h3>" . _("Styles") . "</h3>
+                
                 <div class=\"titlebar-styling-section\">
                         <div class=\"titlebar-styling-select\">
-                            <select id=\"titlebar-styling-$this->_pluslet_id\">
+                            <select id=\"titlebar-styling-$this->_pluslet_id\" class=\"box-setting-select\">
                                 $tb_styles
                             </select>
                         </div>   
@@ -353,8 +354,6 @@ class Pluslet {
                         <div class=\"titlebar-styling-label\">
                             <!--   <label for=\"titlebar-styling-$this->_pluslet_id\">" . _("Box Styling") . "</label>-->
                         </div>
-                        
-
                 </div> 
             </form>
             <div class=\"pure-g pluslet-metadata\">
