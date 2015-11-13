@@ -211,6 +211,8 @@ ob_end_flush ();
 	<!--end .panel-wrap-->
 
 
+
+
 	<div class="guide-wrap">
 
 		<!--GUIDE HEADER CONTAINER-->
@@ -280,6 +282,15 @@ ob_end_flush ();
 
 		<!--GUIDE BUILDER CONTAINER-->
 		<div class="guidewrapper">
+
+			<div class="guide-wrap-width-var">
+
+				<?php global $guide_wrap_width_var; ?>
+				<script>
+					$('.guide-wrap-width-var').css('width', '<?php echo $guide_wrap_width_var; ?>');
+
+				</script>
+
 			<div id="tabs" data-tab-count="<?php echo ( count($all_tabs) );  ?>">
 
                  <?php $lobjGuide->outputNavTabs(); ?>
@@ -290,6 +301,8 @@ ob_end_flush ();
 
                </div>
 		</div>
+
+			</div>
 
 	</div>
 	<!--end .guide-wrap-->

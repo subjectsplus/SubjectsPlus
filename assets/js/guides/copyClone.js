@@ -16,6 +16,7 @@ function copyClone() {
 			cloneButton : '.clone-button',
 			copyButton : '.copy-button',
 			cloneFavoriteButton : '.clone-favorite',
+			copyFavoriteButton : '.copy-favorite',
 		
 		},
 		strings : {
@@ -53,22 +54,33 @@ function copyClone() {
 						var origin_title = $(this).parent().parent().parent()
 								.text().replace(" /Clone Copy/g", "");
 						var origin_type = $(this).parent().parent().parent().data().plusletType;
-					
 
 						ps.dropPluslet(origin_id, origin_type, origin_title);
 
 					});
 
 			$('body').on(
-					'dblclick',
+					'click',
 					myCopyClone.settings.cloneFavoriteButton,
 					function() {
 
-						var origin_id = $(this).attr(
-								myCopyClone.settings.plusletIdSelector);
-						var origin_title = $(this).html();
+						var origin_id = $(this).parent().siblings('.fav-box-item').find('a').attr('data-pluslet-id');
+						var origin_title = $(this).parent().siblings('.fav-box-item').find('a').text();
 
 						ps.dropPluslet('', 'Clone', origin_id, origin_title);
+
+					});
+
+			$('body').on(
+					'click',
+					myCopyClone.settings.copyFavoriteButton,
+					function() {
+
+						var origin_id = $(this).parent().siblings('.fav-box-item').find('a').attr('data-pluslet-id');
+						var origin_title = $(this).parent().siblings('.fav-box-item').find('a').text();
+						var origin_type = $(this).parent().siblings('.fav-box-item').find('a').attr('data-pluslet-type');
+
+						ps.dropPluslet(origin_id, origin_type, origin_title);
 
 					});
 
