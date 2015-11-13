@@ -202,7 +202,7 @@ function pluslet() {
 							$('#pluslet-' + edit_id[1]).attr('name', 'modified-pluslet');
 						}
 
-						var h = Help();
+						var h = help();
 						h.makeHelpable('img[class*=help-]');
 
 						//display box_settings for editable pluslet
