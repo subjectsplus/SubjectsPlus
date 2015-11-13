@@ -376,17 +376,19 @@ ob_end_flush ();
 				href="#"><i class="fa fa-search"
 					title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
 
-			<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
-							src="<?php print $AssetPath; ?>images/icons/myguides.svg"
-							title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
+
+			<li id="show_dblist_options" class="top-panel-option-item"><a
+						href="#"><i class="fa fa-list"
+									title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
 
 			<li id="show_layout_options" class="top-panel-option-item"><a
 				href="#"><i class="fa fa-columns"
 					title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
 
-			<li id="show_dblist_options" class="top-panel-option-item"><a
-				href="#"><i class="fa fa-list"
-					title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
+			<li id="show_tabs" class="top-panel-option-item"><a href="#"><img
+							src="<?php print $AssetPath; ?>images/icons/myguides.svg"
+							title="<?php print _("Tabs"); ?>" class="custom-icon" /><br /><?php print _("Tabs"); ?></a></li>
+
 
 			<li id="show_analytics_options" class="top-panel-option-item"><a
 				href="#"><i class="fa fa-pie-chart"
