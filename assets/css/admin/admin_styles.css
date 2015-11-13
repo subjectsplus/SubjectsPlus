@@ -245,7 +245,7 @@ header {
   text-decoration: none;
   padding: .5em 0.5em;
   text-align: left;
-  font-size: 17px;
+  font-size: 18px;
   color: #858585;
 }
 
@@ -308,7 +308,7 @@ header {
 
 #topnav > li > div ul li a, #topnav > li.selected > div ul li a {
   color: #333 !important;
-  font-size:15px;
+  font-size:16px;
 }
 
 #topnav > li > div ul li:hover {
@@ -438,7 +438,7 @@ html, button, input, select, textarea {
 
 .guide-title-area h2 {
   margin: 12px 0 0 40px;
-  font-size: 19px;
+  font-size: 20px;
   font-family: 'NotoSansBold';
 }
 
@@ -817,7 +817,8 @@ a.pure-button-secondary:hover {
 .fav-box-item:before, .fav-template-item:before {
   font-family: FontAwesome;
   content:"\f005";
-  color: #F5D76E; font-size:16px;
+  color: #F5D76E; 
+  font-size:16px;
   padding: 0 8px 0 0;
 }
 
@@ -936,9 +937,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 5px 0 0 0; overflow: auto; max-height:415px; width: 98% !important;}
 
 .db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 4px 5px 0 5px; 
-  color: #333; font-size: 0.95em; line-height: 1.3em; display:inline-block; margin: 0;} 
+  color: #333; font-size: 12px; line-height: 1.3em; display:inline-block; margin: 0;} 
 
-.list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  
+.list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular'; font-weight: normal; }  
 
 .add-to-list-button { font-size: 0.9em; padding: 4px; }
 
@@ -951,9 +952,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; overflow: auto; max-height:230px; width: 281px !important;}
 
 .db-list-item-draggable {width: 270px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: move; padding: 8px 0; 
-  color:#FFF;  font-size: 1em; line-height: 1.3em; border-bottom: 1px dotted #858585;}
+  color:#FFF;  font-size: 1em; line-height: 1.3em; border-bottom: 1px dotted #858585; font-size: 12px; font-family: 'NotoSansRegular'; font-weight: normal;}
 
-.db-list-toggle { font-size:0.8em; cursor:pointer; padding-right: 5px;}
+.db-list-toggle { font-size:11px; cursor:pointer; padding-right: 5px; font-family: 'NotoSansRegular'; font-weight: normal;}
 
 .active .fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
 

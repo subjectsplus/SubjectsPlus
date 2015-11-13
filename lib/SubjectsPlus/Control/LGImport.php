@@ -229,20 +229,24 @@ public function importBox($box, $section_id) {
   $config->set('Core.Encoding', 'UTF-8');
   $config->set('HTML.TidyLevel', 'heavy');
 
-  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe'));
+  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol'));
   $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
   $config->set('HTML.SafeIframe', true);
   $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
   
   $purifier = new \HTMLPurifier($config);
   
-  $pure_html =  $purifier->purify(html_entity_decode(str_replace("\xc2\xa0",' ',$box->DESCRIPTION)),ENT_QUOTES, 'UTF-8');
+  $pure_html =  $purifier->purify($box->DESCRIPTION);
   
   // Import images and replace the old urls with new urls
   $doc = new \DOMDocument();
  
   if ($pure_html) {
-  $doc->loadHTML($pure_html);
+  	
+  // Add these options -- otherwise you'll get a full HTML document with
+  // a doctype when running saveHTML()
+  
+  $doc->loadHTML($pure_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
   
   
   // Download images
@@ -269,11 +273,10 @@ public function importBox($box, $section_id) {
     
   
   // Create html for the description
-  $description = $doc->saveHTML();
   
-  if ($description != null) {  
-  $description .= "<div class=\"description\">". $description  . "</div>";
-  }	
+  $clean_description = str_replace('&Acirc;','', $doc->saveHTML());
+  $description .= "<div class=\"description\">". $clean_description  . "</div>";
+  
   
   switch ($box->BOX_TYPE) {      
 

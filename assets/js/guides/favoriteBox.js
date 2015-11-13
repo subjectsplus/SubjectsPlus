@@ -17,8 +17,8 @@ function favoriteBox() {
             favoriteBoxList: $(".fav-boxes-list")
         },
         strings: {
-            copyButton: "<div class='pure-u-2-5' style='text-align:right;'><button class='copy-button pure-button pure-button-secondary'>Copy</button></div></div></li>",
-            copyCloneButtons: "<div class='pure-u-2-5' style='text-align:right;'><button class='clone-button pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-button pure-button pure-button-secondary'>Copy</button></div></div></li>",
+            copyButton: "<span class='pure-u-2-5' style='text-align:right;'><button class='copy-favorite pure-button pure-button-secondary'>Copy</button></span></div></li>",
+            copyCloneButtons: "<span class='pure-u-2-5' style='text-align:right;'><button class='clone-favorite pure-button pure-button-secondary'>Link</button>&nbsp;<button class='copy-favorite pure-button pure-button-secondary'>Copy</button></span></div></li>",
             noFavoritesText: "<li>No boxes have been marked as a favorite. To do so, click the gears button on the box you wish to mark as a Favorite and activate the Favorite toggle switch.</li>"
         },
         bindUiActions: function () {
@@ -49,18 +49,23 @@ function favoriteBox() {
                     }
 
                     $.each(data, function (idx, obj) {
+
                         if(obj.type == 'Clone') {
-                            myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" +
+                            myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "' data-pluslet-type='" + obj.type + "'>" +
+                                "<div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" +
                                 "<a href='#box-" + obj.id + "'" +
                                 "data-tab='" + obj.tab_index + "'" +
-                                "data-pluslet_id='" + obj.id + "'" +
+                                "data-pluslet-id='" + obj.id + "'" +
+                                "data-pluslet-type='" + obj.type + "'" +
                                 "id='boxid-" + obj.tab_index + "-" + obj.id + "'>" + obj.title + "</a></div>" + myFavoriteBox.strings.copyButton);
                         } else {
-                            myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "'><div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" +
+                            myFavoriteBox.settings.favoriteBoxList.append("<li data-pluslet-id='" + obj.id + "' data-pluslet-type='" + obj.type + "'>" +
+                                "<div class='pure-g'><div class='pure-u-3-5 fav-box-item' title='" + obj.title + "'>" +
                                 "<a href='#box-" + obj.id + "'" +
                                 "data-tab='" + obj.tab_index + "'" +
-                                "data-pluslet_id='" + obj.id + "'" +
-                                "id='boxid-" + obj.tab_index + "-" + obj.id + "'>" + obj.title + "</div>" + myFavoriteBox.strings.copyCloneButtons);
+                                "data-pluslet-id='" + obj.id + "'" +
+                                "data-pluslet-type='" + obj.type + "'" +
+                                "id='boxid-" + obj.tab_index + "-" + obj.id + "'>" + obj.title + "</a></div>" + myFavoriteBox.strings.copyCloneButtons);
                         }
 
 
