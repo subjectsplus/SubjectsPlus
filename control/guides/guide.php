@@ -295,9 +295,7 @@ ob_end_flush ();
 
                  <?php $lobjGuide->outputNavTabs(); ?>
 
-                 <?php
-																	$lobjGuide->outputTabs ();
-																	?>
+                 <?php $lobjGuide->outputTabs (); ?>
 
                </div>
 		</div>
