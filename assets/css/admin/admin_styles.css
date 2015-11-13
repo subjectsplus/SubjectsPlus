@@ -3539,3 +3539,21 @@ li.hidden_tab.ui-state-default
 .alert-colour {color: #d24d57;}
 
 .striper .fa { color: #333;}
+
+.guide_list_header { 
+  font-size: 1.5em;
+  padding-bottom: .5em;
+  }
+
+.guide_list li {
+
+    font-size: 1.2em !important;
+    padding: .5em;
+    list-style: none;
+}
+
+.guide_list li a {
+    text-decoration: none;
+}
+
+.list_bonus { font-size: .8em; color: #ccc;}
