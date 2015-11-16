@@ -361,6 +361,28 @@ $target_blank_links.each(function() {
 
 });
 
+
+
+///////////////////////////////
+// Draw attention to TOC linked item
+///////////////////////////////
+
+$(document.body).on('click','a[id*=boxid-]', function(event) {
+    var tab_id = $(this).attr('id').split('-')[1];
+    var box_id = $(this).attr('id').split('-')[2];
+
+    var selected_box = '.pluslet-' + box_id;
+
+    $('#tabs').tabs('select', tab_id);
+
+    $(selected_box).effect('pulsate', {
+        times:1
+    }, 2000);
+    //$(selected_box).animateHighlight('#dd0000', 1000);
+
+});
+
+
 </script>
 
 
