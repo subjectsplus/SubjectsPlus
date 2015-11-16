@@ -27,13 +27,26 @@ function section() {
 		    	// Click the first section after everything has loaded.
 			    mySection.clickInitialSection();
 			    mySection.viewSectionControls();
+				mySection.clickTabOnSwitch();
+
 		    });
 			
 		},
 		viewSectionControls : function() {
 			
 			
-		
+			$('.sptab').each(function() { 
+				 if($(this).children().size() > 1) {
+					 console.log("More than one?");
+					 $(this).children().find('.sp_section_controls').show();
+				 } 	else {
+					 
+					 $(this).children().find('.sp_section_controls').hide();
+					 $(this).find('.sp_section').removeClass('section_selected_area');
+
+
+				 }
+				});
 			
 		},
 		makeAddSection : function(lstrSelector)
@@ -67,7 +80,7 @@ function section() {
 						
 						// When you add a section fade in the save button 
 						$("#save_guide").fadeIn();
-						$('.sp_section_controls').first().show();
+						//$('.sp_section_controls').first().show();
 						
 						$('div#tabs-' + selectedTab)
 						var newSection = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
@@ -76,6 +89,7 @@ function section() {
 						var l = layout();
 						l.highlightLayout(newSection.parent());
 					    
+						mySection.viewSectionControls();
 
 					}
 				});
@@ -90,18 +104,17 @@ function section() {
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
 				
-			
-					 if($(this).parent().parent().size() > 1) {
-						console.log($(this).parent().parent().size());
-						 $(this).show();
-					 } 	else {
-						 $(this).hide();
-					
-					 }
+				// Removes existing highlights and controls 
 				
+				$('.sp_section_controls').removeClass('sp_section_selected');
+				$('.sp_section').removeClass('section_selected_area');
 				
 				$('#layout_options_content').data('selected-section', '');
 
+				// This adds the classes for highlighting 
+				
+			 	$(this).toggleClass('sp_section_selected');
+			    $(this).parent().toggleClass('section_selected_area');
 				
 				
 				
@@ -111,7 +124,7 @@ function section() {
 				// Highlight the layout that is associated with the section. 
 				l.highlightLayout($(this).parent())
 				// Show the initial section. Now you are using sections so you will need the section contorls.
-				//$('.sp_section_controls').first().show();
+				
 
 				
 			});
@@ -122,27 +135,22 @@ function section() {
 			$('.sp_section_controls').first().trigger('click');
 			
 		},
-		
-		switchTabSection : function () {
-			$('.ui-tabs-nav li').on('click', function() {
-			    // When you click another tab, hide the controls for the first section 
-			    // and mark that tab as active
-				var tab = $(this).attr('aria-controls');
-				var tabChildren = $('#' + tab).children();
-				
-				
+		clickTabOnSwitch : function () {
 			
-				tabChildren.find('.sp_section_controls').first().trigger('click');
-			//	$('.sp_section').removeClass('section_selected_area');
-		    //	tabChildren.find('.sp_section_controls').parent().removeClass('section_selected_area');
+			$('.ui-tabs-nav > li').on('click', function() {
+				 var tabIndex = $(this).attr('aria-controls').split('-')[1];
+				$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
+				mySection.viewSectionControls();
 				
-
 			});
+			
+			
 		},
 		
 		setupHighlights : function() {
 			// Hide the first section control in each of the tabs:
 			$('.sp_section:first-child .sp_section_controls').hide();
+			
 			
 		}
 	};
