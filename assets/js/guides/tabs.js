@@ -299,11 +299,11 @@ function tabs() {
                             myTabs.settings.saveButton.fadeIn();
 
 
-                            myTabs.settings.tabs.tabs();
+                            $('#tabs').tabs();
 
                             if (external_link === '') {
-                                $(tabs).tabs("refresh");
-                                $(tabs).tabs('select', $('#tabs').data().tabCount);
+                                $('#tabs').tabs("refresh");
+                                $('#tabs').tabs('select', $('#tabs').data().tabCount);
                             } else {
                              
                                 myTabs.settings.tabs.tabs('select', 0);
