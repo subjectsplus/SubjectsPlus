@@ -35,8 +35,9 @@ function section() {
 			$('.sptab').each(function() { 
 				 if($(this).children().size() > 1) {
 					 $(this).children().find('.sp_section_controls').show();
-					 
-				 } 
+					 $(this).children().find('.sp_section_controls').parent().addClass('section_selected_area');
+		
+				 } 	
 				});
 		},
 		makeAddSection : function(lstrSelector)
@@ -92,13 +93,19 @@ function section() {
 			 */
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
+				
+				// Removes existing highlights and controls 
 				$('.sp_section_controls').removeClass('sp_section_selected');
 				$('.sp_section').removeClass('section_selected_area');
 
 				$('#layout_options_content').data('selected-section', '');
 
+				// This adds the classes for highlighting 
 				$(this).toggleClass('sp_section_selected');
 				$(this).parent().toggleClass('section_selected_area');
+				
+				
+				
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				l.activateLayoutButtons();
@@ -118,19 +125,18 @@ function section() {
 			
 			// Hide the first section control in each of the tabs:
 			$('.sp_section:first-child .sp_section_controls').hide();
-			//$('.sp_section').removeClass('section_selected_area');
 			
 				$('.ui-tabs-nav li').on('click', function() {
 			    // When you click another tab, hide the controls for the first section 
 			    // and mark that tab as active
 				var tab = $(this).attr('aria-controls');
 				var tabChildren = $('#' + tab).children();
-				tabChildren.find('.sp_section_controls').first().trigger('click');
-				if (tabChildren.find('.sp_section').size() < 1) {
-					console.log("Hide highlight");
-					tabChildren.find('.sp_section').removeClass('section_selected_area');
-				}
 				
+				
+			
+				tabChildren.find('.sp_section_controls').first().trigger('click');
+				$('.sp_section').removeClass('section_selected_area');
+				tabChildren.find('.sp_section_controls').parent().removeClass('section_selected_area');
 				
 
 			});
