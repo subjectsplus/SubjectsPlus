@@ -17,20 +17,18 @@ class GuideList implements OutputInterface {
 	private $_guide_list;
 	
 	public function __construct(Querier $db, $type = "", $active = 1) {
-		
+		$this->db = $db;
 		$this->type = $type;
 		$this->active = $active;
 
-		$connection = $db->getConnection();
-		//$this->db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
-		$statement = $connection->prepare("SELECT * FROM subject ORDER BY subject WHERE type = :type AND active = :active");
+		$connection = $this->db->getConnection();
+		$statement = $connection->prepare("SELECT * FROM subject WHERE type = :type AND active = :active  ORDER BY subject ");
 
 		$statement->bindParam(":type", $this->type);
 		$statement->bindParam(":active", $this->active);
 		$statement->execute();
 		$this->_guide_list = $statement->fetchAll();
 
-		print_r($db->errorInfo());
 	}
 
 	public function toArray() {

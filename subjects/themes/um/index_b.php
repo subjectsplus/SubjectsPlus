@@ -242,7 +242,7 @@ foreach ($guide_types as $key => $value) {
 
 $guide_list = new GuideList($db,$value, 1);
 $all_guides = $guide_list->toArray(); // get our full listing of guides as an array
-print_r($all_guides); print "<br /><br />";
+//print_r($all_guides); print "<br /><br />";
 $total_rows = count($all_guides); // total number of guides
 $switch_row = round($total_rows / 2);
 
@@ -303,8 +303,7 @@ $switch_row = round($total_rows / 2);
             $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Quick Search", "guides", '80');
             $input_box->displayBox();
             print "<br /><br />";
-            print $layout;
-            print $our_results; ?>
+            print $layout; ?>
         </div> <!-- end breather -->
     </div><!--end 3/4 main area-->
 
