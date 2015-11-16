@@ -136,7 +136,7 @@ $newlist .= "</ul>\n";
 
 
 $searchbox = '
-<div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
+<div class="autoC index-search" id="autoC" style="margin: 1em 2em 2em 0;">
     <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
         <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
         <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
@@ -248,8 +248,8 @@ $switch_row = round($total_rows / 2);
 
       if ($total_rows > 0) {
 
-        $col_1 = "<div class=\"pure-u-1-2\">";
-        $col_2 = "<div class=\"pure-u-1-2\">";
+        $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\">";
+        $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\">";
 
         $row_count = 1;
 
@@ -297,13 +297,15 @@ $switch_row = round($total_rows / 2);
 <div class="pure-g" id="guidesplash">
     
     <div class="pure-u-1 pure-u-lg-3-4 panel-adj" id="listguides">
-        <div class="breather">        
-            <?php 
+        <div class="breather">
+             <div class="index-search-area">        
+                <?php 
+                $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides", '80');
+                $input_box->displayBox();
+                print $layout; ?>
+            </div>
 
-            $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Quick Search", "guides", '80');
-            $input_box->displayBox();
-            print "<br /><br />";
-            print $layout; ?>
+
         </div> <!-- end breather -->
     </div><!--end 3/4 main area-->
 
