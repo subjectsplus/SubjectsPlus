@@ -1890,6 +1890,13 @@ table.item_listing th {
     margin-bottom:5%;
 }
 
+img.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+
+
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
  .tip {
