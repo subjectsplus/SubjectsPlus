@@ -1198,7 +1198,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   background-color: rgba(255, 255, 255, 0.6);
   position: absolute;
   bottom:100%;
-  left:0;
+  right:0;
   width:52px;
   border-radius: 2px 2px 0 0;
 
@@ -1491,7 +1491,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   min-height: calc(100% - 20px);
   background-color: #f2f2f2;
   box-shadow: 0 0 2px rgba(54, 51, 51, 0.4) inset;
-  width: 250px;
+  width: 210px;
 }
 
 .box_settings label {
@@ -1589,11 +1589,9 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 /* titlebar styling */
 .titlebar-styling-section {display: inline-block;}
 
-.titlebar-styling-label {width:110px; float:left;}
+.titlebar-styling-label {width:0; float:left;}
 
 .titlebar-styling-select {width:120px; float:left;}
-/* override for select goes under primary slect class */
-
 
 .titlebar-styling-select select option{white-space: nowrap; width: auto;}
 
@@ -1602,7 +1600,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 /* pluslet metadata */
 .pluslet-metadata {margin-top:20px;}
 
-.pluslet_id {color: #CCCCCC; font-size: 11px;}
+.pluslet_id {color: #CCCCCC; font-size: 11px; font-family: 'NotoSansRegular' !important; font-weight: normal;}
 
 .pluslet-help {text-align:right;}
 .pluslet-help img:hover {cursor: pointer;}
@@ -1894,7 +1892,8 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 .portal-column .pure-form select option {white-space: nowrap; width: auto;}
 
 
-.portal-column .pure-form.titlebar-styling-select select {font-size: 0.9em !important; width: 120px !important; border-radius: 5px !important; box-shadow: none; padding:2px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; }
+/* override for select goes under primary select class, this one is for box settings in flyout */
+.titlebar-styling-select select.box-setting-select {font-size: 12px !important; width: 120px !important; border-radius: 5px !important; box-shadow: none; padding:2px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; font-family: 'NotoSansRegular' !important;}
 
 
 .portal-column .pure-button-pluslet, 
@@ -1944,8 +1943,9 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
   margin:0 -2.5em !important;
   padding: 0.65em 0;
   color:#FFF;
-  font-family:'NotoSansBold' !important;
+  font-family:'NotoSansRegular' !important;
   font-weight: normal !important;
+  font-size: 16px;
 }
 
 .master-feedback-link {color: #FFF !important;}
@@ -1955,17 +1955,46 @@ input[type="checkbox"], input[type="radio"] {width: auto !important;}
   width: 100%;
   text-align: center;
   font-weight: normal !important;
-  font-family: 'NotoSansBold' !important;
+  font-family: 'NotoSansRegular' !important;
   display: none;
   color: #fff;
   padding: 0.65em 0;
   background-color: rgba(192,57,87, 0.8);
+  font-size: 16px;
 }
 
 div.feedback a:link {
   color: #fff !important;
 }
 
+#response {
+  position: absolute;
+  top:45px;
+  float: left;
+  background-color: rgba(192,57,87, 0.8);
+  width: 100%;
+  text-align:center;
+  display: none;
+  margin-top:0;
+  padding: 0.65em 0;
+  z-index: -1;
+  color:#FFF;
+  font-family:'NotoSansRegular' !important;
+  font-weight: normal !important;
+  font-size: 16px;
+}
+ 
+#response .feedback {
+  width: 100%;
+  text-align: center;
+  font-weight: normal !important;
+  font-family: 'NotoSansRegular' !important;
+  font-size: 16px;
+  display: none;
+  color: #fff;
+  padding: 0;
+  background-color: transparent;
+}
 
 
 /* Collections Page */
@@ -2835,32 +2864,7 @@ div.tooltip div
 
 #save_zone button {display: inline-block;} /* otherwise hidden by another declaration */
 
-#response {
-  position: absolute;
-  top:45px;
-  float: left;
-  background-color: rgba(192,57,87, 0.8);
-  width: 100%;
-  text-align:center;
-  display: none;
-  margin-top:0;
-  padding: 0.65em 0;
-  z-index: -1;
-  color:#FFF;
-  font-family:'NotoSansRegular' !important;
-  font-weight: normal !important;
-}
- 
-#response .feedback {
-  width: 100%;
-  text-align: center;
-  font-weight: normal !important;
-  font-family: 'NotoSansRegular' !important;
-  display: none;
-  color: #fff;
-  padding: 0;
-  background-color: transparent;
-}
+
 
 
 
