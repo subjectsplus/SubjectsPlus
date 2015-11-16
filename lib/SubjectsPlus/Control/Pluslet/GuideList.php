@@ -97,19 +97,12 @@ class Pluslet_GuideList extends Pluslet {
         $col_1 .= "</div>";
         $col_2 .= "</div>";
 
-        $layout .= "<div class=\"pure-u-1 guide_list_header\">$value</div>" . $col_1 . $col_2;
+        $layout .= "<div class=\"pure-u-1 guide_list_header\"><h3>$value</h3></div>" . $col_1 . $col_2;
 
         $list_guides = "<div class=\"pure-g guide_list\">$layout</div>";
       }
 
     }
-  // Get our newest guides
-
-
-  
-
-
-
 
   return $list_guides;
 
