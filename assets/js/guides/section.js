@@ -32,13 +32,9 @@ function section() {
 		},
 		viewSectionControls : function() {
 			
-			$('.sptab').each(function() { 
-				 if($(this).children().size() > 1) {
-					 $(this).children().find('.sp_section_controls').show();
-					 $(this).children().find('.sp_section_controls').parent().addClass('section_selected_area');
+			
 		
-				 } 	
-				});
+			
 		},
 		makeAddSection : function(lstrSelector)
 		///////////////
@@ -94,15 +90,18 @@ function section() {
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
 				
-				// Removes existing highlights and controls 
-				$('.sp_section_controls').removeClass('sp_section_selected');
-				$('.sp_section').removeClass('section_selected_area');
-
+			
+					 if($(this).parent().parent().size() > 1) {
+						console.log($(this).parent().parent().size());
+						 $(this).show();
+					 } 	else {
+						 $(this).hide();
+					
+					 }
+				
+				
 				$('#layout_options_content').data('selected-section', '');
 
-				// This adds the classes for highlighting 
-				$(this).toggleClass('sp_section_selected');
-				$(this).parent().toggleClass('section_selected_area');
 				
 				
 				
@@ -112,7 +111,7 @@ function section() {
 				// Highlight the layout that is associated with the section. 
 				l.highlightLayout($(this).parent())
 				// Show the initial section. Now you are using sections so you will need the section contorls.
-				$('.sp_section_controls').first().show();
+				//$('.sp_section_controls').first().show();
 
 				
 			});
@@ -120,13 +119,12 @@ function section() {
 		clickInitialSection : function() {
 			
 			// Click the first section to mark it as active 
-			
 			$('.sp_section_controls').first().trigger('click');
 			
-			// Hide the first section control in each of the tabs:
-			$('.sp_section:first-child .sp_section_controls').hide();
-			
-				$('.ui-tabs-nav li').on('click', function() {
+		},
+		
+		switchTabSection : function () {
+			$('.ui-tabs-nav li').on('click', function() {
 			    // When you click another tab, hide the controls for the first section 
 			    // and mark that tab as active
 				var tab = $(this).attr('aria-controls');
@@ -135,12 +133,16 @@ function section() {
 				
 			
 				tabChildren.find('.sp_section_controls').first().trigger('click');
-				$('.sp_section').removeClass('section_selected_area');
-				tabChildren.find('.sp_section_controls').parent().removeClass('section_selected_area');
+			//	$('.sp_section').removeClass('section_selected_area');
+		    //	tabChildren.find('.sp_section_controls').parent().removeClass('section_selected_area');
 				
 
 			});
-			
+		},
+		
+		setupHighlights : function() {
+			// Hide the first section control in each of the tabs:
+			$('.sp_section:first-child .sp_section_controls').hide();
 			
 		}
 	};
