@@ -8,6 +8,7 @@
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\Guide\GuideList;
     
 $use_jquery = array("ui");
 
@@ -150,6 +151,7 @@ include("includes/header_um.php");
 
 // put together our main result display
 
+/*
   // Default dubious guide listing
   $intro = "<p> These guides identify key resources in specific areas. Check out our <a href=\"http://libguides.miami.edu/\">complete list of interactive library subject guides</a>, tabbed for easy reference. You can also chat with our resource librarians or leave them a message.</p>";
   //$guide_list = listGuides($search, $view_type);
@@ -163,7 +165,128 @@ include("includes/header_um.php");
 
   //$layout = makePluslet("", $our_results, "","",FALSE);
 
+$guide_list = new GuideList($db);
+$all_guides = $guide_list->toArray(); // get our full listing of guides as an array
 
+// loop through all guides, breaking down by type
+$layout = "";
+
+
+foreach($guide_types as $our_type) {
+    $row_count = 1;
+
+    // Set our section header; won't be used if no entries
+    $header = "<h3>$our_type</h3>";
+
+    foreach ($all_guides as $key => $value) {
+
+    //$total_rows = array_count_values($all_guides); // total number of guides in this section
+    $switch_row = round($total_rows / 2); // used to know when to switch columns
+
+        $col_1 = "<div class=\"pure-u-1-2\">";
+        $col_2 = "<div class=\"pure-u-1-2\">";
+        $item_count = 1;
+
+        if ($value["type"] == $our_type) {
+
+            $guide_location = $guide_path . $value["subject_id"];
+            $list_bonus = "";
+
+            if ($value["description"] != "") {$list_bonus .= $value["description"] . "<br />"; } // add description
+            if ($value["keywords"] != "") {$list_bonus .= $value["keywords"] . "<br />"; } // add keywords
+
+            $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($value["subject"]) . "</a>
+            <div class=\"list_bonus\">$list_bonus</div>
+            </li>";
+
+            // now choose our column for this item
+              if ($item_count <= $switch_row) {
+                // first col
+                $col_1 .= $our_item;
+                
+              } else {
+                // even
+                $col_2 .= $our_item;
+              }
+
+            print $our_item;
+            $item_count++;
+        }
+
+        // if we have any results, put together a column
+        if ($item_count > 1) {
+            $layout .= $header;
+        }
+        
+    }
+}
+      $query ="select subject_id, subject, shortform, type, description, keywords 
+      FROM subject where active = '1' and type != 'Placeholder' and type = '" . $value .  "' order by subject";
+
+      $guides = $this->db->query($query);
+*/
+
+
+
+    // let's use our Pretty URLs if mod_rewrite = TRUE or 1
+    if ($mod_rewrite == 1) {
+       $guide_path = "";
+    } else {
+       $guide_path = $PublicPath . "guide.php?subject=";
+    }
+
+    $layout = ""; //init
+
+// loop through our source types
+foreach ($guide_types as $key => $value) {
+
+$guide_list = new GuideList($db,$value, 1);
+$all_guides = $guide_list->toArray(); // get our full listing of guides as an array
+print_r($all_guides); print "<br /><br />";
+$total_rows = count($all_guides); // total number of guides
+$switch_row = round($total_rows / 2);
+
+      if ($total_rows > 0) {
+
+        $col_1 = "<div class=\"pure-u-1-2\">";
+        $col_2 = "<div class=\"pure-u-1-2\">";
+
+        $row_count = 1;
+
+        foreach ($all_guides as $myrow) {
+
+        $guide_location = $guide_path . $myrow[0];
+        $list_bonus = "";
+
+        if ($myrow[4] != "") {$list_bonus .= $myrow[4] . "<br />"; } // add description
+        if ($myrow[5] != "") {$list_bonus .= $myrow[5] . "<br />"; } // add keywords
+        $list_bonus .= $myrow[3] . "<br />";
+
+        $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+        <div class=\"list_bonus\">$list_bonus</div>
+        </li>";
+
+          if ($row_count <= $switch_row) {
+            // first col
+            $col_1 .= $our_item;
+            
+          } else {
+            // even
+            $col_2 .= $our_item;
+          }
+
+        $row_count++;
+        }
+
+        $col_1 .= "</div>";
+        $col_2 .= "</div>";
+
+        $layout .= "<div class=\"pure-u-1 guide_list_header\"><h3>$value</h3></div>" . $col_1 . $col_2;
+
+        $list_guides = "<div class=\"pure-g guide_list\">$layout</div>";
+      }
+
+    }
 
 ////////////////////////////
 // Now we are finally read to display the page
@@ -180,6 +303,7 @@ include("includes/header_um.php");
             $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Quick Search", "guides", '80');
             $input_box->displayBox();
             print "<br /><br />";
+            print $layout;
             print $our_results; ?>
         </div> <!-- end breather -->
     </div><!--end 3/4 main area-->
