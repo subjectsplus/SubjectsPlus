@@ -69,6 +69,9 @@ $pluslets_activated = array( "Basic", "Heading", "Feed", "TOC", "HTML5Video", "2
 $titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
 
 
+//This sets the max width of the guide container
+$guide_container_width = array( "1260px");
+
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)
 // You need to set this to TRUE
