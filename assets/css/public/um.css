@@ -1400,19 +1400,53 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 
 
-.index-search-area {}
-.index-search-area .autoC {background-color: #f2f2f2; padding:50px;}
+.index-search-area {margin-right: 50px;}
+.index-search-area .autoC {margin-bottom:40px;}
 .index-search-area .ui-autocomplete-input {
-    background: #484848 none repeat scroll 0 0;
-    border-color: #3e3e3e #525252 #525252 #3e3e3e;
-    border-radius: 4px;
+    /*background: #f2f2f2 none repeat scroll 0 0;
+    border-color: #DADFE1 #F2F1EF #F2F1EF #DADFE1 !important;
+    box-shadow:none !important;*/
+    border-radius:4px 0 0 4px !important;
     border-style: solid;
     border-width: 1px;
     margin: 0;
-    height: 45px;
-    width: 50%;
-    padding: 0;
+    height: 44px;
+    padding: 0.5em !important;
+    font-size: 1.1em;
+    color: #666;
+    width: -moz-calc(100% - 65px);
+    width: -webkit-calc(100% - 65px);
+    width: calc(100% - 65px);
+    
 }
+
+.index-search-area .ui-autocomplete-input:focus {border-color: #f37421 !important;}
+
+
+.index-search-area .pure-button-topsearch {
+    background-color: #f37421;
+    color: #fff;
+    margin: 0 0 0 -4px;
+    height: 45px;
+    border-radius:0 4px 4px 0 !important;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    border-top:1px solid #DADFE1;
+    letter-spacing: 1px;
+}
+
+.guide_list {background-color: #F2f2f2; padding:20px 10px;margin-bottom: 25px; border-radius: 2px; }
+
+.guide_list_header {margin-bottom:0;}
+.guide_list_header h3 {letter-spacing: 0; color:#f37421; font-size: 1.3em; border-bottom: 1px dotted #BDC3C7; padding-bottom:2px; }
+
+.index-search-area ul {list-style: inside none none !important; margin: 15px 0 0 10px !important; padding: 0;}
+
+.index-search-area ul li {font-size:1.05em;}
+.index-search-area ul li .fa {color: #ABB7B7; font-size:1.1em;}
+
+.guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none;}
+
 
 
 /* //////////////////
@@ -1862,6 +1896,8 @@ table.item_listing th {
     .pluslet_body .pure-form textarea {
       width: 55%;
     }
+
+    
     
 }
 
@@ -1905,6 +1941,9 @@ table.item_listing th {
 .links {
     margin-bottom:5%;
 }
+
+
+
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {

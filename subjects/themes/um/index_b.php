@@ -136,7 +136,7 @@ $newlist .= "</ul>\n";
 
 
 $searchbox = '
-<div class="autoC index-search" id="autoC" style="margin: 1em 2em 2em 0;">
+<div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
     <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
         <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
         <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
@@ -248,8 +248,8 @@ $switch_row = round($total_rows / 2);
 
       if ($total_rows > 0) {
 
-        $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\">";
-        $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\">";
+        $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul>";
+        $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul>";
 
         $row_count = 1;
 
@@ -258,12 +258,12 @@ $switch_row = round($total_rows / 2);
         $guide_location = $guide_path . $myrow[0];
         $list_bonus = "";
 
-        if ($myrow[4] != "") {$list_bonus .= $myrow[4] . "<br />"; } // add description
-        if ($myrow[5] != "") {$list_bonus .= $myrow[5] . "<br />"; } // add keywords
-        $list_bonus .= $myrow[3] . "<br />";
+        if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
+        if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
+        //$list_bonus .= $myrow[3] . "<br />";
 
-        $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
-        <div class=\"list_bonus\">$list_bonus</div>
+        $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+        <div class=\"guide_list_bonus\">$list_bonus</div>
         </li>";
 
           if ($row_count <= $switch_row) {
@@ -278,12 +278,12 @@ $switch_row = round($total_rows / 2);
         $row_count++;
         }
 
-        $col_1 .= "</div>";
-        $col_2 .= "</div>";
+        $col_1 .= "</ul></div>";
+        $col_2 .= "</ul></div>";
 
-        $layout .= "<div class=\"pure-u-1 guide_list_header\"><h3>$value</h3></div>" . $col_1 . $col_2;
+        $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><h3>$value</h3></div>" . $col_1 . $col_2 ."</div>";
 
-        $list_guides = "<div class=\"pure-g guide_list\">$layout</div>";
+        $list_guides = "";
       }
 
     }
@@ -300,7 +300,7 @@ $switch_row = round($total_rows / 2);
         <div class="breather">
              <div class="index-search-area">        
                 <?php 
-                $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides", '80');
+                $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
                 print $layout; ?>
             </div>
@@ -345,9 +345,6 @@ include("includes/footer_um.php");
 <script type="text/javascript" language="javascript">
     $(document).ready(function(){
 
-        // add rowstriping
-        stripeR();
-
 
         $("[id*=show]").on("change", function() {
 
@@ -360,16 +357,14 @@ include("includes/footer_um.php");
 
         });
 
-        function stripeR() {
-            $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
-            $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
-        }
+        // Toggle details for each guide list item 
+          $( ".fa-plus-square" ).click(function() {
+             $(this).toggleClass('fa-plus-square fa-minus-square');
+             $(this).parent().find('.guide_list_bonus').toggle();            
+          });
 
-        function unStripeR () {
-            $(".zebra").removeClass("evenrow");
-            $(".zebra").removeClass("oddrow");
-        }
-       
+        
+
 
     });
 </script>
