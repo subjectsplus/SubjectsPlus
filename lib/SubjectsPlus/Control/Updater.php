@@ -340,8 +340,8 @@ class Updater
 		
 		
 		$this->threeToFourAlterTables = array (
-				"ALTER TABLE `tab` ADD COLUMN `parent` TEXT NOT NULL" ,
-				"ALTER TABLE `tab` ADD COLUMN `children` TEXT NOT NULL",
+				"ALTER TABLE `tab` ADD COLUMN `parent` TEXT DEFAULT NULL" ,
+				"ALTER TABLE `tab` ADD COLUMN `children` TEXT DEFAULT NULL",
 				"ALTER TABLE `pluslet` ADD COLUMN `favorite_box` INT NULL DEFAULT 0",
 				"ALTER TABLE `tab` ADD COLUMN `extra` MEDIUMTEXT NULL",
 				"ALTER TABLE `pluslet` ADD COLUMN `target_blank_links` INT NULL DEFAULT 0",
