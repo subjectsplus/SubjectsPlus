@@ -354,6 +354,19 @@ class Updater
 		);
 	}
 
+	public function moveStaffDepartmentIds () {
+		$db = new Querier;
+		$staff_results = $db->query('SELECT staff_id, department_id FROM staff');
+		foreach ($staff_results as $staff) {
+		$staff_id = $staff['staff_id'];
+		$department_id = $staff['department_id'];
+		$db->exec("INSERT INTO staff_department VALUES ($staff_id, $department_id)");
+			
+		}
+		
+	}
+	
+	
 	/**
 	 * sp_Updater::displayStartingUpdaterPage() - this method will display the page
 	 * that displays before the updater runs update
@@ -497,6 +510,8 @@ class Updater
 							return FALSE;
 						}
 					}
+					
+					$this->moveStaffDepartmentIds();
 												
 					foreach($this->threeToFourAlterTables as $lstrAQuery)
 					{
