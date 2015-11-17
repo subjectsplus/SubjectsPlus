@@ -13,6 +13,10 @@
 
 use SubjectsPlus\Control\Updater;
 
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
+
 //set varirables needed in header
 $subcat = "update";
 $page_title = "Update";

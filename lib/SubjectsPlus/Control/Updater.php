@@ -135,20 +135,21 @@ class Updater
          PRIMARY KEY (`staff_id`)
          ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'",
 				
-				"CREATE TABLE ​stats​ (
- ​stats_id​ int(11) NOT NULL AUTO_INCREMENT,
- http_referer​ varchar(200) DEFAULT NULL,
- query_string varchar(200) DEFAULT NULL,
- ​remote_address​ varchar(200) DEFAULT NULL,
- ​guide_page varchar(200) DEFAULT NULL,
- ​`date`​ int(11) DEFAULT NULL,
- ​page_title​ varchar(200) DEFAULT NULL,
- ​user_agent varchar(200) DEFAULT NULL,
- ​subject_short_form​ varchar(200) DEFAULT NULL,
- ​event_type​ varchar(200) DEFAULT NULL,
- ​tab_name varchar(200) DEFAULT NULL,
- PRIMARY KEY (​stats_id​)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+				"CREATE TABLE `stats` (
+  `stats_id` int(11) NOT NULL AUTO_INCREMENT,
+  `http_referer` varchar(200) DEFAULT NULL,
+  `query_string` varchar(200) DEFAULT NULL,
+  `remote_address` varchar(200) DEFAULT NULL,
+  `guide_page` varchar(200) DEFAULT NULL,
+  `date` int(11) DEFAULT NULL,
+  `page_title` varchar(200) DEFAULT NULL,
+  `user_agent` varchar(200) DEFAULT NULL,
+  `subject_short_form` varchar(200) DEFAULT NULL,
+  `event_type` varchar(200) DEFAULT NULL,
+  `tab_name` varchar(200) DEFAULT NULL,
+  `link_url` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`stats_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1090 DEFAULT CHARSET=utf8;"
 		);
 		
 		
@@ -325,7 +326,7 @@ class Updater
 		);
 
 		$this->twoToThreeAlterTables = array(
-			"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
+			"ALTER IGNORE TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
 			"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
 			"ALTER IGNORE TABLE `subject` ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
 			"ALTER IGNORE TABLE `subject` ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
@@ -339,13 +340,15 @@ class Updater
 		
 		
 		$this->threeToFourAlterTables = array ( 
-				"ALTER TABLE ​tab​ ADD ​`parent`​ TEXT NOT NULL ADD ​`children`​ TEXT NOT NULL",
-				"ALTER TABLE ​​pluslet​ ADD COLUMN ​`favorite_box`​ INT NULL DEFAULT 0 AFTER ​`titlebar_styling`",
-				"ALTER TABLE ​pluslet​ ADD ​`master`​ INT NULL DEFAULT NULL",
-				"ALTER TABLE tab ADD COLUMN `extra` MEDIUMTEXT NULL AFTER `children`",
-				"ALTER TABLE ​pluslet​ ADD COLUMN ​`target_blank_links`​ INT NULL DEFAULT 0 AFTER ​`favorite_box`​)",
-				"ALTER TABLE ​pluslet​ CHANGE COLUMN ​extra​ ​extra​ MEDIUMTEXT NULL DEFAULT NULL",
-				"ALTER TABLE ​staff​ ADD COLUMN ​social_media​ MEDIUMTEXT NULL DEFAULT NULL"
+				'ALTER TABLE `​tab` ADD COLUMN `parent` TEXT NOT NULL' ,
+				'ALTER TABLE "tab" ADD COLUMN "​children"​ TEXT NOT NULL',
+				'ALTER TABLE ​​"pluslet"​ ADD COLUMN "​favorite_box"​ INT NULL DEFAULT 0 AFTER ​"titlebar_styling"',
+				'ALTER TABLE ​"pluslet"​ ADD ​COLUMN "master"​ INT NULL DEFAULT NULL',
+				'ALTER TABLE "tab" ADD COLUMN "extra" MEDIUMTEXT NULL AFTER "children"',
+				'ALTER TABLE ​"pluslet​" ADD COLUMN ​"target_blank_links"​ INT NULL DEFAULT 0 AFTER ​"favorite_box​"',
+				'ALTER TABLE ​"pluslet"​ CHANGE COLUMN ​"extra"​ MEDIUMTEXT NULL DEFAULT NULL',
+				'ALTER TABLE ​"staff"​ ADD COLUMN ​"social_media"​ MEDIUMTEXT NULL DEFAULT NULL'
+				
 		);
 	}
 
@@ -478,6 +481,7 @@ class Updater
 						}
 
 						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+						
 						return FALSE;
 					}
 				}
@@ -491,21 +495,7 @@ class Updater
 							return FALSE;
 						}
 					}
-				
-					foreach($this->threeToFourInsert as $lstrIQuery)
-					{
-						if( $db->query( $lstrIQuery ) === FALSE )
-						{
-							$this->displayUpdaterErrorPage( _( "Problem inserting new data into table." ) . "<br />$lstrIQuery" );
-							return FALSE;
-						}
-					}
-				
-					if( !$this->fix2ExistingData() )
-					{
-						return FALSE;
-					}
-				
+												
 					foreach($this->threeToFourAlterTables as $lstrAQuery)
 					{
 						if( $db->exec( $lstrAQuery ) === FALSE )
@@ -518,6 +508,8 @@ class Updater
 							}
 				
 							$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+							print_r($db->errorInfo());
+								
 							return FALSE;
 						}
 					}
