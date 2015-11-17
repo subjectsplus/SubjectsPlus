@@ -551,49 +551,6 @@ class Installer
 		}
 	}
 	
-	public function updateToFour() {
-
-		/*
-		$db = new Querier;
-		$dbc = $db->getConnection();
-		
-		$statement = $statement = $dbc->prepare("ALTER TABLE ​tab​ ADD ​`parent`​ TEXT NOT NULL ADD ​`children`​ TEXT NOT NULL");
-		$statement->execute();
-		$statement = $dbc->prepare("ALTER TABLE ​​pluslet​ ADD COLUMN ​`favorite_box`​ INT NULL DEFAULT 0 AFTER ​`titlebar_styling`​");
-		$statement->execute();
-		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ ADD ​`master`​ INT NULL DEFAULT NULL COMMENT 'added v4'");
-		$statement->execute();
-		$statement = $dbc->prepare("CREATE TABLE ​stats​ (
- ​stats_id​ int(11) NOT NULL AUTO_INCREMENT,
- http_referer​ varchar(200) DEFAULT NULL,
- query_string varchar(200) DEFAULT NULL,
- ​remote_address​ varchar(200) DEFAULT NULL,
- ​guide_page varchar(200) DEFAULT NULL,
- ​`date`​ int(11) DEFAULT NULL,
- ​page_title​ varchar(200) DEFAULT NULL,
- ​user_agent varchar(200) DEFAULT NULL,
- ​subject_short_form​ varchar(200) DEFAULT NULL,
- ​event_type​ varchar(200) DEFAULT NULL,
- ​tab_name varchar(200) DEFAULT NULL,
- PRIMARY KEY (​stats_id​)
-) ENGINE=MyISAM AUTO_INCREMENT=157 DEFAULT CHARSET=utf8");
-		
-		$statement->execute();
-		var_dump($statement->errorInfo());
-		
-		$statement = $dbc->prepare("ALTER TABLE tab ADD COLUMN `extra` VARCHAR(255) NULL AFTER `children`");
-		$statement->execute();
-		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ ADD COLUMN ​`target_blank_links`​ INT NULL DEFAULT 0 AFTER ​`favorite_box`​)");
-		$statement->execute();
-		$statement = $dbc->prepare("ALTER TABLE ​pluslet​ CHANGE COLUMN ​extra​ ​extra​ MEDIUMTEXT NULL DEFAULT NULL");
-		$statement->execute();
-		
-		
-
-		var_dump($statement->errorInfo());
-		
-		*/
-	}
 
 	/**
 	 * sp_Installer::updateRewriteBases() - this method updates all the htaccess files

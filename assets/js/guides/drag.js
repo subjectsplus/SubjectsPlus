@@ -193,7 +193,7 @@ function drag() {
 		 									  maxHeight: "800px"
 		 								      });
 		 								      
-		 								      var h = Help();
+		 								      var h = help();
 		 								      h.makeHelpable("img[class*=help-]");
 
 		 								      //Close main flyout when a pluslet is dropped

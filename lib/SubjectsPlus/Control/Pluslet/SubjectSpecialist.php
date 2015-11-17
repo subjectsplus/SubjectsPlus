@@ -213,6 +213,23 @@ class Pluslet_SubjectSpecialist extends Pluslet {
             $this->_body_content = "";
         }
 
+        global $CKPath;
+        global $CKBasePath;
+
+        include ($CKPath);
+        global $BaseURL;
+
+
+        $oCKeditor = new CKEditor($CKBasePath);
+        $oCKeditor->timestamp = time();
+        //$oCKeditor->config['ToolbarStartExpanded'] = true;
+        $config['toolbar'] = 'SubsPlus_Narrow';
+        $config['height'] = '300';
+        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+
+        $this_instance = "editor1";
+        $this->_editor = $oCKeditor->editor($this_instance, $this->_body, $config);
+
 
         //this should rarely happen, only on pull from libguides xml does it occur
         if(empty($this->_staffArray)) {

@@ -1091,7 +1091,7 @@ function isInstalled()
 function isUpdated()
 {
 	//does key SubjectsPlus 2.0 tables exist query
-	$lstrQuery = 'SHOW TABLES LIKE \'section\'';
+	$lstrQuery = 'SHOW TABLES LIKE \'staff_department\'';
     $db = new Querier;
 	$rscResults = $db->query( $lstrQuery );
 	$lintRowCount = count( $rscResults );

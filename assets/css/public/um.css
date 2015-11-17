@@ -1943,6 +1943,12 @@ table.item_listing th {
 }
 
 
+img.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+
 
 
 /* ≥ 1280px     .pure-u-xl-* */

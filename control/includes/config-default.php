@@ -60,7 +60,7 @@ $require_user_columns = array( "title", "classification", "tel", "address", "cit
 
 //used to declare which pluslets are activated in new box drop-down
 
-$pluslets_activated = array( "Basic", "Heading", "Feed", "TOC", "HTML5Video", "2", "4", "WorldCat", "Catalog", "Related", "ArticlesPlus", "SocialMedia", "SubjectSpecialist", "GoogleBooks", "GoogleScholar", "GoogleSearch", "1", "GuideSearch", "GuideSelect", "NewDBs", "NewGuides");
+$pluslets_activated = array( "Basic", "Heading", "Feed", "TOC", "HTML5Video", "2", "4", "WorldCat", "Catalog", "Related", "ArticlesPlus", "SocialMedia", "SubjectSpecialist", "GoogleBooks", "GoogleScholar", "GoogleSearch", "1", "GuideSearch", "GuideSelect", "NewDBs", "NewGuides", "CollectionList");
 
 
 // These are used to allow the admin to set different 'themes' for the pluslet titlebar
@@ -68,6 +68,9 @@ $pluslets_activated = array( "Basic", "Heading", "Feed", "TOC", "HTML5Video", "2
 
 $titlebar_styles = array( "White/Black" => "ts-whiteblack", "Black/White" => "ts-blackwhite");
 
+
+//This sets the max width of the guide container
+$guide_container_width = array( "1260px");
 
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)
