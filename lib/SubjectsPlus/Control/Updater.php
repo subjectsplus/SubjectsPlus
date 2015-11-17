@@ -1,7 +1,7 @@
 <?php
    namespace SubjectsPlus\Control;
 /**
- * sp_Updater - this class handles the updating to SubjectsPlus 3.0
+ * sp_Updater - this class handles the updating to SubjectsPlus 4
  *
  * @package SubjectsPlus
  * @author dgonzalez
@@ -22,20 +22,32 @@ class Updater
 {
 	//class properties
 	//make one for each version before current version
-	private $lobj1NewTables;
-	private $lobj2NewTables;
-	private $lobj1InsertInto;
-	private $lobj2InsertInto;
-	private $lobj1FixData;
-	private $lobj2FixData;
-	private $lobj1AlterTables;
-	private $lobj2AlterTables;
-	private $lobj2FixDataAfterAlter;
+	
+	// one to two 
+	
+	private $oneToTwoTables;
+	private $oneToTwoInsert;
+	private $oneToTwoFixData;
+	private $oneToTwoAlterTables;
+	
+	// two to three 
+	
+	private $twoToThreeTables;
+	private $twoToThreeInsert;
+	private $twoToThreeFixData;
+	private $twoToThreeAlterTables;
+	
+	// three to four
+	
+	private $threeToFourTables;
+	private $threeToFourInsert;
+	private $threeToFourFixData;
+	private $threeToFourAlterTables;
 
 	function __construct()
 	{
 		//queries to add new tables
-		$this->lobj1NewTables = array(
+		$this->oneToTwoTables = array(
 			"CREATE TABLE IF NOT EXISTS `discipline` (
 			  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
 			  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
@@ -65,7 +77,7 @@ class Updater
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v2'"
 		);
 
-		$this->lobj2NewTables = array(
+		$this->twoToThreeTables = array(
 			"CREATE TABLE IF NOT EXISTS `subject_department` (
 			  `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
 			  `id_subject` bigint(20) NOT NULL,
@@ -115,8 +127,34 @@ class Updater
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'"
 		);
 
+		$this->threeToFourTables = array ("
+        
+		CREATE TABLE `staff_department` (
+         `staff_id` int(11) NOT NULL AUTO_INCREMENT,
+         `department_id` int(11) NOT NULL,
+         PRIMARY KEY (`staff_id`)
+         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'",
+				
+				"CREATE TABLE `stats` (
+  `stats_id` int(11) NOT NULL AUTO_INCREMENT,
+  `http_referer` varchar(200) DEFAULT NULL,
+  `query_string` varchar(200) DEFAULT NULL,
+  `remote_address` varchar(200) DEFAULT NULL,
+  `guide_page` varchar(200) DEFAULT NULL,
+  `date` int(11) DEFAULT NULL,
+  `page_title` varchar(200) DEFAULT NULL,
+  `user_agent` varchar(200) DEFAULT NULL,
+  `subject_short_form` varchar(200) DEFAULT NULL,
+  `event_type` varchar(200) DEFAULT NULL,
+  `tab_name` varchar(200) DEFAULT NULL,
+  `link_url` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`stats_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1090 DEFAULT CHARSET=utf8;"
+		);
+		
+		
 		//queries to insert into new tables
-		$this->lobj1InsertInto = array(
+		$this->oneToTwoInsert = array(
 			"INSERT INTO `discipline` (`discipline_id`,`discipline`,`sort`) VALUES (1,'agriculture',1),(2,'anatomy &amp; physiology',2),
 			(3,'anthropology',3),(4,'applied sciences',4),(5,'architecture',5),(6,'astronomy &amp; astrophysics',6),(7,'biology',7),
 			(8,'botany',8),(9,'business',9),(10,'chemistry',10),(11,'computer science',11),(12,'dance',12),(13,'dentistry',13),
@@ -134,7 +172,7 @@ class Updater
 		);
 
 		//queries to insert into new tables
-		$this->lobj2InsertInto = array(
+		$this->twoToThreeInsert = array(
 			"INSERT INTO tab (subject_id) SELECT s.subject_id
 			  FROM subject as s LEFT OUTER JOIN tab as t
 			  ON s.subject_id = t.subject_id
@@ -152,7 +190,7 @@ class Updater
 		);
 
 		//queries to fix data and columns
-		$this->lobj1FixData = array(
+		$this->oneToTwoFixData = array(
 			"ALTER TABLE `rank` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NULL DEFAULT NULL, CHANGE COLUMN `title_id` `title_id` BIGINT(20) NULL DEFAULT NULL,
 			CHANGE COLUMN `source_id` `source_id` BIGINT(20) NULL DEFAULT NULL",
 			"UPDATE `talkback` SET `a_from` = NULL WHERE `a_from` REGEXP '[^0-9]'",
@@ -217,13 +255,13 @@ class Updater
 			"DROP TABLE `temp_chchchanges`"
 		);
 
-		$this->lobj2FixData = array(
+		$this->twoToThreeFixData = array(
 			"DELETE ps FROM pluslet_subject as ps LEFT OUTER JOIN subject as s ON s.subject_id = ps.subject_id WHERE s.subject_id IS NULL",
 			"DROP TABLE IF EXISTS `pluslet_subject`"
 		);
 
 		//queries to change or drop columns, add referential integrity, add indexes
-		$this->lobj1AlterTables = array(
+		$this->oneToTwoAlterTables = array(
 			"DROP TABLE IF EXISTS `pluslet_staff`",
 			"ALTER TABLE `department` ADD COLUMN `email` VARCHAR(255) NULL DEFAULT NULL  AFTER `telephone`,
 			ADD COLUMN `url` VARCHAR(255) NULL DEFAULT NULL  AFTER `email`",
@@ -287,8 +325,8 @@ class Updater
 			ADD INDEX `fk_talkback_staff_id_idx` (`a_from` ASC)"
 		);
 
-		$this->lobj2AlterTables = array(
-			"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
+		$this->twoToThreeAlterTables = array(
+			"ALTER IGNORE TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
 			"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
 			"ALTER IGNORE TABLE `subject` ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
 			"ALTER IGNORE TABLE `subject` ADD COLUMN `description` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
@@ -298,6 +336,21 @@ class Updater
 			"ALTER TABLE `subject_department` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`",
 			"ALTER TABLE `subject_subject` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`",
 			"ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified`"
+		);
+		
+		
+		$this->threeToFourAlterTables = array (
+				"ALTER TABLE `tab` ADD COLUMN `parent` TEXT DEFAULT NULL" ,
+				"ALTER TABLE `tab` ADD COLUMN `children` TEXT DEFAULT NULL",
+				"ALTER TABLE `pluslet` ADD COLUMN `favorite_box` INT NULL DEFAULT 0",
+				"ALTER TABLE `tab` ADD COLUMN `extra` MEDIUMTEXT NULL",
+				"ALTER TABLE `pluslet` ADD COLUMN `target_blank_links` INT NULL DEFAULT 0",
+				"ALTER TABLE `staff` ADD COLUMN `social_media` MEDIUMTEXT NULL DEFAULT NULL ",
+				"ALTER TABLE `pluslet` ADD COLUMN  `master` INT NULL DEFAULT NULL",
+				"ALTER TABLE `pluslet` MODIFY COLUMN `extra` MEDIUMTEXT NULL DEFAULT NULL"
+
+
+				
 		);
 	}
 
@@ -312,20 +365,20 @@ class Updater
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
 	<div class="install-pluslet" name="error_page">
-    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 3.0" ); ?></h2>
+    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 4" ); ?></h2>
 
 				<div align="center">
 					<p><?php echo _( "Welcome to the SubjectPlus Updater!" ); ?></p>
 					<br />
 					<p><?php echo _( "Before we begin, if you are currently running version 0.9, please run the <a href=\"migrate_to_v1_fromv09.php\">Migrator</a>." ); ?></p>
-					<p><?php echo _( "If you are running version 1.x or higher, follow these steps to update to version 3.0." ); ?></p>
+					<p><?php echo _( "If you are running version 1.x or higher, follow these steps to update to version 4." ); ?></p>
 				</div>
 				<br />
 				<ul>
 					<li>
 						<strong><?php echo _( "Backup your current SubjectsPlus database" ); ?></strong>
 						<br />
-						<em style="font-style: italic; font-size: smaller;"><?php echo _( "The updater will examine and update your data in order to work with 3.0. Also if error occurs, you may need to revert back to older database." ); ?></em>
+						<em style="font-style: italic; font-size: smaller;"><?php echo _( "The updater will examine and update your data in order to work with 4. Also if error occurs, you may need to revert back to older database." ); ?></em>
 					</li>
 					<li><?php echo _( "After <a href=\"?step=1\">Run Updater</a>" ); ?>
 						<br />
@@ -338,7 +391,7 @@ class Updater
 	}
 
 	/**
-	 * sp_Updater::update() - this method updates to SubjectPlus 3.0
+	 * sp_Updater::update() - this method updates to SubjectPlus 4.0
 	 *
 	 * @return boolean
 	 */
@@ -351,7 +404,7 @@ class Updater
 		switch( $lstrVersion )
 		{
 			case '1':
-				foreach($this->lobj1NewTables as $lstrNQuery)
+				foreach($this->oneToTwoTables as $lstrNQuery)
 				{
 					if( $db->query( $lstrNQuery ) === FALSE )
 					{
@@ -360,7 +413,7 @@ class Updater
 					}
 				}
 
-				foreach($this->lobj1InsertInto as $lstrIQuery)
+				foreach($this->oneToTwoInsert as $lstrIQuery)
 				{
 					if( $db->query( $lstrIQuery ) === FALSE )
 					{
@@ -376,7 +429,7 @@ class Updater
 
 				if( !$this->before1AlterQueries() ) return FALSE;
 
-				foreach($this->lobj1AlterTables as $lstrAQuery)
+				foreach($this->oneToTwoAlterTables as $lstrAQuery)
 				{
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
@@ -395,7 +448,7 @@ class Updater
 				if( !$this->after1AlterQueries() ) return FALSE;
 
 			case '2':
-				foreach($this->lobj2NewTables as $lstrNQuery)
+				foreach($this->twoToThreeTables as $lstrNQuery)
 				{
 					if( $db->query( $lstrNQuery ) === FALSE )
 					{
@@ -404,7 +457,7 @@ class Updater
 					}
 				}
 
-				foreach($this->lobj2InsertInto as $lstrIQuery)
+				foreach($this->twoToThreeInsert as $lstrIQuery)
 				{
 					if( $db->query( $lstrIQuery ) === FALSE )
 					{
@@ -418,7 +471,7 @@ class Updater
 					return FALSE;
 				}
 
-				foreach($this->lobj2AlterTables as $lstrAQuery)
+				foreach($this->twoToThreeAlterTables as $lstrAQuery)
 				{
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
@@ -430,9 +483,38 @@ class Updater
 						}
 
 						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+						
 						return FALSE;
 					}
 				}
+				
+				case '3':
+					foreach($this->threeToFourTables as $lstrNQuery)
+					{
+						if( $db->query( $lstrNQuery ) === FALSE )
+						{
+							$this->displayUpdaterErrorPage( _( "Problem creating new table." ) . "<br />$lstrNQuery" );
+							return FALSE;
+						}
+					}
+												
+					foreach($this->threeToFourAlterTables as $lstrAQuery)
+					{
+						if( $db->exec( $lstrAQuery ) === FALSE )
+						{
+							//if duplicate column, keep going. assume correct column
+							$lobjDBErrorInfo = $db->errorInfo();
+							if( $lobjDBErrorInfo[1] == '1060' )
+							{
+								continue;
+							}
+				
+							$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+							print_r($db->errorInfo());
+								
+							return FALSE;
+						}
+					}
 
 			default:
 				break;
@@ -456,7 +538,7 @@ class Updater
 	<div class="install-pluslet" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Update Complete" ); ?></h2>
 
-				<p><?php echo _( "SubjectsPlus update to 3.0 complete. Please log in." ); ?></p>
+				<p><?php echo _( "SubjectsPlus update to 4 complete. Please log in." ); ?></p>
 				<br />
 				<p><?php echo _( "If you have any <strong>custom pluslets</strong>. please follow the following steps to successfully migrate over." ); ?></p>
 				<p><?php echo _( "Move custom pluslets from &#39;/control/includes/classes&#39; to &#39;/lib/SubjectsPlus/Control/Pluslet&#39;" ); ?></p>
@@ -466,6 +548,8 @@ class Updater
 				<p><strong><?php echo _( "require_once(&quot;Pluslet.php&quot;);" ); ?></strong></p>
 				<p><?php echo _( "Edit each file to remove &#39;sp_&#39; from class declaration. For example, edit &#39;class sp_Pluslet_6 extends sp_Pluslet {&#39; to &#39;class Pluslet_6 extends Pluslet {&#39;" ); ?></p>
 				<br />
+				<p><?php echo _( "You many need to change custom CSS styles for your theme." ); ?></p>
+				
 				<p><a href="login.php"><?php echo _( "Log In" ); ?></a></p>
 				<br />
 				<em style="font-style: italic; font-size: smaller;"><?php echo _( "The first time you log in after update, you must use entire email address for user (e.g. admin@sp.edu)." ); ?></em>
@@ -505,7 +589,7 @@ class Updater
 	{
 		$db = new Querier;
 
-		foreach($this->lobj1FixData as $lstrFQuery)
+		foreach($this->oneToTwoFixData as $lstrFQuery)
 		{
 			if( $db->query( $lstrFQuery ) === FALSE )
 			{
@@ -527,7 +611,7 @@ class Updater
 	{
 		$db = new Querier;
 
-		foreach($this->lobj2FixData as $lstrFQuery)
+		foreach($this->twoToThreeFixData as $lstrFQuery)
 		{
 			if( $db->query( $lstrFQuery ) === FALSE )
 			{
@@ -662,6 +746,14 @@ class Updater
 	private function getCurrentVersion()
 	{
 		$db = new Querier;
+		
+		//test whether current vesion is 3.x
+		$lstrQuery = 'SHOW TABLES LIKE \'staff_department\'';
+		$rscResults = $db->query( $lstrQuery );
+		$lintRowCount = count( $rscResults );
+		
+		//no key SubjectsPlus 3..0 tables exists
+		if( $lintRowCount != 0 ) return '4';
 
 		//test whether current vesion is 3.x
 		$lstrQuery = 'SHOW TABLES LIKE \'section\'';
