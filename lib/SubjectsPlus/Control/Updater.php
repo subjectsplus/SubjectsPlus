@@ -1,7 +1,7 @@
 <?php
    namespace SubjectsPlus\Control;
 /**
- * sp_Updater - this class handles the updating to SubjectsPlus 3.0
+ * sp_Updater - this class handles the updating to SubjectsPlus 4
  *
  * @package SubjectsPlus
  * @author dgonzalez
@@ -365,20 +365,20 @@ class Updater
 		?>
 		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
 	<div class="install-pluslet" name="error_page">
-    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 3.0" ); ?></h2>
+    <h2 class="bw_head"><?php echo _( "Update to SubjectsPlus 4" ); ?></h2>
 
 				<div align="center">
 					<p><?php echo _( "Welcome to the SubjectPlus Updater!" ); ?></p>
 					<br />
 					<p><?php echo _( "Before we begin, if you are currently running version 0.9, please run the <a href=\"migrate_to_v1_fromv09.php\">Migrator</a>." ); ?></p>
-					<p><?php echo _( "If you are running version 1.x or higher, follow these steps to update to version 3.0." ); ?></p>
+					<p><?php echo _( "If you are running version 1.x or higher, follow these steps to update to version 4." ); ?></p>
 				</div>
 				<br />
 				<ul>
 					<li>
 						<strong><?php echo _( "Backup your current SubjectsPlus database" ); ?></strong>
 						<br />
-						<em style="font-style: italic; font-size: smaller;"><?php echo _( "The updater will examine and update your data in order to work with 3.0. Also if error occurs, you may need to revert back to older database." ); ?></em>
+						<em style="font-style: italic; font-size: smaller;"><?php echo _( "The updater will examine and update your data in order to work with 4. Also if error occurs, you may need to revert back to older database." ); ?></em>
 					</li>
 					<li><?php echo _( "After <a href=\"?step=1\">Run Updater</a>" ); ?>
 						<br />
@@ -391,7 +391,7 @@ class Updater
 	}
 
 	/**
-	 * sp_Updater::update() - this method updates to SubjectPlus 3.0
+	 * sp_Updater::update() - this method updates to SubjectPlus 4.0
 	 *
 	 * @return boolean
 	 */
@@ -538,7 +538,7 @@ class Updater
 	<div class="install-pluslet" name="error_page" align="center">
 			<h2 class="bw_head"><?php echo _( "Update Complete" ); ?></h2>
 
-				<p><?php echo _( "SubjectsPlus update to 3.0 complete. Please log in." ); ?></p>
+				<p><?php echo _( "SubjectsPlus update to 4 complete. Please log in." ); ?></p>
 				<br />
 				<p><?php echo _( "If you have any <strong>custom pluslets</strong>. please follow the following steps to successfully migrate over." ); ?></p>
 				<p><?php echo _( "Move custom pluslets from &#39;/control/includes/classes&#39; to &#39;/lib/SubjectsPlus/Control/Pluslet&#39;" ); ?></p>
@@ -548,6 +548,8 @@ class Updater
 				<p><strong><?php echo _( "require_once(&quot;Pluslet.php&quot;);" ); ?></strong></p>
 				<p><?php echo _( "Edit each file to remove &#39;sp_&#39; from class declaration. For example, edit &#39;class sp_Pluslet_6 extends sp_Pluslet {&#39; to &#39;class Pluslet_6 extends Pluslet {&#39;" ); ?></p>
 				<br />
+				<p><?php echo _( "You many need to change custom CSS styles for your theme." ); ?></p>
+				
 				<p><a href="login.php"><?php echo _( "Log In" ); ?></a></p>
 				<br />
 				<em style="font-style: italic; font-size: smaller;"><?php echo _( "The first time you log in after update, you must use entire email address for user (e.g. admin@sp.edu)." ); ?></em>
