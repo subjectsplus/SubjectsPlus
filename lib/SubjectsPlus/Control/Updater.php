@@ -22,20 +22,32 @@ class Updater
 {
 	//class properties
 	//make one for each version before current version
-	private $lobj1NewTables;
-	private $lobj2NewTables;
-	private $lobj1InsertInto;
-	private $lobj2InsertInto;
-	private $lobj1FixData;
-	private $lobj2FixData;
-	private $lobj1AlterTables;
-	private $lobj2AlterTables;
-	private $lobj2FixDataAfterAlter;
+	
+	// one to two 
+	
+	private $oneToTwoTables;
+	private $oneToTwoInsert;
+	private $oneToTwoFixData;
+	private $oneToTwoAlterTables;
+	
+	// two to three 
+	
+	private $twoToThreeTables;
+	private $twoToThreeInsert;
+	private $twoToThreeFixData;
+	private $twoToThreeAlterTables;
+	
+	// three to four
+	
+	private $threeToFourTables;
+	private $threeToFourInsert;
+	private $threeToFourFixData;
+	private $threeToFourAlterTables;
 
 	function __construct()
 	{
 		//queries to add new tables
-		$this->lobj1NewTables = array(
+		$this->oneToTwoTables = array(
 			"CREATE TABLE IF NOT EXISTS `discipline` (
 			  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
 			  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
@@ -65,7 +77,7 @@ class Updater
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v2'"
 		);
 
-		$this->lobj2NewTables = array(
+		$this->twoToThreeTables = array(
 			"CREATE TABLE IF NOT EXISTS `subject_department` (
 			  `idsubject_department` int(11) NOT NULL AUTO_INCREMENT,
 			  `id_subject` bigint(20) NOT NULL,
@@ -115,8 +127,33 @@ class Updater
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='added v3'"
 		);
 
+		$this->threeToFourTables = array ("
+        
+		CREATE TABLE `staff_department` (
+         `staff_id` int(11) NOT NULL AUTO_INCREMENT,
+         `department_id` int(11) NOT NULL,
+         PRIMARY KEY (`staff_id`)
+         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'",
+				
+				"CREATE TABLE ​stats​ (
+ ​stats_id​ int(11) NOT NULL AUTO_INCREMENT,
+ http_referer​ varchar(200) DEFAULT NULL,
+ query_string varchar(200) DEFAULT NULL,
+ ​remote_address​ varchar(200) DEFAULT NULL,
+ ​guide_page varchar(200) DEFAULT NULL,
+ ​`date`​ int(11) DEFAULT NULL,
+ ​page_title​ varchar(200) DEFAULT NULL,
+ ​user_agent varchar(200) DEFAULT NULL,
+ ​subject_short_form​ varchar(200) DEFAULT NULL,
+ ​event_type​ varchar(200) DEFAULT NULL,
+ ​tab_name varchar(200) DEFAULT NULL,
+ PRIMARY KEY (​stats_id​)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8"
+		);
+		
+		
 		//queries to insert into new tables
-		$this->lobj1InsertInto = array(
+		$this->oneToTwoInsert = array(
 			"INSERT INTO `discipline` (`discipline_id`,`discipline`,`sort`) VALUES (1,'agriculture',1),(2,'anatomy &amp; physiology',2),
 			(3,'anthropology',3),(4,'applied sciences',4),(5,'architecture',5),(6,'astronomy &amp; astrophysics',6),(7,'biology',7),
 			(8,'botany',8),(9,'business',9),(10,'chemistry',10),(11,'computer science',11),(12,'dance',12),(13,'dentistry',13),
@@ -134,7 +171,7 @@ class Updater
 		);
 
 		//queries to insert into new tables
-		$this->lobj2InsertInto = array(
+		$this->twoToThreeInsert = array(
 			"INSERT INTO tab (subject_id) SELECT s.subject_id
 			  FROM subject as s LEFT OUTER JOIN tab as t
 			  ON s.subject_id = t.subject_id
@@ -152,7 +189,7 @@ class Updater
 		);
 
 		//queries to fix data and columns
-		$this->lobj1FixData = array(
+		$this->oneToTwoFixData = array(
 			"ALTER TABLE `rank` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NULL DEFAULT NULL, CHANGE COLUMN `title_id` `title_id` BIGINT(20) NULL DEFAULT NULL,
 			CHANGE COLUMN `source_id` `source_id` BIGINT(20) NULL DEFAULT NULL",
 			"UPDATE `talkback` SET `a_from` = NULL WHERE `a_from` REGEXP '[^0-9]'",
@@ -217,13 +254,13 @@ class Updater
 			"DROP TABLE `temp_chchchanges`"
 		);
 
-		$this->lobj2FixData = array(
+		$this->twoToThreeFixData = array(
 			"DELETE ps FROM pluslet_subject as ps LEFT OUTER JOIN subject as s ON s.subject_id = ps.subject_id WHERE s.subject_id IS NULL",
 			"DROP TABLE IF EXISTS `pluslet_subject`"
 		);
 
 		//queries to change or drop columns, add referential integrity, add indexes
-		$this->lobj1AlterTables = array(
+		$this->oneToTwoAlterTables = array(
 			"DROP TABLE IF EXISTS `pluslet_staff`",
 			"ALTER TABLE `department` ADD COLUMN `email` VARCHAR(255) NULL DEFAULT NULL  AFTER `telephone`,
 			ADD COLUMN `url` VARCHAR(255) NULL DEFAULT NULL  AFTER `email`",
@@ -287,7 +324,7 @@ class Updater
 			ADD INDEX `fk_talkback_staff_id_idx` (`a_from` ASC)"
 		);
 
-		$this->lobj2AlterTables = array(
+		$this->twoToThreeAlterTables = array(
 			"ALTER TABLE `staff` ADD COLUMN `position_vacant` INT(1) NULL DEFAULT 0 AFTER `lat_long`",
 			"ALTER TABLE `subject` ADD `header` VARCHAR( 100 ) NULL AFTER `extra`",
 			"ALTER IGNORE TABLE `subject` ADD COLUMN `redirect_url` VARCHAR(255) NULL DEFAULT NULL  AFTER `shortform`",
@@ -298,6 +335,17 @@ class Updater
 			"ALTER TABLE `subject_department` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `id_department`",
 			"ALTER TABLE `subject_subject` ADD COLUMN `date` TIMESTAMP NOT NULL AFTER `subject_child`",
 			"ALTER TABLE `subject` ADD COLUMN `background_link` VARCHAR(255) NULL DEFAULT NULL  AFTER `last_modified`"
+		);
+		
+		
+		$this->threeToFourAlterTables = array ( 
+				"ALTER TABLE ​tab​ ADD ​`parent`​ TEXT NOT NULL ADD ​`children`​ TEXT NOT NULL",
+				"ALTER TABLE ​​pluslet​ ADD COLUMN ​`favorite_box`​ INT NULL DEFAULT 0 AFTER ​`titlebar_styling`",
+				"ALTER TABLE ​pluslet​ ADD ​`master`​ INT NULL DEFAULT NULL",
+				"ALTER TABLE tab ADD COLUMN `extra` MEDIUMTEXT NULL AFTER `children`",
+				"ALTER TABLE ​pluslet​ ADD COLUMN ​`target_blank_links`​ INT NULL DEFAULT 0 AFTER ​`favorite_box`​)",
+				"ALTER TABLE ​pluslet​ CHANGE COLUMN ​extra​ ​extra​ MEDIUMTEXT NULL DEFAULT NULL",
+				"ALTER TABLE ​staff​ ADD COLUMN ​social_media​ MEDIUMTEXT NULL DEFAULT NULL"
 		);
 	}
 
@@ -351,7 +399,7 @@ class Updater
 		switch( $lstrVersion )
 		{
 			case '1':
-				foreach($this->lobj1NewTables as $lstrNQuery)
+				foreach($this->oneToTwoTables as $lstrNQuery)
 				{
 					if( $db->query( $lstrNQuery ) === FALSE )
 					{
@@ -360,7 +408,7 @@ class Updater
 					}
 				}
 
-				foreach($this->lobj1InsertInto as $lstrIQuery)
+				foreach($this->oneToTwoInsert as $lstrIQuery)
 				{
 					if( $db->query( $lstrIQuery ) === FALSE )
 					{
@@ -376,7 +424,7 @@ class Updater
 
 				if( !$this->before1AlterQueries() ) return FALSE;
 
-				foreach($this->lobj1AlterTables as $lstrAQuery)
+				foreach($this->oneToTwoAlterTables as $lstrAQuery)
 				{
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
@@ -395,7 +443,7 @@ class Updater
 				if( !$this->after1AlterQueries() ) return FALSE;
 
 			case '2':
-				foreach($this->lobj2NewTables as $lstrNQuery)
+				foreach($this->twoToThreeTables as $lstrNQuery)
 				{
 					if( $db->query( $lstrNQuery ) === FALSE )
 					{
@@ -404,7 +452,7 @@ class Updater
 					}
 				}
 
-				foreach($this->lobj2InsertInto as $lstrIQuery)
+				foreach($this->twoToThreeInsert as $lstrIQuery)
 				{
 					if( $db->query( $lstrIQuery ) === FALSE )
 					{
@@ -418,7 +466,7 @@ class Updater
 					return FALSE;
 				}
 
-				foreach($this->lobj2AlterTables as $lstrAQuery)
+				foreach($this->twoToThreeAlterTables as $lstrAQuery)
 				{
 					if( $db->exec( $lstrAQuery ) === FALSE )
 					{
@@ -505,7 +553,7 @@ class Updater
 	{
 		$db = new Querier;
 
-		foreach($this->lobj1FixData as $lstrFQuery)
+		foreach($this->oneToTwoFixData as $lstrFQuery)
 		{
 			if( $db->query( $lstrFQuery ) === FALSE )
 			{
@@ -527,7 +575,7 @@ class Updater
 	{
 		$db = new Querier;
 
-		foreach($this->lobj2FixData as $lstrFQuery)
+		foreach($this->twoToThreeFixData as $lstrFQuery)
 		{
 			if( $db->query( $lstrFQuery ) === FALSE )
 			{
