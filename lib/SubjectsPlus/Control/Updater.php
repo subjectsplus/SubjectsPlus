@@ -481,6 +481,46 @@ class Updater
 						return FALSE;
 					}
 				}
+				
+				case '3':
+					foreach($this->threeToFourTables as $lstrNQuery)
+					{
+						if( $db->query( $lstrNQuery ) === FALSE )
+						{
+							$this->displayUpdaterErrorPage( _( "Problem creating new table." ) . "<br />$lstrNQuery" );
+							return FALSE;
+						}
+					}
+				
+					foreach($this->threeToFourInsert as $lstrIQuery)
+					{
+						if( $db->query( $lstrIQuery ) === FALSE )
+						{
+							$this->displayUpdaterErrorPage( _( "Problem inserting new data into table." ) . "<br />$lstrIQuery" );
+							return FALSE;
+						}
+					}
+				
+					if( !$this->fix2ExistingData() )
+					{
+						return FALSE;
+					}
+				
+					foreach($this->threeToFourAlterTables as $lstrAQuery)
+					{
+						if( $db->exec( $lstrAQuery ) === FALSE )
+						{
+							//if duplicate column, keep going. assume correct column
+							$lobjDBErrorInfo = $db->errorInfo();
+							if( $lobjDBErrorInfo[1] == '1060' )
+							{
+								continue;
+							}
+				
+							$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+							return FALSE;
+						}
+					}
 
 			default:
 				break;
