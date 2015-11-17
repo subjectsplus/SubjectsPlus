@@ -339,15 +339,17 @@ class Updater
 		);
 		
 		
-		$this->threeToFourAlterTables = array ( 
-				'ALTER TABLE `​tab` ADD COLUMN `parent` TEXT NOT NULL' ,
-				'ALTER TABLE "tab" ADD COLUMN "​children"​ TEXT NOT NULL',
-				'ALTER TABLE ​​"pluslet"​ ADD COLUMN "​favorite_box"​ INT NULL DEFAULT 0 AFTER ​"titlebar_styling"',
-				'ALTER TABLE ​"pluslet"​ ADD ​COLUMN "master"​ INT NULL DEFAULT NULL',
-				'ALTER TABLE "tab" ADD COLUMN "extra" MEDIUMTEXT NULL AFTER "children"',
-				'ALTER TABLE ​"pluslet​" ADD COLUMN ​"target_blank_links"​ INT NULL DEFAULT 0 AFTER ​"favorite_box​"',
-				'ALTER TABLE ​"pluslet"​ CHANGE COLUMN ​"extra"​ MEDIUMTEXT NULL DEFAULT NULL',
-				'ALTER TABLE ​"staff"​ ADD COLUMN ​"social_media"​ MEDIUMTEXT NULL DEFAULT NULL'
+		$this->threeToFourAlterTables = array (
+				"ALTER TABLE `tab` ADD COLUMN `parent` TEXT NOT NULL" ,
+				"ALTER TABLE `tab` ADD COLUMN `children` TEXT NOT NULL",
+				"ALTER TABLE `pluslet` ADD COLUMN `favorite_box` INT NULL DEFAULT 0",
+				"ALTER TABLE `tab` ADD COLUMN `extra` MEDIUMTEXT NULL",
+				"ALTER TABLE `pluslet` ADD COLUMN `target_blank_links` INT NULL DEFAULT 0",
+				"ALTER TABLE `staff` ADD COLUMN `social_media` MEDIUMTEXT NULL DEFAULT NULL ",
+				"ALTER TABLE `pluslet` ADD COLUMN  `master` INT NULL DEFAULT NULL",
+				"ALTER TABLE `pluslet` MODIFY COLUMN `extra` MEDIUMTEXT NULL DEFAULT NULL"
+
+
 				
 		);
 	}
