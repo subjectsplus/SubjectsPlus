@@ -662,6 +662,14 @@ class Updater
 	private function getCurrentVersion()
 	{
 		$db = new Querier;
+		
+		//test whether current vesion is 3.x
+		$lstrQuery = 'SHOW TABLES LIKE \'staff_department\'';
+		$rscResults = $db->query( $lstrQuery );
+		$lintRowCount = count( $rscResults );
+		
+		//no key SubjectsPlus 3..0 tables exists
+		if( $lintRowCount != 0 ) return '4';
 
 		//test whether current vesion is 3.x
 		$lstrQuery = 'SHOW TABLES LIKE \'section\'';
