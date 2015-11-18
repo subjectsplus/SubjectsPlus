@@ -4,7 +4,7 @@
  *   @brief Display the subject guides splash page
  *
  *   @author adarby
- *   @date mar 2011
+ *   @date nov 2015
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
@@ -309,7 +309,32 @@ $switch_row = round($total_rows / 2);
         </div> <!-- end breather -->
     </div><!--end 3/4 main area-->
 
-    <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
+    <div class="pure-u-1 pure-u-lg-1-4">
+
+        <div class="find-expert-area">
+                <h3>Find an Expert</h3>
+                <ul class="expert-list">
+                    <li>
+                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
+                        <div class="expert-label">item</div>                                              
+                    </li>
+                    <li>
+                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
+                        <div class="expert-label">item</div>                                              
+                    </li>
+                    <li>
+                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
+                        <div class="expert-label">item</div>                                              
+                    </li>
+                    <li>
+                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
+                        <div class="expert-label">item</div>                                              
+                    </li>
+                </ul>
+                <p>Need help?</p>
+                <div class="expert-btn-area"><a href="http://library.miami.edu/ask-a-librarian/" class="expert-button">Ask an expert!</a></div>
+        </div>
+
           <!-- start tip -->
             <div class="tip">
                 <h2><?php print _("Newest Guides"); ?></h2>
