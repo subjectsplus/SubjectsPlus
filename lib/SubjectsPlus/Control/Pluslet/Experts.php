@@ -55,6 +55,7 @@ class Pluslet_Experts extends Pluslet {
           AND ss.subject_id = sub.subject_id
           AND s.active = 1
           AND sub.active = 1
+    	  ORDER BY RAND()
           LIMIT 0,3";
 
     $expertArray = $this->db->query($q);
