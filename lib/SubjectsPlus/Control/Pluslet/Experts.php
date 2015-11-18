@@ -55,6 +55,7 @@ class Pluslet_Experts extends Pluslet {
           AND ss.subject_id = sub.subject_id
           AND s.active = 1
           AND sub.active = 1
+          AND ptags LIKE '%librarian%'
     	  GROUP BY s.staff_id
     	  ORDER BY RAND()
           LIMIT 0,3";
