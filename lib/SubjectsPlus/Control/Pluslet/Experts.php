@@ -50,11 +50,12 @@ class Pluslet_Experts extends Pluslet {
     }
 
     // get all of our librarian experts into an array
-    $q = "SELECT CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject FROM staff s, staff_subject ss, subject sub
+    $q = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
           WHERE s.staff_id = ss.staff_id
           AND ss.subject_id = sub.subject_id
           AND s.active = 1
           AND sub.active = 1
+    	  GROUP BY s.staff_id
     	  ORDER BY RAND()
           LIMIT 0,3";
 
@@ -70,8 +71,8 @@ class Pluslet_Experts extends Pluslet {
 
     foreach ($expertArray as $key => $value) {
 
-      $image = getHeadshot($value[1], "smaller","staff_photo");
-      $profile = "<div>" . $image . "<br />" . $value[0] . "</div>";
+      $image = getHeadshot($value['email'], "smaller","staff_photo");
+      $profile = "<div>" . $image . "<br />" . $value['fullname'] . "</div>";
 
       // this is to display two cols, col_1 with expert then text, col_2 with expert then expert
       if ($row_count % 2 == 0) {
