@@ -216,8 +216,9 @@ $switch_row = round($total_rows / 2);
 
 
     //EXPERTS
+
     // get all of our librarian experts into an array
-    $qe = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
+    $qexperts = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
           WHERE s.staff_id = ss.staff_id
           AND ss.subject_id = sub.subject_id
           AND s.active = 1
@@ -227,40 +228,28 @@ $switch_row = round($total_rows / 2);
           ORDER BY RAND()
           LIMIT 0,3";
 
-    $statement = $connection->prepare($qe);
+    $statement = $connection->prepare($qexperts);
     $statement->execute();
     $expertArray = $statement->fetchAll();
-
     
 
-    // init our columns
-    $col_1e = "<div class=\"pure-u-1-2\">";
-    $col_2e = "<div class=\"pure-u-1-2\">";    
+    // init list item
+    $expert_item = "<li>";   
+    
     // the text that shows up in the blank box
-    $bonus_text = "<br />" . _("Need help?  Ask an expert.");
-
-    $row_count = 0;
+    $bonus_text = _("Need help? Ask an expert!");    
 
     foreach ($expertArray as $key => $value) {
 
-      $imagee = getHeadshot($value['email'], "smaller","staff_photo");
-      $profilee = "<div>" . $imagee . "<br />" . $value['fullname'] . "</div>";
+      $exp_image = getHeadshotFull($value['email']);
+      $exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
 
-      // this is to display two cols, col_1 with expert then text, col_2 with expert then expert
-      if ($row_count % 2 == 0) {
-        $col_2e .= $profilee;
-      } else {
-        $col_1e .= $profilee;
-      }
-
-      $row_count++;
+      $expert_item .= $exp_profile;    
     }
-
   
-    $col_1e .= "$bonus_text</div>";
-    $col_2e .= "</div>";
+    $expert_item .= "</li>";
 
-    $guide_experts = "<div class=\"pure-g expert_list\">$col_1 $col_2</div>";
+    $guide_experts = "$expert_item";
 
 
 
@@ -290,30 +279,10 @@ $switch_row = round($total_rows / 2);
     <div class="pure-u-1 pure-u-lg-1-4">
 
         <div class="find-expert-area">
-                <h3>Find an Expert</h3>
-                <ul class="expert-list">
-                    <li>
-                        <?php print $guide_experts; ?>                                          
-                    </li>
-                    <li>
-                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
-                        <div class="expert-label">item</div>                                              
-                    </li>
-                    <li>
-                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
-                        <div class="expert-label">item</div>                                              
-                    </li>
-                    <li>
-                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
-                        <div class="expert-label">item</div>                                              
-                    </li>
-                    <li>
-                        <div class="expert-img"><img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" /></div>
-                        <div class="expert-label">item</div>                                              
-                    </li>
+                <ul class="expert-list">                   
+                    <?php print $guide_experts; ?>
                 </ul>
-                <p>Need help?</p>
-                <div class="expert-btn-area"><a href="http://library.miami.edu/ask-a-librarian/" class="expert-button">Ask an expert!</a></div>
+                <div class="expert-btn-area"><a href="http://library.miami.edu/ask-a-librarian/" class="expert-button"><?php print $bonus_text; ?></a></div>
         </div>
 
           <!-- start tip -->
