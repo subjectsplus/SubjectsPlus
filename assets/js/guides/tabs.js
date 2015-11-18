@@ -87,6 +87,7 @@ function tabs() {
                     if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
                         $(tabs).find(".ui-tabs-nav").sortable("cancel");
                     else {
+                    	$(tabs).tabs();
                         $(tabs).tabs( "refresh" );
                         $(tabs).tabs("destroy");
                         $(tabs).tabs();
@@ -264,8 +265,7 @@ function tabs() {
                 console.log($(li));
                 
                 //make tabs sortable
-                $(function () {
-                    $(tabs).find(".ui-tabs-nav").sortable({
+                    $('#tabs').find(".ui-tabs-nav").sortable({
                         axis: "x",
                         stop: function (event, ui) {
                             if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
@@ -280,7 +280,7 @@ function tabs() {
                             }
                         }
                     });
-                });
+              
 
 
                 $.ajax
