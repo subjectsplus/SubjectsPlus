@@ -45,22 +45,6 @@ if (isset($_POST["search"])) {
 }
 
 
-// set up our checkboxes for guide types
-$tickboxes = "<ul>";
-
-// We don't want our placeholder
-if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
-
-foreach ($guide_types as $key) {
-    $tickboxes .= "<li><input type=\"checkbox\" id=\"show-" . ucfirst($key) . "\" name=\"show$key\"";
-    if ($view_type == "all" || $view_type == $key) {
-        $tickboxes .= " checked=\"checked\"";
-    }
-    $tickboxes .= "/>" . ucfirst($key) . " Guides</li></li>\n";
-}
-
-$tickboxes .= "</ul>";
-
 // Get the subjects for jquery autocomplete
 $suggestibles = "";  // init
 
@@ -146,11 +130,11 @@ $searchbox = '
 ';
 
 // Add header now, because we need a value ($v2styles) from it
-
 include("includes/header_um.php");
 
-// put together our main result display
 
+// put together our main result display
+//**************************************
 
     // let's use our Pretty URLs if mod_rewrite = TRUE or 1
     if ($mod_rewrite == 1) {
@@ -161,62 +145,63 @@ include("includes/header_um.php");
 
     $layout = ""; //init
 
-// loop through our source types
-foreach ($guide_types as $key => $value) {
+    // loop through our source types
+    foreach ($guide_types as $key => $value) {
 
-$guide_list = new GuideList($db,$value, 1);
-$all_guides = $guide_list->toArray(); // get our full listing of guides as an array
-//print_r($all_guides); print "<br /><br />";
-$total_rows = count($all_guides); // total number of guides
-$switch_row = round($total_rows / 2);
-
-      if ($total_rows > 0) {
-
-        $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul>";
-        $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul>";
-
-        $row_count = 1;
-
-        foreach ($all_guides as $myrow) {
-
-        $guide_location = $guide_path . $myrow[0];
-        $list_bonus = "";
-
-        if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
-        if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
-        //$list_bonus .= $myrow[3] . "<br />";
-
-        $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
-        <div class=\"guide_list_bonus\">$list_bonus</div>
-        </li>";
-
-          if ($row_count <= $switch_row) {
-            // first col
-            $col_1 .= $our_item;
+            $guide_list = new GuideList($db,$value, 1);
             
-          } else {
-            // even
-            $col_2 .= $our_item;
-          }
+            $all_guides = $guide_list->toArray(); // get our full listing of guides as an array
+            
+            $total_rows = count($all_guides); // total number of guides
+            
+            $switch_row = round($total_rows / 2);
 
-        $row_count++;
-        }
+        if ($total_rows > 0) {
 
-        $col_1 .= "</ul></div>";
-        $col_2 .= "</ul></div>";
+            $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+            $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
 
-        $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><h3>$value</h3></div>" . $col_1 . $col_2 ."</div>";
+            $row_count = 1;
 
-        $list_guides = "";
-      }
+            foreach ($all_guides as $myrow) {
 
-    }
+                $guide_location = $guide_path . $myrow['shortform'];
+                $list_bonus = "";
+
+                if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
+                if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
+            
+            $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+            <div class=\"guide_list_bonus\">$list_bonus</div>
+            </li>";
+
+              if ($row_count <= $switch_row) {
+                // first col
+                $col_1 .= $our_item;
+                
+              } else {
+                // even
+                $col_2 .= $our_item;
+              }
+
+                $row_count++;
+
+            } //end foreach
+
+            $col_1 .= "</ul></div>";
+            $col_2 .= "</ul></div>";
+
+            $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div>";
+            
+        } //end if
+
+    }//end foreach
 
 
 
 
     //EXPERTS
-
+    //**************************************
     // get all of our librarian experts into an array
     $qexperts = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
           WHERE s.staff_id = ss.staff_id
@@ -226,7 +211,7 @@ $switch_row = round($total_rows / 2);
           AND ptags LIKE '%librarian%'
           GROUP BY s.staff_id
           ORDER BY RAND()
-          LIMIT 0,3";
+          LIMIT 0,4";
 
     $statement = $connection->prepare($qexperts);
     $statement->execute();
@@ -234,22 +219,46 @@ $switch_row = round($total_rows / 2);
     
 
     // init list item
-    $expert_item = "<li>";   
+    $expert_item = "";   
     
-    // the text that shows up in the blank box
-    $bonus_text = _("Need help? Ask an expert!");    
+    // additional text 
+    $bonus_text = _("Need help? Ask an expert!");
+
+    // additional text 
+    $button_text = _("See all experts");     
 
     foreach ($expertArray as $key => $value) {
 
       $exp_image = getHeadshotFull($value['email']);
-      $exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
+      //$exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
+
+      $librarian_email = $value['email'];
+      $name_id = explode("@", $librarian_email);
+
+      $exp_profile = "<li><div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\">" . $value['fullname'] . "</a></div><div class=\"expert-tooltip\" id=\"tooltip-" . $name_id[0] . "\"><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\"><strong>Subjects:</strong> " . $value['subject'] ."</div></div></li>";
 
       $expert_item .= $exp_profile;    
     }
-  
-    $expert_item .= "</li>";
 
     $guide_experts = "$expert_item";
+
+    
+
+    // ANCHOR buttons for guide types
+    //**************************************
+    $guide_type_btns = "<ul>";
+
+    // We don't want our placeholder
+    if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
+
+    foreach ($guide_types as $key) {
+        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+        
+        $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
+    }
+
+    $guide_type_btns .= "<li><a href=\"" . PATH_TO_SP . "subjects/collection.php\">Collections</a></li></ul>";
+
 
 
 
@@ -269,6 +278,7 @@ $switch_row = round($total_rows / 2);
                 <?php 
                 $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
+                print "<div class=\"pills-label\">" . _("Choose Guide Type:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
                 print $layout; ?>
             </div>
 
@@ -278,11 +288,13 @@ $switch_row = round($total_rows / 2);
 
     <div class="pure-u-1 pure-u-lg-1-4">
 
-        <div class="find-expert-area">
-                <ul class="expert-list">                   
+        <div class="find-expert-area-circ">
+                <h3>Find an Expert</h3>
+                <p><?php print $bonus_text; ?></p>
+                <ul class="expert-list-circ">                   
                     <?php print $guide_experts; ?>
                 </ul>
-                <div class="expert-btn-area"><a href="http://library.miami.edu/ask-a-librarian/" class="expert-button"><?php print $bonus_text; ?></a></div>
+                <div class="expert-btn-area"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="expert-button"><?php print $button_text; ?></a></div>
         </div>
 
           <!-- start tip -->
@@ -341,8 +353,10 @@ include("includes/footer_um.php");
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
 
-        
+              
 
 
     });
+
+    
 </script>
