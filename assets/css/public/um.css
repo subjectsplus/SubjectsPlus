@@ -309,7 +309,7 @@ img {
 }
 
 .nav_highlight { /* Fake orange button on nav - hidden on small */
-    background-color: none;
+    background-color: transparent;
     border: none;
     text-transform: uppercase;
     padding: 10px 10px 11px 10px !important;

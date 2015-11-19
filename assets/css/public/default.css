@@ -141,7 +141,7 @@ img {
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    background-color: #transparent;
+    background-color: transparent;
     height: 3em;
     max-width: 1400px;
 }
