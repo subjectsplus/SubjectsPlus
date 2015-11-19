@@ -302,6 +302,70 @@ function saveSetup() {
 
 				break;
 
+				case "Card":
+
+					pbody = CKEDITOR.instances.cardEditor.getData();
+
+					pitem_type = item_type[2];
+					var extra = {};
+
+					//parse text inputs to create extra fields
+					$(lobjThis).find('input[name^=' + item_type[2] + '-extra][type=url]')
+							.each(function() {
+								var name_split = $(this).attr("name").split("-");
+								extra[name_split[2]] = $(this).val();
+							});
+
+					//parse text inputs to create extra fields
+					$(lobjThis).find('input[name^=' + item_type[2] + '-extra][type=text]')
+							.each(function() {
+								var name_split = $(this).attr("name").split("-");
+								extra[name_split[2]] = $(this).val();
+							});
+
+					//parse textareas to create extra fields
+					$(lobjThis).find('textarea[name^=' + item_type[2] + '-extra]').each(
+							function() {
+								var name_split = $(this).attr("name").split("-");
+								extra[name_split[2]] = $(this).val();
+							});
+
+					//parse selectboxes to create extra fields
+					$(lobjThis).find('select[name^=' + item_type[2] + '-extra]').each(
+							function() {
+								var name_split = $(this).attr("name").split("-");
+								extra[name_split[2]] = $(this).val();
+							});
+
+					//parse radio inputs to create extra fields
+					$(lobjThis)
+							.find('input[name^=' + item_type[2] + '-extra][type=radio]')
+							.each(
+									function() {
+										var name_split = $(this).attr("name").split("-");
+										extra[name_split[2]] = typeof extra[name_split[2]] === 'undefined' ? ''
+												: extra[name_split[2]];
+
+										if ($(this).is(':checked'))
+											extra[name_split[2]] = $(this).val();
+									});
+
+					//parse checkboxe inputs to create extra fields
+					$(lobjThis)
+							.find('input[name^=' + item_type[2] + '-extra][type=checkbox]')
+							.each(
+									function() {
+										var name_split = $(this).attr("name").split("-");
+										extra[name_split[2]] = typeof extra[name_split[2]] === 'undefined' ? []
+												: extra[name_split[2]];
+
+										if ($(this).is(':checked'))
+											extra[name_split[2]].push($(this).val());
+									});
+
+					pspecial = $.isEmptyObject(extra) ? "" : JSON.stringify(extra);
+
+					break;
 			default:
 
 				pbody = $('#' + item_type[2] + '-body').html();
