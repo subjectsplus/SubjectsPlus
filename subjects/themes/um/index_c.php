@@ -4,7 +4,7 @@
  *   @brief Display the subject guides splash page
  *
  *   @author adarby
- *   @date mar 2011
+ *   @date nov 2015
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
@@ -151,82 +151,6 @@ include("includes/header_um.php");
 
 // put together our main result display
 
-/*
-  // Default dubious guide listing
-  $intro = "<p> These guides identify key resources in specific areas. Check out our <a href=\"http://libguides.miami.edu/\">complete list of interactive library subject guides</a>, tabbed for easy reference. You can also chat with our resource librarians or leave them a message.</p>";
-  //$guide_list = listGuides($search, $view_type);
-  $guide_results = listGuides($search, $view_type, "2col");
-
-
-// End CHC hack
-
-
-  $our_results = $guide_results;
-
-  //$layout = makePluslet("", $our_results, "","",FALSE);
-
-$guide_list = new GuideList($db);
-$all_guides = $guide_list->toArray(); // get our full listing of guides as an array
-
-// loop through all guides, breaking down by type
-$layout = "";
-
-
-foreach($guide_types as $our_type) {
-    $row_count = 1;
-
-    // Set our section header; won't be used if no entries
-    $header = "<h3>$our_type</h3>";
-
-    foreach ($all_guides as $key => $value) {
-
-    //$total_rows = array_count_values($all_guides); // total number of guides in this section
-    $switch_row = round($total_rows / 2); // used to know when to switch columns
-
-        $col_1 = "<div class=\"pure-u-1-2\">";
-        $col_2 = "<div class=\"pure-u-1-2\">";
-        $item_count = 1;
-
-        if ($value["type"] == $our_type) {
-
-            $guide_location = $guide_path . $value["subject_id"];
-            $list_bonus = "";
-
-            if ($value["description"] != "") {$list_bonus .= $value["description"] . "<br />"; } // add description
-            if ($value["keywords"] != "") {$list_bonus .= $value["keywords"] . "<br />"; } // add keywords
-
-            $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($value["subject"]) . "</a>
-            <div class=\"list_bonus\">$list_bonus</div>
-            </li>";
-
-            // now choose our column for this item
-              if ($item_count <= $switch_row) {
-                // first col
-                $col_1 .= $our_item;
-                
-              } else {
-                // even
-                $col_2 .= $our_item;
-              }
-
-            print $our_item;
-            $item_count++;
-        }
-
-        // if we have any results, put together a column
-        if ($item_count > 1) {
-            $layout .= $header;
-        }
-        
-    }
-}
-      $query ="select subject_id, subject, shortform, type, description, keywords 
-      FROM subject where active = '1' and type != 'Placeholder' and type = '" . $value .  "' order by subject";
-
-      $guides = $this->db->query($query);
-*/
-
-
 
     // let's use our Pretty URLs if mod_rewrite = TRUE or 1
     if ($mod_rewrite == 1) {
@@ -288,6 +212,49 @@ $switch_row = round($total_rows / 2);
 
     }
 
+
+
+
+    //EXPERTS
+
+    // get all of our librarian experts into an array
+    $qexperts = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
+          WHERE s.staff_id = ss.staff_id
+          AND ss.subject_id = sub.subject_id
+          AND s.active = 1
+          AND sub.active = 1
+          AND ptags LIKE '%librarian%'
+          GROUP BY s.staff_id
+          ORDER BY RAND()
+          LIMIT 0,3";
+
+    $statement = $connection->prepare($qexperts);
+    $statement->execute();
+    $expertArray = $statement->fetchAll();
+    
+
+    // init list item
+    $expert_item = "<li>";   
+    
+    // the text that shows up in the blank box
+    $bonus_text = _("Need help? Ask an expert!");    
+
+    foreach ($expertArray as $key => $value) {
+
+      $exp_image = getHeadshotFull($value['email']);
+      $exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
+
+      $expert_item .= $exp_profile;    
+    }
+  
+    $expert_item .= "</li>";
+
+    $guide_experts = "$expert_item";
+
+
+
+
+
 ////////////////////////////
 // Now we are finally read to display the page
 ////////////////////////////
@@ -309,7 +276,15 @@ $switch_row = round($total_rows / 2);
         </div> <!-- end breather -->
     </div><!--end 3/4 main area-->
 
-    <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
+    <div class="pure-u-1 pure-u-lg-1-4">
+
+        <div class="find-expert-area">
+                <ul class="expert-list">                   
+                    <?php print $guide_experts; ?>
+                </ul>
+                <div class="expert-btn-area"><a href="http://library.miami.edu/ask-a-librarian/" class="expert-button"><?php print $bonus_text; ?></a></div>
+        </div>
+
           <!-- start tip -->
             <div class="tip">
                 <h2><?php print _("Newest Guides"); ?></h2>

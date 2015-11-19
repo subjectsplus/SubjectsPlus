@@ -29,10 +29,11 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Heading 6',		element: 'h6' },
 	{ name: 'Preformatted Text',element: 'pre' },
 	{ name: 'Address',			element: 'address' },
-	*/
+
 
 	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
+	 */
 	{
 		name: 'Special Container',
 		element: 'div',
@@ -59,8 +60,9 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	{ name: 'Book Cover', element: 'span', attributes: { 'class': 'book-cover-art' } },
 	{ name: 'Center Image', element: 'img', attributes: { 'class': 'center-image' } },
-	{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
+	{ name: 'Card',			element: 'span', attributes: { 'class': 'card' } },
 
+	/*
 	{ name: 'Big',				element: 'big' },
 	{ name: 'Small',			element: 'small' },
 	{ name: 'Typewriter',		element: 'tt' },
@@ -78,7 +80,7 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	{ name: 'Language: RTL',	element: 'span', attributes: { 'dir': 'rtl' } },
 	{ name: 'Language: LTR',	element: 'span', attributes: { 'dir': 'ltr' } },
-
+    */
 
 
 

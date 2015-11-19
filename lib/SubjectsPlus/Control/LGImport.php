@@ -711,7 +711,7 @@ public function loadLibGuidesLinksXML() {
       
       if(isset($matches[0])) {
 	
-	$clean_link_name = strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME));
+	$clean_link_name = trim(strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME)));
 	
 	if( $this->db->exec("INSERT INTO title (title, description, pre) VALUES (" . $this->db->quote($clean_link_name) . ","  . $this->db->quote($link->DESCRIPTION_SHORT) . "," . $this->db->quote($matches[0]) . ")") ) {
 	  $this->log->importLog( "Inserted title");

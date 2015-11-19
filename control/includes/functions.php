@@ -774,6 +774,7 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
   global $AssetPath;
 
   $headshot = "<img src=\"" . $AssetPath . "" . "/users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
+    
   switch ($pic_size) {
     case "small":
       $headshot .= " width=\"50\"";
@@ -789,6 +790,21 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
   $headshot .= " class=\"$class\" />";
   return $headshot;
 }
+
+
+function getHeadshotFull($email, $pic_size="full", $class="staff_photo_full") {
+
+  $name_id = explode("@", $email);
+  $lib_image = "_" . $name_id[0];
+  global $AssetPath;
+  
+  $headshot_large = "<img src=\"" . $AssetPath . "" . "/users/$lib_image/headshot_large.jpg\" alt=\"$email\" title=\"$email\"  width=\"225\" class=\"$class\" />";
+  
+  return $headshot_large;
+}
+
+
+
 
 // Display staff images
 function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
