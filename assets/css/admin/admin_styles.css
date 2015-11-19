@@ -1860,7 +1860,7 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 #cboxWrapper:focus {outline:none !important;}
 
 
-/* Pop up boxes - index overides */
+/* Pop up boxes - index overides*/ 
 .ui-dialog {z-index: 9999999 !important;}
 .ui-widget-overlay {z-index: 99999 !important;}
 
