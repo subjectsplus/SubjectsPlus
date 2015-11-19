@@ -233,7 +233,7 @@ function modifyDB($id, $type) {
                 title=" . $db->quote($pluslet_title) . ",
                 body=" . $db->quote($pluslet_body) . ",
                 type=" . $db->quote($pluslet_type) . ",
-                extra = '$pluslet_extra',
+                extra=" . $db->quote($pluslet_extra) . ",
                 hide_titlebar  = '$pluslet_hide_titlebar',
                 collapse_body = '$pluslet_collapse_body',
                 titlebar_styling = '$pluslet_titlebar_styling',
