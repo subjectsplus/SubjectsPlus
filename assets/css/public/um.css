@@ -1541,8 +1541,8 @@ img.center-image {
 .expert-img {display: block;}
 .expert-img img.staff_photo_full {padding:0; background-color: transparent; width: 175px; height: 175px; border: none;}
 .expert-list .expert-label {color: #FFF; display: block; text-align: center; position: absolute; top:144px; left:0; background-color: rgba(0,0,0,0.6); padding:3px 0; width:100%; font-size:1.1em;}
-.expert-title {display: block; font-size:0.9em; color:#f37421; line-height: 1.2em; padding:5px;}
-.expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em;}
+.expert-title {display: block; font-size:0.9em; color:#f37421 !important; line-height: 1.2em; padding:5px;}
+.expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; color: #FFF !important;}
 
 .expert-btn-area {text-align: center; margin-top:15px;}
 .expert-button {text-align: center; padding:10px 16px; background-color: #f37421; font-size:1.1em; color:#FFF !important; 
@@ -1594,16 +1594,17 @@ img.center-image {
     width:175px;
     min-height:120px;    
     border-radius: 2px;
-    background-color: #ECF0F1;
+    background-color: rgba(0,0,0,0.85);
     z-index:99999;
-    padding: 5px;    
+    padding: 5px;  
+    color: #FFF;  
 }
 
 .expert-tooltip:before {
     content:"\A";
     border-style: solid;
     border-width: 15px 0 15px 15px;
-    border-color: transparent  transparent transparent #ECF0F1;
+    border-color: transparent  transparent transparent rgba(0,0,0,0.85);
     position: absolute;
     right: -15px;
     top:35%;
