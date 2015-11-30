@@ -1457,31 +1457,31 @@ img.center-image {
     /*background: #f2f2f2 none repeat scroll 0 0;
     border-color: #DADFE1 #F2F1EF #F2F1EF #DADFE1 !important;
     box-shadow:none !important;*/
-    border-radius:4px 0 0 4px !important;
+    border-radius:4px 4px 4px 4px !important;
     border-style: solid;
     border-width: 1px;
-    margin: 0;
+    margin: 0 10px 0 0;
     height: 35px;
     padding: 0.5em !important;
     font-size: 1.1em;
     color: #666;
-    width: -moz-calc(100% - 65px);
-    width: -webkit-calc(100% - 65px);
-    width: calc(100% - 65px);    
-    text-transform: uppercase;    
+    width: -moz-calc(100% - 75px);
+    width: -webkit-calc(100% - 75px);
+    width: calc(100% - 75px);    
+    text-transform: none;    
 }
 
 .index-search-area .ui-autocomplete-input:focus {border-color: #f37421 !important;}
 
 .index-search-area .pure-button-topsearch {
-    background-color: #f37421;
+    background-color: #666;
     color: #fff;
-    margin: 0 0 0 -4px;
-    height: 36px;
-    border-radius:0 4px 4px 0 !important;
-    text-transform: uppercase;
+    margin: 2px 0 0 0;
+    height: 35px;
+    border-radius:4px 4px 4px 4px !important;
+    text-transform: none;
     font-size: 1.2em;
-    border-top:1px solid #DADFE1;
+    border-top: none;
     letter-spacing: 1px;
 }
 
@@ -1492,12 +1492,12 @@ img.center-image {
 .ui-autocomplete.index-search-dd li a:hover {color: #f37421;}
 
 
-.pills-label {display:inline-block; color: #666; font-size:1.05em; margin-right:20px;}
+.pills-label {display:inline-block; color: #666; font-size:1.05em; margin-right:5px; font-weight: bold;}
 .pills-container {display:inline-block; margin-bottom: 25px;}
 .pills-container ul {list-style-type: none;}
-.pills-container ul li {display:inline-block; font-size:1.1em; margin-right:5px;}
-.pills-container ul li a {display:inline-block; font-size:0.95em; background-color: rgba(162,173,0,0.7); color: #fff; padding: 5px 10px; border-radius: 2px;}
-.pills-container ul li a:hover {background-image: linear-gradient(transparent, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.1));}
+.pills-container ul li {display:inline-block; font-size:1.1em; margin-right:8px;}
+.pills-container ul li a {display:inline-block; font-size:0.95em; color: #666; padding: 0;}
+.pills-container ul li a:hover {color: #f37421;}
 
 
 
@@ -1541,7 +1541,7 @@ img.center-image {
 .expert-img {display: block;}
 .expert-img img.staff_photo_full {padding:0; background-color: transparent; width: 175px; height: 175px; border: none;}
 .expert-list .expert-label {color: #FFF; display: block; text-align: center; position: absolute; top:144px; left:0; background-color: rgba(0,0,0,0.6); padding:3px 0; width:100%; font-size:1.1em;}
-.expert-title {display: block; font-size:0.9em; color:#f37421 !important; line-height: 1.2em; padding:5px;}
+.expert-title {display: block; font-size:0.9em; color:#fc8550 !important; line-height: 1.2em; padding:5px;}
 .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; color: #FFF !important;}
 
 .expert-btn-area {text-align: center; margin-top:15px;}
@@ -1594,7 +1594,7 @@ img.center-image {
     width:175px;
     min-height:120px;    
     border-radius: 2px;
-    background-color: rgba(0,0,0,0.85);
+    background-color: rgba(0,0,0,0.8);
     z-index:99999;
     padding: 5px;  
     color: #FFF;  
@@ -1604,7 +1604,7 @@ img.center-image {
     content:"\A";
     border-style: solid;
     border-width: 15px 0 15px 15px;
-    border-color: transparent  transparent transparent rgba(0,0,0,0.85);
+    border-color: transparent  transparent transparent rgba(0,0,0,0.8);
     position: absolute;
     right: -15px;
     top:35%;
