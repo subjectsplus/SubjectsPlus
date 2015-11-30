@@ -278,7 +278,7 @@ include("includes/header_um.php");
                 <?php 
                 $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
-                print "<div class=\"pills-label\">" . _("Choose Guide Type:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
+                print "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
                 print $layout; ?>
             </div>
 
