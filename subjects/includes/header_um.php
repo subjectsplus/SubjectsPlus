@@ -256,7 +256,7 @@ $v2styles = TRUE;
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/scholarly-communications/">Scholarly Communications &amp; Publishing</a></li>
                       </ul>
                       <div class="mega_feature">
-                        <img src="http://library.miami.edu/sp/assets/users/_djui/headshot.jpg" alt="Librarian headshot" />
+                        <img src="<?php print PATH_TO_SP; ?>assets/users/_djui/headshot.jpg" alt="Librarian headshot" />
                         Need Help?  <a href="<?php print PATH_FROM_ROOT; ?>/ask-a-librarian/">Ask a Librarian</a>
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/research/">Research Overview</a></div>
