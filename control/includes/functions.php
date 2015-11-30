@@ -773,7 +773,7 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
   $lib_image = "_" . $name_id[0];
   global $AssetPath;
 
-  $headshot = "<img src=\"" . $AssetPath . "" . "/users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
+  $headshot = "<img src=\"" . $AssetPath . "" . "/users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\" align=\"left\"";
     
   switch ($pic_size) {
     case "small":
