@@ -791,6 +791,41 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
   return $headshot;
 }
 
+/* This function is only for the University of Miami; on UM site, rename this to getHeadshot and comment out the other one */
+function getHeadshotUM($email, $pic_size="medium", $class="staff_photo") {
+
+  
+   $name_id = explode("@", $email);
+  $lib_image = "_" . $name_id[0];
+  global $AssetPath;
+  // Get the real file path for the headshot image 
+  $headshot_path  =  dirname(dirname(dirname(__FILE__))) . "/assets/users/$lib_image/headshot.jpg";
+
+  if(file_exists($headshot_path)) {
+
+      // Check if the image is the UM logo
+      $image_hash = md5_file($headshot_path);
+      $um_logo = "91b8c9ec083c5abc898a5c482aac959e";
+
+      if($image_hash == $um_logo) {} else {
+
+              $headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
+
+  switch ($pic_size) {
+    case "small":
+      $headshot .= " width=\"50\"";
+      break;
+    case "medium":
+      $headshot .= " width=\"70\"";
+      break;
+  }
+
+  $headshot .= " class=\"staff_photo\"  align=\"left\" />";
+  // If the image exists and isn't the UM logo return the img html
+  return $headshot;
+     }
+   }
+}
 
 function getHeadshotFull($email, $pic_size="full", $class="staff_photo_full") {
 
