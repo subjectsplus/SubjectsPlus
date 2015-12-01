@@ -145,6 +145,9 @@ include("includes/header_um.php");
 
     $layout = ""; //init
 
+    // We don't want our placeholder
+    if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
+
     // loop through our source types
     foreach ($guide_types as $key => $value) {
 
