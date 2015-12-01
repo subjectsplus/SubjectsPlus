@@ -84,7 +84,7 @@ a img {
 }
 
 :focus {
-    border-color: #e091b0 !important;
+    border-color: #CCC !important;
 }
 
 /* no's*/
@@ -730,6 +730,18 @@ html, button, input, select, textarea {
 
 #pluslet-id-NewGuides:hover {
   background-image: url(images/icons/new-guides-white.svg);  
+}
+
+#pluslet-id-CollectionList {
+  background-image: url(images/icons/guide-collections.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-CollectionList:hover {
+  background-image: url(images/icons/guide-collections-white.svg);  
 }
 
 
