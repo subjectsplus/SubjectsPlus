@@ -75,7 +75,7 @@ class Pluslet_3 extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-users\" title=\"" . _("Subject Specialists") . "\" ></i><span class=\"icon-text\">" . _("Subject Specialists") ."</span>";
+        $icon="<i class=\"fa fa-male\" title=\"" . _("Subject Specialists") . "\" ></i><span class=\"icon-text\">" . _("Subject Specialists") ."</span>";
         return $icon;
     }
 
