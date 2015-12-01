@@ -1471,7 +1471,7 @@ img.center-image {
     text-transform: none;    
 }
 
-.index-search-area .ui-autocomplete-input:focus {border-color: #f37421 !important;}
+.index-search-area .ui-autocomplete-input:focus {border-color: #999 !important;}
 
 .index-search-area .pure-button-topsearch {
     background-color: #666;
@@ -1542,7 +1542,7 @@ img.center-image {
 .expert-img img.staff_photo_full {padding:0; background-color: transparent; width: 175px; height: 175px; border: none;}
 .expert-list .expert-label {color: #FFF; display: block; text-align: center; position: absolute; top:144px; left:0; background-color: rgba(0,0,0,0.6); padding:3px 0; width:100%; font-size:1.1em;}
 .expert-title {display: block; font-size:0.9em; color:#FFF !important; line-height: 1.2em; padding:5px;}
-.expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; color: #000 !important;}
+.expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; color: #dae35c !important;}
 
 .expert-btn-area {text-align: center; margin-top:15px;}
 .expert-button {text-align: center; padding:10px 16px; background-color: #f37421; font-size:1.1em; color:#FFF !important; 
