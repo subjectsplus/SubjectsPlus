@@ -102,7 +102,7 @@ class Pluslet_Experts extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text googlescholar-text\">" . _("Experts") . "</span>";
+        $icon="<i class=\"fa fa-users\" title=\"" . _("Experts") . "\" ></i><span class=\"icon-text\">"  . _("Experts") . "</span>";
         return $icon;
     }
 

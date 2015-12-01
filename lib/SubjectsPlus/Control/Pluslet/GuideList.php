@@ -115,7 +115,7 @@ class Pluslet_GuideList extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text googlescholar-text\">" . _("List Guides") . "</span>";
+        $icon="<i class=\"fa fa-bars\" title=\"" . _("List Guides") . "\" ></i><span class=\"icon-text\">"  . _("List Guides") . "</span>";
         return $icon;
     }
 
