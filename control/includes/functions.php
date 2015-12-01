@@ -55,10 +55,9 @@ function isCool($emailAdd="", $password="", $shibboleth=false) {
   global $PublicPath;
   global $debugger;
   global $salt;
-
   
 
-  if($shibboleth) {
+  if($shibboleth == true) {
   	
   	$connection = $db->getConnection();
   	$statement = $connection->prepare("SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
@@ -68,6 +67,14 @@ function isCool($emailAdd="", $password="", $shibboleth=false) {
   	$statement->execute();   
   	$result =  $statement->fetchAll();
   	
+  } else {
+
+  	$query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+        FROM staff
+        WHERE email = '" . scrubData($emailAdd, "email") . "' AND password = '" . scrubData($password) . "'";
+  	$db = new Querier;
+  	$result = $db->query($query);  	 
+ 
   }
  
   $numrows = count($result);
@@ -114,81 +121,6 @@ session_regenerate_id();
   
   
   return $result;
-}
-
-/////////////////////
-// Gets info about the user, based on IP or .htaccess, according to your config file
-// This is called by control/includes/header.php, and control/login.php
-/////////////////////////
-
-function isCoolNotUM($emailAdd="", $password="", $shibboleth=false) {
-
- $db = new Querier;
- 
- global $subcat;
- global $CpanelPath;
- global $PublicPath;
- global $debugger;
- global $salt;
-
- 
-
- if($shibboleth) {
-     
-     $connection = $db->getConnection();
-     $statement = $connection->prepare("SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
-       FROM staff
-       WHERE email = :mail");
-     $statement->bindParam(":mail", $emailAdd);
-     $statement->execute();   
-     $result =  $statement->fetchAll();
-     
- }
-
- $numrows = count($result);
-
- if ($numrows > 0) {
-
-   $user = $result;
-   if (is_array($user)) {
-
-
-//set session variables
-session_start();
-session_regenerate_id();
-
-// Create session vars for the basic types
-     $_SESSION['checkit'] = md5($user[0][4]) . $salt;
-     $_SESSION['staff_id'] = $user[0][0];
-     $_SESSION['ok_ip'] = $user[0][1];
-     $_SESSION['fname'] = $user[0][2];
-     $_SESSION['lname'] = $user[0][3];
-     $_SESSION['email'] = $user[0][4];
-     $_SESSION['user_type_id'] = $user[0][5];
-
-// unpack our extra
-     if ($user[0][7] != NULL) {
-       $jobj = json_decode($user[0][7]);
-       $_SESSION['css'] = $jobj->{'css'};
-     }
-
-// unpack our ptags
-     $current_ptags = explode("|", $user[0][6]);
-
-     foreach ($current_ptags as $value) {
-       $_SESSION[$value] = 1;
-     }
-
-     $result = "success";
-   }
- } else {
-
-   $result = "failure";
- }
-
- 
- 
- return $result;
 }
 
 ///////////////////////////

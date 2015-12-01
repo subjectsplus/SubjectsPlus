@@ -34,7 +34,8 @@ if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FIL
 
 require_once(dirname(__FILE__) . "/config.php");
 
-$db = new Querier;
+//isCool($_SERVER['mail'],"", false);
+
 
 // start our session
 session_start();
