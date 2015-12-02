@@ -851,8 +851,6 @@ function getHeadshotUM($email, $pic_size="medium", $class="staff_photo") {
    }
 }
 
-*/
-
 function getHeadshotFull($email, $pic_size="full", $class="staff_photo_full") {
 
   $name_id = explode("@", $email);
