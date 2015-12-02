@@ -1774,6 +1774,10 @@ h4.guide-select-heading {margin: 6px 0;}
 .expert-list-circ .expert-title {display: block; font-size:0.95em; line-height: 1.2em; padding:5px; color:#FFF;}
 .expert-list-circ .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; line-height: 1.2em; color: #FFF;}
 
+.expert-btn-area {text-align: center; margin-top:15px; margin-bottom:10px;}
+.find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(192, 57, 87, 0.8); font-size:0.9em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: "NotoSansBold" !important;}
+.find-expert-area-circ .expert-button:hover {background-color: rgba(192, 57, 87, 1);}
+
 /*Expert tooltips */
 
 .expert-list-circ li:hover .expert-tooltip {display:block;}
@@ -1802,6 +1806,28 @@ h4.guide-select-heading {margin: 6px 0;}
     right: -15px;
     top:35%;
 }
+
+
+
+
+/*Guide List Pluslet */
+.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px; }
+
+.guide_list_header {margin-bottom:0;}
+.guide_list_header h3 {letter-spacing: 0; color:#333; font-size: 1em; padding-bottom:2px; }
+
+ul.guide-listing {list-style: inside none none !important; margin: 5px 0 0 5px !important; padding: 0 !important;}
+ul.guide-listing li {font-size:1em; padding-bottom:5px;}
+ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margin-right:4px;}
+
+.guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
+
+.pills-label {display:inline-block; color: #858585; font-size:1em; margin-right:5px; font-weight: bold; font-style: italic;}
+.pills-container {display:inline-block; margin-bottom: 5px;}
+.pills-container ul {list-style-type: none;}
+.pills-container ul li {display:inline-block; font-size:1em; margin-right:8px;}
+.pills-container ul li a {display:inline-block; font-size:1em; color: #333; padding: 0;}
+
 
 
 
@@ -3585,23 +3611,7 @@ Additional Helper Classes - AGD
 
 .striper .fa { color: #333;}
 
-.guide_list_header { 
-  font-size: 1.5em;
-  padding-bottom: .5em;
-  }
 
-.guide_list li {
-
-    font-size: 1.2em !important;
-    padding: .5em;
-    list-style: none;
-}
-
-.guide_list li a {
-    text-decoration: none;
-}
-
-.list_bonus { font-size: .8em; color: #ccc;}
 
 
 
