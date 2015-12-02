@@ -68,6 +68,9 @@ class Pluslet_Experts extends Pluslet {
     // additional text
     $bonus_text = _("Need help?  Ask an expert.");
 
+    // additional text - button 
+    $button_text = _("See all experts");  
+
 
     foreach ($expertArray as $key => $value) {
 
@@ -83,7 +86,7 @@ class Pluslet_Experts extends Pluslet {
 
     $guide_experts = "$expert_item";
 
-    $list_guide_experts = "<div class=\"find-expert-area-circ\">$bonus_text<br /><ul class=\"expert-list-circ\">$guide_experts</ul></div>";
+    $list_guide_experts = "<div class=\"find-expert-area-circ\">$bonus_text<br /><ul class=\"expert-list-circ\">$guide_experts</ul><div class=\"expert-btn-area\"><a href=\"" . PATH_TO_SP ."subjects/staff.php?letter=Subject Librarians A-Z\" class=\"expert-button\">" . $button_text . "</a></div></div>";
 
   return $list_guide_experts;
 

@@ -1544,7 +1544,7 @@ img.center-image {
 .expert-title {display: block; font-size:0.9em; color:#FFF !important; line-height: 1.2em; padding:5px;}
 .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; color: #dae35c !important;}
 
-.expert-btn-area {text-align: center; margin-top:15px;}
+.expert-btn-area {text-align: center; margin-top:15px; margin-bottom: 10px;}
 .expert-button {text-align: center; padding:10px 16px; background-color: #f37421; font-size:1.1em; color:#FFF !important; 
     border-radius: 2px; }
 .expert-button:hover {background-image: linear-gradient(transparent, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.1));}
@@ -1610,11 +1610,39 @@ img.center-image {
     top:35%;
 }
 
+
+
+
 /*Experts Pluslet - Front-end */
 .type-experts .pluslet_body {overflow: initial !important;}
 .type-experts .find-expert-area-circ {padding:0; margin: 0;}
-.type-experts .expert-list-circ {margin: 15px 0 !important;}
+.type-experts .expert-list-circ {margin: 15px 0 !important; text-align: center;}
 .type-experts .expert-list-circ li {display: inline-block !important; margin: 0 0 10px !important;}
+.type-experts .expert-button {text-decoration:none !important; background-color: rgba(209, 214, 136, 1); color:#333 !important;border: 1px solid #bcbbbb; }
+
+
+
+/*Guide List Pluslet - Front-end */
+.type-guidelist .guide_list {background-color: #F2F2F2; margin-bottom: 15px; }
+
+.type-guidelist .guide_list_header h3 {color:#333; font-size: 1em; font-weight: bold;}
+
+.type-guidelist ul.guide-listing {list-style: inside none none !important; margin: 15px 0 0 5px !important; padding: 0;}
+.type-guidelist ul.guide-listing li {font-size:1em; padding-bottom:5px;}
+.type-guidelist ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margin-right:4px;}
+
+.type-guidelist .pills-label {font-weight: normal;}
+.type-guidelist .pills-container {margin-bottom: 5px;}
+.type-guidelist .pills-container ul {margin: 0 !important;}
+.type-guidelist .pills-container ul li {display:inline-block !important; font-size:1em; margin-right:8px !important;}
+.type-guidelist .pills-container ul li a {display:inline-block; font-size:1em; color: #333; padding: 0 !important;}
+
+
+
+
+
+
+
 
 
 /* //////////////////

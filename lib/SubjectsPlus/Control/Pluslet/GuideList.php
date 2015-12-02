@@ -51,6 +51,7 @@ class Pluslet_GuideList extends Pluslet {
 
     $layout = ""; //init
 
+
     // loop through our source types
     foreach ($guide_types as $key => $value) {
 
@@ -64,8 +65,8 @@ class Pluslet_GuideList extends Pluslet {
 
       if ($total_rows > 0) {
 
-        $col_1 = "<div class=\"pure-u-1-2\">";
-        $col_2 = "<div class=\"pure-u-1-2\">";
+        $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+        $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
 
         $row_count = 1;
 
@@ -74,13 +75,12 @@ class Pluslet_GuideList extends Pluslet {
         $guide_location = $guide_path . $myrow[0];
         $list_bonus = "";
 
-        if ($myrow[4] != "") {$list_bonus .= $myrow[4] . "<br />"; } // add description
-        if ($myrow[5] != "") {$list_bonus .= $myrow[5] . "<br />"; } // add keywords
-        $list_bonus .= $myrow[3] . "<br />";
+        if ($myrow[4] != "") {$list_bonus .= $myrow[4] . "<br /><br />"; } // add description
+        if ($myrow[5] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[5]; } // add keywords
 
-        $our_item = "<li><a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
-        <div class=\"list_bonus\">$list_bonus</div>
-        </li>";
+        $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+            <div class=\"guide_list_bonus\">$list_bonus</div>
+            </li>";
 
           if ($row_count <= $switch_row) {
             // first col
@@ -91,20 +91,39 @@ class Pluslet_GuideList extends Pluslet {
             $col_2 .= $our_item;
           }
 
-        $row_count++;
-        }
+          $row_count++;
 
-        $col_1 .= "</div>";
-        $col_2 .= "</div>";
+        }//end foreach
 
-        $layout .= "<div class=\"pure-u-1 guide_list_header\"><h3>$value</h3></div>" . $col_1 . $col_2;
+        $col_1 .= "</ul></div>";
+        $col_2 .= "</ul></div>";
 
-        $list_guides = "<div class=\"pure-g guide_list\">$layout</div>";
+        $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div>";
+
+        $list_guides = $layout;
       }
 
     }
 
-  return $list_guides;
+    // ANCHOR buttons for guide types
+    //**************************************
+    $guide_type_btns = "<ul>";
+
+    // We don't want our placeholder
+    if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
+
+    foreach ($guide_types as $key) {
+        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+        
+        $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
+    }
+
+    $guide_type_btns .= "</ul>";
+
+    $final_list = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>" . $list_guides;
+
+
+  return $final_list;
 
   }
 
