@@ -34,13 +34,22 @@ if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FIL
 
 require_once(dirname(__FILE__) . "/config.php");
 
-//isCool($_SERVER['mail'],"", false);
+
+if ($use_shibboleth == TRUE) {
+	
+	isCool($_SERVER['mail'],"", true);
+	
+} else {
+	
+	$db = new Querier;
+	// start our session
+	session_start();
+	
+}
 
 
-$db = new Querier;
 
-// start our session
-session_start();
+
 
 //print_r($_SESSION);
 //added in order to redirect to proper page if cannot connect to database. Only check if $tryDB variable doesn't exists and says no

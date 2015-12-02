@@ -61,6 +61,9 @@ if(!is_writable($lstrConfigFilePath))
 
 							"guide_types" => array( _( "Guide Types" ), _( "These are the different ways you may organize your guides." ), "array", "right", "large", "", _("You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query.") ),
 
+			                "use_shibboleth" => array( _( "Use Shibboleth" ), _( "This option controls whether Shibboleth will be used for logging in." ), "boolean", "right", "small", "", _("This checks the staff email with the server variables returned from Shibboleth.") ),
+				
+			
 							"all_ctags" => array( _( "Record Tags" ), _( "These are the tags that a given record location can have associated with it." ), "array", "right", "textarea", "", _("Record tags are a way of slicing and dicing the total set of records.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places.") ),
 
 							"all_vtags" => array( _( "Video Tags" ), _( "These are the tags that a given video can have associated with it. These are used for the videos module." ), "array", "right", "large", "", "" ),
@@ -71,8 +74,6 @@ if(!is_writable($lstrConfigFilePath))
 							"all_cattags" => array( _( "Talkback Topic Tags" ), _( "These are the tags that a given talkback can have associated with it." ), "array", "right", "textarea", "", _("Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places.") ),
 
 							"titlebar_styles" => array( _( "Titlebar Styles" ), _( "These are the styles that can be issued to a pluslet titlebars." ), "array", "right", "large", "", _("This allows titlebars to have custom styles with custom keys for subject guide creator to make.") ),
-
-
 
 							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array(_('1'), _('2'), _('3'), _('4'), _('5'), 'Basic', 'Heading', 'Feed', 'TOC', 'HTML5Video', 'WorldCat', 'Catalog', 'Related', 'ArticlesPlus', 'SocialMedia', 'SubjectSpecialist','GoogleSearch','GoogleScholar','GoogleBooks', 'GuideSearch', 'NewDBs', 'NewGuides', 'GuideList', 'CollectionList','Experts', 'Card' ), _("") ),
 

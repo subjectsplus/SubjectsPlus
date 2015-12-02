@@ -117,6 +117,12 @@ $email_key = "@sp.edu";
 $tel_prefix = "";
 $tel_prefix_short = "";
 
+///Shibboleth
+// Use Shibboleth for logging in
+// (Assumes that you have a staff table with email addresses)
+//
+$use_shibboleth = FALSE;
+
 //////////////////////
 // MySQL
 //////////////////////
@@ -229,6 +235,7 @@ $guides_temp_path = "uploads/";
 // look for instructions on wiki
 // http://www.subjectsplus.com/wiki/index.php?title=Internationalization_1.0
 /////////////////////////////////
+
 
 
 // Enter desired language here
