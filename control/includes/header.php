@@ -37,6 +37,8 @@ require_once(dirname(__FILE__) . "/config.php");
 //isCool($_SERVER['mail'],"", false);
 
 
+$db = new Querier;
+
 // start our session
 session_start();
 
