@@ -1722,8 +1722,10 @@ h4.toc-heading {margin: 6px 0;}
 .articlesplus-search {margin: 0 10px;}
 
 
+
 /* Book Search Pluslet- default */
 .book-search {margin: 0 10px;}
+
 
 
 /* Google Search Pluslet */
@@ -1753,6 +1755,53 @@ h4.guide-select-heading {margin: 6px 0;}
 .video-container {margin-bottom: 10px;}
 
 
+
+/*Experts Pluslet, circles style */
+.find-expert-area-circ {padding:0;}
+
+.expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0 !important;}
+.expert-list-circ li {
+    display:inline-block; 
+    margin: 0 0 10px 0;
+    padding:0; 
+    width:120px;
+    position:relative;
+}
+
+.expert-list-circ .expert-img {display: block; text-align: center;}
+.expert-list-circ .expert-img img.staff_photo_full {padding:0; background-color: transparent; width: 80px; height: 80px; border: none; border-radius: 50%;}
+.expert-list-circ .expert-label {display: block; text-align: center; padding:3px 0; width:100%; font-size:0.9em; line-height: 1.1em;}
+.expert-list-circ .expert-title {display: block; font-size:0.95em; line-height: 1.2em; padding:5px; color:#FFF;}
+.expert-list-circ .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; line-height: 1.2em; color: #FFF;}
+
+/*Expert tooltips */
+
+.expert-list-circ li:hover .expert-tooltip {display:block;}
+
+.expert-tooltip {
+    position:absolute;
+    top:-20px;
+    right:92%;
+    display:none;
+    margin:5px;
+    width:175px;
+    min-height:120px;    
+    border-radius: 2px;
+    background-color: rgba(102, 102, 102, 0.9);
+    z-index:99999;
+    padding: 5px;  
+    color: #FFF;  
+}
+
+.expert-tooltip:before {
+    content:"\A";
+    border-style: solid;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent  transparent transparent rgba(102, 102, 102, 0.9);
+    position: absolute;
+    right: -15px;
+    top:35%;
+}
 
 
 

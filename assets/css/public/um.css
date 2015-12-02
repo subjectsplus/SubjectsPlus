@@ -1610,6 +1610,11 @@ img.center-image {
     top:35%;
 }
 
+/*Experts Pluslet - Front-end */
+.type-experts .pluslet_body {overflow: initial !important;}
+.type-experts .find-expert-area-circ {padding:0; margin: 0;}
+.type-experts .expert-list-circ {margin: 15px 0 !important;}
+.type-experts .expert-list-circ li {display: inline-block !important; margin: 0 0 10px !important;}
 
 
 /* //////////////////
