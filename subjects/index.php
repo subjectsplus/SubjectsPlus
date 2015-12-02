@@ -14,7 +14,7 @@ include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index.php"); exit;}
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index_c.php"); exit;}
 
 // let's use our Pretty URLs if mod_rewrite = TRUE or 1
 if ($mod_rewrite == 1) {
