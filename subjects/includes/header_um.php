@@ -313,7 +313,7 @@ $v2styles = TRUE;
                        <ul>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>                          
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
-                          <li><a href="<?php print PATH_TO_SP; ?>subjects/gis/">GIS Services</a></li>
+                          <li><a href="<?php print PATH_TO_SP; ?>subjects/gis">GIS Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/graduate-study/">Graduate Study Room</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li>

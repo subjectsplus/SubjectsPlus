@@ -18,6 +18,9 @@ $page_title = "Modify Guides in SubjectsPlus";
 include("../includes/config.php");
 include("../includes/header.php");
 
+$db = new Querier;
+
+
 $gear_alt = _("Edit Guide Metadata");
 $eye_alt = _("View Guide on Public Site");
 $linkie_alt = _("Check Guide Links");

@@ -3,7 +3,7 @@
 use SubjectsPlus\Control\Querier;
 
 include_once("autoloader.php");
-
+include_once("config.php");
 
 //////////////////////////////
 // If gettext isn't installed
@@ -40,45 +40,54 @@ function checkSession() {
   return $result;
 }
 
+
 /////////////////////
 // Gets info about the user, based on IP or .htaccess, according to your config file
 // This is called by control/includes/header.php, and control/login.php
 /////////////////////////
 
-function isCool($emailAdd="", $password="") {
+function isCool($emailAdd="", $password="", $shibboleth=false) {
 
+  $db = new Querier;
+  
   global $subcat;
   global $CpanelPath;
   global $PublicPath;
   global $debugger;
   global $salt;
+  
 
+  if($shibboleth == true) {
+  	
+  	$connection = $db->getConnection();
+  	$statement = $connection->prepare("SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+        FROM staff
+        WHERE email = :mail");
+  	$statement->bindParam(":mail", $emailAdd);
+  	$statement->execute();   
+  	$result =  $statement->fetchAll();
+  	
+  } else {
 
-  try {
-      } catch (Exception $e) {
-    echo $e;
-  }
-
-  $query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+  	$query = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
         FROM staff
         WHERE email = '" . scrubData($emailAdd, "email") . "' AND password = '" . scrubData($password) . "'";
-
-  $db = new Querier;
-  $result = $db->query($query);
-  $numrows = count($result);
-
-  if ($debugger == "yes") {
-    print "<p class=\"debugger\">$query<br /><strong>from</strong> isCool(), functions.php<br /></p>";
+  	$db = new Querier;
+  	$result = $db->query($query);  	 
+ 
   }
+ 
+  $numrows = count($result);
 
   if ($numrows > 0) {
 
     $user = $result;
     if (is_array($user)) {
 
+ 
 //set session variables
-      session_start();
-      session_regenerate_id();
+session_start();
+session_regenerate_id();
 
 // Create session vars for the basic types
       $_SESSION['checkit'] = md5($user[0][4]) . $salt;
@@ -109,6 +118,8 @@ function isCool($emailAdd="", $password="") {
     $result = "failure";
   }
 
+  
+  
   return $result;
 }
 
@@ -767,29 +778,42 @@ function seeRecentChanges($staff_id, $limit=10) {
   return $recent_activity;
 }
 
+/* This function is only for the University of Miami; on UM site, rename this to getHeadshot and comment out the other one */
 function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
 
-  $name_id = explode("@", $email);
+  
+   $name_id = explode("@", $email);
   $lib_image = "_" . $name_id[0];
   global $AssetPath;
+  // Get the real file path for the headshot image 
+  $headshot_path  =  dirname(dirname(dirname(__FILE__))) . "/assets/users/$lib_image/headshot.jpg";
 
-  $headshot = "<img src=\"" . $AssetPath . "" . "/users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\" align=\"left\"";
-    
+  if(file_exists($headshot_path)) {
+
+      // Check if the image is the UM logo
+      $image_hash = md5_file($headshot_path);
+      $um_logo = "91b8c9ec083c5abc898a5c482aac959e";
+
+      if($image_hash == $um_logo) {} else {
+
+              $headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
+
   switch ($pic_size) {
     case "small":
       $headshot .= " width=\"50\"";
-      break;
-    case "smaller":
-      $headshot .= " width=\"40\"";
       break;
     case "medium":
       $headshot .= " width=\"70\"";
       break;
   }
 
-  $headshot .= " class=\"$class\" />";
+  $headshot .= " class=\"staff_photo\"  align=\"left\" />";
+  // If the image exists and isn't the UM logo return the img html
   return $headshot;
+     }
+   }
 }
+
 
 /* This function is only for the University of Miami; on UM site, rename this to getHeadshot and comment out the other one */
 function getHeadshotUM($email, $pic_size="medium", $class="staff_photo") {
@@ -826,6 +850,8 @@ function getHeadshotUM($email, $pic_size="medium", $class="staff_photo") {
      }
    }
 }
+
+*/
 
 function getHeadshotFull($email, $pic_size="full", $class="staff_photo_full") {
 
