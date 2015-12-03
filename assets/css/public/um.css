@@ -1564,7 +1564,7 @@ img.center-image {
 .expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0;}
 .expert-list-circ li {
     display:inline-block; 
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     padding:0; 
     width:120px;
     position:relative;
@@ -1580,6 +1580,8 @@ img.center-image {
 .find-expert-area-circ .expert-button {text-align: center; padding:8px 12px; background-color: #f37421; font-size:1em; color:#FFF !important; border-radius: 2px; }
 .find-expert-area-circ .expert-button:hover {background-image: linear-gradient(transparent, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.1));}
 
+
+.expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 120px; color: #333;}
 
 /*Expert tooltips */
 
