@@ -109,6 +109,7 @@ function resourceList() {
 					myResourceList.settings.dbListResults.disableSelection();
 
 					$('.fa-check').hide();
+					$('.show-description-toggle').hasClass('active').show();
 
 				});
 			},
