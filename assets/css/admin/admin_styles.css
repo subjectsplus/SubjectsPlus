@@ -1778,6 +1778,8 @@ h4.guide-select-heading {margin: 6px 0;}
 .find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(192, 57, 87, 0.8); font-size:0.9em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: "NotoSansBold" !important;}
 .find-expert-area-circ .expert-button:hover {background-color: rgba(192, 57, 87, 1);}
 
+.expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 120px;}
+
 /*Expert tooltips */
 
 .expert-list-circ li:hover .expert-tooltip {display:block;}
