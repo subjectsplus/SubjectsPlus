@@ -241,6 +241,12 @@ print $social_and_search;
             $('#rightcol').width(new_sidebar_width);
         }
 
+        // Toggle details for each guide list item 
+          $( ".fa-plus-square" ).click(function() {
+             $(this).toggleClass('fa-plus-square fa-minus-square');
+             $(this).parent().find('.guide_list_bonus').toggle();            
+          });
+
 
     });
 

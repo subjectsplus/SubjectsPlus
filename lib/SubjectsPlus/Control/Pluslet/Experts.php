@@ -56,42 +56,39 @@ class Pluslet_Experts extends Pluslet {
           AND s.active = 1
           AND sub.active = 1
           AND ptags LIKE '%librarian%'
-    	  GROUP BY s.staff_id
-    	  ORDER BY RAND()
-          LIMIT 0,3";
+    	    GROUP BY s.staff_id
+    	    ORDER BY RAND()
+          LIMIT 0,4";
 
     $expertArray = $this->db->query($q);
 
-    // init our columns
-    $col_1 = "<div class=\"pure-u-1-2\">";
-    $col_2 = "<div class=\"pure-u-1-2\">";    
-    // the text that shows up in the blank box
-    $bonus_text = "<br />" . _("Need help?  Ask an expert.");
+    // init list item
+    $expert_item = "";
 
-    $row_count = 0;
+    // additional text
+    $bonus_text = _("Need help?  Ask an expert.");
+
+    // additional text - button 
+    $button_text = _("See all experts");  
+
 
     foreach ($expertArray as $key => $value) {
 
-      $image = getHeadshot($value['email'], "smaller","staff_photo");
-      $profile = "<div>" . $image . "<br />" . $value['fullname'] . "</div>";
+      $exp_image = getHeadshotFull($value['email']);
 
-      // this is to display two cols, col_1 with expert then text, col_2 with expert then expert
-      if ($row_count % 2 == 0) {
-        $col_2 .= $profile;
-      } else {
-        $col_1 .= $profile;
-      }
+      $librarian_email = $value['email'];
+      $name_id = explode("@", $librarian_email);
 
-      $row_count++;
+      $exp_profile = "<li><div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\">" . $value['fullname'] . "</a></div><div class=\"expert-tooltip\" id=\"tooltip-" . $name_id[0] . "\"><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\"><strong>Subjects:</strong> " . $value['subject'] ." ...</div></div></li>";
+
+      $expert_item .= $exp_profile;     
     }
 
-  
-    $col_1 .= "$bonus_text</div>";
-    $col_2 .= "</div>";
+    $guide_experts = "$expert_item";
 
-    $list_guides = "<div class=\"pure-g expert_list\">$col_1 $col_2</div>";
+    $list_guide_experts = "<div class=\"find-expert-area-circ\">$bonus_text<br /><ul class=\"expert-list-circ\">$guide_experts</ul><div class=\"expert-btn-area\"><a href=\"" . PATH_TO_SP ."subjects/staff.php?letter=Subject Librarians A-Z\" class=\"expert-button\">" . $button_text . "</a></div></div>";
 
-  return $list_guides;
+  return $list_guide_experts;
 
   }
 
