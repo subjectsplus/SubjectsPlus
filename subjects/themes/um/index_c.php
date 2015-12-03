@@ -145,6 +145,9 @@ include("includes/header_um.php");
 
     $layout = ""; //init
 
+// let's grab our collections
+    $collection_results = listCollections("","2col");
+
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
 
@@ -260,7 +263,7 @@ include("includes/header_um.php");
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
 
-    $guide_type_btns .= "<li><a href=\"" . PATH_TO_SP . "subjects/collection.php\">Collections</a></li></ul>";
+    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
 
 
 
@@ -282,7 +285,9 @@ include("includes/header_um.php");
                 $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
                 print "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
-                print $layout; ?>
+                print $layout;   
+                print $collection_results; 
+                ?>
             </div>
 
 
