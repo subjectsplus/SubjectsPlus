@@ -2,6 +2,10 @@
 
 include("includes/config.php");
 
+global $use_shibboleth;
+global $shibboleth_logout;
+
+
 // Initialize the session.
 session_start();
 
@@ -17,5 +21,10 @@ if (isset($_COOKIE[session_name()])) {
 // Finally, destroy the session.
 session_destroy();
 
-header("Location:login.php");
+if ($use_shibboleth == TRUE) {
+	header("Location:$shibboleth_logout");
+} else {
+	header("Location:login.php");	
+}
+
 ?> 

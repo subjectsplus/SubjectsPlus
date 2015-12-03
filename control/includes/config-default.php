@@ -122,7 +122,7 @@ $tel_prefix_short = "";
 // (Assumes that you have a staff table with email addresses)
 //
 $use_shibboleth = FALSE;
-
+$shibboleth_logout = "";
 //////////////////////
 // MySQL
 //////////////////////
