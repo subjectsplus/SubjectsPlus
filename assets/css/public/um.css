@@ -111,12 +111,12 @@ img {
 
 /* Front-end pluslet customization colors for titlebar - PV */
 
-.ts-whiteblack {
+.ts-umgreen {
     background-color: #d1d688 !important;
     color: #333 !important;
 }
 
-.ts-blackwhite {
+.ts-umcream {
     background-color: #e8d3a2 !important;
     color: #333 !important;
 }
