@@ -159,9 +159,9 @@ if( isInstalled() )
 	    				}  
 
 						}
-    			
 
-		        $lobjInstaller->updateToFour(); 
+
+		        $lobjInstaller->updateToFour();
 		                                
 		                                
 						$lobjInstaller->displayInstallationCompletePage();
