@@ -3,7 +3,11 @@
 use SubjectsPlus\Control\Querier;
 
 include_once("autoloader.php");
-include_once("config.php");
+
+if (file_exists("config.php") {
+	include_once("config.php");
+}
+
 
 //////////////////////////////
 // If gettext isn't installed
