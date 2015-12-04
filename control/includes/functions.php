@@ -3,7 +3,11 @@
 use SubjectsPlus\Control\Querier;
 
 include_once("autoloader.php");
-include_once("config.php");
+
+if (file_exists("config.php")) {
+	include_once("config.php");
+}
+
 
 //////////////////////////////
 // If gettext isn't installed
@@ -1774,7 +1778,7 @@ function listGuides($search = "", $type="all", $display="default") {
     return $list_guides;
 }
 
-function listCollections($search = "") {
+function listCollections($search = "", $display="default") {
     $db = new Querier();
     
     $whereclause = "";
@@ -1787,15 +1791,26 @@ function listCollections($search = "") {
 
 
     $q = "SELECT collection_id, title, description, shortform FROM $whereclause collection ORDER BY title";
-   // $r = $db->query($q);
+    $r = $db->query($q);
+    $num_rows = count($r);
+            
+    $switch_row = round($num_rows / 2);
+
+    $layout = "";
+
     //print $q;
-    $row_count = 0;
+    $row_count = 1;
     $colour1 = "oddrow";
     $colour2 = "evenrow";
 
+    if ($num_rows < 1) { return; }
+
+    switch ($display) {
+      case "default":
+
     $list_collections = "<table class=\"item_listing\" width=\"98%\">";
 
-    foreach ($db->query($q) as $myrow) {
+    foreach ($r as $myrow) {
 
         $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -1809,6 +1824,44 @@ function listCollections($search = "") {
     }
 
     $list_collections .= "</table>";
+    break;
+
+    case "2col":
+
+    // for 2 col
+    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+    $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";    
+
+    foreach ($r as $myrow) {
+
+      $guide_location = "collection.php?d=" . $myrow[3];
+      $list_bonus = $myrow[2];
+
+      $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+      <div class=\"guide_list_bonus\">$list_bonus</div>
+      </li>";  
+
+      if ($row_count <= $switch_row) {
+        // first col
+        $col_1 .= $our_item;
+                
+      } else {
+        // even
+        $col_2 .= $our_item;
+      }
+
+      $row_count++;
+
+    } // end foreach
+
+    $col_1 .= "</ul></div>";
+    $col_2 .= "</ul></div>";
+
+    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-Collection\"></a><h3>" . _("Guide Collections") . "</h3></div>" . $col_1 . $col_2 ."</div>";
+    $list_collections = $layout;
+
+    break;
+  }
     
     return $list_collections;
 }

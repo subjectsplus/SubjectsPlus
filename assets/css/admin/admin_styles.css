@@ -1762,7 +1762,7 @@ h4.guide-select-heading {margin: 6px 0;}
 .expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0 !important;}
 .expert-list-circ li {
     display:inline-block; 
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     padding:0; 
     width:120px;
     position:relative;
@@ -1777,6 +1777,8 @@ h4.guide-select-heading {margin: 6px 0;}
 .expert-btn-area {text-align: center; margin-top:15px; margin-bottom:10px;}
 .find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(192, 57, 87, 0.8); font-size:0.9em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: "NotoSansBold" !important;}
 .find-expert-area-circ .expert-button:hover {background-color: rgba(192, 57, 87, 1);}
+
+.expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 120px;}
 
 /*Expert tooltips */
 

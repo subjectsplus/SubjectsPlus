@@ -159,11 +159,8 @@ if( isInstalled() )
 	    				}  
 
 						}
+						
 
-
-		        $lobjInstaller->updateToFour();
-		                                
-		                                
 						$lobjInstaller->displayInstallationCompletePage();
 						$_SESSION['firstInstall'] = 1;
 					}
