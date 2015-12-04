@@ -180,7 +180,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                 $body_content .= "";
             }
 
-            $body_content .= "<script>$('.pluslet_body_content').appendTo($('.subjectSpecialistPluslet:first-child'));</script>";
+            $body_content .= "<script>$('.pluslet_body_content').appendTo($('.subjectSpecialistPluslet:last-child'));</script>";
 
             $body_content .= "<script>$('ul.staff-details:empty').parent('div').hide();</script>";
 
