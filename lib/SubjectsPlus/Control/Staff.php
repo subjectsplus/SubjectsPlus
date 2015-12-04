@@ -1006,7 +1006,7 @@ class Staff {
         . $db->quote(scrubData($this->_lname)) . ","
         . $db->quote(scrubData($this->_title)) . ","
         . $db->quote(scrubData($this->_tel)) . ","
-        . $db->quote($this->_department_id) . ","
+        . $db->quote($this->_department_id[0]) . ","
         . $db->quote(scrubData($this->_staff_sort, "integer")) . ","
         . $db->quote(scrubData($this->_email, "email")) . ","
         . $db->quote(scrubData($this->_user_type_id, "integer")) . ","
