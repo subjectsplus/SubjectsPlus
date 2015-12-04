@@ -13,6 +13,8 @@ table, td, th { vertical-align:top; }
 /* Remove annoying border on linked images. */
 a img { border: none; }
 
+p {margin-bottom: 10px;}
+
 /* no's*/
 .no-border{border: 0 !important}
 .no-margin{margin: 0 !important}
@@ -300,6 +302,7 @@ img {
 
 .pluslet li {
     display: list-item;
+    margin-left: 5px;
 }
 
 .pluslet li a {
@@ -1202,6 +1205,8 @@ width:55px;
 /* Subject Specialist Pluslet - NEW - Front-end*/
 .subjectSpecialistPlusletOld {margin: 0 0 12px 0; display: block; padding-bottom: 10px;}
 .subjectSpecialistPluslet {margin: 0 0 12px 0; display: block; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
+
+
 .staff-image {width: 90px; float:left; display: inline-block; margin-right: 10px; }
 
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
@@ -1214,7 +1219,8 @@ width:55px;
   width: -webkit-calc(100% - 110px);
 }
 
-.staff-details {list-style-type: none; margin: 0 !important; padding: 0; }
+.staff-details {list-style-type: none; margin: 0 !important; padding: 0; display: inline-block; }
+.staff-details h4 {font-weight: bold; margin-bottom: 6px;}
 .staff-details li {margin: 0 !important; display: block !important; white-space: pre-wrap;   white-space: -moz-pre-wrap;   
    white-space: -o-pre-wrap;  word-wrap: break-word; }
 
@@ -1391,7 +1397,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 .guide_list_header h3 {letter-spacing: 0; color:#333; font-size: 1em; padding-bottom:2px; }
 
 ul.guide-listing {list-style: inside none none !important; margin: 5px 0 0 5px !important; padding: 0 !important;}
-ul.guide-listing li {font-size:1em !important; padding-bottom:5px;}
+ul.guide-listing li {font-size:1em !important; padding-bottom:0;}
 ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-right:4px;}
 
 .guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
