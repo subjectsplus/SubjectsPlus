@@ -3667,3 +3667,110 @@ Additional Helper Classes - AGD
 
 } /* end last responsive block */
 
+
+
+/*** styles for Card Pluslet - taken from http://materializecss.com/cards.html ***/
+/** added cbrownroberts nov 19, 2015 ***/
+
+
+.card {
+  position: relative;
+  margin: 0.5rem 0 1rem 0;
+  background-color: #fff;
+  transition: box-shadow .25s;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-panel {
+  transition: box-shadow .25s;
+  padding: 20px;
+  margin: 0.5rem 0 1rem 0;
+  border-radius: 2px;
+  background-color: #fff; }
+
+
+.card .card-title {
+  font-size: 20px;
+  font-weight: 300;
+  background-color: rgba(0,0,0,0.5);
+  width: 100%; }
+.card .card-title.activator {
+  cursor: pointer; }
+.card.small, .card.medium, .card.large {
+  position: relative; }
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+  max-height: 60%;
+  overflow: hidden; }
+.card.small .card-content, .card.medium .card-content, .card.large .card-content {
+  max-height: 40%;
+  overflow: hidden; }
+.card.small .card-action, .card.medium .card-action, .card.large .card-action {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: inherit; }
+.card.small {
+  height: 300px; }
+.card.medium {
+  height: 400px; }
+.card.large {
+  height: 500px; }
+.card .card-image {
+  position: relative; }
+.card .card-image img {
+  display: block;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
+.card .card-image .card-title {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px; }
+.card .card-content {
+  padding: 20px;
+  border-radius: 0 0 2px 2px;
+}
+.card .card-content p {
+  margin: 0;
+  color: inherit; }
+.card .card-content .card-title {
+  line-height: 48px; }
+.card .card-action {
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding: 20px; }
+.card .card-action a {
+  color: #ffab40;
+  margin-right: 20px;
+  -webkit-transition: color .3s ease;
+  -moz-transition: color .3s ease;
+  -o-transition: color .3s ease;
+  -ms-transition: color .3s ease;
+  transition: color .3s ease;
+  text-transform: uppercase; }
+.card .card-action a:hover {
+  color: #ffd8a6; }
+.card .card-reveal {
+  padding: 20px;
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  overflow-y: auto;
+  top: 100%;
+  height: 100%;
+  z-index: 1;
+  display: none; }
+.card .card-reveal .card-title {
+  cursor: pointer;
+  display: block; }
+
+/*** end Card styles ****/
