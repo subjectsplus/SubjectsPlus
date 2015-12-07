@@ -367,7 +367,8 @@ $target_blank_links.each(function() {
 
 });
 
-
+$("div[name='Clone']").find('.pluslet_body:eq(0)').children().removeAttr('class');
+$("div[name='Clone']").find('.pluslet_body:eq(1)').removeAttr('class');
 
 ///////////////////////////////
 // Draw attention to TOC linked item
