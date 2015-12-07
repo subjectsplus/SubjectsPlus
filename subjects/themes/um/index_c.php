@@ -145,7 +145,7 @@ include("includes/header_um.php");
 
     $layout = ""; //init
 
-// let's grab our collections
+    // let's grab our collections
     $collection_results = listCollections("","2col");
 
     // We don't want our placeholder
