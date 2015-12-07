@@ -67,6 +67,7 @@ class StaffDisplay {
           }
 
           if ($mod_rewrite == 1) {
+            //$link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
             $link_to_details = "staff/" . $name_id[0];
           } else {
             $link_to_details = "staff_details.php?name=" . $name_id[0];
@@ -138,6 +139,7 @@ class StaffDisplay {
           // end subject listing
 
           if ($mod_rewrite == 1) {
+            //$link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
             $link_to_details = "staff/" . $name_id[0];
           } else {
             $link_to_details = "staff_details.php?name=" . $name_id[0];
@@ -309,7 +311,8 @@ class StaffDisplay {
           $items .= "<td class=\"staff-name-row\">";
 
           if ($mod_rewrite == 1) {
-            $linky = "staff_details.php?name=" . $name_id[0];
+            //$linky = "/subjects/profile/" . $name_id[0]; // um custom
+            $linky = "staff/" . $name_id[0];
           } else {
             $linky = "staff_details.php?name=" . $name_id[0];
           }
@@ -380,6 +383,7 @@ class StaffDisplay {
           }
 
           if ($mod_rewrite == 1) {
+            //$link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
             $link_to_details = "staff/" . $name_id[0];
           } else {
             $link_to_details = "staff_details.php?name=" . $name_id[0];

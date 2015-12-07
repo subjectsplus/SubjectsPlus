@@ -892,7 +892,8 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
       $name_id = explode("@", $email);
 
       if ($mod_rewrite == 1) {
-        $linky = "staff_details.php?name=" . $name_id[0];
+        //$linky = "/subjects/profile/" . $name_id[0]; // um custom
+        $linky = $linky = "staff/" . $name_id[0];
       } else {
         $linky = "staff_details.php?name=" . $name_id[0];
       }
@@ -1898,10 +1899,10 @@ $list_guides = "<table class=\"item_listing\" width=\"98%\">";
     $guide_location = $guide_path . $value[4];
     $thumbnail = $AssetPath . "images/guide_thumbs/$value[3].jpg";
     $thumbnail_default = "$AssetPath/images/guide_thumbs/chc.jpg";
-
-          
+//print $thumbnail;
+          print_r(getimagesize($thumbnail));
     //check if appropriate image exists; otherwise use the default one
-    if (!@getimagesize($thumbnail)) { $thumbnail = $thumbnail_default; }
+    if (!getimagesize($thumbnail)) { $thumbnail = $thumbnail_default; }
 
     // Stick in the title if it's the first row
     if ($key == 0) {

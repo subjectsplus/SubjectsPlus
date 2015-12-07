@@ -126,7 +126,6 @@ if (isset($_GET["d"])) {
 } else {
   // Default collection listing
   $intro = "<p></p>";
-  //$guide_list = listGuides($search, $view_type);
   $guide_results = listCollections($search);
 
 }

@@ -3,3 +3,18 @@ UM Specific Customizations
 * Need to keep in the GA event tracking codes
 ** DbHandler.php needs "trackContainer" class added to the table that renders all the databases
 ** And then this needs to be turned on in the jQuery at the bottom of databases.php in this theme
+
+ALSO
+
+1.  need to limit to subjects in lib/SubjectsPlus/StaffDisplay.php.  Need to modify the query in getAssocSubjects so that you have
+
+AND type = 'Subject'
+
+2.  In the functions.php file, use the getHeadshotsUM function instead of getHeadshots.  Rename the former, comment out the latter.  The UM one screens out the big U placeholder image.
+
+In functions.php need to customize the mod_rewrites to be like this:
+
+            $link_to_details = "staff/" . $name_id[0];
+            $link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
+
+I.e., make sure the second one is not commented out.  Need to do the same thing :( in the           
