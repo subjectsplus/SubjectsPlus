@@ -83,7 +83,7 @@ class Pluslet_Card extends Pluslet
 
     static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-file-text-o\" title=\"" . _("Card Image") . "\" ></i><span class=\"icon-text card-text\">" . _("Card Image") . "</span>";
+        $icon="<span class=\"icon-text guidesearch-text\">" . _("Image Card") . "</span>";
         return $icon;
     }
 

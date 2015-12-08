@@ -9,9 +9,9 @@ function pluslet() {
 
 	var myPluslet = {
 			settings : {
-				hideBodyContent : ['.pluslet.type-heading','.pluslet.type-worldcat' ,'.pluslet.type-catalog','.pluslet.type-relguide', '.pluslet.type-articleplus','.pluslet.type-toc','.pluslet.type-googlebooks','.pluslet.type-googlescholar','.pluslet.type-googlesearch','.pluslet.type-guideselect','.pluslet.type-newdbs','.pluslet.type-guidesearch','.pluslet.type-newguides','.pluslet.type-experts', '.pluslet.type-guidelist', '.pluslet.type-collectionlist'],
+				hideBodyContent : ['.pluslet.type-heading','.pluslet.type-worldcat' ,'.pluslet.type-catalog','.pluslet.type-relguide', '.pluslet.type-articleplus','.pluslet.type-toc','.pluslet.type-googlebooks','.pluslet.type-googlescholar','.pluslet.type-googlesearch','.pluslet.type-guideselect','.pluslet.type-newdbs','.pluslet.type-guidesearch','.pluslet.type-newguides','.pluslet.type-experts', '.pluslet.type-guidelist', '.pluslet.type-collectionlist', '.pluslet.type-card'],
 				hideLinksNewTab : ['.pluslet.type-heading','.pluslet.type-video','.pluslet.type-worldcat','.pluslet.type-catalog','.pluslet.type-relguide','.pluslet.type-articleplus','.pluslet.type-toc','.pluslet.type-googlebooks','.pluslet.type-googlescholar','.pluslet.type-googlesearch','.pluslet.type-guideselect','.pluslet.type-guidesearch', '.pluslet.type-experts', '.pluslet.type-collectionlist'],
-				hideTitleBar :    ['.pluslet.type-heading','.pluslet.type-toc'],
+				hideTitleBar :    ['.pluslet.type-heading','.pluslet.type-toc', '.pluslet.type-card'],
 				hideMarkFavorite :['.pluslet.type-worldcat','.pluslet.type-catalog','.pluslet.type-articleplus','.pluslet.type-relguide',
 				'.pluslet.type-googlebooks','.pluslet.type-googlescholar','.pluslet.type-googlesearch','.pluslet.type-guideselect','.pluslet.type-newdbs','.pluslet.type-guidesearch','.pluslet.type-newguides','.pluslet.type-experts', '.pluslet.type-guidelist', '.pluslet.type-collectionlist']
 	
