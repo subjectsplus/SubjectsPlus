@@ -1871,6 +1871,7 @@ function listGuideCollections($collection_shortform) {
 
 global $guide_path;
 global $AssetPath;
+global $collection_thumbnail_default;
 
 $db = new Querier();
 
@@ -1897,12 +1898,12 @@ $list_guides = "<table class=\"item_listing\" width=\"98%\">";
     $row_colour = ($key % 2) ? $colour1 : $colour2;
 
     $guide_location = $guide_path . $value[4];
-    $thumbnail = $AssetPath . "images/guide_thumbs/$value[3].jpg";
-    $thumbnail_default = "$AssetPath/images/guide_thumbs/chc.jpg";
-//print $thumbnail;
-          print_r(getimagesize($thumbnail));
+    $thumbnail = $AssetPath . "images/guide_thumbs/$value[4].jpg";
+    //$thumbnail_default = "$AssetPath/images/guide_thumbs/chc.jpg"; //um only
+    $thumbnail_default = $collection_thumbnail_default;
+
     //check if appropriate image exists; otherwise use the default one
-    if (!getimagesize($thumbnail)) { $thumbnail = $thumbnail_default; }
+    if (!@getimagesize($thumbnail)) { $thumbnail = $thumbnail_default; }
 
     // Stick in the title if it's the first row
     if ($key == 0) {

@@ -12,9 +12,22 @@ AND type = 'Subject'
 
 2.  In the functions.php file, use the getHeadshotsUM function instead of getHeadshots.  Rename the former, comment out the latter.  The UM one screens out the big U placeholder image.
 
-In functions.php need to customize the mod_rewrites to be like this:
+In functions.php and StaffDisplay.php class need to customize the mod_rewrites to be like this:
 
             $link_to_details = "staff/" . $name_id[0];
             $link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
 
-I.e., make sure the second one is not commented out.  Need to do the same thing :( in the           
+I.e., make sure the UM one is not commented out/takes precedence.    
+
+3.  In functions again, listGuideCollections, need to hard code this URL:
+
+    $thumbnail = "http://sp.library.miami.edu/assets/images/guide_thumbs/$value[4].jpg";
+
+(It doesn't like the https agnostic urls)    
+
+4.  In subjects/staff_details.php, because of our mod_rewrite, you need to move the icons up another directory:
+
+<img src=\"../../assets/images/icons/email.gif\" style=\"vertical-align: bottom;\" />  <a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a><br />
+<img src=\"../../assets/images/icons/telephone.gif\" style=\"vertical-align: bottom;\" />  $tel";
+
+5.  Make sure "Header Switcher" in edit config has "um,default".  We need um in first position to make sure it's the default, and we seem to need default or else it doesn't work :)

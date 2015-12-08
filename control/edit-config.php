@@ -61,9 +61,9 @@ if(!is_writable($lstrConfigFilePath))
 
 							"guide_types" => array( _( "Guide Types" ), _( "These are the different ways you may organize your guides." ), "array", "right", "large", "", _("You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query.") ),
 
-			                "use_shibboleth" => array( _( "Use Shibboleth" ), _( "This option controls whether Shibboleth will be used for logging in." ), "boolean", "right", "small", "", _("This checks the staff email with the server variables returned from Shibboleth.") ),
+			        "use_shibboleth" => array( _( "Use Shibboleth" ), _( "This option controls whether Shibboleth will be used for logging in." ), "boolean", "right", "small", "", _("This checks the staff email with the server variables returned from Shibboleth.") ),
 				
-			"shibboleth_logout" => array( _( "Shibboleth Logout URL" ), _( "This is the URL that logs the user out of a Shibboleth session." ), "string", "right", "small", "", _("This is a URL that logs the user out of a Shibboleth session.") ),
+							"shibboleth_logout" => array( _( "Shibboleth Logout URL" ), _( "This is the URL that logs the user out of a Shibboleth session." ), "string", "right", "large", "", _("This is a URL that logs the user out of a Shibboleth session.") ),
 				
 							"all_ctags" => array( _( "Record Tags" ), _( "These are the tags that a given record location can have associated with it." ), "array", "right", "textarea", "", _("Record tags are a way of slicing and dicing the total set of records.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places.") ),
 
@@ -95,6 +95,8 @@ if(!is_writable($lstrConfigFilePath))
 
 							"guide_index_page" => array( _( "Use a Guide as your index page" ), _("If you want one of your guides to be the splash page at /subjects/ , enter the short form"), "string", "right", "medium", "" , "" ), 
 
+							"collection_thumbnail" => array( _( "Collection default image" ), _("Set the image that shows by default on a collection page.  You must put this image in /assets/images/guide_thumbs/"), "string", "right", "medium", "" , "" ), 
+
 							"mod_rewrite" => array( _( "Use URL rewrites" ), _( "Make links prettier." ), "boolean", "right", "small", "" , "" ),
 
 							"BaseURL" => array( _( "Base URL of your SubjectsPlus Installation" ), _( "e.g. 'http://www.yoursite.edu/library/sp/.' Make sure to include the trailing slash! <strong>If changed, you will need to log back in.</strong>" ), "string", "left", "large", "" ,"" ),
@@ -113,7 +115,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"hname" => array( _( "MySQL Hostname" ), _( "This is the ip or url to your MySQL database." ), "string", "left", "medium", "" , _( "host help?" ) ),
 	  
-	  "db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL database uses." ), "string", "left", "medium", "" , _( "" ) ),
+	  					"db_port" => array( _( "MySQL Port" ), _( "This is the port your MySQL database uses." ), "string", "left", "medium", "" , _( "" ) ),
 
 							"uname" => array( _( "MySQL Username" ), _( "This is the username to your MySQL database." ), "string", "left", "medium", "" ,"" ),
 

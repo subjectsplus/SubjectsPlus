@@ -228,6 +228,10 @@ $IconPath = $AssetPath . "images/icons";
    You shouldn't have to modify this */
 $guides_temp_path = "uploads/";
 
+/* Default image used on the collections page */
+$collection_thumbnail = "chc.jpg";
+$collection_thumbnail_default = "$AssetPath/images/guide_thumbs/" . $collection_thumbnail;
+
 //////////////////////////////////
 // I18N support information here
 // uncomment and change language
