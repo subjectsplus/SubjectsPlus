@@ -180,7 +180,7 @@ div.mega_child.mega-md {width: 400px !important;}
 
 
 /* Front-end pluslet customization colors for titlebar - PV */
-.ts-whiteblack {
+.ts-whiteblack, .ts-umgreen {
     background-color: #cee8eb !important;
     color: #333 !important;
 }
@@ -197,6 +197,22 @@ div.mega_child.mega-md {width: 400px !important;}
 .pluslet_body a.pure-button-pluslet:hover {
   background-color: #999;  
 }
+
+.type-experts .expert-button {    
+    border: 1px solid #bcbbbb;
+    background-color: #f1722e;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.type-experts .expert-button:hover {background-color: #999;}
+
+.table-of-contents { color: #40659b !important;}
+.table-of-contents:hover { color: #cc6666 !important;}
+
+.card .card-action a {color: #40659b !important; text-decoration: none !important; }
+.card .card-action a:hover {text-decoration: underline !important; color: #cc6666 !important;}
+
 
 
 @media screen and (min-width: 48em) {
