@@ -394,8 +394,6 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 
 
 <script>
-
-<script>
 <?php include('./includes/js/hash.js'); ?>
 <?php include('./includes/js/track.js'); ?>
 <?php include('./includes/js/tabDropdown.js'); ?>
@@ -406,6 +404,7 @@ hash.init();
 track.init();
 tabDropdown.init();
 autoComplete.init();
+
 </script>
 
 
