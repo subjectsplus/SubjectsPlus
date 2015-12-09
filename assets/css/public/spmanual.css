@@ -47,7 +47,8 @@ body {
     text-align: left;
     line-height: 1.5em;
     color: #000;
-    background: url("../../images/grid.png") repeat scroll 0 0 #FFFFFF;
+    background: url("http://www.subjectsplus.com/images/bg1.jpg") no-repeat scroll center top #E3E1D9;
+    color: #858585;
 }
 
 html,
@@ -73,11 +74,11 @@ a:hover {
 h1 {
     color: #333333;
   
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: bold;
-    padding: 0.5em 0 1em;
+    padding: 1em 0 0em 2em;
     text-shadow: 0 2px 3px #CCCCCC;
-    margin: .5em 0 1em 0em;    
+    margin: .5em 0 0em 0em;    
 }
 
 h2 {
@@ -131,11 +132,11 @@ img {
 /* Header area */
 
 #header {
-    background: #fff;
+    background: transparent;
     height: 3em;
     padding: 1em;
     margin: 0 0 2em 0;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 }
 
 #header_inner_wrap {
