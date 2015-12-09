@@ -333,8 +333,10 @@ function tabs() {
                                 });
                             
                             $('#tabs').data().tabCount++;
-                            console.log(html)
-                           // Layout().layoutSection(sectionId, layout);
+                            var sec = $("#" +id).children();
+                            sec.find('.sp_section_controls').hide();
+	                       
+                           
                         }
                     });
 

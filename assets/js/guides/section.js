@@ -137,12 +137,13 @@ function section() {
 		},
 		clickTabOnSwitch : function () {
 			
-			$('.ui-tabs-nav > li').on('click', function() {
+			$('body').on('click', '.ui-tabs-nav > li', function() {
 				 var tabIndex = $(this).attr('aria-controls').split('-')[1];
 				$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
 				mySection.viewSectionControls();
 				
 			});
+			
 			
 			
 		},
