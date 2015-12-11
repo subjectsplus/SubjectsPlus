@@ -994,7 +994,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .db-list-toggle { font-size:11px; cursor:pointer; padding-right: 5px; font-family: 'NotoSansRegular'; font-weight: normal;}
 
-.active .fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
+.fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
 
 .fa-minus { color: #D24D57; font-size:16px; padding: 0 2px 0 0; }
 
@@ -2076,10 +2076,6 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 #colorbox:focus {outline:none !important;}
 #cboxWrapper:focus {outline:none !important;}
 
-
-/* Pop up boxes - index overides*/ 
-.ui-dialog {z-index: 9999999 !important;}
-.ui-widget-overlay {z-index: 99999 !important;}
 
 
 

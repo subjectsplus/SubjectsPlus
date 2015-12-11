@@ -30,12 +30,13 @@ function layout() {
 		},
 		init : function() {
 
-			myLayout.initialLayout();
-			myLayout.selectedLayout();
-			myLayout.layoutSections();
-			myLayout.bindUiActions();
+
 		
 			document.addEventListener("DOMContentLoaded", function() {
+				myLayout.initialLayout();
+				myLayout.selectedLayout();
+				myLayout.layoutSections();
+				myLayout.bindUiActions();
 				myLayout.activateLayoutButtons();
 				myLayout.highlightLayout($('.sp_section'));
 			});

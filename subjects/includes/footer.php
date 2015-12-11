@@ -54,16 +54,6 @@
   }
 </script>
 
-<script>
-<?php include('./includes/js/hash.js'); ?>
-<?php include('./includes/js/track.js'); ?>
-<?php include('./includes/js/tabDropdown.js'); ?>
-<?php include('./includes/js/autoComplete.js'); ?>
-<?php include('./includes/js/jquery.scrollTo.js'); ?>
-hash.init();
-track.init();
-tabDropdown.init();
-autoComplete.init();
-</script>
+
 </body>
 </html>

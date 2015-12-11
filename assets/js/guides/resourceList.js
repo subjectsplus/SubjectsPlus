@@ -107,9 +107,8 @@ function resourceList() {
 							"</span>" + myResourceList.strings.displayToggles);
 					myResourceList.settings.dbListResults.sortable();
 					myResourceList.settings.dbListResults.disableSelection();
+					$('.db-list-item-draggable').last().find('.fa-check').hide();
 
-					$('.fa-check').hide();
-					$('.show-description-toggle').hasClass('active').show();
 
 				});
 			},

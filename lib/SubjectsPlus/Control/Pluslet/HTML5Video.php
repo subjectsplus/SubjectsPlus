@@ -155,7 +155,7 @@ class Pluslet_HTML5Video extends Pluslet {
         
         	$this->_body .= "<div class='video-container'><div id='kaltura-player'>" .
         			 
-        			"<iframe src=\"//cdnapi.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/25208101/partner_id/1332041?iframeembed=true&playerId=kplayer&entry_id={$kaltura_ref_id}&flashvars[streamerType]=auto\""
+        			"<iframe src=\"//cdnapisec.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/25208101/partner_id/1332041?iframeembed=true&playerId=kplayer&entry_id={$kaltura_ref_id}&flashvars[streamerType]=auto\""
         			. "width='560' height='315' allowfullscreen webkitallowfullscreen mozAllowFullScreen frameborder=\"0\"></iframe>"
         					. "</div></div>";
         	 
