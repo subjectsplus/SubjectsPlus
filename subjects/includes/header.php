@@ -23,6 +23,7 @@ if (isset($css_override)  && $css_override != "") {
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/<?php print $our_base_css; ?>">
 <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/print.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
 <?php 
 // Load our jQuery libraries + some css

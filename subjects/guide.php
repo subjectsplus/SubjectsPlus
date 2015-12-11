@@ -35,19 +35,26 @@ if( isset( $_GET['subject'] ) )
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
 
+///////////////////////
 // Add This + Search //
+// Add This is turned off by default :)
 
-$social_and_search = '
-<div id="guide_nav_tools">
-<form id="guide_search" class="pure-form"><!-- AddToAny BEGIN -->
+/* $addthis = '<!-- AddToAny BEGIN -->
     <div class="a2a_kit"  style="float: left !important;">
     <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
     <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
     <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
 </div>
     <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->
-<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="' . _("Find in Guide") . '" autocomplete="off"/></form>
+    <!-- AddToAny END -->'; */
+
+$addthis = "";
+
+$social_and_search = '
+<div id="guide_nav_tools">
+<form id="guide_search" class="pure-form"> ' .
+$addthis . 
+'<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="' . _("Find in Guide") . '" autocomplete="off"/></form>
 </div>
 ';
 
