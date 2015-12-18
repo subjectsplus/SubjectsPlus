@@ -682,9 +682,9 @@ table {
     font-size: 1.2em;
 }
 table.item_listing td, div.item_listing p {
-    padding: .5em 0 .5em .5em;
-    border-bottom: 1px solid #ccc;
+    padding: .5em 0 .5em .5em;    
     margin: 0;
+    padding: 10px 0 5px 5px;
 }
 table.item_listing th {
     padding: .5em 0 .5em .5em;
