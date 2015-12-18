@@ -1342,7 +1342,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 .find-expert-area-circ {padding:0;}
 
-.expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0 !important; text-align: center;}
+.expert-list-circ {list-style-type: none; margin:15px 0 15px 0 !important; padding:0 !important; text-align: center;}
 .expert-list-circ li {
     display:inline-block; 
     margin: 0 0 10px 0;
@@ -1358,7 +1358,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 .expert-list-circ .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; line-height: 1.2em; color: #FFF;}
 
 .expert-btn-area {text-align: center; margin-top:15px; margin-bottom:10px;}
-.find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
+.find-expert-area-circ .expert-button {text-align: center; padding: 6px 12px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
 .find-expert-area-circ .expert-button:hover {background-color: rgba(51, 51, 51, 1);}
 
 .expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 115px;}
@@ -1395,23 +1395,22 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 
 /*Guide List Pluslet */
-.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px; }
+.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px;  }
 
 .guide_list_header {border-bottom: 1px dotted #ccc; font-size: 1.1em !important; font-weight: bold;}
 .guide_list_header h3 {letter-spacing: 0; color:#333; font-size: 1em; padding-bottom:2px; }
 
 ul.guide-listing {list-style: inside none none !important; margin: 5px 0 0 5px !important; padding: 0 !important;}
-ul.guide-listing li {font-size:1em !important; padding-bottom:0;}
+ul.guide-listing li {font-size:1.025em !important; padding-bottom:0; margin-bottom: 5px;}
 ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-right:4px;}
 
 .guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
 
-.pills-label {display:inline-block; color: #858585; font-size:1em; margin-right:5px; font-weight: bold; font-style: italic;}
+.pills-label {display:inline-block; color: #858585; font-size:1.1em; margin-right:10px; font-weight: bold; font-style: italic;}
 .pills-container {display:inline-block; margin-bottom: 5px;}
 .pills-container ul {list-style-type: none;}
 .pills-container ul li {display:inline-block; font-size:1em; margin-right:8px;}
-.pills-container ul li a {display:inline-block; font-size:1em; color: #333; padding: 0;}
-
+.pills-container ul li a {display:inline-block; font-size:1.1em; color: #333; padding: 0;}
 
 
 /* Card Pluslet - Front-End */
@@ -1532,6 +1531,68 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     display: block; }
 
 /*** end Card styles ****/
+
+
+
+/* Revised Index - Front-end */
+
+#guidesplash {margin: 20px 0 0 0;}
+
+.index-search-area {margin-right: 0; }
+.index-search-area .autoC {margin-bottom:25px;}
+.index-search-area .ui-autocomplete-input {
+    /*background: #f2f2f2 none repeat scroll 0 0;
+    border-color: #DADFE1 #F2F1EF #F2F1EF #DADFE1 !important;
+    box-shadow:none !important;*/
+    border-radius:4px 4px 4px 4px !important;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0 10px 0 0;
+    height: 35px;
+    padding: 0.5em !important;
+    font-size: 1.1em;
+    color: #666;
+    width: -moz-calc(100% - 75px);
+    width: -webkit-calc(100% - 75px);
+    width: calc(100% - 75px);    
+    text-transform: none;    
+}
+
+.index-search-area .ui-autocomplete-input:focus {border-color: #999 !important;}
+
+.index-search-area .pure-button-topsearch {
+    background-color: #666;
+    color: #fff;
+    margin: 2px 0 0 0;
+    height: 35px;
+    border-radius:4px 4px 4px 4px !important;
+    text-transform: none;
+    font-size: 1.2em;
+    border-top: none;
+    letter-spacing: 1px;
+}
+
+.ui-autocomplete.index-search-dd {}
+.ui-autocomplete.index-search-dd .ui-autocomplete-category {display:none;}
+.ui-autocomplete.index-search-dd li {border-bottom: 1px dashed #e0e0e0; border-top: none; font-size:1.1em; }
+.ui-autocomplete.index-search-dd li a {color: #666; padding: 10px;}
+.ui-autocomplete.index-search-dd li a:hover {color: #cc6666;}
+
+.guide_list_container {margin-top:20px;}
+
+.find-expert-area-circ h3 {
+    letter-spacing: 0;
+}
+
+.find-expert-area-circ p {padding: 10px 10px 0;}
+
+#guidesplash .find-expert-area-circ {margin-bottom: 10px; padding: 0 0 15px;}
+
+#guidesplash .expert-list-circ li {width:130px;}
+
+#guidesplash .guide_list_header {margin-bottom: 6px;}
+#guidesplash .guide_list_header h3 {padding-bottom: 5px;}
+
 
 
 
