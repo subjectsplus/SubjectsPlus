@@ -388,6 +388,9 @@ img {
      padding: 10px 30px 0 2px;
 }
 
+.ui-tabs-nav.ui-widget-header {border: none !important; background-color: transparent !important; background-image: none !important;}
+
+.ui-tabs .ui-tabs-nav li.child-tab {border-bottom: 1px solid #d3d3d3 !important;}
 
 /* Print Dialog */
 
@@ -1133,8 +1136,7 @@ div.video_thumb img {
 /* DZ -  When on this tab */
 .ui-state-active .hometab, .ui-state-focus .hometab {
     
-   /* background: url(../../images/icons/home-white.png) no-repeat center center !important;*/
-    background-color: rgba(51, 51, 51, 0.7) !important;
+   /* background: url(../../images/icons/home-white.png) no-repeat center center !important;*/    
     color: #FFF !important;
 }
 
@@ -1535,7 +1537,7 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
 /* Revised Index - Front-end */
 
-#guidesplash {margin: 20px 0 0 0;}
+#guidesplash {margin: 20px 10px 0 10px;}
 
 .index-search-area {margin-right: 0; }
 .index-search-area .autoC {margin-bottom:25px;}
@@ -1554,7 +1556,8 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     width: -moz-calc(100% - 75px);
     width: -webkit-calc(100% - 75px);
     width: calc(100% - 75px);    
-    text-transform: none;    
+    text-transform: none;  
+    display: inline-block !important;  
 }
 
 .index-search-area .ui-autocomplete-input:focus {border-color: #999 !important;}
@@ -1585,7 +1588,7 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
 .find-expert-area-circ p {padding: 10px 10px 0;}
 
-#guidesplash .find-expert-area-circ {margin-bottom: 10px; padding: 0 0 15px;}
+#guidesplash .find-expert-area-circ {padding: 0 0 15px 30px; margin-bottom:10px; margin-top:0;}
 
 #guidesplash .expert-list-circ li {width:130px;}
 
@@ -1655,6 +1658,8 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     .pluslet_body .pure-form textarea {
       width: 55%;
     }
+
+    #guidesplash .find-expert-area-circ {margin-top:100px;}
 
 }
 

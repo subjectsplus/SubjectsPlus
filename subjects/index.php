@@ -290,7 +290,7 @@ include("includes/header.php");
 
 ?>
 <div class="pure-g" id="guidesplash">
-  <div class="pure-u-1 pure-u-md-2-3" id="listguides">
+  <div class="pure-u-1 pure-u-lg-2-3" id="listguides">
 
       <div class="index-search-area">        
           <?php 
@@ -304,7 +304,7 @@ include("includes/header.php");
   
   </div><!--end 2/3 main area-->
 
-  <div class="pure-u-1 pure-u-md-1-3">
+  <div class="pure-u-1 pure-u-lg-1-3">
 
       
           <div class="find-expert-area-circ">
