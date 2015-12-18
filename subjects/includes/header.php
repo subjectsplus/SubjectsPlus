@@ -10,9 +10,20 @@
 
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure-min.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/grids-responsive-min.css">
-<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/cleanwhite.css">
+<?php 
+// see if we need to override the css; you, too, can do this via the Admin > Config Site page
+if (isset($css_override)  && $css_override != "") { 
+    // trim off .css in case someone included it
+    $css_override = explode(".css", $css_override);
+    $our_base_css = $css_override[0] . ".css"; 
+} else {
+    $our_base_css = "cleanwhite.css";
+}
+?>
+<link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/<?php print $our_base_css; ?>">
 <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/print.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
 <?php 
 // Load our jQuery libraries + some css
@@ -49,7 +60,7 @@ $v2styles = TRUE;
     <div id="header_inner_wrap">
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-5">
-                <a href="<?php print $PublicPath; ?>"><img src="<?php print $AssetPath; ?>images/public/logo.png" alt="Home Page" /></a>
+                <a href="<?php print $PublicPath; ?>"><img class="main_logo" src="<?php print $AssetPath; ?>images/public/logo.png" alt="Home Page" /></a>
                 
             </div>
             <div class="pure-u-1 pure-u-md-4-5">

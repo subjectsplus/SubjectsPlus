@@ -46,8 +46,9 @@ body {
     font-size: 0.8125em;
     text-align: left;
     line-height: 1.5em;
-    color: #494949;
-    background: #F5F2F0;
+    color: #000;
+    background: url("http://www.subjectsplus.com/images/bg1.jpg") no-repeat scroll center top #E3E1D9;
+    color: #858585;
 }
 
 html,
@@ -73,11 +74,11 @@ a:hover {
 h1 {
     color: #333333;
   
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: bold;
-    padding: 0.5em 0 1em;
+    padding: 1em 0 0em 2em;
     text-shadow: 0 2px 3px #CCCCCC;
-    margin: .5em 0 1em 0em;    
+    margin: .5em 0 0em 0em;    
 }
 
 h2 {
@@ -131,11 +132,11 @@ img {
 /* Header area */
 
 #header {
-    background: #fff;
+    background: transparent;
     height: 3em;
     padding: 1em;
     margin: 0 0 2em 0;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    box-shadow: none;
 }
 
 #header_inner_wrap {
@@ -143,7 +144,7 @@ img {
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    background-color: #transparent;
+    background-color: transparent;
     height: 3em;
     max-width: 1400px;
 }
@@ -286,14 +287,12 @@ img {
     position: relative;
     clear: both;
     background: #fff; 
-    border: 0px solid #ccc;
+    border: 1px solid #ccc;
     padding: 0;
     font-size: 10pt;   
     border-radius: 5px;
     margin: 1em 1em;    
     box-shadow: 5px 5px 7px #e0e0e0;
-    border-radius: 6px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 }
 
 .pluslet ul {
@@ -302,7 +301,6 @@ img {
 
 .pluslet li {
     display: list-item;
-    margin-left: 5px;
 }
 
 .pluslet li a {
@@ -335,27 +333,28 @@ img {
 .titlebar {
     color: #333;
     position: relative;
+    height: 2em;
     padding: 0;
     margin: 0;
     width: 100%;
+    border-bottom: 1px solid #B3B9BF;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background-color: #fff;
-
+    background-color: #333;
 }
 
 .titlebar_text {
-    font: 1.2em sans-serif;
+    font: 1em sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 0px;
-    padding: 10px 10px 0px;
+    padding: 5px 10px 5px;
     border:  none;
-    color: #333;
+    color: #fff;
     background-color: transparent;
 
 }
@@ -458,7 +457,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: normal;}
+.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: none;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
 
 
@@ -627,7 +626,7 @@ overflow: auto;
     border-radius: 3px;
     padding: 0 .6em;
     margin: .2em .5em .2em 0;
-    color: 333;
+    color: #333;
     text-decoration: none;
 }
 #letterhead_small a:hover {
@@ -1162,16 +1161,18 @@ width:55px;
     float:left;
 }
 
+
+
 .ts-blackwhite, .ts-umgreen
 {
-    background-color:black;
-    color:white;
+	background-color:black;
+	color:white;
 }
 
 .ts-whiteblack, .ts-umcream
 {
-    background-color:white;
-    color:black;
+	background-color:white;
+	color:black;
 }
 
 .noshow {display: none;}
@@ -1227,6 +1228,7 @@ width:55px;
 .staff-social {padding: .2em 0.2em .2em 0; font-size: 26px; display: inline-block;}
 .staff-social  a {text-decoration: none; color: rgba(51,51,51,0.7) !important;}
 .staff-social a:hover { color: rgba(51,51,51,1) !important;}
+
 
 
 /* WorldCat Pluslet - Front-end */
@@ -1309,8 +1311,7 @@ width:55px;
 
 /* TOC Pluslet - Front-end */
 h4.toc-heading {margin: 6px 0; font-weight: bold;}
-.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0; color: #40659b !important;}
-.table-of-contents:hover { color: #cc6666 !important;}
+.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0;}
 
 
 /* Google Search Pluslet - Front-end */
@@ -1341,7 +1342,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 .find-expert-area-circ {padding:0;}
 
-.expert-list-circ {list-style-type: none; margin:15px 0 15px 0 !important; padding:0 !important; text-align: center;}
+.expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0 !important; text-align: center;}
 .expert-list-circ li {
     display:inline-block; 
     margin: 0 0 10px 0;
@@ -1357,7 +1358,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 .expert-list-circ .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; line-height: 1.2em; color: #FFF;}
 
 .expert-btn-area {text-align: center; margin-top:15px; margin-bottom:10px;}
-.find-expert-area-circ .expert-button {text-align: center; padding: 6px 12px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
+.find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
 .find-expert-area-circ .expert-button:hover {background-color: rgba(51, 51, 51, 1);}
 
 .expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 115px;}
@@ -1394,203 +1395,23 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 
 /*Guide List Pluslet */
-.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px;  }
+.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px; }
 
 .guide_list_header {border-bottom: 1px dotted #ccc; font-size: 1.1em !important; font-weight: bold;}
 .guide_list_header h3 {letter-spacing: 0; color:#333; font-size: 1em; padding-bottom:2px; }
 
 ul.guide-listing {list-style: inside none none !important; margin: 5px 0 0 5px !important; padding: 0 !important;}
-ul.guide-listing li {font-size:1.025em !important; padding-bottom:0; margin-bottom: 5px;}
+ul.guide-listing li {font-size:1em !important; padding-bottom:0;}
 ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-right:4px;}
 
 .guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
 
-.pills-label {display:inline-block; color: #858585; font-size:1.1em; margin-right:10px; font-weight: bold; font-style: italic;}
+.pills-label {display:inline-block; color: #858585; font-size:1em; margin-right:5px; font-weight: bold; font-style: italic;}
 .pills-container {display:inline-block; margin-bottom: 5px;}
 .pills-container ul {list-style-type: none;}
 .pills-container ul li {display:inline-block; font-size:1em; margin-right:8px;}
-.pills-container ul li a {display:inline-block; font-size:1.1em; color: #333; padding: 0;}
+.pills-container ul li a {display:inline-block; font-size:1em; color: #333; padding: 0;}
 
-
-/* Card Pluslet - Front-End */
-/*** styles for Card Pluslet - taken from http://materializecss.com/cards.html ***/
-/** added cbrownroberts nov 19, 2015 ***/
-
-.type-card {
-    border:none;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.type-card .titlebar {display:none;}
-
-.type-card .pluslet_body {margin:0; padding: 0 0 5px 0;}
-
-.card {
-    position: relative;
-    margin: 0 0 0 0;
-    background-color: #fff;
-    transition: box-shadow .25s;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-.card-panel {
-    transition: box-shadow .25s;
-    padding: 20px;
-    margin: 0.5rem 0 1rem 0;
-    border-radius: 2px;
-    background-color: #fff; }
-
-.card .card-title {
-    font-size: 20px;
-    font-weight: 300;
-    background-color: rgba(0,0,0,0.5);
-    width: -moz-calc(100% - 40px);
-    width: -webkit-calc(100% - 40px);
-    width: calc(100% - 40px);  
-}
-.card .card-title.activator {
-    cursor: pointer; }
-.card.small, .card.medium, .card.large {
-    position: relative; }
-.card.small .card-image, .card.medium .card-image, .card.large .card-image {
-    max-height: 60%;
-    overflow: hidden; }
-.card.small .card-content, .card.medium .card-content, .card.large .card-content {
-    max-height: 40%;
-    overflow: hidden; }
-.card.small .card-action, .card.medium .card-action, .card.large .card-action {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    background-color: inherit; }
-.card.small {
-    height: 300px; }
-.card.medium {
-    height: 400px; }
-.card.large {
-    height: 500px; }
-.card .card-image {
-    position: relative; }
-.card .card-image img {
-    display: block;
-    border-radius: 2px 2px 0 0;
-    position: relative;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%; }
-.card .card-image .card-title {
-    color: #fff;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: 20px; }
-.card .card-content {
-    padding: 20px;
-    border-radius: 0 0 2px 2px;
-}
-.card .card-content p {
-    margin: 0;
-    color: inherit; }
-.card .card-content .card-title {
-    line-height: 48px; }
-.card .card-action {
-    border-top: 1px solid rgba(160, 160, 160, 0.2);
-    padding: 20px; }
-.card .card-action a {    
-    margin-right: 20px;
-    -webkit-transition: color .3s ease;
-    -moz-transition: color .3s ease;
-    -o-transition: color .3s ease;
-    -ms-transition: color .3s ease;
-    transition: color .3s ease;
-    text-transform: none; 
-    text-decoration: none !important;
-    color: #40659b !important;
-}
-.card .card-action a:hover {text-decoration: underline !important; color: #cc6666 !important;}
-.card .card-reveal {
-    padding: 20px;
-    position: absolute;
-    background-color: #fff;
-    width: 100%;
-    overflow-y: auto;
-    top: 100%;
-    height: 100%;
-    z-index: 1;
-    display: none; }
-.card .card-reveal .card-title {
-    cursor: pointer;
-    display: block; }
-
-/*** end Card styles ****/
-
-
-
-/* Revised Index - Front-end */
-
-#guidesplash {margin: 20px 0 0 0;}
-
-.index-search-area {margin-right: 0; }
-.index-search-area .autoC {margin-bottom:25px;}
-.index-search-area .ui-autocomplete-input {
-    /*background: #f2f2f2 none repeat scroll 0 0;
-    border-color: #DADFE1 #F2F1EF #F2F1EF #DADFE1 !important;
-    box-shadow:none !important;*/
-    border-radius:4px 4px 4px 4px !important;
-    border-style: solid;
-    border-width: 1px;
-    margin: 0 10px 0 0;
-    height: 35px;
-    padding: 0.5em !important;
-    font-size: 1.1em;
-    color: #666;
-    width: -moz-calc(100% - 75px);
-    width: -webkit-calc(100% - 75px);
-    width: calc(100% - 75px);    
-    text-transform: none;    
-}
-
-.index-search-area .ui-autocomplete-input:focus {border-color: #999 !important;}
-
-.index-search-area .pure-button-topsearch {
-    background-color: #666;
-    color: #fff;
-    margin: 2px 0 0 0;
-    height: 35px;
-    border-radius:4px 4px 4px 4px !important;
-    text-transform: none;
-    font-size: 1.2em;
-    border-top: none;
-    letter-spacing: 1px;
-}
-
-.ui-autocomplete.index-search-dd {}
-.ui-autocomplete.index-search-dd .ui-autocomplete-category {display:none;}
-.ui-autocomplete.index-search-dd li {border-bottom: 1px dashed #e0e0e0; border-top: none; font-size:1.1em; }
-.ui-autocomplete.index-search-dd li a {color: #666; padding: 10px;}
-.ui-autocomplete.index-search-dd li a:hover {color: #cc6666;}
-
-.guide_list_container {margin-top:20px;}
-
-.find-expert-area-circ h3 {
-    letter-spacing: 0;
-}
-
-.find-expert-area-circ p {padding: 10px 10px 0;}
-
-#guidesplash .find-expert-area-circ {margin-bottom: 10px; padding: 0 0 15px;}
-
-#guidesplash .expert-list-circ li {width:130px;}
-
-#guidesplash .guide_list_header {margin-bottom: 6px;}
-#guidesplash .guide_list_header h3 {padding-bottom: 5px;}
 
 
 
@@ -1696,3 +1517,110 @@ img.pluslet_card_image {
 /** end ckeditor custom styles ***/
 
 
+
+
+/*** styles for Card Pluslet - taken from http://materializecss.com/cards.html ***/
+/** added cbrownroberts nov 19, 2015 ***/
+
+
+.card {
+    position: relative;
+    margin: 0.5rem 0 1rem 0;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-panel {
+    transition: box-shadow .25s;
+    padding: 20px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 2px;
+    background-color: #fff; }
+
+
+.card .card-title {
+    font-size: 20px;
+    font-weight: 300;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%; }
+.card .card-title.activator {
+    cursor: pointer; }
+.card.small, .card.medium, .card.large {
+    position: relative; }
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    max-height: 60%;
+    overflow: hidden; }
+.card.small .card-content, .card.medium .card-content, .card.large .card-content {
+    max-height: 40%;
+    overflow: hidden; }
+.card.small .card-action, .card.medium .card-action, .card.large .card-action {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: inherit; }
+.card.small {
+    height: 300px; }
+.card.medium {
+    height: 400px; }
+.card.large {
+    height: 500px; }
+.card .card-image {
+    position: relative; }
+.card .card-image img {
+    display: block;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%; }
+.card .card-image .card-title {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px; }
+.card .card-content {
+    padding: 20px;
+    border-radius: 0 0 2px 2px;
+}
+.card .card-content p {
+    margin: 0;
+    color: inherit; }
+.card .card-content .card-title {
+    line-height: 48px; }
+.card .card-action {
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 20px; }
+.card .card-action a {
+    color: #ffab40;
+    margin-right: 20px;
+    -webkit-transition: color .3s ease;
+    -moz-transition: color .3s ease;
+    -o-transition: color .3s ease;
+    -ms-transition: color .3s ease;
+    transition: color .3s ease;
+    text-transform: uppercase; }
+.card .card-action a:hover {
+    color: #ffd8a6; }
+.card .card-reveal {
+    padding: 20px;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    overflow-y: auto;
+    top: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none; }
+.card .card-reveal .card-title {
+    cursor: pointer;
+    display: block; }
+
+/*** end Card styles ****/

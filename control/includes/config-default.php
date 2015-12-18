@@ -153,6 +153,12 @@ $target_blank = TRUE;
 $subjects_theme = "";
 /////////////////////
 
+/////////////////////
+// Use override CSS
+// for light theming of site via CSS without renaming files
+$css_override = "";
+/////////////////////
+
 //////////////////////
 // Header switcher
 // This allows SP to mimic the style of different sites,

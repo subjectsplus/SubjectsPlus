@@ -32,20 +32,21 @@ body,
 .pure-g [class *= "pure-u"],
 .pure-g-r [class *= "pure-u"] {
     /* Set you're content font stack here: */
-    font-family: sans-serif;
+   font-family: 'Lato', sans-serif;
 }
 
 .ui-widget-header {
-       background: #cccccc !important;
+       /* background: #cccccc !important; */
+       background: none !important;
 }
 
 body {
     margin: 0 auto;
     padding: 0;
     
-    font-size: 0.8125em;
+    font-size: 16px;
     text-align: left;
-    line-height: 1.5em;
+    line-height: 1.2em;
     color: #494949;
     background: #F5F2F0;
 }
@@ -73,10 +74,10 @@ a:hover {
 h1 {
     color: #333333;
   
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: bold;
     padding: 0.5em 0 1em;
-    text-shadow: 0 2px 3px #CCCCCC;
+    /*text-shadow: 0 2px 3px #CCCCCC;*/
     margin: .5em 0 1em 0em;    
 }
 
@@ -135,7 +136,8 @@ img {
     height: 3em;
     padding: 1em;
     margin: 0 0 2em 0;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1); */
+    border-bottom: 1px solid #ccc;
 }
 
 #header_inner_wrap {
@@ -143,7 +145,7 @@ img {
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    background-color: #transparent;
+    background-color: transparent;
     height: 3em;
     max-width: 1400px;
 }
@@ -262,8 +264,7 @@ img {
     z-index: 1;
     overflow: visible;
     border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 5px;    
+    background-color: #fff;  
      padding: .5em 1em;
     margin: 1em;
 }
@@ -286,14 +287,16 @@ img {
     position: relative;
     clear: both;
     background: #fff; 
-    border: 0px solid #ccc;
+    border: 1px solid #ccc;
+    border-top: 0;
     padding: 0;
-    font-size: 10pt;   
-    border-radius: 5px;
+    font-size: 1em;   
+    
     margin: 1em 1em;    
-    box-shadow: 5px 5px 7px #e0e0e0;
-    border-radius: 6px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    /*
+    border-radius: 5px;
+    box-shadow: 5px 5px 7px #e0e0e0; 
+    */
 }
 
 .pluslet ul {
@@ -302,7 +305,6 @@ img {
 
 .pluslet li {
     display: list-item;
-    margin-left: 5px;
 }
 
 .pluslet li a {
@@ -321,6 +323,8 @@ img {
 }
 #tabs .pluslet ul {
     margin-bottom: 0.5em;
+    list-style-position: inside;
+    list-style-type: square;
 }
 
 .pluslet_body {
@@ -329,35 +333,48 @@ img {
     margin: .5em;
     text-align: left;
     overflow: auto;
+    font-size: 14px;
+    font-family: sans-serif;
 }
 
 
 .titlebar {
     color: #333;
     position: relative;
+    height: 3em;
     padding: 0;
-    margin: 0;
+    margin: 0em 0 0 0;
     width: 100%;
+    border-bottom: 1px solid #efefef;
+    border-top: 3px solid #DF70A7;
+
+    /*
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background-color: #fff;
-
+    background-color: #333;
+    */
 }
 
 .titlebar_text {
-    font: 1.2em sans-serif;
-    font-weight: 700;
-    margin-bottom: 5px;
-    margin-top: 0px;
-    padding: 10px 10px 0px;
+    margin-bottom: 0;
+    margin-top: 0!important;
+    font-size: 1.1em;
+    color: #1e1e1e;
+
+    padding: 5px 10px 5px;
     border:  none;
-    color: #333;
     background-color: transparent;
 
+}
+
+.titlebar_text::before,
+.p-head h2::before {
+  content: "■ ";
+  color: #DF70A7;
 }
 
 .titlebar_options {
@@ -458,7 +475,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: normal;}
+.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: none;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
 
 
@@ -627,7 +644,7 @@ overflow: auto;
     border-radius: 3px;
     padding: 0 .6em;
     margin: .2em .5em .2em 0;
-    color: 333;
+    color: #333;
     text-decoration: none;
 }
 #letterhead_small a:hover {
@@ -1162,16 +1179,18 @@ width:55px;
     float:left;
 }
 
+
+
 .ts-blackwhite, .ts-umgreen
 {
-    background-color:black;
-    color:white;
+	background-color:black;
+	color:white;
 }
 
 .ts-whiteblack, .ts-umcream
 {
-    background-color:white;
-    color:black;
+	background-color:white;
+	color:black;
 }
 
 .noshow {display: none;}
@@ -1227,6 +1246,7 @@ width:55px;
 .staff-social {padding: .2em 0.2em .2em 0; font-size: 26px; display: inline-block;}
 .staff-social  a {text-decoration: none; color: rgba(51,51,51,0.7) !important;}
 .staff-social a:hover { color: rgba(51,51,51,1) !important;}
+
 
 
 /* WorldCat Pluslet - Front-end */
@@ -1341,7 +1361,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 .find-expert-area-circ {padding:0;}
 
-.expert-list-circ {list-style-type: none; margin:15px 0 15px 0 !important; padding:0 !important; text-align: center;}
+.expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0 !important; text-align: center;}
 .expert-list-circ li {
     display:inline-block; 
     margin: 0 0 10px 0;
@@ -1357,7 +1377,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 .expert-list-circ .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; line-height: 1.2em; color: #FFF;}
 
 .expert-btn-area {text-align: center; margin-top:15px; margin-bottom:10px;}
-.find-expert-area-circ .expert-button {text-align: center; padding: 6px 12px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
+.find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
 .find-expert-area-circ .expert-button:hover {background-color: rgba(51, 51, 51, 1);}
 
 .expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 115px;}
@@ -1394,22 +1414,23 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 
 
 /*Guide List Pluslet */
-.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px;  }
+.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px; }
 
 .guide_list_header {border-bottom: 1px dotted #ccc; font-size: 1.1em !important; font-weight: bold;}
 .guide_list_header h3 {letter-spacing: 0; color:#333; font-size: 1em; padding-bottom:2px; }
 
 ul.guide-listing {list-style: inside none none !important; margin: 5px 0 0 5px !important; padding: 0 !important;}
-ul.guide-listing li {font-size:1.025em !important; padding-bottom:0; margin-bottom: 5px;}
-ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-right:4px;}
+ul.guide-listing li {font-size:1em !important; padding-bottom:0; line-height: 1.2em; margin-bottom: 8px;}
+ul.guide-listing li .fa {color: #666; font-size:.9em; cursor: pointer; margin-right:4px;}
 
 .guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
 
-.pills-label {display:inline-block; color: #858585; font-size:1.1em; margin-right:10px; font-weight: bold; font-style: italic;}
+.pills-label {display:inline-block; color: #858585; font-size:1em; margin-right:5px; font-weight: bold; font-style: italic;}
 .pills-container {display:inline-block; margin-bottom: 5px;}
 .pills-container ul {list-style-type: none;}
 .pills-container ul li {display:inline-block; font-size:1em; margin-right:8px;}
-.pills-container ul li a {display:inline-block; font-size:1.1em; color: #333; padding: 0;}
+.pills-container ul li a {display:inline-block; font-size:1em; color: #333; padding: 0;}
+
 
 
 /* Card Pluslet - Front-End */
@@ -1533,67 +1554,6 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
 
 
-/* Revised Index - Front-end */
-
-#guidesplash {margin: 20px 0 0 0;}
-
-.index-search-area {margin-right: 0; }
-.index-search-area .autoC {margin-bottom:25px;}
-.index-search-area .ui-autocomplete-input {
-    /*background: #f2f2f2 none repeat scroll 0 0;
-    border-color: #DADFE1 #F2F1EF #F2F1EF #DADFE1 !important;
-    box-shadow:none !important;*/
-    border-radius:4px 4px 4px 4px !important;
-    border-style: solid;
-    border-width: 1px;
-    margin: 0 10px 0 0;
-    height: 35px;
-    padding: 0.5em !important;
-    font-size: 1.1em;
-    color: #666;
-    width: -moz-calc(100% - 75px);
-    width: -webkit-calc(100% - 75px);
-    width: calc(100% - 75px);    
-    text-transform: none;    
-}
-
-.index-search-area .ui-autocomplete-input:focus {border-color: #999 !important;}
-
-.index-search-area .pure-button-topsearch {
-    background-color: #666;
-    color: #fff;
-    margin: 2px 0 0 0;
-    height: 35px;
-    border-radius:4px 4px 4px 4px !important;
-    text-transform: none;
-    font-size: 1.2em;
-    border-top: none;
-    letter-spacing: 1px;
-}
-
-.ui-autocomplete.index-search-dd {}
-.ui-autocomplete.index-search-dd .ui-autocomplete-category {display:none;}
-.ui-autocomplete.index-search-dd li {border-bottom: 1px dashed #e0e0e0; border-top: none; font-size:1.1em; }
-.ui-autocomplete.index-search-dd li a {color: #666; padding: 10px;}
-.ui-autocomplete.index-search-dd li a:hover {color: #cc6666;}
-
-.guide_list_container {margin-top:20px;}
-
-.find-expert-area-circ h3 {
-    letter-spacing: 0;
-}
-
-.find-expert-area-circ p {padding: 10px 10px 0;}
-
-#guidesplash .find-expert-area-circ {margin-bottom: 10px; padding: 0 0 15px;}
-
-#guidesplash .expert-list-circ li {width:130px;}
-
-#guidesplash .guide_list_header {margin-bottom: 6px;}
-#guidesplash .guide_list_header h3 {padding-bottom: 5px;}
-
-
-
 
 /*  Media Queries */
 
@@ -1621,7 +1581,7 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
         background-color: transparent;
         position: absolute;
         top:-46px !important;
-        right: 305px;
+        right: 205px;
         width: 36px;
     }
 
@@ -1630,12 +1590,16 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
      background-color: transparent;
     position: absolute;
     top: 0 !important;
-    right: 305px !important;
+    right: 205px !important;
     width: 36px;
     }
 
+    /* Tabs override -- here and search elsewhere for this class */
     .ui-widget-header {
-       background: url("../shared/images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll top left #cccccc !important;
+       /*background: url("../shared/images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll top left #cccccc !important;*/
+       background: none !important;
+       border: none !important;
+
     }
 
     .pluslet_body .pure-form input,
@@ -1694,5 +1658,7 @@ img.pluslet_card_image {
 
 
 /** end ckeditor custom styles ***/
+
+
 
 
