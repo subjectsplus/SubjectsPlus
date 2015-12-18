@@ -479,7 +479,7 @@ include("includes/header.php");
 ?>
 <br />
 <div class="pure-g">
-<div class="pure-u-1 pure-u-md-2-3">
+<div class="pure-u-1 pure-u-lg-2-3">
 	<?php print $feedback . $stk_message; ?>
 	<div class="pluslet_simple no_overflow">
 
@@ -490,7 +490,7 @@ include("includes/header.php");
 		<?php print $comment_header . $results; ?>
 	</div>  
 </div>
-<div class="pure-u-1 pure-u-md-1-3">
+<div class="pure-u-1 pure-u-lg-1-3">
 	<!-- start pluslet -->
 	<div class="pluslet">
 		<div class="titlebar"><div class="titlebar_text"><?php print _("Tell Us What You Think"); ?></div></div>
