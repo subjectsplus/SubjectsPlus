@@ -332,29 +332,28 @@ img {
 .titlebar {
     color: #333;
     position: relative;
-    height: 2em;
     padding: 0;
     margin: 0;
-    width: 100%;
-    border-bottom: 1px solid #B3B9BF;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background-color: #333;
+    width: 100%;    
+    background-color: #fff;
+
 }
 
 .titlebar_text {
-    font: 1em sans-serif;
+    font: 1.15em sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 0px;
-    padding: 5px 10px 5px;
+    padding: 10px;
     border:  none;
-    color: #fff;
+    color: #333;
     background-color: transparent;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 
 }
 
@@ -790,6 +789,19 @@ table.item_listing a:hover {
 
 /* The next few determine how peoples' names and pix appear in staff.php & staff_details.php
 staff_photo2 is in the sidebar of the subject results page (which requires a float)*/
+
+.staff-heading th{padding:5px 0 10px 0; font-size: 1.1em;}
+
+.footable {font-size: 1em;}
+.footable tr td {padding:10px 5px;}
+
+.staff-tel-row {
+    min-width: 100px;
+}
+
+#quick_search {display:inline-block; width: -moz-calc(100% - 60px); width: -webkit-calc(100% - 60px); width: calc(100% - 60px);}
+#topsearch_button {display:inline-block; padding:5px 50px; width:50px; }
+
 
 .staff_photo {
     position: relative;
@@ -1656,6 +1668,8 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     .pluslet_body .pure-form textarea {
       width: 55%;
     }
+
+    #guidesplash .find-expert-area-circ {margin-top:100px;}
 
 }
 

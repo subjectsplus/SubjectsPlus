@@ -337,26 +337,27 @@ img {
     position: relative;
     padding: 0;
     margin: 0;
-    width: 100%;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    width: 100%;    
     background-color: #fff;
+    border-radius: 6px;
 
 }
 
 .titlebar_text {
-    font: 1.2em sans-serif;
+    font: 1.15em sans-serif;
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 0px;
-    padding: 10px 10px 0px;
+    padding: 10px;
     border:  none;
     color: #333;
     background-color: transparent;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 
 }
 
@@ -461,7 +462,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 
 
 /* Next lines override the regular pluslet to create a heading */
-.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: normal;}
+.plusheading, .type-heading { background-color: transparent; padding: 0; text-transform: normal;}
 div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
 
 
@@ -569,7 +570,7 @@ overflow: auto;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    padding: 0 .6em;
+    padding: 0.2em .6em;
     margin: .5em .5em .5em 0;
     color: #fff;
 }
@@ -580,7 +581,7 @@ overflow: auto;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    padding: 0 .6em;
+    padding: 0.2em .6em;
     margin: .5em .5em .5em 0;
     text-decoration: none;
     color: #333;
@@ -666,7 +667,7 @@ overflow: auto;
 */
 
 .evenrow, .even {
-    background-color: #efefef;
+    background-color: #f2f2f2;
 }
 .oddrow, .odd {
     background-color: #fff;
@@ -795,6 +796,18 @@ table.item_listing a:hover {
 
 /* The next few determine how peoples' names and pix appear in staff.php & staff_details.php
 staff_photo2 is in the sidebar of the subject results page (which requires a float)*/
+.staff-heading th{padding:5px 0 10px 0; font-size: 1.1em;}
+
+.footable {font-size: 1em;}
+.footable tr td {padding:10px 5px;}
+
+.staff-tel-row {
+    min-width: 100px;
+}
+
+#quick_search {display:inline-block; width: -moz-calc(100% - 60px); width: -webkit-calc(100% - 60px); width: calc(100% - 60px);}
+#topsearch_button {display:inline-block; padding:5px 50px; width:50px; }
+
 
 .staff_photo {
     position: relative;
@@ -1145,7 +1158,7 @@ div.video_thumb img {
 
 /* Next lines override the regular pluslet to create a heading */
 .evenrow {
-    background-color: #E3E1D9;
+    background-color: #f2f2f2;
 }
 
 .bullet {
