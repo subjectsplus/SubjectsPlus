@@ -22,9 +22,9 @@ class GuideList implements OutputInterface {
 		$this->active = $active;
 
 		$connection = $this->db->getConnection();
-		$statement = $connection->prepare("SELECT * FROM subject WHERE type = :type AND active = :active  ORDER BY subject ");
+		$statement = $connection->prepare("SELECT * FROM subject WHERE active = :active  ORDER BY subject ");
 
-		$statement->bindParam(":type", $this->type);
+	//	$statement->bindParam(":type", $this->type);
 		$statement->bindParam(":active", $this->active);
 		$statement->execute();
 		$this->_guide_list = $statement->fetchAll();
