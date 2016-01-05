@@ -312,6 +312,7 @@ function pluslet() {
 							width: 'auto',
 							height: 'auto',
 							resizable: false,
+							dialogClass: 'topindex',
 							buttons: {
 								'Yes': function() {
 									// Delete pluslet from database

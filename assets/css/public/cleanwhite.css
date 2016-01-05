@@ -303,6 +303,7 @@ img {
 .pluslet li {
     display: list-item;
     margin-left: 5px;
+    margin-bottom: 10px;
 }
 
 .pluslet li a {
@@ -329,6 +330,10 @@ img {
     margin: .5em;
     text-align: left;
     overflow: auto;
+}
+
+.pluslet_body .description {
+   padding: 10px 0;
 }
 
 

@@ -1160,7 +1160,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover {border-bottom: 3px solid #C03957 !important;}
 
 #tabs.ui-tabs .ui-tabs-nav li.child-tab.ui-state-default.ui-state-hover,
-#tabs.ui-tabs .ui-tabs-nav li.child-tab.ui-tabs-active.ui-state-active {border-bottom: 3px solid #858585 !important;}
+#tabs.ui-tabs .ui-tabs-nav li.child-tab.ui-tabs-active.ui-state-active {border-bottom: 3px solid #C03957 !important;}
 
 #tabs.ui-tabs .ui-tabs-nav li.ui-tabs-active.ui-state-active a,
 #tabs.ui-tabs .ui-tabs-nav li.ui-state-default.ui-state-hover a {color: #333;}
@@ -1467,11 +1467,17 @@ li.fav-box-item:hover::before {color: #C03957;}
   list-style-position: inside;
 }
 
+
+
 .portal-column-0 .pluslet .pluslet_body img,
 .portal-column-1 .pluslet .pluslet_body img,
 .portal-column-2 .pluslet .pluslet_body img{
   height: auto !important;
   max-width: 100%;
+}
+
+.pluslet_body .description {
+   padding: 10px 0;
 }
 
 .box_settings {
@@ -1961,6 +1967,8 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 
 
+.token-list-item {margin-bottom:10px;}
+
 
 /*** toggle pluslet body --CBR */
 .pluslet_body_open {
@@ -2082,6 +2090,7 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 .ui-dialog {z-index: 9999999 !important;}
 .ui-widget-overlay {z-index: 99999 !important;}*/ 
 
+.topindex {z-index: 9999999 !important;}
 
 
 /* Pure Form overrides for guide page - PV */

@@ -515,7 +515,7 @@ div.printer_no_tabs { /* Print button on guide with NO tabs */
 #tabs .pluslet li, #tabs .pluslet_simple li {
     display: list-item;
     line-height: 1.4em;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 #tabs .pluslet li a, #tabs .pluslet_simple li a {
@@ -652,7 +652,7 @@ ul.ui-autocomplete li a{
 .titlebar {
     color: #333;
     position: relative;
-    height: 2em;
+    min-height: 2em;
     padding: 0;
     margin: 0;
     border-bottom: 1px solid #B3B9BF;
@@ -662,13 +662,12 @@ ul.ui-autocomplete li a{
 .titlebar_text {
     font: 1em Arial, sans-serif;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 0;
     margin-top: 0px;
-    padding: 5px 10px 0px;
+    padding: 5px 10px 8px 10px;
     border:  none;
     color: #fff;
     /*color: #000;*/
-    background-color: transparent;
     background-color: #E8D3A2;
         color: #000000;
     
@@ -697,7 +696,7 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
 
 .pluslet_simple .pluslet_body {font-size: 10pt; margin: 0 0 0 -15px; padding: 0;}
 
-.pluslet_body p {line-height:1.4em;}
+.pluslet_body p {line-height:1.4em; margin-bottom: 15px;}
 
 .pluslet_body a,
 .pluslet_body a:link {text-decoration: underline; color: #40659b;}
@@ -707,6 +706,11 @@ div.type-heading .titlebar { background-color: transparent;border: none;}
 .pluslet_body a:hover,
 .pluslet_body a:active,
 .pluslet_body a:focus {text-decoration: underline; color: #cc6666;}
+
+.pluslet_body .description {
+   padding: 10px 0;
+}
+
 
 div.pluslet form {
     padding-top: -10px;
@@ -1428,7 +1432,7 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 }
 
 .links {
-    margin-bottom:5%;
+    margin-bottom:20px;
 }
 
 
@@ -1632,7 +1636,7 @@ img.center-image {
 .type-guidelist .guide_list_header h3 {color:#333; font-size: 1em; font-weight: bold;}
 
 .type-guidelist ul.guide-listing {list-style: inside none none !important; margin: 15px 0 0 5px !important; padding: 0;}
-.type-guidelist ul.guide-listing li {font-size:1em; padding-bottom:5px;}
+.type-guidelist ul.guide-listing li {font-size:1em; padding-bottom:5px; margin-bottom: 0 !important;}
 .type-guidelist ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margin-right:4px;}
 
 .type-guidelist .pills-label {font-weight: normal;}
