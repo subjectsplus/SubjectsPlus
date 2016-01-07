@@ -2317,7 +2317,51 @@ div.feedback a:link {
 .ui-widget {font-family: 'NotoSansRegular' !important; font-weight: normal;}
 
 
-    
+
+/* LibGuides Import page */
+.links-success {
+    color: #3fc380;
+    font-size: 1.4em;
+    margin: 20px 0;
+}
+
+.link_results caption {
+    font-size: 1.4em;
+    font-weight: bold;
+    font-style: normal;
+    text-align: left;
+    font-family: "NotoSansRegular", sans-serif;
+}    
+
+.loading {
+  color: #c03957;
+  font-size: 1.4em;
+  margin: 20px 0;
+  font-family: "NotoSansRegular", sans-serif;
+}
+
+.import-feedback-error {
+  color: #D91E18;
+  font-size: 1.4em;
+  margin: 20px 0;}
+
+.import-error {
+  font-size: 1.0em;
+}
+
+.import-no-links {
+  color: #D91E18;
+  font-size: 1.2em;
+  margin: 20px 0;
+}
+
+.import-feedback-success {
+  color: #3fc380;
+  font-size: 1.4em;
+  margin: 20px 0;
+}
+
+.import-feedback {margin:10px 0;}
 
 
 
