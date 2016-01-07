@@ -333,10 +333,9 @@ function tabs() {
                                 });
                             
                             $('#tabs').data().tabCount++;
-                            var sec = $("#" +id).children();
-                            sec.find('.sp_section_controls').hide();
-	                       
-                           
+							$('#'+id).parent().trigger('click');
+						
+							
                         }
                     });
 
