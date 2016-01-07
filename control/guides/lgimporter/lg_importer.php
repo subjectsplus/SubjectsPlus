@@ -87,10 +87,10 @@ $owners_combined = $libguides_importer->OutputGuides ( $_GET ["email"] );
 					<button class='import_links pure-button pure-button-primary'>①
 						Import Links</button>
 					<button class='view-links-results pure-button pure-button-primary'
-						disabled>② View Link Import Results</button>
+						disabled>View/Hide Link Import Results</button>
 					<div class="loading"></div>
 					<h2 class="import-your-guides">Then import your guides:</h2>
-					<button class='import_guide pure-button pure-button-primary'>③
+					<button class='import_guide pure-button pure-button-primary'>② 
 						Import Guide</button>
 				</div>
 
@@ -144,9 +144,10 @@ console.log(previously_imported);
 		<div class="titlebar_text">Import Output</div>
 	</div>
 	<div class="pluslet_body import-output">
-		<p>After you import a guide feedback about the process will appear
+		<div class="import-message">
+			<p>After you import a guide feedback about the process will appear
 			here.</p>
-
+		</div>
 
 
 		<table class="link_results pure-table">

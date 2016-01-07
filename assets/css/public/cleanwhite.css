@@ -1557,7 +1557,7 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
 #guidesplash {margin: 20px 10px 0 10px;}
 
-.index-search-area {margin-right: 0; }
+.index-search-area {margin-right: 0; padding: 0;}
 .index-search-area .autoC {margin-bottom:25px;}
 .index-search-area .ui-autocomplete-input {
     /*background: #f2f2f2 none repeat scroll 0 0;
@@ -1571,9 +1571,9 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     padding: 0.5em !important;
     font-size: 1.1em;
     color: #666;
-    width: -moz-calc(100% - 75px);
-    width: -webkit-calc(100% - 75px);
-    width: calc(100% - 75px);    
+    width: -moz-calc(100% - 75px) !important;
+    width: -webkit-calc(100% - 75px) !important;
+    width: calc(100% - 75px) !important;    
     text-transform: none;  
     display: inline-block !important;  
 }
@@ -1590,6 +1590,7 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     font-size: 1.2em;
     border-top: none;
     letter-spacing: 1px;
+    padding: 5px 10px !important;
 }
 
 .ui-autocomplete.index-search-dd {}
@@ -1665,6 +1666,8 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
       width: 65%;
     }
 
+    .index-search-area {padding: 0;}
+
 
 }
 
@@ -1678,6 +1681,8 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
     }
 
     #guidesplash .find-expert-area-circ {margin-top:100px;}
+
+    .index-search-area {padding: 0 30px 0 0;}
 
 }
 
