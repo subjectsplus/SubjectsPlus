@@ -23,7 +23,7 @@ I.e., make sure the UM one is not commented out/takes precedence.
 
     $thumbnail = "http://sp.library.miami.edu/assets/images/guide_thumbs/$value[4].jpg";
 
-(It doesn't like the https agnostic urls)    
+(It doesn't like the https agnostic urls) 
 
 4.  In subjects/staff_details.php, because of our mod_rewrite, you need to move the icons up another directory:
 

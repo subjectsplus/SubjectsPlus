@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Guide\GuideList;
     
 $use_jquery = array("ui");
 
-$page_title = $resource_name;
+$page_title = "Research Guides";
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
 $noheadersearch = TRUE;
@@ -27,23 +27,7 @@ if ($mod_rewrite == 1) {
    $guide_path = "guide.php?subject=";
 }
 
-if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
-
-    // use the submitted value
-    $view_type = scrubData($_GET['type']);
-} else {
-    $view_type = "all";
-}
-
-///////////////////////
-// Have they done a search?
-
-$search = "";
-
-if (isset($_POST["search"])) {
-    $search = scrubData($_POST["search"]);
-}
-
+//print_r ($_REQUEST);
 
 // Get the subjects for jquery autocomplete
 $suggestibles = "";  // init
@@ -77,11 +61,9 @@ $suggestibles = trim($suggestibles, ', ');
 
 $q2 = "select subject, subject_id, shortform from subject where active = '1' AND type != 'Placeholder' order by subject_id DESC limit 0,5";
 
-
 $statement = $connection->prepare($q2);
 $statement->execute();
 $r2 = $statement->fetchAll();
-
 
 $newest_guides = "<ul>\n";
 
@@ -115,20 +97,6 @@ $newlist = "<ul>\n";
 }
 $newlist .= "</ul>\n";
 
-// List guides function -- no other page uses it ? //
-
-
-
-$searchbox = '
-<div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
-    <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
-        <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
-        <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-        <input type="submit" alt="Search" name="submitsearch" id="topsearch_button" class="pure-button pure-button-topsearch" value="Go">
-    </form>
-</div>
-';
-
 // Add header now, because we need a value ($v2styles) from it
 include("includes/header_um.php");
 
@@ -136,14 +104,64 @@ include("includes/header_um.php");
 // put together our main result display
 //**************************************
 
-    // let's use our Pretty URLs if mod_rewrite = TRUE or 1
-    if ($mod_rewrite == 1) {
-       $guide_path = "";
-    } else {
-       $guide_path = $PublicPath . "guide.php?subject=";
+$pills = ""; //init
+$layout = ""; //init
+$collection_results = ""; //init
+
+// Is this a search?
+if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
+    $searchterm = scrubData($_POST["searchterm"]);
+    $search_param = "%" . $searchterm . "%";
+
+    $pills = "<div class=\"pills-label\">" . _("Start over:") ."</div><div class=\"pills-container\"><a href=\"index.php\">See All Research Guides</a></div>"; 
+
+    $q_search = "select * from subject 
+    WHERE active = '1' 
+    AND type != 'Placeholder' 
+    AND subject LIKE '$search_param'
+    ORDER BY subject";
+
+
+    $statement = $connection->prepare($q_search);
+    $statement->execute();
+    $r_search = $statement->fetchAll();
+
+    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+
+    foreach ($r_search as $key => $value) {
+
+        $guide_location = $guide_path . $value['shortform'];
+        $list_bonus = "";
+
+        if ($value[6] != "") {$list_bonus .= $value[6] . "<br /><br />";} // add description
+        if ($value[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $value[7]; } // add keywords
+            
+        $col_1 .= "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($value[1]) . "</a>
+            <div class=\"guide_list_bonus\">$list_bonus</div>
+            </li>";
     }
 
-    $layout = ""; //init
+    $col_1 .= "</ul></div>";  // close 'er up
+
+    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><h3>" . _("Search Results for ") . $searchterm . "</h3></div>" . $col_1 . "</div>";
+} else {
+
+    // ANCHOR buttons for guide types
+    //**************************************
+    $guide_type_btns = "<ul>";
+
+    // We don't want our placeholder
+    if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
+
+    foreach ($guide_types as $key) {
+        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+        
+        $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
+    }
+
+    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
+
+    $pills = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>"; 
 
     // let's grab our collections
     $collection_results = listCollections("","2col");
@@ -203,7 +221,7 @@ include("includes/header_um.php");
 
     }//end foreach
 
-
+} // end search term check
 
 
     //EXPERTS
@@ -250,20 +268,7 @@ include("includes/header_um.php");
 
     
 
-    // ANCHOR buttons for guide types
-    //**************************************
-    $guide_type_btns = "<ul>";
 
-    // We don't want our placeholder
-    if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
-
-    foreach ($guide_types as $key) {
-        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
-        
-        $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
-    }
-
-    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
 
 
 
@@ -282,9 +287,9 @@ include("includes/header_um.php");
         <div class="breather">
              <div class="index-search-area">        
                 <?php 
-                $input_box = new CompleteMe("quick_search_b", "search_results.php", $proxyURL, "Find Guides", "guides");
+                $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
-                print "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
+                print $pills;
                 print $layout;   
                 print $collection_results; 
                 ?>
