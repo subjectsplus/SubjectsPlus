@@ -101,15 +101,6 @@ $newlist = "<ul>\n";
 }
 $newlist .= "</ul>\n";
 
-$searchbox = '
-<div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
-    <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
-        <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
-        <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-        <input type="submit" alt="Search" name="submitsearch" id="topsearch_button" class="pure-button pure-button-topsearch" value="Go">
-    </form>
-</div>
-';
 
 // Add header now 
 
@@ -156,7 +147,7 @@ if (isset($_GET["d"])) {
           <div class="tip">
             <h2><?php print _("Search Guides"); ?></h2>
                   <?php
-                  $input_box = new CompleteMe("quick_search", "search_results.php", $proxyURL, "Quick Search", "guides", '');
+                  $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
                   $input_box->displayBox();
                   ?>
           </div>
