@@ -22,8 +22,7 @@ function section() {
 		     
 		    mySection.bindUiActions();
 		    
-		    
-		    $(window).bind("load", function() {
+		    $( document ).ajaxComplete(function() {
 		    	// Click the first section after everything has loaded.
 			    mySection.clickInitialSection();
 			    mySection.viewSectionControls();
@@ -42,7 +41,7 @@ function section() {
 				 } 	else {
 					 
 					 $(this).children().find('.sp_section_controls').hide();
-					 $(this).find('.sp_section').removeClass('section_selected_area');
+				     $(this).find('.sp_section').removeClass('section_selected_area');
 
 
 				 }

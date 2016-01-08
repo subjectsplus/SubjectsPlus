@@ -139,6 +139,7 @@ class Autocomplete {
            OR description LIKE :search_term
            OR keywords LIKE :search_term
            OR type LIKE :search_term)
+           ORDER BY subject
            ");
         	break;
 

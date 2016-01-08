@@ -68,8 +68,8 @@ function linksHandler(titles) {
 	}
 	$('.link-results-body').empty().append(table_data);
 	$('.link_results').show();
-	$('.import-output').append(
-			"<h1 class=\"links-success\">" + "Links Imported Successfully"
+	$('.import-message').append(
+			"<h1 class=\"links-success\">" + "Step 1: Links Imported Successfully"
 					+ "</h1>");
 
 	$('.loading').remove();
@@ -94,10 +94,10 @@ function importGuides(selected_guide_id, selected_guide_name, url) {
 						 "staff_id" : staff_id },
 				error : function(data) {
 
-					$('.import-output')
+					$('.import-message')
 							.append(
-									"<p class='import-feedback'>There was an error importing this guide. You may be trying to import a guide that has already been imported.</p>");
-					$('.import-output').append(
+									"<p class='import-feedback-error'>There was an error importing this guide. You may be trying to import a guide that has already been imported.</p>");
+					$('.import-message').append(
 							"<p class='import-error'>" + data.responseText
 									+ "</p>");
 					console.log(data);
@@ -107,9 +107,9 @@ function importGuides(selected_guide_id, selected_guide_name, url) {
 					console.log(data);
 
 					if (!data) {
-						$('.import-output')
+						$('.import-message')
 								.append(
-										"<p class='import-feedback'>There was problem importing this guide</p>");
+										"<p class='import-feedback-error'>There was problem importing this guide</p>");
 						$('.loading').remove();
 
 					}
@@ -124,7 +124,7 @@ function importGuides(selected_guide_id, selected_guide_name, url) {
 
 						$('.loading')
 								.html(
-										"The importer couldn't find any links in this guide.");
+										"<p class=\"import-no-links\">The importer couldn't find any links in this guide.</p>");
 
 					}
 
@@ -132,20 +132,20 @@ function importGuides(selected_guide_id, selected_guide_name, url) {
 						console.log(data);
 						guidesHandler(data);
 
-						$('.import-output')
+						$('.import-message')
 								.append(
-										"<h1 class='import-feedback'>Sucessfully Imported <a target=\"_blank\" href='../guide.php?subject_id="
+										"<h1 class='import-feedback-success'>Step 2: Guide Sucessfully Imported - <a target=\"_blank\" href='../guide.php?subject_id="
 												+ data.imported_guide[0]
 												+ "'>"
 												+ selected_guide_name
 												+ "</a></h1>");
-						$('.import-output')
+						$('.import-message')
 								.append(
 										"<p class='import-feedback'>You can compare your guide with its <a target=\"_blank\" href='http://libguides.miami.edu/content.php?pid="
 												+ data.imported_guide[0]
 												+ "'>original LibGuide</a>.</p>");
 
-						$('.import-output')
+						$('.import-message')
 								.append(
 										"<p class='import-feedback'>Click here to view all your <a target=\"_blank\" href='../../'> SubjectsPlus guides</a></p>");
 						$('.previously-imported').append(
@@ -169,7 +169,7 @@ $('.import_links').on(
 			var selected_guide_id = $(this).parent().parent().find(
 					'option:selected').val();
 
-			$('.import-output').append("<div class=\"loading loader\">Loading... <i class=\"fa fa-spinner fa-spin\"></i></div>");
+			$('.import-message').append("<div class=\"loading loader\">Loading... <i class=\"fa fa-spinner fa-spin\"></i></div>");
 
 			importGuides(selected_guide_id, selected_guide_name,
 					"lg_importer_links_json.php");
@@ -187,8 +187,8 @@ $('.import_guide').on(
 
 			importGuides(selected_guide_id, selected_guide_name,
 					"lg_importer_json.php");
-			$('.import-output').append(
-					"<div class=\"loading loader\">Loading...</div>");
+			$('.import-message').append(
+					"<div class=\"loading loader\">Loading... <i class=\"fa fa-spinner fa-spin\"></div>");
 
 		});
 
