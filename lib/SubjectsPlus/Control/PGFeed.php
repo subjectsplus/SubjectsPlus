@@ -702,7 +702,7 @@ class PGFeed {
 	$content = $reader->value;
 	
 	if ($this->strip) {
-	 /* $newContent = preg_replace("/<.+?>/","",$content);*/
+	  $newContent = preg_replace("/<.+?>/","",$content);
 	}
 	else {
 	  $newContent = $content;
@@ -717,7 +717,7 @@ class PGFeed {
       }
 
       // CDATA
-	  /*
+	 
       else if ($reader->nodeType == 4 && $isInDescription) {
 	$cdata = $reader->value;
 	if ($this->strip) {
@@ -726,7 +726,7 @@ class PGFeed {
 	$item["content"] = $cdata;
 	$item["description"] = $item["content"];
       }
-*/
+
       $reader->close;
     }
   }
