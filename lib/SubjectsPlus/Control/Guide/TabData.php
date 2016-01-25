@@ -19,7 +19,7 @@ class TabData implements OutputInterface
 
     public function __construct(Querier $db) {
 
-        $this->db = new Querier;
+        $this->db = $db;
     }
 
 
