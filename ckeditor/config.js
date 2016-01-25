@@ -52,6 +52,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 			['subsplus_resource', 'subsplus_asset' , 'subsplus_faq' , 'subsplus_cat_link', 'Abbr', 'Maximize']
 
+
 		];
 
 	config.toolbar_SubsPlus =

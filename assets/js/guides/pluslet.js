@@ -270,29 +270,13 @@ function pluslet() {
 
 						var delete_id = $(this).parent().parent().attr('id').split('_')[1];
 						var element_deletion = this;
-						$('<div class=\'delete_confirm\' title=\'Are you sure?\'>All content in this section will be deleted.</div>').dialog({
-							autoOpen: true,
-							modal: true,
-							width: 'auto',
-							height: 'auto',
-							resizable: false,
-							buttons: {
-								'Yes': function() {
-									// Remove node
-									$(element_deletion).parent().parent().remove();
-									$('#response').hide();
-									var save = saveSetup(); 
-									save.saveGuide();
-									$('#save_guide').fadeOut();
-									$( this ).dialog( 'close' );
-									return false;
-								},
-								Cancel: function() {
-									$( this ).dialog( 'close' );
-								}
-							}
-						});
-						return false;
+
+						//get all pluslets in a section
+						var this_sections_pluslets = $('#section_' + delete_id).children().find('.pluslet');
+
+						//check for child pluslets and delete pluslet if none exist, otherwise
+						//display dialog box indicating child pluslets exist
+						myPluslet.fetchAllClones(this_sections_pluslets, element_deletion);
 					});
 				}else
 				{
@@ -306,38 +290,11 @@ function pluslet() {
 						var subjectId = g.getSubjectId();
 						var deleteId = $(this).attr('id').split('-')[1];
 						var elementDeletion = this;
-						$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
-							autoOpen: true,
-							modal: true,
-							width: 'auto',
-							height: 'auto',
-							resizable: false,
-							dialogClass: 'topindex',
-							buttons: {
-								'Yes': function() {
-									// Delete pluslet from database
-									$('#response').load('helpers/guide_data.php', {
-										delete_id: deleteId,
-										subject_id: subjectId,
-										flag: 'delete'
-									},
-									function() {
-										$('#response').fadeIn();
-										$('#save_guide').fadeIn();
 
-									});
+						//check for child pluslets and delete pluslet if none exist, otherwise
+						//display dialog box indicating child pluslets exist
+						myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
 
-									// Remove node
-									$(elementDeletion).parents('.pluslet').remove();
-									$( this ).dialog( 'close' );
-									return false;
-								},
-								Cancel: function() {
-									$( this ).dialog( 'close' );
-								}
-							}
-						});
-						return false;
 					});
 				}
 			}, 
@@ -352,9 +309,176 @@ function pluslet() {
 						$('.pluslet_body').toggleClass('pluslet_body_closed');
 					});
 				});
-			}
+			},
 
-        
+			fetchAllClones: function(this_sections_pluslets, element_deletion) {
+				//get all cloned pluslets
+				var i = 0;
+				$(this_sections_pluslets).each(function() {
+
+					var section_pluslet_id = $(this).find('id').context.id.split('-')[1];
+
+					var req = $.ajax({
+						url: "helpers/fetch_cloned_pluslets.php",
+						type: "GET",
+						data: 'master_id=' + section_pluslet_id,
+						dataType: "json"
+					});
+
+					var success = function(resp) {
+						var clones = [];
+						$.each(resp.cloned_pluslets, function( key, value ) {
+							clones.push(value);
+						});
+						if(clones.length > 0) {
+							var titles = [];
+							$.each(clones, function( key, value ) {
+								titles.push(value.title);
+							});
+
+							$('<div>This section cannoted be deleted because it has linked boxes.<br>' + titles + '</div>').dialog({
+								autoOpen: true,
+								modal: true,
+								width: 'auto',
+								height: 'auto',
+								resizable: false,
+								buttons: {
+									Cancel: function () {
+										$(this).dialog('close');
+									}
+								}
+							});
+							return false;
+
+						} else {
+							console.log(i++);
+							$('<div id="dialog_' + i++ + '" class=\'delete_confirm\' title=\'Are you sure?\'>All content in this section will be deleted.</div>').dialog({
+								autoOpen: false,
+								modal: true,
+								width: 'auto',
+								height: 'auto',
+								resizable: false,
+								buttons: {
+									'Yes': function() {
+										// Remove node
+										$(element_deletion).parent().parent().remove();
+										$('#response').hide();
+										var save = saveSetup();
+										save.saveGuide();
+										$('#save_guide').fadeOut();
+										$( this ).dialog( 'close' );
+										return false;
+									},
+									Cancel: function() {
+										$( this ).dialog( 'close' );
+									}
+								}
+							});
+
+							$('.delete_confirm').first().dialog('open');
+							return false;
+
+						}
+
+					};
+
+					var err = function(req, status, err) {
+						return err;
+					};
+
+					req.then(success, err);
+
+				});
+
+			},
+
+			fetchAllClonesByPlusletId: function(pluslet_id, subjectId, elementDeletion) {
+
+				var req = $.ajax({
+					url: "helpers/fetch_cloned_pluslets.php",
+					type: "GET",
+					data: 'master_id=' + pluslet_id,
+					dataType: "json"
+				});
+
+				var success = function(resp) {
+					var responses = [];
+					$.each(resp, function( key, value ){
+						responses.push(value);
+					});
+					var objs = [];
+					$.each(responses, function( key, value ) {
+						if(value.length > 0) {
+							objs.push(value);
+						}
+					});
+					var clones = [];
+					$.each(objs, function( key, value ) {
+						clones = value;
+					});
+					if(clones.length > 0) {
+						var titles = [];
+						$.each(clones, function( key, value ){
+							titles.push(value.title);
+						});
+
+						$('<div>This section cannoted be deleted because it has linked boxes.' + titles + '</div>').dialog({
+							autoOpen: true,
+							modal: true,
+							width: 'auto',
+							height: 'auto',
+							resizable: false,
+							buttons: {
+								Cancel: function () {
+									$(this).dialog('close');
+								}
+							}
+						});
+						return false;
+					} else {
+						$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
+							autoOpen: true,
+							modal: true,
+							width: 'auto',
+							height: 'auto',
+							resizable: false,
+							dialogClass: 'topindex',
+							buttons: {
+								'Yes': function() {
+									// Delete pluslet from database
+									$('#response').load('helpers/guide_data.php', {
+												delete_id: pluslet_id,
+												subject_id: subjectId,
+												flag: 'delete'
+											},
+											function() {
+												$('#response').fadeIn();
+												$('#save_guide').fadeIn();
+
+											});
+
+									// Remove node
+									$(elementDeletion).parents('.pluslet').remove();
+									$( this ).dialog( 'close' );
+									return false;
+								},
+								Cancel: function() {
+									$( this ).dialog( 'close' );
+								}
+							}
+						});
+						return false;
+					}
+
+
+				};
+
+				var err = function(req, status, err) {
+					return err;
+				};
+
+				req.then(success, err);
+			}
 	}
 
 	return myPluslet;   
