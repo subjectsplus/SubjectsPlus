@@ -102,7 +102,7 @@ function flyout() {
 		},
 		setScrollBar : function() {
 
-			$('.box_options_container, .fav-boxes-content, .db-list-results, .user_guides_display').enscroll({
+			$('.box_options_container, .fav-boxes-content, .db-list-results, .user_guides_display, .flyout-tabs').enscroll({
 			    verticalTrackClass: 'track',
 			    verticalHandleClass: 'handle',
 			    minScrollbarLength: 28
