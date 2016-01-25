@@ -35,6 +35,10 @@ function tabs() {
             myTabs.fetchTabsFlyout();
             myTabs.sortTabsFlyout();
 
+            //configure sortable drag and drop zone for creating new guide from tabs
+            myTabs.newGuideFromTabsSortable();
+            //copy tabs to create new guide
+            myTabs.createNewGuideFromTabs();
        
         },
         init: function () {
@@ -258,11 +262,11 @@ function tabs() {
                      
                     tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
                 $(li).attr('data-external-link', external_link);
-                console.log(id);
+                //console.log(id);
                 $(li).attr('data-visibility', 1);
-                console.log(id);
+                //console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
-                console.log($(li));
+                //console.log($(li));
                 
                 //make tabs sortable
                     $('#tabs').find(".ui-tabs-nav").sortable({
@@ -447,6 +451,77 @@ function tabs() {
 
                 });
 
+            });
+        },
+        newGuideFromTabsSortable : function() {
+
+            var oldList, newList, item;
+            $(".categories-sortable").sortable({
+                connectWith: $('.categories-sortable'),
+                start: function (event, ui) {
+                    item = ui.item;
+                    newList = oldList = ui.item.parent();
+
+                },
+                stop: function (event, ui) {
+                    var str = item.context.id;
+                    var tab_id = str.split("_");
+                },
+                change: function (event, ui) {
+                    if (ui.sender) {
+                        newList = ui.placeholder.parent();
+                    }
+                },
+            })
+            .disableSelection();
+
+        },
+        createNewGuideFromTabs : function() {
+
+            function urlParam(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results==null){
+                    return null;
+                }
+                else{
+                    return results[1] || 0;
+                }
+            }
+
+
+            $('.create-guide').on('click', function() {
+
+                var selected_guide = urlParam('subject_id');
+
+                var tabs = [];
+                $('#categories-chosen li').each(function(i) {
+                    tabs.push($(this).attr('id').split('_')[1]);
+                });
+
+                if(tabs !== '') {
+                    var url = "create_guide_from_tabs.php?tabs=" + tabs;
+                } else {
+                    var url = "create_guide_from_tabs.php";
+                }
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {
+                        subject_id : selected_guide,
+                        tabs: tabs
+                    },
+                    success: function(new_subject_id) {
+
+                        $('.metadata-url').show();
+                        $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);
+
+                        window.location.href = "/control/guides/metadata.php?subject_id=" + new_subject_id;
+                    },
+                    fail: function (err) {
+                        console.log(err);
+                    }
+                });
             });
 
         }
