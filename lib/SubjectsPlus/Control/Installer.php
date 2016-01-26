@@ -60,6 +60,20 @@ class Installer
 					  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 					  PRIMARY KEY (`chchchanges_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
+					"CREATE TABLE `collection` (
+					  `collection_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `title` text CHARACTER SET latin1 NOT NULL,
+					  `description` text CHARACTER SET latin1 NOT NULL,
+					  `shortform` text CHARACTER SET latin1 NOT NULL,
+					  PRIMARY KEY (`collection_id`)
+					) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
+					"CREATE TABLE `collection_subject` (
+					  `collection_subject_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `collection_id` int(11) NOT NULL,
+					  `subject_id` int(11) NOT NULL,
+					  `sort` int(11) NOT NULL,
+					  PRIMARY KEY (`collection_subject_id`)
+					) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
 					"CREATE TABLE `discipline` (
 					  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
