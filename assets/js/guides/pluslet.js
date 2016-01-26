@@ -273,86 +273,10 @@ function pluslet() {
 
 						//get all pluslets in a section
 						var this_sections_pluslets = $('#section_' + delete_id).children().find('.pluslet');
+						
+						if(this_sections_pluslets.length == 0) {
 
-						//check for child pluslets and delete pluslet if none exist, otherwise
-						//display dialog box indicating child pluslets exist
-						myPluslet.fetchAllClones(this_sections_pluslets, element_deletion);
-					});
-				}else
-				{
-					////////////////////////////
-					// DELETE PLUSLET
-					// removes pluslet from DOM; change must be saved to persist
-					/////////////////////////////
-
-					$('.guidewrapper').on('click', lstrSelector ,function(event) {
-						var g = guide();
-						var subjectId = g.getSubjectId();
-						var deleteId = $(this).attr('id').split('-')[1];
-						var elementDeletion = this;
-
-						//check for child pluslets and delete pluslet if none exist, otherwise
-						//display dialog box indicating child pluslets exist
-						myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
-
-					});
-				}
-			}, 
-			
-			
-			expandCollapseCSS: function () {
-			    //Expand/Collapse Trigger CSS for all Pluslets on a Tab
-				document.addEventListener("DOMContentLoaded", function() {
-					$("#expand_tab").click(function () {
-						$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
-						$('.pluslet_body').toggle();
-						$('.pluslet_body').toggleClass('pluslet_body_closed');
-					});
-				});
-			},
-
-			fetchAllClones: function(this_sections_pluslets, element_deletion) {
-				//get all cloned pluslets
-				var i = 0;
-				$(this_sections_pluslets).each(function() {
-
-					var section_pluslet_id = $(this).find('id').context.id.split('-')[1];
-
-					var req = $.ajax({
-						url: "helpers/fetch_cloned_pluslets.php",
-						type: "GET",
-						data: 'master_id=' + section_pluslet_id,
-						dataType: "json"
-					});
-
-					var success = function(resp) {
-						var clones = [];
-						$.each(resp.cloned_pluslets, function( key, value ) {
-							clones.push(value);
-						});
-						if(clones.length > 0) {
-							var titles = [];
-							$.each(clones, function( key, value ) {
-								titles.push(value.title);
-							});
-
-							$('<div>This section cannoted be deleted because it has linked boxes.<br>' + titles + '</div>').dialog({
-								autoOpen: true,
-								modal: true,
-								width: 'auto',
-								height: 'auto',
-								resizable: false,
-								buttons: {
-									Cancel: function () {
-										$(this).dialog('close');
-									}
-								}
-							});
-							return false;
-
-						} else {
-							console.log(i++);
-							$('<div id="dialog_' + i++ + '" class=\'delete_confirm\' title=\'Are you sure?\'>All content in this section will be deleted.</div>').dialog({
+							$('<div id="dialog" class=\'delete_confirm\' title=\'Are you sure?\'>All content in this section will be deleted.</div>').dialog({
 								autoOpen: false,
 								modal: true,
 								width: 'auto',
@@ -378,8 +302,92 @@ function pluslet() {
 							$('.delete_confirm').first().dialog('open');
 							return false;
 
+						} else {
+
+							//check for child pluslets and delete pluslet if none exist, otherwise
+							//display dialog box indicating child pluslets exist
+							myPluslet.fetchAllClones(this_sections_pluslets, element_deletion);
+
 						}
 
+
+					});
+				}else
+				{
+					////////////////////////////
+					// DELETE PLUSLET
+					// removes pluslet from DOM; change must be saved to persist
+					/////////////////////////////
+
+					$('.guidewrapper').on('click', lstrSelector ,function(event) {
+						var g = guide();
+						var subjectId = g.getSubjectId();
+						var deleteId = $(this).attr('id').split('-')[1];
+						var elementDeletion = this;
+
+						//check for child pluslets and delete pluslet if none exist, otherwise
+						//display dialog box indicating child pluslets exist
+						//console.log(subjectId);
+						myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
+
+					});
+				}
+			}, 
+			
+			
+			expandCollapseCSS: function () {
+			    //Expand/Collapse Trigger CSS for all Pluslets on a Tab
+				document.addEventListener("DOMContentLoaded", function() {
+					$("#expand_tab").click(function () {
+						$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+						$('.pluslet_body').toggle();
+						$('.pluslet_body').toggleClass('pluslet_body_closed');
+					});
+				});
+			},
+
+			fetchAllClones: function(this_sections_pluslets, element_deletion) {
+				//get all cloned pluslets
+				var i = 0;
+				$(this_sections_pluslets).each(function() {
+
+
+					var section_pluslet_id = $(this).find('id').context.id.split('-')[1];
+
+					var req = $.ajax({
+						url: "helpers/fetch_cloned_pluslets.php",
+						type: "GET",
+						data: 'master_id=' + section_pluslet_id,
+						dataType: "json"
+					});
+
+					var success = function(resp) {
+						var clones = [];
+						$.each(resp.cloned_pluslets, function( key, value ) {
+							clones.push(value);
+						});
+
+						if(clones.length > 0) {
+							var titles = [];
+							$.each(clones, function( key, value ) {
+								titles.push(value.title);
+							});
+
+							$('<div>This section cannot be deleted because it has linked boxes.<br>' + titles + '</div>').dialog({
+								autoOpen: true,
+								modal: true,
+								width: 'auto',
+								height: 'auto',
+								resizable: false,
+								buttons: {
+									Cancel: function () {
+										$(this).dialog('close');
+									}
+								}
+							});
+							return false;
+
+						}
 					};
 
 					var err = function(req, status, err) {
@@ -406,23 +414,25 @@ function pluslet() {
 					$.each(resp, function( key, value ){
 						responses.push(value);
 					});
+
 					var objs = [];
 					$.each(responses, function( key, value ) {
-						if(value.length > 0) {
-							objs.push(value);
-						}
+						objs.push(value);
 					});
 					var clones = [];
 					$.each(objs, function( key, value ) {
 						clones = value;
 					});
+
+
 					if(clones.length > 0) {
 						var titles = [];
+
 						$.each(clones, function( key, value ){
 							titles.push(value.title);
 						});
 
-						$('<div>This section cannoted be deleted because it has linked boxes.' + titles + '</div>').dialog({
+						$('<div>This box cannot be deleted because it has linked boxes.' + titles + '</div>').dialog({
 							autoOpen: true,
 							modal: true,
 							width: 'auto',
@@ -469,6 +479,7 @@ function pluslet() {
 						});
 						return false;
 					}
+
 
 
 				};
