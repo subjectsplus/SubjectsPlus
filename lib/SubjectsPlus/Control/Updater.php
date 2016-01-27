@@ -133,7 +133,7 @@ class Updater
          `staff_id` int(11) NOT NULL AUTO_INCREMENT,
          `department_id` int(11) NOT NULL,
          PRIMARY KEY (`staff_id`)
-         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'",
+         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4';",
 				
 				"CREATE TABLE `stats` (
   `stats_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -151,15 +151,15 @@ class Updater
   PRIMARY KEY (`stats_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='Added v4';",
 
-		"CREATE TABLE IF NOT EXISTS `collection` (
+		"CREATE TABLE `collection` (
   `collection_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` text CHARACTER SET latin1 NOT NULL,
-  `description` text CHARACTER SET latin1 NOT NULL,
-  `shortform` text CHARACTER SET latin1 NOT NULL,
+  `title` text  NOT NULL,
+  `description` text  NOT NULL,
+  `shortform` text  NOT NULL,
   PRIMARY KEY (`collection_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='Added v4';",
 
-"CREATE TABLE IF NOT EXISTS `collection_subject` (
+"CREATE TABLE `collection_subject` (
   `collection_subject_id` int(11) NOT NULL AUTO_INCREMENT,
   `collection_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
