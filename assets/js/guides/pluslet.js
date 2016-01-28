@@ -375,7 +375,7 @@ function pluslet() {
 
 							$('<div>This section cannot be deleted because it has linked boxes.<br>' + titles + '</div>').dialog({
 								autoOpen: true,
-								modal: true,
+								modal: false,
 								width: 'auto',
 								height: 'auto',
 								resizable: false,
@@ -434,7 +434,7 @@ function pluslet() {
 
 						$('<div>This box cannot be deleted because it has linked boxes.' + titles + '</div>').dialog({
 							autoOpen: true,
-							modal: true,
+							modal: false,
 							width: 'auto',
 							height: 'auto',
 							resizable: false,
@@ -448,7 +448,7 @@ function pluslet() {
 					} else {
 						$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
 							autoOpen: true,
-							modal: true,
+							modal: false,
 							width: 'auto',
 							height: 'auto',
 							resizable: false,
