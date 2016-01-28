@@ -1621,7 +1621,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 .titlebar-styling-label {width:0; float:left;}
 
-.titlebar-styling-select {width:120px; float:left;}
+.titlebar-styling-select {width:140px; float:left;}
 
 .titlebar-styling-select select option{white-space: nowrap; width: auto;}
 
@@ -2121,7 +2121,7 @@ div[name^="new-"] .titlebar_options #settings- {display:none;}
 
 
 /* override for select goes under primary select class, this one is for box settings in flyout */
-.titlebar-styling-select select.box-setting-select {font-size: 12px !important; width: 120px !important; border-radius: 5px !important; box-shadow: none; padding:2px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; font-family: 'NotoSansRegular' !important;}
+.titlebar-styling-select select.box-setting-select {font-size: 12px !important; width: 140px !important; border-radius: 5px !important; box-shadow: none; padding:2px 3px !important; color: #858585; white-space: nowrap; border: 2px solid #cccccc !important; font-family: 'NotoSansRegular' !important;}
 
 
 .portal-column .pure-button-pluslet, 

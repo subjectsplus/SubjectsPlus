@@ -275,7 +275,7 @@ class Pluslet {
         foreach ($titlebar_styles as $key => $value) {
             $tb_styles .= "<option value=\"$value\" style=\"$value\"";
             if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
-            $tb_styles .= ">$key</option>";
+            $tb_styles .= ">$value</option>";
         }
 
         $box_settings = "<div class=\"box_settings pure-u-1\">

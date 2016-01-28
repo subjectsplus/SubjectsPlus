@@ -66,7 +66,7 @@ $pluslets_activated = array("Basic", "Heading", "Card", "HTML5Video", "SubjectSp
 // These are used to allow the admin to set different 'themes' for the pluslet titlebar
 // which the guide author may choose from
 
-$titlebar_styles = array( "Regular Heading" => "ts-umcream", "Alternative Heading" =>"ts-umgreen");
+$titlebar_styles = array( "Regular Heading" => "ts-umcream", "Alternative Heading" => "ts-umgreen");
 
 
 //This sets the max width of the guide container
