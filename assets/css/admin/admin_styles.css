@@ -1632,7 +1632,7 @@ a[id^="delete-"]:hover, a.close-settings:hover {color:#C03957 !important;}
 
 .pluslet_id {color: #CCCCCC; font-size: 11px; font-family: 'NotoSansRegular' !important; font-weight: normal;}
 
-.pluslet-help {text-align:right;}
+.pluslet-help {text-align:right; display:none;}
 .pluslet-help img:hover {cursor: pointer;}
 
 
