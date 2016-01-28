@@ -133,7 +133,7 @@ class Updater
          `staff_id` int(11) NOT NULL AUTO_INCREMENT,
          `department_id` int(11) NOT NULL,
          PRIMARY KEY (`staff_id`)
-         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4'",
+         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Added v4';",
 				
 				"CREATE TABLE `stats` (
   `stats_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -149,7 +149,23 @@ class Updater
   `tab_name` varchar(200) DEFAULT NULL,
   `link_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`stats_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1090 DEFAULT CHARSET=utf8;"
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='Added v4';",
+
+		"CREATE TABLE `collection` (
+  `collection_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text  NOT NULL,
+  `description` text  NOT NULL,
+  `shortform` text  NOT NULL,
+  PRIMARY KEY (`collection_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='Added v4';",
+
+"CREATE TABLE `collection_subject` (
+  `collection_subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `collection_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `sort` int(11) NOT NULL,
+  PRIMARY KEY (`collection_subject_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='Added v4';"
 		);
 		
 		

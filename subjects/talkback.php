@@ -361,7 +361,7 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 	}
 
 	$statement->bindParam(":tbtags", $filter);
-	$statement->bindParam(":cattags", $cat_tags);
+	$statement->bindParam(":ctags", $cat_tags);
 	$statement->execute();
 
 

@@ -364,10 +364,6 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 	AND YEAR(date_submitted) < :year 
 	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC");
 	
-	$statement->bindParam(":year", $this_year);
-	
-	
-	
 	$filter = '%' . $set_filter . '%';
 
 	if (isset($_GET['c'])) {
@@ -377,9 +373,11 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 		$cat_tags = "%%";
 	
 	}
-	
+
+	$statement->bindParam(":year", $this_year);	
 	$statement->bindParam(":tbtags", $filter);
-	$statement->bindParam(":cattags", $cat_tags);
+	$statement->bindParam(":ctags", $cat_tags);
+
     $statement->execute();
     
     
