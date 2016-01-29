@@ -757,6 +757,20 @@ html, button, input, select, textarea {
 }
 
 
+
+/* added by cbrownroberts 01-29-2016 */
+/* used for hook to expand collapse indiviudal pluslets */
+.expand_collapse {
+  text-align:right;
+}
+.expand_collapse > i {
+  font-size: 18px;
+  color: #858585;
+  padding-right:6px;
+}
+
+
+
 #show_findbox_options i {font-size: 32px;}
 
 

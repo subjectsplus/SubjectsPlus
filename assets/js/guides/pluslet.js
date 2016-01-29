@@ -32,6 +32,7 @@ function pluslet() {
 			},
 			bindUiActions : function() {
 				myPluslet.expandPluslet();
+				myPluslet.expandCollapseIndividualPluslet();
 				myPluslet.boxItemDropPluslet();
 				
 				////////////////////
@@ -135,7 +136,7 @@ function pluslet() {
 				document.addEventListener("DOMContentLoaded", function() {
 
 					$( '#expand_tab' ).click(function() {
-						console.log('expand');
+
 						$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
 						$('.pluslet_body').toggle();
 						$('.pluslet_body').toggleClass('pluslet_body_closed');
@@ -342,6 +343,30 @@ function pluslet() {
 						$(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
 						$('.pluslet_body').toggle();
 						$('.pluslet_body').toggleClass('pluslet_body_closed');
+					});
+				});
+			},
+
+		    expandCollapseIndividualPluslet: function () {
+				// expand collapse individual pluslets
+				document.addEventListener("DOMContentLoaded", function() {
+					// add font-awesome icon to pluslet
+					$('.pluslet_body').after('<div class="expand_collapse"><i class="fa fa-angle-up" title="Expand Collapse Box"></i></div>');
+
+					$('.expand_collapse i').click(function () {
+						console.log($(this));
+						if ($(this).hasClass('fa-angle-up')) {
+
+							$(this).removeClass('fa-angle-up');
+							$(this).addClass('fa-angle-down');
+						} else if ($(this).hasClass('fa-angle-down')) {
+
+							$(this).removeClass('fa-angle-down');
+							$(this).addClass('fa-angle-up');
+						}
+
+						$(this).parent().prev('div.pluslet_body').slideToggle('slow');
+
 					});
 				});
 			},
