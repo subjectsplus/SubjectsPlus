@@ -151,12 +151,12 @@ include("includes/header.php");
 
 if ($displaytype == "search") {
 
-
 	$connection = $db->getConnection();
 	$statement = $connection->prepare("SELECT faq_id, question, answer, keywords
 	FROM `faq`
-	WHERE question like '%:search_clause1%' OR answer like %:search_clause2% OR keywords like %:search_clause3% Group BY question");
+	WHERE question like :search_clause1 OR answer like :search_clause2 OR keywords like :search_clause3 Group BY question");
 	
+    $search_clause = "%" . $search_clause . "%";
 	$statement->bindParam(":search_clause1", $search_clause);
 	$statement->bindParam(":search_clause2", $search_clause);
 	$statement->bindParam(":search_clause3", $search_clause);
@@ -207,7 +207,7 @@ if ($displaytype == "search") {
 	AND fp.faqpage_id = :postvar_coll_id
 	ORDER BY fp.name, question");
 	$statement->bindParam(':postvar_coll_id',$postvar_coll_id);
-	$statement->execture();
+	$statement->execute();
 
     $intro = "";
 } else {
@@ -215,11 +215,14 @@ if ($displaytype == "search") {
     // This is the default
 	$connection = $db->getConnection();
 	$statement = $connection->prepare("SELECT f.faq_id, question, answer, keywords
-	FROM faq f, faq_faqpage ff, faqpage fp
-	WHERE f.faq_id = ff.faq_id
-	AND fp.faqpage_id = ff.faqpage_id
-	AND fp.faqpage_id = :default_faqpage_id
-	ORDER BY f.question");
+    FROM faq f 
+    LEFT OUTER JOIN faq_faqpage ff
+    ON f.faq_id = ff.faq_id
+    LEFT OUTER JOIN faqpage fp
+    ON fp.faqpage_id = ff.faqpage_id
+    AND fp.faqpage_id = :default_faqpage_id
+    ORDER BY f.question");
+
 
 	$statement->bindParam(":default_faqpage_id", $default_faqpage_id);
 	$statement->execute();
@@ -311,7 +314,7 @@ if (isset($index)) {
     print "
 		<div class=\"pluslet_simple\">
 
-		<div class=\"faq_filter\"><a href=\"#rdiv\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</a></div>
+		<div class=\"faq_filter\"><a href=\"faq.php\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</a></div>
 		$index\n";
     print "</div>";
 }
