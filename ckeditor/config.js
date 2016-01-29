@@ -9,7 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
 	//added by dgonzalez
-	config.extraPlugins = 'subsplus_asset,subsplus_cat_link,subsplus_resource,subsplus_faq,subsplus_sub_spe,subsplus_toc,maximize';
+	config.extraPlugins = 'subsplus_asset,subsplus_cat_link,subsplus_resource,subsplus_faq,subsplus_sub_spe,subsplus_toc,maximize,justify';
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
@@ -46,7 +46,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.toolbar_SubsPlus_Narrow =
 		[
 
-			['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','Anchor','-','Image','-', 'PasteText','PasteFromWord','-', 'HorizontalRule','-','RemoveFormat', '-','Styles','-','Source'],
+			['Bold','Italic','JustifyLeft','JustifyCenter','JustifyRight','-','BulletedList','NumberedList','-','Link','Unlink','Anchor','-','Image','-', 'PasteText','PasteFromWord','-', 'HorizontalRule','-','RemoveFormat', '-','Styles','-','Source'],
 
 			'/',
 
