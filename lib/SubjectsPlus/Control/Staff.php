@@ -643,6 +643,7 @@ class Staff {
         ";
     } else {
       $our_password = "<input type=\"password\" name=\"password\" size=\"20\" class=\"required_field\" /><br />
+        <p style=\"font-size: smaller\">Pasword must have a special character, a letter, a number, and at least 6 characters.</p>
 		<p style=\"font-size: smaller\">The password is stored as a hash in the database, but unless you have SSL travels clear text across the internet.</p>";
     }
 
