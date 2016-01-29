@@ -510,7 +510,7 @@ include("includes/header.php");
 			          <br />
 			          <?php print _("(In case we need to contact you)"); ?>
 			          <br /><br />
-			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" />
+			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" style="width: 50px" />
 			          <br /><br />
 			          <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" /></p>
 			        </div>
