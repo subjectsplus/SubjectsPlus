@@ -690,7 +690,7 @@ public function loadLibGuidesLinksXML() {
       // When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field 
       
       $matches = array();
-      preg_match("/^\b(the|a|an|la|les|el|las|los)\b/i", strip_tags($link->NAME), $matches);
+      preg_match("/^\b(the |a |an |la |les |el |las |los )\b/i", strip_tags($link->NAME), $matches);
       
       
       // If there isn't an article in the title
