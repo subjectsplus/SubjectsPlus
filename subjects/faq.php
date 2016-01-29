@@ -221,7 +221,7 @@ if ($displaytype == "search") {
 	AND fp.faqpage_id = :default_faqpage_id
 	ORDER BY f.question");
 
-	$statement->bindParam(":deafult_faqpage_id", $deafult_faqpage_id);
+	$statement->bindParam(":default_faqpage_id", $default_faqpage_id);
 	$statement->execute();
 }
 
