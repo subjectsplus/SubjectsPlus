@@ -157,9 +157,9 @@ if ($displaytype == "search") {
 	FROM `faq`
 	WHERE question like '%:search_clause1%' OR answer like %:search_clause2% OR keywords like %:search_clause3% Group BY question");
 	
-	$statement->bindParam(":seach_clause1", $search_clause);
-	$statement->bindParam(":seach_clause2", $search_clause);
-	$statement->bindParam(":seach_clause3", $search_clause);
+	$statement->bindParam(":search_clause1", $search_clause);
+	$statement->bindParam(":search_clause2", $search_clause);
+	$statement->bindParam(":search_clause3", $search_clause);
 	
 	$statement->execute();
 	
@@ -183,9 +183,9 @@ if ($displaytype == "search") {
 	FROM `faq` f, faq_subject fs, subject s
 	WHERE f.faq_id = fs.faq_id
 	AND fs.subject_id = s.subject_id
-	AND s.subject_id = :post_var_subject_id
+	AND s.subject_id = :postvar_subject_id
 	ORDER BY question");
-	$statement->bindParam(':post_var_subject_id', $post_var_subject_id);
+	$statement->bindParam(':postvar_subject_id', $postvar_subject_id);
 	$statement->execute();
 	
        $intro = "";
