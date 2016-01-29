@@ -13,7 +13,7 @@ include("header.php");
 <div class="box" align="center">
     <h2 class="bw_head"><?php echo _( "First Time Update" ); ?></h2>
 
-			<p><?php echo _( "Welcome to version 3.0." ) ?></p>
+			<p><?php echo _( "Welcome to your new version of SubjectsPlus" ) ?></p>
 			<div align="left">
 				<ul>
 					<li><?php echo _( 'Configure SubjectsPlus ' ) ?><a href="../edit-config.php" target="_blank"><?php echo _( 'here' ) ?></a>.</li>
