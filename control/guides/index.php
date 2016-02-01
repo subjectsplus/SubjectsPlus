@@ -74,7 +74,7 @@ if ($num_rows > 0) {
     $myguides .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\"> &nbsp;&nbsp;
         <a class=\"showmedium-reloader\" href=\"../guides/metadata.php?subject_id=$mysubs_id&amp;wintype=pop\"><i class=\"fa fa-gear fa-lg\" alt=\"$gear_alt\" title=\"$gear_alt\"></i></a> &nbsp;&nbsp;
         <a target=\"_blank\" href=\"../../subjects/guide.php?subject=$myrow1[3]\"><i class=\"fa fa-eye fa-lg\" alt=\"$view_alt\" title=\"$view_alt\"></i></a> &nbsp;&nbsp;
-        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><i class=\"fa fa-globe fa-lg\" alt=\"$linkie_alt\" title=\"$linkie_alt\"></i></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
+        <a class=\"showmedium\" href=\"../guides/link_checker.php?subject_id=$mysubs_id&amp;wintype=pop\"><i class=\"fa fa-link fa-lg\" alt=\"$linkie_alt\" title=\"$linkie_alt\"></i></a> &nbsp;&nbsp; <a href=\"guide.php?subject_id=$mysubs_id\">$mysubs_name</a>";
     if ($active != "1") {
       $myguides .= " <span style=\"color: #666;\">" . _("unpublished") . "</span>";
     }
@@ -168,7 +168,7 @@ $('#guides').select2();
       <div class="pluslet_body">
         <p><i class="fa fa-gear fa-lg"  alt="<?php echo $gear_alt; ?>" title="<?php echo $gear_alt; ?>"></i> <?php print _("Edit Guide Metadata"); ?> </p>
         <p><i class="fa fa-eye fa-lg"  alt="<?php echo $eye_alt; ?>" title="<?php echo $eye_alt; ?>"></i> <?php print _("View Guide on Public Site"); ?></p>
-        <p><i class="fa fa-globe fa-lg"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"></i> <?php print _("Check Guide Links"); ?></p>
+        <p><i class="fa fa-link fa-lg"  alt="<?php echo $linkie_alt; ?>" title="<?php echo $linkie_alt; ?>"></i> <?php print _("Check Guide Links"); ?></p>
         <p><?php echo _("Need to delete a guide?  Use the gear icon, and use the Delete button."); ?></p>
       </div>
     </div>
