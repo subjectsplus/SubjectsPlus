@@ -315,9 +315,12 @@ function tabs() {
                     li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
                      
                     tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+
+                var visibility = $('select[name="new-tab-visibility"]').val();
+
                 $(li).attr('data-external-link', external_link);
                 console.log(id);
-                $(li).attr('data-visibility', 1);
+                $(li).attr('data-visibility', visibility);
                 console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 console.log($(li));

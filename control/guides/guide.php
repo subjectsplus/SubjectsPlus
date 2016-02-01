@@ -322,6 +322,13 @@ ob_end_flush ();
 					<label for="tab_external_link"><?php print _("Redirect URL"); ?></label>
 					<input type="text" name="tab_external_link" id="tab_external_link" />
 				</div>
+				<div class="pure-control-group">
+					<label><?php print _("Visibility"); ?></label> <select
+						name="new-tab-visibility">
+						<option value="1">Public</option>
+						<option value="0">Hidden</option>
+					</select>
+				</div>
 			</fieldset>
 		</form>
 	</div>
