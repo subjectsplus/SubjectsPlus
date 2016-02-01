@@ -269,7 +269,7 @@ class Guide
                     </div>
                 <div class=\"pluslet_body\">
 				$copy_guide
-			<label for=\"record_title\">" . _("Guide") . "</label>
+			<label for=\"record_title\">" . _("Guide Title") . "</label>
             <input type=\"text\" name=\"subject\" id=\"record_title\" class=\"pure-input-1-2 required_field\" value=\"" . $this->_subject . "\">
 
             <label for=\"record_shortform\">" . _("Short Form") . "</label>
