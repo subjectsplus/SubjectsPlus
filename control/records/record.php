@@ -218,8 +218,8 @@ if (win_type == "pop") {
 
                 // hide life preserver
                 $(this).parent().parent().find(".checkurl_img").hide();
-                // hide call_num box
-                $(".call_num_box").hide("slow");
+               
+                $(".call_num_box").show("slow");
 
                 // Shrink Location Box
                 $(this).parent().parent().children(".record_location").attr("size", 30);
