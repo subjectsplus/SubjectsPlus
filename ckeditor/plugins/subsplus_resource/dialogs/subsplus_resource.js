@@ -255,11 +255,13 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 			    element = element.getAscendant( 'span', true );
 
 			if ( !element || element.getName() != 'span' || element.data( 'cke-realelement' ) ) {
-			    element = editor.document.createElement( 'li' );
+			 
+				element = editor.document.createElement( 'span' );
 			    element.addClass('token-list-item');
-				//element.addClass('subsplus_resource');
-				//element.setStyle('background', '#E488B6');
-				//element.setAttribute('contentEditable', 'false');
+	  			element.addClass('subsplus_resource');
+  				element.setAttribute('contentEditable', 'false');
+
+		
 			    this.insertMode = true;
 			}
 			else
@@ -283,9 +285,7 @@ CKEDITOR.dialog.add( 'subsplus_resourceDialog', function( editor ) {
 
 			if ( this.insertMode )
 				editor.insertElement( this.element );
-
-			//place the token in the editor
-			//editor.insertHtml( '&nbsp;<span class="subsplus_resource" style="background: #E488B6;" contentEditable=false>' + lstrToken + '</span>&nbsp;' );
+		
 		}
 	};
 });
