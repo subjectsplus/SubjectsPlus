@@ -187,18 +187,19 @@ switch ($_REQUEST["action"]) {
 
     return; // return early so we don't show the stuff that follows
     break;
+
   case "delete_collection":
     // Make sure no one is associated with this department
     $qChecker = "SELECT * FROM faqpage f, faq_faqpage ff
             WHERE f.faqpage_id = ff.faqpage_id
             AND f.faqpage_id = " . scrubData($_POST["delete_id"], "integer");
-
+            //print $qChecker;
     $rChecker = $db->query($qChecker);
 
     //print $qChecker;
 
     if (count($rChecker) != 0) {
-      print _("Your request cannot be completed:  There are one or more records linked to this item.");
+      print _("Your request cannot be completed:  There are one or more records linked to this item.  Please unlink them--you can find them under FAQ > Browse by Subject, Browse by Collection. ");
     } else {
 
       $qDelete = "DELETE FROM faqpage WHERE faqpage_id = " . scrubData($_POST["delete_id"], "integer");

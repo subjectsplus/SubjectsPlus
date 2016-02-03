@@ -73,11 +73,15 @@ if (isset($_POST["update_collections"])) {
         }
     }
 
-    if ($error != 1) {
+/*
+    if ($error !== 1) {
         $feedback = _("Thy Will Be Done.  Updated.");
     } else {
         $feedback = _("Thwarted!  Something has gone wrong with the update.  Contact the admin.");
     }
+*/
+
+    $feedback = _("Thy Will Be Done.  Updated.");
 }
 
 
@@ -93,11 +97,13 @@ $resultArray = $querierDept->query($q);
 if ($resultArray) {
     foreach ($resultArray as $value) {
 
-        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
+        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
     }
 }
 
 $collection_box = "<form id=\"sources\" action=\"\" method=\"post\">
+<button class=\"button\" id=\"save_guide\"  class=\"button pure-button pure-button-primary\" style=\"display: block;\" name=\"update_collections\" >" . _("SAVE CHANGES") . "</button>
+
 <p>" . _("Edit label or delete collection.") . "</p>
 $ourlist
 </form>";
@@ -152,21 +158,29 @@ include("../includes/footer.php");
         });
 
 
-        $('a[id*=confirm-yes-]').livequery('click', function(event) {
+        jQuery('.pluslet_body').on('click','a[id*=confirm-yes-]', function(event) {
 
             var delete_id = $(this).attr("id").split("-");
             var this_id = delete_id[2];
 
-            // Remove the confirm zone, and the row from the table
-            $(this).parent().remove();
-            $("#item-"+this_id).remove();
-
+             // Remove the confirm zone, and the row from the table
+             jQuery(this).parent().remove();
+             jQuery("#item-"+this_id).remove();
+/*
             $(".feedback").load("admin_bits.php", {action: 'delete_collection', delete_id:this_id},
             function() {
 
                 $(".feedback").fadeIn();
             });
+*/
 
+             jQuery.post("admin_bits.php", {action: 'delete_collection', delete_id:this_id},
+                     function(response) {
+                   console.log(response);
+                   $('#feedback').remove();
+                   jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
+                 jQuery("#feedback").show();
+               });
             return false;
         });
 

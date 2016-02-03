@@ -194,9 +194,9 @@ include("../includes/footer.php");
 
      jQuery.post("admin_bits.php", {action: 'delete_source', delete_id:this_id},
 			 function(response) {
-	 console.log(response);
-	 $('#feedback').remove();
-	 jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
+	       console.log(response);
+	       $('#feedback').remove();
+	       jQuery("#maincontent").prepend('<div id="feedback">' + response + '</div>');
          jQuery("#feedback").show();
        });
 
