@@ -13,9 +13,15 @@ require_once("autoloader.php");
 
 require_once("functions.php");
 
+include_once(dirname(dirname(dirname(__FILE__))) . "/lib/CSRF-Protector-PHP-nojs-support/libs/csrf/csrfprotector.php");
+
+
+
 use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\BuildNav;
 use SubjectsPlus\Control\Querier;
+
+
 
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
 if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FILE__) . '/config.php' ) < 10 )
@@ -48,6 +54,8 @@ if ($use_shibboleth == TRUE) {
 }
 
 
+//Initialise CSRFGuard library
+csrfProtector::init();
 
 
 
