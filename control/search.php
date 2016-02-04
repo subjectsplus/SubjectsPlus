@@ -5,6 +5,9 @@ $page_title = "Search Results";
 include("includes/header.php");
 use SubjectsPlus\Control\Search;
 
+// scrub incoming
+$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+
 if (isset($_POST["searchterm"])) {
 	$search = new Search;
 	$search->setSearch($_POST['searchterm']);
