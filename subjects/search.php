@@ -9,6 +9,9 @@
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 
+// scrub incoming
+$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+
 $use_jquery = "";
 
 $page_title = _("Search Results for Resources by Title and Description");
