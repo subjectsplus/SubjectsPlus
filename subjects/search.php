@@ -22,6 +22,9 @@ include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 include("includes/header.php");
 
+// scrub incoming
+$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+
 // Our search box
 $input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60", "");
 
