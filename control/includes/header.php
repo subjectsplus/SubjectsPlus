@@ -13,7 +13,8 @@ require_once("autoloader.php");
 
 require_once("functions.php");
 
-include_once(dirname(dirname(dirname(__FILE__))) . "/lib/CSRF-Protector-PHP-nojs-support/libs/csrf/csrfprotector.php");
+//include_once(dirname(dirname(dirname(__FILE__))) . "/lib/CSRF-Protector-PHP-nojs-support/libs/csrf/csrfprotector.php");
+//see also line 58 below
 
 
 
@@ -55,7 +56,7 @@ if ($use_shibboleth == TRUE) {
 
 
 //Initialise CSRFGuard library
-csrfProtector::init();
+//csrfProtector::init();
 
 
 
