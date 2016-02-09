@@ -30,13 +30,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'about' }
 	];
 
-	var roxyFileman = '../../ckeditor/fileman/index.html';
-
-	config.filebrowserBrowseUrl = roxyFileman;
-	config.filebrowserImageBrowseUrl = roxyFileman+'?type=image';
-	config.removeDialogTabs = 'link:upload;image:upload';
-
-	// Remove some buttons, provided by the standard plugins, which we don't
+        // Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
 	config.removeButtons = 'Underline';
 
