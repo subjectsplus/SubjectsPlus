@@ -84,9 +84,4 @@ CKEDITOR.on('dialogDefinition', function(ev) {
 	var dialogName = ev.data.name;
 	var dialogDefinition = ev.data.definition;
 
-	if (dialogName == 'image') {
-		dialogDefinition.onShow = function () {
-			this.selectPage('Upload');
-		};
-	}
 });
