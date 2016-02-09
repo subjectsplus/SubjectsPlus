@@ -39,7 +39,7 @@ if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FIL
 require_once(dirname(__FILE__) . "/config.php");
 
 
-if ($use_shibboleth == TRUE) {
+if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
 	
 	isCool($_SERVER['mail'],"", true);
 	
