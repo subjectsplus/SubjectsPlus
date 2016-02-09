@@ -1,5 +1,5 @@
 {
-"FILES_ROOT":          "/dev-non-svn/rails_projects/SubjectsPlus/assets/images",
+"FILES_ROOT":          "/var/www/sp/assets/images/",
 "RETURN_URL_PREFIX":   "",
 "SESSION_PATH_KEY":    "",
 "THUMBS_VIEW_WIDTH":   "140",
