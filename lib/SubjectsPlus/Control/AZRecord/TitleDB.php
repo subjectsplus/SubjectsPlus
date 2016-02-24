@@ -33,6 +33,19 @@ class TitleDB
             $statement->execute();
             $this->last_insert = $this->connection->lastInsertId();
             $this->connection->commit();
+
+            if (isset($title->subjects)) {
+                $this->connection->beginTransaction();
+                foreach ($title->subjects as $subject) {
+                    $statement = $this->connection->prepare("INSERT INTO rank (title_id,subject_id) VALUES (:title_id,:subject_id)");
+                    $statement->bindParam(':subject_id', $subject['subject_id']);
+                    $statement->bindParam(':title_id', $this->last_insert);
+                    $statement->execute();
+                    $this->connection->commit();
+                }
+
+            }
+
         } catch(PDOExecption $e) {
             $this->connection->rollback();
             print "Error!: " . $e->getMessage() . "</br>";

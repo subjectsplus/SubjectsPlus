@@ -23,9 +23,8 @@ class Title
     public $pre;
     public $last_modified_by;
     public $last_modified;
+    public $locations;
     public $subjects;
-    public  $locations;
-
 
     /**
      * _title constructor.
@@ -38,7 +37,7 @@ class Title
      * @param $description
      * @param $title_id
      */
-    public function __construct($title_id, $title,$alternate_title, $description,$pre , $last_modified_by, $last_modified  )
+    public function __construct($title_id, $title,$alternate_title, $description,$pre , $last_modified_by, $last_modified ,$subjects  )
     {
 
         $this->last_modified = $last_modified;
@@ -48,12 +47,14 @@ class Title
         $this->alternate_title = $alternate_title;
         $this->description = $description;
         $this->title_id = $title_id;
+        $this->subjects = $subjects;
     }
 
 
     public function toArray(){
         return get_object_vars($this);
     }
+
 
 
 }
