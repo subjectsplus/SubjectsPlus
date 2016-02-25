@@ -14,7 +14,7 @@ namespace SubjectsPlus\Control\AzRecord;
 
 use SubjectsPlus\Control\Interfaces\OutputInterface;
 
-class Location implements OutputInterface
+class Location implements LocationInterface,OutputInterface
 {
 
     private $id;
