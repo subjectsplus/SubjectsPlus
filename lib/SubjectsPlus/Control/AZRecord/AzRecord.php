@@ -16,9 +16,11 @@ class AzRecord
 {
     private $connection;
     private $title;
+    private $db;
 
     public function __construct(Querier $db)
     {
+        $this->db = $db;
         $this->connection = $db->getConnection();
 
     }
@@ -34,22 +36,22 @@ class AzRecord
 
     public function getRecord($id) {
 
-        $title_db = new AzRecordDb($this->connection);
-        $this->title = $title_db->getSingleById("SELECT * FROM title WHERE title_id = :id",new TitleFactory(), $id);
+
+        $this->title = $this->db->getSingleById("SELECT * FROM title WHERE title_id = :id",new TitleFactory(), $id);
         $this->getRecordLocations($id);
-        $this->title->subjects = $this->getSubjectAssociations($id);
+        $this->title->setSubjects($this->getSubjectAssociations($id));
     }
 
     private function getRecordLocations($id) {
 
-        $locations_db = new AzRecordDb($this->connection);
-        $locations = $locations_db->getArrayById("SELECT * FROM location
+        $locations = $this->db->getArrayById("SELECT * FROM location
 INNER JOIN location_title ON location.location_id = location_title.location_id
 INNER JOIN title ON location_title.title_id = title.title_id
 WHERE title.title_id = :id", new LocationFactory(), $id);
         foreach ($locations as $location) {
-            $this->title->locations[] = $location->toArray();
+            $locations_array[] = $location->toArray();
         }
+        $this->title->setLocations($locations_array);
 
     }
 
@@ -60,9 +62,9 @@ WHERE title.title_id = :id", new LocationFactory(), $id);
         $statement->execute();
         $results = $statement->fetchAll();
         foreach ($results as $result) {
-            $subjects[] = array("subjectId" => $result['subject_id']);
+            $subjects_array[] = array("subjectId" => $result['subject_id']);
         }
-        return $subjects;
+        return $subjects_array;
     }
 
 }

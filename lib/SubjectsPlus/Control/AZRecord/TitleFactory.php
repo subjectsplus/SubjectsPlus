@@ -12,7 +12,16 @@ namespace SubjectsPlus\Control\AzRecord;
 class TitleFactory
 {
     public static function create($title) {
-        return new Title($title['title_id'], $title['title'], $title['alternate_title'], $title['description'], $title['pre'],
-            $title['last_modified_by'], $title['last_modified'],$title['subjects']);
+        $my_title = new Title();
+        $my_title->setTitleId($title['title_id']);
+        $my_title->setTitle($title['title']);
+        $my_title->setAlternateTitle($title['alternate_title']);
+        $my_title->setDescription($title['description']);
+        $my_title->setPre($title['pre']);
+        $my_title->setLastModifiedBy($title['last_modified_by']);
+        $my_title->setLastModified($title['last_modified']);
+
+        return $my_title;
+
     }
 }
