@@ -20,7 +20,7 @@ class LinkChecker {
 		//set timeout to zero because link checker can take a very long time
 		ini_set('max_execution_time', '0' );
 
-		if (!function_exists('curl_exec')) throw new Exception('CURL extension required to create an sp_LinkChecker object');
+		if (!function_exists('curl_exec')) throw new \Exception('CURL extension required to create an sp_LinkChecker object');
 
 		$this->_proxy = $lstrProxy;
 		$this->_timeout = $lintTimeout;
