@@ -174,7 +174,7 @@ class Pluslet_TOC extends Pluslet {
             }
 
 
-              $this->_body .= "$checkbox <h4 href=\"#box-$parent_id\" class=\"table-of-contents-header\" id=\"boxid-$parent_id\">$parent_name</h4>";
+              $this->_body .= "<h4 href=\"#box-$parent_id\" class=\"table-of-contents-header\" id=\"boxid-$parent_id\">$checkbox $parent_name</h4>";
 
 
 
