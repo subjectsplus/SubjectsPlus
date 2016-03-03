@@ -111,32 +111,48 @@ class CopyGuide implements OutputInterface {
 
 
                 $new_section_tab_array = array();
+                $new_value = array();
                 foreach($section as $sec) {
 
                     foreach($sec as $key => $value) {
-                        $value['new_tab_id'] = $sec['new_tab_id'];
-                        $value['new_section_id'] = $sec['new_section_id'][$key];
+
+
+                        if( isset( $sec['new_tab_id'], $sec['new_section_id'][$key] ) ) {
+
+                            $value['new_tab_id'] = $sec['new_tab_id'];
+                            $value['new_section_id'] = $sec['new_section_id'][$key];
+                        }
 
                         array_push($new_section_tab_array, $value);
                     }
 
-
                     foreach($new_section_tab_array as $arr) {
-                        //get existing pluslet data
-                        $existing_pluslet = $this->fetchExistingPlusletDataBySubjectITabIdSectionId($subject_id, $arr['tab_id'], $arr['section_id']);
 
-                        foreach($existing_pluslet as $pluslet) {
-                            //insert new pluslet
-                            $new_pluslet_id = $this->insertPlusletData($pluslet);
+                        if( isset( $arr['new_tab_id'], $arr['new_section_id'] ) ) {
+                           //get existing pluslet data
+                           $existing_pluslet = $this->fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id, $arr['tab_id'], $arr['section_id']);
 
-                            //insert new pluslet and section ids
-                            $new_pluslet_section_id = $this->insertPlusletSectionIds($arr['new_section_id'], $new_pluslet_id, $pluslet ['pcolumn'], $pluslet ['prow']);
+                            if( isset($existing_pluslet) ) {
+
+                                foreach($existing_pluslet as $pluslet) {
+                                    //insert new pluslet
+                                    $new_pluslet_id = $this->insertPlusletData($pluslet);
+
+                                    //insert new pluslet and section ids
+                                    $this->insertPlusletSectionIds($arr['new_section_id'], $new_pluslet_id, $pluslet ['pcolumn'], $pluslet ['prow']);
+                                }
+
+                            }
+
                         }
+
                     }
 
                 }
 
             }
+
+
 
             $connection->commit();
 
@@ -329,11 +345,12 @@ class CopyGuide implements OutputInterface {
         foreach($section_data as $data) {
 
             foreach($data as $key => $value) {
-               $value['new_tab_id'] = $data['new_tab_id'];
+
+               $new_tab_id = $data['new_tab_id'];
 
                if(is_array($value))  {
                    $statement = $connection->prepare ( "INSERT INTO section (`tab_id`, `layout`, `section_index`) VALUES (:tab_id, :layout, :section_index)" );
-                   $statement->bindParam ( ":tab_id",        $value['new_tab_id'] );
+                   $statement->bindParam ( ":tab_id",        $new_tab_id );
                    $statement->bindParam ( ":layout",        $value['layout'] );
                    $statement->bindParam ( ":section_index", $value['section_index'] );
                    $statement->execute ();
@@ -372,7 +389,7 @@ class CopyGuide implements OutputInterface {
     }
 
 
-    public function fetchExistingPlusletDataBySubjectITabIdSectionId($subject_id = null, $tab_id = null, $section_id = null) {
+    public function fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id = null, $tab_id = null, $section_id = null) {
 
         $connection = $this->db->getConnection ();
 
