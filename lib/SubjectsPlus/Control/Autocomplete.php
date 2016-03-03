@@ -167,7 +167,7 @@ class Autocomplete {
         
         
      case "azrecords":
-        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', title.title as 'label' FROM title
+        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', DISTINCT title.title as 'label' FROM title
 INNER JOIN location_title 
 ON title.title_id = location_title.title_id
 INNER JOIN location
