@@ -1,6 +1,6 @@
 <?php
-   namespace SubjectsPlus\Control;
-     require_once("Pluslet.php");
+namespace SubjectsPlus\Control;
+require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_TOC
  *   @brief
@@ -19,7 +19,7 @@ class Pluslet_TOC extends Pluslet {
     //$this->_editable = TRUE;
     $this->_subject_id = $subject_id;
     $this->_pluslet_bonus_classes = "no_overflow";
-  }
+}
 
   static function getMenuName()
   {
@@ -62,6 +62,7 @@ class Pluslet_TOC extends Pluslet {
 
       $jobj = json_decode($this->_extra);
       $this->_ticked_items = explode(',', $jobj->{'ticked'});
+
     }
 
 
@@ -150,17 +151,40 @@ class Pluslet_TOC extends Pluslet {
 
         if( !empty($item)) {
 
-          $this->_body .= "<h4 class=\"toc-heading\">". $item['parent']['name'] . "</h4>";
+
+
+           // $this->_body .= "<h4 class=\"toc-heading\">". $item['parent']['name'] . "</h4>";
+
+
           $parent_id = $item['parent']['parent_id'];
+          $parent_name = $item['parent']['name'];
 
           // Edit
           if ($action == "edit") {
+
+            if (isset($this->_ticked_items)) {
+              // show ticked items as pre-ticked
+              if (!in_array($parent_id, $this->_ticked_items)) {
+                $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$parent_id\" />";
+              } else {
+                $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$parent_id\" checked=\"checked\" />";
+              }
+            } else {
+              $checkbox = "<input type=\"checkbox\" name=\"checkbox-$this->_current_id\" value=\"$parent_id\" checked=\"checked\" />";
+            }
+
+
+              $this->_body .= "<h4 href=\"#box-$parent_id\" class=\"table-of-contents-header\" id=\"boxid-$parent_id\">$checkbox $parent_name</h4>";
+
+
 
                 foreach( $item['children'] as $child):
                   $child_title = $child['title'];
 
                   $child_id = $child['id'];
                   $p_column = $child['pcolumn'];
+
+
 
                   if (isset($this->_ticked_items)) {
                     // show ticked items as pre-ticked
@@ -184,6 +208,12 @@ class Pluslet_TOC extends Pluslet {
             // View
             // display only ticked items
             if ($this->_ticked_items) {
+              if (in_array($parent_id, $this->_ticked_items)) {
+
+                $this->_body .= "<h4 class=\"table-of-contents-header\">$parent_name</h4>\n";
+
+              }
+
               foreach ($item['children'] as $child) {
 
                 $child_title = $child['title'];
@@ -228,5 +258,3 @@ class Pluslet_TOC extends Pluslet {
   }
 
 }
-
-?>

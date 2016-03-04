@@ -401,6 +401,7 @@ ORDER BY newtitle
 				$information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\">" . _ ( "about" ) . "</span>";
 			} else {
 				$information = "";
+				$information1 = "";
 			}
 
 			$target = targetBlanker ();

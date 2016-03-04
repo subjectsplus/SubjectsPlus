@@ -174,7 +174,7 @@ include("../includes/footer.php");
     $('a[id*=confirm-yes]').livequery('click', function(event) {
       var this_record_id = $(this).attr("id").split("-");
       // see if we're in a popup window, and tweak string accordingly
-      var pop_status = "<?php print $_REQUEST["wintype"]; ?>";
+      var pop_status = "<?php print $_GET["wintype"]; ?>";
 
       var delete_url = "faq.php?faq_id=" + this_record_id[2] + "&delete_record=true&wintype=" + pop_status;
 
