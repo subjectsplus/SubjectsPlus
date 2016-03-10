@@ -326,10 +326,38 @@ function pluslet() {
 						var deleteId = $(this).attr('id').split('-')[1];
 						var elementDeletion = this;
 
-						//check for child pluslets and delete pluslet if none exist, otherwise
-						//display dialog box indicating child pluslets exist
-						//console.log(subjectId);
-						myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
+						//pluslet has been saved
+						if(deleteId > 0) {
+							//check for child pluslets and delete pluslet if none exist, otherwise
+							//display dialog box indicating child pluslets exist
+							//console.log(subjectId);
+							myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
+						} else {
+							//pluslet has not been saved so just remove the node
+							$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
+								autoOpen: true,
+								modal: false,
+								width: 'auto',
+								height: 'auto',
+								resizable: false,
+								dialogClass: 'topindex',
+								buttons: {
+									'Yes': function() {
+
+										// Remove node
+										$(elementDeletion).parents('.pluslet').remove();
+										$( this ).dialog( 'close' );
+										return false;
+									},
+									Cancel: function() {
+										$( this ).dialog( 'close' );
+									}
+								}
+							});
+
+
+						}
+
 
 					});
 				}
