@@ -472,6 +472,25 @@ class Config
 					$lstrHTML .= "</select>\n";
 
 					break;
+				case 'pword':
+					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"password\" value=\"{$lobjValues[$lstrKey]}\" ";
+
+					switch( strtolower( $lobjOption[4] ) )
+					{
+						case 'medium':
+							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+							break;
+						case 'small':
+							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
+							break;
+						default:
+							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
+							break;
+					}
+
+					$lstrHTML .= "/>\n";
+					break;
+
 				default:
 					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lobjValues[$lstrKey]}\" ";
 
