@@ -381,6 +381,9 @@ function pluslet() {
 					// add font-awesome icon to pluslet
 					$('.pluslet_body').after('<div class="expand_collapse"><i class="fa fa-angle-up" title="Expand Collapse Box"></i></div>');
 
+					//remove copy of expand_collapse trigger when pluslet is a clone
+					$('.pluslet_body .pluslet_body').next('.expand_collapse').remove();
+
 					$('.expand_collapse i').click(function () {
 						console.log($(this));
 						if ($(this).hasClass('fa-angle-up')) {
