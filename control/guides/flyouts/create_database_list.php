@@ -7,8 +7,8 @@
 
 		<div class="databases-results-display">
 			<input class="databases-search" type="text"
-				placeholder="<?php print _("Enter database title..."); ?>"></input>
-			<label for="limit-az"> <input id="limit-az" type="checkbox" checked></input>
+				placeholder="<?php print _("Enter database title..."); ?>" />
+			<label for="limit-az"> <input id="limit-az" type="checkbox" checked />
 				Limit to AZ List
 			</label>
 			<ul class="databases-searchresults"></ul>
