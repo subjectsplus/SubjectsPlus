@@ -186,21 +186,10 @@ WHERE location.location_id = " . $record[0]['location_id']);
 }
 
 if ($record_title[0]["title"] == "") {
-  
-  $description .=    "<div class=\"links\">" . 
-		     "<span class=\"link_title token-list-item\"><a href=\"$link->URL\">$link->NAME</a></span>" .
-                     "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                     "</div>";
-
+  $description .=    "<span class=\"link_title token-list-item subsplus_resource\"><a href=\"$link->URL\">$link->NAME</a></span>" .
 } 
-
 if ($record_title[0]['title']) {
-  
-  $description .= 
-  "<div class=\"links\">" . 
-                  "<span class=\"link_title token-list-item\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>" . 
-                  "</div>";
-  
+  $description .= "<span class=\"link_title token-list-item subsplus_resource\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>";
 }
 
 $this->log->importLog ("Insert record:");
@@ -276,8 +265,11 @@ public function importBox($box, $section_id) {
   
   $clean_description = str_replace('&Acirc;','', $doc->saveHTML());
 
+ if (ctype_space($clean_description) == true || $clean_description != '') {
   $description .= "<div class=\"description\">". $clean_description  . "</div>";
-  
+ } else {
+ 	$description = '';
+ }
   
   switch ($box->BOX_TYPE) {      
 
