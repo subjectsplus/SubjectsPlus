@@ -229,8 +229,8 @@ public function importBox($box, $section_id) {
   $config->set('Core.Encoding', 'UTF-8');
   $config->set('HTML.TidyLevel', 'heavy');
 
-  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol'));
-  $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
+  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol','span'));
+  $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src','span.class', 'div.class'));
   $config->set('HTML.SafeIframe', true);
   $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
   
