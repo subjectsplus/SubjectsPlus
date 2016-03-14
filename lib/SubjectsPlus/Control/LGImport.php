@@ -188,7 +188,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 if ($record_title[0]["title"] == "") {
   
   $description .=    "<div class=\"links\">" . 
-		     "<span class=\"link_title\"><a href=\"$link->URL\">$link->NAME</a></span>" .
+		     "<span class=\"link_title token-list-item\"><a href=\"$link->URL\">$link->NAME</a></span>" .
                      "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
                      "</div>";
 
@@ -198,7 +198,7 @@ if ($record_title[0]['title']) {
   
   $description .= 
   "<div class=\"links\">" . 
-                  "<span class=\"link_title\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>" . 
+                  "<span class=\"link_title token-list-item\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>" . 
                   "</div>";
   
 }
@@ -275,6 +275,7 @@ public function importBox($box, $section_id) {
   // Create html for the description
   
   $clean_description = str_replace('&Acirc;','', $doc->saveHTML());
+
   $description .= "<div class=\"description\">". $clean_description  . "</div>";
   
   
