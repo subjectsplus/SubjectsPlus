@@ -161,19 +161,19 @@ class Autocomplete {
 
         break;
       case "records":
-       $statement = $connection->prepare("SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', 
-       		title FROM title WHERE title LIKE :search_term");
+       $statement = $connection->prepare("SELECT  title_id AS 'id', 'Record' as 'content_type',  title AS 'label'
+                                          FROM title WHERE title LIKE :search_term GROUP BY title");
         break;
         
         
      case "azrecords":
-        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', DISTINCT title.title as 'label' FROM title
+        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', title.title as 'label' FROM title
 INNER JOIN location_title 
 ON title.title_id = location_title.title_id
 INNER JOIN location
 ON location.location_id = location_title.location_id
 AND eres_display = 'Y'
-AND title.title LIKE :search_term");
+AND title.title LIKE :search_term GROUP BY title");
         	break;
         
       case "faq":
@@ -206,6 +206,8 @@ AND title.title LIKE :search_term");
                     		
 
     }
+
+    $search_param = '%'.$search_param.'%';
 
     $statement->bindParam(":search_term", $search_param);
     	 
