@@ -242,7 +242,7 @@ function resourceList() {
 
 
 								if ($(this).text()) {
-									token_string += " <span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}</span>";
+									token_string += '<span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' + record_id + "},{" + title + "}" + ",{" + display_options + "}}</span>";
 								}
 							});
 
