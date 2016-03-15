@@ -242,7 +242,7 @@ function resourceList() {
 
 
 								if ($(this).text()) {
-									token_string += "<li class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}</li>";
+									token_string += '<span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' + record_id + "},{" + title + "}" + ",{" + display_options + "}}</span>";
 								}
 							});
 
@@ -256,7 +256,7 @@ function resourceList() {
 							myResourceList.settings.click_count++;
 							myResourceList.settings.dbListResults.empty();
 						}
-					}, 100);
+					}, 1000);
 				});
 			}
 	};
