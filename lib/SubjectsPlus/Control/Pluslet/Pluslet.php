@@ -249,7 +249,7 @@ class Pluslet {
 
         echo "
             <div class=\"titlebar pure-g\">
-                <div class=\"titlebar_text pure-u-2-3\">$this->_title</div>
+                <div class=\"titlebar_text pure-u-2-3\">".stripslashes($this->_title)."</div>
                 <div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>
             </div>
             <div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">";

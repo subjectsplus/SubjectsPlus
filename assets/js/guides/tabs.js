@@ -526,7 +526,7 @@ function tabs() {
 
                             $('.metadata-url').show();
                             $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);
-
+                            console.log(new_subject_id);
                             window.location.href = "/control/guides/metadata.php?subject_id=" + new_subject_id;
                         },
                         fail: function (err) {
@@ -535,11 +535,6 @@ function tabs() {
                     });
                 });
             });
-
-        },
-
-        copyGuideFromExistingGuide : function () {
-
 
         }
     }

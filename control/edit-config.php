@@ -122,7 +122,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"uname" => array( _( "MySQL Username" ), _( "This is the username to your MySQL database." ), "string", "left", "medium", "" ,"" ),
 
-							"pword" => array( _( "MySQL Password" ), _( "This is the password for your MySQL user." ), "string", "left", "medium", "" ,"" ),
+							"pword" => array( _( "MySQL Password" ), _( "This is the password for your MySQL user." ), "pword", "left", "medium", "" ,"" ),
 
 							"dbName_SPlus" => array( _( "MySQL SubjectsPlus Database" ), _( "Name of the SubjectsPlus database" ), "string", "left", "" , _( "database help?" ) ),
 

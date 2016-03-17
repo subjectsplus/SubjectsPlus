@@ -186,21 +186,10 @@ WHERE location.location_id = " . $record[0]['location_id']);
 }
 
 if ($record_title[0]["title"] == "") {
-  
-  $description .=    "<div class=\"links\">" . 
-		     "<span class=\"link_title\"><a href=\"$link->URL\">$link->NAME</a></span>" .
-                     "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                     "</div>";
-
+  $description .=    "<span class=\"link_title token-list-item subsplus_resource\"><a href=\"$link->URL\">$link->NAME</a></span>" .
 } 
-
 if ($record_title[0]['title']) {
-  
-  $description .= 
-  "<div class=\"links\">" . 
-                  "<span class=\"link_title\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>" . 
-                  "</div>";
-  
+  $description .= "<span class=\"link_title token-list-item subsplus_resource\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>";
 }
 
 $this->log->importLog ("Insert record:");
@@ -229,8 +218,8 @@ public function importBox($box, $section_id) {
   $config->set('Core.Encoding', 'UTF-8');
   $config->set('HTML.TidyLevel', 'heavy');
 
-  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol'));
-  $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
+  $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol','span'));
+  $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src','span.class', 'div.class'));
   $config->set('HTML.SafeIframe', true);
   $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
   
@@ -275,8 +264,12 @@ public function importBox($box, $section_id) {
   // Create html for the description
   
   $clean_description = str_replace('&Acirc;','', $doc->saveHTML());
+
+ if (ctype_space($clean_description) == true || $clean_description != '') {
   $description .= "<div class=\"description\">". $clean_description  . "</div>";
-  
+ } else {
+ 	$description = '';
+ }
   
   switch ($box->BOX_TYPE) {      
 
