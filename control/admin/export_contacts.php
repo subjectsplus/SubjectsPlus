@@ -67,9 +67,8 @@ emergency_contact_name AS 'Contact Name', emergency_contact_phone AS 'Contact Ph
   $and
   ORDER BY lname";
 
-
 $db = new Querier;
-$export = $db->query($select);
+$export = $db->query($select,PDO::FETCH_NUM);
 
 $fields = count( $export );
 
@@ -83,8 +82,10 @@ foreach ($header_fields as $key => $value) {
 
     foreach( $export as $row )
 {
+
     $line = '';
     foreach( $row as $value )
+
     {                                            
         if ( ( !isset( $value ) ) || ( $value == "" ) )
         {
@@ -123,7 +124,7 @@ header("Expires: 0");
 
 print "$header\n$data";
 
-print "$header\n$data";
+//print "$header\n$data";
 
     
 
