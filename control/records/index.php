@@ -179,7 +179,7 @@ makePluslet(_("Browse Records"), $letter_header_body, "no_overflow");
 print "</div>"; // close pure-u-2-3
 print "<div class=\"pure-u-1-3\">";
 
-makePluslet(_("New Record"), $new_record_body, "no_overflow");
+makePluslet(_("New AZRecord"), $new_record_body, "no_overflow");
 
 print "</div>"; // close pure-u-1-3
 print "</div>"; // close pure-g

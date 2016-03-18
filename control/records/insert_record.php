@@ -1,6 +1,7 @@
 <?php
 include("../includes/autoloader.php");
 include("../includes/config.php");
+include("../includes/functions.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\AzRecord\TitleDb;
@@ -19,6 +20,12 @@ $title_json = json_decode(file_get_contents('php://input'), true);
 $title = TitleFactory::create($title_json);
 
 $title_insert_id = $title_db->insertTitle($title);
+
+if (isset($title_insert_id)){
+    echo json_encode(array("response"=>getControlURL() . "/records/record.php?record_id=" . $title_insert_id));
+} else {
+    echo json_encode(array("response"=>"error"));
+}
 
 $locations = $title_json['locations'];
 
