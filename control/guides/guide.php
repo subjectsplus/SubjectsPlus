@@ -381,11 +381,6 @@ ob_end_flush ();
 				href="#"><i class="fa fa-search"
 					title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
 
-
-			<li id="show_dblist_options" class="top-panel-option-item"><a
-						href="#"><i class="fa fa-list"
-									title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
-
 			<li id="show_layout_options" class="top-panel-option-item"><a
 				href="#"><i class="fa fa-columns"
 					title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
