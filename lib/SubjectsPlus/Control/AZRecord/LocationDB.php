@@ -22,32 +22,23 @@ class LocationDB
     }
 
     public function insertLocation(Location $location) {
-            $format = $location->getFormat();
-            $call_number = $location->getCallNumber();
-            $location_param = $location->getLocation();
-            $access_r = $location->getAccessRestrictions();
-            $eres_display = $location->getEresDisplay();
-            $display_note = $location->getDisplayNote();
-            $help_guide = $location->getHelpguide();
-            $citation_guide = $location->getCitationGuide();
-            $ctags = $location->getCtags();
+        $this->connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
 
-            $this->connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
             $this->connection->beginTransaction();
             $statement = $this->connection->prepare("INSERT INTO location (format, call_number, location, access_restrictions, eres_display,
             display_note, helpguide, citation_guide, ctags)
             VALUES (:format, :call_number, :location, :access_restrictions, :eres_display,
             :display_note, :helpguide, :citation_guide, :ctags)");
-            $statement->bindParam(':format', $format);
-            $statement->bindParam(':call_number', $call_number);
-            $statement->bindParam(':location', $location_param);
-            $statement->bindParam(':access_restrictions', $access_r);
-            $statement->bindParam(':eres_display', $eres_display);
-            $statement->bindParam(':display_note',$display_note);
-            $statement->bindParam(':helpguide', $help_guide);
-            $statement->bindParam(':citation_guide', $citation_guide);
-            $statement->bindParam(':ctags', $ctags);
+            $statement->bindParam(':format', $location->getFormat());
+            $statement->bindParam(':call_number', $location->getCallNumber());
+            $statement->bindParam(':location', $location->getLocation());
+            $statement->bindParam(':access_restrictions', $location->getAccessRestrictions());
+            $statement->bindParam(':eres_display', $location->getEresDisplay());
+            $statement->bindParam(':display_note', $location->getDisplayNote());
+            $statement->bindParam(':helpguide', $location->getHelpguide());
+            $statement->bindParam(':citation_guide', $location->getCitationGuide());
+            $statement->bindParam(':ctags', $location->getCtags());
             $statement->execute();
             $this->last_insert = $this->connection->lastInsertId();
             $this->connection->commit();
@@ -56,31 +47,21 @@ class LocationDB
 
     }
     public function updateLocation(Location $location) {
-        $format = $location->getFormat();
-        $call_number = $location->getCallNumber();
-        $location_param = $location->getLocation();
-        $access_r = $location->getAccessRestrictions();
-        $eres_display = $location->getEresDisplay();
-        $display_note = $location->getDisplayNote();
-        $help_guide = $location->getHelpguide();
-        $citation_guide = $location->getCitationGuide();
-        $ctags = $location->getCtags();
-
         $this->connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
         $this->connection->beginTransaction();
         $statement = $this->connection->prepare("UPDATE location SET format = :format, call_number = :call_number, location = :location, access_restrictions = :access_restrictions, eres_display = :eres_display,
             display_note = :display_note, helpguide = :helpguide, citation_guide = :citation_guide, ctags = :ctags WHERE location_id = :location_id");
         $statement->bindParam(':location_id', $location->getId());
-        $statement->bindParam(':format', $format);
-        $statement->bindParam(':call_number', $call_number);
-        $statement->bindParam(':location', $location_param);
-        $statement->bindParam(':access_restrictions', $access_r);
-        $statement->bindParam(':eres_display', $eres_display);
-        $statement->bindParam(':display_note',$display_note);
-        $statement->bindParam(':helpguide', $help_guide);
-        $statement->bindParam(':citation_guide', $citation_guide);
-        $statement->bindParam(':ctags', $ctags);
+        $statement->bindParam(':format', $location->getFormat());
+        $statement->bindParam(':call_number', $location->getCallNumber());
+        $statement->bindParam(':location', $location->getLocation());
+        $statement->bindParam(':access_restrictions', $location->getAccessRestrictions());
+        $statement->bindParam(':eres_display', $location->getEresDisplay());
+        $statement->bindParam(':display_note', $location->getDisplayNote());
+        $statement->bindParam(':helpguide', $location->getHelpguide());
+        $statement->bindParam(':citation_guide', $location->getCitationGuide());
+        $statement->bindParam(':ctags', $location->getCtags());
         $statement->execute();
         $this->connection->commit();
 

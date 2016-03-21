@@ -43,7 +43,7 @@ class AzRecord
     }
 
     private function getRecordLocations($id) {
-        $locations_array = array();
+
         $locations = $this->db->getArrayById("SELECT * FROM location
 INNER JOIN location_title ON location.location_id = location_title.location_id
 INNER JOIN title ON location_title.title_id = title.title_id
@@ -57,7 +57,6 @@ WHERE title.title_id = :id", new LocationFactory(), $id);
 
 
     private function getSubjectAssociations($title_id) {
-        $subjects_array = array();
         $statement = $this->connection->prepare('SELECT subject_id FROM rank WHERE title_id = :title_id');
         $statement->bindParam(':title_id', $title_id);
         $statement->execute();

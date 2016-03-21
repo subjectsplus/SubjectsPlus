@@ -9,5 +9,5 @@ $db = new Querier();
 
 $record_list = new AzRecordList($db);
 
-//header('Content-Type: application/json');
-var_dump($record_list->());
+header('Content-Type: application/json');
+echo $record_list->toJSON();

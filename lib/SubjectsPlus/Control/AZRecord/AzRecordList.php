@@ -34,7 +34,7 @@ class AzRecordList implements OutputInterface
     }
 
     public function toJSON() {
-        return json_encode(array("records" => $this->records));
+        return json_encode($this->records);
     }
 
     public function toArray() {
