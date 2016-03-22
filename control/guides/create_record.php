@@ -4,7 +4,7 @@
     <fieldset>
 
        <label for="prefix"><?php echo _('Prefix'); ?>
-        <input id="prefix" required />
+        <input id="prefix" />
        </label>
 
 
@@ -12,38 +12,61 @@
         <label for="record-title"><?php echo _('Record Title'); ?></label>
         <input id="record-title" type="text" required />
        </label>
-        
+        <label for="alternate-title">
+        <input id="alternate-title' type="text"  />
+        </label>
         <label for="location"><?php echo _('Location (Enter URL)'); ?></label>
         <input id="location" type="text" required/>
         </label>
+
+        <label for="checkurl">
+            <span id="checkurl" class="checkurl_img_wrapper"><i alt="Check URL" title="Check URL" border="0" class="fa fa-globe fa-2x clickable"></i></span>
+        </label>
+
         <label for="description"><?php echo _('Description'); ?>
-        <textarea id="description" required></textarea>
+        <textarea id="description"></textarea>
         </label>
 
         <button id="advanced" class="pure-button" type="button"><?php echo _('Advanced Options'); ?></button>
-        <button id="add-record" class="pure-button pure-button-primary" type="button"><?php echo _('Create Record'); ?></button>
+        <button id="add-record" class="pure-button pure-button-primary" type="submit"><?php echo _('Create Record'); ?></button>
     </fieldset>
     <div class="notify"></div>
 </form>
 
-<script>
-    $('#add-record').on("click", function() {
-
-        record.title =  $('#record-title').val();
-        record.description = $('#description').val();
-        record.pre =  $('#description').val();
-        location.location = $('#location').val()
-        record.locations.push(location);
-
-
-        $.post("<?php echo getControlURL(); ?>/records/insert_record.php",JSON.stringify(record), function(data){
-            res = JSON.parse(data);
-            if (res.response !== "error") {
-                $('.notify').html("<a href='" + res.response + "'>"+ record.title + "</a>")
+    <script>
+        $('#create-record-from').on('submit', function (e) {
+            if(!this.checkValidity())
+            {
+                console.log(this.checkValidity());
+                e.preventDefault();
             } else {
+                e.preventDefault();
 
+                record.title =  $('#record-title').val();
+                record.description = $('#description').val();
+                record.pre =  $('#description').val();
+                location.location = $('#location').val()
+                record.locations.push(location);
+
+                $.post("<?php echo getControlURL(); ?>/records/insert_record.php",JSON.stringify(record), function(data){
+                    res = JSON.parse(data);
+                    if (res.response !== "error") {
+                        $('.notify').html("<a href='" + res.response + "'>"+ record.title + "</a>")
+                    } else {
+                        $('.notify').html("<?php echo _('There was an error inserting the record'); ?>")
+                    }
+                });
             }
         });
+
+
+    $('#checkurl').on('click', function() {
+        var location = $('#location').val();
+
+        $.post("<?php echo getControlURL(); ?>/records/record_bits.php", {type:"check_url", checkurl:location}, function(data) {
+            $('#checkurl').html(data);
+        });
+
     });
 </script>
 

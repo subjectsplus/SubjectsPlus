@@ -23,7 +23,7 @@ $title_insert_id = $title_db->insertTitle($title);
 if (isset($title_insert_id)) {
    echo json_encode(array("response"=> getControlURL() . '/records/record.php?record_id=' . $title_insert_id));
 } else {
-   echo json_encode(array("response" => "Error inserting the record"));
+   echo json_encode(array("response" => "error"));
 }
 
 
