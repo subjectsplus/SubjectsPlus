@@ -55,6 +55,17 @@ class Title implements TitleInterface,OutputInterface
      */
     public function setTitle($title)
     {
+        $re = "/\\b(the|a|an|la|les|el|las|los)/i";
+        preg_match($re, $title, $matches);
+
+        if (isset($matches[0])) {
+            $this->pre = $matches[0];
+            $pos = strpos($title, $matches[0]);
+            if ($pos !== false) {
+                $title = trim(substr_replace($title, "", $pos, strlen($matches[0])));
+            }
+        }
+
         $this->title = $title;
     }
 
