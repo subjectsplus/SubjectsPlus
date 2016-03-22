@@ -1,13 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jlittle
- * Date: 2/23/16
- * Time: 5:09 PM
+ *   @file Title.php
+ *   @brief
  *
- * Titles are metadata for Locations, which can have multiple titles
- *
- *
+ *   @author Jamie Little (little9)
+ *   @date Feb 2016
+ *   @todo
  */
 
 namespace SubjectsPlus\Control\AzRecord;

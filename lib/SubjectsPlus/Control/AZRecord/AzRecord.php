@@ -1,17 +1,18 @@
 <?php
+/**
+ *   @file AzRecord.php
+ *   @brief
+ *
+ *   @author Jamie Little (little9)
+ *   @date Feb 2016
+ *   @todo
+ */
+
 namespace SubjectsPlus\Control\AzRecord;
 
 use SubjectsPlus\Control\Querier;
 
-/**
- * Created by PhpStorm.
- * User: jlittle
- * Date: 2/23/16
- * Time: 4:06 PM
- *
- * An AZRecord is a combination of the location, title, and rank tables
- *
- */
+
 class AzRecord
 {
     private $connection;

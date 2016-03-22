@@ -1,9 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jlittle
- * Date: 2/25/16
- * Time: 12:11 PM
+ *   @file AzRecordList.php
+ *   @brief
+ *
+ *   @author Jamie Little (little9)
+ *   @date Feb 2016
+ *   @todo
  */
 
 namespace SubjectsPlus\Control\AzRecord;

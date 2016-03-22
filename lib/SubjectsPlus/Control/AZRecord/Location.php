@@ -1,12 +1,11 @@
 <?php
 /**
- * _created by _php_storm.
- * _user: jlittle
- * _date: 2/24/16
- * _time: 8:58 _a_m
+ *   @file Location.php
+ *   @brief
  *
- * _locations can represent _u_r_ls or physical items like books. _they can have multiple _titles.
- *
+ *   @author Jamie Little (little9)
+ *   @date Feb 2016
+ *   @todo
  */
 
 namespace SubjectsPlus\Control\AzRecord;
