@@ -12,7 +12,8 @@
         <label for="record-title"><?php echo _('Record Title'); ?></label>
         <input id="record-title" type="text" required />
        </label>
-        <label for="alternate-title">
+        <label for="alternate-title"><?php echo _('Alternate Title'); ?></label>
+
         <input id="alternate-title' type="text"  />
         </label>
         <label for="location"><?php echo _('Location (Enter URL)'); ?></label>
@@ -27,7 +28,6 @@
         <textarea id="description"></textarea>
         </label>
 
-        <button id="advanced" class="pure-button" type="button"><?php echo _('Advanced Options'); ?></button>
         <button id="add-record" class="pure-button pure-button-primary" type="submit"><?php echo _('Create Record'); ?></button>
     </fieldset>
     <div class="notify"></div>
