@@ -1,10 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jlittle
- * Date: 2/25/16
- * Time: 4:16 PM
+ *   @file LocationInterface.php
+ *   @brief
+ *
+ *   @author Jamie Little (little9)
+ *   @date Feb 2016
+ *   @todo
  */
+
 
 namespace SubjectsPlus\Control\AzRecord;
 

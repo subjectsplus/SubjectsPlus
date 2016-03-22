@@ -1,13 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jlittle
- * Date: 2/23/16
- * Time: 5:09 PM
+ *   @file Title.php
+ *   @brief
  *
- * Titles are metadata for Locations, which can have multiple titles
- *
- *
+ *   @author Jamie Little (little9)
+ *   @date Feb 2016
+ *   @todo
  */
 
 namespace SubjectsPlus\Control\AzRecord;
@@ -55,6 +53,17 @@ class Title implements TitleInterface,OutputInterface
      */
     public function setTitle($title)
     {
+        $re = "/\\b(the|a|an|la|les|el|las|los)/i";
+        preg_match($re, $title, $matches);
+
+        if (isset($matches[0])) {
+            $this->pre = $matches[0];
+            $pos = strpos($title, $matches[0]);
+            if ($pos !== false) {
+                $title = trim(substr_replace($title, "", $pos, strlen($matches[0])));
+            }
+        }
+
         $this->title = $title;
     }
 
