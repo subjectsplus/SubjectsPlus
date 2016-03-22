@@ -147,7 +147,7 @@ class Querier  {
 
     }
     public function getArrayById($sql, $factory, $id) {
-        $objects = [];
+        $objects = array();
         $statement = $this->_connection->prepare($sql);
         $statement->bindParam(':id', $id);
         $statement->execute();
