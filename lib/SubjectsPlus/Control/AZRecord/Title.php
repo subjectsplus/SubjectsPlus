@@ -58,9 +58,12 @@ class Title implements TitleInterface,OutputInterface
 
         if (isset($matches[0])) {
             $this->pre = $matches[0];
-            $pos = strpos($title, $matches[0]);
-            if ($pos !== false) {
-                $title = trim(substr_replace($title, "", $pos, strlen($matches[0])));
+            $title_array = explode(" ",$title);
+            if (isset($title_array[0])) {
+                if ($title_array[0] == $matches[0]) {
+                    $title_array[0] = "";
+                }
+                $title = implode($title_array);
             }
         }
 

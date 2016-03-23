@@ -139,6 +139,10 @@
                             record.description = $('#description').val();
                             record.pre = $('#prefix').val();
                             location.location = $('#location').val();
+
+                            record.subjects = [];
+                            record.locations = [];
+
                             record.subjects.push({'subject_id': $('#guide-parent-wrap').data().subjectId});
                             record.locations.push(location);
 
