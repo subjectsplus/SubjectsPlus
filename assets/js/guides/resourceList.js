@@ -186,9 +186,8 @@ function resourceList() {
 					myResourceList.settings.dbSearchResults.empty();
 					var search_url;
 					var search_term = myResourceList.settings.dbSearchBox.val();
-					var limit_az = myResourceList.settings.limitAz.prop("checked");
 
-					if (limit_az) {
+					if ($('#limit-az').prop("checked")) {
 						search_url = myResourceList.settings.autoCompleteUrlAzList;
 					} else {
 						search_url = myResourceList.settings.autoCompleteUrl;
