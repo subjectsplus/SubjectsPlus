@@ -6,8 +6,6 @@ var record = {
     "pre": "",
     "last_modified_by": "",
     "last_modified": "",
-    "subjects": [{
-        "subject_id": "1"
-    }],
+    "subjects": [],
     "locations" : []
 };
