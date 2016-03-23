@@ -63,7 +63,7 @@ class Title implements TitleInterface,OutputInterface
                 if ($title_array[0] == $matches[0]) {
                     $title_array[0] = "";
                 }
-                $title = implode($title_array);
+                $title = implode(" ",$title_array);
             }
         }
 
