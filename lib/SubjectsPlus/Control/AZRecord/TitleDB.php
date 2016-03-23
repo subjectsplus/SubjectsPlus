@@ -49,7 +49,7 @@ class TitleDB
             if (isset($subjects)) {
                 $this->connection->beginTransaction();
                 foreach ($subjects as $subject) {
-                    $statement = $this->connection->prepare("INSERT INTO rank (title_id,subject_id) VALUES (:title_id,:subject_id)");
+                    $statement = $this->connection->prepare("INSERT INTO rank (title_id,subject_id,source_id, rank) VALUES (:title_id,:subject_id, 3, 1)");
                     $statement->bindParam(':subject_id', $subject['subject_id']);
                     $statement->bindParam(':title_id', $this->last_insert);
                     $statement->execute();

@@ -23,7 +23,7 @@ class TitleFactory
         $my_title->setDescription($title['description']);
         $my_title->setLastModifiedBy($title['last_modified_by']);
         $my_title->setLastModified($title['last_modified']);
-
+        $my_title->setSubjects($title['subjects']);
         return $my_title;
 
     }
