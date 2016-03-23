@@ -47,30 +47,6 @@
                 <?php } ?>
 
 
-                <div class="db-list-content" style="display: block;">
-
-                    <h4>Records Selected:</h4>
-
-                    <span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox"> <span class="db-list-input-label"> Icons </span>
-                    <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox"> <span class="db-list-input-label">Descriptions</span>
-                    <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox"> <span class="db-list-input-label">Notes</span>
-
-                    <ul class="db-list-results ui-sortable">
-                        <?php foreach($data as $datum): ?>
-                            <?php foreach($datum as $token): ?>
-                        <li class="db-list-item-draggable" value="<?php echo $token['record_id']; ?>">
-                            <span class="db-list-label"><?php echo $token['title']; ?></span>
-                            <div>
-                                <span class="show-icons-toggle db-list-toggle"><i class="fa fa-minus"></i><i class="fa fa-check" style="display: none;"></i> Icons  </span>
-                                <span class="show-description-toggle db-list-toggle"><i class="fa fa-minus"></i> <i class="fa fa-check" style="display: none;"></i> Description </span>
-                                <span class="include-note-toggle db-list-toggle"><i class="fa fa-minus"></i><i class="fa fa-check" style="display: none;"></i> Note </span>
-                            </div>
-                        </li>
-                        <?php endforeach; ?>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-
 
                 <!--display results selected-->
                 <div class="db-list-content">
@@ -168,6 +144,11 @@
                             $('#checkurl').html(data);
                         });
 
+                    });
+
+
+                    CKEDITOR.replace('description', {
+                        toolbar : 'Basic'
                     });
                 </script>
 

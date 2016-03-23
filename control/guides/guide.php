@@ -492,6 +492,7 @@ ob_end_flush ();
 
 
 
+
   </div>
 </div>
 
@@ -511,5 +512,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 </div>
 <!--end .guide-parent-wrap-->
+
+<script src="../../ckeditor/ckeditor.js"></script>
 
 <?php include("../includes/guide_footer.php"); ?>
