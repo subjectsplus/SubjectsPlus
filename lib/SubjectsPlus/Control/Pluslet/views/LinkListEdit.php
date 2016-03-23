@@ -73,19 +73,19 @@
             <div class="pure-u-1-3">
                 <h3>Add New Record</h3>
 
-                <form id="create-record-from" class="pure-form pure-form-stacked">
+                <form id="create-record-form" class="pure-form pure-form-stacked">
                     <fieldset>
 
                         <label for="record-title"><?php echo _('Record Title'); ?>
-                            <input id="record-title" type="text" required/>
+                            <input id="record-title" type="text" value="" required/>
                         </label>
 
 
                         <label for="alternate-title"><?php echo _('Alternate Title'); ?>
-                            <input id="alternate-title" type="text"/>
+                            <input id="alternate-title" value="" type="text"/>
                         </label>
                         <label for="location"><?php echo _('Location (Enter URL)'); ?>
-                            <input id="location" type="text" required/>
+                            <input id="location" type="text"  value="" required/>
                         </label>
 
                         <label for="checkurl">
@@ -94,7 +94,7 @@
                         </label>
 
                         <label for="description"><?php echo _('Description'); ?>
-                            <textarea id="description"></textarea>
+                            <textarea id="description" value=""></textarea>
                         </label>
 
                         <button id="add-record" class="pure-button pure-button-primary"
@@ -104,7 +104,7 @@
                 </form>
 
                 <script>
-                    $('#create-record-from').on('submit', function (e) {
+                    $('#create-record-form').on('submit', function (e) {
                         if (!this.checkValidity()) {
                             console.log(this.checkValidity());
                             e.preventDefault();
@@ -126,6 +126,8 @@
                                 res = JSON.parse(data);
                                 if (res.response !== "error") {
                                     $('.notify').html("<a target='_blank' href='" + res.response + "'>" + record.title + "</a>")
+                                    document.getElementById("create-record-form").reset();
+                                    CKEDITOR.instances.description.setData("");
                                 } else {
                                     $('.notify').html("<?php echo _('There was an error inserting the record'); ?>")
                                 }
