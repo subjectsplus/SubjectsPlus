@@ -120,6 +120,12 @@ function pluslet() {
 					//Close main flyout when a pluslet is dropped
 					$('#main-options').slideReveal('hide');
 
+
+					if(item_type == 'LinkList') {
+						console.log('new linklist box dropped');
+						$('.linklist_edit_colorbox_btn').colorbox({open: true, inline:true, width:"90%", height:"90%"});
+					}
+
 					
 				});
 			}, 

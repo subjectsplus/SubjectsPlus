@@ -43,7 +43,8 @@ function resourceList() {
 				showIconsToggle: $(".show-icons-toggle"),
 				showNoteToggle: $(".include-note-toggle"),
 				click_count: 0,
-				searchTermMinimumLength: 3
+				searchTermMinimumLength: 3,
+				linkListEditBtn: $('#linklist_edit_colorbox_btn'),
 
 			},
 
@@ -84,6 +85,8 @@ function resourceList() {
 
 				myResourceList.databaseSearch();
 				myResourceList.addListToPage();
+
+				myResourceList.loadLinkListEditModal();
 
 
 
@@ -160,6 +163,18 @@ function resourceList() {
 				$('body').on("click", ".include-note-toggle", function () {
 					myResourceList.toggleOptions($(this));
 				});
+
+				$('#show_all_icons_input').on('click', function() {
+					myResourceList.toggleOptions($(".show-icons-toggle"));
+				});
+
+				$('#show_all_desc_input').on('click', function() {
+					myResourceList.toggleOptions($(".show-description-toggle"));
+				});
+
+				$('#show_all_notes_input').on('click', function() {
+					myResourceList.toggleOptions($(".include-note-toggle"));
+				});
 			},
 
 
@@ -174,9 +189,9 @@ function resourceList() {
 					var limit_az = myResourceList.settings.limitAz.prop("checked");
 
 					if (limit_az) {
-						search_url = myResourceList.settings.autoCompleteUrl;
-					} else {
 						search_url = myResourceList.settings.autoCompleteUrlAzList;
+					} else {
+						search_url = myResourceList.settings.autoCompleteUrl;
 					}
 
 
@@ -191,14 +206,17 @@ function resourceList() {
 						$.get(search_url + search_term, function (data) {
 
 							if (data.length !== 0) {
+								console.log(data);
 								for (var i = 0; i < 10; i++) {
 									try {
 										if (data[i]['content_type'] == "Record") {
 											
-											myResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
-													"<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
-													"<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +
-													"<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div></li>");
+											myResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">"
+													+ "<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>"
+													+ "<div class=\"pure-u-1-5\" style=\"text-align:right;\">"
+													+ "<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div>"
+												    + "<div>" + data[i].location_url + "</div>"
+												    + "</li>");
 										}
 
 									} catch (e) {
@@ -221,43 +239,50 @@ function resourceList() {
 			addListToPage: function () {
 				/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
 				myResourceList.settings.dbListButton.on("click", function () {
-					var ps = pluslet();
-					ps.dropPluslet('', 'Basic', '');
-					var waitCKEDITOR = setInterval(function () {
-						if (window.CKEDITOR) {
-							clearInterval(waitCKEDITOR);
-
-							var token_string = "<ul class='token-list'>";
-
-							$(".db-list-item-draggable").each(function (data) {
-								var title = $(this).find('.db-list-label').text();
-								var record_id = $(this).val();
-
-								// Grab the options
-								var display_options = $(this).data().display_options;
 
 
-								// If these are undefined, make them 0
-								display_options = (typeof display_options === 'undefined') ? "000" : display_options;
+					var token_string = "<ul class='token-list'>";
 
 
-								if ($(this).text()) {
-									token_string += '<span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' + record_id + "},{" + title + "}" + ",{" + display_options + "}}</span>";
-								}
-							});
+					$(".db-list-item-draggable").each(function (data) {
 
-							token_string += "</ul>";
+						var title = $(this).find('.db-list-label').text();
+						var record_id = $(this).val();
 
+						// Grab the options
+						var display_options = $(this).data().display_options;
 
+						// If these are undefined, make them 0
+						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
 
-							var ck_index = Object.keys(CKEDITOR.instances).length - 1;
-							CKEDITOR.instances[Object.keys(CKEDITOR.instances)[ck_index]].setData(token_string.trim());
-
-							myResourceList.settings.click_count++;
-							myResourceList.settings.dbListResults.empty();
+						if ($(this).text()) {
+							token_string += '<li><span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' + record_id + "},{" + title + "}" + ",{" + display_options + "}}</span></li>";
 						}
-					}, 1000);
+					});
+
+					token_string += "</ul>";
+
+					//console.log($('#' + new_pluslet_id).find('.pluslet_body'));
+
+					$.colorbox.close();
+
+					//console.log(token_string.trim());
+
+					myResourceList.settings.click_count++;
+					myResourceList.settings.dbListResults.empty();
+
+					var new_pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
+
+					$('#' + new_pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
 				});
+			},
+
+			loadLinkListEditModal: function() {
+
+				$.colorbox.remove();
+
+				$('.linklist_edit_colorbox_btn').colorbox({inline:true, width:"90%", height:"90%"});
+
 			}
 	};
 	return myResourceList; 

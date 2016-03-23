@@ -19,6 +19,10 @@
 	<div class="db-list-content">
 
 		<h4>Databases Selected:</h4>
+
+		<span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox" /> <span class="db-list-input-label"> Icons </span>
+		 <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox" /> <span class="db-list-input-label">Descriptions</span>
+		 <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox" /> <span class="db-list-input-label">Notes</span>
 		<ul class="db-list-results">
 		</ul>
 	</div>
