@@ -71,7 +71,7 @@ function resourceList() {
 				myResourceList.bindUiActions();
 
 				});
-				
+
 				return myResourceList;
 			},
 
@@ -95,7 +95,7 @@ function resourceList() {
 
 			addToList: function () {
 				/** This function adds the selected result to the list of database tokens. */
-				$('body').on("click", '.add-to-list-button', function () {
+				$('.databases-searchresults').on("click", '.add-to-list-button', function (e) {
 
 					myResourceList.settings.dbListButtons.show();
 					myResourceList.settings.dbListContent.show();
@@ -104,14 +104,15 @@ function resourceList() {
 					databaseToken.label = $(this).attr('data-label').trim();
 					databaseToken.record_id = $(this).val();
 
+					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
+					"</span>" + myResourceList.strings.displayToggles;
 
-
-					myResourceList.settings.dbListResults.append("<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-							"</span>" + myResourceList.strings.displayToggles);
+					myResourceList.settings.dbListResults.after(tokenHtml);
 					myResourceList.settings.dbListResults.sortable();
+
+
 					myResourceList.settings.dbListResults.disableSelection();
 					$('.db-list-item-draggable').last().find('.fa-check').hide();
-
 
 				});
 			},
@@ -193,7 +194,6 @@ function resourceList() {
 						search_url = myResourceList.settings.autoCompleteUrl;
 					}
 
-
 					if ($(this).val() === "") {
 						myResourceList.settings.dbSearchResults.html(myResourceList.strings.noResults);
 
@@ -236,9 +236,7 @@ function resourceList() {
 			},
 
 			addListToPage: function () {
-				/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
 				myResourceList.settings.dbListButton.on("click", function () {
-
 
 					var token_string = "<ul class='token-list'>";
 
