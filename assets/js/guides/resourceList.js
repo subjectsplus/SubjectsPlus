@@ -87,6 +87,7 @@ function resourceList() {
 				myResourceList.addListToPage();
 
 				myResourceList.loadLinkListEditModal();
+				myResourceList.removeLinkListItem();
 
 
 
@@ -105,7 +106,9 @@ function resourceList() {
 					databaseToken.record_id = $(this).val();
 
 					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-					"</span>" + myResourceList.strings.displayToggles;
+					"</span>" +
+						"<span><i class='fa fa-remove' id='" + databaseToken.record_id +"'></i></span>" +
+						myResourceList.strings.displayToggles;
 
 					myResourceList.settings.dbListResults.append(tokenHtml);
 					myResourceList.settings.dbListResults.sortable();
@@ -257,7 +260,10 @@ function resourceList() {
 						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
 
 						if ($(this).text()) {
-							token_string += "<li class='db-list-item-draggable' value='" + record_id + "'><span class='token-list-item subsplus_resource' contenteditable='false'>{{dab},{" + record_id + "},{placeholder},{" + display_options + "}}</span></li>";
+							token_string += "<li class='db-list-item-draggable' value='" + record_id + "'>" +
+								"<span class='token-list-item subsplus_resource' contenteditable='false'>{{dab},{" + record_id + "},{placeholder},{" + display_options + "}}" +
+								"</span>" +
+								"</li>";
 
 						}
 					});
@@ -287,10 +293,16 @@ function resourceList() {
 			},
 
 			loadLinkListEditModal: function() {
-				
 				$('.linklist_edit_colorbox_btn').colorbox({inline:true, width:"90%", height:"90%"});
+			},
 
+			removeLinkListItem: function() {
+				$('body').on('click', 'i', function() {
+					console.log($(this).parent('li'));
+					$(this).parent().parent('li').remove();
+				})
 			}
+
 	};
 	return myResourceList; 
 };
