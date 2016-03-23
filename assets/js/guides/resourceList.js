@@ -203,9 +203,8 @@ function resourceList() {
 					if (search_term.length > myResourceList.settings.searchTermMinimumLength) {
 
 						$.get(search_url + search_term, function (data) {
-
 							if (data.length !== 0) {
-								console.log(data);
+
 								for (var i = 0; i < 10; i++) {
 									try {
 										if (data[i]['content_type'] == "Record") {
@@ -240,10 +239,10 @@ function resourceList() {
 				myResourceList.settings.dbListButton.on("click", function () {
 
 
-					var token_string = "<ul class='token-list'>";
 
+					var token_string = "";
 
-					$(".db-list-item-draggable").each(function (data) {
+						$(".db-list-item-draggable").each(function (data) {
 
 						var title = $(this).find('.db-list-label').text();
 						var record_id = $(this).val();
@@ -255,31 +254,32 @@ function resourceList() {
 						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
 
 						if ($(this).text()) {
-							token_string += '<li><span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' + record_id + "},{" + title + "}" + ",{" + display_options + "}}</span></li>";
+							token_string += "<li class='db-list-item-draggable' value='" + record_id + "'><span class='token-list-item subsplus_resource' contenteditable='false'>{{dab},{" + record_id + "},{" + title + "},{" + display_options + "}}</span></li>";
+
 						}
 					});
 
-					token_string += "</ul>";
-
-					//console.log($('#' + new_pluslet_id).find('.pluslet_body'));
 
 					$.colorbox.close();
 
-					//console.log(token_string.trim());
 
 					myResourceList.settings.click_count++;
 					myResourceList.settings.dbListResults.empty();
 
 					var new_pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
 
-					$('#' + new_pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
+
+					if(new_pluslet_id) {
+						$('#' + new_pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
+					} else {
+						$('#pluslet-185').find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
+					}
+
 				});
 			},
 
 			loadLinkListEditModal: function() {
-
-				$.colorbox.remove();
-
+				
 				$('.linklist_edit_colorbox_btn').colorbox({inline:true, width:"90%", height:"90%"});
 
 			}

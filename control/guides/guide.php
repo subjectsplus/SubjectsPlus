@@ -467,14 +467,7 @@ ob_end_flush ();
 							title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
 				</ul>
 			</div>
-
-
-			<!--custom database list-->
-          
-          <?php include_once('flyouts/create_database_list.php'); ?>
-          
-
-          
+			
           <!--analytics-->
           <?php include_once('flyouts/analytics.php'); ?>
 

@@ -36,7 +36,7 @@
             </div>
             <div class="pure-u-1-3">
                 <h3>Your List</h3>
-<?php echo $this->_body; ?>
+
                 <!--display results selected-->
                 <div class="db-list-content">
 
@@ -48,12 +48,14 @@
 
                     <ul class="db-list-results">
 
-                        <?php if($this->_body) {
+                        <?php if(isset($this->_tokens)) {
 
-                            echo $this->_body;
+                            echo $this->_tokens;
                         } ?>
 
                     </ul>
+
+                    
                 </div>
 
                 <!--buttons-->
