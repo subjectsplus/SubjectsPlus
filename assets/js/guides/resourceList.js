@@ -107,7 +107,7 @@ function resourceList() {
 					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
 					"</span>" + myResourceList.strings.displayToggles;
 
-					myResourceList.settings.dbListResults.after(tokenHtml);
+					myResourceList.settings.dbListResults.append(tokenHtml);
 					myResourceList.settings.dbListResults.sortable();
 
 
@@ -241,17 +241,23 @@ function resourceList() {
 
 						$(".db-list-item-draggable").each(function (data) {
 
+							console.log('data: ' + data)
+
 						var title = $(this).find('.db-list-label').text();
+							console.log('title: ' + title);
+
 						var record_id = $(this).val();
+							console.log('record_id: ' + record_id);
 
 						// Grab the options
 						var display_options = $(this).data().display_options;
+						console.log('display_options: ' + display_options);
 
 						// If these are undefined, make them 0
 						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
 
 						if ($(this).text()) {
-							token_string += "<li class='db-list-item-draggable' value='" + record_id + "'><span class='token-list-item subsplus_resource' contenteditable='false'>{{dab},{" + record_id + "},{" + title + "},{" + display_options + "}}</span></li>";
+							token_string += "<li class='db-list-item-draggable' value='" + record_id + "'><span class='token-list-item subsplus_resource' contenteditable='false'>{{dab},{" + record_id + "},{placeholder},{" + display_options + "}}</span></li>";
 
 						}
 					});
@@ -264,12 +270,17 @@ function resourceList() {
 					myResourceList.settings.dbListResults.empty();
 
 					var new_pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
+					var pluslet_id = "";
+					if($(this).attr('data-linklist-tmp-pluslet_id') > 0) {
+						pluslet_id = $.attr('data-linklist-tmp-pluslet_id');
+					}
+					console.log('pluslet_id: ' + $(this).attr('data-linklist-tmp-pluslet_id'));
 
 
 					if(new_pluslet_id) {
 						$('#' + new_pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
 					} else {
-						$('#pluslet-185').find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
+						$('#pluslet-' + pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
 					}
 
 				});

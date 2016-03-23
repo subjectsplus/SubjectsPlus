@@ -36,7 +36,7 @@
             </div>
             <div class="pure-u-1-3">
                 <h3>Your List</h3>
-                
+
                 <!--display results selected-->
                 <div class="db-list-content">
 
@@ -55,12 +55,21 @@
 
                     </ul>
 
-                    
                 </div>
+
+
+                <?php if( (isset($this->_pluslet_id)) && (!empty($this->_pluslet_id)) ) {
+
+                    $data_linklist_tmp_pluslet_id = $this->_pluslet_id;
+                } else {
+                    $data_linklist_tmp_pluslet_id = "";
+                    
+                } ?>
+
 
                 <!--buttons-->
                 <div class="db-list-buttons">
-                    <button class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
+                    <button data-linklist-tmp-pluslet_id="<?php echo  $data_linklist_tmp_pluslet_id ?>" class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
                     <button class="pure-button pure-button-primary dblist-reset-button"><?php print _("Reset List Box"); ?></button>
                 </div>
 
