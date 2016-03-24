@@ -80,7 +80,7 @@ function pluslet() {
 			    });
 
 			},
-			dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
+				dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
 				var g = guide();
 				var subjectId = g.getSubjectId();
 			    // Create new node below, using a random number

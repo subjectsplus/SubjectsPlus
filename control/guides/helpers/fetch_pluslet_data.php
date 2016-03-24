@@ -1,4 +1,11 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: cbrownroberts
+ * Date: 3/24/16
+ * Time: 12:19 PM
+ */
+
 header("Content-Type: application/json");
 header("Expires: on, 01 Jan 1970 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -8,15 +15,13 @@ header("Pragma: no-cache");
 require_once("../../includes/autoloader.php");
 require_once("../../includes/config.php");
 
+use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\Guide\PlusletData;
 
-use SubjectsPlus\Control\FavoritePluslet;
+$db = new Querier();
+$pluslet_id = $_GET['pluslet_id'];
 
-$objFavPluslets = new FavoritePluslet();
-$staff_id = $objFavPluslets->setStaffId($_GET['staff_id']);
-$favorites = $objFavPluslets->getFavoritePluslets($staff_id);
+$objPluslet = new PlusletData($db);
+$pluslet = $objPluslet->fetchPlusletById($pluslet_id);
 
-
-echo json_encode($favorites);
-
-
-?>
+echo json_encode($pluslet);

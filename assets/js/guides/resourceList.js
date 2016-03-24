@@ -26,6 +26,7 @@ function resourceList() {
 
 				autoCompleteUrl: "../includes/autocomplete_data.php?collection=records&term=",
 				autoCompleteUrlAzList: "../includes/autocomplete_data.php?collection=azrecords&term=",
+				plusletDataUrl: "helpers/fetch_pluslet_data.php",
 				dbListButton: $(".dblist-button"),
 				dbListButtons: $(".db-list-buttons"),
 				dbListContent: $('.db-list-content'),
@@ -87,7 +88,7 @@ function resourceList() {
 				myResourceList.addListToPage();
 
 				myResourceList.loadLinkListEditModal();
-				myResourceList.removeLinkListItem();
+
 
 
 
@@ -106,9 +107,7 @@ function resourceList() {
 					databaseToken.record_id = $(this).val();
 
 					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-					"</span>" +
-						"<span><i class='fa fa-remove' id='" + databaseToken.record_id +"'></i></span>" +
-						myResourceList.strings.displayToggles;
+					"</span>" + myResourceList.strings.displayToggles;
 
 					myResourceList.settings.dbListResults.append(tokenHtml);
 					myResourceList.settings.dbListResults.sortable();
@@ -240,67 +239,116 @@ function resourceList() {
 			addListToPage: function () {
 				myResourceList.settings.dbListButton.on("click", function () {
 
-					var token_string = "";
+
+					if($(this).attr('data-linklist-tmp-pluslet_id') > 0) {
+						var pluslet_id = $.attr('data-linklist-tmp-pluslet_id');
+					} else {
+						var pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
+					}
+					//console.log('pluslet_id: ' + $(this).attr('data-linklist-tmp-pluslet_id'));
+
+					var linkList = "<div id='LinkList-body'>";
+					linkList += '<div class="link-list-text-top"></div>';
+
+					linkList += '<ul class="link-list" data-link-list-pluslet-id="' + pluslet_id + '">'
+
 
 						$(".db-list-item-draggable").each(function (data) {
+							//console.log('data: ' + data)
 
-							console.log('data: ' + data)
+							var label = $(this).find('.db-list-label').text();
+							//console.log('label: ' + label);
 
-						var title = $(this).find('.db-list-label').text();
-							console.log('title: ' + title);
+							var record_id = $(this).val();
+							//console.log('record_id: ' + record_id);
 
-						var record_id = $(this).val();
-							console.log('record_id: ' + record_id);
+							// Grab the options
+							var display_options = $(this).data().display_options;
+							//console.log('display_options: ' + display_options);
 
-						// Grab the options
-						var display_options = $(this).data().display_options;
-						console.log('display_options: ' + display_options);
+							// If these are undefined, make them 0
+							display_options = (typeof display_options === 'undefined') ? "000" : display_options;
 
-						// If these are undefined, make them 0
-						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
+							if ($(this).text()) {
+								linkList += "<li data-link-list-label='" + label + "' data-link-list-item-id='" + record_id + "' data-link-list-display-options='" + display_options + "'>" +
+								"{{dab},{" + record_id + "},{placeholder},{" + display_options + "}}</li>";
 
-						if ($(this).text()) {
-							token_string += "<li class='db-list-item-draggable' value='" + record_id + "'>" +
-								"<span class='token-list-item subsplus_resource' contenteditable='false'>{{dab},{" + record_id + "},{placeholder},{" + display_options + "}}" +
-								"</span>" +
-								"</li>";
-
-						}
+							}
 					});
 
+					linkList += '</ul>';
 
-					$.colorbox.close();
-
+					linkList += '</div>';
 
 					myResourceList.settings.click_count++;
 					myResourceList.settings.dbListResults.empty();
 
 					var new_pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
-					var pluslet_id = "";
-					if($(this).attr('data-linklist-tmp-pluslet_id') > 0) {
-						pluslet_id = $.attr('data-linklist-tmp-pluslet_id');
-					}
-					console.log('pluslet_id: ' + $(this).attr('data-linklist-tmp-pluslet_id'));
+
+					console.log('pluslet_id: ' + $(this).attr('data-linklist-tmp-pluslet-id'));
+
+					linkList += '<div class="link-list-text-bottom"></div>';
 
 
 					if(new_pluslet_id) {
-						$('#' + new_pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
+						$('#' + new_pluslet_id).find('.pluslet_body').append(linkList.trim());
 					} else {
-						$('#pluslet-' + pluslet_id).find('.pluslet_body').append('<div id="LinkList-body">' + token_string.trim() + '</div>');
+						$('#pluslet-' + pluslet_id).find('.pluslet_body').append(linkList.trim());
+						//console.log(linkList.trim());
 					}
 
+					$.colorbox.close();
 				});
 			},
 
 			loadLinkListEditModal: function() {
-				$('.linklist_edit_colorbox_btn').colorbox({inline:true, width:"90%", height:"90%"});
-			},
 
-			removeLinkListItem: function() {
-				$('body').on('click', 'i', function() {
-					console.log($(this).parent('li'));
-					$(this).parent().parent('li').remove();
-				})
+				if($(this).attr('data-linklist-tmp-pluslet_id') > 0) {
+					var pluslet_id = $.attr('data-linklist-tmp-pluslet_id');
+				} else {
+					var pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
+				}
+
+				myResourceList.settings.linkListEditBtn.on('click', function() {
+
+					$.ajax({
+						url: myResourceList.settings.plusletDataUrl,
+						type: "GET",
+						dataType: "json",
+						data: { pluslet_id: pluslet_id },
+						success: function (data) {
+							console.log(data.body);
+							var body = data.body;
+							var ul = $(body).find('ul.link-list:first-child');
+
+							var newlinkList = "";
+
+							$('ul.link-list li').each(function() {
+
+								var databaseToken = Object.create(myDatabaseToken);
+								databaseToken.label = $(this).attr('data-link-list-label');
+								databaseToken.record_id = $(this).attr('data-link-list-item-id');
+
+								newlinkList += "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
+									"</span></li>";
+
+
+							});
+
+							$('.db-list-results').append(newlinkList.trim());
+
+
+						}
+					});
+
+					myResourceList.settings.dbListButtons.show();
+					myResourceList.settings.dbListContent.show();
+
+
+
+				});
+				$('.linklist_edit_colorbox_btn').colorbox({inline:true, width:"90%", height:"90%"});
+
 			}
 
 	};

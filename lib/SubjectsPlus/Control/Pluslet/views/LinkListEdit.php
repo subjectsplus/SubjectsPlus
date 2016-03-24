@@ -14,9 +14,10 @@
 <!-- colorbox  -->
 <div style='display:none'>
     <div id="linklist_edit_colorbox_<?php echo $this->_pluslet_id; ?>" >
+        <h2>Pluslet id: <?php echo $this->_pluslet_id; ?></h2>
         <div class="pure-g">
             <div class="pure-u-1-3">
-                <h2>Pluslet id: <?php echo $this->_pluslet_id; ?></h2>
+
                 <h3><?php print _("Record Search Box"); ?></h3>
 
                 <!--display db results list-->
@@ -35,25 +36,22 @@
 
             </div>
             <div class="pure-u-1-3">
-                <h3>Your List</h3>
+                <h3>Selected Records</h3>
+
+                <span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox" /> <span class="db-list-input-label"> Icons </span>
+                <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox" /> <span class="db-list-input-label">Descriptions</span>
+                <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox" /> <span class="db-list-input-label">Notes</span>
 
                 <!--display results selected-->
                 <div class="db-list-content">
 
-                    <h4>Records Selected:</h4>
+                    <div id='LinkList-body'>
 
-                    <span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox" /> <span class="db-list-input-label"> Icons </span>
-                    <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox" /> <span class="db-list-input-label">Descriptions</span>
-                    <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox" /> <span class="db-list-input-label">Notes</span>
+                        <ul class="db-list-results ui-sortable">
 
-                    <ul class="db-list-results">
+                        </ul>
 
-                        <?php if(isset($this->_tokens)) {
-
-                            echo $this->_tokens;
-                        } ?>
-
-                    </ul>
+                    </div>
 
                 </div>
 
@@ -63,13 +61,13 @@
                     $data_linklist_tmp_pluslet_id = $this->_pluslet_id;
                 } else {
                     $data_linklist_tmp_pluslet_id = "";
-                    
+
                 } ?>
 
 
                 <!--buttons-->
                 <div class="db-list-buttons">
-                    <button data-linklist-tmp-pluslet_id="<?php echo  $data_linklist_tmp_pluslet_id ?>" class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
+                    <button data-linklist-tmp-pluslet-id="<?php echo  $data_linklist_tmp_pluslet_id ?>" class="pure-button pure-button-primary dblist-button"><?php print _("Create List Box"); ?></button>
                     <button class="pure-button pure-button-primary dblist-reset-button"><?php print _("Reset List Box"); ?></button>
                 </div>
 

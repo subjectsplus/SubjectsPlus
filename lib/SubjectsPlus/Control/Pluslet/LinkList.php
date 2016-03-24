@@ -54,11 +54,12 @@ class Pluslet_LinkList extends Pluslet
         if(!empty($result)) {
             $this->_body = $result[0]['body'];
             parent::tokenizeText();
-            $this->_list  = '<ul class="db-list-results">';
-            $this->_list .= $this->_body;
-            $this->_list .= "</ul>";
 
-            $this->_body = $this->_list;
+            $this->_list = $this->_body;
+
+            $this->_body = "<div id='LinkList-body'>";
+            $this->_body .= $this->_list;
+            $this->_body .= "</div>";
             //var_dump($this->_tokens);
         }
 
@@ -76,25 +77,22 @@ class Pluslet_LinkList extends Pluslet
         $statement->execute();
         $result = $statement->fetchAll();
 
-        if(!empty($result)) {
-            $this->_body = $result[0]['body'];
-            parent::tokenizeText();
+        //var_dump($result[0]['body']);
 
-            $this->_tokens = $this->_body;
-            //var_dump($this->_tokens);
+        if(!empty($result)) {
+
+            $this->_linkList = $result[0]['body'];
+
+            $this->_body = "<div id='LinkList-body'>";
+            $this->_body .= $this->_linkList;
+            $this->_body .= "</div>";
         }
 
-
-
-        $this->_body = "";
         $this->_body .= "<p class=\"faq-alert\">" . _("Click 'Edit' to edit your Link List box.") . "</p>";
 
-        $this->_body .= "<a class='cboxElement linklist_edit_colorbox_btn' href='#linklist_edit_colorbox_".$this->_pluslet_id."'>Edit</a>";
-
+        $this->_body .= "<a class='cboxElement linklist_edit_colorbox_btn' id='linklist_edit_colorbox_btn' href='#linklist_edit_colorbox_".$this->_pluslet_id."'>Edit</a>";
 
         $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
-
-
     }
 
 
