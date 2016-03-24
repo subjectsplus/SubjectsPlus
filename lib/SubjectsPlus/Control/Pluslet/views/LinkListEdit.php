@@ -106,39 +106,43 @@
                 </form>
 
                 <script>
-                    $('#create-record-form').on('submit', function (e) {
-                        if (!this.checkValidity()) {
-                            console.log(this.checkValidity());
-                            e.preventDefault();
-                        } else {
-                            e.preventDefault();
-
-                            record.title = $('#record-title').val();
-                            record.description = $('#description').val();
-                            record.pre = $('#prefix').val();
-                            location.location = $('#location').val();
-
-                            record.subjects = [];
-                            record.locations = [];
-
-                            record.subjects.push({'subject_id': $('#guide-parent-wrap').data().subjectId});
-                            record.locations.push(location);
-
-                            $.post("<?php echo getControlURL(); ?>/records/insert_record.php", JSON.stringify(record), function (data) {
-                                res = JSON.parse(data);
-                                if (res.response !== "error") {
-                                    $('.notify').html("<a target='_blank' href='" + res.response + "'>" + record.title + "</a>")
-                                    document.getElementById("create-record-form").reset();
-                                    CKEDITOR.instances.description.setData("");
-                                } else {
-                                    $('.notify').html("<?php echo _('There was an error inserting the record'); ?>")
-                                }
-                            });
-                        }
+                    $('#create-record-form').on('submit', function (event) {
+                        submitRecordForm(event);
                     });
 
-
                     $('#checkurl').on('click', function () {
+                        checkUrl();
+                    });
+
+                    function submitRecordForm(event) {
+                        // Override the form submit action. Doing this lets you use the html5 form validation
+                        // techniques/controls
+                        if (!document.getElementById('create-record-form').checkValidity()) {
+                            event.preventDefault();
+                        } else {
+                            event.preventDefault();
+
+                            // Insert the record object
+                            createRecord.insertRecord({
+                                "title_id": null,
+                                "title": $('#record-title').val(),
+                                "alternate_title": null,
+                                "description": $('#description').val(),
+                                "pre": null,
+                                "last_modified_by": "",
+                                "last_modified": "",
+                                "subjects": [{'subject_id': $('#guide-parent-wrap').data().subjectId}],
+                                "locations" : [$('#location').val()]
+                            });
+
+                            // Reset the form
+                            document.getElementById('create-record-form').reset();
+                            // Reset the CKEditor description content
+                            CKEDITOR.instances.description.setData("");
+                        }
+                    }
+
+                    function checkUrl() {
                         var location = $('#location').val();
 
                         $.post("<?php echo getControlURL(); ?>/records/record_bits.php", {
@@ -147,9 +151,7 @@
                         }, function (data) {
                             $('#checkurl').html(data);
                         });
-
-                    });
-
+                    }
 
                     CKEDITOR.replace('description', {
                         toolbar : 'Basic'
