@@ -41,27 +41,6 @@ class Pluslet_LinkList extends Pluslet
 
 
     protected function onViewOutput() {
-        // Look for tokens, tokenize
-        //parent::tokenizeText();
-
-        $db = new Querier;
-        $connection = $db->getConnection();
-        $statement = $connection->prepare("SELECT * FROM pluslet WHERE pluslet_id = :pluslet_id");
-        $statement->bindParam(":pluslet_id", $this->_pluslet_id);
-        $statement->execute();
-        $result = $statement->fetchAll();
-
-        if(!empty($result)) {
-            $this->_body = $result[0]['body'];
-            parent::tokenizeText();
-
-            $this->_list = $this->_body;
-
-            $this->_body = "<div id='LinkList-body'>";
-            $this->_body .= $this->_list;
-            $this->_body .= "</div>";
-            //var_dump($this->_tokens);
-        }
 
 
 
@@ -70,29 +49,14 @@ class Pluslet_LinkList extends Pluslet
 
     protected function onEditOutput() {
 
-        $db = new Querier;
-        $connection = $db->getConnection();
-        $statement = $connection->prepare("SELECT * FROM pluslet WHERE pluslet_id = :pluslet_id");
-        $statement->bindParam(":pluslet_id", $this->_pluslet_id);
-        $statement->execute();
-        $result = $statement->fetchAll();
 
-        //var_dump($result[0]['body']);
+        //print_r($this->_body);
+        if($this->_body != null) {
 
-        if(!empty($result)) {
-
-            $this->_linkList = $result[0]['body'];
-
-            $this->_body = "<div id='LinkList-body'>";
-            $this->_body .= $this->_linkList;
-            $this->_body .= "</div>";
+            $this->_linkList = $this->_body;
         }
 
-        $this->_body .= "<p class=\"faq-alert\">" . _("Click 'Edit' to edit your Link List box.") . "</p>";
-
-        $this->_body .= "<a class='cboxElement linklist_edit_colorbox_btn' id='linklist_edit_colorbox_btn' href='#linklist_edit_colorbox_".$this->_pluslet_id."'>Edit</a>";
-
-        $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
+        $this->_body = $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
     }
 
 
