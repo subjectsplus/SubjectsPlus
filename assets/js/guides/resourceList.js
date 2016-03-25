@@ -239,77 +239,60 @@ function resourceList() {
 			addListToPage: function () {
 				myResourceList.settings.dbListButton.on("click", function () {
 
+					var sorted_list = $('.dblist-button').parent().prev().html();
+					console.log(sorted_list);
 
-					if($(this).attr('data-linklist-tmp-pluslet_id') > 0) {
-						var pluslet_id = $.attr('data-linklist-tmp-pluslet_id');
-					} else {
-						var pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
-					}
-					//console.log('pluslet_id: ' + $(this).attr('data-linklist-tmp-pluslet_id'));
+					var li_items = $(sorted_list).find('li');
 
-					var linkList = "<div id='LinkList-body'>";
-					linkList += '<div class="link-list-text-top"></div>';
+					var link_list_items = "";
 
-					linkList += '<ul class="link-list" data-link-list-pluslet-id="' + pluslet_id + '">'
+					//extract values
+					$(li_items).each(function (data) {
+						var label = $(this).find('.db-list-label').text();
 
+						var record_id = $(this).val();
 
-						$(".db-list-item-draggable").each(function (data) {
-							//console.log('data: ' + data)
+						var icons = $('.show-icons-toggle').find('.fa-check').attr('style');
+						var icons_toggle = (icons == "display: inline-block;") ? '1' : '0';
 
-							var label = $(this).find('.db-list-label').text();
-							//console.log('label: ' + label);
+						var desc = $('.show-description-toggle').find('.fa-check').attr('style');
+						var desc_toggle = (desc == "display: inline-block;") ? '1' : '0';
 
-							var record_id = $(this).val();
-							//console.log('record_id: ' + record_id);
+						var note = $('.include-note-toggle').find('.fa-check').attr('style');
+						var note_toggle = (note == "display: inline-block;") ? '1' : '0';
 
-							// Grab the options
-							var display_options = $(this).data().display_options;
-							//console.log('display_options: ' + display_options);
+						link_list_items += '<li data-link-list-item-id=“' + record_id + '” ' +
+							' data-link-list-display-options=“000”>' +
+							'{{dab},{' + record_id + '},' +
+							'{' + label + '},' +
+							'{' + icons_toggle + desc_toggle + note_toggle + '}}</li>';
 
-							// If these are undefined, make them 0
-							display_options = (typeof display_options === 'undefined') ? "000" : display_options;
-
-							if ($(this).text()) {
-								linkList += "<li data-link-list-label='" + label + "' data-link-list-item-id='" + record_id + "' data-link-list-display-options='" + display_options + "'>" +
-								"{{dab},{" + record_id + "},{placeholder},{" + display_options + "}}</li>";
-
-							}
 					});
 
-					linkList += '</ul>';
+					//remove sorted_list so it's not saved as part of the body
+					$('.db-list-results').remove();
 
-					linkList += '</div>';
+					var viewLinkList = '<ul class=“link-list”>' + link_list_items + '</ul>';
+					console.log(viewLinkList);
+					/*
+					 <div class=“link-list-text-top”>Welcome to my <b>link farm!</b></div>
+					 <ul class=“link-list” data-link-list-pluslet-id=“123”>
+					 	<li data-link-list-item-id=“169” data-link-list-display-options=“000”>{{dab},{169},{placeholder},{000}}</li>
+					 </ul>
+					 <div class=“link-list-text-bottom”></div>
+					 */
 
-					myResourceList.settings.click_count++;
-					myResourceList.settings.dbListResults.empty();
+					$('#LinkList-body').append(viewLinkList);
 
-					var new_pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
-
-					console.log('pluslet_id: ' + $(this).attr('data-linklist-tmp-pluslet-id'));
-
-					linkList += '<div class="link-list-text-bottom"></div>';
-
-
-					if(new_pluslet_id) {
-						$('#' + new_pluslet_id).find('.pluslet_body').append(linkList.trim());
-					} else {
-						$('#pluslet-' + pluslet_id).find('.pluslet_body').append(linkList.trim());
-						//console.log(linkList.trim());
-					}
-
-					$.colorbox.close();
 				});
 			},
 
 			loadLinkListEditModal: function() {
 
-				if($(this).attr('data-linklist-tmp-pluslet_id') > 0) {
-					var pluslet_id = $.attr('data-linklist-tmp-pluslet_id');
-				} else {
-					var pluslet_id = $("div[name='new-pluslet-LinkList']").attr('id');
-				}
-
 				myResourceList.settings.linkListEditBtn.on('click', function() {
+
+					var pluslet_id = $(this).attr('data-edit-pluslet-id-btn');
+					console.log(pluslet_id);
 
 					$.ajax({
 						url: myResourceList.settings.plusletDataUrl,
@@ -317,9 +300,9 @@ function resourceList() {
 						dataType: "json",
 						data: { pluslet_id: pluslet_id },
 						success: function (data) {
-							console.log(data.body);
+							//console.log(data.body);
 							var body = data.body;
-							var ul = $(body).find('ul.link-list:first-child');
+							var ul = $(body).find('ul.link-list');
 
 							var newlinkList = "";
 
@@ -334,6 +317,8 @@ function resourceList() {
 
 
 							});
+
+							console.log(newlinkList);
 
 							$('.db-list-results').append(newlinkList.trim());
 
