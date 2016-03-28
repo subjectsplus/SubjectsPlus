@@ -23,7 +23,7 @@ function tabs() {
             findBoxTabs: $('#find-box-tabs')
         },
         strings: {
-            tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
+            tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
             reorderTabString: "<li  class='panel-list-item'>Please save all changes before sorting tabs.</li>",
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
@@ -145,22 +145,7 @@ function tabs() {
                 }
             });
             
-            $('#tabs').find(".ui-tabs-nav").sortable({
-                axis: "x",
-                stop: function (event, ui) {
-                    if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
-                        $(tabs).find(".ui-tabs-nav").sortable("cancel");
-                    else {
-                    	$(tabs).tabs();
-                        $(tabs).tabs( "refresh" );
-                        $(tabs).tabs("destroy");
-                        $(tabs).tabs();
-                        $(tabs).tabs('select', 0);
-                        $("#response").hide();
-                        $("#save_guide").fadeIn();
-                    }
-                }
-            });
+
                 
 
             //setup dialog to edit tab
@@ -312,7 +297,7 @@ function tabs() {
 
             // actual addTab function: adds new tab using the input from the form above
             function addTab() {
-                var tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+                var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
 
                 var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
                     external_link = $('input#tab_external_link').val(),
@@ -330,25 +315,7 @@ function tabs() {
                 //console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 //console.log($(li));
-                
-                //make tabs sortable
-                $('#tabs').find(".ui-tabs-nav").sortable({
-                    axis: "x",
-                    stop: function (event, ui) {
-                        if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
-                            $(tabs).find(".ui-tabs-nav").sortable("cancel");
-                        else {
-                            $(tabs).tabs( "refresh" );
-                            $(tabs).tabs("destroy");
-                            $(tabs).tabs();
-                            $(tabs).tabs('select', 0);
-                            $("#response").hide();
-                            $("#save_guide").fadeIn();
-                        }
-                    }
-                });
 
-                
 				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
 
