@@ -23,7 +23,7 @@ function tabs() {
             findBoxTabs: $('#find-box-tabs')
         },
         strings: {
-            tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
+            tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
             reorderTabString: "<li  class='panel-list-item'>Please save all changes before sorting tabs.</li>",
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
@@ -145,7 +145,6 @@ function tabs() {
                 }
             });
             
-
 
             //setup dialog to edit tab
             var editTabDialog = myTabs.settings.editTabDialog.dialog({
@@ -296,7 +295,7 @@ function tabs() {
 
             // actual addTab function: adds new tab using the input from the form above
             function addTab() {
-                var tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+                var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
 
                 var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
                     external_link = $('input#tab_external_link').val(),
@@ -314,7 +313,7 @@ function tabs() {
                 //console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 //console.log($(li));
-             
+
 				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
 
