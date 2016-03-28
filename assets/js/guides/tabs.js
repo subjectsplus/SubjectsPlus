@@ -145,23 +145,7 @@ function tabs() {
                 }
             });
             
-            $('#tabs').find(".ui-tabs-nav").sortable({
-                axis: "x",
-                stop: function (event, ui) {
-                    if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
-                        $(tabs).find(".ui-tabs-nav").sortable("cancel");
-                    else {
-                    	$(tabs).tabs();
-                        $(tabs).tabs( "refresh" );
-                        $(tabs).tabs("destroy");
-                        $(tabs).tabs();
-                        $(tabs).tabs('select', 0);
-                        $("#response").hide();
-                        $("#save_guide").fadeIn();
-                    }
-                }
-            });
-                
+
 
             //setup dialog to edit tab
             var editTabDialog = myTabs.settings.editTabDialog.dialog({
@@ -330,25 +314,7 @@ function tabs() {
                 //console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 //console.log($(li));
-                
-                //make tabs sortable
-                $('#tabs').find(".ui-tabs-nav").sortable({
-                    axis: "x",
-                    stop: function (event, ui) {
-                        if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
-                            $(tabs).find(".ui-tabs-nav").sortable("cancel");
-                        else {
-                            $(tabs).tabs( "refresh" );
-                            $(tabs).tabs("destroy");
-                            $(tabs).tabs();
-                            $(tabs).tabs('select', 0);
-                            $("#response").hide();
-                            $("#save_guide").fadeIn();
-                        }
-                    }
-                });
-
-                
+             
 				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
 
