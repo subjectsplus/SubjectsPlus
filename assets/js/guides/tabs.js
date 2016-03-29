@@ -115,8 +115,13 @@ function tabs() {
                                 });
                             
                             $('#tabs').data().tabCount++;
-							$('#'+id).parent().trigger('click');
-					
+
+                            setTimeout(function() {
+                                $('#'+id).find('.sp_section_controls').trigger('click');
+                                $('#'+id).find('.sp_section').removeClass('section_selected_area');
+
+                            },100);
+
 		},
         setupTabs: function () {
 
