@@ -51,12 +51,17 @@ class Pluslet_LinkList extends Pluslet
 
 
         //print_r($this->_body);
-        if($this->_body != null) {
+        if( ($this->_body != null) && ($this->_pluslet_id != null) ) {
 
             $this->_linkList = $this->_body;
+            $this->_body = $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
+
+        } else {
+
+            $this->_body = $this->loadHtml(__DIR__ . '/views/LinkListNew.php');
         }
 
-        $this->_body = $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
+
     }
 
 

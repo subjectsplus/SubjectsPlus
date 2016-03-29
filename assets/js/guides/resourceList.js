@@ -86,13 +86,7 @@ function resourceList() {
 
 				myResourceList.databaseSearch();
 				myResourceList.addListToPage();
-
-				myResourceList.loadLinkListEditModal();
-
-
-
-
-
+				
 			},
 
 			addToList: function () {
@@ -261,11 +255,15 @@ function resourceList() {
 						var note = $('.include-note-toggle').find('.fa-check').attr('style');
 						var note_toggle = (note == "display: inline-block;") ? '1' : '0';
 
-						link_list_items += '<li data-link-list-item-id=“' + record_id + '” ' +
-							' data-link-list-display-options=“000”>' +
-							'{{dab},{' + record_id + '},' +
-							'{' + label + '},' +
-							'{' + icons_toggle + desc_toggle + note_toggle + '}}</li>';
+						var display_options = icons_toggle + desc_toggle + note_toggle;
+
+
+						link_list_items += "<li data-link-list-label='" + label +"' ";
+						link_list_items += " data-link-list-item-id='" + record_id +"' ";
+						link_list_items += "data-link-list-display-options='" + display_options + "' >";
+						link_list_items += "{{dab},{" + record_id + "},{" + label + "},{" + display_options + "}}";
+						link_list_items += "</li>";
+
 
 					});
 
@@ -287,55 +285,40 @@ function resourceList() {
 				});
 			},
 
-			loadLinkListEditModal: function() {
+			loadLinkListEditModal: function(pluslet_id) {
+				
+				$.ajax({
+					url: myResourceList.settings.plusletDataUrl,
+					type: "GET",
+					dataType: "json",
+					data: { pluslet_id: pluslet_id },
+					success: function (data) {
+						//console.log(data.body);
+						var body = data.body;
+						var ul = $(body).find('ul.link-list');
+						console.log(data);
 
-				myResourceList.settings.linkListEditBtn.on('click', function() {
+						var newlinkList = "";
 
-					var pluslet_id = $(this).attr('data-edit-pluslet-id-btn');
-					console.log(pluslet_id);
+						$('ul.link-list li').each(function(item) {
 
-					$.ajax({
-						url: myResourceList.settings.plusletDataUrl,
-						type: "GET",
-						dataType: "json",
-						data: { pluslet_id: pluslet_id },
-						success: function (data) {
-							//console.log(data.body);
-							var body = data.body;
-							var ul = $(body).find('ul.link-list');
+							console.log(item);
 
-							var newlinkList = "";
+							var databaseToken = Object.create(myDatabaseToken);
+							databaseToken.label = $(this).attr('data-link-list-label');
+							databaseToken.record_id = $(this).attr('data-link-list-item-id');
 
-							$('ul.link-list li').each(function() {
-
-								var databaseToken = Object.create(myDatabaseToken);
-								databaseToken.label = $(this).attr('data-link-list-label');
-								databaseToken.record_id = $(this).attr('data-link-list-item-id');
-
-								newlinkList += "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-									"</span></li>";
-
-
-							});
-
-							console.log(newlinkList);
-
-							$('.db-list-results').append(newlinkList.trim());
+							newlinkList += "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
+								"</span></li>";
+						});
 
 
-						}
-					});
+						$('.db-list-results').append(newlinkList.trim());
 
-					myResourceList.settings.dbListButtons.show();
-					myResourceList.settings.dbListContent.show();
-
-
-
+					}
 				});
-				$('.linklist_edit_colorbox_btn').colorbox({inline:true, width:"90%", height:"90%"});
-
+				
 			}
-
 	};
 	return myResourceList; 
 };

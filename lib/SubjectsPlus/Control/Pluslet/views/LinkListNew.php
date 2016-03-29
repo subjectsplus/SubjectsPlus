@@ -1,78 +1,14 @@
-<div id="link-list-pluslet-id" data-link-list-pluslet-id="<?php echo $this->_pluslet_id; ?>"></div>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: cbrownroberts
+ * Date: 3/18/16
+ * Time: 3:41 PM
+ */
 
 
+?>
 
-<script>
-$(document).ready(function() {
-
-    console.log('edit view');
-
-    var pluslet_id = $('#link-list-pluslet-id').attr('data-link-list-pluslet-id');
-    console.log('pluslet_id: ' + pluslet_id);
-
-    $.ajax({
-        url: "helpers/fetch_pluslet_data.php",
-        type: "GET",
-        dataType: "json",
-        data: { pluslet_id: pluslet_id },
-        success: function (data) {
-            //console.log(data.body);
-            var body = data.body;
-            var ul = $('ul.link-list');
-            console.log(body);
-
-            var newlinkList = "";
-
-            $(body).find('li').each(function() {
-
-
-                var label = $(this).attr('data-link-list-label');
-                var record_id = $(this).attr('data-link-list-item-id');
-                var display_options = $(this).attr('data-link-list-display-options');
-
-                var icons = display_options.substring(0,1);
-                var icons_active = (icons == '1') ? "active" : "";
-                var icons_minus = (icons == '1') ? "display: none;" : "display: inline-block;";
-                var icons_check = (icons == '1') ? "display: inline-block;" : "display: none;";
-
-
-                var desc = display_options.substring(1,2);
-                var desc_active = (desc == '1') ? "active" : "";
-                var desc_minus = (desc == '1') ? "display: none;" : "display: inline-block;";
-                var desc_check = (desc == '1') ? "display: inline-block;" : "display: none;";
-
-
-                var note = display_options.substring(2,3);
-                var note_active = (note == '1') ? "active" : "";
-                var note_minus = (note == '1') ? "display: none;" : "display: inline-block;";
-                var note_check = (note == '1') ? "display: inline-block;" : "display: none;";
-
-
-                newlinkList += "<li class='db-list-item-draggable' value='" + record_id + "'><span class='db-list-label'>" + label + "</span>";
-                newlinkList += "<div>";
-                newlinkList += '<span class="show-icons-toggle db-list-toggle ' + icons_active + '">';
-                newlinkList += '<i class="fa fa-minus" style="' + icons_minus + '"></i>';
-                newlinkList += '    <i class="fa fa-check"  style="' + icons_check + '"></i> Icons </span>';
-                newlinkList += '   <span class="show-description-toggle db-list-toggle ' + desc_active + '">';
-                newlinkList += '    <i class="fa fa-minus" style="' + desc_minus + '"></i>';
-                newlinkList += '    <i class="fa fa-check" style="' + desc_check + '"></i> Description </span>';
-                newlinkList += '    <span class="include-note-toggle db-list-toggle ' + note_active + '">';
-                newlinkList += '    <i class="fa fa-minus" style="' + note_minus + '"></i>';
-                newlinkList += '    <i class="fa fa-check" style="' + note_check + '"></i> Note </span>';
-                newlinkList += '</div>';
-                newlinkList += "</li>";
-                console.log(newlinkList);
-            });
-
-
-            $('.db-list-results.ui-sortable').show().append(newlinkList.trim());
-
-        }
-    });
-
-});
-
-</script>
 
 <?php if ((isset($this->_pluslet_id)) && (!empty($this->_pluslet_id))) {
     $pluslet_id = $this->_pluslet_id;
@@ -118,7 +54,10 @@ $(document).ready(function() {
             <div id="LinkList-body">
                 <ul class="db-list-results ui-sortable" data-link-list-pluslet-id="">
 
-
+                    <?php if (isset($this->_linkList)) {
+                        echo $this->_linkList;
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -222,8 +161,11 @@ $(document).ready(function() {
     </div>
 </div>
 
+
 <script>
     var rL = resourceList();
     rL.init();
     rL.bindUiActions();
 </script>
+
+
