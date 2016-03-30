@@ -28,6 +28,11 @@ class PlusletData extends GuideBase implements OutputInterface
     }
 
 
+    public function dropSavePluslet() {
+        $connection = $this->db->getConnection();
+
+    }
+
     public function fetchPlusletById($pluslet_id) {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("SELECT * FROM pluslet WHERE pluslet_id = :pluslet_id");

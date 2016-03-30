@@ -1,78 +1,10 @@
 <div id="link-list-pluslet-id" data-link-list-pluslet-id="<?php echo $this->_pluslet_id; ?>"></div>
 
 
-
 <script>
-$(document).ready(function() {
-
-    console.log('edit view');
-
-    var pluslet_id = $('#link-list-pluslet-id').attr('data-link-list-pluslet-id');
-    console.log('pluslet_id: ' + pluslet_id);
-
-    $.ajax({
-        url: "helpers/fetch_pluslet_data.php",
-        type: "GET",
-        dataType: "json",
-        data: { pluslet_id: pluslet_id },
-        success: function (data) {
-            //console.log(data.body);
-            var body = data.body;
-            var ul = $('ul.link-list');
-            console.log(body);
-
-            var newlinkList = "";
-
-            $(body).find('li').each(function() {
-
-
-                var label = $(this).attr('data-link-list-label');
-                var record_id = $(this).attr('data-link-list-item-id');
-                var display_options = $(this).attr('data-link-list-display-options');
-
-                var icons = display_options.substring(0,1);
-                var icons_active = (icons == '1') ? "active" : "";
-                var icons_minus = (icons == '1') ? "display: none;" : "display: inline-block;";
-                var icons_check = (icons == '1') ? "display: inline-block;" : "display: none;";
-
-
-                var desc = display_options.substring(1,2);
-                var desc_active = (desc == '1') ? "active" : "";
-                var desc_minus = (desc == '1') ? "display: none;" : "display: inline-block;";
-                var desc_check = (desc == '1') ? "display: inline-block;" : "display: none;";
-
-
-                var note = display_options.substring(2,3);
-                var note_active = (note == '1') ? "active" : "";
-                var note_minus = (note == '1') ? "display: none;" : "display: inline-block;";
-                var note_check = (note == '1') ? "display: inline-block;" : "display: none;";
-
-
-                newlinkList += "<li class='db-list-item-draggable' value='" + record_id + "'><span class='db-list-label'>" + label + "</span>";
-                newlinkList += "<div>";
-                newlinkList += '<span class="show-icons-toggle db-list-toggle ' + icons_active + '">';
-                newlinkList += '<i class="fa fa-minus" style="' + icons_minus + '"></i>';
-                newlinkList += '    <i class="fa fa-check"  style="' + icons_check + '"></i> Icons </span>';
-                newlinkList += '   <span class="show-description-toggle db-list-toggle ' + desc_active + '">';
-                newlinkList += '    <i class="fa fa-minus" style="' + desc_minus + '"></i>';
-                newlinkList += '    <i class="fa fa-check" style="' + desc_check + '"></i> Description </span>';
-                newlinkList += '    <span class="include-note-toggle db-list-toggle ' + note_active + '">';
-                newlinkList += '    <i class="fa fa-minus" style="' + note_minus + '"></i>';
-                newlinkList += '    <i class="fa fa-check" style="' + note_check + '"></i> Note </span>';
-                newlinkList += '</div>';
-                newlinkList += "</li>";
-                console.log(newlinkList);
-            });
-
-
-            $('.db-list-results.ui-sortable').show().append(newlinkList.trim());
-
-        }
-    });
-
-});
-
+    $('#save_guide').hide();
 </script>
+
 
 <?php if ((isset($this->_pluslet_id)) && (!empty($this->_pluslet_id))) {
     $pluslet_id = $this->_pluslet_id;
@@ -115,14 +47,51 @@ $(document).ready(function() {
 
         <!--display results selected-->
         <div class="db-list-content">
+            <?php $linkList = $this->_linkList; ?>
             <div id="LinkList-body">
-                <ul class="db-list-results ui-sortable" data-link-list-pluslet-id="">
 
+                <div class=“link-list-text-top”><?php //echo $linkList['topContent']; ?></div>
+                <ul class="db-list-results ui-sortable" data-link-list-pluslet-id="<?php echo $this->_pluslet_id; ?>">
+                    <?php foreach($linkList['record'] as $item): ?>
 
+                        <?php $displayOptions = $item['displayOptions']['showIcons'].$item['displayOptions']['showDesc'].$item['displayOptions']['showNote']; ?>
+
+                        <li class="db-list-item-draggable" value="<?php echo $item['recordId']; ?>"><span class="db-list-label"><?php echo $item['title']; ?></span>
+                            <div>
+                                <span class="show-icons-toggle db-list-toggle">
+                                    <i class="fa fa-minus"></i>
+                                    <i class="fa fa-check"  style="display: none;"></i> Icons
+                                </span>
+
+                                <span class="show-description-toggle db-list-toggle active">
+                                    <i class="fa fa-minus" style="display: none;"></i>
+                                    <i class="fa fa-check" style="display: inline-block;"></i> Description
+                                </span>
+                                <span class="include-note-toggle db-list-toggle"
+                                    <i class="fa fa-minus"></i>
+                                    <i class="fa fa-check" style="display: none;"></i> Note
+                                </span>
+                            </div>
+                        </li>
+
+                    <?php endforeach; ?>
                 </ul>
+                <div class=“link-list-text-bottom”><?php //echo $linkList['bottomContent']; ?></div>
+
             </div>
+
         </div>
 
+
+        <br>
+        <?php if($linkList['topContent']) {$textarea = trim($linkList['topContent']);} ?>
+        <?php if($linkList['bottomContent']) {$textarea = trim($linkList['bottomContent']);} ?>
+        <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"><?php echo $textarea; ?></textarea>
+        <br>
+        <div>
+            <input type="radio" name="LinkList-extra-radio" value="top" > Above List<br>
+            <input type="radio" name="LinkList-extra-radio" value="bottom" checked> Below List<br>
+        </div>
 
         <!--buttons-->
         <div class="db-list-buttons">
@@ -131,6 +100,12 @@ $(document).ready(function() {
             <button
                 class="pure-button pure-button-primary dblist-reset-button"><?php print _("Reset List Box"); ?></button>
         </div>
+
+        <script>
+            $('.db-list-content').show();
+            $('.db-list-buttons').show();
+        </script>
+
 
     </div>
     <div class="pure-u-1-3">
@@ -217,6 +192,12 @@ $(document).ready(function() {
             CKEDITOR.replace('description', {
                 toolbar: 'Basic'
             });
+
+            /*
+             CKEDITOR.replace('LinkList-extra-textcontent', {
+             toolbar: 'Basic'
+             });
+             */
         </script>
 
     </div>

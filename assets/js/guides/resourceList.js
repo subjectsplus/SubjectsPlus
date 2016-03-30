@@ -233,92 +233,80 @@ function resourceList() {
 			addListToPage: function () {
 				myResourceList.settings.dbListButton.on("click", function () {
 
-					var sorted_list = $('.dblist-button').parent().prev().html();
-					console.log(sorted_list);
+					$('#save_guide').show();
 
-					var li_items = $(sorted_list).find('li');
+					var linkListRadio = $("input[name='link-list-radio']:checked").val();
+
+					var pluslet_id = $('#link-list-pluslet-id').attr('data-link-list-pluslet-id');
+					console.log(pluslet_id);
+
+					if ($.trim($("#link-list-textarea").val()).length > 0) {
+
+						var textContent = $.trim($("#link-list-textarea").val());
+
+						if(linkListRadio == 'top') {
+							var topContent = "<topContent>" + textContent + "</topContent>";
+							var bottomContent = "<bottomContent></bottomContent>";
+						} else {
+							var topContent = "<topContent></topContent>";
+							var topContent = "<bottomContent>" + textContent + "</bottomContent>";
+						}
+
+					}
+
+					if(pluslet_id > 0) {
+						var sorted_list = $('.db-list-results').html();
+					}
+					console.log(sorted_list);
 
 					var link_list_items = "";
 
-					//extract values
-					$(li_items).each(function (data) {
-						var label = $(this).find('.db-list-label').text();
-
-						var record_id = $(this).val();
-
-						var icons = $('.show-icons-toggle').find('.fa-check').attr('style');
-						var icons_toggle = (icons == "display: inline-block;") ? '1' : '0';
-
-						var desc = $('.show-description-toggle').find('.fa-check').attr('style');
-						var desc_toggle = (desc == "display: inline-block;") ? '1' : '0';
-
-						var note = $('.include-note-toggle').find('.fa-check').attr('style');
-						var note_toggle = (note == "display: inline-block;") ? '1' : '0';
-
-						var display_options = icons_toggle + desc_toggle + note_toggle;
-
-
-						link_list_items += "<li data-link-list-label='" + label +"' ";
-						link_list_items += " data-link-list-item-id='" + record_id +"' ";
-						link_list_items += "data-link-list-display-options='" + display_options + "' >";
-						link_list_items += "{{dab},{" + record_id + "},{" + label + "},{" + display_options + "}}";
-						link_list_items += "</li>";
-
+					$(sorted_list).each(function (data) {
+						//console.log(index);
+						var label = $(this).find('.db-list-label');
+						console.log('label: ' + label);
 
 					});
 
-					//remove sorted_list so it's not saved as part of the body
-					$('.db-list-results').remove();
+					//convert to xml
+					var xml = "";
 
-					var viewLinkList = '<ul class=“link-list”>' + link_list_items + '</ul>';
-					console.log(viewLinkList);
-					/*
-					 <div class=“link-list-text-top”>Welcome to my <b>link farm!</b></div>
-					 <ul class=“link-list” data-link-list-pluslet-id=“123”>
-					 	<li data-link-list-item-id=“169” data-link-list-display-options=“000”>{{dab},{169},{placeholder},{000}}</li>
-					 </ul>
-					 <div class=“link-list-text-bottom”></div>
-					 */
+					xml += "<linkList>";
+					xml += topContent;
+					xml += "<record>";
 
-					$('#LinkList-body').append(viewLinkList);
+					xml += "</record>";
+					xml += bottomContent;
+					xml += "</linkList>";
+
+
 
 				});
 			},
 
-			loadLinkListEditModal: function(pluslet_id) {
-				
-				$.ajax({
-					url: myResourceList.settings.plusletDataUrl,
-					type: "GET",
-					dataType: "json",
-					data: { pluslet_id: pluslet_id },
-					success: function (data) {
-						//console.log(data.body);
-						var body = data.body;
-						var ul = $(body).find('ul.link-list');
-						console.log(data);
+			convertToSortableList: function(list) {
 
-						var newlinkList = "";
+			},
 
-						$('ul.link-list li').each(function(item) {
+			convertToViewableList: function(list) {
 
-							console.log(item);
+			},
 
-							var databaseToken = Object.create(myDatabaseToken);
-							databaseToken.label = $(this).attr('data-link-list-label');
-							databaseToken.record_id = $(this).attr('data-link-list-item-id');
-
-							newlinkList += "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-								"</span></li>";
-						});
+			createLinkList: function() {
+				//get data from form
+				var linkListRadio = $("input[name='link-list-radio']:checked").val();
+				var textContent = $.trim($("#link-list-textarea").val());
 
 
-						$('.db-list-results').append(newlinkList.trim());
 
-					}
-				});
-				
+			},
+
+			editLinkList: function() {
+
+
 			}
+
+
 	};
 	return myResourceList; 
 };

@@ -52,15 +52,18 @@
         <!--display results selected-->
         <div class="db-list-content">
             <div id="LinkList-body">
-                <ul class="db-list-results ui-sortable" data-link-list-pluslet-id="">
-
-                    <?php if (isset($this->_linkList)) {
-                        echo $this->_linkList;
-                    }
-                    ?>
-                </ul>
+                <ul class="db-list-results ui-sortable" data-link-list-pluslet-id=""></ul>
             </div>
         </div>
+
+        <br>
+        <textarea id="link-list-textarea" name="LinkList-extra-textarea"></textarea>
+        <br>
+        <div>
+            <input type="radio" name="LinkList-extra-radio" value="top" > Above List<br>
+            <input type="radio" name="LinkList-extra-radio" value="bottom" checked> Below List<br>
+        </div>
+
 
 
         <!--buttons-->
@@ -156,7 +159,15 @@
             CKEDITOR.replace('description', {
                 toolbar: 'Basic'
             });
+/*
+
+             CKEDITOR.replace('LinkList-extra-textcontent', {
+             toolbar: 'Basic'
+             });
+*/
         </script>
+
+
 
     </div>
 </div>
