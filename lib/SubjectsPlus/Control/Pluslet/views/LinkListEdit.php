@@ -1,17 +1,9 @@
-<div id="link-list-pluslet-id" data-link-list-pluslet-id="<?php echo $this->_pluslet_id; ?>"></div>
+<div id="LinkList-body">
 
 
 <script>
     $('#save_guide').hide();
 </script>
-
-
-<?php if ((isset($this->_pluslet_id)) && (!empty($this->_pluslet_id))) {
-    $pluslet_id = $this->_pluslet_id;
-} else {
-    $data_linklist_tmp_pluslet_id = "";
-
-} ?>
 
 
 <div class="pure-g">
@@ -48,7 +40,7 @@
         <!--display results selected-->
         <div class="db-list-content">
             <?php $linkList = $this->_linkList; ?>
-            <div id="LinkList-body">
+            <div class="link-list-draggable">
 
                 <div class=“link-list-text-top”><?php //echo $linkList['topContent']; ?></div>
                 <ul class="db-list-results ui-sortable" data-link-list-pluslet-id="<?php echo $this->_pluslet_id; ?>">
@@ -208,3 +200,5 @@
     rL.init();
     rL.bindUiActions();
 </script>
+
+</div>

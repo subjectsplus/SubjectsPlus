@@ -70,8 +70,17 @@ function resourceList() {
 				document.addEventListener("DOMContentLoaded", function(event) { 
 
 				myResourceList.bindUiActions();
+			    myResourceList.editLinkList();
 
 				});
+
+
+				if($('.link-list')) {
+					console.log($('.link-list').hide());
+					myResourceList.editLinkList($('.link-list').html());
+
+				}
+
 
 				return myResourceList;
 			},
@@ -234,74 +243,40 @@ function resourceList() {
 				myResourceList.settings.dbListButton.on("click", function () {
 
 					$('#save_guide').show();
+					var linkListTextTop = document.createElement("div");
+					linkListTextTop.setAttribute("class","link-list-text-top");
 
-					var linkListRadio = $("input[name='link-list-radio']:checked").val();
+					var tokenList = document.createElement("ul");
+					tokenList.setAttribute("class","link-list");
 
-					var pluslet_id = $('#link-list-pluslet-id').attr('data-link-list-pluslet-id');
-					console.log(pluslet_id);
+					$(".db-list-item-draggable").each(function (data) {
+						var title = $(this).find('.db-list-label').text();
+						var record_id = $(this).val();
 
-					if ($.trim($("#link-list-textarea").val()).length > 0) {
+						// Grab the options
+						var display_options = $(this).data().display_options;
 
-						var textContent = $.trim($("#link-list-textarea").val());
 
-						if(linkListRadio == 'top') {
-							var topContent = "<topContent>" + textContent + "</topContent>";
-							var bottomContent = "<bottomContent></bottomContent>";
-						} else {
-							var topContent = "<topContent></topContent>";
-							var topContent = "<bottomContent>" + textContent + "</bottomContent>";
+						// If these are undefined, make them 0
+						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
+
+
+						if ($(this).text()) {
+							var linkListItem =  document.createElement("li");
+							linkListItem.setAttribute("class","token-list-item");
+							var tokenText = document.createTextNode("{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}")
+							linkListItem.appendChild(tokenText);
+							tokenList.appendChild(linkListItem);
 						}
-
-					}
-
-					if(pluslet_id > 0) {
-						var sorted_list = $('.db-list-results').html();
-					}
-					console.log(sorted_list);
-
-					var link_list_items = "";
-
-					$(sorted_list).each(function (data) {
-						//console.log(index);
-						var label = $(this).find('.db-list-label');
-						console.log('label: ' + label);
-
 					});
 
-					//convert to xml
-					var xml = "";
-
-					xml += "<linkList>";
-					xml += topContent;
-					xml += "<record>";
-
-					xml += "</record>";
-					xml += bottomContent;
-					xml += "</linkList>";
-
-
+					$('#LinkList-body').html(tokenList);
 
 				});
 			},
+			editLinkList: function(linkListHTML) {
 
-			convertToSortableList: function(list) {
-
-			},
-
-			convertToViewableList: function(list) {
-
-			},
-
-			createLinkList: function() {
-				//get data from form
-				var linkListRadio = $("input[name='link-list-radio']:checked").val();
-				var textContent = $.trim($("#link-list-textarea").val());
-
-
-
-			},
-
-			editLinkList: function() {
+			$('.db-list-content').html(linkListHTML);
 
 
 			}
