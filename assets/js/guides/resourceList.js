@@ -56,7 +56,8 @@ function resourceList() {
 				displayToggles: "<div><span class='show-icons-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
 				" Icons  </span><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i> <i class='fa fa-check'></i>" +
 				" Description </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
-				" Note </span></div>"
+				" Note </span></div>",
+				removeListItemBtn: "<span class='db-list-remove-item' style='float:right; cursor:'><i class='fa fa-remove'></i></span>"
 			},
 
 			init: function () {
@@ -93,6 +94,7 @@ function resourceList() {
 
 				myResourceList.databaseSearch();
 				myResourceList.addListToPage();
+				myResourceList.removeFromList();
 				
 			},
 
@@ -107,8 +109,10 @@ function resourceList() {
 					databaseToken.label = $(this).attr('data-label').trim();
 					databaseToken.record_id = $(this).val();
 
-					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-					"</span>" + myResourceList.strings.displayToggles;
+					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'>" +
+						"<span class='db-list-label'>" + databaseToken.label + "</span>" +
+						myResourceList.strings.removeListItemBtn +
+						myResourceList.strings.displayToggles;
 
 					myResourceList.settings.dbListResults.append(tokenHtml);
 					myResourceList.settings.dbListResults.sortable();
@@ -117,6 +121,13 @@ function resourceList() {
 					myResourceList.settings.dbListResults.disableSelection();
 					$('.db-list-item-draggable').last().find('.fa-check').hide();
 
+				});
+			},
+
+			removeFromList: function() {
+				$('body').on('click', '.fa-remove', function() {
+
+					$(this).parent().parent('li').remove();
 				});
 			},
 
