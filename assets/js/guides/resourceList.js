@@ -294,12 +294,48 @@ function resourceList() {
 
 				});
 			},
-			editLinkList: function(linkListHTML) {
+			editLinkList: function() {
+
+				$('.link-list-container .link-list .token-list-item').each(function() {
+					var tokenArray = myResourceList.tokenToArray($(this).text());
+
+					var dbListItem = document.createElement("li");
+					dbListItem.setAttribute("class", "db-list-item-draggable");
+					dbListItem.setAttribute("value", tokenArray[1]);
+
+					var toggleDiv = document.createElement("div");
+
+					var dbListSpan = document.createElement("span");
+					dbListSpan.setAttribute("class", "db-list-label");
+
+					var dbListLabel = document.createTextNode(tokenArray[2]);
+					dbListSpan.appendChild(dbListLabel);
+
+					dbListItem.appendChild(dbListSpan);
+
+					var showIcons = document.createElement("span");
+					var showDescription = document.createElement("span");
+					var includeNote = document.createElement("span");
+
+					var faMinus = document.createElement("i");
+					var faCheck = document.createElement("i");
+
+					var iconsLabel = document.createTextNode("Icons");
+					var descLabel = document.createTextNode("Description");
+					var noteLabel = document.createTextNode("Label");
+
+					$('.db-list-results').append(dbListItem);
+				});
 
 				// Take the token list and turn into draggable markup when in edit view
 
-			}
+			},
+			tokenToArray : function(token) {
 
+				var tokenArray = token.split("{").join('').split("}").join('').split(',');
+
+				return tokenArray;
+			}
 
 	};
 	return myResourceList; 
