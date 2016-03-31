@@ -3,8 +3,25 @@
 
 <script>
     $('#save_guide').hide();
-</script>
 
+    $('#report-broken-record-container').hide();
+
+    $('#show-broken-record-form').on('click', function() {
+        $('#report-broken-record-container').show();
+
+    })
+
+
+
+
+</script>
+<style>
+    #report-broken-record-container {
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+
+</style>
 
 <div class="pure-g">
     <div class="pure-u-1-3">
@@ -25,6 +42,7 @@
         </div>
 
 
+
     </div>
     <div class="pure-u-1-3">
         <h3>Selected Records</h3>
@@ -39,36 +57,13 @@
 
         <!--display results selected-->
         <div class="db-list-content">
-            <?php $linkList = $this->_linkList; ?>
+
             <div class="link-list-draggable">
 
-                <div class=“link-list-text-top”><?php //echo $linkList['topContent']; ?></div>
                 <ul class="db-list-results ui-sortable" data-link-list-pluslet-id="<?php echo $this->_pluslet_id; ?>">
-                    <?php foreach($linkList['record'] as $item): ?>
 
-                        <?php $displayOptions = $item['displayOptions']['showIcons'].$item['displayOptions']['showDesc'].$item['displayOptions']['showNote']; ?>
-
-                        <li class="db-list-item-draggable" value="<?php echo $item['recordId']; ?>"><span class="db-list-label"><?php echo $item['title']; ?></span>
-                            <div>
-                                <span class="show-icons-toggle db-list-toggle">
-                                    <i class="fa fa-minus"></i>
-                                    <i class="fa fa-check"  style="display: none;"></i> Icons
-                                </span>
-
-                                <span class="show-description-toggle db-list-toggle active">
-                                    <i class="fa fa-minus" style="display: none;"></i>
-                                    <i class="fa fa-check" style="display: inline-block;"></i> Description
-                                </span>
-                                <span class="include-note-toggle db-list-toggle"
-                                    <i class="fa fa-minus"></i>
-                                    <i class="fa fa-check" style="display: none;"></i> Note
-                                </span>
-                            </div>
-                        </li>
-
-                    <?php endforeach; ?>
                 </ul>
-                <div class=“link-list-text-bottom”><?php //echo $linkList['bottomContent']; ?></div>
+
 
             </div>
 
@@ -76,9 +71,8 @@
 
 
         <br>
-        <?php if($linkList['topContent']) {$textarea = trim($linkList['topContent']);} ?>
-        <?php if($linkList['bottomContent']) {$textarea = trim($linkList['bottomContent']);} ?>
-        <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"><?php echo $textarea; ?></textarea>
+
+        <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
         <br>
         <div>
             <input type="radio" name="LinkList-extra-radio" value="top" > Above List<br>
@@ -97,7 +91,6 @@
             $('.db-list-content').show();
             $('.db-list-buttons').show();
         </script>
-
 
     </div>
     <div class="pure-u-1-3">
@@ -188,6 +181,17 @@
 
         </script>
 
+        <a id="show-broken-record-form">Report Broken Record</a>
+        <div id="report-broken-record-container">
+            <form action="mailto:cgb37@miami.edu?Subject='Broken Record Link'" method="post" enctype="text/plain">
+                <label for="broken-record-name">Record: </label><br>
+                <input id="broken-record-name" name="broken-record-name" type="text" /><br>
+                <label id="broken-record-msg">Comments: </label><br>
+                <textarea id="broken-record-msg" name="broken-record-msg" rows="7" cols="34"></textarea><br>
+                <input type="submit" value="Send" class="pure-button pure-button-primary" id="report-broken-record" />
+                <input type="reset" value="Reset" class="pure-button pure-button-primary">
+            </form>
+        </div>
     </div>
 </div>
 
