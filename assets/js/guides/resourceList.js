@@ -313,6 +313,8 @@ function resourceList() {
 
 					dbListItem.appendChild(dbListSpan);
 
+					
+
 					var showIcons = document.createElement("span");
 					var showDescription = document.createElement("span");
 					var includeNote = document.createElement("span");
