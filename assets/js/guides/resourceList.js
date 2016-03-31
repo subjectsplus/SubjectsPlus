@@ -76,9 +76,7 @@ function resourceList() {
 
 
 				if($('.link-list')) {
-					console.log($('.link-list').hide());
-					myResourceList.editLinkList($('.link-list').html());
-
+				//	myResourceList.editLinkList($('.link-list').html());
 				}
 
 
@@ -243,12 +241,30 @@ function resourceList() {
 				myResourceList.settings.dbListButton.on("click", function () {
 
 					$('#save_guide').show();
+
+					// Create a container to append everything to
+					var linkListContainer = document.createElement("div");
+					linkListContainer.setAttribute("class","link-list-container");
+
+
+					// Create the top and bottom elements
 					var linkListTextTop = document.createElement("div");
 					linkListTextTop.setAttribute("class","link-list-text-top");
+					var linkListTextTopText = document.createTextNode("");
+					linkListTextTop.appendChild(linkListTextTopText);
 
+					var linkListTextBottom = document.createElement("div");
+					linkListTextBottom.setAttribute("class","link-list-text-bottom");
+					var linkListTextBottomText = document.createTextNode("");
+					linkListTextTop.appendChild(linkListTextBottomText);
+					linkListContainer.appendChild(linkListTextBottom);
+
+					// Create the token list ul
 					var tokenList = document.createElement("ul");
 					tokenList.setAttribute("class","link-list");
 
+
+					// Go through the draggables and turn them into <li>s with the token
 					$(".db-list-item-draggable").each(function (data) {
 						var title = $(this).find('.db-list-label').text();
 						var record_id = $(this).val();
@@ -264,24 +280,27 @@ function resourceList() {
 						if ($(this).text()) {
 							var linkListItem =  document.createElement("li");
 							linkListItem.setAttribute("class","token-list-item");
-							var tokenText = document.createTextNode("{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}")
+							var tokenText = document.createTextNode("{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}");
 							linkListItem.appendChild(tokenText);
 							tokenList.appendChild(linkListItem);
+							linkListContainer.appendChild(tokenList);
 						}
 					});
 
-					$('#LinkList-body').html(tokenList);
+					linkListContainer.appendChild(linkListTextBottom);
+
+					// append the token list to the body of the pluslet
+					$('#LinkList-body').html(linkListContainer);
 
 				});
 			},
 			editLinkList: function(linkListHTML) {
 
-			$('.db-list-content').html(linkListHTML);
-
+				// Take the token list and turn into draggable markup when in edit view
 
 			}
 
 
 	};
 	return myResourceList; 
-};
+}

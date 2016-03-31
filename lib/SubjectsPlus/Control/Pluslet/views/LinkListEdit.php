@@ -185,11 +185,7 @@
                 toolbar: 'Basic'
             });
 
-            /*
-             CKEDITOR.replace('LinkList-extra-textcontent', {
-             toolbar: 'Basic'
-             });
-             */
+
         </script>
 
     </div>
@@ -199,6 +195,7 @@
     var rL = resourceList();
     rL.init();
     rL.bindUiActions();
+    rL.editLinkList();
 </script>
 
 </div>
