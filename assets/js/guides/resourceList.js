@@ -227,7 +227,7 @@ function resourceList() {
 													+ "<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>"
 													+ "<div class=\"pure-u-1-5\" style=\"text-align:right;\">"
 													+ "<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div>"
-												    + "<div>" + data[i].location_url + "</div>"
+													+ "<div><a href='" + data[i].location_url + "' target='_blank'>" + data[i].location_url + "</a></div>"
 												    + "</li>");
 										}
 
