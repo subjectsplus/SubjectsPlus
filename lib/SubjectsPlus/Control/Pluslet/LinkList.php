@@ -8,6 +8,8 @@
 
 namespace SubjectsPlus\Control;
 require_once 'Pluslet.php';
+use DOMDocument;
+use DOMXPath;
 
 class Pluslet_LinkList extends Pluslet
 {
@@ -41,10 +43,21 @@ class Pluslet_LinkList extends Pluslet
 
 
 
-
     }
 
+protected function getLinkListId() {
+    $link_list_id = "";
 
+    if (isset($this->_body)) {
+        $dom = new DOMDocument();
+        $dom->loadHTML($this->_body);
+        $xpath = new DOMXPath($dom);
+        $query = "//div[@data-link-list-id]";
+        $entries = $xpath->query($query);
+        $link_list_id = $entries[0]->getAttribute("data-link-list-id");
+    }
+    return $link_list_id;
+}
     protected function onEditOutput() {
 
         $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
