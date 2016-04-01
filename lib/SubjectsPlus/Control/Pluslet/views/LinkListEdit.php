@@ -178,7 +178,9 @@
                 toolbar: 'Basic'
             });
 
-
+            CKEDITOR.replace('link-list-textarea', {
+                toolbar: 'Basic'
+            });
         </script>
 
         <a id="show-broken-record-form">Report Broken Record</a>

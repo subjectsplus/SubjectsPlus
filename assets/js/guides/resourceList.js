@@ -125,7 +125,7 @@ function resourceList() {
 			},
 
 			removeFromList: function() {
-				$('body').on('click', '.fa-remove', function() {
+				$('body').on('click', '.db-list-remove-item', function() {
 
 					$(this).parent().parent('li').remove();
 				});
