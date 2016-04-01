@@ -45,70 +45,7 @@ function saveSetup() {
 							lstrSelector,
 							function(event) {
 
-								var staff_id = $('#guide-parent-wrap').data.staffId;
-								var subject_id = $('#guide-parent-wrap').data.SubjectId;
 
-								// make sure our required fields have values
-								// before continuing
-								var test_req = mySaveSetup.checkRequired();
-
-								if (test_req === 1) {
-									alert("You must complete all required form fields.");
-									return false;
-								}
-
-								// 1. Look for new- or modified-pluslet
-								// 2. Check to make sure data is okay
-								// 3. Save to DB
-								// 4. Recreate pluslet with ID
-								// 5. Save layout
-
-								// //////////////////
-								// modified-pluslet
-								// loop through each pluslet
-								// /////////////////
-								$('div[name*=modified-pluslet]').each(
-										function() {
-
-											var update_id = $(this).attr("id")
-													.split("-");
-											var this_id = update_id[1];
-
-											// prepare the pluslets for saving
-											mySaveSetup.preparePluslets("modified",
-													this_id, this, staff_id,
-													subject_id);
-										});
-
-								// //////////////////////
-								// Now the new pluslets
-								// //////////////////////
-
-								$('div[name*=new-pluslet]')
-										.each(
-												function() {
-
-													var insert_id = $(this)
-															.attr("id"); // just
-													// a
-													// random
-													// gen
-													// number
-
-													// prepare pluslets for
-													// saving
-													mySaveSetup.preparePluslets("new",
-															insert_id, this,
-															staff_id,
-															subject_id);
-												});
-
-								// ////////////////////
-								// We're good, save the guide layout
-								// insert a pause so the new pluslet is found
-								// ////////////////////
-								$("#response").hide();
-								$("#save_guide").fadeOut();
 
 								mySaveSetup.saveGuide();
 
@@ -368,6 +305,13 @@ function saveSetup() {
 					break;
 			default:
 
+				/**
+				 *
+				 * This needs to be fixed. Dupe IDs are bad.
+				 *
+				 *
+				 */
+
 				pbody = $('#' + item_type[2] + '-body').html();
 				pbody = pbody === undefined ? "" : pbody;
 				pitem_type = item_type[2];
@@ -513,6 +457,74 @@ function saveSetup() {
 		    return (string+'').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");
 		},
 		saveGuide : function () {
+
+
+			var staff_id = $('#guide-parent-wrap').data.staffId;
+			var subject_id = $('#guide-parent-wrap').data.SubjectId;
+
+			// make sure our required fields have values
+			// before continuing
+			var test_req = mySaveSetup.checkRequired();
+
+			if (test_req === 1) {
+				alert("You must complete all required form fields.");
+				return false;
+			}
+
+			// 1. Look for new- or modified-pluslet
+			// 2. Check to make sure data is okay
+			// 3. Save to DB
+			// 4. Recreate pluslet with ID
+			// 5. Save layout
+
+			// //////////////////
+			// modified-pluslet
+			// loop through each pluslet
+			// /////////////////
+			$('div[name*=modified-pluslet]').each(
+				function() {
+
+					var update_id = $(this).attr("id")
+						.split("-");
+					var this_id = update_id[1];
+
+					// prepare the pluslets for saving
+					mySaveSetup.preparePluslets("modified",
+						this_id, this, staff_id,
+						subject_id);
+				});
+
+			// //////////////////////
+			// Now the new pluslets
+			// //////////////////////
+
+			$('div[name*=new-pluslet]')
+				.each(
+					function() {
+
+						var insert_id = $(this)
+							.attr("id"); // just
+						// a
+						// random
+						// gen
+						// number
+
+						// prepare pluslets for
+						// saving
+						mySaveSetup.preparePluslets("new",
+							insert_id, this,
+							staff_id,
+							subject_id);
+					});
+
+			// ////////////////////
+			// We're good, save the guide layout
+			// insert a pause so the new pluslet is found
+			// ////////////////////
+			$("#response").hide();
+			$("#save_guide").fadeOut();
+
+
 		    ///////////////////////
 			// saveGuide FUNCTION
 			// called at end of previous section

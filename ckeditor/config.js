@@ -67,6 +67,14 @@ CKEDITOR.editorConfig = function( config ) {
 			['Image', 'Source']
 		];
 
+	config.toolbar_TextFormat =
+			[
+
+							['Bold','Italic','-','BulletedList','NumberedList','-','Link','Unlink','-', 'PasteText','PasteFromWord','-', 'Source', 'Maximize']
+
+			];
+
+
 	config.enterMode = CKEDITOR.ENTER_BR;
 	config.shiftEnterMode = CKEDITOR.ENTER_BR;
 
