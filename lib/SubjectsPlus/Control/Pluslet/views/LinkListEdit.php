@@ -1,7 +1,5 @@
 <div id="LinkList-body">
-
-
-<script>
+    <script>
     $('#save_guide').hide();
 
     $('#report-broken-record-container').hide();
@@ -201,7 +199,8 @@
     var rL = resourceList();
     rL.init();
     rL.bindUiActions();
-    rL.editLinkList();
+
+    rL.editLinkList("<?php echo $this->getLinkListId();?>");
 </script>
 
 </div>

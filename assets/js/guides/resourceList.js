@@ -250,12 +250,12 @@ function resourceList() {
 
 			addListToPage: function () {
 				myResourceList.settings.dbListButton.on("click", function () {
-
-					$('#save_guide').show();
+					 var linkListId = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 
 					// Create a container to append everything to
 					var linkListContainer = document.createElement("div");
-					linkListContainer.setAttribute("class","link-list-container");
+					linkListContainer.setAttribute("class", "link-list-container");
+					linkListContainer.setAttribute("data-link-list-id", linkListId);
 
 
 					// Create the top and bottom elements
@@ -299,43 +299,37 @@ function resourceList() {
 					});
 
 					linkListContainer.appendChild(linkListTextBottom);
+					
+				    // append the token list to the body of the pluslet
+					$(this).parents().find('#LinkList-body').html(linkListContainer);
 
-					// append the token list to the body of the pluslet
-					$('#LinkList-body').html(linkListContainer);
+					$('#save_guide').show();
 
 				});
 			},
-			editLinkList: function() {
+			editLinkList: function(linkListId) {
+				$("[data-link-list-id='" + linkListId + "']").hide();
 
-				$('.link-list-container .link-list .token-list-item').each(function() {
+				$("[data-link-list-id='" + linkListId + "']").find('.token-list-item').each(function () {
 					var tokenArray = myResourceList.tokenToArray($(this).text());
 
+					// Create the sortable <li>s
 					var dbListItem = document.createElement("li");
 					dbListItem.setAttribute("class", "db-list-item-draggable");
 					dbListItem.setAttribute("value", tokenArray[1]);
 
-					var toggleDiv = document.createElement("div");
+					// Remove button
+					dbListItem.appendChild(myResourceList.removeButtonHtml());
 
+					// Create the div for the toggles
 					var dbListSpan = document.createElement("span");
 					dbListSpan.setAttribute("class", "db-list-label");
-
 					var dbListLabel = document.createTextNode(tokenArray[2]);
+
 					dbListSpan.appendChild(dbListLabel);
 
 					dbListItem.appendChild(dbListSpan);
-
-					
-
-					var showIcons = document.createElement("span");
-					var showDescription = document.createElement("span");
-					var includeNote = document.createElement("span");
-
-					var faMinus = document.createElement("i");
-					var faCheck = document.createElement("i");
-
-					var iconsLabel = document.createTextNode("Icons");
-					var descLabel = document.createTextNode("Description");
-					var noteLabel = document.createTextNode("Label");
+					dbListItem.appendChild(myResourceList.togglesHtml());
 
 					$('.db-list-results').append(dbListItem);
 				});
@@ -348,8 +342,66 @@ function resourceList() {
 				var tokenArray = token.split("{").join('').split("}").join('').split(',');
 
 				return tokenArray;
-			}
+			},
+			createToggles : function() {
 
+			},
+			sortableListHtml : function () {
+
+			},
+		    removeButtonHtml : function () {
+				var removeButton = document.createElement("span");
+				removeButton.setAttribute("class","db-list-remove-item");
+				removeButton.setAttribute("style","float:right; cursor:pointer;");
+
+				var removeIcon = document.createElement("i");
+				removeIcon.setAttribute("class", "fa fa-remove");
+				removeButton.appendChild(removeIcon);
+				return removeButton;
+			},
+			togglesHtml : function () {
+
+				var toggleDiv = document.createElement("div");
+
+				var showIcons = document.createElement("span");
+				showIcons.setAttribute("class", "show-icons-toggle db-list-toggle");
+
+				var showDescription = document.createElement("span");
+				showDescription.setAttribute("class", "show-description-toggle db-list-toggle");
+
+				var includeNote = document.createElement("span");
+				includeNote.setAttribute("class","include-note-toggle db-list-toggle");
+
+				var faMinus = document.createElement("i");
+				faMinus.setAttribute("class", "fa fa-minus");
+
+				var faCheck = document.createElement("i");
+				faCheck.setAttribute("class", "fa fa-check");
+
+
+				showIcons.appendChild(faMinus);
+				showIcons.appendChild(faCheck);
+
+				showDescription.appendChild(faMinus);
+				showDescription.appendChild(faCheck);
+
+				includeNote.appendChild(faMinus);
+				includeNote.appendChild(faCheck);
+
+
+				var iconsLabel = document.createTextNode("Icons");
+				showIcons.appendChild(iconsLabel);
+				var descLabel = document.createTextNode("Description");
+				showDescription.appendChild(descLabel);
+				var noteLabel = document.createTextNode("Label");
+				includeNote.appendChild(noteLabel);
+
+				toggleDiv.appendChild(showIcons);
+				toggleDiv.appendChild(showDescription);
+				toggleDiv.appendChild(includeNote);
+
+				return toggleDiv;
+			}
 	};
 	return myResourceList; 
 }
