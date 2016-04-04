@@ -70,7 +70,7 @@
 
         <br>
 
-        <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+        <textarea id="linklisttextarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
         <br>
         <div>
             <input type="radio" name="LinkList-extra-radio" value="top" > Above List<br>
@@ -203,9 +203,9 @@
         CKEDITOR.replace('description', {
             toolbar: 'TextFormat'
         });
-        
-        
-        CKEDITOR.replace('link-list-textarea', {
+
+
+        CKEDITOR.replace('linklisttextarea', {
             toolbar: 'Basic'
         });
     });

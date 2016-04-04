@@ -70,8 +70,8 @@ function resourceList() {
 
 				document.addEventListener("DOMContentLoaded", function(event) { 
 
-				myResourceList.bindUiActions();
-			    myResourceList.editLinkList();
+					myResourceList.bindUiActions();
+				    myResourceList.editLinkList();
 
 				});
 
@@ -79,6 +79,8 @@ function resourceList() {
 				if($('.link-list')) {
 				//	myResourceList.editLinkList($('.link-list').html());
 				}
+
+
 
 
 				return myResourceList;
@@ -126,7 +128,6 @@ function resourceList() {
 
 			removeFromList: function() {
 				$('body').on('click', '.db-list-remove-item', function() {
-
 					$(this).parent().parent('li').remove();
 				});
 			},
@@ -267,13 +268,25 @@ function resourceList() {
 					var linkListTextBottom = document.createElement("div");
 					linkListTextBottom.setAttribute("class","link-list-text-bottom");
 					var linkListTextBottomText = document.createTextNode("");
-					linkListTextTop.appendChild(linkListTextBottomText);
+					linkListTextBottom.appendChild(linkListTextBottomText);
 					linkListContainer.appendChild(linkListTextBottom);
+
+
+					var textContent = $.trim(CKEDITOR.instances.linklisttextarea.getData());
+					//console.log('textContent: ' + textContent);
+
+					var linkListRadio = $("input[name='LinkList-extra-radio']:checked").val();
+					console.log(linkListRadio);
+
+					if(linkListRadio == 'top') {
+						$(linkListTextTop).html(textContent);
+					}
+					linkListContainer.appendChild(linkListTextTop);
+
 
 					// Create the token list ul
 					var tokenList = document.createElement("ul");
 					tokenList.setAttribute("class","link-list");
-
 
 					// Go through the draggables and turn them into <li>s with the token
 					$(".db-list-item-draggable").each(function (data) {
@@ -281,12 +294,10 @@ function resourceList() {
 						var record_id = $(this).val();
 
 						// Grab the options
-						var display_options = $(this).data().display_options;
-
+						var display_options = $(this).data().display_options
 
 						// If these are undefined, make them 0
 						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
-
 
 						if ($(this).text()) {
 							var linkListItem =  document.createElement("li");
@@ -298,6 +309,10 @@ function resourceList() {
 						}
 					});
 
+
+					if (linkListRadio == 'bottom'){
+						$(linkListTextBottom).html(textContent);
+					}
 					linkListContainer.appendChild(linkListTextBottom);
 					
 				    // append the token list to the body of the pluslet
@@ -333,6 +348,20 @@ function resourceList() {
 
 					$('.db-list-results').append(dbListItem);
 				});
+
+				if($('#link-list-text-top').html()) {
+					var textContent = $('#link-list-text-top').html();
+				}
+				if($('#link-list-text-bottom').html()) {
+					var textContent = $('#link-list-text-top').html();
+				}
+				console.log(textContent);
+
+				CKEDITOR.replace('linklisttextarea', {
+					toolbar: 'Basic'
+				});
+
+				$.trim(CKEDITOR.instances.linklisttextarea.setData('blah'));
 
 				// Take the token list and turn into draggable markup when in edit view
 
