@@ -172,13 +172,9 @@
                 });
             }
 
-            CKEDITOR.replace('description', {
-                toolbar: 'Basic'
-            });
 
-            CKEDITOR.replace('link-list-textarea', {
-                toolbar: 'Basic'
-            });
+
+
         </script>
 
         <a id="show-broken-record-form">Report Broken Record</a>
@@ -201,6 +197,18 @@
     rL.bindUiActions();
 
     rL.editLinkList("<?php echo $this->getLinkListId();?>");
+
+    $(document).ready(function() {
+
+        CKEDITOR.replace('description', {
+            toolbar: 'TextFormat'
+        });
+        
+        
+        CKEDITOR.replace('link-list-textarea', {
+            toolbar: 'Basic'
+        });
+    });
 </script>
 
 </div>
