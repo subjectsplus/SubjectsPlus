@@ -80,9 +80,9 @@ var RecordListDisplay = (function () {
     function RecordListDisplay(recordList) {
         this.recordList = recordList;
     }
-    RecordListDisplay.prototype.getList = function (id) {
+    RecordListDisplay.prototype.getList = function () {
         var recordListHtml = this.liDisplayRecordList();
-        return "<ul class='link-list-display' data-link-list-id='" + id + "'>" + recordListHtml + "</ul>";
+        return "<ul class='link-list-display'>" + recordListHtml + "</ul>";
     };
     RecordListDisplay.prototype.liDisplayRecord = function (record) {
         var token = record.getRecordToken();

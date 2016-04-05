@@ -143,8 +143,5 @@ $id = uniqid();
     </div>
 </div>
 <script>
-    var idSelector = $('body').find("[data-link-list-id$=<?php echo $id ?>]").selector;
-    var id = "<?php echo $id ?>";
-    LinkList(id, idSelector);
-
+    LinkList();
 </script>

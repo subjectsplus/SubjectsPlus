@@ -8,7 +8,7 @@ function LinkList(id,idSelector) {
     var myRecordList = new RecordList;
 
     // Autocomplete search
-    $(idSelector + ' .databases-search').keyup(function (data) {
+    $(' .databases-search').keyup(function (data) {
         if ($('.databases-search').val().length > 2) {
             databaseSearch();
         }
@@ -16,7 +16,7 @@ function LinkList(id,idSelector) {
 
     });
     // Rerun the search when the user changes the limit az box
-    $(idSelector + '#limit-az').on('change', function () {
+    $('#limit-az').on('change', function () {
         databaseSearch();
     });
 
@@ -28,17 +28,17 @@ function LinkList(id,idSelector) {
         myRecordList.addToList(myRecord);
         // Get a sortable list and append it to the draggable link list area
         var sortableList = new RecordListSortable(myRecordList);
-        $(idSelector + ' .link-list-draggable').html(sortableList.getList());
+        $('.link-list-draggable').html(sortableList.getList());
     });
 
     // Reset the the html and RecordList instance
-    $(idSelector + ' .dblist-reset-button').on('click', function () {
+    $(' .dblist-reset-button').on('click', function () {
         $(this).parents().find('.link-list-draggable').html('');
         myRecordList = new RecordList;
     });
 
     // Create List button
-    $(idSelector + ' .dblist-button').on('click', function () {
+    $(' .dblist-button').on('click', function () {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
         if (myRecordList.getList().length > 0) {
@@ -62,6 +62,8 @@ function LinkList(id,idSelector) {
         }
     });
 
+
+
     function databaseSearch() {
         var limitAz;
         if ($('#limit-az').prop("checked")) {
@@ -73,25 +75,22 @@ function LinkList(id,idSelector) {
     }
 
     // Load existing list behaviour
-    if ($(idSelector + '.link-list').data().linkListId) {
-        console.log('Existing list found');
-        loadDisplayList();
-
+    if ($('.link-list').data().linkListId) {
+        loadDisplayList($('#LinkList-body').siblings().first().find('li'));
     }
 
-    function loadDisplayList() {
+    function loadDisplayList(list) {
         // This loads a display list and appends a sortable list
         var existingList = new RecordList();
-        console.log(idSelector +  ' .link-list li');
-        $(idSelector +  ' .link-list li').each(function (data) {
+        list.each(function (data) {
             console.log(data);
             var token = $(this).text();
             console.log(token);
             var exisitingRecord = new Record(token);
             existingList.addToList(exisitingRecord);
             var existingSortableList = new RecordListSortable(existingList);
-            $(idSelector +  ' .link-list-draggable').html(existingSortableList.getList());
-            $(idSelector +  ' .db-list-results').sortable();
+            $('.link-list-draggable').html(existingSortableList.getList());
+            $('.db-list-results').sortable();
         });
 
         myRecordList = existingList;
