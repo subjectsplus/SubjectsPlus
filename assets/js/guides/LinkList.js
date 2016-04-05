@@ -21,7 +21,7 @@ function LinkList(id,idSelector) {
     });
 
     // Add to sortable list when user click the add button
-    $(idSelector).on('click', '.add-to-list-button', function () {
+    $('body').on('click', '.add-to-list-button', function () {
         // Create a Record object for the listing you clicked on
         var myRecord = new Record('{{dab},{' + $(this).val() + '},{' + $(this).data().label + '},{000}}');
         // Add that record to the main RecordList
@@ -56,7 +56,7 @@ function LinkList(id,idSelector) {
                 list.append("<div class='link-list-text-bottom'>" + description + "</div>");
             }
 
-
+            saveSetup().saveGuide();
         } else {
             alert('Please add some records to your list.')
         }
@@ -75,8 +75,10 @@ function LinkList(id,idSelector) {
     }
 
     // Load existing list behaviour
-    if ($('.link-list').data().linkListId) {
-        loadDisplayList($('#LinkList-body').siblings().first().find('li'));
+    if ($('#LinkList-body').siblings().find('li')) {
+
+        loadDisplayList($('#LinkList-body').siblings().find('li'));
+
     }
 
     function loadDisplayList(list) {

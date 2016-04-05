@@ -2,6 +2,12 @@
 $id = uniqid();
 ?>
 
+<style>
+    .link-list-display {
+        display: none;
+    }
+</style>
+
 <div class='link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
 
     <div class="pure-g">
