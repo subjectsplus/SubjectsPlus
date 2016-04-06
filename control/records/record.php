@@ -78,9 +78,9 @@ if (isset($_POST["submit_record"])) {
     // 1b. IF THIS IS AN INSERT make sure the title isn't an exact dupe
     if ($_POST["title_id"] == "") {
 
-        $querierDupe = new Querier();
+        $db = new Querier();
         $qDupe = "SELECT title_id, title FROM title WHERE title LIKE " . $db->quote($_POST["title"]) ;
-        $dupetitleArray = $querierDupe->query($qDupe);
+        $dupetitleArray = $db->query($qDupe);
      
         if ($dupetitleArray) {
             echo _("There is already a record with this title: ") . "<a href=\"record.php?record_id=" . $dupetitleArray[0] . "\">" . $dupetitleArray[1] . "</a>.  " . _("Maybe do a search and make sure it doesn't already exist?");
