@@ -1,5 +1,15 @@
 function LinkList(id,idSelector) {
 
+    $('document').ready(function () {
+
+        // Hide save changes
+        //
+
+        $('#save_guide').hide();
+
+        activateCKEditors();
+    });
+
     var myId = id;
 
     console.log(myId);
@@ -23,7 +33,16 @@ function LinkList(id,idSelector) {
     // Add to sortable list when user click the add button
     $('body').on('click', '.add-to-list-button', function () {
         // Create a Record object for the listing you clicked on
-        var myRecord = new Record('{{dab},{' + $(this).val() + '},{' + $(this).data().label + '},{000}}');
+        console.log($(this));
+        var li = $(this).parents().find('li.database-listing').data();
+        var myRecord = new Record({
+            recordId: li.recordId,
+            title: li.title,
+            location: li.location,
+            showIcons : li.showIcons,
+            showDescription : li.showDescription,
+            showNote : li.showNote
+        });
         // Add that record to the main RecordList
         myRecordList.addToList(myRecord);
         // Get a sortable list and append it to the draggable link list area
@@ -84,12 +103,18 @@ function LinkList(id,idSelector) {
     function loadDisplayList(list) {
         // This loads a display list and appends a sortable list
         var existingList = new RecordList();
-        list.each(function (data) {
-            console.log(data);
-            var token = $(this).text();
-            console.log(token);
-            var exisitingRecord = new Record(token);
-            existingList.addToList(exisitingRecord);
+        list.each(function (li) {
+
+            var existingRecord = new Record({
+                title: $(this).data().title,
+                recordId : $(this).data().recordId,
+                showIcons : $(this).data().showIcons,
+                showDescription : $(this).data().showDescription,
+                showNote : $(this).data().showNote,
+                location : $(this).data().location
+            });
+
+            existingList.addToList(existingRecord);
             var existingSortableList = new RecordListSortable(existingList);
             $('.link-list-draggable').html(existingSortableList.getList());
             $('.db-list-results').sortable();
@@ -101,7 +126,15 @@ function LinkList(id,idSelector) {
     function loadSortableList() {
         myRecordList = new RecordList;
         $('.db-list-item-draggable').each(function (li) {
-            var record = new Record($(this).data().token)
+            console.log(li);
+            var record = new Record({
+                title: $(this).data().title,
+                recordId : $(this).data().recordId,
+                showIcons : $(this).data().showIcons,
+                showDescription : $(this).data().showDescription,
+                showNote : $(this).data().showNote,
+                location : $(this).data().location
+            });
             myRecordList.addToList(record);
 
         });
@@ -111,6 +144,7 @@ function LinkList(id,idSelector) {
         var searchResults = new RecordList;
         $.each(data, function (index) {
             var resultRecord = recordSearch.searchResultRecord(data[index]);
+            console.log(resultRecord);
             searchResults.addToList(resultRecord);
         });
 
@@ -131,9 +165,31 @@ function LinkList(id,idSelector) {
         });
     }
 
+    function toggleCheck(attr,context) {
+        console.log("Checking?");
+        console.log( context.closest('.db-list-item-draggable'));
+        console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-    $('document').ready(function () {
-        activateCKEditors();
-    })
+        if (context.closest('.db-list-item-draggable').attr(attr) === 0) {
+            context.closest('.db-list-item-draggable').attr(attr, 1);
+            console.log( context.closest('.db-list-item-draggable').attr(attr));
+            context.children('.fa').removeClass('fa-minus');
+            context.children('.fa').addClass('fa-check');
+
+        }
+
+
+    }
+
+    $('body').on('click','.show-icons-toggle',function() {
+        toggleCheck('data-show-icons',$(this));
+    });
+    $('body').on('click','.include-note-toggle',function() {
+        toggleCheck('data-show-note',$(this));
+    });
+    $('body').on('click','.show-description-toggle',function() {
+        toggleCheck('data-show-desciption',$(this));
+    });
+
 
 }
