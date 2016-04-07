@@ -33,8 +33,7 @@ function LinkList(id,idSelector) {
     // Add to sortable list when user click the add button
     $('body').on('click', '.add-to-list-button', function () {
         // Create a Record object for the listing you clicked on
-        console.log($(this));
-        var li = $(this).parents().find('li.database-listing').data();
+        var li = $(this).parents('li.database-listing').data();
         var myRecord = new Record({
             recordId: li.recordId,
             title: li.title,
@@ -43,6 +42,7 @@ function LinkList(id,idSelector) {
             showDescription : li.showDescription,
             showNote : li.showNote
         });
+
         // Add that record to the main RecordList
         myRecordList.addToList(myRecord);
         // Get a sortable list and append it to the draggable link list area
