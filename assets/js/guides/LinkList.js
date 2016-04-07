@@ -170,9 +170,17 @@ function LinkList(id,idSelector) {
             context.closest('.db-list-item-draggable').attr(attr, 1);
             console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-            context.closest('.db-list-item-draggable').children().find('.fa').removeClass('fa-minus');
-            context.closest('.db-list-item-draggable').children().find('.fa').addClass('fa-check');
-            console.log(context.closest('.db-list-item-draggable').children().find('.fa'));
+            console.log(context.children());
+            context.children().removeClass('fa-minus');
+            context.children().addClass('fa-check');
+        } else {
+            console.log("It's one!");
+            context.closest('.db-list-item-draggable').attr(attr, 0);
+            console.log(context.closest('.db-list-item-draggable').attr(attr));
+
+            console.log(context.children());
+            context.children().removeClass('fa-check');
+            context.children().addClass('fa-minus');
         }
 
 
