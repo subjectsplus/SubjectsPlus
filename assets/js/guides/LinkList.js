@@ -1,14 +1,8 @@
 function LinkList(id,idSelector) {
 
-    $('document').ready(function () {
-
-        // Hide save changes
-        //
-
         $('#save_guide').hide();
 
         activateCKEditors();
-    });
 
     var myId = id;
 
@@ -33,7 +27,7 @@ function LinkList(id,idSelector) {
     // Add to sortable list when user click the add button
     $('body').on('click', '.add-to-list-button', function () {
         // Create a Record object for the listing you clicked on
-        var li = $(this).parents('li.database-listing').data();
+        var li = $(this).closest('li.database-listing').data();
         var myRecord = new Record({
             recordId: li.recordId,
             title: li.title,
@@ -48,6 +42,8 @@ function LinkList(id,idSelector) {
         // Get a sortable list and append it to the draggable link list area
         var sortableList = new RecordListSortable(myRecordList);
         $('.link-list-draggable').html(sortableList.getList());
+        $('.db-list-results').sortable();
+
     });
 
     // Reset the the html and RecordList instance
@@ -170,12 +166,22 @@ function LinkList(id,idSelector) {
         console.log( context.closest('.db-list-item-draggable'));
         console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-        if (context.closest('.db-list-item-draggable').attr(attr) === 0) {
+        if (context.closest('.db-list-item-draggable').attr(attr) == 0) {
+            console.log("It's zero!");
             context.closest('.db-list-item-draggable').attr(attr, 1);
-            console.log( context.closest('.db-list-item-draggable').attr(attr));
-            context.children('.fa').removeClass('fa-minus');
-            context.children('.fa').addClass('fa-check');
+            console.log(context.closest('.db-list-item-draggable').attr(attr));
 
+            console.log(context.children());
+            context.children().removeClass('fa-minus');
+            context.children().addClass('fa-check');
+        } else {
+            console.log("It's one!");
+            context.closest('.db-list-item-draggable').attr(attr, 0);
+            console.log(context.closest('.db-list-item-draggable').attr(attr));
+
+            console.log(context.children());
+            context.children().removeClass('fa-check');
+            context.children().addClass('fa-minus');
         }
 
 
