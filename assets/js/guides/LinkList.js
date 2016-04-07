@@ -165,12 +165,14 @@ function LinkList(id,idSelector) {
         console.log( context.closest('.db-list-item-draggable'));
         console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-        if (context.closest('.db-list-item-draggable').attr(attr) === 0) {
+        if (context.closest('.db-list-item-draggable').attr(attr) == 0) {
+            console.log("It's zero!");
             context.closest('.db-list-item-draggable').attr(attr, 1);
-            console.log( context.closest('.db-list-item-draggable').attr(attr));
-            context.children('.fa').removeClass('fa-minus');
-            context.children('.fa').addClass('fa-check');
+            console.log(context.closest('.db-list-item-draggable').attr(attr));
 
+            context.closest('.db-list-item-draggable').children().find('.fa').removeClass('fa-minus');
+            context.closest('.db-list-item-draggable').children().find('.fa').addClass('fa-check');
+            console.log(context.closest('.db-list-item-draggable').children().find('.fa'));
         }
 
 
