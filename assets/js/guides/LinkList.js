@@ -41,6 +41,8 @@ function LinkList(id,idSelector) {
         // Get a sortable list and append it to the draggable link list area
         var sortableList = new RecordListSortable(myRecordList);
         $('.link-list-draggable').html(sortableList.getList());
+        $('.db-list-results').sortable();
+
     });
 
     // Reset the the html and RecordList instance
