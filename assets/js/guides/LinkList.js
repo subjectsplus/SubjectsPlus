@@ -1,14 +1,8 @@
 function LinkList(id,idSelector) {
 
-    $('document').ready(function () {
-
-        // Hide save changes
-        //
-
         $('#save_guide').hide();
 
         activateCKEditors();
-    });
 
     var myId = id;
 
@@ -33,8 +27,7 @@ function LinkList(id,idSelector) {
     // Add to sortable list when user click the add button
     $('body').on('click', '.add-to-list-button', function () {
         // Create a Record object for the listing you clicked on
-        console.log($(this));
-        var li = $(this).parents().find('li.database-listing').data();
+        var li = $(this).closest('li.database-listing').data();
         var myRecord = new Record({
             recordId: li.recordId,
             title: li.title,
