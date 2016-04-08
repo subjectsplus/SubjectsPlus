@@ -23,7 +23,7 @@ function tabs() {
             findBoxTabs: $('#find-box-tabs')
         },
         strings: {
-            tabTemplate: "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
+            tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
             reorderTabString: "<li  class='panel-list-item'>Please save all changes before sorting tabs.</li>",
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
@@ -115,8 +115,13 @@ function tabs() {
                                 });
                             
                             $('#tabs').data().tabCount++;
-							$('#'+id).parent().trigger('click');
-					
+
+                            setTimeout(function() {
+                                $('#'+id).find('.sp_section_controls').trigger('click');
+                                $('#'+id).find('.sp_section').removeClass('section_selected_area');
+
+                            },100);
+
 		},
         setupTabs: function () {
 
@@ -145,23 +150,6 @@ function tabs() {
                 }
             });
             
-            $('#tabs').find(".ui-tabs-nav").sortable({
-                axis: "x",
-                stop: function (event, ui) {
-                    if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
-                        $(tabs).find(".ui-tabs-nav").sortable("cancel");
-                    else {
-                    	$(tabs).tabs();
-                        $(tabs).tabs( "refresh" );
-                        $(tabs).tabs("destroy");
-                        $(tabs).tabs();
-                        $(tabs).tabs('select', 0);
-                        $("#response").hide();
-                        $("#save_guide").fadeIn();
-                    }
-                }
-            });
-                
 
             //setup dialog to edit tab
             var editTabDialog = myTabs.settings.editTabDialog.dialog({
@@ -312,7 +300,7 @@ function tabs() {
 
             // actual addTab function: adds new tab using the input from the form above
             function addTab() {
-                var tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+                var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
 
                 var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
                     external_link = $('input#tab_external_link').val(),
@@ -330,25 +318,7 @@ function tabs() {
                 //console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 //console.log($(li));
-                
-                //make tabs sortable
-                $('#tabs').find(".ui-tabs-nav").sortable({
-                    axis: "x",
-                    stop: function (event, ui) {
-                        if ($(ui.item).attr("id") === 'add_tab' || $(ui.item).parent().children(':first').attr("id") !== 'add_tab' || $(ui.item).attr('data-external-link') !== '')
-                            $(tabs).find(".ui-tabs-nav").sortable("cancel");
-                        else {
-                            $(tabs).tabs( "refresh" );
-                            $(tabs).tabs("destroy");
-                            $(tabs).tabs();
-                            $(tabs).tabs('select', 0);
-                            $("#response").hide();
-                            $("#save_guide").fadeIn();
-                        }
-                    }
-                });
 
-                
 				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
 
@@ -526,7 +496,7 @@ function tabs() {
 
                             $('.metadata-url').show();
                             $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);
-
+                            console.log(new_subject_id);
                             window.location.href = "/control/guides/metadata.php?subject_id=" + new_subject_id;
                         },
                         fail: function (err) {
@@ -535,11 +505,6 @@ function tabs() {
                     });
                 });
             });
-
-        },
-
-        copyGuideFromExistingGuide : function () {
-
 
         }
     }

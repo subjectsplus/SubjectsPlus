@@ -26,6 +26,7 @@ function resourceList() {
 
 				autoCompleteUrl: "../includes/autocomplete_data.php?collection=records&term=",
 				autoCompleteUrlAzList: "../includes/autocomplete_data.php?collection=azrecords&term=",
+				plusletDataUrl: "helpers/fetch_pluslet_data.php",
 				dbListButton: $(".dblist-button"),
 				dbListButtons: $(".db-list-buttons"),
 				dbListContent: $('.db-list-content'),
@@ -43,7 +44,8 @@ function resourceList() {
 				showIconsToggle: $(".show-icons-toggle"),
 				showNoteToggle: $(".include-note-toggle"),
 				click_count: 0,
-				searchTermMinimumLength: 3
+				searchTermMinimumLength: 3,
+				linkListEditBtn: $('#linklist_edit_colorbox_btn'),
 
 			},
 
@@ -54,7 +56,8 @@ function resourceList() {
 				displayToggles: "<div><span class='show-icons-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
 				" Icons  </span><span class='show-description-toggle db-list-toggle'><i class='fa fa-minus'></i> <i class='fa fa-check'></i>" +
 				" Description </span><span class='include-note-toggle db-list-toggle'><i class='fa fa-minus'></i><i class='fa fa-check'></i>" +
-				" Note </span></div>"
+				" Note </span></div>",
+				removeListItemBtn: "<span class='db-list-remove-item' style='float:right; cursor:'><i class='fa fa-remove'></i></span>"
 			},
 
 			init: function () {
@@ -67,10 +70,19 @@ function resourceList() {
 
 				document.addEventListener("DOMContentLoaded", function(event) { 
 
-				myResourceList.bindUiActions();
+					myResourceList.bindUiActions();
+				    myResourceList.editLinkList();
 
 				});
-				
+
+
+				if($('.link-list')) {
+				//	myResourceList.editLinkList($('.link-list').html());
+				}
+
+
+
+
 				return myResourceList;
 			},
 
@@ -84,15 +96,13 @@ function resourceList() {
 
 				myResourceList.databaseSearch();
 				myResourceList.addListToPage();
-
-
-
-
+				myResourceList.removeFromList();
+				
 			},
 
 			addToList: function () {
 				/** This function adds the selected result to the list of database tokens. */
-				$('body').on("click", '.add-to-list-button', function () {
+				$('.databases-searchresults').on("click", '.add-to-list-button', function (e) {
 
 					myResourceList.settings.dbListButtons.show();
 					myResourceList.settings.dbListContent.show();
@@ -101,15 +111,24 @@ function resourceList() {
 					databaseToken.label = $(this).attr('data-label').trim();
 					databaseToken.record_id = $(this).val();
 
+					var tokenHtml = "<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'>" +
+						"<span class='db-list-label'>" + databaseToken.label + "</span>" +
+						myResourceList.strings.removeListItemBtn +
+						myResourceList.strings.displayToggles;
 
-
-					myResourceList.settings.dbListResults.append("<li class='db-list-item-draggable' value='" + databaseToken.record_id + "'><span class='db-list-label'>" + databaseToken.label +
-							"</span>" + myResourceList.strings.displayToggles);
+					myResourceList.settings.dbListResults.append(tokenHtml);
 					myResourceList.settings.dbListResults.sortable();
+
+
 					myResourceList.settings.dbListResults.disableSelection();
 					$('.db-list-item-draggable').last().find('.fa-check').hide();
 
+				});
+			},
 
+			removeFromList: function() {
+				$('body').on('click', '.db-list-remove-item', function() {
+					$(this).parent().parent('li').remove();
 				});
 			},
 
@@ -160,6 +179,18 @@ function resourceList() {
 				$('body').on("click", ".include-note-toggle", function () {
 					myResourceList.toggleOptions($(this));
 				});
+
+				$('#show_all_icons_input').on('click', function() {
+					myResourceList.toggleOptions($(".show-icons-toggle"));
+				});
+
+				$('#show_all_desc_input').on('click', function() {
+					myResourceList.toggleOptions($(".show-description-toggle"));
+				});
+
+				$('#show_all_notes_input').on('click', function() {
+					myResourceList.toggleOptions($(".include-note-toggle"));
+				});
 			},
 
 
@@ -171,14 +202,12 @@ function resourceList() {
 					myResourceList.settings.dbSearchResults.empty();
 					var search_url;
 					var search_term = myResourceList.settings.dbSearchBox.val();
-					var limit_az = myResourceList.settings.limitAz.prop("checked");
 
-					if (limit_az) {
-						search_url = myResourceList.settings.autoCompleteUrl;
-					} else {
+					if ($('#limit-az').prop("checked")) {
 						search_url = myResourceList.settings.autoCompleteUrlAzList;
+					} else {
+						search_url = myResourceList.settings.autoCompleteUrl;
 					}
-
 
 					if ($(this).val() === "") {
 						myResourceList.settings.dbSearchResults.html(myResourceList.strings.noResults);
@@ -189,16 +218,18 @@ function resourceList() {
 					if (search_term.length > myResourceList.settings.searchTermMinimumLength) {
 
 						$.get(search_url + search_term, function (data) {
-
 							if (data.length !== 0) {
+
 								for (var i = 0; i < 10; i++) {
 									try {
 										if (data[i]['content_type'] == "Record") {
 											
-											myResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">" +
-													"<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>" +
-													"<div class=\"pure-u-1-5\" style=\"text-align:right;\">" +
-													"<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div></li>");
+											myResourceList.settings.dbSearchResults.append("<li data-pluslet-id='" + data[i].id + "' class=\"db-list-item database-listing\">"
+													+ "<div class=\"pure-g\"><div class=\"pure-u-4-5 list-search-label\" title=\"" + data[i].label + "\">" + data[i].label + "</div>"
+													+ "<div class=\"pure-u-1-5\" style=\"text-align:right;\">"
+													+ "<button data-label='" + data[i].label + "' value='" + data[i].id + "' class=\"add-to-list-button pure-button pure-button-secondary\"><i class=\"fa fa-plus\"></i></button></div></div>"
+													+ "<div><a href='" + data[i].location_url + "' target='_blank'>" + data[i].location_url + "</a></div>"
+												    + "</li>");
 										}
 
 									} catch (e) {
@@ -219,46 +250,187 @@ function resourceList() {
 			},
 
 			addListToPage: function () {
-				/** This function adds a CKEditor to the page with the resource list that the user has created. It has a interval atteched to wait for the CKEditor to show up before setting the contents.  **/
 				myResourceList.settings.dbListButton.on("click", function () {
-					var ps = pluslet();
-					ps.dropPluslet('', 'Basic', '');
-					var waitCKEDITOR = setInterval(function () {
-						if (window.CKEDITOR) {
-							clearInterval(waitCKEDITOR);
+					 var linkListId = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 
-							var token_string = "<ul class='token-list'>";
-
-							$(".db-list-item-draggable").each(function (data) {
-								var title = $(this).find('.db-list-label').text();
-								var record_id = $(this).val();
-
-								// Grab the options
-								var display_options = $(this).data().display_options;
+					// Create a container to append everything to
+					var linkListContainer = document.createElement("div");
+					linkListContainer.setAttribute("class", "link-list-container");
+					linkListContainer.setAttribute("data-link-list-id", linkListId);
 
 
-								// If these are undefined, make them 0
-								display_options = (typeof display_options === 'undefined') ? "000" : display_options;
+					// Create the top and bottom elements
+					var linkListTextTop = document.createElement("div");
+					linkListTextTop.setAttribute("class","link-list-text-top");
+					var linkListTextTopText = document.createTextNode("");
+					linkListTextTop.appendChild(linkListTextTopText);
+
+					var linkListTextBottom = document.createElement("div");
+					linkListTextBottom.setAttribute("class","link-list-text-bottom");
+					var linkListTextBottomText = document.createTextNode("");
+					linkListTextBottom.appendChild(linkListTextBottomText);
+					linkListContainer.appendChild(linkListTextBottom);
 
 
-								if ($(this).text()) {
-									token_string += "<li class='token-list-item'>{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}</li>";
-								}
-							});
+					var textContent = $.trim(CKEDITOR.instances.linklisttextarea.getData());
+					//console.log('textContent: ' + textContent);
 
-							token_string += "</ul>";
+					var linkListRadio = $("input[name='LinkList-extra-radio']:checked").val();
+					console.log(linkListRadio);
+
+					if(linkListRadio == 'top') {
+						$(linkListTextTop).html(textContent);
+					}
+					linkListContainer.appendChild(linkListTextTop);
 
 
+					// Create the token list ul
+					var tokenList = document.createElement("ul");
+					tokenList.setAttribute("class","link-list");
 
-							var ck_index = Object.keys(CKEDITOR.instances).length - 1;
-							CKEDITOR.instances[Object.keys(CKEDITOR.instances)[ck_index]].setData(token_string.trim());
+					// Go through the draggables and turn them into <li>s with the token
+					$(".db-list-item-draggable").each(function (data) {
+						var title = $(this).find('.db-list-label').text();
+						var record_id = $(this).val();
 
-							myResourceList.settings.click_count++;
-							myResourceList.settings.dbListResults.empty();
+						// Grab the options
+						var display_options = $(this).data().display_options
+
+						// If these are undefined, make them 0
+						display_options = (typeof display_options === 'undefined') ? "000" : display_options;
+
+						if ($(this).text()) {
+							var linkListItem =  document.createElement("li");
+							linkListItem.setAttribute("class","token-list-item");
+							var tokenText = document.createTextNode("{{dab},{" + record_id + "},{" + title + "}" + ",{" + display_options + "}}");
+							linkListItem.appendChild(tokenText);
+							tokenList.appendChild(linkListItem);
+							linkListContainer.appendChild(tokenList);
 						}
-					}, 100);
+					});
+
+
+					if (linkListRadio == 'bottom'){
+						$(linkListTextBottom).html(textContent);
+					}
+					linkListContainer.appendChild(linkListTextBottom);
+					
+				    // append the token list to the body of the pluslet
+					$(this).parents().find('#LinkList-body').html(linkListContainer);
+
+					$('#save_guide').show();
+
 				});
+			},
+			editLinkList: function(linkListId) {
+				$("[data-link-list-id='" + linkListId + "']").hide();
+
+				$("[data-link-list-id='" + linkListId + "']").find('.token-list-item').each(function () {
+					var tokenArray = myResourceList.tokenToArray($(this).text());
+
+					// Create the sortable <li>s
+					var dbListItem = document.createElement("li");
+					dbListItem.setAttribute("class", "db-list-item-draggable");
+					dbListItem.setAttribute("value", tokenArray[1]);
+
+					// Remove button
+					dbListItem.appendChild(myResourceList.removeButtonHtml());
+
+					// Create the div for the toggles
+					var dbListSpan = document.createElement("span");
+					dbListSpan.setAttribute("class", "db-list-label");
+					var dbListLabel = document.createTextNode(tokenArray[2]);
+
+					dbListSpan.appendChild(dbListLabel);
+
+					dbListItem.appendChild(dbListSpan);
+					dbListItem.appendChild(myResourceList.togglesHtml());
+
+					$('.db-list-results').append(dbListItem);
+				});
+
+				if($('#link-list-text-top').html()) {
+					var textContent = $('#link-list-text-top').html();
+				}
+				if($('#link-list-text-bottom').html()) {
+					var textContent = $('#link-list-text-top').html();
+				}
+				console.log(textContent);
+
+				CKEDITOR.replace('linklisttextarea', {
+					toolbar: 'Basic'
+				});
+
+				$.trim(CKEDITOR.instances.linklisttextarea.setData('blah'));
+
+				// Take the token list and turn into draggable markup when in edit view
+
+			},
+			tokenToArray : function(token) {
+
+				var tokenArray = token.split("{").join('').split("}").join('').split(',');
+
+				return tokenArray;
+			},
+			createToggles : function() {
+
+			},
+			sortableListHtml : function () {
+
+			},
+		    removeButtonHtml : function () {
+				var removeButton = document.createElement("span");
+				removeButton.setAttribute("class","db-list-remove-item");
+				removeButton.setAttribute("style","float:right; cursor:pointer;");
+
+				var removeIcon = document.createElement("i");
+				removeIcon.setAttribute("class", "fa fa-remove");
+				removeButton.appendChild(removeIcon);
+				return removeButton;
+			},
+			togglesHtml : function () {
+
+				var toggleDiv = document.createElement("div");
+
+				var showIcons = document.createElement("span");
+				showIcons.setAttribute("class", "show-icons-toggle db-list-toggle");
+
+				var showDescription = document.createElement("span");
+				showDescription.setAttribute("class", "show-description-toggle db-list-toggle");
+
+				var includeNote = document.createElement("span");
+				includeNote.setAttribute("class","include-note-toggle db-list-toggle");
+
+				var faMinus = document.createElement("i");
+				faMinus.setAttribute("class", "fa fa-minus");
+
+				var faCheck = document.createElement("i");
+				faCheck.setAttribute("class", "fa fa-check");
+
+
+				showIcons.appendChild(faMinus);
+				showIcons.appendChild(faCheck);
+
+				showDescription.appendChild(faMinus);
+				showDescription.appendChild(faCheck);
+
+				includeNote.appendChild(faMinus);
+				includeNote.appendChild(faCheck);
+
+
+				var iconsLabel = document.createTextNode("Icons");
+				showIcons.appendChild(iconsLabel);
+				var descLabel = document.createTextNode("Description");
+				showDescription.appendChild(descLabel);
+				var noteLabel = document.createTextNode("Label");
+				includeNote.appendChild(noteLabel);
+
+				toggleDiv.appendChild(showIcons);
+				toggleDiv.appendChild(showDescription);
+				toggleDiv.appendChild(includeNote);
+
+				return toggleDiv;
 			}
 	};
 	return myResourceList; 
-};
+}

@@ -80,7 +80,7 @@ function pluslet() {
 			    });
 
 			},
-			dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
+				dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
 				var g = guide();
 				var subjectId = g.getSubjectId();
 			    // Create new node below, using a random number
@@ -120,7 +120,7 @@ function pluslet() {
 					//Close main flyout when a pluslet is dropped
 					$('#main-options').slideReveal('hide');
 
-					
+
 				});
 			}, 
 			getParameterByName : function(name) {
@@ -326,10 +326,38 @@ function pluslet() {
 						var deleteId = $(this).attr('id').split('-')[1];
 						var elementDeletion = this;
 
-						//check for child pluslets and delete pluslet if none exist, otherwise
-						//display dialog box indicating child pluslets exist
-						//console.log(subjectId);
-						myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
+						//pluslet has been saved
+						if(deleteId > 0) {
+							//check for child pluslets and delete pluslet if none exist, otherwise
+							//display dialog box indicating child pluslets exist
+							//console.log(subjectId);
+							myPluslet.fetchAllClonesByPlusletId(deleteId, subjectId, elementDeletion);
+						} else {
+							//pluslet has not been saved so just remove the node
+							$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
+								autoOpen: true,
+								modal: false,
+								width: 'auto',
+								height: 'auto',
+								resizable: false,
+								dialogClass: 'topindex',
+								buttons: {
+									'Yes': function() {
+
+										// Remove node
+										$(elementDeletion).parents('.pluslet').remove();
+										$( this ).dialog( 'close' );
+										return false;
+									},
+									Cancel: function() {
+										$( this ).dialog( 'close' );
+									}
+								}
+							});
+
+
+						}
+
 
 					});
 				}
@@ -352,6 +380,9 @@ function pluslet() {
 				document.addEventListener("DOMContentLoaded", function() {
 					// add font-awesome icon to pluslet
 					$('.pluslet_body').after('<div class="expand_collapse"><i class="fa fa-angle-up" title="Expand Collapse Box"></i></div>');
+
+					//remove copy of expand_collapse trigger when pluslet is a clone
+					$('.pluslet_body .pluslet_body').next('.expand_collapse').remove();
 
 					$('.expand_collapse i').click(function () {
 						console.log($(this));

@@ -10,7 +10,7 @@
  */
 $subsubcat = "";
 $subcat = "records";
-$page_title = "Record Bits include";
+$page_title = "AZRecord Bits include";
 $header = "noshow";
 
 use SubjectsPlus\Control\Querier;
@@ -104,7 +104,7 @@ switch ($_POST["type"]) {
             <p><a href=\"$del_record\">$del_record</a></p>";
         $messageParams = array('from' => $_SESSION['email'],
             'to' => $administrator_email,
-            'subjectLine' => _("SubjectsPlus: Record Delete Recommendation"),
+            'subjectLine' => _("SubjectsPlus: AZRecord Delete Recommendation"),
             'content' => $message_body);
         $message = new MailMessage($messageParams);
         $mailer = new Mailer();

@@ -72,6 +72,7 @@ if (! isset ( $_SESSION ["admin"] ) || $_SESSION ["admin"] != 1) {
 if (isset ( $_GET ["insert_pluslet"] )) {
 	$qa = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
     FROM pluslet p WHERE p.pluslet_id = '" . $_GET ["insert_pluslet"] . "'";
+        $db = new Querier; 	
 	$ra = $db->query ( $qa );
 }
 
@@ -79,7 +80,7 @@ if (isset ( $this_id )) {
 	$subject_id = $_GET ["subject_id"];
 	// get name of quide
 	$q = "SELECT subject, shortform, active, extra from subject where subject_id = '$subject_id'";
-	
+	$db = new Querier;
 	$r = $db->query ( $q );
 	
 	// If this guide doesn't exist, send them away
@@ -153,7 +154,7 @@ foreach ( $pluslets_activated as $lstrPluslet ) {
 $conditions = "";
 
 $q1 = "SELECT rank_id FROM rank WHERE subject_id = '$this_id'";
-
+$db = new Querier;
 $r1 = $db->query ( $q1 );
 
 $num_resources = count ( $r1 );
@@ -381,11 +382,6 @@ ob_end_flush ();
 				href="#"><i class="fa fa-search"
 					title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
 
-
-			<li id="show_dblist_options" class="top-panel-option-item"><a
-						href="#"><i class="fa fa-list"
-									title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
-
 			<li id="show_layout_options" class="top-panel-option-item"><a
 				href="#"><i class="fa fa-columns"
 					title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
@@ -472,14 +468,7 @@ ob_end_flush ();
 							title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
 				</ul>
 			</div>
-
-
-			<!--custom database list-->
-          
-          <?php include_once('flyouts/create_database_list.php'); ?>
-          
-
-          
+			
           <!--analytics-->
           <?php include_once('flyouts/analytics.php'); ?>
 
@@ -497,6 +486,7 @@ ob_end_flush ();
 
 
 
+
   </div>
 </div>
 
@@ -508,7 +498,7 @@ ob_end_flush ();
 <?php
 // Get the shortform
 $postvar_subject_id = scrubData ( $_GET ['subject_id'] );
-$db = new Querier ();
+$db = new Querier;
 $sform = $db->query ( "SELECT shortform FROM subject WHERE subject_id = '$postvar_subject_id'" );
 $short_form = $sform [0];
 echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
@@ -516,5 +506,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 </div>
 <!--end .guide-parent-wrap-->
+
+<script src="../../ckeditor/ckeditor.js"></script>
 
 <?php include("../includes/guide_footer.php"); ?>

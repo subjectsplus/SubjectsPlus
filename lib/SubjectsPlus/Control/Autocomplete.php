@@ -161,13 +161,19 @@ class Autocomplete {
 
         break;
       case "records":
-       $statement = $connection->prepare("SELECT title_id AS 'id', 'Record' as 'content_type',title AS 'label', 
-       		title FROM title WHERE title LIKE :search_term");
+       $statement = $connection->prepare("SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', location.location as 'location_url'
+FROM title
+INNER JOIN location_title
+ON title.title_id = location_title.title_id
+INNER JOIN location
+ON location.location_id = location_title.location_id
+AND title.title LIKE :search_term");
         break;
         
         
      case "azrecords":
-        	$statement = $connection->prepare("SELECT title.title_id as 'id','Record' as 'content_type', title.title as 'label' FROM title
+        	$statement = $connection->prepare("SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', location.location as 'location_url'
+FROM title
 INNER JOIN location_title 
 ON title.title_id = location_title.title_id
 INNER JOIN location
@@ -207,6 +213,8 @@ AND title.title LIKE :search_term");
 
     }
 
+    $search_param = '%'.$search_param.'%';
+
     $statement->bindParam(":search_term", $search_param);
     	 
 
@@ -233,9 +241,10 @@ AND title.title LIKE :search_term");
       		$arr[$i]['id'] = $myrow['id'];
       		
       	}
-      	
 
       	$arr[$i]['content_type'] = $myrow['content_type'];
+
+        $arr[$i]['location_url'] = $myrow['location_url'];
 
         if (isset( $myrow['short_form'])) {
           $arr[$i]['shortform'] =  $myrow['short_form'];
@@ -253,10 +262,9 @@ AND title.title LIKE :search_term");
 
         if (isset( $myrow['additional_id'])) {
           $arr[$i]['parent_id'] = $myrow['additional_id'];
-
-
         }
-	
+
+
         switch($myrow['content_type']) {
 
           case "Record":
@@ -264,7 +272,8 @@ AND title.title LIKE :search_term");
 
             if ($this->getSearchPage() == "control") {
               $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
-          }   else {
+
+            } else {
 
               $db = new Querier();
               $record_url_sql = "SELECT location, title
@@ -278,14 +287,11 @@ AND title.title LIKE :search_term");
               if (isset($record_url_result[0]['location'])) {
 
                 $arr[$i]['url'] = $record_url_result[0]['location'];
-            } else {
-
-                $arr[$i]['url'] = '';
-
+              } else {
+                  $arr[$i]['url'] = '';
+              }
 
             }
-
-          }
 
             break;
 

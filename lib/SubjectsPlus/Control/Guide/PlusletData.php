@@ -15,19 +15,34 @@ use SubjectsPlus\Control\Interfaces\OutputInterface;
 class PlusletData extends GuideBase implements OutputInterface
 {
 
-    private $db;
-    private $connection;
+    protected $db;
 
     public $pluslet_ids;
     public $cloned_pluslets;
 
     public function __construct(Querier $db)
     {
+
         $this->db = $db;
 
-        $this->connection = $this->db->getConnection();
     }
 
+
+    public function dropSavePluslet() {
+        $connection = $this->db->getConnection();
+
+    }
+
+    public function fetchPlusletById($pluslet_id) {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("SELECT * FROM pluslet WHERE pluslet_id = :pluslet_id");
+
+
+        $statement->bindParam ( ":pluslet_id", $pluslet_id );
+        $statement->execute();
+        $pluslet = $statement->fetch();
+        return $pluslet;
+    }
 
     public function fetchAllPluslets() {
         // Find ALL our existing pluslets from all guides
@@ -92,10 +107,6 @@ class PlusletData extends GuideBase implements OutputInterface
 
     }
 
-    public function fetchPlusletByPlusletId($pluslet_id = null) {
-
-
-    }
 
 
     public function fetchClonedPlusletsById($master_id = null) {

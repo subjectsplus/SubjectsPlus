@@ -21,6 +21,8 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         $this->_subject_id = $subject_id;
 
+        $this->_pluslet_id = $pluslet_id;
+
         $this->_array_keys = array('', 'Name', 'Photo', 'Title', 'Email', 'Phone', 'Facebook', 'Twitter', 'Pinterest', 'Instagram');
     }
 
