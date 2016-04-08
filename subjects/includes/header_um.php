@@ -243,15 +243,16 @@ $v2styles = TRUE;
                   <!-- begin research mega menu -->
                   <div class="mega_child mega-lg mega-left-special">
                       <ul>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/research/getting-started/">Getting Started</a></li>
-                          <li><a href="http://libguides.miami.edu/">Research Guides</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/research/consultations/">Research Consultations</a></li>
-                         <li><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z">Subject Librarians</a></li>
-                         <li  class="last"><a href="<?php print PATH_FROM_ROOT; ?>/citation/">Citation Help</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/research/getting-started/">Getting Started</a></li>
+                        <li><a href="http://libguides.miami.edu/">Research Guides</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/research/consultations/">Research Consultations</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/library-research-scholars/">Library Research Scholars</a></li>
+                        <li class="last"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z">Liaison Librarians A-Z</a></li>
                       </ul>
-                      <ul>                          
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/workshops-tutorials/">Workshops</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/tutorials/">Tutorials</a></li>
+                      <ul>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/citation/">Citation Help</a></li>                          
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/workshops/">Workshops</a></li>
+                          <li><a href="http://sp.library.miami.edu/subjects/tutorials">Research Tutorials</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/copyright/">Copyright</a></li>
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/scholarly-communications/">Scholarly Communications &amp; Publishing</a></li>
                       </ul>
