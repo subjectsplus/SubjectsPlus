@@ -46,13 +46,17 @@ $id = uniqid();
 
 
             <br>
+            <button class="pure-button pure-button-primary" id="show-linklist-textarea-btn">Add Text</button>
 
-            <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
-            <br>
-            <div>
-                <input type="radio" name="LinkList-extra-radio" value="top"> Above List<br>
-                <input type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List<br>
+            <div id="link-list-textarea-container">
+                <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+                <br>
+                <div>
+                    <input type="radio" name="LinkList-extra-radio" value="top"> Above List<br>
+                    <input type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List<br>
+                </div>    
             </div>
+            
 
             <!--buttons-->
             <div class="db-list-buttons" style="display: block;">
