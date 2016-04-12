@@ -253,12 +253,24 @@ function LinkList(id,idSelector) {
                 "citation_guide": "",
                 "ctags": ""
                 }]
+            }, function(res){
+                var record = new Record({
+                    recordId: res.record_id,
+                    title:  $('#record-title').val(),
+                    location: $('#location').val()
+                });
+                myRecordList.addToList(record);
+                var sortableList = new RecordListSortable(myRecordList);
+                $('.link-list-draggable').html(sortableList.getList());
+                $('.db-list-results').sortable();
             });
 
             // Reset the form
             document.getElementById('create-record-form').reset();
             // Reset the CKEditor description content
             CKEDITOR.instances.description.setData("");
+
+
         }
     }
 
@@ -272,7 +284,5 @@ function LinkList(id,idSelector) {
             $('#checkurl').html(data);
         });
     }
-
-
 
 }
