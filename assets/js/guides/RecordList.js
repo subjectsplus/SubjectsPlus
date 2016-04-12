@@ -38,6 +38,9 @@ var RecordList = (function () {
     RecordList.prototype.getList = function () {
         return this.recordList;
     };
+    RecordList.prototype.removeFromList = function (index) {
+        this.recordList.splice(index, 1);
+    };
     return RecordList;
 }());
 var RecordListSortable = (function () {
@@ -62,7 +65,7 @@ var RecordListSortable = (function () {
         (record.showIcons === 1) ? showIconToggle = this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : showIconToggle = this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
         (record.showDescription === 1) ? showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', true, 'Description') : showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', false, 'Description');
         (record.showNote === 1) ? showNotesToggle = this.sortableToggleSpan('include-note-toggle', true, 'Note') : showNotesToggle = this.sortableToggleSpan('include-note-toggle', false, 'Note');
-        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class='db-list-label'>" + record.title + "</span>            <div>             " + showIconToggle + showNotesToggle + " " + showDescriptionToggle + "               </div>             </span>             </li>";
+        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + record.location + "'  \n             data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class='db-list-label'>" + record.title + "</span>            <div>             " + showIconToggle + showNotesToggle + " " + showDescriptionToggle + "               </div>             </span>              <span class='db-list-remove-item' style='float:right; cursor:'><i class='fa fa-remove'></i></span>\n            </li>";
         return liRecordHtml;
     };
     RecordListSortable.prototype.liSortableRecordList = function () {
@@ -124,6 +127,7 @@ var RecordListSearch = (function () {
 }());
 var RecordSearch = (function () {
     function RecordSearch() {
+        // This takes a search string and then returns a RecordList based on the search results
         this.searchUrl = "../includes/autocomplete_data.php?collection=records";
         this.searchResults = new RecordList;
     }
@@ -132,8 +136,8 @@ var RecordSearch = (function () {
         limitAz === true ? collection = "azrecords" : collection = "records";
         this.searchResults = new RecordList;
         $.ajax({
-            url: this.searchUrl,
-            data: { term: searchTerm, collection: "records" }
+            "url": this.searchUrl,
+            "data": { term: searchTerm, collection: "records" }
         }).done(function (data) {
             callback(data);
         }).fail(function (data) {

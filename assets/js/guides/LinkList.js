@@ -1,8 +1,8 @@
 function LinkList(id,idSelector) {
-
-        $('#save_guide').hide();
-
-        activateCKEditors();
+    
+    $('#save_guide').hide();
+    
+    activateCKEditors();
 
     var myId = id;
 
@@ -195,6 +195,23 @@ function LinkList(id,idSelector) {
     $('body').on('click','.show-description-toggle',function() {
         toggleCheck('data-show-desciption',$(this));
     });
+
+    // Triggered by X on sortable list
+    $('body').on('click','.fa-remove', function() {
+        var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
+
+        for (var i=0;i<myRecordList.recordList.length;i++) {
+            var record = myRecordList.recordList[i];
+            if (record.recordId === recordId) {
+                myRecordList.removeFromList(i);
+            }
+        }
+        
+        $(this).closest('li.db-list-item-draggable').remove();
+
+    })
+
+
 
 
 }
