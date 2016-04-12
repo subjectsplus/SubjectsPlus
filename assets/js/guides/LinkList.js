@@ -219,5 +219,22 @@ function LinkList(id,idSelector) {
         toggleCheck('data-show-description',$(this));
     });
 
+    // Triggered by X on sortable list
+    $('body').on('click','.fa-remove', function() {
+        var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
+
+        for (var i=0;i<myRecordList.recordList.length;i++) {
+            var record = myRecordList.recordList[i];
+            if (record.recordId === recordId) {
+                myRecordList.removeFromList(i);
+            }
+        }
+        
+        $(this).closest('li.db-list-item-draggable').remove();
+
+    })
+
+
+
 
 }
