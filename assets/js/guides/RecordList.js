@@ -23,7 +23,7 @@ var Record = (function () {
         }
     }
     Record.prototype.getRecordToken = function () {
-        var displayOptions = "" + this.showIcons + this.showNote + this.showDescription;
+        var displayOptions = "" + this.showIcons + this.showDescription + this.showNote;
         return "{{dab},{" + this.recordId + "},{" + this.title + "},{" + displayOptions + "}}";
     };
     return Record;
@@ -90,7 +90,7 @@ var RecordListDisplay = (function () {
     };
     RecordListDisplay.prototype.liDisplayRecord = function (record) {
         var token = record.getRecordToken();
-        return "<li data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "' >" + token + "</li>";
+        return "<li data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-description='" + record.showDescription + "' data-show-note='" + record.showNote + "' >" + token + "</li>";
     };
     RecordListDisplay.prototype.liDisplayRecordList = function () {
         var liRecordListHtml = '';
