@@ -53,7 +53,7 @@ function LinkList(id,idSelector) {
     });
 
     // Create List button
-    $(' .dblist-button').on('click', function () {
+    $(' .dblist-button, #sp-modal-close-btn').on('click', function () {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
         if (myRecordList.getList().length > 0) {

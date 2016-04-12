@@ -8,7 +8,8 @@ $id = uniqid();
     }
 </style>
 
-<div class='link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
+
+<div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
 
     <div class="pure-g">
         <div class="pure-u-1-3">
@@ -60,8 +61,8 @@ $id = uniqid();
             </div>
         </div>
         <div class="pure-u-1-3">
+            <span id="sp-modal-close"><a id="sp-modal-close-btn"> <i class="fa fa-remove"></i></a> </span>
             <h3>Add New Record</h3>
-
             <form id="create-record-form" class="pure-form pure-form-stacked">
                 <fieldset>
 
@@ -148,6 +149,8 @@ $id = uniqid();
         </div>
     </div>
 </div>
+
+
 <script>
     LinkList();
 </script>
