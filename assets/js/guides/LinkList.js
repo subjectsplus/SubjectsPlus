@@ -1,8 +1,11 @@
 function LinkList(id,idSelector) {
 
-        $('#save_guide').hide();
+    $('#save_guide').hide();
 
-        activateCKEditors();
+    hideLinkListTextareas();
+
+
+    activateCKEditors();
 
     var myId = id;
 
@@ -71,12 +74,20 @@ function LinkList(id,idSelector) {
                 list.append("<div class='link-list-text-bottom'>" + description + "</div>");
             }
 
+
+
             saveSetup().saveGuide();
+
+
         } else {
             alert('Please add some records to your list.')
         }
     });
 
+    $('#show-linklist-textarea-btn').on('click', function() {
+        
+        $('#link-list-textarea-container').show();
+    });
 
 
     function databaseSearch() {
@@ -150,16 +161,27 @@ function LinkList(id,idSelector) {
     }
 
 
-// CKEditor
+    // CKEditor
     function activateCKEditors() {
+
+        // (not loaded yet, your code to load it)
         CKEDITOR.replace('description', {
             toolbar: 'TextFormat'
         });
 
+
         CKEDITOR.replace('link-list-textarea', {
             toolbar: 'TextFormat'
         });
+
     }
+
+
+    function hideLinkListTextareas() {
+        $('#link-list-textarea-container').hide();
+    }
+
+
 
     function toggleCheck(attr,context) {
         console.log("Checking?");
@@ -194,7 +216,7 @@ function LinkList(id,idSelector) {
         toggleCheck('data-show-note',$(this));
     });
     $('body').on('click','.show-description-toggle',function() {
-        toggleCheck('data-show-desciption',$(this));
+        toggleCheck('data-show-description',$(this));
     });
 
 
