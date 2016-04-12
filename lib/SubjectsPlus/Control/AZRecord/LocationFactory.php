@@ -16,7 +16,6 @@ class LocationFactory
 {
     public static function create($location) {
         $new_location = new Location();
-        $new_location->setId($location['location_id']);
         $new_location->setCallNumber($location['call_number']);
         $new_location->setFormat($location['format']);
         $new_location->setLocation($location['location']);

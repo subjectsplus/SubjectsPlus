@@ -206,11 +206,72 @@ function LinkList(id,idSelector) {
                 myRecordList.removeFromList(i);
             }
         }
-        
+
         $(this).closest('li.db-list-item-draggable').remove();
 
-    })
+    });
 
+
+
+    // Record submission
+
+    $('#create-record-form').on('submit', function (event) {
+        submitRecordForm(event);
+    });
+    $('#checkurl').on('click', function () {
+        checkUrl();
+    });
+
+
+    function submitRecordForm(event) {
+        // Override the form submit action. Doing this lets you use the html5 form validation
+        // techniques/controls
+        if (!document.getElementById('create-record-form').checkValidity()) {
+            event.preventDefault();
+        } else {
+            event.preventDefault();
+
+            // Insert the record object
+            createRecord.insertRecord({
+                "title_id": null,
+                "title": $('#record-title').val(),
+                "alternate_title": $('#alternate-title').val(),
+                "description":  CKEDITOR.instances.description.getData(),
+                "pre": null,
+                "last_modified_by": "",
+                "last_modified": "",
+                "subjects": [{ 'subject_id': $('#guide-parent-wrap').data().subjectId }],
+                "locations": [{
+                "location_id": "",
+                "format": "1",
+                "call_number": "",
+                "location": $('#location').val(),
+                "access_restrictions": "1",
+                "eres_display": "Y",
+                "display_note": "",
+                "helpguide": "",
+                "citation_guide": "",
+                "ctags": ""
+                }]
+            });
+
+            // Reset the form
+            document.getElementById('create-record-form').reset();
+            // Reset the CKEditor description content
+            CKEDITOR.instances.description.setData("");
+        }
+    }
+
+    function checkUrl() {
+        var location = $('#location').val();
+
+        $.post("../../control/records/record_bits.php", {
+            type: "check_url",
+            checkurl: location
+        }, function (data) {
+            $('#checkurl').html(data);
+        });
+    }
 
 
 
