@@ -52,10 +52,10 @@ AND p.type != 'Special'";
 	INNER JOIN section sec
 	ON ps.section_id = sec.section_id
 	WHERE sec.tab_id = '{$row[0]}'";
-			$dr = $db->exec ( $qd );
+			$db->exec ( $qd );
 			
 			$qd = "DELETE FROM tab WHERE tab_id = '{$row[0]}'";
-			$dr = $db->exec ( $qd );
+			$db->exec ( $qd );
 		}
 		
 		$lintTabIndex = 0;
@@ -68,7 +68,7 @@ AND p.type != 'Special'";
 			
 			$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url, visibility) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}', {$lobjTab['visibility']})";
 			// print $qi . "<br />";
-			$ir = $db->exec ( $qi );
+			$db->exec ( $qi );
 			
 			$lintTabId = $db->last_id ();
 			
@@ -79,7 +79,7 @@ AND p.type != 'Special'";
 				// insert section, as of now only one per tab
 				$qi = "INSERT INTO section (section_index, layout, tab_id) VALUES ('$lintSectionIndex', '{$lobjSection['layout']}', '$lintTabId')";
 				// print $qi . "<br />";
-				$ir = $db->exec ( $qi );
+				$db->exec ( $qi );
 				
 				$lintSecId = $db->last_id ();
 				
@@ -110,7 +110,7 @@ AND p.type != 'Special'";
 					if ($key != 0) {
 						$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 0, '$key')";
 						// print $qi . "<br />";
-						$ir = $db->query ( $qi );
+						$db->exec($qi);
 						
 						array_push ( $lobjAfterPluslets, $value );
 					}
@@ -120,7 +120,7 @@ AND p.type != 'Special'";
 					if ($key != 0) {
 						$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 1, '$key')";
 						// print $qi . "<br />";
-						$ir = $db->query ( $qi );
+						$db->exec($qi);
 						
 						array_push ( $lobjAfterPluslets, $value );
 					}
@@ -130,7 +130,7 @@ AND p.type != 'Special'";
 					if ($key != 0) {
 						$qi = "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$value', '$lintSecId', 2, '$key')";
 						// print $qi . "<br />";
-						$ir = $db->query ( $qi );
+						$db->exec($qi);
 						
 						array_push ( $lobjAfterPluslets, $value );
 					}
