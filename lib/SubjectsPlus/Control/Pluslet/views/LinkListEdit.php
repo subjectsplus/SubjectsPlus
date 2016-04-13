@@ -1,5 +1,8 @@
 <?php
 $id = uniqid();
+
+//declare gloabl email for broken record report
+global $administrator_email;
 ?>
 
 <style>
@@ -37,11 +40,18 @@ $id = uniqid();
             <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox"> <span class="db-list-input-label">Descriptions</span>
             <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox"> <span class="db-list-input-label">Notes</span>
 
+
             <!--display results selected-->
             <div class="db-list-content" style="display: block;">
+                <?php if(isset($this->_topText)) {
+                    echo $this->_topText;
+                } ?>
                 <div class="link-list-draggable" id="record-sortable-list">
 
                 </div>
+                <?php if(isset($this->_bottomText)) {
+                    echo $this->_bottomText;
+                } ?>
             </div>
 
 
@@ -139,9 +149,10 @@ $id = uniqid();
 
             </script>
 
-            <a id="show-broken-record-form">Report Broken Record</a>
+            <button class="pure-button pure-button-primary" id="show-broken-record-form-btn">Report Broken Record</button>
+
             <div id="report-broken-record-container" style="display: none;">
-                <form action="mailto:?Subject='Broken Record Link'" method="post" enctype="text/plain">
+                <form action="mailto:<?php echo $administrator_email; ?>?Subject='Broken Record Link'" method="post" enctype="text/plain">
                     <label for="broken-record-name">Record: </label><br>
                     <input id="broken-record-name" name="broken-record-name" type="text"><br>
                     <label id="broken-record-msg">Comments: </label><br>
@@ -157,4 +168,20 @@ $id = uniqid();
 
 <script>
     LinkList();
+    
+    
+    var topText = $('.link-list-text-top').html();
+    var bottomText = $('.link-list-text-bottom').html();
+    
+    if(topText != "") {
+        CKEDITOR.instances['link-list-textarea'].setData( $('.link-list-text-top').html() );
+        $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
+    }
+
+    if(bottomText != "") {
+        CKEDITOR.instances['link-list-textarea'].setData( $('.link-list-text-bottom').html() );
+        $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
+    }
+
+
 </script>

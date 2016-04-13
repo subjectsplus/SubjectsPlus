@@ -41,27 +41,73 @@ class Pluslet_LinkList extends Pluslet
 
     protected function onViewOutput() {
 
+    }
 
+    protected function getLinkListId() {
+        $link_list_id = "";
+
+        if (isset($this->_body)) {
+            $dom = new DOMDocument();
+            $dom->loadHTML($this->_body);
+            $xpath = new DOMXPath($dom);
+            $query = "//div[@data-link-list-id]";
+            $entries = $xpath->query($query);
+            $link_list_id = $entries[0]->getAttribute("data-link-list-id");
+        }
+        return $link_list_id;
+    }
+
+
+    protected function getLinkListTextTop() {
+        $link_list_text = "";
+
+        if (isset($this->_body)) {
+            $dom = new DOMDocument();
+            $dom->loadHTML($this->_body);
+
+            $xpath = new DOMXPath($dom);
+            $query = '//div[contains(@class, "link-list-text-top")]';
+            $entries = $xpath->query($query);
+
+            if( $entries->item(0)->nodeValue != null ) {
+                $link_list_text = $entries->item(0)->nodeValue;
+            }
+
+        }
+        return $link_list_text;
 
     }
 
-protected function getLinkListId() {
-    $link_list_id = "";
+    protected function getLinkListTextBottom() {
+        $link_list_text = "";
 
-    if (isset($this->_body)) {
-        $dom = new DOMDocument();
-        $dom->loadHTML($this->_body);
-        $xpath = new DOMXPath($dom);
-        $query = "//div[@data-link-list-id]";
-        $entries = $xpath->query($query);
-        $link_list_id = $entries[0]->getAttribute("data-link-list-id");
+        if (isset($this->_body)) {
+            $dom = new DOMDocument();
+            $dom->loadHTML($this->_body);
+
+            $xpath = new DOMXPath($dom);
+            $query = '//div[contains(@class, "link-list-text-bottom")]';
+            $entries = $xpath->query($query);
+
+            if( $entries->item(0)->nodeValue != null ) {
+                $link_list_text = $entries->item(0)->nodeValue;
+            }
+        }
+        return $link_list_text;
+
     }
-    return $link_list_id;
-}
+
+
     protected function onEditOutput() {
 
-        $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
+        $textTop    = $this->getLinkListTextTop();
+        $textBottom = $this->getLinkListTextBottom();
 
+        $this->_topText = "<div class='link-list-text-top' style='display:none;'>{$textTop}</div>";
+
+        $this->_bottomText = "<div class='link-list-text-bottom' style='display:none;'>{$textBottom}</div>";
+
+        $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
 
     }
 

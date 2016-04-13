@@ -74,8 +74,6 @@ function LinkList(id,idSelector) {
                 list.append("<div class='link-list-text-bottom'>" + description + "</div>");
             }
 
-
-
             saveSetup().saveGuide();
 
 
@@ -233,6 +231,10 @@ function LinkList(id,idSelector) {
         $(this).closest('li.db-list-item-draggable').remove();
 
     })
+
+    $('body').on('click', '#show-broken-record-form-btn', function() {
+        $('#report-broken-record-container').show();
+    });
 
 
 
