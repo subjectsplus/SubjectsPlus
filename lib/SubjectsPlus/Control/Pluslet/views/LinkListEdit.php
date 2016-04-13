@@ -104,50 +104,6 @@ global $administrator_email;
                 </fieldset>
                 <div class="notify"></div>
             </form>
-            <script>
-
-
-                function submitRecordForm(event) {
-                    // Override the form submit action. Doing this lets you use the html5 form validation
-                    // techniques/controls
-                    if (!document.getElementById('create-record-form').checkValidity()) {
-                        event.preventDefault();
-                    } else {
-                        event.preventDefault();
-
-                        // Insert the record object
-                        createRecord.insertRecord({
-                            "title_id": null,
-                            "title": $('#record-title').val(),
-                            "alternate_title": null,
-                            "description": $('#description').val(),
-                            "pre": null,
-                            "last_modified_by": "",
-                            "last_modified": "",
-                            "subjects": [{ 'subject_id': $('#guide-parent-wrap').data().subjectId }],
-                            "locations": [$('#location').val()]
-                        });
-
-                        // Reset the form
-                        document.getElementById('create-record-form').reset();
-                        // Reset the CKEditor description content
-                        CKEDITOR.instances.description.setData("");
-                    }
-                }
-
-                function checkUrl() {
-                    var location = $('#location').val();
-
-                    $.post("../../control/records/record_bits.php", {
-                        type: "check_url",
-                        checkurl: location
-                    }, function (data) {
-                        $('#checkurl').html(data);
-                    });
-                }
-
-
-            </script>
 
             <button class="pure-button pure-button-primary" id="show-broken-record-form-btn">Report Broken Record</button>
 

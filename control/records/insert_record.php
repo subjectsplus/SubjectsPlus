@@ -21,17 +21,23 @@ $title = TitleFactory::create($title_json);
 $title_insert_id = $title_db->insertTitle($title);
 
 if (isset($title_insert_id)) {
-   echo json_encode(array("response"=> getControlURL() . '/records/record.php?record_id=' . $title_insert_id));
+   echo json_encode(array("response"=> getControlURL() . '/records/record.php?record_id=' . $title_insert_id, "record_id" => $title_insert_id));
 } else {
    echo json_encode(array("response" => "error"));
 }
 
 
 $locations = $title_json['locations'];
-
-foreach ($locations as $location) {
-    $location_instance = LocationFactory::create($location);
-    $location_insert_id =  $location_db->insertLocation($location_instance);
+if (is_array($locations)) {
+    foreach ($locations as $location) {
+        $location_instance = LocationFactory::create($location);
+        $location_insert_id = $location_db->insertLocation($location_instance);
+        $location_title_db = new LocationTitleDb($location_insert_id, $title_insert_id, $db);
+        $location_title_db->insertLocationTitle();
+    }
+} else {
+    $location_instance = LocationFactory::create($locations);
+    $location_insert_id = $location_db->insertLocation($location_instance);
     $location_title_db = new LocationTitleDb($location_insert_id, $title_insert_id, $db);
     $location_title_db->insertLocationTitle();
 }
