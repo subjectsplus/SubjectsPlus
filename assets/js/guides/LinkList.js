@@ -277,8 +277,8 @@ function LinkList(id,idSelector) {
             }, function(res){
                 var record = new Record({
                     recordId: res.record_id,
-                    title:  $('#record-title').val(),
-                    location: $('#location').val()
+                    title:  res.record.title,
+                    location: res.record.location
                 });
                 myRecordList.addToList(record);
                 var sortableList = new RecordListSortable(myRecordList);
