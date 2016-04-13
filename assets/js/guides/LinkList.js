@@ -217,6 +217,26 @@ function LinkList(id,idSelector) {
         toggleCheck('data-show-description',$(this));
     });
 
+
+    $('body').on('click', '#show_all_icons_input', function() {
+        toggleCheck('data-show-icons',$('.show-icons-toggle'));
+    });
+
+    $('body').on('click', '#show_all_notes_input', function() {
+        toggleCheck('data-show-note',$('.include-note-toggle'));
+    });
+
+    $('body').on('click', '#show_all_desc_input', function() {
+        toggleCheck('data-show-description',$('.show-description-toggle'));
+    });
+
+
+
+
+
+
+
+
     // Triggered by X on sortable list
     $('body').on('click','.fa-remove', function() {
         var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
