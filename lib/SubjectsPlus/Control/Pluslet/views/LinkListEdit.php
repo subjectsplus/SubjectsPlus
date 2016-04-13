@@ -16,7 +16,6 @@ global $administrator_email;
 
     <div class="pure-g">
         <div class="pure-u-1-3">
-
             <h3>Record Search Box</h3>
 
             <!--display db results list-->
@@ -32,6 +31,7 @@ global $administrator_email;
             </div>
 
         </div>
+
         <div class="pure-u-1-3">
             <h3>Selected Records</h3>
 
@@ -54,19 +54,24 @@ global $administrator_email;
                 } ?>
             </div>
 
-
             <br>
             <button class="pure-button pure-button-primary" id="show-linklist-textarea-btn">Add Text</button>
 
             <div id="link-list-textarea-container">
-                <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+                <label for="link-list-textarea">Link List Context:
+                    <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+                </label>
                 <br>
                 <div>
-                    <input type="radio" name="LinkList-extra-radio" value="top"> Above List<br>
-                    <input type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List<br>
+                    <label for="top-text-radio">
+                        <input id="top-text-radio" type="radio" name="LinkList-extra-radio" value="top"> Above List
+                    </label> <br>
+                    <label for="bottom-text-radio">
+                        <input id="bottom-text-radio" type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List
+                    </label><br>
+
                 </div>    
             </div>
-            
 
             <!--buttons-->
             <div class="db-list-buttons" style="display: block;">
@@ -74,6 +79,7 @@ global $administrator_email;
                 <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
             </div>
         </div>
+
         <div class="pure-u-1-3">
             <span id="sp-modal-close"><a id="sp-modal-close-btn"> <i class="fa fa-remove"></i></a> </span>
             <h3>Add New Record</h3>
