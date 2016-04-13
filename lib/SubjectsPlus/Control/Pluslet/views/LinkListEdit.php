@@ -43,13 +43,13 @@ global $administrator_email;
 
             <!--display results selected-->
             <div class="db-list-content" style="display: block;">
-                <?php if(isset($this->_topText)) {
+                <?php if( ( isset($this->_topText) ) && ( !is_null($this->_topText) ) ) {
                     echo $this->_topText;
                 } ?>
                 <div class="link-list-draggable" id="record-sortable-list">
 
                 </div>
-                <?php if(isset($this->_bottomText)) {
+                <?php if( ( isset($this->_bottomText) ) && ( !is_null($this->_bottomText) ) ) {
                     echo $this->_bottomText;
                 } ?>
             </div>
