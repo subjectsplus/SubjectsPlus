@@ -154,14 +154,7 @@ global $administrator_email;
     }
 
 
-    $('body').on('click', '.close-trigger', function() {
-        if($('.db-list-results').length > 0) {
-            $('.dblist-button').trigger('click');
-        } else {
-            $('#delete-').trigger('click');
-        }
 
-    });
 
 
 
