@@ -13,7 +13,7 @@ global $administrator_email;
 
 
 <div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
-
+<?php echo $this->_title; ?>
     <div class="pure-g">
         <div class="pure-u-1-3">
             <h3>Record Search Box</h3>
@@ -43,13 +43,13 @@ global $administrator_email;
 
             <!--display results selected-->
             <div class="db-list-content" style="display: block;">
-                <?php if( ( isset($this->_topText) ) && ( !is_null($this->_topText) ) ) {
+                <?php if( ( isset($this->_topText) ) && ( !empty($this->_topText) ) ) {
                     echo $this->_topText;
                 } ?>
                 <div class="link-list-draggable" id="record-sortable-list">
 
                 </div>
-                <?php if( ( isset($this->_bottomText) ) && ( !is_null($this->_bottomText) ) ) {
+                <?php if( ( isset($this->_bottomText) ) && ( !empty($this->_bottomText) ) ) {
                     echo $this->_bottomText;
                 } ?>
             </div>
@@ -102,10 +102,15 @@ global $administrator_email;
                         <span id="checkurl" class="checkurl_img_wrapper"><i alt="Check URL" title="Check URL" border="0" class="fa fa-globe fa-2x clickable"></i></span>
                     </label>
 
-                    <label for="description">
-                        Description                    <textarea id="description"></textarea>
-                    </label>
 
+                    <button class="pure-button pure-button-primary" id="show-record-description-btn">Add Description</button>
+                    <div id="record-description-container">
+                        <label for="description">
+                            Description                    <textarea id="description"></textarea>
+                        </label>
+                    </div>
+                    <br>
+                    
                     <button id="add-record" class="pure-button pure-button-primary" type="submit">Create Record</button>
                 </fieldset>
                 <div class="notify"></div>
