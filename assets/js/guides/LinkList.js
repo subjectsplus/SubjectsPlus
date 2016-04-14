@@ -74,6 +74,8 @@ function LinkList(id,idSelector) {
                 list.append("<div class='link-list-text-bottom'>" + description + "</div>");
             }
 
+
+
             saveSetup().saveGuide();
 
 
@@ -82,9 +84,13 @@ function LinkList(id,idSelector) {
         }
     });
 
-    $('#show-linklist-textarea-btn').on('click', function() {
-        
+    //show textareas
+    $('body').on('click', '#show-linklist-textarea-btn', function() {
         $('#link-list-textarea-container').show();
+    });
+
+    $('body').on('click', '#show-record-description-btn', function() {
+        $('#record-description-container').show();
     });
 
 
@@ -100,9 +106,7 @@ function LinkList(id,idSelector) {
 
     // Load existing list behaviour
     if ($('#LinkList-body').siblings().find('li')) {
-
         loadDisplayList($('#LinkList-body').siblings().find('li'));
-
     }
 
     function loadDisplayList(list) {
@@ -167,7 +171,6 @@ function LinkList(id,idSelector) {
             toolbar: 'TextFormat'
         });
 
-
         CKEDITOR.replace('link-list-textarea', {
             toolbar: 'TextFormat'
         });
@@ -175,8 +178,11 @@ function LinkList(id,idSelector) {
     }
 
 
+
+
     function hideLinkListTextareas() {
         $('#link-list-textarea-container').hide();
+        $('#record-description-container').hide();
     }
 
 
@@ -229,10 +235,7 @@ function LinkList(id,idSelector) {
     $('body').on('click', '#show_all_desc_input', function() {
         toggleCheck('data-show-description',$('.show-description-toggle'));
     });
-
-
-
-
+    
 
 
 
