@@ -3964,9 +3964,9 @@ Additional Helper Classes - AGD
 }
 
 
-/* modal dialog box */
 
-.sp-modal-window {
+/* The Modal (background) */
+.sp-modal {
   position: fixed;
   font-family: Arial, Helvetica, sans-serif;
   top: 0;
@@ -3976,16 +3976,9 @@ Additional Helper Classes - AGD
   background: rgba(0, 0, 0, 0.8);
   z-index: 99999;
   opacity:1;
-  -webkit-transition: opacity 400ms ease-in;
-  -moz-transition: opacity 400ms ease-in;
-  transition: opacity 400ms ease-in;
-  pointer-events: none;
 }
-.sp-modal-window:target {
-  opacity:1;
-  pointer-events: auto;
-}
-.sp-modal-window > div {
+
+.sp-modal > div {
   width: 90%;
   position: relative;
   margin: 10% auto;
@@ -4014,6 +4007,10 @@ Additional Helper Classes - AGD
   -webkit-box-shadow: 1px 1px 3px #000;
   box-shadow: 1px 1px 3px #000;
 }
-.sp-modal-window-close:hover {
-  background: #00d9ff;
+
+
+/* The Close Button */
+#sp-modal-close {
+  float:right;
+  cursor: pointer;
 }
