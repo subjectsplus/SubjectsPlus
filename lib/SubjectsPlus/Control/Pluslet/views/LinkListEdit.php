@@ -75,13 +75,16 @@ global $administrator_email;
 
             <!--buttons-->
             <div class="db-list-buttons" style="display: block;">
-                <button data-link-list-pluslet-id="" class="pure-button pure-button-primary dblist-button">Create List Box</button>
+
                 <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
             </div>
         </div>
 
-        <div class="pure-u-1-3">
-            <span id="sp-modal-close"><a id="sp-modal-close-btn"> <i class="fa fa-remove"></i></a> </span>
+        <span class="pure-u-1-3">
+            <span class="close-trigger pure-button pure-button-primary">Close Modal</span>
+            <span class="delete-trigger"><a class="pure-button pure-button-primary" id="delete-<?php echo $this->_pluslet_id; ?>">Delete List</a></span>
+            <span class="dblist-button pure-button pure-button-primary">Save List</span>
+
             <h3>Add New Record</h3>
             <form id="create-record-form" class="pure-form pure-form-stacked">
                 <fieldset>
@@ -110,7 +113,7 @@ global $administrator_email;
                         </label>
                     </div>
                     <br>
-                    
+
                     <button id="add-record" class="pure-button pure-button-primary" type="submit">Create Record</button>
                 </fieldset>
                 <div class="notify"></div>
@@ -150,4 +153,15 @@ global $administrator_email;
         CKEDITOR.instances['link-list-textarea'].setData( $('.link-list-text-bottom').html() );
         $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
     }
+
+
+    $('body').on('click', '.close-trigger', function() {
+        if($('.db-list-results').length > 0) {
+            $('.dblist-button').trigger('click');
+        } else {
+            $('#delete-').trigger('click');
+        }
+
+    });
+
 </script>
