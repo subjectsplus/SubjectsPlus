@@ -80,8 +80,10 @@ global $administrator_email;
             </div>
         </div>
 
-        <div class="pure-u-1-3">
+        <span class="pure-u-1-3">
             <span id="sp-modal-close"><a id="sp-modal-close-btn"> <i class="fa fa-remove"></i></a> </span>
+            <span class="delete-trigger"><a id="delete-<?php echo $this->_pluslet_id; ?>"><i class="fa fa-trash-o"></i></a></span>
+
             <h3>Add New Record</h3>
             <form id="create-record-form" class="pure-form pure-form-stacked">
                 <fieldset>
@@ -110,7 +112,7 @@ global $administrator_email;
                         </label>
                     </div>
                     <br>
-                    
+
                     <button id="add-record" class="pure-button pure-button-primary" type="submit">Create Record</button>
                 </fieldset>
                 <div class="notify"></div>
