@@ -77,6 +77,8 @@ function LinkList(id,idSelector) {
 
 
             saveSetup().saveGuide();
+            
+            document.location.reload(true);
 
 
         } else {
