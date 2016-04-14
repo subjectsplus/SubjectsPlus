@@ -69,7 +69,7 @@ class Pluslet_LinkList extends Pluslet
             $query = '//div[contains(@class, "link-list-text-top")]';
             $entries = $xpath->query($query);
 
-            if( $entries->item(0)->nodeValue != null ) {
+            if( (is_object($entries) == true) && ($entries->length > 0) ) {
                 $link_list_text = $entries->item(0)->nodeValue;
             }
 
@@ -89,7 +89,7 @@ class Pluslet_LinkList extends Pluslet
             $query = '//div[contains(@class, "link-list-text-bottom")]';
             $entries = $xpath->query($query);
 
-            if( $entries->item(0)->nodeValue != null ) {
+            if( (is_object($entries) == true) && ($entries->length > 0) ) {
                 $link_list_text = $entries->item(0)->nodeValue;
             }
         }
