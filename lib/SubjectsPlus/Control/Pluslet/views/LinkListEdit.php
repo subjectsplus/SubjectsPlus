@@ -88,7 +88,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
             <!--buttons-->
             <div class="db-list-buttons" style="display: block;">
-
+                <button class="pure-button pure-button-primary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
                 <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
             </div>
         </div>
@@ -174,6 +174,14 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
         $("input[id^='pluslet-update-title-']").val($(this).val());
 
+    });
+
+    $('body').on('click', '#sort-list-alpha-btn', function() {
+        console.log('sort list');
+        $( "li", "#db-list-results" ).sort(function( a, b ) {
+            return $( a ).text() > $( b ).text();
+
+        }).appendTo( "#db-list-results" );
     });
 
 
