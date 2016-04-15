@@ -22,128 +22,147 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
 
 <div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
-    <div class="pure-g">
+    <div class="pure-g modal-container">
 
-        <div class="pure-u-1-3">
-            <label for="link-list-title-input">Title
-                <input type="text" id="link-list-title-input" value="<?php echo $title; ?>" />
-            </label>
-
-            <h3>Record Search Box</h3>
-
-            <!--display db results list-->
-            <div class="dblist-display">
-                <div class="databases-results-display">
-                    <input class="databases-search" type="text" placeholder="Enter database title...">
-                    <label for="limit-az">
-                        <input id="limit-az" type="checkbox" checked="">
-                        Limit to AZ List
+        <div class="modal-header">
+            <div class="pure-g">
+                <div class="pure-u-3-4">
+                    <label for="link-list-title-input">Title:
+                        <input type="text" id="link-list-title-input" value="<?php echo $title; ?>" />
                     </label>
-                    <ul class="databases-searchresults" id="databases-searchresults"></ul>
+                    <span class="dblist-button pure-button pure-button-primary">Save List</span>
+                    <span class="delete-trigger modal-delete"><a id="delete-<?php echo $this->_pluslet_id; ?>">Delete List</a></span>
+                </div>
+                <div class="pure-u-1-4 modal-header-controls">                     
+                    <span class="close-trigger"><i class="fa fa-times" aria-hidden="true"></i>Close Window</span>
                 </div>
             </div>
-
         </div>
 
+
         <div class="pure-u-1-3">
-            <h3>Selected Records</h3>
+            <div class="modal-subs">             
 
-            <span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox">
-            <span class="db-list-input-label"> Icons </span>
-            <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox"> <span class="db-list-input-label">Descriptions</span>
-            <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox"> <span class="db-list-input-label">Notes</span>
+                <h3>Find a Link / Record</h3>
 
-
-            <!--display results selected-->
-            <div class="db-list-content" style="display: block;">
-                <?php if( ( isset($this->_topText) ) && ( !empty($this->_topText) ) ) {
-                    echo $this->_topText;
-                } ?>
-                <div class="link-list-draggable" id="record-sortable-list">
-
-                </div>
-                <?php if( ( isset($this->_bottomText) ) && ( !empty($this->_bottomText) ) ) {
-                    echo $this->_bottomText;
-                } ?>
-            </div>
-
-            <br>
-            <button class="pure-button pure-button-primary" id="show-linklist-textarea-btn">Add Text</button>
-
-            <div id="link-list-textarea-container">
-                <label for="link-list-textarea">Link List Context:
-                    <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+                <label for="limit-az">
+                    <input id="limit-az" type="checkbox" checked="">
+                    Limit to AZ List
                 </label>
-                <br>
-                <div>
-                    <label for="top-text-radio">
-                        <input id="top-text-radio" type="radio" name="LinkList-extra-radio" value="top"> Above List
-                    </label> <br>
-                    <label for="bottom-text-radio">
-                        <input id="bottom-text-radio" type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List
-                    </label><br>
 
-                </div>    
-            </div>
+                <!--display db results list-->
+                <div class="dblist-display">
+                    <div class="databases-results-display">
+                        <input class="databases-search" type="text" placeholder="Enter database title...">
+                        <ul class="databases-searchresults" id="databases-searchresults"></ul>
+                    </div>
+                </div>
 
-            <!--buttons-->
-            <div class="db-list-buttons" style="display: block;">
-                <button class="pure-button pure-button-primary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
-                <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
             </div>
         </div>
 
-        <span class="pure-u-1-3">
-            <span class="close-trigger pure-button pure-button-primary">Close Modal</span>
-            <span class="delete-trigger"><a class="pure-button pure-button-primary" id="delete-<?php echo $this->_pluslet_id; ?>">Delete List</a></span>
-            <span class="dblist-button pure-button pure-button-primary">Save List</span>
+        <div class="pure-u-1-3">
+            <div class="modal-subs">
 
-            <h3>Add New Record</h3>
-            <form id="create-record-form" class="pure-form pure-form-stacked">
-                <fieldset>
-
-                    <label for="record-title">
-                        Record Title                    <input id="record-title" type="text" value="" required="">
-                    </label>
+                <h3>Selected Records</h3>
+                <span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox">
+                <span class="db-list-input-label"> Icons </span>
+                <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox"> <span class="db-list-input-label">Descriptions</span>
+                <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox"> <span class="db-list-input-label">Notes</span>
 
 
-                    <label for="alternate-title">
-                        Alternate Title                    <input id="alternate-title" value="" type="text">
-                    </label>
-                    <label for="location">
-                        Location (Enter URL)                    <input id="location" type="text" value="" required="">
-                    </label>
+                <!--display results selected-->
+                <div class="db-list-content" style="display: block;">
+                    <?php if( ( isset($this->_topText) ) && ( !empty($this->_topText) ) ) {
+                        echo $this->_topText;
+                    } ?>
+                    <div class="link-list-draggable" id="record-sortable-list">
 
-                    <label for="checkurl">
-                        <span id="checkurl" class="checkurl_img_wrapper"><i alt="Check URL" title="Check URL" border="0" class="fa fa-globe fa-2x clickable"></i></span>
-                    </label>
-
-
-                    <button class="pure-button pure-button-primary" id="show-record-description-btn">Add Description</button>
-                    <div id="record-description-container">
-                        <label for="description">
-                            Description                    <textarea id="description"></textarea>
-                        </label>
                     </div>
+                    <?php if( ( isset($this->_bottomText) ) && ( !empty($this->_bottomText) ) ) {
+                        echo $this->_bottomText;
+                    } ?>
+                </div>
+
+                <br>
+                <button class="pure-button pure-button-primary" id="show-linklist-textarea-btn">Add Text</button>
+
+                <div id="link-list-textarea-container">
+                    <label for="link-list-textarea">Link List Context:
+                        <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+                    </label>
                     <br>
+                    <div>
+                        <label for="top-text-radio">
+                            <input id="top-text-radio" type="radio" name="LinkList-extra-radio" value="top"> Above List
+                        </label> <br>
+                        <label for="bottom-text-radio">
+                            <input id="bottom-text-radio" type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List
+                        </label><br>
 
-                    <button id="add-record" class="pure-button pure-button-primary" type="submit">Create Record</button>
-                </fieldset>
-                <div class="notify"></div>
-            </form>
+                    </div>    
+                </div>
+
+                <!--buttons-->
+                <div class="db-list-buttons" style="display: block;">
+                    <button class="pure-button pure-button-primary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
+                    <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="pure-u-1-3">
+            <div class="modal-subs">            
+
+                <h3>Add New Record</h3>
+                <form id="create-record-form" class="pure-form pure-form-stacked">
+                    <fieldset>
+
+                        <label for="record-title">
+                            Record Title                    <input id="record-title" type="text" value="" required="">
+                        </label>
 
 
-            <button class="pure-button pure-button-primary" id="show-broken-record-form-btn">Report Broken Record</button>
+                        <label for="alternate-title">
+                            Alternate Title                    <input id="alternate-title" value="" type="text">
+                        </label>
+                        <label for="location">
+                            Location (Enter URL)                    <input id="location" type="text" value="" required="">
+                        </label>
 
-            <div id="report-broken-record-container" style="display: none;">
-                <form action="mailto:<?php echo $administrator_email; ?>?Subject='Broken Record Link'" method="post" enctype="text/plain">
-                    <label for="broken-record-name">Record: </label><br>
-                    <input id="broken-record-name" name="broken-record-name" type="text"><br>
-                    <label id="broken-record-msg">Comments: </label><br>
-                    <textarea id="broken-record-msg" name="broken-record-msg" rows="7" cols="34"></textarea><br>
-                    <input type="submit" value="Send" class="pure-button pure-button-primary" id="report-broken-record">
-                    <input type="reset" value="Reset" class="pure-button pure-button-primary">
+                        <label for="checkurl">
+                            <span id="checkurl" class="checkurl_img_wrapper"><i alt="Check URL" title="Check URL" border="0" class="fa fa-globe fa-2x clickable"></i></span>
+                        </label>
+
+
+                        <button class="pure-button pure-button-primary" id="show-record-description-btn">Add Description</button>
+                        <div id="record-description-container">
+                            <label for="description">
+                                Description                    <textarea id="description"></textarea>
+                            </label>
+                        </div>
+                        <br>
+
+                        <button id="add-record" class="pure-button pure-button-primary" type="submit">Create Record</button>
+                    </fieldset>
+                    <div class="notify"></div>
                 </form>
+
+
+                <button class="pure-button pure-button-primary" id="show-broken-record-form-btn">Report Broken Record</button>
+
+                <div id="report-broken-record-container" style="display: none;">
+                    <form action="mailto:<?php echo $administrator_email; ?>?Subject='Broken Record Link'" method="post" enctype="text/plain">
+                        <label for="broken-record-name">Record: </label><br>
+                        <input id="broken-record-name" name="broken-record-name" type="text"><br>
+                        <label id="broken-record-msg">Comments: </label><br>
+                        <textarea id="broken-record-msg" name="broken-record-msg" rows="7" cols="34"></textarea><br>
+                        <input type="submit" value="Send" class="pure-button pure-button-primary" id="report-broken-record">
+                        <input type="reset" value="Reset" class="pure-button pure-button-primary">
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
