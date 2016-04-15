@@ -12,7 +12,7 @@ class Pluslet_GuideList extends Pluslet {
 
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
-  
+
     $this->_type = "GuideList";
     $this->_pluslet_bonus_classes = "type-guidelist";
 
@@ -22,10 +22,10 @@ class Pluslet_GuideList extends Pluslet {
 
   protected function onEditOutput()
   {
-  	
+
     $output = $this->outputGuides();
     $this->_body = $output;
-   
+
   }
 
   protected function onViewOutput()
@@ -38,15 +38,15 @@ class Pluslet_GuideList extends Pluslet {
 
   public function outputGuides() {
 
-  global $mod_rewrite;
-  global $PublicPath;
-  global $guide_types;
+    global $mod_rewrite;
+    global $PublicPath;
+    global $guide_types;
 
     // let's use our Pretty URLs if mod_rewrite = TRUE or 1
     if ($mod_rewrite == 1) {
-       $guide_path = "";
+      $guide_path = "";
     } else {
-       $guide_path = $PublicPath . "guide.php?subject=";
+      $guide_path = $PublicPath . "guide.php?subject=";
     }
 
     $layout = ""; //init
@@ -72,6 +72,7 @@ class Pluslet_GuideList extends Pluslet {
 
         foreach ($guides as $myrow) {
 
+
         $guide_location = $guide_path . $myrow['shortform'];
         $list_bonus = "";
 
@@ -79,13 +80,14 @@ class Pluslet_GuideList extends Pluslet {
         if ($myrow['keywords'] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow['keywords']; } // add keywords
 
         $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow['subject']) . "</a>
+
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
 
           if ($row_count <= $switch_row) {
             // first col
             $col_1 .= $our_item;
-            
+
           } else {
             // even
             $col_2 .= $our_item;
@@ -113,9 +115,9 @@ class Pluslet_GuideList extends Pluslet {
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
 
     foreach ($guide_types as $key) {
-        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
-        
-        $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
+      $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+
+      $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
 
     $guide_type_btns .= "</ul>";
@@ -123,7 +125,7 @@ class Pluslet_GuideList extends Pluslet {
     $final_list = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>" . $list_guides;
 
 
-  return $final_list;
+    return $final_list;
 
   }
 
@@ -133,10 +135,10 @@ class Pluslet_GuideList extends Pluslet {
   }
 
   static function getMenuIcon()
-    {
-        $icon="<i class=\"fa fa-bars\" title=\"" . _("List Guides") . "\" ></i><span class=\"icon-text\">"  . _("List Guides") . "</span>";
-        return $icon;
-    }
+  {
+    $icon="<i class=\"fa fa-bars\" title=\"" . _("List Guides") . "\" ></i><span class=\"icon-text\">"  . _("List Guides") . "</span>";
+    return $icon;
+  }
 
 
 }

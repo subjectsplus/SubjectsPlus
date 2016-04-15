@@ -3964,6 +3964,7 @@ Additional Helper Classes - AGD
 }
 
 
+
 /* The Modal (background) */
 .sp-modal {
   position: fixed;
@@ -3975,6 +3976,7 @@ Additional Helper Classes - AGD
   background: rgba(0, 0, 0, 0.8);
   z-index: 99999;
   opacity:1;
+
 }
 
 .sp-modal > div {

@@ -119,6 +119,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                     </label>
 
 
+
                     <button class="pure-button pure-button-primary" id="show-record-description-btn">Add Description</button>
                     <div id="record-description-container">
                         <label for="description">
@@ -170,11 +171,16 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
     $('#link-list-title-input').bind('keypress keyup blur', function() {
 
+
         $("input[name='new_pluslet_title']").val($(this).val());
+
+
 
         $("input[id^='pluslet-update-title-']").val($(this).val());
 
+
     });
+
 
     $('body').on('click', '#sort-list-alpha-btn', function() {
         console.log('sort list');
