@@ -3,6 +3,15 @@ $id = uniqid();
 
 //declare gloabl email for broken record report
 global $administrator_email;
+
+
+//set title if exists
+if( (isset($this->_title)) && (!empty($this->_title)) ) {
+    $title = $this->_title;
+} else {
+    $title = "Link List";
+}
+
 ?>
 
 <style>
@@ -13,9 +22,13 @@ global $administrator_email;
 
 
 <div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
-<?php echo $this->_title; ?>
     <div class="pure-g">
+
         <div class="pure-u-1-3">
+            <label for="link-list-title-input">Title
+                <input type="text" id="link-list-title-input" value="<?php echo $title; ?>" />
+            </label>
+
             <h3>Record Search Box</h3>
 
             <!--display db results list-->
@@ -75,7 +88,7 @@ global $administrator_email;
 
             <!--buttons-->
             <div class="db-list-buttons" style="display: block;">
-
+                <button class="pure-button pure-button-primary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
                 <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
             </div>
         </div>
@@ -155,13 +168,24 @@ global $administrator_email;
     }
 
 
-    $('body').on('click', '.close-trigger', function() {
-        if($('.db-list-results').length > 0) {
-            $('.dblist-button').trigger('click');
-        } else {
-            $('#delete-').trigger('click');
-        }
+
+    $('#link-list-title-input').bind('keypress keyup blur', function() {
+
+        $("input[name='new_pluslet_title']").val($(this).val());
+
+        $("input[id^='pluslet-update-title-']").val($(this).val());
 
     });
+
+
+    $('body').on('click', '#sort-list-alpha-btn', function() {
+        console.log('sort list');
+        $( "li", "#db-list-results" ).sort(function( a, b ) {
+            return $( a ).text() > $( b ).text();
+
+        }).appendTo( "#db-list-results" );
+    });
+
+
 
 </script>

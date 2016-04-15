@@ -235,8 +235,17 @@ function LinkList(id,idSelector) {
     $('body').on('click', '#show_all_desc_input', function() {
         toggleCheck('data-show-description',$('.show-description-toggle'));
     });
-    
 
+
+    // Pseudo-cancel action - if sortable list has items close triggers save otherwise it triggers fake delete
+    $('body').on('click', '.close-trigger', function() {
+        if($('.db-list-results').length > 0) {
+            $('.dblist-button').trigger('click');
+        } else {
+            $('#delete-').trigger('click');
+        }
+
+    });
 
 
 
