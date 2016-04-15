@@ -72,13 +72,15 @@ class Pluslet_GuideList extends Pluslet {
 
         foreach ($guides as $myrow) {
 
-          $guide_location = $guide_path . $myrow['shortform'];
-          $list_bonus = "";
 
-          if ($myrow['description'] != "") {$list_bonus .= $myrow['description'] . "<br /><br />"; } // add description
-          if ($myrow['keywords'] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow['keywords']; } // add keywords
+        $guide_location = $guide_path . $myrow['shortform'];
+        $list_bonus = "";
 
-          $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow['subject']) . "</a>
+        if ($myrow['description'] != "") {$list_bonus .= $myrow['description'] . "<br /><br />"; } // add description
+        if ($myrow['keywords'] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow['keywords']; } // add keywords
+
+        $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow['subject']) . "</a>
+
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
 

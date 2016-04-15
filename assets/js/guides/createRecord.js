@@ -6,7 +6,7 @@ var createRecord = {
     options : {
       notifyElement : '.notify'
     },
-    insertRecord : function(record) {
+    insertRecord : function(record, callback) {
         var notification = "";
 
         // Insert the record object
@@ -17,6 +17,7 @@ var createRecord = {
             if (res.response !== "error") {
                 notification = "<a target='_blank' href='" + res.response + "'>" + record.title + "</a>";
                 createRecord.insertNotify(notification);
+                callback(res);
             } else {
                 notification = "There was an error inserting the record";
                 createRecord.insertNotify(notification);
