@@ -30,8 +30,8 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                     <label for="link-list-title-input">Title:
                         <input type="text" id="link-list-title-input" value="<?php echo $title; ?>" />
                     </label>
-                    <span class="dblist-button pure-button pure-button-primary">Save List</span>
-                    <span class="delete-trigger modal-delete"><a id="delete-<?php echo $this->_pluslet_id; ?>">Delete List</a></span>
+                    <button class="dblist-button pure-button pure-button-primary modal-save">Save List</button>
+                    <button class="delete-trigger modal-delete"><a id="delete-<?php echo $this->_pluslet_id; ?>">Delete List</a></button>
                 </div>
                 <div class="pure-u-1-4 modal-header-controls">                     
                     <span class="close-trigger"><i class="fa fa-times" aria-hidden="true"></i>Close Window</span>
@@ -65,10 +65,16 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
             <div class="modal-subs">
 
                 <h3>Selected Records</h3>
-                <span class="db-list-input-label">Show all: </span> <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox">
-                <span class="db-list-input-label"> Icons </span>
+                <span class="db-list-input-label">Show all: </span> 
+                <input type="checkbox" name="show_all_icons_input" id="show_all_icons_input" class="pure-checkbox"> <span class="db-list-input-label"> Icons </span>
                 <input type="checkbox" name="show_all_desc_input" id="show_all_desc_input" class="pure-checkbox"> <span class="db-list-input-label">Descriptions</span>
                 <input type="checkbox" name="show_all_notes_input" id="show_all_notes_input" class="pure-checkbox"> <span class="db-list-input-label">Notes</span>
+
+                <!--buttons-->
+                <div class="records-sort">
+                    <button class="pure-button pure-button-secondary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
+                    <button class="pure-button pure-button-secondary dblist-reset-button">Reset List Box</button>
+                </div>
 
 
                 <!--display results selected-->
@@ -83,31 +89,22 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                         echo $this->_bottomText;
                     } ?>
                 </div>
+                
+                <label for="link-list-textarea" class="label-context">Link List Context:</label>
+                <button class="pure-button pure-button-outline" id="show-linklist-textarea-btn"><i class="fa fa-pencil" aria-hidden="true"></i>Add Text</button>
 
-                <br>
-                <button class="pure-button pure-button-primary" id="show-linklist-textarea-btn">Add Text</button>
-
-                <div id="link-list-textarea-container">
-                    <label for="link-list-textarea">Link List Context:
-                        <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
-                    </label>
-                    <br>
-                    <div>
+                <div id="link-list-textarea-container">                   
+                    <textarea id="link-list-textarea" name="LinkList-extra-textarea" cols="34" rows="7"></textarea>
+                    
+                    <div class="label-context-options">
                         <label for="top-text-radio">
                             <input id="top-text-radio" type="radio" name="LinkList-extra-radio" value="top"> Above List
-                        </label> <br>
+                        </label> <br />
                         <label for="bottom-text-radio">
                             <input id="bottom-text-radio" type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List
-                        </label><br>
-
+                        </label>
                     </div>    
-                </div>
-
-                <!--buttons-->
-                <div class="db-list-buttons" style="display: block;">
-                    <button class="pure-button pure-button-primary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
-                    <button class="pure-button pure-button-primary dblist-reset-button">Reset List Box</button>
-                </div>
+                </div>                
 
             </div>
         </div>
@@ -120,46 +117,53 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                     <fieldset>
 
                         <label for="record-title">
-                            Record Title                    <input id="record-title" type="text" value="" required="">
+                            Record Title <input id="record-title" type="text" value="" required="">
                         </label>
-
 
                         <label for="alternate-title">
-                            Alternate Title                    <input id="alternate-title" value="" type="text">
+                            Alternate Title <input id="alternate-title" value="" type="text">
                         </label>
+
                         <label for="location">
-                            Location (Enter URL)                    <input id="location" type="text" value="" required="">
+                            Location (Enter URL) <input id="location" type="text" value="" required="">
+                             <span id="checkurl" class="checkurl_img_wrapper"><i alt="Check URL" title="Check URL" border="0" class="fa fa-globe fa-2x clickable"></i> Check URL</span>
                         </label>
 
-                        <label for="checkurl">
-                            <span id="checkurl" class="checkurl_img_wrapper"><i alt="Check URL" title="Check URL" border="0" class="fa fa-globe fa-2x clickable"></i></span>
+                        <label for="description">
+                            Description 
                         </label>
+                        
+                        <button class="pure-button pure-button-outline" id="show-record-description-btn"><i class="fa fa-pencil" aria-hidden="true"></i>Add Description</button>
+                        
+                        <div id="record-description-container">                            
+                            <textarea id="description"></textarea>                           
+                        </div>                        
 
-
-                        <button class="pure-button pure-button-primary" id="show-record-description-btn">Add Description</button>
-                        <div id="record-description-container">
-                            <label for="description">
-                                Description                    <textarea id="description"></textarea>
-                            </label>
-                        </div>
-                        <br>
-
-                        <button id="add-record" class="pure-button pure-button-primary" type="submit">Create Record</button>
+                        <button id="add-record" class="pure-button pure-button-primary modal-create-record-btn" type="submit">Create Record</button>
                     </fieldset>
+                    
                     <div class="notify"></div>
+
                 </form>
 
-
-                <button class="pure-button pure-button-primary" id="show-broken-record-form-btn">Report Broken Record</button>
-
+                <h3>Broken Link / Record</h3>
+                <button class="pure-button pure-button-secondary" id="show-broken-record-form-btn">Report Broken Record</button>
+                
                 <div id="report-broken-record-container" style="display: none;">
-                    <form action="mailto:<?php echo $administrator_email; ?>?Subject='Broken Record Link'" method="post" enctype="text/plain">
-                        <label for="broken-record-name">Record: </label><br>
-                        <input id="broken-record-name" name="broken-record-name" type="text"><br>
-                        <label id="broken-record-msg">Comments: </label><br>
-                        <textarea id="broken-record-msg" name="broken-record-msg" rows="7" cols="34"></textarea><br>
-                        <input type="submit" value="Send" class="pure-button pure-button-primary" id="report-broken-record">
-                        <input type="reset" value="Reset" class="pure-button pure-button-primary">
+                    <form action="mailto:<?php echo $administrator_email; ?>?Subject='Broken Record Link'" method="post" enctype="text/plain" class="pure-form pure-form-stacked">
+                        <fieldset>
+                            <label for="broken-record-name">Record         
+                                <input id="broken-record-name" name="broken-record-name" type="text">
+                            </label>
+                            
+                            <label id="broken-record-msg">Comments 
+                                <textarea id="broken-record-msg" name="broken-record-msg" rows="7" cols="34"></textarea>
+                            </label>
+
+                           
+                            <button type="submit" class="pure-button pure-button-primary" id="report-broken-record">Send</button>
+                            <button type="reset" class="pure-button pure-button-primary">Reset</button>
+                        </fieldset>
                     </form>
                 </div>
 
@@ -204,6 +208,13 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
         }).appendTo( "#db-list-results" );
     });
+
+
+    $('.db-list-results, .databases-searchresults').enscroll({
+        verticalTrackClass: 'track3',
+        verticalHandleClass: 'handle3',
+        minScrollbarLength: 28
+    }); 
 
 
 
