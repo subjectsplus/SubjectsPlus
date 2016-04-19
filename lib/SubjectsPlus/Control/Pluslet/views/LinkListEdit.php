@@ -192,22 +192,14 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
     }
 
     if(bottomText != "") {
-        console.log(bottomText);
         CKEDITOR.instances['link-list-textarea'].setData( bottomText );
         $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
     }
 
-
-
+    
     $('#link-list-title-input').bind('keypress keyup blur', function() {
-
-
         $("input[name='new_pluslet_title']").val($(this).val());
-
-
         $("input[id^='pluslet-update-title-']").val($(this).val());
-
-
     });
 
 
