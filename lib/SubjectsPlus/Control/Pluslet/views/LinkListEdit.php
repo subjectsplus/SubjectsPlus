@@ -22,7 +22,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
 
 <div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
-    <div class="pure-g modal-container">
+    <div class="modal-container">
 
         <div class="modal-header">
             <div class="pure-g">
@@ -39,7 +39,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
             </div>
         </div>
 
-
+        <div class="pure-g">
         <div class="pure-u-1-3">
             <div class="modal-subs">             
 
@@ -169,6 +169,9 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
             </div>
         </div>
+        </div>
+
+
     </div>
 </div>
 
