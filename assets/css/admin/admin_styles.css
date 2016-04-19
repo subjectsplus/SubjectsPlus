@@ -1137,9 +1137,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .db-list-label {
   display: inline-block; 
   margin-bottom: 4px;
-  width: -moz-calc(100% - 40px);
-  width: -webkit-calc(100% - 40px);
-  width: calc(100% - 40px);
+  width: -moz-calc(100% - 30px);
+  width: -webkit-calc(100% - 30px);
+  width: calc(100% - 30px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -4108,6 +4108,8 @@ Link Link Admin Panel
 }
 
 #show-record-description-btn, #show-broken-record-form-btn {margin: 0 0 10px 0; font-size: 12px;}
+
+.show-create-record, .show-report-broken-record {cursor:pointer;}
 
 .modal-create-record-btn {display: block; margin:20px 0;}
 
