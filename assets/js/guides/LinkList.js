@@ -252,7 +252,8 @@ function LinkList(id,idSelector) {
 
 
     // Triggered by X on sortable list
-    $('body').on('click','.fa-remove', function() {
+    $('body').on('click','.db-list-remove-item', function() {
+        console.log('clicked');
         var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
 
         for (var i=0;i<myRecordList.recordList.length;i++) {
