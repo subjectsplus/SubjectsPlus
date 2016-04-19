@@ -110,7 +110,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
         </div>
 
         <div class="pure-u-1-3">
-            <div class="modal-subs">            a
+            <div class="modal-subs">            
 
                 <h3>Add New Record</h3>
                 <form id="create-record-form" class="pure-form pure-form-stacked">
