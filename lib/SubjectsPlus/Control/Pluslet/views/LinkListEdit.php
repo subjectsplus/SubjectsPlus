@@ -112,8 +112,8 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
         <div class="pure-u-1-3">
             <div class="modal-subs">            
 
-                <h3>Add New Record</h3>
-                <form id="create-record-form" class="pure-form pure-form-stacked">
+                <h3 class="show-create-record"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i> Add New Record</h3>
+                <form id="create-record-form" class="pure-form pure-form-stacked" style="display:none;">
                     <fieldset>
 
                         <label for="record-title">
@@ -148,9 +148,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
                 </form>
 
-                <h3>Broken Link / Record</h3>
-                <button class="pure-button pure-button-secondary" id="show-broken-record-form-btn">Report Broken Record</button>
-                
+                <h3 class="show-report-broken-record"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i> Broken Link / Record</h3>
                 <div id="report-broken-record-container" style="display: none;">
                     <form action="mailto:<?php echo $administrator_email; ?>?Subject='Broken Record Link'" method="post" enctype="text/plain" class="pure-form pure-form-stacked">
                         <fieldset>
@@ -163,7 +161,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                             </label>
 
                            
-                            <button type="submit" class="pure-button pure-button-primary" id="report-broken-record">Send</button>
+                            <button type="submit" class="pure-button pure-button-primary" id="report-broken-record">Report Broken Record</button>
                             <button type="reset" class="pure-button pure-button-primary">Reset</button>
                         </fieldset>
                     </form>
@@ -220,12 +218,25 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
         }).appendTo( "#db-list-results" );
     });
 
-
+    //Add custom js scrollbar for list containers
     $('.db-list-results, .databases-searchresults').enscroll({
         verticalTrackClass: 'track3',
         verticalHandleClass: 'handle3',
         minScrollbarLength: 28
+    });
+
+    // Expand/collapse "Add record containers"
+    $(".show-create-record").click(function() {        
+        $("#create-record-form ").toggle();
+        $(".show-create-record .fa").toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
     }); 
+
+    $(".show-report-broken-record").click(function() {        
+        $("#report-broken-record-container ").toggle();
+        $(".show-report-broken-record .fa").toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
+    });
+
+
 
 
 
