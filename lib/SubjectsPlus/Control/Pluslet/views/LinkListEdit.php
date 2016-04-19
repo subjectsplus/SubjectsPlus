@@ -155,15 +155,18 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
     
     
     var topText = $('.link-list-text-top').html();
-    var bottomText = $('.link-list-text-bottom').html();
+    var bottomText = $('.link-list-text-bottom').text();
+
+    console.log('top: ' + topText);
+    console.log('bottom: ' + bottomText);
     
     if(topText != "") {
-        CKEDITOR.instances['link-list-textarea'].setData( $('.link-list-text-top').html() );
+        CKEDITOR.instances['link-list-textarea'].setData( topText );
         $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
     }
 
     if(bottomText != "") {
-        CKEDITOR.instances['link-list-textarea'].setData( $('.link-list-text-bottom').html() );
+        CKEDITOR.instances['link-list-textarea'].setData( bottomText );
         $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
     }
 
