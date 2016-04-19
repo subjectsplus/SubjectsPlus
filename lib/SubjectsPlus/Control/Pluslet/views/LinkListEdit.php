@@ -180,20 +180,19 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
 <script>
     LinkList();
-    
-    
-    var topText = $('.link-list-text-top').html();
-    var bottomText = $('.link-list-text-bottom').text();
 
-    console.log('top: ' + topText);
-    console.log('bottom: ' + bottomText);
-    
+
+    var topText = $('.insert-text-top').html();
+    var bottomText = $('.insert-text-bottom').html();
+
+
     if(topText != "") {
         CKEDITOR.instances['link-list-textarea'].setData( topText );
         $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
     }
 
     if(bottomText != "") {
+        console.log(bottomText);
         CKEDITOR.instances['link-list-textarea'].setData( bottomText );
         $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
     }
