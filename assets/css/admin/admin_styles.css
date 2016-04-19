@@ -1081,11 +1081,20 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .databases-searchresults {background-color: #ececec; padding: 5px 0; margin: 5px 0 0 0; overflow: auto; overflow-x:none; max-height:415px; width: 85% !important; border-right: 1px solid #EEEEEE; border-bottom: 1px solid #EEEEEE; border-left: 1px solid #DADFE1; border-top: 1px solid #DADFE1;}
 
-.db-list-item {width: 430px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 8px 0 12px; color: #333; font-size: 12px; line-height: 1.3em; display:inline-block; margin: 0; border-bottom: 1px dotted #ccc;} 
+.db-list-item {width: 98%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 8px 0 12px; color: #333; font-size: 12px; line-height: 1.3em; display:inline-block; margin: 0; border-bottom: 1px dotted #ccc;} 
 
-.db-list-item-link {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 375px; font-size: 12px; font-family:'NotoSansRegular' !important; line-height: 1.1em;}
+.db-list-item-link {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-family:'NotoSansRegular' !important; line-height: 1.1em; 
+  width: -moz-calc(100% - 25px);
+  width: -webkit-calc(100% - 25px);
+  width: calc(100% - 25px);
+}
 
-.list-search-label { width: 335px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular' !important; font-weight: normal; }  
+.list-search-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular' !important; font-weight: normal; 
+  width: -moz-calc(100% - 25px);
+  width: -webkit-calc(100% - 25px);
+  width: calc(100% - 25px);
+  display: inline-block;
+}  
 
 .add-to-list-button { font-size: 0.9em !important; padding: 2px 4px; }
 
