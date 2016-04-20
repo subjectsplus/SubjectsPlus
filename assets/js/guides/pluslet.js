@@ -71,6 +71,17 @@ function pluslet() {
 
 			    });
 
+
+				$(document.body).on('click', '.table-of-contents-header > a', function(e){
+					e.preventDefault();
+					var tabIndex = $(this).data("tab_index");
+
+					$('#tabs').tabs('select', tabIndex);
+
+					window.location.hash = 'tab-' + tabIndex;
+
+				});
+
 			    
 			    ////////////////////
 			    // box-settings bind to show when clicking on gear or edit icon.
