@@ -103,9 +103,10 @@ class Pluslet_LinkList extends Pluslet
         $textTop    = $this->getLinkListTextTop();
         $textBottom = $this->getLinkListTextBottom();
 
-        $this->_topText = "<div class='link-list-text-top' style='display:none;'>{$textTop}</div>";
 
-        $this->_bottomText = "<div class='link-list-text-bottom' style='display:none;'>{$textBottom}</div>";
+        $this->_topText = "<div  class='insert-text-top' style='display:none;'>{$textTop}</div>";
+
+        $this->_bottomText = "<div class='insert-text-bottom' style='display:none;'>{$textBottom}</div>";
 
         $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
 
