@@ -1,0 +1,27 @@
+<html>
+<head>
+<style>
+.book_isbn_container{
+	width: 40%;
+	float: left;
+	margin: 2%;
+	padding: 3px;
+	-webkit-box-shadow: 6px 3px 5px -2px rgba(161,152,161,0.52);
+    -moz-box-shadow: 6px 3px 5px -2px rgba(161,152,161,0.52);
+    box-shadow: 6px 3px 5px -2px rgba(161,152,161,0.52);
+}
+</style>
+</head>
+<?php
+//@todo [Get the styles in a separate .css file]
+foreach($this->output_books as $book){
+      ?><div class="book_isbn_container">
+        <label><?echo $book["title"] ?></label><br><?
+      ?><text><?echo $book["subtitle"] ?></text><br><?
+      ?><label><?echo implode(" - ", $book["authors"]) ?></label><br><?
+      ?><img src=<? echo $book["image"]?>></img>
+        </div>
+      <?
+}
+?><br style="clear: both"> <?
+?>
