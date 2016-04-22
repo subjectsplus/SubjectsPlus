@@ -1,11 +1,62 @@
 <script>
+  //Misc features needed for perform the actions
+  var UTILS = UTILS || {};
+  UTILS.generateISBNId = function(){
+  	var temp_date = new Date();
+  	return function(){
+        return temp_date.valueOf();
+    }
+  }
+//@todo create an html helper to put the above code inside, this fiel is not responsible
+//for that code format
+  var ISBNActions = ISBNActions || {};
+        ISBNActions.init   = function () {
+                     $(document).off("click", "#isbn_add_new").on("click","#isbn_add_new", function(){
+                      var id = (UTILS.generateISBNId())();
+                      var insert_text_in =  '<div class="single_isbn">'+ 
+                                                 '<input class="isbn_input" name="ISBNSearch-extra-isbn'+ id +'" type="text"/>'+
+                                                 '<br>'+
+                                                 '<input class="check_isbn" type="button" value="check"/>'+
+                                                 '<input class="delete_isbn_entry" type="button" value="-">'+
+                                             '</div>'+
+                                             '<br>';
+                      $("#isbn_input_container").append(insert_text_in);
+                      });
+                      $(document).off("click", ".check_isbn").on("click",".check_isbn", function(){
+                        var input_to_check = $(this).siblings(".isbn_input").val();
+                        var ajax_request = $.ajax({
+                                             method: "POST",
+                                             url: "helpers/isbn_search/isbn_checker.php",
+                                             data: {isbn_number : input_to_check}
+                                           });
+                        ajax_request.done(function( msg ) {
+                        	var json = JSON.parse(msg);
+                            alert(json.totalItems);
+                          });                    
+                      });
+                      $(document).off("click",".delete_isbn_entry").on("click",".delete_isbn_entry", function(){
+                         alert("tumba isbn");
+                      });
+            };
+   
+  ISBNActions.init();
+
 
 </script>
-<input type="text"/>
-<br>
-<input type="text"/>
-<br>
-<input type="text"/>
-<br>
-<input type="text"/>
-<h1>Test Box</h1>
+<div id="isbn_general_container">
+	<div id="isbn_input_container">
+       <? foreach ($this->json_extra as $key => $value) {
+          ?> <div class="single_isbn"> 
+              <input class="isbn_input" name="ISBNSearch-extra-<? echo $key ?>" type="text" value = <? echo $value ?> />
+              <br>
+              <input class="check_isbn" type="button" value="check"/>
+              <input class="delete_isbn_entry" type="button" value="-">
+              </div> <?
+              if($key !== "counter") {
+
+              }
+       } ?>
+       <br>
+    </div>
+<input id="isbn_add_new" type="button" value="+ Add ISBN"/>
+<? echo $this->data; ?>
