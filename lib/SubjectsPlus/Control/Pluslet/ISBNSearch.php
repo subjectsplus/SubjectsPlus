@@ -5,11 +5,8 @@
  * Date: 4/17/16
  * Time: 11:56 PM
  */
-
 namespace SubjectsPlus\Control;
-use SubjectsPlus\Control\Helpers\Searcher;
 require_once("Pluslet.php");
-
 class Pluslet_ISBNSearch extends Pluslet
 {
 
@@ -17,7 +14,6 @@ class Pluslet_ISBNSearch extends Pluslet
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
         $this->_type = "ISBNSearch";
-      //  $this->_pluslet_bonus_classes = "type-googlesearch";
     }
     protected function onEditOutput()
     {
@@ -41,20 +37,8 @@ class Pluslet_ISBNSearch extends Pluslet
         if(isset($this->_extra) && $this->_extra !== "") {
             $json_extra = json_decode($this->_extra);
           
-           // $searcher = new SearcherFactory();
-
-            foreach ($json_extra as $key => $value) {
-             $page = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=isbn:".$value);
-             $elements = json_decode($page);
-             $title = $elements->items[0]->volumeInfo->title;
-             $subtitle = isset($elements->items[0]->volumeInfo->subtitle)?$elements->items[0]->volumeInfo->subtitle:"";
-             $authors = $elements->items[0]->volumeInfo->authors;
-             $thumbnail = $elements->items[0]->volumeInfo->imageLinks->smallThumbnail;
-             
-             $this->output_books[] = array("title"=>$title, "subtitle"=>$subtitle, "authors"=>$authors, "image"=>$thumbnail);
-            }
-            
-
+            $searcher = $this->getISBNInstance("GoogleBooks");
+            $this->output_books = $searcher->getBooks($json_extra);
 
              $output = $this->loadHtml(__DIR__ . '/views/ISBNSearchView.html');
 
@@ -76,8 +60,8 @@ class Pluslet_ISBNSearch extends Pluslet
         $icon="<i class=\"fa fa-users\" title=\"" . _("ISBN Search") . "\" ></i><span class=\"icon-text\">"  . _("ISBNSearch") . "</span>";
         return $icon;
     }
-    private function checkISBN(){
-        return json_encode(array("succes"=>true));
+    private function getISBNInstance($searcher){
+        return Helpers\ISBNSearcher\SearcherFactory::build($searcher);
     }
 
 }
