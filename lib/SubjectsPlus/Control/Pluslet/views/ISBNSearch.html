@@ -1,20 +1,18 @@
-<script>
 
-</script>
 <div id="isbn_general_container">
 	<div id="isbn_input_container">
        <? foreach ($this->json_extra as $key => $value) {
           ?> <div id="<? echo $key ?>" class="single_isbn"> 
               <input class="isbn_input" name="ISBNSearch-extra-<? echo $key ?>" type="text" value = <? echo $value ?> />
               <br>
-              <input class="check_isbn" type="button" value="check"/>
-              <input class="delete_isbn_entry" type="button" value="-" delete-container-id="<? echo $key?>">
+              <button class="check_isbn" type="button">check</button>
+              <button class="delete_isbn_entry" type="button" delete-container-id="<? echo $key?>">-</button>
               </div> <?
               if($key !== "counter") {
 
               }
        } ?>
-       <br>
     </div>
-<input id="isbn_add_new" type="button" value="+ Add ISBN"/>
+    <br>
+<button id="isbn_add_new" type="button">+ Add ISBN</button>
 <? echo $this->data; ?>

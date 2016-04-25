@@ -12,18 +12,13 @@
 //-determine a way that ISBNActions.init() is called only one time, so the click events over the buttons are only declared one time.
   var ISBNActions = ISBNActions || {
         init : function () {
-                     $(document).off("click","#isbn_add_new").on("click","#isbn_add_new", function(){
+                     $(document).on("click","#isbn_add_new", function(){
                       var id = (UTILS.generateISBNId())();
-                      var insert_text_in =  '<div id="isbn'+ id +'" class="single_isbn">'+ 
-                                                 '<input class="isbn_input" name="ISBNSearch-extra-isbn'+ id +'" type="text"/>'+
-                                                 '<br>'+
-                                                 '<input class="check_isbn" type="button" value="check"/>'+
-                                                 '<input class="delete_isbn_entry" type="button" value="-" delete-container-id = "isbn'+ id +'">'+
-                                             '</div>'+
-                                             '<br>';
-                      $("#isbn_input_container").append(insert_text_in);
+                      
+                      var data = {id:id};
+                      $("#isbn_input_container").append(ISBNActions.getISBNInputBody(data));
                       });
-                      $(document).off("click",".check_isbn").on("click",".check_isbn", function(){
+                      $(document).on("click",".check_isbn", function(){
                         var input_to_check = $(this).siblings(".isbn_input").val();
                         var ajax_request = $.ajax({
                                              method: "POST",
@@ -40,7 +35,16 @@
                          var id_to_delete = $_this.attr("delete-container-id");
                          $("#"+id_to_delete).remove();
                       });
-            }
+            },
+        getISBNInputBody : function(params) {
+          var insert_text_in =  '<div id="isbn'+ params.id +'" class="single_isbn">'+ 
+                                    '<input class="isbn_input" name="ISBNSearch-extra-isbn'+ params.id +'" type="text"/>'+
+                                    '<br>'+
+                                    '<button class="check_isbn">check</button>'+
+                                    '<button class="delete_isbn_entry" delete-container-id = "isbn'+ params.id +'">-</button>'+
+                                '</div>';
+          return insert_text_in;
+        }    
       }
    
   ISBNActions.init();

@@ -37,12 +37,6 @@
 
                                       ));
 
-    $am->set('handlebars', new AssetCache(
-             new FileAsset($assets . DIRECTORY_SEPARATOR . 'handlebars' . DIRECTORY_SEPARATOR . 'handlebars-v4.0.5.js')
-             ,new FilesystemCache($cache)
-
-             ));
-
     $am->set('otherjs', new AssetCache(
              new GlobAsset($assets . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR .  '*.js')
 
@@ -64,8 +58,7 @@
     			array(new AssetReference($am, 'jquery'),
     					new AssetReference($am, 'jquery_ui'),
     					new AssetReference($am,'otherjs'),
-    					new AssetReference($am, 'guidejs')),
-              new AssetReference($am, 'handlebars')
+    					new AssetReference($am, 'guidejs'))
     			 
     	);
     	
