@@ -31,11 +31,11 @@ $view_contact_info = "";
 if ($_SESSION['user_type_id'] == '1') {
   // allow user to update their own bio?
   if (isset($user_bio_update) && $user_bio_update == TRUE) {
-    $mod_bio = "<p class=\"star-class\"><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">Update Your Biographical Details</a></p>";
+    $mod_bio = "<p class=\"star-class\"><a href=\"includes/set_bio.php?staff_id=" . $_SESSION['staff_id'] . "\" class=\"showsmall\">" . _("Update Your Biographical Details") . "</a></p>";
   }
   // allow user to update their own photo?
  if (isset($user_photo_update) && $user_photo_update == TRUE) {
-    $mod_photo = "<p class=\"star-class\"><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">Update Headshot</a></p>";
+    $mod_photo = "<p class=\"star-class\"><a href=\"includes/set_picture.php?staff_id=" . $_SESSION['staff_id'] . "\" id=\"load_photo\">" . _("Update Headshot") . "</a></p>";
 
   }
 }
@@ -61,7 +61,7 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
                 <?php print $headshot; ?>
             </div>
             <div class="pure-u-1 pure-u-lg-3-4 pure-u-xl-4-5">
-                <p class="star-class"><a href="includes/set_password.php?staff_id=<?php print $_SESSION["staff_id"]; ?>" id="reset_password">Reset Password </a></p>
+                <p class="star-class"><a href="includes/set_password.php?staff_id=<?php print $_SESSION["staff_id"]; ?>" id="reset_password"><?php print _("Reset Password"); ?></a></p>
                 <?php
                 print $mod_bio;
                 print $mod_photo;
