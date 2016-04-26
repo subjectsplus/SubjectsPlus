@@ -40,6 +40,8 @@ if( (empty($this->getAction())) || (empty($this->getInstitutionCode())) ||
 } else { ?>
 
 
+
+
 <form name="searchForm" role="search" method="get" action="<?php echo $this->getAction(); ?>" class="pure-form" enctype="application/x-www-form-urlencoded; charset=utf-8" id="simple" target="_blank" onsubmit="searchPrimo()">
     <div class="formEntryArea">
     <input type="hidden" name="institution" value="<?php echo $this->getInstitutionCode(); ?>">
@@ -71,7 +73,7 @@ if( (empty($this->getAction())) || (empty($this->getInstitutionCode())) ||
     <br><br>
     <input type="hidden" id="scp.scps" name="scp.scps" value="<?php echo $this->getScope(); ?>" />
 
-    <select class="form-control" id="vl(650122160UI1)" name="vl(650122160UI1)">
+    <select class="form-control" id="resource-type" name="">
         <option value="all_items" id="all_items">All items</option>
         <option value="books" id="books">Books</option>
         <option value="articles" id="articles">Articles</option>
@@ -134,3 +136,26 @@ if( (empty($this->getAction())) || (empty($this->getInstitutionCode())) ||
 
 
 <?php } ?>
+
+<script>
+
+    $( "#tab" ).change( function() {
+
+        var tab = this.value;
+
+        if(tab == 'everything') {
+            $('#resource-type').attr('name', "vl(672468638UI1)");
+
+        } else if (tab == 'default_tab') {
+            $('#resource-type').attr('name', "vl(672468639UI1)");
+
+        } else {
+            $('#resource-type').attr('name', "vl(672468638UI1)");
+
+        }
+
+    });
+
+
+
+</script>
