@@ -85,7 +85,7 @@ function flyout() {
 
 			//Top Level Panel Flyout 
 			window.onload = function() {
-				mainslider.slideReveal('show');
+				mainslider.slideReveal('hide');
 			};
 
 		},
