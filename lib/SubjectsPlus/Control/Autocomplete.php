@@ -244,7 +244,11 @@ AND title.title LIKE :search_term");
 
       	$arr[$i]['content_type'] = $myrow['content_type'];
 
-        $arr[$i]['location_url'] = $myrow['location_url'];
+        if(isset($myrow['location_url'])) {
+          $arr[$i]['location_url'] = $myrow['location_url'];
+        }
+
+
 
         if (isset( $myrow['short_form'])) {
           $arr[$i]['shortform'] =  $myrow['short_form'];
