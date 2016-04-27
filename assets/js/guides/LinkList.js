@@ -85,7 +85,7 @@ function LinkList(id,idSelector) {
             alert('Please add some records to your list.')
         }
     });
-
+    
     //show textareas
     $('body').on('click', '#show-linklist-textarea-btn', function() {
         $('#link-list-textarea-container').show();
@@ -245,9 +245,9 @@ function LinkList(id,idSelector) {
         if($('.db-list-results').length > 0) {
             $('.dblist-button').trigger('click');
         } else {
-            $('#delete-').trigger('click');
+            thisList = $(this).closest('div[name="new-pluslet-LinkList"]');
+            thisList.remove();
         }
-
     });
 
 
