@@ -9,7 +9,7 @@ function LinkList(id,idSelector) {
 
     var myId = id;
 
-    console.log(myId);
+    //console.log(myId);
 
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
@@ -78,7 +78,7 @@ function LinkList(id,idSelector) {
 
             saveSetup().saveGuide();
             
-            document.location.reload(true);
+            //document.location.reload(true);
 
 
         } else {
@@ -191,24 +191,24 @@ function LinkList(id,idSelector) {
 
 
     function toggleCheck(attr,context) {
-        console.log("Checking?");
-        console.log( context.closest('.db-list-item-draggable'));
-        console.log(context.closest('.db-list-item-draggable').attr(attr));
+        //console.log("Checking?");
+        //console.log( context.closest('.db-list-item-draggable'));
+        //console.log(context.closest('.db-list-item-draggable').attr(attr));
 
         if (context.closest('.db-list-item-draggable').attr(attr) == 0) {
-            console.log("It's zero!");
+            //console.log("It's zero!");
             context.closest('.db-list-item-draggable').attr(attr, 1);
-            console.log(context.closest('.db-list-item-draggable').attr(attr));
+            //console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-            console.log(context.children());
+            //console.log(context.children());
             context.children().removeClass('fa-minus');
             context.children().addClass('fa-check');
         } else {
-            console.log("It's one!");
+            //console.log("It's one!");
             context.closest('.db-list-item-draggable').attr(attr, 0);
-            console.log(context.closest('.db-list-item-draggable').attr(attr));
+            //console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-            console.log(context.children());
+            //console.log(context.children());
             context.children().removeClass('fa-check');
             context.children().addClass('fa-minus');
         }
@@ -240,6 +240,57 @@ function LinkList(id,idSelector) {
     });
 
 
+
+    //delete a saved LinkList
+    $('body').on('click', '.modal-delete', function() {
+
+        var elementDeletion = $(this).closest('div[name="modified-pluslet-LinkList"]');
+
+        var thisPlusletId = $(this).closest('div[name="modified-pluslet-LinkList"]').attr('id').split('-')[1];
+        //console.log(thisPlusletId);
+
+        var g = guide();
+        var subjectId = g.getSubjectId();
+
+
+
+
+        $('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
+            autoOpen: true,
+            modal: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            dialogClass: 'topindex',
+            buttons: {
+                'Yes': function() {
+                    // Delete pluslet from database
+                    $('#response').load('helpers/guide_data.php', {
+                            delete_id: thisPlusletId,
+                            subject_id: subjectId,
+                            flag: 'delete'
+                        },
+                        function() {
+                            $('#response').fadeIn();
+                            $('#save_guide').fadeIn();
+
+                        });
+
+                    // Remove node
+                    $(elementDeletion).remove();
+                    $( this ).dialog( 'close' );
+                    return false;
+                },
+                Cancel: function() {
+                    $( this ).dialog( 'close' );
+                }
+            }
+        });
+        return false;
+
+    });
+
+
     // Pseudo-cancel action - if sortable list has items close triggers save otherwise it triggers fake delete
     $('body').on('click', '.close-trigger', function() {
         if($('.db-list-results').length > 0) {
@@ -254,7 +305,7 @@ function LinkList(id,idSelector) {
 
     // Triggered by X on sortable list
     $('body').on('click','.db-list-remove-item', function() {
-        console.log('clicked');
+        //console.log('clicked');
         var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
 
         for (var i=0;i<myRecordList.recordList.length;i++) {
