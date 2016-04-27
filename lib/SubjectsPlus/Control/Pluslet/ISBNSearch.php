@@ -19,7 +19,7 @@ class Pluslet_ISBNSearch extends Pluslet
     {
         $this->json_extra = json_decode($this->_extra);
         $this->data = $data['totalItems'];
-        $output = $this->loadHtml(__DIR__ . '/views/ISBNSearch.html');
+        $output = $this->loadHtml(__DIR__ . '/views/ISBNSearchEdit.html');
       
         $this->_body = $output;
     }
@@ -37,6 +37,10 @@ class Pluslet_ISBNSearch extends Pluslet
         if(isset($this->_extra) && $this->_extra !== "") {
             $json_extra = json_decode($this->_extra);
           
+          /**
+           * @todo Define "GoogleBoks" in a config file.
+           * @var ISearcher [get the instance of the new created ISearcher]
+           */
             $searcher = $this->getISBNInstance("GoogleBooks");
             //here you receive an instance of ISearcher, that's why you can call "getBooks" method 
             $this->output_books = $searcher->getBooks($json_extra);
@@ -68,7 +72,7 @@ class Pluslet_ISBNSearch extends Pluslet
      * @return [type]           [description]
      */
     private function getISBNInstance($searcher){
-        return Helpers\ISBNSearcher\SearcherFactory::build($searcher);
+        return Component\ISBNSearcher\SearcherFactory::build($searcher);
     }
 
 }

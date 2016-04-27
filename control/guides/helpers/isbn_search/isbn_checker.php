@@ -1,8 +1,9 @@
 <?php
 require_once("../../../includes/autoloader.php");
-use SubjectsPlus\Control\Helpers\ISBNSearcher as Searcher;
+use SubjectsPlus\Control\Component\ISBNSearcher as Searcher;
 
 $isbn_to_check = $_POST['isbn_number'];
+$isbn_to_check = str_replace("-", "" , $isbn_to_check);
 
 $searcher = Searcher\SearcherFactory::build("GoogleBooks");
 

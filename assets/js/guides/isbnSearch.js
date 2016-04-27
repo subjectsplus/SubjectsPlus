@@ -13,22 +13,29 @@
   var ISBNActions = ISBNActions || {
         init : function () {
                      $(document).on("click","#isbn_add_new", function(){
+                      var container_id = $(this).attr("container-id");
                       var id = (UTILS.generateISBNId())();
                       
                       var data = {id:id};
-                      $("#isbn_input_container").append(ISBNActions.getISBNInputBody(data));
+                      $("#isbn_input_container_"+container_id).append(ISBNActions.getISBNInputBody(data));
                       });
                       $(document).on("click",".check_isbn", function(){
-                        var input_to_check = $(this).siblings(".isbn_input").val();
-                        var ajax_request = $.ajax({
+                        $click_env = $(this);
+                        var input_to_check = $click_env.siblings(".isbn_input").val();
+
+                        if (input_to_check.trim() !== "") {
+                            var ajax_request = $.ajax({
                                              method: "POST",
                                              url: "helpers/isbn_search/isbn_checker.php",
                                              data: {isbn_number : input_to_check}
                                            });
-                        ajax_request.done(function( msg ) {
-                        	var json = JSON.parse(msg);
-                            alert(json.totalItems);
-                          });                    
+                            ajax_request.done(function( msg ){
+                        	      var json = JSON.parse(msg);
+                                var label_id = $click_env.attr("label-id");
+                                var valid = json.totalItems > 0 ? "Valid" : "not found";
+                                $("#"+label_id).html(valid);  
+                            });
+                        }                    
                       });
                       $(document).on("click",".delete_isbn_entry", function(){
                          var $_this = $(this);
@@ -39,9 +46,10 @@
         getISBNInputBody : function(params) {
           var insert_text_in =  '<div id="isbn'+ params.id +'" class="single_isbn">'+ 
                                     '<input class="isbn_input" name="ISBNSearch-extra-isbn'+ params.id +'" type="text"/>'+
+                                    '<label id="check_label_isbn'+ params.id +'"></label>'+
                                     '<br>'+
-                                    '<button class="check_isbn">check</button>'+
-                                    '<button class="delete_isbn_entry" delete-container-id = "isbn'+ params.id +'">-</button>'+
+                                    '<button class="check_isbn" label-id="check_label_isbn'+ params.id +'">check</button>'+
+                                    '<button class="delete_isbn_entry" delete-container-id = "isbn'+ params.id +'">delete</button>'+
                                 '</div>';
           return insert_text_in;
         }    

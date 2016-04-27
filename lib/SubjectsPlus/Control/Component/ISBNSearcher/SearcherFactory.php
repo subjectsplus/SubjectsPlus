@@ -1,13 +1,12 @@
 <?
-namespace SubjectsPlus\Control\Helpers\ISBNSearcher;
-//require_once("GoogleBooksSearcher.php");
+namespace SubjectsPlus\Control\Component\ISBNSearcher;
 class SearcherFactory {
 	function __construct() {
 
 	}
 	static function build($searcher_type)
     {
-        $searcher = "SubjectsPlus\\Control\\Helpers\\ISBNSearcher\\".$searcher_type."Searcher";
+        $searcher = "SubjectsPlus\\Control\\Component\\ISBNSearcher\\".$searcher_type."Searcher";
         //$searcher_class = new $searcher();
         if(class_exists($searcher)) {
           return new $searcher();

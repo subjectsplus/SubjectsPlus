@@ -15,13 +15,7 @@
 <?php
 //@todo [Get the styles in a separate .css file]
 foreach($this->output_books as $book){
-      ?><div class="book_isbn_container">
-        <label><?echo $book["title"] ?></label><br><?
-      ?><text><?echo $book["subtitle"] ?></text><br><?
-      ?><label><?echo implode(" - ", $book["authors"]) ?></label><br><?
-      ?><img src=<? echo $book["image"]?>></img>
-        </div>
-      <?
+       echo $book;
 }
 ?><br style="clear: both"> <?
 ?>
