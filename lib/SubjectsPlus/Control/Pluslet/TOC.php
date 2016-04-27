@@ -207,10 +207,11 @@ class Pluslet_TOC extends Pluslet {
           } else {
             // View
             // display only ticked items
+
             if ($this->_ticked_items) {
               if (in_array($parent_id, $this->_ticked_items)) {
 
-                $this->_body .= "<h4 class=\"table-of-contents-header\">$parent_name</h4>\n";
+                $this->_body .= "<h4 class=\"table-of-contents-header\"><a href=\"#tab-$parent_id\" data-tab_index=\"$parent_id\">$parent_name</a></h4>\n";
 
               }
 

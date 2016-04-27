@@ -56,7 +56,7 @@ function LinkList(id,idSelector) {
     });
 
     // Create List button
-    $(' .dblist-button, #sp-modal-close-btn').on('click', function () {
+    $(' .dblist-button').on('click', function () {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
         if (myRecordList.getList().length > 0) {
@@ -91,7 +91,8 @@ function LinkList(id,idSelector) {
         $('#link-list-textarea-container').show();
     });
 
-    $('body').on('click', '#show-record-description-btn', function() {
+    $('body').on('click', '#show-record-description-btn', function(event) {
+        event.preventDefault();
         $('#record-description-container').show();
     });
 
@@ -252,7 +253,8 @@ function LinkList(id,idSelector) {
 
 
     // Triggered by X on sortable list
-    $('body').on('click','.fa-remove', function() {
+    $('body').on('click','.db-list-remove-item', function() {
+        console.log('clicked');
         var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
 
         for (var i=0;i<myRecordList.recordList.length;i++) {

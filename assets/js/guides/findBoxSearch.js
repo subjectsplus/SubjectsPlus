@@ -73,7 +73,7 @@ function findBoxSearch() {
 
 							for (var i = 0; i < data.length; i++) {
 
-								console.log(data);
+								//console.log(data);
 
 								if (data[i]['content_type'] == "Pluslet") {
 
@@ -90,7 +90,7 @@ function findBoxSearch() {
 										+ " </div></div></li>";
 									
 										myFindBoxSearch.settings.findBoxSearchResults.append(listItem);
-										console.log();
+										//console.log();
 
 								    
 								}

@@ -85,7 +85,7 @@ function flyout() {
 
 			//Top Level Panel Flyout 
 			window.onload = function() {
-				mainslider.slideReveal('show');
+				mainslider.slideReveal('hide');
 			};
 
 		},
@@ -102,14 +102,14 @@ function flyout() {
 		},
 		setScrollBar : function() {
 
-			$('.box_options_container, .fav-boxes-content, .db-list-results, .user_guides_display, .flyout-tabs').enscroll({
+			$('.box_options_container, .fav-boxes-content, .user_guides_display, .flyout-tabs').enscroll({
 			    verticalTrackClass: 'track',
 			    verticalHandleClass: 'handle',
 			    minScrollbarLength: 28
 			});
 
 
-			$('.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults, .databases-searchresults').enscroll({
+			$('.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults').enscroll({
 			    verticalTrackClass: 'track2',
 			    verticalHandleClass: 'handle2',
 			    minScrollbarLength: 28

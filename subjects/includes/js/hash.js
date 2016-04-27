@@ -97,17 +97,27 @@ var hash = {
 			 * to specific boxes. 
 			 * 
 			 */
-		$('.table-of-contents').on('click', function(e){
-	           e.preventDefault();
-	           var tabIndex = $(this).data("tab_index");
-	           var plusletId = $(this).data("pluslet_id");
-	           var tabId = $(this).attr("id");
+			$('.table-of-contents-header > a').on('click', function(e){
+				e.preventDefault();
+				var tabIndex = $(this).data("tab_index");
+				
+				$('#tabs').tabs('select', tabIndex);
 
-	           $('#tabs').tabs('select', tabIndex);
-	          
-	           window.location.hash = 'box-' + plusletId;
-		   
-		});
+				window.location.hash = 'tab-' + tabIndex;
+
+			});
+
+			$('.table-of-contents').on('click', function(e){
+				   e.preventDefault();
+				   var tabIndex = $(this).data("tab_index");
+				   var plusletId = $(this).data("pluslet_id");
+				   var tabId = $(this).attr("id");
+
+				   $('#tabs').tabs('select', tabIndex);
+
+				   window.location.hash = 'box-' + plusletId;
+
+			});
 		
 		}
 		

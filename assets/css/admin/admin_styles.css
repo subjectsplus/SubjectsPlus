@@ -408,7 +408,7 @@ Page structure - added by PV
 html,body { height:100%; }
 
 html, button, input, select, textarea {
-    font-family: 'NotoSansRegular'; /* before -> sans-serif*/
+    font-family: 'NotoSansRegular' !important; /* before -> sans-serif*/
 }
 
 .guide-parent-wrap {margin: 0 0 0 0;}
@@ -833,7 +833,7 @@ a.pure-button-secondary:hover {
 
 .custom-icon{width:36px; height:36px;}
 
-.fav-boxes-content, .fav-templates-content, .db-list-content {
+.fav-boxes-content, .fav-templates-content {
   background: #484848;
    border-right: 1px solid #525252;
    border-bottom: 1px solid #525252;
@@ -905,6 +905,103 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 
 
+/* Tooltip for Find Boxes */
+
+.tooltip_wrapper {
+
+  background: #d5d5d5;
+  color: #444;
+  cursor: help;
+  font-size: 12px;
+  /* margin: 100px 75px 10px 75px; */
+  padding: 5px;
+  position: relative;
+  text-align: left;
+
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.tooltip_wrapper .tooltip {
+  background: #C03957;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -250px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 5px;
+  pointer-events: none;
+  position: absolute;
+  width: 200px;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+  -moz-transition: all .25s ease-out;
+  -ms-transition: all .25s ease-out;
+  -o-transition: all .25s ease-out;
+  transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.tooltip_wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+/* CSS Triangles - see Trevor's post */
+.tooltip_wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #C03957 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 23px;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+
+.tooltip_wrapper:hover .tooltip {
+   opacity: 1;
+   pointer-events: auto;
+   -webkit-transform: translateY(0px);
+   -moz-transform: translateY(0px);
+   -ms-transform: translateY(0px);
+   -o-transform: translateY(0px);
+   transform: translateY(0px);
+ }
+
+
+
+/* IE can just show/hide with no transition */
+.lte8 .tooltip_wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .tooltip_wrapper:hover .tooltip {
+  display: block;
+}
+
+
+
+
+
 /* Layouts Icons Panel */
 
 .layout_options {
@@ -960,9 +1057,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 /* Custom DB List Panel */
 
 .dblist-display {
-  background-color: #d5d5d5;
-  padding: 5px;
-  border-radius: 4px;
+  padding: 10px 0;
 }
 
 .databases-results-display {max-height:475px;}
@@ -972,9 +1067,9 @@ li.fav-box-item:hover::before {color: #C03957;}
   border-radius: 2px;
   font-family: 'NotoSansRegular' !important;
   padding: 4px;
-  width: 96%;
+  width: 50%;
   margin-bottom: 10px;
-  font-size:13px;
+  font-size:1em;
 }
 
 .databases-results-display label {
@@ -984,44 +1079,83 @@ li.fav-box-item:hover::before {color: #C03957;}
   font-size: 12px;
 }
 
-.databases-searchresults {background-color: #f2f2f2; padding: 0; margin: 5px 0 0 0; overflow: auto; max-height:415px; width: 98% !important;}
+.databases-searchresults {background-color: #ececec; padding: 5px 0; margin: 5px 0 0 0; overflow: auto; overflow-x:none; max-height:415px; width: 85% !important; border-right: 1px solid #EEEEEE; border-bottom: 1px solid #EEEEEE; border-left: 1px solid #DADFE1; border-top: 1px solid #DADFE1;}
 
-.db-list-item {width: 255px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 4px 5px 0 5px; 
-  color: #333; font-size: 12px; line-height: 1.3em; display:inline-block; margin: 0;} 
+.db-list-item {width: 98%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; padding: 8px 0 12px; color: #333; font-size: 12px; line-height: 1.3em; display:inline-block; margin: 0; border-bottom: 1px dotted #ccc;} 
 
-.list-search-label { width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular' !important; font-weight: normal; }  
+.db-list-item-link {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-family:'NotoSansRegular' !important; line-height: 1.1em; 
+  width: -moz-calc(100% - 25px);
+  width: -webkit-calc(100% - 25px);
+  width: calc(100% - 25px);
+}
 
-.add-to-list-button { font-size: 0.9em; padding: 4px; }
+.list-search-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-family:'NotoSansRegular' !important; font-weight: normal; 
+  width: -moz-calc(100% - 25px);
+  width: -webkit-calc(100% - 25px);
+  width: calc(100% - 25px);
+  display: inline-block;
+}  
+
+.add-to-list-button { font-size: 0.9em !important; padding: 2px 4px; }
 
 .no-box-results {color: #333; padding: 6px 2px; display: block; font-size: 12px;}
 
-.db-list-content {padding:8px;display:none; margin: 20px 0; width: 295px !important; overflow: hidden !important;}
+.db-list-content {padding:0; display:none; margin: 10px 0; width: 90% !important; overflow: hidden !important; font-family: 'NotoSansRegular';}
 
 .db-list-content h4 {margin: 0; font-family: 'NotoSansBold'; font-weight: normal;}
 
-.db-list-results {list-style: inside none none; margin: 0 0 0 0; padding: 6px; overflow: auto; max-height:230px; width: 281px !important;}
+#record-sortable-list .db-list-results {
+  list-style: inside none none; 
+  background-color: #ececec;
+  padding: 5px 0;
+  margin: 5px 0 0 0; 
+  overflow: auto; 
+  overflow-x:none; 
+  max-height: 350px; 
+  width: 100% !important;
+  border-right: 1px solid #EEEEEE; 
+  border-bottom: 1px solid #EEEEEE; 
+  border-left: 1px solid #DADFE1; 
+  border-top: 1px solid #DADFE1;
+}
 
-.db-list-item-draggable {width: 270px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: move; padding: 8px 0; 
-  color:#FFF;  font-size: 1em; line-height: 1.3em; border-bottom: 1px dotted #858585; font-size: 12px; font-family: 'NotoSansRegular'; font-weight: normal;}
+.db-list-item-draggable {
+  width: 98%; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  cursor: move; 
+  color:#333;  
+  line-height: 1.3em; 
+  border-bottom: 1px dotted #CCC; 
+  font-size: 12px; 
+  font-family: 'NotoSansRegular'; 
+  font-weight: normal; 
+  padding: 4px 0 6px 8px;
+}
 
-.db-list-label {display: inline-block; margin-bottom: 6px;}
+.db-list-label {
+  display: inline-block; 
+  margin-bottom: 4px;
+  width: -moz-calc(100% - 30px);
+  width: -webkit-calc(100% - 30px);
+  width: calc(100% - 30px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.db-list-remove-item {}
+
+.db-list-remove-item button {font-size: 0.9em !important; padding: 2px 4px; cursor:pointer;}
 
 .db-list-toggle { font-size:11px; cursor:pointer; padding-right: 5px; font-family: 'NotoSansRegular'; font-weight: normal;}
 
-.fa-check { color: #90C695; font-size:16px; padding: 0 2px 0 0; }
+.fa-check { color: #90C695; font-size:13px !important; padding: 0 2px 0 0; }
 
-.fa-minus { color: #D24D57; font-size:16px; padding: 0 2px 0 0; }
+.fa-minus { color: #D24D57; font-size:13px !important; padding: 0 2px 0 0; }
 
-.db-list-buttons { font-size: 12px; display:none;}
 
-.db-list-buttons .dblist-button, 
-.db-list-buttons .dblist-reset-button {font-family:'NotoSansBold'; font-weight: normal;}
-
-.dblist-reset-button {
-    background-color: #d5d5d5;
-    color: #666;
-    text-shadow: none;
-}
 
 
 
@@ -2319,6 +2453,41 @@ div.feedback a:link {
 }
 
 .handle2:hover {
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+/* JS Scrollbar styles  - on modal windows*/
+.track3 {
+    width: 8px;
+    background-clip: padding-box;
+    background-color: #FFF;
+    border-radius: 16px;
+    margin-top: 5px;
+}
+
+
+.track3:active {    
+    background: #FFF;
+    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                        inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.14),
+                inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+}
+
+.handle3 {
+    width: 8px;
+    background-clip: padding-box;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+    cursor: grab;
+}
+
+.handle3:hover {
     -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
 }
@@ -3812,6 +3981,139 @@ Additional Helper Classes - AGD
 
 
 
+/*///////////////////////////////////////////
+Modal Panel
+////////////////////////////////////////////*/
+
+/* The Modal (background) */
+.sp-modal {
+  position: fixed;
+  font-family: "NotoSansRegular" !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99999;
+  opacity:1;
+}
+
+
+/* modal container */
+.sp-modal .modal-container {
+  width: 90%;
+  position: relative;
+  margin: 5% auto;
+  padding: 0 0 20px 0;
+  border-radius: 2px;
+  background: #f2f2f2;  
+}
+
+.modal-subs {padding: 0 20px 0 10px;}
+
+.modal-header {
+  background: #666; 
+  background: -moz-linear-gradient(#999, #666);
+  background: -webkit-linear-gradient(#999, #666);
+  background: -o-linear-gradient(#999, #666);
+  color: #FFF; 
+  padding: 15px 10px;
+}
+
+.modal-header-controls {text-align: right;}
+
+.close-trigger {margin: 0 0 0 20px; cursor:pointer;}
+.close-trigger:hover {text-decoration: underline;}
+
+.close-trigger i, .modal-delete i {
+  font-size: 1.3em;
+  padding: 0 4px 0 0;
+}
+
+.modal-delete {background-color: #EEE; text-align: left; border-radius: 2px; padding: 4px 6px; color:#000; border:none;}
+.modal-delete:hover {background-color: #d5d5d5;}
+
+.modal-delete a[id^="delete-"] {color:#000 !important;}
+
+.modal-header label {color:#FFF; font-size: 1.1em; margin-right:10px;}
+
+.modal-header label input {margin: 0 0 0 5px; font-size: 0.9em; font-family: "NotoSansRegular" !important; width: 300px;}
+
+.modal-save {padding: 4px 6px;}
+
+
+/*///////////////////////////////////////////
+Link Link Admin Panel
+////////////////////////////////////////////*/
+
+.db-list-input-label, #LinkList-body .modal-subs label {font-size:12px; font-family: "NotoSansBold"; margin: 0 0 10px;}
+
+.pure-checkbox {margin-left: 5px;}
+
+.records-sort, #show-linklist-textarea-btn {margin: 10px 0 0; font-size: 12px;}
+
+.sp-modal .modal-container  .pure-button-secondary, 
+.sp-modal .modal-container  a.pure-button-secondary {
+  background-color: #999;
+  color: #FFF !important;
+  text-shadow: none !important;
+}
+
+.sp-modal .modal-container .pure-button-secondary:hover, 
+.sp-modal .modal-container  a.pure-button-secondary:hover {
+  background-color: rgba(228,136,182, 0.8);
+  box-shadow: none;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;  
+}
+
+.sp-modal .modal-container  .pure-button-outline, 
+.sp-modal .modal-container  a.pure-button-outline {
+  background-color: transparent;
+  color: #333 !important;
+  text-shadow: none !important;
+  border: 1px solid #999;
+}
+
+.sp-modal .modal-container .pure-button-outline:hover, 
+.sp-modal .modal-container  a.pure-button-outline:hover {
+  background-color: transparent;
+  box-shadow: none;
+  color: #000 !important;
+  text-shadow: none !important;
+  border: 1px solid #999;  
+}
+
+.pure-button-outline i {font-size:14px; padding:0 4px 0 0;}
+
+
+.label-context {display: block; margin: 20px 0 0 0 !important;}
+
+#link-list-textarea-container, #record-description-container {margin:10px 0; width: 90%;}
+
+.label-context-options {margin:10px 0;}
+
+.label-context-options label {font-family: "NotoSansRegular"!important;}
+
+#create-record-form fieldset {padding:0;}
+
+#create-record-form .checkurl_img_wrapper {
+    cursor: pointer;
+    display: block;
+    margin-left: 47%;
+    margin-top: -2.7em;
+    float: none;
+    width: auto;
+    margin-right: 0;
+}
+
+#show-record-description-btn, #show-broken-record-form-btn {margin: 0 0 10px 0; font-size: 12px;}
+
+.show-create-record, .show-report-broken-record {cursor:pointer;}
+
+.modal-create-record-btn {display: block; margin:20px 0;}
+
+
 
 
 /*///////////////////////////////////////////
@@ -3864,135 +4166,3 @@ Additional Helper Classes - AGD
 }
 
 } /* end last responsive block */
-
-
-
-.tooltip_wrapper {
-
-  background: #d5d5d5;
-  color: #444;
-  cursor: help;
-  font-size: 12px;
-  /* margin: 100px 75px 10px 75px; */
-  padding: 5px;
-  position: relative;
-  text-align: left;
-
-  -webkit-transform: translateZ(0); /* webkit flicker fix */
-  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
-}
-
-.tooltip_wrapper .tooltip {
-  background: #C03957;
-  bottom: 100%;
-  color: #fff;
-  display: block;
-  left: -250px;
-  margin-bottom: 15px;
-  opacity: 0;
-  padding: 5px;
-  pointer-events: none;
-  position: absolute;
-  width: 200px;
-  -webkit-transform: translateY(10px);
-  -moz-transform: translateY(10px);
-  -ms-transform: translateY(10px);
-  -o-transform: translateY(10px);
-  transform: translateY(10px);
-  -webkit-transition: all .25s ease-out;
-  -moz-transition: all .25s ease-out;
-  -ms-transition: all .25s ease-out;
-  -o-transition: all .25s ease-out;
-  transition: all .25s ease-out;
-  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-  -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-  -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-  -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
-}
-
-
-/* This bridges the gap so you can mouse into the tooltip without it disappearing */
-.tooltip_wrapper .tooltip:before {
-  bottom: -20px;
-  content: " ";
-  display: block;
-  height: 20px;
-  left: 0;
-  position: absolute;
-  width: 100%;
-}
-
-/* CSS Triangles - see Trevor's post */
-.tooltip_wrapper .tooltip:after {
-  border-left: solid transparent 10px;
-  border-right: solid transparent 10px;
-  border-top: solid #C03957 10px;
-  bottom: -10px;
-  content: " ";
-  height: 0;
-  left: 23px;
-  margin-left: -13px;
-  position: absolute;
-  width: 0;
-}
-
-.tooltip_wrapper:hover .tooltip {
-   opacity: 1;
-   pointer-events: auto;
-   -webkit-transform: translateY(0px);
-   -moz-transform: translateY(0px);
-   -ms-transform: translateY(0px);
-   -o-transform: translateY(0px);
-   transform: translateY(0px);
- }
-
-
-
-/* IE can just show/hide with no transition */
-.lte8 .tooltip_wrapper .tooltip {
-  display: none;
-}
-
-.lte8 .tooltip_wrapper:hover .tooltip {
-  display: block;
-}
-
-
-.db-list-input-label {
-  font-size:11px;
-}
-
-
-
-/* The Modal (background) */
-.sp-modal {
-  position: fixed;
-  font-family: Arial, Helvetica, sans-serif;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 99999;
-  opacity:1;
-
-}
-
-.sp-modal > div {
-  width: 90%;
-  position: relative;
-  margin: 10% auto;
-  padding: 5px 20px 13px 20px;
-  border-radius: 10px;
-  background: #fff;
-  background: -moz-linear-gradient(#fff, #999);
-  background: -webkit-linear-gradient(#fff, #999);
-  background: -o-linear-gradient(#fff, #999);
-}
-
-/* The Close Button */
-#sp-modal-close {
-  float:right;
-  cursor: pointer;
-}
