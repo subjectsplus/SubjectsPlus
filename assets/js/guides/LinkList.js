@@ -240,6 +240,14 @@ function LinkList(id,idSelector) {
     });
 
 
+    
+    //hide delete button if no items exist
+    if($('.db-list-results').length > 0) {
+        $('#delete-linklist-btn').show();
+    } else {
+        $('#delete-linklist-btn').hide();
+    }
+    
 
     //delete a saved LinkList
     $('body').on('click', '.modal-delete', function() {

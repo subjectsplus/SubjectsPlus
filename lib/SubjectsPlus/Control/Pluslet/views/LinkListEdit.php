@@ -31,7 +31,7 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                         <input type="text" id="link-list-title-input" value="<?php echo $title; ?>" />
                     </label>
                     <button class="dblist-button pure-button pure-button-primary modal-save">Save List</button>
-                    <button class="delete-trigger modal-delete"><a id="delete-<?php echo $this->_pluslet_id; ?>">Delete List</a></button>
+                    <button class="delete-trigger modal-delete" id="delete-linklist-btn">Delete List</button>
                 </div>
                 <div class="pure-u-1-4 modal-header-controls">                     
                     <span class="close-trigger"><i class="fa fa-times" aria-hidden="true"></i>Close Window</span>
@@ -177,58 +177,62 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
 
 <script>
-    LinkList();
+
+    $( document ).ready(function() {
+
+        LinkList();
 
 
-    var topText = $('.insert-text-top').html();
-    var bottomText = $('.insert-text-bottom').html();
+        var topText = $('.insert-text-top').html();
+        var bottomText = $('.insert-text-bottom').html();
 
 
-    if(topText != "") {
-        CKEDITOR.instances['link-list-textarea'].setData( topText );
-        $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
-    }
+        if(topText != "") {
+            CKEDITOR.instances['link-list-textarea'].setData( topText );
+            $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
+        }
 
-    if(bottomText != "") {
-        CKEDITOR.instances['link-list-textarea'].setData( bottomText );
-        $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
-    }
+        if(bottomText != "") {
+            CKEDITOR.instances['link-list-textarea'].setData( bottomText );
+            $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
+        }
 
-    
-    $('#link-list-title-input').bind('keypress keyup blur', function() {
-        $("input[name='new_pluslet_title']").val($(this).val());
-        $("input[id^='pluslet-update-title-']").val($(this).val());
+
+        $('#link-list-title-input').bind('keypress keyup blur', function() {
+            $("input[name='new_pluslet_title']").val($(this).val());
+            $("input[id^='pluslet-update-title-']").val($(this).val());
+        });
+
+
+        $('body').on('click', '#sort-list-alpha-btn', function() {
+            $( "li", "#db-list-results" ).sort(function( a, b ) {
+                return $( a ).text() > $( b ).text();
+
+            }).appendTo( "#db-list-results" );
+        });
+
+        //Add custom js scrollbar for list containers
+        $('.db-list-results, .databases-searchresults').enscroll({
+            verticalTrackClass: 'track3',
+            verticalHandleClass: 'handle3',
+            minScrollbarLength: 28
+        });
+
+        // Expand/collapse "Add record containers"
+        $(".show-create-record").click(function() {
+            $("#create-record-form ").toggle();
+            $(".show-create-record .fa").toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
+        });
+
+        $(".show-report-broken-record").click(function() {
+            $("#report-broken-record-container ").toggle();
+            $(".show-report-broken-record .fa").toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
+        });
+
+
+
+
+
     });
-
-
-    $('body').on('click', '#sort-list-alpha-btn', function() {
-        console.log('sort list');
-        $( "li", "#db-list-results" ).sort(function( a, b ) {
-            return $( a ).text() > $( b ).text();
-
-        }).appendTo( "#db-list-results" );
-    });
-
-    //Add custom js scrollbar for list containers
-    $('.db-list-results, .databases-searchresults').enscroll({
-        verticalTrackClass: 'track3',
-        verticalHandleClass: 'handle3',
-        minScrollbarLength: 28
-    });
-
-    // Expand/collapse "Add record containers"
-    $(".show-create-record").click(function() {        
-        $("#create-record-form ").toggle();
-        $(".show-create-record .fa").toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
-    }); 
-
-    $(".show-report-broken-record").click(function() {        
-        $("#report-broken-record-container ").toggle();
-        $(".show-report-broken-record .fa").toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
-    });
-
-
-
-
 
 </script>
