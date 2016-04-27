@@ -89,6 +89,18 @@ require_once("Pluslet.php");
 
 		 switch($type) {
 
+			 case "Chat":
+				 $cloned_pluslet = new Pluslet_Chat($master, null, $subject_id, 1);
+				 break;
+
+			 case "PrimoSearch":
+				 $cloned_pluslet = new Pluslet_PrimoSearch($master, null, $subject_id, 1);
+				 break;
+
+			 case "Card":
+				 $cloned_pluslet = new Pluslet_Card($master, null, $subject_id, 1);
+				 break;
+
 			 case "HTML5Video":
 				 $cloned_pluslet = new Pluslet_HTML5Video($master, null, $subject_id, 1);
 				 break;
@@ -113,6 +125,7 @@ require_once("Pluslet.php");
 				 $cloned_pluslet = new Pluslet_Basic($master, null, $subject_id, 1);
 				 break;
 		 }
+
 
 		 $cloned_pluslet->_isclone = 1;
 		 $cloned_pluslet->_hide_titlebar = 1;

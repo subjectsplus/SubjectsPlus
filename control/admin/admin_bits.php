@@ -14,6 +14,7 @@ $page_title = "Admin Bits include";
 $header = "noshow";
 include("../includes/header.php");
 
+$db = new Querier;
 
 //print "<pre>";
 //print_r($_REQUEST);

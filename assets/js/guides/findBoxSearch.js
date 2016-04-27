@@ -32,7 +32,8 @@ function findBoxSearch() {
 			noSearchResults: "<li><span class=\"no-box-results\">No Results</span></li>",
 			findBoxSearchButtons: "<div class=\"pure-u-2-5\" style=\"text-align:right;\">"
 			+ "<button class=\"clone-button pure-button pure-button-secondary\">Link</button>&nbsp; "
-			+ "<button class=\"copy-button pure-button pure-button-secondary\">Copy</button></div></div></li>"
+			+ "<button class=\"copy-button pure-button pure-button-secondary\">Copy</button>"
+
 
 		},
 
@@ -72,6 +73,8 @@ function findBoxSearch() {
 
 							for (var i = 0; i < data.length; i++) {
 
+								//console.log(data);
+
 								if (data[i]['content_type'] == "Pluslet") {
 
 								    var listItem = "<li data-pluslet-type='" +data[i].type + "' data-pluslet-id='"
@@ -82,10 +85,12 @@ function findBoxSearch() {
 										+ data[i].label
 										+ "\">"
 										+ data[i].label
-										+ "</div>" + myFindBoxSearch.strings.findBoxSearchButtons;
+										+ "</div>" + myFindBoxSearch.strings.findBoxSearchButtons
+										+ " <span class='tooltip_wrapper'><i class='fa fa-question-circle'></i> <span class='tooltip'>" + data[i].parent +"</span></span>"
+										+ " </div></div></li>";
 									
 										myFindBoxSearch.settings.findBoxSearchResults.append(listItem);
-										console.log();
+										//console.log();
 
 								    
 								}
