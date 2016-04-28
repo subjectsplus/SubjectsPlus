@@ -259,9 +259,7 @@ function LinkList(id,idSelector) {
 
         var g = guide();
         var subjectId = g.getSubjectId();
-
-
-
+        
 
         $('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
             autoOpen: true,
