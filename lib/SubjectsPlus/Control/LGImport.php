@@ -16,9 +16,12 @@ class LGImport {
     private $_column = 0;
     private $_staff_id;
     private $log;
+private $titles = array();
+private $dupes = array();
+private $urls = array();
+
     public function __construct($lib_guides_xml_path, Logger $log, Querier $db) {
         $libguides_xml = new \SimpleXMLElement ( file_get_contents ( $lib_guides_xml_path, 'r' ) );
-
         $this->libguidesxml = $libguides_xml;
         $this->log = $log;
         $this->db = $db;
@@ -65,10 +68,13 @@ class LGImport {
         $row = $this->getRow ();
         $column = $this->getColumn ();
 
-        $description_clean = $this->db->quote ( $description );
+
+        $tokens_description = $this->replaceLinksWithTokens($description);
+
+
         $box_name = $this->db->quote ( $box->NAME );
 
-        if ($this->db->exec ( "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, $description_clean, 'Basic')" )) {
+        if ($this->db->exec ( "INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, {$this->db->quote($tokens_description)}, 'Basic')" )) {
 
             $this->log->importLog ( "Inserted pluslet '$box->NAME'" );
         } else {
@@ -99,7 +105,6 @@ class LGImport {
 
         $this->db->exec ( "INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet_id', $section_id, $column, $row)");
     }
-
     public function insertRSSPluslet($box, $section_id, $feed_url) {
 
         $row = $this->getRow();
@@ -136,8 +141,6 @@ class LGImport {
 
 
     }
-
-
     public function insertLinkListPluslet($box, $section_id)
     {
         $row = $this->getRow();
@@ -183,8 +186,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
         $this->db->exec("INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow) VALUES ('$pluslet_id', $section_id, $column, $row)");
 
     }
-
-
     public function insertLinkedBox($box, $section_id) {
 
 
@@ -205,85 +206,13 @@ WHERE location.location_id = " . $record[0]['location_id']);
         }
 
     }
-
-    public function importBoxLinks($box) {
-
-        $description = "";
-
-        foreach ( $box->LINKS->LINK as $link )  {
-
-
-
-            $record = $this->db->query("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL),NULL,TRUE);
-
-            if (isset($record[0])) {
-
-                if ($record[0]['location_id']) {
-
-                    $record_title = $this->db->query("SELECT title.title,title.title_id, location.location  FROM 
-location_title 
-JOIN title ON title.title_id = location_title.title_id
-JOIN location on location.location_id = location_title.location_id
-WHERE location.location_id = " . $record[0]['location_id']);
-
-
-
-                } else {
-
-                }
-
-                if ($record_title[0]["title"] == "") {
-
-                    $description .=    "<div class=\"links\">" .
-                        "<span class=\"link_title\"><a href=\"$link->URL\">$link->NAME</a></span>" .
-                        "<div class=\"link-description\">$link->DESCRIPTION_SHORT</div>" .
-                        "</div>";
-
-                }
-
-                if ($record_title[0]['title']) {
-
-                    $description .=
-                        "<div class=\"links\">" .
-                        "<span class=\"link_title\">{{dab},{" . $record_title[0]['title_id'] . "}," . "{" . $record_title[0]["title"] . "},{01}}</span>" .
-                        "</div>";
-
-                }
-
-                $this->log->importLog ("Insert record:");
-                $this->log->importLog($record_title);
-                $this->log->importLog("SELECT * FROM location WHERE location = " .  $this->db->quote($link->URL));
-
-            }
-
-        }
-
-        return $description;
-
-    }
-
     public function importBox($box, $section_id) {
 
        // $this->db->exec("SET NAMES utf-8" );
-
         $description = null;
 
-
-
         // Import images and replace the old urls with new urls
-
-        $config = \HTMLPurifier_Config::createDefault();
-        $config->set('Core.Encoding', 'UTF-8');
-        $config->set('HTML.TidyLevel', 'heavy');
-
-        $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol'));
-        $config->set('HTML.AllowedAttributes', array('a.href', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
-        $config->set('HTML.SafeIframe', true);
-        $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
-
-        $purifier = new \HTMLPurifier($config);
-
-        $pure_html =  $purifier->purify($box->DESCRIPTION);
+        $pure_html = $this->purifyHTML($box->DESCRIPTION);
 
         // Import images and replace the old urls with new urls
         $doc = new \DOMDocument();
@@ -292,12 +221,9 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
             // Add these options -- otherwise you'll get a full HTML document with
             // a doctype when running saveHTML()
-
             $doc->loadHTML($pure_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-
             // Download images
-
             $nodes = $doc->getElementsByTagName("img");
 
             foreach( $nodes as $node ) {
@@ -318,9 +244,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
             }
         }
 
-
         // Create html for the description
-
         $clean_description = str_replace('&Acirc;','', $doc->saveHTML());
         $description .= "<div class=\"description\">". $clean_description  . "</div>";
 
@@ -333,15 +257,12 @@ WHERE location.location_id = " . $record[0]['location_id']);
                 break;
             case "Basic Links":
 
-                //$description .= $this->importBoxLinks($box);
-                //$this->insertBasicPluslet($box, $section_id, $description);
+
                 $this->insertLinkListPluslet($box,$section_id);
                 break;
 
             case "Complex Links":
 
-               // $description .= $this->importBoxLinks($box);
-                //$this->insertBasicPluslet($box, $section_id, $description);
                 $this->insertLinkListPluslet($box,$section_id);
 
                 break;
@@ -375,6 +296,8 @@ WHERE location.location_id = " . $record[0]['location_id']);
                 // Box type: Books
 
                 foreach ( $box->BOOKS->BOOK as $book )  {
+
+                    $this->parseLink($book->URL, $book->TITLE, $book->DESCRIPTION);
 
                     $description .=
                         "<div class=\"book\">" .
@@ -435,7 +358,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 
     }
-
     public function downloadImages($url) {
         // This method creates a folder for a guide image in assets, downloads the image , and then returns the new URL for that image
 
@@ -476,7 +398,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $img_path;
 
     }
-
     public function outputOwners() {
 
         $libguides_xml= $this->libguidesxml;
@@ -517,7 +438,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 
     }
-
     public function outputGuides($email_address) {
         // Outputs a select box for guides
 
@@ -601,8 +521,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $owners_combined;
 
     }
-
-
     public function guideImported() {
 
         $guide_id = $this->getGuideID();
@@ -611,8 +529,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $guide;
 
     }
-
-
     public function guideDupe($guide_url) {
 
         $guide = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $guide_url");
@@ -620,7 +536,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $guide[0][0];
 
     }
-
     public function loadLibGuidesXML() {
 
         $libguides_xml= $this->libguidesxml;
@@ -655,7 +570,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $subject_values;
 
     }
-
     public function insertChildren() {
 
         $tabs = $this->db->query("SELECT * FROM tab");
@@ -683,121 +597,141 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 
     }
+    public function articlesToArray($string) {
+        $matches = array();
+        preg_match("/^\b(the |a |an |la |les |el |las |los |le )\b/i", strip_tags($string), $matches);
+        return $matches;
+    }
+    public function removeArticlesFromString($string) {
+        $article_free_string = trim(strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $string)));
+        return $article_free_string;
+    }
+    public function removeProxy($url) {
+        $noProxyUrl = str_replace("https://iiiprxy.library.miami.edu/login?url=", "",$url);
+        return $noProxyUrl;
+    }
+    public function removeLegacyCatlog($url,$title) {
+        $new_url = "http://search.library.miami.edu/primo_library/libweb/action/dlSearch.do?&institution=01UOML&vid=uxtest2&query=any,contains,{$title}";
+        return $new_url;
+    }
+public function purifyHTML($html) {
 
-    public function loadLibGuidesLinksXML() {
+    $config = \HTMLPurifier_Config::createDefault();
+    $config->set('Core.Encoding', 'UTF-8');
+    $config->set('HTML.TidyLevel', 'heavy');
 
-        $all_titles = array();
-        $titles = array();
-        $dupes = array();
-        $urls = array();
+    $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol'));
+    $config->set('HTML.AllowedAttributes', array('a.href','class', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
+    $config->set('HTML.SafeIframe', true);
+    $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
 
-        $guide_id = $this->getGuideID();
+    $purifier = new \HTMLPurifier($config);
+    $html = str_replace(chr(194)," ",$html);
+    return $purifier->purify($html);
 
-        $libguides_xml= $this->libguidesxml;
+}
+    public function parseLink($link_url, $link_name,$link_description) {
+        // Remove the proxy url from the link URL
+        $noproxy_url = str_replace("https://iiiprxy.library.miami.edu/login?url=", "",$link_url);
+        $noproxy_url = $this->db->quote($noproxy_url);
 
-        $link_values = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/..//LINKS/LINK");
+        $clean_url =  str_replace("'","", $noproxy_url);
+        $title =  $this->db->quote(strip_tags($link_name));
 
-        foreach (  $link_values as $link ) {
+        $new_catalog_url = $this->removeLegacyCatlog($clean_url, $title);
 
-            // Remove the proxy url from the link URL
-            $noproxy_url = str_replace("https://iiiprxy.library.miami.edu/login?url=", "",$link->URL);
-            $noproxy_url = $this->db->quote($noproxy_url);
+        array_push($this->urls, array("url" => $new_catalog_url));
+        array_push($this->titles, array("title" => $title));
 
-            $clean_url =  str_replace("'","", $noproxy_url);
+        $record_check = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
+        $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
 
-            array_push($urls, array("url" => $clean_url));
+        if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
+            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES ({$this->db->quote($new_catalog_url)},1,1,'N' )" )) {
 
-
-
-
-            $title =  $this->db->quote(strip_tags($link->NAME));
-            array_push($titles, array("title" => $title));
-
-
-            $record_check = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
-            $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
-
-
-            $this->log->importLog ( serialize($record_check)) ;
-            $this->log->importLog ("RECORD CHECK!!!!!!!!!!!!!!!!!!!!!!");
-            $this->log->importLog($record_check[0][0]);
-
-            if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
-
-                if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES (" . $this->db->quote($link->URL) . " , 1, 1, 'N' )" )) {
-
-                    array_push($dupes, array("status" => "New Record Created"));
-
-
-                    $this->log->importLog("Inserted location");
-                    $location_id = $this->db->last_id();
-
-                } else {
-
-                    $this->log->importLog ("Error inserting location:");
-                }
-
-                // When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field
-
-                $matches = array();
-                preg_match("/^\b(the |a |an |la |les |el |las |los |le )\b/i", strip_tags($link->NAME), $matches);
+                array_push($this->dupes, array("status" => "New Record Created"));
 
 
-                // If there isn't an article in the title
-                if (empty($matches[0])) {
-
-                    if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote(strip_tags($link->NAME)) . ","  . $this->db->quote($link->DESCRIPTION_SHORT)  . ")") ) {
-                        $this->log->importLog( "Inserted title");
-                        $title_id = $this->db->last_id();
-
-                    } else {
-                        $this->log->importLog("Error inserting title:" );
-                        $this->log->importLog(  serialize($this->db->errorInfo()) );
-                    }
-
-                }
-
-                // If there is an article in the title
-
-                if(isset($matches[0])) {
-
-                    $clean_link_name = trim(strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link->NAME)));
-
-                    if( $this->db->exec("INSERT INTO title (title, description, pre) VALUES (" . $this->db->quote($clean_link_name) . ","  . $this->db->quote($link->DESCRIPTION_SHORT) . "," . $this->db->quote($matches[0]) . ")") ) {
-                        $this->log->importLog( "Inserted title");
-                        $title_id = $this->db->last_id();
-
-                    } else {
-                        $this->log->importLog("Error inserting title:" );
-                        $this->log->importLog(  serialize($this->db->errorInfo()) );
-                    }
-
-                }
-
-
-                if( $this->db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
-                    $this->log->importLog( "Inserted location_title");
-
-
-                } else {
-                    $this->log->importLog( "Error inserting location_title:");
-                    $this->log->importLog(  serialize($this->db->errorInfo())  );
-
-                    $this->log->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
-                }
-
+                $this->log->importLog("Inserted location");
+                $location_id = $this->db->last_id();
 
             } else {
-                array_push($dupes, array("status" => "Link Already Imported Into Records" ));
+
+                $this->log->importLog ("Error inserting location:");
+                $this->log->importLog("\"INSERT INTO location (location, format, access_restrictions, eres_display) VALUES ($new_catalog_url , 1, 1, 'N' )\"");
+            }
+
+            // When inserting the titles into the databases, articles (a, an, the) should be removed and then stored in the prefix field
+
+            $matches = array();
+            preg_match("/^\b(the |a |an |la |les |el |las |los |le )\b/i", strip_tags($link_name), $matches);
+
+
+            // If there isn't an article in the title
+            if (empty($matches[0])) {
+
+                if( $this->db->exec("INSERT INTO title (title, description) VALUES (" . $this->db->quote(strip_tags($link_name)) . ","  . $this->db->quote($link_description)  . ")") ) {
+                    $this->log->importLog( "Inserted title");
+                    $title_id = $this->db->last_id();
+
+                } else {
+                    $this->log->importLog("Error inserting title:" );
+                    $this->log->importLog(  serialize($this->db->errorInfo()) );
+                }
+
+            }
+
+            // If there is an article in the title
+            if(isset($matches[0])) {
+
+                $clean_link_name = trim(strip_tags(preg_replace("/^\b(the|a|an|la|les|el|las|los)/i", " ", $link_name)));
+
+                if( $this->db->exec("INSERT INTO title (title, description, pre) VALUES (" . $this->db->quote($clean_link_name) . ","  . $this->db->quote($link_description) . "," . $this->db->quote($matches[0]) . ")") ) {
+                    $this->log->importLog( "Inserted title");
+                    $title_id = $this->db->last_id();
+
+                } else {
+                    $this->log->importLog("Error inserting title:" );
+                    $this->log->importLog(  serialize($this->db->errorInfo()) );
+                }
 
             }
 
 
+            if( $this->db->exec("INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id )") ) {
+                $this->log->importLog( "Inserted location_title");
 
+
+            } else {
+                $this->log->importLog( "Error inserting location_title:");
+                $this->log->importLog(  serialize($this->db->errorInfo())  );
+
+                $this->log->importLog( "INSERT INTO location_title (title_id, location_id) VALUES ($title_id, $location_id)");
+            }
+
+
+        } else {
+            array_push($this->dupes, array("status" => "Link Already Imported Into Records" ));
+        }
+
+
+
+    }
+    public function parseLinks($link_values) {
+
+        $all_titles = array();
+
+        foreach (  $link_values as $link ) {
+            if (isset($link->NAME)) {
+                $this->parseLink($link->URL,$link->NAME, $link->DESCRIPTION_SHORT);
+            }
+            if ($link->TITLE) {
+                $this->parseLink($link->URL,$link->TITLE, $link->DESCRIPTION);
+            }
 
         }
 
-        $all_titles['titles'] = zip($titles, $dupes, $urls);
+        $all_titles['titles'] = zip($this->titles, $this->dupes, $this->urls);
 
         $return_titles = json_encode($all_titles);
 
@@ -805,175 +739,96 @@ WHERE location.location_id = " . $record[0]['location_id']);
     }
 
 
-    public function importLibGuides() {
-        $subject_values = $this->loadLibGuidesXML();
+    public function loadLibGuidesLinksXML() {
+        $guide_id = $this->getGuideID();
+        $libguides_xml= $this->libguidesxml;
+        $link_values = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.=$guide_id]/..//URL/..");
 
-        $response = array();
+        $descriptions = $libguides_xml->xpath("//GUIDE/GUIDE_ID[.='$guide_id']/..//DESCRIPTION");
 
-
-        if ($this->guideImported() != 0) {
-
-            //exit;
+        foreach($descriptions as $description) {
+            if ($description != "") {
+                $this->parseLinksFromDescription($description);
+            }
         }
 
+        return $this->parseLinks($link_values);
+
+    }
+    public function importLibGuides() {
+        $subject_values = $this->loadLibGuidesXML();
+        $response = array();
 
         foreach($subject_values as $subject) {
-
             // Remove the apostrophes and spaces from the shortform
-
-
             $shortform = preg_replace("/[^[:alnum:]]/", '', $subject[0]);
 
-
             // Escape the apostrophes in the guide name
-
             $guide_name = str_replace("'", "''",$subject[0]);
 
-
             if ($subject[0] != null) {
-
-
-
                 if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]','{\"maincol:\"\"}')")) {
-
-
                     $response = array("imported_guide" => $subject[1] );
-
-
-
-
                 } else {
-                    // echo $subject[1][0];
-
                     $response = array("imported_guide" => $subject[1][0] );
-
-
                     $query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[7]','{\"maincol:\"\"}')";
-
                     $this->log->importLog( "Error inserting subject:");
                     $this->log->importLog ($query);
                     $this->log->importLog ( serialize($this->db->errorInfo()) );
-
                 }
 
                 if ($this->getGuideOwner() != null) {
-
                     $staff_id = $this->getStaffID();
-
                     $this->log->importLog ("Staff ID: " . $staff_id );
 
                     if($this->db->exec("INSERT INTO staff_subject (subject_id, staff_id) VALUES ($subject[1], $staff_id)")) {
                         $this->log->importLog ("Inserted staff: '$staff_id'");
-
                     } else {
-
                         $this->log->importLog("Error inserting staff. ");
-
                     }
-
                 }
-
-
-            }
-
-            else {
-
             }
 
             $subject_page = $subject[4];
-
             $tab_index = 0;
 
-
-
             foreach ($subject_page->PAGE as $tab) {
-
-
-                try {
-
-                    //$this->db->exec("ALTER TABLE `tab` ADD COLUMN `parent` VARCHAR(500) NULL AFTER `visibility`");
-                  //  $this->db->exec("ALTER TABLE `tab` ADD COLUMN `children` VARCHAR(500) NULL AFTER `parent`");
-
-                } catch(Exception $e) {
-
-                    $this->log->importLog($e);
-
-                }
-
                 // LibGuide's pages are tabs so make a new tab
-
                 $tab_index++;
                 $visibility = 1;
-
-
                 $clean_tab_name = $this->db->quote($tab->NAME);
-
-
-
                 $parent_id =  $tab->PARENT_PAGE_ID;
                 $tab_id = $tab->PAGE_ID;
                 $external_url = $tab->EXTERNAL_LINK;
 
-
-
                 if($this->db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index,visibility, parent,children,extra,external_url) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1, $visibility, '','','','$external_url')")) {
-
                     if ($parent_id != '') {
                         $this->db->exec("UPDATE tab SET parent='$parent_id' WHERE tab_id='$tab_id'");
-                    } else {
-
-
-
                     }
-
-
-
-
                     $this->log->importLog ("Inserted tab '$tab->NAME'");
-
                 } else {
-
                     $this->log->importLog( "Problem inserting the tab, '$tab->NAME'. This tab may already exist in the database." );
-
-
                     $this->log->importLog ("Error inserting tab:");
                     $this->log->importLog (serialize($this->db->errorInfo()));
-
                 }
-
-
-
-
-
-
 
                 $section_index = null;
 
-
                 foreach ($tab->BOXES as $section) {
-
                     // LibGuide's box parents into sections
-
                     $section_uniqid = $section_index . rand();
-
                     $section_index++;
-
 
                     if($this->db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
                         $this->log->importLog("Inserted section");
                     } else {
                         $this->log->importLog("Problem inserting this section. This section  may already exist in the database.");
-
                         $this->log->importLog("Error inserting section:");
                         $this->log->importLog($this->db->errorInfo() );
-
                     }
-
                 }
-
                 foreach ($tab->BOXES->BOX as $pluslet) {
                     // This imports each LibGuide's boxes as pluslets
-
                     $this->log->importLog("\n");
                     $this->log->importLog((string) $pluslet);
                     $this->log->importLog("\n");
@@ -987,17 +842,60 @@ WHERE location.location_id = " . $record[0]['location_id']);
                     $box_types['box_type'] = $pluslet->BOX_TYPE;
                     $boxes = array($box_names, $box_types);
                     array_push($response, array("box" => $boxes ));
-
-
                 }
+            }
+        }
+        $this->insertChildren();
+        return json_encode($response);
+    }
+
+
+    public function parseLinksFromDescription($description) {
+        $html = new \DOMDocument();
+        $html->loadHTML($this->purifyHTML($description));
+        foreach($html->getElementsByTagName("a") as $link) {
+            $href = $link->getAttribute("href");
+
+            $this->parseLink($this->removeProxy($href), $link->nodeValue,"");
+        }
+        return $description;
+    }
+
+
+    public function replaceLinksWithTokens($description) {
+        $html = new \DOMDocument();
+        $html->loadHTML($this->purifyHTML($description),LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        foreach($html->getElementsByTagName("a") as $link) {
+            $href = $link->getAttribute("href");
+            $no_proxy_href = $this->removeProxy($href);
+
+            if (strpos($no_proxy_href,'http://ibisweb.miami.edu') !== false) {
+                $no_proxy_href = $this->removeLegacyCatlog($no_proxy_href, "'{$link->nodeValue}'");
+
+            }
+
+            if (strpos($no_proxy_href,'http://catalog.library.miami.edu') !== false) {
+                $no_proxy_href = $this->removeLegacyCatlog($no_proxy_href, "'{$link->nodeValue}'");
+
             }
 
 
-        }
-        $this->insertChildren();
+            $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($no_proxy_href), NULL, TRUE);
 
-        return json_encode($response);
+            if (isset($record[0])) {
+                $location = $record[0];
+                $tokenSpan = $html->createElement("span");
+                $tokenSpan->setAttribute("class","token-list-item subsplus_resource");
+                $tokenSpan->setAttribute("contenteditable", "false");
+                $linkTitle = $link->nodeValue;
+                $linkId  = $location[0];
+                $tokenText = $html->createTextNode("{{dab},{{$linkId}},{{$linkTitle}},{000}}");
+                $tokenSpan->appendChild($tokenText);
+                $link->parentNode->replaceChild($tokenSpan,$link);
+            }
+        }
+        return $html->saveHTML();
 
     }
-
 }
