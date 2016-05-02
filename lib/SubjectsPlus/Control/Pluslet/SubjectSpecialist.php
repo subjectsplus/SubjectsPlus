@@ -225,7 +225,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $oCKeditor = new CKEditor($CKBasePath);
         $oCKeditor->timestamp = time();
         //$oCKeditor->config['ToolbarStartExpanded'] = true;
-        $config['toolbar'] = 'SubsPlus_Narrow';
+        $config['toolbar'] = 'TextFormat';
         $config['height'] = '300';
         $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
