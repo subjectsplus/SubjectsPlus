@@ -41,7 +41,7 @@ class Pluslet_ISBNSearch extends Pluslet
            * @todo Define "GoogleBoks" in a config file.
            * @var ISearcher [get the instance of the new created ISearcher]
            */
-            $searcher = $this->getISBNInstance("GoogleBooks");
+            $searcher = $this->getISBNInstance($this->getISBNEngineSearcher());
             //here you receive an instance of ISearcher, that's why you can call "getBooks" method 
             $this->output_books = $searcher->getBooks($json_extra);
 
@@ -62,17 +62,27 @@ class Pluslet_ISBNSearch extends Pluslet
      */
     static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-users\" title=\"" . _("ISBN Search") . "\" ></i><span class=\"icon-text\">"  . _("ISBNSearch") . "</span>";
+        $icon="<i class=\"fa fa-bars\" title=\"" . _("List Guides") . "\" ></i><span class=\"icon-text\">"  . _("ISBN Search") . "</span>";
         return $icon;
     }
 
     /**
      * Creates and instance of ISearcher
-     * @param  [type] $searcher [description]
-     * @return [type]           [description]
+     * @param  string $searcher [the name of the defined searcher in the config file]
+     * @return ISearcher [The ISearcher that is goign to manage the isbn searching process]
      */
     private function getISBNInstance($searcher){
         return Component\ISBNSearcher\SearcherFactory::build($searcher);
+    }
+
+    /**
+     * Get the define ISBN searcher engine defined in the config file
+     * @return string [the defined searcher engine] 
+     */
+    private function getISBNEngineSearcher() {
+        global $isbn_engine;
+        //GoogleBooks is the default engine searcher
+        return $isbn_engine ;//!= "" ? $isbn_engine : "GoogleBooks";
     }
 
 }

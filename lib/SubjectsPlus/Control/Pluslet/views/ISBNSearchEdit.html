@@ -1,0 +1,19 @@
+<? $uniqueId = uniqid("");?>
+<div id="isbn_general_container" >
+	<div id="isbn_input_container_<?echo $uniqueId; ?>"x >
+       <? foreach ($this->json_extra as $key => $value) {
+          ?> <div id="<? echo $key ?>" class="single_isbn"> 
+              <input class="isbn_input" name="ISBNSearch-extra-<? echo $key ?>" type="text" value = <? echo $value ?> />
+              <label id="check_label_<? echo $key ?>"></label>
+              <br>
+              <button class="check_isbn" type="button" label-id ="check_label_<? echo $key?>" >check</button>
+              <button class="delete_isbn_entry" type="button" delete-container-id="<? echo $key?>">delete</button>
+              </div> <?
+              if($key !== "counter") {
+
+              }
+       } ?>
+    </div>
+    <br>
+<button id="isbn_add_new" type="button" container-id=<? echo $uniqueId ?> >+ Add ISBN</button>
+<? echo $this->data; ?>
