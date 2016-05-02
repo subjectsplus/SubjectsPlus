@@ -13,18 +13,3 @@ $searcher = Searcher\SearcherFactory::build($isbn_engine);
 echo $searcher->existBook($isbn_to_check);
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

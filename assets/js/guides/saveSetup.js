@@ -44,6 +44,7 @@ function saveSetup() {
 							'click',
 							lstrSelector,
 							function(event) {
+
 								var staff_id = $('#guide-parent-wrap').data.staffId;
 								var subject_id = $('#guide-parent-wrap').data.SubjectId;
 
