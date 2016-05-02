@@ -20,7 +20,6 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
     }
 </style>
 
-
 <div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
     <div class="modal-container">
 
@@ -89,7 +88,8 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                         echo $this->_bottomText;
                     } ?>
                 </div>
-                
+
+
                 <label for="link-list-textarea" class="label-context">Link List Context:</label>
                 <button class="pure-button pure-button-outline" id="show-linklist-textarea-btn"><i class="fa fa-pencil" aria-hidden="true"></i>Add Text</button>
 
@@ -178,7 +178,9 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
 <script>
 
+
     $( document ).ready(function() {
+
 
         LinkList();
 
@@ -187,16 +189,21 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
         var bottomText = $('.insert-text-bottom').html();
 
 
-        if(topText != "") {
-            CKEDITOR.instances['link-list-textarea'].setData( topText );
-            $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
-        }
 
-        if(bottomText != "") {
-            CKEDITOR.instances['link-list-textarea'].setData( bottomText );
-            $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
-        }
+        if(CKEDITOR.instances['link-list-textarea']) {
 
+            if(topText != "") {
+                CKEDITOR.instances['link-list-textarea'].setData( topText );
+                $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
+            }
+
+            if(bottomText != "") {
+                CKEDITOR.instances['link-list-textarea'].setData( bottomText );
+                $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
+            }
+
+        }
+        
 
         $('#link-list-title-input').bind('keypress keyup blur', function() {
             $("input[name='new_pluslet_title']").val($(this).val());

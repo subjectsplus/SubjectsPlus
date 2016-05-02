@@ -4,8 +4,8 @@ function LinkList(id,idSelector) {
 
     hideLinkListTextareas();
 
-
     activateCKEditors();
+
 
     var myId = id;
 
@@ -65,21 +65,20 @@ function LinkList(id,idSelector) {
 
             list.html(displayList.getList());
 
-
             var description = CKEDITOR.instances['link-list-textarea'].getData();
-            console.log(descriptionLocation);
+
+
+            //console.log(descriptionLocation);
             if (descriptionLocation == "top") {
                 list.prepend("<div class='link-list-text-top'>" + description + "</div>");
             } else {
                 list.append("<div class='link-list-text-bottom'>" + description + "</div>");
             }
 
-
+            //remove the textarea with the list in the admin view after saving changes
+            $('[name="link-list-textarea"]').remove();
 
             saveSetup().saveGuide();
-            
-            //document.location.reload(true);
-
 
         } else {
             alert('Please add some records to your list.')
@@ -88,7 +87,9 @@ function LinkList(id,idSelector) {
     
     //show textareas
     $('body').on('click', '#show-linklist-textarea-btn', function() {
+
         $('#link-list-textarea-container').show();
+
     });
 
     $('body').on('click', '#show-record-description-btn', function(event) {
@@ -138,7 +139,7 @@ function LinkList(id,idSelector) {
     function loadSortableList() {
         myRecordList = new RecordList;
         $('.db-list-item-draggable').each(function (li) {
-            console.log(li);
+            //console.log(li);
             var record = new Record({
                 title: $(this).data().title,
                 recordId : $(this).data().recordId,
@@ -156,7 +157,7 @@ function LinkList(id,idSelector) {
         var searchResults = new RecordList;
         $.each(data, function (index) {
             var resultRecord = recordSearch.searchResultRecord(data[index]);
-            console.log(resultRecord);
+            //console.log(resultRecord);
             searchResults.addToList(resultRecord);
         });
 
@@ -171,10 +172,6 @@ function LinkList(id,idSelector) {
 
         // (not loaded yet, your code to load it)
         CKEDITOR.replace('description', {
-            toolbar: 'TextFormat'
-        });
-
-        CKEDITOR.replace('link-list-textarea', {
             toolbar: 'TextFormat'
         });
 
@@ -259,7 +256,7 @@ function LinkList(id,idSelector) {
 
         var g = guide();
         var subjectId = g.getSubjectId();
-        
+
 
         $('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
             autoOpen: true,
