@@ -100,6 +100,25 @@ class Pluslet_LinkList extends Pluslet
 
     protected function onEditOutput() {
 
+        global $CKPath;
+        global $CKBasePath;
+
+        include ($CKPath);
+        global $BaseURL;
+
+
+        $oCKeditor = new CKEditor($CKBasePath);
+        $oCKeditor->timestamp = time();
+        //$oCKeditor->config['ToolbarStartExpanded'] = true;
+        $config['toolbar'] = 'TextFormat';
+        $config['height'] = '300';
+        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+
+        $this_instance = "link-list-textarea";
+        $this->_editor = $oCKeditor->editor($this_instance, $this->_body, $config);
+
+
+
         $textTop    = $this->getLinkListTextTop();
         $textBottom = $this->getLinkListTextBottom();
 
