@@ -4,12 +4,12 @@ function LinkList(id,idSelector) {
 
     hideLinkListTextareas();
 
-
     activateCKEditors();
+
 
     var myId = id;
 
-    console.log(myId);
+    //console.log(myId);
 
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
@@ -65,30 +65,31 @@ function LinkList(id,idSelector) {
 
             list.html(displayList.getList());
 
-
             var description = CKEDITOR.instances['link-list-textarea'].getData();
-            console.log(descriptionLocation);
+
+
+            //console.log(descriptionLocation);
             if (descriptionLocation == "top") {
                 list.prepend("<div class='link-list-text-top'>" + description + "</div>");
             } else {
                 list.append("<div class='link-list-text-bottom'>" + description + "</div>");
             }
 
-
+            //remove the textarea with the list in the admin view after saving changes
+            $('[name="link-list-textarea"]').remove();
 
             saveSetup().saveGuide();
-            
-            document.location.reload(true);
-
 
         } else {
             alert('Please add some records to your list.')
         }
     });
-
+    
     //show textareas
     $('body').on('click', '#show-linklist-textarea-btn', function() {
+
         $('#link-list-textarea-container').show();
+
     });
 
     $('body').on('click', '#show-record-description-btn', function(event) {
@@ -138,7 +139,7 @@ function LinkList(id,idSelector) {
     function loadSortableList() {
         myRecordList = new RecordList;
         $('.db-list-item-draggable').each(function (li) {
-            console.log(li);
+            //console.log(li);
             var record = new Record({
                 title: $(this).data().title,
                 recordId : $(this).data().recordId,
@@ -156,7 +157,7 @@ function LinkList(id,idSelector) {
         var searchResults = new RecordList;
         $.each(data, function (index) {
             var resultRecord = recordSearch.searchResultRecord(data[index]);
-            console.log(resultRecord);
+            //console.log(resultRecord);
             searchResults.addToList(resultRecord);
         });
 
@@ -174,10 +175,6 @@ function LinkList(id,idSelector) {
             toolbar: 'TextFormat'
         });
 
-        CKEDITOR.replace('link-list-textarea', {
-            toolbar: 'TextFormat'
-        });
-
     }
 
 
@@ -191,24 +188,24 @@ function LinkList(id,idSelector) {
 
 
     function toggleCheck(attr,context) {
-        console.log("Checking?");
-        console.log( context.closest('.db-list-item-draggable'));
-        console.log(context.closest('.db-list-item-draggable').attr(attr));
+        //console.log("Checking?");
+        //console.log( context.closest('.db-list-item-draggable'));
+        //console.log(context.closest('.db-list-item-draggable').attr(attr));
 
         if (context.closest('.db-list-item-draggable').attr(attr) == 0) {
-            console.log("It's zero!");
+            //console.log("It's zero!");
             context.closest('.db-list-item-draggable').attr(attr, 1);
-            console.log(context.closest('.db-list-item-draggable').attr(attr));
+            //console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-            console.log(context.children());
+            //console.log(context.children());
             context.children().removeClass('fa-minus');
             context.children().addClass('fa-check');
         } else {
-            console.log("It's one!");
+            //console.log("It's one!");
             context.closest('.db-list-item-draggable').attr(attr, 0);
-            console.log(context.closest('.db-list-item-draggable').attr(attr));
+            //console.log(context.closest('.db-list-item-draggable').attr(attr));
 
-            console.log(context.children());
+            //console.log(context.children());
             context.children().removeClass('fa-check');
             context.children().addClass('fa-minus');
         }
@@ -240,21 +237,78 @@ function LinkList(id,idSelector) {
     });
 
 
+    
+    //hide delete button if no items exist
+    if($('.db-list-results').length > 0) {
+        $('#delete-linklist-btn').show();
+    } else {
+        $('#delete-linklist-btn').hide();
+    }
+    
+
+    //delete a saved LinkList
+    $('body').on('click', '.modal-delete', function() {
+
+        var elementDeletion = $(this).closest('div[name="modified-pluslet-LinkList"]');
+
+        var thisPlusletId = $(this).closest('div[name="modified-pluslet-LinkList"]').attr('id').split('-')[1];
+        //console.log(thisPlusletId);
+
+        var g = guide();
+        var subjectId = g.getSubjectId();
+
+
+        $('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
+            autoOpen: true,
+            modal: false,
+            width: 'auto',
+            height: 'auto',
+            resizable: false,
+            dialogClass: 'topindex',
+            buttons: {
+                'Yes': function() {
+                    // Delete pluslet from database
+                    $('#response').load('helpers/guide_data.php', {
+                            delete_id: thisPlusletId,
+                            subject_id: subjectId,
+                            flag: 'delete'
+                        },
+                        function() {
+                            $('#response').fadeIn();
+                            $('#save_guide').fadeIn();
+
+                        });
+
+                    // Remove node
+                    $(elementDeletion).remove();
+                    $( this ).dialog( 'close' );
+                    return false;
+                },
+                Cancel: function() {
+                    $( this ).dialog( 'close' );
+                }
+            }
+        });
+        return false;
+
+    });
+
+
     // Pseudo-cancel action - if sortable list has items close triggers save otherwise it triggers fake delete
     $('body').on('click', '.close-trigger', function() {
         if($('.db-list-results').length > 0) {
             $('.dblist-button').trigger('click');
         } else {
-            $('#delete-').trigger('click');
+            thisList = $(this).closest('div[name="new-pluslet-LinkList"]');
+            thisList.remove();
         }
-
     });
 
 
 
     // Triggered by X on sortable list
     $('body').on('click','.db-list-remove-item', function() {
-        console.log('clicked');
+        //console.log('clicked');
         var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
 
         for (var i=0;i<myRecordList.recordList.length;i++) {

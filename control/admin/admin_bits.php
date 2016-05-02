@@ -24,7 +24,7 @@ $extra_q = "";
 $success = FALSE;
 $message = "";
 
-
+$db = new Querier;
 
 switch ($_REQUEST["action"]) {
   case "staff_mod":

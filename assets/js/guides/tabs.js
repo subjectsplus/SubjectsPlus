@@ -149,7 +149,6 @@ function tabs() {
                     form[0].reset();
                 }
             });
-            
 
             //setup dialog to edit tab
             var editTabDialog = myTabs.settings.editTabDialog.dialog({
