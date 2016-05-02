@@ -226,7 +226,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
             // Add these options -- otherwise you'll get a full HTML document with
             // a doctype when running saveHTML()
-            $doc->loadHTML($pure_html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $doc->loadHTML($pure_html);
 
             // Download images
             $nodes = $doc->getElementsByTagName("img");
@@ -250,7 +250,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
         }
 
         // Create html for the description
-        $clean_description = str_replace('&Acirc;','', $doc->saveHTML());
+        $clean_description = str_replace('&Acirc;','', preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $doc->saveHTML())));
         $description .= "<div class=\"description\">". $clean_description  . "</div>";
 
 
@@ -625,7 +625,7 @@ public function purifyHTML($html) {
     $config->set('Core.Encoding', 'UTF-8');
     $config->set('HTML.TidyLevel', 'heavy');
 
-    $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol'));
+    $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol','font','table','tr','td','th'));
     $config->set('HTML.AllowedAttributes', array('a.href','class', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
     $config->set('HTML.SafeIframe', true);
     $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
@@ -885,7 +885,7 @@ public function purifyHTML($html) {
 
     public function replaceLinksWithTokens($description) {
         $html = new \DOMDocument();
-        $html->loadHTML($this->purifyHTML($description),LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $html->loadHTML($this->purifyHTML($description));
 
         foreach($html->getElementsByTagName("a") as $link) {
             $href = $link->getAttribute("href");
@@ -913,7 +913,7 @@ public function purifyHTML($html) {
                 $link->parentNode->replaceChild($tokenSpan,$link);
             }
         }
-        return $html->saveHTML();
+        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $html->saveHTML()));
 
     }
 }
