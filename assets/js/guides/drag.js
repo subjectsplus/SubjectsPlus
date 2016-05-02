@@ -17,7 +17,7 @@ function drag() {
             myDrag.makeDropable(".dropspotty");
             myDrag.makeDropable(".cke");
             myDrag.makeSortable(".sort-column");
-            myDrag.makeSortable('.sptab', 'sections');
+            myDrag.makeSortable('.sptab','sections');
             myDrag.makeDraggable(".draggable");
 
             $(".box-item").mousedown(function () {
