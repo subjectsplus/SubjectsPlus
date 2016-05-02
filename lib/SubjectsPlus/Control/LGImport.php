@@ -149,11 +149,13 @@ private $urls = array();
         $linkListText = $box->DESCRIPTION;
         $links = "";
         foreach ($box->LINKS->LINK as $link) {
-            $new_url = $this->removeLegacyCatlog($link->URL, "'". $link->NAME . "'");
+            $new_url = $link->URL;
+
+            if($this->isCatalogLink($link->URL) == true){
+                $new_url = $this->removeLegacyCatlog($link->URL, "'". $link->NAME . "'");
+            }
 
             $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($new_url), NULL, TRUE);
-            echo "SELECT * FROM location WHERE location LIKE " . $this->db->quote($new_url);
-            print_r($record);
             if (isset($record[0]['location_id'])) {
                 $record_title = $this->db->query("SELECT title.title,title.title_id, location.location  FROM 
 location_title 
@@ -641,16 +643,18 @@ public function purifyHTML($html) {
         $clean_url =  str_replace("'","", $noproxy_url);
         $title =  $this->db->quote(strip_tags($link_name));
 
-        $new_catalog_url = $this->removeLegacyCatlog($clean_url, $title);
+        if ($this->isCatalogLink($clean_url) == true) {
+            $clean_url = $this->removeLegacyCatlog($clean_url, $title);
+        }
 
-        array_push($this->urls, array("url" => $new_catalog_url));
+        array_push($this->urls, array("url" => $clean_url));
         array_push($this->titles, array("title" => $title));
 
         $record_check = $this->db->query("SELECT COUNT(*) FROM location WHERE location = $noproxy_url ");
         $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
 
         if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
-            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES ({$this->db->quote($new_catalog_url)},1,1,'N' )" )) {
+            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES ({$this->db->quote($clean_url)},1,1,'N' )" )) {
 
                 array_push($this->dupes, array("status" => "New Record Created"));
 
@@ -864,6 +868,20 @@ public function purifyHTML($html) {
         return $description;
     }
 
+    public function isCatalogLink($href) {
+        $isCatalogLink = false;
+
+        if (strpos($href,'http://ibisweb.miami.edu') !== false) {
+            $isCatalogLink = true;
+        }
+
+        if (strpos($href,'http://catalog.library.miami.edu') !== false) {
+            $isCatalogLink = true;
+        }
+
+        return $isCatalogLink;
+
+    }
 
     public function replaceLinksWithTokens($description) {
         $html = new \DOMDocument();
@@ -873,16 +891,13 @@ public function purifyHTML($html) {
             $href = $link->getAttribute("href");
             $no_proxy_href = $this->removeProxy($href);
 
-            if (strpos($no_proxy_href,'http://ibisweb.miami.edu') !== false) {
+            if ($this->isCatalogLink($no_proxy_href) == true) {
                 $no_proxy_href = $this->removeLegacyCatlog($no_proxy_href, "'{$link->nodeValue}'");
-
             }
 
-            if (strpos($no_proxy_href,'http://catalog.library.miami.edu') !== false) {
+            if ($this->isCatalogLink($no_proxy_href) == true) {
                 $no_proxy_href = $this->removeLegacyCatlog($no_proxy_href, "'{$link->nodeValue}'");
-
             }
-
 
             $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($no_proxy_href), NULL, TRUE);
 
