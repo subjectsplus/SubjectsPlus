@@ -63,6 +63,7 @@ class Pluslet_LinkList extends Pluslet
 
         if (isset($this->_body)) {
             $dom = new DOMDocument();
+            libxml_use_internal_errors(true);
             $dom->loadHTML($this->_body);
 
             $xpath = new DOMXPath($dom);
@@ -83,6 +84,7 @@ class Pluslet_LinkList extends Pluslet
 
         if (isset($this->_body)) {
             $dom = new DOMDocument();
+            libxml_use_internal_errors(true);
             $dom->loadHTML($this->_body);
 
             $xpath = new DOMXPath($dom);
