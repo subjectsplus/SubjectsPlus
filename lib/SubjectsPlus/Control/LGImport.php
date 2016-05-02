@@ -149,8 +149,11 @@ private $urls = array();
         $linkListText = $box->DESCRIPTION;
         $links = "";
         foreach ($box->LINKS->LINK as $link) {
+            $new_url = $this->removeLegacyCatlog($link->URL, "'". $link->NAME . "'");
 
-            $record = $this->db->query("SELECT * FROM location WHERE location = " . $this->db->quote($link->URL), NULL, TRUE);
+            $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($new_url), NULL, TRUE);
+            echo "SELECT * FROM location WHERE location LIKE " . $this->db->quote($new_url);
+            print_r($record);
             if (isset($record[0]['location_id'])) {
                 $record_title = $this->db->query("SELECT title.title,title.title_id, location.location  FROM 
 location_title 
@@ -161,7 +164,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
                 $this->log->importLog("Insert record:");
                 $this->log->importLog($record_title);
-                $this->log->importLog("SELECT * FROM location WHERE location = " . $this->db->quote($link->URL));
+                $this->log->importLog("SELECT * FROM location WHERE location LIKE " .  $this->db->quote($new_url));
 
 
             }
