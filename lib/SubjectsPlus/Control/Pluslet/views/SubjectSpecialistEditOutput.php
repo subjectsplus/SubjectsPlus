@@ -46,7 +46,7 @@
 
         }
 
-        $this->_body .= "<h4>{$staffMember['fname']} {$staffMember['lname']}</h4>"; 
+        $this->_body .= "<h4>{$staffMember['fname']} {$staffMember['lname']}</h4>";
 
         $this->_body .= "<input type='text' name='SubjectSpecialist-extra-staffId{$staffId}' value='{$staffId}' style='display:none;' />";
 
@@ -86,7 +86,7 @@
 
     //$this->_body .= $this->_editor;
 
-    if(isset($this->_body_content[0]['body'])  && is_array($this->_body_content[0]['body'])) {
+    if(isset($this->_body_content[0]['body'])  && is_array($this->_body_content[0]['body']) && ($this->_body_content[0]['body'] != '') ) {
         $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'>{$this->_body_content[0]['body']}</textarea>";
     } else {
         $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'></textarea>";
