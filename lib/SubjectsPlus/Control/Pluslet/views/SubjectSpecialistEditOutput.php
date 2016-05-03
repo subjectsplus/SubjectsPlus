@@ -85,9 +85,9 @@
 
 
     //$this->_body .= $this->_editor;
-
-    if(isset($this->_body_content[0]['body'])  && is_array($this->_body_content[0]['body']) && ($this->_body_content[0]['body'] != '') ) {
-        $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'>{$this->_body_content[0]['body']}</textarea>";
+    $body_content = $this->_body_content[0]['body'];
+    if( (isset($body_content))  && ($body_content != '') ) {
+        $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'>{$body_content}</textarea>";
     } else {
         $this->_body .= "<textarea cols='60' id='editor1' name='editor1' rows='10'></textarea>";
     }
