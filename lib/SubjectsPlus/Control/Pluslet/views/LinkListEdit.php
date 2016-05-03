@@ -212,10 +212,9 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
 
 
         $('body').on('click', '#sort-list-alpha-btn', function() {
-            $( "li", "#db-list-results" ).sort(function( a, b ) {
-                return $( a ).text() > $( b ).text();
 
-            }).appendTo( "#db-list-results" );
+            tinysort('ul#db-list-results > li',{attr:'data-title'});
+
         });
 
         //Add custom js scrollbar for list containers
