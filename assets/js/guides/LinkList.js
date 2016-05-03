@@ -300,6 +300,8 @@ function LinkList(id,idSelector) {
             $('.dblist-button').trigger('click');
         } else {
             thisList = $(this).closest('div[name="new-pluslet-LinkList"]');
+            //remove the textarea with the list in the admin view after saving changes
+            $('[name="link-list-textarea"]').remove();
             thisList.remove();
         }
     });

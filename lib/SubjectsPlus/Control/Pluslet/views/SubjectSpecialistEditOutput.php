@@ -46,7 +46,7 @@
 
         }
 
-        $this->_body .= "<h4>{$staffMember['fname']} {$staffMember['lname']}</h4>";
+        $this->_body .= "<h4>{$staffMember['fname']} {$staffMember['lname']}</h4>"; 
 
         $this->_body .= "<input type='text' name='SubjectSpecialist-extra-staffId{$staffId}' value='{$staffId}' style='display:none;' />";
 
