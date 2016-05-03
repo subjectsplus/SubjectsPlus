@@ -147,7 +147,9 @@ class LGImport {
         $pluslet_title = $box->NAME;
         $linkListText = $box->DESCRIPTION;
         $links = "";
+
         foreach ($box->LINKS->LINK as $link) {
+
             $new_url = $link->URL;
 
             if($this->isCatalogLink($link->URL) == true){
@@ -169,8 +171,6 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 
             }
-
-
 
         }
         $linkListBody = "<div class='link-list-text-top'>$linkListText</div><ul class='link-list-display'>$links</ul>";
@@ -212,7 +212,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
     }
     public function importBox($box, $section_id) {
 
-       // $this->db->exec("SET NAMES utf-8" );
+        // $this->db->exec("SET NAMES utf-8" );
         $description = null;
 
         // Import images and replace the old urls with new urls
@@ -334,29 +334,31 @@ WHERE location.location_id = " . $record[0]['location_id']);
                 }
 
                 $this->insertBasicPluslet($box, $section_id, $description);
-
+                break;
             case "User Feedback":
-
+                break;
             case "Google Search":
 
                 $this->insertPluslet($box, $section_id, "GoogleSearch", "Google Search");
-
+                break;
             case "Poll":
-
+                break;
             case "Google Books":
                 $this->insertPluslet($box, $section_id, "GoogleBooks", "Google Books");
-
+                break;
             case "Events":
-
+                break;
             case "Guide Links":
-
+                break;
             case "User Profile":
                 $this->insertPluslet($box, $section_id, "SubjectSpecialist", "Subject Specialist");
-
+                break;
             case "Google Scholar":
 
                 $this->insertPluslet($box, $section_id, "GoogleScholar", "Google Scholar");
-
+                break;
+            default:
+                break;
         }
 
 
@@ -615,25 +617,31 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $noProxyUrl;
     }
     public function removeLegacyCatlog($url,$title) {
-        $new_url = "http://search.library.miami.edu/primo_library/libweb/action/dlSearch.do?&institution=01UOML&vid=uxtest2&query=any,contains,{$title}";
+        $url_params = explode("record=", $url);
+        if (isset($url_params[1])) {
+            $new_url = "http://search.library.miami.edu/primo_library/libweb/action/dlSearch.do?&institution=01UOML&vid=uxtest2&query=any,contains,{$url_params[1]}";
+        } else {
+            $new_url = "http://search.library.miami.edu/primo_library/libweb/action/dlSearch.do?&institution=01UOML&vid=uxtest2&query=any,contains,{$title}";
+
+        }
         return $new_url;
     }
     public function purifyHTML($html) {
 
-    $config = \HTMLPurifier_Config::createDefault();
-    $config->set('Core.Encoding', 'UTF-8');
-    $config->set('HTML.TidyLevel', 'heavy');
+        $config = \HTMLPurifier_Config::createDefault();
+        $config->set('Core.Encoding', 'UTF-8');
+        $config->set('HTML.TidyLevel', 'heavy');
 
-    $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol','font','table','tr','td','th'));
-    $config->set('HTML.AllowedAttributes', array('a.href','class', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
-    $config->set('HTML.SafeIframe', true);
-    $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
+        $config->set('HTML.AllowedElements', array('a','b','p','i','em','u', 'br', 'div', 'img', 'strong','iframe','ul','li','ol','font','table','tr','td','th'));
+        $config->set('HTML.AllowedAttributes', array('a.href','class', 'img.src', '*.alt', '*.title', '*.border', 'a.target', 'a.rel','iframe.src'));
+        $config->set('HTML.SafeIframe', true);
+        $config->set('URI.SafeIframeRegexp', '%^http://(www.youtube.com/embed/|player.vimeo.com/video/)%');
 
-    $purifier = new \HTMLPurifier($config);
-    $html = str_replace(chr(194)," ",$html);
-    return $purifier->purify($html);
+        $purifier = new \HTMLPurifier($config);
+        $html = str_replace(chr(194)," ",$html);
+        return $purifier->purify($html);
 
-}
+    }
     public function parseLink($link_url, $link_name,$link_description) {
         // Remove the proxy url from the link URL
         $noproxy_url = str_replace("https://iiiprxy.library.miami.edu/login?url=", "",$link_url);
@@ -892,19 +900,21 @@ WHERE location.location_id = " . $record[0]['location_id']);
                 $no_proxy_href = $this->removeLegacyCatlog($no_proxy_href, "'{$link->nodeValue}'");
             }
 
-            $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($no_proxy_href), NULL, TRUE);
+           // $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($no_proxy_href), NULL, TRUE);
 
-            if (isset($record[0])) {
-                $location = $record[0];
-                $tokenSpan = $html->createElement("span");
-                $tokenSpan->setAttribute("class","token-list-item subsplus_resource");
-                $tokenSpan->setAttribute("contenteditable", "false");
+            //if (isset($record[0])) {
+            //    $location = $record[0];
+                $tokenSpan = $html->createElement("a");
+            //    $tokenSpan->setAttribute("class","token-list-item subsplus_resource");
+           //     $tokenSpan->setAttribute("contenteditable", "false");
                 $linkTitle = $link->nodeValue;
-                $linkId  = $location[0];
-                $tokenText = $html->createTextNode("{{dab},{{$linkId}},{{$linkTitle}},{000}}");
+          //      $linkId  = $location[0];
+                $tokenText = $html->createTextNode($linkTitle);
                 $tokenSpan->appendChild($tokenText);
+                $tokenSpan->setAttribute('href',$link->getAttribute('href'));
                 $link->parentNode->replaceChild($tokenSpan,$link);
-            }
+
+           // }
         }
         return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $html->saveHTML()));
 
