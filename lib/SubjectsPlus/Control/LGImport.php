@@ -10,15 +10,14 @@ namespace SubjectsPlus\Control;
 require_once (__DIR__ . "../../../HTMLPurifier/HTMLPurifier.auto.php");
 class LGImport {
     private $_guide_id;
-    private $_libguides_xml;
     private $_guide_owner;
     private $_row = 0;
     private $_column = 0;
     private $_staff_id;
     private $log;
-private $titles = array();
-private $dupes = array();
-private $urls = array();
+    private $titles = array();
+    private $dupes = array();
+    private $urls = array();
 
     public function __construct($lib_guides_xml_path, Logger $log, Querier $db) {
         $libguides_xml = new \SimpleXMLElement ( file_get_contents ( $lib_guides_xml_path, 'r' ) );
@@ -619,7 +618,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
         $new_url = "http://search.library.miami.edu/primo_library/libweb/action/dlSearch.do?&institution=01UOML&vid=uxtest2&query=any,contains,{$title}";
         return $new_url;
     }
-public function purifyHTML($html) {
+    public function purifyHTML($html) {
 
     $config = \HTMLPurifier_Config::createDefault();
     $config->set('Core.Encoding', 'UTF-8');
@@ -744,8 +743,6 @@ public function purifyHTML($html) {
 
         return $return_titles;
     }
-
-
     public function loadLibGuidesLinksXML() {
         $guide_id = $this->getGuideID();
         $libguides_xml= $this->libguidesxml;
@@ -774,11 +771,11 @@ public function purifyHTML($html) {
             $guide_name = str_replace("'", "''",$subject[0]);
 
             if ($subject[0] != null) {
-                if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[7]','{\"maincol:\"\"}')")) {
+                if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, header, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[9]','um','{\"maincol:\"\"}')")) {
                     $response = array("imported_guide" => $subject[1] );
                 } else {
                     $response = array("imported_guide" => $subject[1][0] );
-                    $query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[7]','{\"maincol:\"\"}')";
+                    $query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, header, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[9]','um','{\"maincol:\"\"}')";
                     $this->log->importLog( "Error inserting subject:");
                     $this->log->importLog ($query);
                     $this->log->importLog ( serialize($this->db->errorInfo()) );
@@ -855,8 +852,6 @@ public function purifyHTML($html) {
         $this->insertChildren();
         return json_encode($response);
     }
-
-
     public function parseLinksFromDescription($description) {
         $html = new \DOMDocument();
         $html->loadHTML($this->purifyHTML($description));
@@ -867,7 +862,6 @@ public function purifyHTML($html) {
         }
         return $description;
     }
-
     public function isCatalogLink($href) {
         $isCatalogLink = false;
 
@@ -882,7 +876,6 @@ public function purifyHTML($html) {
         return $isCatalogLink;
 
     }
-
     public function replaceLinksWithTokens($description) {
         $html = new \DOMDocument();
         $html->loadHTML($this->purifyHTML($description));
