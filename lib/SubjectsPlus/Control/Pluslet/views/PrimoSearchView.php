@@ -16,146 +16,97 @@
 </style>
 <script type="text/javascript">
     function searchPrimo() {
-
-
+        document.getElementById("primoQuery").value = document.getElementById("rtype").value + "," + document.getElementById("precisionOperator").value + "," + document.getElementById("primoQueryTemp").value.replace(/[,]/g, " ");
         document.forms["searchForm"].submit();
-    }
-    function searchKeyPress(e) {
-        if (typeof e == 'undefined' && window.event) {
-            e = window.event;
-        }
-        if (e.keyCode == 13) {
-            document.getElementById('go').click();
-        }
     }
 </script>
 
 <?php
-if( (empty($this->getAction())) || (empty($this->getInstitutionCode())) ||
-    (empty($this->getMode())) || (empty($this->getSrt())) ||
-    (empty($this->getVid())) || (empty($this->getScope())) ) {
+
+//get the form vars
+$action          = $this->getAction();
+$institutionCode = $this->getInstitutionCode();
+$mode            = $this->getMode();
+$sort            = $this->getSrt();
+$vid             = $this->getVid();
+$scope           = $this->getScope();
+
+
+if( (empty($action)) || (empty($institutionCode)) || (empty($mode)) || (empty($sort)) || (empty($vid)) || (empty($scope)) ) {
 
     echo "<p>Please have your SubjectsPlus Admin add the settings for your institution's Primo account.</p>";
     echo "<p>The file is located at /lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php</p>";
+
 } else { ?>
 
-
-
-
-<form name="searchForm" role="search" method="get" action="<?php echo $this->getAction(); ?>" class="pure-form" enctype="application/x-www-form-urlencoded; charset=utf-8" id="simple" target="_blank" onsubmit="searchPrimo()">
+<form class="pure-form" id="simple" name="searchForm" method="get" target="_blank" action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="searchPrimo()">
     <div class="formEntryArea">
-    <input type="hidden" name="institution" value="<?php echo $this->getInstitutionCode(); ?>">
-    <input type="hidden" id="fn" name="fn" value="search" />
-    <input type="hidden" id="ct" name="ct" value="search" />
-    <input type="hidden" id="initialSearch" name="initialSearch" value="true" />
-    <input type="hidden" id="mode" name="mode" value="<?php echo $this->getMode(); ?>" />
 
+        <input type="text" class="form-control" id="primoQueryTemp" value="" size="35">
+        <br><br>
 
-    <input type="hidden" id="indx" name="indx" value="1" />
-    <input type="hidden" id="dum" name="dum" value="true" />
-    <input type="hidden" id="srt" name="srt" value="<?php echo $this->getSrt(); ?>" />
+        <!-- Customizable Parameters -->
+        <input type="hidden" name="institution" value="<?php echo $institutionCode; ?>">
+        <input type="hidden" name="vid" value="<?php echo $vid; ?>">
+        <input type="hidden" id="srt" name="srt" value="<?php echo $this->getSrt(); ?>" />
 
+        <select class="form-control" id="tab" name="tab">
+            <option value="everything" id="everything_tab" name="everything_tab">Everything</option>
+            <option value="default_tab" id="default_tab" name="default_tab">Library Catalog</option>
+        </select>
+            <br><br>
+        <input type="hidden" name="mode" value="Basic">
+            <select class="form-control" id="precisionOperator"
+                    name="precisionOperator">
 
-    <input id="vid" name="vid" value="<?php echo $this->getVid(); ?>" type="hidden">
+                <option value="contains" class="EXLSelectedOption">
+                    that contain my query words
+                </option>
+                <option value="exact" class="EXLSelectOption">
+                    with my exact phrase
+                </option>
 
-    <input type="hidden" id="frbg" name="frbg" value="" />
-    <input type="hidden" id="tb" name="tb" value="t" />
+            </select>
+            <br><br>
 
+        <select class="form-control" id="rtype" name="rtype">
+            <option  value="any" id="scope_anyall1" selected="selected" class="EXLSelectedOption">
+                anywhere in the record
+            </option>
+            <option  value="title" id="scope_titleall1" class="EXLSelectOption">
+                Title
+            </option>
+            <option  value="creator" id="scope_creatorall1" class="EXLSelectOption">
+                Author/Creator
+            </option>
+            <option  value="sub" id="scope_suball1" class="EXLSelectOption">
+                Subject
+            </option>
+            <option  value="desc" id="scope_lsr06all1" class="EXLSelectOption">
+                Description
+            </option>
+            <option  value="isbn" id="scope_isbnall1" class="EXLSelectOption">
+                ISBN
+            </option>
+        </select>
+        <br><br>
 
-    <input type="text" size="30" id="vl(freeText0)"  name="vl(freeText0)"  />
+        <!-- Fixed parameters -->
+        <input type="hidden" name="displayMode" value="full">
+        <input type="hidden" name="bulkSize" value="10">
+        <input type="hidden" name="highlight" value="true">
+        <input type="hidden" name="dum" value="true">
+        <input type="hidden" name="query" id="primoQuery">
+        <input type="hidden" name="displayField" value="all">
 
-    <br><br>
-    <select class="form-control" id="tab" name="tab">
-        <option value="everything" id="everything_tab" name="everything_tab">Everything</option>
-        <option value="default_tab" id="default_tab" name="default_tab">Library Catalog</option>
-    </select>
+        <!-- Enable this if "Expand My Results" is enabled by default in Views Wizard -->
+        <input type="hidden" name="pcAvailabiltyMode" value="true">
 
-    <br><br>
-    <input type="hidden" id="scp.scps" name="scp.scps" value="<?php echo $this->getScope(); ?>" />
-
-    <select class="form-control" id="resource-type" name="">
-        <option value="all_items" id="all_items">All items</option>
-        <option value="books" id="books">Books</option>
-        <option value="articles" id="articles">Articles</option>
-        <option value="journals" id="journals">Journals</option>
-        <option value="government_documents" id="government_documents">Government Documents</option>
-        <option value="video" id="video">Video</option>
-        <option value="audio" id="audio">Audio</option>
-    </select>
-
-    <br><br>
-
-    <select class="EXLSelectTag blue EXLSimpleSearchSelect" id="exlidInput_precisionOperator_1"
-            name="vl(1UIStartWith0)">
-
-        <option value="contains" class="EXLSelectedOption">
-            that contain my query words
-        </option>
-        <option value="exact" class="EXLSelectOption">
-            with my exact phrase
-        </option>
-        <option value="begins_with" class="EXLSelectOption">
-            starts with
-        </option>
-    </select>
-
-    <br><br>
-
-
-    <select class="EXLSelectTag blue EXLSimpleSearchSelect" id="exlidInput_scope_all1" name="vl(618226781UI0)">
-        <option  value="any" id="scope_anyall1" selected="selected" class="EXLSelectedOption">
-            anywhere in the record
-        </option>
-        <option  value="title" id="scope_titleall1" class="EXLSelectOption">
-            Title
-        </option>
-        <option  value="creator" id="scope_creatorall1" class="EXLSelectOption">
-            Author/Creator
-        </option>
-        <option  value="sub" id="scope_suball1" class="EXLSelectOption">
-            Subject
-        </option>
-        <option  value="lsr06" id="scope_lsr06all1" class="EXLSelectOption">
-            Call Number
-        </option>
-        <option  value="isbn" id="scope_isbnall1" class="EXLSelectOption">
-            ISBN
-        </option>
-        <option  value="lsr01" id="scope_lsr01all1" class="EXLSelectOption">
-            Course Reserves
-        </option>
-    </select>
-
-    <br><br>
-
-
-    <input id="go" class="pure-button pure-button-pluslet" type="button" value="Search" title="Search" onclick="searchPrimo();" alt="Search">
-
+        <!-- Search Button -->
+        <input id="go" title="Search" onclick="searchPrimo()" type="button" value="Search" alt="Search" style="height: 22px; font-size: 12px; font-weight: bold; background: #DE6E17; color: #ffffff; border: 1px solid;">
     </div>
 </form>
 
 
+
 <?php } ?>
-
-<script>
-
-    $( "#tab" ).change( function() {
-
-        var tab = this.value;
-
-        if(tab == 'everything') {
-            $('#resource-type').attr('name', "vl(672468638UI1)");
-
-        } else if (tab == 'default_tab') {
-            $('#resource-type').attr('name', "vl(672468639UI1)");
-
-        } else {
-            $('#resource-type').attr('name', "vl(672468638UI1)");
-
-        }
-
-    });
-
-
-
-</script>
