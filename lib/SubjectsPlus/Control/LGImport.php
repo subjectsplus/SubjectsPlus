@@ -771,11 +771,11 @@ WHERE location.location_id = " . $record[0]['location_id']);
             $guide_name = str_replace("'", "''",$subject[0]);
 
             if ($subject[0] != null) {
-                if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[9]','{\"maincol:\"\"}')")) {
+                if($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, header, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[9]','um','{\"maincol:\"\"}')")) {
                     $response = array("imported_guide" => $subject[1] );
                 } else {
                     $response = array("imported_guide" => $subject[1][0] );
-                    $query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[9]','{\"maincol:\"\"}')";
+                    $query = "INSERT INTO subject (subject, subject_id, shortform, description, keywords, header, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' ,  '$subject[3]', '$subject[9]','um','{\"maincol:\"\"}')";
                     $this->log->importLog( "Error inserting subject:");
                     $this->log->importLog ($query);
                     $this->log->importLog ( serialize($this->db->errorInfo()) );
