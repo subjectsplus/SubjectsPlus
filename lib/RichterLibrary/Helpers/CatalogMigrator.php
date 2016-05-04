@@ -9,6 +9,10 @@ class CatalogMigrator
     }
 
     public function getPrimoUrl($param) {
+        $param = str_replace("~S11","",$param);
+        $param = str_replace("~S12","",$param);
+        $param = str_replace("~S13","",$param);
+
         return  "http://search.library.miami.edu/primo_library/libweb/action/dlSearch.do?&institution=01UOML&vid=uxtest2&query=any,contains,{$param}";
     }
     
@@ -81,6 +85,24 @@ class CatalogMigrator
 
         if (strpos($href,"http://libguides.miami.edu/") !== false) {
             $catalogLinkType = "libguides";
+            return $catalogLinkType;
+
+        }
+
+        if (strpos($href,"content.php") !== false) {
+            $catalogLinkType = "libguides";
+            return $catalogLinkType;
+
+        }
+
+        if (strpos($href,".jpg") !== false) {
+            $catalogLinkType = "image";
+            return $catalogLinkType;
+
+        }
+
+        if (strpos($href,".gif") !== false) {
+            $catalogLinkType = "image";
             return $catalogLinkType;
 
         }

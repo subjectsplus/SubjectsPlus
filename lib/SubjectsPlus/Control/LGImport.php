@@ -679,6 +679,8 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
     public function parseLink($link_url, $link_name, $link_description)
     {
+        
+
         // Remove the proxy url from the link URL
         $noproxy_url = $this->cm->removeProxy($link_url);
         $noproxy_url = $this->db->quote($noproxy_url);
@@ -704,6 +706,9 @@ WHERE location.location_id = " . $record[0]['location_id']);
             return 0;
         }
         if ($type == "search") {
+            return 0;
+        }
+        if ($type == "image") {
             return 0;
         }
 
