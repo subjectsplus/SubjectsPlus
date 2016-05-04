@@ -50,7 +50,7 @@ use RichterLibrary\Helpers\CatalogMigrator;
 $db = new Querier ();
 $log = new Logger ();
 $cm = new CatalogMigrator();
-$libguides_importer = new LGImport ( 'libguides.xml', $log, $db );
+$libguides_importer = new LGImport ( 'libguides.xml', $log, $db, $cm );
 ?>
 
 <div class="pure-g">

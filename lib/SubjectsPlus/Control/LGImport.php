@@ -184,8 +184,8 @@ class LGImport
 
             $new_url = $link->URL;
 
-            if ($this->cm->isCatalogLink($link->URL) == true) {
-                $new_url = $this->cm->removeLegacyCatalog($link->URL, "'" . $link->NAME . "'");
+            if ($this->cm->whatType($link->URL) == "default") {
+                $new_url = $this->cm->removeLegacyCatlog($link->URL, "'" . $link->NAME . "'");
             }
 
             $record = $this->db->query("SELECT * FROM location WHERE location LIKE " . $this->db->quote($new_url), NULL, TRUE);
@@ -685,8 +685,25 @@ WHERE location.location_id = " . $record[0]['location_id']);
         $clean_url = str_replace("'", "", $noproxy_url);
         $title = $this->db->quote(strip_tags($link_name));
 
-        if ($this->cm->isCatalogLink($clean_url) == true) {
-            $clean_url = $this->cm->removeLegacyCatalog($clean_url, $title);
+        $type = $this->cm->whatType($clean_url);
+
+
+
+        if ($type == "record") {
+            $clean_url = $this->cm->removeLegacyCatalog($clean_url);
+        }
+
+        if ($type == "default") {
+            $clean_url = $this->cm->removeLegacyCatalog($clean_url);
+        }
+        if ($type == "mail") {
+        return 0;
+        }
+        if ($type == "libguides") {
+            return 0;
+        }
+        if ($type == "search") {
+            return 0;
         }
 
         array_push($this->urls, array("url" => $clean_url));
@@ -919,15 +936,13 @@ WHERE location.location_id = " . $record[0]['location_id']);
         foreach ($html->getElementsByTagName("a") as $link) {
             $href = $link->getAttribute("href");
             $no_proxy_href = $this->cm->removeProxy($href);
+            $new_href= $this->cm->removeLegacyCatalog($no_proxy_href);
 
-            if ($this->cm->isCatalogLink($no_proxy_href) == true) {
-                $no_proxy_href = $this->($no_proxy_href, "'{$link->nodeValue}'");
-            }
             $tokenSpan = $html->createElement("a");
             $linkTitle = $link->nodeValue;
             $tokenText = $html->createTextNode($linkTitle);
             $tokenSpan->appendChild($tokenText);
-            $tokenSpan->setAttribute('href', $link->getAttribute('href'));
+            $tokenSpan->setAttribute('href', $new_href);
             $link->parentNode->replaceChild($tokenSpan, $link);
 
         }
