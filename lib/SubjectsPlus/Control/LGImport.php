@@ -362,7 +362,8 @@ WHERE location.location_id = " . $record[0]['location_id']);
                     foreach ($files->FILE as $file) {
 
                         $description .= "<div class=\"file\">" .
-                            "<div class=\"file-title\"><a href=\"http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID\">$file->NAME</a></div>"
+                            "<div class=\"file-title\"><i class=\"fa fa-file\" aria-hidden=\"true\"></i>
+<a href=\"http://libguides.miami.edu/loader.php?type=d&id=$file->FILE_ID\">$file->NAME</a></div>"
                             . "<div class=\"file-description\">" . $file->DESCRIPTION . "</div>"
 
                             . "</div>";
