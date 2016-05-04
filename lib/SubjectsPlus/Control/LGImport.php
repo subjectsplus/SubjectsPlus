@@ -95,10 +95,7 @@ class LGImport
     {
         $row = $this->getRow();
         $column = $this->getColumn();
-
-
-        $tokens_description = $this->replaceLinksWithTokens($description);
-
+        
 
         $box_name = $this->db->quote($box->NAME);
 
@@ -693,7 +690,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
 
         if ($type == "record") {
-            $clean_url = $this->cm->removeLegacyCatalog($clean_url);
+            return 0;
         }
 
         if ($type == "default") {
@@ -934,25 +931,5 @@ WHERE location.location_id = " . $record[0]['location_id']);
         return $description;
     }
 
-    public function replaceLinksWithTokens($description)
-    {
-        $html = new \DOMDocument();
-        $html->loadHTML($this->purifyHTML($description));
 
-        foreach ($html->getElementsByTagName("a") as $link) {
-            $href = $link->getAttribute("href");
-            $no_proxy_href = $this->cm->removeProxy($href);
-            $new_href= $this->cm->removeLegacyCatalog($no_proxy_href);
-
-            $tokenSpan = $html->createElement("a");
-            $linkTitle = $link->nodeValue;
-            $tokenText = $html->createTextNode($linkTitle);
-            $tokenSpan->appendChild($tokenText);
-            $tokenSpan->setAttribute('href', $new_href);
-            $link->parentNode->replaceChild($tokenSpan, $link);
-
-        }
-        return preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $html->saveHTML()));
-
-    }
 }
