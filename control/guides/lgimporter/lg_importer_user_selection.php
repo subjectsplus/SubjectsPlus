@@ -16,6 +16,8 @@ include('../../includes/header.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
+use RichterLibrary\Helpers\CatalogMigrator;
+
 ?>
 
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
@@ -36,8 +38,9 @@ use SubjectsPlus\Control\Logger;
 
 $db = new Querier;
 $log = new Logger;
+$cm = new CatalogMigrator;
 
-$libguides_importer = new LGImport('libguides.xml',$log,$db);
+$libguides_importer = new LGImport('libguides.xml',$log,$db, $cm);
 $libguides_importer->OutputOwners();
 
 ?>

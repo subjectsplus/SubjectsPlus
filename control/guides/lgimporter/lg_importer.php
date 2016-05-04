@@ -18,6 +18,7 @@ include ('../../includes/header.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
+use RichterLibrary\Helpers\CatalogMigrator;
 
 ?>
 
@@ -48,8 +49,8 @@ use SubjectsPlus\Control\Logger;
 
 $db = new Querier ();
 $log = new Logger ();
-
-$libguides_importer = new LGImport ( 'libguides.xml', $log, $db );
+$cm = new CatalogMigrator();
+$libguides_importer = new LGImport ( 'libguides.xml', $log, $db, $cm );
 ?>
 
 <div class="pure-g">
