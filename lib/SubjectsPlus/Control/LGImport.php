@@ -95,11 +95,12 @@ class LGImport
     {
         $row = $this->getRow();
         $column = $this->getColumn();
-        
+
+        $clean_html = $this->purifyHTML($description);
 
         $box_name = $this->db->quote($box->NAME);
 
-        if ($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, {$this->db->quote($tokens_description)}, 'Basic')")) {
+        if ($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, {$this->db->quote($clean_html)}, 'Basic')")) {
 
             $this->log->importLog("Inserted pluslet '$box->NAME'");
         } else {
