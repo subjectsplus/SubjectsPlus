@@ -4166,3 +4166,9 @@ Link Link Admin Panel
 }
 
 } /* end last responsive block */
+
+
+button.create-guide {font-family: "NotoSansBold";
+  font-size: 12px;
+  font-weight: normal;
+}
