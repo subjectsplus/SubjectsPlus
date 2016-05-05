@@ -178,6 +178,11 @@ class LGImport
         $linkListText = $box->DESCRIPTION;
         $links = "";
 
+        if (!isset($box->LINKS->LINK)) {
+            $this->insertBasicPluslet($box,$section_id,$linkListText);
+            return;
+        }
+
         foreach ($box->LINKS->LINK as $link) {
 
             $new_url = $link->URL;
@@ -890,7 +895,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
                     $section_uniqid = $section_index . rand();
                     $section_index++;
 
-                    if ($this->db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
+                    if ($this->db->exec("INSERT INTO section (tab_id, section_id, section_index, layout) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index, '3-6-3')")) {
                         $this->log->importLog("Inserted section");
                     } else {
                         $this->log->importLog("Problem inserting this section. This section  may already exist in the database.");
