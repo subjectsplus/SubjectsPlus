@@ -192,9 +192,10 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
             $body_content .= "<script>$('ul.staff-details:empty').parent('div').hide();</script>";
 
-            $this->_body = $body_content;
+            $this->_body_content = $body_content;
 
 
+            $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistViewOutput.php' );
 
         }
 
@@ -223,7 +224,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
             $this->_body_content = array();
         }
-        
+
 
         global $CKPath;
         global $CKBasePath;
