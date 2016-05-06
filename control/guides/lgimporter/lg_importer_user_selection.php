@@ -40,6 +40,7 @@ $db = new Querier;
 $log = new Logger;
 $cm = new CatalogMigrator;
 
+
 $libguides_importer = new LGImport('libguides.xml',$log,$db, $cm);
 $libguides_importer->OutputOwners();
 
