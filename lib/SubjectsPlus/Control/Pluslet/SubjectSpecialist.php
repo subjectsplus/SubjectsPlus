@@ -27,6 +27,12 @@ class Pluslet_SubjectSpecialist extends Pluslet {
     }
 
     protected function onViewOutput() {
+
+        //$this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistViewOutput.php' );
+
+
+
+
         // Get librarians associated with this guide
         $querier = new Querier();
         $qs = "SELECT *
@@ -186,9 +192,13 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
             $body_content .= "<script>$('ul.staff-details:empty').parent('div').hide();</script>";
 
-            $this->_body = $body_content;
+            $this->_body_content = $body_content;
+
+
+            $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistViewOutput.php' );
 
         }
+
     }
 
 
@@ -212,8 +222,9 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         } else {
 
-            $this->_body_content = "";
+            $this->_body_content = array();
         }
+
 
         global $CKPath;
         global $CKBasePath;
@@ -225,7 +236,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $oCKeditor = new CKEditor($CKBasePath);
         $oCKeditor->timestamp = time();
         //$oCKeditor->config['ToolbarStartExpanded'] = true;
-        $config['toolbar'] = 'SubsPlus_Narrow';
+        $config['toolbar'] = 'TextFormat';
         $config['height'] = '300';
         $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 

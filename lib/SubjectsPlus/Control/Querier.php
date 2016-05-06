@@ -136,5 +136,30 @@ class Querier  {
 	{
 		return $this->_connection->errorInfo();
 	}
+
+    public function getSingleById($sql, $factory, $id) {
+        $statement = $this->_connection->prepare($sql);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch();
+
+        return $factory::create($result);
+
+    }
+    public function getArrayById($sql, $factory, $id) {
+        $objects = array();
+        $statement = $this->_connection->prepare($sql);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $results = $statement->fetchAll();
+
+
+        foreach ($results as $result) {
+            $objects[] = $factory::create($result);
+
+        }
+
+        return $objects;
+
+    }
 }
-?>

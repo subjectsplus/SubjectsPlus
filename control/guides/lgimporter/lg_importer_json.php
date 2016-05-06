@@ -17,11 +17,13 @@ include('../../includes/functions.php');
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LGImport;
 use SubjectsPlus\Control\Logger;
+use RichterLibrary\Helpers\CatalogMigrator;
 
 $db = new Querier;
 $log = new Logger;
+$cm = new CatalogMigrator;
 
-$lg_importer = new LGImport('libguides.xml',$log,$db);
+$lg_importer = new LGImport('libguides.xml',$log,$db,$cm);
 
 // Set the guide id
 $lg_importer->setGuideID($_GET['libguide']);

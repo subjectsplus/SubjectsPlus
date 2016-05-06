@@ -71,6 +71,17 @@ function pluslet() {
 
 			    });
 
+
+				$(document.body).on('click', '.table-of-contents-header > a', function(e){
+					e.preventDefault();
+					var tabIndex = $(this).data("tab_index");
+
+					$('#tabs').tabs('select', tabIndex);
+
+					window.location.hash = 'tab-' + tabIndex;
+
+				});
+
 			    
 			    ////////////////////
 			    // box-settings bind to show when clicking on gear or edit icon.
@@ -80,7 +91,7 @@ function pluslet() {
 			    });
 
 			},
-			dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
+				dropPluslet : function(clone_id, item_type, origin_id, clone_title) {
 				var g = guide();
 				var subjectId = g.getSubjectId();
 			    // Create new node below, using a random number
@@ -120,7 +131,7 @@ function pluslet() {
 					//Close main flyout when a pluslet is dropped
 					$('#main-options').slideReveal('hide');
 
-					
+
 				});
 			}, 
 			getParameterByName : function(name) {

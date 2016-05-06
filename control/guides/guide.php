@@ -382,11 +382,6 @@ ob_end_flush ();
 				href="#"><i class="fa fa-search"
 					title="<?php print _("Find Boxes"); ?>" /></i><br /><?php print _("Find Boxes"); ?></a></li>
 
-
-			<li id="show_dblist_options" class="top-panel-option-item"><a
-						href="#"><i class="fa fa-list"
-									title="<?php print _("Custom List"); ?>" /></i><br /><?php print _("Custom List"); ?></a></li>
-
 			<li id="show_layout_options" class="top-panel-option-item"><a
 				href="#"><i class="fa fa-columns"
 					title="<?php print _("Layouts"); ?>" /></i><br /><?php print _("Layouts"); ?></a></li>
@@ -473,14 +468,7 @@ ob_end_flush ();
 							title="<?php print _("New Section"); ?>" class="custom-icon" /></a></li>
 				</ul>
 			</div>
-
-
-			<!--custom database list-->
-          
-          <?php include_once('flyouts/create_database_list.php'); ?>
-          
-
-          
+			
           <!--analytics-->
           <?php include_once('flyouts/analytics.php'); ?>
 
@@ -495,6 +483,7 @@ ob_end_flush ();
 
 		<!--  Image Gallery -->
 		<?php include_once('flyouts/asset_manager.php')?>
+
 
 
 
@@ -518,8 +507,6 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 </div>
 <!--end .guide-parent-wrap-->
 
-
 <script src="../../ckeditor/ckeditor.js"></script>
 
 <?php include("../includes/guide_footer.php"); ?>
-
