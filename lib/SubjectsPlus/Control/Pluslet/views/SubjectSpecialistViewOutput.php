@@ -21,7 +21,11 @@
     var hiddenPlusletId = <?php echo $this->_pluslet_id; ?>;
 
 
-    $('#pluslet-' + hiddenPlusletId).children('.box_settings').remove();
-    $('#pluslet-' + hiddenPlusletId).children('.titlebar').remove();
+    if( $('#pluslet-' + hiddenPlusletId).closest('[name="Clone"]').length > 0) {
+
+        $('#pluslet-' + hiddenPlusletId).children('.box_settings').remove();
+        $('#pluslet-' + hiddenPlusletId).children('.titlebar').remove();
+    }
+
 
 </script>

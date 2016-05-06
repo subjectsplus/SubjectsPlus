@@ -13,7 +13,7 @@ namespace SubjectsPlus\Control\AzRecord;
 use SubjectsPlus\Control\Querier;
 use PDO;
 
-class LocationDB
+class LocationDb
 {
     private $last_insert;
 
