@@ -27,7 +27,6 @@ class GoogleBooksSearcher implements PlusInterface\ISearcher {
                  $output_books[] = $book_outputter->HTML();
              }
         }
-            //die(var_dump($output_books));
         return $output_books;    
 	}
 
