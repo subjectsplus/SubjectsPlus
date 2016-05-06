@@ -14,7 +14,7 @@ namespace SubjectsPlus\Control\AzRecord;
 use SubjectsPlus\Control\Querier;
 use PDO;
 
-class TitleDB
+class TitleDb
 {
     private $last_insert;
 
