@@ -178,6 +178,11 @@ class LGImport
         $linkListText = $box->DESCRIPTION;
         $links = "";
 
+        if (!isset($box->LINKS->LINK)) {
+            $this->insertBasicPluslet($box,$section_id,$linkListText);
+            return;
+        }
+
         foreach ($box->LINKS->LINK as $link) {
 
             $new_url = $link->URL;
@@ -717,7 +722,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
         $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
 
         if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
-            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES ({$this->db->quote($clean_url)},1,1,'N' )")) {
+            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display, ctags) VALUES ({$this->db->quote($clean_url)},1,1,'N', 'LG')")) {
 
                 array_push($this->dupes, array("status" => "New Record Created"));
 
@@ -890,7 +895,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
                     $section_uniqid = $section_index . rand();
                     $section_index++;
 
-                    if ($this->db->exec("INSERT INTO section (tab_id, section_id, section_index) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index)")) {
+                    if ($this->db->exec("INSERT INTO section (tab_id, section_id, section_index, layout) VALUES ('$tab->PAGE_ID', $section_uniqid ,   $section_index, '3-6-3')")) {
                         $this->log->importLog("Inserted section");
                     } else {
                         $this->log->importLog("Problem inserting this section. This section  may already exist in the database.");
