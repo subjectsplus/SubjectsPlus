@@ -722,7 +722,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
         $title_check = $this->db->query("SELECT COUNT(*) FROM title WHERE title = $title");
 
         if ($record_check[0][0] == 0 && $title_check[0][0] == 0) {
-            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display) VALUES ({$this->db->quote($clean_url)},1,1,'N' )")) {
+            if ($this->db->exec("INSERT INTO location (location, format, access_restrictions, eres_display, ctags) VALUES ({$this->db->quote($clean_url)},1,1,'N', 'LG')")) {
 
                 array_push($this->dupes, array("status" => "New Record Created"));
 
