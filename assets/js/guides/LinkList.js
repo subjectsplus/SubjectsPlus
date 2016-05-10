@@ -299,10 +299,18 @@ function LinkList(id,idSelector) {
         if($('.db-list-results').length > 0) {
             $('.dblist-button').trigger('click');
         } else {
-            thisList = $(this).closest('div[name="new-pluslet-LinkList"]');
-            //remove the textarea with the list in the admin view after saving changes
-            $('[name="link-list-textarea"]').remove();
-            thisList.remove();
+
+            var newList = $(this).closest('div[name="new-pluslet-LinkList"]');
+            var modifiedList = $(this).closest('div[name="modified-pluslet-LinkList"]');
+
+            if(newList.length > 0) {
+                //remove the textarea with the list in the admin view after saving changes
+                $('[name="link-list-textarea"]').remove();
+                newList.remove();
+            } else if (modifiedList.length > 0) {
+                $('.dblist-button').trigger('click');
+            }
+
         }
     });
 
