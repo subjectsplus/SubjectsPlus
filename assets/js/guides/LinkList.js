@@ -109,8 +109,8 @@ function LinkList(id,idSelector) {
     }
 
     // Load existing list behaviour
-    if ($('#LinkList-body').siblings().find('li')) {
-        loadDisplayList($('#LinkList-body').siblings().find('li'));
+    if ($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li')) {
+        loadDisplayList($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li'));
     }
 
     function loadDisplayList(list) {
