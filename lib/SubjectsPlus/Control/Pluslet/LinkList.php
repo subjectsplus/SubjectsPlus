@@ -71,10 +71,11 @@ class Pluslet_LinkList extends Pluslet
             $entries = $xpath->query($query);
 
             if( (is_object($entries) == true) && ($entries->length > 0) ) {
-                $link_list_text = $entries->item(0)->nodeValue;
+                $link_list_text = $dom->saveHTML($entries->item(0));
             }
 
         }
+
         return $link_list_text;
 
     }
@@ -92,7 +93,7 @@ class Pluslet_LinkList extends Pluslet
             $entries = $xpath->query($query);
 
             if( (is_object($entries) == true) && ($entries->length > 0) ) {
-                $link_list_text = $entries->item(0)->nodeValue;
+                $link_list_text = $dom->saveHTML($entries->item(0));
             }
         }
         return $link_list_text;
