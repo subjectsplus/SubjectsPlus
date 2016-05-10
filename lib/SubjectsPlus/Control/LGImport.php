@@ -92,6 +92,42 @@ class LGImport
         return $this->_column;
     }
 
+    public function parseImagesHtml($html) {
+        if ($html != '') {
+            // Import images and replace the old urls with new urls
+            $doc = new \DOMDocument();
+
+            // Add these options -- otherwise you'll get a full HTML document with
+            // a doctype when running saveHTML()
+            $doc->loadHTML($html);
+
+            // Download images
+            $nodes = $doc->getElementsByTagName("img");
+
+            foreach ($nodes as $node) {
+
+                foreach ($node->attributes as $attr) {
+                    $test = strpos($attr->value, "http://");
+
+                    if ($test !== false) {
+                        $this->log->importLog($attr->value);
+                        $attr->value = $this->downloadImages($attr->value);
+                        $this->log->importLog($attr->value);
+                    }
+                }
+            }
+
+
+            $new_html = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $doc->saveHTML()));
+            return $new_html;
+
+        }
+        
+
+
+    }
+
+
     public function insertBasicPluslet($box, $section_id, $description)
     {
         $row = $this->getRow();
@@ -176,7 +212,13 @@ class LGImport
         $row = $this->getRow();
         $column = $this->getColumn();
         $pluslet_title = $box->NAME;
-        $linkListText = $box->DESCRIPTION;
+
+        if (isset($box->DESCRIPTION)) {
+            $linkListText = $this->parseImagesHtml($box->DESCRIPTION);
+        } else {
+            $linkListText = "";
+        }
+
         $links = "";
 
         if (!isset($box->LINKS->LINK)) {
@@ -249,6 +291,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
     }
 
+
     public function importBox($box, $section_id)
     {
 
@@ -258,39 +301,13 @@ WHERE location.location_id = " . $record[0]['location_id']);
         // Import images and replace the old urls with new urls
         $pure_html = $this->purifyHTML($box->DESCRIPTION);
 
-        // Import images and replace the old urls with new urls
-        $doc = new \DOMDocument();
-
         if ($pure_html) {
+            $clean_description = $this->parseImagesHtml($pure_html);
+            $description .= "<div class=\"description\">" . $clean_description . "</div>";
 
-            // Add these options -- otherwise you'll get a full HTML document with
-            // a doctype when running saveHTML()
-            $doc->loadHTML($pure_html);
-
-            // Download images
-            $nodes = $doc->getElementsByTagName("img");
-
-            foreach ($nodes as $node) {
-
-                foreach ($node->attributes as $attr) {
-                    $test = strpos($attr->value, "http://");
-
-                    if ($test !== false) {
-                        $this->log->importLog($attr->value);
-
-                        $attr->value = $this->downloadImages($attr->value);
-
-                        $this->log->importLog($attr->value);
-
-
-                    }
-                }
-            }
         }
 
         // Create html for the description
-        $clean_description = str_replace('&Acirc;', '', preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $doc->saveHTML())));
-        $description .= "<div class=\"description\">" . $clean_description . "</div>";
 
 
         switch ($box->BOX_TYPE) {
