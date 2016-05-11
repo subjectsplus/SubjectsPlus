@@ -8,8 +8,8 @@ function LinkList(id,idSelector) {
 
 
     var myId = id;
-
     //console.log(myId);
+
 
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
@@ -96,7 +96,7 @@ function LinkList(id,idSelector) {
         event.preventDefault();
         $('#record-description-container').show();
     });
-
+    
 
     function databaseSearch() {
         var limitAz;
@@ -112,6 +112,8 @@ function LinkList(id,idSelector) {
     if ($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li')) {
         loadDisplayList($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li'));
     }
+
+
 
     function loadDisplayList(list) {
         // This loads a display list and appends a sortable list
@@ -152,6 +154,8 @@ function LinkList(id,idSelector) {
 
         });
     }
+
+
 
     function addSearchResultsToPage(data) {
         var searchResults = new RecordList;
@@ -274,8 +278,9 @@ function LinkList(id,idSelector) {
                             flag: 'delete'
                         },
                         function() {
+                            $('textarea[name="link-list-textarea"]').remove();
                             $('#response').fadeIn();
-                            $('#save_guide').fadeIn();
+                            $( this ).dialog( 'close' );
 
                         });
 
