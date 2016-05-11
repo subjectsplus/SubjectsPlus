@@ -108,7 +108,7 @@ var RecordListSearch = (function () {
         this.recordList = recordList;
     }
     RecordListSearch.prototype.liRecordList = function (record) {
-        return "<li class=\"db-list-item database-listing\" data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class=\"list-search-label\" title=\"" + record.title + "\">" + record.title + "</span>\n <span>             <button class=\"add-to-list-button pure-button pure-button-secondary\"> <i class=\"fa fa-plus\"></i></button></span>                          <div class=\"db-list-item-link\"><a href='" + record.location + "' target='_blank'>" + record.location + "</a></div>             </li>";
+        return "<li class=\"db-list-item database-listing\" data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title=\"" + record.title + "\" data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class=\"list-search-label\" title=\"" + record.title + "\">" + record.title + "</span>\n <span>             <button class=\"add-to-list-button pure-button pure-button-secondary\"> <i class=\"fa fa-plus\"></i></button></span>                          <div class=\"db-list-item-link\"><a href='" + record.location + "' target='_blank'>" + record.location + "</a></div>             </li>";
     };
     RecordListSearch.prototype.liDisplayRecordList = function () {
         var liRecordListHtml = '';
