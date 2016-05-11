@@ -274,9 +274,9 @@ function LinkList(id,idSelector) {
                             flag: 'delete'
                         },
                         function() {
+                            $('textarea[name="link-list-textarea"]').hide();
                             $('#response').fadeIn();
-                            $('#save_guide').fadeIn();
-
+                            $( '.delete_confirm' ).dialog( 'close' );
                         });
 
                     // Remove node
