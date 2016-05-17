@@ -4002,7 +4002,7 @@ Modal Panel
 /* modal container */
 .sp-modal .modal-container {
   width: 90%;
-  height: 650px;
+  height: 750px;
   overflow: scroll;
   position: relative;
   margin: 5% auto;

@@ -58,7 +58,7 @@ class Pluslet_LinkList extends Pluslet
     }
 
 
-    protected function getLinkListTextTop() {
+    protected function getLinkListText() {
         $link_list_text = "";
 
         if (isset($this->_body)) {
@@ -67,37 +67,22 @@ class Pluslet_LinkList extends Pluslet
             $dom->loadHTML($this->_body);
 
             $xpath = new DOMXPath($dom);
-            $query = '//div[contains(@class, "link-list-text-top")]';
-            $entries = $xpath->query($query);
+            $query = '//ul[contains(@class, "link-list-display")]';
+            $list = $xpath->query($query);
 
-            if( (is_object($entries) == true) && ($entries->length > 0) ) {
-                $link_list_text = $dom->saveHTML($entries->item(0));
+            if( (is_object($list) == true) && ($list->length > 0) ) {
+
+                $newEl = $dom->createElement('div');
+                $newNode = $dom->appendChild($newEl);
+                $theList = $list->item(0);
+                $newNode->appendChild($theList);
+                $dom->removeChild($newNode);
+                $link_list_text = $dom->saveHTML();
             }
 
         }
 
         return $link_list_text;
-
-    }
-
-    protected function getLinkListTextBottom() {
-        $link_list_text = "";
-
-        if (isset($this->_body)) {
-            $dom = new DOMDocument();
-            libxml_use_internal_errors(true);
-            $dom->loadHTML($this->_body);
-
-            $xpath = new DOMXPath($dom);
-            $query = '//div[contains(@class, "link-list-text-bottom")]';
-            $entries = $xpath->query($query);
-
-            if( (is_object($entries) == true) && ($entries->length > 0) ) {
-                $link_list_text = $dom->saveHTML($entries->item(0));
-            }
-        }
-        return $link_list_text;
-
     }
 
 
@@ -120,15 +105,7 @@ class Pluslet_LinkList extends Pluslet
         $this_instance = "link-list-textarea";
         $this->_editor = $oCKeditor->editor($this_instance, $this->_body, $config);
 
-
-
-        $textTop    = $this->getLinkListTextTop();
-        $textBottom = $this->getLinkListTextBottom();
-
-
-        $this->_topText = "<div  class='insert-text-top' style='display:none;'>{$textTop}</div>";
-
-        $this->_bottomText = "<div class='insert-text-bottom' style='display:none;'>{$textBottom}</div>";
+        $this->_linkText = $this->getLinkListText();
 
         $this->_body .= $this->loadHtml(__DIR__ . '/views/LinkListEdit.php');
 
