@@ -367,7 +367,7 @@ function LinkList(id,idSelector) {
                 "call_number": "",
                 "location": $('#location').val(),
                 "access_restrictions": "1",
-                "eres_display": "Y",
+                "eres_display": "N",
                 "display_note": "",
                 "helpguide": "",
                 "citation_guide": "",
