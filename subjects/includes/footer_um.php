@@ -17,7 +17,7 @@ switch ($our_site) {
         Email:  <a href=\"mailto:chc@miami.edu\">chc@miami.edu</a>";
     $social_icons = "<p id=\"social_icons_small\">
   <a href=\"" . PATH_TO_CHILD . "/feed/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/rss_26.png\"  alt=\"Visit the CHC Blog\" title=\"Visit the CHC Blog\" /></a>
-  <a href=\"" . PATH_TO_CHILD . "/community/subscribe/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mailing_list.png\"  alt=\"Join our Mailing List\" title=\"Join our Mailing List\" /></a>
+  <a href=\"http://library.miami.edu/subscribe/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mailing_list.png\"  alt=\"Join our Mailing List\" title=\"Join our Mailing List\" /></a>
       <a href=\"http://www.facebook.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
     <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
     <a href=\"http://vimeo.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/vimeo.png\"  alt=\"Find Us on Vimeo\" title=\"Find Us on Vimeo\" /></a>

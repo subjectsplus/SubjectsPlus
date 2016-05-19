@@ -241,23 +241,26 @@ div.mega_child.mega-md {width: 400px !important;}
         </div> 
 
         <div class="pure-u-1 pure-u-md-1-5 visible-desktop">
-          <form id="head_search" action="<?php print THEME_BASE_DIR; ?>resolver.php" method="post">
-                <div id="search_container">
-                  <fieldset id="searchzone">
-                    <input type="text" name="searchterms" id="searchy" autocomplete="off"  />
-                    <input type="submit" value="go" id="topsearch_button2" name="submitsearch" alt="Search" />
-                  </fieldset>
-                  
-                  <fieldset id="search_options">
-                      <ul>
-                        <li class="active"><input type="radio" name="searchtype" value="website" checked="checked" />website</li>
-                        <li><input type="radio" name="searchtype" value="catalog_keyword" />catalog</li>
-                        <li><input type="radio" name="searchtype" value="article" />articles+</li>
-                        <li class="list-last"><input type="radio" name="searchtype" value="digital" />digital collections</li>
-                      </ul>
-                  </fieldset>
-                </div>
-          </form>
+          <?php
+            class SearchBox {
+              function __construct() {
+              }
+              
+              public function requireToVar($file){
+                ob_start();
+                require($file);
+                
+                return ob_get_clean();
+                }
+                
+              public function outputBox() {
+                $markup = $this->requireToVar('views/um-searchbox.html');
+                return $markup;
+              }
+            }
+            $sb = new SearchBox(); echo $sb->outputBox();
+
+            ?>
         </div>
 
     </div> <!-- end pure-g -->
