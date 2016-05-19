@@ -271,11 +271,11 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                         <input type="hidden" name="query" id="primoQuery5">
                         <input type="hidden" name="displayField" value="all">
 
-                        <!-- Media only -->
+                        <!-- Media only 
                         <input type="hidden" value="facet" name="ct"> 
                         <input type="hidden" value="facet_rtype" name="fctN">
                         <input type="hidden" value="audio" name="fctV">
-                        <input type="hidden" value="show_only" name="rfnGrp">
+                        <input type="hidden" value="show_only" name="rfnGrp">-->
 
 
                         <select name="searchfield5" id="searchfield5">
@@ -286,11 +286,22 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                           <option value="lsr06">Call Number</option>
                           <option value="isbn">ISBN</option>
                           <option value="lsr01">Course Reserve</option>
-                        </select>  
+                        </select>
 
-                      <input maxlength="75" type="text" id="primoQueryTemp5" value="" size="20" class="primoQueryInput" />
-                       
+
+
+                      <input maxlength="75" type="text" id="primoQueryTemp5" value="" size="20" class="primoQueryInput" /> 
+
                       <input id="goSearch5" title="Search" onclick="searchPrimo5()" type="submit" value="Search" alt="Search" />
+
+                      <p style="font-size:12px !important; margin: 4px 0 0 0;">Limit to:
+                      <select name="facet_rtype" id="facet_rtype">
+                          <option value="audio">Audio</option>
+                          <option value="video">Video</option>
+                      </select>
+                      </p>  
+                       
+                      
                     </form>
 
                     <script type="text/javascript">                                        
