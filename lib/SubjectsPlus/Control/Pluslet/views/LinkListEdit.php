@@ -12,6 +12,13 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
     $title = "Link List";
 }
 
+if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
+
+    echo "<div id='link-text' style='display: none;'>{$this->_linkText}</div>";
+}
+
+
+
 ?>
 
 <style>
@@ -79,13 +86,13 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                 <!--display results selected-->
                 <div class="db-list-content" style="display: block;">
                     <?php if( ( isset($this->_topText) ) && ( !empty($this->_topText) ) ) {
-                        echo $this->_topText;
+                        echo "<div class='link-list-text-top'>" . $this->_topText . "</div>";
                     } ?>
                     <div class="link-list-draggable" id="record-sortable-list">
 
                     </div>
                     <?php if( ( isset($this->_bottomText) ) && ( !empty($this->_bottomText) ) ) {
-                        echo $this->_bottomText;
+                        echo "<div class='link-list-text-bottom'>" . $this->_bottomText . "</div>";
                     } ?>
                 </div>
 
@@ -98,10 +105,10 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
                     
                     <div class="label-context-options">
                         <label for="top-text-radio">
-                            <input id="top-text-radio" type="radio" name="LinkList-extra-radio" value="top"> Above List
+                            <input id="top-text-radio" type="radio" name="linkList-text-radio" value="top"> Above List
                         </label> <br />
                         <label for="bottom-text-radio">
-                            <input id="bottom-text-radio" type="radio" name="LinkList-extra-radio" value="bottom" checked=""> Below List
+                            <input id="bottom-text-radio" type="radio" name="linkList-text-radio" value="bottom"> Below List
                         </label>
                     </div>    
                 </div>                
@@ -185,21 +192,21 @@ if( (isset($this->_title)) && (!empty($this->_title)) ) {
         LinkList();
 
 
-        var topText = $('.insert-text-top').html();
-        var bottomText = $('.insert-text-bottom').html();
-
+        var linkText = $('#link-text').children().html();
 
 
         if(CKEDITOR.instances['link-list-textarea']) {
 
-            if(topText != "") {
-                CKEDITOR.instances['link-list-textarea'].setData( topText );
-                $('input:radio[name="LinkList-extra-radio"][value="top"]').prop('checked', true);
+            if( $('#link-text').find('div.link-list-text-top').html() !== undefined ) {
+
+                $('input:radio[name="linkList-text-radio"][value="top"]').prop('checked', true);
+                CKEDITOR.instances['link-list-textarea'].setData( linkText );
             }
 
-            if(bottomText != "") {
-                CKEDITOR.instances['link-list-textarea'].setData( bottomText );
-                $('input:radio[name="LinkList-extra-radio"][value="bottom"]').prop('checked', true);
+            if( $('#link-text').find('div.link-list-text-bottom').html() !== undefined ) {
+
+                $('input:radio[name="linkList-text-radio"][value="bottom"]').prop('checked', true);
+                CKEDITOR.instances['link-list-textarea'].setData( linkText );
             }
 
         }

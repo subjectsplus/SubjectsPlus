@@ -30,6 +30,7 @@ class LGImport
         $this->libguidesxml = $libguides_xml;
         $this->log = $log;
         $this->db = $db;
+        $this->connection = $db->getConnection();
         $this->cm = $cm;
     }
 
@@ -91,6 +92,42 @@ class LGImport
         return $this->_column;
     }
 
+    public function parseImagesHtml($html) {
+        if ($html != '') {
+            // Import images and replace the old urls with new urls
+            $doc = new \DOMDocument();
+
+            // Add these options -- otherwise you'll get a full HTML document with
+            // a doctype when running saveHTML()
+            $doc->loadHTML($html);
+
+            // Download images
+            $nodes = $doc->getElementsByTagName("img");
+
+            foreach ($nodes as $node) {
+
+                foreach ($node->attributes as $attr) {
+                    $test = strpos($attr->value, "http://");
+
+                    if ($test !== false) {
+                        $this->log->importLog($attr->value);
+                        $attr->value = $this->downloadImages($attr->value);
+                        $this->log->importLog($attr->value);
+                    }
+                }
+            }
+
+
+            $new_html = preg_replace('/^<!DOCTYPE.+?>/', '', str_replace( array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $doc->saveHTML()));
+            return $new_html;
+
+        }
+        
+
+
+    }
+
+
     public function insertBasicPluslet($box, $section_id, $description)
     {
         $row = $this->getRow();
@@ -100,7 +137,7 @@ class LGImport
 
         $box_name = $this->db->quote($box->NAME);
 
-        if ($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ($box->BOX_ID, $box_name, {$this->db->quote($clean_html)}, 'Basic')")) {
+        if ($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ('$box->BOX_ID', $box_name, {$this->db->quote($clean_html)}, 'Basic')")) {
 
             $this->log->importLog("Inserted pluslet '$box->NAME'");
         } else {
@@ -127,7 +164,7 @@ class LGImport
         $row = $this->getRow();
         $column = $this->getColumn();
 
-        $this->db->exec("INSERT INTO pluslet(title, type,body) VALUES ('$pluslet_title', '$pluslet_type','')");
+        $this->db->exec("INSERT INTO pluslet(title, type,body) VALUES ({$this->db->quote($pluslet_title)}, '$pluslet_type','')");
 
         $pluslet_id = $this->db->last_id();
 
@@ -140,13 +177,13 @@ class LGImport
         $row = $this->getRow();
         $column = $this->getColumn();
 
-        if ($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type, extra) VALUES ($box->BOX_ID, '$box->NAME', '$feed_url', 'Feed', '{\"num_items\":5,  \"show_desc\":1, \"show_feed\": 1, \"feed_type\": \"RSS\"}' )")) {
+        if ($this->db->exec("INSERT INTO pluslet (pluslet_id, title, body, type, extra) VALUES ($box->BOX_ID, {$this->db->quote($box->NAME)}, '$feed_url', 'Feed', '{\"num_items\":5,  \"show_desc\":1, \"show_feed\": 1, \"feed_type\": \"RSS\"}' )")) {
 
             $this->log->importLog("Inserted RSS pluslet '$box->NAME'");
 
         } else {
 
-            $this->log->importLog("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ('$box->BOX_ID', '$box->NAME', '$feed_url', 'Feed', '' )");
+            $this->log->importLog("INSERT INTO pluslet (pluslet_id, title, body, type) VALUES ('$box->BOX_ID', {$this->db->quote($box->NAME)}, '$feed_url', 'Feed', '' )");
 
             $this->log->importLog("RSS RSSS RSS Error inserting pluslet:");
             $this->log->importLog($this->db->errorInfo());
@@ -175,7 +212,13 @@ class LGImport
         $row = $this->getRow();
         $column = $this->getColumn();
         $pluslet_title = $box->NAME;
-        $linkListText = $box->DESCRIPTION;
+
+        if (isset($box->DESCRIPTION)) {
+            $linkListText = $this->parseImagesHtml($box->DESCRIPTION);
+        } else {
+            $linkListText = "";
+        }
+
         $links = "";
 
         if (!isset($box->LINKS->LINK)) {
@@ -248,6 +291,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
 
     }
 
+
     public function importBox($box, $section_id)
     {
 
@@ -257,39 +301,13 @@ WHERE location.location_id = " . $record[0]['location_id']);
         // Import images and replace the old urls with new urls
         $pure_html = $this->purifyHTML($box->DESCRIPTION);
 
-        // Import images and replace the old urls with new urls
-        $doc = new \DOMDocument();
-
         if ($pure_html) {
+            $clean_description = $this->parseImagesHtml($pure_html);
+            $description .= "<div class=\"description\">" . $clean_description . "</div>";
 
-            // Add these options -- otherwise you'll get a full HTML document with
-            // a doctype when running saveHTML()
-            $doc->loadHTML($pure_html);
-
-            // Download images
-            $nodes = $doc->getElementsByTagName("img");
-
-            foreach ($nodes as $node) {
-
-                foreach ($node->attributes as $attr) {
-                    $test = strpos($attr->value, "http://");
-
-                    if ($test !== false) {
-                        $this->log->importLog($attr->value);
-
-                        $attr->value = $this->downloadImages($attr->value);
-
-                        $this->log->importLog($attr->value);
-
-
-                    }
-                }
-            }
         }
 
         // Create html for the description
-        $clean_description = str_replace('&Acirc;', '', preg_replace('/^<!DOCTYPE.+?>/', '', str_replace(array('<html>', '</html>', '<body>', '</body>'), array('', '', '', ''), $doc->saveHTML())));
-        $description .= "<div class=\"description\">" . $clean_description . "</div>";
 
 
         switch ($box->BOX_TYPE) {
@@ -843,7 +861,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
             $guide_name = str_replace("'", "''", $subject[0]);
 
             if ($subject[0] != null) {
-                if ($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, header, extra) VALUES ('$guide_name', '$subject[1]', '$shortform' , '$subject[3]', '$subject[9]','um','{\"maincol:\"\"}')")) {
+                if ($this->db->exec("INSERT INTO subject (subject, subject_id, shortform, description, keywords, header, extra) VALUES ({$this->db->quote($guide_name)}, '$subject[1]', {$this->db->quote($shortform)} , {$this->db->quote($subject[3])}, {$this->db->quote($subject[9])},'um','{\"maincol:\"\"}')")) {
                     $response = array("imported_guide" => $subject[1]);
                 } else {
                     $response = array("imported_guide" => $subject[1][0]);
@@ -877,7 +895,7 @@ WHERE location.location_id = " . $record[0]['location_id']);
                 $tab_id = $tab->PAGE_ID;
                 $external_url = $tab->EXTERNAL_LINK;
 
-                if ($this->db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index,visibility, parent,children,extra,external_url) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1, $visibility, '','','','$external_url')")) {
+                if ($this->db->exec("INSERT INTO tab (tab_id, subject_id, label, tab_index,visibility, parent,children,extra,external_url) VALUES ('$tab->PAGE_ID', '$subject[1]', $clean_tab_name, $tab_index - 1, $visibility, '','','',{$this->db->quote($external_url)})")) {
                     if ($parent_id != '') {
                         $this->db->exec("UPDATE tab SET parent='$parent_id' WHERE tab_id='$tab_id'");
                     }

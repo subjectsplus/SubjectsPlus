@@ -61,14 +61,13 @@ function LinkList(id,idSelector) {
         loadSortableList();
         if (myRecordList.getList().length > 0) {
             var displayList = new RecordListDisplay(myRecordList);
-            var descriptionLocation = $('input[name=LinkList-extra-radio]:checked').val();
+            var descriptionLocation = $('input[name=linkList-text-radio]:checked').val();
 
             list.html(displayList.getList());
 
             var description = CKEDITOR.instances['link-list-textarea'].getData();
+            //var description = '';
 
-
-            //console.log(descriptionLocation);
             if (descriptionLocation == "top") {
                 list.prepend("<div class='link-list-text-top'>" + description + "</div>");
             } else {
@@ -76,7 +75,7 @@ function LinkList(id,idSelector) {
             }
 
             //remove the textarea with the list in the admin view after saving changes
-            $('[name="link-list-textarea"]').remove();
+            $('[name="link-list-textarea"]').hide();
 
             saveSetup().saveGuide();
 
@@ -109,8 +108,8 @@ function LinkList(id,idSelector) {
     }
 
     // Load existing list behaviour
-    if ($('#LinkList-body').siblings().find('li')) {
-        loadDisplayList($('#LinkList-body').siblings().find('li'));
+    if ($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li')) {
+        loadDisplayList($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li'));
     }
 
     function loadDisplayList(list) {
@@ -274,9 +273,9 @@ function LinkList(id,idSelector) {
                             flag: 'delete'
                         },
                         function() {
+                            $('textarea[name="link-list-textarea"]').hide();
                             $('#response').fadeIn();
-                            $('#save_guide').fadeIn();
-
+                            $( '.delete_confirm' ).dialog( 'close' );
                         });
 
                     // Remove node
@@ -299,10 +298,18 @@ function LinkList(id,idSelector) {
         if($('.db-list-results').length > 0) {
             $('.dblist-button').trigger('click');
         } else {
-            thisList = $(this).closest('div[name="new-pluslet-LinkList"]');
-            //remove the textarea with the list in the admin view after saving changes
-            $('[name="link-list-textarea"]').remove();
-            thisList.remove();
+
+            var newList = $(this).closest('div[name="new-pluslet-LinkList"]');
+            var modifiedList = $(this).closest('div[name="modified-pluslet-LinkList"]');
+
+            if(newList.length > 0) {
+                //remove the textarea with the list in the admin view after saving changes
+                $('[name="link-list-textarea"]').remove();
+                newList.remove();
+            } else if (modifiedList.length > 0) {
+                $('.dblist-button').trigger('click');
+            }
+
         }
     });
 
@@ -360,7 +367,7 @@ function LinkList(id,idSelector) {
                 "call_number": "",
                 "location": $('#location').val(),
                 "access_restrictions": "1",
-                "eres_display": "Y",
+                "eres_display": "N",
                 "display_note": "",
                 "helpguide": "",
                 "citation_guide": "",
