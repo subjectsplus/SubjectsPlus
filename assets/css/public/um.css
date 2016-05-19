@@ -1766,6 +1766,25 @@ img.center-image {
 /** end Card Styles **/
 
 
+.megasearchzone form .primoQueryInput[type] {
+  width:75%;
+  height:38px; 
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;  
+  border-top: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  padding: 0 0 0 5px;   
+  box-shadow: 0 0 0 4px #f2f2f2;
+  font-size: 1em;
+  background-color: #FFF;
+  text-align:left;
+}
+
 
 
 
@@ -2039,7 +2058,32 @@ img.center-image {
         box-shadow: none;
         background-color: #f2f2f2;
         height: 22px;
-        vertical-align: middle; }
+        vertical-align: middle;
+    }
+
+
+    .megasearchzone form .primoQueryInput[type] {
+      width:auto;
+      height:24px; 
+      font-size: 0.9em;
+      -webkit-border-bottom-left-radius: 0;
+      -moz-border-radius-bottomleft: 0;
+      border-bottom-left-radius: 0;
+      -webkit-border-top-left-radius: 0;
+      -moz-border-radius-topleft: 0;
+      border-top-left-radius: 0;  
+      border-top: 1px solid #CCC;
+      border-left: 1px solid #CCC;
+      border-bottom: 1px solid #CCC;
+      border-right: 1px solid #CCC;
+      padding: 0 0 0 5px;   
+      box-shadow: none; 
+      background-color: #FFF;
+    }
+
+
+
+
 
     #nav_menu li.last-child {
         float: right;        
