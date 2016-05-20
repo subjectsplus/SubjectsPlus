@@ -1399,7 +1399,8 @@ h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
 .book {
     display: inline-block;
     line-height:1.3em;
-        font-size:.8em;
+    font-size:1em;
+    margin-bottom: 1em;
 }
 
 .book-cover-art {
