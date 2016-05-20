@@ -440,7 +440,7 @@ ORDER BY newtitle
 
 		$db = new Querier;
 		$connection = $db->getConnection();
-		$statement = $connection->prepare ( "SELECT subject, subject_id FROM subject WHERE active = '1' ORDER BY subject");
+		$statement = $connection->prepare ( "SELECT subject, subject_id FROM subject WHERE active = '1' AND type = 'Subject' ORDER BY subject");
 
 		$statement->bindParam ( ":qualifer", $letter );
 		$statement->execute ();

@@ -14,6 +14,9 @@ AND type = 'Subject'
 
 In functions.php and StaffDisplay.php class need to customize the mod_rewrites to be like this:
 
+        		//$linky = "/subjects/profile/" . $name_id[0]; // um custom
+        		$linky = $linky = "staff/" . $name_id[0];
+
             $link_to_details = "staff/" . $name_id[0];
             $link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
 

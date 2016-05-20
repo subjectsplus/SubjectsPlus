@@ -72,11 +72,14 @@ if (isset($_GET["ctag"])) {
     $alpha_id = "All Records";
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions order by title.title";
 } elseif ($_GET['letter'] == "restricted") {
-    $alpha_id = "Restricted Items";
+    $alpha_id = _("Restricted Items");
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and restrictions_id != '1' order by title.title";
 } elseif ($_GET['letter'] == "unrestricted") {
-    $alpha_id = "Unrestricted Items";
+    $alpha_id = _("Unrestricted Items");
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and restrictions_id = '1' order by title.title";
+} elseif ($_GET['letter'] == "az") {
+    $alpha_id = _("A-Z List Items");
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and eres_display = 'Y' order by title.title";    
 } else {
     $alpha_id = $_GET['letter'];
     //$alpha_id = FALSE;
@@ -89,19 +92,26 @@ if (isset($_GET["ctag"])) {
 // gather ctags
 
 $tag_list = "<span class=\"";
+if (isset($_GET["letter"]) && $_GET["letter"] == "az") {
+    $tag_list .= "ctag-on";
+} else {
+    $tag_list .= "ctag-off";
+}
+$tag_list .= "\"><a href=\"index.php?letter=az\">" . _("A-Z List") . "</a></span>
+<span class=\"";
 if (isset($_GET["letter"]) && $_GET["letter"] == "restricted") {
     $tag_list .= "ctag-on";
 } else {
     $tag_list .= "ctag-off";
 }
-$tag_list .= "\"><a href=\"index.php?letter=restricted\">restricted</a></span>
+$tag_list .= "\"><a href=\"index.php?letter=restricted\">" . _("Restricted") . "</a></span>
 <span class=\"";
 if (isset($_GET["letter"]) && $_GET["letter"] == "unrestricted") {
     $tag_list .= "ctag-on";
 } else {
     $tag_list .= "ctag-off";
 }
-$tag_list .= "\"><a href=\"index.php?letter=unrestricted\">free</a></span>";
+$tag_list .= "\"><a href=\"index.php?letter=unrestricted\">" . _("Free") . "</a></span>";
 
 // init the ctag
 $selected_ctag = "";
