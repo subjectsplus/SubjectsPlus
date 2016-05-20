@@ -56,6 +56,8 @@ if (!isset ($noheadersearch)) {
 
 // We've got a variable for those who wish to keep the old styles
 $v2styles = TRUE;
+
+$primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do";
 ?>
 
 <script type="text/javascript">
@@ -98,23 +100,27 @@ $v2styles = TRUE;
         </div>
       
         <div class="pure-u-1 pure-u-md-1-5 visible-desktop">
-          <form id="head_search" action="<?php print THEME_BASE_DIR; ?>resolver.php" method="post">
-              <div id="search_container">
-                <fieldset id="searchzone">
-                  <input type="text" name="searchterms" id="searchy" autocomplete="off"  />
-                  <input type="submit" value="go" id="topsearch_button2" name="submitsearch" alt="Search" />
-                </fieldset>
+         <?php
+            class SearchBox {
+              function __construct() {
+              }
+              
+              public function requireToVar($file){
+                ob_start();
+                require($file);
                 
-                <fieldset id="search_options">
-                  <ul>
-                    <li class="active"><input type="radio" name="searchtype" value="website" checked="checked" />website</li>
-                    <li><input type="radio" name="searchtype" value="catalog_keyword" />catalog</li>
-                    <li><input type="radio" name="searchtype" value="article" />articles+</li>
-                    <li class="list-last"><input type="radio" name="searchtype" value="digital" />digital collections</li>
-                  </ul>
-                </fieldset>
-              </div>
-          </form>
+                return ob_get_clean();
+                }
+                
+              public function outputBox() {
+                $markup = $this->requireToVar('views/um-searchbox.html');
+                return $markup;
+              }
+            }
+            $sb = new SearchBox(); echo $sb->outputBox();
+
+            ?>
+
         </div>
 
     </div> <!-- end pure-g -->
@@ -130,29 +136,58 @@ $v2styles = TRUE;
                   <div class="mega_child mega-md mega-left">
                     <div class="megasearchzone">
                     <p>Looking for books? Start with the catalog:</p>
-                      <form action="http://catalog.library.miami.edu/search/" method="get" name="search" id="search">
-                        <input type="hidden" id="iiiFormHandle_1">
 
-                        <select name="searchtype" id="searchtype">
-                          <option value="X" selected="selected">Keyword</option>
-                          <option value="t">Title</option>
-                          <option value="a">Author</option>
-                          <option value="d">Subject</option>
-                        </select>
+                    <form action="<?php print $primoSearch; ?>" method="get" name="searchForm3" id="simple3" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="searchPrimo3()">
+                      
+                      <!-- Customizable Parameters -->
+                      <input type="hidden" name="institution" value="01UOML">
+                      <input type="hidden" name="vid" value="uml">
+                      <input type="hidden" name="tab" value="default_tab">
+                      <input type="hidden" name="mode" value="Basic">
 
-                        <input type="hidden" name="SORT" id="SORT" value="D" />
+                      <!-- Fixed parameters -->
+                      <input type="hidden" name="displayMode" value="full">
+                      <input type="hidden" name="bulkSize" value="10">
+                      <input type="hidden" name="highlight" value="true">
+                      <input type="hidden" name="dum" value="true">
+                      <input type="hidden" name="query" id="primoQuery3">
+                      <input type="hidden" name="displayField" value="all">
 
-                        <input maxlength="75" name="searcharg" size="20" />
-                        
-                        <input name="Search" type="submit" id="Search" value="Search" />
-                      </form>
+                      <!-- Books only -->
+                      <input type="hidden" value="facet" name="ct"> 
+                      <input type="hidden" value="facet_rtype" name="fctN"> 
+                      <input type="hidden" value="Books" name="fctV"> 
+                      <input type="hidden" value="show_only" name="rfnGrp">
+
+                      <select name="searchfield3" id="searchfield3">
+                        <option value="any">Anywhere</option>
+                        <option value="title"> Title</option>
+                        <option value="creator"> Author/Creator</option>
+                        <option value="sub"> Subject</option>
+                        <option value="lsr06"> Call Number</option>
+                        <option value="isbn"> ISBN</option>
+                        <option value="lsr01"> Course Reserve</option>
+                      </select>
+
+                      <input maxlength="75" type="text" id="primoQueryTemp3" value="" size="20" class="primoQueryInput">
+                      <input id="goSearch" title="Search" onclick="searchPrimo3()" type="submit" value="Search" alt="Search">
+                    </form>
+
+                    <script type="text/javascript">                                        
+                        function searchPrimo3() {
+                          var searchfield = document.getElementById("searchfield3").value;
+                          document.getElementById("primoQuery3").value = searchfield + ",contains," + document.getElementById("primoQueryTemp3").value.replace(/[,]/g, " ");
+                          document.forms["searchForm3"].submit();
+                        }                        
+                    </script>
+
                     </div>
                     <ul>
-                      <li><a href="http://catalog.library.miami.edu/">Catalog home</a></li>
-                      <li class="last"><a href="<?php print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a></li>
+                      <li class="last"><a href="http://search.library.miami.edu/">Catalog home</a></li>
+                      <!--<li class="last"><a href="<?php //print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a></li>-->
                     </ul>
                     <ul>
-                      <li><a href="http://miami.lib.overdrive.com/">Overdrive E-Books</a></li>
+                      <li class="last"><a href="http://miami.lib.overdrive.com/">Overdrive E-Books</a></li>
                     </ul>
                     <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/books/">Books Overview</a></div>
                   </div>
@@ -165,19 +200,47 @@ $v2styles = TRUE;
                   <div class="mega_child mega-md mega-left">
                       <div class="megasearchzone">
                       <p>Search for Articles across many databases:</p>
-                        <form action="http://miami.summon.serialssolutions.com/search" method="GET" id="summon_search">
-                          <input type="hidden" value="ContentType,Newspaper Article, true" name="" />
-                          <input type="hidden" value="ContentType,Book Review, true" name="" />
-                          <input type="hidden" value="ContentType,Trade Publication Article, true" name="" />
-                          <input name="s.q" value="" size="30" />
-                          <input type="submit" value="Go" /> 
-                        </form>
+
+                      <form id="simple4" name="searchForm4" method="GET" target="_self" action="<?php print $primoSearch; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="searchPrimo4()">
+
+                      <!-- Customizable Parameters -->
+                      <input type="hidden" name="institution" value="01UOML">
+                      <input type="hidden" name="vid" value="uml">
+                      <input type="hidden" name="tab" value="everything">
+                      <input type="hidden" name="search_scope" value="Everything">                
+                      <input type="hidden" name="mode" value="Basic">
+
+                      <!-- Fixed parameters -->
+                      <input type="hidden" name="displayMode" value="full">
+                      <input type="hidden" name="bulkSize" value="10">
+                      <input type="hidden" name="highlight" value="true">
+                      <input type="hidden" name="dum" value="true">
+                      <input type="hidden" name="query" id="primoQuery4">
+                      <input type="hidden" name="displayField" value="all">
+
+                      <!-- Articles only -->
+                      <input type="hidden" value="facet" name="ct"> 
+                      <input type="hidden" value="facet_rtype" name="fctN"> 
+                      <input type="hidden" value="articles" name="fctV"> 
+                      <input type="hidden" value="show_only" name="rfnGrp">
+
+                      <input type="text" id="primoQueryTemp4" value="" size="35" class="primoQueryInput">
+                      <input id="go4" title="Search" onclick="searchPrimo4()" type="submit" value="Search" alt="Search">
+                  </form>
+
+                  <script type="text/javascript">                                        
+                        function searchPrimo4() {
+                          document.getElementById("primoQuery4").value = "any,contains," + document.getElementById("primoQueryTemp4").value.replace(/[,]/g, " ");
+                        document.forms["searchForm4"].submit();
+                        }
+                  </script>
+
                       </div>
                       <ul>
                         <li class="last"><a href="<?php print PATH_TO_SP; ?>subjects/databases.php">Databases A-Z</a></li>
                       </ul>
                       <ul>
-                        <li class="last"><a href="http://mt7kx4ww9u.search.serialssolutions.com/">Journal List</a></li>
+                        <li class="last"><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do?institution=01UOML&vid=uml&query=facet_atoz%2cexact%2cA&indx=1&bulkSize=30&dym=false&loc=local%2cscope%3a%28AZ01UOML%29&fn=goAlmaAz&sortField=stitle&almaAzSearch=true&azSearch=true&selectedAzAlmaLetter=A">Journal List</a></li>
                       </ul>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/articles/">Articles Overview</a></div>
                   </div>
@@ -188,51 +251,75 @@ $v2styles = TRUE;
               <!--CDSs/DVDs-->
               <li class="mega"><a href="http://library.miami.edu/media/">CD / DVDs</a>
                   <!-- begin cdz mega menu -->
-                  <div class="mega_child mega-lg mega-left">
+                  <div class="mega_child mega-md mega-left">
                     <div class="megasearchzone">
                     <p>Looking for Music or Movies? Use the Catalog:</p>
-                      <form action="http://catalog.library.miami.edu/search/" method="get" name="search" id="search">
-                        <input type="hidden" id="iiiFormHandle_1">
+                      
+                      <form action="<?php print $primoSearch; ?>" method="get" name="searchForm5" id="simple5" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="searchPrimo5()">
 
-                        <select name="searchtype" id="searchtype" style="">
-                          <option value="X" selected="selected">Keyword</option>
-                          <option value="t">Title</option>
-                          <option value="a">Author</option>
-                          <option value="d">Subject</option>
-                          <option value="c">LC Call Number</option>
-                          <option value="l">Local Call Number</option>
-                          <option value="g">SuDocs Number</option>
-                          <option value="i">ISSN/ISBN Number</option>
-                          <option value="o">OCLC Number</option>
-                          <option value="m">Music Pub. Number</option>
+                        <!-- Customizable Parameters -->
+                        <input type="hidden" name="institution" value="01UOML">
+                        <input type="hidden" name="vid" value="uml">
+                        <input type="hidden" name="tab" value="default_tab">
+                        <input type="hidden" name="mode" value="Basic">
+
+                        <!-- Fixed parameters -->
+                        <input type="hidden" name="displayMode" value="full">
+                        <input type="hidden" name="bulkSize" value="10">
+                        <input type="hidden" name="highlight" value="true">
+                        <input type="hidden" name="dum" value="true">
+                        <input type="hidden" name="query" id="primoQuery5">
+                        <input type="hidden" name="displayField" value="all">
+
+                        <!-- Media only 
+                        <input type="hidden" value="facet" name="ct"> 
+                        <input type="hidden" value="facet_rtype" name="fctN">
+                        <input type="hidden" value="audio" name="fctV">
+                        <input type="hidden" value="show_only" name="rfnGrp">-->
+
+
+                        <select name="searchfield5" id="searchfield5">
+                         <option value="any">Anywhere</option>
+                          <option value="title">Title</option>
+                          <option value="creator">Author/Creator</option>
+                          <option value="sub">Subject</option>
+                          <option value="lsr06">Call Number</option>
+                          <option value="isbn">ISBN</option>
+                          <option value="lsr01">Course Reserve</option>
                         </select>
 
-                        <input type="hidden" name="SORT" id="SORT" value="D" />
 
-                        <input maxlength="75" name="searcharg" size="15"  style="" /><br /><br />
 
-                           <span style="font-size:12px;">limit to:</span> 
-                         <select id="label4" name="searchscope">
-                           <option value="17" selected="selected"> DVDs/Videos </option>
-                            <option value="15"> Music CDs</option>
-                            <option value="8"> Music Library</option>
-                            <option value="16"> Music Recordings</option>
-                            <option value="18"> Music Scores</option>
-                            <option value="19"> Streaming Audio/Video</option>
-                            <option value="11">Entire Collection</option>
-                          </select>
-                          
-                        <input type="hidden" id="iiiFormHandle_1"/>
-                        <input name="Search" type="submit" id="Search" value="Search" />
-                      </form>
+                      <input maxlength="75" type="text" id="primoQueryTemp5" value="" size="20" class="primoQueryInput" /> 
+
+                      <input id="goSearch5" title="Search" onclick="searchPrimo5()" type="submit" value="Search" alt="Search" />
+
+                      <p style="font-size:12px !important; margin: 4px 0 0 0;">Limit to:
+                      <select name="facet_rtype" id="facet_rtype">
+                          <option value="audio">Audio</option>
+                          <option value="video">Video</option>
+                      </select>
+                      </p>  
+                       
+                      
+                    </form>
+
+                    <script type="text/javascript">                                        
+                        function searchPrimo5() {
+                          var searchfield = document.getElementById("searchfield5").value;
+                          document.getElementById("primoQuery5").value =  searchfield + ",contains," + document.getElementById("primoQueryTemp5").value.replace(/[,]/g, " ");
+                          document.forms["searchForm5"].submit();
+                        }                        
+                    </script>
                       
 
                   </div>
-                  <div class="mega_feature">
+                  
+                  <!--<div class="mega_feature">
                         <a href="http://library.miami.edu/udvd/">
                         <img alt="Try UDVD for your DVD Needs" title="Try UDVD for your DVD Needs" src="https://library.miami.edu/wp-content/themes/umiami/images/udvd_square.png">
                         </a>
-                  </div>
+                  </div>-->
                   <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/media/">CD/DVDs Overview</a>, <a href="http://library.miami.edu/musiclib/">Music Library</a></div>
                 </div>
                   <!-- end cdz mega menu -->
@@ -291,7 +378,7 @@ $v2styles = TRUE;
                         <p style="align-right"><a href="http://www.library.miami.edu/rsmaslib/">RSMAS Library</a></p>
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>,
-                        <a href="<?php print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a>,
+                        <!--<a href="<?php //print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a>,-->
                         <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Suggest a Purchase</a></div>
                   </div>
                   <!-- end lib/cols mega menu -->
@@ -300,7 +387,7 @@ $v2styles = TRUE;
                 <!--SERVICES-->
                 <li class="services mega"><a href="http://library.miami.edu/services/">SERVICES</a>
                   <!-- begin services mega menu -->
-                    <div class="mega_child mega-md mega-right-special">
+                    <div class="mega_child mega-lg mega-right-special">
                       <ul>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/borrowing/">Access &amp; Borrowing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/ada/">ADA/Disability Services</a></li>
@@ -320,6 +407,11 @@ $v2styles = TRUE;
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li>
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>
                         </ul>
+
+                        <div class="mega_feature">
+                          <img src="https://library.miami.edu/wp-content/themes/umiami/images/essential10-thumb.jpg" alt="Essential 10" /><br />
+                          <p style="line-height: 1.3em;">Discover the <a href="https://library.miami.edu/wp-content/uploads/2015/11/Essential10.pdf" target="_blank">Essential 10</a> things to do at the Libraries!</p>
+                        </div>
                      
                         <div class="mega_more">See also <a href="<?php print PATH_TO_SP; ?>subjects/staff.php">Staff List</a>,
                           <a href="<?php print PATH_FROM_ROOT; ?>/patron/">Information by Patron Type</a></div>
@@ -361,7 +453,7 @@ $v2styles = TRUE;
                         <span style="display: inline-block; width: 160px;">Information for</span>
                       </div>
                       <ul>
-                        <li><a href="http://ibisweb.miami.edu:2082/patroninfo">MyLibrary</a></li>                        
+                        <li><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/login.do?loginFn=signin&vid=uml&targetURL=http:%2F%2Fmiami-primo.hosted.exlibrisgroup.com%2Fprimo_library%2Flibweb%2Faction%2Fsearch.do%3Fvid%3Duml%26amp;dscnt%3D0%26amp;afterTimeout%3DE08029BDF7C2992FC31D8ACB97398E2E%26amp;dstmp%3D1463604331494%26amp;initializeIndex%3Dtrue&isMobile=false">MyLibrary</a></li>                        
                         <li><a href="https://www.courses.miami.edu/webapps/login/">Blackboard</a></li>
                         <li><a href="https://triton.library.miami.edu/">ILLiad (Interlibrary Loan)</a></li>
                         <li><a href="http://illweb.library.miami.edu/aeon/logon.html">Aeon</a></li>
