@@ -271,13 +271,6 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                         <input type="hidden" name="query" id="primoQuery5">
                         <input type="hidden" name="displayField" value="all">
 
-                        <!-- Media only 
-                        <input type="hidden" value="facet" name="ct"> 
-                        <input type="hidden" value="facet_rtype" name="fctN">
-                        <input type="hidden" value="audio" name="fctV">
-                        <input type="hidden" value="show_only" name="rfnGrp">-->
-
-
                         <select name="searchfield5" id="searchfield5">
                          <option value="any">Anywhere</option>
                           <option value="title">Title</option>
@@ -292,16 +285,14 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
 
                       <input maxlength="75" type="text" id="primoQueryTemp5" value="" size="20" class="primoQueryInput" /> 
 
-                      <input id="goSearch5" title="Search" onclick="searchPrimo5()" type="submit" value="Search" alt="Search" />
+                      <p style="font-size:14px !important; margin: 0;">limit to:
+                        <select id="searchfield6" name="query">                        
+                          <option value="facet_rtype,exact,audio" id="mediaType_audio1">Audio</option> 
+                          <option value="facet_rtype,exact,video" id="mediaType_video1">Video</option>                    
+                        </select>
 
-                      <p style="font-size:12px !important; margin: 4px 0 0 0;">Limit to:
-                      <select name="facet_rtype" id="facet_rtype">
-                          <option value="audio">Audio</option>
-                          <option value="video">Video</option>
-                      </select>
-                      </p>  
-                       
-                      
+                        <input id="goSearch5" title="Search" onclick="searchPrimo5()" type="submit" value="Search" alt="Search" />
+                      </p> 
                     </form>
 
                     <script type="text/javascript">                                        
