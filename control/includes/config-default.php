@@ -96,6 +96,9 @@ $resource_name = "SubjectsPlus";
 /* Name of your college/university/institution */
 $institution_name = "";
 
+/* Code used to create customizations */
+$institution_code = "";
+
 /* Name/email address for SubjectsPlus administrator */
 $administrator = "Library Webmaster";
 $administrator_email = "";
