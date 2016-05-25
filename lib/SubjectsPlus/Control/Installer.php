@@ -144,9 +144,11 @@ class Installer
 					  `title` varchar(255) DEFAULT NULL,
 					  `alternate_title` varchar(255) DEFAULT NULL,
 					  `description` text,
+					  `internal_notes` mediumtext NULL DEFAULT NULL,
 					  `pre` varchar(255) DEFAULT NULL,
 					  `last_modified_by` varchar(50) DEFAULT NULL,
 					  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+					  
 					  PRIMARY KEY (`title_id`),
 					  KEY `INDEXSEARCHtitle` (`title`,`alternate_title`,`description`(200))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
