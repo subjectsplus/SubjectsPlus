@@ -272,7 +272,7 @@ class Installer
 					  `location_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `format` bigint(20) DEFAULT NULL,
 					  `call_number` varchar(255) DEFAULT NULL,
-					  `location` varchar(255) DEFAULT NULL,
+					  `location` TEXT DEFAULT NULL,
 					  `access_restrictions` int(10) DEFAULT NULL,
 					  `eres_display` varchar(1) DEFAULT NULL,
 					  `display_note` text,

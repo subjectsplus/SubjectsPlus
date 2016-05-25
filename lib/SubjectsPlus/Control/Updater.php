@@ -172,7 +172,8 @@ class Updater
 		);
 
 		$this->fourToFourOneAlterTables = array(
-			"ALTER TABLE `title` ADD `internal_notes` MEDIUMTEXT NULL DEFAULT NULL AFTER `description`"
+			"ALTER TABLE `title` ADD `internal_notes` MEDIUMTEXT NULL DEFAULT NULL AFTER `description`",
+            "ALTER TABLE `location` CHANGE COLUMN `location` `location` TEXT NULL DEFAULT NULL"
 		);
 		
 		//queries to insert into new tables
