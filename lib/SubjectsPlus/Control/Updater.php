@@ -44,6 +44,9 @@ class Updater
 	private $threeToFourFixData;
 	private $threeToFourAlterTables;
 
+	// four to four.one
+	private $fourToFourOneAlterTables;
+
 	function __construct()
 	{
 		//queries to add new tables
@@ -167,7 +170,10 @@ class Updater
   PRIMARY KEY (`collection_subject_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='Added v4';"
 		);
-		
+
+		$this->fourToFourOneAlterTables = array(
+			"ALTER TABLE `title` ADD `internal_notes` MEDIUMTEXT NULL DEFAULT NULL AFTER `description`";
+		);
 		
 		//queries to insert into new tables
 		$this->oneToTwoInsert = array(
@@ -546,6 +552,23 @@ class Updater
 							return FALSE;
 						}
 					}
+			case '4':
+				foreach($this->fourToFourOneAlterTables as $lstrAQuery) {
+					if( $db->exec( $lstrAQuery ) === FALSE )
+					{
+						//if duplicate column, keep going. assume correct column
+						$lobjDBErrorInfo = $db->errorInfo();
+						if( $lobjDBErrorInfo[1] == '1060' )
+						{
+							continue;
+						}
+
+						$this->displayUpdaterErrorPage( _( "Problem altering existing tables." ) . "<br />$lstrAQuery" );
+						print_r($db->errorInfo());
+
+						return FALSE;
+					}
+				}
 
 			default:
 				break;
