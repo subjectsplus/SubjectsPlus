@@ -18,6 +18,7 @@ class Record {
 	private $_title;
 	private $_alternate_title;
 	private $_description;
+  private $_internal_notes; /* added v 4.1 */
 	private $_location_id;
 	private $_location;
 	private $_call_number;
@@ -58,6 +59,7 @@ class Record {
   			$this->_title = $_POST["title"];
   			$this->_alternate_title = $_POST["alternate_title"];
   			$this->_description = $_POST["description"];
+        $this->_internal_notes = $_POST["internal_notes"];
 
         // data stored in location table
         $this->_location_id = $_POST["location_id"]; // array
@@ -91,7 +93,7 @@ class Record {
         // Get title table info (title, description)
         /////////////
         $querier = new Querier();
-        $q1 = "select title_id, pre, title, alternate_title, description from title where title_id = " . $this->_record_id;
+        $q1 = "select title_id, pre, title, alternate_title, description, internal_notes from title where title_id = " . $this->_record_id;
         $titleArray = $querier->query($q1);
 
         $this->_debug .= "<p>Title query: $q1";
@@ -103,6 +105,7 @@ class Record {
         	$this->_title = $titleArray[0]["title"];
         	$this->_alternate_title = $titleArray[0]["alternate_title"];
         	$this->_description = $titleArray[0]["description"];
+          $this->_internal_notes = $titleArray[0]["internal_notes"];
         }
 
         ///////////////////
@@ -208,6 +211,26 @@ class Record {
 		echo "<textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
 	}
 
+    print "<label for=\"internal_notes\">" . _("Internal Notes") . "</label>
+
+    ";
+
+    if ($wysiwyg_desc == 1) {
+      include($CKPath);
+      global $BaseURL;
+
+      // Create and output object
+      $oCKeditor = new CKEditor($CKBasePath);
+      $oCKeditor->timestamp = time();
+      $config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
+      $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+
+       $oCKeditor->editor('internal_notes', $this->_internal_notes, $config);
+      echo "<br />";
+  } else {
+    echo "<textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"70\">" . stripslashes($this->_description) . "</textarea>";
+  }
+
 	echo "</div></div>"; // end pluslet_body, end pluslet
   print "</div>"; // end 1/3 grid
   print "<div class=\"pure-u-1-3\">";
@@ -250,8 +273,9 @@ class Record {
 	$defsourceArray = $querierSource->query($qSource);
   // let's not have an undefined offset
   if (!isset($this->_def_source[0][0])) {
-    $this->_def_source[0][0] = "";
+    $this->_def_source[0][0] = "1"; // this sets it to the first type, which is by default Journals/Magazines
   }
+
 
 	$sourceMe = new Dropdown("default_source_id", $defsourceArray, $this->_def_source[0][0]);
 	$source_string = $sourceMe->display();
@@ -504,7 +528,7 @@ public function buildLocation() {
  }
 
  echo "<input type=\"hidden\" name=\"ctags[]\" value=\"" . $this->_ctags . "\" />
- <label for=\"ctags[]\">ctags:</label> ";
+ <label for=\"ctags[]\">" . _("Format Tags") . " (ctags)</label> ";
 
  $current_ctags = explode("|", $this->_ctags);
     $tag_count = 0; // added because if you have a lot of ctags, it just stretches the div forever
@@ -663,10 +687,11 @@ public function buildLocation() {
  	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
  	$our_prefix = $db->quote(scrubData($this->_prefix));
 
- 	$qInsertTitle = "INSERT INTO title (title, alternate_title, description, pre) VALUES (
+ 	$qInsertTitle = "INSERT INTO title (title, alternate_title, description, internal_notes, pre) VALUES (
  		" . $our_title . ",
  		" . $our_alternate_title . ",
  		" . $db->quote(scrubData($this->_description, "richtext")) . ",
+    " . $db->quote(scrubData($this->_internal_notes, "richtext")) . ",
  		" . $our_prefix . "
  		)";
 
@@ -720,7 +745,7 @@ public function updateRecord($notrack = 0) {
 	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
 	$our_prefix = $db->quote(scrubData($this->_prefix));
 
-	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote(scrubData($this->_description, "richtext")) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData($this->_title_id, "integer");
+	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote(scrubData($this->_description, "richtext")) . ", internal_notes = " . $db->quote(scrubData($this->_internal_notes, "richtext")) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData($this->_title_id, "integer");
 
 	$rUpTitle = $db->exec($qUpTitle);
 

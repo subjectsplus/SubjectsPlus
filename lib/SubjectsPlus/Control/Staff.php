@@ -826,9 +826,15 @@ class Staff {
 
     print "<div class=\"pure-u-1-3\">";
 
+    // only do if someone isn't using Shib
+    if (isset($use_shibboleth) && $use_shibboleth == FALSE) {
+      // nothing.  I've done it this way in case someone with an older config.php file doesn't have this $use_shibboleth var set
+    } else {
+
     $password_update = "<p><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
 
     makePluslet(_("Change Password?"), $password_update, "no_overflow");
+    }
 
     $saver = "<input type=\"submit\" name=\"submit_record\" class=\"pure-button pure-button-primary\" value=\"" . _("Update Now!") . "\" />";
 
