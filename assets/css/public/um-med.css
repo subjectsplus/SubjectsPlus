@@ -1,0 +1,186 @@
+/* UM Med Theme Styles */
+body {
+background-color: #d9e0bf !important;
+background-image: none;
+border-top: medium none;
+}
+
+#header-content {
+    border: none;
+    border-radius: 0;
+    margin: 0 auto;
+    padding: 3px 0 0;
+}
+
+.calder-logo {width:220px; height:75px; max-width: 95%;}
+
+.uhealth-logo {width:200px; height:75px; max-width: 95%;}
+
+#menu_button {
+    display: inline-block;
+    float: none;
+    margin-top: 15px;
+    text-align: left;
+    width: -moz-calc(100% - 30px);
+    width: -webkit-calc(100% - 30px);
+    width: calc(100% - 30px);
+}
+
+.button-menu {
+    background-color: #d77127;
+    border-radius: 2px;
+    color: #f5e9b8 !important;
+    text-shadow: none;
+}
+
+
+a:link {
+    color: #f1722e;
+    text-decoration: none;
+}
+a:hover {text-decoration: underline;}
+
+.pluslet_body a, .pluslet_body a:link {
+    color: #f1722e;
+    text-decoration: underline;
+}
+
+h1 {
+    background-image: url("http://library.miami.edu/chc/wp-content/themes/um-chc/images/h1_bg_blue-blue.png");
+    background-color: #cee8eb !important;
+}
+
+.print-img-tabs, .print-img-tabs:hover {
+    background-image: url("../../images/printer-chc.png");
+    border: 2px solid #f1722e;
+}
+
+ #nav_menu li.last-child a:hover {
+        color: #ffffff !important;
+}
+
+a.nav_highlight:hover {background-color: #999 !important;}
+
+div.mega_child.mega-md {width: 400px !important;}
+
+#spum_nav a:hover,
+#spum_nav a:active  {
+    color: #e1e1db !important;
+}
+
+#spum_nav .mega_child li a:hover {
+    color: #fff !important;
+}
+
+#nav_menu li a.selected_href {
+        color: #ffffff;
+    }
+
+#searchzone {
+    background-color: #dfdfdf;
+    border: 1px solid #f27f41;
+}
+
+#searchy {
+    background-color: #dfdfdf;
+}
+
+#topsearch_button2 {
+    background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+#search_options {
+    background-color: #dfdfdf;
+    border-bottom: 1px solid #c3c3c3;    
+    border-left: 1px solid #c3c3c3;
+    border-right: 1px solid #c3c3c3;    
+}
+
+#search_options li:hover, #search_options li.active {
+    background-color: #999;
+}
+
+#search_options li {
+    border-bottom: 1px solid #c3c3c3;
+}
+
+
+
+
+
+
+#social_media_accounts ul li a { color: rgba(51,51,51,0.7) !important;}
+#social_media_accounts ul li a:hover { color: #f1722e !important;}
+
+.staff-social li  a {color: rgba(51,51,51,0.7) !important;}
+.staff-social li a:hover { color: #f1722e !important;}
+
+
+/* Front-end pluslet customization colors for titlebar - PV */
+.ts-whiteblack, .ts-umgreen {
+    background-color: #cee8eb !important;
+    color: #333 !important;
+}
+
+.titlebar {border-bottom: none !important;}
+
+.pluslet_body .pure-button-pluslet, 
+.pluslet_body a.pure-button-pluslet {
+  background-color: #f1722e;
+  color: #FFF !important;  
+}
+
+.pluslet_body .pure-button-pluslet:hover, 
+.pluslet_body a.pure-button-pluslet:hover {
+  background-color: #999;  
+}
+
+.type-experts .expert-button {    
+    border: 1px solid #bcbbbb;
+    background-color: #f1722e;
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.type-experts .expert-button:hover {background-color: #999;}
+
+.table-of-contents { color: #40659b !important;}
+.table-of-contents:hover { color: #cc6666 !important;}
+
+.card .card-action a {color: #40659b !important; text-decoration: none !important; }
+.card .card-action a:hover {text-decoration: underline !important; color: #cc6666 !important;}
+
+
+
+
+/* //////////////////
+//  Media Queries 
+////////////////// */
+
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+
+.calder-logo {width:220px; height:75px; max-width: 100%;}
+
+.uhealth-logo {width:200px; height:75px; max-width: 100%;}
+
+}
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+    #menu_button {display:none !important;}
+}
+
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+
+}
+
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+ 
+    
+}
