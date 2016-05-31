@@ -21,7 +21,7 @@
 // Some constants, previously in the config.php
 
 if ($_SERVER['HTTP_HOST'] != "localhost") {
-    define("PATH_FROM_ROOT", "");
+    define("PATH_FROM_ROOT", "http://library.miami.edu");
     define("THEME_FOLDER", "http://library.miami.edu/wp-content/themes/");
     define("THEME_BASE_DIR", "http://library.miami.edu/wp-content/themes/um-chc/");
 } else {

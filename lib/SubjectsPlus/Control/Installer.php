@@ -144,9 +144,11 @@ class Installer
 					  `title` varchar(255) DEFAULT NULL,
 					  `alternate_title` varchar(255) DEFAULT NULL,
 					  `description` text,
+					  `internal_notes` mediumtext NULL DEFAULT NULL,
 					  `pre` varchar(255) DEFAULT NULL,
 					  `last_modified_by` varchar(50) DEFAULT NULL,
 					  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+					  
 					  PRIMARY KEY (`title_id`),
 					  KEY `INDEXSEARCHtitle` (`title`,`alternate_title`,`description`(200))
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
@@ -270,7 +272,7 @@ class Installer
 					  `location_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `format` bigint(20) DEFAULT NULL,
 					  `call_number` varchar(255) DEFAULT NULL,
-					  `location` varchar(255) DEFAULT NULL,
+					  `location` TEXT DEFAULT NULL,
 					  `access_restrictions` int(10) DEFAULT NULL,
 					  `eres_display` varchar(1) DEFAULT NULL,
 					  `display_note` text,

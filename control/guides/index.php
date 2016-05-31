@@ -67,6 +67,7 @@ if ($num_rows > 0) {
     $mysubs_id = $myrow1[0];
     $mysubs_name = stripslashes($myrow1[1]);
     $active = $myrow1[2];
+    $active = $myrow1[2];
 
     $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
@@ -86,15 +87,6 @@ if ($num_rows > 0) {
 }
 ?>
 
-<link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
-
-<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
-<style>
-.select2-container {
-width: 65%;
-margin-right: 3%;
-}
-</style>
 
 <script>
 $(document).ready(function() {
