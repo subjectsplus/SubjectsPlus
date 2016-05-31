@@ -385,7 +385,7 @@ class Guide
         }
     }
     // get edit history
-    $last_mod = _("Last modified: ") . lastModded("record", $this->_subject_id);
+    $last_mod = _("Last modified: ") . lastModded("guide", $this->_subject_id);
     $title = "<div id=\"last_edited\">$last_mod</div>";
 
     makePluslet($title, $content, "no_overflow");
