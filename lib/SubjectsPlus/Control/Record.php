@@ -18,7 +18,7 @@ class Record {
 	private $_title;
 	private $_alternate_title;
 	private $_description;
-  private $_internal_notes; /* added v 4.1 */
+    private $_internal_notes; /* added v 4.1 */
 	private $_location_id;
 	private $_location;
 	private $_call_number;
@@ -320,14 +320,12 @@ class Record {
       <div class=\"titlebar_options\"></div>
     </div>
     <div class=\"pluslet_body\">
-
-	<select name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
+	
+	<select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
 	$subject_string
 	</select>
 	<div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
 	</div>
-
-
 	</div>";
 
   	$this->outputRelatedPluslets();

@@ -141,11 +141,15 @@ $record->outputForm($wintype);
 
 print "</div>"; // close #maincontent
 include("../includes/footer.php");
+
+
+
 ?>
 
 <script type="text/javascript">
 
     $(function (){
+        $('#select_subject').select2();
 
         /*
 // Pre-load new record with subject, if called from within guide
