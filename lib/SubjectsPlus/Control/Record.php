@@ -178,7 +178,7 @@ class Record {
   	<div class=\"pure-u-1-3\">
   	<div class=\"pluslet\">
     <div class=\"titlebar\">
-      <div class=\"titlebar_text\">" . _("Record") . "</div>
+      <div class=\"titlebar_text\">" . _("Record") . " (ID " . $this->_record_id . ")</div>
       <div class=\"titlebar_options\"></div>
     </div>
     <div class=\"pluslet_body\">
