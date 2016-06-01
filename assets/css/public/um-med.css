@@ -14,6 +14,7 @@ border-top: medium none;
     border-radius: 0;
     margin: 0 auto;
     padding: 3px 0 0;
+    max-width: 1110px;
 }
 
 .header-content {
@@ -85,6 +86,9 @@ a.nav_highlight:hover {background-color: transparent !important; color: #f5e9b8 
     border-bottom-left-radius: 9px;
     border-bottom-right-radius: 9px;
 }
+
+#wide_footer a:link {color: #d8e0b9;}
+
 .directions-btn {
     color:#F5E9B8 !important; 
     font-weight:bold; 
@@ -114,7 +118,7 @@ h1 {
 
 
 a:link {
-    color: #d8e0b9;
+    color: #40659b;
     text-decoration: none;
 }
 a:hover {text-decoration: underline;}
@@ -202,6 +206,72 @@ a:hover {text-decoration: underline;}
 .card .card-action a:hover {text-decoration: underline !important; color: #cc6666 !important;}
 
 
+/* CUSTOM pages */
+
+/* Index page */
+.index-search-area .pure-button-topsearch {
+    background-color: #d77127;
+    color: #fff;
+    text-shadow: 0 0 1px #333;
+}
+
+.index-search-area ul.guide-listing a:link {
+    color: #40659b;
+    text-decoration: none;
+}
+
+.find-expert-area-circ h3 {
+    color: #de752f;
+}
+
+.expert-label a:link {color: #6c8564;}
+
+.expert-subjects {
+    color: #f5e9b8 !important;
+}
+
+.find-expert-area-circ .expert-button {
+    background-color: #d77127;
+}
+
+/* Sidebars */
+.tip {
+    background-color: #7b9a70;
+    background-image: none;
+}
+
+div.tip h2 {
+    border-bottom: 1px dashed #d9e0bf;
+    color:#FFF;
+}
+
+div.tip a, div.tip ul li, div.tip p {
+    color: #FFF;
+}
+
+.sidebar-bkg {
+    background: transparent none no-repeat scroll left top;}
+
+/* Databases */
+#selected_letter, #letterhead a:hover {
+    background-color: #d77127;
+}
+
+table.item_listing a:link {
+    color: #40659b;
+}
+
+.pure-button-topsearch {
+    background-color: #d77127;
+    color: #fff;
+    text-shadow: 0 0 1px #333;
+}
+
+
+
+/* Talkback */
+
+.talkback-link {color: #40659b !important;}
 
 
 /* //////////////////
