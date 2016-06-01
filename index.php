@@ -1,6 +1,6 @@
 <?php
 /* Redirect so directory contents can't be viewed */
-//header('Location: subjects/index.php');
+header('Location: subjects/index.php');
 
 include("control/includes/config.php");
 include("control/includes/functions.php");
