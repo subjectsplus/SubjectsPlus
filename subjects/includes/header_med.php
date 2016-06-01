@@ -109,21 +109,10 @@ $('body').on('click', '.track-me', function() {
           <a href="http://calder.med.miami.edu/index.html"><img src="http://calder.med.miami.edu/images/calderheaderlogo.jpg" alt="Home Page" border="0" class="calder-logo" /></a>
         </div>
       
-        <div class="pure-u-1-2">
-          <a href="http://umiamihospital.com/"><img src="http://calder.med.miami.edu/images/uhealth-300.jpg" alt="UMHealth System" border="0" class="uhealth-logo" /></a>
-          
+        <div class="pure-u-1-2 uhealth-area">
+          <a href="http://umiamihospital.com/"><img src="http://calder.med.miami.edu/images/uhealth-300.jpg" alt="UMHealth System" border="0" class="uhealth-logo" /></a>          
         </div>
-
         <span id="menu_button"><a class="pure-button pure-u-1 button-menu" href="#">Menu</a></span>
-
-        <!--<div class="pure-u-1 pure-u-md-1-5 visible-desktop">
-            <img src="http://library.miami.edu/chc/wp-content/themes/um-chc/images/question_orange.png" alt="ask a librarian" />
-            <span class="header-text"><a href="http://library.miami.edu/ask-a-librarian/">Ask a Librarian</a></span>
-        </div> 
-
-        <div class="pure-u-1 pure-u-md-1-5 visible-desktop">
-          
-        </div>-->
 
     </div> <!-- end pure-g -->
 
@@ -131,81 +120,42 @@ $('body').on('click', '.track-me', function() {
     <div class="pure-g">
         <div class="pure-u-1" id="spum_nav">              
               <ul class="nav" id="nav_menu">
-
-                      <!--VISIT-->
-                      <li class="mega"><a href="#">VISIT</a>
-                          <!-- begin visit mega menu -->
-                            <div class="mega_child mega-md mega-left">                                 
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/hoursdirections">Hours &amp; Directions</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/planyourvisit">Plan Your Visit</a></li>
-                                    <li class="last"><a  href="<?php print PATH_TO_CHILD; ?>/instruction">Instruction, Tours, &amp; Room Use</a></li>
-                                  </ul>
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/events/">Programs &amp; Events</a></li>
-                                    <li class="last"><a  href="<?php print PATH_TO_CHILD; ?>/pavilion">The Robert C. Goizueta Pavilion</a></li>
-                                  </ul>
-                                  
-                                  <div class="mega_more">See also <a href="http://www.library.miami.edu/specialcollections/">Special Collections</a>, <a href="http://www.library.miami.edu/universityarchives/">Archives</a></div>
-                            </div>
-                      </li>
-
-                      <!--COLLECTIONS-->
-                      <li class="mega"><a href="#">COLLECTIONS</a>
-                            <div class="mega_child mega-md mega-left">
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/collections">Overview</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/collections/digitalcollections/">Digital Collections</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/collections/books/">Books</a></li>
-                                    <li class="last"><a href="<?php print PATH_TO_CHILD; ?>/collections/periodicals/">Periodicals</a></li>
-                                  </ul>
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/collections/archivalmaterials/">Archival &amp; Manuscript Materials</a></li>
-                                    <li><a href="http://library.miami.edu/oral-histories/">Oral Histories</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/searchtools">Search Tools</a></li>
-                                    <li class="last"><a  href="http://libguides.miami.edu/chc">Research Guides</a></li>
-                                  </ul>
-                            </div>
-                      </li>
-
-                      <!--RESEARCH-->                      
-                      <li class="archives_visitor mega"><a href="#">RESEARCH</a>
-                            <div class="mega_child mega-md mega-left">
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/fellows">Fellowships</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/scholars">Undergraduate Scholars</a></li>
-                                    <li class="last"><a href="http://libguides.miami.edu/chc">Research Tips</a></li>
-                                  </ul>
-                                  <ul>
-                                    <li><a href="<?php print PATH_FROM_ROOT; ?>/photocopies-digital-reproductions/">Rights &amp; Reproductions</a></li>
-                                    <li class="last"><a href="<?php print PATH_TO_CHILD; ?>/scholarlypublications/">Scholarly Publications</a></li>
-                                  </ul>
-                            </div>
-                      </li>
-
-                      <!--ABOUT US-->
-                      <li class="archives_visitor mega"><a href="#">ABOUT US</a>
-                            <div class="mega_child mega-md mega-left">
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/contacts/">Contacts</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/missionhistory/">Mission &amp; History</a></li>
-                                    <li class="last"><a href="<?php print PATH_TO_CHILD; ?>/grantshistory/">Grants History</a></li>
-                                  </ul>
-                                  <ul>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/makeagift/">Make a Gift</a></li>
-                                    <li><a href="<?php print PATH_TO_CHILD; ?>/amigos/">Join the Amigos</a></li>
-                                    <li class="last"><a href="<?php print PATH_TO_CHILD; ?>/followchc/">Follow CHC</a></li>
-                                  </ul>
-                            </div>
-                      </li>
-
-                      <!--ACCOUNTS-->
-                      <li class="login mega last-child" rel="accounts"><a href="http://aeon.library.miami.edu/" class="nav_highlight">Your Research Account</a></li>
-                    
-
+                     
+                  <li><a href="index.html">HOME</a></li>
+                  <li><a href="mission.html">MISSION</a></li>
+                  <li><a href="librarianask.html">ASK A LIBRARIAN</a></li>
+                  <li><a href="request_forms.html" rel="dropmenu1_e">FORMS</a></li>
+                  <li><a href="other_libraries.html#" rel="dropmenu2_e">OTHER LIBRARIES</a></li>
+                  <li><a href="department_and_staff_listings.html">CONTACT US</a></li>
+                  <li><a href="http://callcat.med.miami.edu/patroninfo/">MY ACCOUNT</a></li>
+                  <li><img src="http://calder.med.miami.edu/images/biomedlogo.png" alt="Biomedical Communications" width="18" height="18" border="0"><a href="http://calder.med.miami.edu/biomed/index.html" id="biomed-link">BIOMEDICAL COMMUNICATIONS</a></li>
                 </ul><!--end #nav_menu -->
         </div> <!-- end #spum_nav --> 
     </div>
+
+
+    <!--1st drop down menu -->                                                   
+      <div id="dropmenu1_e" class="dropmenudiv_e">
+        <a href="forms/bib-search.html">Bibliographic Search Request</a>
+        <a href="forms/e-journal_access_problem_form.html">E-Journal Access Problem</a>
+        <a href="forms/general_feedback.html">General Feedback</a>
+        <a href="forms/journal_photocopy_request_patron.html">Interlibrary Loan / <br />&nbsp;Journal Photocopy Request</a>
+        <a href="forms/request_purchase_subscription.html">Purchase / <br />&nbsp;Subscription Request Form</a>
+        <a href="forms/reference_question.html">Reference Question</a>
+        <a href="forms/classregistration2.html">Register for a Class!</a>
+      </div>
+                
+        
+        <!--2nd drop down menu -->                                                
+      <div id="dropmenu2_e" class="dropmenudiv_e" style="width: 320px;">
+        <a href="http://bascompalmer.org/physician-resources/library-services">Mary and Edward Norton Library of Ophthalmology</a>
+        <a href="http://library.miami.edu/">Otto G. Richter Library</a>
+        <a href="http://www6.miami.edu/mh-library/">Pomerance Library and Resource Center</a>
+        <a href="http://library.miami.edu/rsmaslib/">Rosenstiel School of Marine and Atmospheric <br />&nbsp;Science Library</a>
+        <a href="http://www.law.miami.edu/library/">University of Miami Law Library</a>
+        <a href="http://calder.med.miami.edu/umhlibrary">University of Miami Hospital Library</a>        
+      </div>
+
     
 
     <!-- PAGE HEADER-->

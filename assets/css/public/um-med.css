@@ -5,6 +5,10 @@ background-image: none;
 border-top: medium none;
 }
 
+#wrap { margin: 0 auto; }
+
+/* header styles */
+
 #header-content {
     border: none;
     border-radius: 0;
@@ -12,101 +16,176 @@ border-top: medium none;
     padding: 3px 0 0;
 }
 
+.header-content {
+    padding: 15px 15px 0;
+}
+
+#header-content img {
+    float: none;
+}
+
+.uhealth-area {text-align: right;}
+
 .calder-logo {width:220px; height:75px; max-width: 95%;}
 
 .uhealth-logo {width:200px; height:75px; max-width: 95%;}
 
 #menu_button {
     display: inline-block;
-    float: none;
-    margin-top: 15px;
+    float: right;
+    margin: 10px 20px 0 0;
     text-align: left;
-    width: -moz-calc(100% - 30px);
-    width: -webkit-calc(100% - 30px);
-    width: calc(100% - 30px);
+    width: 65px;
 }
 
 .button-menu {
     background-color: #d77127;
     border-radius: 2px;
-    color: #f5e9b8 !important;
+    color: #FFF !important;
     text-shadow: none;
+}
+
+#spum_nav {
+    margin:36px 0 0 0;
+    padding:0;
+    background-color: #d77127;
+}
+
+#spum_nav ul li {
+    border-bottom: 1px solid #f5924b;
+}
+
+#spum_nav a:hover,
+#spum_nav a:active  {
+    color: #f5e9b8 !important;
+}
+
+a.nav_highlight:hover {background-color: transparent !important; color: #f5e9b8 !important;}
+
+.dropmenudiv_e {display: none !important;}
+
+
+/* footer styles */
+
+#push, .footer-container {
+    height: auto;
+}
+
+.footer-container {
+    background-color: transparent;
+    border-top: medium none;
+}
+
+#wide_footer {
+    background-color: #7b9a70;
+    background-image: none;
+    color: #eaf1e1;
+    font-size: 1em;
+    line-height: 1.5em;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+.directions-btn {
+    color:#F5E9B8 !important; 
+    font-weight:bold; 
+    font-size:12px; 
+    text-shadow: 0 1px 1px #000; 
+    background:#de752f; 
+    padding:5px; 
+    border-radius:4px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+#social_icons_small {text-align: right; margin-right: 10px;}
+
+#umiami_logo {text-align: center; padding:0; }
+
+
+/* content areas styles */
+
+h1 {
+    background-image: none;
+    background-color: #7b9a70 !important;
+    margin-top: 10px;
+    text-shadow: 0 1px 1px #444;
+    color: #eaf1e1;
 }
 
 
 a:link {
-    color: #f1722e;
+    color: #d8e0b9;
     text-decoration: none;
 }
 a:hover {text-decoration: underline;}
 
 .pluslet_body a, .pluslet_body a:link {
-    color: #f1722e;
+    color: #40659b;
     text-decoration: underline;
 }
 
-h1 {
-    background-image: url("http://library.miami.edu/chc/wp-content/themes/um-chc/images/h1_bg_blue-blue.png");
-    background-color: #cee8eb !important;
-}
 
 .print-img-tabs, .print-img-tabs:hover {
     background-image: url("../../images/printer-chc.png");
-    border: 2px solid #f1722e;
+    border: 2px solid #de752f;
 }
 
- #nav_menu li.last-child a:hover {
-        color: #ffffff !important;
+#tabs li a {
+    background-color: #7b9a70;
+    color: #fff;
 }
 
-a.nav_highlight:hover {background-color: #999 !important;}
-
-div.mega_child.mega-md {width: 400px !important;}
-
-#spum_nav a:hover,
-#spum_nav a:active  {
-    color: #e1e1db !important;
+#tabs li a:hover{
+    background-color: #de752f;
+    color: #f5e9b8;
 }
 
-#spum_nav .mega_child li a:hover {
-    color: #fff !important;
-}
+#tabs .pluslet li a, #tabs .pluslet_simple li a {color: #40659b;}
+#tabs .pluslet li a:hover, #tabs .pluslet_simple li a:hover {background-color:transparent; color: #40659b;}
 
-#nav_menu li a.selected_href {
-        color: #ffffff;
-    }
 
-#searchzone {
-    background-color: #dfdfdf;
-    border: 1px solid #f27f41;
-}
-
-#searchy {
-    background-color: #dfdfdf;
-}
 
 #topsearch_button2 {
     background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 
-#search_options {
-    background-color: #dfdfdf;
-    border-bottom: 1px solid #c3c3c3;    
-    border-left: 1px solid #c3c3c3;
-    border-right: 1px solid #c3c3c3;    
+.titlebar {border-bottom: none !important; background-color: #d9e0bf;}
+
+.titlebar_text {background-color: #d9e0bf;}
+
+/* Front-end pluslet customization colors for titlebar - PV */
+.ts-whiteblack, .ts-umgreen {
+    background-color: #d9e0bf !important;
+    color: #000 !important;
 }
 
-#search_options li:hover, #search_options li.active {
-    background-color: #999;
-}
-
-#search_options li {
-    border-bottom: 1px solid #c3c3c3;
+.ts-umcream {
+    background-color: rgba(236, 215, 157, 1) !important;
+    color: #000 !important;
 }
 
 
+.pluslet_body .pure-button-pluslet, 
+.pluslet_body a.pure-button-pluslet {
+  background-color: #d77127;
+  color: #FFF !important;
+  text-shadow: 0 1px 1px #000;  
+}
 
+.pluslet_body .pure-button-pluslet:hover, 
+.pluslet_body a.pure-button-pluslet:hover {
+  background-color: #d77127;
+}
 
+.type-experts .expert-button {    
+    border: 1px solid #bcbbbb;
+    background-color: #d77127;
+    color: #fff !important;
+    text-decoration: none !important;
+    text-shadow: 0 0 1px #333;
+}
+
+.type-experts .expert-button:hover {background-color: #d77127;}
 
 
 #social_media_accounts ul li a { color: rgba(51,51,51,0.7) !important;}
@@ -115,34 +194,6 @@ div.mega_child.mega-md {width: 400px !important;}
 .staff-social li  a {color: rgba(51,51,51,0.7) !important;}
 .staff-social li a:hover { color: #f1722e !important;}
 
-
-/* Front-end pluslet customization colors for titlebar - PV */
-.ts-whiteblack, .ts-umgreen {
-    background-color: #cee8eb !important;
-    color: #333 !important;
-}
-
-.titlebar {border-bottom: none !important;}
-
-.pluslet_body .pure-button-pluslet, 
-.pluslet_body a.pure-button-pluslet {
-  background-color: #f1722e;
-  color: #FFF !important;  
-}
-
-.pluslet_body .pure-button-pluslet:hover, 
-.pluslet_body a.pure-button-pluslet:hover {
-  background-color: #999;  
-}
-
-.type-experts .expert-button {    
-    border: 1px solid #bcbbbb;
-    background-color: #f1722e;
-    color: #fff !important;
-    text-decoration: none !important;
-}
-
-.type-experts .expert-button:hover {background-color: #999;}
 
 .table-of-contents { color: #40659b !important;}
 .table-of-contents:hover { color: #cc6666 !important;}
@@ -156,7 +207,13 @@ div.mega_child.mega-md {width: 400px !important;}
 /* //////////////////
 //  Media Queries 
 ////////////////// */
+/* ≥ 480px  */
+@media screen and (min-width: 480px) {
 
+#menu_button {float: right; width: auto; margin-right: 20px;}
+
+
+}
 
 /* ≥ 568px  .pure-u-sm-* */
 @media screen and (min-width: 35.5em) {
@@ -169,18 +226,52 @@ div.mega_child.mega-md {width: 400px !important;}
 
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) {
+    
+    #header-content {margin: 10px auto 0 auto;}
+
     #menu_button {display:none !important;}
+
+    #spum_nav {margin: 5px 0 0 0;}
+
+    #spum_nav ul li {border-bottom: none; display: inline-block;}
+
+    #spum_nav a {font-size:13px; padding: 10px 4px; color:#f5e9b8;}
+
+    #spum_nav a:hover,
+    #spum_nav a:active  {color: #7A5330 !important;}
+
+    a.nav_highlight:hover {color: #7A5330 !important;}
+
+    .dropmenudiv_e {display: block !important;}
+
+    .footer-container {float: left; margin-top: 2em; width: 100%; padding-bottom: 10px;}
+
+    h1 {margin-top:0px;}
+
+    #umiami_logo {text-align: left;}
+
+
+
+
 }
 
 
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
 
+    #spum_nav a {font-size:14px; padding: 10px 5px;}
+
+    #spum_nav ul {text-align: center;}
+
+    #social_icons_small {text-align: center;}
+
 }
 
 
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) {
+
+    #spum_nav a {padding: 10px;}
  
     
 }

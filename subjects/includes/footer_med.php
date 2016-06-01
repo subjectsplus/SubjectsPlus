@@ -7,217 +7,118 @@
 <div id="push"></div>
 </div><!--end #wrap-->
 
-
-<?php
-if (!isset($our_site)) {$our_site="chc";}// just in case
-
-switch ($our_site) {
-  case "chc":
-     $library_address = "<strong>Cuban Heritage Collection | <a href=\"http://library.miami.edu\">UM Libraries</a></strong><br />1300 Memorial Drive, Coral Gables, Florida 33124-0320<br />
-        (305) 284-4900<br />
-        Email:  <a href=\"mailto:chc@miami.edu\">chc@miami.edu</a>";
-    $social_icons = "<p id=\"social_icons_small\">
-  <a href=\"" . PATH_TO_CHILD . "/feed/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/rss_26.png\"  alt=\"Visit the CHC Blog\" title=\"Visit the CHC Blog\" /></a>
-  <a href=\"http://library.miami.edu/subscribe/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mailing_list.png\"  alt=\"Join our Mailing List\" title=\"Join our Mailing List\" /></a>
-      <a href=\"http://www.facebook.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
-    <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
-    <a href=\"http://vimeo.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/vimeo.png\"  alt=\"Find Us on Vimeo\" title=\"Find Us on Vimeo\" /></a>
-      <a href=\"http://www.flickr.com/photos/umdigital/collections/72157623554504931/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
-    </p>";
-  break;
-  default:
-    $library_address = "<strong>UM Libraries</strong> 1300 Memorial Drive<br />Coral Gables, Florida 33124-0320<br />
-        (305) 284-3233";
-    $social_icons = "<p id=\"social_icons_small\">       
-      <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
-      <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
-     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a><br />
-        <a href=\"http://library.miami.edu/support-the-libraries/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/support-uml.png\"  alt=\"Support UML\" title=\"Support UML\" style=\"margin-top: 10px;\" /></a><a href=\"http://library.miami.edu/uml-news-2014/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/uml-news.png\"  alt=\"UML in the News\" title=\"UML in the News\" style=\"margin-top: 10px;\" /></a>
-    </p>";
-
-  }
-    ?>
-
-
 <div class="footer-container">
   <div id="wide_footer">
 		    <div class="pure-g">
-    	        <div class="pure-u-1 pure-u-md-1-5 footer-adj">
-    				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
+    	        <div class="pure-u-1 pure-u-md-1-5 pure-u-lg-5-24 footer-adj" id="umiami_logo">
+    				    <a href="http://www.miami.edu/"><img src="<?php print $AssetPath; ?>images/med-um-logo.jpg" alt="University of Miami" border="0"  /></a>
               </div>
-    				  <div class="pure-u-1 pure-u-md-2-5 footer-adj">
-                  <p style=""><?php print $library_address; ?><br />
-                  <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
-                  <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
-                  <a href="/report-website-issue/">Report Site Issue</a> |
-                  <a href="/support-the-libraries/">Make a Gift</a>
+    				  <div class="pure-u-1 pure-u-md-2-5 pure-u-lg-1-3 footer-adj">
+                  <p>Louis Calder Memorial Library<br />
+                  1601 NW 10th Ave Miami, FL 33136 <br />
+                  P.O. Box 016950 (R-950) <br />
+                  Miami, FL 33101 <br />
+                  Tel: 305-243-6403 &nbsp;&nbsp;&nbsp;&nbsp; Fax: 305-325-9670<br />
+                  <a href="http://calder.med.miami.edu/directions.html" class="directions-btn">Directions</a>
                   </p>
             	</div>
-    				  <div class="pure-u-1 pure-u-md-2-5 footer-adj">
-    					       <?php print $social_icons; ?>
+    				  <div class="pure-u-1 pure-u-md-2-5 pure-u-lg-1-3 footer-adj">
+    					    <p>
+                  <a href="http://www.miami.edu/ref/index.php/ep/">Emergency Preparedness</a><br />
+                  <a href="http://www.miami.edu/blackboard">Blackboard</a><br />
+                  <a href="http://www.miami.edu/employment">Employment</a><br />
+                  <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy Statement and Legal Notices</a><br />
+                  <a href="mailto:sxh2751@med.miami.edu">Feedback</a><br />
+                  Copyright 2016 University of Miami. All Rights Reserved.
+                  </p>
     				  </div>
+              <div class="pure-u-1 pure-u-lg-1-8 footer-adj">
+                  <p id="social_icons_small"><a href="https://www.facebook.com/caldermedlibrary"><img src="http://calder.med.miami.edu/images/facebook.png" alt="Find Us on Facebook" title="Facebook" width="40px" height="40px"/></a></p>
+              </div>
 	     </div> <!-- end pure-g -->
   </div> <!-- end wide-footer -->
 </div> <!--footer-container-->
 
 
-</body>
-</html>
+<script type="text/javascript" src="includes/js/dropdowntabs.js">
+/***********************************************
+  * Drop Down Tabs Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+  * This notice MUST stay intact for legal use
+  * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+  ***********************************************/  
+</script>
+
 <script type="text/javascript" language="javascript">
 
-/**
-* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+
-* <http://cherne.net/brian/resources/jquery.hoverIntent.html>
-* 
-* @param  f  onMouseOver function || An object with configuration options
-* @param  g  onMouseOut function  || Nothing (use configuration options object)
-* @author    Brian Cherne brian(at)cherne(dot)net
-*/
-(function($){$.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=$.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){$(ob).unbind("mousemove",track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=="mouseenter"){pX=ev.pageX;pY=ev.pageY;$(ob).bind("mousemove",track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{$(ob).unbind("mousemove",track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);
+jQuery(document).ready(function(){
 
-  jQuery(document).ready(function(){
-  // check window height for making footer ok
-  var win_height = $(window).height();
-  if (win_height > 900) {
-    // tweak the size of the footer area so it extends to bottom of page
-    var extra_height = (win_height - 800) + "px";
-    //alert(extra_height);
-    //$("#wide_footer").css("min-height", extra_height);
-  }
 
-  $("#menu_button").click(function() {
+ //Mobile menu click
+ $("#menu_button").click(function() {
     $("#spum_nav").toggle();
-});
-
-   //$navmenu = $("#nav_menu");
-
-  function addMega(){
-
-    $(this).children("a").addClass("selected_href");
-    $(this).find("[class^=mega]").stop().fadeTo('fast', 1).show();
-  }
-
-  function removeMega(){
-
-    $(this).children("a").removeClass("selected_href");
-    $(this).find(".mega_child").hide();
-
-  }
-
-  var megaConfig = {
-    interval: 50,
-    sensitivity: 4,
-    over: addMega,
-    timeout: 100,
-    out: removeMega
-  };
-
-// Only want hoverintent to fire if window is a certain size
+  });    
+  
+// Resize function
 var $window = $(window);
 
 function checkWidth() {
   windowsize = $window.width();
 
-  if (windowsize >= 768) {
-    $("#spum_nav").show();
-    $("li.mega").hoverIntent(megaConfig);
+  if (windowsize >= 748) {
+    $("#spum_nav").show();    
+  }
+  else {
+    $("#spum_nav").hide();
   }
 
-  if (windowsize < 747) {
-      $("#spum_nav").hide();
-       $("li.mega").unbind();
-     }
-}
+  if ((windowsize >= 748) && (windowsize <= 1000)) {
+    $("#biomed-link").html("BIOMED COMM");    
+  }
+  else {
+    $("#biomed-link").html("BIOMEDICAL COMMUNICATIONS");
+  }
+
+} // end checkWidth()
+
 
 $(window).resize(checkWidth).resize();
 
-// end hoverintent loader by window size
+}); 
 
-/*
-if (jQuery("body").width() >= 1024) {
-  $("li.mega").hoverIntent(megaConfig);
-}
-
-$(window).on('resize', function(e){
-  var win = $(this); //this = window
-  if (win.width() >= 1024) { 
-      $("li.mega").hoverIntent(megaConfig);
-  } else {
-      $("li.mega").addClass("offer").removeClass("mega");
-  }
-
-});
-
-*/
-
-
-$(".mega_child select").mouseout(function(e) {
-        e.stopPropagation();
-});
-  // end hover //
-
-  // Search box dropdown //
-
-  var $searchme = $("#search_container");
-
-  function addSearchme() {
-    $("#search_options").stop().fadeTo('fast', 1).show();
-  }
-
-  function removeSearchme() {
-    $("#search_options").stop().fadeTo('fast', 1).hide();
-  }
-
-  var searchmeConfig = {
-    interval: 200,
-    sensitivity: 4,
-    over: addSearchme,
-    timeout: 300,
-    out: removeSearchme
-  };
-
-  $searchme.hoverIntent(searchmeConfig);
-
-  var our_option = $('#search_options input:radio:checked').val();
-
-  $("#search_options li").click(function() {
-    $("#search_options li").removeClass("active");
-    $(this).children().attr('checked', 'checked');
-    $(this).addClass("active");
-  //alert ($(this).prev().html());
-
-  });
-
-  // End Search Dropdown zone //
-});
 </script>
+
+
 <script>
+//print tabs
 function printView() {
     var visible_tab;
 
     $('#tab-body').children().each(function () {
-  if ($(this).is(":visible")) {
-      visible_tab = $(this);
-      
-  } else {
-      $(this).show();
-      
-  }
-
-
+        if ($(this).is(":visible")) {
+            visible_tab = $(this);
+            
+        } else {
+            $(this).show();
+            
+        }
     });
     window.print();
     
     
     $('#tab-body').children().each(function () {
-  $(this).hide(); 
-  
+        $(this).hide();   
     });
     
     $(visible_tab).show();
     
-}
+} //end printView()
 
 </script>
 
-<script type="text/javascript" src="http://calder.med.miami.edu/dropdowntabs.js">
+
+<script type="text/javascript">
+tabdropdown.init("spum_nav", 3);
+ </script>
+
+</body>
+</html>
