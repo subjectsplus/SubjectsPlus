@@ -984,21 +984,32 @@ class Staff {
 
   public function insertRecord() {
 
+    global $salt;
+    global $use_shibboleth;
+    
     $db = new Querier;
 
     ////////////////
     // check and hash password
     ////////////////
 
-    if( $this->correctPassword($this->_password) )
-    {
-      $this->_password = md5($this->_password);
-    }else
-    {
-      $this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
+    // only do if someone isn't using Shib
+    if (isset($use_shibboleth) && $use_shibboleth === TRUE) {
+      // set password to the salt; this shouldn't actually ever be used/accessed
+      $this->_password = md5($salt);
+      
+    } else {
 
-      return;
+      if( $this->correctPassword($this->_password) )
+      {
+        $this->_password = md5($this->_password);
+      }else
+      {
+        $this->_message = _("Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed.");
 
+        return;
+
+      }
     }
 
     ////////////////
