@@ -394,10 +394,13 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
     }, 2000);
     //$(selected_box).animateHighlight('#dd0000', 1000);
 
+
+
 });
 
-
 </script>
+
+
 
 
 <script>
@@ -412,7 +415,12 @@ track.init();
 tabDropdown.init();
 autoComplete.init();
 
+
+
 </script>
+
+
+
 
 
 <?php

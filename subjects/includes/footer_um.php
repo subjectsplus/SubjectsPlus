@@ -189,31 +189,48 @@ $(".mega_child select").mouseout(function(e) {
   // End Search Dropdown zone //
 });
 </script>
+
 <script>
-function printView() {
-    var visible_tab;
+  function printView() {
+      var visible_tab;
 
     $('#tab-body').children().each(function () {
-  if ($(this).is(":visible")) {
-      visible_tab = $(this);
+        if ($(this).is(":visible")) {
+            visible_tab = $(this);        
+        } 
+        else {
+            $(this).show();        
+        }
+
+        
+      });
+      window.print();
       
-  } else {
-      $(this).show();
       
-  }
+      $('#tab-body').children().each(function () {
+    $(this).hide(); 
+    
+      });
+      
+      $(visible_tab).show();
+
+  } //end printView()
 
 
-    });
-    window.print();
-    
-    
-    $('#tab-body').children().each(function () {
-  $(this).hide(); 
+//show print dialog
+function showPrintDialog() {
   
-    });
-    
-    $(visible_tab).show();
-    
+  $(".printer_tabs").colorbox({html: "<h1>Print Selection</h1><div class=\"printDialog\"><ul><li><a onclick=\"window.print();\" class=\"pure-button pure-button-topsearch\">Print Current Tab</a></li><li><a onclick=\"printView();\" class=\"pure-button pure-button-topsearch\">Print All Tabs</a></li></ul></div>", innerWidth:640, innerHeight:480});
+
 }
 
+
+$(".print-img-tabs").click(function() {    
+    showPrintDialog()
+});
+
+$('.print-img-no-tabs').click(function(){ window.print(); });  
+  
 </script>
+
+
