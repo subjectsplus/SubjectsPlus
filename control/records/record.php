@@ -140,11 +140,8 @@ $record->outputForm($wintype);
 //$record->deBug();
 
 print "</div>"; // close #maincontent
-include("../includes/footer.php");
-
-
-
 ?>
+
 
 <script type="text/javascript">
 
@@ -617,3 +614,9 @@ if (win_type == "pop") {
 
 
 </script>
+
+<?php
+include("../includes/footer.php");
+
+?>
+
