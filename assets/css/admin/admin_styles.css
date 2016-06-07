@@ -951,7 +951,6 @@ li.fav-box-item:hover::before {color: #C03957;}
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
 }
 
-
 /* This bridges the gap so you can mouse into the tooltip without it disappearing */
 .tooltip_wrapper .tooltip:before {
   bottom: -20px;
@@ -988,6 +987,9 @@ li.fav-box-item:hover::before {color: #C03957;}
  }
 
 
+
+
+#findbox-searchresults li:first-child {margin-top: 40px;}
 
 /* IE can just show/hide with no transition */
 .lte8 .tooltip_wrapper .tooltip {

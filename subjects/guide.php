@@ -381,23 +381,31 @@ $("div[name='Clone']").find('.pluslet_body:eq(1)').removeAttr('class');
 // Draw attention to TOC linked item
 ///////////////////////////////
 
+
 $(document.body).on('click','a[id*=boxid-]', function(event) {
     var tab_id = $(this).attr('id').split('-')[1];
     var box_id = $(this).attr('id').split('-')[2];
-
     var selected_box = '.pluslet-' + box_id;
 
-    $('#tabs').tabs('select', tab_id);
+    if(!$('#tabs').data('ui-tabs')) {
 
-    $(selected_box).effect('pulsate', {
-        times:1
-    }, 2000);
-    //$(selected_box).animateHighlight('#dd0000', 1000);
+        $(selected_box).effect('pulsate', {
+            times:1
+        }, 2000);
+
+    } else {
+
+        $('#tabs').tabs('select', tab_id);
+
+        $(selected_box).effect('pulsate', {
+            times:1
+        }, 2000);
+    }
 
 });
-
-
 </script>
+
+
 
 
 <script>
@@ -412,7 +420,12 @@ track.init();
 tabDropdown.init();
 autoComplete.init();
 
+
+
 </script>
+
+
+
 
 
 <?php
