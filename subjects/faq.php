@@ -193,7 +193,7 @@ if ($displaytype == "search") {
 	$connection = $db->getConnection();
 	$statement = $connection->prepare("SELECT faq_id, question, answer, keywords
 	FROM `faq`
-	WHERE faq_id = ':postvar_faq_id'");
+	WHERE faq_id = :postvar_faq_id");
     $statement->bindParam(':postvar_faq_id',$postvar_faq_id);
 	$statement->execute();
 
