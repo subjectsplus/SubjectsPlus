@@ -298,7 +298,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 			<div class="tipend"> </div>
 			<!-- end tip -->
 
-			<?php if ($featured) { ?>
+			<?php if (isset($featured)) { ?>
 				<div class="tip">
 					<h2><?php print _("Featured Databases"); ?></h2>
 					<?php print $featured_list; ?>
