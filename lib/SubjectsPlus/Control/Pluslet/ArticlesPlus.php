@@ -20,7 +20,7 @@ class Pluslet_ArticlesPlus extends Pluslet {
   protected function onEditOutput()
   {
   	
-    $this->_body = "<p class=\"faq-alert\">" . _("Click 'Save' to view your Articles+ search box.") . "</p>";
+    $this->_body = "<p class=\"faq-alert\">" . _("Click 'Save' to view your uSearch Articles search box.") . "</p>";
    
   }
 
@@ -35,12 +35,12 @@ class Pluslet_ArticlesPlus extends Pluslet {
 
   static function getMenuName()
   {
-    return _('Articles+ Search');
+    return _('uSearch Articles');
   }
 
   static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-file-text-o\" title=\"" . _("Articles+ Search") . "\" ></i><span class=\"icon-text articlesplus-text\">" . _("Articles+ Search") . "</span>";
+        $icon="<i class=\"fa fa-file-text-o\" title=\"" . _("uSearch Articles") . "\" ></i><span class=\"icon-text articlesplus-text\">" . _("uSearch Articles") . "</span>";
         return $icon;
     }
 
