@@ -1,70 +1,74 @@
 <div class="catalog-search">
-<form action="http://catalog.library.miami.edu/search/" method="get" name="search" id="search" class="pure-form" target="_blank">
-
-<input type="hidden" id="iiiFormHandle_1">
+<form action="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do?institution=01UOML&vid=uml" method="get" name="searchPrimo" id="searchPrimoForm" class="pure-form" target="_blank" enctype="application/x-www-form-urlencoded; charset=utf-8" onsubmit="primoSearch()">
 
 <fieldset>
 <!-- Optional legend:-->
-<legend>Find items in the Catalog</legend>
+<legend>Find items in the uSearch Catalog</legend>
 
 <div class="formEntryArea">
 
+<!-- Customizable Parameters -->
+<input type="hidden" name="institution" value="01UOML">
+<input type="hidden" name="vid" value="uml">
+<input type="hidden" name="tab" value="default_tab">
+<input type="hidden" name="mode" value="Basic">
+
+ <!-- Fixed parameters -->
+<input type="hidden" name="displayMode" value="full">
+<input type="hidden" name="bulkSize" value="10">
+<input type="hidden" name="highlight" value="true">
+<input type="hidden" name="dum" value="true">
+<input type="hidden" name="query" id="primoQuery">
+<input type="hidden" name="displayField" value="all">
+
+<!-- our target fields -->
 <select name="searchtype" id="searchtype" style="vertical-align:middle;">
-        <option value="X" selected="selected">Keyword</option>
-        <option value="t">Title</option>
-        <option value="a">Author</option>
-        <option value="d">Subject</option>
-        <option value="c">LC Call Number</option>
-        <option value="l">Local Call Number</option>
-        <option value="g">SuDocs Number</option>
-        <option value="i">ISSN . ISBN Number</option>
-        <option value="o">OCLC Number</option>
-        <option value="m">Music Publisher Number</option>
+  <option value="any">Anywhere</option>
+  <option value="title"> Title</option>
+  <option value="creator"> Author/Creator</option>
+  <option value="sub"> Subject</option>
+  <option value="lsr06"> Call Number</option>
+  <option value="isbn"> ISBN</option>
+  <option value="lsr01"> Course Reserve</option>
 </select>
-<input type="hidden" name="SORT" id="SORT" value="D">
+
 <br />
-<input maxlength="75" name="searcharg">&nbsp;&nbsp;
 
-    <script language="javascript">
-    function iiiDoSubmit_1()
-    {
-    //getFormHandleForm() is in common.js
-    var obj = getFormHandleForm(1);
-    obj.submit();
-    }
+<input type="text" id="primoQueryTemp" value="">&nbsp;&nbsp;
 
-    </script>
-<input type="hidden" id="iiiFormHandle_1">
 <br/>
-<span class="wcat-label">Limit search to:</span><br />
-<select name="searchscope" id="searchscope">
-    <option value="10"> Architecture Library</option>
-        <option value="14"> Audiobooks</option>
-        <option value="12"> Books (Print)</option>
-        <option value="7"> Cuban Heritage Collection</option>
-        <option value="17"> DVDs/Videos </option>
-        <option value="13"> E-Books</option>
-        <option value="4"> Government Documents &amp; Maps</option>
-        <option value="2"> Internet Resources</option>
-        <option value="1"> Journals &amp; Other Serials</option>
-        <option value="9"> Marine Science Library</option>
-        <option value="15"> Music CDs</option>
-        <option value="8"> Music Library</option>
-        <option value="16"> Music Recordings</option>
-        <option value="3"> Richter Reference</option>
-        <option value="18"> Music Scores</option>
-        <option value="6"> Special Collections &amp; UM Archives</option>
-        <option value="19"> E-Music/E-Audio/E-Video</option>
-        <option value="11" selected="selected"> View Entire Collection</option>
-  </select>
 
-<input name="Search" type="submit" id="Search" value="Search" class="pure-button pure-button-pluslet">
+<span class="wcat-label">Limit search to:</span><br />
+
+<select name="search_scope" id="searchscope">
+  <option value="default_scope">Library Catalog</option>
+  <option value="MUSIC">Music Library</option>
+  <option value="ARCH">Architecture Library</option>
+  <option value="UA">University Archives</option>
+  <option value="SC">Special Collections</option>
+  <option value="MARINE">Marine Library</option>
+  <option value="CHC">Cuban Heritage Collection</option>
+  <option value="LAW">Law Library</option>
+  <option value="MED">Medical Libraries</option>
+</select>         
+
+
+<input id="Search" title="Search" onclick="primoSearch()" type="submit" value="Search" alt="Search" class="pure-button pure-button-pluslet">
+
 <br />
-<span class="adv-prompt"><a href="http://catalog.library.miami.edu/search/X">Advanced Search</a></span>
+<span class="adv-prompt"><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?mode=Advanced&ct=AdvancedSearch&vid=uml&ct=AdvancedSearch" target="_blank">Advanced Search</a></span>
 
 </div><!-- end formEntryArea -->
 
 </fieldset> 
+
+<script type="text/javascript">
+   function primoSearch() {
+      var searchfield = document.getElementById("searchtype").value;
+      document.getElementById("primoQuery").value = searchfield + ",contains," + document.getElementById("primoQueryTemp").value.replace(/[,]/g, " ");
+      document.forms["searchPrimo"].submit();
+    }    
+</script>
 
 </form>
 </div>
