@@ -47,7 +47,7 @@ if ($_GET["letter"] == "bysub") {
 		// add subject name to title
 
 		$connection = $db->getConnection();
-		$statement = $connection->prepare("SELECT subject FROM subject WHERE subject_id = :id");
+	  $statement = $connection->prepare("SELECT subject FROM subject WHERE subject_id = :id AND type = 'Subject' AND active = '1'");
 		$statement->bindParam(":id", $clean_id);
 		$statement->execute();
 		$myrow = $statement->fetchAll();
@@ -298,7 +298,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 			<div class="tipend"> </div>
 			<!-- end tip -->
 
-			<?php if ($featured) { ?>
+			<?php if (isset($featured)) { ?>
 				<div class="tip">
 					<h2><?php print _("Featured Databases"); ?></h2>
 					<?php print $featured_list; ?>
