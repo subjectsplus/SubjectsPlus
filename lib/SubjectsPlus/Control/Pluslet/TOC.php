@@ -49,7 +49,7 @@ class Pluslet_TOC extends Pluslet {
 			ON t.subject_id = s.subject_id
 			WHERE s.subject_id = '$this->_subject_id'
 			AND p.type != 'TOC'
-			ORDER BY ps.prow ASC";
+			ORDER BY ps.pcolumn, ps.prow ASC";
 
     //print $qs;
 
