@@ -28,7 +28,7 @@ class Pluslet_LinkList extends Pluslet
 
     static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-list-alt\" title=\"" . _("Link List") . "\" ></i><span class=\"icon-text\">" . _("Link List") . "</span>";
+        $icon="<i class=\"fa fa-list-ul\" title=\"" . _("Link List") . "\" ></i><span class=\"icon-text\">" . _("Link List") . "</span>";
         return $icon;
     }
 
