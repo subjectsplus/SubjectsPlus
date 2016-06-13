@@ -47,7 +47,7 @@ if ($_GET["letter"] == "bysub") {
 		// add subject name to title
 
 		$connection = $db->getConnection();
-		$statement = $connection->prepare("SELECT subject FROM subject WHERE subject_id = :id");
+	  $statement = $connection->prepare("SELECT subject FROM subject WHERE subject_id = :id AND type = 'Subject' AND active = '1'");
 		$statement->bindParam(":id", $clean_id);
 		$statement->execute();
 		$myrow = $statement->fetchAll();
