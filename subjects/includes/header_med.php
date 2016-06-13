@@ -121,13 +121,13 @@ $('body').on('click', '.track-me', function() {
         <div class="pure-u-1" id="spum_nav">              
               <ul class="nav" id="nav_menu">
                      
-                  <li><a href="index.html">HOME</a></li>
-                  <li><a href="mission.html">MISSION</a></li>
-                  <li><a href="librarianask.html">ASK A LIBRARIAN</a></li>
-                  <li><a href="request_forms.html" rel="dropmenu1_e">FORMS</a></li>
-                  <li><a href="other_libraries.html#" rel="dropmenu2_e">OTHER LIBRARIES</a></li>
-                  <li><a href="department_and_staff_listings.html">CONTACT US</a></li>
-                  <li><a href="http://callcat.med.miami.edu/patroninfo/">MY ACCOUNT</a></li>
+                  <li><a href="http://calder.med.miami.edu/index.html">HOME</a></li>
+                  <li><a href="http://calder.med.miami.edu/mission.html">MISSION</a></li>
+                  <li><a href="http://calder.med.miami.edu/librarianask.html">ASK A LIBRARIAN</a></li>
+                  <li><a href="http://calder.med.miami.edu/request_forms.html" rel="dropmenu1_e">FORMS</a></li>
+                  <li><a href="http://calder.med.miami.edu/other_libraries.html#" rel="dropmenu2_e">OTHER LIBRARIES</a></li>
+                  <li><a href="http://calder.med.miami.edu/department_and_staff_listings.html">CONTACT US</a></li>
+                  <li><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/myAccountMenu.do?vid=med&fromLink=gotoMyAccountUI">MY ACCOUNT</a></li>
                   <li><img src="http://calder.med.miami.edu/images/biomedlogo.png" alt="Biomedical Communications" width="18" height="18" border="0"><a href="http://calder.med.miami.edu/biomed/index.html" id="biomed-link">BIOMEDICAL COMMUNICATIONS</a></li>
                 </ul><!--end #nav_menu -->
         </div> <!-- end #spum_nav --> 
@@ -136,13 +136,13 @@ $('body').on('click', '.track-me', function() {
 
     <!--1st drop down menu -->                                                   
       <div id="dropmenu1_e" class="dropmenudiv_e">
-        <a href="forms/bib-search.html">Bibliographic Search Request</a>
-        <a href="forms/e-journal_access_problem_form.html">E-Journal Access Problem</a>
-        <a href="forms/general_feedback.html">General Feedback</a>
-        <a href="forms/journal_photocopy_request_patron.html">Interlibrary Loan / <br />&nbsp;Journal Photocopy Request</a>
-        <a href="forms/request_purchase_subscription.html">Purchase / <br />&nbsp;Subscription Request Form</a>
-        <a href="forms/reference_question.html">Reference Question</a>
-        <a href="forms/classregistration2.html">Register for a Class!</a>
+        <a href="http://calder.med.miami.edu/forms/bib-search.html">Bibliographic Search Request</a>
+        <a href="http://calder.med.miami.edu/forms/e-journal_access_problem_form.html">E-Journal Access Problem</a>
+        <a href="http://calder.med.miami.edu/forms/general_feedback.html">General Feedback</a>
+         <a href="http://calder.med.miami.edu/forms/journal_photocopy_request_patron.html">Interlibrary Loan / <br />&nbsp;Journal Photocopy Request</a>
+        <a href="http://calder.med.miami.edu/forms/request_purchase_subscription.html">Purchase / <br />&nbsp;Subscription Request Form</a>
+        <a href="http://calder.med.miami.edu/forms/reference_question.html">Reference Question</a>
+        <a href="http://calder.med.miami.edu/forms/classregistration2.html">Register for a Class!</a>
       </div>
                 
         
@@ -150,7 +150,6 @@ $('body').on('click', '.track-me', function() {
       <div id="dropmenu2_e" class="dropmenudiv_e" style="width: 320px;">
         <a href="http://bascompalmer.org/physician-resources/library-services">Mary and Edward Norton Library of Ophthalmology</a>
         <a href="http://library.miami.edu/">Otto G. Richter Library</a>
-        <a href="http://www6.miami.edu/mh-library/">Pomerance Library and Resource Center</a>
         <a href="http://library.miami.edu/rsmaslib/">Rosenstiel School of Marine and Atmospheric <br />&nbsp;Science Library</a>
         <a href="http://www.law.miami.edu/library/">University of Miami Law Library</a>
         <a href="http://calder.med.miami.edu/umhlibrary">University of Miami Hospital Library</a>        
