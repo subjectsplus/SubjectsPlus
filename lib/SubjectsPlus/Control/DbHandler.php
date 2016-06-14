@@ -73,10 +73,12 @@ class DbHandler {
 
 				if (isset ( $subject_id )) {
 					// get title ids in pluslets' resource token connected to subject
+					// I don't know the purpose of this, so I zeroed it out below by resetting the $lobjTitleIds array --agd
+					
 					$lobjGuide = new Guide ( $subject_id );
 					$lobjTitleIds = $lobjGuide->getRelatedTitles ();
 
-
+					$lobjTitleIds = array();
 					if (count($lobjTitleIds) > 0) {
 
 						$connection = $db->getConnection ();
