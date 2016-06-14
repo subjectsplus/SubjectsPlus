@@ -41,6 +41,46 @@ if( !file_exists( "includes/config.php" ) || filesize( "includes/config.php" ) <
 
 require_once("includes/config.php");
 
+// Let's start by making sure they aren't using Shibboleth; if someone is in Shibboleth, but not in SP, they could land on this page
+$use_shibboleth = TRUE;
+if (isset($use_shibboleth) && $use_shibboleth == TRUE) {
+
+    $message = "<h2>" . _("Shibboleth Authentication Error") . "</h2>
+    <p>" . _("If you are seeing this page, please contact the")  . " <a href=\"mailto:$administrator_email\">" .("SubjectsPlus Admin") . "</a>.</p>
+    <p>" . _("Perhaps you have not yet been entered as a user into SubjectsPlus, or your email address has changed since you were entered.") . "</p>";
+
+$logo = "<img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" border=\"0\" />\n
+<br />";
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
+        <title>Shibboleth Failure</title>
+    </head>
+
+<body id="controlpage">
+
+    <div style="margin: 4em auto; width: 500px;">
+<?php
+
+makePluslet($logo, $message,"");
+?>
+
+</div>
+
+</body>
+</html>
+
+<?php 
+
+
+    exit;
+}
+
 //added in order to redirect to proper page if we cannot connect to mySQL database
 if( !isset($tryDB) || $tryDB != 'no')
 {
