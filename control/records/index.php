@@ -155,10 +155,19 @@ if ($alpha_id & $full_query) {
 
             $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
+            if($myrow['eres_display']  == 'Y') {
+                $az_star = "<i class=\"fa fa-star\"></i>";
+            } else {
+                $az_star = "<i class=\"fa fa-star-o\"></i>";
+            }
+
+            $record_url = $myrow['location'];
+            $link_tooltip = '<span style="float:right;" class="tooltip_wrapper"><i class="fa fa-link"></i> <span class="tooltip">'.$record_url.'</span></span>';
+
             // weed out extraneous P tags
             $blurb = stripP($blurb);
 
-            $results .= "<div class=\"record-results $row_colour\">&nbsp;&nbsp;<i class=\"fa fa-star\"></i> <a href=\"record.php?record_id=$id\" class=\"record-label\">$label</a>\n";
+            $results .= "<div class=\"record-results $row_colour\">&nbsp;&nbsp; $az_star  <a href=\"record.php?record_id=$id\" class=\"record-label\" title=\"$label\">$label</a> $link_tooltip\n";
    
         $results .= "</div>\n";
 
