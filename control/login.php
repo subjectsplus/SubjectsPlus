@@ -42,7 +42,7 @@ if( !file_exists( "includes/config.php" ) || filesize( "includes/config.php" ) <
 require_once("includes/config.php");
 
 // Let's start by making sure they aren't using Shibboleth; if someone is in Shibboleth, but not in SP, they could land on this page
-$use_shibboleth = TRUE;
+
 if (isset($use_shibboleth) && $use_shibboleth == TRUE) {
 
     $message = "<h2>" . _("Shibboleth Authentication Error") . "</h2>
