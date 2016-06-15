@@ -3478,8 +3478,15 @@ div.tooltip div
 
 .record-results {
   clear: both; float: left; width: 98%; padding: 3px 5px;
-
 }
+
+.record-results .fa-star, .record-results .fa-star-o {margin: 5px 8px 5px 0; }
+.record-results .fa-star {color: #c03957;}
+.record-results .fa-star-o {color:#999;}
+
+.record-results .tooltip_wrapper {background-color: transparent; color: #333; font-size: 14px;}
+
+
 
 .record-label {
 
