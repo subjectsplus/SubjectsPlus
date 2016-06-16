@@ -447,7 +447,7 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                         <li><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/login.do?loginFn=signin&vid=uml&targetURL=http:%2F%2Fmiami-primo.hosted.exlibrisgroup.com%2Fprimo_library%2Flibweb%2Faction%2Fsearch.do%3Fvid%3Duml%26amp;dscnt%3D0%26amp;afterTimeout%3DE08029BDF7C2992FC31D8ACB97398E2E%26amp;dstmp%3D1463604331494%26amp;initializeIndex%3Dtrue&isMobile=false">MyLibrary</a></li>                        
                         <li><a href="https://www.courses.miami.edu/webapps/login/">Blackboard</a></li>
                         <li><a href="https://triton.library.miami.edu/">ILLiad (Interlibrary Loan)</a></li>
-                        <li><a href="http://illweb.library.miami.edu/aeon/logon.html">Aeon</a></li>
+                        <li><a href="https://aeon.library.miami.edu/aeon/">Aeon</a></li>
                         <li class="last"><a href="https://myum.miami.edu/">MyUM</a></li>
                       </ul>
                       <ul>
