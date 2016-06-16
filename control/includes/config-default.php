@@ -352,4 +352,57 @@ define("PATH_TO_SP", $BaseURL);
 // If yes, enter the short form
 $guide_index_page = "";
 
+
+////////////////////////
+// Primo Pluslet Config
+////////////////////////
+$primo_flyout_icon_name = "uSearch";
+
+//must be set to invidual institution's primo settings
+//if action, institution_code, vid, and select_tags are not set correctly, primo search will not work
+$primo_action           = "";
+$primo_institution_code = "";
+$primo_vid              = "";
+$primo_select_tabs = array(
+
+    'electronic' => array(
+        'value'        => 'primo_central',
+        'id'           => 'primo_central',
+        'name'         => 'primo_central',
+        'label'        => 'Electronic Resources',
+        'search_scope' => 'Primo_Central'
+    ),
+
+    'catalog' => array(
+        'value'        => 'default_tab',
+        'id'           => 'default_tab',
+        'name'         => 'default_tab',
+        'label'        => 'Library Catalog',
+        'search_scope' => 'default_scope'
+    ),
+
+    'everything' => array(
+        'value'        => 'everything',
+        'id'           => 'everything_tab',
+        'name'         => 'everything_tab',
+        'label'        => 'Everything',
+        'search_scope' => 'Everything'
+    ),
+
+);
+
+//search options
+$primo_mode = "Basic";
+$primo_srt  = "rank";
+
+//primo hidden fields
+$primo_displayMode        = "full";
+$primo_bulkSize           = "10";
+$primo_highlight          = "true";
+$primo_dum                = "true";
+$primo_displayField       = "all";
+$primo_pcAvailabilityMode = "false";
+
+
+
 ?>
