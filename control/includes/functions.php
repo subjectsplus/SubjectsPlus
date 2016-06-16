@@ -892,8 +892,12 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
       $name_id = explode("@", $email);
 
       if ($mod_rewrite == 1) {
-        //$linky = "/subjects/profile/" . $name_id[0]; // um custom
-        $linky = $linky = "staff/" . $name_id[0];
+        if(isset($institution_code) && $institution_code == "um") {
+          $linky = "/subjects/profile/" . $name_id[0]; // um custom
+        } else {
+          $linky = $linky = "staff/" . $name_id[0];
+        }
+        
       } else {
         $linky = "staff_details.php?name=" . $name_id[0];
       }
