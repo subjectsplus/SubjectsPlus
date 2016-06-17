@@ -162,7 +162,7 @@ if ($alpha_id & $full_query) {
             }
 
             $record_url = $myrow['location'];
-            $link_tooltip = '<span style="float:right;" class="tooltip_wrapper"><i class="fa fa-link"></i> <span class="tooltip">'.$record_url.'</span></span>';
+            $link_tooltip = '<span style="float:right;" class="tooltip_wrapper"><a href="'.$record_url.'" target="_blank"> <i class="fa fa-link"></i> <span class="tooltip">'.$record_url.'</span></a></span>';
 
             // weed out extraneous P tags
             $blurb = stripP($blurb);
