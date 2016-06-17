@@ -140,6 +140,7 @@ if ($alpha_id & $full_query) {
 
     
     $full_result = $db->query($full_query);
+    $record_count = count($full_result);
 
     $row_count = 0;
     $colour1 = "oddrow";
@@ -181,6 +182,7 @@ if ($alpha_id & $full_query) {
 $letter_header_body = "<div align=\"center\" style=\"font-size: 1.2em;\">$atoz</div>\n
 <div align=\"center\" class=\"ctag_list\">$tag_list</div>
 <h2 align=\"center\">$alpha_id</h2>
+<p>Record count: $record_count</p>
 $results
 
 ";
