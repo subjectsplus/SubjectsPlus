@@ -140,6 +140,7 @@ if ($alpha_id & $full_query) {
 
     
     $full_result = $db->query($full_query);
+    $record_count = count($full_result);
 
     $row_count = 0;
     $colour1 = "oddrow";
@@ -162,7 +163,7 @@ if ($alpha_id & $full_query) {
             }
 
             $record_url = $myrow['location'];
-            $link_tooltip = '<span style="float:right;" class="tooltip_wrapper"><i class="fa fa-link"></i> <span class="tooltip">'.$record_url.'</span></span>';
+            $link_tooltip = '<span style="float:right;" class="tooltip_wrapper"><a href="'.$record_url.'" target="_blank"> <i class="fa fa-link"></i> <span class="tooltip">'.$record_url.'</span></a></span>';
 
             // weed out extraneous P tags
             $blurb = stripP($blurb);
@@ -181,6 +182,7 @@ if ($alpha_id & $full_query) {
 $letter_header_body = "<div align=\"center\" style=\"font-size: 1.2em;\">$atoz</div>\n
 <div align=\"center\" class=\"ctag_list\">$tag_list</div>
 <h2 align=\"center\">$alpha_id</h2>
+<p>Record count: $record_count</p>
 $results
 
 ";
