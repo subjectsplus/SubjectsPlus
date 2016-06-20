@@ -20,7 +20,11 @@ if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subject
 
 // Now, check if they want to use an SP guide as the splash page
 if (isset($guide_index_page) && $guide_index_page != "") { 
-  header("Location:" . $guide_path . $guide_index_page); 
+  if (isset($mod_rewrite) && $mod_rewrite == TRUE) {
+    header("Location:" . $guide_path . $guide_index_page); 
+  } else {
+    header("Location:" . $guide_path . "guide.php?subject=" . $guide_index_page); 
+  }
 }
 
 $use_jquery = array("ui");
