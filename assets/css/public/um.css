@@ -1238,7 +1238,7 @@ div.video_thumb img {
 
 
 /* TOC Pluslet - Front-end */
-h4.table-of-contents-header {margin: 10px 0 8px 0; font-weight: bold; font-size:1.1em;}
+h4.table-of-contents-header {margin: 10px 0 8px 0; font-weight: bold; font-size: 1.05em; line-height: 1.2em;} 
 
 h4.table-of-contents-header a:link {text-decoration: none;}
 h4.table-of-contents-header a:hover {text-decoration: underline;}
