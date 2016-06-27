@@ -147,7 +147,7 @@ a:hover {text-decoration: underline;}
 #tabs .pluslet li a, #tabs .pluslet_simple li a {color: #40659b;}
 #tabs .pluslet li a:hover, #tabs .pluslet_simple li a:hover {background-color:transparent; color: #40659b;}
 
-
+div.printer_no_tabs {padding-top: 5px;}
 
 #topsearch_button2 {
     background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
