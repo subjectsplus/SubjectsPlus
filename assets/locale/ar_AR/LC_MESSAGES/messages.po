@@ -1,23 +1,11 @@
-#: control/edit-config.php:79 control/edit-config.php:120
-#: control/includes/functions.php:1633
-#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:608
 msgid ""
 msgstr ""
-"Project-Id-Version: دليل المكتبات 4 SubjectsPlus\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-27 09:35-0400\n"
-"PO-Revision-Date: 2016-05-24 10:18+0300\n"
-"Last-Translator: دينا هاشم - مؤسسة تقنية المعارف للتجارة  <massoud@kwareict."
-"com>\n"
-"Language-Team: KnowledgWare Team <massoud@kwareict.com>\n"
-"Language: ar_SA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"domain: messages\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: SubjectsPlus\n"
+"Language: ar\n"
 
 #: ckeditor/php/uploader.php:193
 msgid "Could not upload file to user\\'s assets folder."
@@ -39,12 +27,8 @@ msgstr "المستخدم غير مُسجل الدخول."
 #: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:92
 #: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:122
 #: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:140
-msgid ""
-"<strong>Tick</strong> the boxes of any FAQs you want to include in your "
-"pluslet and hit <strong>OK</strong>."
-msgstr ""
-"<strong>قم بتحديد</strong> المربعات لأي من الأسئلة الشائعة التي ترغب في "
-"إدراجها في pluslet وقم بالضغط على<strong>موافق</strong>."
+msgid "<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>."
+msgstr "<strong>قم بتحديد</strong> المربعات لأي من الأسئلة الشائعة التي ترغب في إدراجها في pluslet وقم بالضغط على<strong>موافق</strong>."
 
 #: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:85
 #: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:115
@@ -53,13 +37,8 @@ msgid "There are no results.  You'll need to try something different."
 msgstr "لا توجد نتائج. سوف تحتاج إلى تجربة شيء مختلف"
 
 #: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:152
-msgid ""
-"You don't have any FAQs associated with this subject yet.  Maybe click "
-"Browse by Subject or Browse by Collection, above, to see what else is out "
-"there."
-msgstr ""
-"لا يوجد لديك أي أسئلة شائعة مرتبطة بهذا الموضوع بعد. ربما يمكنك النقر على "
-"اعرض حسب الموضوع أو حسب الحاوية أعلاه لرؤية ما يوجد هناك."
+msgid "You don't have any FAQs associated with this subject yet.  Maybe click Browse by Subject or Browse by Collection, above, to see what else is out there."
+msgstr "لا يوجد لديك أي أسئلة شائعة مرتبطة بهذا الموضوع بعد. ربما يمكنك النقر على اعرض حسب الموضوع أو حسب الحاوية أعلاه لرؤية ما يوجد هناك."
 
 #: ckeditor/plugins/subsplus_resource/php/getResourceRadioListSearch.php:42
 msgid "There were no results matching your query."
@@ -98,9 +77,7 @@ msgid "Permissions Updated."
 msgstr "تم تحديث الصلاحيات."
 
 #: control/admin/admin_bits.php:176
-msgid ""
-"Your request cannot be completed:  There are one or more librarians "
-"associated with this subject"
+msgid "Your request cannot be completed:  There are one or more librarians associated with this subject"
 msgstr "لا يمكن إتمام طلبك:لا يوجد مكتبي أو أكثر مرتبط بهذا الموضوع"
 
 #: control/admin/admin_bits.php:183 control/admin/departments.php:43
@@ -108,23 +85,15 @@ msgid "Thy Will Be Done.  Department list updated."
 msgstr "ابشر بما يرضيك. تم تحديث قائمة الإدارات."
 
 #: control/admin/admin_bits.php:203
-msgid ""
-"Your request cannot be completed:  There are one or more records linked to "
-"this item.  Please unlink them--you can find them under FAQ > Browse by "
-"Subject, Browse by Collection. "
-msgstr ""
-"لا يمكن إتمام طلبك: يوجد تسجيلة أو أكثر مرتبطة بهذا المادة. الرجاء فك "
-"الارتباط بينهم. يمكن أن تجدهم تحت أسئلة شائعة > تصفح بالموضوع، تصفح "
-"بالمجموعة."
+msgid "Your request cannot be completed:  There are one or more records linked to this item.  Please unlink them--you can find them under FAQ > Browse by Subject, Browse by Collection. "
+msgstr "لا يمكن إتمام طلبك: يوجد تسجيلة أو أكثر مرتبطة بهذا المادة. الرجاء فك الارتباط بينهم. يمكن أن تجدهم تحت أسئلة شائعة > تصفح بالموضوع، تصفح بالمجموعة."
 
 #: control/admin/admin_bits.php:213
 msgid "Thy Will Be Done.  Offending item removed."
 msgstr "ابشر بما يرضيك. تم حذف المادة المسيئة."
 
 #: control/admin/admin_bits.php:228 control/admin/admin_bits.php:255
-msgid ""
-"Your request cannot be completed:  There are one or more records linked to "
-"this source"
+msgid "Your request cannot be completed:  There are one or more records linked to this source"
 msgstr "لا يمكن إتمام طلبك: لا يوجد تسجيلة أو أكثر مرتبطة بهذا المصدر"
 
 #: control/admin/admin_bits.php:238 control/admin/sources.php:40
@@ -169,12 +138,8 @@ msgid "Remove"
 msgstr "أجذف "
 
 #: control/admin/departments.php:131
-msgid ""
-"Enter department name, telephone number, email, website url.  Drag "
-"departments to change display order."
-msgstr ""
-"قم بإدخال اسم القسم ورقم الهاتف والبريد الإلكتروني و URL موقع الويب. قم بسحب "
-"الأقسام لتغيير ترتيب العرض."
+msgid "Enter department name, telephone number, email, website url.  Drag departments to change display order."
+msgstr "قم بإدخال اسم القسم ورقم الهاتف والبريد الإلكتروني و URL موقع الويب. قم بسحب الأقسام لتغيير ترتيب العرض."
 
 #: control/admin/departments.php:132 control/admin/disciplines.php:96
 #: control/admin/faq_collections.php:105
@@ -232,11 +197,8 @@ msgid "Thy Will Be Done.  discipline list updated."
 msgstr "ابشر بما يرضيك. تم تحديث قائمة المصادر."
 
 #: control/admin/disciplines.php:98
-msgid ""
-"NOTE:  Disciplines were added to facilitate Serials Solution ingest of "
-"data.  This original set was provided by SerSol in Nov 2012. \n"
-"    If you are a SerSol customer, you might not want to change these.  Sort "
-"may or may not be implemented in your version of SP."
+msgid "NOTE:  Disciplines were added to facilitate Serials Solution ingest of data.  This original set was provided by SerSol in Nov 2012. \n"
+"    If you are a SerSol customer, you might not want to change these.  Sort may or may not be implemented in your version of SP."
 msgstr "ملاحظة: "
 
 #: control/admin/disciplines.php:100
@@ -268,8 +230,7 @@ msgid "Thy Will Be Done.  Updated."
 msgstr "أبشر بما يرضيك. تم التحديث."
 
 #: control/admin/faq_collections.php:41
-msgid ""
-"Thwarted!  Something has gone wrong with the insert.  Contact the admin."
+msgid "Thwarted!  Something has gone wrong with the insert.  Contact the admin."
 msgstr "فشل! لقد حدث خطأ ما في هذا الإدخال. يرجى الاتصال بالإدارة"
 
 #: control/admin/faq_collections.php:107
@@ -316,19 +277,10 @@ msgid "Add"
 msgstr "أضف"
 
 #: control/admin/guide_collections.php:163
-msgid ""
-"<p>You can create 'collections' as a way of grouping together similar "
-"guides, and presenting them separately from the \n"
-"    full list of guides.  E.g., you want guides only for your music library."
-"</p><p>You can add a new collection below, and then add guides\n"
-"    to your collection via the dropdown list.  You can rearrange the order "
-"of guides within a collection by dragging them.</p>"
-msgstr ""
-"<p>يمكنك إنشاء \"مجموعات\" كطريقة لتجميع الأدلة المتشابهة أو ذات العلاقة، "
-"وتقديمها بشكل منفصل من قائمة الأدلة الكاملة. على سبيل المثال، تريد أدلة فقط "
-"لمكتبتك الفقهية.</p><p>يمكنك إضافة مجموعة جديدة أدناه، ومن ثم إضافة أدلة إلى "
-"مجموعتك عن طريق القائمة المنسدلة.  يمكنك إعادة ترتيب الأدلة داخل مجموعة عن "
-"طريق سحبها.</p>"
+msgid "<p>You can create 'collections' as a way of grouping together similar guides, and presenting them separately from the \n"
+"    full list of guides.  E.g., you want guides only for your music library.</p><p>You can add a new collection below, and then add guides\n"
+"    to your collection via the dropdown list.  You can rearrange the order of guides within a collection by dragging them.</p>"
+msgstr "<p>يمكنك إنشاء \"مجموعات\" كطريقة لتجميع الأدلة المتشابهة أو ذات العلاقة، وتقديمها بشكل منفصل من قائمة الأدلة الكاملة. على سبيل المثال، تريد أدلة فقط لمكتبتك الفقهية.</p><p>يمكنك إضافة مجموعة جديدة أدناه، ومن ثم إضافة أدلة إلى مجموعتك عن طريق القائمة المنسدلة.  يمكنك إعادة ترتيب الأدلة داخل مجموعة عن طريق سحبها.</p>"
 
 #: control/admin/guide_collections.php:170 control/guides/create_record.php:23
 #: lib/SubjectsPlus/Control/Guide.php:455
@@ -522,8 +474,7 @@ msgid "Show inactive users"
 msgstr "أعرض المستخدمين الغير نشطين"
 
 #: control/admin/user.php:78
-msgid ""
-"None registered.  Just as well.  They're going to rise up against us someday."
+msgid "None registered.  Just as well.  They're going to rise up against us someday."
 msgstr "غير مسجل. أيضا. سوف يثورون ضدنا يوما ما."
 
 #: control/admin/user.php:81
@@ -539,37 +490,21 @@ msgid "Options"
 msgstr "خيارات"
 
 #: control/admin/user.php:149
-msgid ""
-"Select which parts of SubjectsPlus this user may access.\n"
-"                <p><strong>records</strong> allows access to both the Record "
-"and Guide tabs.\n"
-"                <p><strong>eresource_mgr</strong> allows the user to see all "
-"the information about a Record (and delete it), and quickly see all guides.\n"
-"                <p><strong>admin</strong> allows access to the overall admin "
-"of the site.\n"
-"                <p><strong>librarian</strong> means user shows up in lists "
-"of librarians.\n"
-"                <p><strong>supervisor</strong> means user shows up in list "
-"of supervisors\n"
-"                <p><strong>view_map</strong> lets user see the map of where "
-"everyone lives.  Probably only for muckymucks.  Might not be implemented on "
-"your site; check wiki for help.\n"
+msgid "Select which parts of SubjectsPlus this user may access.\n"
+"                <p><strong>records</strong> allows access to both the Record and Guide tabs.\n"
+"                <p><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.\n"
+"                <p><strong>admin</strong> allows access to the overall admin of the site.\n"
+"                <p><strong>librarian</strong> means user shows up in lists of librarians.\n"
+"                <p><strong>supervisor</strong> means user shows up in list of supervisors\n"
+"                <p><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.  Might not be implemented on your site; check wiki for help.\n"
 "                "
-msgstr ""
-"إختر أي جزء من موضوعات بلس يمكن لهذا المستخدم الوصول اليه.\n"
-"                <p><strong>التسجيلات</strong> تسمح الوصول الى ألسنة كل من "
-"التسجيلة والدليلً.\n"
-"                <p><strong>مدير_الموارد_الإلكترونية</strong> تسمح برؤية كافة "
-"المعلومات حول التسجيلة (وحذفها) ورؤية جميع الأدلة بسرعة أيضا.\n"
-"                <p><strong>مدير</strong>  تسمح الوصول الى إدارة الموقع بشكل "
-"شامل. \n"
-"                <p><strong>أخصائي مكتبات</strong>  تعني ظهور المستخدم في "
-"قوائم أخصائي المكتبات. \n"
-"                <p><strong>مشرف</strong> تعني ظهور المستخدم في قوائم "
-"المشرفين\n"
-"                <p><strong>عرض_الخريطة</strong> تتيح للمستخدم مشاهدة أين "
-"يعيش كل شخص على الخريطة. ربما فقط لمواقف نادرة. لربما لم يتم تنفيذها في "
-"موقعك؛ ننصح بالرجوع الى الوكي للحصول الى المساعدة. \n"
+msgstr "إختر أي جزء من موضوعات بلس يمكن لهذا المستخدم الوصول اليه.\n"
+"                <p><strong>التسجيلات</strong> تسمح الوصول الى ألسنة كل من التسجيلة والدليلً.\n"
+"                <p><strong>مدير_الموارد_الإلكترونية</strong> تسمح برؤية كافة المعلومات حول التسجيلة (وحذفها) ورؤية جميع الأدلة بسرعة أيضا.\n"
+"                <p><strong>مدير</strong>  تسمح الوصول الى إدارة الموقع بشكل شامل. \n"
+"                <p><strong>أخصائي مكتبات</strong>  تعني ظهور المستخدم في قوائم أخصائي المكتبات. \n"
+"                <p><strong>مشرف</strong> تعني ظهور المستخدم في قوائم المشرفين\n"
+"                <p><strong>عرض_الخريطة</strong> تتيح للمستخدم مشاهدة أين يعيش كل شخص على الخريطة. ربما فقط لمواقف نادرة. لربما لم يتم تنفيذها في موقعك؛ ننصح بالرجوع الى الوكي للحصول الى المساعدة. \n"
 "                "
 
 #: control/admin/user.php:158
@@ -581,18 +516,12 @@ msgid "There is no record by that ID."
 msgstr "لا توجد تسجيلة بهذا المعرّف."
 
 #: control/admin/user.php:295
-msgid ""
-"We're really going to miss that staff person.  Search above to delete "
-"someone else!"
+msgid "We're really going to miss that staff person.  Search above to delete someone else!"
 msgstr "سنفتقد بالتأكيد هذا الموظف. ابحث أعلاه لحذف شخص آخر!"
 
 #: control/edit-config.php:35 control/setup-config.php:67
-msgid ""
-"Sorry, but I can't write to the <code>config.php</code> file. Please change "
-"permissions."
-msgstr ""
-"عذراً، ولكن لا أستطيع الكتابة في الملف <code>config.php</code>. الرجاء غيّر "
-"الصلاحيات."
+msgid "Sorry, but I can't write to the <code>config.php</code> file. Please change permissions."
+msgstr "عذراً، ولكن لا أستطيع الكتابة في الملف <code>config.php</code>. الرجاء غيّر الصلاحيات."
 
 #: control/edit-config.php:52 control/install.php:50
 #: control/setup-config.php:93
@@ -699,15 +628,8 @@ msgstr "لاتصال _الطوارئ"
 
 #: control/edit-config.php:54 control/install.php:52
 #: control/setup-config.php:95
-msgid ""
-"The 'User Form' controls who may access SubjectsPlus and what permissions "
-"they have.  Some fields are necessary for SubjectsPlus to work; these may be "
-"safely turned off if you don't want to capture or display this information."
-msgstr ""
-"يتحكم \"نموذج المستخدم\" بمن يستطيع الوصول الى موضوعات بلس وطبيعة الصلاحيات "
-"التي يمكن الحصول عليها. بعض تلك الحقول مطلوب تعبئتها ليعمل موضوعات بلس؛ ومن "
-"الممكن اخفائها لأسباب أمنية اذا رأيت عدم الحاجة الى الحصول على تلك المعلومات "
-"من من قبل المستخدم أو عرضها عليه."
+msgid "The 'User Form' controls who may access SubjectsPlus and what permissions they have.  Some fields are necessary for SubjectsPlus to work; these may be safely turned off if you don't want to capture or display this information."
+msgstr "يتحكم \"نموذج المستخدم\" بمن يستطيع الوصول الى موضوعات بلس وطبيعة الصلاحيات التي يمكن الحصول عليها. بعض تلك الحقول مطلوب تعبئتها ليعمل موضوعات بلس؛ ومن الممكن اخفائها لأسباب أمنية اذا رأيت عدم الحاجة الى الحصول على تلك المعلومات من من قبل المستخدم أو عرضها عليه."
 
 #: control/edit-config.php:56 control/install.php:54
 #: control/setup-config.php:97
@@ -758,9 +680,7 @@ msgstr "طول الارتفاع"
 
 #: control/edit-config.php:58 control/install.php:56
 #: control/setup-config.php:99
-msgid ""
-"These fields may be required, i.e., the form cannot be submitted until they "
-"are completed."
+msgid "These fields may be required, i.e., the form cannot be submitted until they are completed."
 msgstr "هذه الحقول ربما مطلوبة، لذلك لا يمكن تقديم النموذج قبل اكمالها."
 
 #: control/edit-config.php:60
@@ -787,12 +707,8 @@ msgstr "هذه الطرق المختلفة التي بها يمكنك ترتيب
 
 #: control/edit-config.php:62 control/install.php:58
 #: control/setup-config.php:101
-msgid ""
-"You may add new types at any time.  If you change an existing type, you will "
-"need to update all items in subjects table by hand/SQL query."
-msgstr ""
-"يمكنك إضافة أنواع جديدة في أي وقت. في حال غيرت نوع موجود سابقاً، عليك تحديث "
-"جميع المواد في جدول الموضوعات يدويا، أو من خلال كويري SQL."
+msgid "You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query."
+msgstr "يمكنك إضافة أنواع جديدة في أي وقت. في حال غيرت نوع موجود سابقاً، عليك تحديث جميع المواد في جدول الموضوعات يدويا، أو من خلال كويري SQL."
 
 #: control/edit-config.php:64
 msgid "Use Shibboleth"
@@ -803,9 +719,7 @@ msgid "This option controls whether Shibboleth will be used for logging in."
 msgstr "يتحكم هذا الاختيار فيما لو سوف يتم استخدام Shibboleth للدخول."
 
 #: control/edit-config.php:64
-msgid ""
-"This checks the staff email with the server variables returned from "
-"Shibboleth."
+msgid "This checks the staff email with the server variables returned from Shibboleth."
 msgstr "تفحص هذه بريد الموظفين مع متغيرات الخادم التي رجعت من Shibboleth."
 
 #: control/edit-config.php:66
@@ -827,21 +741,13 @@ msgstr "وسوم المادة"
 
 #: control/edit-config.php:68 control/install.php:60
 #: control/setup-config.php:103
-msgid ""
-"These are the tags that a given record location can have associated with it."
+msgid "These are the tags that a given record location can have associated with it."
 msgstr "هذه الوسوم التي يمكن ربطها بمكان تسجيلة مُعطاه "
 
 #: control/edit-config.php:68 control/install.php:60
 #: control/setup-config.php:103
-msgid ""
-"Record tags are a way of slicing and dicing the total set of records.  If "
-"you add a new tag, you will need to add new code to deal with items with "
-"this tag.  Adding a tag by itself will do nothing except make that tag show "
-"up in some places."
-msgstr ""
-"وسوم التسجيلة هي احدى الطرق المستخدمة في تقطيع وتفصيل المجموعة الكلية "
-"للتسجيلات. في حال أضفت وسم جديد، عليك إضافة كود جديد للتعامل مع المواد بذلك "
-"الوسم. مجرد إضافة وسم فقط لن يعمل شئ أكثر من عرض ذلك الوسم في بعض الأماكن."
+msgid "Record tags are a way of slicing and dicing the total set of records.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places."
+msgstr "وسوم التسجيلة هي احدى الطرق المستخدمة في تقطيع وتفصيل المجموعة الكلية للتسجيلات. في حال أضفت وسم جديد، عليك إضافة كود جديد للتعامل مع المواد بذلك الوسم. مجرد إضافة وسم فقط لن يعمل شئ أكثر من عرض ذلك الوسم في بعض الأماكن."
 
 #: control/edit-config.php:70 control/install.php:62
 #: control/setup-config.php:105
@@ -850,11 +756,8 @@ msgstr "وسوم الفيديو"
 
 #: control/edit-config.php:70 control/install.php:62
 #: control/setup-config.php:105
-msgid ""
-"These are the tags that a given video can have associated with it. These are "
-"used for the videos module."
-msgstr ""
-"هذه الوسوم التي يمكن ارتباط فيديو ما بها. تسخدم هذه الوسوم لوحدة الفيديو."
+msgid "These are the tags that a given video can have associated with it. These are used for the videos module."
+msgstr "هذه الوسوم التي يمكن ارتباط فيديو ما بها. تسخدم هذه الوسوم لوحدة الفيديو."
 
 #: control/edit-config.php:72
 msgid "Talkback Site Tag"
@@ -862,23 +765,13 @@ msgstr "صفحة استفسار من مستفيد العامة"
 
 #: control/edit-config.php:72 control/install.php:64
 #: control/setup-config.php:107
-msgid ""
-"These are the tags associated with TalkBack entries. The default is to email "
-"all talkbacks to administrator email. Edit only if you want to change that "
-"or add a branch."
-msgstr ""
-"هذه الوسوم التي يمكن ربط استفسار من مستفيد بها. المفترض عمله هو ارسال جميع "
-"الاستفسارات من مستفيد الى المدير عبر الإيميل. قم بالتحرير في حال أردت أن "
-"تغير هذا العمل أو أردت ان تضيف فرع."
+msgid "These are the tags associated with TalkBack entries. The default is to email all talkbacks to administrator email. Edit only if you want to change that or add a branch."
+msgstr "هذه الوسوم التي يمكن ربط استفسار من مستفيد بها. المفترض عمله هو ارسال جميع الاستفسارات من مستفيد الى المدير عبر الإيميل. قم بالتحرير في حال أردت أن تغير هذا العمل أو أردت ان تضيف فرع."
 
 #: control/edit-config.php:73 control/install.php:65
 #: control/setup-config.php:108
-msgid ""
-"e.g. To make a main branch sending to admin email and branch1 branch sent to "
-"specified email -> 'main=,branch1=example@branch1.edu'"
-msgstr ""
-"مثلا، لجعل فرع رئيسي يرسل الى ايميل مدير والفرع فرع1 يرسل الى ايميل معين  -> "
-"'main=,branch1=example@branch1.edu'"
+msgid "e.g. To make a main branch sending to admin email and branch1 branch sent to specified email -> 'main=,branch1=example@branch1.edu'"
+msgstr "مثلا، لجعل فرع رئيسي يرسل الى ايميل مدير والفرع فرع1 يرسل الى ايميل معين  -> 'main=,branch1=example@branch1.edu'"
 
 #: control/edit-config.php:75
 msgid "Talkback Topic Tags"
@@ -889,15 +782,8 @@ msgid "These are the tags that a given talkback can have associated with it."
 msgstr "هذه الوسوم التي من الممكن ربط استفسار من مستفيد ما بها."
 
 #: control/edit-config.php:75
-msgid ""
-"Talkback tags are a way of slicing and dicing the total set of talkbacks.  "
-"If you add a new tag, you will need to add new code to deal with items with "
-"this tag.  Adding a tag by itself will do nothing except make that tag show "
-"up in some places."
-msgstr ""
-"وسوم استفسار من مستفيد هي احدى الطرق المستخدمة في تقطيع وتفصيل الاستفسارات "
-"من مستفيد. في حال أضفت وسم جديد، عليك إضافة كود جديد للتعامل مع المواد بذلك "
-"الوسم. مجرد إضافة وسم فقط لن يعمل شيء أكثر من عرض ذلك الوسم في بعض الأماكن."
+msgid "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places."
+msgstr "وسوم استفسار من مستفيد هي احدى الطرق المستخدمة في تقطيع وتفصيل الاستفسارات من مستفيد. في حال أضفت وسم جديد، عليك إضافة كود جديد للتعامل مع المواد بذلك الوسم. مجرد إضافة وسم فقط لن يعمل شيء أكثر من عرض ذلك الوسم في بعض الأماكن."
 
 #: control/edit-config.php:77
 msgid "Titlebar Styles"
@@ -908,9 +794,7 @@ msgid "These are the styles that can be issued to a pluslet titlebars."
 msgstr "هناك عدة ستايلات يمكن اعتمادها لأشرطة عناوين العناصر."
 
 #: control/edit-config.php:77
-msgid ""
-"This allows titlebars to have custom styles with custom keys for subject "
-"guide creator to make."
+msgid "This allows titlebars to have custom styles with custom keys for subject guide creator to make."
 msgstr "هذا يسمح لأشرطة العنوان  "
 
 #: control/edit-config.php:79
@@ -953,12 +837,8 @@ msgstr "أدرج تكامل تخصصات Serials Solutions"
 
 #: control/edit-config.php:82 control/install.php:68
 #: control/setup-config.php:111
-msgid ""
-"If you wish to include your SP guides in Serials Solutions' results--i.e., "
-"you have Summon--you need to use their disciplines."
-msgstr ""
-"في حال رغبت في ادراج أدلة موضوعات بلس ضمن نتائج بحث Serials Solutions-- "
-"مثلا، لديك اشتراك في صمون EDS من إبسكو--عندها عليك استخدام تخصصاتهم."
+msgid "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines."
+msgstr "في حال رغبت في ادراج أدلة موضوعات بلس ضمن نتائج بحث Serials Solutions-- مثلا، لديك اشتراك في صمون EDS من إبسكو--عندها عليك استخدام تخصصاتهم."
 
 #: control/edit-config.php:84
 msgid "Enable the API service (your api key is '"
@@ -1005,61 +885,40 @@ msgid "Have more than one header choice for a guide"
 msgstr "هناك أكثر من خيار ترويسة واحدة لدليل ما"
 
 #: control/edit-config.php:92
-msgid ""
-"Enter a comma separated list of headers.  The header name you put here will "
-"correspond to a header file on the server.  E.g., 'chc' would point to "
-"subjects/includes/header_chc.php"
-msgstr ""
-"أدخل قائمة رؤوس بينهم فواصل. كل اسم رأس تضعه سوف يطتبق ملف رأس في الخادم. "
-"مثلا chc' سوف يشير الى subjects/includes/header_chc.php"
+msgid "Enter a comma separated list of headers.  The header name you put here will correspond to a header file on the server.  E.g., 'chc' would point to subjects/includes/header_chc.php"
+msgstr "أدخل قائمة رؤوس بينهم فواصل. كل اسم رأس تضعه سوف يطتبق ملف رأس في الخادم. مثلا chc' سوف يشير الى subjects/includes/header_chc.php"
 
 #: control/edit-config.php:94
 msgid "Use a theme"
 msgstr "استخدم ثيم"
 
 #: control/edit-config.php:94
-msgid ""
-"Use a child theme to override the default theme.  Enter the directory name "
-"that you've created under subjects/themes/"
-msgstr ""
-"استخدم ثيم فرعي ليتخطى على القيم الافتراضي. أدخل اسم المجلد الذي أنشأته تحت "
-"subjects/themes/"
+msgid "Use a child theme to override the default theme.  Enter the directory name that you've created under subjects/themes/"
+msgstr "استخدم ثيم فرعي ليتخطى على القيم الافتراضي. أدخل اسم المجلد الذي أنشأته تحت subjects/themes/"
 
 #: control/edit-config.php:96
 msgid "Use your own CSS"
 msgstr "استخدم ال CSS الخاصة بك"
 
 #: control/edit-config.php:96
-msgid ""
-"Not to be comfused with 'Use a Theme.'  This will point at your own CSS "
-"instead of the default."
-msgstr ""
-"الرجاء عدم خلط هذه مع \"استخدم ثيم\" ، سوف تشير هذه الى ال CSS بدلا من "
-"الافتراضية."
+msgid "Not to be comfused with 'Use a Theme.'  This will point at your own CSS instead of the default."
+msgstr "الرجاء عدم خلط هذه مع \"استخدم ثيم\" ، سوف تشير هذه الى ال CSS بدلا من الافتراضية."
 
 #: control/edit-config.php:98
 msgid "Use a Guide as your index page"
 msgstr "استخدم دليل بمثابة صفحتك للفهرس"
 
 #: control/edit-config.php:98
-msgid ""
-"If you want one of your guides to be the splash page at /subjects/ , enter "
-"the short form"
-msgstr ""
-"اذا كنت ترغب أن تمثل الصفحة المتدفقة في المجلد /subjects/ أحد أدلتك، أدخل "
-"النموذج المختصر"
+msgid "If you want one of your guides to be the splash page at /subjects/ , enter the short form"
+msgstr "اذا كنت ترغب أن تمثل الصفحة المتدفقة في المجلد /subjects/ أحد أدلتك، أدخل النموذج المختصر"
 
 #: control/edit-config.php:100
 msgid "Collection default image"
 msgstr "صورة الحاوية الافتراضية"
 
 #: control/edit-config.php:100
-msgid ""
-"Set the image that shows by default on a collection page.  You must put this "
-"image in /assets/images/guide_thumbs/"
-msgstr ""
-"حدّد الصورة التي سوف تظهر في صفحة المجموعة افتراضيا. عليك وضع هذه الصورة في /"
-"assets/images/guide_thumbs/"
+msgid "Set the image that shows by default on a collection page.  You must put this image in /assets/images/guide_thumbs/"
+msgstr "حدّد الصورة التي سوف تظهر في صفحة المجموعة افتراضيا. عليك وضع هذه الصورة في /assets/images/guide_thumbs/"
 
 #: control/edit-config.php:102
 msgid "Use URL rewrites"
@@ -1076,12 +935,8 @@ msgstr "الرابط الرئيسي لنسختك من موضوعات بلس"
 
 #: control/edit-config.php:104 control/install.php:70
 #: control/setup-config.php:113
-msgid ""
-"e.g. 'http://www.yoursite.edu/library/sp/.' Make sure to include the "
-"trailing slash! <strong>If changed, you will need to log back in.</strong>"
-msgstr ""
-"مثلا 'http://www.yoursite.edu/library/sp/.' تأكد من ادراج الشرطة اللاحقة "
-"trailing slash! <strong>  لو تغيرت، يجب عليك أن تعيد تسجيل الدخول.</strong>"
+msgid "e.g. 'http://www.yoursite.edu/library/sp/.' Make sure to include the trailing slash! <strong>If changed, you will need to log back in.</strong>"
+msgstr "مثلا 'http://www.yoursite.edu/library/sp/.' تأكد من ادراج الشرطة اللاحقة trailing slash! <strong>  لو تغيرت، يجب عليك أن تعيد تسجيل الدخول.</strong>"
 
 #: control/edit-config.php:106 control/install.php:72
 #: control/setup-config.php:115
@@ -1130,12 +985,8 @@ msgstr "عنوان البريد الإلكتروني لمدير موضوعات �
 
 #: control/edit-config.php:112 control/install.php:78
 #: control/setup-config.php:121
-msgid ""
-"This will appear in footer, and also be used as default email for TalkBack "
-"submissions."
-msgstr ""
-"سوف تظهر هذه في التذييل، وسوف تستخدم بمثابة البريد الإلكتروني لتقديمات "
-"استفسار من مستفيد."
+msgid "This will appear in footer, and also be used as default email for TalkBack submissions."
+msgstr "سوف تظهر هذه في التذييل، وسوف تستخدم بمثابة البريد الإلكتروني لتقديمات استفسار من مستفيد."
 
 #: control/edit-config.php:114 control/install.php:80
 #: control/setup-config.php:123
@@ -1164,11 +1015,8 @@ msgstr "الرمز الذي يسبق رقم التلفون للموظفين. ع�
 
 #: control/edit-config.php:116 control/install.php:82
 #: control/setup-config.php:125
-msgid ""
-"Allows you to put short (non-prefixed) version of phone number on pages "
-"where space is limited."
-msgstr ""
-"يسمح لك بوضع رقم تلفون قصير (غير مسبوق برمز) على صفحات حيث الفراغات محدودة."
+msgid "Allows you to put short (non-prefixed) version of phone number on pages where space is limited."
+msgstr "يسمح لك بوضع رقم تلفون قصير (غير مسبوق برمز) على صفحات حيث الفراغات محدودة."
 
 #: control/edit-config.php:118 control/install.php:84
 #: control/setup-config.php:127
@@ -1236,23 +1084,13 @@ msgstr "قائمة بامتدادات ملفات تم قبول رفعها."
 
 #: control/edit-config.php:128 control/install.php:94
 #: control/setup-config.php:139
-msgid ""
-"This option contains the coma-separated list of accepted file extensions for "
-"file uploads via CKEditor."
-msgstr ""
-"يجوي هذا الخيار على قائمة امتدادات مفصلة بالفواصل للملفات المقبول رفعها من "
-"خلال المحرر CKEditor."
+msgid "This option contains the coma-separated list of accepted file extensions for file uploads via CKEditor."
+msgstr "يجوي هذا الخيار على قائمة امتدادات مفصلة بالفواصل للملفات المقبول رفعها من خلال المحرر CKEditor."
 
 #: control/edit-config.php:128 control/install.php:94
 #: control/setup-config.php:139
-msgid ""
-"If a file isn't in this list, it should not be uploaded.  File uploads only "
-"occur via the admin backend, using CKEditor, but this is to stop a user from "
-"doing something, uh, foolish."
-msgstr ""
-"اذا لم تجد امتداد الملف في هذه القائمة، فيجب عدم رفعه. رفع الملفات عادة تتم "
-"من خلال الإدارة في الخلف، باستخدام CKEditor، ولكن هذا لمنع المستخدم من عمل "
-"شيء قد يكون مضراً. "
+msgid "If a file isn't in this list, it should not be uploaded.  File uploads only occur via the admin backend, using CKEditor, but this is to stop a user from doing something, uh, foolish."
+msgstr "اذا لم تجد امتداد الملف في هذه القائمة، فيجب عدم رفعه. رفع الملفات عادة تتم من خلال الإدارة في الخلف، باستخدام CKEditor، ولكن هذا لمنع المستخدم من عمل شيء قد يكون مضراً. "
 
 #: control/edit-config.php:130 control/install.php:96
 #: control/setup-config.php:141
@@ -1266,24 +1104,16 @@ msgstr "النص الذي يجب استباقه في حال استخدام خا�
 
 #: control/edit-config.php:130 control/install.php:96
 #: control/setup-config.php:141
-msgid ""
-"In the Records tab of SP, if you flag an item as 'restricted,' the proxy "
-"string will be prepended."
-msgstr ""
-"في تاب التسجيلات في موضوعات بلس، اذا تم توسيم مادة ما على أنها \"مقيدة\": "
-"يجب عندها استباق نص مسار البروكسي. "
+msgid "In the Records tab of SP, if you flag an item as 'restricted,' the proxy string will be prepended."
+msgstr "في تاب التسجيلات في موضوعات بلس، اذا تم توسيم مادة ما على أنها \"مقيدة\": يجب عندها استباق نص مسار البروكسي. "
 
 #: control/edit-config.php:132
 msgid "Open String"
 msgstr "افتح النص"
 
 #: control/edit-config.php:132
-msgid ""
-"Used to create a link to an item in your Catalog. Your subject search term "
-"is sandwiched between these two strings"
-msgstr ""
-"تستخدم لإنشاء رابط للوصول الى مادة في فهرسك. سوف يصبح مصطلح البحث الموضوعي "
-"مُحاصر بهذين النصين."
+msgid "Used to create a link to an item in your Catalog. Your subject search term is sandwiched between these two strings"
+msgstr "تستخدم لإنشاء رابط للوصول الى مادة في فهرسك. سوف يصبح مصطلح البحث الموضوعي مُحاصر بهذين النصين."
 
 #: control/edit-config.php:134
 msgid "Close String"
@@ -1326,12 +1156,8 @@ msgid "Open String Bib"
 msgstr "ببيوغرافيا مفتوحة النص"
 
 #: control/edit-config.php:144
-msgid ""
-"Used to create a link to an item in your Catalog. Your Bib search term is "
-"sandwiched between these two strings"
-msgstr ""
-"تُستخدم لإنشاء رابط لمادة في فهرسك. أصبحت مادة البحث الببليوغرافي محصورة بين "
-"هذين النصين."
+msgid "Used to create a link to an item in your Catalog. Your Bib search term is sandwiched between these two strings"
+msgstr "تُستخدم لإنشاء رابط لمادة في فهرسك. أصبحت مادة البحث الببليوغرافي محصورة بين هذين النصين."
 
 #: control/edit-config.php:146 control/install.php:98
 #: control/setup-config.php:143
@@ -1345,14 +1171,8 @@ msgstr "المسار الى ملفات CKEditor تم الحاقه بـ الـ UR
 
 #: control/edit-config.php:146 control/install.php:98
 #: control/setup-config.php:143
-msgid ""
-"CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled "
-"with SubjectsPlus under the sp/ root folder.  If you move CKEditor to "
-"another location, you will need to change this path."
-msgstr ""
-"يُستخدم المحرر CKEditor لتوليد صناديق ادخال البيانات المرئية WYSIWYG. لقد تم "
-"دمج المحرر مع موضوعات بلس تحت المجلد الأصلي /root لموضوعات بلس. اذا نقلت "
-"CKEditor الى مكان آخر، عندها عليك ان تغير المسار."
+msgid "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path."
+msgstr "يُستخدم المحرر CKEditor لتوليد صناديق ادخال البيانات المرئية WYSIWYG. لقد تم دمج المحرر مع موضوعات بلس تحت المجلد الأصلي /root لموضوعات بلس. اذا نقلت CKEditor الى مكان آخر، عندها عليك ان تغير المسار."
 
 #: control/edit-config.php:182
 msgid "Thy will be done."
@@ -1439,41 +1259,22 @@ msgid "View FAQ on Public Site"
 msgstr "أعرض الأسئلة الشائعة في موقع عام"
 
 #: control/faq/index.php:110
-msgid ""
-"FAQs may be assigned a subject or a collection.  FAQ collections are "
-"groupings that may show up on the sidebar of the public FAQ page:\n"
-"        for example, Library Catalog or InterLibrary Loan.  If you assign a "
-"subject, you can easily add all FAQs for that subject to a subject guide."
-msgstr ""
-"يمكن تعيين موضوع او مجموعة للأسئلة الشائعة. مجموعات الأسئلة الشائعة هي عبارة "
-"عن تجمعات تظهر على الشريط الجاني في صفحة الأسئلة الشائعة العامة:\n"
-"على سبيل المثال، فهرس المكتبة أو الاستعارات البينية بين المكتبات. اذا قمت "
-"بتعيين موضوع، يمكنك إضافة جميع الأسئلة الشائعة لذلك الموضوع الى دليل موضوعي "
-"بسهولة."
+msgid "FAQs may be assigned a subject or a collection.  FAQ collections are groupings that may show up on the sidebar of the public FAQ page:\n"
+"        for example, Library Catalog or InterLibrary Loan.  If you assign a subject, you can easily add all FAQs for that subject to a subject guide."
+msgstr "يمكن تعيين موضوع او مجموعة للأسئلة الشائعة. مجموعات الأسئلة الشائعة هي عبارة عن تجمعات تظهر على الشريط الجاني في صفحة الأسئلة الشائعة العامة:\n"
+"على سبيل المثال، فهرس المكتبة أو الاستعارات البينية بين المكتبات. اذا قمت بتعيين موضوع، يمكنك إضافة جميع الأسئلة الشائعة لذلك الموضوع الى دليل موضوعي بسهولة."
 
 #: control/faq/index.php:112
-msgid ""
-"FAQ collections are created by the site administrator, or someone with the "
-"'admin' privilege in SubjectsPlus."
-msgstr ""
-"يتم إنشاء مجموعات الأسئلة الشائعة بواسطة مدير الموقع، أو أي شخص يملك صلاحية "
-"\"مدير\" في موضوعات بلس. "
+msgid "FAQ collections are created by the site administrator, or someone with the 'admin' privilege in SubjectsPlus."
+msgstr "يتم إنشاء مجموعات الأسئلة الشائعة بواسطة مدير الموقع، أو أي شخص يملك صلاحية \"مدير\" في موضوعات بلس. "
 
 #: control/forgotpassword.php:28
-msgid ""
-"An email has been sent to reset your password.  Please click the link in the "
-"email and follow the instructions."
-msgstr ""
-"تم ارسال بريد إلكتروني لإعادة تعيين كلمة المرور الخاصة بك. الرجاء أنقر على "
-"الرابط في رسالة البريد الإلكتروني واتبع الإرشادات."
+msgid "An email has been sent to reset your password.  Please click the link in the email and follow the instructions."
+msgstr "تم ارسال بريد إلكتروني لإعادة تعيين كلمة المرور الخاصة بك. الرجاء أنقر على الرابط في رسالة البريد الإلكتروني واتبع الإرشادات."
 
 #: control/forgotpassword.php:32
-msgid ""
-"Please enter your <strong>email</strong> so we can email you a link to reset "
-"your password."
-msgstr ""
-"الرجاء ادخال <strong>بريدك الإلكتروني</strong> حتى يمكننا ارسال رابط لإعادة "
-"تعيين كلمة المرور الخاصة بك."
+msgid "Please enter your <strong>email</strong> so we can email you a link to reset your password."
+msgstr "الرجاء ادخال <strong>بريدك الإلكتروني</strong> حتى يمكننا ارسال رابط لإعادة تعيين كلمة المرور الخاصة بك."
 
 #: control/forgotpassword.php:45
 msgid "Password has been updated."
@@ -1490,24 +1291,16 @@ msgstr "الرجاء إدخال كلمة المرور الجديدة."
 
 #: control/forgotpassword.php:49 control/forgotpassword.php:54
 #: control/forgotpassword.php:76 control/includes/set_password.php:63
-msgid ""
-"Password must have at least one letter, one number, one special character, "
-"and be at least 6 characters long."
-msgstr ""
-"يجب إحتواء كلمة المرور على حرف، و رقم واحد، ورمز خاص، ويجب ان لا يقل عدد "
-"الخانات عن ستة."
+msgid "Password must have at least one letter, one number, one special character, and be at least 6 characters long."
+msgstr "يجب إحتواء كلمة المرور على حرف، و رقم واحد، ورمز خاص، ويجب ان لا يقل عدد الخانات عن ستة."
 
 #: control/forgotpassword.php:53
 msgid "Password doesn't meet requirements."
 msgstr "كلمة المرور غير موافقة للمتطلبات."
 
 #: control/forgotpassword.php:73
-msgid ""
-"The id and email do not match or the id does not exits or the link has "
-"expired."
-msgstr ""
-"رقم التحقق والبريد الإلكتروني لا يتوافقان، أو أن رقم التحقق غير صحيح، أو أن "
-"الرابط انتهت مدته."
+msgid "The id and email do not match or the id does not exits or the link has expired."
+msgstr "رقم التحقق والبريد الإلكتروني لا يتوافقان، أو أن رقم التحقق غير صحيح، أو أن الرابط انتهت مدته."
 
 #: control/forgotpassword.php:94 control/login.php:146
 msgid "Forgot Password"
@@ -1528,12 +1321,10 @@ msgid "Location (Enter URL)"
 msgstr "الموقع (أدخل URL)"
 
 #: control/guides/create_record.php:28
-#, fuzzy
 msgid "Create Record"
 msgstr "أنشئ تسجيلة جديدة"
 
 #: control/guides/create_record.php:52
-#, fuzzy
 msgid "There was an error inserting the record"
 msgstr "لقد حدثت مشكلة أثناء الحذف"
 
@@ -1571,14 +1362,10 @@ msgid "Create New Guide"
 msgstr "أنشئ دليل جديد"
 
 #: control/guides/guide.php:61
-msgid ""
-"You do not have permission to edit this guide.  Ask the guide's creator to "
-"add you as a co-editor."
-msgstr ""
-"ليس لديك صلاحية تحرير هذا الدليل. اطلب من منشئ الدليل إضافتك كمحرر مساعد."
+msgid "You do not have permission to edit this guide.  Ask the guide's creator to add you as a co-editor."
+msgstr "ليس لديك صلاحية تحرير هذا الدليل. اطلب من منشئ الدليل إضافتك كمحرر مساعد."
 
 #: control/guides/guide.php:126
-#, fuzzy
 msgid "Drag box selection, then drop it to the right"
 msgstr "إسحب اختيارك من الصناديق، ثم إفلاته على اليسار"
 
@@ -1722,37 +1509,22 @@ msgid "Help:  Feed box"
 msgstr "مساعدة: صندوق تغذية "
 
 #: control/guides/helpers/popup_help.php:21
-msgid ""
-"\n"
-"<p>This box allows you to insert an RSS feed into the page.  It could be a "
-"normal RSS feed, or else something that\n"
+msgid "\n"
+"<p>This box allows you to insert an RSS feed into the page.  It could be a normal RSS feed, or else something that\n"
 "uses the RSS technology, like Delicious or Twitter feeds.</p>\n"
 "\n"
-"<p>Click the edit icon (pencil) to enter or edit a feed.  In the first box, "
-"enter the feed's URL.  Then decide how many items you want to display, and "
-"whether or not you want the description (i.e., the body of the feed) to "
-"appear.  Note that showing the description could use up a lot of screen real "
-"estate.</p>\n"
+"<p>Click the edit icon (pencil) to enter or edit a feed.  In the first box, enter the feed's URL.  Then decide how many items you want to display, and whether or not you want the description (i.e., the body of the feed) to appear.  Note that showing the description could use up a lot of screen real estate.</p>\n"
 "\n"
 "<h2>Locating a Web Feed</h2>\n"
-"<p>In order to add a web feed to a SubjectsPlus page, you must provide a URL "
-"that points to the feed. Feed URLs are different from general website URLs. "
-"They will often, but not necessarily, end in .xml, .rss, or .rdf.</p>\n"
-"<p>For instance, you may want to feature a feed from Arts & Letters Daily on "
-"your subject page. The URL for this site is <a href=\"http://www.aldaily.com"
-"\" target=\"blank\">http://www.aldaily.com</a>, but that is not the feed "
-"URL. To find the feed URL, click on the web feed icon in the address bar of "
-"your browser (the icon may be either blue or orange):</p>\n"
+"<p>In order to add a web feed to a SubjectsPlus page, you must provide a URL that points to the feed. Feed URLs are different from general website URLs. They will often, but not necessarily, end in .xml, .rss, or .rdf.</p>\n"
+"<p>For instance, you may want to feature a feed from Arts & Letters Daily on your subject page. The URL for this site is <a href=\"http://www.aldaily.com\" target=\"blank\">http://www.aldaily.com</a>, but that is not the feed URL. To find the feed URL, click on the web feed icon in the address bar of your browser (the icon may be either blue or orange):</p>\n"
 "\n"
-"<p><img src=\"../images/admin/rss_example_icons.gif\" alt=\"example feed "
-"icons\" border=\"0\" style=\"float: left; margin-right: 10px; \"/> You will "
-"probably see a drop-down menu of choices.  Choose \"Subscribe to RSS.\"\n"
-"You should now see the feed URL in the address bar.  In the above case, it "
-"is\n"
-"<a href=\"http://www.aldaily.com/rss/rss.xml\" target=\"blank\">http://www."
-"aldaily.com/rss/rss.xml</a>.\n"
+"<p><img src=\"../images/admin/rss_example_icons.gif\" alt=\"example feed icons\" border=\"0\" style=\"float: left; margin-right: 10px; \"/> You will probably see a drop-down menu of choices.  Choose \"Subscribe to RSS.\"\n"
+"You should now see the feed URL in the address bar.  In the above case, it is\n"
+"<a href=\"http://www.aldaily.com/rss/rss.xml\" target=\"blank\">http://www.aldaily.com/rss/rss.xml</a>.\n"
 "This is the URL that may be added to SubjectsPlus\n"
 "to create a feed.</p>\n"
+""
 msgstr ""
 
 #: control/guides/helpers/popup_help.php:41
@@ -1764,18 +1536,12 @@ msgid "'Fixed' Box"
 msgstr "صندوق 'ثابت'"
 
 #: control/guides/helpers/popup_help.php:104
-msgid ""
-"<p>Fixed box types (such as the Key to Icons or the Subject Specialist) can "
-"only be customized by the SubjectsPlus administrator.</p>\n"
+msgid "<p>Fixed box types (such as the Key to Icons or the Subject Specialist) can only be customized by the SubjectsPlus administrator.</p>\n"
 "    <p>You may drop them, move them around and delete them.</p> \n"
-"    <p>The All Items by Source box has a little pencil; you may use it to "
-"rearrange the records that are associated with this guide."
-msgstr ""
-"p>فقط من يمكلك صلاحية المدير الذي باستطاعته تعديل الصناديق ذات النوع الثابت "
-"(مثل صندوق \"توضيحات حول الأيقونات\" وصندوق \"متخصص الموضوع\").</p>\n"
+"    <p>The All Items by Source box has a little pencil; you may use it to rearrange the records that are associated with this guide."
+msgstr "p>فقط من يمكلك صلاحية المدير الذي باستطاعته تعديل الصناديق ذات النوع الثابت (مثل صندوق \"توضيحات حول الأيقونات\" وصندوق \"متخصص الموضوع\").</p>\n"
 "    <p>يمكنك اسقاطهم، نقلهم من مكان إلى آخر، ويمنك حذفهم.</p> \n"
-"    <p>يحوي صندوق \"كل المواد بواسطة المصدر\" على قلم رصاص صغير يمكنك "
-"استخدامه لإعادة ترتيب التسجيلات المرتبطة بذلك الدليل.."
+"    <p>يحوي صندوق \"كل المواد بواسطة المصدر\" على قلم رصاص صغير يمكنك استخدامه لإعادة ترتيب التسجيلات المرتبطة بذلك الدليل.."
 
 #: control/guides/helpers/popup_help.php:111
 #: lib/SubjectsPlus/Control/Pluslet/Heading.php:24
@@ -1783,12 +1549,8 @@ msgid "Heading"
 msgstr "رأس"
 
 #: control/guides/helpers/popup_help.php:113
-msgid ""
-"<p>This type just provides an organizational header showing only the title "
-"text.  It functions like an HTML H2, say.</p>"
-msgstr ""
-"<p>هذا النوع لمجرد تزويدنا بترويسة مرتبة لعرض نص العنوان فقط. تعمل مثل HTML "
-"H2 ، مجازاً.</p>"
+msgid "<p>This type just provides an organizational header showing only the title text.  It functions like an HTML H2, say.</p>"
+msgstr "<p>هذا النوع لمجرد تزويدنا بترويسة مرتبة لعرض نص العنوان فقط. تعمل مثل HTML H2 ، مجازاً.</p>"
 
 #: control/guides/helpers/popup_help.php:118
 msgid "'Normal' Box"
@@ -1877,24 +1639,16 @@ msgid "Submit"
 msgstr "تقديم"
 
 #: control/guides/manage.php:206
-msgid ""
-"Use this to organize which items are associated with a record, and thus "
-"displayed in 'All Items by Source' box."
-msgstr ""
-"استخدم هذه لتحديد أي المواد تلحق بالتسجيلة، وبالتالي عرضها في صندوق \"كل "
-"المواد بواسطة المصدر\". "
+msgid "Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box."
+msgstr "استخدم هذه لتحديد أي المواد تلحق بالتسجيلة، وبالتالي عرضها في صندوق \"كل المواد بواسطة المصدر\". "
 
 #: control/guides/manage.php:209
 msgid "Edit icon"
 msgstr "حرّر الأيقونة"
 
 #: control/guides/manage.php:209
-msgid ""
-"Note: You can also do this in a guide, by clicking on the pencil icon for an "
-"'All Items by Source' box."
-msgstr ""
-"لاحظ: يمكنك عمل هذا أيضا في الدليل، من خلال النقر على أيقونة قلم الرصاص "
-"التابعة لـصندوق \"كل المواد حسب المصدر\"."
+msgid "Note: You can also do this in a guide, by clicking on the pencil icon for an 'All Items by Source' box."
+msgstr "لاحظ: يمكنك عمل هذا أيضا في الدليل، من خلال النقر على أيقونة قلم الرصاص التابعة لـصندوق \"كل المواد حسب المصدر\"."
 
 #: control/guides/manage.php:213
 msgid "Highlighted items are orphans.  Pity the orphans!"
@@ -1902,8 +1656,7 @@ msgstr "المواد المُعلّم عليها يتيمة. مساكين هؤل
 
 #: control/guides/manage.php:217
 msgid "Admin Tip: add ?view=all to this page's URL to see all users' items."
-msgstr ""
-"نصيحة إدارية: أضف ?view=all  الى URL هذه الصفحة لرؤية كافة مواد المستخدمين."
+msgstr "نصيحة إدارية: أضف ?view=all  الى URL هذه الصفحة لرؤية كافة مواد المستخدمين."
 
 #: control/guides/manage.php:229
 msgid "Manage your Uploads"
@@ -1918,13 +1671,8 @@ msgid "-- Choose a Different Guide --"
 msgstr "-- اختر دليلا مختلفا --"
 
 #: control/guides/manage_items.php:125
-msgid ""
-"There do not seem to be any resources associated with this guide.  To add "
-"new resources, go to the Records tab, select that resource, and then add "
-"your subject."
-msgstr ""
-"يبدو أنه لا توجد أي مصادر مرتبطة بهذا الدليل. لإضافة مصادر جديدة، اذهب إلى "
-"تبويب المواد، قم بتحديد هذا المصدر، ثم إضافة موضوعك."
+msgid "There do not seem to be any resources associated with this guide.  To add new resources, go to the Records tab, select that resource, and then add your subject."
+msgstr "يبدو أنه لا توجد أي مصادر مرتبطة بهذا الدليل. لإضافة مصادر جديدة، اذهب إلى تبويب المواد، قم بتحديد هذا المصدر، ثم إضافة موضوعك."
 
 #: control/guides/manage_items.php:134
 #: lib/SubjectsPlus/Control/Pluslet/1.php:185
@@ -1948,13 +1696,8 @@ msgid "Public guide"
 msgstr "دليل عام"
 
 #: control/guides/metadata.php:77
-msgid ""
-"You must have a title, shortform, type, and one associated staff member.  "
-"Please go back and fix these omissions.  And turn on JavaScript, for "
-"goodness sakes!"
-msgstr ""
-"يجب أن يكون لديك عنوان، صيغة مختصرة، نوع وموظف مرتبط. يرجى العودة وإصلاح هذه "
-"النواقص. وقم بتفعيل جافاسكريبت من فضلك!"
+msgid "You must have a title, shortform, type, and one associated staff member.  Please go back and fix these omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "يجب أن يكون لديك عنوان، صيغة مختصرة، نوع وموظف مرتبط. يرجى العودة وإصلاح هذه النواقص. وقم بتفعيل جافاسكريبت من فضلك!"
 
 #: control/guides/metadata.php:228
 msgid "Thwarted!  You must have at least one staff member for a guide."
@@ -1973,12 +1716,8 @@ msgid "Configuration File Missing!"
 msgstr "ملف التهيئة مفقود."
 
 #: control/includes/configErrorPage.php:60
-msgid ""
-"The SubjectsPlus Configurations file does not exist. Before we continue we "
-"need to setup a connection to your database."
-msgstr ""
-"ملف تهيئة موضوعات بلس غير موجود. قبل أن نواصل يجب ان نجهز الاتصال بقاعدة "
-"البيانات الخاصة بك."
+msgid "The SubjectsPlus Configurations file does not exist. Before we continue we need to setup a connection to your database."
+msgstr "ملف تهيئة موضوعات بلس غير موجود. قبل أن نواصل يجب ان نجهز الاتصال بقاعدة البيانات الخاصة بك."
 
 #: control/includes/configErrorPage.php:61
 msgid "Let's make it!"
@@ -1990,12 +1729,8 @@ msgid "Configuration File Error!"
 msgstr "خطأ في ملف الإعدادات!"
 
 #: control/includes/configErrorPage.php:68
-msgid ""
-"Sorry, I need a config-default.php file to work from. Please re-upload this "
-"file from your SubjectsPlus installation."
-msgstr ""
-"عذراً، نحتاج ملف config-default.php لنعمل منه. الرجاء إعادة رفع هذا الملف من "
-"نسخة موضوعات بلس المركبة."
+msgid "Sorry, I need a config-default.php file to work from. Please re-upload this file from your SubjectsPlus installation."
+msgstr "عذراً، نحتاج ملف config-default.php لنعمل منه. الرجاء إعادة رفع هذا الملف من نسخة موضوعات بلس المركبة."
 
 #: control/includes/configErrorPage.php:74
 #: control/includes/configErrorPage.php:81
@@ -2003,27 +1738,12 @@ msgid "DB Error!"
 msgstr "خطأ قاعدة بيانات!"
 
 #: control/includes/configErrorPage.php:75
-msgid ""
-"Could not choose database.<br />The database name does not exist. Make sure "
-"that database exists and change configurations manually in file config.php."
-"<br />You can also delete the config file and go through initial config "
-"setup."
-msgstr ""
-"لم نستطع إختيار قاعدة بيانات. <br />اسم قاعدة البيانات لا وجود له. تأكد من "
-"وجود قاعدة البيانات ومن ثم غيّر  التهيئة يدوياً في الملف config.php. <br /> "
-"يمكنك أيضا حذف ملف التهيئة وإعادة تنفيذ اعدادات التهيئة الأولية."
+msgid "Could not choose database.<br />The database name does not exist. Make sure that database exists and change configurations manually in file config.php.<br />You can also delete the config file and go through initial config setup."
+msgstr "لم نستطع إختيار قاعدة بيانات. <br />اسم قاعدة البيانات لا وجود له. تأكد من وجود قاعدة البيانات ومن ثم غيّر  التهيئة يدوياً في الملف config.php. <br /> يمكنك أيضا حذف ملف التهيئة وإعادة تنفيذ اعدادات التهيئة الأولية."
 
 #: control/includes/configErrorPage.php:82
-msgid ""
-"Could not establish mySQL connection.<br />Make sure user name exists and "
-"password is correct and change configurations manually in file config.php."
-"<br />You can also delete the config file and go through initial config "
-"setup."
-msgstr ""
-"تعذر الاتصال بقاعدة البيانات MySQL. <br /> الرجاء التأكد من وجود اسم "
-"المستخدم وأن كلمة المرور صحيحة، ثم قم بتغيير الاعدادات يديوياً  في الملف "
-"config.php. <br /> يمكنك أيضاً حذف ملف التهيئة config وأعد تنفيذ مرحلة "
-"التهيئة الأولية. "
+msgid "Could not establish mySQL connection.<br />Make sure user name exists and password is correct and change configurations manually in file config.php.<br />You can also delete the config file and go through initial config setup."
+msgstr "تعذر الاتصال بقاعدة البيانات MySQL. <br /> الرجاء التأكد من وجود اسم المستخدم وأن كلمة المرور صحيحة، ثم قم بتغيير الاعدادات يديوياً  في الملف config.php. <br /> يمكنك أيضاً حذف ملف التهيئة config وأعد تنفيذ مرحلة التهيئة الأولية. "
 
 #: control/includes/firstTimeInstall.php:14
 msgid "First Time Installation "
@@ -2061,14 +1781,10 @@ msgstr "مرحباً بك في نسختك الجديدة موضوعات بلس!"
 
 #: control/includes/firstTimeUpdate.php:21
 msgid "You can change the email key so you can log in with only the username."
-msgstr ""
-"يمكنك تغيير مفتاح البريد الإلكتروني حتى تتمكن من الدخول باستخدام اسم "
-"المستخدم فقط."
+msgstr "يمكنك تغيير مفتاح البريد الإلكتروني حتى تتمكن من الدخول باستخدام اسم المستخدم فقط."
 
 #: control/includes/firstTimeUpdate.php:22
-msgid ""
-"You can configure your Catalog Connections as they were in the previous "
-"version."
+msgid "You can configure your Catalog Connections as they were in the previous version."
 msgstr "يمكنك تهيئة توصيلات فهرسك مثلما كانت في الاصدارة السابقة."
 
 #: control/includes/firstTimeUpdate.php:23
@@ -2076,12 +1792,8 @@ msgid "Move over your previous /users/ folders to /assets/, i.e., _jsmith"
 msgstr "قم بنقل مجلداتك من /users/ الى /assets/. مثلا jsmith"
 
 #: control/includes/firstTimeUpdate.php:24
-msgid ""
-"If you have styled the front end, move over default.css to assets/css/ and "
-"tweak as necessary.  See wiki for tips."
-msgstr ""
-"اذا قمت بتعديل ستايل الواجهة، عليك ان تنقل default.css إلى assets/css/ وضبطه "
-"حسب الحاجة. أنظر في الوكي حيث توجد بعض النصائح."
+msgid "If you have styled the front end, move over default.css to assets/css/ and tweak as necessary.  See wiki for tips."
+msgstr "اذا قمت بتعديل ستايل الواجهة، عليك ان تنقل default.css إلى assets/css/ وضبطه حسب الحاجة. أنظر في الوكي حيث توجد بعض النصائح."
 
 #: control/includes/firstTimeUpdate.php:26
 msgid "You can find out new features in 3.0 on the wiki."
@@ -2089,8 +1801,7 @@ msgstr "يوجد امتيازات جديدة في الاصدارة 3.0 تجده�
 
 #: control/includes/functions.php:263
 msgid "Invalid file type: not on whitelist of ok file types"
-msgstr ""
-"نوع ملف غير صحيح: غير موجود في القائمة البيضاء لأنواع الملفات المسموح بها"
+msgstr "نوع ملف غير صحيح: غير موجود في القائمة البيضاء لأنواع الملفات المسموح بها"
 
 #: control/includes/functions.php:453
 msgid "Last modification date unknown."
@@ -2231,12 +1942,8 @@ msgid "No"
 msgstr "لا"
 
 #: control/includes/linkchecker.php:28
-msgid ""
-"The link report can take a few minutes to run, depending on how many links "
-"you have on the page.  So be patient."
-msgstr ""
-"يمكن أن يستغرق تقرير الرابط بضعة دقائق للتشغيل، بناء على عدد الروابط "
-"الموجودة لديك في الصفحة. لذا يرجى الصبر."
+msgid "The link report can take a few minutes to run, depending on how many links you have on the page.  So be patient."
+msgstr "يمكن أن يستغرق تقرير الرابط بضعة دقائق للتشغيل، بناء على عدد الروابط الموجودة لديك في الصفحة. لذا يرجى الصبر."
 
 #: control/includes/linkchecker.php:31
 msgid "Run Linkchecker Now"
@@ -2304,12 +2011,8 @@ msgid "Current Thumbnail . . . boooring."
 msgstr "الصورة المصغرة الحالية . . . مملة. "
 
 #: control/includes/set_image.php:55
-msgid ""
-"Once you click upload, the current image will be replaced.  <strong>Note:</"
-"strong>  Images should be 200x150 px."
-msgstr ""
-"بمجرد قيامك بالنقر على تحميل، سيتم استبدال الصورة الحالية. <strong>ملاحظة:</"
-"strong>  سيتم أن يكون أبعاد صورتك 200x150 بكسيل."
+msgid "Once you click upload, the current image will be replaced.  <strong>Note:</strong>  Images should be 200x150 px."
+msgstr "بمجرد قيامك بالنقر على تحميل، سيتم استبدال الصورة الحالية. <strong>ملاحظة:</strong>  سيتم أن يكون أبعاد صورتك 200x150 بكسيل."
 
 #: control/includes/set_image.php:125
 msgid "Update Image"
@@ -2320,12 +2023,8 @@ msgid "Password updated.  Close this box to continue."
 msgstr "تم تحديث كلمة المرور. أغلق هذا المربع للاستمرار."
 
 #: control/includes/set_password.php:66
-msgid ""
-"You cannot leave the password box blank.  Close this window if you don't "
-"want to change the password."
-msgstr ""
-"لا يمكنك ترك مربع كلمة المرور فارغا. أغلق هذه النافذة إذا لم تكن ترغب في "
-"تغيير كلمة المرور"
+msgid "You cannot leave the password box blank.  Close this window if you don't want to change the password."
+msgstr "لا يمكنك ترك مربع كلمة المرور فارغا. أغلق هذه النافذة إذا لم تكن ترغب في تغيير كلمة المرور"
 
 #: control/includes/set_password.php:71
 msgid "Update Password for "
@@ -2336,14 +2035,8 @@ msgid "Current Picture . . . boooring."
 msgstr "الصورة الحالية . . . مملة."
 
 #: control/includes/set_picture.php:70
-msgid ""
-"Upload the new you.  Once you click upload, the current image will be "
-"replaced.  <strong>Note:</strong>  Your image will be scaled to <strong>70px "
-"wide</strong>.  Using a square image is best."
-msgstr ""
-"قم بتحميل صورتك الجديدة. بمجرد قيامك بالنقر على تحميل، سيتم استبدال الصورة "
-"الحالية. <strong>ملاحظة:</strong>  سيتم إعادة تحجيم صورتك إلى  <strong>70 "
-"بيكسل عرض</strong>"
+msgid "Upload the new you.  Once you click upload, the current image will be replaced.  <strong>Note:</strong>  Your image will be scaled to <strong>70px wide</strong>.  Using a square image is best."
+msgstr "قم بتحميل صورتك الجديدة. بمجرد قيامك بالنقر على تحميل، سيتم استبدال الصورة الحالية. <strong>ملاحظة:</strong>  سيتم إعادة تحجيم صورتك إلى  <strong>70 بيكسل عرض</strong>"
 
 #: control/includes/set_picture.php:155
 msgid "File not uploaded to the specified location"
@@ -2358,12 +2051,10 @@ msgid "Update Picture for "
 msgstr "تحديث الصور لـ"
 
 #: control/index.php:34
-#, fuzzy
 msgid "Update Your Biographical Details"
 msgstr "تفاصيل السيرة الذانية"
 
 #: control/index.php:38
-#, fuzzy
 msgid "Update Headshot"
 msgstr "حدّث السيرة الذاتية"
 
@@ -2372,12 +2063,10 @@ msgid "View/Export Staff Contact Info"
 msgstr "أعرض/صدّر  "
 
 #: control/index.php:53
-#, php-format
 msgid "Hello %s"
 msgstr "مرحبا %s"
 
 #: control/index.php:64
-#, fuzzy
 msgid "Reset Password"
 msgstr "إعادة تعيين كلمة المرور "
 
@@ -2406,12 +2095,8 @@ msgid "Already Installed"
 msgstr "مُركب بالفعل "
 
 #: control/install.php:41
-msgid ""
-"There appears to already be an installation of SubjectsPlus. To reinstall "
-"please clear old database tables first."
-msgstr ""
-"يبدو أن هناك نسخة مُركبة من موضوعات بلس. ليتم التركيب الرجائ تنظيف جداول "
-"القاعدة القديمة أولاً."
+msgid "There appears to already be an installation of SubjectsPlus. To reinstall please clear old database tables first."
+msgstr "يبدو أن هناك نسخة مُركبة من موضوعات بلس. ليتم التركيب الرجائ تنظيف جداول القاعدة القديمة أولاً."
 
 #: control/install.php:42 lib/SubjectsPlus/Control/Installer.php:490
 #: lib/SubjectsPlus/Control/Updater.php:584
@@ -2428,9 +2113,7 @@ msgstr "هذا هو البورت الذي يستخدمه خادمك الخاص �
 
 #: control/login.php:127
 msgid "Please enter your <strong>credentials</strong> to proceed."
-msgstr ""
-"يرجى إدخال <strong>بيانات التحقق: اسم تسجيل الدخول وكلمة المرور</strong> "
-"الخاصة بك للاستمرار"
+msgstr "يرجى إدخال <strong>بيانات التحقق: اسم تسجيل الدخول وكلمة المرور</strong> الخاصة بك للاستمرار"
 
 #: control/login.php:135
 msgid "Login"
@@ -2442,12 +2125,8 @@ msgid "Password"
 msgstr "كلمة المرور"
 
 #: control/login.php:182
-msgid ""
-"Please check your email and password and try again.  (Note that login "
-"attempts are logged.)"
-msgstr ""
-"يرجى التأكد من اسم البريد الإلكتروني وكلمة المرور وإعادة المحاولة. (لاحظ أنه "
-"يتم تسجيل محاولات الدخول)"
+msgid "Please check your email and password and try again.  (Note that login attempts are logged.)"
+msgstr "يرجى التأكد من اسم البريد الإلكتروني وكلمة المرور وإعادة المحاولة. (لاحظ أنه يتم تسجيل محاولات الدخول)"
 
 #: control/login.php:200
 msgid "Email Address"
@@ -2462,27 +2141,22 @@ msgid "Please select a letter or tag to browse."
 msgstr "يرجى اختيار حرف أو وسم للاستعراض"
 
 #: control/records/index.php:75
-#, fuzzy
 msgid "Restricted Items"
 msgstr "مصدر مقيد"
 
 #: control/records/index.php:78
-#, fuzzy
 msgid "Unrestricted Items"
 msgstr "مصدر غير مقيد"
 
 #: control/records/index.php:81
-#, fuzzy
 msgid "A-Z List Items"
 msgstr "قائمة قاعدة البيانات مرتبة من الألف إلى الياء"
 
 #: control/records/index.php:100
-#, fuzzy
 msgid "A-Z List"
 msgstr "قائمة قاعدة البيانات مرتبة من الألف إلى الياء"
 
 #: control/records/index.php:107
-#, fuzzy
 msgid "Restricted"
 msgstr "مصدر مقيد"
 
@@ -2503,17 +2177,12 @@ msgid "Browse Records"
 msgstr "اعرض التسجيلات"
 
 #: control/records/index.php:192
-#, fuzzy
 msgid "New AZRecord"
 msgstr "تسجيلة جديدة"
 
 #: control/records/record.php:73
-msgid ""
-"You must have a title, location, and subject.  Please go back and fix these "
-"omissions.  And turn on JavaScript, for goodness sakes!"
-msgstr ""
-"يجب أن يكون لديك عنوان، موقع، وموضوع. يرجى العودة وإصلاح هذه النواقص. وقم "
-"بتفعيل جافاسكريبت بالله عليك!"
+msgid "You must have a title, location, and subject.  Please go back and fix these omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "يجب أن يكون لديك عنوان، موقع، وموضوع. يرجى العودة وإصلاح هذه النواقص. وقم بتفعيل جافاسكريبت بالله عليك!"
 
 #: control/records/record.php:86
 msgid "There is already a record with this title: "
@@ -2556,7 +2225,6 @@ msgid "This URL looks dodgy; better check it"
 msgstr "هذا ال URL يبدو غير صحيح، من الأفضل التحقق منه"
 
 #: control/records/record_bits.php:107
-#, fuzzy
 msgid "SubjectsPlus: AZRecord Delete Recommendation"
 msgstr "موضوعات بلس: توصية حذف المادة"
 
@@ -2578,14 +2246,8 @@ msgid "Error! No Base file to use!"
 msgstr "خطأ لا يوجد ملف أساسي"
 
 #: control/setup-config.php:58
-msgid ""
-"The file 'config.php' already exists. If you need to reset any of the "
-"configuration items in this file, you must be an admin and go to the Admin "
-"Nav and click 'Config Site'."
-msgstr ""
-"الملف 'config.php' موجود بالفعل. اذا كنت تريد تعديل أي من قيم عناصر "
-"الاعدادات في هذا الملف، يجب ان تملك صلاحية المدير ثم غدهب الى صفحة تصفح "
-"الإدارة وأنقر على \"اعدادات الموقع\"."
+msgid "The file 'config.php' already exists. If you need to reset any of the configuration items in this file, you must be an admin and go to the Admin Nav and click 'Config Site'."
+msgstr "الملف 'config.php' موجود بالفعل. اذا كنت تريد تعديل أي من قيم عناصر الاعدادات في هذا الملف، يجب ان تملك صلاحية المدير ثم غدهب الى صفحة تصفح الإدارة وأنقر على \"اعدادات الموقع\"."
 
 #: control/setup-config.php:134
 msgid "This is the port your MySQL server uses. (Default: 3306)."
@@ -2608,14 +2270,8 @@ msgid "Topic Filter:"
 msgstr "مُفلتر الموضوع:"
 
 #: control/talkback/index.php:169
-msgid ""
-"TalkBack questions come via the web form on the public TalkBack page. An "
-"email should be sent to the admin when a new one arrives, and they may be "
-"answered here."
-msgstr ""
-"تأتي أسئلة استفسار من مستفيد عبر نموذج الويب في صفحة استفسار من مستفيد "
-"العامة. يجب إرسال رسالة بريد الكتروني إلى المدير عند وصول سؤال جديد، ويمكن "
-"الإجابة عنه هنا."
+msgid "TalkBack questions come via the web form on the public TalkBack page. An email should be sent to the admin when a new one arrives, and they may be answered here."
+msgstr "تأتي أسئلة استفسار من مستفيد عبر نموذج الويب في صفحة استفسار من مستفيد العامة. يجب إرسال رسالة بريد الكتروني إلى المدير عند وصول سؤال جديد، ويمكن الإجابة عنه هنا."
 
 #: control/talkback/index.php:172
 msgid "TalkBack Public Page"
@@ -2671,7 +2327,6 @@ msgid "View Video on Public Site"
 msgstr "اعرض الفيديو في موقع عام"
 
 #: control/videos/index.php:94
-#, fuzzy
 msgid "Collected Videos"
 msgstr "مجموعة"
 
@@ -2692,12 +2347,8 @@ msgid "About Videos"
 msgstr "حول الفيديوهات"
 
 #: control/videos/ingest.php:39
-msgid ""
-"Select a source you wish to pull in video metadata from.  Enter the name of "
-"the user account, followed by the source."
-msgstr ""
-"اختر مصدر تود ان تسحي منه ميتاداتا الفيديو. أدخل اسم حساب المستخدم متبوعاً "
-"بالمصدر."
+msgid "Select a source you wish to pull in video metadata from.  Enter the name of the user account, followed by the source."
+msgstr "اختر مصدر تود ان تسحي منه ميتاداتا الفيديو. أدخل اسم حساب المستخدم متبوعاً بالمصدر."
 
 #: control/videos/ingest.php:43
 msgid "Account username"
@@ -2708,8 +2359,7 @@ msgid "Enter an account username to begin."
 msgstr "أدخل اسم حساب مستخدم لتبدأ."
 
 #: control/videos/ingest.php:269
-msgid ""
-"Error loading the video feed. It's possible there is no channel by that name."
+msgid "Error loading the video feed. It's possible there is no channel by that name."
 msgstr "حجث خطأ عند تحميل تغذية الفيديو. من المحتمل عدم وجود قناة بهذا الاسم."
 
 #: control/videos/ingest.php:349
@@ -2717,8 +2367,7 @@ msgid "INSERT Video Metadata"
 msgstr "أدخل ميتاداتا الفيديو"
 
 #: control/videos/ingest.php:351
-msgid ""
-"Note:  You already have metadata for this video.  Click UPDATE to overwrite."
+msgid "Note:  You already have metadata for this video.  Click UPDATE to overwrite."
 msgstr "ملاحظة: لديك ميتاداتا لهذا الفيديو فعلا. أنقر حدّث للتخطي."
 
 #: control/videos/ingest.php:352
@@ -2946,7 +2595,6 @@ msgstr "لا"
 
 #: lib/SubjectsPlus/Control/Config.php:515
 #: lib/SubjectsPlus/Control/Config.php:932
-#, fuzzy
 msgid "Not right?"
 msgstr "غير متروك؟"
 
@@ -2987,9 +2635,7 @@ msgid "Welcome!"
 msgstr "مرحباً!"
 
 #: lib/SubjectsPlus/Control/Config.php:671
-msgid ""
-"Before getting started, we need some information about the database, You "
-"will need to know the following: "
+msgid "Before getting started, we need some information about the database, You will need to know the following: "
 msgstr "قبل أن نبأ، نحتاج بعض المعلومات عن القاعدة. يجب عليك معرفة مايلي: "
 
 #: lib/SubjectsPlus/Control/Config.php:673
@@ -3009,14 +2655,8 @@ msgid "Database name"
 msgstr "اسم قواعد البيانات"
 
 #: lib/SubjectsPlus/Control/Config.php:678
-msgid ""
-"If for any reason this automatic file creation does not work, you can simply "
-"open <code>config-default.php</code> in a text editor and fill in your "
-"information and then save it as <code>config.php</code>."
-msgstr ""
-"اذا تعذر انشاء هذا الملف تلقائيا لأي سبب، بإمكانك ببساطة فتح ملف "
-"<code>config-default.php</code> في محرر نصي وتعبئة بياناتك ومن ثم حفظه باسم "
-"<code>config.php</code>."
+msgid "If for any reason this automatic file creation does not work, you can simply open <code>config-default.php</code> in a text editor and fill in your information and then save it as <code>config.php</code>."
+msgstr "اذا تعذر انشاء هذا الملف تلقائيا لأي سبب، بإمكانك ببساطة فتح ملف <code>config-default.php</code> في محرر نصي وتعبئة بياناتك ومن ثم حفظه باسم <code>config.php</code>."
 
 #: lib/SubjectsPlus/Control/Config.php:950
 msgid "Database Configurations"
@@ -3027,10 +2667,7 @@ msgid "SubjectsPlus Installation"
 msgstr "تركيب موضوعات بلس"
 
 #: lib/SubjectsPlus/Control/Config.php:972
-msgid ""
-"<p>Welcome to the SubjetsPlus Installation. Please complete the following "
-"information so that we can continue with installation. These can be changed "
-"later.</p>"
+msgid "<p>Welcome to the SubjetsPlus Installation. Please complete the following information so that we can continue with installation. These can be changed later.</p>"
 msgstr "p>مرحباً بك في تركيب موضوعات بلس.</p>"
 
 #: lib/SubjectsPlus/Control/Config.php:975
@@ -3166,12 +2803,10 @@ msgid "Listed:  Appears on the guides page"
 msgstr ""
 
 #: lib/SubjectsPlus/Control/Guide.php:318
-#, fuzzy
 msgid "Unlisted:  Not listed, but visible if you have the URL"
 msgstr "مخفي: غير ظاهر، ولكن يمكن رؤيته اذا لديك الرابط"
 
 #: lib/SubjectsPlus/Control/Guide.php:323
-#, fuzzy
 msgid "Hidden:  Must be logged in to SP to view"
 msgstr "محجوب: يجب تسجيل الدخول في موضوعات بلس قبل العرض"
 
@@ -3224,10 +2859,8 @@ msgstr "لقد حدثت مشكلة في الحذف (خطوة 2 من 2)"
 
 #: lib/SubjectsPlus/Control/Guide.php:615
 #: lib/SubjectsPlus/Control/Guide.php:696
-msgid ""
-"There is already a guide with this SHORTFORM.  The shortform must be unique."
-msgstr ""
-"يوجد بالفعل دليل بهذه الصيغة المختصرة. يجب أن تكون الصيغة المشتركة فريدة."
+msgid "There is already a guide with this SHORTFORM.  The shortform must be unique."
+msgstr "يوجد بالفعل دليل بهذه الصيغة المختصرة. يجب أن تكون الصيغة المشتركة فريدة."
 
 #: lib/SubjectsPlus/Control/Guide.php:685
 #: lib/SubjectsPlus/Control/Guide.php:794
@@ -3314,16 +2947,11 @@ msgstr "صورة: آه أوه"
 
 #: lib/SubjectsPlus/Control/LinkChecker.php:121
 msgid "<i>Possible</i> problem with link; click on link to open in new window."
-msgstr ""
-"<i>محتمل</i> هناك مشكلة في الرابط.؛ انقر على الرابط ليفتح في نافذة جديدة.."
+msgstr "<i>محتمل</i> هناك مشكلة في الرابط.؛ انقر على الرابط ليفتح في نافذة جديدة.."
 
 #: lib/SubjectsPlus/Control/LinkChecker.php:163
-msgid ""
-"Please wait while the links in your guide are being checked. This will vary "
-"depending on how many links are in your guide."
-msgstr ""
-"الرجاء الانتظار الى حين الانتهاء من فحص الروابط في دليلك. مدة الانتظار تختلف "
-"حسب عدد الروابط في دليلك."
+msgid "Please wait while the links in your guide are being checked. This will vary depending on how many links are in your guide."
+msgstr "الرجاء الانتظار الى حين الانتهاء من فحص الروابط في دليلك. مدة الانتظار تختلف حسب عدد الروابط في دليلك."
 
 #: lib/SubjectsPlus/Control/LinkChecker.php:181
 msgid "Checking 'All Items By Source' Box:"
@@ -3360,12 +2988,8 @@ msgid "Box:"
 msgstr "صندوق"
 
 #: lib/SubjectsPlus/Control/LinkChecker.php:330
-msgid ""
-"Please wait while the locations of all records are being checked. This will "
-"vary depending on how many locations there are."
-msgstr ""
-"الرجائ الانتظار حتى يتم فحص أماكن جميع التسجيلات. هذا يعتمد على عدد الأماكن "
-"الموجودة. "
+msgid "Please wait while the locations of all records are being checked. This will vary depending on how many locations there are."
+msgstr "الرجائ الانتظار حتى يتم فحص أماكن جميع التسجيلات. هذا يعتمد على عدد الأماكن الموجودة. "
 
 #: lib/SubjectsPlus/Control/LinkChecker.php:345
 msgid "Checking All Records"
@@ -3430,7 +3054,6 @@ msgstr "تفسير الأيقونات"
 #: lib/SubjectsPlus/Control/Pluslet/3.php:95
 #: lib/SubjectsPlus/Control/Pluslet/SubjectSpecialist.php:266
 #: lib/SubjectsPlus/Control/Pluslet/SubjectSpecialist.php:272
-#, fuzzy
 msgid "Contact Us"
 msgstr "بيانتت اتصال"
 
@@ -3496,7 +3119,6 @@ msgid "Catalog Search"
 msgstr "بحث الفهرس"
 
 #: lib/SubjectsPlus/Control/Pluslet/Chat.php:47
-#, fuzzy
 msgid "Click 'Save Changes' to view your Chat box."
 msgstr "أنقر على \"احفظ\" لترى صندوق بحثك."
 
@@ -3514,16 +3136,11 @@ msgid "It can be found on this guide: "
 msgstr "يمكن تواجدها في هذا الدليل."
 
 #: lib/SubjectsPlus/Control/Pluslet/Clone.php:43
-msgid ""
-"There was a problem locating its original source. It's possible that the "
-"original guide has been deleted."
-msgstr ""
-"يوجد مشكلة في الوصول الى المصدر الأصل. من الممكن أنه تم حذف الدليل الأصل."
+msgid "There was a problem locating its original source. It's possible that the original guide has been deleted."
+msgstr "يوجد مشكلة في الوصول الى المصدر الأصل. من الممكن أنه تم حذف الدليل الأصل."
 
 #: lib/SubjectsPlus/Control/Pluslet/Clone.php:50
-msgid ""
-"Your box has been linked. You will need to save the page to view its "
-"contents."
+msgid "Your box has been linked. You will need to save the page to view its contents."
 msgstr "تم ربط صندوقك  بنجاح. عليك بحفظ الصفحة لترى محتواها."
 
 #: lib/SubjectsPlus/Control/Pluslet/Clone.php:139
@@ -3566,11 +3183,8 @@ msgid "items<br />Show descriptions?"
 msgstr "المواد<br />اعرض التخصصات?"
 
 #: lib/SubjectsPlus/Control/Pluslet/Feed.php:94
-msgid ""
-"You can enter a URL to an RSS feed or use your username for Delicious or "
-"Tumblr."
-msgstr ""
-"يمكنك ادخال URL تغذية ال RSS أو استخدم اسم حسابك على Delicious أو Tumblr"
+msgid "You can enter a URL to an RSS feed or use your username for Delicious or Tumblr."
+msgstr "يمكنك ادخال URL تغذية ال RSS أو استخدم اسم حسابك على Delicious أو Tumblr"
 
 #: lib/SubjectsPlus/Control/Pluslet/Feed.php:127
 msgid "Loading ..."
@@ -3601,7 +3215,6 @@ msgstr "بحث جوجل"
 
 #: lib/SubjectsPlus/Control/Pluslet/GuideEditorList.php:32
 #: lib/SubjectsPlus/Control/Pluslet/GuideEditorList.php:38
-#, fuzzy
 msgid "Guide Editor"
 msgstr "عنوان الدليل"
 
@@ -3630,33 +3243,19 @@ msgid "Guide Select"
 msgstr "مجموعات الأدلة"
 
 #: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:110
-msgid ""
-"There was a problem creating the YouTube embed. The URL should look like: "
-"http://www.youtube.com/watch?v=abc1234"
-msgstr ""
-"يوجد مشكلة عند انشاء اليوتيوب المُتضمن.  تأكد من ظهور الرابط على هذا النحو: "
-"http://www.youtube.com/watch?v=abc1234"
+msgid "There was a problem creating the YouTube embed. The URL should look like: http://www.youtube.com/watch?v=abc1234"
+msgstr "يوجد مشكلة عند انشاء اليوتيوب المُتضمن.  تأكد من ظهور الرابط على هذا النحو: http://www.youtube.com/watch?v=abc1234"
 
 #: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:125
-msgid ""
-"There was a problem creating the Vimeo embed. The URL should look like: "
-"http://vimeo.com/0137581375135"
-msgstr ""
-"يوجد مشكلة عند انشاء الفيميو المُتضمن.  تأكد من ظهور الرابط على هذا النحو: "
-"http://vimeo.com/0137581375135"
+msgid "There was a problem creating the Vimeo embed. The URL should look like: http://vimeo.com/0137581375135"
+msgstr "يوجد مشكلة عند انشاء الفيميو المُتضمن.  تأكد من ظهور الرابط على هذا النحو: http://vimeo.com/0137581375135"
 
 #: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:137
-msgid ""
-"Sorry, your browser doesn't support embedded videos, but don't worry, you "
-"can <a href='videofile.ogg'>download it</a> and watch it with your favorite "
-"video player!"
-msgstr ""
-"عذراً، متصفحك لا يدعم الفيديو المُتضمن. يمكنك  <a href='videofile.ogg'>تنزيله</"
-"a> ومشاهدته ببرنامج تشغيل الفيديو المفضل لديك."
+msgid "Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href='videofile.ogg'>download it</a> and watch it with your favorite video player!"
+msgstr "عذراً، متصفحك لا يدعم الفيديو المُتضمن. يمكنك  <a href='videofile.ogg'>تنزيله</a> ومشاهدته ببرنامج تشغيل الفيديو المفضل لديك."
 
 #: lib/SubjectsPlus/Control/Pluslet/LinkList.php:31
 #: lib/SubjectsPlus/Control/Pluslet/LinkList.php:37
-#, fuzzy
 msgid "Link List"
 msgstr "الرابط جيد!"
 
@@ -3731,20 +3330,16 @@ msgid "Note: "
 msgstr "ملاحظة: "
 
 #: lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php:56
-#, fuzzy
 msgid "Click 'Save Changes' to view your Primo Search box."
 msgstr "أنقر على \"احفظ\" لترى صندوق بحثك."
 
 #: lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php:61
 #: lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php:66
-#, fuzzy
 msgid "Primo Search"
 msgstr "بحث كتاب"
 
 #: lib/SubjectsPlus/Control/Pluslet/Related.php:23
-msgid ""
-"This box automatically links to any child guides that you have assigned to "
-"this guide."
+msgid "This box automatically links to any child guides that you have assigned to this guide."
 msgstr "يوصلك هذا الصندوق تلقائياً بأي أدلة فرعية سبق أن عينتها لهذا الدليل."
 
 #: lib/SubjectsPlus/Control/Pluslet/Related.php:53
@@ -3950,35 +3545,20 @@ msgid "Photo"
 msgstr "صورة"
 
 #: lib/SubjectsPlus/Control/Staff.php:627
-msgid ""
-"Select which parts of SubjectsPlus this user may access.\n"
-"                <br /><strong>records</strong> allows access to both the "
-"Record and Guide tabs.\n"
-"                <br /><strong>eresource_mgr</strong> allows the user to see "
-"all the information about a Record (and delete it), and quickly see all "
-"guides.\n"
-"                <br /><strong>admin</strong> allows access to the overall "
-"admin of the site.\n"
-"                <br /><strong>librarian</strong> means user shows up in "
-"lists of librarians.\n"
-"                <br /><strong>supervisor</strong> means user shows up in "
-"list of supervisors\n"
-"                <br /><strong>view_map</strong> lets user see the map of "
-"where everyone lives.  Probably only for muckymucks."
-msgstr ""
-"إختر أي جزء من موضوعات بلس يمكن لهذا المستخدم الوصول اليه.\n"
-"                <p><strong>التسجيلات</strong> تسمح الوصول الى ألسنة كل من "
-"التسجيلة والدليلً.\n"
-"                <p><strong>مدير_الموارد_الإلكترونية</strong> تسمح برؤية كافة "
-"المعلومات حول التسجيلة (وحذفها) ورؤية جميع الأدلة بسرعة أيضا.\n"
-"                <p><strong>مدير</strong>  تسمح الوصول الى إدارة الموقع بشكل "
-"شامل. \n"
-"                <p><strong>أخصائي مكتبات</strong>  تعني ظهور المستخدم في "
-"قوائم أخصائيي المكتبات. \n"
-"                <p><strong>مشرف</strong> تعني ظهور المستخدم في قوائم "
-"المشرفين\n"
-"                <p><strong>عرض_الخريطة</strong> تتيح للمستخدم مشاهدة أين "
-"يعيش كل شخص على الخريطة. ربما فقط لمواقف نادرة. \n"
+msgid "Select which parts of SubjectsPlus this user may access.\n"
+"                <br /><strong>records</strong> allows access to both the Record and Guide tabs.\n"
+"                <br /><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.\n"
+"                <br /><strong>admin</strong> allows access to the overall admin of the site.\n"
+"                <br /><strong>librarian</strong> means user shows up in lists of librarians.\n"
+"                <br /><strong>supervisor</strong> means user shows up in list of supervisors\n"
+"                <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks."
+msgstr "إختر أي جزء من موضوعات بلس يمكن لهذا المستخدم الوصول اليه.\n"
+"                <p><strong>التسجيلات</strong> تسمح الوصول الى ألسنة كل من التسجيلة والدليلً.\n"
+"                <p><strong>مدير_الموارد_الإلكترونية</strong> تسمح برؤية كافة المعلومات حول التسجيلة (وحذفها) ورؤية جميع الأدلة بسرعة أيضا.\n"
+"                <p><strong>مدير</strong>  تسمح الوصول الى إدارة الموقع بشكل شامل. \n"
+"                <p><strong>أخصائي مكتبات</strong>  تعني ظهور المستخدم في قوائم أخصائيي المكتبات. \n"
+"                <p><strong>مشرف</strong> تعني ظهور المستخدم في قوائم المشرفين\n"
+"                <p><strong>عرض_الخريطة</strong> تتيح للمستخدم مشاهدة أين يعيش كل شخص على الخريطة. ربما فقط لمواقف نادرة. \n"
 "                "
 
 #: lib/SubjectsPlus/Control/Staff.php:642
@@ -4067,12 +3647,8 @@ msgid "Re-Enter Password"
 msgstr "إعادة تعيين كلمة المرور "
 
 #: lib/SubjectsPlus/Control/Staff.php:962
-msgid ""
-"Thy will be done.  Note that any subject guides associated with this user "
-"are now orphans.  Pity the orphans."
-msgstr ""
-"ابشر بما يرضيك. لاحظ أن أي أدلة موضوعات مرتبطة بهذا المستخدم ستكون يتيمة "
-"الآن."
+msgid "Thy will be done.  Note that any subject guides associated with this user are now orphans.  Pity the orphans."
+msgstr "ابشر بما يرضيك. لاحظ أن أي أدلة موضوعات مرتبطة بهذا المستخدم ستكون يتيمة الآن."
 
 #: lib/SubjectsPlus/Control/Staff.php:966
 #: lib/SubjectsPlus/Control/StaffBrief.php:332
@@ -4082,24 +3658,16 @@ msgid "There was a problem with your delete."
 msgstr "لقد حدثت مشكلة لحذفك."
 
 #: lib/SubjectsPlus/Control/Staff.php:984
-msgid ""
-"Pasword must have a special character, a letter, a number, and at least 6 "
-"characters. Insert was not executed."
-msgstr ""
-"يجب احتواء كلمة المرور على رمز خاص، و حرف، و رقم، ويجب ان لا يقل عدد الخانات "
-"عن 6. لم يتم تنفيذ طلب الادراج. "
+msgid "Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed."
+msgstr "يجب احتواء كلمة المرور على رمز خاص، و حرف، و رقم، ويجب ان لا يقل عدد الخانات عن 6. لم يتم تنفيذ طلب الادراج. "
 
 #: lib/SubjectsPlus/Control/Staff.php:995
 msgid "Email is not unique. Insert was not executed."
 msgstr "البريد الإلكتروني ليس مميز. لم يتم تنفيذ طلب الادراج."
 
 #: lib/SubjectsPlus/Control/Staff.php:1065
-msgid ""
-"Couldn't create directory in /assets/users/. Please check this folder's "
-"permissions. "
-msgstr ""
-"لم نستطع انشاء مجلد في /assets/users/. الرجاء التأكد من صلاحيات الوصول الى "
-"هذا المجلد."
+msgid "Couldn't create directory in /assets/users/. Please check this folder's permissions. "
+msgstr "لم نستطع انشاء مجلد في /assets/users/. الرجاء التأكد من صلاحيات الوصول الى هذا المجلد."
 
 #: lib/SubjectsPlus/Control/Staff.php:1076
 #: lib/SubjectsPlus/Control/StaffBrief.php:397
@@ -4127,11 +3695,8 @@ msgid "Permissions"
 msgstr "صلاحيات"
 
 #: lib/SubjectsPlus/Control/StaffBrief.php:328
-msgid ""
-"Thy will be done.  Note that any subject guides associated with this user "
-"are now orphans."
-msgstr ""
-"ابشر بما يرضيك. لاحظ أن أي أدلة موضوع مرتبطة بهذا المستخدم ستكون يتيمة الآن."
+msgid "Thy will be done.  Note that any subject guides associated with this user are now orphans."
+msgstr "ابشر بما يرضيك. لاحظ أن أي أدلة موضوع مرتبطة بهذا المستخدم ستكون يتيمة الآن."
 
 #: lib/SubjectsPlus/Control/StaffDisplay.php:196
 msgid "Librarian"
@@ -4171,10 +3736,8 @@ msgid "Topic Tags (relevant topics)"
 msgstr "وسوم الموضوعات (موضوعات ذات صلة)"
 
 #: lib/SubjectsPlus/Control/Talkback.php:311
-msgid ""
-"Thy will be done.  Offending Talkback deleted.  Close window to continue."
-msgstr ""
-"ابشر بما يرضيك. تم حذف اسنفسار من مستفيد المسئ. أغلق النافذة للاستمرار."
+msgid "Thy will be done.  Offending Talkback deleted.  Close window to continue."
+msgstr "ابشر بما يرضيك. تم حذف اسنفسار من مستفيد المسئ. أغلق النافذة للاستمرار."
 
 #: lib/SubjectsPlus/Control/Talkback.php:313
 msgid "Thy will be done.  Offending Talkback deleted."
@@ -4189,32 +3752,20 @@ msgid "Welcome to the SubjectPlus Updater!"
 msgstr "مرحباً بك في مُحدث موضوعات بلس!"
 
 #: lib/SubjectsPlus/Control/Updater.php:402
-msgid ""
-"Before we begin, if you are currently running version 0.9, please run the <a "
-"href=\"migrate_to_v1_fromv09.php\">Migrator</a>."
-msgstr ""
-"قبل أن نبدأ، اذا كنت حالياً تعمل على النسخة 0.9 الرجاء قم بتشغيل المُرقي</a>. "
-"<a href=\"migrate_to_v1_fromv09.php\"> "
+msgid "Before we begin, if you are currently running version 0.9, please run the <a href=\"migrate_to_v1_fromv09.php\">Migrator</a>."
+msgstr "قبل أن نبدأ، اذا كنت حالياً تعمل على النسخة 0.9 الرجاء قم بتشغيل المُرقي</a>. <a href=\"migrate_to_v1_fromv09.php\"> "
 
 #: lib/SubjectsPlus/Control/Updater.php:403
-msgid ""
-"If you are running version 1.x or higher, follow these steps to update to "
-"version 4."
-msgstr ""
-"اذا كنت تعمل على النسخة 1.x أو أحدث منها، الرجاء اتباع هذه الخطوات للتحديث "
-"الى النسخة 4."
+msgid "If you are running version 1.x or higher, follow these steps to update to version 4."
+msgstr "اذا كنت تعمل على النسخة 1.x أو أحدث منها، الرجاء اتباع هذه الخطوات للتحديث الى النسخة 4."
 
 #: lib/SubjectsPlus/Control/Updater.php:408
 msgid "Backup your current SubjectsPlus database"
 msgstr "قم بعمل نسخة احتياطية من قاعدة معلومات موضوعات بلس الحالية"
 
 #: lib/SubjectsPlus/Control/Updater.php:410
-msgid ""
-"The updater will examine and update your data in order to work with 4. Also "
-"if error occurs, you may need to revert back to older database."
-msgstr ""
-"سوف يفحص التحديث ويحدث بياناتك حتى تعمل مع الاصدارة 3.0. أيضاً، في حال حدوث "
-"خطأ، ربما عليك او ترجع الى نسخة قديمة من قاعدة البيانات."
+msgid "The updater will examine and update your data in order to work with 4. Also if error occurs, you may need to revert back to older database."
+msgstr "سوف يفحص التحديث ويحدث بياناتك حتى تعمل مع الاصدارة 3.0. أيضاً، في حال حدوث خطأ، ربما عليك او ترجع الى نسخة قديمة من قاعدة البيانات."
 
 #: lib/SubjectsPlus/Control/Updater.php:412
 msgid "After <a href=\"?step=1\">Run Updater</a>"
@@ -4235,28 +3786,16 @@ msgid "SubjectsPlus update to 4 complete. Please log in."
 msgstr "تمت الترقية الى الاصدارة 4.0 من موضوعات بلس. الرجاء سجّل الدخول."
 
 #: lib/SubjectsPlus/Control/Updater.php:574
-msgid ""
-"If you have any <strong>custom pluslets</strong>. please follow the "
-"following steps to successfully migrate over."
-msgstr ""
-"اذا لديم أي <strong>عناصر معدلة</strong>، ارجاء اتبع الخطوات التالية لعمل "
-"ترقية ناجحة."
+msgid "If you have any <strong>custom pluslets</strong>. please follow the following steps to successfully migrate over."
+msgstr "اذا لديم أي <strong>عناصر معدلة</strong>، ارجاء اتبع الخطوات التالية لعمل ترقية ناجحة."
 
 #: lib/SubjectsPlus/Control/Updater.php:575
-msgid ""
-"Move custom pluslets from &#39;/control/includes/classes&#39; to &#39;/lib/"
-"SubjectsPlus/Control/Pluslet&#39;"
-msgstr ""
-"أنقل العناصر المعدلة من  &#39;/control/includes/classes&#39;  الى  &#39;/lib/"
-"SubjectsPlus/Control/Pluslet&#39;"
+msgid "Move custom pluslets from &#39;/control/includes/classes&#39; to &#39;/lib/SubjectsPlus/Control/Pluslet&#39;"
+msgstr "أنقل العناصر المعدلة من  &#39;/control/includes/classes&#39;  الى  &#39;/lib/SubjectsPlus/Control/Pluslet&#39;"
 
 #: lib/SubjectsPlus/Control/Updater.php:576
-msgid ""
-"Rename files to remove &#39;sp_Pluslet_&#39;. For example, rename &#39;"
-"sp_Pluslet_111.php&#39; to &#39;111.php&#39;"
-msgstr ""
-"أعد تسمية الملفات لاسترجاع &#39;sp_Pluslet_&#39;. على سبيل المثال، &#39;"
-"sp_Pluslet_111.php&#39; الى &#39;111.php&#39;"
+msgid "Rename files to remove &#39;sp_Pluslet_&#39;. For example, rename &#39;sp_Pluslet_111.php&#39; to &#39;111.php&#39;"
+msgstr "أعد تسمية الملفات لاسترجاع &#39;sp_Pluslet_&#39;. على سبيل المثال، &#39;sp_Pluslet_111.php&#39; الى &#39;111.php&#39;"
 
 #: lib/SubjectsPlus/Control/Updater.php:577
 msgid "Edit each file to add the following lines to the top of the file:"
@@ -4271,26 +3810,16 @@ msgid "require_once(&quot;Pluslet.php&quot;);"
 msgstr "require_once(&quot;Pluslet.php&quot;);"
 
 #: lib/SubjectsPlus/Control/Updater.php:580
-msgid ""
-"Edit each file to remove &#39;sp_&#39; from class declaration. For example, "
-"edit &#39;class sp_Pluslet_6 extends sp_Pluslet {&#39; to &#39;class "
-"Pluslet_6 extends Pluslet {&#39;"
-msgstr ""
-"حرّر كل ملف لحذف &#39;sp_&#39; من تصريح الكلاس. على سبيل المثال، عندما تحرّر  "
-"&#39;class سوف ينتج عنه: sp_Pluslet_6 امتداد sp_Pluslet {&#39; الى &#39;"
-"class و Pluslet_6  امتداد Pluslet {&#39;"
+msgid "Edit each file to remove &#39;sp_&#39; from class declaration. For example, edit &#39;class sp_Pluslet_6 extends sp_Pluslet {&#39; to &#39;class Pluslet_6 extends Pluslet {&#39;"
+msgstr "حرّر كل ملف لحذف &#39;sp_&#39; من تصريح الكلاس. على سبيل المثال، عندما تحرّر  &#39;class سوف ينتج عنه: sp_Pluslet_6 امتداد sp_Pluslet {&#39; الى &#39;class و Pluslet_6  امتداد Pluslet {&#39;"
 
 #: lib/SubjectsPlus/Control/Updater.php:582
 msgid "You many need to change custom CSS styles for your theme."
 msgstr "لربما عليك تغيير ستايل الـ CSS المخصصة للثيم الخاص بك. "
 
 #: lib/SubjectsPlus/Control/Updater.php:586
-msgid ""
-"The first time you log in after update, you must use entire email address "
-"for user (e.g. admin@sp.edu)."
-msgstr ""
-"عند أول مرة تسجل دخولك بعد التحديث، عليك ان تستخدم البريد الإلكتروني كاملا "
-"لذلك المستخد (مثلا: admin@sp.edu)"
+msgid "The first time you log in after update, you must use entire email address for user (e.g. admin@sp.edu)."
+msgstr "عند أول مرة تسجل دخولك بعد التحديث، عليك ان تستخدم البريد الإلكتروني كاملا لذلك المستخد (مثلا: admin@sp.edu)"
 
 #: lib/SubjectsPlus/Control/Updater.php:604
 msgid "Updater Error"
@@ -4359,9 +3888,7 @@ msgid "Create Date"
 msgstr "أنشئ تاريخ"
 
 #: lib/SubjectsPlus/Control/Video.php:281
-msgid ""
-"Thy will be done.  Offending video metadata deleted.  Close window to "
-"continue."
+msgid "Thy will be done.  Offending video metadata deleted.  Close window to continue."
 msgstr "ابشر بما يرضيك. تم حذف السؤال الشائع المسيء. أغلق النافذة للاستمرار."
 
 #: lib/SubjectsPlus/Control/Video.php:283
@@ -4417,12 +3944,8 @@ msgid "An alphabetical list of the electronic resources available."
 msgstr "توجد قائمة أبجدية متاحة للمصادر الالكترونية"
 
 #: subjects/databases.php:28 subjects/themes/um/databases.php:20
-msgid ""
-"library, research, electronic journals, databases, electronic resources, "
-"full text, online, magazine, articles, paper, assignment"
-msgstr ""
-"المكتبة، البحث، الدوريات الالكترونية، قواعد البيانات، المصادر الالكترونية، "
-"النص الكامل، أونلاين، المجلة، المقالات، الأوراق، المهمات"
+msgid "library, research, electronic journals, databases, electronic resources, full text, online, magazine, articles, paper, assignment"
+msgstr "المكتبة، البحث، الدوريات الالكترونية، قواعد البيانات، المصادر الالكترونية، النص الكامل، أونلاين، المجلة، المقالات، الأوراق، المهمات"
 
 #: subjects/databases.php:49 subjects/themes/um/databases.php:41
 msgid "Database List By Subject"
@@ -4446,16 +3969,8 @@ msgstr "قواعد بيانات مختارة"
 
 #: subjects/faq.php:54 subjects/themes/ic/faq.php:54
 #: subjects/themes/um/faq.php:47
-msgid ""
-"<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them "
-"<strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., "
-"different groupings of FAQs for different purposes/audiences), or browse the "
-"Basic FAQs, below.</p>"
-msgstr ""
-"<p>يمكنك <strong>بخث</strong>الأسئلة الشائعة، <strong>استعراضها</strong> "
-"بواسطة <strong>الموضوع</strong>، انظر <strong>مجموعات</strong>الأسئلة "
-"الشائعة(أي: التجميعات المختلفة للأسئلة الشائعة لمحتلف الأغراض/الجماهير )، أو "
-"استعرض الأسئلة الشائعة الأساسية أدناه  </p>"
+msgid "<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them <strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., different groupings of FAQs for different purposes/audiences), or browse the Basic FAQs, below.</p>"
+msgstr "<p>يمكنك <strong>بخث</strong>الأسئلة الشائعة، <strong>استعراضها</strong> بواسطة <strong>الموضوع</strong>، انظر <strong>مجموعات</strong>الأسئلة الشائعة(أي: التجميعات المختلفة للأسئلة الشائعة لمحتلف الأغراض/الجماهير )، أو استعرض الأسئلة الشائعة الأساسية أدناه  </p>"
 
 #: subjects/faq.php:289 subjects/themes/ic/faq.php:290
 #: subjects/themes/um/faq.php:265
@@ -4494,8 +4009,7 @@ msgstr "أحدث قواعد البيانات"
 
 #: subjects/search.php:112
 msgid "Search Subject Guides, Database Records, Staff List, FAQs, etc."
-msgstr ""
-"ابحث عن أدلة الموضوع، تسجيلات القاعدة، قائمة الموظفين، الأسئلة الشائعة، الخ."
+msgstr "ابحث عن أدلة الموضوع، تسجيلات القاعدة، قائمة الموظفين، الأسئلة الشائعة، الخ."
 
 #: subjects/staff.php:69
 msgid "Staff Listing"
@@ -4526,9 +4040,7 @@ msgid "Thanks"
 msgstr "شكرا"
 
 #: subjects/talkback.php:103 subjects/themes/um/talkback.php:121
-msgid ""
-"Thank you for your feedback.  We will try to post a response within the next "
-"three business days."
+msgid "Thank you for your feedback.  We will try to post a response within the next three business days."
 msgstr "شكرا على ردك. سوف نحاول نشر إجابة خلال أيام العمل الثلاثة التالية"
 
 #: subjects/talkback.php:110 subjects/themes/um/talkback.php:128
@@ -4592,33 +4104,22 @@ msgid "Hmm, That Was a Tricky Bit of Math"
 msgstr "حسنا، لقد كانت تلك عملية حسابية صعبة"
 
 #: subjects/talkback.php:466 subjects/themes/um/talkback.php:482
-msgid ""
-"Sorry, you must answer the Skill Testing Question correctly.  It's an anti-"
-"spam measure . . . ."
-msgstr ""
-"عذرا، يجب عليك الإجابة على سؤال اختبار المهارة بشكل صحيح، لأنه مقياس مضاد "
-"للبريد الضار...."
+msgid "Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . ."
+msgstr "عذرا، يجب عليك الإجابة على سؤال اختبار المهارة بشكل صحيح، لأنه مقياس مضاد للبريد الضار...."
 
 #: subjects/talkback.php:486
-msgid ""
-"<p><strong>Talk Back</strong> is where you can <strong>ask a question</"
-"strong> or <strong>make a suggestion</strong> about library services.</p>\n"
-"\t\t<p>So, please let us know what you think, and we will post your "
-"suggestion and an answer from one of our helpful staff members.</p>"
-msgstr ""
-"<p><strong>استفسار من مستفيد</strong> هو المكان الذي يمكنك فيه <strong>طرح "
-"سؤال</strong> أو <strong>تقديم مقترح</strong>حول خدمات المكتبة.</p>\n"
+msgid "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>\n"
+"\t\t<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>"
+msgstr "<p><strong>استفسار من مستفيد</strong> هو المكان الذي يمكنك فيه <strong>طرح سؤال</strong> أو <strong>تقديم مقترح</strong>حول خدمات المكتبة.</p>\n"
 "\t\t\t\n"
 "\n"
-"\t\t<p>لذا، يرجى إعلامنا برأيك، وسوف نقوم بنشر مقترحك وإجابة من أحد موظفينا "
-"المختصين</p>"
+"\t\t<p>لذا، يرجى إعلامنا برأيك، وسوف نقوم بنشر مقترحك وإجابة من أحد موظفينا المختصين</p>"
 
 #: subjects/talkback.php:496
 msgid "Tell Us What You Think"
 msgstr "أخبرنا برأيك"
 
 #: subjects/talkback.php:498
-#, fuzzy
 msgid "Wait!  Do you need help right now?"
 msgstr "انتظر! هل تحتاج المساعدة متروكة الآن؟"
 
@@ -4660,8 +4161,7 @@ msgstr "تم عرض كافة الأسئلة الشائعة. قم بالبحث ا
 
 #: subjects/themes/um/faq.php:306
 msgid "Note:  Not all FAQs displayed.  Search or browse for more "
-msgstr ""
-"ملاحظة: لا يتم عرض جميع الأسئلة الشائعة. قم باستعراض المزيد أو البحث عنه."
+msgstr "ملاحظة: لا يتم عرض جميع الأسئلة الشائعة. قم باستعراض المزيد أو البحث عنه."
 
 #: subjects/themes/um/faq.php:338
 msgid "Browse FAQs by Subject"
@@ -4680,17 +4180,12 @@ msgid "Comments"
 msgstr "تعليقات"
 
 #: subjects/themes/um/talkback.php:504
-msgid ""
-"<p>Please use this page <strong>make a comment or suggestion</strong> about "
-"library services.</p>\n"
+msgid "<p>Please use this page <strong>make a comment or suggestion</strong> about library services.</p>\n"
 " \n"
 "        <p>We will post your suggestion as well as a response.</p>\n"
 "\n"
-"        <p class=\"response-link\"><a href=\"#tellus\">Submit your response</"
-"a></p>"
-msgstr ""
-"<p>الرجاء استخدم هذه الصفحة <strong>قدّم تعليق أو مقترح</strong> حول خدمات "
-"المكتبة.</p>\n"
+"        <p class=\"response-link\"><a href=\"#tellus\">Submit your response</a></p>"
+msgstr "<p>الرجاء استخدم هذه الصفحة <strong>قدّم تعليق أو مقترح</strong> حول خدمات المكتبة.</p>\n"
 " \n"
 "        <p>سوف ننشر مقترحك وكذلك الرد عليه.</p>\n"
 "\n"
@@ -4720,54 +4215,87 @@ msgstr "أفلام مختارة."
 msgid "Browse by Tag"
 msgstr "اعرض حسب الوسم"
 
-#~ msgid "Create Database List Box"
-#~ msgstr "أنشئ صندوق قائمة قاعدة بيانات"
+#: 
+msgid "Create Database List Box"
+msgstr "أنشئ صندوق قائمة قاعدة بيانات"
 
-#~ msgid "Create List Box"
-#~ msgstr "أنشئ صندوق القائمة"
+#: 
+msgid "Create List Box"
+msgstr "أنشئ صندوق القائمة"
 
-#~ msgid "Custom List"
-#~ msgstr "قامة مخصصة"
+#: 
+msgid "Custom List"
+msgstr "قامة مخصصة"
 
-#~ msgid "E.g., musichistory.jpg, if your shortform is \"musichistory\"."
-#~ msgstr ""
-#~ "مثلا، الملف musichistory.jpg في حال أسمبت النموذج المصغر \"musichistory\"."
+#: 
+msgid "Drag box selection, then drop it to the left"
+msgstr "إسحب اختيارك من الصناديق، ثم إفلاته على اليسار"
 
-#~ msgid "Enter database title..."
-#~ msgstr "أدخل عنوان قاعدة البيانات.."
+#: 
+msgid "E.g., musichistory.jpg, if your shortform is \"musichistory\"."
+msgstr "مثلا، الملف musichistory.jpg في حال أسمبت النموذج المصغر \"musichistory\"."
 
-#~ msgid ""
-#~ "If you want to associate a thumbnail image with this guide, put a file "
-#~ "called [shortform].jpg in assets/images/guide_thumbs/ on the server."
-#~ msgstr ""
-#~ "اذا رغبت في إلحاق صورة مصغيرة بهذا الدليل، عليك وضع ملف باسم [shortform]."
-#~ "jpg في المسار assets/images/guide_thumbs/ على الخادم."
+#: 
+msgid "Enter database title..."
+msgstr "أدخل عنوان قاعدة البيانات.."
 
-#~ msgid ""
-#~ "Note that this is NOT required, and might NOT be implemented in your "
-#~ "version of SubjectsPlus."
-#~ msgstr "لاحظ أن هذا ليس إجبار، ولربما غير مدعوم في نسخنك من موضوعات بلس."
+#: 
+msgid "Hidden:  Not listed, but visible if you have the URL"
+msgstr "مخفي: غير ظاهر، ولكن يمكن رؤيته اذا لديك الرابط"
 
-#~ msgid "Open All Links in New Tab"
-#~ msgstr "افتح جميع الروابط في التاب الجديد"
+#: 
+msgid "If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server."
+msgstr "اذا رغبت في إلحاق صورة مصغيرة بهذا الدليل، عليك وضع ملف باسم [shortform].jpg في المسار assets/images/guide_thumbs/ على الخادم."
 
-#~ msgid "Public:  Everyone can see"
-#~ msgstr "عام: يمكن مشاهدته من قبل الجميع"
+#: 
+msgid "Not left?"
+msgstr "غير متروك؟"
 
-#~ msgid "Remove Boxes"
-#~ msgstr "أجذف الصناديق"
+#: 
+msgid "Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus."
+msgstr "لاحظ أن هذا ليس إجبار، ولربما غير مدعوم في نسخنك من موضوعات بلس."
 
-#~ msgid "Remove Boxes from Current Tab"
-#~ msgstr "أحذف الصناديق من اللسان الحالي"
+#: 
+msgid "Open All Links in New Tab"
+msgstr "افتح جميع الروابط في التاب الجديد"
 
-#~ msgid "Reset List Box"
-#~ msgstr "ضفّر صندوق القائمة"
+#: 
+msgid "Public:  Everyone can see"
+msgstr "عام: يمكن مشاهدته من قبل الجميع"
 
-#~ msgid "Styles"
-#~ msgstr "ستايلات"
+#: 
+msgid "Remove Boxes"
+msgstr "أجذف الصناديق"
 
-#~ msgid "Subject Specialists"
-#~ msgstr "أخضائيي الموضوع"
+#: 
+msgid "Remove Boxes from Current Tab"
+msgstr "أحذف الصناديق من اللسان الحالي"
 
-#~ msgid "Thumbnail (VERY optional)"
-#~ msgstr "صورة مصغرة (إختياري جداً)"
+#: 
+msgid "Reset List Box"
+msgstr "ضفّر صندوق القائمة"
+
+#: 
+msgid "Styles"
+msgstr "ستايلات"
+
+#: 
+msgid "Subject Specialists"
+msgstr "أخضائيي الموضوع"
+
+#: 
+msgid "SubjectsPlus: Record Delete Recommendation"
+msgstr "موضوعات بلس: توصية حذف المادة"
+
+#: 
+msgid "Suppressed:  Must be logged in to SP to view"
+msgstr "محجوب: يجب تسجيل الدخول في موضوعات بلس قبل العرض"
+
+#: 
+msgid "Thumbnail (VERY optional)"
+msgstr "صورة مصغرة (إختياري جداً)"
+
+#: 
+msgid "Wait!  Do you need help left now?"
+msgstr "انتظر! هل تحتاج المساعدة متروكة الآن؟"
+

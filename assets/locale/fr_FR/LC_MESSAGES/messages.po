@@ -1,1900 +1,4395 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#: control/includes/classes/sp_Pluslet.php:295
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-21 13:45-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: SubjectsPlus\n"
+"Language: fr\n"
 
-#: control/login.php:37
-msgid "Please enter your <strong>login and password</strong> to proceed."
+#: ckeditor/php/uploader.php:193
+#, fuzzy
+msgid "Could not upload file to user\\'s assets folder."
+msgstr "<strong>A. Téléverser un fichier</strong> dans votre répertoire d'actifs"
+
+#: ckeditor/php/uploader.php:204
+msgid "The extension is not supported."
 msgstr ""
 
-#: control/login.php:44
-msgid "Login"
+#: ckeditor/plugins/subsplus_asset/php/getExistingRadioButtons.php:36
+msgid "User assets folder does not exist and cannot create it."
 msgstr ""
 
-#: control/login.php:48 control/includes/classes/Staff.php:258
-msgid "Password"
+#: ckeditor/plugins/subsplus_asset/php/getExistingRadioButtons.php:46
+msgid "User not logged in."
 msgstr ""
 
-#: control/login.php:87
-msgid ""
-"Please check your login and password and try again.  (Note that login "
-"attempts are logged.)"
-msgstr ""
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:62
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:92
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:122
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:140
+msgid "<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>."
+msgstr "<strong>Sélectionnez</strong> les cases de chaque FAQ que vous voulez inclure dans votre <em>pluslet</em> et cliquez sur <strong>OK</strong>."
 
-#: control/guides/metadata.php:55 control/admin/user.php:111
-msgid "There is no record by that ID."
-msgstr ""
-
-#: control/guides/metadata.php:68
-msgid ""
-"You must have a title, shortform, type, and one associated staff member.  "
-"Please go back and fix these omissions.  And turn on JavaScript, for "
-"goodness sakes!"
-msgstr ""
-
-#: control/guides/metadata.php:169
-msgid "Thwarted!  You must have at least one staff member for a guide."
-msgstr ""
-
-#: control/guides/metadata.php:189 control/records/record.php:495
-msgid "You must have at least one subject."
-msgstr ""
-
-#: control/guides/metadata.php:219 control/faq/faq.php:138
-#: control/records/record.php:525 control/talkback/talkback.php:138
-#: control/admin/user.php:240
-msgid "You must complete all required form fields."
-msgstr ""
-
-#: control/guides/metadata.php:246
-msgid "There is already a guide with that short form!  Try again."
-msgstr ""
-
-#: control/guides/helpers/fck_get_tokens.php:35
-msgid "<strong>Search</strong> for a resource saved in SubjectsPlus"
-msgstr ""
-
-#: control/guides/helpers/fck_get_tokens.php:36
-msgid ""
-"<strong>Tick</strong> the button next to the desired resource and click OK "
-"(bottom)"
-msgstr ""
-
-#: control/guides/helpers/fck_get_tokens.php:42
-#: control/guides/helpers/discover.php:56
-msgid "Go!"
-msgstr ""
-
-#: control/guides/helpers/fck_get_tokens.php:43
-msgid "Include icons?"
-msgstr ""
-
-#: control/guides/helpers/fck_get_tokens.php:73
-#: control/guides/helpers/find_pluslets.php:50
-msgid "There were no results matching your query."
-msgstr ""
-
-#: control/guides/helpers/fck_get_tokens.php:88
-#: control/guides/helpers/fck_get_assets.php:85
-msgid "Never mind"
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:28
-#: control/includes/classes/sp_BuildNav.php:68
-msgid "Browse by Subject"
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:28
-#: control/includes/classes/sp_BuildNav.php:69
-msgid "Browse by Collection"
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:34
-msgid "Browse all FAQs by Subject"
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:35
-#: control/guides/helpers/fck_get_faqs.php:61
-#: control/guides/helpers/fck_get_faqs.php:97
-msgid ""
-"<strong>Tick</strong> the boxes of any FAQs you want to include in your "
-"pluslet and hit <strong>OK</strong>."
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:53
-#: control/guides/helpers/fck_get_faqs.php:80
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:85
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:115
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:133
 msgid "There are no results.  You'll need to try something different."
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:60
-msgid "Browse all FAQs by Collection"
-msgstr ""
-
-#: control/guides/helpers/fck_get_faqs.php:95
-msgid ""
-"You don't have any FAQs associated with this subject yet.  Maybe click "
-"Browse by Subject or Browse by Collection, above, to see what else is out "
-"there."
-msgstr ""
-
-#: control/guides/helpers/guide_data.php:121
-msgid "<strong>Box removed</strong>"
-msgstr ""
-
-#: control/guides/helpers/discover.php:45
-msgid "- Browse Pluslets -"
-msgstr ""
-
-#: control/guides/helpers/save_guide.php:70
-msgid "Guide Updated."
-msgstr ""
-
-#: control/guides/helpers/ajax_mod.php:32
-msgid "This item has been removed from your guide"
-msgstr ""
-
-#: control/guides/helpers/ajax_mod.php:34
-msgid "There was a problem with the delete"
-msgstr ""
-
-#: control/guides/helpers/ajax_mod.php:79
-msgid "Thy will be done.  Ranks updated."
-msgstr ""
-
-#: control/guides/helpers/ajax_mod.php:81
-msgid "There was a problem with your update."
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:46
-msgid ""
-"Select the type of link you wish to create, and click <em>Create Link</em>."
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:49
-msgid "A. Link to Subject Heading"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:51
-msgid "Prefix text (optional)"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:53
-msgid "LC Subject Heading"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:54
-#: control/guides/helpers/fck_get_cat.php:67
-#: control/guides/helpers/fck_get_cat.php:76
-msgid "Create Link"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:56
-msgid ""
-"<strong>Examples</strong> (the unlinked text is from the optional Prefix "
-"text box):</p>\r\n"
-"\t<blockquote>\r\n"
-"\tPN 1997 - Screenplays - see <span class=\"linkie\">Motion picture plays</"
-"span><br />\r\n"
-"\tTR 899 <span class=\"linkie\">Motion Pictures--Editing<span>\r\n"
-"\t</blockquote>"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:64
-msgid "B. Link to Keyword Search Results"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:66
-msgid "E.g., fast cars"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:71
-msgid "C. Link to Call Number (DVDs and Reserves only in Voyager)"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:73
-msgid "E.g., DVD 3001"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:75
-msgid "Title or Link Text"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:85
-msgid "2. Your Catalog Link (Subject Heading):"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:95
-msgid "2. Your Catalog Link (Keywords):"
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:97
-#: control/guides/helpers/fck_get_cat.php:108
-msgid ""
-"If the link looks good, hit the OK button to insert the token into the "
-"pluslet."
-msgstr ""
-
-#: control/guides/helpers/fck_get_cat.php:106
-msgid "2. Your Catalog Link (Call Number):"
-msgstr ""
-
-#: control/guides/helpers/guide_bits.php:68
-msgid "LinkChecker Results for "
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:33
-msgid "<strong>Success.</strong>  Added file:"
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:36
-msgid "There was a problem uploading your file."
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:36
-msgid "Please try again, or contact the administrator"
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:50
-msgid "<strong>A. Upload a file</strong> to your asset folder"
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:53
-msgid "Upload"
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:56
-msgid "<strong>B. Tick the item</strong> you want to insert into the pluslet"
-msgstr ""
-
-#: control/guides/helpers/fck_get_assets.php:96
-#: control/guides/helpers/fck_get_assets.php:100
-msgid ""
-"C. Add Link Text</strong> for your document.  (If you leave it blank, it "
-"will be the file name.)"
-msgstr ""
-
-#: control/guides/delish_url.php:19
-msgid "Generate Delicious Display Page.  Yum."
-msgstr ""
-
-#: control/guides/delish_url.php:21
-msgid "Use this tool to generate a page that display results from delicious."
-msgstr ""
-
-#: control/guides/delish_url.php:24
-msgid "Folder"
-msgstr ""
-
-#: control/guides/delish_url.php:25
-msgid "The delicious account name, e.g., thislibrary "
-msgstr ""
-
-#: control/guides/delish_url.php:27
-msgid "Tag"
-msgstr ""
-
-#: control/guides/delish_url.php:28
-msgid "Any subfolders you want displayed, can be more than one comma-separated"
-msgstr ""
-
-#: control/guides/delish_url.php:30
-msgid "Label"
-msgstr ""
-
-#: control/guides/delish_url.php:31
-msgid "The title you want to appear at the top of your list"
-msgstr ""
-
-#: control/guides/delish_url.php:34
-msgid "Notes"
-msgstr ""
-
-#: control/guides/delish_url.php:36 control/includes/header.php:68
-#: control/includes/classes/sp_Guide.php:164
-#: control/includes/classes/sp_Pluslet_Feed.php:59
-#: control/includes/classes/sp_Talkback.php:163
-msgid "Yes"
-msgstr ""
-
-#: control/guides/delish_url.php:37 control/includes/header.php:69
-#: control/includes/classes/sp_Guide.php:168
-#: control/includes/classes/sp_Pluslet_Feed.php:60
-#: control/includes/classes/sp_Talkback.php:167
-msgid "No"
-msgstr ""
-
-#: control/guides/delish_url.php:41
-msgid "Generate Delicious URL"
-msgstr ""
-
-#: control/guides/delish_url.php:51
-msgid ""
-"This is a way to generate a URL that displays data from your delicious "
-"account. You can point users to a\r\n"
-"    page of results that looks like a regular page of your website.  Or your "
-"SubjectsPlus installation, anyway."
-msgstr ""
-
-#: control/guides/delish_url.php:53
-msgid "The public delish feed page is located at sp/subjects/delish_feed.php ."
-msgstr ""
-
-#: control/guides/index.php:15
-msgid "Edit Guide Metadata"
-msgstr ""
-
-#: control/guides/index.php:16
-msgid "View Guide on Public Site"
-msgstr ""
-
-#: control/guides/index.php:17
-msgid "Check Guide Links"
-msgstr ""
-
-#: control/guides/index.php:30
-msgid "Please check with the guide's owner before modifying"
-msgstr ""
-
-#: control/guides/index.php:35
-msgid "-- Choose Guide --"
-msgstr ""
-
-#: control/guides/index.php:72
-msgid "unpublished"
-msgstr ""
-
-#: control/guides/index.php:78
-msgid "You don't have any guides yet.  Why not create one?"
-msgstr ""
-
-#: control/guides/index.php:82
-msgid "Edit Your Guides"
-msgstr ""
-
-#: control/guides/index.php:90
-msgid "All Guides"
-msgstr ""
-
-#: control/guides/index.php:98
-msgid "Create"
-msgstr ""
-
-#: control/guides/index.php:101
-msgid "Make sure the guide doesn't already exist!"
-msgstr ""
-
-#: control/guides/index.php:102
-msgid "Create new guide"
-msgstr ""
-
-#: control/guides/index.php:106
-msgid "Tips"
-msgstr ""
-
-#: control/guides/index.php:111
-msgid "Need to delete a guide?  Use the gear icon, and use the Delete button."
-msgstr ""
-
-#: control/guides/guide.php:51
-msgid ""
-"You do not have permission to edit this guide.  Ask the guide's creator to "
-"add you as a co-editor."
-msgstr ""
-
-#: control/guides/guide.php:150
-msgid "Drag selection, then drop to right"
-msgstr ""
-
-#: control/guides/guide.php:151
-msgid "Editable Box"
-msgstr ""
-
-#: control/guides/guide.php:152
-msgid "Heading"
-msgstr ""
-
-#: control/guides/guide.php:153
-msgid "Delicious/RSS/Flickr/Twitter"
-msgstr ""
-
-#: control/guides/guide.php:276
-msgid "New Box"
-msgstr ""
-
-#: control/guides/guide.php:296 control/guides/manage_items.php:137
-#: control/admin/faq_collections.php:102 control/admin/departments.php:132
-#: control/admin/sources.php:107
-msgid "SAVE CHANGES"
-msgstr ""
-
-#: control/guides/guide.php:301
-msgid "Drop Left"
-msgstr ""
-
-#: control/guides/guide.php:308
-msgid "Drop Right"
-msgstr ""
-
-#: control/guides/manage_items.php:80
-msgid "-- Choose a Different Guide --"
-msgstr ""
-
-#: control/guides/manage_items.php:120
-msgid ""
-"There do not seem to be any resources associated with this guide.  To add "
-"new resources, go to the Records tab, select that resource, and then add "
-"your subject."
-msgstr ""
-
-#: control/guides/manage_items.php:131
-#: control/includes/classes/sp_BuildNav.php:53
-msgid "Organize Resources"
-msgstr ""
-
-#: control/guides/manage_items.php:134
-msgid "Organize Resources for "
-msgstr ""
-
-#: control/faq/browse_faq.php:23 subjects/faq.php:278
-msgid "Browse FAQs by Collection"
-msgstr ""
-
-#: control/faq/browse_faq.php:25 control/faq/browse_faq.php:57
-msgid "If you wish to edit a FAQ, click the link."
-msgstr ""
-
-#: control/faq/browse_faq.php:55
-msgid "Browse FAQs by Subject Area"
-msgstr ""
-
-#: control/faq/index.php:65
-msgid "No FAQs yet.  Why not dream one up?"
-msgstr ""
-
-#: control/faq/index.php:72
-msgid "FAQs visible"
-msgstr ""
-
-#: control/faq/index.php:74 control/talkback/index.php:144
-msgid "See All"
-msgstr ""
-
-#: control/faq/index.php:83
-msgid "Create FAQ"
-msgstr ""
-
-#: control/faq/index.php:85
-msgid "CREATE FAQ"
-msgstr ""
-
-#: control/faq/index.php:87
-msgid "About FAQs"
-msgstr ""
-
-#: control/faq/index.php:89 control/includes/classes/sp_FAQ.php:128
-msgid "Edit FAQ"
-msgstr ""
-
-#: control/faq/index.php:90
-msgid "View FAQ on Public Site"
-msgstr ""
-
-#: control/faq/faq_bits.php:53 control/records/record_bits.php:98
-msgid "The following record is recommended for delete"
-msgstr ""
-
-#: control/faq/faq_bits.php:57
-msgid "SubjectsPlus: FAQ Delete Recommendation"
-msgstr ""
-
-#: control/faq/faq_bits.php:62 control/records/record_bits.php:107
-msgid "Delete request sent to "
-msgstr ""
-
-#: control/index.php:33
-#, php-format
-msgid "Hello %s"
-msgstr ""
-
-#: control/index.php:37
-msgid "Reset Password"
-msgstr ""
-
-#: control/index.php:40
-msgid "Update Your Biographical Details"
-msgstr ""
-
-#: control/index.php:41
-msgid "Update Headshot"
-msgstr ""
-
-#: control/index.php:46 control/admin/index.php:58
-msgid "Recent Activity"
-msgstr ""
-
-#: control/index.php:48
-msgid "You have recently added or edited:"
-msgstr ""
-
-#: control/index.php:53
-msgid "Background Options"
-msgstr ""
-
-#: control/index.php:77
-msgid "Search Strings"
-msgstr ""
-
-#: control/search.php:24
-msgid "<p>Please search for something with the box above.</p>"
-msgstr ""
-
-#: control/search.php:105
-msgid "Search Results"
-msgstr ""
-
-#: control/includes/functions_legacy.php:50
-#: control/includes/functions_legacy.php:269
-msgid "required"
-msgstr ""
-
-#: control/includes/functions_legacy.php:332
-msgid "Are you sure you wish to <strong>delete this item forever</strong>?"
-msgstr ""
-
-#: control/includes/functions_legacy.php:333
-#: control/includes/classes/Staff.php:275
-#: control/includes/classes/sp_Record.php:180
-#: control/includes/classes/sp_FAQ.php:168
-#: control/includes/classes/sp_Guide.php:209
-#: control/includes/classes/sp_Talkback.php:183
-msgid "Delete Forever!"
-msgstr ""
-
-#: control/includes/functions_legacy.php:334
-msgid "Use your browser's back button if you have reconsidered."
-msgstr ""
-
-#: control/includes/functions_legacy.php:444
-msgid "Thy Will Be Done:  Deleted"
-msgstr ""
-
-#: control/includes/functions_legacy.php:448
-msgid "Thwarted!  Your Delete failed!  Contact the administrator."
-msgstr ""
-
-#: control/includes/functions_legacy.php:452
-msgid "Thy Will Be Done:  Updated"
-msgstr ""
-
-#: control/includes/functions_legacy.php:456
-msgid "Thwarted!  Your Update failed! Contact the administrator"
-msgstr ""
-
-#: control/includes/functions_legacy.php:460
-msgid "Thy Will Be Done:  Added"
-msgstr ""
-
-#: control/includes/functions_legacy.php:464
-msgid "Thwarted!  Your Insert failed! Contact the administrator"
-msgstr ""
-
-#: control/includes/functions_legacy.php:468
-msgid "You must select an audiofile and/or a question!"
-msgstr ""
-
-#: control/includes/header.php:66
-msgid "Required"
-msgstr ""
-
-#: control/includes/header.php:67
-msgid "Are you sure?"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_4.php:21
-msgid "FAQs"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_4.php:49
-msgid "There are no FAQs linked for this guide"
-msgstr ""
-
-#: control/includes/classes/StaffDisplay.php:95
-msgid "Librarian"
-msgstr ""
-
-#: control/includes/classes/StaffDisplay.php:96
-msgid "Subject Responsibilities"
-msgstr ""
-
-#: control/includes/classes/StaffDisplay.php:175
-msgid "Name"
-msgstr ""
-
-#: control/includes/classes/StaffDisplay.php:176
-#: control/includes/classes/Staff.php:193
-msgid "Title"
-msgstr ""
-
-#: control/includes/classes/StaffDisplay.php:177
-msgid "Phone"
-msgstr ""
-
-#: control/includes/classes/StaffDisplay.php:178
-msgid "Email"
-msgstr ""
-
-#: control/includes/classes/Staff.php:163
-msgid "Click to update photo"
-msgstr ""
-
-#: control/includes/classes/Staff.php:165
-msgid "You can change the photo after saving."
-msgstr ""
-
-#: control/includes/classes/Staff.php:182
-msgid "Staff Member"
-msgstr ""
-
-#: control/includes/classes/Staff.php:185
-msgid "First Name "
-msgstr ""
-
-#: control/includes/classes/Staff.php:189
-msgid "Last Name "
-msgstr ""
-
-#: control/includes/classes/Staff.php:197
-msgid "Department"
-msgstr ""
-
-#: control/includes/classes/Staff.php:201
-msgid "Show First in Dept List?"
-msgstr ""
-
-#: control/includes/classes/Staff.php:205 control/admin/departments.php:153
-msgid "Telephone"
-msgstr ""
-
-#: control/includes/classes/Staff.php:208
-msgid "Email (This is the username for logging in to SubjectsPlus)"
-msgstr ""
-
-#: control/includes/classes/Staff.php:212
-msgid "User Type"
-msgstr ""
-
-#: control/includes/classes/Staff.php:216
-msgid "Active User?"
-msgstr ""
-
-#: control/includes/classes/Staff.php:221
-msgid "Photo"
-msgstr ""
-
-#: control/includes/classes/Staff.php:225
-msgid "Biographical Details"
-msgstr ""
-
-#: control/includes/classes/Staff.php:227 control/includes/set_bio.php:71
-msgid "Please only include professional details."
-msgstr ""
-
-#: control/includes/classes/Staff.php:237
-msgid "Permissions"
-msgstr ""
-
-#: control/includes/classes/Staff.php:262
-msgid "The password is hidden.  Reset?"
-msgstr ""
-
-#: control/includes/classes/Staff.php:270
-msgid "Save"
-msgstr ""
-
-#: control/includes/classes/Staff.php:272
-#: control/includes/classes/sp_Record.php:176
-msgid "Save Record Now"
-msgstr ""
-
-#: control/includes/classes/Staff.php:278
-#: control/includes/classes/sp_Record.php:186
-#: control/includes/classes/sp_FAQ.php:173
-#: control/includes/classes/sp_Guide.php:211
-#: control/includes/classes/sp_Talkback.php:186
-msgid "Last modified: "
-msgstr ""
-
-#: control/includes/classes/Staff.php:287
-msgid "Enter the new password.  Make it a good one!"
-msgstr ""
-
-#: control/includes/classes/Staff.php:322
-msgid ""
-"Thy will be done.  Note that any subject guides associated with this user "
-"are now orphans."
-msgstr ""
-
-#: control/includes/classes/Staff.php:326
-#: control/includes/classes/sp_Talkback.php:232
-msgid "There was a problem with your delete."
-msgstr ""
-
-#: control/includes/classes/Staff.php:388
-msgid "Thy Will Be Done.  Added."
-msgstr ""
-
-#: control/includes/classes/Staff.php:429
-#: control/includes/classes/sp_FAQ.php:440
-#: control/includes/classes/sp_Talkback.php:304
-#: control/admin/faq_collections.php:38 control/admin/faq_collections.php:76
-msgid "Thy Will Be Done.  Updated."
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_3.php:23
-msgid "Subject Specialist"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:143
-msgid "Record Title"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:146
-msgid "Description"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:163 control/records/index.php:127
-msgid "Location"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:182
-#: control/includes/classes/sp_FAQ.php:170
-msgid "Recommend Delete"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:202
-msgid "Default Source Type"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:226
-msgid "Subjects"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:228
-msgid "-- Select --"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:337
-msgid "Location (URL)"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:341
-msgid "Call Number"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:343
-msgid "Format"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:345
-msgid "Access Restrictions"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:353
-msgid "A-Z DB List"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:362
-msgid "Display Note"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:382
-msgid "X Delete this location"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:416
-msgid "remove subject"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:417
-msgid "change source type"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:418
-msgid "add description override"
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:449
-#: control/includes/classes/sp_FAQ.php:307
-#: control/includes/classes/sp_Guide.php:294
-msgid "There was a problem with your delete (stage 1 of 2)."
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:455
-msgid "Thy will be done.  Offending record deleted."
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:467
-#: control/includes/classes/sp_Guide.php:316
-msgid "There was a problem with your delete (stage 2 of 2)."
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:515
-msgid "Thy Will Be Done.  Record added."
-msgstr ""
-
-#: control/includes/classes/sp_Record.php:580
-msgid "Thy Will Be Done.  Record updated."
-msgstr ""
-
-#: control/includes/classes/sp_CompleteMe.php:52
-msgid "Go"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:69
-msgid "There is no active record with that ID.  Weird.  Why not make one?"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:137
-#: control/includes/classes/sp_Talkback.php:119
-msgid "Question"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:140
-#: control/includes/classes/sp_Talkback.php:125
-msgid "Answer"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:155
-msgid "Keywords (comma separated please)"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:163
-#: control/includes/classes/sp_Guide.php:202
-#: control/includes/classes/sp_Talkback.php:178
-msgid "Save Now"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:228
-msgid "Relevant Subjects"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:235
-msgid "Relevant Collections"
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:314
-msgid "Thy will be done.  Offending FAQ deleted.  Close window to continue."
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:316
-msgid "Thy will be done.  Offending FAQ deleted."
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:329
-msgid "There was a problem with your delete, stage 2 of 2."
-msgstr ""
-
-#: control/includes/classes/sp_FAQ.php:375
-#: control/includes/classes/sp_Guide.php:373 control/admin/admin_bits.php:48
+msgstr "Il n'y a aucun résultat. Veuillez essayer autre chose."
+
+#: ckeditor/plugins/subsplus_faq/php/getFaqCheckboxes.php:152
+msgid "You don't have any FAQs associated with this subject yet.  Maybe click Browse by Subject or Browse by Collection, above, to see what else is out there."
+msgstr "Il n'y a aucune FAQ associée avec ce sujet. Cliquez sur <em>Naviguez par sujet</em> ou <em>Naviguez par collection</em>, ci-dessus, pour voir ce qui s'y trouve."
+
+#: ckeditor/plugins/subsplus_resource/php/getResourceRadioListSearch.php:42
+msgid "There were no results matching your query."
+msgstr "Votre requête n'a donné aucun résultat."
+
+#: ckeditor/plugins/subsplus_sub_spe/php/getStaffCheckboxes.php:40
+#, fuzzy
+msgid "Specialists"
+msgstr "Spécialiste du sujet"
+
+#: ckeditor/plugins/subsplus_sub_spe/php/getStaffCheckboxes.php:68
+#: control/admin/manage_guides.php:75 control/admin/manage_guides.php:95
+msgid "All"
+msgstr "Tous"
+
+#: control/admin/admin_bits.php:48 lib/SubjectsPlus/Control/FAQ.php:415
+#: lib/SubjectsPlus/Control/Guide.php:685
+#: lib/SubjectsPlus/Control/Guide.php:794
+#: lib/SubjectsPlus/Control/RefStat.php:195
 msgid "Thy Will Be Done."
+msgstr "Ce sera fait."
+
+#: control/admin/admin_bits.php:52 control/admin/admin_bits.php:111
+msgid "You must select something first."
+msgstr "Vous devez sélectionner quelque chose en premier."
+
+#: control/admin/admin_bits.php:107
+msgid "Thy Will Be Done.  Selected records now "
+msgstr "Enregistrements sélectionnés "
+
+#: control/admin/admin_bits.php:160
+msgid "Error"
 msgstr ""
 
-#: control/includes/classes/sp_Pluslet_1.php:30
-msgid "All Items by Source"
-msgstr ""
+#: control/admin/admin_bits.php:162
+#, fuzzy
+msgid "Permissions Updated."
+msgstr "Permissions"
 
-#: control/includes/classes/sp_Pluslet_1.php:143
-#: control/includes/classes/sp_Pluslet_1.php:152
-msgid "Print Location:"
-msgstr ""
+#: control/admin/admin_bits.php:176
+msgid "Your request cannot be completed:  There are one or more librarians associated with this subject"
+msgstr "Votre requête ne peut être complétée : il y a un ou plusieurs bibliothécaires associés avec ce sujet."
 
-#: control/includes/classes/sp_Pluslet_1.php:219
-msgid "Note:  Not all sources displayed."
-msgstr ""
+#: control/admin/admin_bits.php:183 control/admin/departments.php:43
+msgid "Thy Will Be Done.  Department list updated."
+msgstr "Liste de départements mise à jour."
 
-#: control/includes/classes/sp_Pluslet_1.php:227
-msgid "See all"
-msgstr ""
+#: control/admin/admin_bits.php:203
+#, fuzzy
+msgid "Your request cannot be completed:  There are one or more records linked to this item.  Please unlink them--you can find them under FAQ > Browse by Subject, Browse by Collection. "
+msgstr "Votre requête ne peut être complétée : il y a un ou plusieurs enregistrements liés à cette source."
 
-#: control/includes/classes/sp_Pluslet.php:49
-msgid "There is no box with that ID.  Why not create a new one?"
-msgstr ""
+#: control/admin/admin_bits.php:213
+msgid "Thy Will Be Done.  Offending item removed."
+msgstr "Item offensant retiré."
 
-#: control/includes/classes/sp_Pluslet.php:70
-msgid "Help"
-msgstr ""
+#: control/admin/admin_bits.php:228 control/admin/admin_bits.php:255
+msgid "Your request cannot be completed:  There are one or more records linked to this source"
+msgstr "Votre requête ne peut être complétée : il y a un ou plusieurs enregistrements liés à cette source."
 
-#: control/includes/classes/sp_Pluslet.php:71
-msgid "toggle me"
-msgstr ""
+#: control/admin/admin_bits.php:238 control/admin/sources.php:40
+#: control/admin/sources.php:80
+msgid "Thy Will Be Done.  Source list updated."
+msgstr "Liste de sources mise à jour."
 
-#: control/includes/classes/sp_Pluslet.php:77
-#: control/includes/classes/sp_Pluslet.php:79
-msgid "Edit"
-msgstr ""
+#: control/admin/admin_bits.php:265 control/admin/disciplines.php:38
+#, fuzzy
+msgid "Thy Will Be Done.  Discipline list updated."
+msgstr "Liste de sources mise à jour."
 
-#: control/includes/classes/sp_Pluslet.php:83
-msgid "Remove item from this guide"
-msgstr ""
+#: control/admin/admin_bits.php:309
+msgid "inactive"
+msgstr "inactif"
 
-#: control/includes/classes/sp_DbHandler.php:45
-msgid "Sorry, there are no results at this time."
-msgstr ""
-
-#: control/includes/classes/sp_DbHandler.php:89
-msgid "Note:"
-msgstr ""
-
-#: control/includes/classes/sp_DbHandler.php:95
-msgid "more information"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_5.php:23
-msgid "Book Search"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:74
-msgid "There is no active record with that ID.  Why not create a new one?"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:125
-msgid "Edit Existing Guide Metadata"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:127
-msgid "Create New Guide"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:136
-msgid "Guide"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:139
-msgid "Short Form"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:142
-msgid "Short label for subject--minus spaces, ampersands, etc."
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:145
-msgid "Type of Guide"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:159
-msgid "Publish Guide (publicly accessible)?"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:182
-msgid "Main column width:"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:243
-msgid "Staff"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:263 control/admin/admin_bits.php:238
+#: control/admin/admin_bits.php:314 lib/SubjectsPlus/Control/Guide.php:499
+#: lib/SubjectsPlus/Control/Guide.php:517
+#: lib/SubjectsPlus/Control/Guide.php:535
 msgid "delete"
+msgstr "supprimer"
+
+#: control/admin/admin_bits.php:315 lib/SubjectsPlus/Control/FAQ.php:146
+msgid "see live"
+msgstr "voir en ligne"
+
+#: control/admin/admin_bits.php:320
+msgid "Sorry, there were no results."
+msgstr "Désolé, il n'y a aucun résultat."
+
+#: control/admin/departments.php:46 control/admin/guide_collections.php:46
+#, fuzzy
+msgid "Thwarted!  Something has gone wrong with insert.  Contact the admin."
+msgstr "Quelque chose n'a pas fonctionné à l'insertion. Contactez l'administrateur."
+
+#: control/admin/departments.php:102
+#, fuzzy
+msgid "Thy Will Be Done.  Department list order updated."
+msgstr "Liste de départements mise à jour."
+
+#: control/admin/departments.php:122 control/admin/faq_collections.php:100
+#: control/admin/guide_collections.php:149
+#: control/admin/guide_collections.php:282 control/admin/sources.php:96
+msgid "Remove"
 msgstr ""
 
-#: control/includes/classes/sp_Guide.php:277
-msgid "You do not have permission to delete this guide."
+#: control/admin/departments.php:131
+#, fuzzy
+msgid "Enter department name, telephone number, email, website url.  Drag departments to change display order."
+msgstr "Saisir le nom du département et le numéro de téléphone. Déplacez les départements pour changer l'ordre d'affichage."
+
+#: control/admin/departments.php:132 control/admin/disciplines.php:96
+#: control/admin/faq_collections.php:105
+#: control/admin/guide_collections.php:155 control/admin/sources.php:101
+#: control/guides/guide.php:233 control/guides/manage_items.php:139
+msgid "SAVE CHANGES"
+msgstr "SAUVEGARDER LES MODIFICATIONS"
+
+#: control/admin/departments.php:141
+msgid "Department Name"
+msgstr "Nom du département"
+
+#: control/admin/departments.php:144 lib/SubjectsPlus/Control/Staff.php:487
+#: lib/SubjectsPlus/Control/StaffBrief.php:207
+msgid "Telephone"
+msgstr "Numéro de téléphone"
+
+#: control/admin/departments.php:147 control/login.php:199
+#: lib/SubjectsPlus/Control/Staff.php:888
+msgid "Email"
+msgstr "Courriel"
+
+#: control/admin/departments.php:150
+msgid "Website"
 msgstr ""
 
-#: control/includes/classes/sp_Guide.php:301
-msgid ""
-"Thy will be done.  Offending Guide (and associated boxes) deleted.  Close "
-"window to continue."
-msgstr ""
+#: control/admin/departments.php:153
+msgid "Add New Department"
+msgstr "Ajouter un nouveau département"
 
-#: control/includes/classes/sp_Guide.php:303
-msgid "Thy will be done.  Offending Guide (and associated boxes) deleted."
-msgstr ""
+#: control/admin/departments.php:157
+#, fuzzy
+msgid "Staff by Department"
+msgstr "Département"
 
-#: control/includes/classes/sp_Guide.php:327
-#: control/includes/classes/sp_Guide.php:382
-msgid ""
-"There is already a guide with this SHORTFORM.  The shortform must be unique."
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:373
-msgid "View Your Guide"
-msgstr ""
-
-#: control/includes/classes/sp_Guide.php:438
-msgid "Thy Will Be Done.  Guide updated."
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_Feed.php:61
-msgid "Display"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_Feed.php:62
-msgid "items<br />Show descriptions?"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_Feed.php:75
-msgid "Enter RSS feed or username/tag (for delicious)"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_Feed.php:108
-msgid "Loading ..."
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_6.php:21
-msgid "Guide Outline"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_6.php:68
-msgid "There are no contents for this guide yet!"
-msgstr ""
-
-#: control/includes/classes/sp_Pluslet_2.php:21 subjects/databases.php:99
-msgid "Key to Icons"
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:67
-msgid "There is no active record with that ID.  Weird."
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:111
-msgid "Edit TalkBack"
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:122
-msgid "Question By"
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:151
-msgid "Answered By"
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:158
-msgid "Live?"
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:217
-msgid ""
-"Thy will be done.  Offending Talkback deleted.  Close window to continue."
-msgstr ""
-
-#: control/includes/classes/sp_Talkback.php:219
-msgid "Thy will be done.  Offending Talkback deleted."
-msgstr ""
-
-#: control/includes/classes/sp_MailMessage.php:25
-msgid "Library_No_Reply"
-msgstr ""
-
-#: control/includes/classes/sp_MailMessage.php:62
-msgid "This is an automatically generated email. Please do not respond."
-msgstr ""
-
-#: control/includes/classes/sp_MailMessage.php:62
-msgid "Email sent: "
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:33
-msgid "Records"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:35 control/records/index.php:145
-msgid "New Record"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:36
-msgid "Browse Items"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:48 control/admin/index.php:34
-msgid "Guides"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:50
-msgid "New Guide"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:51
-msgid "Browse Guides"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:52
-msgid "Delicious Builder"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:67
-msgid "New FAQ"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:92
-msgid "Admin"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:94 control/admin/index.php:29
-msgid "Add New User"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:95
-msgid "Manage Users"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:96 control/admin/index.php:37
-msgid "Manage Guides"
-msgstr ""
-
-#: control/includes/classes/sp_BuildNav.php:97 control/admin/index.php:41
+#: control/admin/departments.php:171 control/admin/index.php:52
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:115
+#: lib/SubjectsPlus/Control/BuildNav.php:164
 msgid "Departments"
+msgstr "Départements"
+
+#: control/admin/departments.php:176
+msgid "Add Department"
+msgstr "Ajouter un département"
+
+#: control/admin/departments.php:178 control/admin/guide_collections.php:199
+msgid "View Live!"
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:98
-msgid "Sources"
+#: control/admin/disciplines.php:41
+msgid "Thwarted!  Something has gone wrong.  Contact the admin."
+msgstr "Quelque chose n'a pas fonctionné. Contactez l'administrateur."
+
+#: control/admin/disciplines.php:75
+#, fuzzy
+msgid "Thy Will Be Done.  discipline list updated."
+msgstr "Liste de sources mise à jour."
+
+#: control/admin/disciplines.php:98
+msgid "NOTE:  Disciplines were added to facilitate Serials Solution ingest of data.  This original set was provided by SerSol in Nov 2012. \n"
+"    If you are a SerSol customer, you might not want to change these.  Sort may or may not be implemented in your version of SP."
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:99
+#: control/admin/disciplines.php:100
+msgid "Enter discipline type label."
+msgstr ""
+
+#: control/admin/disciplines.php:111 control/admin/sources.php:114
+msgid "Source Name"
+msgstr "Nom de la source"
+
+#: control/admin/disciplines.php:114
+#, fuzzy
+msgid "Add New Discipline"
+msgstr "Ajouter un nouvel usager"
+
+#: control/admin/disciplines.php:127
+msgid "Disciplines"
+msgstr ""
+
+#: control/admin/disciplines.php:132
+msgid "Add Discipline"
+msgstr ""
+
+#: control/admin/faq_collections.php:39 control/admin/faq_collections.php:84
+#: lib/SubjectsPlus/Control/FAQ.php:477 lib/SubjectsPlus/Control/Staff.php:1205
+#: lib/SubjectsPlus/Control/StaffBrief.php:431
+#: lib/SubjectsPlus/Control/Talkback.php:407
+#: lib/SubjectsPlus/Control/Video.php:376
+msgid "Thy Will Be Done.  Updated."
+msgstr "Mis à jour"
+
+#: control/admin/faq_collections.php:41
+msgid "Thwarted!  Something has gone wrong with the insert.  Contact the admin."
+msgstr "Quelque chose n'a pas fonctionné à l'insertion. Contactez l'administrateur."
+
+#: control/admin/faq_collections.php:107
+msgid "Edit label or delete collection."
+msgstr "Modifier la légende ou supprimer la collection."
+
+#: control/admin/faq_collections.php:112
+#: control/admin/guide_collections.php:168
+msgid "Collection Name"
+msgstr "Nom de la collection"
+
+#: control/admin/faq_collections.php:115
+#: control/admin/guide_collections.php:174
+msgid "Add New Collection"
+msgstr "Ajouter une nouvelle collection"
+
+#: control/admin/faq_collections.php:130
+#, fuzzy
+msgid "Current Collections"
+msgstr "Collections pertinentes"
+
+#: control/admin/faq_collections.php:135
+msgid "Add Collection"
+msgstr "Ajouter une collection"
+
+#: control/admin/guide_collections.php:43
+#, fuzzy
+msgid "Thy Will Be Done.  Guide Collection list updated."
+msgstr "Guide mis à jour."
+
+#: control/admin/guide_collections.php:71
+#, fuzzy
+msgid "Thy Will Be Done.  Guide Collections Updated."
+msgstr "Guide mis à jour."
+
+#: control/admin/guide_collections.php:95
+#, fuzzy
+msgid "Thy Will Be Done.  Collection Deleted."
+msgstr "Supprimé"
+
+#: control/admin/guide_collections.php:107 control/guides/index.php:41
+#: control/guides/manage.php:199
+msgid "-- Choose Guide --"
+msgstr "-- Choisir un guide --"
+
+#: control/admin/guide_collections.php:110
+msgid "Add"
+msgstr ""
+
+#: control/admin/guide_collections.php:163
+msgid "<p>You can create 'collections' as a way of grouping together similar guides, and presenting them separately from the \n"
+"    full list of guides.  E.g., you want guides only for your music library.</p><p>You can add a new collection below, and then add guides\n"
+"    to your collection via the dropdown list.  You can rearrange the order of guides within a collection by dragging them.</p>"
+msgstr ""
+
+#: control/admin/guide_collections.php:170 control/guides/create_record.php:23
+#: lib/SubjectsPlus/Control/Guide.php:455
+#: lib/SubjectsPlus/Control/Record.php:191
+#: lib/SubjectsPlus/Control/Video.php:126
+msgid "Description"
+msgstr "Description"
+
+#: control/admin/guide_collections.php:172
+#, fuzzy
+msgid "Shortform"
+msgstr "Nom abrégé"
+
+#: control/admin/guide_collections.php:178 control/includes/functions.php:1861
+#: lib/SubjectsPlus/Control/BuildNav.php:163
+#: lib/SubjectsPlus/Control/Pluslet/CollectionList.php:71
+#, fuzzy
+msgid "Guide Collections"
+msgstr "Ajouter une collection"
+
+#: control/admin/guide_collections.php:195
+msgid "Instructions/Help"
+msgstr ""
+
+#: control/admin/guide_collections.php:197
+#, fuzzy
+msgid "Collection"
+msgstr "Ajouter une collection"
+
+#: control/admin/guide_collections.php:319 control/admin/profile.php:107
+#: control/admin/user.php:375 control/edit-config.php:304
+#: control/faq/faq.php:148 control/guides/metadata.php:298
+#: control/records/record.php:563 control/setup-config.php:292
+#: control/talkback/talkback.php:170 control/videos/video.php:183
+msgid "You must complete all required form fields."
+msgstr "Vous devez compléter tous les champs obligatoires."
+
+#: control/admin/index.php:18 lib/SubjectsPlus/Control/BuildNav-prev.php:112
+#: lib/SubjectsPlus/Control/BuildNav.php:160
+msgid "Add New User"
+msgstr "Ajouter un nouvel usager"
+
+#: control/admin/index.php:19
+msgid "Browse Users"
+msgstr "Naviguez dans les usagers"
+
+#: control/admin/index.php:27
+msgid "Users"
+msgstr "Usagers"
+
+#: control/admin/index.php:29
+msgid "Note:  This is potentially confidential stuff."
+msgstr ""
+
+#: control/admin/index.php:31
+msgid "View Map of Staff Addresses"
+msgstr ""
+
+#: control/admin/index.php:34
+#, fuzzy
+msgid "Staff Map"
+msgstr "Membre du personnel"
+
+#: control/admin/index.php:37 control/admin/manage_guides.php:135
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:114
+#: lib/SubjectsPlus/Control/BuildNav.php:162
+msgid "Manage Guides"
+msgstr "Gérer les guides"
+
+#: control/admin/index.php:40
+#, fuzzy
+msgid "Manage Disciplines"
+msgstr "Gérer les usagers"
+
+#: control/admin/index.php:45 control/guides/manage.php:76
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:50
+#: lib/SubjectsPlus/Control/BuildNav.php:72
+msgid "Guides"
+msgstr "Guides"
+
+#: control/admin/index.php:49
+msgid "Browse/Add New Department"
+msgstr "Naviguez/Ajouter un nouveau département"
+
+#: control/admin/index.php:55
+msgid "Add New Source Type"
+msgstr "Ajouter un nouveau type source"
+
+#: control/admin/index.php:56
+#, fuzzy
+msgid "Check All Records' Links"
+msgstr "Vérifier les liens du guide"
+
+#: control/admin/index.php:60
+msgid "Record Source Types"
+msgstr "Types sources des enregistrements"
+
+#: control/admin/index.php:63
+#, fuzzy
+msgid "Browse/Add FAQ Collections"
+msgstr "Naviguez dans les FAQs par collection"
+
+#: control/admin/index.php:66 lib/SubjectsPlus/Control/BuildNav-prev.php:117
+#: lib/SubjectsPlus/Control/BuildNav.php:166
 msgid "FAQ Collections"
+msgstr "Collections de FAQs"
+
+#: control/admin/index.php:72 control/index.php:110
+msgid "Recent Activity"
+msgstr "Activité récente"
+
+#: control/admin/manage_guides.php:42
+msgid "Modify"
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:100
-msgid "Config Site"
+#: control/admin/manage_guides.php:43 control/faq/index.php:61
+msgid "View Live"
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:114
-msgid "Search records"
+#: control/admin/manage_guides.php:44
+#, fuzzy
+msgid "Check Links"
+msgstr "Vérifier les liens du guide"
+
+#: control/admin/manage_guides.php:78 lib/SubjectsPlus/Control/FAQ.php:273
+#: lib/SubjectsPlus/Control/FAQ.php:287
+msgid "Select"
+msgstr "Sélectionner"
+
+#: control/admin/manage_guides.php:99
+msgid "~~Guide Status~~"
+msgstr "~~Statut du guide~~"
+
+#: control/admin/manage_guides.php:100
+msgid "Public"
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:118
-msgid "Search guides"
+#: control/admin/manage_guides.php:101
+msgid "Hidden"
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:122
-msgid "Search faqs"
+#: control/admin/manage_guides.php:102
+msgid "Suppressed"
 msgstr ""
 
-#: control/includes/classes/sp_BuildNav.php:126
-msgid "Search talkback"
-msgstr ""
+#: control/admin/manage_guides.php:103
+msgid "~~Guide Types~~"
+msgstr "~~Types de guides~~"
 
-#: control/includes/classes/sp_BuildNav.php:130
-msgid "Search users"
-msgstr ""
+#: control/admin/manage_guides.php:117
+msgid "Ticked Guides"
+msgstr "Guides sélectionnés"
 
-#: control/includes/classes/sp_BuildNav.php:134
-msgid "Search all"
-msgstr ""
+#: control/admin/manage_guides.php:118
+msgid "Show Guides By"
+msgstr "Afficher les guides par"
 
-#: control/includes/classes/sp_BuildNav.php:148
-msgid "Hi"
-msgstr ""
+#: control/admin/manage_guides.php:119
+msgid "Show"
+msgstr "Afficher"
 
-#: control/includes/classes/sp_BuildNav.php:152
-msgid "My options"
-msgstr ""
+#: control/admin/manage_guides.php:123
+msgid "Assign to "
+msgstr "Assigner à"
 
-#: control/includes/classes/sp_BuildNav.php:153
-msgid "{Logout}"
-msgstr ""
+#: control/admin/sources.php:103
+msgid "Enter source type label.  Drag sources to change sort order."
+msgstr "Saisir la légende du type source. Déplacer les sources pour en changer l'ordre d'affichage."
 
-#: control/includes/config_bits.php:35
-msgid "Background Updated!"
-msgstr ""
+#: control/admin/sources.php:117
+msgid "Add New Source"
+msgstr "Ajouter une nouvelle source"
 
-#: control/includes/functions.php:238
-msgid "Invalid file type: not on whitelist of ok file types"
-msgstr ""
+#: control/admin/sources.php:132 lib/SubjectsPlus/Control/BuildNav-prev.php:116
+#: lib/SubjectsPlus/Control/BuildNav.php:165
+msgid "Sources"
+msgstr "Sources"
 
-#: control/includes/functions.php:382
-msgid "Last modification date unknown."
-msgstr ""
+#: control/admin/sources.php:137
+msgid "Add Source"
+msgstr "Ajoute une source"
 
-#: control/includes/functions.php:431
-msgid "Someone Has Blundered!"
-msgstr ""
-
-#: control/includes/functions.php:433
-msgid "(But probably not you.)"
-msgstr ""
-
-#: control/includes/functions.php:556
-msgid "Restricted Resource"
-msgstr ""
-
-#: control/includes/functions.php:558
-msgid "Restricted resource"
-msgstr ""
-
-#: control/includes/functions.php:562
-msgid "Unrestricted Resource"
-msgstr ""
-
-#: control/includes/functions.php:564
-msgid "Unrestricted resource"
-msgstr ""
-
-#: control/includes/functions.php:568
-msgid "Some full text available"
-msgstr ""
-
-#: control/includes/functions.php:570 subjects/databases.php:73
-msgid "Some full text"
-msgstr ""
-
-#: control/includes/functions.php:576
-msgid "OpenURL enabled"
-msgstr ""
-
-#: control/includes/functions.php:580
-msgid "Resource contains images"
-msgstr ""
-
-#: control/includes/functions.php:582 control/includes/functions.php:814
-#: subjects/databases.php:74
-msgid "Images"
-msgstr ""
-
-#: control/includes/functions.php:586
-msgid "Resource contains video"
-msgstr ""
-
-#: control/includes/functions.php:588 subjects/databases.php:75
-msgid "Video files"
-msgstr ""
-
-#: control/includes/functions.php:592
-msgid "Resource contains audio"
-msgstr ""
-
-#: control/includes/functions.php:594 subjects/databases.php:76
-msgid "Audio files"
-msgstr ""
-
-#: control/includes/functions.php:647
-msgid "Research Guides"
-msgstr ""
-
-#: control/includes/functions.php:651
-msgid "FAQ"
-msgstr ""
-
-#: control/includes/functions.php:655
-msgid "Talk Back"
-msgstr ""
-
-#: control/includes/functions.php:661
-msgid "Research Guide created"
-msgstr ""
-
-#: control/includes/functions.php:664
-msgid "Research Guide metadata"
-msgstr ""
-
-#: control/includes/functions.php:667
-msgid "Research Guide deleted"
-msgstr ""
-
-#: control/includes/functions.php:674
-msgid "Record"
-msgstr ""
-
-#: control/includes/functions.php:678
-msgid "Staff Details updated."
-msgstr ""
-
-#: control/includes/functions.php:683
-msgid "New User Added"
-msgstr ""
-
-#: control/includes/functions.php:687
-msgid "User Information updated"
-msgstr ""
-
-#: control/includes/functions.php:691
-msgid "User deleted"
-msgstr ""
-
-#: control/includes/functions.php:814
-msgid "Databases with Images"
-msgstr ""
-
-#: control/includes/functions.php:815
-msgid "Databases with Audio"
-msgstr ""
-
-#: control/includes/functions.php:815
-msgid "Audio"
-msgstr ""
-
-#: control/includes/functions.php:816
-msgid "Databases with Video"
-msgstr ""
-
-#: control/includes/functions.php:816
-msgid "Video"
-msgstr ""
-
-#: control/includes/set_bio.php:34 control/includes/set_password.php:34
+#: control/admin/staff_map.php:21 control/includes/set_bio.php:34
+#: control/includes/set_image.php:30 control/includes/set_password.php:32
 #: control/includes/set_picture.php:33
 msgid "You are not authorized to view this."
+msgstr "Vous n'êtes pas autorisé à voir ce contenu."
+
+#: control/admin/user.php:46
+msgid "Show only active users"
 msgstr ""
 
-#: control/includes/set_bio.php:41 control/includes/set_password.php:41
-#: control/includes/set_picture.php:40
-msgid "Perhaps you have come here by a funny path?"
+#: control/admin/user.php:49
+#, fuzzy
+msgid "* = inactive user"
+msgstr "inactif"
+
+#: control/admin/user.php:51
+msgid "Show inactive users"
 msgstr ""
 
-#: control/includes/set_bio.php:55
-msgid "Bio updated.  Close window to continue."
+#: control/admin/user.php:78
+msgid "None registered.  Just as well.  They're going to rise up against us someday."
+msgstr "Aucun usager enregistré"
+
+#: control/admin/user.php:81
+#, fuzzy
+msgid "Click on a name to update details and privileges."
+msgstr "Cliquez sur un nom pour mettre à jour les détails et privilèges"
+
+#: control/admin/user.php:104
+#, fuzzy
+msgid "Update Permissions"
+msgstr "Permissions"
+
+#: control/admin/user.php:146
+#, fuzzy
+msgid "Options"
+msgstr "Mes options"
+
+#: control/admin/user.php:149
+msgid "Select which parts of SubjectsPlus this user may access.\n"
+"                <p><strong>records</strong> allows access to both the Record and Guide tabs.\n"
+"                <p><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.\n"
+"                <p><strong>admin</strong> allows access to the overall admin of the site.\n"
+"                <p><strong>librarian</strong> means user shows up in lists of librarians.\n"
+"                <p><strong>supervisor</strong> means user shows up in list of supervisors\n"
+"                <p><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.  Might not be implemented on your site; check wiki for help.\n"
+"                "
 msgstr ""
 
-#: control/includes/set_bio.php:57 control/includes/set_password.php:60
-msgid "There was a problem.  Contact the admin."
+#: control/admin/user.php:158
+msgid "On Privilege"
 msgstr ""
 
-#: control/includes/set_bio.php:67
-msgid "Update Biography for "
+#: control/admin/user.php:239 control/guides/metadata.php:62
+msgid "There is no record by that ID."
+msgstr "Il n'y a aucun enregistrement avec cet ID."
+
+#: control/admin/user.php:295
+msgid "We're really going to miss that staff person.  Search above to delete someone else!"
+msgstr "Nous allons nous ennuyer de ce membre du personnel. Effectuez une recherche pour supprimer quelqu'un d'autre!"
+
+#: control/edit-config.php:35 control/setup-config.php:67
+msgid "Sorry, but I can't write to the <code>config.php</code> file. Please change permissions."
 msgstr ""
 
-#: control/includes/set_bio.php:78
-msgid "Update Bio"
+#: control/edit-config.php:52 control/install.php:50
+#: control/setup-config.php:93
+msgid "Columns To OMIT On User Form"
 msgstr ""
 
-#: control/includes/linkchecker.php:29
-msgid ""
-"The link report can take a few minutes to run, depending on how many links "
-"you have on the page.  So be patient."
+#: control/edit-config.php:52 control/install.php:50
+#: control/setup-config.php:93
+msgid "Tick the fields you would like to OMIT on the user form."
 msgstr ""
 
-#: control/includes/linkchecker.php:32
+#: control/edit-config.php:52 lib/SubjectsPlus/Control/Staff.php:352
+msgid "fname"
+msgstr ""
+
+#: control/edit-config.php:52 lib/SubjectsPlus/Control/Staff.php:353
+msgid "lname"
+msgstr ""
+
+#: control/edit-config.php:52 control/edit-config.php:57 control/install.php:50
+#: control/install.php:55 control/setup-config.php:93
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:354
+#: lib/SubjectsPlus/Control/Staff.php:409
+#, fuzzy
+msgid "title"
+msgstr "Titre"
+
+#: control/edit-config.php:53 control/install.php:51
+#: control/setup-config.php:94 lib/SubjectsPlus/Control/Staff.php:357
+#, fuzzy
+msgid "department"
+msgstr "Département"
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:355
+#: lib/SubjectsPlus/Control/Staff.php:422
+msgid "position_number"
+msgstr ""
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:356
+msgid "classification"
+msgstr ""
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:358
+#: lib/SubjectsPlus/Control/Staff.php:462
+#: lib/SubjectsPlus/Control/Staff.php:514
+#: lib/SubjectsPlus/Control/Staff.php:526
+msgid "priority"
+msgstr ""
+
+#: control/edit-config.php:53 control/install.php:51
+#: control/setup-config.php:94 lib/SubjectsPlus/Control/Staff.php:359
+msgid "supervisor"
+msgstr ""
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:310
+#: lib/SubjectsPlus/Control/Staff.php:314
+#: lib/SubjectsPlus/Control/Staff.php:360
+msgid "tel"
+msgstr ""
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:361
+#: lib/SubjectsPlus/Control/Staff.php:501
+msgid "fax"
+msgstr ""
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:362
+msgid "intercom"
+msgstr ""
+
+#: control/edit-config.php:53 control/edit-config.php:57 control/install.php:51
+#: control/install.php:55 control/setup-config.php:94
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:364
+msgid "room_number"
+msgstr ""
+
+#: control/edit-config.php:53 control/install.php:51
+#: control/setup-config.php:94 lib/SubjectsPlus/Control/Staff.php:363
+msgid "user_type"
+msgstr ""
+
+#: control/edit-config.php:54 control/install.php:52
+#: control/setup-config.php:95 lib/SubjectsPlus/Control/Staff.php:365
+#: lib/SubjectsPlus/Control/Staff.php:757
+#, fuzzy
+msgid "personal_information"
+msgstr "plus d'informations"
+
+#: control/edit-config.php:54 control/edit-config.php:58 control/install.php:52
+#: control/install.php:56 control/setup-config.php:95
+#: control/setup-config.php:99 lib/SubjectsPlus/Control/Staff.php:366
+#: lib/SubjectsPlus/Control/Staff.php:712
+#: lib/SubjectsPlus/Control/Staff.php:758
+msgid "emergency_contact"
+msgstr ""
+
+#: control/edit-config.php:54 control/install.php:52
+#: control/setup-config.php:95
+msgid "The 'User Form' controls who may access SubjectsPlus and what permissions they have.  Some fields are necessary for SubjectsPlus to work; these may be safely turned off if you don't want to capture or display this information."
+msgstr ""
+
+#: control/edit-config.php:56 control/install.php:54
+#: control/setup-config.php:97
+msgid "Columns To Require On User Form"
+msgstr ""
+
+#: control/edit-config.php:56 control/install.php:54
+#: control/setup-config.php:97
+msgid "Tick the fields you would like to make required on the user form"
+msgstr ""
+
+#: control/edit-config.php:57 control/install.php:55
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:678
+msgid "address"
+msgstr ""
+
+#: control/edit-config.php:57 control/install.php:55
+#: control/setup-config.php:98 lib/SubjectsPlus/Control/Staff.php:679
+msgid "city"
+msgstr ""
+
+#: control/edit-config.php:58 control/install.php:56
+#: control/setup-config.php:99 lib/SubjectsPlus/Control/Staff.php:680
+msgid "state"
+msgstr ""
+
+#: control/edit-config.php:58 control/install.php:56
+#: control/setup-config.php:99 lib/SubjectsPlus/Control/Staff.php:681
+msgid "zip"
+msgstr ""
+
+#: control/edit-config.php:58 control/install.php:56
+#: control/setup-config.php:99 lib/SubjectsPlus/Control/Staff.php:682
+#: lib/SubjectsPlus/Control/Staff.php:710
+#, fuzzy
+msgid "home_phone"
+msgstr "Numéro de téléphone"
+
+#: control/edit-config.php:58 control/install.php:56
+#: control/setup-config.php:99 lib/SubjectsPlus/Control/Staff.php:683
+#: lib/SubjectsPlus/Control/Staff.php:711
+#, fuzzy
+msgid "cell_phone"
+msgstr "Numéro de téléphone"
+
+#: control/edit-config.php:58 control/install.php:56
+#: control/setup-config.php:99 lib/SubjectsPlus/Control/Staff.php:735
+msgid "lat_long"
+msgstr ""
+
+#: control/edit-config.php:58 control/install.php:56
+#: control/setup-config.php:99
+msgid "These fields may be required, i.e., the form cannot be submitted until they are completed."
+msgstr ""
+
+#: control/edit-config.php:60
+msgid "Guide Container Width"
+msgstr ""
+
+#: control/edit-config.php:60
+msgid "Assign a width in pixels for your guides. For example, 960px."
+msgstr ""
+
+#: control/edit-config.php:60
+msgid "For example, 960px or 1160px."
+msgstr ""
+
+#: control/edit-config.php:62 control/install.php:58
+#: control/setup-config.php:101
+#, fuzzy
+msgid "Guide Types"
+msgstr "~~Types de guides~~"
+
+#: control/edit-config.php:62 control/install.php:58
+#: control/setup-config.php:101
+msgid "These are the different ways you may organize your guides."
+msgstr ""
+
+#: control/edit-config.php:62 control/install.php:58
+#: control/setup-config.php:101
+msgid "You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query."
+msgstr ""
+
+#: control/edit-config.php:64
+msgid "Use Shibboleth"
+msgstr ""
+
+#: control/edit-config.php:64
+msgid "This option controls whether Shibboleth will be used for logging in."
+msgstr ""
+
+#: control/edit-config.php:64
+msgid "This checks the staff email with the server variables returned from Shibboleth."
+msgstr ""
+
+#: control/edit-config.php:66
+msgid "Shibboleth Logout URL"
+msgstr ""
+
+#: control/edit-config.php:66
+msgid "This is the URL that logs the user out of a Shibboleth session."
+msgstr ""
+
+#: control/edit-config.php:66
+msgid "This is a URL that logs the user out of a Shibboleth session."
+msgstr ""
+
+#: control/edit-config.php:68 control/install.php:60
+#: control/setup-config.php:103
+#, fuzzy
+msgid "Record Tags"
+msgstr "Enregistrements"
+
+#: control/edit-config.php:68 control/install.php:60
+#: control/setup-config.php:103
+msgid "These are the tags that a given record location can have associated with it."
+msgstr ""
+
+#: control/edit-config.php:68 control/install.php:60
+#: control/setup-config.php:103
+msgid "Record tags are a way of slicing and dicing the total set of records.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places."
+msgstr ""
+
+#: control/edit-config.php:70 control/install.php:62
+#: control/setup-config.php:105
+#, fuzzy
+msgid "Video Tags"
+msgstr "Fichiers vidéo"
+
+#: control/edit-config.php:70 control/install.php:62
+#: control/setup-config.php:105
+msgid "These are the tags that a given video can have associated with it. These are used for the videos module."
+msgstr ""
+
+#: control/edit-config.php:72
+#, fuzzy
+msgid "Talkback Site Tag"
+msgstr "Page publique de la référence"
+
+#: control/edit-config.php:72 control/install.php:64
+#: control/setup-config.php:107
+msgid "These are the tags associated with TalkBack entries. The default is to email all talkbacks to administrator email. Edit only if you want to change that or add a branch."
+msgstr ""
+
+#: control/edit-config.php:73 control/install.php:65
+#: control/setup-config.php:108
+msgid "e.g. To make a main branch sending to admin email and branch1 branch sent to specified email -> 'main=,branch1=example@branch1.edu'"
+msgstr ""
+
+#: control/edit-config.php:75
+#, fuzzy
+msgid "Talkback Topic Tags"
+msgstr "Page publique de la référence"
+
+#: control/edit-config.php:75
+msgid "These are the tags that a given talkback can have associated with it."
+msgstr ""
+
+#: control/edit-config.php:75
+msgid "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places."
+msgstr ""
+
+#: control/edit-config.php:77
+msgid "Titlebar Styles"
+msgstr ""
+
+#: control/edit-config.php:77
+msgid "These are the styles that can be issued to a pluslet titlebars."
+msgstr ""
+
+#: control/edit-config.php:77
+msgid "This allows titlebars to have custom styles with custom keys for subject guide creator to make."
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "Pluslet Activated"
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "Which Pluslets are activated."
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "4"
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "2"
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "1"
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "3"
+msgstr ""
+
+#: control/edit-config.php:79
+msgid "5"
+msgstr ""
+
+#: control/edit-config.php:81 control/install.php:67
+#: control/setup-config.php:110
+msgid "Use SerSol Provided Disciplines"
+msgstr ""
+
+#: control/edit-config.php:81 control/install.php:67
+#: control/setup-config.php:110
+msgid "Include Serials Solutions disciplines integration."
+msgstr ""
+
+#: control/edit-config.php:82 control/install.php:68
+#: control/setup-config.php:111
+msgid "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines."
+msgstr ""
+
+#: control/edit-config.php:84
+msgid "Enable the API service (your api key is '"
+msgstr ""
+
+#: control/edit-config.php:84
+msgid "If turned off, the API will return empty results"
+msgstr ""
+
+#: control/edit-config.php:84
+msgid "Go to "
+msgstr ""
+
+#: control/edit-config.php:84
+msgid "this page"
+msgstr ""
+
+#: control/edit-config.php:84
+msgid " for an explanation of how the API works."
+msgstr ""
+
+#: control/edit-config.php:86
+msgid "Enable Users to Edit Bio"
+msgstr ""
+
+#: control/edit-config.php:88
+msgid "Enable Users to Edit Headshot Photo"
+msgstr ""
+
+#: control/edit-config.php:90
+msgid "Have database links show in new tab"
+msgstr ""
+
+#: control/edit-config.php:90
+msgid "Affects display on databases.php and within subject guides"
+msgstr ""
+
+#: control/edit-config.php:92
+msgid "Header Switcher"
+msgstr ""
+
+#: control/edit-config.php:92
+msgid "Have more than one header choice for a guide"
+msgstr ""
+
+#: control/edit-config.php:92
+msgid "Enter a comma separated list of headers.  The header name you put here will correspond to a header file on the server.  E.g., 'chc' would point to subjects/includes/header_chc.php"
+msgstr ""
+
+#: control/edit-config.php:94
+msgid "Use a theme"
+msgstr ""
+
+#: control/edit-config.php:94
+msgid "Use a child theme to override the default theme.  Enter the directory name that you've created under subjects/themes/"
+msgstr ""
+
+#: control/edit-config.php:96
+msgid "Use your own CSS"
+msgstr ""
+
+#: control/edit-config.php:96
+msgid "Not to be comfused with 'Use a Theme.'  This will point at your own CSS instead of the default."
+msgstr ""
+
+#: control/edit-config.php:98
+msgid "Use a Guide as your index page"
+msgstr ""
+
+#: control/edit-config.php:98
+msgid "If you want one of your guides to be the splash page at /subjects/ , enter the short form"
+msgstr ""
+
+#: control/edit-config.php:100
+#, fuzzy
+msgid "Collection default image"
+msgstr "Nom de la collection"
+
+#: control/edit-config.php:100
+msgid "Set the image that shows by default on a collection page.  You must put this image in /assets/images/guide_thumbs/"
+msgstr ""
+
+#: control/edit-config.php:102
+msgid "Use URL rewrites"
+msgstr ""
+
+#: control/edit-config.php:102
+msgid "Make links prettier."
+msgstr ""
+
+#: control/edit-config.php:104 control/install.php:70
+#: control/setup-config.php:113
+msgid "Base URL of your SubjectsPlus Installation"
+msgstr ""
+
+#: control/edit-config.php:104 control/install.php:70
+#: control/setup-config.php:113
+msgid "e.g. 'http://www.yoursite.edu/library/sp/.' Make sure to include the trailing slash! <strong>If changed, you will need to log back in.</strong>"
+msgstr ""
+
+#: control/edit-config.php:106 control/install.php:72
+#: control/setup-config.php:115
+#, fuzzy
+msgid "Name of this Resource"
+msgstr "Ressource à accès restreint"
+
+#: control/edit-config.php:106 control/install.php:72
+#: control/setup-config.php:115
+#, fuzzy
+msgid "e.g. SubjectsPlus, Research Guides"
+msgstr "Guides de recherche"
+
+#: control/edit-config.php:108 control/install.php:74
+#: control/setup-config.php:117
+msgid "Institution Name"
+msgstr ""
+
+#: control/edit-config.php:108 control/install.php:74
+#: control/setup-config.php:117
+msgid "Name of your college/university/institution"
+msgstr ""
+
+#: control/edit-config.php:110 control/install.php:76
+#: control/setup-config.php:119
+msgid "Name of Library Administrator"
+msgstr ""
+
+#: control/edit-config.php:110 control/install.php:76
+#: control/setup-config.php:119
+msgid "Name for SubjectsPlus administrator"
+msgstr ""
+
+#: control/edit-config.php:110 control/install.php:76
+#: control/setup-config.php:119
+msgid "This will appear in the footer of SP pages."
+msgstr ""
+
+#: control/edit-config.php:112 control/install.php:78
+#: control/setup-config.php:121
+msgid "Library Administrator Email Address"
+msgstr ""
+
+#: control/edit-config.php:112 control/install.php:78
+#: control/setup-config.php:121
+msgid "Email address for SubjectsPlus administrator"
+msgstr ""
+
+#: control/edit-config.php:112 control/install.php:78
+#: control/setup-config.php:121
+msgid "This will appear in footer, and also be used as default email for TalkBack submissions."
+msgstr ""
+
+#: control/edit-config.php:114 control/install.php:80
+#: control/setup-config.php:123
+#, fuzzy
+msgid "Email Key"
+msgstr "Courriel"
+
+#: control/edit-config.php:114 control/install.php:80
+#: control/setup-config.php:123
+msgid "Ending of campus email addresses, including @ sign"
+msgstr ""
+
+#: control/edit-config.php:114 control/install.php:80
+#: control/setup-config.php:123
+msgid "This allows for simpler login."
+msgstr ""
+
+#: control/edit-config.php:116 control/install.php:82
+#: control/setup-config.php:125
+#, fuzzy
+msgid "Telephone Prefix"
+msgstr "Numéro de téléphone"
+
+#: control/edit-config.php:116 control/install.php:82
+#: control/setup-config.php:125
+msgid "Prefix to prepend to telephone number for staff. Usually area code."
+msgstr ""
+
+#: control/edit-config.php:116 control/install.php:82
+#: control/setup-config.php:125
+msgid "Allows you to put short (non-prefixed) version of phone number on pages where space is limited."
+msgstr ""
+
+#: control/edit-config.php:118 control/install.php:84
+#: control/setup-config.php:127
+msgid "MySQL Hostname"
+msgstr ""
+
+#: control/edit-config.php:118 control/install.php:84
+#: control/setup-config.php:127
+msgid "This is the ip or url to your MySQL database."
+msgstr ""
+
+#: control/edit-config.php:118 control/install.php:84
+#: control/setup-config.php:127
+msgid "host help?"
+msgstr ""
+
+#: control/edit-config.php:120 control/install.php:90
+#: control/setup-config.php:134
+msgid "MySQL Port"
+msgstr ""
+
+#: control/edit-config.php:120
+msgid "This is the port your MySQL database uses."
+msgstr ""
+
+#: control/edit-config.php:122 control/install.php:86
+#: control/setup-config.php:129
+msgid "MySQL Username"
+msgstr ""
+
+#: control/edit-config.php:122 control/install.php:86
+#: control/setup-config.php:129
+msgid "This is the username to your MySQL database."
+msgstr ""
+
+#: control/edit-config.php:124 control/install.php:88
+#: control/setup-config.php:131
+#, fuzzy
+msgid "MySQL Password"
+msgstr "Mot de passe"
+
+#: control/edit-config.php:124 control/install.php:88
+#: control/setup-config.php:131
+msgid "This is the password for your MySQL user."
+msgstr ""
+
+#: control/edit-config.php:126 control/install.php:92
+#: control/setup-config.php:137
+msgid "MySQL SubjectsPlus Database"
+msgstr ""
+
+#: control/edit-config.php:126 control/install.php:92
+#: control/setup-config.php:137
+msgid "Name of the SubjectsPlus database"
+msgstr ""
+
+#: control/edit-config.php:126 control/install.php:92
+#: control/setup-config.php:137
+#, fuzzy
+msgid "database help?"
+msgstr "Banques de données"
+
+#: control/edit-config.php:128 control/install.php:94
+#: control/setup-config.php:139
+msgid "List of accepted uploads' file extentions"
+msgstr ""
+
+#: control/edit-config.php:128 control/install.php:94
+#: control/setup-config.php:139
+msgid "This option contains the coma-separated list of accepted file extensions for file uploads via CKEditor."
+msgstr ""
+
+#: control/edit-config.php:128 control/install.php:94
+#: control/setup-config.php:139
+msgid "If a file isn't in this list, it should not be uploaded.  File uploads only occur via the admin backend, using CKEditor, but this is to stop a user from doing something, uh, foolish."
+msgstr ""
+
+#: control/edit-config.php:130 control/install.php:96
+#: control/setup-config.php:141
+msgid "Proxy URL"
+msgstr ""
+
+#: control/edit-config.php:130 control/install.php:96
+#: control/setup-config.php:141
+msgid "String which should be prepended if you use a proxy server"
+msgstr ""
+
+#: control/edit-config.php:130 control/install.php:96
+#: control/setup-config.php:141
+msgid "In the Records tab of SP, if you flag an item as 'restricted,' the proxy string will be prepended."
+msgstr ""
+
+#: control/edit-config.php:132
+#, fuzzy
+msgid "Open String"
+msgstr "Expressions de recherche"
+
+#: control/edit-config.php:132
+msgid "Used to create a link to an item in your Catalog. Your subject search term is sandwiched between these two strings"
+msgstr ""
+
+#: control/edit-config.php:134
+#, fuzzy
+msgid "Close String"
+msgstr "Expressions de recherche"
+
+#: control/edit-config.php:134
+msgid "If you don't need to close string, leave blank."
+msgstr ""
+
+#: control/edit-config.php:136
+msgid "Open String Keyword"
+msgstr ""
+
+#: control/edit-config.php:136
+msgid "As above, for Keyword search."
+msgstr ""
+
+#: control/edit-config.php:138
+msgid "Close String Keyword"
+msgstr ""
+
+#: control/edit-config.php:138 control/edit-config.php:142
+msgid "If necessary."
+msgstr ""
+
+#: control/edit-config.php:140
+#, fuzzy
+msgid "Open String Call Number"
+msgstr "Cote"
+
+#: control/edit-config.php:140
+msgid "As above, for Call Number search."
+msgstr ""
+
+#: control/edit-config.php:142
+#, fuzzy
+msgid "Close String Call Number"
+msgstr "Cote"
+
+#: control/edit-config.php:144
+msgid "Open String Bib"
+msgstr ""
+
+#: control/edit-config.php:144
+msgid "Used to create a link to an item in your Catalog. Your Bib search term is sandwiched between these two strings"
+msgstr ""
+
+#: control/edit-config.php:146 control/install.php:98
+#: control/setup-config.php:143
+msgid "Base Path for CKEditor"
+msgstr ""
+
+#: control/edit-config.php:146 control/install.php:98
+#: control/setup-config.php:143
+msgid "Path to CKEditor files appended to base URL"
+msgstr ""
+
+#: control/edit-config.php:146 control/install.php:98
+#: control/setup-config.php:143
+msgid "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path."
+msgstr ""
+
+#: control/edit-config.php:182
+#, fuzzy
+msgid "Thy will be done."
+msgstr "Ce sera fait."
+
+#: control/edit-config.php:207 control/install.php:121
+#: control/setup-config.php:192
+msgid "Something went wrong and could not save configurations."
+msgstr ""
+
+#: control/faq/browse_faq.php:34 control/faq/browse_faq.php:73
+msgid "If you wish to edit a FAQ, click the link."
+msgstr "Si vous souhaitez modifier une FAQ, cliquez sur le lien."
+
+#: control/faq/browse_faq.php:69 subjects/faq.php:366
+#: subjects/themes/ic/faq.php:367 subjects/themes/um/faq.php:349
+msgid "Browse FAQs by Collection"
+msgstr "Naviguez dans les FAQs par collection"
+
+#: control/faq/browse_faq.php:108
+msgid "Browse FAQs by Subject Area"
+msgstr "Naviguez dans les FAQs par sujet"
+
+#: control/faq/faq_bits.php:52 control/records/record_bits.php:103
+#: control/talkback/tb_bits.php:73
+msgid "The following record is recommended for delete"
+msgstr "L'enregistrement suivant devrait être supprimé"
+
+#: control/faq/faq_bits.php:56 control/talkback/tb_bits.php:77
+msgid "SubjectsPlus: FAQ Delete Recommendation"
+msgstr "SubjectsPlus : FAQs à supprimer"
+
+#: control/faq/faq_bits.php:61 control/records/record_bits.php:112
+#: control/talkback/tb_bits.php:82
+msgid "Delete request sent to "
+msgstr "Requête de suppression envoyée à "
+
+#: control/faq/index.php:60 control/faq/index.php:108
+#: control/talkback/index.php:248 control/talkback/tb_bits.php:128
+#: control/videos/index.php:66 control/videos/index.php:83
+#: lib/SubjectsPlus/Control/LinkChecker.php:501
+msgid "Edit"
+msgstr "Modifier"
+
+#: control/faq/index.php:72
+msgid "No FAQs yet.  Why not dream one up?"
+msgstr "Aucune FAQ présente. Pourquoi ne pas en imaginer une?"
+
+#: control/faq/index.php:75
+msgid "FAQs visible"
+msgstr "FAQs visibles"
+
+#: control/faq/index.php:78 control/videos/index.php:97
+msgid "See All"
+msgstr "Voir toutes les FAQs"
+
+#: control/faq/index.php:87
+#, fuzzy
+msgid "View FAQs"
+msgstr "Nouvelle FAQ"
+
+#: control/faq/index.php:93
+msgid "Create FAQ"
+msgstr "Créer une FAQ"
+
+#: control/faq/index.php:98
+msgid "CREATE FAQ"
+msgstr "CRÉER UNE FAQ"
+
+#: control/faq/index.php:103
+msgid "About FAQs"
+msgstr "À propos des FAQs"
+
+#: control/faq/index.php:108 lib/SubjectsPlus/Control/FAQ.php:145
+msgid "Edit FAQ"
+msgstr "Modifier une FAQ"
+
+#: control/faq/index.php:109 control/videos/index.php:67
+#: control/videos/index.php:84
+msgid "View"
+msgstr ""
+
+#: control/faq/index.php:109
+msgid "View FAQ on Public Site"
+msgstr "Voir la FAQ sur le site public"
+
+#: control/faq/index.php:110
+msgid "FAQs may be assigned a subject or a collection.  FAQ collections are groupings that may show up on the sidebar of the public FAQ page:\n"
+"        for example, Library Catalog or InterLibrary Loan.  If you assign a subject, you can easily add all FAQs for that subject to a subject guide."
+msgstr ""
+
+#: control/faq/index.php:112
+msgid "FAQ collections are created by the site administrator, or someone with the 'admin' privilege in SubjectsPlus."
+msgstr ""
+
+#: control/forgotpassword.php:28
+msgid "An email has been sent to reset your password.  Please click the link in the email and follow the instructions."
+msgstr ""
+
+#: control/forgotpassword.php:32
+msgid "Please enter your <strong>email</strong> so we can email you a link to reset your password."
+msgstr ""
+
+#: control/forgotpassword.php:45
+msgid "Password has been updated."
+msgstr ""
+
+#: control/forgotpassword.php:48
+msgid "Passwords did not match."
+msgstr ""
+
+#: control/forgotpassword.php:48 control/forgotpassword.php:53
+#: control/forgotpassword.php:75
+#, fuzzy
+msgid "Please enter your new password."
+msgstr "Veuillez saisir votre <strong>nom d'usager</strong> et votre <strong>mot de passe</strong> pour commencer."
+
+#: control/forgotpassword.php:49 control/forgotpassword.php:54
+#: control/forgotpassword.php:76 control/includes/set_password.php:63
+msgid "Password must have at least one letter, one number, one special character, and be at least 6 characters long."
+msgstr ""
+
+#: control/forgotpassword.php:53
+msgid "Password doesn't meet requirements."
+msgstr ""
+
+#: control/forgotpassword.php:73
+msgid "The id and email do not match or the id does not exits or the link has expired."
+msgstr ""
+
+#: control/forgotpassword.php:94 control/login.php:146
+#, fuzzy
+msgid "Forgot Password"
+msgstr "Mot de passe"
+
+#: control/guides/create_record.php:6 lib/SubjectsPlus/Control/Record.php:185
+msgid "Record Title"
+msgstr "Titre de l'enregistrement"
+
+#: control/guides/create_record.php:11 lib/SubjectsPlus/Control/Record.php:188
+msgid "Alternate Title"
+msgstr ""
+
+#: control/guides/create_record.php:14 control/records/record_bits.php:67
+#: lib/SubjectsPlus/Control/Record.php:432
+#: lib/SubjectsPlus/Control/Record.php:436
+msgid "Location (Enter URL)"
+msgstr "Adresse (saisir une URL)"
+
+#: control/guides/create_record.php:28
+#, fuzzy
+msgid "Create Record"
+msgstr "Nouvel enregistrement"
+
+#: control/guides/create_record.php:52
+#, fuzzy
+msgid "There was an error inserting the record"
+msgstr "Il y a eu un problème à la suppression"
+
+#: control/guides/flyouts/analytics.php:3 control/guides/guide.php:396
+msgid "Analytics"
+msgstr ""
+
+#: control/guides/flyouts/find_boxes.php:3 control/guides/guide.php:383
+msgid "Find Boxes"
+msgstr ""
+
+#: control/guides/flyouts/find_boxes.php:7
+#, fuzzy
+msgid "Browse"
+msgstr "Naviguez dans les items"
+
+#: control/guides/flyouts/find_boxes.php:8
+#, fuzzy
+msgid "Search"
+msgstr "Chercher dans tout"
+
+#: control/guides/flyouts/find_boxes.php:20
+msgid "Enter box title..."
+msgstr ""
+
+#: control/guides/flyouts/my_guides_list.php:12 control/guides/guide.php:400
+#, fuzzy
+msgid "My Guides"
+msgstr "Guides"
+
+#: control/guides/flyouts/tabs.php:23
+msgid "Reorder Tabs"
+msgstr ""
+
+#: control/guides/flyouts/tabs.php:44 control/index.php:78
+#: lib/SubjectsPlus/Control/Guide.php:258
+msgid "Create New Guide"
+msgstr "Créer un nouveau guide"
+
+#: control/guides/guide.php:61
+msgid "You do not have permission to edit this guide.  Ask the guide's creator to add you as a co-editor."
+msgstr "Vous n'avez pas la permission de modifier ce guide. Demandez au créateur du guide de vous ajouter comme coéditeur."
+
+#: control/guides/guide.php:126
+#, fuzzy
+msgid "Drag box selection, then drop it to the right"
+msgstr "Déplacer la sélection et déposez-la à droite"
+
+#: control/guides/guide.php:208 control/guides/guide.php:209
+msgid "Show/Hide Header"
+msgstr ""
+
+#: control/guides/guide.php:246 control/guides/manage_items.php:169
+#, fuzzy
+msgid "View Guide"
+msgstr "Nouveau guide"
+
+#: control/guides/guide.php:250 control/guides/index.php:24
+#: control/guides/index.php:169
+msgid "Edit Guide Metadata"
+msgstr "Modifier les métadonnées du guide"
+
+#: control/guides/guide.php:252 control/guides/guide.php:267
+#, fuzzy
+msgid "Find in Guide"
+msgstr "Trouver des guides de recherche"
+
+#: control/guides/guide.php:318 lib/SubjectsPlus/Control/StaffBrief.php:195
+#: lib/SubjectsPlus/Control/Video.php:123
+msgid "Title"
+msgstr "Titre"
+
+#: control/guides/guide.php:323 control/guides/guide.php:347
+msgid "Redirect URL"
+msgstr ""
+
+#: control/guides/guide.php:327 control/guides/guide.php:351
+#: lib/SubjectsPlus/Control/Guide.php:308
+msgid "Visibility"
+msgstr ""
+
+#: control/guides/guide.php:342
+#, fuzzy
+msgid "New Title"
+msgstr "Titre"
+
+#: control/guides/guide.php:379
+msgid "Boxes"
+msgstr ""
+
+#: control/guides/guide.php:387
+msgid "Layouts"
+msgstr ""
+
+#: control/guides/guide.php:391
+msgid "Tabs"
+msgstr ""
+
+#: control/guides/guide.php:406
+msgid "Image Gallery"
+msgstr ""
+
+#: control/guides/guide.php:406
+msgid "Assets"
+msgstr ""
+
+#: control/guides/guide.php:410
+msgid "Close"
+msgstr ""
+
+#: control/guides/guide.php:422
+#, fuzzy
+msgid "Add Boxes"
+msgstr "Ajoute une source"
+
+#: control/guides/guide.php:425
+msgid "Favorite Boxes"
+msgstr ""
+
+#: control/guides/guide.php:447
+msgid "Choose Layout"
+msgstr ""
+
+#: control/guides/guide.php:451
+msgid "1 Column"
+msgstr ""
+
+#: control/guides/guide.php:453
+msgid "2 Columns"
+msgstr ""
+
+#: control/guides/guide.php:455
+msgid "Sidebar + Column"
+msgstr ""
+
+#: control/guides/guide.php:457
+msgid "Column + Sidebar"
+msgstr ""
+
+#: control/guides/guide.php:459
+msgid "3 Columns"
+msgstr ""
+
+#: control/guides/guide.php:461
+msgid "2 Sidebars"
+msgstr ""
+
+#: control/guides/guide.php:464
+#, fuzzy
+msgid "Add New Section"
+msgstr "Ajouter une nouvelle collection"
+
+#: control/guides/guide.php:468
+#, fuzzy
+msgid "New Section"
+msgstr "Ajouter une nouvelle collection"
+
+#: control/guides/guide_copy.php:80
+#, fuzzy
+msgid "Copy Guide"
+msgstr "Aucun guide"
+
+#: control/guides/helpers/ajax_mod.php:29
+msgid "This item has been removed from your guide"
+msgstr "Cet item a été retiré de votre guide"
+
+#: control/guides/helpers/ajax_mod.php:31
+msgid "There was a problem with the delete"
+msgstr "Il y a eu un problème à la suppression"
+
+#: control/guides/helpers/ajax_mod.php:77
+msgid "Thy will be done.  Ranks updated."
+msgstr "Rangs mis à jour."
+
+#: control/guides/helpers/ajax_mod.php:79
+msgid "There was a problem with your update."
+msgstr "Il y a eu un problème avec la mise à jour."
+
+#: control/guides/helpers/guide_bits.php:120
+msgid "LinkChecker Results for "
+msgstr "Résultats du vérificateur de liens pour "
+
+#: control/guides/helpers/guide_bits.php:161
+#, fuzzy
+msgid "They Will Be Done:  Deleted."
+msgstr "Supprimé"
+
+#: control/guides/helpers/guide_data.php:164
+msgid "<div class=\"feedback\" style=\"display: block;\">Box Removed</div>"
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:19
+msgid "Help:  Feed box"
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:21
+msgid "\n"
+"<p>This box allows you to insert an RSS feed into the page.  It could be a normal RSS feed, or else something that\n"
+"uses the RSS technology, like Delicious or Twitter feeds.</p>\n"
+"\n"
+"<p>Click the edit icon (pencil) to enter or edit a feed.  In the first box, enter the feed's URL.  Then decide how many items you want to display, and whether or not you want the description (i.e., the body of the feed) to appear.  Note that showing the description could use up a lot of screen real estate.</p>\n"
+"\n"
+"<h2>Locating a Web Feed</h2>\n"
+"<p>In order to add a web feed to a SubjectsPlus page, you must provide a URL that points to the feed. Feed URLs are different from general website URLs. They will often, but not necessarily, end in .xml, .rss, or .rdf.</p>\n"
+"<p>For instance, you may want to feature a feed from Arts & Letters Daily on your subject page. The URL for this site is <a href=\"http://www.aldaily.com\" target=\"blank\">http://www.aldaily.com</a>, but that is not the feed URL. To find the feed URL, click on the web feed icon in the address bar of your browser (the icon may be either blue or orange):</p>\n"
+"\n"
+"<p><img src=\"../images/admin/rss_example_icons.gif\" alt=\"example feed icons\" border=\"0\" style=\"float: left; margin-right: 10px; \"/> You will probably see a drop-down menu of choices.  Choose \"Subscribe to RSS.\"\n"
+"You should now see the feed URL in the address bar.  In the above case, it is\n"
+"<a href=\"http://www.aldaily.com/rss/rss.xml\" target=\"blank\">http://www.aldaily.com/rss/rss.xml</a>.\n"
+"This is the URL that may be added to SubjectsPlus\n"
+"to create a feed.</p>\n"
+""
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:41
+msgid "Help:  Twitter box"
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:103
+msgid "'Fixed' Box"
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:104
+msgid "<p>Fixed box types (such as the Key to Icons or the Subject Specialist) can only be customized by the SubjectsPlus administrator.</p>\n"
+"    <p>You may drop them, move them around and delete them.</p> \n"
+"    <p>The All Items by Source box has a little pencil; you may use it to rearrange the records that are associated with this guide."
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:111
+#: lib/SubjectsPlus/Control/Pluslet/Heading.php:24
+msgid "Heading"
+msgstr "Titre de section"
+
+#: control/guides/helpers/popup_help.php:113
+msgid "<p>This type just provides an organizational header showing only the title text.  It functions like an HTML H2, say.</p>"
+msgstr ""
+
+#: control/guides/helpers/popup_help.php:118
+msgid "'Normal' Box"
+msgstr ""
+
+#: control/guides/index.php:25 control/guides/index.php:27
+#: control/guides/index.php:170
+msgid "View Guide on Public Site"
+msgstr "Voir le guide sur le site public"
+
+#: control/guides/index.php:26 control/guides/index.php:171
+msgid "Check Guide Links"
+msgstr "Vérifier les liens du guide"
+
+#: control/guides/index.php:36 control/guides/manage.php:194
+msgid "Please check with the guide's owner before modifying"
+msgstr "Veuillez aviser le propriétaire du guide avant toute modification"
+
+#: control/guides/index.php:79 control/videos/index.php:58
+msgid "unpublished"
+msgstr "non publié"
+
+#: control/guides/index.php:85
+msgid "You don't have any guides yet.  Why not create one?"
+msgstr "Vous n'avez aucun guide pour l'instant. Pourquoi ne pas en créer un?"
+
+#: control/guides/index.php:111
+msgid "Edit Your Guides"
+msgstr "Modifier vos guides"
+
+#: control/guides/index.php:124
+msgid "All Guides"
+msgstr "Tous les guides"
+
+#: control/guides/index.php:140
+msgid "Create"
+msgstr "Créer"
+
+#: control/guides/index.php:145
+msgid "Make sure the guide doesn't already exist!"
+msgstr "Assurez-vous que le guide n'existe pas déjà!"
+
+#: control/guides/index.php:146
+msgid "Create new guide"
+msgstr "Créer un nouveau guide"
+
+#: control/guides/index.php:153 control/guides/index.php:158
+msgid "Import LibGuides"
+msgstr ""
+
+#: control/guides/index.php:165
+msgid "Tips"
+msgstr "Trucs"
+
+#: control/guides/index.php:172
+msgid "Need to delete a guide?  Use the gear icon, and use the Delete button."
+msgstr "Besoin de supprimer un guide? Utilisez l'icône <em>Engrenage</em> et le bouton <em>Supprimer</em>"
+
+#: control/guides/manage.php:73
+msgid "File"
+msgstr ""
+
+#: control/guides/manage.php:74
+msgid "Size"
+msgstr ""
+
+#: control/guides/manage.php:75
+msgid "Owner"
+msgstr ""
+
+#: control/guides/manage.php:77
+#, fuzzy
+msgid "Delete"
+msgstr "supprimer"
+
+#: control/guides/manage.php:177 control/guides/manage_items.php:119
+#, fuzzy
+msgid "Delete Item"
+msgstr "Supprimer de façon permanente!"
+
+#: control/guides/manage.php:182
+msgid "No files found."
+msgstr ""
+
+#: control/guides/manage.php:203 control/login.php:210
+#: subjects/talkback.php:515 subjects/themes/um/talkback.php:534
+msgid "Submit"
+msgstr "Soumettre"
+
+#: control/guides/manage.php:206
+msgid "Use this to organize which items are associated with a record, and thus displayed in 'All Items by Source' box."
+msgstr ""
+
+#: control/guides/manage.php:209
+#, fuzzy
+msgid "Edit icon"
+msgstr "Modifier"
+
+#: control/guides/manage.php:209
+msgid "Note: You can also do this in a guide, by clicking on the pencil icon for an 'All Items by Source' box."
+msgstr ""
+
+#: control/guides/manage.php:213
+msgid "Highlighted items are orphans.  Pity the orphans!"
+msgstr ""
+
+#: control/guides/manage.php:217
+msgid "Admin Tip: add ?view=all to this page's URL to see all users' items."
+msgstr ""
+
+#: control/guides/manage.php:229
+#, fuzzy
+msgid "Manage your Uploads"
+msgstr "Gérer les guides"
+
+#: control/guides/manage.php:234
+#, fuzzy
+msgid "Manage All Items by Source"
+msgstr "Tous les items par source"
+
+#: control/guides/manage_items.php:84
+msgid "-- Choose a Different Guide --"
+msgstr "-- Choisir un guide différent --"
+
+#: control/guides/manage_items.php:125
+msgid "There do not seem to be any resources associated with this guide.  To add new resources, go to the Records tab, select that resource, and then add your subject."
+msgstr "Il ne semble pas y avoir de ressources associées à votre guide. Pour ajouter de nouvelles ressources, allez sous l'onglet Enregistrements, sélectionnez la ressource et ajoutez votre sujet."
+
+#: control/guides/manage_items.php:134
+#: lib/SubjectsPlus/Control/Pluslet/1.php:185
+msgid "Organize Resources"
+msgstr "Organiser les ressources"
+
+#: control/guides/manage_items.php:137
+msgid "Organize Resources for "
+msgstr "Organiser les ressources pour"
+
+#: control/guides/manage_items.php:145
+msgid "You may drag items to rearrange their order"
+msgstr ""
+
+#: control/guides/manage_items.php:165
+#, fuzzy
+msgid "Admin guide"
+msgstr "Administration"
+
+#: control/guides/manage_items.php:166
+msgid "Public guide"
+msgstr ""
+
+#: control/guides/metadata.php:77
+msgid "You must have a title, shortform, type, and one associated staff member.  Please go back and fix these omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "Vous devez inscrire un titre, un nom abrégé, un type et un membre du personnel associé. Veuillez corriger ces omissions. Et n'oubliez pas d'activer Javascript dans votre navigateur!"
+
+#: control/guides/metadata.php:228
+msgid "Thwarted!  You must have at least one staff member for a guide."
+msgstr "Vous devez assigner au moins un membre du personnel à un guide."
+
+#: control/guides/metadata.php:268 control/records/record.php:533
+msgid "You must have at least one subject."
+msgstr "Vous devez inscrire au moins un sujet."
+
+#: control/guides/metadata.php:325
+msgid "There is already a guide with that short form!  Try again."
+msgstr "Il y a déjà un guide avec ce nom abrégé. Veuillez recommencer."
+
+#: control/includes/configErrorPage.php:59
+msgid "Configuration File Missing!"
+msgstr ""
+
+#: control/includes/configErrorPage.php:60
+msgid "The SubjectsPlus Configurations file does not exist. Before we continue we need to setup a connection to your database."
+msgstr ""
+
+#: control/includes/configErrorPage.php:61
+msgid "Let's make it!"
+msgstr ""
+
+#: control/includes/configErrorPage.php:67 control/setup-config.php:48
+#: control/setup-config.php:57 control/setup-config.php:66
+msgid "Configuration File Error!"
+msgstr ""
+
+#: control/includes/configErrorPage.php:68
+msgid "Sorry, I need a config-default.php file to work from. Please re-upload this file from your SubjectsPlus installation."
+msgstr ""
+
+#: control/includes/configErrorPage.php:74
+#: control/includes/configErrorPage.php:81
+msgid "DB Error!"
+msgstr ""
+
+#: control/includes/configErrorPage.php:75
+msgid "Could not choose database.<br />The database name does not exist. Make sure that database exists and change configurations manually in file config.php.<br />You can also delete the config file and go through initial config setup."
+msgstr ""
+
+#: control/includes/configErrorPage.php:82
+msgid "Could not establish mySQL connection.<br />Make sure user name exists and password is correct and change configurations manually in file config.php.<br />You can also delete the config file and go through initial config setup."
+msgstr ""
+
+#: control/includes/firstTimeInstall.php:14
+msgid "First Time Installation "
+msgstr ""
+
+#: control/includes/firstTimeInstall.php:16
+msgid "Here are a few tips for setting up your SujectsPlus installation."
+msgstr ""
+
+#: control/includes/firstTimeInstall.php:19
+msgid "Change your default password to something more memorable."
+msgstr ""
+
+#: control/includes/firstTimeInstall.php:20
+#: control/includes/firstTimeUpdate.php:19
+msgid "Configure SubjectsPlus "
+msgstr ""
+
+#: control/includes/firstTimeInstall.php:20
+#: control/includes/firstTimeUpdate.php:19
+msgid "here"
+msgstr ""
+
+#: control/includes/firstTimeInstall.php:21
+msgid "Find out about customizing and using SP on the wiki. "
+msgstr ""
+
+#: control/includes/firstTimeUpdate.php:14
+#, fuzzy
+msgid "First Time Update"
+msgstr "Prénom"
+
+#: control/includes/firstTimeUpdate.php:16
+msgid "Welcome to your new version of SubjectsPlus"
+msgstr ""
+
+#: control/includes/firstTimeUpdate.php:21
+msgid "You can change the email key so you can log in with only the username."
+msgstr ""
+
+#: control/includes/firstTimeUpdate.php:22
+msgid "You can configure your Catalog Connections as they were in the previous version."
+msgstr ""
+
+#: control/includes/firstTimeUpdate.php:23
+msgid "Move over your previous /users/ folders to /assets/, i.e., _jsmith"
+msgstr ""
+
+#: control/includes/firstTimeUpdate.php:24
+msgid "If you have styled the front end, move over default.css to assets/css/ and tweak as necessary.  See wiki for tips."
+msgstr ""
+
+#: control/includes/firstTimeUpdate.php:26
+msgid "You can find out new features in 3.0 on the wiki."
+msgstr ""
+
+#: control/includes/functions.php:263
+msgid "Invalid file type: not on whitelist of ok file types"
+msgstr "Type de fichier invalide : ne figure pas dans la liste de fichiers autorisés"
+
+#: control/includes/functions.php:453
+msgid "Last modification date unknown."
+msgstr "Date de la dernière modification inconnue"
+
+#: control/includes/functions.php:515
+msgid "Someone Has Blundered!"
+msgstr "Quelqu'un a fait une bourde!"
+
+#: control/includes/functions.php:517
+msgid "(But probably not you.)"
+msgstr "(Mais probablement pas vous.)"
+
+#: control/includes/functions.php:612
+msgid "Restricted Resource"
+msgstr "Ressource à accès restreint"
+
+#: control/includes/functions.php:615
+msgid "Restricted resource"
+msgstr "Ressource à accès restreint"
+
+#: control/includes/functions.php:619
+msgid "Unrestricted Resource"
+msgstr "Ressource à accès non restreint"
+
+#: control/includes/functions.php:621
+msgid "Unrestricted resource"
+msgstr "Ressource à accès non restreint"
+
+#: control/includes/functions.php:626
+msgid "Some full text available"
+msgstr "Texte intégral disponible"
+
+#: control/includes/functions.php:629 subjects/themes/um/databases.php:266
+msgid "Some full text"
+msgstr "Texte intégral"
+
+#: control/includes/functions.php:636
+msgid "OpenURL enabled"
+msgstr "OpenURL activé"
+
+#: control/includes/functions.php:641
+msgid "Resource contains images"
+msgstr "La ressource contient des images"
+
+#: control/includes/functions.php:644 subjects/themes/um/databases.php:267
+msgid "Images"
+msgstr "Images"
+
+#: control/includes/functions.php:649
+msgid "Resource contains video"
+msgstr "La ressource contient des enregistrements vidéo"
+
+#: control/includes/functions.php:652 subjects/themes/um/databases.php:268
+msgid "Video files"
+msgstr "Fichiers vidéo"
+
+#: control/includes/functions.php:657
+msgid "Resource contains audio"
+msgstr "La ressource contient des enregistrements audio"
+
+#: control/includes/functions.php:660 subjects/themes/um/databases.php:269
+msgid "Audio files"
+msgstr "Fichiers audio"
+
+#: control/includes/functions.php:715
+msgid "Research Guides"
+msgstr "Guides de recherche"
+
+#: control/includes/functions.php:719
+msgid "FAQ"
+msgstr "FAQ"
+
+#: control/includes/functions.php:723 subjects/talkback.php:33
+msgid "Talk Back"
+msgstr "Référence"
+
+#: control/includes/functions.php:729
+msgid "Research Guide created"
+msgstr "Guide de recherche créé"
+
+#: control/includes/functions.php:732
+msgid "Research Guide metadata"
+msgstr "Métadonnées du guide de recherche"
+
+#: control/includes/functions.php:735
+msgid "Research Guide deleted"
+msgstr "Guide de recherche supprimé"
+
+#: control/includes/functions.php:742 lib/SubjectsPlus/Control/Record.php:178
+msgid "Record"
+msgstr "Enregistrement"
+
+#: control/includes/functions.php:746
+msgid "Staff Details updated."
+msgstr "Détails du membre du personnel mis à jour."
+
+#: control/includes/functions.php:751
+msgid "New User Added"
+msgstr "Nouvel usager ajouté"
+
+#: control/includes/functions.php:755
+msgid "User Information updated"
+msgstr "Informations de l'usager mis à jour"
+
+#: control/includes/functions.php:759
+msgid "User deleted"
+msgstr "Usager supprimé"
+
+#: control/includes/functions.php:765
+#: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:26
+#: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:174
+msgid "Video"
+msgstr "Vidéo"
+
+#: control/includes/functions.php:937
+msgid "List All Format Types"
+msgstr ""
+
+#: control/includes/header.php:157
+msgid "Required"
+msgstr "Requis"
+
+#: control/includes/header.php:158
+msgid "Are you sure?"
+msgstr "Êtes-vous certain?"
+
+#: control/includes/header.php:159 lib/SubjectsPlus/Control/Pluslet/Feed.php:78
+#: lib/SubjectsPlus/Control/Talkback.php:194
+#: lib/SubjectsPlus/Control/Video.php:195
+msgid "Yes"
+msgstr "Oui"
+
+#: control/includes/header.php:160 lib/SubjectsPlus/Control/Pluslet/Feed.php:79
+#: lib/SubjectsPlus/Control/Talkback.php:198
+#: lib/SubjectsPlus/Control/Video.php:199
+msgid "No"
+msgstr "Non"
+
+#: control/includes/linkchecker.php:28
+msgid "The link report can take a few minutes to run, depending on how many links you have on the page.  So be patient."
+msgstr "Le rapport de vérification des liens peut prendre plusieurs minutes à être produit, dépendant du nombre de liens se trouvant sur votre page. Soyez patient."
+
+#: control/includes/linkchecker.php:31
 msgid "Run Linkchecker Now"
-msgstr ""
+msgstr "Exécuter le vérificateur de liens maintenant"
 
-#: control/includes/linkchecker.php:37 subjects/delish_feed.php:37
+#: control/includes/linkchecker.php:36
+#: lib/SubjectsPlus/Control/LinkChecker.php:158
 msgid "Results"
-msgstr ""
+msgstr "Résultats"
 
-#: control/includes/linkchecker.php:69
+#: control/includes/linkchecker.php:68
 msgid "Wow, it appears that all your links are okay.  Good work!"
-msgstr ""
+msgstr "Tous vos liens fonctionnent."
+
+#: control/includes/linkchecker.php:71
+#: lib/SubjectsPlus/Control/LinkChecker.php:542
+#: lib/SubjectsPlus/Control/LinkChecker.php:548
+msgid "Would you like to mail this report to someone?"
+msgstr "Voudriez-vous envoyer ce rapport par courriel?"
 
 #: control/includes/linkchecker.php:72
-msgid "Would you like to mail this report to someone?"
-msgstr ""
+#: lib/SubjectsPlus/Control/LinkChecker.php:543
+#: lib/SubjectsPlus/Control/LinkChecker.php:549
+msgid "Send report to: "
+msgstr "Envoyer le rapport à : "
 
 #: control/includes/linkchecker.php:73
-msgid "Send report to: "
-msgstr ""
-
-#: control/includes/linkchecker.php:74
+#: lib/SubjectsPlus/Control/LinkChecker.php:545
 msgid "Send report to All Guide Owners"
-msgstr ""
+msgstr "Envoyer le rapport à tous les propriétaires de guides"
 
 #: control/includes/linkchecker.php:84
 msgid "Link Report for "
-msgstr ""
+msgstr "Rapport de vérification de liens pour "
+
+#: control/includes/set_bio.php:41 control/includes/set_image.php:37
+#: control/includes/set_password.php:39 control/includes/set_picture.php:40
+msgid "Perhaps you have come here by a funny path?"
+msgstr "Peut-être vous êtes-vous rendu ici par un drôle de chemin?"
+
+#: control/includes/set_bio.php:55
+msgid "Bio updated.  Close window to continue."
+msgstr "Biographie mise à jour. Fermer la fenêtre pour continuer."
+
+#: control/includes/set_bio.php:57 control/includes/set_password.php:60
+msgid "There was a problem.  Contact the admin."
+msgstr "Il y a eu un problème. Contactez l'administrateur."
+
+#: control/includes/set_bio.php:69
+msgid "Update Biography for "
+msgstr "Mettre à jour la biographie de "
+
+#: control/includes/set_bio.php:73 lib/SubjectsPlus/Control/Staff.php:601
+#: lib/SubjectsPlus/Control/Staff.php:805
+#: lib/SubjectsPlus/Control/StaffBrief.php:231
+msgid "Please only include professional details."
+msgstr "Veuillez n'inclure que des détails professionnels."
+
+#: control/includes/set_bio.php:80
+msgid "Update Bio"
+msgstr "Mettre à jour la biographie"
+
+#: control/includes/set_image.php:49
+#, fuzzy
+msgid "Current Thumbnail . . . boooring."
+msgstr "Photographie courante"
+
+#: control/includes/set_image.php:55
+#, fuzzy
+msgid "Once you click upload, the current image will be replaced.  <strong>Note:</strong>  Images should be 200x150 px."
+msgstr "Téléverser une nouvelle photo. Une fois que vous cliquez sur Téléverser, l'image courante sera remplacée. <strong>Note : votre image sera redimensionnée à 70px de côté</strong>. Utiliser une image carrée est préférable."
+
+#: control/includes/set_image.php:125
+#, fuzzy
+msgid "Update Image"
+msgstr "Mettre à jour la biographie"
 
 #: control/includes/set_password.php:57
 msgid "Password updated.  Close this box to continue."
-msgstr ""
+msgstr "Mot de passe mis à jour. Fermer cette boîte pour continuer."
 
-#: control/includes/set_password.php:63
-msgid ""
-"You cannot leave the password box blank.  Close this window if you don't "
-"want to change the password."
-msgstr ""
+#: control/includes/set_password.php:66
+msgid "You cannot leave the password box blank.  Close this window if you don't want to change the password."
+msgstr "Vous ne pouvez pas laisser le champ du mot de passe à blanc. Fermer cette fenêtre si vous ne voulez pas modifier votre mot de passe."
 
-#: control/includes/set_password.php:68
+#: control/includes/set_password.php:71
 msgid "Update Password for "
-msgstr ""
+msgstr "Mettre à jour le mot de passe pour "
 
-#: control/includes/set_picture.php:63
+#: control/includes/set_picture.php:64
 msgid "Current Picture . . . boooring."
+msgstr "Photographie courante"
+
+#: control/includes/set_picture.php:70
+msgid "Upload the new you.  Once you click upload, the current image will be replaced.  <strong>Note:</strong>  Your image will be scaled to <strong>70px wide</strong>.  Using a square image is best."
+msgstr "Téléverser une nouvelle photo. Une fois que vous cliquez sur Téléverser, l'image courante sera remplacée. <strong>Note : votre image sera redimensionnée à 70px de côté</strong>. Utiliser une image carrée est préférable."
+
+#: control/includes/set_picture.php:155
+msgid "File not uploaded to the specified location"
 msgstr ""
 
-#: control/includes/set_picture.php:69
-msgid ""
-"Upload the new you.  Once you click upload, the current image will be "
-"replaced.  <strong>Note:</strong>  Your image will be scaled to <strong>70px "
-"wide</strong>.  Using a square image is best."
+#: control/includes/set_picture.php:166
+msgid "File not uploaded to the server"
 msgstr ""
 
-#: control/includes/set_picture.php:135
+#: control/includes/set_picture.php:173
 msgid "Update Picture for "
+msgstr "Mettre à jour la photo pour "
+
+#: control/index.php:34
+msgid "Update Your Biographical Details"
+msgstr "Mettre à jour vos détails biographiques"
+
+#: control/index.php:38
+msgid "Update Headshot"
+msgstr "Mettre à jour votre photo"
+
+#: control/index.php:45
+msgid "View/Export Staff Contact Info"
 msgstr ""
 
-#: control/records/index.php:22
+#: control/index.php:53
+msgid "Hello %s"
+msgstr "Bonjour %s"
+
+#: control/index.php:64
+msgid "Reset Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: control/index.php:77
+#, fuzzy
+msgid "Create New Record"
+msgstr "Nouvel enregistrement"
+
+#: control/index.php:79
+#, fuzzy
+msgid "Create New FAQ"
+msgstr "Créer une FAQ"
+
+#: control/index.php:82
+msgid "Favourites"
+msgstr ""
+
+#: control/index.php:85
+msgid "Background Options"
+msgstr "Options d'arrière plan"
+
+#: control/index.php:115
+msgid "You have recently added or edited:"
+msgstr "Vous avez récemment ajouté ou modifié : "
+
+#: control/install.php:39
+msgid "Already Installed"
+msgstr ""
+
+#: control/install.php:41
+msgid "There appears to already be an installation of SubjectsPlus. To reinstall please clear old database tables first."
+msgstr ""
+
+#: control/install.php:42 lib/SubjectsPlus/Control/Installer.php:490
+#: lib/SubjectsPlus/Control/Updater.php:584
+msgid "Log In"
+msgstr ""
+
+#: control/install.php:64 control/setup-config.php:107
+#, fuzzy
+msgid "Talkback"
+msgstr "Référence"
+
+#: control/install.php:90
+msgid "This is the port your MySQL server uses. (Default: 3306)"
+msgstr ""
+
+#: control/login.php:127
+#, fuzzy
+msgid "Please enter your <strong>credentials</strong> to proceed."
+msgstr "Veuillez saisir votre <strong>nom d'usager</strong> et votre <strong>mot de passe</strong> pour commencer."
+
+#: control/login.php:135
+msgid "Login"
+msgstr "Connexion"
+
+#: control/login.php:139 control/login.php:204 control/login.php:205
+#: lib/SubjectsPlus/Control/StaffBrief.php:264
+msgid "Password"
+msgstr "Mot de passe"
+
+#: control/login.php:182
+#, fuzzy
+msgid "Please check your email and password and try again.  (Note that login attempts are logged.)"
+msgstr "Veuillez vérifier votre nom d'usager et votre mot de passe, et réessayez de vous connecter. (Notez que les tentatives de connexion sont enregistrées.)"
+
+#: control/login.php:200
+msgid "Email Address"
+msgstr ""
+
+#: control/login.php:214
+msgid "I have forgotten my password"
+msgstr ""
+
+#: control/records/index.php:62
 msgid "Please select a letter or tag to browse."
+msgstr "Sélectionner une lettre ou un mot clé pour naviguer."
+
+#: control/records/index.php:75
+#, fuzzy
+msgid "Restricted Items"
+msgstr "Ressource à accès restreint"
+
+#: control/records/index.php:78
+#, fuzzy
+msgid "Unrestricted Items"
+msgstr "Ressource à accès non restreint"
+
+#: control/records/index.php:81
+#, fuzzy
+msgid "A-Z List Items"
+msgstr "Liste alphabétique des BDs"
+
+#: control/records/index.php:100
+#, fuzzy
+msgid "A-Z List"
+msgstr "Liste alphabétique des BDs"
+
+#: control/records/index.php:107
+#, fuzzy
+msgid "Restricted"
+msgstr "Ressource à accès restreint"
+
+#: control/records/index.php:114
+msgid "Free"
 msgstr ""
 
-#: control/records/index.php:148
+#: control/records/index.php:180
 msgid "Make sure the item doesn't already exist!"
-msgstr ""
+msgstr "Assurez-vous que l'item n'existe pas déjà!"
 
-#: control/records/index.php:149
+#: control/records/index.php:181
 msgid "Create new item"
-msgstr ""
+msgstr "Créer un nouvel item"
 
-#: control/records/record.php:64
-msgid ""
-"You must have a title, location, and subject.  Please go back and fix these "
-"omissions.  And turn on JavaScript, for goodness sakes!"
-msgstr ""
+#: control/records/index.php:187
+#, fuzzy
+msgid "Browse Records"
+msgstr "Naviguez dans les usagers"
 
-#: control/records/record.php:77
+#: control/records/index.php:192
+#, fuzzy
+msgid "New AZRecord"
+msgstr "Nouvel enregistrement"
+
+#: control/records/record.php:73
+msgid "You must have a title, location, and subject.  Please go back and fix these omissions.  And turn on JavaScript, for goodness sakes!"
+msgstr "Vous devez indiquer un titre, une localisation et un sujet. Veuillez corriger ces omissions et activer Javascript dans votre navigateur."
+
+#: control/records/record.php:86
 msgid "There is already a record with this title: "
-msgstr ""
+msgstr "Il y a déjà un enregistrement avec ce titre : "
 
-#: control/records/record.php:77
+#: control/records/record.php:86
 msgid "Maybe do a search and make sure it doesn't already exist?"
-msgstr ""
+msgstr "Peut-être pourriez-vous effectuer une recherche pour vous assurer que ça n'existe pas déjà?"
 
-#: control/records/record_bits.php:53
+#: control/records/record_bits.php:45 lib/SubjectsPlus/Control/Record.php:562
+msgid "remove subject"
+msgstr "retirer le sujet"
+
+#: control/records/record_bits.php:60
 msgid "Source Override"
-msgstr ""
+msgstr "Outrepassement de la source"
 
-#: control/records/record_bits.php:53
+#: control/records/record_bits.php:60
 msgid "add source override"
-msgstr ""
+msgstr "ajouter un outrepassement de la source"
 
-#: control/records/record_bits.php:53
+#: control/records/record_bits.php:61
 msgid "never mind"
-msgstr ""
+msgstr "laissez faire"
 
-#: control/records/record_bits.php:59
-msgid "Location (Enter URL)"
-msgstr ""
-
-#: control/records/record_bits.php:62
+#: control/records/record_bits.php:70 lib/SubjectsPlus/Control/Record.php:439
 msgid "Location (Enter Call Number)"
-msgstr ""
+msgstr "Localisation (saisir une cote)"
 
-#: control/records/record_bits.php:65
+#: control/records/record_bits.php:73 lib/SubjectsPlus/Control/Record.php:443
 msgid "Location (Enter Persistent Catalog URL--include http://)"
-msgstr ""
+msgstr "Adresse (saisir un permalien de votre catalogue -- inclure http://)"
 
-#: control/records/record_bits.php:88
+#: control/records/record_bits.php:93
 msgid "This URL looks OK to me"
-msgstr ""
+msgstr "Cette URL semble correcte"
 
-#: control/records/record_bits.php:91
+#: control/records/record_bits.php:96
 msgid "This URL looks dodgy; better check it"
+msgstr "Cette URL semble suspecte; vérifiez-la"
+
+#: control/records/record_bits.php:107
+#, fuzzy
+msgid "SubjectsPlus: AZRecord Delete Recommendation"
+msgstr "SubjectsPlus : Recommandation de suppression d'enregistrement"
+
+#: control/search.php:75 subjects/search.php:99
+#: subjects/themes/um/index_c.php:146
+#, fuzzy
+msgid "Search Results for "
+msgstr "Résultats de recherche"
+
+#: control/search.php:78 subjects/search.php:102
+msgid "No search term entered"
 msgstr ""
 
-#: control/records/record_bits.php:102
-msgid "SubjectsPlus: Record Delete Recommendation"
+#: control/search.php:79 subjects/search.php:103
+msgid "<p>Please search for something with the box above.</p>"
+msgstr "<p>Effectuez votre recherche dans la boîte ci-dessus.</p>"
+
+#: control/setup-config.php:49
+msgid "Error! No Base file to use!"
 msgstr ""
 
-#: control/talkback/index.php:55 control/talkback/index.php:94
-msgid "Anonymous"
+#: control/setup-config.php:58
+msgid "The file 'config.php' already exists. If you need to reset any of the configuration items in this file, you must be an admin and go to the Admin Nav and click 'Config Site'."
 msgstr ""
 
-#: control/talkback/index.php:72 control/talkback/index.php:124
-#: control/talkback/index.php:125
-msgid "Hooray, no unanswered TalkBacks."
+#: control/setup-config.php:134
+msgid "This is the port your MySQL server uses. (Default: 3306)."
 msgstr ""
 
-#: control/talkback/index.php:104
-msgid "--"
-msgstr ""
-
-#: control/talkback/index.php:133
-msgid "Unanswered TalkBacks"
-msgstr ""
-
-#: control/talkback/index.php:140
-msgid "Answered TalkBacks"
-msgstr ""
-
-#: control/talkback/index.php:142
-msgid "TalkBacks visible"
-msgstr ""
-
-#: control/talkback/index.php:146
-msgid "See 10 Most Recent"
-msgstr ""
-
-#: control/talkback/index.php:155
-msgid "About TalkBack"
+#: control/setup-config.php:179
+msgid "Configuration Setup Complete."
 msgstr ""
 
 #: control/talkback/index.php:157
-msgid ""
-"TalkBack questions come via the web form on the public TalkBack page. An "
-"email should be sent to the admin when a new one arrives, and they may be "
-"answered here."
+#, fuzzy
+msgid "Show:"
+msgstr "Afficher"
+
+#: control/talkback/index.php:158
+msgid "Site Filter:"
 msgstr ""
 
-#: control/talkback/index.php:160
+#: control/talkback/index.php:159
+msgid "Topic Filter:"
+msgstr ""
+
+#: control/talkback/index.php:169
+msgid "TalkBack questions come via the web form on the public TalkBack page. An email should be sent to the admin when a new one arrives, and they may be answered here."
+msgstr "Les questions de référence proviennent du formulaire Web sur la page publique <em>Référence</em>. Un courriel devrait être envoyé à l'administrateur lorsqu'une nouvelle question est posée et peut être répondue ici."
+
+#: control/talkback/index.php:172
 msgid "TalkBack Public Page"
-msgstr ""
-
-#: control/admin/faq_collections.php:40
-msgid ""
-"Thwarted!  Something has gone wrong with the insert.  Contact the admin."
-msgstr ""
-
-#: control/admin/faq_collections.php:78
-msgid ""
-"Thwarted!  Something has gone wrong with the update.  Contact the admin."
-msgstr ""
-
-#: control/admin/faq_collections.php:108
-msgid "Edit label or delete collection."
-msgstr ""
-
-#: control/admin/faq_collections.php:114
-msgid "Add Collection"
-msgstr ""
-
-#: control/admin/faq_collections.php:117
-msgid "Collection Name"
-msgstr ""
-
-#: control/admin/faq_collections.php:120
-msgid "Add New Collection"
-msgstr ""
-
-#: control/admin/index.php:26
-msgid "Users"
-msgstr ""
-
-#: control/admin/index.php:30
-msgid "Browse Users"
-msgstr ""
-
-#: control/admin/index.php:44
-msgid "Browse/Add New Department"
-msgstr ""
-
-#: control/admin/index.php:48
-msgid "Record Source Types"
-msgstr ""
-
-#: control/admin/index.php:51
-msgid "Add New Source Type"
-msgstr ""
-
-#: control/admin/admin_bits.php:52 control/admin/admin_bits.php:102
-msgid "You must select something first."
-msgstr ""
-
-#: control/admin/admin_bits.php:98
-msgid "Thy Will Be Done.  Selected records now "
-msgstr ""
-
-#: control/admin/admin_bits.php:146
-msgid ""
-"Your request cannot be completed:  There are one or more librarians "
-"associated with this subject"
-msgstr ""
-
-#: control/admin/admin_bits.php:156 control/admin/departments.php:40
-#: control/admin/departments.php:101
-msgid "Thy Will Be Done.  Department list updated."
-msgstr ""
-
-#: control/admin/admin_bits.php:172
-msgid ""
-"Your request cannot be completed:  There are one or more records linked to "
-"this item."
-msgstr ""
-
-#: control/admin/admin_bits.php:182
-msgid "Thy Will Be Done.  Offending item removed."
-msgstr ""
-
-#: control/admin/admin_bits.php:197
-msgid ""
-"Your request cannot be completed:  There are one or more records linked to "
-"this source"
-msgstr ""
-
-#: control/admin/admin_bits.php:207 control/admin/sources.php:39
-#: control/admin/sources.php:81
-msgid "Thy Will Be Done.  Source list updated."
-msgstr ""
-
-#: control/admin/admin_bits.php:233
-msgid "inactive"
-msgstr ""
-
-#: control/admin/admin_bits.php:239
-msgid "see live"
-msgstr ""
-
-#: control/admin/admin_bits.php:244
-msgid "Sorry, there were no results."
-msgstr ""
-
-#: control/admin/departments.php:43 control/admin/departments.php:103
-#: control/admin/sources.php:41 control/admin/sources.php:83
-msgid "Thwarted!  Something has gone wrong.  Contact the admin."
-msgstr ""
-
-#: control/admin/departments.php:138
-msgid ""
-"Enter department name and telephone number.  Drag departments to change "
-"display order."
-msgstr ""
-
-#: control/admin/departments.php:147
-msgid "Add Department"
-msgstr ""
-
-#: control/admin/departments.php:150
-msgid "Department Name"
-msgstr ""
-
-#: control/admin/departments.php:156
-msgid "Add New Department"
-msgstr ""
-
-#: control/admin/manage_guides.php:68 control/admin/manage_guides.php:86
-msgid "All"
-msgstr ""
-
-#: control/admin/manage_guides.php:71
-msgid "Select"
-msgstr ""
-
-#: control/admin/manage_guides.php:90
-msgid "~~Guide Status~~"
-msgstr ""
-
-#: control/admin/manage_guides.php:91
-msgid "Active"
-msgstr ""
-
-#: control/admin/manage_guides.php:92
-msgid "Inactive"
-msgstr ""
-
-#: control/admin/manage_guides.php:93
-msgid "~~Guide Types~~"
-msgstr ""
-
-#: control/admin/manage_guides.php:110
-msgid "Ticked Guides"
-msgstr ""
-
-#: control/admin/manage_guides.php:111
-msgid "Show Guides By"
-msgstr ""
-
-#: control/admin/manage_guides.php:112
-msgid "Show"
-msgstr ""
-
-#: control/admin/manage_guides.php:115
-msgid "Assign to "
-msgstr ""
-
-#: control/admin/sources.php:113
-msgid "Enter source type label.  Drag sources to change sort order."
-msgstr ""
-
-#: control/admin/sources.php:122
-msgid "Add Source"
-msgstr ""
-
-#: control/admin/sources.php:125
-msgid "Source Name"
-msgstr ""
+msgstr "Page publique de la référence"
 
-#: control/admin/sources.php:128
-msgid "Add New Source"
-msgstr ""
-
-#: control/admin/user.php:56
-msgid ""
-"None registered.  Just as well.  They're going to rise up against us someday."
-msgstr ""
-
-#: control/admin/user.php:59
-msgid "Click on a name to update details and privileges"
-msgstr ""
-
-#: control/admin/user.php:160
-msgid ""
-"We're really going to miss that staff person.  Search above to delete "
-"someone else!"
-msgstr ""
-
-#: subjects/staff.php:64 subjects/staff_details.php:139
-msgid "Staff Listing"
-msgstr ""
-
-#: subjects/databases.php:14
-msgid "Database List"
-msgstr ""
-
-#: subjects/databases.php:15
-msgid "An alphabetical list of the electronic resources available."
-msgstr ""
-
-#: subjects/databases.php:16
-msgid ""
-"library, research, electronic journals, databases, electronic resources, "
-"full text, online, magazine, articles, paper, assignment"
-msgstr ""
+#: control/talkback/index.php:180
+#, fuzzy
+msgid "View and Answer TalkBacks"
+msgstr "Questions de référence répondues"
 
-#: subjects/databases.php:55
-msgid "Click for more information about a database."
-msgstr ""
+#: control/talkback/index.php:185
+msgid "About TalkBack"
+msgstr "À propos de la référence"
 
-#: subjects/databases.php:70
-msgid "Campus Faculty, Staff &amp; Students only"
-msgstr ""
+#: control/talkback/index.php:208
+#, fuzzy
+msgid "Alas, there are no items with this tag."
+msgstr "Désolé, il n'y a aucun résultat à ce moment."
 
-#: subjects/databases.php:71
-msgid "Click for help guide (.pdf or .html)"
-msgstr ""
+#: control/talkback/index.php:218 control/talkback/tb_bits.php:106
+#: lib/SubjectsPlus/Control/Talkback.php:79
+msgid "Anonymous"
+msgstr "Anonyme"
 
-#: subjects/databases.php:72
-msgid "OpenURL Enabled"
-msgstr ""
+#: control/talkback/index.php:241 control/talkback/tb_bits.php:122
+msgid "--"
+msgstr "--"
 
-#: subjects/databases.php:89
-msgid "Databases"
-msgstr ""
+#: control/update.php:41
+#, fuzzy
+msgid "Already Updated"
+msgstr "Guide mis à jour."
 
-#: subjects/databases.php:106 subjects/index.php:190
-msgid "Newest Databases"
+#: control/update.php:43
+msgid "Already at SubjectsPlus 3.0. No need to run updater."
 msgstr ""
 
-#: subjects/index.php:151
-msgid "Find Research Guides"
+#: control/update.php:44
+msgid "Log In."
 msgstr ""
 
-#: subjects/index.php:154
-msgid "Find the research guide of your dreams"
+#: control/videos/index.php:78
+msgid "No Videos yet.  Grab your camera."
 msgstr ""
 
-#: subjects/index.php:162
-msgid "show suggestions"
+#: control/videos/index.php:81
+msgid "FIND VIDEOS"
 msgstr ""
 
-#: subjects/index.php:169
-msgid "Browse Research Guides"
+#: control/videos/index.php:82
+msgid "ENTER VIDEO"
 msgstr ""
 
-#: subjects/index.php:183
-msgid "Newest Guides"
-msgstr ""
+#: control/videos/index.php:84
+#, fuzzy
+msgid "View Video on Public Site"
+msgstr "Voir le guide sur le site public"
 
-#: subjects/faq.php:25
-msgid ""
-"<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them "
-"<strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., "
-"different groupings of FAQs for different purposes/audiences), or browse the "
-"Basic FAQs, below.</p>"
-msgstr ""
+#: control/videos/index.php:94
+#, fuzzy
+msgid "Collected Videos"
+msgstr "Collections de FAQs"
 
-#: subjects/faq.php:195
-msgid "No Results"
-msgstr ""
+#: control/videos/index.php:95
+#, fuzzy
+msgid "Videos visible"
+msgstr "Fichiers vidéo"
 
-#: subjects/faq.php:197
-msgid "There were no FAQs found for this query."
-msgstr ""
+#: control/videos/index.php:108
+#, fuzzy
+msgid "Ingest Video Metadata"
+msgstr "Modifier les métadonnées du guide"
 
-#: subjects/faq.php:236
-msgid "Note:  Not all FAQs displayed.  Search or browse for more "
+#: control/videos/index.php:110
+msgid "Add Metadata by Hand"
 msgstr ""
 
-#: subjects/faq.php:247
-msgid "Search FAQs"
-msgstr ""
+#: control/videos/index.php:112
+#, fuzzy
+msgid "About Videos"
+msgstr "À propos des FAQs"
 
-#: subjects/faq.php:266
-msgid "Browse FAQs by Subject"
+#: control/videos/ingest.php:39
+msgid "Select a source you wish to pull in video metadata from.  Enter the name of the user account, followed by the source."
 msgstr ""
 
-#: subjects/delish_feed.php:164
-msgid "image created with"
+#: control/videos/ingest.php:43
+msgid "Account username"
 msgstr ""
 
-#: subjects/guide.php:131
-msgid "No Guide"
+#: control/videos/ingest.php:66
+msgid "Enter an account username to begin."
 msgstr ""
 
-#: subjects/talkback.php:29
-msgid "Thanks"
+#: control/videos/ingest.php:269
+msgid "Error loading the video feed. It's possible there is no channel by that name."
 msgstr ""
 
-#: subjects/talkback.php:31
-msgid ""
-"Thank you for your feedback.  We will try to post a response within the next "
-"three business days."
-msgstr ""
+#: control/videos/ingest.php:349
+#, fuzzy
+msgid "INSERT Video Metadata"
+msgstr "Modifier les métadonnées du guide"
 
-#: subjects/talkback.php:38
-msgid "Oh dear."
-msgstr ""
+#: control/videos/ingest.php:351
+msgid "Note:  You already have metadata for this video.  Click UPDATE to overwrite."
+msgstr ""
+
+#: control/videos/ingest.php:352
+#, fuzzy
+msgid "UPDATE Video Metadata"
+msgstr "Modifier les métadonnées du guide"
 
-#: subjects/talkback.php:40
-msgid "There was a problem with your submission.  Please try again."
-msgstr ""
+#: control/videos/video_bits.php:89
+msgid "Modified."
+msgstr ""
 
-#: subjects/talkback.php:49
+#: control/videos/video_bits.php:89
+msgid "Check metadata for accuracy.  New videos are now active."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/AllHandler.php:60
+#: lib/SubjectsPlus/Control/DbHandler.php:335
+#: lib/SubjectsPlus/Control/DbHandler.php:454
+msgid "Sorry, there are no results at this time."
+msgstr "Désolé, il n'y a aucun résultat à ce moment."
+
+#: lib/SubjectsPlus/Control/AllHandler.php:104
+#: lib/SubjectsPlus/Control/DbHandler.php:393
+msgid "Note:"
+msgstr "Note :"
+
+#: lib/SubjectsPlus/Control/AllHandler.php:111
+#: lib/SubjectsPlus/Control/DbHandler.php:399
+msgid "more information"
+msgstr "plus d'informations"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:35
+#: lib/SubjectsPlus/Control/BuildNav.php:56
+#: lib/SubjectsPlus/Control/LinkChecker.php:65
+msgid "Records"
+msgstr "Enregistrements"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:37
+#: lib/SubjectsPlus/Control/BuildNav.php:59
+msgid "New Record"
+msgstr "Nouvel enregistrement"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:38
+#: lib/SubjectsPlus/Control/BuildNav.php:60
+msgid "Browse Items"
+msgstr "Naviguez dans les items"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:52
+#: lib/SubjectsPlus/Control/BuildNav.php:75
+msgid "New Guide"
+msgstr "Nouveau guide"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:53
+#: lib/SubjectsPlus/Control/BuildNav.php:76
+msgid "Browse Guides"
+msgstr "Naviguez dans les guides"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:54
+#: lib/SubjectsPlus/Control/BuildNav.php:77
+#, fuzzy
+msgid "Manage Files"
+msgstr "Gérer les guides"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:55
+#: lib/SubjectsPlus/Control/BuildNav.php:78
+msgid "Delicious Builder"
+msgstr "Générateur pour Delicious"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:56
+#: lib/SubjectsPlus/Control/BuildNav.php:79
+#: lib/SubjectsPlus/Control/LinkChecker.php:57
+#, fuzzy
+msgid "Link Checker"
+msgstr "Exécuter le vérificateur de liens maintenant"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:70
+#: lib/SubjectsPlus/Control/BuildNav.php:96
+msgid "New FAQ"
+msgstr "Nouvelle FAQ"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:71
+#: lib/SubjectsPlus/Control/BuildNav.php:97
+msgid "Browse by Subject"
+msgstr "Naviguez par sujet"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:72
+#: lib/SubjectsPlus/Control/BuildNav.php:98
+msgid "Browse by Collection"
+msgstr "Naviguez par collection"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:97
+#: lib/SubjectsPlus/Control/BuildNav.php:125
+msgid "List Current"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:98
+#: lib/SubjectsPlus/Control/BuildNav.php:126
+msgid "Find/Ingest"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:99
+#: lib/SubjectsPlus/Control/BuildNav.php:127
+msgid "Manually Enter"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:110
+#: lib/SubjectsPlus/Control/BuildNav.php:157
+msgid "Admin"
+msgstr "Administration"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:113
+#: lib/SubjectsPlus/Control/BuildNav.php:161
+msgid "Manage Users"
+msgstr "Gérer les usagers"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:118
+#: lib/SubjectsPlus/Control/BuildNav.php:167
+msgid "Config Site"
+msgstr "Configurer le site"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:133
+#: lib/SubjectsPlus/Control/BuildNav.php:176
+msgid "Search records"
+msgstr "Chercher dans les enregistrements"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:137
+#: lib/SubjectsPlus/Control/BuildNav.php:180
+msgid "Search guides"
+msgstr "Chercher dans les guides"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:141
+#: lib/SubjectsPlus/Control/BuildNav.php:184
+msgid "Search faqs"
+msgstr "Chercher dans les FAQs"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:145
+#: lib/SubjectsPlus/Control/BuildNav.php:192
+msgid "Search talkback"
+msgstr "Chercher dans le TalkBack"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:149
+#: lib/SubjectsPlus/Control/BuildNav.php:196
+msgid "Search users"
+msgstr "Chercher dans les usagers"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:153
+#: lib/SubjectsPlus/Control/BuildNav.php:188
+#: lib/SubjectsPlus/Control/BuildNav.php:200
+msgid "Search all"
+msgstr "Chercher dans tout"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:168
+msgid "Hi"
+msgstr "Bonjour"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:172
+#, fuzzy
+msgid "View My Profile"
+msgstr "Fichiers vidéo"
+
+#: lib/SubjectsPlus/Control/BuildNav-prev.php:173
+#, fuzzy
+msgid "Logout"
+msgstr "{Déconnexion}"
+
+#: lib/SubjectsPlus/Control/BuildNav.php:39
+#, fuzzy
+msgid "Edit Your Profile"
+msgstr "Modifier vos guides"
+
+#: lib/SubjectsPlus/Control/BuildNav.php:40
+msgid "Log Out"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/BuildNav.php:93
+#: lib/SubjectsPlus/Control/Pluslet/4.php:22
+#: lib/SubjectsPlus/Control/Pluslet/4.php:67
+#: lib/SubjectsPlus/Control/Pluslet/4.php:72
+msgid "FAQs"
+msgstr "FAQs"
+
+#: lib/SubjectsPlus/Control/BuildNav.php:112
 msgid "TalkBack"
+msgstr "Référence"
+
+#: lib/SubjectsPlus/Control/BuildNav.php:122
+#, fuzzy
+msgid "Videos"
+msgstr "Vidéo"
+
+#: lib/SubjectsPlus/Control/BuildNav.php:140
+msgid "Stats"
 msgstr ""
 
-#: subjects/talkback.php:51
-msgid "Share your comments and suggestions about the library"
+#: lib/SubjectsPlus/Control/BuildNav.php:143
+msgid "Overview"
 msgstr ""
 
-#: subjects/talkback.php:52
-msgid "library, comments, suggestions, complaints"
+#: lib/SubjectsPlus/Control/BuildNav.php:144
+#, fuzzy
+msgid "Add Transaction"
+msgstr "Ajouter une collection"
+
+#: lib/SubjectsPlus/Control/CompleteMe.php:68
+msgid "Go"
+msgstr "Soumettre"
+
+#: lib/SubjectsPlus/Control/Config.php:450
+#: lib/SubjectsPlus/Control/Config.php:514
+#: lib/SubjectsPlus/Control/Config.php:886
+#: lib/SubjectsPlus/Control/Config.php:931
+#, fuzzy
+msgid "This is automatically generated on installation"
+msgstr "Ceci est un courriel généré automatiquement. Veuillez ne pas y répondre."
+
+#: lib/SubjectsPlus/Control/Config.php:451
+#: lib/SubjectsPlus/Control/Config.php:887
+#, fuzzy
+msgid "Edit?"
+msgstr "Modifier"
+
+#: lib/SubjectsPlus/Control/Config.php:463
+#: lib/SubjectsPlus/Control/Config.php:468
+#: lib/SubjectsPlus/Control/Config.php:899
+#: lib/SubjectsPlus/Control/Config.php:904
+msgid "TRUE"
 msgstr ""
 
-#: subjects/talkback.php:55
-msgid "What is five times five?"
+#: lib/SubjectsPlus/Control/Config.php:464
+#: lib/SubjectsPlus/Control/Config.php:469
+#: lib/SubjectsPlus/Control/Config.php:900
+#: lib/SubjectsPlus/Control/Config.php:905
+msgid "FALSE"
 msgstr ""
 
-#: subjects/talkback.php:211
-msgid "Hmm, That Was a Tricky Bit of Math"
+#: lib/SubjectsPlus/Control/Config.php:515
+#: lib/SubjectsPlus/Control/Config.php:932
+#, fuzzy
+msgid "Not right?"
+msgstr "Déposer à droite"
+
+#: lib/SubjectsPlus/Control/Config.php:548
+#, fuzzy
+msgid "Core Configurations"
+msgstr "plus d'informations"
+
+#: lib/SubjectsPlus/Control/Config.php:556
+msgid "Institutional Configurations"
 msgstr ""
 
-#: subjects/talkback.php:213
-msgid ""
-"Sorry, you must answer the Skill Testing Question correctly.  It's an anti-"
-"spam measure . . . ."
+#: lib/SubjectsPlus/Control/Config.php:571
+#, fuzzy
+msgid "Catalog Connections"
+msgstr "Collections pertinentes"
+
+#: lib/SubjectsPlus/Control/Config.php:582
+#: lib/SubjectsPlus/Control/Config.php:955
+#: lib/SubjectsPlus/Control/Staff.php:835
+#: lib/SubjectsPlus/Control/StaffBrief.php:276
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: lib/SubjectsPlus/Control/Config.php:585
+#: lib/SubjectsPlus/Control/Config.php:957
+#, fuzzy
+msgid "Save Config"
+msgstr "Enregistrer maintenant"
+
+#: lib/SubjectsPlus/Control/Config.php:590
+msgid "Other Configurations"
 msgstr ""
 
-#: subjects/talkback.php:232
-msgid ""
-"<p><strong>Talk Back</strong> is where you can <strong>ask a question</"
-"strong> or <strong>make a suggestion</strong> about library services.</p>\r\n"
-"\r\n"
-"        <p>So, please let us know what you think, and we will post your "
-"suggestion and an answer from one of our helpful staff members</p>"
+#: lib/SubjectsPlus/Control/Config.php:647
+msgid "Something went wrong:"
 msgstr ""
 
-#: subjects/talkback.php:243
-msgid "Tell Us What You Think"
+#: lib/SubjectsPlus/Control/Config.php:669
+msgid "Welcome!"
 msgstr ""
 
-#: subjects/talkback.php:245
-msgid "Wait!  Do you need help right now?"
+#: lib/SubjectsPlus/Control/Config.php:671
+msgid "Before getting started, we need some information about the database, You will need to know the following: "
 msgstr ""
 
-#: subjects/talkback.php:245
-msgid "Visit the Research Desk!"
+#: lib/SubjectsPlus/Control/Config.php:673
+#, fuzzy
+msgid "Database host"
+msgstr "Liste des banques de données"
+
+#: lib/SubjectsPlus/Control/Config.php:674
+#, fuzzy
+msgid "Database username"
+msgstr "Banques de données"
+
+#: lib/SubjectsPlus/Control/Config.php:675
+#, fuzzy
+msgid "Database password"
+msgstr "Banques de données"
+
+#: lib/SubjectsPlus/Control/Config.php:676
+#, fuzzy
+msgid "Database name"
+msgstr "Banques de données"
+
+#: lib/SubjectsPlus/Control/Config.php:678
+msgid "If for any reason this automatic file creation does not work, you can simply open <code>config-default.php</code> in a text editor and fill in your information and then save it as <code>config.php</code>."
 msgstr ""
 
-#: subjects/talkback.php:248
-msgid "your name (optional):"
+#: lib/SubjectsPlus/Control/Config.php:950
+#, fuzzy
+msgid "Database Configurations"
+msgstr "Liste des banques de données"
+
+#: lib/SubjectsPlus/Control/Config.php:970
+msgid "SubjectsPlus Installation"
 msgstr ""
 
-#: subjects/talkback.php:251
-msgid "comment:"
+#: lib/SubjectsPlus/Control/Config.php:972
+msgid "<p>Welcome to the SubjetsPlus Installation. Please complete the following information so that we can continue with installation. These can be changed later.</p>"
 msgstr ""
 
-#: subjects/talkback.php:255
-msgid "Enter Number:"
+#: lib/SubjectsPlus/Control/Config.php:975
+msgid "Site Configurations"
 msgstr ""
 
-#: subjects/talkback.php:257
-msgid "Submit"
+#: lib/SubjectsPlus/Control/Config.php:981
+msgid "Install"
 msgstr ""
 
-#: subjects/includes/footer.php:13
-msgid "Revised: "
+#: lib/SubjectsPlus/Control/Config.php:983
+msgid "Install SubjectsPlus"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/DbHandler.php:383
+#, fuzzy
+msgid "Help Guide"
+msgstr "Nouveau guide"
+
+#: lib/SubjectsPlus/Control/DbHandler.php:401
+msgid "about"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/FAQ.php:87
+msgid "There is no active record with that ID.  Weird.  Why not make one?"
+msgstr "Il n'y a aucun enregistrement actif avec cet ID. Pourquoi ne pas en créer un?"
+
+#: lib/SubjectsPlus/Control/FAQ.php:160
+#: lib/SubjectsPlus/Control/Talkback.php:139
+msgid "Question"
+msgstr "Question"
+
+#: lib/SubjectsPlus/Control/FAQ.php:163
+#: lib/SubjectsPlus/Control/Talkback.php:145
+msgid "Answer"
+msgstr "Réponse"
+
+#: lib/SubjectsPlus/Control/FAQ.php:182
+msgid "Keywords (comma separated please)"
+msgstr "Mots clés (séparés par des virgules)"
+
+#: lib/SubjectsPlus/Control/FAQ.php:189 lib/SubjectsPlus/Control/Guide.php:389
+#: lib/SubjectsPlus/Control/Record.php:239
+#: lib/SubjectsPlus/Control/Staff.php:663
+#: lib/SubjectsPlus/Control/StaffBrief.php:284
+#: lib/SubjectsPlus/Control/Talkback.php:259
+#: lib/SubjectsPlus/Control/Video.php:224
+msgid "Last modified: "
+msgstr "Dernière modification : "
+
+#: lib/SubjectsPlus/Control/FAQ.php:199 lib/SubjectsPlus/Control/Guide.php:378
+#: lib/SubjectsPlus/Control/Talkback.php:269
+#: lib/SubjectsPlus/Control/Video.php:233
+msgid "Save Now"
+msgstr "Enregistrer maintenant"
+
+#: lib/SubjectsPlus/Control/FAQ.php:204 lib/SubjectsPlus/Control/Guide.php:385
+#: lib/SubjectsPlus/Control/Record.php:233
+#: lib/SubjectsPlus/Control/Staff.php:659
+#: lib/SubjectsPlus/Control/StaffBrief.php:281
+#: lib/SubjectsPlus/Control/Talkback.php:274
+#: lib/SubjectsPlus/Control/Video.php:238
+msgid "Delete Forever!"
+msgstr "Supprimer de façon permanente!"
+
+#: lib/SubjectsPlus/Control/FAQ.php:206 lib/SubjectsPlus/Control/Record.php:235
+msgid "Recommend Delete"
+msgstr "Recommander la suppression"
+
+#: lib/SubjectsPlus/Control/FAQ.php:268
+msgid "Relevant Subjects"
+msgstr "Sujets pertinents"
+
+#: lib/SubjectsPlus/Control/FAQ.php:282
+msgid "Relevant Collections"
+msgstr "Collections pertinentes"
+
+#: lib/SubjectsPlus/Control/FAQ.php:354 lib/SubjectsPlus/Control/Guide.php:580
+#: lib/SubjectsPlus/Control/Record.php:632
+#: lib/SubjectsPlus/Control/Staff.php:949
+msgid "There was a problem with your delete (stage 1 of 2)."
+msgstr "Il y a eu un problème avec la suppression (étape 1 de 2)."
+
+#: lib/SubjectsPlus/Control/FAQ.php:359
+msgid "Thy will be done.  Offending FAQ deleted.  Close window to continue."
+msgstr "FAQ offensant supprimé. Fermer la fenêtre pour continuer."
+
+#: lib/SubjectsPlus/Control/FAQ.php:361
+msgid "Thy will be done.  Offending FAQ deleted."
+msgstr "FAQ offensant supprimé."
+
+#: lib/SubjectsPlus/Control/Guide/SaveGuide.php:164
+#, fuzzy
+msgid "Thy Will Be Done:  Guide Updated."
+msgstr "Guide mis à jour."
+
+#: lib/SubjectsPlus/Control/Guide.php:119
+msgid "There is no active record with that ID.  Why not create a new one?"
+msgstr "Il n'y a pas d'enregistrement actif avec cet ID. Pourquoi ne pas en créer un?"
+
+#: lib/SubjectsPlus/Control/Guide.php:252
+#, fuzzy
+msgid "Copy an Existing Guide"
+msgstr "Modifier les métadonnées d'un guide existant"
+
+#: lib/SubjectsPlus/Control/Guide.php:255
+msgid "Edit Existing Guide Metadata"
+msgstr "Modifier les métadonnées d'un guide existant"
+
+#: lib/SubjectsPlus/Control/Guide.php:273
+#, fuzzy
+msgid "Guide Title"
+msgstr "Sommaire du guide"
+
+#: lib/SubjectsPlus/Control/Guide.php:276
+msgid "Short Form"
+msgstr "Nom abrégé"
+
+#: lib/SubjectsPlus/Control/Guide.php:279
+#, fuzzy
+msgid "Short label that shows up in URL--don't use spaces, ampersands, etc."
+msgstr "Légende abrégée pour le sujet -- sans les espaces, apostrophes, etc."
+
+#: lib/SubjectsPlus/Control/Guide.php:281
+msgid "Type of Guide"
+msgstr "Type de guide"
+
+#: lib/SubjectsPlus/Control/Guide.php:292
+#, fuzzy
+msgid "Header Type"
+msgstr "Type d'usager"
+
+#: lib/SubjectsPlus/Control/Guide.php:302
+msgid "If you're not sure, stick with default"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:313
+msgid "Listed:  Appears on the guides page"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:318
+msgid "Unlisted:  Not listed, but visible if you have the URL"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:323
+msgid "Hidden:  Must be logged in to SP to view"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:367
+#, fuzzy
+msgid "Parent Guides"
+msgstr "Guides les plus récents"
+
+#: lib/SubjectsPlus/Control/Guide.php:370
+msgid "Parent guides allow you to create a hierarchy"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:448
+msgid "Staff"
+msgstr "Membre du personnel"
+
+#: lib/SubjectsPlus/Control/Guide.php:458
+#, fuzzy
+msgid "Keywords (separate with commas)"
+msgstr "Mots clés (séparés par des virgules)"
+
+#: lib/SubjectsPlus/Control/Guide.php:460
+msgid "Redirect Url (for non-SubjectsPlus content)"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:466
+msgid "Parent Disciplines"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:473
+#, fuzzy
+msgid "Metadata (optional)"
+msgstr "Texte d'introduction (facultatif)"
+
+#: lib/SubjectsPlus/Control/Guide.php:550
+msgid "You do not have permission to delete this guide."
+msgstr "Vous n'avez pas la permission de supprimer ce guide."
+
+#: lib/SubjectsPlus/Control/Guide.php:587
+#: lib/SubjectsPlus/Control/Guide.php:589
+#, fuzzy
+msgid "Thy will be done.  Offending Guide (and associated boxes) deleted. "
+msgstr "Guide offensant (et boîtes associées) supprimé."
+
+#: lib/SubjectsPlus/Control/Guide.php:587
+#: lib/SubjectsPlus/Control/Guide.php:589
+#, fuzzy
+msgid "Back to Browse Guides."
+msgstr "Naviguez dans les guides"
+
+#: lib/SubjectsPlus/Control/Guide.php:602
+#: lib/SubjectsPlus/Control/Record.php:650
+msgid "There was a problem with your delete (stage 2 of 2)."
+msgstr "Il y a eu un problème avec la suppression (étape 2 de 2)."
+
+#: lib/SubjectsPlus/Control/Guide.php:615
+#: lib/SubjectsPlus/Control/Guide.php:696
+msgid "There is already a guide with this SHORTFORM.  The shortform must be unique."
+msgstr "Il y a déjà un guide associé avec le nom abrégé. Le nom abrégé doit être unique."
+
+#: lib/SubjectsPlus/Control/Guide.php:685
+#: lib/SubjectsPlus/Control/Guide.php:794
+msgid "Add Content To Your New Guide"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Guide.php:789
+msgid "Thy Will Be Done.  Guide updated."
+msgstr "Guide mis à jour."
+
+#: lib/SubjectsPlus/Control/Guide.php:1099
+#, fuzzy
+msgid "Drop Here"
+msgstr "Déposer à gauche"
+
+#: lib/SubjectsPlus/Control/Installer.php:442
+#: lib/SubjectsPlus/Control/Updater.php:440
+#: lib/SubjectsPlus/Control/Updater.php:484
+#: lib/SubjectsPlus/Control/Updater.php:525
+msgid "Problem creating new table."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Installer.php:451
+#: lib/SubjectsPlus/Control/Updater.php:449
+#: lib/SubjectsPlus/Control/Updater.php:493
+msgid "Problem inserting new data into table."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Installer.php:485
+msgid "Installation Complete"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Installer.php:487
+msgid "SubjectsPlus installation complete. Please log in."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Installer.php:488
+#, fuzzy
+msgid "<strong>Username: </strong> "
+msgstr "<strong>Boîte retirée</strong>"
+
+#: lib/SubjectsPlus/Control/Installer.php:489
+#, fuzzy
+msgid "<strong>Password: </strong> "
+msgstr "<strong>Boîte retirée</strong>"
+
+#: lib/SubjectsPlus/Control/Installer.php:508
+msgid "Installation Error"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Installer.php:511
+msgid "Try again."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:65
+#: lib/SubjectsPlus/Control/Updater.php:414
+msgid "This may take a while. Be patient."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:67
+msgid "Check Links In Records"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:73
+#, fuzzy
+msgid "Select Guide"
+msgstr "Guides les plus récents"
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:103
+msgid "Check Links In Guide"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:116
+msgid "Legend"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:120
+#, fuzzy
+msgid "Image: OK"
+msgstr "Images"
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:120
+msgid "Link is good!"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:121
+msgid "Image: Uh oh"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:121
+msgid "<i>Possible</i> problem with link; click on link to open in new window."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:163
+msgid "Please wait while the links in your guide are being checked. This will vary depending on how many links are in your guide."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:181
+#, fuzzy
+msgid "Checking 'All Items By Source' Box:"
+msgstr "Tous les items par source"
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:183
+msgid "This guide does not have an 'All Items By Source' box."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:188
+#: lib/SubjectsPlus/Control/LinkChecker.php:253
+#: lib/SubjectsPlus/Control/LinkChecker.php:352
+msgid "Link"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:189
+#: lib/SubjectsPlus/Control/LinkChecker.php:254
+#: lib/SubjectsPlus/Control/LinkChecker.php:353
+msgid "Status"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:190
+#: lib/SubjectsPlus/Control/LinkChecker.php:255
+#: lib/SubjectsPlus/Control/LinkChecker.php:354
+msgid "HTTP Error Message"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:236
+msgid "Checking"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:236
+msgid "Box:"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:330
+msgid "Please wait while the locations of all records are being checked. This will vary depending on how many locations there are."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:345
+msgid "Checking All Records"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:347
+msgid "No Record Locations Exist"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:450
+msgid "Possible error"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:455
+msgid "Looks okay"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:511
+#: lib/SubjectsPlus/Control/LinkChecker.php:515
+msgid "This box does not contain any links"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/LinkChecker.php:511
+#: lib/SubjectsPlus/Control/LinkChecker.php:515
+msgid "N/A"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/MailMessage.php:25
+msgid "Library_No_Reply"
+msgstr "Biblio_No_Reply"
+
+#: lib/SubjectsPlus/Control/MailMessage.php:62
+msgid "This is an automatically generated email. Please do not respond."
+msgstr "Ceci est un courriel généré automatiquement. Veuillez ne pas y répondre."
+
+#: lib/SubjectsPlus/Control/MailMessage.php:62
+msgid "Email sent: "
+msgstr "Courriel envoyé :"
+
+#: lib/SubjectsPlus/Control/Pluslet/1.php:31
+#: lib/SubjectsPlus/Control/Pluslet/1.php:244
+msgid "All Items by Source"
+msgstr "Tous les items par source"
+
+#: lib/SubjectsPlus/Control/Pluslet/1.php:150
+#: lib/SubjectsPlus/Control/Pluslet/1.php:159
+msgid "Print Location:"
+msgstr "Localisation de l'impression :"
+
+#: lib/SubjectsPlus/Control/Pluslet/1.php:249
+#, fuzzy
+msgid "All Items / Source"
+msgstr "Tous les items par source"
+
+#: lib/SubjectsPlus/Control/Pluslet/2.php:22
+#: lib/SubjectsPlus/Control/Pluslet/2.php:52
+#: lib/SubjectsPlus/Control/Pluslet/2.php:57 subjects/databases.php:258
+msgid "Key to Icons"
+msgstr "Légende des icônes"
+
+#: lib/SubjectsPlus/Control/Pluslet/3.php:24
+#: lib/SubjectsPlus/Control/Pluslet/3.php:90
+#: lib/SubjectsPlus/Control/Pluslet/3.php:95
+#: lib/SubjectsPlus/Control/Pluslet/SubjectSpecialist.php:266
+#: lib/SubjectsPlus/Control/Pluslet/SubjectSpecialist.php:272
+msgid "Contact Us"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/4.php:51
+#: lib/SubjectsPlus/Control/Pluslet/4.php:55
+msgid "There are no FAQs linked for this guide"
+msgstr "Il n'y a aucune FAQ liée à ce guide"
+
+#: lib/SubjectsPlus/Control/Pluslet/4.php:56
+#, fuzzy
+msgid "Add New FAQ"
+msgstr "Nouvelle FAQ"
+
+#: lib/SubjectsPlus/Control/Pluslet/5.php:25
+msgid "Book Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Pluslet/5.php:71
+msgid "Books: Use the Library Catalog"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/5.php:76
+msgid " Books: Use the Library Catalog"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/5.php:76
+#, fuzzy
+msgid " Book Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Pluslet/6.php:22
+msgid "Guide Outline"
+msgstr "Sommaire du guide"
+
+#: lib/SubjectsPlus/Control/Pluslet/6.php:74
+#: lib/SubjectsPlus/Control/Pluslet/TOC.php:251
+msgid "There are no contents for this guide yet!"
+msgstr "Il n'y a aucun contenu pour ce guide!"
+
+#: lib/SubjectsPlus/Control/Pluslet/ArticlesPlus.php:23
+msgid "Click 'Save' to view your Articles+ search box."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/ArticlesPlus.php:38
+#: lib/SubjectsPlus/Control/Pluslet/ArticlesPlus.php:43
+msgid "Articles+ Search"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Basic.php:26
+#: lib/SubjectsPlus/Control/Pluslet/Basic.php:32
+msgid "Editable Box"
+msgstr "Boîte modifiable"
+
+#: lib/SubjectsPlus/Control/Pluslet/Card.php:81
+#, fuzzy
+msgid "Card Image"
+msgstr "Images"
+
+#: lib/SubjectsPlus/Control/Pluslet/Card.php:86
+#, fuzzy
+msgid "Image Card"
+msgstr "Images"
+
+#: lib/SubjectsPlus/Control/Pluslet/Catalog.php:38
+#: lib/SubjectsPlus/Control/Pluslet/Catalog.php:43
+#, fuzzy
+msgid "Catalog Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Pluslet/Chat.php:47
+msgid "Click 'Save Changes' to view your Chat box."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Chat.php:52
+#: lib/SubjectsPlus/Control/Pluslet/Chat.php:57
+msgid "Chat"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Clone.php:36
+msgid "This box is linked to another box."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Clone.php:40
+msgid "It can be found on this guide: "
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Clone.php:43
+msgid "There was a problem locating its original source. It's possible that the original guide has been deleted."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Clone.php:50
+msgid "Your box has been linked. You will need to save the page to view its contents."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Clone.php:139
+msgid "Clone"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/CollectionList.php:24
+msgid "This box will show the collections of guides"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/CollectionList.php:76
+#, fuzzy
+msgid "CollectionList"
+msgstr "Collections de FAQs"
+
+#: lib/SubjectsPlus/Control/Pluslet/Experts.php:69
+msgid "Need help?  Ask an expert."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Experts.php:72 subjects/index.php:249
+#: subjects/themes/um/index_c.php:252
+#, fuzzy
+msgid "See all experts"
+msgstr "Tout voir"
+
+#: lib/SubjectsPlus/Control/Pluslet/Experts.php:97
+#: lib/SubjectsPlus/Control/Pluslet/Experts.php:102
+msgid "Experts"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Feed.php:22
+#: lib/SubjectsPlus/Control/Pluslet/Feed.php:27
+msgid "RSS"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Feed.php:80
+msgid "Display"
+msgstr "Afficher"
+
+#: lib/SubjectsPlus/Control/Pluslet/Feed.php:81
+msgid "items<br />Show descriptions?"
+msgstr "items<br />Afficher les descriptions?"
+
+#: lib/SubjectsPlus/Control/Pluslet/Feed.php:94
+#, fuzzy
+msgid "You can enter a URL to an RSS feed or use your username for Delicious or Tumblr."
+msgstr "Saisir le fil RSS ou le nom d'usager / tag (pour Delicious)"
+
+#: lib/SubjectsPlus/Control/Pluslet/Feed.php:127
+msgid "Loading ..."
+msgstr "Chargement..."
+
+#: lib/SubjectsPlus/Control/Pluslet/GoogleBooks.php:24
+#: lib/SubjectsPlus/Control/Pluslet/GoogleScholar.php:24
+#: lib/SubjectsPlus/Control/Pluslet/GoogleSearch.php:23
+#: lib/SubjectsPlus/Control/Pluslet/GuideSearch.php:24
+#: lib/SubjectsPlus/Control/Pluslet/WorldCat.php:23
+msgid "Click 'Save' to view your search box."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/GoogleBooks.php:39
+#: lib/SubjectsPlus/Control/Pluslet/GoogleBooks.php:44
+msgid "Google Books"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/GoogleScholar.php:39
+#: lib/SubjectsPlus/Control/Pluslet/GoogleScholar.php:44
+msgid "Google Scholar"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/GoogleSearch.php:38
+#: lib/SubjectsPlus/Control/Pluslet/GoogleSearch.php:43
+#, fuzzy
+msgid "Google Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Pluslet/GuideEditorList.php:32
+#: lib/SubjectsPlus/Control/Pluslet/GuideEditorList.php:38
+#, fuzzy
+msgid "Guide Editor"
+msgstr "Guide mis à jour."
+
+#: lib/SubjectsPlus/Control/Pluslet/GuideList.php:125 subjects/index.php:299
+#: subjects/themes/um/index_c.php:164
+#, fuzzy
+msgid "Select:"
+msgstr "Sélectionner"
+
+#: lib/SubjectsPlus/Control/Pluslet/GuideList.php:134
+#: lib/SubjectsPlus/Control/Pluslet/GuideList.php:139
+#, fuzzy
+msgid "List Guides"
+msgstr "Guides les plus récents"
+
+#: lib/SubjectsPlus/Control/Pluslet/GuideSearch.php:128
+#: lib/SubjectsPlus/Control/Pluslet/GuideSearch.php:133
+#, fuzzy
+msgid "Guide Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Pluslet/GuideSelect.php:40
+msgid "Click 'Save' to view guide type menus."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/GuideSelect.php:57
+#: lib/SubjectsPlus/Control/Pluslet/GuideSelect.php:62
+#, fuzzy
+msgid "Guide Select"
+msgstr "Sélectionner"
+
+#: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:110
+msgid "There was a problem creating the YouTube embed. The URL should look like: http://www.youtube.com/watch?v=abc1234"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:125
+msgid "There was a problem creating the Vimeo embed. The URL should look like: http://vimeo.com/0137581375135"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/HTML5Video.php:137
+msgid "Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href='videofile.ogg'>download it</a> and watch it with your favorite video player!"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/LinkList.php:31
+#: lib/SubjectsPlus/Control/Pluslet/LinkList.php:37
+msgid "Link List"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/NewDBs.php:24
+msgid "This box will show the databases flagged as 'new.'"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/NewDBs.php:58
+#, fuzzy
+msgid "New DBs"
+msgstr "Nouvelle boîte"
+
+#: lib/SubjectsPlus/Control/Pluslet/NewDBs.php:63
+msgid "NewDBs"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/NewGuides.php:24
+msgid "This box will show the most recently created guides"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/NewGuides.php:61
+#, fuzzy
+msgid "New Guides"
+msgstr "Nouveau guide"
+
+#: lib/SubjectsPlus/Control/Pluslet/NewGuides.php:66
+#, fuzzy
+msgid "NewGuides"
+msgstr "Nouveau guide"
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:67
+msgid "There is no box with that ID.  Why not create a new one?"
+msgstr "Il n'y a aucune boîte avec cet ID. Pourquoi ne pas en créer une?"
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:99
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:284
+msgid "Remove item from this guide"
+msgstr "Retirer l'item de ce guide"
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:114
+msgid "Edit & Box Settings"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:273
+msgid "Help: About this box"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:283
+msgid "Close Settings Panel"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:288
+#, fuzzy
+msgid "Settings"
+msgstr "Expressions de recherche"
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:300
+msgid "Hide Titlebar"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:314
+msgid "Hide Box Content"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:329
+msgid "Favorite Box"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:343
+msgid "help"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:546
+#: lib/SubjectsPlus/Control/Pluslet/Pluslet.php:599
+#, fuzzy
+msgid "Note: "
+msgstr "Note :"
+
+#: lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php:56
+msgid "Click 'Save Changes' to view your Primo Search box."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php:61
+#: lib/SubjectsPlus/Control/Pluslet/PrimoSearch.php:66
+#, fuzzy
+msgid "Primo Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Pluslet/Related.php:23
+msgid "This box automatically links to any child guides that you have assigned to this guide."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/Related.php:53
+#, fuzzy
+msgid "Related Guides"
+msgstr "Guides de recherche"
+
+#: lib/SubjectsPlus/Control/Pluslet/Related.php:58
+msgid "Related"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/SocialMedia.php:26
+#: lib/SubjectsPlus/Control/Staff.php:591
+msgid "Social Media"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/SocialMedia.php:99
+msgid "SocialMedia"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/SubjectSpecialist.php:266
+msgid "Subject Specialist"
+msgstr "Spécialiste du sujet"
+
+#: lib/SubjectsPlus/Control/Pluslet/TOC.php:26
+#: lib/SubjectsPlus/Control/Pluslet/TOC.php:31
+msgid "Table of Contents"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/TOC.php:31
+msgid "TOC"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Pluslet/WorldCat.php:38
+#: lib/SubjectsPlus/Control/Pluslet/WorldCat.php:43
+#, fuzzy
+msgid "WorldCat Search"
+msgstr "Recherche de livres"
+
+#: lib/SubjectsPlus/Control/Record.php:182
+msgid "Prefix"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Record.php:229
+#: lib/SubjectsPlus/Control/Staff.php:656
+#: lib/SubjectsPlus/Control/StaffBrief.php:278
+msgid "Save Record Now"
+msgstr "Sauvegarder l'enregistrement maintenant"
+
+#: lib/SubjectsPlus/Control/Record.php:261
+msgid "Default Source Type"
+msgstr "Type source par défaut"
+
+#: lib/SubjectsPlus/Control/Record.php:295
+msgid "Subjects"
+msgstr "Sujets"
+
+#: lib/SubjectsPlus/Control/Record.php:300
+msgid "-- Select --"
+msgstr "-- Sélectionner --"
+
+#: lib/SubjectsPlus/Control/Record.php:428
+msgid "Check URL"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Record.php:449
+msgid "Location"
+msgstr "Localisation"
+
+#: lib/SubjectsPlus/Control/Record.php:459
+msgid "Call Number"
+msgstr "Cote"
+
+#: lib/SubjectsPlus/Control/Record.php:461
+msgid "Format"
+msgstr "Format"
+
+#: lib/SubjectsPlus/Control/Record.php:463
+msgid "Access Restrictions"
+msgstr "Restrictions d'accès"
+
+#: lib/SubjectsPlus/Control/Record.php:471
+msgid "A-Z DB List"
+msgstr "Liste alphabétique des BDs"
+
+#: lib/SubjectsPlus/Control/Record.php:480
+msgid "Display Note"
+msgstr "Afficher la note"
+
+#: lib/SubjectsPlus/Control/Record.php:498
+#, fuzzy
+msgid "Help Guide Location"
+msgstr "Vérifier les liens du guide"
+
+#: lib/SubjectsPlus/Control/Record.php:526
+msgid "X Delete this location"
+msgstr "X Supprimer cette localisation"
+
+#: lib/SubjectsPlus/Control/Record.php:563
+msgid "change source type"
+msgstr "changer le type source"
+
+#: lib/SubjectsPlus/Control/Record.php:564
+msgid "add description override"
+msgstr "ajouter une description d'outrepassement"
+
+#: lib/SubjectsPlus/Control/Record.php:607
+msgid "Permission denied to delete."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Record.php:638
+msgid "Thy will be done.  Offending record deleted."
+msgstr "Enregistrement offensant supprimé."
+
+#: lib/SubjectsPlus/Control/Record.php:705
+msgid "Thy Will Be Done.  Record added."
+msgstr "Enregistrement ajouté."
+
+#: lib/SubjectsPlus/Control/Record.php:772
+msgid "Thy Will Be Done.  Record updated."
+msgstr "Enregistrement mis à jour."
+
+#: lib/SubjectsPlus/Control/Staff.php:325
+#: lib/SubjectsPlus/Control/StaffBrief.php:164
+msgid "Click to update photo"
+msgstr "Cliquer pour mettre à jour la photo"
+
+#: lib/SubjectsPlus/Control/Staff.php:327
+#: lib/SubjectsPlus/Control/StaffBrief.php:166
+msgid "You can change the photo after saving."
+msgstr "Vous pourrez changer la photo après avoir sauvegardé."
+
+#: lib/SubjectsPlus/Control/Staff.php:374
+#: lib/SubjectsPlus/Control/Staff.php:597
+#: lib/SubjectsPlus/Control/StaffBrief.php:184
+msgid "Staff Member"
+msgstr "Membre du personnel"
+
+#: lib/SubjectsPlus/Control/Staff.php:386
+#, fuzzy
+msgid "First Name"
+msgstr "Prénom"
+
+#: lib/SubjectsPlus/Control/Staff.php:396
+#, fuzzy
+msgid "Last Name"
+msgstr "Nom"
+
+#: lib/SubjectsPlus/Control/Staff.php:407
+msgid "Position Title"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:420
+msgid "Position #"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:436
+msgid "Job Classification"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:438
+msgid "job_classification"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:449
+#: lib/SubjectsPlus/Control/StaffBrief.php:199
+msgid "Department"
+msgstr "Département"
+
+#: lib/SubjectsPlus/Control/Staff.php:459
+#, fuzzy
+msgid "Display Priority"
+msgstr "Afficher la note"
+
+#: lib/SubjectsPlus/Control/Staff.php:477
+msgid "Supervisor"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:499
+#, fuzzy
+msgid "FAX"
+msgstr "FAQ"
+
+#: lib/SubjectsPlus/Control/Staff.php:512
+msgid "Intercom"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:524
+msgid "Room #"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:535
+#: lib/SubjectsPlus/Control/StaffBrief.php:210
+msgid "Email (This is the username for logging in to SubjectsPlus)"
+msgstr "Courriel (ceci est le nom d'usager pour la connexion à SubjectsPlus)"
+
+#: lib/SubjectsPlus/Control/Staff.php:543
+#: lib/SubjectsPlus/Control/StaffBrief.php:214
+msgid "User Type"
+msgstr "Type d'usager"
+
+#: lib/SubjectsPlus/Control/Staff.php:549
+#: lib/SubjectsPlus/Control/StaffBrief.php:218
+msgid "Active User?"
+msgstr "Usager actif?"
+
+#: lib/SubjectsPlus/Control/Staff.php:587
+#: lib/SubjectsPlus/Control/StaffBrief.php:224
+msgid "Photo"
+msgstr "Photo"
+
+#: lib/SubjectsPlus/Control/Staff.php:627
+msgid "Select which parts of SubjectsPlus this user may access.\n"
+"                <br /><strong>records</strong> allows access to both the Record and Guide tabs.\n"
+"                <br /><strong>eresource_mgr</strong> allows the user to see all the information about a Record (and delete it), and quickly see all guides.\n"
+"                <br /><strong>admin</strong> allows access to the overall admin of the site.\n"
+"                <br /><strong>librarian</strong> means user shows up in lists of librarians.\n"
+"                <br /><strong>supervisor</strong> means user shows up in list of supervisors\n"
+"                <br /><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:642
+#: lib/SubjectsPlus/Control/Staff.php:829
+#: lib/SubjectsPlus/Control/StaffBrief.php:267
+msgid "The password is hidden.  Reset?"
+msgstr "Le mot de passe est caché. Réinitialiser?"
+
+#: lib/SubjectsPlus/Control/Staff.php:686
+msgid "Street Address"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:689
+msgid "City"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:691
+msgid "State"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:693
+msgid "Zip"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:696
+#, fuzzy
+msgid "Home Phone"
+msgstr "Numéro de téléphone"
+
+#: lib/SubjectsPlus/Control/Staff.php:698
+#, fuzzy
+msgid "Cell Phone"
+msgstr "Numéro de téléphone"
+
+#: lib/SubjectsPlus/Control/Staff.php:715
+#: lib/SubjectsPlus/Control/Staff.php:724
+msgid "Emergency Contact"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:717
+msgid "Relationship"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:719
+msgid "Phone"
+msgstr "Numéro de téléphone"
+
+#: lib/SubjectsPlus/Control/Staff.php:738
+msgid "Latitude/Longitude"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:741
+msgid "Get Coordinates"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:746
+msgid "Add to Map"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:801
+#: lib/SubjectsPlus/Control/StaffBrief.php:229
+msgid "Biographical Details"
+msgstr "Détails biographiques"
+
+#: lib/SubjectsPlus/Control/Staff.php:813
+msgid "Social Media Accounts"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:831
+#, fuzzy
+msgid "Change Password?"
+msgstr "Réinitialiser le mot de passe"
+
+#: lib/SubjectsPlus/Control/Staff.php:833
+#, fuzzy
+msgid "Update Now!"
+msgstr "Mettre à jour la biographie"
+
+#: lib/SubjectsPlus/Control/Staff.php:870
+#: lib/SubjectsPlus/Control/StaffBrief.php:293
+msgid "Enter the new password.  Make it a good one!"
+msgstr "Saisir le mot de passe. "
+
+#: lib/SubjectsPlus/Control/Staff.php:906
+#, fuzzy
+msgid "New Password"
+msgstr "Mot de passe"
+
+#: lib/SubjectsPlus/Control/Staff.php:910
+#, fuzzy
+msgid "Re-Enter Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: lib/SubjectsPlus/Control/Staff.php:962
+#, fuzzy
+msgid "Thy will be done.  Note that any subject guides associated with this user are now orphans.  Pity the orphans."
+msgstr "Notez que tout guide associé avec cet usager est maintenant orphelin."
+
+#: lib/SubjectsPlus/Control/Staff.php:966
+#: lib/SubjectsPlus/Control/StaffBrief.php:332
+#: lib/SubjectsPlus/Control/Talkback.php:326
+#: lib/SubjectsPlus/Control/Video.php:296
+msgid "There was a problem with your delete."
+msgstr "Il y a eu un problème à la suppression."
+
+#: lib/SubjectsPlus/Control/Staff.php:984
+msgid "Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:995
+msgid "Email is not unique. Insert was not executed."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:1065
+msgid "Couldn't create directory in /assets/users/. Please check this folder's permissions. "
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Staff.php:1076
+#: lib/SubjectsPlus/Control/StaffBrief.php:397
+msgid "Thy Will Be Done.  Added."
+msgstr "Ajouté"
+
+#: lib/SubjectsPlus/Control/Staff.php:1100
+msgid "Email is not unique. Update was not executed."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/StaffBrief.php:187
+msgid "First Name "
+msgstr "Prénom"
+
+#: lib/SubjectsPlus/Control/StaffBrief.php:191
+msgid "Last Name "
+msgstr "Nom"
+
+#: lib/SubjectsPlus/Control/StaffBrief.php:203
+msgid "Show First in Dept List?"
+msgstr "Montrer en tête de liste du département?"
+
+#: lib/SubjectsPlus/Control/StaffBrief.php:242
+msgid "Permissions"
+msgstr "Permissions"
+
+#: lib/SubjectsPlus/Control/StaffBrief.php:328
+msgid "Thy will be done.  Note that any subject guides associated with this user are now orphans."
+msgstr "Notez que tout guide associé avec cet usager est maintenant orphelin."
+
+#: lib/SubjectsPlus/Control/StaffDisplay.php:196
+msgid "Librarian"
+msgstr "Bibliothécaire"
+
+#: lib/SubjectsPlus/Control/StaffDisplay.php:196
+msgid "Subject Responsibilities"
+msgstr "Responsables du sujet"
+
+#: lib/SubjectsPlus/Control/Talkback.php:73
+#: lib/SubjectsPlus/Control/Video.php:73
+msgid "There is no active record with that ID.  Weird."
+msgstr "Il n'y a pas d'enregistrement actif avec cet ID."
+
+#: lib/SubjectsPlus/Control/Talkback.php:125
+msgid "Edit TalkBack"
+msgstr "Modifier la question de référence"
+
+#: lib/SubjectsPlus/Control/Talkback.php:142
+msgid "Question By"
+msgstr "Question de"
+
+#: lib/SubjectsPlus/Control/Talkback.php:281
+msgid "Answered By"
+msgstr "Répondu par"
+
+#: lib/SubjectsPlus/Control/Talkback.php:283
+msgid "Is this comment live?"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Talkback.php:285
+msgid "Site Tags (relevant library sites)"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Talkback.php:287
+msgid "Topic Tags (relevant topics)"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Talkback.php:311
+msgid "Thy will be done.  Offending Talkback deleted.  Close window to continue."
+msgstr "Question de référence offensante supprimée. Fermer la fenêtre pour continuer."
+
+#: lib/SubjectsPlus/Control/Talkback.php:313
+msgid "Thy will be done.  Offending Talkback deleted."
+msgstr "Question de référence offensante supprimée."
+
+#: lib/SubjectsPlus/Control/Updater.php:397
+msgid "Update to SubjectsPlus 4"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:400
+msgid "Welcome to the SubjectPlus Updater!"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:402
+msgid "Before we begin, if you are currently running version 0.9, please run the <a href=\"migrate_to_v1_fromv09.php\">Migrator</a>."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:403
+msgid "If you are running version 1.x or higher, follow these steps to update to version 4."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:408
+msgid "Backup your current SubjectsPlus database"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:410
+msgid "The updater will examine and update your data in order to work with 4. Also if error occurs, you may need to revert back to older database."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:412
+msgid "After <a href=\"?step=1\">Run Updater</a>"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:472
+#: lib/SubjectsPlus/Control/Updater.php:514
+#: lib/SubjectsPlus/Control/Updater.php:543
+msgid "Problem altering existing tables."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:570
+#, fuzzy
+msgid "Update Complete"
+msgstr "Mettre à jour la biographie"
+
+#: lib/SubjectsPlus/Control/Updater.php:572
+msgid "SubjectsPlus update to 4 complete. Please log in."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:574
+msgid "If you have any <strong>custom pluslets</strong>. please follow the following steps to successfully migrate over."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:575
+msgid "Move custom pluslets from &#39;/control/includes/classes&#39; to &#39;/lib/SubjectsPlus/Control/Pluslet&#39;"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:576
+msgid "Rename files to remove &#39;sp_Pluslet_&#39;. For example, rename &#39;sp_Pluslet_111.php&#39; to &#39;111.php&#39;"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:577
+msgid "Edit each file to add the following lines to the top of the file:"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:578
+msgid "namespace SubjectsPlus\\Control;"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:579
+msgid "require_once(&quot;Pluslet.php&quot;);"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:580
+msgid "Edit each file to remove &#39;sp_&#39; from class declaration. For example, edit &#39;class sp_Pluslet_6 extends sp_Pluslet {&#39; to &#39;class Pluslet_6 extends Pluslet {&#39;"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:582
+msgid "You many need to change custom CSS styles for your theme."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:586
+msgid "The first time you log in after update, you must use entire email address for user (e.g. admin@sp.edu)."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:604
+#, fuzzy
+msgid "Updater Error"
+msgstr "Mettre à jour la biographie"
+
+#: lib/SubjectsPlus/Control/Updater.php:607
+msgid "Please drop database and restore backup before trying again."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:627
+#: lib/SubjectsPlus/Control/Updater.php:649
+msgid "Problem fixing existing data."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:677
+msgid "Problem renaming existing keyword column."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:705
+msgid "Problem droping for existing keyword column."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Updater.php:713
+msgid "Problem renaming for existing keyword column."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:32
+msgid "Have you tried ingesting the data for this video?  Much faster/easier."
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:109
+msgid "Edit Video Info"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:149
+msgid "Video file storage location"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:152
+msgid "Foreign ID"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:155
+msgid "Duration in seconds"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:190
+msgid "Live?"
+msgstr "En ligne?"
+
+#: lib/SubjectsPlus/Control/Video.php:210
+#: lib/SubjectsPlus/Control/Video.php:257
+msgid "Thumbnail"
+msgstr ""
+
+#: lib/SubjectsPlus/Control/Video.php:213
+#, fuzzy
+msgid "Click to update thumbnail"
+msgstr "Cliquer pour mettre à jour la photo"
+
+#: lib/SubjectsPlus/Control/Video.php:215
+#, fuzzy
+msgid "You can change the thumbnail after saving."
+msgstr "Vous pourrez changer la photo après avoir sauvegardé."
+
+#: lib/SubjectsPlus/Control/Video.php:249
+#, fuzzy
+msgid "Create Date"
+msgstr "Créer"
+
+#: lib/SubjectsPlus/Control/Video.php:281
+#, fuzzy
+msgid "Thy will be done.  Offending video metadata deleted.  Close window to continue."
+msgstr "FAQ offensant supprimé. Fermer la fenêtre pour continuer."
+
+#: lib/SubjectsPlus/Control/Video.php:283
+#, fuzzy
+msgid "Thy will be done.  Offending video metadata deleted."
+msgstr "Enregistrement offensant supprimé."
+
+#: lib/SubjectsPlus/Control/Video.php:338
+#, fuzzy
+msgid "Thy Will Be Done. Added."
+msgstr "Ajouté"
+
+#: subjects/collection.php:21 subjects/themes/um/collection.php:14
+#, fuzzy
+msgid "Research Guide Collections"
+msgstr "Guide de recherche supprimé"
+
+#: subjects/collection.php:22 subjects/guide.php:35 subjects/index.php:29
+#: subjects/themes/ic/guide.php:35 subjects/themes/um/collection.php:15
+msgid "The best stuff for your research.  No kidding."
+msgstr ""
+
+#: subjects/collection.php:23 subjects/index.php:30
+#: subjects/themes/um/collection.php:16
+msgid "research, databases, subjects, search, find"
+msgstr ""
+
+#: subjects/collection.php:115 subjects/index.php:138
+#: subjects/themes/um/index.php:140
+#, fuzzy
+msgid "Search Research Guides"
+msgstr "Guides de recherche"
+
+#: subjects/collection.php:163 subjects/themes/um/collection.php:148
+#: subjects/themes/um/index.php:187
+#, fuzzy
+msgid "Search Guides"
+msgstr "Chercher dans les guides"
+
+#: subjects/collection.php:175 subjects/index.php:323
+#: subjects/themes/um/collection.php:159 subjects/themes/um/index.php:199
+#: subjects/themes/um/index_c.php:315
+msgid "Newest Guides"
+msgstr "Guides les plus récents"
+
+#: subjects/collection.php:182 subjects/databases.php:250
+#: subjects/themes/um/collection.php:167 subjects/themes/um/index.php:207
+#: subjects/themes/um/index_c.php:323
+msgid "Newest Databases"
+msgstr "Banques de données les plus récentes"
+
+#: subjects/databases.php:26 subjects/themes/um/databases.php:18
+msgid "Database List"
+msgstr "Liste des banques de données"
+
+#: subjects/databases.php:27 subjects/themes/um/databases.php:19
+msgid "An alphabetical list of the electronic resources available."
+msgstr "Une liste alphabétique de toutes les ressources électroniques disponibles."
+
+#: subjects/databases.php:28 subjects/themes/um/databases.php:20
+msgid "library, research, electronic journals, databases, electronic resources, full text, online, magazine, articles, paper, assignment"
+msgstr "bibliothèque, rechercher, revues électroniques, banques de données, ressources électroniques, texte intégral, en ligne, magazines, articles, journaux, travaux"
+
+#: subjects/databases.php:49 subjects/themes/um/databases.php:41
+#, fuzzy
+msgid "Database List By Subject"
+msgstr "Liste des banques de données"
+
+#: subjects/databases.php:72 subjects/themes/um/databases.php:67
+#, fuzzy
+msgid "Database List By Format"
+msgstr "Liste des banques de données"
+
+#: subjects/databases.php:92 subjects/themes/um/databases.php:87
+#, fuzzy
+msgid "Database List: Search Results"
+msgstr "Résultats de recherche"
+
+#: subjects/databases.php:225 subjects/themes/um/databases.php:292
+#, fuzzy
+msgid "Search Databases"
+msgstr "Banques de données"
+
+#: subjects/databases.php:240 subjects/themes/um/databases.php:303
+#, fuzzy
+msgid "Featured Databases"
+msgstr "Banques de données les plus récentes"
+
+#: subjects/faq.php:54 subjects/themes/ic/faq.php:54
+#: subjects/themes/um/faq.php:47
+msgid "<p>You can <strong>search</strong> the FAQs, <strong>browse</strong> them <strong>by subject</strong>, see <strong>collections</strong> of FAQs (i.e., different groupings of FAQs for different purposes/audiences), or browse the Basic FAQs, below.</p>"
+msgstr "<p>Vous pouvez <strong>chercher</strong> dans les FAQs, <strong>naviguer</strong> par <strong>sujet</strong>, voir les <strong>collections</strong> de FAQs (c'est-à-dire différents groupements de FAQs pour différents publics), ou naviguer les FAQs de base, ci-dessous.</p>"
+
+#: subjects/faq.php:289 subjects/themes/ic/faq.php:290
+#: subjects/themes/um/faq.php:265
+msgid "No Results"
+msgstr "Aucun résultat"
+
+#: subjects/faq.php:291 subjects/themes/ic/faq.php:292
+#: subjects/themes/um/faq.php:267
+msgid "There were no FAQs found for this query."
+msgstr "Il n'y a pas de FAQ trouvée pour cette requête."
+
+#: subjects/faq.php:349 subjects/themes/ic/faq.php:350
+#: subjects/themes/um/faq.php:322
+msgid "Search FAQs"
+msgstr "Chercher dans les FAQs"
+
+#: subjects/guide.php:36 subjects/themes/ic/guide.php:36
+msgid "library, research, databases, subjects, search, find"
 msgstr ""
 
 #: subjects/includes/footer.php:15
+msgid "Revised: "
+msgstr "Révisé : "
+
+#: subjects/includes/footer.php:17
 msgid "This page maintained by: "
+msgstr "Cette page est maintenue par : "
+
+#: subjects/index.php:246 subjects/themes/um/index_c.php:249
+msgid "Need help? Ask an expert!"
 msgstr ""
+
+#: subjects/index.php:333
+#, fuzzy
+msgid "Newest Databases "
+msgstr "Banques de données les plus récentes"
+
+#: subjects/search.php:112
+msgid "Search Subject Guides, Database Records, Staff List, FAQs, etc."
+msgstr ""
+
+#: subjects/staff.php:69
+msgid "Staff Listing"
+msgstr "Liste des membres du personnel"
+
+#: subjects/staff.php:79
+msgid "Find People"
+msgstr ""
+
+#: subjects/staff_details.php:147
+#, fuzzy
+msgid "Staff Listing: "
+msgstr "Liste des membres du personnel"
+
+#: subjects/talkback.php:34 subjects/themes/um/talkback.php:28
+msgid "Share your comments and suggestions about the library"
+msgstr "Partagez vos commentaires et suggestions à propos de la bibliothèque"
+
+#: subjects/talkback.php:35 subjects/themes/um/talkback.php:29
+msgid "library, comments, suggestions, complaints"
+msgstr "bibliothèque, commentaires, suggestions, plaintes"
+
+#: subjects/talkback.php:38 subjects/themes/um/talkback.php:32
+msgid "5 times 5 = "
+msgstr ""
+
+#: subjects/talkback.php:101 subjects/themes/um/talkback.php:119
+msgid "Thanks"
+msgstr "Merci"
+
+#: subjects/talkback.php:103 subjects/themes/um/talkback.php:121
+msgid "Thank you for your feedback.  We will try to post a response within the next three business days."
+msgstr "Merci de vos commentaires. Nous allons essayer d'envoyer une réponse dans les trois prochains jours ouvrables."
+
+#: subjects/talkback.php:110 subjects/themes/um/talkback.php:128
+msgid "Oh dear."
+msgstr "Ayoye."
+
+#: subjects/talkback.php:112 subjects/themes/um/talkback.php:130
+msgid "There was a problem with your submission.  Please try again."
+msgstr "Il y a eu un problème avec la soumission du formulaire. Veuillez recommencer."
+
+#: subjects/talkback.php:184 subjects/themes/um/talkback.php:202
+msgid "New Comment via SubjectsPlus"
+msgstr ""
+
+#: subjects/talkback.php:199 subjects/themes/um/talkback.php:217
+msgid "New Comment Awaits Response"
+msgstr ""
+
+#: subjects/talkback.php:211 subjects/themes/um/talkback.php:229
+msgid "Received:"
+msgstr ""
+
+#: subjects/talkback.php:230 subjects/themes/um/talkback.php:248
+msgid "Contact:"
+msgstr ""
+
+#: subjects/talkback.php:251 subjects/themes/um/talkback.php:269
+#, fuzzy
+msgid "Comment:"
+msgstr "commentaires:"
+
+#: subjects/talkback.php:283 subjects/themes/um/talkback.php:301
+msgid "Reply Now"
+msgstr ""
+
+#: subjects/talkback.php:292 subjects/themes/um/talkback.php:310
+msgid "You will be required to log in"
+msgstr ""
+
+#: subjects/talkback.php:370 subjects/themes/um/talkback.php:386
+msgid "Comments from Previous Years"
+msgstr ""
+
+#: subjects/talkback.php:370 subjects/themes/um/talkback.php:386
+msgid "See this year"
+msgstr ""
+
+#: subjects/talkback.php:406 subjects/themes/um/talkback.php:422
+msgid "Comments from "
+msgstr ""
+
+#: subjects/talkback.php:406 subjects/themes/um/talkback.php:422
+msgid "See previous years"
+msgstr ""
+
+#: subjects/talkback.php:451 subjects/themes/um/talkback.php:467
+#, fuzzy
+msgid "There are no comments just yet.  Be the first!"
+msgstr "Il n'y a aucun contenu pour ce guide!"
+
+#: subjects/talkback.php:464 subjects/themes/um/talkback.php:480
+msgid "Hmm, That Was a Tricky Bit of Math"
+msgstr "C'était une colle mathématique"
+
+#: subjects/talkback.php:466 subjects/themes/um/talkback.php:482
+msgid "Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . ."
+msgstr "Désolé, vous devez répondre à la question d'habileté mathématique. Il s'agit d'une mesure anti-pourriel..."
+
+#: subjects/talkback.php:486
+#, fuzzy
+msgid "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>\n"
+"\t\t<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>"
+msgstr "<p><strong>Référence</strong> est l'endroit où vous pouvez <strong>poser une question</strong> ou <strong>faire une suggestion</strong> concernant les services de la bibliothèque.</p>\r\n"
+"\r\n"
+"<p>Laissez-nous donc savoir ce que vous pensez et nous publierons une réponse de la part d'un des membres du personnel.</p>"
+
+#: subjects/talkback.php:496
+msgid "Tell Us What You Think"
+msgstr "Dites-nous ce que vous pensez"
+
+#: subjects/talkback.php:498
+msgid "Wait!  Do you need help right now?"
+msgstr "Attendez! Avez-vous besoin d'aide immédiatement?"
+
+#: subjects/talkback.php:498
+msgid "Visit the Research Desk!"
+msgstr "Rendez-vous au bureau de la référence"
+
+#: subjects/talkback.php:501 subjects/themes/um/talkback.php:520
+msgid "Thank you for your submission."
+msgstr ""
+
+#: subjects/talkback.php:501 subjects/themes/um/talkback.php:520
+msgid "Did you want to say something else?"
+msgstr ""
+
+#: subjects/talkback.php:506 subjects/themes/um/talkback.php:525
+#, fuzzy
+msgid "Your comment:"
+msgstr "commentaires:"
+
+#: subjects/talkback.php:508 subjects/themes/um/talkback.php:527
+#, fuzzy
+msgid "Your email (optional):"
+msgstr "votre nom (facultatif):"
+
+#: subjects/talkback.php:511 subjects/themes/um/talkback.php:530
+msgid "(In case we need to contact you)"
+msgstr ""
+
+#: subjects/themes/um/databases.php:264
+msgid "Campus Faculty, Staff &amp; Students only"
+msgstr "Facultés, membres du personnel et étudiants seulement"
+
+#: subjects/themes/um/databases.php:265
+#, fuzzy
+msgid "Click for more information"
+msgstr "plus d'informations"
+
+#: subjects/themes/um/faq.php:304
+#, fuzzy
+msgid "All FAQs displayed.  Search or browse to limit "
+msgstr "Note : pas tous les FAQs sont affichées. Effectuez une recherche pour en trouver d'autres."
+
+#: subjects/themes/um/faq.php:306
+msgid "Note:  Not all FAQs displayed.  Search or browse for more "
+msgstr "Note : pas tous les FAQs sont affichées. Effectuez une recherche pour en trouver d'autres."
+
+#: subjects/themes/um/faq.php:338
+msgid "Browse FAQs by Subject"
+msgstr "Naviguez dans les FAQs par sujet"
+
+#: subjects/themes/um/index_c.php:116
+msgid "Start over:"
+msgstr ""
+
+#: subjects/themes/um/staff_details.php:143
+msgid "Staff Profile: "
+msgstr ""
+
+#: subjects/themes/um/talkback.php:27
+#, fuzzy
+msgid "Comments"
+msgstr "commentaires:"
+
+#: subjects/themes/um/talkback.php:504
+msgid "<p>Please use this page <strong>make a comment or suggestion</strong> about library services.</p>\n"
+" \n"
+"        <p>We will post your suggestion as well as a response.</p>\n"
+"\n"
+"        <p class=\"response-link\"><a href=\"#tellus\">Submit your response</a></p>"
+msgstr ""
+
+#: subjects/themes/um/video.php:14 subjects/video.php:21
+#, fuzzy
+msgid "Library Videos"
+msgstr "Bibliothécaire"
+
+#: subjects/themes/um/video.php:15 subjects/video.php:22
+msgid "A collection of videos produced at this library."
+msgstr ""
+
+#: subjects/themes/um/video.php:16 subjects/video.php:23
+msgid "library, research, videos, instruction"
+msgstr ""
+
+#: subjects/themes/um/video.php:137 subjects/video.php:143
+#, fuzzy
+msgid "Sorry, no videos match this criteria."
+msgstr "Désolé, il n'y a aucun résultat à ce moment."
+
+#: subjects/themes/um/video.php:159 subjects/video.php:170
+msgid "Feature Films"
+msgstr ""
+
+#: subjects/themes/um/video.php:167 subjects/video.php:177
+#, fuzzy
+msgid "Browse by Tag"
+msgstr "Naviguez par sujet"
+
