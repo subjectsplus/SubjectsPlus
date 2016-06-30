@@ -1857,7 +1857,7 @@ function listCollections($search = "", $display="default", $show_children="false
 
           $guide_location2 = $guide_path . $mysubguide[2];
 
-          $list_bonus .= "<li><a href=\"$guide_location2\">$mysubguide[1]</li>";
+          $list_bonus .= "<li><a href=\"$guide_location2\">$mysubguide[1]</a></li>";
         }
         
       }
