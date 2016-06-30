@@ -149,6 +149,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     // ANCHOR buttons for guide types
     //**************************************
     $guide_type_btns = "<ul>";
+    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Guide Collections</a></li>";
 
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
@@ -159,12 +160,12 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
 
-    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
+    $guide_type_btns .= "</ul>";
 
     $pills = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>"; 
 
     // let's grab our collections
-    $collection_results = listCollections("","2col");
+    $collection_results = listCollections("","2col", "true");
 
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
@@ -290,8 +291,9 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
                 $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
                 print $pills;
-                print $layout;   
                 print $collection_results; 
+                print $layout;   
+                
                 ?>
             </div>
 
