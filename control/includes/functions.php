@@ -1783,7 +1783,7 @@ function listGuides($search = "", $type="all", $display="default") {
     return $list_guides;
 }
 
-function listCollections($search = "", $display="default") {
+function listCollections($search = "", $display="default", $show_children="false") {
     $db = new Querier();
     
     $whereclause = "";
@@ -1841,6 +1841,20 @@ function listCollections($search = "", $display="default") {
 
       $guide_location = "collection.php?d=" . $myrow[3];
       $list_bonus = $myrow[2];
+
+      // Here, we want to show the guides associated with that collection
+      if ($show_children != "false") {
+        // get all kids
+        $q2 = "SELECT s.subject_id, s.subject, s.shortform FROM subject s, collection_subject cs, collection c 
+        WHERE s.subject_id = cs.subject_id AND cs.collection_id = c.collection_id AND c.collection_id = $myrow[0] ORDER BY cs.sort";
+        $r2 = $db->query($q2);
+        $num_rows2 = count($r2);
+
+        foreach ($r2 as $mysubguide) {
+          $list_bonus .= "<ul class="collection_list"><li><a href=\"\">$mysubguide[1]</li></ul>";
+        }
+        
+      }
 
       $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
       <div class=\"guide_list_bonus\">$list_bonus</div>
