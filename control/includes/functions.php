@@ -1851,7 +1851,10 @@ function listCollections($search = "", $display="default", $show_children="false
         $num_rows2 = count($r2);
 
         foreach ($r2 as $mysubguide) {
-          $list_bonus .= "<ul class="collection_list"><li><a href=\"\">$mysubguide[1]</li></ul>";
+
+          $guide_location = $guide_path . $mysubguide[2];
+
+          $list_bonus .= "<ul class=\"collection_list\"><li><a href=\"$guide_location\">$mysubguide[1]</li></ul>";
         }
         
       }
