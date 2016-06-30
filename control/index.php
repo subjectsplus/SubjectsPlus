@@ -45,6 +45,14 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
   $view_contact_info = "<p class=\"star-class\"><a href=\"admin/contacts.php\">" . _("View/Export Staff Contact Info") . "</a></p>";
 }
 
+// Unncessary if someone is using shibboleth authentication
+if (isset($use_shibboleth) && $use_shibboleth === TRUE) {
+  // nothing.  I've done it this way in case someone with an older config.php file doesn't have this $use_shibboleth var set
+  $reset_password = "<p class=\"star-class\"><a href=\"includes/set_password.php?staff_id=" . $_SESSION["staff_id"] . "\" id=\"reset_password\">" .  _("Reset Password") . "</a></p>";
+} else {
+  $reset_password = "";
+}
+
 ?>
 <div class="pure-g">
 <div class="pure-u-1-3">  
@@ -61,8 +69,8 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
                 <?php print $headshot; ?>
             </div>
             <div class="pure-u-1 pure-u-lg-3-4 pure-u-xl-4-5">
-                <p class="star-class"><a href="includes/set_password.php?staff_id=<?php print $_SESSION["staff_id"]; ?>" id="reset_password"><?php print _("Reset Password"); ?></a></p>
                 <?php
+                print $reset_password;
                 print $mod_bio;
                 print $mod_photo;
                 print $view_contact_info;

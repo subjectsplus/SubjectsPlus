@@ -149,6 +149,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     // ANCHOR buttons for guide types
     //**************************************
     $guide_type_btns = "<ul>";
+    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Guide Collections</a></li>";
 
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
@@ -159,12 +160,12 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
 
-    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
+    $guide_type_btns .= "</ul>";
 
     $pills = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>"; 
 
     // let's grab our collections
-    $collection_results = listCollections("","2col");
+    $collection_results = listCollections("","2col", "true");
 
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
@@ -187,15 +188,18 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
             $row_count = 1;
 
-            foreach ($all_guides as $myrow) {
+           foreach ($all_guides as $myrow) {
+
+             $icon = "fa-info-circle";
+             $title_hover = "See guide description (when available)";
 
                 $guide_location = $guide_path . $myrow['shortform'];
                 $list_bonus = "";
 
                 if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
-                if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
-            
-            $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+                if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords 
+
+            $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
 
@@ -215,7 +219,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
             $col_1 .= "</ul></div>";
             $col_2 .= "</ul></div>";
 
-            $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div>";
+            $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div><div class=\"pure-u-1 guide-list-expand\">Expand/Hide All</div>" . $col_1 . $col_2 ."</div>";
             
         } //end if
 
@@ -290,8 +294,9 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
                 $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
                 print $pills;
-                print $layout;   
                 print $collection_results; 
+                print $layout;   
+                
                 ?>
             </div>
 
@@ -357,9 +362,19 @@ include("includes/footer_um.php");
 
         });
 
-        // Toggle details for each guide list item 
+        // Toggle details for each guide list item in collection list 
           $( ".fa-plus-square" ).click(function() {
              $(this).toggleClass('fa-plus-square fa-minus-square');
+             $(this).parent().find('.guide_list_bonus').toggle();            
+          });
+
+          // Toggle details for each guide list item 
+          $( ".fa-info-circle" ).click(function() {
+             $(this).parent().find('.guide_list_bonus').toggle();            
+          });
+
+           // Toggle details for all guides in a category list
+          $( ".guide-list-expand" ).click(function() {
              $(this).parent().find('.guide_list_bonus').toggle();            
           });
 

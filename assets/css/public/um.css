@@ -1524,6 +1524,10 @@ img.center-image {
 
 .guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
 
+.collection-description {margin: 5px 0 10px; font-size: 1.05em; display: none;}
+.collection_list {list-style-type: square;}
+.index-search-area ul.guide-listing li .collection_list li {font-size: 1.05em;}
+.guide-list-expand {color: #f37421; text-align: right; text-decoration: underline; }
 
 /*Expert area, card style */
 .find-expert-area {padding:0 10px 20px 10px; margin-top: 2em;}

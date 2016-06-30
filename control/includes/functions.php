@@ -1783,7 +1783,7 @@ function listGuides($search = "", $type="all", $display="default") {
     return $list_guides;
 }
 
-function listCollections($search = "", $display="default") {
+function listCollections($search = "", $display="default", $show_children="false") {
     $db = new Querier();
     
     $whereclause = "";
@@ -1839,11 +1839,31 @@ function listCollections($search = "", $display="default") {
 
     foreach ($r as $myrow) {
 
-      $guide_location = "collection.php?d=" . $myrow[3];
-      $list_bonus = $myrow[2];
+      $icon = "fa-plus-square";
+      $title_hover = "See all guides in this collection";
 
-      $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
-      <div class=\"guide_list_bonus\">$list_bonus</div>
+      $guide_location = "collection.php?d=" . $myrow[3];
+      $list_bonus = "<p class=\"collection-description\">$myrow[2]</p><ul class=\"collection_list\">";
+
+      // Here, we want to show the guides associated with that collection
+      if ($show_children != "false") {
+        // get all kids
+        $q2 = "SELECT s.subject_id, s.subject, s.shortform FROM subject s, collection_subject cs, collection c 
+        WHERE s.subject_id = cs.subject_id AND cs.collection_id = c.collection_id AND c.collection_id = $myrow[0] AND s.active = 1 ORDER BY cs.sort";
+        $r2 = $db->query($q2);
+        $num_rows2 = count($r2);
+
+        foreach ($r2 as $mysubguide) {
+
+          $guide_location2 = $guide_path . $mysubguide[2];
+
+          $list_bonus .= "<li><a href=\"$guide_location2\">$mysubguide[1]</a></li>";
+        }
+        
+      }
+
+      $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+      <div class=\"guide_list_bonus\">$list_bonus</ul></div>
       </li>";  
 
       if ($row_count <= $switch_row) {
@@ -1862,7 +1882,7 @@ function listCollections($search = "", $display="default") {
     $col_1 .= "</ul></div>";
     $col_2 .= "</ul></div>";
 
-    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-Collection\"></a><h3>" . _("Guide Collections") . "</h3></div>" . $col_1 . $col_2 ."</div>";
+    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-Collection\"></a><h3>" . _("Guide Collections") . "</h3></div><div class=\"pure-u-1 guide-list-expand\">Expand/Hide All</div>" . $col_1 . $col_2 ."</div>";
     $list_collections = $layout;
 
     break;
