@@ -322,7 +322,7 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                   <div class="mega_child mega-lg mega-left-special">
                       <ul>
                         <li><a href="<?php print PATH_FROM_ROOT; ?>/research/getting-started/">Getting Started</a></li>
-                        <li><a href="http://libguides.miami.edu/">Research Guides</a></li>
+                        <li><a href="http://sp.library.miami.edu/subjects/index.php">Research Guides</a></li>
                         <li><a href="<?php print PATH_FROM_ROOT; ?>/research/consultations/">Research Consultations</a></li>
                         <li><a href="<?php print PATH_FROM_ROOT; ?>/library-research-scholars/">Library Research Scholars</a></li>
                         <li class="last"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z">Liaison Librarians A-Z</a></li>
