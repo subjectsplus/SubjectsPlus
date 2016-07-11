@@ -153,6 +153,7 @@ if (isset($_GET["browse"])) {
                 <p><strong>librarian</strong> means user shows up in lists of librarians.
                 <p><strong>supervisor</strong> means user shows up in list of supervisors
                 <p><strong>view_map</strong> lets user see the map of where everyone lives.  Probably only for muckymucks.  Might not be implemented on your site; check wiki for help.
+                <p><strong>allguides</strong> lets user edit any guides, even if they are not listed as an owner.
                 ");
 
     makePluslet(_("On Privilege"), $privs_blurb, "no_overflow");
