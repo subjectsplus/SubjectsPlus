@@ -27,7 +27,7 @@ $all_vtags = array( "collections", "instruction", "events", "exhibit", "services
 
 // These are the tags that denote permissions for a staff member.  They
 // will be used in a pipe-delimited list in the ptags field of the staff table.
-$all_ptags = array("talkback", "faq", "records", "eresource_mgr", "videos", "admin", "librarian", "supervisor", "view_map");
+$all_ptags = array("talkback", "faq", "records", "eresource_mgr", "videos", "admin", "librarian", "supervisor", "view_map", "allguides");
 
 // These are the tags associated with TalkBack entries.  Used in a pipe-delimited
 // list in the tbtags field of the talkback table. They can be
