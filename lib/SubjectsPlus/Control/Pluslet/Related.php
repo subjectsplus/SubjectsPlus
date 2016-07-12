@@ -23,22 +23,22 @@ class Pluslet_Related extends Pluslet {
 		$this->_body = "<div class=\"faq-alert\">" . _("This box automatically links to any child guides that you have assigned to this guide.") . "</div>";
 	}
 	public function outputRelatedGuides() {
-		
-		
+
+
 		$output = "";
-		
+
 		$output .= "<ul>";
-		
-		
-		$children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE subject_parent = ' . $this->_subject_id );
-		
+
+
+		$children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE active = 1 AND subject_parent = ' . $this->_subject_id );
+
 		foreach ( $children as $child ) {
-		
+
 			$child_info = $this->db->query ( "SELECT * FROM subject WHERE subject_id = {$child['subject_child']} " );
-			
+
 			$output .= "<li><a href=\"../../subjects/guide.php?subject={$child_info[0]['shortform']}\">{$child_info[0]['subject']}</a></li>";
 		}
-		
+
 		$output .= "</ul>";
 		
 		return $output;
