@@ -30,7 +30,7 @@ class Pluslet_Related extends Pluslet {
 		$output .= "<ul>";
 
 
-		$children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE active = 1 AND subject_parent = ' . $this->_subject_id );
+		$children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE active = 1 AND subject_parent = ' . $this->_subject_id . ' ORDER BY subject.subject ASC' );
 
 		foreach ( $children as $child ) {
 
