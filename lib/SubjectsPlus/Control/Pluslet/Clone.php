@@ -89,6 +89,10 @@ require_once("Pluslet.php");
 
 		 switch($type) {
 
+			 case "Related":
+				 $cloned_pluslet = new Pluslet_Related($master, null, $subject_id, 1);
+				 break;
+
 			 case "Chat":
 				 $cloned_pluslet = new Pluslet_Chat($master, null, $subject_id, 1);
 				 break;
