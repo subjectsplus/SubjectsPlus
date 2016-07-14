@@ -1,6 +1,7 @@
 <?php
 namespace SubjectsPlus\Control\OAI;
 use DOMDocument;
+use SubjectsPlus\Control\Querier;
 use XSLTProcessor;
 
 /**
@@ -36,4 +37,22 @@ class Repo
         return  $this->xslt->transformToXml($xsl);
     }
 
+    public function getRecord(Request $request) {
+        $xsl = new DOMDocument();
+        $xsl->load('./xsl/GetRecord.xsl');
+        $this->xslt->importStylesheet($xsl);
+        
+        $record = new Record(new Querier());
+        $record->getRecord($request->identifier);
+
+        $this->xslt->setParameter('','creator',$record->getCreator());
+        $this->xslt->setParameter('','title',$record->getTitle());
+
+        
+        $this->xslt->setParameter('','responseDate',date('c'));
+        $this->xslt->setParameter('','repositoryName',$this->repositoryName);
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $request->queryString);
+        $this->xslt->setParameter('','adminEmail',$this->adminEmail);
+        return  $this->xslt->transformToXml($xsl);
+    }
 }

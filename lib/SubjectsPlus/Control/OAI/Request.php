@@ -12,10 +12,11 @@ class Request
 {
     public $verb;
     public $queryString;
-
+    public $identifier;
+    
     public function __construct($verb, $queryString)
     {
         $this->verb = $verb;
-        $this->queryString = $queryString;
+        $this->queryString = '?'.$queryString;
     }
 }

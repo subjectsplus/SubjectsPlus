@@ -6,6 +6,9 @@
  * Time: 11:25 AM
  */
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Record;
@@ -26,21 +29,31 @@ $setup = array('repositoryName'   => $resource_name,
 $repo = new Repo(new XSLTProcessor(),$setup);
 
 if ($_GET['verb'] == 'Identify') {
-    $request = new Request('Identify','?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('Identify',$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
 
 if (empty($_GET['verb'])) {
-    $request = new Request('badVerb','?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('badVerb',$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
 
 if ($_GET['verb'] == 'ListSets') {
-    $request = new Request('ListSets','?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('ListSets', $_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
 
 if ($_GET['verb'] == 'ListMetadataFormats') {
-    $request = new Request('ListMetadataFormats','?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('ListMetadataFormats',$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
+
 }
+
+if ($_GET['verb'] == 'GetRecord') {
+    $request = new Request('GetRecord',$_SERVER['QUERY_STRING']);
+    $request->identifier = $_GET['Identifier'];
+
+    echo $repo->getRecord($request);
+}
+
+
