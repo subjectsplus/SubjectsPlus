@@ -9,9 +9,10 @@
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Record;
+use SubjectsPlus\Control\OAI\Request;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
+header("Content-type: text/xml");
 
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
@@ -25,16 +26,23 @@ $setup = array('repositoryName'   => $resource_name,
 $repo = new Repo(new XSLTProcessor(),$setup);
 
 if ($_GET['verb'] == 'Identify') {
-    $dom = new DOMDocument();
-    $dom->load('./xsl/Identify.xsl');
-    echo $repo->identify($dom);
+    $request = new Request('Identify','?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processRequest($request);
 }
 
+if (empty($_GET['verb'])) {
+    $request = new Request('badVerb','?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processRequest($request);
+}
+
+if ($_GET['verb'] == 'ListSets') {
+    $request = new Request('ListSets','?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processRequest($request);
+}
 
 if ($_GET['verb'] == 'ListMetadataFormats') {
-    $dom = new DOMDocument();
-    $dom->load('./xsl/ListMetadataFormats.xsl');
-    echo $repo->listMetadataFormats($dom);
+    $request = new Request('ListMetadataFormats','?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processRequest($request);
 }
 
 
