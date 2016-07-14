@@ -25,13 +25,13 @@ class Repo
         $this->adminEmail = $setup['adminEmail'];
     }
 
-    public function processRequest(array $request) {
+    public function processRequest(Request $request) {
         $xsl = new DOMDocument();
-        $xsl->load('./xsl/'. $request['verb'].'.xsl');
+        $xsl->load('./xsl/'. $request->verb.'.xsl');
         $this->xslt->importStylesheet($xsl);
         $this->xslt->setParameter('','responseDate',date('c'));
         $this->xslt->setParameter('','repositoryName',$this->repositoryName);
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $request['queryString']);
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $request->queryString);
         $this->xslt->setParameter('','adminEmail',$this->adminEmail);
         return  $this->xslt->transformToXml($xsl);
     }

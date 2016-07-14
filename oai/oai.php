@@ -7,6 +7,7 @@
  */
 
 use SubjectsPlus\Control\OAI\Repo;
+use SubjectsPlus\Control\OAI\Request;
 
 header("Content-type: text/xml");
 
@@ -17,21 +18,21 @@ $setup = array('repositoryName' => $resource_name, 'baseUrl' =>$BaseURL.'oai/oai
 $repo = new Repo(new XSLTProcessor(),$setup);
 
 if ($_GET['verb'] == 'Identify') {
-    $request = array('verb'=>'Identify', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('Identify','?'.$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
 
 if (empty($_GET['verb'])) {
-    $request = array('verb'=>'badVerb', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('badVerb','?'.$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
 
 if ($_GET['verb'] == 'ListSets') {
-    $request = array('verb'=>'ListSets', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('ListSets','?'.$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
 
 if ($_GET['verb'] == 'ListMetadataFormats') {
-    $request = array('verb'=>'ListMetadataFormats', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    $request = new Request('ListMetadataFormats','?'.$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
