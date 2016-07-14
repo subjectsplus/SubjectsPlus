@@ -25,38 +25,38 @@ class Repo
         $this->adminEmail = $setup['adminEmail'];
     }
 
-    public function identify(DOMDocument $xsl)
+    public function identify(DOMDocument $xsl, $query)
     {
         $this->xslt->importStylesheet($xsl);
         $this->xslt->setParameter('','responseDate',date('c'));
         $this->xslt->setParameter('','repositoryName',$this->repositoryName);
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl);
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $query);
         $this->xslt->setParameter('','adminEmail',$this->adminEmail);
         return  $this->xslt->transformToXml($xsl);
     }
 
-    public function badVerb(DOMDocument $xsl)
+    public function badVerb(DOMDocument $xsl, $query)
     {
         $this->xslt->importStylesheet($xsl);
         $this->xslt->setParameter('','responseDate',date('c'));
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl);
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $query);
         return  $this->xslt->transformToXml($xsl);
     }
 
 
-    public function listSets(DOMDocument $xsl)
+    public function listSets(DOMDocument $xsl, $query)
     {
         $this->xslt->importStylesheet($xsl);
         $this->xslt->setParameter('','responseDate',date('c'));
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl);
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $query);
         return  $this->xslt->transformToXml($xsl);
     }
 
-    public function listMetadataFormats(DOMDocument $xsl)
+    public function listMetadataFormats(DOMDocument $xsl, $query)
     {
         $this->xslt->importStylesheet($xsl);
         $this->xslt->setParameter('','responseDate',date('c'));
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl);
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $query);
         return  $this->xslt->transformToXml($xsl);
     }
 
