@@ -35,6 +35,14 @@ class Repo
         return  $this->xslt->transformToXml($xsl);
     }
 
+    public function badVerb(DOMDocument $xsl)
+    {
+        $this->xslt->importStylesheet($xsl);
+        $this->xslt->setParameter('','responseDate',date('c'));
+        $this->xslt->setParameter('','baseUrl',$this->baseUrl);
+        return  $this->xslt->transformToXml($xsl);
+    }
+
     public function listMetadataFormats(DOMDocument $xsl)
     {
         $this->xslt->importStylesheet($xsl);

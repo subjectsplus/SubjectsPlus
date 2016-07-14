@@ -23,6 +23,11 @@ if ($_GET['verb'] == 'Identify') {
     echo $repo->identify($dom);
 }
 
+if (empty($_GET['verb'])) {
+    $dom = new DOMDocument();
+    $dom->load('./xsl/badVerb.xsl');
+    echo $repo->badVerb($dom);
+}
 
 if ($_GET['verb'] == 'ListMetadataFormats') {
     $dom = new DOMDocument();
