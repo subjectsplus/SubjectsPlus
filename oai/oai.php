@@ -17,25 +17,21 @@ $setup = array('repositoryName' => $resource_name, 'baseUrl' =>$BaseURL.'oai/oai
 $repo = new Repo(new XSLTProcessor(),$setup);
 
 if ($_GET['verb'] == 'Identify') {
-    $dom = new DOMDocument();
-    $dom->load('./xsl/Identify.xsl');
-    echo $repo->identify($dom,"?".$_SERVER['QUERY_STRING']);
+    $request = array('verb'=>'Identify', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processVerb($request);
 }
 
 if (empty($_GET['verb'])) {
-    $dom = new DOMDocument();
-    $dom->load('./xsl/badVerb.xsl');
-    echo $repo->badVerb($dom,"?".$_SERVER['QUERY_STRING']);
+    $request = array('verb'=>'badVerb', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processVerb($request);
 }
 
 if ($_GET['verb'] == 'ListSets') {
-    $dom = new DOMDocument();
-    $dom->load('./xsl/ListSets.xsl');
-    echo $repo->listSets($dom,"?".$_SERVER['QUERY_STRING']);
+    $request = array('verb'=>'ListSets', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processVerb($request);
 }
 
 if ($_GET['verb'] == 'ListMetadataFormats') {
-    $dom = new DOMDocument();
-    $dom->load('./xsl/ListMetadataFormats.xsl');
-    echo $repo->listMetadataFormats("?".$dom,$_SERVER['QUERY_STRING']);
+    $request = array('verb'=>'ListMetadataFormats', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
+    echo $repo->processVerb($request);
 }
