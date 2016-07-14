@@ -27,16 +27,11 @@ class Record
     private $title;
     private $type = 'InteractiveResource';
 
-    public function __construct(Querier $db, array $setup)
+    public function __construct(Querier $db)
     {
         $this->db = $db;
         $this->connection = $db->getConnection();
 
-        $this->repositoryName = $setup['repositoryName'];
-        $this->baseUrl        = $setup['baseUrl'];
-        $this->adminEmail     = $setup['adminEmail'];
-        $this->publisher      = $setup['institutionName'];
-        $this->identifierUrl  = $setup['identifierUrl'];
     }
 
 

@@ -6,6 +6,9 @@
  * Time: 11:25 AM
  */
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Record;
@@ -45,17 +48,10 @@ if ($_GET['verb'] == 'ListMetadataFormats') {
     echo $repo->processRequest($request);
 }
 
+if ($_GET['verb'] == 'GetRecord') {
+    $request = new Request('GetRecord',$_SERVER['QUERY_STRING']);
+    $request->identifier = $_GET['Identifier'];
 
-if( (isset($_GET['subject_id'])) && ($_GET['verb'] == 'GetRecord') ) {
-
-    $id = $_GET['subject_id'];
-
-    $db = new Querier();
-
-    $record = new Record($db, $setup);
-    $record->getRecord($id);
-    $record->toArray();
-
-    var_dump($record);
+    echo $repo->getRecord($request);
 }
 
