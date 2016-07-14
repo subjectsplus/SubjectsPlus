@@ -29,6 +29,12 @@ if (empty($_GET['verb'])) {
     echo $repo->badVerb($dom);
 }
 
+if ($_GET['verb'] == 'ListSets') {
+    $dom = new DOMDocument();
+    $dom->load('./xsl/ListSets.xsl');
+    echo $repo->listSets($dom);
+}
+
 if ($_GET['verb'] == 'ListMetadataFormats') {
     $dom = new DOMDocument();
     $dom->load('./xsl/ListMetadataFormats.xsl');
