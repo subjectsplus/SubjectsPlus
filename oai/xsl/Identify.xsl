@@ -14,6 +14,7 @@
     </xsl:template>
     
     <xsl:template name="Identify">
+
         <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
             <responseDate><xsl:value-of select="$responseDate"/></responseDate>
             <request verb="Identify"><xsl:value-of select="$baseUrl"/></request>
@@ -22,7 +23,7 @@
             <baseURL><xsl:value-of select="$baseUrl"></xsl:value-of></baseURL>
             <protocolVersion>2.0</protocolVersion>
             <adminEmail><xsl:value-of select="$adminEmail"></xsl:value-of></adminEmail>
-            <deletedRecord>transient</deletedRecord>
+            <deletedRecord>no</deletedRecord>
             <granularity>YYYY-MM-DD</granularity>
         </Identify>
         </OAI-PMH>

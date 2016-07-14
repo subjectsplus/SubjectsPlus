@@ -16,6 +16,6 @@ class Request
     public function __construct($verb, $queryString)
     {
         $this->verb = $verb;
-        $this->queryString = $queryString;
+        $this->queryString = '?'.$queryString;
     }
 }
