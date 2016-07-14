@@ -9,9 +9,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\OAI\Repo;
-use SubjectsPlus\Control\OAI\Record;
 use SubjectsPlus\Control\OAI\Request;
 
 
@@ -24,7 +22,7 @@ $setup = array('repositoryName'   => $resource_name,
                 'baseUrl'         => $BaseURL.'oai/oai.php',
                 'adminEmail'      => $administrator_email,
                 'institutionName' => $institution_name,
-                'identifierUrl'   => $BaseURL.'subjects/guide.php?subject_id=');
+                'identifierUrl'   => $BaseURL.'subjects/guide.php?id=');
 
 $repo = new Repo(new XSLTProcessor(),$setup);
 
