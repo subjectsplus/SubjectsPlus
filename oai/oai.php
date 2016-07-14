@@ -18,20 +18,20 @@ $repo = new Repo(new XSLTProcessor(),$setup);
 
 if ($_GET['verb'] == 'Identify') {
     $request = array('verb'=>'Identify', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
-    echo $repo->processVerb($request);
+    echo $repo->processRequest($request);
 }
 
 if (empty($_GET['verb'])) {
     $request = array('verb'=>'badVerb', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
-    echo $repo->processVerb($request);
+    echo $repo->processRequest($request);
 }
 
 if ($_GET['verb'] == 'ListSets') {
     $request = array('verb'=>'ListSets', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
-    echo $repo->processVerb($request);
+    echo $repo->processRequest($request);
 }
 
 if ($_GET['verb'] == 'ListMetadataFormats') {
     $request = array('verb'=>'ListMetadataFormats', 'queryString'=>'?'.$_SERVER['QUERY_STRING']);
-    echo $repo->processVerb($request);
+    echo $repo->processRequest($request);
 }
