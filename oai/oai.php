@@ -44,18 +44,3 @@ if ($_GET['verb'] == 'ListMetadataFormats') {
     $request = new Request('ListMetadataFormats','?'.$_SERVER['QUERY_STRING']);
     echo $repo->processRequest($request);
 }
-
-
-if( (isset($_GET['subject_id'])) && ($_GET['verb'] == 'GetRecord') ) {
-
-    $id = $_GET['subject_id'];
-
-    $db = new Querier();
-
-    $record = new Record($db, $setup);
-    $record->getRecord($id);
-    $record->toArray();
-
-    var_dump($record);
-}
-
