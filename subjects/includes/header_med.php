@@ -120,15 +120,14 @@ $('body').on('click', '.track-me', function() {
     <div class="pure-g">
         <div class="pure-u-1" id="spum_nav">              
               <ul class="nav" id="nav_menu">
-                     
                   <li><a href="http://calder.med.miami.edu/index.html">HOME</a></li>
                   <li><a href="http://calder.med.miami.edu/mission.html">MISSION</a></li>
                   <li><a href="http://calder.med.miami.edu/librarianask.html">ASK A LIBRARIAN</a></li>
                   <li><a href="http://calder.med.miami.edu/request_forms.html" rel="dropmenu1_e">FORMS</a></li>
                   <li><a href="http://calder.med.miami.edu/other_libraries.html#" rel="dropmenu2_e">OTHER LIBRARIES</a></li>
-                  <li><a href="http://calder.med.miami.edu/department_and_staff_listings.html">CONTACT US</a></li>
+                  <li><a href="http://calder.med.miami.edu/department_and_staff_listings.html">STAFF LIST</a></li>
                   <li><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/myAccountMenu.do?vid=med&fromLink=gotoMyAccountUI">MY ACCOUNT</a></li>
-                  <li><img src="http://calder.med.miami.edu/images/biomedlogo.png" alt="Biomedical Communications" width="18" height="18" border="0"><a href="http://calder.med.miami.edu/biomed/index.html" id="biomed-link">BIOMEDICAL COMMUNICATIONS</a></li>
+                  <li><a href="http://spmed.library.miami.edu/subjects/talkback.php">COMMENTS</a></li>
                 </ul><!--end #nav_menu -->
         </div> <!-- end #spum_nav --> 
     </div>
