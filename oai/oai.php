@@ -8,8 +8,7 @@
 
 use SubjectsPlus\Control\OAI\Repo;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+header("Content-type: text/xml");
 
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
