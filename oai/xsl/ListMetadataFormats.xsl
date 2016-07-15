@@ -22,11 +22,6 @@
                     <schema>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</schema>
                     <metadataNamespace>http://www.openarchives.org/OAI/2.0/oai_dc/</metadataNamespace>
                 </metadataFormat>
-                <metadataFormat>
-                    <metadataPrefix>marc21</metadataPrefix>
-                    <schema>http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd</schema>
-                    <metadataNamespace>http://www.loc.gov/MARC21/slim</metadataNamespace>
-                </metadataFormat>
             </ListMetadataFormats>
         </OAI-PMH>
     </xsl:template>
