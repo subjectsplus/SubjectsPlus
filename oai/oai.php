@@ -12,8 +12,8 @@ ini_set('display_errors', 1);
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Request;
 
-
 header("Content-type: text/xml");
+
 
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
@@ -50,14 +50,15 @@ if ($_GET['verb'] == 'ListMetadataFormats') {
 if ($_GET['verb'] == 'GetRecord') {
     $request = new Request('GetRecord',$_SERVER['QUERY_STRING']);
     $request->identifier = $_GET['Identifier'];
-
     echo $repo->getRecord($request);
 }
 
+if ($_GET['verb'] == 'ListRecords') {
+    $request = new Request('ListRecords',$_SERVER['QUERY_STRING']);
+    echo $repo->listRecords($request);
+}
 
-if ($_GET['verb'] == 'GetRecords') {
-    $request = new Request('GetRecords',$_SERVER['QUERY_STRING']);
+if ($_GET['verb'] == 'records') {
+    echo $repo->allRecordsXml();
 
-
-    var_dump( $repo->getRecordList($request) );
 }
