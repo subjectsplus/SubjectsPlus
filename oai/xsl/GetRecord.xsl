@@ -4,17 +4,17 @@
     <xsl:param name="responseDate"></xsl:param>
     <xsl:param name="baseUrl"></xsl:param>
     <xsl:param name="adminEmail"></xsl:param>
-    <xsl:param name="publisher"></xsl:param>
-    <xsl:param name="language"></xsl:param>
-    <xsl:param name="type"></xsl:param>
-    <xsl:param name="format"></xsl:param>
-
 
     <xsl:param name="lastModified"></xsl:param>
     <xsl:param name="title"></xsl:param>
     <xsl:param name="creator"></xsl:param>
     <xsl:param name="identifier"></xsl:param>
     <xsl:param name="date"></xsl:param>
+    <xsl:param name="format"></xsl:param>
+    <xsl:param name="language"></xsl:param>
+    <xsl:param name="publisher"></xsl:param>
+    <xsl:param name="type"></xsl:param>
+    <xsl:param name="recordDate"></xsl:param>
 
     <xsl:template match="/">
         <xsl:call-template name="GetRecord"></xsl:call-template>
@@ -35,7 +35,7 @@
                 <record>
                     <header>
                         <identifier><xsl:value-of select="$identifier"></xsl:value-of></identifier>
-                        <datestamp><xsl:value-of select="$lastModified"></xsl:value-of></datestamp>
+                        <datestamp><xsl:value-of select="$recordDate"></xsl:value-of></datestamp>
                     </header>
                     <metadata>
                         <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
