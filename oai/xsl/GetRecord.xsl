@@ -16,6 +16,7 @@
     <xsl:param name="language"></xsl:param>
     <xsl:param name="publisher"></xsl:param>
     <xsl:param name="type"></xsl:param>
+    <xsl:param name="recordDate"></xsl:param>
 
     <xsl:template match="/">
         <xsl:call-template name="GetRecord"></xsl:call-template>
@@ -36,7 +37,7 @@
                 <record>
                     <header>
                         <identifier><xsl:value-of select="$identifier"></xsl:value-of></identifier>
-                        <datestamp><xsl:value-of select="$lastModifed"></xsl:value-of></datestamp>
+                        <datestamp><xsl:value-of select="$recordDate"></xsl:value-of></datestamp>
                     </header>
                     <metadata>
                         <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
