@@ -6,6 +6,8 @@
     <xsl:param name="adminEmail"></xsl:param>
     <xsl:param name="publisher"></xsl:param>
     <xsl:param name="language"></xsl:param>
+    <xsl:param name="type"></xsl:param>
+    <xsl:param name="format"></xsl:param>
 
     <xsl:param name="lastModified"></xsl:param>
     <xsl:param name="title"></xsl:param>
@@ -49,6 +51,12 @@
                             <dc:date>
                                 <xsl:value-of select="$lastModified"></xsl:value-of>
                             </dc:date>
+                            <dc:type>
+                                <xsl:value-of select="$type"></xsl:value-of>
+                            </dc:type>
+                            <dc:format>
+                                <xsl:value-of select="$format"></xsl:value-of>
+                            </dc:format>
                         </oai_dc:dc>
                     </metadata>
                 </record>

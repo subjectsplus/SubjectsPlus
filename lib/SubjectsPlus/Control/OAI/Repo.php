@@ -18,6 +18,8 @@ class Repo
     private $publisher;
     private $language;
     private $identifierUrl;
+    private $type;
+    private $format;
     private $xslt;
 
     
@@ -63,6 +65,8 @@ class Repo
         $this->xslt->setParameter('','language',$this->language);
         $this->xslt->setParameter('','identifier',$this->identifierUrl.$record->getIdentifier());
         $this->xslt->setParameter('','lastModified',$record->getDate());
+        $this->xslt->setParameter('','type', $record->getType());
+        $this->xslt->setParameter('','format', $record->getFormat());
         return  $this->xslt->transformToXml($xsl);
     }
 
