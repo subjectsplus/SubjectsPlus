@@ -55,3 +55,9 @@ if ($_GET['verb'] == 'GetRecord') {
 }
 
 
+if ($_GET['verb'] == 'GetRecords') {
+    $request = new Request('GetRecords',$_SERVER['QUERY_STRING']);
+
+
+    var_dump( $repo->getRecordList($request) );
+}

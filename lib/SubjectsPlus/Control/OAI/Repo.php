@@ -55,4 +55,11 @@ class Repo
         $this->xslt->setParameter('','adminEmail',$this->adminEmail);
         return  $this->xslt->transformToXml($xsl);
     }
+
+    public function getRecordList(Request $request) {
+
+        $records = new RecordList(new Querier());
+
+        return $records;
+    }
 }
