@@ -18,11 +18,18 @@ header("Content-type: text/xml");
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
 
+if(isset($language)) {
+    $lang = $language;
+} else {
+    $lang = "English";
+}
+
 $setup = array('repositoryName'   => $resource_name,
                 'baseUrl'         => $BaseURL.'oai/oai.php',
                 'adminEmail'      => $administrator_email,
-                'institutionName' => $institution_name,
-                'identifierUrl'   => $BaseURL.'subjects/guide.php?id=');
+                'publisher'       => $institution_name,
+                'identifierUrl'   => $BaseURL.'subjects/guide.php?id=',
+                'language'        => $lang);
 
 $repo = new Repo(new XSLTProcessor(),$setup);
 

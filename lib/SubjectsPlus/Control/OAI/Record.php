@@ -21,8 +21,7 @@ class Record
     private $description;
     private $format = 'text/html';
     private $identifier;
-    private $identifierUrl;
-    private $language = 'English';
+    private $language;
     private $publisher;
     private $title;
     private $type = 'InteractiveResource';
@@ -31,9 +30,7 @@ class Record
     {
         $this->db = $db;
         $this->connection = $db->getConnection();
-
     }
-
 
 
     public  function getRecord($id) {
@@ -44,7 +41,7 @@ class Record
         $this->setTitle($record['subject']);
         $this->setDate($record['last_modified']);
         $this->setDescription($record['description']);
-        $this->setIdentifier($this->identifierUrl.$id);
+        $this->setIdentifier($id);
         $this->setCreator($staff['fname'].' '.$staff['lname']);
     }
 
