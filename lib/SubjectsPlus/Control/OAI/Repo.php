@@ -39,7 +39,7 @@ class Repo
     public function getRecords() {
         $recordList = new RecordList(new Querier());
         $xml = new DOMDocument();
-        $xml->loadXML('<ListRecords/>');
+        $xml->loadXML('<ListRecords xmlns="http://www.openarchives.org/OAI/2.0/"></ListRecords>');
 
         foreach ($recordList->getRecords() as $record) {
             $xsl = new DOMDocument();
@@ -68,8 +68,6 @@ class Repo
         $this->setupBasicParams($this->xslt);
         $this->setupDcParams($this->xslt, $record);
         return $this->xslt->transformToXml($xsl);
-
-
     }
 
     public function allRecordsXml() {
@@ -78,21 +76,19 @@ class Repo
 
     public function listRecords(Request $request)
     {
-
         $xsl = new DOMDocument();
         $xsl->load('./xsl/ListRecords.xsl');
         $this->xslt->importStylesheet($xsl);
 
         $this->setupBasicParams($this->xslt);
         return $this->xslt->transformToXml($xsl);
-
-
     }
 
 
     public function setupBasicParams(XSLTProcessor $xslt)
     {
         $xslt->setParameter('', 'responseDate', date('c'));
+        $xslt->setParameter('', 'recordDate', date('Y-m-d'));
         $xslt->setParameter('', 'repositoryName', $this->repositoryName);
         $xslt->setParameter('', 'baseUrl', $this->baseUrl);
         $xslt->setParameter('', 'adminEmail', $this->adminEmail);

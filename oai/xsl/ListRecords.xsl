@@ -11,7 +11,7 @@
     <xsl:param name="records"></xsl:param>
 
 
-    <xsl:template    match="/">
+    <xsl:template match="/">
         <xsl:call-template name="ListRecords"></xsl:call-template>
     </xsl:template>
 
