@@ -7,8 +7,7 @@
     <xsl:param name="responseDate"></xsl:param>
     <xsl:param name="baseUrl"></xsl:param>
     <xsl:param name="adminEmail"></xsl:param>
-    <xsl:param name="verbTemplate"></xsl:param>
- 
+
     <xsl:template match="/">
         <xsl:call-template name="Identify"></xsl:call-template>
     </xsl:template>

@@ -27,14 +27,14 @@ class RecordList
             $record = new Record($db);
             $record->getRecord($subject_id['subject_id']);
 
-            $this->records[] = $record->toArray();
+            $this->records[] = $record;
 
 
         }
     }
 
 
-    public function toArray() {
+    public function getRecords() {
         return $this->records;
     }
 

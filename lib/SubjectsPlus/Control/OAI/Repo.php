@@ -1,5 +1,6 @@
 <?php
 namespace SubjectsPlus\Control\OAI;
+
 use DOMDocument;
 use SubjectsPlus\Control\Querier;
 use XSLTProcessor;
@@ -18,11 +19,9 @@ class Repo
     private $publisher;
     private $language;
     private $identifierUrl;
-    private $type;
-    private $format;
     private $xslt;
 
-    
+
     public function __construct(XSLTProcessor $xslt, array $setup)
     {
         $this->xslt = $xslt;
@@ -34,46 +33,82 @@ class Repo
         $this->identifierUrl = $setup['identifierUrl'];
     }
 
-    public function processRequest(Request $request) {
+    public function processRequest(Request $request)
+    {
         $xsl = new DOMDocument();
-        $xsl->load('./xsl/'. $request->verb.'.xsl');
+        $xsl->load('./xsl/' . $request->verb . '.xsl');
         $this->xslt->importStylesheet($xsl);
-        $this->xslt->setParameter('','responseDate',date('c'));
-        $this->xslt->setParameter('','repositoryName',$this->repositoryName);
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $request->queryString);
-        $this->xslt->setParameter('','adminEmail',$this->adminEmail);
-        return  $this->xslt->transformToXml($xsl);
+        $this->setupBasicParams($this->xslt);
+        return $this->xslt->transformToXml($xsl);
     }
 
-    public function getRecord(Request $request) {
+    public function getRecords() {
+        $recordList = new RecordList(new Querier());
+        $xml = new DOMDocument();
+        $xml->loadXML('<ListRecords/>');
+
+        foreach ($recordList->getRecords() as $record) {
+            $xsl = new DOMDocument();
+            $xsl->load('./xsl/singleRecord.xsl');
+            $this->xslt->importStylesheet($xsl);
+
+            $this->setupBasicParams($this->xslt);
+            $this->setupDcParams($this->xslt, $record);
+
+            $f = $xml->createDocumentFragment();
+            $f->appendXML($this->xslt->transformToXml($xsl));
+            $xml->documentElement->appendChild($f);
+
+        }
+        return $xml;
+    }
+
+    public function getRecord(Request $request)
+    {
+        $record = new Record(new Querier());
+        $record->getRecord($request->identifier);
         $xsl = new DOMDocument();
         $xsl->load('./xsl/GetRecord.xsl');
         $this->xslt->importStylesheet($xsl);
-        
-        $record = new Record(new Querier());
-        $record->getRecord($request->identifier);
 
-        $this->xslt->setParameter('','creator',$record->getCreator());
-        $this->xslt->setParameter('','title',$record->getTitle());
-
-        
-        $this->xslt->setParameter('','responseDate',date('c'));
-        $this->xslt->setParameter('','repositoryName',$this->repositoryName);
-        $this->xslt->setParameter('','baseUrl',$this->baseUrl . $request->queryString);
-        $this->xslt->setParameter('','adminEmail',$this->adminEmail);
-        $this->xslt->setParameter('','publisher',$this->publisher);
-        $this->xslt->setParameter('','language',$this->language);
-        $this->xslt->setParameter('','identifier',$this->identifierUrl.$record->getIdentifier());
-        $this->xslt->setParameter('','lastModified',$record->getDate());
-        $this->xslt->setParameter('','type', $record->getType());
-        $this->xslt->setParameter('','format', $record->getFormat());
-        return  $this->xslt->transformToXml($xsl);
+        $this->setupBasicParams($this->xslt);
+        $this->setupDcParams($this->xslt, $record);
+        return $this->xslt->transformToXml($xsl);
     }
 
-    public function getRecordList(Request $request) {
+    public function allRecordsXml() {
+      return $this->getRecords()->saveXML();
+    }
 
-        $records = new RecordList(new Querier());
+    public function listRecords(Request $request)
+    {
+        $xsl = new DOMDocument();
+        $xsl->load('./xsl/ListRecords.xsl');
+        $this->xslt->importStylesheet($xsl);
 
-        return $records;
+        $this->setupBasicParams($this->xslt);
+        return $this->xslt->transformToXml($xsl);
+    }
+
+
+    public function setupBasicParams(XSLTProcessor $xslt)
+    {
+        $xslt->setParameter('', 'responseDate', date('c'));
+        $xslt->setParameter('', 'repositoryName', $this->repositoryName);
+        $xslt->setParameter('', 'baseUrl', $this->baseUrl);
+        $xslt->setParameter('', 'adminEmail', $this->adminEmail);
+    }
+
+    public function setupDcParams(XSLTProcessor $xslt, Record $record)
+    {
+        $xslt->setParameter('', 'creator', $record->getCreator());
+        $xslt->setParameter('', 'title', $record->getTitle());
+        $xslt->setParameter('', 'description', $record->getDescription());
+        $xslt->setParameter('', 'date', $record->getDate());
+        $xslt->setParameter('', 'format', $record->getFormat());
+        $xslt->setParameter('', 'language', $record->getLanguage());
+        $xslt->setParameter('', 'publisher', $record->getPublisher());
+        $xslt->setParameter('', 'identifier', $record->getIdentifier());
+        $xslt->setParameter('', 'type', $record->getType());
     }
 }
