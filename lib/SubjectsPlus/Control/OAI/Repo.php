@@ -94,10 +94,12 @@ class Repo
 
     public function setupBasicParams(XSLTProcessor $xslt)
     {
+        $url = new BaseUrl($this->baseUrl);
+        
         $xslt->setParameter('', 'responseDate', date('c'));
         $xslt->setParameter('', 'recordDate', date('Y-m-d'));
         $xslt->setParameter('', 'repositoryName', $this->repositoryName);
-        $xslt->setParameter('', 'baseUrl', new BaseUrl($this->baseUrl));
+        $xslt->setParameter('', 'baseUrl', $url->getUrl()  );
         $xslt->setParameter('', 'adminEmail', $this->adminEmail);
     }
 
