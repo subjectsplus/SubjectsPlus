@@ -24,11 +24,21 @@ $db = new Querier;
 // special image path because of mod_rewrite issues when source types are included in URL
 $img_path = $PublicPath . "images";
 
-if( isset( $_GET['subject'] ) )
-{
+if( isset( $_GET['subject'] ) ) {
 	$check_this = $_GET['subject'];
-}else
-{
+
+} elseif( isset($_GET['id']) ) {
+
+    $id = $_GET['id'];
+    $connection = $db->getConnection();
+    $statement = $connection->prepare("SELECT shortform FROM subject WHERE subject_id = :value");
+    $statement->bindParam(':value', $id);
+    $statement->execute();
+    $res = $statement->fetchAll();
+
+    $check_this = $res[0]["shortform"];
+
+} else {
 	$check_this = FALSE;
 }
 
