@@ -5,11 +5,10 @@
                 version="1.0">
 
     <xsl:output indent="yes"></xsl:output>
-
     <xsl:param name="responseDate"></xsl:param>
     <xsl:param name="baseUrl"></xsl:param>
     <xsl:param name="records"></xsl:param>
-
+    <xsl:param name="url"></xsl:param>
 
     <xsl:template match="/">
         <xsl:call-template name="ListRecords"></xsl:call-template>
@@ -19,7 +18,7 @@
         <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
             <responseDate><xsl:value-of select="$responseDate"/></responseDate>
             <request verb="ListRecords"><xsl:value-of select="$baseUrl"/></request>
-                 <xsl:copy-of select="document(string(concat($baseUrl,'?verb=records')))"></xsl:copy-of>
+                 <xsl:copy-of select="document(string(concat($url,'?verb=records')))"></xsl:copy-of>
         </OAI-PMH>
     </xsl:template>
 </xsl:stylesheet>
