@@ -27,7 +27,7 @@ if(isset($language)) {
 $url = new BaseUrl($BaseURL);
 
 $setup = array('repositoryName'   => $resource_name,
-                'baseUrl'         => $BaseURL.'oai/oai.php',
+                'baseUrl'         => $url->getUrl().'oai/oai.php',
                 'adminEmail'      => $administrator_email,
                 'publisher'       => $institution_name,
                 'identifierUrl'   =>  $url->getUrl().'subjects/guide.php?id=',
