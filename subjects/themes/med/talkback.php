@@ -515,9 +515,9 @@ include("includes/header_med.php");
 
 	<div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
 			 <div class="tip">
-				<h2>Need help <strong>now</strong>? <br /><a href="/ask-a-librarian/">Ask a Librarian</a>.</h2>
+				<h2>Need help <strong>now</strong>? <br /><a href="http://calder.med.miami.edu/librarianask.html">Ask a Librarian</a>.</h2>
 				<?php if (isset($stage_two)) { 
-					print "<p>" . _("Thank you for your submission.") . "<a href=\"http://calder.med.miami.edu/librarianask.html\">" . _("Did you want to say something else?") . "</a>";
+					print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
 				} else {  ?>
 
 		      		<form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
