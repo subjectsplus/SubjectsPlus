@@ -111,6 +111,7 @@ class Repo
         $xslt->setParameter('', 'language', $record->getLanguage());
         $xslt->setParameter('', 'publisher', $record->getPublisher());
         $xslt->setParameter('', 'identifier', $record->getIdentifier());
+        $xslt->setParameter('', 'url', new BaseUrl($this->baseUrl) . '/subjects/guide.php?id=' . $record->getIdentifier());
         $xslt->setParameter('', 'type', $record->getType());
     }
 }
