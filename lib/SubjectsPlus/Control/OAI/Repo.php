@@ -103,6 +103,7 @@ class Repo
 
     public function setupDcParams(XSLTProcessor $xslt, Record $record)
     {
+
         $xslt->setParameter('', 'creator', $record->getCreator());
         $xslt->setParameter('', 'title', $record->getTitle());
         $xslt->setParameter('', 'description', $record->getDescription());
@@ -111,7 +112,7 @@ class Repo
         $xslt->setParameter('', 'language', $record->getLanguage());
         $xslt->setParameter('', 'publisher', $record->getPublisher());
         $xslt->setParameter('', 'identifier', $record->getIdentifier());
-        $xslt->setParameter('', 'url', new BaseUrl($this->baseUrl) . '/subjects/guide.php?id=' . $record->getIdentifier());
+        $xslt->setParameter('', 'url', $this->identifierUrl . $record->getIdentifier());
         $xslt->setParameter('', 'type', $record->getType());
     }
 }

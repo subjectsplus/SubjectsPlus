@@ -8,12 +8,19 @@ namespace SubjectsPlus\Control;
  * Time: 1:49 PM
  */
 class BaseUrl
-{
-    public function __construct($baseUrl) {
-        if (str_pos("//",$baseUrl == 0)) {
-            $baseUrl = str_replace("//","http://");
+{   private $baseUrl;
+
+    public function __construct($baseUrl)
+    {
+        if (strpos("//", $baseUrl == 0)) {
+            $baseUrl = str_replace($baseUrl, "//", "http://");
         }
-        return $baseUrl;
+        $this->baseUrl = $baseUrl;
     }
+
+    public function __toString(){
+        return $this->baseUrl;
+    }
+
 
 }

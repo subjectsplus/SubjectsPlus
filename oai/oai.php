@@ -9,6 +9,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+use SubjectsPlus\Control\BaseUrl;
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Request;
 
@@ -28,7 +29,7 @@ $setup = array('repositoryName'   => $resource_name,
                 'baseUrl'         => $BaseURL.'oai/oai.php',
                 'adminEmail'      => $administrator_email,
                 'publisher'       => $institution_name,
-                'identifierUrl'   => $BaseURL.'subjects/guide.php?id=',
+                'identifierUrl'   => new BaseUrl($BaseURL) .'subjects/guide.php?id=',
                 'language'        => $lang);
 
 $repo = new Repo(new XSLTProcessor(),$setup);
@@ -62,7 +63,7 @@ if ($_GET['verb'] == 'GetRecord') {
 
 if ($_GET['verb'] == 'ListRecords') {
     $request = new Request('ListRecords',$_SERVER['QUERY_STRING']);
-    echo $repo->listRecords($request);
+    echo $repo->listRecords();
 }
 
 if ($_GET['verb'] == 'records') {

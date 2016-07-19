@@ -63,9 +63,7 @@
                             <dc:type>
                                 <xsl:value-of select="$type"></xsl:value-of>
                             </dc:type>
-                            <dc:identifier>
-                                <xsl:value-of select="$url"></xsl:value-of>
-                            </dc:identifier>
+                            <dc:identifier><xsl:value-of select="$url"></xsl:value-of></dc:identifier>
                         </oai_dc:dc>
                     </metadata>
                 </record>
