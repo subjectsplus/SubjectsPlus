@@ -67,7 +67,7 @@ $dept_intro = '
           	<ul>
           	<li><a href="#113">Inter-Library Loan & Course Reserves</a></li></li>
           	</ul>
-            <li><a href="#106">Cataloging & Metadata</a></li>
+            <li><a href="#106">Metadata & Discovery Services</a></li>
             <li><a href="#143">Systems</a>
             <ul>
             <li><a href="#129">Systems Support</a></li>
