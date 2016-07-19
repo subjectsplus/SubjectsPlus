@@ -24,12 +24,13 @@ if(isset($language)) {
 } else {
     $lang = "English";
 }
+$url = new BaseUrl($BaseURL);
 
 $setup = array('repositoryName'   => $resource_name,
                 'baseUrl'         => $BaseURL.'oai/oai.php',
                 'adminEmail'      => $administrator_email,
                 'publisher'       => $institution_name,
-                'identifierUrl'   => new BaseUrl($BaseURL) .'subjects/guide.php?id=',
+                'identifierUrl'   =>  $url->getUrl().'subjects/guide.php?id=',
                 'language'        => $lang);
 
 $repo = new Repo(new XSLTProcessor(),$setup);
