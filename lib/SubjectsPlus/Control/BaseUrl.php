@@ -18,7 +18,7 @@ class BaseUrl
         $this->baseUrl = $baseUrl;
     }
 
-    public function __toString(){
+    public function getUrl(){
         return $this->baseUrl;
     }
 

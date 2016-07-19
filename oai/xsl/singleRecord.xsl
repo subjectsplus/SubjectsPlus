@@ -17,6 +17,7 @@
     <xsl:param name="publisher"></xsl:param>
     <xsl:param name="type"></xsl:param>
     <xsl:param name="recordDate"></xsl:param>
+    <xsl:param name="url"></xsl:param>
 
     <xsl:output indent="yes" omit-xml-declaration="yes"/>
 
@@ -56,6 +57,9 @@
                     <dc:type>
                         <xsl:value-of select="$type"></xsl:value-of>
                     </dc:type>
+                    <dc:identifier>
+                        <xsl:value-of select="$url"></xsl:value-of>
+                    </dc:identifier>
 
 
                 </oai_dc:dc>
