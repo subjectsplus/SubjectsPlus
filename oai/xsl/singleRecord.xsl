@@ -10,6 +10,7 @@
 
     <xsl:param name="title"></xsl:param>
     <xsl:param name="creator"></xsl:param>
+    <xsl:param name="description"></xsl:param>
     <xsl:param name="identifier"></xsl:param>
     <xsl:param name="date"></xsl:param>
     <xsl:param name="format"></xsl:param>
@@ -57,6 +58,9 @@
                     <dc:type>
                         <xsl:value-of select="$type"></xsl:value-of>
                     </dc:type>
+                    <dc:description>
+                        <xsl:value-of select="$description"></xsl:value-of>
+                    </dc:description>
                     <dc:identifier>
                         <xsl:value-of select="$url"></xsl:value-of>
                     </dc:identifier>
