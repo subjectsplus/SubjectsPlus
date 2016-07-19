@@ -12,7 +12,7 @@ class BaseUrl
 
     public function __construct($baseUrl)
     {
-        if (strpos("//", $baseUrl == 0)) {
+        if (strpos($baseUrl,'//') == 0) {
             $baseUrl = str_replace($baseUrl, "//", "http://");
         }
         $this->baseUrl = $baseUrl;
