@@ -74,7 +74,7 @@ class Repo
       return $this->getRecords()->saveXML();
     }
 
-    public function listRecords(Request $request)
+    public function listRecords()
     {
         $xsl = new DOMDocument();
         $xsl->load('./xsl/ListRecords.xsl');

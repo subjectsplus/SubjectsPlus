@@ -13,7 +13,7 @@ use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Request;
 
 header("Content-type: text/xml");
-
+libxml_disable_entity_loader(false);
 
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
