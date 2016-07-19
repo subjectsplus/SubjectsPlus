@@ -2,6 +2,7 @@
 namespace SubjectsPlus\Control\OAI;
 
 use DOMDocument;
+use SubjectsPlus\Control\BaseUrl;
 use SubjectsPlus\Control\Querier;
 use XSLTProcessor;
 
@@ -96,7 +97,7 @@ class Repo
         $xslt->setParameter('', 'responseDate', date('c'));
         $xslt->setParameter('', 'recordDate', date('Y-m-d'));
         $xslt->setParameter('', 'repositoryName', $this->repositoryName);
-        $xslt->setParameter('', 'baseUrl', $this->baseUrl);
+        $xslt->setParameter('', 'baseUrl', new BaseUrl($this->baseUrl));
         $xslt->setParameter('', 'adminEmail', $this->adminEmail);
     }
 
