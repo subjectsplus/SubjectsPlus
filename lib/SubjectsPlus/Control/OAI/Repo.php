@@ -16,6 +16,9 @@ class Repo
     private $repositoryName;
     private $baseUrl;
     private $adminEmail;
+    private $publisher;
+    private $language;
+    private $identifierUrl;
     private $xslt;
 
 
@@ -25,6 +28,9 @@ class Repo
         $this->repositoryName = $setup['repositoryName'];
         $this->baseUrl = $setup['baseUrl'];
         $this->adminEmail = $setup['adminEmail'];
+        $this->publisher = $setup['publisher'];
+        $this->language = $setup['language'];
+        $this->identifierUrl = $setup['identifierUrl'];
     }
 
     public function processRequest(Request $request)

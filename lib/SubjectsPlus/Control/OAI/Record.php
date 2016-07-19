@@ -21,19 +21,18 @@ class Record
     private $description;
     private $format = 'text/html';
     private $identifier;
-    private $identifierUrl;
-    private $language = 'English';
+    private $language;
     private $publisher;
     private $title;
     private $type = 'InteractiveResource';
+
+
 
     public function __construct(Querier $db)
     {
         $this->db = $db;
         $this->connection = $db->getConnection();
-
     }
-
 
 
     public  function getRecord($id) {
@@ -44,8 +43,34 @@ class Record
         $this->setTitle($record['subject']);
         $this->setDate($record['last_modified']);
         $this->setDescription($record['description']);
-        $this->setIdentifier($this->identifierUrl.$id);
+        $this->setIdentifier($id);
         $this->setCreator($staff['fname'].' '.$staff['lname']);
+
+        $globalVars = $this->getGlobals();
+
+        $this->setPublisher($globalVars['publisher']);
+        $this->setLanguage($globalVars['language']);
+
+    }
+
+    private function getGlobals() {
+
+        $globalVars = array();
+        global $institution_name;
+        if(!is_null($institution_name)) {
+            $globalVars['publisher'] = $institution_name;
+        } else {
+            $globalVars['publisher'] = "University of Miami Libraries";
+        }
+
+        global $language;
+        if(!is_null($language)) {
+            $globalVars['language'] = $language;
+        } else {
+            $globalVars['language'] = 'English';
+        }
+
+        return $globalVars;
     }
 
 

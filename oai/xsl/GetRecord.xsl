@@ -4,10 +4,8 @@
     <xsl:param name="responseDate"></xsl:param>
     <xsl:param name="baseUrl"></xsl:param>
     <xsl:param name="adminEmail"></xsl:param>
-    <xsl:param name="verbTemplate"></xsl:param>
 
-    <xsl:param name="lastModifed"></xsl:param>
-    
+    <xsl:param name="lastModified"></xsl:param>
     <xsl:param name="title"></xsl:param>
     <xsl:param name="creator"></xsl:param>
     <xsl:param name="identifier"></xsl:param>
@@ -65,8 +63,6 @@
                             <dc:type>
                                 <xsl:value-of select="$type"></xsl:value-of>
                             </dc:type>
-                            
-                           
                         </oai_dc:dc>
                     </metadata>
                 </record>
