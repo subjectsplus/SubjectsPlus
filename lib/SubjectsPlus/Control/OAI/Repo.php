@@ -99,7 +99,7 @@ class Repo
         $xslt->setParameter('', 'responseDate', date('c'));
         $xslt->setParameter('', 'recordDate', date('Y-m-d'));
         $xslt->setParameter('', 'repositoryName', $this->repositoryName);
-        $xslt->setParameter('', 'baseUrl', $url->getUrl()  );
+        $xslt->setParameter('', 'baseUrl', $url->getUrl());
         $xslt->setParameter('', 'adminEmail', $this->adminEmail);
     }
 
