@@ -61,6 +61,10 @@ class Repo
             $xml->documentElement->appendChild($f);
 
         }
+
+        $xml->saveXML();
+        $xml->save('recordlist.xml');
+
         return $xml;
     }
 
