@@ -63,7 +63,7 @@ class Repo
         }
 
         $xml->saveXML();
-        $xml->save('recordlist.xml');
+        $xml->save('../assets/cache/recordlist.xml');
 
         return $xml;
     }
@@ -87,6 +87,10 @@ class Repo
 
     public function listRecords()
     {
+        if(!file_exists('../assets/cache/recordlist.xml')) {
+            $this->getRecords();
+        }
+
         $xsl = new DOMDocument();
         $xsl->load('./xsl/ListRecords.xsl');
         $this->xslt->importStylesheet($xsl);
