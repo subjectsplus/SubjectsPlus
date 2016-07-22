@@ -9,12 +9,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+
 use SubjectsPlus\Control\BaseUrl;
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Request;
 
 header("Content-type: text/xml");
-libxml_disable_entity_loader(false);
+
 
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
@@ -24,6 +25,8 @@ if(isset($language)) {
 } else {
     $lang = "English";
 }
+
+global $BaseURL;
 $url = new BaseUrl($BaseURL);
 
 $setup = array('repositoryName'   => $resource_name,
