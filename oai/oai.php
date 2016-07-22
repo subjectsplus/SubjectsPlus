@@ -24,13 +24,21 @@ if(isset($language)) {
 } else {
     $lang = "English";
 }
-$url = new BaseUrl($BaseURL);
+
+$baseUrl = function($BaseUrl) {
+    // Function to add http prefix if missing
+    if (substr($BaseUrl,0,4) == 4) {
+       return $BaseUrl;
+    } else {
+       return "http:" . $BaseUrl;
+    }
+};
 
 $setup = array('repositoryName'   => $resource_name,
-                'baseUrl'         => $url->getUrl().'oai/oai.php',
+                'baseUrl'         => $baseUrl($BaseURL) . 'oai/oai.php',
                 'adminEmail'      => $administrator_email,
                 'publisher'       => $institution_name,
-                'identifierUrl'   =>  $url->getUrl().'subjects/guide.php?id=',
+                'identifierUrl'   =>  $baseUrl($BaseURL) . 'subjects/guide.php?id=',
                 'language'        => $lang);
 
 $repo = new Repo(new XSLTProcessor(),$setup);
