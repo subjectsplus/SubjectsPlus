@@ -87,9 +87,8 @@ class Repo
 
     public function listRecords()
     {
-        if(!file_exists('../assets/cache/recordlist.xml')) {
-            $this->getRecords();
-        }
+        //write the xml file first
+        $this->getRecords();
 
         $xsl = new DOMDocument();
         $xsl->load('./xsl/ListRecords.xsl');

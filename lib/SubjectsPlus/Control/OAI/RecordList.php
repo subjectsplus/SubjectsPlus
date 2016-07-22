@@ -16,11 +16,18 @@ class RecordList
     private $connection;
     private $records;
 
+    private $active = 1;
+    private $type = 'Subject';
+
 
     public function __construct(Querier $db)
     {
         $this->connection = $db->getConnection();
-        $statement = $this->connection->prepare("SELECT subject_id FROM subject");
+
+
+        $statement = $this->connection->prepare("SELECT subject_id FROM subject WHERE active = :active AND `type` = :type");
+        $statement->bindParam(':active', $this->active);
+        $statement->bindParam(':type', $this->type);
         $statement->execute();
         $subject_ids = $statement->fetchAll();
         foreach ($subject_ids as $subject_id) {
