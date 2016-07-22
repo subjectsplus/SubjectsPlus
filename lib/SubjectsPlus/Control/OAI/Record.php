@@ -43,11 +43,11 @@ class Record
         $this->setTitle($record['subject']);
         $this->setDate($record['last_modified']);
         $this->setDescription($record['description']);
-        $this->setIdentifier($id);
         $this->setCreator($staff['fname'].' '.$staff['lname']);
 
         $globalVars = $this->getGlobals();
 
+        $this->setIdentifier($globalVars['baseurl']."?verb=GetRecord&Identifier=".$id);
         $this->setPublisher($globalVars['publisher']);
         $this->setLanguage($globalVars['language']);
 
@@ -56,6 +56,10 @@ class Record
     private function getGlobals() {
 
         $globalVars = array();
+
+        global $BaseURL;
+        $globalVars['baseurl'] = $BaseURL;
+
         global $institution_name;
         if(!is_null($institution_name)) {
             $globalVars['publisher'] = $institution_name;
