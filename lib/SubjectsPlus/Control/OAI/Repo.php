@@ -87,9 +87,8 @@ class Repo
 
     public function listRecords()
     {
-        if(!file_exists('../assets/cache/recordlist.xml')) {
-            $this->getRecords();
-        }
+        //write the xml file first
+        $this->getRecords();
 
         $xsl = new DOMDocument();
         $xsl->load('./xsl/ListRecords.xsl');
@@ -102,12 +101,12 @@ class Repo
 
     public function setupBasicParams(XSLTProcessor $xslt)
     {
-        $url = new BaseUrl($this->baseUrl);
+        global $baseUrl;
         
         $xslt->setParameter('', 'responseDate', date('c'));
         $xslt->setParameter('', 'recordDate', date('Y-m-d'));
         $xslt->setParameter('', 'repositoryName', $this->repositoryName);
-        $xslt->setParameter('', 'baseUrl', $url->getUrl());
+        $xslt->setParameter('', 'baseUrl', $this->baseUrl);
         $xslt->setParameter('', 'adminEmail', $this->adminEmail);
     }
 

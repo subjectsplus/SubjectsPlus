@@ -9,12 +9,13 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+
 use SubjectsPlus\Control\BaseUrl;
 use SubjectsPlus\Control\OAI\Repo;
 use SubjectsPlus\Control\OAI\Request;
 
 header("Content-type: text/xml");
-libxml_disable_entity_loader(false);
+
 
 include_once ('../control/includes/autoloader.php');
 include_once('../control/includes/config.php');
@@ -24,13 +25,23 @@ if(isset($language)) {
 } else {
     $lang = "English";
 }
-$url = new BaseUrl($BaseURL);
+
+
+$baseUrl = function($BaseUrl) {
+    // Function to add http prefix if missing
+    if (substr($BaseUrl,0,4) == 4) {
+       return $BaseUrl;
+    } else {
+       return "http:" . $BaseUrl;
+    }
+};
+
 
 $setup = array('repositoryName'   => $resource_name,
-                'baseUrl'         => $url->getUrl().'oai/oai.php',
+                'baseUrl'         => $baseUrl($BaseURL) . 'oai/oai.php',
                 'adminEmail'      => $administrator_email,
                 'publisher'       => $institution_name,
-                'identifierUrl'   =>  $url->getUrl().'subjects/guide.php?id=',
+                'identifierUrl'   =>  $baseUrl($BaseURL) . 'subjects/guide.php?id=',
                 'language'        => $lang);
 
 $repo = new Repo(new XSLTProcessor(),$setup);
