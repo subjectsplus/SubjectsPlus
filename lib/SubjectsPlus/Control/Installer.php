@@ -53,16 +53,16 @@ class Installer
 					"CREATE TABLE `chchchanges` (
 					  `chchchanges_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `staff_id` int(11) NOT NULL,
-					  `ourtable` varchar(50) NOT NULL,
+					  `ourtable` varchar(50) CHARACTER SET latin1 NOT NULL,
 					  `record_id` int(11) NOT NULL,
-					  `record_title` varchar(255) DEFAULT NULL,
-					  `message` varchar(255) DEFAULT NULL,
+					  `record_title` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+					  `message` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
 					  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 					  PRIMARY KEY (`chchchanges_id`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `discipline` (
 					  `discipline_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `discipline` varchar(100) NOT NULL,
+					  `discipline` varchar(100) CHARACTER SET latin1 NOT NULL,
 					  `sort` int(11) NOT NULL,
 					  PRIMARY KEY (`discipline_id`),
 					  UNIQUE KEY `discipline` (`discipline`)
