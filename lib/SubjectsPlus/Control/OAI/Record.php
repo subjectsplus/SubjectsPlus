@@ -47,7 +47,7 @@ class Record
 
         $globalVars = $this->getGlobals();
 
-        $this->setIdentifier($globalVars['baseurl']."?verb=GetRecord&Identifier=".$id);
+        $this->setIdentifier($id);
         $this->setPublisher($globalVars['publisher']);
         $this->setLanguage($globalVars['language']);
 
@@ -106,7 +106,9 @@ class Record
 
         return $result;
     }
-    
+
+
+
 
     /**
      * @return mixed
