@@ -29,14 +29,23 @@ class Pluslet_Related extends Pluslet {
     }
     public function outputRelatedGuides() {
 
+        $output = "";
+
         if($this->_isclone == 1) {
             $subject_id = $this->getSubjectIdByMasterId($this->_pluslet_id);
-            $subject_id = $subject_id[0];
+            $subject_id = $subject_id['subject_id'];
+
         } else {
             $subject_id = $this->_subject_id;
         }
 
-        $output = "";
+        //get master subject and shortform
+        $master_subject = $this->getMasterSubject($subject_id);
+
+        if(isset($master_subject)) {
+            $output .= "<h3><a href=\"../../subjects/guide.php?subject={$master_subject['shortform']}\"> {$master_subject['subject']}</a></h3>";
+        }
+
         $output .= "<ul>";
 
         $children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE active = 1 AND subject_parent = ' . $subject_id . ' ORDER BY subject.subject ASC' );
@@ -79,6 +88,17 @@ class Pluslet_Related extends Pluslet {
         $statement->execute();
         $subject_id = $statement->fetch();
         return $subject_id;
+    }
+
+    public function getMasterSubject($master_id) {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("SELECT subject, shortform FROM subject
+											WHERE subject_id  = :master_id");
+
+        $statement->bindParam ( ":master_id", $master_id );
+        $statement->execute();
+        $subject = $statement->fetch();
+        return $subject;
     }
 
 
