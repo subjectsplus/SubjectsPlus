@@ -18,7 +18,15 @@ $auto_complete->setSearchPage("control");
 
 if (isset($_GET["subject_id"])) {
 
-$auto_complete->setSubjectId($_GET["subject_id"]);
+    $auto_complete->setSubjectId($_GET["subject_id"]);
 
 }
+
+
+if (isset($_GET["staff_id"])) {
+
+    $auto_complete->setStaffId($_GET["staff_id"]);
+
+}
+
 echo $auto_complete->search();
