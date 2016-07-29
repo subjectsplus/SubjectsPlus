@@ -103,7 +103,7 @@ if (isset($_GET["delete_id"])) {
 $subs_option_boxes = getSubBoxes("", "", 1);
 
 $all_guides = "
-<select name=\"item\" id=\"guides\" size=\"1\">
+<select name=\"item\" id=\"guides\" size=\"1\" class=\"guide_collection_select\">
 <option value=\"\">" . _("-- Choose Guide --") . "</option>
 $subs_option_boxes
 </select>
@@ -126,17 +126,23 @@ $ourlist = "";
 foreach ($CollArray as $value) {
 
 $ourlist .= "
-  <div class=\"pluslet no_overflow\">
+  <div class=\"pluslet no_overflow collection-entry\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">$value[1]</div>
-      <div class=\"titlebar_options\"><a href=\"guide_collections.php?delete_id={$value[0]}\"><i class=\"fa fa-trash-o\" title=\"Remove item from this guide\"></i></a></div>
+      <div class=\"titlebar_options\"><a href=\"guide_collections.php?delete_id={$value[0]}\"><i class=\"fa fa-trash-o\" title=\"Delete Collection\"></i></a></div>
     </div>
     <div class=\"pluslet_body\">
-    <p>(Note: Guide must be public to display on the list)</p>
-    <p><em><strong>$value[2]</strong></em></p>
-    $all_guides
-    <form id=\"collections$value[0]\" action=\"\" method=\"post\">
-    <ul id=\"sortable-$value[0]\" class=\"sortable_list\">
+
+        <div class=\"pure-g\">
+            <div class=\"pure-u-1-3\">
+                <p><strong>Description: </strong><br />$value[2]</p>
+                <p><strong>Shortform: </strong>$value[3]</p>
+            </div>
+            <div class=\"pure-u-2-3\">
+                <p><strong>Guides: (Note: Guide must be set to \"public\" to display on the list)</strong></p>
+                $all_guides
+                <form id=\"collections$value[0]\" action=\"\" method=\"post\">
+                <ul id=\"sortable-$value[0]\" class=\"sortable_list\">
     ";
 
     // now get our subjects
@@ -154,6 +160,7 @@ $ourlist .="
 </ul>
 <button class=\"button pure-button pure-button-primary\" name=\"update_collections\" value=\"$value[0]\" style=\"display: block;\" >" . _("SAVE CHANGES") . "</button>
 </form>
+ </div></div>
 </div></div>";
 
 }
@@ -194,9 +201,9 @@ print "</div>
 
 makePluslet(_("Instructions/Help"), $add_help_box, "no_overflow");
 
-makePluslet(_("Collection"), $add_collection_box, "no_overflow");
+makePluslet(_("Create New Collection"), $add_collection_box, "no_overflow");
 
-makePluslet(_("View Live!"), $view_Colls_box, "no_overflow");
+makePluslet(_("Collections Listing - View Live!"), $view_Colls_box, "no_overflow");
 
 print "</div>"; // close pure-u-
 print "</div>"; // close pure

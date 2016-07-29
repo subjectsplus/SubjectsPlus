@@ -798,7 +798,7 @@ html, button, input, select, textarea {
 
 .find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 13px; line-height: 1.3em; max-height:540px; }
 
-.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:524px;}
+.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:440px;}
 
 .guides-display .guide-list {width: 100%; font-family: "NotoSansRegular"; color: #666 !important; border: 1px solid #bcbbbb;padding: 4px;}
 
@@ -2461,6 +2461,25 @@ div.feedback a:link {
 .admin-prompt {margin: 0 5px 10px 0; text-align: right; font-size: 0.9em;}
 
 
+.pluslet.collection-entry .titlebar_options i {color: #333; font-size: 20px;}
+.pluslet.collection-entry .titlebar_options i:hover {color: #c03957;}
+
+#maincontent .pluslet.collection-entry .pure-g {
+   padding-top: 0;
+}
+
+.pluslet.collection-entry p {padding: 0 25px 0 0;}
+
+.guide_collection_select {
+  width:50%;
+  background-color: #fff;
+    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    color: #444;
+    margin: 0.25em 0;
+    padding: 0.25em;
+}
 
 
 
