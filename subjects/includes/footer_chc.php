@@ -22,6 +22,7 @@ switch ($our_site) {
       <a href=\"http://www.facebook.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
     <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
     <a href=\"http://vimeo.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/vimeo.png\"  alt=\"Find Us on Vimeo\" title=\"Find Us on Vimeo\" /></a>
+      <a href=\"https://www.instagram.com/umchc/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/instagram-icon.png\"  alt=\"Instagram\" title=\"Instagram\" /></a>
       <a href=\"http://www.flickr.com/photos/umdigital/collections/72157623554504931/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
     </p>";
   break;
