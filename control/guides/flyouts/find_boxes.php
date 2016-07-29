@@ -18,9 +18,19 @@
         <div id="search-tab" class="find-box-tab-list-content">
             <div class="searchbox-results-display">
                 <input class="findbox-search" type="text" placeholder="<?php print _("Enter box title..."); ?>" />
-                <input type="radio" name="search_scope" value="my_pluslets" checked> My Pluslets<br>
-                <input type="radio" name="search_scope" value="current_guide"> This Guide<br>
-                <input type="radio" name="search_scope" value="allguides"> All
+
+                <div class="sp-custom-radio">
+                  <input id="find_box_option1" type="radio" name="search_scope" value="my_pluslets" checked="checked">
+                  <label for="find_box_option1"><span><span></span></span>My Boxes</label>
+                </div>
+                <div class="sp-custom-radio">
+                  <input id="find_box_option2" type="radio" name="search_scope" value="current_guide">
+                  <label for="find_box_option2"><span><span></span></span>This Guide</label>
+                </div>
+                <div class="sp-custom-radio">
+                  <input id="find_box_option3" type="radio" name="search_scope" value="allguides">
+                  <label for="find_box_option3"><span><span></span></span>All</label>
+                </div>
                 <ul id="findbox-searchresults" class="findbox-searchresults"></ul>
             </div>
         </div>
