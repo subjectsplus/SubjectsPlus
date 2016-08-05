@@ -575,6 +575,7 @@ function showDocIcon($extension) {
       return "pdf.png";
       break;
     case "ppt":
+    case "pptx":
       return "ppt.png";
       break;
     case "psd":
