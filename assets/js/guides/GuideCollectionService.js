@@ -9,7 +9,8 @@ function guideCollectionService() {
     var myGuideCollection = {
 
         settings : {
-            collectionActionUrl : "/control/guides/helpers/collections.php?"
+            collectionActionUrl : "/control/guides/helpers/collections.php?",
+            sortableGuideList : $('ul#guide-list')
         },
         strings : {
             removeGuideBtn: "<a class='remove-guide-btn'><i class='fa fa-remove'></i> </a>"
@@ -126,7 +127,6 @@ function guideCollectionService() {
 
                 var isDup = myGuideCollection.shortformDupeCheck(collection.shortform);
 
-                console.log(isDup);
                 if(isValid == true && isDup == false) {
                     //add collection to db and display collection metadata
                     myGuideCollection.addCollectionRequest(collection);
@@ -232,16 +232,16 @@ function guideCollectionService() {
 
                         //remove element from collection list
                         $(elementDestoyed).remove();
-                        
+
                         //clear collection metadata
                         myGuideCollection.clearCollectionMetadata();
-                        
+
                         //clear form value
                         myGuideCollection.clearAddFormValues();
-                        
+
                         //clear search results
                         myGuideCollection.clearSearchResults();
-                        
+
                         //clear guide list
                         myGuideCollection.clearGuideList();
 
@@ -257,7 +257,7 @@ function guideCollectionService() {
             // Autocomplete search
             $(' #add-guide-input').keyup(function (data) {
                 if ($('#add-guide-input').val().length > 2) {
-                    
+
                     var searchTerm = $('#add-guide-input').val();
                     var url = '../includes/autocomplete_data.php?';
                     var collection = 'all_guides';
@@ -279,13 +279,13 @@ function guideCollectionService() {
 
                             $.each(data, function (index, obj) {
                                 var addBtn = "<a class='add-guide-btn'><i class='fa fa-plus'></i> </a>";
-                                
+
                                 $('#guide-search-results').prepend('<li data-guide_id="' + obj.id + '">' + addBtn + obj.label + '</li>');
 
                             })
                         }
                     });
-                    
+
                 }
 
             });
@@ -294,7 +294,7 @@ function guideCollectionService() {
         displayCollectionGuides: function () {
 
             $('body').on('click', '#display-guides-btn', function () {
-                
+
                 var collection_id = $(this).parent('li').attr('data-collection_id');
                 var title         = $(this).parent('li').attr('data-label');
                 var description   = $(this).parent('li').attr('data-description');
@@ -346,7 +346,7 @@ function guideCollectionService() {
                             $('#guide-list').prepend( '<li id="item_' + item + '" ' +
                                 'data-guide_id="' + subject_id + '">' +
                                 '<i class="fa fa-bars" aria-hidden="true"></i> ' +
-                                 label + myGuideCollection.strings.removeGuideBtn + '</li>' );
+                                label + myGuideCollection.strings.removeGuideBtn + '</li>' );
 
                         });
 
@@ -407,6 +407,10 @@ function guideCollectionService() {
                             label + myGuideCollection.strings.removeGuideBtn + '</li>' );
                     }
                 });
+
+                if( !$(myGuideCollection.settings.sortableGuideList).hasClass('.ui-sortable') ) {
+                    myGuideCollection.makeGuidesSortable(collection_id);
+                }
 
             });
         },
@@ -557,7 +561,7 @@ function guideCollectionService() {
         },
 
         hideGuideCollectionViewportContainer: function () {
-          $('#guide-collection-viewport-container').hide();
+            $('#guide-collection-viewport-container').hide();
         },
 
         showSearchResultsContainer: function () {
@@ -588,4 +592,3 @@ function guideCollectionService() {
 
     return myGuideCollection;
 }
-
