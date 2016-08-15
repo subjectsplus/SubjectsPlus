@@ -40,7 +40,7 @@ class GuideCollection implements OutputInterface
     public function fetchCollections() {
         $statement = $this->connection->prepare("SELECT c.collection_id, c.title, c.description, c.shortform 
                                                   FROM collection c 
-                                                  ORDER BY c.collection_id DESC");
+                                                  ORDER BY c.title ASC");
         $statement->execute();
         $collections = $statement->fetchAll();
 
