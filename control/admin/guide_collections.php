@@ -1,10 +1,3 @@
-<style>
-
-    ul#guide-collection-list li { background: green; }
-
-    ul#guide-collection-list li:nth-child(odd) { background: red; }
-</style>
-
 <?php
 /**
  *   @file guide_collections.php

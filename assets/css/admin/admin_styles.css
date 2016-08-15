@@ -2466,11 +2466,14 @@ div.feedback a:link {
     padding: 0 !important;
 }
 
-#guide-collection-list li {margin: 0 0 2px 0;}
 
 #guide-collection-list a[id^="delete-"] {float:right;}
 
 #display-guides-btn i {margin: 0 8px 0 0;}
+
+#guide-collection-list li { background: #f6e3e7; margin: 0 0 2px 0; padding: 5px;}
+
+#guide-collection-list li:nth-child(odd) { background: transparent; }
 
 
 /* Pluslet ID 1 */
