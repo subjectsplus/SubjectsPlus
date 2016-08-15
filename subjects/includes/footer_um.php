@@ -21,6 +21,7 @@ switch ($our_site) {
       <a href=\"http://www.facebook.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
     <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
     <a href=\"http://vimeo.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/vimeo.png\"  alt=\"Find Us on Vimeo\" title=\"Find Us on Vimeo\" /></a>
+    <a href=\"https://www.instagram.com/umchc/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/instagram-icon.png\"  alt=\"Instagram\" title=\"Instagram\" /></a>
       <a href=\"http://www.flickr.com/photos/umdigital/collections/72157623554504931/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
     </p>";
   break;
@@ -30,7 +31,8 @@ switch ($our_site) {
     $social_icons = "<p id=\"social_icons_small\">      
       <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
       <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
-     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a><br />
+     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
+     <a href=\"https://www.instagram.com/umiamilibraries/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/instagram-icon.png\"  alt=\"Instagram\" title=\"Instagram\" /></a><br />
         <a href=\"http://library.miami.edu/support-the-libraries/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/support-uml.png\"  alt=\"Support UML\" title=\"Support UML\" style=\"margin-top: 10px;\" /></a><a href=\"http://library.miami.edu/uml-inthenews/ \"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/uml-news.png\"  alt=\"UML in the News\" title=\"UML in the News\" style=\"margin-top: 10px;\" /></a>
     </p>";
 
@@ -46,7 +48,7 @@ switch ($our_site) {
                 <p style=""><?php print $library_address; ?><br />
                 <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
                 <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
-                <a href="<?php print PATH_FROM_ROOT; ?>/report-website-issue/">Report Site Issue</a> |
+                <a href="mailto:webmaster.lib@miami.edu">Report Site Issue</a> |
                 <a href="<?php print PATH_FROM_ROOT; ?>/support-the-libraries/">Make a Gift</a>
                 </p>
             	</div>
