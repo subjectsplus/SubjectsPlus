@@ -23,13 +23,13 @@ include("../includes/autoloader.php");
 
 
 $add_collection_box = "
-<form id=\"guide-collection-form\">
+<form id=\"guide-collection-form\" class=\"pure-form pure-form-stacked\">
 <label for=\"title\">" . _("Collection Name") . "</label>
-<input type=\"text\" id='title' name=\"title\"size=\"40\" class=\"required_field\" required>
+<input type=\"text\" id='title' name=\"title\" class=\"required_field\" required>
 <label for=\"description\">" . _("Description") . "</label>
-<textarea name=\"description\" id=\"description\" rows=\"4\" cols=\"50\"></textarea>
-<label for=\"url\">" . _("Shortform") . "</label>
-<input type=\"text\" id='shortform' name=\"shortform\" size=\"20\"  class=\"required_field\" required>
+<textarea name=\"description\" id=\"description\"></textarea>
+<label for=\"url\">" . _("Shortform (must be unique)") . "</label>
+<input type=\"text\" id='shortform' name=\"shortform\" class=\"required_field\" required>
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>
 ";
@@ -41,7 +41,7 @@ $guide_collection_list .= "</div>";
 
 
 
-$guide_search_viewport .= "<div id='search-results-container'>";
+$guide_search_viewport = "<div id='search-results-container'>";
 $guide_search_viewport .= "<label for='add-guide-input'>Search</label>";
 $guide_search_viewport .= "<input id='add-guide-input' type='text' name='add-guide-input' />";
 $guide_search_viewport .= "<div><h4>Search Results</h4><ul id='guide-search-results'></ul></div>";
@@ -68,7 +68,7 @@ $guide_collection_viewport .= "</div>";
 
 $guide_collection_viewport .= "</div>";
 
-$associated_guides_viewport .= "<div id='guide-list-container'>";
+$associated_guides_viewport = "<div id='guide-list-container'>";
 $associated_guides_viewport .= "<h3 id='guide-label'>Associated Guides</h3>";
 $associated_guides_viewport .= "<ul id='guide-list'></ul>";
 $associated_guides_viewport .= "</div>";
@@ -91,8 +91,8 @@ $associated_guides_viewport .= "</div>";
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Add Collection"), $add_collection_box , "no_overflow"); ?>
-        <?php echo makePluslet(_("Guide Collections"), $guide_collection_list, "no_overflow"); ?>
+        <?php echo makePluslet(_("Add New Collection"), $add_collection_box , "no_overflow"); ?>
+        <?php echo makePluslet(_("Guide Collections List"), $guide_collection_list, "no_overflow"); ?>
     </div>
 
     <div class="pure-u-1-3">

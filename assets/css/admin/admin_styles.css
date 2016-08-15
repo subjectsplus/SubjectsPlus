@@ -2456,6 +2456,11 @@ div.feedback a:link {
 /* Collections Page */
 #add_collection {margin: 10px 0;}
 
+#guide-collection-form input, 
+#guide-collection-form textarea {width: 75%;}
+
+
+
 
 /* Pluslet ID 1 */
 .admin-prompt {margin: 0 5px 10px 0; text-align: right; font-size: 0.9em;}
