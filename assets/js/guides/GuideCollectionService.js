@@ -55,8 +55,8 @@ function guideCollectionService() {
                             "data-label='" + obj.title + "'" +
                             "data-description='" + obj.description + "'" +
                             " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                            "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +obj.title +
-                            "<a id='delete-collection-btn'><i class='fa fa-trash'></i></a></li>");
+                            "<a id='display-guides-btn' title='Edit'><i class='fa fa-edit'></i></a> " +obj.title +
+                            "<a id='delete-collection-btn' title='Delete'><i class='fa fa-trash'></i></a></li>");
                     });
 
                 }
