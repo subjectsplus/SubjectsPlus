@@ -2459,7 +2459,18 @@ div.feedback a:link {
 #guide-collection-form input, 
 #guide-collection-form textarea {width: 75%;}
 
+#guide-collection-list {
+    list-style-position: outside;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 !important;
+}
 
+#guide-collection-list li {margin: 0 0 2px 0;}
+
+#guide-collection-list a[id^="delete-"] {float:right;}
+
+#display-guides-btn i {margin: 0 8px 0 0;}
 
 
 /* Pluslet ID 1 */

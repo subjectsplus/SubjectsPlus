@@ -9,7 +9,7 @@ function guideCollectionService() {
     var myGuideCollection = {
 
         settings : {
-            collectionActionUrl : "/control/guides/helpers/collections.php?",
+            collectionActionUrl : "../../control/guides/helpers/collections.php?",
             sortableGuideList : $('ul#guide-list')
         },
         strings : {
@@ -55,8 +55,8 @@ function guideCollectionService() {
                             "data-label='" + obj.title + "'" +
                             "data-description='" + obj.description + "'" +
                             " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                            "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +
-                            "<a id='delete-collection-btn'><i class='fa fa-trash'></i></a> " +obj.title + "</li>");
+                            "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +obj.title +
+                            "<a id='delete-collection-btn'><i class='fa fa-trash'></i></a></li>");
                     });
 
                 }
@@ -86,8 +86,8 @@ function guideCollectionService() {
                         "data-label='" + obj.title + "'" +
                         "data-description='" + obj.description + "'" +
                         " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                        "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +
-                        "<a id='delete-collection-btn'> <i class='fa fa-trash'></i></a> " +obj.title + "</li>");
+                        "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +obj.title +
+                        "<a id='delete-collection-btn'> <i class='fa fa-trash'></i></a></li>");
 
                     $('#item_' + obj.collection_id).effect( "highlight" );
 
