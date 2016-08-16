@@ -9,7 +9,7 @@ function guideCollectionService() {
     var myGuideCollection = {
 
         settings : {
-            collectionActionUrl : "../../control/guides/helpers/collections.php?",
+            collectionActionUrl : "/control/guides/helpers/collections.php?",
             sortableGuideList : $('ul#guide-list')
         },
         strings : {
