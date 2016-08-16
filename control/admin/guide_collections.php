@@ -55,21 +55,21 @@ $guide_collection_viewport .= "<div id='collection-metadata' data-collection_id=
 $guide_collection_viewport .= "<h3 id='collection-title'></h3>";
 $guide_collection_viewport .= "<p id='collection-description'></p>";
 $guide_collection_viewport .= "<p id='collection-shortform'></p>";
-$guide_collection_viewport .= "<button id='edit-collection-metadata-btn'>Edit Collection</button>";
+$guide_collection_viewport .= "<button id='edit-collection-metadata-btn' class='pure-button pure-button-primary'>Edit Collection</button>";
 $guide_collection_viewport .= "</div>";
 
 
 $guide_collection_viewport .= "<div id='collection-metadata-editform' data-collection_id='' style='display:none;'>";
-$guide_collection_viewport .= "<input type='text' id='collection-title-input' name='collection-title-input'>";
-$guide_collection_viewport .= "<input type='text' id='collection-description-input' name='collection-description-input'/>";
-$guide_collection_viewport .= "<input type='text' id='collection-shortform-input' name='collection-shortform-input'/>";
-$guide_collection_viewport .= "<button id='update-collection-metadata-btn'>Save</button>";
+$guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-title-input' name='collection-title-input'>";
+$guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-description-input' name='collection-description-input'/>";
+$guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-shortform-input' name='collection-shortform-input'/>";
+$guide_collection_viewport .= "<button id='update-collection-metadata-btn' class='pure-button pure-button-primary'>Save</button>";
 $guide_collection_viewport .= "</div>";
 
 $guide_collection_viewport .= "</div>";
 
 $associated_guides_viewport = "<div id='guide-list-container'>";
-$associated_guides_viewport .= "<h3 id='guide-label'>Associated Guides</h3>";
+$associated_guides_viewport .= "<h4 id='guide-label'>Reorder Guides in this Collection</h4>";
 $associated_guides_viewport .= "<ul id='guide-list'></ul>";
 $associated_guides_viewport .= "</div>";
 
@@ -100,7 +100,7 @@ $associated_guides_viewport .= "</div>";
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Collection"), $guide_collection_viewport, "no_overflow"); ?>
+        <?php echo makePluslet(_("Collection Details"), $guide_collection_viewport, "no_overflow"); ?>
         <?php echo makePluslet(_("Associated Guides"), $associated_guides_viewport, "no_overflow"); ?>
     </div>
 

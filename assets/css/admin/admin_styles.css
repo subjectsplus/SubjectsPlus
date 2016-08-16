@@ -2459,7 +2459,7 @@ div.feedback a:link {
 #guide-collection-form input, 
 #guide-collection-form textarea {width: 75%;}
 
-#guide-collection-list {
+#guide-collection-list, #guide-search-results, #guide-list {
     list-style-position: outside;
     list-style-type: none;
     margin: 0;
@@ -2467,13 +2467,33 @@ div.feedback a:link {
 }
 
 
-#guide-collection-list a[id^="delete-"] {float:right;}
+#guide-collection-list a[id^="delete-"] {float:right; color: #333 !important;}
 
+#display-guides-btn {cursor: pointer;}
 #display-guides-btn i {margin: 0 8px 0 0;}
 
 #guide-collection-list li { background: #f6e3e7; margin: 0 0 2px 0; padding: 5px;}
 
 #guide-collection-list li:nth-child(odd) { background: transparent; }
+
+#guide-collection-list li.edit_current {background: #f1c40f;}
+
+#add-guide-input, .collection-metadata-edit-input {width: 75%; display:block; margin: 0.25em 0; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 1px 3px #ddd inset; padding: 0.5em 0.6em;}
+
+#guide-search-results li {padding: 2px 5px;}
+.add-guide-btn {cursor: pointer;}
+.add-guide-btn i, #guide-list i {margin: 0 8px 0 0;}
+
+.remove-guide-btn {float:right; }
+.remove-guide-btn i {margin: 0 !important; font-size: 18px;}
+
+#guide-label {margin: 0 0 10px 0;}
+
+#guide-list li {cursor: move; margin: 0 0 2px 0; padding: 5px; background: #f6e3e7;}
+#guide-list li:nth-child(odd) { background: transparent; }
+
+#collection-metadata-editform {margin:10px 0;}
+#update-collection-metadata-btn {margin: 10px 0 0 0;}
 
 
 /* Pluslet ID 1 */
