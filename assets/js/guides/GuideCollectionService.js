@@ -9,11 +9,11 @@ function guideCollectionService() {
     var myGuideCollection = {
 
         settings : {
-            collectionActionUrl : "/control/guides/helpers/collections.php?",
+            collectionActionUrl : "../../control/guides/helpers/collections.php?",
             sortableGuideList : $('ul#guide-list')
         },
         strings : {
-            removeGuideBtn: "<a class='remove-guide-btn'><i class='fa fa-remove'></i> </a>"
+            removeGuideBtn: "<a class='remove-guide-btn' title='Remove Guide from Collection'><i class='fa fa-trash fa-lg'></i> </a>"
         },
         bindUiActions : function() {
 
@@ -55,8 +55,8 @@ function guideCollectionService() {
                             "data-label='" + obj.title + "'" +
                             "data-description='" + obj.description + "'" +
                             " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                            "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +
-                            "<a id='delete-collection-btn'><i class='fa fa-trash'></i></a> " +obj.title + "</li>");
+                            "<a id='display-guides-btn' title='Edit'><i class='fa fa-pencil fa-lg'></i></a> " +obj.title +
+                            "<a id='delete-collection-btn' title='Delete'><i class='fa fa-trash'></i></a></li>");
                     });
 
                 }
@@ -86,8 +86,8 @@ function guideCollectionService() {
                         "data-label='" + obj.title + "'" +
                         "data-description='" + obj.description + "'" +
                         " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                        "<a id='display-guides-btn'><i class='fa fa-edit'></i></a> " +
-                        "<a id='delete-collection-btn'> <i class='fa fa-trash'></i></a> " +obj.title + "</li>");
+                        "<a id='display-guides-btn'><i class='fa fa-pencil fa-lg'></i></a> " +obj.title +
+                        "<a id='delete-collection-btn'> <i class='fa fa-trash'></i></a></li>");
 
                     $('#item_' + obj.collection_id).effect( "highlight" );
 
@@ -203,6 +203,8 @@ function guideCollectionService() {
                         }
                     });
 
+                    $('#collection-metadata-editform').hide();
+
                 });
 
             });
@@ -278,7 +280,7 @@ function guideCollectionService() {
                             //console.log(data);
 
                             $.each(data, function (index, obj) {
-                                var addBtn = "<a class='add-guide-btn'><i class='fa fa-plus'></i> </a>";
+                                var addBtn = "<a class='add-guide-btn' title='Add Guide to Collection'><i class='fa fa-plus-circle'></i> </a>";
 
                                 $('#guide-search-results').prepend('<li data-guide_id="' + obj.id + '">' + addBtn + obj.label + '</li>');
 
@@ -299,6 +301,12 @@ function guideCollectionService() {
                 var title         = $(this).parent('li').attr('data-label');
                 var description   = $(this).parent('li').attr('data-description');
                 var shortform     = $(this).parent('li').attr('data-shortform');
+
+                
+                //clear/highlight current edit selection
+                var currentEdit = $(this).parent('li');
+                $('#guide-collection-list li').removeClass('edit_current');
+                currentEdit.addClass("edit_current");
 
 
                 //clear guide list
