@@ -126,7 +126,7 @@ if ($staffmem[0][8] != "") {
             $linky = "guide.php?subject=" . $mysubs[2];
         }
         */
-        $linky = "guide.php?subject=" . $mysubs[2];
+        $linky = "/subjects/guide.php?subject=" . $mysubs[2];
         //end hotfix
 
         // li subject listing
