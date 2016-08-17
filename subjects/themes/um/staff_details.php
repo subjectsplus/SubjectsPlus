@@ -115,11 +115,19 @@ if ($staffmem[0][8] != "") {
 
     foreach ($r as $mysubs) {
 
+        //hotfix-staff-link branch - 8-17-2016
+        /*
+         * @TODO fix the path
+         */
+        /*
         if ($mod_rewrite == 1) {
             $linky = $mysubs[2];
         } else {
             $linky = "guide.php?subject=" . $mysubs[2];
         }
+        */
+        $linky = "guide.php?subject=" . $mysubs[2];
+        //end hotfix
 
         // li subject listing
         $li_subject_listing .= "<li><a href=\"$linky\">$mysubs[1]</a></li>";
