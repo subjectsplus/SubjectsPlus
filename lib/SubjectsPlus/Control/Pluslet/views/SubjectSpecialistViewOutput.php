@@ -20,7 +20,7 @@
         $(subjectSpecialists).children('.box_settings, .titlebar').remove();
     }
 
-
+/*
     var subjectSpecialistPlusletId = $('div[name="SubjectSpecialist"]').attr('id');
     var content = $('#' + subjectSpecialistPlusletId).html();
 
@@ -42,6 +42,6 @@
 
     var pluslet_body = $('#' + subjectSpecialistPlusletId).find('.pluslet_body');
     $(pluslet_body).html(newContent);
-
+*/
 
 </script>
