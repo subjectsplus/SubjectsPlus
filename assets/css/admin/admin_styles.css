@@ -1902,7 +1902,7 @@ h4.toc-heading {margin: 6px 0;}
 .subjectSpecialistPluslet h4 {margin:0 0 10px 0 !important;}
 
 .staff-details {list-style-type: none; margin: 0; padding: 0 !important;}
-.staff-details li {margin: 0 0 2px 0; }
+.staff-details li {margin: 0 0 2px 0; word-wrap: initial;}
 
 .staff-image {width: 90px; float:left; display: inline-block; min-height:125px;}
 .staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
@@ -1916,7 +1916,28 @@ h4.toc-heading {margin: 6px 0;}
   width: calc(100% - 90px);
 }
 
-.staff-social {padding: .2em 0.3em .2em 0; font-size: 26px; display: inline-block;}
+.staff-social {padding: .2em 0.3em .2em 0; font-size: 20px; display: inline-block;}
+
+
+.subject-specialists {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.specialist-photo {
+    display: inline-block;
+    padding: 0 15px 0 0;
+}
+
+.specialist-info {
+    display: inline-block;   
+    vertical-align: top;
+    width: -moz-calc(100% - 100px);
+    width: -webkit-calc(100% - 100px);
+    width: calc(100% - 100px); 
+}
+
+.specialist-info h4 {margin: 0;}
 
 
 /*  Subject Specialist - OLD */
