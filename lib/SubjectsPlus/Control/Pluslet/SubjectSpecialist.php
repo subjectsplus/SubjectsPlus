@@ -114,6 +114,9 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         for($i = 0; $i < count($show_keys); ++$i) {
             $key = 'show'.$show_keys[$i].$staff_id;
 
+            if(!isset($data) && $data == null) {
+                $data = array();
+            }
             $value = "";
             if( ( array_key_exists($key, $data) ) && ($key != null) ) {
                 if(isset($value)) {
