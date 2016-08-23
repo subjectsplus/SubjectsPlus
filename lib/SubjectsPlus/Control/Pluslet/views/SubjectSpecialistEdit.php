@@ -8,7 +8,17 @@
 
 ?>
 
+<?php
+    $settings = array();
+    foreach($this->_editors as $staff):
+        $settings = $this->getSubjectSpeicalistSettings($staff, $this->_array_keys, $this->_data_array);
+        $this->setSubjectSpecialist($settings);
+?>
+
+
 <div class="subject-specialist-form-container">
+
+    <textarea id="target"></textarea>
 
     <h4><?php echo $this->fullname; ?></h4>
     <input type="text" name="SubjectSpecialist-extra-staffId<?php echo $this->staff_id; ?>" value="<?php echo $this->staff_id; ?>" style="display:none;">
@@ -34,62 +44,49 @@
     <label style="display:inline;"> Show Phone</label>
     <br>
 
-    <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showFacebook<?php echo $this->staff_id; ?>" value="<?php echo $this->showFacebook; ?>" />
-    <label style="display:inline;"> Show Facebook</label>
-    <br>
 
-    <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showTwitter<?php echo $this->staff_id; ?>" value="<?php echo $this->showTwitter; ?>" />
-    <label style="display:inline;"> Show Twitter</label>
-    <br>
+    <?php if($this->facebook == "") { ?>
+        <input type="checkbox" name="SubjectSpecialist-extra-showFacebook<?php echo $this->staff_id; ?>" value="No" style="display:none;" />
+    <?php } else { ?>
+        <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showFacebook<?php echo $this->staff_id; ?>" value="<?php echo $this->showFacebook; ?>" />
+        <label style="display:inline;"> Show Facebook</label>
+        <br>
+    <?php } ?>
 
-    <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showPinterest<?php echo $this->staff_id; ?>" value="<?php echo $this->showPinterest; ?>" />
-    <label style="display:inline;"> Show Pinterest</label>
-    <br>
+    <?php if($this->twitter == "") { ?>
+        <input type="checkbox" name="SubjectSpecialist-extra-showTwitter<?php echo $this->staff_id; ?>" value="No" style="display:none;" />
+    <?php } else { ?>
+        <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showTwitter<?php echo $this->staff_id; ?>" value="<?php echo $this->showTwitter; ?>" />
+        <label style="display:inline;"> Show Twitter</label>
+        <br>
+    <?php } ?>
 
-    <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showInstagram<?php echo $this->staff_id; ?>" value="<?php echo $this->showInstagram; ?>" />
-    <label style="display:inline;"> Show Instagram</label>
+    <?php if($this->pinterest == "") { ?>
+        <input type="checkbox" name="SubjectSpecialist-extra-showPinterest<?php echo $this->staff_id; ?>" value="No" style="display:none;" />
+    <?php } else { ?>
+        <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showPinterest<?php echo $this->staff_id; ?>" value="<?php echo $this->showPinterest; ?>" />
+        <label style="display:inline;"> Show Pinterest</label>
+        <br>
+    <?php } ?>
+
+    <?php if($this->instagram == "") { ?>
+        <input type="checkbox" name="SubjectSpecialist-extra-showInstagram<?php echo $this->staff_id; ?>" value="No" style="display:none;" />
+    <?php } else { ?>
+        <input class="checkbox_ss" type="checkbox" name="SubjectSpecialist-extra-showInstagram<?php echo $this->staff_id; ?>" value="<?php echo $this->showInstagram; ?>" />
+        <label style="display:inline;"> Show Instagram</label>
+    <?php } ?>
+
+
+
+
+
 
 </div>
 
-
+<?php endforeach; ?>
 
 
 <script>
-
-
-
-    $(document).ready(function(){
-        $("textarea[name=editor1]").hide();
-
-
-        /*
-         CKEDITOR.replace( 'editor1', {
-         height: 250
-         } );
-
-         */
-        $(".checkbox_ss").each(function() {
-
-            if( $(this, "input").val() == "Yes") {
-
-                $(this, "input").prop("checked", true);
-            }
-        });
-
-
-        $(".checkbox_ss").on('click', function() {
-            //var value = $(this).attr('value');
-
-            if( ($(this).attr('value') == "No") || $(this).attr('value') == "" ) {
-                $(this).attr('value', 'Yes');
-                $(this, "input").prop("checked", true);
-            } else {
-                $(this).attr('value', 'No');
-                $(this, "input").prop("checked", false);
-            }
-        });
-
-    });
-
-
+    var ss = subjectSpecialist();
+    ss.init();
 </script>

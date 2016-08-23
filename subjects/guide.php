@@ -424,14 +424,15 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('./includes/js/tabDropdown.js'); ?>
 <?php include('./includes/js/jquery.scrollTo.js'); ?>
 <?php include('./includes/js/autoComplete.js'); ?>
-<?php include('./includes/js/CloneView.js'); ?>
+<?php include('./includes/js/cloneView.js'); ?>
+<?php include('./includes/js/subjectSpecialistView.js'); ?>
 
 hash.init();
 track.init();
 tabDropdown.init();
 autoComplete.init();
-cloneView().init();
-
+cloneView.init();
+subjectSpecialistView.init();
 
 
 </script>
