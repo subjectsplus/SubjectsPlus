@@ -18,8 +18,6 @@
 
 <div class="subject-specialist-form-container">
 
-    <textarea id="target"></textarea>
-
     <h4><?php echo $this->fullname; ?></h4>
     <input type="text" name="SubjectSpecialist-extra-staffId<?php echo $this->staff_id; ?>" value="<?php echo $this->staff_id; ?>" style="display:none;">
     <br>

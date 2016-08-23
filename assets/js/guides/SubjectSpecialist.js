@@ -6,7 +6,7 @@ function subjectSpecialist() {
         strings: {},
         bindUiActions: function () {
             mySubjectSpecialist.clickCheckboxes();
-            mySubjectSpecialist.isNumberKey();
+
         },
         init: function () {
             mySubjectSpecialist.bindUiActions();
@@ -65,12 +65,6 @@ function subjectSpecialist() {
             var plusletId = $(content).parents('id');
             console.log(plusletId);
 
-        },
-
-        isNumberKey: function () {
-            $( "#target" ).keypress(function() {
-                console.log( "Handler for .keypress() called." );
-            });
         }
     };
 
