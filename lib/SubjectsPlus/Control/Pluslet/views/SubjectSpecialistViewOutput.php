@@ -21,27 +21,6 @@
     }
 
 
-    var subjectSpecialistPlusletId = $('div[name="SubjectSpecialist"]').attr('id');
-    var content = $('#' + subjectSpecialistPlusletId).html();
-
-    var profiles = $(content).find('.subjectSpecialistPluslet');
-
-
-
-    $(profiles).each(function() {
-
-        $('.subjectSpecialistPluslet:hidden').remove();
-
-    });
-
-    var newContent = '';
-    newContent += $(profiles).html();
-    newContent += $('.pluslet_body_content').html();
-
-
-
-    var pluslet_body = $('#' + subjectSpecialistPlusletId).find('.pluslet_body');
-    $(pluslet_body).html(newContent);
 
 
 </script>
