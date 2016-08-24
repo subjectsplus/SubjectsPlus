@@ -8,7 +8,7 @@ var subjectSpecialistView = {
         subjectSpecialistView.bindUiActions();
         subjectSpecialistView.removeEditor();
         subjectSpecialistView.removeItems();
-        subjectSpecialistView.moveBodyContentToBottom();
+
     },
 
     removeItems : function () {
@@ -16,9 +16,9 @@ var subjectSpecialistView = {
                $('div[data-show-photo="No"]').siblings('.specialist-info').removeClass('show-photo-full');
                $('div[data-show-photo="No"]').remove();
         }
-        $('.staff-content[data-show-title="No"]').remove();
-        $('.staff-content[data-show-email="No"]').remove();
-        $('.staff-content[data-show-phone="No"]').remove();
+        $('li[data-show-title="No"]').remove();
+        $('li[data-show-phone="No"]').remove();
+        $('li[data-show-email="No"]').remove();
         $('.staff-social[data-show-facebook="No"]').remove();
         $('.staff-social[data-show-twitter="No"]').remove();
         $('.staff-social[data-show-pinterest="No"]').remove();
@@ -27,12 +27,9 @@ var subjectSpecialistView = {
 
     removeEditor : function () {
         if ( $('h4[data-show-name="No"]'))  {
-            $('h4[data-show-name="No"]').parent('.subject-specialists').remove();
+            $('h4[data-show-name="No"]').parents('.subject-specialists').remove();
         }
     },
 
-    moveBodyContentToBottom : function () {
-        var content = ($('#subject-specialist-content'));
-        $('div[name="SubjectSpecialist"]').children('.pluslet_body').prepend(content);
-    }
+
 };

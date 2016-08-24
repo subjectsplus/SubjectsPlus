@@ -32,15 +32,15 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
     protected function onViewOutput()
     {
-        $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialist.php' );
+        $this->_body = $this->loadHtml(__DIR__ . '/views/SubjectSpecialist.php' );
     }
 
 
     protected function onEditOutput() {
         //get ckEditor
-       $this->_ckEditor = $this->getCkEditor();
+        $this->_ckEditor = $this->getCkEditor();
 
-        $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistEdit.php' );
+        $this->_body = $this->loadHtml(__DIR__ . '/views/SubjectSpecialistEdit.php' );
     }
 
 
@@ -157,7 +157,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
     protected function getGuideEditors($subject_id) {
         $querier = new Querier();
-        $qs = "SELECT s.staff_id, s.fname, s.lname, s.email, s.title, s.tel, s.social_media
+        $qs = "SELECT DISTINCT(s.staff_id), s.fname, s.lname, s.email, s.title, s.tel, s.social_media
                     FROM staff s, staff_subject ss
                     WHERE s.staff_id = ss.staff_id
                     AND ss.subject_id = " . $subject_id . "
