@@ -1,4 +1,4 @@
-function subjectSpecialist(pluslet_id) {
+function subjectSpecialist() {
 
     var mySubjectSpecialist = {
 
@@ -7,6 +7,7 @@ function subjectSpecialist(pluslet_id) {
         bindUiActions: function () {
             mySubjectSpecialist.clickCheckboxes();
 
+
         },
         init: function () {
             mySubjectSpecialist.bindUiActions();
@@ -14,7 +15,7 @@ function subjectSpecialist(pluslet_id) {
             mySubjectSpecialist.removeEditor();
             mySubjectSpecialist.removeItems();
             mySubjectSpecialist.hideTextarea();
-            mySubjectSpecialist.moveBodyContentToBottom();
+
         },
 
         hideTextarea : function () {
@@ -60,15 +61,9 @@ function subjectSpecialist(pluslet_id) {
                     $(this, "input").prop("checked", false);
                 }
             });
-        },
-
-        moveBodyContentToBottom : function () {
-            var content = $('.pluslet_body').find('#subject-specialist-content');
-
-            var plusletId = $(content).parents('id');
-            console.log(plusletId);
-
         }
+
+
 
 };
 

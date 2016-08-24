@@ -38,7 +38,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
     protected function onEditOutput() {
         //get ckEditor
-       // $this->_ckEditor = $this->getCkEditor();
+       $this->_ckEditor = $this->getCkEditor();
 
         $this->_body .= $this->loadHtml(__DIR__ . '/views/SubjectSpecialistEdit.php' );
     }

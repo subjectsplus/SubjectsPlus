@@ -217,7 +217,7 @@ function saveSetup() {
 
 			case "SubjectSpecialist":
 
-				//pbody = CKEDITOR.instances.editor1.getData();
+				pbody = CKEDITOR.instances['editor1'].getData();
 
 				pitem_type = item_type[2];
 				var extra = {};

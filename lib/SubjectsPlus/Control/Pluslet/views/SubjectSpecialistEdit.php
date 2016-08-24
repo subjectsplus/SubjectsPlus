@@ -7,6 +7,7 @@
  */
 
 ?>
+<div id="subject-specialist-form-container">
 
 <?php
     $settings = array();
@@ -16,7 +17,7 @@
 ?>
 
 
-<div class="subject-specialist-form-container">
+<div class="subject-specialist-form">
 
     <h4><?php echo $this->fullname; ?></h4>
     <input type="text" name="SubjectSpecialist-extra-staffId<?php echo $this->staff_id; ?>" value="<?php echo $this->staff_id; ?>" style="display:none;">
@@ -83,8 +84,25 @@
 
 <?php endforeach; ?>
 
+    <textarea id="editor1" name="editor1"></textarea>
 
-<script>
-    var ss = subjectSpecialist();
-    ss.init();
-</script>
+
+    <script>
+
+        $(document).ready(function() {
+
+
+            var ss = subjectSpecialist();
+            ss.init();
+
+
+
+            if(CKEDITOR.instances['editor1']) {
+                CKEDITOR.instances['editor1'].setData('<?php echo $this->_body; ?>');
+            }
+
+        });
+
+
+
+    </script>
