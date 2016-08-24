@@ -1,4 +1,4 @@
-function subjectSpecialist() {
+function subjectSpecialist(pluslet_id) {
 
     var mySubjectSpecialist = {
 
@@ -66,7 +66,8 @@ function subjectSpecialist() {
             console.log(plusletId);
 
         }
-    };
+
+};
 
     return mySubjectSpecialist;
 }
