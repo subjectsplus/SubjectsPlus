@@ -18,8 +18,8 @@
 
 <div class="subject-specialists" data-staff-id="<?php echo $this->staff_id; ?>">
     
-    <div class="specialist-photo" data-show-photo="<?php echo $this->showPhoto; ?>" ><img src="<?php echo $this->img_url; ?>" /> </div>
-    <div class="specialist-info">
+    <div class="specialist-photo" data-show-photo="<?php echo $this->showPhoto; ?>" ><img src="<?php echo $this->img_url;?>" /> </div>
+    <div class="specialist-info show-photo-full">
         <h4 data-show-name="<?php echo $this->showName; ?>"><?php echo $this->fullname; ?></h4>
         <ul class="staff-details">
             <li data-show-title="<?php echo $this->showTitle; ?>"><?php echo $this->title; ?></li>
