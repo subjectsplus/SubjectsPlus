@@ -50,3 +50,9 @@
     </div>
 </div>
 
+
+
+<script>
+    var ss = subjectSpecialist();
+    ss.init();
+</script>

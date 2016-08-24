@@ -88,21 +88,10 @@
 
 
     <script>
+        var ss = subjectSpecialist();
+        ss.init();
 
-        $(document).ready(function() {
-
-
-            var ss = subjectSpecialist();
-            ss.init();
-
-
-
-            if(CKEDITOR.instances['editor1']) {
-                CKEDITOR.instances['editor1'].setData('<?php echo $this->_body; ?>');
-            }
-
-        });
-
-
-
+        if(CKEDITOR.instances['editor1']) {
+            CKEDITOR.instances['editor1'].setData('<?php echo $this->_body; ?>');
+        }
     </script>

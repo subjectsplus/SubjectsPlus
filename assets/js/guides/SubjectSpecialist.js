@@ -6,7 +6,7 @@ function subjectSpecialist() {
         strings: {},
         bindUiActions: function () {
             mySubjectSpecialist.clickCheckboxes();
-
+            //mySubjectSpecialist.cleanupMarkupOnSave();
 
         },
         init: function () {
@@ -23,7 +23,7 @@ function subjectSpecialist() {
         },
 
         removeItems : function () {            
-            if ($('div[data-show-photo="No"]')) {
+            if( $('div[data-show-photo="No"]') ) {
                $('div[data-show-photo="No"]').siblings('.specialist-info').removeClass('show-photo-full');
                $('div[data-show-photo="No"]').remove();
             }
@@ -38,7 +38,7 @@ function subjectSpecialist() {
 
         removeEditor : function () {
             if ( $('h4[data-show-name="No"]'))  {
-              $('h4[data-show-name="No"]').parents('.subject-specialists').remove();
+                $('h4[data-show-name="No"]').parents('.subject-specialists').remove();
             }
         },
 
@@ -52,7 +52,6 @@ function subjectSpecialist() {
 
         clickCheckboxes : function () {
             $('.checkbox_ss').on('click', function() {
-
                 if( ($(this).attr('value') == "No") || $(this).attr('value') == "" ) {
                     $(this).attr('value', 'Yes');
                     $(this, "input").prop("checked", true);
@@ -62,7 +61,6 @@ function subjectSpecialist() {
                 }
             });
         }
-
 
 
 };
