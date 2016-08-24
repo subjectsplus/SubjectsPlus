@@ -21,8 +21,11 @@ function subjectSpecialist() {
             $("textarea[name=editor1]").hide();
         },
 
-        removeItems : function () {
-            $('div[data-show-photo="No"]').remove();
+        removeItems : function () {            
+            if ($('div[data-show-photo="No"]')) {
+               $('div[data-show-photo="No"]').siblings('.specialist-info').removeClass('show-photo-full');
+               $('div[data-show-photo="No"]').remove();
+            }
             $('.staff-content[data-show-title="No"]').remove();
             $('.staff-content[data-show-email="No"]').remove();
             $('.staff-content[data-show-phone="No"]').remove();
