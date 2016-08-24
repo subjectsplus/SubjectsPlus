@@ -45,3 +45,10 @@
 
 </div>
 
+<script>
+    var pluslet_id = <?php echo $this->_pluslet_id; ?>;
+    var ss = new subjectSpecialist(pluslet_id);
+    ss.init();
+
+    $('#subject-specialist-content').html($('#subject-specialist-content').children());
+</script>
