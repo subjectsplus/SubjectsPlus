@@ -12,5 +12,9 @@
 	// Initialize the guide interface 
 	var myGuideSetup = guideSetup();
 	myGuideSetup.init();
+
+
+    var bookList = bookList();
+    bookList.init();
 </script>
 </html>

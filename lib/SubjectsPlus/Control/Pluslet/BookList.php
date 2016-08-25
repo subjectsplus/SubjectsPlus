@@ -19,7 +19,7 @@ class Pluslet_BookList extends Pluslet
     public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
-        $this->_type = "BOOKLIST";
+        $this->_type = "BookList";
         $this->_pluslet_id = $pluslet_id;
         $this->_subject_id = $subject_id;
         $this->_isclone = $isclone;
