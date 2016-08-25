@@ -8,11 +8,10 @@
 ?>
 
 
-<div id="subject-specialist-content" data-pluslet-id="<?php echo $this->_pluslet_id; ?>">
+<div class="subject-specialist-content" data-pluslet-id="<?php echo $this->_pluslet_id; ?>">
 <?php
     $settings = array();
     foreach($this->_editors as $staff):
-
         $settings = $this->getSubjectSpeicalistSettings($staff, $this->_array_keys, $this->_data_array);
         $this->setSubjectSpecialist($settings);
 ?>
@@ -45,7 +44,7 @@
     <?php endforeach; ?>
 
 
-    <div>
+    <div class="subject-specialist-description">
         <?php echo $this->_body; ?>
     </div>
 </div>

@@ -1299,7 +1299,7 @@ h4.table-of-contents-header a:hover {text-decoration: underline;}
     border-bottom: 1px dashed #CCC;
 }
 
-#subject-specialist-content div:last-of-type {border: none;}
+.subject-specialist-content div:last-of-type {border: none;}
 
 .subject-specialist-description {border-top: 1px dashed #CCC; padding-top: 10px;}
 
@@ -1316,7 +1316,7 @@ h4.table-of-contents-header a:hover {text-decoration: underline;}
 
 .specialist-info h4 {margin: 0; font-weight: bold;}
 
-#subject-specialist-content .specialist-info .staff-details li {white-space: inherit !important; word-wrap: break-word;}
+.subject-specialist-content .specialist-info .staff-details li {white-space: inherit !important; word-wrap: break-word;}
 
 .show-photo-full {
     width: -moz-calc(100% - 100px);

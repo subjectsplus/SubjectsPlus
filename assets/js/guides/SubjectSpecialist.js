@@ -22,7 +22,11 @@ function subjectSpecialist() {
             $("textarea[name=editor1]").hide();
         },
 
-        removeItems : function () {            
+        removeItems : function () {
+
+            var pluslet_id = $('.subject-specialist-content').attr('data-pluslet-id');
+            //console.log(pluslet_id);
+
             if( $('div[data-show-photo="No"]') ) {
                $('div[data-show-photo="No"]').siblings('.specialist-info').removeClass('show-photo-full');
                $('div[data-show-photo="No"]').remove();
@@ -34,6 +38,17 @@ function subjectSpecialist() {
             $('.staff-social[data-show-twitter="No"]').remove();
             $('.staff-social[data-show-pinterest="No"]').remove();
             $('.staff-social[data-show-instagram="No"]').remove();
+
+            //remove .subject-specialist-description div if empty so that style applies to last child
+            var descDiv = $('.subject-specialist-content').attr('data-pluslet-id', pluslet_id).find('.subject-specialist-description');
+            $.each(descDiv, function() {
+
+                if( !$.trim( $(this).html() )) {
+                    console.log( $(this).html() );
+                    $(this).remove();
+                }
+            });
+
         },
 
         removeEditor : function () {

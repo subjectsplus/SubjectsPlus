@@ -1926,7 +1926,7 @@ h4.toc-heading {margin: 6px 0;}
     border-bottom: 1px dashed #CCC;
 }
 
-#subject-specialist-content div:last-of-type {border: none;}
+.subject-specialist-content div:last-of-type {border: none;}
 
 .specialist-photo {
     display: inline-block;
