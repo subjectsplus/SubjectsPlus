@@ -7,7 +7,7 @@
  */?>
 
 
-        <textarea id="target" rows="4" cols="30" name="BOOKLIST-extra-isbn"
+        <textarea id="target" rows="4" cols="30" name="BookList-extra-isbn"
                   placeholder="Please insert a comma-separated ISBNs list"><?php
                 if ($this->_extra != null)
                     {
@@ -16,7 +16,3 @@
 
             ?></textarea>
 
-<script>
-    var bookList = bookList();
-    bookList.init();
-</script>

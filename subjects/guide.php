@@ -425,6 +425,7 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('./includes/js/jquery.scrollTo.js'); ?>
 <?php include('./includes/js/autoComplete.js'); ?>
 <?php include('./includes/js/CloneView.js'); ?>
+<?php include('../assets/js/guides/BookList.js'); ?>
 
 hash.init();
 track.init();
@@ -432,7 +433,12 @@ tabDropdown.init();
 autoComplete.init();
 cloneView().init();
 
+$(document).ready(function() {
 
+    var bookList = bookList();
+    bookList.init();
+
+});
 
 </script>
 

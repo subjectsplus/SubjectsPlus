@@ -1,5 +1,7 @@
 function bookList() {
 
+    "use strict";
+
     var myBookList = {
 
         settings: {},
@@ -26,6 +28,7 @@ function bookList() {
         isNumberKey: function ()
         {
             $('#target').keypress(function(evt) {
+                console.log('key')
                 var result = true;
                 var charCode = (evt.which) ? evt.which : event.keyCode;
                 if (charCode < 48 || charCode > 57)
@@ -52,7 +55,7 @@ function bookList() {
 
                 myBookList.getUrl(url).then(function(response) {
                     var obj = $.parseJSON( response );
-                    var container = document.getElementById ("container");
+                    var container = document.getElementById('booklist-container');
 
                     if (obj.totalItems != 0){
 
@@ -112,6 +115,7 @@ function bookList() {
                         container.appendChild(divBook);
                         $("#"+checkNumberMessageId).html("Please check this number: " + isbn);
                     }
+
 
                 }, function(error) {
                     console.error("Failed!", error);
