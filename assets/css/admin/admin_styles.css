@@ -1921,8 +1921,12 @@ h4.toc-heading {margin: 6px 0;}
 
 .subject-specialists {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #CCC;
 }
+
+#subject-specialist-content div:last-of-type {border: none;}
 
 .specialist-photo {
     display: inline-block;
@@ -1941,6 +1945,8 @@ h4.toc-heading {margin: 6px 0;}
 }
 
 .specialist-info h4 {margin: 0;}
+
+.subject-specialist-description {border-top: 1px dashed #CCC; padding-top: 10px;}
 
 
 /*  Subject Specialist - OLD */

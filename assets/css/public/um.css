@@ -1299,7 +1299,9 @@ h4.table-of-contents-header a:hover {text-decoration: underline;}
     border-bottom: 1px dashed #CCC;
 }
 
-.subject-specialists:last-of-type {border-bottom: none;}
+#subject-specialist-content div:last-of-type {border: none;}
+
+.subject-specialist-description {border-top: 1px dashed #CCC; padding-top: 10px;}
 
 .specialist-photo {
     display: inline-block;
