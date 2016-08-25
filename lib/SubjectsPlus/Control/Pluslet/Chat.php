@@ -31,11 +31,27 @@ class Pluslet_Chat extends Pluslet
      */
     protected function onViewOutput()
     {
-        //$this->setJid();
-        //$this->setSrc();
-        $this->setWidth("100%");
-        $this->setHeight("350px");
 
+        //must be set these in config.php
+        global $chat_jid;
+        global $chat_src;
+        global $chat_height;
+        global $chat_width;
+
+        if( empty($chat_jid) || empty($chat_src) ) {
+
+            $flashMessge =  "<p>Please have your SubjectsPlus Admin add the settings for your institution's Chat account.</p>";
+            $flashMessge .= "<p>The file is located at /control/includes/config.php</p>";
+
+            $this->_body = $flashMessge;
+
+        } else {
+
+            $this->setJid($chat_jid);
+            $this->setSrc($chat_src);
+            $this->setWidth($chat_width);
+            $this->setHeight($chat_height);
+        }
 
         $output = $this->loadHtml(__DIR__ . '/views/ChatView.php');
 
