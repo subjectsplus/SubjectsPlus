@@ -20,4 +20,7 @@
         $(subjectSpecialists).children('.box_settings, .titlebar').remove();
     }
 
+
+
+
 </script>

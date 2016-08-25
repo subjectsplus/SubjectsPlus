@@ -1,10 +1,10 @@
 /**
  * Object that encompasses the functionality of the find box search
  * in the 'Find Boxes' flyout.
- * 
+ *
  * findBoxSearch
  * @author little9 (Jamie Little)
- * 
+ *
  */
 /*jslint browser: true*/
 /*global $, jQuery, alert*/
@@ -20,7 +20,10 @@ function findBoxSearch() {
 			findBoxSearchResults: $('.findbox-searchresults'),
 			autoCompleteUrl: '../includes/autocomplete_data.php?collection=pluslet&term=',
 			closeButton : $(".close-settings"),
-			allGuidesAutoCompleteUrl : "../includes/autocomplete_data.php?collection=all_guides&term="
+			allGuidesAutoCompleteUrl : "../includes/autocomplete_data.php?collection=all_guides&term=",
+			currentGuideAutoCompleteUrl : "../includes/autocomplete_data.php?collection=guide&term=",
+			myplusletsAutoCompleteUrl : "../includes/autocomplete_data.php?collection=mypluslets&term="
+
 		},
 
 		/**
@@ -63,44 +66,61 @@ function findBoxSearch() {
 		 *         found.
 		 */
 		search: function (search_term) {
+
+			var searchScope = $("input[type='radio'][name='search_scope']:checked").val();
+			var autocompleteUrl;
+
+			if(searchScope == 'current_guide') {
+
+				var subject_id = $('#guide-parent-wrap').attr('data-subject-id');
+				autocompleteUrl = "../includes/autocomplete_data.php?subject_id=" + subject_id + "&collection=current_guide&term=";
+
+			} else if (searchScope == 'my_pluslets') {
+				var staff_id = $('#guide-parent-wrap').attr('data-staff-id');
+				autocompleteUrl = "../includes/autocomplete_data.php?collection=my_pluslets&staff_id=" + staff_id + "&term=";
+
+			} else {
+				autocompleteUrl = myFindBoxSearch.settings.autoCompleteUrl;
+			}
+
+
 			$.get(
-					myFindBoxSearch.settings.autoCompleteUrl
-					+ search_term,
-					function (data) {
+				autocompleteUrl
+				+ search_term,
+				function (data) {
 
 
-						if (data.length != 0) {
+					if (data.length != 0) {
 
-							for (var i = 0; i < data.length; i++) {
+						for (var i = 0; i < data.length; i++) {
 
-								//console.log(data);
+							if (data[i]['content_type'] == "Pluslet") {
 
-								if (data[i]['content_type'] == "Pluslet") {
+								var listItem = "<li data-pluslet-type='" +data[i].type + "' data-pluslet-id='"
+									+ data[i].id
+									+ "' class=\"pluslet-listing\">"
+									+ "<div class=\"pure-g\">"
+									+ "<div class=\"pure-u-3-5 box-search-label\" title=\""
+									+ data[i].label
+									+ "\">"
+									+ data[i].label
+									+ "</div>" + myFindBoxSearch.strings.findBoxSearchButtons
+									+ " <span class='tooltip_wrapper'><i class='fa fa-question-circle'></i> <span class='tooltip'>" + data[i].parent +"</span></span>"
+									+ " </div></div></li>";
 
-								    var listItem = "<li data-pluslet-type='" +data[i].type + "' data-pluslet-id='"
-										+ data[i].id
-										+ "' class=\"pluslet-listing\">"
-										+ "<div class=\"pure-g\">"
-										+ "<div class=\"pure-u-3-5 box-search-label\" title=\""
-										+ data[i].label
-										+ "\">"
-										+ data[i].label
-										+ "</div>" + myFindBoxSearch.strings.findBoxSearchButtons
-										+ " <span class='tooltip_wrapper'><i class='fa fa-question-circle'></i> <span class='tooltip'>" + data[i].parent +"</span></span>"
-										+ " </div></div></li>";
-									
-										myFindBoxSearch.settings.findBoxSearchResults.append(listItem);
-										//console.log();
 
-								    
+								if(data[i].type != "Clone") {
+									myFindBoxSearch.settings.findBoxSearchResults.append(listItem);
 								}
 
 							}
-						} else {
-							myFindBoxSearch.settings.findBoxSearchResults
-								.html("<li><span class=\"no-box-results\">No Results</span></li>");
+
 						}
-					});
+					} else {
+						myFindBoxSearch.settings.findBoxSearchResults
+							.html("<li><span class=\"no-box-results\">No Results</span></li>");
+					}
+				});
 
 		},
 
@@ -122,11 +142,11 @@ function findBoxSearch() {
 				$(this).parent(".box_settings").hide();
 			});
 		}, loadCloneMenu : function() {
-			
-			$.get(myFindBoxSearch.settings.allGuidesAutoCompleteUrl, function(data) { 
+
+			$.get(myFindBoxSearch.settings.allGuidesAutoCompleteUrl, function(data) {
 
 				for(var i = 0; i<data.length;i++) {
-			        var subject_id = data[i].id;
+					var subject_id = data[i].id;
 					$('.guide-list').append("<option data-subject-id='" + subject_id + "' class=\"guide-listing\">" + data[i].label + "</li>");
 
 				}
@@ -139,18 +159,21 @@ function findBoxSearch() {
 				$('.pluslet-list').empty();
 
 				$.get("../includes/autocomplete_data.php?collection=guide&subject_id=" + subject_id + " &term="
-						,function(data) {
+					,function(data) {
 
 						for(var i = 0; i<data.length;i++) {
-							$('.pluslet-list').append("<li data-pluslet-type='" +data[i].type + "' data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><div class=\"pure-g\"><div class=\"pure-u-3-5 box-search-label\" title=\""+ data[i].label + "\">"  + data[i].label + "</div><div class=\"pure-u-2-5\" style=\"text-align:right;\"><button class=\"clone-button pure-button pure-button-secondary\">Link</button>&nbsp;<button class=\"copy-button pure-button pure-button-secondary\">Copy</button></div></div></li>");
-				
+
+							if(data[i].type != "Clone") {
+								$('.pluslet-list').append("<li data-pluslet-type='" +data[i].type + "' data-pluslet-id='" + data[i].id + "' class=\"pluslet-listing\"><div class=\"pure-g\"><div class=\"pure-u-3-5 box-search-label\" title=\""+ data[i].label + "\">"  + data[i].label + "</div><div class=\"pure-u-2-5\" style=\"text-align:right;\"><button class=\"clone-button pure-button pure-button-secondary\">Link</button>&nbsp;<button class=\"copy-button pure-button pure-button-secondary\">Copy</button></div></div></li>");
+							}
+
 						}
-				});	
-				
+					});
+
 			});
 		}
 
-		
+
 
 	};
 

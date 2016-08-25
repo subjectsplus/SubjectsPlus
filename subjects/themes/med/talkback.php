@@ -501,9 +501,9 @@ include("includes/header_med.php");
 		<div class="breather">
 				<?php print $feedback . $stk_message; ?>
 
-				<?php print _("<p>Please use this page <strong>make a comment or suggestion</strong> about library services.</p>
+				<?php print _("<p>Please use this page to write comments or make suggestions about Library services, resources, and facilities.</p>
  
-        <p>We will post your suggestion as well as a response.</p>
+        <p>Suitable comments will be posted along with Library responses.</p>
 
         <p class=\"response-link\"><a href=\"#tellus\">Submit your response</a></p>"); ?>
 
@@ -515,7 +515,7 @@ include("includes/header_med.php");
 
 	<div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
 			 <div class="tip">
-				<h2>Need help <strong>now</strong>? <br /><a href="/ask-a-librarian/">Ask a Librarian</a>.</h2>
+				<h2>Need help <strong>now</strong>? <br /><a href="http://calder.med.miami.edu/librarianask.html">Ask a Librarian</a>.</h2>
 				<?php if (isset($stage_two)) { 
 					print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
 				} else {  ?>

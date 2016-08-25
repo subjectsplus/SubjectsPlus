@@ -798,13 +798,13 @@ html, button, input, select, textarea {
 
 .find-box-tab-list-content {background: #d5d5d5 !important; padding: 1em 5px !important; color: #333 !important; font-size: 13px; line-height: 1.3em; max-height:540px; }
 
-.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:524px;}
+.find-box-tab-list-content .pluslet-list, .find-box-tab-list-content .findbox-searchresults {width: 98% !important; overflow:auto; max-height:440px;}
 
 .guides-display .guide-list {width: 100%; font-family: "NotoSansRegular"; color: #666 !important; border: 1px solid #bcbbbb;padding: 4px;}
 
 .guides-display .guide-list option {width: 100%;}
 
-.pluslet-list, .findbox-searchresults {list-style: inside none none; margin: 0 0 0 0; background-color: #f2f2f2; padding:0;}
+.pluslet-list, .findbox-searchresults {list-style: inside none none; margin: 5px 0 0 0; background-color: #f2f2f2; padding:0;}
 
 .pluslet-list .pluslet-listing,
 .findbox-searchresults .pluslet-listing{padding:5px;}
@@ -814,7 +814,85 @@ font-size: 12px;}
 
 .clone-button, .copy-button {font-family: 'NotoSansBold' !important; padding: 0.5em 0.75em !important; font-size:10px !important; font-weight: normal !important;}
 
-#search-tab .findbox-search {width:96%; font-family: 'NotoSansRegular' !important; border: 1px solid #bcbbbb; border-radius: 2px; padding: 4px;}
+#search-tab .findbox-search {width:96%; font-family: 'NotoSansRegular' !important; border: 1px solid #bcbbbb; border-radius: 2px; padding: 4px; margin:0 0 10px 0;}
+
+
+/* Custom style radio buttons */
+.sp-custom-radio input[type=checkbox]:not(old),
+.sp-custom-radio input[type=radio   ]:not(old){
+  width     : 2em;
+  margin: 0 0 0 8px;
+  padding   : 0;
+  font-size : 1em;
+  opacity   : 0;
+}
+
+.sp-custom-radio input[type=checkbox]:not(old) + label,
+.sp-custom-radio input[type=radio   ]:not(old) + label{
+  display      : inline-block;
+  margin-left  : -2em;
+  line-height  : 1.5em;
+  font-family: "NotoSansRegular" !important;
+  font-size: 0.9em;
+}
+
+.sp-custom-radio input[type=checkbox]:not(old) + label > span,
+.sp-custom-radio input[type=radio   ]:not(old) + label > span{
+  display          : inline-block;
+  width            : 1em;
+  height           : 1em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.0625em solid rgb(192,192,192);
+  border-radius    : 0.25em;
+  background       : rgb(224,224,224);
+  background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align   : bottom;
+}
+
+.sp-custom-radio input[type=checkbox]:not(old):checked + label > span,
+.sp-custom-radio input[type=radio   ]:not(old):checked + label > span{
+  background-image :    -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :     -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :      -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image : -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :         linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+
+.sp-custom-radio input[type=checkbox]:not(old):checked + label > span:before{
+  content     : '✓';
+  display     : block;
+  width       : 1em;
+  color       : rgb(153,204,102);
+  font-size   : 0.875em;
+  line-height : 1em;
+  text-align  : center;
+  text-shadow : 0 0 0.0714em rgb(115,153,77);
+  font-weight : bold;
+}
+
+.sp-custom-radio input[type=radio]:not(old):checked +  label > span > span{
+  display          : block;
+  width            : 0.7em;
+  height           : 0.7em;
+  margin           : 0.1em;
+  border           : 0.0625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(192,57,87);
+  background-image :    -moz-linear-gradient(rgb(192,57,87),rgb(226,102,164));
+  background-image :     -ms-linear-gradient(rgb(192,57,87),rgb(226,102,164));
+  background-image :      -o-linear-gradient(rgb(192,57,87),rgb(226,102,164));
+  background-image : -webkit-linear-gradient(rgb(192,57,87),rgb(226,102,164));
+  background-image :         linear-gradient(rgb(192,57,87),rgb(226,102,164));
+}
+
+
+
+
+
 
 .pure-button-secondary, 
 a.pure-button-secondary {
@@ -2378,9 +2456,69 @@ div.feedback a:link {
 /* Collections Page */
 #add_collection {margin: 10px 0;}
 
+#guide-collection-form input, 
+#guide-collection-form textarea {width: 75%;}
+
+#guide-collection-list, #guide-search-results, #guide-list {
+    list-style-position: outside;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 !important;
+}
+
+
+#guide-collection-list a[id^="delete-"] {float:right; color: #333 !important;}
+
+#display-guides-btn {cursor: pointer;}
+#display-guides-btn i {margin: 0 8px 0 0;}
+
+#guide-collection-list li { background: #f6e3e7; margin: 0 0 2px 0; padding: 5px;}
+
+#guide-collection-list li:nth-child(odd) { background: transparent; }
+
+#guide-collection-list li.edit_current {background: #f1c40f;}
+
+#add-guide-input, .collection-metadata-edit-input {width: 75%; display:block; margin: 0.25em 0; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 1px 3px #ddd inset; padding: 0.5em 0.6em;}
+
+#guide-search-results li {padding: 2px 5px;}
+.add-guide-btn {cursor: pointer;}
+.add-guide-btn i, #guide-list i {margin: 0 8px 0 0;}
+
+.remove-guide-btn {float:right; }
+.remove-guide-btn i {margin: 0 !important; font-size: 18px;}
+
+#guide-label {margin: 0 0 10px 0;}
+
+#guide-list li {cursor: move; margin: 0 0 2px 0; padding: 5px; background: #f6e3e7;}
+#guide-list li:nth-child(odd) { background: transparent; }
+
+#collection-metadata-editform {margin:10px 0;}
+#update-collection-metadata-btn {margin: 10px 0 0 0;}
+
 
 /* Pluslet ID 1 */
 .admin-prompt {margin: 0 5px 10px 0; text-align: right; font-size: 0.9em;}
+
+
+.pluslet.collection-entry .titlebar_options i {color: #333; font-size: 20px;}
+.pluslet.collection-entry .titlebar_options i:hover {color: #c03957;}
+
+#maincontent .pluslet.collection-entry .pure-g {
+   padding-top: 0;
+}
+
+.pluslet.collection-entry p {padding: 0 25px 0 0;}
+
+.guide_collection_select {
+  width:50%;
+  background-color: #fff;
+    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    color: #444;
+    margin: 0.25em 0;
+    padding: 0.25em;
+}
 
 
 

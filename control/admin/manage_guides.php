@@ -67,6 +67,13 @@ FROM staff
 WHERE ptags like '%records%'
 ORDER BY lname";
 
+$q2 = "SELECT s.staff_id, Concat(fname, ' ' , lname) as fullname
+FROM staff s, staff_subject ss, subject su
+WHERE s.staff_id = ss.staff_id
+AND ss.subject_id = su.subject_id 
+GROUP BY lname
+ORDER BY lname";
+
 $querier2 = new Querier();
 $staffArray = $querier2->query($q2);
 

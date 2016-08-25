@@ -88,6 +88,7 @@ function copyClone() {
 		init : function() {
 		    myCopyClone.bindUiActions();
 		    myCopyClone.markAsLinked();
+			myCopyClone.removeCloneDupMarkup();
 		},
 		markAsLinked: function () {
 		    /**
@@ -99,6 +100,21 @@ function copyClone() {
 		        $(this).children('.titlebar').children('.titlebar_text').addClass('linked_pluslet');
 		    });
 
+		},
+
+		removeCloneDupMarkup: function () {
+
+			var clones = $('div[name="Clone"]');
+
+			$.each(clones, function (index, value) {
+
+				var clone = $(this).find('.pluslet_body');
+				var cloneContent = $(clone).find('.pluslet_body').html();
+
+				$(this).find('.pluslet_body').remove();
+
+				$( '<div class="pluslet_body">' + cloneContent + '</div>').insertAfter($(this).find('.titlebar'));
+			});
 		}
 	};
 

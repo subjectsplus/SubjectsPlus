@@ -49,8 +49,14 @@ include ("../includes/header.php");
 $postvar_subject_id = scrubData ( $_GET ['subject_id'] );
 $this_id = $_GET ["subject_id"];
 
+// Editable if either a) they have admin, or b) they have allguides
+$canedit = 0;
+
+if (isset ( $_SESSION ["admin"] ) && $_SESSION ["admin"] == 1) { $canedit = 1; }
+if (isset ( $_SESSION ["allguides"] ) && $_SESSION ["allguides"] == 1) { $canedit = 1; }
+
 // See if they have permission to edit this guide
-if (! isset ( $_SESSION ["admin"] ) || $_SESSION ["admin"] != 1) {
+if ($canedit == 0) {
 	$q = "SELECT staff_id from staff_subject WHERE subject_id = '$this_id'
     AND staff_id = '" . $_SESSION ["staff_id"] . "'";
 	$db = new Querier ();
