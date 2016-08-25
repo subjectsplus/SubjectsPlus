@@ -1,8 +1,7 @@
 <?php
-if( (empty($this->getJid())) || (empty($this->getSrc())) ) {
-
-    echo "<p>Please have your SubjectsPlus Admin add the settings for your institution's Chat account.</p>";
-    echo "<p>The file is located at /lib/SubjectsPlus/Control/Pluslet/Chat.php</p>";
+if( (!empty($this->flashMessage)) ) {
+    //something went wrong
+    echo $this->flashMessage;
 } else { ?>
 
     <div jid="<?php echo $this->getJid(); ?>" class="libraryh3lp" >
