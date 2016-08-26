@@ -1290,9 +1290,39 @@ h4.table-of-contents-header a:hover {text-decoration: underline;}
 .staff-details li {margin: 0 !important; display: block !important; white-space: pre-wrap;   white-space: -moz-pre-wrap;   
    white-space: -o-pre-wrap;  word-wrap: break-word; }
 
-.staff-social {padding: .2em 0.2em .2em 0; font-size: 26px; display: inline-block;}
+.staff-social {padding: .2em 0.2em .2em 0; font-size: 20px; display: inline-block;}
 
+.subject-specialists {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #CCC;
+}
 
+.subject-specialist-content div:last-of-type {border: none;}
+
+.subject-specialist-description {border-top: 1px dashed #CCC; padding-top: 10px;}
+
+.specialist-photo {
+    display: inline-block;
+    padding: 0 15px 0 0;
+}
+
+.specialist-info {
+    display: inline-block;   
+    vertical-align: top;
+    
+}
+
+.specialist-info h4 {margin: 0; font-weight: bold;}
+
+.subject-specialist-content .specialist-info .staff-details li {white-space: inherit !important; word-wrap: break-word;}
+
+.show-photo-full {
+    width: -moz-calc(100% - 100px);
+    width: -webkit-calc(100% - 100px);
+    width: calc(100% - 100px);
+}
 
 
 /* WorldCat Pluslet - Front-end*/
