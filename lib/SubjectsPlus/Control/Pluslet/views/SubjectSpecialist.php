@@ -23,7 +23,7 @@
             <ul class="staff-details">
                 <li data-show-title="<?php echo $this->showTitle; ?>"><?php echo $this->title; ?></li>
                 <li data-show-email="<?php echo $this->showEmail; ?>"><a href="mailto:<?php echo $this->email; ?>"><?php echo $this->email; ?></a></li>
-                <li data-show-phone="<?php echo $this->showPhone; ?>">(<?php echo $this->tel_prefix; ?>) <?php echo $this->tel; ?></li>
+                <li data-show-phone="<?php echo $this->showPhone; ?>"><?php echo $this->tel_prefix; ?> <?php echo $this->tel; ?></li>
                 <li>
                     <div class="staff-social" data-show-facebook="<?php echo $this->showFacebook; ?>">
                         <a href="https://facebook.com/<?php echo $this->facebook; ?>"><i class="fa fa-facebook"></i></a>
