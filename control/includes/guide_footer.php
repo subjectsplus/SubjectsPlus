@@ -13,7 +13,6 @@
 	var myGuideSetup = guideSetup();
 	myGuideSetup.init();
 
-
     var bookList = bookList();
     bookList.init();
 </script>
