@@ -48,7 +48,7 @@
                     if (charCode < 48 || charCode > 57)
                         result = false;
 
-                    if (charCode == 88 || charCode == 44 || charCode == 32)
+                    if (charCode == 88 || charCode == 44)
                         result = true;
 
                     return result;

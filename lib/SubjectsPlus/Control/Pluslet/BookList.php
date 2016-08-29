@@ -75,8 +75,8 @@ class Pluslet_BookList extends Pluslet
                     $this->_bookTitle = $info->title;
 
                     $this->setBookCover($isbn, $syndetics_client_code, $info);
+                    $this->setBookIsbn($info, $isbn);
 
-                    $this->_bookIsbnNumber = $isbn;
                     $this->_authorsList = implode(", ", $info->authors);
                     $this->_publishedDate = date_format(date_create($info->publishedDate), "F, Y");
                 }
@@ -121,6 +121,23 @@ class Pluslet_BookList extends Pluslet
                 $this->_bookCover = $info->imageLinks->thumbnail;
             }else{
                 $this->_bookCover = "";
+            }
+        }
+    }
+
+    function setBookIsbn($info, $isbn)
+    {
+        $this->_bookIsbnNumberArray = array();
+        $this->_bookIsbnNumber = $isbn;
+        $industryIdentifiers = $info->industryIdentifiers;
+
+        foreach ($industryIdentifiers as $identifier){
+            if ($identifier->type == "ISBN_10"){
+                array_push($this->_bookIsbnNumberArray, "ISBN10: " . $identifier->identifier);
+            }else if ($identifier->type == "ISBN_13"){
+                array_push($this->_bookIsbnNumberArray, "ISBN13: " . $identifier->identifier);
+            }else{
+                array_push($this->_bookIsbnNumberArray, $identifier->identifier);
             }
         }
     }
