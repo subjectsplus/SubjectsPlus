@@ -25,13 +25,15 @@ function style() {
             myStyle.bindUiActions();
         },
         fixFlashFOUC: function () {
-            $(".guidewrapper").css("display", "block");
+            $(".guidewrapper").css("display", "inline-block");
             $("#main-options").css("display", "block");
         }, 
         hideControlHeader : function () {
         	
         	 $('#hide_header').click(function(event) {
-        	 $("#header, #subnavcontainer").toggle('fast');
+        	   $("#header, #subnavcontainer").toggle('fast');
+               $("#header").toggleClass("toggle_header_fix");
+               $("#guide-parent-wrap").toggleClass("toggle_header-margin");
         	  });
         }
    
