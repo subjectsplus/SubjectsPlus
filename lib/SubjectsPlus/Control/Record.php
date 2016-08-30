@@ -18,7 +18,7 @@ class Record {
 	private $_title;
 	private $_alternate_title;
 	private $_description;
-    private $_internal_notes; /* added v 4.1 */
+  private $_internal_notes; /* added v 4.1 */
 	private $_location_id;
 	private $_location;
 	private $_call_number;
@@ -27,6 +27,7 @@ class Record {
 	private $_display_note;
 	private $_eres_display;
 	private $_ctags;
+  private $_record_status; /* added v 4.1 */
 	private $_subject;
 	private $_rank;
 	private $_source;
@@ -71,6 +72,7 @@ class Record {
         $this->_eres_display = $_POST["eres_display"]; // array
         $this->_ctags = $_POST["ctags"]; // array
         $this->_helpguide = $_POST["helpguide"]; // array
+        $this->_record_status = $_POST["record_status"]; // array
         // data stored in rank table
         $this->_subject = $_POST["subject"]; // array
         $this->_rank = $_POST["rank"]; // array
@@ -130,7 +132,7 @@ class Record {
         /////////////
 
         $querier3 = new Querier();
-        $q3 = "SELECT l.location_id, format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide FROM location_title lt, location l WHERE lt.location_id = l.location_id AND lt.title_id = " . $this->_record_id;
+        $q3 = "SELECT l.location_id, format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide, record_status FROM location_title lt, location l WHERE lt.location_id = l.location_id AND lt.title_id = " . $this->_record_id;
         //print $q3;
         $this->_locations = $querier3->query($q3);
 
@@ -334,6 +336,8 @@ class Record {
 
 public function buildLocation() {
 
+  global $record_status;
+
 	$this->_boxcount = 1;
 
     ///////////////
@@ -352,6 +356,9 @@ public function buildLocation() {
 	$qRes = "select restrictions_id, restrictions from restrictions order by restrictions_id";
 	$restrictionsArray = $querierRes->query($qRes);
 
+  // Statuses come from config.php
+  $statusArray = $record_status;
+
     // Test if these exist, otherwise go to plan B
 	if ($this->_locations == FALSE) {
       // no location
@@ -362,6 +369,10 @@ public function buildLocation() {
       // create restrictions box for later
 		$restrictMe = new Dropdown("access_restrictions[]", $restrictionsArray);
 		$this->_restrictions = $restrictMe->display();
+
+      // create restrictions box for later
+    $statusMe = new Dropdown("record_status[]", $statusArray);
+    $this->_restrictions = $restrictMe->display();    
 
 		$new_loc = self::outputLocation();
 	} else {
@@ -392,6 +403,10 @@ public function buildLocation() {
         // create restrictions box
 			$restrictMe = new Dropdown("access_restrictions[]", $restrictionsArray, $value["access_restrictions"]);
 			$this->_restrictions = $restrictMe->display();
+
+        // create status box; array comes from config.php
+      $statusMe = new Dropdown("record_status[]", $record_status, $value["record_status"]);
+      $this->_record_status = $statusMe->display();
 
         ///////////////
         // Display Note
@@ -483,7 +498,10 @@ public function buildLocation() {
  	<div style=\"float: left; margin-right: 1em;\"><label for=\"format[]\">" . _("Format") . "</label>
  	{$this->_formats}</div>
  	<div style=\"float: left; margin-right: 1em;\"><label for=\"format[]\">" . _("Access Restrictions") . "</label>
- 	{$this->_restrictions}<br /></div>";
+ 	{$this->_restrictions}<br /></div>
+  <div style=\"float: left; margin-right: 1em;\"><label for=\"record_status[]\">" . _("Status") . "</label>
+  {$this->_record_status}<br /></div>
+  ";
 
  	if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
  		echo "<div style=\"float: left;\"><br />";
@@ -826,7 +844,7 @@ function modifyLocation() {
 		if ($value == "") {
 
         // Blank location, do an insert
-			$qInsertLoc = "INSERT INTO location (format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide) VALUES (
+			$qInsertLoc = "INSERT INTO location (format, call_number, location, access_restrictions, eres_display, display_note, ctags, helpguide, record_status) VALUES (
 				'" . scrubData($this->_format[$key], "integer") . "',
 				" . $db->quote(scrubData($this->_call_number[$key])) . ",
 				" . $db->quote(scrubData($this->_location[$key])) . ",
@@ -834,7 +852,8 @@ function modifyLocation() {
 				'" . scrubData($this->_eres_display[$key]) . "',
 				" . $db->quote(scrubData($this->_display_note[$key], "richtext")) . ",
 				" . $db->quote(scrubData($this->_ctags[$key])) . ",
-				" . $db->quote(scrubData($this->_helpguide[$key])) . "
+				" . $db->quote(scrubData($this->_helpguide[$key])) . ",
+        " . $db->quote(scrubData($this->_record_status[$key])) . "
 				)";
 
       $rInsertLoc = $db->exec($qInsertLoc);
@@ -856,6 +875,7 @@ function modifyLocation() {
     	"', display_note = '" . scrubData($this->_display_note[$key], "richtext") .
     	"', ctags = " . $db->quote(scrubData($this->_ctags[$key])) .
     	", helpguide = " . $db->quote(scrubData($this->_helpguide[$key])) .
+      ", record_status = " . $db->quote(scrubData($this->_record_status[$key])) .
     	" WHERE location_id = " . scrubData($this->_location_id[$key], "integer");
 
     	$rUpLoc = $db->exec($qUpLoc);

@@ -63,27 +63,27 @@ $results = "<p>" . _("Please select a letter or tag to browse.") . "</p>";
 
 if (isset($_GET["ctag"])) {
     $alpha_id = $_GET["ctag"];
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and ctags like '%$alpha_id%' order by title.title";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and ctags like '%$alpha_id%' order by title.title";
 } elseif (!isset($_GET['letter'])) {
     $alpha_id = $firstletter;
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$firstletter%' order by title.title";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$firstletter%' order by title.title";
     //$alpha_id = FALSE;
 } elseif ($_GET['letter'] == "all") {
     $alpha_id = "All Records";
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions order by title.title";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions order by title.title";
 } elseif ($_GET['letter'] == "restricted") {
     $alpha_id = _("Restricted Items");
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and restrictions_id != '1' order by title.title";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and restrictions_id != '1' order by title.title";
 } elseif ($_GET['letter'] == "unrestricted") {
     $alpha_id = _("Unrestricted Items");
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and restrictions_id = '1' order by title.title";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and restrictions_id = '1' order by title.title";
 } elseif ($_GET['letter'] == "az") {
     $alpha_id = _("A-Z List Items");
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and eres_display = 'Y' order by title.title";    
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and eres_display = 'Y' order by title.title";    
 } else {
     $alpha_id = $_GET['letter'];
     //$alpha_id = FALSE;
-    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$alpha_id%' order by title.title";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$alpha_id%' order by title.title";
 }
 
 // print $full_query;
@@ -162,13 +162,20 @@ if ($alpha_id & $full_query) {
                 $az_star = "<i class=\"fa fa-star-o\"></i>";
             }
 
+            // added v4.1
+            $record_status = "";
+
+            if (isset($myrow['record_status']) && $myrow['record_status'] != "Active") {
+                 $record_status = " <span style=\"margin-left: 1em;\" class=\"smallgrey\">" . $myrow['record_status'] . "</span> ";
+             }
+
             $record_url = $myrow['location'];
             $link_tooltip = '<span style="float:right;" class="tooltip_wrapper"><a href="'.$record_url.'" target="_blank"> <i class="fa fa-link"></i> <span class="tooltip">'.$record_url.'</span></a></span>';
 
             // weed out extraneous P tags
             $blurb = stripP($blurb);
 
-            $results .= "<div class=\"record-results $row_colour\">&nbsp;&nbsp; $az_star  <a href=\"record.php?record_id=$id\" class=\"record-label\" title=\"$label\">$label</a> $link_tooltip\n";
+            $results .= "<div class=\"record-results $row_colour\">&nbsp;&nbsp; $az_star  <a href=\"record.php?record_id=$id\" class=\"record-label\" title=\"$label\">$label</a> $record_status $link_tooltip\n";
    
         $results .= "</div>\n";
 

@@ -185,11 +185,12 @@ if (isset ($v2styles) && $v2styles == 1) {
 }
 
 // Trial Databases //
-// UM trial databases--requires DB_Trials in ctags field
+// xxxUM trial databases--requires DB_Trials in ctags fieldxxx
+// In v4.2 uses the "status" field set to "Trial"
 $connection = $db->getConnection();
 $statement = $connection->prepare("select distinct title, location, access_restrictions, title.title_id as this_record
         FROM title, location, location_title
-        WHERE ctags LIKE '%Database_Trial%'
+        WHERE record_status = 'Trial'
         AND title.title_id = location_title.title_id
         AND location.location_id = location_title.location_id
         ORDER BY title");

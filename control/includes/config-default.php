@@ -16,7 +16,7 @@ $guide_types = array( "Subject", "Course", "Topic");
 // These are the tags that a given record location can have associated with it.  They
 // will be used in a pipe-delimited list in the ctags field of the location table.
 // In versions > 1.0.x, these will fill a drop down of format types
-$all_ctags = array( "full_text", "openurl", "images", "video", "audio", "Mobile_Enabled", "Database_Trial", "New_Databases");
+$all_ctags = array( "full_text", "openurl", "images", "video", "audio", "Mobile_Enabled", "New_Databases");
 
 // These are used for the videos module.  Basically, list places you store videos
 // If you add types, you'll have to modify the files to deal with these types
@@ -68,9 +68,15 @@ $pluslets_activated = array("Basic", "Heading", "LinkList", "Card", "HTML5Video"
 
 $titlebar_styles = array( "Regular Heading" => "ts-umcream", "Alternative Heading" => "ts-umgreen");
 
+// These are the default statuses a record in the Record module might have
+// This is new in v 4.1
+$record_status = array("Active", "Inactive", "Trial", "Rejected");
 
 //This sets the max width of the guide container
 $guide_container_width = array( "1160px");
+
+//Global Subject Specialist Pluslet Heading
+$default_subject_specialist_heading = "Librarians";
 
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)

@@ -13,7 +13,7 @@
     $settings = array();
     foreach($this->_editors as $staff):
         $settings = $this->getSubjectSpeicalistSettings($staff, $this->_array_keys, $this->_data_array);
-        $this->setSubjectSpecialist($settings);
+        $this->setSubjectSpecialist($settings);    
 ?>
 
 
