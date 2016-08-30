@@ -20,8 +20,22 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $this->tel_prefix = $tel_prefix;
 
         $this->_subject_id = $subject_id;
-
+        
         $this->_pluslet_id = $pluslet_id;
+
+        //set title if exists
+        global $default_subject_specialist_heading;
+
+        if( (isset($this->_title)) && (!empty($this->_title)) ) {
+            $title = $this->_title;
+        } else {
+            $this->_title = $default_subject_specialist_heading;
+        }
+        
+        
+      
+            
+       
 
         // Get librarians associated with this guide
         $this->_editors = $this->getGuideEditors($this->_subject_id);
