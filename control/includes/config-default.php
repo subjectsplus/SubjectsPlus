@@ -16,7 +16,7 @@ $guide_types = array( "Subject", "Course", "Topic");
 // These are the tags that a given record location can have associated with it.  They
 // will be used in a pipe-delimited list in the ctags field of the location table.
 // In versions > 1.0.x, these will fill a drop down of format types
-$all_ctags = array( "full_text", "openurl", "images", "video", "audio", "Mobile_Enabled", "Database_Trial", "New_Databases");
+$all_ctags = array( "full_text", "openurl", "images", "video", "audio", "Mobile_Enabled", "New_Databases");
 
 // These are used for the videos module.  Basically, list places you store videos
 // If you add types, you'll have to modify the files to deal with these types

@@ -173,7 +173,10 @@ class Updater
 
 		$this->fourToFourOneAlterTables = array(
 			"ALTER TABLE `title` ADD `internal_notes` MEDIUMTEXT NULL DEFAULT NULL AFTER `description`",
-            "ALTER TABLE `location` CHANGE COLUMN `location` `location` TEXT NULL DEFAULT NULL"
+      "ALTER TABLE `location` CHANGE COLUMN `location` `location` TEXT NULL DEFAULT NULL",
+      "ALTER TABLE `location` ADD `record_status` VARCHAR( 255 ) NULL DEFAULT NULL COMMENT 'added v4.1'",
+      "ALTER TABLE `location` ADD `trial_start` DATE NULL DEFAULT NULL COMMENT 'added v4.2'",
+      "ALTER TABLE `location` ADD `trial_end` DATE NULL DEFAULT NULL COMMENT 'added v4.2'"
 		);
 		
 		//queries to insert into new tables
@@ -370,10 +373,7 @@ class Updater
 				"ALTER TABLE `pluslet` ADD COLUMN `target_blank_links` INT NULL DEFAULT 0",
 				"ALTER TABLE `staff` ADD COLUMN `social_media` MEDIUMTEXT NULL DEFAULT NULL ",
 				"ALTER TABLE `pluslet` ADD COLUMN  `master` INT NULL DEFAULT NULL",
-				"ALTER TABLE `pluslet` MODIFY COLUMN `extra` MEDIUMTEXT NULL DEFAULT NULL"
-
-
-				
+				"ALTER TABLE `pluslet` MODIFY COLUMN `extra` MEDIUMTEXT NULL DEFAULT NULL"	
 		);
 	}
 

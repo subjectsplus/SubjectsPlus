@@ -6,6 +6,14 @@
  *   @author adarby
  *   @date mar 2011
  */
+
+//added in order to hide errors if SP not yet installed.  
+if( !file_exists( "../control/includes/config.php" ) || filesize( "../control/includes/config.php" ) < 10 )
+{
+  print "<p>" .  _("SubjectsPlus has not been installed yet.  Please follow the instructions on the wiki: ") . "</p><p><a href=\"http://subjectsplus.com/wiki2/index.php?title=Main_Page\">http://subjectsplus.com/wiki2/index.php?title=Main_Page</a></p>";
+  exit;
+}
+
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideList;
