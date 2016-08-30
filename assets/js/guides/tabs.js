@@ -20,7 +20,8 @@ function tabs() {
             dataExternalLink: 'li[data-external-link]',
             saveButton: $('#save_guide'),
             tabExternalUrl: 'input[name=\'tab_external_url\']',
-            findBoxTabs: $('#find-box-tabs')
+            findBoxTabs: $('#find-box-tabs'),
+            cloneByTabUrl : "/control/guides/helpers/fetch_cloned_pluslets_by_tab_id.php?",
         },
         strings: {
             tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
@@ -217,7 +218,53 @@ function tabs() {
                     },
                     "Delete": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
+                        console.log(window.lastClickedTab);
 
+                        var g = guide();
+                        var subject_id = g.getSubjectId();
+
+                        var href = "#tabs-" + id;
+
+                        var tab_id = $('a[href="' + href + '" ]').parent('li').attr('id');
+
+                        // define payload
+                        var payload = {
+                            'subject_id' : subject_id,
+                            'tab_id' : tab_id
+                        };
+
+                        $.ajax({
+                            url: myTabs.settings.cloneByTabUrl,
+                            type: "GET",
+                            data: payload,
+                            dataType: "json",
+                            success: function(data) {
+                                console.log(data);
+
+                                if(data.clones_by_tab[0].length > 0) {
+
+                                    editTabDialog.dialog("close");
+
+                                    alert('This tab contains master boxes that have linked boxes in other tabs.')
+                                } else {
+
+                                    $('a[href="#tabs-' + id + '"]').parent().remove();
+                                    $('div#tabs-' + id).remove();
+                                    myTabs.settings.tabs.tabs("destroy");
+                                    myTabs.settings.tabs.tabs();
+                                    myTabs.settings.tabCounter--;
+                                    editTabDialog.dialog("close");
+                                    $("#response").hide();
+                                    $('#save_guide').fadeIn();
+                                }
+
+                            }
+                        });
+
+
+
+
+                        /*
                         $('a[href="#tabs-' + id + '"]').parent().remove();
                         $('div#tabs-' + id).remove();
                         myTabs.settings.tabs.tabs("destroy");
@@ -227,6 +274,7 @@ function tabs() {
                         $("#response").hide();
                         $('#save_guide').fadeIn();
                         //$('#save_template').fadeIn();
+                        */
                     },
                     Cancel: function () {
                         $(this).dialog("close");
