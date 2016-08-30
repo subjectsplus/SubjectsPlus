@@ -59,7 +59,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"guide_container_width" => array( _( "Guide Container Width" ), _( "Assign a width in pixels for your guides. For example, 960px." ), "array", "right", "small", "", _("For example, 960px or 1160px.") ),
 
-							"default_subject_specialist_heading" => array( _( "Default Subject Specialist Pluslet Heading" ), _( "A global heading for the Subject Specialist Pluslet" ), "string", "right", "small", "" , _( "For example Subject Librarians or Liaison Librarians." ) ),
+							"default_subject_specialist_heading" => array( _( "Default Subject Specialist Pluslet Heading" ), _( "A global heading for the Subject Specialist Pluslet" ), "string", "right", "large", "" , _( "For example Subject Librarians or Liaison Librarians." ) ),
 
 							"guide_types" => array( _( "Guide Types" ), _( "These are the different ways you may organize your guides." ), "array", "right", "large", "", _("You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query.") ),
 
