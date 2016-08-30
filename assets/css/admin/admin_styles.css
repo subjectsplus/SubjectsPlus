@@ -497,7 +497,8 @@ html, button, input, select, textarea {
 }
 
 .toggle_header_fix {position:fixed;}
-.toggle_header-margin {margin:40px 0 0 0;}
+.toggle_header_margin {margin:40px 0 0 0;}
+.toggle_response_margin {margin:0 0 0 40px !important;}
 
 #savour,
 #savour2  {
@@ -2475,7 +2476,7 @@ div.feedback a:link {
   width: 100%;
   text-align:center;
   display: none;
-  margin:0 0 0 40px;
+  margin:0;
   padding: 0.65em 0;
   z-index: -1;
   color:#FFF;
@@ -3429,7 +3430,7 @@ ul.sortable_list li:hover  {
 
 /* Talkback */
 
-.toggle_unanswered, .toggle_answered {
+.heunanswered, .toggle_answered {
   text-decoration: underline;
   color: #4977A4;
   cursor: pointer;

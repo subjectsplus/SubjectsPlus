@@ -33,7 +33,8 @@ function style() {
         	 $('#hide_header').click(function(event) {
         	   $("#header, #subnavcontainer").toggle('fast');
                $("#header").toggleClass("toggle_header_fix");
-               $("#guide-parent-wrap").toggleClass("toggle_header-margin");
+               $("#guide-parent-wrap").toggleClass("toggle_header_margin");
+               $("#response").toggleClass("toggle_response_margin");
         	  });
         }
    
