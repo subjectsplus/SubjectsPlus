@@ -72,6 +72,9 @@ $titlebar_styles = array( "Regular Heading" => "ts-umcream", "Alternative Headin
 //This sets the max width of the guide container
 $guide_container_width = array( "1160px");
 
+//Global Subject Specialist Pluslet Heading
+$default_subject_specialist_heading = "Librarians";
+
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)
 // You need to set this to TRUE
