@@ -14,9 +14,7 @@ use SubjectsPlus\Control\Guide\PlusletData;
 
 header('Content-Type: application/json');
 
-$subject_id = $_GET['subject_id']; // "690128";
-$tab_id = $_GET['tab_id']; // "5837498";
-
+$tab_id = $_GET['tab_id']; // "4531189";
 
 $db = new Querier;
 $objPlusletData = new PlusletData($db);
