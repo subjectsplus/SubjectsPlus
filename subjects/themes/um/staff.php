@@ -73,17 +73,14 @@ $dept_intro = '
             <li><a href="#129">Systems Support</a></li>
             </ul>
             </li>
-            <li><a href="#140">Web & Emerging Technologies</a></li>
+            <li><a href="#140">Web & Application Development</a></li>
           </ul>
           <li><a href="#105">Judi Prokop Newman Business Information Resource Center</a></li>
           <li><a href="#125">Learning & Research Services</a></li>
           <ul>
-            
-
             <li><a href="#107">Digital Media Lab</a></li>
-            <li><a href="#118">Education & Outreach</a></li>
-            <!--<li><a href="#Information_/_Learning_Commons">Information / Learning Commons</a></li>-->
-            
+            <li><a href="#118">Learning and Research Services</a></li>
+            <!--<li><a href="#Information_/_Learning_Commons">Information / Learning Commons</a></li>-->   
           </ul>
 
           <li><a href="#103">Marta and Austin Weeks Music Library & Technology Center</a></li>
