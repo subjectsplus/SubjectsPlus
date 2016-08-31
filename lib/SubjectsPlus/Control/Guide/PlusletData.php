@@ -142,10 +142,7 @@ class PlusletData extends GuideBase implements OutputInterface
 
     public function getClonedPlusletsBySubjectIdTabId($tab_id) {
 
-        $connection = $this->db->getConnection();
         $pluslets = $this->fetchPlusletsByTabId($tab_id);
-
-
         $master_ids = array();
         foreach($pluslets  as $pluslet):
             $master_ids[] = $pluslet["pluslet_id"];
@@ -154,11 +151,9 @@ class PlusletData extends GuideBase implements OutputInterface
         $clones_by_tab = array();
         foreach($master_ids  as $master_id):
             $clones_by_tab[] = $this->fetchClonedPlusletsById($master_id);
-
         endforeach;
 
         $this->clones_by_tab = $clones_by_tab;
-
     }
 
 
