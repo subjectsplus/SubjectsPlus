@@ -387,8 +387,7 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/instruction-tour-request-form/">Instruction/Tour Request</a></li>
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>
-                          
+                          <li class="last"><a href="http://sp.library.miami.edu/subjects/etd">ETD Formatting Support</a></li> 
                       </ul>
                        <ul>
                           <li><a href="http://library.miami.edu/learningcommons/">Learning Commons</a></li>
@@ -397,7 +396,8 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                           <li><a href="<?php print PATH_TO_SP; ?>subjects/gis">GIS Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/graduate-study/">Graduate Study Room</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li>                          
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li> 
+                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li>                         
                         </ul>
 
                         <div class="mega_feature">
