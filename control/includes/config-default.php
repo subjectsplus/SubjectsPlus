@@ -68,6 +68,9 @@ $pluslets_activated = array("Basic", "Heading", "LinkList", "Card", "HTML5Video"
 
 $titlebar_styles = array( "Regular Heading" => "ts-umcream", "Alternative Heading" => "ts-umgreen");
 
+// These are the default statuses a record in the Record module might have
+// This is new in v 4.1
+$record_status = array("Active", "Inactive", "Trial", "Rejected");
 
 //This sets the max width of the guide container
 $guide_container_width = array( "1160px");
