@@ -217,10 +217,10 @@ Header and nav/subnav stuff
 
 header {
   width: 100%;
-  background-color: #fff;
-  border-bottom: 1px solid #B7B7B7;
+  background-color: #fff;  
   min-height: 2.9em;
   line-height: 2.8em;
+  z-index: 99999;
 }
 
 
@@ -405,15 +405,23 @@ header {
 /*--------------------------- 
 Page structure - added by PV 
 ---------------------------*/
-html,body { height:100%; }
+html,body { height:100%;}
 
 html, button, input, select, textarea {
     font-family: 'NotoSansRegular' !important; /* before -> sans-serif*/
 }
 
-.guide-parent-wrap {margin: 0 0 0 0;}
+.guide-parent-wrap {
+  margin: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 99998;
+}
 
-.panel-wrap {background-color: transparent; float: left; width:60px; height:100%;}
+.panel-wrap {background-color: transparent; float: left; width:60px; height:100%; 
+  -webkit-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.12);
+  -moz-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.12);}
 
 .guide-wrap {
   background-color: transparent; 
@@ -428,6 +436,9 @@ html, button, input, select, textarea {
 
 #guide_header {
   height: 3.1em;
+  -webkit-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.12);
+  -moz-box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 6px 5px 0px rgba(0,0,0,0.12);
 }
 
 .guide-title-area {background-color: #333; height: 3.1em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
@@ -485,6 +496,10 @@ html, button, input, select, textarea {
   margin: 0 0 0;
 }
 
+.toggle_header_fix {position:fixed;}
+.toggle_header_margin {margin:40px 0 0 0;}
+.toggle_response_margin {margin:0 0 0 40px !important;}
+
 #savour,
 #savour2  {
   margin:0;
@@ -532,7 +547,7 @@ html, button, input, select, textarea {
 
 .top-panel-option-item {} /* Used in selectedPanelDisplay() function - don't delete by PV */
 
-.guidewrapper {margin: 6px 75px 0 40px;}
+.guidewrapper {margin: 87px 0 0 60px;}
 
 #tabs {
   margin:0;
@@ -547,7 +562,7 @@ html, button, input, select, textarea {
     right: -40px;
     padding: 8px 0;
     position: absolute;
-    top: 6.3em;
+    top: 6em;
     width: 40px;
     text-align: center;
     color: #FFF;
@@ -563,7 +578,7 @@ html, button, input, select, textarea {
 
 #guide_search input {
   font-size: 1em;
-  padding: .2em .4em;
+  padding: .07em .4em;
   margin: 0.6em 0;
   width:94%;
 }
@@ -1714,7 +1729,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   font-size: 0.9em;
   display: none; 
   position:absolute;
-  z-index: 999999;
+  z-index: 99997;
   top: 0;
   left: 100%;
   min-height: -moz-calc(100% - 20px);
@@ -1741,7 +1756,7 @@ li.fav-box-item:hover::before {color: #C03957;}
   font-size: 0.9em;
   display: none; 
   position:absolute;
-  z-index: 99998;
+  z-index: 99997;
   top: 0;
   left: 100%;
   min-height: -moz-calc(100% - 20px);
@@ -2455,13 +2470,13 @@ div.feedback a:link {
 
 #response {
   position: absolute;
-  top:45px;
+  top:43px;
   float: left;
   background-color: rgba(192,57,87, 0.8);
   width: 100%;
   text-align:center;
   display: none;
-  margin-top:0;
+  margin:0;
   padding: 0.65em 0;
   z-index: -1;
   color:#FFF;
@@ -3415,7 +3430,7 @@ ul.sortable_list li:hover  {
 
 /* Talkback */
 
-.toggle_unanswered, .toggle_answered {
+.heunanswered, .toggle_answered {
   text-decoration: underline;
   color: #4977A4;
   cursor: pointer;
