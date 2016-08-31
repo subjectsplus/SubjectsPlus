@@ -323,7 +323,7 @@ class Staff {
     $headshot = self::getHeadshot($this->_email, "medium");
 
     if ($this->_staff_id != "") {
-      $headshot .= "<p><a href=\"../includes/set_picture.php?staff_id=$this->_staff_id\" id=\"load_photo\">" . _("Click to update photo") . "</a></p>";
+      $headshot .= "<p>&nbsp;<a href=\"../includes/set_picture.php?staff_id=$this->_staff_id\" id=\"load_photo\">" . _("Click to update photo") . "</a></p>";
     } else {
       $headshot .= "<p>" . _("You can change the photo after saving.") . "</p>";
     }
