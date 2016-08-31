@@ -260,21 +260,6 @@ function tabs() {
 
                             }
                         });
-
-
-
-
-                        /*
-                        $('a[href="#tabs-' + id + '"]').parent().remove();
-                        $('div#tabs-' + id).remove();
-                        myTabs.settings.tabs.tabs("destroy");
-                        myTabs.settings.tabs.tabs();
-                        myTabs.settings.tabCounter--;
-                        $(this).dialog("close");
-                        $("#response").hide();
-                        $('#save_guide').fadeIn();
-                        //$('#save_template').fadeIn();
-                        */
                     },
                     Cancel: function () {
                         $(this).dialog("close");
@@ -544,7 +529,7 @@ function tabs() {
                             $('.metadata-url').show();
                             $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);
                             console.log(new_subject_id);
-                            window.location.href = "/control/guides/metadata.php?subject_id=" + new_subject_id;
+                            window.location.href = "metadata.php?subject_id=" + new_subject_id;
                         },
                         fail: function (err) {
                             console.log(err);
