@@ -232,9 +232,9 @@ function tabs() {
                             data: payload,
                             dataType: "json",
                             success: function(data) {
-                                console.log(data);
+                                //console.log(data);
 
-                                if(data.clones_by_tab.length > 0) {
+                                if( (data.clones_by_tab.length) && (data.clones_by_tab[0].length > 0) ) {
 
                                     editTabDialog.dialog("close");
 
@@ -249,6 +249,7 @@ function tabs() {
                                     editTabDialog.dialog("close");
                                     $("#response").hide();
                                     $('#save_guide').fadeIn();
+                                    
                                 }
 
                             }
