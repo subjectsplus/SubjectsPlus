@@ -61,9 +61,9 @@ if(!is_writable($lstrConfigFilePath))
 
 							"default_subject_specialist_heading" => array( _( "Default Subject Specialist Pluslet Heading" ), _( "A global heading for the Subject Specialist Pluslet" ), "string", "right", "large", "" , _( "For example Subject Librarians or Liaison Librarians." ) ),
 
-							"headshot_thumb_width" => array( _( "Staff Headshot Thumbnail" ), _( "Width for staff headshot thumbnail" ), "string", "right", "small", "" , _( "For example: 70, 100." ) ),
+							"headshot_thumb_width" => array( _( "Staff Headshot Thumbnail" ), _( "Width for staff headshot thumbnail. Note: If you change this value, it WILL affect previously uploaded headshot images." ), "string", "right", "small", "" , _( "For example: 70, 100." ) ),
 
-							"headshot_large_width" => array( _( "Staff Headshot Large" ), _( "Width for staff headshot large" ), "string", "right", "small", "" , _( "For example: 225, 300." ) ),
+							"headshot_large_width" => array( _( "Staff Headshot Large" ), _( "Width for staff headshot large. Note: If you change this value, it WILL affect previously uploaded headshots." ), "string", "right", "small", "" , _( "For example: 225, 300." ) ),
 
 							"guide_types" => array( _( "Guide Types" ), _( "These are the different ways you may organize your guides." ), "array", "right", "large", "", _("You may add new types at any time.  If you change an existing type, you will need to update all items in subjects table by hand/SQL query.") ),
 
