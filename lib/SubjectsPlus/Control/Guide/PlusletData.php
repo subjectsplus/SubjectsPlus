@@ -19,6 +19,7 @@ class PlusletData extends GuideBase implements OutputInterface
 
     public $pluslet_ids;
     public $cloned_pluslets;
+    public $clones_by_tab;
 
     public function __construct(Querier $db)
     {
@@ -107,6 +108,22 @@ class PlusletData extends GuideBase implements OutputInterface
 
     }
 
+    public function fetchPlusletsByTabId( $tab_id = null) {
+        $connection = $this->db->getConnection ();
+
+        $pluslets_statement = $connection->prepare ( "SELECT * FROM subject
+                                INNER JOIN tab on tab.subject_id = subject.subject_id
+                                INNER JOIN section on tab.tab_id = section.tab_id
+                                INNER JOIN pluslet_section on section.section_id = pluslet_section.section_id
+                                INNER JOIN pluslet on pluslet_section.pluslet_id = pluslet.pluslet_id
+                            WHERE tab.tab_id = :tab_id" );
+        $pluslets_statement->bindParam ( ":tab_id", $tab_id );
+        $pluslets_statement->execute ();
+        $pluslets = $pluslets_statement->fetchAll ();
+
+        return $pluslets;
+    }
+
 
 
     public function fetchClonedPlusletsById($master_id = null) {
@@ -118,7 +135,27 @@ class PlusletData extends GuideBase implements OutputInterface
         $cloned_pluslets = $statement->fetchAll();
 
         $this->cloned_pluslets = $cloned_pluslets;
+
+        return $cloned_pluslets;
     }
+
+
+    public function getClonedPlusletsBySubjectIdTabId($tab_id) {
+
+        $pluslets = $this->fetchPlusletsByTabId($tab_id);
+        $master_ids = array();
+        foreach($pluslets  as $pluslet):
+            $master_ids[] = $pluslet["pluslet_id"];
+        endforeach;
+
+        $clones_by_tab = array();
+        foreach($master_ids  as $master_id):
+            $clones_by_tab[] = $this->fetchClonedPlusletsById($master_id);
+        endforeach;
+
+        $this->clones_by_tab = $clones_by_tab;
+    }
+
 
 
     public function toArray() {
