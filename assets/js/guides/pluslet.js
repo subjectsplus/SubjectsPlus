@@ -477,29 +477,19 @@ function pluslet() {
 				});
 
 				var success = function(resp) {
-					var responses = [];
-					$.each(resp, function( key, value ){
-						responses.push(value);
-					});
 
-					var objs = [];
-					$.each(responses, function( key, value ) {
-						objs.push(value);
-					});
-					var clones = [];
-					$.each(objs, function( key, value ) {
-						clones = value;
-					});
+					if(resp.cloned_pluslets.length > 0 ) {
 
-
-					if( (clones) && (clones.length > 0) ) {
-						var titles = [];
-
-						$.each(clones, function( key, value ){
-							titles.push(value.title);
+						var clones = [];
+						$.each(resp, function( key, value ){
+							if( Object.prototype.toString.call( value ) === '[object Array]' ) {
+								$.each(value, function( index, obj ) {
+									clones.push(obj.title);
+								});
+							}
 						});
 
-						$('<div>This box cannot be deleted because it has linked boxes.' + titles + '</div>').dialog({
+						$('<div>This box cannot be deleted because it has linked boxes.' + clones + '</div>').dialog({
 							autoOpen: true,
 							modal: false,
 							width: 'auto',
@@ -512,7 +502,9 @@ function pluslet() {
 							}
 						});
 						return false;
+
 					} else {
+						//delete the pluslet
 						$('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
 							autoOpen: true,
 							modal: false,
@@ -524,15 +516,15 @@ function pluslet() {
 								'Yes': function() {
 									// Delete pluslet from database
 									$('#response').load('helpers/guide_data.php', {
-												delete_id: pluslet_id,
-												subject_id: subjectId,
-												flag: 'delete'
-											},
-											function() {
-												$('#response').fadeIn();
-												$('#save_guide').fadeIn();
+											delete_id: pluslet_id,
+											subject_id: subjectId,
+											flag: 'delete'
+										},
+										function() {
+											$('#response').fadeIn();
+											$('#save_guide').fadeIn();
 
-											});
+										});
 
 									// Remove node
 									$(elementDeletion).parents('.pluslet').remove();
@@ -546,9 +538,6 @@ function pluslet() {
 						});
 						return false;
 					}
-
-
-
 				};
 
 				var err = function(req, status, err) {
