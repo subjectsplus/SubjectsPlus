@@ -204,9 +204,7 @@ ob_end_flush ();
 }
 </style>
 
-<div class="guide-parent-wrap" id="guide-parent-wrap"
-	data-staff-id="<?php echo $_SESSION['staff_id']; ?>"
-	data-subject-id="<?php echo $_GET['subject_id']; ?>">
+<div class="guide-parent-wrap" id="guide-parent-wrap" data-staff-id="<?php echo $_SESSION['staff_id']; ?>" data-subject-id="<?php echo $_GET['subject_id']; ?>">
 
 	<div class="panel-wrap">
 		<div id="hide_header">
@@ -216,8 +214,6 @@ ob_end_flush ();
 		</div>
 	</div>
 	<!--end .panel-wrap-->
-
-
 
 
 	<div class="guide-wrap">
@@ -264,17 +260,7 @@ ob_end_flush ();
 		</div>
 		<!-- end guide header-->
 
-		<div id="find-in-guide-container">
-			<div class="pure-g">
-				<div class="pure-u-5-6 pure-u-lg-7-8">&nbsp;</div>
-				<div class="pure-u-1-6 pure-u-lg-1-8 find-guide-parent">
-					<form class="pure-form" id="guide_search">
-						<input class="find-guide-input" type="text"
-							placeholder="<?php print _("Find in Guide"); ?>"></input>
-					</form>
-				</div>
-			</div>
-		</div>
+		
 		
 		<input id="extra" type="hidden" size="1"
 			value="<?php
@@ -284,33 +270,25 @@ ob_end_flush ();
 			}
 			
 			?>"
-			name="extra" />
-
-
-		<!--GUIDE BUILDER CONTAINER-->
-		<div class="guidewrapper">
-
-			<div id="guide-container-width">
-
-				<?php global $guide_container_width; ?>
-				<script>
-					$('#guide-container-width').css('width', '<?php echo $guide_container_width[0]; ?>');
-
-				</script>
-
-			<div id="tabs" data-tab-count="<?php echo ( count($all_tabs) );  ?>">
-
-                 <?php $lobjGuide->outputNavTabs(); ?>
-
-                 <?php $lobjGuide->outputTabs (); ?>
-
-               </div>
-		</div>
-
-			</div>
+			name="extra" />		
 
 	</div>
 	<!--end .guide-wrap-->
+
+	
+	<!--In guide search-->
+	<div id="find-in-guide-container">
+		<div class="pure-g">
+			<div class="pure-u-5-6 pure-u-lg-7-8">&nbsp;</div>
+			<div class="pure-u-1-6 pure-u-lg-1-8 find-guide-parent">
+				<form class="pure-form" id="guide_search">
+					<input class="find-guide-input" type="text"
+						placeholder="<?php print _("Find in Guide"); ?>"></input>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- end #find-in-guide-container-->
 
 	<!-- Feedback -->
 	<div id="response"></div>
@@ -363,8 +341,30 @@ ob_end_flush ();
 			</fieldset>
 		</form>
 	</div>
-</div>
-<!--end .guide-parent-wrap-->
+
+</div> <!--end #guide-parent-wrap-->
+
+<!--GUIDE BUILDER CONTAINER-->
+		<div class="guidewrapper">
+
+			<div id="guide-container-width">
+
+				<?php global $guide_container_width; ?>
+				<script>
+					$('#guide-container-width').css('width', '<?php echo $guide_container_width[0]; ?>');
+
+				</script>
+
+				<div id="tabs" data-tab-count="<?php echo ( count($all_tabs) );  ?>">
+
+	                 <?php $lobjGuide->outputNavTabs(); ?>
+	                 <?php $lobjGuide->outputTabs (); ?>
+
+	            </div> <!--end #tabs-->
+
+			</div><!--end #guide-container-width-->
+
+		</div><!--end #guidewrapper-->
 
 
 <!-- FLYOUT PANEL-->
