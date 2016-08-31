@@ -492,7 +492,7 @@ function pluslet() {
 					});
 
 
-					if(clones.length > 0) {
+					if( (clones) && (clones.length > 0) ) {
 						var titles = [];
 
 						$.each(clones, function( key, value ){
