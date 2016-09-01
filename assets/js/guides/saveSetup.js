@@ -100,7 +100,7 @@ function saveSetup() {
 				lstrInstance = "pluslet-update-body-" + lintID;
 				//Title of item
 		        if($("#pluslet-update-title-" + lintID).val() == null) {
-		            b = $(".pluslet-" + lintID).find('.titlebar_text').clone();
+		            var b = $(".pluslet-" + lintID).find('.titlebar_text').clone();
 		            b.children().remove();
 		            lstrTitle = b.text().trim();
 		        } else {
@@ -537,7 +537,7 @@ function saveSetup() {
 		        var lstrExternal = $(this).parent('li').attr('data-external-link');
 		        var lintVisibility = parseInt($(this).parent('li').attr('data-visibility'));
 		        var tab_id = $(this).attr("href").split("tabs-")[1];
-		        console.log("Tab ids:" + tab_id);
+		        //console.log("Tab ids:" + tab_id);
 		        var lobjTab = {};
 		        lobjTab.name = lstrName;
 		        lobjTab.external = lstrExternal;
@@ -545,9 +545,9 @@ function saveSetup() {
 		        lobjTab.sections = [];
 
 		        $('div#tabs-' + tab_id + ' div[id^="section_"]').each(function () {
-		            console.log("Selector:" + 'div#tabs-' + tab_id + ' div[id^="section_"]');
+		            //console.log("Selector:" + 'div#tabs-' + tab_id + ' div[id^="section_"]');
 		            var section_id = $(this).attr("id").split("section_")[1];
-		            console.log("Section ID:" + section_id);
+		            //console.log("Section ID:" + section_id);
 		            var lobjSection = {};
 		            lobjSection.center_data = "";
 		            lobjSection.left_data = "";
