@@ -574,7 +574,7 @@ function saveSetup() {
 		    });
 
 		    lstrTabs = JSON.stringify(lobjTabs);
-		    console.log(lstrTabs);
+		    //console.log(lstrTabs);
 		    $("#response").load("helpers/save_guide.php", {
 		            this_subject_id: $('#guide-parent-wrap').data().subjectId,
 		            user_name: $('#guide-parent-wrap').data().staffId,
@@ -590,10 +590,15 @@ function saveSetup() {
 		            favoriteBox().getUserFavoriteBoxes(g.getStaffId());
 		            favoriteBox().markAsFavorite();
 		            copyClone().markAsLinked();
-
+					mySaveSetup.updateTabIds();
 
 
 		        });
+		},
+
+		updateTabIds: function () {
+
+			console.log('update tabs');
 		},
 		refreshFeeds: function () {
 		    /////////////////////

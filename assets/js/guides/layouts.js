@@ -72,11 +72,11 @@ function layout() {
 				
 				var sourceColumn = moveColumns[k][0];
 				var targetColumn = moveColumns[k][1];
-				console.log(sourceColumn);
+				//console.log(sourceColumn);
 				
 				var content = $('#section_' + sectionId + ' #container-' + sourceColumn + ' .portal-column').children();
-				console.log('#' + sectionId + ' #container-' + sourceColumn + ' .portal-column');
-				console.log('#' + sectionId + ' #container-' + targetColumn + ' .portal-column')
+				//console.log('#' + sectionId + ' #container-' + sourceColumn + ' .portal-column');
+				//console.log('#' + sectionId + ' #container-' + targetColumn + ' .portal-column')
 				$('#section_' + sectionId + '  #container-' + targetColumn + ' .portal-column').append(content);
 				
 			}
@@ -147,12 +147,12 @@ function layout() {
 
 			}
 
-			console.log(dataLayout);
+			//console.log(dataLayout);
 
 			
 			for (var k in myLayout.layouts) {	
 				if (dataLayout === k) {
-					console.log("Adding active...");
+					//console.log("Adding active...");
 					$(myLayout.layouts[k].selector).addClass('active-layout-icon');
 				} else {
 					$(myLayout.layouts[k].selector).removeClass('active-layout-icon');
