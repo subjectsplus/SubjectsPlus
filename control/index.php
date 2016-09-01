@@ -46,12 +46,16 @@ if (isset($_SESSION["admin"]) || isset($_SESSION["supervisor"])) {
 }
 
 // Unncessary if someone is using shibboleth authentication
-if (isset($use_shibboleth) && $use_shibboleth === TRUE) {
-  // nothing.  I've done it this way in case someone with an older config.php file doesn't have this $use_shibboleth var set
-  $reset_password = "<p class=\"star-class\"><a href=\"includes/set_password.php?staff_id=" . $_SESSION["staff_id"] . "\" id=\"reset_password\">" .  _("Reset Password") . "</a></p>";
-} else {
-  $reset_password = "";
+
+$reset_password = "<p class=\"star-class\"><a href=\"includes/set_password.php?staff_id=" . $_SESSION["staff_id"] . "\" id=\"reset_password\">" .  _("Reset Password") . "</a></p>";
+
+if (isset($use_shibboleth)) {
+  // $use_shibboleth var exists, but is it set to true?
+  if ($use_shibboleth == TRUE) {
+    $reset_password = "";
+  } 
 }
+
 
 ?>
 <div class="pure-g">

@@ -639,24 +639,51 @@ class Staff {
     // Password
     ///////////////
 
-    // only do if someone isn't using Shib
-    if (isset($use_shibboleth) && $use_shibboleth === TRUE) {
-      // nothing.  I've done it this way in case someone with an older config.php file doesn't have this $use_shibboleth var set
-    } else {
+    $make_pwd_box = "false";
+    $our_password = "";
 
-    if ($this->_staff_id != "") {
-      $our_password = "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>
-        ";
+    $pwd_text_1 = "<p  ><a href=\"../includes/set_password.php?staff_id=" . $this->_staff_id . "\" id=\"reset_password\">" . _("The password is hidden.  Reset?") . "</a></p>";
+
+    $pwd_text_2 = "<input type=\"password\" name=\"password\" size=\"20\" class=\"required_field\" /><br />
+    <p style=\"font-size: smaller\">Pasword must have a special character, a letter, a number, and at least 6 characters.</p>
+    <p style=\"font-size: smaller\">The password is stored as a hash in the database, but unless you have SSL travels clear text across the internet.</p>";
+
+    // Don't show this box if they have shibboleth turned on
+
+    //$use_shibboleth2 = "";
+    if (!isset($use_shibboleth2)) {
+
+      // show password, but determine which text to use
+        if ($this->_staff_id != "") {
+          $our_password = $pwd_text_1;
+        } else {
+          $our_password = $pwd_text_2;
+        } 
+      $make_pwd_box = "true";
+
     } else {
-      $our_password = "<input type=\"password\" name=\"password\" size=\"20\" class=\"required_field\" /><br />
-        <p style=\"font-size: smaller\">Pasword must have a special character, a letter, a number, and at least 6 characters.</p>
-		<p style=\"font-size: smaller\">The password is stored as a hash in the database, but unless you have SSL travels clear text across the internet.</p>";
+      // maybe show password
+      if ($use_shibboleth2 == TRUE) {
+      //don't show password
+
+      } else {
+      // show password, but determine which text to use
+        if ($this->_staff_id != "") {
+          $our_password = $pwd_text_1;
+        } else {
+          $our_password = $pwd_text_2;
+        }
+
+        $make_pwd_box = "true";
+      }
     }
 
-    makePluslet("Password", $our_password, "no_overflow");
-}
+    if ($make_pwd_box == "true") {
+      makePluslet("Password", $our_password, "no_overflow");
+    }
 
-    /////////////////
+
+    ///////////////
     // Save/Delete Buttons
     /////////////////
 

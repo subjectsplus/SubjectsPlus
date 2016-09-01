@@ -79,7 +79,7 @@ $dept_intro = '
           <li><a href="#125">Learning & Research Services</a></li>
           <ul>
             <li><a href="#107">Digital Media Lab</a></li>
-            <li><a href="#118">Learning and Research Services</a></li>
+            <li><a href="#118">Learning & Research Services</a></li>
             <!--<li><a href="#Information_/_Learning_Commons">Information / Learning Commons</a></li>-->   
           </ul>
 
