@@ -9,7 +9,9 @@ function saveSetup() {
 
 	var mySaveSetup = {
 
-		settings : {},
+		settings : {
+			fetchTabIdsUrl : "/control/guides/helpers/fetch_tab_ids.php?",
+		},
 		strings : {},
 		bindUiActions : function() {
 			
@@ -598,7 +600,37 @@ function saveSetup() {
 
 		updateTabIds: function () {
 
-			console.log('update tabs');
+			var g = guide();
+			var subjectId = g.getSubjectId();
+
+			var payload = {
+				'subject_id' : subjectId,
+			};
+
+			$.ajax({
+				url: mySaveSetup.settings.fetchTabIdsUrl,
+				type: "GET",
+				data: payload,
+				dataType: "json",
+				success: function(data) {
+					//console.log(data);
+					var newIds = [];
+					$.each(data.tab_ids, function (index, value) {
+						newIds.push(value.tab_id);
+					});
+
+					$(newIds).map(function (index, value) {});
+
+					var items = $('#tabs > ul li');
+					$.each(items, function(index, obj) {
+						if($.isNumeric($(obj).attr('id'))) {
+							var newId = $(newIds).get(index - 1);
+							//console.log( $(obj).attr('id', newId) );
+						}
+					});
+				}
+			});
+
 		},
 		refreshFeeds: function () {
 		    /////////////////////
