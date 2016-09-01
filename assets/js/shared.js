@@ -45,13 +45,13 @@ $(document).ready(function($){
     ///////////////////////
     $('#load_photo').colorbox({
         iframe: true,
-        innerWidth:"500",
-        innerHeight:"400",
+        innerWidth:"600",
+        innerHeight:"600",
 
         onClosed:function() {
 
             $("#headshot").attr("src", headshot_location);
-
+             window.location = window.location.href;
         }
     });
 

@@ -144,18 +144,18 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
       ?>
       <script type="text/javascript" language="javascript"> 
       $(document).ready(function(){ 
-        parent.$.colorbox.close();  
-        window.location = window.location.href;
+        parent.$.colorbox.close();
       }); 
-      </script>
-      <?php
+      </script>      
+
+      <?php 
 
       } else {
         // one error occured
-        echo '<fieldset>';
-        echo '  <legend>' . _("File could not be uploaded to the specified location") . '</legend>';
-        echo '  Error: ' . $handle->error . '';
-        echo '</fieldset>';
+        echo '<div class="setStaffPhotoWarning">';
+        echo '<p>' . _("File could not be uploaded to the specified location") . '</p>' ;
+        echo '<p> Error: ' . $handle->error . '';
+        echo '</p></div>';
       }
 
     // we delete the temporary files
@@ -164,17 +164,28 @@ if ((isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GE
   } else {
     // if we're here, the upload file failed for some reasons
     // i.e. the server didn't receive the file
-    echo '<fieldset>';
-    echo '  <legend>' . _("File not uploaded to the server") . '</legend>';
-    echo '  Error: ' . $handle->error . '';
-    echo '</fieldset>';
+    echo '<div class="setStaffPhotoWarning">';
+    echo '  <p>' . _("File not uploaded to the server") . '</p>';
+    echo '  <p>Error: ' . $handle->error . '';
+    echo '</p></div>';
   }
 }
 
-print "<div id=\"maincontent\">
+print "<div id=\"maincontent\"><div class=\"set_photo_container\">
 <h2 class=\"bw_head\">" . _("Update Picture for ") . $staffer[0]['fname'] . "&nbsp;" . $staffer[0]['lname'] . "</h2>";
 print $original_photo;
 print $upload_box;
-print "</div>";
+print "</div></div>";
+
+?>
+
+<script type="text/javascript" language="javascript"> 
+  $(document).ready(function(){ 
+      $(".setStaffPhotoWarning").insertBefore(".bw_head");
+      $(".setStaffPhotoWarning").css("width","92%");
+  }); 
+</script>  
+
+<?php
 
 include("../includes/footer.php");
