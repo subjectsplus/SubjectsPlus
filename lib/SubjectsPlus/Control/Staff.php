@@ -650,8 +650,8 @@ class Staff {
 
     // Don't show this box if they have shibboleth turned on
 
-    //$use_shibboleth2 = "";
-    if (!isset($use_shibboleth2)) {
+    //$use_shibboleth = ""; // for testing purposes, to set this without blowing things up
+    if (!isset($use_shibboleth)) {
 
       // show password, but determine which text to use
         if ($this->_staff_id != "") {
@@ -663,7 +663,7 @@ class Staff {
 
     } else {
       // maybe show password
-      if ($use_shibboleth2 == TRUE) {
+      if ($use_shibboleth == TRUE) {
       //don't show password
 
       } else {
