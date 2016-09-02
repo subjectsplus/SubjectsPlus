@@ -10,7 +10,7 @@ function saveSetup() {
 	var mySaveSetup = {
 
 		settings : {
-			fetchTabIdsUrl : "/control/guides/helpers/fetch_tab_ids.php?",
+			fetchTabIdsUrl : "./helpers/fetch_tab_ids.php?",
 		},
 		strings : {},
 		bindUiActions : function() {
