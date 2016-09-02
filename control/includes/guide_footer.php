@@ -8,6 +8,8 @@
 </body>
 <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
 
+<script type="text/javascript" src="ajax.js"></script>
+
 <script>
 	// Initialize the guide interface 
 	var myGuideSetup = guideSetup();
@@ -15,5 +17,7 @@
 
     var bookList = bookList();
     bookList.init();
+
+
 </script>
 </html>

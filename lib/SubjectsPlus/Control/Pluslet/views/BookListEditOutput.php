@@ -10,7 +10,7 @@
                   placeholder="Please insert a comma-separated ISBNs list"><?php
                 if ($this->_extra != null) {
                         echo $this->_extra['isbn'];
-                  }
+                }
             ?></textarea>
 
 <script>
