@@ -32,13 +32,14 @@ foreach ($r as $okemail) {
     $ok_names[] = $names[0];
 }
 
-// Check if our user-submitted name is okay; else use default
+// Check if our user-submitted name is okay & active; else redirect to staff listing page
+
 if (isset($_GET['name']) && in_array(($_GET['name']), $ok_names)) {
     // use the submitted name
     $check_this = $_GET['name'];
 } else {
     // use the first good email address
-    $check_this = $ok_names[0];
+    header("location:{$PublicPath}staff.php");
 }
 
 // agd 2011 using a LIKE in the $qstaffer query below
