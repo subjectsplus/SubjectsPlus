@@ -10,7 +10,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\SubjectsPlus\Control;
+use SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array("ui"); //um don't want no ui_styles
@@ -426,6 +426,7 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('./includes/js/autoComplete.js'); ?>
 <?php include('./includes/js/cloneView.js'); ?>
 <?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
+<?php include('../assets/js/guides/BookList.js'); ?>
 
 hash.init();
 track.init();
@@ -433,9 +434,17 @@ tabDropdown.init();
 autoComplete.init();
 cloneView.init();
 
+$(document).ready(function() {
+
 
     var ss = subjectSpecialist();
     ss.init();
+
+
+    var bookList = bookList();
+    bookList.init();
+
+});
 
 
 </script>

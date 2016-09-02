@@ -1,19 +1,10 @@
-<!--end maincontent div -->
-</div>
-<br />
-<!--end wrap div -->
-</div>
 
 
-</body>
-<script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
+    var bookList = bookList();
+    bookList.init();
 
-<script>
-	// Initialize the guide interface 
-	var myGuideSetup = guideSetup();
-	myGuideSetup.init();
+
 
     var ss = subjectSpecialist();
     ss.init();
-</script>
 </html>
