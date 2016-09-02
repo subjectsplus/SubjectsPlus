@@ -2627,7 +2627,7 @@ class upload {
         $this->translation['no_mime']                     = 'MIME type can\'t be detected.';
         $this->translation['incorrect_file']              = 'Incorrect type of file.';
         $this->translation['image_too_wide']              = 'Image too wide.';
-        $this->translation['image_too_narrow']            = 'Image too narrow.';
+        $this->translation['image_too_narrow']            = 'Image too narrow. Please check minimum width.';
         $this->translation['image_too_high']              = 'Image too tall.';
         $this->translation['image_too_short']             = 'Image too short.';
         $this->translation['ratio_too_high']              = 'Image ratio too high (image too wide).';

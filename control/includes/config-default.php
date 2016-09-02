@@ -78,6 +78,12 @@ $guide_container_width = array( "1160px");
 //Global Subject Specialist Pluslet Heading
 $default_subject_specialist_heading = "Librarians";
 
+//Headshot Thumbnail Width
+$headshot_thumb_width = "70";
+
+//Headshot Large Width
+$headshot_large_width = "225";
+
 // SerSol provided disciplines; you may use for SerSol purposes, or add your own
 // In order to activate disciplines (which could function as parents to subjects/guides/topics)
 // You need to set this to TRUE

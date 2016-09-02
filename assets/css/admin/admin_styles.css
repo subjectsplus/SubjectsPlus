@@ -4308,6 +4308,19 @@ Link Link Admin Panel
 .modal-create-record-btn {display: block; margin:20px 0;}
 
 
+/*///////////////////////////////////////////
+Admin Screen User Profile
+////////////////////////////////////////////*/
+
+.setStaffPhotoWarning {display: inline-block; background-color: #f6e3e7;padding:10px; margin: 10px 10px 0 10px;}
+
+.set_photo_container {background-color: #FFF; padding: 10px; margin: 10px 0;}
+
+
+
+
+
+
 
 
 /*///////////////////////////////////////////
