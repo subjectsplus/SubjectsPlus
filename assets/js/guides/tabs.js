@@ -21,7 +21,7 @@ function tabs() {
             saveButton: $('#save_guide'),
             tabExternalUrl: 'input[name=\'tab_external_url\']',
             findBoxTabs: $('#find-box-tabs'),
-            cloneByTabUrl : "./helpers/fetch_cloned_pluslets_by_tab_id.php?",
+            cloneByTabUrl : "helpers/fetch_cloned_pluslets_by_tab_id.php?",
         },
         strings: {
             tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
