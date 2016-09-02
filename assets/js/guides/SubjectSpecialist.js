@@ -44,7 +44,7 @@ function subjectSpecialist() {
             $.each(descDiv, function() {
 
                 if( !$.trim( $(this).html() )) {
-                    console.log( $(this).html() );
+                    //console.log( $(this).html() );
                     $(this).remove();
                 }
             });
