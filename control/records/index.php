@@ -36,25 +36,35 @@ $alpha_result = $db->query($alpha_query);
 
 $count = 0;
 $firstletter = "A";
-    
+
+$azRange = range('A', 'Z');
+$azRange[] = "Num";
+$azRange[] = "All";
+
 foreach ($alpha_result as $myletter) {
 
-	if (isset($myletter[0][0])) {
-	
-    if ($count == 0) { $firstletter = $myletter[0][0];}
+    if (isset($myletter[0][0])) {
 
-    $atoz .="<a href=\""
-            . "index.php?letter="
-            . $myletter[0][0]
-            . "\">"
-            . $myletter[0][0]
-            . "</a> &nbsp;";
+        $upperCase = strtoupper($myletter[0][0]);
 
-    $count++;
-    
-	}
+        if ($count == 0) {
+            $firstletter = $upperCase;
+        }
+
+        if (in_array($upperCase, $azRange)) {
+            $atoz .="<a href=\""
+                . "index.php?letter="
+                . $upperCase
+                . "\">"
+                . $upperCase
+                . "</a> &nbsp;";
+
+            $count++;
+        }
+    }
 }
 
+$atoz .= "<a href=\"index.php?letter=Num\">Num</a>&nbsp;";
 $atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
 
 // end A-Z header for now
