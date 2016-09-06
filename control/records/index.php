@@ -78,7 +78,10 @@ if (isset($_GET["ctag"])) {
     $alpha_id = $firstletter;
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$firstletter%' order by title.title";
     //$alpha_id = FALSE;
-} elseif ($_GET['letter'] == "all") {
+} elseif ($_GET['letter'] == "Num") {
+    $alpha_id = "Num";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and title NOT REGEXP '^[[:alpha:]]'order by title.title";
+}elseif ($_GET['letter'] == "all") {
     $alpha_id = "All Records";
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions order by title.title";
 } elseif ($_GET['letter'] == "restricted") {
