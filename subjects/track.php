@@ -25,7 +25,7 @@ if(isset($_SERVER['HTTP_REFERER'])) {
 
 if(isset($_SERVER['REMOTE_ADDR'])) {
 	$stats->setRemoteAddress($_SERVER['REMOTE_ADDR']);
-} 
+}
 
 if(isset($_GET['page_title'])) {
 	$stats->setPageTitle($_GET['page_title']);
@@ -43,7 +43,7 @@ if(isset($_GET['event_type'])) {
 	$stats->setEventType($_GET['event_type']);
 } else {
 	$stats->setEventType("view");
-	
+
 }
 
 if(isset($_GET['tab_name'])) {
@@ -52,6 +52,7 @@ if(isset($_GET['tab_name'])) {
 
 if(isset($_GET['link_url'])) {
 	$stats->setLinkUrl($_GET['link_url']);
+	$stats->setLinkTitle($_GET['link_title']);
 }
 
 $stats->saveStats();
