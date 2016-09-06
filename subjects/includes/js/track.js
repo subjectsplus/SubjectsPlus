@@ -39,8 +39,14 @@ var track = {
 		});
 
 		$('body').on('click', '.track-me', function() {
+		
 			$.get(track.settings.trackUrl,
-				{'event_type':'link', 'link_title':$(this).text(),'link_url':$(this).attr('href'),'subject': subject});
+				{'event_type':'link',
+					'link_title':$(this).text(),
+					'link_url':$(this).attr('href'),
+					'in_pluslet':$(this).parents('.pluslet').attr('name'),
+					'subject': subject
+				});
 
 		});
 

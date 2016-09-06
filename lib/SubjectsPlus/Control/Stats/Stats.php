@@ -20,6 +20,8 @@ class Stats implements OutputInterface {
 	private $tab_name;
 	private $link_url;
 	private $link_title;
+	private $in_tab;
+	private $in_pluslet;
 
 
 	public function __construct(Querier $db) {
@@ -94,10 +96,26 @@ class Stats implements OutputInterface {
 	}
 
 	public function getLinkTitle() {
-		return $this->link_url;
-	}
+	return $this->link_url;
+}
 	public function setLinkTitle($link_title) {
 		$this->link_title = $link_title;
+		return $this;
+	}
+
+	public function getInTab() {
+		return $this->in_tab;
+	}
+	public function setInTab($in_tab) {
+		$this->in_tab = $in_tab;
+		return $this;
+	}
+
+	public function getInPluslet() {
+		return $this->in_pluslet;
+	}
+	public function setInPluslet($in_pluslet) {
+		$this->in_pluslet = $in_pluslet;
 		return $this;
 	}
 
@@ -116,7 +134,7 @@ class Stats implements OutputInterface {
 	public function saveStats() {
 
 		$connection = $this->db->getConnection();
-		$statement = $connection->prepare("INSERT INTO stats (http_referer, remote_address, date, page_title, user_agent, subject_short_form, event_type,tab_name,link_url, link_title) VALUES (:http_referer, :remote_address, :date, :page_title, :user_agent, :subject_short_form, :event_type, :tab_name, :link_url, :link_title)");
+		$statement = $connection->prepare("INSERT INTO stats (http_referer, remote_address, date, page_title, user_agent, subject_short_form, event_type,tab_name,link_url, link_title, in_tab, in_pluslet) VALUES (:http_referer, :remote_address, :date, :page_title, :user_agent, :subject_short_form, :event_type, :tab_name, :link_url, :link_title, :in_tab, :in_pluslet)");
 		$statement->bindParam(":http_referer", $this->http_referer);
 		$statement->bindParam(":remote_address", $this->remote_address);
 		$statement->bindParam(":date", $this->date);
@@ -128,6 +146,8 @@ class Stats implements OutputInterface {
 		$statement->bindParam(":tab_name", $this->tab_name);
 		$statement->bindParam(":link_url", $this->link_url);
 		$statement->bindParam(":link_title", $this->link_title);
+		$statement->bindParam(":in_tab", $this->in_tab);
+		$statement->bindParam(":in_pluslet", $this->in_pluslet);
 		$statement->execute();
 
 	}

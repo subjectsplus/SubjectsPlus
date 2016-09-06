@@ -53,6 +53,8 @@ if(isset($_GET['tab_name'])) {
 if(isset($_GET['link_url'])) {
 	$stats->setLinkUrl($_GET['link_url']);
 	$stats->setLinkTitle($_GET['link_title']);
+	$stats->setInTab($_GET['in_tab']);
+	$stats->setInPluslet($_GET['in_pluslet']);
 }
 
 $stats->saveStats();
