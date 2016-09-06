@@ -14,6 +14,4 @@
 <script>
     var b = bookList();
     b.init();
-
-
 </script>
