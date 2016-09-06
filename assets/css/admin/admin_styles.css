@@ -633,7 +633,8 @@ html, button, input, select, textarea {
   display: inline-block;
   margin: 0 5px 10px 10px;
   padding: 10px 0;
-  width: 113px;
+  width: 85px;
+  height: 56px;
   font-size: 30px;
   overflow: hidden;
   border-radius: 2px;
@@ -654,7 +655,7 @@ html, button, input, select, textarea {
 .box-item .icon-text {
   font-size: 12px !important;
   line-height: 0.9em;
-  padding-top: 4px;
+  padding-top: 8px;
   display: block;
 }
 
