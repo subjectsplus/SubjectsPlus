@@ -584,7 +584,7 @@ function saveSetup() {
 		        },
 		        function () {
 		            
-		            $("#response").fadeIn();
+		            $("#response").fadeIn().delay(4000).fadeOut();
 		            mySaveSetup.refreshFeeds();
 		         
 		            var g = guide();
