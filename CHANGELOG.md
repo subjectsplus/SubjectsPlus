@@ -90,6 +90,9 @@
 
 **Merged pull requests:**
 
+- Sp4 dev merge into master: updated change log [\#791](https://github.com/subjectsplus/SubjectsPlus/pull/791) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev: updated change log [\#790](https://github.com/subjectsplus/SubjectsPlus/pull/790) ([cgb37](https://github.com/cgb37))
+- updated change log [\#789](https://github.com/subjectsplus/SubjectsPlus/pull/789) ([cgb37](https://github.com/cgb37))
 - Fix parent guide delete: 	Added display sibling guides to Related Guides [\#786](https://github.com/subjectsplus/SubjectsPlus/pull/786) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master Fixed \#783 Allow Related Guides box to appear in flyout in child guides [\#785](https://github.com/subjectsplus/SubjectsPlus/pull/785) ([cgb37](https://github.com/cgb37))
 - Merge pull request \#780 from subjectsplus/fix-parent-guide-delete [\#784](https://github.com/subjectsplus/SubjectsPlus/pull/784) ([cgb37](https://github.com/cgb37))
