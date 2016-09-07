@@ -216,7 +216,8 @@ class Guide
         $children = $db->query ( 'SELECT * FROM subject
                           INNER JOIN subject_subject
                           ON subject.subject_id = subject_subject.subject_child
-                          WHERE subject_parent = ' . $this->_subject_id );
+                          WHERE subject_parent = ' . $this->_subject_id . '
+                          OR subject_child = ' . $this->_subject_id );
 
         return $children;
     }
