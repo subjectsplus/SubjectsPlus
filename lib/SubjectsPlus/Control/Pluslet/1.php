@@ -78,7 +78,7 @@ class Pluslet_1 extends Pluslet {
 
         foreach ($r as $myrow) {
 
-
+            $last_title_id = ""; //init
             $label = $myrow["title"];
 
             $url = $myrow["location"];
