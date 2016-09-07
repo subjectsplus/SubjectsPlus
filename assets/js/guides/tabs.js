@@ -232,12 +232,10 @@ function tabs() {
                             data: payload,
                             dataType: "json",
                             success: function(data) {
-                                //console.log(data);
 
-                                if( (data.clones_by_tab.length) && (data.clones_by_tab[0].length > 0) ) {
+                                if( (data.clones_by_tab.length) && (data.clones_by_tab.length > 0) ) {
 
                                     editTabDialog.dialog("close");
-
                                     alert('This tab contains master boxes that have linked boxes in other tabs.')
                                 } else {
 
@@ -249,9 +247,7 @@ function tabs() {
                                     editTabDialog.dialog("close");
                                     $("#response").hide();
                                     $('#save_guide').fadeIn();
-                                    
                                 }
-
                             }
                         });
                     },
@@ -496,7 +492,7 @@ function tabs() {
             document.addEventListener("DOMContentLoaded", function() {
                 $('.create-guide').on('click', function() {
 
-                    console.log('copy guide');
+                    //console.log('copy guide');
 
                     var selected_guide = urlParam('subject_id');
 

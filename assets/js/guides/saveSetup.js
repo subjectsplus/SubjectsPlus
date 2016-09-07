@@ -9,7 +9,9 @@ function saveSetup() {
 
 	var mySaveSetup = {
 
-		settings : {},
+		settings : {
+			fetchTabIdsUrl : "helpers/fetch_tab_ids.php?",
+		},
 		strings : {},
 		bindUiActions : function() {
 			
@@ -100,7 +102,7 @@ function saveSetup() {
 				lstrInstance = "pluslet-update-body-" + lintID;
 				//Title of item
 		        if($("#pluslet-update-title-" + lintID).val() == null) {
-		            b = $(".pluslet-" + lintID).find('.titlebar_text').clone();
+		            var b = $(".pluslet-" + lintID).find('.titlebar_text').clone();
 		            b.children().remove();
 		            lstrTitle = b.text().trim();
 		        } else {
@@ -537,7 +539,7 @@ function saveSetup() {
 		        var lstrExternal = $(this).parent('li').attr('data-external-link');
 		        var lintVisibility = parseInt($(this).parent('li').attr('data-visibility'));
 		        var tab_id = $(this).attr("href").split("tabs-")[1];
-		        console.log("Tab ids:" + tab_id);
+		        //console.log("Tab ids:" + tab_id);
 		        var lobjTab = {};
 		        lobjTab.name = lstrName;
 		        lobjTab.external = lstrExternal;
@@ -545,9 +547,9 @@ function saveSetup() {
 		        lobjTab.sections = [];
 
 		        $('div#tabs-' + tab_id + ' div[id^="section_"]').each(function () {
-		            console.log("Selector:" + 'div#tabs-' + tab_id + ' div[id^="section_"]');
+		            //console.log("Selector:" + 'div#tabs-' + tab_id + ' div[id^="section_"]');
 		            var section_id = $(this).attr("id").split("section_")[1];
-		            console.log("Section ID:" + section_id);
+		            //console.log("Section ID:" + section_id);
 		            var lobjSection = {};
 		            lobjSection.center_data = "";
 		            lobjSection.left_data = "";
@@ -574,7 +576,7 @@ function saveSetup() {
 		    });
 
 		    lstrTabs = JSON.stringify(lobjTabs);
-		    console.log(lstrTabs);
+		    //console.log(lstrTabs);
 		    $("#response").load("helpers/save_guide.php", {
 		            this_subject_id: $('#guide-parent-wrap').data().subjectId,
 		            user_name: $('#guide-parent-wrap').data().staffId,
@@ -582,7 +584,7 @@ function saveSetup() {
 		        },
 		        function () {
 		            
-		            $("#response").fadeIn();
+		            $("#response").fadeIn().delay(4000).fadeOut();
 		            mySaveSetup.refreshFeeds();
 		         
 		            var g = guide();
@@ -590,10 +592,45 @@ function saveSetup() {
 		            favoriteBox().getUserFavoriteBoxes(g.getStaffId());
 		            favoriteBox().markAsFavorite();
 		            copyClone().markAsLinked();
-
+					mySaveSetup.updateTabIds();
 
 
 		        });
+		},
+
+		updateTabIds: function () {
+
+			var g = guide();
+			var subjectId = g.getSubjectId();
+
+			var payload = {
+				'subject_id' : subjectId,
+			};
+
+			$.ajax({
+				url: mySaveSetup.settings.fetchTabIdsUrl,
+				type: "GET",
+				data: payload,
+				dataType: "json",
+				success: function(data) {
+					console.log(data);
+					var newIds = [];
+					$.each(data.tab_ids, function (index, value) {
+						newIds.push(value.tab_id);
+					});
+
+					$(newIds).map(function (index, value) {});
+
+					var items = $('#tabs > ul li');
+					$.each(items, function(index, obj) {
+						if($.isNumeric($(obj).attr('id'))) {
+							var newId = $(newIds).get(index - 1);
+							console.log( $(obj).attr('id', newId) );
+						}
+					});
+				}
+			});
+
 		},
 		refreshFeeds: function () {
 		    /////////////////////

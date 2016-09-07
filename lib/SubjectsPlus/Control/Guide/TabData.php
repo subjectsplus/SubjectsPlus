@@ -16,6 +16,7 @@ class TabData implements OutputInterface
 {
 
     private $db;
+    public $tab_ids;
 
     public function __construct(Querier $db) {
 
@@ -70,6 +71,18 @@ class TabData implements OutputInterface
         }
     }
 
+
+    public function fetchTabIdsBySubjectId($subject_id) {
+
+        $connection = $this->db->getConnection();
+
+        $statement = $connection->prepare("SELECT tab_id FROM tab WHERE subject_id = :subject_id");
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $tab_ids = $statement->fetchAll();
+        $this->tab_ids = $tab_ids;
+
+    }
 
     public function toArray() {
         return get_object_vars ( $this );
