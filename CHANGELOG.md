@@ -6,9 +6,9 @@
 
 **Implemented enhancements:**
 
+- Allow Related Guides box to appear in flyout in child guides [\#783](https://github.com/subjectsplus/SubjectsPlus/issues/783)
 - With the new sticky save, the feedback bar should fade out again after a few seconds [\#772](https://github.com/subjectsplus/SubjectsPlus/issues/772)
 - Static nav bar for guide functions [\#737](https://github.com/subjectsplus/SubjectsPlus/issues/737)
-- Subject Specialist: Add option to display as small or large headshot thumbnail [\#730](https://github.com/subjectsplus/SubjectsPlus/issues/730)
 - Remove 0 results from database by subject dropdown [\#729](https://github.com/subjectsplus/SubjectsPlus/issues/729)
 - Would like center align added to CKEditor \(UM\) [\#728](https://github.com/subjectsplus/SubjectsPlus/issues/728)
 - Add new status flag to Record, make sure everything doesn't break [\#724](https://github.com/subjectsplus/SubjectsPlus/issues/724)
@@ -22,6 +22,8 @@
 - Limit Find Boxes Search to current guide [\#447](https://github.com/subjectsplus/SubjectsPlus/issues/447)
 - Links Pluslet [\#416](https://github.com/subjectsplus/SubjectsPlus/issues/416)
 - Add ckeditor to sub specialist [\#268](https://github.com/subjectsplus/SubjectsPlus/issues/268)
+- Sp4 dev merge into master: Added display sibling guides to Related Guides [\#788](https://github.com/subjectsplus/SubjectsPlus/pull/788) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev: Display siblings in related guide box when in a child guide [\#787](https://github.com/subjectsplus/SubjectsPlus/pull/787) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master [\#686](https://github.com/subjectsplus/SubjectsPlus/pull/686) ([cgb37](https://github.com/cgb37))
 - feature - added Master subject name to related guide pluslet [\#685](https://github.com/subjectsplus/SubjectsPlus/pull/685) ([cgb37](https://github.com/cgb37))
 - feature- display child guides in Related guides pluslet when pluslet [\#684](https://github.com/subjectsplus/SubjectsPlus/pull/684) ([cgb37](https://github.com/cgb37))
@@ -88,6 +90,11 @@
 
 **Merged pull requests:**
 
+- Fix parent guide delete: 	Added display sibling guides to Related Guides [\#786](https://github.com/subjectsplus/SubjectsPlus/pull/786) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master Fixed \#783 Allow Related Guides box to appear in flyout in child guides [\#785](https://github.com/subjectsplus/SubjectsPlus/pull/785) ([cgb37](https://github.com/cgb37))
+- Merge pull request \#780 from subjectsplus/fix-parent-guide-delete [\#784](https://github.com/subjectsplus/SubjectsPlus/pull/784) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master: added auto generated change log [\#782](https://github.com/subjectsplus/SubjectsPlus/pull/782) ([cgb37](https://github.com/cgb37))
+- Added auto generated changelog  [\#781](https://github.com/subjectsplus/SubjectsPlus/pull/781) ([cgb37](https://github.com/cgb37))
 - Added OR subject\_child = subject\_id to Related Guides query [\#780](https://github.com/subjectsplus/SubjectsPlus/pull/780) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master Fix \#772 Add fade out to response bar [\#779](https://github.com/subjectsplus/SubjectsPlus/pull/779) ([cgb37](https://github.com/cgb37))
 - Staging merge into sp4-dev: Fix \#772 Add fade out to response bar [\#778](https://github.com/subjectsplus/SubjectsPlus/pull/778) ([cgb37](https://github.com/cgb37))
