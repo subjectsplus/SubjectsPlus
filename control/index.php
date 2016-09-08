@@ -7,6 +7,8 @@
  *   @date May 2011
  */
 use SubjectsPlus\Control\Staff;
+use SubjectsPlus\Control\Stats;
+use SubjectsPlus\Control\Querier;
 
 $page_title = "SubjectsPlus";
 $subcat = "home";
@@ -58,6 +60,11 @@ if (isset($use_shibboleth)) {
 
 
 ?>
+
+
+
+
+
 <div class="pure-g">
 <div class="pure-u-1-3">  
   <div class="pluslet">
@@ -112,22 +119,58 @@ if (isset($use_shibboleth)) {
 
 </div>
 
-<div class="pure-u-1-3">  
+<!-- Total External Link Clicks Per Guide -->
+<?php
+$db = new Querier;
+$stats = new Stats($db);
+$staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 
-</div>
+?>
+
+    <div class="pure-u-1-3">
+	<div class="pluslet no_overlflow">
+	    <div class="titlebar">
+		<div class="titlebar_text">Guide Views</div>
+	    </div>
+	    <div class="pluslet_body">
+		<table>
+		    <thead>
+			<tr>
+			    <td>Guide</td>
+			    <td>Number of Views</td>
+			</tr>
+		    </thead>
+		    <tbody>
+			<?php foreach ($staff_short_forms as $staff_short_form) { ?>
+			    <tr>
+				<td>
+				    <?php echo $staff_short_form['shortform']  ?>
+				</td>
+				<td>
+				   <?php $view_count = $stats->getShortFormCount($staff_short_form['shortform']); echo $view_count[0]['view_count'] ?>
+				</td>
+			    </tr>
+			<?php } ?>
+		    </tbody>
+		</table>
+	    </div>
+	</div>
+    </div>
+
+
 
 <div class="pure-u-1-3">  
-  <div class="pluslet">
-    <div class="titlebar">
-      <div class="titlebar_text"><?php print _("Recent Activity"); ?></div>
-      <div class="titlebar_options"></div>
+    <div class="pluslet">
+	<div class="titlebar">
+	    <div class="titlebar_text"><?php print _("Recent Activity"); ?></div>
+	    <div class="titlebar_options"></div>
+	</div>
+	<div class="topimage"></div>
+	<div class="pluslet_body">
+	    <p><?php print _("You have recently added or edited:"); ?></p>
+	    <?php echo $recent_activity ?>
+	</div>
     </div>
-    <div class="topimage"></div>
-    <div class="pluslet_body">
-      <p><?php print _("You have recently added or edited:"); ?></p>
-      <?php echo $recent_activity ?>
-    </div>
-  </div>
 </div>
 </div>
 
