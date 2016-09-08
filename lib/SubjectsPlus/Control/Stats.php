@@ -29,7 +29,7 @@ class Stats
 	return $this->db->query($query);
     }
     public function getTopExternalLinks() {
-	$query = "SELECT count(*) as num, link_url as 'total_link_clicks', subject_short_form from stats  
+	$query = "SELECT count(*) as num, link_url, subject_short_form from stats  
 	WHERE event_type = 'link' AND link_url NOT LIKE '#%' group by link_url order by count(*) desc";
 	return $this->db->query($query);
     }
@@ -38,4 +38,18 @@ class Stats
 	WHERE event_type = 'tab_click' group by subject_short_form order by count(*) desc";
 	return $this->db->query($query);
     }
+
+    public function getStaffShortForms($staffId) {
+	(int) $staffId = $staffId;
+	$query = "SELECT su.shortform FROM staff as st, subject as su WHERE staff_id = $staffId and su.active = 1";
+	return $this->db->query($query);
+    }
+
+    public function getShortFormCount($shortForm) {
+	$shortForm = $this->db->quote($shortForm); 
+	$query = "SELECT count(*) as view_count FROM stats WHERE subject_short_form = $shortForm";
+	return $this->db->query($query);
+    }
+    
+    
 }
