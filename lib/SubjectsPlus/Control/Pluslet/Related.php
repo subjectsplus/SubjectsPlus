@@ -31,9 +31,17 @@ class Pluslet_Related extends Pluslet {
 
         $output = "";
 
+        //is this a child guide? if so, get parent and siblings
+        $parent_id = $this->isChildGuide($this->_subject_id);
+
+
         if($this->_isclone == 1) {
             $subject_id = $this->getSubjectIdByMasterId($this->_pluslet_id);
             $subject_id = $subject_id['subject_id'];
+
+        } elseif ( (isset($parent_id)) && ($parent_id != NULL) ) {
+
+            $subject_id = $parent_id['subject_parent'];
 
         } else {
             $subject_id = $this->_subject_id;
@@ -46,9 +54,10 @@ class Pluslet_Related extends Pluslet {
             $output .= "<h3><a href=\"../../subjects/guide.php?subject={$master_subject['shortform']}\"> {$master_subject['subject']}</a></h3>";
         }
 
+
         $output .= "<ul>";
 
-        $children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE active = 1 AND subject_parent = ' . $subject_id . ' ORDER BY subject.subject ASC' );
+        $children = $this->db->query ( 'SELECT * FROM subject INNER JOIN subject_subject ON subject.subject_id = subject_subject.subject_child WHERE active = 1 AND subject_parent = ' . $subject_id .' ORDER BY subject.subject ASC' );
 
         foreach ( $children as $child ) {
 
@@ -99,6 +108,17 @@ class Pluslet_Related extends Pluslet {
         $statement->execute();
         $subject = $statement->fetch();
         return $subject;
+    }
+
+    public function isChildGuide($subject_id) {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("SELECT subject_parent FROM subject_subject
+											WHERE subject_child  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $parent_id = $statement->fetch();
+        return $parent_id;
     }
 
 
