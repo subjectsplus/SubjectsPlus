@@ -1,25 +1,18 @@
 /*Document   : booklist.css
 Created on : September 2016
 Author     : pvillanueva
-Description: stylesheet for new books feed (Primo/Alma)
+Description: New Books List Styling - Primo
 */
 
-
-/* New Books List Styling - Primo */
-
-#new_books_container {background-color: #FFF; padding: 10px 10px 10px 0;}
+#new_books_container {background-color: #FFF; padding: 10px;}
 
 #new_books_container .item {
   display:inline-block; 
-  width: calc(100% - 20px);
-    width: -moz-calc(100% - 20px);
-    width: -webkit-calc(100% - 20px);
-  padding: 0 0 15px 10px; 
+  width: 100%;
+  padding: 0; 
   margin: 0 0 15px 0;   
   vertical-align: top;
 }
-
-#new_books_container div:last-of-type {border-bottom: none;}
 
 #new_books_container .item-info {list-style-type:none; margin:0; padding:0; padding: 0 10px 0 0; text-align: center;}
 
@@ -48,12 +41,11 @@ Description: stylesheet for new books feed (Primo/Alma)
 /* //////////////////
 //  Media Queries 
 ////////////////// */
+
 /*for 480px */
 @media screen and (min-width: 480px) {
 
 #new_books_container .item-info {text-align: left;}
-
-
 
 #new_books_container .item-info img {
   float: left;
@@ -69,17 +61,19 @@ Description: stylesheet for new books feed (Primo/Alma)
 
 #new_books_container .item-title{ margin-top: 0;}
 
-}
+}/* end media query */
 
 /* ≥ 568px  .pure-u-sm-* */
 @media screen and (min-width: 35.5em) {
 
 
 
-}
+}/* end media query */
 
 /* ≥ 768px  .pure-u-md-* */
-@media screen and (min-width: 48em) {}
+@media screen and (min-width: 48em) {
+
+}/* end media query */
 
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
@@ -96,4 +90,4 @@ Description: stylesheet for new books feed (Primo/Alma)
   vertical-align: top;
 }
 
-}
+}/* end media query */
