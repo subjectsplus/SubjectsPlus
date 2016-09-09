@@ -426,6 +426,7 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('./includes/js/autoComplete.js'); ?>
 <?php include('./includes/js/cloneView.js'); ?>
 <?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
+<?php include('../assets/js/guides/bookList.js'); ?>
 
 hash.init();
 track.init();
@@ -436,9 +437,6 @@ cloneView.init();
 
     var ss = subjectSpecialist();
     ss.init();
-
-var b = bookList();
-b.init();
 
 </script>
 

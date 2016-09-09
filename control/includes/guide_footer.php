@@ -16,7 +16,5 @@
     var ss = subjectSpecialist();
     ss.init();
 
-    var b = bookList();
-    b.init();
 </script>
 </html>

@@ -15,5 +15,5 @@
 
 <script>
     var b = bookList();
-    b.init();
+    b.initEditView();
 </script>

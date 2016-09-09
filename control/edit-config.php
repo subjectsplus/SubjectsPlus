@@ -153,7 +153,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"syndetics_client_code" => array( _( "Syndetics Client Code" ), _( "This option contains the client code required to use Syndetics" ), "string", "right", "medium", "" , ""),
 
-							"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "medium", "" , "")
+							"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , "")
 
 	);
 

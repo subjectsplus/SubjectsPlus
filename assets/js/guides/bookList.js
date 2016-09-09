@@ -4,14 +4,20 @@ function bookList() {
 
         settings: {},
         strings: {},
-        bindUiActions: function () {
-            myBookList.getBookList();
+        bindUiActions: function (container) {
+            myBookList.getBookList(container);
+        },
+        bindUiActionsForEditView: function () {
             myBookList.validCharacters();
             myBookList.isNumberKey();
         },
-        init: function () {
-            myBookList.bindUiActions();
-        },validCharacters: function () {
+        init: function (container) {
+            myBookList.bindUiActions(container);
+        },
+        initEditView: function () {
+            myBookList.bindUiActionsForEditView();
+        },
+        validCharacters: function () {
             $('textarea[name=BookList-extra-isbn]').on('paste', function() {
                 var $el = $(this);
                 setTimeout(function() {
@@ -81,45 +87,56 @@ function bookList() {
                 myBookList.setNumberErrorMessage(isbn, container);
             }
         },
-        getBookList: function () {
+        getBookList: function (container) {
 
-            var bookListContainers = document.getElementsByClassName('booklist-container');
+            var googleBooksAPI = container.getElementsByTagName('input')[2].value;
+            var data = container.getElementsByTagName('input')[0].value;
 
-            for (var i=0; i < bookListContainers.length; i++){
-                var container = bookListContainers[i];
-                var data = container.getElementsByTagName('input')[0].value;
-
-                if (data != undefined){
-                    if(data.trim()){
-                    var arr = data.split(',');
-                    console.log(data);
-
-                    for(var j=0; j < arr.length; j++) {
-                        var isbn = arr[j];
-                        var url = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
-                        url = url.concat(isbn);
-
-                        myBookList.getUrl(url).then(myBookList.populatePlusletView.bind(null, container, isbn), function(error) {
-                            console.error("Failed!", error);
-                        });
-                    }}}
+            if (googleBooksAPI) {
+                if (data.trim()) {
+                    myBookList.prepareData(container);
+                }
+            } else {
+                myBookList.setGoogleBooksAPIErrorMessage(container);
             }
+
+        },
+        prepareData: function (container){
+            var data = container.getElementsByTagName('input')[0].value;
+            var googleBooksAPI = container.getElementsByTagName('input')[2].value;
+
+                if (data != undefined) {
+                    if (data.trim()) {
+                        var arr = data.split(',');
+                        console.log(data);
+
+                        for (var j = 0; j < arr.length; j++) {
+                            var isbn = arr[j];
+                            var url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPI + "&q=isbn:";
+                            url = url.concat(isbn);
+
+                            myBookList.getUrl(url).then(myBookList.populatePlusletView.bind(null, container, isbn), function (error) {
+                                console.error("Failed!", error);
+                            });
+                        }
+                    }
+                }
         },
         setBookISBNNumber: function (info, isbn, container){
 
             var industryIdentifiers = info.volumeInfo.industryIdentifiers;
             var isbnNumberList = document.createElement('ul');
 
-            for(var i = 0; i < industryIdentifiers.length; i++){
+            for(var k = 0; k < industryIdentifiers.length; k++){
 
                 var li = document.createElement('li');
 
-                if (industryIdentifiers[i].type === 'ISBN_10'){
-                    li.innerHTML = 'ISBN10: ' + industryIdentifiers[i].identifier;
-                }else if (industryIdentifiers[i].type === 'ISBN_13'){
-                    li.innerHTML = 'ISBN13: ' + industryIdentifiers[i].identifier;
+                if (industryIdentifiers[k].type === 'ISBN_10'){
+                    li.innerHTML = 'ISBN10: ' + industryIdentifiers[k].identifier;
+                }else if (industryIdentifiers[k].type === 'ISBN_13'){
+                    li.innerHTML = 'ISBN13: ' + industryIdentifiers[k].identifier;
                 }else{
-                    li.innerHTML = industryIdentifiers[i].identifier;
+                    li.innerHTML = industryIdentifiers[k].identifier;
                 }
 
                 isbnNumberList.appendChild(li);
@@ -132,6 +149,13 @@ function bookList() {
         setNumberErrorMessage: function (isbn, container) {
             var checkNumberMessage = document.createElement('h2');
             checkNumberMessage.innerHTML = "Please check this number: " + isbn;
+            var divBook = document.createElement('div');
+            divBook.appendChild(checkNumberMessage);
+            container.appendChild(divBook);
+        },
+        setGoogleBooksAPIErrorMessage: function (container) {
+            var checkNumberMessage = document.createElement('h2');
+            checkNumberMessage.innerHTML = "Please check the Google Books API key";
             var divBook = document.createElement('div');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
