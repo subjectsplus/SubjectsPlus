@@ -371,8 +371,8 @@ public function buildLocation() {
 		$this->_restrictions = $restrictMe->display();
 
       // create restrictions box for later
-    $statusMe = new Dropdown("record_status[]", $statusArray);
-    $this->_restrictions = $restrictMe->display();    
+        $statusMe = new Dropdown("record_status[]", $statusArray);
+        $this->_record_status = $statusMe->display();
 
 		$new_loc = self::outputLocation();
 	} else {
