@@ -370,7 +370,7 @@ public function buildLocation() {
 		$restrictMe = new Dropdown("access_restrictions[]", $restrictionsArray);
 		$this->_restrictions = $restrictMe->display();
 
-      // create restrictions box for later
+      // create status box for later
         $statusMe = new Dropdown("record_status[]", $statusArray);
         $this->_record_status = $statusMe->display();
 
