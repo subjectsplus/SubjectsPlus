@@ -6,37 +6,99 @@ Description: New Books List Styling - Primo
 
 #new_books_container {background-color: #FFF; padding: 10px;}
 
-#new_books_container .item {
+.sort-by-button-group {margin:0 0 10px 0;}
+
+#new_books_container .element-item {
   display:inline-block; 
-  width: 100%;
   padding: 0; 
-  margin: 0 0 15px 0;   
+  margin: 0 8px 8px 0;   
   vertical-align: top;
+  background-color: #f2f2f2;
+  border: 1px solid #eee;
+  border-radius: 2px;
 }
 
-#new_books_container .item-info {list-style-type:none; margin:0; padding:0; padding: 0 10px 0 0; text-align: center;}
+.flip-container {perspective: 1000px;}
 
-#new_books_container .item-info img {
-  float: none;
-    padding: 0;
-    width: 150px;
+.flip-container {  width: 46%; height:215px;}
+.front, .back {  width: 100%; max-height:215px;}
+
+/* flip the pane when hovered */
+.flip-container:hover .flipper, 
+.flip-container.hover .flipper {
+   transform: rotateY(180deg);
 }
+
+/* flip speed goes here */
+.flipper {transition: 0.6s; transform-style: preserve-3d;  position: relative; }
+
+/* hide back of pane during swap */
+.front, .back {
+   backface-visibility: hidden;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+   z-index: 2;
+   /* for firefox 31 */
+   transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+   transform: rotateY(180deg);
+}
+
+
+
+.flip-btn {background-color: #444; border-radius: 50%; width:22px; height:22px; color:#FFF; text-align: center; vertical-align: middle; cursor: pointer; display: inline-block; position: absolute; left: 92%; top: 5%;border: 2px solid #fff; z-index: 9;}
+.flip-btn i {font-size:16px;}
+
+#new_books_container .item {width:100%; max-height:215px;}
+
+#new_books_container .item-image {display: inline-block; width: 100%;}
+#new_books_container .item-image:after {
+  content: "\f02d"; 
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  font-size:75px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  color: #d5d5d5;
+}
+
+#new_books_container .item-image img {border-radius: 2px; width:100%; max-height: 215px;}
+
+#new_books_container .item-image.remove-placeholder-cover:after {content:"";}
+
+#new_books_container .item-title{ font-size:0.95em; margin: 0; background-color: #444; padding: 4px; color:#FFF; line-height: 1.2em; position: absolute; bottom:0; border-radius: 0 0 2px 2px}
+#new_books_container .item-title a {color: #FFF;}
+
+#new_books_container .item-info {list-style-type:none; margin:0; padding: 5px;}
+
 
 #new_books_container li {
-    margin-left: 0;
+    margin: 0 0 8px 0;
     line-height: 1.2em;
-    margin-bottom: 8px;
-    text-align: left;
+    font-size:0.95em;
 }
 
-#new_books_container .item-title{ font-size:1em; font-weight: bold; margin-top: 8px;}
+
 #new_books_container .item-author:before {content: "Author:"; padding-right:5px; font-weight:bold;}
 #new_books_container .item-description:before {content: "Location:"; padding-right:5px; font-weight:bold;}
 #new_books_container .item-language:before {content: "Language:"; padding-right:5px; font-weight:bold;}
 #new_books_container .item-format:before {content: "Format:"; padding-right:5px; font-weight:bold;}
 #new_books_container .item-type:before {content: "Type:"; padding-right:5px; font-weight:bold;}
-#new_books_container .item-pubdate{}
-#new_books_container .item-arrivaldate:before {content: "Date Added:"; padding-right:5px; font-weight:bold;}
+#new_books_container .item-arrivaldate:before {content: "Date:"; padding-right:5px; font-weight:bold;}
+
+#new_books_container .item-format, #new_books_container .item-type {display:none;}
+
 
 /* //////////////////
 //  Media Queries 
@@ -45,13 +107,11 @@ Description: New Books List Styling - Primo
 /*for 480px */
 @media screen and (min-width: 480px) {
 
-#new_books_container .item-info {text-align: left;}
+#new_books_container .item-image img {max-height: 215px;}
 
-#new_books_container .item-info img {
-  float: left;
-    padding: 0 30px 0 0;
-    width: 150px;
-}
+
+
+
 
 #new_books_container li {
     margin-left: 180px;
