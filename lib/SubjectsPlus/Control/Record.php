@@ -72,7 +72,7 @@ class Record {
         $this->_eres_display = $_POST["eres_display"]; // array
         $this->_ctags = $_POST["ctags"]; // array
         $this->_helpguide = $_POST["helpguide"]; // array
-        $this->_record_status = $_POST["record_status"]; // array
+        $this->_record_status = isset($_POST["record_status"]) ? $_POST['record_status'] : "Active";
         // data stored in rank table
         $this->_subject = $_POST["subject"]; // array
         $this->_rank = $_POST["rank"]; // array
