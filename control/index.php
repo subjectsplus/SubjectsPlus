@@ -144,7 +144,7 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 			<?php foreach ($staff_short_forms as $staff_short_form) { ?>
 			    <tr>
 				<td>
-				    <?php echo $staff_short_form['shortform']  ?>
+				    <?php echo $staff_short_form['subject']  ?>
 				</td>
 				<td>
 				   <?php $view_count = $stats->getShortFormCount($staff_short_form['shortform']); echo $view_count[0]['view_count'] ?>
@@ -156,7 +156,8 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 	    </div>
 	</div>
     </div>
-
+</div>
+</div>
 
 
 <div class="pure-u-1-3">  
