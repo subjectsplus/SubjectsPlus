@@ -1,6 +1,8 @@
 <?php
 namespace SubjectsPlus\Control;
 use Assetic\Exception\Exception;
+use SubjectsPlus\Control\Guide\PlusletData;
+
 /**
  * @file sp_Guide
  * @brief manage guide metadata
@@ -36,7 +38,7 @@ class Guide
     public function __construct($subject_id = "", $flag = "")
     {
 
-    		$this->db = new Querier;
+        $this->db = new Querier;
     	
         global $use_disciplines;
 
@@ -168,7 +170,6 @@ class Guide
 
         $this->_debug .= "<p>Staff query: $q2";
     }
-
 
     public function getAssociatedParents()
     {
@@ -539,6 +540,66 @@ class Guide
         return $ourdisciplines;
     }
 
+    public function isParentGuide($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT subject_parent FROM subject_subject
+											WHERE subject_parent  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $id = $statement->fetch();
+
+        if ( (isset($id)) && ($id != null) ) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public function isChildGuide($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT subject_child FROM subject_subject
+											WHERE subject_child  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $id = $statement->fetch();
+
+        if ( (isset($id)) && ($id != null) ) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteParentChildRelationship($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+
+        $statement = $connection->prepare("DELETE FROM subject_subject
+                                            WHERE subject_child  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        return;
+    }
+
+    public function hasMasterPluslets($subject_id) {
+
+        $pluslet_data = new PlusletData($this->db);
+
+        $masters = $pluslet_data->getClonedPlusletsBySubjectId($subject_id);
+
+        if( (isset($masters)) && (!empty($masters[0])) ) {
+            return true;
+        }
+        return false;
+    }
+
     public function deleteRecord()
     {
 
@@ -550,6 +611,26 @@ class Guide
             $this->_message = _("You do not have permission to delete this guide.");
             return FALSE;
         }
+
+        $hasMasterClones = $this->hasMasterPluslets($this->_subject_id);
+        if($hasMasterClones == true) {
+            $this->_message = _("This guide cannot be deleted because it contains master boxes " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            return FALSE;
+        }
+
+        //is this a parent guide? if so, cannot delete because it will leave orphans
+        $isParentGuide = $this->isParentGuide($this->_subject_id);
+        if($isParentGuide == true) {
+            $this->_message = _("This guide cannot be deleted because it is a parent guide. " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            return FALSE;
+        }
+
+        //is this a child guide? If so, delete the relationship in subject_subject table
+        $isChildGuide = $this->isChildGuide($this->_subject_id);
+        if($isChildGuide == true) {
+            $this->deleteParentChildRelationship($this->_subject_id);
+        }
+
 
         $db = new Querier;
 

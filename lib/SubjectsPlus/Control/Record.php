@@ -158,7 +158,7 @@ class Record {
      }
   }
 
-  public function outputForm($wintype="") {
+    public function outputForm($wintype="") {
 
   	global $wysiwyg_desc;
   	global $CKPath;
@@ -334,7 +334,7 @@ class Record {
   	print "</div></form>";
 }
 
-public function buildLocation() {
+    public function buildLocation() {
 
   global $record_status;
 
@@ -447,7 +447,7 @@ public function buildLocation() {
     } // End location test outer loop
  }
 
- private function outputLocation() {
+    private function outputLocation() {
  	global $IconPath;
  	global $all_ctags;
  	global $wysiwyg_desc;
@@ -567,7 +567,7 @@ public function buildLocation() {
     </div></div>"; // end pluslet_body, end pluslet
  }
 
- public function outputSubject($value) {
+    public function outputSubject($value) {
  	global $IconPath;
 
  	$subject_name = Truncate($value[6], 25, '');
@@ -608,7 +608,7 @@ public function buildLocation() {
  	return $oursubjects;
  }
 
- public function outputRelatedPluslets()
+    public function outputRelatedPluslets()
  {
  	global $BaseURL;
 
@@ -640,57 +640,57 @@ public function buildLocation() {
  	makePluslet( 'Referenced in Pluslets', $lstrBody, 'no-overflow' );
  }
 
- public function deleteRecord() {
+    public function deleteRecord() {
 
-    // make sure they're allowed to delete
- 	if (!isset($_SESSION["eresource_mgr"]) || $_SESSION["eresource_mgr"] != "1") {
- 		$this->_debug = _("Permission denied to delete.");
- 		return FALSE;
- 	}
+        // make sure they're allowed to delete
+        if (!isset($_SESSION["eresource_mgr"]) || $_SESSION["eresource_mgr"] != "1") {
+            $this->_debug = _("Permission denied to delete.");
+            return FALSE;
+        }
 
-  $db = new Querier;
+      $db = new Querier;
 
-  // Delete the location, location_title and title records
- 	$q = "DELETE location , location_title, title
- 	FROM location,location_title, title
- 	WHERE location.location_id = location_title.location_id
- 	AND title.title_id = location_title.title_id
- 	AND title.title_id = '" . $this->_record_id . "'";
+      // Delete the location, location_title and title records
+        $q = "DELETE location , location_title, title
+        FROM location,location_title, title
+        WHERE location.location_id = location_title.location_id
+        AND title.title_id = location_title.title_id
+        AND title.title_id = '" . $this->_record_id . "'";
 
- 	$delete_result = $db->exec($q);
+        $delete_result = $db->exec($q);
 
- 	$this->_debug = "<p>Del query: $q";
+        $this->_debug = "<p>Del query: $q";
 
-  if (isset($delete_result)) {
- 		$q2 = "DELETE FROM rank WHERE title_id = '" . $this->_record_id . "'";
+      if (isset($delete_result)) {
+            $q2 = "DELETE FROM rank WHERE title_id = '" . $this->_record_id . "'";
 
- 		$delete_result2 = $db->exec($q2);
+            $delete_result2 = $db->exec($q2);
 
- 		$this->_debug .= "<p>Del query 2: $q2";
- 	} else {
-      // message
- 		$this->_message = _("There was a problem with your delete (stage 1 of 2).");
- 		return FALSE;
- 	}
+            $this->_debug .= "<p>Del query 2: $q2";
+        } else {
+          // message
+            $this->_message = _("There was a problem with your delete (stage 1 of 2).");
+            return FALSE;
+        }
 
- 	if (isset($delete_result2)) {
-      // message
- 		$this->_message = _("Thy will be done.  Offending record deleted.");
+        if (isset($delete_result2)) {
+          // message
+            $this->_message = _("Thy will be done.  Offending record deleted.");
 
-      // /////////////////////
-      // Alter chchchanges table
-      // table, flag, item_id, title, staff_id
-      ////////////////////
+          // /////////////////////
+          // Alter chchchanges table
+          // table, flag, item_id, title, staff_id
+          ////////////////////
 
- 		$updateChangeTable = changeMe("record", "delete", $this->_record_id, $this->_title, $_SESSION['staff_id']);
+            $updateChangeTable = changeMe("record", "delete", $this->_record_id, $this->_title, $_SESSION['staff_id']);
 
- 		return TRUE;
- 	} else {
-      // message
- 		$this->_message = _("There was a problem with your delete (stage 2 of 2).");
- 		return FALSE;
- 	}
- }
+            return TRUE;
+        } else {
+          // message
+            $this->_message = _("There was a problem with your delete (stage 2 of 2).");
+            return FALSE;
+        }
+     }
 
  public function insertRecord($notrack = 0) {
 
