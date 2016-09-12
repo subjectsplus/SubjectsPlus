@@ -44,7 +44,10 @@
 - Permission toggle buttons not working on staff admin interface [\#476](https://github.com/subjectsplus/SubjectsPlus/issues/476)
 - LibGuides importer--problem with tokens [\#444](https://github.com/subjectsplus/SubjectsPlus/issues/444)
 - Initial article not being added for tokens [\#443](https://github.com/subjectsplus/SubjectsPlus/issues/443)
+- Upon Copying an Existing Guide, the visibility is set to public [\#417](https://github.com/subjectsplus/SubjectsPlus/issues/417)
 - Main menu bar random behavior  [\#409](https://github.com/subjectsplus/SubjectsPlus/issues/409)
+- Sp4 dev merge into master: Fix \#417 Set guide visibility to hidden [\#823](https://github.com/subjectsplus/SubjectsPlus/pull/823) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev : Fix \#417 Set guide visibility to hidden [\#822](https://github.com/subjectsplus/SubjectsPlus/pull/822) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master: Fix \#581 Cannot delete faq or key to icons [\#820](https://github.com/subjectsplus/SubjectsPlus/pull/820) ([cgb37](https://github.com/cgb37))
 - Staging merge into sp4-dev : Fix \#581 [\#819](https://github.com/subjectsplus/SubjectsPlus/pull/819) ([cgb37](https://github.com/cgb37))
 - Fix \#581 - cannot delete faqs or key to icons [\#818](https://github.com/subjectsplus/SubjectsPlus/pull/818) ([cgb37](https://github.com/cgb37))
@@ -97,6 +100,11 @@
 
 **Merged pull requests:**
 
+- ReadMe and License accidentally deleted [\#827](https://github.com/subjectsplus/SubjectsPlus/pull/827) ([cgb37](https://github.com/cgb37))
+- Updating stats to include month limit [\#826](https://github.com/subjectsplus/SubjectsPlus/pull/826) ([little9](https://github.com/little9))
+- Little9 feature more stats [\#825](https://github.com/subjectsplus/SubjectsPlus/pull/825) ([little9](https://github.com/little9))
+- Updating stats to include month limit [\#824](https://github.com/subjectsplus/SubjectsPlus/pull/824) ([little9](https://github.com/little9))
+- Fix \#417 Set guide visibility to hidden when creating a copy of a guide. [\#821](https://github.com/subjectsplus/SubjectsPlus/pull/821) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master: primo search was accidentally deleted [\#817](https://github.com/subjectsplus/SubjectsPlus/pull/817) ([cgb37](https://github.com/cgb37))
 - primo search was accidentally deleted [\#816](https://github.com/subjectsplus/SubjectsPlus/pull/816) ([cgb37](https://github.com/cgb37))
 - primo search was accidentally deleted [\#815](https://github.com/subjectsplus/SubjectsPlus/pull/815) ([cgb37](https://github.com/cgb37))
