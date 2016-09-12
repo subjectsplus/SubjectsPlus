@@ -25,6 +25,12 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 
 ?>
 
+<style>
+ .total-views {
+     font-size:5em;
+ }
+</style>
+
 <!-- Total Views Last Month -->
 <div class="pure-g">
     <div class="pure-u-1-3">
@@ -32,7 +38,7 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 	    <div class="titlebar">
 		<div class="titlebar_text">Total Views Last Month</div>
 	    </div>
-	    <div class="pluslet_body">
+	    <div class="pluslet_body total-views">
 		<?php print_r($total_views[0]['total_views_last_month']); ?>
 	    </div>
 	</div>
@@ -41,10 +47,10 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 
 <!-- Total External Link Clicks Per Guide -->
 
-    <div class="pure-u-1-3">
+    <div class="pure-u-3-3">
 	<div class="pluslet no_overlflow">
 	    <div class="titlebar">
-		<div class="titlebar_text">Total Views</div>
+		<div class="titlebar_text">Total Views Per Guide Last Month</div>
 	    </div>
 	    <div class="pluslet_body">
 		<table class="stats-table">
@@ -75,10 +81,10 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 
 <!-- Total Tab Clicks Per Guide -->
 
-    <div class="pure-u-1-3">
+    <div class="pure-u-3-3">
 	<div class="pluslet no_overlflow">
 	    <div class="titlebar">
-		<div class="titlebar_text">Tab Clicks Per Guide</div>
+		<div class="titlebar_text">Tab Clicks Per Guide Last Month</div>
 	    </div>
 	    <div class="pluslet_body">
 		<table class="stats-table">
@@ -112,10 +118,10 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 
 <!-- Total External Link Clicks -->
 
-    <div class="pure-u-1-3">
+    <div class="pure-u-3-3">
 	<div class="pluslet no_overlflow">
 	    <div class="titlebar">
-		<div class="titlebar_text">Total Link Clicks Per Guide</div>
+		<div class="titlebar_text">Total Link Clicks Per Guide Last Month</div>
 	    </div>
 	    <div class="pluslet_body">
 		<table class="stats-table">
