@@ -307,7 +307,7 @@ class Guide
         ////////////////////
 
         $is_live = "<label for=\"active\">" . _("Visibility") . "</label>
-    <input name=\"active\" type=\"radio\" value=\"2\"";
+    <input name=\"active\" type=\"radio\" value=\"1\"";
         if ($this->_active == 1) {
             $is_live .= " checked=\"checked\"";
         }
