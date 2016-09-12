@@ -100,6 +100,9 @@
 
 **Merged pull requests:**
 
+- Sp4 dev merge into master ReadMe and License accidentally deleted  [\#830](https://github.com/subjectsplus/SubjectsPlus/pull/830) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev : ReadMe and License accidentally deleted  [\#829](https://github.com/subjectsplus/SubjectsPlus/pull/829) ([cgb37](https://github.com/cgb37))
+- update change log [\#828](https://github.com/subjectsplus/SubjectsPlus/pull/828) ([cgb37](https://github.com/cgb37))
 - ReadMe and License accidentally deleted [\#827](https://github.com/subjectsplus/SubjectsPlus/pull/827) ([cgb37](https://github.com/cgb37))
 - Updating stats to include month limit [\#826](https://github.com/subjectsplus/SubjectsPlus/pull/826) ([little9](https://github.com/little9))
 - Little9 feature more stats [\#825](https://github.com/subjectsplus/SubjectsPlus/pull/825) ([little9](https://github.com/little9))
