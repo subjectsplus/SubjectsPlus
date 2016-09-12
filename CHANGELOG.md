@@ -30,6 +30,7 @@
 
 **Fixed bugs:**
 
+- Check for cloned pluslets before deleting a guide [\#736](https://github.com/subjectsplus/SubjectsPlus/issues/736)
 - Make sure that database A-Z flags are being set correctly by application \(UM\) [\#723](https://github.com/subjectsplus/SubjectsPlus/issues/723)
 - If tab is deleted that contains a master pluslet with a clone in another tab then guide death [\#717](https://github.com/subjectsplus/SubjectsPlus/issues/717)
 - Large headshots upon creating new user are blurry [\#609](https://github.com/subjectsplus/SubjectsPlus/issues/609)
@@ -45,6 +46,7 @@
 
 **Closed issues:**
 
+- Box Removed flash message should fade away [\#792](https://github.com/subjectsplus/SubjectsPlus/issues/792)
 - Update the DOM of tabs upon save guide [\#751](https://github.com/subjectsplus/SubjectsPlus/issues/751)
 - pptx icon not mapped to uploaded files in functions.php showDocIcon\(\) [\#735](https://github.com/subjectsplus/SubjectsPlus/issues/735)
 - If you try to enter an inactive or non-existing staff member, it defaults to first person in system [\#631](https://github.com/subjectsplus/SubjectsPlus/issues/631)
@@ -90,6 +92,21 @@
 
 **Merged pull requests:**
 
+- Sp4 dev merge into master [\#811](https://github.com/subjectsplus/SubjectsPlus/pull/811) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev: cannot delete guide if it's a parent or contains master pluslets [\#810](https://github.com/subjectsplus/SubjectsPlus/pull/810) ([cgb37](https://github.com/cgb37))
+- Fix parent guide delete [\#809](https://github.com/subjectsplus/SubjectsPlus/pull/809) ([cgb37](https://github.com/cgb37))
+- Fix record num Added Status field when creating a new record [\#805](https://github.com/subjectsplus/SubjectsPlus/pull/805) ([cgb37](https://github.com/cgb37))
+- Fix record num \#622 [\#804](https://github.com/subjectsplus/SubjectsPlus/pull/804) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into staging [\#803](https://github.com/subjectsplus/SubjectsPlus/pull/803) ([cgb37](https://github.com/cgb37))
+- Adding datatables for stats page, moving it to Guides dropdown [\#802](https://github.com/subjectsplus/SubjectsPlus/pull/802) ([little9](https://github.com/little9))
+- Styles and JS flip effect script needs to be added to the sp4 repo [\#800](https://github.com/subjectsplus/SubjectsPlus/pull/800) ([pvillanueva01](https://github.com/pvillanueva01))
+- Styles and JS flip effect script needs to be added to the sp4 repo [\#799](https://github.com/subjectsplus/SubjectsPlus/pull/799) ([pvillanueva01](https://github.com/pvillanueva01))
+- Showing basic stats on index page [\#798](https://github.com/subjectsplus/SubjectsPlus/pull/798) ([little9](https://github.com/little9))
+- Fix record num merge into staging: Fix \#622 group numbers together in record list [\#797](https://github.com/subjectsplus/SubjectsPlus/pull/797) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master: dded fade out to Box Removed [\#796](https://github.com/subjectsplus/SubjectsPlus/pull/796) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev: Fixed \#793 added fade out to Box Removed flash message [\#795](https://github.com/subjectsplus/SubjectsPlus/pull/795) ([cgb37](https://github.com/cgb37))
+- update change log [\#794](https://github.com/subjectsplus/SubjectsPlus/pull/794) ([cgb37](https://github.com/cgb37))
+- added fade out to Box Removed flash message when deleting a link list [\#793](https://github.com/subjectsplus/SubjectsPlus/pull/793) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master: updated change log [\#791](https://github.com/subjectsplus/SubjectsPlus/pull/791) ([cgb37](https://github.com/cgb37))
 - Staging merge into sp4-dev: updated change log [\#790](https://github.com/subjectsplus/SubjectsPlus/pull/790) ([cgb37](https://github.com/cgb37))
 - updated change log [\#789](https://github.com/subjectsplus/SubjectsPlus/pull/789) ([cgb37](https://github.com/cgb37))
