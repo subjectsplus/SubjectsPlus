@@ -6,58 +6,56 @@ Description: New Books List Styling - Primo
 
 #new_books_container {background-color: #FFF; padding: 10px;}
 
-.sort-by-button-group {margin:0 0 10px 0;}
+.books-loading {
+  color: #666;
+  height: 50px;
+  width: 50px;
+  font-size:12px;
+  float:right;
+  text-align: center;
+}
 
-#new_books_container .element-item {
-  display:inline-block; 
-  padding: 0; 
-  margin: 0 8px 8px 0;   
-  vertical-align: top;
-  background-color: #f2f2f2;
-  border: 1px solid #eee;
+.books-loading i {font-size:22px;}
+
+#sorts {visibility: hidden;}
+
+.sort-by-button-group {margin:0 0 10px 0; }
+
+.sort-by-button-group button {
+  background-color: #e7e7e7; 
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0 0 5px 0;
   border-radius: 2px;
 }
 
-.flip-container {perspective: 1000px;}
+#new_books_container #new_books {position: relative; visibility: hidden;}
 
-.flip-container {  width: 46%; height:215px;}
-.front, .back {  width: 100%; max-height:215px;}
-
-/* flip the pane when hovered */
-.flip-container:hover .flipper, 
-.flip-container.hover .flipper {
-   transform: rotateY(180deg);
+#new_books_container #new_books:after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
-/* flip speed goes here */
-.flipper {transition: 0.6s; transform-style: preserve-3d;  position: relative; }
-
-/* hide back of pane during swap */
-.front, .back {
-   backface-visibility: hidden;
-   position: absolute;
-   top: 0;
-   left: 0;
+#new_books_container #new_books .element-item {
+  display:inline-block; 
+  padding: 0; 
+  margin: 0;   
+  vertical-align: top;  
+  width:135px; 
+  height:227px;
 }
-
-/* front pane, placed above back */
-.front {
-   z-index: 2;
-   /* for firefox 31 */
-   transform: rotateY(0deg);
-}
-
-/* back, initially hidden pane */
-.back {
-   transform: rotateY(180deg);
-}
-
-
 
 .flip-btn {background-color: #444; border-radius: 50%; width:22px; height:22px; color:#FFF; text-align: center; vertical-align: middle; cursor: pointer; display: inline-block; position: absolute; left: 92%; top: 5%;border: 2px solid #fff; z-index: 9;}
 .flip-btn i {font-size:16px;}
 
-#new_books_container .item {width:100%; max-height:215px;}
+#new_books_container .item {width:135px; height:215px; display: inline-block; background-color: #f2f2f2; border: 1px solid #eee;
+  border-radius: 2px;}
 
 #new_books_container .item-image {display: inline-block; width: 100%;}
 #new_books_container .item-image:after {
@@ -77,11 +75,11 @@ Description: New Books List Styling - Primo
 
 #new_books_container .item-image.remove-placeholder-cover:after {content:"";}
 
-#new_books_container .item-title{ font-size:0.95em; margin: 0; background-color: #444; padding: 4px; color:#FFF; line-height: 1.2em; position: absolute; bottom:0; border-radius: 0 0 2px 2px}
+#new_books_container .item-title{ font-size:0.95em; margin: 0; background-color: #444; padding: 4px; color:#FFF; line-height: 1.2em; position: absolute; bottom:0; border-radius: 0 0 2px 2px; width: 127px; height: 35px;}
+
 #new_books_container .item-title a {color: #FFF;}
 
 #new_books_container .item-info {list-style-type:none; margin:0; padding: 5px;}
-
 
 #new_books_container li {
     margin: 0 0 8px 0;
@@ -100,6 +98,37 @@ Description: New Books List Styling - Primo
 #new_books_container .item-format, #new_books_container .item-type {display:none;}
 
 
+
+.back, .front {
+  width:135px; 
+  height:215px;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+.back {transform: rotateY(180deg);}
+
+
+.flip-container {perspective: 1000px;}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-container.hover .flipper { transform: rotateY(180deg); }
+
+
+
 /* //////////////////
 //  Media Queries 
 ////////////////// */
@@ -107,9 +136,19 @@ Description: New Books List Styling - Primo
 /*for 480px */
 @media screen and (min-width: 480px) {
 
-#new_books_container .item-image img {max-height: 215px;}
+/*#new_books_container .item-image img {max-height: 215px;}
+
+#new_books_container #new_books .element-item {width:135px; 
+  height:227px;}
+
+#new_books_container .item {width:135px; height:215px; }
 
 
+#new_books_container .item-image img {width:100%; max-height: 215px;}
+
+.back, .front {
+  width:135px; 
+  height:215px;}
 
 
 
@@ -119,7 +158,7 @@ Description: New Books List Styling - Primo
     margin-bottom: 8px;
 }
 
-#new_books_container .item-title{ margin-top: 0;}
+#new_books_container .item-title{ margin-top: 0;}*/
 
 }/* end media query */
 
@@ -138,7 +177,7 @@ Description: New Books List Styling - Primo
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
 
-#new_books_container .item-info {text-align: left;}
+/*#new_books_container .item-info {text-align: left;}
 
 #new_books_container .item {
   display:inline-block; 
@@ -148,6 +187,6 @@ Description: New Books List Styling - Primo
   padding: 0 0 15px 10px; 
   margin: 0 0 15px 0;   
   vertical-align: top;
-}
+}*/
 
 }/* end media query */
