@@ -33,16 +33,21 @@
 - Check for cloned pluslets before deleting a guide [\#736](https://github.com/subjectsplus/SubjectsPlus/issues/736)
 - Make sure that database A-Z flags are being set correctly by application \(UM\) [\#723](https://github.com/subjectsplus/SubjectsPlus/issues/723)
 - If tab is deleted that contains a master pluslet with a clone in another tab then guide death [\#717](https://github.com/subjectsplus/SubjectsPlus/issues/717)
+- you can’t delete a guide if it has a parent [\#689](https://github.com/subjectsplus/SubjectsPlus/issues/689)
 - Large headshots upon creating new user are blurry [\#609](https://github.com/subjectsplus/SubjectsPlus/issues/609)
 - Delete function fails if there are children guides [\#602](https://github.com/subjectsplus/SubjectsPlus/issues/602)
 - When you add a Subject Specialist, you don't get a "save" button [\#587](https://github.com/subjectsplus/SubjectsPlus/issues/587)
 - using tab to create new guide not working [\#583](https://github.com/subjectsplus/SubjectsPlus/issues/583)
+- Cannot delete FAQs or Key to Icons boxes [\#581](https://github.com/subjectsplus/SubjectsPlus/issues/581)
 - Print not working in UML views [\#574](https://github.com/subjectsplus/SubjectsPlus/issues/574)
 - Subject Specialist as Favorite embeds all html  [\#487](https://github.com/subjectsplus/SubjectsPlus/issues/487)
 - Permission toggle buttons not working on staff admin interface [\#476](https://github.com/subjectsplus/SubjectsPlus/issues/476)
 - LibGuides importer--problem with tokens [\#444](https://github.com/subjectsplus/SubjectsPlus/issues/444)
 - Initial article not being added for tokens [\#443](https://github.com/subjectsplus/SubjectsPlus/issues/443)
 - Main menu bar random behavior  [\#409](https://github.com/subjectsplus/SubjectsPlus/issues/409)
+- Sp4 dev merge into master: Fix \#581 Cannot delete faq or key to icons [\#820](https://github.com/subjectsplus/SubjectsPlus/pull/820) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev : Fix \#581 [\#819](https://github.com/subjectsplus/SubjectsPlus/pull/819) ([cgb37](https://github.com/cgb37))
+- Fix \#581 - cannot delete faqs or key to icons [\#818](https://github.com/subjectsplus/SubjectsPlus/pull/818) ([cgb37](https://github.com/cgb37))
 
 **Closed issues:**
 
@@ -92,6 +97,12 @@
 
 **Merged pull requests:**
 
+- Sp4 dev merge into master: primo search was accidentally deleted [\#817](https://github.com/subjectsplus/SubjectsPlus/pull/817) ([cgb37](https://github.com/cgb37))
+- primo search was accidentally deleted [\#816](https://github.com/subjectsplus/SubjectsPlus/pull/816) ([cgb37](https://github.com/cgb37))
+- primo search was accidentally deleted [\#815](https://github.com/subjectsplus/SubjectsPlus/pull/815) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master: updated change log [\#814](https://github.com/subjectsplus/SubjectsPlus/pull/814) ([cgb37](https://github.com/cgb37))
+- Staging merge into sp4-dev : updated change log [\#813](https://github.com/subjectsplus/SubjectsPlus/pull/813) ([cgb37](https://github.com/cgb37))
+- update change log [\#812](https://github.com/subjectsplus/SubjectsPlus/pull/812) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master [\#811](https://github.com/subjectsplus/SubjectsPlus/pull/811) ([cgb37](https://github.com/cgb37))
 - Staging merge into sp4-dev: cannot delete guide if it's a parent or contains master pluslets [\#810](https://github.com/subjectsplus/SubjectsPlus/pull/810) ([cgb37](https://github.com/cgb37))
 - Fix parent guide delete [\#809](https://github.com/subjectsplus/SubjectsPlus/pull/809) ([cgb37](https://github.com/cgb37))
