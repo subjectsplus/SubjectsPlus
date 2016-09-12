@@ -1,12 +1,12 @@
 <?php
 /**
- *   @file index.php
- *   @brief Splash interface to the SubjectsPlus admin folder.
- *
- *   @author agdarby
- *   @date Dec 2012
- *   @todo
- */
+*   @file index.php
+*   @brief Splash interface to the SubjectsPlus admin folder.
+*
+*   @author agdarby
+*   @date Dec 2012
+*   @todo
+*/
 $subcat = "admin";
 $page_title = "Admin SubjectsPlus";
 

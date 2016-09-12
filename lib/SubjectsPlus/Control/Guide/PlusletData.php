@@ -20,6 +20,7 @@ class PlusletData extends GuideBase implements OutputInterface
     public $pluslet_ids;
     public $cloned_pluslets;
     public $clones_by_tab;
+    public $clones_by_subject;
 
     public function __construct(Querier $db)
     {
@@ -129,7 +130,7 @@ class PlusletData extends GuideBase implements OutputInterface
     public function fetchClonedPlusletsById($master_id = null) {
         // Find ALL our existing pluslet ids from all guides
         $connection = $this->db->getConnection();
-        $statement = $connection->prepare("SELECT * FROM pluslet WHERE type like 'Clone' AND extra LIKE '%master%' AND extra like '%{$master_id}%' ");
+        $statement = $connection->prepare("SELECT * FROM pluslet WHERE type like 'Clone' AND extra LIKE '%master%' AND extra = '{$master_id}' ");
 
         $statement->execute();
         $cloned_pluslets = $statement->fetchAll();
@@ -156,6 +157,22 @@ class PlusletData extends GuideBase implements OutputInterface
         $this->clones_by_tab = $clones_by_tab;
     }
 
+
+    public function getClonedPlusletsBySubjectId($subject_id) {
+        $pluslets = $this->fetchPlusletsBySubjectId($subject_id);
+        $master_ids = array();
+        foreach($pluslets  as $pluslet):
+            $master_ids[] = $pluslet["pluslet_id"];
+        endforeach;
+
+        $clones_by_subject = array();
+        foreach($master_ids  as $master_id):
+            $clones_by_subject[] = $this->fetchClonedPlusletsById($master_id);
+        endforeach;
+
+        $this->clones_by_subject = $clones_by_subject;
+        return $clones_by_subject;
+    }
 
 
     public function toArray() {

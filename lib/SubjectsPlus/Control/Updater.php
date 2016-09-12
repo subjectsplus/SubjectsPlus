@@ -46,6 +46,7 @@ class Updater
 
 	// four to four.one
 	private $fourToFourOneAlterTables;
+	private $fourOnetoFourTwoAlterTables;
 
 	function __construct()
 	{
@@ -178,6 +179,11 @@ class Updater
       "ALTER TABLE `location` ADD `trial_start` DATE NULL DEFAULT NULL COMMENT 'added v4.2'",
       "ALTER TABLE `location` ADD `trial_end` DATE NULL DEFAULT NULL COMMENT 'added v4.2'"
 		);
+
+		$this->fourOnetoFourTwoAlterTables = array(
+			"ALTER TABLE `sp`.`stats` 
+ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
+		
 		
 		//queries to insert into new tables
 		$this->oneToTwoInsert = array(

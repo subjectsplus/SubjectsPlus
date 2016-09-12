@@ -29,13 +29,27 @@ class Stats
 	return $this->db->query($query);
     }
     public function getTopExternalLinks() {
-	$query = "SELECT count(*) as num, link_url as 'total_link_clicks', subject_short_form from stats  
-	WHERE event_type = 'link' AND link_url NOT LIKE '#%' group by link_url order by count(*) desc";
+	$query = "SELECT count(*) as num, link_url, subject_short_form, page_title from stats  
+	WHERE event_type = 'link' AND link_url NOT LIKE '#%' AND subject_short_form != '' group by link_url, subject_short_form order by subject_short_form ASC";
 	return $this->db->query($query);
     }
     public function  getTopTabsPerGuide() {
-	$query = "SELECT count(*) as num ,tab_name, subject_short_form from stats  
-	WHERE event_type = 'tab_click' group by subject_short_form order by count(*) desc";
+	$query = "SELECT tab_name, trim(subject_short_form) as subject_short_form, count(*) as num from stats  
+	WHERE event_type = 'tab_click' and subject_short_form != '' GROUP BY tab_name, subject_short_form ORDER BY trim(subject_short_form) ASC";
 	return $this->db->query($query);
     }
+
+    public function getStaffShortForms($staffId) {
+	(int) $staffId = $staffId;
+	$query = "SELECT su.shortform, su.subject FROM staff as st, subject as su WHERE staff_id = $staffId and su.active = 1";
+	return $this->db->query($query);
+    }
+
+    public function getShortFormCount($shortForm) {
+	$shortForm = $this->db->quote($shortForm); 
+	$query = "SELECT count(*) as view_count FROM stats WHERE subject_short_form = $shortForm";
+	return $this->db->query($query);
+    }
+    
+    
 }
