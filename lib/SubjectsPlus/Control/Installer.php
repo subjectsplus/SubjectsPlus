@@ -416,7 +416,7 @@ class Installer
 					(55,'statistics',55),(56,'veterinary medicine',56),(57,'visual arts',57),(58,'women&#039;s studies',58),(59,'zoology',59)",
 					"INSERT INTO `restrictions` VALUES (1,'None'),(2,'Restricted'),(3,'On Campus Only'),(4,'Rest--No Proxy')",
 					"INSERT INTO `title` VALUES (1,'Sample Record',NULL,'Here you can enter a description of the record.&nbsp; A description may be overwritten for a given subject by clicking the icon next to the desired subject in the Record screen.<br />',
-					NULL,NULL,NULL,NULL)",
+					NULL,NULL,NULL,'2011-03-26 19:16:19')",
 					"INSERT INTO `source` VALUES (1,'Journals/Magazines',1),(2,'Newspapers',5),(3,'Web Sites',10),(4,'FAQs',15),(5,'Almanacs & Yearbooks',100),(6,'Atlases',100),(7,'Bibliographies',100),
 					(8,'Biographical Information',100),(9,'Concordances',100),(10,'Dictionaries',100),(11,'Encyclopedias',100),(12,'Government Information',100),(13,'Grants/Scholarships/Financial Aid',100),
 					(14,'Handbooks & Guides',100),(15,'Images',100),(16,'Local',100),(17,'Primary Sources',100),(18,'Quotations',100),(19,'Regional',100),(20,'Reviews',100),(21,'Statistics/Data',100),
