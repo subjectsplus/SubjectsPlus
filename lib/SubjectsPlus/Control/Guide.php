@@ -600,8 +600,51 @@ class Guide
         return false;
     }
 
+    public function hasSpecialPluslets($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT ps.pluslet_section_id FROM pluslet p INNER JOIN pluslet_section ps
+        ON p.pluslet_id = ps.pluslet_id
+        INNER JOIN section sec
+        ON ps.section_id = sec.section_id
+        INNER JOIN tab t
+        ON sec.tab_id = t.tab_id
+        INNER JOIN subject s
+        ON t.subject_id = s.subject_id
+        WHERE p.type = 'Special' AND s.subject_id = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $special_pluslets = $statement->fetchAll();
+        return $special_pluslets;
+    }
+
+    public function deleteSpecialFromPlusletSection($pluslet_section_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+
+        $statement = $connection->prepare("DELETE FROM pluslet_section
+                                            WHERE pluslet_section_id  = :pluslet_section_id");
+
+        $statement->bindParam ( ":pluslet_section_id", $pluslet_section_id );
+        $statement->execute();
+        return;
+
+    }
+
     public function deleteRecord()
     {
+
+        //if guide has special type pluslets, delete the row in pluslet_section table
+        $special_pluslets = $this->hasSpecialPluslets($this->_subject_id);
+        if( (isset($special_pluslets)) && (!empty($special_pluslets['0'])) ) {
+
+            foreach($special_pluslets as $special_pluslet) {
+                $this->deleteSpecialFromPlusletSection($special_pluslet['pluslet_section_id']);
+            }
+        }
 
         // make sure they're allowed to delete
         //print "<p> session staff = " . $_SESSION["staff_id"] . " -- staff_id = " . $this->_staffers[0][0];
