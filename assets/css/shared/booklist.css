@@ -139,12 +139,21 @@ span.item-title-text:after {
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
+   -moz-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
   display:block;
 }
 .flip-container.hover .front{display: none;}
 
-.flip-container .back {transform: rotateY(180deg); display:none;}
+.flip-container .back {
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg); 
+  display:none;
+}
 .flip-container.hover .back{display: block;}
 
 .flip-container {perspective: 1000px;}
@@ -156,9 +165,11 @@ span.item-title-text:after {
 }
 
 .flip-container.hover .flipper { 
-  transform: rotateY(180deg); 
+  
   -moz-transform: rotateY(-180deg);
   -webkit-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  transform: rotateY(-180deg); 
 }
 
 .fake-space {display:inline-block;visibility:hidden; }
