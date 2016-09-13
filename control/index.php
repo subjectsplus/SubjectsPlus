@@ -143,7 +143,7 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 			<?php foreach ($staff_short_forms as $staff_short_form) { ?>
 			    <tr>
 				<td>
-				    <?php echo $staff_short_form['subject']  ?>
+				    <a href="./guides/guide.php?subject_id=<?php echo $staff_short_form[0]; ?>"><?php echo $staff_short_form['subject'];  ?></a>
 				</td>
 				<td>
 				   <?php $view_count = $stats->getShortFormCount($staff_short_form['shortform']); echo $view_count[0]['view_count'] ?>
