@@ -163,43 +163,83 @@ function bookList() {
         setBookCover: function (isbn, syndeticsClientCode, info, container) {
             var foundInSyndetics = false;
             var foundInGoogle = false;
-            var testingExist = false;
+            var inCache = false;
+            var cachePath = "";
 
-            if (!(syndeticsClientCode === "")) {
-                $.ajax({
-                    type: "GET",
-                    url: '../../subjects/includes/syndetics_image_xml_data.php',
-                    data: {
-                        "isbn": isbn,
-                        "syndeticsClientCode": syndeticsClientCode
-                    },
-                    dataType: "text",
-                    async: false,
-                    success: function(data) {
-                        if (data.localeCompare('false') != 0){
-                            foundInSyndetics = true;
-                            myBookList.setBookCoverSrc(container, data);
-                        }
+            $.ajax({
+                type: "GET",
+                url: '../../subjects/includes/book_cover_cache_check.php',
+                data: {
+                    "isbn": isbn
+                },
+                dataType: "text",
+                async: false,
+                success: function (data) {
+                    if (data.localeCompare('false') != 0){
+                        inCache = true;
+                        cachePath = data;
                     }
-                });
-            }
+                }
+            });
 
-            if (!foundInSyndetics){
-                var googleImageUrl;
-                var test = info.hasOwnProperty('imageLinks');
-
-                if (test){
-                    googleImageUrl = info.imageLinks.thumbnail;
+            if (inCache){
+                myBookList.setBookCoverSrc(container, cachePath);
+            }else {
+                if (!(syndeticsClientCode === "")) {
+                    $.ajax({
+                        type: "GET",
+                        url: '../../subjects/includes/syndetics_image_xml_data.php',
+                        data: {
+                            "isbn": isbn,
+                            "syndeticsClientCode": syndeticsClientCode
+                        },
+                        dataType: "text",
+                        async: false,
+                        success: function (data) {
+                            var info = $.parseJSON(data);
+                            if (info[1].localeCompare('false') != 0) {
+                                foundInSyndetics = true;
+                                myBookList.setBookCoverSrc(container, info[1]);
+                                $.ajax({
+                                    type: "GET",
+                                    url: '../../subjects/includes/book_cover_download.php',
+                                    data: {
+                                        "url": info[1],
+                                        "isbn": info[0]
+                                    },
+                                    dataType: "text"
+                                });
+                            }
+                        }
+                    });
                 }
 
-                if (googleImageUrl != null){
-                    foundInGoogle = true;
-                    myBookList.setBookCoverSrc(container, googleImageUrl);
-                }
-            }
+                if (!foundInSyndetics) {
+                    var googleImageUrl;
+                    var test = info.hasOwnProperty('imageLinks');
 
-            if (!foundInGoogle){
-                myBookList.setBookCoverSrc(container, "");
+                    if (test) {
+                        googleImageUrl = info.imageLinks.thumbnail;
+                    }
+
+                    if (googleImageUrl != null) {
+                        foundInGoogle = true;
+                        myBookList.setBookCoverSrc(container, googleImageUrl);
+                        $.ajax({
+                            type: "GET",
+                            url: '../../subjects/includes/book_cover_download.php',
+                            data: {
+                                "url": googleImageUrl,
+                                "isbn": isbn
+                            },
+                            dataType: "text"
+                        });
+                    }
+                }
+
+                if (!foundInGoogle) {
+                    myBookList.setBookCoverSrc(container, "");
+                }
             }
         },
         setBookCoverSrc: function (container, url){
