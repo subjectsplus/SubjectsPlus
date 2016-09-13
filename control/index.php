@@ -88,7 +88,6 @@ if (isset($use_shibboleth)) {
                 ?>
             </div>
         </div>
-         
     </div>
   </div>
   <?php 
@@ -127,13 +126,13 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 
 ?>
 
-    <div class="pure-u-1-3">
+    <div class="pure-u-2-3">
 	<div class="pluslet no_overlflow">
 	    <div class="titlebar">
-		<div class="titlebar_text">Guide Views</div>
+		<div class="titlebar_text">Your Guide Views Last Month</div>
 	    </div>
 	    <div class="pluslet_body">
-		<table>
+		<table class="stats-table">
 		    <thead>
 			<tr>
 			    <td>Guide</td>
@@ -144,7 +143,7 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 			<?php foreach ($staff_short_forms as $staff_short_form) { ?>
 			    <tr>
 				<td>
-				    <?php echo $staff_short_form['shortform']  ?>
+				    <a href="./guides/guide.php?subject_id=<?php echo $staff_short_form[0]; ?>"><?php echo $staff_short_form['subject'];  ?></a>
 				</td>
 				<td>
 				   <?php $view_count = $stats->getShortFormCount($staff_short_form['shortform']); echo $view_count[0]['view_count'] ?>
@@ -156,6 +155,7 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 	    </div>
 	</div>
     </div>
+</div>
 
 
 
@@ -240,4 +240,12 @@ var headshot_location = "<?php print $user->getHeadshotLoc(); ?>";
     });
 
   });
+</script>
+
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script>
+ $(document).ready(function(){
+     $('.stats-table').DataTable();
+ });
 </script>

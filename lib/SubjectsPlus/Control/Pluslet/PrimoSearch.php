@@ -66,7 +66,7 @@ class Pluslet_PrimoSearch extends Pluslet
             global $primo_displayField;
             global $primo_pcAvailabilityMode;
 
-            
+
             //set your local options
             $this->setAction($primo_action);
             $this->setInstitutionCode($primo_institution_code);
