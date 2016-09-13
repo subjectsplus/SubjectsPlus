@@ -28,6 +28,7 @@ class StaffDisplay {
 			FROM staff
 			WHERE active = 1
             AND ptags like '%librarian%'
+            AND user_type_id = '1'
 			order by lname, fname";
 
       $db = new Querier;
@@ -257,6 +258,7 @@ class StaffDisplay {
 			AND type = 'Subject'
       AND staff.active = 1
       AND subject.active = 1
+      AND staff.user_type_id = '1'
       AND type != 'Placeholder'
 			order by subject, lname, fname";
         
