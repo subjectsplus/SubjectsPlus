@@ -45,7 +45,7 @@ Description: New Books List Styling - Primo
 #new_books_container #new_books .element-item {
   display:inline-block; 
   padding: 0; 
-  margin: 0;   
+  margin: 0 15px 0 0;   
   vertical-align: top;  
   width:135px; 
   height:227px;
@@ -79,6 +79,33 @@ Description: New Books List Styling - Primo
 
 #new_books_container .item-title a {color: #FFF;}
 
+#new_books_container .item-title a span.item-title-text {
+  display: inline-block;
+  line-height: 1.2em;
+  margin-right: -1em;
+  max-height: 32px;
+  overflow: hidden;
+  padding-right: 1.25em;
+}
+
+span.item-title-text:before {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+span.item-title-text:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1em;
+  height: 1.2em;
+  margin-top: 0.2em;
+  background-color: #444;
+  bottom: 0;
+}
+
 #new_books_container .item-info {list-style-type:none; margin:0; padding: 5px;}
 
 #new_books_container li {
@@ -102,20 +129,23 @@ Description: New Books List Styling - Primo
 .back, .front {
   width:135px; 
   height:215px;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.front {
+.flip-container .front {
   z-index: 2;
   /* for firefox 31 */
   transform: rotateY(0deg);
+  display:block;
 }
+.flip-container.hover .front{display: none;}
 
-.back {transform: rotateY(180deg);}
-
+.flip-container .back {transform: rotateY(180deg); display:none;}
+.flip-container.hover .back{display: block;}
 
 .flip-container {perspective: 1000px;}
 
@@ -125,7 +155,14 @@ Description: New Books List Styling - Primo
   position: relative;
 }
 
-.flip-container.hover .flipper { transform: rotateY(180deg); }
+.flip-container.hover .flipper { 
+  transform: rotateY(180deg); 
+  -moz-transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+}
+
+
+
 
 
 
@@ -136,35 +173,25 @@ Description: New Books List Styling - Primo
 /*for 480px */
 @media screen and (min-width: 480px) {
 
-/*#new_books_container .item-image img {max-height: 215px;}
+ #new_books_container #new_books .element-item,
+ #new_books_container .item,
+ .back, 
+ .front  {width:130px;}
 
-#new_books_container #new_books .element-item {width:135px; 
-  height:227px;}
+#new_books_container .item-title {width: 122px;}
 
-#new_books_container .item {width:135px; height:215px; }
-
-
-#new_books_container .item-image img {width:100%; max-height: 215px;}
-
-.back, .front {
-  width:135px; 
-  height:215px;}
-
-
-
-#new_books_container li {
-    margin-left: 180px;
-    line-height: 1.2em;
-    margin-bottom: 8px;
-}
-
-#new_books_container .item-title{ margin-top: 0;}*/
 
 }/* end media query */
 
 /* ≥ 568px  .pure-u-sm-* */
 @media screen and (min-width: 35.5em) {
 
+ #new_books_container #new_books .element-item,
+ #new_books_container .item,
+ .back, 
+ .front  {width:170px;}
+
+#new_books_container .item-title {width: 162px;}
 
 
 }/* end media query */
@@ -172,21 +199,37 @@ Description: New Books List Styling - Primo
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) {
 
+  #new_books_container #new_books .element-item,
+ #new_books_container .item,
+ .back, 
+ .front  {width:165px;}
+
+#new_books_container .item-title {width: 157px;}
+
 }/* end media query */
+
 
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) {
 
-/*#new_books_container .item-info {text-align: left;}
+#new_books_container #new_books .element-item,
+ #new_books_container .item,
+ .back, 
+ .front  {width:145px;}
 
-#new_books_container .item {
-  display:inline-block; 
-  width: calc(50% - 20px);
-    width: -moz-calc(50% - 20px);
-    width: -webkit-calc(50% - 20px);
-  padding: 0 0 15px 10px; 
-  margin: 0 0 15px 0;   
-  vertical-align: top;
-}*/
+#new_books_container .item-title {width: 137px;}
+
 
 }/* end media query */
+
+/* ≥ 1200px     .pure-u-xl-* */
+@media screen and (min-width: 1200px) {
+
+ #new_books_container #new_books .element-item,
+ #new_books_container .item,
+ .back, 
+ .front  {width:160px;}
+
+#new_books_container .item-title {width: 152px;}
+
+  }/* end media query */
