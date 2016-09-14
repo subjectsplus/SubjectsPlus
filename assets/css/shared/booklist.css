@@ -30,7 +30,7 @@ Description: New Books List Styling - Primo
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-  margin: 0 0 5px 0;
+  margin: 0 3px 5px 0;
   border-radius: 2px;
 }
 
@@ -48,7 +48,7 @@ Description: New Books List Styling - Primo
   margin: 0 15px 0 0;   
   vertical-align: top;  
   width:135px; 
-  height:227px;
+  height:230px;
 }
 
 .flip-btn {background-color: #444; border-radius: 50%; width:22px; height:22px; color:#FFF; text-align: center; vertical-align: middle; cursor: pointer; display: inline-block; position: absolute; left: 92%; top: 5%;border: 2px solid #fff; z-index: 9;}
@@ -172,7 +172,7 @@ span.item-title-text:after {
   transform: rotateY(-180deg); 
 }
 
-.fake-space {display:inline-block;visibility:hidden; }
+.fake-space {display:inline-block;visibility:hidden;width:1px; height:1px;}
 
 
 
@@ -218,6 +218,8 @@ span.item-title-text:after {
 
 #new_books_container .item-title {width: 157px;}
 
+#new_books_container #new_books .element-item {height:235px;}
+
 }/* end media query */
 
 
@@ -230,6 +232,8 @@ span.item-title-text:after {
  .front  {width:145px;}
 
 #new_books_container .item-title {width: 137px;}
+
+#new_books_container #new_books .element-item {height:245px;}
 
 
 }/* end media query */
