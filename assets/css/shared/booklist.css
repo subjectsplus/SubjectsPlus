@@ -30,9 +30,11 @@ Description: New Books List Styling - Primo
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-  margin: 0 0 5px 0;
+  margin: 0 3px 5px 0;
   border-radius: 2px;
 }
+
+.sort-by-button-group button.active-sort {background-color: #f37421; color: #fff;}
 
 #new_books_container #new_books {position: relative; visibility: hidden;}
 
@@ -48,11 +50,11 @@ Description: New Books List Styling - Primo
   margin: 0 15px 0 0;   
   vertical-align: top;  
   width:135px; 
-  height:227px;
+  height:230px;
 }
 
-.flip-btn {background-color: #444; border-radius: 50%; width:22px; height:22px; color:#FFF; text-align: center; vertical-align: middle; cursor: pointer; display: inline-block; position: absolute; left: 92%; top: 5%;border: 2px solid #fff; z-index: 9;}
-.flip-btn i {font-size:16px;}
+.flip-btn {background-color: #444; border-radius: 50%; width:20px; height:20px; color:#FFF; text-align: center; vertical-align: middle; cursor: pointer; display: inline-block; position: absolute; left: 92%; bottom: 15%;border: 2px solid #fff; z-index: 9; line-height: 1.5em;}
+.flip-btn i {font-size:14px;}
 
 #new_books_container .item {width:135px; height:215px; display: inline-block; background-color: #f2f2f2; border: 1px solid #eee;
   border-radius: 2px;}
@@ -77,7 +79,7 @@ Description: New Books List Styling - Primo
 
 #new_books_container .item-title{ font-size:0.95em; margin: 0; background-color: #444; padding: 4px; color:#FFF; line-height: 1.2em; position: absolute; bottom:0; border-radius: 0 0 2px 2px; width: 127px; height: 35px;}
 
-#new_books_container .item-title a {color: #FFF;}
+#new_books_container .item-title a {color: #FFF;  text-decoration: underline;}
 
 #new_books_container .item-title a span.item-title-text {
   display: inline-block;
@@ -85,7 +87,7 @@ Description: New Books List Styling - Primo
   margin-right: -1em;
   max-height: 32px;
   overflow: hidden;
-  padding-right: 1.25em;
+  padding-right: 1.5em;
 }
 
 span.item-title-text:before {
@@ -122,7 +124,9 @@ span.item-title-text:after {
 #new_books_container .item-type:before {content: "Type:"; padding-right:5px; font-weight:bold;}
 #new_books_container .item-arrivaldate:before {content: "Date:"; padding-right:5px; font-weight:bold;}
 
-#new_books_container .item-format, #new_books_container .item-type {display:none;}
+#new_books_container .item-format, 
+#new_books_container .item-type,
+#new_books_container .item-arrivaldate {display:none; }
 
 
 
@@ -139,12 +143,21 @@ span.item-title-text:after {
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
+   -moz-transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
   display:block;
 }
 .flip-container.hover .front{display: none;}
 
-.flip-container .back {transform: rotateY(180deg); display:none;}
+.flip-container .back {
+  -moz-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg); 
+  display:none;
+}
 .flip-container.hover .back{display: block;}
 
 .flip-container {perspective: 1000px;}
@@ -156,11 +169,14 @@ span.item-title-text:after {
 }
 
 .flip-container.hover .flipper { 
-  transform: rotateY(180deg); 
+  
   -moz-transform: rotateY(-180deg);
   -webkit-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  transform: rotateY(-180deg); 
 }
 
+.fake-space {display:inline-block;visibility:hidden;width:1px; height:1px;}
 
 
 
@@ -206,6 +222,8 @@ span.item-title-text:after {
 
 #new_books_container .item-title {width: 157px;}
 
+#new_books_container #new_books .element-item {height:235px;}
+
 }/* end media query */
 
 
@@ -218,6 +236,8 @@ span.item-title-text:after {
  .front  {width:145px;}
 
 #new_books_container .item-title {width: 137px;}
+
+#new_books_container #new_books .element-item {height:245px;}
 
 
 }/* end media query */
