@@ -6,15 +6,10 @@ function guideCollectionService() {
 
     "use strict";
 
-    if(typeof(myGuideSetup) === 'undefined') {
-        var myGuideSetup = guideSetup();
-    }
-    var baseUrl = myGuideSetup.getBaseUrl();
-
     var myGuideCollection = {
 
         settings : {
-            collectionActionUrl : baseUrl + "/control/guides/helpers/collections.php?",
+            collectionActionUrl : "helpers/collections.php?",
             sortableGuideList : $('ul#guide-list')
         },
         strings : {
