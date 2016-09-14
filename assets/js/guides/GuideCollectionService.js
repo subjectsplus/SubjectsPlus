@@ -7,7 +7,7 @@ function guideCollectionService() {
     "use strict";
 
     if(typeof(myGuideSetup) === 'undefined') {
-        myGuideSetup = guideSetup();
+        var myGuideSetup = guideSetup();
     }
     var baseUrl = myGuideSetup.getBaseUrl();
 
