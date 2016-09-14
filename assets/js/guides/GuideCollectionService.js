@@ -6,10 +6,12 @@ function guideCollectionService() {
 
     "use strict";
 
+    var baseUrl = myGuideSetup.getBaseUrl();
+
     var myGuideCollection = {
 
         settings : {
-            collectionActionUrl : "/control/guides/helpers/collections.php?",
+            collectionActionUrl : baseUrl + "/control/guides/helpers/collections.php?",
             sortableGuideList : $('ul#guide-list')
         },
         strings : {
