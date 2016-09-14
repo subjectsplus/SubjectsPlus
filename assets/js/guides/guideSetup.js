@@ -12,22 +12,22 @@ function guideSetup() {
 
 	var myGuideSetup = {
 			settings : {
-				
+
 			},
 			setupFunctions : [findBoxSearch, style,
-			                  flyout, tabs, pluslet, section, layout, drag, help, 
+			                  flyout, tabs, pluslet, section, layout, drag, help,
 			                  saveSetup, copyClone, colorBox, favoriteBox, guideSearch, subjectSpecialist],
 			init : function() {
-				
+
 				for (var func in myGuideSetup.setupFunctions) {
-					
+
 					var setupFunc = myGuideSetup.setupFunctions[func]();
 					setupFunc.init();
 				}
-								
 
 
-			}	
+
+			}
 	}
 	return myGuideSetup;
 }	
