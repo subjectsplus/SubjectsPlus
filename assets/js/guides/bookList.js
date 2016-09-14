@@ -42,7 +42,7 @@ function bookList() {
                 return result;
             });
         },
-        populatePlusletView: function(container, isbn, response){
+        populatePlusletView: function(container, inCache, isbn, response){
             var obj = $.parseJSON( response );
 
             if (obj.totalItems != 0){
@@ -56,7 +56,7 @@ function bookList() {
 
                 var bookTitle = obj.volumeInfo.title;
                 var titleHeader = document.createElement('h2');
-                titleHeader.setAttribute('data-book-title', bookTitle)
+                titleHeader.setAttribute('data-book-title', bookTitle);
                 titleHeader.innerHTML = bookTitle;
                 titleHeader.appendChild(br);
                 divContent.appendChild(titleHeader);
@@ -82,6 +82,18 @@ function bookList() {
                 divBook.setAttribute('data-book-id', isbn);
                 divBook.appendChild(divContent);
                 container.appendChild(divBook);
+
+                if (!inCache){
+                    $.ajax({
+                        type: "GET",
+                        url: '../../subjects/includes/book_metadata_download.php',
+                        data: {
+                            "metadata": response,
+                            "isbn": isbn
+                        },
+                        dataType: "text"
+                    });
+                }
 
             }else{
                 myBookList.setNumberErrorMessage(isbn, container);
@@ -112,12 +124,46 @@ function bookList() {
 
                         for (var j = 0; j < arr.length; j++) {
                             var isbn = arr[j];
-                            var url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPI + "&q=isbn:";
-                            url = url.concat(isbn);
+                            var inCache = false;
+                            var cachePath = '';
 
-                            myBookList.getUrl(url).then(myBookList.populatePlusletView.bind(null, container, isbn), function (error) {
-                                console.error("Failed!", error);
+                            $.ajax({
+                                type: "GET",
+                                url: '../../subjects/includes/book_metadata_cache_check.php',
+                                data: {
+                                    "isbn": isbn
+                                },
+                                dataType: "text",
+                                async: false,
+                                success: function (data) {
+                                    if (data.localeCompare('false') != 0){
+                                        inCache = true;
+                                        cachePath = data;
+                                    }
+                                }
                             });
+
+                            if (inCache){
+                                $.ajax({
+                                    type: "GET",
+                                    url: '../../subjects/includes/book_metadata_reader.php',
+                                    data: {
+                                        "url": cachePath
+                                    },
+                                    dataType: "text",
+                                    success: function (result) {
+                                        myBookList.populatePlusletView(container, inCache, isbn, result);
+                                    }
+                                });
+                            }else {
+
+                                var url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPI + "&q=isbn:";
+                                url = url.concat(isbn);
+
+                                myBookList.getUrl(url).then(myBookList.populatePlusletView.bind(null, container, inCache, isbn), function (error) {
+                                    console.error("Failed!", error);
+                                });
+                            }
                         }
                     }
                 }
