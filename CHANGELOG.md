@@ -204,7 +204,7 @@
 - Updates to footer [\#693](https://github.com/subjectsplus/SubjectsPlus/pull/693) ([pvillanueva01](https://github.com/pvillanueva01))
 - Custom radio button styles for Find Boxes Search options [\#691](https://github.com/subjectsplus/SubjectsPlus/pull/691) ([pvillanueva01](https://github.com/pvillanueva01))
 - Sp4 dev merge into master [\#688](https://github.com/subjectsplus/SubjectsPlus/pull/688) ([cgb37](https://github.com/cgb37))
-- fix - added CloneView.js  [\#687](https://github.com/subjectsplus/SubjectsPlus/pull/687) ([cgb37](https://github.com/cgb37))
+- fix - added cloneView.js  [\#687](https://github.com/subjectsplus/SubjectsPlus/pull/687) ([cgb37](https://github.com/cgb37))
 - Sp4 dev [\#683](https://github.com/subjectsplus/SubjectsPlus/pull/683) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master  [\#682](https://github.com/subjectsplus/SubjectsPlus/pull/682) ([cgb37](https://github.com/cgb37))
 - line 109 - $baseUrl should be $this-\>baseUrl [\#681](https://github.com/subjectsplus/SubjectsPlus/pull/681) ([cgb37](https://github.com/cgb37))
