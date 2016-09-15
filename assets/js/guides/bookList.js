@@ -10,6 +10,7 @@ function bookList() {
         bindUiActionsForEditView: function () {
             myBookList.validCharacters();
             myBookList.isNumberKey();
+            myBookList.checkSources();
         },
         init: function (container) {
             myBookList.bindUiActions(container);
@@ -40,6 +41,46 @@ function bookList() {
                     result = true;
 
                 return result;
+            });
+        },
+        isSomethingElseChecked : function (object)
+        {
+            var result = false;
+
+            $(object).parent().children('input').each(function () {
+                if(!$(this).is(object)){
+                    if ($(this).is(":checked")){
+                        result = true;
+                    }
+                }
+            });
+
+            return result;
+        },
+        checkSources: function ()
+        {
+            $('input[class=book-list-pluslet-checkbox]').on("click", function(evt) {
+                var child = $(this);
+                var childChecked = false;
+
+                if (child.is(":checked")){
+                    childChecked = true;
+                }
+
+                var result = true;
+                child.parent().children('input').each(function () {
+                    if(!$(this).is(child)){
+                        if (childChecked && myBookList.isSomethingElseChecked(child)){
+                            $(this).attr("checked", false);
+                            result = false;
+                        }
+                    }
+                });
+
+                if (result && !childChecked){
+                    event.preventDefault();
+                }
+
             });
         },
         populatePlusletView: function(container, inCache, isbn, response){
