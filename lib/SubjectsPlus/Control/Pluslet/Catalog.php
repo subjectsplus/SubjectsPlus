@@ -78,11 +78,16 @@ class Pluslet_Catalog extends Pluslet {
     }
 
     static function getMenuName() {
-        return _('uSearch Catalog');
+        global $catalog_primo_flyout_icon_name;
+        if( isset($catalog_primo_flyout_icon_name) && (!empty($catalog_primo_flyout_icon_name)) ) {
+            return _("$catalog_primo_flyout_icon_name");
+        } else {
+            return _('Catalog');
+        }
     }
 
     static function getMenuIcon() {
-        $icon="<i class=\"fa fa-book\" title=\"" . _("uSearch Catalog") . "\" ></i><span class=\"icon-text\">" . _("uSearch Catalog") . "</span>";
+        $icon="<i class=\"fa fa-book\" title=\"" . self::getMenuName() . "\" ></i><span class=\"icon-text\">" . self::getMenuName() . "</span>";
         return $icon;
     }
 
