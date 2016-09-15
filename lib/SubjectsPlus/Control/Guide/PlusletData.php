@@ -128,16 +128,22 @@ class PlusletData extends GuideBase implements OutputInterface
 
 
     public function fetchClonedPlusletsById($master_id = null) {
-        // Find ALL our existing pluslet ids from all guides
-        $connection = $this->db->getConnection();
-        $statement = $connection->prepare("SELECT * FROM pluslet WHERE type like 'Clone' AND extra LIKE '%master%' AND extra LIKE '%{$master_id}%' ");
 
-        $statement->execute();
-        $cloned_pluslets = $statement->fetchAll();
+        //pluslets by number type mess up the LIKE query
+        if(strlen($master_id) == 1) {
+            $this->cloned_pluslets = array();
+        } else {
 
-        $this->cloned_pluslets = $cloned_pluslets;
+            // Find ALL our existing pluslet ids from all guides
+            $connection = $this->db->getConnection();
+            $statement = $connection->prepare("SELECT * FROM pluslet WHERE type like 'Clone' AND extra LIKE '%master%' AND extra LIKE '%{$master_id}%' ");
 
-        return $cloned_pluslets;
+            $statement->execute();
+            $cloned_pluslets = $statement->fetchAll();
+
+            $this->cloned_pluslets = $cloned_pluslets;
+            return $cloned_pluslets;
+        }
     }
 
 
