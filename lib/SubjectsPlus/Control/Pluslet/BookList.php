@@ -37,8 +37,7 @@ class Pluslet_BookList extends Pluslet
         {
             $this->_extra = json_decode( $this->_extra, true );
         }
-
-        $this->_bookListSettings = $this->getBookListSettings();
+        
         $this->_body = $this->loadHtml(__DIR__ . '/views/BookListEditOutput.php');
     }
 
@@ -60,30 +59,5 @@ class Pluslet_BookList extends Pluslet
         return $icon;
     }
 
-    private function getBookListSettings() {
 
-        $data = $this->_extra;
-
-        $checkBoxesSetttings = array(
-            'openLibraryCover' => isset($data['openLibraryCover']) && !empty($data['openLibraryCover']) ? $data['openLibraryCover'][0] : "",
-            'syndeticsCover' => isset($data['syndeticsCover']) && !empty($data['syndeticsCover']) ? $data['syndeticsCover'][0] : "",
-            'googleBooksCover' => isset($data['googleBooksCover']) && !empty($data['googleBooksCover']) ? $data['googleBooksCover'][0] : "",
-            'openLibraryMetadata' => isset($data['openLibraryMetadata']) && !empty($data['openLibraryMetadata']) ? $data['openLibraryMetadata'][0] : "",
-            'googleBooksMetadata' => isset($data['googleBooksMetadata']) && !empty($data['googleBooksMetadata']) ? $data['googleBooksMetadata'][0] : ""
-        );
-
-        return $this->checkBoxes($checkBoxesSetttings);;
-
-    }
-
-    private function checkBoxes($checkBoxSettings){
-
-        foreach ($checkBoxSettings as $key => $val) {
-            if (strcmp($val, 'on') == 0){
-                $checkBoxSettings[$key] = 'checked = "checked"';
-            }
-        }
-
-        return $checkBoxSettings;
-    }
 }
