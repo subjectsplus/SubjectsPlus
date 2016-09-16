@@ -15,8 +15,9 @@ function guideSetup() {
 
 			},
 			setupFunctions : [findBoxSearch, style,
-			                  flyout, tabs, pluslet, section, layout, drag, help,
-			                  saveSetup, copyClone, colorBox, favoriteBox, guideSearch, subjectSpecialist],
+				flyout, tabs, pluslet, section, layout, drag, help,
+				saveSetup, copyClone, colorBox, favoriteBox, guideSearch, subjectSpecialist, primoCatalog],
+
 			init : function() {
 
 				for (var func in myGuideSetup.setupFunctions) {
@@ -24,9 +25,6 @@ function guideSetup() {
 					var setupFunc = myGuideSetup.setupFunctions[func]();
 					setupFunc.init();
 				}
-
-
-
 			}
 	}
 	return myGuideSetup;
