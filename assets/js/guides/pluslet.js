@@ -221,10 +221,12 @@ function pluslet() {
 						//display box_settings for editable pluslet
 						$('#' + 'pluslet-' + edit_id[1]).find('.box_settings').delay(500).show();
 
-						//close box settings panel
-						$( '.close-settings' ).click(function() {      
+						// close box settings panel
+						$( '.close-settings' ).click(function(evt) {
 							$('#' + 'pluslet-' + edit_id[1]).find('.box_settings').hide();
+							evt.stopImmediatePropagation();
 						});
+
 
 						// Hide body-content option from box settings options based on TYPE
 
