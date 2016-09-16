@@ -1,6 +1,8 @@
 <?php
 namespace SubjectsPlus\Control;
 use Assetic\Exception\Exception;
+use SubjectsPlus\Control\Guide\PlusletData;
+
 /**
  * @file sp_Guide
  * @brief manage guide metadata
@@ -36,7 +38,7 @@ class Guide
     public function __construct($subject_id = "", $flag = "")
     {
 
-    		$this->db = new Querier;
+        $this->db = new Querier;
     	
         global $use_disciplines;
 
@@ -169,7 +171,6 @@ class Guide
         $this->_debug .= "<p>Staff query: $q2";
     }
 
-
     public function getAssociatedParents()
     {
 
@@ -216,7 +217,8 @@ class Guide
         $children = $db->query ( 'SELECT * FROM subject
                           INNER JOIN subject_subject
                           ON subject.subject_id = subject_subject.subject_child
-                          WHERE subject_parent = ' . $this->_subject_id );
+                          WHERE subject_parent = ' . $this->_subject_id . '
+                          OR subject_child = ' . $this->_subject_id );
 
         return $children;
     }
@@ -538,8 +540,111 @@ class Guide
         return $ourdisciplines;
     }
 
+    public function isParentGuide($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT subject_parent FROM subject_subject
+											WHERE subject_parent  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $id = $statement->fetch();
+
+        if ( (isset($id)) && ($id != null) ) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public function isChildGuide($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT subject_child FROM subject_subject
+											WHERE subject_child  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $id = $statement->fetch();
+
+        if ( (isset($id)) && ($id != null) ) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteParentChildRelationship($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+
+        $statement = $connection->prepare("DELETE FROM subject_subject
+                                            WHERE subject_child  = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        return;
+    }
+
+    public function hasMasterPluslets($subject_id) {
+
+        $pluslet_data = new PlusletData($this->db);
+
+        $masters = $pluslet_data->getClonedPlusletsBySubjectId($subject_id);
+
+        if( (isset($masters)) && (!empty($masters[0])) ) {
+            return true;
+        }
+        return false;
+    }
+
+    public function hasSpecialPluslets($subject_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT ps.pluslet_section_id FROM pluslet p INNER JOIN pluslet_section ps
+        ON p.pluslet_id = ps.pluslet_id
+        INNER JOIN section sec
+        ON ps.section_id = sec.section_id
+        INNER JOIN tab t
+        ON sec.tab_id = t.tab_id
+        INNER JOIN subject s
+        ON t.subject_id = s.subject_id
+        WHERE p.type = 'Special' AND s.subject_id = :subject_id");
+
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
+        $special_pluslets = $statement->fetchAll();
+        return $special_pluslets;
+    }
+
+    public function deleteSpecialFromPlusletSection($pluslet_section_id) {
+
+        $db  = new Querier();
+        $connection = $db->getConnection();
+
+        $statement = $connection->prepare("DELETE FROM pluslet_section
+                                            WHERE pluslet_section_id  = :pluslet_section_id");
+
+        $statement->bindParam ( ":pluslet_section_id", $pluslet_section_id );
+        $statement->execute();
+        return;
+
+    }
+
     public function deleteRecord()
     {
+
+        //if guide has special type pluslets, delete the row in pluslet_section table
+        $special_pluslets = $this->hasSpecialPluslets($this->_subject_id);
+        if( (isset($special_pluslets)) && (!empty($special_pluslets['0'])) ) {
+
+            foreach($special_pluslets as $special_pluslet) {
+                $this->deleteSpecialFromPlusletSection($special_pluslet['pluslet_section_id']);
+            }
+        }
 
         // make sure they're allowed to delete
         //print "<p> session staff = " . $_SESSION["staff_id"] . " -- staff_id = " . $this->_staffers[0][0];
@@ -549,6 +654,26 @@ class Guide
             $this->_message = _("You do not have permission to delete this guide.");
             return FALSE;
         }
+
+        $hasMasterClones = $this->hasMasterPluslets($this->_subject_id);
+        if($hasMasterClones == true) {
+            $this->_message = _("This guide cannot be deleted because it contains master boxes " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            return FALSE;
+        }
+
+        //is this a parent guide? if so, cannot delete because it will leave orphans
+        $isParentGuide = $this->isParentGuide($this->_subject_id);
+        if($isParentGuide == true) {
+            $this->_message = _("This guide cannot be deleted because it is a parent guide. " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            return FALSE;
+        }
+
+        //is this a child guide? If so, delete the relationship in subject_subject table
+        $isChildGuide = $this->isChildGuide($this->_subject_id);
+        if($isChildGuide == true) {
+            $this->deleteParentChildRelationship($this->_subject_id);
+        }
+
 
         $db = new Querier;
 

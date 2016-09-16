@@ -119,7 +119,7 @@ if (!isset($feedback)) {
 
 
     
-If (!isset($_REQUEST["wintype"])) {
+if (!isset($_REQUEST["wintype"])) {
   $_GET["wintype"] = "";
 }
 
@@ -129,8 +129,8 @@ if (!isset($no_form)) {
 }
 
 //$record->deBug();
-
-print $record->getMessage();
+print   "<div class=\"master-feedback\" style=\"display:block;\">" . $record->getMessage() . "</div>";
+//print $record->getMessage();
 
 print "</div>"; // end #maincontent
 

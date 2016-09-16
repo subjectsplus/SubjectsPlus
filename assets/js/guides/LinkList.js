@@ -274,7 +274,7 @@ function LinkList(id,idSelector) {
                         },
                         function() {
                             $('textarea[name="link-list-textarea"]').hide();
-                            $('#response').fadeIn();
+                            $('#response').fadeIn().delay(4000).fadeOut();;
                             $( '.delete_confirm' ).dialog( 'close' );
                         });
 

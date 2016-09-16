@@ -36,25 +36,35 @@ $alpha_result = $db->query($alpha_query);
 
 $count = 0;
 $firstletter = "A";
-    
+
+$azRange = range('A', 'Z');
+$azRange[] = "Num";
+$azRange[] = "All";
+
 foreach ($alpha_result as $myletter) {
 
-	if (isset($myletter[0][0])) {
-	
-    if ($count == 0) { $firstletter = $myletter[0][0];}
+    if (isset($myletter[0][0])) {
 
-    $atoz .="<a href=\""
-            . "index.php?letter="
-            . $myletter[0][0]
-            . "\">"
-            . $myletter[0][0]
-            . "</a> &nbsp;";
+        $upperCase = strtoupper($myletter[0][0]);
 
-    $count++;
-    
-	}
+        if ($count == 0) {
+            $firstletter = $upperCase;
+        }
+
+        if (in_array($upperCase, $azRange)) {
+            $atoz .="<a href=\""
+                . "index.php?letter="
+                . $upperCase
+                . "\">"
+                . $upperCase
+                . "</a> &nbsp;";
+
+            $count++;
+        }
+    }
 }
 
+$atoz .= "<a href=\"index.php?letter=Num\">Num</a>&nbsp;";
 $atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
 
 // end A-Z header for now
@@ -68,7 +78,10 @@ if (isset($_GET["ctag"])) {
     $alpha_id = $firstletter;
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status  from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions  and title like '$firstletter%' order by title.title";
     //$alpha_id = FALSE;
-} elseif ($_GET['letter'] == "all") {
+} elseif ($_GET['letter'] == "Num") {
+    $alpha_id = "Num";
+    $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions and title REGEXP '^[[:digit:]]'order by title.title";
+}elseif ($_GET['letter'] == "all") {
     $alpha_id = "All Records";
     $full_query = "select distinct title, description, location, restrictions_id, title.title_id as 'this_record', eres_display, ctags, record_status from title, restrictions, location, location_title, source where title.title_id = location_title.title_id and location.location_id = location_title.location_id and restrictions_id = access_restrictions order by title.title";
 } elseif ($_GET['letter'] == "restricted") {

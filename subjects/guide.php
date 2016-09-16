@@ -438,6 +438,10 @@ cloneView.init();
     var ss = subjectSpecialist();
     ss.init();
 
+    var primoCatalog = primoCatalog();
+    primoCatalog.init();
+
+
 </script>
 
 
