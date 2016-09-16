@@ -328,6 +328,52 @@ function getSubBoxes($prefix="", $trunc="", $all_subs=0) {
   return $subs_option_boxes;
 }
 
+function getSubjectsDropDownItems($prefix="", $trunc="", $all_subs=0) {
+
+  $subs_option_boxes = "";
+
+  if ($all_subs == "1") {
+    $subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
+  } else {
+    $subs_query = "SELECT distinct s.subject_id, subject, type
+            FROM subject s, staff_subject ss
+            WHERE s.subject_id = ss.subject_id
+            AND ss.staff_id = " . $_SESSION['staff_id'] . "
+            ORDER BY type, subject";
+  }
+
+  $db = new Querier;
+  $subs_result = $db->query($subs_query);
+
+  $num_subs = count($subs_result);
+
+  if ($num_subs > 0) {
+
+// create the option
+    $current_type = "";
+    $subs_option_boxes = "";
+
+    foreach ($subs_result as $myrow) {
+      $subs_id = $myrow[0];
+      $subs_name = $myrow[1];
+      $subs_type = $myrow[2];
+
+      if ($trunc) {
+        $subs_name = Truncate($subs_name, $trunc, '');
+      }
+
+      if ($current_type != $subs_type) {
+
+        $subs_option_boxes .= "<option value=\"\" style=\"background-color: #F6E3E7\">~~" . strtoupper($subs_type) . "~~</option>";
+      }
+
+      $current_type = $subs_type;
+    }
+  }
+
+  return $subs_option_boxes;
+}
+
 function getDBbySubBoxes($selected_sub, $additionaltype = "Placeholder") {
   $db = new Querier;
   $subs_option_boxes = "";
