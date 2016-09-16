@@ -90,7 +90,7 @@ if( (!empty($this->flashMessage)) ) {
             <br>
 
             <span class="adv_search_btn">
-                <a id="adv_search_btn">Advanced</a>
+                <a id="adv_search_btn">More Options</a>
             </span>
 
             <br><br>
@@ -183,9 +183,5 @@ if( (!empty($this->flashMessage)) ) {
         document.forms["searchForm"].submit();
     }
 
-    function setSearchScope() {
 
-
-
-    }
 </script>
