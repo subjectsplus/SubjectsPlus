@@ -30,6 +30,7 @@
 
 **Fixed bugs:**
 
+- When both the uSearch and Catalog boxes are on the same page they conflict [\#853](https://github.com/subjectsplus/SubjectsPlus/issues/853)
 - Check for cloned pluslets before deleting a guide [\#736](https://github.com/subjectsplus/SubjectsPlus/issues/736)
 - Make sure that database A-Z flags are being set correctly by application \(UM\) [\#723](https://github.com/subjectsplus/SubjectsPlus/issues/723)
 - If tab is deleted that contains a master pluslet with a clone in another tab then guide death [\#717](https://github.com/subjectsplus/SubjectsPlus/issues/717)
@@ -103,6 +104,15 @@
 
 **Merged pull requests:**
 
+- Fixed the click event propagation of the close button in the settings [\#864](https://github.com/subjectsplus/SubjectsPlus/pull/864) ([cgb37](https://github.com/cgb37))
+- Fixed the click event propagation of the close button in the settings [\#863](https://github.com/subjectsplus/SubjectsPlus/pull/863) ([cgb37](https://github.com/cgb37))
+- Fix pluslet settings close button [\#862](https://github.com/subjectsplus/SubjectsPlus/pull/862) ([cgb37](https://github.com/cgb37))
+- Fix \#853  When both the uSearch and Catalog boxes are on the same page [\#861](https://github.com/subjectsplus/SubjectsPlus/pull/861) ([cgb37](https://github.com/cgb37))
+- Fix \#853  When both the uSearch and Catalog boxes are on the same page [\#860](https://github.com/subjectsplus/SubjectsPlus/pull/860) ([cgb37](https://github.com/cgb37))
+- Changed 'Advanced' to 'More Option' link in PrimoSearch form [\#859](https://github.com/subjectsplus/SubjectsPlus/pull/859) ([cgb37](https://github.com/cgb37))
+- Fix cannot delete FAQs or Key to Icons box [\#858](https://github.com/subjectsplus/SubjectsPlus/pull/858) ([cgb37](https://github.com/cgb37))
+- \[d4a5dfe\] changed sql from = to Like in fetch\_cloned\_pluslets.php [\#857](https://github.com/subjectsplus/SubjectsPlus/pull/857) ([cgb37](https://github.com/cgb37))
+- changed sql from = to Like in fetch\_cloned\_pluslets.php [\#856](https://github.com/subjectsplus/SubjectsPlus/pull/856) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master: moved guide collections helper into admin/helpers rather than guides/helpers [\#855](https://github.com/subjectsplus/SubjectsPlus/pull/855) ([cgb37](https://github.com/cgb37))
 - Staging merge into sp4-dev : Added helpers dir to /control/admin [\#854](https://github.com/subjectsplus/SubjectsPlus/pull/854) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master: new books list styles [\#852](https://github.com/subjectsplus/SubjectsPlus/pull/852) ([cgb37](https://github.com/cgb37))
@@ -227,7 +237,7 @@
 - Updates to footer [\#693](https://github.com/subjectsplus/SubjectsPlus/pull/693) ([pvillanueva01](https://github.com/pvillanueva01))
 - Custom radio button styles for Find Boxes Search options [\#691](https://github.com/subjectsplus/SubjectsPlus/pull/691) ([pvillanueva01](https://github.com/pvillanueva01))
 - Sp4 dev merge into master [\#688](https://github.com/subjectsplus/SubjectsPlus/pull/688) ([cgb37](https://github.com/cgb37))
-- fix - added cloneView.js  [\#687](https://github.com/subjectsplus/SubjectsPlus/pull/687) ([cgb37](https://github.com/cgb37))
+- fix - added CloneView.js  [\#687](https://github.com/subjectsplus/SubjectsPlus/pull/687) ([cgb37](https://github.com/cgb37))
 - Sp4 dev [\#683](https://github.com/subjectsplus/SubjectsPlus/pull/683) ([cgb37](https://github.com/cgb37))
 - Sp4 dev merge into master  [\#682](https://github.com/subjectsplus/SubjectsPlus/pull/682) ([cgb37](https://github.com/cgb37))
 - line 109 - $baseUrl should be $this-\>baseUrl [\#681](https://github.com/subjectsplus/SubjectsPlus/pull/681) ([cgb37](https://github.com/cgb37))
@@ -351,6 +361,44 @@
 - Fix subjectspecialist cgb merged into sp4dev [\#532](https://github.com/subjectsplus/SubjectsPlus/pull/532) ([cgb37](https://github.com/cgb37))
 - Download images for complex links desc [\#531](https://github.com/subjectsplus/SubjectsPlus/pull/531) ([little9](https://github.com/little9))
 - Sp4 dev [\#530](https://github.com/subjectsplus/SubjectsPlus/pull/530) ([little9](https://github.com/little9))
+- Sp4 dev [\#529](https://github.com/subjectsplus/SubjectsPlus/pull/529) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb merge into sp4dev [\#528](https://github.com/subjectsplus/SubjectsPlus/pull/528) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb merged into sp4dev [\#527](https://github.com/subjectsplus/SubjectsPlus/pull/527) ([cgb37](https://github.com/cgb37))
+- Merging in 4.1.0 [\#526](https://github.com/subjectsplus/SubjectsPlus/pull/526) ([little9](https://github.com/little9))
+- css fix [\#525](https://github.com/subjectsplus/SubjectsPlus/pull/525) ([pvillanueva01](https://github.com/pvillanueva01))
+- Sp4 dev [\#524](https://github.com/subjectsplus/SubjectsPlus/pull/524) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#523](https://github.com/subjectsplus/SubjectsPlus/pull/523) ([cgb37](https://github.com/cgb37))
+- added conditional for checking to see if pluslet was a clone before r… [\#522](https://github.com/subjectsplus/SubjectsPlus/pull/522) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#521](https://github.com/subjectsplus/SubjectsPlus/pull/521) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#520](https://github.com/subjectsplus/SubjectsPlus/pull/520) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#519](https://github.com/subjectsplus/SubjectsPlus/pull/519) ([cgb37](https://github.com/cgb37))
+- added button.create-guide {font-family: "NotoSansBold"; [\#518](https://github.com/subjectsplus/SubjectsPlus/pull/518) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#517](https://github.com/subjectsplus/SubjectsPlus/pull/517) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#512](https://github.com/subjectsplus/SubjectsPlus/pull/512) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#511](https://github.com/subjectsplus/SubjectsPlus/pull/511) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#509](https://github.com/subjectsplus/SubjectsPlus/pull/509) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#508](https://github.com/subjectsplus/SubjectsPlus/pull/508) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#507](https://github.com/subjectsplus/SubjectsPlus/pull/507) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#506](https://github.com/subjectsplus/SubjectsPlus/pull/506) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#505](https://github.com/subjectsplus/SubjectsPlus/pull/505) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#504](https://github.com/subjectsplus/SubjectsPlus/pull/504) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#503](https://github.com/subjectsplus/SubjectsPlus/pull/503) ([cgb37](https://github.com/cgb37))
+- added conditional to check for empty string [\#502](https://github.com/subjectsplus/SubjectsPlus/pull/502) ([cgb37](https://github.com/cgb37))
+- merge Sp4 dev into merge-prep [\#501](https://github.com/subjectsplus/SubjectsPlus/pull/501) ([cgb37](https://github.com/cgb37))
+- Merge Fix subjectspecialist cgb into sp4-dev [\#500](https://github.com/subjectsplus/SubjectsPlus/pull/500) ([cgb37](https://github.com/cgb37))
+- Merge Fix subjectspecialist cgb into sp4-dev [\#499](https://github.com/subjectsplus/SubjectsPlus/pull/499) ([cgb37](https://github.com/cgb37))
+- remove textarea from admin view upon save when no items exist in list… [\#493](https://github.com/subjectsplus/SubjectsPlus/pull/493) ([cgb37](https://github.com/cgb37))
+- Fix subjectspecialist cgb [\#492](https://github.com/subjectsplus/SubjectsPlus/pull/492) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#491](https://github.com/subjectsplus/SubjectsPlus/pull/491) ([cgb37](https://github.com/cgb37))
+- Merge prep [\#489](https://github.com/subjectsplus/SubjectsPlus/pull/489) ([cgb37](https://github.com/cgb37))
+- Merge prep [\#488](https://github.com/subjectsplus/SubjectsPlus/pull/488) ([cgb37](https://github.com/cgb37))
+- merge qa-sp4dev-42 into sp4-dev - small fix for autocomplete [\#486](https://github.com/subjectsplus/SubjectsPlus/pull/486) ([cgb37](https://github.com/cgb37))
+- Qa sp4dev 42 [\#485](https://github.com/subjectsplus/SubjectsPlus/pull/485) ([cgb37](https://github.com/cgb37))
+- Fix linklist save [\#484](https://github.com/subjectsplus/SubjectsPlus/pull/484) ([cgb37](https://github.com/cgb37))
+- Feature toc tablink [\#483](https://github.com/subjectsplus/SubjectsPlus/pull/483) ([cgb37](https://github.com/cgb37))
+- Search Primo Pluslet - has getters and setters for local customization. [\#482](https://github.com/subjectsplus/SubjectsPlus/pull/482) ([cgb37](https://github.com/cgb37))
+- Merge feature-chat-pluslet into sp4-dev [\#478](https://github.com/subjectsplus/SubjectsPlus/pull/478) ([cgb37](https://github.com/cgb37))
+- Feature linklist modal [\#477](https://github.com/subjectsplus/SubjectsPlus/pull/477) ([cgb37](https://github.com/cgb37))
 
 ## [v4.0.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.3) (2016-04-07)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.0.2...v4.0.3)
@@ -378,6 +426,13 @@
 - In Create List, Duplicate Results showing up in autocomplete [\#454](https://github.com/subjectsplus/SubjectsPlus/issues/454)
 - Obscure mysql credentials in admin \> config [\#442](https://github.com/subjectsplus/SubjectsPlus/issues/442)
 
+**Merged pull requests:**
+
+- Fix \[\#474\] - GuideList pluslet links not working. Fixed by pointing u… [\#475](https://github.com/subjectsplus/SubjectsPlus/pull/475) ([cgb37](https://github.com/cgb37))
+- Adding basic form for records [\#459](https://github.com/subjectsplus/SubjectsPlus/pull/459) ([little9](https://github.com/little9))
+- Feature azrecords [\#458](https://github.com/subjectsplus/SubjectsPlus/pull/458) ([little9](https://github.com/little9))
+- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
+
 ## [v4.0.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.1) (2016-03-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0...v4.0.1)
 
@@ -385,6 +440,10 @@
 
 - In Custom List Search duplicate records display on the azresult list [\#440](https://github.com/subjectsplus/SubjectsPlus/issues/440)
 - When you click an image in CKEditor, you aren't editing it [\#435](https://github.com/subjectsplus/SubjectsPlus/issues/435)
+
+**Merged pull requests:**
+
+- Update TOC.php [\#439](https://github.com/subjectsplus/SubjectsPlus/pull/439) ([little9](https://github.com/little9))
 
 ## [v4.0.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0) (2016-02-09)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.5...v4.0.0)
@@ -443,17 +502,55 @@
 - security question re: files & directories writable by php [\#287](https://github.com/subjectsplus/SubjectsPlus/issues/287)
 - In ckeditor, add a center css declaration [\#244](https://github.com/subjectsplus/SubjectsPlus/issues/244)
 
+**Merged pull requests:**
+
+- Replacing admin headshots [\#436](https://github.com/subjectsplus/SubjectsPlus/pull/436) ([agdarby](https://github.com/agdarby))
+- Reset gitignore [\#433](https://github.com/subjectsplus/SubjectsPlus/pull/433) ([pvillanueva01](https://github.com/pvillanueva01))
+- Update image names for head shots [\#432](https://github.com/subjectsplus/SubjectsPlus/pull/432) ([pvillanueva01](https://github.com/pvillanueva01))
+- reset .gitignore [\#430](https://github.com/subjectsplus/SubjectsPlus/pull/430) ([pvillanueva01](https://github.com/pvillanueva01))
+- New user default images [\#429](https://github.com/subjectsplus/SubjectsPlus/pull/429) ([pvillanueva01](https://github.com/pvillanueva01))
+- git reset [\#427](https://github.com/subjectsplus/SubjectsPlus/pull/427) ([pvillanueva01](https://github.com/pvillanueva01))
+- Update config default to include collections thumbnail [\#426](https://github.com/subjectsplus/SubjectsPlus/pull/426) ([pvillanueva01](https://github.com/pvillanueva01))
+- LibGuide Import message styles and position, CSS fixes for default th… [\#398](https://github.com/subjectsplus/SubjectsPlus/pull/398) ([pvillanueva01](https://github.com/pvillanueva01))
+- Styling fixes for migrated lib guides content. Added z-index fix for … [\#397](https://github.com/subjectsplus/SubjectsPlus/pull/397) ([pvillanueva01](https://github.com/pvillanueva01))
+- Style adjustments for default databases page [\#396](https://github.com/subjectsplus/SubjectsPlus/pull/396) ([pvillanueva01](https://github.com/pvillanueva01))
+- Style updates for clean-white staff page [\#395](https://github.com/subjectsplus/SubjectsPlus/pull/395) ([pvillanueva01](https://github.com/pvillanueva01))
+- Removed old index test pages. Style fixes for default index and guide… [\#394](https://github.com/subjectsplus/SubjectsPlus/pull/394) ([pvillanueva01](https://github.com/pvillanueva01))
+- Default Index Page and styles [\#393](https://github.com/subjectsplus/SubjectsPlus/pull/393) ([pvillanueva01](https://github.com/pvillanueva01))
+- Image Card Pluslet updates for admin, default and um themes [\#392](https://github.com/subjectsplus/SubjectsPlus/pull/392) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.0.0-beta.5](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.5) (2015-12-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.4...v4.0.0-beta.5)
+
+**Merged pull requests:**
+
+- revert fix [\#384](https://github.com/subjectsplus/SubjectsPlus/pull/384) ([pvillanueva01](https://github.com/pvillanueva01))
+- staff fix [\#383](https://github.com/subjectsplus/SubjectsPlus/pull/383) ([pvillanueva01](https://github.com/pvillanueva01))
 
 ## [v4.0.0-beta.4](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.4) (2015-12-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.3...v4.0.0-beta.4)
 
+**Merged pull requests:**
+
+- config fix [\#382](https://github.com/subjectsplus/SubjectsPlus/pull/382) ([pvillanueva01](https://github.com/pvillanueva01))
+- fix styles for pluslets - distributed version [\#381](https://github.com/subjectsplus/SubjectsPlus/pull/381) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.0.0-beta.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.3) (2015-12-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.1...v4.0.0-beta.3)
 
+**Merged pull requests:**
+
+- more style adjustments for Experts pluslet [\#379](https://github.com/subjectsplus/SubjectsPlus/pull/379) ([pvillanueva01](https://github.com/pvillanueva01))
+- show visible expertise to experts pluslet [\#378](https://github.com/subjectsplus/SubjectsPlus/pull/378) ([pvillanueva01](https://github.com/pvillanueva01))
+- Add visible subject expertise to index page [\#377](https://github.com/subjectsplus/SubjectsPlus/pull/377) ([pvillanueva01](https://github.com/pvillanueva01))
+- Fix to properly display pluslet heading style options [\#374](https://github.com/subjectsplus/SubjectsPlus/pull/374) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.0.0-beta.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.1) (2015-12-03)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.0...v4.0.0-beta.1)
+
+**Merged pull requests:**
+
+- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
 
 ## [v4.0.0-beta.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.0) (2015-12-02)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.2...v4.0.0-beta.0)
@@ -530,6 +627,62 @@
 - Unable to delete video - even as admin [\#193](https://github.com/subjectsplus/SubjectsPlus/issues/193)
 - sp4 dev:  need to create folder for user \#1 if they choose a different name than "admin" [\#188](https://github.com/subjectsplus/SubjectsPlus/issues/188)
 
+**Merged pull requests:**
+
+- Experts Pluslet styling in guide admin page, UM theme, default theme … [\#371](https://github.com/subjectsplus/SubjectsPlus/pull/371) ([pvillanueva01](https://github.com/pvillanueva01))
+- header fix [\#370](https://github.com/subjectsplus/SubjectsPlus/pull/370) ([pvillanueva01](https://github.com/pvillanueva01))
+- more style fixes for index-c [\#369](https://github.com/subjectsplus/SubjectsPlus/pull/369) ([pvillanueva01](https://github.com/pvillanueva01))
+- Set index to index\_c [\#368](https://github.com/subjectsplus/SubjectsPlus/pull/368) ([pvillanueva01](https://github.com/pvillanueva01))
+- Guide Collection Icon and styles [\#367](https://github.com/subjectsplus/SubjectsPlus/pull/367) ([pvillanueva01](https://github.com/pvillanueva01))
+- more index c [\#366](https://github.com/subjectsplus/SubjectsPlus/pull/366) ([pvillanueva01](https://github.com/pvillanueva01))
+- More changes to Index C, icons for new pluslets [\#365](https://github.com/subjectsplus/SubjectsPlus/pull/365) ([pvillanueva01](https://github.com/pvillanueva01))
+- Redo Tabs icon [\#364](https://github.com/subjectsplus/SubjectsPlus/pull/364) ([pvillanueva01](https://github.com/pvillanueva01))
+- Index C chnages [\#363](https://github.com/subjectsplus/SubjectsPlus/pull/363) ([pvillanueva01](https://github.com/pvillanueva01))
+- Fix for Talkback layout [\#355](https://github.com/subjectsplus/SubjectsPlus/pull/355) ([pvillanueva01](https://github.com/pvillanueva01))
+- Styles for expert tooltip [\#352](https://github.com/subjectsplus/SubjectsPlus/pull/352) ([pvillanueva01](https://github.com/pvillanueva01))
+- Revised Index-C with multiple experts [\#351](https://github.com/subjectsplus/SubjectsPlus/pull/351) ([pvillanueva01](https://github.com/pvillanueva01))
+- Add expert box to Index C [\#340](https://github.com/subjectsplus/SubjectsPlus/pull/340) ([pvillanueva01](https://github.com/pvillanueva01))
+- Index C and styles [\#339](https://github.com/subjectsplus/SubjectsPlus/pull/339) ([pvillanueva01](https://github.com/pvillanueva01))
+- Index page styles [\#334](https://github.com/subjectsplus/SubjectsPlus/pull/334) ([pvillanueva01](https://github.com/pvillanueva01))
+- Adding function to move staff department columns into table issue \#228 [\#333](https://github.com/subjectsplus/SubjectsPlus/pull/333) ([little9](https://github.com/little9))
+- Update updater [\#332](https://github.com/subjectsplus/SubjectsPlus/pull/332) ([little9](https://github.com/little9))
+- Fix \#323 [\#329](https://github.com/subjectsplus/SubjectsPlus/pull/329) ([little9](https://github.com/little9))
+- z-index fixes for overlay [\#328](https://github.com/subjectsplus/SubjectsPlus/pull/328) ([pvillanueva01](https://github.com/pvillanueva01))
+- added tab icon [\#327](https://github.com/subjectsplus/SubjectsPlus/pull/327) ([pvillanueva01](https://github.com/pvillanueva01))
+- Tabs icon, final styles and fonts for guide interface [\#326](https://github.com/subjectsplus/SubjectsPlus/pull/326) ([pvillanueva01](https://github.com/pvillanueva01))
+- more styles [\#325](https://github.com/subjectsplus/SubjectsPlus/pull/325) ([pvillanueva01](https://github.com/pvillanueva01))
+- More style changes [\#324](https://github.com/subjectsplus/SubjectsPlus/pull/324) ([pvillanueva01](https://github.com/pvillanueva01))
+- more font fixes [\#320](https://github.com/subjectsplus/SubjectsPlus/pull/320) ([pvillanueva01](https://github.com/pvillanueva01))
+- Styles to fix elements in flyout, issues with jagged fonts, etc [\#317](https://github.com/subjectsplus/SubjectsPlus/pull/317) ([pvillanueva01](https://github.com/pvillanueva01))
+- Js remove constructor references [\#316](https://github.com/subjectsplus/SubjectsPlus/pull/316) ([little9](https://github.com/little9))
+- Using different font source to avoid jitter in the letters [\#315](https://github.com/subjectsplus/SubjectsPlus/pull/315) ([pvillanueva01](https://github.com/pvillanueva01))
+- Upgrading Assetic and refactoring the js.php file [\#310](https://github.com/subjectsplus/SubjectsPlus/pull/310) ([little9](https://github.com/little9))
+- Fix pure column css assignments for layout [\#308](https://github.com/subjectsplus/SubjectsPlus/pull/308) ([pvillanueva01](https://github.com/pvillanueva01))
+- Section Controls, Columns Styles, font standardization part 1 [\#307](https://github.com/subjectsplus/SubjectsPlus/pull/307) ([pvillanueva01](https://github.com/pvillanueva01))
+- Refactoring important front end js into modules [\#306](https://github.com/subjectsplus/SubjectsPlus/pull/306) ([little9](https://github.com/little9))
+- Fixing section click events [\#302](https://github.com/subjectsplus/SubjectsPlus/pull/302) ([little9](https://github.com/little9))
+- Copyclone & Section  fixes [\#300](https://github.com/subjectsplus/SubjectsPlus/pull/300) ([little9](https://github.com/little9))
+- Fix metadata colorbox [\#298](https://github.com/subjectsplus/SubjectsPlus/pull/298) ([little9](https://github.com/little9))
+- Feature tabs layout [\#296](https://github.com/subjectsplus/SubjectsPlus/pull/296) ([little9](https://github.com/little9))
+- Feature js even more refactor [\#281](https://github.com/subjectsplus/SubjectsPlus/pull/281) ([little9](https://github.com/little9))
+- Feature image gallery [\#267](https://github.com/subjectsplus/SubjectsPlus/pull/267) ([little9](https://github.com/little9))
+- Change plantClone to dropPluslet, fixes \#234 [\#264](https://github.com/subjectsplus/SubjectsPlus/pull/264) ([little9](https://github.com/little9))
+- LGImporter fixes [\#260](https://github.com/subjectsplus/SubjectsPlus/pull/260) ([little9](https://github.com/little9))
+- Feature lgimporter cleanup [\#259](https://github.com/subjectsplus/SubjectsPlus/pull/259) ([little9](https://github.com/little9))
+- Lgimporter updates [\#258](https://github.com/subjectsplus/SubjectsPlus/pull/258) ([little9](https://github.com/little9))
+- Forced fix to style initial/second tab on the tab list [\#237](https://github.com/subjectsplus/SubjectsPlus/pull/237) ([pvillanueva01](https://github.com/pvillanueva01))
+- Nested tabs styles on Admin side [\#226](https://github.com/subjectsplus/SubjectsPlus/pull/226) ([pvillanueva01](https://github.com/pvillanueva01))
+- staff member can belong to multiple departments, thanks Benton V [\#225](https://github.com/subjectsplus/SubjectsPlus/pull/225) ([agdarby](https://github.com/agdarby))
+- Icons and styles for Guide Search, Guide Select, New DBs and New Guides [\#224](https://github.com/subjectsplus/SubjectsPlus/pull/224) ([pvillanueva01](https://github.com/pvillanueva01))
+- Fix index page pv [\#223](https://github.com/subjectsplus/SubjectsPlus/pull/223) ([pvillanueva01](https://github.com/pvillanueva01))
+- JS custom scrollbar for main flyout panel [\#222](https://github.com/subjectsplus/SubjectsPlus/pull/222) ([pvillanueva01](https://github.com/pvillanueva01))
+- Scrollbar styles - to test in Windows IE, Firefox and Chrome [\#221](https://github.com/subjectsplus/SubjectsPlus/pull/221) ([pvillanueva01](https://github.com/pvillanueva01))
+- Guidesearch [\#220](https://github.com/subjectsplus/SubjectsPlus/pull/220) ([little9](https://github.com/little9))
+- Adding link/tab tracking back into UM header [\#219](https://github.com/subjectsplus/SubjectsPlus/pull/219) ([little9](https://github.com/little9))
+- Styles for Pluslet ID 1 [\#218](https://github.com/subjectsplus/SubjectsPlus/pull/218) ([pvillanueva01](https://github.com/pvillanueva01))
+- Pluslet ID 1 fixes [\#217](https://github.com/subjectsplus/SubjectsPlus/pull/217) ([pvillanueva01](https://github.com/pvillanueva01))
+- Talkback updates and reset index page [\#216](https://github.com/subjectsplus/SubjectsPlus/pull/216) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.0.0-beta.2](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.2) (2015-10-06)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.1.0...v4.0.0-beta.2)
 
@@ -564,6 +717,30 @@
 - ChunkFiveRegular is a non UTF-8 font [\#46](https://github.com/subjectsplus/SubjectsPlus/issues/46)
 - Missing translations [\#45](https://github.com/subjectsplus/SubjectsPlus/issues/45)
 - Slovenian translation [\#44](https://github.com/subjectsplus/SubjectsPlus/issues/44)
+
+**Merged pull requests:**
+
+- File back to original source code [\#210](https://github.com/subjectsplus/SubjectsPlus/pull/210) ([pvillanueva01](https://github.com/pvillanueva01))
+- Talkback html email layout for Um and distributed copy [\#209](https://github.com/subjectsplus/SubjectsPlus/pull/209) ([pvillanueva01](https://github.com/pvillanueva01))
+- GA Event Tracker for UM databases page [\#208](https://github.com/subjectsplus/SubjectsPlus/pull/208) ([pvillanueva01](https://github.com/pvillanueva01))
+- Fix for missing message upon deleting guide. Added link to "Browse Gu… [\#207](https://github.com/subjectsplus/SubjectsPlus/pull/207) ([pvillanueva01](https://github.com/pvillanueva01))
+- Container for draggable boxes in flyout now scrollable [\#205](https://github.com/subjectsplus/SubjectsPlus/pull/205) ([pvillanueva01](https://github.com/pvillanueva01))
+- Styles and icons for Google Boxes: Search, books and Scholar. Be sure… [\#204](https://github.com/subjectsplus/SubjectsPlus/pull/204) ([pvillanueva01](https://github.com/pvillanueva01))
+- Limit "make favorite" for some box types [\#203](https://github.com/subjectsplus/SubjectsPlus/pull/203) ([pvillanueva01](https://github.com/pvillanueva01))
+- Miscellaneous styles. Feedback message position/display on all other … [\#202](https://github.com/subjectsplus/SubjectsPlus/pull/202) ([pvillanueva01](https://github.com/pvillanueva01))
+- TOC styles, front-end and back-end [\#201](https://github.com/subjectsplus/SubjectsPlus/pull/201) ([pvillanueva01](https://github.com/pvillanueva01))
+- Final style changes for new subject specialist and front-end display [\#200](https://github.com/subjectsplus/SubjectsPlus/pull/200) ([pvillanueva01](https://github.com/pvillanueva01))
+- Added SubjectSpecialist to importer [\#198](https://github.com/subjectsplus/SubjectsPlus/pull/198) ([little9](https://github.com/little9))
+- Adding more pluslet types to the importer  [\#197](https://github.com/subjectsplus/SubjectsPlus/pull/197) ([little9](https://github.com/little9))
+- Added Google Search and Scholar Pluslets [\#196](https://github.com/subjectsplus/SubjectsPlus/pull/196) ([little9](https://github.com/little9))
+- Subject Specialist Styles [\#195](https://github.com/subjectsplus/SubjectsPlus/pull/195) ([pvillanueva01](https://github.com/pvillanueva01))
+- Miscellaneous fixes from demo [\#192](https://github.com/subjectsplus/SubjectsPlus/pull/192) ([pvillanueva01](https://github.com/pvillanueva01))
+- fixes to pluslet language - box [\#187](https://github.com/subjectsplus/SubjectsPlus/pull/187) ([pvillanueva01](https://github.com/pvillanueva01))
+- Disable "Hide Titlebar" for Heading box type [\#186](https://github.com/subjectsplus/SubjectsPlus/pull/186) ([pvillanueva01](https://github.com/pvillanueva01))
+- FAQ public display fixed [\#185](https://github.com/subjectsplus/SubjectsPlus/pull/185) ([pvillanueva01](https://github.com/pvillanueva01))
+- Missing images [\#182](https://github.com/subjectsplus/SubjectsPlus/pull/182) ([pvillanueva01](https://github.com/pvillanueva01))
+- FAQ Pluslet - add new FAQ opens on a pop up window [\#181](https://github.com/subjectsplus/SubjectsPlus/pull/181) ([pvillanueva01](https://github.com/pvillanueva01))
+- Styling for My Guides flyout panel [\#180](https://github.com/subjectsplus/SubjectsPlus/pull/180) ([pvillanueva01](https://github.com/pvillanueva01))
 
 ## [v3.1.0](https://github.com/subjectsplus/SubjectsPlus/tree/v3.1.0) (2014-12-19)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.10...v3.1.0)
