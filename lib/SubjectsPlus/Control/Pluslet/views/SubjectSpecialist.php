@@ -52,6 +52,8 @@
 
 
 <script>
-    var ss = subjectSpecialist();
-    ss.init();
+    if(typeof subjectSpecialist == 'function' ) {
+        var ss = subjectSpecialist();
+        ss.init();
+    }
 </script>
