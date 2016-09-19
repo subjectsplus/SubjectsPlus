@@ -16,7 +16,7 @@ function guideSetup() {
 			},
 			setupFunctions : [findBoxSearch, style,
 				flyout, tabs, pluslet, section, layout, drag, help,
-				saveSetup, copyClone, colorBox, favoriteBox, guideSearch, subjectSpecialist, primoCatalog],
+				saveSetup, copyClone, colorBox, favoriteBox, guideSearch, subjectSpecialist, primoCatalog, articlesPlus],
 
 			init : function() {
 
