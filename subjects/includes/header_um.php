@@ -397,7 +397,7 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                           <li><a href="http://library.miami.edu/learningcommons/">Learning Commons</a></li> 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/booking/richter-study/">Reserve Group Study Room</a></li> 
+                          <li><a href="http://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li> 
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
                         </ul>
 
