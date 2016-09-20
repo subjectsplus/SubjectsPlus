@@ -428,6 +428,7 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
 <?php include('../assets/js/guides/Catalog.js'); ?>
 <?php include('../assets/js/guides/ArticlesPlus.js'); ?>
+<?php include('../assets/js/guides/PrimoSearchBox.js'); ?>
 
 hash.init();
 track.init();
@@ -443,6 +444,9 @@ cloneView.init();
 
     var articlesPlusSearch = articlesPlus();
     articlesPlusSearch.init();
+
+    var primoSearchBox = primoSearchBox();
+    primoSearchBox.init();
 
 </script>
 

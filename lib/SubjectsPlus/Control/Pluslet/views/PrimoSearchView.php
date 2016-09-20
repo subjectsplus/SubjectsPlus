@@ -26,24 +26,21 @@
 
 <?php
 
-//get the form vars
-$pluslet = $this->_pluslet_view;
-
 //set the form vars
-$action             = $pluslet['_action'];
-$institutionCode    = $pluslet['_institution_code'];
-$mode               = $pluslet['_mode'];
-$sort               = $pluslet['_srt'];
-$vid                = $pluslet['_vid'];
-$select_tabs        = $pluslet['_select_tabs'];
+$action             = $this->getAction();
+$institutionCode    = $this->getInstitutionCode();
+$mode               = $this->getMode();
+$sort               = $this->getSrt();
+$vid                = $this->getVid();
+$select_tabs        = $this->getSelectTabs();
 
 //set hidden field vars
-$displayMode        = $pluslet['_displayMode'];
-$bulkSize           = $pluslet['_bulkSize'];
-$highlight          = $pluslet['_highlight'];
-$dum                = $pluslet['_dum'];
-$displayField       = $pluslet['_displayField'];
-$pcAvailabilityMode = $pluslet['_pcAvailabilityMode'];
+$displayMode        = $this->getDisplayMode();
+$bulkSize           = $this->getBulkSize();
+$highlight          = $this->getHighlight();
+$dum                = $this->getDum();
+$displayField       = $this->getDisplayField();
+$pcAvailabilityMode = $this->getPcAvailabilityMode();
 
 
 if( (!empty($this->flashMessage)) ) {
@@ -51,10 +48,10 @@ if( (!empty($this->flashMessage)) ) {
     echo $this->flashMessage;
 } else { ?>
 
-    <form class="pure-form" id="simple" name="searchForm" method="get" target="_blank" action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8">
+    <form class="pure-form" id="primo-search-form" name="primo-search-form" method="get" target="_blank" action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8">
         <div class="formEntryArea">
 
-            <input type="text" class="form-control" id="primoQueryTemp" value="" size="35">
+            <input type="text" class="form-control" id="primo-search-box-query-temp" value="" size="35">
 
             <br><br>
             <!-- Customizable Parameters -->
@@ -139,51 +136,10 @@ if( (!empty($this->flashMessage)) ) {
 
 
             <!-- Search Button -->
-            <input id="go" title="Search" onclick="searchPrimo()" type="button" value="Search" alt="Search" class="button pure-button pure-button-primary">
+            <input id="search-primo-btn" title="Search" type="button" value="Search" alt="Search" class="button pure-button pure-button-primary">
         </div>
     </form>
 
 
 
 <?php } ?>
-
-
-<script type="text/javascript">
-
-    $('#advanced_search_container').hide();
-
-    $('#adv_search_btn').on('click', function () {
-        $('#advanced_search_container').toggle();
-    })
-
-/*
-is this change func neccessary?
-
-    $('input[name="search_scope"]').val($('select#tab').find('option:first').data('scope'));
-    $('#tab').change(function () {
-        $('input[name="search_scope"]').val($(this).find(':selected').data('scope'));
-    })
- */
-    function searchPrimo() {
-
-        var primoQuery = $('#primoQuery').val();
-        var primoQueryTemp = $('#primoQueryTemp').val().replace(/[,]/g, " ");
-        var rtype = $('#rtype').val();
-        var precisionOperator = $('#precisionOperator').val();
-
-        if(rtype && precisionOperator) {
-
-            $('#primoQuery').val(rtype + ',' + precisionOperator + ',' + primoQueryTemp)
-
-        } else {
-
-            $('#primoQuery').val('any,contains,' + primoQueryTemp);
-
-        }
-
-        //document.getElementById("primoQuery").value = document.getElementById("rtype").value + "," + document.getElementById("precisionOperator").value + "," + document.getElementById("primoQueryTemp").value.replace(/[,]/g, " ");
-        document.forms["searchForm"].submit();
-    }
-
-
-</script>
