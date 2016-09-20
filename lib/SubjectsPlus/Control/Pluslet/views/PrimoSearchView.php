@@ -136,7 +136,7 @@ if( (!empty($this->flashMessage)) ) {
 
 
             <input type="hidden" name="query" id="primoQuery">
-            <input type="hidden" name="search_scope" value="">
+
 
             <!-- Search Button -->
             <input id="go" title="Search" onclick="searchPrimo()" type="button" value="Search" alt="Search" class="button pure-button pure-button-primary">
@@ -156,12 +156,14 @@ if( (!empty($this->flashMessage)) ) {
         $('#advanced_search_container').toggle();
     })
 
+/*
+is this change func neccessary?
 
     $('input[name="search_scope"]').val($('select#tab').find('option:first').data('scope'));
     $('#tab').change(function () {
         $('input[name="search_scope"]').val($(this).find(':selected').data('scope'));
     })
-
+ */
     function searchPrimo() {
 
         var primoQuery = $('#primoQuery').val();
