@@ -141,6 +141,7 @@ span.item-title-text:after {
   width:135px; 
   height:215px;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   position: absolute;
   top: 0;
@@ -164,6 +165,9 @@ span.item-title-text:after {
   -ms-transform: rotateY(180deg);
   transform: rotateY(180deg); 
   display:none;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: visible;
 }
 .flip-container.hover .back{display: block;}
 
@@ -198,6 +202,7 @@ span.item-title-text:after {
     padding: 3px 6px;
     position: absolute;
     text-align: center;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
 }
 
 .cat-request a {color: #FFF;}
