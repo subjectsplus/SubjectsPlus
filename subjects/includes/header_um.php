@@ -362,7 +362,7 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                             <li><a href="http://merrick.library.miami.edu/">UM Digital Collections</a></li>
                             <li><a href="http://library.miami.edu/oral-histories/">UM Oral Histories</a></li>
                             <li><a href="http://scholarlyrepository.miami.edu/">UM Scholarly Repository</a></li>
-                            <li class="last"><a href="http://www.library.miami.edu/universityarchives/">University Archives</a></li>
+                            <li><a href="http://www.library.miami.edu/universityarchives/">University Archives</a></li>
                         </ul>
                       <div class="mega_feature">
                         <img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" alt="RSMAS" />
@@ -398,7 +398,7 @@ $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
                           <li><a href="http://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li> 
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
                         </ul>
 
                         <div class="mega_feature">
