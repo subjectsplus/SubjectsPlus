@@ -427,6 +427,7 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('./includes/js/cloneView.js'); ?>
 <?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
 <?php include('../assets/js/guides/Catalog.js'); ?>
+<?php include('../assets/js/guides/ArticlesPlus.js'); ?>
 
 hash.init();
 track.init();
@@ -434,13 +435,14 @@ tabDropdown.init();
 autoComplete.init();
 cloneView.init();
 
-
     var ss = subjectSpecialist();
     ss.init();
 
     var primoCatalog = primoCatalog();
     primoCatalog.init();
 
+    var articlesPlusSearch = articlesPlus();
+    articlesPlusSearch.init();
 
 </script>
 

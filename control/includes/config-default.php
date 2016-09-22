@@ -365,6 +365,10 @@ define("PATH_TO_SP", $BaseURL);
 $guide_index_page = "";
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Pluslets Config
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////
 // Primo Pluslet Config
 ////////////////////////
@@ -376,14 +380,6 @@ $primo_action           = "";
 $primo_institution_code = "";
 $primo_vid              = "";
 $primo_select_tabs = array(
-
-    'electronic' => array(
-        'value'        => 'primo_central',
-        'id'           => 'primo_central',
-        'name'         => 'primo_central',
-        'label'        => 'Electronic Resources',
-        'search_scope' => 'Primo_Central'
-    ),
 
     'catalog' => array(
         'value'        => 'default_tab',
@@ -412,9 +408,76 @@ $primo_displayMode        = "full";
 $primo_bulkSize           = "10";
 $primo_highlight          = "true";
 $primo_dum                = "true";
-$primo_displayField       = "all";
+$primo_displayField    	  = "all";
 $primo_pcAvailabilityMode = "false";
 
 
+////////////////////////////////
+// Catalog Primo Pluslet Config
+////////////////////////////////
+$catalog_primo_flyout_icon_name = "uSearch Catalog";
+$catalog_primo_legend = "Find items in the uSearch Catalog";
+
+$catalog_primo_action = "";
+$catalog_primo_insitution_code = "";
+$catalog_primo_vid             = "";
+$catalog_primo_tab             = "default_tab";
+$catalog_primo_mode            = "Basic";
+
+$catalog_primo_displayMode  = "full";
+$catalog_primo_bulkSize     = "10";
+$catalog_primo_highlight    = "true";
+$catalog_primo_dum          = "true";
+$catalog_primo_displayField = "all";
+
+$catalog_primo_target_fields = array(
+    'any'     => 'Anywhere',
+    'title'   => 'Title',
+    'creator' => 'Author/Creator',
+    'sub'     => 'Subject',
+    'lsr06'   => 'Call Number',
+    'isbn'    => 'ISBN',
+    'lsr01'   => 'Course Reserve'
+);
+
+$catalog_primo_search_scope = array(
+    'default_scope' => 'Library Catalog',
+    'MUSIC' => 'Music Library',
+    'ARCH' => 'Architecture Library',
+    'UA' => 'University Archives',
+    'SC' => 'Special Collections',
+    'MARINE' => 'Marine Library',
+    'CHC' => 'Cuban Heritage Collection',
+    'LAW' => 'Law Library',
+    'MED' => 'Medical Libraries'
+);
+
+$catalog_primo_advanced_search_link = "";
+
+
+
+/////////////////////////////////////////////////
+// ArticlesPlus Primo Config
+/////////////////////////////////////////////////
+$articlesplus_primo_flyout_icon_name = "uSearch Catalog";
+$articlesplus_primo_legend = "Find items in the uSearch Catalog";
+
+$articlesplus_primo_action = "";
+$articlesplus_primo_insitution_code = "";
+$articlesplus_primo_vid             = "";
+$articlesplus_primo_tab             = "everything";
+$articlesplus_primo_mode            = "Basic";
+$articlesplus_primo_search_scope    = "Everything";
+
+$articlesplus_primo_displayMode  = "full";
+$articlesplus_primo_bulkSize     = "10";
+$articlesplus_primo_highlight    = "true";
+$articlesplus_primo_dum          = "true";
+$articlesplus_primo_displayField = "all";
+
+$articlesplus_primo_ct     = "facet";
+$articlesplus_primo_fctN   = "facet_rtype";
+$articlesplus_primo_fctV   = "articles";
+$articlesplus_primo_rfnGrp = "show_only";
 
 ?>
