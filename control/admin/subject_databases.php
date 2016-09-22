@@ -26,8 +26,8 @@ $subs_option_boxes = getSubjectsDropDownItems("guide.php?subject_id=", "", 1);
 
 $all_subjects = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
-<select name=\"item\" id=\"subjects\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
-<option value=\"\">" . _("-- Select Subject --") . "</option>
+<select name=\"item\" id=\"subjects\" size=\"1\" >
+<option id='place_holder'>" . _("      -- Choose Subject --     ") . "</option>
 $subs_option_boxes
 </select>
 </form>";
@@ -79,6 +79,8 @@ $associated_guides_viewport .= "</div>";
     }
 </style>
 
+
+
 <div class="pure-g">
 
     <div class="pure-u-1-3">
@@ -91,7 +93,6 @@ $associated_guides_viewport .= "</div>";
                 <div class="all-subjects-dropdown dropdown_list"><?php print $all_subjects; ?></div>
             </div>
         </div>
-        <?php echo makePluslet(_("Guide Collections List"), $guide_collection_list, "no_overflow"); ?>
     </div>
 
     <div class="pure-u-1-3">
@@ -104,8 +105,14 @@ $associated_guides_viewport .= "</div>";
     </div>
 
 </div>
+<link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
+<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
 
 <script>
     var gcs = guideCollectionService();
     gcs.init();
+    $(document).ready(function() {
+        $('#subjects').select2();
+
+    });
 </script>
