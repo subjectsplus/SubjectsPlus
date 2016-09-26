@@ -202,6 +202,7 @@ INNER JOIN location_title
 ON title.title_id = location_title.title_id
 INNER JOIN location
 ON location.location_id = location_title.location_id
+AND record_status = 'Active'
 AND title.title LIKE :search_term");
                 break;
 
@@ -214,6 +215,7 @@ ON title.title_id = location_title.title_id
 INNER JOIN location
 ON location.location_id = location_title.location_id
 AND eres_display = 'Y'
+AND record_status = 'Active'
 AND title.title LIKE :search_term");
                 break;
 
