@@ -10,7 +10,6 @@ function bookList() {
         bindUiActionsForEditView: function () {
             myBookList.validCharacters();
             myBookList.isNumberKey();
-            myBookList.checkSources();
         },
         init: function (container) {
             myBookList.bindUiActions(container);
@@ -24,7 +23,6 @@ function bookList() {
                 setTimeout(function() {
                     $el.val(function(i, val) {
                         return val.replace(/[^0-9X,]/g, '')
-                        console.log("on paste");
                     })
                 })
             });
@@ -43,199 +41,344 @@ function bookList() {
                 return result;
             });
         },
-        isSomethingElseChecked : function (object)
-        {
-            var result = false;
+        populatePlusletViewFromCache: function(container, response, coverPath){
+            var data = response.isbn;
 
-            $(object).parent().children('input').each(function () {
-                if(!$(this).is(object)){
-                    if ($(this).is(":checked")){
-                        result = true;
+            if( Object.prototype.toString.call( data ) === '[object Array]' ) {
+                var text = '{ "title":"'+data[0].title+'" , "author":"'+data[1].author+'",' +
+                    '"date":"'+data[2].date+'" }';
+
+                var obj = JSON.parse(text);
+                data = obj;
+            }
+
+            var br = document.createElement('br');
+            var divContent = document.createElement('div');
+
+            myBookList.setBookCoverSrc(container, coverPath);
+
+            var bookTitle = data.title;
+            var titleHeader = document.createElement('h2');
+            titleHeader.setAttribute('data-book-title', bookTitle);
+            titleHeader.innerHTML = bookTitle;
+            titleHeader.appendChild(br);
+            divContent.appendChild(titleHeader);
+
+            var authorsList = data.author;
+            var authorsListP = document.createElement('p');
+            authorsListP.setAttribute('data-book-author', authorsList);
+            authorsListP.innerHTML = authorsList;
+            authorsListP.appendChild(br);
+            divContent.appendChild(authorsListP);
+
+            var date = data.date;
+            var publishedDate = document.createElement('p');
+            publishedDate.setAttribute('data-book-pubdate', date);
+            publishedDate.innerHTML = date;
+            publishedDate.appendChild(br);
+            divContent.appendChild(publishedDate);
+            container.appendChild(divContent);
+        },
+        getBookList: function (container) {
+            var data = container.getElementsByTagName('input')[0].value;
+            var syndeticsClientCode = container.getElementsByTagName('input')[1].value;
+            var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
+            var regex = new RegExp('(ISBN[-]*(1[03])*[ ]*(: ){0,1})*(([0-9Xx][- ]*){13}|([0-9Xx][- ]*){10})');
+
+            if (data != undefined) {
+                if (data.trim()) {
+                    var arr = data.split(',');
+
+                    for (var j = 0; j < arr.length; j++) {
+                        var isbn = arr[j];
+
+                        if (isbn.trim()) {
+                            if (regex.test(isbn)) {
+                                var metadataCachePath = '';
+                                var coverCachePath = '';
+
+                                var prefix = myBookList.getUrlPrefix();
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: prefix + 'assets/cache/' + isbn + '.bookmetadata',
+                                    dataType: "text",
+                                    async: false,
+                                    success: function (data) {
+                                        metadataCachePath = $.parseJSON(data);
+                                    }
+                                });
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: prefix + 'assets/cache/' + isbn + '.jpg',
+                                    dataType: "text",
+                                    async: false,
+                                    success: function () {
+                                        coverCachePath = prefix + 'assets/cache/' + isbn + '.jpg';
+                                    }
+                                });
+
+                                if (metadataCachePath && coverCachePath) {
+                                    var metadata = metadataCachePath;
+                                    myBookList.populatePlusletViewFromCache(container, metadata, coverCachePath);
+                                }
+                                else {
+                                    myBookList.updateBookCache(container, isbn, googleBooksAPIKey, syndeticsClientCode);
+                                }
+                            } else {
+                                myBookList.setNumberErrorMessage(isbn, container);
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        getUrlPrefix : function () {
+            var value = '';
+            var url = document.location.href;
+
+            if (url.indexOf('control') !== -1){
+                value = document.location.href.split("control")[0];
+            }else if (url.indexOf('subjects') !== -1){
+                value = document.location.href.split("subjects")[0];
+            }
+
+            return value;
+        },
+        validateSyndeticsClientCode: function (syndeticsClientCode, container){
+            var result =  true;
+            $.ajax({
+                url: "http://syndetics.com/index.aspx?isbn=9780605039070/xml.xml&client=" + syndeticsClientCode + "&type=rn12",
+                statusCode: {
+                    500: function() {
+                        myBookList.setSyndeticsClientCodeErrorMessage(container);
+                        result = false;
+                    }
+                },
+                async: false
+            });
+
+            return result;
+        },
+        validateGoogleBooksAPIKey: function (googleBooksAPIKey, container, isbn){
+            var result =  true;
+            $.ajax({
+                url: "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=" + isbn,
+                statusCode: {
+                    400: function() {
+                        myBookList.setGoogleBooksAPIErrorMessage(container);
+                        result = false;
+                    }
+                },
+                async: false
+            });
+
+            return result;
+        },
+        getCoverPathFromSyndetics: function (container, isbn, syndeticsClientCode){
+            var result = '';
+
+            $.ajax({
+                type: "GET",
+                url: myBookList.getUrlPrefix() + 'subjects/includes/syndetics_image_xml_data.php',
+                data: {
+                    "isbn": isbn,
+                    "syndeticsClientCode": syndeticsClientCode
+                },
+                dataType: "text",
+                async: false,
+                success: function (data) {
+                    if (data.trim()){
+                        result = data;
                     }
                 }
             });
 
             return result;
         },
-        checkSources: function ()
-        {
-            $('input[class=book-list-pluslet-checkbox]').on("click", function(evt) {
-                var child = $(this);
-                var childChecked = false;
+        updateBookCache: function (container, isbn, googleBooksAPIKey, syndeticsClientCode){
+            var validSyndeticsCode = false;
+            var coverPath = '';
+            var coverPathSyndetics = '';
+            var validGoogleBooksAPIKey = false;
+            var url = '';
+            var result = {isbn:[]};
 
-                if (child.is(":checked")){
-                    childChecked = true;
+            if (syndeticsClientCode.trim()) {
+                validSyndeticsCode = myBookList.validateSyndeticsClientCode(syndeticsClientCode, container);
+
+                if (validSyndeticsCode) {
+                    coverPath = myBookList.getCoverPathFromSyndetics(container, isbn, syndeticsClientCode);
+                    coverPathSyndetics = coverPath;
                 }
+            }
 
-                var result = true;
-                child.parent().children('input').each(function () {
-                    if(!$(this).is(child)){
-                        if (childChecked && myBookList.isSomethingElseChecked(child)){
-                            $(this).attr("checked", false);
-                            result = false;
-                        }
-                    }
-                });
+            if (googleBooksAPIKey.trim()) {
+                validGoogleBooksAPIKey = myBookList.validateGoogleBooksAPIKey(googleBooksAPIKey, container, isbn);
 
-                if (result && !childChecked){
-                    event.preventDefault();
-                }
+                if (validGoogleBooksAPIKey) {
+                    url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=isbn:" + isbn;
 
-            });
-        },
-        populatePlusletView: function(container, inCache, isbn, response){
-            var obj = $.parseJSON( response );
-
-            if (obj.totalItems != 0){
-                obj = obj.items[0];
-
-                var br = document.createElement('br');
-                var divContent = document.createElement('div');
-
-                var syndeticCode = container.getElementsByTagName('input')[1].value;
-                myBookList.setBookCover(isbn, syndeticCode, obj.volumeInfo, container);
-
-                var bookTitle = obj.volumeInfo.title;
-                var titleHeader = document.createElement('h2');
-                titleHeader.setAttribute('data-book-title', bookTitle);
-                titleHeader.innerHTML = bookTitle;
-                titleHeader.appendChild(br);
-                divContent.appendChild(titleHeader);
-
-                var authorsList = obj.volumeInfo.authors;
-                var authorsListP = document.createElement('p');
-                var authorsListInfo = authorsList.join(", ");
-                authorsListP.setAttribute('data-book-author', authorsListInfo);
-                authorsListP.innerHTML = authorsListInfo;
-                authorsListP.appendChild(br);
-                divContent.appendChild(authorsListP);
-
-                var date = myBookList.formatDate(obj.volumeInfo.publishedDate);
-                var publishedDate = document.createElement('p');
-                publishedDate.setAttribute('data-book-pubdate', date);
-                publishedDate.innerHTML = date;
-                publishedDate.appendChild(br);
-                divContent.appendChild(publishedDate);
-
-                myBookList.setBookISBNNumber(obj, isbn, divContent);
-
-                var divBook = document.createElement('div');
-                divBook.setAttribute('data-book-id', isbn);
-                divBook.appendChild(divContent);
-                container.appendChild(divBook);
-
-                if (!inCache){
                     $.ajax({
                         type: "GET",
-                        url: '../../subjects/includes/book_metadata_download.php',
-                        data: {
-                            "metadata": response,
-                            "isbn": isbn
-                        },
-                        dataType: "text"
-                    });
-                }
+                        url: url,
+                        dataType: "text",
+                        async: false,
+                        success: function (data) {
+                            var obj = $.parseJSON(data);
+                            if (obj.totalItems != 0) {
+                                obj = obj.items[0];
 
-            }else{
-                myBookList.setNumberErrorMessage(isbn, container);
-            }
-        },
-        getBookList: function (container) {
+                                result.isbn.push({
+                                    "title": obj.volumeInfo.title
+                                });
+                                result.isbn.push({
+                                    "author": obj.volumeInfo.authors.join(", ")
+                                });
+                                result.isbn.push({
+                                    "date": myBookList.formatDate(obj.volumeInfo.publishedDate)
+                                });
 
-            var googleBooksAPI = container.getElementsByTagName('input')[2].value;
-            var data = container.getElementsByTagName('input')[0].value;
-
-            if (googleBooksAPI) {
-                if (data.trim()) {
-                    myBookList.prepareData(container);
-                }
-            } else {
-                myBookList.setGoogleBooksAPIErrorMessage(container);
-            }
-
-        },
-        prepareData: function (container){
-            var data = container.getElementsByTagName('input')[0].value;
-            var googleBooksAPI = container.getElementsByTagName('input')[2].value;
-
-                if (data != undefined) {
-                    if (data.trim()) {
-                        var arr = data.split(',');
-                        console.log(data);
-
-                        for (var j = 0; j < arr.length; j++) {
-                            var isbn = arr[j];
-                            var inCache = false;
-                            var cachePath = '';
-
-                            $.ajax({
-                                type: "GET",
-                                url: '../../subjects/includes/book_metadata_cache_check.php',
-                                data: {
-                                    "isbn": isbn
-                                },
-                                dataType: "text",
-                                async: false,
-                                success: function (data) {
-                                    if (data.localeCompare('false') != 0){
-                                        inCache = true;
-                                        cachePath = data;
+                                if (!coverPathSyndetics) {
+                                    if (typeof obj.volumeInfo.imageLinks !== 'undefined') {
+                                        coverPath = obj.volumeInfo.imageLinks.thumbnail;
                                     }
                                 }
-                            });
 
-                            if (inCache){
-                                $.ajax({
-                                    type: "GET",
-                                    url: '../../subjects/includes/book_metadata_reader.php',
-                                    data: {
-                                        "url": cachePath
-                                    },
-                                    dataType: "text",
-                                    success: function (result) {
-                                        myBookList.populatePlusletView(container, inCache, isbn, result);
-                                    }
-                                });
-                            }else {
+                                myBookList.populatePlusletViewFromCache(container, result, coverPath);
+                                myBookList.downloadCoverToCache(coverPath, isbn);
+                                myBookList.downloadDataToCache(result, isbn);
 
-                                var url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPI + "&q=isbn:";
-                                url = url.concat(isbn);
-
-                                myBookList.getUrl(url).then(myBookList.populatePlusletView.bind(null, container, inCache, isbn), function (error) {
-                                    console.error("Failed!", error);
-                                });
+                            } else {
+                                myBookList.setNumberErrorMessage(isbn, container);
                             }
                         }
-                    }
+                    });
                 }
-        },
-        setBookISBNNumber: function (info, isbn, container){
-
-            var industryIdentifiers = info.volumeInfo.industryIdentifiers;
-            var isbnNumberList = document.createElement('ul');
-
-            for(var k = 0; k < industryIdentifiers.length; k++){
-
-                var li = document.createElement('li');
-
-                if (industryIdentifiers[k].type === 'ISBN_10'){
-                    li.innerHTML = 'ISBN10: ' + industryIdentifiers[k].identifier;
-                }else if (industryIdentifiers[k].type === 'ISBN_13'){
-                    li.innerHTML = 'ISBN13: ' + industryIdentifiers[k].identifier;
-                }else{
-                    li.innerHTML = industryIdentifiers[k].identifier;
-                }
-
-                isbnNumberList.appendChild(li);
             }
 
-            isbnNumberList.appendChild(document.createElement('br'));
-            isbnNumberList.setAttribute('data-book-isbn-list', isbn);
-            container.appendChild(isbnNumberList);
+            var validOpenLibrary = myBookList.getMetaDataFromOpenLibrary(container, isbn, coverPathSyndetics);
+
+            if (validSyndeticsCode && !validGoogleBooksAPIKey) {
+                myBookList.setNoSourceAvailableErrorMessage(container);
+            }else if(!validOpenLibrary){
+                myBookList.setNoSourceAvailableErrorMessage(container);
+            }
+        },
+        getMetaDataFromOpenLibrary: function (container, isbn, coverPathSyndetics){
+            var coverPath = '';
+            var validOpenLibraryData = false;
+            var validSyndetics = false;
+            var url = '';
+            var result = {isbn:[]};
+            var succeed = false;
+
+            if (!coverPathSyndetics.trim()) {
+                $.ajax({
+                    type: "GET",
+                    url: myBookList.getUrlPrefix() + 'subjects/includes/book_cover_from_open_library.php',
+                    dataType: "text",
+                    async: false,
+                    data: {
+                        "isbn": isbn,
+                    },
+                    success: function (data) {
+                        coverPath = data;
+                    }
+                });
+            }else{
+                validSyndetics = true;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: myBookList.getUrlPrefix() + 'subjects/includes/book_metadata_from_open_library.php',
+                dataType: "text",
+                data: {
+                    "isbn": isbn,
+                },
+                async: false,
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+
+                    if (obj.isbn.length != 0){
+                        validOpenLibraryData = true;
+                        obj = obj.isbn;
+
+                        result.isbn.push({
+                            "title": obj.title
+                        });
+                        result.isbn.push({
+                            "author": obj.author.join(", ")
+                        });
+                        result.isbn.push({
+                            "date": myBookList.formatDate(obj.date)
+                        });
+                    }
+                }
+            });
+
+            if (validSyndetics && validOpenLibraryData){
+                myBookList.populatePlusletViewFromCache(container, result, coverPathSyndetics);
+                myBookList.downloadCoverToCache(coverPathSyndetics, isbn);
+                myBookList.downloadDataToCache(result, isbn);
+                succeed = true;
+            }else if (validOpenLibraryData) {
+                myBookList.populatePlusletViewFromCache(container, result, coverPath);
+                myBookList.downloadCoverToCache(coverPath, isbn);
+                myBookList.downloadDataToCache(result, isbn);
+                succeed = true;
+            }
+
+            return succeed;
+
+        },
+        formatAuthorsFromOpenLibrary : function (authors) {
+            var names = Array();
+
+            for (var name in authors){
+                names.push(authors);
+            }
+
+            return names.join(", ");
+        },
+        downloadDataToCache: function (data, isbn) {
+            $.ajax({
+                type: "GET",
+                url: myBookList.getUrlPrefix() + 'subjects/includes/book_metadata_download.php',
+                data: {
+                    "title": data.isbn[0].title,
+                    "isbn": isbn,
+                    "author": data.isbn[1].author,
+                    "date": data.isbn[2].date
+                },
+                async: false,
+                dataType: "text"
+            });
+        },
+        downloadCoverToCache: function (url, isbn) {
+            $.ajax({
+                type: "GET",
+                url: myBookList.getUrlPrefix() + 'subjects/includes/book_cover_download.php',
+                data: {
+                    "url": url,
+                    "isbn": isbn
+                },
+                async: false,
+                dataType: "text"
+            });
         },
         setNumberErrorMessage: function (isbn, container) {
             var checkNumberMessage = document.createElement('h2');
             checkNumberMessage.innerHTML = "Please check this number: " + isbn;
+            var divBook = document.createElement('div');
+            divBook.appendChild(checkNumberMessage);
+            container.appendChild(divBook);
+        },
+        setNoSourceAvailableErrorMessage: function (container) {
+            var checkNumberMessage = document.createElement('h2');
+            checkNumberMessage.innerHTML = "Sorry, there is not information for this book.";
             var divBook = document.createElement('div');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
@@ -247,87 +390,12 @@ function bookList() {
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
-        setBookCover: function (isbn, syndeticsClientCode, info, container) {
-            var foundInSyndetics = false;
-            var foundInGoogle = false;
-            var inCache = false;
-            var cachePath = "";
-
-            $.ajax({
-                type: "GET",
-                url: '../../subjects/includes/book_cover_cache_check.php',
-                data: {
-                    "isbn": isbn
-                },
-                dataType: "text",
-                async: false,
-                success: function (data) {
-                    if (data.localeCompare('false') != 0){
-                        inCache = true;
-                        cachePath = data;
-                    }
-                }
-            });
-
-            if (inCache){
-                myBookList.setBookCoverSrc(container, cachePath);
-            }else {
-                if (!(syndeticsClientCode === "")) {
-                    $.ajax({
-                        type: "GET",
-                        url: '../../subjects/includes/syndetics_image_xml_data.php',
-                        data: {
-                            "isbn": isbn,
-                            "syndeticsClientCode": syndeticsClientCode
-                        },
-                        dataType: "text",
-                        async: false,
-                        success: function (data) {
-                            var info = $.parseJSON(data);
-                            if (info[1].localeCompare('false') != 0) {
-                                foundInSyndetics = true;
-                                myBookList.setBookCoverSrc(container, info[1]);
-                                $.ajax({
-                                    type: "GET",
-                                    url: '../../subjects/includes/book_cover_download.php',
-                                    data: {
-                                        "url": info[1],
-                                        "isbn": info[0]
-                                    },
-                                    dataType: "text"
-                                });
-                            }
-                        }
-                    });
-                }
-
-                if (!foundInSyndetics) {
-                    var googleImageUrl;
-                    var test = info.hasOwnProperty('imageLinks');
-
-                    if (test) {
-                        googleImageUrl = info.imageLinks.thumbnail;
-                    }
-
-                    if (googleImageUrl != null) {
-                        foundInGoogle = true;
-                        myBookList.setBookCoverSrc(container, googleImageUrl);
-                        $.ajax({
-                            type: "GET",
-                            url: '../../subjects/includes/book_cover_download.php',
-                            data: {
-                                "url": googleImageUrl,
-                                "isbn": isbn
-                            },
-                            dataType: "text"
-                        });
-                    }
-                }
-
-                if (!foundInGoogle) {
-                    myBookList.setBookCoverSrc(container, "");
-                }
-            }
+        setSyndeticsClientCodeErrorMessage: function (container) {
+            var checkNumberMessage = document.createElement('h2');
+            checkNumberMessage.innerHTML = "Please check the Syndetics Client Code";
+            var divBook = document.createElement('div');
+            divBook.appendChild(checkNumberMessage);
+            container.appendChild(divBook);
         },
         setBookCoverSrc: function (container, url){
             var imgCover = document.createElement('img');

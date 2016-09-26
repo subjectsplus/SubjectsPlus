@@ -25,9 +25,6 @@
 
 ?>
 
-
-
-
 <script>
 
     var container = $("#"+"<?php echo $this->_pluslet_id_field?>").find('.booklist-content');

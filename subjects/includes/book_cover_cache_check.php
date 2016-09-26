@@ -12,7 +12,7 @@ $book_cover_cache_check = function ($isbn) {
     if (file_exists($file)) {
         echo $file;
     } else {
-        echo 'false';
+        echo '';
     }
 };
 
