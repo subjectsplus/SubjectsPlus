@@ -256,14 +256,17 @@ function bookList() {
                         }
                     });
                 }
-            }
+            }else {
 
-            var validOpenLibrary = myBookList.getMetaDataFromOpenLibrary(container, isbn, coverPathSyndetics);
+                var validOpenLibrary = myBookList.getMetaDataFromOpenLibrary(container, isbn, coverPathSyndetics);
 
-            if (validSyndeticsCode && !validGoogleBooksAPIKey) {
-                myBookList.setNoSourceAvailableErrorMessage(container);
-            }else if(!validOpenLibrary){
-                myBookList.setNoSourceAvailableErrorMessage(container);
+                if (validSyndeticsCode && !validGoogleBooksAPIKey) {
+                    myBookList.setNoSourceAvailableErrorMessage(container);
+                }
+
+                if (!validOpenLibrary) {
+                    myBookList.setNoSourceAvailableErrorMessage(container);
+                }
             }
         },
         getMetaDataFromOpenLibrary: function (container, isbn, coverPathSyndetics){
