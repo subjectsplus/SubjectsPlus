@@ -27,7 +27,15 @@
 
 <script>
 
-    var container = $("#"+"<?php echo $this->_pluslet_id_field?>").find('.booklist-content');
+    var containerSelector = "<?php
+        if (!empty($this->_clone_id)){
+            echo "pluslet-" . $this->_clone_id;
+        }else{
+            echo $this->_pluslet_id_field;
+        }
+    ?>";
+
+    var container = $("#"+containerSelector).find('.booklist-content');
     $.each(container, function() {
         var b = bookList();
         b.init(this);
