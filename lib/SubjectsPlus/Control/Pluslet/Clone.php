@@ -132,6 +132,10 @@ require_once("Pluslet.php");
 			 case "Basic":
 				 $cloned_pluslet = new Pluslet_Basic($master, null, $subject_id, 1);
 				 break;
+
+             case "BookList":
+                 $cloned_pluslet = new Pluslet_Basic($master, null, $subject_id, 1);
+                 break;
 		 }
 
 
