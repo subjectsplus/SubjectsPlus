@@ -148,21 +148,7 @@ print "</div>"; // close #maincontent
     $(function (){
         $('#select_subject').select2();
 
-        /*
-// Pre-load new record with subject, if called from within guide
-var win_type = '<?php print $_GET["wintype"]; ?>';
 
-if (win_type == "pop") {
-
-        var our_sub_id = '<?php print ($_GET["caller_id"]); ?>';
-        var our_sub_text = 'boo';
-        var our_source_text = $('select[name=default_source_id] :selected').text();
-        var our_source_id = $('select[name=default_source_id] :selected').val();
-
-        $('#subject_list').prepend('<div class="new_subject-'+our_sub_id+'"></div>');
-        $('.new_subject-'+our_sub_id+'').hide().load("record_bits.php", {type: 'add_subject', our_sub_id: our_sub_id, our_sub_text: our_sub_text, our_source_text: our_source_text, our_source_id:our_source_id}).fadeIn(1600);
-
-} */
 
         // add in some default text
         //$("#record_title").defaultText("Enter Record Title");
