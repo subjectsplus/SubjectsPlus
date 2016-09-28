@@ -60,19 +60,19 @@ $v2styles = TRUE;
 $primoSearch = "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do";
 ?>
 
-<script type="text/javascript">
+<?php
+global $google_analytics_ua;
+if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-15217512-1']);
-  _gaq.push(['_trackPageview']);
+    echo "<div id='google-analytics-ua' style='visibility: hidden;' data-uacode='{$google_analytics_ua}'></div>";
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+    if( file_exists('includes/google-analytics-tracker.php') ) {
+        include_once ('google-analytics-tracker.php');
+    }
+}
+?>
 
-</script>
+
 
 </head>
 
