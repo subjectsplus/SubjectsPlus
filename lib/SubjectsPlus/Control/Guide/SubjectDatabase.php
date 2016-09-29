@@ -116,12 +116,12 @@ class SubjectDatabase implements OutputInterface
     }
 
     public function fetchSubjectDatabases($subject_id) {
-        $statement = $this->connection->prepare("SELECT s.subject_id, s.subject, s.description, s.shortform, s.type, cs.sort, cs.collection_subject_id 
-                                                  FROM subject s 
-                                                  INNER JOIN collection_subject cs 
-                                                  ON s.subject_id = cs.subject_id 
-                                                  WHERE cs.collection_id = :collection_id 
-                                                  ORDER BY cs.sort DESC");
+        $statement = $this->connection->prepare("SELECT r.rank_id, l.eres_display, t.title
+                                                  FROM rank r, title t, location l, location_title lt
+                                                  WHERE r.subject_id = :subject_id
+                                                  AND lt.title_id = r.title_id
+                                                  AND l.location_id = lt.location_title
+                                                  ORDER BY r.sort DESC");
         $statement->bindParam ( ":subject_id", $subject_id );
         $statement->execute();
         $databases = $statement->fetchAll();
@@ -165,13 +165,13 @@ class SubjectDatabase implements OutputInterface
     }
 
 
-    public function updateGuideSortOrderInCollection($sort, $collection_subject_id) {
+    public function updateGuideSortOrderInCollection($sort, $rank_id) {
             // UPDATE [Table] SET [Position] = $i WHERE [EntityId] = $value
-            $statement = $this->connection->prepare ( "UPDATE collection_subject 
+            $statement = $this->connection->prepare ( "UPDATE ranl 
                                                     SET sort = :sort
-                                                    WHERE collection_subject_id = :collection_subject_id" );
+                                                    WHERE rank_id = :rank_id" );
             $statement->bindParam ( ":sort", $sort );
-            $statement->bindParam ( ":collection_subject_id", $collection_subject_id );
+            $statement->bindParam ( ":rank_id", $rank_id );
             $statement->execute();
     }
 

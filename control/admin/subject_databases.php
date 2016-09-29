@@ -39,37 +39,16 @@ $guide_collection_list .= "</div>";
 
 
 
-$guide_search_viewport = "<div id='search-results-container'>";
-$guide_search_viewport .= "<label for='add-guide-input'>Search</label>";
-$guide_search_viewport .= "<input id='add-guide-input' type='text' name='add-guide-input' />";
-$guide_search_viewport .= "<div><h4>Search Results</h4><ul id='guide-search-results'></ul></div>";
-$guide_search_viewport .= "</div>";
+$database_search_viewport = "<div id='search-results-container'>";
+$database_search_viewport .= "<label for='add-database-input'>Search</label>";
+$database_search_viewport .= "<input id='add-database-input' type='text' name='add-database-input' />";
+$database_search_viewport .= "<div><h4>Search Results</h4><ul id='database-search-results'></ul></div>";
+$database_search_viewport .= "</div>";
 
-
-
-$guide_collection_viewport =  "<div id='guide-collection-viewport-container'>";
-
-$guide_collection_viewport .= "<div id='collection-metadata' data-collection_id=''>";
-$guide_collection_viewport .= "<h3 id='collection-title'></h3>";
-$guide_collection_viewport .= "<p id='collection-description'></p>";
-$guide_collection_viewport .= "<p id='collection-shortform'></p>";
-$guide_collection_viewport .= "<button id='edit-collection-metadata-btn' class='pure-button pure-button-primary'>Edit Collection</button>";
-$guide_collection_viewport .= "</div>";
-
-
-$guide_collection_viewport .= "<div id='collection-metadata-editform' data-collection_id='' style='display:none;'>";
-$guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-title-input' name='collection-title-input'>";
-$guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-description-input' name='collection-description-input'/>";
-$guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-shortform-input' name='collection-shortform-input'/>";
-$guide_collection_viewport .= "<button id='update-collection-metadata-btn' class='pure-button pure-button-primary'>Save</button>";
-$guide_collection_viewport .= "</div>";
-
-$guide_collection_viewport .= "</div>";
-
-$associated_guides_viewport = "<div id='guide-list-container'>";
-$associated_guides_viewport .= "<h4 id='guide-label'>Reorder Guides in this Collection</h4>";
-$associated_guides_viewport .= "<ul id='guide-list'></ul>";
-$associated_guides_viewport .= "</div>";
+$associated_databases_viewport = "<div id='database-list-container'>";
+$associated_databases_viewport .= "<h4 id='database-label'></h4>";
+$associated_databases_viewport .= "<ul id='database-list'></ul>";
+$associated_databases_viewport .= "</div>";
 
 
 ?>
@@ -86,7 +65,7 @@ $associated_guides_viewport .= "</div>";
     <div class="pure-u-1-3">
         <div class="pluslet">
             <div class="titlebar">
-                <div class="titlebar_text"><?php print _("Subject"); ?></div>
+                <div class="titlebar_text"><?php print _("Select Subject"); ?></div>
                 <div class="titlebar_options"></div>
             </div>
             <div class="pluslet_body">
@@ -96,12 +75,11 @@ $associated_guides_viewport .= "</div>";
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Add Guides"), $guide_search_viewport, "no_overflow"); ?>
+        <?php echo makePluslet(_("Associate Databases with this Subject"), $database_search_viewport, "no_overflow"); ?>
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Collection Details"), $guide_collection_viewport, "no_overflow"); ?>
-        <?php echo makePluslet(_("Associated Guides"), $associated_guides_viewport, "no_overflow"); ?>
+        <?php echo makePluslet(_("Selected Subject's Databases"), $associated_databases_viewport, "no_overflow"); ?>
     </div>
 
 </div>
@@ -109,8 +87,8 @@ $associated_guides_viewport .= "</div>";
 <script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
 
 <script>
-    var gcs = guideCollectionService();
-    gcs.init();
+    var sds = subjectDatabaseService();
+    sds.init();
     $(document).ready(function() {
         $('#subjects').select2();
 

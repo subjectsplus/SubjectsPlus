@@ -367,7 +367,7 @@ function getSubjectsDropDownItems($prefix="", $trunc="", $all_subs=0) {
 //        $subs_option_boxes .= "<option value=\"\" style=\"background-color: #F6E3E7\">~~" . strtoupper($subs_type) . "~~</option>";
 //      }
 
-      $subs_option_boxes .= "<option subject-id=\'$subs_id\' value=\"$prefix$subs_id\">$subs_name</option>";
+      $subs_option_boxes .= "<option subject-id=$subs_id>$subs_name</option>";
 
       $current_type = $subs_type;
     }

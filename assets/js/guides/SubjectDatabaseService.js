@@ -13,17 +13,16 @@ function subjectDatabaseService() {
             sortableDatabaseList : $('ul#database-list')
         },
         strings : {
-            removeGuideBtn: "<a class='remove-guide-btn' title='Remove Database from Subject'><i class='fa fa-trash fa-lg'></i> </a>"
+            removeDatabaseBtn: "<a class='remove-database-btn' title='Remove Database from Subject'><i class='fa fa-trash fa-lg'></i> </a>"
         },
         bindUiActions : function() {
 
             mySubjectDatabase.addCollection();
             mySubjectDatabase.deleteCollection();
-            mySubjectDatabase.guideSearch();
-            mySubjectDatabase.addGuideToCollection();
-            mySubjectDatabase.updateCollection();
+            mySubjectDatabase.databaseSearch();
+            mySubjectDatabase.addDatabaseToSubject();
             mySubjectDatabase.displaySubjectDatabases();
-            mySubjectDatabase.deleteGuideFromCollection();
+            mySubjectDatabase.deleteDatabaseFromSubject();
         },
         init : function() {
             mySubjectDatabase.bindUiActions();
@@ -65,7 +64,7 @@ function subjectDatabaseService() {
                     mySubjectDatabase.renderCollectionMetadata(obj.title, obj.description, obj.shortform, obj.collection_id);
                     mySubjectDatabase.showGuideCollectionViewportContainer();
                     mySubjectDatabase.showSearchResultsContainer();
-                    mySubjectDatabase.showGuideListContainer();
+                    mySubjectDatabase.showDatabaseListContainer();
                 }
             });
 
@@ -124,61 +123,6 @@ function subjectDatabaseService() {
         },
 
 
-        updateCollection: function () {
-
-            $('body').on('click', '#edit-collection-metadata-btn', function () {
-
-                var collection_id = $(this).parent('#collection-metadata').attr('data-collection_id');
-                var title = $(this).parent('#collection-metadata').children('h3#collection-title').text();
-                var shortform = $(this).parent('#collection-metadata').children('#collection-shortform').text();
-                var description = $(this).parent('#collection-metadata').children('#collection-description').text();
-
-                $('#collection-metadata-editform').show();
-
-                $('input#collection-title-input').val(title);
-                $('input#collection-shortform-input').val(shortform);
-                $('input#collection-description-input').val(description);
-
-                $('body').on('click', '#update-collection-metadata-btn', function () {
-
-
-                    var title = $('input#collection-title-input').val();
-                    var shortform = $('input#collection-shortform-input').val();
-                    var description =  $('input#collection-description-input').val();
-
-                    var payload = {
-                        'action': 'update',
-                        'collection_id' : collection_id,
-                        'title' : title,
-                        'shortform' : shortform,
-                        'description' : description
-                    };
-
-                    $.ajax({
-                        url: mySubjectDatabase.settings.databaseActionUrl,
-                        type: "POST",
-                        dataType: "json",
-                        data: payload,
-                        success: function(data) {
-
-                            mySubjectDatabase.clearEditFormValues();
-                            mySubjectDatabase.clearCollectionMetadata();
-
-                            $( "#collection-metadata" ).fadeIn( "slow", function() {
-                                mySubjectDatabase.renderCollectionMetadata(title, description,shortform, collection_id);
-                            });
-
-                        }
-                    });
-
-                    $('#collection-metadata-editform').hide();
-
-                });
-
-            });
-        },
-
-
         deleteCollection: function() {
 
             $('body').on('click', '#delete-collection-btn', function () {
@@ -223,21 +167,18 @@ function subjectDatabaseService() {
         },
 
 
-        guideSearch: function () {
+        databaseSearch: function () {
             // Autocomplete search
-            $(' #add-guide-input').keyup(function (data) {
-                if ($('#add-guide-input').val().length > 2) {
+            $(' #add-database-input').keyup(function (data) {
+                if ($('#add-database-input').val().length > 2) {
 
-                    var searchTerm = $('#add-guide-input').val();
+                    var searchTerm = $('#add-database-input').val();
                     var url = '../includes/autocomplete_data.php?';
-                    var collection = 'all_guides';
-                    //showInactive === true ? collection = "all_guides" : collection = "guides";
+                    var collection = 'azrecords';
                     var payload = {
                         'term': searchTerm,
                         'collection': collection
                     };
-
-                    $('#guide-search-results').empty();
 
                     $.ajax({
                         url: url,
@@ -245,19 +186,20 @@ function subjectDatabaseService() {
                         dataType: "json",
                         data: payload,
                         success: function(data) {
-                            //console.log(data);
-
+                            var result = '';
                             $.each(data, function (index, obj) {
-                                var addBtn = "<a class='add-guide-btn' title='Add Guide to Collection'><i class='fa fa-plus-circle'></i> </a>";
+                                var listCount = $('#database-list').find("li[data-subject_id='"+obj.id+"']").length;
 
-                                $('#guide-search-results').prepend('<li data-guide_id="' + obj.id + '">' + addBtn + obj.label + '</li>');
+                                if (listCount == 0) {
+                                    var addBtn = "<a class='add-database-btn' title='Add Database to Subject'><i class='fa fa-plus-circle'></i> </a>";
+                                    result += '<li data-subject_id="' + obj.id + '">' + addBtn + obj.label + '</li>';
+                                }
+                            });
 
-                            })
+                            $("#database-search-results").replaceWith('<ul id="database-search-results">' + result + '</ul>');
                         }
                     });
-
                 }
-
             });
         },
 
@@ -286,37 +228,26 @@ function subjectDatabaseService() {
                         data: payload,
                         success: function (data) {
 
-                            //show guide collection viewport container
-                            mySubjectDatabase.showGuideCollectionViewportContainer();
-
-                            //clear any collection metadata
-                            mySubjectDatabase.clearCollectionMetadata();
-
-                            //render collection metadata
-                            mySubjectDatabase.renderCollectionMetadata(title, description, shortform, collection_id);
-
-                            //clear form values
-                            mySubjectDatabase.clearAddFormValues();
-
                             //clear search results
                             mySubjectDatabase.clearSearchResults();
 
                             //render search results
                             mySubjectDatabase.showSearchResultsContainer();
 
-                            //render guide list container
-                            mySubjectDatabase.showGuideListContainer();
+                            //render database list container
+                            mySubjectDatabase.showDatabaseListContainer();
 
-                            //render guides
-                            var guides = data.guides;
-                            $.each(guides, function (index, obj) {
-                                var label = obj.subject;
-                                var item = obj.collection_subject_id;
+                            //render databases
+                            var databases = data.databases;
+                            $.each(databases, function (index, obj) {
+                                var label = obj.title;
+                                var item = obj.rank_id;
                                 var subject_id = obj.subject_id;
-                                $('#guide-list').prepend('<li id="item_' + item + '" ' +
+                                var active = obj.eres_display;
+                                $('#database-list').prepend('<li id="item_' + item + '"active_record="' + active + '" ' +
                                     'data-guide_id="' + subject_id + '">' +
                                     '<i class="fa fa-bars" aria-hidden="true"></i> ' +
-                                    label + mySubjectDatabase.strings.removeGuideBtn + '</li>');
+                                    label + mySubjectDatabase.strings.removeDatabaseBtn + '</li>');
 
                             });
 
@@ -324,7 +255,7 @@ function subjectDatabaseService() {
                         }
                     });
 
-                    mySubjectDatabase.makeGuidesSortable(collection_id);
+                    mySubjectDatabase.makeDatabasesSortable();
                 }else{
                     alert("Choose subject selected");
                 }
@@ -332,143 +263,56 @@ function subjectDatabaseService() {
 
         },
 
-        makeGuidesSortable : function (collection_id) {
+        makeDatabasesSortable : function () {
 
-            $('#guide-list').sortable({
-
+            $('#database-list').sortable({
                 axis: 'y',
                 update: function (event, ui) {
-                    var data = 'action=sortguides&' + $(this).sortable('serialize');
-
-                    $.ajax({
-                        url: mySubjectDatabase.settings.databaseActionUrl,
-                        type: "POST",
-                        data: data,
-                        success: function(data) {
-                            console.log(data);
-                        }
+                    var listItems = $("#database-list li");
+                    listItems.each(function(idx, li) {
+                        var item = $(li);
+                        item.attr( 'item_rank',item.index());
                     });
-
                 }
-
             });
         },
 
 
-        addGuideToCollection: function () {
+        addDatabaseToSubject: function () {
 
-            $('body').on('click', '.add-guide-btn', function () {
-                var label = $(this).closest('li').text();
-                var collection_id = $('#collection-title').attr('data-collection_id');
-                var subject_id =  $(this).closest('li').attr('data-guide_id');
-                var payload = {
-                    'action' : 'addguide',
-                    'collection_id' : collection_id,
-                    'subject_id': subject_id
-                };
+            $('body').on('click', '.add-database-btn', function () {
+                var clickedRow = $(this).closest('li');
+                var clickedRowId = clickedRow.attr('data-subject_id');
+                var listCount = $('#database-list').find("li[data-subject_id='"+clickedRowId+"']").length;
+                var listItemsCount = $('#database-list').find("li").length;
 
-                $.ajax({
-                    url: mySubjectDatabase.settings.databaseActionUrl,
-                    type: "POST",
-                    dataType: "json",
-                    data: payload,
-                    success: function(data) {
-                        console.log(data);
-                        $('#guide-list').append( '<li id="item_' + data.lastInsertId + '" ' +
-                            'data-guide_id="' + subject_id + '">' +
-                            '<i class="fa fa-bars" aria-hidden="true"></i> ' +
-                            label + mySubjectDatabase.strings.removeGuideBtn + '</li>' );
+                debugger;
+                if (listCount == 0) {
+                    var label = clickedRow.text();
+
+                    $('#database-list').append('<li item_rank="' + listItemsCount +'" data-subject_id="' + clickedRowId + '">' +
+                        '<i class="fa fa-bars" aria-hidden="true"></i> ' + label
+                        + mySubjectDatabase.strings.removeDatabaseBtn + '</li>');
+
+                    clickedRow.remove();
+
+
+                    if (!$(mySubjectDatabase.settings.sortableDatabaseList).hasClass('.ui-sortable')) {
+                        mySubjectDatabase.makeDatabasesSortable();
                     }
-                });
-
-                if( !$(mySubjectDatabase.settings.sortableDatabaseList).hasClass('.ui-sortable') ) {
-                    mySubjectDatabase.makeGuidesSortable(collection_id);
+                }else{
+                    clickedRow.remove();
                 }
 
             });
         },
 
-        deleteGuideFromCollection: function () {
+        deleteDatabaseFromSubject: function () {
 
-            $('body').on('click', '.remove-guide-btn', function () {
-
+            $('body').on('click', '.remove-database-btn', function () {
                 var listItem = $(this).closest('li');
-
-                var payload = {
-                    'action' : 'removeguide',
-                    'collection_id' : $('#collection-title').attr('data-collection_id'),
-                    'subject_id': $(this).closest('li').attr('data-guide_id')
-                };
-
-                console.log(payload);
-
-                $.ajax({
-                    url: mySubjectDatabase.settings.databaseActionUrl,
-                    type: "POST",
-                    dataType: "json",
-                    data: payload,
-                    success: function(data) {
-                        console.log(data);
-                        $(listItem).remove();
-
-                    }
-                });
-
+                $(listItem).remove();
             });
-        },
-
-        validateForm: function () {
-
-            var isValid = false;
-
-            if( !$('input[name="title"]').val() ) {
-                mySubjectDatabase.errorDialog('#error-dialog-title');
-            } else if ( !$('input[name="shortform"]').val() ) {
-                mySubjectDatabase.errorDialog('#error-dialog-shortform');
-            } else {
-                isValid = true;
-            }
-
-            return isValid;
-        },
-
-        shortformDupeCheck: function (shortform) {
-
-            var payload = {
-                'action' : 'validateshortform',
-                'shortform' : shortform,
-            };
-
-
-            var isDup = (function () {
-                var isDup = true;
-                $.ajax({
-                    url: mySubjectDatabase.settings.databaseActionUrl,
-                    type: "GET",
-                    async: false,
-                    data: payload,
-                    'success': function (data) {
-                        isDup = data.shortform.shortform;
-
-                        console.log(isDup);
-
-                    }
-                });
-                console.log(isDup);
-                return isDup;
-            })();
-
-
-            if (isDup == undefined) {
-                console.log(isDup);
-                return false;
-
-            } else {
-                console.log(isDup);
-                mySubjectDatabase.errorDialog('#error-dialog-shortform-dup');
-                return true;
-            }
-
         },
 
         errorDialog: function (selector) {
@@ -516,13 +360,6 @@ function subjectDatabaseService() {
             $('#collection-shortform').append(shortform);
         },
 
-        clearAddFormValues: function () {
-            $('#title').val('');
-            $('#description').val('');
-            $('#shortform').val('');
-            $('#add-guide-input').val();
-        },
-
         clearEditFormValues: function () {
             $('#collection-title-input').val('');
             $('#collection-description-input').val('');
@@ -546,11 +383,11 @@ function subjectDatabaseService() {
         },
 
         clearSearchResults: function () {
-            $('#guide-search-results').empty();
+            $('#database-search-results').empty();
         },
 
-        showGuideListContainer: function () {
-            $('#guide-list-container').show();
+        showDatabaseListContainer: function () {
+            $('#database-list-container').show();
         },
 
         hideGuideListContainer: function () {

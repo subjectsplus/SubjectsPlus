@@ -20,7 +20,7 @@ use SubjectsPlus\Control\Guide\SubjectDatabase;
 use SubjectsPlus\Control\Querier;
 
 $db = new Querier;
-$objCollections = new SubjectDatabase($db);
+$objDatabases = new SubjectDatabase($db);
 
 if(isset($_REQUEST['action'])) {
     $action = scrubData($_REQUEST['action'], 'text');
@@ -42,59 +42,59 @@ if(isset($_REQUEST['action'])) {
     }
 
     if(isset($_REQUEST['subject_id'])) {
-        $guide_id = scrubData($_REQUEST['subject_id'], 'integer');
+        $subject_id = scrubData($_REQUEST['subject_id'], 'integer');
     }
 
     switch ($action) {
         case "fetchall":
-            $objCollections->fetchCollections();
+            $objDatabases->fetchCollections();
             break;
 
         case "fetchone":
-            $objCollections->fetchCollectionById($subject_id);
+            $objDatabases->fetchCollectionById($subject_id);
             break;
 
         case "create":
-            $objCollections->createCollection($title, $description, $shortform);
+            $objDatabases->createCollection($title, $description, $shortform);
             break;
 
         case "update":
-            $objCollections->updateCollection($subject_id, $title, $description, $shortform);
+            $objDatabases->updateCollection($subject_id, $title, $description, $shortform);
             break;
 
         case "delete":
-            $objCollections->deleteCollectionGuides($subject_id);
+            $objDatabases->deleteCollectionGuides($subject_id);
             break;
 
         case "fetchdatabases":
-            $objCollections->fetchSubjectDatabases($subject_id);
+            $objDatabases->fetchSubjectDatabases($subject_id);
             break;
-        case "sortguides":
+        case "sortdatabases":
 
             $i = 0;
 
             foreach ($_REQUEST['item'] as $value) {
-                $objCollections->updateGuideSortOrderInCollection($i, $value);
+                $objDatabases->updateGuideSortOrderInCollection($i, $value);
                 $i++;
             }
             break;
 
         case "addguide":
-            $objCollections->addGuideToCollection($subject_id, $guide_id);
+            $objDatabases->addGuideToCollection($subject_id, $guide_id);
             break;
 
         case "removeguide":
-            $objCollections->deleteGuideFromCollection($guide_id, $subject_id);
+            $objDatabases->deleteGuideFromCollection($guide_id, $subject_id);
             break;
 
         case "validateshortform":
-            $objCollections->validateShortform($shortform);
+            $objDatabases->validateShortform($shortform);
             break;
 
     }
 
 } else {
-    $objCollections->response = 'Error, action must be set.';
+    $objDatabases->response = 'Error, action must be set.';
 }
 
-echo $objCollections->toJSON();
+echo $objDatabases->toJSON();
