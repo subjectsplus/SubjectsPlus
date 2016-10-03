@@ -48,6 +48,7 @@ $database_search_viewport .= "</div>";
 $associated_databases_viewport = "<div id='database-list-container'>";
 $associated_databases_viewport .= "<h4 id='database-label'></h4>";
 $associated_databases_viewport .= "<ul id='database-list'></ul>";
+$associated_databases_viewport .= "<button id='update-databases-btn' class='pure-button pure-button-primary' style=\"display: none;\">Save Changes</button>";
 $associated_databases_viewport .= "</div>";
 
 

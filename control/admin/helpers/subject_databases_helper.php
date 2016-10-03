@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cbrownroberts
- * Date: 6/29/16
- * Time: 9:52 AM
- */
 
 header("Content-Type: application/json");
 header("Expires: on, 01 Jan 1970 00:00:00 GMT");
@@ -25,74 +19,43 @@ $objDatabases = new SubjectDatabase($db);
 if(isset($_REQUEST['action'])) {
     $action = scrubData($_REQUEST['action'], 'text');
 
-    if(isset($_REQUEST['collection_id'])) {
-        $subject_id = scrubData($_REQUEST['subject_id'], 'integer');
+    if( isset($_REQUEST['subject_database_id']) ) {
+        $subject_database_id         = scrubData(htmlspecialchars_decode($_REQUEST['subject_database_id']), 'integer');
     }
 
-    if( isset($_REQUEST['title']) ) {
-        $title         = scrubData($_REQUEST['title']);
+    if( isset($_REQUEST['subject_id']) ) {
+        $subject_id   = scrubData(htmlspecialchars_decode($_REQUEST['subject_id']), 'integer');
     }
 
-    if( isset($_REQUEST['description']) ) {
-        $description   = scrubData($_REQUEST['description']);
+    if( isset($_REQUEST['subject_id']) ) {
+        $subject_id   = scrubData(htmlspecialchars_decode($_REQUEST['subject_id']), 'integer');
     }
 
-    if( isset($_REQUEST['shortform']) ) {
-        $shortform     = scrubData($_REQUEST['shortform']);
+    if( isset($_REQUEST['title_id']) ) {
+        $title_id     = scrubData(htmlspecialchars_decode($_REQUEST['title_id']), 'integer');
     }
 
-    if(isset($_REQUEST['subject_id'])) {
-        $subject_id = scrubData($_REQUEST['subject_id'], 'integer');
+    if(isset($_REQUEST['sort'])) {
+        $sort = scrubData(htmlspecialchars_decode($_REQUEST['sort']), 'integer');
+    }
+
+    if(isset($_REQUEST['description_override'])) {
+        $description_override = scrubData(htmlspecialchars_decode($_REQUEST['description_override']));
     }
 
     switch ($action) {
-        case "fetchall":
-            $objDatabases->fetchCollections();
-            break;
-
-        case "fetchone":
-            $objDatabases->fetchCollectionById($subject_id);
-            break;
-
-        case "create":
-            $objDatabases->createCollection($title, $description, $shortform);
-            break;
-
         case "update":
-            $objDatabases->updateCollection($subject_id, $title, $description, $shortform);
+            $objDatabases->saveChanges($subject_database_id, $subject_id, $title_id, $sort, $description_override);
             break;
 
         case "delete":
-            $objDatabases->deleteCollectionGuides($subject_id);
+            $objDatabases->deleteDatabaseFromGuide($subject_database_id, $description_override);
             break;
 
         case "fetchdatabases":
             $objDatabases->fetchSubjectDatabases($subject_id);
             break;
-        case "sortdatabases":
-
-            $i = 0;
-
-            foreach ($_REQUEST['item'] as $value) {
-                $objDatabases->updateGuideSortOrderInCollection($i, $value);
-                $i++;
-            }
-            break;
-
-        case "addguide":
-            $objDatabases->addGuideToCollection($subject_id, $guide_id);
-            break;
-
-        case "removeguide":
-            $objDatabases->deleteGuideFromCollection($guide_id, $subject_id);
-            break;
-
-        case "validateshortform":
-            $objDatabases->validateShortform($shortform);
-            break;
-
     }
-
 } else {
     $objDatabases->response = 'Error, action must be set.';
 }

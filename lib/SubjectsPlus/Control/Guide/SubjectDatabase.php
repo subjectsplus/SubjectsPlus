@@ -34,94 +34,55 @@ class SubjectDatabase implements OutputInterface
         $this->connection = $this->db->getConnection();
     }
 
-    /**
-     *
-     */
-    public function fetchCollections() {
-        $statement = $this->connection->prepare("SELECT c.collection_id, c.title, c.description, c.shortform 
-                                                  FROM collection c 
-                                                  ORDER BY c.title ASC");
-        $statement->execute();
-        $collections = $statement->fetchAll();
-
-        $this->collections = $collections;
-    }
-
-    /**
-     * @param $collection_id
-     */
-    public function fetchCollectionById($collection_id) {
-
-        $statement = $this->connection->prepare("SELECT c.collection_id, c.title, c.description, c.shortform 
-                                            FROM collection c
-                                            WHERE c.collection_id = :collection_id");
-
-        $statement->bindParam ( ":collection_id", $collection_id );
-        $statement->execute();
-        $collection = $statement->fetch();
-
-        $this->collection = $collection;
-    }
-
-    /**
-     * @param $title
-     * @param $description
-     * @param $shortform
-     */
-    public function createCollection($title, $description, $shortform) {
-        $statement = $this->connection->prepare ( "INSERT INTO collection (`title`, `description`, `shortform`) 
-                                                    VALUES (:title, :description, :shortform) " );
-        $statement->bindParam ( ":title", $title );
-        $statement->bindParam ( ":description", $description );
-        $statement->bindParam ( ":shortform", $shortform );
+    public function saveChanges($subject_database_id, $subject_id, $title_id, $sort, $description_override) {
+        $rank_id = $this->getRankId($subject_id, $title_id);
+        $statement = $this->connection->prepare ( "INSERT INTO subject_database
+                    VALUES (:subject_database_id, :rank_id, :sort)
+                    ON DUPLICATE KEY UPDATE
+                      rank_id           = :rank_id,
+                      sort             = :sort"
+        );
+        $statement->bindParam ( ":subject_database_id", $subject_database_id );
+        $statement->bindParam ( ":rank_id", $rank_id );
+        $statement->bindParam ( ":sort", $sort );
         $statement->execute();
 
-        $this->lastInsertId = $this->connection->lastInsertId();
+        $this->updateDescriptionOverride($rank_id, $description_override);
+
     }
 
-    /**
-     * @param $collection_id
-     */
-    public function updateCollection($collection_id, $title, $description, $shortform) {
-        $statement = $this->connection->prepare ( "UPDATE collection 
-                                                    SET `title` = :title, 
-                                                    `description` = :description, 
-                                                    `shortform` = :shortform 
-                                                    WHERE collection_id = :collection_id" );
-        $statement->bindParam ( ":title", $title );
-        $statement->bindParam ( ":description", $description );
-        $statement->bindParam ( ":shortform", $shortform );
-        $statement->bindParam ( ":collection_id", $collection_id );
+    function updateDescriptionOverride ($rank_id, $description_override){
+        $statement = $this->connection->prepare ( "UPDATE rank
+                SET description_override = :description_override
+                WHERE rank_id = :rank_id"
+        );
+        $statement->bindParam ( ":description_override", $description_override );
+        $statement->bindParam ( ":rank_id", $rank_id );
         $statement->execute();
     }
 
-    /**
-     * @param $collection_id
-     */
-    public function deleteCollection($collection_id) {
-        $statement = $this->connection->prepare("DELETE FROM collection WHERE collection_id = :collection_id");
-        $statement->bindParam ( ":collection_id", $collection_id );
+    function getRankId($subject_id, $title_id) {
+        $statement = $this->connection->prepare("SELECT rank_id FROM rank
+                    WHERE subject_id = :subject_id
+                    AND title_id = :title_id"
+        );
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->bindParam ( ":title_id", $title_id );
         $statement->execute();
-    }
-
-    /**
-     * @param $collection_id
-     */
-    public function deleteCollectionGuides($collection_id) {
-        //delete guides first
-        $this->deleteAllGuidesFromCollection($collection_id);
-
-        //delete collection
-        $this->deleteCollection($collection_id);
+        $statement = $statement->fetchAll();
+        return $statement[0]['rank_id'];
     }
 
     public function fetchSubjectDatabases($subject_id) {
-        $statement = $this->connection->prepare("SELECT r.rank_id, l.eres_display, t.title
-                                                  FROM rank r, title t, location l, location_title lt
-                                                  WHERE r.subject_id = :subject_id
-                                                  AND lt.title_id = r.title_id
-                                                  AND l.location_id = lt.location_title
-                                                  ORDER BY r.sort DESC");
+        $statement = $this->connection->prepare("SELECT sd.subject_database_id, t.title, l.record_status, r.title_id, sd.sort, r.rank_id, r.description_override, r.rank_id
+FROM rank r, location_title lt, location l, title t, subject_database sd
+    WHERE r.subject_id = :subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND sd.rank_id = r.rank_id
+ORDER BY sd.sort DESC")
+        ;
         $statement->bindParam ( ":subject_id", $subject_id );
         $statement->execute();
         $databases = $statement->fetchAll();
@@ -129,62 +90,10 @@ class SubjectDatabase implements OutputInterface
         $this->databases = $databases;
     }
 
-    /**
-     * @param $collectionId
-     */
-    public function addGuideToCollection($collection_id, $guide_id) {
-        $statement = $this->connection->prepare ( "INSERT INTO collection_subject (`collection_id`, `subject_id`) 
-                                                    VALUES (:collection_id, :subject_id) " );
-        $statement->bindParam ( ":collection_id", $collection_id );
-        $statement->bindParam ( ":subject_id", $guide_id );
+    public function deleteDatabaseFromGuide($subject_database_id) {
+        $statement = $this->connection->prepare("DELETE FROM subject_database WHERE subject_database_id = :subject_database_id");
+        $statement->bindParam ( ":subject_database_id", $subject_database_id );
         $statement->execute();
-
-        $this->lastInsertId = $this->connection->lastInsertId();
-    }
-
-    /**
-     * @param $guide_id
-     * @param $collection_id
-     */
-    public function deleteGuideFromCollection($guide_id, $collection_id) {
-        $statement = $this->connection->prepare("DELETE FROM collection_subject 
-                                                  WHERE collection_id = :collection_id
-                                                  AND subject_id = :guide_id");
-        $statement->bindParam ( ":collection_id", $collection_id );
-        $statement->bindParam ( ":guide_id", $guide_id );
-        $statement->execute();
-    }
-
-    /**
-     * @param $collection_id
-     */
-    public function deleteAllGuidesFromCollection($collection_id) {
-        $statement = $this->connection->prepare("DELETE FROM collection_subject WHERE collection_id = :collection_id");
-        $statement->bindParam ( ":collection_id", $collection_id );
-        $statement->execute();
-    }
-
-
-    public function updateGuideSortOrderInCollection($sort, $rank_id) {
-            // UPDATE [Table] SET [Position] = $i WHERE [EntityId] = $value
-            $statement = $this->connection->prepare ( "UPDATE ranl 
-                                                    SET sort = :sort
-                                                    WHERE rank_id = :rank_id" );
-            $statement->bindParam ( ":sort", $sort );
-            $statement->bindParam ( ":rank_id", $rank_id );
-            $statement->execute();
-    }
-
-    public function validateShortform($shortform) {
-        //shortform must be unique
-        $statement = $this->connection->prepare("SELECT shortform
-                                                  FROM collection
-                                                  WHERE shortform = :shortform");
-
-        $statement->bindParam(":shortform", $shortform);
-        $statement->execute();
-        $shortform = $statement->fetch();
-        $this->shortform = $shortform;
     }
 
 
