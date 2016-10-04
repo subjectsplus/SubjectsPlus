@@ -37,20 +37,6 @@ class SubjectDatabase implements OutputInterface
     public function saveChanges($title_id, $subject_id, $description_override) {
         $rank_id = $this->getRankId($subject_id, $title_id);
         $this->updateDescriptionOverride($rank_id, $description_override);
-//        $rank_id = $this->getRankId($subject_id, $title_id);
-//        $statement = $this->connection->prepare ( "INSERT INTO subject_database
-//                    VALUES (:subject_database_id, :rank_id, :sort)
-//                    ON DUPLICATE KEY UPDATE
-//                      rank_id           = :rank_id,
-//                      sort             = :sort"
-//        );
-//        $statement->bindParam ( ":subject_database_id", $subject_database_id );
-//        $statement->bindParam ( ":rank_id", $rank_id );
-//        $statement->bindParam ( ":sort", $sort );
-//        $statement->execute();
-//
-//        $this->updateDescriptionOverride($rank_id, $description_override);
-
     }
 
     function updateDescriptionOverride ($rank_id, $description_override){
@@ -82,16 +68,8 @@ FROM rank r, location_title lt, location l, title t
     AND lt.title_id = r.title_id
     AND l.location_id = lt.location_id
     AND t.title_id = lt.title_id
-    AND r.dbbysub_active = 1")
-        ;
-//        $statement = $this->connection->prepare("SELECT sd.subject_database_id, t.title, l.record_status, r.title_id, sd.sort, r.rank_id, r.description_override, r.rank_id
-//FROM rank r, location_title lt, location l, title t, subject_database sd
-//    WHERE r.subject_id = :subject_id
-//    AND lt.title_id = r.title_id
-//    AND l.location_id = lt.location_id
-//    AND t.title_id = lt.title_id
-//    AND sd.rank_id = r.rank_id")
-//        ;
+    AND r.dbbysub_active = 1");
+
         $statement->bindParam ( ":subject_id", $subject_id );
         $statement->execute();
         $databases = $statement->fetchAll();
@@ -103,9 +81,6 @@ FROM rank r, location_title lt, location l, title t
         $statement = $this->connection->prepare("UPDATE rank SET dbbysub_active = 0  WHERE rank_id = :rank_id");
         $statement->bindParam ( ":rank_id", $rank_id );
         $statement->execute();
-//        $statement = $this->connection->prepare("DELETE FROM subject_database WHERE subject_database_id = :subject_database_id");
-//        $statement->bindParam ( ":subject_database_id", $subject_database_id );
-//        $statement->execute();
     }
 
 

@@ -42,7 +42,6 @@ if(isset($_REQUEST['action'])) {
     switch ($action) {
         case "update":
             $objDatabases->saveChanges($title_id, $subject_id, $description_override);
-            //$objDatabases->saveChanges($subject_database_id, $subject_id, $title_id, $sort, $description_override);
             break;
 
         case "delete":

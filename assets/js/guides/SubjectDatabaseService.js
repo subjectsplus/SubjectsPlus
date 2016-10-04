@@ -80,7 +80,6 @@ function subjectDatabaseService() {
             var subject_id = selected_item.attr('subject-id');
             mySubjectDatabase.databasesIdToDelete = new Array();
 
-            debugger;
             if (subject_id)
             {
                 mySubjectDatabase.clearDatabasesList();
@@ -124,15 +123,6 @@ function subjectDatabaseService() {
                                 '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
                                 '</li>');
 
-                            // $('#database-list').prepend('<li subject_database_id="' + subject_database_id + '" title_id="' + title_id +
-                            //     '"sort="' + sort + '"record_status="' + record_status + '" rank_id="'+ rank_id + '" source_id="' + source_id + '">' +
-                            //     '<i class="fa fa-bars" aria-hidden="true"></i> ' +
-                            //     label + mySubjectDatabase.strings.removeDatabaseBtn +
-                            //     '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="note_override-' + subject_database_id +
-                            //     '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
-                            //         '<textarea id="description-override-textarea' + subject_database_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
-                            //     '</li>');
-
                             if (description_override) {
                                 $('#description-override-textarea' + rank_id).val(description_override);
                             }
@@ -152,17 +142,6 @@ function subjectDatabaseService() {
                 mySubjectDatabase.clearDatabasesList();
             }
         },
-
-        // makeDatabasesSortable : function () {
-        //
-        //     $('#database-list').sortable({
-        //         axis: 'y',
-        //         update: function (event, ui) {
-        //             mySubjectDatabase.orderItems();
-        //             mySubjectDatabase.showSaveChangesButtons();
-        //         }
-        //     });
-        // },
 
         orderItems : function (){
             tinysort("#database-list > li", {natural:true});
@@ -278,7 +257,6 @@ function subjectDatabaseService() {
                     var title_id =  $(this).attr('title_id');
                     var description_override = $(this).find('textarea').val();
 
-                    debugger;
                     var payload = {
                         'action': 'update',
                         'title_id': title_id,
@@ -337,38 +315,6 @@ function subjectDatabaseService() {
             $('#flash-msg').append(msg).addClass( 'success-msg' );
         },
 
-        showCollectionMetadataContainer: function () {
-            $('#collection-metadata').show();
-        },
-
-        hideCollectionMetadataContainer: function () {
-            $('#collection-metadata').hide();
-        },
-
-        clearCollectionMetadata: function () {
-            $('#collection-title').html(' ');
-            $('#collection-description').html('');
-            $('#collection-shortform').html('');
-        },
-
-        renderCollectionMetadata: function (title, description, shortform, collection_id) {
-            $('#collection-metadata').attr('data-collection_id', collection_id);
-            $('#collection-title').attr('data-collection_id', collection_id);
-            $('#collection-title').append(title);
-            $('#collection-description').append(description);
-            $('#collection-shortform').append(shortform);
-        },
-
-        clearEditFormValues: function () {
-            $('#collection-title-input').val('');
-            $('#collection-description-input').val('');
-            $('#collection-shortform-input').val('');
-        },
-
-        showGuideCollectionViewportContainer: function () {
-            $('#guide-collection-viewport-container').show();
-        },
-
         showSaveChangesButtons: function () {
             $('#update-databases-btn').show();
         },
@@ -379,10 +325,6 @@ function subjectDatabaseService() {
 
         hideAllDescriptionOverrideTextAreas: function () {
             $('.description-override-text-area').hide();
-        },
-
-        hideGuideCollectionViewportContainer: function () {
-            $('#guide-collection-viewport-container').hide();
         },
 
         showSearchResultsContainer: function () {

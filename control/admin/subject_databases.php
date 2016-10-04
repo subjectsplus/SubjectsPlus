@@ -13,7 +13,7 @@ use SubjectsPlus\Control\Querier;
     
 $subsubcat = "";
 $subcat = "admin";
-$page_title = "Admin Subject Databases";
+$page_title = "Admin Subject>Databases";
 $feedback = "";
 
 //var_dump($_POST);
@@ -80,7 +80,7 @@ $associated_databases_viewport .= "</div>";
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Selected Subject's Databases"), $associated_databases_viewport, "no_overflow"); ?>
+        <?php echo makePluslet(_("Databases"), $associated_databases_viewport, "no_overflow"); ?>
     </div>
 
 </div>
