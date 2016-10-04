@@ -19,37 +19,34 @@ $objDatabases = new SubjectDatabase($db);
 if(isset($_REQUEST['action'])) {
     $action = scrubData($_REQUEST['action'], 'text');
 
-    if( isset($_REQUEST['subject_database_id']) ) {
-        $subject_database_id         = scrubData(htmlspecialchars_decode($_REQUEST['subject_database_id']), 'integer');
-    }
-
-    if( isset($_REQUEST['subject_id']) ) {
-        $subject_id   = scrubData(htmlspecialchars_decode($_REQUEST['subject_id']), 'integer');
-    }
-
-    if( isset($_REQUEST['subject_id']) ) {
-        $subject_id   = scrubData(htmlspecialchars_decode($_REQUEST['subject_id']), 'integer');
+   if( isset($_REQUEST['subject_id']) ) {
+        $subject_id   = scrubData($_REQUEST['subject_id'], 'integer');
     }
 
     if( isset($_REQUEST['title_id']) ) {
-        $title_id     = scrubData(htmlspecialchars_decode($_REQUEST['title_id']), 'integer');
+        $title_id     = scrubData($_REQUEST['title_id'], 'integer');
     }
 
-    if(isset($_REQUEST['sort'])) {
-        $sort = scrubData(htmlspecialchars_decode($_REQUEST['sort']), 'integer');
+    if(isset($_REQUEST['dbbysub_active'])) {
+        $dbbysub_active = scrubData($_REQUEST['dbbysub_active'], 'integer');
     }
 
     if(isset($_REQUEST['description_override'])) {
-        $description_override = scrubData(htmlspecialchars_decode($_REQUEST['description_override']));
+        $description_override = scrubData($_REQUEST['description_override']);
+    }
+
+    if(isset($_REQUEST['rank_id'])) {
+        $rank_id = scrubData($_REQUEST['rank_id']);
     }
 
     switch ($action) {
         case "update":
-            $objDatabases->saveChanges($subject_database_id, $subject_id, $title_id, $sort, $description_override);
+            $objDatabases->saveChanges($title_id, $subject_id, $description_override);
+            //$objDatabases->saveChanges($subject_database_id, $subject_id, $title_id, $sort, $description_override);
             break;
 
         case "delete":
-            $objDatabases->deleteDatabaseFromGuide($subject_database_id, $description_override);
+            $objDatabases->hideDatabaseFromGuide($rank_id);
             break;
 
         case "fetchdatabases":

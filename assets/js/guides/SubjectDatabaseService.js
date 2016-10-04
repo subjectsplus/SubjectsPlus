@@ -80,6 +80,7 @@ function subjectDatabaseService() {
             var subject_id = selected_item.attr('subject-id');
             mySubjectDatabase.databasesIdToDelete = new Array();
 
+            debugger;
             if (subject_id)
             {
                 mySubjectDatabase.clearDatabasesList();
@@ -102,13 +103,10 @@ function subjectDatabaseService() {
                         var databases = data.databases;
                         $.each(databases, function (index, obj) {
                             var label = obj.title;
-                            var subject_database_id = obj.subject_database_id;
                             var title_id = obj.title_id;
                             var record_status = obj.record_status;
-                            var sort = obj.sort;
                             var rank_id = obj.rank_id;
                             var description_override = obj.description_override;
-                            var source_id = obj.source_id;
                             var active_description_override = 'fa-inactive';
 
                             if (description_override) {
@@ -117,24 +115,34 @@ function subjectDatabaseService() {
                                 }
                             }
 
-                            $('#database-list').prepend('<li subject_database_id="' + subject_database_id + '" title_id="' + title_id +
-                                '"sort="' + sort + '"record_status="' + record_status + '" rank_id="'+ rank_id + '" source_id="' + source_id + '">' +
+                            $('#database-list').prepend('<li title_id="' + title_id +
+                                '"record_status="' + record_status + '" rank_id="'+ rank_id + '">' +
                                 '<i class="fa fa-bars" aria-hidden="true"></i> ' +
                                 label + mySubjectDatabase.strings.removeDatabaseBtn +
-                                '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="note_override-' + subject_database_id +
+                                '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="note_override-' + rank_id +
                                 '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
-                                    '<textarea id="description-override-textarea' + subject_database_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
+                                '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
                                 '</li>');
 
+                            // $('#database-list').prepend('<li subject_database_id="' + subject_database_id + '" title_id="' + title_id +
+                            //     '"sort="' + sort + '"record_status="' + record_status + '" rank_id="'+ rank_id + '" source_id="' + source_id + '">' +
+                            //     '<i class="fa fa-bars" aria-hidden="true"></i> ' +
+                            //     label + mySubjectDatabase.strings.removeDatabaseBtn +
+                            //     '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="note_override-' + subject_database_id +
+                            //     '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
+                            //         '<textarea id="description-override-textarea' + subject_database_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
+                            //     '</li>');
+
                             if (description_override) {
-                                $('#description-override-textarea' + subject_database_id).val(description_override);
+                                $('#description-override-textarea' + rank_id).val(description_override);
                             }
                         });
 
+                        mySubjectDatabase.orderItems();
                         mySubjectDatabase.descriptionOverrideButtonBehavior();
                         mySubjectDatabase.descriptionOverrideTextAreaBehavior();
                         mySubjectDatabase.hideAllDescriptionOverrideTextAreas();
-                        mySubjectDatabase.makeDatabasesSortable();
+
                         mySubjectDatabase.hideSaveChangesButtons();
                         mySubjectDatabase.showNoDataBasesMessage();
                     }
@@ -145,29 +153,24 @@ function subjectDatabaseService() {
             }
         },
 
-        makeDatabasesSortable : function () {
-
-            $('#database-list').sortable({
-                axis: 'y',
-                update: function (event, ui) {
-                    mySubjectDatabase.orderItems();
-                    mySubjectDatabase.showSaveChangesButtons();
-                }
-            });
-        },
+        // makeDatabasesSortable : function () {
+        //
+        //     $('#database-list').sortable({
+        //         axis: 'y',
+        //         update: function (event, ui) {
+        //             mySubjectDatabase.orderItems();
+        //             mySubjectDatabase.showSaveChangesButtons();
+        //         }
+        //     });
+        // },
 
         orderItems : function (){
-            var listItems = $("#database-list li");
-            listItems.each(function(idx, li) {
-                var item = $(li);
-                item.attr( 'sort',item.index());
-            });
+            tinysort("#database-list > li", {natural:true});
         },
 
         descriptionOverrideButtonBehavior: function () {
 
             $( ".note_override").click(function(event) {
-                debugger;
                 $(this).parent().find('textarea').toggle();
                 event.preventDefault();
                 event.stopPropagation();
@@ -191,7 +194,7 @@ function subjectDatabaseService() {
                 if (listCount == 0) {
                     var label = clickedRow.text();
 
-                    $('#database-list').append('<li sort="' + listItemsCount +'" title_id="' + clickedRowId + '">' +
+                    $('#database-list').append('<li title_id="' + clickedRowId + '">' +
                         '<i class="fa fa-bars" aria-hidden="true"></i> ' + label
                         + mySubjectDatabase.strings.removeDatabaseBtn +
                         '<i class="fa fa-lg fa-file-text-o fa-inactive note_override clickable" id="not-saved-override-button' + listItemsCount + '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
@@ -200,7 +203,6 @@ function subjectDatabaseService() {
 
 
                     $('#database-list').find('#not-saved-override-button'+listItemsCount).click(function(event) {
-                        debugger;
                         $(this).parent().find('textarea').toggle();
                         event.preventDefault();
                         event.stopPropagation();
@@ -209,7 +211,7 @@ function subjectDatabaseService() {
 
                     clickedRow.remove();
                     if (!$(mySubjectDatabase.settings.sortableDatabaseList).hasClass('.ui-sortable')) {
-                        mySubjectDatabase.makeDatabasesSortable();
+                        mySubjectDatabase.orderItems();
                     }
 
                     mySubjectDatabase.orderItems();
@@ -232,14 +234,14 @@ function subjectDatabaseService() {
             $('body').on('click', '.remove-database-btn', function () {
 
                 var listItem = $(this).closest('li');
-                if (typeof listItem.attr('subject_database_id') !== typeof undefined && listItem.attr('subject_database_id') !== false) {
-                    mySubjectDatabase.databasesIdToDelete.push(listItem.attr('subject_database_id'));
+                if (typeof listItem.attr('rank_id') !== typeof undefined && listItem.attr('rank_id') !== false) {
+                    mySubjectDatabase.databasesIdToDelete.push(listItem.attr('rank_id'));
                 }
                 $(listItem).remove();
                 var databaseInput = $('#add-database-input');
                 if (listItem.text().toLowerCase().indexOf(databaseInput.val().toLowerCase()) !== -1){
                     var addBtn = "<a class='add-database-btn' title='Add Database to Subject'><i class='fa fa-plus-circle'></i> </a>";
-                    var itemToSearchResults = '<li sort="' + listItem.attr('sort')+'" title_id="' + listItem.attr('title_id') + '">' + addBtn + listItem.text() + '</li>';
+                    var itemToSearchResults = '<li title_id="' + listItem.attr('title_id') +  '" rank_id="' + listItem.attr('rank_id') + '">' + addBtn + listItem.text() + '</li>';
 
                     $('#database-search-results').prepend(itemToSearchResults);
                 }
@@ -261,7 +263,7 @@ function subjectDatabaseService() {
                 for (var i = 0; i < deleteListCount; i++) {
                     var payload = {
                         'action': 'delete',
-                        'subject_database_id': mySubjectDatabase.databasesIdToDelete[i]
+                        'rank_id': mySubjectDatabase.databasesIdToDelete[i]
                     };
                     $.ajax({
                         url: mySubjectDatabase.settings.databaseActionUrl,
@@ -274,16 +276,13 @@ function subjectDatabaseService() {
                 var total = $('#database-list li').length;
                 $('#database-list li').each(function(index) {
                     var title_id =  $(this).attr('title_id');
-                    var sort =  $(this).attr('sort');
-                    var subject_database_id =  $(this).attr('subject_database_id');
                     var description_override = $(this).find('textarea').val();
 
+                    debugger;
                     var payload = {
                         'action': 'update',
-                        'subject_database_id': subject_database_id,
-                        'subject_id' : subject_id,
-                        'title_id' : title_id,
-                        'sort' : sort,
+                        'title_id': title_id,
+                        'subject_id': subject_id,
                         'description_override' : description_override
                     };
 
