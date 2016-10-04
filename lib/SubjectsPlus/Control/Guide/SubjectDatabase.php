@@ -36,7 +36,21 @@ class SubjectDatabase implements OutputInterface
 
     public function saveChanges($title_id, $subject_id, $description_override) {
         $rank_id = $this->getRankId($subject_id, $title_id);
-        $this->updateDescriptionOverride($rank_id, $description_override);
+
+        if ($rank_id) {
+            $this->updateDescriptionOverride($rank_id, $description_override);
+        }else{
+            $this->insert($title_id, $subject_id, $description_override);
+        }
+    }
+
+    function insert ($title_id, $subject_id, $description_override){
+        $statement = $this->connection->prepare ("INSERT INTO rank (rank, subject_id, title_id, source_id, description_override, dbbysub_active)
+VALUES (0,:subject_id,:title_id, 1, :description_override, 1)");
+        $statement->bindParam ( ":description_override", $description_override );
+        $statement->bindParam ( ":title_id", $title_id );
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->execute();
     }
 
     function updateDescriptionOverride ($rank_id, $description_override){
