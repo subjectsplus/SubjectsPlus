@@ -27,8 +27,6 @@ function subjectDatabaseService() {
         init : function() {
             mySubjectDatabase.bindUiActions();
             mySubjectDatabase.hideSearchResultsContainer();
-            mySubjectDatabase.hideGuideCollectionViewportContainer();
-            mySubjectDatabase.hideGuideListContainer();
         },
 
         databaseSearch: function () {
