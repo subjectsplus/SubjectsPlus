@@ -159,6 +159,7 @@ class Installer
 					  `title_id` bigint(20) DEFAULT NULL,
 					  `source_id` bigint(20) DEFAULT NULL,
 					  `description_override` text,
+					  `dbbysub_active` TINYINT(1) DEFAULT NULL,
 					  PRIMARY KEY (`rank_id`),
 					  KEY `fk_rank_subject_id_idx` (`subject_id`),
 					  KEY `fk_rank_title_id_idx` (`title_id`),
@@ -427,7 +428,7 @@ class Installer
 					"INSERT INTO `staff` VALUES (1,'Admin','Super','SubjectsPlus Admin','5555',1,0,'admin$lstrEmailDomain','',0,1,'{$lstrHashPassword}',1,'talkback|faq|records|eresource_mgr|videos|admin|librarian|supervisor','{\"css\": \"basic\"}',
 					'This is the default user with a SubjectsPlus install.  You should delete or rename me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
 					"INSERT INTO `location_title` VALUES (1,1)",
-					"INSERT INTO `rank` VALUES (1,0,1,1,1,'')",
+					"INSERT INTO `rank` VALUES (1,0,1,1,1,'',1)",
 					"INSERT INTO `staff_subject` VALUES (1,1)"
 			);
 	}
