@@ -34,7 +34,6 @@
             echo $this->_pluslet_id_field;
         }
     ?>";
-
     var container = $("#"+containerSelector).find('.booklist-content');
     $.each(container, function() {
         var b = bookList();
