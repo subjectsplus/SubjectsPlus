@@ -338,6 +338,7 @@ function getSubjectsDropDownItems($prefix="", $trunc="", $all_subs=0) {
     $subs_query = "SELECT distinct s.subject_id, subject, type
             FROM subject s, staff_subject ss
             WHERE s.subject_id = ss.subject_id
+            AND s.type = 'Subject'
             AND ss.staff_id = " . $_SESSION['staff_id'] . "
             ORDER BY type, subject";
   }
