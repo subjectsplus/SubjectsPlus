@@ -20,11 +20,7 @@ class Pluslet_BookList extends Pluslet
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
         $this->_type = "BookList";
-        $this->_pluslet_id = $pluslet_id;
-        $this->_subject_id = $subject_id;
-        $this->_isclone = $isclone;
-        $this->_clone_id = $clone_id;
-        $this->_pluslet_bonus_classes = "type-booklist";
+        $this->_pluslet_bonus_classes = "type-BookList";
 
     }
 
