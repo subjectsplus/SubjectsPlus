@@ -4,6 +4,7 @@ function bookList() {
 
         settings: {},
         strings: {},
+
         bindUiActions: function (container) {
             myBookList.getBookList(container);
         },

@@ -13,7 +13,6 @@
     }
     ?></textarea>
 
-
 <script>
     var b = bookList();
     b.initEditView();
