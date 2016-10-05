@@ -54,19 +54,17 @@ if (!isset ($noheadersearch)) {
 // We've got a variable for those who wish to keep the old styles
 $v2styles = TRUE;
 ?>
+    <?php
+    global $google_analytics_ua;
+    if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
 
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-15217512-1']);
-  _gaq.push(['_trackPageview']);
+        echo "<div id='google-analytics-ua' style='visibility: hidden;' data-uacode='{$google_analytics_ua}'></div>";
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+        if( file_exists('includes/google-analytics-tracker.php') ) {
+            include_once ('google-analytics-tracker.php');
+        }
+    }
+    ?>
 
 <script>
 $(document).ready(function() {
