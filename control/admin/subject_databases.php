@@ -21,8 +21,9 @@ $feedback = "";
 include("../includes/header.php");
 include("../includes/autoloader.php");
 
+include('get_subject_databases_guides.php');
+$subs_option_boxes = $result;
 
-$subs_option_boxes = getSubjectsDropDownItems("guide.php?subject_id=", "", 1);
 
 $all_subjects = "
 <form method=\"post\" action=\"index.php\" name=\"form\">

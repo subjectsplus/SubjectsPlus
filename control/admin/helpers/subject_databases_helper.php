@@ -51,6 +51,7 @@ if(isset($_REQUEST['action'])) {
         case "fetchdatabases":
             $objDatabases->fetchSubjectDatabases($subject_id);
             break;
+
     }
 } else {
     $objDatabases->response = 'Error, action must be set.';

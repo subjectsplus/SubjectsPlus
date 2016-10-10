@@ -23,15 +23,44 @@ class SubjectDatabase implements OutputInterface
     protected $connection;
 
     public $response;
-    public $collection;
-    public $collections;
     public $databases;
-    public $lastInsertId;
-    public $shortform;
 
     public function __construct(Querier $db) {
         $this->db = $db;
         $this->connection = $this->db->getConnection();
+    }
+
+    function getSubjectsDropDownItems($staff_id) {
+
+        $subs_option_boxes = "";
+
+        $statement = $this->connection->prepare ("SELECT distinct s.subject_id, subject, type
+            FROM subject s, staff_subject ss
+            WHERE s.subject_id = ss.subject_id
+            AND s.type = 'Subject'
+            AND ss.staff_id = :staff_id
+            ORDER BY type, subject");
+        $statement->bindParam ( ":staff_id", $staff_id );
+
+
+        $statement->execute();
+        $statement = $statement->fetchAll();
+        $subs_result = $statement;
+        $num_subs = count($subs_result);
+
+        if ($num_subs > 0) {
+            $subs_option_boxes = "";
+
+            foreach ($subs_result as $myrow) {
+                $subs_id = $myrow[0];
+                $subs_name = $myrow[1];
+                $subs_type = $myrow[2];
+
+                $subs_option_boxes .= "<option subject-id=$subs_id>$subs_name</option>";
+            }
+        }
+
+        return $subs_option_boxes;
     }
 
     public function saveChanges($title_id, $subject_id, $description_override) {
