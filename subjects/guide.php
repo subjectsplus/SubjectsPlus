@@ -428,6 +428,8 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
 <?php include('../assets/js/guides/Catalog.js'); ?>
 <?php include('../assets/js/guides/ArticlesPlus.js'); ?>
+<?php include('../assets/js/guides/PrimoSearchBox.js'); ?>
+<?php include('../assets/js/guides/bookList.js'); ?>
 
 hash.init();
 track.init();
@@ -443,6 +445,23 @@ cloneView.init();
 
     var articlesPlusSearch = articlesPlus();
     articlesPlusSearch.init();
+
+    var primoSearchBox = primoSearchBox();
+    primoSearchBox.init();
+
+    var containers = $(".booklist-content");
+    $.each(containers, function() {
+        var container = this;
+        if ($(container).parent().parent().attr('name') == 'Clone'){
+            container = $("#"+$(container).parent().parent().attr('id')).find('.booklist-content')[0];
+        }
+
+        if ($(container).attr('rendered') == '0') {
+            var b = bookList();
+            b.init(container);
+            $(container).attr('rendered', '1');
+        }
+    });
 
 </script>
 
