@@ -120,7 +120,20 @@ FROM rank r, location_title lt, location l, title t
         $this->databases = $databases;
     }
 
-    public function hideDatabaseFromGuide($rank_id, $dbbysub_active) {
+    public function getDescriptionOverride($subject_id, $title_id) {
+
+        $statement = $this->connection->prepare("SELECT description_override, rank_id FROM rank
+                    WHERE subject_id = :subject_id
+                    AND title_id = :title_id"
+        );
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->bindParam ( ":title_id", $title_id );
+        $statement->execute();
+        $databases = $statement->fetchAll();
+        $this->databases = $databases;
+    }
+
+    public function hideDatabaseFromGuide($rank_id) {
         $statement = $this->connection->prepare("UPDATE rank SET dbbysub_active = 0  WHERE rank_id = :rank_id");
         $statement->bindParam ( ":rank_id", $rank_id );
         $statement->execute();

@@ -52,6 +52,10 @@ if(isset($_REQUEST['action'])) {
             $objDatabases->fetchSubjectDatabases($subject_id);
             break;
 
+        case "getDescriptionOverride":
+            $objDatabases->getDescriptionOverride($subject_id, $title_id);
+            break;
+
     }
 } else {
     $objDatabases->response = 'Error, action must be set.';
