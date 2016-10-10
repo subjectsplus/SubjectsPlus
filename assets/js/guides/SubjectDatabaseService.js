@@ -203,7 +203,6 @@ function subjectDatabaseService() {
                         $('#database-list').find("li[title_id='"+clickedRowId+"']").show();
                         var index = mySubjectDatabase.databasesIdToDelete.indexOf(rank_id);
                         if(mySubjectDatabase.databasesIdToDelete.indexOf(rank_id) != -1){
-                            debugger;
                             var index = mySubjectDatabase.databasesIdToDelete.indexOf(rank_id);
                             mySubjectDatabase.databasesIdToDelete.splice(index, 1);
                         }
@@ -213,7 +212,6 @@ function subjectDatabaseService() {
                         var active_description_override = 'fa-inactive';
 
                         if(mySubjectDatabase.databasesIdToDelete.indexOf(rank_id) != -1){
-                            debugger;
                             var index = mySubjectDatabase.databasesIdToDelete.indexOf(rank_id);
                             mySubjectDatabase.databasesIdToDelete.splice(index, 1);
                         }
@@ -287,7 +285,6 @@ function subjectDatabaseService() {
                 var selected_item = $('#subjects').find(":selected");
                 var subject_id = selected_item.attr('subject-id');
 
-                debugger;
                 var deleteListCount = mySubjectDatabase.databasesIdToDelete.length;
                 for (var i = 0; i < deleteListCount; i++) {
                     var payload = {
