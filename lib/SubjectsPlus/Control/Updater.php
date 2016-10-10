@@ -295,6 +295,7 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
 		//queries to change or drop columns, add referential integrity, add indexes
 		$this->oneToTwoAlterTables = array(
 			"DROP TABLE IF EXISTS `pluslet_staff`",
+			"ALTER TABLE `rank` ADD COLUMN `dbbysub_active` TINYINT(1) DEFAULT NULL",
 			"ALTER TABLE `department` ADD COLUMN `email` VARCHAR(255) NULL DEFAULT NULL  AFTER `telephone`,
 			ADD COLUMN `url` VARCHAR(255) NULL DEFAULT NULL  AFTER `email`",
 			"ALTER TABLE `faq_subject` CHANGE COLUMN `subject_id` `subject_id` BIGINT(20) NOT NULL",
