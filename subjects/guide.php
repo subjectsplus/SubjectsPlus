@@ -446,6 +446,9 @@ cloneView.init();
     var articlesPlusSearch = articlesPlus();
     articlesPlusSearch.init();
 
+    var primoSearchBox = primoSearchBox();
+    primoSearchBox.init();
+
     var containers = $(".booklist-content");
     $.each(containers, function() {
         var container = this;

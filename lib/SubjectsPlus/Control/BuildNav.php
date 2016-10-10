@@ -165,7 +165,8 @@ if ($is_um == TRUE) {
     			<li><a href=\"$CpanelPath" . "admin/departments.php\">" . _("Departments") . "</a></li>
     			<li><a href=\"$CpanelPath" . "admin/sources.php\">" . _("Sources") . "</a></li>
           <li><a href=\"$CpanelPath" . "admin/faq_collections.php\">" . _("FAQ Collections") . "</a></li>
-    			<li><a href=\"$CpanelPath" . "edit-config.php\">" . _("Config Site") . "</a></li>
+          <li><a href=\"$CpanelPath" . "admin/subject_databases.php\">" . _("Subject>Databases") . "</a></li>
+    			<li><a href=\"$CpanelPath" . "edit-config.php\">" . _("Config Site") . "</a></li>    			
     		</ul>
       </div>
 	   </li>";
