@@ -428,6 +428,7 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
 <?php include('../assets/js/guides/Catalog.js'); ?>
 <?php include('../assets/js/guides/ArticlesPlus.js'); ?>
+<?php include('../assets/js/guides/PrimoSearchBox.js'); ?>
 <?php include('../assets/js/guides/bookList.js'); ?>
 
 hash.init();
