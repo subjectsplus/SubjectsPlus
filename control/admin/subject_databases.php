@@ -1,15 +1,7 @@
 <?php
-/**
- *   @file guide_collections.php
- *   @brief CRUD collections of guides for display on public page
- *
- *   @author acarrasco
- *   @date Sept 2016
- *   
- */
 
 use SubjectsPlus\Control\Querier;
-
+use SubjectsPlus\Control\Guide\SubjectDatabase;
     
 $subsubcat = "";
 $subcat = "admin";
@@ -20,9 +12,18 @@ $feedback = "";
 
 include("../includes/header.php");
 include("../includes/autoloader.php");
+require_once("../includes/config.php");
+require_once("../includes/functions.php");
 
+$db = new Querier;
+$objDatabases = new SubjectDatabase($db);
 
-$subs_option_boxes = getSubjectsDropDownItems("guide.php?subject_id=", "", 1);
+if (isset($_SESSION['staff_id'])) {
+    $staff_id = scrubData($_SESSION['staff_id'], 'integer');
+}
+
+$subs_option_boxes = $objDatabases->getSubjectsDropDownItems($staff_id);
+
 
 $all_subjects = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
