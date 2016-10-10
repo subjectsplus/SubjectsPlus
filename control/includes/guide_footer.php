@@ -15,5 +15,6 @@
 
     var ss = subjectSpecialist();
     ss.init();
+
 </script>
 </html>
