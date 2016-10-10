@@ -66,11 +66,9 @@ function subjectDatabaseService() {
         },
 
         displaySubjectDatabases: function () {
-
             $('body').on('change', '#subjects', function () {
                         mySubjectDatabase.refreshSubjectDatabases();
             });
-
         },
 
         refreshSubjectDatabases: function(){
@@ -141,7 +139,6 @@ function subjectDatabaseService() {
         },
 
         orderItems : function (){
-            debugger;
             tinysort("#database-list > li", {natural:true});
         },
 
@@ -167,34 +164,93 @@ function subjectDatabaseService() {
                 var clickedRowId = clickedRow.attr('title_id');
                 var listCount = $('#database-list').find("li[subject_id='"+clickedRowId+"']").length;
                 var listItemsCount = $('#database-list').find("li").length;
+                var subject_id = $('#subjects').find(":selected").attr('subject-id');
+                var rank_id = '';
+                var description_override = '';
+                var textArea = '<textarea id="description-override-textarea" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>';
 
                 if (listCount == 0) {
                     var label = clickedRow.text();
+                    var hidden = $('#database-list').find("li[title_id='"+clickedRowId+"']").length;
 
-                    $('#database-list').append('<li title_id="' + clickedRowId + '">' +
-                        label + mySubjectDatabase.strings.removeDatabaseBtn +
-                        '<i class="fa fa-lg fa-file-text-o fa-inactive note_override clickable" id="not-saved-override-button' + listItemsCount + '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
-                        '<textarea id="description-override-textarea" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
-                        '</li>');
+                    var payload = {
+                        'action': 'getDescriptionOverride',
+                        'subject_id': subject_id,
+                        'title_id': clickedRowId
+                    };
 
+                    $.ajax({
+                        url: mySubjectDatabase.settings.databaseActionUrl,
+                        type: "GET",
+                        dataType: "json",
+                        data: payload,
+                        async: false,
+                        success: function (data) {
+                            var databases = data.databases;
+                            $.each(databases, function (index, obj) {
+                                description_override = obj.description_override;
+                                rank_id = obj.rank_id;
 
-                    $('#database-list').find('#not-saved-override-button'+listItemsCount).click(function(event) {
-                        $(this).parent().find('textarea').toggle();
-                        event.preventDefault();
-                        event.stopPropagation();
+                                if (rank_id){
+                                    textArea = '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>';
+                                }
+
+                            });
+                        }
                     });
 
+                    if (hidden > 0){
+                        $('#database-list').find("li[title_id='"+clickedRowId+"']").show();
+                        var index = mySubjectDatabase.databasesIdToDelete.indexOf(rank_id);
+                        if(mySubjectDatabase.databasesIdToDelete.indexOf(rank_id) != -1){
+                            debugger;
+                            var index = mySubjectDatabase.databasesIdToDelete.indexOf(rank_id);
+                            mySubjectDatabase.databasesIdToDelete.splice(index, 1);
+                        }
+                        clickedRow.remove();
+                    }else {
 
-                    clickedRow.remove();
-                    mySubjectDatabase.showSaveChangesButtons();
-                    mySubjectDatabase.descriptionOverrideTextAreaBehavior();
-                    mySubjectDatabase.hideAllDescriptionOverrideTextAreas();
-                    mySubjectDatabase.orderItems();
+                        var active_description_override = 'fa-inactive';
 
-                    if ($('#database-list-no-items').is(':visible')){
-                        $('#database-list-no-items').hide();
+                        if(mySubjectDatabase.databasesIdToDelete.indexOf(rank_id) != -1){
+                            debugger;
+                            var index = mySubjectDatabase.databasesIdToDelete.indexOf(rank_id);
+                            mySubjectDatabase.databasesIdToDelete.splice(index, 1);
+                        }
+
+                        var validDescriptionOverride = false;
+                        if (description_override) {
+                            if (description_override.trim()) {
+                                active_description_override = '';
+                                validDescriptionOverride = true;
+                            }
+                        }
+
+                        $('#database-list').append('<li title_id="' + clickedRowId + '">' +
+                            label + mySubjectDatabase.strings.removeDatabaseBtn +
+                            '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="not-saved-override-button' + listItemsCount + '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
+                            textArea +'</li>');
+
+                        if (validDescriptionOverride) {
+                            $('#description-override-textarea' + rank_id).val(description_override);
+                        }
+
+                        $('#database-list').find('#not-saved-override-button' + listItemsCount).click(function (event) {
+                            $(this).parent().find('textarea').toggle();
+                            event.preventDefault();
+                            event.stopPropagation();
+                        });
+
+                        clickedRow.remove();
+                        mySubjectDatabase.showSaveChangesButtons();
+                        mySubjectDatabase.descriptionOverrideTextAreaBehavior();
+                        mySubjectDatabase.hideAllDescriptionOverrideTextAreas();
+                        mySubjectDatabase.orderItems();
+
+                        if ($('#database-list-no-items').is(':visible')) {
+                            $('#database-list-no-items').hide();
+                        }
                     }
-
                 }else{
                     clickedRow.remove();
                 }
@@ -209,7 +265,7 @@ function subjectDatabaseService() {
                 if (typeof listItem.attr('rank_id') !== typeof undefined && listItem.attr('rank_id') !== false) {
                     mySubjectDatabase.databasesIdToDelete.push(listItem.attr('rank_id'));
                 }
-                $(listItem).remove();
+                $(listItem).hide();
                 var databaseInput = $('#add-database-input');
                 if (listItem.text().toLowerCase().indexOf(databaseInput.val().toLowerCase()) !== -1){
                     var addBtn = "<a class='add-database-btn' title='Add Database to Subject'><i class='fa fa-plus-circle'></i> </a>";
@@ -231,12 +287,14 @@ function subjectDatabaseService() {
                 var selected_item = $('#subjects').find(":selected");
                 var subject_id = selected_item.attr('subject-id');
 
+                debugger;
                 var deleteListCount = mySubjectDatabase.databasesIdToDelete.length;
                 for (var i = 0; i < deleteListCount; i++) {
                     var payload = {
                         'action': 'delete',
                         'rank_id': mySubjectDatabase.databasesIdToDelete[i]
                     };
+                    $('#database-list').find("li[rank_id='"+mySubjectDatabase.databasesIdToDelete[i]+"']").remove();
                     $.ajax({
                         url: mySubjectDatabase.settings.databaseActionUrl,
                         type: "POST",
@@ -247,30 +305,34 @@ function subjectDatabaseService() {
 
                 var total = $('#database-list li').length;
                 $('#database-list li').each(function(index) {
-                    var title_id =  $(this).attr('title_id');
-                    var description_override = $(this).find('textarea').val();
+                    if($(this).is(":visible")) {
+                        var title_id = $(this).attr('title_id');
+                        var description_override = $(this).find('textarea').val();
 
-                    var payload = {
-                        'action': 'update',
-                        'title_id': title_id,
-                        'subject_id': subject_id,
-                        'description_override' : description_override
-                    };
+                        var payload = {
+                            'action': 'update',
+                            'title_id': title_id,
+                            'subject_id': subject_id,
+                            'description_override': description_override
+                        };
 
-                    $.ajax({
-                        url: mySubjectDatabase.settings.databaseActionUrl,
-                        type: "POST",
-                        dataType: "json",
-                        data: payload,
-                        success: function() {
-                            if (index === total - 1){
-                                mySubjectDatabase.refreshSubjectDatabases();
+                        $.ajax({
+                            url: mySubjectDatabase.settings.databaseActionUrl,
+                            type: "POST",
+                            dataType: "json",
+                            data: payload,
+                            success: function () {
+                                if (index === total - 1) {
+                                    mySubjectDatabase.refreshSubjectDatabases();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 });
 
+
                 $('#update-databases-btn').hide();
+                mySubjectDatabase.clearSearchResults();
 
             });
         },
