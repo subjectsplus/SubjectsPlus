@@ -30,7 +30,7 @@ class SubjectDatabase implements OutputInterface
         $this->connection = $this->db->getConnection();
     }
 
-    function getSubjectsDropDownItems($staff_id) {
+    function getSubjectsDropDownItems() {
 
         $subs_option_boxes = "";
 
@@ -38,11 +38,7 @@ class SubjectDatabase implements OutputInterface
             FROM subject s, staff_subject ss
             WHERE s.subject_id = ss.subject_id
             AND s.type = 'Subject'
-            AND ss.staff_id = :staff_id
             ORDER BY type, subject");
-        $statement->bindParam ( ":staff_id", $staff_id );
-
-
         $statement->execute();
         $statement = $statement->fetchAll();
         $subs_result = $statement;
