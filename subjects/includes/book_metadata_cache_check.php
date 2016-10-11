@@ -7,7 +7,9 @@
  */
 
 $book_metadata_cache_check = function ($isbn) {
-    $file = $_SERVER["DOCUMENT_ROOT"]."/sp/assets/cache/".$isbn.".bookmetadata";
+
+    $prefix = explode('subjects', dirname(__FILE__));
+    $file = $prefix[0]."/assets/cache/".$isbn.".bookmetadata";
 
     if (file_exists($file)) {
         echo $file;
