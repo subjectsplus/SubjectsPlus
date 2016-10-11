@@ -54,7 +54,6 @@ function copyClone() {
 						var origin_title = $(this).parent().parent().parent()
 								.text().replace(" /Clone Copy/g", "");
 						var origin_type = $(this).parent().parent().parent().data().plusletType;
-
 						ps.dropPluslet(origin_id, origin_type, origin_title);
 
 					});
