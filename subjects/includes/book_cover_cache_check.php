@@ -7,7 +7,9 @@
  */
 
 $book_cover_cache_check = function ($isbn) {
-    $file = $_SERVER["DOCUMENT_ROOT"]."/sp/assets/cache/".$isbn.".jpg";
+
+    $prefix = explode('subjects', dirname(__FILE__));
+    $file = $prefix[0]."/assets/cache/".$isbn.".jpg";
 
     if (file_exists($file)) {
         echo $file;

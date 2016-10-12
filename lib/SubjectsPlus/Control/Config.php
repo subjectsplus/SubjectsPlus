@@ -593,6 +593,14 @@ class Config
 				            <?php echo $lstrRightHTML; ?>
 				        </div>
 				    </div>
+					<div class="pluslet">
+						<div class="titlebar">
+							<div class="titlebar_text"><?php print _("Clear the cache"); ?></div>
+						</div>
+						<div class="pluslet_body">
+							<input type="submit" class="button" name="clear_cache_btn" value="<?php echo _("Clear"); ?>" />
+						</div>
+					</div>
 				</div>
 				</div> <!-- end pure g-r -->
 

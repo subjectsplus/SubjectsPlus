@@ -109,7 +109,6 @@ function bookList() {
                                         metadataCachePath = $.parseJSON(data);
                                     }
                                 });
-
                                 $.ajax({
                                     type: "GET",
                                     url: prefix + 'assets/cache/' + isbn + '.jpg',
@@ -144,7 +143,6 @@ function bookList() {
             }else if (url.indexOf('subjects') !== -1){
                 value = document.location.href.split("subjects")[0];
             }
-
             return value;
         },
         validateSyndeticsClientCode: function (syndeticsClientCode, container){
