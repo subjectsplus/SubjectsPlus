@@ -18,11 +18,7 @@ require_once("../includes/functions.php");
 $db = new Querier;
 $objDatabases = new SubjectDatabase($db);
 
-if (isset($_SESSION['staff_id'])) {
-    $staff_id = scrubData($_SESSION['staff_id'], 'integer');
-}
-
-$subs_option_boxes = $objDatabases->getSubjectsDropDownItems($staff_id);
+$subs_option_boxes = $objDatabases->getSubjectsDropDownItems();
 
 
 $all_subjects = "
