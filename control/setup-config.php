@@ -140,8 +140,12 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
 						"proxyURL" => array( _( "Proxy URL" ), _( "String which should be prepended if you use a proxy server" ), "string", "right", "large", "" , _( "In the Records tab of SP, if you flag an item as 'restricted,' the proxy string will be prepended." ) ),
 
-						"CKBasePath" => array( _( "Base Path for CKEditor" ), _( "Path to CKEditor files appended to base URL" ), "string", "left", "medium", "" , _( "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path." ) )
-						 );
+						"CKBasePath" => array( _( "Base Path for CKEditor" ), _( "Path to CKEditor files appended to base URL" ), "string", "left", "medium", "" , _( "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path." ) ),
+
+                        "syndetics_client_code" => array( _( "Syndetics Client Code" ), _( "This option contains the client code required to use Syndetics" ), "string", "right", "medium", "" , ""),
+
+						"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , "")
+            );
 
 			//set config options
 			$lobjConfig->setConfigOptions( $lobjConfigOptions );

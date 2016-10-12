@@ -84,7 +84,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"titlebar_styles" => array( _( "Titlebar Styles" ), _( "These are the styles that can be issued to a pluslet titlebars." ), "aarray", "right", "large", "", _("This allows titlebars to have custom styles with custom keys for subject guide creator to make.") ),
 
-							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array('Basic', 'LinkList', 'PrimoSearch', 'Heading','Card', 'HTML5Video','SubjectSpecialist', _('4'),'Feed','SocialMedia', 'Chat', 'WorldCat', 'Catalog','ArticlesPlus','GoogleBooks','GoogleScholar','GoogleSearch', 'Related','TOC', _('2'), _('1'), 'GuideSearch', 'GuideSelect',  'NewDBs', 'NewGuides','CollectionList','GuideList','Experts', _('3'), _('5')), _("") ),
+							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array('Basic', 'LinkList', 'PrimoSearch', 'Heading','Card', 'HTML5Video','SubjectSpecialist', 'BookList', _('4'),'Feed','SocialMedia', 'Chat', 'WorldCat', 'Catalog','ArticlesPlus','GoogleBooks','GoogleScholar','GoogleSearch', 'Related','TOC', _('2'), _('1'), 'GuideSearch', 'GuideSelect',  'NewDBs', 'NewGuides','CollectionList','GuideList','Experts', _('3'), _('5')), _("") ),
 
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 							_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),
@@ -151,8 +151,13 @@ if(!is_writable($lstrConfigFilePath))
 
 							"open_string_bib" => array( _( "Open String Bib" ), _( "Used to create a link to an item in your Catalog. Your Bib search term is sandwiched between these two strings" ), "string", "right-bottom", "medium", "" , "" ),
 
-							"CKBasePath" => array( _( "Base Path for CKEditor" ), _( "Path to CKEditor files appended to base URL" ), "string", "left", "medium", "" , _( "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path." ) )
-						 );
+							"CKBasePath" => array( _( "Base Path for CKEditor" ), _( "Path to CKEditor files appended to base URL" ), "string", "left", "medium", "" , _( "CKEditor is used to generate the WYSIWYG data entry boxes.  It is bundled with SubjectsPlus under the sp/ root folder.  If you move CKEditor to another location, you will need to change this path." ) ),
+
+							"syndetics_client_code" => array( _( "Syndetics Client Code" ), _( "This option contains the client code required to use Syndetics" ), "string", "right", "medium", "" , ""),
+
+							"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , "")
+
+	);
 
 	//set config options
 	$lobjConfig->setConfigOptions( $lobjConfigOptions );
