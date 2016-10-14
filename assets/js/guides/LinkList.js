@@ -83,6 +83,13 @@ function LinkList(id,idSelector) {
             alert('Please add some records to your list.')
         }
     });
+
+    // Allows override button to show/hide the description override text area
+    $('body').on('click', '.db-list-item-description-override', function (event) {
+        $(this).parent().find('textarea').toggle();
+        event.preventDefault();
+        event.stopPropagation();
+    });
     
     //show textareas
     $('body').on('click', '#show-linklist-textarea-btn', function() {

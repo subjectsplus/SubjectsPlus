@@ -58,14 +58,27 @@ var RecordListSortable = (function () {
         toggleSpanHtml = "<span class='" + toggleClass + " db-list-toggle'>" + checkIcon + " " + label + "</span>";
         return toggleSpanHtml;
     };
+
+
+
     RecordListSortable.prototype.liSortableRecord = function (record) {
         var showIconToggle;
         var showDescriptionToggle;
         var showNotesToggle;
+        var title_id = record.recordId;
+        var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
+        debugger;
         (record.showIcons === 1) ? showIconToggle = this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : showIconToggle = this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
         (record.showDescription === 1) ? showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', true, 'Description') : showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', false, 'Description');
         (record.showNote === 1) ? showNotesToggle = this.sortableToggleSpan('include-note-toggle', true, 'Note') : showNotesToggle = this.sortableToggleSpan('include-note-toggle', false, 'Note');
-        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + record.location + "'  \n             data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class='db-list-label'>" + record.title + "</span>  <span class='db-list-remove-item'><button class=\"pure-button pure-button-secondary\"><i class='fa fa-remove'></i></button></span>\n <div>             " + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div>  </span></li>";
+        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + record.location + "'  \n " +
+            "data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'" +
+            " data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             " +
+            "<span class='db-list-label'>" + record.title + "</span>  " +
+            "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o'></i></button></span>" +
+            "<span class='db-list-remove-item'><button class=\"pure-button pure-button-secondary\"><i class='fa fa-remove'></i></button></span>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
+            "<textarea class='link-list-description-override-text-area' style='clear: both; display: block' rows='4' cols='35'></textarea> </span>" +
+            "</li>";
         return liRecordHtml;
     };
     RecordListSortable.prototype.liSortableRecordList = function () {

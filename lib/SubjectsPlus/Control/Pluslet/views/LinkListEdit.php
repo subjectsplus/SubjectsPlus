@@ -27,7 +27,7 @@ if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
     }
 </style>
 
-<div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<? echo $id; ?>">
+<div class='sp-modal link-list' id="LinkList-body" data-link-list-id="<?php echo $id; ?>">
     <div class="modal-container">
 
         <div class="modal-header">
@@ -243,7 +243,7 @@ if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
         });
 
 
-
+        $('.link-list-description-override-text-area').hide();
 
 
     });
