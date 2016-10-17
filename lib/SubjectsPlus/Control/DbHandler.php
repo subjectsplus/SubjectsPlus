@@ -97,6 +97,7 @@ class DbHandler {
         	ON rk.source_id = s.source_id
         WHERE title LIKE :qualifer
         	AND eres_display = 'Y'
+        	AND dbbysub_active = 1
         ORDER BY newtitle" );
 
 						/*
@@ -130,6 +131,7 @@ class DbHandler {
         	ON rk.source_id = s.source_id
         WHERE subject_id = :subject_id
         	AND eres_display = 'Y'
+        	AND dbbysub_active = 1
         ORDER BY newtitle" );
 
 						$statement->bindParam ( ":subject_id", $subject_id );
@@ -157,6 +159,7 @@ class DbHandler {
         	ON rk.source_id = s.source_id
         WHERE title LIKE :qualifer
         	AND eres_display = 'Y'
+        	AND dbbysub_active = 1
         ORDER BY newtitle" );
 
 					$letter = "%" . $qualifier . "%";
@@ -320,7 +323,7 @@ ORDER BY newtitle
         	INNER JOIN source as s
         	ON rk.source_id = s.source_id
         WHERE (title LIKE :qualifer OR description LIKE :qualifer1)
-        	AND eres_display = 'Y'
+        	AND eres_display = 'Y'        	
         ORDER BY newtitle" );
 
 					$qualifier = "%" . $qualifier . "%";
