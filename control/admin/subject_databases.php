@@ -77,7 +77,7 @@ $associated_databases_viewport .= "</div>";
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Databases (Limited to A-Z DB List for now)"), $associated_databases_viewport, "no_overflow"); ?>
+        <?php echo makePluslet(_("Databases (Limited to A-Z DB List)"), $associated_databases_viewport, "no_overflow"); ?>
     </div>
 
 </div>
