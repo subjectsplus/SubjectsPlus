@@ -107,6 +107,8 @@ FROM rank r, location_title lt, location l, title t
     AND lt.title_id = r.title_id
     AND l.location_id = lt.location_id
     AND t.title_id = lt.title_id
+    AND l.eres_display = 'Y'
+    AND l.record_status = 'Active'
     AND r.dbbysub_active = 1");
 
         $statement->bindParam ( ":subject_id", $subject_id );
