@@ -67,7 +67,34 @@ var RecordListSortable = (function () {
         var showNotesToggle;
         var title_id = record.recordId;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
-        debugger;
+        var rank_id;
+        var description_override = '';
+
+        $.ajax({
+            url: '../admin/helpers/subject_databases_helper.php',
+            type: "GET",
+            dataType: "json",
+            data: {
+                'action': 'getDescriptionOverride',
+                'subject_id': subject_id,
+                'title_id': title_id
+            },
+            async: false,
+            success: function (data) {
+                var databases = data.databases;
+                $.each(databases, function (index, obj) {
+                    if (obj.description_override)
+                        description_override = obj.description_override;
+                    rank_id = obj.rank_id;
+                });
+            }
+        });
+
+        var textArea = "<textarea class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'></textarea></span>";
+        if (rank_id){
+            textArea = "<textarea id='description-override-textarea" + rank_id + "' title_id='"+title_id+"' subject_id='"+subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+description_override+"</textarea>";
+        }
+
         (record.showIcons === 1) ? showIconToggle = this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : showIconToggle = this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
         (record.showDescription === 1) ? showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', true, 'Description') : showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', false, 'Description');
         (record.showNote === 1) ? showNotesToggle = this.sortableToggleSpan('include-note-toggle', true, 'Note') : showNotesToggle = this.sortableToggleSpan('include-note-toggle', false, 'Note');
@@ -77,7 +104,7 @@ var RecordListSortable = (function () {
             "<span class='db-list-label'>" + record.title + "</span>  " +
             "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o'></i></button></span>" +
             "<span class='db-list-remove-item'><button class=\"pure-button pure-button-secondary\"><i class='fa fa-remove'></i></button></span>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
-            "<textarea class='link-list-description-override-text-area' style='clear: both; display: block' rows='4' cols='35'></textarea> </span>" +
+             textArea + "</span>" +
             "</li>";
         return liRecordHtml;
     };

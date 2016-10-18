@@ -243,7 +243,7 @@ if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
         });
 
 
-        $('.link-list-description-override-text-area').hide();
+        $('.link-list-description-override-textarea').hide();
 
 
     });

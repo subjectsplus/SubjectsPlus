@@ -60,6 +60,10 @@ function LinkList(id,idSelector) {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
         if (myRecordList.getList().length > 0) {
+
+
+            saveDescriptionOverride(myRecordList);
+
             var displayList = new RecordListDisplay(myRecordList);
             var descriptionLocation = $('input[name=linkList-text-radio]:checked').val();
 
@@ -103,6 +107,31 @@ function LinkList(id,idSelector) {
         $('#record-description-container').show();
     });
 
+    function saveDescriptionOverride(myRecordList) {
+        var recordList = myRecordList.recordList;
+        var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
+
+        $.each(recordList, function (index, obj) {
+            var titleId = obj.recordId;
+            debugger;
+            var descriptionOverride = $("li[data-record-id='"+obj.recordId+"']").find("textarea").val();
+
+            debugger;
+            $.ajax({
+                url: '../admin/helpers/subject_databases_helper.php',
+                type: "GET",
+                dataType: "json",
+                async: false,
+                data: {
+                    'action': 'saveDescriptionOverride',
+                    'subject_id': subject_id,
+                    'title_id': titleId,
+                    'description_override': descriptionOverride
+                }
+            });
+        });
+
+    }
 
     function databaseSearch() {
         var limitAz;
