@@ -223,12 +223,21 @@ if(!is_writable($lstrConfigFilePath))
 			//display edit HTML form with new values
 			$lobjConfig->displayEditConfigForm( 'new' );
 		}
-	}else
-	{
+	}else if (isset( $_POST['clear_cache_btn'] )){
+		//display message
+		$lobjConfig->displayMessage( _( "Thy will be done." ) );
+		$lobjConfig->displayEditConfigForm();
+
+		$prefix = explode('control', dirname(__FILE__));
+		array_map('unlink', glob( "$prefix[0]/assets/cache/*.jpg"));
+		array_map('unlink', glob( "$prefix[0]/assets/cache/*.bookmetadata"));
+	}else {
 		//no message and HTML form with original config values
 		$lobjConfig->displayMessage( '' );
 		$lobjConfig->displayEditConfigForm( );
 	}
+
+
 }
 
 //SubjectsPlus footer
