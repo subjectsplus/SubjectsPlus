@@ -113,10 +113,8 @@ function LinkList(id,idSelector) {
 
         $.each(recordList, function (index, obj) {
             var titleId = obj.recordId;
-            debugger;
             var descriptionOverride = $("li[data-record-id='"+obj.recordId+"']").find("textarea").val();
 
-            debugger;
             $.ajax({
                 url: '../admin/helpers/subject_databases_helper.php',
                 type: "GET",

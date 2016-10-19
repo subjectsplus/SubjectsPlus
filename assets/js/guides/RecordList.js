@@ -95,6 +95,12 @@ var RecordListSortable = (function () {
             textArea = "<textarea id='description-override-textarea" + rank_id + "' title_id='"+title_id+"' subject_id='"+subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+description_override+"</textarea>";
         }
 
+        var descriptionOverrideButton = "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o  fa-inactive'></i></button></span>";
+
+        if (description_override.trim()){
+            descriptionOverrideButton = "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o'></i></button></span>";
+        }
+
         (record.showIcons === 1) ? showIconToggle = this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : showIconToggle = this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
         (record.showDescription === 1) ? showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', true, 'Description') : showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', false, 'Description');
         (record.showNote === 1) ? showNotesToggle = this.sortableToggleSpan('include-note-toggle', true, 'Note') : showNotesToggle = this.sortableToggleSpan('include-note-toggle', false, 'Note');
@@ -102,7 +108,7 @@ var RecordListSortable = (function () {
             "data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'" +
             " data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             " +
             "<span class='db-list-label'>" + record.title + "</span>  " +
-            "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o'></i></button></span>" +
+             descriptionOverrideButton +
             "<span class='db-list-remove-item'><button class=\"pure-button pure-button-secondary\"><i class='fa fa-remove'></i></button></span>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
              textArea + "</span>" +
             "</li>";
