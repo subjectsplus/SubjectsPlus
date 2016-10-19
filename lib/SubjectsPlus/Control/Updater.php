@@ -380,7 +380,7 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
 				"ALTER TABLE `staff` ADD COLUMN `social_media` MEDIUMTEXT NULL DEFAULT NULL ",
 				"ALTER TABLE `pluslet` ADD COLUMN  `master` INT NULL DEFAULT NULL",
 				"ALTER TABLE `pluslet` MODIFY COLUMN `extra` MEDIUMTEXT NULL DEFAULT NULL",
-			    "ALTER TABLE `rank` ADD COLUMN `dbbysub_active` TINYINT(1) DEFAULT NULL"
+			    "ALTER TABLE `rank` ADD COLUMN `dbbysub_active` TINYINT(1) DEFAULT 1"
 		);
 	}
 
