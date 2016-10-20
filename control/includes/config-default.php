@@ -482,4 +482,13 @@ $articlesplus_primo_fctN   = "facet_rtype";
 $articlesplus_primo_fctV   = "articles";
 $articlesplus_primo_rfnGrp = "show_only";
 
+///////////////////////////////////////////
+// BookList Config
+//////////////////////////////////////////
+// api keys for retrieving book covers and metadata
+
+$syndetics_client_code = "";
+
+$google_books_api_key = "";
+
 ?>
