@@ -330,7 +330,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                       <ul>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/citation/">Citation Help</a></li>                          
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/workshops/">Workshops</a></li>
-                          <li><a href="http://sp.library.miami.edu/subjects/tutorials">Research Tutorials</a></li>
+                          <li><a href="http://sp.library.miami.edu/subjects/tutorials">How-to Videos</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/copyright/">Copyright</a></li>
                           <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/scholarly-communications/">Scholarly Communications &amp; Publishing</a></li>
                       </ul>
@@ -397,8 +397,9 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
                           <li><a href="http://library.miami.edu/datacuration/">Research Data Services</a></li> 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
-                          <li><a href="http://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li> 
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
+                          <li><a href="http://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li>
+                          <li><a href="http://library.miami.edu/rooms-spaces/">Rooms &amp; Spaces</a></li> 
+                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
                         </ul>
 
                         <div class="mega_feature">
