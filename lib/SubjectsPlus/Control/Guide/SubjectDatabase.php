@@ -101,7 +101,7 @@ VALUES (0,:subject_id,:title_id, 1, :description_override, 1)");
     }
 
     public function fetchSubjectDatabases($subject_id) {
-        $statement = $this->connection->prepare("SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override, r.rank_id
+        $statement = $this->connection->prepare("SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
 FROM rank r, location_title lt, location l, title t
     WHERE r.subject_id = :subject_id
     AND lt.title_id = r.title_id
