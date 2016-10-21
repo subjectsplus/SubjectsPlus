@@ -159,7 +159,7 @@ class Installer
 					  `title_id` bigint(20) DEFAULT NULL,
 					  `source_id` bigint(20) DEFAULT NULL,
 					  `description_override` text,
-					  `dbbysub_active` TINYINT(1) DEFAULT NULL,
+					  `dbbysub_active` TINYINT(1) DEFAULT '1',
 					  PRIMARY KEY (`rank_id`),
 					  KEY `fk_rank_subject_id_idx` (`subject_id`),
 					  KEY `fk_rank_title_id_idx` (`title_id`),

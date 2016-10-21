@@ -88,6 +88,25 @@ VALUES (0,:subject_id,:title_id, 1, :description_override, 1)");
         $statement->execute();
     }
 
+    public function saveDescriptionOverride ($subject_id, $title_id, $description_override){
+        $rank_id = $this->getRankId($subject_id, $title_id);
+
+        if ($rank_id) {
+            $statement = $this->connection->prepare ( "UPDATE rank
+                SET description_override = :description_override
+                WHERE subject_id = :subject_id
+                AND title_id = :title_id"
+            );
+        }else{
+            $statement = $this->connection->prepare ("INSERT INTO rank (rank, subject_id, title_id, source_id, description_override, dbbysub_active)
+VALUES (0,:subject_id,:title_id, 1, :description_override, 0)");
+        }
+        $statement->bindParam ( ":description_override", $description_override );
+        $statement->bindParam ( ":subject_id", $subject_id );
+        $statement->bindParam ( ":title_id", $title_id );
+        $statement->execute();
+    }
+
     function getRankId($subject_id, $title_id) {
         $statement = $this->connection->prepare("SELECT rank_id FROM rank
                     WHERE subject_id = :subject_id
