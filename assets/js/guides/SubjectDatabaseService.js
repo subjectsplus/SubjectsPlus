@@ -111,11 +111,11 @@ function subjectDatabaseService() {
                             }
 
                             $('#database-list').prepend('<li title_id="' + title_id +
-                                '"record_status="' + record_status + '" rank_id="'+ rank_id + '">' +
+                                '"record_status="' + record_status + '" rank_id="'+ rank_id + '"><i class="fa fa-pencil fa-lg ' + active_description_override + ' note_override clickable" id="note_override-' + rank_id +
+                                '" alt="Add Description Override" title="Add Description Override" border="0"></i>' +
                                  label + mySubjectDatabase.strings.removeDatabaseBtn +
-                                '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="note_override-' + rank_id +
-                                '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
-                                '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>' +
+                                '<br>' +
+                                '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4"></textarea>' +
                                 '</li>');
 
                             if (description_override) {
@@ -167,7 +167,7 @@ function subjectDatabaseService() {
                 var subject_id = $('#subjects').find(":selected").attr('subject-id');
                 var rank_id = '';
                 var description_override = '';
-                var textArea = '<textarea id="description-override-textarea" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>';
+                var textArea = '<textarea id="description-override-textarea" class="description-override-text-area" style="clear: both; display: block" rows="4"></textarea>';
 
                 if (listCount == 0) {
                     var label = clickedRow.text();
@@ -192,7 +192,7 @@ function subjectDatabaseService() {
                                 rank_id = obj.rank_id;
 
                                 if (rank_id){
-                                    textArea = '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4" cols="35"></textarea>';
+                                    textArea = '<textarea id="description-override-textarea' + rank_id + '" class="description-override-text-area" style="clear: both; display: block" rows="4"></textarea>';
                                 }
 
                             });
@@ -224,9 +224,9 @@ function subjectDatabaseService() {
                             }
                         }
 
-                        $('#database-list').append('<li title_id="' + clickedRowId + '">' +
+                        $('#database-list').append('<li title_id="' + clickedRowId + '"><i class="fa fa-pencil fa-lg ' + active_description_override + ' note_override clickable" id="not-saved-override-button' + listItemsCount + '" alt="Add Description Override" title="Add Description Override" border="0"></i>   ' +
                             label + mySubjectDatabase.strings.removeDatabaseBtn +
-                            '<i class="fa fa-lg fa-file-text-o ' + active_description_override + ' note_override clickable" id="not-saved-override-button' + listItemsCount + '" alt="Add Description Override" title="Add Description Override" border="0"></i><br>' +
+                            '<br>' +
                             textArea +'</li>');
 
                         if (validDescriptionOverride) {
@@ -337,7 +337,7 @@ function subjectDatabaseService() {
         showNoDataBasesMessage: function () {
             if($('#database-list li').length == 0) {
                 if($('#database-list-no-items').length == 0) {
-                    $('#database-list').prepend("<h4 id='database-list-no-items'>There are not databases assigned to this subject.</h4>");
+                    $('#database-list-container').prepend("<p id='database-list-no-items' class='db-alert'>There are no databases assigned to this subject.</p>");
                 }else{
                     $('#database-list-no-items').show();
                 }
