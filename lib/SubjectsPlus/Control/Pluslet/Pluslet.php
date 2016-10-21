@@ -544,6 +544,8 @@ class Pluslet {
                                             //$subject_id = $db->last_id($r1);
                                             //$subject_id = $subject_id[0];
                                             $subject_id = $r1[0]["subject_id"];
+                                        }elseif (isset($_POST["this_subject_id"])){
+                                            $subject_id = $_POST["this_subject_id"];
                                         }
 
                                         $override = findDescOverride($subject_id, $fields[1]);
