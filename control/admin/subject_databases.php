@@ -49,7 +49,17 @@ $associated_databases_viewport .= "<button id='update-databases-btn' class='pure
 $associated_databases_viewport .= "</div>";
 
 $about_tb_body = "<p>" . _("You may use this page to set the databases which should be associated with each subject.  This will appear on the public subjects/databases.php page when you click the Databases by Subject dropdown (if your site has one).") . "</p>
-    <br />";
+    <p><a href=\"" . $PublicPath . "/databases.php?letter=bysub\">" . _("Databases by Subject") . "</a></p>
+    <h3>" . _("Usage") . "</h3>
+    <ul>
+    <li>" . _("Select your subject") . "</li>
+    <li>" . _("Search for a record stored in the A-Z list of records") . "</li>
+    <li>" . _("Add that record to your list") . "</li>
+    <li>" . _("Save and enjoy") . "</li>
+    </ul>
+    <br />"
+
+;
 
 ?>
 <style>
