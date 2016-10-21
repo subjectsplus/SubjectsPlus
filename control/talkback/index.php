@@ -137,7 +137,7 @@ if (isset($_GET["cattag"]) && $_GET["cattag"] != '' && $_GET["cattag"] != 'All' 
 }
 
 $querierTBYES = new Querier();
-$qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_formatted, answer, a_from, display, last_revised_by, tbtags
+$qTBYES = "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %D %Y') as date_formatted, answer, a_from, display, last_revised_by, tbtags, cattags
     FROM talkback
     $sql_where
     ORDER BY date_submitted DESC
@@ -243,11 +243,18 @@ function genTalkBacks($tbArray, $show_response = 1) {
       $mod_line = "";
     }
 
+    if (isset($value["cattags"]) && $value["cattags"] != "") {
+      $cattags = "<br /><span class=\"ctag-off\" style=\"font-size: 10px;\">" . $value["cattags"] . "</span>";
+    } else {
+      $cattags = "";
+    }
+
     $tb_answer .= "
             <div style=\"clear: both; float: left;  padding: 3px 5px; width: 98%;\" class=\"striper $row_colour\">
                 <div style=\"float: left; width: 32px; max-width: 5%;\"><a class=\"showmedium-reloader\" style=\"color: #333;\" href=\"talkback.php?talkback_id=$value[0]&amp;wintype=pop\"><i class=\"fa fa-pencil fa-lg\" alt=\"" . _("Edit") . "\"></i></a></div>
                 <div style=\"float: left; width: $first_div_width;\">
                  $tb_tagger<strong>Q:</strong> $short_question <span style=\"color: #666; font-size: 10px;\">($q_from, $value[date_formatted])</span>
+                 $cattags
                 </div>";
 
     if (isset($show_response) && $show_response == 1) {
