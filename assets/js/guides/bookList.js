@@ -340,9 +340,7 @@ function bookList() {
 
             $.when(myBookList.getBookDataFromOpenLibrary(isbn), myBookList.getBookCoverFromOpenLibrary(isbn)).then(function(a1,a2){
 
-                debugger;
                 if (!coverPathSyndetics.trim()){
-                    debugger;
                     if (a2[1] === 'success') {
                         coverPath = a2[0];
                     }
@@ -353,7 +351,6 @@ function bookList() {
                 if (a1[1] === 'success'){
                     var obj = $.parseJSON(a1[0]);
 
-                    debugger;
                     if (obj.isbn.length != 0){
                         validOpenLibraryData = true;
                         obj = obj.isbn;
@@ -382,7 +379,6 @@ function bookList() {
                     succeed = true;
                 }
 
-                debugger;
                 if (validSyndeticsClientCode && !validGoogleBooksAPIKey && view === 'control') {
                     myBookList.setNoSourceAvailableErrorMessage(container, isbn);
                 }
