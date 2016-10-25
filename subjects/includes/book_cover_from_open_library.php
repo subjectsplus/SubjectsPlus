@@ -1,4 +1,5 @@
 <?php
+include("../../control/includes/functions.php");
 
 $book_cover_from_open_library = function ($isbn) {
 
@@ -29,4 +30,4 @@ $book_cover_from_open_library = function ($isbn) {
     echo $result;
 };
 
-$book_cover_from_open_library(htmlspecialchars($_GET['isbn']));
+$book_cover_from_open_library(scrubData($_GET['isbn']));
