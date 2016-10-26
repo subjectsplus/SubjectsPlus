@@ -95,10 +95,10 @@ var RecordListSortable = (function () {
             textArea = "<textarea id='description-override-textarea" + rank_id + "' title_id='"+title_id+"' subject_id='"+subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+description_override+"</textarea>";
         }
 
-        var descriptionOverrideButton = "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o  fa-inactive'></i></button></span>";
+        var descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary' title='Edit description'><i class='fa fa-pencil'></i></button>";
 
         if (description_override.trim()){
-            descriptionOverrideButton = "<span class='db-list-item-description-override'><button ><i class='fa fa-file-text-o'></i></button></span>";
+            descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary active' title='Edit description'><i class='fa fa-pencil'></i></button>";
         }
 
         (record.showIcons === 1) ? showIconToggle = this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : showIconToggle = this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
@@ -109,7 +109,7 @@ var RecordListSortable = (function () {
             " data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             " +
             "<span class='db-list-label'>" + record.title + "</span>  " +
              descriptionOverrideButton +
-            "<span class='db-list-remove-item'><button class=\"pure-button pure-button-secondary\"><i class='fa fa-remove'></i></button></span>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
+            "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
              textArea + "</span>" +
             "</li>";
         return liRecordHtml;
@@ -154,7 +154,7 @@ var RecordListSearch = (function () {
         this.recordList = recordList;
     }
     RecordListSearch.prototype.liRecordList = function (record) {
-        return "<li class=\"db-list-item database-listing\" data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title=\"" + record.title + "\" data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class=\"list-search-label\" title=\"" + record.title + "\">" + record.title + "</span>\n <span>             <button class=\"add-to-list-button pure-button pure-button-secondary\"> <i class=\"fa fa-plus\"></i></button></span>                          <div class=\"db-list-item-link\"><a href='" + record.location + "' target='_blank'>" + record.location + "</a></div>             </li>";
+        return "<li class=\"db-list-item database-listing\" data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title=\"" + record.title + "\" data-show-icons='" + record.showIcons + "'              data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             <span class=\"list-search-label\" title=\"" + record.title + "\">" + record.title + "</span>\n <button class=\"add-to-list-button pure-button pure-button-secondary\" title=\"Add to list\"> <i class=\"fa fa-plus\"></i></button>                          <div class=\"db-list-item-link\"><a href='" + record.location + "' target='_blank'>" + record.location + "</a></div>             </li>";
     };
     RecordListSearch.prototype.liDisplayRecordList = function () {
         var liRecordListHtml = '';

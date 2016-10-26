@@ -1232,9 +1232,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .db-list-label {
   display: inline-block; 
   margin-bottom: 4px;
-  width: -moz-calc(100% - 30px);
-  width: -webkit-calc(100% - 30px);
-  width: calc(100% - 30px);
+  width: -moz-calc(100% - 55px);
+  width: -webkit-calc(100% - 55px);
+  width: calc(100% - 55px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -4306,6 +4306,16 @@ Link Link Admin Panel
 .show-create-record, .show-report-broken-record {cursor:pointer;}
 
 .modal-create-record-btn {display: block; margin:20px 0;}
+
+.db-list-item-description-override, .db-list-remove-item {
+  font-size: 0.9em !important;
+  padding: 3px 6px;
+  margin: 0 3px 0 0;
+}
+
+.db-list-item-description-override.active {background-color:#c03957 !important;}
+
+.link-list-description-override-textarea {margin:5px 0;}
 
 
 /*///////////////////////////////////////////
