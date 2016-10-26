@@ -772,6 +772,19 @@ html, button, input, select, textarea {
 }
 
 
+#pluslet-id-BookList {
+  background-image: url(images/icons/booklist.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-BookList:hover {
+  background-image: url(images/icons/booklist-white.svg);  
+}
+
+
 
 /* added by cbrownroberts 01-29-2016 */
 /* used for hook to expand collapse indiviudal pluslets */
