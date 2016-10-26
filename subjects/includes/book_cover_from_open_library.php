@@ -16,7 +16,8 @@ $book_cover_from_open_library = function ($isbn) {
     if (!empty($response)) {
         foreach ($response as $data) {
             if (array_key_exists('thumbnail_url', $data)) {
-                $result = $data['thumbnail_url'];
+                $cover_url = str_replace("-S.jpg", "-M.jpg", $data['thumbnail_url']);
+                $result = $cover_url;
             }
         }
     }
