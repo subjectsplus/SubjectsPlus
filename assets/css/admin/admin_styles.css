@@ -279,7 +279,7 @@ header {
   position: absolute;
   border: 0px solid #9A9A9A;
   top: 44px;
-  min-width: 200px;
+  min-width: 215px;
   max-width: 800px;
   z-index: 1000;
   -moz-box-shadow: 2px 2px 3px #9a9a9a;
@@ -1232,9 +1232,9 @@ li.fav-box-item:hover::before {color: #C03957;}
 .db-list-label {
   display: inline-block; 
   margin-bottom: 4px;
-  width: -moz-calc(100% - 30px);
-  width: -webkit-calc(100% - 30px);
-  width: calc(100% - 30px);
+  width: -moz-calc(100% - 55px);
+  width: -webkit-calc(100% - 55px);
+  width: calc(100% - 55px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -4307,6 +4307,16 @@ Link Link Admin Panel
 
 .modal-create-record-btn {display: block; margin:20px 0;}
 
+.db-list-item-description-override, .db-list-remove-item {
+  font-size: 0.9em !important;
+  padding: 3px 6px;
+  margin: 0 3px 0 0;
+}
+
+.db-list-item-description-override.active {background-color:#c03957 !important;}
+
+.link-list-description-override-textarea {margin:5px 0;}
+
 
 /*///////////////////////////////////////////
 Admin Screen User Profile
@@ -4317,9 +4327,74 @@ Admin Screen User Profile
 .set_photo_container {background-color: #FFF; padding: 10px; margin: 10px 0;}
 
 
+/*///////////////////////////////////////////
+Databases by Subject
+////////////////////////////////////////////*/
+#s2id_subjects.select2-container {width:75%;}
+
+#add-database-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px #ddd inset;
+    display: block;
+    margin: 0.25em 0;
+    padding: 0.5em 0.6em;
+    width: 75%;
+}
+.db-alert {background-color: rgba(192, 57, 87, 0.3); padding: 5px 5px 2px;}
+
+#database-search-results {
+  list-style-position: outside;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 !important;
+}
+
+#database-search-results li {
+    padding: 2px 5px;
+}
+
+.add-database-btn {
+    cursor: pointer;
+}
+
+#database-list {margin:0; padding:0 !important;}
+
+#database-list li {
+  background: #f6e3e7 none repeat scroll 0 0;
+  margin: 0 0 2px;
+  padding: 5px;
+}
+
+#database-list li:nth-child(2n+1) {
+    background: transparent none repeat scroll 0 0;
+}
+
+#database-list a.remove-database-btn {
+    color: #333 !important;
+    float: right;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+}
 
 
+#database-list i[id^="note_override-"], #database-list i[id^="not-saved-override-"] {margin: 0 8px 0 0;}
+#database-list i[id^="note_override-"].fa-inactive, #database-list i[id^="not-saved-override-"].fa-inactive {color: #333;}
+#database-list i[id^="note_override-"].fa-inactive:hover, #database-list i[id^="not-saved-override-"].fa-inactive:hover {color: #c03957;}
 
+.description-override-text-area {
+  margin:5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px #ddd inset;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0.5em 0.6em;
+   width: 75%;
+}
+
+#update-databases-btn {margin: 10px 0;}
 
 
 

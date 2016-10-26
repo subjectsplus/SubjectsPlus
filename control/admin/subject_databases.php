@@ -5,7 +5,7 @@ use SubjectsPlus\Control\Guide\SubjectDatabase;
     
 $subsubcat = "";
 $subcat = "admin";
-$page_title = "Admin Subject>Databases";
+$page_title = "Admin Databases by Subject";
 $feedback = "";
 
 //var_dump($_POST);
@@ -23,7 +23,7 @@ $subs_option_boxes = $objDatabases->getSubjectsDropDownItems();
 
 $all_subjects = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
-<select name=\"item\" id=\"subjects\" size=\"1\" >
+<select name=\"item\" id=\"subjects\">
 <option id='place_holder'>" . _("      -- Choose Subject --     ") . "</option>
 $subs_option_boxes
 </select>
@@ -37,7 +37,7 @@ $guide_collection_list .= "</div>";
 
 
 $database_search_viewport = "<div id='search-results-container'>";
-$database_search_viewport .= "<label for='add-database-input'>Search</label>";
+$database_search_viewport .= "<label for='add-database-input'>Search</label> ";
 $database_search_viewport .= "<input id='add-database-input' type='text' name='add-database-input' />";
 $database_search_viewport .= "<div><h4>Search Results</h4><ul id='database-search-results'></ul></div>";
 $database_search_viewport .= "</div>";
@@ -48,6 +48,8 @@ $associated_databases_viewport .= "<ul id='database-list'></ul>";
 $associated_databases_viewport .= "<button id='update-databases-btn' class='pure-button pure-button-primary' style=\"display: none;\">Save Changes</button>";
 $associated_databases_viewport .= "</div>";
 
+$about_tb_body = "<p>" . _("You may use this page to set the databases which should be associated with each subject.  This will appear on the public subjects/databases.php page when you click the Databases by Subject dropdown (if your site has one).") . "</p>
+    <br />";
 
 ?>
 <style>
@@ -70,14 +72,15 @@ $associated_databases_viewport .= "</div>";
                 <div class="all-subjects-dropdown dropdown_list"><?php print $all_subjects; ?></div>
             </div>
         </div>
+        <?php echo makePluslet(_("Databases Associated with Subject"), $associated_databases_viewport, "no_overflow"); ?>
+    </div>
+
+    <div class="pure-u-1-3">        
+        <?php echo makePluslet(_("Databases (Limited to A-Z DB List)"), $database_search_viewport, "no_overflow"); ?>
     </div>
 
     <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Associate Databases with this Subject"), $database_search_viewport, "no_overflow"); ?>
-    </div>
-
-    <div class="pure-u-1-3">
-        <?php echo makePluslet(_("Databases (Limited to A-Z DB List)"), $associated_databases_viewport, "no_overflow"); ?>
+        <?php echo makePluslet(_("About Databases by Subject"), $about_tb_body, "no_overflow"); ?>
     </div>
 
 </div>
