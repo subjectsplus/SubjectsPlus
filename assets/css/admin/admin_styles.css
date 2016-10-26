@@ -2256,6 +2256,17 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 .token-list-item {margin-bottom:10px;}
 
 
+
+/*Book List ISBN Pluslet */
+
+.booklist_isbn_cover { text-align:center;}
+.booklist_isbn_cover img {width:150px; height:auto;}
+
+.booklist_isbn_data {max-width: 150px;}
+.booklist_isbn_data h4 {margin: 5px 0;}
+.booklist_isbn_data p {margin:0 0 5px 0;}
+
+
 /*** toggle pluslet body --CBR */
 .pluslet_body_open {
   display: block;

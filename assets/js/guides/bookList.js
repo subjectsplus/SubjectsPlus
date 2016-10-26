@@ -107,11 +107,12 @@ function bookList() {
 
             var br = document.createElement('br');
             var divContent = document.createElement('div');
+            divContent.classList.add('booklist_isbn_data');
 
             myBookList.setBookCoverSrc(container, coverPath);
 
             var bookTitle = data.title;
-            var titleHeader = document.createElement('h2');
+            var titleHeader = document.createElement('h4');
             titleHeader.setAttribute('data-book-title', bookTitle);
             titleHeader.innerHTML = bookTitle;
             titleHeader.appendChild(br);
@@ -411,6 +412,7 @@ function bookList() {
             imgCover.setAttribute('data-show-image', url);
 
             var divCover = document.createElement('div');
+            divCover.classList.add('booklist_isbn_cover');
             divCover.appendChild(imgCover);
 
             container.appendChild(divCover);
