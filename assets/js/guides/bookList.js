@@ -378,28 +378,28 @@ function bookList() {
             });
         },
         setNumberErrorMessage: function (isbn, container) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Please check this number: " + isbn;
             var divBook = document.createElement('div');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
         setNoSourceAvailableErrorMessage: function (container, isbn) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Sorry, there is not information for this book." + isbn;
             var divBook = document.createElement('div');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
         setGoogleBooksAPIErrorMessage: function (container) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Please check the Google Books API key";
             var divBook = document.createElement('div');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
         setSyndeticsClientCodeErrorMessage: function (container) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Please check the Syndetics Client Code";
             var divBook = document.createElement('div');
             divBook.appendChild(checkNumberMessage);
