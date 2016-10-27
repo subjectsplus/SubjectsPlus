@@ -52,7 +52,7 @@ class Pluslet_BookList extends Pluslet
 
     static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text \">" . _("Book List") . "</span>";
+        $icon="<span class=\"icon-text guidesearch-text\">" . _("Book List") . "</span>";
         return $icon;
     }
 

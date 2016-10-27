@@ -7,7 +7,7 @@
  */?>
 
 <textarea rows="4" cols="30" name="BookList-extra-isbn"
-          placeholder="Please insert a comma-separated ISBNs list"><?php
+          placeholder="Please insert comma-separated ISBN numbers"><?php
     if ($this->_extra != null) {
         echo $this->_extra['isbn'];
     }

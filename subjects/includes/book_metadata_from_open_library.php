@@ -1,5 +1,7 @@
 <?php
 
+include("../../control/includes/functions.php");
+
 $book_metadata_from_open_library = function ($isbn) {
 
     $url = "http://openlibrary.org/api/volumes/brief/isbn/" . $isbn . ".json";
@@ -34,7 +36,6 @@ $book_metadata_from_open_library = function ($isbn) {
                     $date = $info['data']['publish_date'];
                 }
 
-
                 $result = array("isbn" => array('title' => "$title" ,'isbn' => "$isbn",'author' => array($author),'date' => "$date"));
             }
             break;
@@ -43,4 +44,4 @@ $book_metadata_from_open_library = function ($isbn) {
     echo json_encode($result);
 };
 
-$book_metadata_from_open_library(htmlspecialchars($_GET['isbn']));
+$book_metadata_from_open_library(scrubData($_GET['isbn']));
