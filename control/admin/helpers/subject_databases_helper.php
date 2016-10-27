@@ -39,6 +39,10 @@ if(isset($_REQUEST['action'])) {
         $rank_id = scrubData($_REQUEST['rank_id']);
     }
 
+    if( isset($_REQUEST['dbbysub_active']) ) {
+        $dbbysub_active   = scrubData($_REQUEST['dbbysub_active'], 'integer');
+    }
+
     switch ($action) {
         case "update":
             $objDatabases->saveChanges($title_id, $subject_id, $description_override);
@@ -56,6 +60,9 @@ if(isset($_REQUEST['action'])) {
             $objDatabases->getDescriptionOverride($subject_id, $title_id);
             break;
 
+        case "saveDescriptionOverride":
+            $objDatabases->saveDescriptionOverride($subject_id, $title_id, $description_override);
+            break;
     }
 } else {
     $objDatabases->response = 'Error, action must be set.';
