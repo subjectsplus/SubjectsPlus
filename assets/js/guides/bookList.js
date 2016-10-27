@@ -119,19 +119,26 @@ function bookList() {
             divContent.appendChild(titleHeader);
 
             var authorsList = data.author;
-            var authorsListP = document.createElement('p');
+            var authorsListP = document.createElement('p'); 
+            authorsListP.classList.add('booklist-author');           
             authorsListP.setAttribute('data-book-author', authorsList);
-            authorsListP.innerHTML = authorsList;
+            authorsListP.innerHTML = authorsList;            
             authorsListP.appendChild(br);
             divContent.appendChild(authorsListP);
 
             var date = data.date;
             var publishedDate = document.createElement('p');
+            publishedDate.classList.add('booklist-date');
             publishedDate.setAttribute('data-book-pubdate', date);
             publishedDate.innerHTML = date;
             publishedDate.appendChild(br);
             divContent.appendChild(publishedDate);
             container.appendChild(divContent);
+
+            var divItem = divContent.previousSibling;
+            divItem.appendChild(divContent);
+
+            
         },
         getBookList: function (container) {
             var data = container.getElementsByTagName('input')[0].value;
@@ -411,11 +418,17 @@ function bookList() {
             imgCover.setAttribute('src', url);
             imgCover.setAttribute('data-show-image', url);
 
+
+            var divItem = document.createElement('div');
+            divItem.classList.add('booklist_item');
+
             var divCover = document.createElement('div');
             divCover.classList.add('booklist_isbn_cover');
             divCover.appendChild(imgCover);
+            divItem.appendChild(divCover);
 
-            container.appendChild(divCover);
+
+            container.appendChild(divItem);
         },
         getUrl: function (url) {
             // Return a new promise.
