@@ -1553,6 +1553,21 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
 
 
+/*Book List ISBN Pluslet - Frontend */
+
+.booklist_item {display: inline-block; vertical-align: top;}
+
+.booklist_isbn_cover {margin:0 9px 0 0; max-width:250px;}
+.booklist_isbn_cover img {width:150px; max-height:220px; padding: 4px; background-color: #eee; border-radius: 3px; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}
+
+.booklist_isbn_data {max-width: 250px; margin: 4px 9px 15px 0; text-align: center;}
+.booklist_isbn_data h4 {line-height: 1.1em; margin: 0 0 8px 0; font-size:1em; width:150px; font-weight: bold; }
+.booklist_isbn_data p {line-height: 0.8em; margin: 0 0 5px; width:150px;}
+.booklist-author:before {content: "by"; padding: 0 4px 0 0;}
+.booklist-date {padding: 0 0 10px; }
+
+
+
 /* Revised Index - Front-end */
 
 #guidesplash {margin: 20px 10px 0 10px;}
