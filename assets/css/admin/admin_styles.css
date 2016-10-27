@@ -2269,7 +2269,9 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 .booklist-author:before {content: "by"; padding: 0 4px 0 0;}
 .booklist-date {padding: 0 0 10px; }
 
+.booklist-alert {background-color: rgba(192, 57, 87, 0.3); padding: 5px 5px 2px; margin:0 0 5px 0;}
 
+.booklist-alert p {margin: 0;}
 
 /*** toggle pluslet body --CBR */
 .pluslet_body_open {
