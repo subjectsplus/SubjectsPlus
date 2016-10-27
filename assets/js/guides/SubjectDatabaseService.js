@@ -106,7 +106,7 @@ function subjectDatabaseService() {
 
                             if (description_override) {
                                 if (description_override.trim()) {
-                                    active_description_override = '';
+                                    active_description_override = 'active';
                                 }
                             }
 

@@ -4412,6 +4412,8 @@ Databases by Subject
 #database-list i[id^="note_override-"], #database-list i[id^="not-saved-override-"] {margin: 0 8px 0 0;}
 #database-list i[id^="note_override-"].fa-inactive, #database-list i[id^="not-saved-override-"].fa-inactive {color: #333;}
 #database-list i[id^="note_override-"].fa-inactive:hover, #database-list i[id^="not-saved-override-"].fa-inactive:hover {color: #c03957;}
+#database-list i[id^="note_override-"].active, #database-list i[id^="not-saved-override-"].active {color: #c03957;}
+#database-list i[id^="note_override-"].active:hover, #database-list i[id^="not-saved-override-"].active:hover {color: #c03957;}
 
 .description-override-text-area {
   margin:5px 0;
