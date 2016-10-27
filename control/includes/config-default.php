@@ -413,15 +413,6 @@ $primo_dum                = "true";
 $primo_displayField    	  = "all";
 $primo_pcAvailabilityMode = "false";
 
-/////////////////////////////////////////
-// Chat Pluslet Config
-// http://docs.libraryh3lp.com/index.html
-/////////////////////////////////////////
-
-$chat_jid = "";
-$chat_src = "";
-$chat_width = "100%";
-$chat_height = "350px";
 
 ////////////////////////////////
 // Catalog Primo Pluslet Config

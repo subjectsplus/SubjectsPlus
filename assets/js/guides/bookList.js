@@ -107,30 +107,38 @@ function bookList() {
 
             var br = document.createElement('br');
             var divContent = document.createElement('div');
+            divContent.classList.add('booklist_isbn_data');
 
             myBookList.setBookCoverSrc(container, coverPath);
 
             var bookTitle = data.title;
-            var titleHeader = document.createElement('h2');
+            var titleHeader = document.createElement('h4');
             titleHeader.setAttribute('data-book-title', bookTitle);
             titleHeader.innerHTML = bookTitle;
             titleHeader.appendChild(br);
             divContent.appendChild(titleHeader);
 
             var authorsList = data.author;
-            var authorsListP = document.createElement('p');
+            var authorsListP = document.createElement('p'); 
+            authorsListP.classList.add('booklist-author');           
             authorsListP.setAttribute('data-book-author', authorsList);
-            authorsListP.innerHTML = authorsList;
+            authorsListP.innerHTML = authorsList;            
             authorsListP.appendChild(br);
             divContent.appendChild(authorsListP);
 
             var date = data.date;
             var publishedDate = document.createElement('p');
+            publishedDate.classList.add('booklist-date');
             publishedDate.setAttribute('data-book-pubdate', date);
             publishedDate.innerHTML = date;
             publishedDate.appendChild(br);
             divContent.appendChild(publishedDate);
             container.appendChild(divContent);
+
+            var divItem = divContent.previousSibling;
+            divItem.appendChild(divContent);
+
+            
         },
         getBookList: function (container) {
             var data = container.getElementsByTagName('input')[0].value;
@@ -378,30 +386,34 @@ function bookList() {
             });
         },
         setNumberErrorMessage: function (isbn, container) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Please check this number: " + isbn;
             var divBook = document.createElement('div');
+            divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
         setNoSourceAvailableErrorMessage: function (container, isbn) {
-            var checkNumberMessage = document.createElement('h2');
-            checkNumberMessage.innerHTML = "Sorry, there is not information for this book." + isbn;
+            var checkNumberMessage = document.createElement('p');
+            checkNumberMessage.innerHTML = "Sorry, there is no information for this book." + isbn;
             var divBook = document.createElement('div');
+            divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
         setGoogleBooksAPIErrorMessage: function (container) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Please check the Google Books API key";
             var divBook = document.createElement('div');
+            divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
         setSyndeticsClientCodeErrorMessage: function (container) {
-            var checkNumberMessage = document.createElement('h2');
+            var checkNumberMessage = document.createElement('p');
             checkNumberMessage.innerHTML = "Please check the Syndetics Client Code";
             var divBook = document.createElement('div');
+            divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
@@ -410,10 +422,17 @@ function bookList() {
             imgCover.setAttribute('src', url);
             imgCover.setAttribute('data-show-image', url);
 
-            var divCover = document.createElement('div');
-            divCover.appendChild(imgCover);
 
-            container.appendChild(divCover);
+            var divItem = document.createElement('div');
+            divItem.classList.add('booklist_item');
+
+            var divCover = document.createElement('div');
+            divCover.classList.add('booklist_isbn_cover');
+            divCover.appendChild(imgCover);
+            divItem.appendChild(divCover);
+
+
+            container.appendChild(divItem);
         },
         getUrl: function (url) {
             // Return a new promise.
