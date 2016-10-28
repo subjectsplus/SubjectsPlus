@@ -772,6 +772,19 @@ html, button, input, select, textarea {
 }
 
 
+#pluslet-id-BookList {
+  background-image: url(images/icons/booklist.svg);
+  background-position: 50% 30%;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  height: 46px; 
+}
+
+#pluslet-id-BookList:hover {
+  background-image: url(images/icons/booklist-white.svg);  
+}
+
+
 
 /* added by cbrownroberts 01-29-2016 */
 /* used for hook to expand collapse indiviudal pluslets */
@@ -2242,6 +2255,23 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .token-list-item {margin-bottom:10px;}
 
+
+
+/*Book List ISBN Pluslet */
+.booklist_item {display: inline-block; vertical-align: top;}
+
+.booklist_isbn_cover {margin:0 9px 0 0; max-width:250px;}
+.booklist_isbn_cover img {width:150px; max-height:220px; padding: 4px; background-color: #eee; border-radius: 3px; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);}
+
+.booklist_isbn_data {max-width: 250px; margin: 4px 9px 15px 0; text-align: center;}
+.booklist_isbn_data h4 {line-height: 1.1em; margin: 0 0 8px 0; font-size:1em; width:150px; }
+.booklist_isbn_data p {line-height: 0.8em; margin: 0 0 5px; width:150px;}
+.booklist-author:before {content: "by"; padding: 0 4px 0 0;}
+.booklist-date {padding: 0 0 10px; }
+
+.booklist-alert {background-color: rgba(192, 57, 87, 0.3); padding: 5px 5px 2px; margin:0 0 5px 0;}
+
+.booklist-alert p {margin: 0;}
 
 /*** toggle pluslet body --CBR */
 .pluslet_body_open {
@@ -4382,6 +4412,8 @@ Databases by Subject
 #database-list i[id^="note_override-"], #database-list i[id^="not-saved-override-"] {margin: 0 8px 0 0;}
 #database-list i[id^="note_override-"].fa-inactive, #database-list i[id^="not-saved-override-"].fa-inactive {color: #333;}
 #database-list i[id^="note_override-"].fa-inactive:hover, #database-list i[id^="not-saved-override-"].fa-inactive:hover {color: #c03957;}
+#database-list i[id^="note_override-"].active, #database-list i[id^="not-saved-override-"].active {color: #c03957;}
+#database-list i[id^="note_override-"].active:hover, #database-list i[id^="not-saved-override-"].active:hover {color: #c03957;}
 
 .description-override-text-area {
   margin:5px 0;

@@ -97,7 +97,7 @@ $v2styles = TRUE;
                   <li><a href="http://calder.med.miami.edu/other_libraries.html#" rel="dropmenu2_e">OTHER LIBRARIES</a></li>
                   <li><a href="http://calder.med.miami.edu/department_and_staff_listings.html">STAFF LIST</a></li>
                   <li><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/myAccountMenu.do?vid=med&fromLink=gotoMyAccountUI">MY ACCOUNT</a></li>
-                  <li><a href="http://spmed.library.miami.edu/subjects/talkback.php">COMMENTS</a></li>
+                  <li><a href="http://spmed.library.miami.edu/subjects/talkback.php">PATRON SUGGESTIONS &amp; COMMENTS</a></li>
                 </ul><!--end #nav_menu -->
         </div> <!-- end #spum_nav --> 
     </div>
