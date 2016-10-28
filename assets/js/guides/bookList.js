@@ -146,6 +146,7 @@ function bookList() {
             var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
             var regex = new RegExp('(ISBN[-]*(1[03])*[ ]*(: ){0,1})*(([0-9Xx][- ]*){13}|([0-9Xx][- ]*){10})');
             var prefix = myBookList.getUrlPrefix();
+            var test = '';
 
             if (data != undefined) {
                 if (data.trim()) {
