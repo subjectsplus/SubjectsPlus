@@ -395,7 +395,7 @@ function bookList() {
         },
         setNoSourceAvailableErrorMessage: function (container, isbn) {
             var checkNumberMessage = document.createElement('p');
-            checkNumberMessage.innerHTML = "Sorry, there is no information for this book." + isbn;
+            checkNumberMessage.innerHTML = "Sorry, there is not information for this book." + isbn;
             var divBook = document.createElement('div');
             divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
