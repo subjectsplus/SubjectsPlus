@@ -158,7 +158,9 @@ function bookList() {
                             if (regex.test(isbn)) {
                                myBookList.processISBN(isbn, prefix, googleBooksAPIKey, syndeticsClientCode, container);
                             } else {
-                                myBookList.setNumberErrorMessage(isbn, container);
+                                if (view === 'control') {
+                                    myBookList.setNumberErrorMessage(isbn, container);
+                                }
                             }
                         }
                     }
