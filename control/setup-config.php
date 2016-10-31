@@ -144,7 +144,13 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
                         "syndetics_client_code" => array( _( "Syndetics Client Code" ), _( "This option contains the client code required to use Syndetics" ), "string", "right", "medium", "" , ""),
 
-						"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , "")
+						"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+                        "primo_domain" => array( _( "Primo Domain" ), _( "This option contains the Primo domain" ), "string", "right", "large", "" , ""),
+
+                        "primo_institution_code" => array( _( "Primo Institution Code" ), _( "This option contains the Primo institution code" ), "string", "right", "large", "" , ""),
+
+                        "primo_vid" => array( _( "Primo View" ), _( "This option contains the Primo view" ), "string", "right", "large", "" , "")
             );
 
 			//set config options

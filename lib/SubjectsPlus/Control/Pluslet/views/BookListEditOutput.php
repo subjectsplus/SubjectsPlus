@@ -9,7 +9,7 @@
 <textarea rows="4" cols="30" name="BookList-extra-listDescription"
           placeholder="Please insert a description for this list"><?php
     if ($this->_extra != null) {
-        echo $this->_extra['listDescription'];
+        echo isset($this->_extra['listDescription']) ? $this->_extra['listDescription'] : '';
     }
     ?></textarea>
 
