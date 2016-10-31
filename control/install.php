@@ -101,11 +101,11 @@ if( isInstalled() )
 
 		"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , ""),
 
-		"primo_domain" => array( _( "Primo Domain" ), _( "This option contains the Primo domain" ), "string", "right", "large", "" , ""),
+		"booklist_primo_domain" => array( _( "Primo Domain" ), _( "This option contains the Primo domain" ), "string", "right", "large", "" , ""),
 
-		"primo_institution_code" => array( _( "Primo Institution Code" ), _( "This option contains the Primo institution code" ), "string", "right", "large", "" , ""),
+		"booklist_primo_institution_code" => array( _( "Primo Institution Code" ), _( "This option contains the Primo institution code" ), "string", "right", "large", "" , ""),
 
-		"primo_vid" => array( _( "Primo View" ), _( "This option contains the Primo view" ), "string", "right", "large", "" , "")
+		"booklist_primo_vid" => array( _( "Primo View" ), _( "This option contains the Primo view" ), "string", "right", "large", "" , "")
 	);
 
 	//new instance of config amd set path and options
