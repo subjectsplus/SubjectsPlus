@@ -372,12 +372,13 @@ $google_anayltics_ua = "";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////
-// Primo Pluslet Config
+// Primo Config
 ////////////////////////
 $primo_flyout_icon_name = "uSearch";
 
 //must be set to invidual institution's primo settings
 //if action, institution_code, vid, and select_tags are not set correctly, primo search will not work
+$primo_domain = "";
 $primo_action           = "";
 $primo_institution_code = "";
 $primo_vid              = "";
@@ -490,5 +491,7 @@ $articlesplus_primo_rfnGrp = "show_only";
 $syndetics_client_code = "";
 
 $google_books_api_key = "";
+
+
 
 ?>

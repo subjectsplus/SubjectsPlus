@@ -3,6 +3,7 @@ function bookList() {
 
     var validGoogleBooksAPIKey = false;
     var validSyndeticsClientCode = false;
+    var isPrimoConfigured = false;
     var view = 'control';
 
     var validateCodes = {
@@ -37,6 +38,15 @@ function bookList() {
 
                 validGoogleBooksAPIKey = result;
             }
+        },
+        isPrimoConfigured: function (container) {
+            var primoDomain = container.getElementsByTagName('input')[3].value;
+            var primoInstitutionCode = container.getElementsByTagName('input')[4].value;
+            var primoView = container.getElementsByTagName('input')[5].value;
+
+            if (primoDomain && primoInstitutionCode && primoView){
+                isPrimoConfigured = true;
+            }
         }
     };
 
@@ -58,6 +68,7 @@ function bookList() {
 
             validateCodes.validateGoogleBooksAPIKey(googleBooksAPIKey);
             validateCodes.validateSyndeticsClientCode(syndeticsClientCode);
+            validateCodes.isPrimoConfigured(container);
 
             var url = document.location.href;
 
@@ -109,14 +120,30 @@ function bookList() {
             var divContent = document.createElement('div');
             divContent.classList.add('booklist_isbn_data');
 
-            myBookList.setBookCoverSrc(container, coverPath);
+            myBookList.setBookCoverSrc(container, coverPath, data.isbn);
 
             var bookTitle = data.title;
             var titleHeader = document.createElement('h4');
             titleHeader.setAttribute('data-book-title', bookTitle);
             titleHeader.innerHTML = bookTitle;
             titleHeader.appendChild(br);
-            divContent.appendChild(titleHeader);
+
+            if (isPrimoConfigured) {
+                var primoDomain = container.getElementsByTagName('input')[3].value;
+                var primoInstitutionCode = container.getElementsByTagName('input')[4].value;
+                var primoView = container.getElementsByTagName('input')[5].value;
+                var url = "https://" + primoDomain + '/primo_library/libweb/action/dlSearch.do?institution=' + primoInstitutionCode + '&vid=' + primoView + '&tab=default_tab&search_scope=default_scope&indx=1&bulkSize=10&query=any,contains,' + data.isbn;
+
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', url);
+                anchor.setAttribute('target', '_blank');
+
+                anchor.appendChild(titleHeader);
+                divContent.appendChild(anchor);
+            }else{
+                divContent.appendChild(titleHeader);
+            }
+
 
             var authorsList = data.author;
             var authorsListP = document.createElement('p'); 
@@ -419,21 +446,34 @@ function bookList() {
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
-        setBookCoverSrc: function (container, url){
+        setBookCoverSrc: function (container, url, isbn){
             var imgCover = document.createElement('img');
             imgCover.setAttribute('src', url);
             imgCover.setAttribute('data-show-image', url);
-
 
             var divItem = document.createElement('div');
             divItem.classList.add('booklist_item');
 
             var divCover = document.createElement('div');
             divCover.classList.add('booklist_isbn_cover');
-            divCover.appendChild(imgCover);
+
+            if (isPrimoConfigured) {
+                var primoDomain = container.getElementsByTagName('input')[3].value;
+                var primoInstitutionCode = container.getElementsByTagName('input')[4].value;
+                var primoView = container.getElementsByTagName('input')[5].value;
+                var url = "https://" + primoDomain + '/primo_library/libweb/action/dlSearch.do?institution=' + primoInstitutionCode + '&vid=' + primoView + '&tab=default_tab&search_scope=default_scope&indx=1&bulkSize=10&query=any,contains,' + isbn;
+
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', url);
+                anchor.setAttribute('target', '_blank');
+
+                anchor.appendChild(imgCover);
+                divCover.appendChild(anchor);
+            }else {
+                divCover.appendChild(imgCover);
+            }
+
             divItem.appendChild(divCover);
-
-
             container.appendChild(divItem);
         },
         getUrl: function (url) {
