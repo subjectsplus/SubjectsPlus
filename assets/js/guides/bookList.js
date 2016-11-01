@@ -19,7 +19,6 @@ function bookList() {
                     },
                     async: false
                 });
-
                 validSyndeticsClientCode = result;
             }
         },
@@ -35,7 +34,6 @@ function bookList() {
                     },
                     async: false
                 });
-
                 validGoogleBooksAPIKey = result;
             }
         },
@@ -51,9 +49,6 @@ function bookList() {
     };
 
     var myBookList = {
-
-        settings: {},
-        strings: {},
 
         bindUiActions: function (container) {
             myBookList.getBookList(container);

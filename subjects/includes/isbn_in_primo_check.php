@@ -25,12 +25,13 @@ $isbn_in_primo = function ($isbn) {
     curl_close($curl);
     $response = json_decode($raw,true);
 
-    if (isset($response)) {
+    if (isset($response['info'])) {
         $total = $response['info']['total'];
-        if ($total != 0){
+        if ($total != 0) {
             $pnxId = $response['docs'][0]['pnxId'];
             $result_url = 'https://' . $booklist_primo_domain . '/primo_library/libweb/action/display.do?doc=' . $pnxId . '&displayMode=full&vid=' . $booklist_primo_vid . '&institution=' . $booklist_primo_institution_code;
         }
+
     }
 
     echo $result_url;
