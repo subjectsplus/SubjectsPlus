@@ -622,6 +622,7 @@ function showIcons($ctags, $showtext = 0) {
   $icons = "";
 if ($ctags != "") {
   foreach ($ctags as $value) {
+    $value = strtolower($value);
     switch ($value) {
       case "restricted":
         //$icons .= "<img src=\"$IconPath/lock.png\" border=\"0\" alt=\"" . _("Restricted Resource") . "\" title=\"" . _("Restricted Resource") . "\" /> ";
