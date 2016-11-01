@@ -19,7 +19,6 @@ function bookList() {
                     },
                     async: false
                 });
-
                 validSyndeticsClientCode = result;
             }
         },
@@ -35,7 +34,6 @@ function bookList() {
                     },
                     async: false
                 });
-
                 validGoogleBooksAPIKey = result;
             }
         },
@@ -51,9 +49,6 @@ function bookList() {
     };
 
     var myBookList = {
-
-        settings: {},
-        strings: {},
 
         bindUiActions: function (container) {
             myBookList.getBookList(container);
@@ -116,11 +111,32 @@ function bookList() {
                 data = obj;
             }
 
+            if (isPrimoConfigured) {
+                $.ajax({
+                    type: "GET",
+                    url: myBookList.getUrlPrefix() + 'subjects/includes/isbn_in_primo_check.php',
+                    data: {
+                        "isbn": data.isbn
+                    },
+                    dataType: "text",
+                    success: function (anchorUrl) {
+                        if (anchorUrl.trim()){
+                            myBookList.insertBookInformation(data, container, coverPath, anchorUrl);
+                        }else{
+                            myBookList.insertBookInformation(data, container, coverPath, '');
+                        }
+                    }
+                });
+            }else{
+                myBookList.insertBookInformation(data, container, coverPath, '');
+            }
+        },
+        insertBookInformation: function (data, container, coverPath, anchorUrl) {
             var br = document.createElement('br');
             var divContent = document.createElement('div');
             divContent.classList.add('booklist_isbn_data');
 
-            myBookList.setBookCoverSrc(container, coverPath, data.isbn);
+            myBookList.setBookCoverSrc(container, coverPath, anchorUrl);
 
             var bookTitle = data.title;
             var titleHeader = document.createElement('h4');
@@ -128,28 +144,22 @@ function bookList() {
             titleHeader.innerHTML = bookTitle;
             titleHeader.appendChild(br);
 
-            if (isPrimoConfigured) {
-                var primoDomain = container.getElementsByTagName('input')[3].value;
-                var primoInstitutionCode = container.getElementsByTagName('input')[4].value;
-                var primoView = container.getElementsByTagName('input')[5].value;
-                var url = "https://" + primoDomain + '/primo_library/libweb/action/dlSearch.do?institution=' + primoInstitutionCode + '&vid=' + primoView + '&tab=default_tab&search_scope=default_scope&indx=1&bulkSize=10&query=any,contains,' + data.isbn;
-
+            if (anchorUrl) {
                 var anchor = document.createElement('a');
-                anchor.setAttribute('href', url);
+                anchor.setAttribute('href', anchorUrl);
                 anchor.setAttribute('target', '_blank');
-
                 anchor.appendChild(titleHeader);
                 divContent.appendChild(anchor);
             }else{
                 divContent.appendChild(titleHeader);
             }
 
-
+            var br = document.createElement('br');
             var authorsList = data.author;
-            var authorsListP = document.createElement('p'); 
-            authorsListP.classList.add('booklist-author');           
+            var authorsListP = document.createElement('p');
+            authorsListP.classList.add('booklist-author');
             authorsListP.setAttribute('data-book-author', authorsList);
-            authorsListP.innerHTML = authorsList;            
+            authorsListP.innerHTML = authorsList;
             authorsListP.appendChild(br);
             divContent.appendChild(authorsListP);
 
@@ -164,8 +174,6 @@ function bookList() {
 
             var divItem = divContent.previousSibling;
             divItem.appendChild(divContent);
-
-            
         },
         getBookList: function (container) {
             var data = container.getElementsByTagName('input')[0].value;
@@ -446,7 +454,7 @@ function bookList() {
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
-        setBookCoverSrc: function (container, url, isbn){
+        setBookCoverSrc: function (container, url, anchorUrl){
             var imgCover = document.createElement('img');
             imgCover.setAttribute('src', url);
             imgCover.setAttribute('data-show-image', url);
@@ -457,19 +465,14 @@ function bookList() {
             var divCover = document.createElement('div');
             divCover.classList.add('booklist_isbn_cover');
 
-            if (isPrimoConfigured) {
-                var primoDomain = container.getElementsByTagName('input')[3].value;
-                var primoInstitutionCode = container.getElementsByTagName('input')[4].value;
-                var primoView = container.getElementsByTagName('input')[5].value;
-                var url = "https://" + primoDomain + '/primo_library/libweb/action/dlSearch.do?institution=' + primoInstitutionCode + '&vid=' + primoView + '&tab=default_tab&search_scope=default_scope&indx=1&bulkSize=10&query=any,contains,' + isbn;
-
+            if (anchorUrl){
                 var anchor = document.createElement('a');
-                anchor.setAttribute('href', url);
+                anchor.setAttribute('href', anchorUrl);
                 anchor.setAttribute('target', '_blank');
 
                 anchor.appendChild(imgCover);
                 divCover.appendChild(anchor);
-            }else {
+            }else{
                 divCover.appendChild(imgCover);
             }
 
