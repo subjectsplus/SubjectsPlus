@@ -292,7 +292,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 			<div class="tip">
 				<h2><?php print _("Search Databases"); ?></h2>
 				<?php
-				$input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "records", '');
+				$input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
 				$input_box->displayBox();
 				?>
 			</div>
