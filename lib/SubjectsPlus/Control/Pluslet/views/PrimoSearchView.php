@@ -41,6 +41,7 @@ $highlight          = $this->getHighlight();
 $dum                = $this->getDum();
 $displayField       = $this->getDisplayField();
 $pcAvailabilityMode = $this->getPcAvailabilityMode();
+$primo_default_search_scope = $this->getPrimoDefaultSearchScope();
 
 
 if( (!empty($this->flashMessage)) ) {
@@ -87,7 +88,7 @@ if( (!empty($this->flashMessage)) ) {
             <br>
 
 
-            <input type="hidden" class="search_scope" name="search_scope" value="Everything">
+            <input type="hidden" class="search_scope" name="search_scope" value="<?php echo $primo_default_search_scope; ?>">
 
 
 

@@ -520,7 +520,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 <script>
 
-	<?php include('../../assets/js/guides/PrimoSearchBox.js'); ?>
+	<?php //include('../../assets/js/guides/PrimoSearchBox.js'); ?>
 
 	<?php include('../../assets/js/guides/bookList.js'); ?>
 
