@@ -48,10 +48,10 @@ if( (!empty($this->flashMessage)) ) {
     echo $this->flashMessage;
 } else { ?>
 
-    <form class="pure-form" id="primo-search-form" name="primo-search-form" method="get" target="_blank" action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8">
+    <form class="pure-form" name="primo-search-form" method="get" target="_blank" action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8">
         <div class="formEntryArea">
 
-            <input type="text" class="form-control" id="primo-search-box-query-temp" value="" size="35">
+            <input type="text" class="form-control" name="primo-search-box-query-temp" value="" size="35">
 
             <br><br>
             <!-- Customizable Parameters -->
@@ -87,14 +87,13 @@ if( (!empty($this->flashMessage)) ) {
             <br>
 
             <span class="adv_search_btn">
-                <a id="adv_search_btn">More Options</a>
+                 <a name="adv_search_btn">More Options</a>
             </span>
 
             <br><br>
 
-            <div id="advanced_search_container">
-                <select class="form-control" id="precisionOperator"
-                        name="precisionOperator">
+            <div name="advanced_search_container">
+                <select class="form-control" name="precisionOperator">
 
                     <option value="contains" class="EXLSelectedOption">
                         that contain my query words
@@ -106,7 +105,7 @@ if( (!empty($this->flashMessage)) ) {
                 </select>
                 <br><br>
 
-                <select class="form-control" id="rtype" name="rtype">
+                <select class="form-control" name="rtype">
                     <option  value="any" id="scope_anyall1" selected="selected" class="EXLSelectedOption">
                         anywhere in the record
                     </option>
@@ -131,15 +130,20 @@ if( (!empty($this->flashMessage)) ) {
 
             </div>
 
-
-            <input type="hidden" name="query" id="primoQuery">
-
+            <input type="hidden" name="query">
 
             <!-- Search Button -->
-            <input id="search-primo-btn" title="Search" type="button" value="Search" alt="Search" class="button pure-button pure-button-primary">
+            <input title="Search" type="button" value="Search" alt="Search" class="button pure-button pure-button-primary search-primo-btn">
         </div>
     </form>
 
-
+    <script>
+        if (jQuery.isFunction(primoSearchBox)) {
+            var primoSearchBox = primoSearchBox();
+            primoSearchBox.init();
+        }else{
+            primoSearchBox.init();
+        }
+    </script>
 
 <?php } ?>
