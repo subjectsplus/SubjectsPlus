@@ -517,7 +517,10 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 <?php include("../includes/guide_footer.php"); ?>
 
+
 <script>
+
+	<?php include('../../assets/js/guides/PrimoSearchBox.js'); ?>
 
 	<?php include('../../assets/js/guides/bookList.js'); ?>
 
