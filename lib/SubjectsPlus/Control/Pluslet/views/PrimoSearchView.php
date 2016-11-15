@@ -137,6 +137,13 @@ if( (!empty($this->flashMessage)) ) {
         </div>
     </form>
 
-
+    <script>
+        if (jQuery.isFunction(primoSearchBox)) {
+            var primoSearchBox = primoSearchBox();
+            primoSearchBox.init();
+        }else{
+            primoSearchBox.init();
+        }
+    </script>
 
 <?php } ?>
