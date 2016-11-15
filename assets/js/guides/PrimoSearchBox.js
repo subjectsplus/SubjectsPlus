@@ -56,9 +56,9 @@ function primoSearchBox() {
                 var search_scope = $(this).val();
 
                 if( search_scope == 'default_tab') {
-                    $('.search_scope').val('default_scope');
+                    $(this).siblings('.search_scope').val('default_scope');
                 } else {
-                    $('.search_scope').val('Everything');
+                    $(this).siblings('.search_scope').val('Everything');
                 }
             });
         }
