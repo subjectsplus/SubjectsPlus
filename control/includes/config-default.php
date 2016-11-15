@@ -491,4 +491,9 @@ $syndetics_client_code = "";
 
 $google_books_api_key = "";
 
+$booklist_primo_domain = "";
+$booklist_primo_vid = "";
+$booklist_primo_institution_code = "";
+$booklist_primo_api_key = "";
+
 ?>

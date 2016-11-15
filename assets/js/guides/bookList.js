@@ -15,10 +15,8 @@ function bookList() {
                         500: function () {
                             result = false;
                         }
-                    },
-                    async: false
+                    }
                 });
-
                 validSyndeticsClientCode = result;
             }
         },
@@ -31,19 +29,14 @@ function bookList() {
                         400: function () {
                             result = false;
                         }
-                    },
-                    async: false
+                    }
                 });
-
                 validGoogleBooksAPIKey = result;
             }
         }
     };
 
     var myBookList = {
-
-        settings: {},
-        strings: {},
 
         bindUiActions: function (container) {
             myBookList.getBookList(container);
@@ -56,16 +49,13 @@ function bookList() {
             var syndeticsClientCode = container.getElementsByTagName('input')[1].value;
             var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
 
-            validateCodes.validateGoogleBooksAPIKey(googleBooksAPIKey);
-            validateCodes.validateSyndeticsClientCode(syndeticsClientCode);
-
-            var url = document.location.href;
-
-            if (url.indexOf('control') === -1) {
-                view = 'live';
-            }
-
-            myBookList.bindUiActions(container);
+            $.when(validateCodes.validateGoogleBooksAPIKey(googleBooksAPIKey), validateCodes.validateSyndeticsClientCode(syndeticsClientCode)).then(function(a1,a2){
+                var url = document.location.href;
+                if (url.indexOf('control') === -1) {
+                    view = 'live';
+                }
+                myBookList.bindUiActions(container);
+            });
         },
         initEditView: function () {
             myBookList.bindUiActionsForEditView();
@@ -80,8 +70,7 @@ function bookList() {
                 })
             });
         },
-        isNumberKey: function ()
-        {
+        isNumberKey: function () {
             $('textarea[name=BookList-extra-isbn]').keypress(function(evt) {
                 var result = true;
                 var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -94,35 +83,50 @@ function bookList() {
                 return result;
             });
         },
-        populatePlusletViewFromCache: function(container, response, coverPath){
+        populatePlusletViewFromCache: function (container, response, coverPath) {
             var data = response.isbn;
 
-            if( Object.prototype.toString.call( data ) === '[object Array]' ) {
-                var text = '{ "title":"'+data[0].title+'" , "author":"'+data[1].author+'",' +
-                    '"date":"'+data[2].date+'" }';
+            if (Object.prototype.toString.call(data) === '[object Array]') {
+                var text = '{ "title":"' + data[0].title + '" , "author":"' + data[1].author + '",' +
+                    '"date":"' + data[2].date + '" , "primoUrl":"' + data[3].primoUrl + '" }';
 
                 var obj = JSON.parse(text);
+                debugger;
                 data = obj;
             }
+            myBookList.insertBookInformation(data, container, coverPath);
 
+        },
+        insertBookInformation: function (data, container, coverPath) {
             var br = document.createElement('br');
             var divContent = document.createElement('div');
             divContent.classList.add('booklist_isbn_data');
+            var anchorUrl = $("<textarea/>").html(data.primoUrl).text();
 
-            myBookList.setBookCoverSrc(container, coverPath);
+            myBookList.setBookCoverSrc(container, coverPath, anchorUrl);
 
             var bookTitle = data.title;
             var titleHeader = document.createElement('h4');
             titleHeader.setAttribute('data-book-title', bookTitle);
             titleHeader.innerHTML = bookTitle;
             titleHeader.appendChild(br);
-            divContent.appendChild(titleHeader);
 
+            if (anchorUrl) {
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', anchorUrl);
+                anchor.setAttribute('target', '_blank');
+                anchor.appendChild(titleHeader);
+                divContent.appendChild(anchor);
+            }else{
+                divContent.appendChild(titleHeader);
+            }
+
+            var br = document.createElement('br');
             var authorsList = data.author;
-            var authorsListP = document.createElement('p'); 
-            authorsListP.classList.add('booklist-author');           
+            var authorsListP = document.createElement('p');
+            authorsListP.classList.add('booklist-author');
             authorsListP.setAttribute('data-book-author', authorsList);
-            authorsListP.innerHTML = authorsList;            
+            authorsListP.innerHTML = authorsList;
             authorsListP.appendChild(br);
             divContent.appendChild(authorsListP);
 
@@ -137,8 +141,6 @@ function bookList() {
 
             var divItem = divContent.previousSibling;
             divItem.appendChild(divContent);
-
-            
         },
         getBookList: function (container) {
             var data = container.getElementsByTagName('input')[0].value;
@@ -158,7 +160,9 @@ function bookList() {
                             if (regex.test(isbn)) {
                                myBookList.processISBN(isbn, prefix, googleBooksAPIKey, syndeticsClientCode, container);
                             } else {
-                                myBookList.setNumberErrorMessage(isbn, container);
+                                if (view === 'control') {
+                                    myBookList.setNumberErrorMessage(isbn, container);
+                                }
                             }
                         }
                     }
@@ -219,61 +223,68 @@ function bookList() {
             var url = '';
             var result = {isbn: []};
 
-            if (validSyndeticsClientCode) {
-                coverPath = myBookList.getCoverPathFromSyndetics(container, isbn, syndeticsClientCode);
-                coverPathSyndetics = coverPath;
-            }
+            $.ajax({
+                type: "GET",
+                url: myBookList.getUrlPrefix() + 'subjects/includes/isbn_in_primo_check.php',
+                data: {
+                    "isbn": isbn
+                },
+                dataType: "text",
+                success: function (anchorUrl) {
+                    if (validSyndeticsClientCode) {
+                        coverPath = myBookList.getCoverPathFromSyndetics(container, isbn, syndeticsClientCode);
+                        coverPathSyndetics = coverPath;
+                    }
 
-            if (validGoogleBooksAPIKey) {
-                url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=isbn:" + isbn;
+                    if (validGoogleBooksAPIKey) {
+                        url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=isbn:" + isbn;
 
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: "text",
-                    success: function (data) {
-                        var obj = $.parseJSON(data);
-                        if (obj.totalItems != 0) {
-                            obj = obj.items[0];
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            dataType: "text",
+                            success: function (data) {
+                                var obj = $.parseJSON(data);
+                                if (obj.totalItems != 0) {
+                                    obj = obj.items[0];
 
-                            result.isbn.push({
-                                "title": obj.volumeInfo.title
-                            });
-                            result.isbn.push({
-                                "author": obj.volumeInfo.authors.join(", ")
-                            });
-                            result.isbn.push({
-                                "date": myBookList.formatDate(obj.volumeInfo.publishedDate)
-                            });
+                                    result.isbn.push({
+                                        "title": obj.volumeInfo.title
+                                    });
+                                    result.isbn.push({
+                                        "author": obj.volumeInfo.authors.join(", ")
+                                    });
+                                    result.isbn.push({
+                                        "date": myBookList.formatDate(obj.volumeInfo.publishedDate)
+                                    });
+                                    result.isbn.push({
+                                        "primoUrl": anchorUrl
+                                    });
 
-                            if (!coverPathSyndetics) {
-                                if (typeof obj.volumeInfo.imageLinks !== 'undefined') {
-                                    coverPath = obj.volumeInfo.imageLinks.thumbnail;
+                                    if (!coverPathSyndetics) {
+                                        if (typeof obj.volumeInfo.imageLinks !== 'undefined') {
+                                            coverPath = obj.volumeInfo.imageLinks.thumbnail;
+                                        }
+                                    }
+
+                                    myBookList.populatePlusletViewFromCache(container, result, coverPath);
+                                    myBookList.downloadCoverToCache(coverPath, isbn);
+                                    myBookList.downloadDataToCache(result, isbn);
+
+                                } else {
+                                    if (view === 'control') {
+                                        myBookList.setNumberErrorMessage(isbn, container);
+                                    }
                                 }
                             }
-
-                            myBookList.populatePlusletViewFromCache(container, result, coverPath);
-                            myBookList.downloadCoverToCache(coverPath, isbn);
-                            myBookList.downloadDataToCache(result, isbn);
-
-                        } else {
-                            if (view === 'control') {
-                                myBookList.setNumberErrorMessage(isbn, container);
-                            }
-                        }
+                        });
+                    } else {
+                        var validOpenLibrary = myBookList.getMetaDataFromOpenLibrary(container, isbn, coverPathSyndetics, anchorUrl);
                     }
-                });
-            } else {
-
-                var validOpenLibrary = myBookList.getMetaDataFromOpenLibrary(container, isbn, coverPathSyndetics);
-            }
-        },
-        isFileInCache: function (url, type) {
-            return $.ajax({
-                type: type,
-                dataType: "text",
-                url: url
+                }
             });
+
+
         },
         getBookDataFromOpenLibrary: function (isbn) {
             return $.ajax({
@@ -295,7 +306,7 @@ function bookList() {
                 }
             });
         },
-        getMetaDataFromOpenLibrary: function (container, isbn, coverPathSyndetics) {
+        getMetaDataFromOpenLibrary: function (container, isbn, coverPathSyndetics, primoUrl) {
             var coverPath = '';
             var validOpenLibraryData = false;
             var validSyndetics = false;
@@ -327,6 +338,9 @@ function bookList() {
                         });
                         result.isbn.push({
                             "date": myBookList.formatDate(obj.date)
+                        });
+                        result.isbn.push({
+                            "primoUrl": primoUrl
                         });
                     }
                 }
@@ -369,7 +383,8 @@ function bookList() {
                     "title": data.isbn[0].title,
                     "isbn": isbn,
                     "author": data.isbn[1].author,
-                    "date": data.isbn[2].date
+                    "date": data.isbn[2].date,
+                    "primoUrl": data.isbn[3].primoUrl
                 },
                 dataType: "text"
             });
@@ -395,7 +410,7 @@ function bookList() {
         },
         setNoSourceAvailableErrorMessage: function (container, isbn) {
             var checkNumberMessage = document.createElement('p');
-            checkNumberMessage.innerHTML = "Sorry, there is no information for this book." + isbn;
+            checkNumberMessage.innerHTML = "Sorry, there is not information for this book." + isbn;
             var divBook = document.createElement('div');
             divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
@@ -417,21 +432,29 @@ function bookList() {
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
-        setBookCoverSrc: function (container, url){
+        setBookCoverSrc: function (container, url, anchorUrl){
             var imgCover = document.createElement('img');
             imgCover.setAttribute('src', url);
             imgCover.setAttribute('data-show-image', url);
-
 
             var divItem = document.createElement('div');
             divItem.classList.add('booklist_item');
 
             var divCover = document.createElement('div');
             divCover.classList.add('booklist_isbn_cover');
-            divCover.appendChild(imgCover);
+
+            if (anchorUrl){
+                var anchor = document.createElement('a');
+                anchor.setAttribute('href', anchorUrl);
+                anchor.setAttribute('target', '_blank');
+
+                anchor.appendChild(imgCover);
+                divCover.appendChild(anchor);
+            }else{
+                divCover.appendChild(imgCover);
+            }
+
             divItem.appendChild(divCover);
-
-
             container.appendChild(divItem);
         },
         getUrl: function (url) {
