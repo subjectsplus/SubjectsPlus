@@ -86,6 +86,12 @@ if( (!empty($this->flashMessage)) ) {
             </select>
             <br>
 
+
+            <input type="hidden" id="search_scope" class="search_scope" name="search_scope" value="Everything">
+
+
+
+
             <span class="adv_search_btn">
                  <a name="adv_search_btn">More Options</a>
             </span>

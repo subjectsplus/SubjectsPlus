@@ -8,15 +8,18 @@ function primoSearchBox() {
         bindUiActions: function () {
             myPrimoSearchBox.toggleMoreOptions();
             myPrimoSearchBox.search();
+
         },
         init: function () {
             myPrimoSearchBox.bindUiActions();
             myPrimoSearchBox.hideMoreOptions();
+            myPrimoSearchBox.toggleSearchScope();
         },
 
         search : function () {
 
             $(".search-primo-btn").on('click', function () {
+
 
                 var form = $(this).parent().parent();
                 var formChildren = $(form).children();
@@ -28,6 +31,7 @@ function primoSearchBox() {
 
                 if(rtype.val() && precisionOperator.val()) {
                     primoQuery.val(rtype.val() + ',' + precisionOperator.val() + ',' + primoQueryTemp.val().replace(/[,]/g, " "));
+
                 } else {
                     primoQuery.val('any,contains,' + primoQueryTemp.val().replace(/[,]/g, " "));
                 }
@@ -43,6 +47,19 @@ function primoSearchBox() {
         toggleMoreOptions : function () {
            $("[name='adv_search_btn']").on('click', function () {
                $("[name='advanced_search_container']").toggle();
+            });
+        },
+
+        toggleSearchScope: function () {
+            $('body').on('change', 'select[name="tab"]', function () {
+
+                var search_scope = $(this).val();
+
+                if( search_scope == 'default_tab') {
+                    $('.search_scope').val('default_scope');
+                } else {
+                    $('.search_scope').val('Everything');
+                }
             });
         }
     };
