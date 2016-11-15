@@ -87,7 +87,7 @@ if( (!empty($this->flashMessage)) ) {
             <br>
 
 
-            <input type="hidden" id="search_scope" class="search_scope" name="search_scope" value="Everything">
+            <input type="hidden" class="search_scope" name="search_scope" value="Everything">
 
 
 
