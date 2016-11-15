@@ -371,7 +371,7 @@ class Pluslet_PrimoSearch extends Pluslet
     /**
      * @param mixed $primo_default_search_scope
      */
-    public function setPrimoDefaultSearchScope($primo_default_search_scope) {
+    public function setPrimoDefaultSearchScope($primo_default_search_scope = null) {
 
         if($primo_default_search_scope != null) {
             $this->_primo_default_search_scope = $primo_default_search_scope;
