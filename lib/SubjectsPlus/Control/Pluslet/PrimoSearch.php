@@ -26,6 +26,7 @@ class Pluslet_PrimoSearch extends Pluslet
     private $_displayField;
     private $_pcAvailabilityMode;
     private $_primo_flyout_icon_name;
+    private $_primo_default_search_scope;
 
 
     public function __construct($pluslet_id, $flag = "", $subject_id, $isclone = 0) {
@@ -79,6 +80,7 @@ class Pluslet_PrimoSearch extends Pluslet
         $this->setDum();
         $this->setDisplayField();
         $this->setPcAvailabilityMode();
+        $this->setPrimoDefaultSearchScope();
 
     }
 
@@ -358,6 +360,29 @@ class Pluslet_PrimoSearch extends Pluslet
             $this->_pcAvailabilityMode = $primo_pcAvailabilityMode;
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPrimoDefaultSearchScope() {
+        return $this->_primo_default_search_scope;
+    }
+
+    /**
+     * @param mixed $primo_default_search_scope
+     */
+    public function setPrimoDefaultSearchScope($primo_default_search_scope = null) {
+
+        if($primo_default_search_scope != null) {
+            $this->_primo_default_search_scope = $primo_default_search_scope;
+        } else {
+            global $primo_default_search_scope;
+            $this->_primo_default_search_scope = $primo_default_search_scope;
+        }
+
+    }
+
+
 
 
 }

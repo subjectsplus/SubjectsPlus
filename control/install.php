@@ -99,7 +99,15 @@ if( isInstalled() )
 
 		"syndetics_client_code" => array( _( "Syndetics Client Code" ), _( "This option contains the client code required to use Syndetics" ), "string", "right", "medium", "" , ""),
 
-		"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , "")
+		"google_books_api_key" => array( _( "Google Books API Key" ), _( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+        "booklist_primo_domain" => array( _( "Book List Pluslet Primo Domain" ), _( "This option contains the Primo domain for the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+        "booklist_primo_institution_code" => array( _( "Book List Pluslet Primo Institution Code" ), _( "This option contains the Primo institution code for the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+        "booklist_primo_vid" => array( _( "Book List Pluslet Primo View" ), _( "This option contains the Primo view for the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+        "booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , "")
 	);
 
 	//new instance of config amd set path and options
