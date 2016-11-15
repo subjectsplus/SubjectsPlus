@@ -45,9 +45,9 @@ function primoSearchBox() {
         },
 
         toggleMoreOptions : function () {
-           $("[name='adv_search_btn']").on('click', function () {
-               $("[name='advanced_search_container']").toggle();
-            });
+           $("body").on('click', '[name="adv_search_btn"]', function () {
+               $(this).parent().siblings("[name='advanced_search_container']").toggle();
+           });
         },
 
         toggleSearchScope: function () {
