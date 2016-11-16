@@ -3,9 +3,11 @@ function bookList() {
 
     var validGoogleBooksAPIKey = false;
     var validSyndeticsClientCode = false;
+    var serverWithHTTPS = false;
+    var urlPrefix = '';
     var view = 'control';
 
-    var validateCodes = {
+    var validation = {
         validateSyndeticsClientCode: function (syndeticsClientCode) {
             if (syndeticsClientCode.trim()) {
                 var result = true;
@@ -33,6 +35,16 @@ function bookList() {
                 });
                 validGoogleBooksAPIKey = result;
             }
+        },
+        checkIfServerWithHTTPS: function () {
+            $.ajax({
+                    url: 'https://' + window.location.host +  window.location.pathname,
+                    statusCode: {
+                        200: function () {
+                            serverWithHTTPS = true;
+                        }
+                    }
+                });
         }
     };
 
@@ -49,7 +61,9 @@ function bookList() {
             var syndeticsClientCode = container.getElementsByTagName('input')[1].value;
             var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
 
-            $.when(validateCodes.validateGoogleBooksAPIKey(googleBooksAPIKey), validateCodes.validateSyndeticsClientCode(syndeticsClientCode)).then(function(a1,a2){
+            $.when(validation.validateGoogleBooksAPIKey(googleBooksAPIKey), validation.validateSyndeticsClientCode(syndeticsClientCode), validation.checkIfServerWithHTTPS()).then(function(a1,a2){
+                myBookList.getUrlPrefix();
+
                 var url = document.location.href;
                 if (url.indexOf('control') === -1) {
                     view = 'live';
@@ -146,7 +160,7 @@ function bookList() {
             var syndeticsClientCode = container.getElementsByTagName('input')[1].value;
             var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
             var regex = new RegExp('(ISBN[-]*(1[03])*[ ]*(: ){0,1})*(([0-9Xx][- ]*){13}|([0-9Xx][- ]*){10})');
-            var prefix = myBookList.getUrlPrefix();
+            var prefix = urlPrefix;
 
             if (data != undefined) {
                 if (data.trim()) {
@@ -185,22 +199,26 @@ function bookList() {
             });
         },
         getUrlPrefix : function () {
-            var value = '';
-            var url = document.location.href;
+            var pathName = window.location.pathname;
+            var protocol = window.location.protocol;
+            var host = window.location.host;
 
-            if (url.indexOf('control') !== -1){
-                value = document.location.href.split("control")[0];
-            }else if (url.indexOf('subjects') !== -1){
-                value = document.location.href.split("subjects")[0];
+            if (protocol !== 'https:' && serverWithHTTPS){
+                protocol = 'https:';
             }
-            return value;
+
+            if (pathName.indexOf('control') !== -1){
+                pathName = pathName.split("control")[0];
+            }else if (pathName.indexOf('subjects') !== -1){
+                pathName = pathName.split("subjects")[0];
+            }
+            urlPrefix = protocol + '//' + host  + pathName;
         },
         getCoverPathFromSyndetics: function (container, isbn, syndeticsClientCode){
             var result = '';
-
             $.ajax({
                 type: "GET",
-                url: myBookList.getUrlPrefix() + 'subjects/includes/syndetics_image_xml_data.php',
+                url: urlPrefix + 'subjects/includes/syndetics_image_xml_data.php',
                 data: {
                     "isbn": isbn,
                     "syndeticsClientCode": syndeticsClientCode
@@ -224,7 +242,7 @@ function bookList() {
 
             $.ajax({
                 type: "GET",
-                url: myBookList.getUrlPrefix() + 'subjects/includes/isbn_in_primo_check.php',
+                url: urlPrefix  + 'subjects/includes/isbn_in_primo_check.php',
                 data: {
                     "isbn": isbn
                 },
@@ -288,7 +306,7 @@ function bookList() {
         getBookDataFromOpenLibrary: function (isbn) {
             return $.ajax({
                 type: "GET",
-                url: myBookList.getUrlPrefix() + 'subjects/includes/book_metadata_from_open_library.php',
+                url: urlPrefix + 'subjects/includes/book_metadata_from_open_library.php',
                 dataType: "text",
                 data: {
                     "isbn": isbn,
@@ -298,7 +316,7 @@ function bookList() {
         getBookCoverFromOpenLibrary: function (isbn) {
             return $.ajax({
                 type: "GET",
-                url: myBookList.getUrlPrefix() + 'subjects/includes/book_cover_from_open_library.php',
+                url: urlPrefix + 'subjects/includes/book_cover_from_open_library.php',
                 dataType: "text",
                 data: {
                     "isbn": isbn,
@@ -377,7 +395,7 @@ function bookList() {
         downloadDataToCache: function (data, isbn) {
             $.ajax({
                 type: "GET",
-                url: myBookList.getUrlPrefix() + 'subjects/includes/book_metadata_download.php',
+                url: urlPrefix + 'subjects/includes/book_metadata_download.php',
                 data: {
                     "title": data.isbn[0].title,
                     "isbn": isbn,
@@ -391,7 +409,7 @@ function bookList() {
         downloadCoverToCache: function (url, isbn) {
             $.ajax({
                 type: "GET",
-                url: myBookList.getUrlPrefix() + 'subjects/includes/book_cover_download.php',
+                url: urlPrefix + 'subjects/includes/book_cover_download.php',
                 data: {
                     "url": url,
                     "isbn": isbn
