@@ -10,16 +10,12 @@ function bookList() {
     var validation = {
         validateSyndeticsClientCode: function (syndeticsClientCode) {
             if (syndeticsClientCode.trim()) {
-                var result = true;
                 $.ajax({
-                    url: "https://syndetics.com/index.aspx?isbn=9780605039070/xml.xml&client=" + syndeticsClientCode + "&type=rn12",
-                    statusCode: {
-                        500: function () {
-                            result = false;
-                        }
+                    url: urlPrefix + 'subjects/includes/validate_syndetics_client_code.php',
+                    success: function (result) {
+                        validSyndeticsClientCode = result;
                     }
                 });
-                validSyndeticsClientCode = result;
             }
         },
         validateGoogleBooksAPIKey: function (googleBooksAPIKey) {
@@ -60,9 +56,9 @@ function bookList() {
         init: function (container) {
             var syndeticsClientCode = container.getElementsByTagName('input')[1].value;
             var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
+            myBookList.getUrlPrefix();
 
             $.when(validation.validateGoogleBooksAPIKey(googleBooksAPIKey), validation.validateSyndeticsClientCode(syndeticsClientCode), validation.checkIfServerWithHTTPS()).then(function(a1,a2){
-                myBookList.getUrlPrefix();
 
                 var url = document.location.href;
                 if (url.indexOf('control') === -1) {
