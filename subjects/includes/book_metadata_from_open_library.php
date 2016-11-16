@@ -4,7 +4,7 @@ include("../../control/includes/functions.php");
 
 $book_metadata_from_open_library = function ($isbn) {
 
-    $url = "http://openlibrary.org/api/volumes/brief/isbn/" . $isbn . ".json";
+    $url = "https://openlibrary.org/api/volumes/brief/isbn/" . $isbn . ".json";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, htmlspecialchars_decode($url));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
