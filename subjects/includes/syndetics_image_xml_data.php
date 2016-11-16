@@ -17,10 +17,7 @@ $validateImageExists = function($isbn, $syndeticsClientCode) {
     $xml = null;
     libxml_use_internal_errors(true);
     $xml = simplexml_load_string($result);
-
     curl_close($curl);
-    $result = array();
-    array_push($result, $isbn);
 
     if (isset($xml)){
         if (isset($xml->LC)){
