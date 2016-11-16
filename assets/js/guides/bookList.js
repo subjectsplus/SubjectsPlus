@@ -10,7 +10,7 @@ function bookList() {
             if (syndeticsClientCode.trim()) {
                 var result = true;
                 $.ajax({
-                    url: "http://syndetics.com/index.aspx?isbn=9780605039070/xml.xml&client=" + syndeticsClientCode + "&type=rn12",
+                    url: "https://syndetics.com/index.aspx?isbn=9780605039070/xml.xml&client=" + syndeticsClientCode + "&type=rn12",
                     statusCode: {
                         500: function () {
                             result = false;
@@ -91,7 +91,6 @@ function bookList() {
                     '"date":"' + data[2].date + '" , "primoUrl":"' + data[3].primoUrl + '" }';
 
                 var obj = JSON.parse(text);
-                debugger;
                 data = obj;
             }
             myBookList.insertBookInformation(data, container, coverPath);
