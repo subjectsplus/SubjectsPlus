@@ -7,6 +7,8 @@
 <meta name="Description" content="<?php if (isset($description)) {print $description;} ?>" />
 <meta name="Keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>" />
 <meta name="Author" content="" />
+<meta http-equiv="Content-Security-Policy" content="default-src www.syndetics.com spmed.library.miami.edu library.miami.edu"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/pure-min.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/grids-responsive-min.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um.css">
