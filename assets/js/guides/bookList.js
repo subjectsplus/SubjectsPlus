@@ -3,7 +3,6 @@ function bookList() {
 
     var validGoogleBooksAPIKey = false;
     var validSyndeticsClientCode = false;
-    var serverWithHTTPS = false;
     var urlPrefix = '';
     var view = 'control';
 
@@ -31,16 +30,6 @@ function bookList() {
                 });
                 validGoogleBooksAPIKey = result;
             }
-        },
-        checkIfServerWithHTTPS: function () {
-            $.ajax({
-                    url: 'https://' + window.location.host +  window.location.pathname,
-                    statusCode: {
-                        200: function () {
-                            serverWithHTTPS = true;
-                        }
-                    }
-                });
         }
     };
 
@@ -58,7 +47,7 @@ function bookList() {
             var googleBooksAPIKey = container.getElementsByTagName('input')[2].value;
             myBookList.getUrlPrefix();
 
-            $.when(validation.validateGoogleBooksAPIKey(googleBooksAPIKey), validation.validateSyndeticsClientCode(syndeticsClientCode), validation.checkIfServerWithHTTPS()).then(function(a1,a2){
+            $.when(validation.validateGoogleBooksAPIKey(googleBooksAPIKey), validation.validateSyndeticsClientCode(syndeticsClientCode)).then(function(a1,a2){
 
                 var url = document.location.href;
                 if (url.indexOf('control') === -1) {
@@ -190,7 +179,6 @@ function bookList() {
         isFileInCache: function (url, type) {
             return $.ajax({
                 type: type,
-                dataType: "text",
                 url: url
             });
         },
@@ -198,10 +186,6 @@ function bookList() {
             var pathName = window.location.pathname;
             var protocol = window.location.protocol;
             var host = window.location.host;
-
-            if (protocol !== 'https:' && serverWithHTTPS){
-                protocol = 'https:';
-            }
 
             if (pathName.indexOf('control') !== -1){
                 pathName = pathName.split("control")[0];
@@ -238,7 +222,7 @@ function bookList() {
 
             $.ajax({
                 type: "GET",
-                url: urlPrefix  + 'subjects/includes/isbn_in_primo_check.php',
+                url: urlPrefix  + 'control/includes/isbn_in_primo_check.php',
                 data: {
                     "isbn": isbn
                 },
