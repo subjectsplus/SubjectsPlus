@@ -5,8 +5,7 @@
  * Date: 11/1/2016
  * Time: 9:14 AM
  */
-include("../../control/includes/functions.php");
-include("../../control/includes/config.php");
+include( "functions.php" );
 
 $isbn_in_primo = function ($isbn) {
 
