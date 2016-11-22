@@ -11,7 +11,6 @@ $book_metadata_download = function ($title, $isbn, $author, $date, $primoUrl) {
 
     $prefix = explode('subjects', dirname(__FILE__));
     $file_path = $prefix[0] . "assets/cache/" . $isbn . ".bookmetadata";
-    $decoded_primoUrl = htmlspecialchars_decode($primoUrl);
 
     if (!file_exists($file_path)) {
         $data = array("isbn" => array('title' => "$title", 'isbn' => "$isbn", 'author' => "$author", 'date' => "$date", 'primoUrl' => $primoUrl));
