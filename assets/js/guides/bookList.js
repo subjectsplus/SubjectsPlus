@@ -155,6 +155,7 @@ function bookList() {
                             if (regex.test(isbn)) {
                                myBookList.processISBN(isbn, prefix, container);
                             } else {
+
                                 if (view === 'control') {
                                     myBookList.setNumberErrorMessage(isbn, container);
                                 }
@@ -266,7 +267,7 @@ function bookList() {
 
                                 } else {
                                     if (view === 'control') {
-                                        myBookList.setNumberErrorMessage(isbn, container);
+                                        myBookList.setNoSourceAvailableErrorMessage(isbn, container);
                                     }
                                 }
                             }
@@ -405,9 +406,9 @@ function bookList() {
             divBook.appendChild(checkNumberMessage);
             container.appendChild(divBook);
         },
-        setNoSourceAvailableErrorMessage: function (container, isbn) {
+        setNoSourceAvailableErrorMessage: function (isbn, container) {
             var checkNumberMessage = document.createElement('p');
-            checkNumberMessage.innerHTML = "Sorry, there is not information for this book." + isbn;
+            checkNumberMessage.innerHTML = "Sorry, this ISBN can't be found: " + isbn;
             var divBook = document.createElement('div');
             divBook.classList.add('booklist-alert');
             divBook.appendChild(checkNumberMessage);
