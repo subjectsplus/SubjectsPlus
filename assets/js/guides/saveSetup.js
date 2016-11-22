@@ -608,6 +608,17 @@ function saveSetup() {
 					var b = bookList();
 					b.init(container);
 					$(container).attr('rendered', '1');
+					setTimer();
+				}
+
+				function setTimer() {
+					setTimeout(showContainer, 2000);
+				}
+
+				function showContainer() {
+					var loader = $(container).prev();
+					$(loader).hide();
+					$(container).show("fade");
 				}
 			});
 		},
