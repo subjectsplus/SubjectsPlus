@@ -157,7 +157,6 @@ function bookList() {
                             } else {
 
                                 if (view === 'control') {
-                                    debugger;
                                     myBookList.setNumberErrorMessage(isbn, container);
                                 }
                             }
@@ -268,7 +267,6 @@ function bookList() {
 
                                 } else {
                                     if (view === 'control') {
-                                        debugger;
                                         myBookList.setNoSourceAvailableErrorMessage(isbn, container);
                                     }
                                 }
