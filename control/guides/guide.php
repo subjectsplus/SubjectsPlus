@@ -526,7 +526,6 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 	var containers = $(".booklist-content");
 	$.each(containers, function() {
-
 		var container = this;
 		if ($(container).parent().parent().attr('name') == 'Clone'){
 			container = $("#"+$(container).parent().parent().attr('id')).find('.booklist-content')[0];
@@ -537,7 +536,20 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 			var b = bookList();
 			b.init(container);
 			$(container).attr('rendered', '1');
+			setTimer();
+		}
+
+		function setTimer() {
+			setTimeout(showContainer, 1000);
+		}
+
+		function showContainer() {
+			var loader = $(container).prev();
+			$(loader).hide();
+			$(container).show("fade");
 		}
 	});
+
+
 
 </script>
