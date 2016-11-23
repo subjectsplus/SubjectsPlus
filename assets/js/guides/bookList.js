@@ -233,10 +233,16 @@ function bookList() {
 
                     if (validGoogleBooksAPIKey) {
                         url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=isbn:" + isbn;
-
                         $.ajax({
                             type: "GET",
                             url: url,
+                            statusCode: {
+                                403: function() {
+                                    if (view === 'control') {
+                                        myBookList.setNoSourceAvailableErrorMessage(isbn, container);
+                                    }
+                                }
+                            },
                             success: function (data) {
                                 var obj = data;
                                 if (obj.totalItems != 0) {
@@ -354,11 +360,11 @@ function bookList() {
                 }
 
                 if (validSyndeticsClientCode && !validGoogleBooksAPIKey && view === 'control') {
-                    myBookList.setNoSourceAvailableErrorMessage(container, isbn);
+                    myBookList.setNoSourceAvailableErrorMessage(isbn, container);
                 }
 
                 if (!validOpenLibraryData && view === 'control') {
-                    myBookList.setNoSourceAvailableErrorMessage(container, isbn);
+                    myBookList.setNoSourceAvailableErrorMessage(isbn, container);
                 }
             });
         },
