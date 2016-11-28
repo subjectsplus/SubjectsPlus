@@ -460,6 +460,17 @@ cloneView.init();
             var b = bookList();
             b.init(container);
             $(container).attr('rendered', '1');
+            setTimer();
+        }
+
+        function setTimer() {
+            setTimeout(showContainer, 600);
+        }
+
+        function showContainer() {
+            var loader = $(container).prev();
+            $(loader).hide();
+            $(container).show();
         }
     });
 
