@@ -205,7 +205,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 						            <tr>
 						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
 						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <img src=\"http://sp.library.miami.edu/assets/images/email/calendar.jpg\" width=\"40\" height=\"40\" border=\"0\">
+						                  <!--<img src=\"http://sp.library.miami.edu/assets/images/email/calendar.jpg\" width=\"40\" height=\"40\" border=\"0\">-->
 						              </td>
 						              <td width=\"150\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
 						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Received:") . "</p>
@@ -224,7 +224,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 						            <tr>
 						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
 						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <img src=\"http://sp.library.miami.edu/assets/images/email/contact.jpg\" width=\"40\" height=\"40\" border=\"0\">
+						                  <!--<img src=\"http://sp.library.miami.edu/assets/images/email/contact.jpg\" width=\"40\" height=\"40\" border=\"0\">-->
 						              </td>
 						              <td width=\"150\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
 						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Contact:") . "</p>
@@ -245,7 +245,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 						            <tr>
 						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
 						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <img src=\"http://sp.library.miami.edu/assets/images/email/comment.jpg\" width=\"40\" height=\"40\" border=\"0\">
+						                  <!--<img src=\"http://sp.library.miami.edu/assets/images/email/comment.jpg\" width=\"40\" height=\"40\" border=\"0\">-->
 						              </td>
 						              <td width=\"530\" valign=\"middle\" height=\"40\" bgcolor=\"#FFFFFF\">
 						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Comment:") . "</p>
@@ -280,7 +280,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 						            <tr>
 						              <td width=\"175\" height=\"50\" valign=\"middle\" bgcolor=\"#FFFFFF\">&nbsp;</td>              
 						              <td width=\"250\" height=\"50\" valign=\"middle\" align=\"center\" bgcolor=\"#858585\">
-						                  <p style=\"font-size:28px; color:#FFF; font-family:Helvetica, sans-serif;\"><a href=\"http://sp.library.miami.edu/control/talkback\" target=\"_blank\" style=\"color: #FFF; text-decoration:none;\"><span style=\"color: #FFF; text-decoration:none;\">" . _("Reply Now") . "</span></a></p>
+						                  <p style=\"font-size:28px; color:#FFF; font-family:Helvetica, sans-serif;\"><!--<a href=\"http://sp.library.miami.edu/control/talkback\" target=\"_blank\" style=\"color: #FFF; text-decoration:none;\">--><span style=\"color: #FFF; text-decoration:none;\">" . _("Reply Now") . "</span></a></p>
 						              </td>              
 						              <td width=\"175\" height=\"50\" valign=\"middle\" bgcolor=\"#FFFFFF\">&nbsp;</td>
 						            </tr>
@@ -297,7 +297,7 @@ if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 						  </tr>       
 						  <tr>
 						     <td width=\"600\" height=\"70\" valign=\"middle\" align=\"center\" bgcolor=\"#FFFFFF\">
-						        <img src=\"http://sp.library.miami.edu/assets/images/email/subjectsplus-footer.jpg\" width=\"276\" height=\"40\" border=\"0\">
+						        <!--<img src=\"http://sp.library.miami.edu/assets/images/email/subjectsplus-footer.jpg\" width=\"276\" height=\"40\" border=\"0\">-->
 						      </td>
 						  </tr>
 						</table>            
