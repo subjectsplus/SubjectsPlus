@@ -365,7 +365,7 @@ define("PATH_TO_SP", $BaseURL);
 $guide_index_page = "";
 
 
-$google_anayltics_ua = "";
+$google_analytics_ua = "";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // Pluslets Config
