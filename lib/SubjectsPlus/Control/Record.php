@@ -536,7 +536,7 @@ class Record {
 
     echo "
     <label for=\"helpguide[]\">" . _("Help Guide Location") . "</label>
-    <input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" id=\"helpguide[]\"  size=\"60\" />
+    <input type=\"text\" value=\"{$this->_helpguide}\" name=\"helpguide[]\" id=\"helpguide[]\"  size=\"60\" class=\"pure-input-2-3\" />
     ";
  } else {
  	echo "<br /><br /><input type=\"hidden\" name=\"eres_display[]\" value=\"{$this->_az_display}\">
