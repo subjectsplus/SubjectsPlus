@@ -546,7 +546,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 		function showContainer() {
 			var loader = $(container).prev();
 			$(loader).hide();
-			$(container).show("fade");
+			$(container).show();
 		}
 	});
 
