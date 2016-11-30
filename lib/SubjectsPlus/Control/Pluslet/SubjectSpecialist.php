@@ -206,7 +206,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         $config['height'] = '300';
         $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-        $this_instance = "editor1";
+        $this_instance = "editor-specialist";
         $ckEditor = $oCKeditor->editor($this_instance, $this->_body, $config);
         return $ckEditor;
     }
