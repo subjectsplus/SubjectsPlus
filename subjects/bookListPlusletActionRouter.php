@@ -227,8 +227,8 @@ function book_cover_from_open_library () {
 	}
 
 	if (empty($result)){
-		$prefix = explode('subjects', dirname(__FILE__));
-		$url = $prefix[0]."assets/images/blank-cover.png";
+        $page_url = explode('control', curPageURL());
+        $url = $page_url[0] . "assets/images/blank-cover.png";
 		$result = $url;
 	}
 
@@ -316,7 +316,11 @@ function book_cover_download () {
 
 function curPageURL() {
 	$pageURL = 'http';
-	if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+    if (array_key_exists('HTTPS', $_SERVER)) {
+        if ($_SERVER["HTTPS"] == "on") {
+            $pageURL .= "s";
+        }
+    }
 	$pageURL .= "://";
 	if ($_SERVER["SERVER_PORT"] != "80") {
 		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
