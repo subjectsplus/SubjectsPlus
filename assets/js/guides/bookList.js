@@ -80,7 +80,7 @@ function bookList() {
                 if (charCode == 88 || charCode == 44 || charCode == 8 || charCode == 188)
                     result = true;
 
-                if (evt.ctrlKey && (charCode == 86 || charCode == 67 || charCode == 90 || charCode == 88)){
+                if ((evt.ctrlKey || evt.metaKey) && (charCode == 86 || charCode == 67 || charCode == 90 || charCode == 88)){
                     result = true;
                 }
 
@@ -91,7 +91,6 @@ function bookList() {
                 if (37 <= charCode && charCode <= 40){
                     result = true;
                 }
-
                 return result;
             });
         },
