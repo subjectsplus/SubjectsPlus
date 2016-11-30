@@ -99,20 +99,24 @@ function validateSyndeticsImageExists() {
 	libxml_use_internal_errors(true);
 	$xml = simplexml_load_string($result);
 	curl_close($curl);
+    $result = '';
+
 
 	if (isset($xml)){
 		if (isset($xml->LC)){
-			echo $xml->LC;
+			echo $result = $xml->LC;
 		}elseif (isset($xml->MC)){
-			echo $xml->MC;
+			echo $result = $xml->MC;
 		}elseif (isset($xml->SC)){
-			echo $xml->SC;
-		}else{
-			echo '';
+			echo $result = $xml->SC;
 		}
-	}else{
-		echo '';
 	}
+
+    if (empty($result)){
+        $page_url = explode('control', curPageURL());
+        $url = $page_url[0] . "assets/images/blank-cover.png";
+        echo $url;
+    }
 
 	libxml_use_internal_errors(false);
 };
@@ -227,8 +231,8 @@ function book_cover_from_open_library () {
 	}
 
 	if (empty($result)){
-		$prefix = explode('subjects', dirname(__FILE__));
-		$url = $prefix[0]."assets/images/blank-cover.png";
+        $page_url = explode('control', curPageURL());
+        $url = $page_url[0] . "assets/images/blank-cover.png";
 		$result = $url;
 	}
 
@@ -316,7 +320,11 @@ function book_cover_download () {
 
 function curPageURL() {
 	$pageURL = 'http';
-	if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+    if(array_key_exists('HTTPS', $_SERVER)) {
+        if ($_SERVER["HTTPS"] == "on") {
+            $pageURL .= "s";
+        }
+    }
 	$pageURL .= "://";
 	if ($_SERVER["SERVER_PORT"] != "80") {
 		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
