@@ -71,14 +71,26 @@ function bookList() {
             });
         },
         isNumberKey: function () {
-            $('textarea[name=BookList-extra-isbn]').keypress(function(evt) {
+            $('textarea[name=BookList-extra-isbn]').keydown(function(evt) {
                 var result = true;
-                var charCode = (evt.which) ? evt.which : event.keyCode;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
                 if (charCode < 48 || charCode > 57)
                     result = false;
 
-                if (charCode == 88 || charCode == 44)
+                if (charCode == 88 || charCode == 44 || charCode == 8 || charCode == 188)
                     result = true;
+
+                if (evt.ctrlKey && (charCode == 86 || charCode == 67 || charCode == 90 || charCode == 88)){
+                    result = true;
+                }
+
+                if (evt.shiftKey && (37 <= charCode && charCode <= 40)){
+                    result = true;
+                }
+
+                if (37 <= charCode && charCode <= 40){
+                    result = true;
+                }
 
                 return result;
             });
