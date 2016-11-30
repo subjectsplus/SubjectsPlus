@@ -10,7 +10,8 @@
 //added in order to hide errors if SP not yet installed.  
 if( !file_exists( "../control/includes/config.php" ) || filesize( "../control/includes/config.php" ) < 10 )
 {
-  print "<p>" .  _("SubjectsPlus has not been installed yet.  Please follow the instructions on the wiki: ") . "</p><p><a href=\"http://subjectsplus.com/wiki2/index.php?title=Main_Page\">http://subjectsplus.com/wiki2/index.php?title=Main_Page</a></p>";
+  print "<img src=\"../assets/images/admin/logo_v3_full.png\" border=\"0\" />\n<br />";
+  print "<p>" .  _("SubjectsPlus has not been installed yet.  Please follow the instructions on the wiki: ") . "</p><p><a href=\"http://subjectsplus.com/wiki2/index.php?title=Main_Page\" target=\"_blank\">http://subjectsplus.com/wiki2/index.php?title=Main_Page</a></p>";
   exit;
 }
 
