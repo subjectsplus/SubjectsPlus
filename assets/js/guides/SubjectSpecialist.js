@@ -19,7 +19,7 @@ function subjectSpecialist() {
         },
 
         hideTextarea : function () {
-            $("textarea[name=editor1]").hide();
+            $("textarea[name=editor-specialist]").hide();
         },
 
         removeItems : function () {
