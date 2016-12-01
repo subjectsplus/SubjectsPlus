@@ -153,8 +153,13 @@ entries:
       output: web, pdf
 
     - title: Admin
-      url: /mydoc_atom_text_editor.html
+      url: /mydoc_webstorm_text_editor.html
       output: web, pdf
+
+    - title: Docs by Jekyll
+      external_url: http://idratherbewriting.com/documentation-theme-jekyll/index.html
+      output: web, pdf
+
 
   - title: Pluslets/Boxes
     output: web, pdf

@@ -14,6 +14,8 @@ topnav_dropdowns:
       folderitems:
         - title: Github Repo
           external_url: https://github.com/subjectsplus/SubjectsPlus
+        - title: Github Issues
+          external_url: https://github.com/subjectsplus/SubjectsPlus/issues
         - title: Google Groups
           external_url: https://groups.google.com/forum/#!forum/subjectsplus
         - title: SubjectsPlus Wiki
@@ -26,3 +28,5 @@ topnav_dropdowns:
           external_url: https://github.com/subjectsplus/SubjectsPlus/blob/master/README.md
         - title: License
           external_url: https://github.com/subjectsplus/SubjectsPlus/blob/master/LICENSE.txt
+        - title: BitBucket Private
+          external_url: https://bitbucket.org/umiamiwet/subjectsplus-deployment-automation
