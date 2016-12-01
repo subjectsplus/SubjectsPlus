@@ -80,17 +80,18 @@ function bookList() {
                 if (charCode == 88 || charCode == 44 || charCode == 8 || charCode == 188)
                     result = true;
 
-                if ((evt.ctrlKey || evt.metaKey) && (charCode == 86 || charCode == 67 || charCode == 90 || charCode == 88)){
+                if ((evt.ctrlKey || evt.metaKey) && (charCode == 86 || charCode == 67 || charCode == 90 || charCode == 88)){ //for ctrl key and for Mac's keyboards command key
                     result = true;
                 }
 
-                if (evt.shiftKey && (37 <= charCode && charCode <= 40)){
+                if (evt.shiftKey && (37 <= charCode && charCode <= 40)){ // shift key
                     result = true;
                 }
 
-                if (37 <= charCode && charCode <= 40){
+                if ((37 <= charCode && charCode <= 40) || (96 <= charCode && charCode <= 105)){ //keypad numbers
                     result = true;
                 }
+
                 return result;
             });
         },
