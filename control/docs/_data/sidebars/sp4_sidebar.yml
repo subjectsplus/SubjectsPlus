@@ -28,7 +28,7 @@ entries:
       output: web, pdf
       type: homepage
 
-    - title: About the theme author
+    - title: About
       url: /sp4_overview_about.html
       output: web, pdf
 
