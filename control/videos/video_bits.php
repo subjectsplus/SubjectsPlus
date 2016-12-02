@@ -63,13 +63,14 @@ switch ($_REQUEST["type"]) {
               ",duration = " . $db->quote(scrubData($_POST['duration'])) .
               ",date = " . $db->quote(scrubData(date("Y-m-d", strtotime($_POST["upload_date"])))) .
               " WHERE foreign_id = " . $db->quote($our_id);
-         
-          //print_r ($qupdate);
-    
-        $rupdate = $db->exec($qupdate);
 
-          $video_idq = "SELECT video_id FROM video WHERE foreign_id =" . $db->quote($our_id);
-          $video_id = $db->query($video_idq)[0]['video_id'];
+          //print_r ($qupdate);
+
+          $rupdate = $db->exec($qupdate);
+
+          $video_idq = "SELECT video_id FROM video WHERE foreign_id =" . $db->quote($our_id) . "LIMIT 1";
+          $video_q_result = $db->query($video_idq)[0];
+          $video_id = $video_q_result[0];
 
 
       }
