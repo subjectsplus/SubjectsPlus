@@ -24,20 +24,16 @@ entries:
     folderitems:
 
     - title: Get started
-      url: /index.html
+      url: /sp4_overview_getting_started.html
       output: web, pdf
       type: homepage
 
-    - title: Supported features
-      url: /mydoc_supported_features.html
-      output: web, pdf
-
     - title: About the theme author
-      url: /mydoc_about.html
+      url: /sp4_overview_about.html
       output: web, pdf
 
     - title: Support
-      url: /mydoc_support.html
+      url: /sp4_overview_support.html
       output: web, pdf
 
   - title: Release Notes
@@ -45,11 +41,7 @@ entries:
     folderitems:
 
     - title: 4.1 Release notes
-      url: /mydoc_release_notes_60.html
-      output: web, pdf
-
-    - title: 4.0 Release notes
-      url: /mydoc_release_notes_50.html
+      url: /sp4_release_notes_41.html
       output: web, pdf
 
   - title: Installation
@@ -162,163 +154,147 @@ entries:
     folderitems:
 
     - title: Editable Box
-      url: /mydoc_sidebar_navigation.html
+      url: /sp4_pluslet_editable_box.html
       output: web, pdf
 
     - title: Link List
-      url: /mydoc_yaml_tutorial.html
+      url: /sp4_pluslet_link_list.html
       output: web, pdf
 
     - title: uSearch
-      url: /mydoc_tags.html
+      url: /sp4_pluslet_usearch.html
       output: web, pdf
 
     - title: Heading
-      url: /mydoc_series.html
+      url: /sp4_pluslet_heading.html
       output: web, pdf
 
     - title: Image Card
-      url: /mydoc_series.html
+      url: /sp4_pluslet_image_card.html
       output: web, pdf
 
     - title: Video
-      url: /mydoc_series.html
+      url: /sp4_pluslet_video.html
       output: web, pdf
 
     - title: Subject Specialist
-      url: /mydoc_series.html
+      url: /sp4_pluslet_subject_specialist.html
       output: web, pdf
 
     - title: Book List
-      url: /mydoc_series.html
+      url: /sp4_pluslet_book_list.html
       output: web, pdf
 
     - title: FAQs
-      url: /mydoc_series.html
+      url: /sp4_pluslet_faqs.html
       output: web, pdf
 
     - title: RSS
-      url: /mydoc_series.html
-      output: web, pdf
-
-    - title: RSS
-      url: /mydoc_series.html
+      url: /sp4_pluslet_rss.html
       output: web, pdf
 
     - title: Social Media
-      url: /mydoc_series.html
+      url: /sp4_pluslet_social_media.html
       output: web, pdf
 
     - title: Chat
-      url: /mydoc_series.html
+      url: /sp4_pluslet_chat.html
       output: web, pdf
 
     - title: WorldCat Search
-      url: /mydoc_series.html
+      url: /sp4_pluslet_worldcat_search.html
       output: web, pdf
 
     - title: Primo Catalog
-      url: /mydoc_series.html
+      url: /sp4_pluslet_primo_catalog.html
       output: web, pdf
 
     - title: Primo Articles
-      url: /mydoc_series.html
+      url: /sp4_pluslet_primo_articles.html
       output: web, pdf
 
     - title: Google Books
-      url: /mydoc_series.html
+      url: /sp4_pluslet_google_books.html
       output: web, pdf
 
     - title: Google Scholar
-      url: /mydoc_series.html
+      url: /sp4_pluslet_google_scholar.html
       output: web, pdf
 
     - title: Google Search
-      url: /mydoc_series.html
+      url: /sp4_pluslet_google_search.html
       output: web, pdf
 
     - title: Related Guides
-      url: /mydoc_series.html
+      url: /sp4_pluslet_related_guides.html
       output: web, pdf
 
     - title: TOC
-      url: /mydoc_series.html
+      url: /sp4_pluslet_toc.html
       output: web, pdf
 
-    - title: Ket to Icons
-      url: /mydoc_series.html
+    - title: Key to Icons
+      url: /sp4_pluslet_key_to_icons.html
       output: web, pdf
 
     - title: All Items / Source
-      url: /mydoc_series.html
+      url: /sp4_pluslet_all_items_by_source.html
       output: web, pdf
 
     - title: Guide Search
-      url: /mydoc_series.html
+      url: /sp4_pluslet_guide_search.html
       output: web, pdf
 
     - title: Guide Select
-      url: /mydoc_series.html
+      url: /sp4_pluslet_guide_select.html
       output: web, pdf
 
     - title: New DBs
-      url: /mydoc_series.html
+      url: /sp4_pluslet_new_dbs.html
       output: web, pdf
 
     - title: New Guides
-      url: /mydoc_series.html
+      url: /sp4_pluslet_new_guides.html
       output: web, pdf
 
     - title: Guide Collections
-      url: /mydoc_series.html
+      url: /sp4_pluslet_guide_collections.html
       output: web, pdf
 
     - title: List Guides
-      url: /mydoc_series.html
+      url: /sp4_pluslet_list_guides.html
       output: web, pdf
 
     - title: Experts
-      url: /mydoc_series.html
+      url: /sp4_pluslet_experts.html
       output: web, pdf
 
   - title: Analytics
     output: web, pdf
 
     folderitems:
-    - title: Knowledge-base layout
-      url: /mydoc_kb_layout.html
+    - title: Analytics Sitewide
+      url: /sp4_analytics_overall.html
       output: web, pdf
 
-    - title: Glossary layout
-      url: /mydoc_glossary.html
-      output: web, pdf
-
-    - title: FAQ layout
-      url: /mydoc_faq_layout.html
-      output: web, pdf
-
-    - title: Scroll layout
-      url: /mydoc_scroll.html
-      output: web, pdf
-
-    - title: Shuffle layout
-      url: /mydoc_shuffle.html
+    - title: Analytics by Guide
+      url: /sp4_analytics_by_guide.html
       output: web, pdf
 
   - title: API
     output: web, pdf
 
     folderitems:
-    - title: Knowledge-base layout
-      url: /mydoc_kb_layout.html
+    - title: SubjectsPlus API
+      url: /sp4_api_index.html
       output: web, pdf
 
   - title: Tips for Admins
     output: web, pdf
 
     folderitems:
-    - title: Knowledge-base layout
-      url: /mydoc_kb_layout.html
+    - title: Tips for Admins
+      url: /sp4_tips_for_admins_index.html
       output: web, pdf
 
   - title: Troubleshooting
@@ -327,46 +303,5 @@ entries:
     folderitems:
 
     - title: Troubleshooting
-      url: /mydoc_troubleshooting.html
+      url: /sp4_troubleshooting_index.html
       output: web, pdf
-
-  - title: Tag archives
-    output: web
-    folderitems:
-
-    - title: Tag archives overview
-      url: /mydoc_tag_archives_overview.html
-      output: web
-
-      subfolders:
-      - title: Tag archive pages
-        output: web
-        subfolderitems:
-
-        - title: Formatting pages
-          url: /tag_formatting.html
-          output: web
-
-        - title: Navigation pages
-          url: /tag_navigation.html
-          output: web
-
-        - title: Content types pages
-          url: /tag_content_types.html
-          output: web
-
-        - title: Publishing pages
-          url: /tag_publishing.html
-          output: web
-
-        - title: Special layout pages
-          url: /tag_special_layouts.html
-          output: web
-
-        - title: Collaboration pages
-          url: /tag_collaboration.html
-          output: web
-
-        - title: Troubleshooting pages
-          url: /tag_troubleshooting.html
-          output: web

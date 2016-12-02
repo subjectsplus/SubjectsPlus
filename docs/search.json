@@ -1002,6 +1002,39 @@
 
 
 {
+"title": "Analytics by Guide",
+"tags": "analytics",
+"keywords": "pluslets",
+"url": "sp4_analytics_by_guide.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Sitewide Analytics",
+"tags": "analytics",
+"keywords": "analytics",
+"url": "sp4_analytics_overall.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SubjectsPlus API",
+"tags": "api",
+"keywords": "api",
+"url": "sp4_api_index.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "Admin",
 "tags": "",
 "keywords": "",
@@ -1139,6 +1172,391 @@
 "keywords": "sp4, install",
 "url": "sp4_new_installation.html",
 "summary": "How to install SubjectsPlus 4"
+}
+,
+
+
+
+{
+"title": "SubjectsPlus Overview",
+"tags": "getting_started",
+"keywords": "overview",
+"url": "sp4_overview_about.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SubjectsPlus Getting Started",
+"tags": "getting_started",
+"keywords": "getting started",
+"url": "sp4_overview_getting_started.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SubjectsPlus Support",
+"tags": "getting_started",
+"keywords": "support",
+"url": "sp4_overview_support.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "All Items by Source Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_all_items_by_source.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Book List Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_book_list.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Chat Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_chat.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Editable Box Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_editable_box.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Experts Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_experts.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "FAQs Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_faqs.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Google Books Search Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_google_books.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Google Scholar Search Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_google_scholar.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Google Search Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_google_search.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Guide Collections Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_guide_collections.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Guide Search Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_guide_search.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Guide Select Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_guide_select.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Heading Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_heading.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Image Card Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_image_card.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Key to Icons Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_key_to_icons.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Link List Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_link_list.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "List Guides Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_list_guides.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "New Databases Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_new_dbs.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "New Guides Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_new_guides.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Primo Article Search Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_primo_articles.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Primo Catalog Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_primo_catalog.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Related Guides Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_related_guides.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "RSS Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_rss.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Social Media Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_social_media.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Subject Specialist Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_subject_specialist.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Table of Contents (TOC) Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_toc.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "uSearch Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_usearch.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Video Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_video.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "WorldCat Search Pluslet",
+"tags": "pluslets",
+"keywords": "pluslets",
+"url": "sp4_pluslet_worldcat_search.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SubjectsPlus 4.1 Release Notes",
+"tags": "releases",
+"keywords": "release",
+"url": "sp4_pluslet_.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Tips for Admins",
+"tags": "admins",
+"keywords": "",
+"url": "sp4_tips_for_admins_index.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SubjectsPlus Troubleshooting",
+"tags": "troubleshooting",
+"keywords": "",
+"url": "sp4_troubleshooting_index.html",
+"summary": ""
 }
 ,
 

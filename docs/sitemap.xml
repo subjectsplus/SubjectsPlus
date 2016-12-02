@@ -574,6 +574,24 @@
   
   
   <url>
+    <loc>http://localhost:4000/sp4_analytics_by_guide.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_analytics_overall.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_api_index.html</loc>
+  </url>
+  
+  
+  
+  <url>
     <loc>http://localhost:4000/sp4_authoring_admin.html</loc>
   </url>
   
@@ -647,6 +665,216 @@
   
   <url>
     <loc>http://localhost:4000/sp4_new_installation.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_overview_about.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_overview_getting_started.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_overview_support.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_all_items_by_source.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_book_list.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_chat.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_editable_box.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_experts.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_faqs.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_google_books.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_google_scholar.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_google_search.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_guide_collections.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_guide_search.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_guide_select.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_heading.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_image_card.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_key_to_icons.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_link_list.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_list_guides.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_new_dbs.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_new_guides.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_primo_articles.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_primo_catalog.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_related_guides.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_rss.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_social_media.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_subject_specialist.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_toc.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_usearch.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_video.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_worldcat_search.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_pluslet_.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_tips_for_admins_index.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_troubleshooting_index.html</loc>
   </url>
   
   
