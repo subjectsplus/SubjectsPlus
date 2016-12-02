@@ -532,6 +532,120 @@
   
   
   <url>
+    <loc>http://localhost:4000/sp4_admin_collections.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_admin_departments.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_admin_guides.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_admin_pluslet_config.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_admin_site_config.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_admin_sources.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_admin_users.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_admin.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_collections.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_databases_by_subject.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_faqs.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_guides.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_layouts.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_pluslets.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_records.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_tabs.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_talkback.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_authoring_videos.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/pages/sp4/sp4_cutomization_themes.html</loc>
+  </url>
+  
+  
+  
+  <url>
     <loc>http://localhost:4000/sp4_new_installation.html</loc>
   </url>
   

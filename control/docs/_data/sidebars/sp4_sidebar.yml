@@ -28,10 +28,6 @@ entries:
       output: web, pdf
       type: homepage
 
-    - title: Introduction
-      url: /sp4_new_installation.html
-      output: web, pdf
-
     - title: Supported features
       url: /mydoc_supported_features.html
       output: web, pdf
@@ -48,11 +44,11 @@ entries:
     output: web, pdf
     folderitems:
 
-    - title: 6.0 Release notes
+    - title: 4.1 Release notes
       url: /mydoc_release_notes_60.html
       output: web, pdf
 
-    - title: 5.0 Release notes
+    - title: 4.0 Release notes
       url: /mydoc_release_notes_50.html
       output: web, pdf
 
@@ -73,7 +69,7 @@ entries:
     folderitems:
 
     - title: Themes
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_customization_themes.html
       output: web, pdf
 
   - title: Admin
@@ -81,31 +77,31 @@ entries:
     folderitems:
 
     - title: Site Config
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_site_config.html
       output: web, pdf
 
     - title: Pluslet Config
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_pluslet_config.html
       output: web, pdf
 
     - title: Users
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_users.html
       output: web, pdf
 
     - title: Guides
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_guides.html
       output: web, pdf
 
     - title: Collections
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_collections.html
       output: web, pdf
 
     - title: Departments
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_departments.html
       output: web, pdf
 
     - title: Sources
-      url: /mydoc_about_ruby_gems_etc.html
+      url: /sp4_admin_sources.html
       output: web, pdf
 
   - title: Authoring
@@ -113,47 +109,47 @@ entries:
     folderitems:
 
     - title: Records
-      url: /mydoc_pages.html
+      url: /sp4_authoring_records.html
       output: web, pdf
 
     - title: Guides
-      url: /mydoc_posts.html
+      url: /sp4_authoring_guides.html
       output: web, pdf
 
     - title: Tabs
-      url: /mydoc_posts.html
+      url: /sp4_authoring_tabs.html
       output: web, pdf
 
     - title: Layouts
-      url: /mydoc_posts.html
+      url: /sp4_authoring_layouts.html
       output: web, pdf
 
     - title: Pluslets Boxes
-      url: /mydoc_lists.html
+      url: /sp4_authoring_pluslets.html
       output: web, pdf
 
     - title: Collections
-      url: /mydoc_collections.html
+      url: /sp4_authoring_collections.html
       output: web, pdf
 
     - title: Databases by Subject
-      url: /mydoc_collections.html
+      url: /sp4_authoring_databases_by_subject.html
       output: web, pdf
 
     - title: FAQs Tab
-      url: /mydoc_conditional_logic.html
+      url: /sp4_authoring_faqs.html
       output: web, pdf
 
     - title: Talkback Tab
-      url: /mydoc_content_reuse.html
+      url: /sp4_authoring_talkback.html
       output: web, pdf
 
     - title: Videos
-      url: /mydoc_webstorm_text_editor.html
+      url: /sp4_authoring_videos.html
       output: web, pdf
 
     - title: Admin
-      url: /mydoc_webstorm_text_editor.html
+      url: /sp4_authoring_admin.html
       output: web, pdf
 
     - title: Docs by Jekyll

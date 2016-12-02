@@ -925,6 +925,215 @@
 
 
 {
+"title": "Collections",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_collections.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Departments",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_departments.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Guides",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_guides.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Pluslets Config",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_pluslet_config.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Site Config",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_site_config.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Sources",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_sources.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Users",
+"tags": "",
+"keywords": "",
+"url": "sp4_admin_users.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Admin",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_admin.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Collections",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_collections.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Databases by Subject",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_databases_by_subject.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "FAQs",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_faqs.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Guides",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_guides.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Layouts",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_layouts.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Pluslets / Boxes",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_pluslets.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Records",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_records.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Tabs",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_tabs.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Talkback",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_talkback.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "Videos",
+"tags": "",
+"keywords": "",
+"url": "sp4_authoring_videos.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "SubjectsPlus Custom Themes",
+"tags": "",
+"keywords": "",
+"url": "pagessp4sp4_cutomization_themes.html",
+"summary": ""
+}
+,
+
+
+
+{
 "title": "SubjectsPlus 4 New Installation",
 "tags": "installationgetting_started",
 "keywords": "sp4, install",
