@@ -69,8 +69,9 @@ switch ($_REQUEST["type"]) {
           $rupdate = $db->exec($qupdate);
 
           $video_idq = "SELECT video_id FROM video WHERE foreign_id =" . $db->quote($our_id) . "LIMIT 1";
-          $video_q_result = $db->query($video_idq)[0];
-          $video_id = $video_q_result[0];
+          $video_q_result = $db->query($video_idq);
+          $video_q_result_array = $video_q_result[0];
+          $video_id = $video_q_result_array[0];
 
 
       }
