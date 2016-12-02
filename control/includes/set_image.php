@@ -43,10 +43,19 @@ if (is_numeric($_REQUEST["video_id"])) {
 $dir_dest = "../../assets/images/video_thumbs/";
 $dir_pics = (isset($_GET['pics']) ? $_GET['pics'] : $dir_dest);
 
+$thumbnail_path = '';
+
+if (@fopen($dir_dest . $video_id . "_medium.jpg", "r")) {
+    $thumbnail_path = $dir_dest . $video_id . "_medium.jpg";
+}else if (@fopen($dir_dest . $video_id . "_small.jpg", "r")){
+    $thumbnail_path = $dir_dest . $video_id . "_small.jpg";
+}else{
+    $thumbnail_path = $dir_dest . "placeholder/_medium.jpg";
+}
 
 $original_photo = "
 <div class=\"box no_overflow\" id=\"original_photo\">
-<p><img src=\"../../assets/images/video_thumbs/" . $video_id . "_medium.jpg\" class=\"staff_photo\" align=\"left\"   />" . _("Current Thumbnail . . . boooring.") . "</p>
+<p><img src=\"" . $thumbnail_path . "\" class=\"staff_photo\" align=\"left\"   />" . _("Current Thumbnail . . . boooring.") . "</p>
 </div>";
 
 
@@ -125,7 +134,6 @@ print "<div id=\"maincontent\">
 <h2 class=\"bw_head\">" . _("Update Image") . "</h2>";
 print $upload_box;
 print $original_photo;
-print $result;
 print "</div>";
 
 include("../includes/footer.php");
