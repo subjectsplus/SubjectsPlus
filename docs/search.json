@@ -405,7 +405,7 @@
 "title": "Scroll layout",
 "tags": "special_layouts",
 "keywords": "json, scrolling, scrollto, jquery plugin",
-"url": "mydoc_scroll.html",
+"url": "jsmydoc_scroll.html",
 "summary": "This page demonstrates how you the integration of a script called ScrollTo, which is used here to link definitions of a JSON code sample to a list of definitions for that particular term. The scenario here is that the JSON blocks are really long, with extensive nesting and subnesting, which makes it difficult for tables below the JSON to adequately explain the term in a usable way."
 }
 ,
@@ -416,7 +416,7 @@
 "title": "Scroll layout",
 "tags": "special_layouts",
 "keywords": "json, scrolling, scrollto, jquery plugin",
-"url": "jsmydoc_scroll.html",
+"url": "mydoc_scroll.html",
 "summary": "This page demonstrates how you the integration of a script called ScrollTo, which is used here to link definitions of a JSON code sample to a list of definitions for that particular term. The scenario here is that the JSON blocks are really long, with extensive nesting and subnesting, which makes it difficult for tables below the JSON to adequately explain the term in a usable way."
 }
 ,
@@ -919,6 +919,30 @@
 
 
 
+
+
+
+
+
+{
+"title": "SubjectsPlus 4 New Installation",
+"tags": "installationgetting_started",
+"keywords": "sp4, install",
+"url": "sp4_new_installation.html",
+"summary": "How to install SubjectsPlus 4"
+}
+,
+
+
+
+{
+"title": "SubjectsPlus Upgrade",
+"tags": "getting_startedinstallation",
+"keywords": "upgrade SubjectsPlus",
+"url": "sp4_upgrade.html",
+"summary": "How to upgrade from an earlier version of SubjectsPlus"
+}
+,
 
 
 

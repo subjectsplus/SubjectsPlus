@@ -28,7 +28,7 @@ exclude:
   - .gitignore
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_subject_line: Jekyll documentation theme
+feedback_subject_line: SubjectsPlus documentation
 
 #feedback_email: tomjohnson1492@gmail.com
 # used as a contact email for the Feedback link in the top navigation bar
@@ -92,6 +92,7 @@ defaults:
 
 sidebars:
 - home_sidebar
+- sp4_sidebar
 - mydoc_sidebar
 - product1_sidebar
 - product2_sidebar

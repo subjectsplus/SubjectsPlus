@@ -244,13 +244,13 @@
   
   
   <url>
-    <loc>http://localhost:4000/mydoc_scroll.html</loc>
+    <loc>http://localhost:4000/js/mydoc_scroll.html</loc>
   </url>
   
   
   
   <url>
-    <loc>http://localhost:4000/js/mydoc_scroll.html</loc>
+    <loc>http://localhost:4000/mydoc_scroll.html</loc>
   </url>
   
   
@@ -526,6 +526,20 @@
   
   
   
+  
+  
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_new_installation.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>http://localhost:4000/sp4_upgrade.html</loc>
+  </url>
   
   
   
