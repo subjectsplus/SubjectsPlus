@@ -19,6 +19,7 @@ class Video {
   private $_date;
   private $_display;
   private $_vtags;
+  private $_debug;
 
   public function __construct($video_id="", $flag="") {
 
@@ -205,8 +206,13 @@ $guide_string
 // Thumbnail
 ////////////////////
 
-
-    $this->_vid_loc = $AssetPath . "images/video_thumbs/" . $this->_video_id . "_medium.jpg";
+      if (@fopen($AssetPath . "images/video_thumbs/" . $this->_video_id . "_medium.jpg", "r")) {
+          $this->_vid_loc = $AssetPath . "images/video_thumbs/" . $this->_video_id . "_medium.jpg";
+      }else if (@fopen($AssetPath . "images/video_thumbs/" . $this->_video_id . "_small.jpg", "r")){
+          $this->_vid_loc = $AssetPath . "images/video_thumbs/" . $this->_video_id . "_small.jpg";
+      }else{
+          $this->_vid_loc = $AssetPath . "images/video_thumbs/placeholder/_medium.jpg";
+      }
     $thumbnail = "<img src=\"" . $this->_vid_loc . "\" alt=\"" . _("Thumbnail") . "\" />";
 
     if ($this->_video_id != "") {
@@ -247,9 +253,7 @@ print "<div class=\"pure-u-1-3\">
       </div>
       <div class=\"pluslet_body\">
             <label for=\"date\">" . _("Create Date") . "</label>
-            <input type=\"text\" name=\"date\" value=\"" . $this->_date . "\" />
-            <span class=\"smaller\">" . ("YYYY-MM-DD") . "</span>
-            <br /><br />
+            <input type=date name=\"date\" min=2010-09-08 value=\"" . $this->_date . "\" />
             $is_live
             </div></div>
             </form>";
@@ -304,7 +308,11 @@ print "<div class=\"pure-u-1-3\">
     // add to vid table
     /////////////////////
       $db = new Querier;
-      
+
+      if (empty($this->_date)){
+          $this->_date = date("m/d/y");
+      }
+
     $qInsertVid = "INSERT INTO video (title, description, source, foreign_id, duration, date, display, vtags) VALUES (" .
 	  $db->quote(scrubData($this->_title, 'text')) . ","  .
       $db->quote(scrubData($this->_description, 'richtext')) . "," .
