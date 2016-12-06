@@ -30,8 +30,10 @@ class Dropdown {
     public function display() {
         $array_type = "";
 
-        if (is_array($this->_optionsArray[0])) {
-            $array_type = "multi";
+        if(isset($this->_optionsArray[0])) {
+            if (is_array($this->_optionsArray[0])) {
+                $array_type = "multi";
+            }
         }
 
         if ($this->_dropdown_type == "multi") {

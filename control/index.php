@@ -126,7 +126,7 @@ $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
 
 ?>
 
-    <div class="pure-u-2-3">
+    <div class="pure-u-2-3" <?php if ($staff_short_forms == null) { echo "style=\"display:none;\""; } ?>>
 	<div class="pluslet no_overlflow">
 	    <div class="titlebar">
 		<div class="titlebar_text">Your Guide Views Last Month</div>

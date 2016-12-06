@@ -66,17 +66,20 @@ if (isset($_GET["tag"])) {
 			
 		$pretty_tag = "%" . ucfirst($_GET["tag"]) . "%";
 
-		$db = new Querier;
-		$connection = $db->getConnection();
-		$statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
+        if (!empty($pretty_tag)) {
+
+            $db = new Querier;
+            $connection = $db->getConnection();
+            $statement = $connection->prepare("select distinct video_id, title, description, source, foreign_id, duration, date
         FROM video
         WHERE display = '1'
 	    and vtags like :tag
   		ORDER BY date");
 
-		$statement->bindParam(":tag", $pretty_tag);
-		$statement->execute();
-		$r = $statement->fetchAll();
+            $statement->bindParam(":tag", $pretty_tag);
+            $statement->execute();
+            $r = $statement->fetchAll();
+        }
 
 	}
 }
@@ -112,16 +115,26 @@ if ($num_rows) {
     // prepare the location
     switch ($myrow["source"]) {
       case "Vimeo":
-        $location = "http://player.vimeo.com/video/" . $myrow["foreign_id"];
+        $location = "https://player.vimeo.com/video/" . $myrow["foreign_id"];
         break;
       case "YouTube":
-        $location = "http://www.youtube.com/embed/" . $myrow["foreign_id"];
+        $location = "https://www.youtube.com/embed/" . $myrow["foreign_id"];
         break;
     }
 
     $thumb_loc = $AssetPath . "images/video_thumbs/" . $item_id;
-    $thumbnail_medium = "<img src=\"" . $thumb_loc . "_medium.jpg\" alt=\"" . $item_title . "\" class=\"ajax\" href=\"$location\" />"; // hard-coded width bc youtube medium is BIIIG
-    $thumbnail_small = "<img src=\"" . $thumb_loc . "_small.jpg\" alt=\"" . $item_title . "\"  />";
+      $thumbnail_path = '';
+
+      if (@fopen($thumb_loc . "_medium.jpg", "r")) {
+          $thumbnail_path = $thumb_loc . "_medium.jpg";
+      }else if (@fopen($thumb_loc . "_small.jpg", "r")){
+          $thumbnail_path = $thumb_loc . "_small.jpg";
+      }else{
+          $thumbnail_path = $AssetPath . "images/video_thumbs/placeholder/_medium.jpg";
+      }
+
+    $thumbnail_medium = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\" class=\"ajax\" href=\"$location\" />"; // hard-coded width bc youtube medium is BIIIG
+    $thumbnail_small = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\"  />";
     $date = $myrow["date"];
 
     // convert seconds into something more friendly

@@ -94,6 +94,7 @@ include("../includes/footer.php");
     });
 
     $('a[id*=ingest]').click(function() {
+      debugger;
       var ingest_id = $(this).attr("id").split("---");
       var data_bits = $("#data-" + ingest_id[1]).html();
       var useful_bits = data_bits.split("||");
@@ -247,7 +248,7 @@ function seekVids($source, $vid_user_name, $start_index=1, $vid_count=0) {
   switch ($source) {
     case "Vimeo":
       // API endpoint
-      $api_endpoint = 'http://vimeo.com/api/v2/' . $vid_user_name;
+      $api_endpoint = 'https://vimeo.com/api/v2/' . $vid_user_name;
       $vid_data = $api_endpoint . "/videos.xml";
       if ($start_index == 2 || $start_index == 3) {
         $vid_data .= "?page=$start_index";

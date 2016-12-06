@@ -53,10 +53,13 @@ if (isset($_POST['action']) && ($_POST['action'] == 'password')) {
     	if( $record->correctPassword( $_POST[ 'password' ] ) )
     	{
 	    	$pass_result = $record->updatePassword($_POST["password"]);
-	        if ($pass_result == TRUE) {
+	        if ($pass_result == 1) {
 	            $feedback = "<div class=\"box\">" . _("Password updated.  Close this box to continue.") . "</div>";
 	            $password_box = "";
-	        } else {
+	        }else if ($pass_result == 2){
+                $feedback = "<div class=\"box\">" . _("Please try a different password.") . "</div>";
+            }
+	        else {
 	            $feedback = "<div class=\"box\">" . _("There was a problem.  Contact the admin.") . "</div>";
 	        }
     	}else{

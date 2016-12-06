@@ -114,8 +114,18 @@ if ($num_rows) {
     }
 
     $thumb_loc = $AssetPath . "images/video_thumbs/" . $item_id;
-    $thumbnail_medium = "<img src=\"" . $thumb_loc . "_medium.jpg\" alt=\"" . $item_title . "\" class=\"ajax\" href=\"$location\" />"; // hard-coded width bc youtube medium is BIIIG
-    $thumbnail_small = "<img src=\"" . $thumb_loc . "_small.jpg\" alt=\"" . $item_title . "\"  />";
+      $thumbnail_path = '';
+
+      if (@fopen($thumb_loc . "_medium.jpg", "r")) {
+          $thumbnail_path = $thumb_loc . "_medium.jpg";
+      }else if (@fopen($thumb_loc . "_small.jpg", "r")){
+          $thumbnail_path = $thumb_loc . "_small.jpg";
+      }else{
+          $thumbnail_path = $AssetPath . "images/video_thumbs/placeholder/_medium.jpg";
+      }
+
+      $thumbnail_medium = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\" class=\"ajax\" href=\"$location\" />"; // hard-coded width bc youtube medium is BIIIG
+      $thumbnail_small = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\"  />";
     $date = $myrow["date"];
 
     // convert seconds into something more friendly
