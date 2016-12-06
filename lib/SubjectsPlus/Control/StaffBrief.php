@@ -439,7 +439,11 @@ $headshot
 
         $r = $db->query($q);
 
-        if ($r) {
+        $error = $db->errorInfo();
+
+        if ($r == 0 && $error[0] === '00000'){
+            return 2;
+        }else if ($r) {
             $updateChangeTable = changeMe("staff", "update", $this->_staff_id, "password update", $_SESSION['staff_id']);
 
             return TRUE;
