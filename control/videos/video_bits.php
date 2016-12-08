@@ -36,16 +36,15 @@ switch ($_REQUEST["type"]) {
       $rcheck = $db->query($qcheck);
       
       if (count($rcheck) == 0) {
-        $qinsert = "INSERT INTO video (title, description, source, foreign_id, duration, date, display)
-        values(\"" . $_POST["title"] . "\", \""  
-        . $_POST["description"] . "\", \"" 
-        . $_POST["source"] . "\", \""         
-        . $_POST["foreign_id"] . "\", \"" 
-        . $_POST["duration"] . "\", \""         
-        . $_POST["upload_date"] . "\",
-          1                
-        )";
-        
+        $qinsert = "INSERT INTO video (title, description, source, foreign_id, duration, date, display) VALUES (\"" .
+            $_POST["title"] . "\",\""  .
+            $_POST["description"] . "\",\"" .
+            $_POST["source"] . "\",\"" .
+            $_POST["foreign_id"] . "\",\"" .
+            $_POST["duration"] . "\",\"" .
+            date("Y-m-d", strtotime($_POST["upload_date"])) . "\",\"" .
+            1 . "\")";
+
        //   print_r ($qinsert);
         $rinsert = $db->exec($qinsert);
         $video_id = $db->last_id();
@@ -55,22 +54,26 @@ switch ($_REQUEST["type"]) {
         // Do an update
           $db = new Querier;
 
-        
-          
-        $qupdate = "UPDATE video 
-          SET title = " . $db->quote(scrubData($_POST['title'])) . ",
-          description = " . $db->quote(scrubData($_POST['description'], 'richtext')) . ",
-          source = " . $db->quote(scrubData($_POST['source'])) . " ,
-          foreign_id = " . $db->quote(scrubData($_POST['foreign_id'])) . ",
-          duration = " . $db->quote(scrubData($_POST['duration'])) . " ,
-          date = " .  $db->quote(scrubData($_POST['upload_date'])) . " ,
-          WHERE foreign_id = " . $our_id ;
-         
+
+          $qupdate = "UPDATE video SET title = " .
+              $db->quote(scrubData($_POST['title'])) .
+              ",description = " . $db->quote(scrubData($_POST['description'], 'richtext')) .
+              ",source = " . $db->quote(scrubData($_POST['source'])) .
+              ",foreign_id = " . $db->quote(scrubData($_POST['foreign_id'])) .
+              ",duration = " . $db->quote(scrubData($_POST['duration'])) .
+              ",date = " . $db->quote(scrubData(date("Y-m-d", strtotime($_POST["upload_date"])))) .
+              " WHERE foreign_id = " . $db->quote($our_id);
+
           //print_r ($qupdate);
-    
-        $rupdate = $db->exec($qupdate);
-        $video_id = $rupdate[0];
-          
+
+          $rupdate = $db->exec($qupdate);
+
+          $video_idq = "SELECT video_id FROM video WHERE foreign_id =" . $db->quote($our_id) . "LIMIT 1";
+          $video_q_result = $db->query($video_idq);
+          $video_q_result_array = $video_q_result[0];
+          $video_id = $video_q_result_array[0];
+
+
       }
       // insert/update image
       

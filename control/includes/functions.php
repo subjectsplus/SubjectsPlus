@@ -187,6 +187,7 @@ function curl_get($url) {
   $curl = curl_init($url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
   curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+  curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, false);
 
   //added @ symbol to not display if curlopt_followlocation option cannot be set.
   //This function still works without it.
