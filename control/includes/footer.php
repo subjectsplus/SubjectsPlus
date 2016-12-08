@@ -4,9 +4,10 @@
 <!--end wrap div -->
 </div>
 
-
+<?php global $AssetPath; ?>
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
-<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>]
+<script type="text/javascript" src="<?php echo $AssetPath; ?>js/select2/select2.min.js"></script>
+
 <style>
     .select2-container {
         width: 65%;

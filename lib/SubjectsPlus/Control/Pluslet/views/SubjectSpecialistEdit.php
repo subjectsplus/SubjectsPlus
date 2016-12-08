@@ -84,14 +84,14 @@
 
 <?php endforeach; ?>
 
-    <textarea id="editor1" name="editor1"></textarea>
+    <textarea id="editor-specialist" name="editor-specialist"></textarea>
 
 
     <script>
         var ss = subjectSpecialist();
         ss.init();
 
-        if(CKEDITOR.instances['editor1']) {
-            CKEDITOR.instances['editor1'].setData('<?php echo $this->_body; ?>');
+        if(CKEDITOR.instances['editor-specialist']) {
+            CKEDITOR.instances['editor-specialist'].setData('<?php echo $this->_body; ?>');
         }
     </script>
