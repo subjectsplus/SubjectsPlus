@@ -110,6 +110,12 @@
 
 **Merged pull requests:**
 
+- Merge pull request \#1041 from subjectsplus/fix-release-cgb [\#1042](https://github.com/subjectsplus/SubjectsPlus/pull/1042) ([cgb37](https://github.com/cgb37))
+- Fix release cgb [\#1041](https://github.com/subjectsplus/SubjectsPlus/pull/1041) ([cgb37](https://github.com/cgb37))
+- Fix release cgb [\#1040](https://github.com/subjectsplus/SubjectsPlus/pull/1040) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#1039](https://github.com/subjectsplus/SubjectsPlus/pull/1039) ([cgb37](https://github.com/cgb37))
+- Final merge before release [\#1038](https://github.com/subjectsplus/SubjectsPlus/pull/1038) ([cgb37](https://github.com/cgb37))
+- update change log for release [\#1037](https://github.com/subjectsplus/SubjectsPlus/pull/1037) ([cgb37](https://github.com/cgb37))
 - Merge staging into sp4-dev [\#1036](https://github.com/subjectsplus/SubjectsPlus/pull/1036) ([abelfacenda](https://github.com/abelfacenda))
 - \[a9ba867\] Fixed password message			 [\#1034](https://github.com/subjectsplus/SubjectsPlus/pull/1034) ([abelfacenda](https://github.com/abelfacenda))
 - merging staging into sp4-dev [\#1033](https://github.com/subjectsplus/SubjectsPlus/pull/1033) ([abelfacenda](https://github.com/abelfacenda))
