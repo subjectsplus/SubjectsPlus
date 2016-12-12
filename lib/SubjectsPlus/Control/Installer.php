@@ -353,6 +353,9 @@ class Installer
   `subject_short_form` varchar(200) DEFAULT NULL,
   `event_type` varchar(200) DEFAULT NULL,
   `tab_name` varchar(200) DEFAULT NULL,
+  `link_title` varchar(200) DEFAULT NULL,
+  `in_tab` VARCHAR(200) DEFAULT NULL,
+  `in_pluslet` VARCHAR(200) DEFAULT NULL,
   `link_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`stats_id`)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8",
