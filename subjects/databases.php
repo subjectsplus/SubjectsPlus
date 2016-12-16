@@ -366,6 +366,21 @@ include("includes/footer.php");
           window.navigator.msSaveBlob(blobObject, 'myFavoriteDatabasesList');
       }
 
+      function saveOnDisk (){
+          var favoriteDatabases = localStorage.favoriteDatabases;
+          uriContent = "data:application/octet-stream," + encodeURIComponent(favoriteDatabases);
+          var link = document.createElement('a');
+          if (typeof link.download === 'string') {
+              link.href = uriContent;
+              link.setAttribute('download', "myFavoriteDatabasesList");
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+          } else {
+              window.open(uriContent);
+          }
+      }
+
       $("#exportFavoriteDatabases").click(function () {
               if (typeof(Storage) !== "undefined") {
 
@@ -373,24 +388,7 @@ include("includes/footer.php");
                       if (msieversion() != 0) {
                           saveOnInternetExplorer();
                       }else{
-                          var favoriteDatabases = localStorage.favoriteDatabases;
-                          uriContent = "data:application/octet-stream," + encodeURIComponent(favoriteDatabases);
-                          var link = document.createElement('a');
-                          if (typeof link.download === 'string') {
-                              link.href = uriContent;
-                              link.setAttribute('download', "myFavoriteDatabasesList");
-
-                              //Firefox requires the link to be in the body
-                              document.body.appendChild(link);
-
-                              //simulate click
-                              link.click();
-
-                              //remove the link when done
-                              document.body.removeChild(link);
-                          } else {
-                              window.open(uriContent);
-                          }
+                          saveOnDisk();
                       }
                   }
               }
@@ -401,16 +399,6 @@ include("includes/footer.php");
               $('#favoriteDatabasesListInput').trigger('click');
           }
       )
-
-      function detectOS (){
-          var OSName="Unknown OS";
-          if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
-          if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
-          if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
-          if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
-          return OSName;
-      }
-
 
       // load favorite list from a File on user's computer
       $("#favoriteDatabasesListInput").change(function (event) {
