@@ -162,6 +162,11 @@ if (isset($_POST["searchterm"])) {
 }
 
 $intro .= "<br class=\"clear-both\" />
+<div id='favoriteDatabasesList'>
+<a id='exportFavoriteDatabases' download='myFavoriteDatabasesList'>Save favorite databases list</a>
+<a id='importFavoriteDatabases'>Restore favorite databases list</a>
+<input id=\"favoriteDatabasesListInput\" type=\"file\" style=\"display: none;\" />
+</div>
 <div style=\"float: right; padding: 0 1.5em .5em 0;\"><a id=\"expander\" style=\"cursor: pointer;\">expand all descriptions</a></div>";
 
 // Create our table of databases object
@@ -276,50 +281,224 @@ include("includes/footer.php");
 
 <script type="text/javascript" language="javascript">
 
-  $(document).ready(function(){
-  
-/*  We use this at UM to track database clicks as events in GA
-    $(".trackContainer a").click(function() {
-      _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
-      // alert($(this).text());
-    });
-*/
-    var stripeholder = ".zebra";
-    // add rowstriping
-    stripeR();
+  $(document).ready(function() {
 
-
-    $("[id*=show]").livequery("change", function() {
-
-      var showtype_id = $(this).attr("id").split("-");
-      //alert("u clicked: " + showtype_id[1]);
-      unStripeR();
-      $(".type-" + showtype_id[1]).toggle();
+      /*  We use this at UM to track database clicks as events in GA
+       $(".trackContainer a").click(function() {
+       _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
+       // alert($(this).text());
+       });
+       */
+      var stripeholder = ".zebra";
+      // add rowstriping
       stripeR();
+      setFavoriteDatabases();
+      showFavoriteDatabases();
 
-    });
+      $("[id*=show]").livequery("change", function () {
 
-    // show db details
-    $("span[id*=bib-]").livequery("click", function() {
-      var bib_id = $(this).attr("id").split("-");
-      $(this).parent().parent().find(".list_bonus").toggle()
-    });
+          var showtype_id = $(this).attr("id").split("-");
+          //alert("u clicked: " + showtype_id[1]);
+          unStripeR();
+          $(".type-" + showtype_id[1]).toggle();
+          stripeR();
 
-    // show all db details
-    $("#expander").click(function() {
-      $(".list_bonus").toggle()
-    })
+      });
 
-    function stripeR(container) {
-      $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
-      $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
-    }
+      // show db details
+      $("span[id*=bib-]").livequery("click", function () {
+          var bib_id = $(this).attr("id").split("-");
+          $(this).parent().parent().find(".list_bonus").toggle()
+      });
 
-    function unStripeR () {
-      $(".zebra").removeClass("evenrow");
-      $(".zebra").removeClass("oddrow");
-    }
+      // show all db details
+      $("#expander").click(function () {
+          $(".list_bonus").toggle()
+      })
+
+      function stripeR(container) {
+          $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
+          $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
+      }
+
+      function unStripeR() {
+          $(".zebra").removeClass("evenrow");
+          $(".zebra").removeClass("oddrow");
+      }
+
+      //add database to favorites using HTML5 localStorage
+      $(".favorite-database-icon").click(function () {
+          if (typeof(Storage) !== "undefined") {
+              var databaseName = $(this).parent().parent().find("a").text();
+              var databaseUrl = $(this).parent().parent().find("a").attr('href');
+              if ($(this).hasClass("fa-star-o")) {
+                  //mark as favorite
+                  markAsFavorite(this);
+                  if (!$.isEmptyObject(localStorage.favoriteDatabases)) {
+                      saveFavoriteDatabaseToLocalStorage(databaseName, databaseUrl);
+                  } else {
+                      localStorage.favoriteDatabases = "[]";
+                      saveFavoriteDatabaseToLocalStorage(databaseName, databaseUrl);
+                  }
+              } else {
+                  //unmark as favorite
+                  $(this).removeClass("fa-star");
+                  $(this).addClass("fa-star-o");
+                  deleteFavoriteDatabaseFromLocalStorage(databaseName, databaseUrl);
+              }
+          }
+      })
+
+      function msieversion()
+      {
+          var ua = window.navigator.userAgent
+          var msie = ua.indexOf ( "MSIE " )
+
+          if ( msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer, return version number
+              return parseInt (ua.substring (msie+5, ua.indexOf (".", msie )))
+          else                 // If another browser, return 0
+              return 0
+
+      }
+
+      function saveOnInternetExplorer (){
+          var blobObject = new Blob([localStorage.favoriteDatabases]);
+          window.navigator.msSaveBlob(blobObject, 'myFavoriteDatabasesList');
+      }
+
+      $("#exportFavoriteDatabases").click(function () {
+              if (typeof(Storage) !== "undefined") {
+
+                  if (!$.isEmptyObject(localStorage.favoriteDatabases)) {
+                      if (msieversion() != 0) {
+                          saveOnInternetExplorer();
+                      }else{
+                          var favoriteDatabases = localStorage.favoriteDatabases;
+                          uriContent = "data:application/octet-stream," + encodeURIComponent(favoriteDatabases);
+                          var link = document.createElement('a');
+                          if (typeof link.download === 'string') {
+                              link.href = uriContent;
+                              link.setAttribute('download', "myFavoriteDatabasesList");
+
+                              //Firefox requires the link to be in the body
+                              document.body.appendChild(link);
+
+                              //simulate click
+                              link.click();
+
+                              //remove the link when done
+                              document.body.removeChild(link);
+                          } else {
+                              window.open(uriContent);
+                          }
+                      }
+                  }
+              }
+          }
+      )
+
+      $("#importFavoriteDatabases").click(function () {
+              $('#favoriteDatabasesListInput').trigger('click');
+          }
+      )
+
+      function detectOS (){
+          var OSName="Unknown OS";
+          if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+          if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+          if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+          if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+          return OSName;
+      }
 
 
-  });
+      // load favorite list from a File on user's computer
+      $("#favoriteDatabasesListInput").change(function (event) {
+              var files = event.target.files;
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  try {
+                      var favoriteDatabases = JSON.parse(e.target.result);
+
+                      for (var i = 0, len = favoriteDatabases.length; i < len; i++) {
+                          var objectLength = Object.keys(favoriteDatabases[i]).length;
+                          if (objectLength != 2){
+                              throw 'error';
+                          }else if (!('databaseName' in favoriteDatabases[i]) && !('databaseUrl' in favoriteDatabases[i])){
+                              throw 'error';
+                          }
+                      }
+
+                      localStorage.favoriteDatabases = JSON.stringify(favoriteDatabases);
+                      location.reload();
+                  } catch(e) {
+                      alert('The favorite databases list file is either corrupted or wrong!'); // error in the above string (in this case, yes)!
+                  }
+              }
+              reader.readAsText(files[0]);
+          }
+      );
+
+      function saveFavoriteDatabaseToLocalStorage(databaseName, databaseUrl) {
+          var favoriteDatabases = JSON.parse(localStorage.favoriteDatabases);
+          favoriteDatabases.push({"databaseName": databaseName, "databaseUrl": databaseUrl});
+          localStorage.favoriteDatabases = JSON.stringify(favoriteDatabases);
+      }
+
+      function deleteFavoriteDatabaseFromLocalStorage(databaseName, databaseUrl) {
+          var toDelete = {"databaseName": databaseName, "databaseUrl": databaseUrl};
+          var favoriteDatabases = JSON.parse(localStorage.favoriteDatabases);
+          var position = -1;
+          for (var i = 0, len = favoriteDatabases.length; i < len; i++) {
+              if (favoriteDatabases[i].databaseName == toDelete.databaseName && favoriteDatabases[i].databaseUrl == toDelete.databaseUrl) {
+                  position = i;
+                  break;
+              }
+          }
+          if (position != -1) {
+              favoriteDatabases.splice(position, 1);
+          }
+          localStorage.favoriteDatabases = JSON.stringify(favoriteDatabases);
+      }
+
+      function setFavoriteDatabases() {
+          if (!$.isEmptyObject(localStorage.favoriteDatabases)) {
+              var favoriteDatabases = JSON.parse(localStorage.favoriteDatabases);
+              $(".favorite-database-icon").each(function () {
+                  var databaseName = $(this).parent().parent().find("a").text();
+                  var databaseUrl = $(this).parent().parent().find("a").attr('href');
+                  for (var i = 0, len = favoriteDatabases.length; i < len; i++) {
+                      if (favoriteDatabases[i].databaseName == databaseName && favoriteDatabases[i].databaseUrl == databaseUrl) {
+                          markAsFavorite(this);
+                          break;
+                      }
+                  }
+              })
+          }
+      }
+
+      function markAsFavorite(button) {
+          $(button).removeClass("fa-star-o");
+          $(button).addClass("fa-star");
+      }
+
+      function showFavoriteDatabases() {
+          var favoriteDatabasesListDiv = document.getElementById('favoriteDatabasesList');
+          var list = document.createElement('ul');
+          if (!$.isEmptyObject(localStorage.favoriteDatabases)) {
+              var favoriteDatabases = JSON.parse(localStorage.favoriteDatabases);
+              for (var i = 0, len = favoriteDatabases.length; i < len; i++) {
+                  var listItem = document.createElement('li');
+                  var anchor = document.createElement('a');
+                  anchor.setAttribute('href', favoriteDatabases[i].databaseUrl);
+                  anchor.appendChild(document.createTextNode(favoriteDatabases[i].databaseName));
+
+                  listItem.appendChild(anchor);
+                  list.appendChild(listItem);
+              }
+              favoriteDatabasesListDiv.appendChild(list);
+          }
+      }
+  })
+  ;
 </script>
