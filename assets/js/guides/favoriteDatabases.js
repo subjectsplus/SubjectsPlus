@@ -56,7 +56,7 @@ function favoriteDatabasesList() {
         },
         saveOnDisk: function () {
             var favoriteDatabases = localStorage.favoriteDatabases;
-            uriContent = "data:application/octet-stream," + encodeURIComponent(favoriteDatabases);
+            var uriContent = "data:application/octet-stream," + encodeURIComponent(favoriteDatabases);
             var link = document.createElement('a');
             if (typeof link.download === 'string') {
                 link.href = uriContent;
