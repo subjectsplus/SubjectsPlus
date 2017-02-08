@@ -29,8 +29,8 @@ $page_description = _("Share your comments and suggestions about the library");
 $page_keywords = _("library, comments, suggestions, complaints");
 
 // Skill testing question + answer
-$stk = _("5 times 5 = ");
-$stk_answer = "25";
+$stk = _("8 plus 5 = ");
+$stk_answer = "13";
 
 // Show headshots
 $show_talkback_face = 1;
