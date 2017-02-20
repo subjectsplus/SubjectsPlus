@@ -348,21 +348,21 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                   <!-- begin lib/cols mega menu -->
                   <div class="mega_child mega-lg mega-right">
                         <ul>
-                            <li><a href="http://arc.miami.edu/the-school/facilities/architecture-reference-library">Architecture</a></li>
-                            <li><a href="http://www.bus.miami.edu/research-library/">Business</a></li>
+                            <li><a href="http://library.miami.edu/architecture/">Architecture</a></li>
+                            <li><a href="http://library.miami.edu/business/">Business</a></li>
                             <li><a href="http://www.law.miami.edu/library/">Law</a></li>
-                            <li><a href="http://www.library.miami.edu/rsmaslib/">Marine</a></li>
+                            <li><a href="http://library.miami.edu/rsmaslib/">Marine</a></li>
                             <li><a href="http://calder.med.miami.edu/">Medical</a></li>
                             <li><a href="http://library.miami.edu/musiclib/">Music</a></li>
                             <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/">Richter (interdisciplinary)</a></li>
                         </ul>
                         <ul>
-                            <li><a href="http://www.library.miami.edu/chc/">Cuban Heritage Collection</a></li>
-                            <li><a href="http://www.library.miami.edu/specialcollections/">Special Collections</a></li>
+                            <li><a href="http://library.miami.edu/chc/">Cuban Heritage Collection</a></li>
+                            <li><a href="http://library.miami.edu/specialcollections/">Special Collections</a></li>
                             <li><a href="http://merrick.library.miami.edu/">UM Digital Collections</a></li>
                             <li><a href="http://library.miami.edu/oral-histories/">UM Oral Histories</a></li>
                             <li><a href="http://scholarlyrepository.miami.edu/">UM Scholarly Repository</a></li>
-                            <li><a href="http://www.library.miami.edu/universityarchives/">University Archives</a></li>
+                            <li><a href="http://library.miami.edu/universityarchives/">University Archives</a></li>
                         </ul>
                       <div class="mega_feature">
                         <img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" alt="RSMAS" />
@@ -370,7 +370,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                       </div>
                       <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>,
                         <!--<a href="<?php //print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a>,-->
-                        <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Suggest a Purchase</a></div>
+                        <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Recommend a Purchase</a></div>
                   </div>
                   <!-- end lib/cols mega menu -->
                 </li>
