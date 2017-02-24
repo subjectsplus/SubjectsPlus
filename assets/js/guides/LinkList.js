@@ -34,6 +34,7 @@ function LinkList(id,idSelector) {
         var myRecord = new Record({
             recordId: li.recordId,
             title: li.title,
+            prefix: li.prefix,
             location: li.location,
             showIcons : li.showIcons,
             showDescription : li.showDescription,
@@ -153,6 +154,7 @@ function LinkList(id,idSelector) {
 
             var existingRecord = new Record({
                 title: $(this).data().title,
+                prefix: $(this).data().prefix,
                 recordId : $(this).data().recordId,
                 showIcons : $(this).data().showIcons,
                 showDescription : $(this).data().showDescription,
@@ -175,6 +177,7 @@ function LinkList(id,idSelector) {
             //console.log(li);
             var record = new Record({
                 title: $(this).data().title,
+                prefix: $(this).data().prefix,
                 recordId : $(this).data().recordId,
                 showIcons : $(this).data().showIcons,
                 showDescription : $(this).data().showDescription,
