@@ -20,7 +20,7 @@ It is made available under the GNU GPL.
 
 ## Requirements
 
-* PHP >= to 5.3
+* PHP >= to 5.3 - 5.6 
 * MySQL --anything over 4 should be ok
 * Web server -- usually Apache, but some people have SubjectsPlus running on IIS
 * JavaScript enabled for the admin to work properly. 
