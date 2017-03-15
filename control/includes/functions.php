@@ -337,11 +337,11 @@ function getDBbySubBoxes($selected_sub, $additionaltype = "Placeholder") {
 
   if ($additionaltype != "") { $morequery = "OR type = '" . $additionaltype . "'";}
 
-  $subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE (type = 'Subject' " . $morequery . ") AND active = '1' ORDER BY subject";
+  //$subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE (type = 'Subject' " . $morequery . ") AND active = '1' ORDER BY subject";
  
    $subs_query = "
     SELECT DISTINCT s.subject_id, s.subject, s.type 
-FROM SUBJECT s
+FROM subject s
 INNER JOIN rank r
 ON s.subject_id = r.subject_id
 INNER JOIN title t
