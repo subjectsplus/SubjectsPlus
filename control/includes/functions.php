@@ -21,7 +21,8 @@ if (empty($i_frame_settings)){
 
 if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== false){
     if (strpos($i_frame_settings, 'ALLOW-FROM') !== false) {
-        $trusted_site_url = explode("ALLOW-FROM", $i_frame_settings)[1];
+        $temp = explode("ALLOW-FROM", $i_frame_settings);
+        $trusted_site_url = $temp[1];
     }elseif (strpos($i_frame_settings, 'SAMEORIGIN') !== false){
         $trusted_site_url = " 'self'";
     }else{
