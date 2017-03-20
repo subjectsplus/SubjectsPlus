@@ -499,5 +499,5 @@ $booklist_primo_api_key = "";
 ////////////////////////////////////////////
 //Render page on iFrame settings
 ////////////////////////////////////////////
-$i_frame_settings = ""
+$i_frame_settings = "";
 ?>
