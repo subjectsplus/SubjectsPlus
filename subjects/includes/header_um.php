@@ -183,11 +183,11 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
 
                     </div>
                     <ul>
-                      <li class="last"><a href="http://search.library.miami.edu/">Catalog home</a></li>
-                      <!--<li class="last"><a href="<?php //print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a></li>-->
+                      <li><a href="http://search.library.miami.edu/">Catalog home</a></li>
+                      <li class="last"><a href="https://library.miami.edu/newitems/index.php?src=richter&display=grid">New Items</a></li>
                     </ul>
                     <ul>
-                      <li class="last"><a href="http://miami.lib.overdrive.com/">Overdrive E-Books</a></li>
+                      <li><a href="http://miami.lib.overdrive.com/">Overdrive E-Books</a></li>
                     </ul>
                     <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/books/">Books Overview</a></div>
                   </div>
@@ -358,19 +358,17 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                         </ul>
                         <ul>
                             <li><a href="http://library.miami.edu/chc/">Cuban Heritage Collection</a></li>
+                            <li><a href="http://merrick.library.miami.edu/">Digital Collections</a></li>
+                            <li><a href="http://library.miami.edu/oral-histories/">Oral Histories</a></li>
+                            <li><a href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a></li>
                             <li><a href="http://library.miami.edu/specialcollections/">Special Collections</a></li>
-                            <li><a href="http://merrick.library.miami.edu/">UM Digital Collections</a></li>
-                            <li><a href="http://library.miami.edu/oral-histories/">UM Oral Histories</a></li>
-                            <li><a href="http://scholarlyrepository.miami.edu/">UM Scholarly Repository</a></li>
                             <li><a href="http://library.miami.edu/universityarchives/">University Archives</a></li>
                         </ul>
                       <div class="mega_feature">
                         <img src="https://library.miami.edu/wp-content/themes/umiami/images/rsmas.jpg" alt="RSMAS" />
                         <p style="align-right"><a href="http://www.library.miami.edu/rsmaslib/">RSMAS Library</a></p>
                       </div>
-                      <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>,
-                        <!--<a href="<?php //print PATH_TO_SP; ?>subjects/new_acquisitions.php">New Acquisitions</a>,-->
-                        <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Recommend a Purchase</a></div>
+                      <div class="mega_more">See also <a href="<?php print PATH_FROM_ROOT; ?>/libraries-collections/">Collections Overview</a>, <a href="https://library.miami.edu/newitems/index.php?src=richter&display=grid">New Items</a>, <a href="<?php print PATH_FROM_ROOT; ?>/suggest-a-purchase/">Recommend a Purchase</a></div>
                   </div>
                   <!-- end lib/cols mega menu -->
                 </li>
