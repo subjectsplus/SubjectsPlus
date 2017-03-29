@@ -327,7 +327,7 @@ include("includes/footer.php");
 
       <?php include('../assets/js/guides/favoriteDatabases.js'); ?>
       var fdl = favoriteDatabasesList();
-      fdl.init();
+      fdl.umlibrary_favorite_links.init();
   })
   ;
 </script>
