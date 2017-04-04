@@ -40,7 +40,7 @@ switch ($_POST["type"]) {
         $subject_name = Truncate($_POST["our_sub_text"], 25, '');
         $source_name = Truncate($_POST["our_source_text"], 15, '');
 
-        echo "<div class=\"selected_item_wrapper\"><div class=\"selected_item\" id=\"root-" . $_POST["our_source_id"] . "\"><input type=\"hidden\" name=\"rank[]\" value=\"0\" /><input type=\"hidden\" name=\"subject[]\" value=\"" . $_POST["our_sub_id"] . "\" /><input type=\"hidden\" id=\"hidden_source-" . $_POST["our_sub_id"] . "-" . $_POST["our_source_id"] . "\" name=\"source[]\" value=\"" . $_POST["our_source_id"] . "\" />" . $subject_name . "<span class=\"small_extra\"> " . $source_name . " </span><br />
+        echo "<div class=\"selected_item_wrapper\"><div class=\"selected_item\" id=\"root-" . $_POST["our_source_id"] . "\"><input type=\"hidden\" name=\"rank[]\" value=\"0\" /><input name=\"dbbysub_active[]\" value=\"1\" type=\"hidden\"/><input type=\"hidden\" name=\"subject[]\" value=\"" . $_POST["our_sub_id"] . "\" /><input type=\"hidden\" id=\"hidden_source-" . $_POST["our_sub_id"] . "-" . $_POST["our_source_id"] . "\" name=\"source[]\" value=\"" . $_POST["our_source_id"] . "\" />" . $subject_name . "<span class=\"small_extra\"> " . $source_name . " </span><br />
         <textarea class=\"desc_override desc-area\" name=\"description_override[]\" rows=\"4\" cols=\"35\"></textarea></div>
         <div class=\"selected_item_options\"><i class=\"fa fa-lg fa-trash delete_sub clickable\" alt=\"" . _("remove subject") . "\" title=\"" . _("remove subject") . "\"></i>
         <i class=\"fa fa-book fa-lg\"></i>
