@@ -59,7 +59,7 @@ class BuildNav {
             <li><a href=\"$CpanelPath" . "records/record.php\">" . _("New Record") . "</a></li>
             <li><a href=\"$CpanelPath" . "records/index.php\">" . _("Browse Items") . "</a></li>";
 
-      if (isset($_SESSION["admin"]) || (isset($_SESSION["records"]) && isset($_SESSION["eresource_mgr"]))) {
+      if (isset($_SESSION["admin"]) || (isset($_SESSION["records"]))) {
           print "<li><a href=\"$CpanelPath" . "records/subject_databases.php\">" . _("Databases by Subject") . "</a></li>";
       }
 
