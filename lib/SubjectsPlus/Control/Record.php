@@ -40,6 +40,7 @@ class Record {
 	private $_message;
 	private $_locations;
 	private $_helpguide;
+    private $_dbbysub_active;
 	public $_debug;
 
 	public function __construct($record_id="", $flag="") {
@@ -78,6 +79,7 @@ class Record {
         $this->_rank = $_POST["rank"]; // array
         $this->_source = $_POST["source"]; // array
         $this->_description_override = $_POST["description_override"]; // array
+        $this->_dbbysub_active = $_POST["dbbysub_active"]; // array
 
         $this->_subject_count = count($this->_subject); // # of items in above arrays
 
@@ -116,10 +118,11 @@ class Record {
         // ////////////////
 
         $querier2 = new Querier();
-        $q2 = "select rank, rank.subject_id, title_id, so.source_id, rank_id, description_override, subject, source
+        $q2 = "select rank, rank.subject_id, title_id, so.source_id, rank_id, description_override, subject, source, dbbysub_active
         FROM rank, subject, source so
         WHERE rank.subject_id = subject.subject_id
         AND rank.source_id = so.source_id
+        AND dbbysub_active = 1
         AND title_id = " . $this->_record_id . "
         ORDER BY subject";
 
@@ -594,6 +597,7 @@ class Record {
  	<div class=\"pure-u-1-2\">
  	<input name=\"subject[]\" value=\"$value[1]\" type=\"hidden\" />
  	<input name=\"rank[]\" value=\"$value[0]\" type=\"hidden\" />
+ 	<input name=\"dbbysub_active[]\" value=\"$value[8]\" type=\"hidden\" />
  	<input name=\"source[]\" value=\"$value[3]\" id=\"hidden_source-$value[1]-$value[3]\" type=\"hidden\" />
  	$subject_name <span class=\"small_extra\">$source_name</span><br />
  	<textarea style=\"display: none; clear: both;\" class=\"desc_override\" name=\"description_override[]\" rows=\"4\" cols=\"35\">$value[5]</textarea>
@@ -817,12 +821,13 @@ function modifyRank() {
 	$db = new Querier();
 
 	for ($i = 0; $i < $this->_subject_count; $i++) {
-		$qUpRank = "INSERT INTO rank (rank, subject_id, title_id, source_id, description_override) VALUES (
+		$qUpRank = "INSERT INTO rank (rank, subject_id, title_id, source_id, dbbysub_active, description_override) VALUES (
 			'" . scrubData($this->_rank[$i], "integer") . "', ";
 		//added dgonzalez to check whether the value must be inserted into database as NULL
 		$qUpRank .= scrubData($this->_subject[$i], "integer") != 0 ? "'" . scrubData($this->_subject[$i], "integer") . "'," : "NULL, ";
 		$qUpRank .= scrubData($this->_title_id, "integer") != 0 ? "'" . scrubData($this->_title_id, "integer") . "'," : "NULL, ";
 		$qUpRank .= scrubData($this->_source[$i], "integer") != 0 ? "'" . scrubData($this->_source[$i], "integer") . "'," : "NULL, ";
+        $qUpRank .= scrubData($this->_dbbysub_active[$i], "integer") != 0 ? "'" . scrubData($this->_dbbysub_active[$i], "integer") . "'," : "0, ";
 		$qUpRank .= $db->quote(scrubData($this->_description_override[$i], "richtext")) . ")";
 
 		$rUpRank = $db->exec($qUpRank);
