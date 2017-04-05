@@ -57,8 +57,13 @@ class BuildNav {
         <div>
          <ul>
             <li><a href=\"$CpanelPath" . "records/record.php\">" . _("New Record") . "</a></li>
-            <li><a href=\"$CpanelPath" . "records/index.php\">" . _("Browse Items") . "</a></li>
-         </ul>
+            <li><a href=\"$CpanelPath" . "records/index.php\">" . _("Browse Items") . "</a></li>";
+
+      if (isset($_SESSION["admin"]) || (isset($_SESSION["records"]))) {
+          print "<li><a href=\"$CpanelPath" . "records/subject_databases.php\">" . _("Databases by Subject") . "</a></li>";
+      }
+
+         print "</ul>
 		  </div></li>";
 
       ///////////////
@@ -164,8 +169,7 @@ if ($is_um == TRUE) {
           <li><a href=\"$CpanelPath" . "admin/guide_collections.php\">" . _("Guide Collections") . "</a></li>
     			<li><a href=\"$CpanelPath" . "admin/departments.php\">" . _("Departments") . "</a></li>
     			<li><a href=\"$CpanelPath" . "admin/sources.php\">" . _("Sources") . "</a></li>
-          <li><a href=\"$CpanelPath" . "admin/faq_collections.php\">" . _("FAQ Collections") . "</a></li>
-          <li><a href=\"$CpanelPath" . "admin/subject_databases.php\">" . _("Databases by Subject") . "</a></li>
+          <li><a href=\"$CpanelPath" . "admin/faq_collections.php\">" . _("FAQ Collections") . "</a></li>          
     			<li><a href=\"$CpanelPath" . "edit-config.php\">" . _("Config Site") . "</a></li>    			
     		</ul>
       </div>

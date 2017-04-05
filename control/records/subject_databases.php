@@ -4,7 +4,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\SubjectDatabase;
     
 $subsubcat = "";
-$subcat = "admin";
+$subcat = "records";
 $page_title = "Admin Databases by Subject";
 $feedback = "";
 
@@ -19,7 +19,6 @@ $db = new Querier;
 $objDatabases = new SubjectDatabase($db);
 
 $subs_option_boxes = $objDatabases->getSubjectsDropDownItems();
-
 
 $all_subjects = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
