@@ -20,8 +20,12 @@ header('Content-Type: text/html; charset=utf-8');
 
 <?php
 if ($lti->valid) {
-    $course_id = $_REQUEST["oauth_consumer_key"];
-    echo $course_id;
+    $course_id = $_REQUEST["context_label"];
+
+    if (strcmp($course_id, '123456') == 0){
+        header("Location: http://sp.library.miami.edu/subjects/english"); /* Redirect browser */
+        exit();
+    }
 
 ?>
 <h2>Hello, World!</h2>
