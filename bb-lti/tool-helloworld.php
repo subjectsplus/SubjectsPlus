@@ -19,6 +19,7 @@ header('Content-Type: text/html; charset=utf-8');
 <body>
 
 <?php
+//Where the magic happens!
 if ($lti->valid) {
     $course_id = $_REQUEST["context_label"];
 
@@ -44,10 +45,8 @@ if ($lti->valid) {
 
     <?php
 } else {
-    ?>
-    <h2>This was not a valid LTI launch</h2>
-    <p>Error message: <?= $lti->message ?></p>
-    <?php
+    header("Location: https://library.miami.edu"); /* Redirect browser */
+    exit();
 }
 ?>
 </body>
