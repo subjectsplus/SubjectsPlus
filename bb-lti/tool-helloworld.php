@@ -20,6 +20,9 @@ header('Content-Type: text/html; charset=utf-8');
 
 <?php
 if ($lti->valid) {
+    $course_id = $_REQUEST["oauth_consumer_key"];
+    echo $course_id;
+
 ?>
 <h2>Hello, World!</h2>
 <p>We have implemented a basic LTI tool!</p>
