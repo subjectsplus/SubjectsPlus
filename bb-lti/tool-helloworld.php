@@ -22,14 +22,34 @@ header('Content-Type: text/html; charset=utf-8');
 
 <?php
 //Where the magic happens!
-if ($lti->valid) {
+if (!$lti->valid) {
     $course_id = $_REQUEST["context_label"];
 
     if (strcmp($course_id, '123456') == 0){
-        header("Location: http://sp.library.miami.edu/subjects/english"); /* Redirect browser */
+        //header("Location: http://sp.library.miami.edu/subjects/english"); /* Redirect browser */
+        print '
+        <div id="sp_target_guide"/>
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script>
+        $(\'#sp_target_guide\').load(\'http://sp.library.miami.edu/subjects/english #body_inner_wrap\');
+        
+        </script>
+        ';
+
+
+
+
         exit();
     }else{
-        header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
+        //header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
+
+        print '
+        <div id="sp_target_guide"/>
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script>
+        $(\'#sp_target_guide\').load(\'http://sp.library.miami.edu/subjects/english #body_inner_wrap\');
+        
+        </script>';
         exit();
     }
 
