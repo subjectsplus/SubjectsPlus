@@ -476,12 +476,15 @@ cloneView.init();
 
 
     try {
-       console.log(window.self !== window.top);
-       console.log('Not in iFrame');
+       if(window.self !== window.top){
+           console.log('Not in iFrame');
+       }else{
+           console.log('Hello from iFrame');
+       }
     } catch (e) {
         console.log('Hello from iFrame');
     }
-}
+
 
 </script>
 
