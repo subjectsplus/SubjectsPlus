@@ -25,6 +25,7 @@ class LocationFactory
         $new_location->setCitationGuide(  $location['citation_guide']);
         $new_location->setDisplayNote( $location['display_note']);
         $new_location->setCtags($location['ctags']);
+        $new_location->setRecordStatus($location['record_status']);
         return $new_location;
     }
 }
