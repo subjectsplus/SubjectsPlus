@@ -186,20 +186,21 @@ include("includes/footer_um.php");
 
 
 <script type="text/javascript" language="javascript">
-    var isInIFrame = function () {
-        try {
-            return window.self !== window.top;
-        } catch (e) {
-            return true;
-        }
-    };
 
-    console.log(isInIFrame());
-    if (isInIFrame()){
-        $('#spum_nav').hide();
-    }
 
     $(document).ready(function(){
+        var isInIFrame = function () {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        };
+
+        console.log(isInIFrame());
+        if (isInIFrame()){
+            $('#spum_nav').hide();
+        }
 
         // add rowstriping
         stripeR();

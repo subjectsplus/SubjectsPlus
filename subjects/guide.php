@@ -239,21 +239,21 @@ print $social_and_search;
 
 
 <script type="text/javascript" language="javascript">
-    var isInIFrame = function () {
-        try {
-            return window.self !== window.top;
-        } catch (e) {
-            return true;
-        }
-    };
 
-    console.log(isInIFrame());
-    if (isInIFrame()){
-        $('#header').hide();
-    }
 
     $(document).ready(function(){
+        var isInIFrame = function () {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        };
 
+        console.log(isInIFrame());
+        if (isInIFrame()){
+            $('#header').hide();
+        }
 
         // .togglebody makes the body of a pluslet show or disappear
         $('body').on('click','.titlebar_text', function(event) {
