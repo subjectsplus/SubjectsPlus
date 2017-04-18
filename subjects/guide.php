@@ -10,7 +10,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\SubjectsPlus\Control;
+use SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array("ui"); //um don't want no ui_styles
@@ -498,4 +498,20 @@ if (isset ($header_type) && $header_type != 'default') {
     }
 } else {
     include("includes/footer.php");
+}
+
+if (isset($_GET['bb-lti'])) {
+    $bb_lti = scrubData($_GET['bb-lti'], 'integer');
+    if ($bb_lti == 1) {
+        print '
+            <style type="text/css">
+                #spum_nav{
+                    display: none;
+                }
+                .footer-container{
+                    display: none;
+                }
+            </style>
+        ';
+    }
 }

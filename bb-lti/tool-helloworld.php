@@ -12,14 +12,6 @@ header('Content-Type: text/html; charset=utf-8');
 ?>
 
 <!DOCTYPE html>
-<style type="text/css">
-    #spum_nav{
-        display: none;
-    }
-    .footer-container{
-        display: none;
-    }
-</style>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -35,7 +27,7 @@ if ($lti->valid) {
     $course_id = $_REQUEST["context_label"];
 
     if (strcmp($course_id, '123456') == 0){
-        print file_get_contents("http://sp.library.miami.edu/subjects/guide.php?subject=WomensGenderStudies");
+        header("Location: http://sp.library.miami.edu/subjects/guide.php?subject=WomensGenderStudies&bb-lti=1"); /* Redirect browser */
         exit();
     }else{
         header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
