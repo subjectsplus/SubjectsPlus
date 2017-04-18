@@ -501,6 +501,7 @@ if (isset ($header_type) && $header_type != 'default') {
 }
 
 if (isset($_GET['bb-lti'])) {
+    echo 'aaaa' + $_GET['bb-lti'];
     $bb_lti = scrubData($_GET['bb-lti'], 'integer');
     if ($bb_lti == 1) {
         print '
