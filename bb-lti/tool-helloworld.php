@@ -26,9 +26,7 @@ if ($lti->valid) {
     $course_id = $_REQUEST["context_label"];
 
     if (strcmp($course_id, '123456') == 0){
-        print ' 
-        <iframe src="http://development.library.miami.edu/sp4dev-staging-afc/subjects/index.php"></iframe> 
-        ';
+        header("Location: http://sp.library.miami.edu/subjects/guide.php?subject=WomensGenderStudies"); /* Redirect browser */
         exit();
     }else{
         header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */

@@ -6,7 +6,6 @@
  *   @author adarby
  *   @date nov 2015
  */
-
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideList;
