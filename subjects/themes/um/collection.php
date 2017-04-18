@@ -200,7 +200,7 @@ include("includes/footer_um.php");
         console.log(isInIFrame());
         if (isInIFrame()){
             $('#spum_nav').hide();
-            $('.footer-container').hide();
+            $('#push').hide();
         }
 
         // add rowstriping

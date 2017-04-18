@@ -253,7 +253,7 @@ print $social_and_search;
         console.log(isInIFrame());
         if (isInIFrame()){
             $('#header').hide();
-            $('.footer-container').hide();
+            $('#push').hide();
         }
 
         // .togglebody makes the body of a pluslet show or disappear
