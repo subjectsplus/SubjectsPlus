@@ -12,6 +12,14 @@ header('Content-Type: text/html; charset=utf-8');
 ?>
 
 <!DOCTYPE html>
+<style type="text/css">
+    #spum_nav{
+        display: none;
+    }
+    .footer-container{
+        display: none;
+    }
+</style>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -19,6 +27,7 @@ header('Content-Type: text/html; charset=utf-8');
 </head>
 
 <body>
+
 
 <?php
 //Where the magic happens!
