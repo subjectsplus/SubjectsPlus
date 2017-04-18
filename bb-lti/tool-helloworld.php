@@ -35,7 +35,7 @@ if ($lti->valid) {
     $course_id = $_REQUEST["context_label"];
 
     if (strcmp($course_id, '123456') == 0){
-        header("Location: http://sp.library.miami.edu/subjects/guide.php?subject=WomensGenderStudies"); /* Redirect browser */
+        print file_get_contents("http://sp.library.miami.edu/subjects/guide.php?subject=WomensGenderStudies");
         exit();
     }else{
         header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
