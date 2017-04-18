@@ -474,6 +474,15 @@ cloneView.init();
         }
     });
 
+
+    try {
+       console.log(window.self !== window.top);
+       console.log('Not in iFrame');
+    } catch (e) {
+        console.log('Hello from iFrame');
+    }
+}
+
 </script>
 
 
@@ -498,21 +507,4 @@ if (isset ($header_type) && $header_type != 'default') {
     }
 } else {
     include("includes/footer.php");
-}
-
-if (isset($_GET['subject'])) {
-    echo 'aaaa ' + $_GET['subject'];
-//    $bb_lti = scrubData($_GET['bb-lti'], 'integer');
-//    if ($bb_lti == 1) {
-//        print '
-//            <style type="text/css">
-//                #spum_nav{
-//                    display: none;
-//                }
-//                .footer-container{
-//                    display: none;
-//                }
-//            </style>
-//        ';
-//    }
 }
