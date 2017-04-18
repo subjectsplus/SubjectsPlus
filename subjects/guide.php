@@ -500,19 +500,19 @@ if (isset ($header_type) && $header_type != 'default') {
     include("includes/footer.php");
 }
 
-if (isset($_GET['bb-lti'])) {
-    echo 'aaaa' + $_GET['bb-lti'];
-    $bb_lti = scrubData($_GET['bb-lti'], 'integer');
-    if ($bb_lti == 1) {
-        print '
-            <style type="text/css">
-                #spum_nav{
-                    display: none;
-                }
-                .footer-container{
-                    display: none;
-                }
-            </style>
-        ';
-    }
+if (isset($_GET['subject'])) {
+    echo 'aaaa ' + $_GET['subject'];
+//    $bb_lti = scrubData($_GET['bb-lti'], 'integer');
+//    if ($bb_lti == 1) {
+//        print '
+//            <style type="text/css">
+//                #spum_nav{
+//                    display: none;
+//                }
+//                .footer-container{
+//                    display: none;
+//                }
+//            </style>
+//        ';
+//    }
 }
