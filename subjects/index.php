@@ -7,6 +7,8 @@
  *   @date mar 2011
  */
 
+header('X-Frame-Options: ALLOW-FROM http://localhost:9876');
+header("Content-Security-Policy: http://localhost:9876");
 //added in order to hide errors if SP not yet installed.  
 if( !file_exists( "../control/includes/config.php" ) || filesize( "../control/includes/config.php" ) < 10 )
 {
