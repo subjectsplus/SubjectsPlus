@@ -117,7 +117,7 @@ function LinkList(id,idSelector) {
             var descriptionOverride = $("li[data-record-id='"+obj.recordId+"']").find("textarea").val();
 
             $.ajax({
-                url: '../admin/helpers/subject_databases_helper.php',
+                url: '../records/helpers/subject_databases_helper.php',
                 type: "GET",
                 dataType: "json",
                 async: false,
