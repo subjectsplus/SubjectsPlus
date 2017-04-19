@@ -1,6 +1,6 @@
 <?php
 header('X-Frame-Options: ALLOW-FROM http://localhost:9876');
-header("Content-Security-Policy: http://localhost:9876");
+header("Content-Security-Policy: frame-ancestors http://localhost:9876");
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set("display_errors", 1);
 
