@@ -496,4 +496,8 @@ $booklist_primo_vid = "";
 $booklist_primo_institution_code = "";
 $booklist_primo_api_key = "";
 
+////////////////////////////////////////////
+//Render page on iFrame settings
+////////////////////////////////////////////
+$i_frame_settings = "";
 ?>

@@ -107,7 +107,9 @@ if( isInstalled() )
 
         "booklist_primo_vid" => array( _( "Book List Pluslet Primo View" ), _( "This option contains the Primo view for the Book List Pluslet" ), "string", "right", "large", "" , ""),
 
-        "booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , "")
+        "booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+        "i_frame_settings" => array( _( "Render page on i-frame settings" ), _( "Type one setting. \n For example: DENY, SAMEORIGIN or ALLOW-FROM + trusted url(include http/https). Default to SAMEORIGIN" ), "string", "right", "large", "", _("") )
 	);
 
 	//new instance of config amd set path and options
