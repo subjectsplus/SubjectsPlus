@@ -74,7 +74,7 @@ var RecordListSortable = (function () {
         var description_override = '';
 
         $.ajax({
-            url: '../admin/helpers/subject_databases_helper.php',
+            url: '../records/helpers/subject_databases_helper.php',
             type: "GET",
             dataType: "json",
             data: {
