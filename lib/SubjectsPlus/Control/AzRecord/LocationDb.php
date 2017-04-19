@@ -75,7 +75,7 @@ class LocationDb
 
         $this->connection->beginTransaction();
         $statement = $this->connection->prepare("UPDATE location SET format = :format, call_number = :call_number, location = :location, access_restrictions = :access_restrictions, eres_display = :eres_display,
-            display_note = :display_note, helpguide = :helpguide, citation_guide = :citation_guide, ctags = :ctags, record_status = : record_status WHERE location_id = :location_id");
+            display_note = :display_note, helpguide = :helpguide, citation_guide = :citation_guide, ctags = :ctags, record_status = :record_status WHERE location_id = :location_id");
         $statement->bindParam(':location_id', $location->getId());
         $statement->bindParam(':format', $format);
         $statement->bindParam(':call_number', $call_number);
