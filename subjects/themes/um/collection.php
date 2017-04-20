@@ -189,7 +189,7 @@ include("includes/footer_um.php");
 
 
     $(document).ready(function(){
-        <?php include('./bb-lti/view.js'); ?>
+        <?php include('../../../bb-lti/view.js'); ?>
 
         // add rowstriping
         stripeR();
