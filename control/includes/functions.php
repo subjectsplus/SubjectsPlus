@@ -20,6 +20,7 @@ if (empty($i_frame_settings)){
 }
 
 if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== false){
+    echo $i_frame_settings;
     if (strpos($i_frame_settings, 'ALLOW-FROM') !== false) {
         $temp = explode("ALLOW-FROM", $i_frame_settings);
         $trusted_site_url = $temp[1];
