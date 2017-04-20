@@ -204,6 +204,7 @@ include("includes/footer_um.php");
             $('.sidebar-bkg').hide();
             $('.visible-desktop').hide();
             $('#wide_footer').hide();
+            $('.footer-container').hide();
         }
 
         // add rowstriping
