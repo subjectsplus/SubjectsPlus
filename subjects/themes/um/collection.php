@@ -189,7 +189,21 @@ include("includes/footer_um.php");
 
 
     $(document).ready(function(){
-        <?php include('../../../bb-lti/view.js'); ?>
+        var isInIFrame = function () {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        };
+
+        console.log(isInIFrame());
+        if (isInIFrame()){
+            $('#spum_nav').hide();
+            $('#push').hide();
+            $('.sidebar-bkg').hide();
+            $('.visible-desktop').hide();
+        }
 
         // add rowstriping
         stripeR();
