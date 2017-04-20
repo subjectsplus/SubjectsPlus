@@ -25,7 +25,7 @@ if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== 
         $trusted_site_url = $temp[1];
     }elseif (strpos($i_frame_settings, 'SAMEORIGIN') !== false){
         $trusted_site_url = " 'self'";
-    }elseif (strpos($i_frame_settings, 'none') !== false || (strpos($i_frame_settings, 'DENY') !== false)){{
+    }elseif (strpos($i_frame_settings, 'none') !== false || (strpos($i_frame_settings, 'DENY') !== false)){
         $trusted_site_url = " 'none'";
     }
     @header( 'Content-Security-Policy: frame-ancestors' . $trusted_site_url);
