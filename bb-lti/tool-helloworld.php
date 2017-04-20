@@ -28,7 +28,7 @@ if ($lti->valid) {
     $fromBB = $_REQUEST["custom_frombb"];
 
     if (strcmp($course_id, '123456') == 0){
-        header("Location: http://development.library.miami.edu/sp4dev-staging-afc/subjects/collection.php?d=math&fromBB=".$fromBB); /* Redirect browser */
+        header("Location: http://development.library.miami.edu/sp4dev-staging-afc/subjects/collection.php?d=engcollection&fromBB=".$fromBB); /* Redirect browser */
         exit();
     }else{
         header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
