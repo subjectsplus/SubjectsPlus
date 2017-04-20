@@ -25,9 +25,10 @@ header('Content-Type: text/html; charset=utf-8');
 //Where the magic happens!
 if ($lti->valid) {
     $course_id = $_REQUEST["context_label"];
+    $fromBB = $_REQUEST["custom_frombb"];
 
     if (strcmp($course_id, '123456') == 0){
-        header("Location: http://development.library.miami.edu/sp4dev-staging-afc/subjects/collection.php?d=math"); /* Redirect browser */
+        header("Location: http://development.library.miami.edu/sp4dev-staging-afc/subjects/collection.php?d=math&fromBB=".$fromBB); /* Redirect browser */
         exit();
     }else{
         header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
