@@ -30,7 +30,11 @@ if ($lti->valid) {
     if (strcmp($course_id, '123456') == 0){
         header("Location: http://development.library.miami.edu/sp4dev-staging-afc/subjects/collection.php?d=engcollection&fromBB=".$fromBB); /* Redirect browser */
         exit();
-    }else{
+    }elseif (strcmp($course_id, 'english_literature') == 0){
+        header("Location: http://sp.library.miami.edu/subjects/english); /* Redirect browser */
+        exit();
+    }
+    else{
         header("Location: http://sp.library.miami.edu/subjects"); /* Redirect browser */
         exit();
     }
