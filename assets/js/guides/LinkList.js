@@ -117,7 +117,7 @@ function LinkList(id,idSelector) {
             var descriptionOverride = $("li[data-record-id='"+obj.recordId+"']").find("textarea").val();
 
             $.ajax({
-                url: '../admin/helpers/subject_databases_helper.php',
+                url: '../records/helpers/subject_databases_helper.php',
                 type: "GET",
                 dataType: "json",
                 async: false,
@@ -390,25 +390,26 @@ function LinkList(id,idSelector) {
 
             // Insert the record object
             createRecord.insertRecord({
-                "title_id": null,
-                "title": $('#record-title').val(),
-                "alternate_title": $('#alternate-title').val(),
-                "description":  CKEDITOR.instances.description.getData(),
-                "pre": null,
-                "last_modified_by": "",
-                "last_modified": "",
-                "subjects": [{ 'subject_id': $('#guide-parent-wrap').data().subjectId }],
-                "locations": [{
-                "location_id": "",
-                "format": "1",
-                "call_number": "",
-                "location": $('#location').val(),
-                "access_restrictions": "1",
-                "eres_display": "N",
-                "display_note": "",
-                "helpguide": "",
-                "citation_guide": "",
-                "ctags": ""
+                    "title_id": null,
+                    "title": $('#record-title').val(),
+                    "alternate_title": $('#alternate-title').val(),
+                    "description":  CKEDITOR.instances.description.getData(),
+                    "pre": null,
+                    "last_modified_by": "",
+                    "last_modified": "",
+                    "subjects": [{ 'subject_id': $('#guide-parent-wrap').data().subjectId }],
+                    "locations": [{
+                    "location_id": "",
+                    "format": "1",
+                    "call_number": "",
+                    "location": $('#location').val(),
+                    "access_restrictions": "1",
+                    "eres_display": "N",
+                    "display_note": "",
+                    "helpguide": "",
+                    "citation_guide": "",
+                    "ctags": "",
+                     "record_status": "Active"
                 }]
             }, function(res){
                 var record = new Record({

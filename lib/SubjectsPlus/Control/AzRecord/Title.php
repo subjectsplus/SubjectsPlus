@@ -12,6 +12,10 @@ namespace SubjectsPlus\Control\AzRecord;
 
 use SubjectsPlus\Control\Interfaces\OutputInterface;
 
+/*
+ * testing deploy.sh
+ */
+
 class Title implements TitleInterface,OutputInterface
 {
     private $title_id;
@@ -53,14 +57,14 @@ class Title implements TitleInterface,OutputInterface
      */
     public function setTitle($title)
     {
-        $re = "/\\b(the|a|an|la|les|el|las|los)/i";
+        $re = "/\\b(the|a|an|la|les|el|las|los)+[[:space:]]/i";
         preg_match($re, $title, $matches);
 
         if (isset($matches[0])) {
             $this->pre = $matches[0];
             $title_array = explode(" ",$title);
             if (isset($title_array[0])) {
-                if ($title_array[0] == $matches[0]) {
+                if ($title_array[0] == trim($matches[0])) {
                     $title_array[0] = "";
                 }
                 $title = trim(implode(" ",$title_array));
