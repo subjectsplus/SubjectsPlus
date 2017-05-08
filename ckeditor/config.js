@@ -37,6 +37,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'en';
 
 	//added by dgonzalez
+	// removed , 'Maximize' from SubsPlus_Narrow temporarily
 	config.toolbar_SubsPlus_Narrow =
 		[
 
@@ -44,7 +45,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 			'/',
 
-			['subsplus_resource', 'subsplus_asset' , 'subsplus_faq' , 'subsplus_cat_link', 'Abbr', 'Maximize']
+			['subsplus_resource', 'subsplus_asset' , 'subsplus_faq' , 'subsplus_cat_link', 'Abbr']
 
 
 		];
