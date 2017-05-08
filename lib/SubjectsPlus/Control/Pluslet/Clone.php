@@ -74,14 +74,19 @@ require_once("Pluslet.php");
 	 }
 
 
-	 public function getPlusletType($pluslet_id) {
+     public function getPlusletType($pluslet_id) {
 
-		 $db = new Querier();
-		 $pluslet_type = $db->query("SELECT type from pluslet WHERE pluslet_id = '{$pluslet_id}'");
+         $db = new Querier();
+         $pluslet_type = $db->query("SELECT type from pluslet WHERE pluslet_id = '{$pluslet_id}'");
 
-		 $type = $pluslet_type[0]['type'];
-		 return $type;
-	 }
+         if ($pluslet_type) {
+             $type = $pluslet_type[0]['type'];
+         } else {
+             $type= "Basic";
+         }
+
+         return $type;
+     }
 
 	 public function getPlusletCloneBody($type, $master, $subject_id) {
 
