@@ -177,7 +177,7 @@ if (BlackLister($this_comment) == TRUE && ($_POST['skill'] == $stk_answer)) {
 		$feedback = $submission_feedback;
 		$this_name = "";
 		$this_comment = "";
-		$stage_two == "ok";
+		$stage_two = "ok";
 
 } elseif (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 
