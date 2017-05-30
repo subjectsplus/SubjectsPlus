@@ -29,8 +29,8 @@ $page_description = _("Share your comments and suggestions about the library");
 $page_keywords = _("library, comments, suggestions, complaints");
 
 // Skill testing question + answer
-$stk = _("5 times 5 = ");
-$stk_answer = "25";
+$stk = _("5 times 4 = ");
+$stk_answer = "20";
 
 // Show headshots
 $show_talkback_face = 1;
@@ -166,7 +166,16 @@ $this_year = date("Y");
 
 $todaycomputer = date('Y-m-d H:i:s');
 
-if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
+// let's do the blacklister first
+
+if (BlackLister($this_comment) == TRUE && ($_POST['skill'] == $stk_answer)) {
+		// we'll pretend it was an okay submission	
+		$feedback = $submission_feedback;
+		$this_name = "";
+		$this_comment = "";
+		$stage_two = "ok";
+
+} elseif (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
 
 // clean submission and enter into db!  Don't show page again.
 
@@ -545,12 +554,28 @@ include("includes/header_med.php");
 </div> <!--end panel-container-->
 
 			
-			<?php
+<?php
 
 ///////////////////////////
 // Load footer file
 ///////////////////////////
 
-			include("includes/footer_med.php");
+			include("includes/footer_um.php");
 
-			?>
+///////////////////
+// Blacklister Function
+/////////////////////
+
+function BlackLister($checkstring) {
+	$blacklist_terms = "viagra|cialis";
+
+	if (preg_match("/$blacklist_terms/i",$checkstring)) {
+		// found naughtiness
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+
+}
+
+?>
