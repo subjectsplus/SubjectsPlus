@@ -107,7 +107,7 @@ $statement = $connection->prepare("SELECT DISTINCT title, location, access_restr
            ON rk.source_id = s.source_id
 WHERE l.ctags LIKE '%New_Databases%'
            AND eres_display = 'Y'
-ORDER BY t.title
+ORDER BY RAND()
 ASC limit 0,5");
 $statement->execute();
 
@@ -310,7 +310,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 
 			<?php if ($newlist) { ?>
 				<div class="tip">
-					<h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bysub&subject_id=76">see all</a>)</h2>
+					<h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
 					<?php print $newlist; ?>
 				</div>
 				<div class="tipend"></div>
