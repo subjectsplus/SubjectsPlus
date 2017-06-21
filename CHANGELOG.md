@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
-
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.1...HEAD)
+## [v4.2](https://github.com/subjectsplus/SubjectsPlus/tree/v4.2) (2017-06-21)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.1...v4.2)
 
 **Implemented enhancements:**
 
@@ -20,6 +19,8 @@
 
 **Merged pull requests:**
 
+- update changelog merge from Sp4 dev [\#1108](https://github.com/subjectsplus/SubjectsPlus/pull/1108) ([cgb37](https://github.com/cgb37))
+- update changelog [\#1107](https://github.com/subjectsplus/SubjectsPlus/pull/1107) ([cgb37](https://github.com/cgb37))
 - Merge from sp4-dev	removed undefined prefix from sortable list [\#1105](https://github.com/subjectsplus/SubjectsPlus/pull/1105) ([cgb37](https://github.com/cgb37))
 - removed undefined prefix from sortable list [\#1104](https://github.com/subjectsplus/SubjectsPlus/pull/1104) ([cgb37](https://github.com/cgb37))
 - Hotfix linklist [\#1103](https://github.com/subjectsplus/SubjectsPlus/pull/1103) ([cgb37](https://github.com/cgb37))
@@ -675,6 +676,7 @@
 - Fix \[\#474\] - GuideList pluslet links not working. Fixed by pointing u… [\#475](https://github.com/subjectsplus/SubjectsPlus/pull/475) ([cgb37](https://github.com/cgb37))
 - Adding basic form for records [\#459](https://github.com/subjectsplus/SubjectsPlus/pull/459) ([little9](https://github.com/little9))
 - Feature azrecords [\#458](https://github.com/subjectsplus/SubjectsPlus/pull/458) ([little9](https://github.com/little9))
+- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 
 ## [v4.0.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.1) (2016-03-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0...v4.0.1)
@@ -686,7 +688,6 @@
 
 **Merged pull requests:**
 
-- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 - Update TOC.php [\#439](https://github.com/subjectsplus/SubjectsPlus/pull/439) ([little9](https://github.com/little9))
 
 ## [v4.0.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0) (2016-02-09)
@@ -792,6 +793,10 @@
 ## [v4.0.0-beta.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.1) (2015-12-03)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.0...v4.0.0-beta.1)
 
+**Merged pull requests:**
+
+- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.0.0-beta.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.0) (2015-12-02)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.2...v4.0.0-beta.0)
 
@@ -869,7 +874,6 @@
 
 **Merged pull requests:**
 
-- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
 - Experts Pluslet styling in guide admin page, UM theme, default theme … [\#371](https://github.com/subjectsplus/SubjectsPlus/pull/371) ([pvillanueva01](https://github.com/pvillanueva01))
 - header fix [\#370](https://github.com/subjectsplus/SubjectsPlus/pull/370) ([pvillanueva01](https://github.com/pvillanueva01))
 - more style fixes for index-c [\#369](https://github.com/subjectsplus/SubjectsPlus/pull/369) ([pvillanueva01](https://github.com/pvillanueva01))
