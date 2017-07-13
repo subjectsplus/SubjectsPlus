@@ -93,7 +93,7 @@ $alphabet = getLetters("databases", $_GET["letter"], 1, TRUE);
 
 // Get our newest databases
 $connection = $db->getConnection();
-$statement = $connection->prepare("SELECT DISTINCT title, location, access_restrictions
+$statement = $connection->prepare("SELECT * FROM (SELECT DISTINCT title, location, access_restrictions
            FROM title as t
            INNER JOIN location_title as lt
            ON t.title_id = lt.title_id
@@ -107,8 +107,8 @@ $statement = $connection->prepare("SELECT DISTINCT title, location, access_restr
            ON rk.source_id = s.source_id
 WHERE l.ctags LIKE '%New_Databases%'
            AND eres_display = 'Y'
-ORDER BY t.title
-ASC limit 0,5");
+ORDER BY RAND()
+ASC limit 0,5) results ORDER BY title");
 $statement->execute();
 
 $newlist = "";
@@ -310,7 +310,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 
 			<?php if ($newlist) { ?>
 				<div class="tip">
-					<h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bysub&subject_id=76">see all</a>)</h2>
+					<h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
 					<?php print $newlist; ?>
 				</div>
 				<div class="tipend"></div>

@@ -1,8 +1,79 @@
 # Change Log
 
-## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
+## [v4.2](https://github.com/subjectsplus/SubjectsPlus/tree/v4.2) (2017-06-21)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.1...v4.2)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.3...HEAD)
+**Implemented enhancements:**
+
+- Move the Databases by Subjects tool from Admin to Records tab [\#1057](https://github.com/subjectsplus/SubjectsPlus/issues/1057)
+- added Table to ckeditor toolbar\_SubsPlus\_Narrow instance [\#1092](https://github.com/subjectsplus/SubjectsPlus/pull/1092) ([cgb37](https://github.com/cgb37))
+
+**Fixed bugs:**
+
+- Articles such as A, An, & The not splicing correctly in Records [\#1088](https://github.com/subjectsplus/SubjectsPlus/issues/1088)
+- Title Factory class not including record\_status [\#1087](https://github.com/subjectsplus/SubjectsPlus/issues/1087)
+- Record search for non AZ records not working [\#1086](https://github.com/subjectsplus/SubjectsPlus/issues/1086)
+- Insert Record not setting record\_status in title table [\#1085](https://github.com/subjectsplus/SubjectsPlus/issues/1085)
+- Problems with Database by Subject Associations [\#1058](https://github.com/subjectsplus/SubjectsPlus/issues/1058)
+- subject table name case sensitive [\#1054](https://github.com/subjectsplus/SubjectsPlus/pull/1054) ([cgb37](https://github.com/cgb37))
+
+**Merged pull requests:**
+
+- update changelog merge from Sp4 dev [\#1108](https://github.com/subjectsplus/SubjectsPlus/pull/1108) ([cgb37](https://github.com/cgb37))
+- update changelog [\#1107](https://github.com/subjectsplus/SubjectsPlus/pull/1107) ([cgb37](https://github.com/cgb37))
+- Merge from sp4-dev	removed undefined prefix from sortable list [\#1105](https://github.com/subjectsplus/SubjectsPlus/pull/1105) ([cgb37](https://github.com/cgb37))
+- removed undefined prefix from sortable list [\#1104](https://github.com/subjectsplus/SubjectsPlus/pull/1104) ([cgb37](https://github.com/cgb37))
+- Hotfix linklist [\#1103](https://github.com/subjectsplus/SubjectsPlus/pull/1103) ([cgb37](https://github.com/cgb37))
+- merge sp4-dev into master [\#1102](https://github.com/subjectsplus/SubjectsPlus/pull/1102) ([abelfacenda](https://github.com/abelfacenda))
+- merge sp4dev into master [\#1101](https://github.com/subjectsplus/SubjectsPlus/pull/1101) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1100](https://github.com/subjectsplus/SubjectsPlus/pull/1100) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev merge into master - blacklist for talkback [\#1099](https://github.com/subjectsplus/SubjectsPlus/pull/1099) ([cgb37](https://github.com/cgb37))
+- \[	e4df836\] 	turning off Maximize plugin in ckeditor congig [\#1098](https://github.com/subjectsplus/SubjectsPlus/pull/1098) ([abelfacenda](https://github.com/abelfacenda))
+- \[e4df836\] turning off Maximize plugin in ckeditor config [\#1097](https://github.com/subjectsplus/SubjectsPlus/pull/1097) ([abelfacenda](https://github.com/abelfacenda))
+- Merge staging into master [\#1096](https://github.com/subjectsplus/SubjectsPlus/pull/1096) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev  [\#1094](https://github.com/subjectsplus/SubjectsPlus/pull/1094) ([abelfacenda](https://github.com/abelfacenda))
+- fixed clone orphans issue [\#1093](https://github.com/subjectsplus/SubjectsPlus/pull/1093) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1091](https://github.com/subjectsplus/SubjectsPlus/pull/1091) ([cgb37](https://github.com/cgb37))
+- added Table to ckeditor toolbar\_SubsPlus\_Narrow instance [\#1090](https://github.com/subjectsplus/SubjectsPlus/pull/1090) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#1084](https://github.com/subjectsplus/SubjectsPlus/pull/1084) ([cgb37](https://github.com/cgb37))
+- testing deploy [\#1083](https://github.com/subjectsplus/SubjectsPlus/pull/1083) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master [\#1082](https://github.com/subjectsplus/SubjectsPlus/pull/1082) ([cgb37](https://github.com/cgb37))
+- refactor preg\_match so that it accounts for a space after the article… [\#1081](https://github.com/subjectsplus/SubjectsPlus/pull/1081) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master [\#1080](https://github.com/subjectsplus/SubjectsPlus/pull/1080) ([cgb37](https://github.com/cgb37))
+- query string pointing to wrong directory for subject database override [\#1079](https://github.com/subjectsplus/SubjectsPlus/pull/1079) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master: typo in record\_status [\#1078](https://github.com/subjectsplus/SubjectsPlus/pull/1078) ([cgb37](https://github.com/cgb37))
+- typo in record\_status [\#1077](https://github.com/subjectsplus/SubjectsPlus/pull/1077) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master: updated Location Factory to use record\_status [\#1076](https://github.com/subjectsplus/SubjectsPlus/pull/1076) ([cgb37](https://github.com/cgb37))
+- updated Location Factory to use record\_status [\#1075](https://github.com/subjectsplus/SubjectsPlus/pull/1075) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master: added record\_status param to create record func. [\#1074](https://github.com/subjectsplus/SubjectsPlus/pull/1074) ([cgb37](https://github.com/cgb37))
+- added record\_status param to create record func. [\#1073](https://github.com/subjectsplus/SubjectsPlus/pull/1073) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master sql query was wrong. it was search for like %new% [\#1072](https://github.com/subjectsplus/SubjectsPlus/pull/1072) ([cgb37](https://github.com/cgb37))
+- sql query was wrong. it was search for like %new% [\#1071](https://github.com/subjectsplus/SubjectsPlus/pull/1071) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#1070](https://github.com/subjectsplus/SubjectsPlus/pull/1070) ([abelfacenda](https://github.com/abelfacenda))
+- merge sp4-dev into master [\#1069](https://github.com/subjectsplus/SubjectsPlus/pull/1069) ([abelfacenda](https://github.com/abelfacenda))
+- merge staging into sp4-dev [\#1068](https://github.com/subjectsplus/SubjectsPlus/pull/1068) ([abelfacenda](https://github.com/abelfacenda))
+- Afc enhacement move databases by subjects [\#1067](https://github.com/subjectsplus/SubjectsPlus/pull/1067) ([abelfacenda](https://github.com/abelfacenda))
+- Staging [\#1066](https://github.com/subjectsplus/SubjectsPlus/pull/1066) ([abelfacenda](https://github.com/abelfacenda))
+- Moved Databases by Subject to Records [\#1065](https://github.com/subjectsplus/SubjectsPlus/pull/1065) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev merge into master [\#1064](https://github.com/subjectsplus/SubjectsPlus/pull/1064) ([cgb37](https://github.com/cgb37))
+- Database by Subject bug fix [\#1063](https://github.com/subjectsplus/SubjectsPlus/pull/1063) ([cgb37](https://github.com/cgb37))
+- Database by Subject bug fix [\#1062](https://github.com/subjectsplus/SubjectsPlus/pull/1062) ([cgb37](https://github.com/cgb37))
+- 	Updates to UM header [\#1061](https://github.com/subjectsplus/SubjectsPlus/pull/1061) ([cgb37](https://github.com/cgb37))
+- Updates to UM header [\#1060](https://github.com/subjectsplus/SubjectsPlus/pull/1060) ([cgb37](https://github.com/cgb37))
+- Updates to UM header [\#1059](https://github.com/subjectsplus/SubjectsPlus/pull/1059) ([pvillanueva01](https://github.com/pvillanueva01))
+- Sp4 dev merge into staging [\#1056](https://github.com/subjectsplus/SubjectsPlus/pull/1056) ([cgb37](https://github.com/cgb37))
+- Cgb37 patch 1 - 	subject table name case sensitive [\#1055](https://github.com/subjectsplus/SubjectsPlus/pull/1055) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master [\#1053](https://github.com/subjectsplus/SubjectsPlus/pull/1053) ([cgb37](https://github.com/cgb37))
+- added prefix to linkList label [\#1052](https://github.com/subjectsplus/SubjectsPlus/pull/1052) ([cgb37](https://github.com/cgb37))
+- Updates to UM navigation menu [\#1051](https://github.com/subjectsplus/SubjectsPlus/pull/1051) ([cgb37](https://github.com/cgb37))
+- Updates to UM navigation menu [\#1050](https://github.com/subjectsplus/SubjectsPlus/pull/1050) ([pvillanueva01](https://github.com/pvillanueva01))
+- Sp4 dev [\#1048](https://github.com/subjectsplus/SubjectsPlus/pull/1048) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master \[8ab096c\]  [\#1047](https://github.com/subjectsplus/SubjectsPlus/pull/1047) ([cgb37](https://github.com/cgb37))
+- added window reload to subject specialist to reload dom after save [\#1046](https://github.com/subjectsplus/SubjectsPlus/pull/1046) ([cgb37](https://github.com/cgb37))
+- changing STK in talkback [\#1045](https://github.com/subjectsplus/SubjectsPlus/pull/1045) ([cgb37](https://github.com/cgb37))
+
+## [v4.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.1) (2016-12-08)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.3...v4.1)
 
 **Implemented enhancements:**
 
@@ -110,6 +181,8 @@
 
 **Merged pull requests:**
 
+- final merge for release of 4.1 [\#1044](https://github.com/subjectsplus/SubjectsPlus/pull/1044) ([cgb37](https://github.com/cgb37))
+- Staging [\#1043](https://github.com/subjectsplus/SubjectsPlus/pull/1043) ([cgb37](https://github.com/cgb37))
 - Merge pull request \#1041 from subjectsplus/fix-release-cgb [\#1042](https://github.com/subjectsplus/SubjectsPlus/pull/1042) ([cgb37](https://github.com/cgb37))
 - Fix release cgb [\#1041](https://github.com/subjectsplus/SubjectsPlus/pull/1041) ([cgb37](https://github.com/cgb37))
 - Fix release cgb [\#1040](https://github.com/subjectsplus/SubjectsPlus/pull/1040) ([cgb37](https://github.com/cgb37))
@@ -603,6 +676,7 @@
 - Fix \[\#474\] - GuideList pluslet links not working. Fixed by pointing u… [\#475](https://github.com/subjectsplus/SubjectsPlus/pull/475) ([cgb37](https://github.com/cgb37))
 - Adding basic form for records [\#459](https://github.com/subjectsplus/SubjectsPlus/pull/459) ([little9](https://github.com/little9))
 - Feature azrecords [\#458](https://github.com/subjectsplus/SubjectsPlus/pull/458) ([little9](https://github.com/little9))
+- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 
 ## [v4.0.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.1) (2016-03-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0...v4.0.1)
@@ -614,7 +688,6 @@
 
 **Merged pull requests:**
 
-- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 - Update TOC.php [\#439](https://github.com/subjectsplus/SubjectsPlus/pull/439) ([little9](https://github.com/little9))
 
 ## [v4.0.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0) (2016-02-09)
@@ -720,6 +793,10 @@
 ## [v4.0.0-beta.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.1) (2015-12-03)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.0...v4.0.0-beta.1)
 
+**Merged pull requests:**
+
+- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.0.0-beta.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.0) (2015-12-02)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.2...v4.0.0-beta.0)
 
@@ -797,7 +874,6 @@
 
 **Merged pull requests:**
 
-- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
 - Experts Pluslet styling in guide admin page, UM theme, default theme … [\#371](https://github.com/subjectsplus/SubjectsPlus/pull/371) ([pvillanueva01](https://github.com/pvillanueva01))
 - header fix [\#370](https://github.com/subjectsplus/SubjectsPlus/pull/370) ([pvillanueva01](https://github.com/pvillanueva01))
 - more style fixes for index-c [\#369](https://github.com/subjectsplus/SubjectsPlus/pull/369) ([pvillanueva01](https://github.com/pvillanueva01))
