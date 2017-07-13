@@ -33,8 +33,8 @@ $page_description = _("Share your comments and suggestions about the library");
 $page_keywords = _("library, comments, suggestions, complaints");
 
 // Skill testing question + answer
-$stk = _("8 plus 5 = ");
-$stk_answer = "13";
+$stk = _("8 times 5 = ");
+$stk_answer = "40";
 
 // Show headshots
 $show_talkback_face = 1;
@@ -566,14 +566,12 @@ include("includes/header_um.php");
 
 			include("includes/footer_um.php");
 
-
-
 ///////////////////
 // Blacklister Function
 /////////////////////
 
 function BlackLister($checkstring) {
-	$blacklist_terms = "viagra|cialis";
+	$blacklist_terms = "viagra|cialis|footballjerseys";
 
 	if (preg_match("/$blacklist_terms/i",$checkstring)) {
 		// found naughtiness
