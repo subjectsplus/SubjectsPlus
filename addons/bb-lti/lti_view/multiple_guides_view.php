@@ -1,27 +1,32 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: acarrasco
- * Date: 7/7/2017
- * Time: 11:56 AM
- */
+
+use SubjectsPlus\Control\Querier;
+global $AssetPath;
+$subsubcat = "";
+$page_title = "Lorem ipsum title";
+$feedback = "";
+
+//var_dump($_POST);
+$use_jquery = array("ui");
+include("../../control/includes/autoloader.php");
+require_once("../../control/includes/config.php");
+require_once("../../control/includes/functions.php");
+include("../../subjects/includes/header_um.php");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Multiple Guides</title>
-</head>
-<body>
-<h3>Hi!</h3>
-<hr>
-<p>We think the following guides might be of interest</p>
-<ul>
-    <?php foreach($results as $guide_title => $guide_link): ?>
-        <li>
-            <a target="_blank" href="<?php echo $guide_link;?>"><?php echo $guide_title;?></a>
-        </li>
-    <?php endforeach; ?>
-</ul>
-</body>
-</html>
+<div class="wrapper">
+    <div>
+        <div class="breather">
+            <p>Lorem ipsum</p>
+            <ul class="guide-listing">
+                <?php foreach($results as $guide_title => $guide_link): ?>
+                    <li>
+                        <a target="_blank" href="<?php echo $guide_link;?>"><?php echo $guide_title;?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<?php include("../../subjects/includes/footer_um.php"); ?>
