@@ -21,11 +21,10 @@ if ($lti->valid) {
         $guide_path = $PublicPath . "guide.php?subject=";
     }
     $course_label = $_REQUEST["context_label"];
-    $course_code = explode("-", $course_label)[0];
 
-    $courses_code = new LTICourseController('bb_course_code');
+    $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
 
-    $courses_code->processCourseCode($course_code, $guide_path);
+    $courses_code->processCourseCode($course_label, $guide_path);
 }else{
     echo 'Error';
 }

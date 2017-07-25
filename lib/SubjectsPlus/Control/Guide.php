@@ -2,6 +2,7 @@
 namespace SubjectsPlus\Control;
 use Assetic\Exception\Exception;
 use SubjectsPlus\Control\Guide\PlusletData;
+use SubjectsPlus\Control\Guide\SubjectBBCourse;
 
 /**
  * @file sp_Guide
@@ -267,6 +268,24 @@ class Guide
             $guide_title_line = _("Create New Guide");
         }
 
+        $db = new Querier();
+        $objInstructors = new SubjectBBCourse($db);
+        $instructor_option_boxes = $objInstructors->getInstructorsDropDownItems($this->_instructor);
+
+        $all_instructors = "
+            <select name=\"instructor\" id=\"instructor\">
+            <option id='intructor_place_holder'>" . _("None") . "</option>
+            $instructor_option_boxes
+            </select>
+            
+            <script>
+            $(document).ready(function() {
+        $('#instructor').select2();
+
+    });
+            </script>
+            ";
+
         echo "
             <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
@@ -291,7 +310,7 @@ class Guide
             <input type=\"text\" name=\"coursecode\" id=\"course_code\" size=\"20\" class=\"pure-input-1-4\" value=\"" . $this->_course_code . "\">
             
             <label for=\"instructor\">" . _("Instructor") . "</label>
-            <input type=\"text\" name=\"instructor\" id=\"instructor\" size=\"20\" class=\"pure-input-1-4\" value=\"" . $this->_instructor . "\">
+            <div class=\"all-instructors-dropdown dropdown_list\">" . $all_instructors ."</div>
 
             <label for=\"type\">" . _("Type of Guide") . "</label>
             ";

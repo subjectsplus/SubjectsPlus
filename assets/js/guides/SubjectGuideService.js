@@ -172,7 +172,6 @@ function subjectGuideService() {
                 var subject_code_id = selected_item.attr('subject-code-id');
 
                 var deleteListCount = mySubjectGuide.guidesIdToDelete.length;
-                debugger;
                 for (var i = 0; i < deleteListCount; i++) {
                     var payload = {
                         'action': 'saveChanges',
@@ -195,7 +194,6 @@ function subjectGuideService() {
                             'guide_id': guide_id,
                             'subject_code_id': subject_code_id
                         };
-                        debugger;
                         $.ajax({
                             url: mySubjectGuide.settings.guideActionUrl,
                             type: "POST",
