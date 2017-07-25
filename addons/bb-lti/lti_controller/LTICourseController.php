@@ -104,7 +104,9 @@ class LTICourseController
     private function getCourseURL($subject_code){
         $temp = explode("-", $subject_code);
         $course_code = $temp[0];
-        $instructor = trim($this->getInstructorByCourseCode($subject_code)[0]['instructor']);
+        $instructor_temp = $subject_code[0];
+        $instructor_temp = $instructor_temp['instructor'];
+        $instructor = trim($this->getInstructorByCourseCode($instructor_temp));
 
         if (!empty($instructor)){
             $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
