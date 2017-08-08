@@ -77,6 +77,9 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
 </head>
 
 <body>
+
+<div class="sys-alert-regular"><p style="text-align: center; margin: 0; padding: 0;">All UM Libraries websites and services will be temporarily offline on Thursday evening, Aug. 10th due to the move of library servers into the Ungar Building. The uSearch library catalog will remain available; however, access to all licensed electronic resources and digital collections will be affected. The work will begin at ca. 6:30 pm; web services may be interrupted for several hours, with the UML website and electronic resource access restored ASAP.</p></div>
+
 <div id="wrap">
 
 <div id="header-content"> 
@@ -381,23 +384,24 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/borrowing/">Access &amp; Borrowing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/ada/">ADA/Disability Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>  
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>/course-reserves/">Course Reserves</a></li>                           
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/course-reserves/">Course Reserves</a></li>
+                          <li><a href="http://library.miami.edu/datacuration/">Data Management</a></li> 
+                          <li><a href="http://sp.library.miami.edu/subjects/data-services">Data Services</a></li>                           
                           <li><a href="http://sp.library.miami.edu/subjects/digital-humanities">Digital Humanities</a></li>                 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
                           <li><a href="http://sp.library.miami.edu/subjects/etd">ETD Formatting Support</a></li> 
-                          <li><a href="<?php print PATH_TO_SP; ?>subjects/gis">GIS Services</a></li>
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/graduate-study/">Graduate Study Room</a></li>
+                          <li class="last"><a href="<?php print PATH_TO_SP; ?>subjects/gis">GIS Services</a></li>                          
                       </ul>
                        <ul>                               
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/graduate-study/">Graduate Study Room</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/instruction-tour-request-form/">Instruction/Tour Request</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/interlibrary-loan/">Interlibrary Loan</a></li>
                           <li><a href="http://library.miami.edu/learningcommons/">Learning Commons</a></li> 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
-                          <li><a href="http://library.miami.edu/datacuration/">Research Data Services</a></li> 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
                           <li><a href="http://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li>
                           <li><a href="http://library.miami.edu/rooms-spaces/">Rooms &amp; Spaces</a></li> 
-                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
                         </ul>
 
                         <div class="mega_feature">
