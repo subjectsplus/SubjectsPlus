@@ -71,7 +71,7 @@ $v2styles = TRUE;
 
 <body>
 
-<div class="sys-alert-regular"><p style="text-align: center; margin: 0; padding: 0;">All UM Libraries websites and services will be temporarily offline on Thursday evening, Aug. 10th due to the move of library servers into the Ungar Building. The uSearch library catalog will remain available; however, access to all licensed electronic resources and digital collections will be affected. The work will begin at ca. 6:30 pm; web services may be interrupted for several hours, with the UML website and electronic resource access restored ASAP.</p></div>
+<div class="sys-alert-regular"><p style="text-align: center; margin: 0; padding: 0;"><strong>LIMITED ACCESS TO CALDER LIBRARY RESOURCES – THURSDAY, AUGUST 10, 6:30 p.m. – Midnight.</strong></p><p style="text-align: center; margin: 0; padding: 0;">All off-campus access to Calder Library's e-resources will be unavailable from approximately 6:30 p.m. to Midnight on Thursday, August 10th, due to server maintenance. On-campus access to some of the Library's major resources may be accessed <strong><a href="http://calder.med.miami.edu/pages/campusdburl.html">here</a></strong>.</p></div>
 
 <div id="wrap">
 
