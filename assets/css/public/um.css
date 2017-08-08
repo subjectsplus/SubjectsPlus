@@ -1841,8 +1841,16 @@ img.center-image {
 }
 
 
+/* System Alert */
 
-
+.sys-alert-regular {
+    background-color: #ffffff;
+    border-bottom: 1px dashed #cccccc;
+    color: #333333;
+    font-size: 1.15em;
+    margin-bottom: 3em;
+    padding: 0.3em;
+}
 
 
 
