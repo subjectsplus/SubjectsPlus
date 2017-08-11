@@ -71,8 +71,6 @@ $v2styles = TRUE;
 
 <body>
 
-<div class="sys-alert-regular"><p style="text-align: center; margin: 0; padding: 0;"><strong>LIMITED ACCESS TO CALDER LIBRARY RESOURCES – THURSDAY, AUGUST 10, 6:30 p.m. – Midnight.</strong></p><p style="text-align: center; margin: 0; padding: 0;">All off-campus access to Calder Library's e-resources will be unavailable from approximately 6:30 p.m. to Midnight on Thursday, August 10th, due to server maintenance. On-campus access to some of the Library's major resources may be accessed <strong><a href="http://calder.med.miami.edu/pages/campusdburl.html">here</a></strong>.</p></div>
-
 <div id="wrap">
 
 <div id="header-content"> 
