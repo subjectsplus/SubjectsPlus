@@ -128,7 +128,8 @@ class LTICourseController
         $q = "SELECT instructor FROM $this->course_instructor_table_name WHERE course_id = '" . $course_id . "'";
         $statement = $this->connection->prepare($q);
         $statement->execute();
-        $instructor_temp = $statement->fetchAll()[0];
+        $instructor_temp = $statement->fetchAll();
+        $instructor_temp = $instructor_temp[0];
         $instructor_temp = $instructor_temp['instructor'];
         $instructor = trim($instructor_temp);
         return $instructor;
