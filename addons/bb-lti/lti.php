@@ -18,7 +18,7 @@ if ($lti->valid) {
     if ($mod_rewrite == 1) {
         $guide_path = "";
     } else {
-        $guide_path = $PublicPath . "guide.php?subject=";
+        $guide_path = $PublicPath;
     }
     $course_label = $_REQUEST["context_label"];
 

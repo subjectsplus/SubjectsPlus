@@ -2364,6 +2364,17 @@ img.pluslet_card_image {
     height:auto;
 }
 
+.notification{
+    background-color: darkorange;
+}
+
+.notification-close-button{
+    float: right;
+    display: inline-block;
+    padding: 2px 5px;
+    border: none;
+    background: none;
+}
 
 /** end ckeditor custom styles ***/
 

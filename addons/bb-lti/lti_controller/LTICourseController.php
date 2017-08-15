@@ -104,10 +104,7 @@ class LTICourseController
     private function getCourseURL($subject_code){
         $temp = explode("-", $subject_code);
         $course_code = $temp[0];
-        $instructor_temp = $this->getInstructorByCourseCode($subject_code);
-        $instructor_temp = $instructor_temp[0];
-        $instructor_temp = $instructor_temp['instructor'];
-        $instructor = trim($instructor_temp);
+        $instructor = $this->getInstructorByCourseCode($subject_code);
 
         if (!empty($instructor)){
             $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
@@ -131,32 +128,56 @@ class LTICourseController
         $q = "SELECT instructor FROM $this->course_instructor_table_name WHERE course_id = '" . $course_id . "'";
         $statement = $this->connection->prepare($q);
         $statement->execute();
+        $instructor_temp = $statement->fetchAll()[0];
+        $instructor_temp = $instructor_temp['instructor'];
+        $instructor = trim($instructor_temp);
+        return $instructor;
+    }
+
+    private function getGuidesByInstructor ($instructor){
+        $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND instructor LIKE '%". $instructor . "%' ORDER BY subject";
+        $statement = $this->connection->prepare($q);
+        $statement->execute();
         return $statement->fetchAll();
     }
 
     function processCourseCode($course_code, $guide_path){
-        //Find guides by subject code and course number
-        $guides = $this->getCourseURL($course_code);
-        $guides_count = count($guides);
+        $instructor = $this->getInstructorByCourseCode($course_code);
+        $intructor_courses = $this->getGuidesByInstructor($instructor);
+        $instructor_courses_count = count($intructor_courses);
 
-       if ($guides_count == 0){ //If nothing found, then find guides by subject code only
-            $subject_code = substr($course_code, 0, 3);
-
-            $guides = $this->getCourseURL($subject_code);
-            $guides_count = count($guides);
-        }
-
-        //Redirect according to the results
-        if ($guides_count == 0){
-            header("Location: " . $guide_path); /* Redirect browser */
-        }elseif ($guides_count == 1){
-            header("Location: " . $guide_path . $guides[0]['shortform']); /* Redirect browser */
-        }else{
+        if ($instructor_courses_count == 1){
+            header("Location: " . $guide_path . $intructor_courses[0]['shortform']); /* Redirect browser */
+        }elseif ($instructor_courses_count > 1){
             $results = array();
-            foreach ($guides as $guide){
+            foreach ($intructor_courses as $guide){
                 $results[$guide['subject']] = $guide_path . $guide['shortform'];
             }
             include ('lti_view/multiple_guides_view.php');
+        }else{
+            //Find guides by subject code and course number
+            $guides = $this->getCourseURL($course_code);
+            $guides_count = count($guides);
+
+            if ($guides_count == 0){ //If nothing found, then find guides by subject code only
+                $subject_code = substr($course_code, 0, 3);
+
+                $guides = $this->getCourseURL($subject_code);
+                $guides_count = count($guides);
+            }
+
+            //Redirect according to the results
+            if ($guides_count == 0){
+                header("Location: " . $guide_path . "?no_bb_guide=1"); /* Redirect browser */
+            }elseif ($guides_count == 1){
+                header("Location: " . $guide_path . "guide.php?subject=" . $guides[0]['shortform']); /* Redirect browser */
+            }else{
+                $results = array();
+                foreach ($guides as $guide){
+                    $results[$guide['subject']] = $guide_path . "guide.php?subject=" . $guide['shortform'];
+                }
+                include ('lti_view/multiple_guides_view.php');
+            }
         }
     }
 }

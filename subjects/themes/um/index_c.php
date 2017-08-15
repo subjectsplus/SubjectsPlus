@@ -271,13 +271,18 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
     $guide_experts = "$expert_item";
 
-    
+if ( isset ( $_GET["no_bb_guide"] )){
 
+    $bb_guide_not_found = intval(scrubData($_GET["no_bb_guide"]));
 
-
-
-
-
+    if ($bb_guide_not_found == 1){
+        print "
+<div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" .  _("We could not find a guide") . "</p>
+</div>";
+    }
+}
 
 
 ////////////////////////////
@@ -382,7 +387,11 @@ include("includes/footer_um.php");
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
 
-              
+        if ($(".notification-close-button")[0]){
+            $(".notification-close-button").click(function(){
+               $(".notification").hide();
+            });
+        }
 
 
     });
