@@ -52,6 +52,43 @@ class SubjectBBCourse implements OutputInterface
         return $subs_option_boxes;
     }
 
+    function getCurrentAssociations() {
+
+        $temp = "";
+
+        $statement = $this->connection->prepare ("SELECT DISTINCT course_code FROM subject where course_code IS NOT NULL AND LENGTH(course_code) = 3");
+        $statement->execute();
+        $statement = $statement->fetchAll();
+        $course_codes = $statement;
+
+        foreach ($course_codes as $course_code){
+            $code = $course_code[0];
+            $statement = $this->connection->prepare ("SELECT subject_id, subject, shortform FROM subject where course_code IS NOT NULL AND course_code = :code");
+            $statement->bindParam ( ":code", $code );
+            $statement->execute();
+            $statement = $statement->fetchAll();
+            $guides = $statement;
+            $temp[$code]=$guides;
+        }
+
+        $associations = "";
+
+        if (count($temp) > 0){
+            $associations .= "<dl>";
+            foreach ($temp as $key => $value){
+                $associations .= "<dt data-subject-code='$key' class='subject-code-title'>$key</dt>";
+                foreach ($value as $guide_info){
+                    $guide_id = $guide_info[0];
+                    $guide_title = $guide_info[1];
+                    $associations .= "<dd class='subject-code-guide' data-guide-id='$guide_id'>$guide_title <a id=\"delete-association-btn\" title=\"Delete\"><i class=\"fa fa-trash\"></i></a></dd>";
+                }
+            }
+
+            $associations .= "</dl>";
+        }
+        return $associations;
+    }
+
     function getInstructorsDropDownItems($selected_instructor) {
 
         $subs_option_boxes = "";

@@ -83,6 +83,7 @@ class BuildNav {
           <!--<li><a href=\"$CpanelPath" . "guides/delish_url.php\">" . _("Delicious Builder") . "</a></li>-->
           <li><a href=\"$CpanelPath" . "guides/link_checker.php\">" . _("Link Checker") . "</a></li>
  <li><a href=\"$CpanelPath" . "guides/stats.php\">" . _("Stats") . "</a></li> 
+  <li><a href=\"$CpanelPath" . "guides/guide_bb_course.php\">" . _("Blackboard Courses Guide Admin") . "</a></li> 
        </ul>
       </div></li>";
     }

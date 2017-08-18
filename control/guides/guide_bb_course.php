@@ -19,6 +19,7 @@ $db = new Querier;
 $objSubjectCodes = new SubjectBBCourse($db);
 
 $subs_option_boxes = $objSubjectCodes->getSubjectCodesDropDownItems();
+$current_associations = $objSubjectCodes->getCurrentAssociations();
 
 $all_subject_codes = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
@@ -61,6 +62,10 @@ $associated_guides_viewport .= "</div>";
 <div class="pure-g">
 
     <div class="pure-u-1-2">
+        <?php echo makePluslet(_("Current Associations"), $current_associations, "no_overflow"); ?>
+    </div>
+
+    <div class="pure-u-1-2">
         <div class="pluslet">
             <div class="titlebar">
                 <div class="titlebar_text"><?php print _("Select Subject Code"); ?></div>
@@ -70,12 +75,12 @@ $associated_guides_viewport .= "</div>";
                 <div class="all-subjects-dropdown dropdown_list"><?php print $all_subject_codes; ?></div>
             </div>
         </div>
-        <?php echo makePluslet(_("Guides Associated with Subject Code"), $associated_guides_viewport, "no_overflow"); ?>
+        <div class="pure-u-1-2">
+            <?php echo makePluslet(_("Search Guides"), $subject_code_search_viewport, "no_overflow"); ?>
+        </div>
     </div>
 
-    <div class="pure-u-1-2">
-        <?php echo makePluslet(_("Search Guides"), $subject_code_search_viewport, "no_overflow"); ?>
-    </div>
+
 
 </div>
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
