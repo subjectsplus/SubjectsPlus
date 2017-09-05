@@ -71,8 +71,6 @@ $v2styles = TRUE;
 
 <body>
 
-<div class="sys-alert-regular"><p style="text-align: center; margin: 0; padding: 0;">All UM Libraries websites and services will be temporarily offline on Thursday evening, Aug. 10th due to the move of library servers into the Ungar Building. The uSearch library catalog will remain available; however, access to all licensed electronic resources and digital collections will be affected. The work will begin at ca. 6:30 pm; web services may be interrupted for several hours, with the UML website and electronic resource access restored ASAP.</p></div>
-
 <div id="wrap">
 
 <div id="header-content"> 
