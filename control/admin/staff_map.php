@@ -40,12 +40,15 @@ AND ptags LIKE "%librarian%"';
   $db = new Querier;
   $staffArray = $db->query($q1);
 
+
 ?>
 <div id="map" style="width: 100%; height: 800px; border: 1px solid #333;"></div>
 
-<?php include("../includes/footer.php"); ?>
+<?php include("../includes/footer.php"); global $google_maps_api_key;?>
 
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $google_maps_api_key?>&sensor=false"></script>
 <script type="text/javascript">
   
   google.maps.event.addDomListener(window, 'load', function() {
