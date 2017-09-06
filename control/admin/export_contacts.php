@@ -73,7 +73,7 @@ $export = $db->query($select,PDO::FETCH_NUM);
 $fields = count( $export );
 
 // yes, i cheated.  couldn't figure out how to get this with pdo from $select query
-$header_fields = array("Last Name", "First Name", "Work Phone #", "Cell Phone #", "Home Phone", "Contact Name", "Contact Phone #", "Relationship", "Department", "Street Address", "City", "State", "Zip", "Super_ID", "Supervisor Lname", "Supervisor Fname");
+$header_fields = array("Last Name", "First Name", "Work Phone #", "Cell Phone #", "Home Phone", "Contact Email", "Contact Name", "Contact Phone #", "Relationship", "Department", "Street Address", "City", "State", "Zip", "Super_ID", "Supervisor Lname", "Supervisor Fname");
 
 foreach ($header_fields as $key => $value) {
   $header .= $value  . "\t";
