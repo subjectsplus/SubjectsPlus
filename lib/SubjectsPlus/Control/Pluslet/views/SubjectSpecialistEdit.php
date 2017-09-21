@@ -86,9 +86,9 @@
         var ss = subjectSpecialist();
         ss.init();
 
-        var editor = CKEDITOR.instances['editor-specialist'];
-
-        $('#editor-specialist-container').append(editor.updateElement());
+//        var editor = CKEDITOR.instances['editor-specialist'];
+//
+//        $('#editor-specialist-container').append(editor.updateElement());
 
         $('body').on('click', '#save_guide', function(){
 
