@@ -60,7 +60,48 @@ function subjectGuideService() {
         displaySubjectCodeGuides: function () {
             $('body').on('change', '#subject_codes', function () {
                 mySubjectGuide.refreshSubjectCodeGuides();
+                mySubjectGuide.addToEditing();
             });
+        },
+
+        addToEditing: function () {
+            var selected_item = $('#subject_codes').find(":selected");
+            var selected_subject_code_id = selected_item.attr('subject-code-id');
+            var selectedCodeForEdition = $("#current-selection-editing").children().length;
+            var codeInCurrentAssociations = $("#current-associations-list").find("dt[data-subject-code='" + selected_subject_code_id + "']");
+            var codeGuidesList = $("#current-associations-list").find("dd[data-subject-code='" + selected_subject_code_id + "']");
+
+            if (codeInCurrentAssociations.length == 1){
+                mySubjectGuide.setCurrentCodeAsEditing(codeInCurrentAssociations, codeGuidesList);
+                if (selectedCodeForEdition != 0){
+                    mySubjectGuide.cleanSelectedForEditing(selected_subject_code_id);
+                }
+            }else{
+                mySubjectGuide.cleanSelectedForEditing("");
+            }
+        },
+
+        cleanSelectedForEditing: function (selected_subject_code_id) {
+            var editingNow = $('#current-selection-editing');
+            var currentAssociationsList = $('#current-associations-list');
+            $(editingNow).children().each(function (i, element) {
+                if ($(element).attr('data-subject-code') !== selected_subject_code_id){
+                    var temp = $(element).detach();
+                    $(currentAssociationsList).append(temp);
+                }
+            });
+
+            if (!selected_subject_code_id){
+                editingNow.parent().hide();
+            }
+        },
+
+        setCurrentCodeAsEditing: function (codeInCurrentAssociations, codeGuidesList) {
+            var editingList = $('#current-selection-editing');
+            editingList.append(codeInCurrentAssociations);
+            editingList.append(codeGuidesList);
+            var editing = $('#code-editing-list');
+            editing.show();
         },
 
         refreshSubjectCodeGuides: function () {
@@ -104,6 +145,8 @@ function subjectGuideService() {
                 });
             } else {
                 mySubjectGuide.clearSearchResults();
+                mySubjectGuide.hideSearchResultsContainer();
+                mySubjectGuide.cleanSelectedForEditing("");
                 mySubjectGuide.clearDatabasesList();
             }
         },

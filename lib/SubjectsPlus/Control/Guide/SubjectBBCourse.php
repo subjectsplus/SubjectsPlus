@@ -74,13 +74,18 @@ class SubjectBBCourse implements OutputInterface
         $associations = "";
 
         if (count($temp) > 0){
-            $associations .= "<dl>";
+            $associations .= "<div style='display: none' id='code-editing-list'>
+                                <h3>Selected for editing</h3>
+                                <dl id='current-selection-editing'></dl>
+<hr>
+</div>";
+            $associations .= "<dl id='current-associations-list'>";
             foreach ($temp as $key => $value){
                 $associations .= "<dt data-subject-code='$key' class='subject-code-title'>$key</dt>";
                 foreach ($value as $guide_info){
                     $guide_id = $guide_info[0];
                     $guide_title = $guide_info[1];
-                    $associations .= "<dd class='subject-code-guide' data-guide-id='$guide_id'>$guide_title <a id=\"delete-association-btn\" title=\"Delete\"><i class=\"fa fa-trash\"></i></a></dd>";
+                    $associations .= "<dd data-subject-code='$key' class='subject-code-guide' data-guide-id='$guide_id'>$guide_title <a id=\"delete-association-btn\" title=\"Delete\"><i class=\"fa fa-trash\"></i></a></dd>";
                 }
             }
 
