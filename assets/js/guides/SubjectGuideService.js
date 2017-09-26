@@ -154,36 +154,79 @@ function subjectGuideService() {
         addGuideToSubject: function () {
             $('body').on('click', '.add-guide-btn', function () {
                 var clickedRow = $(this).closest('li');
-                var clickedRowId = clickedRow.attr('guide_id');
-                var listCount = $('#guide-list').find("li[subject_id='"+clickedRowId+"']").length;
+                var subject_id = clickedRow.attr('guide_id');
+                var listCount = $('#guide-list').find("li[subject_id='"+subject_id+"']").length;
                 var listItemsCount = $('#guide-list').find("li").length;
                 var label = clickedRow.text();
-                var subject_id = $('#subject_codes').find(":selected").attr('subject-code-id');
+                var subject_code_id = $('#subject_codes').find(":selected").attr('subject-code-id');
+                var codeInCurrentAssociations = $("#current-associations-list").find("dt[data-subject-code='" + subject_code_id + "']");
+                var codeGuidesList = $("#current-associations-list").find("dd[data-subject-code='" + subject_code_id + "']");
+                var editingAssociationList = $("#current-selection-editing").find("dt[data-subject-code='" + subject_code_id + "']");
 
-                if (listCount == 0) {
-
-                    var hidden = $('#guide-list').find("li[subject_id='"+clickedRowId+"']").length;
-
-                    if (hidden > 0){
-                        $('#guide-list').find("li[subject_id='"+clickedRowId+"']").show();
-                        // var index = mySubjectGuide.guidesIdToDelete.indexOf(rank_id);
-                        // if(mySubjectGuide.guidesIdToDelete.indexOf(rank_id) != -1){
-                        //     var index = mySubjectGuide.guidesIdToDelete.indexOf(rank_id);
-                        //     mySubjectGuide.guidesIdToDelete.splice(index, 1);
-                        // }
-                        clickedRow.remove();
-                    }else {
-                        if(mySubjectGuide.guidesIdToDelete.indexOf(subject_id) != -1){
-                            var index = mySubjectGuide.guidesIdToDelete.indexOf(subject_id);
-                            mySubjectGuide.guidesIdToDelete.splice(index, 1);
-                        }
-                        $('#guide-list').prepend('<li subject_id="' + clickedRowId + '">' +  label + mySubjectGuide.strings.removeDatabaseBtn);
-                        clickedRow.remove();
-                        mySubjectGuide.showSaveChangesButtons();
+                if (codeInCurrentAssociations.length == 1){
+                    mySubjectGuide.setCurrentCodeAsEditing(codeInCurrentAssociations, codeGuidesList);
+                    if (selectedCodeForEdition != 0){
+                        mySubjectGuide.cleanSelectedForEditing(label);
                     }
                 }else{
-                    $('#guide-list').prepend('<li subject_id="' + clickedRowId + '">' + label + mySubjectGuide.strings.removeDatabaseBtn);
+                    if (editingAssociationList.length == 0){
+                        $("#current-selection-editing").append('<dt data-subject-code="'+subject_code_id+'">'+subject_code_id+'</dt>');
+                    }
+
+                    $("#current-selection-editing").append('' +
+                        '<dd subject_id="'+subject_id+'" data-subject-code="'+subject_code_id+'">'+label + mySubjectGuide.strings.removeDatabaseBtn +'</dd>');
                     clickedRow.remove();
+                    var editing = $('#code-editing-list');
+                    editing.show();
+                    var this_element = $("#current-selection-editing last-child").
+
+                    debugger;
+                    mySubjectGuide.saveInsertAssociation(this_element, subject_id, subject_code_id);
+                }
+
+                // if (listCount == 0) {
+                //
+                //     var hidden = $('#guide-list').find("li[subject_id='"+clickedRowId+"']").length;
+                //
+                //     if (hidden > 0){
+                //         $('#guide-list').find("li[subject_id='"+clickedRowId+"']").show();
+                //         // var index = mySubjectGuide.guidesIdToDelete.indexOf(rank_id);
+                //         // if(mySubjectGuide.guidesIdToDelete.indexOf(rank_id) != -1){
+                //         //     var index = mySubjectGuide.guidesIdToDelete.indexOf(rank_id);
+                //         //     mySubjectGuide.guidesIdToDelete.splice(index, 1);
+                //         // }
+                //         clickedRow.remove();
+                //     }else {
+                //         if(mySubjectGuide.guidesIdToDelete.indexOf(subject_id) != -1){
+                //             var index = mySubjectGuide.guidesIdToDelete.indexOf(subject_id);
+                //             mySubjectGuide.guidesIdToDelete.splice(index, 1);
+                //         }
+                //         $('#guide-list').prepend('<li subject_id="' + clickedRowId + '">' +  label + mySubjectGuide.strings.removeDatabaseBtn);
+                //         clickedRow.remove();
+                //         mySubjectGuide.showSaveChangesButtons();
+                //     }
+                // }else{
+                //     $('#guide-list').prepend('<li subject_id="' + clickedRowId + '">' + label + mySubjectGuide.strings.removeDatabaseBtn);
+                //     clickedRow.remove();
+                // }
+            });
+        },
+
+        saveInsertAssociation: function (guide_id, subject_code_id) {
+            var payload = {
+                'action': 'saveChanges',
+                'guide_id': guide_id,
+                'subject_code_id': subject_code_id
+            };
+            $.ajax({
+                url: mySubjectGuide.settings.guideActionUrl,
+                type: "POST",
+                dataType: "json",
+                data: payload,
+                success: function (data) {
+                    if (index === total - 1) {
+                        mySubjectGuide.refreshSubjectCodeGuides();
+                    }
                 }
             });
         },
@@ -209,8 +252,6 @@ function subjectGuideService() {
 
         saveChanges: function () {
 
-            $('body').on('click', '#update-guides-btn', function () {
-
                 var selected_item = $('#subject_codes').find(":selected");
                 var subject_code_id = selected_item.attr('subject-code-id');
 
@@ -228,6 +269,8 @@ function subjectGuideService() {
                         data: payload
                     });
                 }
+
+                debugger;
                 var total = $('#guide-list li').length;
                 $('#guide-list li').each(function(index) {
                     if($(this).is(":visible")) {
@@ -254,7 +297,6 @@ function subjectGuideService() {
                 $('#update-guides-btn').hide();
                 mySubjectGuide.clearSearchResults();
 
-            });
         },
 
         showNoGuidesMessage: function () {

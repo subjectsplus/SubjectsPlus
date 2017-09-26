@@ -85,7 +85,7 @@ class SubjectBBCourse implements OutputInterface
                 foreach ($value as $guide_info){
                     $guide_id = $guide_info[0];
                     $guide_title = $guide_info[1];
-                    $associations .= "<dd data-subject-code='$key' class='subject-code-guide' data-guide-id='$guide_id'>$guide_title <a id=\"delete-association-btn\" title=\"Delete\"><i class=\"fa fa-trash\"></i></a></dd>";
+                    $associations .= "<dd data-subject-code='$key' class='subject-code-guide' data-guide-id='$guide_id'>$guide_title <a id=\"delete-association-btn\" title=\"Remove Guide from Subject Code\"><i class=\"fa fa-trash\"></i></a></dd>";
                 }
             }
 
