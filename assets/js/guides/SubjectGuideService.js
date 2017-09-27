@@ -17,7 +17,6 @@ function subjectGuideService() {
             mySubjectGuide.addGuideToSubject();
             mySubjectGuide.displaySubjectCodeGuides();
             mySubjectGuide.deleteGuideFromSubjectCode();
-            mySubjectGuide.saveChanges();
         },
         init : function() {
             mySubjectGuide.bindUiActions();
@@ -42,11 +41,11 @@ function subjectGuideService() {
                         success: function(data) {
                             var result = '';
                             $.each(data, function (index, obj) {
-                                var listCount = $('#guide-list').find("li[subject_id='"+obj.id+"']").filter(':visible').length;
+                                var listCount = $("dd[data-guide-id='"+obj.id+"']").length;
 
                                 if (listCount == 0) {
                                     var addBtn = "<a class='add-guide-btn' title='Add Guide to Subject Code'><i class='fa fa-plus-circle'></i> </a>";
-                                    result += '<li guide_id="' + obj.id + '">' + addBtn + obj.label + '</li>';
+                                    result += '<li data-guide-id="' + obj.id + '">' + addBtn + obj.label + '</li>';
                                 }
                             });
 
@@ -108,7 +107,6 @@ function subjectGuideService() {
             var selected_item = $('#subject_codes').find(":selected");
             var subject_code_id = selected_item.attr('subject-code-id');
             mySubjectGuide.guidesIdToDelete = new Array();
-            mySubjectGuide.hideNoGuidesMessage();
 
             if (subject_code_id) {
                 mySubjectGuide.clearGuidesList();
@@ -138,23 +136,19 @@ function subjectGuideService() {
                             }
                             $('#guide-list').prepend('<li subject_id="' + subject_id + '">' + subject + instructor + '<a class="remove-guide-btn"><i class="fa fa-trash fa-lg"></i></a></li>');
                         });
-
-                        mySubjectGuide.hideSaveChangesButtons();
-                        mySubjectGuide.showNoGuidesMessage();
                     }
                 });
             } else {
                 mySubjectGuide.clearSearchResults();
                 mySubjectGuide.hideSearchResultsContainer();
-                mySubjectGuide.cleanSelectedForEditing("");
-                mySubjectGuide.clearDatabasesList();
+                mySubjectGuide.cleanSelectedForEditing("");``
             }
         },
 
         addGuideToSubject: function () {
             $('body').on('click', '.add-guide-btn', function () {
                 var clickedRow = $(this).closest('li');
-                var subject_id = clickedRow.attr('guide_id');
+                var subject_id = clickedRow.attr('data-guide-id');
                 var listCount = $('#guide-list').find("li[subject_id='"+subject_id+"']").length;
                 var listItemsCount = $('#guide-list').find("li").length;
                 var label = clickedRow.text();
@@ -174,48 +168,21 @@ function subjectGuideService() {
                     }
 
                     $("#current-selection-editing").append('' +
-                        '<dd subject_id="'+subject_id+'" data-subject-code="'+subject_code_id+'">'+label + mySubjectGuide.strings.removeDatabaseBtn +'</dd>');
+                        '<dd data-guide-id="'+subject_id+'" data-subject-code="'+subject_code_id+'">'+label + mySubjectGuide.strings.removeDatabaseBtn +'</dd>');
                     clickedRow.remove();
                     var editing = $('#code-editing-list');
                     editing.show();
-                    var this_element = $("#current-selection-editing last-child").
+                    var this_element = $("#current-selection-editing last-child");
 
-                    debugger;
                     mySubjectGuide.saveInsertAssociation(this_element, subject_id, subject_code_id);
                 }
-
-                // if (listCount == 0) {
-                //
-                //     var hidden = $('#guide-list').find("li[subject_id='"+clickedRowId+"']").length;
-                //
-                //     if (hidden > 0){
-                //         $('#guide-list').find("li[subject_id='"+clickedRowId+"']").show();
-                //         // var index = mySubjectGuide.guidesIdToDelete.indexOf(rank_id);
-                //         // if(mySubjectGuide.guidesIdToDelete.indexOf(rank_id) != -1){
-                //         //     var index = mySubjectGuide.guidesIdToDelete.indexOf(rank_id);
-                //         //     mySubjectGuide.guidesIdToDelete.splice(index, 1);
-                //         // }
-                //         clickedRow.remove();
-                //     }else {
-                //         if(mySubjectGuide.guidesIdToDelete.indexOf(subject_id) != -1){
-                //             var index = mySubjectGuide.guidesIdToDelete.indexOf(subject_id);
-                //             mySubjectGuide.guidesIdToDelete.splice(index, 1);
-                //         }
-                //         $('#guide-list').prepend('<li subject_id="' + clickedRowId + '">' +  label + mySubjectGuide.strings.removeDatabaseBtn);
-                //         clickedRow.remove();
-                //         mySubjectGuide.showSaveChangesButtons();
-                //     }
-                // }else{
-                //     $('#guide-list').prepend('<li subject_id="' + clickedRowId + '">' + label + mySubjectGuide.strings.removeDatabaseBtn);
-                //     clickedRow.remove();
-                // }
             });
         },
 
-        saveInsertAssociation: function (guide_id, subject_code_id) {
+        saveInsertAssociation: function (element, data_guide_id, subject_code_id) {
             var payload = {
                 'action': 'saveChanges',
-                'guide_id': guide_id,
+                'guide_id': data_guide_id,
                 'subject_code_id': subject_code_id
             };
             $.ajax({
@@ -224,8 +191,8 @@ function subjectGuideService() {
                 dataType: "json",
                 data: payload,
                 success: function (data) {
-                    if (index === total - 1) {
-                        mySubjectGuide.refreshSubjectCodeGuides();
+                    if (!data) {
+                        alert("A connection error has occurred");
                     }
                 }
             });
@@ -233,35 +200,14 @@ function subjectGuideService() {
 
         deleteGuideFromSubjectCode: function () {
             $('body').on('click', '.remove-guide-btn', function () {
-                var listItem = $(this).closest('li');
-                if (typeof listItem.attr('subject_id') !== typeof undefined && listItem.attr('subject_id') !== false) {
-                    mySubjectGuide.guidesIdToDelete.push(listItem.attr('subject_id'));
-                }
-                $(listItem).hide();
-                var guideInput = $('#add-guide-input');
-                var addBtn = "<a class='add-guide-btn' title='Add Guide to Subject Code'><i class='fa fa-plus-circle'></i> </a>";
-
-                var itemToSearchResults = '<li guide_id="' + listItem.attr('subject_id') + '" >' + addBtn + listItem.text() + '</li>';
-
-                $('#guide-search-results').prepend(itemToSearchResults);
-
-                mySubjectGuide.showSaveChangesButtons();
-                mySubjectGuide.showNoGuidesMessage();
-            });
-        },
-
-        saveChanges: function () {
-
-                var selected_item = $('#subject_codes').find(":selected");
-                var subject_code_id = selected_item.attr('subject-code-id');
-
-                var deleteListCount = mySubjectGuide.guidesIdToDelete.length;
-                for (var i = 0; i < deleteListCount; i++) {
+                var listItem = $(this).closest('dd');
+                var subject_code = listItem.attr('data-subject-code');
+                if (typeof listItem.attr('data-guide-id') !== typeof undefined && listItem.attr('data-guide-id') !== false) {
                     var payload = {
                         'action': 'saveChanges',
-                        'guide_id': mySubjectGuide.guidesIdToDelete[i]
+                        'guide_id': listItem.attr('data-guide-id')
                     };
-                    $('#guides-list').find("li[subject_id='"+mySubjectGuide.guidesIdToDelete[i]+"']").remove();
+
                     $.ajax({
                         url: mySubjectGuide.settings.guideActionUrl,
                         type: "POST",
@@ -270,78 +216,12 @@ function subjectGuideService() {
                     });
                 }
 
-                debugger;
-                var total = $('#guide-list li').length;
-                $('#guide-list li').each(function(index) {
-                    if($(this).is(":visible")) {
-                        var guide_id = $(this).attr('subject_id');
-                        var payload = {
-                            'action': 'saveChanges',
-                            'guide_id': guide_id,
-                            'subject_code_id': subject_code_id
-                        };
-                        $.ajax({
-                            url: mySubjectGuide.settings.guideActionUrl,
-                            type: "POST",
-                            dataType: "json",
-                            data: payload,
-                            success: function () {
-                                if (index === total - 1) {
-                                    mySubjectGuide.refreshSubjectCodeGuides();
-                                }
-                            }
-                        });
-                    }
-                });
-
-                $('#update-guides-btn').hide();
-                mySubjectGuide.clearSearchResults();
-
-        },
-
-        showNoGuidesMessage: function () {
-            if($('#guide-list li').length == 0) {
-                if($('#guide-list-no-items').length == 0) {
-                    $('#guide-list-container').prepend("<p id='guide-list-no-items' class='db-alert'>There are no guides assigned to this subject code.</p>");
-                }else{
-                    $('#guide-list-no-items').show();
-                }
-            }
-        },
-
-        errorDialog: function (selector) {
-            $( selector ).dialog({
-                resizable: false,
-                height: "auto",
-                width: 400,
-                modal: true,
-                buttons: {
-                    Cancel: function() {
-                        $( this ).dialog( "close" );
-                    }
+                $("dd[data-guide-id='"+listItem.attr('data-guide-id')+"']").remove();
+                if ($("dd[data-subject-code='"+subject_code+"']").length == 0){
+                    $("dt[data-subject-code='"+subject_code+"']").remove();
+                    $("#code-editing-list").hide();
                 }
             });
-        },
-
-
-        clearFlashMsg: function () {
-            $('#flash-msg').html(' ');
-        },
-        renderFlashMsg: function (msg) {
-            mySubjectGuide.clearFlashMsg();
-            $('#flash-msg').append(msg).addClass( 'success-msg' );
-        },
-
-        showSaveChangesButtons: function () {
-            $('#update-guides-btn').show();
-        },
-
-        hideSaveChangesButtons: function () {
-            $('#update-guides-btn').hide();
-        },
-
-        hideAllDescriptionOverrideTextAreas: function () {
-            $('.description-override-text-area').hide();
         },
 
         showSearchResultsContainer: function () {
@@ -359,14 +239,6 @@ function subjectGuideService() {
 
         showDatabaseListContainer: function () {
             $('#database-list-container').show();
-        },
-
-        hideGuideListContainer: function () {
-            $('#guide-list-container').hide();
-        },
-
-        hideNoGuidesMessage: function () {
-            $('#guide-list-no-items').hide();
         },
 
         clearGuidesList: function () {
