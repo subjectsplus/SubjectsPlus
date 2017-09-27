@@ -1223,7 +1223,7 @@ class Staff {
         "lat_long = " . $db->quote(scrubData($this->_lat_long)) .
         " WHERE staff_id = " . scrubData($this->_staff_id, 'integer');
 
-    //echo $qUpStaff;
+    echo $qUpStaff;
     $rUpStaff = $db->exec($qUpStaff);
 
     if ($type == "full") {
