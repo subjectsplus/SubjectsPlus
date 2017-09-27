@@ -20,9 +20,9 @@
 // Some constants, previously in the config.php
 
 if ($_SERVER['HTTP_HOST'] != "localhost") {
-    define("PATH_FROM_ROOT", "http://library.miami.edu");
-    define("THEME_FOLDER", "http://library.miami.edu/wp-content/themes/");
-    define("THEME_BASE_DIR", "http://library.miami.edu/wp-content/themes/um-chc/");
+    define("PATH_FROM_ROOT", "https://library.miami.edu");
+    define("THEME_FOLDER", "https://library.miami.edu/wp-content/themes/");
+    define("THEME_BASE_DIR", "https://library.miami.edu/wp-content/themes/um-chc/");
 } else {
     define("PATH_FROM_ROOT", "/richter/chc");
     define("THEME_BASE_DIR", "http://localhost/richter/wp-content/themes/um-chc/");
@@ -82,7 +82,7 @@ a:hover {text-decoration: underline;}
 }
 
 h1 {
-    background-image: url("http://library.miami.edu/chc/wp-content/themes/um-chc/images/h1_bg_blue-blue.png");
+    background-image: url("https://library.miami.edu/chc/wp-content/themes/um-chc/images/h1_bg_blue-blue.png");
     background-color: #cee8eb !important;
 }
 
@@ -122,7 +122,7 @@ div.mega_child.mega-md {width: 400px !important;}
 }
 
 #topsearch_button2 {
-    background: url("http://library.miami.edu/wp-content/themes/umiami/images/search_button_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("https://library.miami.edu/wp-content/themes/umiami/images/search_button_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 
 #search_options {
@@ -204,15 +204,15 @@ div.mega_child.mega-md {width: 400px !important;}
     <div class="pure-g header-content">
 
         <div class="pure-u-1 pure-u-md-2-5">
-          <a href="/index.php"><img src="http://library.miami.edu/chc/wp-content/themes/um-chc/images/chc_logo.png" alt="UM Cuban Heritage Collection" border="0" /></a>
+          <a href="/index.php"><img src="https://library.miami.edu/chc/wp-content/themes/um-chc/images/chc_logo.png" alt="UM Cuban Heritage Collection" border="0" /></a>
           <span id="menu_button"><a class="pure-button button-menu" href="#">Menu</a></span>
         </div>
       
         <div class="pure-u-1 pure-u-md-1-5 visible-desktop">&nbsp;</div>
 
         <div class="pure-u-1 pure-u-md-1-5 visible-desktop">
-            <img src="http://library.miami.edu/chc/wp-content/themes/um-chc/images/question_orange.png" alt="ask a librarian" />
-            <span class="header-text"><a href="http://library.miami.edu/ask-a-librarian/">Ask a Librarian</a></span>
+            <img src="https://library.miami.edu/chc/wp-content/themes/um-chc/images/question_orange.png" alt="ask a librarian" />
+            <span class="header-text"><a href="https://library.miami.edu/ask-a-librarian/">Ask a Librarian</a></span>
         </div> 
 
         <div class="pure-u-1 pure-u-md-1-5 visible-desktop">
@@ -259,7 +259,7 @@ div.mega_child.mega-md {width: 400px !important;}
                                     <li class="last"><a  href="<?php print PATH_TO_CHILD; ?>/pavilion">The Robert C. Goizueta Pavilion</a></li>
                                   </ul>
                                   
-                                  <div class="mega_more">See also <a href="http://www.library.miami.edu/specialcollections/">Special Collections</a>, <a href="http://www.library.miami.edu/universityarchives/">Archives</a></div>
+                                  <div class="mega_more">See also <a href="https://www.library.miami.edu/specialcollections/">Special Collections</a>, <a href="https://www.library.miami.edu/universityarchives/">Archives</a></div>
                             </div>
                       </li>
 
@@ -274,9 +274,9 @@ div.mega_child.mega-md {width: 400px !important;}
                                   </ul>
                                   <ul>
                                     <li><a href="<?php print PATH_TO_CHILD; ?>/collections/archivalmaterials/">Archival &amp; Manuscript Materials</a></li>
-                                    <li><a href="http://library.miami.edu/oral-histories/">Oral Histories</a></li>
+                                    <li><a href="https://library.miami.edu/oral-histories/">Oral Histories</a></li>
                                     <li><a href="<?php print PATH_TO_CHILD; ?>/searchtools">Search Tools</a></li>
-                                    <li class="last"><a  href="http://libguides.miami.edu/chc">Research Guides</a></li>
+                                    <li class="last"><a  href="https://sp.library.miami.edu/subjects/collection.php?d=chc">Research Guides</a></li>
                                   </ul>
                             </div>
                       </li>
@@ -287,7 +287,7 @@ div.mega_child.mega-md {width: 400px !important;}
                                   <ul>
                                     <li><a href="<?php print PATH_TO_CHILD; ?>/fellows">Fellowships</a></li>
                                     <li><a href="<?php print PATH_TO_CHILD; ?>/scholars">Undergraduate Scholars</a></li>
-                                    <li class="last"><a href="http://libguides.miami.edu/chc">Research Tips</a></li>
+                                    <li class="last"><a href="https://sp.library.miami.edu/subjects/chc">Research Tips</a></li>
                                   </ul>
                                   <ul>
                                     <li><a href="<?php print PATH_FROM_ROOT; ?>/photocopies-digital-reproductions/">Rights &amp; Reproductions</a></li>
@@ -313,7 +313,7 @@ div.mega_child.mega-md {width: 400px !important;}
                       </li>
 
                       <!--ACCOUNTS-->
-                      <li class="login mega last-child" rel="accounts"><a href="http://aeon.library.miami.edu/" class="nav_highlight">Your Research Account</a></li>
+                      <li class="login mega last-child" rel="accounts"><a href="https://aeon.library.miami.edu/aeon/" class="nav_highlight">Your Research Account</a></li>
                     
 
                 </ul><!--end #nav_menu -->
