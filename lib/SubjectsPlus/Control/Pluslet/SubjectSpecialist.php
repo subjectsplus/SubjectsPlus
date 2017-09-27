@@ -51,10 +51,15 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
 
     protected function onEditOutput() {
-        //get ckEditor
-        $this->_ckEditor = $this->getCkEditor();
 
+        $body_before_ckEditor = $this->_body;
         $this->_body = $this->loadHtml(__DIR__ . '/views/SubjectSpecialistEdit.php' );
+
+        //get ckEditor
+        $ckEditor = $this->getCkEditor($body_before_ckEditor);
+
+        $this->_body .= '<hr>' . $ckEditor;
+
     }
 
 
@@ -190,7 +195,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         return $editorData;
     }
 
-    protected function getCkEditor() {
+    protected function getCkEditor($body_before_ckEditor) {
 
         global $CKPath;
         global $CKBasePath;
@@ -201,13 +206,14 @@ class Pluslet_SubjectSpecialist extends Pluslet {
 
         $oCKeditor = new CKEditor($CKBasePath);
         $oCKeditor->timestamp = time();
+        $oCKeditor->returnOutput = true;
         //$oCKeditor->config['ToolbarStartExpanded'] = true;
         $config['toolbar'] = 'TextFormat';
         $config['height'] = '300';
         $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
         $this_instance = "editor-specialist";
-        $ckEditor = $oCKeditor->editor($this_instance,  $this->_body, $config);
+        $ckEditor = $oCKeditor->editor($this_instance,  $body_before_ckEditor, $config);
         return $ckEditor;
     }
 
