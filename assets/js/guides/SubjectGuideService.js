@@ -141,7 +141,7 @@ function subjectGuideService() {
             } else {
                 mySubjectGuide.clearSearchResults();
                 mySubjectGuide.hideSearchResultsContainer();
-                mySubjectGuide.cleanSelectedForEditing("");``
+                mySubjectGuide.cleanSelectedForEditing("");
             }
         },
 
