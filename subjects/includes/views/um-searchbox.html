@@ -1,4 +1,5 @@
-<form id="head_search" name="head_search" action="http://library.miami.edu/" method="GET">
+<!-- changing to https -->
+<form id="head_search" name="head_search" action="https://library.miami.edu/" method="GET">
 	<div id="search_container">
 		<fieldset style="" id="searchzone">
 			<input type="text" name="s" id="searchy" autocomplete="off">
@@ -77,13 +78,13 @@
 
 		var search = $('#searchy').val();
 		if (element.attr('value') === 'website') {
-			$('#head_search').attr("action", "http://library.miami.edu/");
+			$('#head_search').attr("action", "https://library.miami.edu/");
 
 		}
 
 		if (element.attr('value') === 'catalog_keyword') {
 
-			$('#head_search').attr("action", "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do");
+			$('#head_search').attr("action", "https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do");
 			$('#head_search').attr("onsubmit", "searchPrimoCatalog()");
 
 			$('#tab').attr("value", "default_tab");		
@@ -93,7 +94,7 @@
 
 		if (element.attr('value') === 'article') {
 
-			$('#head_search').attr("action", "http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do");
+			$('#head_search').attr("action", "https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do");
 			$('#head_search').attr("onsubmit", "searchPrimoCatalog()");
 			
 			$('#tab').attr("value", "everything");
@@ -104,7 +105,7 @@
 
 		if (element.attr('value') === 'digital') {
 
-			$('#head_search').attr("action", "http://merrick.library.miami.edu/cdm4/results.php");
+			$('#head_search').attr("action", "https://merrick.library.miami.edu/cdm4/results.php");
 			$('#cdmsearch').attr("value", search);
 
 		}
@@ -113,9 +114,9 @@
 
 
 	function searchPrimoCatalog() {
-      document.getElementById("primoQueryCatalog").value = "any,contains," + document.getElementById("searchy").value.replace(/[,]/g, " ");
-      document.forms["head_search"].submit();
-    } 
+      	  document.getElementById("primoQueryCatalog").value = "any,contains," + document.getElementById("searchy").value.replace(/[,]/g, " ");
+          document.forms["head_search"].submit();
+        } 
 
 	    
 
