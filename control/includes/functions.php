@@ -1982,3 +1982,115 @@ function targetBlanker() {
   return $target;
 
 }
+
+
+/**
+ * Created by PhpStorm.
+ * User: cbrownroberts
+ * Date: 4/21/17
+ * Time: 11:27 AM
+ * Send a message to Slack using Webhooks integration
+ */
+
+// (string) $message - message to be passed to Slack
+// (string) $channel - channel in which to write the message
+// (string) $icon - You can set up custom emoji icons to use with each message
+function sendSlackMsg($message, $channel = "wad-only", $icon = ":sunglasses:", $webhookUrl = "https://hooks.slack.com/services/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") {
+    $channel = ($channel) ? $channel : "wad-only";
+    $data = "payload=" . json_encode(array(
+            "channel"       =>  "#{$channel}",
+            "text"          =>  $message,
+            "icon_emoji"    =>  $icon
+        ));
+
+    // Get your webhook endpoint from your Slack settings
+    $ch = curl_init($webhookUrl);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+
+    return $result;
+}
+
+/**
+ * Created by PhpStorm.
+ * User: cbrownroberts
+ * Date: 9/27/17
+ * Time: 11:27 AM
+ * Add Google Invisible reCaptcha to form
+ * https://www.google.com/recaptcha
+ *
+ * these keys only work for sp.library.miami.edu
+ * site key: 6Lc3ODIUAAAAAAHj43kximcqolHy8awBeQZL58Um
+ * secret key: 6Lc3ODIUAAAAAFktaVHTLi0_Sqg_qUCCKeHZ5ZQl
+ *
+ * this must be in the head
+ * <script src='https://www.google.com/recaptcha/api.js'></script>
+ *
+ * Client Side
+ * button
+ * <button
+    class="g-recaptcha"
+    data-sitekey="6Lc3ODIUAAAAAAHj43kximcqolHy8awBeQZL58Um"
+    data-callback="YourOnSubmitFn">
+    Submit
+    </button>
+ *
+ * callback function for data-callback
+ *
+ *  function onSubmit(token) {
+        document.getElementById("tellus").submit();
+    }
+ *
+ * Server Side
+ * secret (required) 6Lc3ODIUAAAAAFktaVHTLi0_Sqg_qUCCKeHZ5ZQl
+ * response (required) The value of 'g-recaptcha-response'.
+ * remoteip (optional) The end user's ip address.
+ *
+ *   // Call the function post_captcha
+    $res = post_captcha($_POST['g-recaptcha-response']);
+    //var_dump($res);
+
+    if (!$res['success']) {
+        // What happens when the reCAPTCHA is not properly set up
+        $feedback = $submission_failure_feedback;
+    } else {
+        failed
+ * }
+ *
+ * See subjects/themes/um/talkback.php for example
+ *
+ *
+ */
+function post_captcha($user_response, $secret_key = "6Lc3ODIUAAAAAFktaVHTLi0_Sqg_qUCCKeHZ5ZQl") {
+
+    // reCaptcha info
+    $secret = $secret_key;
+    $remoteip = $_SERVER["REMOTE_ADDR"];
+    $curlopt_url = "https://www.google.com/recaptcha/api/siteverify";
+
+
+    $fields_string = '';
+    $fields = array(
+        'secret' => $secret,
+        'response' => $user_response,
+        'remoteip' => $remoteip
+    );
+    foreach($fields as $key=>$value)
+        $fields_string .= $key . '=' . $value . '&';
+    $fields_string = rtrim($fields_string, '&');
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $curlopt_url);
+    curl_setopt($ch, CURLOPT_POST, count($fields));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    return json_decode($result, true);
+}
