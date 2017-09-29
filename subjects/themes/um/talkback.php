@@ -136,6 +136,8 @@ $submission_failure_feedback = "
 </div>\n
 </div>\n";
 
+$recaptcha_failure_feedback = "Recaptcha failure triggered from UM talkback.php";
+
 //////////////////////
 // Some email stuff
 //////////////////////
@@ -191,8 +193,8 @@ if ( BlackLister($this_comment) == TRUE ) {
         // What happens when the reCAPTCHA is not properly set up
         $feedback = $submission_failure_feedback;
 
-        $slackMsg = "talkback recaptcha failed " . $feedback;
-        sendSlackMsg($slackMsg, "sp4", ":email:", "https://hooks.slack.com/services/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");
+        $slackMsg = $recaptcha_failure_feedback;
+        sendSlackMsg($slackMsg, "alerts", ":rotating_light:", "https://hooks.slack.com/services/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");
 
 
     } else {
@@ -361,12 +363,12 @@ if ( BlackLister($this_comment) == TRUE ) {
             if ($success) {
                 $stage_two = "ok";
                 $slackMsg = "talkback submitted " . $subject;
-                sendSlackMsg($slackMsg, "sp4", ":email:");
+                sendSlackMsg($slackMsg, "email", ":rotating_light:");
                 //print "mail sent to $send_to";
             } else {
                 $stage_two = "fail";
                 $slackMsg = "talkback mail fail.";
-                sendSlackMsg($slackMsg, "sp4", ":email:");
+                sendSlackMsg($slackMsg, "alerts", ":rotating_light:");
                 //print "mail didn't go to $send_to";
             }
         }
