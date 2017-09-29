@@ -160,9 +160,9 @@ include("includes/header_um.php");
 
 <!--Data Table-->
 <link type="text/css" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/footable.core.css">
-<script src="http://sp.library.miami.edu/subjects/themes/um/js/footable.js" type="text/javascript"></script>
-<script src="http://sp.library.miami.edu/subjects/themes/um/js/footable.sort.js" type="text/javascript"></script>
-<script src="http://sp.library.miami.edu/subjects/themes/um/js/footable.filter.js" type="text/javascript"></script>
+<script src="https://sp.library.miami.edu/subjects/themes/um/js/footable.js" type="text/javascript"></script>
+<script src="https://sp.library.miami.edu/subjects/themes/um/js/footable.sort.js" type="text/javascript"></script>
+<script src="https://sp.library.miami.edu/subjects/themes/um/js/footable.filter.js" type="text/javascript"></script>
 
 <script type="text/javascript">     
 
