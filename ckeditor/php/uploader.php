@@ -131,7 +131,9 @@ function getUserURL()
 			}
 		}
 
-		$lstrURL = 'http://' . $lstrURL . '/assets/';
+        $protocol = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+
+        $lstrURL = $protocol . $lstrURL . '/assets/';
 
 		//check to see if the user has their assets folder
 		$lstrURL = $lstrURL . "users/_" . $lstrUsername;
