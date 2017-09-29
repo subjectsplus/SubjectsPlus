@@ -16,7 +16,7 @@ switch ($our_site) {
         (305) 284-4900<br />
         Email:  <a href=\"mailto:chc@miami.edu\">chc@miami.edu</a>";
     $social_icons = "<p id=\"social_icons_small\">
-  <a href=\"" . PATH_TO_CHILD . "/feed/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/rss_26.png\"  alt=\"Visit the CHC Blog\" title=\"Visit the CHC Blog\" /></a>
+  <a href=\"" . PATH_TO_CHILD . "/feed/\"><img src=\"" . THEME_BASE_DIR . "/images/rss_26.png\"  alt=\"Visit the CHC Blog\" title=\"Visit the CHC Blog\" /></a>
   <a href=\"http://library.miami.edu/subscribe/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/mailing_list.png\"  alt=\"Join our Mailing List\" title=\"Join our Mailing List\" /></a>
       <a href=\"http://www.facebook.com/umchc\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
     <a href=\"https://twitter.com/umchc\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
@@ -29,33 +29,33 @@ switch ($our_site) {
     $library_address = "<strong>UM Libraries</strong> 1300 Memorial Drive<br />Coral Gables, Florida 33124-0320<br />
         (305) 284-3233";
     $social_icons = "<p id=\"social_icons_small\">      
-      <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
-      <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
-     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
-     <a href=\"https://www.instagram.com/umiamilibraries/\" border=\"0\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/instagram-icon.png\"  alt=\"Instagram\" title=\"Instagram\" /></a><br />
-        <a href=\"http://library.miami.edu/support-the-libraries/\"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/support-uml.png\"  alt=\"Support UML\" title=\"Support UML\" style=\"margin-top: 10px;\" /></a><a href=\"http://library.miami.edu/uml-inthenews/ \"><img src=\"http://library.miami.edu/wp-content/themes/umiami/images/uml-news.png\"  alt=\"UML in the News\" title=\"UML in the News\" style=\"margin-top: 10px;\" /></a>
+      <a href=\"http://www.facebook.com/pages/University-of-Miami-Libraries/16409329419\"><img src=\"" . THEME_BASE_DIR . "/images/facebook.png\"  alt=\"Find Us on Facebook\" title=\"Find Us on Facebook\" /></a>
+      <a href=\"http://www.flickr.com/photos/umdigital/\" border=\"0\"><img src=\"" . THEME_BASE_DIR . "/images/flickr.png\"  alt=\"Find us on Flickr\" title=\"Find Us on Flickr\" /></a>
+     <a href=\"https://twitter.com/UMiamiLibraries\" border=\"0\"><img src=\"" . THEME_BASE_DIR . "/images/twitter.png\"  alt=\"Twitter\" title=\"Twitter\" /></a>
+     <a href=\"https://www.instagram.com/umiamilibraries/\" border=\"0\"><img src=\"" . THEME_BASE_DIR . "/images/instagram-icon.png\"  alt=\"Instagram\" title=\"Instagram\" /></a><br />
+        <a href=\"http://library.miami.edu/support-the-libraries/\"><img src=\"" . THEME_BASE_DIR . "/images/support-uml.png\"  alt=\"Support UML\" title=\"Support UML\" style=\"margin-top: 10px;\" /></a><a href=\"https://library.miami.edu/uml-inthenews/ \"><img src=\"" . THEME_BASE_DIR . "/images/uml-news.png\"  alt=\"UML in the News\" title=\"UML in the News\" style=\"margin-top: 10px;\" /></a>
     </p>";
 
   }
     ?>
 <div class="footer-container">
-  <div id="wide_footer">	
-  	    <div class="pure-g">
-    	        <div class="pure-u-1 pure-u-md-1-5 footer-adj">
-    				    <a href="http://www.miami.edu/"><img src="http://library.miami.edu/wp-content/themes/umiami/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
+  <div id="wide_footer">  
+        <div class="pure-g">
+              <div class="pure-u-1 pure-u-md-1-5 footer-adj">
+                <a href="http://www.miami.edu/"><img src="<?php print THEME_BASE_DIR; ?>/images/umiami_logo.png" alt="University of Miami" border="0" id="umiami_logo" /></a>
               </div>
-    				  <div class="pure-u-1 pure-u-md-3-5 footer-adj">
+              <div class="pure-u-1 pure-u-md-3-5 footer-adj">
                 <p style=""><?php print $library_address; ?><br />
                 <a href="http://www.miami.edu/index.php/copyright_notice/">&copy; <?php print date("Y"); ?></a> |
                 <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy</a> |
                 <a href="mailto:webmaster.lib@miami.edu">Report Site Issue</a> |
                 <a href="<?php print PATH_FROM_ROOT; ?>/support-the-libraries/">Make a Gift</a>
                 </p>
-            	</div>
-    				  <div class="pure-u-1 pure-u-md-1-5 footer-adj">
-    					       <?php print $social_icons; ?>
-    				  </div>
-  	     </div> <!-- end pure-g -->     
+              </div>
+              <div class="pure-u-1 pure-u-md-1-5 footer-adj">
+                     <?php print $social_icons; ?>
+              </div>
+         </div> <!-- end pure-g -->     
   </div> <!-- end wide-footer -->
 </div> <!--footer-container-->
 
