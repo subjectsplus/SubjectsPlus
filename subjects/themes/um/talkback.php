@@ -363,7 +363,7 @@ if ( BlackLister($this_comment) == TRUE ) {
             if ($success) {
                 $stage_two = "ok";
                 $slackMsg = "talkback submitted " . $subject;
-                sendSlackMsg($slackMsg, "alerts", ":rotating_light:");
+                sendSlackMsg($slackMsg, "email", ":rotating_light:");
                 //print "mail sent to $send_to";
             } else {
                 $stage_two = "fail";
