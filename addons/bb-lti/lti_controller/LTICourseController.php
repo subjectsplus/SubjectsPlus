@@ -220,18 +220,22 @@ class LTICourseController
     function processCourseCode($course_code, $guide_path)
     {
         $instructor = $this->getInstructorByCourseCode($course_code);
-        $intructor_courses = $this->getGuidesByInstructor($instructor);
-        $instructor_courses_count = count($intructor_courses);
 
-        if ($instructor_courses_count == 1) {
-            header("Location: " . $guide_path . $intructor_courses[0]['shortform']); /* Redirect browser */
-        } elseif ($instructor_courses_count > 1) {
-            $results = array();
-            foreach ($intructor_courses as $guide) {
-                $results[$guide['subject']] = $guide_path . $guide['shortform'];
+        if (!empty($instructor)) {
+            $intructor_courses = $this->getGuidesByInstructor($instructor);
+            $instructor_courses_count = count($intructor_courses);
+
+            if ($instructor_courses_count == 1) {
+                header("Location: " . $guide_path . $intructor_courses[0]['shortform']); /* Redirect browser */
+            } elseif ($instructor_courses_count > 1) {
+                $results = array();
+                foreach ($intructor_courses as $guide) {
+                    $results[$guide['subject']] = $guide_path . $guide['shortform'];
+                }
+                include('lti_view/multiple_guides_view.php');
             }
-            include('lti_view/multiple_guides_view.php');
-        } else {
+        }
+        else {
             //Find guides by subject code and course number
             $guides = $this->getCourseURL($course_code);
             $guides_count = count($guides);
