@@ -407,7 +407,7 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
 
             if (!array_key_exists ( 'kaltura' , $extra )) {
                 $extra['kaltura'] = "";
-                $db->exec("UPDATE pluslet SET pluslet.extra = " . json_encode($extra) ." WHERE pluslet.pluslet_id = $pluslet_id");
+                $db->exec("UPDATE pluslet SET pluslet.extra = '" . json_encode($extra) ."' WHERE pluslet.pluslet_id = $pluslet_id");
             }
         }
     }
