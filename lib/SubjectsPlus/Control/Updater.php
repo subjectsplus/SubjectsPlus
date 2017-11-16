@@ -404,9 +404,11 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
         foreach ($video_pluslet_results as $pluslet) {
             $pluslet_id = $pluslet['pluslet_id'];
             $extra = json_decode($pluslet['extra']);
-            $extra['kaltura'] = "";
 
-            $db->exec("UPDATE pluslet SET pluslet.extra = " . json_encode($extra) ." WHERE pluslet.pluslet_id = $pluslet_id");
+            if (!isset($extra->kaltura)) {
+                $extra['kaltura'] = "";
+                $db->exec("UPDATE pluslet SET pluslet.extra = " . json_encode($extra) ." WHERE pluslet.pluslet_id = $pluslet_id");
+            }
         }
     }
 	
