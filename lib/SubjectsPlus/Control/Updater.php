@@ -395,6 +395,20 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
 		}
 		
 	}
+
+    public function addKalturaToVideoPluslet()
+    {
+        $db = new Querier;
+        $video_pluslet_results = $db->query("SELECT pluslet_id, extra FROM pluslet WHERE pluslet.type = 'HTML5Video'");
+
+        foreach ($video_pluslet_results as $pluslet) {
+            $pluslet_id = $pluslet['pluslet_id'];
+            $extra = json_decode($pluslet['extra']);
+            $extra['kaltura'] = "";
+
+            $db->exec("UPDATE pluslet SET pluslet.extra = " . json_encode($extra) ." WHERE pluslet.pluslet_id = $pluslet_id");
+        }
+    }
 	
 	
 	/**
@@ -560,6 +574,8 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
 							return FALSE;
 						}
 					}
+
+                    $this->addKalturaToVideoPluslet();
 			case '4':
 				foreach($this->fourToFourOneAlterTables as $lstrAQuery) {
 					if( $db->exec( $lstrAQuery ) === FALSE )
