@@ -401,7 +401,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/learningcommons/">Learning Commons</a></li> 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/printing/">Printing</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/reserve-equipment/">Reserve Equipment</a></li>
-                          <li><a href="http://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li>
+                          <li><a href="https://libcal.miami.edu/booking/richter-study">Reserve Group Study Room</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/rooms-spaces/">Rooms &amp; Spaces</a></li> 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/teaching-support/">Teaching Support</a></li>
                         </ul>
