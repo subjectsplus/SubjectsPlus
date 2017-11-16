@@ -403,7 +403,7 @@ ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
 
         foreach ($video_pluslet_results as $pluslet) {
             $pluslet_id = $pluslet['pluslet_id'];
-            $extra = json_decode($pluslet['extra']);
+            $extra = json_decode($pluslet['extra'], true);
 
             if (!isset($extra->kaltura)) {
                 $extra['kaltura'] = "";
