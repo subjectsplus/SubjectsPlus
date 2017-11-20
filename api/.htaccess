@@ -1,11 +1,5 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-#	RewriteBase /api/
-#
-#	RewriteCond %{REQUEST_FILENAME} !-f
-#	RewriteCond %{REQUEST_FILENAME} !-d
-#	RewriteRule ^(.*)$ index.php/$l [L]
-
     RewriteBase /
 
     # Store the current location in an environment variable CWD
