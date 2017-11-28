@@ -57,7 +57,7 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
         <div class="pure-u-1-3">
             <div class="pluslet no_overlflow">
                 <div class="titlebar">
-                    <div class="titlebar_text">Total Views</div>
+                    <div class="titlebar_text">Total Views since <?php echo $stats->getFirstRecordMonthAndYear()?></div>
                 </div>
                 <div class="pluslet_body total-views">
                     <?php print_r($total_views); ?>
