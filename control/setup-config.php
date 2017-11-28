@@ -152,7 +152,9 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
                         "booklist_primo_vid" => array( _( "Book List Pluslet Primo View" ), _( "This option contains the Primo view for the Book List Pluslet" ), "string", "right", "large", "" , ""),
 
-                        "booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , "")
+                        "booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , ""),
+
+                        "stats_enabled" => array( _( "Enable Stats" ), _( "This option enables guides stats (experimental)" ), "boolean", "right", "small", "" , "")
             );
 
 			//set config options
