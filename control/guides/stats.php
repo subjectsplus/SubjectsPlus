@@ -59,7 +59,7 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
                 <div class="titlebar">
                     <div class="titlebar_text">
                         <?php
-                        if ($stats->areStatsEmpty())
+                        if ($stats->emptyStats())
                             echo "Total Views";
                         else
                             echo "Total Views since " . $stats->getFirstRecordMonthAndYear()

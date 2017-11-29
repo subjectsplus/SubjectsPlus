@@ -52,7 +52,7 @@ FROM_UNIXTIME(stats.date) BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
         return $result;
     }
 
-    public function areStatsEmpty(){
+    public function emptyStats(){
         $query = "SELECT FROM_UNIXTIME(date) as date FROM stats ORDER BY date ASC LIMIT 1";
         $query_exec = $this->db->query($query);
         return empty($query_exec);
