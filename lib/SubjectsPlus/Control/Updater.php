@@ -152,6 +152,9 @@ class Updater
   `event_type` varchar(200) DEFAULT NULL,
   `tab_name` varchar(200) DEFAULT NULL,
   `link_url` varchar(200) DEFAULT NULL,
+  `link_title` varchar(200) DEFAULT NULL,
+  `in_tab` varchar(200) DEFAULT NULL,
+  `in_pluslet` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`stats_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='Added v4';",
 
@@ -181,10 +184,13 @@ class Updater
 		);
 
 		$this->fourOnetoFourTwoAlterTables = array(
-			"ALTER TABLE `sp`.`stats` 
-ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`");
-		
-		
+			"ALTER TABLE `stats` 
+ADD COLUMN `link_title` VARCHAR(200) NULL COMMENT '' AFTER `link_url`",
+            "ALTER TABLE `stats` 
+ADD COLUMN `in_tab` VARCHAR(200) NULL COMMENT '' AFTER `link_title`",
+            "ALTER TABLE `stats` 
+ADD COLUMN `in_pluslet` VARCHAR(200) NULL COMMENT '' AFTER `in_tab`");
+
 		//queries to insert into new tables
 		$this->oneToTwoInsert = array(
 			"INSERT INTO `discipline` (`discipline_id`,`discipline`,`sort`) VALUES (1,'agriculture',1),(2,'anatomy &amp; physiology',2),
