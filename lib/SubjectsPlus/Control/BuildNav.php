@@ -15,7 +15,8 @@ class BuildNav {
     global $AssetPath;
     global $CpanelPath;
     global $subcat;
-    global $is_um; 
+    global $is_um;
+    global $stats_enabled;
 
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
@@ -74,6 +75,12 @@ class BuildNav {
         print " class=\"selected\"";
       }
 
+      $stats_menu_option = "";
+
+      if ($stats_enabled){
+          $stats_menu_option = "<li><a href=\"$CpanelPath" . "guides/stats.php\">" . _("Stats") . "</a></li> ";
+      }
+
       print "><a href=\"$CpanelPath" . "guides/\">" . _("Guides") . "</a>
       <div>
        <ul>
@@ -82,7 +89,7 @@ class BuildNav {
           <li><a href=\"$CpanelPath" . "guides/manage.php\">" . _("Manage Files") . "</a></li>
           <!--<li><a href=\"$CpanelPath" . "guides/delish_url.php\">" . _("Delicious Builder") . "</a></li>-->
           <li><a href=\"$CpanelPath" . "guides/link_checker.php\">" . _("Link Checker") . "</a></li>
- <li><a href=\"$CpanelPath" . "guides/stats.php\">" . _("Stats") . "</a></li> 
+          $stats_menu_option
        </ul>
       </div></li>";
     }
