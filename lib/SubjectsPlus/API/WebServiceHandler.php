@@ -75,7 +75,10 @@ class WebServiceHandler
 		global $api_enabled;
 		global $api_key;
 
-		if( !isset( $api_enabled ) || $api_enabled === FALSE ) exit;
+		if( !isset( $api_enabled ) || $api_enabled === FALSE ){
+            $this->displayNotEnabledMessage();
+		    exit;
+        }
 
 		if($this->mstrService == '' )
 		{
@@ -183,6 +186,20 @@ class WebServiceHandler
 		print "\n    It should reflect the path that is after your websites url. E.g. if you have www.mywebsite.com/dir1/sp/api then .htaccess file should have 'RewriteBase' path of /dir1/sp/api/";
 		print "</pre>";
 	}
+
+    /**
+     * sp_WebServiceHandler::displayNotEnabledMessage() - display a message if the api is not enabled
+     * @return void
+     */
+    public function displayNotEnabledMessage()
+    {
+        print "<h1>API not enabled</h1>\n";
+
+        print "<pre><strong>You need to activate the API.</strong>";
+        print "\n
+        \nTo enable, go to Admin > Config Site in the Control Panel.";
+        print "</pre>";
+    }
 }
 
 ?>
