@@ -46,7 +46,8 @@ FROM_UNIXTIME(stats.date) BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
 
     public function getFirstRecordMonthAndYear(){
         $query = "SELECT FROM_UNIXTIME(date) as date FROM stats ORDER BY date ASC LIMIT 1";
-        $query_exec = $this->db->query($query)[0];
+        $query_exec = $this->db->query($query);
+        $query_exec = $query_exec[0];
         $result = empty($query_exec['date']) ? "No data" : date('F, Y', strtotime($query_exec['date']));
         return $result;
     }
