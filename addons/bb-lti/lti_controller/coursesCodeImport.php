@@ -3,7 +3,12 @@ include("../../../control/includes/autoloader.php"); // need to use this if head
 include("../../../control/includes/config.php");
 require_once('LTICourseController.php');
 
-$courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
+try {
+    $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
 
-echo $courses_code->importCourseCode();
-echo $courses_code->importCourseInstructor();
+    echo $courses_code->importCourseCode();
+    echo $courses_code->importCourseInstructor();
+} catch (Exception $e) {
+    echo 'Exception "\n"', $e->getMessage(), "\n";
+}
+

@@ -6,7 +6,6 @@ $subsubcat = "";
 $page_title = "Lorem ipsum title";
 $feedback = "";
 
-//var_dump($_POST);
 $use_jquery = array("ui");
 include("../../control/includes/autoloader.php");
 require_once("../../control/includes/config.php");
