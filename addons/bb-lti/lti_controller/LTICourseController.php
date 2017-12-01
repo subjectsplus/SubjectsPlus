@@ -190,7 +190,7 @@ class LTICourseController
             }
         }
 
-        $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND instructor = 'None' ORDER BY subject";
+        $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND (instructor = 'None' OR instructor IS NULL OR instructor = '' )";
 
         $statement = $this->connection->prepare($q);
         $statement->execute();
@@ -203,10 +203,14 @@ class LTICourseController
         $statement = $this->connection->prepare($q);
         $statement->execute();
         $instructor_temp = $statement->fetchAll();
-        $instructor_temp = $instructor_temp[0];
-        $instructor_temp = $instructor_temp['instructor'];
-        $instructor = trim($instructor_temp);
-        return $instructor;
+        if (!empty($instructor_temp)){
+            $instructor_temp = $instructor_temp[0];
+            $instructor_temp = $instructor_temp['instructor'];
+            $instructor = trim($instructor_temp);
+            return $instructor;
+        }else{
+            return "";
+        }
     }
 
     private function getGuidesByInstructor($instructor)
