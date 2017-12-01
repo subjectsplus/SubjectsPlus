@@ -233,32 +233,38 @@ class LTICourseController
                     $results[$guide['subject']] = $guide_path . $guide['shortform'];
                 }
                 include('lti_view/multiple_guides_view.php');
+            }else{
+                $this->findGuideBySubjectCodeAndCourseNumber($course_code, $guide_path);
             }
         }
         else {
-            //Find guides by subject code and course number
-            $guides = $this->getCourseURL($course_code);
+            $this->findGuideBySubjectCodeAndCourseNumber($course_code, $guide_path);
+        }
+    }
+
+    function findGuideBySubjectCodeAndCourseNumber($course_code, $guide_path){
+        //Find guides by subject code and course number
+        $guides = $this->getCourseURL($course_code);
+        $guides_count = count($guides);
+
+        if ($guides_count == 0) { //If nothing found, then find guides by subject code only
+            $subject_code = substr($course_code, 0, 3);
+
+            $guides = $this->getCourseURL($subject_code);
             $guides_count = count($guides);
+        }
 
-            if ($guides_count == 0) { //If nothing found, then find guides by subject code only
-                $subject_code = substr($course_code, 0, 3);
-
-                $guides = $this->getCourseURL($subject_code);
-                $guides_count = count($guides);
+        //Redirect according to the results
+        if ($guides_count == 0) {
+            header("Location: " . $guide_path . "?no_bb_guide=1"); /* Redirect browser */
+        } elseif ($guides_count == 1) {
+            header("Location: " . $guide_path . "guide.php?subject=" . $guides[0]['shortform']); /* Redirect browser */
+        } else {
+            $results = array();
+            foreach ($guides as $guide) {
+                $results[$guide['subject']] = $guide_path . "guide.php?subject=" . $guide['shortform'];
             }
-
-            //Redirect according to the results
-            if ($guides_count == 0) {
-                header("Location: " . $guide_path . "?no_bb_guide=1"); /* Redirect browser */
-            } elseif ($guides_count == 1) {
-                header("Location: " . $guide_path . "guide.php?subject=" . $guides[0]['shortform']); /* Redirect browser */
-            } else {
-                $results = array();
-                foreach ($guides as $guide) {
-                    $results[$guide['subject']] = $guide_path . "guide.php?subject=" . $guide['shortform'];
-                }
-                include('lti_view/multiple_guides_view.php');
-            }
+            include('lti_view/multiple_guides_view.php');
         }
     }
 }
