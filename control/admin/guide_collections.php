@@ -28,7 +28,7 @@ $add_collection_box = "
 <input type=\"text\" id='title' name=\"title\" class=\"required_field\" required>
 <label for=\"description\">" . _("Description") . "</label>
 <textarea name=\"description\" id=\"description\"></textarea>
-<label for=\"url\">" . _("Shortform (must be unique)") . "</label>
+<label for=\"shortform\">" . _("Shortform (must be unique)") . "</label>
 <input type=\"text\" id='shortform' name=\"shortform\" class=\"required_field\" required>
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>
