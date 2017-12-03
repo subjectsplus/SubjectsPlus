@@ -87,7 +87,7 @@ $disciplineArray = $querierDept->query($qdiscipline);
 
 foreach ($disciplineArray as $value) {
 
-  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item disc-sortable\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times fa-lg\"></i></a> &nbsp; <input type=\"text\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
+  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item disc-sortable\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times fa-lg\"></i></a> &nbsp; <input type=\"text\" title=\"exisiting discipline\" size=\"40\" name=\"discipline[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"discipline_id[]\" value=\"$value[0]\" /></li>";
 }
 
 
@@ -108,8 +108,8 @@ $ourlist
 
 $add_discipline_box = "
 <form id=\"new_discipline\" action=\"\" method=\"post\">
-<span class=\"record_label\">" . _("Source Name") . "</span><br />
-<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"\" value=\"\">
+<label class=\"record_label\" for=\"new_discipline_label\">" . _("Source Name") . "</label><br />
+<input type=\"text\" name=\"source\" id=\"new_discipline_label\" size=\"40\" class=\"\" value=\"\">
 <br /><br />
 <button class=\"button\" id=\"add_discipline\" name=\"add_discipline\">" . _("Add New Discipline") . "</button>
 </form>";
