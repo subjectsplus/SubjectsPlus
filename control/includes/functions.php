@@ -500,6 +500,11 @@ function scrubData($string, $type="text") {
         $string = stripslashes($string);
       }
       break;
+      case "richtext_html_purifier":
+          $config = HTMLPurifier_Config::createDefault();
+          $purifier = new HTMLPurifier($config);
+          $string = $purifier->purify($string);
+          break;
     case "email":
 // magic quotes test
       if (get_magic_quotes_gpc()) {
