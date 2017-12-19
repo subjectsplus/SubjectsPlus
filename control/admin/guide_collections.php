@@ -28,7 +28,7 @@ $add_collection_box = "
 <input type=\"text\" id='title' name=\"title\" class=\"required_field\" required>
 <label for=\"description\">" . _("Description") . "</label>
 <textarea name=\"description\" id=\"description\"></textarea>
-<label for=\"url\">" . _("Shortform (must be unique)") . "</label>
+<label for=\"shortform\">" . _("Shortform (must be unique)") . "</label>
 <input type=\"text\" id='shortform' name=\"shortform\" class=\"required_field\" required>
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\" >" . _("Add New Collection") . "</button>
 </form>
@@ -53,15 +53,19 @@ $guide_collection_viewport =  "<div id='guide-collection-viewport-container'>";
 
 $guide_collection_viewport .= "<div id='collection-metadata' data-collection_id=''>";
 $guide_collection_viewport .= "<h3 id='collection-title'></h3>";
-$guide_collection_viewport .= "<p id='collection-description'></p>";
+$guide_collection_viewport .= "<dl><dt>" . _("Description") . "</dt><dd id='collection-description'></dd>";
+$guide_collection_viewport .= "<dt>" . _("Shortform") . "</dt><dd id='collection-shortform'></dd></dl>";
 $guide_collection_viewport .= "<p id='collection-shortform'></p>";
 $guide_collection_viewport .= "<button id='edit-collection-metadata-btn' class='pure-button pure-button-primary'>Edit Collection</button>";
 $guide_collection_viewport .= "</div>";
 
 
 $guide_collection_viewport .= "<div id='collection-metadata-editform' data-collection_id='' style='display:none;'>";
+$guide_collection_viewport .= "<label for='collection-title-input'>" . _("Collection Name") . "</label>"
 $guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-title-input' name='collection-title-input'>";
+$guide_collection_viewport .= "<label for='collection-description-input'>" . _("Description") . "</label>"
 $guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-description-input' name='collection-description-input'/>";
+$guide_collection_viewport .= "<label for='collection-shortform-input'>" . _("Shortform") . "</label>"
 $guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-shortform-input' name='collection-shortform-input'/>";
 $guide_collection_viewport .= "<button id='update-collection-metadata-btn' class='pure-button pure-button-primary'>Save</button>";
 $guide_collection_viewport .= "</div>";

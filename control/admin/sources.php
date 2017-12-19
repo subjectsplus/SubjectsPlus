@@ -93,7 +93,7 @@ $sourceArray = $querierDept->query($qSource);
 
 foreach ($sourceArray as $value) {
 
-  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> &nbsp; <input type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
+  $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item\" style=\"margin-bottom: .5em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> &nbsp; <input title=\"exisiting source\" type=\"text\" size=\"40\" name=\"source[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"source_id[]\" value=\"$value[0]\" /></li>";
 }
 
 $source_box = "
@@ -111,8 +111,8 @@ $ourlist
 
 $add_source_box = "
 <form id=\"new_source\" action=\"\" method=\"post\">
-<span class=\"record_label\">" . _("Source Name") . "</span><br />
-<input type=\"text\" name=\"source\" id=\"\" size=\"40\" class=\"\" value=\"\">
+<label class=\"record_label\" for=\"new_source_label\">" . _("Source Name") . "</label><br />
+<input type=\"text\" name=\"source\" id=\"new_source_label\" size=\"40\" class=\"\" value=\"\">
 <br /><br />
 <button class=\"button\" id=\"add_source\" name=\"add_source\">" . _("Add New Source") . "</button>
 </form>";

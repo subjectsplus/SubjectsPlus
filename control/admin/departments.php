@@ -120,10 +120,10 @@ $ourlist = "";
 foreach ($deptArray as $value) {
 
     $ourlist .= "<li id=\"item-$value[0]\" class=\"sortable_item department-sortable\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a>
-  &nbsp; <input type=\"text\" size=\"40\" name=\"dept[]\" value=\"$value[1]\" /> 
-  &nbsp; <input type=\"text\" size=\"10\" name=\"tel[]\" value=\"$value[2]\" /> 
-  &nbsp; <input type=\"text\" size=\"20\" name=\"email[]\" value=\"$value[4]\" />
-  &nbsp; <input type=\"text\" size=\"20\" name=\"url[]\" value=\"$value[5]\" />
+  &nbsp; <input type=\"text\" size=\"40\" title=\"" . _("Department Name") . "\" name=\"dept[]\" value=\"$value[1]\" /> 
+  &nbsp; <input type=\"text\" size=\"10\" title=\"" . _("Telephone") . "\" name=\"tel[]\" value=\"$value[2]\" /> 
+  &nbsp; <input type=\"text\" size=\"20\" title=\"" . _("Email") . "\" name=\"email[]\" value=\"$value[4]\" />
+  &nbsp; <input type=\"text\" size=\"20\" title=\"" . _("Website") . "\" name=\"url[]\" value=\"$value[5]\" />
   <input type=\"hidden\" name=\"dept_id[]\" value=\"$value[0]\" /></li>";
 }
 
@@ -139,16 +139,16 @@ $ourlist
 
 $add_dept_box = "<form id=\"new_department\" action=\"\" class=\"pure-form pure-form-stacked\" method=\"post\">
 <label for=\"department\">" . _("Department Name") . "</label>
-<input type=\"text\" name=\"department\" id=\"\" size=\"40\" value=\"\">
+<input type=\"text\" name=\"department\" id=\"department\" size=\"40\" value=\"\">
 
 <label for=\"telephone\">" . _("Telephone") . "</label>
-<input type=\"text\" name=\"telephone\" id=\"\" size=\"10\" value=\"\">
+<input type=\"text\" name=\"telephone\" id=\"telephone\" size=\"10\" value=\"\">
 
 <label for=\"email\">" . _("Email") . "</label>
-<input type=\"text\" name=\"email\" id=\"\" size=\"20\" value=\"\">
+<input type=\"text\" name=\"email\" id=\"email\" size=\"20\" value=\"\">
 
 <label for=\"url\">" . _("Website") . "</label>
-<input type=\"text\" name=\"url\" id=\"\" size=\"40\" value=\"\">
+<input type=\"text\" name=\"url\" id=\"url\" size=\"40\" value=\"\">
 <p></p>
 <button class=\"button pure-button pure-button-primary\" id=\"add_dept\" name=\"add_department\" >" . _("Add New Department") . "</button>
 </form>";
