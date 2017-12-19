@@ -61,11 +61,11 @@ $guide_collection_viewport .= "</div>";
 
 
 $guide_collection_viewport .= "<div id='collection-metadata-editform' data-collection_id='' style='display:none;'>";
-$guide_collection_viewport .= "<label for='collection-title-input'>" . _("Collection Name") . "</label>"
+$guide_collection_viewport .= "<label for='collection-title-input'>" . _("Collection Name") . "</label>";
 $guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-title-input' name='collection-title-input'>";
-$guide_collection_viewport .= "<label for='collection-description-input'>" . _("Description") . "</label>"
+$guide_collection_viewport .= "<label for='collection-description-input'>" . _("Description") . "</label>";
 $guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-description-input' name='collection-description-input'/>";
-$guide_collection_viewport .= "<label for='collection-shortform-input'>" . _("Shortform") . "</label>"
+$guide_collection_viewport .= "<label for='collection-shortform-input'>" . _("Shortform") . "</label>";
 $guide_collection_viewport .= "<input type='text' class='collection-metadata-edit-input' id='collection-shortform-input' name='collection-shortform-input'/>";
 $guide_collection_viewport .= "<button id='update-collection-metadata-btn' class='pure-button pure-button-primary'>Save</button>";
 $guide_collection_viewport .= "</div>";
