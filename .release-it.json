@@ -1,0 +1,7 @@
+{
+  "github": {
+    "release": true,
+    "assets": "dist/*.zip",
+    "tokenRef": "GITHUB_TOKEN"
+  }
+}
