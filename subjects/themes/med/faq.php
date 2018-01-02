@@ -246,6 +246,11 @@ $results = "";
             $index .= "<div class=\"zebra\" style=\"min-height: 1.5em;\"><a href=\"#faq-$row_count\">$question</a></div>\n";
             $show_row_count = $row_count . ". ";
         }
+
+        $tokenizer = new TextTokenizer($answer);
+        $tokenizer->tokenizeText();
+        $answer = $tokenizer->getTokenizedText();
+
         $results .= "<a name=\"faq-$row_count\"></a>\n
 		<div class=\"pluslet_simple\">\n
 		<h2 class=\"question\">$show_row_count$question</h2>\n
