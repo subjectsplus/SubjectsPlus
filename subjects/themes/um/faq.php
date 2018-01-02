@@ -11,6 +11,7 @@
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\TextTokenizer;
 
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
