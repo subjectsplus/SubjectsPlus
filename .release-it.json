@@ -1,5 +1,37 @@
 {
-"github": {
+  "non-interactive": false,
+  "dry-run": false,
+  "verbose": false,
+  "force": false,
+  "pkgFiles": [
+    "package.json"
+  ],
+  "increment": "patch",
+  "preReleaseId": null,
+  "buildCommand": false,
+  "safeBump": true,
+  "beforeChangelogCommand": "conventional-changelog -p angular -i CHANGELOG.md -s",
+  "changelogCommand": "conventional-changelog -p angular | tail -n +3",
+  "requireCleanWorkingDir": false,
+  "src": {
+    "commit": true,
+    "commitMessage": "Release %s",
+    "tag": true,
+    "tagName": "%s",
+    "tagAnnotation": "Release %s",
+    "push": true,
+    "pushRepo": null,
+    "beforeStartCommand": false,
+    "afterReleaseCommand": false
+  },
+  "npm": {
+    "publish": false,
+    "publishPath": ".",
+    "tag": "latest",
+    "private": false,
+    "access": null
+  },
+  "github": {
     "release": false,
     "releaseName": "SubjectsPlus %s",
     "preRelease": false,
@@ -12,7 +44,9 @@
     "repo": false,
     "stageDir": ".stage",
     "baseDir": "dist",
-    "files": ["**/*"],
+    "files": [
+      "**/*"
+    ],
     "pkgFiles": null,
     "commit": true,
     "commitMessage": "Release %s",
