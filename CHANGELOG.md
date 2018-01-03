@@ -1,5 +1,96 @@
 # Change Log
 
+## [4.2.1](https://github.com/subjectsplus/SubjectsPlus/tree/4.2.1) (2018-01-03)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.2...4.2.1)
+
+**Implemented enhancements:**
+
+- Add new Google Recaptcha to Talkback form [\#1138](https://github.com/subjectsplus/SubjectsPlus/issues/1138)
+
+**Closed issues:**
+
+- Display ckeditor after subject specialist options in the Subject Specialist Box [\#1137](https://github.com/subjectsplus/SubjectsPlus/issues/1137)
+
+**Merged pull requests:**
+
+- another update [\#1203](https://github.com/subjectsplus/SubjectsPlus/pull/1203) ([cgb37](https://github.com/cgb37))
+- Merged sp4-dev into master [\#1202](https://github.com/subjectsplus/SubjectsPlus/pull/1202) ([abelfacenda](https://github.com/abelfacenda))
+- updated release-it configs [\#1201](https://github.com/subjectsplus/SubjectsPlus/pull/1201) ([abelfacenda](https://github.com/abelfacenda))
+- Merge sp4-dev into master [\#1200](https://github.com/subjectsplus/SubjectsPlus/pull/1200) ([abelfacenda](https://github.com/abelfacenda))
+- Feature release it [\#1199](https://github.com/subjectsplus/SubjectsPlus/pull/1199) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev merge into master: fix  [\#1196](https://github.com/subjectsplus/SubjectsPlus/pull/1196) ([cgb37](https://github.com/cgb37))
+- Merge pull request \#1194 from subjectsplus/master [\#1195](https://github.com/subjectsplus/SubjectsPlus/pull/1195) ([cgb37](https://github.com/cgb37))
+- merge pull request [\#1194](https://github.com/subjectsplus/SubjectsPlus/pull/1194) ([cgb37](https://github.com/cgb37))
+- Improving labelling for text inputs for a11y purposes [\#1191](https://github.com/subjectsplus/SubjectsPlus/pull/1191) ([sandbergja](https://github.com/sandbergja))
+- Staging [\#1189](https://github.com/subjectsplus/SubjectsPlus/pull/1189) ([abelfacenda](https://github.com/abelfacenda))
+- Staging into master [\#1188](https://github.com/subjectsplus/SubjectsPlus/pull/1188) ([abelfacenda](https://github.com/abelfacenda))
+- Staging [\#1187](https://github.com/subjectsplus/SubjectsPlus/pull/1187) ([abelfacenda](https://github.com/abelfacenda))
+- Staging [\#1186](https://github.com/subjectsplus/SubjectsPlus/pull/1186) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1185](https://github.com/subjectsplus/SubjectsPlus/pull/1185) ([abelfacenda](https://github.com/abelfacenda))
+- Afc stats on off [\#1184](https://github.com/subjectsplus/SubjectsPlus/pull/1184) ([abelfacenda](https://github.com/abelfacenda))
+- Staging [\#1182](https://github.com/subjectsplus/SubjectsPlus/pull/1182) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1181](https://github.com/subjectsplus/SubjectsPlus/pull/1181) ([abelfacenda](https://github.com/abelfacenda))
+- Afc api fix [\#1180](https://github.com/subjectsplus/SubjectsPlus/pull/1180) ([abelfacenda](https://github.com/abelfacenda))
+- \[ eba00df\]  fixed updater from sp3 to sp4  [\#1179](https://github.com/subjectsplus/SubjectsPlus/pull/1179) ([abelfacenda](https://github.com/abelfacenda))
+-  fixed updater from sp3 to sp4 [\#1178](https://github.com/subjectsplus/SubjectsPlus/pull/1178) ([abelfacenda](https://github.com/abelfacenda))
+-  fixed updater from sp3 to sp4 [\#1177](https://github.com/subjectsplus/SubjectsPlus/pull/1177) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev merge into master [\#1175](https://github.com/subjectsplus/SubjectsPlus/pull/1175) ([cgb37](https://github.com/cgb37))
+- Update libcal url to https [\#1174](https://github.com/subjectsplus/SubjectsPlus/pull/1174) ([pvillanueva01](https://github.com/pvillanueva01))
+- Staging [\#1172](https://github.com/subjectsplus/SubjectsPlus/pull/1172) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1171](https://github.com/subjectsplus/SubjectsPlus/pull/1171) ([abelfacenda](https://github.com/abelfacenda))
+- Afc talkback email https images [\#1170](https://github.com/subjectsplus/SubjectsPlus/pull/1170) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev merge int staging to resync [\#1169](https://github.com/subjectsplus/SubjectsPlus/pull/1169) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master for deploy [\#1168](https://github.com/subjectsplus/SubjectsPlus/pull/1168) ([cgb37](https://github.com/cgb37))
+- updated channel value with alerts [\#1167](https://github.com/subjectsplus/SubjectsPlus/pull/1167) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into staging to resync [\#1166](https://github.com/subjectsplus/SubjectsPlus/pull/1166) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master for deploy [\#1165](https://github.com/subjectsplus/SubjectsPlus/pull/1165) ([cgb37](https://github.com/cgb37))
+- updated emoji for successful talkback submission [\#1164](https://github.com/subjectsplus/SubjectsPlus/pull/1164) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master for deploy [\#1163](https://github.com/subjectsplus/SubjectsPlus/pull/1163) ([cgb37](https://github.com/cgb37))
+- created new slack channel for alerts [\#1162](https://github.com/subjectsplus/SubjectsPlus/pull/1162) ([cgb37](https://github.com/cgb37))
+- Staging [\#1161](https://github.com/subjectsplus/SubjectsPlus/pull/1161) ([abelfacenda](https://github.com/abelfacenda))
+- \[a983976\]set uploaded file path to https or http [\#1160](https://github.com/subjectsplus/SubjectsPlus/pull/1160) ([abelfacenda](https://github.com/abelfacenda))
+- set uploaded file path to https or http [\#1159](https://github.com/subjectsplus/SubjectsPlus/pull/1159) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev merge into staging [\#1157](https://github.com/subjectsplus/SubjectsPlus/pull/1157) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master for deploy [\#1156](https://github.com/subjectsplus/SubjectsPlus/pull/1156) ([cgb37](https://github.com/cgb37))
+- pointing to https for footable.js includes in staff.php [\#1155](https://github.com/subjectsplus/SubjectsPlus/pull/1155) ([agdarby](https://github.com/agdarby))
+- Sp4 dev merge into master [\#1154](https://github.com/subjectsplus/SubjectsPlus/pull/1154) ([cgb37](https://github.com/cgb37))
+- removing the commented out call to font.googleapis cuz it is throwing… [\#1153](https://github.com/subjectsplus/SubjectsPlus/pull/1153) ([agdarby](https://github.com/agdarby))
+- Sp4 dev [\#1151](https://github.com/subjectsplus/SubjectsPlus/pull/1151) ([cgb37](https://github.com/cgb37))
+- fix talkback.php [\#1150](https://github.com/subjectsplus/SubjectsPlus/pull/1150) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master [\#1149](https://github.com/subjectsplus/SubjectsPlus/pull/1149) ([cgb37](https://github.com/cgb37))
+- Feature recaptcha [\#1148](https://github.com/subjectsplus/SubjectsPlus/pull/1148) ([cgb37](https://github.com/cgb37))
+- testing rsync deploy [\#1147](https://github.com/subjectsplus/SubjectsPlus/pull/1147) ([cgb37](https://github.com/cgb37))
+- Update um-searchbox.html [\#1146](https://github.com/subjectsplus/SubjectsPlus/pull/1146) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#1145](https://github.com/subjectsplus/SubjectsPlus/pull/1145) ([agdarby](https://github.com/agdarby))
+- undoing a goof with commented query [\#1144](https://github.com/subjectsplus/SubjectsPlus/pull/1144) ([agdarby](https://github.com/agdarby))
+- more https work [\#1143](https://github.com/subjectsplus/SubjectsPlus/pull/1143) ([agdarby](https://github.com/agdarby))
+- Sp4 dev merge into master for deploy [\#1141](https://github.com/subjectsplus/SubjectsPlus/pull/1141) ([cgb37](https://github.com/cgb37))
+- changes to sp to make it https compliant [\#1140](https://github.com/subjectsplus/SubjectsPlus/pull/1140) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into feature-recaptcha [\#1139](https://github.com/subjectsplus/SubjectsPlus/pull/1139) ([cgb37](https://github.com/cgb37))
+- Sp4 dev [\#1136](https://github.com/subjectsplus/SubjectsPlus/pull/1136) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1135](https://github.com/subjectsplus/SubjectsPlus/pull/1135) ([abelfacenda](https://github.com/abelfacenda))
+- enabled returnoutput in ckeditor [\#1134](https://github.com/subjectsplus/SubjectsPlus/pull/1134) ([abelfacenda](https://github.com/abelfacenda))
+- Staging [\#1132](https://github.com/subjectsplus/SubjectsPlus/pull/1132) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1131](https://github.com/subjectsplus/SubjectsPlus/pull/1131) ([abelfacenda](https://github.com/abelfacenda))
+- Added Contact Email to Excel file header [\#1130](https://github.com/subjectsplus/SubjectsPlus/pull/1130) ([abelfacenda](https://github.com/abelfacenda))
+- Staging [\#1129](https://github.com/subjectsplus/SubjectsPlus/pull/1129) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1128](https://github.com/subjectsplus/SubjectsPlus/pull/1128) ([abelfacenda](https://github.com/abelfacenda))
+- added api key to google maps script [\#1127](https://github.com/subjectsplus/SubjectsPlus/pull/1127) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1126](https://github.com/subjectsplus/SubjectsPlus/pull/1126) ([cgb37](https://github.com/cgb37))
+- Removed alert message from UML SP and SP Med [\#1125](https://github.com/subjectsplus/SubjectsPlus/pull/1125) ([pvillanueva01](https://github.com/pvillanueva01))
+- Sp4 dev into master: 	Update SP Med alert message [\#1124](https://github.com/subjectsplus/SubjectsPlus/pull/1124) ([cgb37](https://github.com/cgb37))
+- Update SP Med alert message [\#1123](https://github.com/subjectsplus/SubjectsPlus/pull/1123) ([pvillanueva01](https://github.com/pvillanueva01))
+- Staging [\#1122](https://github.com/subjectsplus/SubjectsPlus/pull/1122) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1121](https://github.com/subjectsplus/SubjectsPlus/pull/1121) ([abelfacenda](https://github.com/abelfacenda))
+- Added alert message to headers for SP UM and SP Med. Added CSS styles. [\#1120](https://github.com/subjectsplus/SubjectsPlus/pull/1120) ([pvillanueva01](https://github.com/pvillanueva01))
+- Sp4 dev merge into master: 	Added new links to UM theme [\#1119](https://github.com/subjectsplus/SubjectsPlus/pull/1119) ([cgb37](https://github.com/cgb37))
+- Added new links to UM theme - Services mega menu [\#1118](https://github.com/subjectsplus/SubjectsPlus/pull/1118) ([pvillanueva01](https://github.com/pvillanueva01))
+- Staging [\#1115](https://github.com/subjectsplus/SubjectsPlus/pull/1115) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1114](https://github.com/subjectsplus/SubjectsPlus/pull/1114) ([abelfacenda](https://github.com/abelfacenda))
+- Sp4 dev [\#1112](https://github.com/subjectsplus/SubjectsPlus/pull/1112) ([cgb37](https://github.com/cgb37))
+- updated changelog to reflect release of v4.2 merge of Sp4 dev [\#1111](https://github.com/subjectsplus/SubjectsPlus/pull/1111) ([cgb37](https://github.com/cgb37))
+- updated changelog to reflect release of v4.2 [\#1110](https://github.com/subjectsplus/SubjectsPlus/pull/1110) ([cgb37](https://github.com/cgb37))
+
 ## [v4.2](https://github.com/subjectsplus/SubjectsPlus/tree/v4.2) (2017-06-21)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.1...v4.2)
 
@@ -676,7 +767,6 @@
 - Fix \[\#474\] - GuideList pluslet links not working. Fixed by pointing u… [\#475](https://github.com/subjectsplus/SubjectsPlus/pull/475) ([cgb37](https://github.com/cgb37))
 - Adding basic form for records [\#459](https://github.com/subjectsplus/SubjectsPlus/pull/459) ([little9](https://github.com/little9))
 - Feature azrecords [\#458](https://github.com/subjectsplus/SubjectsPlus/pull/458) ([little9](https://github.com/little9))
-- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 
 ## [v4.0.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.1) (2016-03-04)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0...v4.0.1)
@@ -688,6 +778,7 @@
 
 **Merged pull requests:**
 
+- Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 - Update TOC.php [\#439](https://github.com/subjectsplus/SubjectsPlus/pull/439) ([little9](https://github.com/little9))
 
 ## [v4.0.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0) (2016-02-09)
@@ -793,10 +884,6 @@
 ## [v4.0.0-beta.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.1) (2015-12-03)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.0...v4.0.0-beta.1)
 
-**Merged pull requests:**
-
-- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
-
 ## [v4.0.0-beta.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.0) (2015-12-02)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.2...v4.0.0-beta.0)
 
@@ -874,6 +961,7 @@
 
 **Merged pull requests:**
 
+- more changes and styles for Experts and Guides List Pluslets [\#372](https://github.com/subjectsplus/SubjectsPlus/pull/372) ([pvillanueva01](https://github.com/pvillanueva01))
 - Experts Pluslet styling in guide admin page, UM theme, default theme … [\#371](https://github.com/subjectsplus/SubjectsPlus/pull/371) ([pvillanueva01](https://github.com/pvillanueva01))
 - header fix [\#370](https://github.com/subjectsplus/SubjectsPlus/pull/370) ([pvillanueva01](https://github.com/pvillanueva01))
 - more style fixes for index-c [\#369](https://github.com/subjectsplus/SubjectsPlus/pull/369) ([pvillanueva01](https://github.com/pvillanueva01))
