@@ -1,5 +1,21 @@
 # Change Log
 
+## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
+
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.2.1...HEAD)
+
+**Merged pull requests:**
+
+- Sp4 dev merge into master: \[3ef0764\] added richtext in description override box [\#1212](https://github.com/subjectsplus/SubjectsPlus/pull/1212) ([cgb37](https://github.com/cgb37))
+- Afc sp fix html stripped description override box [\#1211](https://github.com/subjectsplus/SubjectsPlus/pull/1211) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into this branch [\#1210](https://github.com/subjectsplus/SubjectsPlus/pull/1210) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master \[27e2f38\] scrubbing id and email [\#1209](https://github.com/subjectsplus/SubjectsPlus/pull/1209) ([cgb37](https://github.com/cgb37))
+- Afc sp pwfix merge into sp4-dev [\#1208](https://github.com/subjectsplus/SubjectsPlus/pull/1208) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into afc-sp-pwfix [\#1207](https://github.com/subjectsplus/SubjectsPlus/pull/1207) ([cgb37](https://github.com/cgb37))
+- Sp4 dev merge into master [\#1206](https://github.com/subjectsplus/SubjectsPlus/pull/1206) ([cgb37](https://github.com/cgb37))
+- Afc sp faqs tokens merge into sp4-dev [\#1205](https://github.com/subjectsplus/SubjectsPlus/pull/1205) ([cgb37](https://github.com/cgb37))
+- merge in release-it github generator from sp4-dev [\#1204](https://github.com/subjectsplus/SubjectsPlus/pull/1204) ([cgb37](https://github.com/cgb37))
+
 ## [4.2.1](https://github.com/subjectsplus/SubjectsPlus/tree/4.2.1) (2018-01-03)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.2...4.2.1)
 
