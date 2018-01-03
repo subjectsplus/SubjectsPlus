@@ -1,7 +1,7 @@
 {
 "github": {
     "release": false,
-    "releaseName": "SubjectsPlus",
+    "releaseName": "SubjectsPlus %s",
     "preRelease": false,
     "draft": false,
     "tokenRef": "GITHUB_TOKEN",
