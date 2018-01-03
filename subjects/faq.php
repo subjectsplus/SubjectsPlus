@@ -11,6 +11,7 @@
 use SubjectsPlus\Control\Dropdown;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\TextTokenizer;
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
@@ -258,6 +259,11 @@ $results = "";
             $index .= "<div class=\"zebra\" style=\"min-height: 1.5em; width: 97%;\"><a href=\"#faq-$row_count\">$question</a></div>\n";
             $show_row_count = $row_count . ". ";
         }
+
+        $tokenizer = new TextTokenizer($answer);
+        $tokenizer->tokenizeText();
+        $answer = $tokenizer->getTokenizedText();
+
         $results .= "<a name=\"faq-$row_count\"></a>\n
 		<div class=\"pluslet_simple\">\n
 		<h2 class=\"question\">$show_row_count$question</h2>\n
