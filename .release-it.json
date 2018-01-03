@@ -4,7 +4,7 @@
     "releaseName": "SubjectsPlus",
     "preRelease": false,
     "draft": false,
-    "tokenRef": "CHANGELOG_GITHUB_TOKEN",
+    "tokenRef": "GITHUB_TOKEN",
     "assets": null,
     "host": null
   },
