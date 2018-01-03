@@ -10,6 +10,14 @@ use SubjectsPlus\Control\Staff;
 $db = new Querier;
 
 $lstrForm = '';
+if(isset($_GET['id'])){
+    $_GET['id'] = scrubData($_GET['id'], "integer");
+}
+
+if(isset($_POST['email'])){
+    $_POST['email'] = scrubData($_POST['email'], "email");
+}
+
 if(!isset($_GET['id']))
 {
 	if(isset($_POST['email']))
