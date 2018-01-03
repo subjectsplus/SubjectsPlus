@@ -1,0 +1,32 @@
+{
+"github": {
+    "release": false,
+    "releaseName": "SubjectsPlus %s",
+    "preRelease": false,
+    "draft": false,
+    "tokenRef": "GITHUB_TOKEN",
+    "assets": null,
+    "host": null
+  },
+  "dist": {
+    "repo": false,
+    "stageDir": ".stage",
+    "baseDir": "dist",
+    "files": ["**/*"],
+    "pkgFiles": null,
+    "commit": true,
+    "commitMessage": "Release %s",
+    "tag": true,
+    "tagName": "%s",
+    "tagAnnotation": "Release %s",
+    "push": true,
+    "beforeStageCommand": false,
+    "afterReleaseCommand": false,
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": false
+    }
+  }
+}
