@@ -277,9 +277,11 @@ if ( isset ( $_GET["no_bb_guide"] )){
 
     if ($bb_guide_not_found == 1){
         print "
-<div class=\"notification\">
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
     <button class=\"notification-close-button\">x</button>
-    <p>" .  _("We could not find a guide") . "</p>
+    <p>" . _("Sorry, we could not find a guide.") . "</p>
+  </div>
 </div>";
     }
 }
