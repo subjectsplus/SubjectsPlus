@@ -80,10 +80,10 @@ class TextTokenizer
                     $tokenized .= $part;
                 }
             } // end foreach
+            $this->_tokenized_text = $tokenized;
         } else {
-            return;
+            $this->_tokenized_text = $this->_original_text;
         }
-        $this->_tokenized_text = $tokenized;
     }
 
     private function isProperlyFormedToken($text)
