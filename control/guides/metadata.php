@@ -365,6 +365,11 @@ include("../includes/footer.php");
      return false;
    });
 
+     //////////////////
+     // Initialize Parent Guides Dropdown
+     //////////////////
+     $("select[name='parent_id[]']").select2();
+
 
  });
 
