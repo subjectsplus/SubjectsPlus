@@ -501,4 +501,12 @@ $booklist_primo_api_key = "";
 ////////////////////////////////////////////
 $stats_enabled = FALSE;
 
+
+////////////////////////////////////////////
+//Questionpoint Chat settings
+////////////////////////////////////////////
+// you can find your institution ID by logging into
+// Questionpoint and looking in the top right corner
+$qp_inst_id = '13969';
+
 ?>
