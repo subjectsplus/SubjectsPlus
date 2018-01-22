@@ -143,8 +143,8 @@ class StaffWebService extends WebService implements InterfaceWebService
                 case 'personnel':
                     $lstrQuery = 'SELECT
   staff_id AS id,
-  lname    AS last_name,
-  fname    AS first_name,
+  lname,
+  fname,
   title,
   tel,
   a.email as email,
