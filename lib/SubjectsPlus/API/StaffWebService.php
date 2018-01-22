@@ -89,6 +89,16 @@ class StaffWebService extends WebService implements InterfaceWebService
 
 					$lobjFinalParams['max'] = $lstrValue;
 					break;
+                case 'personnel':
+                    $lobjSplit = explode(',', $lstrValue);
+
+                    foreach($lobjSplit as &$lstrUnScrubbed)
+                    {
+                        $lstrUnScrubbed = scrubData($lstrUnScrubbed);
+                    }
+
+                    $lobjFinalParams['personnel'] = $lobjSplit;
+                    break;
 			}
 		}
 
@@ -126,12 +136,29 @@ class StaffWebService extends WebService implements InterfaceWebService
 						array_push($lobjCondition, "email = '$lstrEmail'\n");
 					}
 
-					$lstrCombine = implode(' OR ', $lobjCondition);
+                    $lstrCombine = implode(' OR ', $lobjCondition);
 
-					array_push($lobjConditions, $lstrCombine);
-					break;
-			}
-		}
+                    array_push($lobjConditions, $lstrCombine);
+                    break;
+                case 'personnel':
+                    $lstrQuery = 'SELECT
+  staff_id AS id,
+  lname,
+  fname,
+  title,
+  tel,
+  a.email as email,
+  bio,
+  department.department_id as department_id,
+  department.name as department_name,
+  department.telephone as department_telephone,
+  IF((SELECT staff_id FROM staff as b WHERE b.staff_id = a.supervisor_id AND b.active = 1) IS NOT NULL, a.supervisor_id, "") as supervisor_id
+FROM staff as a, department as department
+WHERE active = 1 AND department.department_id = a.department_id ORDER BY a.staff_id';
+
+                    break;
+            }
+        }
 
 		if(count($lobjConditions) > 0)
 		{

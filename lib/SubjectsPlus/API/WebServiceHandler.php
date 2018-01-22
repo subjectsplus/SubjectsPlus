@@ -168,7 +168,9 @@ class WebServiceHandler
 		print "Results can be returned as xml or json (default).  E.g.:\nsp/api/staff/output/xml/key/api-key\n\n";
 		print "staff\n  * enter email address to return results.  Separate multiple addresses with commas.  Examples:\n";
 		print "  sp/api/staff/email/you@miami.edu/key/api-key\n  sp/api/staff/email/you@miami.edu,me@miami.edu/key/api-key\n";
-		print "  * select a department by id\n  sp/api/staff/department/99/key/api-key\n  * set a limit\n  sp/api/staff/department/99/max/5/key/api-key\n\n";
+		print "  * select a department by id\n  sp/api/staff/department/99/key/api-key\n  * set a limit\n  sp/api/staff/department/99/max/5/key/api-key\n";
+        print "  * show all personnel \n";
+        print "  sp/api/staff/personnel/all/key/api-key \n\n";
 		print "talkback\n  * show all talkbacks submitted between start date and end date\n  sp/api/talkback/startdate/2013-04-01/enddate/2013-04-30/key/api-key\n";
 		print "  * show all talkbacks submitted on one date\n  sp/api/talkback/startdate/2013-04-01/key/api-key\n";
 		print "  * enter max number of returns\n  sp/api/talkback/max/10/key/api-key\n\ndatabase\n  * Lots of options:\n";
