@@ -49,7 +49,7 @@ class StaffWebService extends WebService implements InterfaceWebService
 		{
 			if(isset($tel_prefix))
 			{
-				$lobjRow['work_telephone'] = $tel_prefix . $lobjRow['work_telephone'];
+				$lobjRow['tel'] = $tel_prefix . $lobjRow['tel'];
 			}
 		}
 
@@ -146,7 +146,7 @@ class StaffWebService extends WebService implements InterfaceWebService
   lname    AS last_name,
   fname    AS first_name,
   title,
-  tel AS work_telephone,
+  tel,
   a.email as email,
   bio,
   department.department_id as department_id,
