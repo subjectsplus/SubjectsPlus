@@ -538,7 +538,7 @@ function guideCollectionService() {
         },
 
         clearCollectionMetadata: function () {
-            $('#collection-title').html(' ');
+            $('#collection-title').html('');
             $('#collection-description').html('');
             $('#collection-shortform').html('');
         },
