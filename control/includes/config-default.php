@@ -507,6 +507,7 @@ $stats_enabled = FALSE;
 ////////////////////////////////////////////
 // you can find your institution ID by logging into
 // Questionpoint and looking in the top right corner
-$qp_inst_id = '13969';
+// e.g. 13969
+$qp_inst_id = '';
 
 ?>
