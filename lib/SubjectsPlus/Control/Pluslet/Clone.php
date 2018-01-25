@@ -106,6 +106,10 @@ require_once("Pluslet.php");
 				 $cloned_pluslet = new Pluslet_Chat($master, null, $subject_id, 1);
 				 break;
 
+			 case "QP":
+				 $cloned_pluslet = new Pluslet_QP($master, null, $subject_id, 1);
+				 break;
+
 			 case "PrimoSearch":
 				 $cloned_pluslet = new Pluslet_PrimoSearch($master, null, $subject_id, 1);
 				 break;
