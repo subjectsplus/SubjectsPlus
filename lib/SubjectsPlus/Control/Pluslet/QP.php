@@ -46,6 +46,7 @@ class Pluslet_QP extends Pluslet {
                 $this->_inst_id = $qp_inst_id;
                 $this->_extra = json_decode( $this->_extra, true );
 	        $this->_color = isset($this->_extra['color']) ? $this->_extra['color'] : 'green';
+	        $this->_lang_id = isset($this->_extra['language']) ? $this->_extra['language'] : 1;
                 $this->_body = $this->loadHtml(__DIR__ . '/views/QPChatViewOutput.php');
         }
     }
