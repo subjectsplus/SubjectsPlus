@@ -33,12 +33,17 @@ class Pluslet_QP extends Pluslet {
     protected function onViewOutput()
     {
         global $qp_inst_id;
-        if( empty($qp_inst_id) && strpos($_SERVER['REQUEST_URI'], 'control')) {
-                $flashMessage = "<p>" . _("Please have your SubjectsPlus Admin add the settings for your institution's QuestionPoint Chat account.") . "</p>";
-                $flashMessage .= "<p>" . _("The file is located at /control/includes/config.php") . "</p>";
+        if( empty($qp_inst_id)) {
+                if( strpos($_SERVER['REQUEST_URI'], 'control')) {
+                    $flashMessage = "<p>" . _("Please have your SubjectsPlus Admin add the settings for your institution's QuestionPoint Chat account.") . "</p>";
+                    $flashMessage .= "<p>" . _("The file is located at /control/includes/config.php") . "</p>";
+                } else {
+                    $flashMessage = "<p>" . _("The chat feature is not currently available.") . "</p>";
+                    $flashMessage .= "<p>" . _("Please contact your library directly.") . "</p>";
+                }
 		$this->_body = $flashMessage;
         } else {
-                $this->_inst_id = empty($qp_inst_id) ? '13969' : $qp_inst_id; # Fallback to Oregon's Statewide Chat service in the public view
+                $this->_inst_id = $qp_inst_id;
                 $this->_extra = json_decode( $this->_extra, true );
 	        $this->_color = isset($this->_extra['color']) ? $this->_extra['color'] : 'green';
                 $this->_body = $this->loadHtml(__DIR__ . '/views/QPChatViewOutput.php');
