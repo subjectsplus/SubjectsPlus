@@ -22,7 +22,7 @@ class Pluslet_QP extends Pluslet {
     }
   static function getMenuName()
   {
-    return _('Chat');
+    return _('QuestionPoint Chat');
   }
 
     public static function getMenuIcon()
