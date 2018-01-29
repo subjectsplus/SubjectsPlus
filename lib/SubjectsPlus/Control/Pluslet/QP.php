@@ -27,7 +27,7 @@ class Pluslet_QP extends Pluslet {
 
     public static function getMenuIcon()
     {
-        $icon="<i class=\"fa fa-commenting-o\" title=\"" . _("Chat") . "\" ></i><span class=\"icon-text\">" . _("Chat") . "</span>";
+        $icon="<i class=\"fa fa-commenting-o\" title=\"" . _("QuestionPoint Chat") . "\" ></i><span class=\"icon-text\">" . _("QuestionPoint Chat") . "</span>";
         return $icon;
     }
     protected function onViewOutput()
