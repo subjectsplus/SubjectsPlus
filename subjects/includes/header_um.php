@@ -329,6 +329,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                         <li><a href="<?php print PATH_FROM_ROOT; ?>/research/getting-started/">Getting Started</a></li>
                         <li><a href="<?php print PATH_TO_SP; ?>subjects/index.php">Research Guides</a></li>
                         <li><a href="<?php print PATH_FROM_ROOT; ?>/research/consultations/">Research Consultations</a></li>
+                        <li><a href="<?php print PATH_FROM_ROOT; ?>/digital-scholarship/">Digital Scholarship</a></li>
                         <li><a href="<?php print PATH_FROM_ROOT; ?>/library-research-scholars/">Library Research Scholars</a></li>
                         <li class="last"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z">Liaison Librarians A-Z</a></li>
                       </ul>
