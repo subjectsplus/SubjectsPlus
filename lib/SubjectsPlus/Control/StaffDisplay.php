@@ -258,7 +258,7 @@ class StaffDisplay {
 			AND type = 'Subject'
       AND staff.active = 1
       AND subject.active = 1
-      AND staff.user_type_id = '1'
+      AND staff.user_type_id = 1
       AND type != 'Placeholder'
 			order by subject, lname, fname";
         
