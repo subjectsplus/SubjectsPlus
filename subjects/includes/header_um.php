@@ -365,6 +365,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                         <ul>
                             <li><a href="<?php print PATH_FROM_ROOT; ?>/chc/">Cuban Heritage Collection</a></li>
                             <li><a href="https://merrick.library.miami.edu/">Digital Collections</a></li>
+                            <li><a href="https://library.miami.edu/kislak-center/" target="_blank">Kislak Center</a></li>
                             <li><a href="<?php print PATH_FROM_ROOT; ?>/oral-histories/">Oral Histories</a></li>
                             <li><a href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a></li>
                             <li><a href="<?php print PATH_FROM_ROOT; ?>/specialcollections/">Special Collections</a></li>
