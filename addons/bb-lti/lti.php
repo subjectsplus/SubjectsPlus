@@ -1,6 +1,4 @@
 <?php
-echo getcwd();
-exit();
 try {
     if (required_indexes_exist()) {
         include("../../control/includes/autoloader.php"); // need to use this if header not loaded yet
