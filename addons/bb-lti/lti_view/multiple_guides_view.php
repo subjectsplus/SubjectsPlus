@@ -1,6 +1,8 @@
 <?php
-
-use SubjectsPlus\Control\Querier;
+if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+    die('Direct access not allowed');
+    exit();
+};
 global $AssetPath;
 $subsubcat = "";
 $page_title = "Select your guide";

@@ -306,13 +306,22 @@ class Guide
             
             <span class=\"smaller\">* " . _("Short label that shows up in URL--don't use spaces, ampersands, etc.") . "</span>
             
-            <label for=\"course_code\">" . _("Course Code") . "</label>
+            ";
+
+        global $lti_enabled;
+        if (isset($lti_enabled)) {
+            if ($lti_enabled) {
+                echo "
+                <label for=\"course_code\">" . _("Course Code") . "</label>
             <input type=\"text\" name=\"coursecode\" id=\"course_code\" size=\"20\" class=\"pure-input-1-4\" value=\"" . $this->_course_code . "\">
             
             <label for=\"instructor\">" . _("Instructor") . "</label>
-            <div class=\"all-instructors-dropdown dropdown_list\">" . $all_instructors ."</div>
-
-            <label for=\"type\">" . _("Type of Guide") . "</label>
+            <div class=\"all-instructors-dropdown dropdown_list\">" . $all_instructors . "</div>
+                ";
+            }
+        }
+            
+        echo "<label for=\"type\">" . _("Type of Guide") . "</label>
             ";
 
         /////////////////////

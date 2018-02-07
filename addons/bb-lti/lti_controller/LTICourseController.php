@@ -1,4 +1,8 @@
 <?php
+if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
+    die('Direct access not allowed');
+    exit();
+};
 /**
  * Created by PhpStorm.
  * User: acarrasco
@@ -66,7 +70,12 @@ class LTICourseController
             $line = fgets($file);
         }
         fclose($file);
+        $this->deleteTempFile($file_path);
         echo 'done';
+    }
+
+    private function deleteTempFile($file){
+        unlink($file);
     }
 
     public function getLatestFileFromServer($file_path='')
