@@ -146,7 +146,8 @@ class LTICourseController
         fclose($remoteStream);
 
         $log = fopen("log.txt","a");
-        fwrite($log, date() . " - Updated from " . $last_file);
+        $date = date("Y-m-d H:i:s");
+        fwrite($log, $date . " - Updated from " . $last_file . PHP_EOL);
         fclose($log);
     }
 
