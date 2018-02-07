@@ -71,7 +71,6 @@ class LTICourseController
         }
         fclose($file);
         $this->deleteTempFile($file_path);
-        echo 'done';
     }
 
     private function deleteTempFile($file){
@@ -174,7 +173,6 @@ class LTICourseController
         }
         fclose($file);
         $this->deleteTempFile($file_path);
-        echo 'done';
     }
 
     private function tableExists($table_name)
