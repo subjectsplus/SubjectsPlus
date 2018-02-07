@@ -8,7 +8,36 @@ if (file_exists("config.php")) {
 	include_once("config.php");
 }
 
+function setXFrameOptions (){
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
+    global $i_frame_settings;
+    if (empty($i_frame_settings)){
+        if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== false){
+            $i_frame_settings = " 'self'";
+        }else{
+            $i_frame_settings = 'SAMEORIGIN';
+        }
+    }
+
+    if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== false){
+        $trusted_site_url = $i_frame_settings;
+        if (strpos($i_frame_settings, 'ALLOW-FROM') !== false) {
+            $temp = explode("ALLOW-FROM", $i_frame_settings);
+            $trusted_site_url = $temp[1];
+        }elseif (strpos($i_frame_settings, 'SAMEORIGIN') !== false){
+            $trusted_site_url = " 'self'";
+        }elseif (strpos($i_frame_settings, 'none') !== false || (strpos($i_frame_settings, 'DENY') !== false)){
+            $trusted_site_url = " 'none'";
+        }
+        @header( 'Content-Security-Policy: frame-ancestors' . $trusted_site_url);
+    }else{
+        @header( 'X-Frame-Options: ' . $i_frame_settings);
+    }
+}
+
+
+setXFrameOptions();
 //////////////////////////////
 // If gettext isn't installed
 // just return the string

@@ -167,7 +167,10 @@ if(!is_writable($lstrConfigFilePath))
 
                             "stats_enabled" => array( _( "Enable Stats" ), _( "This option enables guides stats (experimental)" ), "boolean", "right", "small", "" , "")
 
-	);
+	
+
+
+    );
 
 	//set config options
 	$lobjConfig->setConfigOptions( $lobjConfigOptions );

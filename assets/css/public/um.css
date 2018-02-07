@@ -2373,6 +2373,27 @@ img.pluslet_card_image {
 }
 
 
+
 /** end ckeditor custom styles ***/
 
 
+.notification{
+    background-color: rgba(255,204,204,1);
+    border: 1px solid rgba(255,0,0,0.3);
+    width:90%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius:4px;
+    font-weight: bold;
+    color: rgba(255,0,0,1);
+}
+
+.notification-close-button{
+    float: right;
+    display: inline-block;
+    padding: 2px 5px;
+    border: none;
+    background: none;
+    color: rgba(255,0,0,1);
+    font-size:1.5em;
+}
