@@ -286,6 +286,20 @@ if ( isset ( $_GET["no_bb_guide"] )){
     }
 }
 
+if ( isset ( $_GET["no_lti_enabled"] )){
+
+    $bb_guide_not_found = intval(scrubData($_GET["no_lti_enabled"]));
+
+    if ($bb_guide_not_found == 1){
+        print "
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" . _("Sorry, we could not find a guide.") . "</p>
+  </div>
+</div>";
+    }
+}
 
 ////////////////////////////
 // Now we are finally read to display the page

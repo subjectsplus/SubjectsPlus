@@ -2,7 +2,11 @@
 try {
     include("../../control/includes/config.php");
     global $lti_enabled;
-
+    if ($mod_rewrite == 1) {
+        $guide_path = "";
+    } else {
+        $guide_path = $PublicPath;
+    }
     if (isset($lti_enabled)){
         if ($lti_enabled){
             if (required_indexes_exist()) {
@@ -18,11 +22,7 @@ try {
                 if ($lti->valid) {
 
                     // let's use our Pretty URLs if mod_rewrite = TRUE or 1
-                    if ($mod_rewrite == 1) {
-                        $guide_path = "";
-                    } else {
-                        $guide_path = $PublicPath;
-                    }
+
                     $course_label = scrubData($_REQUEST["context_label"]);
 
                     $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
@@ -36,6 +36,8 @@ try {
                 die('Invalid LTI call');
                 exit();
             }
+        }else{
+            header("Location: " . $guide_path . "?no_lti_enabled=1"); /* Redirect browser */
         }
     }
 
