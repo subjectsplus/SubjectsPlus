@@ -168,6 +168,7 @@ class LTICourseController
             $line = fgets($file);
         }
         fclose($file);
+        $this->deleteTempFile($file_path);
         echo 'done';
     }
 

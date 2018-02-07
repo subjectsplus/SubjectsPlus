@@ -1,11 +1,13 @@
 <?php
-
+echo getcwd();
+exit();
 try {
     if (required_indexes_exist()) {
         include("../../control/includes/autoloader.php"); // need to use this if header not loaded yet
         include("../../control/includes/config.php");
+        include_once('../../control/includes/functions.php');
         require_once '../../lib/ims-blti/blti.php';
-        require_once('lti_controller/LTICourseController.php');
+        require_once('../../control/lti_controller/LTICourseController.php');
 
         global $lti_secret;
         $lti = new BLTI($lti_secret, false, false);
