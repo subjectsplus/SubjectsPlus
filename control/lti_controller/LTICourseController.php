@@ -144,6 +144,10 @@ class LTICourseController
         // Close our streams
         fclose($localStream);
         fclose($remoteStream);
+
+        $log = fopen("log.txt","a");
+        fwrite($log, date() . " - Updated from " . $last_file);
+        fclose($log);
     }
 
     private function updateBBCourseInstructorTable()
