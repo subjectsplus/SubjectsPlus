@@ -1,6 +1,6 @@
 <?php
-include("../../../control/includes/autoloader.php"); // need to use this if header not loaded yet
-include("../../../control/includes/config.php");
+include("../includes/autoloader.php"); // need to use this if header not loaded yet
+include("../includes/config.php");
 require_once('LTICourseController.php');
 
 try {
@@ -11,4 +11,3 @@ try {
 } catch (Exception $e) {
     echo 'Exception "\n"', $e->getMessage(), "\n";
 }
-
