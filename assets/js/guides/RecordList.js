@@ -4,9 +4,11 @@ var Record = (function () {
         this.location = settings.location;
         if (settings.tokenString) {
             this.tokenString = settings.tokenString;
-            console.log('tokenString: ' + this.tokenString);
+            //console.log('tokenString: ' + this.tokenString);
+            //console.log('prefix: ' + this.prefix);
             var splitToken = settings.tokenString.split("{").join('').split("}").join('').split(',');
             this.recordId = splitToken[1];
+            this.prefix = "";
             this.title = splitToken[2];
             this.displayOptions = splitToken[3];
             var optionsArray = this.displayOptions.toString().split('').map(Number);
@@ -72,9 +74,10 @@ var RecordListSortable = (function () {
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
         var rank_id;
         var description_override = '';
+        //console.log(record.prefix);
 
         $.ajax({
-            url: '../admin/helpers/subject_databases_helper.php',
+            url: '../records/helpers/subject_databases_helper.php',
             type: "GET",
             dataType: "json",
             data: {
@@ -109,8 +112,8 @@ var RecordListSortable = (function () {
         (record.showNote === 1) ? showNotesToggle = this.sortableToggleSpan('include-note-toggle', true, 'Note') : showNotesToggle = this.sortableToggleSpan('include-note-toggle', false, 'Note');
         var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + record.location + "'  \n " +
             "data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'" +
-            " data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "' data-prefix='" + record.prefix + "'>             " +
-            "<span class='db-list-label'>" + record.prefix + " " + record.title + "</span>  " +
+            " data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             " +
+            "<span class='db-list-label'>" + record.title + "</span>  " +
              descriptionOverrideButton +
             "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
              textArea + "</span>" +

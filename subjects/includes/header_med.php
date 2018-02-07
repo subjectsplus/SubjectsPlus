@@ -70,6 +70,7 @@ $v2styles = TRUE;
 </head>
 
 <body>
+
 <div id="wrap">
 
 <div id="header-content"> 

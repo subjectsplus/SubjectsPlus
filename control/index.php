@@ -120,41 +120,46 @@ if (isset($use_shibboleth)) {
 
 <!-- Total External Link Clicks Per Guide -->
 <?php
-$db = new Querier;
-$stats = new Stats($db);
-$staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
+global $stats_enabled;
 
+if ($stats_enabled){
+    $db = new Querier;
+    $stats = new Stats($db);
+    $staff_short_forms = $stats->getStaffShortForms($_SESSION['staff_id']);
+}
 ?>
 
-    <div class="pure-u-2-3" <?php if ($staff_short_forms == null) { echo "style=\"display:none;\""; } ?>>
-	<div class="pluslet no_overlflow">
-	    <div class="titlebar">
-		<div class="titlebar_text">Your Guide Views Last Month</div>
-	    </div>
-	    <div class="pluslet_body">
-		<table class="stats-table">
-		    <thead>
-			<tr>
-			    <td>Guide</td>
-			    <td>Number of Views</td>
-			</tr>
-		    </thead>
-		    <tbody>
-			<?php foreach ($staff_short_forms as $staff_short_form) { ?>
-			    <tr>
-				<td>
-				    <a href="./guides/guide.php?subject_id=<?php echo $staff_short_form[0]; ?>"><?php echo $staff_short_form['subject'];  ?></a>
-				</td>
-				<td>
-				   <?php $view_count = $stats->getShortFormCount($staff_short_form['shortform']); echo $view_count[0]['view_count'] ?>
-				</td>
-			    </tr>
-			<?php } ?>
-		    </tbody>
-		</table>
-	    </div>
-	</div>
-    </div>
+    <?php if ($stats_enabled): ?>
+        <div class="pure-u-2-3" <?php if ($staff_short_forms == null) { echo "style=\"display:none;\""; } ?>>
+            <div class="pluslet no_overlflow">
+                <div class="titlebar">
+                    <div class="titlebar_text">Your Guide Views Last Month</div>
+                </div>
+                <div class="pluslet_body">
+                    <table class="stats-table">
+                        <thead>
+                        <tr>
+                            <td>Guide</td>
+                            <td>Number of Views</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($staff_short_forms as $staff_short_form) { ?>
+                            <tr>
+                                <td>
+                                    <a href="./guides/guide.php?subject_id=<?php echo $staff_short_form[0]; ?>"><?php echo $staff_short_form['subject'];  ?></a>
+                                </td>
+                                <td>
+                                    <?php $view_count = $stats->getShortFormCount($staff_short_form['shortform']); echo $view_count[0]['view_count'] ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
 
 

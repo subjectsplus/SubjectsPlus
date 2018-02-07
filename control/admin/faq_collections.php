@@ -97,11 +97,11 @@ $resultArray = $querierDept->query($q);
 if ($resultArray) {
     foreach ($resultArray as $value) {
 
-        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> &nbsp; <input type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
+        $ourlist .= "<p id=\"item-$value[0]\" style=\"margin-bottom: 1em;\"><a id=\"delete-$value[0]\"><i class=\"fa fa-times\" title=\"" . _("Remove") . "\"></i></a> &nbsp; <input title=\"exisiting collection\" type=\"text\" size=\"40\" name=\"name[]\" value=\"$value[1]\" /> <input type=\"hidden\" name=\"faqpage_id[]\" value=\"$value[0]\" /></p>";
     }
 }
 
-$collection_box = "<form id=\"sources\" action=\"\" method=\"post\">
+$collection_box = "<form id=\"faq_collections\" action=\"\" method=\"post\">
 <button class=\"button\" id=\"save_guide\"  class=\"button pure-button pure-button-primary\" style=\"display: block;\" name=\"update_collections\" >" . _("SAVE CHANGES") . "</button>
 
 <p>" . _("Edit label or delete collection.") . "</p>
@@ -109,8 +109,8 @@ $ourlist
 </form>";
 
 $add_collection_box = "<form id=\"new_collection\" action=\"\" method=\"post\">
-<span class=\"record_label\">" . _("Collection Name") . "</span><br />
-<input type=\"text\" name=\"new_coll_name\" id=\"\" size=\"40\" class=\"required_field\" value=\"\">
+<label class=\"record_label\" for=\"new_collection_label\">" . _("Collection Name") . "</label><br />
+<input type=\"text\" name=\"new_coll_name\" id=\"new_collection_label\" size=\"40\" class=\"required_field\" value=\"\">
 <br /><br />
 <button class=\"button pure-button pure-button-primary\" id=\"add_collection\" name=\"add_collection\">" . _("Add New Collection") . "</button>
 </form>

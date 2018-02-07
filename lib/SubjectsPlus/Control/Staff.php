@@ -129,35 +129,38 @@ class Staff {
 
         break;
       case "forgot":
-        $this->_email = $_POST['email'];
+        $this->_email = scrubData($_POST['email'], 'email');
 
         /////////////
         // Get staff table info
         /////////////
-        $querier = new  Querier();
-        $q1 = "select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio, social_media from staff where email = '" . $this->_email . "'";
-        $staffArray = $querier->query($q1);
+          $querier = new  Querier();
+          $connection = $querier->getConnection();
+          $statement = $connection->prepare("select staff_id, lname, fname, title, tel, department_id, staff_sort, email, ip, user_type_id, password, ptags, active, bio, social_media from staff where email = :email");
+          $statement->bindParam ( ":email", $this->_email );
+          $statement->execute();
+          $staffArray = $statement->fetch();
 
-        $this->_debug .= "<p class=\"debug\">Staff query: $q1";
+        $this->_debug .= "<p class=\"debug\">Staff query: $statement->queryString";
         // Test if these exist, otherwise go to plan B
         if ($staffArray == FALSE) {
           $this->_message = "There is no active record with that email.";
         } else {
-          $this->_staff_id = $staffArray[0]['staff_id'];
-          $this->_lname = $staffArray[0]['lname'];
-          $this->_fname = $staffArray[0]['fname'];
+          $this->_staff_id = $staffArray['staff_id'];
+          $this->_lname = $staffArray['lname'];
+          $this->_fname = $staffArray['fname'];
           $this->_fullname = $this->_fname . " " . $this->_lname;
-          $this->_title = $staffArray[0]['title'];
-          $this->_tel = $staffArray[0]['tel'];
-          $this->_department_id = $staffArray[0]['department_id'];
-          $this->_staff_sort = $staffArray[0]['staff_sort'];
-          $this->_ip = $staffArray[0]['ip'];
-          $this->_user_type_id = $staffArray[0]['user_type_id'];
-          $this->_password = $staffArray[0]['password'];
-          $this->_ptags = $staffArray[0]['ptags'];
-          $this->_active = $staffArray[0]['active'];
-          $this->_bio = $staffArray[0]['bio'];
-          $this->_social_media = $staffArray[0]['social_media'];
+          $this->_title = $staffArray['title'];
+          $this->_tel = $staffArray['tel'];
+          $this->_department_id = $staffArray['department_id'];
+          $this->_staff_sort = $staffArray['staff_sort'];
+          $this->_ip = $staffArray['ip'];
+          $this->_user_type_id = $staffArray['user_type_id'];
+          $this->_password = $staffArray['password'];
+          $this->_ptags = $staffArray['ptags'];
+          $this->_active = $staffArray['active'];
+          $this->_bio = $staffArray['bio'];
+          $this->_social_media = $staffArray['social_media'];
         }
         break;
       default:

@@ -389,7 +389,7 @@ class Guide
         ////////
 
         $querier = new Querier();
-        $subject_query = "SELECT subject_id, subject FROM subject WHERE subject_id != '$this->_subject_id'";
+        $subject_query = "SELECT subject_id, subject FROM subject WHERE subject_id != '$this->_subject_id' ORDER BY subject ASC ";
         $subjectArray = $querier->query($subject_query);
 
         $parentMe = new Dropdown("parent_id[]", $subjectArray, "", "50", "--Select--");

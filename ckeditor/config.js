@@ -37,14 +37,15 @@ CKEDITOR.editorConfig = function( config ) {
 	config.language = 'en';
 
 	//added by dgonzalez
+	// removed , 'Maximize' from SubsPlus_Narrow temporarily
 	config.toolbar_SubsPlus_Narrow =
 		[
 
-			['Bold','Italic','JustifyLeft','JustifyCenter','JustifyRight','-','BulletedList','NumberedList','-','Link','Unlink','Anchor','-','Image','-', 'PasteText','PasteFromWord','-', 'HorizontalRule','-','RemoveFormat', '-','Styles','-','Source'],
+			['Bold','Italic','JustifyLeft','JustifyCenter','JustifyRight','-','BulletedList','NumberedList', 'Table', '-','Link','Unlink','Anchor','-','Image','-', 'PasteText','PasteFromWord','-', 'HorizontalRule','-','RemoveFormat', '-','Styles','-','Source'],
 
 			'/',
 
-			['subsplus_resource', 'subsplus_asset' , 'subsplus_faq' , 'subsplus_cat_link', 'Abbr', 'Maximize']
+			['subsplus_resource', 'subsplus_asset' , 'subsplus_faq' , 'subsplus_cat_link', 'Abbr']
 
 
 		];

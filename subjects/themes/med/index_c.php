@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Guide\GuideList;
     
 $use_jquery = array("ui");
 
-$page_title = "Research Guides";
+$page_title = "Resource Guides";
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
 $noheadersearch = TRUE;

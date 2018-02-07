@@ -154,7 +154,7 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
                         "booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , ""),
 
-                        "i_frame_settings" => array( _( "Render page on i-frame settings" ), _( "Type one setting. \n For example: DENY, SAMEORIGIN or ALLOW-FROM + trusted url(include http/https). Default to SAMEORIGIN" ), "string", "right", "large", "", _("") )
+                        "stats_enabled" => array( _( "Enable Stats" ), _( "This option enables guides stats (experimental)" ), "boolean", "right", "small", "" , "")
             );
 
 			//set config options

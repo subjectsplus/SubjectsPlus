@@ -554,7 +554,7 @@ class Pluslet {
                                             // show the subject-specific "description_override" if it exists
                                             $description = "<br />" . scrubData($override);
                                         } else {
-                                            $description = "<br />" . scrubData($myrow[6]);
+                                            $description = "<br />" . scrubData($myrow[6], 'richtext_html_purifier');
                                         }
                                         //$description = "<br />$myrow[9]";
 
