@@ -2,6 +2,7 @@
 namespace SubjectsPlus\Control;
 use Assetic\Exception\Exception;
 use SubjectsPlus\Control\Guide\PlusletData;
+use SubjectsPlus\Control\Guide\SubjectBBCourse;
 
 /**
  * @file sp_Guide
@@ -29,11 +30,15 @@ class Guide
     private $_parents;
     private $_header;
     private $_debug;
+    private $_course_code;
+    private $_instructor;
 
     public $_ok_staff = array();
     public $main_col_size;
 
     public $_isAdmin;
+
+
 
     public function __construct($subject_id = "", $flag = "")
     {
@@ -71,6 +76,8 @@ class Guide
                 $this->_shortform = $_POST["shortform"];
                 $this->_extra = $_POST['extra'];
                 $this->_header = $_POST['header'];
+                $this->_course_code = $_POST['coursecode'];
+                $this->_instructor = $_POST['instructor'];
 
                 //add http to redirect url if not present
                 $this->_redirect_url = strpos($this->_redirect_url, "http://") === 0 || strpos($this->_redirect_url, "https://") === 0
@@ -111,7 +118,7 @@ class Guide
                 /////////////
 
                 $db = new Querier();
-                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra, header from subject where subject_id = " . $this->_subject_id;
+                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra, header, course_code, instructor from subject where subject_id = " . $this->_subject_id;
                 $guideArray = $db->query($q1);
 
                 $this->_debug .= "<p>Subject query: $q1";
@@ -128,6 +135,8 @@ class Guide
                     $this->_type = $guideArray[0]["type"];
                     $this->_extra = json_decode($guideArray[0]["extra"], true);
                     $this->_header = $guideArray[0]["header"];
+                    $this->_course_code = $guideArray[0]["course_code"];
+                    $this->_instructor = $guideArray[0]["instructor"];
                 }
 
                 ///////////////////
@@ -259,6 +268,24 @@ class Guide
             $guide_title_line = _("Create New Guide");
         }
 
+        $db = new Querier();
+        $objInstructors = new SubjectBBCourse($db);
+        $instructor_option_boxes = $objInstructors->getInstructorsDropDownItems($this->_instructor);
+
+        $all_instructors = "
+            <select name=\"instructor\" id=\"instructor\">
+            <option id='intructor_place_holder'>" . _("None") . "</option>
+            $instructor_option_boxes
+            </select>
+            
+            <script>
+            $(document).ready(function() {
+        $('#instructor').select2();
+
+    });
+            </script>
+            ";
+
         echo "
             <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
@@ -276,10 +303,25 @@ class Guide
 
             <label for=\"record_shortform\">" . _("Short Form") . "</label>
             <input type=\"text\" name=\"shortform\" id=\"record_shortform\" size=\"20\" class=\"pure-input-1-4 required_field\" value=\"" . $this->_shortform . "\">
-
+            
             <span class=\"smaller\">* " . _("Short label that shows up in URL--don't use spaces, ampersands, etc.") . "</span>
+            
+            ";
 
-            <label for=\"type\">" . _("Type of Guide") . "</label>
+        global $lti_enabled;
+        if (isset($lti_enabled)) {
+            if ($lti_enabled) {
+                echo "
+                <label for=\"course_code\">" . _("Course Code") . "</label>
+            <input type=\"text\" name=\"coursecode\" id=\"course_code\" size=\"20\" class=\"pure-input-1-4\" value=\"" . $this->_course_code . "\">
+            
+            <label for=\"instructor\">" . _("Instructor") . "</label>
+            <div class=\"all-instructors-dropdown dropdown_list\">" . $all_instructors . "</div>
+                ";
+            }
+        }
+            
+        echo "<label for=\"type\">" . _("Type of Guide") . "</label>
             ";
 
         /////////////////////
@@ -750,7 +792,7 @@ class Guide
         // update subject table
         /////////////////////
 
-        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, header, extra) VALUES (
+        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, header, extra, course_code, instructor) VALUES (
         " . $db->quote(scrubData($this->_subject, "text")) . ",
         " . $db->quote(scrubData($this->_shortform, "text")) . ",
         " . $db->quote(scrubData($this->_description, "text")) . ",
@@ -759,7 +801,9 @@ class Guide
         " . $db->quote(scrubData($this->_active, "integer")) . ",
         " . $db->quote(scrubData($this->_type, "text")) . ",
         " . $db->quote(scrubData($this->_header, "text")) . ",
-        " . $db->quote($json_extra) . "
+        " . $db->quote($json_extra) . ",
+        " . $db->quote(scrubData($this->_course_code, "text")) . ",
+        " . $db->quote(scrubData($this->_instructor, "text")) . "     
         )";
 
         $db = new Querier;
@@ -843,7 +887,9 @@ class Guide
         active = " . $db->quote(scrubData($this->_active, "integer")) . ",
         type = " . $db->quote(scrubData($this->_type, "text")) . ",
         header = " . $db->quote(scrubData($this->_header, "text")) . ",
-        extra = " . $db->quote($json_extra) . "
+        extra = " . $db->quote($json_extra) . ",
+        course_code = " . $db->quote(scrubData($this->_course_code, "text")) . ",
+        instructor = " . $db->quote(scrubData($this->_instructor, "text")) . "
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
         $rUpSubject = $db->exec($qUpSubject);

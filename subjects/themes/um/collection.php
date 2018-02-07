@@ -186,7 +186,26 @@ include("includes/footer_um.php");
 
 
 <script type="text/javascript" language="javascript">
+
+
     $(document).ready(function(){
+        var isInIFrame = function () {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        };
+
+        console.log(isInIFrame());
+        if (isInIFrame()){
+            $('#spum_nav').hide();
+            $('#push').hide();
+            $('.sidebar-bkg').hide();
+            $('.visible-desktop').hide();
+            $('#wide_footer').hide();
+            $('.footer-container').hide();
+        }
 
         // add rowstriping
         stripeR();

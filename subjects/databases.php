@@ -162,6 +162,11 @@ if (isset($_POST["searchterm"])) {
 }
 
 $intro .= "<br class=\"clear-both\" />
+<div id='favoriteDatabasesList'>
+<a id='exportFavoriteDatabases' download='myFavoriteDatabasesList'>Save favorite databases list</a>
+<a id='importFavoriteDatabases'>Restore favorite databases list</a>
+<input id=\"favoriteDatabasesListInput\" type=\"file\" style=\"display: none;\" />
+</div>
 <div style=\"float: right; padding: 0 1.5em .5em 0;\"><a id=\"expander\" style=\"cursor: pointer;\">expand all descriptions</a></div>";
 
 // Create our table of databases object
@@ -276,50 +281,53 @@ include("includes/footer.php");
 
 <script type="text/javascript" language="javascript">
 
-  $(document).ready(function(){
-  
-/*  We use this at UM to track database clicks as events in GA
-    $(".trackContainer a").click(function() {
-      _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
-      // alert($(this).text());
-    });
-*/
-    var stripeholder = ".zebra";
-    // add rowstriping
-    stripeR();
+  $(document).ready(function() {
 
-
-    $("[id*=show]").livequery("change", function() {
-
-      var showtype_id = $(this).attr("id").split("-");
-      //alert("u clicked: " + showtype_id[1]);
-      unStripeR();
-      $(".type-" + showtype_id[1]).toggle();
+      /*  We use this at UM to track database clicks as events in GA
+       $(".trackContainer a").click(function() {
+       _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
+       // alert($(this).text());
+       });
+       */
+      var stripeholder = ".zebra";
+      // add rowstriping
       stripeR();
 
-    });
 
-    // show db details
-    $("span[id*=bib-]").livequery("click", function() {
-      var bib_id = $(this).attr("id").split("-");
-      $(this).parent().parent().find(".list_bonus").toggle()
-    });
+      $("[id*=show]").livequery("change", function () {
 
-    // show all db details
-    $("#expander").click(function() {
-      $(".list_bonus").toggle()
-    })
+          var showtype_id = $(this).attr("id").split("-");
+          //alert("u clicked: " + showtype_id[1]);
+          unStripeR();
+          $(".type-" + showtype_id[1]).toggle();
+          stripeR();
 
-    function stripeR(container) {
-      $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
-      $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
-    }
+      });
 
-    function unStripeR () {
-      $(".zebra").removeClass("evenrow");
-      $(".zebra").removeClass("oddrow");
-    }
+      // show db details
+      $("span[id*=bib-]").livequery("click", function () {
+          var bib_id = $(this).attr("id").split("-");
+          $(this).parent().parent().find(".list_bonus").toggle()
+      });
 
+      // show all db details
+      $("#expander").click(function () {
+          $(".list_bonus").toggle()
+      })
 
-  });
+      function stripeR(container) {
+          $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
+          $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
+      }
+
+      function unStripeR() {
+          $(".zebra").removeClass("evenrow");
+          $(".zebra").removeClass("oddrow");
+      }
+
+      <?php include('../assets/js/guides/favoriteDatabases.js'); ?>
+      var fdl = favoriteDatabasesList();
+      fdl.umlibrary_favorite_links.init();
+  })
+  ;
 </script>

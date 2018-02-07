@@ -7,7 +7,7 @@
  *   @date mar 2011
  */
 
-//added in order to hide errors if SP not yet installed.  
+//added in order to hide errors if SP not yet installed.
 if( !file_exists( "../control/includes/config.php" ) || filesize( "../control/includes/config.php" ) < 10 )
 {
   print "<img src=\"../assets/images/admin/logo_v3_full.png\" border=\"0\" />\n<br />";

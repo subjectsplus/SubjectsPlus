@@ -10,7 +10,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\SubjectsPlus\Control;
+use SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array("ui"); //um don't want no ui_styles
@@ -240,7 +240,10 @@ print $social_and_search;
 
 <script type="text/javascript" language="javascript">
 
-    $(document).ready(function(){
+
+    $(document).ready(function()
+
+        <?php include('./bb-lti/view.js'); ?>
 
         // .togglebody makes the body of a pluslet show or disappear
         $('body').on('click','.titlebar_text', function(event) {
@@ -378,6 +381,7 @@ $(function() {
 
 <script>
 
+
 var $target_blank_links = $(".target_blank_links");
 $target_blank_links.each(function() {
     $(this).find('a').attr('target', '_blank');
@@ -473,7 +477,6 @@ cloneView.init();
             $(container).show();
         }
     });
-
 </script>
 
 

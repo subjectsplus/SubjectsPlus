@@ -391,6 +391,8 @@ $(document).ready(function(){
 		$(".zebra").removeClass("oddrow");
 	}
 
-
+    <?php include('../assets/js/guides/favoriteDatabases.js'); ?>
+    var fdl = favoriteDatabasesList();
+    fdl.init();
 });
 </script>

@@ -271,14 +271,35 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
     $guide_experts = "$expert_item";
 
-    
+if ( isset ( $_GET["no_bb_guide"] )){
 
+    $bb_guide_not_found = intval(scrubData($_GET["no_bb_guide"]));
 
+    if ($bb_guide_not_found == 1){
+        print "
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" . _("Sorry, we could not find a guide.") . "</p>
+  </div>
+</div>";
+    }
+}
 
+if ( isset ( $_GET["no_lti_enabled"] )){
 
+    $bb_guide_not_found = intval(scrubData($_GET["no_lti_enabled"]));
 
-
-
+    if ($bb_guide_not_found == 1){
+        print "
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" . _("Sorry, we could not find a guide.") . "</p>
+  </div>
+</div>";
+    }
+}
 
 ////////////////////////////
 // Now we are finally read to display the page
@@ -382,7 +403,11 @@ include("includes/footer_um.php");
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
 
-              
+        if ($(".notification-close-button")[0]){
+            $(".notification-close-button").click(function(){
+               $(".notification").hide();
+            });
+        }
 
 
     });
