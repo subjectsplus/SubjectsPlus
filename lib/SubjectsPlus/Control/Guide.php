@@ -2,6 +2,7 @@
 namespace SubjectsPlus\Control;
 use Assetic\Exception\Exception;
 use SubjectsPlus\Control\Guide\PlusletData;
+use SubjectsPlus\Control\Guide\SubjectBBCourse;
 
 /**
  * @file sp_Guide
