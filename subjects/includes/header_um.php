@@ -365,6 +365,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                         <ul>
                             <li><a href="<?php print PATH_FROM_ROOT; ?>/chc/">Cuban Heritage Collection</a></li>
                             <li><a href="https://merrick.library.miami.edu/">Digital Collections</a></li>
+                            <li><a href="https://library.miami.edu/kislak-center/" target="_blank">Kislak Center</a></li>
                             <li><a href="<?php print PATH_FROM_ROOT; ?>/oral-histories/">Oral Histories</a></li>
                             <li><a href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a></li>
                             <li><a href="<?php print PATH_FROM_ROOT; ?>/specialcollections/">Special Collections</a></li>
@@ -388,7 +389,7 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/ada/">ADA/Disability Services</a></li>
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/computers/">Computers</a></li>  
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/course-reserves/">Course Reserves</a></li>
-                          <li><a href="<?php print PATH_FROM_ROOT; ?>datacuration/">Data Management</a></li> 
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/datacuration/">Data Management</a></li> 
                           <li><a href="<?php print PATH_TO_SP; ?>subjects/data-services">Data Services</a></li>                           
                           <li><a href="<?php print PATH_TO_SP; ?>subjects/digital-humanities">Digital Humanities</a></li>                 
                           <li><a href="<?php print PATH_FROM_ROOT; ?>/medialab/">Digital Media Lab</a></li>
