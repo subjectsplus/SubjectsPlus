@@ -2,6 +2,7 @@
 namespace SubjectsPlus\Control;
 use Assetic\Exception\Exception;
 use SubjectsPlus\Control\Guide\PlusletData;
+use SubjectsPlus\Control\Guide\SubjectBBCourse;
 
 /**
  * @file sp_Guide
@@ -29,6 +30,8 @@ class Guide
     private $_parents;
     private $_header;
     private $_debug;
+    private $_course_code;
+    private $_instructor;
 
     public $_ok_staff = array();
     public $main_col_size;
@@ -259,6 +262,24 @@ class Guide
             $guide_title_line = _("Create New Guide");
         }
 
+        $db = new Querier();
+        $objInstructors = new SubjectBBCourse($db);
+        $instructor_option_boxes = $objInstructors->getInstructorsDropDownItems($this->_instructor);
+
+        $all_instructors = " 
+            <select name=\"instructor\" id=\"instructor\"> 
+            <option id='intructor_place_holder'>" . _("None") . "</option> 
+            $instructor_option_boxes 
+            </select> 
+             
+            <script> 
+            $(document).ready(function() { 
+        $('#instructor').select2(); 
+ 
+    }); 
+            </script> 
+            ";
+
         echo "
             <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
@@ -277,10 +298,22 @@ class Guide
             <label for=\"record_shortform\">" . _("Short Form") . "</label>
             <input type=\"text\" name=\"shortform\" id=\"record_shortform\" size=\"20\" class=\"pure-input-1-4 required_field\" value=\"" . $this->_shortform . "\">
 
-            <span class=\"smaller\">* " . _("Short label that shows up in URL--don't use spaces, ampersands, etc.") . "</span>
+            <span class=\"smaller\">* " . _("Short label that shows up in URL--don't use spaces, ampersands, etc.") . "</span>";
 
-            <label for=\"type\">" . _("Type of Guide") . "</label>
-            ";
+        global $lti_enabled;
+        if (isset($lti_enabled)) {
+            if ($lti_enabled) {
+                echo "
+                <label for=\"course_code\">" . _("Course Code") . "</label>
+            <input type=\"text\" name=\"coursecode\" id=\"course_code\" size=\"20\" class=\"pure - input - 1 - 4\" value=\"" . $this->_course_code . "\" >
+
+            <label for=\"instructor\" > " . _("Instructor") . "</label>
+            <div class=\"all - instructors - dropdown dropdown_list\">" . $all_instructors . "</div>
+                ";
+            }
+        }
+            
+        echo "<label for=\"type\">" . _("Type of Guide") . "</label>";
 
         /////////////////////
         // Guide types dropdown

@@ -271,7 +271,35 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
     $guide_experts = "$expert_item";
 
-    
+if ( isset ( $_GET["no_bb_guide"] )){
+
+    $bb_guide_not_found = intval(scrubData($_GET["no_bb_guide"]));
+
+    if ($bb_guide_not_found == 1){
+        print "
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" . _("Sorry, we could not find a guide.") . "</p>
+  </div>
+</div>";
+    }
+}
+
+if ( isset ( $_GET["no_lti_enabled"] )){
+
+    $no_lti_enabled = intval(scrubData($_GET["no_lti_enabled"]));
+
+    if ($no_lti_enabled == 1){
+        print "
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" . _("Sorry, we could not find a guide.") . "</p>
+  </div>
+</div>";
+    }
+}
 
 
 
