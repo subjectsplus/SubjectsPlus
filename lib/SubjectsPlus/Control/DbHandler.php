@@ -445,7 +445,7 @@ ORDER BY newtitle
 
 		$db = new Querier;
 		$connection = $db->getConnection();
-		$statement = $connection->prepare ( "SELECT DISTINCT s.subject, s.subject_id
+		$statement = $connection->prepare ( "SELECT DISTINCT s.subject, s.subject_id,  s.type
 FROM title AS t
 INNER JOIN location_title AS lt
 ON t.title_id = lt.title_id
@@ -458,6 +458,7 @@ ON rk.title_id = t.title_id
 INNER JOIN subject AS s
 ON rk.subject_id = s.subject_id
 AND s.active = 1
+AND s.type = 'Subject'
 AND eres_display = 'Y'
 AND dbbysub_active = 1
 ORDER BY s.subject");
