@@ -501,6 +501,16 @@ $booklist_primo_api_key = "";
 ////////////////////////////////////////////
 $stats_enabled = FALSE;
 
+////////////////////////////////////////////
+//Blackboard LTI Settings
+////////////////////////////////////////////
+$lti_enabled = FALSE;
+$lti_secret = '';
+$lti_sftp_server_url = '';
+$lti_instructors_dir_path = '';
+$lti_courses_dir_path = '';
+$lti_service_account_username = '';
+$lti_service_account_password = '';
 
 ////////////////////////////////////////////
 //Questionpoint Chat settings
