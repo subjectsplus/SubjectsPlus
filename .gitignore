@@ -139,3 +139,5 @@ import_log.html
 subjectsplus-db-diagram.png
 richter_items.php
 external_scripts
+
+control/lti_controller/config.php
