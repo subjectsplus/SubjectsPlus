@@ -445,21 +445,18 @@ ORDER BY newtitle
 
 		$db = new Querier;
 		$connection = $db->getConnection();
-		$statement = $connection->prepare ( "SELECT DISTINCT s.subject, s.subject_id
-FROM title AS t
-INNER JOIN location_title AS lt
-ON t.title_id = lt.title_id
-INNER JOIN location AS l
-ON lt.location_id = l.location_id
-INNER JOIN restrictions AS r
-ON l.access_restrictions = r.restrictions_id
-INNER JOIN rank AS rk
-ON rk.title_id = t.title_id
-INNER JOIN subject AS s
-ON rk.subject_id = s.subject_id
+		$statement = $connection->prepare ( "SELECT s.subject, s.subject_id, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND l.eres_display = 'Y'
+    AND l.record_status = 'Active'
+    AND r.dbbysub_active = 1)
 AND s.active = 1
-AND eres_display = 'Y'
-AND dbbysub_active = 1
 ORDER BY s.subject");
 
 		$statement->bindParam ( ":qualifer", $letter );

@@ -338,21 +338,19 @@ function getDBbySubBoxes($selected_sub, $additionaltype = "Placeholder") {
   if ($additionaltype != "") { $morequery = "OR type = '" . $additionaltype . "'";}
 
   //$subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE (type = 'Subject' " . $morequery . ") AND active = '1' ORDER BY subject";
- 
-   $subs_query = "
-    SELECT DISTINCT s.subject_id, s.subject, s.type 
-FROM subject s
-INNER JOIN rank r
-ON s.subject_id = r.subject_id
-INNER JOIN title t
-ON r.title_id = t.title_id
-INNER JOIN location_title lt
-ON t.title_id = lt.title_id
-INNER JOIN location l
-ON lt.location_id = l.location_id
-WHERE s.type = 'Subject' 
-AND s.active = '1' 
-AND l.eres_display = 'Y'
+
+    $subs_query = "SELECT s.subject_id, s.subject, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND l.eres_display = 'Y'
+    AND l.record_status = 'Active'
+    AND r.dbbysub_active = 1)
+AND s.active = 1
 ORDER BY s.subject";
   $subs_result = $db->query($subs_query);
 

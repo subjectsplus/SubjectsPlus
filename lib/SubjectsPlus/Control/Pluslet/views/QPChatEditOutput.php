@@ -1,3 +1,4 @@
+<form class="pure-form pure-form-stacked" id="qpEditForm">
 <label for="qp_color"><?php echo _("Color"); ?></label>
 <select name="QP-extra-color">
 <?php
@@ -43,3 +44,4 @@ foreach ($possible_languages as $code => $language_name) {
 }
 ?>
 </select>
+</form>
