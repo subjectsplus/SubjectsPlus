@@ -116,7 +116,7 @@ class Guide
                 /////////////
 
                 $db = new Querier();
-                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra, header from subject where subject_id = " . $this->_subject_id;
+                $q1 = "select subject_id, subject, active, shortform, description, keywords, redirect_url, type, extra, header, course_code, instructor from subject where subject_id = " . $this->_subject_id;
                 $guideArray = $db->query($q1);
 
                 $this->_debug .= "<p>Subject query: $q1";
