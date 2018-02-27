@@ -787,7 +787,7 @@ class Guide
         // update subject table
         /////////////////////
 
-        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, header, extra) VALUES (
+        $qInsertSubject = "INSERT INTO subject (subject, shortform, description, keywords, redirect_url, active, type, header, extra, course_code, instructor) VALUES (
         " . $db->quote(scrubData($this->_subject, "text")) . ",
         " . $db->quote(scrubData($this->_shortform, "text")) . ",
         " . $db->quote(scrubData($this->_description, "text")) . ",
