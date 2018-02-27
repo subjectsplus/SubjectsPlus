@@ -133,6 +133,8 @@ class Guide
                     $this->_type = $guideArray[0]["type"];
                     $this->_extra = json_decode($guideArray[0]["extra"], true);
                     $this->_header = $guideArray[0]["header"];
+                    $this->_course_code = $guideArray[0]["course_code"];
+                    $this->_instructor = $guideArray[0]["instructor"];
                 }
 
                 ///////////////////
