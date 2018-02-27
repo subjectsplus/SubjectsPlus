@@ -796,7 +796,9 @@ class Guide
         " . $db->quote(scrubData($this->_active, "integer")) . ",
         " . $db->quote(scrubData($this->_type, "text")) . ",
         " . $db->quote(scrubData($this->_header, "text")) . ",
-        " . $db->quote($json_extra) . "
+        " . $db->quote($json_extra) . ",
+        " . $db->quote(scrubData($this->_course_code, "text")) . ",
+        " . $db->quote(scrubData($this->_instructor, "text")) . "     
         )";
 
         $db = new Querier;
