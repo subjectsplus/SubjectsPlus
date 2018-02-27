@@ -878,7 +878,9 @@ class Guide
         active = " . $db->quote(scrubData($this->_active, "integer")) . ",
         type = " . $db->quote(scrubData($this->_type, "text")) . ",
         header = " . $db->quote(scrubData($this->_header, "text")) . ",
-        extra = " . $db->quote($json_extra) . "
+        extra = " . $db->quote($json_extra) . ",
+        course_code = " . $db->quote(scrubData($this->_course_code, "text")) . ",
+        instructor = " . $db->quote(scrubData($this->_instructor, "text")) . "
         WHERE subject_id = " . scrubData($this->_subject_id, "integer");
 
         $rUpSubject = $db->exec($qUpSubject);
