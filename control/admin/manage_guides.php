@@ -26,7 +26,7 @@ try { 	} catch (Exception $e) { echo $e; }
 ///////////////////
 
 
-$q = "SELECT s.subject_id, subject, fname, lname, st.staff_id, type, shortform, s.active
+$q = "SELECT s.subject_id, subject, fname, lname, st.staff_id, type, shortform, s.active, course_code, instructor
   FROM subject s
   LEFT JOIN staff_subject ss ON s.subject_id = ss.subject_id
   LEFT JOIN staff st ON ss.staff_id = st.staff_id
