@@ -386,7 +386,9 @@ ADD COLUMN `in_pluslet` VARCHAR(200) NULL COMMENT '' AFTER `in_tab`");
 				"ALTER TABLE `staff` ADD COLUMN `social_media` MEDIUMTEXT NULL DEFAULT NULL ",
 				"ALTER TABLE `pluslet` ADD COLUMN  `master` INT NULL DEFAULT NULL",
 				"ALTER TABLE `pluslet` MODIFY COLUMN `extra` MEDIUMTEXT NULL DEFAULT NULL",
-			    "ALTER TABLE `rank` ADD COLUMN `dbbysub_active` TINYINT(1) DEFAULT 1"
+			    "ALTER TABLE `rank` ADD COLUMN `dbbysub_active` TINYINT(1) DEFAULT 1",
+                "ALTER TABLE `subject` ADD COLUMN `course_code` VARCHAR (45) DEFAULT NULL",
+                "ALTER TABLE `subject` ADD COLUMN `instructor` VARCHAR (255) DEFAULT NULL"
 		);
 	}
 
