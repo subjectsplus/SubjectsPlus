@@ -102,6 +102,8 @@ class Installer
 					  `last_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 					  `background_link` varchar(255) DEFAULT NULL,
 					  `extra` varchar(255) DEFAULT NULL,
+					  `course_code` varchar (45) DEFAULT NULL,
+					  `instructor` varchar (255) DEFAULT NULL,
 					  PRIMARY KEY (`subject_id`),
 					  KEY `INDEXSEARCHsubject` (`subject`,`shortform`,`description`,`keywords`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",

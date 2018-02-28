@@ -301,6 +301,21 @@ if ( isset ( $_GET["no_lti_enabled"] )){
     }
 }
 
+if ( isset ( $_GET["invalid_lti_call"] )){
+
+    $invalid_lti_call = intval(scrubData($_GET["invalid_lti_call"]));
+
+    if ($invalid_lti_call == 1){
+        print "
+<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
+  <div class=\"notification\">
+    <button class=\"notification-close-button\">x</button>
+    <p>" . _("Please access the LTI from the appropiate LMS.") . "</p>
+  </div>
+</div>";
+    }
+}
+
 
 
 
