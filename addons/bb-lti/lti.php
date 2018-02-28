@@ -2,12 +2,9 @@
 try {
     include("../../control/includes/config.php");
     global $lti_enabled;
-    if ($mod_rewrite == 1) {
-        $guide_path = "";
-    } else {
-        $guide_path = $PublicPath;
-    }
-    if (isset($lti_enabled)){
+    $guide_path = $PublicPath;
+
+    if (isset($lti_enabled)) {
         if ($lti_enabled){
             if (required_indexes_exist()) {
                 include("../../control/includes/autoloader.php"); // need to use this if header not loaded yet
@@ -29,12 +26,10 @@ try {
 
                     $courses_code->processCourseCode($course_label, $guide_path);
                 }else{
-                    die('Invalid LTI call');
-                    exit();
+                    header("Location: " . $guide_path . "?invalid_lti_call=1"); /* Redirect browser */
                 }
             } else {
-                die('Invalid LTI call');
-                exit();
+                header("Location: " . $guide_path . "?invalid_lti_call=1"); /* Redirect browser */
             }
         }else{
             header("Location: " . $guide_path . "?no_lti_enabled=1"); /* Redirect browser */
