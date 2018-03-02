@@ -4,6 +4,7 @@ try {
     global $lti_enabled;
     $guide_path = $PublicPath;
 
+
     if (isset($lti_enabled)) {
         if ($lti_enabled){
             if (required_indexes_exist()) {
@@ -12,22 +13,28 @@ try {
                 require_once '../../lib/ims-blti/blti.php';
                 require_once('../../control/lti_controller/LTICourseController.php');
 
-                global $lti_secret;
-                $lti = new BLTI($lti_secret, false, false);
-                session_start();
+                global $lti_blackboard_consumer_key;
 
-                if ($lti->valid) {
+	            $request_consumer_key = scrubData($_REQUEST["oauth_consumer_key"]);
 
-                    // let's use our Pretty URLs if mod_rewrite = TRUE or 1
+	            if ($request_consumer_key == $lti_blackboard_consumer_key){
+		            global $lti_secret;
+		            $lti = new BLTI($lti_secret, false, false);
+		            session_start();
 
-                    $course_label = scrubData($_REQUEST["context_label"]);
+		            if ($lti->valid) {
 
-                    $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
+			            $course_label = scrubData($_REQUEST["context_label"]);
 
-                    $courses_code->processCourseCode($course_label, $guide_path);
-                }else{
-                    header("Location: " . $guide_path . "?invalid_lti_call=1"); /* Redirect browser */
-                }
+			            $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
+
+			            $courses_code->processCourseCode($course_label, $guide_path);
+		            }else{
+			            header("Location: " . $guide_path . "?invalid_lti_call=1"); /* Redirect browser */
+		            }
+	            }else{
+		            header("Location: " . $guide_path . "?invalid_lti_call=1"); /* Redirect browser */
+	            }
             } else {
                 header("Location: " . $guide_path . "?invalid_lti_call=1"); /* Redirect browser */
             }
