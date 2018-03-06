@@ -88,18 +88,14 @@ $subs_option_boxes
 </select>
 </form>";
 
-// Make a safe query
-$connection = $db->getConnection();
-$statement = $connection->prepare("select title.title_id, title, location, source, source.source_id, rank.rank_id
+$q = "select title.title_id, title, location, source, source.source_id, rank.rank_id
 FROM title, restrictions, location, location_title, source, rank
 WHERE title.title_id = location_title.title_id and location.location_id = location_title.location_id
-AND restrictions_id = access_restrictions and rank.subject_id = :subject_id and rank.title_id = title.title_id
+AND restrictions_id = access_restrictions and rank.subject_id = '$subject_id' and rank.title_id = title.title_id
 AND source.source_id = rank.source_id order by source.rs asc, source.source,
-rank.rank asc, title.title");
+rank.rank asc, title.title";
 
-$statement->bindParam(":subject_id", $subject_id);
-$r = $statement->execute();
-$r = $statement->fetchAll();
+$r = $db->query($q);
 
 $num_rows = count($r);
 $last_source_id = ""; // init
