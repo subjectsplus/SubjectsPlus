@@ -34,6 +34,7 @@ if (isset($_REQUEST["subject_id"])) {
 
 	$statement->bindParam(":subject_id", $subject_id);
 	$mysub = $statement->execute();
+	$mysub = $statement->fetchAll();
 
 	$subject_name = $mysub[0][0];
     $shortform = $mysub[0][1];
@@ -98,6 +99,7 @@ rank.rank asc, title.title");
 
 $statement->bindParam(":subject_id", $subject_id);
 $r = $statement->execute();
+$r = $statement->fetchAll();
 
 $num_rows = count($r);
 $last_source_id = ""; // init
