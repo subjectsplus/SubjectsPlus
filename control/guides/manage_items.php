@@ -43,9 +43,9 @@ if (isset($_REQUEST["subject_id"])) {
     setcookie("our_shortform", $shortform);
 } elseif (isset($_COOKIE["our_guide_id"])) {
 
-    $subject_id = $_COOKIE["our_guide_id"];
-    $subject_name = $_COOKIE["our_guide"];
-    $shortform = $_COOKIE["our_shortform"];
+    $subject_id = scrubData($_COOKIE["our_guide_id"], 'integer');
+    $subject_name = scrubData($_COOKIE["our_guide"]);
+    $shortform = scrubData($_COOKIE["our_shortform"]);
 } else {
 
     $nocookies = "yes";
@@ -87,14 +87,17 @@ $subs_option_boxes
 </select>
 </form>";
 
-$q = "select title.title_id, title, location, source, source.source_id, rank.rank_id
+// Make a safe query
+$connection = $db->getConnection();
+$statement = $connection->prepare("select title.title_id, title, location, source, source.source_id, rank.rank_id
 FROM title, restrictions, location, location_title, source, rank
 WHERE title.title_id = location_title.title_id and location.location_id = location_title.location_id
-AND restrictions_id = access_restrictions and rank.subject_id = '$subject_id' and rank.title_id = title.title_id
+AND restrictions_id = access_restrictions and rank.subject_id = :subject_id and rank.title_id = title.title_id
 AND source.source_id = rank.source_id order by source.rs asc, source.source,
-rank.rank asc, title.title";
+rank.rank asc, title.title");
 
-$r = $db->query($q);
+$statement->bindParam(":subject_id", $subject_id);
+$r = $statement->execute();
 
 $num_rows = count($r);
 $last_source_id = ""; // init
