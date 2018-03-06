@@ -43,9 +43,9 @@ if (isset($_REQUEST["subject_id"])) {
     setcookie("our_shortform", $shortform);
 } elseif (isset($_COOKIE["our_guide_id"])) {
 
-    $subject_id = $_COOKIE["our_guide_id"];
-    $subject_name = $_COOKIE["our_guide"];
-    $shortform = $_COOKIE["our_shortform"];
+    $subject_id = scrubData($_COOKIE["our_guide_id"], 'integer');
+    $subject_name = scrubData($_COOKIE["our_guide"]);
+    $shortform = scrubData($_COOKIE["our_shortform"]);
 } else {
 
     $nocookies = "yes";
