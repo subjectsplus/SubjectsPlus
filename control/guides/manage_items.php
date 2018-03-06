@@ -27,16 +27,14 @@ if(isset($_GET['subject_id']))
 $nocookies = "";
 
 if (isset($_REQUEST["subject_id"])) {
-	$subject_id = scrubData($_REQUEST["subject_id"], 'integer');
-	// Make a safe query
-	$connection = $db->getConnection();
-	$statement = $connection->prepare("SELECT subject, shortform FROM subject WHERE subject_id = :subject_id");
 
-	$statement->bindParam(":subject_id", $subject_id);
-	$mysub = $statement->execute();
-	$mysub = $statement->fetchAll();
+    $subject_id = $_REQUEST["subject_id"];
 
-	$subject_name = $mysub[0][0];
+    $q = "SELECT subject, shortform FROM subject WHERE subject_id = '$subject_id'";
+
+    $mysub = $db->query($q);
+
+    $subject_name = $mysub[0][0];
     $shortform = $mysub[0][1];
 
     setcookie("our_guide", $subject_name);
@@ -44,9 +42,9 @@ if (isset($_REQUEST["subject_id"])) {
     setcookie("our_shortform", $shortform);
 } elseif (isset($_COOKIE["our_guide_id"])) {
 
-    $subject_id = scrubData($_COOKIE["our_guide_id"], 'integer');
-    $subject_name = scrubData($_COOKIE["our_guide"]);
-    $shortform = scrubData($_COOKIE["our_shortform"]);
+    $subject_id = $_COOKIE["our_guide_id"];
+    $subject_name = $_COOKIE["our_guide"];
+    $shortform = $_COOKIE["our_shortform"];
 } else {
 
     $nocookies = "yes";
