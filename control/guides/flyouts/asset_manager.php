@@ -40,7 +40,7 @@ display:none;
 <form id="imagezone" action="../includes/asset_manager_upload.php" class="dropzone dz-clickable user_guides_display">
 <div class="dz-default dz-message"><span class="dropzone-text">Drop files here to upload</span></div>
 
-<input type="hidden" name="staff_id" value="<?php echo $_SESSION['staff_id']; ?>" />
+<input type="hidden" name="staff_id" value="<?php echo scrubData($_SESSION['staff_id'], 'integer'); ?>" />
 </form>
 </div>
 
