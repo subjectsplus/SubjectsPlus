@@ -280,7 +280,7 @@ if ( isset ( $_GET["no_bb_guide"] )){
 <div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
   <div class=\"notification\">
     <button class=\"notification-close-button\">x</button>
-    <p>" . _("Sorry, we could not find a guide.") . "</p>
+    <p>" . _("Find the Research Guide that best meets your needs below.") . "</p>
   </div>
 </div>";
     }
@@ -295,7 +295,7 @@ if ( isset ( $_GET["no_lti_enabled"] )){
 <div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
   <div class=\"notification\">
     <button class=\"notification-close-button\">x</button>
-    <p>" . _("Sorry, we could not find a guide.") . "</p>
+    <p>" . _("Find the Research Guide that best meets your needs below.") . "</p>
   </div>
 </div>";
     }
