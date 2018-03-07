@@ -27,7 +27,7 @@
 
         $(".user-guides").empty();
         var request_guides = jQuery.ajax({
-            url: "./helpers/user_guides.php?staff_id=<?php echo scrubData($_SESSION['staff_id']); ?>",
+            url: "./helpers/user_guides.php?staff_id=<?php echo scrubData($_SESSION['staff_id'], 'integer'); ?>",
             type: "GET",
             dataType: "json",
             success: function(data) {
