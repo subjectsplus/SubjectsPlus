@@ -310,6 +310,21 @@ class LTICourseController
 
 	    //For the eventType "lti_hit", the associated research guides ids with the course_code is being stored in the link_title column
 	    $stats->setLinkTitle($research_guides_ids);
+
+	    if(isset($_SERVER['HTTP_REFERER'])) {
+		    $stats->setHttpReferer($_SERVER['HTTP_REFERER']);
+	    } else {
+		    $stats->setHttpReferer("Referer Unavailable");
+	    }
+
+	    if(isset($_SERVER['REMOTE_ADDR'])) {
+		    $stats->setRemoteAddress($_SERVER['REMOTE_ADDR']);
+	    }
+
+	    if(isset($_SERVER['HTTP_USER_AGENT'])) {
+		    $stats->setUserAgent($_SERVER['HTTP_USER_AGENT']);
+	    }
+
 	    $stats->saveStats();
     }
 }
