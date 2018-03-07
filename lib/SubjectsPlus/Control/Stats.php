@@ -21,7 +21,7 @@ class Stats
 
     public function getAllTotalViews()
     {
-        $query = "SELECT count(*) as 'total_views' from stats";
+        $query = "SELECT count(*) as 'total_views' from stats WHERE event_type = 'view'";
         $query_exec = $this->db->query($query);
         $result = $query_exec[0];
         return empty($result) ? "0" : $result['total_views'];
