@@ -481,50 +481,50 @@ function lastModded($table, $record_id, $zero_message = 1, $show_email = 1) {
  * @return string  	scrubbed string
  */
 
-function scrubData($string, $type="text") {
+function scrubData( $string, $type = "text" ) {
 
-  switch ($type) {
-    case "text":
+	switch ( $type ) {
+		case "text":
 // magic quotes test
-      if (get_magic_quotes_gpc()) {
-        $string = stripslashes($string);
-      }
-      $string = strip_tags($string);
-      $string = htmlspecialchars($string, ENT_QUOTES);
-      break;
-    case "richtext":
+			if ( get_magic_quotes_gpc() ) {
+				$string = stripslashes( $string );
+			}
+			$string = strip_tags( $string );
+			$string = htmlspecialchars( $string, ENT_QUOTES );
+			break;
+		case "richtext":
 // magic quotes test
-      if (get_magic_quotes_gpc()) {
-        $string = stripslashes($string);
-      }
-      break;
-      case "richtext_html_purifier":
-          $config = HTMLPurifier_Config::createDefault();
-          $purifier = new HTMLPurifier($config);
-          $string = $purifier->purify($string);
-          break;
-    case "email":
+			if ( get_magic_quotes_gpc() ) {
+				$string = stripslashes( $string );
+			}
+			break;
+		case "richtext_html_purifier":
+			$config   = HTMLPurifier_Config::createDefault();
+			$purifier = new HTMLPurifier( $config );
+			$string   = $purifier->purify( $string );
+			break;
+		case "email":
 // magic quotes test
-      if (get_magic_quotes_gpc()) {
-        $string = stripslashes($string);
-      }
-      //removes any tags protecting against javascript injection
-      $string = strip_tags($string);
+			if ( get_magic_quotes_gpc() ) {
+				$string = stripslashes( $string );
+			}
+			//removes any tags protecting against javascript injection
+			$string = filter_var( $string, FILTER_SANITIZE_EMAIL );
 
-      //checks to see if the email is in valid email format, if not return a blank string
-      if (!isValidEmailAddress($string)) {
-        $string = '';
-      }
+			//checks to see if the email is in valid email format, if not return a blank string
+			if ( ! isValidEmailAddress( $string ) ) {
+				$string = '';
+			}
 
-      break;
-    case "integer":
+			break;
+		case "integer":
 // this just makes it into a whole number; might not be a good solution...
-      $string = round($string);
-      break;
-  }
+			$string = round( $string );
+			break;
+	}
 
 
-  return $string;
+	return $string;
 }
 
 // just to handle all the error messages
@@ -2096,4 +2096,18 @@ function post_captcha($user_response, $secret_key = "6Lc3ODIUAAAAAFktaVHTLi0_Sqg
     curl_close($ch);
 
     return json_decode($result, true);
+}
+
+function encryptIt( $q ) {
+	global $cryptKey;
+	$qEncoded = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), $q, MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ) );
+
+	return $qEncoded;
+}
+
+function decryptIt( $q ) {
+	global $cryptKey;
+	$qDecoded = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0" );
+
+	return $qDecoded;
 }
