@@ -276,6 +276,12 @@ print feedBack($feedback);
     
 $record = (!isset($record)) ? new Staff($ok_record_id, '', TRUE) : $record;
 
+global $stats_encryption_enabled;
+
+if ($stats_encryption_enabled){
+	$record = new Staff($ok_record_id, '', TRUE);
+}
+
 // show feedback if it isn't already set
 if (!$feedback) {
     $feedback = $record->getMessage();
