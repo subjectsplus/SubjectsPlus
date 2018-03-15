@@ -24,21 +24,63 @@ if (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) {
 }
 
 $querier = new Querier();
-$q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
+global $stats_encryption_enabled;
+
+if ( $stats_encryption_enabled ) {
+	$q1 = 'SELECT staff_id,
+  fname,
+  lname,
+  email,
+  emergency_contact_name,
+  emergency_contact_relation,
+  emergency_contact_phone,
+  street_address,
+  city,
+  state,
+  zip,
+  home_phone,
+  cell_phone,
+  lat_long
 FROM staff
 WHERE lat_long != ""
-AND active = 1' ;
+AND active = 1';
 
-if (isset($_GET["fac_only"])  && $_GET["fac_only"] == 1 ) {
-  $q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
+	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
+		$q1 = 'SELECT staff_id,
+  fname,
+  lname),
+  email,
+  emergency_contact_name,
+  emergency_contact_relation,
+  emergency_contact_phone,
+  street_address,
+  city,
+  state,
+  zip,
+  home_phone,
+  cell_phone,
+  lat_long
 FROM staff
 WHERE lat_long != ""
 AND ptags LIKE "%librarian%"';
+	}
+} else {
+	$q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
+FROM staff
+WHERE lat_long != ""
+AND active = 1';
+
+	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
+		$q1 = 'SELECT staff_id, CONCAT( fname, " ", lname ) AS fullname, email, CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact, CONCAT( street_address, "<br />", city, " ", state, " ", zip ) AS full_address, home_phone, cell_phone, lat_long
+FROM staff
+WHERE lat_long != ""
+AND ptags LIKE "%librarian%"';
+	}
 }
 
+$db = new Querier;
+$staffArray = $db->query($q1);
 
-  $db = new Querier;
-  $staffArray = $db->query($q1);
 
 
 ?>
@@ -91,8 +133,29 @@ AND ptags LIKE "%librarian%"';
 
 <?php
 // Now we slip in da markers!
+
 foreach ($staffArray as $key => $value) {
-  if ($value["lat_long"] != '') {
+
+
+  if (!empty($value["lat_long"])) {
+
+      if ($stats_encryption_enabled){
+	      $value["lat_long"] = !empty($value["lat_long"]) ? decryptIt($value["lat_long"]) : "";
+	      $value["fullname"] = $value["fname"] . " " . $value["lname"];
+	      $street_address = !empty($value["street_address"]) ? decryptIt($value["street_address"]) : "";
+	      $city = !empty($value["city"]) ? decryptIt($value["city"]) : "";
+	      $state = !empty($value["state"]) ? decryptIt($value["state"]) : "";
+	      $zip = !empty($value["zip"]) ? decryptIt($value["zip"]) : "";
+	      $value["full_address"] =  $street_address . "<br/>" . $city . " " . $state . " " . $zip;
+	      $emergency_contact_name = !empty($value["emergency_contact_name"]) ? decryptIt($value["emergency_contact_name"]) : "";
+	      $emergency_contact_relation = !empty($value["emergency_contact_relation"]) ? decryptIt($value["emergency_contact_relation"]) : "";
+	      $emergency_contact_phone = !empty($value["emergency_contact_phone"]) ? decryptIt($value["emergency_contact_phone"]) : "";
+	      $value["contact"] = $emergency_contact_name . " (" . $emergency_contact_relation . "): " . $emergency_contact_phone;
+	      $value["home_phone"] = !empty($value["home_phone"]) ? decryptIt($value["home_phone"]) : "";
+	      $value["cell_phone"] = !empty($value["cell_phone"]) ? decryptIt($value["cell_phone"]) : "";
+      }
+
+
     print "markers[" . $key . "] = new google.maps.Marker({
       map: map,
       position: new google.maps.LatLng(" . $value["lat_long"] . "),
@@ -103,7 +166,7 @@ foreach ($staffArray as $key => $value) {
       cell_phone: '" . $value["cell_phone"] . "',
       email: '" . $value["email"] . "'
     });
-            
+
             ";
   }
 }
