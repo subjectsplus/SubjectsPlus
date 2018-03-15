@@ -95,18 +95,18 @@ class Staff {
 				$this->_job_classification         = $_POST["job_classification"];
 				$this->_room_number                = $_POST["room_number"];
 				$this->_supervisor_id              = $_POST["supervisor_id"];
-				$this->_emergency_contact_name     = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["emergency_contact_name"] ) ) : scrubData( $_POST["emergency_contact_name"] );
-				$this->_emergency_contact_relation = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["emergency_contact_relation"] ) ) : scrubData( $_POST["emergency_contact_relation"] );
-				$this->_emergency_contact_phone    = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["emergency_contact_phone"] ) ) : scrubData( $_POST["emergency_contact_phone"] );
-				$this->_street_address             = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["street_address"] ) ) : scrubData( $_POST["street_address"] );
-				$this->_city                       = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["city"] ) ) : scrubData( $_POST["city"] );
-				$this->_state                      = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["state"] ) ) : scrubData( $_POST["state"] );
-				$this->_zip                        = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["zip"] ) ) : scrubData( $_POST["zip"] );$_POST["zip"];
-				$this->_home_phone                 = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["home_phone"] ) ) : scrubData( $_POST["home_phone"] );
-				$this->_cell_phone                 = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["cell_phone"] ) ) : scrubData( $_POST["cell_phone"] );$_POST["cell_phone"];
+				$this->_emergency_contact_name     = $stats_encryption_enabled ? !empty($_POST["emergency_contact_name"]) ? encryptIt( scrubData( $_POST["emergency_contact_name"] ) ) : "" : scrubData( $_POST["emergency_contact_name"] );
+				$this->_emergency_contact_relation = $stats_encryption_enabled ? !empty($_POST["emergency_contact_relation"]) ? encryptIt( scrubData( $_POST["emergency_contact_relation"] ) ) : "" : scrubData( $_POST["emergency_contact_relation"] );
+				$this->_emergency_contact_phone    = $stats_encryption_enabled ? !empty($_POST["emergency_contact_phone"]) ? encryptIt( scrubData( $_POST["emergency_contact_phone"] ) ) : "" : scrubData( $_POST["emergency_contact_phone"] );
+				$this->_street_address             = $stats_encryption_enabled ? !empty($_POST["street_address"]) ? encryptIt( scrubData( $_POST["street_address"] ) ) : "" : scrubData( $_POST["street_address"] );
+				$this->_city                       = $stats_encryption_enabled ? !empty($_POST["city"]) ? encryptIt( scrubData( $_POST["city"] ) ) : "" : scrubData( $_POST["city"] );
+				$this->_state                      = $stats_encryption_enabled ? !empty($_POST["state"]) ? encryptIt( scrubData( $_POST["state"] ) ) : "" : scrubData( $_POST["state"] );
+				$this->_zip                        = $stats_encryption_enabled ? !empty($_POST["zip"]) ? encryptIt( scrubData( $_POST["zip"] ) ) : ""  : scrubData( $_POST["zip"] );
+				$this->_home_phone                 = $stats_encryption_enabled ? !empty($_POST["home_phone"]) ? encryptIt( scrubData( $_POST["home_phone"] ) ) : ""  : scrubData( $_POST["home_phone"] );
+				$this->_cell_phone                 = $stats_encryption_enabled ? !empty($_POST["cell_phone"]) ? encryptIt( scrubData( $_POST["cell_phone"] ) ) : ""  : scrubData( $_POST["cell_phone"] );
 				$this->_fax                        = $_POST["fax"];
 				$this->_intercom                   = $_POST["intercom"];
-				$this->_lat_long                   = $stats_encryption_enabled ? encryptIt( scrubData( $_POST["lat_long"] ) ) : scrubData( $_POST["lat_long"] );
+				$this->_lat_long                   = $stats_encryption_enabled ? !empty($_POST["lat_long"]) ? encryptIt( scrubData( $_POST["lat_long"] ) ) : "" : scrubData( $_POST["lat_long"] );
 				$this->_fullname                   = isset( $_POST["fullname"] ) ? $_POST["fullname"] : $_POST["fname"] . " " . $_POST["lname"];
 
 				//new sp4
@@ -214,18 +214,18 @@ class Staff {
 						$this->_job_classification         = $staffArray[0]['job_classification'];
 						$this->_room_number                = $staffArray[0]['room_number'];
 						$this->_supervisor_id              = $staffArray[0]['supervisor_id'];
-						$this->_emergency_contact_name     = $stats_encryption_enabled ? decryptIt( $staffArray[0]['emergency_contact_name']) :  $staffArray[0]['emergency_contact_name'];
-						$this->_emergency_contact_relation = $stats_encryption_enabled ? decryptIt( $staffArray[0]['emergency_contact_relation']) :  $staffArray[0]['emergency_contact_relation'];
-						$this->_emergency_contact_phone    = $stats_encryption_enabled ? decryptIt( $staffArray[0]['emergency_contact_phone']) :  $staffArray[0]['emergency_contact_phone'];
-						$this->_street_address             = $stats_encryption_enabled ? decryptIt( $staffArray[0]['street_address']) :  $staffArray[0]['street_address'];
-						$this->_city                       = $stats_encryption_enabled ? decryptIt( $staffArray[0]['city']) :  $staffArray[0]['city'];
-						$this->_state                      = $stats_encryption_enabled ? decryptIt( $staffArray[0]['state']) :  $staffArray[0]['state'];
-						$this->_zip                        = $stats_encryption_enabled ? decryptIt( $staffArray[0]['zip']) :  $staffArray[0]['zip'];
-						$this->_home_phone                 = $stats_encryption_enabled ? decryptIt( $staffArray[0]['home_phone']) :  $staffArray[0]['home_phone'];
-						$this->_cell_phone                 = $stats_encryption_enabled ? decryptIt( $staffArray[0]['cell_phone']) :  $staffArray[0]['cell_phone'];
+						$this->_emergency_contact_name     = $stats_encryption_enabled ? !empty($staffArray[0]['emergency_contact_name']) ? decryptIt( $staffArray[0]['emergency_contact_name']) : "" :  $staffArray[0]['emergency_contact_name'];
+						$this->_emergency_contact_relation = $stats_encryption_enabled ? !empty( $staffArray[0]['emergency_contact_relation']) ? decryptIt( $staffArray[0]['emergency_contact_relation']) : "" :  $staffArray[0]['emergency_contact_relation'];
+						$this->_emergency_contact_phone    = $stats_encryption_enabled ? !empty($staffArray[0]['emergency_contact_phone']) ? decryptIt( $staffArray[0]['emergency_contact_phone']) : "" :  $staffArray[0]['emergency_contact_phone'];
+						$this->_street_address             = $stats_encryption_enabled ? !empty($staffArray[0]['street_address']) ? decryptIt( $staffArray[0]['street_address']) : "" :  $staffArray[0]['street_address'];
+						$this->_city                       = $stats_encryption_enabled ? !empty($staffArray[0]['city']) ? decryptIt( $staffArray[0]['city']) : "" :  $staffArray[0]['city'];
+						$this->_state                      = $stats_encryption_enabled ? !empty($staffArray[0]['state']) ? decryptIt( $staffArray[0]['state']) : "" :  $staffArray[0]['state'];
+						$this->_zip                        = $stats_encryption_enabled ? !empty($staffArray[0]['zip']) ? decryptIt( $staffArray[0]['zip']) : "" :  $staffArray[0]['zip'];
+						$this->_home_phone                 = $stats_encryption_enabled ? !empty($staffArray[0]['home_phone']) ? decryptIt( $staffArray[0]['home_phone']) : "" :  $staffArray[0]['home_phone'];
+						$this->_cell_phone                 = $stats_encryption_enabled ? !empty($staffArray[0]['cell_phone']) ? decryptIt( $staffArray[0]['cell_phone']) : "" :  $staffArray[0]['cell_phone'];
 						$this->_fax                        = $staffArray[0]['fax'];
 						$this->_intercom                   = $staffArray[0]['intercom'];
-						$this->_lat_long                   = $stats_encryption_enabled ? decryptIt( $staffArray[0]['lat_long']) :  $staffArray[0]['lat_long'];
+						$this->_lat_long                   = $stats_encryption_enabled ? !empty($staffArray[0]['lat_long']) ? decryptIt( $staffArray[0]['lat_long']) : ""  :  $staffArray[0]['lat_long'];
 
 						//new for sp4
 

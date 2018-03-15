@@ -61,6 +61,11 @@ if (!$feedback) {
 echo "<div class=\"feedback\">$feedback</div><br /><br />";
 }
 
+global $stats_encryption_enabled;
+if ($stats_encryption_enabled){
+	$record = new Staff($ok_record_id, '', TRUE);
+}
+
 $record->outputSelfEditForm();
 
 

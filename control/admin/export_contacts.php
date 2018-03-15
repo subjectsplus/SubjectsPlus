@@ -79,11 +79,25 @@ foreach ($header_fields as $key => $value) {
   $header .= $value  . "\t";
 }
 
+global $stats_encryption_enabled;
 
     foreach( $export as $row )
 {
 
-    $line = '';
+	if ($stats_encryption_enabled){
+		$row[3] = !empty($row[3]) ? decryptIt($row[3]) : "";
+		$row[4] = !empty($row[4]) ? decryptIt($row[4]) : "";
+		$row[6] = !empty($row[6]) ? decryptIt($row[6]) : "";
+		$row[7] = !empty($row[7]) ? decryptIt($row[7]) : "";
+		$row[8] = !empty($row[8]) ? decryptIt($row[8]) : "";
+		$row[10] = !empty($row[10]) ? decryptIt($row[10]) : "";
+		$row[11] = !empty($row[11]) ? decryptIt($row[11]) : "";
+		$row[12] = !empty($row[12]) ? decryptIt($row[12]) : "";
+		$row[13] = !empty($row[13]) ? decryptIt($row[13]) : "";
+	}
+
+
+	$line = '';
     foreach( $row as $value )
 
     {                                            
