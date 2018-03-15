@@ -81,6 +81,8 @@ AND ptags LIKE "%librarian%"';
 $db = new Querier;
 $staffArray = $db->query($q1);
 
+
+
 ?>
 <div id="map" style="width: 100%; height: 800px; border: 1px solid #333;"></div>
 
@@ -134,18 +136,27 @@ $staffArray = $db->query($q1);
 
 foreach ($staffArray as $key => $value) {
 
+
   if (!empty($value["lat_long"])) {
+
       if ($stats_encryption_enabled){
-	      $value["lat_long"] = decryptIt($value["lat_long"]);
+	      $value["lat_long"] = !empty($value["lat_long"]) ? decryptIt($value["lat_long"]) : "";
 	      $value["fullname"] = $value["fname"] . " " . $value["lname"];
-	      $value["full_address"] =  decryptIt($value["street_address"]) . "<br/>" . decryptIt($value["city"]) . " " . decryptIt($value["state"]) . " " . decryptIt($value["zip"]);
-	      $value["contact"] = decryptIt($value["emergency_contact_name"]) . " (" . decryptIt($value["emergency_contact_relation"]) . "): " . decryptIt($value["emergency_contact_phone"]);
-	      $value["home_phone"] = decryptIt($value["home_phone"]);
-	      $value["cell_phone"] = decryptIt($value["cell_phone"]);
+	      $street_address = !empty($value["street_address"]) ? decryptIt($value["street_address"]) : "";
+	      $city = !empty($value["city"]) ? decryptIt($value["city"]) : "";
+	      $state = !empty($value["state"]) ? decryptIt($value["state"]) : "";
+	      $zip = !empty($value["zip"]) ? decryptIt($value["zip"]) : "";
+	      $value["full_address"] =  $street_address . "<br/>" . $city . " " . $state . " " . $zip;
+	      $emergency_contact_name = !empty($value["emergency_contact_name"]) ? decryptIt($value["emergency_contact_name"]) : "";
+	      $emergency_contact_relation = !empty($value["emergency_contact_relation"]) ? decryptIt($value["emergency_contact_relation"]) : "";
+	      $emergency_contact_phone = !empty($value["emergency_contact_phone"]) ? decryptIt($value["emergency_contact_phone"]) : "";
+	      $value["contact"] = $emergency_contact_name . " (" . $emergency_contact_relation . "): " . $emergency_contact_phone;
+	      $value["home_phone"] = !empty($value["home_phone"]) ? decryptIt($value["home_phone"]) : "";
+	      $value["cell_phone"] = !empty($value["cell_phone"]) ? decryptIt($value["cell_phone"]) : "";
       }
 
-    if(empty($value["lat_long"]) != " "){
-	    print "markers[" . $key . "] = new google.maps.Marker({
+
+    print "markers[" . $key . "] = new google.maps.Marker({
       map: map,
       position: new google.maps.LatLng(" . $value["lat_long"] . "),
       fullname: '" . $value["fullname"] . "',
@@ -155,9 +166,8 @@ foreach ($staffArray as $key => $value) {
       cell_phone: '" . $value["cell_phone"] . "',
       email: '" . $value["email"] . "'
     });
-            
+
             ";
-    }
   }
 }
 ?>
