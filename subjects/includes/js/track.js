@@ -39,13 +39,21 @@ var track = {
 		});
 
 		$('body').on('click', '.track-me', function() {
-		
+
+			var tab_name = $('.ui-tabs-active.ui-state-active');
+			if (tab_name.size() == 1){
+				tab_name = tab_name[0].innerText;
+			}else{
+				tab_name = "";
+			}
+
 			$.get(track.settings.trackUrl,
 				{'event_type':'link',
 					'link_title':$(this).text(),
 					'link_url':$(this).attr('href'),
 					'in_pluslet':$(this).parents('.pluslet').attr('name'),
-					'subject': subject
+					'subject': subject,
+					'tab_name': tab_name
 				});
 
 		});

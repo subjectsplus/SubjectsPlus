@@ -12,8 +12,10 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 
 include('config.php');
 include_once (SP_PATH . "/lib/SubjectsPlus/Control/Querier.php");
-use SubjectsPlus\Control\Querier;
+include_once (SP_PATH . "/lib/SubjectsPlus/Control/Stats/Stats.php");
 
+use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\Stats\Stats;
 class LTICourseController
 {
     private $course_code_table_name = '';
@@ -195,7 +197,7 @@ class LTICourseController
         $instructor = $this->getInstructorByCourseCode($subject_code);
 
         if (!empty($instructor)) {
-            $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
+            $q = "SELECT subject_id, subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
             $statement = $this->connection->prepare($q);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -205,7 +207,7 @@ class LTICourseController
             }
         }
 
-        $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND (instructor = 'None' OR instructor IS NULL OR instructor = '' )";
+        $q = "SELECT subject_id, subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND (instructor = 'None' OR instructor IS NULL OR instructor = '' )";
 
         $statement = $this->connection->prepare($q);
         $statement->execute();
@@ -230,7 +232,7 @@ class LTICourseController
 
     private function getGuidesByInstructor($instructor)
     {
-        $q = "SELECT subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
+        $q = "SELECT subject_id, subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
         $statement = $this->connection->prepare($q);
         $statement->execute();
         return $statement->fetchAll();
@@ -245,12 +247,16 @@ class LTICourseController
             $instructor_courses_count = count($intructor_courses);
 
             if ($instructor_courses_count == 1) {
+            	$this->saveStats($course_code, $instructor_courses_count, $intructor_courses[0]['subject_id']);
                 header("Location: " . $guide_path . $intructor_courses[0]['shortform']); /* Redirect browser */
             } elseif ($instructor_courses_count > 1) {
                 $results = array();
+                $research_guide_ids = array();
                 foreach ($intructor_courses as $guide) {
                     $results[$guide['subject']] = $guide_path . $guide['shortform'];
+	                array_push($research_guide_ids, $guide['subject_id']);
                 }
+	            $this->saveStats($course_code, $instructor_courses_count, implode(",", $research_guide_ids));
                 include('lti_view/multiple_guides_view.php');
             }else{
                 $this->findGuideBySubjectCodeAndCourseNumber($course_code, $guide_path);
@@ -275,15 +281,50 @@ class LTICourseController
 
         //Redirect according to the results
         if ($guides_count == 0) {
+	        $this->saveStats($course_code, $guides_count, "");
             header("Location: " . $guide_path . "?no_bb_guide=1"); /* Redirect browser */
         } elseif ($guides_count == 1) {
+	        $this->saveStats($course_code, 1, $guides[0]['subject_id']);
             header("Location: " . $guide_path . "guide.php?subject=" . $guides[0]['shortform']); /* Redirect browser */
         } else {
             $results = array();
+	        $research_guide_ids = array();
             foreach ($guides as $guide) {
+	            array_push($research_guide_ids, $guide['subject_id']);
                 $results[$guide['subject']] = $guide_path . "guide.php?subject=" . $guide['shortform'];
             }
+	        $this->saveStats($course_code, $guides_count, implode(",", $research_guide_ids));
             include('lti_view/multiple_guides_view.php');
         }
+    }
+
+    function saveStats($course_code, $associations_count, $research_guides_ids){
+	    $stats = new Stats($this->db);
+	    $stats->setEventType('lti_hit');
+
+	    //For the eventType "lti_hit", the course_code is being stored in the tab_name column
+	    $stats->setTabName($course_code);
+
+	    //For the eventType "lti_hit", the count of associated research guides with the course_code  is being stored in the link_url column
+	    $stats->setLinkUrl($associations_count);
+
+	    //For the eventType "lti_hit", the associated research guides ids with the course_code is being stored in the link_title column
+	    $stats->setLinkTitle($research_guides_ids);
+
+	    if(isset($_SERVER['HTTP_REFERER'])) {
+		    $stats->setHttpReferer($_SERVER['HTTP_REFERER']);
+	    } else {
+		    $stats->setHttpReferer("Referer Unavailable");
+	    }
+
+	    if(isset($_SERVER['REMOTE_ADDR'])) {
+		    $stats->setRemoteAddress($_SERVER['REMOTE_ADDR']);
+	    }
+
+	    if(isset($_SERVER['HTTP_USER_AGENT'])) {
+		    $stats->setUserAgent($_SERVER['HTTP_USER_AGENT']);
+	    }
+
+	    $stats->saveStats();
     }
 }
