@@ -967,7 +967,7 @@ function getDBbyTypeBoxes($selected_type = "", $show_formats = TRUE) {
   return $alphabet;
 }
 
-function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE) {
+function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE, $return_az_range = FALSE) {
 
   $selected = scrubData($selected);
 
@@ -1032,6 +1032,9 @@ function getLetters($table, $selected = "A", $numbers = 1, $show_formats = TRUE)
     }
   }
 
+  if ($return_az_range){
+      return $azRange;
+  }
 
   $alphabet = "<div id=\"letterhead\" align=\"center\">";
 

@@ -122,8 +122,16 @@ class DatabaseWebService extends WebService implements InterfaceWebService
 							case "num":
 					            array_push($lobjCondition, "left(title, 1)  REGEXP '[[:digit:]]+'\n");
 					            break;
-					        case "all":
-					            array_push($lobjCondition, "title != ''\n");
+							case "all":
+								array_push($lobjCondition, "title != ''\n");
+								break;
+							case "all_letters_list":
+								return "SELECT distinct UCASE(left(title,1)) AS initial
+                    FROM location l, location_title lt, title t
+                    WHERE l.location_id = lt.location_id AND lt.title_id = t.title_id
+                    AND eres_display = 'Y'
+                    AND left(title,1) REGEXP '[A-Z0-9]'
+                    ORDER BY initial";
 							default:
 								array_push($lobjCondition, "title LIKE '$lstrQualifier%'\n");
 								break;
