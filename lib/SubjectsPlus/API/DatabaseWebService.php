@@ -132,6 +132,21 @@ class DatabaseWebService extends WebService implements InterfaceWebService
                     AND eres_display = 'Y'
                     AND left(title,1) REGEXP '[A-Z0-9]'
                     ORDER BY initial";
+							case "all_by_subject_db_filter":
+								return "SELECT s.subject_id, s.subject, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND l.eres_display = 'Y'
+    AND l.record_status = 'Active'
+    AND r.dbbysub_active = 1)
+AND s.active = 1
+ORDER BY s.subject";
+								break;
 							default:
 								array_push($lobjCondition, "title LIKE '$lstrQualifier%'\n");
 								break;
