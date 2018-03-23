@@ -441,7 +441,7 @@ class StaffDisplay {
               WHERE subject.subject_id = staff_subject.subject_id
               AND staff_subject.staff_id = $staff_id
               AND subject.active = 1
-              AND type != 'Placeholder'
+              AND type = 'Subject'
               ORDER BY subject";
       //print $q2;
         $db = new Querier;
