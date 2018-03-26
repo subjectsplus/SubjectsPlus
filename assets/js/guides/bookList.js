@@ -65,7 +65,7 @@ function bookList() {
                 var $el = $(this);
                 setTimeout(function() {
                     $el.val(function(i, val) {
-                        return val.replace(/[^0-9X,]/g, '')
+                        return val.replace(/[^0-9X,-]/g, '')
                     })
                 })
             });
@@ -89,6 +89,10 @@ function bookList() {
                 }
 
                 if ((37 <= charCode && charCode <= 40) || (96 <= charCode && charCode <= 105)){ //keypad numbers
+                    result = true;
+                }
+
+                if (charCode == 109 || charCode == 189){ // - key
                     result = true;
                 }
 
@@ -250,7 +254,8 @@ function bookList() {
                     }
 
                     if (validGoogleBooksAPIKey === 'true') {
-                        url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=isbn:" + isbn;
+                        var preparedISBNForGoogle = isbn.replace(/[^0-9X]/g, '');
+                        url = "https://www.googleapis.com/books/v1/volumes?key=" + googleBooksAPIKey + "&q=isbn:" + preparedISBNForGoogle;
                         $.ajax({
                             type: "GET",
                             url: url,
@@ -265,12 +270,15 @@ function bookList() {
                                 var obj = data;
                                 if (obj.totalItems != 0) {
                                     obj = obj.items[0];
-
                                     result.isbn.push({
                                         "title": obj.volumeInfo.title
                                     });
+                                    var authors = "";
+                                    if (obj.volumeInfo.authors){
+                                        authors = obj.volumeInfo.authors.join(", ");
+                                    }
                                     result.isbn.push({
-                                        "author": obj.volumeInfo.authors.join(", ")
+                                        "author": authors
                                     });
                                     result.isbn.push({
                                         "date": myBookList.formatDate(obj.volumeInfo.publishedDate)
