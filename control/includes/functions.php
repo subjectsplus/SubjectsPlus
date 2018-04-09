@@ -385,7 +385,7 @@ ORDER BY s.subject";
 		}
 	}
 
-	$alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
+	$alphabet .= "<label for=\"browser\">" . _("Browsers:") . "</label> <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">
         $subs_option_boxes
         </select>";
 
@@ -1007,7 +1007,7 @@ function getDBbyTypeBoxes( $selected_type = "", $show_formats = true ) {
 	}
 
 	if ( $show_formats == true ) {
-		$alphabet .= " <select name=\"browser\" id=\"select_format\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Format\">
+		$alphabet .= "<label for=\"browser\">" . _("Browsers:") . "</label> <select name=\"browser\" id=\"select_format\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Format\">
       <option value=\"databases.php?letter=bytype\">" . _( "List All Format Types" ) . "</option>
       $types_option_boxes
       </select>";
