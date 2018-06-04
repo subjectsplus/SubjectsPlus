@@ -193,9 +193,6 @@ if ( BlackLister($this_comment) == TRUE ) {
         // What happens when the reCAPTCHA is not properly set up
         $feedback = $submission_failure_feedback;
 
-        $slackMsg = $recaptcha_failure_feedback;
-        sendSlackMsg($slackMsg, "alerts", ":rotating_light:", "https://hooks.slack.com/services/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");
-
 
     } else {
         // If CAPTCHA is successful...
