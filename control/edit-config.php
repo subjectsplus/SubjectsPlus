@@ -61,6 +61,8 @@ if(!is_writable($lstrConfigFilePath))
 
 							"google_analytics_ua" => array( _('Google Analytics UA Code'), _('Add your Google Analytics UA Tracking code.'), "string", "right", "medium", "", ""),
 
+                            "google_tag_manager" => array( _('Google Tag Manager Code'), _('Add your Google Analytics Tag Manager code.'), "string", "right", "medium", "", ""),
+
 							"default_subject_specialist_heading" => array( _( "Default Subject Specialist Pluslet Heading" ), _( "A global heading for the Subject Specialist Pluslet" ), "string", "right", "large", "" , _( "For example Subject Librarians or Liaison Librarians." ) ),
 
 							"headshot_thumb_width" => array( _( "Staff Headshot Thumbnail" ), _( "Width for staff headshot thumbnail. Note: If you change this value, it WILL affect previously uploaded headshot images." ), "string", "right", "small", "" , _( "For example: 70, 100." ) ),

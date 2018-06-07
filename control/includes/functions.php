@@ -167,6 +167,11 @@ function generatejQuery($use_jquery) {
 		<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.tablesorter.pager.js\"></script>\n";
   }
 
+  if (in_array("sp_legacy", $use_jquery)) {
+        $myjquery = "<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n
+        <script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\"></script>\n";
+  }
+
   return $myjquery;
 }
 
