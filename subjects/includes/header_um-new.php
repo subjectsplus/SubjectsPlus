@@ -66,4 +66,4 @@
 
     <!-- Main Content-->
     <div class="body-default">
-        <section>
+        <main>

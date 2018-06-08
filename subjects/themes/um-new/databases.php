@@ -136,7 +136,6 @@ $intro .= "<br class=\"clear-both\" />
 
 
 // Create our table of databases object
-
 $our_items = new DbHandler();
 
 $out = "";
@@ -161,7 +160,7 @@ if ($show_subjects == TRUE) {
 }
 
 // Assemble the content for our main pluslet/box
-$display = $intro . $out;
+$display = $out;
 
 
 // Trial Databases //
@@ -212,8 +211,7 @@ include("includes/header_um-new.php");
 // Our version 2 vs version 3 styles choice
 
 if (isset ($v2styles) && $v2styles == 1) {
-    $db_results = "<form class=\"pure-form\">$alphabet</form>
-  $display";
+    $db_results = $display;
 
     $layout = makePluslet("", $db_results, "","",FALSE);
 } else {
@@ -247,7 +245,7 @@ if (isset ($v2styles) && $v2styles == 1) {
     </div>
 </section>
 
-<section class="section">
+<section class="section section-half-top">
     <div class="container">
         <script src="<?php print $AssetPath; ?>js/bootstrap-select.js"></script>
         <script>
@@ -266,60 +264,64 @@ if (isset ($v2styles) && $v2styles == 1) {
         </script>
 
         <form><?php print $alphabet; ?></form>
+        <div class="row mt-5">
+            <div class="col-lg-8">
+                <?php print $intro;
+                print $db_results;
+                ?>
+            </div>
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-12">
+                        <?php if ($newlist) { ?>
+                            <div class="feature popular-list">
+                                <h4>- New Databases -</h4>
+                                <?php print $newlist; ?>
+                                <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See all</a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="col-sm-6 col-lg-12">
+                        <!--Resource promotion-->
+                        <div class="card mt-2 mt-sm-0 mt-lg-3">
+                            <a href="http://www.miami.edu/lynda" title="Lynda.com"><img src="https://new.library.miami.edu/images/card-lynda.jpg" alt="Lynda.com" class="card-img-top no-decoration"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a class="no-decoration default" href="http://www.miami.edu/lynda">Lynda.com</a>
+                                </h5>
+                                <p>Tutorials just a click away. We offer access to lynda's 95,000+ "how-to" videos on a wide range of software applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <?php print $db_results; ?>
+                <?php if (isset($featured)) { ?>
+                    <div class="feature popular-list">
+                        <h4><?php print _("- Featured Databases -"); ?></h4>
+                        <?php print $featured_list; ?>
+                    </div>
+                <?php } ?>
+
+                <?php if ($trials) { ?>
+                    <div class="feature popular-list">
+                        <h4>- Database Trials -</h4>
+                        <?php print $trial_list; ?>
+                        <p>Trial demonstrations of fee-based subscription services under consideration. Feedback:  <a href="mailto:d.roose@miami.edu" class="default no-decoration">d.roose@miami.edu</a></p>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 </section>
 
-
-<div class="panel-container">
-
-
-            <!-- start tip -->
-            <div class="tip">
-                <h2><?php print _("Search Databases"); ?></h2>
-                <?php
-                $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
-                $input_box->displayBox();
-                ?>
-            </div>
-            <div class="tipend"> </div>
-            <!-- end tip -->
-
-            <?php if (isset($featured)) { ?>
-                <div class="tip">
-                    <h2><?php print _("Featured Databases"); ?></h2>
-                    <?php print $featured_list; ?>
-                    <br />
-                </div>
-                <div class="tipend"></div>
-            <?php } ?>
-
-            <?php if ($newlist) { ?>
-                <div class="tip">
-                    <h2 class="see-all-db">5 New Databases (<a href="databases.php?letter=bytype&type=New_Databases">see all</a>)</h2>
-                    <?php print $newlist; ?>
-                </div>
-                <div class="tipend"></div>
-            <?php } ?>
-
-            <?php if ($trials) { ?>
-                <div class="tip">
-                    <h2>Database Trials</h2>
-                    <?php print $trial_list; ?>
-                    <br />
-                    <p style="line-height: 1.3em;">Trial demonstrations of fee-based subscription services under consideration.
-                        Feedback:  <a href="mailto:d.roose@miami.edu">d.roose@miami.edu</a></p>
-                </div>
-                <div class="tipend"></div>
-            <?php } ?>
-            <div class="tip">
-                <h2>Key to Icons</h2>
-                <?php print $legend; ?>
-            </div>
-            <div class="tipend"></div>
-
-</div> <!--end panel-container-->
+<!--original search-->
+<div class="d-none">
+<h4><?php print _("Search Databases"); ?></h4>
+<?php
+$input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
+$input_box->displayBox();
+?>
+</div>
 
     <script type="text/javascript" language="javascript">
         $(document).ready(function(){

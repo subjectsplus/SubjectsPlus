@@ -1,4 +1,4 @@
-</section>
+</main>
 </div>
 
 <!--Load Jekyll-built site footer (Site Footer, Site Toolbar)-->
