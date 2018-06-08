@@ -207,8 +207,8 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more informat
 // Load footer file
 include("includes/header_um-new.php");
 
-// Our version 2 vs version 3 styles choice
 
+// Our version 2 vs version 3 styles choice
 if (isset ($v2styles) && $v2styles == 1) {
     $db_results = $display;
 
@@ -263,6 +263,17 @@ if (isset ($v2styles) && $v2styles == 1) {
                 // show all db details
                 $('#expander').click( function() {
                     $('.list_bonus').toggle();
+                });
+
+                //show individual db details
+                $('span[id*=bib-]').click( function() {
+                    var bib_id = $(this).attr("id").split("-");
+                    $(this).parent().parent().find(".list_bonus").toggle();
+                });
+
+                // SP GA Event Tracking
+                $('.trackContainer a').click( function() {
+                    _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
                 });
             });
         </script>
@@ -326,50 +337,6 @@ $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick S
 $input_box->displayBox();
 ?>
 </div>
-
-    <script type="text/javascript" language="javascript">
-        $(document).ready(function(){
-            $(".trackContainer a").click(function() {
-                _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
-                //alert($(this).text());
-            });
-
-            var stripeholder = ".zebra";
-            // add rowstriping
-            stripeR();
-
-
-            $("[id*=show]").livequery("change", function() {
-
-                var showtype_id = $(this).attr("id").split("-");
-                //alert("u clicked: " + showtype_id[1]);
-                unStripeR();
-                $(".type-" + showtype_id[1]).toggle();
-                stripeR();
-
-            });
-
-            // show db details
-            $("span[id*=bib-]").livequery("click", function() {
-                var bib_id = $(this).attr("id").split("-");
-                $(this).parent().parent().find(".list_bonus").toggle()
-            });
-
-
-
-            function stripeR(container) {
-                $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
-                $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
-            }
-
-            function unStripeR () {
-                $(".zebra").removeClass("evenrow");
-                $(".zebra").removeClass("oddrow");
-            }
-
-
-        });
-    </script>
 
 <?php
 // Load footer file
