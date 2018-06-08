@@ -81,6 +81,7 @@ if (isset($_POST["searchterm"])) {
     $description_search = 1; // if you want to search descriptions, too, set to 1; otherwise to 0
 }
 
+// A-Z Listing
 $alphabet = getLetters("databases", $_GET["letter"], 1, TRUE);
 
 
@@ -150,7 +151,7 @@ if ($show_subjects == TRUE) {
 } else {
     // if it's the type type, show filter tip
     if (isset($clean_type) && $clean_type != "") {
-        $out .= "<div class=\"faq_filter\">displaying databases filtered by $clean_type >> <a href=\"databases.php?letter=bytype\">view all types</a></div>";
+        $out .= "<div class=\"feature-light p-3 mb-3\">Displaying databases filtered by <em><strong>$clean_type</strong></em>. <a href=\"databases.php?letter=bytype\" class=\"no-decoration\">View all types</a>.</div>";
     }
 
     // otherwise display our results from the database list
@@ -279,7 +280,7 @@ if (isset ($v2styles) && $v2styles == 1) {
         </script>
 
         <form><?php print $alphabet; ?></form>
-        <div class="row mt-5">
+        <div class="row mt-2 mt-lg-5">
             <div class="col-lg-8">
                 <?php print $intro;
                 print $db_results;

@@ -401,7 +401,7 @@ ORDER BY newtitle
 			$bonus = "$blurb<br />";
 
 			if ($blurb != "") {
-				$information1 = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><img src=\"$IconPath/information.png\" border=\"0\" alt=\"" . _ ( "more information" ) . "\" title=\"" . _ ( "more information" ) . "\" /></span>";
+				$information1 = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
 				// This is new details link; you can use the one above if you prefer
 				$information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\">" . _ ( "about" ) . "</span>";
 			} else {
@@ -429,8 +429,9 @@ ORDER BY newtitle
       </td>
     </tr>";
 		$onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
-      <td style=\"width: 120px\">$information1 <span class=\"db_icons\">$icons</span></td><td><a href=\"$url\" $target>$item_title</a>  $helpguide $display_note_text
-        <div class=\"list_bonus\">$bonus</div>
+      <td>$information1</td>
+      <td><a href=\"$url\" $target class=\"no-decoration default\">$item_title</a>  $helpguide $display_note_text
+        <div class=\"list_bonus\"><span class=\"db_icons\">$icons</span> $bonus</div>
       </td>
     </tr>";
 
