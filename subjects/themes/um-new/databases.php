@@ -234,17 +234,46 @@ if (isset ($v2styles) && $v2styles == 1) {
     </div>
 </div>
 
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <script src="<?php print $AssetPath; ?>js/bootstrap-select.js"></script>
+        <script>
+            $( function(){
+                $('#select_format').selectpicker({
+                    style: 'btn-select-db',
+                    width: '250px',
+                    size: '10'
+                });
+                $('#select_subject').selectpicker({
+                    style: 'btn-select-db',
+                    width: '250px',
+                    size: '10'
+                });
+            });
+        </script>
+
+        <form><?php print $alphabet; ?></form>
+
+        <?php print $db_results; ?>
+    </div>
+</section>
+
 
 <div class="panel-container">
 
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
-            <div class="breather">
-                <?php print $db_results; ?>
-            </div>
-        </div> <!--end 3/4 main area column-->
-
-        <div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
 
             <!-- start tip -->
             <div class="tip">
@@ -290,10 +319,6 @@ if (isset ($v2styles) && $v2styles == 1) {
             </div>
             <div class="tipend"></div>
 
-            <br />
-
-        </div> <!--end 1/4 column sidebar-->
-    </div> <!--end pure-g-->
 </div> <!--end panel-container-->
 
     <script type="text/javascript" language="javascript">
