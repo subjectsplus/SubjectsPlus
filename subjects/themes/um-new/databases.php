@@ -319,7 +319,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 </section>
 
 <!--original search-->
-<div class="">
+<div class="d-none">
 <h4><?php print _("Search Databases"); ?></h4>
 <?php
 $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
