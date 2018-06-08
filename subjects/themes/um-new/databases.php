@@ -128,11 +128,10 @@ $intro = "";
 
 if (isset($_POST["searchterm"])) {
     $selected = scrubData($_POST["searchterm"]);
-    $intro .= "<p style=\"background-color: #eee; padding: .3em; border: 1px solid #ccc; width: 75%;\">Search results for <strong>$selected</strong></p><br />";
+    $intro .= "<div class=\"feature-light p-3 mb-3\"><p class=\"mb-0\">Search results for <strong><em>$selected</em></strong></p></div>";
 }
 
-$intro .= "<br class=\"clear-both\" />
-<div style=\"float: right; padding: 0 1.5em .5em 0;\"><a id=\"expander\" style=\"cursor: pointer;\">expand all descriptions</a></div>";
+$intro .= "<div class=\"expander\"><a id=\"expander\" class=\"no-decoration default\">Expand all descriptions</a></div>";
 
 
 // Create our table of databases object
@@ -196,7 +195,7 @@ if ($rtrial = $statement->fetchAll()) {
     $trials = TRUE;
 
 } else {
-    $trial_list = "No trials at this time.";
+    $trial_list = "<p><strong>No trials at this time.</strong></p>";
     $trials = FALSE;
 }
 
@@ -260,6 +259,11 @@ if (isset ($v2styles) && $v2styles == 1) {
                     width: '250px',
                     size: '10'
                 });
+
+                // show all db details
+                $('#expander').click( function() {
+                    $('.list_bonus').toggle();
+                });
             });
         </script>
 
@@ -283,7 +287,7 @@ if (isset ($v2styles) && $v2styles == 1) {
                     </div>
                     <div class="col-sm-6 col-lg-12">
                         <!--Resource promotion-->
-                        <div class="card mt-2 mt-sm-0 mt-lg-3">
+                        <div class="card mt-2 mt-sm-0 mt-lg-3 mb-3 mb-lg-4">
                             <a href="http://www.miami.edu/lynda" title="Lynda.com"><img src="https://new.library.miami.edu/images/card-lynda.jpg" alt="Lynda.com" class="card-img-top no-decoration"></a>
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -302,11 +306,11 @@ if (isset ($v2styles) && $v2styles == 1) {
                     </div>
                 <?php } ?>
 
-                <?php if ($trials) { ?>
+                <?php if (isset($trials)) { ?>
                     <div class="feature popular-list">
                         <h4>- Database Trials -</h4>
                         <?php print $trial_list; ?>
-                        <p>Trial demonstrations of fee-based subscription services under consideration. Feedback:  <a href="mailto:d.roose@miami.edu" class="default no-decoration">d.roose@miami.edu</a></p>
+                        <p>Trial demonstrations of fee-based subscription services under consideration. Feedback:  <a href="mailto:d.roose@miami.edu" class="no-decoration">d.roose@miami.edu</a></p>
                     </div>
                 <?php } ?>
             </div>
@@ -315,7 +319,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 </section>
 
 <!--original search-->
-<div class="d-none">
+<div class="">
 <h4><?php print _("Search Databases"); ?></h4>
 <?php
 $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
@@ -351,10 +355,7 @@ $input_box->displayBox();
                 $(this).parent().parent().find(".list_bonus").toggle()
             });
 
-            // show all db details
-            $("#expander").click(function() {
-                $(".list_bonus").toggle()
-            })
+
 
             function stripeR(container) {
                 $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
