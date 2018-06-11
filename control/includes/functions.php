@@ -1858,12 +1858,12 @@ function listCollections($search = "", $display="default", $show_children="false
     case "2col":
 
     // for 2 col
-    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-    $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";    
+    $col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
+    $col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
 
     foreach ($r as $myrow) {
 
-      $icon = "fa-plus-square";
+      $icon = "fa-plus-circle";
       $title_hover = "See all guides in this collection";
 
       $guide_location = "collection.php?d=" . $myrow[3];
@@ -1881,12 +1881,12 @@ function listCollections($search = "", $display="default", $show_children="false
 
           $guide_location2 = $guide_path . $mysubguide[2];
 
-          $list_bonus .= "<li><a href=\"$guide_location2\">$mysubguide[1]</a></li>";
+          $list_bonus .= "<li><a href=\"$guide_location2\" class=\"no-decoration default\">$mysubguide[1]</a></li>";
         }
         
       }
 
-      $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+      $our_item = "<li title=\"{$title_hover}\"><i class=\"fas {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode($myrow[1]) . "</a>
       <div class=\"guide_list_bonus\">$list_bonus</ul></div>
       </li>";  
 
@@ -1906,7 +1906,7 @@ function listCollections($search = "", $display="default", $show_children="false
     $col_1 .= "</ul></div>";
     $col_2 .= "</ul></div>";
 
-    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-Collection\"></a><h3>" . _("Guide Collections") . "</h3></div><div class=\"pure-u-1 guide-list-expand\">Expand/Hide All</div>" . $col_1 . $col_2 ."</div>";
+    $layout .= "<div class=\"tab-pane guide_list active\" id=\"section-Collection\" role=\"tabpanel\" aria-labelledby=\"show-Collection\"><div class=\"guide-list-expand\">Expand/hide all</div><div class=\"guide_list_header\"><a name=\"section-Collection\"></a><h2>" . _("Guide Collections") . "</h2></div><div class=\"row\">" . $col_1 . $col_2 ."</div></div>";
     $list_collections = $layout;
 
     break;

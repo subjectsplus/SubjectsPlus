@@ -132,7 +132,7 @@ if (isset($_POST["searchterm"])) {
     $intro .= "<div class=\"feature-light p-3 mb-3\"><p class=\"mb-0\">Search results for <strong><em>$selected</em></strong></p></div>";
 }
 
-$intro .= "<div class=\"expander\"><a id=\"expander\" class=\"no-decoration default\">Expand all descriptions</a></div>";
+$intro .= "<div class=\"expander\"><a id=\"expander\" class=\"no-decoration default\">Expand/hide all descriptions</a></div>";
 
 
 // Create our table of databases object

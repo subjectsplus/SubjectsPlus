@@ -72,7 +72,6 @@ $newest_guides .= "</ul>\n";
 
 $qnew = "SELECT title, location, access_restrictions FROM title t, location_title lt, location l WHERE t.title_id = lt.title_id AND l.location_id = lt.location_id AND eres_display = 'Y' order by t.title_id DESC limit 0,5";
 
-
 $statement = $connection->prepare($qnew);
 $statement->execute();
 $rnew = $statement->fetchAll();
@@ -90,6 +89,7 @@ foreach ($rnew as $myrow) {
 }
 $newlist .= "</ul>\n";
 
+
 // Add header now, because we need a value ($v2styles) from it
 include("includes/header_um-new.php");
 
@@ -106,7 +106,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $searchterm = scrubData($_POST["searchterm"]);
     $search_param = "%" . $searchterm . "%";
 
-    $pills = "<div class=\"pills-label\">" . _("Start over:") . ">See All Research Guides</a></div>";
+    $pills = "<div class=\"pills-container\">" . _("Start over:") ."<a href=\"index.php\" class=\"no-decoration\">See All Research Guides</a></div>";
 
     $q_search = "select * from subject 
     WHERE active = '1' 
@@ -119,7 +119,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $statement->execute();
     $r_search = $statement->fetchAll();
 
-    $col_1 = "<div class=\"col-md-6\"><ul class=\"guide-listing\">";
+    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
 
     foreach ($r_search as $key => $value) {
 
@@ -129,7 +129,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
         if ($value[6] != "") {$list_bonus .= $value[6] . "<br /><br />";} // add description
         if ($value[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $value[7]; } // add keywords
 
-        $col_1 .= "<li><i class=\"fas fa-info-circle\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($value[1]) . "</a>
+        $col_1 .= "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($value[1]) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
     }
@@ -137,25 +137,28 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $col_1 .= "</ul></div>";  // close 'er up
 
     $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><h3>" . _("Search Results for ") . $searchterm . "</h3></div>" . $col_1 . "</div>";
-} else {
+}
+else {
 
     // ANCHOR buttons for guide types
     //**************************************
-    $guide_type_btns = "<ul>";
-    $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Guide Collections</a></li>";
+    $guide_type_btns = "<ul class=\"nav nav-pills justify-content-around justify-content-md-start\" id=\"pills-tab-guides\" role=\"tablist\">";
+
+    $guide_type_btns .= "<li class=\"nav-item\"><a class=\"nav-link no-decoration default active\" id=\"show-Collection\" name=\"showCollection\" data-toggle=\"pill\" href=\"#section-Collection\" role=\"tab\" aria-controls=\"section-Collection\" aria-selected=\"true\">Guide Collections</a></li>";
 
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
 
+    //Output guide buttons/pills
     foreach ($guide_types as $key) {
-        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+        $guide_type_btns .= "<li class=\"nav-item\"><a class=\"nav-link no-decoration default\" id=\"show-" . ucfirst($key) . "\" name=\"show$key\" data-toggle=\"pill\" href=\"#section-" . ucfirst($key) . "\" role=\"tab\" aria-controls=\"section-" . ucfirst($key) . "\" aria-selected=\"true\">";
 
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
 
     $guide_type_btns .= "</ul>";
 
-    $pills = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
+    $pills = "<div class=\"pills-container\">" . $guide_type_btns . "</div>";
 
     // let's grab our collections
     $collection_results = listCollections("","2col", "true");
@@ -176,8 +179,8 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
         if ($total_rows > 0) {
 
-            $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-            $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+            $col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
+            $col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
 
             $row_count = 1;
 
@@ -192,7 +195,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
                 if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
                 if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
 
-                $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+                $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode($myrow[1]) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
 
@@ -212,7 +215,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
             $col_1 .= "</ul></div>";
             $col_2 .= "</ul></div>";
 
-            $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div><div class=\"pure-u-1 guide-list-expand\">Expand/Hide All</div>" . $col_1 . $col_2 ."</div>";
+            $layout .= "<div class=\"tab-pane guide_list\" id=\"section-$value\" role=\"tabpanel\" aria-labelledby=\"show-$value\"><div class=\"guide-list-expand\">Expand/hide all</div><div class=\"guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div><div class=\"row\">" . $col_1 . $col_2 ."</div></div>";
 
         } //end if
 
@@ -314,12 +317,12 @@ if ( isset ( $_GET["invalid_lti_call"] )){
 
 
 
-
 // Legend //
-$legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click to expand / see more information") . "\n";
+$legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more information") . " &nbsp;&nbsp;  <i class=\"fas fa-plus-circle\"></i> = " . _("Click to expand list") . "\n";
 
 // Now we are finally read to display the page
 ?>
+
 <div class="feature section">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
@@ -333,7 +336,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click to expand / see m
     </div>
 </div>
 
-<!-- Search -->
+<!-- Search Component -->
 <section class="search-area d-none d-lg-block">
     <div class="full-search">
         <div class="container text-center">
@@ -348,71 +351,69 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click to expand / see m
 </section>
 
 <!-- Original search with auto complete-->
+<div class="index-search-area d-none">
+    <?php
+    $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
+    $input_box->displayBox();
+    ?>
+</div>
 
+<section class="section section-half-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <?php print $pills; ?>
 
-
-<div class="panel-container">
-    <div class="pure-g" id="guidesplash">
-
-        <div class="pure-u-1 pure-u-lg-3-4 panel-adj" id="listguides">
-            <div class="breather">
-                <div class="index-search-area">
+                <div class="tab-content" id="pills-tabContent-guides">
                     <?php
-                    $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
-                    $input_box->displayBox();
-                    print $pills;
                     print $collection_results;
-                    print $layout;
-
-                    ?>
+                    print $layout; ?>
                 </div>
 
-
-            </div> <!-- end breather -->
-        </div><!--end 3/4 main area-->
-
-        <div class="pure-u-1 pure-u-lg-1-4">
-
-            <div class="find-expert-area-circ">
-                <h3>Find an Expert</h3>
-                <p><?php print $bonus_text; ?></p>
-                <ul class="expert-list-circ">
-                    <?php print $guide_experts; ?>
-                </ul>
-                <div class="expert-btn-area"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="expert-button"><?php print $button_text; ?></a></div>
             </div>
-
-            <!-- start tip -->
-            <div class="tip">
+            <div class="col-lg-4">
+                <div class="find-expert-area-circ">
+                    <h3>Find an Expert</h3>
+                    <p><?php print $bonus_text; ?></p>
+                    <ul class="expert-list-circ">
+                        <?php print $guide_experts; ?>
+                    </ul>
+                    <div class="expert-btn-area"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="expert-button"><?php print $button_text; ?></a></div>
+                </div>
                 <h2><?php print _("Newest Guides"); ?></h2>
                 <?php print $newest_guides; ?>
-            </div>
-            <!-- end tip -->
-            <div class="tipend"> </div>
-
-            <!-- start tip -->
-            <div class="tip">
                 <h2><?php print _("Newest Databases"); ?></h2>
                 <?php print $newlist; ?>
             </div>
-            <!-- end tip -->
-            <div class="tipend"> </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    $( function(){
+        // Toggle details for all guides in a category list
+        $( '.guide-list-expand' ).click( function() {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
+
+        // Toggle details for each guide list item in collection list
+        $( ".fa-plus-circle" ).click(function() {
+            $(this).toggleClass('fa-plus-circle fa-minus-circle');
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
 
 
-        </div><!--end 1/4 sidebar-->
-
-    </div> <!--end pure-g-->
-</div> <!--end panel-container-->
+    });
+</script>
 
 
 <?php
-///////////////////////////
 // Load footer file
-///////////////////////////
-
 include("includes/footer_um-new.php");
-
 ?>
+
+
 
 <script type="text/javascript" language="javascript">
     $(document).ready(function(){
@@ -429,21 +430,14 @@ include("includes/footer_um-new.php");
 
         });
 
-        // Toggle details for each guide list item in collection list
-        $( ".fa-plus-square" ).click(function() {
-            $(this).toggleClass('fa-plus-square fa-minus-square');
-            $(this).parent().find('.guide_list_bonus').toggle();
-        });
+
 
         // Toggle details for each guide list item
         $( ".fa-info-circle" ).click(function() {
             $(this).parent().find('.guide_list_bonus').toggle();
         });
 
-        // Toggle details for all guides in a category list
-        $( ".guide-list-expand" ).click(function() {
-            $(this).parent().find('.guide_list_bonus').toggle();
-        });
+
 
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
