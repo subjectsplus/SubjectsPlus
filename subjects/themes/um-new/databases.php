@@ -11,7 +11,7 @@ use SubjectsPlus\Control\DbHandler;
 
 $db = new Querier;
 
-$use_jquery = array("sp_legacy");
+//$use_jquery = array("sp_legacy");
 
 $page_title = _("Database List");
 $description = _("An alphabetical list of the electronic resources available.");
