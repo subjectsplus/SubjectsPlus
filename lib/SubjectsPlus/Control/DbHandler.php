@@ -395,13 +395,13 @@ ORDER BY newtitle
 			if ($myrow ["display_note"] == NULL) {
 				$display_note_text = "";
 			} else {
-				$display_note_text = "<br /><strong>" . _ ( "Note:" ) . " </strong>" . $myrow ['display_note'];
+				$display_note_text = "<div class=\"db-note\"><strong>" . _ ( "Note:" ) . " </strong>" . $myrow ['display_note'] . "</div>";
 			}
 
 			$bonus = "$blurb<br />";
 
 			if ($blurb != "") {
-				$information1 = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
+				$information1 = "<span class=\"fas fa-heart uml-quick-links favorite-item-icon inactive-favorite\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
 				// This is new details link; you can use the one above if you prefer
 				$information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\">" . _ ( "about" ) . "</span>";
 			} else {
