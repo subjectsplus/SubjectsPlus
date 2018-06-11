@@ -429,7 +429,7 @@ ORDER BY newtitle
       </td>
     </tr>";
 		$onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
-      <td>$information1</td>
+      <td width=\"70px\">$information1</td>
       <td><a href=\"$url\" $target class=\"no-decoration default\">$item_title</a>  $helpguide $display_note_text
         <div class=\"list_bonus\"><span class=\"db_icons\">$icons</span> $bonus</div>
       </td>
