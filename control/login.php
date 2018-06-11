@@ -214,7 +214,7 @@ if (($postvar_username != "") AND (isset($postvar_password))) {
             header("location:$loc");
             exit();
         } else {
-            header("location:index.php");
+            header("location:index_c.php");
             exit();
         }
     } else {

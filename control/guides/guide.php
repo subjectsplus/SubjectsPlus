@@ -20,7 +20,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\FavoritePluslet;
 
 if (! isset ( $_GET ["subject_id"] )) {
-	header ( "location:index.php" );
+	header ( "location:index_c.php" );
 }
 
 // necessary for jquery slider
@@ -91,7 +91,7 @@ if (isset ( $this_id )) {
 	
 	// If this guide doesn't exist, send them away
 	if (count ( $r ) == 0) {
-		header ( "location:index.php" );
+		header ( "location:index_c.php" );
 	}
 	
 	$subject_name = $r [0] [0];

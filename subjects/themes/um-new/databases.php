@@ -205,7 +205,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more informat
 
 
 // Now we are finally read to display the page
-// Load footer file
+// Load header file
 include("includes/header_um-new.php");
 
 

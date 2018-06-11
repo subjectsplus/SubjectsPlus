@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief Display the subject guides splash page
  *
  *   @author adarby

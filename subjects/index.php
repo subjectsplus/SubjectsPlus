@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief Display the subject guides splash page
  *
  *   @author adarby
@@ -11,7 +11,7 @@
 if( !file_exists( "../control/includes/config.php" ) || filesize( "../control/includes/config.php" ) < 10 )
 {
   print "<img src=\"../assets/images/admin/logo_v3_full.png\" border=\"0\" />\n<br />";
-  print "<p>" .  _("SubjectsPlus has not been installed yet.  Please follow the instructions on the wiki: ") . "</p><p><a href=\"http://subjectsplus.com/wiki2/index.php?title=Main_Page\" target=\"_blank\">http://subjectsplus.com/wiki2/index.php?title=Main_Page</a></p>";
+  print "<p>" .  _("SubjectsPlus has not been installed yet.  Please follow the instructions on the wiki: ") . "</p><p><a href=\"http://subjectsplus.com/wiki2/index_c.php?title=Main_Page\" target=\"_blank\">http://subjectsplus.com/wiki2/index_c.php?title=Main_Page</a></p>";
   exit;
 }
 

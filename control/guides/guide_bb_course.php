@@ -22,7 +22,7 @@ $subs_option_boxes = $objSubjectCodes->getSubjectCodesDropDownItems();
 $current_associations = $objSubjectCodes->getCurrentAssociations();
 
 $all_subject_codes = "
-<form method=\"post\" action=\"index.php\" name=\"form\">
+<form method=\"post\" action=\"index_c.php\" name=\"form\">
 <select name=\"item\" id=\"subject_codes\">
 <option id='place_holder'>" . _("      -- Choose Subject Code --     ") . "</option>
 $subs_option_boxes

@@ -51,7 +51,7 @@ class csrfp_test extends PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_URI'] = 'temp';       // For logging
         $_SERVER['REQUEST_SCHEME'] = 'http';    // For authorisePost
         $_SERVER['HTTP_HOST'] = 'test';         // For isUrlAllowed
-        $_SERVER['PHP_SELF'] = '/index.php';     // For authorisePost
+        $_SERVER['PHP_SELF'] = '/index_c.php';     // For authorisePost
         $_POST[CSRFP_TOKEN] = $_GET[CSRFP_TOKEN] = '123';
         $_SESSION[CSRFP_TOKEN] = $_COOKIE[CSRFP_TOKEN] = 'abc'; //token mismatch - leading to failed validation
         $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
@@ -352,7 +352,7 @@ class csrfp_test extends PHPUnit_Framework_TestCase
      */
     public function testGetAbsoluteURL()
     {
-        $this->assertSame('http://test/index.php', csrfprotector::getAbsoluteURL('http://test/index.php'));
+        $this->assertSame('http://test/index_c.php', csrfprotector::getAbsoluteURL('http://test/index_c.php'));
         $this->assertSame('http://test/delete.php', csrfprotector::getAbsoluteURL('./delete.php'));
         $this->assertSame('http://delete.php', csrfprotector::getAbsoluteURL('../delete.php'));
         $this->assertSame('http://test2/delete.php', csrfprotector::getAbsoluteURL('../test2/delete.php'));
@@ -368,13 +368,13 @@ class csrfp_test extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(csrfprotector::isURLallowed('http"//test/nodelete.php'));
 
-        $this->assertTrue(csrfprotector::isURLallowed('http://test/index.php'));
+        $this->assertTrue(csrfprotector::isURLallowed('http://test/index_c.php'));
 
         $this->assertFalse(csrfprotector::isURLallowed('http://test/delete.php'));
 
         $this->assertFalse(csrfprotector::isURLallowed('http://test/delete_users.php'));
 
-        $this->assertFalse(csrfprotector::isURLallowed('https://test/index.php'));
+        $this->assertFalse(csrfprotector::isURLallowed('https://test/index_c.php'));
 
         $this->assertFalse(csrfprotector::isURLallowed('https://test/delete_users.php'));
     }
@@ -409,7 +409,7 @@ class csrfp_test extends PHPUnit_Framework_TestCase
         $this->assertTrue(strpos($buffer_, "?" .CSRFP_TOKEN ."=" .$_COOKIE[CSRFP_TOKEN]) != false);
 
         // No modification case
-        $buffer = "<a href='http://test/index.php'></a>";
+        $buffer = "<a href='http://test/index_c.php'></a>";
         $buffer_ = csrfprotector::rewriteHTML($buffer);
         $this->assertSame($buffer, $buffer_);
 

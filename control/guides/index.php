@@ -1,7 +1,7 @@
 <?php
 
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief Splash page for subject guide creation
  *
  *   @author adarby
@@ -36,7 +36,7 @@ $subs_option_boxes = getSubBoxes("guide.php?subject_id=", "", 1);
 $dropdown_intro_text = _("Please check with the guide's owner before modifying");
 
 $all_guides = "
-<form method=\"post\" action=\"index.php\" name=\"form\">
+<form method=\"post\" action=\"index_c.php\" name=\"form\">
 <select name=\"item\" id=\"guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
 <option value=\"\">" . _("-- Choose Guide --") . "</option>
 $subs_option_boxes

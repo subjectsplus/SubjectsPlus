@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief handles RUD (Read, Update, Delete) for talkback module.
  *   Note that C (create) is handled only from a talkback submission from
  *   public website
@@ -91,7 +91,7 @@ foreach ($all_tbtags as $key => $value) {
   } else {
     $tag_class = "ctag-off";
   }
-  $filters .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$key&show=$set_limit&cattag=\" class=\"filter_results\">$key</a></span>";
+  $filters .= " <span class=\"$tag_class\"><a href=\"index_c.php?tbtag=$key&show=$set_limit&cattag=\" class=\"filter_results\">$key</a></span>";
 }
 
 foreach ($all_cattags as $value) {
@@ -101,7 +101,7 @@ foreach ($all_cattags as $value) {
 	} else {
 		$tag_class = "ctag-off";
 	}
-	$cat_filters .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$our_filter&show=$set_limit&cattag=$value\" class=\"filter_results\">$value</a></span>";
+	$cat_filters .= " <span class=\"$tag_class\"><a href=\"index_c.php?tbtag=$our_filter&show=$set_limit&cattag=$value\" class=\"filter_results\">$value</a></span>";
 }
 
 // layout for our # to show
@@ -115,7 +115,7 @@ foreach ($num_filters as $value) {
     $tag_class = "ctag-off";
 
   }
-  $show_links .= " <span class=\"$tag_class\"><a href=\"index.php?tbtag=$our_filter&show=$value&cattag=$cat_filter\" class=\"filter_results\">$value</a></span>";
+  $show_links .= " <span class=\"$tag_class\"><a href=\"index_c.php?tbtag=$our_filter&show=$value&cattag=$cat_filter\" class=\"filter_results\">$value</a></span>";
 }
 
 /////////////////////

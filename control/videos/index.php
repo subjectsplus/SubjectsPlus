@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief handles RUD (Read, Update, Delete) for Video module.
  *
  *   @author adarby
@@ -94,7 +94,7 @@ print "<br />
     <div class=\"titlebar\">" . _("Collected Videos") . "</div>
     <p class=\"pluslet_body\"><strong>$row_count1 " . _("Videos visible") . "</strong> ";
 if (!isset($_GET["limit"]) || $_GET["limit"] != "all") {
-  print "(<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
+  print "(<a href=\"index_c.php?limit=all\">" . _("See All") . "</a>)";
 }
 print "</p><br />
 <div class=\"pluslet_body\">    

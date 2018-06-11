@@ -21,7 +21,7 @@ $objDatabases = new SubjectDatabase($db);
 $subs_option_boxes = $objDatabases->getSubjectsDropDownItems();
 
 $all_subjects = "
-<form method=\"post\" action=\"index.php\" name=\"form\">
+<form method=\"post\" action=\"index_c.php\" name=\"form\">
 <select name=\"item\" id=\"subjects\">
 <option id='place_holder'>" . _("      -- Choose Subject --     ") . "</option>
 $subs_option_boxes

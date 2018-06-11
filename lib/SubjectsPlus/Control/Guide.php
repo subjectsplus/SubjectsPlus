@@ -694,14 +694,14 @@ class Guide
 
         $hasMasterClones = $this->hasMasterPluslets($this->_subject_id);
         if($hasMasterClones == true) {
-            $this->_message = _("This guide cannot be deleted because it contains master boxes " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            $this->_message = _("This guide cannot be deleted because it contains master boxes " . "<a class=\"master-feedback-link\" href=\"index_c.php\">" . _("Back to Browse Guides.") . "</a>");
             return FALSE;
         }
 
         //is this a parent guide? if so, cannot delete because it will leave orphans
         $isParentGuide = $this->isParentGuide($this->_subject_id);
         if($isParentGuide == true) {
-            $this->_message = _("This guide cannot be deleted because it is a parent guide. " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            $this->_message = _("This guide cannot be deleted because it is a parent guide. " . "<a class=\"master-feedback-link\" href=\"index_c.php\">" . _("Back to Browse Guides.") . "</a>");
             return FALSE;
         }
 
@@ -745,9 +745,9 @@ class Guide
         if (isset($delete_result2)) {
             // message
             if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
-                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a></div>";
+                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index_c.php\">" . _("Back to Browse Guides.") . "</a></div>";
             } else {
-                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a></div>";
+                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index_c.php\">" . _("Back to Browse Guides.") . "</a></div>";
             }
 
             ///////////////////////
@@ -1457,7 +1457,7 @@ class Guide
 					$page_title = 'Guide Unavailable';
 
 					$body = 'This guide is currently unavailable. It may be under maintenance, or just resting.<br />';
-					$body .= '<a href="index.php">Find another guide.</a>';
+					$body .= '<a href="index_c.php">Find another guide.</a>';
 
 					include(dirname(dirname(dirname(dirname(__FILE__)))) . "/subjects/includes/header.php");
 					makePluslet('Guide Not Public', $body, "no_overflow");
@@ -1465,7 +1465,7 @@ class Guide
 				}
 				break;
 			default: //not implemented to redirect to index page
-				header("location:{$BaseURL}subjects/index.php");
+				header("location:{$BaseURL}subjects/index_c.php");
 				return FALSE;
 				break;
 		}

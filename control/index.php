@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief Splash page for admin (after successful login)
  *
  *   @author adarby
@@ -109,7 +109,7 @@ if (isset($use_shibboleth)) {
       <ul>
       <?php
       foreach ($all_bgs as $value) {
-        print "<li><a id=\"css-$value\" href=\"index.php\">" . ucfirst($value) . "</a></li>";
+        print "<li><a id=\"css-$value\" href=\"index_c.php\">" . ucfirst($value) . "</a></li>";
       }
       ?>
       </ul>

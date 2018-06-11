@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index.php
+ *   @file index_c.php
  *   @brief handles RUD (Read, Update, Delete) for FAQ module.
  *
  *   @author adarby
@@ -75,7 +75,7 @@ if ($faqArray) {
 $faq_body = "<p><strong>$row_count1 " . _("FAQs visible");
 
 if (!isset($limit) || $limit != "all") {
-  $faq_body .= " (<a href=\"index.php?limit=all\">" . _("See All") . "</a>)";
+  $faq_body .= " (<a href=\"index_c.php?limit=all\">" . _("See All") . "</a>)";
 }
 
 $faq_body .= "</strong></p>" . $faq_list;

@@ -199,7 +199,7 @@ p.tight { margin: .2em 0;}
 Header and nav/subnav stuff
 ////////////////////// */
 
-/* note:  this is used for the nasa control room bg image; it gets turned on by choosing the nasa bg option in control/index.php */
+/* note:  this is used for the nasa control room bg image; it gets turned on by choosing the nasa bg option in control/index_c.php */
 
 .background {
   bottom: 0;
@@ -3526,7 +3526,7 @@ div.tooltip div
   overflow: auto;
 }
 
-/* guides/index.php */
+/* guides/index_c.php */
 
 .narrow {
   mad-width: 300px;
@@ -3677,7 +3677,7 @@ div.tooltip div
   float: left; width: 400px; margin-left: 2em;
 }
 
-/* records/index.php */
+/* records/index_c.php */
 
 .ctag-list-box {
 

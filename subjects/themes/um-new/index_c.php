@@ -2,32 +2,26 @@
 /**
  *   @file index_c.php
  *   @brief Display the subject guides splash page
- *
- *   @author adarby
- *   @date nov 2015
  */
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideList;
-    
-$use_jquery = array("ui");
+
+$use_jquery = array("sp_legacy");
 
 $page_title = "Research Guides";
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find";
-$noheadersearch = TRUE;
 
 $db = new Querier;
 $connection = $db->getConnection();
 
 // let's use our Pretty URLs if mod_rewrite = TRUE or 1
 if ($mod_rewrite == 1) {
-   $guide_path = "";
+    $guide_path = "";
 } else {
-   $guide_path = "guide.php?subject=";
+    $guide_path = "guide.php?subject=";
 }
-
-//print_r ($_REQUEST);
 
 // Get the subjects for jquery autocomplete
 $suggestibles = "";  // init
@@ -45,13 +39,12 @@ foreach ($r as $myrow) {
     $item_title = trim($myrow[0][0]);
 
 
-	if(!isset($link))
-	{
-		$link = '';
-	}
+    if(!isset($link))
+    {
+        $link = '';
+    }
 
     $suggestibles .= "{text:\"" . htmlspecialchars($item_title) . "\", url:\"$link$myrow[1][0]\"}, ";
-
 }
 
 $suggestibles = trim($suggestibles, ', ');
@@ -85,7 +78,7 @@ $statement->execute();
 $rnew = $statement->fetchAll();
 
 $newlist = "<ul>\n";
-    foreach ($rnew as $myrow) {
+foreach ($rnew as $myrow) {
     $db_url = "";
 
     // add proxy string if necessary
@@ -98,7 +91,7 @@ $newlist = "<ul>\n";
 $newlist .= "</ul>\n";
 
 // Add header now, because we need a value ($v2styles) from it
-include("includes/header_um.php");
+include("includes/header_um-new.php");
 
 
 // put together our main result display
@@ -126,7 +119,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $statement->execute();
     $r_search = $statement->fetchAll();
 
-    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+    $col_1 = "<div class=\"col-md-6\"><ul class=\"guide-listing\">";
 
     foreach ($r_search as $key => $value) {
 
@@ -135,8 +128,8 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
         if ($value[6] != "") {$list_bonus .= $value[6] . "<br /><br />";} // add description
         if ($value[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $value[7]; } // add keywords
-            
-        $col_1 .= "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($value[1]) . "</a>
+
+        $col_1 .= "<li><i class=\"fas fa-info-circle\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($value[1]) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
     }
@@ -156,13 +149,13 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
     foreach ($guide_types as $key) {
         $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
-        
+
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
 
     $guide_type_btns .= "</ul>";
 
-    $pills = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>"; 
+    $pills = "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
 
     // let's grab our collections
     $collection_results = listCollections("","2col", "true");
@@ -173,13 +166,13 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     // loop through our source types
     foreach ($guide_types as $key => $value) {
 
-            $guide_list = new GuideList($db,$value, 1);
-            
-            $all_guides = $guide_list->toArray(); // get our full listing of guides as an array
-            
-            $total_rows = count($all_guides); // total number of guides
-            
-            $switch_row = round($total_rows / 2);
+        $guide_list = new GuideList($db,$value, 1);
+
+        $all_guides = $guide_list->toArray(); // get our full listing of guides as an array
+
+        $total_rows = count($all_guides); // total number of guides
+
+        $switch_row = round($total_rows / 2);
 
         if ($total_rows > 0) {
 
@@ -188,29 +181,29 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 
             $row_count = 1;
 
-           foreach ($all_guides as $myrow) {
+            foreach ($all_guides as $myrow) {
 
-             $icon = "fa-info-circle";
-             $title_hover = "See guide description (when available)";
+                $icon = "fa-info-circle";
+                $title_hover = "See guide description (when available)";
 
                 $guide_location = $guide_path . $myrow['shortform'];
                 $list_bonus = "";
 
                 if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
-                if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords 
+                if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
 
-            $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+                $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
 
-              if ($row_count <= $switch_row) {
-                // first col
-                $col_1 .= $our_item;
-                
-              } else {
-                // even
-                $col_2 .= $our_item;
-              }
+                if ($row_count <= $switch_row) {
+                    // first col
+                    $col_1 .= $our_item;
+
+                } else {
+                    // even
+                    $col_2 .= $our_item;
+                }
 
                 $row_count++;
 
@@ -220,7 +213,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
             $col_2 .= "</ul></div>";
 
             $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div><div class=\"pure-u-1 guide-list-expand\">Expand/Hide All</div>" . $col_1 . $col_2 ."</div>";
-            
+
         } //end if
 
     }//end foreach
@@ -228,10 +221,10 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
 } // end search term check
 
 
-    //EXPERTS
-    //**************************************
-    // get all of our librarian experts into an array
-    $qexperts = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
+//EXPERTS
+//**************************************
+// get all of our librarian experts into an array
+$qexperts = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS fullname, s.email, s.tel, s.title, sub.subject  FROM staff s, staff_subject ss, subject sub
           WHERE s.staff_id = ss.staff_id
           AND ss.subject_id = sub.subject_id
           AND s.active = 1
@@ -242,34 +235,34 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
           ORDER BY RAND()
           LIMIT 0,4";
 
-    $statement = $connection->prepare($qexperts);
-    $statement->execute();
-    $expertArray = $statement->fetchAll();
-    
+$statement = $connection->prepare($qexperts);
+$statement->execute();
+$expertArray = $statement->fetchAll();
 
-    // init list item
-    $expert_item = "";   
-    
-    // additional text 
-    $bonus_text = _("Need help? Ask an expert!");
 
-    // additional text 
-    $button_text = _("See all experts");     
+// init list item
+$expert_item = "";
 
-    foreach ($expertArray as $key => $value) {
+// additional text
+$bonus_text = _("Need help? Ask an expert!");
 
-      $exp_image = getHeadshotFull($value['email']);
-      //$exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
+// additional text
+$button_text = _("See all experts");
 
-      $librarian_email = $value['email'];
-      $name_id = explode("@", $librarian_email);
+foreach ($expertArray as $key => $value) {
 
-      $exp_profile = "<li><div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\">" . $value['fullname'] . "</a><br /><div class=\"expert-subject-min\">" . $value['subject'] . "</div></div><div class=\"expert-tooltip\" id=\"tooltip-" . $name_id[0] . "\"><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\"><strong>Subjects:</strong> " . $value['subject'] ." ...</div></div></li>";
+    $exp_image = getHeadshotFull($value['email']);
+    //$exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
 
-      $expert_item .= $exp_profile;    
-    }
+    $librarian_email = $value['email'];
+    $name_id = explode("@", $librarian_email);
 
-    $guide_experts = "$expert_item";
+    $exp_profile = "<li><div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\">" . $value['fullname'] . "</a><br /><div class=\"expert-subject-min\">" . $value['subject'] . "</div></div><div class=\"expert-tooltip\" id=\"tooltip-" . $name_id[0] . "\"><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\"><strong>Subjects:</strong> " . $value['subject'] ." ...</div></div></li>";
+
+    $expert_item .= $exp_profile;
+}
+
+$guide_experts = "$expert_item";
 
 if ( isset ( $_GET["no_bb_guide"] )){
 
@@ -329,37 +322,37 @@ if ( isset ( $_GET["invalid_lti_call"] )){
 
 ?>
 <div class="panel-container">
-<div class="pure-g" id="guidesplash">
-    
-    <div class="pure-u-1 pure-u-lg-3-4 panel-adj" id="listguides">
-        <div class="breather">
-             <div class="index-search-area">        
-                <?php 
-                $input_box = new CompleteMe("quick_search_b", "index_c.php", $proxyURL, "Find Guides", "guides");
-                $input_box->displayBox();
-                print $pills;
-                print $collection_results; 
-                print $layout;   
-                
-                ?>
-            </div>
+    <div class="pure-g" id="guidesplash">
+
+        <div class="pure-u-1 pure-u-lg-3-4 panel-adj" id="listguides">
+            <div class="breather">
+                <div class="index-search-area">
+                    <?php
+                    $input_box = new CompleteMe("quick_search_b", "index_c.php", $proxyURL, "Find Guides", "guides");
+                    $input_box->displayBox();
+                    print $pills;
+                    print $collection_results;
+                    print $layout;
+
+                    ?>
+                </div>
 
 
-        </div> <!-- end breather -->
-    </div><!--end 3/4 main area-->
+            </div> <!-- end breather -->
+        </div><!--end 3/4 main area-->
 
-    <div class="pure-u-1 pure-u-lg-1-4">
+        <div class="pure-u-1 pure-u-lg-1-4">
 
-        <div class="find-expert-area-circ">
+            <div class="find-expert-area-circ">
                 <h3>Find an Expert</h3>
                 <p><?php print $bonus_text; ?></p>
-                <ul class="expert-list-circ">                   
+                <ul class="expert-list-circ">
                     <?php print $guide_experts; ?>
                 </ul>
                 <div class="expert-btn-area"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="expert-button"><?php print $button_text; ?></a></div>
-        </div>
+            </div>
 
-          <!-- start tip -->
+            <!-- start tip -->
             <div class="tip">
                 <h2><?php print _("Newest Guides"); ?></h2>
                 <?php print $newest_guides; ?>
@@ -367,18 +360,18 @@ if ( isset ( $_GET["invalid_lti_call"] )){
             <!-- end tip -->
             <div class="tipend"> </div>
 
-        <!-- start tip -->
-        <div class="tip">
-            <h2><?php print _("Newest Databases"); ?></h2>
-            <?php print $newlist; ?>
-        </div>
-        <!-- end tip -->
-        <div class="tipend"> </div>
-        
+            <!-- start tip -->
+            <div class="tip">
+                <h2><?php print _("Newest Databases"); ?></h2>
+                <?php print $newlist; ?>
+            </div>
+            <!-- end tip -->
+            <div class="tipend"> </div>
 
-    </div><!--end 1/4 sidebar-->
 
-</div> <!--end pure-g-->
+        </div><!--end 1/4 sidebar-->
+
+    </div> <!--end pure-g-->
 </div> <!--end panel-container-->
 
 
@@ -387,7 +380,7 @@ if ( isset ( $_GET["invalid_lti_call"] )){
 // Load footer file
 ///////////////////////////
 
-include("includes/footer_um.php");
+include("includes/footer_um-new.php");
 
 ?>
 
@@ -406,29 +399,29 @@ include("includes/footer_um.php");
 
         });
 
-        // Toggle details for each guide list item in collection list 
-          $( ".fa-plus-square" ).click(function() {
-             $(this).toggleClass('fa-plus-square fa-minus-square');
-             $(this).parent().find('.guide_list_bonus').toggle();            
-          });
+        // Toggle details for each guide list item in collection list
+        $( ".fa-plus-square" ).click(function() {
+            $(this).toggleClass('fa-plus-square fa-minus-square');
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
 
-          // Toggle details for each guide list item 
-          $( ".fa-info-circle" ).click(function() {
-             $(this).parent().find('.guide_list_bonus').toggle();            
-          });
+        // Toggle details for each guide list item
+        $( ".fa-info-circle" ).click(function() {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
 
-           // Toggle details for all guides in a category list
-          $( ".guide-list-expand" ).click(function() {
-             $(this).parent().find('.guide_list_bonus').toggle();            
-          });
+        // Toggle details for all guides in a category list
+        $( ".guide-list-expand" ).click(function() {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
 
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
 
-              
+
 
 
     });
 
-    
+
 </script>

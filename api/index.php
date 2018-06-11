@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file api/index.php
+ *   @file api/index_c.php
  *   @brief Return data from subjectsplus
  *	 @package SubjectsPlus API
  *

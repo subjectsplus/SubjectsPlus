@@ -2,7 +2,7 @@
 namespace SubjectsPlus\Control;
 /**
  *   @file sp_Video
- *   @brief manage video metadata submissions (called by video/index.php)
+ *   @brief manage video metadata submissions (called by video/index_c.php)
  *
  *   @author agdarby
  *   @date Feb 2012

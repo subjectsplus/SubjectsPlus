@@ -79,7 +79,7 @@ if ($check_this) {
 
     // If this guide doesn't exist, send them away
     if (count($r) == 0) {
-        header("location:index.php");
+        header("location:index_c.php");
     }
 
 
@@ -152,7 +152,7 @@ if ($check_this) {
     
     
 } else {
-    header("location:index.php");
+    header("location:index_c.php");
 }
 
 $page_title = $subject_name;

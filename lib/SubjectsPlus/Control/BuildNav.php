@@ -32,7 +32,7 @@ class BuildNav {
     
     print "
       <ul id=\"topnav\">
-      <li id=\"logospot\"><a href=\"$CpanelPath" . "index.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
+      <li id=\"logospot\"><a href=\"$CpanelPath" . "index_c.php\"><img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" /></a>
       <div>$headshot_lg
       <p> Hi $name </p>
       <br style=\"clear: both\" />
@@ -58,7 +58,7 @@ class BuildNav {
         <div>
          <ul>
             <li><a href=\"$CpanelPath" . "records/record.php\">" . _("New Record") . "</a></li>
-            <li><a href=\"$CpanelPath" . "records/index.php\">" . _("Browse Items") . "</a></li>";
+            <li><a href=\"$CpanelPath" . "records/index_c.php\">" . _("Browse Items") . "</a></li>";
 
       if (isset($_SESSION["admin"]) || (isset($_SESSION["records"]))) {
           print "<li><a href=\"$CpanelPath" . "records/subject_databases.php\">" . _("Databases by Subject") . "</a></li>";
