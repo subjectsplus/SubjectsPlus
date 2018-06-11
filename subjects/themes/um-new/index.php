@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index_c.php
+ *   @file index.php
  *   @brief Display the subject guides splash page
  */
 use SubjectsPlus\Control\CompleteMe;
@@ -106,7 +106,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $searchterm = scrubData($_POST["searchterm"]);
     $search_param = "%" . $searchterm . "%";
 
-    $pills = "<div class=\"pills-label\">" . _("Start over:") ."</div><div class=\"pills-container\"><a href=\"index_c.php\">See All Research Guides</a></div>";
+    $pills = "<div class=\"pills-label\">" . _("Start over:") . ">See All Research Guides</a></div>";
 
     $q_search = "select * from subject 
     WHERE active = '1' 
@@ -315,12 +315,42 @@ if ( isset ( $_GET["invalid_lti_call"] )){
 
 
 
+// Legend //
+$legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click to expand / see more information") . "\n";
 
-////////////////////////////
 // Now we are finally read to display the page
-////////////////////////////
-
 ?>
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0"><?php print $legend; ?></p>
+
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon" ></div>
+        </div>
+    </div>
+</div>
+
+<!-- Search -->
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Original search with auto complete-->
+
+
+
 <div class="panel-container">
     <div class="pure-g" id="guidesplash">
 
@@ -328,7 +358,7 @@ if ( isset ( $_GET["invalid_lti_call"] )){
             <div class="breather">
                 <div class="index-search-area">
                     <?php
-                    $input_box = new CompleteMe("quick_search_b", "index_c.php", $proxyURL, "Find Guides", "guides");
+                    $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
                     $input_box->displayBox();
                     print $pills;
                     print $collection_results;

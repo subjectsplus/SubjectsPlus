@@ -1,6 +1,6 @@
 <?php
 /**
-*   @file index_c.php
+*   @file index.php
 *   @brief Splash interface to the SubjectsPlus admin folder.
 *
 *   @author agdarby

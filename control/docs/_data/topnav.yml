@@ -19,7 +19,7 @@ topnav_dropdowns:
         - title: Google Groups
           external_url: https://groups.google.com/forum/#!forum/subjectsplus
         - title: SubjectsPlus Wiki
-          external_url: http://subjectsplus.com/wiki2/index_c.php?title=Main_Page
+          external_url: http://subjectsplus.com/wiki2/index.php?title=Main_Page
         - title: SubjectsPlus Homepage
           external_url: http://www.subjectsplus.com/
         - title: Changelog

@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index_c.php
+ *   @file index.php
  *   @brief Display the subject guides by collection splash page
  *
  *   @author adarby
@@ -147,7 +147,7 @@ if (isset($_GET["d"])) {
           <div class="tip">
             <h2><?php print _("Search Guides"); ?></h2>
                   <?php
-                  $input_box = new CompleteMe("quick_search", "index_c.php", $proxyURL, "Quick Search", "guides", '');
+                  $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
                   $input_box->displayBox();
                   ?>
           </div>

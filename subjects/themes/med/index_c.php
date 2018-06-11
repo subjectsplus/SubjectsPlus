@@ -1,6 +1,6 @@
 <?php
 /**
- *   @file index_c.php
+ *   @file index.php
  *   @brief Display the subject guides splash page
  *
  *   @author adarby
@@ -113,7 +113,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $searchterm = scrubData($_POST["searchterm"]);
     $search_param = "%" . $searchterm . "%";
 
-    $pills = "<div class=\"pills-label\">" . _("Start over:") ."</div><div class=\"pills-container\"><a href=\"index_c.php\">See All Research Guides</a></div>"; 
+    $pills = "<div class=\"pills-label\">" . _("Start over:") ."</div><div class=\"pills-container\"><a href=\"index.php\">See All Research Guides</a></div>";
 
     $q_search = "select * from subject 
     WHERE active = '1' 
@@ -298,7 +298,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
         <div class="breather">
              <div class="index-search-area">        
                 <?php 
-                $input_box = new CompleteMe("quick_search_b", "index_c.php", $proxyURL, "Find Guides", "guides");
+                $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
                 $input_box->displayBox();
                 print $pills;
                 print $layout;   

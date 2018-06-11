@@ -2,7 +2,7 @@
    namespace SubjectsPlus\Control;
 /**
  *   @file sp_Talkback
- *   @brief manage talkback submissions (called by talkback/index_c.php)
+ *   @brief manage talkback submissions (called by talkback/index.php)
  *
  *   @author agdarby
  *   @date Jan 2011

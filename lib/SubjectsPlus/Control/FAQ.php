@@ -2,7 +2,7 @@
    namespace SubjectsPlus\Control;
 /**
  *   @file FAQ
- *   @brief manage faq submissions (called by faq/index_c.php)
+ *   @brief manage faq submissions (called by faq/index.php)
  *
  *   @author agdarby
  *   @date Jan 2011

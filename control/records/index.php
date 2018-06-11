@@ -1,7 +1,7 @@
 <?php
 
 /**
- *   @file index_c.php
+ *   @file index.php
  *   @brief Browse view of records / splash screen
  *
  *   @author adarby
@@ -14,7 +14,7 @@ use SubjectsPlus\Control\LinkChecker;
 use SubjectsPlus\Control\Querier;
 
 $subcat = "records";
-$subsubcat = "index_c.php";
+$subsubcat = "index.php";
 $page_title = "Browse Items";
 
 // init some vars
@@ -53,7 +53,7 @@ foreach ($alpha_result as $myletter) {
 
         if (in_array($upperCase, $azRange)) {
             $atoz .="<a href=\""
-                . "index_c.php?letter="
+                . "index.php?letter="
                 . $upperCase
                 . "\">"
                 . $upperCase
@@ -64,8 +64,8 @@ foreach ($alpha_result as $myletter) {
     }
 }
 
-$atoz .= "<a href=\"index_c.php?letter=Num\">Num</a>&nbsp;";
-$atoz .= "<a href=\"index_c.php?letter=all\">[all]</a>";
+$atoz .= "<a href=\"index.php?letter=Num\">Num</a>&nbsp;";
+$atoz .= "<a href=\"index.php?letter=all\">[all]</a>";
 
 // end A-Z header for now
 
@@ -110,21 +110,21 @@ if (isset($_GET["letter"]) && $_GET["letter"] == "az") {
 } else {
     $tag_list .= "ctag-off";
 }
-$tag_list .= "\"><a href=\"index_c.php?letter=az\">" . _("A-Z List") . "</a></span>
+$tag_list .= "\"><a href=\"index.php?letter=az\">" . _("A-Z List") . "</a></span>
 <span class=\"";
 if (isset($_GET["letter"]) && $_GET["letter"] == "restricted") {
     $tag_list .= "ctag-on";
 } else {
     $tag_list .= "ctag-off";
 }
-$tag_list .= "\"><a href=\"index_c.php?letter=restricted\">" . _("Restricted") . "</a></span>
+$tag_list .= "\"><a href=\"index.php?letter=restricted\">" . _("Restricted") . "</a></span>
 <span class=\"";
 if (isset($_GET["letter"]) && $_GET["letter"] == "unrestricted") {
     $tag_list .= "ctag-on";
 } else {
     $tag_list .= "ctag-off";
 }
-$tag_list .= "\"><a href=\"index_c.php?letter=unrestricted\">" . _("Free") . "</a></span>";
+$tag_list .= "\"><a href=\"index.php?letter=unrestricted\">" . _("Free") . "</a></span>";
 
 // init the ctag
 $selected_ctag = "";
@@ -141,7 +141,7 @@ foreach ($all_ctags as $value) {
         $tag_class = "ctag-off";
     }
 
-    $tag_list .= " <span class=\"$tag_class\"><a href=\"index_c.php?ctag=$value\">$value</a></span>";
+    $tag_list .= " <span class=\"$tag_class\"><a href=\"index.php?ctag=$value\">$value</a></span>";
 }
 
 
