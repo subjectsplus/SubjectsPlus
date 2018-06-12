@@ -273,8 +273,8 @@ if ( isset ( $_GET["no_bb_guide"] )){
 
     if ($bb_guide_not_found == 1){
         print "
-<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
-  <div class=\"notification\">
+<div class=\"panel-container\">
+  <div class=\"notification feature-light p-3\">
     <button class=\"notification-close-button\">x</button>
     <p>" . _("Find the Research Guide that best meets your needs below.") . "</p>
   </div>
@@ -288,8 +288,8 @@ if ( isset ( $_GET["no_lti_enabled"] )){
 
     if ($no_lti_enabled == 1){
         print "
-<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
-  <div class=\"notification\">
+<div class=\"panel-container\">
+  <div class=\"notification feature-light p-3\">
     <button class=\"notification-close-button\">x</button>
     <p>" . _("Find the Research Guide that best meets your needs below.") . "</p>
   </div>
@@ -303,10 +303,10 @@ if ( isset ( $_GET["invalid_lti_call"] )){
 
     if ($invalid_lti_call == 1){
         print "
-<div class=\"panel-container\" style=\"min-height:auto; border-radius:0;padding:20px 0;\">
-  <div class=\"notification\">
+<div class=\"panel-container\">
+  <div class=\"notification feature-light p-3\">
     <button class=\"notification-close-button\">x</button>
-    <p>" . _("Please access the LTI from the appropiate LMS.") . "</p>
+    <p>" . _("Please access the LTI from the appropriate LMS.") . "</p>
   </div>
 </div>";
     }

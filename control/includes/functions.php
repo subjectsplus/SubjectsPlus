@@ -1955,16 +1955,11 @@ $list_guides = "<table class=\"item_listing\" width=\"98%\">";
 
     // Stick in the title if it's the first row
     if ($key == 0) {
-      $list_guides .= "<tr><td><h3>$value[1]</h3></td></tr>";
+      $list_guides .= "<span id=\"collection_parent_title\">$value[1]</span>";
     }
 
-    $list_guides .= "<tr class=\"zebra $row_colour\" style=\"height: 1.5em;\">
-    <td><img class=\"staff_photo\" align=\"left\" style=\"margin-bottom: 20px;\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . 
-     "\" src=\"$thumbnail\" />
-     <a href=\"$guide_location\">" . htmlspecialchars_decode($value[3]) . "</a> 
-        <div style=\"font-size: .9em;\">{$value[6]}</div></td></tr>";
-
-
+    $list_guides .= "<tr class=\"zebra $row_colour\">
+    <td><div class=\"d-flex flex-row flex-nowrap mb-3\"><div class=\"collection-image\"><img class=\"staff_photo\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . "\" src=\"$thumbnail\" /></div><div><h4><a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode($value[3]) . "</a></h4>{$value[6]}</div></div></td></tr>";
   }
 
 $list_guides .= "</table>";

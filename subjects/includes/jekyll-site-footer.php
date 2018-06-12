@@ -53,6 +53,10 @@
 
                                 <ul class="list-unstyled mobile-hours-list">
                                     <li>
+                                        <a class="no-decoration default" href="https://new.library.miami.edu/richter/index.html">Richter Library</a>
+                                        <span><a class="no-decoration default" href="https://new.library.miami.edu/richter/hours.html"><i class="far fa-clock"></i> <span data-calendar="richter"></span></a></span>
+                                    </li>
+                                    <li>
                                         <a class="no-decoration default" href="https://new.library.miami.edu/architecture/index.html">Architecture Library</a>
                                         <span><a class="no-decoration default" href="https://new.library.miami.edu/architecture/hours.html"><i class="far fa-clock"></i> <span data-calendar="architecture"></span></a></span>
                                     </li>
@@ -75,10 +79,6 @@
                                     <li>
                                         <a class="no-decoration default" href="https://new.library.miami.edu/musiclib/index.html">Music Library</a>
                                         <span><a class="no-decoration default" href="https://new.library.miami.edu/musiclib/hours.html"><i class="far fa-clock"></i> <span data-calendar="musiclib"></span></a></span>
-                                    </li>
-                                    <li>
-                                        <a class="no-decoration default" href="https://new.library.miami.edu/richter/index.html">Richter Library</a>
-                                        <span><a class="no-decoration default" href="https://new.library.miami.edu/richter/hours.html"><i class="far fa-clock"></i> <span data-calendar="richter"></span></a></span>
                                     </li>
                                 </ul>
                             </div>
