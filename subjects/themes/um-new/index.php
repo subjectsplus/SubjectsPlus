@@ -7,7 +7,7 @@ use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideList;
 
-$use_jquery = array("sp_legacy");
+//$use_jquery = array("sp_legacy");
 
 $page_title = "Research Guides";
 $description = "The best stuff for your research.  No kidding.";
@@ -106,7 +106,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $searchterm = scrubData($_POST["searchterm"]);
     $search_param = "%" . $searchterm . "%";
 
-    $pills = "<div class=\"pills-container\">" . _("Start over:") ."<a href=\"index.php\" class=\"no-decoration\">See All Research Guides</a></div>";
+    $pills = "<div class=\"feature-light p-3 mb-3\">" . _("Need to start over? ") ."<a href=\"index.php\" class=\"no-decoration\">See All Research Guides</a></div>";
 
     $q_search = "select * from subject 
     WHERE active = '1' 
@@ -119,7 +119,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $statement->execute();
     $r_search = $statement->fetchAll();
 
-    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
+    $col_1 = "<ul class=\"guide-listing list-unstyled\">";
 
     foreach ($r_search as $key => $value) {
 
@@ -129,14 +129,14 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
         if ($value[6] != "") {$list_bonus .= $value[6] . "<br /><br />";} // add description
         if ($value[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $value[7]; } // add keywords
 
-        $col_1 .= "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($value[1]) . "</a>
+        $col_1 .= "<li><i class=\"fa fa-info-circle\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode($value[1]) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
     }
 
-    $col_1 .= "</ul></div>";  // close 'er up
+    $col_1 .= "</ul>";  // close 'er up
 
-    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><h3>" . _("Search Results for ") . $searchterm . "</h3></div>" . $col_1 . "</div>";
+    $layout .= "<div class=\"guide_list\"><div class=\"guide_list_header\"><h4>" . _("Search Results for ") . "<em>" . $searchterm . "</em></h4></div>" . $col_1 . "</div>";
 }
 else {
 
@@ -236,12 +236,11 @@ $qexperts = "SELECT DISTINCT (s.staff_id), CONCAT(s.fname, ' ', s.lname) AS full
           AND sub.type = 'Subject'
           GROUP BY s.staff_id
           ORDER BY RAND()
-          LIMIT 0,4";
+          LIMIT 0,3";
 
 $statement = $connection->prepare($qexperts);
 $statement->execute();
 $expertArray = $statement->fetchAll();
-
 
 // init list item
 $expert_item = "";
@@ -249,23 +248,24 @@ $expert_item = "";
 // additional text
 $bonus_text = _("Need help? Ask an expert!");
 
-// additional text
 $button_text = _("See all experts");
 
 foreach ($expertArray as $key => $value) {
 
     $exp_image = getHeadshotFull($value['email']);
-    //$exp_profile = "<div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\">" . $value['fullname'] . "</div><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\">" . $value['subject'] ."</div>";
 
     $librarian_email = $value['email'];
     $name_id = explode("@", $librarian_email);
 
-    $exp_profile = "<li><div class=\"expert-img\">" . $exp_image . "</div><div class=\"expert-label\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\">" . $value['fullname'] . "</a><br /><div class=\"expert-subject-min\">" . $value['subject'] . "</div></div><div class=\"expert-tooltip\" id=\"tooltip-" . $name_id[0] . "\"><div class=\"expert-title\">" . $value['title'] ."</div><div class=\"expert-subjects\"><strong>Subjects:</strong> " . $value['subject'] ." ...</div></div></li>";
+    $exp_profile = "<li class=\"d-sm-flex flex-sm-row flex-sm-nowrap justify-content-sm-start\"><div class=\"staff-img\"><div class=\"img-accent\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">" . $exp_image . "</a></div></div><div class=\"staff-details\"><p><strong><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">" . $value['fullname'] . "</a></strong><br /><em>" . $value['subject'] . "</em></p><p class=\"mt-3\"><strong>Subjects:</strong> " . $value['subject'] ."</p></div></li>";
 
     $expert_item .= $exp_profile;
 }
 
 $guide_experts = "$expert_item";
+
+
+// Blackboard Integration
 
 if ( isset ( $_GET["no_bb_guide"] )){
 
@@ -312,12 +312,7 @@ if ( isset ( $_GET["invalid_lti_call"] )){
     }
 }
 
-
-
-
-
-
-// Legend //
+// Legend
 $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more information") . " &nbsp;&nbsp;  <i class=\"fas fa-plus-circle\"></i> = " . _("Click to expand list") . "\n";
 
 // Now we are finally read to display the page
@@ -369,21 +364,24 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more informat
                     print $collection_results;
                     print $layout; ?>
                 </div>
-
             </div>
+
             <div class="col-lg-4">
-                <div class="find-expert-area-circ">
-                    <h3>Find an Expert</h3>
-                    <p><?php print $bonus_text; ?></p>
-                    <ul class="expert-list-circ">
-                        <?php print $guide_experts; ?>
-                    </ul>
-                    <div class="expert-btn-area"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="expert-button"><?php print $button_text; ?></a></div>
+                <h4 class="mb-2">Find an Expert</h4>
+                <p><?php print $bonus_text; ?></p>
+                <ul class="people-vertical list-unstyled">
+                    <?php print $guide_experts; ?>
+                </ul>
+
+                <div class="text-center mt-3 mb-3 mb-lg-5"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="btn btn-default" role="button"><?php print $button_text; ?></a></div>
+
+                <div class="feature popular-list p-3 mt-3">
+                    <h4><?php print _("- New Databases -"); ?></h4>
+                    <?php print $newlist; ?>
+                    <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See all</a>
+                    <h4 class="mt-4"><?php print _("- New Guides -"); ?></h4>
+                    <?php print $newest_guides; ?>
                 </div>
-                <h2><?php print _("Newest Guides"); ?></h2>
-                <?php print $newest_guides; ?>
-                <h2><?php print _("Newest Databases"); ?></h2>
-                <?php print $newlist; ?>
             </div>
         </div>
 
@@ -403,49 +401,17 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more informat
             $(this).parent().find('.guide_list_bonus').toggle();
         });
 
+        // Toggle details for each guide list item
+        $('.fa-info-circle').click( function() {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
 
+        //add class to ui-autocomplete dropdown
+        $('.ui-autocomplete-input').addClass("index-search-dd");
     });
 </script>
-
 
 <?php
 // Load footer file
 include("includes/footer_um-new.php");
 ?>
-
-
-
-<script type="text/javascript" language="javascript">
-    $(document).ready(function(){
-
-
-        $("[id*=show]").on("change", function() {
-
-            var showtype_id = $(this).attr("id").split("-");
-            //alert("u clicked: " + showtype_id[1]);
-            unStripeR();
-            $(".type-" + showtype_id[1]).toggle();
-            stripeR();
-
-
-        });
-
-
-
-        // Toggle details for each guide list item
-        $( ".fa-info-circle" ).click(function() {
-            $(this).parent().find('.guide_list_bonus').toggle();
-        });
-
-
-
-        //add class to ui-autocomplete dropdown
-        $( ".ui-autocomplete" ).addClass( "index-search-dd" );
-
-
-
-
-    });
-
-
-</script>
