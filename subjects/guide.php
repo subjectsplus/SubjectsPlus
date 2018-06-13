@@ -225,7 +225,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
             if ($multi_tab == TRUE) {
                 $lobjGuide->outputNavTabs('public');
                 
-                $bonus_class= "";
+                $bonus_class= "yes-tabs";
 
                 if (isset ($header_type) && $header_type != 'um-new'){
                     print $printer_tabs;

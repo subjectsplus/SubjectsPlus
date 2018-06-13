@@ -29,25 +29,22 @@
                     // Print all tabs
                     $('#all-tabs').click( function() {
 
-                        var visible_tab;
-
                         $('#tab-body').children().each( function () {
                             if ($(this).is(":visible")) {
-                                visible_tab = $(this);
+                                $(this).addClass('current-visible-tab');
                             }
-                            else {
-                                $(this).show();
-                            }
+                            $(this).show();
                         });
 
                         window.print();
-                        console.log("hungry");
+                        console.log("print them puppies");
 
                         $('#tab-body').children().each( function () {
                             $(this).hide();
+                            $('.current-visible-tab').show();
                         });
 
-                        visible_tab.show();
+                        $('.current-visible-tab').removeClass('current-visible-tab');
                     });
                 }
             });
