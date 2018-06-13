@@ -348,8 +348,8 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more informat
 <!-- Original search with auto complete-->
 <div class="index-search-area d-none">
     <?php
-    $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
-    $input_box->displayBox();
+    //$input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
+    //$input_box->displayBox();
     ?>
 </div>
 

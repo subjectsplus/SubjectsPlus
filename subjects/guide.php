@@ -13,7 +13,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
-//$use_jquery = array("ui"); //um don't want no ui_styles
+//$use_jquery = array("sp_legacy"); //UM styles
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
@@ -208,11 +208,6 @@ print $social_and_search;
             if ($multi_tab == TRUE) {
                 $lobjGuide->outputNavTabs('public');
                 
-                
-                
-                
-                
-                
                 $bonus_class= "";
                 print $printer_tabs;
             } else {
@@ -373,9 +368,6 @@ $(function() {
 }
 </style>
 
-
-
-
 <script>
 
 var $target_blank_links = $(".target_blank_links");
@@ -414,8 +406,6 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 
 });
 </script>
-
-
 
 
 <script>

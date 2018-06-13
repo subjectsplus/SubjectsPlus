@@ -332,10 +332,10 @@ if (isset ($v2styles) && $v2styles == 1) {
 
 <!--original search-->
 <div class="d-none">
-<h4><?php print _("Search Databases"); ?></h4>
+<h4><?php //print _("Search Databases"); ?></h4>
 <?php
-$input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
-$input_box->displayBox();
+//$input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
+//$input_box->displayBox();
 ?>
 </div>
 

@@ -6,7 +6,7 @@
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 
-$use_jquery = array("sp_legacy");
+//$use_jquery = array("sp_legacy");
 
 $page_title = _("Research Guide Collections");
 $description = _("The best stuff for your research.  No kidding.");
@@ -144,10 +144,10 @@ if (isset($_GET["d"])) {
 
 <!-- Original search with auto complete-->
 <div class="d-none">
-    <?php print _("Search Guides"); ?></h2>
+    <?php //print _("Search Guides"); ?></h2>
     <?php
-    $input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
-    $input_box->displayBox();
+    //$input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
+    //$input_box->displayBox();
     ?>
 </div>
 
