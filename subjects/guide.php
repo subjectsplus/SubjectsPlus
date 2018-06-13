@@ -189,7 +189,7 @@ print $tracking_image;
 print $social_and_search;
 ?>
 
-<!--Minimal header if un-new theme is used-->
+<!--Minimal header if um-new theme is used-->
 <?php
 if (isset ($header_type) && $header_type == 'um-new') {
 
