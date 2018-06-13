@@ -176,10 +176,10 @@ if (isset ($header_type) && $header_type != 'default') {
 // do we have more than one tab?
 if (count($all_tabs) > 1) {
     $multi_tab = TRUE;
-    $printOption = "<div class=\"printer_tabs\"><i class=\"fas fa-print\" title=\"Print\"></i></div>";
+    $printOption = "<div class=\"printer_tabs\"><i class=\"fas fa-print\" title=\"Print this guide\"></i></div>";
 } else {
     $multi_tab = FALSE;
-    $printOption = "<div class=\"printer_no_tabs\"><i class=\"fas fa-print\" title=\"Print\"></i></div>";
+    $printOption = "<div class=\"printer_no_tabs\"><i class=\"fas fa-print\" title=\"Print this guide\"></i></div>";
 }
 
 // Add tracking image
@@ -193,9 +193,9 @@ print $social_and_search;
 <?php
 if (isset ($header_type) && $header_type == 'um-new') {
 
-    $guide_min_header = "<div class=\"feature section\">
+    $guide_min_header = "<div class=\"feature section guide-header\">
         <div class=\"container text-center minimal-header\">
-            <h5 class=\"mb-1\">" . _("Research Guides") . "</h5>
+            <h5 class=\"mt-3 mt-lg-0 mb-1\">" . _("Research Guides") . "</h5>
             <h1>" . $page_title . "</h1>
             <hr align=\"center\" class=\"hr-panel\">" . $printOption ."<div class=\"favorite-heart\">
             <div id=\"heart\" title=\"Add to Favorites\" tabindex=\"0\" role=\"button\" data-type=\"favorite-page-icon\"
@@ -211,7 +211,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
 }
 ?>
 
-
+<!-- Guide content display-->
 <div id="tabs" class="hide-tabs-fouc">
 	<div id="main-content" data-subject="<?php echo scrubData($_GET['subject']); ?>" data-url="<?php echo getSubjectsURL(); ?>" data-subject-id="<?php echo $this_id; ?>">
 
@@ -239,7 +239,6 @@ if (isset ($header_type) && $header_type == 'um-new') {
                 }
             }
             ?>
-
         </div>
 		<!-- end tab-container -->
 
@@ -250,10 +249,9 @@ if (isset ($header_type) && $header_type == 'um-new') {
             ?>
         </div>
 		<!-- end tab-body -->
-	</div>
-	<!-- end main-content -->
-</div>
-<!-- end tabs -->
+
+	</div> <!-- end main-content -->
+</div> <!-- end tabs -->
 
 <?php
 if (isset ($header_type) && $header_type == 'um-new') {
@@ -500,12 +498,7 @@ cloneView.init();
 
 </script>
 
-
-
-
-
 <?php
-
 ///////////////////////////
 // Load footer file
 ///////////////////////////
