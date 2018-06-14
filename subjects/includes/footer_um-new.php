@@ -22,7 +22,7 @@
 
        function showPrintDialog() {
             $(".printer_tabs").colorbox({
-                html: "<h3>Print Selection</h3><ul class=\"list-unstyled\"><li><a onclick=\"window.print();\" class=\"no-decoration\">Print Current Tab</a></li><li><a class=\"no-decoration\" id=\"all-tabs\">Print All Tabs</a></li></ul>",
+                html: "<h3>Print Selection</h3><ul class=\"list-unstyled\"><li><a onclick=\"window.print();\" class=\"btn btn-default\" href=\"#\">Print Current Tab</a></li><li><a id=\"all-tabs\" class=\"btn btn-default\" href=\"#\">Print All Tabs</a></li></ul>",
                 innerWidth:280,
                 innerHeight:300,
                 onComplete:function() {

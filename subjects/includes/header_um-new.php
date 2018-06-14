@@ -13,7 +13,6 @@
 
     <!-- SP CSS -->
     <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp.css" type="text/css">
-    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um-print.css" type="text/css" media="print">
 
     <!-- Google Analytics and Tag Manager -->
     <?php
