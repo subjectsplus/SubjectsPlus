@@ -13,6 +13,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
+//$use_jquery = array('sp_legacy');
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
@@ -226,6 +227,8 @@ if (isset ($header_type) && $header_type == 'um-new') {
             if ($multi_tab == TRUE) {
 
                 if (isset ($header_type) && $header_type == 'um-new'){
+
+                    //desktop view
                     $container_md_open = "<div class=\"d-none d-md-inline-block\">";
                     print $container_md_open;
 
@@ -234,8 +237,14 @@ if (isset ($header_type) && $header_type == 'um-new') {
                     $container_md_end = "</div>";
                     print $container_md_end;
 
-                    $container_mobile_open = "<div class=\"d-md-none\"><script src=\"". $AssetPath ."um-special/bootstrap-select.js\"></script><select id=\"select_tabs\"><option value=''>Hello</option></select></div>";
+                    //mobile view
+                    $container_mobile_open = "<div class=\"d-md-none\"><script src=\"". $AssetPath ."um-special/bootstrap-select.js\"></script>";
                     print $container_mobile_open;
+
+                    $lobjGuide->outputMobile('public');
+
+                    $container_mobile_end = "</div>";
+                    print $container_mobile_end;
                 }
                 else {
                     $lobjGuide->outputNavTabs('public');

@@ -16,10 +16,10 @@
 <!--Load Jekyll-built site scripts (Site Header Scripts, Mega Menus Scripts, Component Scripts)-->
 <?php include("includes/jekyll-site-scripts.php"); ?>
 
-<!-- Print scripts-->
 <script>
     $( function(){
 
+        //Print scripts
        function showPrintDialog() {
             $(".printer_tabs").colorbox({
                 html: "<h3>Print Selection</h3><ul class=\"list-unstyled\"><li><a onclick=\"window.print();\" class=\"btn btn-default\" href=\"#\">Print Current Tab</a></li><li><a id=\"all-tabs\" class=\"btn btn-default\" href=\"#\">Print All Tabs</a></li></ul>",
@@ -57,6 +57,17 @@
 
         $('.printer_no_tabs').click( function() {
             window.print();
+        });
+
+        // Select for Guide Tabs
+        $('#select_tabs').selectpicker({
+            style: 'btn-select-db',
+            width: '80%',
+            size: '10'
+        });
+
+        $("#select_tabs").change(function() {
+            window.location = $(this).find("option:selected").val();
         });
 
     });
