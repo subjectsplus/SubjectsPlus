@@ -1020,10 +1020,6 @@ class Guide
         
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\"><i class=\"fa fa-plus\"></i></li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
-        
-        
-        	
-        	
         	
         $children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTab['tab_id']}");
         $child_ids = array();
@@ -1031,22 +1027,17 @@ class Guide
         foreach($children as $child) {
            $decoded_children = json_decode($child[0]); 	
            if ($decoded_children) {
-       	   foreach($decoded_children as $decoded_child) {
-       	  
-       	   	$child_id = $decoded_child->child; 
-       	     array_push($child_ids, $child_id);
-          	  	   	
-       	   		}
-       	   
-           	}	
-           
+               foreach($decoded_children as $decoded_child) {
+
+                    $child_id = $decoded_child->child;
+                     array_push($child_ids, $child_id);
+               }
+           }
         }
-        
 
         $childs = implode($child_ids, ',');
         
         	// Modded to handle tab children
-        	
         	
         $class = "dropspotty";
         $class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';

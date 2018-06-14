@@ -205,7 +205,8 @@ if (isset ($header_type) && $header_type == 'um-new') {
     </div>
     <section class=\"section section-half-top\">
         <div class=\"container\">
-            <div class=\"row\">";
+            <div class=\"row\">
+                <div class=\"col-12\"";
 
     print $guide_min_header;
 }
@@ -223,8 +224,23 @@ if (isset ($header_type) && $header_type == 'um-new') {
 			
             // Only show tabs if there is more than one tab
             if ($multi_tab == TRUE) {
-                $lobjGuide->outputNavTabs('public');
-                
+
+                if (isset ($header_type) && $header_type == 'um-new'){
+                    $container_md_open = "<div class=\"d-none d-md-inline-block\">";
+                    print $container_md_open;
+
+                    $lobjGuide->outputNavTabs('public');
+
+                    $container_md_end = "</div>";
+                    print $container_md_end;
+
+                    $container_mobile_open = "<div class=\"d-md-none\"><script src=\"". $AssetPath ."um-special/bootstrap-select.js\"></script><select id=\"select_tabs\"><option value=''>Hello</option></select></div>";
+                    print $container_mobile_open;
+                }
+                else {
+                    $lobjGuide->outputNavTabs('public');
+                }
+
                 $bonus_class= "yes-tabs";
 
                 if (isset ($header_type) && $header_type != 'um-new'){
@@ -257,6 +273,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
 if (isset ($header_type) && $header_type == 'um-new') {
 
     $um_new_section_closing = "</div>
+            </div>
         </div>
     </section>";
 
@@ -290,8 +307,6 @@ if (isset ($header_type) && $header_type == 'um-new') {
              $(this).toggleClass('fa-plus-square fa-minus-square');
              $(this).parent().find('.guide_list_bonus').toggle();            
           });
-
-
     });
 
     $(window).load(function(){
