@@ -1108,24 +1108,24 @@ class Guide
 
             $childs = implode($child_ids, ',');
 
-            $class = "dropspotty";
+            $class = "";
             $class .= $lobjTabMobile['visibility'] == 0 ? ' hidden_tab' : '';
 
             // Output the tabs as options with value
 
             if (!$this->_isAdmin && $key == 0) {
 
-                $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" class=\"$class $home_tab_class\" data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
+                $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" class=\"$home_tab_class $class\" data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
 
             } else {
 
                 if (!empty($childs)) {
                     // Parents
-                    $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" data-children=\"$childs\" class=\"$class parent-tab\" data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
+                    $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" data-children=\"$childs\" class=\"parent-tab $class\" data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
 
                 } else {
                     // Children
-                    $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" class=\"$class child-tab\"  data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
+                    $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" class=\"child-tab $class\"  data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
                 }
             }
             $tabs_mobile .= $this->_isAdmin ? "" : "";

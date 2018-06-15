@@ -59,15 +59,44 @@
             window.print();
         });
 
-        // Select for Guide Tabs
-        $('#select_tabs').selectpicker({
-            style: 'btn-select-db',
-            width: '80%',
-            size: '10'
+        // Select2 for Guide Tabs
+        $('#select_tabs').select2({
+            width: "80%",
+            containerCssClass: "tabs-select",
+            dropdownCssClass: "tabs-select-dropdown"
         });
 
         $("#select_tabs").change(function() {
-            window.location = $(this).find("option:selected").val();
+        console.log("patty");
+
+        // open external link on tab-select
+        var option_external_link = $(this).find('option:selected').attr('data-external-link');
+        console.log(option_external_link);
+        if (option_external_link != "") {
+            window.open(option_external_link, '_blank');
+        }
+
+        var option_tab_link = $(this).find('option:selected').val();
+        console.log(option_tab_link);
+
+        //hide all tab body children
+        var tabchild = $('#tab-body .sptab');
+
+        var active_tabbody = tabchild.attr('id');
+        console.log(active_tabbody);
+
+        var trim = active_tabbody.substr(1);
+
+
+        if (trim == option_tab_link){
+            console.log("we match");
+            $(tabchild).show();
+
+        }
+
+
+        //var activeTab = $(this).val();
+        //$(activeTab).show();
         });
 
     });

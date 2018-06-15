@@ -238,7 +238,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
                     print $container_md_end;
 
                     //mobile view
-                    $container_mobile_open = "<div class=\"d-md-none\"><script src=\"". $AssetPath ."um-special/bootstrap-select.js\"></script>";
+                    $container_mobile_open = "<div class=\"d-md-none\"><link href=\"". $AssetPath . "js/select2/select2.css\" rel=\"stylesheet\"/><script src=\"". $AssetPath ."js/select2/select2.js\"></script>";
                     print $container_mobile_open;
 
                     $lobjGuide->outputMobile('public');
