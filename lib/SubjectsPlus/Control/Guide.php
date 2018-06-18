@@ -1089,7 +1089,7 @@ class Guide
 
         $all_tabs = $this->getTabs($lstrFilter);
 
-        $tabs_mobile = $this->_isAdmin ? "" : "<select id=\"select_tabs\">"; // init tabs in mobile as select
+        $tabs_mobile = $this->_isAdmin ? "" : "<select id=\"select_tabs\"><option></option>"; // init tabs in mobile as select
         foreach ($all_tabs as $key => $lobjTabMobile) {
 
             $children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTabMobile['tab_id']}");
