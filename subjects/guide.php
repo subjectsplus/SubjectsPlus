@@ -196,7 +196,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
 
     $guide_min_header = "<div class=\"feature section guide-header\">
         <div class=\"container text-center minimal-header\">
-            <h5 class=\"mt-3 mt-lg-0 mb-1\">" . _("Research Guides") . "</h5>
+            <h5 class=\"mt-3 mt-lg-0 mb-1\"><a href=\"index.php\" class=\"no-decoration default\">" . _("Research Guides") . "</a></h5>
             <h1>" . $page_title . "</h1>
             <hr align=\"center\" class=\"hr-panel\">" . $printOption ."<div class=\"favorite-heart\">
             <div id=\"heart\" title=\"Add to Favorites\" tabindex=\"0\" role=\"button\" data-type=\"favorite-page-icon\"
@@ -238,7 +238,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
                     print $container_md_end;
 
                     //mobile view
-                    $container_mobile_open = "<div class=\"d-md-none\"><link href=\"". $AssetPath . "js/select2/select2.css\" rel=\"stylesheet\"/><script src=\"". $AssetPath ."js/select2/select2.js\"></script>";
+                    $container_mobile_open = "<div class=\"d-md-none text-center\"><link href=\"". $AssetPath . "js/select2/select2.css\" rel=\"stylesheet\"/><script src=\"". $AssetPath ."js/select2/select2.js\"></script>";
                     print $container_mobile_open;
 
                     $lobjGuide->outputMobile('public');
@@ -336,47 +336,49 @@ if (isset ($header_type) && $header_type == 'um-new') {
 // this messes stuff up if it displays for tabless page
 
 if ($multi_tab == TRUE) { ?>
-//setup $ UI tabs and dialogs
+
+    //setup $ UI tabs and dialogs
 $(function() {
+
    var tabTitle = $( "#tab_title" ),
    tabContent = $( "#tab_content" ),
    tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
    tabCounter = <?php echo ( count($all_tabs) ); ?>;
+
+   // initialize tabs
    var tabs = $( "#tabs" ).tabs();
+
    //add click event for external url tabs
    $('li[data-external-link]').each(function()
 					 {
-       if($(this).attr('data-external-link') != "")
-       {
-	 $(this).children('a[href^="#tabs-"]').on('click', function(evt)
-						       {
-	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	     //evt.stopImmediatePropagation
-		 
-	   });
+       if($(this).attr('data-external-link') != "") {
 
-	 $(this).children('a[href^="#tabs-"]').each(function() {
-	   var elementData = $._data(this),
-	   events = elementData.events;
+           $(this).children('a[href^="#tabs-"]').on('click', function(evt)
+                               {
+                window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                //evt.stopImmediatePropagation
+           });
 
-	   var onClickHandlers = events['click'];
+         $(this).children('a[href^="#tabs-"]').each(function() {
+           var elementData = $._data(this),
+           events = elementData.events;
 
-	   // Only one handler. Nothing to change.
-				 if (onClickHandlers.length == 1) {
-	     return;
-	   }
-	
-	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
-	 });
+           var onClickHandlers = events['click'];
+
+           // Only one handler. Nothing to change.
+                     if (onClickHandlers.length == 1) {
+             return;
+           }
+
+           onClickHandlers.splice(0, 0, onClickHandlers.pop());
+         });
        }
-     });
+   });
 
 });
 
 <?php } ?>
-
 </script>
-
 
 
 <!--[if IE]>
@@ -438,8 +440,6 @@ $("div[name='Clone']").find('.pluslet_body:eq(1)').removeAttr('class');
 ///////////////////////////////
 // Draw attention to TOC linked item
 ///////////////////////////////
-
-
 $(document.body).on('click','a[id*=boxid-]', function(event) {
     var tab_id = $(this).attr('id').split('-')[1];
     var box_id = $(this).attr('id').split('-')[2];
