@@ -217,7 +217,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
 <div id="tabs" class="hide-tabs-fouc">
 	<div id="main-content" data-subject="<?php echo scrubData($_GET['subject']); ?>" data-url="<?php echo getSubjectsURL(); ?>" data-subject-id="<?php echo $this_id; ?>">
 
-		<div id="tab-container">
+		<div id="tab-container" style="visibility: hidden;">
             <?php
 			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>';
 

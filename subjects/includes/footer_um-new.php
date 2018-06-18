@@ -83,6 +83,10 @@
             }
         });
 
+        //fix FOUC
+        $('#tab-container').attr('style', 'visibility:visible;');
+
+
     });
 </script>
 
