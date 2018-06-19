@@ -86,6 +86,9 @@
         //fix FOUC
         $('#tab-container').attr('style', 'visibility:visible;');
 
+        //Add style to Pluslet Feature
+        $('.ts-feature').parent().parent().addClass('pluslet-feature');
+
 
     });
 </script>
