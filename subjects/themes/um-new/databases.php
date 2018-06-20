@@ -247,7 +247,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 
 <section class="section section-half-top">
     <div class="container">
-        <script src="<?php print $AssetPath; ?>js/bootstrap-select.js"></script>
+        <script src="<?php print $AssetPath; ?>um-special/bootstrap-select.js"></script>
         <script>
             $( function(){
                 $('#select_format').selectpicker({

@@ -91,7 +91,7 @@ em {font-style: italic;}
 .header-text,
 #search_options,
 #spum_nav,
-#nav_menu, 
+#nav_menu,
 ul#nav_menu div,
 #guide_nav_tools,
 #tab-container,
@@ -147,7 +147,7 @@ display: none;
 }
 
 .tip ul li a[href^="http://"]:after,
-.tip ul li a[href^="https://"]:after,  {
+.tip ul li a[href^="https://"]:after  {
       content: " (" attr(href) ")";
       font-size: 80%;
       display: block !important;
