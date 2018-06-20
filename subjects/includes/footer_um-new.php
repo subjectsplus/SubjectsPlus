@@ -89,12 +89,12 @@
         //Add style to Pluslet Feature
         $('.ts-feature').parent().parent().addClass('pluslet-feature');
 
-        //add icon for external tabs
+        //add icon for external tabs - desktop
         $('#tab-container .ui-tabs-nav li').each( function() {
             var external_tab = $(this).attr('data-external-link');
 
             if (external_tab != "") {
-                $(this).find('a').append(' <i class=\"fas fa-external-link-alt\" title=\"Opens in new window\"></i>');
+                $(this).find('a').append('<i class=\"fas fa-external-link-alt\" title=\"Opens in new window\"></i>');
                 console.log(external_tab);
             }
         });
