@@ -90,15 +90,12 @@
         $('.ts-feature').parent().parent().addClass('pluslet-feature');
 
         //add icon for external tabs
-        var tab_pill = $('#tab-container .ui-tabs-nav li');
-
-        $(tab_pill).each( function() {
-            var external_tab = $(tab_pill).attr('data-external-link');
-            console.log(external_tab);
+        $('#tab-container .ui-tabs-nav li').each( function() {
+            var external_tab = $(this).attr('data-external-link');
 
             if (external_tab != "") {
-                $(tab_pill).find('a').append('hello');
-                console.log('see');
+                $(this).find('a').append(' <i class=\"fas fa-external-link-alt\" title=\"Opens in new window\"></i>');
+                console.log(external_tab);
             }
         });
 
