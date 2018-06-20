@@ -83,9 +83,14 @@
             }
         });
 
+        //fix FOUC
+        $('#tab-container').attr('style', 'visibility:visible;');
+
+        //Add style to Pluslet Feature
+        $('.ts-feature').parent().parent().addClass('pluslet-feature');
+
         //add icon for external tabs
         var tab_pill = $('#tab-container .ui-tabs-nav li');
-
 
         $(tab_pill).each( function() {
             var external_tab = $(tab_pill).attr('data-external-link');
@@ -96,12 +101,6 @@
                 console.log('see');
             }
         });
-
-        //fix FOUC
-        $('#tab-container').attr('style', 'visibility:visible;');
-
-        //Add style to Pluslet Feature
-        $('.ts-feature').parent().parent().addClass('pluslet-feature');
 
 
     });
