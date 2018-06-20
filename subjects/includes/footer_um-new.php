@@ -83,6 +83,20 @@
             }
         });
 
+        //add icon for external tabs
+        var tab_pill = $('#tab-container .ui-tabs-nav li');
+
+
+        $(tab_pill).each( function() {
+            var external_tab = $(tab_pill).attr('data-external-link');
+            console.log(external_tab);
+
+            if (external_tab != "") {
+                $(tab_pill).find('a').append('hello');
+                console.log('see');
+            }
+        });
+
         //fix FOUC
         $('#tab-container').attr('style', 'visibility:visible;');
 
