@@ -99,6 +99,25 @@
             }
         });
 
+        //Experts Pluslet - move tooltip into details
+        $('.pluslet[name=\"Experts\"] .expert-list-circ li').each( function() {
+            var expert_pluslet_tooltip = $(this).find('.expert-tooltip');
+            $(this).find('.expert-label').append(expert_pluslet_tooltip);
+        });
+
+        //Subject Specialist Social Icons substitution to avoid Font Awesome issues
+        $('.pluslet[name=\"SubjectSpecialist\"] .staff-details .staff-social[data-show-twitter=\"Yes\"]').each( function() {
+            $(this).find('i').addClass('fab fa-twitter-square').removeClass('fa fa-twitter');
+        });
+
+        $('.pluslet[name=\"SubjectSpecialist\"] .staff-details .staff-social[data-show-pinterest=\"Yes\"]').each( function() {
+            $(this).find('i').addClass('fab fa-pinterest-square').removeClass('fa fa-pinterest');
+        });
+
+        $('.pluslet[name=\"SubjectSpecialist\"] .staff-details .staff-social[data-show-facebook=\"Yes\"]').each( function() {
+            $(this).find('i').addClass('fab fa-facebook').removeClass('fa fa-facebook');
+        });
+
 
     });
 </script>
