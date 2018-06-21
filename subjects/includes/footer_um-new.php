@@ -115,7 +115,19 @@
         });
 
         $('.pluslet[name=\"SubjectSpecialist\"] .staff-details .staff-social[data-show-facebook=\"Yes\"]').each( function() {
-            $(this).find('i').addClass('fab fa-facebook').removeClass('fa fa-facebook');
+            $(this).find('i').removeClass('fa fa-facebook').addClass('fab fa-facebook');
+        });
+
+        $('.pluslet[name=\"SubjectSpecialist\"] .staff-details .staff-social[data-show-instagram=\"Yes\"]').each( function() {
+            $(this).find('i').removeClass('fa fa-instagram').addClass('fab fa-instagram');
+        });
+
+        //Social Media avoid Font Awesome issues
+        $('.pluslet[name=\"SocialMedia\"] #social_media_accounts li').each( function() {
+            $(this).find('i.fa-facebook-square').removeClass('fa fa-facebook-square').addClass('fab fa-facebook');
+            $(this).find('i.fa-twitter-square').removeClass('fa fa-twitter-square').addClass('fab fa-twitter-square');
+            $(this).find('i.fa-pinterest-square').removeClass('fa fa-pinterest-square').addClass('fab fa-pinterest-square');
+            $(this).find('i.fa-instagram').removeClass('fa fa-instagram').addClass('fab fa-instagram');
         });
 
 
