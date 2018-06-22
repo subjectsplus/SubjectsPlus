@@ -2,9 +2,6 @@
 /**
  *   @file video.php
  *   @brief Display the videos
- *
- *   @author adarby
- *   @date feb 2012
  */
 
 use SubjectsPlus\Control\Querier;
@@ -16,9 +13,9 @@ $description = _("A collection of videos produced at this library.");
 $keywords = _("library, research, videos, instruction");
 
 $extra_sql = "";
+
 // Intro text
-$intro = "<p>A collection of videos produced by the University of Miami Libraries.</p>";
-$display = "<br />";
+$intro = "A collection of videos produced by the University of Miami Libraries.";
 
 try {
 } catch (Exception $e) {
@@ -27,9 +24,8 @@ try {
 
 // Get Tags
 // create the option
-$vtag_items = "
-  <ul>
-  <li><a href=\"video.php?tag=all\">All</a></li>";
+$vtag_items = "<ul><li><a href=\"video.php\">All</a></li>";
+$display = "";
 
 foreach ($all_vtags as $value) {
     $vtag_items .= "<li><a href=\"video.php?tag=$value\">" . ucfirst($value) . "</a></li>";
@@ -89,9 +85,7 @@ if (empty($_GET)) {
 
 $num_rows = count($r);
 
-
 if ($num_rows) {
-
 
     foreach ($r as $myrow) {
 
@@ -138,79 +132,65 @@ if ($num_rows) {
         $secs = $myrow["duration"] % 60;
         $item_duration .= "$secs seconds";
 
-        $display .= "<div class=\"vid_container\">
-            $thumbnail_medium <h3 class=\"ajax\" href=\"$location\">$safe_title</h3><p class=\"runtime\">$item_duration</p><a class=\"details_details\">More about this video</a>
+        $display .= "<div class=\"vid_container\">$thumbnail_medium <div class=\"vid-meta\"><h3 class=\"ajax\" href=\"$location\">$safe_title</h3><p class=\"runtime\">$item_duration</p></div><a class=\"details_details no-decoration default\"><i class=\"fa fa-info-circle\"></i> More about this video</a>
           <div class=\"list_bonus\">$item_blurb</div>
             </div>";
     }
 } else {
-    $display .= "<div class=\"no_results\">" . _("Sorry, no videos match this criteria.") . "</div>";
+    $display .= "<div class=\"feature-light p-3\">" . _("Sorry, no videos match this criteria.") . "</div>";
 }
 
 
-// Now we are finally read to display the page
+// Load header
 include("includes/header_um-new.php");
 ?>
 
-<div class="panel-container">
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
-            <div class="breather">
-                <?php print $intro; ?>
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0"><?php print $intro; ?></p>
+
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon" ></div>
+        </div>
+    </div>
+</div>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
                 <?php print $display; ?>
             </div>
-        </div> <!--end 3/4 main area-->
-
-        <div class="pure-u-1 pure-u-lg-1-4 sidebar-bkg">
-            <!-- start tip -->
-            <div class="tip">
-                <h2><?php print _("Feature Films"); ?></h2>
-                <p>  Looking for movies to check out?  See <a href="http://library.miami.edu/media/">CDs/DVDs</a> or <a href="http://library.miami.edu/udvd/">UDVD</a>.</p>
+            <div class="col-lg-3">
+                <div class="feature popular-list">
+                    <h4><?php print _("Looking for Feature Films?"); ?></h4>
+                    <ul>
+                        <li><a href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?mode=Basic&vid=uml&tab=default_tab">Library Catalog</a></li>
+                        <li><a href="databases.php?letter=bytype&type=Video">Streaming Video</a></li>
+                    </ul>
+                    <h4>- <?php print _("Browse by Tag"); ?> -</h4>
+                    <?php print $vtag_items; ?>
+                </div>
             </div>
-            <!-- end tip -->
-            <div class="tipend"> </div>
-
-            <!-- start tip -->
-            <div class="tip">
-                <h2><?php print _("Browse by Tag"); ?></h2>
-                <?php print $vtag_items; ?>
-            </div>
-            <!-- end tip -->
-            <div class="tipend"> </div>
-
-        </div> <!--end 1/4 sidebar column-->
-
-    </div><!--end pure=g-->
-</div> <!-- end panel-container -->
-
+        </div>
+    </div>
+</section>
 
 <?php
 // Load footer file
 include("includes/footer_um-new.php"); ?>
 
-<script type="text/javascript" language="javascript">
-    $(document).ready(function(){
-
+<script>
+    $( function(){
 
         // show db details
-        $(".details_details").on("click", function() {
-
-            $(this).parent().find(".list_bonus").toggle()
+        $('.details_details').click( function() {
+            $(this).parent().find(".list_bonus").toggle();
         });
 
         $(".ajax").colorbox({iframe:true, innerWidth:640, innerHeight:480});
-
-
-        function stripeR(container) {
-            $(".zebra").not(":hidden").filter(":even").addClass("evenrow");
-            $(".zebra").not(":hidden").filter(":odd").addClass("oddrow");
-        }
-
-        function unStripeR () {
-            $(".zebra").removeClass("evenrow");
-            $(".zebra").removeClass("oddrow");
-        }
-
 
     });
 </script>
