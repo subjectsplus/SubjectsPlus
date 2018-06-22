@@ -1,7 +1,7 @@
 </main>
 <!--Powered by Subjects Plus-->
 <div class="container">
-    <p style="font-size:.8rem; text-align: right; margin-bottom: .25rem;">Powered by <a href="http://www.subjectsplus.com/" class="no-decoration default">SubjectsPlus</a></p>
+    <p style="font-size:.8rem; text-align: center; margin-bottom: .25rem;">Powered by <a href="http://www.subjectsplus.com/" class="no-decoration default">SubjectsPlus</a></p>
 </div>
 
 </div>
