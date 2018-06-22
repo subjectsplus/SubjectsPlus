@@ -7,3 +7,5 @@ RewriteEngine On
 RewriteRule ^staff/([^/\.]+)/?$ staff_details.php?name=$1 [L]
 RewriteRule ^([^/\.]+)/?$ guide.php?subject=$1 [L]
 RewriteRule ^([^/\.]+)/([^/\.]+)/?$ guide.php?subject=$1&source=$2 [L]
+
+ErrorDocument 404 /subjects/blank-404.php
