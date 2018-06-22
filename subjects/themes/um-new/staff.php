@@ -1,12 +1,7 @@
 <?php
-
 /**
  *   @file services/staff.php
  *   @brief staff listings -- um theme override
- *
- *   @author adarby
- *   @date fall 2014
- *   @todo
  */
 use SubjectsPlus\Control\Staff;
 use SubjectsPlus\Control\StaffDisplay;
@@ -16,15 +11,10 @@ use SubjectsPlus\Control\Querier;
 $page_title = "Library Staff";
 $description = "Library contact list.";
 $keywords = "staff list, librarians, contacts";
+$legend = "Click on a name for more information.";
 
-$use_jquery = array("ui", "ui_styles");
+//$use_jquery = array("ui", "ui_styles");
 
-//////////
-// Generate List
-//////////
-
-
-//////////
 // Generate List
 //////////
 
@@ -119,13 +109,31 @@ $out = $staff_data->writeTable($selected_letter);
 // Assemble the content for our main pluslet
 $display = $alphabet . $intro . $out;
 
-////////////////////////////
-// Now we are finally read to display the page
-////////////////////////////
-
+// header
 include("includes/header_um-new.php");
-
 ?>
+
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0"><?php print $legend; ?></p>
+
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon" ></div>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        hello
+    </div>
+</section>
+
+
+
 
 
 <div class="panel-container panel-adj">
@@ -260,14 +268,8 @@ include("includes/header_um-new.php");
 </script>
 
 <?php
-
-////////////
 // Footer
-///////////
-
-include("includes/footer_um-new.php");
-
-?>
+include("includes/footer_um-new.php"); ?>
 
 <style type="text/css">
     #backtotop {
