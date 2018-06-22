@@ -1,4 +1,9 @@
 </main>
+<!--Powered by Subjects Plus-->
+<div class="container">
+    <p style="font-size:.8rem; text-align: right; margin-bottom: .25rem;">Powered by <a href="http://www.subjectsplus.com/" class="no-decoration default">SubjectsPlus</a></p>
+</div>
+
 </div>
 
 <!--Load Jekyll-built site footer (Site Footer, Site Toolbar)-->
