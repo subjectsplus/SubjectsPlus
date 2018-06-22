@@ -100,10 +100,10 @@ if ($num_rows) {
         // prepare the location
         switch ($myrow["source"]) {
             case "Vimeo":
-                $location = "http://player.vimeo.com/video/" . $myrow["foreign_id"];
+                $location = "https://player.vimeo.com/video/" . $myrow["foreign_id"];
                 break;
             case "YouTube":
-                $location = "http://www.youtube.com/embed/" . $myrow["foreign_id"];
+                $location = "https://www.youtube.com/embed/" . $myrow["foreign_id"];
                 break;
         }
 
@@ -118,8 +118,8 @@ if ($num_rows) {
             $thumbnail_path = $AssetPath . "images/video_thumbs/placeholder/_medium.jpg";
         }
 
-        $thumbnail_medium = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\" class=\"ajax\" href=\"$location\" />"; // hard-coded width bc youtube medium is BIIIG
-        $thumbnail_small = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\"  />";
+        $thumbnail_medium = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\" class=\"ajax\" href=\"$location\" title=\"Click to play video\" />"; // hard-coded width bc youtube medium is BIIIG
+        $thumbnail_small = "<img src=\"" . $thumbnail_path . "\" alt=\"" . $item_title . "\" title=\"Click to play video\" />";
         $date = $myrow["date"];
 
         // convert seconds into something more friendly
@@ -132,7 +132,7 @@ if ($num_rows) {
         $secs = $myrow["duration"] % 60;
         $item_duration .= "$secs seconds";
 
-        $display .= "<div class=\"vid_container\">$thumbnail_medium <div class=\"vid-meta\"><h3 class=\"ajax\" href=\"$location\">$safe_title</h3><p class=\"runtime\">$item_duration</p></div><a class=\"details_details no-decoration default\"><i class=\"fa fa-info-circle\"></i> More about this video</a>
+        $display .= "<div class=\"vid_container\">$thumbnail_medium <div class=\"vid-meta\"><h3 class=\"ajax\" href=\"$location\" title=\"Click to play video\">$safe_title</h3><p class=\"runtime\">$item_duration</p></div><a class=\"details_details no-decoration default\"><i class=\"fa fa-info-circle\"></i> More about this video</a>
           <div class=\"list_bonus\">$item_blurb</div>
             </div>";
     }
