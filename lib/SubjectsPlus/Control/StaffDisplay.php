@@ -23,6 +23,154 @@ class StaffDisplay {
     $selected = scrubData($qualifier);
 
     switch ($qualifier) {
+        case "Departments":
+            $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, s.staff_id, s.ptags
+        FROM staff s, staff_department sd, department d
+        WHERE s.staff_id = sd.staff_id
+        AND sd.department_id = d.department_id
+        AND user_type_id = '1'
+        AND active =1
+        ORDER BY department_sort, d.name, staff_sort DESC, lname";
+
+            $db = new Querier;
+            $r = $db->query($q);
+
+            $items = "<ul class=\"list-unstyled d-md-flex flex-md-row flex-md-wrap staff-departments\">";
+            $current_dept = "";
+
+            foreach ($r as $myrow) {
+
+                $dept_name = $myrow["2"];
+                $lname = $myrow["3"];
+                $fname = $myrow["4"];
+                $title = $myrow["5"];
+                $tel = $myrow["6"];
+                $email = $myrow["7"];
+                $dept_id = $myrow["8"];
+                $dept_tel = $myrow["9"];
+                $name_id = explode("@", $email);
+
+                $staff_id = $myrow["10"];
+                $ptags = $myrow["11"];
+
+                if ($get_assoc_subs == 1) {
+                    // Grab our subjects, if any
+                    $assoc_subjects = self::getAssocSubjects($staff_id, $ptags);
+                } else {
+                    $assoc_subjects = "";
+                }
+                // end subject listing
+
+                if ($mod_rewrite == 1) {
+                    //$link_to_details = "/subjects/profile/" . $name_id[0]; // um custom
+                    $link_to_details = "staff/" . $name_id[0];
+                } else {
+                    $link_to_details = "staff_details.php?name=" . $name_id[0];
+                }
+
+                if ($current_dept != $dept_id) {
+                    $items .= "<a name=\"$dept_id\"></a><h2>$dept_name | " . $tel_prefix . " " . $dept_tel . "</h2>";
+                }
+
+                $items .= "<li><div class=\"staff-pic\">";
+
+                // Here we stick in their headshot; comment out if you don't want; maybe later this should be an admin parameter
+                $items .= getHeadshot($email, 'medium');
+
+                $items .= "</div><div class=\"staff-meta\"><h4>";
+
+                if ($print_display != 1) {
+                    $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
+                } else {
+                    $items .= "$lname, $fname";
+                }
+
+                $items .= "</h4>
+    			<p><em>$title</em></p>
+    			<p>$assoc_subjects</p>
+    			<p>$tel_prefix $tel </p>
+    			<p><a href=\"mailto:$email\">$email</a></p></div></li>";
+
+
+                $current_dept = $dept_id;
+            }
+
+            $items .= "</ul>";
+
+            break;
+
+        case "Subject Librarians":
+
+            $q = "select distinct lname, fname, title, tel, email, staff.staff_id
+                from staff, staff_subject ss, subject su
+                where staff.staff_id = ss.staff_id
+                AND ss.subject_id = su.subject_id
+                AND staff.active = 1
+                AND type = 'Subject'
+                AND su.active = '1'
+                AND user_type_id = '1'
+                AND su.type != 'Placeholder'
+                order by lname, fname";
+            $db = new Querier;
+            $r = $db->query($q);
+
+            $items = "<table class=\"footable foo3\" width=\"100%\">
+        <thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th><strong>" . _("Librarian") . "</strong></th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\"><strong>" . _("Subject Responsibilities") . "</strong></th></tr></thead>";
+
+            $row_count = 0;
+            $colour1 = "oddrow";
+            $colour2 = "evenrow";
+
+            foreach ($r as $myrow) {
+                $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+
+                $items .= "<tr class=\"$row_colour\">\n";
+                $items .= showStaff($myrow[4], '', '', 1);
+
+                $items .= "<td>";
+
+                $sub_query = "select subject, shortform from subject, staff_subject
+                    WHERE subject.subject_id = staff_subject.subject_id
+                    AND staff_id =  '$myrow[5]'
+                    AND type = 'Subject'
+                    AND active = '1'
+                    AND type != 'Placeholder'
+                    ORDER BY subject";
+
+                /* Select all active records (this is based on a db connection made above) */
+
+                $sub_result = $db->query($sub_query);
+
+                $num_rows = (count($sub_result) - 1);
+
+                // Loop through all items, sticking commas in between
+
+                $subrowcount = 0;
+
+                foreach ($sub_result as $subrow) {
+
+                    if ($mod_rewrite == 1) {
+                        $linky = $subrow[1];
+                    } else {
+                        $linky = "guide.php?subject=" . $subrow[1];
+                    }
+
+                    $items .= "<a href=\"$linky\">$subrow[0]</a>";
+                    if ($subrowcount < $num_rows) {
+                        $items .= ", ";
+                    }
+                    $subrowcount++;
+                }
+
+                $items .= "</td>\n
+					</tr>";
+
+                $row_count++;
+            }
+
+            $items .= "</table>";
+            break;
+
       case "Faculty Profiles":
         $q = "select lname, fname, title, tel, email, staff_id, ptags
 			FROM staff
