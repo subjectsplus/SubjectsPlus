@@ -86,11 +86,10 @@ class StaffDisplay {
                 }
 
                 $items .= "</h4>
-    			<p><em>$title</em></p>
-    			<p>$assoc_subjects</p>
+    			<p><em>$title</em></p>    			
     			<p>$tel_prefix $tel </p>
-    			<p><a href=\"mailto:$email\">$email</a></p></div></li>";
-
+    			<p><a href=\"mailto:$email\">$email</a></p>
+    			<p>$assoc_subjects</p></div></li>";
 
                 $current_dept = $dept_id;
             }
