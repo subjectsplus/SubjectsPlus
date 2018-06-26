@@ -72,12 +72,12 @@ class StaffDisplay {
                     $items .= "<a name=\"$dept_id\"></a><h2>$dept_name | " . $tel_prefix . " " . $dept_tel . "</h2>";
                 }
 
-                $items .= "<li><div class=\"staff-pic\">";
+                $items .= "<li><div class=\"staff-pic\"><a href=\"$link_to_details\">";
 
                 // Here we stick in their headshot; comment out if you don't want; maybe later this should be an admin parameter
                 $items .= getHeadshot($email, 'medium');
 
-                $items .= "</div><div class=\"staff-meta\"><h4>";
+                $items .= "</a></div><div class=\"staff-meta\"><h4>";
 
                 if ($print_display != 1) {
                     $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
@@ -89,7 +89,7 @@ class StaffDisplay {
     			<p><em>$title</em></p>    			
     			<p>$tel_prefix $tel </p>
     			<p><a href=\"mailto:$email\">$email</a></p>
-    			<p>$assoc_subjects</p></div></li>";
+    			<p class=\"staff-subjects\">$assoc_subjects</p></div></li>";
 
                 $current_dept = $dept_id;
             }
