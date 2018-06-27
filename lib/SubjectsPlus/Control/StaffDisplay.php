@@ -103,10 +103,10 @@ class StaffDisplay {
                 }
 
                 $items .= "</h4>
-    			<p><em>$title</em></p>    			
-    			<p>$tel_prefix $tel </p>
-    			<p><a href=\"mailto:$email\">$email</a></p>
-    			<p class=\"staff-subjects\">$assoc_subjects</p></div></li>";
+                <p><em>$title</em></p>    			
+                <p>$tel_prefix $tel </p>
+                <p><a href=\"mailto:$email\">$email</a></p>
+                <p class=\"staff-subjects\">$assoc_subjects</p></div></li>";
 
                 $current_dept = $dept_id;
             }
@@ -130,20 +130,15 @@ class StaffDisplay {
             $db = new Querier;
             $r = $db->query($q);
 
-            $items = "<table class=\"footable foo3\" width=\"100%\">
-        <thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th><strong>" . _("Librarian") . "</strong></th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\"><strong>" . _("Subject Responsibilities") . "</strong></th></tr></thead>";
-
-            $row_count = 0;
-            $colour1 = "oddrow";
-            $colour2 = "evenrow";
+            $items = "<ul class=\"list-unstyled staff-librarians\">";
 
             foreach ($r as $myrow) {
-                $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-                $items .= "<tr class=\"$row_colour\">\n";
+                $items .= "<li><div class=\"staff-info d-flex flex-row flex-nowrap\">";
+
                 $items .= showStaff($myrow[4], '', '', 1);
 
-                $items .= "<td>";
+                $items .= "</div><div class=\"staff-subjects\">";
 
                 $sub_query = "select subject, shortform from subject, staff_subject
                     WHERE subject.subject_id = staff_subject.subject_id
@@ -178,24 +173,21 @@ class StaffDisplay {
                     $subrowcount++;
                 }
 
-                $items .= "</td>\n
-					</tr>";
-
-                $row_count++;
+                $items .= "</div></li>";
             }
 
-            $items .= "</table>";
+            $items .= "</ul>";
             break;
 
-      case "Faculty Profiles":
+        case "Faculty Profiles":
         $q = "select lname, fname, title, tel, email, staff_id, ptags
-			FROM staff
-			WHERE active = 1
+            FROM staff
+            WHERE active = 1
             AND ptags like '%librarian%'
             AND user_type_id = '1'
-			order by lname, fname";
+            order by lname, fname";
 
-      $db = new Querier;
+        $db = new Querier;
 
         $r = $db->query($q);
 
@@ -239,17 +231,17 @@ class StaffDisplay {
           }
 
           $items .= "<tr class=\"$row_colour zebra\">
-		      <td class=\"$row_colour staff-name-row\"><span class=\"staff_contact\">";
+              <td class=\"$row_colour staff-name-row\"><span class=\"staff_contact\">";
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
           } else {
             $items .= "$lname, $fname";
           }
-          
+
           $items .= "</span></td>
-			<td class=\"$row_colour\">$title $assoc_subjects</td>
-			<td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
-			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
+            <td class=\"$row_colour\">$title $assoc_subjects</td>
+            <td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
+            <td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
         }
@@ -258,7 +250,7 @@ class StaffDisplay {
 
 
         break;
-      case "By Department":
+        case "By Department":
         $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, s.staff_id, s.ptags
         FROM staff s, staff_department sd, department d
         WHERE s.staff_id = sd.staff_id
@@ -321,18 +313,18 @@ class StaffDisplay {
           $items .= getHeadshot($email, 'medium');
 
           $items .= "</td>
-		      <td class=\"$row_colour staff-name-row\"><span class=\"staff_contact\">";          
+              <td class=\"$row_colour staff-name-row\"><span class=\"staff_contact\">";
 
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\">$lname, $fname</a>";
           } else {
             $items .= "$lname, $fname";
           }
-          
+
           $items .= "</span></td>
-    			<td class=\"$row_colour\">$title $assoc_subjects</td>
-    			<td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
-    			<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
+                <td class=\"$row_colour\">$title $assoc_subjects</td>
+                <td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
+                <td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
           $current_dept = $dept_id;
@@ -342,7 +334,7 @@ class StaffDisplay {
         $items .= "</table>";
 
         break;
-      case "Subject Librarians A-Z":
+        case "Subject Librarians A-Z":
 
         $q = "select distinct lname, fname, title, tel, email, staff.staff_id
                 from staff, staff_subject ss, subject su
@@ -369,7 +361,7 @@ class StaffDisplay {
 
           $items .= "<tr class=\"$row_colour\">\n";
           $items .= showStaff($myrow[4], '', '', 1);
-          
+
           $items .= "<td>";
 
           $sub_query = "select subject, shortform from subject, staff_subject
@@ -406,7 +398,7 @@ class StaffDisplay {
           }
 
           $items .= "</td>\n
-					</tr>";
+                    </tr>";
 
           $row_count++;
         }
@@ -414,18 +406,18 @@ class StaffDisplay {
         $items .= "</table>";
         break;
 
-      case "Librarians by Subject Specialty":
+        case "Librarians by Subject Specialty":
         $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
                     staff, staff_subject, subject
-			where staff.staff_id = staff_subject.staff_id
-			AND staff_subject.subject_id = subject.subject_id
-			AND type = 'Subject'
-      AND staff.active = 1
-      AND subject.active = 1
-      AND staff.user_type_id = 1
-      AND type != 'Placeholder'
-			order by subject, lname, fname";
-        
+            where staff.staff_id = staff_subject.staff_id
+            AND staff_subject.subject_id = subject.subject_id
+            AND type = 'Subject'
+        AND staff.active = 1
+        AND subject.active = 1
+        AND staff.user_type_id = 1
+        AND type != 'Placeholder'
+            order by subject, lname, fname";
+
         $hf1 = array("label"=>"Subject","hide"=>false,"nosort"=>false);
         $hf2 = array("label"=>"Library Liaison","hide"=>false,"nosort"=>false);
         $hf3 = array("label"=>"Phone","hide"=>true,"nosort"=>true);
@@ -434,7 +426,7 @@ class StaffDisplay {
         $head_fields = array($hf1, $hf2, $hf3, $hf4);
         $db = new Querier;
         $r = $db->query($q);
-        
+
         $items = prepareTHUM($head_fields);
 
         $row_count = 0;
@@ -442,8 +434,8 @@ class StaffDisplay {
         $colour2 = "evenrow";
         $subrowsubject = "";
 
-    foreach ($r as $myrow) {
-          
+        foreach ($r as $myrow) {
+
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
@@ -455,17 +447,17 @@ class StaffDisplay {
           if ($subrowsubject == $myrow["subject"]) {
             //$psubject = " ";
             $psubject = $myrow["subject"];
-            
+
           } else {
             $subrowsubject = $myrow["subject"];
             $psubject = $myrow["subject"];
             $shortsub = $myrow["shortform"];
           }
 
-          
+
 
           $items .= "<tr class=\"zebra $row_colour\">
-					<td>";
+                    <td>";
 
           if ($mod_rewrite == 1) {
             $linky = $shortsub;
@@ -490,7 +482,7 @@ class StaffDisplay {
           $items .= "<td>";
           $items .= "<a href=\"mailto:$email\">$email</a>";
           $items .= "</td>
-					</tr>";
+                    </tr>";
 
           $row_count++;
         }
@@ -498,15 +490,15 @@ class StaffDisplay {
         $items .= "</table>";
         break;
 
-      case "A-Z":
-      default:
+        case "A-Z":
+        default:
 
         $q = "SELECT s.staff_id, lname, fname, title, tel, s.email, name, ptags
-			FROM staff s
-			LEFT JOIN department d on s.department_id = d.department_id
-			WHERE user_type_id = '1'
-      AND active = 1
-			ORDER BY s.lname, s.fname";
+            FROM staff s
+            LEFT JOIN department d on s.department_id = d.department_id
+            WHERE user_type_id = '1'
+        AND active = 1
+            ORDER BY s.lname, s.fname";
 
         $hf1 = array("label"=>"Name","hide"=>false,"nosort"=>false);
         $hf2 = array("label"=>"Title","hide"=>true,"nosort"=>false);
@@ -558,20 +550,20 @@ class StaffDisplay {
           //$headshot = getHeadshot($email, "medium");
 
           $items .= "
-		<tr class=\"zebra $row_colour\">
-			<td class=\"staff-name-row\">";
-          
+        <tr class=\"zebra $row_colour\">
+            <td class=\"staff-name-row\">";
+
           if ($print_display != 1) {
             $items .= "<a href=\"$link_to_details\" class=\"no_link\">$full_name</a>";
           } else {
             $items .= "$full_name";
           }
-          
+
           $items .= "</td>
-			<td class=\"staff-title-row\">$title $assoc_subjects</td>
-			<td  class=\"staff-tel-row\">$tel &nbsp;</td>
-			<td  class=\"staff-email-row\"><a href=\"mailto:$email\">$email</a></td>
-		</tr>";
+            <td class=\"staff-title-row\">$title $assoc_subjects</td>
+            <td  class=\"staff-tel-row\">$tel &nbsp;</td>
+            <td  class=\"staff-email-row\"><a href=\"mailto:$email\">$email</a></td>
+        </tr>";
 
           $row_count++;
         }
@@ -579,9 +571,6 @@ class StaffDisplay {
         $items .= "</table>";
         break;
     }
-
-
-
 
     return $items;
   }

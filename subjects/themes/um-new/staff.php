@@ -194,6 +194,33 @@ include("includes/header_um-new.php");
                     </div>
                 </div>
             </div>
+
+            <script>
+                $( function(){
+                    // Select2 for Departments
+                    $('#select_dept').select2({
+                        width: "80%",
+                        containerCssClass: "tabs-select",
+                        dropdownCssClass: "tabs-select-dropdown",
+                        placeholder: "Select a department"
+                    });
+
+                    $("#select_dept").change(function() {
+
+                        // open external link on tab-select
+                        var option_external_link = $(this).find('option:selected').attr('data-external');
+
+                        if (option_external_link != "") {
+                            window.open(option_external_link, '_blank');
+                        }
+                        else {
+                            var dept_anchor = $(this).find('option:selected').val();
+                            console.log(dept_anchor);
+                            location = dept_anchor;
+                        }
+                    });
+                });
+            </script>
         <?php
             } else {
             print $display;
@@ -202,33 +229,6 @@ include("includes/header_um-new.php");
 
     </div>
 </section>
-
-<script>
-    $( function(){
-        // Select2 for Departments
-        $('#select_dept').select2({
-            width: "80%",
-            containerCssClass: "tabs-select",
-            dropdownCssClass: "tabs-select-dropdown",
-            placeholder: "Select a department"
-        });
-
-        $("#select_dept").change(function() {
-
-            // open external link on tab-select
-            var option_external_link = $(this).find('option:selected').attr('data-external');
-
-            if (option_external_link != "") {
-                window.open(option_external_link, '_blank');
-            }
-            else {
-                var dept_anchor = $(this).find('option:selected').val();
-                console.log(dept_anchor);
-                location = dept_anchor;
-            }
-        });
-    });
-</script>
 
 <?php
 // Footer

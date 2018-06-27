@@ -913,6 +913,8 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
     return;
   }
 
+
+
   foreach ($r as $myrow) {
 
     if ($link_name == 1) {
@@ -930,14 +932,17 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
         $linky = "staff_details.php?name=" . $name_id[0];
       }
       $full_name = "<a href=\"$linky\">" . $myrow[0] . " " . $myrow[1] . "</a>";
+      $img_link = "<a href=\"$linky\">";
     } else {
       $full_name = $myrow[0] . " " . $myrow[1];
+      $img_link = "";
     }
 
 
-    $staffer = "<td class=\"staffpic\">";
+    $staffer = "<div class=\"staffpic\">";
+    $staffer .= $img_link;
     $staffer .= getHeadshot($email, $pic_size);
-    $staffer .= "</td><td><strong>$full_name</strong><br />$myrow[2]<br />$tel_prefix $myrow[3]<br /><a href=\"mailto:$myrow[4]\">$myrow[4]</a></td>";
+    $staffer .= "</a></div><div class=\"staff-meta\"><h4>$full_name</h4><p><em>$myrow[2]</em></p><p>$tel_prefix $myrow[3]</p><p><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p></div></td>";
   }
 
   return $staffer;
