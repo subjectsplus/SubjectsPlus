@@ -70,11 +70,15 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
         <a href="#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
     </div>
    </li>
-  
-  <li><a href="#109" class="dept-heading">Cuban Heritage Collection</a></li>
-  <li><a href="#104" class="dept-heading">Special Collections</a></li>
-  <li><a href="#133" class="dept-heading">University Archives</a></li>
-  
+   
+   <li class="dept-heading">Collections</li>
+   <li>
+    <div class="dept-sub">
+        <a href="#109">Cuban Heritage Collection</a>
+        <a href="#104">Special Collections</a>
+        <a href="#133">University Archives</a>
+    </div>
+   </li>  
 </ul>';
 
 // views set in StaffDisplay.php
@@ -98,7 +102,7 @@ include("includes/header_um-new.php");
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0"><?php print $legend; ?></p>
+        <p class="mb-0"><a href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/04/UML_Org_Chart_January2018-v2.pdf" class="default">Organization Chart (pdf)</a></p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
@@ -107,7 +111,20 @@ include("includes/header_um-new.php");
     </div>
 </div>
 
-<section class="section">
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-half-top">
     <div class="container">
         <?php print $alphabet; ?>
         <div class="row">

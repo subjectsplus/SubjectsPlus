@@ -24,7 +24,7 @@ class StaffDisplay {
 
     switch ($qualifier) {
         case "Departments":
-            $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, s.staff_id, s.ptags
+            $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, d.email, d.url, s.staff_id, s.ptags
         FROM staff s, staff_department sd, department d
         WHERE s.staff_id = sd.staff_id
         AND sd.department_id = d.department_id
@@ -48,10 +48,12 @@ class StaffDisplay {
                 $email = $myrow["7"];
                 $dept_id = $myrow["8"];
                 $dept_tel = $myrow["9"];
+                $dept_email = $myrow["10"];
+                $dept_url = $myrow["11"];
                 $name_id = explode("@", $email);
 
-                $staff_id = $myrow["10"];
-                $ptags = $myrow["11"];
+                $staff_id = $myrow["12"];
+                $ptags = $myrow["13"];
 
                 if ($get_assoc_subs == 1) {
                     // Grab our subjects, if any
@@ -69,7 +71,22 @@ class StaffDisplay {
                 }
 
                 if ($current_dept != $dept_id) {
-                    $items .= "<a name=\"$dept_id\"></a><h2>$dept_name | " . $tel_prefix . " " . $dept_tel . "</h2>";
+                    $site_url = "https://new.library.miami.edu";
+                    $items .= "<a name=\"$dept_id\"></a><h2>$dept_name</h2><div class=\"dept-info d-sm-flex flex-sm-row flex-sm-nowrap\">";
+
+                    if ($dept_tel != "") {
+                        $items .= "<p><i class=\"fas fa-phone\"></i>$tel_prefix $dept_tel</p>";
+                    }
+
+                    if ($dept_email != ""){
+                        $items .="<p><i class=\"fas fa-envelope\"></i><a href=\"mailto:$dept_email\" class=\"no-decoration default\">$dept_email</a></p>";
+                    }
+
+                    if ($dept_url != ""){
+                        $items .= "<p><i class=\"fas fa-file-alt\"></i><a href=\"$site_url$dept_url\" class=\"no-decoration default\">Department Page</a></p>";
+                    }
+
+                    $items .="</div>";
                 }
 
                 $items .= "<li><div class=\"staff-pic\"><a href=\"$link_to_details\">";
