@@ -11,8 +11,6 @@ use SubjectsPlus\Control\Querier;
 $page_title = "Library Staff";
 $description = "Library contact list.";
 $keywords = "staff list, librarians, contacts";
-$legend = "Click on a name for more information.";
-
 
 $intro = "";
 $dept_intro = '<ul class="list-unstyled dept-intro">
@@ -81,6 +79,57 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
    </li>  
 </ul>';
 
+$dept_select = "<select id=\"select_dept\">
+  <option></option>
+  <optgroup label=\"Office of the Dean and University Librarian\">
+      <option value=\"#101\" data-external=\"\">Office of the Dean and University Librarian</option>
+      <option value=\"#141\" data-external=\"\">Creative Services</option>
+      <option value=\"#102\" data-external=\"\">Financial Administration</option>
+      <option value=\"#124\" data-external=\"\">Human Resources</option>
+  </optgroup>
+
+  <optgroup label=\"Collection Strategies and Scholarly Communication\">
+    <option value=\"#122\" data-external=\"\">Collection Strategies and Scholarly Communication</option>
+    <option value=\"#100\" data-external=\"\">Acquisitions</option>
+    <option value=\"#128\" data-external=\"\">Preservation / Conservation</option>
+  </optgroup>
+
+  <optgroup label=\"Digital Strategies\">
+    <option value=\"#130\" data-external=\"\">Digital Strategies</option>
+    <option value=\"#110\" data-external=\"\">Digital Production</option>
+  </optgroup>
+
+  <optgroup label=\"Health Science Services\">
+    <option value=\"http://calder.med.miami.edu/\" data-external=\"http://calder.med.miami.edu\">Louis Calder Memorial Library</option>
+  </optgroup>
+
+  <optgroup label=\"Information Systems &amp; Access\">
+    <option value=\"#126\" data-external=\"\">Information Systems &amp; Access</option>
+    <option value=\"#99\" data-external=\"\">Access Services</option>
+    <option value=\"#132\" data-external=\"\">Facilities</option>
+    <option value=\"#113\" data-external=\"\">Inter-Library Loan & Course Reserves</option>
+    <option value=\"#106\" data-external=\"\">Metadata & Discovery Services</option>
+    <option value=\"#143\" data-external=\"\">Systems Administration</option>
+    <option value=\"#129\" data-external=\"\">Systems Support</option>
+    <option value=\"#140\" data-external=\"\">Web & Application Development</option>
+  </optgroup>
+
+  <optgroup label=\"Learning & Research Services\">
+    <option value=\"#125\" data-external=\"\">Learning & Research Services</option>
+    <option value=\"#107\" data-external=\"\">Digital Media Lab</option>
+    <option value=\"#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>
+    <option value=\"#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>
+    <option value=\"#117\" data-external=\"\">Paul Buisson Architecture Library</option>
+    <option value=\"#119\" data-external=\"\">Rosenstiel School of Marine Science & Atmospheric Science Library</option>
+  </optgroup>
+
+  <optgroup label=\"Collections\">
+    <option value=\"#109\" data-external=\"\">Cuban Heritage Collection</option>
+    <option value=\"#104\" data-external=\"\">Special Collections</option>
+    <option value=\"#133\" data-external=\"\">University Archives</option>    
+  </optgroup>
+</select>";
+
 // views set in StaffDisplay.php
 $our_cats = array("Departments","Subject Librarians");
 
@@ -127,41 +176,58 @@ include("includes/header_um-new.php");
 <section class="section section-half-top">
     <div class="container">
         <?php print $alphabet; ?>
-        <div class="row">
-            <div class="col-lg-8 order-last order-lg-first">
-                <?php print $display;  ?>
-            </div>
-            <div class="col-lg-4 order-first order-lg-last">
-                <div class="feature popular-list">
-                    <?php print $dept_intro;  ?>
+
+        <?php
+        if ($selected_letter == "Departments") { ?>
+            <div class="row">
+                <div class="col-lg-8 order-last order-lg-first">
+                    <?php print $display;  ?>
+                </div>
+                <div class="col-lg-4 order-first order-lg-last">
+                    <div class="d-lg-none text-center">
+                        <link href="<?php print $AssetPath;  ?>js/select2/select2.css" rel="stylesheet"/>
+                        <script src="<?php print $AssetPath;  ?>js/select2/select2.js"></script>
+                        <?php print $dept_select;  ?>
+                    </div>
+                    <div class="feature popular-list d-none d-lg-inline-block">
+                        <?php print $dept_intro;  ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php
+            } else {
+            print $display;
+        }
+        ?>
 
     </div>
 </section>
 
+<script>
+    $( function(){
+        // Select2 for Departments
+        $('#select_dept').select2({
+            width: "80%",
+            containerCssClass: "tabs-select",
+            dropdownCssClass: "tabs-select-dropdown",
+            placeholder: "Select a department"
+        });
 
-<?php
-//if ($selected_letter == "By Department") {
- //   print $dept_intro;
-//}
+        $("#select_dept").change(function() {
 
-//if ($selected_letter == "A-Z") {
- //   $intro = "";
-//}
+            // open external link on tab-select
+            var option_external_link = $(this).find('option:selected').attr('data-external');
 
-?>
-
-<script type="text/javascript">
-
-    //Clear filter A-Z
-    $('.clear-filter').click(function (e) {
-        e.preventDefault();
-        $('.filter-status').val('');
-        $('.footable').trigger('footable_clear_filter');
+            if (option_external_link != "") {
+                window.open(option_external_link, '_blank');
+            }
+            else {
+                var dept_anchor = $(this).find('option:selected').val();
+                console.log(dept_anchor);
+                location = dept_anchor;
+            }
+        });
     });
-
 </script>
 
 <?php
