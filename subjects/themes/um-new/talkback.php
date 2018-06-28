@@ -22,7 +22,7 @@ $db = new Querier;
 
 /* Set local variables */
 $page_title = _("Comments");
-$page_description = _("Share your comments and suggestions about the library");
+$page_description = _("Please use this page to make a comment or suggestion about library services. We will post your suggestion as well as a response.");
 $page_keywords = _("library, comments, suggestions, complaints");
 
 // Skill testing question + answer
@@ -529,28 +529,30 @@ include("includes/header_um-new.php");
     }
 </script>
 
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0"><?php print $page_description; ?></p>
 
-    <div class="panel-container">
-        <div class="pure-g">
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon" ></div>
+        </div>
+    </div>
+</div>
 
-            <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
-                <div class="breather">
-                    <?php print $feedback . $stk_message; ?>
+<section class="section">
+    <div class="container">
+        <?php print $feedback . $stk_message; ?>
 
-                    <?php print _("<p>Please use this page <strong>make a comment or suggestion</strong> about library services.</p>
- 
-        <p>We will post your suggestion as well as a response.</p>
-
-        <p class=\"response-link\"><a href=\"#tellus\">Submit your response</a></p>"); ?>
-
-                    <div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
-                    <?php print $comment_header . $results; ?>
-
-                </div>
-            </div> <!--end 3/4 main area column-->
-
-            <div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
-                <div class="tip">
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
+                <?php print $comment_header . $results; ?>
+            </div>
+            <div class="col-lg-5">
+                <div class="feature p-3">
                     <h2>Need help <strong>now</strong>? <br /><a href="/ask-a-librarian/">Ask a Librarian</a>.</h2>
                     <?php if (isset($stage_two)) {
                         print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
@@ -574,15 +576,11 @@ include("includes/header_um-new.php");
                             </div>
                         </form>
                     <?php  } ?>
-                    <p>
                 </div>
-                <div class="tipend"> </div>
-
-            </div><!--end 1/4 sidebar column-->
-
-        </div> <!--end pure-g-->
-    </div> <!--end panel-container-->
-
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php
 // Load footer file
