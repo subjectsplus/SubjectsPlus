@@ -134,11 +134,11 @@ class StaffDisplay {
 
             foreach ($r as $myrow) {
 
-                $items .= "<li><div class=\"staff-info d-flex flex-row flex-nowrap\">";
+                $items .= "<li class=\"d-lg-flex flex-lg-row flex-lg-nowrap\"><div class=\"staff-info d-flex flex-row flex-nowrap\">";
 
                 $items .= showStaff($myrow[4], '', '', 1);
 
-                $items .= "</div><div class=\"staff-subjects\">";
+                $items .= "</div><div class=\"staff-subjects\"><p><strong>Subject Responsibilities:</strong></p>";
 
                 $sub_query = "select subject, shortform from subject, staff_subject
                     WHERE subject.subject_id = staff_subject.subject_id

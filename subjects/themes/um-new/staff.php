@@ -23,29 +23,33 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
     </div>
   </li>
   
-  <li><a href="#122" class="dept-heading">Collection Strategies and Scholarly Communication</a></li>
+  <li><a href="#122" class="dept-heading">Collection Strategies Division</a></li>
   <li>
     <div class="dept-sub">
         <a href="#100">Acquisitions</a>
         <a href="#128">Preservation / Conservation</a>
+        <a href="#109">Cuban Heritage Collection</a>
+        <a href="#104">Special Collections</a>
+        <a href="#133">University Archives</a>
     </div>    
   </li>
   
-  <li><a href="#130" class="dept-heading">Digital Strategies</a></li>
+  <li><a href="#130" class="dept-heading">Digital Strategies Division</a></li>
   <li>
     <div class="dept-sub">
-      <a href="#110">Digital Production</a>  
+        <a href="#">Digital Scholarship</a>  
+      <a href="#110">Digital Production Lab</a>  
     </div>
   </li>
   
-  <li class="dept-heading">Health Science Services</li>
+  <li class="dept-heading">Health Sciences Division</li>
   <li>
     <div class="dept-sub">
         <a href="http://calder.med.miami.edu/">Louis Calder Memorial Library</a>
     </div>
   </li>
   
-  <li><a href="#126" class="dept-heading">Information Systems &amp; Access</a></li>
+  <li><a href="#126" class="dept-heading">Information Systems, Access &amp; Facilities Division</a></li>
   <li>
     <div class="dept-sub">
         <a href="#99">Access Services</a>
@@ -58,25 +62,17 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
     </div>
   </li>
   
-   <li><a href="#125" class="dept-heading">Learning & Research Services</a></li>
+   <li class="dept-heading">Learning & Research Services Division</li>
    <li>
     <div class="dept-sub">
         <a href="#107">Digital Media Lab</a>
         <a href="#105">Judi Prokop Newman Business Information Resource Center</a>
+        <a href="#125">Learning & Research Services Division</a>
         <a href="#103">Marta and Austin Weeks Music Library & Technology Center</a>
         <a href="#117">Paul Buisson Architecture Library</a>
         <a href="#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
     </div>
-   </li>
-   
-   <li class="dept-heading">Collections</li>
-   <li>
-    <div class="dept-sub">
-        <a href="#109">Cuban Heritage Collection</a>
-        <a href="#104">Special Collections</a>
-        <a href="#133">University Archives</a>
-    </div>
-   </li>  
+   </li>   
 </ul>';
 
 $dept_select = "<select id=\"select_dept\">
@@ -88,23 +84,27 @@ $dept_select = "<select id=\"select_dept\">
       <option value=\"#124\" data-external=\"\">Human Resources</option>
   </optgroup>
 
-  <optgroup label=\"Collection Strategies and Scholarly Communication\">
-    <option value=\"#122\" data-external=\"\">Collection Strategies and Scholarly Communication</option>
+  <optgroup label=\"Collection Strategies Division\">
+    <option value=\"#122\" data-external=\"\">Collection Strategies</option>
     <option value=\"#100\" data-external=\"\">Acquisitions</option>
     <option value=\"#128\" data-external=\"\">Preservation / Conservation</option>
+    <option value=\"#109\" data-external=\"\">Cuban Heritage Collection</option>
+    <option value=\"#104\" data-external=\"\">Special Collections</option>
+    <option value=\"#133\" data-external=\"\">University Archives</option> 
   </optgroup>
 
-  <optgroup label=\"Digital Strategies\">
-    <option value=\"#130\" data-external=\"\">Digital Strategies</option>
-    <option value=\"#110\" data-external=\"\">Digital Production</option>
+  <optgroup label=\"Digital Strategies Division\">
+    <option value=\"#110\" data-external=\"\">Digital Production Lab</option>
+    <option value=\"#\" data-external=\"\">Digital Scholarship</option>
+    <option value=\"#130\" data-external=\"\">Digital Strategies</option>    
   </optgroup>
 
-  <optgroup label=\"Health Science Services\">
+  <optgroup label=\"Health Sciences Division\">
     <option value=\"http://calder.med.miami.edu/\" data-external=\"http://calder.med.miami.edu\">Louis Calder Memorial Library</option>
   </optgroup>
 
-  <optgroup label=\"Information Systems &amp; Access\">
-    <option value=\"#126\" data-external=\"\">Information Systems &amp; Access</option>
+  <optgroup label=\"Information Systems, Access &amp; Facilities Division\">
+    <option value=\"#126\" data-external=\"\">Information Systems, Access &amp; Facilities</option>
     <option value=\"#99\" data-external=\"\">Access Services</option>
     <option value=\"#132\" data-external=\"\">Facilities</option>
     <option value=\"#113\" data-external=\"\">Inter-Library Loan & Course Reserves</option>
@@ -114,19 +114,13 @@ $dept_select = "<select id=\"select_dept\">
     <option value=\"#140\" data-external=\"\">Web & Application Development</option>
   </optgroup>
 
-  <optgroup label=\"Learning & Research Services\">
-    <option value=\"#125\" data-external=\"\">Learning & Research Services</option>
+  <optgroup label=\"Learning & Research Services Division\">    
     <option value=\"#107\" data-external=\"\">Digital Media Lab</option>
     <option value=\"#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>
+    <option value=\"#125\" data-external=\"\">Learning & Research Services</option>
     <option value=\"#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>
     <option value=\"#117\" data-external=\"\">Paul Buisson Architecture Library</option>
     <option value=\"#119\" data-external=\"\">Rosenstiel School of Marine Science & Atmospheric Science Library</option>
-  </optgroup>
-
-  <optgroup label=\"Collections\">
-    <option value=\"#109\" data-external=\"\">Cuban Heritage Collection</option>
-    <option value=\"#104\" data-external=\"\">Special Collections</option>
-    <option value=\"#133\" data-external=\"\">University Archives</option>    
   </optgroup>
 </select>";
 
