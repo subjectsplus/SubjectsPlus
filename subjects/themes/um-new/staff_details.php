@@ -51,29 +51,32 @@ $tel = $tel_prefix . $staffmem[0][4];
 
 $fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
-$info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"
-title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"  align=\"left\" class=\"staff_photo_large\" />
-<p style=\"margin-top; 0; padding-top: 0;\"><strong>$fullname</strong><br />
-{$staffmem[0][3]}<br />
-<img src=\"../../assets/images/icons/email.gif\" style=\"vertical-align: middle;\" />  <a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a><br />
-<img src=\"../../assets/images/icons/telephone.gif\" style=\"vertical-align: middle;\" />  $tel";
-
-
-$info .= "</p>";
+$info = "<div class=\"staff-profile d-sm-flex flex-sm-row flex-sm-wrap\">
+    <div class=\"staff_photo\">
+        <img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"
+title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\" />
+    </div>
+    <div class=\"staff-meta\">
+        <h2>$fullname</h2>
+        <p><em>{$staffmem[0][3]}</em></p>
+        <p><a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a></p>
+        <p>$tel</p>
+    </div>";
 
 if ($staffmem[0][7] != "") {
-    $info .= "<br class=\"clear-both\" /><br />" . $staffmem[0][7];
+    $info .= "<div class=\"staff-bio\">" . $staffmem[0][7] . "</div>";
 }
 
+$info .= "</div>";
 
 // If it's a ref librarian, show their subjects
 $subject_listing = ""; // init in case they don't have subs
 $li_subject_listing = "";
 
+
+// Get a list of subjects for this person
 if ($staffmem[0][8] != "") {
 
-    // Get a list of subjects for this person
-    // Maybe you could make a better query above to include this info
     $statement = $connection->prepare("SELECT s.subject_id, subject, shortform
                                         FROM staff_subject ss, subject s
                                         WHERE ss.subject_id = s.subject_id
@@ -90,11 +93,8 @@ if ($staffmem[0][8] != "") {
     $per_row = ceil($total_rows / 2);
 
     $row_count = 0;
-    $colour1 = "odd";
-    $colour2 = "even";
 
-    $subject_listing = "<p class=\"clear-both\"><br /><strong>Subject Liaison for . . . </strong></p>
-<div style=\"float: left; width: 47%\">";
+    $subject_listing = "<p><strong>Subject Liaison for . . . </strong></p>";
 
     foreach ($r as $mysubs) {
 
@@ -103,17 +103,10 @@ if ($staffmem[0][8] != "") {
         // li subject listing
         $li_subject_listing .= "<li><a href=\"$linky\">$mysubs[1]</a></li>";
 
-        // two col listing
-        if ($row_count == $per_row) {
-            $subject_listing .= "</div><div style=\"float: left; width: 47%\">";
-        }
-
         $subject_listing .= "<a href=\"$linky\">{$mysubs[1]}</a><br /> ";
 
         $row_count++;
     }
-
-    $subject_listing .= "</div><br />";
 }
 
 // Assemble the content for our main pluslet
@@ -127,6 +120,7 @@ include("includes/header_um-new.php");
 
 <div class="feature section">
     <div class="container text-center minimal-header">
+        <h5 class="mt-3 mt-lg-0 mb-1"><a href="staff.php" class="no-decoration default">Staff List</a></h5>
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
         <p class="mb-0">&nbsp;</p>
@@ -140,14 +134,21 @@ include("includes/header_um-new.php");
 
 <section class="section">
     <div class="container">
-        <?php print $display; ?>
-
-        <?php if ($li_subject_listing != "") { ?>
-            <h2>Subject Areas</h2>
-            <ul>
-                <?php print $li_subject_listing; ?>
-            </ul>
-        <?php } ?>
+        <div class="row">
+            <div class="col-lg-8">
+                <?php print $display; ?>
+            </div>
+            <div class="col-lg-4">
+                <?php if ($li_subject_listing != "") { ?>
+                    <div class="feature popular-list">
+                    <h4>- Subject Areas -</h4>
+                    <ul>
+                        <?php print $li_subject_listing; ?>
+                    </ul>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 </section>
 
