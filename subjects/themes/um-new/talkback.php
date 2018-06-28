@@ -95,7 +95,7 @@ if (isset($all_cattags)) {
         } else {
             $tag_class = "";
         }
-        $cat_filters .= " <a href=\"talkback.php?v=$set_filter&c=$value\" class=\"$tag_class\">$value</a>";
+        $cat_filters .= "<li><a href=\"talkback.php?v=$set_filter&c=$value\" class=\"pill $tag_class\">$value</a></li>";
     }
 }
 
@@ -113,7 +113,7 @@ $feedback = "";
 
 $submission_feedback = "
 <div class=\"talkback-message talkback-success\">\n
-<h2>" . _("Thanks") . "</h2>\n
+<h4>" . _("Thanks") . "</h4>\n
 <div class=\"talkback-message-body\">\n
 <p>" . _("Thank you for your feedback.  We will try to post a response within the next three business days.") . "</p>\n
 </div>\n
@@ -122,7 +122,7 @@ $submission_feedback = "
 
 $submission_failure_feedback = "
 <div class=\"talkback-message talkback-error\">\n
-<h2>" . _("Oh dear.") . "</h2>\n
+<h4>" . _("Oh dear.") . "</h4>\n
 <div class=\"talkback-message-body\">\n
 <p>" . _("There was a problem with your submission.  Please try again.") . "</p>
 <p>" . _("If you continue to get an error, please contact the <a href=\"mailto:$administrator_email\">administrator</a>") . "
@@ -413,7 +413,7 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 
     $our_result = $statement->fetchAll();
 
-    $comment_header = "<h2>" . _("Comments from Previous Years") . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\">" . _("See this year") . "</a></span></h2>";
+    $comment_header = "<h2>" . _("Comments from Previous Years") . "</h2><div class=\"year-switch\"><a href=\"talkback.php?v=$set_filter\">" . _("(See this year)") . "</a></div>";
 
 } else {
     // New ones //
@@ -449,7 +449,7 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 
 
 
-    $comment_header = "<h2>" . _("Comments from ") . "$this_year <span style=\"font-size: 11px; font-weight: normal;\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _("See previous years") . "</a></span></h2>";
+    $comment_header = "<h2>" . _("Comments from ") . "$this_year</h2><div class=\"year-switch\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _("(See previous years)") . "</a></div>";
 
 }
 
@@ -542,15 +542,21 @@ include("includes/header_um-new.php");
     </div>
 </div>
 
-<section class="section">
+<section class="section talkback">
     <div class="container">
         <?php print $feedback . $stk_message; ?>
 
         <div class="row">
             <div class="col-lg-7">
-                <div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
+                <div class="pills-container">
+                    <ul class="list-unstyled d-flex flex-row flex-wrap justify-content-around justify-content-md-start">
+                        <?php print $cat_filters; ?>
+                    </ul>
+                </div>
+
                 <?php print $comment_header . $results; ?>
             </div>
+
             <div class="col-lg-5">
                 <div class="feature p-3">
                     <h2>Need help <strong>now</strong>? <br /><a href="/ask-a-librarian/">Ask a Librarian</a>.</h2>
@@ -579,6 +585,7 @@ include("includes/header_um-new.php");
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -587,7 +594,6 @@ include("includes/header_um-new.php");
 include("includes/footer_um-new.php");
 
 // Blacklister Function
-/////////////////////
 
 function BlackLister($checkstring) {
     $blacklist_terms = "viagra|cialis|footballjerseys";
