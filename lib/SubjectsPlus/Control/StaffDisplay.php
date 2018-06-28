@@ -138,7 +138,7 @@ class StaffDisplay {
 
                 $items .= showStaff($myrow[4], '', '', 1);
 
-                $items .= "</div><div class=\"staff-subjects\"><p><strong>Subject Responsibilities:</strong></p>";
+                $items .= "</div><div class=\"staff-subjects\"><p><strong>Subjects</strong></p>";
 
                 $sub_query = "select subject, shortform from subject, staff_subject
                     WHERE subject.subject_id = staff_subject.subject_id

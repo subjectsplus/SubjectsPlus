@@ -37,8 +37,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li><a href="#130" class="dept-heading">Digital Strategies Division</a></li>
   <li>
     <div class="dept-sub">
-        <a href="#">Digital Scholarship</a>  
-      <a href="#110">Digital Production Lab</a>  
+      <a href="#110">Digital Production</a>  
     </div>
   </li>
   
@@ -67,7 +66,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
     <div class="dept-sub">
         <a href="#107">Digital Media Lab</a>
         <a href="#105">Judi Prokop Newman Business Information Resource Center</a>
-        <a href="#125">Learning & Research Services Division</a>
+        <a href="#125">Learning & Research Services</a>
         <a href="#103">Marta and Austin Weeks Music Library & Technology Center</a>
         <a href="#117">Paul Buisson Architecture Library</a>
         <a href="#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
@@ -94,8 +93,7 @@ $dept_select = "<select id=\"select_dept\">
   </optgroup>
 
   <optgroup label=\"Digital Strategies Division\">
-    <option value=\"#110\" data-external=\"\">Digital Production Lab</option>
-    <option value=\"#\" data-external=\"\">Digital Scholarship</option>
+    <option value=\"#110\" data-external=\"\">Digital Production</option>
     <option value=\"#130\" data-external=\"\">Digital Strategies</option>    
   </optgroup>
 
