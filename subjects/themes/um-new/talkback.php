@@ -478,16 +478,18 @@ if ($result_count != 0) {
         $lib_page = "staff_details.php?name=" . $name_id[0];
 
         $results .= "
-		<div class=\"tellus_item oddrow\">\n
-		<a name=\"$talkback_id\"></a>\n
-		<p class=\"tellus_comment\"><span class=\"comment_num\">$row_count</span> <strong>$question</strong><br />
-		<span style=\"clear: both;font-size: 11px;\">Comment from $myrow[2] on <em>$myrow[4]</em></span></p><br />\n
-		<p>";
+		<div class=\"tellus_item\">
+		<a name=\"$talkback_id\"></a>
+		<p class=\"tellus_comment\"><span class=\"comment_num\" style=\"background-image: url('$AssetPath";
+        $results .= "images/comment_box.png');\">$row_count</span>$question</p>
+		<p class=\"comment-meta\">Comment from $myrow[2] on $myrow[4]</p>
+		<div class=\"answer\">$answer</div><div class=\"responder d-flex flex-row flex-nowrap\">";
+
         if ($show_talkback_face == 1) {
             $results .= getHeadshot($myrow[9]);
         }
-        $results .= $answer;
-        $results .= "<p style=\"clear: both;font-size: 11px;\">Answered by <a href=\"$lib_page\">$myrow[7] $myrow[8]</a>, $myrow[10]</p></div>\n";
+
+        $results .= "<p>Answered by <a href=\"$lib_page\">$myrow[7] $myrow[8]</a>, $myrow[10]</p></div></div>";
 
         // Add 1 to the row count, for the "even/odd" row striping
 
@@ -547,7 +549,7 @@ include("includes/header_um-new.php");
         <?php print $feedback . $stk_message; ?>
 
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-8">
                 <div class="pills-container">
                     <ul class="list-unstyled d-flex flex-row flex-wrap justify-content-around justify-content-md-start">
                         <?php print $cat_filters; ?>
@@ -557,20 +559,22 @@ include("includes/header_um-new.php");
                 <?php print $comment_header . $results; ?>
             </div>
 
-            <div class="col-lg-5">
-                <div class="feature p-3">
-                    <h2>Need help <strong>now</strong>? <br /><a href="/ask-a-librarian/">Ask a Librarian</a>.</h2>
+            <div class="col-lg-4">
+                <div class="feature popular-list">
+                    <h3>- Need help now? -</h3>
+                    <h5><a href="https://new.library.miami.edu/research/ask-a-librarian.html">Ask a Librarian</a></h5>
+                    <hr>
                     <?php if (isset($stage_two)) {
                         print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
                     } else {  ?>
 
-                        <form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
+                        <form id="tellus" action="<?php print $form_action; ?>" method="post">
                             <div class="talkback_form <?php print $tb_bonus_css; ?>">
                                 <p>
                                     <strong><?php print _("Your comment:"); ?></strong><br />
-                                    <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
+                                    <textarea name="the_suggestion"><?php print $this_comment; ?></textarea><br /><br />
                                     <strong><?php print _("Your email (optional):"); ?></strong><br />
-                                    <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
+                                    <input type="text" name="name" value="<?php print $this_name; ?>" class="form-item" />
                                     <br />
                                     <?php print _("(In case we need to contact you)"); ?>
                                     <br /><br />
