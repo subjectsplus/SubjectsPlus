@@ -562,27 +562,28 @@ include("includes/header_um-new.php");
             <div class="col-lg-4">
                 <div class="feature popular-list">
                     <h3>- Need help now? -</h3>
-                    <h5><a href="https://new.library.miami.edu/research/ask-a-librarian.html">Ask a Librarian</a></h5>
+                    <a href="https://new.library.miami.edu/research/ask-a-librarian.html" class="btn btn-default">Ask a Librarian</a>
                     <hr>
                     <?php if (isset($stage_two)) {
                         print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
                     } else {  ?>
 
                         <form id="tellus" action="<?php print $form_action; ?>" method="post">
-                            <div class="talkback_form <?php print $tb_bonus_css; ?>">
-                                <p>
-                                    <strong><?php print _("Your comment:"); ?></strong><br />
-                                    <textarea name="the_suggestion"><?php print $this_comment; ?></textarea><br /><br />
-                                    <strong><?php print _("Your email (optional):"); ?></strong><br />
-                                    <input type="text" name="name" value="<?php print $this_name; ?>" class="form-item" />
-                                    <br />
-                                    <?php print _("(In case we need to contact you)"); ?>
-                                    <br /><br />
-                                    <button name="submit_comment" class="pure-button pure-button-topsearch g-recaptcha"
-                                            data-sitekey="6Lc3ODIUAAAAAAHj43kximcqolHy8awBeQZL58Um"
-                                            data-callback="onSubmit"
-                                            data-size="invisible">submit</button>
-                                </p>
+                            <div class="<?php print $tb_bonus_css; ?>">
+                                <div class="form-group">
+                                    <label for="the_suggestion"><?php print _("Your comment:"); ?></label>
+                                    <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3">
+                                    <?php print $this_comment; ?></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="suggestion_email"><?php print _("Your email (optional):"); ?></label>
+                                    <input type="email" class="form-control" id="suggestion_email" value="<?php print $this_name; ?>" />
+                                    <p><?php print _("(In case we need to contact you)"); ?></p>
+                                </div>
+                                <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
+                                        data-sitekey="6Lc3ODIUAAAAAAHj43kximcqolHy8awBeQZL58Um"
+                                        data-callback="onSubmit"
+                                        data-size="invisible">Submit</button>
                             </div>
                         </form>
                     <?php  } ?>
