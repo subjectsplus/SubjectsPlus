@@ -377,7 +377,35 @@ $(function() {
 
 });
 
-<?php } ?>
+<?php
+if (isset ($header_type) && $header_type == 'um-new') { ?>
+
+    // Select2 for Guide Tabs
+    $('#select_tabs').select2({
+        width: "80%",
+        containerCssClass: "tabs-select",
+        dropdownCssClass: "tabs-select-dropdown",
+        placeholder: "In this guide..."
+    });
+
+    $("#select_tabs").change(function() {
+
+        // open external link on tab-select
+        var option_external_link = $(this).find('option:selected').attr('data-external-link');
+        console.log(option_external_link);
+        if (option_external_link != "") {
+            window.open(option_external_link, '_blank');
+        } else {
+            var option_tab_link = $(this).find('option:selected').val();
+            console.log(option_tab_link);
+            var trim = option_tab_link.substr(6);
+            console.log(trim);
+            $("#tabs").tabs("option", "active", trim);
+        }
+    });
+
+<?php   }
+} ?>
 </script>
 
 

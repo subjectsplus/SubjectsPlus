@@ -373,7 +373,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _("Click for more informat
                     <?php print $guide_experts; ?>
                 </ul>
 
-                <div class="text-center mt-3 mb-3 mb-lg-5"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians A-Z" class="btn btn-default" role="button"><?php print $button_text; ?></a></div>
+                <div class="text-center mt-3 mb-3 mb-lg-5"><a href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians" class="btn btn-default" role="button"><?php print $button_text; ?></a></div>
 
                 <div class="feature popular-list p-3 mt-3">
                     <h4><?php print _("- New Databases -"); ?></h4>

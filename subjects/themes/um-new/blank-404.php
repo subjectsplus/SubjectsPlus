@@ -1,11 +1,10 @@
 <?php
-
-$page_title = "Page Not Found";
+$page_title = "Page Not Found (404)";
 $description = "404 Page Not Found";
 $keywords = "404, missing page";
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
+include("../../../control/includes/config.php");
+include("../../../control/includes/functions.php");
 
 //header
 include("includes/header_um-new.php");
@@ -80,5 +79,5 @@ include("includes/header_um-new.php");
 </section>
 
 <?php
-// Footer
+// Load footer file
 include("includes/footer_um-new.php"); ?>
