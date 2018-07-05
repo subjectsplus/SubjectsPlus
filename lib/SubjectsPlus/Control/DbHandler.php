@@ -399,11 +399,12 @@ ORDER BY newtitle
 			}
 
 			$bonus = "$blurb<br />";
+			$favorite_link_rand_id = time() . rand();
 
 			if ($blurb != "") {
-				$information1 = "<span class=\"fas fa-heart uml-quick-links favorite-item-icon inactive-favorite\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
+				$information1 = "<span class=\"fas fa-heart uml-quick-links favorite-item-icon inactive-favorite\" data-favorite-link-rand-id=\"$favorite_link_rand_id\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
 				// This is new details link; you can use the one above if you prefer
-				$information = "<span class=\"fas fa-heart uml-quick-links favorite-item-icon inactive-favorite\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "about" ) . "\"></i></span>";
+				$information = "<span class=\"fas fa-heart uml-quick-links favorite-item-icon inactive-favorite\" data-favorite-link-rand-id=\"$favorite_link_rand_id\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa-info-circle\" title=\"" . _ ( "about" ) . "\"></i></span>";
 			} else {
 				$information = "";
 				$information1 = "";
@@ -412,7 +413,7 @@ ORDER BY newtitle
 			$target = targetBlanker ();
 
 
-          $items .= self::generateLayout ( $row_colour, $url, $target, $item_title, $information, $information1, $icons, $helpguide, $display_note_text, $bonus );
+          $items .= self::generateLayout ( $row_colour, $url, $target, $item_title, $information, $information1, $icons, $helpguide, $display_note_text, $bonus, $favorite_link_rand_id);
 
 
 
@@ -422,7 +423,7 @@ ORDER BY newtitle
 		$items .= "</table>";
 		return $items;
 	}
-	function generateLayout($row_colour, $url, $target, $item_title, $information, $information1, $icons, $helpguide, $display_note_text, $bonus) {
+	function generateLayout($row_colour, $url, $target, $item_title, $information, $information1, $icons, $helpguide, $display_note_text, $bonus, $favorite_link_rand_id) {
 		$onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
       <td><a href=\"$url\" $target>$item_title</a> $information <span class=\"db_icons\">$icons</span> $helpguide $display_note_text
         <div class=\"list_bonus\">$icons $bonus</div>
@@ -430,7 +431,7 @@ ORDER BY newtitle
     </tr>";
 		$onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
       <td width=\"70px\">$information1</td>
-      <td><a href=\"$url\" $target class=\"no-decoration default\">$item_title</a>  $helpguide $display_note_text
+      <td><a href=\"$url\" $target data-favorite-link-rand-id=\"$favorite_link_rand_id\" class=\"no-decoration default \">$item_title</a>  $helpguide $display_note_text
         <div class=\"list_bonus\"><span class=\"db_icons\">$icons</span> $bonus</div>
       </td>
     </tr>";
