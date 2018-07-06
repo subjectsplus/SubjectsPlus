@@ -166,13 +166,14 @@ include("includes/header_um-new.php");
 </section>
 
 <section class="section section-half-top">
+    <input id="jekyll-category" value="sp-staff" type="hidden">
     <div class="container">
         <?php print $alphabet; ?>
 
         <?php
         if ($selected_letter == "Departments") { ?>
             <div class="row">
-                <div class="col-lg-8 order-last order-lg-first">
+                <div class="col-lg-8 order-last order-lg-first  ">
                     <?php print $display;  ?>
                 </div>
                 <div class="col-lg-4 order-first order-lg-last">
