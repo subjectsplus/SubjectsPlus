@@ -24,18 +24,29 @@ class StaffDisplay {
 
     switch ($qualifier) {
         case "Departments":
+        	$items = "";
+			$search_term = isset($_GET["search_term"]) ? scrubData($_GET["search_term"]) : "";
+
             $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, d.email, d.url, s.staff_id, s.ptags
         FROM staff s, staff_department sd, department d
         WHERE s.staff_id = sd.staff_id
         AND sd.department_id = d.department_id
         AND user_type_id = '1'
         AND active =1
+        AND (lname LIKE :search_term OR fname LIKE :search_term OR title LIKE :search_term OR name LIKE :search_term OR CONCAT(fname, ' ', lname) LIKE :search_term)
         ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
             $db = new Querier;
-            $r = $db->query($q);
 
-            $items = "<ul class=\"list-unstyled d-md-flex flex-md-row flex-md-wrap staff-departments\">";
+			$query_params = [':search_term'=>'%'.$search_term.'%'];
+
+            $r = $db->queryWithPreparedStatement($q, NULL, $query_params);
+
+			if (!empty($search_term)){
+				$items .= "<div class=\"feature-light p-3 mb-3\"><p class=\"mb-0\">Search results for <strong><em>$search_term</em></strong></p></div>";
+			}
+
+            $items .= "<ul class=\"list-unstyled d-md-flex flex-md-row flex-md-wrap staff-departments\">";
             $current_dept = "";
 
             foreach ($r as $myrow) {

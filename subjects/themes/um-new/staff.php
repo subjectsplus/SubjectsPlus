@@ -8,36 +8,39 @@ use SubjectsPlus\Control\StaffDisplay;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 
+global $PublicPath;
+$staff_page_url = $PublicPath . 'staff.php';
+
 $page_title = "Library Staff";
 $description = "Library contact list.";
 $keywords = "staff list, librarians, contacts";
 
 $intro = "";
 $dept_intro = '<ul class="list-unstyled dept-intro">
-  <li><a href="#101" class="dept-heading">Office of the Dean and University Librarian</a></li>
+  <li><a href="'.$staff_page_url.'#101" class="dept-heading">Office of the Dean and University Librarian</a></li>
   <li>
     <div class="dept-sub">
-      <a href="#141">Creative Services</a>
-      <a href="#102">Financial Administration</a>
-      <a href="#124">Human Resources</a>
+      <a href="'.$staff_page_url.'#141">Creative Services</a>
+      <a href="'.$staff_page_url.'#102">Financial Administration</a>
+      <a href="'.$staff_page_url.'#124">Human Resources</a>
     </div>
   </li>
   
-  <li><a href="#122" class="dept-heading">Collection Strategies Division</a></li>
+  <li><a href="'.$staff_page_url.'#122" class="dept-heading">Collection Strategies Division</a></li>
   <li>
     <div class="dept-sub">
-        <a href="#100">Acquisitions</a>
-        <a href="#128">Preservation / Conservation</a>
-        <a href="#109">Cuban Heritage Collection</a>
-        <a href="#104">Special Collections</a>
-        <a href="#133">University Archives</a>
+        <a href="'.$staff_page_url.'#100">Acquisitions</a>
+        <a href="'.$staff_page_url.'#128">Preservation / Conservation</a>
+        <a href="'.$staff_page_url.'#109">Cuban Heritage Collection</a>
+        <a href="'.$staff_page_url.'#104">Special Collections</a>
+        <a href="'.$staff_page_url.'#133">University Archives</a>
     </div>    
   </li>
   
-  <li><a href="#130" class="dept-heading">Digital Strategies Division</a></li>
+  <li><a href="'.$staff_page_url.'#130" class="dept-heading">Digital Strategies Division</a></li>
   <li>
     <div class="dept-sub">
-      <a href="#110">Digital Production</a>  
+      <a href="#'.$staff_page_url.'110">Digital Production</a>  
     </div>
   </li>
   
@@ -48,28 +51,28 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
     </div>
   </li>
   
-  <li><a href="#126" class="dept-heading">Information Systems, Access &amp; Facilities Division</a></li>
+  <li><a href="'.$staff_page_url.'#126" class="dept-heading">Information Systems, Access &amp; Facilities Division</a></li>
   <li>
     <div class="dept-sub">
-        <a href="#99">Access Services</a>
-        <a href="#132">Facilities</a>
-        <a href="#113">Inter-Library Loan & Course Reserves</a>
-        <a href="#106">Metadata & Discovery Services</a>
-        <a href="#143">Systems Administration</a>
-        <a href="#129">Systems Support</a>
-        <a href="#140">Web & Application Development</a>
+        <a href="'.$staff_page_url.'#99">Access Services</a>
+        <a href="'.$staff_page_url.'#132">Facilities</a>
+        <a href="'.$staff_page_url.'#113">Inter-Library Loan & Course Reserves</a>
+        <a href="'.$staff_page_url.'#106">Metadata & Discovery Services</a>
+        <a href="'.$staff_page_url.'#143">Systems Administration</a>
+        <a href="'.$staff_page_url.'#129">Systems Support</a>
+        <a href="'.$staff_page_url.'#140">Web & Application Development</a>
     </div>
   </li>
   
    <li class="dept-heading">Learning & Research Services Division</li>
    <li>
     <div class="dept-sub">
-        <a href="#107">Digital Media Lab</a>
-        <a href="#105">Judi Prokop Newman Business Information Resource Center</a>
-        <a href="#125">Learning & Research Services</a>
-        <a href="#103">Marta and Austin Weeks Music Library & Technology Center</a>
-        <a href="#117">Paul Buisson Architecture Library</a>
-        <a href="#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
+        <a href="'.$staff_page_url.'#107">Digital Media Lab</a>
+        <a href="'.$staff_page_url.'#105">Judi Prokop Newman Business Information Resource Center</a>
+        <a href="'.$staff_page_url.'#125">Learning & Research Services</a>
+        <a href="'.$staff_page_url.'#103">Marta and Austin Weeks Music Library & Technology Center</a>
+        <a href="'.$staff_page_url.'#117">Paul Buisson Architecture Library</a>
+        <a href="'.$staff_page_url.'#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
     </div>
    </li>   
 </ul>';
@@ -77,24 +80,24 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
 $dept_select = "<select id=\"select_dept\">
   <option></option>
   <optgroup label=\"Office of the Dean and University Librarian\">
-      <option value=\"#101\" data-external=\"\">Office of the Dean and University Librarian</option>
-      <option value=\"#141\" data-external=\"\">Creative Services</option>
-      <option value=\"#102\" data-external=\"\">Financial Administration</option>
-      <option value=\"#124\" data-external=\"\">Human Resources</option>
+      <option value=\"$staff_page_url#101\" data-external=\"\">Office of the Dean and University Librarian</option>
+      <option value=\"$staff_page_url#141\" data-external=\"\">Creative Services</option>
+      <option value=\"$staff_page_url#102\" data-external=\"\">Financial Administration</option>
+      <option value=\"$staff_page_url#124\" data-external=\"\">Human Resources</option>
   </optgroup>
 
   <optgroup label=\"Collection Strategies Division\">
-    <option value=\"#122\" data-external=\"\">Collection Strategies</option>
-    <option value=\"#100\" data-external=\"\">Acquisitions</option>
-    <option value=\"#128\" data-external=\"\">Preservation / Conservation</option>
-    <option value=\"#109\" data-external=\"\">Cuban Heritage Collection</option>
-    <option value=\"#104\" data-external=\"\">Special Collections</option>
-    <option value=\"#133\" data-external=\"\">University Archives</option> 
+    <option value=\"$staff_page_url#122\" data-external=\"\">Collection Strategies</option>
+    <option value=\"$staff_page_url#100\" data-external=\"\">Acquisitions</option>
+    <option value=\"$staff_page_url#128\" data-external=\"\">Preservation / Conservation</option>
+    <option value=\"$staff_page_url#109\" data-external=\"\">Cuban Heritage Collection</option>
+    <option value=\"$staff_page_url#104\" data-external=\"\">Special Collections</option>
+    <option value=\"$staff_page_url#133\" data-external=\"\">University Archives</option> 
   </optgroup>
 
   <optgroup label=\"Digital Strategies Division\">
-    <option value=\"#110\" data-external=\"\">Digital Production</option>
-    <option value=\"#130\" data-external=\"\">Digital Strategies</option>    
+    <option value=\"$staff_page_url#110\" data-external=\"\">Digital Production</option>
+    <option value=\"$staff_page_url#130\" data-external=\"\">Digital Strategies</option>    
   </optgroup>
 
   <optgroup label=\"Health Sciences Division\">
@@ -102,23 +105,23 @@ $dept_select = "<select id=\"select_dept\">
   </optgroup>
 
   <optgroup label=\"Information Systems, Access &amp; Facilities Division\">
-    <option value=\"#126\" data-external=\"\">Information Systems, Access &amp; Facilities</option>
-    <option value=\"#99\" data-external=\"\">Access Services</option>
-    <option value=\"#132\" data-external=\"\">Facilities</option>
-    <option value=\"#113\" data-external=\"\">Inter-Library Loan & Course Reserves</option>
-    <option value=\"#106\" data-external=\"\">Metadata & Discovery Services</option>
-    <option value=\"#143\" data-external=\"\">Systems Administration</option>
-    <option value=\"#129\" data-external=\"\">Systems Support</option>
-    <option value=\"#140\" data-external=\"\">Web & Application Development</option>
+    <option value=\"$staff_page_url#126\" data-external=\"\">Information Systems, Access &amp; Facilities</option>
+    <option value=\"$staff_page_url#99\" data-external=\"\">Access Services</option>
+    <option value=\"$staff_page_url#132\" data-external=\"\">Facilities</option>
+    <option value=\"$staff_page_url#113\" data-external=\"\">Inter-Library Loan & Course Reserves</option>
+    <option value=\"$staff_page_url#106\" data-external=\"\">Metadata & Discovery Services</option>
+    <option value=\"$staff_page_url#143\" data-external=\"\">Systems Administration</option>
+    <option value=\"$staff_page_url#129\" data-external=\"\">Systems Support</option>
+    <option value=\"$staff_page_url#140\" data-external=\"\">Web & Application Development</option>
   </optgroup>
 
   <optgroup label=\"Learning & Research Services Division\">    
-    <option value=\"#107\" data-external=\"\">Digital Media Lab</option>
-    <option value=\"#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>
-    <option value=\"#125\" data-external=\"\">Learning & Research Services</option>
-    <option value=\"#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>
-    <option value=\"#117\" data-external=\"\">Paul Buisson Architecture Library</option>
-    <option value=\"#119\" data-external=\"\">Rosenstiel School of Marine Science & Atmospheric Science Library</option>
+    <option value=\"$staff_page_url#107\" data-external=\"\">Digital Media Lab</option>
+    <option value=\"$staff_page_url#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>
+    <option value=\"$staff_page_url#125\" data-external=\"\">Learning & Research Services</option>
+    <option value=\"$staff_page_url#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>
+    <option value=\"$staff_page_url#117\" data-external=\"\">Paul Buisson Architecture Library</option>
+    <option value=\"$staff_page_url#119\" data-external=\"\">Rosenstiel School of Marine Science & Atmospheric Science Library</option>
   </optgroup>
 </select>";
 
@@ -166,13 +169,14 @@ include("includes/header_um-new.php");
 </section>
 
 <section class="section section-half-top">
+    <input id="jekyll-category" value="sp-staff" type="hidden">
     <div class="container">
         <?php print $alphabet; ?>
 
         <?php
         if ($selected_letter == "Departments") { ?>
             <div class="row">
-                <div class="col-lg-8 order-last order-lg-first">
+                <div class="col-lg-8 order-last order-lg-first  ">
                     <?php print $display;  ?>
                 </div>
                 <div class="col-lg-4 order-first order-lg-last">
