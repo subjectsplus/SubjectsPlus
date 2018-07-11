@@ -40,7 +40,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li><a href="'.$staff_page_url.'#130" class="dept-heading">Digital Strategies Division</a></li>
   <li>
     <div class="dept-sub">
-      <a href="#'.$staff_page_url.'#110">Digital Production</a>  
+      <a href="'.$staff_page_url.'#110">Digital Production</a>  
     </div>
   </li>
   
