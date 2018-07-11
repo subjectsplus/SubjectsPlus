@@ -279,7 +279,7 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
                 });
             </script>
 
-            <form><?php print $alphabet; ?></form>
+            <form class="db-form" style="visibility: hidden;"><?php print $alphabet; ?></form>
             <div class="row mt-2 mt-lg-5">
                 <div class="col-lg-8">
 					<?php print $intro;
@@ -334,15 +334,6 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
             </div>
         </div>
     </section>
-
-    <!--original search-->
-    <div class="d-none">
-        <h4><?php //print _("Search Databases"); ?></h4>
-		<?php
-		//$input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Quick Search", "azrecords", '');
-		//$input_box->displayBox();
-		?>
-    </div>
 
 <?php
 // Load footer file

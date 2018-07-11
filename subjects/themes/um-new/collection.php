@@ -142,15 +142,6 @@ if (isset($_GET["d"])) {
     </div>
 </section>
 
-<!-- Original search with auto complete-->
-<div class="d-none">
-    <?php //print _("Search Guides"); ?></h2>
-    <?php
-    //$input_box = new CompleteMe("quick_search", "index.php", $proxyURL, "Quick Search", "guides", '');
-    //$input_box->displayBox();
-    ?>
-</div>
-
 <section class="section section-half-top">
     <div class="container">
         <div class="row">
