@@ -279,7 +279,7 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
                 });
             </script>
 
-            <form class="db-form" style="visibility: hidden;"><?php print $alphabet; ?></form>
+            <form><?php print $alphabet; ?></form>
             <div class="row mt-2 mt-lg-5">
                 <div class="col-lg-8">
 					<?php print $intro;
