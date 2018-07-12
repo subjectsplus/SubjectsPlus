@@ -113,63 +113,62 @@ if ( isset( $_GET["d"] ) ) {
 
 // Now we are finally read to display the page
 ?>
-<section>
-    <input id="jekyll-category" value="sp-guide" type="hidden">
-    <div class="feature section">
-        <div class="container text-center minimal-header">
-            <h1></h1>
-            <hr align="center" class="hr-panel">
-            <p class="mb-0">&nbsp;</p>
 
-            <div class="favorite-heart">
-                <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
-                     data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon"></div>
+<input id="jekyll-category" value="sp-guide" type="hidden">
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0">&nbsp;</p>
+
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Component -->
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-    <!-- Search Component -->
-    <section class="search-area d-none d-lg-block">
-        <div class="full-search">
-            <div class="container text-center">
-                <div class="search-group">
-                    <div id="uml-site-search-container"></div>
-                    <div class="adv-search d-none">
-                        <a class="no-decoration default" href="#">Advanced Search</a>
-                    </div>
+<section class="section section-half-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <?php print $guide_results; ?>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature popular-list p-3 mt-3">
+                    <h4><?php print _( "- New Databases -" ); ?></h4>
+                    <?php print $newlist; ?>
+                    <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
+                        all</a>
+                    <h4 class="mt-4"><?php print _( "- New Guides -" ); ?></h4>
+                    <?php print $newest_guides; ?>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section section-half-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-					<?php print $guide_results; ?>
-                </div>
-                <div class="col-lg-4">
-                    <div class="feature popular-list p-3 mt-3">
-                        <h4><?php print _( "- New Databases -" ); ?></h4>
-						<?php print $newlist; ?>
-                        <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
-                            all</a>
-                        <h4 class="mt-4"><?php print _( "- New Guides -" ); ?></h4>
-						<?php print $newest_guides; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        $(function () {
-            // Move Collection Title to minimal page header
-            var $collection_title = $('#collection_parent_title');
-            $('.minimal-header h1').append($collection_title);
-        });
-    </script>
+<script>
+    $(function () {
+        // Move Collection Title to minimal page header
+        var $collection_title = $('#collection_parent_title');
+        $('.minimal-header h1').append($collection_title);
+    });
+</script>
 
 
 <?php

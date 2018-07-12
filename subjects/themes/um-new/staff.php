@@ -142,6 +142,7 @@ $display = $staff_data->writeTable($selected_letter);
 include("includes/header_um-new.php");
 ?>
 
+<input id="jekyll-category" value="sp-staff" type="hidden">
 <div class="feature section">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
@@ -169,7 +170,6 @@ include("includes/header_um-new.php");
 </section>
 
 <section class="section section-half-top">
-    <input id="jekyll-category" value="sp-staff" type="hidden">
     <div class="container">
         <?php print $alphabet; ?>
 

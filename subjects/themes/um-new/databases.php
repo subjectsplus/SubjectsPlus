@@ -218,122 +218,122 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
 	print "version 3 styles not set up yet";
 }
 ?>
-    <input id="jekyll-category" value="sp-databases" type="hidden">
-    <div class="feature section">
-        <div class="container text-center minimal-header">
-            <h1><?php print $page_title; ?></h1>
-            <hr align="center" class="hr-panel">
-            <p class="mb-0"><?php print $legend; ?></p>
+<input id="jekyll-category" value="sp-databases" type="hidden">
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0"><?php print $legend; ?></p>
 
-            <div class="favorite-heart">
-                <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
-                     data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon"></div>
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon"></div>
+        </div>
+    </div>
+</div>
+
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <section class="search-area d-none d-lg-block">
-        <div class="full-search">
-            <div class="container text-center">
-                <div class="search-group">
-                    <div id="uml-site-search-container"></div>
-                    <div class="adv-search d-none">
-                        <a class="no-decoration default" href="#">Advanced Search</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-half-top">
-        <div class="container">
-            <script src="<?php print $AssetPath; ?>um-special/bootstrap-select.js"></script>
-            <script>
-                $(function () {
-                    $('#select_format').selectpicker({
-                        style: 'btn-select-db',
-                        width: '250px',
-                        size: '10'
-                    });
-                    $('#select_subject').selectpicker({
-                        style: 'btn-select-db',
-                        width: '250px',
-                        size: '10'
-                    });
-
-                    // show all db details
-                    $('#expander').click(function () {
-                        $('.list_bonus').toggle();
-                    });
-
-                    //show individual db details
-                    $('span[id*=bib-]').click(function () {
-                        var bib_id = $(this).attr("id").split("-");
-                        $(this).parent().parent().find(".list_bonus").toggle();
-                    });
-
-                    // SP GA Event Tracking
-                    $('.trackContainer a').click(function () {
-                        _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
-                    });
+<section class="section section-half-top">
+    <div class="container">
+        <script src="<?php print $AssetPath; ?>um-special/bootstrap-select.js"></script>
+        <script>
+            $(function () {
+                $('#select_format').selectpicker({
+                    style: 'btn-select-db',
+                    width: '250px',
+                    size: '10'
                 });
-            </script>
+                $('#select_subject').selectpicker({
+                    style: 'btn-select-db',
+                    width: '250px',
+                    size: '10'
+                });
 
-            <form><?php print $alphabet; ?></form>
-            <div class="row mt-2 mt-lg-5">
-                <div class="col-lg-8">
-					<?php print $intro;
-					print $db_results;
-					?>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-12">
-							<?php if ( $newlist ) { ?>
-                                <div class="feature popular-list">
-                                    <h4>- New Databases -</h4>
-									<?php print $newlist; ?>
-                                    <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default"
-                                       role="button">See all</a>
-                                </div>
-							<?php } ?>
-                        </div>
-                        <div class="col-sm-6 col-lg-12">
-                            <!--Resource promotion-->
-                            <div class="card mt-2 mt-sm-0 mt-lg-3 mb-3 mb-lg-4">
-                                <a href="http://www.miami.edu/lynda" title="Lynda.com"><img
-                                            src="https://new.library.miami.edu/images/card-lynda.jpg" alt="Lynda.com"
-                                            class="card-img-top no-decoration"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <a class="no-decoration default" href="http://www.miami.edu/lynda">Lynda.com</a>
-                                    </h5>
-                                    <p>Tutorials just a click away. We offer access to lynda's 95,000+ "how-to" videos
-                                        on a wide range of software applications.</p>
-                                </div>
+                // show all db details
+                $('#expander').click(function () {
+                    $('.list_bonus').toggle();
+                });
+
+                //show individual db details
+                $('span[id*=bib-]').click(function () {
+                    var bib_id = $(this).attr("id").split("-");
+                    $(this).parent().parent().find(".list_bonus").toggle();
+                });
+
+                // SP GA Event Tracking
+                $('.trackContainer a').click(function () {
+                    _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
+                });
+            });
+        </script>
+
+        <form><?php print $alphabet; ?></form>
+        <div class="row mt-2 mt-lg-5">
+            <div class="col-lg-8">
+                <?php print $intro;
+                print $db_results;
+                ?>
+            </div>
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-12">
+                        <?php if ( $newlist ) { ?>
+                            <div class="feature popular-list">
+                                <h4>- New Databases -</h4>
+                                <?php print $newlist; ?>
+                                <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default"
+                                   role="button">See all</a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="col-sm-6 col-lg-12">
+                        <!--Resource promotion-->
+                        <div class="card mt-2 mt-sm-0 mt-lg-3 mb-3 mb-lg-4">
+                            <a href="http://www.miami.edu/lynda" title="Lynda.com"><img
+                                        src="https://new.library.miami.edu/images/card-lynda.jpg" alt="Lynda.com"
+                                        class="card-img-top no-decoration"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a class="no-decoration default" href="http://www.miami.edu/lynda">Lynda.com</a>
+                                </h5>
+                                <p>Tutorials just a click away. We offer access to lynda's 95,000+ "how-to" videos
+                                    on a wide range of software applications.</p>
                             </div>
                         </div>
                     </div>
-
-					<?php if ( isset( $featured ) ) { ?>
-                        <div class="feature popular-list">
-                            <h4><?php print _( "- Featured Databases -" ); ?></h4>
-							<?php print $featured_list; ?>
-                        </div>
-					<?php } ?>
-
-					<?php if ( isset( $trials ) ) { ?>
-                        <div class="feature popular-list">
-                            <h4>- Database Trials -</h4>
-							<?php print $trial_list; ?>
-                            <p>Trial demonstrations of fee-based subscription services under consideration. Feedback: <a
-                                        href="mailto:d.roose@miami.edu" class="no-decoration">d.roose@miami.edu</a></p>
-                        </div>
-					<?php } ?>
                 </div>
+
+                <?php if ( isset( $featured ) ) { ?>
+                    <div class="feature popular-list">
+                        <h4><?php print _( "- Featured Databases -" ); ?></h4>
+                        <?php print $featured_list; ?>
+                    </div>
+                <?php } ?>
+
+                <?php if ( isset( $trials ) ) { ?>
+                    <div class="feature popular-list">
+                        <h4>- Database Trials -</h4>
+                        <?php print $trial_list; ?>
+                        <p>Trial demonstrations of fee-based subscription services under consideration. Feedback: <a
+                                    href="mailto:d.roose@miami.edu" class="no-decoration">d.roose@miami.edu</a></p>
+                    </div>
+                <?php } ?>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <?php
 // Load footer file
