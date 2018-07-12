@@ -171,6 +171,12 @@ include("includes/header_um-new.php");
 
 <section class="section section-half-top">
     <div class="container">
+        <div id="backtotop">
+            <a href="#" class="default no-decoration">
+                <i class="fas fa-arrow-alt-circle-up" title="Back to top"></i>
+                <span>Top</span>
+            </a>
+        </div>
         <?php print $alphabet; ?>
 
         <?php
