@@ -232,6 +232,30 @@ include("includes/header_um-new.php");
     </div>
 </section>
 
+<script>
+    $(function () {
+        var pxShow = 400;//height on which the button will show
+        var fadeInTime = 1000;//how slow/fast you want the button to show
+        var fadeOutTime = 1000;//how slow/fast you want the button to hide
+        var scrollSpeed = 1000;//how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
+
+        $(window).scroll(function(){
+            if($(window).scrollTop() >= pxShow){
+                $('#backtotop').fadeIn(fadeInTime);
+            }else{
+                $('#backtotop').fadeOut(fadeOutTime);
+            }
+        });
+
+        // show all db details
+        $('#backtotop a').click(function () {
+           $('html, body').animate({scrollTop:0}, scrollSpeed);
+        });
+
+
+    });
+</script>
+
 <?php
 // Footer
 include("includes/footer_um-new.php"); ?>
