@@ -68,7 +68,7 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?mode=Basic&vid=uml&tab=default_tab&">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/floor-plans/">Floor Maps</a></li>
 
@@ -78,7 +78,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/specialcollections/index.html">Rare Books (Special Collections)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/login.do?loginFn=signin&vid=uml&targetURL=http:%2F%2Fmiami-primo.hosted.exlibrisgroup.com%2Fprimo_library%2Flibweb%2Faction%2Fsearch.do%3Fvid%3Duml%26amp;dscnt%3D0%26amp;afterTimeout%3DE08029BDF7C2992FC31D8ACB97398E2E%26amp;dstmp%3D1463604331494%26amp;initializeIndex%3Dtrue&isMobile=false">Renew your Books (My Account)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Renew your Books (My Account)</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
 
@@ -90,11 +90,11 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration cta" href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?vid=uml">uSearch Articles <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=everything&search_scope=Everything&vid=uml_new&offset=0">uSearch Articles <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/databases.php">Databases A-Z</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/dlSearch.do?institution=01UOML&vid=uml&query=facet_atoz%2cexact%2cA&indx=1&bulkSize=30&dym=false&loc=local%2cscope%3a%28AZ01UOML%29&fn=goAlmaAz&sortField=stitle&almaAzSearch=true&azSearch=true&selectedAzAlmaLetter=A">eJournals</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/jsearch?vid=uml_new&lang=en_US">eJournals</a></li>
 
                                         </ul>
 
@@ -105,7 +105,7 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?mode=Basic&vid=uml&tab=default_tab&">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/musiclib/index.html">Music Library</a></li>
 
@@ -123,9 +123,9 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?mode=Basic&vid=uml&tab=digital_collections&">uSearch Digital Collections <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=digital_collections&search_scope=Digital_Collections&vid=uml_new&offset=0">uSearch Digital Collections <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="http://proust.library.miami.edu/findingaids/">Archival Finding Aids</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://atom.library.miami.edu/">Archival Finding Aids</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/chc/index.html">Cuban Heritage Collection</a></li>
 
@@ -166,7 +166,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/copyright.html">Understanding Copyright</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/usearch">uSearch Help</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/guide.php?subject=U2">uSearch Help</a></li>
 
                                         </ul>
 
@@ -217,7 +217,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/lib-collections/index.html">Distinctive Collections</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?vid=uml">Find Books & Articles</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=everything&search_scope=Everything&vid=uml_new&offset=0">Find Books & Articles</a></li>
 
                                         </ul>
 
@@ -286,6 +286,17 @@
                                             <li><a class="dropdown-item no-decoration" href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a></li>
 
                                         </ul>
+
+
+
+                                        <h5>Related</h5>
+                                        <hr align="left" class="hr-decoration">
+                                        <ul>
+
+                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/library-research-scholars.html">Library Research Scholars & Adobe Scholars</a></li>
+
+                                        </ul>
+
 
                                     </div>
                                 </div>
@@ -656,7 +667,7 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="http://proust.library.miami.edu/findingaids/">Archival Finding Aids</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://atom.library.miami.edu/">Archival Finding Aids</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="http://merrick.library.miami.edu/digitalprojects/exhibits.php">Digital Exhibits</a></li>
 
@@ -801,7 +812,7 @@
                         <hr align="left" class="hr-panel">
                         <ul>
 
-                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/login.do?loginFn=signin&vid=uml&targetURL=http:%2F%2Fmiami-primo.hosted.exlibrisgroup.com%2Fprimo_library%2Flibweb%2Faction%2Fsearch.do%3Fvid%3Duml%26amp;dscnt%3D0%26amp;afterTimeout%3DE08029BDF7C2992FC31D8ACB97398E2E%26amp;dstmp%3D1463604331494%26amp;initializeIndex%3Dtrue&isMobile=false">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
                             <li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
 
