@@ -289,7 +289,7 @@
 
 
 
-                                        <h5>Related</h5>
+                                        <h5>Apply for Fellowships</h5>
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
