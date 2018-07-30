@@ -223,7 +223,7 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0"><?php print $legend; ?></p>
+        <p class="mb-0">&nbsp;</p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"

@@ -17,7 +17,7 @@
             </div>
             <div class="col um-svg">
                 <a href="http://www.miami.edu/" target="_blank" title="University of Miami" class="no-decoration">
-                    <img src="https://new.library.miami.edu/assets/common-images/um-logo-sliver.svg" alt="University of Miami Sliver-logo">
+                    <img src="https://library.miami.edu/assets/common-images/um-logo-sliver.svg" alt="University of Miami Sliver-logo">
                 </a>
             </div>
             <div class="col-1">
@@ -30,9 +30,9 @@
 </section>
 <nav class="navbar-expand-xl site-navbar" style="background-color:#4f5b65;">
     <div class="container position-relative">
-        <a class="navbar-brand" href="https://new.library.miami.edu">
-            <img src="https://new.library.miami.edu/assets/common-images/uml-logo_vision2.png" alt="University of Miami Libraries" class="d-inline-block d-sm-none">
-            <img src="https://new.library.miami.edu/assets/common-images/uml-logo_vision-full2.png" alt="University of Miami Libraries" class="d-none d-sm-inline-block d-lg-block">
+        <a class="navbar-brand" href="https://library.miami.edu">
+            <img src="https://library.miami.edu/assets/common-images/uml-logo_vision2.png" alt="University of Miami Libraries" class="d-inline-block d-sm-none">
+            <img src="https://library.miami.edu/assets/common-images/uml-logo_vision-full2.png" alt="University of Miami Libraries" class="d-none d-sm-inline-block d-lg-block">
         </a>
         <button class="navbar-toggler js-sidebar-toggler d-block d-xl-none" data-button-options='{"modifiers":"left","wrapText":false}' aria-label="Toggle sidebar">
             <div class="nav-icon">
@@ -46,7 +46,8 @@
         </button>
 
         <div class="nav-account d-none d-lg-inline-block">
-            <a class="no-decoration" href="#"><i class="fas fa-user-circle"></i> My Account</a>
+            <a class="no-decoration mr-3" href="https://library.miami.edu/research/ask-a-librarian.html"><i class="fas fa-question-circle"></i> Ask A Librarian</a>
+            <a class="no-decoration account" href="#"><i class="fas fa-user-circle"></i> Accounts</a>
         </div>
     </div>
 
@@ -70,17 +71,17 @@
 
                                             <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/floor-plans/">Floor Maps</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/newitems/index.php?src=richter&display=grid">New Arrivals</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="/new-arrivals.html">New Arrivals</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://uofmiami.overdrive.com/">Overdrive E-Books & Audiobooks</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/specialcollections/index.html">Rare Books (Special Collections)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/index.html">Rare Books (Special Collections)</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Renew your Books (My Account)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide (Richter)</a></li>
 
                                         </ul>
 
@@ -107,11 +108,11 @@
 
                                             <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/musiclib/index.html">Music Library</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/musiclib/index.html">Music Library</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/musiclib/browsing-guide.html">Score Browsing Guide</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/musiclib/browsing-guide.html">Score Browsing Guide</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/musiclib/streamingaudioreserves.html">Streaming Music</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/musiclib/streamingaudioreserves.html">Streaming Music</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/databases.php?letter=bytype&type=Video">Streaming Video</a></li>
 
@@ -127,13 +128,13 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://atom.library.miami.edu/">Archival Finding Aids</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/chc/index.html">Cuban Heritage Collection</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/chc/index.html">Cuban Heritage Collection</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://merrick.library.miami.edu/cdm/">Digital Collections</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/specialcollections/index.html">Special Collections</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/index.html">Special Collections</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/universityarchives/index.html">University Archives</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/universityarchives/index.html">University Archives</a></li>
 
                                         </ul>
 
@@ -144,7 +145,7 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/find/games-maps.html">Maps, Games & more</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/find/games-maps.html">Maps, Games & more</a></li>
 
                                         </ul>
 
@@ -154,17 +155,17 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/find/borrowing.html">Access & Borrowing Policies</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/find/borrowing.html">Access & Borrowing Policies</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/find/course-reserves.html">Course Reserves</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/find/course-reserves.html">Course Reserves</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/find/suggest-a-purchase.html">Recommend a Purchase</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/suggest-a-purchase/">Recommend a Purchase</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://scholarlyrepository.miami.edu/">Scholarly Repository</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/copyright.html">Understanding Copyright</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/copyright.html">Understanding Copyright</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/guide.php?subject=U2">uSearch Help</a></li>
 
@@ -191,19 +192,17 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration cta" href="https://new.library.miami.edu/learningcommons/index.html">Learning Commons <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://library.miami.edu/learningcommons/index.html">Learning Commons <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/ask-a-librarian.html">Ask a Librarian</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/ask-a-librarian.html">Ask a Librarian</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/research-question.html">Develop Your Research Question</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/consultations.html">Research Consultations</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/consultations.html">Research Consultations</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/index.php">Research Guides</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/copyright.html">Understanding Copyright</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/copyright.html">Understanding Copyright</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/workshops-tutorials.html">Workshops</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/workshops-tutorials.html">Workshops</a></li>
 
                                         </ul>
 
@@ -215,7 +214,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/databases.php">Databases A-Z</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/lib-collections/index.html">Distinctive Collections</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/lib-collections/index.html">Distinctive Collections</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=everything&search_scope=Everything&vid=uml_new&offset=0">Find Books & Articles</a></li>
 
@@ -228,17 +227,17 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/analyze-data.html#dh">Digital Humanities Data</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/analyze-data.html#dh">Digital Humanities Data</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/analyze-data.html#gis">Geospatial Data (GIS)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/analyze-data.html#gis">Geospatial Data (GIS)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/analyze-data.html#stats">Statistics</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/analyze-data.html#stats">Statistics</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/analyze-data.html#survey">Survey / Census Datasets</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/analyze-data.html#survey">Survey / Census Datasets</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/analyze-data.html#ta">Textual Analysis & Survey</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/analyze-data.html#ta">Textual Analysis & Survey</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/analyze-data.html#viz">Visualization</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/analyze-data.html#viz">Visualization</a></li>
 
                                         </ul>
 
@@ -248,13 +247,9 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/citation-help.html">Citation Help</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/citation-help.html">Citation Help</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/data-services">Data Management Strategies</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/project-scoping.html">Project Scoping / Brainstorming</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/research-project-design.html">Research Project Design</a></li>
 
                                         </ul>
 
@@ -265,7 +260,7 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-xl-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-xl-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
 
                                         </ul>
 
@@ -277,11 +272,11 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/journal-formatting.html">Journal Formatting</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/journal-formatting.html">Journal Formatting</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/promoting-your-scholarship.html">Promoting Your Scholarship</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/promoting-your-scholarship.html">Promoting Your Scholarship</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a></li>
 
@@ -293,7 +288,7 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/library-research-scholars.html">Library Research Scholars & Adobe Scholars</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/library-research-scholars.html">Library Research Scholars & Adobe Scholars</a></li>
 
                                         </ul>
 
@@ -321,19 +316,19 @@
                                             <div class="col-12 col-xl-6">
                                                 <ul>
 
-                                                    <li><a class="dropdown-item no-decoration cta" href="https://new.library.miami.edu/learningcommons/index.html">Learning Commons <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+                                                    <li><a class="dropdown-item no-decoration cta" href="https://library.miami.edu/learningcommons/index.html">Learning Commons <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="http://umarc.miami.edu/arc/Index.html">Camner Center (Tutoring)</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="http://umarc.miami.edu/arc/Index.html">Camner Center for Academic Resources</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/computers.html">Computers</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/computers.html">Computers</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/medialab/index.html">Creative Studio</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/creative-studio/index.html">Creative Studio</a></li>
 
                                                     <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/data-services">Data Services</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab</a></li>
 
                                                 </ul>
                                             </div>
@@ -344,11 +339,11 @@
 
                                                     <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/faculty-exploratory.html">One-Button Studio</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/faculty-exploratory.html">One-Button Studio</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/research/consultations.html">Research Consultations</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/consultations.html">Research Consultations</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/computers.html">Software</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/computers.html">Software</a></li>
 
                                                     <li><a class="dropdown-item no-decoration" href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk</a></li>
 
@@ -363,16 +358,16 @@
                                         <script>
                                             var cardItems = [
 
-                                                ['https://new.library.miami.edu/images/card-mango.jpg'],
+                                                ['https://library.miami.edu/images/card-mango.jpg'],
 
-                                                ['https://new.library.miami.edu/images/card-lynda.jpg']
+                                                ['https://library.miami.edu/images/card-lynda.jpg']
 
                                             ];
                                             var cardLink = [
 
                                                 ['http://access.library.miami.edu/login?url=http://connect.mangolanguages.com/univ-miami/start'],
 
-                                                ['http://www.miami.edu/lynda']
+                                                ['http://access.library.miami.edu/login?url=http://www.miami.edu/lynda']
 
                                             ];
                                             var cardTitle = [
@@ -417,92 +412,88 @@
                                 <div class="row">
                                     <div class="col-12 col-xl-3">
 
+                                        <h5>Rooms & Spaces</h5>
+                                        <hr align="left" class="hr-decoration">
+                                        <ul>
+
+                                            <li><a class="dropdown-item no-decoration cta" href="https://library.miami.edu/spaces/index.html">See All <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="/kislak-center/index.html">Kislak Center</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/music-study">Music Library Rooms</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
+
+                                        </ul>
+
+                                    </div>
+                                    <div class="col-12 col-xl-3">
+
                                         <h5>Study Spaces</h5>
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
                                             <li><a class="dropdown-item no-decoration cta" href="https://libcal.miami.edu/booking/richter-study">Reserve Study Room <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/floor-plans/">Floor Maps</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/graduate-study.html">Graduate Study Areas</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/graduate-study.html">Graduate Study Areas</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/group-study.html">Group Study Use Policy</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/group-study.html">Group Study Use Policy</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/noise.html">Noise & Courtesy Policy</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/noise.html">Noise & Courtesy Policy</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/study-zones.html">Study Zones / Quiet Areas</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/study-zones.html">Study Zones / Quiet Areas</a></li>
 
                                         </ul>
 
                                     </div>
-                                    <div class="col-12 col-xl-6">
 
-                                        <h5>Rooms & Spaces</h5>
+                                    <div class="col-12 col-xl-3">
+
+                                        <h5>Consultation Spaces</h5>
                                         <hr align="left" class="hr-decoration">
-                                        <div class="row">
-                                            <div class="col-12 col-xl-6">
-                                                <ul>
+                                        <ul>
 
-                                                    <li><a class="dropdown-item no-decoration" href="http://umarc.miami.edu/arc/Index.html">Camner Center (Tutoring)</a></li>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://library.miami.edu/learningcommons/index.html">Learning Commons <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="http://umarc.miami.edu/arc/Index.html">Camner Center for Academic Resources</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/central-service-point.html">Central Service Point</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/creative-studio/index.html">Creative Studio</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/conference-room.html">Conference Room (3rd Floor)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/medialab/index.html">Creative Studio</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/faculty-exploratory.html">Faculty Exploratory</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/research/ask-a-librarian.html">Research Support</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/faculty-reading-room.html">Faculty Reading Room</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab</a></li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="col-12 col-xl-6">
-                                                <ul>
-
-                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/kislak-center/">Kislak Center</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/lost-found.html">Lost & Found</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/music-study">Music Library Rooms</a></li>
-
-                                                    <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a></li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        </ul>
 
                                     </div>
+
                                     <div class="col-12 col-xl-3">
 
                                         <h5>Technology</h5>
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/computers.html">Computers</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/computers.html">Computers</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/printing.html">Printing, Copying & Scanning</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/printing.html">Printing, Copying & Scanning</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/computers.html">Software</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/computers.html">Software</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk</a></li>
 
@@ -530,52 +521,52 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/architecture-lib-sm.jpg" alt="Architecture Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/richter-lib-sm.jpg" alt="Richter Library" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/architecture/index.html">Architecture Library</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/architecture/hours.html"><span data-calendar="architecture"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/richter/index.html">Richter Library<br />(Interdisciplinary)</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/richter/hours.html"><span data-calendar="richter"></span></a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/business-lib-sm.jpg" alt="Business Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/architecture-lib-sm.jpg" alt="Architecture Library" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/business/index.html">Business Library</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/business/hours.html"><span data-calendar="business"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/architecture/index.html">Architecture Library</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/architecture/hours.html"><span data-calendar="architecture"></span></a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/law-lib-sm.jpg" alt="Law Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/business-lib-sm.jpg" alt="Business Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <div class="nested-items">
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/business/index.html">Business Library</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/business/hours.html"><span data-calendar="business"></span></a></div>
+                                                </div>
+                                            </li>
+                                            <li class="mm-lib">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/law-lib-sm.jpg" alt="Law Library" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
                                                     <a class="dropdown-item no-decoration" href="http://www.law.miami.edu/library/">Law Library</a>
                                                     <div class="mm-lib-time"><a href="https://www.law.miami.edu/iml/library/library-contact-and-hours" class="no-decoration default">See Hours</a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/marine-lib-sm.jpg" alt="Marine and Atmospheric Science Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/marine-lib-sm.jpg" alt="Marine and Atmospheric Science Library" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/rsmaslib/index.html">Marine and Atmospheric Science Library</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/rsmaslib/hours.html"><span data-calendar="rsmaslib"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/rsmaslib/index.html">Marine and Atmospheric Science Library</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/rsmaslib/hours.html"><span data-calendar="rsmaslib"></span></a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/med-lib-sm.jpg" alt="Medical Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/med-lib-sm.jpg" alt="Medical Library" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
                                                     <a class="dropdown-item no-decoration" href="http://calder.med.miami.edu/">Medical Library</a>
                                                     <div class="mm-lib-time"><a href="http://calder.med.miami.edu/libraryhours.html" class="no-decoration default">See Hours</a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/music-lib-sm.jpg" alt="Music Library" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/music-lib-sm.jpg" alt="Music Library" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/musiclib/index.html">Music Library</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/musiclib/hours.html"><span data-calendar="musiclib"></span></a></div>
-                                                </div>
-                                            </li>
-                                            <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/richter-lib-sm.jpg" alt="Richter Library" class="mm-lib-img d-none d-xl-inline-block">
-                                                <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/richter/index.html">Richter Library</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/richter/hours.html"><span data-calendar="richter"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/musiclib/index.html">Music Library</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/musiclib/hours.html"><span data-calendar="musiclib"></span></a></div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -585,38 +576,38 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/chc-sm.jpg" alt="Cuban Heritage Collection" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/chc-sm.jpg" alt="Cuban Heritage Collection" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/chc/index.html">Cuban Heritage Collection<br />(Richter Library)</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/chc/hours.html"><span data-calendar="chc"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/chc/index.html">Cuban Heritage Collection<br />(Richter Library)</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/chc/hours.html"><span data-calendar="chc"></span></a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/digital-collections-sm.jpg" alt="Digital Collections" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/digital-collections-sm.jpg" alt="Digital Collections" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
                                                     <a class="dropdown-item no-decoration" href="http://merrick.library.miami.edu/">Digital Collections</a>
                                                     <div class="mm-lib-time">Online</div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/special-collections-sm.jpg" alt="Special Collections" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/special-collections-sm.jpg" alt="Special Collections" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/specialcollections/index.html">Special Collections<br />(Kislak Center)</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/specialcollections/hours.html"><span data-calendar="specialcollections"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/index.html">Special Collections<br />(Kislak Center)</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/hours.html"><span data-calendar="specialcollections"></span></a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/scholarly-repository2-sm.jpg"  alt="Scholarly Repository" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/scholarly-repository2-sm.jpg"  alt="Scholarly Repository" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
                                                     <a class="dropdown-item no-decoration" href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a>
                                                     <div class="mm-lib-time">Online</div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://new.library.miami.edu/assets/common-images/mm-libraries/archives-sm.jpg" alt="University Archives" class="mm-lib-img d-none d-xl-inline-block">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/archives-sm.jpg" alt="University Archives" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://new.library.miami.edu/universityarchives/index.html">University Archives<br />(Kislak Center)</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/universityarchives/hours.html"><span data-calendar="universityarchives"></span></a></div>
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/universityarchives/index.html">University Archives<br />(Kislak Center)</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/universityarchives/hours.html"><span data-calendar="universityarchives"></span></a></div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -625,9 +616,9 @@
                                         <script>
                                             var cardCollectionItems = [
 
-                                                ['https://new.library.miami.edu/images/card-chc-ochumare-sm.jpg'],
+                                                ['https://library.miami.edu/images/card-chc-ochumare-sm.jpg'],
 
-                                                ['https://new.library.miami.edu/images/card-panam-sm.jpg']
+                                                ['https://library.miami.edu/images/card-panam-sm.jpg']
 
                                             ];
                                             var cardCollectionLink = [
@@ -671,7 +662,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="http://merrick.library.miami.edu/digitalprojects/exhibits.php">Digital Exhibits</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/oral-histories.html">Oral Histories</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/oral-histories.html">Oral Histories</a></li>
 
                                         </ul>
 
@@ -696,37 +687,37 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/index.html">About Us</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/index.html">About Us</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/talkback.php">Comments</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/departments/index.html">Departments</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/departments/index.html">Departments</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/workhere/">Employment</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="/workhere/index.html">Employment</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/facts.html">Facts & Figures</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/facts.html">Facts & Figures</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/forms.html">Forms</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/forms.html">Forms</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/lib-collections/index.html">Libraries & Collections</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/lib-collections/index.html">Libraries & Collections</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/news/">Library News & Events</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="/news.html">Library News & Events</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/publications.html">Library Publications</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/publications.html">Library Publications</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/message-from-dean.html">Message from the Dean</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/message-from-dean.html">Message from the Dean</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/vision-mission-and-values.html">Mission / Vision</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/vision-mission-and-values.html">Mission / Vision</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/04/UML_Org_Chart_January2018-v2.pdf">Organization Chart (.pdf)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/07/UML-Org-Chart-September2018.pdf">Organization Chart (.pdf)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/strategic-partners.html">Partnerships</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/strategic-partners.html">Partnerships</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/staff.php">Staff List</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/strategic-planning.html">Strategic Planning</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/strategic-planning.html">Strategic Planning</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/policies.html">University & Library Policies</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/policies.html">University & Library Policies</a></li>
 
                                         </ul>
 
@@ -737,13 +728,13 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/chc/amigos.html">Amigos of the Cuban Heritage Collection</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/chc/amigos.html">Amigos of the Cuban Heritage Collection</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/support-the-libraries.html">Donating Materials</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/support-the-libraries.html">Donating Materials</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/friends-of-the-libraries.html">Friends of the Libraries</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/friends-of-the-libraries.html">Friends of the Libraries</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/donating-materials.html">Gifts & Donations Policy</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/donating-materials.html">Gifts & Donations Policy</a></li>
 
                                         </ul>
 
@@ -753,39 +744,39 @@
                                         <hr align="left" class="hr-decoration">
                                         <ul>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/alumnus.html">Alumni</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/alumnus.html">Alumni</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/faculty.html">Faculty</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/faculty.html">Faculty</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/graduate.html">Graduate</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/graduate.html">Graduate</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/undergrad.html">Undergraduate</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/undergrad.html">Undergraduate</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/visitors.html">Visitor</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/visitors.html">Visitor</a></li>
 
                                         </ul>
 
                                     </div>
                                     <div class="col-12 col-xl-4">
                                         <div class="card">
-                                            <img src="https://new.library.miami.edu/images/card-about-richter-lib-sm.jpg" alt="Richter Library" class="card-img-top d-none d-xl-block">
+                                            <img src="https://library.miami.edu/images/card-about-richter-lib-sm.jpg" alt="Richter Library" class="card-img-top d-none d-xl-block">
                                             <div class="card-body">
 
                                                 <h5 class="card-title">Planning a Visit?</h5>
                                                 <hr align="left" class="hr-decoration d-block d-xl-none">
                                                 <ul>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/ada.html">ADA / Disability Services</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/ada.html">ADA / Disability Services</a></li>
 
                                                     <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/faq.php">FAQs</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/floor-plans/">Floor Maps</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/richter/hours.html">Hours</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/richter/hours.html">Hours</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/about/maps-directions.html">Maps & Directions</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/about/maps-directions.html">Maps & Directions</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://new.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide (Richter)</a></li>
 
                                                 </ul>
 
@@ -810,7 +801,7 @@
                     <div class="col-12 col-lg-4">
                         <h5>Accounts</h5>
                         <hr align="left" class="hr-panel">
-                        <ul>
+                        <ul class="d-inline-block">
 
                             <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
@@ -829,7 +820,7 @@
                         <h5>My Favorite Links</h5>
                         <hr align="left" class="hr-panel">
                         <div class="my-favorite-links uml-quick-links" data-type="account-list">
-                            <h6><a href="https://new.library.miami.edu/favorites.html" class="no-decoration default">(How to use this feature)</a></h6>
+                            <h6><a href="https://library.miami.edu/favorites.html" class="no-decoration default">(How to use this feature)</a></h6>
                         </div>
                     </div>
                 </div>

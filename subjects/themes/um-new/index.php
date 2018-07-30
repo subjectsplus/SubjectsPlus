@@ -332,7 +332,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more informa
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0"><?php print $legend; ?></p>
+        <p class="mb-0">&nbsp;</p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"

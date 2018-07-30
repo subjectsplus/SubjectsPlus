@@ -147,7 +147,7 @@ include("includes/header_um-new.php");
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0"><a href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/04/UML_Org_Chart_January2018-v2.pdf" class="default">Organization Chart (pdf)</a></p>
+        <p class="mb-0"><a href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/07/UML-Org-Chart-September2018.pdf" class="default">Organization Chart (pdf)</a></p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
