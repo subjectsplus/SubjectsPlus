@@ -242,9 +242,9 @@ $login_form = $introtext . '
             <button type="submit" class="pure-button pure-button-primary">' . _( "Submit" ) . '</button>
         </div>
     </fieldset>
-    <br />
-    <div align="center"><a href="forgotpassword.php">' . _( "I have forgotten my password" ) . '</a></div>
-</form>
+    <br />'.
+//    <div align="center"><a href="forgotpassword.php">' . _( "I have forgotten my password" ) . '</a></div>
+'</form>
 ';
 
 $logo = "<img src=\"$AssetPath" . "images/admin/logo_v3_full.png\" border=\"0\" />\n
