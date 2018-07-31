@@ -71,9 +71,9 @@
 
                                             <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/new-arrivals.html">New Arrivals</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/new-arrivals.html">New Arrivals</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://uofmiami.overdrive.com/">Overdrive E-Books & Audiobooks</a></li>
 
@@ -420,7 +420,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab</a></li>
 
@@ -770,7 +770,7 @@
 
                                                     <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/faq.php">FAQs</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
                                                     <li><a class="dropdown-item no-decoration" href="https://library.miami.edu/richter/hours.html">Hours</a></li>
 
