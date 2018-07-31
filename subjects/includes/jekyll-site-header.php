@@ -590,17 +590,17 @@
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
-                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/special-collections-sm.jpg" alt="Special Collections" class="mm-lib-img d-none d-xl-inline-block">
-                                                <div class="nested-items">
-                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/index.html">Special Collections<br />(Kislak Center)</a>
-                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/hours.html"><span data-calendar="specialcollections"></span></a></div>
-                                                </div>
-                                            </li>
-                                            <li class="mm-lib">
                                                 <img src="https://library.miami.edu/assets/common-images/mm-libraries/scholarly-repository2-sm.jpg"  alt="Scholarly Repository" class="mm-lib-img d-none d-xl-inline-block">
                                                 <div class="nested-items">
                                                     <a class="dropdown-item no-decoration" href="http://scholarlyrepository.miami.edu/">Scholarly Repository</a>
                                                     <div class="mm-lib-time">Online</div>
+                                                </div>
+                                            </li>
+                                            <li class="mm-lib">
+                                                <img src="https://library.miami.edu/assets/common-images/mm-libraries/special-collections-sm.jpg" alt="Special Collections" class="mm-lib-img d-none d-xl-inline-block">
+                                                <div class="nested-items">
+                                                    <a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/index.html">Special Collections<br />(Kislak Center)</a>
+                                                    <div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://library.miami.edu/specialcollections/hours.html"><span data-calendar="specialcollections"></span></a></div>
                                                 </div>
                                             </li>
                                             <li class="mm-lib">
