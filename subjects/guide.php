@@ -408,6 +408,14 @@ if (isset ($header_type) && $header_type == 'um-new') { ?>
 } ?>
 </script>
 
+<?php
+if (isset ($header_type) && $header_type == 'med') { ?>
+<script>
+    $("#tab-container").css("visibility", "visible");
+</script>
+<?php   }
+ ?>
+
 
 <!--[if IE]>
 <style>
