@@ -377,7 +377,8 @@ include("includes/footer_med.php");
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
 
-              
+        // switch icon option
+        $("#listguides #section-Collection i.fa-plus-circle").removeClass("fas fa-plus-circle").addClass("fa fa-plus-square");
 
 
     });
