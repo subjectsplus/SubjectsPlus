@@ -120,7 +120,7 @@ include("includes/header_um-new.php");
 
 <div class="feature section">
     <div class="container text-center minimal-header">
-        <h5 class="mt-3 mt-lg-0 mb-1"><a href="staff.php" class="no-decoration default">Staff List</a></h5>
+        <h5 class="mt-3 mt-lg-0 mb-1"><a href="../staff.php" class="no-decoration default">Staff List</a></h5>
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
         <p class="mb-0">&nbsp;</p>

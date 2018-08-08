@@ -244,7 +244,7 @@ if ($result_count != 0) {
         $keywords = $myrow["3"];
 
         if ($result_count > 1) {
-            $index .= "<div class=\"zebra\" style=\"min-height: 1.5em;\"><a href=\"#faq-$row_count\">$question</a></div>\n";
+            $index .= "<div class=\"faq-listing\"><a href=\"#faq-$row_count\" class=\"no-decoration\">$question</a></div>\n";
             $show_row_count = $row_count . ". ";
         }
 
@@ -252,27 +252,19 @@ if ($result_count != 0) {
         $tokenizer->tokenizeText();
         $answer = $tokenizer->getTokenizedText();
 
-        $results .= "<a name=\"faq-$row_count\"></a>\n
-		<div class=\"pluslet_simple\">\n
-		<h2 class=\"question\">$show_row_count$question</h2>\n
-                <p class=\"answer\">
-		$answer
-                </p>
-		</div>\n
+        $results .= "<a name=\"faq-$row_count\"></a>
+		<div class=\"faq\">
+		<h2>$show_row_count$question</h2>
+        <p>$answer</p>
+		</div>
 ";
 
         // Add 1 to the row count, for the "even/odd" row striping
-
         $row_count++;
     }
 } else {
 
-    $results = "<div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\">" . _("No Results") . "</div></div>\n
-<div class=\"pluslet_body\">\n"
-        . _("There were no FAQs found for this query.") .
-        "</div>\n
-</div>\n";
+    $results = "<h2>" . _("No Results") . "</h2><p>". _("There were no FAQs found for this query.") . "</p></div>";
 }
 
 
@@ -297,91 +289,95 @@ foreach ($collections_result as $myrow1) {
 
 ?>
 
-
-
-<div class="panel-container">
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-3-4 panel-adj">
+<input id="jekyll-category" value="sp-faq" type="hidden">
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0">
             <?php
-            //$num_faqs = $row_count - 1;
-            // print "<p style=\"background-color: #ffffcf;\"><strong>Note:</strong>  $num_faqs FAQs displayed.  Search <strong>all FAQs</strong> with the boxes to the right.</p><br />";
-
             if (isset($_GET["page"]) && $_GET["page"] == "all") {
-                print "<div class=\"breather\"><div class=\"faq_filter\">" . _("All FAQs displayed.  Search or browse to limit ") . " &raquo;</div></div>";
+                print _("All FAQs displayed, search or browse to limit results.");
             } else {
-                print "<div class=\"breather\"><div class=\"faq_filter\">" . _("Note:  Not all FAQs displayed.  Search or browse for more ") . " &raquo;</div></div>";
+                print _("Not all FAQs displayed, search or browse for more.");
             }
+            ?>
+        </p>
 
-            if (isset($index) && $index != "") {
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon" ></div>
+        </div>
+    </div>
+</div>
 
-                print "$index<br />";
-            }
-
-
-            print $results; ?>
-
-        </div> <!--end 3/4 main area column-->
-
-        <div class="pure-u-1  pure-u-lg-1-4 database-page sidebar-bkg">
-            <a name="rdiv"></a>
-            <div class="tip">
-                <h2><?php print _("Search FAQs"); ?></h2>
-                <form action="faq.php" method="post" autocomplete="on" class="pure-form">
-                    <p>
-                        <?php
-                        $input_box = new CompleteMe("quick_search", "faq.php", "faq.php?faq_id=", "Quick Search", "faq", '');
-                        $input_box->displayBox();
-                        ?>
-
-                        <br />
-                </form>
-            </div>
-            <div class="tipend"> </div>
-            <?php
-            if (isset($guide_string)) { ?>
-
-                <div class="tip">
-                    <h2><?php print _("Browse FAQs by Subject"); ?></h2>
-                    <form action="faq.php" method="post">
-                        <?php print $guide_string; ?>
-                        <input type="submit" value="go" class="form_button button" />
-                    </form>
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
                 </div>
-                <div class="tipend"> </div>
-
-            <?php } ?>
-
-            <div class="tip">
-                <h2><?php print _("Browse FAQs by Collection"); ?></h2>
-
-                <ul>
-                    <?php print $coll_items; ?>
-                </ul>
             </div>
-            <div class="tipend"> </div>
+        </div>
+    </div>
+</section>
 
-        </div> <!--end 1/4 sidebar column-->
+<section class="section talkback">
+    <div class="container">
+        <div id="backtotop">
+            <a href="#" class="default no-decoration">
+                <i class="fas fa-arrow-alt-circle-up" title="Back to top"></i>
+                <span>Top</span>
+            </a>
+        </div>
 
+        <div class="row">
+            <div class="col-lg-8">
+                <?php
+                if (isset($index) && $index != "") {
+                    print "$index <hr class=\"mb-4\">";
+                }
 
-    </div> <!--end pure-g-->
-</div> <!--end panel-container-->
+                print $results; ?>
+            </div>
+            <div class="col-lg-4">
+                <div class="feature popular-list">
+                    <h4><?php print _("Browse FAQs by Collection"); ?></h4>
+                    <ul>
+                        <?php print $coll_items; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<?php
+<script>
+    $(function () {
+        var pxShow = 400;//height on which the button will show
+        var fadeInTime = 1000;//how slow/fast you want the button to show
+        var fadeOutTime = 1000;//how slow/fast you want the button to hide
+        var scrollSpeed = 1000;//how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
 
-include("includes/footer_um-new.php");
+        $(window).scroll(function(){
+            if($(window).scrollTop() >= pxShow){
+                $('#backtotop').fadeIn(fadeInTime);
+            }else{
+                $('#backtotop').fadeOut(fadeOutTime);
+            }
+        });
 
-?>
-<script type="text/javascript">
+        // show all db details
+        $('#backtotop a').click(function () {
+            $('html, body').animate({scrollTop:0}, scrollSpeed);
+        });
 
-    $(document).ready(function(){
-
-        function stripeR(container) {
-            $(".zebra:even").addClass("evenrow");
-            $(".zebra:odd").addClass("oddrow");
-        }
-
-        stripeR();
 
     });
-
 </script>
+
+<?php
+// footer
+include("includes/footer_um-new.php"); ?>

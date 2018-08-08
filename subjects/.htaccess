@@ -4,8 +4,14 @@ RewriteEngine On
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^([^\.]+)$ $1.php [NC,L]
 #RewriteBase /subjectsplus/subjects/
-RewriteRule ^staff/([^/\.]+)/?$ staff_details.php?name=$1 [L]
+
+RewriteBase /subjects/
+#RewriteRule ^profile/([^/\.]+)/?$ staff_details.php?name=$1 [L]
+RewriteRule ^staff/([^/*]+)/?$ staff_details.php?name=$1 [L]
+RewriteRule ^profile/?([a-zA-Z0-9\[\]\.()+|_-]+)$ staff_details.php?name=$1 [L]
 RewriteRule ^([^/\.]+)/?$ guide.php?subject=$1 [L]
 RewriteRule ^([^/\.]+)/([^/\.]+)/?$ guide.php?subject=$1&source=$2 [L]
+
+RewriteRule ^([^/\.]+)/?$ guide.php?subject=$1 [L]
 
 ErrorDocument 404 /subjects/blank-404.php

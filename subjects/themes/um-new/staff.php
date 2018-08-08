@@ -40,7 +40,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li><a href="'.$staff_page_url.'#130" class="dept-heading">Digital Strategies Division</a></li>
   <li>
     <div class="dept-sub">
-      <a href="#'.$staff_page_url.'110">Digital Production</a>  
+      <a href="'.$staff_page_url.'#110">Digital Production</a>  
     </div>
   </li>
   
@@ -142,11 +142,12 @@ $display = $staff_data->writeTable($selected_letter);
 include("includes/header_um-new.php");
 ?>
 
+<input id="jekyll-category" value="sp-staff" type="hidden">
 <div class="feature section">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0"><a href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/04/UML_Org_Chart_January2018-v2.pdf" class="default">Organization Chart (pdf)</a></p>
+        <p class="mb-0"><a href="https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/07/UML-Org-Chart-September2018.pdf" class="default">Organization Chart (pdf)</a></p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
@@ -169,8 +170,13 @@ include("includes/header_um-new.php");
 </section>
 
 <section class="section section-half-top">
-    <input id="jekyll-category" value="sp-staff" type="hidden">
     <div class="container">
+        <div id="backtotop">
+            <a href="#" class="default no-decoration">
+                <i class="fas fa-arrow-alt-circle-up" title="Back to top"></i>
+                <span>Top</span>
+            </a>
+        </div>
         <?php print $alphabet; ?>
 
         <?php
@@ -225,6 +231,30 @@ include("includes/header_um-new.php");
 
     </div>
 </section>
+
+<script>
+    $(function () {
+        var pxShow = 400;//height on which the button will show
+        var fadeInTime = 1000;//how slow/fast you want the button to show
+        var fadeOutTime = 1000;//how slow/fast you want the button to hide
+        var scrollSpeed = 1000;//how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
+
+        $(window).scroll(function(){
+            if($(window).scrollTop() >= pxShow){
+                $('#backtotop').fadeIn(fadeInTime);
+            }else{
+                $('#backtotop').fadeOut(fadeOutTime);
+            }
+        });
+
+        // show all db details
+        $('#backtotop a').click(function () {
+           $('html, body').animate({scrollTop:0}, scrollSpeed);
+        });
+
+
+    });
+</script>
 
 <?php
 // Footer

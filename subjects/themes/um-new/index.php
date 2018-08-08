@@ -8,8 +8,6 @@ use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideList;
 
-//$use_jquery = array("sp_legacy");
-
 $page_title  = "Research Guides";
 $description = "The best stuff for your research.  No kidding.";
 $keywords    = "research, databases, subjects, search, find";
@@ -328,102 +326,98 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more informa
 
 // Now we are finally read to display the page
 ?>
-    <input id="jekyll-category" value="sp-guide" type="hidden">
-    <div class="feature section">
-        <div class="container text-center minimal-header">
-            <h1><?php print $page_title; ?></h1>
-            <hr align="center" class="hr-panel">
-            <p class="mb-0"><?php print $legend; ?></p>
 
-            <div class="favorite-heart">
-                <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
-                     data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon"></div>
+<input id="jekyll-category" value="sp-guide" type="hidden">
+<div class="feature section">
+    <div class="container text-center minimal-header">
+        <h1><?php print $page_title; ?></h1>
+        <hr align="center" class="hr-panel">
+        <p class="mb-0">&nbsp;</p>
+
+        <div class="favorite-heart">
+            <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
+                 data-item-type="Pages" alt="Add to My Favorites" class="uml-quick-links favorite-page-icon"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Search Component -->
+<section class="search-area d-none d-lg-block">
+    <div class="full-search">
+        <div class="container text-center">
+            <div class="search-group">
+                <div id="uml-site-search-container"></div>
+                <div class="adv-search d-none">
+                    <a class="no-decoration default" href="#">Advanced Search</a>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Search Component -->
-    <section class="search-area d-none d-lg-block">
-        <div class="full-search">
-            <div class="container text-center">
-                <div class="search-group">
-                    <div id="uml-site-search-container"></div>
-                    <div class="adv-search d-none">
-                        <a class="no-decoration default" href="#">Advanced Search</a>
-                    </div>
+
+
+<section class="section section-half-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <?php print $pills; ?>
+
+                <div class="tab-content" id="pills-tabContent-guides">
+                    <?php
+                    print $collection_results;
+                    print $layout; ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h4 class="mb-2">Find an Expert</h4>
+                <p><?php print $bonus_text; ?></p>
+                <ul class="people-vertical list-unstyled">
+                    <?php print $guide_experts; ?>
+                </ul>
+
+                <div class="text-center mt-3 mb-3 mb-lg-5"><a
+                            href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians"
+                            class="btn btn-default" role="button"><?php print $button_text; ?></a></div>
+
+                <div class="feature popular-list p-3 mt-3">
+                    <h4><?php print _( "- New Databases -" ); ?></h4>
+                    <?php print $newlist; ?>
+                    <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
+                        all</a>
+                    <h4 class="mt-4"><?php print _( "- New Guides -" ); ?></h4>
+                    <?php print $newest_guides; ?>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Original search with auto complete-->
-    <div class="index-search-area d-none">
-		<?php
-		//$input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
-		//$input_box->displayBox();
-		?>
     </div>
+</section>
 
-    <section class="section section-half-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-					<?php print $pills; ?>
-
-                    <div class="tab-content" id="pills-tabContent-guides">
-						<?php
-						print $collection_results;
-						print $layout; ?>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <h4 class="mb-2">Find an Expert</h4>
-                    <p><?php print $bonus_text; ?></p>
-                    <ul class="people-vertical list-unstyled">
-						<?php print $guide_experts; ?>
-                    </ul>
-
-                    <div class="text-center mt-3 mb-3 mb-lg-5"><a
-                                href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians"
-                                class="btn btn-default" role="button"><?php print $button_text; ?></a></div>
-
-                    <div class="feature popular-list p-3 mt-3">
-                        <h4><?php print _( "- New Databases -" ); ?></h4>
-						<?php print $newlist; ?>
-                        <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
-                            all</a>
-                        <h4 class="mt-4"><?php print _( "- New Guides -" ); ?></h4>
-						<?php print $newest_guides; ?>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        $(function () {
-            // Toggle details for all guides in a category list
-            $('.guide-list-expand').click(function () {
-                $(this).parent().find('.guide_list_bonus').toggle();
-            });
-
-            // Toggle details for each guide list item in collection list
-            $(".fa-plus-circle").click(function () {
-                $(this).toggleClass('fa-plus-circle fa-minus-circle');
-                $(this).parent().find('.guide_list_bonus').toggle();
-            });
-
-            // Toggle details for each guide list item
-            $('.fa-info-circle').click(function () {
-                $(this).parent().find('.guide_list_bonus').toggle();
-            });
-
-            //add class to ui-autocomplete dropdown
-            $('.ui-autocomplete-input').addClass("index-search-dd");
+<script>
+    $(function () {
+        // Toggle details for all guides in a category list
+        $('.guide-list-expand').click(function () {
+            $(this).parent().find('.guide_list_bonus').toggle();
         });
-    </script>
+
+        // Toggle details for each guide list item in collection list
+        $(".fa-plus-circle").click(function () {
+            $(this).toggleClass('fa-plus-circle fa-minus-circle');
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
+
+        // Toggle details for each guide list item
+        $('.fa-info-circle').click(function () {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
+
+        //add class to ui-autocomplete dropdown
+        $('.ui-autocomplete-input').addClass("index-search-dd");
+    });
+</script>
 
 <?php
 // Load footer file

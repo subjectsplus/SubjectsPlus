@@ -1967,7 +1967,7 @@ $list_guides = "<table class=\"item_listing\" width=\"98%\">";
     }
 
     $list_guides .= "<tr class=\"zebra $row_colour\">
-    <td><div class=\"d-flex flex-row flex-nowrap mb-3\"><div class=\"collection-image\"><img class=\"staff_photo\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . "\" src=\"$thumbnail\" /></div><div><h4><a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode($value[3]) . "</a></h4>{$value[6]}</div></div></td></tr>";
+    <td><div class=\"d-flex flex-row flex-nowrap mb-3\"><div class=\"collection-image\"><img class=\"staff_photo\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . "\" src=\"$thumbnail\" /></div><div><h4><a href=\"$guide_location\" class=\"default\">" . htmlspecialchars_decode($value[3]) . "</a></h4>{$value[6]}</div></div></td></tr>";
   }
 
 $list_guides .= "</table>";
