@@ -103,7 +103,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname;";
                 }
 
                 if ($current_dept != $dept_id) {
-                    $site_url = "https://new.library.miami.edu";
+                    $site_url = "https://library.miami.edu";
                     $items .= "<a name=\"$dept_id\"></a><h2>$dept_name</h2><div class=\"dept-info d-sm-flex flex-sm-row flex-sm-nowrap\">";
 
                     if ($dept_tel != "") {
@@ -124,7 +124,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname;";
                 $items .= "<li><div class=\"staff-pic\"><a href=\"$link_to_details\">";
 
                 // Here we stick in their headshot; comment out if you don't want; maybe later this should be an admin parameter
-                $items .= getHeadshot($email, 'medium');
+                $items .= getHeadshot($email, 'medium', "", true);
 
                 $items .= "</a></div><div class=\"staff-meta\"><h4>";
 
