@@ -38,7 +38,7 @@
                     <div class="container">
                         <h5>Search</h5>
                         <hr align="left" class="hr-panel">
-                        <div id="uml-site-search-container-mobile"></div>
+                        <div class="uml-site-search-container"></div>
                     </div>
                 </section>
             </div>
