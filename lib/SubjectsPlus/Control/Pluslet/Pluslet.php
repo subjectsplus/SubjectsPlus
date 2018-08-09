@@ -154,12 +154,11 @@ class Pluslet {
 		//when TITLEBAR is HIDDEN - PV
 		if ( ( $hide_titlebar == 1 && $this->_visible_id == "" || empty( $this->_title ) && $this->_visible_id == "" ) ) {
 
-			$this->_pluslet .= "
-            <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple abek no_overflow $this->_pluslet_id_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>";
-
-			if ( $this->_target_blank_links == 1 ) {
-				$this->_pluslet_body_bonus_classes .= "target_blank_links";
-			}
+        //when TITLEBAR is HIDDEN - PV
+        if (($hide_titlebar == 1 && $this->_visible_id == "" || $this->_title == "" && $this->_visible_id == "")) {
+	        $this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
+            $this->_pluslet .= "
+            <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple no_overflow $this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
 			$this->_pluslet .= "<div class=\"titlebar pluslet_sort\">$this->_title</div>";
 
@@ -183,7 +182,12 @@ class Pluslet {
 
 			$this->_pluslet_name_field = empty( $this->_pluslet_name_field ) ? $this->_type : "settings-{$this->_pluslet_name_field}";
 
-			$this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
+        } else {
+            //when TITLEBAR is SHOWN - PV
+
+            $this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
+
+            $this->_pluslet .= "<div class=\"pluslet $this->_pluslet_bonus_classes $this->_pluslet_id_field\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">
 			     <a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
 
