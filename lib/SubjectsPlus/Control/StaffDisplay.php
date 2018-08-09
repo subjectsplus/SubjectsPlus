@@ -46,7 +46,7 @@ FROM staff s,
      department d
 WHERE s.staff_id = sd.staff_id
   AND sd.department_id = d.department_id
-  AND user_type_id = '1'
+  AND s.user_type_id = '1'
   AND s.active = 1
   AND (lname LIKE :search_term OR fname LIKE :search_term OR title LIKE :search_term OR name LIKE :search_term OR
        CONCAT(fname, ' ', lname) LIKE :search_term OR (SELECT GROUP_CONCAT(subject)
@@ -56,7 +56,7 @@ WHERE s.staff_id = sd.staff_id
                                                          AND staff_subject.staff_id = s.staff_id
                                                          AND subject.active = 1
                                                          AND type = 'Subject') like :search_term)
-ORDER BY department_sort, d.name, staff_sort DESC, lname;";
+ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
             $db = new Querier;
 
