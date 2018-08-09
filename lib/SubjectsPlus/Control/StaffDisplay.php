@@ -27,14 +27,35 @@ class StaffDisplay {
         	$items = "";
 			$search_term = isset($_GET["search_term"]) ? scrubData($_GET["search_term"]) : "";
 
-            $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, d.email, d.url, s.staff_id, s.ptags
-        FROM staff s, staff_department sd, department d
-        WHERE s.staff_id = sd.staff_id
-        AND sd.department_id = d.department_id
-        AND user_type_id = '1'
-        AND active =1
-        AND (lname LIKE :search_term OR fname LIKE :search_term OR title LIKE :search_term OR name LIKE :search_term OR CONCAT(fname, ' ', lname) LIKE :search_term)
-        ORDER BY department_sort, d.name, staff_sort DESC, lname";
+            $q = "SELECT DISTINCT d.department_sort,
+                s.staff_sort,
+                name,
+                lname,
+                fname,
+                title,
+                s.tel,
+                s.email,
+                d.department_id,
+                d.telephone,
+                d.email,
+                d.url,
+                s.staff_id,
+                s.ptags
+FROM staff s,
+     staff_department sd,
+     department d
+WHERE s.staff_id = sd.staff_id
+  AND sd.department_id = d.department_id
+  AND s.active = 1
+  AND (lname LIKE :search_term OR fname LIKE :search_term OR title LIKE :search_term OR name LIKE :search_term OR
+       CONCAT(fname, ' ', lname) LIKE :search_term OR (SELECT GROUP_CONCAT(subject)
+                                                       FROM subject,
+                                                            staff_subject
+                                                       WHERE subject.subject_id = staff_subject.subject_id
+                                                         AND staff_subject.staff_id = s.staff_id
+                                                         AND subject.active = 1
+                                                         AND type = 'Subject') like :search_term)
+ORDER BY department_sort, d.name, staff_sort DESC, lname;";
 
             $db = new Querier;
 
