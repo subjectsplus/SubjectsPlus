@@ -811,7 +811,7 @@ function seeRecentChanges($staff_id, $limit=10) {
 }
 
 /* This function is only for the University of Miami; on UM site, rename this to getHeadshot and comment out the other one */
-function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
+function getHeadshot($email, $pic_size="medium", $class="staff_photo", $um_theme = false) {
 
   
    $name_id = explode("@", $email);
@@ -820,13 +820,17 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
   // Get the real file path for the headshot image 
   $headshot_path  =  dirname(dirname(dirname(__FILE__))) . "/assets/users/$lib_image/headshot.jpg";
 
+	if(!file_exists($headshot_path)) {
+		$headshot_path  =  dirname(dirname(dirname(__FILE__))) . "/assets/images/headshot_large.jpg";
+    }
+
   if(file_exists($headshot_path)) {
 
       // Check if the image is the UM logo
       $image_hash = md5_file($headshot_path);
       $um_logo = "91b8c9ec083c5abc898a5c482aac959e";
 
-      if($image_hash == $um_logo) {} else {
+      if($image_hash == $um_logo && !$um_theme) {} else {
 
               $headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
 
