@@ -322,7 +322,7 @@ if ( isset ( $_GET["invalid_lti_call"] ) ) {
 }
 
 // Legend
-$legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more information" ) . " &nbsp;&nbsp;  <i class=\"fas fa-plus-circle\"></i> = " . _( "Click to expand list" ) . "\n";
+$legend = "Research Guides point you to materials and resources appropriate for particular disciplines, courses, and special topics.  These guides are curated by UM librarians and experts-in-training, including Library Research Scholars and Peer Research Consultants. In a world of abundant information resources, librarians create research guides to save you time and energy. If you would like to request a guide for a course or topic, please contact your librarian.";
 
 // Now we are finally read to display the page
 ?>
@@ -332,7 +332,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more informa
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0">&nbsp;</p>
+        <p class="mb-0 pb-0 d-none d-md-inline-block pb-md-3 text-left" style="line-height:1.2;"><?php print $legend; ?></p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
