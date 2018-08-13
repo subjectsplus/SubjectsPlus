@@ -201,7 +201,7 @@ if ( $rtrial = $statement->fetchAll() ) {
 }
 
 // Legend //
-$legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more information" ) . "\n";
+$legend = "Research Guides point you to materials and resources appropriate for particular disciplines, courses, and special topics.  These guides are curated by UM librarians and experts-in-training, including Library Research Scholars and Peer Research Consultants. In a world of abundant information resources, librarians create research guides to save you time and energy. If you would like to request a guide for a course or topic, please contact your librarian.";
 
 
 // Now we are finally read to display the page
@@ -223,7 +223,7 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0">&nbsp;</p>
+        <p class="mb-0" style="line-height:1.2;">$legend</p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
