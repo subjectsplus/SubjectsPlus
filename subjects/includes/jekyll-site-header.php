@@ -11,7 +11,7 @@
     <div class="container-fluid no-padding">
         <div class="row no-gutters">
             <div class="col-1">
-                <button class="sliverbutton" aria-label="Toggle Accessibility Options" title="Toggle Accessibility Options">
+                <button class="sliverbutton sliver-accessibility-toggle" aria-label="Toggle Accessibility Options" title="Toggle Accessibility Options">
                     <i class="custom-eye"></i>
                 </button>
             </div>
@@ -28,6 +28,72 @@
         </div>
     </div>
 </section>
+<div class="sliver-content" style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <form action="https://welcome.miami.edu/search/search-results.html">
+                    <input name="client" value="$sSearchClient" type="hidden">
+                    <input name="resTemp" value="/search/search-results.html" type="hidden">
+                    <input name="domain" value="https://library.miami.edu" type="hidden">
+                    <label class="show-for-sr" for="sliverSearchSmall">Search UM</label>
+                    <input class="umsearchfield-sm" id="sliverSearchSmall" name="q" placeholder="Search UM" type="text">
+                    <button aria-label="Search" class="search-sliver"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            <div class="col-md-8 order-md-first">
+                <ul class="list-unstyled mt-3 mt-md-0 mb-md-0 d-md-flex flex-md-nowrap flex-md-row justify-content-md-between justify-content-xl-start">
+                    <li><a href="https://welcome.miami.edu/apply-now/index.html"><button class="apply-btn">Apply</button></a></li>
+                    <li><a href="https://welcome.miami.edu/about-um/index.html">About UM</a></li>
+                    <li><a href="https://welcome.miami.edu/give/index.html">Give to UM</a></li>
+                    <li><a href="https://welcome.miami.edu/academics/schools-and-colleges/index.html">Schools</a></li>
+                    <li><a href="https://alumni.miami.edu/index.html">Alumni</a></li>
+                    <li><a href="http://roadmap.miami.edu/index.html">Roadmap</a></li>
+                    <li class="d-md-none"><a href="https://welcome.miami.edu/academics/index.html">Academics</a></li>
+                    <li class="d-md-none"><a href="https://welcome.miami.edu/admissions/index.html">Admissions</a></li>
+                    <li class="d-md-none"><a href="https://welcome.miami.edu/student-life/index.html">Student Life</a></li>
+                    <li class="d-md-none"><a href="https://welcome.miami.edu/research/index.html">Research</a></li>
+                    <li class="d-md-none"><a href="https://welcome.miami.edu/uhealth/index.html">UHealth</a></li>
+                    <li class="d-md-none"><a href="https://welcome.miami.edu/athletics/index.html">Athletics</a></li>
+                </ul>
+            </div>
+            <div class="col-md-1">
+                <a href="https://welcome.miami.edu/tools/index.html" class="um-last-link">Tools</a>
+            </div>
+        </div>
+
+        <script>
+            // Sliver Scripts
+            $( function(){
+                $('.sliver-toggle-menu').click(function(){
+                    $('.sliver-content').toggle();
+                    $('.sliver-toggle-menu i').toggleClass('fa-plus fa-minus');
+                });
+            });
+        </script>
+    </div>
+</div>
+<div class="sliver-accessibility" style="display: none;">
+    <div class="container">
+        <h6>Accessibility Options:</h6>
+        <ul class="list-unstyled mt-3 mt-md-0 d-sm-flex flex-sm-nowrap flex-sm-row justify-content-sm-start">
+            <li><a href="https://camnercenter.miami.edu/disability-services/index.html">Office of Disability Services</a></li>
+            <li><a href="https://camnercenter.miami.edu/disability-services/request-services/index.html">Request Assistance</a></li>
+            <li>305-284-2374</li>
+        </ul>
+
+        <script>
+            // Accessibility Scripts
+            $( function(){
+                $('.sliver-accessibility-toggle').click(function(){
+                    $('.sliver-accessibility').toggle();
+                });
+            });
+        </script>
+    </div>
+</div>
+
 <nav class="navbar-expand-xl site-navbar" style="background-color:#4f5b65;">
     <div class="container position-relative">
         <a class="navbar-brand" href="https://library.miami.edu">
