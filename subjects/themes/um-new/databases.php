@@ -237,9 +237,6 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
         <div class="container text-center">
             <div class="search-group">
                 <div class="uml-site-search-container"></div>
-                <div class="adv-search">
-                    <a class="no-decoration default" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new&sortby=rank&mode=advanced">Advanced Search</a>
-                </div>
             </div>
         </div>
     </div>

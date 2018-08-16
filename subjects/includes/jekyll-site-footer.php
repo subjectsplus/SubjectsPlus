@@ -39,9 +39,6 @@
                         <h5 class="mt-3">Search</h5>
                         <hr align="left" class="hr-panel">
                         <div class="uml-site-search-container"></div>
-                        <div class="adv-search mt-2 text-right">
-                            <a class="no-decoration default" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new&sortby=rank&mode=advanced">Advanced Search</a>
-                        </div>
                     </div>
                 </section>
             </div>
