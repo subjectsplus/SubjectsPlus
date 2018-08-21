@@ -30,7 +30,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li>
     <div class="dept-sub">
         <a href="'.$staff_page_url.'#100">Acquisitions</a>
-        <a href="'.$staff_page_url.'#128">Preservation / Conservation</a>
+        <a href="'.$staff_page_url.'#128">Preservation Strategies</a>
         <a href="'.$staff_page_url.'#109">Cuban Heritage Collection</a>
         <a href="'.$staff_page_url.'#104">Special Collections</a>
         <a href="'.$staff_page_url.'#133">University Archives</a>
@@ -67,7 +67,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
    <li class="dept-heading">Learning & Research Services Division</li>
    <li>
     <div class="dept-sub">
-        <a href="'.$staff_page_url.'#107">Digital Media Lab</a>
+        <a href="'.$staff_page_url.'#107">Creative Studio</a>
         <a href="'.$staff_page_url.'#105">Judi Prokop Newman Business Information Resource Center</a>
         <a href="'.$staff_page_url.'#125">Learning & Research Services</a>
         <a href="'.$staff_page_url.'#103">Marta and Austin Weeks Music Library & Technology Center</a>
@@ -89,7 +89,7 @@ $dept_select = "<select id=\"select_dept\">
   <optgroup label=\"Collection Strategies Division\">
     <option value=\"$staff_page_url#122\" data-external=\"\">Collection Strategies</option>
     <option value=\"$staff_page_url#100\" data-external=\"\">Acquisitions</option>
-    <option value=\"$staff_page_url#128\" data-external=\"\">Preservation / Conservation</option>
+    <option value=\"$staff_page_url#128\" data-external=\"\">Preservation Strategies</option>
     <option value=\"$staff_page_url#109\" data-external=\"\">Cuban Heritage Collection</option>
     <option value=\"$staff_page_url#104\" data-external=\"\">Special Collections</option>
     <option value=\"$staff_page_url#133\" data-external=\"\">University Archives</option> 
@@ -116,7 +116,7 @@ $dept_select = "<select id=\"select_dept\">
   </optgroup>
 
   <optgroup label=\"Learning & Research Services Division\">    
-    <option value=\"$staff_page_url#107\" data-external=\"\">Digital Media Lab</option>
+    <option value=\"$staff_page_url#107\" data-external=\"\">Creative Studio</option>
     <option value=\"$staff_page_url#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>
     <option value=\"$staff_page_url#125\" data-external=\"\">Learning & Research Services</option>
     <option value=\"$staff_page_url#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>

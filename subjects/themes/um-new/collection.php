@@ -135,9 +135,6 @@ if ( isset( $_GET["d"] ) ) {
         <div class="container text-center">
             <div class="search-group">
                 <div class="uml-site-search-container"></div>
-                <div class="adv-search d-none">
-                    <a class="no-decoration default" href="#">Advanced Search</a>
-                </div>
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@
             <div class="tab-pane" id="search" role="tabpanel" aria-labelledby="search-tab">
                 <section class="section">
                     <div class="container">
-                        <h5>Search</h5>
+                        <h5 class="mt-3">Search</h5>
                         <hr align="left" class="hr-panel">
                         <div class="uml-site-search-container"></div>
                     </div>
@@ -45,7 +45,7 @@
 
             <div class="tab-pane" id="hours" role="tabpanel" aria-labelledby="hours-tab">
                 <section class="section">
-                    <div class="container">
+                    <div class="container mt-3 mt-lg-0">
                         <div class="row" id="mobile-hours-list-container">
                             <div class="col-sm-6">
                                 <h5>Libraries</h5>
@@ -119,7 +119,7 @@
             <div class="tab-pane" id="account" role="tabpanel" aria-labelledby="account-tab">
                 <section class="section">
                     <div class="container">
-                        <h5>Accounts</h5>
+                        <h5 class="mt-3 mt-lg-0">Accounts</h5>
                         <hr align="left" class="hr-panel">
                         <ul class="d-inline-block">
 
@@ -142,7 +142,7 @@
             <div class="tab-pane" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
                 <section class="section">
                     <div class="container">
-                        <h5>My Favorite Links</h5>
+                        <h5 class="mt-3 mt-lg-0">My Favorite Links</h5>
                         <hr align="left" class="hr-panel">
                         <div class="my-favorite-links uml-quick-links" data-type="account-list">
                             <h6><a href="https://library.miami.edu/favorites.html" class="no-decoration default">(How to use this feature)</a></h6>

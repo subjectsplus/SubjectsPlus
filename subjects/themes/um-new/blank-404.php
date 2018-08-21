@@ -62,9 +62,6 @@ include("includes/header_um-new.php");
         <div class="container text-center">
             <div class="search-group">
                 <div id="uml-site-search-container"></div>
-                <div class="adv-search d-none">
-                    <a class="no-decoration default" href="#">Advanced Search</a>
-                </div>
             </div>
         </div>
     </div>
