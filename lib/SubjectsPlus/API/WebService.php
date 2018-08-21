@@ -57,7 +57,22 @@ abstract class WebService
 
 		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
-		if(!$lobjResults) $lobjResults = array();
+		if(!$lobjResults){
+			$lobjResults = array();
+		}else{
+			global $proxyURL;
+			if (!empty($proxyURL)){
+				$databases_count = count($lobjResults);
+				for ($i=0;$i<$databases_count; $i= $i + 1){
+					$database = $lobjResults[$i];
+					$access_restriction = (int) $database['access_restrictions'];
+					if ($access_restriction != 1){
+						$database['location'] = $proxyURL.$database['location'];
+					}
+					$lobjResults[$i] = $database;
+				}
+			}
+		}
 
 		$this->mobjData[$this->mstrTag] = $lobjResults;
 	}
