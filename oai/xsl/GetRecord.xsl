@@ -14,6 +14,7 @@
     <xsl:param name="language"></xsl:param>
     <xsl:param name="publisher"></xsl:param>
     <xsl:param name="type"></xsl:param>
+    <xsl:param name="collectionList"></xsl:param>
     <xsl:param name="recordDate"></xsl:param>
 
     <xsl:template match="/">
@@ -63,6 +64,9 @@
                             <dc:type>
                                 <xsl:value-of select="$type"></xsl:value-of>
                             </dc:type>
+                            <dc:collection>
+                                <xsl:value-of select="$collectionList"></xsl:value-of>
+                            </dc:collection>
                             <dc:identifier><xsl:value-of select="$url"></xsl:value-of></dc:identifier>
                         </oai_dc:dc>
                     </metadata>

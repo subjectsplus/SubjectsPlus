@@ -17,6 +17,7 @@
     <xsl:param name="language"></xsl:param>
     <xsl:param name="publisher"></xsl:param>
     <xsl:param name="type"></xsl:param>
+    <xsl:param name="collectionList"></xsl:param>
     <xsl:param name="recordDate"></xsl:param>
     <xsl:param name="url"></xsl:param>
 
@@ -29,8 +30,12 @@
     <xsl:template name="singleRecord">
         <record>
             <header>
-                <identifier><xsl:value-of select="$identifier"></xsl:value-of></identifier>
-                <datestamp><xsl:value-of select="$recordDate"></xsl:value-of></datestamp>
+                <identifier>
+                    <xsl:value-of select="$identifier"></xsl:value-of>
+                </identifier>
+                <datestamp>
+                    <xsl:value-of select="$recordDate"></xsl:value-of>
+                </datestamp>
             </header>
             <metadata>
                 <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
@@ -58,6 +63,9 @@
                     <dc:type>
                         <xsl:value-of select="$type"></xsl:value-of>
                     </dc:type>
+                    <dc:collection>
+                        <xsl:value-of select="$collectionList"></xsl:value-of>
+                    </dc:collection>
                     <dc:description>
                         <xsl:value-of select="$description"></xsl:value-of>
                     </dc:description>

@@ -102,7 +102,7 @@ class Repo
     public function setupBasicParams(XSLTProcessor $xslt)
     {
         global $baseUrl;
-        
+
         $xslt->setParameter('', 'responseDate', date('c'));
         $xslt->setParameter('', 'recordDate', date('Y-m-d'));
         $xslt->setParameter('', 'repositoryName', $this->repositoryName);
@@ -123,5 +123,7 @@ class Repo
         $xslt->setParameter('', 'identifier', $record->getIdentifier());
         $xslt->setParameter('', 'url', $this->identifierUrl . $record->getIdentifier());
         $xslt->setParameter('', 'type', $record->getType());
+	    $xslt->setParameter('', 'collectionList', $record->getCollectionList());
+
     }
 }
