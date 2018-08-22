@@ -15,7 +15,7 @@
 <link type="text/css" media="print" rel="stylesheet" href="<?php print $AssetPath; ?>css/public/um-print.css">
 <link type="text/css" media="screen" rel="stylesheet" href="<?php print $AssetPath; ?>css/shared/font-awesome.min.css">
 
-<link rel="stylesheet" type="text/css" href="http://calder.med.miami.edu/images/halfmoontabs.css">
+<link rel="stylesheet" type="text/css" href="https://calder.med.miami.edu/images/halfmoontabs.css">
 
 
 
@@ -77,11 +77,11 @@ $v2styles = TRUE;
     <div class="pure-g header-content">
 
         <div class="pure-u-1-2">
-          <a href="http://calder.med.miami.edu/index.html"><img src="http://calder.med.miami.edu/images/calderheaderlogo.jpg" alt="Home Page" border="0" class="calder-logo" /></a>
+          <a href="http://calder.med.miami.edu/index.html"><img src="https://calder.med.miami.edu/images/calderheaderlogo.jpg" alt="Home Page" border="0" class="calder-logo" /></a>
         </div>
       
         <div class="pure-u-1-2 uhealth-area">
-          <a href="http://umiamihospital.com/"><img src="http://calder.med.miami.edu/images/uhealth-300.jpg" alt="UMHealth System" border="0" class="uhealth-logo" /></a>          
+          <a href="http://umiamihospital.com/"><img src="https://calder.med.miami.edu/images/uhealth-300.jpg" alt="UMHealth System" border="0" class="uhealth-logo" /></a>
         </div>
         <span id="menu_button"><a class="pure-button pure-u-1 button-menu" href="#">Menu</a></span>
 
