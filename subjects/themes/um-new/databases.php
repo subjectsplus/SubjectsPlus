@@ -299,7 +299,7 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
                         <!--Resource promotion-->
                         <div class="card mt-2 mt-sm-0 mt-lg-3 mb-3 mb-lg-4">
                             <a href="http://www.miami.edu/lynda" title="Lynda.com"><img
-                                        src="https://library.miami.edu/images/card-lynda.jpg" alt="Lynda.com"
+                                        src="https://www.library.miami.edu/images/card-lynda.jpg" alt="Lynda.com"
                                         class="card-img-top no-decoration"></a>
                             <div class="card-body">
                                 <h5 class="card-title">
