@@ -89,5 +89,5 @@
     });
 
 </script>
-<script src="https://library.miami.edu/assets/webpack/common.bundle.js"></script>
-<script src="https://library.miami.edu/assets/webpack/app.bundle.js"></script>
+<script src="https://www.library.miami.edu/assets/webpack/common.bundle.js"></script>
+<script src="https://www.library.miami.edu/assets/webpack/app.bundle.js"></script>
