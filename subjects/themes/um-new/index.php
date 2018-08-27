@@ -413,6 +413,11 @@ $legend = "Research Guides point you to materials and resources appropriate for 
 
         //add class to ui-autocomplete dropdown
         $('.ui-autocomplete-input').addClass("index-search-dd");
+
+        //LTI notification close button
+        $( ".notification-close-button" ).click(function() {
+            $(this).parent().hide();
+        });
     });
 </script>
 
