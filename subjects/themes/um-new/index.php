@@ -295,12 +295,10 @@ if ( isset ( $_GET["no_lti_enabled"] ) ) {
 
 	if ( $no_lti_enabled == 1 ) {
 		print "
-<div class=\"panel-container\">
-  <div class=\"notification feature-light p-3\">
-    <button class=\"notification-close-button\">x</button>
-    <p>" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
-  </div>
-</div>";
+<div class=\"container alert alert-danger text-center\" role=\"alert\">
+    <button class=\"notification-close-button btn d-inline-block\">x</button>
+    <p class=\"d-inline-block mb-0\">" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
+  </div>";
 	}
 }
 
@@ -310,12 +308,10 @@ if ( isset ( $_GET["invalid_lti_call"] ) ) {
 
 	if ( $invalid_lti_call == 1 ) {
 		print "
-<div class=\"panel-container\">
-  <div class=\"notification feature-light p-3\">
-    <button class=\"notification-close-button\">x</button>
-    <p>" . _( "Please access the LTI from the appropriate LMS." ) . "</p>
-  </div>
-</div>";
+<div class=\"container alert alert-danger text-center\" role=\"alert\">
+    <button class=\"notification-close-button btn d-inline-block\">x</button>
+    <p class=\"d-inline-block mb-0\">" . _( "Please access the LTI from the appropriate LMS." ) . "</p>
+  </div>";
 	}
 }
 
