@@ -282,9 +282,9 @@ if ( isset ( $_GET["no_bb_guide"] ) ) {
 
 	if ( $bb_guide_not_found == 1 ) {
 		print "
-  <div class=\"container alert alert-danger text-center\" role=\"alert\">
-    <button class=\"notification-close-button btn d-inline-block\">x</button>
-    <p class=\"d-inline-block mb-0\">" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
+  <div class=\"alert alert-danger\" role=\"alert\">
+    <button class=\"notification-close-button btn\">X</button>
+    <p>" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
   </div>";
 	}
 }
@@ -295,9 +295,9 @@ if ( isset ( $_GET["no_lti_enabled"] ) ) {
 
 	if ( $no_lti_enabled == 1 ) {
 		print "
-<div class=\"container alert alert-danger text-center\" role=\"alert\">
-    <button class=\"notification-close-button btn d-inline-block\">x</button>
-    <p class=\"d-inline-block mb-0\">" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
+<div class=\"alert alert-danger\" role=\"alert\">
+    <button class=\"notification-close-button btn\">X</button>
+    <p>" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
   </div>";
 	}
 }
@@ -308,9 +308,9 @@ if ( isset ( $_GET["invalid_lti_call"] ) ) {
 
 	if ( $invalid_lti_call == 1 ) {
 		print "
-<div class=\"container alert alert-danger text-center\" role=\"alert\">
-    <button class=\"notification-close-button btn d-inline-block\">x</button>
-    <p class=\"d-inline-block mb-0\">" . _( "Please access the LTI from the appropriate LMS." ) . "</p>
+<div class=\"alert alert-danger\" role=\"alert\">
+    <button class=\"notification-close-button btn\">X</button>
+    <p>" . _( "Please access the LTI from the appropriate LMS." ) . "</p>
   </div>";
 	}
 }
