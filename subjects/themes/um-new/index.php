@@ -282,12 +282,10 @@ if ( isset ( $_GET["no_bb_guide"] ) ) {
 
 	if ( $bb_guide_not_found == 1 ) {
 		print "
-<div class=\"panel-container\">
-  <div class=\"notification feature-light p-3\">
-    <button class=\"notification-close-button\">x</button>
-    <p>" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
-  </div>
-</div>";
+  <div class=\"container alert alert-danger text-center\" role=\"alert\">
+    <button class=\"notification-close-button btn d-inline-block\">x</button>
+    <p class=\"d-inline-block mb-0\">" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
+  </div>";
 	}
 }
 
