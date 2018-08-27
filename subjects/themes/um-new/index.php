@@ -283,7 +283,7 @@ if ( isset ( $_GET["no_bb_guide"] ) ) {
 	if ( $bb_guide_not_found == 1 ) {
 		print "
   <div class=\"alert alert-danger\" role=\"alert\">
-    <button class=\"notification-close-button btn\">X</button>
+    <button class=\"notification-close-button btn\">x</button>
     <p>" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
   </div>";
 	}
@@ -296,7 +296,7 @@ if ( isset ( $_GET["no_lti_enabled"] ) ) {
 	if ( $no_lti_enabled == 1 ) {
 		print "
 <div class=\"alert alert-danger\" role=\"alert\">
-    <button class=\"notification-close-button btn\">X</button>
+    <button class=\"notification-close-button btn\">x</button>
     <p>" . _( "Find the Research Guide that best meets your needs below." ) . "</p>
   </div>";
 	}
@@ -309,7 +309,7 @@ if ( isset ( $_GET["invalid_lti_call"] ) ) {
 	if ( $invalid_lti_call == 1 ) {
 		print "
 <div class=\"alert alert-danger\" role=\"alert\">
-    <button class=\"notification-close-button btn\">X</button>
+    <button class=\"notification-close-button btn\">x</button>
     <p>" . _( "Please access the LTI from the appropriate LMS." ) . "</p>
   </div>";
 	}
