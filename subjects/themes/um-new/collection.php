@@ -115,12 +115,11 @@ if ( isset( $_GET["d"] ) ) {
 ?>
 
 <input id="jekyll-category" value="sp-guide" type="hidden">
-<div class="feature section">
+<div class="feature section-minimal">
     <div class="container text-center minimal-header">
         <h5 class="mt-3 mt-lg-0 mb-1"><a href="index.php" class="no-decoration default">Research Guides</a></h5>
         <h1></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0">&nbsp;</p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"

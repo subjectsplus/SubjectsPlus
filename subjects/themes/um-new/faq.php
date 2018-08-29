@@ -290,7 +290,7 @@ foreach ($collections_result as $myrow1) {
 ?>
 
 <input id="jekyll-category" value="sp-faq" type="hidden">
-<div class="feature section">
+<div class="feature section-minimal">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">

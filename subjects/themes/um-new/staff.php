@@ -143,7 +143,7 @@ include("includes/header_um-new.php");
 ?>
 
 <input id="jekyll-category" value="sp-staff" type="hidden">
-<div class="feature section">
+<div class="feature section-minimal">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">

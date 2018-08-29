@@ -145,11 +145,11 @@ if ($num_rows) {
 include("includes/header_um-new.php");
 ?>
 
-<div class="feature section">
+<div class="feature section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0"><?php print $intro; ?></p>
+        <p class="mb-0 mt-2"><?php print $intro; ?></p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"

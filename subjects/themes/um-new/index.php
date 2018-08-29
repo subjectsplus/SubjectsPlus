@@ -322,11 +322,11 @@ $legend = "Research Guides point you to materials and resources appropriate for 
 ?>
 
 <input id="jekyll-category" value="sp-guide" type="hidden">
-<div class="feature section">
+<div class="feature section-minimal">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0 pb-0 d-none d-md-inline-block pb-md-3 text-left" style="line-height:1.2;"><?php print $legend; ?></p>
+        <p class="mb-0 mt-md-2 mb-md-2 d-none d-md-inline-block text-left" style="line-height:1.2;"><?php print $legend; ?></p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
