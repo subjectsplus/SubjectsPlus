@@ -6,6 +6,11 @@ RewriteEngine On
 #RewriteBase /subjectsplus/subjects/
 
 RewriteBase /subjects/
+
+RewriteCond %{QUERY_STRING} letter=By%20Department [NC]
+RewriteRule (.*) /subjects/staff.php?letter=Departments [R=301,L]
+
+
 #RewriteRule ^profile/([^/\.]+)/?$ staff_details.php?name=$1 [L]
 RewriteRule ^staff/([^/*]+)/?$ staff_details.php?name=$1 [L]
 RewriteRule ^profile/?([a-zA-Z0-9\[\]\.()+|_-]+)$ staff_details.php?name=$1 [L]
