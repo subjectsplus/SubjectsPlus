@@ -531,7 +531,7 @@ include("includes/header_um-new.php");
     }
 </script>
 
-<div class="feature section">
+<div class="feature section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">

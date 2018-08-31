@@ -33,7 +33,7 @@
                   </p>
     				  </div>
               <div class="pure-u-1 pure-u-lg-1-8 footer-adj">
-                  <p id="social_icons_small"><a href="https://www.facebook.com/caldermedlibrary"><img src="http://calder.med.miami.edu/images/facebook.png" alt="Find Us on Facebook" title="Facebook" width="40px" height="40px"/></a></p>
+                  <p id="social_icons_small"><a href="https://www.facebook.com/caldermedlibrary"><img src="https://calder.med.miami.edu/images/facebook.png" alt="Find Us on Facebook" title="Facebook" width="40px" height="40px"/></a></p>
               </div>
 	     </div> <!-- end pure-g -->
   </div> <!-- end wide-footer -->

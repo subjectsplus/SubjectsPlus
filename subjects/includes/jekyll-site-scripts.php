@@ -6,8 +6,8 @@
  */
 ?>
 
-<script src="https://library.miami.edu/assets/js/modernizr.js"></script>
-<script src="https://library.miami.edu/assets/js/js-offcanvas.pkgd.js"></script>
+<script src="https://www.library.miami.edu/assets/js/modernizr.js"></script>
+<script src="https://www.library.miami.edu/assets/js/js-offcanvas.pkgd.js"></script>
 
 <script>
     // Append Around: https://github.com/filamentgroup/AppendAround
@@ -89,5 +89,5 @@
     });
 
 </script>
-<script src="https://library.miami.edu/assets/webpack/common.bundle.js"></script>
-<script src="https://library.miami.edu/assets/webpack/app.bundle.js"></script>
+<script src="https://www.library.miami.edu/assets/webpack/common.bundle.js"></script>
+<script src="https://www.library.miami.edu/assets/webpack/app.bundle.js"></script>

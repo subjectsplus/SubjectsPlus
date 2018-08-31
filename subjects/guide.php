@@ -194,7 +194,7 @@ print $social_and_search;
 <?php
 if (isset ($header_type) && $header_type == 'um-new') {
 
-    $guide_min_header = "<div class=\"feature section guide-header\">
+    $guide_min_header = "<div class=\"feature section-minimal-nosearch guide-header\">
         <div class=\"container text-center minimal-header\">
             <h5 class=\"mt-3 mt-lg-0 mb-1\"><a href=\"index.php\" class=\"no-decoration default\">" . _("Research Guides") . "</a></h5>
             <h1>" . $page_title . "</h1>

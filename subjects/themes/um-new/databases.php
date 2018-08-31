@@ -219,11 +219,10 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
 }
 ?>
 <input id="jekyll-category" value="sp-databases" type="hidden">
-<div class="feature section">
+<div class="feature section-minimal">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
         <hr align="center" class="hr-panel">
-        <p class="mb-0">&nbsp;</p>
 
         <div class="favorite-heart">
             <div id="heart" title="Add to Favorites" tabindex="0" role="button" data-type="favorite-page-icon"
@@ -299,7 +298,7 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
                         <!--Resource promotion-->
                         <div class="card mt-2 mt-sm-0 mt-lg-3 mb-3 mb-lg-4">
                             <a href="http://www.miami.edu/lynda" title="Lynda.com"><img
-                                        src="https://library.miami.edu/images/card-lynda.jpg" alt="Lynda.com"
+                                        src="https://www.library.miami.edu/images/card-lynda.jpg" alt="Lynda.com"
                                         class="card-img-top no-decoration"></a>
                             <div class="card-body">
                                 <h5 class="card-title">
