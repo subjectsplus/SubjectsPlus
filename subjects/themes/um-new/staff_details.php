@@ -47,7 +47,7 @@ GROUP BY s.lname");
 $statement->execute(array("$check_this@%"));
 $staffmem = $statement->fetchAll();
 
-$tel = $tel_prefix . $staffmem[0][4];
+$tel = !empty($tel_prefix) ? $tel_prefix . " " . $staffmem[0][4] : $tel_prefix . $staffmem[0][4];
 
 $fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
