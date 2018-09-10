@@ -41,6 +41,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li>
     <div class="dept-sub">
       <a href="'.$staff_page_url.'#110">Digital Production</a>  
+      <a href="'.$staff_page_url.'#140">Web & Application Development</a>
     </div>
   </li>
   
@@ -59,8 +60,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
         <a href="'.$staff_page_url.'#113">Inter-Library Loan & Course Reserves</a>
         <a href="'.$staff_page_url.'#106">Metadata & Discovery Services</a>
         <a href="'.$staff_page_url.'#143">Systems Administration</a>
-        <a href="'.$staff_page_url.'#129">Systems Support</a>
-        <a href="'.$staff_page_url.'#140">Web & Application Development</a>
+        <a href="'.$staff_page_url.'#129">Systems Support</a>        
     </div>
   </li>
   
@@ -98,6 +98,7 @@ $dept_select = "<select id=\"select_dept\">
   <optgroup label=\"Digital Strategies Division\">
     <option value=\"$staff_page_url#110\" data-external=\"\">Digital Production</option>
     <option value=\"$staff_page_url#130\" data-external=\"\">Digital Strategies</option>    
+    <option value=\"$staff_page_url#140\" data-external=\"\">Web & Application Development</option>
   </optgroup>
 
   <optgroup label=\"Health Sciences Division\">
@@ -111,8 +112,7 @@ $dept_select = "<select id=\"select_dept\">
     <option value=\"$staff_page_url#113\" data-external=\"\">Inter-Library Loan & Course Reserves</option>
     <option value=\"$staff_page_url#106\" data-external=\"\">Metadata & Discovery Services</option>
     <option value=\"$staff_page_url#143\" data-external=\"\">Systems Administration</option>
-    <option value=\"$staff_page_url#129\" data-external=\"\">Systems Support</option>
-    <option value=\"$staff_page_url#140\" data-external=\"\">Web & Application Development</option>
+    <option value=\"$staff_page_url#129\" data-external=\"\">Systems Support</option>    
   </optgroup>
 
   <optgroup label=\"Learning & Research Services Division\">    
