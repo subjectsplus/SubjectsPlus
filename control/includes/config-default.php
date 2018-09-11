@@ -520,4 +520,8 @@ $lti_service_account_password = '';
 // e.g. 13969
 $qp_inst_id = '';
 
+// WebPAC III
+
+$webpac_cat_action = "";
+
 ?>
