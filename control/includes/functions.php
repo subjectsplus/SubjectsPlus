@@ -167,6 +167,14 @@ function generatejQuery($use_jquery) {
 		<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.tablesorter.pager.js\"></script>\n";
   }
 
+  if (in_array("sp_legacy", $use_jquery)) {
+        $myjquery = "<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n
+        <script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\"></script>\n
+      <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/jquery-ui.css\" type=\"text/css\" media=\"all\" />\n
+      <script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.colorbox-min.js\"></script>\n
+      <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/colorbox.css\" type=\"text/css\" />\n";
+  }
+
   return $myjquery;
 }
 
@@ -373,8 +381,7 @@ ORDER BY s.subject";
     }
   }
 
-  $alphabet .= " <select name=\"browser\" onChange=\"window.location=this.options[selectedIndex].value\">
-  <option value=\"\" style=\"color: #ccc;\">- by subject -</option>
+  $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
         $subs_option_boxes
         </select>";
 
@@ -804,7 +811,7 @@ function seeRecentChanges($staff_id, $limit=10) {
 }
 
 /* This function is only for the University of Miami; on UM site, rename this to getHeadshot and comment out the other one */
-function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
+function getHeadshot($email, $pic_size="medium", $class="staff_photo", $um_theme = false) {
 
   
    $name_id = explode("@", $email);
@@ -813,13 +820,17 @@ function getHeadshot($email, $pic_size="medium", $class="staff_photo") {
   // Get the real file path for the headshot image 
   $headshot_path  =  dirname(dirname(dirname(__FILE__))) . "/assets/users/$lib_image/headshot.jpg";
 
+	if(!file_exists($headshot_path)) {
+		$headshot_path  =  dirname(dirname(dirname(__FILE__))) . "/assets/images/headshot_large.jpg";
+    }
+
   if(file_exists($headshot_path)) {
 
       // Check if the image is the UM logo
       $image_hash = md5_file($headshot_path);
       $um_logo = "91b8c9ec083c5abc898a5c482aac959e";
 
-      if($image_hash == $um_logo) {} else {
+      if($image_hash == $um_logo && !$um_theme) {} else {
 
               $headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
 
@@ -906,6 +917,8 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
     return;
   }
 
+
+
   foreach ($r as $myrow) {
 
     if ($link_name == 1) {
@@ -923,14 +936,17 @@ function showStaff($email, $picture=1, $pic_size="medium", $link_name = 0) {
         $linky = "staff_details.php?name=" . $name_id[0];
       }
       $full_name = "<a href=\"$linky\">" . $myrow[0] . " " . $myrow[1] . "</a>";
+      $img_link = "<a href=\"$linky\">";
     } else {
       $full_name = $myrow[0] . " " . $myrow[1];
+      $img_link = "";
     }
 
 
-    $staffer = "<td class=\"staffpic\">";
+    $staffer = "<div class=\"staffpic\">";
+    $staffer .= $img_link;
     $staffer .= getHeadshot($email, $pic_size);
-    $staffer .= "</td><td><strong>$full_name</strong><br />$myrow[2]<br />$tel_prefix $myrow[3]<br /><a href=\"mailto:$myrow[4]\">$myrow[4]</a></td>";
+    $staffer .= "</a></div><div class=\"staff-meta\"><h4>$full_name</h4><p><em>$myrow[2]</em></p><p>$tel_prefix $myrow[3]</p><p><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p></div></td>";
   }
 
   return $staffer;
@@ -957,8 +973,7 @@ function getDBbyTypeBoxes($selected_type = "", $show_formats = TRUE) {
     }
 
     if ($show_formats == TRUE) {
-      $alphabet .= " <select name=\"browser\" onChange=\"window.location=this.options[selectedIndex].value\">
-      <option value=\"\">- by format -</option>
+      $alphabet .= " <select name=\"browser\" id=\"select_format\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Format\">
       <option value=\"databases.php?letter=bytype\">" . _("List All Format Types") . "</option>
       $types_option_boxes
       </select>";
@@ -1855,12 +1870,12 @@ function listCollections($search = "", $display="default", $show_children="false
     case "2col":
 
     // for 2 col
-    $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-    $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";    
+    $col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
+    $col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
 
     foreach ($r as $myrow) {
 
-      $icon = "fa-plus-square";
+      $icon = "fa-plus-circle";
       $title_hover = "See all guides in this collection";
 
       $guide_location = "collection.php?d=" . $myrow[3];
@@ -1878,12 +1893,12 @@ function listCollections($search = "", $display="default", $show_children="false
 
           $guide_location2 = $guide_path . $mysubguide[2];
 
-          $list_bonus .= "<li><a href=\"$guide_location2\">$mysubguide[1]</a></li>";
+          $list_bonus .= "<li><a href=\"$guide_location2\" class=\"no-decoration default\">$mysubguide[1]</a></li>";
         }
         
       }
 
-      $our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+      $our_item = "<li title=\"{$title_hover}\"><i class=\"fas {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode($myrow[1]) . "</a>
       <div class=\"guide_list_bonus\">$list_bonus</ul></div>
       </li>";  
 
@@ -1903,7 +1918,7 @@ function listCollections($search = "", $display="default", $show_children="false
     $col_1 .= "</ul></div>";
     $col_2 .= "</ul></div>";
 
-    $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-Collection\"></a><h3>" . _("Guide Collections") . "</h3></div><div class=\"pure-u-1 guide-list-expand\">Expand/Hide All</div>" . $col_1 . $col_2 ."</div>";
+    $layout .= "<div class=\"tab-pane guide_list active\" id=\"section-Collection\" role=\"tabpanel\" aria-labelledby=\"show-Collection\"><div class=\"guide-list-expand\">Expand/hide all</div><div class=\"guide_list_header\"><a name=\"section-Collection\"></a><h2>" . _("Guide Collections") . "</h2></div><div class=\"row\">" . $col_1 . $col_2 ."</div></div>";
     $list_collections = $layout;
 
     break;
@@ -1952,16 +1967,11 @@ $list_guides = "<table class=\"item_listing\" width=\"98%\">";
 
     // Stick in the title if it's the first row
     if ($key == 0) {
-      $list_guides .= "<tr><td><h3>$value[1]</h3></td></tr>";
+      $list_guides .= "<span id=\"collection_parent_title\">$value[1]</span>";
     }
 
-    $list_guides .= "<tr class=\"zebra $row_colour\" style=\"height: 1.5em;\">
-    <td><img class=\"staff_photo\" align=\"left\" style=\"margin-bottom: 20px;\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . 
-     "\" src=\"$thumbnail\" />
-     <a href=\"$guide_location\">" . htmlspecialchars_decode($value[3]) . "</a> 
-        <div style=\"font-size: .9em;\">{$value[6]}</div></td></tr>";
-
-
+    $list_guides .= "<tr class=\"zebra $row_colour\">
+    <td><div class=\"d-flex flex-row flex-nowrap mb-3\"><div class=\"collection-image\"><img class=\"staff_photo\" title=\"" . $value[3] . "\" alt=\"" . $value[3] . "\" src=\"$thumbnail\" /></div><div><h4><a href=\"$guide_location\" class=\"default\">" . htmlspecialchars_decode($value[3]) . "</a></h4>{$value[6]}</div></div></td></tr>";
   }
 
 $list_guides .= "</table>";

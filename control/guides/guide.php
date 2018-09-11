@@ -24,9 +24,7 @@ if (! isset ( $_GET ["subject_id"] )) {
 }
 
 // necessary for jquery slider
-$use_jquery = array (
-		"ui_styles" 
-);
+$use_jquery = array ("ui_styles" );
 
 // clear out existing cookies
 

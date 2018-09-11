@@ -47,6 +47,7 @@ $dept_intro = '
           <li><a href="#130">Digital Strategies</a></li>
           <ul>
             <li><a href="#110">Digital Production</a></li>
+            <li><a href="#140">Web & Application Development</a></li>
           </ul>
           <li><a href="#102">Financial Administration</a></li>
           <ul>
@@ -72,8 +73,7 @@ $dept_intro = '
             <ul>
             <li><a href="#129">Systems Support</a></li>
             </ul>
-            </li>
-            <li><a href="#140">Web & Application Development</a></li>
+            </li>            
           </ul>
           <li><a href="#105">Judi Prokop Newman Business Information Resource Center</a></li>
           <li><a href="#125">Learning & Research Services</a></li>

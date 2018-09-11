@@ -92,6 +92,45 @@ class Querier  {
         return $rows;
     }
 
+	public function prepareStatement ($sql, $params) {
+		$connection = $this->_connection;
+
+
+		$statement = $connection->prepare($sql);
+		foreach ($params as $param=>$value){
+
+			$statement->bindParam($param, $value);
+		}
+		return $statement;
+	}
+
+
+	public function queryWithPreparedStatement($sql, $fetch_style = NULL, $params) {
+
+		// Default is numbered array
+		if ($fetch_style === NULL) {
+			$fetch_style = PDO::FETCH_BOTH;
+		}
+
+		$sql = $this->prepareStatement($sql, $params);
+		$sql->execute();
+
+		if (!$sql) {
+			exit;
+			//  echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
+			//  print_r($connection->errorInfo());
+			//  echo "</p>";
+			//  echo $sql;
+
+			$rows = NULL;
+		} else {
+			$rows = $sql->fetchAll($fetch_style);
+		}
+
+
+		return $rows;
+	}
+
     public function exec($sql) {
         $connection = $this->_connection;
         $result = $connection->exec($sql);
