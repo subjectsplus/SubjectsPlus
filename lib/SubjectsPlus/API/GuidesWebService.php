@@ -226,6 +226,7 @@ class GuidesWebService extends WebService implements InterfaceWebService
 	{
 		$lobjGuide = array();
 
+		$lobjGuide['id'] = $lobjRow['subject_id'];
 		$lobjGuide['title'] = $lobjRow['title'];
 		$lobjGuide['description'] = $lobjRow['description'];
 		$lobjGuide['authors'] = array();
