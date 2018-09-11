@@ -141,6 +141,8 @@ richter_items.php
 external_scripts
 
 control/lti_controller/config.php
+nul
+
 
 .idea/
 sp4-new.iml
