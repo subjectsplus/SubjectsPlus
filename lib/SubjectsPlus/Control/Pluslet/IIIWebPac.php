@@ -41,7 +41,8 @@ class Pluslet_IIIWebPac extends Pluslet {
 
   static function getMenuIcon()
     {
-        $icon="<span class=\"icon-text googlescholar-text\">" . _("III WebPac") . "</span>";
+        
+        $icon="<i class=\"fa fa-book\" title=\"" . self::getMenuName() . "\" ></i><span class=\"icon-text\">" . self::getMenuName() . "</span>";
         return $icon;
     }
 
