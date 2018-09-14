@@ -23,10 +23,6 @@
         echo "<div id='google-analytics-ua' style='visibility: hidden;' data-uacode='{$google_analytics_ua}'></div>";
         echo "<div id='google_tag_manager' style='visibility: hidden;' data-tag-manager='{$google_tag_manager}'></div>";
 
-        if( file_exists('includes/google-analytics-tracker.php') ) {
-            include_once ('google-analytics-tracker.php');
-        }
-
         if( file_exists('includes/google-analytics-tag-manager.php') ) {
             include_once ('google-analytics-tag-manager.php');
         }

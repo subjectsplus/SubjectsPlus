@@ -6,6 +6,7 @@
  */
 ?>
 
+<!-- Google Analytics Tracker Code-->
 <script>
     var uaCode = $('#google-analytics-ua').attr('data-uacode');
     //console.log(uaCode);
