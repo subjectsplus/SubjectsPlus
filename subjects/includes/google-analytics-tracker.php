@@ -8,6 +8,7 @@
 
 ?>
 
+<!--GA Tracker Code-->
 <script type="text/javascript">
 
     var uaCode = $('#google-analytics-ua').attr('data-uacode');
