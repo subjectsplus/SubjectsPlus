@@ -6,7 +6,7 @@
  */
 ?>
 
-<!-- Google Analytics Tracker Code-->
+<!-- Google Analytics Tracker Script Code-->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var uaCode = $('#google-analytics-ua').attr('data-uacode');
@@ -24,21 +24,17 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'uaCode', 'auto');
+        ga('create', uaCode, 'auto');
         ga('send', 'pageview');
     });
 </script>
 
-<!-- Google Analytics Tag Manager-->
+<!-- Google Analytics Tag Manager Script Code-->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         dataLayer = [];
         var gaTagManager = $('#google_tag_manager').attr('data-tag-manager');
-    });
-</script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
@@ -51,7 +47,7 @@
             j.src =
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'gaTagManager');
+        })(window, document, 'script', dataLayer, gaTagManager);
     });</script>
 <!-- End Google Tag Manager -->
 
