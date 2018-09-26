@@ -754,7 +754,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/departments/index.html">Departments</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/workhere/index.html">Employment</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/workhere/index.html">Employment</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/forms.html">Forms</a></li>
 

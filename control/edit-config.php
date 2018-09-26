@@ -86,7 +86,7 @@ if(!is_writable($lstrConfigFilePath))
 
 							"titlebar_styles" => array( _( "Titlebar Styles" ), _( "These are the styles that can be issued to a pluslet titlebars." ), "aarray", "right", "large", "", _("This allows titlebars to have custom styles with custom keys for subject guide creator to make.") ),
 
-							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array('Basic', 'LinkList', 'PrimoSearch', 'Heading','Card', 'HTML5Video','SubjectSpecialist', 'BookList', _('4'),'Feed','SocialMedia', 'Chat', 'QP', 'WorldCat', 'Catalog','ArticlesPlus','GoogleBooks','GoogleScholar','GoogleSearch', 'Related','TOC', _('2'), _('1'), 'GuideSearch', 'GuideSelect',  'NewDBs', 'NewGuides','CollectionList','GuideList','Experts', _('3'), _('5')), _("") ),
+							"pluslets_activated" => array( _( "Pluslet Activated" ), _( "Which Pluslets are activated." ), "array", "right", "ticks", array('Basic', 'LinkList', 'PrimoSearch', 'Heading','Card', 'HTML5Video','SubjectSpecialist', 'BookList', _('4'),'Feed','SocialMedia', 'Chat', 'QP', 'WorldCat', 'Catalog','ArticlesPlus','GoogleBooks','GoogleScholar','GoogleSearch', 'Related','TOC', _('2'), _('1'), 'GuideSearch', 'GuideSelect',  'NewDBs', 'NewGuides','CollectionList','GuideList','Experts', 'IIIWebPac', _('3'), _('5')), _("") ),
 
 							"use_disciplines" => array( _( "Use SerSol Provided Disciplines" ), _( "Include Serials Solutions disciplines integration." ), "boolean", "right", "small", "" ,
 							_( "If you wish to include your SP guides in Serials Solutions' results--i.e., you have Summon--you need to use their disciplines." ) ),
