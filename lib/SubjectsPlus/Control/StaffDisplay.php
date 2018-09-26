@@ -159,6 +159,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                 AND su.active = '1'
                 AND user_type_id = '1'
                 AND su.type != 'Placeholder'
+                AND ptags like '%librarian%'
                 order by lname, fname";
             $db = new Querier;
             $r = $db->query($q);
