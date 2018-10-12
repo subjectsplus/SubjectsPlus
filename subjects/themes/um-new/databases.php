@@ -270,7 +270,8 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
 
                 // SP GA Event Tracking
                 $('.trackContainer a').click(function () {
-                    _gaq.push(['_trackEvent', 'OutboundLink', 'Click', $(this).text()]);
+                    var label = $(this).text();
+                    ga('send', 'event', 'OutboundLink', 'Click', label);
                 });
             });
         </script>
