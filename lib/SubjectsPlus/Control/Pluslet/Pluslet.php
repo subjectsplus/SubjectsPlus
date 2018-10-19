@@ -682,11 +682,12 @@ class Pluslet {
                 }
             } // end foreach
         } else {
-
-            $this->_body = $this->_body;
+            $this->_body = ($this->_body);
             return;
         }
-        $this->_body = $tokenized;
+
+	    $tokenized = utf8_decode($tokenized);
+	    $this->_body = $tokenized;
     }
 
     protected function onEditOutput()
