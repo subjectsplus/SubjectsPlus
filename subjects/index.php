@@ -316,7 +316,7 @@ include("includes/header.php");
   
   </div><!--end 2/3 main area-->
 
-  <div class="pure-u-1 pure-u-lg-1-3">
+  <div class="pure-u-1 pure-u-lg-1-3" id="content-after-navs">
 
       
           <div class="find-expert-area-circ">

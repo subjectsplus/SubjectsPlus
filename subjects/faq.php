@@ -308,7 +308,7 @@ foreach ($collections_result as $myrow1) {
 
 ?>
 <br />
-<div class="pure-g">
+<div class="pure-g" id="content-after-navs" tabindex="-1">
 <div class="pure-u-1 pure-u-md-2-3">
 <?php
 //$num_faqs = $row_count - 1;

@@ -365,7 +365,7 @@ ORDER BY newtitle
 		}
 
 		// prepare header
-		$items = "<table width=\"98%\" class=\"item_listing trackContainer\">";
+		$items = "<div id=\"content-after-navs\" tabindex=\"-1\"><table width=\"98%\" class=\"item_listing trackContainer\">";
 
 		$row_count = 0;
 		$colour1 = "oddrow";
@@ -444,7 +444,7 @@ ORDER BY newtitle
 			$row_count ++;
 		}
 
-		$items .= "</table>";
+		$items .= "</table></div>";
 		return $items;
 	}
 	function generateLayout($row_colour, $url, $target, $item_title, $information, $information1, $icons, $helpguide, $display_note_text, $bonus, $favorite_link_rand_id) {

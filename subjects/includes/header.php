@@ -58,6 +58,7 @@ $v2styles = TRUE;
 
 <div id="header"> 
     <div id="header_inner_wrap">
+        <a href="#content-after-navs" id="skiptocontent">Skip to Main Content</a>
         <div class="pure-g">
             <div class="pure-u-1 pure-u-md-1-5">
                 <a href="<?php print $PublicPath; ?>"><img class="main_logo" src="<?php print $AssetPath; ?>images/public/logo.png" alt="Home Page" /></a>
@@ -77,4 +78,4 @@ $v2styles = TRUE;
             <div id="content_roof"></div> <!-- end #content_roof -->
             <div id="shadowkiller"></div> <!--end #shadowkiller-->
         
-            <div id="body_inner_wrap">
+            <div id="body_inner_wrap" tabindex="-1">

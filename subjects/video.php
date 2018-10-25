@@ -163,7 +163,7 @@ if ($num_rows) {
 include("includes/header.php");
 ?>
 <br />
-<div class="pure-g">
+<div class="pure-g" id="content-after-navs" tabindex="-1">
 <div class="pure-u-1 pure-u-md-2-3">
     <div class="pluslet">
         <div class="titlebar">

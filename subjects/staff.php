@@ -43,7 +43,8 @@ $alphabet = getLetters($our_cats, $selected_letter);
 
 if ($selected_letter == "A-Z") {
 
-$intro = "<p><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> " . _("Click on a name for more information.") ."</p><br />";
+$intro = "<p><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> " . _("Click on a name for more information.") .
+"<br /><div id=\"content-after-navs\" tabindex=\"-1\">";
 
 }
 
@@ -52,7 +53,7 @@ $out = $staff_data->writeTable($selected_letter);
 
 
 // Assemble the content for our main pluslet
-$display = $alphabet . $intro . $out;
+$display = $alphabet . $intro . $out . "</div>";
 
 ////////////////////////////
 // Now we are finally read to display the page

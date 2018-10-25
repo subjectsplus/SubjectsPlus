@@ -154,7 +154,7 @@ $page_title = _("Staff Listing: ") . $fullname;
 include("includes/header.php");
 
 ?>
-<div class="pure-g">
+<div class="pure-g" id="content-after-navs" tabindex="-1">
 <div class="pure-u-2-3">
     <div class="pluslet">
         <div class="titlebar">

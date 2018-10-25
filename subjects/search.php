@@ -118,7 +118,10 @@ $subtitle = _("Search Results for ") . $_POST['searchterm'];
     </div>
     </div>
 
+    <div id="content-after-navs" tabindex="-1">
 	<?php makePluslet($subtitle, $search_result, "no_overflow"); ?> 
+    </div>
+
 
     </div>
     <div class="pure-u-1-2">
