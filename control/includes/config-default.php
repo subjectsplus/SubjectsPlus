@@ -525,4 +525,9 @@ $qp_inst_id = '';
 
 $webpac_cat_action = "";
 
+////////////////////////////////////////////
+//Enforce https in uploads url
+////////////////////////////////////////////
+$enforce_https_upload_url = FALSE;
+
 ?>
