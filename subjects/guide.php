@@ -400,7 +400,7 @@ if (isset ($header_type) && $header_type == 'um-new') { ?>
             console.log(option_tab_link);
             var trim = option_tab_link.substr(6);
             console.log(trim);
-            $("#tabs").tabs("option", "active", trim);
+            $("#tabs").tabs("select", trim);
         }
     });
 

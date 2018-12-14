@@ -131,7 +131,15 @@ function getUserURL()
 			}
 		}
 
-        $protocol = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+		$protocol = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+
+		global $enforce_https_upload_url;
+
+		if (isset($enforce_https_upload_url)){
+			if ($enforce_https_upload_url){
+				$protocol = "https://";
+			}
+		}
 
         $lstrURL = $protocol . $lstrURL . '/assets/';
 
