@@ -248,6 +248,10 @@ class Staff {
 		}
 	}
 
+	public function userCan ($privilige){
+		return strpos($this->_ptags, $privilige) !== false;
+	}
+
 
 	public function outputForm( $wintype = "" ) {
 
