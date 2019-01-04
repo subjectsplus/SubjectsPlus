@@ -216,7 +216,7 @@ class Config
 
 		try {
 			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $this->lobjNewConfigValues['db_port'] . ';charset=utf8';
-			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array(PDO::ATTR_PERSISTENT => true));
+			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array(PDO::ATTR_PERSISTENT => true, PDO::MYSQL_ATTR_SSL_CA   =>'/home/bin/BaltimoreCyberTrustRoot.crt.pem'));
 		} catch (\PDOException $e) {
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<p>This is the detailed error:</p>";
