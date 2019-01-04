@@ -55,7 +55,7 @@ class Querier  {
         $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $db_port . ';charset=utf8';
 
         try {
-            $this->_connection = new PDO($dsn, $uname, $pword, array(PDO::ATTR_PERSISTENT => true));
+            $this->_connection = new PDO($dsn, $uname, $pword, array(PDO::ATTR_PERSISTENT => true, PDO::MYSQL_ATTR_SSL_CA   =>'/home/bin/BaltimoreCyberTrustRoot.crt.pem'));
         } catch (\PDOException $e) {
 
 
