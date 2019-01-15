@@ -376,15 +376,13 @@ if ( BlackLister($this_comment) == TRUE ) {
 //        }
 
         //todo add $stage_two check after adding an email server
-	    var_dump($stage_one);
-
         if ($stage_one == "ok") {
 
-            $feedback = "all good"; //$submission_feedback;
+            $feedback = $submission_feedback;
             $this_name = "";
             $this_comment = "";
         } else {
-            $feedback = "fail"; //$submission_failure_feedback;
+            $feedback = $submission_failure_feedback;
         }
 
     }
