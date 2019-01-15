@@ -211,6 +211,7 @@ if ( BlackLister($this_comment) == TRUE ) {
 
         $stage_one = "ok";
 
+	    $slackMsg = _("New Comment via SubjectsPlus ". $this_comment);
 	    sendSlackMsg($slackMsg, "talkback", ":email:");
 
 
