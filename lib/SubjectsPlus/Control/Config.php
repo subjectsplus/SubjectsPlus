@@ -42,7 +42,7 @@ class Config
 		$this->lboolChangeSalt = FALSE;
 		$this->lboolChangeAPIKey = FALSE;
 
-		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port' );
+		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port', 'db_cert_path' );
 		$this->lobjSetupSiteKeys = array( 'resource_name', 'institution_name', 'administrator', 'administrator_email', 'email_key', 'tel_prefix' );
 	}
 
@@ -213,10 +213,20 @@ class Config
 	public function checkDBConnection( )
 	{
 		$lstrError = '';
+		if( isset($this->lobjNewConfigValues['db_cert_path']) && $this->lobjNewConfigValues['db_cert_path'] != null ) {
+			$options = array(
+				PDO::ATTR_PERSISTENT => true,
+				PDO::MYSQL_ATTR_SSL_CA => $this->lobjNewConfigValues['db_cert_path'],
+			);
+		} else {
+			$options = array(
+				PDO::ATTR_PERSISTENT => true,
+			);
+		}
 
 		try {
 			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $this->lobjNewConfigValues['db_port'] . ';charset=utf8';
-			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array(PDO::ATTR_PERSISTENT => true, PDO::MYSQL_ATTR_SSL_CA   =>'/home/bin/BaltimoreCyberTrustRoot.crt.pem'));
+			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array($options));
 		} catch (\PDOException $e) {
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<p>This is the detailed error:</p>";

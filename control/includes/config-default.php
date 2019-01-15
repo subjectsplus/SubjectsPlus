@@ -152,6 +152,12 @@ $pword = "";
 
 $db_port = "3306";
 
+/* the $db_cert_path is currently being used when hosting SubjectsPlus in an Azure Web Apps for Container environment.
+** it is necessary for encrypting the mysql connection
+*/
+
+$db_cert_path = "";
+
 /* Name of the SubjectsPlus database, i.e., subsplus.  May have a
    prefix on a shared host, i.e., yoursite_subsplus. */
 $dbName_SPlus = "subjectsplus";
