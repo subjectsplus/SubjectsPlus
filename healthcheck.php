@@ -6,5 +6,5 @@
  * Time: 11:41 AM
  */
 
-
+//used for azure high availability
 include("control/includes/config.php");
