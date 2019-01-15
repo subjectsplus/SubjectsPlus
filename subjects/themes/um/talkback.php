@@ -215,6 +215,10 @@ if ( BlackLister($this_comment) == TRUE ) {
 
         $stage_one = "ok";
 
+        $slackMsg = _("New Comment via SubjectsPlus");
+
+	    sendSlackMsg($slackMsg, "alerts", ":email:");
+
 
         if (isset($debugger) && $debugger == "yes") {
             //	print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
