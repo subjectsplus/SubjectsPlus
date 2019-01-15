@@ -2009,7 +2009,7 @@ function targetBlanker() {
 // (string) $channel - channel in which to write the message
 // (string) $icon - You can set up custom emoji icons to use with each message
 function sendSlackMsg($message, $channel = "talkback", $icon = ":rotating_light:", $webhookUrl = "https://hooks.slack.com/services/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") {
-    $channel = ($channel) ? $channel : "alerts";
+    $channel = ($channel) ? $channel : "talkback";
     $data = "payload=" . json_encode(array(
             "channel"       =>  "#{$channel}",
             "text"          =>  $message,
