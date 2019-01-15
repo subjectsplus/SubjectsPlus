@@ -217,7 +217,7 @@ if ( BlackLister($this_comment) == TRUE ) {
 
         $slackMsg = _("New Comment via SubjectsPlus");
 
-	    sendSlackMsg($slackMsg, "alerts", ":email:");
+	    sendSlackMsg($slackMsg, "talkback", ":email:");
 
 
         if (isset($debugger) && $debugger == "yes") {
@@ -376,12 +376,15 @@ if ( BlackLister($this_comment) == TRUE ) {
 //        }
 
         //todo add $stage_two check after adding an email server
+	    var_dump($stage_one);
+
         if ($stage_one == "ok") {
-            $feedback = $submission_feedback;
+
+            $feedback = "all good"; //$submission_feedback;
             $this_name = "";
             $this_comment = "";
         } else {
-            $feedback = $submission_failure_feedback;
+            $feedback = "fail"; //$submission_failure_feedback;
         }
 
     }
