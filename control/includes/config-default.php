@@ -44,6 +44,10 @@ $all_cattags = array( "Noise", "Resources", "Computers", "Facilities", "Services
 // sp/assets/css/green.css ) and then add "green" to this array.  Boom!
 $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
+
+$talkback_recaptcha_site_key = "";
+$talkback_recaptcha_secret_key = "";
+
 // This array contains the list of columns that should be omitted in the user forms
 // First Name, Last Name, Email Address, Ptags, and Password cannot be omitted
 // Available options: 'title', 'department', 'position_number', 'classification', 'priority', 'supervisor', 'tel',

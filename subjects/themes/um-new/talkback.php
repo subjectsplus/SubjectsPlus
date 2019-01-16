@@ -186,13 +186,8 @@ if ( BlackLister($this_comment) == TRUE ) {
         // What happens when the reCAPTCHA is not properly set up
         $feedback = $submission_failure_feedback;
 
-        $slackMsg = $recaptcha_failure_feedback;
-        sendSlackMsg($slackMsg, "alerts", ":rotating_light:", "https://hooks.slack.com/services/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");
-
-
     } else {
         // If CAPTCHA is successful...
-
 
         if ($this_name == "") {
             $this_name = "Anonymous";
@@ -211,7 +206,13 @@ if ( BlackLister($this_comment) == TRUE ) {
 
         $stage_one = "ok";
 
-	    $slackMsg = _("New Comment via SubjectsPlus ". $this_comment);
+        $slackMsg = "New Comment via Talkback" . PHP_EOL;
+        $slackMsg .= "$this_comment" . PHP_EOL;
+        $slackMsg .= "From: " . $this_name . PHP_EOL;
+        $slackMsg .= "Date submitted: " . $todaycomputer . PHP_EOL;
+        $slackMsg .= "Tags: " . $set_filter . PHP_EOL;
+
+
 	    sendSlackMsg($slackMsg, "talkback", ":email:");
 
 
@@ -585,8 +586,9 @@ include("includes/header_um-new.php");
                                     <input type="email" class="form-control" id="suggestion_email" value="<?php print $this_name; ?>" />
                                     <p><?php print _("(In case we need to contact you)"); ?></p>
                                 </div>
+                                <?php global $talkback_recaptcha_site_key; ?>
                                 <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
-                                        data-sitekey="6Lc3ODIUAAAAAAHj43kximcqolHy8awBeQZL58Um"
+                                        data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
                                         data-callback="onSubmit"
                                         data-size="invisible">Submit</button>
                             </div>
