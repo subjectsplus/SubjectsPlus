@@ -601,6 +601,7 @@ include("includes/header_um-new.php");
                                     <p><?php print _("(In case we need to contact you)"); ?></p>
                                 </div>
                                 <?php global $talkback_recaptcha_site_key; ?>
+                                <?php var_dump($talkback_recaptcha_site_key); ?>
                                 <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
                                         data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
                                         data-callback="onSubmit"
