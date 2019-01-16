@@ -153,6 +153,13 @@ if (isset($_POST["the_suggestion"])) {
     $this_comment = "";
 }
 
+
+if (isset($_POST["suggestion_email"])) {
+	$this_commenter_email = scrubData($_POST["suggestion_email"]);
+} else {
+	$this_commenter_email = "";
+}
+
 //////////////////////
 // date and time stuff
 //////////////////////
@@ -205,16 +212,6 @@ if ( BlackLister($this_comment) == TRUE ) {
         $statement->execute();
 
         $stage_one = "ok";
-
-        $slackMsg = "New Comment via Talkback" . PHP_EOL;
-        $slackMsg .= "$this_comment" . PHP_EOL;
-        $slackMsg .= "From: " . $this_name . PHP_EOL;
-        $slackMsg .= "Date submitted: " . $todaycomputer . PHP_EOL;
-        $slackMsg .= "Tags: " . $set_filter . PHP_EOL;
-
-
-	    sendSlackMsg($slackMsg, "talkback", ":email:");
-
 
         if (isset($debugger) && $debugger == "yes") {
             //	print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
@@ -374,8 +371,25 @@ if ( BlackLister($this_comment) == TRUE ) {
         //todo add && $stage_two == "ok" when email server works
         if ($stage_one == "ok" ) {
             $feedback = $submission_feedback;
+
+	        global $talkback_slack_webhook_url;
+	        global $talkback_slack_channel;
+	        global $talkback_slack_emoji;
+
+
+	        $slackMsg = "New Comment via Talkback" . PHP_EOL;
+	        $slackMsg .= "$this_comment" . PHP_EOL;
+	        $slackMsg .= "From: " . $this_commenter_email . PHP_EOL;
+	        $slackMsg .= "Date submitted: " . $todaycomputer . PHP_EOL;
+	        $slackMsg .= "Tags: " . $set_filter . PHP_EOL;
+
+
+	        sendSlackMsg($slackMsg, $talkback_slack_channel, $talkback_slack_emoji, $talkback_slack_webhook_url);
+
+
             $this_name = "";
             $this_comment = "";
+	        $this_commenter_email = "";
         } else {
             $feedback = $submission_failure_feedback;
         }

@@ -232,7 +232,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 
 		"talkback_recaptcha_site_key" => array(
 			_( "Talkback Google Recaptcha Site Key" ),
-			_( "This option contains the Google Recaptcha site key required to protect the Talkback form." ),
+			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
 			"string",
 			"right",
 			"large",
@@ -248,6 +248,36 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"large",
 			"",
 			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"talkback_slack_webhook_url" => array(
+			_( "Slack Webhook URL for Talkback" ),
+			_( "This option contains the webhook url from Slack that connects Talkback to Slack." ),
+			"string",
+			"right",
+			"large",
+			"",
+			""
+		),
+
+		"talkback_slack_channel" => array(
+			_( "Talkback Slack Channel" ),
+			_( "This option contains Slack channel name that the Talkback form uses." ),
+			"string",
+			"right",
+			"medium",
+			"",
+			""
+		),
+
+		"talkback_slack_emoji" => array(
+			_( "Talkback Slack Emoji Code" ),
+			_( "This option contains Slack emoji code that the Talkback form uses. It must begin and end with a colon. For example, :thought_balloon:" ),
+			"string",
+			"right",
+			"medium",
+			"",
+			_( "It must begin and end with a colon. For example, :thought_balloon:" )
 		),
 
 		"titlebar_styles" => array(
