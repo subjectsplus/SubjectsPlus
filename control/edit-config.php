@@ -525,6 +525,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "database help?" )
 		),
 
+		"db_cert_path" => array(
+			_( "Optional Azure SSL Cert Path" ),
+			_( "This is the path that is required when connecting to Azure Database for MySQL." ),
+			"string",
+			"left",
+			"large",
+			"",
+			_( "" )
+		),
+
 		"upload_whitelist" => array(
 			_( "List of accepted uploads' file extentions" ),
 			_( "This option contains the coma-separated list of accepted file extensions for file uploads via CKEditor." ),
