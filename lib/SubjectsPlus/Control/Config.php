@@ -234,6 +234,8 @@ class Config
 			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array($options));
 		} catch (\PDOException $e) {
 		    $lstrError .= $this->lobjNewConfigValues['db_cert_path'];
+		    $lstrError .= $this->lobjNewConfigValues['hname'];
+			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<p>This is the detailed error:</p>";
 			$lstrError .= 'Connection failed: ' . $e->getMessage();
