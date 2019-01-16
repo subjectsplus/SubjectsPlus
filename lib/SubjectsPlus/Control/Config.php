@@ -224,18 +224,10 @@ class Config
 			);
 		}
 
-		$options = array(
-			PDO::ATTR_PERSISTENT => true,
-			PDO::MYSQL_ATTR_SSL_CA => "/home/bin/BaltimoreCyberTrustRoot.crt.pem",
-		);
-
 		try {
 			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $this->lobjNewConfigValues['db_port'] . ';charset=utf8';
 			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], $options);
 		} catch (\PDOException $e) {
-		    $lstrError .= $this->lobjNewConfigValues['db_cert_path'] . PHP_EOL;
-		    $lstrError .= $this->lobjNewConfigValues['hname'];
-			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<p>This is the detailed error:</p>";
 			$lstrError .= 'Connection failed: ' . $e->getMessage();
