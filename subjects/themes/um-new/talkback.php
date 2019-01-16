@@ -141,8 +141,8 @@ $send_to = $administrator_email;
 $sent_from = $administrator_email;
 
 // clean up post variables
-if (isset($_POST["name"])) {
-    $this_name = scrubData($_POST["name"]);
+if (isset($_POST["suggestion_email"])) {
+    $this_name = scrubData($_POST["suggestion_email"]);
 } else {
     $this_name = "";
 }
@@ -154,11 +154,7 @@ if (isset($_POST["the_suggestion"])) {
 }
 
 
-if (isset($_POST["suggestion_email"])) {
-	$this_commenter_email = scrubData($_POST["suggestion_email"]);
-} else {
-	$this_commenter_email = "";
-}
+
 
 //////////////////////
 // date and time stuff
@@ -379,7 +375,7 @@ if ( BlackLister($this_comment) == TRUE ) {
 
 	        $slackMsg = "New Comment via Talkback" . PHP_EOL;
 	        $slackMsg .= "$this_comment" . PHP_EOL;
-	        $slackMsg .= "From: " . $this_commenter_email . PHP_EOL;
+	        $slackMsg .= "From: " . $this_name . PHP_EOL;
 	        $slackMsg .= "Date submitted: " . $todaycomputer . PHP_EOL;
 	        $slackMsg .= "Tags: " . $set_filter . PHP_EOL;
 
@@ -389,7 +385,7 @@ if ( BlackLister($this_comment) == TRUE ) {
 
             $this_name = "";
             $this_comment = "";
-	        $this_commenter_email = "";
+
         } else {
             $feedback = $submission_failure_feedback;
         }
@@ -597,11 +593,10 @@ include("includes/header_um-new.php");
                                 </div>
                                 <div class="form-group">
                                     <label for="suggestion_email"><?php print _("Your email (optional):"); ?></label>
-                                    <input type="email" class="form-control" id="suggestion_email" value="<?php print $this_name; ?>" />
+                                    <input type="email" class="form-control" id="suggestion_email" name="suggestion_email" value="<?php print $this_name; ?>" />
                                     <p><?php print _("(In case we need to contact you)"); ?></p>
                                 </div>
                                 <?php global $talkback_recaptcha_site_key; ?>
-                                <?php var_dump($talkback_recaptcha_site_key); ?>
                                 <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
                                         data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
                                         data-callback="onSubmit"
