@@ -47,6 +47,10 @@ $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
 $talkback_recaptcha_site_key = "";
 $talkback_recaptcha_secret_key = "";
+$talkback_slack_webhook_url = "";
+$talkback_slack_channel = "";
+$talkback_slack_emoji = "";
+
 
 // This array contains the list of columns that should be omitted in the user forms
 // First Name, Last Name, Email Address, Ptags, and Password cannot be omitted

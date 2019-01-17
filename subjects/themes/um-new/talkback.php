@@ -141,8 +141,8 @@ $send_to = $administrator_email;
 $sent_from = $administrator_email;
 
 // clean up post variables
-if (isset($_POST["name"])) {
-    $this_name = scrubData($_POST["name"]);
+if (isset($_POST["suggestion_email"])) {
+    $this_name = scrubData($_POST["suggestion_email"]);
 } else {
     $this_name = "";
 }
@@ -152,6 +152,9 @@ if (isset($_POST["the_suggestion"])) {
 } else {
     $this_comment = "";
 }
+
+
+
 
 //////////////////////
 // date and time stuff
@@ -205,16 +208,6 @@ if ( BlackLister($this_comment) == TRUE ) {
         $statement->execute();
 
         $stage_one = "ok";
-
-        $slackMsg = "New Comment via Talkback" . PHP_EOL;
-        $slackMsg .= "$this_comment" . PHP_EOL;
-        $slackMsg .= "From: " . $this_name . PHP_EOL;
-        $slackMsg .= "Date submitted: " . $todaycomputer . PHP_EOL;
-        $slackMsg .= "Tags: " . $set_filter . PHP_EOL;
-
-
-	    sendSlackMsg($slackMsg, "talkback", ":email:");
-
 
         if (isset($debugger) && $debugger == "yes") {
             //	print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
@@ -374,8 +367,25 @@ if ( BlackLister($this_comment) == TRUE ) {
         //todo add && $stage_two == "ok" when email server works
         if ($stage_one == "ok" ) {
             $feedback = $submission_feedback;
+
+	        global $talkback_slack_webhook_url;
+	        global $talkback_slack_channel;
+	        global $talkback_slack_emoji;
+
+
+	        $slackMsg = "New Comment via Talkback" . PHP_EOL;
+	        $slackMsg .= "$this_comment" . PHP_EOL;
+	        $slackMsg .= "From: " . $this_name . PHP_EOL;
+	        $slackMsg .= "Date submitted: " . $todaycomputer . PHP_EOL;
+	        $slackMsg .= "Tags: " . $set_filter . PHP_EOL;
+
+
+	        sendSlackMsg($slackMsg, $talkback_slack_channel, $talkback_slack_emoji, $talkback_slack_webhook_url);
+
+
             $this_name = "";
             $this_comment = "";
+
         } else {
             $feedback = $submission_failure_feedback;
         }
@@ -583,7 +593,7 @@ include("includes/header_um-new.php");
                                 </div>
                                 <div class="form-group">
                                     <label for="suggestion_email"><?php print _("Your email (optional):"); ?></label>
-                                    <input type="email" class="form-control" id="suggestion_email" value="<?php print $this_name; ?>" />
+                                    <input type="email" class="form-control" id="suggestion_email" name="suggestion_email" value="<?php print $this_name; ?>" />
                                     <p><?php print _("(In case we need to contact you)"); ?></p>
                                 </div>
                                 <?php global $talkback_recaptcha_site_key; ?>
