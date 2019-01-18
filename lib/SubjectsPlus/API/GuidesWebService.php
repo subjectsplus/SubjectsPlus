@@ -195,6 +195,10 @@ class GuidesWebService extends WebService implements InterfaceWebService
 
 					array_push($lobjConditions, $lstrCombine);
 					break;
+				case 'public-subject-guides':
+
+					break;
+
 			}
 		}
 
