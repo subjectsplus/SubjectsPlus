@@ -43,27 +43,37 @@ class Querier  {
     	global $pword;
     	global $dbName_SPlus;
         global $db_port;
-    
-    if( isset($db_port) ) {
-      
-    } else {
+        global $db_cert_path;
 
-      $db_port = "3306";
-    
-    }
-    
-        $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $db_port . ';charset=utf8';
+	    if( isset($db_port) ) {
 
-        try {
-            $this->_connection = new PDO($dsn, $uname, $pword, array(PDO::ATTR_PERSISTENT => true));
-        } catch (\PDOException $e) {
+	    } else {
+	      $db_port = "3306";
+	    }
 
+	    $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $db_port . ';charset=utf8';
 
-            echo "<h1>There was a problem connecting to the database.</h1>";
-            echo "<p>Are you sure that the database connection information is correct?</p>";
-            echo "<p>This is the detailed error:</p>";
-            echo 'Connection failed: ' . $e->getMessage();
-        }
+	    if( isset($db_cert_path) && $db_cert_path != null ) {
+		    $options = array(
+			    PDO::ATTR_PERSISTENT => true,
+			    PDO::MYSQL_ATTR_SSL_CA => $db_cert_path,
+		    );
+	    } else {
+		    $options = array(
+			    PDO::ATTR_PERSISTENT => true,
+		    );
+	    }
+
+	    try {
+		    $this->_connection = new PDO($dsn, $uname, $pword, $options);
+
+	    } catch (\PDOException $e) {
+		    echo "<h1>There was a problem connecting to the database.</h1>";
+		    echo "<p>Are you sure that the database connection information is correct?</p>";
+		    echo "<p>This is the detailed error:</p>";
+		    echo 'Connection failed: ' . $e->getMessage();
+	    }
+
     }
 
     public function query($sql, $fetch_style = NULL) {

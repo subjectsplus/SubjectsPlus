@@ -138,8 +138,6 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/new-arrivals.html">New Arrivals</a></li>
-
                                             <li><a class="dropdown-item no-decoration" href="https://uofmiami.overdrive.com/">Overdrive E-Books & Audiobooks</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/index.html">Rare Books (Special Collections)</a></li>
