@@ -4,7 +4,7 @@
  *   @brief Display the subject guides
  *
  *   @author adarby
- *   @date rev aug 2014 and beyond...
+ *   @date rev aug 2014, june 13 2018 pv
  */
 
 
@@ -13,11 +13,18 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\SubjectsPlus\Control;
 
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
-//$use_jquery = array("ui"); //um don't want no ui_styles
+//$use_jquery = array('sp_legacy');
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
+
+
+
+if ( (isset( $subjects_theme )) && ( $subjects_theme == 'um-new' ) ) {
+	include( "themes/$subjects_theme/guide.php" );
+	exit;
+}
 
 $db = new Querier;
 
@@ -76,13 +83,10 @@ if ($check_this) {
 	$statement->execute();
 	$r = $statement->fetchAll();
 
-
     // If this guide doesn't exist, send them away
     if (count($r) == 0) {
         header("location:index.php");
     }
-
-
 
 	$redirect_url = $r[0]["redirect_url"];
 
@@ -148,8 +152,6 @@ if ($check_this) {
 	}
 
     $all_tabs = $lobjGuide->getTabs('public');
-
-    
     
 } else {
     header("location:index.php");
@@ -182,8 +184,10 @@ if (isset ($header_type) && $header_type != 'default') {
 // do we have more than one tab?
 if (count($all_tabs) > 1) {
     $multi_tab = TRUE;
+    $printOption = "<div class=\"printer_tabs\"><i class=\"fas fa-print\" title=\"Print this guide\"></i></div>";
 } else {
     $multi_tab = FALSE;
+    $printOption = "<div class=\"printer_no_tabs\"><i class=\"fas fa-print\" title=\"Print this guide\"></i></div>";
 }
 
 // Add tracking image
@@ -191,37 +195,82 @@ $tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.
 
 print $tracking_image;
 print $social_and_search;
-
 ?>
 
+<!--Minimal header if um-new theme is used-->
+<?php
+if (isset ($header_type) && $header_type == 'um-new') {
+
+    $guide_min_header = "<div class=\"feature section-minimal-nosearch guide-header\">
+        <div class=\"container text-center minimal-header\">
+            <h5 class=\"mt-3 mt-lg-0 mb-1\"><a href=\"index.php\" class=\"no-decoration default\">" . _("Research Guides") . "</a></h5>
+            <h1>" . $page_title . "</h1>
+            <hr align=\"center\" class=\"hr-panel\">" . $printOption ."<div class=\"favorite-heart\">
+            <div id=\"heart\" title=\"Add to Favorites\" tabindex=\"0\" role=\"button\" data-type=\"favorite-page-icon\"
+                 data-item-type=\"Pages\" alt=\"Add to My Favorites\" class=\"uml-quick-links favorite-page-icon\" >
+            </div></div>
+        </div>
+    </div>
+    <section class=\"section section-half-top\">
+        <div class=\"container\">
+            <div class=\"row\">
+                <div class=\"col-12\"";
+
+    print $guide_min_header;
+}
+?>
+
+<!-- Guide content display-->
 <div id="tabs" class="hide-tabs-fouc">
 	<div id="main-content" data-subject="<?php echo scrubData($_GET['subject']); ?>" data-url="<?php echo getSubjectsURL(); ?>" data-subject-id="<?php echo $this_id; ?>">
 
-		<div id="tab-container">
+		<div id="tab-container" style="visibility: hidden;">
             <?php
-			
-			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>'; 
+			$printer_tabs ='<div class="printer_tabs"><div class="pure-button pure-button-topsearch print-img-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>';
+
             $printer_no_tabs ='<div class="printer_no_tabs"><div class="pure-button pure-button-topsearch print-img-no-tabs"><img src="../assets/images/printer.png" alt="Print" title="Print"></div></div>';
 			
             // Only show tabs if there is more than one tab
-
             if ($multi_tab == TRUE) {
-                $lobjGuide->outputNavTabs('public');
-                
-                
-                
-                
-                
-                
-                $bonus_class= "";
-                print $printer_tabs;
+
+                if (isset ($header_type) && $header_type == 'um-new'){
+
+                    //desktop view
+                    $container_md_open = "<div class=\"d-none d-md-inline-block\">";
+                    print $container_md_open;
+
+                    $lobjGuide->outputNavTabs('public');
+
+                    $container_md_end = "</div>";
+                    print $container_md_end;
+
+                    //mobile view
+                    $container_mobile_open = "<div class=\"d-md-none text-center\"><link href=\"". $AssetPath . "js/select2/select2.css\" rel=\"stylesheet\"/><script src=\"". $AssetPath ."js/select2/select2.js\"></script>";
+                    print $container_mobile_open;
+
+                    $lobjGuide->outputMobile('public');
+
+                    $container_mobile_end = "</div>";
+                    print $container_mobile_end;
+                }
+                else {
+                    $lobjGuide->outputNavTabs('public');
+                }
+
+                $bonus_class= "yes-tabs";
+
+                if (isset ($header_type) && $header_type != 'um-new'){
+                    print $printer_tabs;
+                }
+
             } else {
                 $bonus_class = "no-tabs";
-				print $printer_no_tabs;
+
+                if (isset ($header_type) && $header_type != 'um-new'){
+                    print $printer_no_tabs;
+                }
             }
-
             ?>
-
         </div>
 		<!-- end tab-container -->
 
@@ -232,10 +281,21 @@ print $social_and_search;
             ?>
         </div>
 		<!-- end tab-body -->
-	</div>
-	<!-- end main-content -->
-</div>
-<!-- end tabs -->
+
+	</div> <!-- end main-content -->
+</div> <!-- end tabs -->
+
+<?php
+if (isset ($header_type) && $header_type == 'um-new') {
+
+    $um_new_section_closing = "</div>
+            </div>
+        </div>
+    </section>";
+
+    print $um_new_section_closing;
+}
+?>
 
 
 <script type="text/javascript" language="javascript">
@@ -263,8 +323,6 @@ print $social_and_search;
              $(this).toggleClass('fa-plus-square fa-minus-square');
              $(this).parent().find('.guide_list_bonus').toggle();            
           });
-
-
     });
 
     $(window).load(function(){
@@ -285,47 +343,85 @@ print $social_and_search;
 // this messes stuff up if it displays for tabless page
 
 if ($multi_tab == TRUE) { ?>
-//setup $ UI tabs and dialogs
+
+    //setup $ UI tabs and dialogs
 $(function() {
+
    var tabTitle = $( "#tab_title" ),
    tabContent = $( "#tab_content" ),
    tabTemplate = "<li class=\"dropspotty\"><a href='#{href}'>#{label}</a> <span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
    tabCounter = <?php echo ( count($all_tabs) ); ?>;
+
+   // initialize tabs
    var tabs = $( "#tabs" ).tabs();
+
    //add click event for external url tabs
    $('li[data-external-link]').each(function()
 					 {
-       if($(this).attr('data-external-link') != "")
-       {
-	 $(this).children('a[href^="#tabs-"]').on('click', function(evt)
-						       {
-	     window.open($(this).parent('li').attr('data-external-link'), '_blank');
-	     //evt.stopImmediatePropagation
-		 
-	   });
+       if($(this).attr('data-external-link') != "") {
 
-	 $(this).children('a[href^="#tabs-"]').each(function() {
-	   var elementData = $._data(this),
-	   events = elementData.events;
+           $(this).children('a[href^="#tabs-"]').on('click', function(evt)
+                               {
+                window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                //evt.stopImmediatePropagation
+           });
 
-	   var onClickHandlers = events['click'];
+         $(this).children('a[href^="#tabs-"]').each(function() {
+           var elementData = $._data(this),
+           events = elementData.events;
 
-	   // Only one handler. Nothing to change.
-				 if (onClickHandlers.length == 1) {
-	     return;
-	   }
-	
-	   onClickHandlers.splice(0, 0, onClickHandlers.pop());
-	 });
+           var onClickHandlers = events['click'];
+
+           // Only one handler. Nothing to change.
+                     if (onClickHandlers.length == 1) {
+             return;
+           }
+
+           onClickHandlers.splice(0, 0, onClickHandlers.pop());
+         });
        }
-     });
+   });
 
 });
 
-<?php } ?>
+<?php
+if (isset ($header_type) && $header_type == 'um-new') { ?>
 
+    // Select2 for Guide Tabs
+    $('#select_tabs').select2({
+        width: "80%",
+        containerCssClass: "tabs-select",
+        dropdownCssClass: "tabs-select-dropdown",
+        placeholder: "In this guide..."
+    });
+
+    $("#select_tabs").change(function() {
+
+        // open external link on tab-select
+        var option_external_link = $(this).find('option:selected').attr('data-external-link');
+        console.log(option_external_link);
+        if (option_external_link != "") {
+            window.open(option_external_link, '_blank');
+        } else {
+            var option_tab_link = $(this).find('option:selected').val();
+            console.log(option_tab_link);
+            var trim = option_tab_link.substr(6);
+            console.log(trim);
+            $("#tabs").tabs("select", trim);
+        }
+    });
+
+<?php   }
+} ?>
 </script>
 
+<?php
+if (isset ($header_type) && $header_type == 'med') { ?>
+<script>
+    $("#tab-container").css("visibility", "visible");
+</script>
+<?php   }
+ ?>
 
 
 <!--[if IE]>
@@ -373,9 +469,6 @@ $(function() {
 }
 </style>
 
-
-
-
 <script>
 
 var $target_blank_links = $(".target_blank_links");
@@ -390,8 +483,6 @@ $("div[name='Clone']").find('.pluslet_body:eq(1)').removeAttr('class');
 ///////////////////////////////
 // Draw attention to TOC linked item
 ///////////////////////////////
-
-
 $(document.body).on('click','a[id*=boxid-]', function(event) {
     var tab_id = $(this).attr('id').split('-')[1];
     var box_id = $(this).attr('id').split('-')[2];
@@ -414,8 +505,6 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 
 });
 </script>
-
-
 
 
 <script>
@@ -476,12 +565,7 @@ cloneView.init();
 
 </script>
 
-
-
-
-
 <?php
-
 ///////////////////////////
 // Load footer file
 ///////////////////////////

@@ -381,6 +381,10 @@ $(document).ready(function(){
 		$(".zebra").removeClass("oddrow");
 	}
 
+    $(".favorite-item-icon").hide();
+	$(".toggleLink.curse_me i.fa-info-circle").removeClass("fas fa-info-circle").addClass("fa fa-info-circle");
+
+
 
 });
 </script>

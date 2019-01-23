@@ -1020,10 +1020,6 @@ class Guide
         
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\"><i class=\"fa fa-plus\"></i></li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
-        
-        
-        	
-        	
         	
         $children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTab['tab_id']}");
         $child_ids = array();
@@ -1031,22 +1027,17 @@ class Guide
         foreach($children as $child) {
            $decoded_children = json_decode($child[0]); 	
            if ($decoded_children) {
-       	   foreach($decoded_children as $decoded_child) {
-       	  
-       	   	$child_id = $decoded_child->child; 
-       	     array_push($child_ids, $child_id);
-          	  	   	
-       	   		}
-       	   
-           	}	
-           
+               foreach($decoded_children as $decoded_child) {
+
+                    $child_id = $decoded_child->child;
+                     array_push($child_ids, $child_id);
+               }
+           }
         }
-        
 
         $childs = implode($child_ids, ',');
         
         	// Modded to handle tab children
-        	
         	
         $class = "dropspotty";
         $class .= $lobjTab['visibility'] == 0 ? ' hidden_tab' : '';
@@ -1084,6 +1075,65 @@ class Guide
         	
         
         echo $tabs;
+    }
+
+    public function outputMobile( $lstrFilter = "" )
+    {
+        global $HomeTabText;
+
+        if (isset($HomeTabText)) {
+            $home_tab_class = "";
+        } else {
+            $home_tab_class = "hometab";
+        }
+
+        $all_tabs = $this->getTabs($lstrFilter);
+
+        $tabs_mobile = $this->_isAdmin ? "" : "<select id=\"select_tabs\"><option></option>"; // init tabs in mobile as select
+        foreach ($all_tabs as $key => $lobjTabMobile) {
+
+            $children = $this->db->query("SELECT children FROM tab WHERE tab_id = {$lobjTabMobile['tab_id']}");
+            $child_ids = array();
+
+            foreach($children as $child) {
+                $decoded_children = json_decode($child[0]);
+                if ($decoded_children) {
+                    foreach($decoded_children as $decoded_child) {
+
+                        $child_id = $decoded_child->child;
+                        array_push($child_ids, $child_id);
+                    }
+                }
+            }
+
+            $childs = implode($child_ids, ',');
+
+            $class = "";
+            $class .= $lobjTabMobile['visibility'] == 0 ? ' hidden_tab' : '';
+
+            // Output the tabs as options with value
+
+            if (!$this->_isAdmin && $key == 0) {
+
+                $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" class=\"$home_tab_class $class\" data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
+
+            } else {
+
+                if (!empty($childs)) {
+                    // Parents
+                    $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" data-children=\"$childs\" class=\"parent-tab $class\" data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
+
+                } else {
+                    // Children
+                    $tabs_mobile .= "<option id=\"{$lobjTabMobile['tab_id']}\" class=\"child-tab $class\"  data-external-link=\"{$lobjTabMobile['external_url']}\" data-visibility=\"{$lobjTabMobile['visibility']}\" value =\"#tabs-$key\">{$lobjTabMobile['label']}</option>";
+                }
+            }
+            $tabs_mobile .= $this->_isAdmin ? "" : "";
+        }
+
+        $tabs_mobile .= "</select>"; // close mobile select tabs
+
+        echo $tabs_mobile;
     }
 
     public function outputTabs( $lstrFilter = "" )
