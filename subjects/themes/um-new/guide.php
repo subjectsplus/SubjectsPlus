@@ -16,15 +16,8 @@ $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles
 //$use_jquery = array('sp_legacy');
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-
-
-
-if ( (isset( $subjects_theme )) && ( $subjects_theme == 'um-new' ) ) {
-	include( "themes/$subjects_theme/guide.php" );
-	exit;
-}
+//include("../control/includes/config.php");
+//include("../control/includes/functions.php");
 
 $db = new Querier;
 
