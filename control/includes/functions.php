@@ -724,6 +724,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 
 	//print $sq2;
 	$db  = new Querier;
+
 	$sr2 = $db->query( $sq2 );
 
 	$num_rows = count( $sr2 );
@@ -731,6 +732,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 	$row_count = 0;
 	$colour1   = "oddrow";
 	$colour2   = "evenrow";
+
 
 	if ( $num_rows != 0 ) {
 
