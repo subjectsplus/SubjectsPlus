@@ -1889,7 +1889,7 @@ function listCollections( $search = "", $display = "default", $show_children = "
 
 				}
 
-				$our_item = "<li title=\"{$title_hover}\"><i class=\"fas {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
+				$our_item = "<li title=\"{$title_hover}\"><i class=\"fas fa {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
       <div class=\"guide_list_bonus\">$list_bonus</ul></div>
       </li>";
 

@@ -108,15 +108,15 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                     $items .= "<a name=\"$dept_id\"></a><h2>$dept_name</h2><div class=\"dept-info d-sm-flex flex-sm-row flex-sm-nowrap\">";
 
                     if ($dept_tel != "") {
-                        $items .= "<p><i class=\"fas fa-phone\"></i>$tel_prefix $dept_tel</p>";
+                        $items .= "<p><i class=\"fas fa fa-phone\"></i>$tel_prefix $dept_tel</p>";
                     }
 
                     if ($dept_email != ""){
-                        $items .="<p><i class=\"fas fa-envelope\"></i><a href=\"mailto:$dept_email\" class=\"no-decoration default\">$dept_email</a></p>";
+                        $items .="<p><i class=\"fas fa fa-envelope\"></i><a href=\"mailto:$dept_email\" class=\"no-decoration default\">$dept_email</a></p>";
                     }
 
                     if ($dept_url != ""){
-                        $items .= "<p><i class=\"fas fa-file-alt\"></i><a href=\"$site_url$dept_url\" class=\"no-decoration default\">Department Page</a></p>";
+                        $items .= "<p><i class=\"fas fa fa-file-alt\"></i><a href=\"$site_url$dept_url\" class=\"no-decoration default\">Department Page</a></p>";
                     }
 
                     $items .="</div>";
