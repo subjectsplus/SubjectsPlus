@@ -21,7 +21,7 @@ It is made available under the GNU GPL.
 ## Requirements
 
 * PHP >= to 5.3 - 5.6 
-* MySQL --anything over 4 should be ok
+* MySQL >= 4 - 5.6
 * Web server -- usually Apache, but some people have SubjectsPlus running on IIS
 * JavaScript enabled for the admin to work properly. 
 
@@ -34,6 +34,9 @@ If you run into any missing/weird functionality, check that the following extens
 * json (some data is stored as json)
 * gettext (only if you need internationalization, aka translations)
 * gd (image resizing--notably for headshots and generation of video thumbnails) 
+
+
+If you have MySQL 5.7 you must disable ONLY_FULL_GROUP_BY permanently. Please refer to this [stack overflow](https://stackoverflow.com/questions/23921117/disable-only-full-group-by) issue.
 
 ## Installation
 
