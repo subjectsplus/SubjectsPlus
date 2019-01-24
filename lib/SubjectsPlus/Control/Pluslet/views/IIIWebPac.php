@@ -13,13 +13,11 @@
 <option value="a">Author</option>
 <option value="d">Subject</option>
 <option value="s">Journal Title</option>
-
-
 </select>
 <input type="hidden" name="SORT" id="SORT" value="D" />
+<br />
 <label for="searcharg" class="accessibleAddInfo">Search term</label>
 <input maxlength="75" name="searcharg" size="20" >
-
 <input type="hidden" id="iiiFormHandle_1"/>
 <input name="Search" type="submit" id="Search" value="SEARCH" >
 
