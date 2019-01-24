@@ -724,6 +724,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 
 	//print $sq2;
 	$db  = new Querier;
+
 	$sr2 = $db->query( $sq2 );
 
 	$num_rows = count( $sr2 );
@@ -731,6 +732,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 	$row_count = 0;
 	$colour1   = "oddrow";
 	$colour2   = "evenrow";
+
 
 	if ( $num_rows != 0 ) {
 
@@ -1887,7 +1889,7 @@ function listCollections( $search = "", $display = "default", $show_children = "
 
 				}
 
-				$our_item = "<li title=\"{$title_hover}\"><i class=\"fas {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
+				$our_item = "<li title=\"{$title_hover}\"><i class=\"fas fa {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
       <div class=\"guide_list_bonus\">$list_bonus</ul></div>
       </li>";
 
