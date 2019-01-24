@@ -16,9 +16,13 @@ $subcat     = "home";
 
 include( __DIR__ . '/includes/header.php' );
 
+
 $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
 
+
 $recent_activity = seeRecentChanges( $_SESSION["staff_id"] );
+
+
 
 $user = new Staff( $_SESSION["staff_id"] );
 
@@ -30,6 +34,7 @@ $headshot = $user->getHeadshot( $_SESSION["email"], "medium" );
 $mod_bio           = "";
 $mod_photo         = "";
 $view_contact_info = "";
+
 
 if ( $_SESSION['user_type_id'] == '1' ) {
 	// allow user to update their own bio?
@@ -58,7 +63,6 @@ if ( isset( $use_shibboleth ) ) {
 		$reset_password = "";
 	}
 }
-
 ?>
 
 <div class="pure-g">
