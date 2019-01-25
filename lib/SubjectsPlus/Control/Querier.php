@@ -62,6 +62,7 @@ class Querier  {
 		    $options = array(
 			    PDO::ATTR_PERSISTENT => true,
 		    );
+
 	    }
 
 	    try {
@@ -86,6 +87,7 @@ class Querier  {
         $connection = $this->_connection;
 
            $result = $connection->query($sql);
+
         if (!$result) {
  	       exit;
           //  echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
@@ -95,9 +97,10 @@ class Querier  {
 
             $rows = NULL;
         } else {
-           $rows = $result->fetchAll($fetch_style);
-        }
 
+           $rows = $result->fetchAll($fetch_style);
+
+        }
 
         return $rows;
     }
