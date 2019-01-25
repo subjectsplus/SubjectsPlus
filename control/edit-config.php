@@ -685,6 +685,96 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
+		"primo_action" => array(
+			_( "Primo Search Form Action" ),
+			_( "This option contains the Primo search form action for the Primo Pluslet. Includes '?' " ),
+			"string",
+			"primo",
+			"large",
+			"",
+			""
+		),
+
+		"primo_institution_code" => array(
+			_( "Primo Search Form Institution Code" ),
+			_( "This option contains the Primo Institution Code for the Primo Pluslet" ),
+			"string",
+			"primo",
+			"medium",
+			"",
+			""
+		),
+
+		"primo_vid" => array(
+			_( "Primo Search Form View ID" ),
+			_( "This option contains the Primo View ID for the Primo Pluslet" ),
+			"string",
+			"primo",
+			"small",
+			"",
+			""
+		),
+
+		"catalog_primo_action" => array(
+			_( "Primo Catalog Search Form Action" ),
+			_( "This option contains the Primo search form action for the Primo Catalog Pluslet. Includes '?' " ),
+			"string",
+			"primo",
+			"large",
+			"",
+			""
+		),
+
+		"catalog_primo_insitution_code" => array(
+			_( "Primo Catalog Search Form Institution Code" ),
+			_( "This option contains the Primo Institution Code for the Primo Catalog Pluslet" ),
+			"string",
+			"primo",
+			"medium",
+			"",
+			""
+		),
+
+		"catalog_primo_vid" => array(
+			_( "Primo Search Form View ID" ),
+			_( "This option contains the Primo View ID for the Primo Pluslet" ),
+			"string",
+			"primo",
+			"small",
+			"",
+			""
+		),
+
+		"articlesplus_primo_action" => array(
+			_( "Primo ArticlesPlus Search Form Action" ),
+			_( "This option contains the Primo search form action for the Primo ArticlesPlus Pluslet. Includes '?' " ),
+			"string",
+			"primo",
+			"large",
+			"",
+			""
+		),
+
+		"articlesplus_primo_insitution_code" => array(
+			_( "Primo ArticlesPlus Search Form Institution Code" ),
+			_( "This option contains the Primo Institution Code for the Primo ArticlesPlus Pluslet" ),
+			"string",
+			"primo",
+			"medium",
+			"",
+			""
+		),
+
+		"articlesplus_primo_vid" => array(
+			_( "Primo ArticlesPlus Search Form View ID" ),
+			_( "This option contains the Primo View ID for the Primo ArticlesPlus Pluslet" ),
+			"string",
+			"primo",
+			"small",
+			"",
+			""
+		),
+
 		"booklist_primo_domain" => array(
 			_( "Book List Pluslet Primo Domain" ),
 			_( "This option contains the Primo domain for the Book List Pluslet" ),

@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/subjectsplus/SubjectsPlus/issues"
   },
-  "homepage": "https://github.com/subjectsplus/SubjectsPlus#readme"
+  "homepage": "https://github.com/subjectsplus/SubjectsPlus#readme",
+  "devDependencies": {
+    "auto-changelog": "^1.11.0",
+    "release-it": "^10.0.2"
+  }
 }
