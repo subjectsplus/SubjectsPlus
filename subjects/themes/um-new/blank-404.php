@@ -61,7 +61,7 @@ include("includes/header_um-new.php");
     <div class="full-search">
         <div class="container text-center">
             <div class="search-group">
-                <div id="uml-site-search-container"></div>
+                <div class="uml-site-search-container"></div>
             </div>
         </div>
     </div>
