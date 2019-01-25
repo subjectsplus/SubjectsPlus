@@ -72,6 +72,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'password')) {
 
 print "<div id=\"maincontent\">
 <h2 class=\"bw_head\">" . _("Update Password for ") . " $staff_name</h2>";
+print "<div class=\"box\">" . _("Note: ") . _("Password must have at least one letter, one number, one special character, and be at least 6 characters long.") . "</div> <br />";
 print $feedback;
 print $password_box;
 print "</div>";
