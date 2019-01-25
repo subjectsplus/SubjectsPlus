@@ -3,8 +3,8 @@ $page_title = "Page Not Found (404)";
 $description = "404 Page Not Found";
 $keywords = "404, missing page";
 
-include("../../../control/includes/config.php");
-include("../../../control/includes/functions.php");
+include("../control/includes/config.php");
+include("../control/includes/functions.php");
 
 //header
 include("includes/header_um-new.php");
@@ -40,7 +40,7 @@ include("includes/header_um-new.php");
                 </div>
             </div>
             <div class="col-lg-6 order-first order-lg-last">
-                <div class="page-header-img" style="background-image: url('https://uml-e-wpapi.azurewebsites.net/wp-content/uploads/2018/04/1260-450-nasa-control.jpg');">
+                <div class="page-header-img" style="background-image: url('https://umlibraryeast.blob.core.windows.net/uploads/2018/04/1260-450-nasa-control.jpg');">
 
                     <script>
                         //Basic Image Tooltips
