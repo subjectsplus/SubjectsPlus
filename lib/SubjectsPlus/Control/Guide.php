@@ -1504,15 +1504,14 @@ class Guide
 				}else
 				{
 					global $AssetPath;
-					header("Location: guide_unavailable.php");
-//					$page_title = 'Guide Unavailable';
-//
-//					$body = 'This guide is currently unavailable. It may be under maintenance, or just resting.<br />';
-//					$body .= '<a href="index.php">Find another guide.</a>';
-//
-//					include(dirname(dirname(dirname(dirname(__FILE__)))) . "/subjects/includes/header.php");
-//					makePluslet('Guide Not Public', $body, "no_overflow");
-//					return FALSE;
+					$page_title = 'Guide Unavailable';
+
+					$body = 'This guide is currently unavailable. It may be under maintenance, or just resting.<br />';
+					$body .= '<a href="index.php">Find another guide.</a>';
+
+					include(dirname(dirname(dirname(dirname(__FILE__)))) . "/subjects/includes/header.php");
+					makePluslet('Guide Not Public', $body, "no_overflow");
+					return FALSE;
 				}
 				break;
 			default: //not implemented to redirect to index page
