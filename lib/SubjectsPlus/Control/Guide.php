@@ -74,8 +74,8 @@ class Guide
                 $this->_shortform = $_POST["shortform"];
                 $this->_extra = $_POST['extra'];
                 $this->_header = $_POST['header'];
-                $this->_course_code = $_POST['coursecode'];
-                $this->_instructor = $_POST['instructor'];
+                $this->_course_code = isset($_POST['coursecode']) ? $_POST['coursecode'] : "";
+                $this->_instructor = isset($_POST['instructor']) ? $_POST['instructor'] : "";
 
                 //add http to redirect url if not present
                 $this->_redirect_url = strpos($this->_redirect_url, "http://") === 0 || strpos($this->_redirect_url, "https://") === 0
@@ -133,8 +133,8 @@ class Guide
                     $this->_type = $guideArray[0]["type"];
                     $this->_extra = json_decode($guideArray[0]["extra"], true);
                     $this->_header = $guideArray[0]["header"];
-                    $this->_course_code = $guideArray[0]["course_code"];
-                    $this->_instructor = $guideArray[0]["instructor"];
+                    $this->_course_code = isset($guideArray[0]["course_code"]) ? $guideArray[0]["course_code"] : "";
+                    $this->_instructor = isset($guideArray[0]["instructor"]) ? $guideArray[0]["instructor"] : "";
                 }
 
                 ///////////////////
