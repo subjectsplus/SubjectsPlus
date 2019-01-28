@@ -1808,6 +1808,63 @@ function listGuides( $search = "", $type = "all", $display = "default" ) {
 	return $list_guides;
 }
 
+function apiGetCollectionsList() {
+	global $PublicPath;
+	$result = array();
+	$db     = new Querier();
+
+	$q           = "SELECT collection_id, title, description, shortform
+FROM collection
+ORDER BY title;";
+	$collections = $db->query( $q , 2);
+
+	foreach ( $collections as $collection ) {
+		$collection_id                = $collection['collection_id'];
+		$collection['collection_url'] = $PublicPath . 'collection.php?d=' . $collection['shortform'];
+		$subjects                     = getSubjectsByCollectionId( $collection_id );
+
+		if ( ! empty( $subjects ) ) {
+			$collection['subjects'] = $subjects;
+			$result['collections'][]  = $collection;
+		}
+	}
+
+
+	header( 'Content-type: application/json' );
+	echo json_encode( $result);
+}
+
+function getSubjectsByCollectionId( $collection_id ) {
+	$result = array();
+	$db     = new Querier();
+
+	$q = "SELECT s.subject_id, s.subject, s.shortform, s.description, s.keywords
+FROM subject s,
+     collection_subject cs,
+     collection c
+WHERE s.subject_id = cs.subject_id
+  AND cs.collection_id = c.collection_id
+  AND c.collection_id = $collection_id AND s.active = 1 ORDER BY cs.sort";
+
+	$subjects = $db->query( $q , 2);
+
+	if ( ! empty( $subjects ) ) {
+		generateSubjectUrl( $subjects );
+		$result = $subjects;
+	}
+
+	return $result;
+}
+
+function generateSubjectUrl( &$subjects ) {
+	global $PublicPath;
+	foreach ( $subjects as &$subject ) {
+		if ( ! empty( $subject['shortform'] ) ) {
+			$subject['subject_url'] = $PublicPath . 'guide.php?subject=' . $subject['shortform'];
+		}
+	}
+}
+
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
 	$db = new Querier();
 
