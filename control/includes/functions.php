@@ -723,7 +723,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 
 
 	//print $sq2;
-	$db  = new Querier;
+	$db = new Querier;
 
 	$sr2 = $db->query( $sq2 );
 
@@ -1808,6 +1808,26 @@ function listGuides( $search = "", $type = "all", $display = "default" ) {
 	return $list_guides;
 }
 
+function apiGetCourseGuidesList() {
+	global $PublicPath;
+	$result = array();
+	$db     = new Querier();
+
+	$q           = "Select subject_id, subject, shortform, type, description, keywords
+      FROM subject where active = '1' and type != 'Placeholder' and type = 'Course' order by subject";
+	$course_guides = $db->query( $q, 2 );
+
+	foreach ( $course_guides as &$course_guide ) {
+		$course_guide['subject_url'] = $PublicPath . 'guide.php?subject=' . $course_guide['shortform'];
+	}
+
+	$result['course_guides'] = $course_guides;
+
+	header( 'Content-type: application/json' );
+	echo json_encode( $result );
+
+}
+
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
 	$db = new Querier();
 
@@ -2001,7 +2021,7 @@ function targetBlanker() {
 // (string) $message - message to be passed to Slack
 // (string) $channel - channel in which to write the message
 // (string) $icon - You can set up custom emoji icons to use with each message
-function sendSlackMsg( $message, $channel, $icon, $webhookUrl) {
+function sendSlackMsg( $message, $channel, $icon, $webhookUrl ) {
 	$channel = ( $channel ) ? $channel : "talkback";
 	$data    = "payload=" . json_encode( array(
 			"channel"    => "#{$channel}",
@@ -2074,7 +2094,7 @@ function sendSlackMsg( $message, $channel, $icon, $webhookUrl) {
 function post_captcha( $user_response ) {
 
 	// reCaptcha info
-    global $talkback_recaptcha_secret_key;
+	global $talkback_recaptcha_secret_key;
 
 	$secret      = $talkback_recaptcha_secret_key;
 	$remoteip    = $_SERVER["REMOTE_ADDR"];

@@ -6,18 +6,12 @@
  *   @author AGD
  *   @date Jan 2019
  */
-
-
 $page_title = "404 -- Page Not Found";
-
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
 if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/blank-404.php"); exit;}
-
 include("includes/header.php");
-
 ?>
 
   <div class="pure-g">
@@ -43,10 +37,7 @@ include("includes/header.php");
 
 
 <?php 
-
 //print "<pre>";
 //print_r($results);
-
 include("includes/footer.php");
-
 ?>
