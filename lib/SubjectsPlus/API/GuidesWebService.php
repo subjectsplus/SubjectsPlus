@@ -139,6 +139,11 @@ class GuidesWebService extends WebService implements InterfaceWebService
 
 					$lobjFinalParams['active'] = $lstrValue;
 					break;
+				case 'topic_guide':
+					$lstrValue = scrubData($lstrValue, 'integer');
+
+					$lobjFinalParams['topic_guide'] = $lstrValue;
+					break;
 			}
 		}
 
@@ -208,6 +213,10 @@ class GuidesWebService extends WebService implements InterfaceWebService
 					$lstrCombine = implode(' AND ', $lobjCondition);
 
 					array_push($lobjConditions, $lstrCombine);
+					break;
+				case 'topic_guide':
+					apiGetTopicGuidesList();
+					return;
 					break;
 			}
 		}

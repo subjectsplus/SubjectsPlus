@@ -1808,6 +1808,26 @@ function listGuides( $search = "", $type = "all", $display = "default" ) {
 	return $list_guides;
 }
 
+function apiGetTopicGuidesList() {
+	global $PublicPath;
+	$result = array();
+	$db     = new Querier();
+
+	$q           = "Select subject_id, subject, shortform, type, description, keywords
+      FROM subject where active = '1' and type != 'Placeholder' and type = 'Topic' order by subject";
+	$course_guides = $db->query( $q, 2 );
+
+	foreach ( $course_guides as &$course_guide ) {
+		$course_guide['subject_url'] = $PublicPath . 'guide.php?subject=' . $course_guide['shortform'];
+	}
+
+	$result['topic_guides'] = $course_guides;
+
+	header( 'Content-type: application/json' );
+	echo json_encode( $result );
+
+}
+
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
 	$db = new Querier();
 
