@@ -144,6 +144,11 @@ class GuidesWebService extends WebService implements InterfaceWebService
 
 					$lobjFinalParams['course_guide'] = $lstrValue;
 					break;
+				case 'collection':
+					$lstrValue = scrubData($lstrValue, 'integer');
+
+					$lobjFinalParams['collection'] = $lstrValue;
+					break;
 			}
 		}
 
@@ -216,6 +221,10 @@ class GuidesWebService extends WebService implements InterfaceWebService
 					break;
 				case 'course_guide':
 					apiGetCourseGuidesList();
+					return;
+					break;
+				case 'collection':
+					apiGetCollectionsList();
 					return;
 					break;
 			}
