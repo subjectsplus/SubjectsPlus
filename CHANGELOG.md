@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
-
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.2.2...HEAD)
+## [v4.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.3) (2019-01-31)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.2.2...v4.3)
 
 **Implemented enhancements:**
 
