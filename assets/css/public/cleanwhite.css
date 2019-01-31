@@ -1739,3 +1739,10 @@ img.pluslet_card_image {
 /** end ckeditor custom styles ***/
 
 
+.staff-departments, .staff-librarians {
+    list-style: none;
+}
+
+.staff-librarians li {
+    display: grid;
+}

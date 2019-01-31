@@ -36,6 +36,7 @@ if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FIL
 	exit;
 }
 
+
 require_once(dirname(__FILE__) . "/config.php");
 
 
@@ -50,7 +51,6 @@ if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
 	session_start();
 	
 }
-
 
 //Initialise CSRFGuard library
 //csrfProtector::init();
@@ -180,9 +180,6 @@ mb_internal_encoding('UTF-8');
     if (isset($_SESSION['css'])) {
       print "<link id=\"css_choice\" href=\"$AssetPath" . "css/theme/" . $_SESSION['css'] . ".css\" rel=\"stylesheet\" type=\"text/css\"></link>";
     }
-
-
-
     ?>
 
   </head>
@@ -191,6 +188,7 @@ mb_internal_encoding('UTF-8');
     <?php
     // for those times when you  need the CSS and jQuery, but no header . . .
     if (isset($no_header) && $no_header == "yes") {
+
       return;
     }
     ?>
@@ -216,6 +214,8 @@ mb_internal_encoding('UTF-8');
 
       <?php
       // This is used in control/records to link to the public site -- you probably don't need to change
+
+
       if (isset($_COOKIE["sub_shortform"])) {
         if ($mod_rewrite == 1) {
           $path_to_subject = $PublicPath . $_COOKIE["sub_shortform"];

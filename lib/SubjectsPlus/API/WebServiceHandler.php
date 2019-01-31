@@ -183,6 +183,10 @@ class WebServiceHandler
 		print "  sp/api/guides/subject_id/22/key/api-key -- show all guides associated with that subject id\n";
 		print "  sp/api/guides/shortform/Nursing/key/api-key -- show all guides associated with that shortform\n";
 		print "  sp/api/guides/type/Subject/key/api-key -- show all guides of that type\n";
+		print "  sp/api/guides/type/Subject/active/1/key/api-key -- show all public guides of that type\n";
+		print "  sp/api/guides/type/Subject/collection/1/key/api-key -- show all collections of guides\n";
+		print "  sp/api/guides/type/Subject/course_guide/1/key/api-key -- show all public course guides\n";
+		print "  sp/api/guides/type/Subject/topic_guide/1/key/api-key -- show all public topic guides\n";
 		print "\n  * enter max number of returns\n  sp/api/guides/type/Subject/max/10/key/api-key\n\nfaq\n  * coming soon";
 		print "\n\n\n  * If web service is not working correctly, the most common problem is that the .htaccess file has the wrong 'RewriteBase' path.";
 		print "\n    It should reflect the path that is after your websites url. E.g. if you have www.mywebsite.com/dir1/sp/api then .htaccess file should have 'RewriteBase' path of /dir1/sp/api/";

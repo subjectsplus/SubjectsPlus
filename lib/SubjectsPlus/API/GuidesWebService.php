@@ -64,7 +64,6 @@ class GuidesWebService extends WebService implements InterfaceWebService
 		}
 
 		$lstrQuery = $this->generateQuery($lobjParams) or die;
-
 		$lobjQuerier = new Querier();
 
 		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
@@ -135,6 +134,26 @@ class GuidesWebService extends WebService implements InterfaceWebService
 
 					$lobjFinalParams['max'] = $lstrValue;
 					break;
+				case 'active':
+					$lstrValue = scrubData($lstrValue, 'integer');
+
+					$lobjFinalParams['active'] = $lstrValue;
+					break;
+				case 'course_guide':
+					$lstrValue = scrubData($lstrValue, 'integer');
+
+					$lobjFinalParams['course_guide'] = $lstrValue;
+					break;
+				case 'collection':
+					$lstrValue = scrubData($lstrValue, 'integer');
+
+					$lobjFinalParams['collection'] = $lstrValue;
+					break;
+				case 'topic_guide':
+					$lstrValue = scrubData($lstrValue, 'integer');
+
+					$lobjFinalParams['topic_guide'] = $lstrValue;
+					break;
 			}
 		}
 
@@ -194,6 +213,28 @@ class GuidesWebService extends WebService implements InterfaceWebService
 					$lstrCombine = implode(' OR ', $lobjCondition);
 
 					array_push($lobjConditions, $lstrCombine);
+					break;
+				case 'active':
+					$lobjCondition = array();
+
+					array_push($lobjCondition, "active = '$lobjValues'\n");
+
+
+					$lstrCombine = implode(' AND ', $lobjCondition);
+
+					array_push($lobjConditions, $lstrCombine);
+					break;
+				case 'course_guide':
+					apiGetCourseGuidesList();
+					return;
+					break;
+				case 'collection':
+					apiGetCollectionsList();
+					return;
+					break;
+				case 'topic_guide':
+					apiGetTopicGuidesList();
+					return;
 					break;
 			}
 		}

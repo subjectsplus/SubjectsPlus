@@ -42,6 +42,8 @@ require_once( "includes/config.php" );
 
 if ( isset( $use_shibboleth ) && $use_shibboleth == true ) {
 
+	header("Location: index.php");
+
 	$message = "<h2>" . _( "Shibboleth Authentication Error" ) . "</h2>
     <p>" . _( "If you are seeing this page, please contact the" ) . " <a href=\"mailto:$administrator_email\">" . ( "SubjectsPlus Admin" ) . "</a>.</p>
     <p>" . _( "Perhaps you have not yet been entered as a user into SubjectsPlus, or your email address has changed since you were entered." ) . "</p>";
