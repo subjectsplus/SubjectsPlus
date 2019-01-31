@@ -1,57 +1,43 @@
 <?php
-
-$page_title = "Page not Found";
-$description = "404 Page not found";
-$keywords = "404, missing page";
-
-$use_jquery = array("ui", "ui_styles");
-
+/**
+ *   @file blank-404.php
+ *   @brief 404 page
+ *
+ *   @author AGD
+ *   @date Jan 2019
+ */
+$page_title = "404 -- Page Not Found";
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
-include("includes/header_um.php");
-
+// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/blank-404.php"); exit;}
+include("includes/header.php");
 ?>
 
+  <div class="pure-g">
+    <div class="pure-u-1-2">
 
-<div class="panel-container">
-<div class="pure-g">
+  <div class="pluslet no_overflow">
+    <div class="titlebar">
+      <div class="titlebar_text"><?php print _("Oh No 404"); ?></div>
+      <div class="titlebar_options"></div>
+    </div>
+    <div class="pluslet_body">
+    <?php print _("This page does not seem to exist.") ?>
+    <br />
+    <a href="index.php"><?php print _("See a list of all research guides."); ?></a>
+    </div>
+    </div>
 
-	<div class="pure-u-1 pure-u-lg-3-4 panel-adj">
-        <div class="breather">
-          	<p>We looked everywhere, and we can't find that page.</p>
-			<p>Try <strong>searching</strong> for the page you want, or
-			<strong> select a category</strong> from the navigational menu above.</p>
-			<br>
-			<form id="head_search" method="post" action="http://library.miami.edu/wp-content/themes/umiami/resolver.php">
-			<input type="hidden" value="website" name="searchtype">
-			<input id="search_tabs" class="searchinput-4" type="text" autocomplete="off" size="40" name="searchterms" value="">
-			<input type="submit" name="submitsearch" value="Search" class="search404">
-			</form>
-        </div>
-    </div> <!--end 3/4 main area column-->
+    </div>
+    <div class="pure-u-1-2">
 
-
-    <div class="pure-u-1 pure-u-lg-1-4 database-page sidebar-bkg">
-
-    </div><!--end 1/4 sidebar column-->
-
-      
-
-      
-
-</div><!--end pure-g-->
-</div> <!--end panel-container-->
+    </div>
+  </div>
 
 
-<!--Data Table-->
-
-
-<?php
-
-////////////
-// Footer
-///////////
-
-include("includes/footer_um.php");
-
+<?php 
+//print "<pre>";
+//print_r($results);
+include("includes/footer.php");
 ?>

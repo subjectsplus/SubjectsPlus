@@ -44,6 +44,14 @@ $all_cattags = array( "Noise", "Resources", "Computers", "Facilities", "Services
 // sp/assets/css/green.css ) and then add "green" to this array.  Boom!
 $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
+
+$talkback_recaptcha_site_key = "";
+$talkback_recaptcha_secret_key = "";
+$talkback_slack_webhook_url = "";
+$talkback_slack_channel = "";
+$talkback_slack_emoji = "";
+
+
 // This array contains the list of columns that should be omitted in the user forms
 // First Name, Last Name, Email Address, Ptags, and Password cannot be omitted
 // Available options: 'title', 'department', 'position_number', 'classification', 'priority', 'supervisor', 'tel',
@@ -151,6 +159,12 @@ $uname = "";
 $pword = "";
 
 $db_port = "3306";
+
+/* the $db_cert_path is currently being used when hosting SubjectsPlus in an Azure Web Apps for Container environment.
+** it is necessary for encrypting the mysql connection
+*/
+
+$db_cert_path = "";
 
 /* Name of the SubjectsPlus database, i.e., subsplus.  May have a
    prefix on a shared host, i.e., yoursite_subsplus. */
@@ -366,6 +380,7 @@ $guide_index_page = "";
 
 
 $google_analytics_ua = "";
+$google_tag_manager = "";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // Pluslets Config
@@ -523,5 +538,10 @@ $qp_inst_id = '';
 // WebPAC III
 
 $webpac_cat_action = "";
+
+////////////////////////////////////////////
+//Enforce https in uploads url
+////////////////////////////////////////////
+$enforce_https_upload_url = FALSE;
 
 ?>

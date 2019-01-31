@@ -42,7 +42,7 @@ class Config
 		$this->lboolChangeSalt = FALSE;
 		$this->lboolChangeAPIKey = FALSE;
 
-		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port' );
+		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port', 'db_cert_path' );
 		$this->lobjSetupSiteKeys = array( 'resource_name', 'institution_name', 'administrator', 'administrator_email', 'email_key', 'tel_prefix' );
 	}
 
@@ -213,10 +213,20 @@ class Config
 	public function checkDBConnection( )
 	{
 		$lstrError = '';
+		if( isset($this->lobjNewConfigValues['db_cert_path']) && $this->lobjNewConfigValues['db_cert_path'] != null ) {
+			$options = array(
+				PDO::ATTR_PERSISTENT => true,
+				PDO::MYSQL_ATTR_SSL_CA => $this->lobjNewConfigValues['db_cert_path'],
+			);
+		} else {
+			$options = array(
+				PDO::ATTR_PERSISTENT => true,
+			);
+		}
 
 		try {
 			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $this->lobjNewConfigValues['db_port'] . ';charset=utf8';
-			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], array(PDO::ATTR_PERSISTENT => true));
+			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], $options);
 		} catch (\PDOException $e) {
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<p>This is the detailed error:</p>";
@@ -363,6 +373,21 @@ class Config
 		$lstrRightHTML = '';
 		$lstrLeftBottomHTML = '';
 		$lstrRightBottomHTML = '';
+
+		// init new vars
+		$section_guide = "";
+		$section_user = "";
+		$section_auth = "";
+		$section_video = "";
+		$section_talkback = "";
+		$section_record = "";
+		$section_api = "";
+		$section_appearance = "";
+		$section_core_tech = "";
+		$section_core_metadata = "";
+		$section_mysql = "";
+		$section_catalog = "";
+		$section_primo = "";
 
 		//go through all options
 		foreach( $this->lobjConfigOptions as $lstrKey => $lobjOption )
@@ -521,88 +546,256 @@ class Config
 			}
 
 			$lstrHTML .= "\n";
+//print "<div class='pluslet_body'>$lstrHTML</div>";
 
-			//based on passed option, place on left, leftbottom or right box
-			if( strtolower( $lobjOption[3] ) == 'left' )
-			{
-				$lstrLeftHTML .= $lstrHTML;
-			}elseif( strtolower( $lobjOption[3] ) == 'left-bottom' )
-			{
-				$lstrLeftBottomHTML .= $lstrHTML;
-			}elseif( strtolower( $lobjOption[3] ) == 'right-bottom' )
-			{
-				$lstrRightBottomHTML .= $lstrHTML;
-			}else
-			{
-				$lstrRightHTML .= $lstrHTML;
+			// Let's group these
+			switch ( strtolower( $lobjOption[3] )) {
+				case "guide":
+					$section_guide .= $lstrHTML;
+				break;
+				case "user":
+					$section_user .= $lstrHTML;
+				break;
+								case "auth":
+					$section_auth .= $lstrHTML;
+				break;
+								case "video":
+					$section_video .= $lstrHTML;
+				break;
+								case "talkback":
+					$section_talkback .= $lstrHTML;
+				break;
+								case "record":
+					$section_record .= $lstrHTML;
+				break;
+								case "api":
+					$section_api .= $lstrHTML;
+				break;
+								case "appearance":
+					$section_appearance .= $lstrHTML;
+				break;
+								case "core-tech":
+					$section_core_tech .= $lstrHTML;
+				break;
+				case "core-metadata":
+					$section_core_metadata .= $lstrHTML;
+				break;
+								case "mysql":
+					$section_mysql .= $lstrHTML;
+				break;
+								case "catalog":
+					$section_catalog.= $lstrHTML;
+				break;
+								case "primo":
+					$section_primo .= $lstrHTML;
+				break;
 			}
+
 		}
 
 		?>
-		<form id="config_form" class="pure-form pure-form-stacked" action="edit-config.php" method="POST">
 
-			<div class="pure-g">
-				<div class="pure-u-1-3">
-				    <div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Core Configurations"); ?></div>
-				        </div>
+<form id="config_form" class="pure-form pure-form-stacked" action="edit-config.php" method="POST">	
+<div id="tabs" style="background-color: transparent;">
+<div class="pure-g">
+	<div class="pure-u-1 pure-u-md-2-3">
+<div class="pluslet">
 				        <div class="pluslet_body">
-				            <?php print $lstrLeftHTML; ?>
-				        </div>
-				    </div>
+  <ul>
+    <li><a href="#tabs-basic"><?php print _("Basic Settings"); ?></a></li>
+    <li><a href="#tabs-catalog"><?php print _("Catalog"); ?></a></li>
+    <li><a href="#tabs-guides"><?php print _("Guides/Records"); ?></a></li>
+    <li><a href="#tabs-talkback"><?php print _("Talkback/Video"); ?></a></li>
+    <li><a href="#tabs-api"><?php print _("API"); ?></a></li>
+    <li><a href="#tabs-server"><?php print _("Server"); ?></a></li>
+  </ul>
+</div>
+</div>
+	</div>
+	<div class="pure-u-1 pure-u-md-1-3">
 				    <div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Institutional Configurations"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $lstrLeftBottomHTML; ?>
-				        </div>
-				    </div>
-				</div>
-
-				<div class="pure-u-1-3">
-
-
-
-
-				    <div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Catalog Connections"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php echo $lstrRightBottomHTML; ?>
-				        </div>
-				    </div>				    				    
-				</div>
-
-				<div class="pure-u-1-3">
-				    <div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Save"); ?></div>
-				        </div>
 				        <div class="pluslet_body">
 				            <input type="submit" class="button" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
 				        </div>
 				    </div>
-				    <div class="pluslet">
+	</div>
+
+  <div id="tabs-basic">
+ 
+				<div class="pure-u-1 pure-u-md-1-3">
+						<div class="pluslet">
 				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Other Configurations"); ?></div>
+				            <div class="titlebar_text"><?php print _("Institutional Settings"); ?></div>
 				        </div>
 				        <div class="pluslet_body">
-				            <?php echo $lstrRightHTML; ?>
+				            <?php print $section_core_metadata; ?>
 				        </div>
 				    </div>
-					<div class="pluslet">
+
+				</div>
+								<div class="pure-u-1 pure-u-md-1-3">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Appearance"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_appearance; ?>
+				        </div>
+				    </div>
+				  </div>
+								<div class="pure-u-1 pure-u-md-1-3">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("User Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_user; ?>
+				        </div>
+				    </div>
+				</div>
+
+    
+  </div> <!-- end tab -->
+  <div id="tabs-server">
+
+				<div class="pure-u-1 pure-u-md-1-2">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Server Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_core_tech; ?>
+				        </div>
+				    </div>
+
+				</div>
+								<div class="pure-u-1 pure-u-md-1-2">
+															<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Authentication"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_auth; ?>
+				        </div>
+				    </div>
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("MySQL Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_mysql; ?>
+				        </div>
+				    </div>
+				  </div>
+
+  </div>
+  <div id="tabs-api">
+
+				<div class="pure-u-1 pure-u-md-1">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("API Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_api; ?>
+				        </div>
+				    </div>
+
+				</div>
+
+
+  </div>
+
+  <div id="tabs-catalog">
+
+				<div class="pure-u-1 pure-u-md-1-2">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Catalog Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_catalog; ?>
+				        </div>
+				    </div>
+
+				</div>
+								<div class="pure-u-1 pure-u-md-1-2">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Primo Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_primo; ?>
+				        </div>
+				    </div>
+				  </div>
+
+  </div>
+
+    <div id="tabs-guides">
+				<div class="pure-u-1 pure-u-md-1-2">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Guide Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_guide; ?>
+				        </div>
+				    </div>
+
+				</div>
+								<div class="pure-u-1 pure-u-md-1-2">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Database Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_record; ?>
+				        </div>
+				    </div>
+
+				    					<div class="pluslet">
 						<div class="titlebar">
 							<div class="titlebar_text"><?php print _("Clear the cache"); ?></div>
 						</div>
 						<div class="pluslet_body">
-							<input type="submit" class="button" name="clear_cache_btn" value="<?php echo _("Clear"); ?>" />
+							<p><?php echo _("Use this button to clear the image cache used in the New Books pluslet") ?></p>
+							<input type="submit" class="button" name="clear_cache_btn" value="<?php echo _("Clear New Books Cache"); ?>" />
 						</div>
 					</div>
+				  </div>
+
+  </div>
+
+    <div id="tabs-talkback">
+				<div class="pure-u-1 pure-u-md-1-3">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Talkback Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_talkback; ?>
+				        </div>
+				    </div>
+
 				</div>
-				</div> <!-- end pure g-r -->
+								<div class="pure-u-1 pure-u-md-1-3">
+						<div class="pluslet">
+				        <div class="titlebar">
+				            <div class="titlebar_text"><?php print _("Video Settings"); ?></div>
+				        </div>
+				        <div class="pluslet_body">
+				            <?php print $section_video; ?>
+				        </div>
+				    </div>
+				  </div>
+								<div class="pure-u-1 pure-u-md-1-3">
+
+				</div>
+  </div>
+
+</div>
+
 
 		</form>
 		<?php

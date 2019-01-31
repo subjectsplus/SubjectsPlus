@@ -43,27 +43,38 @@ class Querier  {
     	global $pword;
     	global $dbName_SPlus;
         global $db_port;
-    
-    if( isset($db_port) ) {
-      
-    } else {
+        global $db_cert_path;
 
-      $db_port = "3306";
-    
-    }
-    
-        $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $db_port . ';charset=utf8';
+	    if( isset($db_port) ) {
 
-        try {
-            $this->_connection = new PDO($dsn, $uname, $pword, array(PDO::ATTR_PERSISTENT => true));
-        } catch (\PDOException $e) {
+	    } else {
+	      $db_port = "3306";
+	    }
 
+	    $dsn = 'mysql:dbname=' . $dbName_SPlus . ';host=' . $hname . ';port=' . $db_port . ';charset=utf8';
 
-            echo "<h1>There was a problem connecting to the database.</h1>";
-            echo "<p>Are you sure that the database connection information is correct?</p>";
-            echo "<p>This is the detailed error:</p>";
-            echo 'Connection failed: ' . $e->getMessage();
-        }
+	    if( isset($db_cert_path) && $db_cert_path != null ) {
+		    $options = array(
+			    PDO::ATTR_PERSISTENT => true,
+			    PDO::MYSQL_ATTR_SSL_CA => $db_cert_path,
+		    );
+	    } else {
+		    $options = array(
+			    PDO::ATTR_PERSISTENT => true,
+		    );
+
+	    }
+
+	    try {
+		    $this->_connection = new PDO($dsn, $uname, $pword, $options);
+
+	    } catch (\PDOException $e) {
+		    echo "<h1>There was a problem connecting to the database.</h1>";
+		    echo "<p>Are you sure that the database connection information is correct?</p>";
+		    echo "<p>This is the detailed error:</p>";
+		    echo 'Connection failed: ' . $e->getMessage();
+	    }
+
     }
 
     public function query($sql, $fetch_style = NULL) {
@@ -76,6 +87,7 @@ class Querier  {
         $connection = $this->_connection;
 
            $result = $connection->query($sql);
+
         if (!$result) {
  	       exit;
           //  echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
@@ -85,12 +97,52 @@ class Querier  {
 
             $rows = NULL;
         } else {
-           $rows = $result->fetchAll($fetch_style);
-        }
 
+           $rows = $result->fetchAll($fetch_style);
+
+        }
 
         return $rows;
     }
+
+	public function prepareStatement ($sql, $params) {
+		$connection = $this->_connection;
+
+
+		$statement = $connection->prepare($sql);
+		foreach ($params as $param=>$value){
+
+			$statement->bindParam($param, $value);
+		}
+		return $statement;
+	}
+
+
+	public function queryWithPreparedStatement($sql, $fetch_style = NULL, $params) {
+
+		// Default is numbered array
+		if ($fetch_style === NULL) {
+			$fetch_style = PDO::FETCH_BOTH;
+		}
+
+		$sql = $this->prepareStatement($sql, $params);
+		$sql->execute();
+
+		if (!$sql) {
+			exit;
+			//  echo "<p><h2>Woah! There was a problem with that query.</h2> Maybe this will help: ";
+			//  print_r($connection->errorInfo());
+			//  echo "</p>";
+			//  echo $sql;
+
+			$rows = NULL;
+		} else {
+			$rows = $sql->fetchAll($fetch_style);
+		}
+
+
+		return $rows;
+	}
 
     public function exec($sql) {
         $connection = $this->_connection;

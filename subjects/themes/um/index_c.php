@@ -113,7 +113,7 @@ if (isset($_POST["searchterm"]) && $_POST["searchterm"] != "") {
     $searchterm = scrubData($_POST["searchterm"]);
     $search_param = "%" . $searchterm . "%";
 
-    $pills = "<div class=\"pills-label\">" . _("Start over:") ."</div><div class=\"pills-container\"><a href=\"index.php\">See All Research Guides</a></div>"; 
+    $pills = "<div class=\"pills-label\">" . _("Start over:") ."</div><div class=\"pills-container\"><a href=\"index.php\">See All Research Guides</a></div>";
 
     $q_search = "select * from subject 
     WHERE active = '1' 

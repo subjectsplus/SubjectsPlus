@@ -1,7 +1,25 @@
 # Pretty URLs -- Uncomment to use
 
-#RewriteEngine on
+RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^([^\.]+)$ $1.php [NC,L]
 #RewriteBase /subjectsplus/subjects/
-#RewriteRule ^staff/([^/\.]+)/?$ staff_details.php?name=$1 [L]
-#RewriteRule ^([^/\.]+)/?$ guide.php?subject=$1 [L]
-#RewriteRule ^([^/\.]+)/([^/\.]+)/?$ guide.php?subject=$1&source=$2 [L]
+
+RewriteBase /subjects/
+
+RewriteCond %{QUERY_STRING} letter=By%20Department [NC]
+RewriteRule (.*) /subjects/staff.php?letter=Departments [R=301,L]
+
+RewriteCond %{QUERY_STRING} letter=Subject%20Librarians%20A-Z [NC]
+RewriteRule (.*) /subjects/staff.php?letter=Subject\ Librarians [R=302,L]
+
+
+#RewriteRule ^profile/([^/\.]+)/?$ staff_details.php?name=$1 [L]
+RewriteRule ^staff/([^/*]+)/?$ staff_details.php?name=$1 [L]
+RewriteRule ^profile/?([a-zA-Z0-9\[\]\.()+|_-]+)$ staff_details.php?name=$1 [L]
+RewriteRule ^([^/\.]+)/?$ guide.php?subject=$1 [L]
+RewriteRule ^([^/\.]+)/([^/\.]+)/?$ guide.php?subject=$1&source=$2 [L]
+
+RewriteRule ^([^/\.]+)/?$ guide.php?subject=$1 [L]
+
+ErrorDocument 404 /subjects/blank-404.php

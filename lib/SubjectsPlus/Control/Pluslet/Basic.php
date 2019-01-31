@@ -76,7 +76,6 @@
 			$config['height'] = '300';
 			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
 
-
 			// Create and output object
 			print parent::startPluslet();
 			$this->_body = $oCKeditor->editor($this_instance, $this->_body, $config);

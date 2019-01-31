@@ -10,9 +10,7 @@
 //added in order to hide errors if SP not yet installed.  
 if( !file_exists( "../control/includes/config.php" ) || filesize( "../control/includes/config.php" ) < 10 )
 {
-  print "<img src=\"../assets/images/admin/logo_v3_full.png\" border=\"0\" />\n<br />";
-  print "<p>" .  _("SubjectsPlus has not been installed yet.  Please follow the instructions on the wiki: ") . "</p><p><a href=\"http://subjectsplus.com/wiki2/index.php?title=Main_Page\" target=\"_blank\">http://subjectsplus.com/wiki2/index.php?title=Main_Page</a></p>";
-  exit;
+  header("Location: ../control/");
 }
 
 use SubjectsPlus\Control\CompleteMe;
@@ -24,7 +22,7 @@ include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index_c.php"); exit;}
+if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index.php"); exit;}
 
 
 // Now, check if they want to use an SP guide as the splash page
@@ -206,7 +204,7 @@ include("includes/header.php");
                   if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
                   if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
               
-              $our_item = "<li><i class=\"fa fa-plus-square\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+              $our_item = "<li><i class=\"fa fa-plus-circle\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
               <div class=\"guide_list_bonus\">$list_bonus</div>
               </li>";
 
@@ -312,7 +310,7 @@ include("includes/header.php");
           $input_box->displayBox();
           print "<div class=\"pills-label\">" . _("Select:") ."</div><div class=\"pills-container\">" . $guide_type_btns . "</div>";
           print $layout;   
-          print $collection_results; 
+          print $collection_results;
           ?>
       </div>
   
@@ -391,10 +389,14 @@ include("includes/footer.php");
             $(".zebra").removeClass("oddrow");
         }
 
+        // Toggle details for all guides in a category list
+        $('.guide-list-expand').click(function () {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
 
-         // Toggle details for each guide list item 
-          $( ".fa-plus-square" ).click(function() {
-             $(this).toggleClass('fa-plus-square fa-minus-square');
+        // Toggle details for each guide list item
+          $( '.fa-plus-circle' ).click(function() {
+             $(this).toggleClass('fa-plus-circle fa-minus-circle');
              $(this).parent().find('.guide_list_bonus').toggle();            
           });
 
