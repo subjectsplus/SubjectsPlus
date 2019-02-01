@@ -10,7 +10,7 @@
 - Subject Specialist: Add option to display as small or large headshot thumbnail [\#730](https://github.com/subjectsplus/SubjectsPlus/issues/730)
 - A screen to easily add databases to a subject [\#722](https://github.com/subjectsplus/SubjectsPlus/issues/722)
 - Search boxes - provide where they come from [\#408](https://github.com/subjectsplus/SubjectsPlus/issues/408)
-- Ithican New Theme [\#406](https://github.com/subjectsplus/SubjectsPlus/issues/406)
+- Ithacan New Theme [\#406](https://github.com/subjectsplus/SubjectsPlus/issues/406)
 - Background/theme for admin interface - for UM/distributed versions [\#400](https://github.com/subjectsplus/SubjectsPlus/issues/400)
 - Styles for colorbox, pop-usps etc [\#399](https://github.com/subjectsplus/SubjectsPlus/issues/399)
 - Place to insert GA code for config file [\#33](https://github.com/subjectsplus/SubjectsPlus/issues/33)
