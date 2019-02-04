@@ -27,7 +27,7 @@
 
 	<div id="drag_drop_tabs_lists">
 
-		<h3>Drag & drop tabs to create new guide.</h3>
+		<h3><?php print _("Drag & drop tabs to create new guide"); ?></h3>
 		<div class='source-news'>
 			<ul id="categories-source" class='news-list categories-sortable flyout-tabs new-guide-tabs panel-list'>
 
@@ -35,7 +35,7 @@
 		</div>
 
 		<div id="new_guide_tabs_container">
-			<h4>New Guide (drop tabs below)</h4>
+			<h4><?php print _("New Guide (drop tabs below)"); ?></h4>
 			<div class='interested-in '>
 				<ul id="categories-chosen" class='news-list interested categories-sortable new-guide-tabs panel-list'>
 
