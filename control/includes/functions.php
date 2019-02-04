@@ -723,7 +723,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 
 
 	//print $sq2;
-	$db  = new Querier;
+	$db = new Querier;
 
 	$sr2 = $db->query( $sq2 );
 
@@ -1808,6 +1808,103 @@ function listGuides( $search = "", $type = "all", $display = "default" ) {
 	return $list_guides;
 }
 
+function apiGetCourseGuidesList() {
+	global $PublicPath;
+	$result = array();
+	$db     = new Querier();
+
+	$q           = "Select subject_id, subject, shortform, type, description, keywords
+      FROM subject where active = '1' and type != 'Placeholder' and type = 'Course' order by subject";
+	$course_guides = $db->query( $q, 2 );
+
+	foreach ( $course_guides as &$course_guide ) {
+		$course_guide['subject_url'] = $PublicPath . 'guide.php?subject=' . $course_guide['shortform'];
+	}
+
+	$result['course_guides'] = $course_guides;
+
+	header( 'Content-type: application/json' );
+	echo json_encode( $result );
+
+}
+
+function apiGetCollectionsList() {
+	global $PublicPath;
+	$result = array();
+	$db     = new Querier();
+
+	$q           = "SELECT collection_id, title, description, shortform
+FROM collection
+ORDER BY title;";
+	$collections = $db->query( $q , 2);
+
+	foreach ( $collections as $collection ) {
+		$collection_id                = $collection['collection_id'];
+		$collection['collection_url'] = $PublicPath . 'collection.php?d=' . $collection['shortform'];
+		$subjects                     = getSubjectsByCollectionId( $collection_id );
+
+		if ( ! empty( $subjects ) ) {
+			$collection['subjects'] = $subjects;
+			$result['collections'][]  = $collection;
+		}
+	}
+
+
+	header( 'Content-type: application/json' );
+	echo json_encode( $result);
+}
+
+function getSubjectsByCollectionId( $collection_id ) {
+	$result = array();
+	$db     = new Querier();
+
+	$q = "SELECT s.subject_id, s.subject, s.shortform, s.description, s.keywords
+FROM subject s,
+     collection_subject cs,
+     collection c
+WHERE s.subject_id = cs.subject_id
+  AND cs.collection_id = c.collection_id
+  AND c.collection_id = $collection_id AND s.active = 1 ORDER BY cs.sort";
+
+	$subjects = $db->query( $q , 2);
+
+	if ( ! empty( $subjects ) ) {
+		generateSubjectUrl( $subjects );
+		$result = $subjects;
+	}
+
+	return $result;
+}
+
+function generateSubjectUrl( &$subjects ) {
+	global $PublicPath;
+	foreach ( $subjects as &$subject ) {
+		if ( ! empty( $subject['shortform'] ) ) {
+			$subject['subject_url'] = $PublicPath . 'guide.php?subject=' . $subject['shortform'];
+		}
+	}
+}
+
+function apiGetTopicGuidesList() {
+	global $PublicPath;
+	$result = array();
+	$db     = new Querier();
+
+	$q           = "Select subject_id, subject, shortform, type, description, keywords
+      FROM subject where active = '1' and type != 'Placeholder' and type = 'Topic' order by subject";
+	$course_guides = $db->query( $q, 2 );
+
+	foreach ( $course_guides as &$course_guide ) {
+		$course_guide['subject_url'] = $PublicPath . 'guide.php?subject=' . $course_guide['shortform'];
+	}
+
+	$result['topic_guides'] = $course_guides;
+
+	header( 'Content-type: application/json' );
+	echo json_encode( $result );
+
+}
+
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
 	$db = new Querier();
 
@@ -2001,7 +2098,7 @@ function targetBlanker() {
 // (string) $message - message to be passed to Slack
 // (string) $channel - channel in which to write the message
 // (string) $icon - You can set up custom emoji icons to use with each message
-function sendSlackMsg( $message, $channel, $icon, $webhookUrl) {
+function sendSlackMsg( $message, $channel, $icon, $webhookUrl ) {
 	$channel = ( $channel ) ? $channel : "talkback";
 	$data    = "payload=" . json_encode( array(
 			"channel"    => "#{$channel}",
@@ -2074,7 +2171,7 @@ function sendSlackMsg( $message, $channel, $icon, $webhookUrl) {
 function post_captcha( $user_response ) {
 
 	// reCaptcha info
-    global $talkback_recaptcha_secret_key;
+	global $talkback_recaptcha_secret_key;
 
 	$secret      = $talkback_recaptcha_secret_key;
 	$remoteip    = $_SERVER["REMOTE_ADDR"];
