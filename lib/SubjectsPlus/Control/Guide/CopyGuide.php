@@ -400,7 +400,8 @@ class CopyGuide implements OutputInterface {
                                 INNER JOIN pluslet on pluslet_section.pluslet_id = pluslet.pluslet_id
                             WHERE subject.subject_id = :subject_id
                             AND section.section_id = :section_id
-                            AND section.tab_id = :tab_id" );
+                            AND section.tab_id = :tab_id
+							AND pluslet.type != 'Special' " );
         $pluslets_statement->bindParam ( ":subject_id", $subject_id );
         $pluslets_statement->bindParam ( ":section_id", $section_id );
         $pluslets_statement->bindParam ( ":tab_id", $tab_id );
