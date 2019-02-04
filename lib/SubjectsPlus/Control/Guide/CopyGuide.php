@@ -417,8 +417,7 @@ class CopyGuide implements OutputInterface {
     public function insertPlusletData($pluslet) {
         $connection = $this->db->getConnection ();
 
-        $pluslet_statement = $connection->prepare ( "
-			    		INSERT INTO pluslet (`title`, `body`, `type`, `extra`, `hide_titlebar`,`collapse_body`, `titlebar_styling`, `favorite_box`)
+        $pluslet_statement = $connection->prepare ( "INSERT INTO pluslet (`title`, `body`, `type`, `extra`, `hide_titlebar`,`collapse_body`, `titlebar_styling`, `favorite_box`)
 			    		VALUES (:title, :body, :type, :extra, :hide_titlebar, :collapse_body, :titlebar_styling, :favorite_box) " );
 
         $pluslet_statement->bindParam ( ':title', $pluslet ['title'] );
