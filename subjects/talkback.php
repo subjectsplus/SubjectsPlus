@@ -495,7 +495,8 @@ include("includes/header.php");
             <div class="pluslet">
                 <div class="titlebar"><div class="titlebar_text"><?php print _("Tell Us What You Think"); ?></div></div>
                 <div class="pluslet_body">
-                    <p><span class="comment_num">!</span><strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
+                    <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        <strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
                     <br />
                     <?php if (isset($stage_two)) {
                         print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
