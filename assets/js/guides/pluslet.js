@@ -285,6 +285,9 @@ function pluslet() {
 						var delete_id = $(this).parent().parent().attr('id').split('_')[1];
 						var element_deletion = this;
 
+						console.log('delete_id: ' + delete_id);
+						console.log('el_deletion: ' + element_deletion);
+
 						//get all pluslets in a section
 						var this_sections_pluslets = $('#section_' + delete_id).children().find('.pluslet');
 						
@@ -297,14 +300,15 @@ function pluslet() {
 								height: 'auto',
 								resizable: false,
 								buttons: {
-									'Yes': function() {
+									Yes: function() {
 										// Remove node
-										$(element_deletion).parent().parent().remove();
+										$("#section_" + delete_id).remove();
 										$('#response').hide();
 										var save = saveSetup();
 										save.saveGuide();
 										$('#save_guide').fadeOut();
 										$( this ).dialog( 'close' );
+										window.location.reload();
 										return false;
 									},
 									Cancel: function() {
