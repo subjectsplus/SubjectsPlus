@@ -43,8 +43,7 @@ $alphabet = getLetters($our_cats, $selected_letter);
 
 if ($selected_letter == "A-Z") {
 
-$intro = "<p><img src=\"$IconPath/information.png\" alt=\"icon\" /> Click on a name for more information.</p>
-<br />";
+$intro = "<p><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> " . _("Click on a name for more information.") ."</p><br />";
 
 }
 
