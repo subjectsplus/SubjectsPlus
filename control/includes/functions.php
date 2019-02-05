@@ -989,7 +989,7 @@ function getDBbyTypeBoxes( $selected_type = "", $show_formats = true ) {
 	return $alphabet;
 }
 
-function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true ) {
+function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true, $show_free = true ) {
 
 	$selected = scrubData( $selected );
 
@@ -1048,6 +1048,12 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 
 		$letterz[] = "All";
 		$azRange[] = "All";
+
+		if ($show_free == true) {
+			$letterz[] = "Free";
+			$azRange[] = "Free";
+		}
+		
 
 		if ( ! $selected ) {
 			$selected = "ALL";
