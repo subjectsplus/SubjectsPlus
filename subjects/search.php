@@ -12,17 +12,18 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Search;
 use SubjectsPlus\Control\CompleteMe;
 
-
-$page_title = "Search Results";
-
 $use_jquery = array("ui"); 
 
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
+$page_title = _("Search Results");
+
 // scrub incoming
-$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+if (isset($_POST["searchterm"])) {
+	$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+}
 
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
 if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/search.php"); exit;}

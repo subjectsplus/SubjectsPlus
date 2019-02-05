@@ -560,6 +560,8 @@ class Pluslet {
 
                                     }
 
+                                    $note = ""; // init note
+
                                     if (isset($show_note) && $show_note == 1) {
                                         if ($myrow[9] != "") {
                                             $note = "<br />" ._("Note: ") . $myrow[9];
@@ -567,10 +569,6 @@ class Pluslet {
 
                                     } else {
                                         $note = "";
-                                    }
-
-                                    if (!isset($note)) {
-                                    	$note = "";
                                     }
 
                                     if($myrow['10']) {

@@ -23,6 +23,30 @@ class DbHandler {
 		// sanitize submission
 
 		switch ($qualifier) {
+            case "Free" :
+
+                $connection = $db->getConnection ();
+                $statement = $connection->prepare ( "SELECT DISTINCT LEFT(t.title,1) AS initial, t.title AS newtitle, t.description, location, access_restrictions, t.title_id AS this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide, alternate_title
+        FROM title AS t
+        INNER JOIN location_title AS lt
+        ON t.title_id = lt.title_id
+        INNER JOIN location AS l
+        ON lt.location_id = l.location_id
+        INNER JOIN restrictions AS r
+        ON l.access_restrictions = r.restrictions_id
+        INNER JOIN rank AS rk
+        ON rk.title_id = t.title_id
+        INNER JOIN source AS s
+        ON rk.source_id = s.source_id
+        WHERE title != ''
+        AND l.`access_restrictions` = '1'
+        AND eres_display = 'Y'
+                ORDER BY newtitle" );
+
+                $statement->execute ();
+                $results = $statement->fetchAll ();
+
+            break;
 			case "Num" :
 
 				$connection = $db->getConnection ();
