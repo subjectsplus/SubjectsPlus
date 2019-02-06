@@ -92,6 +92,12 @@ class Autocomplete {
         $search_param = "%" . $this->param . "%";
         $subject_id = $this->subject_id;
 
+	    $limit_results_number = "";
+
+	    if (isset($_GET["limit_results_number"])) {
+		    $limit_results_number = scrubData($_GET["limit_results_number"], "integer");
+	    }
+
         switch ($this->collection) {
             case "home":
                 $statement = $connection->prepare("SELECT subject_id AS 'id', subject AS 'matching_text',subject AS 'label', description as 'additional_text', shortform AS 'short_form', 'Subject Guide' as 'content_type', '' as 'additional_id', '' as 'parent' FROM subject
@@ -196,19 +202,25 @@ class Autocomplete {
                 break;
 
             case "records":
-                $statement = $connection->prepare("SELECT DISTINCT title.title_id as `id`,'Record' as `content_type`, title.title as `label`, title.pre as `prefix`, location.location as `location_url`
+            	$statement_string = "SELECT DISTINCT title.title_id as `id`,'Record' as `content_type`, title.title as `label`, title.pre as `prefix`, location.location as `location_url`
 FROM title
 INNER JOIN location_title
 ON title.title_id = location_title.title_id
 INNER JOIN location
 ON location.location_id = location_title.location_id
 AND record_status = 'Active'
-AND title.title LIKE :search_term");
+AND title.title LIKE :search_term";
+
+	            if (isset($limit_results_number) && $limit_results_number == 1){
+		            $statement_string = $statement_string . " LIMIT 50";
+	            }
+
+                $statement = $connection->prepare($statement_string);
                 break;
 
 
             case "azrecords":
-                $statement = $connection->prepare("SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', title.pre as 'prefix', location.location as 'location_url'
+	            $statement_string = "SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', title.pre as 'prefix', location.location as 'location_url'
 FROM title
 INNER JOIN location_title 
 ON title.title_id = location_title.title_id
@@ -216,7 +228,13 @@ INNER JOIN location
 ON location.location_id = location_title.location_id
 AND eres_display = 'Y'
 AND record_status = 'Active'
-AND title.title LIKE :search_term");
+AND title.title LIKE :search_term";
+
+	            if (isset($limit_results_number) && $limit_results_number == 1){
+		            $statement_string = $statement_string . " LIMIT 50";
+	            }
+
+	            $statement = $connection->prepare($statement_string);
                 break;
 
             case "faq":
