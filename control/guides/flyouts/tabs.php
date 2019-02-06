@@ -3,7 +3,7 @@
 		cursor: move;
 	}
 	.flyout-tabs {
-		max-height: 260px;
+		max-height: 130px;
 	}
 	#drag_drop_tabs_lists {
 		display: block;
