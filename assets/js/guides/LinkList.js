@@ -139,7 +139,12 @@ function LinkList(id,idSelector) {
         } else {
             limitAz = false
         }
-        recordSearch.search($('.databases-search').val(), limitAz, 'databases-searchresults', addSearchResultsToPage);
+
+        var search_term = $('.databases-search').val();
+
+        if (search_term.length > 2){
+            recordSearch.search($('.databases-search').val(), limitAz, 'databases-searchresults', addSearchResultsToPage);
+        }
     }
 
     // Load existing list behaviour
