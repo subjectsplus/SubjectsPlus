@@ -227,7 +227,10 @@ function drag() {
                     handle: '.section_sort',
                     update: function (event, ui) {
                         $("#response").hide();
-                        $("#save_guide").fadeIn();
+                        //$("#save_guide").fadeIn();
+                        var save = saveSetup();
+                        save.saveGuide();
+                        $('#save_guide').fadeOut();
 
                     },
                     start: function (event, ui) {
@@ -252,7 +255,10 @@ function drag() {
                     handle: 'div.pluslet_sort',
                     update: function (event, ui) {
                         $("#response").hide();
-                        $("#save_guide").fadeIn();
+                        //$("#save_guide").fadeIn();
+                        var save = saveSetup();
+                        save.saveGuide();
+                        $('#save_guide').fadeOut();
 
                     },
                     start: function (event, ui) {
