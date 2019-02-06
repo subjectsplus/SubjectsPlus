@@ -266,7 +266,7 @@ foreach ( $expertArray as $key => $value ) {
 	$librarian_email = $value['email'];
 	$name_id         = explode( "@", $librarian_email );
 
-	$exp_profile = "<li class=\"d-sm-flex flex-sm-row flex-sm-nowrap justify-content-sm-start\"><div class=\"staff-img\"><div class=\"img-accent\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">" . $exp_image . "</a></div></div><div class=\"staff-details\"><p><strong><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">" . $value['fullname'] . "</a></strong><br /><em>" . $value['title'] . "</em></p><p class=\"mt-3\"><strong>Subjects:</strong> " . $value['subject'] . "</p></div></li>";
+	$exp_profile = "<li class=\"d-sm-flex flex-sm-row flex-sm-nowrap justify-content-sm-start\"><div class=\"staff-img\"><div class=\"img-accent\"><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">" . $exp_image . "</a></div></div><div class=\"staff-details\"><p><strong><a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">" . $value['fullname'] . "</a></strong><br /><em>" . $value['title'] . "</em></p><p class=\"mt-3\"><strong>Subjects:</strong> " . $value['subject'] . " <a href=\"" . PATH_TO_SP . "subjects/staff_details.php?name=" . $name_id[0] . "\" class=\"no-decoration default\">and more</a></p></div></li>";
 
 	$expert_item .= $exp_profile;
 }

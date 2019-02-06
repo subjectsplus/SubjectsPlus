@@ -948,7 +948,8 @@ a.pure-button-secondary:hover {
    border-radius: 4px;
    font-family: 'NotoSansRegular';
    margin: 0 0 20px 0;
-   overflow: auto; max-height:275px;
+   overflow: auto;
+   max-height: 125px;
    width: 100% !important;
 }
 
