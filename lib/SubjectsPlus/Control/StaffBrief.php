@@ -485,7 +485,7 @@ $headshot
         if ($email != "") {
             $headshot = "<img id=\"headshot\" src=\"" . $this->_headshot_loc . "\" alt=\"$this->_fullname\" title=\"$this->_fullname\"";
         } else {
-            $headshot = "<img id=\"headshot\" src=\"$AssetPath" . "images/headshot.jpg\" alt=\"No picture\" title=\"No picture\"";
+            $headshot = "<img id=\"headshot\" src=\"$AssetPath" . "images/placeholder-image.jpg\" alt=\"No picture\" title=\"No picture\"";
         }
 
         switch ($pic_size) {
