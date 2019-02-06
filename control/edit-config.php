@@ -466,6 +466,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
+        "institution_code" => array(
+            _( "Institution Code" ),
+            _( "Institution code to create customizations" ),
+            "string",
+            "core-metadata",
+            "medium",
+            "",
+            ""
+        ),
+
 		"administrator" => array(
 			_( "Name of Library Administrator" ),
 			_( "Name for SubjectsPlus administrator" ),
