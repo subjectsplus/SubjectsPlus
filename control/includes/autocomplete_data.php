@@ -29,4 +29,6 @@ if (isset($_GET["staff_id"])) {
 
 }
 
+
+
 echo $auto_complete->search();
