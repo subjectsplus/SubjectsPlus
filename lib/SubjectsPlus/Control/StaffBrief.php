@@ -380,10 +380,20 @@ $headshot
             $path = "../../assets/users/_" . $user_folder[0];
             mkdir($path);
 
-            // And copy over the generic headshot image and headshot_large.jpg
-            $nufile = $path . "/headshot.jpg";
-            $copier = copy("../../assets/images/headshot.jpg", $nufile);
-            $copier = copy("../../assets/images/headshot.jpg", $path . "/headshot_large.jpg");
+            global $institution_code;
+
+            if(  (isset($institution_code)) && ($institution_code == "um") ){
+                // Copy over UM headshot image and headshot_large image
+                $nufile = $path . "/headshot.jpg";
+                $copier = copy( "../../assets/images/headshot.jpg", $nufile );
+                $copier = copy( "../../assets/images/headshot_large.jpg", $path . "/headshot_large.jpg" );
+            } else {
+                // Otherwise copy over the generic headshot image and headshot_large image
+                $nufile = $path . "/headshot.jpg";
+                $copier = copy( "../../assets/images/placeholder-image.jpg", $nufile );
+                $copier = copy( "../../assets/images/placeholder-image_large.jpg", $path . "/headshot_large.jpg" );
+            }
+
         }
 
         // /////////////////////

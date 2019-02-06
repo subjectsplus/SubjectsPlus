@@ -1152,11 +1152,20 @@ class Staff {
 				return;
 
 			} else {
-				// And copy over the generic headshot image and headshot_large image
-				$nufile = $path . "/headshot.jpg";
-				$copier = copy( "../../assets/images/headshot.jpg", $nufile );
-				$copier = copy( "../../assets/images/headshot.jpg", $path . "/headshot_large.jpg" );
 
+               global $institution_code;
+
+               if(  (isset($institution_code)) && ($institution_code == "um") ){
+                   // Copy over UM headshot image and headshot_large image
+                   $nufile = $path . "/headshot.jpg";
+                   $copier = copy( "../../assets/images/headshot.jpg", $nufile );
+                   $copier = copy( "../../assets/images/headshot_large.jpg", $path . "/headshot_large.jpg" );
+               } else {
+                   // Otherwise copy over the generic headshot image and headshot_large image
+                   $nufile = $path . "/headshot.jpg";
+                   $copier = copy( "../../assets/images/placeholder-image.jpg", $nufile );
+                   $copier = copy( "../../assets/images/placeholder-image_large.jpg", $path . "/headshot_large.jpg" );
+               }
 
 				// message
 				$this->_message = _( "Thy Will Be Done.  Added." );
