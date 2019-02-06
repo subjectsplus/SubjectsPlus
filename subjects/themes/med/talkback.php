@@ -394,6 +394,38 @@ if (isset($_GET["t"]) && $_GET["t"] == "prev") {
 
 	$comment_header = "<h2>" . _("Comments from Previous Years") . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\" class=\"talkback-link\">" . _("See this year") . "</a></span></h2>";
 
+} elseif (isset($_GET["c"])) {
+
+	$db = new Querier;
+	$connection = $db->getConnection();
+	$statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate, answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
+	FROM talkback LEFT JOIN staff 
+	ON talkback.a_from = staff.staff_id 
+	WHERE (display ='1' OR display ='Yes') 
+	AND tbtags LIKE :tbtags
+  AND cattags LIKE :ctags
+	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC");
+
+
+	$filter = '%' . $set_filter . '%';
+
+	if (isset($_GET['c'])) {
+		$cat_tags = '%' . scrubData($_GET['c']) . '%';
+	
+	} else {
+		$cat_tags = "%%";
+	}
+
+	$statement->bindParam(":tbtags", $filter);
+	$statement->bindParam(":ctags", $cat_tags);
+
+  $statement->execute();
+    
+    
+	$our_result = $statement->fetchAll(); 
+
+	$comment_header = "<h2>" . _("Comments about ") . scrubData($_GET['c']) . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\" class=\"talkback-link\">" . _("See all for this year") . "</a></span></h2>";
+
 } else {
   // New ones //
 
