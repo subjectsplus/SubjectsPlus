@@ -24,9 +24,7 @@ class PlusletData extends GuideBase implements OutputInterface
 
     public function __construct(Querier $db)
     {
-
         $this->db = $db;
-
     }
 
 
@@ -38,7 +36,6 @@ class PlusletData extends GuideBase implements OutputInterface
     public function fetchPlusletById($pluslet_id) {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("SELECT * FROM pluslet WHERE pluslet_id = :pluslet_id");
-
 
         $statement->bindParam ( ":pluslet_id", $pluslet_id );
         $statement->execute();
@@ -105,8 +102,13 @@ class PlusletData extends GuideBase implements OutputInterface
     }
 
     public function fetchPlusletsBySectionId($section_id = null) {
+	    $connection = $this->db->getConnection();
+	    $statement = $connection->prepare("SELECT * FROM pluslet_section WHERE section_id = :section_id ");
+	    $statement->bindParam ( ":section_id", $section_id );
+	    $statement->execute();
+	    $pluslets = $statement->fetchAll();
 
-
+	    $this->pluslets = $pluslets;
     }
 
     public function fetchPlusletsByTabId( $tab_id = null) {
@@ -125,8 +127,6 @@ class PlusletData extends GuideBase implements OutputInterface
         return $pluslets;
     }
 
-
-
     public function fetchClonedPlusletsById($master_id = null) {
         //pluslets by number type mess up the LIKE query
         if(strlen($master_id) == 1) {
@@ -144,7 +144,6 @@ class PlusletData extends GuideBase implements OutputInterface
         return $cloned_pluslets;
     }
 
-
     public function getClonedPlusletsBySubjectIdTabId($tab_id) {
         $pluslets = $this->fetchPlusletsByTabId($tab_id);
         $master_ids = array();
@@ -159,7 +158,6 @@ class PlusletData extends GuideBase implements OutputInterface
 
         $this->clones_by_tab = $clones_by_tab;
     }
-
 
     public function getClonedPlusletsBySubjectId($subject_id) {
         $pluslets = $this->fetchPlusletsBySubjectId($subject_id);
@@ -176,7 +174,6 @@ class PlusletData extends GuideBase implements OutputInterface
         $this->clones_by_subject = $clones_by_subject;
         return $clones_by_subject;
     }
-
 
     public function toArray() {
         return get_object_vars ( $this );
