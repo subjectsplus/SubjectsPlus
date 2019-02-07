@@ -37,6 +37,7 @@ switch ($_REQUEST["type"]) {
         <div style=\"margin-bottom: 10px !important;padding: 5px !important;\">
 		<div class=\"selected_item\">
 			<input name=\"staff_id[]\" value=\"$item_id\" type=\"hidden\" />
+			<i class=\"fa fa-bars\" aria-hidden=\"true\"></i>
 			$item_name<br />
 		</div>
 		<div class=\"selected_item_options\">
