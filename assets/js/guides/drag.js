@@ -230,6 +230,7 @@ function drag() {
                         //$("#save_guide").fadeIn();
                         var save = saveSetup();
                         save.saveGuide();
+                        console.log('sections saveguide');
                         $('#save_guide').fadeOut();
 
                     },
@@ -256,8 +257,9 @@ function drag() {
                     update: function (event, ui) {
                         $("#response").hide();
                         //$("#save_guide").fadeIn();
-                        var save = saveSetup();
-                        save.saveGuide();
+                        //var save = saveSetup();
+                        //save.saveGuide();
+                        console.log('pluslets saveguide');
                         $('#save_guide').fadeOut();
 
                     },
