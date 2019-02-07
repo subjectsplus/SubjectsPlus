@@ -5,9 +5,9 @@
  *
  *   @author adarby
  *   @date Oct 2012
- * 	  @todo add last modified, info/help buttons for each field,
+ * 	  @todo info/help buttons for each field,
  *   check_url needs to be class rather than id, or have a unique id; title check for dupe in .js
-  have an update button next to default_source type, to change all ?
+ *    have an update button next to default_source type, to change all ?
  */
 
 
@@ -195,18 +195,24 @@ print "</div>"; // close #maincontent
 
                 // Enlarge Location Box (if necessary) and show life preserver (if necessary)
                 $(this).parent().parent().children(".record_location").attr("size", 60);
-                $(this).parent().parent().find(".checkurl_img").show();
+                $(this).parent().parent().find(".fa-globe").show();
 
-                // hide call_num box
+                // hide call_num box -- I guess there were two versions of the class in teh code; second was missing
+                // first rename 
+                $(".call_num_box_vis").addClass("call_num_box").removeClass("call_num_box_vis");
                 $(".call_num_box").hide("slow");
+                
 
             } else if (format_type_id == 2){
                 // change to Print type
-
+                //alert("changed to print");
                 // hide life preserver
-                $(this).parent().parent().find(".checkurl_img").hide();
+                $(this).parent().parent().find(".fa-globe").hide();
                
+               // rename call_num
+               $(".call_num_box").addClass("call_num_box_vis").removeClass("call_num_box");
                 $(".call_num_box").show("slow");
+                //(".call_num_box_vis").show("slow");
 
                 // Shrink Location Box
                 $(this).parent().parent().children(".record_location").attr("size", 30);
@@ -216,8 +222,9 @@ print "</div>"; // close #maincontent
                 // change to Print with URL type:  Show secondary box
                 // Enlarge Location Box (if necessary) and show life preserver (if necessary)
                 $(this).parent().parent().children(".record_location").attr("size", 60);
-                $(this).parent().parent().find(".checkurl_img").show();
+                $(this).parent().parent().find(".fa-globe").show();
                 // show call_num box
+                $(".call_num_box").addClass("call_num_box_vis").removeClass("call_num_box");
                 $(".call_num_box").show("slow");
 
             }
@@ -521,6 +528,10 @@ print "</div>"; // close #maincontent
                 return false;
             };
 
+            // if there is still a value in call_num_box (i.e., where it's not call_num_box_vis) remove it
+
+           if ( $( "div.call_num_box input" ).is( ":hidden" ) ) {  $( "div.call_num_box input" ).val("");}
+
             // check required fields
             // make sure the record isn't a dupe--check for title and location
 
@@ -544,8 +555,6 @@ print "</div>"; // close #maincontent
 
             });
 
-
-
             if (alerter == 1) {
                 alert("<?php print _("You must complete all required form fields."); ?>");
                 return false;
@@ -556,6 +565,8 @@ print "</div>"; // close #maincontent
                 //alert(title_string);
                 return true;
             }
+
+
 
         });
 

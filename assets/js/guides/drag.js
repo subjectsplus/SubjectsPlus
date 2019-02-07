@@ -225,9 +225,13 @@ function drag() {
                     opacity: 0.7,
                     cancel: '.unsortable',
                     handle: '.section_sort',
-                    update: function (event, ui) {
+                    receive: function (event, ui) {
                         $("#response").hide();
-                        $("#save_guide").fadeIn();
+                        //$("#save_guide").fadeIn();
+                        var save = saveSetup();
+                        save.saveGuide();
+                        console.log('sections saveguide');
+                        $('#save_guide').fadeOut();
 
                     },
                     start: function (event, ui) {
@@ -250,9 +254,13 @@ function drag() {
                     tolerance: 'pointer',
                     cancel: '.unsortable',
                     handle: 'div.pluslet_sort',
-                    update: function (event, ui) {
+                    receive: function (event, ui) {
                         $("#response").hide();
-                        $("#save_guide").fadeIn();
+                        //$("#save_guide").fadeIn();
+                        var save = saveSetup();
+                        save.saveGuide();
+                        console.log('pluslets saveguide');
+                        $('#save_guide').fadeOut();
 
                     },
                     start: function (event, ui) {
