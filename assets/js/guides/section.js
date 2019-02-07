@@ -39,11 +39,8 @@ function section() {
 					 console.log("More than one?");
 					 $(this).children().find('.sp_section_controls').show();
 				 } 	else {
-					 
 					 $(this).children().find('.sp_section_controls').hide();
 				     $(this).find('.sp_section').removeClass('section_selected_area');
-
-
 				 }
 				});
 			
@@ -55,10 +52,9 @@ function section() {
 		{
 
 			$(lstrSelector).on('click', function() {
-				
 				//$(tabs).tabs();
-				var selectedTab = $('#tabs').tabs('option', 'selected');
-				console.log(selectedTab);
+				var selectedTab = $('#tabs').tabs('option', 'active');
+
 				$.ajax({
 					
 					url : mySection.settings.sectionDataPath,
@@ -76,20 +72,21 @@ function section() {
 						// Make sure that the new section can accept drops
 						var drop = drag();
 						drop.makeDropable(".dropspotty");
-						
-						// When you add a section fade in the save button 
-						$("#save_guide").fadeIn();
-						//$('.sp_section_controls').first().show();
-						
+
+						// When you add a section autosave
+						var save = saveSetup();
+						save.saveGuide();
+						$('#save_guide').fadeOut();
+						//window.location.reload();
+
 						$('div#tabs-' + selectedTab)
 						var newSection = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 						newSection.trigger('click');
 
 						var l = layout();
 						l.highlightLayout(newSection.parent());
-					    
-						mySection.viewSectionControls();
 
+						mySection.viewSectionControls();
 					}
 				});
 			});
@@ -110,12 +107,9 @@ function section() {
 				
 				$('#layout_options_content').data('selected-section', '');
 
-				// This adds the classes for highlighting 
-				
+				// This adds the classes for highlighting
 			 	$(this).toggleClass('sp_section_selected');
 			    $(this).parent().toggleClass('section_selected_area');
-				
-				
 				
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
 				$('#layout_options_content').data('selected-section', selectedSectionId);
@@ -123,9 +117,7 @@ function section() {
 				// Highlight the layout that is associated with the section. 
 				l.highlightLayout($(this).parent())
 				// Show the initial section. Now you are using sections so you will need the section contorls.
-				
 
-				
 			});
 		},
 		clickInitialSection : function() {

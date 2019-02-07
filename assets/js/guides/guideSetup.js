@@ -30,6 +30,6 @@ function guideSetup() {
 			}
 	}
 	return myGuideSetup;
-}	
+}
 
 
