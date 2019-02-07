@@ -515,8 +515,18 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 <script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
 
+<?php include("../includes/guide_footer.php"); ?>
+
 <script>
     $(document).ready(function() {
+        // Initialize the guide interface
+        var myGuideSetup = guideSetup();
+        myGuideSetup.init();
+
+
+
+    $(document).ready(function() {
+
         // Initialize the guide interface
         var myGuideSetup = guideSetup();
         myGuideSetup.init();
@@ -551,7 +561,6 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
                 $(container).show();
             }
         });
-
 
     });
 

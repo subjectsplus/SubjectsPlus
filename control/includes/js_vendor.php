@@ -6,12 +6,12 @@ header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() + 21600 ) );
 require_once( __DIR__ . "/functions.php" );
 
 use Assetic\Asset\FileAsset;
-use Assetic\Asset\GlobAsset;
+//use Assetic\Asset\GlobAsset;
 use Assetic\Asset\AssetCollection;
 use Assetic\AssetManager;
 use Assetic\Asset\AssetReference;
-use Assetic\Filter\JSMinPlusFilter;
-use Assetic\AssetWriter;
+//use Assetic\Filter\JSMinPlusFilter;
+//use Assetic\AssetWriter;
 use Assetic\Cache\FilesystemCache;
 use Assetic\Asset\AssetCache;
 

@@ -20,18 +20,13 @@ function guideSetup() {
 				subjectSpecialist, primoCatalog, articlesPlus, primoSearchBox],
 
 			init : function() {
-
-				$(document).ready( function() {
-
+				$(document).ready(function() {
 					for (var func in myGuideSetup.setupFunctions) {
 
 						var setupFunc = myGuideSetup.setupFunctions[func]();
 						setupFunc.init();
 					}
-
 				});
-
-
 			}
 	}
 	return myGuideSetup;
