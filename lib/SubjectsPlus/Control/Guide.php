@@ -167,7 +167,7 @@ class Guide
     {
 
         $db = new Querier();
-        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id;
+        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  staff_guide_order";
 
         $this->_staffers = $db->query($q2);
 
@@ -481,7 +481,7 @@ class Guide
             $discipline_string = $disciplineMe->display();
         }
 
-        $staff_box = "$staff_string <div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->";
+        $staff_box = "$staff_string <div id=\"item_list\" class=\"sortable-staff-list ui-sortable\">$staffer_list</div> <!-- staff inserted here -->";
 
         makePluslet(_("Staff"), $staff_box, "no_overflow");
 
@@ -528,10 +528,11 @@ class Guide
         global $IconPath;
 
         $ourstaff = "
-        <div class=\"selected_item_wrapper staffwrapper\">
+        <div class=\"selected_item_wrapper staffwrapper sortable-staff-wrapper\">
         <div class=\"selected_item\">
         <input name=\"staff_id[]\" value=\"$value[0]\" type=\"hidden\" />
-        $value[1]<br />
+        <i class=\"fa fa-bars\" aria-hidden=\"true\"></i> $value[1]
+        <br />
         </div>
         <div class=\"selected_item_options\">
         <i class=\"fa fa-times delete_item delete_staff pointer\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
@@ -1325,12 +1326,14 @@ class Guide
 
         $de_duped = array_unique($this->_staff_id);
 
+        $i = 0;
         foreach ($de_duped as $value) {
             if (is_numeric($value)) {
                 $db = new Querier;
-                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id) VALUES (
+                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_guide_order) VALUES (
 				" . scrubData($value, 'integer') . ",
-				" . scrubData($this->_subject_id, 'integer') . ")";
+				" . scrubData($this->_subject_id, 'integer') . ",
+				" . $i++ . ")";
                 $db = new Querier;
                 $rUpSS = $db->exec($qUpSS);
 
