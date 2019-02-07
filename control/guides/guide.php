@@ -513,41 +513,52 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 <script src="../../ckeditor/ckeditor.js"></script>
 
+<script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
+
 <?php include("../includes/guide_footer.php"); ?>
 
 
 <script>
 
-	<?php //include('../../assets/js/guides/PrimoSearchBox.js'); ?>
-
-	<?php include('../../assets/js/guides/bookList.js'); ?>
-
-	var containers = $(".booklist-content");
-	$.each(containers, function() {
-		var container = this;
-		if ($(container).parent().parent().attr('name') == 'Clone'){
-			container = $("#"+$(container).parent().parent().attr('id')).find('.booklist-content')[0];
-			$(container).attr('rendered', '0');
-		}
-
-		if ($(container).attr('rendered') == '0') {
-			var b = bookList();
-			b.init(container);
-			$(container).attr('rendered', '1');
-			setTimer();
-		}
-
-		function setTimer() {
-			setTimeout(showContainer, 1000);
-		}
-
-		function showContainer() {
-			var loader = $(container).prev();
-			$(loader).hide();
-			$(container).show();
-		}
-	});
 
 
+    $(document).ready(function() {
+
+        // Initialize the guide interface
+        var myGuideSetup = guideSetup();
+        myGuideSetup.init();
+
+        var ss = subjectSpecialist();
+        ss.init();
+
+	    <?php include('../../assets/js/guides/bookList.js'); ?>
+
+        var containers = $(".booklist-content");
+        $.each(containers, function() {
+            var container = this;
+            if ($(container).parent().parent().attr('name') == 'Clone'){
+                container = $("#"+$(container).parent().parent().attr('id')).find('.booklist-content')[0];
+                $(container).attr('rendered', '0');
+            }
+
+            if ($(container).attr('rendered') == '0') {
+                var b = bookList();
+                b.init(container);
+                $(container).attr('rendered', '1');
+                setTimer();
+            }
+
+            function setTimer() {
+                setTimeout(showContainer, 1000);
+            }
+
+            function showContainer() {
+                var loader = $(container).prev();
+                $(loader).hide();
+                $(container).show();
+            }
+        });
+
+    });
 
 </script>
