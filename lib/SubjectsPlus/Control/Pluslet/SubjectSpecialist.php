@@ -180,7 +180,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
                     FROM staff s, staff_subject ss
                     WHERE s.staff_id = ss.staff_id
                     AND ss.subject_id = " . $subject_id . "
-                    ORDER BY lname, fname";
+                    ORDER BY staff_guide_order";
 
         $editors = $querier->query($qs);
         return $editors;
