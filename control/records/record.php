@@ -5,9 +5,9 @@
  *
  *   @author adarby
  *   @date Oct 2012
- * 	  @todo add last modified, info/help buttons for each field,
+ * 	  @todo info/help buttons for each field,
  *   check_url needs to be class rather than id, or have a unique id; title check for dupe in .js
-  have an update button next to default_source type, to change all ?
+ *    have an update button next to default_source type, to change all ?
  */
 
 
