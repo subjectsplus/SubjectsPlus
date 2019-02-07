@@ -6,12 +6,12 @@ header( 'Expires: ' . gmdate( 'D, d M Y H:i:s \G\M\T', time() + 21600 ) );
 require_once( __DIR__ . "/functions.php" );
 
 use Assetic\Asset\FileAsset;
-//use Assetic\Asset\GlobAsset;
+use Assetic\Asset\GlobAsset;
 use Assetic\Asset\AssetCollection;
 use Assetic\AssetManager;
 use Assetic\Asset\AssetReference;
-//use Assetic\Filter\JSMinPlusFilter;
-//use Assetic\AssetWriter;
+use Assetic\Filter\JSMinPlusFilter;
+use Assetic\AssetWriter;
 use Assetic\Cache\FilesystemCache;
 use Assetic\Asset\AssetCache;
 
@@ -37,12 +37,20 @@ $am->set( 'jquery_ui', new AssetCache(
 
 ) );
 
+$am->set( 'jquery_libs', new AssetCache(
+	new GlobAsset( $assets . DIRECTORY_SEPARATOR . 'jquery/libs' . DIRECTORY_SEPARATOR . '*.js' )
+
+	, new FilesystemCache( $cache )
+
+) );
+
 
 $js = new AssetCollection(
 
 	array(
 		new AssetReference( $am, 'jquery' ),
-		new AssetReference( $am, 'jquery_ui' )
+		new AssetReference( $am, 'jquery_ui' ),
+		new AssetReference( $am, 'jquery_libs' )
 	)
 
 );
