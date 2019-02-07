@@ -383,8 +383,8 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         $db = new Querier;
         $r = $db->query($q);
 
-        $items = "<table class=\"footable foo3\" width=\"100%\">
-        <thead><tr class=\"staff-heading\"><th data-sort-ignore=\"true\">&nbsp;</th><th><strong>" . _("Librarian") . "</strong></th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\"><strong>" . _("Subject Responsibilities") . "</strong></th></tr></thead>";
+        $items = "<table class=\"footable foo3 table table-borderless table-responsive librarians-az\" width=\"100%\">
+        <thead><tr class=\"staff-heading\"><th><strong>" . _("Librarian") . "</strong></th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\"><strong>" . _("Subject Responsibilities") . "</strong></th></tr></thead>";
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -394,9 +394,11 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
           $items .= "<tr class=\"$row_colour\">\n";
+          $items .= "<td class=\"librarian-info\">";
           $items .= showStaff($myrow[4], '', '', 1);
+          $items .= "</td>";
 
-          $items .= "<td>";
+          $items .= "<td class=\"librarian-subjects\">";
 
           $sub_query = "select subject, shortform from subject, staff_subject
                     WHERE subject.subject_id = staff_subject.subject_id

@@ -834,7 +834,7 @@ function getHeadshot( $email, $pic_size = "medium", $class = "staff_photo", $um_
 	$headshot_path = dirname( dirname( dirname( __FILE__ ) ) ) . "/assets/users/$lib_image/headshot.jpg";
 
 	if ( ! file_exists( $headshot_path ) ) {
-		$headshot_path = dirname( dirname( dirname( __FILE__ ) ) ) . "/assets/images/headshot_large.jpg";
+		$headshot_path = dirname( dirname( dirname( __FILE__ ) ) ) . "/assets/users/$lib_image/headshot_large.jpg";
 	}
 
 	if ( file_exists( $headshot_path ) ) {
@@ -844,6 +844,21 @@ function getHeadshot( $email, $pic_size = "medium", $class = "staff_photo", $um_
 		$um_logo    = "91b8c9ec083c5abc898a5c482aac959e";
 
 		if ( $image_hash == $um_logo && ! $um_theme ) {
+            $headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
+
+            switch ( $pic_size ) {
+                case "small":
+                    $headshot .= " width=\"50\"";
+                    break;
+                case "medium":
+                    $headshot .= " width=\"70\"";
+                    break;
+            }
+
+            $headshot .= " class=\"staff_photo\"  align=\"left\" />";
+
+            // If the image exists and isn't the UM logo return the img html
+            return $headshot;
 		} else {
 
 			$headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
