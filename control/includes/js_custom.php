@@ -25,14 +25,17 @@ $am = new AssetManager();
 // Create asset refrences to jQuery and all the other js files in the JS folder
 // Creating a refernce to jQuery will allow us to put it first in the file
 
-$am->set( 'jquery', new AssetCache(
-	new FileAsset( $assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR . 'jquery-1.11.1.min.js' )
+$am->set( 'otherjs', new AssetCache(
+	new GlobAsset( $assets . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . '*.js' )
+
 	, new FilesystemCache( $cache )
 
 ) );
 
-$am->set( 'jquery_ui', new AssetCache(
-	new FileAsset( $assets . DIRECTORY_SEPARATOR . 'jquery' . DIRECTORY_SEPARATOR . 'jquery-ui-1.9.2.min.js' )
+
+$am->set( 'guidejs', new AssetCache(
+	new GlobAsset( $assets . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'guides' . DIRECTORY_SEPARATOR . '*.js' )
+
 	, new FilesystemCache( $cache )
 
 ) );
@@ -41,8 +44,8 @@ $am->set( 'jquery_ui', new AssetCache(
 $js = new AssetCollection(
 
 	array(
-		new AssetReference( $am, 'jquery' ),
-		new AssetReference( $am, 'jquery_ui' )
+		new AssetReference( $am, 'otherjs' ),
+		new AssetReference( $am, 'guidejs' )
 	)
 
 );
