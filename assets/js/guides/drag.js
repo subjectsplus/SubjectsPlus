@@ -225,7 +225,7 @@ function drag() {
                     opacity: 0.7,
                     cancel: '.unsortable',
                     handle: '.section_sort',
-                    update: function (event, ui) {
+                    receive: function (event, ui) {
                         $("#response").hide();
                         $("#save_guide").fadeIn();
 
@@ -250,7 +250,7 @@ function drag() {
                     tolerance: 'pointer',
                     cancel: '.unsortable',
                     handle: 'div.pluslet_sort',
-                    update: function (event, ui) {
+                    receive: function (event, ui) {
                         $("#response").hide();
                         $("#save_guide").fadeIn();
 
