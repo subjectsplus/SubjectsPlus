@@ -21,14 +21,20 @@ function guideSetup() {
 
 			init : function() {
 
-				for (var func in myGuideSetup.setupFunctions) {
+				$(document).ready( function() {
 
-					var setupFunc = myGuideSetup.setupFunctions[func]();
-					setupFunc.init();
-				}
+					for (var func in myGuideSetup.setupFunctions) {
+
+						var setupFunc = myGuideSetup.setupFunctions[func]();
+						setupFunc.init();
+					}
+
+				});
+
+
 			}
 	}
 	return myGuideSetup;
-}	
+}
 
 
