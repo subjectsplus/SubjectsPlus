@@ -17,26 +17,23 @@ function section() {
 		strings : {},
 		bindUiActions : function() {
 
-			$( document ).ajaxComplete(function() {
-				// Click the first section after everything has loaded.
-				mySection.clickInitialSection();
-				mySection.viewSectionControls();
+			$( document ).ready(function() {
 				mySection.clickTabOnSwitch();
 				mySection.clickDeleteSection();
 				mySection.chooseSectionForLayouts();
+				mySection.viewSectionControls();
 
 			});
 
 		},
 		init: function () {
 
-		    $( document ).ajaxComplete(function() {
+		    $( document ).ready(function() {
 				mySection.bindUiActions();
-		    	// Click the first section after everything has loaded.
-			    // mySection.clickInitialSection();
-			    // mySection.viewSectionControls();
-				// mySection.clickTabOnSwitch();
-				// mySection.clickDeleteSection();
+
+				// Click the first section after everything has loaded.
+			    mySection.clickInitialSection();
+
 
 		    });
 			
