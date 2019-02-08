@@ -227,12 +227,10 @@ function drag() {
                     handle: '.section_sort',
                     receive: function (event, ui) {
                         $("#response").hide();
-                        //$("#save_guide").fadeIn();
                         var save = saveSetup();
                         save.saveGuide();
                         console.log('sections saveguide');
                         $('#save_guide').fadeOut();
-
                     },
                     start: function (event, ui) {
                         $(ui.item).find('.dropspotty').hide();
@@ -256,12 +254,9 @@ function drag() {
                     handle: 'div.pluslet_sort',
                     receive: function (event, ui) {
                         $("#response").hide();
-                        //$("#save_guide").fadeIn();
                         var save = saveSetup();
                         save.saveGuide();
-                        console.log('pluslets saveguide');
                         $('#save_guide').fadeOut();
-
                     },
                     start: function (event, ui) {
                         $(ui.item).children('.pluslet_body').hide();

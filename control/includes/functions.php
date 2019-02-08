@@ -137,7 +137,7 @@ function generatejQuery( $use_jquery ) {
 
 // Always load jQuery core, ui, livequery
 	$myjquery = "<script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\"></script>\n
-	<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n";
+	<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.livequery.min.js\"></script>\n";
 
 // If there's not an array of values, send 'er back
 	if ( ! is_array( $use_jquery ) ) {
@@ -146,11 +146,11 @@ function generatejQuery( $use_jquery ) {
 
 // Check to see what additional jquery files need to be loaded
 	if ( in_array( "colorbox", $use_jquery ) ) {
-		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.colorbox-min.js\"></script>\n
+		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.colorbox-min.js\"></script>\n
 	<style type=\"text/css\">@import url($AssetPath" . "css/shared/colorbox.css);</style>\n";
 	}
 	if ( in_array( "hover", $use_jquery ) ) {
-		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.hoverIntent.js\"></script>\n";
+		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.hoverIntent.js\"></script>\n";
 	}
 
 	if ( in_array( "ui", $use_jquery ) ) {
@@ -162,15 +162,15 @@ function generatejQuery( $use_jquery ) {
 	}
 
 	if ( in_array( "tablesorter", $use_jquery ) ) {
-		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.tablesorter.js\"></script>\n
-		<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.tablesorter.pager.js\"></script>\n";
+		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.tablesorter.js\"></script>\n
+		<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.tablesorter.pager.js\"></script>\n";
 	}
 
 	if ( in_array( "sp_legacy", $use_jquery ) ) {
-		$myjquery = "<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n
+		$myjquery = "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.livequery.min.js\"></script>\n
         <script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\"></script>\n
       <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/jquery-ui.css\" type=\"text/css\" media=\"all\" />\n
-      <script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.colorbox-min.js\"></script>\n
+      <script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.colorbox-min.js\"></script>\n
       <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/colorbox.css\" type=\"text/css\" />\n";
 	}
 
