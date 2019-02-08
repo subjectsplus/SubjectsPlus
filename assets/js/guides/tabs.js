@@ -1,27 +1,28 @@
 /**
- * 
+ *
  * Set ups click events and tabs functionality on the guide page.
- *   
+ *
  */
 /*jslint browser: true*/
+
 /*global $, jQuery, alert*/
 function tabs() {
-	"use strict";
+    "use strict";
     var myTabs = {
         settings: {
             tabTitle: $('#tab_title'),
             tabContent: $('#tab_content'),
             tabCounter: $('#tabs').data().tabCount,
             tabs: $('#tabs').tabs(),
-            tabsDialog : $("#dialog"),
+            tabsDialog: $("#dialog"),
             dialog: $('#dialog').dialog,
-            editTabDialog : $("#dialog_edit"),
+            editTabDialog: $("#dialog_edit"),
             externalLink: 'input[name=\'tab_external_link\']',
             dataExternalLink: 'li[data-external-link]',
             saveButton: $('#save_guide'),
             tabExternalUrl: 'input[name=\'tab_external_url\']',
             findBoxTabs: $('#find-box-tabs'),
-            cloneByTabUrl : "helpers/fetch_cloned_pluslets_by_tab_id.php?",
+            cloneByTabUrl: "helpers/fetch_cloned_pluslets_by_tab_id.php?",
         },
         strings: {
             tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
@@ -29,101 +30,104 @@ function tabs() {
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
         bindUiActions: function () {
-            myTabs.removePlusletsFromCurrentTab();
-            myTabs.makeTabsClickable();
 
-            myTabs.reorderTabsFlyout();
-            myTabs.fetchTabsFlyout();
-            myTabs.sortTabsFlyout();
+            $(document).ready(function () {
+
+                myTabs.removePlusletsFromCurrentTab();
+                myTabs.makeTabsClickable();
+
+                myTabs.reorderTabsFlyout();
+                //myTabs.fetchTabsFlyout();
+                myTabs.sortTabsFlyout();
 
 
-            //configure sortable drag and drop zone for creating new guide from tabs
-            myTabs.newGuideFromTabsSortable();
-            //copy tabs to create new guide
-            myTabs.createNewGuideFromTabs();
+                //configure sortable drag and drop zone for creating new guide from tabs
+                myTabs.newGuideFromTabsSortable();
+                //copy tabs to create new guide
+                myTabs.createNewGuideFromTabs();
 
-       
+            });
+
         },
         init: function () {
             myTabs.setupTabs();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
             //Find Box Tabs - Browse and Search
-           
+
 
             //Find Box Tabs - Browse and Search
             myTabs.settings.findBoxTabs.tabs();
-            
-
-			var sec = section();
-			sec.makeAddSection('a[id="add_section"]');
 
 
-        
+            var sec = section();
+            sec.makeAddSection('a[id="add_section"]');
+
+
         },
-		getSectionForNewTab : function (id, external_link, li, tabContentHtml) {
+        getSectionForNewTab: function (id, external_link, li, tabContentHtml) {
 
-			if (!external_link) {
-		$.ajax
-                    ({
-                        url: "helpers/section_data.php",
-                        type: "POST",
-                        data: { action: 'create' },
-                        dataType: "html",
-                        success: function (html) {
-                            
-
-                            myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
-                                + "</div>");	
-                        }
-                    });
-			}
-					
-					myTabs.settings.saveButton.fadeIn();
+            if (!external_link) {
+                $.ajax
+                ({
+                    url: "helpers/section_data.php",
+                    type: "POST",
+                    data: {action: 'create'},
+                    dataType: "html",
+                    success: function (html) {
 
 
-                            $('#tabs').tabs();
+                        myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
+                            + "</div>");
+                    }
+                });
+            }
 
-                            if (external_link === '') {
-                                $('#tabs').tabs("refresh");
-                                $('#tabs').tabs('select', $('#tabs').data().tabCount);
-                            } else {
-                             
-                                myTabs.settings.tabs.tabs('select', 0);
-                            }
+            myTabs.settings.saveButton.fadeIn();
 
-                            if ($(li).attr('data-external-link') !== '') {
-                                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
-                                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
-                                    evt.stopImmediatePropagation();
-                                });
-                            }
 
-                            $(li).children('a[href^="#tabs-"]').each(function (data) {
-                                var events = $._data(data, "events");
-                                  
-                                if (events) {
-                                    console.log(events);
-                                    var onClickHandlers = events['click'];
+            $('#tabs').tabs();
 
-                                    // Only one handler. Nothing to change.
-                                    if (onClickHandlers.length === 1) {
-                                        return;
-                                    }
+            if (external_link === '') {
+                $('#tabs').tabs("refresh");
+                $('#tabs').tabs('select', $('#tabs').data().tabCount);
+            } else {
 
-                                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
-                                }
-                                });
-                            
-                            $('#tabs').data().tabCount++;
+                myTabs.settings.tabs.tabs('select', 0);
+            }
 
-                            setTimeout(function() {
-                                $('#'+id).find('.sp_section_controls').trigger('click');
-                                $('#'+id).find('.sp_section').removeClass('section_selected_area');
+            if ($(li).attr('data-external-link') !== '') {
+                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    evt.stopImmediatePropagation();
+                });
+            }
 
-                            },100);
+            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                var events = $._data(data, "events");
 
-		},
+                if (events) {
+                    console.log(events);
+                    var onClickHandlers = events['click'];
+
+                    // Only one handler. Nothing to change.
+                    if (onClickHandlers.length === 1) {
+                        return;
+                    }
+
+                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                }
+            });
+
+            $('#tabs').data().tabCount++;
+
+            setTimeout(function () {
+                $('#' + id).find('.sp_section_controls').trigger('click');
+                $('#' + id).find('.sp_section').removeClass('section_selected_area');
+
+            }, 100);
+
+        },
         setupTabs: function () {
 
             var myDialog = myTabs.settings.tabsDialog.dialog({
@@ -214,7 +218,7 @@ function tabs() {
                         $("#response").hide();
                         console.log('save guide fade in');
                         $('#save_guide').fadeIn();
-                        
+
                     },
                     "Delete": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
@@ -223,7 +227,7 @@ function tabs() {
 
                         // define payload
                         var payload = {
-                            'tab_id' : tab_id
+                            'tab_id': tab_id
                         };
 
                         $.ajax({
@@ -231,9 +235,9 @@ function tabs() {
                             type: "GET",
                             data: payload,
                             dataType: "json",
-                            success: function(data) {
+                            success: function (data) {
 
-                                if( (data.clones_by_tab.length) && (data.clones_by_tab.length > 0) ) {
+                                if ((data.clones_by_tab.length) && (data.clones_by_tab.length > 0)) {
 
                                     editTabDialog.dialog("close");
                                     alert('This tab contains master boxes that have linked boxes in other tabs.')
@@ -327,9 +331,9 @@ function tabs() {
                 var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
                     external_link = $('input#tab_external_link').val(),
                     id = "tabs-" + $('#tabs').data().tabCount,
-                   
+
                     li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
-                     
+
                     tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
 
                 var visibility = $('select[name="new-tab-visibility"]').val();
@@ -341,7 +345,7 @@ function tabs() {
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 //console.log($(li));
 
-				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+                myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
 
                 //override submit for form in edit tab dialog to click rename button
@@ -349,11 +353,11 @@ function tabs() {
                     $(this).parent().parent().find('span:contains("Rename")').click();
                     event.preventDefault();
                 });
-                
+
                 // Move the expand tab to the end
                 $('#expand_tab').appendTo('#tabs .ui-tabs-nav')
             }
-        }, 
+        },
         removePlusletsFromCurrentTab: function () {
             //remove all pluslets from current tab
             $('a.remove_pluslets').on('click', function () {
@@ -373,40 +377,46 @@ function tabs() {
                     $(this).find('a').attr('target', '_blank');
                 }
             });
-        }, 
-        makeTabsClickable : function() {
+        },
+        makeTabsClickable: function () {
             ////////////////////
             // Make page tabs clickable
             ///////////////////
-            $(document.body).on('click','a[id*=tab-]', function(event) {
+            $(document.body).on('click', 'a[id*=tab-]', function (event) {
                 var tab_id = $(this).attr("id").split("-");
-               var selected_tab = "#pluslet-" + box_id[1];
-               myTabs.setupTabs(tab_id[1]);
+                var selected_tab = "#pluslet-" + box_id[1];
+                myTabs.setupTabs(tab_id[1]);
 
             });
         },
-        fetchTabsFlyout : function(subjectId) {
+        fetchTabsFlyout: function (subjectId) {
 
-            $(".flyout-tabs").empty();
 
-            jQuery.ajax({
-                url: "./helpers/fetch_tabs.php?subject_id=" + subjectId,
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
+            $(document).ready(function () {
+                $(".flyout-tabs").empty();
 
-                    if(!data.tabs.length) {
-                        //no results
-                        $(".flyout-tabs").append( "<li  class='panel-list-item'>Tab sorting not available.</li>");
+                jQuery.ajax({
+                    url: "./helpers/fetch_tabs.php?subject_id=" + subjectId,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+
+                        if (!data.tabs.length) {
+                            //no results
+                            $(".flyout-tabs").append("<li  class='panel-list-item'>Tab sorting not available.</li>");
+                        }
+
+                        $.each(data.tabs, function (idx, obj) {
+                            $(".flyout-tabs").append("<li id='item_" + obj.tab_id + "' class='panel-list-item' title='" + obj.label + "'><i class='fa fa-sort'></i> " + obj.label + "</li>");
+                        });
                     }
+                });
 
-                    $.each(data.tabs, function(idx, obj) {
-                        $(".flyout-tabs").append( "<li id='item_"+ obj.tab_id +"' class='panel-list-item' title='" + obj.label + "'><i class='fa fa-sort'></i> " +obj.label + "</li>");
-                    });
-                }
             });
+
+
         },
-        sortTabsFlyout : function() {
+        sortTabsFlyout: function () {
 
             $("#flayout-tab-list").sortable({connectWith: "#flayout-tab-list"});
 
@@ -414,9 +424,9 @@ function tabs() {
 
                 var data = $("#flayout-tab-list").sortable('serialize');
 
-                $.post('./helpers/save_tab_order.php', {"data": data}, function(d){
+                $.post('./helpers/save_tab_order.php', {"data": data}, function (d) {
 
-                }).done(function() {
+                }).done(function () {
 
                     location.reload();
 
@@ -425,17 +435,17 @@ function tabs() {
             });
 
         },
-        reorderTabsFlyout : function() {
-            document.addEventListener("DOMContentLoaded", function() {
+        reorderTabsFlyout: function () {
+            $(document).ready(function () {
 
-            	var g = guide();
+                var g = guide();
                 var subjectId = g.getSubjectId();
 
-                $('#show_tabs').on('click', function() {
+                $('#show_tabs').on('click', function () {
 
-                    if( $("#save_guide").is(':visible') ) {
+                    if ($("#save_guide").is(':visible')) {
 
-                        $(".flyout-tabs").append( myTabs.strings.reorderTabString);
+                        $(".flyout-tabs").append(myTabs.strings.reorderTabString);
 
                         $("#save_tab_order_btn").hide();
 
@@ -454,54 +464,53 @@ function tabs() {
 
         },
 
-        newGuideFromTabsSortable : function() {
+        newGuideFromTabsSortable: function () {
 
             var oldList, newList, item;
             $(".categories-sortable").sortable({
-                    connectWith: $('.categories-sortable'),
-                    start: function (event, ui) {
-                        item = ui.item;
-                        newList = oldList = ui.item.parent();
+                connectWith: $('.categories-sortable'),
+                start: function (event, ui) {
+                    item = ui.item;
+                    newList = oldList = ui.item.parent();
 
-                    },
-                    stop: function (event, ui) {
-                        var str = item.context.id;
-                        var tab_id = str.split("_");
-                    },
-                    change: function (event, ui) {
-                        if (ui.sender) {
-                            newList = ui.placeholder.parent();
-                        }
-                    },
-                })
+                },
+                stop: function (event, ui) {
+                    var str = item.context.id;
+                    var tab_id = str.split("_");
+                },
+                change: function (event, ui) {
+                    if (ui.sender) {
+                        newList = ui.placeholder.parent();
+                    }
+                },
+            })
                 .disableSelection();
 
         },
-        createNewGuideFromTabs : function() {
+        createNewGuideFromTabs: function () {
 
-            function urlParam(name){
+            function urlParam(name) {
                 var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-                if (results==null){
+                if (results == null) {
                     return null;
-                }
-                else{
+                } else {
                     return results[1] || 0;
                 }
             }
 
-            document.addEventListener("DOMContentLoaded", function() {
-                $('.create-guide').on('click', function() {
+            document.addEventListener("DOMContentLoaded", function () {
+                $('.create-guide').on('click', function () {
 
                     //console.log('copy guide');
 
                     var selected_guide = urlParam('subject_id');
 
                     var tabs = [];
-                    $('#categories-chosen li').each(function(i) {
+                    $('#categories-chosen li').each(function (i) {
                         tabs.push($(this).attr('id').split('_')[1]);
                     });
 
-                    if(tabs !== '') {
+                    if (tabs !== '') {
                         var url = "create_guide_from_tabs.php?tabs=" + tabs;
                     } else {
                         var url = "create_guide_from_tabs.php";
@@ -511,10 +520,10 @@ function tabs() {
                         url: url,
                         type: "POST",
                         data: {
-                            subject_id : selected_guide,
+                            subject_id: selected_guide,
                             tabs: tabs
                         },
-                        success: function(new_subject_id) {
+                        success: function (new_subject_id) {
 
                             $('.metadata-url').show();
                             $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);

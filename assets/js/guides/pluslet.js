@@ -282,7 +282,7 @@ function pluslet() {
                     var delete_id = $(this).parent().parent().attr('id').split('_')[1];
                     var element_deletion = this;
 
-                    myPluslet.fetchPlusletsBySectionId(delete_id).done(myPluslet.handlePlusletsBySectionIdData);
+                    myPluslet.fetchPlusletsBySectionId(delete_id).done(myPluslet.handlePlusletsBySectionIdData(delete_id, element_deletion));
                     //console.log(pluslets);
 
                     console.log('lstrSelector: ' + lstrSelector);
@@ -327,9 +327,9 @@ function pluslet() {
 
                         //check for child pluslets and delete pluslet if none exist, otherwise
                         //display dialog box indicating child pluslets exist
-                        var hasClones = myPluslet.fetchAllClones(this_sections_pluslets, element_deletion);
-                        console.log(hasClones);
-                    }
+                        //myPluslet.fetchAllClones(this_sections_pluslets, element_deletion);
+
+                     }
 
 
                 });
@@ -432,9 +432,20 @@ function pluslet() {
             });
         },
 
-        handlePlusletsBySectionIdData(data) {
+        handlePlusletsBySectionIdData(data, section_id, element_deletion) {
 
-            console.log(data);
+            var pluslets = [];
+            $.each(data.pluslets, function (key, value) {
+                pluslets.push(value);
+
+            });
+
+            console.log(section_id);
+            console.log(element_deletion);
+
+            $.each(pluslets, function (key, value) {
+                console.log('key: ' + key + ' value: ' + value.pluslet_id);
+            });
 
         },
 
