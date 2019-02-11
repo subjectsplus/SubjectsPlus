@@ -1124,7 +1124,7 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 function prepareTH( $array ) {
 
 	$th = "
-<table width=\"100%\" class=\"item_listing\">
+<table width=\"100%\" class=\"item_listing other-staff\">
 <tr class=\"pure-g staff-heading\">";
 
 	foreach ( $array as $key => $value ) {
@@ -1138,7 +1138,7 @@ function prepareTH( $array ) {
 
 function prepareTHUM( $array ) {
 	$th = "
-    <table class=\"footable foo1\" data-filter=\"#filter\">
+    <table class=\"footable foo1 other-staff\" data-filter=\"#filter\">
       <thead>
         <tr class=\"staff-heading\">";
 
