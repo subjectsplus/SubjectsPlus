@@ -864,13 +864,14 @@ span.staff_contact a {
 }
 
 h2.dept_header {
-    border:none !important;
     background-color: #fff  !important;
     border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     -khtml-border-radius: 0px !important;
     -webkit-border-radius: 0px !important;
     text-align: center !important;
+    padding-bottom: 6px;
+    border: none !important;
 }
 
 /* This is for the search box on subjects/display.php & subjects/faq.php */
@@ -1629,6 +1630,52 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 #guidesplash .guide_list_header {margin-bottom: 6px;}
 #guidesplash .guide_list_header h3 {padding-bottom: 5px;}
 
+.other-staff,
+.staff-by-dept,
+.librarians-az {
+    width: 100%;
+    max-width: 100%;
+}
+
+.other-staff thead,
+.librarians-az thead {
+    display: none;
+}
+
+.other-staff td,
+.other-staff th {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+}
+
+.staff-by-dept td,
+.librarians-az td, .librarians-az th, .librarians-az .staffpic, .librarians-az .staff-meta {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+}
+
+.staff-departments, .staff-librarians {
+    list-style: none;
+    margin-left: 0 !important;
+}
+
+.staff-librarians li {
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.staff-librarians .staff-info,
+.staff-librarians .staff-subjects,
+.staff-librarians .staffpic,
+.staff-librarians .staff-meta {
+    float: none;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+}
+
 
 
 
@@ -1642,6 +1689,43 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) {
+
+    .other-staff thead {
+        display: table-row;
+    }
+
+    .other-staff td,
+    .other-staff th {
+        display: table-cell;
+        width:auto;
+    }
+
+    .staff-by-dept td,
+    .librarians-az td, .librarians-az th, .librarians-az .staffpic, .librarians-az .staff-meta {
+        display: table-cell;
+        width: auto;
+    }
+
+    .librarians-az .staffpic {
+        width:70px;
+        height: 70px;
+        display: inline;
+    }
+
+    .staff-librarians li {
+        display: table-row;
+        margin-bottom:0;
+    }
+
+    .staff-librarians .staff-info,
+    .staff-librarians .staff-subjects {
+        display: table-cell;
+        width: auto;
+    }
+
+    .staff-librarians .staff-info {
+        width:30%;
+    }
 
     h1 {
         clear: left;
@@ -1738,14 +1822,6 @@ img.pluslet_card_image {
 
 /** end ckeditor custom styles ***/
 
-
-.staff-departments, .staff-librarians {
-    list-style: none;
-}
-
-.staff-librarians li {
-    display: grid;
-}
 
 .uml-quick-links { /* Hide Favorites/Heart on default themes */
      display: none !important;
