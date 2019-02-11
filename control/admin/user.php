@@ -389,7 +389,7 @@ include("../includes/footer.php");
         // Add red star to labels of required inputs
         //////////////////
 
-        $("*[class*=required_field]").prevUntil('div', 'span').append('<span style="color: red;">*</span>');
+        $("*[class*=required_field]").prevUntil('div', 'label').append(' <i class="fa fa-asterisk" aria-hidden="true" style="color: red"></i>');
 
         //////////////////
         // Make sure that delete was intentional
