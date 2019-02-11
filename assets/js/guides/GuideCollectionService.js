@@ -24,6 +24,7 @@ function guideCollectionService() {
             myGuideCollection.updateCollection();
             myGuideCollection.displayCollectionGuides();
             myGuideCollection.deleteGuideFromCollection();
+            myGuideCollection.saveCollectionUpdateToDatabase();
         },
         init : function() {
             myGuideCollection.bindUiActions();
@@ -155,6 +156,41 @@ function guideCollectionService() {
             });
         },
 
+        saveCollectionUpdateToDatabase: function(){
+            $("#update-collection-metadata-btn").click(function () {
+                var collection_id = $('#collection-metadata').attr('data-collection_id');
+                var title = $('input#collection-title-input').val();
+                var shortform = $('input#collection-shortform-input').val();
+                var description =  $('input#collection-description-input').val();
+
+                var payload = {
+                    'action': 'update',
+                    'collection_id' : collection_id,
+                    'title' : title,
+                    'shortform' : shortform,
+                    'description' : description
+                };
+
+                $.ajax({
+                    url: myGuideCollection.settings.collectionActionUrl,
+                    type: "POST",
+                    dataType: "json",
+                    data: payload,
+                    success: function(data) {
+                        myGuideCollection.clearEditFormValues();
+                        myGuideCollection.clearCollectionMetadata();
+
+                        $( "#collection-metadata" ).fadeIn( "slow", function() {
+                            myGuideCollection.renderCollectionMetadata(title, description,shortform, collection_id);
+                        });
+
+                    }
+                });
+
+                $('#collection-metadata-editform').hide();
+
+            });
+        },
 
         updateCollection: function () {
 
@@ -162,51 +198,15 @@ function guideCollectionService() {
 
                 var collection_id = $(this).parent('#collection-metadata').attr('data-collection_id');
                 var title = $(this).parent('#collection-metadata').children('h3#collection-title').text();
-                var shortform = $(this).parent('#collection-metadata').children('#collection-shortform').text();
-                var description = $(this).parent('#collection-metadata').children('#collection-description').text();
+                var shortform = $(this).parent('#collection-metadata').find('dd#collection-shortform').text();
+
+                var description = $(this).parent('#collection-metadata').find('dd#collection-description').text();
 
                 $('#collection-metadata-editform').show();
 
                 $('input#collection-title-input').val(title);
                 $('input#collection-shortform-input').val(shortform);
                 $('input#collection-description-input').val(description);
-
-                $('body').on('click', '#update-collection-metadata-btn', function () {
-
-
-                    var title = $('input#collection-title-input').val();
-                    var shortform = $('input#collection-shortform-input').val();
-                    var description =  $('input#collection-description-input').val();
-
-                    var payload = {
-                        'action': 'update',
-                        'collection_id' : collection_id,
-                        'title' : title,
-                        'shortform' : shortform,
-                        'description' : description
-                    };
-
-                    $.ajax({
-                        url: myGuideCollection.settings.collectionActionUrl,
-                        type: "POST",
-                        dataType: "json",
-                        data: payload,
-                        success: function(data) {
-
-                            myGuideCollection.clearEditFormValues();
-                            myGuideCollection.clearCollectionMetadata();
-
-                            $( "#collection-metadata" ).fadeIn( "slow", function() {
-                                myGuideCollection.renderCollectionMetadata(title, description,shortform, collection_id);
-                            });
-
-                        }
-                    });
-
-                    $('#collection-metadata-editform').hide();
-
-                });
-
             });
         },
 
@@ -311,6 +311,9 @@ function guideCollectionService() {
 
                 //clear guide list
                 myGuideCollection.clearGuideList();
+
+                $('#collection-metadata-editform').hide();
+                $('#collection-metadata-editform').find('.collection-metadata-edit-input').val('');
 
                 var payload = {
                     'action' : 'fetchguides',
@@ -538,9 +541,9 @@ function guideCollectionService() {
         },
 
         clearCollectionMetadata: function () {
-            $('#collection-title').html('');
-            $('#collection-description').html('');
-            $('#collection-shortform').html('');
+            $('h3#collection-title').text('');
+            $('dd#collection-description').text('');
+            $('dd#collection-shortform').html('');
         },
 
         renderCollectionMetadata: function (title, description, shortform, collection_id) {
