@@ -367,18 +367,25 @@ include("includes/footer_med.php");
 
 
         });
+        // switch icon option
+        $("#listguides #section-Collection i.fa-plus-circle").removeClass("fas fa-plus-circle").addClass("fa fa-plus-square");
 
-        // Toggle details for each guide list item 
-          $( ".fa-plus-square" ).click(function() {
-             $(this).toggleClass('fa-plus-square fa-minus-square');
-             $(this).parent().find('.guide_list_bonus').toggle();            
-          });
+        // Toggle details for all guides in a category list
+        $('.guide-list-expand').click(function () {
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
+
+        // Toggle details for each guide list item
+        $( '.fa-plus-square' ).click(function() {
+            $(this).toggleClass('fa-plus-square fa-minus-square');
+            $(this).parent().find('.guide_list_bonus').toggle();
+        });
+
 
         //add class to ui-autocomplete dropdown
         $( ".ui-autocomplete" ).addClass( "index-search-dd" );
 
-        // switch icon option
-        $("#listguides #section-Collection i.fa-plus-circle").removeClass("fas fa-plus-circle").addClass("fa fa-plus-square");
+
 
 
     });

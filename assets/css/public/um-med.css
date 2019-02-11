@@ -358,3 +358,12 @@ table.item_listing a:link {
  
     
 }
+
+.fa,
+.fas {font-size: 16px !important;} /* Default size for font-awesomeicons */
+
+.db_icons i {
+    padding-right: .25rem;
+    vertical-align: top;
+    padding-left: .25rem;
+}
