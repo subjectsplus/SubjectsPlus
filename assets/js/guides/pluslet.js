@@ -146,7 +146,7 @@ function pluslet() {
 
         expandPluslet: function () {
             //Expand/Collapse Trigger CSS for all Pluslets on a Tab
-            document.addEventListener("DOMContentLoaded", function () {
+            $(document).ready( function () {
 
                 $('#expand_tab').click(function () {
 
