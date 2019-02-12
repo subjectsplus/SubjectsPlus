@@ -153,7 +153,7 @@ function section() {
 			$('.section_remove').on('click', function() {
 
 				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
-				console.log( 'section_id: ' + section_id);
+				//console.log( 'section_id: ' + section_id);
 
 				var pluslets = [];
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
@@ -161,39 +161,49 @@ function section() {
 
 				pluslets.then(function(data) {
 
-					var masterClones = [];
-					$.each(data.pluslets, function(key, value) {
-						var pluslet_id = value.pluslet_id;
-						console.log('pluslet_id: ' + pluslet_id);
+					if(data.pluslets.length > 0) {
 
-						masterClones = mySection.hasMasterClones(pluslet_id);
-						console.log(masterClones);
+						var masterClones = [];
+						$.each(data.pluslets, function(key, value) {
+							var pluslet_id = value.pluslet_id;
+							//console.log('pluslet_id: ' + pluslet_id);
 
-						masterClones.then(function(data) {
-							console.log(data.cloned_pluslets);
+							masterClones = mySection.hasMasterClones(pluslet_id);
+							console.log(masterClones);
+
+							masterClones.then(function(data) {
+								//console.log(data.cloned_pluslets);
 
 
-							if(data.cloned_pluslets.length > 0) {
+								if(data.cloned_pluslets.length > 0) {
 
-								$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
-									autoOpen: true,
-									modal: false,
-									width: 'auto',
-									height: 'auto',
-									resizable: false,
-									buttons: {
-										Cancel: function () {
-											$(this).dialog('close');
+									$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
+										autoOpen: true,
+										modal: false,
+										width: 'auto',
+										height: 'auto',
+										resizable: false,
+										buttons: {
+											Cancel: function () {
+												$(this).dialog('close');
+											}
 										}
-									}
-								});
-								return false;
-							} else {
-								mySection.deleteSection(section_id);
-							}
+									});
+									return false;
+								} else {
+									mySection.deleteSection(section_id);
+								}
 
+							});
 						});
-					});
+
+					} else {
+
+						mySection.deleteSection(section_id);
+
+					}
+
+
 				});
 
 
