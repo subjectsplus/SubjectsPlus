@@ -498,7 +498,7 @@ function tabs() {
                 }
             }
 
-            document.addEventListener("DOMContentLoaded", function () {
+            $(document).ready( function () {
                 $('.create-guide').on('click', function () {
 
                     //console.log('copy guide');
