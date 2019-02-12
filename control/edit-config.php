@@ -10,6 +10,9 @@
  */
 
 use SubjectsPlus\Control\Config;
+if ( file_exists( 'includes/version.php' ) ) {
+	include_once 'includes/version.php';
+}
 
 //variables required in header and add header
 $subcat = "admin";
@@ -24,6 +27,8 @@ $lobjConfig = new Config();
 
 //declare variable that stores configuration path
 $lstrConfigFilePath = 'includes/config.php';
+
+
 
 //set config file path
 $lobjConfig->setConfigPath( $lstrConfigFilePath );

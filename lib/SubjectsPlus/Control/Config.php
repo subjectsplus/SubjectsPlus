@@ -2,6 +2,7 @@
 namespace SubjectsPlus\Control;
 
 use PDO;
+
 /**
  * sp_Config - this class handles all aspects of the configuration of SubjectsPlus
  *
@@ -11,8 +12,7 @@ use PDO;
  * @version $Id$
  * @access public
  */
-class Config
-{
+class Config {
 	//class constants
 	const LARGE_INPUT_SIZE = 50;
 	const MEDIUM_INPUT_SIZE = 30;
@@ -33,17 +33,23 @@ class Config
 	 * sp_Config::__construct() - initialize all properties
 	 *
 	 */
-	function __construct()
-	{
-		$this->lobjConfigOptions = array();
-		$this->lobjConfigValues = array();
+	function __construct() {
+		$this->lobjConfigOptions   = array();
+		$this->lobjConfigValues    = array();
 		$this->lobjNewConfigValues = array();
-		$this->lstrConfigPath = '';
-		$this->lboolChangeSalt = FALSE;
-		$this->lboolChangeAPIKey = FALSE;
+		$this->lstrConfigPath      = '';
+		$this->lboolChangeSalt     = false;
+		$this->lboolChangeAPIKey   = false;
 
-		$this->lobjSetupDBKeys = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port', 'db_cert_path' );
-		$this->lobjSetupSiteKeys = array( 'resource_name', 'institution_name', 'administrator', 'administrator_email', 'email_key', 'tel_prefix' );
+		$this->lobjSetupDBKeys   = array( 'hname', 'uname', 'pword', 'dbName_SPlus', 'db_port', 'db_cert_path' );
+		$this->lobjSetupSiteKeys = array(
+			'resource_name',
+			'institution_name',
+			'administrator',
+			'administrator_email',
+			'email_key',
+			'tel_prefix'
+		);
 	}
 
 	/**
@@ -51,10 +57,10 @@ class Config
 	 * setConfigValues method
 	 *
 	 * @param array $lobjConfigOptions
+	 *
 	 * @return void
 	 */
-	public function setConfigOptions( Array $lobjConfigOptions )
-	{
+	public function setConfigOptions( Array $lobjConfigOptions ) {
 		$this->lobjConfigOptions = $lobjConfigOptions;
 
 		$this->setConfigValues();
@@ -66,34 +72,32 @@ class Config
 	 *
 	 * @param string $lstrConfigPath
 	 * @param boolean $lboolSetConfigFile
+	 *
 	 * @return boolean
 	 */
-	public function setConfigPath( $lstrConfigPath , $lboolSetConfigFile = TRUE )
-	{
+	public function setConfigPath( $lstrConfigPath, $lboolSetConfigFile = true ) {
 		$this->lstrConfigPath = $lstrConfigPath;
 
-		if( $lboolSetConfigFile )
-		{
+		if ( $lboolSetConfigFile ) {
 			//only set if the file exits
-			if( !file_exists($this->lstrConfigPath) )
-			{
-				return FALSE;
+			if ( ! file_exists( $this->lstrConfigPath ) ) {
+				return false;
 			}
 
 			$this->setConfigFile();
 		}
 
-		return TRUE;
+		return true;
 	}
 
 	/**
 	 * sp_Config::setChangeSalt() - this method sets the change salt property
 	 *
 	 * @param boolean $lboolChange
+	 *
 	 * @return void
 	 */
-	public function setChangeSalt( $lboolChange = FALSE )
-	{
+	public function setChangeSalt( $lboolChange = false ) {
 		$this->lboolChangeSalt = $lboolChange;
 	}
 
@@ -101,10 +105,10 @@ class Config
 	 * sp_Config::setChangeAPIKey() - this method sets the change API key property
 	 *
 	 * @param boolean $lboolChange
+	 *
 	 * @return void
 	 */
-	public function setChangeAPIKey( $lboolChange = FALSE )
-	{
+	public function setChangeAPIKey( $lboolChange = false ) {
 		$this->lboolChangeAPIKey = $lboolChange;
 	}
 
@@ -114,19 +118,19 @@ class Config
 	 * sets the new values property
 	 *
 	 * @param array $lobjOptions
+	 *
 	 * @return boolean
 	 */
-	public function setNewConfigValues( )
-	{
+	public function setNewConfigValues() {
 		//makes sure that config options is set
-		if( empty( $this->lobjConfigOptions ) ) return FALSE;
+		if ( empty( $this->lobjConfigOptions ) ) {
+			return false;
+		}
 
 		$lobjNewValues = array();
 
-		foreach( $this->lobjConfigOptions as $lstrKey => $lobjOption )
-		{
-			switch( $lobjOption[2] )
-			{
+		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
+			switch ( $lobjOption[2] ) {
 				case 'array':
 					$lobjNewValues[ $lstrKey ] = $this->commaListToArray( addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" ) );
 					break;
@@ -136,8 +140,11 @@ class Config
 				case 'boolean':
 					$lstrValue = addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" );
 					$lstrValue = strtolower( $lstrValue );
-					if( $lstrValue == 'true' ) $lobjNewValues[ $lstrKey ] = TRUE;
-					else $lobjNewValues[ $lstrKey ] = FALSE;
+					if ( $lstrValue == 'true' ) {
+						$lobjNewValues[ $lstrKey ] = true;
+					} else {
+						$lobjNewValues[ $lstrKey ] = false;
+					}
 					break;
 				default:
 					$lobjNewValues[ $lstrKey ] = addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" );
@@ -146,7 +153,7 @@ class Config
 
 		$this->lobjNewConfigValues = $lobjNewValues;
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -155,8 +162,7 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	public function getChangeSalt()
-	{
+	public function getChangeSalt() {
 		return $this->lboolChangeSalt;
 	}
 
@@ -166,8 +172,7 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	public function getChangeAPIKey()
-	{
+	public function getChangeAPIKey() {
 		return $this->lboolChangeAPIKey;
 	}
 
@@ -177,9 +182,8 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	public function isNewBaseURL()
-	{
-		return ( $this->lobjConfigValues[ 'BaseURL' ] != $this->lobjNewConfigValues[ 'BaseURL' ] );
+	public function isNewBaseURL() {
+		return ( $this->lobjConfigValues['BaseURL'] != $this->lobjNewConfigValues['BaseURL'] );
 	}
 
 	/**
@@ -188,9 +192,8 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	public function isNewModRewrite()
-	{
-		return ( $this->lobjConfigValues[ 'mod_rewrite' ] != $this->lobjNewConfigValues[ 'mod_rewrite' ] );
+	public function isNewModRewrite() {
+		return ( $this->lobjConfigValues['mod_rewrite'] != $this->lobjNewConfigValues['mod_rewrite'] );
 	}
 
 	/**
@@ -199,9 +202,8 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	public function getNewBaseURL()
-	{
-		return $this->lobjNewConfigValues[ 'BaseURL' ];
+	public function getNewBaseURL() {
+		return $this->lobjNewConfigValues['BaseURL'];
 	}
 
 	/**
@@ -210,12 +212,11 @@ class Config
 	 *
 	 * @return string
 	 */
-	public function checkDBConnection( )
-	{
+	public function checkDBConnection() {
 		$lstrError = '';
-		if( isset($this->lobjNewConfigValues['db_cert_path']) && $this->lobjNewConfigValues['db_cert_path'] != null ) {
+		if ( isset( $this->lobjNewConfigValues['db_cert_path'] ) && $this->lobjNewConfigValues['db_cert_path'] != null ) {
 			$options = array(
-				PDO::ATTR_PERSISTENT => true,
+				PDO::ATTR_PERSISTENT   => true,
 				PDO::MYSQL_ATTR_SSL_CA => $this->lobjNewConfigValues['db_cert_path'],
 			);
 		} else {
@@ -225,9 +226,9 @@ class Config
 		}
 
 		try {
-			$dsn = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $this->lobjNewConfigValues['db_port'] . ';charset=utf8';
-			$lobjConnection = new PDO($dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], $options);
-		} catch (\PDOException $e) {
+			$dsn            = 'mysql:dbname=' . $this->lobjNewConfigValues['dbName_SPlus'] . ';host=' . $this->lobjNewConfigValues['hname'] . ';port=' . $this->lobjNewConfigValues['db_port'] . ';charset=utf8';
+			$lobjConnection = new PDO( $dsn, $this->lobjNewConfigValues['uname'], $this->lobjNewConfigValues['pword'], $options );
+		} catch ( \PDOException $e ) {
 			$lstrError .= "<h1>There was a problem connecting to the database.</h1>";
 			$lstrError .= "<p>This is the detailed error:</p>";
 			$lstrError .= 'Connection failed: ' . $e->getMessage();
@@ -241,23 +242,21 @@ class Config
 	 * and a specific class
 	 *
 	 * @param string $lstrMessage
+	 *
 	 * @return void
 	 */
-	public function displayMessage( $lstrMessage )
-	{
-		if( $lstrMessage == '' )
-		{
+	public function displayMessage( $lstrMessage ) {
+		if ( $lstrMessage == '' ) {
 			?>
-		<div class="master-feedback" >
-		</div><br /><br />
-		<?php
-		}else
-		{
+            <div class="master-feedback">
+            </div><br/><br/>
+			<?php
+		} else {
 			?>
-		<div class="master-feedback" style="display: block;" >
-			<?php echo $lstrMessage ?>
-		</div><br /><br />
-		<?php
+            <div class="master-feedback" style="display: block;">
+				<?php echo $lstrMessage ?>
+            </div><br/><br/>
+			<?php
 		}
 	}
 
@@ -269,30 +268,32 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	public function writeConfigFile( )
-	{
-		if( $this->setupConfigFile() === TRUE)
-		{
+	public function writeConfigFile() {
+		if ( $this->setupConfigFile() === true ) {
 			//open the file for writing which will truncate all data on the file.
 			$lhndFile = fopen( $this->lstrConfigPath, 'w' );
 
-			if( $lhndFile === FALSE ) return FALSE;
+			if ( $lhndFile === false ) {
+				return false;
+			}
 
 			//go through each line in file array and write it to the file
-			foreach( $this->lobjConfigFile as $lstrLine )
-			{
+			foreach ( $this->lobjConfigFile as $lstrLine ) {
 				$lboolSuccess = fwrite( $lhndFile, $lstrLine );
 
 				//if, at any point, the file cannot be written to, return false.
-				if( $lboolSuccess === FALSE ) return FALSE;
+				if ( $lboolSuccess === false ) {
+					return false;
+				}
 			}
 
 			//close and change permissions of file
 			fclose( $lhndFile );
+
 			return chmod( $this->lstrConfigPath, 0666 );
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -301,27 +302,28 @@ class Config
 	 * folder
 	 *
 	 * @param string $lstrModRewritePath
+	 *
 	 * @return boolean
 	 */
-	public function wrtieModRewriteFile( $lstrModRewritePath = '' )
-	{
-		if( $lstrModRewritePath == '' ) return FALSE;
+	public function wrtieModRewriteFile( $lstrModRewritePath = '' ) {
+		if ( $lstrModRewritePath == '' ) {
+			return false;
+		}
 
 		//create file array
 		$lobjFile = file( $lstrModRewritePath );
 
 		//go through each line of file
-		foreach( $lobjFile as $lintLineNumber => $lstrLine )
-		{
+		foreach ( $lobjFile as $lintLineNumber => $lstrLine ) {
 			//do nothing to first line. Comment
-			if( $lintLineNumber == 0 ) continue;
+			if ( $lintLineNumber == 0 ) {
+				continue;
+			}
 
-			if( $this->lobjNewConfigValues[ 'mod_rewrite' ] )
-			{
+			if ( $this->lobjNewConfigValues['mod_rewrite'] ) {
 				//remove comments if true
-				$lstrLine = str_replace( '#' , '', $lstrLine);
-			}else
-			{
+				$lstrLine = str_replace( '#', '', $lstrLine );
+			} else {
 				//add comments if false
 				$lstrLine = '#' . $lstrLine;
 			}
@@ -333,19 +335,23 @@ class Config
 		$lhndFile = fopen( $lstrModRewritePath, 'w' );
 
 		//if opening of the file givers error, return false
-		if( $lhndFile === FALSE ) return FALSE;
+		if ( $lhndFile === false ) {
+			return false;
+		}
 
 		//go through and write file array to file
-		foreach( $lobjFile as $lstrLine )
-		{
+		foreach ( $lobjFile as $lstrLine ) {
 			$lboolSuccess = fwrite( $lhndFile, $lstrLine );
 
 			//if the file cannot be written to, return false.
-			if( $lboolSuccess === FALSE ) return FALSE;
+			if ( $lboolSuccess === false ) {
+				return false;
+			}
 		}
 
 		//close file and change permissions
 		fclose( $lhndFile );
+
 		return chmod( $lstrModRewritePath, 0666 );
 	}
 
@@ -355,49 +361,47 @@ class Config
 	 * the options stored in class property
 	 *
 	 * @param string $lstrType
+	 *
 	 * @return void
 	 */
-	public function displayEditConfigForm( $lstrType = 'original' )
-	{
+	public function displayEditConfigForm( $lstrType = 'original' ) {
+		global $sp_version;
+
 		//use original or new values
-		if( $lstrType == 'original' )
-		{
+		if ( $lstrType == 'original' ) {
 			$lobjValues = $this->lobjConfigValues;
-		}else
-		{
+		} else {
 			$lobjValues = $this->lobjNewConfigValues;
 		}
 
 		//initialize variables
-		$lstrLeftHTML = '';
-		$lstrRightHTML = '';
-		$lstrLeftBottomHTML = '';
+		$lstrLeftHTML        = '';
+		$lstrRightHTML       = '';
+		$lstrLeftBottomHTML  = '';
 		$lstrRightBottomHTML = '';
 
 		// init new vars
-		$section_guide = "";
-		$section_user = "";
-		$section_auth = "";
-		$section_video = "";
-		$section_talkback = "";
-		$section_record = "";
-		$section_api = "";
-		$section_appearance = "";
-		$section_core_tech = "";
+		$section_guide         = "";
+		$section_user          = "";
+		$section_auth          = "";
+		$section_video         = "";
+		$section_talkback      = "";
+		$section_record        = "";
+		$section_api           = "";
+		$section_appearance    = "";
+		$section_core_tech     = "";
 		$section_core_metadata = "";
-		$section_mysql = "";
-		$section_catalog = "";
-		$section_primo = "";
+		$section_mysql         = "";
+		$section_catalog       = "";
+		$section_primo         = "";
 
 		//go through all options
-		foreach( $this->lobjConfigOptions as $lstrKey => $lobjOption )
-		{
+		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
 			//span containing input label
 			$lstrHTML = "<label for=\"{$lobjOption[0]}\">{$lobjOption[0]} ";
 
 			//if there is a tooltip in the options
-			if( isset( $lobjOption[6] ) && $lobjOption[6] != '' )
-			{
+			if ( isset( $lobjOption[6] ) && $lobjOption[6] != '' ) {
 				$lstrTitle = htmlentities( $lobjOption[6] );
 
 				$lstrHTML .= "&nbsp;<span class=\"tooltipcontainer\"><img class=\"tooltip\" src=\"../assets/images/icons/help.png\" data-notes=\"{$lstrTitle}\" /></span>\n";
@@ -407,71 +411,66 @@ class Config
 			$lstrHTML .= "<span style=\"font-size: smaller; padding: 0px 0px 5px 0px;\">{$lobjOption[1]}</span><br />\n";
 
 			//based on type, create HTML form inputs
-			switch( $lobjOption[2] )
-			{
+			switch ( $lobjOption[2] ) {
 				case 'array':
 					//based on type of array
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'ticks':
 
-							if( isset( $lobjOption[5] ) && is_array( $lobjOption[5] ))
-							{
-								$lstrHTML .= $this->arrayToTicks( $lobjOption[5], $lobjValues[$lstrKey], $lstrKey );
+							if ( isset( $lobjOption[5] ) && is_array( $lobjOption[5] ) ) {
+								$lstrHTML .= $this->arrayToTicks( $lobjOption[5], $lobjValues[ $lstrKey ], $lstrKey );
 								$lstrHTML .= "\n";
 								break;
 							}
 
 						case "textarea":
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<textarea id=\"{$lstrKey}\" name=\"{$lstrKey}\" cols=\"45\" rows=\"3\" >{$lstrValue}</textarea>";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<textarea id=\"{$lstrKey}\" name=\"{$lstrKey}\" cols=\"45\" rows=\"3\" >{$lstrValue}</textarea>";
 							break;
 
 						case 'medium':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" />\n";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" />\n";
 							break;
 						case 'small':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" />\n";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" />\n";
 							break;
 						default:
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" />\n";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" />\n";
 							break;
 					}
 
 					$lstrHTML .= "\n";
 					break;
-					//case of an assosiative array
+				//case of an assosiative array
 				case 'aarray':
 					//based on type of aarray
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'medium':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
 							break;
 						case 'small':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
 							break;
 						default:
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
 							break;
 					}
 
 					//append to auto generated options in order to discourage changing important
 					//configurations
-					if( in_array( $lstrKey, array( 'all_tbtags' ) ) )
-					{
+					if ( in_array( $lstrKey, array( 'all_tbtags' ) ) ) {
 						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
 										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Edit?" ) . "</a></span>\n";
 						break;
@@ -483,13 +482,10 @@ class Config
 					//if a boolean type
 					$lstrHTML .= "<select id=\"{$lstrKey}\" name=\"{$lstrKey}\">\n";
 
-					if( $lobjValues[$lstrKey] )
-					{
+					if ( $lobjValues[ $lstrKey ] ) {
 						$lstrHTML .= "<option value=\"TRUE\" selected>" . _( "TRUE" ) . "</option>\n";
 						$lstrHTML .= "<option value=\"FALSE\" >" . _( "FALSE" ) . "</option>\n";
-					}
-					else
-					{
+					} else {
 						$lstrHTML .= "<option value=\"TRUE\" >" . _( "TRUE" ) . "</option>\n";
 						$lstrHTML .= "<option value=\"FALSE\" selected>" . _( "FALSE" ) . "</option>\n";
 					}
@@ -500,8 +496,7 @@ class Config
 				case 'pword':
 					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"password\" value=\"{$lobjValues[$lstrKey]}\" ";
 
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'medium':
 							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
 							break;
@@ -519,8 +514,7 @@ class Config
 				default:
 					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lobjValues[$lstrKey]}\" ";
 
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'medium':
 							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
 							break;
@@ -534,8 +528,7 @@ class Config
 
 					//append to auto generated options in order to discourage changing important
 					//configurations
-					if( in_array( $lstrKey, array( 'BaseURL', 'CKBasePath' ) ) )
-					{
+					if ( in_array( $lstrKey, array( 'BaseURL', 'CKBasePath' ) ) ) {
 						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
 										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Not right?" ) . "</a></span>\n";
 						break;
@@ -549,255 +542,267 @@ class Config
 //print "<div class='pluslet_body'>$lstrHTML</div>";
 
 			// Let's group these
-			switch ( strtolower( $lobjOption[3] )) {
+			switch ( strtolower( $lobjOption[3] ) ) {
 				case "guide":
 					$section_guide .= $lstrHTML;
-				break;
+					break;
 				case "user":
 					$section_user .= $lstrHTML;
-				break;
-								case "auth":
+					break;
+				case "auth":
 					$section_auth .= $lstrHTML;
-				break;
-								case "video":
+					break;
+				case "video":
 					$section_video .= $lstrHTML;
-				break;
-								case "talkback":
+					break;
+				case "talkback":
 					$section_talkback .= $lstrHTML;
-				break;
-								case "record":
+					break;
+				case "record":
 					$section_record .= $lstrHTML;
-				break;
-								case "api":
+					break;
+				case "api":
 					$section_api .= $lstrHTML;
-				break;
-								case "appearance":
+					break;
+				case "appearance":
 					$section_appearance .= $lstrHTML;
-				break;
-								case "core-tech":
+					break;
+				case "core-tech":
 					$section_core_tech .= $lstrHTML;
-				break;
+					break;
 				case "core-metadata":
 					$section_core_metadata .= $lstrHTML;
-				break;
-								case "mysql":
+					break;
+				case "mysql":
 					$section_mysql .= $lstrHTML;
-				break;
-								case "catalog":
-					$section_catalog.= $lstrHTML;
-				break;
-								case "primo":
+					break;
+				case "catalog":
+					$section_catalog .= $lstrHTML;
+					break;
+				case "primo":
 					$section_primo .= $lstrHTML;
-				break;
+					break;
 			}
 
 		}
 
 		?>
 
-<form id="config_form" class="pure-form pure-form-stacked" action="edit-config.php" method="POST">	
-<div id="tabs" style="background-color: transparent;">
-<div class="pure-g">
-	<div class="pure-u-1 pure-u-md-2-3">
-<div class="pluslet">
-				        <div class="pluslet_body">
-  <ul>
-    <li><a href="#tabs-basic"><?php print _("Basic Settings"); ?></a></li>
-    <li><a href="#tabs-catalog"><?php print _("Catalog"); ?></a></li>
-    <li><a href="#tabs-guides"><?php print _("Guides/Records"); ?></a></li>
-    <li><a href="#tabs-talkback"><?php print _("Talkback/Video"); ?></a></li>
-    <li><a href="#tabs-api"><?php print _("API"); ?></a></li>
-    <li><a href="#tabs-server"><?php print _("Server"); ?></a></li>
-  </ul>
-</div>
-</div>
-	</div>
-	<div class="pure-u-1 pure-u-md-1-3">
-				    <div class="pluslet">
-				        <div class="pluslet_body">
-				            <input type="submit" class="button" name="submit_edit_config" value="<?php echo _("Save Config"); ?>" />
-				        </div>
-				    </div>
-	</div>
+        <form id="config_form" class="pure-form pure-form-stacked" action="edit-config.php" method="POST">
+            <div id="tabs" style="background-color: transparent;">
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-2-3">
+                        <div class="pluslet">
+                            <div class="pluslet_body">
+                                <ul>
+                                    <li><a href="#tabs-basic"><?php print _( "Basic Settings" ); ?></a></li>
+                                    <li><a href="#tabs-catalog"><?php print _( "Catalog" ); ?></a></li>
+                                    <li><a href="#tabs-guides"><?php print _( "Guides/Records" ); ?></a></li>
+                                    <li><a href="#tabs-talkback"><?php print _( "Talkback/Video" ); ?></a></li>
+                                    <li><a href="#tabs-api"><?php print _( "API" ); ?></a></li>
+                                    <li><a href="#tabs-server"><?php print _( "Server" ); ?></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <div class="pluslet">
+                            <div class="pluslet_body">
+                                <input type="submit" class="button" name="submit_edit_config"
+                                       value="<?php echo _( "Save Config" ); ?>"/>
+                            </div>
+                        </div>
+                    </div>
 
-  <div id="tabs-basic">
- 
-				<div class="pure-u-1 pure-u-md-1-3">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Institutional Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_core_metadata; ?>
-				        </div>
-				    </div>
+                    <div id="tabs-basic">
 
-				</div>
-								<div class="pure-u-1 pure-u-md-1-3">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Appearance"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_appearance; ?>
-				        </div>
-				    </div>
-				  </div>
-								<div class="pure-u-1 pure-u-md-1-3">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("User Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_user; ?>
-				        </div>
-				    </div>
-				</div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Institutional Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_core_metadata; ?>
+                                </div>
+                            </div>
 
-    
-  </div> <!-- end tab -->
-  <div id="tabs-server">
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Appearance" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_appearance; ?>
+                                </div>
+                            </div>
+                        </div>
 
-				<div class="pure-u-1 pure-u-md-1-2">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Server Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_core_tech; ?>
-				        </div>
-				    </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "About" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+                                    You are using SubjectsPlus <b>v<?php print $sp_version; ?></b>
+                                </div>
+                            </div>
 
-				</div>
-								<div class="pure-u-1 pure-u-md-1-2">
-															<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Authentication"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_auth; ?>
-				        </div>
-				    </div>
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("MySQL Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_mysql; ?>
-				        </div>
-				    </div>
-				  </div>
-
-  </div>
-  <div id="tabs-api">
-
-				<div class="pure-u-1 pure-u-md-1">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("API Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_api; ?>
-				        </div>
-				    </div>
-
-				</div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "User Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_user; ?>
+                                </div>
+                            </div>
+                        </div>
 
 
-  </div>
+                    </div> <!-- end tab -->
+                    <div id="tabs-server">
 
-  <div id="tabs-catalog">
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Server Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_core_tech; ?>
+                                </div>
+                            </div>
 
-				<div class="pure-u-1 pure-u-md-1-2">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Catalog Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_catalog; ?>
-				        </div>
-				    </div>
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Authentication" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_auth; ?>
+                                </div>
+                            </div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "MySQL Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_mysql; ?>
+                                </div>
+                            </div>
+                        </div>
 
-				</div>
-								<div class="pure-u-1 pure-u-md-1-2">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Primo Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_primo; ?>
-				        </div>
-				    </div>
-				  </div>
+                    </div>
+                    <div id="tabs-api">
 
-  </div>
+                        <div class="pure-u-1 pure-u-md-1">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "API Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_api; ?>
+                                </div>
+                            </div>
 
-    <div id="tabs-guides">
-				<div class="pure-u-1 pure-u-md-1-2">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Guide Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_guide; ?>
-				        </div>
-				    </div>
-
-				</div>
-								<div class="pure-u-1 pure-u-md-1-2">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Database Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_record; ?>
-				        </div>
-				    </div>
-
-				    					<div class="pluslet">
-						<div class="titlebar">
-							<div class="titlebar_text"><?php print _("Clear the cache"); ?></div>
-						</div>
-						<div class="pluslet_body">
-							<p><?php echo _("Use this button to clear the image cache used in the New Books pluslet") ?></p>
-							<input type="submit" class="button" name="clear_cache_btn" value="<?php echo _("Clear New Books Cache"); ?>" />
-						</div>
-					</div>
-				  </div>
-
-  </div>
-
-    <div id="tabs-talkback">
-				<div class="pure-u-1 pure-u-md-1-3">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Talkback Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_talkback; ?>
-				        </div>
-				    </div>
-
-				</div>
-								<div class="pure-u-1 pure-u-md-1-3">
-						<div class="pluslet">
-				        <div class="titlebar">
-				            <div class="titlebar_text"><?php print _("Video Settings"); ?></div>
-				        </div>
-				        <div class="pluslet_body">
-				            <?php print $section_video; ?>
-				        </div>
-				    </div>
-				  </div>
-								<div class="pure-u-1 pure-u-md-1-3">
-
-				</div>
-  </div>
-
-</div>
+                        </div>
 
 
-		</form>
+                    </div>
+
+                    <div id="tabs-catalog">
+
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Catalog Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_catalog; ?>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Primo Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_primo; ?>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="tabs-guides">
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Guide Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_guide; ?>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-2">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Database Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_record; ?>
+                                </div>
+                            </div>
+
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Clear the cache" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+                                    <p><?php echo _( "Use this button to clear the image cache used in the New Books pluslet" ) ?></p>
+                                    <input type="submit" class="button" name="clear_cache_btn"
+                                           value="<?php echo _( "Clear New Books Cache" ); ?>"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="tabs-talkback">
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Talkback Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_talkback; ?>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Video Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_video; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+        </form>
 		<?php
 	}
 
@@ -806,10 +811,10 @@ class Config
 	 * setup config form for the type 'db'
 	 *
 	 * @param string $lstrType
+	 *
 	 * @return void
 	 */
-	public function displaySetupDBConfigForm( $lstrType = 'original' )
-	{
+	public function displaySetupDBConfigForm( $lstrType = 'original' ) {
 		$this->displaySetupConfigForm( 'db', $lstrType );
 	}
 
@@ -818,10 +823,10 @@ class Config
 	 * setup config form for the type 'site'
 	 *
 	 * @param string $lstrType
+	 *
 	 * @return void
 	 */
-	public function displaySetupSiteConfigForm( )
-	{
+	public function displaySetupSiteConfigForm() {
 		$this->displaySetupConfigForm( 'site' );
 	}
 
@@ -831,26 +836,25 @@ class Config
 	 *
 	 * @param string $lstrTitle
 	 * @param string $lstrReason
+	 *
 	 * @return void
 	 */
-	public function displayErrorPage( $lstrTitle, $lstrReason, $lboolError = TRUE )
-	{
+	public function displayErrorPage( $lstrTitle, $lstrReason, $lboolError = true ) {
 		displayLogoOnlyHeader();
 
 		?>
-		<br /><br />
-		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-    	<div class="box" name="error_page" align="center">
-			<h2 class="bw_head"><?php echo _( $lstrTitle ); ?></h2>
+        <br/><br/>
+        <div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+            <div class="box" name="error_page" align="center">
+                <h2 class="bw_head"><?php echo _( $lstrTitle ); ?></h2>
 
-				<?php if( $lboolError )
-				{
+				<?php if ( $lboolError ) {
 					?> <p><?php echo _( "Something went wrong:" ); ?></p><?php
 				}
 				?>
-				<p><?php echo $lstrReason; ?></p>
-			</div>
-		</div>
+                <p><?php echo $lstrReason; ?></p>
+            </div>
+        </div>
 		<?php
 	}
 
@@ -859,28 +863,29 @@ class Config
 	 *
 	 * @return void
 	 */
-	public function displaySteps()
-	{
+	public function displaySteps() {
 		displayLogoOnlyHeader();
 
 		?>
-		<br /><br />
-		<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+        <br/><br/>
+        <div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
             <div class="box" name="error_page">
-            <h2 class="bw_head"><?php echo _( "Welcome!" ); ?></h2>
+                <h2 class="bw_head"><?php echo _( "Welcome!" ); ?></h2>
 
-				<p><?php echo _( "Before getting started, we need some information about the database, You will need to know the following: " ); ?></p><br />
-				<ul>
-					<li><?php echo _( "Database host" ); ?></li>
-					<li><?php echo _( "Database username" ); ?></li>
-					<li><?php echo _( "Database password" ); ?></li>
-					<li><?php echo _( "Database name" ); ?></li>
-				</ul><br />
-				<p><?php echo _( "If for any reason this automatic file creation does not work, you can simply open <code>config-default.php</code> in a text editor and fill in your information and then save it as <code>config.php</code>." ); ?></p>
-				<br />
-				<a href="setup-config.php">Continue</a>
-			</div>
-		</div>
+                <p><?php echo _( "Before getting started, we need some information about the database, You will need to know the following: " ); ?></p>
+                <br/>
+                <ul>
+                    <li><?php echo _( "Database host" ); ?></li>
+                    <li><?php echo _( "Database username" ); ?></li>
+                    <li><?php echo _( "Database password" ); ?></li>
+                    <li><?php echo _( "Database name" ); ?></li>
+                </ul>
+                <br/>
+                <p><?php echo _( "If for any reason this automatic file creation does not work, you can simply open <code>config-default.php</code> in a text editor and fill in your information and then save it as <code>config.php</code>." ); ?></p>
+                <br/>
+                <a href="setup-config.php">Continue</a>
+            </div>
+        </div>
 		<?php
 	}
 
@@ -890,8 +895,7 @@ class Config
 	 *
 	 * @return void
 	 */
-	private function setConfigFile()
-	{
+	private function setConfigFile() {
 		//create file array
 		$lobjConfigFile = file( $this->lstrConfigPath );
 
@@ -905,64 +909,56 @@ class Config
 	 *
 	 * @param string $lstrForm
 	 * @param string $lstrType
+	 *
 	 * @return void
 	 */
-	private function displaySetupConfigForm( $lstrForm = '', $lstrType = 'original' )
-	{
+	private function displaySetupConfigForm( $lstrForm = '', $lstrType = 'original' ) {
 		$lstrForm = strtolower( trim( $lstrForm ) );
 
-		if( $lstrForm == '' ) return;
+		if ( $lstrForm == '' ) {
+			return;
+		}
 
 		//if the db form
-		if( $lstrForm == 'db' )
-		{
-			if( $lstrType == 'original' )
-			{
+		if ( $lstrForm == 'db' ) {
+			if ( $lstrType == 'original' ) {
 				$this->autoGenerateConfigs();
 				$lobjValues = $this->lobjConfigValues;
-			}else
-			{
+			} else {
 				$lobjValues = $this->lobjNewConfigValues;
 			}
 		}
 
 		//if the site form
-		if( $lstrForm == 'site' )
-		{
+		if ( $lstrForm == 'site' ) {
 			$lobjValues = $this->lobjConfigValues;
 		}
 
 		$lstrHTML = '';
 
 		//go through all options and create the form
-		foreach( $this->lobjConfigOptions as $lstrKey => $lobjOption )
-		{
+		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
 			//if db, hide all the non db options
-			if( $lstrForm == 'db' )
-			{
-				if( !in_array( $lstrKey , $this->lobjSetupDBKeys ) )
-				{
+			if ( $lstrForm == 'db' ) {
+				if ( ! in_array( $lstrKey, $this->lobjSetupDBKeys ) ) {
 					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"hidden\" ";
 
-					switch( $lobjOption[2] )
-					{
+					switch ( $lobjOption[2] ) {
 						case 'array':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
 							break;
 						case 'aarray':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
 							break;
 						case 'boolean':
-							if( $lobjValues[$lstrKey] )
-							{
+							if ( $lobjValues[ $lstrKey ] ) {
 								$lstrValue = 'TRUE';
-							}else
-							{
+							} else {
 								$lstrValue = 'FALSE';
 							}
 							break;
 						default:
-							$lstrValue = $lobjValues[$lstrKey];
+							$lstrValue = $lobjValues[ $lstrKey ];
 							break;
 					}
 
@@ -972,31 +968,26 @@ class Config
 			}
 
 			//if site, hide all non site options
-			if( $lstrForm == 'site' )
-			{
-				if( !in_array( $lstrKey , $this->lobjSetupSiteKeys ) )
-				{
+			if ( $lstrForm == 'site' ) {
+				if ( ! in_array( $lstrKey, $this->lobjSetupSiteKeys ) ) {
 					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"hidden\" ";
 
-					switch( $lobjOption[2] )
-					{
+					switch ( $lobjOption[2] ) {
 						case 'array':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
 							break;
 						case 'aarray':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
 							break;
 						case 'boolean':
-							if( $lobjValues[$lstrKey] )
-							{
+							if ( $lobjValues[ $lstrKey ] ) {
 								$lstrValue = 'TRUE';
-							}else
-							{
+							} else {
 								$lstrValue = 'FALSE';
 							}
 							break;
 						default:
-							$lstrValue = $lobjValues[$lstrKey];
+							$lstrValue = $lobjValues[ $lstrKey ];
 							break;
 					}
 
@@ -1008,8 +999,7 @@ class Config
 			$lstrHTML .= "<span class=\"record_label\">{$lobjOption[0]}</span>\n";
 
 			//if there is a tooltip in the options
-			if( isset( $lobjOption[6] ) && $lobjOption[6] != '' )
-			{
+			if ( isset( $lobjOption[6] ) && $lobjOption[6] != '' ) {
 				$lstrTitle = htmlentities( $lobjOption[6] );
 
 				$lstrHTML .= "&nbsp;<span class=\"tooltipcontainer\"><img class=\"tooltip\" src=\"../assets/images/icons/help.png\" data-notes=\"{$lstrTitle}\" /></span>\n";
@@ -1019,71 +1009,66 @@ class Config
 			$lstrHTML .= "<p style=\"font-size: smaller; padding: 0px 0px 5px 0px;\">{$lobjOption[1]}</p>\n";
 
 			//based on type, create HTML form inputs
-			switch( $lobjOption[2] )
-			{
+			switch ( $lobjOption[2] ) {
 				case 'array':
 					//based on type of array
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'ticks':
 
-							if( isset( $lobjOption[5] ) && is_array( $lobjOption[5] ))
-							{
-								$lstrHTML .= $this->arrayToTicks( $lobjOption[5], $lobjValues[$lstrKey], $lstrKey );
+							if ( isset( $lobjOption[5] ) && is_array( $lobjOption[5] ) ) {
+								$lstrHTML .= $this->arrayToTicks( $lobjOption[5], $lobjValues[ $lstrKey ], $lstrKey );
 								$lstrHTML .= "\n";
 								break;
 							}
 
 						case "textarea":
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<textarea id=\"{$lstrKey}\" name=\"{$lstrKey}\" cols=\"45\" rows=\"3\" >{$lstrValue}</textarea>";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<textarea id=\"{$lstrKey}\" name=\"{$lstrKey}\" cols=\"45\" rows=\"3\" >{$lstrValue}</textarea>";
 							break;
 
 						case 'medium':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" />\n";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" />\n";
 							break;
 						case 'small':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" />\n";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" />\n";
 							break;
 						default:
-							$lstrValue = $this->arrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" />\n";
+							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" />\n";
 							break;
 					}
 
 					$lstrHTML .= "\n";
 					break;
-					//case of an assosiative array
+				//case of an assosiative array
 				case 'aarray':
 					//based on type of aarray
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'medium':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
 							break;
 						case 'small':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
 							break;
 						default:
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[$lstrKey] );
-							$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
+							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+							$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
 							break;
 					}
 
 					//append to auto generated options in order to discourage changing important
 					//configurations
-					if( in_array( $lstrKey, array( 'all_tbtags' ) ) )
-					{
+					if ( in_array( $lstrKey, array( 'all_tbtags' ) ) ) {
 						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
 										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Edit?" ) . "</a></span>\n";
 						break;
@@ -1095,13 +1080,10 @@ class Config
 
 					$lstrHTML .= "<select id=\"{$lstrKey}\" name=\"{$lstrKey}\">\n";
 
-					if( $lobjValues[$lstrKey] )
-					{
+					if ( $lobjValues[ $lstrKey ] ) {
 						$lstrHTML .= "<option value=\"TRUE\" selected>" . _( "TRUE" ) . "</option>\n";
 						$lstrHTML .= "<option value=\"FALSE\" >" . _( "FALSE" ) . "</option>\n";
-					}
-					else
-					{
+					} else {
 						$lstrHTML .= "<option value=\"TRUE\" >" . _( "TRUE" ) . "</option>\n";
 						$lstrHTML .= "<option value=\"FALSE\" selected>" . _( "FALSE" ) . "</option>\n";
 					}
@@ -1112,8 +1094,7 @@ class Config
 				default:
 					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lobjValues[$lstrKey]}\" ";
 
-					switch( strtolower( $lobjOption[4] ) )
-					{
+					switch ( strtolower( $lobjOption[4] ) ) {
 						case 'medium':
 							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
 							break;
@@ -1127,8 +1108,7 @@ class Config
 
 					//append to auto generated options in order to discourage changing important
 					//configurations
-					if( in_array( $lstrKey, array( 'BaseURL', 'CKBasePath' ) ) )
-					{
+					if ( in_array( $lstrKey, array( 'BaseURL', 'CKBasePath' ) ) ) {
 						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
 										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Not right?" ) . "</a></span>\n";
 						break;
@@ -1142,49 +1122,49 @@ class Config
 
 		}
 
-		if( $lstrForm == 'db' )
-		{
+		if ( $lstrForm == 'db' ) {
 			?>
-			<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-				<form id="config_form" action="setup-config.php" method="POST">
+            <div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+                <form id="config_form" action="setup-config.php" method="POST">
                     <div class="box required_field">
-					<h2 class="bw_head"><?php echo _( "Database Configurations" ); ?></h2>
+                        <h2 class="bw_head"><?php echo _( "Database Configurations" ); ?></h2>
 
 						<?php echo $lstrHTML; ?>
-					</div>
+                    </div>
                     <div class="box" align="center">
-					<h2 class="bw_head"><?php echo _( "Save" ); ?></h2>
+                        <h2 class="bw_head"><?php echo _( "Save" ); ?></h2>
 
-						<input type="submit" class="button" name="submit_setup_db_config" value="<?php echo _("Save Config"); ?>" />
-					</div>
-				</form>
-			</div>
+                        <input type="submit" class="button" name="submit_setup_db_config"
+                               value="<?php echo _( "Save Config" ); ?>"/>
+                    </div>
+                </form>
+            </div>
 			<?php
 		}
 
-		if( $lstrForm == 'site' )
-		{
+		if ( $lstrForm == 'site' ) {
 			?>
-			<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
-				<form id="config_form" action="install.php?step=1" method="POST">
-                        <div class="box required_field">
+            <div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
+                <form id="config_form" action="install.php?step=1" method="POST">
+                    <div class="box required_field">
                         <h2 class="bw_head"><?php echo _( "SubjectsPlus Installation" ); ?></h2>
 
 						<?php echo _( '<p>Welcome to the SubjetsPlus Installation. Please complete the following information so that we can continue with installation. These can be changed later.</p>' ) ?>
-					</div>
-                        <div class="box required_field">
-					<h2 class="bw_head"><?php echo _( "Site Configurations" ); ?></h2>
+                    </div>
+                    <div class="box required_field">
+                        <h2 class="bw_head"><?php echo _( "Site Configurations" ); ?></h2>
 
 						<?php echo $lstrHTML; ?>
-					</div>
+                    </div>
 
                     <div class="box" align="center">
-					<h2 class="bw_head"><?php echo _( "Install" ); ?></h2>
+                        <h2 class="bw_head"><?php echo _( "Install" ); ?></h2>
 
-						<input type="submit" class="button" name="submit_setup_site_config" value="<?php echo _("Install SubjectsPlus"); ?>" />
-					</div>
-				</form>
-			</div>
+                        <input type="submit" class="button" name="submit_setup_site_config"
+                               value="<?php echo _( "Install SubjectsPlus" ); ?>"/>
+                    </div>
+                </form>
+            </div>
 			<?php
 		}
 	}
@@ -1195,65 +1175,57 @@ class Config
 	 *
 	 * @return boolean
 	 */
-	private function setupConfigFile( )
-	{
+	private function setupConfigFile() {
 		//change globals for databse connection
 		global $hname;
 		global $uname;
 		global $pword;
 		global $dbName_SPlus;
-	    global $db_port;
+		global $db_port;
 
-		$hname = $this->lobjNewConfigValues[ 'hname' ];
-		$uname = $this->lobjNewConfigValues[ 'uname' ];
-		$pword = $this->lobjNewConfigValues[ 'pword' ];
-		$dbName_SPlus = $this->lobjNewConfigValues[ 'dbName_SPlus' ];
-        $db_port =  $this->lobjNewConfigValues[ 'db_port' ];
+		$hname        = $this->lobjNewConfigValues['hname'];
+		$uname        = $this->lobjNewConfigValues['uname'];
+		$pword        = $this->lobjNewConfigValues['pword'];
+		$dbName_SPlus = $this->lobjNewConfigValues['dbName_SPlus'];
+		$db_port      = $this->lobjNewConfigValues['db_port'];
 
 		//if installing, change the salt of the SubjectsPlus config file
-		if( $this->lboolChangeSalt )
-		{
-			$this->lobjConfigOptions[ 'salt' ] = array( "", "", "string", "", "", "", "" );
-			$this->lobjNewConfigValues[ 'salt' ] = $this->generateRandomString( 11 );
+		if ( $this->lboolChangeSalt ) {
+			$this->lobjConfigOptions['salt']   = array( "", "", "string", "", "", "", "" );
+			$this->lobjNewConfigValues['salt'] = $this->generateRandomString( 11 );
 		}
 
 		//if installing, change the API key of the SubjectsPlus config file
-		if( $this->lboolChangeAPIKey )
-		{
-			$this->lobjConfigOptions[ 'api_key' ] = array( "", "", "string", "", "", "", "" );
-			$this->lobjNewConfigValues[ 'api_key' ] = $this->generateRandomString( 20, FALSE );
+		if ( $this->lboolChangeAPIKey ) {
+			$this->lobjConfigOptions['api_key']   = array( "", "", "string", "", "", "", "" );
+			$this->lobjNewConfigValues['api_key'] = $this->generateRandomString( 20, false );
 		}
 
 		//go through file array to change the variables configurations
-		foreach( $this->lobjConfigFile as $lintLineNumber => $lstrLine )
-		{
+		foreach ( $this->lobjConfigFile as $lintLineNumber => $lstrLine ) {
 			//determine whether current line contains a variable declaration at the beginning
 			//of the line
-			if ( ! preg_match( '/^\$([^ ]+)[ ]*=[ ]*(.+)[ ]*;/', $lstrLine, $lobjMatch ) )
+			if ( ! preg_match( '/^\$([^ ]+)[ ]*=[ ]*(.+)[ ]*;/', $lstrLine, $lobjMatch ) ) {
 				continue;
+			}
 
 			//the matched string from the above preg_match should be a key of the options array
 			//and continue only if the key in the options array exists
-			if( isset( $this->lobjConfigOptions[ $lobjMatch[1] ] ) )
-			{
+			if ( isset( $this->lobjConfigOptions[ $lobjMatch[1] ] ) ) {
 				$lobjOption = $this->lobjConfigOptions[ $lobjMatch[1] ];
 
 				//based on the type defined in the option array, write new declaration
 				//of configuration variable
-				switch( $lobjOption[2] )
-				{
+				switch ( $lobjOption[2] ) {
 					case 'array':
 						$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = array( ";
 
 						$lobjList = $this->lobjNewConfigValues[ $lobjMatch[1] ];
 
-						if( count( $lobjList ) == 0 )
-						{
+						if ( count( $lobjList ) == 0 ) {
 							$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
-						}else
-						{
-							foreach( $lobjList as $lstrItem )
-							{
+						} else {
+							foreach ( $lobjList as $lstrItem ) {
 								$this->lobjConfigFile[ $lintLineNumber ] .= '"' . $lstrItem . '", ';
 							}
 
@@ -1267,13 +1239,10 @@ class Config
 
 						$lobjList = $this->lobjNewConfigValues[ $lobjMatch[1] ];
 
-						if( count( $lobjList ) == 0 )
-						{
+						if ( count( $lobjList ) == 0 ) {
 							$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
-						}else
-						{
-							foreach( $lobjList as $lstrKey => $lstrItem )
-							{
+						} else {
+							foreach ( $lobjList as $lstrKey => $lstrItem ) {
 								$this->lobjConfigFile[ $lintLineNumber ] .= '"' . $lstrKey . '"' . ' => "' . $lstrItem . '", ';
 							}
 
@@ -1283,11 +1252,9 @@ class Config
 						}
 						break;
 					case 'boolean':
-						if( $this->lobjNewConfigValues[ $lobjMatch[1] ] )
-						{
+						if ( $this->lobjNewConfigValues[ $lobjMatch[1] ] ) {
 							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = TRUE;\r\n";
-						}else
-						{
+						} else {
 							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = FALSE;\r\n";
 						}
 						break;
@@ -1298,7 +1265,7 @@ class Config
 			}
 		}
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -1309,36 +1276,30 @@ class Config
 	 *
 	 * @return void
 	 */
-	private function setConfigValues( )
-	{
+	private function setConfigValues() {
 		$lobjValues = array();
 
-		foreach( $this->lobjConfigFile as $lintLineNumber => $lstrLine )
-		{
+		foreach ( $this->lobjConfigFile as $lintLineNumber => $lstrLine ) {
 			//if not a variable declaration, continue to next line
-			if ( ! preg_match( '/^\$([^ ]+)[ ]*=[ ]*([^;]*)[ ]*;/', $lstrLine, $lobjMatch ) )
+			if ( ! preg_match( '/^\$([^ ]+)[ ]*=[ ]*([^;]*)[ ]*;/', $lstrLine, $lobjMatch ) ) {
 				continue;
+			}
 
-			if( isset( $this->lobjConfigOptions[ $lobjMatch[1] ] ) )
-			{
+			if ( isset( $this->lobjConfigOptions[ $lobjMatch[1] ] ) ) {
 				$lobjOption = $this->lobjConfigOptions[ $lobjMatch[1] ];
 
 				//get value of variable depending on given type
-				switch( $lobjOption[2] )
-				{
+				switch ( $lobjOption[2] ) {
 					case 'array':
-						preg_match( '/array\((.*)\)/' , $lobjMatch[2], $lobjElements );
+						preg_match( '/array\((.*)\)/', $lobjMatch[2], $lobjElements );
 
-						if( trim( $lobjElements[1] ) == '' )
-						{
+						if ( trim( $lobjElements[1] ) == '' ) {
 							$lobjValues[ $lobjMatch[1] ] = array();
-						}else
-						{
+						} else {
 							$lobjElements = explode( ',', $lobjElements[1] );
 
 							//remove first and last character (quotes)
-							foreach( $lobjElements as $key => $lstrElement )
-							{
+							foreach ( $lobjElements as $key => $lstrElement ) {
 								$lstrElement = trim( $lstrElement );
 								$lstrElement = substr( $lstrElement, 1, ( strlen( $lstrElement ) - 2 ) );
 
@@ -1350,26 +1311,23 @@ class Config
 
 						break;
 					case 'aarray':
-						preg_match( '/array\((.*)\)/' , $lobjMatch[2], $lobjElements );
+						preg_match( '/array\((.*)\)/', $lobjMatch[2], $lobjElements );
 
 						$lobjAArray = array();
 
-						if( trim( $lobjElements[1] ) == '' )
-						{
+						if ( trim( $lobjElements[1] ) == '' ) {
 							$lobjValues[ $lobjMatch[1] ] = array();
-						}else
-						{
+						} else {
 							$lobjElements = explode( ',', $lobjElements[1] );
 
 							//remove first and last character (quotes)
-							foreach( $lobjElements as $key => $lstrElement )
-							{
+							foreach ( $lobjElements as $key => $lstrElement ) {
 								$lobjKeyValue = explode( '=>', $lstrElement );
 
-								$lstrKey = trim( $lobjKeyValue[0] );
+								$lstrKey   = trim( $lobjKeyValue[0] );
 								$lstrValue = trim( $lobjKeyValue[1] );
 
-								$lstrKey = substr( $lstrKey, 1, ( strlen( $lstrKey ) - 2 ) );
+								$lstrKey   = substr( $lstrKey, 1, ( strlen( $lstrKey ) - 2 ) );
 								$lstrValue = substr( $lstrValue, 1, ( strlen( $lstrValue ) - 2 ) );
 
 								$lobjAArray[ $lstrKey ] = $lstrValue;
@@ -1380,15 +1338,13 @@ class Config
 						break;
 					case 'boolean':
 						$lstrValue = $lobjMatch[2];
-						$lstrValue = trim($lstrValue);
-						$lstrValue = strtolower($lstrValue);
+						$lstrValue = trim( $lstrValue );
+						$lstrValue = strtolower( $lstrValue );
 
-						if($lstrValue == 'true')
-						{
-							$lobjValues[ $lobjMatch[1] ] = TRUE;
-						}elseif( $lstrValue == 'false' )
-						{
-							$lobjValues[ $lobjMatch[1] ] = FALSE;
+						if ( $lstrValue == 'true' ) {
+							$lobjValues[ $lobjMatch[1] ] = true;
+						} elseif ( $lstrValue == 'false' ) {
+							$lobjValues[ $lobjMatch[1] ] = false;
 						}
 						break;
 					default:
@@ -1410,21 +1366,22 @@ class Config
 	 * sp_Config::generateRandomString() - this method is used to generate a string of random characters
 	 *
 	 * @param integer $lintLength
+	 *
 	 * @return string
 	 */
-	private function generateRandomString( $lintLength = 10, $lboolSpecialCharacters = TRUE )
-	{
+	private function generateRandomString( $lintLength = 10, $lboolSpecialCharacters = true ) {
 		//list of vaild random characters; includes special characters depending on flag
-		if( $lboolSpecialCharacters )
+		if ( $lboolSpecialCharacters ) {
 			$lstrCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%^&*';
-		else
+		} else {
 			$lstrCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		}
 
 		$lstrRandomString = '';
-		for ($i = 0; $i < $lintLength; $i++)
-		{
-			$lstrRandomString .= $lstrCharacters[rand(0, strlen($lstrCharacters) - 1)];
+		for ( $i = 0; $i < $lintLength; $i ++ ) {
+			$lstrRandomString .= $lstrCharacters[ rand( 0, strlen( $lstrCharacters ) - 1 ) ];
 		}
+
 		return $lstrRandomString;
 	}
 
@@ -1432,16 +1389,17 @@ class Config
 	 * sp_Config::arrayToCommaList() - this method converts an array to a comma separated list string
 	 *
 	 * @param array $lobjList
+	 *
 	 * @return string
 	 */
-	private function arrayToCommaList( $lobjList )
-	{
+	private function arrayToCommaList( $lobjList ) {
 		$lstrList = '';
 
-		if( count( $lobjList ) == 0 ) return $lstrList;
+		if ( count( $lobjList ) == 0 ) {
+			return $lstrList;
+		}
 
-		foreach( $lobjList as $lstrElement )
-		{
+		foreach ( $lobjList as $lstrElement ) {
 			$lstrList .= $lstrElement . ',';
 		}
 
@@ -1455,16 +1413,17 @@ class Config
 	 * sp_Config::aarrayToCommaList() - this method converts an associative array to a comma separated list string
 	 *
 	 * @param array $lobjList
+	 *
 	 * @return string
 	 */
-	private function aarrayToCommaList( $lobjList )
-	{
+	private function aarrayToCommaList( $lobjList ) {
 		$lstrList = '';
 
-		if( count( $lobjList ) == 0 ) return $lstrList;
+		if ( count( $lobjList ) == 0 ) {
+			return $lstrList;
+		}
 
-		foreach( $lobjList as $lstrKey => $lstrElement )
-		{
+		foreach ( $lobjList as $lstrKey => $lstrElement ) {
 			$lstrList .= $lstrKey . "=" . $lstrElement . ',';
 		}
 
@@ -1478,19 +1437,20 @@ class Config
 	 * sp_Config::commaListToArray() - this method converts a comma separated list string to an array
 	 *
 	 * @param string $lstrList
+	 *
 	 * @return array
 	 */
-	private function commaListToArray( $lstrList )
-	{
+	private function commaListToArray( $lstrList ) {
 		$lobjList = array();
 
 		$lobjSplit = explode( ',', $lstrList );
 
-		foreach( $lobjSplit as $lstrElement )
-		{
+		foreach ( $lobjSplit as $lstrElement ) {
 			$lstrElement = trim( $lstrElement );
 
-			if( $lstrElement != '' ) $lobjList[] = $lstrElement;
+			if ( $lstrElement != '' ) {
+				$lobjList[] = $lstrElement;
+			}
 		}
 
 		return $lobjList;
@@ -1500,21 +1460,22 @@ class Config
 	 * sp_Config::commaListToAArray() - this method converts a comma separated list string to an associative array
 	 *
 	 * @param string $lstrList
+	 *
 	 * @return array
 	 */
-	private function commaListToAArray( $lstrList )
-	{
+	private function commaListToAArray( $lstrList ) {
 		$lobjList = array();
 
 		$lobjSplit = explode( ',', $lstrList );
 
-		foreach( $lobjSplit as $lstrElement )
-		{
+		foreach ( $lobjSplit as $lstrElement ) {
 			$lstrElement = trim( $lstrElement );
 
 			$lobjSplit2 = explode( "=", $lstrElement );
 
-			if( $lstrElement != '' ) $lobjList[ $lobjSplit2[0] ] = $lobjSplit2[1];
+			if ( $lstrElement != '' ) {
+				$lobjList[ $lobjSplit2[0] ] = $lobjSplit2[1];
+			}
 		}
 
 		return $lobjList;
@@ -1527,29 +1488,26 @@ class Config
 	 * @param array $lobjList
 	 * @param array $lobjSelected
 	 * @param string $lstrKey
+	 *
 	 * @return string
 	 */
-	private function arrayToTicks( $lobjList, $lobjSelected = array(), $lstrKey = "ticks" )
-	{
+	private function arrayToTicks( $lobjList, $lobjSelected = array(), $lstrKey = "ticks" ) {
 		$lstrHTML = '';
 
-		foreach( $lobjList as $lstrElement )
-		{
+		foreach ( $lobjList as $lstrElement ) {
 			$lstrHTML .= "<span name=\"" . $lstrKey . "\" class=\"";
 
 			//show the preselected configurations as on
-			if( in_array( $lstrElement, $lobjSelected ) )
-			{
+			if ( in_array( $lstrElement, $lobjSelected ) ) {
 				$lstrHTML .= 'ctag-on';
-			}else
-			{
+			} else {
 				$lstrHTML .= 'ctag-off';
 			}
 
 			$lstrHTML .= "\">" . $lstrElement . "</span> ";
 		}
 
-		$lstrHTML .= "<input name=\"" . $lstrKey . "\" type=\"hidden\" value=\"" . $this->arrayToCommaList( $lobjSelected ) . "\" />" ;
+		$lstrHTML .= "<input name=\"" . $lstrKey . "\" type=\"hidden\" value=\"" . $this->arrayToCommaList( $lobjSelected ) . "\" />";
 
 		return $lstrHTML;
 	}
@@ -1560,21 +1518,18 @@ class Config
 	 *
 	 * @return void
 	 */
-	private function autoGenerateConfigs()
-	{
-		$lstrURL = $_SERVER[ 'REQUEST_URI' ];
+	private function autoGenerateConfigs() {
+		$lstrURL   = $_SERVER['REQUEST_URI'];
 		$lobjSplit = explode( '/', $lstrURL );
 
-		for( $i=(count($lobjSplit) - 1); $i>=0; $i-- )
-		{
-			$lstrItem = strtolower( trim( $lobjSplit[$i] ) );
-			unset($lobjSplit[$i]);
+		for ( $i = ( count( $lobjSplit ) - 1 ); $i >= 0; $i -- ) {
+			$lstrItem = strtolower( trim( $lobjSplit[ $i ] ) );
+			unset( $lobjSplit[ $i ] );
 
-			if( $lstrItem == 'control' )
-			{
-				$this->lobjConfigValues[ 'BaseURL' ] = urldecode( 'http://' . $_SERVER[ 'HTTP_HOST' ] . implode( '/', $lobjSplit ) . '/' );
-				$this->lobjConfigValues[ 'CKBasePath' ] = urldecode( implode( '/', $lobjSplit ) .'/' . 'ckeditor' . '/' );
-				$this->lobjConfigValues[ 'all_tbtags' ] = array( 'main' => '' );
+			if ( $lstrItem == 'control' ) {
+				$this->lobjConfigValues['BaseURL']    = urldecode( 'http://' . $_SERVER['HTTP_HOST'] . implode( '/', $lobjSplit ) . '/' );
+				$this->lobjConfigValues['CKBasePath'] = urldecode( implode( '/', $lobjSplit ) . '/' . 'ckeditor' . '/' );
+				$this->lobjConfigValues['all_tbtags'] = array( 'main' => '' );
 				break;
 			}
 		}
