@@ -25,14 +25,12 @@ function layout() {
 		},
 		bindUiActions : function() {
 
-			myLayout.activateLayoutButtons();
+			//myLayout.activateLayoutButtons();
 
 		},
 		init : function() {
-
-
 		
-			document.addEventListener("DOMContentLoaded", function() {
+			$(document).ready(function() {
 				myLayout.initialLayout();
 				myLayout.selectedLayout();
 				myLayout.layoutSections();
