@@ -134,7 +134,8 @@ function section() {
 		},
 
 		clickTabOnSwitch : function () {
-			$('body').on('click', '.ui-tabs-nav > li', function() {
+			$('.ui-tabs-nav > li.child-tab').on('click', function() {
+				console.log('tab: ' + $(this).attr('aria-controls'));
 				 var tabIndex = $(this).attr('aria-controls').split('-')[1];
 				$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
 				mySection.viewSectionControls();
@@ -156,14 +157,80 @@ function section() {
 
 				var pluslets = [];
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
-				console.log('pluslets: ' + pluslets);
+				//console.log('pluslets: ' + pluslets);
+
+				pluslets.then(function(data) {
+
+					var masterClones = [];
+					$.each(data.pluslets, function(key, value) {
+						var pluslet_id = value.pluslet_id;
+						console.log('pluslet_id: ' + pluslet_id);
+
+						masterClones = mySection.hasMasterClones(pluslet_id);
+						console.log(masterClones);
+
+						masterClones.then(function(data) {
+							console.log(data.cloned_pluslets);
+
+
+							if(data.cloned_pluslets.length > 0) {
+
+								$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
+									autoOpen: true,
+									modal: false,
+									width: 'auto',
+									height: 'auto',
+									resizable: false,
+									buttons: {
+										Cancel: function () {
+											$(this).dialog('close');
+										}
+									}
+								});
+								return false;
+							} else {
+								mySection.deleteSection(section_id);
+							}
+
+						});
+					});
+				});
 
 
 			});
 
 		},
 
-		deleteSection: function(data) {
+		deleteSection: function(section_id) {
+
+			$('<div id="dialog" class=\'delete_confirm\' title=\'Are you sure?\'>All content in this section will be deleted.</div>').dialog({
+				autoOpen: false,
+				modal: true,
+				width: 'auto',
+				height: 'auto',
+				resizable: false,
+				buttons: {
+					Yes: function () {
+						// Remove node
+						$("#section_" + section_id).remove();
+						$('#response').hide();
+
+						var save = saveSetup();
+						save.saveGuide();
+						$('#save_guide').fadeOut();
+
+						$(this).dialog('close');
+						return false;
+
+					},
+					Cancel: function () {
+						$(this).dialog('close');
+					}
+				}
+			});
+
+			$('.delete_confirm').first().dialog('open');
+			return false;
 
 
 		},
@@ -176,6 +243,16 @@ function section() {
 				dataType: "json"
 			});
 		},
+
+
+		hasMasterClones: function (pluslet_id) {
+			return $.ajax({
+				url: "helpers/fetch_cloned_pluslets.php",
+				type: "GET",
+				data: 'master_id=' + pluslet_id,
+				dataType: "json"
+			});
+		}
 	};
 
 	return mySection;
