@@ -10,13 +10,13 @@ function articlesPlus() {
         init: function () {
             myArticlesPlus.bindUiActions();
         },
-        searchArticlesPlus : function () {
+        searchArticlesPlus: function () {
 
-            $('#search-articles-plus').on('click', function() {
-
-                document.getElementById("primoQueryArticles").value = "any,contains," + document.getElementById("primoQueryTempArticles").value.replace(/[,]/g, " ");
-
-                document.forms["searchFormPrimo"].submit();
+            $(".pluslet-articles-plus-form-button").click(function (e) {
+                var form =  $(this).parents('form:first');
+                var primoQueryArticlesTempValue = form.find('#primoQueryTempArticles').val();
+                form.find('#primoQueryArticles').val("any,contains," + primoQueryArticlesTempValue.replace(/[,]/g, " "));
+                form.submit();
             });
 
         }
