@@ -384,7 +384,7 @@ function pluslet() {
 
         expandCollapseCSS: function () {
             //Expand/Collapse Trigger CSS for all Pluslets on a Tab
-            document.addEventListener("DOMContentLoaded", function () {
+            $(document).ready( function () {
                 $("#expand_tab").click(function () {
                     $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
                     $('.pluslet_body').toggle();
@@ -395,7 +395,7 @@ function pluslet() {
 
         expandCollapseIndividualPluslet: function () {
             // expand collapse individual pluslets
-            document.addEventListener("DOMContentLoaded", function () {
+            $(document).ready( function () {
                 // add font-awesome icon to pluslet
                 $('.pluslet_body').after('<div class="expand_collapse"><i class="fa fa-angle-up" title="Expand Collapse Box"></i></div>');
 
