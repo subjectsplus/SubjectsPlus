@@ -20,13 +20,17 @@ function pluslet() {
         strings: {},
         init: function () {
 
-            var g = guide();
-            var subjectId = g.getSubjectId();
+            $(document).ready(function() {
+                var g = guide();
+                var subjectId = g.getSubjectId();
 
-            myPluslet.bindUiActions();
-            myPluslet.makeEditable('a[id*=edit]', subjectId);
-            myPluslet.makeDeleteable('a[id*=delete]');
-            myPluslet.makeDeleteable('.section_remove', 'sections');
+                myPluslet.bindUiActions();
+                myPluslet.makeEditable('a[id*=edit]', subjectId);
+                myPluslet.makeDeleteable('a[id*=delete]');
+                //myPluslet.makeDeleteable('.section_remove', 'sections');
+            });
+
+
 
         },
         bindUiActions: function () {
@@ -142,7 +146,7 @@ function pluslet() {
 
         expandPluslet: function () {
             //Expand/Collapse Trigger CSS for all Pluslets on a Tab
-            document.addEventListener("DOMContentLoaded", function () {
+            $(document).ready( function () {
 
                 $('#expand_tab').click(function () {
 
@@ -269,21 +273,16 @@ function pluslet() {
             });
         },
 
-        makeDeleteable: function (lstrSelector, lstrType)
+        makeDeleteable: function (lstrSelector, lstrType) {
             /////////////////////////////
             //DELETE SECTION
             /////////////////////////////
-
-        {
             if (lstrType === 'sections') {
 
                 $('.guidewrapper').on('click', lstrSelector, function (event) {
 
                     var delete_id = $(this).parent().parent().attr('id').split('_')[1];
                     var element_deletion = this;
-
-                    myPluslet.fetchPlusletsBySectionId(delete_id).done(myPluslet.handlePlusletsBySectionIdData(delete_id, element_deletion));
-                    //console.log(pluslets);
 
                     console.log('lstrSelector: ' + lstrSelector);
                     console.log('delete_id: ' + delete_id);
@@ -423,31 +422,6 @@ function pluslet() {
 
 
 
-        fetchPlusletsBySectionId: function(section_id) {
-            return $.ajax({
-                url: "helpers/fetch_pluslets_by_section_id.php",
-                type: "GET",
-                data: 'section_id=' + section_id,
-                dataType: "json"
-            });
-        },
-
-        handlePlusletsBySectionIdData(data, section_id, element_deletion) {
-
-            var pluslets = [];
-            $.each(data.pluslets, function (key, value) {
-                pluslets.push(value);
-
-            });
-
-            console.log(section_id);
-            console.log(element_deletion);
-
-            $.each(pluslets, function (key, value) {
-                console.log('key: ' + key + ' value: ' + value.pluslet_id);
-            });
-
-        },
 
 
         fetchAllClones: function (this_sections_pluslets, element_deletion) {

@@ -107,7 +107,7 @@ function tabs() {
                 var events = $._data(data, "events");
 
                 if (events) {
-                    console.log(events);
+                    //console.log(events);
                     var onClickHandlers = events['click'];
 
                     // Only one handler. Nothing to change.
@@ -164,7 +164,7 @@ function tabs() {
                 buttons: {
                     "Save": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
-                        console.log(window.lastClickedTab);
+                        //console.log(window.lastClickedTab);
                         $('a[href="#tabs-' + id + '"]').text($('input[name="rename_tab_title"]').val());
                         $('a[href="#tabs-' + id + '"]').parent('li').attr('data-visibility', $('select[name="visibility"]').val());
 
@@ -174,7 +174,7 @@ function tabs() {
                                     events = elementData.events;
 
                                 var onClickHandlers = events['click'];
-                                console.log(onClickHandlers);
+                                //console.log(onClickHandlers);
                                 // Only one handler. Nothing to change.
                                 if (onClickHandlers.length === 1) {
                                     return;
@@ -216,7 +216,7 @@ function tabs() {
 
                         $(this).dialog("close");
                         $("#response").hide();
-                        console.log('save guide fade in');
+                        //console.log('save guide fade in');
                         $('#save_guide').fadeIn();
 
                     },
@@ -527,7 +527,7 @@ function tabs() {
 
                             $('.metadata-url').show();
                             $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);
-                            console.log(new_subject_id);
+                            //console.log(new_subject_id);
                             window.location.href = "metadata.php?subject_id=" + new_subject_id;
                         },
                         fail: function (err) {

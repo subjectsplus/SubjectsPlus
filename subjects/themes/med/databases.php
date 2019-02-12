@@ -261,12 +261,11 @@ if ($rfeatured = $featured_statement->fetchAll()) {
 // Legend //
 // <img src=\"$IconPath/lock_unlock.png\" width=\"13\" height=\"13\" border=\"0\" alt=\"Unrestricted Resource\"> = Free Resource <br />\n
 
-$legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted Resource\"> =  " . _("Campus Faculty, Staff &amp; Students only") . "\n<br />
-<img src=\"$IconPath/information.png\" border=\"0\" alt=\"more information icon\" /> = " . _("Click for more information") . "<br /><br />
-<!--<img src=\"$IconPath/full_text.gif\" width=\"13\" height=\"13\" border=\"0\" alt=\"Some full text available\"> = " . _("Some full text") . "<br />\n-->
-<img src=\"$IconPath/camera.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes images\"> = " . _("Images") . "<br />\n
-<img src=\"$IconPath/television.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes video\"> = " . _("Video files") . "<br />\n
-<img src=\"$IconPath/sound.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes audio\"> = " . _("Audio files") . "<br />\n
+$legend = "<p>\n<i class=\"fa fa-lock\" aria-hidden=\"true\" alt=\"Restricted Resource\"></i> =  " . _("Campus Faculty, Staff &amp; Students only") . "<br />
+<i class=\"fa fa-info-circle\" aria-hidden=\"true\" alt=\"Restricted Resource\"></i> = " . _("Click for more information") . "<br />
+<i class=\"fa fas fa-camera\" aria-hidden=\"true\"></i> = " . _("Images") . "<br />\n
+<i class=\"fa fa-video-camera\"></i> = " . _("Video files") . "<br />\n
+<i class=\"fas fa fa-volume-up\" aria-hidden=\"true\"></i> = " . _("Audio files") . "<br />\n
 </p>\n";
 
 ////////////////////////////

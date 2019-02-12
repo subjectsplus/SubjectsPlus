@@ -638,7 +638,7 @@ function saveSetup() {
 				data: payload,
 				dataType: "json",
 				success: function(data) {
-					console.log(data);
+					//console.log(data);
 					var newIds = [];
 					$.each(data.tab_ids, function (index, value) {
 						newIds.push(value.tab_id);
@@ -650,7 +650,7 @@ function saveSetup() {
 					$.each(items, function(index, obj) {
 						if($.isNumeric($(obj).attr('id'))) {
 							var newId = $(newIds).get(index - 1);
-							console.log( $(obj).attr('id', newId) );
+							//console.log( $(obj).attr('id', newId) );
 						}
 					});
 				}
