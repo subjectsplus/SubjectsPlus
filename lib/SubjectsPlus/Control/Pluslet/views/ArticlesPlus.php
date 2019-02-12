@@ -32,7 +32,7 @@ if( (!empty($this->flashMessage)) ) {
 } else { ?>
 
 <div class="articlesplus-search">
-    <form action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8" method="GET" id="summon_search2" class="pure-form" target="_blank" name="articlesplusSearchForm">
+    <form action="<?php echo $action; ?>" enctype="application/x-www-form-urlencoded; charset=utf-8" method="GET" id="summon_search2" class="pure-form pluslet-articles-plus-form" target="_blank" name="articlesplusSearchForm">
         <fieldset>
 
             <!-- Customizable Parameters -->
@@ -59,7 +59,7 @@ if( (!empty($this->flashMessage)) ) {
 
             <legend><?php echo $form_legend; ?></legend>
             <input type="text" id="primoQueryTempArticles" value="" class="searchinput-1" />
-            <input id="search-articles-plus" title="Search" type="submit" value="Search" alt="Search" class="pure-button pure-button-pluslet">
+            <input id="search-articles-plus" title="Search" type="submit" value="Search" alt="Search" class="pure-button pure-button-pluslet pluslet-articles-plus-form-button">
 
         </fieldset>
     </form>
