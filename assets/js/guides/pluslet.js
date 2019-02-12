@@ -534,9 +534,8 @@ function pluslet() {
                                         flag: 'delete'
                                     },
                                     function () {
-                                        $('#response').fadeIn();
-                                        $('#save_guide').fadeIn();
-
+                                        $('#response').fadeOut();
+                                        $('#save_guide').fadeOut();
                                     });
 
                                 // Remove node
