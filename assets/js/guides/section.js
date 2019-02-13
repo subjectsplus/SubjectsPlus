@@ -153,7 +153,7 @@ function section() {
 			$('.section_remove').on('click', function() {
 
 				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
-				//console.log( 'section_id: ' + section_id);
+				console.log( 'section_id 1: ' + section_id);
 
 				var pluslets = [];
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
@@ -198,7 +198,7 @@ function section() {
 						});
 
 					} else {
-
+						console.log('section_id 2: ' + section_id);
 						mySection.deleteSection(section_id);
 
 					}

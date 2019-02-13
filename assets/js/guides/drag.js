@@ -219,14 +219,14 @@ function drag() {
 // Make "Save Changes" button appear on sorting
 ////////////////////////////
             var sortable_element = $(lstrSelector);
-
+            console.log(lstrType);
             if (lstrType === 'sections') {
                 sortable_element.sortable({
                     opacity: 0.7,
                     cancel: '.unsortable',
                     handle: '.section_sort',
-                    receive: function (event, ui) {
-                        $("#response").hide();
+                    update: function (event, ui) {
+                        $("#response").show();
                         var save = saveSetup();
                         save.saveGuide();
                         console.log('sections saveguide');
@@ -256,6 +256,7 @@ function drag() {
                         $("#response").hide();
                         var save = saveSetup();
                         save.saveGuide();
+                        console.log('pluslets saveguide');
                         $('#save_guide').fadeOut();
                     },
                     start: function (event, ui) {

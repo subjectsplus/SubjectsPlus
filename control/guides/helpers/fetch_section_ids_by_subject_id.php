@@ -10,12 +10,12 @@ require_once("../../includes/autoloader.php");
 require_once("../../includes/config.php");
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\Guide\PlusletData;
+use SubjectsPlus\Control\Guide\SectionService;
 header('Content-Type: application/json');
 
 $db = new Querier;
 
-$objPlusletData = new SectionData($db);
+$objPlusletData = new SectionService($db);
 $objPlusletData->fetchSectionIdsBySubjectId($_GET['subject_id']);
 
 echo $objPlusletData->toJSON();
