@@ -153,28 +153,33 @@ function section() {
 			$('.section_remove').on('click', function() {
 
 				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
-				console.log( 'section_id 1: ' + section_id);
+				console.log( 'on click section_id: ' + section_id);
 
 				var pluslets = [];
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
-				//console.log('pluslets: ' + pluslets);
+				console.log('pluslets: ' + pluslets);
 
 				pluslets.then(function(data) {
+
+					if(data.pluslets.length == 0) {
+						console.log('no pluslets delete section: ' + section_id);
+						mySection.deleteSection(section_id);
+
+					}
+
 
 					if(data.pluslets.length > 0) {
 
 						var masterClones = [];
+						var canDeleteSection = false;
 						$.each(data.pluslets, function(key, value) {
 							var pluslet_id = value.pluslet_id;
 							//console.log('pluslet_id: ' + pluslet_id);
 
 							masterClones = mySection.hasMasterClones(pluslet_id);
-							console.log(masterClones);
-
+							//console.log(masterClones);
 							masterClones.then(function(data) {
 								//console.log(data.cloned_pluslets);
-
-
 								if(data.cloned_pluslets.length > 0) {
 
 									$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
@@ -191,24 +196,18 @@ function section() {
 									});
 									return false;
 								} else {
-									mySection.deleteSection(section_id);
+									canDeleteSection = true;
 								}
-
 							});
 						});
 
-					} else {
-						console.log('section_id 2: ' + section_id);
-						mySection.deleteSection(section_id);
-
+						if(canDeleteSection == true) {
+							console.log('no clones: ' + section_id);
+							mySection.deleteSection(section_id);
+						}
 					}
-
-
 				});
-
-
 			});
-
 		},
 
 		deleteSection: function(section_id) {
@@ -222,6 +221,7 @@ function section() {
 				buttons: {
 					Yes: function () {
 						// Remove node
+						console.log('section_id deleteSection: ' + section_id);
 						$("#section_" + section_id).remove();
 						$('#response').hide();
 

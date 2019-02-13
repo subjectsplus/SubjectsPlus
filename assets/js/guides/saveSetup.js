@@ -649,7 +649,7 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         if ($.isNumeric($(obj).attr('id'))) {
                             var newId = $(newIds).get(index - 1);
-                            console.log( $(obj).attr('id', newId) );
+                            //console.log( $(obj).attr('id', newId) );
                         }
                     });
                 }
@@ -672,7 +672,7 @@ function saveSetup() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
+                    //console.log(data);
                     var newIds = [];
                     $.each(data.section_ids, function (index, value) {
                         newIds.push(value.section_id);
@@ -681,13 +681,13 @@ function saveSetup() {
                     $(newIds).map(function (index, value) {
                     });
 
-                    console.log($(newIds));
+                    //console.log($(newIds));
 
                     var items = $('.sp_section');
                     $.each(items, function (index, obj) {
-                        console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
+                        //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
                         var newId = "section_" + $(newIds).get(index);
-                        console.log( $(obj).attr('id', newId) );
+                        //console.log( $(obj).attr('id', newId) );
 
                     });
                 }
