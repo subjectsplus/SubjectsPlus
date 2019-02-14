@@ -219,18 +219,18 @@ function drag() {
 // Make "Save Changes" button appear on sorting
 ////////////////////////////
             var sortable_element = $(lstrSelector);
+            console.log(lstrType);
+
+
 
             if (lstrType === 'sections') {
                 sortable_element.sortable({
                     opacity: 0.7,
                     cancel: '.unsortable',
                     handle: '.section_sort',
-                    receive: function (event, ui) {
+                    update: function (event, ui) {
                         $("#response").hide();
-                        var save = saveSetup();
-                        save.saveGuide();
-                        console.log('sections saveguide');
-                        $('#save_guide').fadeOut();
+
                     },
                     start: function (event, ui) {
                         $(ui.item).find('.dropspotty').hide();
@@ -241,6 +241,10 @@ function drag() {
                     stop: function (event, ui) {
                         $(ui.item).find('.dropspotty').show();
                         $(ui.item).find('.pluslet').show();
+                        var save = saveSetup();
+                        save.saveGuide();
+                        console.log('sections saveguide');
+                        $('#save_guide').fadeOut();
                     }
                 });
             } else {
@@ -252,11 +256,9 @@ function drag() {
                     tolerance: 'pointer',
                     cancel: '.unsortable',
                     handle: 'div.pluslet_sort',
-                    receive: function (event, ui) {
+                    update: function (event, ui) {
                         $("#response").hide();
-                        var save = saveSetup();
-                        save.saveGuide();
-                        $('#save_guide').fadeOut();
+
                     },
                     start: function (event, ui) {
                         $(ui.item).children('.pluslet_body').hide();
@@ -274,6 +276,11 @@ function drag() {
                         }
                         $(ui.item).children().children('.titlebar_text').show();
                         $(ui.item).children().children('.titlebar_options').show();
+
+                        var save = saveSetup();
+                        save.saveGuide();
+                        console.log('pluslets saveguide');
+                        $('#save_guide').fadeOut();
 
                     }
                 });
