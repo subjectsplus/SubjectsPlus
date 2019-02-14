@@ -8,23 +8,46 @@
 
 namespace SubjectsPlus\Control\Guide;
 
+use PDO;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Interfaces\OutputInterface;
 
 class SectionService implements OutputInterface {
 
-	private $db;
+	private $_db;
+	private $_connection;
 	public $section_ids;
+	public $last_insert;
 
 
 	public function __construct(Querier $db) {
-		$this->db = $db;
+		$this->_db = $db;
+		$this->_connection = $this->_db->getConnection();
+		$this->_connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 	}
 
+	public function create($section_index, $layout, $tab_id) {
+
+		$this->_connection->beginTransaction();
+		$this->last_insert = null;
+
+		$statement = $this->_connection->prepare("INSERT INTO section (section_index, layout, tab_id) VALUES (:section_index, :layout, :tab_id)");
+
+		$statement->bindParam(':section_index', $section_index);
+		$statement->bindParam(':layout', $layout);
+		$statement->bindParam(':tab_id', $tab_id);
+
+		$statement->execute();
+		$this->last_insert = $this->_connection->lastInsertId();
+		$this->_connection->commit();
+
+		return $this->last_insert;
+
+
+	}
 
 	public function fetchSectionIdsBySubjectId( $subject_id ) {
-		$connection = $this->db->getConnection();
-		$statement = $connection->prepare( "SELECT * FROM section
+		$statement = $this->_connection->prepare( "SELECT * FROM section
     											INNER JOIN tab on section.tab_id = tab.tab_id
 											    INNER JOIN subject on tab.subject_id = subject.subject_id
 												WHERE tab.subject_id = :subject_id" );
@@ -32,7 +55,6 @@ class SectionService implements OutputInterface {
 		$statement->execute();
 		$section_ids        = $statement->fetchAll();
 		$this->section_ids = $section_ids;
-
 	}
 
 
