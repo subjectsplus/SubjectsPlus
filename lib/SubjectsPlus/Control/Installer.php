@@ -435,7 +435,7 @@ class Installer
 					'This is the default user with a SubjectsPlus install.  You should delete or rename me before you go live!',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL)",
 					"INSERT INTO `location_title` VALUES (1,1)",
 					"INSERT INTO `rank` VALUES (1,0,1,1,1,'',1)",
-					"INSERT INTO `staff_subject` VALUES (1,1)"
+					"INSERT INTO `staff_subject` VALUES (1,1,1)"
 			);
 	}
 

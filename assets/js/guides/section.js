@@ -159,19 +159,18 @@ function section() {
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
 				console.log('pluslets: ' + pluslets);
 
+
 				pluslets.then(function(data) {
+
+					var canDeleteSection = false;
 
 					if(data.pluslets.length == 0) {
 						console.log('no pluslets delete section: ' + section_id);
 						mySection.deleteSection(section_id);
 
-					}
-
-
-					if(data.pluslets.length > 0) {
+					} else if(data.pluslets.length > 0) {
 
 						var masterClones = [];
-						var canDeleteSection = false;
 						$.each(data.pluslets, function(key, value) {
 							var pluslet_id = value.pluslet_id;
 							//console.log('pluslet_id: ' + pluslet_id);
@@ -180,7 +179,12 @@ function section() {
 							//console.log(masterClones);
 							masterClones.then(function(data) {
 								//console.log(data.cloned_pluslets);
-								if(data.cloned_pluslets.length > 0) {
+								if(data.cloned_pluslets.length == 0) {
+
+									canDeleteSection == true;
+
+								} else {
+									canDeleteSection = false;
 
 									$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
 										autoOpen: true,
@@ -195,8 +199,6 @@ function section() {
 										}
 									});
 									return false;
-								} else {
-									canDeleteSection = true;
 								}
 							});
 						});
