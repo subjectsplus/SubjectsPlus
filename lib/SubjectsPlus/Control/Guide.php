@@ -1304,27 +1304,22 @@ class Guide
     	}
     }
 
-    public function dropBoxes($i, $itext, $content) {
-//	    global $AssetPath;
-//	    global $IconPath;
+    public function dropBoxes($i, $itext, $content)
+    {
+        global $AssetPath;
+        global $IconPath;
+        $col = "<div id=\"container-" . $i . "\" class='pure-u-1-3'  \">
+            <div class=\"container-area\">
+                <div class=\"dropspotty unsortable drop_area\" id=\"dropspot-" . $itext . "-1\">       
+                    <span class=\"dropspot-text\"> <i class=\"fa fa-dot-circle-o fa-lg\"></i> " . _('Drop Here') . "</span>
+                </div>
+        
+                <div class=\"portal-column sort-column portal-column-" . $i . "\" class=\"float-left\"> " .
+                $content . "<div></div>"
+            . '</div></div></div>';
 
-	    $col = '<div id="container-' . $i . '" class="pure-u-1-3">';
-	    $col .= '<div class="container-area">';
-	    $col .= '<div class="dropspotty unsortable drop_area ui-droppable" id="dropspot-' . $itext . '">';
-	    $col .= '<span class="dropspot-text"> <i class="fa fa-dot-circle-o fa-lg"></i> ' . _( "Drop Here" ) . '</span>';
-	    $col .= '</div>';
-	    $col .= '<div class="portal-column sort-column portal-column-{$i} ui-sortable">' . $content;
-	    $col .= '<div></div>';
-	    $col .= '</div>';
-	    $col .= '</div>';
-	    $col .= '</div>';
-
-	    return $col;
+        return $col;
     }
-
-
-
-
 
     function modifySS()
     {
