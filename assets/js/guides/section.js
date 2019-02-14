@@ -12,7 +12,8 @@ function section() {
 	var mySection = {
 
 		settings : {
-			sectionDataPath : "helpers/section_data.php"
+			sectionDataPath : "helpers/section_data.php?",
+			sectionServicePath : "helpers/save_section.php?",
 		},
 		strings : {},
 		bindUiActions : function() {
@@ -62,42 +63,113 @@ function section() {
 				//$(tabs).tabs();
 				var selectedTab = $('#tabs').tabs('option', 'active');
 
-				$.ajax({
-					
-					url : mySection.settings.sectionDataPath,
-					type : "POST",
-					data : {
-					action : 'create'
-					
-					},
-					dataType : "html",
-					success : function(html) {
+				var tab_id = $("[aria-controls='tabs-"+ selectedTab +"']").attr("id");
+				var section_index_value = $('#tabs-' + selectedTab + ' .sp_section').last();
+				var section_index = section_index_value.prevObject.last().index() + 1;
+				var layout = "4-4-4";
 
-						$('div#tabs-' + selectedTab).append(html);
-						$(document).scrollTop($('body').height());
-
-						// Make sure that the new section can accept drops
-						var drop = drag();
-						drop.makeDropable(".dropspotty");
-
-						// When you add a section autosave
-						var save = saveSetup();
-						save.saveGuide();
-						$('#save_guide').fadeOut();
-						//window.location.reload();
-
-						$('div#tabs-' + selectedTab)
-						var newSection = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
-						newSection.trigger('click');
-
-						var l = layout();
-						l.highlightLayout(newSection.parent());
-
-						mySection.viewSectionControls();
-					}
+				var newSection = mySection.addNewSection(section_index, layout, tab_id);
+				newSection.then(function(data) {
+					var last_insert_id = data.last_insert;
 				});
+				newSection.then(function(data) {
+
+					var selectedTab = $('#tabs').tabs('option', 'active');
+					console.log(data.last_insert);
+
+					// add section block html with new section id
+					var section_id = data.last_insert;
+					var html = mySection.addNewSectionHtml(section_id);
+					$('div#tabs-' + selectedTab).append(html);
+
+					$(document).scrollTop($('body').height());
+
+					// Make sure that the new section can accept drops
+					var drop = drag();
+					drop.makeDropable(".dropspotty");
+
+				});
+
+				newSection.done(function(data) {
+					var selectedTab = $('#tabs').tabs('option', 'active');
+					$('div#tabs-' + selectedTab)
+					var newSectionBlock = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
+					newSectionBlock.trigger('click');
+
+					mySection.viewSectionControls();
+				});
+
 			});
 		},
+
+		addNewSection: function(section_index, layout, tab_id) {
+			console.log('section_index: ' + section_index);
+			console.log('layout: ' + layout);
+			console.log('tab_id: ' + tab_id);
+
+			return $.ajax({
+
+				url : mySection.settings.sectionServicePath,
+				type : "GET",
+				data : {
+					section_index: section_index,
+					layout: "4-4-4",
+					tab_id: tab_id
+				},
+				dataType: "json"
+
+			});
+		},
+
+		addNewSectionHtml: function(section_id) {
+
+			var html = '<div id="section_' + section_id + '" class="sp_section pure-g" data-layout="4-4-4">\n' +
+				'    <div class="sp_section_controls">\n' +
+				'        <i class="fa fa-arrows section_sort" title="Move Section"></i>\n' +
+				'        <i class="fa fa-trash-o section_remove" title="Delete Section" style="display: none;"></i>\n' +
+				'\n' +
+				'        <div id="slider_section_' + section_id + '" class="sp_section_slider"></div>\n' +
+				'    </div>\n' +
+				'    <div id="container-0" class="pure-u-1-3">\n' +
+				'        <div class="container-area">\n' +
+				'            <div class="dropspotty unsortable drop_area ui-droppable" id="dropspot-left-1">\n' +
+				'                <span class="dropspot-text"> <i class="fa fa-dot-circle-o fa-lg"></i> Drop Here</span>\n' +
+				'            </div>\n' +
+				'\n' +
+				'            <div class="portal-column sort-column portal-column-0 ui-sortable">\n' +
+				'                <div></div>\n' +
+				'            </div>\n' +
+				'        </div>\n' +
+				'    </div>\n' +
+				'    <div id="container-1" class="pure-u-1-3">\n' +
+				'        <div class="container-area">\n' +
+				'            <div class="dropspotty unsortable drop_area ui-droppable" id="dropspot-center-1">\n' +
+				'                <span class="dropspot-text"> <i class="fa fa-dot-circle-o fa-lg"></i> Drop Here</span>\n' +
+				'            </div>\n' +
+				'\n' +
+				'            <div class="portal-column sort-column portal-column-1 ui-sortable">\n' +
+				'                <div></div>\n' +
+				'            </div>\n' +
+				'        </div>\n' +
+				'    </div>\n' +
+				'    <div id="container-2" class="pure-u-1-3">\n' +
+				'        <div class="container-area">\n' +
+				'            <div class="dropspotty unsortable drop_area ui-droppable" id="dropspot-sidebar-1">\n' +
+				'                <span class="dropspot-text"> <i class="fa fa-dot-circle-o fa-lg"></i> Drop Here</span>\n' +
+				'            </div>\n' +
+				'\n' +
+				'            <div class="portal-column sort-column portal-column-2 ui-sortable">\n' +
+				'                <div></div>\n' +
+				'            </div>\n' +
+				'        </div>\n' +
+				'    </div>\n' +
+				'    <div id="clearblock" style="clear:both;"></div>\n' +
+				'    <!-- this just seems to allow the space to grow to fit dropbox areas -->\n' +
+				'</div>';
+
+			return html;
+		},
+
 		chooseSectionForLayouts : function () {
 			
 			/**
@@ -153,15 +225,22 @@ function section() {
 			$('.section_remove').on('click', function() {
 
 				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
-				//console.log( 'section_id: ' + section_id);
+				console.log( 'on click section_id: ' + section_id);
 
 				var pluslets = [];
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
-				//console.log('pluslets: ' + pluslets);
+				console.log('pluslets: ' + pluslets);
+
 
 				pluslets.then(function(data) {
 
-					if(data.pluslets.length > 0) {
+					var canDeleteSection = false;
+
+					if(data.pluslets.length == 0) {
+						console.log('no pluslets delete section: ' + section_id);
+						mySection.deleteSection(section_id);
+
+					} else if(data.pluslets.length > 0) {
 
 						var masterClones = [];
 						$.each(data.pluslets, function(key, value) {
@@ -169,13 +248,15 @@ function section() {
 							//console.log('pluslet_id: ' + pluslet_id);
 
 							masterClones = mySection.hasMasterClones(pluslet_id);
-							console.log(masterClones);
-
+							//console.log(masterClones);
 							masterClones.then(function(data) {
 								//console.log(data.cloned_pluslets);
+								if(data.cloned_pluslets.length == 0) {
 
+									canDeleteSection == true;
 
-								if(data.cloned_pluslets.length > 0) {
+								} else {
+									canDeleteSection = false;
 
 									$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
 										autoOpen: true,
@@ -190,25 +271,17 @@ function section() {
 										}
 									});
 									return false;
-								} else {
-									mySection.deleteSection(section_id);
 								}
-
 							});
 						});
 
-					} else {
-
-						mySection.deleteSection(section_id);
-
+						if(canDeleteSection == true) {
+							console.log('no clones: ' + section_id);
+							mySection.deleteSection(section_id);
+						}
 					}
-
-
 				});
-
-
 			});
-
 		},
 
 		deleteSection: function(section_id) {
@@ -222,6 +295,7 @@ function section() {
 				buttons: {
 					Yes: function () {
 						// Remove node
+						console.log('section_id deleteSection: ' + section_id);
 						$("#section_" + section_id).remove();
 						$('#response').hide();
 
