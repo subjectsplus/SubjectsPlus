@@ -185,7 +185,7 @@ class Autocomplete {
                 break;
 
             case "current_guide":
-                $statement = $connection->prepare("SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type',p.type as 'type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', t.subject_id, su.subject FROM pluslet AS p
+                $statement = $connection->prepare("SELECT p.pluslet_id as 'id',su.shortform as 'short_form','Pluslet' as 'content_type',p.type as 'type', p.title, p.title AS 'label', ps.section_id, t.tab_index AS 'additional_id', su.subject as 'parent', t.subject_id, su.subject FROM pluslet AS p
                     INNER JOIN pluslet_section AS ps
                     ON ps.pluslet_id = p.pluslet_id
                     INNER JOIN section AS s
