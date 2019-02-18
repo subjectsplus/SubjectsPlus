@@ -649,7 +649,7 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         if ($.isNumeric($(obj).attr('id'))) {
                             var newId = $(newIds).get(index - 1);
-                            //console.log( $(obj).attr('id', newId) );
+                            console.log( $(obj).attr('id', newId) );
                         }
                     });
                 }
@@ -687,7 +687,7 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
                         var newId = "section_" + $(newIds).get(index);
-                        //console.log( $(obj).attr('id', newId) );
+                        console.log( $(obj).attr('id', newId) );
 
                     });
                 }

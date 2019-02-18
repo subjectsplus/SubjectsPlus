@@ -240,6 +240,7 @@ function section() {
 						console.log('no pluslets delete section: ' + section_id);
 						mySection.deleteSection(section_id);
 
+
 					} else if(data.pluslets.length > 0) {
 
 						var masterClones = [];
@@ -313,8 +314,8 @@ function section() {
 				}
 			});
 
-			$('.delete_confirm').first().dialog('open');
-			return false;
+			// $('.delete_confirm').first().dialog('open');
+			// return false;
 
 
 		},
