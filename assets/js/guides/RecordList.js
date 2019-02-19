@@ -138,6 +138,7 @@ var RecordListDisplay = (function () {
     }
     RecordListDisplay.prototype.getList = function () {
         var encodedHtml = this.liDisplayRecordList();
+        console.log(encodeHtml);
         var recordListHtml = $.parseHTML(encodedHtml);
         return "<ul class='link-list-display'>" + recordListHtml + "</ul>";
     };
