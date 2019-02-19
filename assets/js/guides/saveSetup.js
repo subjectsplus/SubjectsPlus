@@ -574,10 +574,9 @@ function saveSetup() {
 
             lstrTabs = JSON.stringify(lobjTabs);
             console.log(lstrTabs);
+            mySaveSetup.getTabIds();
+            mySaveSetup.getSectionIds();
             $("#response").load("helpers/save_guide.php", {
-
-                    mySaveSetup.getTabIds();
-                    mySaveSetup.getSectionIds();
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
                     tabs: lstrTabs
@@ -595,8 +594,7 @@ function saveSetup() {
                     mySaveSetup.updateTabIds();
                     mySaveSetup.updateSectionIds();
 
-                    mySaveSetup.getTabIds();
-                    mySaveSetup.getSectionIds();
+
 
 
                 });
@@ -625,6 +623,8 @@ function saveSetup() {
                     $(container).show("fade");
                 }
             });
+
+
         },
 
 
@@ -687,6 +687,9 @@ function saveSetup() {
                             console.log( $(obj).attr('id', newId) );
                         }
                     });
+
+                    mySaveSetup.getTabIds();
+
                 }
             });
 
@@ -725,6 +728,8 @@ function saveSetup() {
                         console.log( $(obj).attr('id', newId) );
 
                     });
+
+                    mySaveSetup.getSectionIds();
                 }
             });
 
