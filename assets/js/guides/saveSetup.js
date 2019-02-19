@@ -573,8 +573,11 @@ function saveSetup() {
             });
 
             lstrTabs = JSON.stringify(lobjTabs);
-            //console.log(lstrTabs);
+            console.log(lstrTabs);
             $("#response").load("helpers/save_guide.php", {
+
+                    mySaveSetup.getTabIds();
+                    mySaveSetup.getSectionIds();
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
                     tabs: lstrTabs
@@ -591,6 +594,9 @@ function saveSetup() {
                     copyClone().markAsLinked();
                     mySaveSetup.updateTabIds();
                     mySaveSetup.updateSectionIds();
+
+                    mySaveSetup.getTabIds();
+                    mySaveSetup.getSectionIds();
 
 
                 });
@@ -618,6 +624,35 @@ function saveSetup() {
                     $(loader).hide();
                     $(container).show("fade");
                 }
+            });
+        },
+
+
+        getTabIds: function() {
+
+            // var g = guide();
+            // var subjectId = g.getSubjectId();
+            //
+            // console.log('subject_id:' + subjectId);
+
+            var nodes = $('.child-tab');
+            console.log(nodes);
+
+            var ids = [];
+            $.each(nodes, function(data) {
+                console.log('tab ids: ' + this.id );
+            });
+
+        },
+
+        getSectionIds: function() {
+
+            var nodes = $('.sp_section');
+            //console.log(nodes);
+
+            var ids = [];
+            $.each(nodes, function(data) {
+                console.log('section ids: ' + this.id.split('_')[1] );
             });
         },
 

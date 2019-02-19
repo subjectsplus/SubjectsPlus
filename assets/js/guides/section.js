@@ -227,9 +227,12 @@ function section() {
 				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
 				console.log( 'on click section_id: ' + section_id);
 
+				mySection.getTabIds();
+				mySection.getSectionIds();
+
 				var pluslets = [];
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
-				console.log('pluslets: ' + pluslets);
+				//console.log('pluslets: ' + pluslets);
 
 
 				pluslets.then(function(data) {
@@ -239,6 +242,8 @@ function section() {
 					if(data.pluslets.length == 0) {
 						console.log('no pluslets delete section: ' + section_id);
 						mySection.deleteSection(section_id);
+						//mySection.getTabIds();
+						//mySection.getSectionIds();
 
 
 					} else if(data.pluslets.length > 0) {
@@ -279,6 +284,8 @@ function section() {
 						if(canDeleteSection == true) {
 							console.log('no clones: ' + section_id);
 							mySection.deleteSection(section_id);
+							//mySection.getTabIds();
+							//mySection.getSectionIds();
 						}
 					}
 				});
@@ -314,10 +321,38 @@ function section() {
 				}
 			});
 
-			// $('.delete_confirm').first().dialog('open');
-			// return false;
+			$('.delete_confirm').first().dialog('open');
+			return false;
 
 
+		},
+
+		getTabIds: function() {
+
+			// var g = guide();
+			// var subjectId = g.getSubjectId();
+			//
+			// console.log('subject_id:' + subjectId);
+
+			var nodes = $('.child-tab');
+			console.log(nodes);
+
+			var ids = [];
+			$.each(nodes, function(data) {
+				console.log('tab ids: ' + this.id );
+			});
+
+		},
+
+		getSectionIds: function() {
+
+			var nodes = $('.sp_section');
+			//console.log(nodes);
+
+			var ids = [];
+			$.each(nodes, function(data) {
+				console.log('section ids: ' + this.id.split('_')[1] );
+			});
 		},
 
 		fetchPlusletsBySectionId: function(section_id) {
