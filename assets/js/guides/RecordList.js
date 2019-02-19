@@ -137,9 +137,7 @@ var RecordListDisplay = (function () {
         this.recordList = recordList;
     }
     RecordListDisplay.prototype.getList = function () {
-        var encodedHtml = this.liDisplayRecordList();
-        console.log(encodeHtml);
-        var recordListHtml = $.parseHTML(encodedHtml);
+        var recordListHtml = this.liDisplayRecordList();
         return "<ul class='link-list-display'>" + recordListHtml + "</ul>";
     };
     RecordListDisplay.prototype.liDisplayRecord = function (record) {
@@ -192,7 +190,7 @@ var RecordSearch = (function () {
         this.searchResults = new RecordList;
         $.ajax({
             "url": this.searchUrl,
-            "data": { term: searchTerm, collection: collection }
+            "data": { term: searchTerm, collection: collection, limit_results_number: 1 }
         }).done(function (data) {
             callback(data);
             console.log(data);
