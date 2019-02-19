@@ -510,6 +510,7 @@ function scrubData( $string, $type = "text" ) {
 			break;
 		case "richtext_html_purifier":
 			$config   = HTMLPurifier_Config::createDefault();
+			$config->set('Core.EscapeNonASCIICharacters',true);
 			$purifier = new HTMLPurifier( $config );
 			$string   = $purifier->purify( $string );
 			break;
