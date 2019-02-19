@@ -137,7 +137,8 @@ var RecordListDisplay = (function () {
         this.recordList = recordList;
     }
     RecordListDisplay.prototype.getList = function () {
-        var recordListHtml = this.liDisplayRecordList();
+        var encodedHtml = this.liDisplayRecordList();
+        var recordListHtml = $.parseHTML(encodedHtml);
         return "<ul class='link-list-display'>" + recordListHtml + "</ul>";
     };
     RecordListDisplay.prototype.liDisplayRecord = function (record) {
