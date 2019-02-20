@@ -703,9 +703,21 @@ class Record {
     // Insert title table
     ////////////////
     $db = new Querier;
- 	$our_title = $db->quote(scrubData($this->_title));
- 	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
- 	$our_prefix = $db->quote(scrubData($this->_prefix));
+
+
+	 $this->_title           = str_replace( '"', "", $this->_title );
+	 $this->_title           = str_replace( '"', "", $this->_title );
+
+	 $this->_alternate_title = str_replace( '"', "", $this->_alternate_title );
+	 $this->_alternate_title = str_replace( "'", "", $this->_alternate_title );
+
+	 $this->_prefix          = str_replace( '"', "", $this->_prefix );
+	 $this->_prefix          = str_replace( "'", "", $this->_prefix );
+
+
+	 $our_title           = $db->quote( scrubData( $this->_title ) );
+	 $our_alternate_title = $db->quote( scrubData( $this->_alternate_title ) );
+	 $our_prefix          = $db->quote( scrubData( $this->_prefix ) );
 
  	$qInsertTitle = "INSERT INTO title (title, alternate_title, description, internal_notes, pre) VALUES (
  		" . $our_title . ",
@@ -761,9 +773,20 @@ public function updateRecord($notrack = 0) {
 
 	$db = new Querier();
 
-	$our_title = $db->quote(scrubData($this->_title));
-	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
-	$our_prefix = $db->quote(scrubData($this->_prefix));
+
+	$this->_title           = str_replace( '"', "", $this->_title );
+	$this->_title           = str_replace( '"', "", $this->_title );
+
+	$this->_alternate_title = str_replace( '"', "", $this->_alternate_title );
+	$this->_alternate_title = str_replace( "'", "", $this->_alternate_title );
+
+	$this->_prefix          = str_replace( '"', "", $this->_prefix );
+	$this->_prefix          = str_replace( "'", "", $this->_prefix );
+
+
+	$our_title           = $db->quote( scrubData( $this->_title ) );
+	$our_alternate_title = $db->quote( scrubData( $this->_alternate_title ) );
+	$our_prefix          = $db->quote( scrubData( $this->_prefix ) );
 
 	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote(scrubData($this->_description, "richtext")) . ", internal_notes = " . $db->quote(scrubData($this->_internal_notes, "richtext")) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData($this->_title_id, "integer");
 
