@@ -703,9 +703,19 @@ class Record {
     // Insert title table
     ////////////////
     $db = new Querier;
- 	$our_title = $db->quote(scrubData($this->_title));
- 	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
- 	$our_prefix = $db->quote(scrubData($this->_prefix));
+
+	 $this->_title           = str_replace( '"', "", $this->_title );
+	 $this->_title           = str_replace( '"', "", $this->_title );
+
+	 $this->_alternate_title = str_replace( '"', "", $this->_alternate_title );
+	 $this->_alternate_title = str_replace( "'", "", $this->_alternate_title );
+
+	 $this->_prefix          = str_replace( '"', "", $this->_prefix );
+	 $this->_prefix          = str_replace( "'", "", $this->_prefix );
+
+	 $our_title           = $db->quote( scrubData( $this->_title ) );
+	 $our_alternate_title = $db->quote( scrubData( $this->_alternate_title ) );
+	 $our_prefix          = $db->quote( scrubData( $this->_prefix ) );
 
  	$qInsertTitle = "INSERT INTO title (title, alternate_title, description, internal_notes, pre) VALUES (
  		" . $our_title . ",
@@ -761,26 +771,36 @@ public function updateRecord($notrack = 0) {
 
 	$db = new Querier();
 
-	$our_title = $db->quote(scrubData($this->_title));
-	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
-	$our_prefix = $db->quote(scrubData($this->_prefix));
+	$this->_title           = str_replace( '"', "", $this->_title );
+	$this->_title           = str_replace( '"', "", $this->_title );
 
-	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote(scrubData($this->_description, "richtext")) . ", internal_notes = " . $db->quote(scrubData($this->_internal_notes, "richtext")) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData($this->_title_id, "integer");
+	$this->_alternate_title = str_replace( '"', "", $this->_alternate_title );
+	$this->_alternate_title = str_replace( "'", "", $this->_alternate_title );
 
-	$rUpTitle = $db->exec($qUpTitle);
+	$this->_prefix          = str_replace( '"', "", $this->_prefix );
+	$this->_prefix          = str_replace( "'", "", $this->_prefix );
 
-    /////////////////////
-    // clear rank
-    /////////////////////
+
+	$our_title           = $db->quote( scrubData( $this->_title ) );
+	$our_alternate_title = $db->quote( scrubData( $this->_alternate_title ) );
+	$our_prefix          = $db->quote( scrubData( $this->_prefix ) );
+
+	$qUpTitle = "UPDATE title SET title = " . $our_title . ", alternate_title = " . $our_alternate_title . ", description = " . $db->quote( scrubData( $this->_description, "richtext" ) ) . ", internal_notes = " . $db->quote( scrubData( $this->_internal_notes, "richtext" ) ) . ", pre = " . $our_prefix . " WHERE title_id = " . scrubData( $this->_title_id, "integer" );
+
+	$rUpTitle = $db->exec( $qUpTitle );
+
+	/////////////////////
+	// clear rank
+	/////////////////////
 
 	$qClearRank = "DELETE FROM rank WHERE title_id = " . $this->_title_id;
 
-	$rClearRank = $db->exec($qClearRank);
+	$rClearRank = $db->exec( $qClearRank );
 
 	$this->_debug .= "<p>2. clear rank: $qClearRank</p>";
 
-	if ($rClearRank === FALSE) {
-		echo blunDer("We have a problem with the clear rank query: $qClearRank");
+	if ( $rClearRank === false ) {
+		echo blunDer( "We have a problem with the clear rank query: $qClearRank" );
 	}
 
     /////////////////////
