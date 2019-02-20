@@ -234,56 +234,70 @@ function section() {
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
 				//console.log('pluslets: ' + pluslets);
 
+				pluslets.then(function(response) {
 
-				pluslets.then(function(data) {
-
+					console.log('pluslets: ' + response.pluslets);
 					var canDeleteSection = false;
 
-					if(data.pluslets.length == 0) {
+					if(response.pluslets.length == 0) {
 						console.log('no pluslets delete section: ' + section_id);
 						mySection.deleteSection(section_id);
 						//mySection.getTabIds();
 						//mySection.getSectionIds();
 
 
-					} else if(data.pluslets.length > 0) {
+					} else {
 
-						var masterClones = [];
-						$.each(data.pluslets, function(key, value) {
-							var pluslet_id = value.pluslet_id;
-							//console.log('pluslet_id: ' + pluslet_id);
 
-							masterClones = mySection.hasMasterClones(pluslet_id);
-							//console.log(masterClones);
+						$.each(response.pluslets, function(key, value) {
+							var master_id = this.pluslet_id;
+							console.log('master_id: ' + master_id);
+
+							var masterClones = [];
+							masterClones = mySection.hasMasterClones(master_id);
+							console.log('masterClones: ' + masterClones);
 							masterClones.then(function(data) {
-								//console.log(data.cloned_pluslets);
-								if(data.cloned_pluslets.length == 0) {
 
-									canDeleteSection == true;
+								$.each(data, function( index, value ) {
 
-								} else {
-									canDeleteSection = false;
+									console.log('index: ' + index + ' value: ' +  value);
 
-									$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
-										autoOpen: true,
-										modal: false,
-										width: 'auto',
-										height: 'auto',
-										resizable: false,
-										buttons: {
-											Cancel: function () {
-												$(this).dialog('close');
-											}
-										}
-									});
-									return false;
-								}
+								});
+
+
+
+								// if(value === "success") {
+								//
+								// 	canDeleteSection = false;
+								//
+								// 	$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
+								// 		autoOpen: true,
+								// 		modal: false,
+								// 		width: 'auto',
+								// 		height: 'auto',
+								// 		resizable: false,
+								// 		buttons: {
+								// 			Cancel: function () {
+								// 				$(this).dialog('close');
+								// 			}
+								// 		}
+								// 	});
+								// 	return false;
+								//
+								//
+								//
+								// } else {
+								// 	canDeleteSection = true;
+								//
+								// }
 							});
 						});
 
+						console.log('canDeleteSection: ' + canDeleteSection);
 						if(canDeleteSection == true) {
+
 							console.log('no clones: ' + section_id);
-							mySection.deleteSection(section_id);
+							//mySection.deleteSection(section_id);
 							//mySection.getTabIds();
 							//mySection.getSectionIds();
 						}
