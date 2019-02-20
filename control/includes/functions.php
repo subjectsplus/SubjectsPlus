@@ -501,6 +501,10 @@ function scrubData( $string, $type = "text" ) {
 			}
 			$string = strip_tags( $string );
 			$string = htmlspecialchars( $string, ENT_QUOTES );
+			$config   = HTMLPurifier_Config::createDefault();
+			$config->set('Core.EscapeNonASCIICharacters',true);
+			$purifier = new HTMLPurifier( $config );
+			$string   = $purifier->purify( $string );
 			break;
 		case "richtext":
 // magic quotes test

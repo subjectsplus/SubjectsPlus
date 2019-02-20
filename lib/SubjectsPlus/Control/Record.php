@@ -703,7 +703,12 @@ class Record {
     // Insert title table
     ////////////////
     $db = new Querier;
- 	$our_title = $db->quote(scrubData($this->_title));
+
+	 $this->_title = str_replace('"', "", $this->_title);
+	 $this->_alternate_title = str_replace("'", "", $this->_alternate_title);
+	 $this->_prefix = str_replace("'", "", $this->_prefix);
+
+    $our_title = $db->quote(scrubData($this->_title));
  	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
  	$our_prefix = $db->quote(scrubData($this->_prefix));
 
@@ -760,6 +765,10 @@ public function updateRecord($notrack = 0) {
     /////////////////////
 
 	$db = new Querier();
+
+	$this->_title = str_replace('"', "", $this->_title);
+	$this->_alternate_title = str_replace("'", "", $this->_alternate_title);
+	$this->_prefix = str_replace("'", "", $this->_prefix);
 
 	$our_title = $db->quote(scrubData($this->_title));
 	$our_alternate_title = $db->quote(scrubData($this->_alternate_title));
