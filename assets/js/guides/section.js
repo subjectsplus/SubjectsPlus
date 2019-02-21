@@ -18,13 +18,10 @@ function section() {
 		strings : {},
 		bindUiActions : function() {
 
-			$( document ).ready(function() {
-				mySection.clickTabOnSwitch();
-				mySection.clickDeleteSection();
-				mySection.chooseSectionForLayouts();
-				mySection.viewSectionControls();
-
-			});
+			mySection.clickTabOnSwitch();
+			mySection.clickDeleteSection();
+			mySection.chooseSectionForLayouts();
+			mySection.viewSectionControls();
 
 		},
 		init: function () {
@@ -34,17 +31,13 @@ function section() {
 
 				// Click the first section after everything has loaded.
 			    mySection.clickInitialSection();
-
-
 		    });
 			
 		},
 		viewSectionControls : function() {
-
-
 			$('.sptab').each(function () {
 				if ($(this).children().size() > 1) {
-					console.log("More than one?");
+					//console.log("More than one?");
 					$(this).children().find('.sp_section_controls').show();
 					$(this).children().find('.section_remove').hide();
 				} else {
@@ -52,7 +45,6 @@ function section() {
 					$(this).find('.sp_section').removeClass('section_selected_area');
 				}
 			});
-			
 		},
 		makeAddSection : function(lstrSelector) {
 
@@ -118,7 +110,11 @@ function section() {
 				},
 				dataType: "json"
 
+			}).done(function() {
+				mySection.getTabIds();
+				mySection.getSectionIds();
 			});
+
 		},
 
 		addNewSectionHtml: function(section_id) {
@@ -128,7 +124,6 @@ function section() {
 				'        <i class="fa fa-arrows section_sort" title="Move Section"></i>\n' +
 				'        <i class="fa fa-trash-o section_remove" title="Delete Section" style="display: none;"></i>\n' +
 				'\n' +
-				'        <div id="slider_section_' + section_id + '" class="sp_section_slider"></div>\n' +
 				'    </div>\n' +
 				'    <div id="container-0" class="pure-u-1-3">\n' +
 				'        <div class="container-area">\n' +
@@ -192,6 +187,7 @@ function section() {
 			    $(this).children('.section_remove').show();
 				
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
+				console.log('selectedSectionId: ' + selectedSectionId);
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				l.activateLayoutButtons();
 				// Highlight the layout that is associated with the section. 
@@ -220,88 +216,62 @@ function section() {
 		},
 
 		clickDeleteSection: function() {
-			// get section id
-			var section_id = "";
-			$('.section_remove').on('click', function() {
 
-				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
+			$('body').on('click', '.section_remove', function() {
+
+				console.log('section_remove clicked');
+
+				var section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
 				console.log( 'on click section_id: ' + section_id);
 
 				mySection.getTabIds();
 				mySection.getSectionIds();
 
 				var pluslets = [];
+				var canDeleteSection = false;
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
 				//console.log('pluslets: ' + pluslets);
-
 				pluslets.then(function(response) {
-
-					console.log('pluslets: ' + response.pluslets);
-					var canDeleteSection = false;
-
+					//console.log('response: ' + response);
 					if(response.pluslets.length == 0) {
-						console.log('no pluslets delete section: ' + section_id);
+						console.log('no pluslets in section: ' + section_id + response.pluslets);
 						mySection.deleteSection(section_id);
-						//mySection.getTabIds();
-						//mySection.getSectionIds();
-
-
+						// mySection.getTabIds();
+						// mySection.getSectionIds();
 					} else {
-
-
-						$.each(response.pluslets, function(key, value) {
-							var master_id = this.pluslet_id;
-							console.log('master_id: ' + master_id);
-
-							var masterClones = [];
-							masterClones = mySection.hasMasterClones(master_id);
-							console.log('masterClones: ' + masterClones);
-							masterClones.then(function(data) {
-
-								$.each(data, function( index, value ) {
-
-									console.log('index: ' + index + ' value: ' +  value);
-
-								});
-
-
-
-								// if(value === "success") {
-								//
-								// 	canDeleteSection = false;
-								//
-								// 	$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
-								// 		autoOpen: true,
-								// 		modal: false,
-								// 		width: 'auto',
-								// 		height: 'auto',
-								// 		resizable: false,
-								// 		buttons: {
-								// 			Cancel: function () {
-								// 				$(this).dialog('close');
-								// 			}
-								// 		}
-								// 	});
-								// 	return false;
-								//
-								//
-								//
-								// } else {
-								// 	canDeleteSection = true;
-								//
-								// }
+						var pluslet_ids = [];
+                        $.each(response.pluslets, function(data) {
+                        	$.each(this, function(key, value) {
+                        		if(key == 'pluslet_id') {
+                        			pluslet_ids.push(value);
+								}
 							});
 						});
-
-						console.log('canDeleteSection: ' + canDeleteSection);
-						if(canDeleteSection == true) {
-
-							console.log('no clones: ' + section_id);
-							//mySection.deleteSection(section_id);
-							//mySection.getTabIds();
-							//mySection.getSectionIds();
-						}
+                        return pluslet_ids;
 					}
+				});
+
+				pluslets.then(function(pluslet_ids){
+					$.each(pluslet_ids, function(data) {
+						console.log(data);
+						//console.log('key: ' + key + ' value: ' + value);
+					});
+
+					//console.log(pluslet_ids);
+					// var masterClones = [];
+					// $.each(pluslet_ids, function(data) {
+					// 	console.log(this);
+					// 	var master_id = this;
+					//
+					// 	masterClones = mySection.hasMasterClones(master_id);
+					// 	masterClones.then(function(data) {
+					// 		console.log(data);
+					// 		if(data.cloned_pluslets.length > 0) {
+					// 			return false;
+					// 		}
+					// 	});
+					// });
+
 				});
 			});
 		},
@@ -319,7 +289,7 @@ function section() {
 						// Remove node
 						console.log('section_id deleteSection: ' + section_id);
 						$("#section_" + section_id).remove();
-						$('#response').hide();
+						//$('#response').show();
 
 						var save = saveSetup();
 						save.saveGuide();
@@ -327,18 +297,18 @@ function section() {
 
 						$(this).dialog('close');
 						return false;
-
 					},
 					Cancel: function () {
 						$(this).dialog('close');
 					}
+				},
+				close: function(event, ui) {
+					$('.delete_confirm').remove();
 				}
 			});
 
-			$('.delete_confirm').first().dialog('open');
+			$('.delete_confirm').dialog('open');
 			return false;
-
-
 		},
 
 		getTabIds: function() {
@@ -379,13 +349,19 @@ function section() {
 		},
 
 
-		hasMasterClones: function (pluslet_id) {
-			return $.ajax({
-				url: "helpers/fetch_cloned_pluslets.php",
-				type: "GET",
-				data: 'master_id=' + pluslet_id,
-				dataType: "json"
-			});
+		hasMasterClones: function (pluslet_ids) {
+
+			$.each(pluslet_ids, function(data) {
+
+				console.log('master_id: ' + this);
+			})
+
+			// return $.ajax({
+			// 	url: "helpers/fetch_cloned_pluslets.php",
+			// 	type: "GET",
+			// 	data: 'master_id=' + pluslet_id,
+			// 	dataType: "json"
+			// });
 		}
 	};
 
