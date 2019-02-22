@@ -18,13 +18,10 @@ function section() {
 		strings : {},
 		bindUiActions : function() {
 
-			$( document ).ready(function() {
-				mySection.clickTabOnSwitch();
-				mySection.clickDeleteSection();
-				mySection.chooseSectionForLayouts();
-				mySection.viewSectionControls();
-
-			});
+			mySection.clickTabOnSwitch();
+			mySection.clickDeleteSection();
+			mySection.chooseSectionForLayouts();
+			mySection.viewSectionControls();
 
 		},
 		init: function () {
@@ -34,17 +31,13 @@ function section() {
 
 				// Click the first section after everything has loaded.
 			    mySection.clickInitialSection();
-
-
 		    });
 			
 		},
 		viewSectionControls : function() {
-
-
 			$('.sptab').each(function () {
 				if ($(this).children().size() > 1) {
-					console.log("More than one?");
+					//console.log("More than one?");
 					$(this).children().find('.sp_section_controls').show();
 					$(this).children().find('.section_remove').hide();
 				} else {
@@ -52,7 +45,6 @@ function section() {
 					$(this).find('.sp_section').removeClass('section_selected_area');
 				}
 			});
-			
 		},
 		makeAddSection : function(lstrSelector) {
 
@@ -118,7 +110,11 @@ function section() {
 				},
 				dataType: "json"
 
+			}).done(function() {
+				mySection.getTabIds();
+				mySection.getSectionIds();
 			});
+
 		},
 
 		addNewSectionHtml: function(section_id) {
@@ -128,7 +124,6 @@ function section() {
 				'        <i class="fa fa-arrows section_sort" title="Move Section"></i>\n' +
 				'        <i class="fa fa-trash-o section_remove" title="Delete Section" style="display: none;"></i>\n' +
 				'\n' +
-				'        <div id="slider_section_' + section_id + '" class="sp_section_slider"></div>\n' +
 				'    </div>\n' +
 				'    <div id="container-0" class="pure-u-1-3">\n' +
 				'        <div class="container-area">\n' +
@@ -192,6 +187,7 @@ function section() {
 			    $(this).children('.section_remove').show();
 				
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
+				console.log('selectedSectionId: ' + selectedSectionId);
 				$('#layout_options_content').data('selected-section', selectedSectionId);
 				l.activateLayoutButtons();
 				// Highlight the layout that is associated with the section. 
@@ -220,67 +216,86 @@ function section() {
 		},
 
 		clickDeleteSection: function() {
-			// get section id
-			var section_id = "";
-			$('.section_remove').on('click', function() {
 
-				section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
+			$('body').on('click', '.section_remove', function() {
+
+				console.log('section_remove clicked');
+
+				var section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
 				console.log( 'on click section_id: ' + section_id);
 
+				mySection.getTabIds();
+				mySection.getSectionIds();
+
 				var pluslets = [];
+				var canDeleteSection = false;
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
-				console.log('pluslets: ' + pluslets);
-
-
-				pluslets.then(function(data) {
-
-					var canDeleteSection = false;
-
-					if(data.pluslets.length == 0) {
-						console.log('no pluslets delete section: ' + section_id);
+				//console.log('pluslets: ' + pluslets);
+				pluslets
+					.then(function(response) {
+					//console.log('response: ' + response);
+					if(response.pluslets.length == 0) {
+						console.log('no pluslets in section: ' + section_id + response.pluslets);
 						mySection.deleteSection(section_id);
-
-					} else if(data.pluslets.length > 0) {
-
-						var masterClones = [];
-						$.each(data.pluslets, function(key, value) {
-							var pluslet_id = value.pluslet_id;
-							//console.log('pluslet_id: ' + pluslet_id);
-
-							masterClones = mySection.hasMasterClones(pluslet_id);
-							//console.log(masterClones);
-							masterClones.then(function(data) {
-								//console.log(data.cloned_pluslets);
-								if(data.cloned_pluslets.length == 0) {
-
-									canDeleteSection == true;
-
-								} else {
-									canDeleteSection = false;
-
-									$('<div>This section cannot be deleted because it has linked boxes.</div>').dialog({
-										autoOpen: true,
-										modal: false,
-										width: 'auto',
-										height: 'auto',
-										resizable: false,
-										buttons: {
-											Cancel: function () {
-												$(this).dialog('close');
-											}
-										}
-									});
-									return false;
+						// mySection.getTabIds();
+						// mySection.getSectionIds();
+					} else {
+						var pluslet_ids = [];
+                        $.each(response.pluslets, function(data) {
+                        	$.each(this, function(key, value) {
+                        		if(key == 'pluslet_id') {
+                        			pluslet_ids.push(value);
 								}
 							});
 						});
-
-						if(canDeleteSection == true) {
-							console.log('no clones: ' + section_id);
-							mySection.deleteSection(section_id);
-						}
+                        return pluslet_ids;
 					}
+				}).then(function(pluslet_ids){
+					//console.log('ids:' + pluslet_ids);
+					var ids = [];
+					$.each(pluslet_ids, function(key, value) {
+						ids.push(value);
+					});
+					return ids;
+
+				}).then(function (ids) {
+					console.log('ids: ' + ids);
+					var checks = [];
+					var canDeleteSection = false;
+					$.each(ids, function (key, value) {
+						//console.log('value: ' + value);
+						var hasClones = mySection.hasMasterClones(value);
+						//console.log('hasClones: ' + hasClones);
+
+						hasClones.then(function (data) {
+
+							$.each(data, function(key, value) {
+								if(key == 'cloned_pluslets') {
+									if( $(value).length > 0 ) {
+										// section has clones so do not delete section
+										canDeleteSection = false;
+										mySection.deleteSectionRejection();
+										return false;
+									} else {
+										canDeleteSection = true;
+									}
+								}
+
+							});
+							return canDeleteSection;
+						}).then(function() {
+							checks.push(canDeleteSection);
+						}).done(function() {
+							return checks;
+						});
+					});
+					return checks;
+				}).done(function(checks) {
+					return checks;
 				});
+
+
+
 			});
 		},
 
@@ -297,7 +312,7 @@ function section() {
 						// Remove node
 						console.log('section_id deleteSection: ' + section_id);
 						$("#section_" + section_id).remove();
-						$('#response').hide();
+						//$('#response').show();
 
 						var save = saveSetup();
 						save.saveGuide();
@@ -305,18 +320,68 @@ function section() {
 
 						$(this).dialog('close');
 						return false;
-
 					},
 					Cancel: function () {
 						$(this).dialog('close');
 					}
+				},
+				close: function(event, ui) {
+					$('.delete_confirm').remove();
 				}
 			});
 
-			$('.delete_confirm').first().dialog('open');
+			$('.delete_confirm').dialog('open');
 			return false;
+		},
 
+		deleteSectionRejection: function() {
 
+			$('<div id="dialog" class=\'delete_reject\' title=\'Are you sure?\'>This section contains boxes that have been linked, therefore it cannot be deleted.</div>').dialog({
+				autoOpen: false,
+				modal: true,
+				width: 'auto',
+				height: 'auto',
+				resizable: false,
+				buttons: {
+					Cancel: function () {
+						$(this).dialog('close');
+					}
+				},
+				close: function(event, ui) {
+					$('.delete_reject').remove();
+				}
+			});
+
+			$('.delete_reject').dialog('open');
+			return false;
+		},
+
+		getTabIds: function() {
+
+			// var g = guide();
+			// var subjectId = g.getSubjectId();
+			//
+			// console.log('subject_id:' + subjectId);
+
+			var nodes = $('.child-tab');
+			console.log(nodes);
+
+			var ids = [];
+			$.each(nodes, function(data) {
+				console.log('tab ids: ' + this.id );
+			});
+
+		},
+
+		getSectionIds: function() {
+
+			var nodes = $('.sp_section');
+			//console.log(nodes);
+
+			var ids = [];
+			$.each(nodes, function(data) {
+				console.log('section ids: ' + this.id.split('_')[1] );
+			});
 		},
 
 		fetchPlusletsBySectionId: function(section_id) {
