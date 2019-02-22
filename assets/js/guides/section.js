@@ -258,47 +258,43 @@ function section() {
 					});
 					return ids;
 
-					// var ids = [];
-					// $.each(pluslet_ids, function(key, value) {
-					//
-					// 	var pluslet_id = value;
-					// 	var clones = mySection.hasMasterClones(pluslet_id);
-					// 	clones.then(function (response) {
-					// 		//console.log(response.cloned_pluslets);
-					// 		var ids = [];
-					// 		var i;
-					// 		for (i = 0; i < response.cloned_pluslets.length; i++) {
-					// 			ids.push(response.cloned_pluslets);
-					// 		}
-					// 		return ids;
-					//
-					// 	}).then(function (ids) {
-					// 		console.log(ids);
-					// 		var canDeleteSection = true;
-					// 		if(ids.length > 0) {
-					// 			console.log('cannot delete');
-					// 			canDeleteSection = false;
-					// 			return false;
-					// 		}
-					// 		return canDeleteSection;
-					// 	}).then(function (canDeleteSection) {
-					// 		console.log('can delete section: ' + canDeleteSection);
-					// 	});
-					// });
-
 				}).then(function (ids) {
 					console.log('ids: ' + ids);
-
+					var checks = [];
+					var canDeleteSection = false;
 					$.each(ids, function (key, value) {
-						console.log('value: ' + value);
+						//console.log('value: ' + value);
 						var hasClones = mySection.hasMasterClones(value);
-						console.log('hasClones: ' + hasClones);
-						hasClones.then(function (data) {
-							console.log('data: ' + data);
+						//console.log('hasClones: ' + hasClones);
 
+						hasClones.then(function (data) {
+
+							$.each(data, function(key, value) {
+								if(key == 'cloned_pluslets') {
+									if( $(value).length > 0 ) {
+										// section has clones so do not delete section
+										canDeleteSection = false;
+										mySection.deleteSectionRejection();
+										return false;
+									} else {
+										canDeleteSection = true;
+									}
+								}
+
+							});
+							return canDeleteSection;
+						}).then(function() {
+							checks.push(canDeleteSection);
+						}).done(function() {
+							return checks;
 						});
 					});
+					return checks;
+				}).done(function(checks) {
+					return checks;
 				});
+
+
 
 			});
 		},
@@ -335,6 +331,28 @@ function section() {
 			});
 
 			$('.delete_confirm').dialog('open');
+			return false;
+		},
+
+		deleteSectionRejection: function() {
+
+			$('<div id="dialog" class=\'delete_reject\' title=\'Are you sure?\'>This section contains boxes that have been linked, therefore it cannot be deleted.</div>').dialog({
+				autoOpen: false,
+				modal: true,
+				width: 'auto',
+				height: 'auto',
+				resizable: false,
+				buttons: {
+					Cancel: function () {
+						$(this).dialog('close');
+					}
+				},
+				close: function(event, ui) {
+					$('.delete_reject').remove();
+				}
+			});
+
+			$('.delete_reject').dialog('open');
 			return false;
 		},
 
