@@ -573,7 +573,9 @@ function saveSetup() {
             });
 
             lstrTabs = JSON.stringify(lobjTabs);
-            //console.log(lstrTabs);
+            console.log(lstrTabs);
+            mySaveSetup.getTabIds();
+            mySaveSetup.getSectionIds();
             $("#response").load("helpers/save_guide.php", {
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
@@ -591,6 +593,8 @@ function saveSetup() {
                     copyClone().markAsLinked();
                     mySaveSetup.updateTabIds();
                     mySaveSetup.updateSectionIds();
+
+
 
 
                 });
@@ -618,6 +622,37 @@ function saveSetup() {
                     $(loader).hide();
                     $(container).show("fade");
                 }
+            });
+
+
+        },
+
+
+        getTabIds: function() {
+
+            // var g = guide();
+            // var subjectId = g.getSubjectId();
+            //
+            // console.log('subject_id:' + subjectId);
+
+            var nodes = $('.child-tab');
+            console.log(nodes);
+
+            var ids = [];
+            $.each(nodes, function(data) {
+                console.log('tab ids: ' + this.id );
+            });
+
+        },
+
+        getSectionIds: function() {
+
+            var nodes = $('.sp_section');
+            //console.log(nodes);
+
+            var ids = [];
+            $.each(nodes, function(data) {
+                console.log('section ids: ' + this.id.split('_')[1] );
             });
         },
 
@@ -649,9 +684,12 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         if ($.isNumeric($(obj).attr('id'))) {
                             var newId = $(newIds).get(index - 1);
-                            //console.log( $(obj).attr('id', newId) );
+                            console.log( $(obj).attr('id', newId) );
                         }
                     });
+
+                    mySaveSetup.getTabIds();
+
                 }
             });
 
@@ -687,9 +725,11 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
                         var newId = "section_" + $(newIds).get(index);
-                        //console.log( $(obj).attr('id', newId) );
+                        console.log( $(obj).attr('id', newId) );
 
                     });
+
+                    mySaveSetup.getSectionIds();
                 }
             });
 
