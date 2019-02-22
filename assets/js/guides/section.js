@@ -231,7 +231,8 @@ function section() {
 				var canDeleteSection = false;
 				pluslets = mySection.fetchPlusletsBySectionId(section_id);
 				//console.log('pluslets: ' + pluslets);
-				pluslets.then(function(response) {
+				pluslets
+					.then(function(response) {
 					//console.log('response: ' + response);
 					if(response.pluslets.length == 0) {
 						console.log('no pluslets in section: ' + section_id + response.pluslets);
@@ -249,30 +250,56 @@ function section() {
 						});
                         return pluslet_ids;
 					}
-				});
-
-				pluslets.then(function(pluslet_ids){
-					$.each(pluslet_ids, function(data) {
-						console.log(data);
-						//console.log('key: ' + key + ' value: ' + value);
+				}).then(function(pluslet_ids){
+					//console.log('ids:' + pluslet_ids);
+					var ids = [];
+					$.each(pluslet_ids, function(key, value) {
+						ids.push(value);
 					});
+					return ids;
 
-					//console.log(pluslet_ids);
-					// var masterClones = [];
-					// $.each(pluslet_ids, function(data) {
-					// 	console.log(this);
-					// 	var master_id = this;
+					// var ids = [];
+					// $.each(pluslet_ids, function(key, value) {
 					//
-					// 	masterClones = mySection.hasMasterClones(master_id);
-					// 	masterClones.then(function(data) {
-					// 		console.log(data);
-					// 		if(data.cloned_pluslets.length > 0) {
+					// 	var pluslet_id = value;
+					// 	var clones = mySection.hasMasterClones(pluslet_id);
+					// 	clones.then(function (response) {
+					// 		//console.log(response.cloned_pluslets);
+					// 		var ids = [];
+					// 		var i;
+					// 		for (i = 0; i < response.cloned_pluslets.length; i++) {
+					// 			ids.push(response.cloned_pluslets);
+					// 		}
+					// 		return ids;
+					//
+					// 	}).then(function (ids) {
+					// 		console.log(ids);
+					// 		var canDeleteSection = true;
+					// 		if(ids.length > 0) {
+					// 			console.log('cannot delete');
+					// 			canDeleteSection = false;
 					// 			return false;
 					// 		}
+					// 		return canDeleteSection;
+					// 	}).then(function (canDeleteSection) {
+					// 		console.log('can delete section: ' + canDeleteSection);
 					// 	});
 					// });
 
+				}).then(function (ids) {
+					console.log('ids: ' + ids);
+
+					$.each(ids, function (key, value) {
+						console.log('value: ' + value);
+						var hasClones = mySection.hasMasterClones(value);
+						console.log('hasClones: ' + hasClones);
+						hasClones.then(function (data) {
+							console.log('data: ' + data);
+
+						});
+					});
 				});
+
 			});
 		},
 
@@ -349,19 +376,13 @@ function section() {
 		},
 
 
-		hasMasterClones: function (pluslet_ids) {
-
-			$.each(pluslet_ids, function(data) {
-
-				console.log('master_id: ' + this);
-			})
-
-			// return $.ajax({
-			// 	url: "helpers/fetch_cloned_pluslets.php",
-			// 	type: "GET",
-			// 	data: 'master_id=' + pluslet_id,
-			// 	dataType: "json"
-			// });
+		hasMasterClones: function (pluslet_id) {
+			return $.ajax({
+				url: "helpers/fetch_cloned_pluslets.php",
+				type: "GET",
+				data: 'master_id=' + pluslet_id,
+				dataType: "json"
+			});
 		}
 	};
 
