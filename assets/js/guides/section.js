@@ -222,97 +222,30 @@ function section() {
 			$('.sp_section:first-child .sp_section_controls').hide();
 		},
 
+
 		clickDeleteSection: function() {
+
 			$('body').on('click', '.section_remove', function() {
 
 				var section_id = $(this).parent('.sp_section_selected').parent('.section_selected_area').attr('id').split('_')[1];
 
-				// loop thru all pluslets in this section
-				var pluslets = mySection.fetchPlusletsBySectionId(section_id);
-				pluslets
-					.then(function(response) {
-					// if it's an empty section just delete it
-					if(response.pluslets.length == 0) {
-						mySection.deleteSectionDialog(section_id);
+				// check for clone parent pluslets, if they exist this section cannot be deleted.
+				var hasParentClones = mySection.hasParentClones(section_id);
+				hasParentClones.then(function(data) {
+					console.log(data.clone_parents_by_section);
+					if(data.clone_parents_by_section.length > 0) {
+						// this section has parent pluslets - do not delete
+						mySection.deleteSectionRejectionDialog();
 					} else {
-						// pluslets exists so create an array of the pluslet ids
-						var pluslet_ids = [];
-                        $.each(response.pluslets, function(data) {
-                        	$.each(this, function(key, value) {
-                        		if(key == 'pluslet_id') {
-                        			pluslet_ids.push(value);
-								}
-							});
-						});
-                        return pluslet_ids;
+						mySection.deleteSectionDialog(section_id);
+
 					}
-				}).then(function (pluslet_ids) {
-					// delete any pluslets that are not master pluslets
-					//mySection.deleteSectionPluslets();
-
-					//loop thru pluslet ids and remove ones that are not clone masters from the dom
-					if(pluslet_ids != undefined) {
-
-						$.each(pluslet_ids, function(key, value) {
-							console.log('pluslet_id: ' + value);
-							var pluslet_id = value;
-							mySection.deletePluslet(pluslet_id);
-						});
-					}
-
-				}).done(function(checks) {
-					return checks;
 				});
+
+
 			});
 		},
 
-		deleteSection: function(section_id) {
-
-
-		},
-
-		deleteSectionPluslets: function(pluslet_ids) {
-
-			//loop thru pluslet ids and remove ones that are not clone masters from the dom
-			var ids = [];
-			if(pluslet_ids != undefined) {
-				$.each(pluslet_ids, function(key, value) {
-					//mySection.deletePluslet(value);
-					ids.push(value);
-				});
-			}
-			return ids;
-		},
-
-		removePlusletNode: function(pluslet_id) {
-
-			$('#pluslet-' + pluslet_id).remove();
-		},
-
-		deletePluslet: function(pluslet_id) {
-
-			var hasClones = mySection.hasMasterClones(pluslet_id);
-			//console.log('hasClones: ' + hasClones);
-			hasClones.then(function (data) {
-
-				$.each(data, function(key, value) {
-					if(key == 'cloned_pluslets') {
-						if( $(value).length > 0 ) {
-							// section has clones so do not delete section
-							mySection.deleteSectionRejectionDialog();
-							return false;
-						} else {
-							console.log('pluslet_id: ' + pluslet_id );
-							mySection.removePlusletNode(pluslet_id);
-						}
-					}
-				});
-			}).done(function() {
-
-				mySection.autoSaveGuide();
-			});
-			return hasClones;
-		},
 
 		deleteSectionDialog: function(section_id) {
 
@@ -329,9 +262,7 @@ function section() {
 						$("#section_" + section_id).remove();
 						//$('#response').show();
 
-						var save = saveSetup();
-						save.saveGuide();
-						$('#save_guide').fadeOut();
+						mySection.autoSaveGuide();
 
 						$(this).dialog('close');
 						return false;
@@ -397,11 +328,11 @@ function section() {
 		},
 
 
-		hasMasterClones: function (pluslet_id) {
+		hasParentClones: function (section_id) {
 			return $.ajax({
-				url: "helpers/fetch_cloned_pluslets.php",
+				url: "helpers/fetch_clone_parent_pluslets_by_section_id.php",
 				type: "GET",
-				data: 'master_id=' + pluslet_id,
+				data: 'section_id=' + section_id,
 				dataType: "json"
 			});
 		}
