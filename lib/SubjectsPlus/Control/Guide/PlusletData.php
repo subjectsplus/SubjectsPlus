@@ -20,6 +20,7 @@ class PlusletData extends GuideBase implements OutputInterface {
 	public $cloned_pluslets;
 	public $clones_by_tab;
 	public $clones_by_subject;
+	public $clone_parents_by_section;
 
 	public function __construct( Querier $db ) {
 		$this->db = $db;
@@ -65,7 +66,6 @@ class PlusletData extends GuideBase implements OutputInterface {
 		$this->pluslet_ids = $pluslet_ids;
 	}
 
-
 	public function fetchPlusletsBySubjectId( $subject_id = null ) {
 		$connection = $this->db->getConnection();
 
@@ -108,6 +108,7 @@ class PlusletData extends GuideBase implements OutputInterface {
 		$pluslets = $statement->fetchAll();
 
 		$this->pluslets = $pluslets;
+		return $pluslets;
 	}
 
 	public function fetchPlusletsByTabId( $tab_id = null ) {
@@ -142,6 +143,31 @@ class PlusletData extends GuideBase implements OutputInterface {
 		}
 
 		return $cloned_pluslets;
+	}
+
+	public function fetchClonedParentPlusletsBySectionId( $section_id ) {
+		$pluslets   = $this->fetchPlusletsBySectionId( $section_id );
+
+		$master_ids = array();
+		foreach ( $pluslets as $pluslet ):
+			$master_ids[] = $pluslet["pluslet_id"];
+		endforeach;
+
+		$clone_parents_by_section = array();
+		foreach ( $master_ids as $master_id ):
+			$cloned_pluslets_by_id = $this->fetchClonedPlusletsById( $master_id );
+
+			if ( ! empty( $cloned_pluslets_by_id ) ) {
+
+				$parent_pluslet = $this->fetchPlusletById($master_id);
+
+
+				$clone_parents_by_section[] = $parent_pluslet;
+			}
+
+		endforeach;
+
+		$this->clone_parents_by_section = $clone_parents_by_section;
 	}
 
 	public function getClonedPlusletsBySubjectIdTabId( $tab_id ) {
