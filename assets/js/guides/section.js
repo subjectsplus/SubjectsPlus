@@ -38,6 +38,7 @@ function section() {
 		autoSaveGuide: function() {
 			var save = saveSetup();
 			save.saveGuide();
+			$("#response").hide();
 			$('#save_guide').fadeOut();
 		},
 		viewSectionControls : function() {

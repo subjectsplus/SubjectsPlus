@@ -53,16 +53,76 @@ function tabs() {
             myTabs.setupTabs();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
-            //Find Box Tabs - Browse and Search
-
 
             //Find Box Tabs - Browse and Search
             myTabs.settings.findBoxTabs.tabs();
 
-
             var sec = section();
             sec.makeAddSection('a[id="add_section"]');
 
+        },
+        autoSaveGuide: function() {
+            var save = saveSetup();
+            save.saveGuide();
+            $("#response").hide();
+            $('#save_guide').fadeOut();
+        },
+        getSubjectId: function() {
+            var g = guide();
+            var subjectId = g.getSubjectId();
+            return subjectId;
+        },
+        getActiveTab: function() {
+            return $('#tabs').tabs('option', 'active');
+        },
+
+        addNewTab: function() {
+
+            // first save tab metadata to tab table
+
+
+            // activate new tab view
+
+
+            // add new section html
+
+
+            // save section metadata to section table
+        },
+
+        saveNewTab: function() {
+
+            var subject_id = myTabs.getSubjectId();
+            var active_tab_index = myTabs.getActiveTab();
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount;
+            var external_url = "";
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            console.log('saveNewTab');
+            console.log('subject_id: ' + subject_id);
+            console.log('tab_index: ' + active_tab_index);
+            console.log('label: ' + label);
+            console.log('external_url: ' + external_url);
+            console.log('visibility: ' + visibility);
+
+            return $.ajax({
+
+                url : "helpers/save_tab.php",
+                type : "GET",
+                data : {
+                    subject_id: subject_id,
+                    label: label,
+                    tab_index: active_tab_index,
+                    external_url: external_url,
+                    visibility: visibility
+                },
+                dataType: "json"
+
+            }).done(function() {
+                var sec = section();
+                sec.getTabIds();
+                sec.getSectionIds();
+            });
 
         },
         getSectionForNewTab: function (id, external_link, li, tabContentHtml) {
@@ -219,6 +279,10 @@ function tabs() {
                         //console.log('save guide fade in');
                         $('#save_guide').fadeIn();
 
+                        // var save = saveSetup();
+                        // save.saveGuide();
+                        // $('#save_guide').fadeOut();
+
                     },
                     "Delete": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
@@ -250,7 +314,10 @@ function tabs() {
                                     myTabs.settings.tabCounter--;
                                     editTabDialog.dialog("close");
                                     $("#response").hide();
-                                    $('#save_guide').fadeIn();
+                                    //$('#save_guide').fadeIn();
+                                    var save = saveSetup();
+                                    save.saveGuide();
+                                    $('#save_guide').fadeOut();
                                 }
                             }
                         });
@@ -320,6 +387,7 @@ function tabs() {
             // addTab form: calls addTab function on submit and closes the dialog
             var form = myDialog.find("form").submit(function (event) {
                 addTab();
+                myTabs.saveNewTab();
                 myDialog.dialog("close");
                 event.preventDefault();
             });
@@ -341,12 +409,11 @@ function tabs() {
                 $(li).attr('data-external-link', external_link);
                 //console.log(id);
                 $(li).attr('data-visibility', visibility);
-                //console.log(id);
+                console.log(id);
                 myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
                 //console.log($(li));
 
                 myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
-
 
                 //override submit for form in edit tab dialog to click rename button
                 $("#dialog_edit").find("form").submit(function (event) {
