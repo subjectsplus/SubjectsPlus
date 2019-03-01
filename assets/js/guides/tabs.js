@@ -35,6 +35,7 @@ function tabs() {
 
                 myTabs.removePlusletsFromCurrentTab();
                 myTabs.makeTabsClickable();
+                myTabs.clickNewTabForm();
 
                 myTabs.reorderTabsFlyout();
                 //myTabs.fetchTabsFlyout();
@@ -76,10 +77,47 @@ function tabs() {
             return $('#tabs').tabs('option', 'active');
         },
 
+        clickNewTabForm: function() {
+
+            var myDialog = myTabs.settings.tabsDialog.dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Add: function () {
+                        addTab();
+                        $(this).dialog("close");
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                open: function () {
+                    $(this).find(myTabs.settings.externalLink).hide();
+                    $(this).find(myTabs.settings.externalLink).prev().hide();
+                    if (myTabs.settings.tabCounter > 0) {
+                        $(this).find(myTabs.settings.externalLink).show();
+                        $(this).find(myTabs.settings.externalLink).prev().show();
+                    }
+                },
+                close: function () {
+                    form[0].reset();
+                }
+            });
+
+            $("#add_tab").button().click(function () {
+                myDialog.dialog("open");
+            });
+
+        },
+
         addNewTab: function() {
 
             // first save tab metadata to tab table
+            var newTab = myTabs.saveNewTab();
+            newTab.then(function(data) {
 
+
+            });
 
             // activate new tab view
 
@@ -124,6 +162,73 @@ function tabs() {
                 sec.getSectionIds();
             });
 
+        },
+        addNewTabHtml: function() {
+            var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
+                external_link = $('input#tab_external_link').val(),
+                id = "tabs-" + $('#tabs').data().tabCount,
+
+                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+
+                tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            $(li).attr('data-external-link', external_link);
+            //console.log(id);
+            $(li).attr('data-visibility', visibility);
+            console.log(id);
+            myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
+            //console.log($(li));
+
+            //myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+
+            //override submit for form in edit tab dialog to click rename button
+            $("#dialog_edit").find("form").submit(function (event) {
+                $(this).parent().parent().find('span:contains("Rename")').click();
+                event.preventDefault();
+            });
+
+            // Move the expand tab to the end
+            $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+        },
+        activateNewTabView: function() {
+            $('#tabs').tabs();
+
+            if (external_link === '') {
+                $('#tabs').tabs("refresh");
+                $('#tabs').tabs('select', $('#tabs').data().tabCount);
+            } else {
+
+                myTabs.settings.tabs.tabs('select', 0);
+            }
+
+            if ($(li).attr('data-external-link') !== '') {
+                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    evt.stopImmediatePropagation();
+                });
+            }
+
+            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                var events = $._data(data, "events");
+
+                if (events) {
+                    //console.log(events);
+                    var onClickHandlers = events['click'];
+
+                    // Only one handler. Nothing to change.
+                    if (onClickHandlers.length === 1) {
+                        return;
+                    }
+
+                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                }
+            });
+
+            $('#tabs').data().tabCount++;
         },
         getSectionForNewTab: function (id, external_link, li, tabContentHtml) {
 
@@ -379,9 +484,9 @@ function tabs() {
             });
 
             // addTab button: just opens the dialog
-            $("#add_tab").button().click(function () {
-                myDialog.dialog("open");
-            });
+            // $("#add_tab").button().click(function () {
+            //     myDialog.dialog("open");
+            // });
 
 
             // addTab form: calls addTab function on submit and closes the dialog
@@ -451,8 +556,10 @@ function tabs() {
             ///////////////////
             $(document.body).on('click', 'a[id*=tab-]', function (event) {
                 var tab_id = $(this).attr("id").split("-");
+                console.log('makeTabsClickable tab_id: ' + tab_id);
                 var selected_tab = "#pluslet-" + box_id[1];
-                myTabs.setupTabs(tab_id[1]);
+                console.log('makeTabsClickable selected_tab: ' + selected_tab);
+                //myTabs.setupTabs(tab_id[1]);
 
             });
         },
