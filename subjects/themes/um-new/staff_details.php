@@ -37,7 +37,7 @@ if (isset($_GET['name']) && in_array(($_GET['name']), $ok_names)) {
 // $staffpath is necessary because of mod_rewriting screwing up paths
 $StaffPath = $PublicPath . "staff.php";
 
-$statement = $connection->prepare("SELECT s.staff_id, lname, fname, title, tel, s.email, d.name, bio, subject_id
+$statement = $connection->prepare("SELECT s.staff_id, lname, fname, title, tel, s.email, d.name, bio, subject_id, ptags
 FROM staff s
 LEFT JOIN department d on s.department_id = d.department_id
 LEFT JOIN staff_subject ss ON s.staff_id = ss.staff_id
@@ -48,6 +48,14 @@ $statement->execute(array("$check_this@%"));
 $staffmem = $statement->fetchAll();
 
 $tel = !empty($tel_prefix) ? $tel_prefix . " " . $staffmem[0][4] : $tel_prefix . $staffmem[0][4];
+
+$lib_check = $staffmem[0][9];
+
+if (strpos($lib_check, 'librarian') !== false) {
+    $page_title_prefix = _("Faculty Profile: ");
+} else {
+    $page_title_prefix = _("Staff Profile: ");
+}
 
 $fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
@@ -112,7 +120,7 @@ if ($staffmem[0][8] != "") {
 // Assemble the content for our main pluslet
 $display = $info;
 
-$page_title = _("Staff Profile: ") . $fullname;
+$page_title = $page_title_prefix . $fullname;
 
 //header
 include("includes/header_um-new.php");
