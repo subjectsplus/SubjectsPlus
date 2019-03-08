@@ -583,7 +583,7 @@ function saveSetup() {
                 },
                 function () {
 
-                    $("#response").fadeIn().delay(4000).fadeOut();
+                    //$("#response").fadeIn().delay(4000).fadeOut();
                     mySaveSetup.refreshFeeds();
 
                     var g = guide();
@@ -593,9 +593,6 @@ function saveSetup() {
                     copyClone().markAsLinked();
                     mySaveSetup.updateTabIds();
                     mySaveSetup.updateSectionIds();
-
-
-
 
                 });
 
