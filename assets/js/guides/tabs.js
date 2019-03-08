@@ -49,15 +49,10 @@ function tabs() {
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
             //Find Box Tabs - Browse and Search
-           
-
-            //Find Box Tabs - Browse and Search
             myTabs.settings.findBoxTabs.tabs();
-            
 
 			var sec = section();
 			sec.makeAddSection('a[id="add_section"]');
-
         },
 
         autoSaveGuide: function() {
@@ -77,65 +72,65 @@ function tabs() {
 
 		getSectionForNewTab : function (id, external_link, li, tabContentHtml) {
 
-			if (!external_link) {
-		$.ajax
-                    ({
-                        url: "helpers/section_data.php",
-                        type: "POST",
-                        data: { action: 'create' },
-                        dataType: "html",
-                        success: function (html) {
-                            
-
-                            myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
-                                + "</div>");	
-                        }
-                    });
-			}
-					
-					myTabs.settings.saveButton.fadeIn();
+            if (!external_link) {
+                $.ajax
+                ({
+                    url: "helpers/section_data.php",
+                    type: "POST",
+                    data: {action: 'create'},
+                    dataType: "html",
+                    success: function (html) {
 
 
-                            $('#tabs').tabs();
+                        myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
+                            + "</div>");
+                    }
+                });
+            }
 
-                            if (external_link === '') {
-                                $('#tabs').tabs("refresh");
-                                $('#tabs').tabs('select', $('#tabs').data().tabCount);
-                            } else {
-                             
-                                myTabs.settings.tabs.tabs('select', 0);
-                            }
+            //myTabs.settings.saveButton.fadeIn();
 
-                            if ($(li).attr('data-external-link') !== '') {
-                                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
-                                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
-                                    evt.stopImmediatePropagation();
-                                });
-                            }
 
-                            $(li).children('a[href^="#tabs-"]').each(function (data) {
-                                var events = $._data(data, "events");
-                                  
-                                if (events) {
-                                    console.log(events);
-                                    var onClickHandlers = events['click'];
+            $('#tabs').tabs();
 
-                                    // Only one handler. Nothing to change.
-                                    if (onClickHandlers.length === 1) {
-                                        return;
-                                    }
+            if (external_link === '') {
+                $('#tabs').tabs("refresh");
+                $('#tabs').tabs('select', $('#tabs').data().tabCount);
+            } else {
 
-                                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
-                                }
-                                });
-                            
-                            $('#tabs').data().tabCount++;
+                myTabs.settings.tabs.tabs('select', 0);
+            }
 
-                            setTimeout(function() {
-                                $('#'+id).find('.sp_section_controls').trigger('click');
-                                $('#'+id).find('.sp_section').removeClass('section_selected_area');
+            if ($(li).attr('data-external-link') !== '') {
+                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    evt.stopImmediatePropagation();
+                });
+            }
 
-                            },100);
+            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                var events = $._data(data, "events");
+
+                if (events) {
+                    console.log(events);
+                    var onClickHandlers = events['click'];
+
+                    // Only one handler. Nothing to change.
+                    if (onClickHandlers.length === 1) {
+                        return;
+                    }
+
+                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                }
+            });
+
+            $('#tabs').data().tabCount++;
+
+            setTimeout(function () {
+                $('#' + id).find('.sp_section_controls').trigger('click');
+                $('#' + id).find('.sp_section').removeClass('section_selected_area');
+
+            }, 100);
 
 		},
         setupTabs: function () {
@@ -145,7 +140,8 @@ function tabs() {
                 modal: true,
                 buttons: {
                     Add: function () {
-                        addTab();
+                        //addTab();
+                        myTabs.addNewTab();
                         $(this).dialog("close");
                     },
                     Cancel: function () {
@@ -226,8 +222,9 @@ function tabs() {
 
                         $(this).dialog("close");
                         $("#response").hide();
-                        console.log('save guide fade in');
-                        $('#save_guide').fadeIn();
+                        //console.log('save guide fade in');
+                        //$('#save_guide').fadeIn();
+                        myTabs.autoSaveGuide();
 
                         
                     },
@@ -260,8 +257,9 @@ function tabs() {
                                     myTabs.settings.tabs.tabs();
                                     myTabs.settings.tabCounter--;
                                     editTabDialog.dialog("close");
-                                    $("#response").hide();
-                                    $('#save_guide').fadeIn();
+                                    // $("#response").hide();
+                                    // $('#save_guide').fadeIn();
+                                    myTabs.autoSaveGuide();
                                 }
                             }
                         });
@@ -330,56 +328,125 @@ function tabs() {
 
             // addTab form: calls addTab function on submit and closes the dialog
             var form = myDialog.find("form").submit(function (event) {
-                addTab();
+                //addTab();
+                myTabs.addNewTab();
+
                 myDialog.dialog("close");
                 event.preventDefault();
             });
 
-            // actual addTab function: adds new tab using the input from the form above
-            function addTab() {
-                var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+            // // actual addTab function: adds new tab using the input from the form above
+            // function addTab() {
+            //     var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+            //
+            //     var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
+            //         external_link = $('input#tab_external_link').val(),
+            //         id = "tabs-" + $('#tabs').data().tabCount,
+            //
+            //         li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+            //
+            //         tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+            //
+            //     var visibility = $('select[name="new-tab-visibility"]').val();
+            //
+            //     $(li).attr('data-external-link', external_link);
+            //     //console.log(id);
+            //     $(li).attr('data-visibility', visibility);
+            //     //console.log(id);
+            //     myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
+            //     //console.log($(li));
+            //
+			// 	myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+            //
+            //
+            //     //override submit for form in edit tab dialog to click rename button
+            //     $("#dialog_edit").find("form").submit(function (event) {
+            //         $(this).parent().parent().find('span:contains("Rename")').click();
+            //         event.preventDefault();
+            //     });
+            //
+            //     // Move the expand tab to the end
+            //     $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+            //
+            //     //myTabs.autoSaveGuide();
+            //     var newTab = myTabs.saveNewTab();
+            //     newTab.then(function(data) {
+            //         //console.log(data.last_insert);
+            //         var last_insert_tab_id = data.last_insert;
+            //
+            //         var mySection = section();
+            //         var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
+            //         newSection.then(function(data) {
+            //             var mySaveSetup = saveSetup();
+            //             mySaveSetup.updateTabIds();
+            //             return data;
+            //         }).then(function(data) {
+            //             var mySaveSetup = saveSetup();
+            //             mySaveSetup.updateSectionIds();
+            //             console.log(data);
+            //             return data;
+            //         })
+            //
+            //     });
+            // }
+        },
+        addNewTab: function() {
 
-                var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
-                    external_link = $('input#tab_external_link').val(),
-                    id = "tabs-" + $('#tabs').data().tabCount,
-                   
-                    li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
-                     
-                    tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+            var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
 
-                var visibility = $('select[name="new-tab-visibility"]').val();
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
+                external_link = $('input#tab_external_link').val(),
+                id = "tabs-" + $('#tabs').data().tabCount,
 
-                $(li).attr('data-external-link', external_link);
-                //console.log(id);
-                $(li).attr('data-visibility', visibility);
-                //console.log(id);
-                myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
-                //console.log($(li));
+                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
 
-				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+                tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            $(li).attr('data-external-link', external_link);
+            //console.log(id);
+            $(li).attr('data-visibility', visibility);
+            //console.log(id);
+            myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
+            //console.log($(li));
+
+            myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
 
-                //override submit for form in edit tab dialog to click rename button
-                $("#dialog_edit").find("form").submit(function (event) {
-                    $(this).parent().parent().find('span:contains("Rename")').click();
-                    event.preventDefault();
-                });
-                
-                // Move the expand tab to the end
-                $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+            //override submit for form in edit tab dialog to click rename button
+            $("#dialog_edit").find("form").submit(function (event) {
+                $(this).parent().parent().find('span:contains("Rename")').click();
+                event.preventDefault();
+            });
 
-                //myTabs.autoSaveGuide();
-                var newTab = myTabs.saveNewTab();
-                newTab.then(function(data) {
-                    //console.log(data.last_insert);
-                    var last_insert_tab_id = data.last_insert;
+            // Move the expand tab to the end
+            $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
 
-                    var newSection = section();
-                    newSection.addNewSection(0, '4-4-4', last_insert_tab_id);
-                    newSection
+            //myTabs.autoSaveGuide();
+            var newTab = myTabs.saveNewTab();
+            newTab.then(function(data) {
+                //console.log(data.last_insert);
+                var last_insert_tab_id = data.last_insert;
 
-                });
-            }
+                var mySection = section();
+                var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
+                newSection.then(function(data) {
+                    var mySaveSetup = saveSetup();
+                    mySaveSetup.updateTabIds();
+                    return data;
+                }).then(function(data) {
+                    var mySaveSetup = saveSetup();
+                    mySaveSetup.updateSectionIds();
+                    console.log(data);
+                    return data;
+                })
+
+            }).then(function(data) {
+                console.log('setup tabs: ' + data);
+                myTabs.setupTabs();
+            });
+
         },
         saveNewTab: function() {
 
@@ -415,6 +482,74 @@ function tabs() {
                 sec.getSectionIds();
             });
 
+        },
+        addNewTabHtml: function() {
+            var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
+                external_link = $('input#tab_external_link').val(),
+                id = "tabs-" + $('#tabs').data().tabCount,
+
+                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+
+                tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            $(li).attr('data-external-link', external_link);
+            //console.log(id);
+            $(li).attr('data-visibility', visibility);
+            console.log(id);
+            myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
+            //console.log($(li));
+
+            //myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+
+            //override submit for form in edit tab dialog to click rename button
+            $("#dialog_edit").find("form").submit(function (event) {
+                $(this).parent().parent().find('span:contains("Rename")').click();
+                event.preventDefault();
+            });
+
+            // Move the expand tab to the end
+            $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+        },
+        activateNewTabView: function() {
+            $('#tabs').tabs();
+            var external_link = $('input#tab_external_link').val();
+
+            if (external_link === '') {
+                $('#tabs').tabs("refresh");
+                $('#tabs').tabs('select', $('#tabs').data().tabCount);
+            } else {
+
+                myTabs.settings.tabs.tabs('select', 0);
+            }
+
+            if ($(li).attr('data-external-link') !== '') {
+                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    evt.stopImmediatePropagation();
+                });
+            }
+
+            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                var events = $._data(data, "events");
+
+                if (events) {
+                    //console.log(events);
+                    var onClickHandlers = events['click'];
+
+                    // Only one handler. Nothing to change.
+                    if (onClickHandlers.length === 1) {
+                        return;
+                    }
+
+                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                }
+            });
+
+            $('#tabs').data().tabCount++;
         },
         removePlusletsFromCurrentTab: function () {
             //remove all pluslets from current tab
