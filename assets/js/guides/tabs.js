@@ -29,20 +29,17 @@ function tabs() {
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
         bindUiActions: function () {
-            myTabs.removePlusletsFromCurrentTab();
             myTabs.makeTabsClickable();
+            myTabs.clickAddNewTab();
 
             myTabs.reorderTabsFlyout();
             myTabs.fetchTabsFlyout();
             myTabs.sortTabsFlyout();
 
-
             //configure sortable drag and drop zone for creating new guide from tabs
             myTabs.newGuideFromTabsSortable();
             //copy tabs to create new guide
             myTabs.createNewGuideFromTabs();
-
-       
         },
         init: function () {
             myTabs.setupTabs();
@@ -306,7 +303,6 @@ function tabs() {
                         if (onClickHandlers.length === 1) {
                             return;
                         }
-
                         onClickHandlers.splice(0, 0, onClickHandlers.pop());
                     });
                 }
@@ -320,76 +316,60 @@ function tabs() {
                 editTabDialog.dialog("open");
             });
 
-            // addTab button: just opens the dialog
-            $("#add_tab").button().click(function () {
-                myDialog.dialog("open");
-            });
+            // // addTab button: just opens the dialog
+            // $("#add_tab").button().click(function () {
+            //     myDialog.dialog("open");
+            // });
 
 
             // addTab form: calls addTab function on submit and closes the dialog
             var form = myDialog.find("form").submit(function (event) {
                 //addTab();
                 myTabs.addNewTab();
-
                 myDialog.dialog("close");
                 event.preventDefault();
             });
 
-            // // actual addTab function: adds new tab using the input from the form above
-            // function addTab() {
-            //     var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
-            //
-            //     var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
-            //         external_link = $('input#tab_external_link').val(),
-            //         id = "tabs-" + $('#tabs').data().tabCount,
-            //
-            //         li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
-            //
-            //         tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
-            //
-            //     var visibility = $('select[name="new-tab-visibility"]').val();
-            //
-            //     $(li).attr('data-external-link', external_link);
-            //     //console.log(id);
-            //     $(li).attr('data-visibility', visibility);
-            //     //console.log(id);
-            //     myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
-            //     //console.log($(li));
-            //
-			// 	myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
-            //
-            //
-            //     //override submit for form in edit tab dialog to click rename button
-            //     $("#dialog_edit").find("form").submit(function (event) {
-            //         $(this).parent().parent().find('span:contains("Rename")').click();
-            //         event.preventDefault();
-            //     });
-            //
-            //     // Move the expand tab to the end
-            //     $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
-            //
-            //     //myTabs.autoSaveGuide();
-            //     var newTab = myTabs.saveNewTab();
-            //     newTab.then(function(data) {
-            //         //console.log(data.last_insert);
-            //         var last_insert_tab_id = data.last_insert;
-            //
-            //         var mySection = section();
-            //         var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
-            //         newSection.then(function(data) {
-            //             var mySaveSetup = saveSetup();
-            //             mySaveSetup.updateTabIds();
-            //             return data;
-            //         }).then(function(data) {
-            //             var mySaveSetup = saveSetup();
-            //             mySaveSetup.updateSectionIds();
-            //             console.log(data);
-            //             return data;
-            //         })
-            //
-            //     });
-            // }
+
         },
+
+        clickAddNewTab: function() {
+            // addTab button: just opens the dialog
+            $("#add_tab").button().click(function () {
+                console.log('click new tab: ');
+                myTabs.newTabDialog();
+            });
+        },
+
+        newTabDialog: function() {
+            myTabs.settings.tabsDialog.dialog({
+                autoOpen: true,
+                modal: true,
+                buttons: {
+                    Add: function () {
+                        //addTab();
+                        myTabs.addNewTab();
+                        $(this).dialog("close");
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                open: function () {
+                    $(this).find(myTabs.settings.externalLink).hide();
+                    $(this).find(myTabs.settings.externalLink).prev().hide();
+                    if (myTabs.settings.tabCounter > 0) {
+                        $(this).find(myTabs.settings.externalLink).show();
+                        $(this).find(myTabs.settings.externalLink).prev().show();
+                    }
+                },
+                close: function () {
+                    var form = $('#dialog').find("form");
+                    $(form)[0].reset();
+                }
+            });
+        },
+
         addNewTab: function() {
 
             var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
@@ -426,76 +406,42 @@ function tabs() {
             //myTabs.autoSaveGuide();
             var newTab = myTabs.saveNewTab();
             newTab.then(function(data) {
-                //console.log(data.last_insert);
                 var last_insert_tab_id = data.last_insert;
 
-                // $.each(data, function(key,value) {
-                //     console.log('key: ' + key + ' value: ' + value);
-                // });
+                var tabIndex = $('#tabs').data().tabCount-1;
+                $('#tabs').tabs({active: tabIndex});
 
                 var mySection = section();
                 var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
                 newSection.then(function(data) {
-                    // $.each(data, function(key,value) {
-                    //     console.log('key: ' + key + ' value: ' + value);
-                    // });
                     var mySaveSetup = saveSetup();
                     mySaveSetup.updateTabIds();
                     return data;
                 }).then(function(data) {
-                    // $.each(data, function(key,value) {
-                    //     console.log('key: ' + key + ' value: ' + value);
-                    // });
                     var mySaveSetup = saveSetup();
                     mySaveSetup.updateSectionIds();
-                    //console.log(data);
                     return data;
                 });
-                // $.each(data, function(key,value) {
-                //     console.log('key: ' + key + ' value: ' + value);
-                // });
-
                 return data;
             }).then(function(data) {
-                console.log('setup tabs: ' + data);
-                $.each(data, function(key,value) {
-                    console.log('key: ' + key + ' value: ' + value);
-                });
                 myTabs.setupTabs();
                 return data;
             }).then(function(data) {
-
                 var t = $('#tabs').data().tabs.active;
                 $(t).attr('id', data.last_insert);
                 $(t).addClass('dropspotty child-tab ui-droppable');
-
-                $.each(data, function(key,value) {
-                    console.log('key: ' + key + ' value: ' + value);
-                });
-
-
-                //myTabs.activateNewTabView();
-
+                return data;
             });
 
         },
         saveNewTab: function() {
-
             var subject_id = myTabs.getSubjectId();
             var active_tab_index = myTabs.getActiveTab();
             var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount;
             var external_url = "";
             var visibility = $('select[name="new-tab-visibility"]').val();
 
-            console.log('saveNewTab');
-            console.log('subject_id: ' + subject_id);
-            console.log('tab_index: ' + active_tab_index);
-            console.log('label: ' + label);
-            console.log('external_url: ' + external_url);
-            console.log('visibility: ' + visibility);
-
             return $.ajax({
-
                 url : "helpers/save_tab.php",
                 type : "GET",
                 data : {
@@ -512,7 +458,6 @@ function tabs() {
                 sec.getTabIds();
                 sec.getSectionIds();
             });
-
         },
         addNewTabHtml: function() {
             var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
@@ -545,7 +490,7 @@ function tabs() {
             // // Move the expand tab to the end
             // $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
         },
-        activateNewTabView: function() {
+        activateNewTabView: function(li) {
             $('#tabs').tabs();
             var external_link = $('input#tab_external_link').val();
 
@@ -582,16 +527,7 @@ function tabs() {
 
             $('#tabs').data().tabCount++;
         },
-        removePlusletsFromCurrentTab: function () {
-            //remove all pluslets from current tab
-            $('a.remove_pluslets').on('click', function () {
-                var currPanel = $("#tabs").tabs('option', 'active');
-                if (confirm(myTabs.strings.confirmPrompt)) {
-                    $("#tabs-" + currPanel).find('.pluslet').remove();
-                    $("#save_guide").fadeIn();
-                }
-            });
-        },
+
         targetBlankLinks: function () {
             // open links in new tab if box_setting target_blank_links is checked.
             //this is for admin side, user view also has function in /subjects/guide.php
@@ -642,46 +578,28 @@ function tabs() {
             $("#flayout-tab-list").sortable({connectWith: "#flayout-tab-list"});
 
             $('#save_tab_order_btn').on('click', function () {
-
                 var data = $("#flayout-tab-list").sortable('serialize');
-
                 $.post('./helpers/save_tab_order.php', {"data": data}, function(d){
-
                 }).done(function() {
-
                     location.reload();
-
                 });
-
             });
-
         },
         reorderTabsFlyout : function() {
             document.addEventListener("DOMContentLoaded", function() {
-
-
-
                 $('#show_tabs').on('click', function() {
 
                     if( $("#save_guide").is(':visible') ) {
-
                         $(".flyout-tabs").append( myTabs.strings.reorderTabString);
-
                         $("#save_tab_order_btn").hide();
 
                     } else {
-
                         myTabs.fetchTabsFlyout();
-
                         myTabs.sortTabsFlyout();
-
                         $("#save_tab_order_btn").show();
                     }
-
                 });
-
             });
-
         },
 
         newGuideFromTabsSortable : function() {
