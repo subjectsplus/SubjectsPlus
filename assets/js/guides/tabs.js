@@ -429,22 +429,53 @@ function tabs() {
                 //console.log(data.last_insert);
                 var last_insert_tab_id = data.last_insert;
 
+                // $.each(data, function(key,value) {
+                //     console.log('key: ' + key + ' value: ' + value);
+                // });
+
                 var mySection = section();
                 var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
                 newSection.then(function(data) {
+                    // $.each(data, function(key,value) {
+                    //     console.log('key: ' + key + ' value: ' + value);
+                    // });
                     var mySaveSetup = saveSetup();
                     mySaveSetup.updateTabIds();
                     return data;
                 }).then(function(data) {
+                    // $.each(data, function(key,value) {
+                    //     console.log('key: ' + key + ' value: ' + value);
+                    // });
                     var mySaveSetup = saveSetup();
                     mySaveSetup.updateSectionIds();
-                    console.log(data);
+                    //console.log(data);
                     return data;
-                })
+                });
+                // $.each(data, function(key,value) {
+                //     console.log('key: ' + key + ' value: ' + value);
+                // });
 
+                return data;
             }).then(function(data) {
                 console.log('setup tabs: ' + data);
+                $.each(data, function(key,value) {
+                    console.log('key: ' + key + ' value: ' + value);
+                });
                 myTabs.setupTabs();
+                return data;
+            }).then(function(data) {
+
+                var t = $('#tabs').data().tabs.active;
+                $(t).attr('id', data.last_insert);
+                $(t).addClass('dropspotty child-tab ui-droppable');
+
+                $.each(data, function(key,value) {
+                    console.log('key: ' + key + ' value: ' + value);
+                });
+
+
+                //myTabs.activateNewTabView();
+
             });
 
         },
@@ -505,14 +536,14 @@ function tabs() {
 
             //myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
 
-            //override submit for form in edit tab dialog to click rename button
-            $("#dialog_edit").find("form").submit(function (event) {
-                $(this).parent().parent().find('span:contains("Rename")').click();
-                event.preventDefault();
-            });
-
-            // Move the expand tab to the end
-            $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+            // //override submit for form in edit tab dialog to click rename button
+            // $("#dialog_edit").find("form").submit(function (event) {
+            //     $(this).parent().parent().find('span:contains("Rename")').click();
+            //     event.preventDefault();
+            // });
+            //
+            // // Move the expand tab to the end
+            // $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
         },
         activateNewTabView: function() {
             $('#tabs').tabs();
