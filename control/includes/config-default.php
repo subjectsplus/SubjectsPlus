@@ -64,7 +64,7 @@ $omit_user_columns = array( );
 // Available options: 'title', 'position_number', 'classification', 'priority', 'tel',
 // 'fax', 'intercom', 'room_number', 'address', 'city', 'state', 'zip', 'home_phone', 'cell_phone',
 // 'lat_long', 'emergency_contact' (all three emergency contact information)
-$require_user_columns = array( "title", "classification", "tel", "address", "city", "state", "zip", "emergency_contact");
+$require_user_columns = array( "title" );
 
 //used to declare which pluslets are activated in new box drop-down
 
