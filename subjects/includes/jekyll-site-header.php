@@ -483,7 +483,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/kislak-center/index.html">Kislak Center</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms</a></li>
 
