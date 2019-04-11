@@ -588,8 +588,7 @@ include("includes/header_um-new.php");
                             <div class="<?php print $tb_bonus_css; ?>">
                                 <div class="form-group">
                                     <label for="the_suggestion"><?php print _("Your comment:"); ?></label>
-                                    <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3">
-                                    <?php print $this_comment; ?></textarea>
+                                    <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3" value="<?php print $this_comment; ?>"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="suggestion_email"><?php print _("Your email (optional):"); ?></label>
