@@ -18,6 +18,8 @@
 
 use SubjectsPlus\Control\Querier;
 
+//change
+
 $db = new Querier;
 
 $use_jquery = array();
