@@ -498,7 +498,7 @@ if ($result_count != 0) {
 		<a name=\"$talkback_id\"></a>
 		<p class=\"tellus_comment\"><span class=\"comment_num\" style=\"background-image: url('$AssetPath";
         $results .= "images/comment_box.png');\">$row_count</span>$question</p>
-		<p class=\"comment-meta\">Comment from $myrow[2] on $myrow[4]</p>
+		<p class=\"comment-meta\">Comment on $myrow[4]</p>
 		<div class=\"answer\">$answer</div><div class=\"responder d-flex flex-row flex-nowrap\">";
 
         if ($show_talkback_face == 1) {
