@@ -168,14 +168,14 @@ $todaycomputer = date('Y-m-d H:i:s');
 
 // let's do the blacklister first
 
-if (BlackLister($this_comment) == TRUE && ($_POST['skill'] == $stk_answer)) {
+if (BlackLister($this_comment) == TRUE ) {
 		// we'll pretend it was an okay submission	
 		$feedback = $submission_feedback;
 		$this_name = "";
 		$this_comment = "";
 		$stage_two = "ok";
 
-} elseif (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
+} elseif (isset($_POST['the_suggestion']) ) {
 
 // clean submission and enter into db!  Don't show page again.
 
@@ -347,7 +347,7 @@ if (BlackLister($this_comment) == TRUE && ($_POST['skill'] == $stk_answer)) {
 		}
 	}
 
-	if ($stage_one == "ok" && $stage_two == "ok") {
+	if ($stage_one == "ok" ) {
 		$feedback = $submission_feedback;
 		$this_name = "";
 		$this_comment = "";
@@ -514,33 +514,39 @@ if ($result_count != 0) {
 // Incomplete Comment submission
 ///////////////////
 
-if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
-
-	$stk_message = "
-	<div class=\"talkback-message talkback-error\">\n
-	<h2>" ._("Hmm, That Was a Tricky Bit of Math") . "</h2>\n
-	<div class=\"talkback-message-body\">\n
-	<p>" . _("Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . .") . "</p>
-	</div>\n
-	</div>\n
-	";
-
-} else {
-	$stk_message = "";
-}
+//if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
+//
+//	$stk_message = "
+//	<div class=\"talkback-message talkback-error\">\n
+//	<h2>" ._("Hmm, That Was a Tricky Bit of Math") . "</h2>\n
+//	<div class=\"talkback-message-body\">\n
+//	<p>" . _("Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . .") . "</p>
+//	</div>\n
+//	</div>\n
+//	";
+//
+//} else {
+//	$stk_message = "";
+//}
 
 
 include("includes/header_med.php");
 
 ?>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        document.getElementById("tellus").submit();
+    }
+</script>
 
 <div class="panel-container">
 <div class="pure-g">
 	
 	<div class="pure-u-1 pure-u-lg-3-4 panel-adj">
 		<div class="breather">
-				<?php print $feedback . $stk_message; ?>
+				<?php print $feedback; ?>
 
 				<?php print _("<p>Please use this page to write comments or make suggestions about Library services, resources, and facilities.</p>
  
@@ -569,10 +575,14 @@ include("includes/header_med.php");
 			          <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
 			          <br />
 			          <?php print _("(In case we need to contact you)"); ?>
+
 			          <br /><br />
-			          <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" />
-			          <br /><br />
-			          <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" /></p>
+				          <?php global $talkback_recaptcha_site_key; ?>
+                          <button type="submit" name="submit_comment" class="pure-button pure-button-topsearch g-recaptcha"
+                                  data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
+                                  data-callback="onSubmit"
+                                  data-size="invisible"><?php print _("Submit"); ?></button>
+                        </p>
 			        </div>
 		      </form>
 		      <?php  } ?>
