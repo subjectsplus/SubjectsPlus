@@ -48,7 +48,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li class="dept-heading">Health Sciences Division</li>
   <li>
     <div class="dept-sub">
-        <a href="http://calder.med.miami.edu/">Louis Calder Memorial Library</a>
+        <a href="'.$staff_page_url.'#146">Louis Calder Memorial Library</a>
     </div>
   </li>
   
@@ -102,7 +102,7 @@ $dept_select = "<select id=\"select_dept\">
   </optgroup>
 
   <optgroup label=\"Health Sciences Division\">
-    <option value=\"http://calder.med.miami.edu/\" data-external=\"http://calder.med.miami.edu\">Louis Calder Memorial Library</option>
+    <option value=\"$staff_page_url#146\" data-external=\"\">Louis Calder Memorial Library</option>
   </optgroup>
 
   <optgroup label=\"Information Systems, Access &amp; Facilities Division\">
