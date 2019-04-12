@@ -599,7 +599,7 @@ include("includes/header_um-new.php");
                                 <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
                                         data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
                                         data-callback="onSubmit"
-                                        data-size="invisible">Submit</button>
+                                        data-size="invisible"><?php print _("Submit"); ?></button>
                             </div>
                         </form>
                     <?php  } ?>
