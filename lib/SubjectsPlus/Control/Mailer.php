@@ -1,5 +1,6 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
+
 class Mailer {
 
   public function __construct() {
