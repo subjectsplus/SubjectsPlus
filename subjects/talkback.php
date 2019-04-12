@@ -435,7 +435,7 @@ if ($result_count != 0) {
 		<div class=\"tellus_item oddrow\">\n
 		<a name=\"$talkback_id\"></a>\n
 		<p class=\"tellus_comment\"><span class=\"comment_num\">$row_count</span> <strong>$question</strong><br />
-		<span style=\"clear: both;font-size: 11px;\">Comment from $myrow[2] on <em>$myrow[4]</em></span></p><br />\n
+		<span style=\"clear: both;font-size: 11px;\">Comment on <em>$myrow[4]</em></span></p><br />\n
 		<p>";
         if ($show_talkback_face == 1) {
             $results .= getHeadshot($myrow[9]);
@@ -505,7 +505,7 @@ include("includes/header.php");
                         <form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
                             <div class="talkback_form">
                                 <p><strong><?php print _("Your comment:"); ?></strong><br />
-                                    <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
+                                    <textarea name="the_suggestion" cols="26" rows="6" class="form-item" value="<?php print $this_comment; ?>"></textarea><br /><br />
                                     <strong><?php print _("Your email (optional):"); ?></strong><br />
                                     <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
                                     <br />

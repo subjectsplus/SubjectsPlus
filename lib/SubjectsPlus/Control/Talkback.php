@@ -66,7 +66,7 @@ class Talkback {
                     FROM talkback WHERE talkback_id = " . $this->_talkback_id;
         $guideArray = $querier->query($q1);
 
-        $this->_debug .= "<p>TB query: $q1";
+        //$this->_debug .= "<p>TB query: $q1";
         // Test if these exist, otherwise go to plan B
         if ($guideArray == FALSE) {
           $this->_message = _("There is no active record with that ID.  Weird.");
@@ -96,7 +96,7 @@ class Talkback {
 
         $this->_staffers = $querier2->query($q2);
 
-        $this->_debug .= "<p>Staff query: $q2";
+        //$this->_debug .= "<p>Staff query: $q2";
 
         break;
     }
@@ -302,7 +302,7 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
 
     $delete_result = $db->exec($q);
 
-    $this->_debug = "<p>Del query: $q";
+    //$this->_debug = "<p>Del query: $q";
 
     if (isset($delete_result)) {
       // message
@@ -350,7 +350,7 @@ makePluslet(_("Topic Tags (relevant topics)"), $cat_tags, "no_overflow");
 
     $this->_talkback_id = $db->last_id();
 
-    $this->_debug = "<p>1. insert: $qInsertTB</p>";
+    //$this->_debug = "<p>1. insert: $qInsertTB</p>";
     if (!$rInsertTB) {
       echo blunDer("We have a problem with the tb query: $qInsertTB");
     }
