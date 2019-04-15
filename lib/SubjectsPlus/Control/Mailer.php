@@ -1,6 +1,7 @@
 <?php
 namespace SubjectsPlus\Control;
 
+
 class Mailer {
 
   public function __construct() {
@@ -14,8 +15,6 @@ class Mailer {
   public function send(MailMessage $m) {
     if (mail($m->getTo(), $m->getSubjectLine(), $m->getContent(), $m->getHeader())) {
       return true;
-    } else {
-      throw new Exception('Mail could not be sent.');
     }
   }
 

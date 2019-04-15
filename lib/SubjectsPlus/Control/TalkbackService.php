@@ -23,14 +23,24 @@ class TalkbackService {
 
 	}
 
-	public function insertComment($this_comment, $this_name, $todaycomputer, $set_filter) {
+	public function insertComment(TalkbackComment $comment) {
+
+		$this_comment  = $comment->getQuestion();
+		$this_name     = $comment->getQFrom();
+		$todaycomputer = $comment->getDateSubmitted();
+		$set_filter    = $comment->getTbtags();
+		$display       = $comment->getDisplay();
+		$answer        = $comment->getAnswer();
+
 		$statement = $this->_connection->prepare( "INSERT INTO talkback (question, q_from, date_submitted, display, tbtags, answer)
-			VALUES (:question, :q_from, :date_submitted, 'No', :tbtags, '')" );
+			VALUES (:question, :q_from, :date_submitted, :display, :tbtags, :answer)" );
 
 		$statement->bindParam( ":question", $this_comment );
 		$statement->bindParam( ":q_from", $this_name );
 		$statement->bindParam( ":date_submitted", $todaycomputer );
 		$statement->bindParam( ":tbtags", $set_filter );
+		$statement->bindParam( ":display", $display );
+		$statement->bindParam( ":answer", $answer );
 
 		$statement->execute();
 	}

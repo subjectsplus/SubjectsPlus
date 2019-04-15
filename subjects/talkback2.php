@@ -2,9 +2,11 @@
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\TalkbackService;
+use SubjectsPlus\Control\TalkbackComment;
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
 use SubjectsPlus\Control\SlackMessenger;
+use SubjectsPlus\Control\Template;
 
 include( "../control/includes/config.php" );
 include( "../control/includes/functions.php" );
@@ -38,13 +40,19 @@ $month     = $today['month'];
 $mday      = $today['mday'];
 $year      = $today['year'];
 $this_year = date( "Y" );
+$todaycomputer = date( 'Y-m-d H:i:s' );
 
 /////////////////////////
 // Deal with multiple talkback instances
 // Usually if you have branch libraries who want separate
 // pages/results
 ////////////////////////
-$set_filter  = "";
+$form_action = "talkback.php"; // this can be overriden below
+$bonus_sql   = ""; // ditto
+$set_filter  = ""; // tritto
+
+// Show headshots
+$show_talkback_face = 1;
 
 if ( isset( $all_tbtags ) ) {
 // Let's get the first item off the tb array to use as our default
@@ -84,6 +92,61 @@ if ( isset( $all_tbtags ) ) {
 }
 
 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// Display Public view /views/talkback/public.php
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+if ( isset( $_POST['the_suggestion'] ) ) {
+
+	// clean up post variables
+	if ( isset( $_POST["name"] ) ) {
+		$this_name = scrubData( $_POST["name"] );
+	} else {
+		$this_name = "";
+	}
+
+	if ( isset( $_POST["the_suggestion"] ) ) {
+		$this_comment = scrubData( $_POST["the_suggestion"] );
+	} else {
+		$this_comment = "";
+	}
+
+
+	$newComment = new TalkbackComment();
+	$newComment->setQuestion($this_comment);
+	$newComment->setQFrom($this_name);
+	$newComment->setDateSubmitted($todaycomputer);
+	$newComment->setDisplay('No');
+	$newComment->setTbtags($set_filter);
+	$newComment->setAnswer('');
+
+	if( $talkbackService->getUseRecaptcha() == TRUE ) {
+
+		// insert the new comment into the db
+		$talkbackService->insertComment($newComment);
+
+		if( $talkbackService->getUseEmail() == TRUE ) {
+			$mailMessege = new MailMessage();
+
+			$mailer = new Mailer($mailMessege);
+			$mailer->send($mailMessege);
+		}
+
+		if( $talkbackService->getUseSlack() == TRUE ) {
+			$slackMsg = new SlackMessenger();
+			$slackMsg->send($message);
+		}
+	}
+
+
+}
+
 $filter = '%' . $set_filter . '%';
 if ( isset( $_GET['c'] ) ) {
 	$cat_tags = '%' . scrubData( $_GET['c'] ) . '%';
@@ -102,17 +165,6 @@ if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 
 $comments = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// End Get Comments
-/////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-// Display Public view /views/talkback/public.php
-/////////////////////////////////////////////////////////////////////////////////////////
-
 // clean up post variables
 if ( isset( $_POST["name"] ) ) {
 	$this_name = scrubData( $_POST["name"] );
@@ -128,42 +180,19 @@ if ( isset( $_POST["the_suggestion"] ) ) {
 
 
 
-if( $talkbackService->getUseRecaptcha() == TRUE ) {
+$tpl_name = 'public';
 
-	echo 'Use recaptcha: '. $talkbackService->getUseRecaptcha();
-
-
-}
-
-
-if( $talkbackService->getUseEmail() == TRUE ) {
-
-	echo 'Use email: '. $talkbackService->getUseEmail();
-
-	$mailMessege = new MailMessage();
-
-	$mailer = new Mailer($mailMessege);
-	$mailer->send($mailMessege);
+$tpl = new Template( './views/talkback' );
+echo $tpl->render( $tpl_name, array(
+	'form_action'  => $form_action,
+	'comments'     => $comments,
+	'this_name'    => $this_name,
+	'this_comment' => $this_comment,
+	'show_talkback_face' => $show_talkback_face
+) );
 
 
 
-}
-
-
-if( $talkbackService->getUseSlack() == TRUE ) {
-
-	echo 'Use slack: '. $talkbackService->getUseSlack();
-
-	$slackMsg = new SlackMessenger();
-
-
-
-
-}
-
-
-
-require_once './views/talkback/public.php';
 
 
 
