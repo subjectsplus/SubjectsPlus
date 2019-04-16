@@ -108,7 +108,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 	if ( isset( $_POST["name"] ) ) {
 		$this_name = scrubData( $_POST["name"] );
 	} else {
-		$this_name = "";
+		$this_name = "Anonymous";
 	}
 
 	if ( isset( $_POST["the_suggestion"] ) ) {
@@ -128,28 +128,36 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 	if( $talkbackService->getUseRecaptcha() == TRUE ) {
 
-		// insert the new comment into the db
-		$talkbackService->insertComment($newComment);
+		// Call the function post_captcha
+		$res = post_captcha($_POST['g-recaptcha-response']);
 
-		if( $talkbackService->getUseEmail() == TRUE ) {
-			$mailMessege = new MailMessage();
+		if (!$res['success']) {
+			// What happens when the reCAPTCHA is not properly set up
+			$feedback = $submission_failure_feedback;
 
-			$mailMessege->setTo('charlesbrownroberts@gmail.com');
-			$mailMessege->setSubjectLine('Talkback comment issued');
-			$mailMessege->setContent('Testing the new talkback');
-			$mailMessege->setFrom('cgb37@miami.edu');
+		} else {
+			// If CAPTCHA is successful...
+			// insert the new comment into the db
+			$talkbackService->insertComment($newComment);
 
-			$mailer = new Mailer($mailMessege);
-			$mailer->send($mailMessege);
-		}
+			if( $talkbackService->getUseEmail() == TRUE ) {
+				$mailMessege = new MailMessage();
 
-		if( $talkbackService->getUseSlack() == TRUE ) {
-			$slackMsg = new SlackMessenger();
-			$slackMsg->send($message);
+				$mailMessege->setTo('charlesbrownroberts@gmail.com');
+				$mailMessege->setSubjectLine('Talkback comment issued');
+				$mailMessege->setContent('Testing the new talkback');
+				$mailMessege->setFrom('cgb37@miami.edu');
+
+				$mailer = new Mailer($mailMessege);
+				$mailer->send($mailMessege);
+			}
+
+			if( $talkbackService->getUseSlack() == TRUE ) {
+				$slackMsg = new SlackMessenger();
+				$slackMsg->send($message);
+			}
 		}
 	}
-
-
 }
 
 $filter = '%' . $set_filter . '%';
