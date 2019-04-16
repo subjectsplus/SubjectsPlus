@@ -47,7 +47,7 @@ $todaycomputer = date( 'Y-m-d H:i:s' );
 // Usually if you have branch libraries who want separate
 // pages/results
 ////////////////////////
-$form_action = "talkback.php"; // this can be overriden below
+$form_action = "talkback2.php"; // this can be overriden below
 $bonus_sql   = ""; // ditto
 $set_filter  = ""; // tritto
 
@@ -133,6 +133,11 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 		if( $talkbackService->getUseEmail() == TRUE ) {
 			$mailMessege = new MailMessage();
+
+			$mailMessege->setTo('charlesbrownroberts@gmail.com');
+			$mailMessege->setSubjectLine('Talkback comment issued');
+			$mailMessege->setContent('Testing the new talkback');
+			$mailMessege->setFrom('cgb37@miami.edu');
 
 			$mailer = new Mailer($mailMessege);
 			$mailer->send($mailMessege);
