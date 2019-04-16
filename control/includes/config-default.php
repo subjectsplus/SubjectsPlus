@@ -45,8 +45,14 @@ $all_cattags = array( "Noise", "Resources", "Computers", "Facilities", "Services
 $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
 
+// Talkback options
+$talkback_use_email = "";
+
+$talkback_use_recaptcha = "";
 $talkback_recaptcha_site_key = "";
 $talkback_recaptcha_secret_key = "";
+
+$talkback_use_slack = "";
 $talkback_slack_webhook_url = "";
 $talkback_slack_channel = "";
 $talkback_slack_emoji = "";

@@ -235,6 +235,38 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places." )
 		),
 
+		"talkback_use_email" => array(
+			_( "Use Email" ),
+			_( "This option controls whether Talkback will use smtp email." ),
+			"boolean",
+			"talkback",
+			"small",
+			"",
+			_( "This option controls whether Talkback uses smtp email." )
+		),
+
+		"email_server" => array(
+			_( "SMTP server" ),
+			_( "This option sets the email server address for use with Talkback" ),
+			"string",
+			"talkback",
+			"large",
+			"",
+			_("This option sets the email server address for use with Talkback")
+		),
+
+
+		"talkback_use_recaptcha" => array(
+			_( "Use Recaptcha" ),
+			_( "This option controls whether Talkback will use Google Recaptcha 3." ),
+			"boolean",
+			"talkback",
+			"small",
+			"",
+			_( "This option controls whether Talkback uses Google Recaptcha 3." )
+		),
+
+
 		"talkback_recaptcha_site_key" => array(
 			_( "Talkback Google Recaptcha Site Key" ),
 			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
@@ -253,6 +285,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"large",
 			"",
 			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"talkback_use_slack" => array(
+			_( "Use Slack" ),
+			_( "This option controls whether Talkback will use a Slack webhook." ),
+			"boolean",
+			"talkback",
+			"small",
+			"",
+			_( "This option controls whether Talkback will use a Slack webhook." )
 		),
 
 		"talkback_slack_webhook_url" => array(
