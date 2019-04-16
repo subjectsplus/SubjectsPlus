@@ -100,7 +100,7 @@ if ( isset( $all_tbtags ) ) {
 // Display Public view /views/talkback/public.php
 /////////////////////////////////////////////////////////////////////////////////////////
 
-
+// echo "Test message from Linux server using ssmtp" | sudo ssmtp -vvv cgb37@miami.edu
 
 if ( isset( $_POST['the_suggestion'] ) ) {
 
@@ -141,6 +141,13 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 			$talkbackService->insertComment($newComment);
 
 			if( $talkbackService->getUseEmail() == TRUE ) {
+
+
+				$to = 'cgb37@miami.edu';
+				$subject = 'testing the mailer';
+				$message = 'will this new mailer work?';
+				mail($to, $subject, $message);
+
 				$mailMessege = new MailMessage();
 
 				$mailMessege->setTo('charlesbrownroberts@gmail.com');
