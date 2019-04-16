@@ -498,7 +498,7 @@ if ($result_count != 0) {
 		<a name=\"$talkback_id\"></a>
 		<p class=\"tellus_comment\"><span class=\"comment_num\" style=\"background-image: url('$AssetPath";
         $results .= "images/comment_box.png');\">$row_count</span>$question</p>
-		<p class=\"comment-meta\">Comment from $myrow[2] on $myrow[4]</p>
+		<p class=\"comment-meta\">Comment on $myrow[4]</p>
 		<div class=\"answer\">$answer</div><div class=\"responder d-flex flex-row flex-nowrap\">";
 
         if ($show_talkback_face == 1) {
@@ -588,8 +588,7 @@ include("includes/header_um-new.php");
                             <div class="<?php print $tb_bonus_css; ?>">
                                 <div class="form-group">
                                     <label for="the_suggestion"><?php print _("Your comment:"); ?></label>
-                                    <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3">
-                                    <?php print $this_comment; ?></textarea>
+                                    <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3" value="<?php print $this_comment; ?>"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="suggestion_email"><?php print _("Your email (optional):"); ?></label>
@@ -600,7 +599,7 @@ include("includes/header_um-new.php");
                                 <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
                                         data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
                                         data-callback="onSubmit"
-                                        data-size="invisible">Submit</button>
+                                        data-size="invisible"><?php print _("Submit"); ?></button>
                             </div>
                         </form>
                     <?php  } ?>
