@@ -92,7 +92,7 @@ class Mailer {
 	/**
 	 * @param mixed $isSmtp
 	 */
-	public function setIsSmtp( $isSmtp ): void {
+	public function setIsSmtp( $isSmtp ) {
 		$this->_isSmtp = $isSmtp;
 	}
 
@@ -106,7 +106,7 @@ class Mailer {
 	/**
 	 * @param mixed $SMTPDebug
 	 */
-	public function setSMTPDebug( $SMTPDebug ): void {
+	public function setSMTPDebug( $SMTPDebug ) {
 		$this->_SMTPDebug = $SMTPDebug;
 	}
 
@@ -120,7 +120,7 @@ class Mailer {
 	/**
 	 * @param mixed $Host
 	 */
-	public function setHost( $Host ): void {
+	public function setHost( $Host ) {
 		$this->_Host = $Host;
 	}
 
@@ -134,7 +134,7 @@ class Mailer {
 	/**
 	 * @param mixed $Port
 	 */
-	public function setPort( $Port ): void {
+	public function setPort( $Port ) {
 		$this->_Port = $Port;
 	}
 
@@ -148,7 +148,7 @@ class Mailer {
 	/**
 	 * @param mixed $SMTPAuth
 	 */
-	public function setSMTPAuth( $SMTPAuth ): void {
+	public function setSMTPAuth( $SMTPAuth ) {
 		$this->_SMTPAuth = $SMTPAuth;
 	}
 
@@ -162,7 +162,7 @@ class Mailer {
 	/**
 	 * @param mixed $Username
 	 */
-	public function setUsername( $Username ): void {
+	public function setUsername( $Username ) {
 		$this->_Username = $Username;
 	}
 
@@ -176,7 +176,7 @@ class Mailer {
 	/**
 	 * @param mixed $Password
 	 */
-	public function setPassword( $Password ): void {
+	public function setPassword( $Password ) {
 		$this->_Password = $Password;
 	}
 
@@ -199,5 +199,3 @@ class Mailer {
 //  }
 
 }
-
-?>
