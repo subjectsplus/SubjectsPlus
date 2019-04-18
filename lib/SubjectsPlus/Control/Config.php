@@ -394,6 +394,7 @@ class Config {
 		$section_mysql         = "";
 		$section_catalog       = "";
 		$section_primo         = "";
+		$section_email_server  = "";
 
 		//go through all options
 		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
@@ -582,6 +583,9 @@ class Config {
 				case "primo":
 					$section_primo .= $lstrHTML;
 					break;
+				case "email":
+					$section_email_server .= $lstrHTML;
+					break;
 			}
 
 		}
@@ -601,6 +605,7 @@ class Config {
                                     <li><a href="#tabs-talkback"><?php print _( "Talkback/Video" ); ?></a></li>
                                     <li><a href="#tabs-api"><?php print _( "API" ); ?></a></li>
                                     <li><a href="#tabs-server"><?php print _( "Server" ); ?></a></li>
+                                    <li><a href="#tabs-email"><?php print _( "Email" ); ?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -797,6 +802,21 @@ class Config {
                         <div class="pure-u-1 pure-u-md-1-3">
 
                         </div>
+                    </div>
+
+                    <div id="tabs-email">
+                        <div class="pure-u-1 pure-u-md-1-1">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Email Server Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+					                <?php print $section_email_server; ?>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>

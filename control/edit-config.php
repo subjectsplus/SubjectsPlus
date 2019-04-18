@@ -880,8 +880,77 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"small",
 			"",
 			""
-		)
+		),
 
+		"email_isSmtp" => array(
+			_( "Use SMTP for email" ),
+			_( "This option contains the Primo view for the Book List Pluslet" ),
+			"boolean",
+			"email",
+			"small",
+			"",
+			""
+		),
+
+		"email_smtp_debug" => array(
+			_( "Display SMTP debug errors" ),
+			_( "This option sets SMTP debug level 0 = off (for production use) 1 = client messages 2 = client and server messages" ),
+			"string",
+			"email",
+			"small",
+			"",
+			""
+		),
+
+		"email_host" => array(
+			_( "SMTP Host" ),
+			_( "This option contains the SMTP host" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_port" => array(
+			_( "SMTP Port" ),
+			_( "This option contains the SMTP Port" ),
+			"string",
+			"email",
+			"smail",
+			"",
+			""
+		),
+
+		"email_smtp_auth" => array(
+			_( "Use SMTP Authorization" ),
+			_( "This option determines is SMTP Authorization is to be used" ),
+			"boolean",
+			"email",
+			"smail",
+			"",
+			""
+		),
+
+		"email_username" => array(
+			_( "SMTP Username" ),
+			_( "This option contains the SMTP username" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_password" => array(
+			_( "SMTP Password" ),
+			_( "This option contains the SMTP password" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
 	);
 
 	//set config options

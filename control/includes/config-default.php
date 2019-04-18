@@ -125,6 +125,16 @@ $institution_name = "";
 /* Code used to create customizations */
 $institution_code = "";
 
+$email_isSmtp     = "";
+$email_smtp_debug = "";
+$email_host       = "";
+$email_port       = "";
+$email_stmp_auth  = "";
+$email_username   = "";
+$email_password   = "";
+
+
+
 /* Name/email address for SubjectsPlus administrator */
 $administrator = "Library Webmaster";
 $administrator_email = "";
