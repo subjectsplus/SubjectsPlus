@@ -42,7 +42,7 @@ class Mailer {
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		$this->_mailer->SMTPDebug = $this->$this->getSMTPDebug();
+		$this->_mailer->SMTPDebug = $this->getSMTPDebug();
 	
 		//Set the hostname of the mail server
 		$this->_mailer->Host = $this->getHost();
