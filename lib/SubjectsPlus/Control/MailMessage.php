@@ -33,7 +33,7 @@ class MailMessage {
 	/**
 	 * @param mixed $setFrom
 	 */
-	public function setSetFrom( $setFrom ): void {
+	public function setSetFrom( $setFrom ) {
 		$this->_setFrom = $setFrom;
 	}
 
@@ -47,7 +47,7 @@ class MailMessage {
 	/**
 	 * @param mixed $addReplyTo
 	 */
-	public function setAddReplyTo( $addReplyTo ): void {
+	public function setAddReplyTo( $addReplyTo ) {
 		$this->_addReplyTo = $addReplyTo;
 	}
 
@@ -61,7 +61,7 @@ class MailMessage {
 	/**
 	 * @param mixed $addAddress
 	 */
-	public function setAddAddress( $addAddress ): void {
+	public function setAddAddress( $addAddress ) {
 		$this->_addAddress = $addAddress;
 	}
 
@@ -75,7 +75,7 @@ class MailMessage {
 	/**
 	 * @param mixed $Subject
 	 */
-	public function setSubject( $Subject ): void {
+	public function setSubject( $Subject ) {
 		$this->_Subject = $Subject;
 	}
 
@@ -89,7 +89,7 @@ class MailMessage {
 	/**
 	 * @param mixed $msgHTML
 	 */
-	public function setMsgHTML( $msgHTML ): void {
+	public function setMsgHTML( $msgHTML ) {
 		$this->_msgHTML = $msgHTML;
 	}
 
@@ -103,7 +103,7 @@ class MailMessage {
 	/**
 	 * @param mixed $AltBody
 	 */
-	public function setAltBody( $AltBody ): void {
+	public function setAltBody( $AltBody ) {
 		$this->_AltBody = $AltBody;
 	}
 
@@ -117,7 +117,7 @@ class MailMessage {
 	/**
 	 * @param mixed $addAttachment
 	 */
-	public function setAddAttachment( $addAttachment ): void {
+	public function setAddAttachment( $addAttachment ) {
 		$this->_addAttachment = $addAttachment;
 	}
 

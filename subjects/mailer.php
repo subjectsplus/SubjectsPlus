@@ -32,6 +32,7 @@ $page_keywords    = _( "library, comments, suggestions, complaints" );
 require_once './includes/header.php';
 
 $mailer = new Mailer();
+$mailer->configureMessage();
 $mailer->send();
 
 

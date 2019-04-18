@@ -42,22 +42,28 @@ class Mailer {
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		$this->_mailer->SMTPDebug = 2;
+		$this->_mailer->SMTPDebug = $this->$this->getSMTPDebug();
 	
 		//Set the hostname of the mail server
-		$this->_mailer->Host = 'smtp.cgcent.miami.edu';
+		$this->_mailer->Host = $this->getHost();
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
-		$this->_mailer->Port = 25;
+		$this->_mailer->Port = $this->getPort();
 
 		//Whether to use SMTP authentication
-		$this->_mailer->SMTPAuth = false;
+		$this->_mailer->SMTPAuth = $this->getSMTPAuth();
 
 		//Username to use for SMTP authentication
 		//$this->_mailer->Username = 'yourname@example.com';
 
 		//Password to use for SMTP authentication
 		//$this->_mailer->Password = 'yourpassword';
+
+	}
+
+
+	public function configureMessage() {
+
 
 		//Set who the message is to be sent from
 		$this->_mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
@@ -80,12 +86,18 @@ class Mailer {
 
 		//Attach an image file
 		//$this->_mailer->addAttachment('images/phpmailer_mini.png');
+
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getisSmtp() {
+		global $email_isSmtp;
+
+		if(isset($email_isSmtp)) {
+			$this->_isSmtp = $email_isSmtp;
+		}
 		return $this->_isSmtp;
 	}
 
@@ -100,6 +112,12 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getSMTPDebug() {
+
+		global $email_smtp_debug;
+
+		if(isset($email_isSmtp)) {
+			$this->_SMTPDebug = $email_smtp_debug;
+		}
 		return $this->_SMTPDebug;
 	}
 
@@ -114,6 +132,12 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getHost() {
+
+		global $email_host;
+
+		if(isset($email_host)) {
+			$this->_Host = $email_host;
+		}
 		return $this->_Host;
 	}
 
@@ -128,6 +152,12 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getPort() {
+
+		global $email_port;
+
+		if(isset($email_port)) {
+			$this->_Port = $email_port;
+		}
 		return $this->_Port;
 	}
 
@@ -142,6 +172,11 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getSMTPAuth() {
+		global $email_stmp_auth;
+
+		if(isset($email_stmp_auth)) {
+			$this->_SMTPAuth = $email_stmp_auth;
+		}
 		return $this->_SMTPAuth;
 	}
 
@@ -156,6 +191,11 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getUsername() {
+		global $email_username;
+
+		if(isset($email_username)) {
+			$this->_Username = $email_username;
+		}
 		return $this->_Username;
 	}
 
@@ -170,6 +210,11 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getPassword() {
+		global $email_password;
+
+		if(isset($email_password)) {
+			$this->_Password = $email_password;
+		}
 		return $this->_Password;
 	}
 
