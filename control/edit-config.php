@@ -882,26 +882,6 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
-		"email_isSmtp" => array(
-			_( "Use SMTP for email" ),
-			_( "This option contains the Primo view for the Book List Pluslet" ),
-			"boolean",
-			"email",
-			"small",
-			"",
-			""
-		),
-
-		"email_smtp_debug" => array(
-			_( "Display SMTP debug errors" ),
-			_( "This option sets SMTP debug level 0 = off (for production use) 1 = client messages 2 = client and server messages" ),
-			"string",
-			"email",
-			"small",
-			"",
-			""
-		),
-
 		"email_host" => array(
 			_( "SMTP Host" ),
 			_( "This option contains the SMTP host" ),
@@ -948,6 +928,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"string",
 			"email",
 			"large",
+			"",
+			""
+		),
+
+		"email_smtp_debug" => array(
+			_( "Display SMTP debug errors" ),
+			_( "This option sets SMTP debug level 0 = off (for production use) 1 = client messages 2 = client and server messages" ),
+			"string",
+			"email",
+			"small",
 			"",
 			""
 		),

@@ -125,7 +125,6 @@ $institution_name = "";
 /* Code used to create customizations */
 $institution_code = "";
 
-$email_isSmtp     = "";
 $email_smtp_debug = "";
 $email_host       = "";
 $email_port       = "";

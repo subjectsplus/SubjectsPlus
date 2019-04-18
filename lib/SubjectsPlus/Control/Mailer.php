@@ -38,6 +38,7 @@ class Mailer {
 
 		//Tell PHPMailer to use SMTP
 		$this->_mailer->isSMTP();
+
 		//Enable SMTP debugging
 		// 0 = off (for production use)
 		// 1 = client messages
@@ -54,10 +55,10 @@ class Mailer {
 		$this->_mailer->SMTPAuth = $this->getSMTPAuth();
 
 		//Username to use for SMTP authentication
-		//$this->_mailer->Username = 'yourname@example.com';
+		$this->_mailer->Username = $this->getUsername();
 
 		//Password to use for SMTP authentication
-		//$this->_mailer->Password = 'yourpassword';
+		$this->_mailer->Password = $this->getPassword();
 
 	}
 
