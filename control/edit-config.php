@@ -907,7 +907,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "This option determines is SMTP Authorization is to be used" ),
 			"boolean",
 			"email",
-			"smail",
+			"small",
 			"",
 			""
 		),

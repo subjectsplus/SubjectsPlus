@@ -54,10 +54,10 @@ class Mailer {
 		$this->_mailer->SMTPAuth = $this->getSMTPAuth();
 
 		//Username to use for SMTP authentication
-		$this->_mailer->Username = $this->getUsername();
+		//$this->_mailer->Username = $this->getUsername();
 
 		//Password to use for SMTP authentication
-		$this->_mailer->Password = $this->getPassword();
+		//$this->_mailer->Password = $this->getPassword();
 
 	}
 

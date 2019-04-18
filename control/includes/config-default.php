@@ -132,7 +132,7 @@ $institution_code = "";
 $email_smtp_debug = "";
 $email_host       = "";
 $email_port       = "";
-$email_stmp_auth  = "";
+$email_smtp_auth  = "";
 $email_username   = "";
 $email_password   = "";
 
