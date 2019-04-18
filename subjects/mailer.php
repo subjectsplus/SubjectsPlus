@@ -69,3 +69,10 @@ if (!$mail->send()) {
 } else {
 	echo 'Message sent!';
 }
+
+
+///////////////////////////
+// Load footer file
+///////////////////////////
+
+require_once './includes/footer.php';
