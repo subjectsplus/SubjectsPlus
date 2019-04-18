@@ -239,7 +239,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Use Email" ),
 			_( "This option controls whether Talkback will use smtp email." ),
 			"boolean",
-			"talkback",
+			"talkback_email",
 			"small",
 			"",
 			_( "This option controls whether Talkback uses smtp email." )
@@ -260,7 +260,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Use Recaptcha" ),
 			_( "This option controls whether Talkback will use Google Recaptcha 3." ),
 			"boolean",
-			"talkback",
+			"talkback_recaptcha",
 			"small",
 			"",
 			_( "This option controls whether Talkback uses Google Recaptcha 3." )
@@ -271,7 +271,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Google Recaptcha Site Key" ),
 			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
 			"string",
-			"talkback",
+			"talkback_recaptcha",
 			"large",
 			"",
 			_("The site key goes on the client side form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
@@ -281,7 +281,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Google Recaptcha Secret Key" ),
 			_( "This option contains the Google Recaptcha secret key required to protect the Talkback form." ),
 			"string",
-			"talkback",
+			"talkback_recaptcha",
 			"large",
 			"",
 			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
@@ -291,7 +291,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Use Slack" ),
 			_( "This option controls whether Talkback will use a Slack webhook." ),
 			"boolean",
-			"talkback",
+			"talkback_slack",
 			"small",
 			"",
 			_( "This option controls whether Talkback will use a Slack webhook." )
@@ -301,7 +301,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Slack Webhook URL for Talkback" ),
 			_( "This option contains the webhook url from Slack that connects Talkback to Slack." ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"large",
 			"",
 			""
@@ -311,7 +311,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Slack Channel" ),
 			_( "This option contains Slack channel name that the Talkback form uses." ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"medium",
 			"",
 			""
@@ -321,7 +321,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Slack Emoji Code" ),
 			_( "This option contains Slack emoji code that the Talkback form uses. It must begin and end with a colon. For example, :thought_balloon:" ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"medium",
 			"",
 			_( "It must begin and end with a colon. For example, :thought_balloon:" )

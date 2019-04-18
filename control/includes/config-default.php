@@ -46,16 +46,20 @@ $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
 
 // Talkback options
-$talkback_use_email = "";
+$talkback_use_email      = "";
+$talback_email_from      = "";
+$talkback_email_reply_to = "";
+$talback_address_to      = "";
 
-$talkback_use_recaptcha = "";
-$talkback_recaptcha_site_key = "";
+
+$talkback_use_recaptcha        = "";
+$talkback_recaptcha_site_key   = "";
 $talkback_recaptcha_secret_key = "";
 
-$talkback_use_slack = "";
+$talkback_use_slack         = "";
 $talkback_slack_webhook_url = "";
-$talkback_slack_channel = "";
-$talkback_slack_emoji = "";
+$talkback_slack_channel     = "";
+$talkback_slack_emoji       = "";
 
 
 // This array contains the list of columns that should be omitted in the user forms

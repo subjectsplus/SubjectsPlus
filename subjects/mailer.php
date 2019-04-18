@@ -26,12 +26,16 @@ $page_title       = _( "Talk Back" );
 $page_description = _( "Share your comments and suggestions about the library" );
 $page_keywords    = _( "library, comments, suggestions, complaints" );
 
-
-
-
 require_once './includes/header.php';
 
+global $email_host;
+global $email_port;
+global $email_smtp_debug;
+
 $mailer = new Mailer();
+$mailer->setHost($email_host);
+$mailer->setPort($email_port);
+$mailer->setSMTPDebug($email_smtp_debug);
 $mailer->configureMessage();
 $mailer->send();
 

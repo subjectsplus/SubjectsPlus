@@ -8,7 +8,6 @@ class Mailer {
 	
 	private $_mailer;
 
-	private $_isSmtp;
 	private $_SMTPDebug;
 	private $_Host;
 	private $_Port;
@@ -93,39 +92,14 @@ class Mailer {
 	/**
 	 * @return mixed
 	 */
-	public function getisSmtp() {
-		global $email_isSmtp;
-
-		if(isset($email_isSmtp)) {
-			$this->_isSmtp = $email_isSmtp;
-		}
-		return $this->_isSmtp;
-	}
-
-	/**
-	 * @param mixed $isSmtp
-	 */
-	public function setIsSmtp( $isSmtp ) {
-		$this->_isSmtp = $isSmtp;
-	}
-
-	/**
-	 * @return mixed
-	 */
 	public function getSMTPDebug() {
-
-		global $email_smtp_debug;
-
-		if(isset($email_isSmtp)) {
-			$this->_SMTPDebug = $email_smtp_debug;
-		}
 		return $this->_SMTPDebug;
 	}
 
 	/**
 	 * @param mixed $SMTPDebug
 	 */
-	public function setSMTPDebug( $SMTPDebug ) {
+	public function setSMTPDebug( $SMTPDebug ): void {
 		$this->_SMTPDebug = $SMTPDebug;
 	}
 
@@ -133,19 +107,13 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getHost() {
-
-		global $email_host;
-
-		if(isset($email_host)) {
-			$this->_Host = $email_host;
-		}
 		return $this->_Host;
 	}
 
 	/**
 	 * @param mixed $Host
 	 */
-	public function setHost( $Host ) {
+	public function setHost( $Host ): void {
 		$this->_Host = $Host;
 	}
 
@@ -153,19 +121,13 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getPort() {
-
-		global $email_port;
-
-		if(isset($email_port)) {
-			$this->_Port = $email_port;
-		}
 		return $this->_Port;
 	}
 
 	/**
 	 * @param mixed $Port
 	 */
-	public function setPort( $Port ) {
+	public function setPort( $Port ): void {
 		$this->_Port = $Port;
 	}
 
@@ -173,18 +135,13 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getSMTPAuth() {
-		global $email_stmp_auth;
-
-		if(isset($email_stmp_auth)) {
-			$this->_SMTPAuth = $email_stmp_auth;
-		}
 		return $this->_SMTPAuth;
 	}
 
 	/**
 	 * @param mixed $SMTPAuth
 	 */
-	public function setSMTPAuth( $SMTPAuth ) {
+	public function setSMTPAuth( $SMTPAuth ): void {
 		$this->_SMTPAuth = $SMTPAuth;
 	}
 
@@ -192,18 +149,13 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getUsername() {
-		global $email_username;
-
-		if(isset($email_username)) {
-			$this->_Username = $email_username;
-		}
 		return $this->_Username;
 	}
 
 	/**
 	 * @param mixed $Username
 	 */
-	public function setUsername( $Username ) {
+	public function setUsername( $Username ): void {
 		$this->_Username = $Username;
 	}
 
@@ -211,20 +163,18 @@ class Mailer {
 	 * @return mixed
 	 */
 	public function getPassword() {
-		global $email_password;
-
-		if(isset($email_password)) {
-			$this->_Password = $email_password;
-		}
 		return $this->_Password;
 	}
 
 	/**
 	 * @param mixed $Password
 	 */
-	public function setPassword( $Password ) {
+	public function setPassword( $Password ): void {
 		$this->_Password = $Password;
 	}
+
+
+
 
 
 	public function send() {
