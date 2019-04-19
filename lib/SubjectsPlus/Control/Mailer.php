@@ -74,9 +74,6 @@ class Mailer {
 		//Set who the message is to be sent from
 		$this->_mailer->setFrom( $this->_msg->getFromAddress(), $this->_msg->getFromLabel() );
 
-		//Set an alternative reply-to address
-		$this->_mailer->addReplyTo( $this->_msg->getReplyToAddress(), $this->_msg->getReplyToLabel() );
-
 		//Set who the message is to be sent to
 		$this->_mailer->addAddress( $this->_msg->getToAddress(), $this->_msg->getToAddressLabel() );
 

@@ -142,16 +142,20 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 			if( $talkbackService->getUseEmail() == TRUE ) {
 
-				$mailMessege = new MailMessage();
-				$mailMessege->setFromAddress('cgb37@miami.edu');
-				$mailMessege->setFromLabel('Charles Brown-Roberts');
-				$mailMessege->setReplyToAddress('cgb37@miami.edu');
-				$mailMessege->setReplyToLabel('Charles Brown-Roberts');
-				$mailMessege->setToAddress('charlesbrownroberts@miami.edu');
-				$mailMessege->setToAddressLabel('Charles Brown-Roberts');
-				$mailMessege->setSubject('Talkback comment issued');
-				$mailMessege->setMsgHTML('Testing the new talkback');
+				// get globals for MailMessage class
+				global $talkback_to_address;
+				global $talkback_to_address_label;
+				global $talkback_subject_line;
 
+				$mailMessege = new MailMessage();
+				$mailMessege->setFromAddress($this_name);
+				$mailMessege->setFromLabel($this_name);
+				$mailMessege->setToAddress($talkback_to_address);
+				$mailMessege->setToAddressLabel($talkback_to_address_label);
+				$mailMessege->setSubject($talkback_subject_line);
+				$mailMessege->setMsgHTML($this_comment);
+
+				// get globals for Mailer class
 				global $email_host;
 				global $email_port;
 				global $email_smtp_auth;
