@@ -16,25 +16,14 @@ class Mailer {
 	public $Password;
 
 	public function __construct() {
-		global $email_server;
-		global $administrator_email;
 
-		ini_set( "SMTP", $email_server );
-		ini_set( "sendmail_from", $administrator_email );
-
-		//$this->_mailer = $this->configureMailer();
-		echo $this->Host;
 
 	}
-	
-	
-	public function configureMailer() {
 
+	protected function configureMailer() {
 		//SMTP needs accurate times, and the PHP time zone MUST be set
 		//This should be done in your php.ini, but this is how to do it if you don't have access to that
 		date_default_timezone_set( 'America/New_York' );
-
-
 
 		//Create a new PHPMailer instance
 		$mailer = new PHPMailer;
@@ -46,19 +35,15 @@ class Mailer {
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		//$mailer->SMTPDebug = $this->getSMTPDebug();
 		$mailer->SMTPDebug = 2;
 
 		//Set the hostname of the mail server
 		$mailer->Host = $this->Host;
-		//$mailer->Host = 'smtp.cgcent.miami.edu';
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
-		//$mailer->Port = $this->getPort();
-		$mailer->Port = 25;
+		$mailer->Port = $this->Port;
 
 		//Whether to use SMTP authentication
-		//$mailer->SMTPAuth = $this->getSMTPAuth();
 		$mailer->SMTPAuth = false;
 
 		//Username to use for SMTP authentication
@@ -90,105 +75,15 @@ class Mailer {
 		//$mailer->addAttachment('images/phpmailer_mini.png');
 
 		return $mailer;
-
 	}
 
 
 	public function configureMessage() {
 
-
-
 	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getSMTPDebug() {
-		return $this->_SMTPDebug;
-	}
-
-	/**
-	 * @param mixed $SMTPDebug
-	 */
-	public function setSMTPDebug( $SMTPDebug ){
-		$this->_SMTPDebug = $SMTPDebug;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getHost() {
-		return $this->_Host;
-	}
-
-	/**
-	 * @param mixed $Host
-	 */
-	public function setHost( $Host ){
-		$this->_Host = $Host;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getPort() {
-		return $this->_Port;
-	}
-
-	/**
-	 * @param mixed $Port
-	 */
-	public function setPort( $Port ){
-		$this->_Port = $Port;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getSMTPAuth() {
-		return $this->_SMTPAuth;
-	}
-
-	/**
-	 * @param mixed $SMTPAuth
-	 */
-	public function setSMTPAuth( $SMTPAuth ){
-		$this->_SMTPAuth = $SMTPAuth;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getUsername() {
-		return $this->_Username;
-	}
-
-	/**
-	 * @param mixed $Username
-	 */
-	public function setUsername( $Username ){
-		$this->_Username = $Username;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getPassword() {
-		return $this->_Password;
-	}
-
-	/**
-	 * @param mixed $Password
-	 */
-	public function setPassword( $Password ){
-		$this->_Password = $Password;
-	}
-
-
-
-
 
 	public function send() {
+		$this->_mailer = $this->configureMailer();
 
 		//send the message, check for errors
 		if ( ! $this->_mailer->send() ) {
@@ -196,13 +91,7 @@ class Mailer {
 		} else {
 			echo 'Message sent!';
 		}
-
-
 	}
-//  public function send(MailMessage $m) {
-//    if (mail($m->getTo(), $m->getSubjectLine(), $m->getContent(), $m->getHeader())) {
-//      return true;
-//    }
-//  }
+
 
 }
