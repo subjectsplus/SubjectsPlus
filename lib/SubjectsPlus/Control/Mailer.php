@@ -42,16 +42,20 @@ class Mailer {
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		$this->_mailer->SMTPDebug = $this->getSMTPDebug();
-	
+		//$this->_mailer->SMTPDebug = $this->getSMTPDebug();
+		$this->_mailer->SMTPDebug = 2;
+
 		//Set the hostname of the mail server
-		$this->_mailer->Host = $this->getHost();
+		//$this->_mailer->Host = $this->getHost();
+		$this->_mailer->Host = 'smtp.cgcent.miami.edu';
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
-		$this->_mailer->Port = $this->getPort();
+		//$this->_mailer->Port = $this->getPort();
+		$this->_mailer->Port = 25;
 
 		//Whether to use SMTP authentication
-		$this->_mailer->SMTPAuth = $this->getSMTPAuth();
+		//$this->_mailer->SMTPAuth = $this->getSMTPAuth();
+		$this->_mailer->SMTPAuth = false;
 
 		//Username to use for SMTP authentication
 		//$this->_mailer->Username = $this->getUsername();
