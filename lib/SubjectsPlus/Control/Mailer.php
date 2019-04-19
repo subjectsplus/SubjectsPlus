@@ -45,14 +45,23 @@ class Mailer {
 		//Set the SMTP port number - likely to be 25, 465 or 587
 		$mailer->Port = $this->Port;
 
-		//Whether to use SMTP authentication
-		$mailer->SMTPAuth = false;
+		if($this->SMTPAuth == true) {
 
-		//Username to use for SMTP authentication
-		//$mailer->Username = $this->getUsername();
+			//Whether to use SMTP authentication
+			$mailer->SMTPAuth = true;
 
-		//Password to use for SMTP authentication
-		//$mailer->Password = $this->getPassword();
+			//Username to use for SMTP authentication
+			$mailer->Username = $this->getUsername();
+
+			//Password to use for SMTP authentication
+			$mailer->Password = $this->getPassword();
+		} else {
+
+			//Whether to use SMTP authentication
+			$mailer->SMTPAuth = false;
+		}
+
+
 
 		return $mailer;
 	}
@@ -63,13 +72,13 @@ class Mailer {
 		$this->_mailer = $this->configureMailer();
 
 		//Set who the message is to be sent from
-		$this->_mailer->setFrom( $this->_msg->getFrom(), 'Charles Brown-Roberts' );
+		$this->_mailer->setFrom( $this->_msg->getFromAddress(), $this->_msg->getFromLabel() );
 
 		//Set an alternative reply-to address
-		$this->_mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
+		$this->_mailer->addReplyTo( $this->_msg->getReplyToAddress(), $this->_msg->getReplyToLabel() );
 
 		//Set who the message is to be sent to
-		$this->_mailer->addAddress( $this->_msg->getAddress(), 'Charles Brown-Roberts' );
+		$this->_mailer->addAddress( $this->_msg->getAddress(), $this->_msg->getToAddressLabel() );
 
 		//Set the subject line
 		$this->_mailer->Subject = $this->_msg->getSubject();

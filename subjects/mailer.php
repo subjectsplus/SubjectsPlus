@@ -35,6 +35,8 @@ global $email_smtp_debug;
 $message = new MailMessage();
 $mailMessege->setFromAddress('cgb37@miami.edu');
 $mailMessege->setFromLabel('Charles Brown-Roberts');
+$mailMessege->setReplyToAddress('cgb37@miami.edu');
+$mailMessege->setReplyToLabel('Charles Brown-Roberts');
 $mailMessege->setToAddress('charlesbrownroberts@miami.edu');
 $mailMessege->setToAddressLabel('Charles Brown-Roberts');
 $mailMessege->setSubject('Talkback comment issued');
