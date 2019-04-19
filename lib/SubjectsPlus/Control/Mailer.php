@@ -26,14 +26,15 @@ class Mailer {
 		//This should be done in your php.ini, but this is how to do it if you don't have access to that
 		date_default_timezone_set( 'America/New_York' );
 
-		//Create a new PHPMailer instance
-		$this->_mailer = new PHPMailer;
 		$this->configureMailer();
 
 	}
 	
 	
 	protected function configureMailer() {
+
+		//Create a new PHPMailer instance
+		$this->_mailer = new PHPMailer;
 
 		//Tell PHPMailer to use SMTP
 		$this->_mailer->isSMTP();
@@ -46,8 +47,8 @@ class Mailer {
 		$this->_mailer->SMTPDebug = 2;
 
 		//Set the hostname of the mail server
-		//$this->_mailer->Host = $this->getHost();
-		$this->_mailer->Host = 'smtp.cgcent.miami.edu';
+		$this->_mailer->Host = $this->getHost();
+		//$this->_mailer->Host = 'smtp.cgcent.miami.edu';
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
 		//$this->_mailer->Port = $this->getPort();
