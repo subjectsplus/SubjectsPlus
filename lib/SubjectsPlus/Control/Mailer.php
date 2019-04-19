@@ -52,38 +52,43 @@ class Mailer {
 		//Password to use for SMTP authentication
 		//$mailer->Password = $this->getPassword();
 
-		//Set who the message is to be sent from
-		$mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
-
-		//Set an alternative reply-to address
-		$mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
-
-		//Set who the message is to be sent to
-		$mailer->addAddress( 'charlesbrownroberts@miami.edu', 'Charles Brown-Roberts' );
-
-		//Set the subject line
-		$mailer->Subject = 'PHPMailer SMTP test';
-
-		//Read an HTML message body from an external file, convert referenced images to embedded,
-		//convert HTML into a basic plain-text alternative body
-		$mailer->msgHTML( 'message content' );
-
-		//Replace the plain text body with one created manually
-		$mailer->AltBody = 'This is a plain-text message body';
-
-		//Attach an image file
-		//$mailer->addAttachment('images/phpmailer_mini.png');
-
 		return $mailer;
 	}
 
 
 	public function configureMessage() {
 
+		$this->_mailer = $this->configureMailer();
+
+		//Set who the message is to be sent from
+		$this->_mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
+
+		//Set an alternative reply-to address
+		$this->_mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
+
+		//Set who the message is to be sent to
+		$this->_mailer->addAddress( 'charlesbrownroberts@miami.edu', 'Charles Brown-Roberts' );
+
+		//Set the subject line
+		$this->_mailer->Subject = 'PHPMailer SMTP test';
+
+		//Read an HTML message body from an external file, convert referenced images to embedded,
+		//convert HTML into a basic plain-text alternative body
+		$this->_mailer->msgHTML( 'message content' );
+
+		//Replace the plain text body with one created manually
+		$this->_mailer->AltBody = 'This is a plain-text message body';
+
+		//Attach an image file
+		//$this->_mailer->addAttachment('images/phpmailer_mini.png');
+		return $this->_mailer;
+
 	}
 
 	public function send() {
-		$this->_mailer = $this->configureMailer();
+
+		$this->_mailer = $this->configureMessage();
+
 
 		//send the message, check for errors
 		if ( ! $this->_mailer->send() ) {

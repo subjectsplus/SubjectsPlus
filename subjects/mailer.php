@@ -41,6 +41,7 @@ $mailer->Port = $email_port;
 $mailer->SMTPAuth = $email_smtp_auth;
 $mailer->SMTPDebug = $email_smtp_debug;
 $mailer->SMTPDebug = $email_smtp_debug;
+$mailer->configureMessage();
 $mailer->send();
 
 
