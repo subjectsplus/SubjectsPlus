@@ -22,6 +22,8 @@ class Mailer {
 		ini_set( "SMTP", $email_server );
 		ini_set( "sendmail_from", $administrator_email );
 
+		$this->_mailer = $this->configureMailer();
+
 
 	}
 	
@@ -34,35 +36,59 @@ class Mailer {
 
 
 		//Create a new PHPMailer instance
-		$this->_mailer = new PHPMailer;
+		$mailer = new PHPMailer;
 
 		//Tell PHPMailer to use SMTP
-		$this->_mailer->isSMTP();
+		$mailer->isSMTP();
 
 		//Enable SMTP debugging
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		//$this->_mailer->SMTPDebug = $this->getSMTPDebug();
-		$this->_mailer->SMTPDebug = 2;
+		//$mailer->SMTPDebug = $this->getSMTPDebug();
+		$mailer->SMTPDebug = 2;
 
 		//Set the hostname of the mail server
-		$this->_mailer->Host = $this->getHost();
-		//$this->_mailer->Host = 'smtp.cgcent.miami.edu';
+		$mailer->Host = $this->getHost();
+		//$mailer->Host = 'smtp.cgcent.miami.edu';
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
-		//$this->_mailer->Port = $this->getPort();
-		$this->_mailer->Port = 25;
+		//$mailer->Port = $this->getPort();
+		$mailer->Port = 25;
 
 		//Whether to use SMTP authentication
-		//$this->_mailer->SMTPAuth = $this->getSMTPAuth();
-		$this->_mailer->SMTPAuth = false;
+		//$mailer->SMTPAuth = $this->getSMTPAuth();
+		$mailer->SMTPAuth = false;
 
 		//Username to use for SMTP authentication
-		//$this->_mailer->Username = $this->getUsername();
+		//$mailer->Username = $this->getUsername();
 
 		//Password to use for SMTP authentication
-		//$this->_mailer->Password = $this->getPassword();
+		//$mailer->Password = $this->getPassword();
+
+		//Set who the message is to be sent from
+		$this->_mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
+
+		//Set an alternative reply-to address
+		$mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
+
+		//Set who the message is to be sent to
+		$mailer->addAddress( 'charlesbrownroberts@miami.edu', 'Charles Brown-Roberts' );
+
+		//Set the subject line
+		$mailer->Subject = 'PHPMailer SMTP test';
+
+		//Read an HTML message body from an external file, convert referenced images to embedded,
+		//convert HTML into a basic plain-text alternative body
+		$mailer->msgHTML( 'message content' );
+
+		//Replace the plain text body with one created manually
+		$mailer->AltBody = 'This is a plain-text message body';
+
+		//Attach an image file
+		//$mailer->addAttachment('images/phpmailer_mini.png');
+
+		return $mailer;
 
 	}
 
@@ -70,27 +96,6 @@ class Mailer {
 	public function configureMessage() {
 
 
-		//Set who the message is to be sent from
-		$this->_mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
-
-		//Set an alternative reply-to address
-		$this->_mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
-
-		//Set who the message is to be sent to
-		$this->_mailer->addAddress( 'charlesbrownroberts@miami.edu', 'Charles Brown-Roberts' );
-
-		//Set the subject line
-		$this->_mailer->Subject = 'PHPMailer SMTP test';
-
-		//Read an HTML message body from an external file, convert referenced images to embedded,
-		//convert HTML into a basic plain-text alternative body
-		$this->_mailer->msgHTML( 'message content' );
-
-		//Replace the plain text body with one created manually
-		$this->_mailer->AltBody = 'This is a plain-text message body';
-
-		//Attach an image file
-		//$this->_mailer->addAttachment('images/phpmailer_mini.png');
 
 	}
 
@@ -183,8 +188,6 @@ class Mailer {
 
 
 	public function send() {
-
-		$this->configureMailer();
 
 		//send the message, check for errors
 		if ( ! $this->_mailer->send() ) {
