@@ -3,6 +3,7 @@ namespace SubjectsPlus\Control;
 
 //Import the PHPMailer class into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
+use SubjectsPlus\Control\MailMessage;
 
 class Mailer {
 	
@@ -15,8 +16,9 @@ class Mailer {
 	public $Username;
 	public $Password;
 
-	public function __construct() {
+	public function __construct(MailMessage $message) {
 
+		$this->_msg = $message;
 
 	}
 

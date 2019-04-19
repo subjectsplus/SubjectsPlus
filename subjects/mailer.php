@@ -6,10 +6,8 @@
  * Time: 12:56
  */
 
-//Import the PHPMailer class into the global namespace
-//use PHPMailer\PHPMailer\PHPMailer;
 use SubjectsPlus\Control\Mailer;
-
+use SubjectsPlus\Control\MailMessage;
 
 
 //SMTP needs accurate times, and the PHP time zone MUST be set
@@ -34,8 +32,9 @@ global $email_smtp_auth;
 global $email_smtp_debug;
 
 
+$message = new MailMessage();
 
-$mailer = new Mailer();
+$mailer = new Mailer($message);
 $mailer->Host = $email_host;
 $mailer->Port = $email_port;
 $mailer->SMTPAuth = $email_smtp_auth;
