@@ -149,6 +149,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$mailMessege->setMsgHTML($newComment->getQuestion());
 
 				$mailer = new Mailer($mailMessege);
+				$mailer->configureMessage();
 				$mailer->send();
 			}
 
