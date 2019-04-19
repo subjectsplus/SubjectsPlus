@@ -67,7 +67,7 @@ class Mailer {
 		//$mailer->Password = $this->getPassword();
 
 		//Set who the message is to be sent from
-		$this->_mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
+		$mailer->setFrom( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
 
 		//Set an alternative reply-to address
 		$mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
