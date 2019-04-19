@@ -37,7 +37,7 @@ class Mailer {
 		// 0 = off (for production use)
 		// 1 = client messages
 		// 2 = client and server messages
-		$mailer->SMTPDebug = 2;
+		$mailer->SMTPDebug = $this->SMTPDebug;
 
 		//Set the hostname of the mail server
 		$mailer->Host = $this->Host;
@@ -51,10 +51,10 @@ class Mailer {
 			$mailer->SMTPAuth = true;
 
 			//Username to use for SMTP authentication
-			$mailer->Username = $this->getUsername();
+			$mailer->Username = $this->Username;
 
 			//Password to use for SMTP authentication
-			$mailer->Password = $this->getPassword();
+			$mailer->Password = $this->Password;
 		} else {
 
 			//Whether to use SMTP authentication
