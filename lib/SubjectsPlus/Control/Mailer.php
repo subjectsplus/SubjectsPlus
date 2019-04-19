@@ -3,7 +3,7 @@ namespace SubjectsPlus\Control;
 
 //Import the PHPMailer class into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
-
+use SubjectsPlus\Control\MailMessage;
 
 class Mailer {
 	

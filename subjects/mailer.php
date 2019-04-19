@@ -33,6 +33,9 @@ global $email_smtp_debug;
 
 
 $message = new MailMessage();
+$message->setFrom('cgb37@miami.edu');
+$message->setAddress('charlesbrownroberts@miami.edu');
+$message->setMsgHTML('message body goes here');
 
 $mailer = new Mailer($message);
 $mailer->Host = $email_host;
@@ -40,7 +43,6 @@ $mailer->Port = $email_port;
 $mailer->SMTPAuth = $email_smtp_auth;
 $mailer->SMTPDebug = $email_smtp_debug;
 $mailer->SMTPDebug = $email_smtp_debug;
-$mailer->configureMessage();
 $mailer->send();
 
 
