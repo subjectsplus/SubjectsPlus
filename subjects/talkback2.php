@@ -142,21 +142,14 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 			if( $talkbackService->getUseEmail() == TRUE ) {
 
-
-				$to = 'cgb37@miami.edu';
-				$subject = 'testing the mailer';
-				$message = 'will this new mailer work?';
-				mail($to, $subject, $message);
-
 				$mailMessege = new MailMessage();
-
 				$mailMessege->setTo('charlesbrownroberts@gmail.com');
 				$mailMessege->setSubjectLine('Talkback comment issued');
 				$mailMessege->setContent('Testing the new talkback');
 				$mailMessege->setFrom('cgb37@miami.edu');
 
 				$mailer = new Mailer($mailMessege);
-				$mailer->send($mailMessege);
+				$mailer->send();
 			}
 
 			if( $talkbackService->getUseSlack() == TRUE ) {
