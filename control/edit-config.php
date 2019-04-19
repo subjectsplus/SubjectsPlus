@@ -235,6 +235,8 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places." )
 		),
 
+
+
 		"talkback_use_email" => array(
 			_( "Use Email" ),
 			_( "This option controls whether Talkback will use smtp email." ),
@@ -245,16 +247,35 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "This option controls whether Talkback uses smtp email." )
 		),
 
-		"email_server" => array(
-			_( "SMTP server" ),
-			_( "This option sets the email server address for use with Talkback" ),
+		"talkback_to_address" => array(
+			_( "To Address" ),
+			_( "This option sets the email To address for use with Talkback" ),
 			"string",
-			"talkback",
+			"talkback_email",
 			"large",
 			"",
-			_("This option sets the email server address for use with Talkback")
+			_("This option sets the email To address for use with Talkback")
 		),
 
+		"talkback_to_address_label" => array(
+			_( "To Address Label" ),
+			_( "This option sets the email To address label for use with Talkback" ),
+			"string",
+			"talkback_email",
+			"large",
+			"",
+			_("This option sets the email To address label for use with Talkback")
+		),
+
+		"talkback_subject_line" => array(
+			_( "Default Talkback Subject Line" ),
+			_( "This option sets the email Subject line for use with Talkback" ),
+			"string",
+			"talkback_email",
+			"large",
+			"",
+			_("This option sets the email Subject line for use with Talkback")
+		),
 
 		"talkback_use_recaptcha" => array(
 			_( "Use Recaptcha" ),
