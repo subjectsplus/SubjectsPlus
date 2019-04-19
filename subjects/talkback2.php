@@ -144,7 +144,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 				$mailMessege = new MailMessage();
 				$mailMessege->setFrom('cgb37@miami.edu');
-				$mailMessege->setAddress('charlesbrownroberts@gmail.com');
+				$mailMessege->setAddress('charlesbrownroberts@miami.edu');
 				$mailMessege->setSubject('Talkback comment issued');
 				$mailMessege->setMsgHTML('Testing the new talkback');
 
@@ -158,7 +158,6 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$mailer->Port = $email_port;
 				$mailer->SMTPAuth = $email_smtp_auth;
 				$mailer->SMTPDebug = $email_smtp_debug;
-				$mailer->send();
 				$mailer->send();
 			}
 
