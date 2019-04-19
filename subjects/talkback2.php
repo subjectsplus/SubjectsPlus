@@ -126,7 +126,8 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 	$newComment->setTbtags($set_filter);
 	$newComment->setAnswer('');
 
-	if( $talkbackService->getUseRecaptcha() == TRUE ) {
+	global $talkback_use_recaptcha;
+	if( $talkback_use_recaptcha == TRUE ) {
 
 		// Call the function post_captcha
 		$res = post_captcha($_POST['g-recaptcha-response']);
@@ -140,7 +141,9 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 			// insert the new comment into the db
 			$talkbackService->insertComment($newComment);
 
-			if( $talkbackService->getUseEmail() == TRUE ) {
+
+			global $talkback_use_email;
+			if( $talkback_use_email == TRUE ) {
 
 				// get globals for MailMessage class
 				global $talkback_to_address;
@@ -169,9 +172,20 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$mailer->send();
 			}
 
-			if( $talkbackService->getUseSlack() == TRUE ) {
+
+			global $talkback_use_slack;
+			if( $talkback_use_slack == TRUE ) {
+
+				global $talkback_slack_channel;
+				global $talkback_slack_webhook_url;
+				global $talkback_slack_emoji;
+
 				$slackMsg = new SlackMessenger();
-				$slackMsg->send($message);
+				$slackMsg->setChannel($talkback_slack_channel);
+				$slackMsg->setIcon($talkback_slack_emoji);
+				$slackMsg->setWebhookurl($talkback_slack_webhook_url);
+				$slackMsg->setMessage($this_comment);
+				$slackMsg->send();
 			}
 		}
 	}
