@@ -78,7 +78,7 @@ class Mailer {
 		$this->_mailer->addReplyTo( $this->_msg->getReplyToAddress(), $this->_msg->getReplyToLabel() );
 
 		//Set who the message is to be sent to
-		$this->_mailer->addAddress( $this->_msg->getAddress(), $this->_msg->getToAddressLabel() );
+		$this->_mailer->addAddress( $this->_msg->getToAddress(), $this->_msg->getToAddressLabel() );
 
 		//Set the subject line
 		$this->_mailer->Subject = $this->_msg->getSubject();
