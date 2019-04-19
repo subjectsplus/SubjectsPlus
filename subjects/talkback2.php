@@ -148,7 +148,17 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$mailMessege->setSubject('Talkback comment issued');
 				$mailMessege->setMsgHTML('Testing the new talkback');
 
+				global $email_host;
+				global $email_port;
+				global $email_smtp_auth;
+				global $email_smtp_debug;
+
 				$mailer = new Mailer($mailMessege);
+				$mailer->Host = $email_host;
+				$mailer->Port = $email_port;
+				$mailer->SMTPAuth = $email_smtp_auth;
+				$mailer->SMTPDebug = $email_smtp_debug;
+				$mailer->send();
 				$mailer->send();
 			}
 

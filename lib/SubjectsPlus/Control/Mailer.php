@@ -78,9 +78,6 @@ class Mailer {
 		//convert HTML into a basic plain-text alternative body
 		$this->_mailer->msgHTML( $this->_msg->getMsgHTML() );
 
-		//Replace the plain text body with one created manually
-		$this->_mailer->AltBody = 'This is a plain-text message body';
-
 		//Attach an image file
 		//$this->_mailer->addAttachment('images/phpmailer_mini.png');
 		return $this->_mailer;
