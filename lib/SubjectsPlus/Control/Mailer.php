@@ -8,12 +8,12 @@ class Mailer {
 	
 	private $_mailer;
 
-	private $_SMTPDebug;
-	private $_Host;
-	private $_Port;
-	private $_SMTPAuth;
-	private $_Username;
-	private $_Password;
+	public $SMTPDebug;
+	public $Host;
+	public $Port;
+	public $SMTPAuth;
+	public $Username;
+	public $Password;
 
 	public function __construct() {
 		global $email_server;
@@ -49,7 +49,7 @@ class Mailer {
 		$mailer->SMTPDebug = 2;
 
 		//Set the hostname of the mail server
-		$mailer->Host = $this->getHost();
+		$mailer->Host = $this->Host;
 		//$mailer->Host = 'smtp.cgcent.miami.edu';
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
