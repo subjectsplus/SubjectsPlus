@@ -22,7 +22,7 @@ class Mailer {
 		ini_set( "SMTP", $email_server );
 		ini_set( "sendmail_from", $administrator_email );
 
-
+		$this->configureMailer();
 	}
 	
 	
