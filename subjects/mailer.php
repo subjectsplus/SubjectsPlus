@@ -85,7 +85,7 @@ $mailer->setHost('smtp.cgcent.miami.edu');
 ////$mailer->setSMTPDebug($email_smtp_debug);
 //$mailer->setSMTPDebug(2);
 //$mailer->configureMailer();
-$mailer->configureMessage();
+//$mailer->configureMessage();
 $mailer->send();
 
 

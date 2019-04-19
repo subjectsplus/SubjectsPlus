@@ -49,8 +49,8 @@ class Mailer {
 		$mailer->SMTPDebug = 2;
 
 		//Set the hostname of the mail server
-		$mailer->Host = $this->getHost();
-		//$mailer->Host = 'smtp.cgcent.miami.edu';
+		//$mailer->Host = $this->getHost();
+		$mailer->Host = 'smtp.cgcent.miami.edu';
 
 		//Set the SMTP port number - likely to be 25, 465 or 587
 		//$mailer->Port = $this->getPort();
