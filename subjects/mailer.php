@@ -33,10 +33,12 @@ global $email_smtp_debug;
 
 
 $message = new MailMessage();
-$message->setFrom('cgb37@miami.edu');
-$message->setAddress('charlesbrownroberts@miami.edu');
-$message->setMsgHTML('message body goes here');
-$message->setSubject('a great comment subject line');
+$mailMessege->setFromAddress('cgb37@miami.edu');
+$mailMessege->setFromLabel('Charles Brown-Roberts');
+$mailMessege->setToAddress('charlesbrownroberts@miami.edu');
+$mailMessege->setToAddressLabel('Charles Brown-Roberts');
+$mailMessege->setSubject('Talkback comment issued');
+$mailMessege->setMsgHTML('Testing the new talkback');
 
 $mailer = new Mailer($message);
 $mailer->Host = $email_host;

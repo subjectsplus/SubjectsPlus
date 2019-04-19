@@ -4,9 +4,12 @@ namespace SubjectsPlus\Control;
 class MailMessage {
 
 
-	private $_from;
-	private $_replyTo;
-	private $_address;
+	private $_fromAddress;
+	private $_fromLabel;
+	private $_replyToAddress;
+	private $_replyToLabel;
+	private $_toAddress;
+	private $_toAddressLabel;
 	private $_subject;
 	private $_msgHTML;
 	private $_altBody;
@@ -20,43 +23,85 @@ class MailMessage {
 	/**
 	 * @return mixed
 	 */
-	public function getFrom() {
-		return $this->_from;
+	public function getFromAddress() {
+		return $this->_fromAddress;
 	}
 
 	/**
-	 * @param mixed $from
+	 * @param mixed $fromAddress
 	 */
-	public function setFrom( $from ) {
-		$this->_from = $from;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getReplyTo() {
-		return $this->_replyTo;
-	}
-
-	/**
-	 * @param mixed $replyTo
-	 */
-	public function setReplyTo( $replyTo ) {
-		$this->_replyTo = $replyTo;
+	public function setFromAddress( $fromAddress ){
+		$this->_fromAddress = $fromAddress;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getAddress() {
-		return $this->_address;
+	public function getFromLabel() {
+		return $this->_fromLabel;
 	}
 
 	/**
-	 * @param mixed $address
+	 * @param mixed $fromLabel
 	 */
-	public function setAddress( $address ) {
-		$this->_address = $address;
+	public function setFromLabel( $fromLabel ){
+		$this->_fromLabel = $fromLabel;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getReplyToAddress() {
+		return $this->_replyToAddress;
+	}
+
+	/**
+	 * @param mixed $replyToAddress
+	 */
+	public function setReplyToAddress( $replyToAddress ){
+		$this->_replyToAddress = $replyToAddress;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getReplyToLabel() {
+		return $this->_replyToLabel;
+	}
+
+	/**
+	 * @param mixed $replyToLabel
+	 */
+	public function setReplyToLabel( $replyToLabel ){
+		$this->_replyToLabel = $replyToLabel;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getToAddress() {
+		return $this->_toAddress;
+	}
+
+	/**
+	 * @param mixed $toAddress
+	 */
+	public function setToAddress( $toAddress ){
+		$this->_toAddress = $toAddress;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getToAddressLabel() {
+		return $this->_toAddressLabel;
+	}
+
+	/**
+	 * @param mixed $toAddressLabel
+	 */
+	public function setToAddressLabel( $toAddressLabel ){
+		$this->_toAddressLabel = $toAddressLabel;
 	}
 
 	/**

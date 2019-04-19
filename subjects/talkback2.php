@@ -143,8 +143,10 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 			if( $talkbackService->getUseEmail() == TRUE ) {
 
 				$mailMessege = new MailMessage();
-				$mailMessege->setFrom('cgb37@miami.edu');
-				$mailMessege->setAddress('charlesbrownroberts@miami.edu');
+				$mailMessege->setFromAddress('cgb37@miami.edu');
+				$mailMessege->setFromLabel('Charles Brown-Roberts');
+				$mailMessege->setToAddress('charlesbrownroberts@miami.edu');
+				$mailMessege->setToAddressLabel('Charles Brown-Roberts');
 				$mailMessege->setSubject('Talkback comment issued');
 				$mailMessege->setMsgHTML('Testing the new talkback');
 
