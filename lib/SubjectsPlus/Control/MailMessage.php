@@ -1,17 +1,16 @@
 <?php
-   namespace SubjectsPlus\Control;
-   //Import the PHPMailer class into the global namespace
-   use PHPMailer\PHPMailer\PHPMailer;
+namespace SubjectsPlus\Control;
+
 class MailMessage {
 
 
-	private $_setFrom;
-	private $_addReplyTo;
-	private $_addAddress;
-	private $_Subject;
+	private $_from;
+	private $_replyTo;
+	private $_address;
+	private $_subject;
 	private $_msgHTML;
-	private $_AltBody;
-	private $_addAttachment;
+	private $_altBody;
+	private $_attachment;
 
 
 	public function __construct() {
@@ -21,57 +20,57 @@ class MailMessage {
 	/**
 	 * @return mixed
 	 */
-	public function getSetFrom() {
-		return $this->_setFrom;
+	public function getFrom() {
+		return $this->_from;
 	}
 
 	/**
-	 * @param mixed $setFrom
+	 * @param mixed $from
 	 */
-	public function setSetFrom( $setFrom ) {
-		$this->_setFrom = $setFrom;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getAddReplyTo() {
-		return $this->_addReplyTo;
-	}
-
-	/**
-	 * @param mixed $addReplyTo
-	 */
-	public function setAddReplyTo( $addReplyTo ) {
-		$this->_addReplyTo = $addReplyTo;
+	public function setFrom( $from ) {
+		$this->_from = $from;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getAddAddress() {
-		return $this->_addAddress;
+	public function getReplyTo() {
+		return $this->_replyTo;
 	}
 
 	/**
-	 * @param mixed $addAddress
+	 * @param mixed $replyTo
 	 */
-	public function setAddAddress( $addAddress ) {
-		$this->_addAddress = $addAddress;
+	public function setReplyTo( $replyTo ) {
+		$this->_replyTo = $replyTo;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAddress() {
+		return $this->_address;
+	}
+
+	/**
+	 * @param mixed $address
+	 */
+	public function setAddress( $address ) {
+		$this->_address = $address;
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getSubject() {
-		return $this->_Subject;
+		return $this->_subject;
 	}
 
 	/**
-	 * @param mixed $Subject
+	 * @param mixed $subject
 	 */
-	public function setSubject( $Subject ) {
-		$this->_Subject = $Subject;
+	public function setSubject( $subject ) {
+		$this->_subject = $subject;
 	}
 
 	/**
@@ -92,97 +91,30 @@ class MailMessage {
 	 * @return mixed
 	 */
 	public function getAltBody() {
-		return $this->_AltBody;
+		return $this->_altBody;
 	}
 
 	/**
-	 * @param mixed $AltBody
+	 * @param mixed $altBody
 	 */
-	public function setAltBody( $AltBody ) {
-		$this->_AltBody = $AltBody;
+	public function setAltBody( $altBody ) {
+		$this->_altBody = $altBody;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getAddAttachment() {
-		return $this->_addAttachment;
+	public function getAttachment() {
+		return $this->_attachment;
 	}
 
 	/**
-	 * @param mixed $addAttachment
+	 * @param mixed $attachment
 	 */
-	public function setAddAttachment( $addAttachment ) {
-		$this->_addAttachment = $addAttachment;
+	public function setAttachment( $attachment ) {
+		$this->_attachment = $attachment;
 	}
 
 
-//    private $_to;
-//    private $_from;
-//    private $_fromString;
-//    private $_subjectLine;
-//    private $_content;
-//    private $_header;
-//
-//    public function __construct($params=NULL) {
-//        if (is_array($params)) {
-//            if (isset($params['to'])) {
-//                $this->_to = $params['to'];
-//            }
-//            if (isset($params['subjectLine'])) {
-//                $this->_subjectLine = $params['subjectLine'];
-//            }
-//            if (isset($params['content'])) {
-//                $this->_content = $params['content'];
-//            }
-//            if (isset($params['from'])) {
-//                $this->_from = $params['from'];
-//                $this->_fromString = _("Library_No_Reply") . "<" . $this->_from . ">";
-//                $this->_header = "Return-Path: " . $this->_from . "\n";
-//                $this->_header .= "From:  " . $this->_from . "\n";
-//                $this->_header .= "Content-Type: text/html; charset=iso-8859-1;\n";
-//            }
-//        }
-//    }
-//
-//    public function getTo() {
-//        return $this->_to;
-//    }
-//
-//    public function getSubjectLine() {
-//        return $this->_subjectLine;
-//    }
-//
-//    public function getContent() {
-//        return $this->_content;
-//    }
-//
-//    public function getFrom() {
-//        return $this->_fromString;
-//    }
-//
-//    public function getHeader() {
-//        return $this->_header;
-//    }
-//
-//    public function setTo($recipientEmail) {
-//        $this->_to = $recipientEmail;
-//    }
-//
-//    public function setSubjectLine($subjectLine) {
-//        $this->_subjectLine = $subjectLine;
-//    }
-//
-//    public function setContent($contentString) {
-//        $this->_content = "<html><body>" . $contentString . "<p>" . _("This is an automatically generated email. Please do not respond.") . "</p><strong>" . _("Email sent: ") . date("l F j, Y, g:i a") . "</strong></body></html>";
-//    }
-//
-//    public function setFrom($from) {
-//        $this->_fromString = "Library_No_Reply <" . $from . ">";
-//        $this->_header = "Return-Path: $from\r\n";
-//        $this->_header .= "From:  $this->_from\r\n";
-//        $this->_header .= "Content-Type: text/html; charset=iso-8859-1;\n\n\r\n";
-//    }
 
 }
-?>

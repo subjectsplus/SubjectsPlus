@@ -3,8 +3,8 @@
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\TalkbackService;
 use SubjectsPlus\Control\TalkbackComment;
-use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\MailMessage;
+use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\SlackMessenger;
 use SubjectsPlus\Control\Template;
 
@@ -143,10 +143,10 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 			if( $talkbackService->getUseEmail() == TRUE ) {
 
 				$mailMessege = new MailMessage();
-				$mailMessege->setTo('charlesbrownroberts@gmail.com');
-				$mailMessege->setSubjectLine('Talkback comment issued');
-				$mailMessege->setContent('Testing the new talkback');
-				$mailMessege->setFrom('cgb37@miami.edu');
+				$mailMessege->setFrom( $newComment->getQFrom());
+				$mailMessege->setAddress('charlesbrownroberts@gmail.com');
+				$mailMessege->setSubject('Talkback comment issued');
+				$mailMessege->setMsgHTML($newComment->getQuestion());
 
 				$mailer = new Mailer($mailMessege);
 				$mailer->send();

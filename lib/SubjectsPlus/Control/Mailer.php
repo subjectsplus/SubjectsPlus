@@ -3,7 +3,7 @@ namespace SubjectsPlus\Control;
 
 //Import the PHPMailer class into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
-use SubjectsPlus\Control\MailMessage;
+
 
 class Mailer {
 	
@@ -69,14 +69,14 @@ class Mailer {
 		$this->_mailer->addReplyTo( 'cgb37@miami.edu', 'Charles Brown-Roberts' );
 
 		//Set who the message is to be sent to
-		$this->_mailer->addAddress( 'charlesbrownroberts@miami.edu', 'Charles Brown-Roberts' );
+		$this->_mailer->addAddress( $this->_msg->getAddress(), 'Charles Brown-Roberts' );
 
 		//Set the subject line
-		$this->_mailer->Subject = 'PHPMailer SMTP test';
+		$this->_mailer->Subject = $this->_msg->getSubject();
 
 		//Read an HTML message body from an external file, convert referenced images to embedded,
 		//convert HTML into a basic plain-text alternative body
-		$this->_mailer->msgHTML( 'message content' );
+		$this->_mailer->msgHTML( $this->_msg->getMsgHTML() );
 
 		//Replace the plain text body with one created manually
 		$this->_mailer->AltBody = 'This is a plain-text message body';
