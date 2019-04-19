@@ -22,16 +22,16 @@ class Mailer {
 		ini_set( "SMTP", $email_server );
 		ini_set( "sendmail_from", $administrator_email );
 
-		//SMTP needs accurate times, and the PHP time zone MUST be set
-		//This should be done in your php.ini, but this is how to do it if you don't have access to that
-		date_default_timezone_set( 'America/New_York' );
-
-		$this->configureMailer();
 
 	}
 	
 	
-	protected function configureMailer() {
+	public function configureMailer() {
+
+		//SMTP needs accurate times, and the PHP time zone MUST be set
+		//This should be done in your php.ini, but this is how to do it if you don't have access to that
+		date_default_timezone_set( 'America/New_York' );
+
 
 		//Create a new PHPMailer instance
 		$this->_mailer = new PHPMailer;
