@@ -77,7 +77,7 @@ var_dump($email_smtp_debug);
 
 $mailer = new Mailer();
 //$mailer->setHost($email_host);
-$mailer->Host ='smtp.cgcent.miami.edu';
+$mailer->Host = 'smtp.cgcent.miami.edu';
 ////$mailer->setPort($email_port);
 //$mailer->setPort(25);
 ////$mailer->setSMTPAuth($email_smtp_auth);
