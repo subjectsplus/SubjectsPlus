@@ -180,11 +180,17 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				global $talkback_slack_webhook_url;
 				global $talkback_slack_emoji;
 
+				$msg = "New Comment via Talkback" . PHP_EOL;
+				$msg .= "$this_comment" . PHP_EOL;
+				$msg .= "From: " . $this_name . PHP_EOL;
+				$msg .= "Date submitted: " . $todaycomputer . PHP_EOL;
+				$msg .= "Tags: " . $set_filter . PHP_EOL;
+
 				$slackMsg = new SlackMessenger();
 				$slackMsg->setChannel($talkback_slack_channel);
 				$slackMsg->setIcon($talkback_slack_emoji);
 				$slackMsg->setWebhookurl($talkback_slack_webhook_url);
-				$slackMsg->setMessage($this_comment);
+				$slackMsg->setMessage($msg);
 				$slackMsg->send();
 			}
 		}
