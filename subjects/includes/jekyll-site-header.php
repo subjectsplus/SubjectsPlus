@@ -479,11 +479,13 @@
 
                                             <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
 
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-reading-room.html">Faculty Reading Room</a></li>
+
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/kislak-center/index.html">Kislak Center</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms</a></li>
 
