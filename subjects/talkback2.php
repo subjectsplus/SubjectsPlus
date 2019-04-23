@@ -150,7 +150,13 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				global $talkback_to_address_label;
 				global $talkback_subject_line;
 
-				$html_message = file_get_contents('./views/talkback/html_msg.php');
+				$tpl_name = 'html_msg';
+				$tpl = new Template( './views/talkback' );
+				$html_message = $tpl->render( $tpl_name, array(
+					'this_name'    => $this_name,
+					'this_comment' => $this_comment
+				) );
+
 
 				$mailMessege = new MailMessage();
 				$mailMessege->setFromAddress($this_name);
