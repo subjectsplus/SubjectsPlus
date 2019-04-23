@@ -60,14 +60,14 @@
                     <!-- start pluslet -->
                     <div class="pluslet">
                         <div class="titlebar">
-                            <div class="titlebar_text">Tell Us What You Think</div>
+                            <div class="titlebar_text"><?php print _( "Tell Us What You Think" ); ?>
+                            </div>
                         </div>
                         <div class="pluslet_body">
                             <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <strong>Wait! Do you need help right now?</strong><br>Visit the Research Desk! </p>
+	                            <?php print _( "<strong>Wait! Do you need help right now?</strong><br>Visit the Research Desk!" ); ?>
+                            </p>
                             <br>
-
-                            <?php //include_once 'comment_form.php'; ?>
                             <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                             <script>
                                 function onSubmit(token) {
