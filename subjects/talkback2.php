@@ -150,13 +150,15 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				global $talkback_to_address_label;
 				global $talkback_subject_line;
 
+				$html_message = file_get_contents('./views/talkback/html_msg.php');
+
 				$mailMessege = new MailMessage();
 				$mailMessege->setFromAddress($this_name);
 				$mailMessege->setFromLabel($this_name);
 				$mailMessege->setToAddress($talkback_to_address);
 				$mailMessege->setToAddressLabel($talkback_to_address_label);
 				$mailMessege->setSubject($talkback_subject_line);
-				$mailMessege->setMsgHTML($this_comment);
+				$mailMessege->setMsgHTML($html_message);
 
 				// get globals for Mailer class
 				global $email_host;
@@ -191,7 +193,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$slackMsg->setIcon($talkback_slack_emoji);
 				$slackMsg->setWebhookurl($talkback_slack_webhook_url);
 				$slackMsg->setMessage($msg);
-				$slackMsg->send();
+				//$slackMsg->send();
 			}
 		}
 	}
