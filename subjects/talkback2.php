@@ -154,8 +154,10 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$tpl = new Template( './views/talkback' );
 				$html_message = $tpl->render( $tpl_name, array(
 					'this_name'    => $this_name,
-					'this_comment' => $this_comment
-				) );
+					'this_comment' => $this_comment,
+					'datetime'     => date( 'Y-m-d H:i:s' )
+
+ 				) );
 
 
 				$mailMessege = new MailMessage();

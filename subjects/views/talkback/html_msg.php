@@ -37,7 +37,7 @@
 								</td>
 								<td width="380" valign="bottom" height="40" bgcolor="#FFFFFF">
 									<p style="font-size:22px; color:#858585; font-family:Helvetica, sans-serif;">
-										<?php echo $month . " " . $mday . " " . $year; ?></p>
+										<?php echo $datetime; ?></p>
 								</td>
 								<td width="10" valign="top" height="40" bgcolor="#FFFFFF">&nbsp;</td>
 							</tr>
