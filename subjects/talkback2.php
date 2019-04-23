@@ -53,7 +53,7 @@ $set_filter  = ""; // tritto
 
 // Show headshots
 $show_talkback_face = 1;
-
+var_dump($all_tbtags);
 if ( isset( $all_tbtags ) ) {
 // Let's get the first item off the tb array to use as our default
 	reset( $all_tbtags ); // make sure array pointer is at first element
@@ -94,7 +94,7 @@ if ( isset( $all_tbtags ) ) {
 
 
 
-
+var_dump($all_cattags);
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Display Public view /views/talkback/public.php
@@ -127,7 +127,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 	$newComment->setAnswer('');
 
 	global $talkback_use_recaptcha;
-	if( $talkback_use_recaptcha == TRUE ) {
+	if( $talkback_use_recaptcha === TRUE ) {
 
 		// Call the function post_captcha
 		$res = post_captcha($_POST['g-recaptcha-response']);
@@ -143,7 +143,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 
 			global $talkback_use_email;
-			if( $talkback_use_email == TRUE ) {
+			if( $talkback_use_email === TRUE ) {
 
 				// get globals for MailMessage class
 				global $talkback_to_address;
@@ -184,7 +184,7 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 
 			global $talkback_use_slack;
-			if( $talkback_use_slack == TRUE ) {
+			if( $talkback_use_slack === TRUE ) {
 
 				global $talkback_slack_channel;
 				global $talkback_slack_webhook_url;
@@ -218,12 +218,22 @@ if ( isset( $_GET['c'] ) ) {
 
 if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 	$comment_year = 'prev';
+	$comment_header = "<h2>" . _( "Comments from Previous Years" ) . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\">" . _( "See this year" ) . "</a></span></h2>";
 } else {
 	$comment_year = 'current';
+	$comment_header = "<h2>" . _( "Comments from " ) . "$this_year <span style=\"font-size: 11px; font-weight: normal;\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _( "See previous years" ) . "</a></span></h2>";
 }
 
 
-$comments = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
+$comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
+
+if(!empty($comments_response)) {
+
+	$comments = $comments_response;
+} else {
+
+	$comments = _( "There are no comments just yet.  Be the first!" );
+}
 
 // clean up post variables
 if ( isset( $_POST["name"] ) ) {
@@ -248,7 +258,11 @@ echo $tpl->render( $tpl_name, array(
 	'comments'     => $comments,
 	'this_name'    => $this_name,
 	'this_comment' => $this_comment,
-	'show_talkback_face' => $show_talkback_face
+	'show_talkback_face' => $show_talkback_face,
+	'set_filter'         => $set_filter,
+	'comment_year'       => $comment_year,
+	'comment_header'     => $comment_header
+
 ) );
 
 

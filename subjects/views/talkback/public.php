@@ -21,10 +21,12 @@
 		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>" ); ?>
                     </div>
                     <div class="pluslet_simple no_overflow">
-                        <h2>Comments from 2019 <span style="font-size: 11px; font-weight: normal;"><a
-                                        href="talkback.php?t=prev&amp;v=main">See previous years</a></span></h2>
+                        <?php echo $comment_header; ?>
 
-                        <?php foreach($comments as $comment): ?>
+
+                        <?php if(is_array($comments)) {
+
+                        foreach($comments as $comment): ?>
 
                             <?php
 	                            // Let's link back to the staff page
@@ -53,6 +55,11 @@
                                 </p>
                         </div>
                         <?php endforeach; ?>
+
+                        <?php } else {
+
+                            echo $comments;
+                        } ?>
 
                     </div>
                 </div>
