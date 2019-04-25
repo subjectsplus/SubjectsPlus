@@ -6,12 +6,14 @@ namespace SubjectsPlus\Control;
 
 class SlackMessenger {
 
-	public $message;
-	public $channel;
-	public $icon;
-	public $webhookurl;
+	private $_message;
+	private $_channel;
+	private $_icon;
+	private $_webhookurl;
 
-
+	/**
+	 * SlackMessenger constructor.
+	 */
 	public function __construct() {
 	}
 
@@ -19,59 +21,61 @@ class SlackMessenger {
 	 * @return mixed
 	 */
 	public function getMessage() {
-		return $this->message;
+		return $this->_message;
 	}
 
 	/**
 	 * @param mixed $message
 	 */
 	public function setMessage( $message ) {
-		$this->message = $message;
+		$this->_message = $message;
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getChannel() {
-		return $this->channel;
+		return $this->_channel;
 	}
 
 	/**
 	 * @param mixed $channel
 	 */
 	public function setChannel( $channel ) {
-		$this->channel = $channel;
+		$this->_channel = $channel;
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getIcon() {
-		return $this->icon;
+		return $this->_icon;
 	}
 
 	/**
 	 * @param mixed $icon
 	 */
 	public function setIcon( $icon ) {
-		$this->icon = $icon;
+		$this->_icon = $icon;
 	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getWebhookurl() {
-		return $this->webhookurl;
+		return $this->_webhookurl;
 	}
 
 	/**
 	 * @param mixed $webhookurl
 	 */
 	public function setWebhookurl( $webhookurl ) {
-		$this->webhookurl = $webhookurl;
+		$this->_webhookurl = $webhookurl;
 	}
-	
 
+	/**
+	 * @return bool|string
+	 */
 	public function send() {
 		$data = "payload=" . json_encode( array(
 				"channel"    => "#{$this->getChannel()}",
