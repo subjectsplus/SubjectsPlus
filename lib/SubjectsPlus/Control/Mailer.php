@@ -1,12 +1,10 @@
 <?php
 namespace SubjectsPlus\Control;
 
-//Import the PHPMailer class into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 
-
 class Mailer {
-	
+
 	private $_mailer;
 
 	public $SMTPDebug;
@@ -16,18 +14,23 @@ class Mailer {
 	public $Username;
 	public $Password;
 
+	/**
+	 * Mailer constructor.
+	 *
+	 * @param MailMessage $message
+	 */
 	public function __construct(MailMessage $message) {
-
 		$this->_msg = $message;
-
 	}
 
+	/**
+	 * @return PHPMailer
+	 */
 	protected function configureMailer() {
-		//SMTP needs accurate times, and the PHP time zone MUST be set
-		//This should be done in your php.ini, but this is how to do it if you don't have access to that
-		date_default_timezone_set( 'America/New_York' );
+		// SMTP needs accurate times, and the PHP time zone MUST be set
+		// This should be done in your php.ini, but if not, it can be set in control/includes/config.php
 
-		//Create a new PHPMailer instance
+		// Create a new PHPMailer instance
 		$mailer = new PHPMailer;
 
 		//Tell PHPMailer to use SMTP
@@ -61,14 +64,15 @@ class Mailer {
 			$mailer->SMTPAuth = false;
 		}
 
-
-
 		return $mailer;
 	}
 
 
+	/**
+	 * @return PHPMailer
+	 * @throws \PHPMailer\PHPMailer\Exception
+	 */
 	public function configureMessage() {
-
 		$this->_mailer = $this->configureMailer();
 
 		//Set who the message is to be sent from
@@ -87,21 +91,17 @@ class Mailer {
 		//Attach an image file
 		//$this->_mailer->addAttachment('images/phpmailer_mini.png');
 		return $this->_mailer;
-
 	}
 
+	/**
+	 * @throws \PHPMailer\PHPMailer\Exception
+	 */
 	public function send() {
-
 		$this->_mailer = $this->configureMessage();
-
 
 		//send the message, check for errors
 		if ( ! $this->_mailer->send() ) {
 			echo 'Mailer Error: ' . $this->_mailer->ErrorInfo;
-		} else {
-			echo 'Message sent!';
 		}
 	}
-
-
 }
