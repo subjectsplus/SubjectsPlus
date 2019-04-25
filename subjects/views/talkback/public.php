@@ -76,16 +76,11 @@
                             </p>
                             <br>
 
-
-	                        <?php global $talkback_recaptcha_site_key; ?>
-	                        <?php global $talkback_recaptcha_secret_key; ?>
-
 	                        <?php
-
+	                        global $talkback_recaptcha_site_key;
 	                        $siteKey = $talkback_recaptcha_site_key;
-	                        $secret = $talkback_recaptcha_secret_key;
 
-	                        if ( $siteKey === '' || $secret === '' ):
+	                        if ( $siteKey === '' ):
 		                        ?>
                                 <h2>Add your keys</h2>
                                 <p>If you do not have keys already then visit <kbd> <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a></kbd>
@@ -128,16 +123,8 @@
                                     });
                                 </script>
 
-
-
-
 	                        <?php
 	                        endif; ?>
-
-
-
-
-
 
                         </div>
                     </div>
