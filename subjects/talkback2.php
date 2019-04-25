@@ -7,6 +7,7 @@ use SubjectsPlus\Control\MailMessage;
 use SubjectsPlus\Control\Mailer;
 use SubjectsPlus\Control\SlackMessenger;
 use SubjectsPlus\Control\Template;
+use SubjectsPlus\Control\ReCaptchaService;
 
 include( "../control/includes/config.php" );
 include( "../control/includes/functions.php" );
@@ -91,13 +92,14 @@ if ( isset( $all_tbtags ) ) {
 
 
 
+
 /////////////////////////////////////////////////////////////////////////////////////////
 // Display Public view /views/talkback/public.php
 /////////////////////////////////////////////////////////////////////////////////////////
 
-// echo "Test message from Linux server using ssmtp" | sudo ssmtp -vvv cgb37@miami.edu
+$recaptcha_response = "";
 
-if ( isset( $_POST['the_suggestion'] ) ) {
+if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response']) ) {
 
 	// clean up post variables
 	if ( isset( $_POST["name"] ) ) {
@@ -114,54 +116,58 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 
 
 	$newComment = new TalkbackComment();
-	$newComment->setQuestion($this_comment);
-	$newComment->setQFrom($this_name);
-	$newComment->setDateSubmitted($todaycomputer);
-	$newComment->setDisplay('No');
-	$newComment->setTbtags($set_filter);
-	$newComment->setAnswer('');
+	$newComment->setQuestion( $this_comment );
+	$newComment->setQFrom( $this_name );
+	$newComment->setDateSubmitted( $todaycomputer );
+	$newComment->setDisplay( 'No' );
+	$newComment->setTbtags( $set_filter );
+	$newComment->setAnswer( '' );
 
 	global $talkback_use_recaptcha;
-	if( $talkback_use_recaptcha === TRUE ) {
+	if ( $talkback_use_recaptcha === true ) {
 
-		// Call the function post_captcha
-		$res = post_captcha($_POST['g-recaptcha-response']);
+		global $talkback_recaptcha_secret_key;
 
-		if (!$res['success']) {
-			// What happens when the reCAPTCHA is not properly set up
-			$feedback = $submission_failure_feedback;
+		$recaptcha_service = new ReCaptchaService();
+		$recaptcha_service->setServerName( scrubData( $_SERVER['SERVER_NAME'] ) );
+		$recaptcha_service->setRemoteAddr( scrubData( $_SERVER['REMOTE_ADDR'] ) );
+		$recaptcha_service->setAction( 'talkback' );
+		$recaptcha_service->setToken( scrubData( $_POST['recaptcha_response'] ) );
+		$recaptcha_response = $recaptcha_service->verify( $talkback_recaptcha_secret_key );
 
-		} else {
+
+		// Take action based on the score returned:
+		if ( $recaptcha_response->getScore() >= 0.5 ) {
+			// Verified - send email
+			$recaptcha_response = "recaptcha score: " . $recaptcha_response->getScore();
+
 			// If CAPTCHA is successful...
 			// insert the new comment into the db
-			$talkbackService->insertComment($newComment);
+			$talkbackService->insertComment( $newComment );
 
-
-			global $talkback_use_email;
-			if( $talkback_use_email === TRUE ) {
+			if ( $talkback_use_email === true ) {
 
 				// get globals for MailMessage class
 				global $talkback_to_address;
 				global $talkback_to_address_label;
 				global $talkback_subject_line;
 
-				$tpl_name = 'html_msg';
-				$tpl = new Template( './views/talkback' );
+				$tpl_name     = 'html_msg';
+				$tpl          = new Template( './views/talkback' );
 				$html_message = $tpl->render( $tpl_name, array(
 					'this_name'    => $this_name,
 					'this_comment' => $this_comment,
 					'datetime'     => date( 'Y-m-d H:i:s' )
 
- 				) );
-
+				) );
 
 				$mailMessege = new MailMessage();
-				$mailMessege->setFromAddress($this_name);
-				$mailMessege->setFromLabel($this_name);
-				$mailMessege->setToAddress($talkback_to_address);
-				$mailMessege->setToAddressLabel($talkback_to_address_label);
-				$mailMessege->setSubject($talkback_subject_line);
-				$mailMessege->setMsgHTML($html_message);
+				$mailMessege->setFromAddress( $this_name );
+				$mailMessege->setFromLabel( $this_name );
+				$mailMessege->setToAddress( $talkback_to_address );
+				$mailMessege->setToAddressLabel( $talkback_to_address_label );
+				$mailMessege->setSubject( $talkback_subject_line );
+				$mailMessege->setMsgHTML( $html_message );
 
 				// get globals for Mailer class
 				global $email_host;
@@ -169,17 +175,17 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				global $email_smtp_auth;
 				global $email_smtp_debug;
 
-				$mailer = new Mailer($mailMessege);
-				$mailer->Host = $email_host;
-				$mailer->Port = $email_port;
-				$mailer->SMTPAuth = $email_smtp_auth;
+				$mailer            = new Mailer( $mailMessege );
+				$mailer->Host      = $email_host;
+				$mailer->Port      = $email_port;
+				$mailer->SMTPAuth  = $email_smtp_auth;
 				$mailer->SMTPDebug = $email_smtp_debug;
 				$mailer->send();
 			}
 
 
 			global $talkback_use_slack;
-			if( $talkback_use_slack === TRUE ) {
+			if ( $talkback_use_slack === true ) {
 
 				global $talkback_slack_channel;
 				global $talkback_slack_webhook_url;
@@ -192,15 +198,22 @@ if ( isset( $_POST['the_suggestion'] ) ) {
 				$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
 
 				$slackMsg = new SlackMessenger();
-				$slackMsg->setChannel($talkback_slack_channel);
-				$slackMsg->setIcon($talkback_slack_emoji);
-				$slackMsg->setWebhookurl($talkback_slack_webhook_url);
-				$slackMsg->setMessage($msg);
+				$slackMsg->setChannel( $talkback_slack_channel );
+				$slackMsg->setIcon( $talkback_slack_emoji );
+				$slackMsg->setWebhookurl( $talkback_slack_webhook_url );
+				$slackMsg->setMessage( $msg );
 				//$slackMsg->send();
 			}
+
 		}
+
+
+	} else {
+		// Not verified - show form error
+		$recaptcha_response = "Recaptcha score is too low. Your comment was not submitted: " . $recaptcha_response->getScore();
 	}
 }
+
 
 $filter = '%' . $set_filter . '%';
 if ( isset( $_GET['c'] ) ) {
@@ -249,6 +262,7 @@ if ( isset( $_POST["the_suggestion"] ) ) {
 }
 
 
+
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 	$tpl_folder = "./views/{$subjects_theme}/talkback";
@@ -269,7 +283,8 @@ echo $tpl->render( $tpl_name, array(
 	'comment_year'          => $comment_year,
 	'comment_header'        => $comment_header,
 	'current_comments_link' => $current_comments_link,
-	'current_comments_label' => $current_comments_label
+	'current_comments_label' => $current_comments_label,
+	'recaptcha_response'     => $recaptcha_response
 
 ) );
 

@@ -12,6 +12,7 @@
     $loader->registerNamespace('CSSMin',  dirname(dirname(__DIR__)) . '/lib');
     $loader->registerNamespace('RichterLibrary', dirname(dirname(__DIR__)) . '/lib');
     $loader->registerNamespace('PHPMailer', dirname(dirname(__DIR__)) . '/lib');
+    $loader->registerNamespace('ReCaptcha', dirname(dirname(__DIR__)) . '/lib');
 
     $loader->register();
 

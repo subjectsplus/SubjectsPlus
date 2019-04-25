@@ -1,10 +1,6 @@
 <?php
 namespace SubjectsPlus\Control;
 
-use SubjectsPlus\Control\Querier;
-use PDO;
-
-
 class TalkbackService {
 
 	private $_db;
@@ -18,11 +14,12 @@ class TalkbackService {
 
 	public function __construct(Querier $db) {
 		$this->_db = $db;
-
 		$this->_connection = $this->_db->getConnection();
-
 	}
 
+	/**
+	 * @param TalkbackComment $comment
+	 */
 	public function insertComment(TalkbackComment $comment) {
 
 		$this_comment  = $comment->getQuestion();
@@ -45,6 +42,14 @@ class TalkbackService {
 		$statement->execute();
 	}
 
+	/**
+	 * @param string $comment_year
+	 * @param $this_year
+	 * @param $filter
+	 * @param $cat_tags
+	 *
+	 * @return array
+	 */
 	public function getComments($comment_year = 'current', $this_year, $filter, $cat_tags) {
 
 		if($comment_year == 'current') {
@@ -74,19 +79,12 @@ class TalkbackService {
 		return $statement->fetchAll();
 	}
 
-
-
-
+	
 
 	/**
 	 * @return mixed
 	 */
 	public function getUseEmail() {
-		global $talkback_use_email;
-
-		if(isset($talkback_use_email)){
-			$this->_use_email = $talkback_use_email;
-		}
 		return $this->_use_email;
 	}
 
@@ -101,11 +99,6 @@ class TalkbackService {
 	 * @return mixed
 	 */
 	public function getUseSlack() {
-		global $talkback_use_slack;
-
-		if( isset($talkback_use_slack) ) {
-			$this->_use_slack = $talkback_use_slack;
-		}
 		return $this->_use_slack;
 	}
 
@@ -120,11 +113,6 @@ class TalkbackService {
 	 * @return mixed
 	 */
 	public function getUseRecaptcha() {
-		global $talkback_use_recaptcha;
-
-		if( isset($talkback_use_recaptcha) ) {
-			$this->_use_recaptcha = $talkback_use_recaptcha;
-		}
 		return $this->_use_recaptcha;
 	}
 
@@ -162,6 +150,10 @@ class TalkbackService {
 	public function setAdminEmail( $admin_email ) {
 		$this->_admin_email = $admin_email;
 	}
+
+
+
+
 
 
 
