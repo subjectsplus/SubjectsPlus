@@ -152,6 +152,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				global $talkback_to_address_label;
 				global $talkback_subject_line;
 
+				// create the html email template
 				$tpl_name     = 'html_msg';
 				$tpl          = new Template( './views/talkback' );
 				$html_message = $tpl->render( $tpl_name, array(
@@ -161,6 +162,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 				) );
 
+				// configure MailMessage
 				$mailMessege = new MailMessage();
 				$mailMessege->setFromAddress( $this_name );
 				$mailMessege->setFromLabel( $this_name );
@@ -175,6 +177,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				global $email_smtp_auth;
 				global $email_smtp_debug;
 
+				// configure Mailer and send email
 				$mailer            = new Mailer( $mailMessege );
 				$mailer->Host      = $email_host;
 				$mailer->Port      = $email_port;
@@ -183,7 +186,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				$mailer->send();
 			}
 
-
+			// set up a slack message
 			global $talkback_use_slack;
 			if ( $talkback_use_slack === true ) {
 
@@ -197,16 +200,16 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				$msg .= _( "Date submitted: " ) . $todaycomputer . PHP_EOL;
 				$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
 
+				// send comment to slack channel talkback
 				$slackMsg = new SlackMessenger();
 				$slackMsg->setChannel( $talkback_slack_channel );
 				$slackMsg->setIcon( $talkback_slack_emoji );
 				$slackMsg->setWebhookurl( $talkback_slack_webhook_url );
 				$slackMsg->setMessage( $msg );
-				//$slackMsg->send();
+				$slackMsg->send();
 			}
 
 		}
-
 
 	} else {
 		// Not verified - show form error
@@ -237,14 +240,12 @@ if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 	$current_comments_label = _( "See previous years" );
 }
 
-
+// get the comments from db
 $comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
 
 if(!empty($comments_response)) {
-
 	$comments = $comments_response;
 } else {
-
 	$comments = _( "There are no comments just yet.  Be the first!" );
 }
 
