@@ -53,7 +53,7 @@
                             <br>
 
                             <p><?php
-	                            if ( $show_talkback_face == 1 ) {
+	                            if ( $talkback_show_headshot === true ) {
 		                            echo getHeadshot( $comment['email'] );
 	                            }
                             ?>

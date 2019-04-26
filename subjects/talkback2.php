@@ -14,83 +14,216 @@ include( "../control/includes/functions.php" );
 include( "../control/includes/autoloader.php" );
 
 /**
- * Set global vars.
+ * global for the reply email address for subjectsplus administrator
  * @global $administrator_email
- * @global $talkback_use_recaptcha
- * @global $talkback_to_address
- * @global $talkback_to_address_label
- * @global $talkback_subject_line
  */
 global $administrator_email;
 
-// get globals for MailMessage class
+/**
+ * global for MailMessage class
+ * @global $talkback_to_address
+ */
 global $talkback_to_address;
+
+/**
+ *
+ * @var $talkback_to_address_label
+ */
 global $talkback_to_address_label;
+
+/**
+ *
+ * @var $talkback_subject_line
+ */
 global $talkback_subject_line;
 
-// get globals for Mailer class
+/**
+ * globals for Mailer class
+ * @global $email_host
+ */
 global $email_host;
+
+/**
+ *
+ * @var $email_port
+ */
 global $email_port;
+
+/**
+ *
+ * @var $email_smtp_auth
+ */
 global $email_smtp_auth;
+
+/**
+ *
+ * @var $email_smtp_debug
+ */
 global $email_smtp_debug;
 
-// get globals for ReCaptcha
+/**
+ * globals for ReCaptcha
+ * @global $talkback_use_recaptcha
+ */
 global $talkback_use_recaptcha;
+
+/**
+ *
+ * @var $talkback_recaptcha_secret_key
+ */
 global $talkback_recaptcha_secret_key;
+
+/**
+ *
+ * @var $talkback_recaptcha_site_key
+ */
 global $talkback_recaptcha_site_key;
 
-// get globals for Slack
+/**
+ * globals for Slack Message
+ * @global $talkback_use_slack
+ */
 global $talkback_use_slack;
+
+/**
+ *
+ * @var $talkback_slack_channel
+ */
 global $talkback_slack_channel;
+
+/**
+ *
+ * @var $talkback_slack_webhook_url
+ */
 global $talkback_slack_webhook_url;
+
+/**
+ *
+ * @var $talkback_slack_emoji
+ */
 global $talkback_slack_emoji;
 
 
-// Show headshots
-$show_talkback_face = 1;
-
+/**
+ * Show headshots true/false
+ * @global $talkback_show_headshot
+ */
+global $talkback_show_headshot;
 
 
 /**
- * Set local variables
+ * local variables used in subjectsplus header.php
  * @var $page_title
+ */
+$page_title = _( "Talk Back" );
+
+/**
+ *
  * @var $page_description
+ */
+$page_description = _( "Share your comments and suggestions about the library" );
+
+/**
+ *
  * @var $page_keywords
- * @var $insertCommentFeedback
+ */
+$page_keywords = _( "library, comments, suggestions, complaints" );
+
+/**
+ * email address taken from comment form
+ * @var $this_name
+ */
+$this_name = "";
+
+/**
+ * comment taken from comment form
+ * @var $this_comment
+ */
+$this_comment = "";
+
+
+/**
+ *
  * @var $today
+ */
+$today = getdate();
+
+/**
+ *
  * @var $month
+ */
+$month = $today['month'];
+
+/**
+ *
  * @var $mday
+ */
+$mday = $today['mday'];
+
+/**
+ *
  * @var $year
+ */
+$year = $today['year'];
+
+/**
+ *
  * @var $this_year
+ */
+$this_yea = date( "Y" );
+
+/**
+ *
  * @var $todaycomputer
  */
-
-$page_title       = _( "Talk Back" );
-$page_description = _( "Share your comments and suggestions about the library" );
-$page_keywords    = _( "library, comments, suggestions, complaints" );
-
-$today     = getdate();
-$month     = $today['month'];
-$mday      = $today['mday'];
-$year      = $today['year'];
-$this_year = date( "Y" );
 $todaycomputer = date( 'Y-m-d H:i:s' );
 
+/**
+ *
+ * @var $insertCommentFeedback
+ */
 $insertCommentFeedback = "";
-$insertCommentSuccessFeedback =  _("Thank you for your feedback.  We will try to post a response within the next three business days.");
-$insertCommentFeedbackFail = _("There was a problem with your submission.  Please try again.") . PHP_EOL;
-$insertCommentFeedbackFail .= _("If you continue to get an error, please contact the <a href='mailto:{$administrator_email}'>administrator</a>");
+
+/**
+ *
+ * @var $insertCommentSuccessFeedback
+ */
+$insertCommentSuccessFeedback = _( "Thank you for your feedback.  We will try to post a response within the next three business days." );
+
+/**
+ *
+ * @var $insertCommentFeedbackFail
+ */
+$insertCommentFeedbackFail = _( "There was a problem with your submission.  Please try again." ) . PHP_EOL;
+$insertCommentFeedbackFail .= _( "If you continue to get an error, please contact the <a href='mailto:{$administrator_email}'>administrator</a>" );
+
+
+/**
+ *
+ * @var $recaptcha_response
+ */
+$recaptcha_response = "";
+
+/**
+ *
+ * @var $recaptcha_response_fail
+ */
+$recaptcha_response_fail = _("Recaptcha score is too low. Your comment was not submitted: ");
+
+/**
+ * this can be overriden below
+ * @var $form_action
+ */
+$form_action = "talkback2.php";
+
+/**
+ *
+ * @var $set_filter
+ */
+$set_filter  = "";
 
 
 
-
-/////////////////////////
-// Deal with multiple talkback instances
-// Usually if you have branch libraries who want separate
-// pages/results
-////////////////////////
-$form_action = "talkback2.php"; // this can be overriden below
-$set_filter  = ""; // tritto
 
 if ( isset( $all_tbtags ) ) {
 
@@ -127,6 +260,62 @@ if ( isset( $all_tbtags ) ) {
 
 	}
 }
+
+
+$filter = '%' . $set_filter . '%';
+if ( isset( $_GET['c'] ) ) {
+	$cat_tags = '%' . scrubData( $_GET['c'] ) . '%';
+
+} else {
+	$cat_tags = "%%";
+
+}
+
+if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
+	$comment_year = 'prev';
+	$comment_header =  _( "Comments from Previous Years" );
+	$current_comments_link = "?v=".$set_filter;
+	$current_comments_label = _( "See this year" );
+
+} else {
+	$comment_year = 'current';
+	$comment_header = _( "Comments from " ) . $this_year;
+	$current_comments_link = "?t=prev&v=".$set_filter;
+	$current_comments_label = _( "See previous years" );
+}
+
+
+/**
+ * init Querier to pass to TalkbackService class
+ * @var $db
+ */
+$db = new Querier();
+
+/**
+ * init TalkbackService
+ * requires an instance of Querier to be passed to the class
+ * @var $talkbackService
+ */
+$talkbackService = new TalkbackService($db);
+
+/**
+ * Get Active Comments and Pass off to if/else block for use with template
+ * @var $comments_response
+ */
+$comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
+
+
+/**
+ * Set the $comments template var
+ * @var $comments
+ */
+if(!empty($comments_response)) {
+	$comments = $comments_response;
+} else {
+	$comments = _( "There are no comments just yet.  Be the first!" );
+}
+
+
 
 
 /**
@@ -180,8 +369,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 		// Take action based on the score returned:
 		if ( $recaptcha_response->getScore() >= 0.5 ) {
-			// Verified - send email
-			$recaptcha_response = "recaptcha score: " . $recaptcha_response->getScore();
+
 
 			// If CAPTCHA is successful...
 			// insert the new comment into the db and provide user feedback
@@ -266,53 +454,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 }
 
 
-$filter = '%' . $set_filter . '%';
-if ( isset( $_GET['c'] ) ) {
-	$cat_tags = '%' . scrubData( $_GET['c'] ) . '%';
 
-} else {
-	$cat_tags = "%%";
-
-}
-
-if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
-	$comment_year = 'prev';
-	$comment_header =  _( "Comments from Previous Years" );
-	$current_comments_link = "?v=".$set_filter;
-	$current_comments_label = _( "See this year" );
-
-} else {
-	$comment_year = 'current';
-	$comment_header = _( "Comments from " ) . $this_year;
-	$current_comments_link = "?t=prev&v=".$set_filter;
-	$current_comments_label = _( "See previous years" );
-}
-
-
-/**
- * init Querier to pass to TalkbackService class
- * @var $db
- * @var $talkbackService
- */
-$db = new Querier();
-$talkbackService = new TalkbackService($db);
-
-/**
- * Get Active Comments and Pass off to if/else block for use with template
- * @var $comments_response
- */
-$comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
-
-
-/**
- * Set the $comments template var
- * @var $comments
- */
-if(!empty($comments_response)) {
-	$comments = $comments_response;
-} else {
-	$comments = _( "There are no comments just yet.  Be the first!" );
-}
 
 
 /**
@@ -330,8 +472,6 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
  * Pass the template parameters to the public view template based on the theme used
  * @global $subjects_theme
  * @var $tpl_folder
- * @var $tpl_name
- * @var $tpl
  */
 
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
@@ -340,15 +480,23 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 	$tpl_folder = "./views/talkback";
 }
 
+/**
+ *
+ * @var $tpl_name
+ */
 $tpl_name = 'public';
 
+/**
+ *
+ * @var $tpl
+ */
 $tpl = new Template( $tpl_folder );
 echo $tpl->render( $tpl_name, array(
 	'form_action'                 => $form_action,
 	'comments'                    => $comments,
 	'this_name'                   => $this_name,
 	'this_comment'                => $this_comment,
-	'show_talkback_face'          => $show_talkback_face,
+	'talkback_show_headshot'      => $talkback_show_headshot,
 	'set_filter'                  => $set_filter,
 	'comment_year'                => $comment_year,
 	'comment_header'              => $comment_header,
