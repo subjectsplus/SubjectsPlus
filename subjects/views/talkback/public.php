@@ -17,8 +17,16 @@
             <div class="pure-g">
                 <div class="pure-u-1 pure-u-lg-2-3">
                     <div class="pluslet_simple no_overflow">
-						<?php print _( "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
-		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>" ); ?>
+
+                        <?php if (isset($insertCommentFeedback) && !empty($insertCommentFeedback)) {
+                            echo $insertCommentFeedback;
+                        } else { ?>
+
+	                    <?php print _( "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
+<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>" ); ?>
+
+                        <?php } ?>
+
                     </div>
                     <div class="pluslet_simple no_overflow">
                         <h2><?php echo $comment_header; ?> <span style="font-size: 12px;"><a href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?> </a> </span></h2>

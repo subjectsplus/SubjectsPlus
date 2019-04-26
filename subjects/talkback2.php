@@ -19,22 +19,29 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 	exit;
 }
 
-/* Set local variables */
+/**
+ * Set local variables
+ * @var $page_title
+ * @var $page_description
+ * @var $page_keywords
+ * @var $insertCommentFeedback
+ */
 
 $page_title       = _( "Talk Back" );
 $page_description = _( "Share your comments and suggestions about the library" );
 $page_keywords    = _( "library, comments, suggestions, complaints" );
+$insertCommentFeedback = "";
+
+/**
+ * Set SOME global vars. Some are defined within the code further down
+ * @global $administrator_email
+ */
+global $administrator_email;
 
 $db = new Querier();
 $talkbackService = new TalkbackService($db);
 
 
-require_once './includes/header.php';
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-// Get Active Comments and Pass off to /views/talkback/public.php
-/////////////////////////////////////////////////////////////////////////////////////////
 
 $today     = getdate();
 $month     = $today['month'];
@@ -142,8 +149,16 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 			$recaptcha_response = "recaptcha score: " . $recaptcha_response->getScore();
 
 			// If CAPTCHA is successful...
-			// insert the new comment into the db
-			$talkbackService->insertComment( $newComment );
+			// insert the new comment into the db and provide user feedback
+			if( !$talkbackService->insertComment( $newComment ) ) {
+
+				$insertCommentFeedback = _("Thank you for your feedback.  We will try to post a response within the next three business days.");
+			} else {
+				$insertCommentFeedback = _("There was a problem with your submission.  Please try again.
+") . PHP_EOL;
+				$insertCommentFeedback .= _("If you continue to get an error, please contact the <a href='mailto:{$administrator_email}'>administrator</a>");
+			}
+
 
 			if ( $talkback_use_email === true ) {
 
@@ -183,6 +198,8 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				$mailer->Port      = $email_port;
 				$mailer->SMTPAuth  = $email_smtp_auth;
 				$mailer->SMTPDebug = $email_smtp_debug;
+
+				// provide user feedback for mail
 				$mailer->send();
 			}
 
@@ -240,7 +257,12 @@ if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 	$current_comments_label = _( "See previous years" );
 }
 
-// get the comments from db
+
+/**
+ * Get Active Comments and Pass off to /views/talkback/public.php $comments_response
+ * @var $comments_response
+ */
+
 $comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
 
 if(!empty($comments_response)) {
@@ -263,14 +285,25 @@ if ( isset( $_POST["the_suggestion"] ) ) {
 }
 
 
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	$tpl_folder = "./views/{$subjects_theme}/talkback";
+	include( "includes/header_{$subjects_theme}.php" );
+} else {
+	include( "includes/header.php" );
+}
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
+
+/** If you have a theme set, but DON'T want to use it for this page, comment out the following if/else statement */
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 	$tpl_folder = "./views/{$subjects_theme}/talkback";
 } else {
 	$tpl_folder = "./views/talkback";
 }
 
+/**
+ * Pass the template parameters to the public view template
+ * @var $tpl_name
+ */
 $tpl_name = 'public';
 
 $tpl = new Template( $tpl_folder );
@@ -285,17 +318,16 @@ echo $tpl->render( $tpl_name, array(
 	'comment_header'        => $comment_header,
 	'current_comments_link' => $current_comments_link,
 	'current_comments_label' => $current_comments_label,
-	'recaptcha_response'     => $recaptcha_response
+	'recaptcha_response'     => $recaptcha_response,
+	'insertCommentFeedback'  => $insertCommentFeedback
 
 ) );
 
 
 
-
-
-
-///////////////////////////
-// Load footer file
-///////////////////////////
-
-require_once './includes/footer.php';
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	$tpl_folder = "./views/{$subjects_theme}/talkback";
+	include( "includes/footer_{$subjects_theme}.php" );
+} else {
+	include( "includes/footer.php" );
+}

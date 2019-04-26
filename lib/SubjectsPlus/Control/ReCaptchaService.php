@@ -14,6 +14,11 @@ class ReCaptchaService {
 	}
 
 
+	/**
+	 * @param $secret
+	 *
+	 * @return \ReCaptcha\Response
+	 */
 	public function verify($secret) {
 		$recaptcha = new ReCaptcha($secret);
 		return $recaptcha->setExpectedHostname($this->getServerName())
