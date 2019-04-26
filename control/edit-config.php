@@ -235,7 +235,15 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places." )
 		),
 
-
+		"talkback_show_headshot" => array(
+			_( "Show headshot in talkback comments" ),
+			_( "This option controls whether Talkback will display the headshot of the person who responded to the comment." ),
+			"boolean",
+			"talkback",
+			"small",
+			"",
+			_( "This option controls whether Talkback will display the headshot of the person who responded to the comment." )
+		),
 
 		"talkback_use_email" => array(
 			_( "Use Email" ),
