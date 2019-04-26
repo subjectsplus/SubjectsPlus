@@ -13,11 +13,7 @@ include( "../control/includes/config.php" );
 include( "../control/includes/functions.php" );
 include( "../control/includes/autoloader.php" );
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include( "themes/$subjects_theme/talkback.php" );
-	exit;
-}
+
 
 /**
  * Set local variables
@@ -59,13 +55,19 @@ global $talkback_to_address;
 global $talkback_to_address_label;
 global $talkback_subject_line;
 
+global $talkback_recaptcha_secret_key;
 
+global $talkback_use_slack;
 
+// get globals for Mailer class
+global $email_host;
+global $email_port;
+global $email_smtp_auth;
+global $email_smtp_debug;
 
-$db = new Querier();
-$talkbackService = new TalkbackService($db);
-
-
+global $talkback_slack_channel;
+global $talkback_slack_webhook_url;
+global $talkback_slack_emoji;
 
 
 // Show headshots
@@ -138,6 +140,10 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	}
 
 
+	/**
+	 * TalkbackComment object
+	 * @var $newComment
+	 */
 	$newComment = new TalkbackComment();
 	$newComment->setQuestion( $this_comment );
 	$newComment->setQFrom( $this_name );
@@ -149,8 +155,10 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 	if ( $talkback_use_recaptcha === true ) {
 
-		global $talkback_recaptcha_secret_key;
-
+		/**
+		 * init ReCaptchaService
+		 * @var $recaptcha_service
+		 */
 		$recaptcha_service = new ReCaptchaService();
 		$recaptcha_service->setServerName( scrubData( $_SERVER['SERVER_NAME'] ) );
 		$recaptcha_service->setRemoteAddr( scrubData( $_SERVER['REMOTE_ADDR'] ) );
@@ -178,7 +186,12 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 			if ( $talkback_use_email === true ) {
 
-				// create the html email template
+				/**
+				 * create the html email template
+				 * @var $tpl_name
+				 * @var $tpl
+				 * @var $html_message
+				 */
 				$tpl_name     = 'html_msg';
 				$tpl          = new Template( './views/talkback' );
 				$html_message = $tpl->render( $tpl_name, array(
@@ -188,7 +201,10 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 				) );
 
-				// configure MailMessage
+				/**
+				 * configure MailMessage
+				 * @var $mailMessege
+				 */
 				$mailMessege = new MailMessage();
 				$mailMessege->setFromAddress( $this_name );
 				$mailMessege->setFromLabel( $this_name );
@@ -197,13 +213,11 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				$mailMessege->setSubject( $talkback_subject_line );
 				$mailMessege->setMsgHTML( $html_message );
 
-				// get globals for Mailer class
-				global $email_host;
-				global $email_port;
-				global $email_smtp_auth;
-				global $email_smtp_debug;
 
-				// configure Mailer and send email
+				/**
+				 * configure Mailer and send email
+				 * @var $mailer
+				 */
 				$mailer            = new Mailer( $mailMessege );
 				$mailer->Host      = $email_host;
 				$mailer->Port      = $email_port;
@@ -215,12 +229,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 			}
 
 			// set up a slack message
-			global $talkback_use_slack;
 			if ( $talkback_use_slack === true ) {
-
-				global $talkback_slack_channel;
-				global $talkback_slack_webhook_url;
-				global $talkback_slack_emoji;
 
 				$msg = _( "New Comment via Talkback" ) . PHP_EOL;
 				$msg .= "$this_comment" . PHP_EOL;
@@ -228,7 +237,10 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				$msg .= _( "Date submitted: " ) . $todaycomputer . PHP_EOL;
 				$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
 
-				// send comment to slack channel talkback
+				/**
+				 * send comment to slack channel talkback
+				 * @var $slackMsg
+				 */
 				$slackMsg = new SlackMessenger();
 				$slackMsg->setChannel( $talkback_slack_channel );
 				$slackMsg->setIcon( $talkback_slack_emoji );
@@ -270,10 +282,19 @@ if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 
 
 /**
+ * init Querier to pass to TalkbackService class
+ * @var $db
+ * @var $talkbackService
+ */
+$db = new Querier();
+$talkbackService = new TalkbackService($db);
+
+/**
  * Get Active Comments and Pass off to if/else block for use with template
  * @var $comments_response
  */
 $comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
+
 
 /**
  * Set the $comments template var
@@ -285,22 +306,12 @@ if(!empty($comments_response)) {
 	$comments = _( "There are no comments just yet.  Be the first!" );
 }
 
-// clean up post variables
-if ( isset( $_POST["name"] ) ) {
-	$this_name = scrubData( $_POST["name"] );
-} else {
-	$this_name = "";
-}
 
-if ( isset( $_POST["the_suggestion"] ) ) {
-	$this_comment = scrubData( $_POST["the_suggestion"] );
-} else {
-	$this_comment = "";
-}
-
-
+/**
+ * Include the header based on the theme used
+ * @global $subjects_theme
+ */
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	$tpl_folder = "./views/{$subjects_theme}/talkback";
 	include( "includes/header_{$subjects_theme}.php" );
 } else {
 	include( "includes/header.php" );
@@ -308,8 +319,8 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 
 
 /**
- * Pass the template parameters to the public view template
- * @var $subjects_theme
+ * Pass the template parameters to the public view template based on the theme used
+ * @global $subjects_theme
  * @var $tpl_folder
  * @var $tpl_name
  * @var $tpl
@@ -325,25 +336,26 @@ $tpl_name = 'public';
 
 $tpl = new Template( $tpl_folder );
 echo $tpl->render( $tpl_name, array(
-	'form_action'  => $form_action,
-	'comments'     => $comments,
-	'this_name'    => $this_name,
-	'this_comment' => $this_comment,
-	'show_talkback_face'    => $show_talkback_face,
-	'set_filter'            => $set_filter,
-	'comment_year'          => $comment_year,
-	'comment_header'        => $comment_header,
-	'current_comments_link' => $current_comments_link,
+	'form_action'            => $form_action,
+	'comments'               => $comments,
+	'this_name'              => $this_name,
+	'this_comment'           => $this_comment,
+	'show_talkback_face'     => $show_talkback_face,
+	'set_filter'             => $set_filter,
+	'comment_year'           => $comment_year,
+	'comment_header'         => $comment_header,
+	'current_comments_link'  => $current_comments_link,
 	'current_comments_label' => $current_comments_label,
 	'recaptcha_response'     => $recaptcha_response,
 	'insertCommentFeedback'  => $insertCommentFeedback
 
 ) );
 
-
-
+/**
+ * Include the footer based on the theme used
+ * @global $subjects_theme
+ */
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	$tpl_folder = "./views/{$subjects_theme}/talkback";
 	include( "includes/footer_{$subjects_theme}.php" );
 } else {
 	include( "includes/footer.php" );
