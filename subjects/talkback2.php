@@ -25,30 +25,48 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
  * @var $page_description
  * @var $page_keywords
  * @var $insertCommentFeedback
+ * @var $today
+ * @var $month
+ * @var $mday
+ * @var $year
+ * @var $this_year
+ * @var $todaycomputer
  */
 
 $page_title       = _( "Talk Back" );
 $page_description = _( "Share your comments and suggestions about the library" );
 $page_keywords    = _( "library, comments, suggestions, complaints" );
 $insertCommentFeedback = "";
-
-/**
- * Set SOME global vars. Some are defined within the code further down
- * @global $administrator_email
- */
-global $administrator_email;
-
-$db = new Querier();
-$talkbackService = new TalkbackService($db);
-
-
-
 $today     = getdate();
 $month     = $today['month'];
 $mday      = $today['mday'];
 $year      = $today['year'];
 $this_year = date( "Y" );
 $todaycomputer = date( 'Y-m-d H:i:s' );
+
+/**
+ * Set SOME global vars. Some are defined within the code further down
+ * @global $administrator_email
+ * @global $talkback_use_recaptcha
+ * @global $talkback_to_address
+ * @global $talkback_to_address_label
+ * @global $talkback_subject_line
+ */
+global $administrator_email;
+global $talkback_use_recaptcha;
+// get globals for MailMessage class
+global $talkback_to_address;
+global $talkback_to_address_label;
+global $talkback_subject_line;
+
+
+
+
+$db = new Querier();
+$talkbackService = new TalkbackService($db);
+
+
+
 
 // Show headshots
 $show_talkback_face = 1;
@@ -98,12 +116,10 @@ if ( isset( $all_tbtags ) ) {
 }
 
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-// Display Public view /views/talkback/public.php
-/////////////////////////////////////////////////////////////////////////////////////////
-
+/**
+ * init the $recaptcha_response var for use with the template after it's set in the if/else block
+ * @var $recaptcha_response
+ */
 $recaptcha_response = "";
 
 if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response']) ) {
@@ -130,7 +146,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$newComment->setTbtags( $set_filter );
 	$newComment->setAnswer( '' );
 
-	global $talkback_use_recaptcha;
+
 	if ( $talkback_use_recaptcha === true ) {
 
 		global $talkback_recaptcha_secret_key;
@@ -161,11 +177,6 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 
 			if ( $talkback_use_email === true ) {
-
-				// get globals for MailMessage class
-				global $talkback_to_address;
-				global $talkback_to_address_label;
-				global $talkback_subject_line;
 
 				// create the html email template
 				$tpl_name     = 'html_msg';
@@ -259,12 +270,15 @@ if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 
 
 /**
- * Get Active Comments and Pass off to /views/talkback/public.php $comments_response
+ * Get Active Comments and Pass off to if/else block for use with template
  * @var $comments_response
  */
-
 $comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
 
+/**
+ * Set the $comments template var
+ * @var $comments
+ */
 if(!empty($comments_response)) {
 	$comments = $comments_response;
 } else {
@@ -293,17 +307,20 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 }
 
 
-/** If you have a theme set, but DON'T want to use it for this page, comment out the following if/else statement */
+/**
+ * Pass the template parameters to the public view template
+ * @var $subjects_theme
+ * @var $tpl_folder
+ * @var $tpl_name
+ * @var $tpl
+ */
+
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 	$tpl_folder = "./views/{$subjects_theme}/talkback";
 } else {
 	$tpl_folder = "./views/talkback";
 }
 
-/**
- * Pass the template parameters to the public view template
- * @var $tpl_name
- */
 $tpl_name = 'public';
 
 $tpl = new Template( $tpl_folder );
