@@ -85,7 +85,7 @@
                             <br>
 
 	                        <?php
-	                        global $talkback_recaptcha_site_key;
+
 	                        $siteKey = $talkback_recaptcha_site_key;
 
 	                        if ( $siteKey === '' ):

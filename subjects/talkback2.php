@@ -13,6 +13,42 @@ include( "../control/includes/config.php" );
 include( "../control/includes/functions.php" );
 include( "../control/includes/autoloader.php" );
 
+/**
+ * Set global vars.
+ * @global $administrator_email
+ * @global $talkback_use_recaptcha
+ * @global $talkback_to_address
+ * @global $talkback_to_address_label
+ * @global $talkback_subject_line
+ */
+global $administrator_email;
+
+// get globals for MailMessage class
+global $talkback_to_address;
+global $talkback_to_address_label;
+global $talkback_subject_line;
+
+// get globals for Mailer class
+global $email_host;
+global $email_port;
+global $email_smtp_auth;
+global $email_smtp_debug;
+
+// get globals for ReCaptcha
+global $talkback_use_recaptcha;
+global $talkback_recaptcha_secret_key;
+global $talkback_recaptcha_site_key;
+
+// get globals for Slack
+global $talkback_use_slack;
+global $talkback_slack_channel;
+global $talkback_slack_webhook_url;
+global $talkback_slack_emoji;
+
+
+// Show headshots
+$show_talkback_face = 1;
+
 
 
 /**
@@ -32,7 +68,7 @@ include( "../control/includes/autoloader.php" );
 $page_title       = _( "Talk Back" );
 $page_description = _( "Share your comments and suggestions about the library" );
 $page_keywords    = _( "library, comments, suggestions, complaints" );
-$insertCommentFeedback = "";
+
 $today     = getdate();
 $month     = $today['month'];
 $mday      = $today['mday'];
@@ -40,38 +76,13 @@ $year      = $today['year'];
 $this_year = date( "Y" );
 $todaycomputer = date( 'Y-m-d H:i:s' );
 
-/**
- * Set SOME global vars. Some are defined within the code further down
- * @global $administrator_email
- * @global $talkback_use_recaptcha
- * @global $talkback_to_address
- * @global $talkback_to_address_label
- * @global $talkback_subject_line
- */
-global $administrator_email;
-global $talkback_use_recaptcha;
-// get globals for MailMessage class
-global $talkback_to_address;
-global $talkback_to_address_label;
-global $talkback_subject_line;
-
-global $talkback_recaptcha_secret_key;
-
-global $talkback_use_slack;
-
-// get globals for Mailer class
-global $email_host;
-global $email_port;
-global $email_smtp_auth;
-global $email_smtp_debug;
-
-global $talkback_slack_channel;
-global $talkback_slack_webhook_url;
-global $talkback_slack_emoji;
+$insertCommentFeedback = "";
+$insertCommentSuccessFeedback =  _("Thank you for your feedback.  We will try to post a response within the next three business days.");
+$insertCommentFeedbackFail = _("There was a problem with your submission.  Please try again.") . PHP_EOL;
+$insertCommentFeedbackFail .= _("If you continue to get an error, please contact the <a href='mailto:{$administrator_email}'>administrator</a>");
 
 
-// Show headshots
-$show_talkback_face = 1;
+
 
 /////////////////////////
 // Deal with multiple talkback instances
@@ -175,12 +186,9 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 			// If CAPTCHA is successful...
 			// insert the new comment into the db and provide user feedback
 			if( !$talkbackService->insertComment( $newComment ) ) {
-
-				$insertCommentFeedback = _("Thank you for your feedback.  We will try to post a response within the next three business days.");
+				$insertCommentFeedback = $insertCommentSuccessFeedback;
 			} else {
-				$insertCommentFeedback = _("There was a problem with your submission.  Please try again.
-") . PHP_EOL;
-				$insertCommentFeedback .= _("If you continue to get an error, please contact the <a href='mailto:{$administrator_email}'>administrator</a>");
+				$insertCommentFeedback = $insertCommentFeedbackFail;
 			}
 
 
@@ -336,18 +344,19 @@ $tpl_name = 'public';
 
 $tpl = new Template( $tpl_folder );
 echo $tpl->render( $tpl_name, array(
-	'form_action'            => $form_action,
-	'comments'               => $comments,
-	'this_name'              => $this_name,
-	'this_comment'           => $this_comment,
-	'show_talkback_face'     => $show_talkback_face,
-	'set_filter'             => $set_filter,
-	'comment_year'           => $comment_year,
-	'comment_header'         => $comment_header,
-	'current_comments_link'  => $current_comments_link,
-	'current_comments_label' => $current_comments_label,
-	'recaptcha_response'     => $recaptcha_response,
-	'insertCommentFeedback'  => $insertCommentFeedback
+	'form_action'                 => $form_action,
+	'comments'                    => $comments,
+	'this_name'                   => $this_name,
+	'this_comment'                => $this_comment,
+	'show_talkback_face'          => $show_talkback_face,
+	'set_filter'                  => $set_filter,
+	'comment_year'                => $comment_year,
+	'comment_header'              => $comment_header,
+	'current_comments_link'       => $current_comments_link,
+	'current_comments_label'      => $current_comments_label,
+	'recaptcha_response'          => $recaptcha_response,
+	'insertCommentFeedback'       => $insertCommentFeedback,
+	'talkback_recaptcha_site_key' => $talkback_recaptcha_site_key
 
 ) );
 
