@@ -55,9 +55,9 @@ class TalkbackService {
 		if($comment_year == 'current') {
 			$operator = '>=';
 		} elseif($comment_year == 'prev') {
-			$operator = '=<';
+			$operator = '<';
 		} else {
-			$operator = '==';
+			$operator = '=';
 		}
 
 		$statement  = $this->_connection->prepare( "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
