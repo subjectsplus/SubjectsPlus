@@ -3,7 +3,7 @@
  * local variables used in subjectsplus header.php
  * @var $page_title
  */
-$page_title = _( "Comments" );
+$page_title = _( "Talkback" );
 
 /**
  *
