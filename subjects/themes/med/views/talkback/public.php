@@ -16,6 +16,10 @@
 	            <?php } ?>
 
 
+
+                <div id="letterhead_small" align="center"><?php print $cat_filters; ?></div>
+
+
                 <h2><?php echo $comment_header; ?> <span style="font-size: 12px;"><a href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?> </a> </span></h2>
 
 

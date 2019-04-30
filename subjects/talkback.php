@@ -222,6 +222,11 @@ $form_action = "talkback.php";
  */
 $set_filter  = "";
 
+/**
+ *
+ * @var $cat_filters
+ */
+$cat_filters = "";
 
 
 
@@ -289,6 +294,23 @@ if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 	$current_comments_link = "?t=prev&v=".$set_filter;
 	$current_comments_label = _( "See previous years" );
 }
+
+if ( isset( $all_cattags ) ) {
+
+	/**
+	 * @todo add a filter that displays all responses
+	 */
+	foreach ( $all_cattags as $value ) {
+		if ( isset( $_GET["c"] ) && $value == $_GET["c"] ) {
+			$tag_class  = "ctag-on";
+			$cat_filter = $value;
+		} else {
+			$tag_class = "";
+		}
+		$cat_filters .= " <a href=\"talkback.php?v=$set_filter&c=$value\" class=\"$tag_class\">$value</a>";
+	}
+}
+
 
 
 /**
@@ -473,6 +495,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
  * @global $subjects_theme
  */
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	include("./themes/{$subjects_theme}/views/talkback/page_metadata.php");
 	include( "includes/header_{$subjects_theme}.php" );
 } else {
 	include( "includes/header.php" );
@@ -508,6 +531,7 @@ echo $tpl->render( $tpl_name, array(
 	'this_name'                   => $this_name,
 	'this_comment'                => $this_comment,
 	'talkback_show_headshot'      => $talkback_show_headshot,
+	'cat_filters'                 => $cat_filters,
 	'set_filter'                  => $set_filter,
 	'comment_year'                => $comment_year,
 	'comment_header'              => $comment_header,
