@@ -98,7 +98,7 @@
 	                        else:
 	                        // Add the g-recaptcha tag to the form you want to include the reCAPTCHA element
 	                        ?>
-                                <?php echo $recaptcha_response; ?>
+
 
                                 <form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
                                     <div class="talkback_form">

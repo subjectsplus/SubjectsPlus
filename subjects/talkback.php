@@ -214,7 +214,7 @@ $recaptcha_response_fail = _("Recaptcha score is too low. Your comment was not s
  * this can be overriden below
  * @var $form_action
  */
-$form_action = "talkback2.php";
+$form_action = "talkback.php";
 
 /**
  *
@@ -241,16 +241,22 @@ if ( isset( $all_tbtags ) ) {
 		switch ( $set_filter ) {
 			case "music":
 				$page_title   = "Comments for the Music Library";
-				$form_action  = "talkback2.php?v=$set_filter";
+				$form_action  = "talkback.php?v=$set_filter";
 				$tb_bonus_css = "talkback_form_music";
 				break;
 			case "rsmas":
 				$page_title  = "Comments for the Marine Library";
-				$form_action = "talkback2.php?v=$set_filter";
+				$form_action = "talkback.php?v=$set_filter";
+				break;
+			case "calder":
+				$page_title = "Comments";
+				$set_filter = "calder";
+				// nothing, we just use the $administrator email on file (config.php)
+				$form_action = "talkback.php";
 				break;
 			default:
 				// nothing, we just use the $administrator email on file (config.php)
-				$form_action = "talkback2.php";
+				$form_action = "talkback.php";
 		}
 
 		// override our admin email
@@ -445,11 +451,16 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 				$slackMsg->send();
 			}
 
+		} else {
+			// Not verified - show form error
+			$insertCommentFeedback = "Recaptcha score is too low. Your comment was not submitted: " . $recaptcha_response->getScore();
+
 		}
 
 	} else {
-		// Not verified - show form error
-		$recaptcha_response = "Recaptcha score is too low. Your comment was not submitted: " . $recaptcha_response->getScore();
+		/**
+		 * @todo basic form without ReCaptcha
+		 */
 	}
 }
 
@@ -475,7 +486,7 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
  */
 
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	$tpl_folder = "./views/{$subjects_theme}/talkback";
+	$tpl_folder = "./themes/{$subjects_theme}/views/talkback";
 } else {
 	$tpl_folder = "./views/talkback";
 }
@@ -502,7 +513,6 @@ echo $tpl->render( $tpl_name, array(
 	'comment_header'              => $comment_header,
 	'current_comments_link'       => $current_comments_link,
 	'current_comments_label'      => $current_comments_label,
-	'recaptcha_response'          => $recaptcha_response,
 	'insertCommentFeedback'       => $insertCommentFeedback,
 	'talkback_recaptcha_site_key' => $talkback_recaptcha_site_key
 
