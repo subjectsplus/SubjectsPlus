@@ -9,7 +9,7 @@ $page_title = _( "Comments" );
  *
  * @var $page_description
  */
-$page_description = _( "Share your comments and suggestions about the library" );
+$page_description = _( "Please use this page to make a comment or suggestion about library services. We will post your suggestion as well as a response." );
 
 /**
  *

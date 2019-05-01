@@ -508,6 +508,9 @@ $tpl_name = 'public';
  */
 $tpl = new Template( $tpl_folder );
 echo $tpl->render( $tpl_name, array(
+	'page_title'                  => $page_title,
+	'page_description'            => $page_description,
+	'page_keywords'               => $page_keywords,
 	'form_action'                 => $form_action,
 	'comments'                    => $comments,
 	'this_name'                   => $this_name,

@@ -26,7 +26,7 @@ if ( isset( $all_tbtags ) ) {
 			case "richter":
 				$page_title = _("Comments for Richter Library");
 				$set_filter = "richter";
-				$form_action  = "talkback.php?v=$set_filter";
+				$form_action  = "talkback.php";
 				break;
 			default:
 				$page_title = _("Talkback");
