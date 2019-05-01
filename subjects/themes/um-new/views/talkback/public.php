@@ -62,7 +62,7 @@
                                 <p class="tellus_comment">
                                     <span class="comment_num"><?php echo $row_count; ?></span>
                                     <strong><?php echo $comment['question']; ?></strong><br>
-                                    <span style="clear: both;font-size: 11px;">Comment on <em>D M</em></span>
+                                    <span style="clear: both;font-size: 11px;">Comment on <em><?php echo date("F j, Y, g:i a", strtotime($comment['date_submitted']) ); ?></em></span>
                                 </p>
                                 <br>
 
