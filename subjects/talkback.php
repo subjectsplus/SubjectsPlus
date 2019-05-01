@@ -176,7 +176,7 @@ $this_year = date( "Y" );
  *
  * @var $todaycomputer
  */
-$todaycomputer = date( 'Y-m-d H:i:s' );
+$todaycomputer = date( 'D M j, Y, g:i a' );
 
 /**
  *

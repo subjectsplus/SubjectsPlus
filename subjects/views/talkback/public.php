@@ -49,7 +49,7 @@
                             <p class="tellus_comment">
                                 <span class="comment_num"><?php echo $comment['talkback_id']; ?></span>
                                 <strong><?php echo $comment['question']; ?></strong><br>
-                                <span style="clear: both;font-size: 11px;">Comment on <em><?php echo $comment['date_submitted']; ?></em></span></p>
+                                <span style="clear: both;font-size: 11px;">Comment on <em><?php echo date("D M j, Y, g:i a", strtotime($comment['date_submitted']) ); ?></em></span></p>
                             <br>
 
                             <p><?php
