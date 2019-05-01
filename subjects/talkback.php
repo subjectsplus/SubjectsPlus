@@ -14,6 +14,12 @@ include( "../control/includes/functions.php" );
 include( "../control/includes/autoloader.php" );
 
 /**
+ *
+ * @global $AssetPath
+ */
+global $AssetPath;
+
+/**
  * global for the reply email address for subjectsplus administrator
  * @global $administrator_email
  */
@@ -508,6 +514,7 @@ $tpl_name = 'public';
  */
 $tpl = new Template( $tpl_folder );
 echo $tpl->render( $tpl_name, array(
+	'asset_path'                  => $AssetPath,
 	'page_title'                  => $page_title,
 	'page_description'            => $page_description,
 	'page_keywords'               => $page_keywords,

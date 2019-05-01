@@ -62,29 +62,30 @@
                                 <a name="<?php echo $row_count; ?>"></a>
 
                                 <p class="tellus_comment">
-                                    <span class="comment_num"><?php echo $row_count; ?></span>
-                                    <strong><?php echo $comment['question']; ?></strong><br>
+                                    <span class="comment_num" style="background-image: url('<?php echo $asset_path; ?>images/comment_box.png');"><?php echo $row_count; ?></span>
+
+									<?php echo $comment['question']; ?></p>
                                 <p class="comment-meta">Comment on
                                     <em><?php echo date( "F j, Y, g:i a", strtotime( $comment['date_submitted'] ) ); ?></em>
                                 </p>
                                 </p>
                                 <br>
-                                <div class="answer">
 
-                                    <div class="answer"><?php echo $comment['answer']; ?></div>
-                                    <div class="responder d-flex flex-row flex-nowrap">
-										<?php
-										if ( $talkback_show_headshot === true ) {
-											echo getHeadshot( $comment['email'] );
-										}
-										?>
 
-                                        <p style="clear: both;font-size: 11px;">Answered by <a
-                                                    href="<?php echo $lib_page; ?>"><?php echo $comment['title']; ?></a>, <?php echo $comment['fname']; ?> <?php echo $comment['lname']; ?>
-                                        </p>
-                                    </div>
+                                <div class="answer"><?php echo $comment['answer']; ?></div>
+                                <div class="responder d-flex flex-row flex-nowrap">
+									<?php
+									if ( $talkback_show_headshot === true ) {
+										echo getHeadshot( $comment['email'] );
+									}
+									?>
 
+                                    <p>Answered by <a
+                                                href="<?php echo $lib_page; ?>"> <?php echo $comment['fname']; ?> <?php echo $comment['lname']; ?></a>, <?php echo $comment['title']; ?>
+                                    </p>
                                 </div>
+
+
 
 
                             </div>
@@ -109,23 +110,25 @@
 
 					<?php $siteKey = $talkback_recaptcha_site_key; ?>
 
-                    <form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
-                        <div class="talkback_form <?php print $tb_bonus_css; ?>">
-                            <p><strong><?php print _( "Your comment:" ); ?></strong><br/>
-                                <textarea name="the_suggestion" cols="26" rows="6" class="form-item"
-                                          value="<?php print $this_comment; ?>"></textarea><br/><br/>
-                                <strong><?php print _( "Your email (optional):" ); ?></strong><br/>
-                                <input type="text" name="name" size="20" value="<?php print $this_name; ?>"
-                                       class="form-item"/>
-                                <br/>
-								<?php print _( "(In case we need to contact you)" ); ?>
-                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                    <form id="tellus" action="<?php print $form_action; ?>" method="post">
+                        <div>
+                            <div class="form-group">
+                                <label for="the_suggestion"><?php echo _( "Your comment:" ); ?></label>
+                                <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3" value="<?php echo $this_comment; ?>"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="suggestion_email">
+									<?php echo _( "Your email (optional):" ); ?>
+                                </label>
+                                <input type="email" class="form-control" id="suggestion_email" name="suggestion_email" value="<?php echo $this_name; ?>">
+                                <p><?php echo _( "(In case we need to contact you)" ); ?></p>
 
-                                <br/><br/>
+                            </div>
 
-                                <button type="submit" name="submit_comment" class="pure-button pure-button-topsearch"
-                                ><?php print _( "Submit" ); ?>
-                                </button>
+
+                            <button type="submit" name="submit_comment" class="btn btn-default"
+                            ><?php print _( "Submit" ); ?>
+                            </button>
                             </p>
                         </div>
                     </form>
