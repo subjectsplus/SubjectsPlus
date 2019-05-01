@@ -67,7 +67,7 @@
 
 									<?php echo $comment['question']; ?></p>
                                 <p class="comment-meta">Comment on
-									<?php echo date( "F j, Y, g:i a", strtotime( $comment['date_submitted'] ) ); ?>
+									<?php echo date( "D M j, Y, g:i a", strtotime( $comment['date_submitted'] ) ); ?>
                                 </p>
 
                                 <div class="answer"><?php echo $comment['answer']; ?></div>
