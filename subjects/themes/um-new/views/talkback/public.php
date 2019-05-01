@@ -79,7 +79,7 @@
 									?>
 
                                     <p>Answered by <a
-                                                href="<?php echo $lib_page; ?>"> <?php echo $comment['fname']; ?><?php echo $comment['lname']; ?></a>, <?php echo $comment['title']; ?>
+                                                href="<?php echo $lib_page; ?>"><?php echo $comment['fname']; ?> <?php echo $comment['lname']; ?></a>, <?php echo $comment['title']; ?>
                                     </p>
                                 </div>
 
