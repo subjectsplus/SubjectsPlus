@@ -85,6 +85,7 @@ class TalkbackService {
 
 	public function sendCommunications($comment_insert_db, TalkbackComment $newComment,  $talkback_use_email, Mailer $mailer, $talkback_use_slack, SlackMessenger $slackMsg) {
 
+
 		if($comment_insert_db === true) {
 			$this->insertComment($newComment);
 		}
@@ -96,6 +97,8 @@ class TalkbackService {
 		if($talkback_use_slack === true) {
 			$slackMsg->send();
 		}
+
+		return true;
 
 	}
 

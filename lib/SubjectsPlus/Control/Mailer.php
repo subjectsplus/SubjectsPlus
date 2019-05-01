@@ -102,6 +102,9 @@ class Mailer {
 		//send the message, check for errors
 		if ( ! $this->_mailer->send() ) {
 			echo 'Mailer Error: ' . $this->_mailer->ErrorInfo;
+			return false;
+		} else {
+			return true;
 		}
 	}
 }
