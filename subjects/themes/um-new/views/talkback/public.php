@@ -62,15 +62,13 @@
                                 <a name="<?php echo $row_count; ?>"></a>
 
                                 <p class="tellus_comment">
-                                    <span class="comment_num" style="background-image: url('<?php echo $asset_path; ?>images/comment_box.png');"><?php echo $row_count; ?></span>
+                                    <span class="comment_num"
+                                          style="background-image: url('<?php echo $asset_path; ?>images/comment_box.png');"><?php echo $row_count; ?></span>
 
 									<?php echo $comment['question']; ?></p>
                                 <p class="comment-meta">Comment on
-                                    <em><?php echo date( "F j, Y, g:i a", strtotime( $comment['date_submitted'] ) ); ?></em>
+									<?php echo date( "F j, Y, g:i a", strtotime( $comment['date_submitted'] ) ); ?>
                                 </p>
-                                </p>
-                                <br>
-
 
                                 <div class="answer"><?php echo $comment['answer']; ?></div>
                                 <div class="responder d-flex flex-row flex-nowrap">
@@ -81,11 +79,9 @@
 									?>
 
                                     <p>Answered by <a
-                                                href="<?php echo $lib_page; ?>"> <?php echo $comment['fname']; ?> <?php echo $comment['lname']; ?></a>, <?php echo $comment['title']; ?>
+                                                href="<?php echo $lib_page; ?>"> <?php echo $comment['fname']; ?><?php echo $comment['lname']; ?></a>, <?php echo $comment['title']; ?>
                                     </p>
                                 </div>
-
-
 
 
                             </div>
@@ -114,13 +110,15 @@
                         <div>
                             <div class="form-group">
                                 <label for="the_suggestion"><?php echo _( "Your comment:" ); ?></label>
-                                <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3" value="<?php echo $this_comment; ?>"></textarea>
+                                <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3"
+                                          value="<?php echo $this_comment; ?>"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="suggestion_email">
 									<?php echo _( "Your email (optional):" ); ?>
                                 </label>
-                                <input type="email" class="form-control" id="suggestion_email" name="suggestion_email" value="<?php echo $this_name; ?>">
+                                <input type="email" class="form-control" id="suggestion_email" name="suggestion_email"
+                                       value="<?php echo $this_name; ?>">
                                 <p><?php echo _( "(In case we need to contact you)" ); ?></p>
 
                             </div>
