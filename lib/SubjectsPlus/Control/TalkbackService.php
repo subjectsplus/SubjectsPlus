@@ -19,6 +19,7 @@ class TalkbackService {
 
 	/**
 	 * @param TalkbackComment $comment
+	 * @return bool true/false
 	 */
 	public function insertComment(TalkbackComment $comment) {
 
@@ -39,7 +40,7 @@ class TalkbackService {
 		$statement->bindParam( ":display", $display );
 		$statement->bindParam( ":answer", $answer );
 
-		$statement->execute();
+		return $statement->execute();
 	}
 
 	/**

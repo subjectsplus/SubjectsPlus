@@ -182,7 +182,7 @@ $this_year = date( "Y" );
  *
  * @var $todaycomputer
  */
-$todaycomputer = date( 'D M j, Y, g:i a' );
+$todaycomputer = date( 'Y-m-d H:i:s' );
 
 /**
  *
@@ -389,7 +389,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 			// If CAPTCHA is successful...
 			// insert the new comment into the db and provide user feedback
-			if( !$talkbackService->insertComment( $newComment ) ) {
+			if( $talkbackService->insertComment( $newComment ) ) {
 				$insertCommentFeedback = $insertCommentSuccessFeedback;
 			} else {
 				$insertCommentFeedback = $insertCommentFeedbackFail;
