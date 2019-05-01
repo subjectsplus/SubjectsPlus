@@ -483,7 +483,6 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
  * @global $subjects_theme
  */
 if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include("./themes/{$subjects_theme}/views/talkback/page_metadata.php");
 	include( "includes/header_{$subjects_theme}.php" );
 } else {
 	include( "includes/header.php" );
