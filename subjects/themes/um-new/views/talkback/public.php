@@ -37,8 +37,10 @@
 
                 <h2><?php if ( isset( $comment_header ) && ! empty( $comment_header ) ) {
 						echo $comment_header;
-					} ?> <span style="font-size: 12px;"><a
-                                href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?> </a> </span>
+					} ?>
+                    <div class="year-switch"><a
+                                href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?> </a>
+                    </div>
                 </h2>
 
 				<?php if ( isset( $comments ) && ! empty( $comments ) ):
@@ -55,26 +57,36 @@
 							$lib_page = "staff_details.php?name=" . $name_id[0];
 							?>
 
-                            <div class="tellus_item oddrow">
+                            <div class="tellus_item">
 
                                 <a name="<?php echo $row_count; ?>"></a>
 
                                 <p class="tellus_comment">
                                     <span class="comment_num"><?php echo $row_count; ?></span>
                                     <strong><?php echo $comment['question']; ?></strong><br>
-                                    <span style="clear: both;font-size: 11px;">Comment on <em><?php echo date("F j, Y, g:i a", strtotime($comment['date_submitted']) ); ?></em></span>
+                                <p class="comment-meta">Comment on
+                                    <em><?php echo date( "F j, Y, g:i a", strtotime( $comment['date_submitted'] ) ); ?></em>
+                                </p>
                                 </p>
                                 <br>
+                                <div class="answer">
 
-                                <p><?php
-									if ( $talkback_show_headshot === true ) {
-										echo getHeadshot( $comment['email'] );
-									}
-									?>
-									<?php echo $comment['answer']; ?></p>
-                                <p style="clear: both;font-size: 11px;">Answered by <a
-                                            href="<?php echo $lib_page; ?>"><?php echo $comment['title']; ?></a>, <?php echo $comment['fname']; ?> <?php echo $comment['lname']; ?>
-                                </p>
+                                    <div class="answer"><?php echo $comment['answer']; ?></div>
+                                    <div class="responder d-flex flex-row flex-nowrap">
+										<?php
+										if ( $talkback_show_headshot === true ) {
+											echo getHeadshot( $comment['email'] );
+										}
+										?>
+
+                                        <p style="clear: both;font-size: 11px;">Answered by <a
+                                                    href="<?php echo $lib_page; ?>"><?php echo $comment['title']; ?></a>, <?php echo $comment['fname']; ?> <?php echo $comment['lname']; ?>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
                             </div>
 							<?php $row_count ++; ?>
 						<?php endforeach; ?>
