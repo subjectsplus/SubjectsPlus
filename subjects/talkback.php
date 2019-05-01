@@ -19,6 +19,9 @@ include( "../control/includes/autoloader.php" );
  */
 global $AssetPath;
 
+
+global $talkback_use_email;
+
 /**
  * global for the reply email address for subjectsplus administrator
  * @global $administrator_email
@@ -368,6 +371,60 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$newComment->setTbtags( $set_filter );
 	$newComment->setAnswer( '' );
 
+	/**
+	 * create the html email template
+	 * @var $tpl_name
+	 * @var $tpl
+	 * @var $html_message
+	 */
+	$tpl_name     = 'html_msg';
+	$tpl          = new Template( './views/talkback' );
+	$html_message = $tpl->render( $tpl_name, array(
+		'this_name'    => $this_name,
+		'this_comment' => $this_comment,
+		'datetime'     => date( 'Y-m-d H:i:s' )
+
+	) );
+
+	/**
+	 * configure MailMessage
+	 * @var $mailMessege
+	 */
+	$mailMessege = new MailMessage();
+	$mailMessege->setFromAddress( $this_name );
+	$mailMessege->setFromLabel( $this_name );
+	$mailMessege->setToAddress( $talkback_to_address );
+	$mailMessege->setToAddressLabel( $talkback_to_address_label );
+	$mailMessege->setSubject( $talkback_subject_line );
+	$mailMessege->setMsgHTML( $html_message );
+
+
+	/**
+	 * configure Mailer and send email
+	 * @var $mailer
+	 */
+	$mailer            = new Mailer( $mailMessege );
+	$mailer->Host      = $email_host;
+	$mailer->Port      = $email_port;
+	$mailer->SMTPAuth  = $email_smtp_auth;
+	$mailer->SMTPDebug = $email_smtp_debug;
+
+	$msg = _( "New Comment via Talkback" ) . PHP_EOL;
+	$msg .= "$this_comment" . PHP_EOL;
+	$msg .= _( "From: " ) . $this_name . PHP_EOL;
+	$msg .= _( "Date submitted: " ) . $todaycomputer . PHP_EOL;
+	$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
+
+	/**
+	 * send comment to slack channel talkback
+	 * @var $slackMsg
+	 */
+	$slackMsg = new SlackMessenger();
+	$slackMsg->setChannel( $talkback_slack_channel );
+	$slackMsg->setIcon( $talkback_slack_emoji );
+	$slackMsg->setWebhookurl( $talkback_slack_webhook_url );
+	$slackMsg->setMessage( $msg );
+
 
 	if ( $talkback_use_recaptcha === true ) {
 
@@ -386,80 +443,15 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 		// Take action based on the score returned:
 		if ( $recaptcha_response->getScore() >= 0.5 ) {
 
-
 			// If CAPTCHA is successful...
-			// insert the new comment into the db and provide user feedback
-			if( $talkbackService->insertComment( $newComment ) ) {
+			// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
+			if( $talkbackService->sendCommunications(true, $newComment, $talkback_use_email, $mailer, $talkback_use_slack, $slackMsg)
+			) {
 				$insertCommentFeedback = $insertCommentSuccessFeedback;
 			} else {
 				$insertCommentFeedback = $insertCommentFeedbackFail;
 			}
 
-
-			if ( $talkback_use_email === true ) {
-
-				/**
-				 * create the html email template
-				 * @var $tpl_name
-				 * @var $tpl
-				 * @var $html_message
-				 */
-				$tpl_name     = 'html_msg';
-				$tpl          = new Template( './views/talkback' );
-				$html_message = $tpl->render( $tpl_name, array(
-					'this_name'    => $this_name,
-					'this_comment' => $this_comment,
-					'datetime'     => date( 'Y-m-d H:i:s' )
-
-				) );
-
-				/**
-				 * configure MailMessage
-				 * @var $mailMessege
-				 */
-				$mailMessege = new MailMessage();
-				$mailMessege->setFromAddress( $this_name );
-				$mailMessege->setFromLabel( $this_name );
-				$mailMessege->setToAddress( $talkback_to_address );
-				$mailMessege->setToAddressLabel( $talkback_to_address_label );
-				$mailMessege->setSubject( $talkback_subject_line );
-				$mailMessege->setMsgHTML( $html_message );
-
-
-				/**
-				 * configure Mailer and send email
-				 * @var $mailer
-				 */
-				$mailer            = new Mailer( $mailMessege );
-				$mailer->Host      = $email_host;
-				$mailer->Port      = $email_port;
-				$mailer->SMTPAuth  = $email_smtp_auth;
-				$mailer->SMTPDebug = $email_smtp_debug;
-
-				// provide user feedback for mail
-				$mailer->send();
-			}
-
-			// set up a slack message
-			if ( $talkback_use_slack === true ) {
-
-				$msg = _( "New Comment via Talkback" ) . PHP_EOL;
-				$msg .= "$this_comment" . PHP_EOL;
-				$msg .= _( "From: " ) . $this_name . PHP_EOL;
-				$msg .= _( "Date submitted: " ) . $todaycomputer . PHP_EOL;
-				$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
-
-				/**
-				 * send comment to slack channel talkback
-				 * @var $slackMsg
-				 */
-				$slackMsg = new SlackMessenger();
-				$slackMsg->setChannel( $talkback_slack_channel );
-				$slackMsg->setIcon( $talkback_slack_emoji );
-				$slackMsg->setWebhookurl( $talkback_slack_webhook_url );
-				$slackMsg->setMessage( $msg );
-				$slackMsg->send();
-			}
 
 		} else {
 			// Not verified - show form error

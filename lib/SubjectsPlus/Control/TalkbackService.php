@@ -1,6 +1,7 @@
 <?php
 namespace SubjectsPlus\Control;
 
+
 class TalkbackService {
 
 	private $_db;
@@ -78,6 +79,24 @@ class TalkbackService {
 		$statement->execute();
 
 		return $statement->fetchAll();
+	}
+
+
+
+	public function sendCommunications($comment_insert_db, TalkbackComment $newComment,  $talkback_use_email, Mailer $mailer, $talkback_use_slack, SlackMessenger $slackMsg) {
+
+		if($comment_insert_db === true) {
+			$this->insertComment($newComment);
+		}
+
+		if($talkback_use_email === true) {
+			$mailer->send();
+		}
+
+		if($talkback_use_slack === true) {
+			$slackMsg->send();
+		}
+
 	}
 
 	
