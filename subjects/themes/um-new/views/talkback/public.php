@@ -117,10 +117,10 @@
                                 <label for="suggestion_email">
 									<?php echo _( "Your email (optional):" ); ?>
                                 </label>
-                                <input type="email" class="form-control" id="suggestion_email" name="suggestion_email"
+                                <input type="email" class="form-control" id="name" name="name"
                                        value="<?php echo $this_name; ?>">
                                 <p><?php echo _( "(In case we need to contact you)" ); ?></p>
-
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                             </div>
 
 
