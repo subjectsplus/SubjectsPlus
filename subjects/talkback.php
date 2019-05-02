@@ -9,6 +9,7 @@ use SubjectsPlus\Control\SlackMessenger;
 use SubjectsPlus\Control\Template;
 use SubjectsPlus\Control\ReCaptchaService;
 
+
 include( "../control/includes/config.php" );
 include( "../control/includes/functions.php" );
 include( "../control/includes/autoloader.php" );
@@ -186,6 +187,12 @@ $this_year = date( "Y" );
  * @var $todaycomputer
  */
 $todaycomputer = date( 'Y-m-d H:i:s' );
+
+/**
+ *
+ * @var $is_robot
+ */
+$is_robot = true;
 
 /**
  *
@@ -382,7 +389,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$html_message = $tpl->render( $tpl_name, array(
 		'this_name'    => $this_name,
 		'this_comment' => $this_comment,
-		'datetime'     => date( 'Y-m-d H:i:s' )
+		'datetime'     => date( 'D M j, Y, g:i a' )
 
 	) );
 
@@ -444,28 +451,32 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 		if ( $recaptcha_response->getScore() >= 0.5 ) {
 
 			// If CAPTCHA is successful...
-			// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
-			if( $talkbackService->sendCommunications(true, $newComment, $talkback_use_email, $mailer, $talkback_use_slack, $slackMsg) ) {
-				$insertCommentFeedback = $insertCommentSuccessFeedback;
-			} else {
-				$insertCommentFeedback = $insertCommentFeedbackFail;
-			}
-
+			$is_robot = false;
 
 		} else {
 			// Not verified - show form error
 			$insertCommentFeedback = "Recaptcha score is too low. Your comment was not submitted: " . $recaptcha_response->getScore();
+			$is_robot              = true;
 
 		}
 
 	} else {
-		/**
-		 * @todo basic form without ReCaptcha
-		 */
+		//no security on this form - it could be a robot but we cannot determine that so send it anyway
+		$is_robot = false;
 	}
+
+
+	if($is_robot === false) {
+
+		// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
+		if( $talkbackService->sendCommunications(true, $newComment, $talkback_use_email, $mailer, $talkback_use_slack, $slackMsg) ) {
+			$insertCommentFeedback = $insertCommentSuccessFeedback;
+		} else {
+			$insertCommentFeedback = $insertCommentFeedbackFail;
+		}
+	}
+
 }
-
-
 
 
 
@@ -520,9 +531,12 @@ echo $tpl->render( $tpl_name, array(
 	'current_comments_link'       => $current_comments_link,
 	'current_comments_label'      => $current_comments_label,
 	'insertCommentFeedback'       => $insertCommentFeedback,
+	'talkback_use_recaptcha'      => $talkback_use_recaptcha,
 	'talkback_recaptcha_site_key' => $talkback_recaptcha_site_key
 
-) );
+));
+
+
 
 /**
  * Include the footer based on the theme used

@@ -99,7 +99,6 @@ class TalkbackService {
 		}
 
 		return true;
-
 	}
 
 	

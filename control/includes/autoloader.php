@@ -14,6 +14,7 @@
     $loader->registerNamespace('PHPMailer', dirname(dirname(__DIR__)) . '/lib');
     $loader->registerNamespace('ReCaptcha', dirname(dirname(__DIR__)) . '/lib');
 
+
     $loader->register();
 
     require_once (dirname(dirname(__DIR__)) . '/lib/HTMLPurifier/HTMLPurifier.auto.php');
