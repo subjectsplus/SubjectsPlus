@@ -101,7 +101,6 @@
 
 	            <?php
 	            if( (isset($talkback_use_recaptcha)) && ($talkback_use_recaptcha === true )) {
-		            var_dump($talkback_use_recaptcha);
 		            include 'comment_form_recaptcha.php';
 	            } else {
 		            include 'comment_form.php';

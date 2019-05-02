@@ -12,14 +12,16 @@ if ( isset( $all_tbtags ) ) {
 		// Quick'n'dirty setup email recipients
 		switch ( $set_filter ) {
 			case "main":
-				$page_title   = _("Comments for Main Library");
-				$form_action  = "talkback.php?v=$set_filter";
-				$tb_bonus_css = "";
+				$page_title    = _( "Comments for Main Library" );
+				$form_action   = "talkback.php";
+				$branch_filter = $set_filter;
+				$tb_bonus_css  = "";
 				break;
 			default:
-				$page_title   = _("Comments for Main Library");
-				$form_action  = "talkback.php";
-				$tb_bonus_css = "";
+				$page_title    = _( "Comments for Main Library" );
+				$form_action   = "talkback.php";
+				$branch_filter = $set_filter;
+				$tb_bonus_css  = "";
 		}
 
 		// override our admin email
@@ -28,8 +30,9 @@ if ( isset( $all_tbtags ) ) {
 		}
 
 	} else {
-		$page_title   = _("Comments for Main Library");
-		$form_action  = "talkback.php";
-		$tb_bonus_css = "";
+		$page_title    = _( "Comments for Main Library" );
+		$form_action   = "talkback.php";
+		$branch_filter = $set_filter;
+		$tb_bonus_css  = "";
 	}
 }

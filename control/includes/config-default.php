@@ -48,7 +48,6 @@ $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 // Talkback options
 $talkback_show_headshot    = "";
 $talkback_use_email        = "";
-$talkback_to_address       = "";
 $talkback_to_address_label = "";
 $talkback_subject_line     = "";
 

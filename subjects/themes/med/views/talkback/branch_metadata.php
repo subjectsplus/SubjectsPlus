@@ -13,13 +13,15 @@ if ( isset( $all_tbtags ) ) {
 		switch ( $set_filter ) {
 			case "calder":
 				$page_title = "Comments";
-				$set_filter = "calder";
 				$form_action = "talkback.php";
+				$branch_filter = $set_filter;
+				$tb_bonus_css = "";
 				break;
 			default:
 				$page_title = "Comments";
-				$set_filter = "calder";
 				$form_action = "talkback.php";
+				$branch_filter = $set_filter;
+				$tb_bonus_css = "";
 		}
 
 		// override our admin email
@@ -27,6 +29,11 @@ if ( isset( $all_tbtags ) ) {
 			$administrator_email = $all_tbtags[ $set_filter ];
 		}
 
+	} else {
+		$page_title   = _("Comments for the Library");
+		$form_action  = "talkback.php";
+		$branch_filter = $set_filter;
+		$tb_bonus_css = "";
 	}
 }
 

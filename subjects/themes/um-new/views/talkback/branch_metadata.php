@@ -5,8 +5,6 @@ if ( isset( $all_tbtags ) ) {
 	reset( $all_tbtags ); // make sure array pointer is at first element
 	$set_filter = key( $all_tbtags );
 
-
-
 	// determine branch/filter
 	if ( isset( $_REQUEST["v"] ) ) {
 		$set_filter = scrubData( lcfirst( $_REQUEST["v"] ) );
@@ -17,20 +15,26 @@ if ( isset( $all_tbtags ) ) {
 			case "music":
 				$page_title   = _("Comments for the Music Library");
 				$form_action  = "talkback.php?v=$set_filter";
+				$branch_filter = $set_filter;
 				$tb_bonus_css = "talkback_form_music";
 				break;
 			case "rsmas":
 				$page_title  = _("Comments for the Marine Library");
 				$form_action = "talkback.php?v=$set_filter";
+				$branch_filter = $set_filter;
+				$tb_bonus_css = "";
 				break;
 			case "richter":
 				$page_title = _("Comments for Richter Library");
-				$set_filter = "richter";
 				$form_action  = "talkback.php";
+				$branch_filter = $set_filter;
+				$tb_bonus_css = "";
 				break;
 			default:
 				$page_title = _("Talkback");
 				$form_action  = "talkback.php";
+				$branch_filter = $set_filter;
+				$tb_bonus_css = "";
 		}
 
 		// override our admin email
@@ -38,5 +42,10 @@ if ( isset( $all_tbtags ) ) {
 			$administrator_email = $all_tbtags[ $set_filter ];
 		}
 
+	} else {
+		$page_title   = _("Comments for the Library");
+		$form_action  = "talkback.php";
+		$branch_filter = $set_filter;
+		$tb_bonus_css = "";
 	}
 }

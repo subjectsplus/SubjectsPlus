@@ -72,10 +72,13 @@ class TalkbackService {
 	AND YEAR(date_submitted) {$operator} :year
 	ORDER BY date_submitted DESC" );
 
+		$branch_filter = "%".$filter."%";
+		$cat_filter = "%".$cat_tags."%";
+
 		$statement->bindParam( ":year", $this_year );
 		//AND tbtags LIKE :tbtags
-		$statement->bindParam( ":tbtags", $filter );
-		$statement->bindParam( ":ctags", $cat_tags );
+		$statement->bindParam( ":tbtags", $branch_filter );
+		$statement->bindParam( ":ctags", $cat_filter );
 		$statement->execute();
 
 		return $statement->fetchAll();

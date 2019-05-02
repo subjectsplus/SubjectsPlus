@@ -29,11 +29,6 @@ global $talkback_use_email;
  */
 global $administrator_email;
 
-/**
- * global for MailMessage class
- * @global $talkback_to_address
- */
-global $talkback_to_address;
 
 /**
  *
@@ -245,6 +240,16 @@ $set_filter  = "";
 $cat_filters = "";
 
 
+/**
+ * $branch_filter is used to filter comments by branch
+ * it is set in branch_metadata.php
+ *
+ * @var $branch_filter
+ *
+ */
+$branch_filter = "";
+
+
 
 /**
  * Include the page metadata based on the theme used
@@ -269,8 +274,6 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 }
 
 
-
-$filter = '%' . $set_filter . '%';
 if ( isset( $_GET['c'] ) ) {
 	$cat_tags = '%' . scrubData( $_GET['c'] ) . '%';
 
@@ -282,13 +285,13 @@ if ( isset( $_GET['c'] ) ) {
 if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
 	$comment_year = 'prev';
 	$comment_header =  _( "Comments from Previous Years" );
-	$current_comments_link = "?v=".$set_filter;
+	$current_comments_link = "?v=".$branch_filter;
 	$current_comments_label = _( "See this year" );
 
 } else {
 	$comment_year = 'current';
 	$comment_header = _( "Comments from " ) . $this_year;
-	$current_comments_link = "?t=prev&v=".$set_filter;
+	$current_comments_link = "?t=prev&v=".$branch_filter;
 	$current_comments_label = _( "See previous years" );
 }
 
@@ -304,7 +307,7 @@ if ( isset( $all_cattags ) ) {
 		} else {
 			$tag_class = "";
 		}
-		$cat_filters .= " <a href='talkback.php?t=$comment_year&v=$set_filter&c=$value' class='$tag_class'>$value</a>";
+		$cat_filters .= " <a href='talkback.php?t=$comment_year&v=$branch_filter&c=$value' class='$tag_class'>$value</a>";
 	}
 }
 
@@ -328,7 +331,7 @@ $talkbackService = new TalkbackService($db);
  * Get Active Comments and Pass off to if/else block for use with template
  * @var $comments_response
  */
-$comments_response = $talkbackService->getComments($comment_year, $this_year, $filter, $cat_tags);
+$comments_response = $talkbackService->getComments($comment_year, $this_year, $branch_filter, $cat_tags);
 
 
 /**
@@ -375,7 +378,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$newComment->setQFrom( $this_name );
 	$newComment->setDateSubmitted( $todaycomputer );
 	$newComment->setDisplay( 'No' );
-	$newComment->setTbtags( $set_filter );
+	$newComment->setTbtags( $branch_filter );
 	$newComment->setAnswer( '' );
 
 	/**
@@ -400,7 +403,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$mailMessege = new MailMessage();
 	$mailMessege->setFromAddress( $this_name );
 	$mailMessege->setFromLabel( $this_name );
-	$mailMessege->setToAddress( $talkback_to_address );
+	$mailMessege->setToAddress( $administrator_email );
 	$mailMessege->setToAddressLabel( $talkback_to_address_label );
 	$mailMessege->setSubject( $talkback_subject_line );
 	$mailMessege->setMsgHTML( $html_message );

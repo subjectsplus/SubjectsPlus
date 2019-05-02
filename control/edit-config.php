@@ -255,15 +255,6 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "This option controls whether Talkback uses smtp email." )
 		),
 
-		"talkback_to_address" => array(
-			_( "To Address" ),
-			_( "This option sets the email To address for use with Talkback" ),
-			"string",
-			"talkback_email",
-			"large",
-			"",
-			_("This option sets the email To address for use with Talkback")
-		),
 
 		"talkback_to_address_label" => array(
 			_( "To Address Label" ),
