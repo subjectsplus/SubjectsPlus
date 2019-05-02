@@ -27,5 +27,9 @@ if ( isset( $all_tbtags ) ) {
 			$administrator_email = $all_tbtags[ $set_filter ];
 		}
 
+	} else {
+		$page_title   = _("Comments for Main Library");
+		$form_action  = "talkback.php";
+		$tb_bonus_css = "";
 	}
 }

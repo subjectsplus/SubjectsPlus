@@ -350,7 +350,7 @@ if(!empty($comments_response)) {
  */
 $recaptcha_response = "";
 
-if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response']) ) {
+if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 	// clean up post variables
 	if ( isset( $_POST["name"] ) ) {
@@ -433,7 +433,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$slackMsg->setMessage( $msg );
 
 
-	if ( $talkback_use_recaptcha === true ) {
+	if ( $talkback_use_recaptcha === true && isset($_POST['recaptcha_response']) ) {
 
 		/**
 		 * init ReCaptchaService
@@ -464,7 +464,6 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 		//no security on this form - it could be a robot but we cannot determine that so send it anyway
 		$is_robot = false;
 	}
-
 
 	if($is_robot === false) {
 
@@ -520,6 +519,7 @@ echo $tpl->render( $tpl_name, array(
 	'page_description'            => $page_description,
 	'page_keywords'               => $page_keywords,
 	'form_action'                 => $form_action,
+	'tb_bonus_css'                => $tb_bonus_css,
 	'comments'                    => $comments,
 	'this_name'                   => $this_name,
 	'this_comment'                => $this_comment,

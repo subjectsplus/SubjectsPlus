@@ -99,50 +99,14 @@
 
             <div class="col-lg-4">
 
-                <div class="feature popular-list">
-                    <h3>- Need help now? -</h3>
-                    <a href="https://new.library.miami.edu/research/ask-a-librarian.html" class="btn btn-default">Ask a
-                        Librarian</a>
-                    <hr>
-
-					<?php $siteKey = $talkback_recaptcha_site_key; ?>
-
-                    <form id="tellus" action="<?php print $form_action; ?>" method="post">
-                        <div>
-                            <div class="form-group">
-                                <label for="the_suggestion"><?php echo _( "Your comment:" ); ?></label>
-                                <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3"
-                                          value="<?php echo $this_comment; ?>"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="suggestion_email">
-									<?php echo _( "Your email (optional):" ); ?>
-                                </label>
-                                <input type="email" class="form-control" id="name" name="name"
-                                       value="<?php echo $this_name; ?>">
-                                <p><?php echo _( "(In case we need to contact you)" ); ?></p>
-                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-                            </div>
-
-
-                            <button type="submit" name="submit_comment" class="btn btn-default"
-                            ><?php print _( "Submit" ); ?>
-                            </button>
-                            </p>
-                        </div>
-                    </form>
-
-
-                    <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $siteKey; ?>"></script>
-                    <script>
-                        grecaptcha.ready(function () {
-                            grecaptcha.execute('<?php echo $siteKey; ?>', {action: 'talkback'}).then(function (token) {
-                                var recaptchaResponse = document.getElementById('recaptchaResponse');
-                                recaptchaResponse.value = token;
-                            });
-                        });
-                    </script>
-                </div>
+	            <?php
+	            if( (isset($talkback_use_recaptcha)) && ($talkback_use_recaptcha === true )) {
+		            var_dump($talkback_use_recaptcha);
+		            include 'comment_form_recaptcha.php';
+	            } else {
+		            include 'comment_form.php';
+	            }
+	            ?>
             </div>
         </div>
 

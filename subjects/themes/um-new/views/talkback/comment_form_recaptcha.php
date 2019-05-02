@@ -1,5 +1,5 @@
 <div class="tip">
-    <h2>Need help <strong>now</strong>? <br/><a href="http://calder.med.miami.edu/librarianask.html">Ask
+    <h2>Need help <strong>now</strong>? <br/><a href="https://library.miami.edu/research/ask-a-librarian.html">Ask
             a Librarian</a>.</h2>
 
 	<?php
