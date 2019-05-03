@@ -101,6 +101,7 @@ class TalkbackService {
 			$slackMsg->send();
 		}
 
+		return true;
 	}
 
 	
