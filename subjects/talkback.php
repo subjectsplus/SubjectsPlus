@@ -472,7 +472,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 		// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
 		if( $talkbackService->sendCommunications(true, $newComment, $talkback_use_email, $mailer, $talkback_use_slack, $slackMsg) ) {
-			//$insertCommentFeedback = $insertCommentSuccessFeedback;
+			$insertCommentFeedback = $insertCommentSuccessFeedback;
 		} else {
 			$insertCommentFeedback = $insertCommentFeedbackFail;
 		}
