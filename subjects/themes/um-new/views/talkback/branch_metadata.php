@@ -9,18 +9,17 @@ if ( isset( $all_tbtags ) ) {
 	if ( isset( $_REQUEST["v"] ) ) {
 		$set_filter = scrubData( lcfirst( $_REQUEST["v"] ) );
 
-
 		// Quick'n'dirty setup email recipients
 		switch ( $set_filter ) {
 			case "music":
 				$page_title   = _("Comments for the Music Library");
-				$form_action  = "talkback.php?v=$set_filter";
+				$form_action  = "talkback.php";
 				$branch_filter = $set_filter;
 				$tb_bonus_css = "talkback_form_music";
 				break;
 			case "rsmas":
 				$page_title  = _("Comments for the Marine Library");
-				$form_action = "talkback.php?v=$set_filter";
+				$form_action = "talkback.php";
 				$branch_filter = $set_filter;
 				$tb_bonus_css = "";
 				break;

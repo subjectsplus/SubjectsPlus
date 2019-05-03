@@ -31,7 +31,7 @@ global $administrator_email;
 
 
 /**
- *
+ * @todo this should be defined in branch_metadata.php
  * @var $talkback_to_address_label
  */
 global $talkback_to_address_label;
@@ -190,19 +190,19 @@ $todaycomputer = date( 'Y-m-d H:i:s' );
 $is_robot = true;
 
 /**
- *
+ * @todo this should be defined in branch_metadata.php
  * @var $insertCommentFeedback
  */
 $insertCommentFeedback = "";
 
 /**
- *
+ * @todo this should be defined in branch_metadata.php
  * @var $insertCommentSuccessFeedback
  */
 $insertCommentSuccessFeedback = _( "Thank you for your feedback.  We will try to post a response within the next three business days." );
 
 /**
- *
+ * @todo this should be defined in branch_metadata.php
  * @var $insertCommentFeedbackFail
  */
 $insertCommentFeedbackFail = _( "There was a problem with your submission.  Please try again." ) . PHP_EOL;
@@ -210,19 +210,19 @@ $insertCommentFeedbackFail .= _( "If you continue to get an error, please contac
 
 
 /**
- *
+ * @todo this should be defined in branch_metadata.php
  * @var $recaptcha_response
  */
 $recaptcha_response = "";
 
 /**
- *
+ * @todo this should be defined in branch_metadata.php
  * @var $recaptcha_response_fail
  */
 $recaptcha_response_fail = _("Recaptcha score is too low. Your comment was not submitted: ");
 
 /**
- * this can be overriden below
+ * this can be overriden in branch_metadata.php
  * @var $form_action
  */
 $form_action = "talkback.php";
@@ -458,7 +458,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 		} else {
 			// Not verified - show form error
-			$insertCommentFeedback = "Recaptcha score is too low. Your comment was not submitted: " . $recaptcha_response->getScore();
+			$insertCommentFeedback = $recaptcha_response_fail;
 			$is_robot              = true;
 
 		}
