@@ -42,7 +42,7 @@
         <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $siteKey; ?>"></script>
         <script>
             grecaptcha.ready(function () {
-                grecaptcha.execute('<?php echo $siteKey; ?>', { action: 'talkback' }).then(function (token) {
+                grecaptcha.execute('<?php echo $siteKey; ?>', {action: 'talkback'}).then(function (token) {
                     var recaptchaResponse = document.getElementById('recaptchaResponse');
                     recaptchaResponse.value = token;
                 });
@@ -51,8 +51,6 @@
 
 	<?php
 	endif; ?>
-
-
 
 
     <p>

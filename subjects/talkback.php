@@ -422,7 +422,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$msg = _( "New Comment via Talkback" ) . PHP_EOL;
 	$msg .= "$this_comment" . PHP_EOL;
 	$msg .= _( "From: " ) . $this_name . PHP_EOL;
-	$msg .= _( "Date submitted: " ) . $todaycomputer . PHP_EOL;
+	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 	$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
 
 	/**
