@@ -1,4 +1,3 @@
-<?php ?>
 <div class="feature section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php if ( isset( $page_title
