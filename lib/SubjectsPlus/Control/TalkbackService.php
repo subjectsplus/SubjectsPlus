@@ -1,9 +1,6 @@
 <?php
 namespace SubjectsPlus\Control;
 
-use SubjectsPlus\Control\Querier;
-use PDO;
-
 
 class TalkbackService {
 
@@ -18,11 +15,13 @@ class TalkbackService {
 
 	public function __construct(Querier $db) {
 		$this->_db = $db;
-
 		$this->_connection = $this->_db->getConnection();
-
 	}
 
+	/**
+	 * @param TalkbackComment $comment
+	 * @return bool true/false
+	 */
 	public function insertComment(TalkbackComment $comment) {
 
 		$this_comment  = $comment->getQuestion();
@@ -42,17 +41,25 @@ class TalkbackService {
 		$statement->bindParam( ":display", $display );
 		$statement->bindParam( ":answer", $answer );
 
-		$statement->execute();
+		return $statement->execute();
 	}
 
+	/**
+	 * @param string $comment_year
+	 * @param $this_year
+	 * @param $filter
+	 * @param $cat_tags
+	 *
+	 * @return array
+	 */
 	public function getComments($comment_year = 'current', $this_year, $filter, $cat_tags) {
 
 		if($comment_year == 'current') {
 			$operator = '>=';
 		} elseif($comment_year == 'prev') {
-			$operator = '=<';
+			$operator = '<';
 		} else {
-			$operator = '==';
+			$operator = '=';
 		}
 
 		$statement  = $this->_connection->prepare( "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
@@ -65,10 +72,13 @@ class TalkbackService {
 	AND YEAR(date_submitted) {$operator} :year
 	ORDER BY date_submitted DESC" );
 
+		$branch_filter = "%".$filter."%";
+		$cat_filter = "%".$cat_tags."%";
+
 		$statement->bindParam( ":year", $this_year );
 		//AND tbtags LIKE :tbtags
-		$statement->bindParam( ":tbtags", $filter );
-		$statement->bindParam( ":ctags", $cat_tags );
+		$statement->bindParam( ":tbtags", $branch_filter );
+		$statement->bindParam( ":ctags", $cat_filter );
 		$statement->execute();
 
 		return $statement->fetchAll();
@@ -76,17 +86,30 @@ class TalkbackService {
 
 
 
+	public function sendCommunications($comment_insert_db, TalkbackComment $newComment,  $talkback_use_email, Mailer $mailer, $talkback_use_slack, SlackMessenger $slackMsg) {
 
+
+		if($comment_insert_db === true) {
+			$this->insertComment($newComment);
+		}
+
+		if($talkback_use_email === true) {
+			$mailer->send();
+		}
+
+		if($talkback_use_slack === true) {
+			$slackMsg->send();
+		}
+
+		return true;
+	}
+
+	
 
 	/**
 	 * @return mixed
 	 */
 	public function getUseEmail() {
-		global $talkback_use_email;
-
-		if(isset($talkback_use_email)){
-			$this->_use_email = $talkback_use_email;
-		}
 		return $this->_use_email;
 	}
 
@@ -101,11 +124,6 @@ class TalkbackService {
 	 * @return mixed
 	 */
 	public function getUseSlack() {
-		global $talkback_use_slack;
-
-		if( isset($talkback_use_slack) ) {
-			$this->_use_slack = $talkback_use_slack;
-		}
 		return $this->_use_slack;
 	}
 
@@ -120,11 +138,6 @@ class TalkbackService {
 	 * @return mixed
 	 */
 	public function getUseRecaptcha() {
-		global $talkback_use_recaptcha;
-
-		if( isset($talkback_use_recaptcha) ) {
-			$this->_use_recaptcha = $talkback_use_recaptcha;
-		}
 		return $this->_use_recaptcha;
 	}
 
@@ -162,6 +175,10 @@ class TalkbackService {
 	public function setAdminEmail( $admin_email ) {
 		$this->_admin_email = $admin_email;
 	}
+
+
+
+
 
 
 

@@ -17,14 +17,24 @@
             <div class="pure-g">
                 <div class="pure-u-1 pure-u-lg-2-3">
                     <div class="pluslet_simple no_overflow">
-						<?php print _( "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
-		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>" ); ?>
+
+                        <?php if (isset($insertCommentFeedback) && !empty($insertCommentFeedback)) {
+                            echo $insertCommentFeedback;
+                        } else { ?>
+
+	                    <?php print _( "<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
+<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>" ); ?>
+
+                        <?php } ?>
+
                     </div>
                     <div class="pluslet_simple no_overflow">
-                        <h2>Comments from 2019 <span style="font-size: 11px; font-weight: normal;"><a
-                                        href="talkback.php?t=prev&amp;v=main">See previous years</a></span></h2>
+                        <h2><?php echo $comment_header; ?> <span style="font-size: 12px;"><a href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?> </a> </span></h2>
 
-                        <?php foreach($comments as $comment): ?>
+
+                        <?php if(is_array($comments)) {
+
+                        foreach($comments as $comment): ?>
 
                             <?php
 	                            // Let's link back to the staff page
@@ -39,11 +49,11 @@
                             <p class="tellus_comment">
                                 <span class="comment_num"><?php echo $comment['talkback_id']; ?></span>
                                 <strong><?php echo $comment['question']; ?></strong><br>
-                                <span style="clear: both;font-size: 11px;">Comment on <em><?php echo $comment['date_submitted']; ?></em></span></p>
+                                <span style="clear: both;font-size: 11px;">Comment on <em><?php echo date("D M j, Y, g:i a", strtotime($comment['date_submitted']) ); ?></em></span></p>
                             <br>
 
                             <p><?php
-	                            if ( $show_talkback_face == 1 ) {
+	                            if ( $talkback_show_headshot === true ) {
 		                            echo getHeadshot( $comment['email'] );
 	                            }
                             ?>
@@ -54,50 +64,22 @@
                         </div>
                         <?php endforeach; ?>
 
+                        <?php } else {
+
+                            echo $comments;
+                        } ?>
+
                     </div>
                 </div>
                 <div class="pure-u-1 pure-u-lg-1-3">
-                    <!-- start pluslet -->
-                    <div class="pluslet">
-                        <div class="titlebar">
-                            <div class="titlebar_text">Tell Us What You Think</div>
-                        </div>
-                        <div class="pluslet_body">
-                            <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <strong>Wait! Do you need help right now?</strong><br>Visit the Research Desk! </p>
-                            <br>
+	                <?php
+	                if( (isset($talkback_use_recaptcha)) && ($talkback_use_recaptcha === true )) {
 
-                            <?php //include_once 'comment_form.php'; ?>
-                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                            <script>
-                                function onSubmit(token) {
-                                    document.getElementById("tellus").submit();
-                                }
-                            </script>
-                            <form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
-                                <div class="talkback_form">
-                                    <p><strong><?php print _( "Your comment:" ); ?></strong><br/>
-                                        <textarea name="the_suggestion" cols="26" rows="6" class="form-item"
-                                                  value="<?php print $this_comment; ?>"></textarea><br/><br/>
-                                        <strong><?php print _( "Your email (optional):" ); ?></strong><br/>
-                                        <input type="text" name="name" size="20" value="<?php print $this_name; ?>"
-                                               class="form-item"/>
-                                        <br/>
-				                        <?php print _( "(In case we need to contact you)" ); ?>
-                                        <br/><br/>
-				                        <?php global $talkback_recaptcha_site_key; ?>
-                                        <button type="submit" name="submit_comment" class="btn btn-default g-recaptcha"
-                                                data-sitekey="<?php echo $talkback_recaptcha_site_key; ?>"
-                                                data-callback="onSubmit"
-                                                data-size="invisible"><?php print _( "Submit" ); ?></button>
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- end pluslet -->
-                    <br>
-
+		                include 'comment_form_recaptcha.php';
+	                } else {
+		                include 'comment_form.php';
+	                }
+	                ?>
                 </div>
             </div>
             <!-- END BODY CONTENT -->
