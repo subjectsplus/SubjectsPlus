@@ -1330,7 +1330,7 @@ class Guide
         foreach ($de_duped as $value) {
             if (is_numeric($value)) {
                 $db = new Querier;
-                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_guide_order) VALUES (
+                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_sort) VALUES (
 				" . scrubData($value, 'integer') . ",
 				" . scrubData($this->_subject_id, 'integer') . ",
 				" . $i++ . ")";
