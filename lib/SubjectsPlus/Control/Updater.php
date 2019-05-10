@@ -787,13 +787,8 @@ ADD COLUMN `in_pluslet` VARCHAR(200) NULL COMMENT '' AFTER `in_tab`");
 		//get rewrite base
 		$lstrRewriteBase = getRewriteBase();
 
-		//get root to subjectsplus path
-		$lstrRootPath = dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR;
-
-		//all htaccess files needing to update
-		$lobjFiles = array( $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess',
-						 	$lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess'
-						 );
+		//rename htaccess-default files needing to update
+		$lobjFiles = $this->rewriteHtaccessFilenames();
 
 		//go through each path and replace existing rewrite base with new rewrite base
 		foreach( $lobjFiles as $lstrPath )
@@ -824,6 +819,33 @@ ADD COLUMN `in_pluslet` VARCHAR(200) NULL COMMENT '' AFTER `in_tab`");
 		}
 
 		return TRUE;
+	}
+
+	/**
+	 * Rename subjects/.htaccess-default to .htaccess and api/.htaccess-default to .htaccess
+	 * .htaccess files were added to .gitignore on 5-10-19
+	 * @return array
+	 */
+	private function rewriteHtaccessFilenames() {
+
+		//get root to subjectsplus path
+		$lstrRootPath = dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR;
+
+		if( (file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
+			$subjectsHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess');
+		} else {
+			$subjectsHtaccess = $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess';
+
+		}
+
+		if( (file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
+			$apiHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess');
+		} else {
+			$apiHtaccess = $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess';
+
+		}
+
+		return array( $subjectsHtaccess, $apiHtaccess);
 	}
 
 	/**
