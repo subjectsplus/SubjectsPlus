@@ -10,6 +10,9 @@
  */
 
 use SubjectsPlus\Control\Config;
+if ( file_exists( 'includes/version.php' ) ) {
+	include_once 'includes/version.php';
+}
 
 //variables required in header and add header
 $subcat = "admin";
@@ -24,6 +27,8 @@ $lobjConfig = new Config();
 
 //declare variable that stores configuration path
 $lstrConfigFilePath = 'includes/config.php';
+
+
 
 //set config file path
 $lobjConfig->setConfigPath( $lstrConfigFilePath );
@@ -230,11 +235,63 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places." )
 		),
 
+		"talkback_show_headshot" => array(
+			_( "Show headshot in talkback comments" ),
+			_( "This option controls whether Talkback will display the headshot of the person who responded to the comment." ),
+			"boolean",
+			"talkback",
+			"small",
+			"",
+			_( "This option controls whether Talkback will display the headshot of the person who responded to the comment." )
+		),
+
+		"talkback_use_email" => array(
+			_( "Use Email" ),
+			_( "This option controls whether Talkback will use smtp email." ),
+			"boolean",
+			"talkback_email",
+			"small",
+			"",
+			_( "This option controls whether Talkback uses smtp email." )
+		),
+
+
+		"talkback_to_address_label" => array(
+			_( "To Address Label" ),
+			_( "This option sets the email To address label for use with Talkback" ),
+			"string",
+			"talkback_email",
+			"large",
+			"",
+			_("This option sets the email To address label for use with Talkback")
+		),
+
+		"talkback_subject_line" => array(
+			_( "Default Talkback Subject Line" ),
+			_( "This option sets the email Subject line for use with Talkback" ),
+			"string",
+			"talkback_email",
+			"large",
+			"",
+			_("This option sets the email Subject line for use with Talkback")
+		),
+
+		"talkback_use_recaptcha" => array(
+			_( "Use Recaptcha" ),
+			_( "This option controls whether Talkback will use Google Recaptcha 3." ),
+			"boolean",
+			"talkback_recaptcha",
+			"small",
+			"",
+			_( "This option controls whether Talkback uses Google Recaptcha 3." )
+		),
+
+
 		"talkback_recaptcha_site_key" => array(
 			_( "Talkback Google Recaptcha Site Key" ),
 			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
 			"string",
-			"talkback",
+			"talkback_recaptcha",
 			"large",
 			"",
 			_("The site key goes on the client side form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
@@ -244,17 +301,27 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Google Recaptcha Secret Key" ),
 			_( "This option contains the Google Recaptcha secret key required to protect the Talkback form." ),
 			"string",
-			"talkback",
+			"talkback_recaptcha",
 			"large",
 			"",
 			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"talkback_use_slack" => array(
+			_( "Use Slack" ),
+			_( "This option controls whether Talkback will use a Slack webhook." ),
+			"boolean",
+			"talkback_slack",
+			"small",
+			"",
+			_( "This option controls whether Talkback will use a Slack webhook." )
 		),
 
 		"talkback_slack_webhook_url" => array(
 			_( "Slack Webhook URL for Talkback" ),
 			_( "This option contains the webhook url from Slack that connects Talkback to Slack." ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"large",
 			"",
 			""
@@ -264,7 +331,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Slack Channel" ),
 			_( "This option contains Slack channel name that the Talkback form uses." ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"medium",
 			"",
 			""
@@ -274,7 +341,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Slack Emoji Code" ),
 			_( "This option contains Slack emoji code that the Talkback form uses. It must begin and end with a colon. For example, :thought_balloon:" ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"medium",
 			"",
 			_( "It must begin and end with a colon. For example, :thought_balloon:" )
@@ -465,6 +532,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"",
 			""
 		),
+
+        "institution_code" => array(
+            _( "Institution Code" ),
+            _( "Institution code to create customizations" ),
+            "string",
+            "core-metadata",
+            "medium",
+            "",
+            ""
+        ),
 
 		"administrator" => array(
 			_( "Name of Library Administrator" ),
@@ -823,8 +900,67 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"small",
 			"",
 			""
-		)
+		),
 
+		"email_host" => array(
+			_( "SMTP Host" ),
+			_( "This option contains the SMTP host" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_port" => array(
+			_( "SMTP Port" ),
+			_( "This option contains the SMTP Port" ),
+			"string",
+			"email",
+			"smail",
+			"",
+			""
+		),
+
+		"email_smtp_auth" => array(
+			_( "Use SMTP Authorization" ),
+			_( "This option determines is SMTP Authorization is to be used" ),
+			"boolean",
+			"email",
+			"small",
+			"",
+			""
+		),
+
+		"email_username" => array(
+			_( "SMTP Username" ),
+			_( "This option contains the SMTP username" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_password" => array(
+			_( "SMTP Password" ),
+			_( "This option contains the SMTP password" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_smtp_debug" => array(
+			_( "Display SMTP debug errors" ),
+			_( "This option sets SMTP debug level 0 = off (for production use) 1 = client messages 2 = client and server messages" ),
+			"string",
+			"email",
+			"small",
+			"",
+			""
+		),
 	);
 
 	//set config options

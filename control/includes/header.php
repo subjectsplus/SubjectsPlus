@@ -171,7 +171,7 @@ mb_internal_encoding('UTF-8');
     <title><?php print $page_title; ?></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
-    <script src="<?php echo getControlURL(); ?>includes/js.php" type="text/javascript"></script>
+    <script src="<?php echo getControlURL(); ?>includes/js_vendor.php" type="text/javascript"></script>
     
     <?php
     // this is for custom css, set by user and stored in database
