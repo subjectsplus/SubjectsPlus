@@ -326,6 +326,7 @@ class Installer
 					"CREATE TABLE `staff_subject` (
 					  `staff_id` int(11) NOT NULL DEFAULT '0',
 					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
+					  `staff_guide_order` int(11) NULL DEFAULT '0',
 					  PRIMARY KEY (`staff_id`,`subject_id`),
 					  KEY `fk_ss_subject_id_idx` (`subject_id`),
 					  KEY `fk_ss_staff_id_idx` (`staff_id`),

@@ -1746,3 +1746,20 @@ img.pluslet_card_image {
 .staff-librarians li {
     display: grid;
 }
+
+.uml-quick-links { /* Hide Favorites/Heart on default themes */
+     display: none !important;
+}
+
+.fa,
+.fas {font-size: 16px !important;} /* Default size for font-awesomeicons */
+
+.db_icons i {
+    padding-right: .25rem;
+    vertical-align: top;
+    padding-left: .25rem;
+}
+
+#listguides table td div > div {
+    display: block;
+}
