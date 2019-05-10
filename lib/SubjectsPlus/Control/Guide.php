@@ -167,7 +167,7 @@ class Guide
     {
 
         $db = new Querier();
-        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  staff_guide_order";
+        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  staff_sort";
 
         $this->_staffers = $db->query($q2);
 
@@ -1016,8 +1016,10 @@ class Guide
             $home_tab_class = "hometab";
         }
 
+
+
         $all_tabs = $this->getTabs($lstrFilter);
-        $main_tabs = $this->db->query("SELECT tab_id FROM tab WHERE parent = '' AND children =  '[]'");
+        //$main_tabs = $this->db->query("SELECT tab_id FROM tab WHERE parent = '' AND children =  '[]'");
         
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\"><i class=\"fa fa-plus\"></i></li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
@@ -1035,6 +1037,8 @@ class Guide
                }
            }
         }
+
+
 
         $childs = implode($child_ids, ',');
         
@@ -1141,6 +1145,7 @@ class Guide
     {
         $all_tabs = $this->getTabs($lstrFilter);
 
+
         // Now loop through tab content
         foreach ($all_tabs as $key => $lobjTab) {
             print "<div id=\"tabs-$key\" class=\"sptab\">";
@@ -1180,8 +1185,9 @@ class Guide
     						<div id=\"slider_section_{$lobjSection['section_id']}\"  class=\"sp_section_slider\"></div>
     				   </div>";
             }
+
     		$qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
-		           FROM pluslet p
+		           FROM pluslet  p
 		           INNER JOIN pluslet_section ps
 		           ON p.pluslet_id = ps.pluslet_id
 		           INNER JOIN section sec
@@ -1189,7 +1195,11 @@ class Guide
 		           WHERE sec.section_id = {$lobjSection['section_id']}
 		           ORDER BY prow ASC";
 
+
+
     		$rc = $db->query($qc);
+
+
 
     		//init
     		$left_col_pluslets = "";
@@ -1330,7 +1340,7 @@ class Guide
         foreach ($de_duped as $value) {
             if (is_numeric($value)) {
                 $db = new Querier;
-                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_guide_order) VALUES (
+                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_sort) VALUES (
 				" . scrubData($value, 'integer') . ",
 				" . scrubData($this->_subject_id, 'integer') . ",
 				" . $i++ . ")";

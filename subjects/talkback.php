@@ -1,536 +1,552 @@
 <?php
-/**
- *   @file talback.php
- *   @brief Suggestion box public interface.  based on file in subjectsplus, talkback.php
- *   @description When someone submits a comment, it will be scrubbed and added to
- *   the talkback table in the db.  If you want to receive an email when something
- *   comes in, leave $send_email_notification set to "1".  By default, this email
- *   goes to the person set as the admin in config.php; if you want to change this
- *   to someone else, do so below
- *   This email function uses the PHP mail() function; if this doesn't work in
- *   your environment, turn $send_email_notification off
- *   In version 2.x of SP, there are now filters to add different talkback instances
- *
- *   @author adarby
- *   @date update aug 2014
- *   @todo
- */
 
 use SubjectsPlus\Control\Querier;
+use SubjectsPlus\Control\TalkbackService;
+use SubjectsPlus\Control\TalkbackComment;
+use SubjectsPlus\Control\MailMessage;
+use SubjectsPlus\Control\Mailer;
+use SubjectsPlus\Control\SlackMessenger;
+use SubjectsPlus\Control\Template;
+use SubjectsPlus\Control\ReCaptchaService;
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/talkback.php"); exit;}
+include( "../control/includes/config.php" );
+include( "../control/includes/functions.php" );
+include( "../control/includes/autoloader.php" );
 
-$db = new Querier;
-$use_jquery = array();
+/**
+ *
+ * @global $AssetPath
+ */
+global $AssetPath;
 
-/* Set local variables */
 
-$page_title = _("Talk Back");
-$page_description = _("Share your comments and suggestions about the library");
-$page_keywords = _("library, comments, suggestions, complaints");
+global $talkback_use_email;
 
-// Skill testing question + answer
-$stk = _("5 times 5 = ");
-$stk_answer = "25";
+/**
+ * global for the reply email address for subjectsplus administrator
+ * @global $administrator_email
+ */
+global $administrator_email;
 
-// Show headshots
-$show_talkback_face = 1;
 
-$form_action = "talkback.php"; // this can be overriden below
-$bonus_sql = ""; // ditto
-$set_filter = ""; // tritto
+/**
+ * @todo this should be defined in branch_metadata.php
+ * @var $talkback_to_address_label
+ */
+global $talkback_to_address_label;
 
-/////////////////////////
-// Deal with multiple talkback instances
-// Usually if you have branch libraries who want separate
-// pages/results
-////////////////////////
+/**
+ *
+ * @var $talkback_subject_line
+ */
+global $talkback_subject_line;
 
-if (isset($all_tbtags)) {
-// Let's get the first item off the tb array to use as our default
-    reset($all_tbtags); // make sure array pointer is at first element
-    $set_filter = key($all_tbtags);
+/**
+ * globals for Mailer class
+ * @global $email_host
+ */
+global $email_host;
 
-// And set our default bonus sql
-    $bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
+/**
+ *
+ * @var $email_port
+ */
+global $email_port;
 
-// determine branch/filter
-    if (isset($_REQUEST["v"])) {
-        $set_filter = scrubData(lcfirst($_REQUEST["v"]));
-        $bonus_sql = "AND tbtags LIKE '%" . $set_filter . "%'";
+/**
+ *
+ * @var $email_smtp_auth
+ */
+global $email_smtp_auth;
 
-        // Quick'n'dirty setup email recipients
-        switch ($set_filter) {
-            case "music":
-                $page_title = "Comments for the Music Library";
-                $form_action = "talkback.php?v=$set_filter";
-                $tb_bonus_css = "talkback_form_music";
-                break;
-            case "rsmas":
-                $page_title = "Comments for the Marine Library";
-                $form_action = "talkback.php?v=$set_filter";
-                break;
-            default:
-                // nothing, we just use the $administrator email on file (config.php)
-                $form_action = "talkback.php";
-        }
+/**
+ *
+ * @var $email_smtp_debug
+ */
+global $email_smtp_debug;
 
-        // override our admin email
-        if (isset($all_tbtags[$set_filter]) && $all_tbtags[$set_filter] != "") {
-            $administrator_email = $all_tbtags[$set_filter];
-        }
+/**
+ * globals for ReCaptcha
+ * @global $talkback_use_recaptcha
+ */
+global $talkback_use_recaptcha;
 
-    } else {
+/**
+ *
+ * @var $talkback_recaptcha_secret_key
+ */
+global $talkback_recaptcha_secret_key;
 
-    }
-}
+/**
+ *
+ * @var $talkback_recaptcha_site_key
+ */
+global $talkback_recaptcha_site_key;
 
-///////////////////////
-// Feedback
-///////////////////////
+/**
+ * globals for Slack Message
+ * @global $talkback_use_slack
+ */
+global $talkback_use_slack;
 
-$feedback = "";
+/**
+ *
+ * @var $talkback_slack_channel
+ */
+global $talkback_slack_channel;
 
-$submission_feedback = "
-<div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\"  >" . _("Thanks") . "</div></div>\n
-<div class=\"pluslet_body\">\n
-<p>" . _("Thank you for your feedback.  We will try to post a response within the next three business days.") . "</p>\n
-</div>\n
-</div>\n
-";
+/**
+ *
+ * @var $talkback_slack_webhook_url
+ */
+global $talkback_slack_webhook_url;
 
-$submission_failure_feedback = "
-<div class=\"pluslet\">\n
-<div class=\"titlebar\"><div class=\"titlebar_text\"  >" . _("Oh dear.") . "</div></div>\n
-<div class=\"pluslet_body\">\n
-<p>" . _("There was a problem with your submission.  Please try again.") . "</p>
-<p>" . _("If you continue to get an error, please contact the <a href=\"mailto:$administrator_email\">administrator</a>") . "
-</div>\n
-</div>\n";
+/**
+ *
+ * @var $talkback_slack_emoji
+ */
+global $talkback_slack_emoji;
 
-//////////////////////
-// Some email stuff
-//////////////////////
 
-$send_email_notification = 1;
-$send_to = $administrator_email;
-/* Use any ol' email address as from, to make sure the mail works */
-$sent_from = $administrator_email;
+/**
+ * Show headshots true/false
+ * @global $talkback_show_headshot
+ */
+global $talkback_show_headshot;
 
-// clean up post variables
-if (isset($_POST["name"])) {
-    $this_name = scrubData($_POST["name"]);
-} else {
-    $this_name = "";
-}
 
-if (isset($_POST["the_suggestion"])) {
-    $this_comment = scrubData($_POST["the_suggestion"]);
-} else {
-    $this_comment = "";
-}
+/**
+ * local variables used in subjectsplus header.php
+ * @var $page_title
+ */
+$page_title = _( "Talk Back" );
 
-//////////////////////
-// date and time stuff
-//////////////////////
+/**
+ *
+ * @var $page_description
+ */
+$page_description = _( "Share your comments and suggestions about the library" );
 
+/**
+ *
+ * @var $page_keywords
+ */
+$page_keywords = _( "library, comments, suggestions, complaints" );
+
+/**
+ * email address taken from comment form
+ * @var $this_name
+ */
+$this_name = "";
+
+/**
+ * comment taken from comment form
+ * @var $this_comment
+ */
+$this_comment = "";
+
+
+/**
+ *
+ * @var $today
+ */
 $today = getdate();
+
+/**
+ *
+ * @var $month
+ */
 $month = $today['month'];
+
+/**
+ *
+ * @var $mday
+ */
 $mday = $today['mday'];
+
+/**
+ *
+ * @var $year
+ */
 $year = $today['year'];
-$this_year = date("Y");
 
-$todaycomputer = date('Y-m-d H:i:s');
+/**
+ *
+ * @var $this_year
+ */
+$this_year = date( "Y" );
 
-if (isset($_POST['the_suggestion']) && ($_POST['skill'] == $stk_answer)) {
+/**
+ *
+ * @var $todaycomputer
+ */
+$todaycomputer = date( 'Y-m-d H:i:s' );
 
-// clean submission and enter into db!  Don't show page again.
+/**
+ *
+ * @var $is_robot
+ */
+$is_robot = true;
 
-    if ($this_name == "") {
-        $this_name = "Anonymous";
-    }
+/**
+ * @todo this should be defined in branch_metadata.php
+ * @var $insertCommentFeedback
+ */
+$insertCommentFeedback = "";
 
-    // Make a safe query
-    $connection = $db->getConnection();
-    $statement = $connection->prepare("INSERT INTO talkback (question, q_from, date_submitted, display, tbtags, answer)
-			VALUES (:question, :q_from, :date_submitted, 'No', :tbtags, '')");
+/**
+ * @todo this should be defined in branch_metadata.php
+ * @var $insertCommentSuccessFeedback
+ */
+$insertCommentSuccessFeedback = _( "Thank you for your feedback.  We will try to post a response within the next three business days." );
 
-    $statement->bindParam(":question", $this_comment);
-    $statement->bindParam(":q_from", $this_name);
-    $statement->bindParam(":date_submitted", $todaycomputer);
-    $statement->bindParam(":tbtags", $set_filter);
+/**
+ * @todo this should be defined in branch_metadata.php
+ * @var $insertCommentFeedbackFail
+ */
+$insertCommentFeedbackFail = _( "There was a problem with your submission.  Please try again." ) . PHP_EOL;
+$insertCommentFeedbackFail .= _( "If you continue to get an error, please contact the <a href='mailto:{$administrator_email}'>administrator</a>" );
 
-    $statement->execute();
-    $stage_one = "ok";
+
+/**
+ * @todo this should be defined in branch_metadata.php
+ * @var $recaptcha_response
+ */
+$recaptcha_response = "";
+
+/**
+ * @todo this should be defined in branch_metadata.php
+ * @var $recaptcha_response_fail
+ */
+$recaptcha_response_fail = _("Recaptcha score is too low. Your comment was not submitted: ");
+
+/**
+ * this can be overriden in branch_metadata.php
+ * @var $form_action
+ */
+$form_action = "talkback.php";
+
+/**
+ *
+ * @var $set_filter
+ */
+$set_filter  = "";
+
+/**
+ *
+ * @var $cat_filters
+ */
+$cat_filters = "";
 
 
-    if (isset($debugger) && $debugger == "yes") {
-        print "<p class=\"debugger\">$query<br /><strong>from</strong> this file</p>";
-    }
+/**
+ * $branch_filter is used to filter comments by branch
+ * it is set in branch_metadata.php
+ *
+ * @var $branch_filter
+ *
+ */
+$branch_filter = "";
 
-    // Send an email if this is turned on
-    if ($send_email_notification == 1) {
-        ini_set("SMTP", $email_server);
-        ini_set("sendmail_from", $sent_from);
 
-        /* here the subject and header are assembled */
 
-        $subject = _("New Comment via SubjectsPlus");
-        $header = "Return-Path: $sent_from\n";
-        $header .= "From:  $sent_from\n";
-        $header .= "Content-Type: text/html; charset=iso-8859-1;\n\n";
-
-        $message = "<html><body style=\"margin:0;\">
-					<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#d4d4d4\" style=\"height: 100%;\">
-						<tr>
-						<td valign=\"top\" align=\"center\">
-						<table cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"#FFFFFF\" style=\"width:600px; height:auto;\" border=\"0\">
-						  <tr>
-						     <td width=\"600\" height=\"40\" valign=\"top\" bgcolor=\"#d4d4d4\">&nbsp;</td>
-						  </tr>
-						  <tr>
-						     <td width=\"600\" height=\"120\" valign=\"middle\" align=\"center\" bgcolor=\"#FFFFFF\">                
-						          <p style=\"font-size:28px; color:#444; font-family:Helvetica, sans-serif;\">" . _("New Comment Awaits Response") . "</p>
-						      </td>
-						  </tr>     
-						  <tr>
-							   <td width=\"600\" height=\"60\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
-						        <table width=\"600\" height=\"40\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
-						            <tr>
-						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <!--<img src=\"http://sp.library.miami.edu/assets/images/email/calendar.jpg\" width=\"40\" height=\"40\" border=\"0\">-->
-						              </td>
-						              <td width=\"150\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Received:") . "</p>
-						              </td>
-						               <td width=\"380\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <p style=\"font-size:22px; color:#858585; font-family:Helvetica, sans-serif;\">$month $mday, $year</p>
-						              </td>
-						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						            </tr>
-						          </table>
-						      </td>
-						  </tr>   
-						  <tr>
-						     <td width=\"600\" height=\"60\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
-						        <table width=\"600\" height=\"40\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
-						            <tr>
-						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <!--<img src=\"http://sp.library.miami.edu/assets/images/email/contact.jpg\" width=\"40\" height=\"40\" border=\"0\">-->
-						              </td>
-						              <td width=\"150\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Contact:") . "</p>
-						              </td>
-						               <td width=\"380\" valign=\"bottom\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <p style=\"font-size:22px; color:#858585; font-family:Helvetica, sans-serif;\">";
-        $message .= $db->quote($this_name);
-
-        $message .= "</p></td>
-						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						            </tr>
-						          </table>
-						      </td>
-						  </tr>  
-						  <tr>
-						     <td width=\"600\" height=\"65\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
-						        <table width=\"600\" height=\"40\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
-						            <tr>
-						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						              <td width=\"50\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <!--<img src=\"http://sp.library.miami.edu/assets/images/email/comment.jpg\" width=\"40\" height=\"40\" border=\"0\">-->
-						              </td>
-						              <td width=\"530\" valign=\"middle\" height=\"40\" bgcolor=\"#FFFFFF\">
-						                  <p style=\"font-size:22px; color:#444; font-family:Helvetica, sans-serif;\">" . _("Comment:") . "</p>
-						              </td>              
-						              <td width=\"10\" valign=\"top\" height=\"40\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						            </tr>
-						          </table>
-						      </td>
-						  </tr> 						  
-						  <tr>
-						     <td width=\"600\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
-						        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
-						            <tr>
-						              <td width=\"60\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>              
-						              <td width=\"530\" valign=\"top\" bgcolor=\"#FFFFFF\">
-						                  <p style=\"font-size:20px; color:#858585; font-family:Helvetica, sans-serif;\">";
-
-        $message .= $db->quote($this_comment);
-        $message .= "</p>
-						              </td>              
-						              <td width=\"10\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						            </tr>
-						          </table>
-						      </td>
-						  </tr> 
-						  <tr>
-						     <td width=\"600\" height=\"60\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						  </tr>      
-						  <tr>
-						     <td width=\"600\" height=\"50\" valign=\"top\" align=\"center\" bgcolor=\"#FFFFFF\">                
-						        <table width=\"600\" height=\"50\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" bgcolor=\"#FFFFFF\">
-						            <tr>
-						              <td width=\"175\" height=\"50\" valign=\"middle\" bgcolor=\"#FFFFFF\">&nbsp;</td>              
-						              <td width=\"250\" height=\"50\" valign=\"middle\" align=\"center\" bgcolor=\"#858585\">
-						                  <p style=\"font-size:28px; color:#FFF; font-family:Helvetica, sans-serif;\"><!--<a href=\"http://sp.library.miami.edu/control/talkback\" target=\"_blank\" style=\"color: #FFF; text-decoration:none;\">--><span style=\"color: #FFF; text-decoration:none;\">" . _("Reply Now") . "</span></a></p>
-						              </td>              
-						              <td width=\"175\" height=\"50\" valign=\"middle\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						            </tr>
-						          </table>
-						      </td>
-						  </tr>
-						  <tr>
-						     <td width=\"600\"  height=\"30\" valign=\"bottom\" align=\"center\" bgcolor=\"#FFFFFF\">
-						     	<p style=\"font-size:14px; color:#858585; font-family:Helvetica, sans-serif;\">" . _("You will be required to log in") . "</p>
-						     </td>
-						  </tr>      
-						  <tr>
-						     <td width=\"600\"  height=\"100\" valign=\"top\" bgcolor=\"#FFFFFF\">&nbsp;</td>
-						  </tr>       
-						  <tr>
-						     <td width=\"600\" height=\"70\" valign=\"middle\" align=\"center\" bgcolor=\"#FFFFFF\">
-						        <!--<img src=\"http://sp.library.miami.edu/assets/images/email/subjectsplus-footer.jpg\" width=\"276\" height=\"40\" border=\"0\">-->
-						      </td>
-						  </tr>
-						</table>            
-						</td>
-						</tr>
-						</table>
-						</body>
-						</html>";
-
-        // begin assembling actual message
-
-        $success = mail($send_to, "$subject", $message, $header);
-        // The below is just for testing purposes
-        if ($success) {
-            $stage_two = "ok";
-            //print "mail sent to $send_to";
-        } else {
-            $stage_two = "fail";
-            //print "mail didn't go to $send_to";
-        }
-    }
-
-    if ($stage_one == "ok" && $stage_two == "ok") {
-        $feedback = $submission_feedback;
-        $this_name = "";
-        $this_comment = "";
-    } else {
-        $feedback = $submission_failure_feedback;
-    }
+/**
+ * Include the page metadata based on the theme used
+ * Variables set here will be used in the appropriate theme header
+ * @global $subjects_theme
+ */
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	include("./themes/{$subjects_theme}/views/talkback/page_metadata.php");
+} else {
+	include( "views/talkback/page_metadata.php" );
 }
 
-////////////////////
-// Display the page
-////////////////////
 
-if (isset($_GET["t"]) && $_GET["t"] == "prev") {
-    $db = new Querier;
-    $connection = $db->getConnection();
-    $statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
-	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
-	FROM talkback LEFT JOIN staff
-	ON talkback.a_from = staff.staff_id
-	WHERE (display ='1' OR display ='Yes')
-	AND tbtags LIKE :tbtags
-    AND cattags LIKE :ctags
-	AND YEAR(date_submitted) < :year
-	GROUP BY theyear, date_submitted ORDER BY date_submitted DESC");
-
-    $statement->bindParam(":year", $this_year);
+/**
+ * Include the branch_metadata based on the theme used
+ * @global $subjects_theme
+ */
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	include("./themes/{$subjects_theme}/views/talkback/branch_metadata.php");
+} else {
+	include( "./views/talkback/branch_metadata.php" );
+}
 
 
-
-    $filter = '%' . $set_filter . '%';
-
-    if (isset($_GET['c'])) {
-        $cat_tags = '%' . scrubData($_GET['c']) . '%';
-
-    } else {
-        $cat_tags = "%%";
-
-    }
-
-    $statement->bindParam(":tbtags", $filter);
-    $statement->bindParam(":ctags", $cat_tags);
-    $statement->execute();
-
-
-    $our_result = $statement->fetchAll();
-
-    $comment_header = "<h2>" . _("Comments from Previous Years") . " <span style=\"font-size: 12px;\"><a href=\"talkback.php?v=$set_filter\">" . _("See this year") . "</a></span></h2>";
+if ( isset( $_GET['c'] ) ) {
+	$cat_tags = '%' . scrubData( $_GET['c'] ) . '%';
 
 } else {
-    // New ones //
-
-    $db = new Querier;
-    $connection = $db->getConnection();
-    $statement = $connection->prepare("SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
-	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
-	FROM talkback LEFT JOIN staff
-	ON talkback.a_from = staff.staff_id
-	WHERE (display ='1' OR display ='Yes')
-    AND tbtags LIKE :tbtags
-	AND cattags LIKE :ctags
-	AND YEAR(date_submitted) >= :year
-	ORDER BY date_submitted DESC");
-
-    $statement->bindParam(":year", $this_year);
-    $filter = '%' . $set_filter . '%';
-    if (isset($_GET['c'])) {
-        $cat_tags = '%' . scrubData($_GET['c']) . '%';
-
-    } else {
-        $cat_tags = "%%";
-
-    }
-    //AND tbtags LIKE :tbtags
-    $statement->bindParam(":tbtags", $filter);
-    $statement->bindParam(":ctags", $cat_tags);
-    $statement->execute();
-
-
-    $our_result = $statement->fetchAll();
-
-
-
-    $comment_header = "<h2>" . _("Comments from ") . "$this_year <span style=\"font-size: 11px; font-weight: normal;\"><a href=\"talkback.php?t=prev&v=$set_filter\">" . _("See previous years") . "</a></span></h2>";
+	$cat_tags = "%%";
 
 }
 
-/* Select all Records, either current or previous year*/
-
-$result_count = count($our_result);
-
-if ($result_count != 0) {
-
-    $row_count = 1;
-    $results = "";
-
-    foreach ($our_result as $myrow) {
-
-        $talkback_id = $myrow["0"];
-        $question = $myrow["1"];
-        $answer = $myrow["5"];
-        $answer = preg_replace('/<\/?div.*?>/ ', '', $answer);
-        $answer = tokenizeText($answer);
-        // $answer = stripslashes(htmlspecialchars_decode($myrow["5"])); Louisa's proposed fix for messy answer @todo
-        $keywords = $myrow["3"];
-        $responder_email = $myrow["9"];
-
-        // Let's link back to the staff page
-        $name_id = explode("@", $responder_email);
-        $lib_page = "staff_details.php?name=" . $name_id[0];
-
-        $results .= "
-		<div class=\"tellus_item oddrow\">\n
-		<a name=\"$talkback_id\"></a>\n
-		<p class=\"tellus_comment\"><span class=\"comment_num\">$row_count</span> <strong>$question</strong><br />
-		<span style=\"clear: both;font-size: 11px;\">Comment from $myrow[2] on <em>$myrow[4]</em></span></p><br />\n
-		<p>";
-        if ($show_talkback_face == 1) {
-            $results .= getHeadshot($myrow[9]);
-        }
-        $results .= $answer;
-        $results .= "<p style=\"clear: both;font-size: 11px;\">Answered by <a href=\"$lib_page\">$myrow[7] $myrow[8]</a>, $myrow[10]</p></div>\n";
-
-        // Add 1 to the row count, for the "even/odd" row striping
-
-        $row_count++;
-    }
-} else {
-    $results = "<p>" . _("There are no comments just yet.  Be the first!") . "</p>";
-    $no_results = TRUE;
-}
-
-
-///////////////////
-// Incomplete Comment submission
-///////////////////
-
-if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
-
-    $stk_message = "
-	<div class=\"pluslet\">\n
-	<div class=\"titlebar\"><div class=\"titlebar_text\"  >" ._("Hmm, That Was a Tricky Bit of Math") . "</div></div>\n
-	<div class=\"pluslet_body\">\n
-	<p><strong>" . _("Sorry, you must answer the Skill Testing Question correctly.  It's an anti-spam measure . . . .") . "</strong></p>
-	</ul>\n
-	</div>\n
-	</div>\n
-	";
+if ( isset( $_GET["t"] ) && $_GET["t"] == "prev" ) {
+	$comment_year = 'prev';
+	$comment_header =  _( "Comments from Previous Years" );
+	$current_comments_link = "?v=".$branch_filter;
+	$current_comments_label = _( "See this year" );
 
 } else {
-    $stk_message = "";
+	$comment_year = 'current';
+	$comment_header = _( "Comments from " ) . $this_year;
+	$current_comments_link = "?t=prev&v=".$branch_filter;
+	$current_comments_label = _( "See previous years" );
+}
+
+if ( isset( $all_cattags ) ) {
+
+	/**
+	 * @todo add a filter that displays all responses
+	 */
+	foreach ( $all_cattags as $value ) {
+		if ( isset( $_GET["c"] ) && $value == $_GET["c"] ) {
+			$tag_class  = "ctag-on";
+			$cat_filter = $value;
+		} else {
+			$tag_class = "";
+		}
+		$cat_filters .= " <a href='talkback.php?t=$comment_year&v=$branch_filter&c=$value' class='$tag_class'>$value</a>";
+	}
 }
 
 
-include("includes/header.php");
 
-?>
-    <br />
-    <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-2-3">
-            <?php print $feedback . $stk_message; ?>
-            <div class="pluslet_simple no_overflow">
 
-                <?php print _("<p><strong>Talk Back</strong> is where you can <strong>ask a question</strong> or <strong>make a suggestion</strong> about library services.</p>
-		<p>So, please let us know what you think, and we will post your suggestion and an answer from one of our helpful staff members.</p>"); ?>
-            </div>
-            <div class="pluslet_simple no_overflow">
-                <?php print $comment_header . $results; ?>
-            </div>
-        </div>
-        <div class="pure-u-1 pure-u-lg-1-3">
-            <!-- start pluslet -->
-            <div class="pluslet">
-                <div class="titlebar"><div class="titlebar_text"><?php print _("Tell Us What You Think"); ?></div></div>
-                <div class="pluslet_body">
-                    <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                        <strong><?php print _("Wait!  Do you need help right now?"); ?></strong><br /><?php print _("Visit the Research Desk!"); ?></p>
-                    <br />
-                    <?php if (isset($stage_two)) {
-                        print "<p>" . _("Thank you for your submission.") . "<a href=\"talkback.php\">" . _("Did you want to say something else?") . "</a>";
-                    } else {  ?>
+/**
+ * init Querier to pass to TalkbackService class
+ * @var $db
+ */
+$db = new Querier();
 
-                        <form id="tellus" action="<?php print $form_action; ?>" method="post" class="pure-form">
-                            <div class="talkback_form">
-                                <p><strong><?php print _("Your comment:"); ?></strong><br />
-                                    <textarea name="the_suggestion" cols="26" rows="6" class="form-item"><?php print $this_comment; ?></textarea><br /><br />
-                                    <strong><?php print _("Your email (optional):"); ?></strong><br />
-                                    <input type="text" name="name" size="20" value="<?php print $this_name; ?>" class="form-item" />
-                                    <br />
-                                    <?php print _("(In case we need to contact you)"); ?>
-                                    <br /><br />
-                                    <strong><?php print $stk; ?></strong> <input type="text" name="skill" size="2" class="form-item" style="width: 50px" />
-                                    <br /><br />
-                                    <input type="submit" name="submit_comment" class="pure-button pure-button-topsearch" value="<?php print _("Submit"); ?>" /></p>
-                            </div>
-                        </form>
-                    <?php  } ?>
-                </div>
-            </div>
-            <!-- end pluslet -->
-            <br />
+/**
+ * init TalkbackService
+ * requires an instance of Querier to be passed to the class
+ * @var $talkbackService
+ */
+$talkbackService = new TalkbackService($db);
 
-        </div>
-    </div>
-    <!-- END BODY CONTENT -->
-<?php
+/**
+ * Get Active Comments and Pass off to if/else block for use with template
+ * @var $comments_response
+ */
+$comments_response = $talkbackService->getComments($comment_year, $this_year, $branch_filter, $cat_tags);
 
-///////////////////////////
-// Load footer file
-///////////////////////////
 
-include("includes/footer.php");
+/**
+ * Set the $comments template var
+ * @var $comments
+ */
+if(!empty($comments_response)) {
+	$comments = $comments_response;
+} else {
+	$comments = _( "There are no comments just yet.  Be the first!" );
+}
 
-?>
+
+
+
+/**
+ * init the $recaptcha_response var for use with the template after it's set in the if/else block
+ * @var $recaptcha_response
+ */
+$recaptcha_response = "";
+
+if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+
+	// clean up post variables
+	if ( isset( $_POST["name"] ) ) {
+		$this_name = scrubData( $_POST["name"] );
+	} else {
+		$this_name = "Anonymous";
+	}
+
+	if ( isset( $_POST["the_suggestion"] ) ) {
+		$this_comment = scrubData( $_POST["the_suggestion"] );
+	} else {
+		$this_comment = "";
+	}
+
+
+	/**
+	 * TalkbackComment object
+	 * @var $newComment
+	 */
+	$newComment = new TalkbackComment();
+	$newComment->setQuestion( $this_comment );
+	$newComment->setQFrom( $this_name );
+	$newComment->setDateSubmitted( $todaycomputer );
+	$newComment->setDisplay( 'No' );
+	$newComment->setTbtags( $branch_filter );
+	$newComment->setAnswer( '' );
+
+	/**
+	 * create the html email template
+	 * @var $tpl_name
+	 * @var $tpl
+	 * @var $html_message
+	 */
+	$tpl_name     = 'html_msg';
+	$tpl          = new Template( './views/talkback' );
+	$html_message = $tpl->render( $tpl_name, array(
+		'this_name'    => $this_name,
+		'this_comment' => $this_comment,
+		'datetime'     => date( 'D M j, Y, g:i a' )
+
+	) );
+
+	/**
+	 * configure MailMessage
+	 * @var $mailMessege
+	 */
+	$mailMessege = new MailMessage();
+	$mailMessege->setFromAddress( $this_name );
+	$mailMessege->setFromLabel( $this_name );
+	$mailMessege->setToAddress( $administrator_email );
+	$mailMessege->setToAddressLabel( $talkback_to_address_label );
+	$mailMessege->setSubject( $talkback_subject_line );
+	$mailMessege->setMsgHTML( $html_message );
+
+
+	/**
+	 * configure Mailer and send email
+	 * @var $mailer
+	 */
+	$mailer            = new Mailer( $mailMessege );
+	$mailer->Host      = $email_host;
+	$mailer->Port      = $email_port;
+	$mailer->SMTPAuth  = $email_smtp_auth;
+	$mailer->SMTPDebug = $email_smtp_debug;
+
+	$msg = _( "New Comment via Talkback" ) . PHP_EOL;
+	$msg .= "$this_comment" . PHP_EOL;
+	$msg .= _( "From: " ) . $this_name . PHP_EOL;
+	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
+	$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
+
+	/**
+	 * send comment to slack channel talkback
+	 * @var $slackMsg
+	 */
+	$slackMsg = new SlackMessenger();
+	$slackMsg->setChannel( $talkback_slack_channel );
+	$slackMsg->setIcon( $talkback_slack_emoji );
+	$slackMsg->setWebhookurl( $talkback_slack_webhook_url );
+	$slackMsg->setMessage( $msg );
+
+
+	if ( $talkback_use_recaptcha === true && isset($_POST['recaptcha_response']) ) {
+
+		/**
+		 * init ReCaptchaService
+		 * @var $recaptcha_service
+		 */
+		$recaptcha_service = new ReCaptchaService();
+		$recaptcha_service->setServerName( scrubData( $_SERVER['SERVER_NAME'] ) );
+		$recaptcha_service->setRemoteAddr( scrubData( $_SERVER['REMOTE_ADDR'] ) );
+		$recaptcha_service->setAction( 'talkback' );
+		$recaptcha_service->setToken( scrubData( $_POST['recaptcha_response'] ) );
+		$recaptcha_response = $recaptcha_service->verify( $talkback_recaptcha_secret_key );
+
+
+		// Take action based on the score returned:
+		if ( $recaptcha_response->getScore() >= 0.5 ) {
+
+			// If CAPTCHA is successful...
+			$is_robot = false;
+
+		} else {
+			// Not verified - show form error
+			$insertCommentFeedback = $recaptcha_response_fail;
+			$is_robot              = true;
+
+		}
+
+	} else {
+		//no security on this form - it could be a robot but we cannot determine that so send it anyway
+		$is_robot = false;
+	}
+
+	if($is_robot === false) {
+
+		// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
+		if( $talkbackService->sendCommunications(true, $newComment, $talkback_use_email, $mailer, $talkback_use_slack, $slackMsg) ) {
+			$insertCommentFeedback = $insertCommentSuccessFeedback;
+		} else {
+			$insertCommentFeedback = $insertCommentFeedbackFail;
+		}
+	}
+
+}
+
+
+
+/**
+ * Include the header based on the theme used
+ * @global $subjects_theme
+ */
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	include( "includes/header_{$subjects_theme}.php" );
+} else {
+	include( "includes/header.php" );
+}
+
+
+/**
+ * Pass the template parameters to the public view template based on the theme used
+ * @global $subjects_theme
+ * @var $tpl_folder
+ */
+
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	$tpl_folder = "./themes/{$subjects_theme}/views/talkback";
+} else {
+	$tpl_folder = "./views/talkback";
+}
+
+/**
+ *
+ * @var $tpl_name
+ */
+$tpl_name = 'public';
+
+/**
+ *
+ * @var $tpl
+ */
+$tpl = new Template( $tpl_folder );
+echo $tpl->render( $tpl_name, array(
+	'asset_path'                  => $AssetPath,
+	'page_title'                  => $page_title,
+	'page_description'            => $page_description,
+	'page_keywords'               => $page_keywords,
+	'form_action'                 => $form_action,
+	'tb_bonus_css'                => $tb_bonus_css,
+	'comments'                    => $comments,
+	'this_name'                   => $this_name,
+	'this_comment'                => $this_comment,
+	'talkback_show_headshot'      => $talkback_show_headshot,
+	'cat_filters'                 => $cat_filters,
+	'set_filter'                  => $set_filter,
+	'comment_year'                => $comment_year,
+	'comment_header'              => $comment_header,
+	'current_comments_link'       => $current_comments_link,
+	'current_comments_label'      => $current_comments_label,
+	'insertCommentFeedback'       => $insertCommentFeedback,
+	'talkback_use_recaptcha'      => $talkback_use_recaptcha,
+	'talkback_recaptcha_site_key' => $talkback_recaptcha_site_key
+
+));
+
+
+
+/**
+ * Include the footer based on the theme used
+ * @global $subjects_theme
+ */
+if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+	include( "includes/footer_{$subjects_theme}.php" );
+} else {
+	include( "includes/footer.php" );
+}

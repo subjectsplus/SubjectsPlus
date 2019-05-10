@@ -137,7 +137,7 @@ function generatejQuery( $use_jquery ) {
 
 // Always load jQuery core, ui, livequery
 	$myjquery = "<script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js\"></script>\n
-	<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n";
+	<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.livequery.min.js\"></script>\n";
 
 // If there's not an array of values, send 'er back
 	if ( ! is_array( $use_jquery ) ) {
@@ -146,11 +146,11 @@ function generatejQuery( $use_jquery ) {
 
 // Check to see what additional jquery files need to be loaded
 	if ( in_array( "colorbox", $use_jquery ) ) {
-		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.colorbox-min.js\"></script>\n
+		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.colorbox-min.js\"></script>\n
 	<style type=\"text/css\">@import url($AssetPath" . "css/shared/colorbox.css);</style>\n";
 	}
 	if ( in_array( "hover", $use_jquery ) ) {
-		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.hoverIntent.js\"></script>\n";
+		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.hoverIntent.js\"></script>\n";
 	}
 
 	if ( in_array( "ui", $use_jquery ) ) {
@@ -162,15 +162,15 @@ function generatejQuery( $use_jquery ) {
 	}
 
 	if ( in_array( "tablesorter", $use_jquery ) ) {
-		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.tablesorter.js\"></script>\n
-		<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.tablesorter.pager.js\"></script>\n";
+		$myjquery .= "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.tablesorter.js\"></script>\n
+		<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.tablesorter.pager.js\"></script>\n";
 	}
 
 	if ( in_array( "sp_legacy", $use_jquery ) ) {
-		$myjquery = "<script type=\"text/javascript\" src=\"$AssetPath" . "js/jquery.livequery.min.js\"></script>\n
+		$myjquery = "<script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.livequery.min.js\"></script>\n
         <script type=\"text/javascript\" src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js\"></script>\n
       <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/jquery-ui.css\" type=\"text/css\" media=\"all\" />\n
-      <script type=\"text/javascript\" src=\"$AssetPath" . "jquery/jquery.colorbox-min.js\"></script>\n
+      <script type=\"text/javascript\" src=\"$AssetPath" . "jquery/libs/jquery.colorbox-min.js\"></script>\n
       <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/colorbox.css\" type=\"text/css\" />\n";
 	}
 
@@ -501,6 +501,10 @@ function scrubData( $string, $type = "text" ) {
 			}
 			$string = strip_tags( $string );
 			$string = htmlspecialchars( $string, ENT_QUOTES );
+			$config   = HTMLPurifier_Config::createDefault();
+			$config->set('Core.EscapeNonASCIICharacters',true);
+			$purifier = new HTMLPurifier( $config );
+			$string   = $purifier->purify( $string );
 			break;
 		case "richtext":
 // magic quotes test
@@ -835,7 +839,7 @@ function getHeadshot( $email, $pic_size = "medium", $class = "staff_photo", $um_
 	$headshot_path = dirname( dirname( dirname( __FILE__ ) ) ) . "/assets/users/$lib_image/headshot.jpg";
 
 	if ( ! file_exists( $headshot_path ) ) {
-		$headshot_path = dirname( dirname( dirname( __FILE__ ) ) ) . "/assets/images/headshot_large.jpg";
+		$headshot_path = dirname( dirname( dirname( __FILE__ ) ) ) . "/assets/users/$lib_image/headshot_large.jpg";
 	}
 
 	if ( file_exists( $headshot_path ) ) {
@@ -845,6 +849,21 @@ function getHeadshot( $email, $pic_size = "medium", $class = "staff_photo", $um_
 		$um_logo    = "91b8c9ec083c5abc898a5c482aac959e";
 
 		if ( $image_hash == $um_logo && ! $um_theme ) {
+            $headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
+
+            switch ( $pic_size ) {
+                case "small":
+                    $headshot .= " width=\"50\"";
+                    break;
+                case "medium":
+                    $headshot .= " width=\"70\"";
+                    break;
+            }
+
+            $headshot .= " class=\"staff_photo\"  align=\"left\" />";
+
+            // If the image exists and isn't the UM logo return the img html
+            return $headshot;
 		} else {
 
 			$headshot = "<img src=\"" . $AssetPath . "" . "users/$lib_image/headshot.jpg\" alt=\"$email\" title=\"$email\"";
@@ -1110,7 +1129,7 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 function prepareTH( $array ) {
 
 	$th = "
-<table width=\"100%\" class=\"item_listing\">
+<table width=\"100%\" class=\"item_listing other-staff\">
 <tr class=\"pure-g staff-heading\">";
 
 	foreach ( $array as $key => $value ) {
@@ -1124,7 +1143,7 @@ function prepareTH( $array ) {
 
 function prepareTHUM( $array ) {
 	$th = "
-    <table class=\"footable foo1\" data-filter=\"#filter\">
+    <table class=\"footable foo1 other-staff\" data-filter=\"#filter\">
       <thead>
         <tr class=\"staff-heading\">";
 

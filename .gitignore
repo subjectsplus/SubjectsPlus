@@ -148,3 +148,8 @@ nul
 sp4-new.iml
 nul
 /node_modules/
+/lib/PHPMailer/docs/
+/lib/PHPMailer/test/
+/lib/PHPMailer/examples/
+/subjects/talkback-working.php
+/subjects/.htaccess
