@@ -167,7 +167,7 @@ class Guide
     {
 
         $db = new Querier();
-        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  staff_sort";
+        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  ss.staff_guide_order";
 
         $this->_staffers = $db->query($q2);
 
@@ -1340,7 +1340,7 @@ class Guide
         foreach ($de_duped as $value) {
             if (is_numeric($value)) {
                 $db = new Querier;
-                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_sort) VALUES (
+                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_guide_order) VALUES (
 				" . scrubData($value, 'integer') . ",
 				" . scrubData($this->_subject_id, 'integer') . ",
 				" . $i++ . ")";
