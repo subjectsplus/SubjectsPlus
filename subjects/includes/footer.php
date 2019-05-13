@@ -70,6 +70,9 @@ $('.print-img-no-tabs').click(function(){ window.print(); });
 
   //fix FOUC
   $('#tab-container').attr('style', 'visibility:visible;');
+
+  //remove favorites from DOM
+    $(".uml-quick-links").remove();
   
 </script>
 

@@ -94,10 +94,10 @@ if ($check_this) {
 
     // check for description and keywords, which may be blank since they were added v2
     if ($r[0]["description"] != "") {
-        $page_description = $r[0]["description"];
+        $description = $r[0]["description"];
     }
     if ($r[0]["keywords"] != "") {
-        $page_keywords = $r[0]["keywords"];
+        $keywords = $r[0]["keywords"];
     }
 
     $jobj = json_decode($r[0]["extra"]);

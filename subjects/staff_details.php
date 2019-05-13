@@ -80,8 +80,8 @@ $info = "<img src=\"" . $UserPath . "/_$check_this/headshot_large.jpg\" alt=\"Pi
 title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\"  align=\"left\" class=\"staff_photo\" />
 <p style=\"margin-top; 0; padding-top: 0; font-size: larger;\"><strong>$fullname</strong><br />
 {$staffmem[0][3]}<br />
-<img src=\"../assets/images/icons/email.gif\" style=\"vertical-align: bottom;\" />  <a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a><br />
-<img src=\"../assets/images/icons/telephone.gif\" style=\"vertical-align: bottom;\" />  $tel";
+<i class=\"fa fa-envelope\" aria-hidden=\"true\"></i> <a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a><br />
+<i class=\"fa fa-phone\" aria-hidden=\"true\"></i> $tel";
 
 
 $info .= "</p>";

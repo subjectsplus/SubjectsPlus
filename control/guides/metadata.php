@@ -238,11 +238,28 @@ include("../includes/footer.php");
        $(this).parent().parent().remove();
    });
 
+
+     //////////////////
+     // Sort and display parent guide list
+     //////////////////
+     function sortParentGuideList(){
+         var $parentGuideItem = $(".selected_item_wrapper.parentwrapper");
+
+         var $alphaList = $parentGuideItem.sort(function (a, b){
+             return $(a).find(".selected_item").text() > $(b).find(".selected_item").text();
+         });
+         $("#parent_list").html($alphaList);
+     }
+
+     sortParentGuideList();
+
    ///////////////////
    // delete a parent
    ///////////////////
 
-   $(".delete_parent").livequery('click', function() {
+     var deleteParentTrigger = $(".selected_item_wrapper.parentwrapper .selected_item_options i.delete_parent");
+   $(deleteParentTrigger).livequery('click', function() {
+       console.log("ready to delete parent guide");
        $(this).parent().parent().remove();
    });
 
@@ -369,6 +386,7 @@ include("../includes/footer.php");
      // Initialize Parent Guides Dropdown
      //////////////////
      $("select[name='parent_id[]']").select2();
+
 
 
  });

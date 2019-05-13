@@ -23,7 +23,7 @@
                     <a href="https://www.facebook.com/pages/University-of-Miami-Libraries/16409329419" target="_blank" class="no-decoration" title="Facebook"><i class="fab fa-facebook-square"></i></a> <a href="https://twitter.com/UMiamiLibraries" target="_blank" class="no-decoration" title="Twitter"><i class="fab fa-twitter-square"></i></a> <a href="https://www.instagram.com/umiamilibraries/" target="_blank" class="no-decoration" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
                 <div class="supplemental">
-                    <h6>&copy; 2018 | <a href="https://www.library.miami.edu/about/privacy-policy.html"  class="no-decoration">Privacy</a> | <a href="mailto:webmaster.lib@miami.edu" target="_blank" class="no-decoration">Report Site Issue</a> | <a href="https://www.library.miami.edu/about/support-the-libraries.html" class="no-decoration">Make a Gift</a></h6>
+                    <h6>&copy; <?php echo date('Y'); ?> | <a href="https://www.library.miami.edu/about/privacy-policy.html"  class="no-decoration">Privacy</a> | <a href="mailto:webmaster.lib@miami.edu" target="_blank" class="no-decoration">Report Site Issue</a> | <a href="https://www.library.miami.edu/about/support-the-libraries.html" class="no-decoration">Make a Gift</a></h6>
                     <img src="https://www.library.miami.edu/assets/common-images/fdlp-logo.png" alt="Federal Depository Library Program" class="fdlp-logo">
                 </div>
             </div>
