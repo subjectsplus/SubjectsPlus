@@ -167,7 +167,7 @@ class Guide
     {
 
         $db = new Querier();
-        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  staff_guide_order";
+        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  ss.staff_guide_order";
 
         $this->_staffers = $db->query($q2);
 
