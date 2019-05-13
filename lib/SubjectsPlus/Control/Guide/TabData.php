@@ -8,80 +8,98 @@
 
 namespace SubjectsPlus\Control\Guide;
 
+use PDO;
 use SubjectsPlus\Control\Querier;
-
 use SubjectsPlus\Control\Interfaces\OutputInterface;
 
 class TabData implements OutputInterface
 {
 
-    private $db;
+    private $_db;
+	private $_connection;
     public $tab_ids;
+    public $tabs;
+	public $last_insert;
 
     public function __construct(Querier $db) {
-
-        $this->db = $db;
+        $this->_db = $db;
+	    $this->_connection = $this->_db->getConnection();
+	    $this->_connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
     }
 
+	public function create($subject_id, $label, $tab_index, $external_url = null, $visibility) {
+		$this->_connection->beginTransaction();
+		$this->last_insert = null;
 
-    public function loadTabs($status_filter = "", $subject_id = null) {
+		$statement = $this->_connection->prepare("INSERT INTO tab (subject_id, label, tab_index, external_url, visibility) VALUES (:subject_id, :label, :tab_index, :external_url, :visibility)");
 
-        $connection = $this->db->getConnection();
-        switch( $status_filter )
-        {
-            case 'hidden':
-                // Find our existing tabs for this guide that is hidden
-                $statement = $connection->prepare("SELECT DISTINCT tab_id, label, tab_index, external_url, visibility FROM tab WHERE subject_id = :subject_id AND visibility = 0 ORDER BY tab_index");
-                break;
-            case 'public':
-                // Find our existing tabs for this guide that is public
-                $statement = $connection->prepare("SELECT DISTINCT tab_id, label, tab_index, external_url, visibility FROM tab WHERE subject_id = :subject_id AND visibility = 1 ORDER BY tab_index");
-                break;
-            default:
-                // Find ALL our existing tabs for this guide
-                $statement = $connection->prepare("SELECT DISTINCT tab_id, label, tab_index, external_url, visibility FROM tab WHERE subject_id = :subject_id ORDER BY tab_index");
-                break;
-        }
+		$statement->bindParam(':subject_id', $subject_id);
+		$statement->bindParam(':label', $label);
+		$statement->bindParam(':tab_index', $tab_index);
+		$statement->bindParam(':external_url', $external_url);
+		$statement->bindParam(':visibility', $visibility);
 
-        $statement->bindParam(":subject_id", $subject_id);
-        $statement->execute();
-        $tabs = $statement->fetchAll();
+		$statement->execute();
+		$this->last_insert = $this->_connection->lastInsertId();
+		$this->_connection->commit();
 
-        $this->tabs = $tabs;
+		return $this->last_insert;
+	}
 
-    }
+
+	public function loadTabs( $status_filter = "", $subject_id = null ) {
+		switch ( $status_filter ) {
+			case 'hidden':
+				// Find our existing tabs for this guide that is hidden
+				$statement = $this->_connection->prepare( "SELECT DISTINCT tab_id, label, tab_index, external_url, visibility 
+																	FROM tab 
+																	WHERE subject_id = :subject_id 
+																	AND visibility = 0 
+																	ORDER BY tab_index" );
+				break;
+			case 'public':
+				// Find our existing tabs for this guide that is public
+				$statement = $this->_connection->prepare( "SELECT DISTINCT tab_id, label, tab_index, external_url, visibility 
+																	FROM tab 
+																	WHERE subject_id = :subject_id 
+																    AND visibility = 1 
+																	ORDER BY tab_index" );
+				break;
+			default:
+				// Find ALL our existing tabs for this guide
+				$statement = $this->_connection->prepare( "SELECT DISTINCT tab_id, label, tab_index, external_url, visibility 
+																	FROM tab 
+																	WHERE subject_id = :subject_id 
+																	ORDER BY tab_index" );
+				break;
+		}
+
+		$statement->bindParam( ":subject_id", $subject_id );
+		$statement->execute();
+		$tabs = $statement->fetchAll();
+
+		$this->tabs = $tabs;
+	}
 
     public function saveTabOrder($data) {
-
         if(isset($data)) {
-
-            $db = $this->db;
-
             parse_str($data['data'], $str);
 
             $tabs = $str['item'];
-
             foreach($tabs as $key => $value) {
-
-                $q = "UPDATE tab SET tab_index =" . $db->quote(scrubData($key) ). " WHERE tab_id = " . $value;
-                $db->exec($q);
-
+                $q = "UPDATE tab SET tab_index =" . $this->_db->quote(scrubData($key) ). " WHERE tab_id = " . $value;
+	            $this->_db->exec($q);
             }
-
         }
     }
 
 
     public function fetchTabIdsBySubjectId($subject_id) {
-
-        $connection = $this->db->getConnection();
-
-        $statement = $connection->prepare("SELECT tab_id FROM tab WHERE subject_id = :subject_id");
+        $statement = $this->_connection->prepare("SELECT tab_id FROM tab WHERE subject_id = :subject_id");
         $statement->bindParam ( ":subject_id", $subject_id );
         $statement->execute();
         $tab_ids = $statement->fetchAll();
         $this->tab_ids = $tab_ids;
-
     }
 
     public function toArray() {

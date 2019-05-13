@@ -25,14 +25,12 @@ function layout() {
 		},
 		bindUiActions : function() {
 
-			myLayout.activateLayoutButtons();
+			//myLayout.activateLayoutButtons();
 
 		},
 		init : function() {
-
-
 		
-			document.addEventListener("DOMContentLoaded", function() {
+			$(document).ready(function() {
 				myLayout.initialLayout();
 				myLayout.selectedLayout();
 				myLayout.layoutSections();
@@ -238,8 +236,11 @@ function layout() {
 					$('.layout-icon').removeClass('active-layout-icon');
 					$(this).addClass('active-layout-icon');
 
-					myLayout.layoutSection(selectedSection,$(this).data().layout)
-				    $("#save_guide").fadeIn();
+					myLayout.layoutSection(selectedSection,$(this).data().layout);
+				    //$("#save_guide").fadeIn();
+					var save = saveSetup();
+					save.saveGuide();
+					$('#save_guide').fadeOut();
 			    });
 			}
 		}

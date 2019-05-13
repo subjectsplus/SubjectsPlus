@@ -1125,6 +1125,8 @@ table.item_listing {width: 100%;}
 
 .staffpic {min-width:115px;}
 
+.staffpic, .staff-meta {display:inline-block;}
+
 *[id^='bib-'] img, .db_icons img {cursor: pointer;}
 
 .pure-button-topsearch {
@@ -1853,9 +1855,40 @@ img.center-image {
 }
 
 
+.staff-departments,
+.staff-librarians {
+    list-style: none;
+}
 
+.staff-departments li,
+.staff-librarians li {
+    margin-bottom: 15px;
+}
 
+.staff-departments .dept-info {
+    margin-bottom: 15px;
+}
 
+.staff-departments .dept-info i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.staff-departments .staff-pic,
+.staff-departments .staff-meta {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+}
+
+.staff-librarians .staff-info,
+.staff-librarians .staff-subjects,
+.staff-librarians .staffpic,
+.staff-librarians .staff-meta{
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+}
 
 
 
@@ -1871,14 +1904,20 @@ img.center-image {
 }
 
 #filter-guides {width: 80%;}
-    
-    
+
+.staff-departments .staff-pic,
+.staff-departments .staff-meta {
+    display: inline-block;
+    width: auto;
+}
 
 }
 
 
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) {
+
+
     #menu_button {display:none;}
 
     .visible-desktop {display: inline-block;}
@@ -2218,6 +2257,8 @@ table.item_listing th {
     }
 
     #filter-guides {width: 50%;}
+
+
     
 }
 
@@ -2396,3 +2437,4 @@ img.pluslet_card_image {
     color: rgba(255,0,0,1);
     font-size:1.5em;
 }
+
