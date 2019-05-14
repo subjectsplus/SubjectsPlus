@@ -110,6 +110,8 @@ $associated_guides_viewport .= "</div>";
 
 </div>
 
+<script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
+
 <script>
     var gcs = guideCollectionService();
     gcs.init();

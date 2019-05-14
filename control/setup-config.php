@@ -116,6 +116,8 @@ if( file_exists( $lstrConfigFilePath ) && filesize( $lstrConfigFilePath ) > 10 )
 
 						"institution_name" => array( _( "Institution Name" ), _( "Name of your college/university/institution" ), "string", "left-bottom", "medium", "" ,"" ),
 
+                        "institution_code" => array( _( "Institution Code" ), _( "Institution code to create customizations" ), "string", "left-bottom", "medium", "" ,"" ),
+
 						"administrator" => array( _( "Name of Library Administrator" ), _( "Name for SubjectsPlus administrator" ), "string", "left-bottom", "medium", "" , _("This will appear in the footer of SP pages.") ),
 
 						"administrator_email" => array( _( "Library Administrator Email Address" ), _( "Email address for SubjectsPlus administrator" ), "string", "left-bottom", "medium", "" , _("This will appear in footer, and also be used as default email for TalkBack submissions.") ),

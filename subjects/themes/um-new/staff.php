@@ -48,7 +48,7 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
   <li class="dept-heading">Health Sciences Division</li>
   <li>
     <div class="dept-sub">
-        <a href="http://calder.med.miami.edu/">Louis Calder Memorial Library</a>
+        <a href="'.$staff_page_url.'#146">Louis Calder Memorial Library</a>
     </div>
   </li>
   
@@ -64,12 +64,13 @@ $dept_intro = '<ul class="list-unstyled dept-intro">
     </div>
   </li>
   
-   <li class="dept-heading">Learning & Research Services Division</li>
+   <li><a href="'.$staff_page_url.'#147" class="dept-heading">Learning & Research Services Division</a></li>
    <li>
     <div class="dept-sub">
+        <a href="'.$staff_page_url.'#125">Richter Library Learning & Research Services</a>
         <a href="'.$staff_page_url.'#107">Creative Studio</a>
-        <a href="'.$staff_page_url.'#105">Judi Prokop Newman Business Information Resource Center</a>
-        <a href="'.$staff_page_url.'#125">Learning & Research Services</a>
+        <a href="'.$staff_page_url.'#148">Learning Commons</a>
+        <a href="'.$staff_page_url.'#105">Judi Prokop Newman Business Information Resource Center</a>        
         <a href="'.$staff_page_url.'#103">Marta and Austin Weeks Music Library & Technology Center</a>
         <a href="'.$staff_page_url.'#117">Paul Buisson Architecture Library</a>
         <a href="'.$staff_page_url.'#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
@@ -102,7 +103,7 @@ $dept_select = "<select id=\"select_dept\">
   </optgroup>
 
   <optgroup label=\"Health Sciences Division\">
-    <option value=\"http://calder.med.miami.edu/\" data-external=\"http://calder.med.miami.edu\">Louis Calder Memorial Library</option>
+    <option value=\"$staff_page_url#146\" data-external=\"\">Louis Calder Memorial Library</option>
   </optgroup>
 
   <optgroup label=\"Information Systems, Access &amp; Facilities Division\">
@@ -115,10 +116,12 @@ $dept_select = "<select id=\"select_dept\">
     <option value=\"$staff_page_url#129\" data-external=\"\">Systems Support</option>    
   </optgroup>
 
-  <optgroup label=\"Learning & Research Services Division\">    
+  <optgroup label=\"Learning & Research Services Division\">
+    <option value=\"$staff_page_url#147\" data-external=\"\">Learning & Research Services</option> 
+    <option value=\"$staff_page_url#125\" data-external=\"\">Richter Library Learning & Research Services</option>   
     <option value=\"$staff_page_url#107\" data-external=\"\">Creative Studio</option>
-    <option value=\"$staff_page_url#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>
-    <option value=\"$staff_page_url#125\" data-external=\"\">Learning & Research Services</option>
+    <option value=\"$staff_page_url#148\" data-external=\"\">Learning Commons</option>
+    <option value=\"$staff_page_url#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>    
     <option value=\"$staff_page_url#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>
     <option value=\"$staff_page_url#117\" data-external=\"\">Paul Buisson Architecture Library</option>
     <option value=\"$staff_page_url#119\" data-external=\"\">Rosenstiel School of Marine Science & Atmospheric Science Library</option>

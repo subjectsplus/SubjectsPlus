@@ -45,11 +45,21 @@ $all_cattags = array( "Noise", "Resources", "Computers", "Facilities", "Services
 $all_bgs = array("basic", "flocking", "metamorphosis", "nasa");
 
 
-$talkback_recaptcha_site_key = "";
+// Talkback options
+$talkback_show_headshot    = "";
+$talkback_use_email        = "";
+$talkback_to_address_label = "";
+$talkback_subject_line     = "";
+
+
+$talkback_use_recaptcha        = "";
+$talkback_recaptcha_site_key   = "";
 $talkback_recaptcha_secret_key = "";
+
+$talkback_use_slack         = "";
 $talkback_slack_webhook_url = "";
-$talkback_slack_channel = "";
-$talkback_slack_emoji = "";
+$talkback_slack_channel     = "";
+$talkback_slack_emoji       = "";
 
 
 // This array contains the list of columns that should be omitted in the user forms
@@ -118,6 +128,15 @@ $institution_name = "";
 
 /* Code used to create customizations */
 $institution_code = "";
+
+$email_smtp_debug = "";
+$email_host       = "";
+$email_port       = "";
+$email_smtp_auth  = "";
+$email_username   = "";
+$email_password   = "";
+
+
 
 /* Name/email address for SubjectsPlus administrator */
 $administrator = "Library Webmaster";
