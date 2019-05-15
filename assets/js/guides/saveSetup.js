@@ -596,89 +596,9 @@ function saveSetup() {
 
                 });
 
-                //     $.ajax()
-                //         .done(function(data) {
-                //
-                //             console.log('autosave start');
-                //             $( "#autosave-spinner" ).show();
-                //
-                //         })
-                //         .done(function (data) {
-                //             mySaveSetup.refreshFeeds();
-                //             var g = guide();
-                //             favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                //             favoriteBox().markAsFavorite();
-                //             console.log('refreshFeeds');
-                //         })
-                //         .done(function (data) {
-                //             copyClone().markAsLinked();
-                //             console.log('markAsLinked');
-                //
-                //         })
-                //         .done(function (data) {
-                //             mySaveSetup.updateTabIds();
-                //             console.log('updateTabIds');
-                //
-                //         })
-                //         .done(function (data) {
-                //             mySaveSetup.updateSectionIds();
-                //             console.log('updateSectionIds');
-                //
-                //         })
-                //         .done(function (data) {
-                //             console.log('autosave stop');
-                //             $( "#autosave-spinner" ).hide();
-                //         });
-                //
-                //
-                //
-                // });
 
 
-            // var jqXr = $.ajax({
-            //     url: "helpers/save_guide.php",
-            //     method: "GET",
-            //     data: {
-            //         this_subject_id: $('#guide-parent-wrap').data().subjectId,
-            //         user_name: $('#guide-parent-wrap').data().staffId,
-            //         tabs: lstrTabs
-            //     }
-            //
-            // });
-            //
-            // jqXr
-            //     .done(function(data) {
-            //
-            //         console.log('autosave stop');
-            //         $( "#autosave-spinner" ).show();
-            //
-            //     })
-            //     .done(function (data) {
-            //         mySaveSetup.refreshFeeds();
-            //         var g = guide();
-            //         favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-            //         favoriteBox().markAsFavorite();
-            //         console.log('refreshFeeds');
-            //     })
-            //     .done(function (data) {
-            //         copyClone().markAsLinked();
-            //         console.log('markAsLinked');
-            //
-            //     })
-            //     .done(function (data) {
-            //         mySaveSetup.updateTabIds();
-            //         console.log('updateTabIds');
-            //
-            //     })
-            //     .done(function (data) {
-            //         mySaveSetup.updateSectionIds();
-            //         console.log('updateSectionIds');
-            //
-            //     })
-            //     .done(function (data) {
-            //         console.log('autosave start');
-            //         $( "#autosave-spinner" ).hide();
-            //     });
+
 
 
 
