@@ -34,6 +34,7 @@ function saveSetup() {
         init: function () {
             mySaveSetup.setupSaveButton('#save_guide');
 
+
         },
 
         setupSaveButton: function (lstrSelector) {
@@ -457,7 +458,6 @@ function saveSetup() {
         },
         saveGuide: function () {
 
-
             var staff_id = $('#guide-parent-wrap').data.staffId;
             var subject_id = $('#guide-parent-wrap').data.SubjectId;
 
@@ -596,6 +596,92 @@ function saveSetup() {
 
                 });
 
+                //     $.ajax()
+                //         .done(function(data) {
+                //
+                //             console.log('autosave start');
+                //             $( "#autosave-spinner" ).show();
+                //
+                //         })
+                //         .done(function (data) {
+                //             mySaveSetup.refreshFeeds();
+                //             var g = guide();
+                //             favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+                //             favoriteBox().markAsFavorite();
+                //             console.log('refreshFeeds');
+                //         })
+                //         .done(function (data) {
+                //             copyClone().markAsLinked();
+                //             console.log('markAsLinked');
+                //
+                //         })
+                //         .done(function (data) {
+                //             mySaveSetup.updateTabIds();
+                //             console.log('updateTabIds');
+                //
+                //         })
+                //         .done(function (data) {
+                //             mySaveSetup.updateSectionIds();
+                //             console.log('updateSectionIds');
+                //
+                //         })
+                //         .done(function (data) {
+                //             console.log('autosave stop');
+                //             $( "#autosave-spinner" ).hide();
+                //         });
+                //
+                //
+                //
+                // });
+
+
+            // var jqXr = $.ajax({
+            //     url: "helpers/save_guide.php",
+            //     method: "GET",
+            //     data: {
+            //         this_subject_id: $('#guide-parent-wrap').data().subjectId,
+            //         user_name: $('#guide-parent-wrap').data().staffId,
+            //         tabs: lstrTabs
+            //     }
+            //
+            // });
+            //
+            // jqXr
+            //     .done(function(data) {
+            //
+            //         console.log('autosave stop');
+            //         $( "#autosave-spinner" ).show();
+            //
+            //     })
+            //     .done(function (data) {
+            //         mySaveSetup.refreshFeeds();
+            //         var g = guide();
+            //         favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+            //         favoriteBox().markAsFavorite();
+            //         console.log('refreshFeeds');
+            //     })
+            //     .done(function (data) {
+            //         copyClone().markAsLinked();
+            //         console.log('markAsLinked');
+            //
+            //     })
+            //     .done(function (data) {
+            //         mySaveSetup.updateTabIds();
+            //         console.log('updateTabIds');
+            //
+            //     })
+            //     .done(function (data) {
+            //         mySaveSetup.updateSectionIds();
+            //         console.log('updateSectionIds');
+            //
+            //     })
+            //     .done(function (data) {
+            //         console.log('autosave start');
+            //         $( "#autosave-spinner" ).hide();
+            //     });
+
+
+
             var containers = $(".booklist-content");
             $.each(containers, function () {
                 var container = this;
@@ -621,6 +707,8 @@ function saveSetup() {
                 }
             });
 
+
+            //$( "#autosave-spinner" ).hide();
 
         },
 
@@ -662,6 +750,10 @@ function saveSetup() {
                 'subject_id': subjectId,
             };
 
+            console.log('autosave start');
+            $( "#autosave-spinner" ).show();
+
+
             $.ajax({
                 url: mySaveSetup.settings.fetchTabIdsUrl,
                 type: "GET",
@@ -688,6 +780,9 @@ function saveSetup() {
                     mySaveSetup.getTabIds();
 
                 }
+            }).done(function () {
+                console.log('autosave stop');
+                $( "#autosave-spinner" ).hide();
             });
 
         },
@@ -700,6 +795,9 @@ function saveSetup() {
             var payload = {
                 'subject_id': subjectId,
             };
+
+            console.log('autosave start');
+            $( "#autosave-spinner" ).show();
 
             $.ajax({
                 url: mySaveSetup.settings.fetchSectionIdsUrl,
@@ -728,6 +826,9 @@ function saveSetup() {
 
                     mySaveSetup.getSectionIds();
                 }
+            }).done(function () {
+                console.log('autosave stop');
+                $( "#autosave-spinner" ).hide();
             });
 
         },
@@ -751,5 +852,9 @@ function saveSetup() {
 
         }
     };
+
+
+
+
     return mySaveSetup;
 }
