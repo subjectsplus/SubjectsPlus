@@ -34,6 +34,7 @@ function saveSetup() {
         init: function () {
             mySaveSetup.setupSaveButton('#save_guide');
 
+
         },
 
         setupSaveButton: function (lstrSelector) {
@@ -457,7 +458,6 @@ function saveSetup() {
         },
         saveGuide: function () {
 
-
             var staff_id = $('#guide-parent-wrap').data.staffId;
             var subject_id = $('#guide-parent-wrap').data.SubjectId;
 
@@ -596,6 +596,12 @@ function saveSetup() {
 
                 });
 
+
+
+
+
+
+
             var containers = $(".booklist-content");
             $.each(containers, function () {
                 var container = this;
@@ -621,6 +627,8 @@ function saveSetup() {
                 }
             });
 
+
+            //$( "#autosave-spinner" ).hide();
 
         },
 
@@ -662,6 +670,10 @@ function saveSetup() {
                 'subject_id': subjectId,
             };
 
+            console.log('autosave start');
+            $( "#autosave-spinner" ).show();
+
+
             $.ajax({
                 url: mySaveSetup.settings.fetchTabIdsUrl,
                 type: "GET",
@@ -688,6 +700,9 @@ function saveSetup() {
                     mySaveSetup.getTabIds();
 
                 }
+            }).done(function () {
+                console.log('autosave stop');
+                $( "#autosave-spinner" ).hide();
             });
 
         },
@@ -700,6 +715,9 @@ function saveSetup() {
             var payload = {
                 'subject_id': subjectId,
             };
+
+            console.log('autosave start');
+            $( "#autosave-spinner" ).show();
 
             $.ajax({
                 url: mySaveSetup.settings.fetchSectionIdsUrl,
@@ -728,6 +746,9 @@ function saveSetup() {
 
                     mySaveSetup.getSectionIds();
                 }
+            }).done(function () {
+                console.log('autosave stop');
+                $( "#autosave-spinner" ).hide();
             });
 
         },
@@ -751,5 +772,9 @@ function saveSetup() {
 
         }
     };
+
+
+
+
     return mySaveSetup;
 }
