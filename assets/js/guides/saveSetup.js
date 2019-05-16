@@ -459,6 +459,7 @@ function saveSetup() {
         saveGuide: function () {
 
             $("#autosave-spinner").show();
+            console.log('saveGuide start');
 
             var staff_id = $('#guide-parent-wrap').data.staffId;
             var subject_id = $('#guide-parent-wrap').data.SubjectId;
@@ -739,7 +740,7 @@ function saveSetup() {
                     mySaveSetup.getSectionIds();
                 }
             }).done(function () {
-                console.log('autosave stop');
+                console.log('updateSectionIds stop');
                 $( "#autosave-spinner" ).hide();
             });
 

@@ -42,8 +42,16 @@ class SectionService implements OutputInterface {
 		$this->_connection->commit();
 
 		return $this->last_insert;
+	}
 
 
+	public function updateSectionLayout($section_id, $layout) {
+		$this->_connection->beginTransaction();
+		$statement = $this->_connection->prepare("UPDATE section SET layout = :layout WHERE section_id = :section_id");
+		$statement->bindParam(':section_id', $section_id);
+		$statement->bindParam(':layout', $layout);
+		$statement->execute();
+		return $this->_connection->commit();
 	}
 
 	public function fetchSectionIdsBySubjectId( $subject_id ) {
