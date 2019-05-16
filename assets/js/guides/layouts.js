@@ -18,7 +18,8 @@ function layout() {
 			threeColumnButton : $('#col-triple'),
 			eightFourColumnButton : $('#col-84'),
 			bigMiddleThreeColumnButton : $('#col-363'),
-			sectionDataUrl : 'helpers/section_data.php'
+			sectionDataUrl : 'helpers/section_data.php',
+			updateSectionLayoutUrl : 'helpers/update_section_layout.php'
 		},
 		strings : {
 
@@ -26,6 +27,7 @@ function layout() {
 		bindUiActions : function() {
 
 			//myLayout.activateLayoutButtons();
+			myLayout.updateSectionLayout();
 
 		},
 		init : function() {
@@ -238,12 +240,44 @@ function layout() {
 
 					myLayout.layoutSection(selectedSection,$(this).data().layout);
 				    //$("#save_guide").fadeIn();
-					var save = saveSetup();
-					save.saveGuide();
-					$('#save_guide').fadeOut();
+					//var save = saveSetup();
+					//save.saveGuide();
+					//$('#save_guide').fadeOut();
+					//myLayout.updateSectionLayout();
 			    });
 			}
+		},
+
+
+		updateSectionLayout : function () {
+			$('.layout-icon').on('click', function () {
+
+				$('#autosave-spinner').show();
+
+				var section_id = $(".section_selected_area").attr('id').split('section_')[1];
+				var layout_id = "#" + $(".active-layout-icon").attr('id');
+
+				for (var k in myLayout.layouts) {
+					if (layout_id === myLayout.layouts[k].selector) {
+						var layout = k;
+						var payload = {
+							'section_id': section_id,
+							'layout': layout
+						};
+
+						$.ajax({
+							url: myLayout.settings.updateSectionLayoutUrl,
+							type: "GET",
+							data: payload,
+						}).always(function () {
+							$("#section_" + section_id).attr('data-layout', layout);
+							$('#autosave-spinner').hide();
+						});
+					}
+				}
+			});
 		}
-	}
+
+	};
 	return myLayout;
-};
+}
