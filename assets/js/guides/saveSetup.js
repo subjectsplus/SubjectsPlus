@@ -34,6 +34,7 @@ function saveSetup() {
         init: function () {
             mySaveSetup.setupSaveButton('#save_guide');
 
+
         },
 
         setupSaveButton: function (lstrSelector) {
@@ -457,6 +458,8 @@ function saveSetup() {
         },
         saveGuide: function () {
 
+            $("#autosave-spinner").show();
+            console.log('saveGuide start');
 
             var staff_id = $('#guide-parent-wrap').data.staffId;
             var subject_id = $('#guide-parent-wrap').data.SubjectId;
@@ -573,9 +576,9 @@ function saveSetup() {
             });
 
             lstrTabs = JSON.stringify(lobjTabs);
-            console.log(lstrTabs);
-            mySaveSetup.getTabIds();
-            mySaveSetup.getSectionIds();
+            //console.log(lstrTabs);
+            //mySaveSetup.getTabIds();
+            //mySaveSetup.getSectionIds();
             $("#response").load("helpers/save_guide.php", {
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
@@ -583,7 +586,7 @@ function saveSetup() {
                 },
                 function () {
 
-                    //$("#response").fadeIn().delay(4000).fadeOut();
+
                     mySaveSetup.refreshFeeds();
 
                     var g = guide();
@@ -594,7 +597,11 @@ function saveSetup() {
                     mySaveSetup.updateTabIds();
                     mySaveSetup.updateSectionIds();
 
+
+
                 });
+
+
 
             var containers = $(".booklist-content");
             $.each(containers, function () {
@@ -621,6 +628,8 @@ function saveSetup() {
                 }
             });
 
+
+            //$( "#autosave-spinner" ).hide();
 
         },
 
@@ -681,11 +690,11 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         if ($.isNumeric($(obj).attr('id'))) {
                             var newId = $(newIds).get(index - 1);
-                            console.log( $(obj).attr('id', newId) );
+                            //console.log( $(obj).attr('id', newId) );
                         }
                     });
 
-                    mySaveSetup.getTabIds();
+                    //mySaveSetup.getTabIds();
 
                 }
             });
@@ -700,6 +709,8 @@ function saveSetup() {
             var payload = {
                 'subject_id': subjectId,
             };
+
+
 
             $.ajax({
                 url: mySaveSetup.settings.fetchSectionIdsUrl,
@@ -722,12 +733,15 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
                         var newId = "section_" + $(newIds).get(index);
-                        console.log( $(obj).attr('id', newId) );
+                        //console.log( $(obj).attr('id', newId) );
 
                     });
 
-                    mySaveSetup.getSectionIds();
+                    //mySaveSetup.getSectionIds();
                 }
+            }).done(function () {
+                console.log('updateSectionIds stop');
+                $( "#autosave-spinner" ).hide();
             });
 
         },
@@ -751,5 +765,9 @@ function saveSetup() {
 
         }
     };
+
+
+
+
     return mySaveSetup;
 }
