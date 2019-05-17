@@ -576,9 +576,9 @@ function saveSetup() {
             });
 
             lstrTabs = JSON.stringify(lobjTabs);
-            console.log(lstrTabs);
-            mySaveSetup.getTabIds();
-            mySaveSetup.getSectionIds();
+            //console.log(lstrTabs);
+            //mySaveSetup.getTabIds();
+            //mySaveSetup.getSectionIds();
             $("#response").load("helpers/save_guide.php", {
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
@@ -690,11 +690,11 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         if ($.isNumeric($(obj).attr('id'))) {
                             var newId = $(newIds).get(index - 1);
-                            console.log( $(obj).attr('id', newId) );
+                            //console.log( $(obj).attr('id', newId) );
                         }
                     });
 
-                    mySaveSetup.getTabIds();
+                    //mySaveSetup.getTabIds();
 
                 }
             });
@@ -733,11 +733,11 @@ function saveSetup() {
                     $.each(items, function (index, obj) {
                         //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
                         var newId = "section_" + $(newIds).get(index);
-                        console.log( $(obj).attr('id', newId) );
+                        //console.log( $(obj).attr('id', newId) );
 
                     });
 
-                    mySaveSetup.getSectionIds();
+                    //mySaveSetup.getSectionIds();
                 }
             }).done(function () {
                 console.log('updateSectionIds stop');
