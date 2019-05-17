@@ -1,0 +1,3 @@
+[submodule "subjects/themes/um-new"]
+	path = subjects/themes/um-new
+	url = https://cgb37@bitbucket.org/umiamiwet/um-new.git
