@@ -173,7 +173,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/index.html">Music Library</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/browsing-guide.html">Score Browsing Guide</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/musicscores">Score Browsing Guide</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/streamingaudioreserves.html">Streaming Music</a></li>
 
