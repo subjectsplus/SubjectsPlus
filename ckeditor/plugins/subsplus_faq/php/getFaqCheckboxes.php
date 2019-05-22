@@ -8,6 +8,26 @@ include_once('../../../../control/includes/autoloader.php');
 
 use SubjectsPlus\Control\Querier;
 
+
+
+//added because without this check a security hole is open
+if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
+	isCool($_SERVER['mail'],"", true);
+} else {
+	session_start();
+}
+
+if( !isset($sessionCheck) || $sessionCheck != 'no' )
+{
+	$sessionCheck = checkSession();
+	if ($sessionCheck == "failure" ) {
+		exit();
+	}
+}
+
+
+
+
 //print out custom style for oddrow class
 print "<style type=\"text/css\">
 .oddrow {

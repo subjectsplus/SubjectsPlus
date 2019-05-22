@@ -8,6 +8,22 @@ include_once('../../../../control/includes/autoloader.php');
 
 use \SubjectsPlus\Control\Querier;
 
+
+//added because without this check a security hole is open
+if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
+	isCool($_SERVER['mail'],"", true);
+} else {
+	session_start();
+}
+
+if( !isset($sessionCheck) || $sessionCheck != 'no' )
+{
+	$sessionCheck = checkSession();
+	if ($sessionCheck == "failure" ) {
+		exit();
+	}
+}
+
 //only do something if the search_terms is activated
 if (isset($_POST["search_terms"]))
 {
