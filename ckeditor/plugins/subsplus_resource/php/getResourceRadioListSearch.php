@@ -8,31 +8,48 @@ include_once('../../../../control/includes/autoloader.php');
 
 use \SubjectsPlus\Control\Querier;
 
+
+//added because without this check a security hole is open
+if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
+	isCool($_SERVER['mail'],"", true);
+} else {
+	session_start();
+}
+
+if( !isset($sessionCheck) || $sessionCheck != 'no' )
+{
+	$sessionCheck = checkSession();
+	if ($sessionCheck == "failure" ) {
+		exit();
+	}
+}
+
 //only do something if the search_terms is activated
 if (isset($_POST["search_terms"]))
 {
 	//initiate Querier
 	$db = new Querier();
+	$connection = $db->getConnection();
 
 	$content = '<strong>Results</strong><br />';
 
 	if (get_magic_quotes_gpc()) {
-		$searcher = $_POST["search_terms"];
+		$searcher = scrubData($_POST["search_terms"]);
 	} else {
-		$searcher = addslashes($_POST["search_terms"]);
+		$searcher = addslashes(scrubData($_POST["search_terms"]));
 	}
 
-	// Connect to database
-	try {
-			} catch (Exception $e) {
-		echo $e;
-	}
-
-	//create query to search terms
-	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $searcher . "%' ORDER BY title";
-
-	//query results
-	$r = $db->query($q);
+	$searcher = "%".$searcher."%";
+	$statement  = $connection->prepare( "SELECT title_id, title FROM title WHERE title LIKE :searcher ORDER BY title");
+	$statement->bindParam( ":searcher", $searcher );
+	$statement->execute();
+	$r = $statement->fetchAll();
+//
+//	//create query to search terms
+//	$q = "SELECT title_id, title FROM title WHERE title LIKE '%" . $searcher . "%' ORDER BY title";
+//
+//	//query results
+//	$r = $db->query($q);
 
 	//total returned rows
 	$total_items = count($r);
