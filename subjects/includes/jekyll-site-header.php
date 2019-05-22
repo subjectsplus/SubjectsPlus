@@ -479,6 +479,8 @@
 
                                             <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
 
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-exploratory.html">Faculty Exploratory</a></li>
+
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-reading-room.html">Faculty Reading Room</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
@@ -490,8 +492,6 @@
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/music-study">Music Library Rooms</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
 
                                         </ul>
 
