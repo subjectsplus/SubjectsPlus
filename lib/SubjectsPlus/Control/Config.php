@@ -381,20 +381,25 @@ class Config {
 		$lstrRightBottomHTML = '';
 
 		// init new vars
-		$section_guide         = "";
-		$section_user          = "";
-		$section_auth          = "";
-		$section_video         = "";
-		$section_talkback      = "";
-		$section_record        = "";
-		$section_api           = "";
-		$section_appearance    = "";
-		$section_core_tech     = "";
-		$section_core_metadata = "";
-		$section_mysql         = "";
-		$section_catalog       = "";
-		$section_primo         = "";
+		$section_guide              = "";
+		$section_user               = "";
+		$section_auth               = "";
+		$section_video              = "";
+		$section_record             = "";
+		$section_api                = "";
+		$section_appearance         = "";
+		$section_core_tech          = "";
+		$section_core_metadata      = "";
+		$section_mysql              = "";
+		$section_catalog            = "";
+		$section_primo              = "";
+		$section_email_server       = "";
+		$section_talkback           = "";
+		$section_talkback_email     = "";
+		$section_talkback_recaptcha = "";
+        $section_talkback_slack     = "";
 
+;
 		//go through all options
 		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
 			//span containing input label
@@ -558,6 +563,15 @@ class Config {
 				case "talkback":
 					$section_talkback .= $lstrHTML;
 					break;
+				case "talkback_email":
+					$section_talkback_email .= $lstrHTML;
+					break;
+				case "talkback_recaptcha":
+					$section_talkback_recaptcha .= $lstrHTML;
+					break;
+				case "talkback_slack":
+					$section_talkback_slack .= $lstrHTML;
+					break;
 				case "record":
 					$section_record .= $lstrHTML;
 					break;
@@ -582,6 +596,9 @@ class Config {
 				case "primo":
 					$section_primo .= $lstrHTML;
 					break;
+				case "email":
+					$section_email_server .= $lstrHTML;
+					break;
 			}
 
 		}
@@ -601,6 +618,7 @@ class Config {
                                     <li><a href="#tabs-talkback"><?php print _( "Talkback/Video" ); ?></a></li>
                                     <li><a href="#tabs-api"><?php print _( "API" ); ?></a></li>
                                     <li><a href="#tabs-server"><?php print _( "Server" ); ?></a></li>
+                                    <li><a href="#tabs-email"><?php print _( "Email" ); ?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -782,7 +800,33 @@ class Config {
 									<?php print $section_talkback; ?>
                                 </div>
                             </div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Talkback Email Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_talkback_email; ?>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Talkback Recaptcha Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+									<?php print $section_talkback_recaptcha; ?>
+                                </div>
+                            </div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Talkback Slack Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_talkback_slack; ?>
+                                </div>
+                            </div>
                         </div>
                         <div class="pure-u-1 pure-u-md-1-3">
                             <div class="pluslet">
@@ -790,13 +834,25 @@ class Config {
                                     <div class="titlebar_text"><?php print _( "Video Settings" ); ?></div>
                                 </div>
                                 <div class="pluslet_body">
-									<?php print $section_video; ?>
+			                        <?php print $section_video; ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="pure-u-1 pure-u-md-1-3">
+                    </div>
+
+                    <div id="tabs-email">
+                        <div class="pure-u-1 pure-u-md-1-1">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Email Server Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+					                <?php print $section_email_server; ?>
+                                </div>
+                            </div>
 
                         </div>
+
                     </div>
 
                 </div>

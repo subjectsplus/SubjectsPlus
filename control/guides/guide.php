@@ -291,6 +291,9 @@ ob_end_flush ();
 	<!-- Feedback -->
 	<div id="response"></div>
 
+    <div id="autosave-spinner">
+        <div class="loading"></div>
+    </div>
 
 	<!-- new tab form (suppressed until tab gears clicked) -->
 	<div id="dialog" title="Tab data">
@@ -555,6 +558,9 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
         });
 
     });
+
+
+
 
 </script>
 

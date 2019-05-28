@@ -108,7 +108,7 @@ class Installer
 					  KEY `INDEXSEARCHsubject` (`subject`,`shortform`,`description`,`keywords`)
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `pluslet` (
-					  `pluslet_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `pluslet_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `title` varchar(100) NOT NULL DEFAULT '',
 					  `body` longtext NOT NULL,
 					  `local_file` varchar(100) DEFAULT NULL,
@@ -171,7 +171,7 @@ class Installer
 					  CONSTRAINT `fk_rank_title_id` FOREIGN KEY (`title_id`) REFERENCES `title` (`title_id`) ON DELETE CASCADE ON UPDATE CASCADE
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `tab` (
-					  `tab_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `tab_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `subject_id` bigint(20) NOT NULL DEFAULT '0',
 					  `label` varchar(120) NOT NULL DEFAULT 'Main',
 					  `tab_index` int(11) NOT NULL DEFAULT '0',
@@ -253,10 +253,10 @@ class Installer
 					  CONSTRAINT `fk_talkback_staff_id` FOREIGN KEY (`a_from`) REFERENCES `staff` (`staff_id`) ON DELETE SET NULL ON UPDATE SET NULL
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `section` (
-					  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+					  `section_id` bigint(20) NOT NULL AUTO_INCREMENT,
 					  `section_index` int(11) NOT NULL DEFAULT '0',
 					  `layout` varchar(255) NOT NULL DEFAULT '4-4-4',
-					  `tab_id` int(11) NOT NULL,
+					  `tab_id` bigint(20) NOT NULL,
 					  PRIMARY KEY (`section_id`),
 					  KEY `fk_section_tab_idx` (`tab_id`),
 					  CONSTRAINT `fk_section_tab` FOREIGN KEY (`tab_id`) REFERENCES `tab` (`tab_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -335,8 +335,8 @@ class Installer
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8",
 					"CREATE TABLE `pluslet_section` (
 					  `pluslet_section_id` int(11) NOT NULL AUTO_INCREMENT,
-					  `pluslet_id` int(11) NOT NULL DEFAULT '0',
-					  `section_id` int(11) NOT NULL,
+					  `pluslet_id` bigint(20) NOT NULL DEFAULT '0',
+					  `section_id` bigint(20) NOT NULL,
 					  `pcolumn` int(11) NOT NULL,
 					  `prow` int(11) NOT NULL,
 					  PRIMARY KEY (`pluslet_section_id`),
@@ -374,7 +374,7 @@ class Installer
 				"CREATE TABLE IF NOT EXISTS `collection_subject` (
 						`collection_subject_id` int(11) NOT NULL AUTO_INCREMENT,
 						`collection_id` int(11) NOT NULL,
-						`subject_id` int(11) NOT NULL,
+						`subject_id` bigint(20) NOT NULL,
 						`sort` int(11) NOT NULL,
 						PRIMARY KEY (`collection_subject_id`)
 				) ENGINE=InnoDB  DEFAULT CHARSET=utf8",
@@ -576,13 +576,8 @@ class Installer
 		//get rewrite base
 		$lstrRewriteBase = getRewriteBase();
 
-		//get root to subjectsplus path
-		$lstrRootPath = dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR;
-
-		//all htaccess files needing to update
-		$lobjFiles = array( $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess',
-						 	$lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess'
-						 );
+		//rename htaccess-default files needing to update
+		$lobjFiles = $this->rewriteHtaccessFilenames();
 
 		//go through each path and replace existing rewrite base with new rewrite base
 		foreach( $lobjFiles as $lstrPath )
@@ -614,6 +609,32 @@ class Installer
 
 		return TRUE;
 	}
-}
 
-?>
+	/**
+     * Rename subjects/.htaccess-default to .htaccess and api/.htaccess-default to .htaccess
+     * .htaccess files were added to .gitignore on 5-10-19
+	 * @return array
+	 */
+	private function rewriteHtaccessFilenames() {
+
+		//get root to subjectsplus path
+		$lstrRootPath = dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR;
+
+		if( (file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
+			$subjectsHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess');
+        } else {
+			$subjectsHtaccess = $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess';
+
+        }
+
+		if( (file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
+			$apiHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess');
+		} else {
+			$apiHtaccess = $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess';
+
+		}
+
+		return array( $subjectsHtaccess, $apiHtaccess);
+    }
+
+}
