@@ -5,6 +5,23 @@ include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
 include_once('../../../../control/includes/autoloader.php');
 
+
+
+//added because without this check a security hole is open
+if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
+	isCool($_SERVER['mail'],"", true);
+} else {
+	session_start();
+}
+
+if( !isset($sessionCheck) || $sessionCheck != 'no' )
+{
+	$sessionCheck = checkSession();
+	if ($sessionCheck == "failure" ) {
+		exit();
+	}
+}
+
 /**
  * getUserPath() - checks to see if session exists and then extracts username
  * 					and returns user path.
@@ -96,4 +113,3 @@ $lstrRadioButtonsHTML = getRadioButtons($lstrUserPath);
 
 //echo out radio buttons list
 echo $lstrRadioButtonsHTML;
-?>

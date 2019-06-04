@@ -1,5 +1,5 @@
 <?php
-die("Disabled!");
+
 use SubjectsPlus\Control\Querier;
 
 //include subjectsplus config and functions files
