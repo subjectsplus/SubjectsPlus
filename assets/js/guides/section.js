@@ -30,7 +30,8 @@ function section() {
 				mySection.bindUiActions();
 
 				// Click the first section after everything has loaded.
-			    mySection.clickInitialSection();
+			    mySection.highlightFirstSectionControls();
+
 		    });
 			
 		},
@@ -46,14 +47,26 @@ function section() {
 		viewSectionControls : function() {
 			$('.sptab').each(function () {
 				if ($(this).children().size() > 1) {
-					//console.log("More than one?");
+					console.log("More than one section?");
 					$(this).children().find('.sp_section_controls').show();
 					$(this).children().find('.section_remove').hide();
 				} else {
-					$(this).children().find('.sp_section_controls').hide();
-					$(this).find('.sp_section').removeClass('section_selected_area');
+					console.log("Only one section?");
+					//$(this).children().find('.sp_section_controls').hide();
+					//$(this).find('.sp_section').removeClass('section_selected_area');
+
 				}
 			});
+		},
+		highlightFirstSectionControls : function () {
+			var current_tab_index = $("#tabs").tabs('option', 'active');
+			console.log('current_tab_index section object: ' + current_tab_index);
+
+			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
+			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+			$('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
+			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+
 		},
 		makeAddSection : function(lstrSelector) {
 
@@ -206,10 +219,6 @@ function section() {
 
 			});
 		},
-		clickInitialSection : function() {
-			// Click the first section to mark it as active 
-			$('.sp_section_controls').first().trigger('click');
-		},
 
 		clickTabOnSwitch : function () {
 			$('.ui-tabs-nav > li.child-tab').on('click', function() {
@@ -244,8 +253,6 @@ function section() {
 
 					}
 				});
-
-
 			});
 		},
 

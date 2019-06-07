@@ -191,7 +191,8 @@ if (count($all_tabs) > 1) {
 }
 
 // Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title . "\" />";
+$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title .
+    "\" aria-hidden=\"true\" alt=\"\" />";
 
 print $tracking_image;
 print $social_and_search;
