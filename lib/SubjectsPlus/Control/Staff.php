@@ -86,7 +86,7 @@ class Staff {
 				}
 
 				$this->_ptags  = $_POST["ptags"];
-				$this->_active = $_POST["active"];
+				$this->_active = isset($_POST["active"]) && !empty($_POST["active"]) ? $_POST["active"] : 0;
 				$this->_bio    = $_POST["bio"];
 
 				// new for UM
@@ -94,7 +94,7 @@ class Staff {
 				$this->_job_classification         = $_POST["job_classification"];
 				$this->_job_classification         = $_POST["job_classification"];
 				$this->_room_number                = $_POST["room_number"];
-				$this->_supervisor_id              = $_POST["supervisor_id"];
+				$this->_supervisor_id              = isset($_POST["supervisor_id"]) && !empty($_POST["supervisor_id"]) ? $_POST["supervisor_id"] : "-1";
 				$this->_emergency_contact_name     = $stats_encryption_enabled ? !empty($_POST["emergency_contact_name"]) ? encryptIt( scrubData( $_POST["emergency_contact_name"] ) ) : "" : scrubData( $_POST["emergency_contact_name"] );
 				$this->_emergency_contact_relation = $stats_encryption_enabled ? !empty($_POST["emergency_contact_relation"]) ? encryptIt( scrubData( $_POST["emergency_contact_relation"] ) ) : "" : scrubData( $_POST["emergency_contact_relation"] );
 				$this->_emergency_contact_phone    = $stats_encryption_enabled ? !empty($_POST["emergency_contact_phone"]) ? encryptIt( scrubData( $_POST["emergency_contact_phone"] ) ) : "" : scrubData( $_POST["emergency_contact_phone"] );
@@ -274,7 +274,7 @@ class Staff {
 		$deptArray   = $querierDept->query( $qDept );
 
 		// create department dropdown
-		$deptMe             = new  Dropdown( "department_id[]", $deptArray, $this->_department_id, "", "", "", "multi" );
+		$deptMe             = new  Dropdown( "department_id[]", $deptArray, $this->_department_id, "", "", "", "multi", $required = true );
 		$this->_departments = $deptMe->display();
 
 		///////////////
@@ -310,7 +310,7 @@ class Staff {
 		);
 
 		// create type dropdown
-		$activateMe           = new  Dropdown( "active", $activeArray, $this->_active );
+		$activateMe           = new  Dropdown( "active", $activeArray, isset($this->_active) && !empty($this->_active) ? $this->_active : 0);
 		$this->_active_or_not = $activateMe->display();
 
 		//////////////
@@ -1087,6 +1087,7 @@ class Staff {
 		}
 
 
+
 		$qInsertStaff = "INSERT INTO staff (fname, lname, title, tel, department_id, staff_sort, email, user_type_id, password, ptags, active, bio,
       position_number, job_classification, room_number, supervisor_id, emergency_contact_name,
       emergency_contact_relation, emergency_contact_phone, street_address, city, state, zip, home_phone, cell_phone, fax, intercom, lat_long, social_media) VALUES ( "
@@ -1121,10 +1122,9 @@ class Staff {
 		                . $db->quote( scrubData( $this->_lat_long ) ) . ","
 		                . $db->quote( scrubData( $this->_social_media ) ) . ")";
 
-
 		$rInsertStaff = $db->exec( $qInsertStaff );
 
-		$this->_debug .= "<p class=\"debug\">Insert query: $qInsertStaff</p>";
+		$this->_debug .= "<p class=\"debug\">Insert query: $rInsertStaff</p>";
 
 
 		$this->_staff_id = $db->last_id();
@@ -1152,11 +1152,20 @@ class Staff {
 				return;
 
 			} else {
-				// And copy over the generic headshot image and headshot_large image
-				$nufile = $path . "/headshot.jpg";
-				$copier = copy( "../../assets/images/headshot.jpg", $nufile );
-				$copier = copy( "../../assets/images/headshot.jpg", $path . "/headshot_large.jpg" );
 
+               global $institution_code;
+
+               if(  (isset($institution_code)) && ($institution_code == "um") ){
+                   // Copy over UM headshot image and headshot_large image
+                   $nufile = $path . "/headshot.jpg";
+                   $copier = copy( "../../assets/images/headshot.jpg", $nufile );
+                   $copier = copy( "../../assets/images/headshot_large.jpg", $path . "/headshot_large.jpg" );
+               } else {
+                   // Otherwise copy over the generic headshot image and headshot_large image
+                   $nufile = $path . "/headshot.jpg";
+                   $copier = copy( "../../assets/images/placeholder-image.jpg", $nufile );
+                   $copier = copy( "../../assets/images/placeholder-image_large.jpg", $path . "/headshot_large.jpg" );
+               }
 
 				// message
 				$this->_message = _( "Thy Will Be Done.  Added." );
@@ -1340,7 +1349,7 @@ class Staff {
 		if ( $email != "" ) {
 			$headshot = "<img id=\"headshot\" src=\"" . $this->_headshot_loc . "\" alt=\"$this->_fullname\" title=\"$this->_fullname\"";
 		} else {
-			$headshot = "<img id=\"headshot\" src=\"$AssetPath" . "images/headshot.jpg\" alt=\"No picture\" title=\"No picture\"";
+			$headshot = "<img id=\"headshot\" src=\"$AssetPath" . "images/placeholder-image.jpg\" alt=\"No picture\" title=\"No picture\"";
 		}
 
 		switch ( $pic_size ) {

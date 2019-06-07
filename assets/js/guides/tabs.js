@@ -29,99 +29,103 @@ function tabs() {
             confirmPrompt: "Are you sure you want to remove all boxes?"
         },
         bindUiActions: function () {
-            myTabs.removePlusletsFromCurrentTab();
             myTabs.makeTabsClickable();
+            myTabs.clickAddNewTab();
+            myTabs.activateFirstSectionControlsOnClick();
 
             myTabs.reorderTabsFlyout();
             myTabs.fetchTabsFlyout();
             myTabs.sortTabsFlyout();
-
 
             //configure sortable drag and drop zone for creating new guide from tabs
             myTabs.newGuideFromTabsSortable();
             //copy tabs to create new guide
             myTabs.createNewGuideFromTabs();
 
-       
+
+
         },
         init: function () {
             myTabs.setupTabs();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
             //Find Box Tabs - Browse and Search
-           
-
-            //Find Box Tabs - Browse and Search
             myTabs.settings.findBoxTabs.tabs();
-            
 
 			var sec = section();
 			sec.makeAddSection('a[id="add_section"]');
-
-
-        
         },
+
+        autoSaveGuide: function() {
+            var save = saveSetup();
+            save.saveGuide();
+            $("#response").hide();
+            $('#save_guide').fadeOut();
+        },
+        getSubjectId: function() {
+            var g = guide();
+            var subjectId = g.getSubjectId();
+            return subjectId;
+        },
+        getActiveTab: function() {
+            return $('#tabs').tabs('option', 'active');
+        },
+
 		getSectionForNewTab : function (id, external_link, li, tabContentHtml) {
 
-			if (!external_link) {
-		$.ajax
-                    ({
-                        url: "helpers/section_data.php",
-                        type: "POST",
-                        data: { action: 'create' },
-                        dataType: "html",
-                        success: function (html) {
-                            
+            if (!external_link) {
+                $.ajax ({
+                    url: "helpers/section_data.php",
+                    type: "POST",
+                    data: {action: 'create'},
+                    dataType: "html",
+                    success: function (html) {
+                        myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
+                            + "</div>");
+                    }
+                });
+            }
 
-                            myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
-                                + "</div>");	
-                        }
-                    });
-			}
-					
-					myTabs.settings.saveButton.fadeIn();
+            $('#tabs').tabs();
 
+            if (external_link === '') {
+                $('#tabs').tabs("refresh");
+                $('#tabs').tabs('select', $('#tabs').data().tabCount);
+            } else {
 
-                            $('#tabs').tabs();
+                myTabs.settings.tabs.tabs('select', 0);
+            }
 
-                            if (external_link === '') {
-                                $('#tabs').tabs("refresh");
-                                $('#tabs').tabs('select', $('#tabs').data().tabCount);
-                            } else {
-                             
-                                myTabs.settings.tabs.tabs('select', 0);
-                            }
+            if ($(li).attr('data-external-link') !== '') {
+                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    evt.stopImmediatePropagation();
+                });
+            }
 
-                            if ($(li).attr('data-external-link') !== '') {
-                                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
-                                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
-                                    evt.stopImmediatePropagation();
-                                });
-                            }
+            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                var events = $._data(data, "events");
 
-                            $(li).children('a[href^="#tabs-"]').each(function (data) {
-                                var events = $._data(data, "events");
-                                  
-                                if (events) {
-                                    console.log(events);
-                                    var onClickHandlers = events['click'];
+                if (events) {
+                    console.log(events);
+                    var onClickHandlers = events['click'];
 
-                                    // Only one handler. Nothing to change.
-                                    if (onClickHandlers.length === 1) {
-                                        return;
-                                    }
+                    // Only one handler. Nothing to change.
+                    if (onClickHandlers.length === 1) {
+                        return;
+                    }
 
-                                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
-                                }
-                                });
-                            
-                            $('#tabs').data().tabCount++;
+                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                }
+            });
 
-                            setTimeout(function() {
-                                $('#'+id).find('.sp_section_controls').trigger('click');
-                                $('#'+id).find('.sp_section').removeClass('section_selected_area');
+            $('#tabs').data().tabCount++;
 
-                            },100);
+            setTimeout(function () {
+                $('#' + id).find('.sp_section_controls').trigger('click');
+                $('#' + id).find('.sp_section').removeClass('section_selected_area');
+
+            }, 100);
 
 		},
         setupTabs: function () {
@@ -131,7 +135,8 @@ function tabs() {
                 modal: true,
                 buttons: {
                     Add: function () {
-                        addTab();
+                        //addTab();
+                        myTabs.addNewTab();
                         $(this).dialog("close");
                     },
                     Cancel: function () {
@@ -212,8 +217,10 @@ function tabs() {
 
                         $(this).dialog("close");
                         $("#response").hide();
-                        console.log('save guide fade in');
-                        $('#save_guide').fadeIn();
+                        //console.log('save guide fade in');
+                        //$('#save_guide').fadeIn();
+                        myTabs.autoSaveGuide();
+
                         
                     },
                     "Delete": function () {
@@ -245,8 +252,9 @@ function tabs() {
                                     myTabs.settings.tabs.tabs();
                                     myTabs.settings.tabCounter--;
                                     editTabDialog.dialog("close");
-                                    $("#response").hide();
-                                    $('#save_guide').fadeIn();
+                                    // $("#response").hide();
+                                    // $('#save_guide').fadeIn();
+                                    myTabs.autoSaveGuide();
                                 }
                             }
                         });
@@ -293,7 +301,6 @@ function tabs() {
                         if (onClickHandlers.length === 1) {
                             return;
                         }
-
                         onClickHandlers.splice(0, 0, onClickHandlers.pop());
                     });
                 }
@@ -307,63 +314,246 @@ function tabs() {
                 editTabDialog.dialog("open");
             });
 
-            // addTab button: just opens the dialog
-            $("#add_tab").button().click(function () {
-                myDialog.dialog("open");
-            });
+            // // addTab button: just opens the dialog
+            // $("#add_tab").button().click(function () {
+            //     myDialog.dialog("open");
+            // });
 
 
             // addTab form: calls addTab function on submit and closes the dialog
             var form = myDialog.find("form").submit(function (event) {
-                addTab();
+                //addTab();
+                myTabs.addNewTab();
                 myDialog.dialog("close");
                 event.preventDefault();
             });
 
-            // actual addTab function: adds new tab using the input from the form above
-            function addTab() {
-                var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
 
-                var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
-                    external_link = $('input#tab_external_link').val(),
-                    id = "tabs-" + $('#tabs').data().tabCount,
-                   
-                    li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
-                     
-                    tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+        },
 
-                var visibility = $('select[name="new-tab-visibility"]').val();
+        clickAddNewTab: function() {
+            // addTab button: just opens the dialog
+            $("#add_tab").button().click(function () {
+                console.log('click new tab: ');
+                myTabs.newTabDialog();
+            });
+        },
 
-                $(li).attr('data-external-link', external_link);
-                //console.log(id);
-                $(li).attr('data-visibility', visibility);
-                //console.log(id);
-                myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
-                //console.log($(li));
-
-				myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
-
-
-                //override submit for form in edit tab dialog to click rename button
-                $("#dialog_edit").find("form").submit(function (event) {
-                    $(this).parent().parent().find('span:contains("Rename")').click();
-                    event.preventDefault();
-                });
-                
-                // Move the expand tab to the end
-                $('#expand_tab').appendTo('#tabs .ui-tabs-nav')
-            }
-        }, 
-        removePlusletsFromCurrentTab: function () {
-            //remove all pluslets from current tab
-            $('a.remove_pluslets').on('click', function () {
-                var currPanel = $("#tabs").tabs('option', 'active');
-                if (confirm(myTabs.strings.confirmPrompt)) {
-                    $("#tabs-" + currPanel).find('.pluslet').remove();
-                    $("#save_guide").fadeIn();
+        newTabDialog: function() {
+            myTabs.settings.tabsDialog.dialog({
+                autoOpen: true,
+                modal: true,
+                buttons: {
+                    Add: function () {
+                        //addTab();
+                        myTabs.addNewTab();
+                        $(this).dialog("close");
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                },
+                open: function () {
+                    $(this).find(myTabs.settings.externalLink).hide();
+                    $(this).find(myTabs.settings.externalLink).prev().hide();
+                    if (myTabs.settings.tabCounter > 0) {
+                        $(this).find(myTabs.settings.externalLink).show();
+                        $(this).find(myTabs.settings.externalLink).prev().show();
+                    }
+                },
+                close: function () {
+                    var form = $('#dialog').find("form");
+                    $(form)[0].reset();
                 }
             });
         },
+
+        addNewTab: function() {
+
+            var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
+                external_link = $('input#tab_external_link').val(),
+                id = "tabs-" + $('#tabs').data().tabCount,
+
+                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+
+                tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            $(li).attr('data-external-link', external_link);
+            //console.log(id);
+            $(li).attr('data-visibility', visibility);
+            //console.log(id);
+            myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
+            //console.log($(li));
+
+            myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+
+
+            //override submit for form in edit tab dialog to click rename button
+            $("#dialog_edit").find("form").submit(function (event) {
+                $(this).parent().parent().find('span:contains("Rename")').click();
+                event.preventDefault();
+            });
+
+            // Move the expand tab to the end
+            $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+
+            var newTab = myTabs.saveNewTab();
+            newTab.then(function(data) {
+                var last_insert_tab_id = data.last_insert;
+
+                var tabIndex = $('#tabs').data().tabCount-1;
+                $('#tabs').tabs({active: tabIndex});
+
+                var mySection = section();
+                var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
+                newSection.then(function(data) {
+                    var mySaveSetup = saveSetup();
+                    mySaveSetup.updateTabIds();
+                    return data;
+                }).then(function(data) {
+                    var mySaveSetup = saveSetup();
+                    mySaveSetup.updateSectionIds();
+                    return data;
+                });
+                return data;
+            }).then(function(data) {
+                myTabs.setupTabs();
+                return data;
+            }).then(function(data) {
+                var t = $('#tabs').data().tabs.active;
+                $(t).attr('id', data.last_insert);
+                $(t).addClass('dropspotty child-tab ui-droppable');
+                return data;
+            }).then(function (data) {
+                myTabs.activateFirstSectionControlsInit();
+            });
+
+        },
+        saveNewTab: function() {
+            var subject_id = myTabs.getSubjectId();
+            var active_tab_index = myTabs.getActiveTab();
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount;
+            var external_url = "";
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            return $.ajax({
+                url : "helpers/save_tab.php",
+                type : "GET",
+                data : {
+                    subject_id: subject_id,
+                    label: label,
+                    tab_index: active_tab_index,
+                    external_url: external_url,
+                    visibility: visibility
+                },
+                dataType: "json"
+
+            }).done(function() {
+                var sec = section();
+                sec.getTabIds();
+                sec.getSectionIds();
+            });
+        },
+        addNewTabHtml: function() {
+            var tabTemplate = "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i><span></li>";
+
+            var label = myTabs.settings.tabTitle.val() || "Tab " + $('#tabs').data().tabCount,
+                external_link = $('input#tab_external_link').val(),
+                id = "tabs-" + $('#tabs').data().tabCount,
+
+                li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)),
+
+                tabContentHtml = myTabs.settings.tabContent.val() || "Tab " + myTabs.settings.tabCounter + " content.";
+
+            var visibility = $('select[name="new-tab-visibility"]').val();
+
+            $(li).attr('data-external-link', external_link);
+            //console.log(id);
+            $(li).attr('data-visibility', visibility);
+            console.log(id);
+            myTabs.settings.tabs.find(".ui-tabs-nav").append(li);
+            //console.log($(li));
+
+            //myTabs.getSectionForNewTab(id, external_link, li, tabContentHtml);
+
+            // //override submit for form in edit tab dialog to click rename button
+            // $("#dialog_edit").find("form").submit(function (event) {
+            //     $(this).parent().parent().find('span:contains("Rename")').click();
+            //     event.preventDefault();
+            // });
+            //
+            // // Move the expand tab to the end
+            // $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
+        },
+        activateNewTabView: function(li) {
+            $('#tabs').tabs();
+            var external_link = $('input#tab_external_link').val();
+
+            if (external_link === '') {
+                $('#tabs').tabs("refresh");
+                $('#tabs').tabs('select', $('#tabs').data().tabCount);
+            } else {
+
+                myTabs.settings.tabs.tabs('select', 0);
+            }
+
+            if ($(li).attr('data-external-link') !== '') {
+                $(li).children('a[href^="#tabs-"]').on('click', function (evt) {
+                    window.open($(this).parent('li').attr('data-external-link'), '_blank');
+                    evt.stopImmediatePropagation();
+                });
+            }
+
+            $(li).children('a[href^="#tabs-"]').each(function (data) {
+                var events = $._data(data, "events");
+
+                if (events) {
+                    //console.log(events);
+                    var onClickHandlers = events['click'];
+
+                    // Only one handler. Nothing to change.
+                    if (onClickHandlers.length === 1) {
+                        return;
+                    }
+
+                    onClickHandlers.splice(0, 0, onClickHandlers.pop());
+                }
+            });
+
+            $('#tabs').data().tabCount++;
+        },
+
+        activateFirstSectionControlsOnClick : function() {
+
+            $("#tabs").tabs({
+                    activate: function (event, ui) {
+                        var current_tab_index = $("#tabs").tabs('option', 'active');
+                        console.log('current_tab_index click tabs object: ' + current_tab_index);
+
+                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
+                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+                        $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
+                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+                    }
+                }
+            );
+        },
+
+        activateFirstSectionControlsInit : function() {
+
+            var current_tab_index = $("#tabs").tabs('option', 'active');
+            console.log('current_tab_index init tabs object: ' + current_tab_index);
+
+            $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
+            $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+            $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
+            $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+        },
+
         targetBlankLinks: function () {
             // open links in new tab if box_setting target_blank_links is checked.
             //this is for admin side, user view also has function in /subjects/guide.php
@@ -385,7 +575,10 @@ function tabs() {
 
             });
         },
-        fetchTabsFlyout : function(subjectId) {
+        fetchTabsFlyout : function() {
+
+            var g = guide();
+            var subjectId = g.getSubjectId();
 
             $(".flyout-tabs").empty();
 
@@ -411,47 +604,28 @@ function tabs() {
             $("#flayout-tab-list").sortable({connectWith: "#flayout-tab-list"});
 
             $('#save_tab_order_btn').on('click', function () {
-
                 var data = $("#flayout-tab-list").sortable('serialize');
-
                 $.post('./helpers/save_tab_order.php', {"data": data}, function(d){
-
                 }).done(function() {
-
                     location.reload();
-
                 });
-
             });
-
         },
         reorderTabsFlyout : function() {
             document.addEventListener("DOMContentLoaded", function() {
-
-            	var g = guide();
-                var subjectId = g.getSubjectId();
-
                 $('#show_tabs').on('click', function() {
 
                     if( $("#save_guide").is(':visible') ) {
-
                         $(".flyout-tabs").append( myTabs.strings.reorderTabString);
-
                         $("#save_tab_order_btn").hide();
 
                     } else {
-
-                        myTabs.fetchTabsFlyout(subjectId);
-
+                        myTabs.fetchTabsFlyout();
                         myTabs.sortTabsFlyout();
-
                         $("#save_tab_order_btn").show();
                     }
-
                 });
-
             });
-
         },
 
         newGuideFromTabsSortable : function() {
@@ -527,8 +701,9 @@ function tabs() {
                     });
                 });
             });
-
         }
-    }
+
+
+    };
     return myTabs;
 }

@@ -173,7 +173,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/index.html">Music Library</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/browsing-guide.html">Score Browsing Guide</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/musicscores">Score Browsing Guide</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/streamingaudioreserves.html">Streaming Music</a></li>
 
@@ -417,30 +417,38 @@
                                         <script>
                                             var cardItems = [
 
-                                                ['https://www.library.miami.edu/images/card-mango.jpg'],
+                                                ['https://www.library.miami.edu/images/card-creative-studio.jpg'],
 
-                                                ['https://www.library.miami.edu/images/card-lynda.jpg']
+                                                ['https://www.library.miami.edu/images/card-lynda.jpg'],
+
+                                                ['https://www.library.miami.edu/images/card-mango.jpg']
 
                                             ];
                                             var cardLink = [
 
-                                                ['http://access.library.miami.edu/login?url=http://connect.mangolanguages.com/univ-miami/start'],
+                                                ['https://www.library.miami.edu/creative-studio/index.html'],
 
-                                                ['http://access.library.miami.edu/login?url=http://www.miami.edu/lynda']
+                                                ['http://access.library.miami.edu/login?url=http://www.miami.edu/lynda'],
+
+                                                ['http://access.library.miami.edu/login?url=http://connect.mangolanguages.com/univ-miami/start']
 
                                             ];
                                             var cardTitle = [
 
-                                                ['Mango Languages'],
+                                                ['Creative Studio'],
 
-                                                ['Lynda.com']
+                                                ['Lynda.com'],
+
+                                                ['Mango Languages']
 
                                             ];
                                             var cardContent = [
 
-                                                ['UM students, staff and faculty have access to Mango Languages which offers online learning in 71 languages.'],
+                                                ['Creative Studio provides expert support in the use of digital audio, video, graphic design technology, printing, 3D printing, and VR technology.'],
 
-                                                ['Tutorials just a click away. We offer access to lynda\'s 95,000+ \"how-to\" videos on a wide range of software applications.']
+                                                ['Tutorials just a click away. We offer access to lynda\'s 95,000+ \"how-to\" videos on a wide range of software applications.'],
+
+                                                ['UM students, staff and faculty have access to Mango Languages which offers online learning in 71 languages.']
 
                                             ];
 
@@ -479,17 +487,19 @@
 
                                             <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
 
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-exploratory.html">Faculty Exploratory</a></li>
+
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-reading-room.html">Faculty Reading Room</a></li>
+
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="/kislak-center/index.html">Kislak Center</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/music-study">Music Library Rooms</a></li>
-
-                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide</a></li>
 
                                         </ul>
 

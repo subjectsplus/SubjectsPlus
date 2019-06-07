@@ -219,6 +219,9 @@ function drag() {
 // Make "Save Changes" button appear on sorting
 ////////////////////////////
             var sortable_element = $(lstrSelector);
+            console.log(lstrType);
+
+
 
             if (lstrType === 'sections') {
                 sortable_element.sortable({
@@ -227,7 +230,6 @@ function drag() {
                     handle: '.section_sort',
                     update: function (event, ui) {
                         $("#response").hide();
-                        $("#save_guide").fadeIn();
 
                     },
                     start: function (event, ui) {
@@ -239,6 +241,10 @@ function drag() {
                     stop: function (event, ui) {
                         $(ui.item).find('.dropspotty').show();
                         $(ui.item).find('.pluslet').show();
+                        var save = saveSetup();
+                        save.saveGuide();
+                        console.log('sections saveguide');
+                        $('#save_guide').fadeOut();
                     }
                 });
             } else {
@@ -252,7 +258,6 @@ function drag() {
                     handle: 'div.pluslet_sort',
                     update: function (event, ui) {
                         $("#response").hide();
-                        $("#save_guide").fadeIn();
 
                     },
                     start: function (event, ui) {
@@ -271,6 +276,11 @@ function drag() {
                         }
                         $(ui.item).children().children('.titlebar_text').show();
                         $(ui.item).children().children('.titlebar_options').show();
+
+                        var save = saveSetup();
+                        save.saveGuide();
+                        console.log('pluslets saveguide');
+                        $('#save_guide').fadeOut();
 
                     }
                 });

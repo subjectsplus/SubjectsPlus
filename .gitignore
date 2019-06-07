@@ -148,3 +148,5 @@ nul
 sp4-new.iml
 nul
 /node_modules/
+/subjects/.htaccess
+/api/.htaccess

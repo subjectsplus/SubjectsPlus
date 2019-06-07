@@ -12,11 +12,12 @@ function primoCatalog() {
         },
         search : function () {
 
-            $('#search-primo-catalog').on('click', function () {
-                var searchfield = document.getElementById("primo-catalog-searchtype").value;
-                document.getElementById("primo-catalog-query").value = searchfield + ",contains," + document.getElementById("primo-catalog-query-temp").value.replace(/[,]/g, " ");
-                document.forms["search-primo-catalog-form"].submit();
-
+            $('.pluslet-catalog-form-button').on('click', function () {
+                var form =  $(this).parents('form:first');
+                var searchfield = form.find('#primo-catalog-searchtype').val();
+                var queryValue = form.find('#primo-catalog-query-temp').val();
+                form.find('#primo-catalog-query').val(searchfield + ",contains," + queryValue.replace(/[,]/g, " "));
+                form.submit();
             });
 
         }

@@ -167,7 +167,7 @@ class Guide
     {
 
         $db = new Querier();
-        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id;
+        $q2 = "SELECT s.staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff s, staff_subject ss WHERE s.staff_id = ss.staff_id AND ss.subject_id = " . $this->_subject_id . " ORDER BY  ss.staff_guide_order";
 
         $this->_staffers = $db->query($q2);
 
@@ -481,7 +481,7 @@ class Guide
             $discipline_string = $disciplineMe->display();
         }
 
-        $staff_box = "$staff_string <div id=\"item_list\">$staffer_list</div> <!-- staff inserted here -->";
+        $staff_box = "$staff_string <div id=\"item_list\" class=\"sortable-staff-list ui-sortable\">$staffer_list</div> <!-- staff inserted here -->";
 
         makePluslet(_("Staff"), $staff_box, "no_overflow");
 
@@ -528,10 +528,11 @@ class Guide
         global $IconPath;
 
         $ourstaff = "
-        <div class=\"selected_item_wrapper staffwrapper\">
+        <div class=\"selected_item_wrapper staffwrapper sortable-staff-wrapper\">
         <div class=\"selected_item\">
         <input name=\"staff_id[]\" value=\"$value[0]\" type=\"hidden\" />
-        $value[1]<br />
+        <i class=\"fa fa-bars\" aria-hidden=\"true\"></i> $value[1]
+        <br />
         </div>
         <div class=\"selected_item_options\">
         <i class=\"fa fa-times delete_item delete_staff pointer\" alt=\"" . _("delete") . "\" title=\"" . _("delete") . "\"></i>
@@ -1015,8 +1016,10 @@ class Guide
             $home_tab_class = "hometab";
         }
 
+
+
         $all_tabs = $this->getTabs($lstrFilter);
-        $main_tabs = $this->db->query("SELECT tab_id FROM tab WHERE parent = '' AND children =  '[]'");
+        //$main_tabs = $this->db->query("SELECT tab_id FROM tab WHERE parent = '' AND children =  '[]'");
         
         $tabs = $this->_isAdmin ? "<ul><li id=\"add_tab\"><i class=\"fa fa-plus\"></i></li>" : "<ul>"; // init tabs (in header of body of guide)
         foreach ($all_tabs as $key => $lobjTab) {
@@ -1034,6 +1037,8 @@ class Guide
                }
            }
         }
+
+
 
         $childs = implode($child_ids, ',');
         
@@ -1140,6 +1145,7 @@ class Guide
     {
         $all_tabs = $this->getTabs($lstrFilter);
 
+
         // Now loop through tab content
         foreach ($all_tabs as $key => $lobjTab) {
             print "<div id=\"tabs-$key\" class=\"sptab\">";
@@ -1179,8 +1185,9 @@ class Guide
     						<div id=\"slider_section_{$lobjSection['section_id']}\"  class=\"sp_section_slider\"></div>
     				   </div>";
             }
+
     		$qc = "SELECT p.pluslet_id, p.title, p.body, ps.pcolumn, p.type, p.extra
-		           FROM pluslet p
+		           FROM pluslet  p
 		           INNER JOIN pluslet_section ps
 		           ON p.pluslet_id = ps.pluslet_id
 		           INNER JOIN section sec
@@ -1188,7 +1195,11 @@ class Guide
 		           WHERE sec.section_id = {$lobjSection['section_id']}
 		           ORDER BY prow ASC";
 
+
+
     		$rc = $db->query($qc);
+
+
 
     		//init
     		$left_col_pluslets = "";
@@ -1325,12 +1336,14 @@ class Guide
 
         $de_duped = array_unique($this->_staff_id);
 
+        $i = 0;
         foreach ($de_duped as $value) {
             if (is_numeric($value)) {
                 $db = new Querier;
-                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id) VALUES (
+                $qUpSS = "INSERT INTO staff_subject (staff_id, subject_id, staff_guide_order) VALUES (
 				" . scrubData($value, 'integer') . ",
-				" . scrubData($this->_subject_id, 'integer') . ")";
+				" . scrubData($this->_subject_id, 'integer') . ",
+				" . $i++ . ")";
                 $db = new Querier;
                 $rUpSS = $db->exec($qUpSS);
 

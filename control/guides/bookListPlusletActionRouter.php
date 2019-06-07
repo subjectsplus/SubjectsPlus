@@ -148,7 +148,8 @@ function isbn_in_primo () {
 		$total = $response['info']['total'];
 		if ($total != 0) {
 			$pnxId = $response['docs'][0]['pnxId'];
-			$result_url = 'https://' . $booklist_primo_domain . '/primo_library/libweb/action/display.do?doc=' . $pnxId . '&displayMode=full&vid=' . $booklist_primo_vid . '&institution=' . $booklist_primo_institution_code;
+			$result_url = 'https://' . $booklist_primo_domain . '/primo-explore/fulldisplay?docid=' . $pnxId . '&context=L&vid=' . $booklist_primo_vid . '&institution=' . $booklist_primo_institution_code;
+
 		}
 
 	}
