@@ -39,5 +39,4 @@ If you run into any missing/weird functionality, check that the following extens
 If you have MySQL 5.7 you must disable ONLY_FULL_GROUP_BY permanently. Please refer to this [stack overflow](https://stackoverflow.com/questions/23921117/disable-only-full-group-by) issue.
 
 ## Installation
-
-Check the readme.txt file, or look at the [wiki](http://www.subjectsplus.com/wiki).
+Visit the [wiki](http://www.subjectsplus.com/wiki) for installation instructions.
