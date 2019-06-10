@@ -259,6 +259,8 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/ask-a-librarian.html">Ask a Librarian</a></li>
 
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/peer-research-consultants.html">Peer Research Consultants</a></li>
+
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/consultations.html">Research Consultations</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/index.php">Research Guides</a></li>
