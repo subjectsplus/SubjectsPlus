@@ -46,6 +46,8 @@ function tabs() {
 
         },
         init: function () {
+
+
             myTabs.setupTabs();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
@@ -663,10 +665,11 @@ function tabs() {
                 }
             }
 
-            document.addEventListener("DOMContentLoaded", function() {
+            $( document ).ready(function() {
+
                 $('.create-guide').on('click', function() {
 
-                    //console.log('copy guide');
+                    console.log('copy guide');
 
                     var selected_guide = urlParam('subject_id');
 
@@ -700,7 +703,9 @@ function tabs() {
                         }
                     });
                 });
+
             });
+
         }
 
 
