@@ -191,10 +191,7 @@ include("includes/header.php");
 
           if ($total_rows > 0) {
 
-              $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-              $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-
-              $row_count = 1;
+              $guide_list_div = "<div class=\"pure-u-1 two-columns\"><ul class=\"guide-listing\">";
 
               foreach ($all_guides as $myrow) {
 
@@ -204,27 +201,15 @@ include("includes/header.php");
                   if ($myrow[6] != "") {$list_bonus .= $myrow[6] . "<br /><br />";} // add description
                   if ($myrow[7] != "") {$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7]; } // add keywords
               
-              $our_item = "<li><i class=\"fa fa-plus-circle\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
+              $guide_list_div .= "<li><i class=\"fa fa-plus-circle\"></i> <a href=\"$guide_location\">" . htmlspecialchars_decode($myrow[1]) . "</a>
               <div class=\"guide_list_bonus\">$list_bonus</div>
               </li>";
 
-                if ($row_count <= $switch_row) {
-                  // first col
-                  $col_1 .= $our_item;
-                  
-                } else {
-                  // even
-                  $col_2 .= $our_item;
-                }
-
-                  $row_count++;
-
               } //end foreach
 
-              $col_1 .= "</ul></div>";
-              $col_2 .= "</ul></div>";
+              $guide_list_div .= "</ul></div>";
 
-              $layout .= "<div class=\"guide_list_container\"><div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div></div>";
+              $layout .= "<div class=\"guide_list_container\"><div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $guide_list_div ."</div></div>";
               
           } //end if
 

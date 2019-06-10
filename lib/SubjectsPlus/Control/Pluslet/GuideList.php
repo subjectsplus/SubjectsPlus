@@ -49,9 +49,6 @@ class Pluslet_GuideList extends Pluslet {
       $guide_path = $PublicPath . "guide.php?subject=";
     }
 
-    $layout = ""; //init
-
-
     // loop through our source types
     foreach ($guide_types as $key => $value) {
 
@@ -65,10 +62,7 @@ class Pluslet_GuideList extends Pluslet {
 
       if ($total_rows > 0) {
 
-        $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-        $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
-
-        $row_count = 1;
+        $guide_list_div = "<div class=\"pure-u-1 two-columns\"><ul class=\"guide-listing\">";
 
         foreach ($guides as $myrow) {
 
@@ -84,25 +78,11 @@ class Pluslet_GuideList extends Pluslet {
             <div class=\"guide_list_bonus\">$list_bonus</div>
             </li>";
 
-          if ($row_count <= $switch_row) {
-            // first col
-            $col_1 .= $our_item;
-
-          } else {
-            // even
-            $col_2 .= $our_item;
-          }
-
-          $row_count++;
+          $guide_list_div .= $our_item;
 
         }//end foreach
 
-        $col_1 .= "</ul></div>";
-        $col_2 .= "</ul></div>";
-
-        $layout .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div>";
-
-        $list_guides = $layout;
+        $list_guides .= "<div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $guide_list_div ."</ul></div></div>";
       }
 
     }

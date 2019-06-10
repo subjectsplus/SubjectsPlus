@@ -1991,8 +1991,7 @@ function listCollections( $search = "", $display = "default", $show_children = "
 		case "2col":
 
 			// for 2 col
-			$col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
-			$col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
+			$collections_div = "<div class=\"pure-u-1 two-columns\"><ul class=\"guide-listing list-unstyled\">";
 
 			foreach ( $r as $myrow ) {
 
@@ -2019,27 +2018,12 @@ function listCollections( $search = "", $display = "default", $show_children = "
 
 				}
 
-				$our_item = "<li title=\"{$title_hover}\"><i class=\"fas fa {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
+				$collections_div .= "<li title=\"{$title_hover}\"><i class=\"fas fa {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
       <div class=\"guide_list_bonus\">$list_bonus</ul></div>
       </li>";
-
-				if ( $row_count <= $switch_row ) {
-					// first col
-					$col_1 .= $our_item;
-
-				} else {
-					// even
-					$col_2 .= $our_item;
-				}
-
-				$row_count ++;
-
 			} // end foreach
 
-			$col_1 .= "</ul></div>";
-			$col_2 .= "</ul></div>";
-
-			$layout           .= "<div class=\"tab-pane guide_list active\" id=\"section-Collection\" role=\"tabpanel\" aria-labelledby=\"show-Collection\"><div class=\"guide-list-expand\">Expand/hide all</div><div class=\"guide_list_header\"><a name=\"section-Collection\"></a><h2>" . _( "Guide Collections" ) . "</h2></div><div class=\"row\">" . $col_1 . $col_2 . "</div></div>";
+			$layout           .= "<div class=\"tab-pane guide_list active\" id=\"section-Collection\" role=\"tabpanel\" aria-labelledby=\"show-Collection\"><div class=\"guide-list-expand\">Expand/hide all</div><div class=\"guide_list_header\"><a name=\"section-Collection\"></a><h2>" . _( "Guide Collections" ) . "</h2></div><div class=\"row\">" . $collections_div . "</ul></div></div></div>";
 			$list_collections = $layout;
 
 			break;

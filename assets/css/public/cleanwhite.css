@@ -1767,7 +1767,11 @@ ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-r
 
     .index-search-area {padding: 0;}
 
-
+    .two-columns {
+        columns: 2;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+    }
 }
 
 /* ≥ 1024px     .pure-u-lg-* */
