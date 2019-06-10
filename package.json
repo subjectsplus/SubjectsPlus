@@ -1,6 +1,6 @@
 {
   "name": "SubjectsPlus",
-  "version": "4.3",
+  "version": "4.4",
   "description": "SubjectsPlus is a a LAMP/WAMP application that allows you to manage a number of interrelated parts of a library website.",
   "main": "index.js",
   "scripts": {
