@@ -7,23 +7,28 @@ include_once('../../../includes/functions.php');
 
 
 class LGImport2 {
-  function loadAllSubjectTerms($staff_id) {
-    if($lg = simplexml_load_file("./lg2.xml")) { // if the libguides xml loads
-      foreach ($lg->xpath('//subject') as $sub) { // for each subject in original XML
+  function __construct() {
+    if($this->lg = simplexml_load_file("./lg2.xml")) { // if the libguides xml loads
+    } else {
+      echo "failed to load file";
+    }
+    $this->db = new Querier;
+
+  }
+
+  public function loadAllSubjectTerms($staff_id) {
+      foreach ($this->lg->xpath('//subject') as $sub) { // for each subject in original XML
         //echo "Importing subject: " . $sub->name;
-        setSubjectPost($sub, $staff_id); //sets _POST fields with appropriate values from XML
+        $this->setSubjectPost($sub, $staff_id); //sets _POST fields with appropriate values from XML
         $newsub = new Guide("", "post"); //create new Guide object with _POST values
         $newsub->insertRecord(); //insert guide into subject, rely on this method for dupe handling
       }
-    }
   }
 
-  function loadAllRecords($staff_id) {
-    if($lg = simplexml_load_file("./lg2.xml")) { // if the libguides xml loads
-
-      foreach ($lg->guides->guide as $guide) { // for each subject in original XML
+  public function loadAllRecords($staff_id) {
+      foreach ($this->lg->guides->guide as $guide) { // for each subject in original XML
         foreach ($guide->xpath(".//asset[type/text() = 'Link' or type/text() = 'Database']") as $asset) { // for each subject in original XML
-          if (fetchId('location', 'location', $asset->url, 'location_id')) { //dupe check
+          if ($this->fetchId('location', 'location', $asset->url, 'location_id')) { //dupe check
             //echo "Not importing duplicate asset: " . $asset->name . "<br/>";
           } else {
             //echo "Importing asset: " . $asset->name . "<br/>";
@@ -34,7 +39,7 @@ class LGImport2 {
 
             $_POST['subjects'] = Array();
             foreach ($guide->subjects->subject as $sub) {
-              $_POST['subjects'][] = fetchSubjectID(getShortForm($sub->name));
+              $_POST['subjects'][] = $this->fetchSubjectID($this->getShortForm($sub->name));
             }
             if (empty($_POST['subjects'])) {
               $_POST['subjects'] = Array(1);
@@ -42,48 +47,45 @@ class LGImport2 {
             $_POST['format'] = Array(1); // In a stock install, this will be Web
             $_POST['rank'] = Array(rand(0,32767));
             $_POST['location_id'] = Array('');
-  	  $_POST['title_id'] = $_POST['prefix'] = $_POST['alternate_title'] = $_POST['internal_notes'] = '';
-  	  $_POST['call_number'] = $_POST['display_note'] = $_POST['eres_display'] = $_POST['ctags'] = $_POST['helpguide'] = $_POST['source'] = $_POST['description_override'] = $_POST['dbbysub_active'] = Array();
+  	    $_POST['title_id'] = $_POST['prefix'] = $_POST['alternate_title'] = $_POST['internal_notes'] = '';
+  	    $_POST['call_number'] = $_POST['display_note'] = $_POST['eres_display'] = $_POST['ctags'] = $_POST['helpguide'] = $_POST['source'] = $_POST['description_override'] = $_POST['dbbysub_active'] = Array();
             $newrecord = new Record("", "post"); //create new Record object with _POST values
             $newrecord->insertRecord(); //insert guide into subject, rely on this method for dupe handling
           }
         }
       }
-    }
   }
 
-  function loadAllLibGuides($staff_id) {
-    if($lg = simplexml_load_file("./lg2.xml")) { // if the libguides xml loads
+  public function loadAllLibGuides($staff_id) {
+      foreach ($this->lg->guides->guide as $gc) { // for each guide in the original xml
 
-      foreach ($lg->guides->guide as $gc) { // for each guide in the original xml
-
-        setSubjectPost($gc, $staff_id); //sets _POST fields with appropriate values from XML
-        $_POST["subject_id"] = fetchSubjectID(getShortForm($gc->name));
+        $this->setSubjectPost($gc, $staff_id); //sets _POST fields with appropriate values from XML
+        $_POST["subject_id"] = $this->fetchSubjectID($this->getShortForm($gc->name));
         if ($gc->subjects) {
           foreach ($gc->subjects->subject as $parent) {
-            $_POST['parent_id'][] = fetchSubjectID(getShortForm($parent->name));
+            $_POST['parent_id'][] = $this->fetchSubjectID($this->getShortForm($parent->name));
           }
         }
 
         $newgui = new Guide("", "post"); //create new Guide object with _POST values
         $_POST["subject_id"] ? $newgui->updateRecord() : $newgui->insertRecord(); //insert or update guide into subject
-        $subid = fetchSubjectID(getShortform($gc->name)); //retrieve subject_id of guide that was just inserted/updated
+        $subid = $this->fetchSubjectID($this->getShortform($gc->name)); //retrieve subject_id of guide that was just inserted/updated
 
         foreach ($gc->pages->page as $page) { // for each page in the current guide
 
-          setTab($page, $subid);  // create or update Tab for the page
-          $tabid = fetchTabId($subid, ($page->position - 1)); // fetch the tab_id associated with the page
+          $this->setTab($page, $subid);  // create or update Tab for the page
+          $tabid = $this->fetchTabId($subid, ($page->position - 1)); // fetch the tab_id associated with the page
           $box_count = 0; // initialize number of boxes to zero
 
           foreach ($page->boxes->box as $box) { // for each box in the current page
 
-            if (setSection($box_count, $tabid)) { // if a new section is created successfully
-              echo "<br>Section insert success!<br>";
+            if ($this->setSection($box_count, $tabid)) { // if a new section is created successfully
+              //echo "<br>Section insert success!<br>";
 
-              $sectid = fetchSectionId($box_count, $tabid);
+              $sectid = $this->fetchSectionId($box_count, $tabid);
 
               foreach ($box->assets->asset as $asset) {
-                setPluslet($asset, $sectid);
+                $this->setPluslet($asset, $sectid, $box);
               }//end of asset loop
             }
             else {
@@ -95,10 +97,6 @@ class LGImport2 {
         }//end of page loop
         //break; //this break is for testing purposes and ensures only one guide is imported
       }//end of guide loop
-    }//end of if(simplexml_load_file())
-    else {
-      echo "failed to load file";
-    }
   }
 
   /*
@@ -107,7 +105,7 @@ class LGImport2 {
   *   for any imported guides and will likely be removed
   *   or changed later on
   */
-  function getShortform($str) {
+  private function getShortform($str) {
     $newstr = crc32($str);
     if(ord($newstr) == 45){
       $newstr = substr($newstr, 1);
@@ -119,10 +117,9 @@ class LGImport2 {
   * fetchId() returns the id of an entry in a table
   *   associated with an identifying value
   */
-  function fetchId($table, $column, $value, $id) {
-    $db = new Querier;
+  private function fetchId($table, $column, $value, $id) {
     $sql = "SELECT * FROM {$table} WHERE {$column} = '{$value}'";
-    $result = $db->query($sql);
+    $result = $this->db->query($sql);
     if ($result) {
       return $result[0]["{$id}"];
     }
@@ -136,10 +133,9 @@ class LGImport2 {
   *   in the 'section' table that matches a
   *   section_index and tab_id
   */
-  function fetchSectionId($section_index, $tab_id) {
-    $db = new Querier;
+  private function fetchSectionId($section_index, $tab_id) {
     $sql = "SELECT * FROM section WHERE section_index = '{$section_index}' AND tab_id = '{$tab_id}'";
-    $result = $db->query($sql);
+    $result = $this->db->query($sql);
     if ($result) {
       return $result[0]['section_id'];
     }
@@ -153,10 +149,9 @@ class LGImport2 {
   *   in the 'tab' table that matches a
   *   subject_id and tab_index
   */
-  function fetchTabId($subject_id, $tab_index) {
-    $db = new Querier;
+  private function fetchTabId($subject_id, $tab_index) {
     $sql = "SELECT * FROM tab WHERE subject_id = '{$subject_id}' AND tab_index = '{$tab_index}'";
-    $result = $db->query($sql);
+    $result = $this->db->query($sql);
     if ($result) {
       return $result[0]['tab_id'];
     }
@@ -169,8 +164,8 @@ class LGImport2 {
   * fetchStaffId() returns the staff id of the user
   *   associated with an email address($email)
   */
-  function fetchStaffId($email) {
-    $result = fetchId('staff', 'email', $email, 'staff_id');
+  private function fetchStaffId($email) {
+    $result = $this->fetchId('staff', 'email', $email, 'staff_id');
     if ($result) {
       return $result;
     }
@@ -183,8 +178,8 @@ class LGImport2 {
   * fetchSubjectID() returns the subject_id of the 'subject'
   *   table entry that matches the provided shortform
   */
-  function fetchSubjectID($shortform) {
-    $result = fetchId('subject', 'shortform', $shortform, 'subject_id');
+  private function fetchSubjectID($shortform) {
+    $result = $this->fetchId('subject', 'shortform', $shortform, 'subject_id');
     if ($result) {
       return $result;
     }
@@ -197,10 +192,10 @@ class LGImport2 {
   * setSubjectPost() prepares _POST fields with the approriate
   *   values from the libguides xml
   */
-  function setSubjectPost($gc, $staff_id = 1) {
+  private function setSubjectPost($gc, $staff_id = 1) {
     $_POST["subject_id"]=NULL;
     $_POST["subject"]=$gc->name;
-    $_POST["shortform"]=getShortform($gc->name);
+    $_POST["shortform"]=$this->getShortform($gc->name);
     $_POST["description"]=$gc->description;
     if ($gc->tags) {
       foreach ($gc->tags->tag as $ti => $tc){
@@ -225,7 +220,7 @@ class LGImport2 {
   *   values and either updates an existing tab or
   *   creates a new one
   */
-  function setTab($page, $subid) {
+  private function setTab($page, $subid) {
     //set values from page
     $tab_label = $page->name;
     $tab_index = ($page->position - 1);
@@ -236,12 +231,11 @@ class LGImport2 {
       $tab_visibility = 1;
     }
 
-    $db = new Querier;
     if ($tab_index == 0) {
       $sql = "UPDATE tab SET label='{$tab_label}', visibility={$tab_visibility} WHERE subject_id={$subid} AND tab_index={$tab_index}";
     }
     else {
-      if (fetchTabId($subid, $tab_index) == NULL){
+      if ($this->fetchTabId($subid, $tab_index) == NULL){
         $sql = "INSERT INTO tab (subject_id, label, tab_index, visibility)
                 VALUES ('{$subid}', '{$tab_label}', '{$tab_index}', '{$tab_visibility}')";
       }
@@ -249,7 +243,7 @@ class LGImport2 {
         return;
       }
     }
-    $result = $db->exec($sql);
+    $result = $this->db->exec($sql);
     return $result;
   }
 
@@ -260,14 +254,13 @@ class LGImport2 {
   *   section until we can figure out how
   *   to convert the libguides layouts.
   */
-  function setSection($section_index, $tabid) {
+  private function setSection($section_index, $tabid) {
     $layout = '0-12-0';
 
-    $db = new Querier;
     $sql = "INSERT INTO section (section_index, layout, tab_id)
             VALUES ('{$section_index}', '{$layout}', '{$tabid}')";
-    if (fetchSectionId($section_index, $tabid) == NULL) {
-      $result = $db->exec($sql);
+    if ($this->fetchSectionId($section_index, $tabid) == NULL) {
+      $result = $this->db->exec($sql);
       return $result;
     }
     else {
@@ -280,9 +273,8 @@ class LGImport2 {
   *   the libguides xml and a section_id
   *   to create a basic pluslet
   */
-  function setPluslet($asset, $sectid){
-  	echo "IN SET PLUSLET";
-    $title = ('' == $asset->name) ? $asset->type : $asset->name;
+  private function setPluslet($asset, $sectid, $box){
+    $title = ('' == $asset->name) ? $box->name : $asset->name;
     $body = $extra = '';
     switch ($asset->type) {
       case 'Book from the Catalog':
@@ -291,7 +283,7 @@ class LGImport2 {
         $extra = '{"listDescription":"Book from the Catalog","isbn":"' . $asset->isbn . '"}';
         break;
       case 'Database':
-        $id = fetchTitleIdFromURL($asset->url);
+        $id = $this->fetchTitleIdFromURL($asset->url);
         if(!$id) { return; }
         $body = '<span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' . $id . '}, {Sample Record},{110}}</span>';
         $type = 'Basic';
@@ -300,7 +292,7 @@ class LGImport2 {
         $type = 'GoogleSearch';
         break;
       case 'Link':
-        $id = fetchTitleIdFromURL($asset->url);
+        $id = $this->fetchTitleIdFromURL($asset->url);
         if(!$id) { return; }
         $body = '<span class="token-list-item subsplus_resource" contenteditable="false">{{dab},{' . $id . '}, {Sample Record},{100}}</span>';
         $type = 'Basic';
@@ -317,18 +309,15 @@ class LGImport2 {
     }
 
     if ($type) {
-      $db = new Querier;
       $sql = "INSERT INTO pluslet (title, body, extra, clone, type)
             VALUES ('{$title}', '{$body}', '{$extra}', 0, '{$type}')";
-      echo $sql;
 
-      $result = $db->exec($sql);
+      $result = $this->db->exec($sql);
       if ($result) {
         // echo "New pluslet created";
         $pluslet_section = 'INSERT INTO pluslet_section (pluslet_id, section_id, pcolumn, prow)
-        VALUES (' . $db->last_id() . ', ' . $sectid . ', 1, ' . rand(0,20) . ')';
-        $ps_result = $db->exec($pluslet_section);
-        if ($ps_result) { echo "Pluslet associated with a section"; }
+        VALUES (' . $this->db->last_id() . ', ' . $sectid . ', 1, ' . rand(0,20) . ')';
+        $ps_result = $this->db->exec($pluslet_section);
       }
     }
   }
@@ -339,10 +328,9 @@ class LGImport2 {
   *   URL
   */
 
-  function fetchTitleIdFromURL($url) {
-    $db = new Querier;
+  private function fetchTitleIdFromURL($url) {
     $sql = "SELECT title_id FROM location_title INNER JOIN location ON location.location_id=location_title.location_id WHERE location='" . $url . "' LIMIT 1";
-    $result = $db->query($sql);
+    $result = $this->db->query($sql);
     if ($result) {
       return $result[0]['title_id'];
     }
@@ -352,3 +340,4 @@ class LGImport2 {
 
   }
 }
+
