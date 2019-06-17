@@ -400,7 +400,7 @@
 
                                                     <li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-exploratory.html">One-Button Studio</a></li>
+                                                    <li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/exploratory">One-Button Studio</a></li>
 
                                                     <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/consultations.html">Research Consultations</a></li>
 
@@ -489,7 +489,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="http://humanities.miami.edu/">Center for Humanities</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-exploratory.html">Faculty Exploratory</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/exploratory">Faculty Exploratory</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/faculty-reading-room.html">Faculty Reading Room</a></li>
 
