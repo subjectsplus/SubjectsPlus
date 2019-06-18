@@ -812,7 +812,7 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 					break;
 			}
 
-			$recent_activity .= "<div class=\"recent-activity $row_colour\"> <img src=\"$IconPath/required.png\"  /></img> $intro";
+			$recent_activity .= "<div class=\"recent-activity $row_colour\"> <img src=\"$IconPath/required.png\" alt=\"\" /></img> $intro";
 			if ( $myrow2["2"] != "" ) {
 				$recent_activity .= ": <a href=\"$linkit\" classs=\"recent-activity-link\" title=\"Took place: $myrow2[4]\">$myrow2[2]</a>";
 			}
