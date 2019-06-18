@@ -166,7 +166,7 @@ mb_language('uni');
 mb_internal_encoding('UTF-8');
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $language ? str_replace('_', '-', $language) : 'en' ?>">
   <head>
     <title><?php print $page_title; ?></title>
     <meta charset="utf-8">
