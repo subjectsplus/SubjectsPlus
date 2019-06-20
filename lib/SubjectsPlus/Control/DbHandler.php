@@ -426,9 +426,9 @@ ORDER BY newtitle
 			$favorite_link_rand_id = time() . rand();
 
 			if ($blurb != "") {
-				$information1 = "<span class=\"fas fa fa-heart uml-quick-links favorite-item-icon inactive-favorite\" data-favorite-link-rand-id=\"$favorite_link_rand_id\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
+				$information1 = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
 				// This is new details link; you can use the one above if you prefer
-				$information = "<span class=\"fas fa fa-heart uml-quick-links favorite-item-icon inactive-favorite\" data-favorite-link-rand-id=\"$favorite_link_rand_id\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "about" ) . "\"></i></span>";
+				$information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "about" ) . "\"></i></span>";
 			} else {
 				$information = "";
 				$information1 = "";
