@@ -141,18 +141,6 @@
                     </div>
                 </section>
             </div>
-
-            <div class="tab-pane" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
-                <section class="section">
-                    <div class="container">
-                        <h5 class="mt-3 mt-lg-0">My Favorite Links</h5>
-                        <hr align="left" class="hr-panel">
-                        <div class="my-favorite-links uml-quick-links" data-type="account-list">
-                            <h6><a href="https://www.library.miami.edu/favorites.html" class="no-decoration default">(How to use this feature)</a></h6>
-                        </div>
-                    </div>
-                </section>
-            </div>
         </div>
     </div>
     <div class="container">
@@ -167,9 +155,6 @@
                 <a class="no-decoration nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false"><i class="fas fa-user-circle"></i> Accounts</a>
             </li>
             <li class="nav-item">
-                <a class="no-decoration nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false"><i class="fas fa-heart"></i> Favorites</a>
-            </li>
-            <li class="nav-item">
                 <a class="no-decoration nav-link" id="ask" href="https://www.library.miami.edu/research/ask-a-librarian.html" aria-selected="false"><i class="fas fa-question-circle"></i> Ask</a>
             </li>
         </ul>
@@ -181,9 +166,9 @@
         $('#toolbarTabs .nav-link').click(function(){
             var tab = $(this);
             var panel = $('#' + this.hash.substr(1).toLowerCase());
-            if (tab.hasClass('active show')){
-                tab.toggleClass('active show');
-                panel.toggleClass('active show');
+            if (tab.hasClass('active')){
+                tab.toggleClass('active');
+                panel.toggleClass('active');
                 return false;
             }
         });

@@ -856,33 +856,21 @@
     <div class="mega-menu account-dropdown" aria-labelledby="dropdown-accounts">
         <div class="section">
             <div class="container">
-                <div class="row">
-                    <div class="col-12 col-lg-4">
-                        <h5>Accounts</h5>
-                        <hr align="left" class="hr-panel">
-                        <ul class="d-inline-block">
+				<h5>Accounts</h5>
+				<hr align="left" class="hr-panel">
+				<ul class="d-inline-block">
 
-                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
+					<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
 
-                            <li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
+					<li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
 
-                            <li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
+					<li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
 
-                            <li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
+					<li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
 
-                            <li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
+					<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
 
-                        </ul>
-
-                    </div>
-                    <div class="col-12 col-lg-8 d-none d-lg-block">
-                        <h5>My Favorite Links</h5>
-                        <hr align="left" class="hr-panel">
-                        <div class="my-favorite-links uml-quick-links" data-type="account-list">
-                            <h6><a href="https://www.library.miami.edu/favorites.html" class="no-decoration default">(How to use this feature)</a></h6>
-                        </div>
-                    </div>
-                </div>
+				</ul>
                 <div class="panel-close d-none d-xl-block">
                     <div class="close-mm" title="Close"></div>
                 </div>

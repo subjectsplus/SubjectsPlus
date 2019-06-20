@@ -150,3 +150,5 @@ nul
 /node_modules/
 /subjects/.htaccess
 /api/.htaccess
+/subjects/themes/med/
+/subjects/themes/um-new/
