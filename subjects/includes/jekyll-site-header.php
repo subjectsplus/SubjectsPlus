@@ -776,7 +776,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/policies.html">Policies</a></li>
 
-                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/staff.php">Staff List</a></li>
+                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/staff.php">People</a></li>
 
                                         </ul>
 
