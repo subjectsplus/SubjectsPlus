@@ -774,7 +774,7 @@
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/vision-mission-and-values.html">Mission / Vision</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/people.html">People</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/people">People</a></li>
 
                                             <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/policies.html">Policies</a></li>
 
