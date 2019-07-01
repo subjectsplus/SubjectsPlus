@@ -146,7 +146,8 @@ SELECT GROUP_CONCAT(subject SEPARATOR \', \') as subject_areas FROM staff_subjec
 	                                    AND ss.staff_id = a.staff_id
 	                                    AND active = \'1\'
 	                                    AND s.type = \'Subject\'
-	                                    ORDER BY subject), "") as subject_areas
+                                        AND a.ptags LIKE \'%librarian%\'
+	                                    ORDER BY subject), "") as librarian_subject_areas
 FROM staff as a,
      department as department
 WHERE active = 1
