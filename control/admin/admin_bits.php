@@ -268,22 +268,26 @@ switch ($_REQUEST["action"]) {
     return; // return early so we don't show the stuff that follows
     break;
   case "address_lookup":
-    //print urlencode($_REQUEST["address"]);
-    $endpoint = "http://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($_REQUEST["address"]) . "&sensor=false";
-    $address = curl_get($endpoint);
-    //print $address;
-    $output = json_decode($address);
-    //print $output->results[0]->geometry->location->lat;
-    $lat = $output->results[0]->geometry->location->lat;
-    $long = $output->results[0]->geometry->location->lng;
-    $coords = $lat . "," . $long;
+    
+    $requested_address = urlencode($_REQUEST["address"]);
+      
+    // Mapbox public access token located in config.php
+    global $mapbox_access_token;
+
+    // Endpoint for MapBox coords API.
+    // API endpoint URL + address query + JSON type + access token defined in config.php + more path parameters
+    $endpoint = "https://api.mapbox.com/geocoding/v5/mapbox.places/" . urlencode( $_REQUEST["address"] ) . ".json?access_token=" . $mapbox_access_token . "&cachebuster=1562179849619&autocomplete=true";
+
+    $mapbox_response = curl_get($endpoint);
+    $formatted_json = json_decode($mapbox_response);
+    $coords = implode(",", $formatted_json->features[0]->center);
 
     print $coords;
-
-    //print $address;
+    
     return; // return early so we don't show the stuff that follows
 
     break;
+
 } // End Action loop
 // Now generate results, $extra_q set in action loop above
 $q = "SELECT s.subject_id, subject, fname, lname, st.staff_id, type, shortform, s.active
