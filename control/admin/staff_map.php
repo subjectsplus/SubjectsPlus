@@ -121,44 +121,13 @@ foreach ($staffArray as $key => $value) {
         geometry: {
           type: 'Point',
           coordinates: [" . $value["lat_long"] . "].reverse(),
-          //[" . $value["lat_long"][1] . ", " . $value["lat_long"][0] . "],
         },
         properties: {
-          title: '" . $value["fullname"] . "',
-          icon: 'harbor'
+          icon: 'library',
+          name: 'Some Name'
         }
       }
     ";
-
-    // print "
-    //   markers[" . $key . "] = {
-    //     position: [" . $value["lat_long"] . "],
-    //     fullname: '" . $value["fullname"] . "',
-    //     address: `" . $value["full_address"] . "`,
-    //     e_contact: '" . $value["contact"] . "',
-    //     home_phone: '" . $value["home_phone"] . "',
-    //     cell_phone: '" . $value["cell_phone"] . "',
-    //     email: '" . $value["email"] . "'
-    //   };
-    // ";
-
-//    print "
-//      
-//      {"type
-//    
-//    "
-
-    // {
-    //   "type": "Feature",
-    //   "geometry": {
-    //   "type": "Point",
-    //   "coordinates": [-122.414, 37.776]
-    //   },
-    //   "properties": {
-    //   "title": "Mapbox SF",
-    //   "icon": "harbor"
-    //   }
-    // },
 
   }
 }
@@ -169,8 +138,12 @@ print "</script>";
 
 ?>
 
-<script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" />
+<!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
+<script src="../../assets/js/mapbox-gl.js"></script>
+<script src="../../assets/css/mapbox-gl.css"></script>
+
+<!-- <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" /> -->
   
 <h1>STILL TESTING</h1>
 <div id='map' style='width: 800px; height: 600px;'></div>
@@ -221,17 +194,6 @@ print "</script>";
           "type": "FeatureCollection",
           "features": [
             ...Object.values(markers)
-            // {
-            //   "type": "Feature",
-            //   "geometry": {
-            //     "type": "Point",
-            //     "coordinates": [-122.414, 37.776]
-            //   },
-            //   "properties": {
-            //     "title": "Mapbox SF",
-            //     "icon": "harbor"
-            //   }
-            // },
           ]
         }
       },
