@@ -114,18 +114,33 @@ foreach ($staffArray as $key => $value) {
       $value["home_phone"] =        !empty($value["home_phone"])                  ? decryptIt($value["home_phone"])                   : "";
       $value["cell_phone"] =        !empty($value["cell_phone"])                  ? decryptIt($value["cell_phone"])                   : "";
     }
-
+    
     print "
       markers[" . $key . "] = {
-        position: [" . $value["lat_long"] . "],
-        fullname: '" . $value["fullname"] . "',
-        address: `" . $value["full_address"] . "`,
-        e_contact: '" . $value["contact"] . "',
-        home_phone: '" . $value["home_phone"] . "',
-        cell_phone: '" . $value["cell_phone"] . "',
-        email: '" . $value["email"] . "'
-      };
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [" . $value["lat_long"] . "].reverse(),
+          //[" . $value["lat_long"][1] . ", " . $value["lat_long"][0] . "],
+        },
+        properties: {
+          title: '" . $value["fullname"] . "',
+          icon: 'harbor'
+        }
+      }
     ";
+
+    // print "
+    //   markers[" . $key . "] = {
+    //     position: [" . $value["lat_long"] . "],
+    //     fullname: '" . $value["fullname"] . "',
+    //     address: `" . $value["full_address"] . "`,
+    //     e_contact: '" . $value["contact"] . "',
+    //     home_phone: '" . $value["home_phone"] . "',
+    //     cell_phone: '" . $value["cell_phone"] . "',
+    //     email: '" . $value["email"] . "'
+    //   };
+    // ";
 
 //    print "
 //      
@@ -186,7 +201,7 @@ print "</script>";
   console.log('homeCoords:', homeCoords);
   console.log('homeCoords typeof:', typeof homeCoords);
 
-  console.log('================== markers :', markers);
+  console.log('================== markers :', ...Object.values(markers));
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -198,24 +213,25 @@ print "</script>";
   map.on('load', function () {
   
     map.addLayer({
-      "id": "points",
+      "id": "staff",
       "type": "symbol",
       "source": {
         "type": "geojson",
         "data": {
           "type": "FeatureCollection",
           "features": [
-            {
-              "type": "Feature",
-              "geometry": {
-              "type": "Point",
-              "coordinates": [-122.414, 37.776]
-              },
-              "properties": {
-              "title": "Mapbox SF",
-              "icon": "harbor"
-              }
-            },
+            ...Object.values(markers)
+            // {
+            //   "type": "Feature",
+            //   "geometry": {
+            //     "type": "Point",
+            //     "coordinates": [-122.414, 37.776]
+            //   },
+            //   "properties": {
+            //     "title": "Mapbox SF",
+            //     "icon": "harbor"
+            //   }
+            // },
           ]
         }
       },
