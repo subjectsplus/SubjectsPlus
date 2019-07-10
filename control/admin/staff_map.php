@@ -92,8 +92,23 @@ $staffArray = $db->query($q1);
 include("../includes/footer.php");
 
 print "
+  <!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
+  <!-- <script src='../../assets/js/mapbox-gl.js'></script> -->
+  <!-- <script src='../../assets/css/mapbox-gl.css'></script> -->
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+
+  <style>
+    .mapboxgl-popup {
+      max-width: 200px;
+      }
+  </style>
+
   <script id='markers-container'>
     let markers = [];
+    let popup, el, newPopup;
+    let popupArray = [];
 ";
 
 foreach ($staffArray as $key => $value) {
@@ -117,26 +132,42 @@ foreach ($staffArray as $key => $value) {
     
     print "
         
-    markers.push(
-      {
-        type: 'Point',
-        geometry: {
+      markers.push(
+        {
           type: 'Point',
-          coordinates: [" . $value["lat_long"] . "].reverse(),
-        },
-        properties: {
-          icon: 'pulsing-dot',
-          name: '" . $value["fullname"] . "'
+          geometry: {
+            type: 'Point',
+            coordinates: [" . $value["lat_long"] . "].reverse(),
+          },
+          properties: {
+            icon: 'pulsing-dot',
+            name: '" . $value["fullname"] . "'
+          }
         }
-      }
-    )
+      )
+
+      // create the popup
+      popup = new mapboxgl.Popup({ offset: 25 })
+        .setText('" . $value["fullname"] . "');
+      
+      // create DOM element for the marker
+      el = document.createElement('div');
+      el.id = 'marker'+" . $key . ";
+
+      // create the marker
+      newPopup = new mapboxgl.Marker(el)
+        .setLngLat([" . $value["lat_long"] . "].reverse())
+        .setPopup(popup) // sets a popup on this marker
+
+      popupArray.push(newPopup);
+
     ";
 
   }
 }
 
 print "
-  console.log('----------------------- ', markers[0]);
+  console.log('----------------------- popupArray: ', popupArray);
   
   </script>
   
@@ -145,20 +176,10 @@ print "
 ?>
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
-
-<script id="">
-</script>
-
-<!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
-<script src="../../assets/js/mapbox-gl.js"></script>
-<script src="../../assets/css/mapbox-gl.css"></script>
-
-<!-- <script src="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" /> -->
   
 <h1>STILL TESTING</h1>
 <div id='map' style='width: 800px; height: 600px;'></div>
-<script>
+<script id="map-drawing">
 
   <?php
     global $mapbox_access_token;
@@ -182,6 +203,11 @@ print "
     center: homeCoords,
     zoom: 9
   });
+
+  // for(let popup of popupArray){
+  //   console.log('popup :', popup);
+  //   popup.addTo(map);
+  // };
 
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
@@ -261,5 +287,37 @@ print "
         "text-anchor": "top"
       }
     });
+
   });
+
+  map.on('click', 'staff', function (e) {
+
+    console.log('e :', e);
+
+    let coordinates = e.features[0].geometry.coordinates.slice();
+    let name = e.features[0].properties.name;
+    
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+    
+    new mapboxgl.Popup()
+      .setLngLat(coordinates)
+      .setHTML(name)
+      .addTo(map);
+  });
+
+  // Change the cursor to a pointer when the mouse is over the places layer.
+  map.on('mouseenter', 'staff', function () {
+    map.getCanvas().style.cursor = 'pointer';
+  });
+  
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'staff', function () {
+    map.getCanvas().style.cursor = '';
+  });
+
 </script>
