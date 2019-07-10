@@ -16,6 +16,8 @@ if (! (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) ){
   exit;
 };
 
+// ----- FETCH INFO FROM THE DB + PASS IT TO THE CLIENT-SIDE JS ----------------------------------------------------
+
 global $stats_encryption_enabled;
 
 if ( $stats_encryption_enabled ) {
@@ -90,10 +92,8 @@ $staffArray = $db->query($q1);
 include("../includes/footer.php");
 
 print "
-  <script>
-
-  let markers = {};
-
+  <script id='markers-container'>
+    let markers = [];
 ";
 
 foreach ($staffArray as $key => $value) {
@@ -116,27 +116,38 @@ foreach ($staffArray as $key => $value) {
     }
     
     print "
-      markers[" . $key . "] = {
-        type: 'Feature',
+        
+    markers.push(
+      {
+        type: 'Point',
         geometry: {
           type: 'Point',
           coordinates: [" . $value["lat_long"] . "].reverse(),
         },
         properties: {
-          icon: 'library',
-          name: 'Some Name'
+          icon: 'pulsing-dot',
+          name: '" . $value["fullname"] . "'
         }
       }
+    )
     ";
 
   }
 }
 
-echo "console.log('----------------------- ', markers[0]);";
-
-print "</script>";
+print "
+  console.log('----------------------- ', markers[0]);
+  
+  </script>
+  
+";
 
 ?>
+
+<!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
+
+<script id="">
+</script>
 
 <!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
 <script src="../../assets/js/mapbox-gl.js"></script>
@@ -149,32 +160,21 @@ print "</script>";
 <div id='map' style='width: 800px; height: 600px;'></div>
 <script>
 
-  <?php global $mapbox_access_token; ?>
+  <?php
+    global $mapbox_access_token;
+    
+    // Use home location coordinates for map centering; this is set in config.php
+    global $home_coords;
+  ?>
 
   mapboxgl.accessToken = "<?php echo $mapbox_access_token ?>";
-
-  <?php
-
-  // Use home location coordinates for map centering; this is set in config.php
-  global $home_coords;
-
-  // If no value has been set in config.php for $home_coords, use Coral Gables as default
-  // if(! isset($home_coords)){
-  //   echo "NOT SET";
-  //   $home_coords = "25.71828,-80.27875";
-  // };
-
-  ?>
 
   console.log('$mapbox_access_token :', "<?php echo $mapbox_access_token; ?>");
 
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
 
-  console.log('homeCoords:', homeCoords);
-  console.log('homeCoords typeof:', typeof homeCoords);
-
-  console.log('================== markers :', ...Object.values(markers));
+  console.log('================== markers :', markers);
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -182,23 +182,79 @@ print "</script>";
     center: homeCoords,
     zoom: 9
   });
+
+  // Start of code for pulsing red dot as marker
+  let dotSize = 75;
+
+  let pulsingDot = {
+    width: dotSize,
+    height: dotSize,
+    data: new Uint8Array(dotSize * dotSize * 4),
+    
+    onAdd: function() {
+      let canvas = document.createElement('canvas');
+      canvas.width = this.width;
+      canvas.height = this.height;
+      this.context = canvas.getContext('2d');
+    },
+    
+    render: function() {
+      let duration = 1000;
+      let t = (performance.now() % duration) / duration;
+      
+      let radius = dotSize / 2 * 0.3;
+      let outerRadius = dotSize / 2 * 0.7 * t + radius;
+      let context = this.context;
+      
+      // draw outer circle
+      context.clearRect(0, 0, this.width, this.height);
+      context.beginPath();
+      context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+      context.fill();
+      
+      // draw inner circle
+      context.beginPath();
+      context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(255, 100, 100, 1)';
+      context.strokeStyle = 'white';
+      context.lineWidth = 2 + 4 * (1 - t);
+      context.fill();
+      context.stroke();
+      
+      // update this image's data with data from the canvas
+      this.data = context.getImageData(0, 0, this.width, this.height).data;
+      
+      // keep the map repainting
+      map.triggerRepaint();
+      
+      // return `true` to let the map know that the image was updated
+      return true;
+    }
+  };
   
   map.on('load', function () {
   
+    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+
+    map.addSource("staff_locations", {
+      type: "geojson",
+      data: {
+        "type": "FeatureCollection",
+        "features": markers
+      },
+      cluster: false,
+      clusterMaxZoom: 1, // Max zoom to cluster points on
+      clusterRadius: 1, // Radius of each cluster when clustering points (defaults to 50)
+    });
+    
     map.addLayer({
       "id": "staff",
       "type": "symbol",
-      "source": {
-        "type": "geojson",
-        "data": {
-          "type": "FeatureCollection",
-          "features": [
-            ...Object.values(markers)
-          ]
-        }
-      },
+      "source": "staff_locations",
       "layout": {
-        "icon-image": "{icon}-15",
+        "icon-image": "pulsing-dot",
+        "icon-ignore-placement": true,
         "text-field": "{title}",
         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
         "text-offset": [0, 0.6],
