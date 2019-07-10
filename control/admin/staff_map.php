@@ -99,16 +99,9 @@ print "
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
 
-  <style>
-    .mapboxgl-popup {
-      max-width: 200px;
-      }
-  </style>
-
   <script id='markers-container'>
     let markers = [];
     let popup, el, newPopup;
-    let popupArray = [];
 ";
 
 foreach ($staffArray as $key => $value) {
@@ -131,46 +124,28 @@ foreach ($staffArray as $key => $value) {
     }
     
     print "
-        
       markers.push(
         {
-          type: 'Point',
+          type: 'Feature',
+          id: " . $key . ",
           geometry: {
             type: 'Point',
             coordinates: [" . $value["lat_long"] . "].reverse(),
           },
           properties: {
+            id: " . $key . ",
             icon: 'pulsing-dot',
             name: '" . $value["fullname"] . "'
           }
         }
       )
-
-      // create the popup
-      popup = new mapboxgl.Popup({ offset: 25 })
-        .setText('" . $value["fullname"] . "');
-      
-      // create DOM element for the marker
-      el = document.createElement('div');
-      el.id = 'marker'+" . $key . ";
-
-      // create the marker
-      newPopup = new mapboxgl.Marker(el)
-        .setLngLat([" . $value["lat_long"] . "].reverse())
-        .setPopup(popup) // sets a popup on this marker
-
-      popupArray.push(newPopup);
-
     ";
 
   }
 }
 
 print "
-  console.log('----------------------- popupArray: ', popupArray);
-  
   </script>
-  
 ";
 
 ?>
@@ -259,6 +234,7 @@ print "
     }
   };
   
+  // Set up static elements of the map on completion of map loading
   map.on('load', function () {
   
     map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
@@ -288,8 +264,23 @@ print "
       }
     });
 
+    map.addLayer({
+      "id": "hover-fills",
+      "type": "fill",
+      "source": "staff_locations",
+      "layout": {},
+      "paint": {
+        "fill-color": ["case",
+          ["boolean", ["feature-state", "hover"], false],
+          "#ff6464",
+          "#ffffff"
+        ]
+      }
+    })
+
   });
 
+  // Set up click event for staff member icons
   map.on('click', 'staff', function (e) {
 
     console.log('e :', e);
@@ -318,6 +309,41 @@ print "
   // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'staff', function () {
     map.getCanvas().style.cursor = '';
+  });
+
+  let hoveredStateId = null;
+
+  // When the user moves their mouse over the state-fill layer, we'll update the
+  // feature state for the feature under the mouse.
+  map.on("mousemove", "staff", function(e) {
+    if (e.features.length > 0) {
+      if (hoveredStateId) {
+        map.setFeatureState({source: 'staff_locations', id: hoveredStateId}, { "hover": false});
+      }
+      hoveredStateId = e.features[0].id;
+      map.setFeatureState({source: 'staff_locations', id: hoveredStateId}, { "hover": true});
+    }
+
+    console.log('hoveredStateId :', hoveredStateId);
+
+    console.log(map.getFeatureState({source: 'staff_locations', id: hoveredStateId}));
+    console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
+
+  });
+
+  // When the mouse leaves the state-fill layer, update the feature state of the
+  // previously hovered feature.
+  map.on("mouseleave", "staff", function() {
+    if (hoveredStateId) {
+      map.setFeatureState({source: 'staff_locations', id: hoveredStateId}, { "hover": false});
+    }
+    hoveredStateId =  null;
+
+    console.log('hoveredStateId :', hoveredStateId);
+
+    console.log(map.getFeatureState({source: 'staff_locations', id: hoveredStateId}));
+    console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
+
   });
 
 </script>
