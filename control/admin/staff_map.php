@@ -34,7 +34,8 @@ if ( $stats_encryption_enabled ) {
     zip,
     home_phone,
     cell_phone,
-    lat_long
+    lat_long,
+    title AS position
   FROM staff
   WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
   AND active = 1';
@@ -53,7 +54,8 @@ if ( $stats_encryption_enabled ) {
       zip,
       home_phone,
       cell_phone,
-      lat_long
+      lat_long,
+      title AS position
     FROM staff
     WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
     AND ptags LIKE "%librarian%"';
@@ -66,7 +68,8 @@ if ( $stats_encryption_enabled ) {
     CONCAT( street_address, "<br/>", city, " ",state, " ", zip ) AS full_address,
     home_phone,
     cell_phone,
-    lat_long
+    lat_long,
+    title AS position
   FROM staff
   WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
   AND active = 1';
@@ -79,7 +82,8 @@ if ( $stats_encryption_enabled ) {
       CONCAT( street_address, "<br/>", city, " ", state, " ", zip ) AS full_address,
       home_phone,
       cell_phone,
-      lat_long
+      lat_long,
+      title AS position
     FROM staff
     WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
     AND ptags LIKE "%librarian%"';
@@ -98,6 +102,18 @@ print "
 
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+
+  <style>
+    .mapboxgl-popup-content{
+      width: 25vw;
+      border-radius: 5px;
+    }
+
+    .mapboxgl-popup-content button {
+      font-size: large;
+      padding: inherit;
+    }
+  </style>
 
   <script id='markers-container'>
     let markers = [];
@@ -121,6 +137,7 @@ foreach ($staffArray as $key => $value) {
       $emergency_contact_phone =    !empty($value["emergency_contact_phone"])     ? decryptIt($value["emergency_contact_phone"])      : "";
       $value["home_phone"] =        !empty($value["home_phone"])                  ? decryptIt($value["home_phone"])                   : "";
       $value["cell_phone"] =        !empty($value["cell_phone"])                  ? decryptIt($value["cell_phone"])                   : "";
+      $value["position"] =          !empty($value["position"])                    ? decryptIt($value["position"])                     : "";
     }
     
     print "
@@ -139,8 +156,9 @@ foreach ($staffArray as $key => $value) {
             full_address:   '" . $value["full_address"] . "',
             email:          '" . $value["email"] . "',
             home_phone:     '" . $value["home_phone"] . "',
-            cellphone:      '" . $value["cell_phone"] . "',
-            contact:        '" . $value["contact"] . "'
+            cell_phone:     '" . $value["cell_phone"] . "',
+            contact:        '" . $value["contact"] . "',
+            position:       '" . $value["position"] . "'
           }
         }
       )
@@ -290,20 +308,27 @@ print "
   // Set up click event for staff member icons
   map.on('click', 'staff', function (e) {
 
-    console.log('e :', e);
-
     let staffMember = e.features[0].properties;
-
     let coordinates = e.features[0].geometry.coordinates.slice();
+    let assetPath = '<?php global $AssetPath; echo $AssetPath; ?>';
+
     let popupHtml = `
-      <h3>${staffMember.fullname}</h3>
+    <div style="display: flex;">
+      <div id="headshot-container" style="width: 50%; align-content: center;">
+        <img src="${assetPath}users/_${staffMember.email.split("@")[0]}/headshot.jpg" style="width: 80%; height: auto; border-radius: 5px;">
+      </div>
+      <div id="name-title-container" style="width: 50%; margin-top: 10px; align-content: center;">
+        <h2 style="text-align: right; margin-bottom: 5px;">${staffMember.fullname}</h2>
+        <p style="text-align: right; margin-top: 0px;">${staffMember.position}</p>
+      </div>
+    </div>
       <p>${staffMember.full_address}</p>
-      <p>${staffMember.email}
+      <strong>Email:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.email ? staffMember.email : `<font color="gray">None Found</font>`}</span>
       <br />
-      <strong>Home Phone:</strong> ${staffMember.home_phone}
+      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.home_phone ? staffMember.home_phone : `<i>Not on File</i>`}</span>
       <br />
-      <strong>Cell Phone:</strong> ${staffMember.cell_phone}
-      <br />
+      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.cell_phone ? staffMember.cell_phone : `<font color="gray">None Found</font>`}</span>
+      <hr>
       <h3>Emergency Contact:</strong></h3>
       <p>${staffMember.contact}</p>
     `
