@@ -153,7 +153,7 @@ print "
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
   
 <h1>STILL TESTING</h1>
-<div id='map' style='width: 800px; height: 600px;'></div>
+<div id='map' style='width: 1000px; height: 800px;'></div>
 <script id="map-drawing">
 
   <?php
@@ -270,10 +270,11 @@ print "
       "source": "staff_locations",
       "layout": {},
       "paint": {
-        "fill-color": ["case",
+        "fill-color": "#ffffff",
+        "fill-opacity": ["case",
           ["boolean", ["feature-state", "hover"], false],
-          "#ff6464",
-          "#ffffff"
+          1,
+          0.5
         ]
       }
     })
@@ -311,38 +312,48 @@ print "
     map.getCanvas().style.cursor = '';
   });
 
-  let hoveredStateId = null;
+  let hoveredPointId = null;
 
-  // When the user moves their mouse over the state-fill layer, we'll update the
+  // When the user moves their mouse over the hover-fills layer, we'll update the
   // feature state for the feature under the mouse.
-  map.on("mousemove", "staff", function(e) {
+  map.on("mousemove", 'staff', function(e) {
+
+    let lastHovered;
+
     if (e.features.length > 0) {
-      if (hoveredStateId) {
-        map.setFeatureState({source: 'staff_locations', id: hoveredStateId}, { "hover": false});
+      if (hoveredPointId) {
+        lastHovered = hoveredPointId;
+        map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": false});
       }
-      hoveredStateId = e.features[0].id;
-      map.setFeatureState({source: 'staff_locations', id: hoveredStateId}, { "hover": true});
+      hoveredPointId = e.features[0].id;
+      map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": true});
     }
 
-    console.log('hoveredStateId :', hoveredStateId);
+    console.log('hoveredPointId :', hoveredPointId);
 
-    console.log(map.getFeatureState({source: 'staff_locations', id: hoveredStateId}));
-    console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
+    console.log(map.getFeatureState({source: 'staff_locations', id: hoveredPointId}));
+    // console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
 
   });
 
   // When the mouse leaves the state-fill layer, update the feature state of the
   // previously hovered feature.
-  map.on("mouseleave", "staff", function() {
-    if (hoveredStateId) {
-      map.setFeatureState({source: 'staff_locations', id: hoveredStateId}, { "hover": false});
+  map.on("mouseleave", 'staff', function() {
+
+    let lastHovered;
+
+    if (hoveredPointId) {
+      lastHovered = hoveredPointId;
+      map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": false});
     }
-    hoveredStateId =  null;
 
-    console.log('hoveredStateId :', hoveredStateId);
+    hoveredPointId =  null;
 
-    console.log(map.getFeatureState({source: 'staff_locations', id: hoveredStateId}));
-    console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
+    console.log('hoveredPointId :', hoveredPointId);
+    console.log('lastHovered :', lastHovered);
+
+    console.log(map.getFeatureState({source: 'staff_locations', id: lastHovered}));
+    // console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
 
   });
 
