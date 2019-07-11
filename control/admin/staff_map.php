@@ -63,7 +63,7 @@ if ( $stats_encryption_enabled ) {
     CONCAT( fname, " ", lname ) AS fullname,
     email,
     CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact,
-    CONCAT( street_address, city, " ",state, " ", zip ) AS full_address,
+    CONCAT( street_address, "<br/>", city, " ",state, " ", zip ) AS full_address,
     home_phone,
     cell_phone,
     lat_long
@@ -76,7 +76,7 @@ if ( $stats_encryption_enabled ) {
       CONCAT( fname, " ", lname ) AS fullname,
       email,
       CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact,
-      CONCAT( street_address, city, " ", state, " ", zip ) AS full_address,
+      CONCAT( street_address, "<br/>", city, " ", state, " ", zip ) AS full_address,
       home_phone,
       cell_phone,
       lat_long
@@ -108,7 +108,7 @@ foreach ($staffArray as $key => $value) {
   if (!empty($value["lat_long"])) {
     if ($stats_encryption_enabled){
       $value["fullname"] =          $value["fname"] . " " . $value["lname"];
-      $value["full_address"] =      $street_address . $city . " " . $state . " " . $zip;
+      $value["full_address"] =      $street_address . "<br/>" . $city . " " . $state . " " . $zip;
       $value["contact"] =           $emergency_contact_name . " (" . $emergency_contact_relation . "): " . $emergency_contact_phone;
 
       $value["lat_long"] =          !empty($value["lat_long"])                    ? decryptIt($value["lat_long"])                     : "";
@@ -133,14 +133,20 @@ foreach ($staffArray as $key => $value) {
             coordinates: [" . $value["lat_long"] . "].reverse(),
           },
           properties: {
-            id: " . $key . ",
-            icon: 'pulsing-dot',
-            name: '" . $value["fullname"] . "'
+            id:             " . $key . ",
+            icon:           'pulsing-dot',
+            fullname:       '" . $value["fullname"] . "',
+            full_address:   '" . $value["full_address"] . "',
+            email:          '" . $value["email"] . "',
+            home_phone:     '" . $value["home_phone"] . "',
+            cellphone:      '" . $value["cell_phone"] . "',
+            contact:        '" . $value["contact"] . "'
           }
         }
       )
-    ";
 
+      console.log('address coming out: ', '" . $value["full_address"] . "' );
+    ";
   }
 }
 
@@ -153,7 +159,7 @@ print "
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
   
 <h1>STILL TESTING</h1>
-<div id='map' style='width: 1000px; height: 800px;'></div>
+<div id='map' style='width: 90vw; height: 800px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
 <script id="map-drawing">
 
   <?php
@@ -286,8 +292,21 @@ print "
 
     console.log('e :', e);
 
+    let staffMember = e.features[0].properties;
+
     let coordinates = e.features[0].geometry.coordinates.slice();
-    let name = e.features[0].properties.name;
+    let popupHtml = `
+      <h3>${staffMember.fullname}</h3>
+      <p>${staffMember.full_address}</p>
+      <p>${staffMember.email}
+      <br />
+      <strong>Home Phone:</strong> ${staffMember.home_phone}
+      <br />
+      <strong>Cell Phone:</strong> ${staffMember.cell_phone}
+      <br />
+      <h3>Emergency Contact:</strong></h3>
+      <p>${staffMember.contact}</p>
+    `
     
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
@@ -298,7 +317,8 @@ print "
     
     new mapboxgl.Popup()
       .setLngLat(coordinates)
-      .setHTML(name)
+      .setHTML(popupHtml)
+      .setMaxWidth('25vw')
       .addTo(map);
   });
 
