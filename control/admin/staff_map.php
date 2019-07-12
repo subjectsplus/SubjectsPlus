@@ -21,6 +21,9 @@ if (! (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) ){
 global $stats_encryption_enabled;
 
 if ( $stats_encryption_enabled ) {
+
+  print "console.log('RUNNING QUERY ON LINE 25')";
+
 	$q1 = 'SELECT staff_id,
     fname,
     lname,
@@ -61,10 +64,13 @@ if ( $stats_encryption_enabled ) {
     AND ptags LIKE "%librarian%"';
   }
 } else {
+
+  print "console.log('RUNNING QUERY ON LINE 68')";
+
 	$q1 = 'SELECT staff_id,
     CONCAT( fname, " ", lname ) AS fullname,
     email,
-    CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact,
+    CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
     CONCAT( street_address, "<br/>", city, " ",state, " ", zip ) AS full_address,
     home_phone,
     cell_phone,
@@ -75,10 +81,13 @@ if ( $stats_encryption_enabled ) {
   AND active = 1';
 
 	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
+
+    print "console.log('RUNNING QUERY ON LINE 85')";
+
 		$q1 = 'SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
       email,
-      CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", emergency_contact_phone ) AS contact,
+      CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
       CONCAT( street_address, "<br/>", city, " ", state, " ", zip ) AS full_address,
       home_phone,
       cell_phone,
@@ -117,7 +126,7 @@ print "
 
   <script id='markers-container'>
     let markers = [];
-    let popup, el, newPopup;
+    let popup, el, newPopup, formattedCoords;
 ";
 
 foreach ($staffArray as $key => $value) {
@@ -125,7 +134,7 @@ foreach ($staffArray as $key => $value) {
     if ($stats_encryption_enabled){
       $value["fullname"] =          $value["fname"] . " " . $value["lname"];
       $value["full_address"] =      $street_address . "<br/>" . $city . " " . $state . " " . $zip;
-      $value["contact"] =           $emergency_contact_name . " (" . $emergency_contact_relation . "): " . $emergency_contact_phone;
+      $value["contact"] =           $emergency_contact_name . " (" . $emergency_contact_relation . "): " . "<span>" . $emergency_contact_phone . "</span>";
 
       $value["lat_long"] =          !empty($value["lat_long"])                    ? decryptIt($value["lat_long"])                     : "";
       $street_address =             !empty($value["street_address"])              ? decryptIt($value["street_address"])               : "";
@@ -162,13 +171,14 @@ foreach ($staffArray as $key => $value) {
           }
         }
       )
-
-      console.log('address coming out: ', '" . $value["full_address"] . "' );
     ";
   }
 }
 
 print "
+
+    console.log(markers);
+
   </script>
 ";
 
@@ -189,12 +199,12 @@ print "
 
   mapboxgl.accessToken = "<?php echo $mapbox_access_token ?>";
 
-  console.log('$mapbox_access_token :', "<?php echo $mapbox_access_token; ?>");
+  // console.log('$mapbox_access_token :', "<?php echo $mapbox_access_token; ?>");
 
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
 
-  console.log('================== markers :', markers);
+  // console.log('================== markers :', markers);
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -202,11 +212,6 @@ print "
     center: homeCoords,
     zoom: 9
   });
-
-  // for(let popup of popupArray){
-  //   console.log('popup :', popup);
-  //   popup.addTo(map);
-  // };
 
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
@@ -327,11 +332,11 @@ print "
       <br />
       <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.home_phone ? staffMember.home_phone : `<i>Not on File</i>`}</span>
       <br />
-      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.cell_phone ? staffMember.cell_phone : `<font color="gray">None Found</font>`}</span>
+      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.cell_phone ? staffMember.cell_phone : `<i>Not on File</i>`}</span>
       <hr>
       <h3>Emergency Contact:</strong></h3>
-      <p>${staffMember.contact}</p>
-    `
+      <p>${staffMember.contact != ' (): <span></span>' ? staffMember.contact : `<i>Not on File</i>`}</p>
+    `;
     
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
@@ -374,9 +379,9 @@ print "
       map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": true});
     }
 
-    console.log('hoveredPointId :', hoveredPointId);
+    // console.log('hoveredPointId :', hoveredPointId);
 
-    console.log(map.getFeatureState({source: 'staff_locations', id: hoveredPointId}));
+    // console.log(map.getFeatureState({source: 'staff_locations', id: hoveredPointId}));
     // console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
 
   });
@@ -394,10 +399,10 @@ print "
 
     hoveredPointId =  null;
 
-    console.log('hoveredPointId :', hoveredPointId);
-    console.log('lastHovered :', lastHovered);
+    // console.log('hoveredPointId :', hoveredPointId);
+    // console.log('lastHovered :', lastHovered);
 
-    console.log(map.getFeatureState({source: 'staff_locations', id: lastHovered}));
+    // console.log(map.getFeatureState({source: 'staff_locations', id: lastHovered}));
     // console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
 
   });

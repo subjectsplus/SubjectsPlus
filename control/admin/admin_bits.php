@@ -280,7 +280,7 @@ switch ($_REQUEST["action"]) {
 
     $mapbox_response = curl_get($endpoint);
     $formatted_json = json_decode($mapbox_response);
-    $coords = implode(",", $formatted_json->features[0]->center);
+    $coords = implode(",", array_reverse($formatted_json->features[0]->center));
 
     print $coords;
     
