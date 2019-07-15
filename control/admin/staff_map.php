@@ -19,12 +19,14 @@ if (! (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) ){
 // ----- FETCH INFO FROM THE DB + PASS IT TO THE CLIENT-SIDE JS ----------------------------------------------------
 
 global $stats_encryption_enabled;
+$db = new Querier;
+$connection = $db->getConnection();
 
 if ( $stats_encryption_enabled ) {
 
   print "console.log('RUNNING QUERY ON LINE 25')";
 
-	$q1 = 'SELECT staff_id,
+	$statement = $connection->prepare('SELECT staff_id,
     fname,
     lname,
     email,
@@ -41,12 +43,12 @@ if ( $stats_encryption_enabled ) {
     title AS position
   FROM staff
   WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
-  AND active = 1';
+  AND active = 1');
 
 	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
-		$q1 = 'SELECT staff_id,
+		$statement = $connection->prepare('SELECT staff_id,
       fname,
-      lname),
+      lname,
       email,
       emergency_contact_name,
       emergency_contact_relation,
@@ -61,13 +63,13 @@ if ( $stats_encryption_enabled ) {
       title AS position
     FROM staff
     WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
-    AND ptags LIKE "%librarian%"';
+    AND ptags LIKE "%librarian%"');
   }
 } else {
 
-  print "console.log('RUNNING QUERY ON LINE 68')";
+  print "<script>console.log('RUNNING QUERY ON LINE 68')</script>";
 
-	$q1 = 'SELECT staff_id,
+	$statement = $connection->prepare('SELECT staff_id,
     CONCAT( fname, " ", lname ) AS fullname,
     email,
     CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
@@ -78,13 +80,13 @@ if ( $stats_encryption_enabled ) {
     title AS position
   FROM staff
   WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
-  AND active = 1';
+  AND active = 1');
 
 	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
 
-    print "console.log('RUNNING QUERY ON LINE 85')";
+    print "<script>console.log('RUNNING QUERY ON LINE 85')</script>";
 
-		$q1 = 'SELECT staff_id,
+		$statement = $connection->prepare('SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
       email,
       CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
@@ -95,12 +97,12 @@ if ( $stats_encryption_enabled ) {
       title AS position
     FROM staff
     WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
-    AND ptags LIKE "%librarian%"';
+    AND ptags LIKE "%librarian%"');
 	}
 }
 
-$db = new Querier;
-$staffArray = $db->query($q1);
+$statement->execute();
+$staffArray = $statement->fetchAll();
 
 include("../includes/footer.php");
 
