@@ -108,11 +108,11 @@ include("../includes/footer.php");
 
 print "
   <!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
-  <!-- <script src='../../assets/js/mapbox-gl.js'></script> -->
-  <!-- <script src='../../assets/css/mapbox-gl.css'></script> -->
+  <script src='../../assets/jquery/libs/mapbox-gl.js'></script>
+  <script src='../../assets/css/shared/mapbox-gl.css'></script>
 
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+  <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script> -->
+  <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' /> -->
 
   <style>
     .mapboxgl-popup-content{
@@ -187,8 +187,7 @@ print "
 ?>
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
-  
-<h1>STILL TESTING</h1>
+
 <div id='map' style='width: 90vw; height: 800px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
 <script id="map-drawing">
 
