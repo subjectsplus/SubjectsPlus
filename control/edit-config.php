@@ -961,6 +961,98 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"",
 			""
 		),
+
+		"problem_report_basic" => array(
+			_( "Use Problem Report" ),
+			_( "This option controls whether Problem Report is to be used." ),
+			"boolean",
+			"problem_report_basic",
+			"small",
+			"",
+			_( "This option controls whether Problem Report is to be used." )
+		),
+
+		"problem_report_use_recaptcha" => array(
+			_( "Use Recaptcha" ),
+			_( "This option controls whether Problem Report will use Recaptcha." ),
+			"boolean",
+			"problem_report_recaptcha",
+			"small",
+			"",
+			_( "This option controls whether Problem Report uses Recaptcha." )
+		),
+
+		"problem_report_recaptcha_site_key" => array(
+			_( "Problem Report Google Recaptcha Site Key" ),
+			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
+			"string",
+			"problem_report_recaptcha",
+			"large",
+			"",
+			_("The site key goes on the client side form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"problem_report_recaptcha_secret_key" => array(
+			_( "Problem Report Google Recaptcha Secret Key" ),
+			_( "This option contains the Google Recaptcha secret key required to protect the Problem Report form." ),
+			"string",
+			"problem_report_recaptcha",
+			"large",
+			"",
+			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"problem_report_use_email" => array(
+			_( "Use Email" ),
+			_( "This option controls whether Problem Report will use smtp email." ),
+			"boolean",
+			"problem_report_email",
+			"small",
+			"",
+			_( "This option controls whether Problem Report uses smtp email." )
+		),
+
+		"problem_report_use_slack" => array(
+			_( "Use Slack" ),
+			_( "This option controls whether Problem Report will use Slack." ),
+			"boolean",
+			"problem_report_slack",
+			"small",
+			"",
+			_( "This option controls whether Problem Report uses Slack." )
+		),
+
+		"problem_report_slack_webhook_url" => array(
+			_( "Slack Webhook URL for Problem Report" ),
+			_( "This option contains the webhook url from Slack that connects Problem Report to Slack." ),
+			"string",
+			"problem_report_slack",
+			"large",
+			"",
+			""
+		),
+
+		"problem_report_slack_channel" => array(
+			_( "Problem Report Slack Channel" ),
+			_( "This option contains Slack channel name that the Problem Report form uses." ),
+			"string",
+			"problem_report_slack",
+			"medium",
+			"",
+			""
+		),
+
+		"problem_report_slack_emoji" => array(
+			_( "Problem Report Slack Emoji Code" ),
+			_( "This option contains Slack emoji code that the Problem Report form uses. It must begin and end with a colon. For example, :thought_balloon:" ),
+			"string",
+			"problem_report_slack",
+			"medium",
+			"",
+			_( "It must begin and end with a colon. For example, :thought_balloon:" )
+		),
+
+
 	);
 
 	//set config options
