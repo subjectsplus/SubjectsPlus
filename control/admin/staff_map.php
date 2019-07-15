@@ -19,6 +19,7 @@ if (! (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) ){
 // ----- FETCH INFO FROM THE DB + PASS IT TO THE CLIENT-SIDE JS ----------------------------------------------------
 
 global $stats_encryption_enabled;
+global $AssetPath;
 $db = new Querier;
 $connection = $db->getConnection();
 
@@ -302,7 +303,7 @@ print "
 
     let staffMember = e.features[0].properties;
     let coordinates = e.features[0].geometry.coordinates.slice();
-    let assetPath = '<?php global $AssetPath; echo $AssetPath; ?>';
+    let assetPath = '<?php echo $AssetPath; ?>';
 
     let popupHtml = `
     <div style="display: flex;">
