@@ -24,9 +24,7 @@ $connection = $db->getConnection();
 
 if ( $stats_encryption_enabled ) {
 
-  print "console.log('RUNNING QUERY ON LINE 25')";
-
-	$statement = $connection->prepare('SELECT staff_id,
+  $statement = $connection->prepare('SELECT staff_id,
     fname,
     lname,
     email,
@@ -67,9 +65,7 @@ if ( $stats_encryption_enabled ) {
   }
 } else {
 
-  print "<script>console.log('RUNNING QUERY ON LINE 68')</script>";
-
-	$statement = $connection->prepare('SELECT staff_id,
+  $statement = $connection->prepare('SELECT staff_id,
     CONCAT( fname, " ", lname ) AS fullname,
     email,
     CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
@@ -84,9 +80,7 @@ if ( $stats_encryption_enabled ) {
 
 	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
 
-    print "<script>console.log('RUNNING QUERY ON LINE 85')</script>";
-
-		$statement = $connection->prepare('SELECT staff_id,
+    $statement = $connection->prepare('SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
       email,
       CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
@@ -109,7 +103,7 @@ include("../includes/footer.php");
 print "
   <!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
   <script src='../../assets/jquery/libs/mapbox-gl.js'></script>
-  <script src='../../assets/css/shared/mapbox-gl.css'></script>
+  <link href='../../assets/css/shared/mapbox-gl.css' ref='stylesheet' />
 
   <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script> -->
   <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' /> -->
@@ -128,7 +122,6 @@ print "
 
   <script id='markers-container'>
     let markers = [];
-    let popup, el, newPopup, formattedCoords;
 ";
 
 foreach ($staffArray as $key => $value) {
@@ -151,36 +144,37 @@ foreach ($staffArray as $key => $value) {
       $value["position"] =          !empty($value["position"])                    ? decryptIt($value["position"])                     : "";
     }
     
-    print "
-      markers.push(
-        {
-          type: 'Feature',
-          id: " . $key . ",
-          geometry: {
-            type: 'Point',
-            coordinates: [" . $value["lat_long"] . "].reverse(),
-          },
-          properties: {
-            id:             " . $key . ",
-            icon:           'pulsing-dot',
-            fullname:       '" . $value["fullname"] . "',
-            full_address:   '" . $value["full_address"] . "',
-            email:          '" . $value["email"] . "',
-            home_phone:     '" . $value["home_phone"] . "',
-            cell_phone:     '" . $value["cell_phone"] . "',
-            contact:        '" . $value["contact"] . "',
-            position:       '" . $value["position"] . "'
-          }
-        }
-      )
-    ";
+    $coords_regexp_match = preg_match('/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/', $value["lat_long"]);
+    
+    if($coords_regexp_match){
+      print "
+          markers.push(
+            {
+              type: 'Feature',
+              id: " . $key . ",
+              geometry: {
+                type: 'Point',
+                coordinates: [" . $value["lat_long"] . "].reverse(),
+              },
+              properties: {
+                id:             " . $key . ",
+                icon:           'pulsing-dot',
+                fullname:       '" . $value["fullname"] . "',
+                full_address:   '" . $value["full_address"] . "',
+                email:          '" . $value["email"] . "',
+                home_phone:     '" . $value["home_phone"] . "',
+                cell_phone:     '" . $value["cell_phone"] . "',
+                contact:        '" . $value["contact"] . "',
+                position:       '" . $value["position"] . "'
+              }
+            }
+          )
+      ";
+    }
   }
 }
 
 print "
-
-    console.log(markers);
-
   </script>
 ";
 
@@ -188,7 +182,7 @@ print "
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
 
-<div id='map' style='width: 90vw; height: 800px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+<div id='map' style='width: 800px; height: 600px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
 <script id="map-drawing">
 
   <?php
@@ -200,12 +194,8 @@ print "
 
   mapboxgl.accessToken = "<?php echo $mapbox_access_token ?>";
 
-  // console.log('$mapbox_access_token :', "<?php echo $mapbox_access_token; ?>");
-
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
-
-  // console.log('================== markers :', markers);
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -266,9 +256,7 @@ print "
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-  
     map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
-
     map.addSource("staff_locations", {
       type: "geojson",
       data: {
@@ -279,7 +267,6 @@ print "
       clusterMaxZoom: 1, // Max zoom to cluster points on
       clusterRadius: 1, // Radius of each cluster when clustering points (defaults to 50)
     });
-    
     map.addLayer({
       "id": "staff",
       "type": "symbol",
@@ -293,7 +280,6 @@ print "
         "text-anchor": "top"
       }
     });
-
     map.addLayer({
       "id": "hover-fills",
       "type": "fill",
@@ -307,8 +293,7 @@ print "
           0.5
         ]
       }
-    })
-
+    });
   });
 
   // Set up click event for staff member icons
@@ -361,51 +346,6 @@ print "
   // Change it back to a pointer when it leaves.
   map.on('mouseleave', 'staff', function () {
     map.getCanvas().style.cursor = '';
-  });
-
-  let hoveredPointId = null;
-
-  // When the user moves their mouse over the hover-fills layer, we'll update the
-  // feature state for the feature under the mouse.
-  map.on("mousemove", 'staff', function(e) {
-
-    let lastHovered;
-
-    if (e.features.length > 0) {
-      if (hoveredPointId) {
-        lastHovered = hoveredPointId;
-        map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": false});
-      }
-      hoveredPointId = e.features[0].id;
-      map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": true});
-    }
-
-    // console.log('hoveredPointId :', hoveredPointId);
-
-    // console.log(map.getFeatureState({source: 'staff_locations', id: hoveredPointId}));
-    // console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
-
-  });
-
-  // When the mouse leaves the state-fill layer, update the feature state of the
-  // previously hovered feature.
-  map.on("mouseleave", 'staff', function() {
-
-    let lastHovered;
-
-    if (hoveredPointId) {
-      lastHovered = hoveredPointId;
-      map.setFeatureState({source: 'staff_locations', id: hoveredPointId}, { "hover": false});
-    }
-
-    hoveredPointId =  null;
-
-    // console.log('hoveredPointId :', hoveredPointId);
-    // console.log('lastHovered :', lastHovered);
-
-    // console.log(map.getFeatureState({source: 'staff_locations', id: lastHovered}));
-    // console.log('83 hovered: ', map.getFeatureState({source: 'staff_locations', id: 83}));
-
   });
 
 </script>
