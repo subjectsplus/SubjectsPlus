@@ -102,8 +102,8 @@ include("../includes/footer.php");
 
 print "
   <!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
-  <script src='../../assets/jquery/libs/mapbox-gl.js'></script>
-  <link href='../../assets/css/shared/mapbox-gl.css' ref='stylesheet' />
+  <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>
+  <link href='" . $AssetPath . "css/shared/mapbox-gl.css' rel='stylesheet' />
 
   <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script> -->
   <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' /> -->
@@ -144,6 +144,7 @@ foreach ($staffArray as $key => $value) {
       $value["position"] =          !empty($value["position"])                    ? decryptIt($value["position"])                     : "";
     }
     
+    // Put everything behind a RegExp check so we don't get junk coordinates coming through
     $coords_regexp_match = preg_match('/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/', $value["lat_long"]);
     
     if($coords_regexp_match){
