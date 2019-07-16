@@ -69,7 +69,9 @@ if ( $stats_encryption_enabled ) {
   $statement = $connection->prepare('SELECT staff_id,
     CONCAT( fname, " ", lname ) AS fullname,
     email,
-    CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
+    emergency_contact_name,
+    emergency_contact_relation,
+    emergency_contact_phone,
     CONCAT( street_address, "<br/>", city, " ",state, " ", zip ) AS full_address,
     home_phone,
     cell_phone,
@@ -84,7 +86,9 @@ if ( $stats_encryption_enabled ) {
     $statement = $connection->prepare('SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
       email,
-      CONCAT( emergency_contact_name, " (", emergency_contact_relation, ")", ": ", "<span>", emergency_contact_phone, "</span>" ) AS contact,
+      emergency_contact_name,
+      emergency_contact_relation,
+      emergency_contact_phone,
       CONCAT( street_address, "<br/>", city, " ", state, " ", zip ) AS full_address,
       home_phone,
       cell_phone,
@@ -113,6 +117,7 @@ print "
     .mapboxgl-popup-content{
       width: 300px;
       border-radius: 5px;
+      padding: 20px;
     }
 
     .mapboxgl-popup-content button {
@@ -159,15 +164,17 @@ foreach ($staffArray as $key => $value) {
                 coordinates: [" . $value["lat_long"] . "].reverse(),
               },
               properties: {
-                id:             " . $key . ",
-                icon:           'pulsing-dot',
-                fullname:       '" . $value["fullname"] . "',
-                full_address:   '" . $value["full_address"] . "',
-                email:          '" . $value["email"] . "',
-                home_phone:     '" . $value["home_phone"] . "',
-                cell_phone:     '" . $value["cell_phone"] . "',
-                contact:        '" . $value["contact"] . "',
-                position:       '" . $value["position"] . "'
+                id:                 " . $key . ",
+                icon:               'pulsing-dot',
+                fullname:           '" . $value["fullname"] . "',
+                full_address:       '" . $value["full_address"] . "',
+                email:              '" . $value["email"] . "',
+                home_phone:         '" . $value["home_phone"] . "',
+                cell_phone:         '" . $value["cell_phone"] . "',
+                position:           '" . $value["position"] . "',
+                contactName:        '" . $value["emergency_contact_name"] . "',
+                contactRelation:    '" . $value["emergency_contact_relation"] . "',
+                contactPhone:       '" . $value["emergency_contact_phone"] . "'
               }
             }
           )
@@ -305,6 +312,15 @@ print "
     let coordinates = e.features[0].geometry.coordinates.slice();
     let assetPath = '<?php echo $AssetPath; ?>';
 
+    let emergencyContact;
+    if(!!staffMember.contactName){
+      emergencyContact = `
+      <strong>${staffMember.contactName}</strong> (${staffMember.contactRelation}):<span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.contactPhone ? staffMember.contactPhone : `<i>Not on File</i>`}</span>
+      `;
+    } else {
+      emergencyContact = `<i>Not on File</i>`;
+    };
+
     let popupHtml = `
     <div style="display: flex;">
       <div id="headshot-container" style="width: 50%; align-content: center;">
@@ -316,14 +332,14 @@ print "
       </div>
     </div>
       <p>${staffMember.full_address}</p>
-      <strong>Email:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.email ? staffMember.email : `<font color="gray">None Found</font>`}</span>
+      <strong>Email:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.email ? staffMember.email : `<font color="gray">None Found</font>`}</span>
       <br />
-      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.home_phone ? staffMember.home_phone : `<i>Not on File</i>`}</span>
+      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.home_phone ? staffMember.home_phone : `<i>Not on File</i>`}</span>
       <br />
-      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: 10px;">${staffMember.cell_phone ? staffMember.cell_phone : `<i>Not on File</i>`}</span>
+      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.cell_phone ? staffMember.cell_phone : `<i>Not on File</i>`}</span>
       <hr>
       <h3>Emergency Contact:</strong></h3>
-      <p>${staffMember.contact != ' (): <span></span>' ? staffMember.contact : `<i>Not on File</i>`}</p>
+      ${emergencyContact}
     `;
     
     // Ensure that if the map is zoomed out such that multiple
