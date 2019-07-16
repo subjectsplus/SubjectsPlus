@@ -280,9 +280,15 @@ switch ($_REQUEST["action"]) {
 
     $mapbox_response = curl_get($endpoint);
     $formatted_json = json_decode($mapbox_response);
-    $coords = implode(",", array_reverse($formatted_json->features[0]->center));
 
-    print $coords;
+    // If valid response from Mapbox Geocoding API
+    if( isset($formatted_json->features[0]->center)){
+      $coords = implode(",", array_reverse($formatted_json->features[0]->center));
+      print $coords;
+    } else {
+      // If Mapbox Geocoding API isn't able to find a matching coordinate/location
+      print "";
+    }
     
     return; // return early so we don't show the stuff that follows
 

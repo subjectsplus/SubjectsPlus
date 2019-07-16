@@ -439,7 +439,16 @@ include("../includes/footer.php");
 					}
 				
 					$.get('admin_bits.php', {action: 'address_lookup', address: address_location}, function(result) {
+
+						let validCoordinate = (/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/).test(result);
+						
+						// If we get back a valid coordinate result from Mapbox
+						if(validCoordinate){
 							$('#lat_long').val(result);
+						} else {
+							// If we don't get back a valid result
+							alert(`Unable to find coordinates for provided address.\n\nPlease check the address fields, and ensure that the record has been saved before looking up coordinates.`);
+						}
 					});
 
 					return;
