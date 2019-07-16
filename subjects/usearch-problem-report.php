@@ -20,6 +20,9 @@ $problemReportService = new ProblemReportService();
  */
 global $AssetPath;
 
+global $BaseURL;
+
+
 /**
  *
  * @var $set_filter
@@ -47,9 +50,11 @@ $item_permalink = "";
 $form_action = "usearch-problem-report.php";
 
 
+global $problem_report_use;
+
 global $problem_report_use_email;
 
-
+global $problem_report_email_recipients;
 
 global $problem_report_use_slack;
 
@@ -79,6 +84,15 @@ global $problem_report_recaptcha_site_key;
 
 
 /**
+ * If set to false in the config the page will redirect to the baseurl
+ */
+if($problem_report_use !== true) {
+	header( "Location: " . $BaseURL);
+}
+
+
+
+/**
  * @todo this should be defined in branch_metadata.php
  * init the $recaptcha_response var for use with the template after it's set in the if/else block
  * @var $recaptcha_response
@@ -92,7 +106,10 @@ $recaptcha_response = "";
 $recaptcha_response_fail = _("Recaptcha score is too low. Your comment was not submitted: ");
 
 
+$form_submit_success = _("Thank you for reporting this issue. Someone will contact you shortly.");
 
+
+$form_submit_fail = _("There was a problem submitting your issue. Please contact the website administrator.");
 
 /**
  * Include the page metadata based on the theme used
@@ -131,9 +148,10 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 
 
 
-if ( isset( $_POST['use_recaptcha'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
-//	// clean up post variables
+if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+
+	// clean up post variables
 	if ( isset( $_POST["user_name"] ) ) {
 		$user_name = scrubData( $_POST["user_name"] );
 	} else {
@@ -172,6 +190,7 @@ if ( isset( $_POST['use_recaptcha'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' )
 		$item_permalink = "No Permalink Entered";
 	}
 
+
 	$msg = _( "New uSearch Problem Reported" ) . PHP_EOL;
 	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 	$msg .= _( "From Name: " ) . $user_name . PHP_EOL;
@@ -204,7 +223,11 @@ if ( isset( $_POST['use_recaptcha'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' )
 	$mailMessege->setFromAddress( $user_email );
 	$mailMessege->setFromLabel( $user_name );
 	$mailMessege->setToAddress( $administrator_email );
-	//$mailMessege->setToAddressLabel( $talkback_to_address_label );
+
+	if ( isset($problem_report_email_recipients) && !empty($problem_report_email_recipients)) {
+		$mailMessege->setToCcAddresses($problem_report_email_recipients);
+	}
+
 	$mailMessege->setSubject( 'uSearch Problem Report' );
 	$mailMessege->setMsgHTML( $html_message );
 
@@ -231,7 +254,7 @@ if ( isset( $_POST['use_recaptcha'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' )
 	$slackMsg->setMessage( $msg );
 
 
-	if ( $problem_report_use_recaptcha === true && isset($_POST['recaptcha_response']) ) {
+	if ( $problem_report_use_recaptcha === true &&  isset( $_POST['use_recaptcha'] ) && isset($_POST['recaptcha_response']) ) {
 
 		/**
 		 * init ReCaptchaService
@@ -247,16 +270,10 @@ if ( isset( $_POST['use_recaptcha'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' )
 
 		// Take action based on the score returned:
 		if ( $recaptcha_response->getScore() >= 0.5 ) {
-
-			// If CAPTCHA is successful...
-			$feedback_success = $recaptcha_response->getScore();
 			$is_robot = false;
-
 		} else {
-			// Not verified - show form error
-			$feedback_fail = $recaptcha_response_fail;
-			$is_robot              = true;
-
+			// this is a robot or spam bot. Do not submit the form
+			$is_robot = true;
 		}
 
 	} else {
@@ -268,9 +285,9 @@ if ( isset( $_POST['use_recaptcha'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' )
 
 		// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
 		if( $problemReportService->sendCommunications( $problem_report_use_email,  $mailer, $problem_report_use_slack,  $slackMsg ) ) {
-			$feedback = $feedback_success;
+			$feedback = $form_submit_success;
 		} else {
-			$feedback = $feedback_fail;
+			$feedback = $form_submit_fail;
 		}
 	}
 

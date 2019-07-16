@@ -883,6 +883,14 @@ class Config {
 			                        <?php print $section_problem_report_basic; ?>
                                 </div>
                             </div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Problem Report Email Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_problem_report_email; ?>
+                                </div>
+                            </div>
                         </div>
                         <div class="pure-u-1 pure-u-md-1-3">
                             <div class="pluslet">
@@ -895,14 +903,6 @@ class Config {
                             </div>
                         </div>
                         <div class="pure-u-1 pure-u-md-1-3">
-                            <div class="pluslet">
-                                <div class="titlebar">
-                                    <div class="titlebar_text"><?php print _( "Problem Report Email Settings" ); ?></div>
-                                </div>
-                                <div class="pluslet_body">
-				                    <?php print $section_problem_report_email; ?>
-                                </div>
-                            </div>
                             <div class="pluslet">
                                 <div class="titlebar">
                                     <div class="titlebar_text"><?php print _( "Problem Report Slack Settings" ); ?></div>

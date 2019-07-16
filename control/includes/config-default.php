@@ -65,7 +65,9 @@ $talkback_slack_emoji       = "";
 // Problem Report Options
 $problem_report_use = "";
 $problem_report_basic = "";
+
 $problem_report_use_email = "";
+$problem_report_email_recipients = "";
 
 $problem_report_use_recaptcha = "";
 $problem_report_recaptcha_secret_key = "";

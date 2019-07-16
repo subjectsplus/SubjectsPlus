@@ -962,7 +962,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
-		"problem_report_basic" => array(
+		"problem_report_use" => array(
 			_( "Use Problem Report" ),
 			_( "This option controls whether Problem Report is to be used." ),
 			"boolean",
@@ -1010,6 +1010,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"small",
 			"",
 			_( "This option controls whether Problem Report uses smtp email." )
+		),
+
+		"problem_report_email_recipients" => array(
+			_( "Problem Report Email Recipient Addresses" ),
+			_( "Email addresses that will receive the problem report." ),
+			"array",
+			"problem_report_email",
+			"textarea",
+			"",
+			_( "Enter valid email addresses separated by a comma" )
 		),
 
 		"problem_report_use_slack" => array(
