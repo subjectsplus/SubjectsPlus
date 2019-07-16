@@ -148,7 +148,6 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 
 
 
-
 if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 	// clean up post variables
@@ -190,17 +189,22 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		$item_permalink = "No Permalink Entered";
 	}
 
+	if ( isset( $_POST["primo_view"] ) ) {
+		$primo_view = scrubData($_POST['primo_view']);
+	} else {
+		$primo_view = 'richter';
+	}
 
 	$msg = _( "New uSearch Problem Reported" ) . PHP_EOL;
-	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 	$msg .= _( "From Name: " ) . $user_name . PHP_EOL;
 	$msg .= _( "From Email: " ) . $user_email . PHP_EOL;
 	$msg .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
 	$msg .= _( "Problem Item: " ) . $item_title . PHP_EOL;
 	$msg .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
+	$msg .= _( "Primo View: " ) . $primo_view . PHP_EOL;
 	$msg .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
 	$msg .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$msg .= _( "Branch: " ) . $branch_filter . PHP_EOL;
+	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 
 
 	/**
