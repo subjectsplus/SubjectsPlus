@@ -111,7 +111,7 @@ print "
 
   <style>
     .mapboxgl-popup-content{
-      width: 25vw;
+      width: 300px;
       border-radius: 5px;
     }
 
