@@ -3,7 +3,9 @@
 use SubjectsPlus\Control\Querier;
 
 $subsubcat = "";
-$subcat = "admin";
+
+// Commented out to make sure that view_map is the only thing being checked for access to this view
+// $subcat = "admin";
 $page_title = "Staff Map";
 
 include("../includes/header.php");
