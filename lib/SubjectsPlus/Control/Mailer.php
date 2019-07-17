@@ -81,6 +81,14 @@ class Mailer {
 		//Set who the message is to be sent to
 		$this->_mailer->addAddress( $this->_msg->getToAddress(), $this->_msg->getToAddressLabel() );
 
+		// Set CC addresses if they exist
+		$cc_addresses = $this->_msg->getToCcAddresses();
+		if( isset($cc_addresses) && !empty($cc_addresses)) {
+			foreach($cc_addresses as $address) {
+				$this->_mailer->addCC($address);
+			}
+		}
+
 		//Set the subject line
 		$this->_mailer->Subject = $this->_msg->getSubject();
 

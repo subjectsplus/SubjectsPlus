@@ -62,6 +62,23 @@ $talkback_slack_channel     = "";
 $talkback_slack_emoji       = "";
 
 
+// Problem Report Options
+$problem_report_use = "";
+$problem_report_basic = "";
+
+$problem_report_use_email = "";
+$problem_report_email_recipients = "";
+
+$problem_report_use_recaptcha = "";
+$problem_report_recaptcha_secret_key = "";
+$problem_report_recaptcha_site_key = "";
+
+$problem_report_use_slack = "";
+$problem_report_slack_channel = "";
+$problem_report_slack_webhook_url = "";
+$problem_report_slack_emoji       = "";
+
+
 // This array contains the list of columns that should be omitted in the user forms
 // First Name, Last Name, Email Address, Ptags, and Password cannot be omitted
 // Available options: 'title', 'department', 'position_number', 'classification', 'priority', 'supervisor', 'tel',
