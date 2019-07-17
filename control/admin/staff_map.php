@@ -201,12 +201,20 @@ print "
     
     // Use home location coordinates for map centering; this is set in config.php
     global $home_coords;
+
+    // Handling home coords being entered as string instead of array
+    if( gettype($home_coords) != 'array' ){
+      $home_coords = preg_split("/,/", $home_coords);
+    };
+
   ?>
 
   mapboxgl.accessToken = "<?php echo $mapbox_access_token ?>";
-
+  
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
+
+  console.log('homeCoords :', homeCoords);
 
   const map = new mapboxgl.Map({
     container: 'map',
