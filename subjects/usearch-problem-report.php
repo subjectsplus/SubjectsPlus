@@ -22,6 +22,35 @@ global $AssetPath;
 
 global $BaseURL;
 
+/**
+ * globals for Mailer class
+ * @global $email_host
+ */
+global $email_host;
+
+/**
+ *
+ * @var $email_port
+ */
+global $email_port;
+
+/**
+ *
+ * @var $email_smtp_auth
+ */
+global $email_smtp_auth;
+
+/**
+ *
+ * @var $email_smtp_debug
+ */
+global $email_smtp_debug;
+
+/**
+ * global for the reply email address for subjectsplus administrator
+ * @global $administrator_email
+ */
+global $administrator_email;
 
 /**
  *
@@ -209,12 +238,19 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 
 	/**
 	 * create the html email template
-	 * @var $tpl_name
 	 * @var $tpl
+	 * @var $tpl_name
+	 * @var $tpl_folder
 	 * @var $html_message
 	 */
+	if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+		$tpl_folder = "./themes/{$subjects_theme}/views/usearch-problem-report";
+	} else {
+		$tpl_folder = "./views/usearch-problem-report";
+	}
+
 	$tpl_name     = 'html_msg';
-	$tpl          = new Template( './views/usearch-problem-report' );
+	$tpl          = new Template( $tpl_folder );
 	$html_message = $tpl->render( $tpl_name, array(
 		'msg'   => $msg
 	));
