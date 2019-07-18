@@ -224,16 +224,16 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		$primo_view = 'richter';
 	}
 
-	$msg = _( "New uSearch Problem Reported" ) . PHP_EOL;
-	$msg .= _( "From Name: " ) . $user_name . PHP_EOL;
-	$msg .= _( "From Email: " ) . $user_email . PHP_EOL;
-	$msg .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
-	$msg .= _( "Problem Item: " ) . $item_title . PHP_EOL;
-	$msg .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
-	$msg .= _( "Primo View: " ) . $primo_view . PHP_EOL;
-	$msg .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
-	$msg .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
+	$msg = _( "New uSearch Problem Reported" ) . "\n";
+	$msg .= _( "From Name: " ) . $user_name . "\n";
+	$msg .= _( "From Email: " ) . $user_email . "\n";
+	$msg .= _( "Affiliation: " ) . $affiliation . "\n";
+	$msg .= _( "Problem Item: " ) . $item_title . "\n";
+	$msg .= _( "Problem Permalink: " ) . $item_permalink . "\n";
+	$msg .= _( "Primo View: " ) . $primo_view . "\n";
+	$msg .= _( "Problem Type: " ) . $problem_type . "\n";
+	$msg .= _( "Problem Description: " ) . $description . "\n";
+	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . "\n";
 
 
 	/**
@@ -249,9 +249,9 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		$tpl_folder = "./views/usearch-problem-report";
 	}
 
-	$tpl_name     = 'html_msg';
+	$tpl_name     = 'email_msg';
 	$tpl          = new Template( $tpl_folder );
-	$html_message = $tpl->render( $tpl_name, array(
+	$email_message = $tpl->render( $tpl_name, array(
 		'msg'   => $msg
 	));
 
@@ -269,7 +269,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	}
 
 	$mailMessege->setSubject( 'uSearch Problem Report' );
-	$mailMessege->setMsgHTML( $html_message );
+	$mailMessege->setMsgHTML( $email_message );
 
 
 	/**
