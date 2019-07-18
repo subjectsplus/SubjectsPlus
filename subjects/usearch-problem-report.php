@@ -283,21 +283,21 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	/**
 	 * Assemble slack message
 	 */
-	$msg = _( "New uSearch Problem Reported" ) . PHP_EOL;
-	$msg .= _( "From Name: " ) . $user_name . PHP_EOL;
-	$msg .= _( "From Email: " ) . $user_email . PHP_EOL;
-	$msg .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
-	$msg .= _( "Problem Item: " ) . $item_title . PHP_EOL;
-	$msg .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
-	$msg .= _( "Primo View: " ) . $primo_view . PHP_EOL;
-	$msg .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
-	$msg .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
+	$message = _( "New uSearch Problem Reported" ) . PHP_EOL;
+	$message .= _( "From Name: " ) . $user_name . PHP_EOL;
+	$message .= _( "From Email: " ) . $user_email . PHP_EOL;
+	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
+	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
+	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
+	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
+	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
+	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
+	//$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 
 
 	$webHookUrl = "https://hooks.slack.com/services/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";
 	$channel = "primo";
-	$message = "testing";
+	//$message = "testing";
 	$icon = ":anger:";
 
 //	function slack($webHookUrl, $message, $channel = "general", $icon = ":sunglasses:") {
