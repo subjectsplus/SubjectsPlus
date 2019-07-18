@@ -305,6 +305,13 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$slackMsg->setWebhookurl( $problem_report_slack_webhook_url );
 	$slackMsg->setMessage( $msg );
 
+	var_dump($problem_report_use_slack);
+	var_dump($problem_report_slack_channel);
+	var_dump($problem_report_slack_webhook_url);
+	var_dump($problem_report_slack_emoji);
+	var_dump($msg);
+
+
 
 	if ( $problem_report_use_recaptcha === true &&  isset( $_POST['use_recaptcha'] ) && isset($_POST['recaptcha_response']) ) {
 
