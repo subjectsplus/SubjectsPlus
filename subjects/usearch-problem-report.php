@@ -289,7 +289,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$message .= _( "From Email: " ) . $user_email . PHP_EOL;
 	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
 	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
-	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
+	$message .= _( "Problem Permalink: " ) .  PHP_EOL;
 	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
 	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
 	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
