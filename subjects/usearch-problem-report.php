@@ -213,7 +213,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	}
 
 	if ( isset( $_POST["item_permalink"] ) ) {
-		$item_permalink = scrubData( $_POST["item_permalink"] );
+		$item_permalink = scrubData( urldecode($_POST["item_permalink"]) );
 	} else {
 		$item_permalink = "No Permalink Entered";
 	}
@@ -232,7 +232,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	 * @var $tpl
 	 * @var $tpl_name
 	 * @var $tpl_folder
-	 * @var $html_message
+	 * @var $email_message
 	 */
 	if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
 		$tpl_folder = "./themes/{$subjects_theme}/views/usearch-problem-report";
