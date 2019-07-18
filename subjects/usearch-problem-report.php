@@ -292,7 +292,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$msg .= _( "Primo View: " ) . $primo_view . PHP_EOL;
 	$msg .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
 	$msg .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$msg .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
+	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 
 
 	$webHookUrl = "https://hooks.slack.com/services/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";
@@ -317,7 +317,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		return $result;
 	}
 
-	slack($problem_report_slack_webhook_url, $message, $problem_report_slack_channel, $problem_report_slack_emoji);
+	slack($problem_report_slack_webhook_url, $msg, $problem_report_slack_channel, $problem_report_slack_emoji);
 
 	/**
 	 * send comment to slack channel talkback
