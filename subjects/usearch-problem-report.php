@@ -213,7 +213,8 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	}
 
 	if ( isset( $_POST["item_permalink"] ) ) {
-		$item_permalink = scrubData( urldecode($_POST["item_permalink"]) );
+		$item_permalink = scrubData( $_POST["item_permalink"] );
+		$item_permalink = urldecode($item_permalink);
 	} else {
 		$item_permalink = "No Permalink Entered";
 	}
@@ -289,35 +290,11 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
 	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
 	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
-//	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
-//	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
-//	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
-//	$message .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
+	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
+	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
+	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
+	$message .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 
-
-	$webHookUrl = "https://hooks.slack.com/services/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";
-	$channel = "primo";
-	//$message = "testing";
-	$icon = ":anger:";
-
-//	function slack($webHookUrl, $message, $channel = "general", $icon = ":sunglasses:") {
-//		$channel = ($channel) ? $channel : "general";
-//		$data = "payload=" . json_encode(array(
-//				"channel"       =>  "#{$channel}",
-//				"text"          =>  $message,
-//				"icon_emoji"    =>  $icon
-//			));
-//		// Get your webhook endpoint from your Slack settings
-//		$ch = curl_init($webHookUrl);
-//		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-//		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-//		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//		$result = curl_exec($ch);
-//		curl_close($ch);
-//		return $result;
-//	}
-//
-//	slack($problem_report_slack_webhook_url, $msg, $problem_report_slack_channel, $problem_report_slack_emoji);
 
 	/**
 	 * send comment to slack channel talkback
