@@ -317,7 +317,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		return $result;
 	}
 
-	slack($problem_report_slack_webhook_url, $msg, $problem_report_slack_channel, $problem_report_slack_emoji);
+	slack($problem_report_slack_webhook_url, $message, $problem_report_slack_channel, $problem_report_slack_emoji);
 
 	/**
 	 * send comment to slack channel talkback
