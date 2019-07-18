@@ -300,24 +300,24 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$message = "testing";
 	$icon = ":anger:";
 
-	function slack($webHookUrl, $message, $channel = "general", $icon = ":sunglasses:") {
-		$channel = ($channel) ? $channel : "general";
-		$data = "payload=" . json_encode(array(
-				"channel"       =>  "#{$channel}",
-				"text"          =>  $message,
-				"icon_emoji"    =>  $icon
-			));
-		// Get your webhook endpoint from your Slack settings
-		$ch = curl_init($webHookUrl);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($ch);
-		curl_close($ch);
-		return $result;
-	}
-
-	slack($problem_report_slack_webhook_url, $msg, $problem_report_slack_channel, $problem_report_slack_emoji);
+//	function slack($webHookUrl, $message, $channel = "general", $icon = ":sunglasses:") {
+//		$channel = ($channel) ? $channel : "general";
+//		$data = "payload=" . json_encode(array(
+//				"channel"       =>  "#{$channel}",
+//				"text"          =>  $message,
+//				"icon_emoji"    =>  $icon
+//			));
+//		// Get your webhook endpoint from your Slack settings
+//		$ch = curl_init($webHookUrl);
+//		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+//		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+//		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//		$result = curl_exec($ch);
+//		curl_close($ch);
+//		return $result;
+//	}
+//
+//	slack($problem_report_slack_webhook_url, $msg, $problem_report_slack_channel, $problem_report_slack_emoji);
 
 	/**
 	 * send comment to slack channel talkback
@@ -327,7 +327,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$slackMsg->setChannel( $problem_report_slack_channel );
 	$slackMsg->setIcon( $problem_report_slack_emoji );
 	$slackMsg->setWebhookurl( $problem_report_slack_webhook_url );
-	$slackMsg->setMessage( $msg );
+	$slackMsg->setMessage( $message );
 
 
 
