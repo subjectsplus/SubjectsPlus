@@ -224,16 +224,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		$primo_view = 'richter';
 	}
 
-	$msg = _( "New uSearch Problem Reported" ) . "\n";
-	$msg .= _( "From Name: " ) . $user_name . "\n";
-	$msg .= _( "From Email: " ) . $user_email . "\n";
-	$msg .= _( "Affiliation: " ) . $affiliation . "\n";
-	$msg .= _( "Problem Item: " ) . $item_title . "\n";
-	$msg .= _( "Problem Permalink: " ) . $item_permalink . "\n";
-	$msg .= _( "Primo View: " ) . $primo_view . "\n";
-	$msg .= _( "Problem Type: " ) . $problem_type . "\n";
-	$msg .= _( "Problem Description: " ) . $description . "\n";
-	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . "\n";
+	$date_submitted =  date( 'D M j, Y, g:i a' );
 
 
 	/**
@@ -252,7 +243,15 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$tpl_name     = 'email_msg';
 	$tpl          = new Template( $tpl_folder );
 	$email_message = $tpl->render( $tpl_name, array(
-		'msg'   => $msg
+		'user_name'      => $user_name,
+		'user_email'     => $user_email,
+		'affiliation'    => $affiliation,
+		'item_title'     => $item_title,
+		'item_permalink' => $item_permalink,
+		'primo_view'     => $primo_view,
+		'problem_type'   => $problem_type,
+		'description'    => $description,
+		'date_submitted' => $date_submitted
 	));
 
 	/**
@@ -263,11 +262,9 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$mailMessege->setFromAddress( $user_email );
 	$mailMessege->setFromLabel( $user_name );
 	$mailMessege->setToAddress( $administrator_email );
-
 	if ( isset($problem_report_email_recipients) && !empty($problem_report_email_recipients)) {
 		$mailMessege->setToCcAddresses($problem_report_email_recipients);
 	}
-
 	$mailMessege->setSubject( 'uSearch Problem Report' );
 	$mailMessege->setMsgHTML( $email_message );
 
@@ -281,6 +278,21 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$mailer->Port      = $email_port;
 	$mailer->SMTPAuth  = $email_smtp_auth;
 	$mailer->SMTPDebug = $email_smtp_debug;
+
+
+	/**
+	 * Assemble slack message
+	 */
+	$msg = _( "New uSearch Problem Reported" ) . PHP_EOL;
+	$msg .= _( "From Name: " ) . $user_name . PHP_EOL;
+	$msg .= _( "From Email: " ) . $user_email . PHP_EOL;
+	$msg .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
+	$msg .= _( "Problem Item: " ) . $item_title . PHP_EOL;
+	$msg .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
+	$msg .= _( "Primo View: " ) . $primo_view . PHP_EOL;
+	$msg .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
+	$msg .= _( "Problem Description: " ) . $description . PHP_EOL;
+	$msg .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
 
 
 	/**
