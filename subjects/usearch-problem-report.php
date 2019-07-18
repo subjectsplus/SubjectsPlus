@@ -295,6 +295,30 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$msg .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
 
 
+	$webHookUrl = "https://hooks.slack.com/services/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";
+	$channel = "primo";
+	$message = "testing";
+	$icon = ":anger:";
+
+	function slack($webHookUrl, $message, $channel = "general", $icon = ":sunglasses:") {
+		$channel = ($channel) ? $channel : "general";
+		$data = "payload=" . json_encode(array(
+				"channel"       =>  "#{$channel}",
+				"text"          =>  $message,
+				"icon_emoji"    =>  $icon
+			));
+		// Get your webhook endpoint from your Slack settings
+		$ch = curl_init($webHookUrl);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
+	}
+
+	slack($webHookUrl, $message, $channel, $icon);
+
 	/**
 	 * send comment to slack channel talkback
 	 * @var $slackMsg
@@ -305,11 +329,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$slackMsg->setWebhookurl( $problem_report_slack_webhook_url );
 	$slackMsg->setMessage( $msg );
 
-	var_dump($problem_report_use_slack);
-	var_dump($problem_report_slack_channel);
-	var_dump($problem_report_slack_webhook_url);
-	var_dump($problem_report_slack_emoji);
-	var_dump($msg);
+
 
 
 
