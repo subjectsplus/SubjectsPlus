@@ -214,7 +214,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 
 	if ( isset( $_POST["item_permalink"] ) ) {
 		$item_permalink = scrubData( $_POST["item_permalink"] );
-		$item_permalink = urldecode($item_permalink);
+		//$item_permalink = urldecode($item_permalink);
 	} else {
 		$item_permalink = "No Permalink Entered";
 	}
@@ -227,7 +227,6 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 
 	$date_submitted =  date( 'D M j, Y, g:i a' );
 
-var_dump($_POST["item_permalink"]);
 	/**
 	 * create the html email template
 	 * @var $tpl
@@ -280,10 +279,6 @@ var_dump($_POST["item_permalink"]);
 	$mailer->SMTPAuth  = $email_smtp_auth;
 	$mailer->SMTPDebug = $email_smtp_debug;
 
-
-	$item_permalink = "https%3A%2F%2Fmiami-primosb.hosted.exlibrisgroup.com%2Fprimo-explore%2Ffulldisplay%3Fdocid%3D01UOML_ALMA21197588370002976%26context%3DL%26vid%3Duml_new_ui%26lang%3Den_US%26search_scope%3DEverything%26adaptor%3DLocal%2520Search%2520Engine%26tab%3Deverything%26query%3Dany%2Ccontains%2Ceastern%2520front%25201917";
-
-	$item_permalink = urldecode($item_permalink);
 
 	/**
 	 * Assemble slack message
