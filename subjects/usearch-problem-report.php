@@ -281,6 +281,8 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$mailer->SMTPDebug = $email_smtp_debug;
 
 
+	$item_permalink = "https%3A%2F%2Fmiami-primosb.hosted.exlibrisgroup.com%2Fprimo-explore%2Ffulldisplay%3Fdocid%3D01UOML_ALMA21197588370002976%26context%3DL%26vid%3Duml_new_ui%26lang%3Den_US%26search_scope%3DEverything%26adaptor%3DLocal%2520Search%2520Engine%26tab%3Deverything%26query%3Dany%2Ccontains%2Ceastern%2520front%25201917";
+
 	/**
 	 * Assemble slack message
 	 */
@@ -289,7 +291,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$message .= _( "From Email: " ) . $user_email . PHP_EOL;
 	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
 	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
-	$message .= _( "Problem Permalink: " ) .  PHP_EOL;
+	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
 	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
 	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
 	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
