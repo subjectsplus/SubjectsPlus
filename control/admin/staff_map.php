@@ -25,6 +25,8 @@ global $AssetPath;
 $db = new Querier;
 $connection = $db->getConnection();
 
+$faculty_only = isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1;
+
 if ( $stats_encryption_enabled ) {
 
   $statement = $connection->prepare('SELECT staff_id,
@@ -43,10 +45,10 @@ if ( $stats_encryption_enabled ) {
     lat_long,
     title AS position
   FROM staff
-  WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
+  WHERE lat_long LIKE "%,%"
   AND active = 1');
 
-	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
+	if ( $faculty_only ) {
 		$statement = $connection->prepare('SELECT staff_id,
       fname,
       lname,
@@ -63,7 +65,7 @@ if ( $stats_encryption_enabled ) {
       lat_long,
       title AS position
     FROM staff
-    WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
+    WHERE lat_long LIKE "%,%"
     AND ptags LIKE "%librarian%"');
   }
 } else {
@@ -80,10 +82,10 @@ if ( $stats_encryption_enabled ) {
     lat_long,
     title AS position
   FROM staff
-  WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
+  WHERE lat_long LIKE "%,%"
   AND active = 1');
 
-	if ( isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1 ) {
+	if ( $faculty_only ) {
 
     $statement = $connection->prepare('SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
@@ -97,7 +99,7 @@ if ( $stats_encryption_enabled ) {
       lat_long,
       title AS position
     FROM staff
-    WHERE lat_long != "" AND lat_long NOT IN ("x","xx")
+    WHERE lat_long LIKE "%,%"
     AND ptags LIKE "%librarian%"');
 	}
 }
@@ -108,12 +110,8 @@ $staffArray = $statement->fetchAll();
 include("../includes/footer.php");
 
 print "
-  <!-- Using local copies of JS and CSS files for development; will switch to CDN for production -->
   <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>
   <link href='" . $AssetPath . "css/shared/mapbox-gl.css' rel='stylesheet' />
-
-  <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script> -->
-  <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' /> -->
 
   <style>
     .mapboxgl-popup-content{
@@ -134,11 +132,8 @@ print "
 
 foreach ($staffArray as $key => $value) {
   if (!empty($value["lat_long"])) {
+    
     if ($stats_encryption_enabled){
-      $value["fullname"] =          $value["fname"] . " " . $value["lname"];
-      $value["full_address"] =      $street_address . "<br/>" . $city . " " . $state . " " . $zip;
-      $value["contact"] =           $emergency_contact_name . " (" . $emergency_contact_relation . "): " . "<span>" . $emergency_contact_phone . "</span>";
-
       $value["lat_long"] =          !empty($value["lat_long"])                    ? decryptIt($value["lat_long"])                     : "";
       $street_address =             !empty($value["street_address"])              ? decryptIt($value["street_address"])               : "";
       $city =                       !empty($value["city"])                        ? decryptIt($value["city"])                         : "";
@@ -150,9 +145,15 @@ foreach ($staffArray as $key => $value) {
       $value["home_phone"] =        !empty($value["home_phone"])                  ? decryptIt($value["home_phone"])                   : "";
       $value["cell_phone"] =        !empty($value["cell_phone"])                  ? decryptIt($value["cell_phone"])                   : "";
       $value["position"] =          !empty($value["position"])                    ? decryptIt($value["position"])                     : "";
-    }
+      
+      $value["full_address"] =      $street_address . "<br/>" . $city . " " . $state . " " . $zip;
+      $value["contact"] =           $emergency_contact_name . " (" . $emergency_contact_relation . "): " . "<span>" . $emergency_contact_phone . "</span>";
+    };
     
     // Put everything behind a RegExp check so we don't get junk coordinates coming through
+    // Need this second RegExp check post-decryption -- even though we're doing a LIKE in the queries already --
+    //  to make sure we don't send junk coordinates in case data ISN'T encrypted, but flag is set to ON
+
     $coords_regexp_match = preg_match('/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/', $value["lat_long"]);
     
     if($coords_regexp_match){
@@ -160,13 +161,13 @@ foreach ($staffArray as $key => $value) {
           markers.push(
             {
               type: 'Feature',
-              id: " . $key . ",
+              id: " . $value["staff_id"] . ",
               geometry: {
                 type: 'Point',
                 coordinates: [" . $value["lat_long"] . "].reverse(),
               },
               properties: {
-                id:                 " . $key . ",
+                id:                 " . $value["staff_id"] . ",
                 icon:               'pulsing-dot',
                 fullname:           '" . $value["fullname"] . "',
                 full_address:       '" . $value["full_address"] . "',
@@ -183,12 +184,14 @@ foreach ($staffArray as $key => $value) {
       ";
     }
   }
-}
+};
 
 print "
+  if(!markers.length){
+    alert(`No valid staff location coordinates found.\n\nPlease check the staff table in your database, and your encryption settings.`);
+  };
   </script>
 ";
-
 ?>
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
@@ -214,7 +217,11 @@ print "
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
 
-  console.log('homeCoords :', homeCoords);
+  // Try to account for home coordinates being left blank, or not being read correctly
+  if(typeof homeCoords === 'undefined' || homeCoords === ''){
+    homeCoords = [-80.278496,25.721266];
+    alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`);
+  };
 
   const map = new mapboxgl.Map({
     container: 'map',
@@ -222,6 +229,11 @@ print "
     center: homeCoords,
     zoom: 9
   });
+
+  // Create default 'home' location icon based on home coordinates
+  let homeLocation = new mapboxgl.Marker()
+    .setLngLat(homeCoords)
+    .addTo(map);
 
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
@@ -299,25 +311,10 @@ print "
         "text-anchor": "top"
       }
     });
-    map.addLayer({
-      "id": "hover-fills",
-      "type": "fill",
-      "source": "staff_locations",
-      "layout": {},
-      "paint": {
-        "fill-color": "#ffffff",
-        "fill-opacity": ["case",
-          ["boolean", ["feature-state", "hover"], false],
-          1,
-          0.5
-        ]
-      }
-    });
   });
 
   // Set up click event for staff member icons
   map.on('click', 'staff', function (e) {
-
     let staffMember = e.features[0].properties;
     let coordinates = e.features[0].geometry.coordinates.slice();
     let assetPath = '<?php echo $AssetPath; ?>';
@@ -332,15 +329,15 @@ print "
     };
 
     let popupHtml = `
-    <div style="display: flex;">
-      <div id="headshot-container" style="width: 50%; align-content: center;">
-        <img src="${assetPath}users/_${staffMember.email.split("@")[0]}/headshot.jpg" style="width: 80%; height: auto; border-radius: 5px;">
+      <div style="display: flex;">
+        <div id="headshot-container" style="width: 50%; align-content: center;">
+          <img src="${assetPath}users/_${staffMember.email.split("@")[0]}/headshot.jpg" style="width: 80%; height: auto; border-radius: 5px;">
+        </div>
+        <div id="name-title-container" style="width: 50%; margin-top: 10px; align-content: center;">
+          <h2 style="text-align: right; margin-bottom: 5px;">${staffMember.fullname}</h2>
+          <p style="text-align: right; margin-top: 0px;">${staffMember.position}</p>
+        </div>
       </div>
-      <div id="name-title-container" style="width: 50%; margin-top: 10px; align-content: center;">
-        <h2 style="text-align: right; margin-bottom: 5px;">${staffMember.fullname}</h2>
-        <p style="text-align: right; margin-top: 0px;">${staffMember.position}</p>
-      </div>
-    </div>
       <p>${staffMember.full_address}</p>
       <strong>Email:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.email ? staffMember.email : `<font color="gray">None Found</font>`}</span>
       <br />
@@ -362,7 +359,7 @@ print "
     new mapboxgl.Popup()
       .setLngLat(coordinates)
       .setHTML(popupHtml)
-      .setMaxWidth('25vw')
+      .setMaxWidth('300px')
       .addTo(map);
   });
 
