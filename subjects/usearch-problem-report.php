@@ -214,7 +214,6 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 
 	if ( isset( $_POST["item_permalink"] ) ) {
 		$item_permalink = scrubData( $_POST["item_permalink"] );
-		//$item_permalink = urldecode($item_permalink);
 	} else {
 		$item_permalink = "No Permalink Entered";
 	}
@@ -247,7 +246,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		'user_email'     => $user_email,
 		'affiliation'    => $affiliation,
 		'item_title'     => $item_title,
-		'item_permalink' => $item_permalink,
+		'item_permalink' => urldecode($item_permalink),
 		'primo_view'     => $primo_view,
 		'problem_type'   => $problem_type,
 		'description'    => $description,
@@ -292,7 +291,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
 	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
 	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$message .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
+	$message .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
 
 
 	/**
@@ -304,9 +303,6 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$slackMsg->setIcon( $problem_report_slack_emoji );
 	$slackMsg->setWebhookurl( $problem_report_slack_webhook_url );
 	$slackMsg->setMessage( $message );
-
-
-
 
 
 	if ( $problem_report_use_recaptcha === true &&  isset( $_POST['use_recaptcha'] ) && isset($_POST['recaptcha_response']) ) {
