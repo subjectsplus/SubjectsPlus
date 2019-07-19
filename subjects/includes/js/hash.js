@@ -112,23 +112,43 @@ var hash = {
             var tabIndex = $(this).data("tab_index");
             var plusletId = $(this).data("pluslet_id");
             var tabId = $(this).attr("id");
-
             var selected_box = '.pluslet-' + plusletId;
 
 
             if (!$('#tabs').data('ui-tabs')) {
 
+                var section = $('#pluslet-' + plusletId).parents('.sp_section').attr('id');
+                var position = $("#" + section).offset().top;
+
+                $("body, html").animate({
+                    scrollTop: position
+                } );
+
                 $(selected_box).effect('pulsate', {
                     times: 1
                 }, 2000);
+
 
             } else {
 
                 $('#tabs').tabs('select', tabId);
 
-                $(selected_box).effect('pulsate', {
-                    times: 1
-                }, 2000);
+                $( "#tabs" ).tabs({
+                    activate: function( event, ui ) {
+
+                        var section = $('#pluslet-' + plusletId).parents('.sp_section').attr('id');
+                        var position = $("#" + section).offset().top;
+
+                        $("body, html").animate({
+                            scrollTop: position
+                        } );
+                        //
+                        // $(selected_box).effect('pulsate', {
+                        //     times: 1
+                        // }, 2000);
+                    }
+                });
+
             }
 
 
