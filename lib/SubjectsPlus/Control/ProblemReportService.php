@@ -33,7 +33,7 @@ class ProblemReportService {
 	/**
 	 * @param mixed $use_email
 	 */
-	public function setUseEmail( $use_email ): void {
+	public function setUseEmail( $use_email ) {
 		$this->_use_email = $use_email;
 	}
 
@@ -47,7 +47,7 @@ class ProblemReportService {
 	/**
 	 * @param mixed $use_slack
 	 */
-	public function setUseSlack( $use_slack ): void {
+	public function setUseSlack( $use_slack ) {
 		$this->_use_slack = $use_slack;
 	}
 
@@ -61,7 +61,7 @@ class ProblemReportService {
 	/**
 	 * @param mixed $use_recaptcha
 	 */
-	public function setUseRecaptcha( $use_recaptcha ): void {
+	public function setUseRecaptcha( $use_recaptcha ) {
 		$this->_use_recaptcha = $use_recaptcha;
 	}
 

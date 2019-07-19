@@ -22,6 +22,35 @@ global $AssetPath;
 
 global $BaseURL;
 
+/**
+ * globals for Mailer class
+ * @global $email_host
+ */
+global $email_host;
+
+/**
+ *
+ * @var $email_port
+ */
+global $email_port;
+
+/**
+ *
+ * @var $email_smtp_auth
+ */
+global $email_smtp_auth;
+
+/**
+ *
+ * @var $email_smtp_debug
+ */
+global $email_smtp_debug;
+
+/**
+ * global for the reply email address for subjectsplus administrator
+ * @global $administrator_email
+ */
+global $administrator_email;
 
 /**
  *
@@ -195,28 +224,36 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		$primo_view = 'richter';
 	}
 
-	$msg = _( "New uSearch Problem Reported" ) . PHP_EOL;
-	$msg .= _( "From Name: " ) . $user_name . PHP_EOL;
-	$msg .= _( "From Email: " ) . $user_email . PHP_EOL;
-	$msg .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
-	$msg .= _( "Problem Item: " ) . $item_title . PHP_EOL;
-	$msg .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
-	$msg .= _( "Primo View: " ) . $primo_view . PHP_EOL;
-	$msg .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
-	$msg .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
+	$date_submitted =  date( 'D M j, Y, g:i a' );
 
+	$box_file = "https://miami.app.box.com/file/263816536251";
 
 	/**
 	 * create the html email template
-	 * @var $tpl_name
 	 * @var $tpl
-	 * @var $html_message
+	 * @var $tpl_name
+	 * @var $tpl_folder
+	 * @var $email_message
 	 */
-	$tpl_name     = 'html_msg';
-	$tpl          = new Template( './views/usearch-problem-report' );
-	$html_message = $tpl->render( $tpl_name, array(
-		'msg'   => $msg
+	if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
+		$tpl_folder = "./themes/{$subjects_theme}/views/usearch-problem-report";
+	} else {
+		$tpl_folder = "./views/usearch-problem-report";
+	}
+
+	$tpl_name     = 'email_msg';
+	$tpl          = new Template( $tpl_folder );
+	$email_message = $tpl->render( $tpl_name, array(
+		'user_name'      => $user_name,
+		'user_email'     => $user_email,
+		'affiliation'    => $affiliation,
+		'item_title'     => $item_title,
+		'item_permalink' => urldecode($item_permalink),
+		'primo_view'     => $primo_view,
+		'problem_type'   => $problem_type,
+		'description'    => $description,
+		'date_submitted' => $date_submitted,
+		'box_file'       => $box_file
 	));
 
 	/**
@@ -227,13 +264,11 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$mailMessege->setFromAddress( $user_email );
 	$mailMessege->setFromLabel( $user_name );
 	$mailMessege->setToAddress( $administrator_email );
-
 	if ( isset($problem_report_email_recipients) && !empty($problem_report_email_recipients)) {
 		$mailMessege->setToCcAddresses($problem_report_email_recipients);
 	}
-
 	$mailMessege->setSubject( 'uSearch Problem Report' );
-	$mailMessege->setMsgHTML( $html_message );
+	$mailMessege->setMsgHTML( $email_message );
 
 
 	/**
@@ -248,6 +283,21 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 
 
 	/**
+	 * Assemble slack message
+	 */
+	$message = _( "New uSearch Problem Reported" ) . PHP_EOL;
+	$message .= _( "From Name: " ) . $user_name . PHP_EOL;
+	$message .= _( "From Email: " ) . $user_email . PHP_EOL;
+	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
+	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
+	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
+	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
+	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
+	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
+	$message .= _( "Box file: " ) . $box_file . PHP_EOL;
+	$message .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
+
+	/**
 	 * send comment to slack channel talkback
 	 * @var $slackMsg
 	 */
@@ -255,7 +305,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$slackMsg->setChannel( $problem_report_slack_channel );
 	$slackMsg->setIcon( $problem_report_slack_emoji );
 	$slackMsg->setWebhookurl( $problem_report_slack_webhook_url );
-	$slackMsg->setMessage( $msg );
+	$slackMsg->setMessage( $message );
 
 
 	if ( $problem_report_use_recaptcha === true &&  isset( $_POST['use_recaptcha'] ) && isset($_POST['recaptcha_response']) ) {
