@@ -226,6 +226,8 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 
 	$date_submitted =  date( 'D M j, Y, g:i a' );
 
+	$box_file = "https://miami.app.box.com/file/263816536251";
+
 	/**
 	 * create the html email template
 	 * @var $tpl
@@ -250,7 +252,8 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		'primo_view'     => $primo_view,
 		'problem_type'   => $problem_type,
 		'description'    => $description,
-		'date_submitted' => $date_submitted
+		'date_submitted' => $date_submitted,
+		'box_file'       => $box_file
 	));
 
 	/**
@@ -291,8 +294,8 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
 	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
 	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
+	$message .= _( "Box file: " ) . $box_file . PHP_EOL;
 	$message .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
-
 
 	/**
 	 * send comment to slack channel talkback
