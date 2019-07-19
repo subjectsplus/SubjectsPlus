@@ -43,13 +43,14 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 	/* this is a declaration of an array that contains all the options in the
 	*  configuration that will be presented to the user in the HTML form to be
 	*  changed and saved. The way this array is declared to work with all the
-	*  functions that use it is as follows: [0] User form label [1] Notes to display
-	*  below input label [2] Type of declaration in config file [3] where to display
-	*  this input on HTML form (left or right box) [4] input specification (for string
-	*  type either small, medium, large or array type can be in form of ticks and boolean
-	*  always is a select box [5] extra data : e.g. holds options for ticks and will only be used if
-	*  array and ticks are specified or if additional data needed [6] tooltip that will display when
-	*  hovering over '?' icon and if blank, no icon will appear
+	*  functions that use it is as follows:
+	*  [0] User form label
+	*  [1] Notes to display below input label
+	*  [2] Type of declaration in config file
+	*  [3] where to display this input on HTML form (left or right box)
+	*  [4] input specification (for string type either small, medium, large or array type can be in form of ticks and boolean always is a select box
+	*  [5] extra data : e.g. holds options for ticks and will only be used if array and ticks are specified or if additional data needed
+	*  [6] tooltip that will display when hovering over '?' icon and if blank, no icon will appear
 	*/
 	$lobjConfigOptions = array(
 		"omit_user_columns" => array(
@@ -755,6 +756,26 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 		"google_books_api_key" => array(
 			_( "Google Books API Key" ),
 			_( "This option contains the API key required to use Google Books API key in the Book List Pluslet" ),
+			"string",
+			"api",
+			"large",
+			"",
+			""
+		),
+
+		"mapbox_access_token" => array(
+			_( "Mapbox Public API Key" ),
+			_( "This option contains the acces token required to use Mapbox staff mapping functionality on the Staff Map page" ),
+			"string",
+			"api",
+			"large",
+			"",
+			""
+		),
+
+		"home_coords" => array(
+			_( "Mapbox Home Coordinates" ),
+			_( "This setting will determine the starting position of the Mapbox map on the Staff Map page" ),
 			"string",
 			"api",
 			"large",
