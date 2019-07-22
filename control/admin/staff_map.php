@@ -196,7 +196,18 @@ print "
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
 
-<div id='map' style='width: 800px; height: 600px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+<div class="pure-g">
+  <div id='map' class='pure-u-2-3' style='width: 1024px; height: 768px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+  <div class="pure-u-1-3">
+    <?php
+      $staff_map_infobox = "
+        <p>TESTING</p>
+      ";
+      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow");
+    ?>
+  </div>
+</div>
+
 <script id="map-drawing">
 
   <?php
