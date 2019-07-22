@@ -12,7 +12,13 @@ $use_jquery = array("ui");
 include("../../control/includes/autoloader.php");
 require_once("../../control/includes/config.php");
 require_once("../../control/includes/functions.php");
-include("../../subjects/includes/header_um.php");
+
+global $subjects_theme;
+if ($subjects_theme == "med"){
+	include("../../subjects/includes/header_med.php");
+}else{
+	include("../../subjects/includes/header_um-new.php");
+}
 ?>
     <div class="panel-container panel-adj">
     <div class="wrapper">
@@ -36,4 +42,11 @@ include("../../subjects/includes/header_um.php");
     </div>
 
 
-<?php include("../../subjects/includes/footer_um.php"); ?>
+<?php
+
+if ($subjects_theme == "med"){
+	include("../../subjects/includes/footer_med.php");
+}else{
+	include("../../subjects/includes/footer_um-new.php");
+}
+?>
