@@ -154,3 +154,5 @@ nul
 /api/.htaccess
 /subjects/themes/med/
 /subjects/themes/um-new/
+
+control/lti_controller/

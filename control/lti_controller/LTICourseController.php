@@ -55,6 +55,7 @@ class LTICourseController
     private function updateBBCoursesCodeTable()
     {
         global $lti_courses_dir_path;
+        global $subjects_theme;
         $file_path = $this->getLatestFileFromServer($lti_courses_dir_path);
         sleep(10);
         $file = fopen($file_path, "r");
@@ -66,6 +67,14 @@ class LTICourseController
             $course_temp = explode("	", $course_data[0]);
             $course_code = $course_temp[0];
             $course_name = $course_temp[1];
+
+            if ($subjects_theme == "med"){
+            	global $med_course_codes;
+            	if (!in_array(preg_replace('/[^a-zA-Z]/', '', $course_code), $med_course_codes)){
+		            $line = fgets($file);
+            		continue;
+	            }
+            }
 
             $statement = $this->connection->prepare("INSERT INTO " . $this->course_code_table_name . " (course_code, course_title)
             SELECT * FROM (SELECT '" . $course_code . "', '" . $course_name . "') AS tmp
@@ -87,6 +96,7 @@ class LTICourseController
         global $lti_service_account_password;
         global $lti_sftp_server_url;
 
+
         // Make our connection
         $sftp_connection = ssh2_connect($lti_sftp_server_url);
 
@@ -97,66 +107,48 @@ class LTICourseController
         if (!$sftp = ssh2_sftp($sftp_connection)) throw new Exception('Unable to create SFTP connection.');
 
         //Set ignored elements array
-        $ignored = array('.', '..', '.svn', '.htaccess', 'instructors');
+        $ignored = array('.', '..', '.svn', '.htaccess', 'instructors', 'old');
 
         // Get and sort the files
         $files = array();
-        foreach (scandir('ssh2.sftp://' . $sftp . $file_path) as $file) {
-            if (in_array($file, $ignored)) continue;
-            $files[$file] = filemtime('ssh2.sftp://' . $sftp . $file_path . '/' . $file);
+
+
+        foreach (scandir('ssh2.sftp://' . intval($sftp) . $file_path) as $file) {
+            if (in_array($file, $ignored) || in_array(pathinfo($file)['extension'], $ignored)) continue;
+            array_push($files,'ssh2.sftp://' . intval($sftp) . $file_path . '/' . $file);
         }
 
-        arsort($files);
-        $files = array_keys($files);
-
         if (!empty($files)) {
-            $last_file = $files[0];
-            $this->downloadFileFromServer($sftp, $file_path, $last_file);
+            $last_file = end($files);
+            $this->downloadFileFromServer($last_file);
         }
 
         ssh2_exec($sftp_connection, 'exit');
         unset($sftp_connection);
 
-        return "./temp_files/$last_file";
+        return "./temp_files/".basename($last_file);
     }
 
-    private function downloadFileFromServer($sftp, $file_path, $last_file){
-        // Remote stream
-        if (!$remoteStream = @fopen("ssh2.sftp://$sftp/$file_path/$last_file", 'r')) {
-            echo "Unable to open remote file: $last_file";
-        }
+    private function downloadFileFromServer($file){
 
-        // Local stream
-        if (!$localStream = @fopen("temp_files/$last_file", 'w')) {
-            echo "Unable to open local file for writing: temp_files/$last_file";
-        }
-
-        // Write from our remote stream to our local stream
-        $read = 0;
-        $fileSize = filesize("ssh2.sftp://$sftp/$file_path/$last_file");
-        while ($read < $fileSize && ($buffer = fread($remoteStream, $fileSize - $read))) {
-            // Increase our bytes read
-            $read += strlen($buffer);
-
-            // Write to our local file
-            if (fwrite($localStream, $buffer) === FALSE) {
-                echo "Unable to write to local file: temp_files/$last_file";
-            }
-        }
+    	$file_basename = basename($file);
+	    $stream = fopen($file, 'r');
+	    $contents = stream_get_contents($stream);
+	    file_put_contents("temp_files/$file_basename", $contents);
 
         // Close our streams
-        fclose($localStream);
-        fclose($remoteStream);
+        fclose($stream);
 
         $log = fopen("log.txt","a");
         $date = date("Y-m-d H:i:s");
-        fwrite($log, $date . " - Updated from " . $last_file . PHP_EOL);
+        fwrite($log, $date . " - Updated from " . $file_basename . PHP_EOL);
         fclose($log);
     }
 
     private function updateBBCourseInstructorTable()
     {
         global $lti_instructors_dir_path;
+	    global $subjects_theme;
         $file_path = $this->getLatestFileFromServer($lti_instructors_dir_path);
         sleep(10);
         $file = fopen($file_path, "r");
@@ -167,6 +159,14 @@ class LTICourseController
             $course_temp = explode("	", $line);
             $course_id = $course_temp[0];
             $course_instructor = $course_temp[1];
+
+	        if ($subjects_theme == "med"){
+		        global $med_course_codes;
+		        if (!in_array(preg_replace('/[^a-zA-Z]/', '', $course_id), $med_course_codes)){
+			        $line = fgets($file);
+			        continue;
+		        }
+	        }
 
             $statement = $this->connection->prepare("INSERT INTO " . $this->course_instructor_table_name . " (course_id, instructor)
             SELECT * FROM (SELECT '" . $course_id . "', '" . $course_instructor . "') AS tmp
