@@ -10,6 +10,10 @@
 //        define('SP_PATH', '/path/to/local/sp4/directory');
 //        break;
 //}
+//
+// $med_course_codes = []; //an array of course codes
+//
+
 
 include('config.php');
 include(SP_PATH . "/control/includes/autoloader.php"); // need to use this if header not loaded yet
