@@ -201,13 +201,21 @@ print "
 
   <?php
     global $mapbox_access_token;
+
+    if( ! isset($mapbox_access_token) ){
+      print " alert(`Mapbox access token not set in:\nSite Config > API > Mapbox Public API Key\n\nMapbox requires a valid access token to display map content.`)";
+    };
     
     // Use home location coordinates for map centering; this is set in config.php
     global $home_coords;
 
-    // Handling home coords being entered as string instead of array
-    if( gettype($home_coords) != 'array' ){
+    if(isset($home_coords) && $home_coords != ''){
+      // If $home_coords is set and not empty, split it on comma
       $home_coords = preg_split("/,/", $home_coords);
+    } else {
+      // If $home_coords isn't set or is an empty string, substitute UM coords as default
+      $home_coords = [25.721266,-80.278496];
+      print " alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`) ";
     };
 
   ?>
@@ -217,9 +225,10 @@ print "
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
 
-  // Try to account for home coordinates being left blank, or not being read correctly
-  if(typeof homeCoords === 'undefined' || homeCoords === ''){
-    homeCoords = [-80.278496,25.721266];
+  
+  if(!homeCoords.length){
+    
+    // Backstop in case above PHP validations somehow don't work to check for valid home coords
     alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`);
   };
 
