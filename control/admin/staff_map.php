@@ -113,6 +113,8 @@ print "
   <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>
   <link href='" . $AssetPath . "css/shared/mapbox-gl.css' rel='stylesheet' />
 
+  // <link href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' rel='stylesheet'>
+
   <style>
     .mapboxgl-popup-content{
       width: 300px;
@@ -196,14 +198,53 @@ print "
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
 
-<div class="pure-g">
-  <div id='map' class='pure-u-2-3' style='width: 1024px; height: 768px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
-  <div class="pure-u-1-3">
+<div class="pure-g" style="margin-top: 25px;">
+  <div class="pure-u-3-5">
+    <div id='map' style='width: 1024px; height: 768px; float: right; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+  </div>
+  <div class="pure-u-2-5">
     <?php
       $staff_map_infobox = "
-        <p>TESTING</p>
+        <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
+
+        <label for='size_select'><i class='fa fa-arrows-alt'></i> Map Size</label>
+        <br/>
+        <select name='size_select' id='size_select'>
+          <option value='640'>640 x 480</option>
+          <option value='800'>800 x 600</option>
+          <option value='1024'>1024 x 768</option>
+        </select>
+
+        <p>
+          <label for='marker_select'><i class='fa fa-map-marker' aria-hidden='true'></i> Marker Type</label>
+          <br/>
+          <select name='marker_select' id='marker_select'>
+            <option value='pulsing-dot'>Pulsing Dot</option>
+            <option value='blue-dot'>Blue Dot</option>
+          </select>
+        </p>
+
+        <p>
+          <label for='map_theme'><i class='fa fa-paint-brush' aria-hidden='true'></i> Map Color Scheme</label>
+          <br/>
+          <select name='map_theme' id='map_theme'>
+            <option value='light'>Light</option>
+            <option value='dark'>Dark</option>
+            <option value='streets'>Streets</option>
+          </select>
+        </p>
+
+        <p>
+          <label for='staff_filter'><i class='fa fa-users' aria-hidden='true'></i> Filter</label>
+          <br/>
+          <select name='staff_filter' id='staff_filter'>
+            <option value='show_all'>All Staff Members</option>
+            <option value='librarians'>Librarians Only</option>
+            <option value='not-librarians'>Non-Librarians</option>
+          </select>
+        </p>
       ";
-      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow");
+      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; width: 50%; box-shadow: 0px 0px 10px #000000;');
     ?>
   </div>
 </div>
