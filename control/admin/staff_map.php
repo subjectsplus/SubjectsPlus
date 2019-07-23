@@ -228,8 +228,8 @@ print "
           <label for='marker_select'><i class='fa fa-map-marker' aria-hidden='true'></i> Marker Type</label>
           <br/>
           <select name='marker_select' id='marker_select'>
-            <option value='pulsing-dot'>Pulsing Dot</option>
-            <option value='blue-dot'>Blue Dot</option>
+            <option value='pulsing'>Pulsing Dot</option>
+            <option value='static'>Blue Dot</option>
           </select>
         </p>
       ";
@@ -287,10 +287,6 @@ print "
     .setLngLat(homeCoords)
     .addTo(map);
 
-  let testLocation = new mapboxgl.Marker({color: 'red'})
-    .setLngLat([-80.033138,25.841379])
-    .addTo(map);
-
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
 
@@ -340,10 +336,22 @@ print "
       return true;
     }
   };
+
+  let selectedMarkerString = $('#marker_select').val();
+
+  // console.log('---------------- selectedMarkerString :', selectedMarkerString);
+
+  const markerMappings = {
+    'pulsing': pulsingDot
+  }
+
+  let selectedMarker = markerMappings[selectedMarkerString];
+
+  // console.log('selectedMarker :', selectedMarker);
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+    map.addImage(selectedMarkerString, selectedMarker, { pixelRatio: 2 });
     map.addSource("staff_locations", {
       type: "geojson",
       data: {
@@ -359,7 +367,7 @@ print "
       "type": "symbol",
       "source": "staff_locations",
       "layout": {
-        "icon-image": "pulsing-dot",
+        "icon-image": selectedMarkerString,
         "icon-ignore-placement": true,
         "text-field": "{title}",
         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
