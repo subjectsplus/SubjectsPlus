@@ -447,6 +447,7 @@ include("../includes/footer.php");
 							$('#lat_long').val(result);
 						} else {
 							// If we don't get back a valid result
+                            $('#lat_long').val('');
 							alert(`Unable to find coordinates for provided address.\n\nPlease check the address fields, and ensure that the record has been saved before looking up coordinates.`);
 						}
 					});

@@ -1416,9 +1416,9 @@ function reduce( $numerator, $denominator ) {
  * @return string
  */
 
-function makePluslet( $title = "", $body = "", $bonus_styles = "", $printout = true ) {
+function makePluslet( $title = "", $body = "", $bonus_styles = "", $printout = true , $inline_css = "") {
 	$pluslet = "
-  <div class=\"pluslet $bonus_styles\">
+  <div class=\"pluslet $bonus_styles\" style=\"$inline_css\">
     <div class=\"titlebar\">
       <div class=\"titlebar_text\">$title</div>
       <div class=\"titlebar_options\"></div>

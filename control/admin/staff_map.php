@@ -113,6 +113,8 @@ print "
   <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>
   <link href='" . $AssetPath . "css/shared/mapbox-gl.css' rel='stylesheet' />
 
+  // <link href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' rel='stylesheet'>
+
   <style>
     .mapboxgl-popup-content{
       width: 300px;
@@ -196,18 +198,76 @@ print "
 
 <!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
 
-<div id='map' style='width: 800px; height: 600px; margin: 0 auto; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+<div class="pure-g" style="margin-top: 25px;">
+  <div class="pure-u-3-5">
+    <div id='map' style='width: 1024px; height: 768px; float: right; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+  </div>
+  <div class="pure-u-2-5">
+    <?php
+      $staff_map_infobox = "
+        <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
+
+        <label for='size_select'><i class='fa fa-arrows-alt'></i> Map Size</label>
+        <br/>
+        <select name='size_select' id='size_select'>
+          <option value='640'>640 x 480</option>
+          <option value='800'>800 x 600</option>
+          <option value='1024'>1024 x 768</option>
+        </select>
+
+        <p>
+          <label for='marker_select'><i class='fa fa-map-marker' aria-hidden='true'></i> Marker Type</label>
+          <br/>
+          <select name='marker_select' id='marker_select'>
+            <option value='pulsing-dot'>Pulsing Dot</option>
+            <option value='blue-dot'>Blue Dot</option>
+          </select>
+        </p>
+
+        <p>
+          <label for='map_theme'><i class='fa fa-paint-brush' aria-hidden='true'></i> Map Color Scheme</label>
+          <br/>
+          <select name='map_theme' id='map_theme'>
+            <option value='light'>Light</option>
+            <option value='dark'>Dark</option>
+            <option value='streets'>Streets</option>
+          </select>
+        </p>
+
+        <p>
+          <label for='staff_filter'><i class='fa fa-users' aria-hidden='true'></i> Filter</label>
+          <br/>
+          <select name='staff_filter' id='staff_filter'>
+            <option value='show_all'>All Staff Members</option>
+            <option value='librarians'>Librarians Only</option>
+            <option value='not-librarians'>Non-Librarians</option>
+          </select>
+        </p>
+      ";
+      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; width: 50%; box-shadow: 0px 0px 10px #000000;');
+    ?>
+  </div>
+</div>
+
 <script id="map-drawing">
 
   <?php
     global $mapbox_access_token;
+
+    if( ! isset($mapbox_access_token) ){
+      print " alert(`Mapbox access token not set in:\nSite Config > API > Mapbox Public API Key\n\nMapbox requires a valid access token to display map content.`)";
+    };
     
     // Use home location coordinates for map centering; this is set in config.php
     global $home_coords;
 
-    // Handling home coords being entered as string instead of array
-    if( gettype($home_coords) != 'array' ){
+    if(isset($home_coords) && $home_coords != ''){
+      // If $home_coords is set and not empty, split it on comma
       $home_coords = preg_split("/,/", $home_coords);
+    } else {
+      // If $home_coords isn't set or is an empty string, substitute UM coords as default
+      $home_coords = [25.721266,-80.278496];
+      print " alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`) ";
     };
 
   ?>
@@ -217,9 +277,10 @@ print "
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
 
-  // Try to account for home coordinates being left blank, or not being read correctly
-  if(typeof homeCoords === 'undefined' || homeCoords === ''){
-    homeCoords = [-80.278496,25.721266];
+  
+  if(!homeCoords.length){
+    
+    // Backstop in case above PHP validations somehow don't work to check for valid home coords
     alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`);
   };
 
