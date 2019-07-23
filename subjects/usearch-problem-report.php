@@ -257,6 +257,21 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	));
 
 	/**
+	 * Assemble message for both Slack and Text-Only Email
+	 */
+	$message = _( "New uSearch Problem Reported" ) . PHP_EOL;
+	$message .= _( "From Name: " ) . $user_name . PHP_EOL;
+	$message .= _( "From Email: " ) . $user_email . PHP_EOL;
+	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
+	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
+	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
+	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
+	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
+	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
+	$message .= _( "Box file: " ) . $box_file . PHP_EOL;
+	$message .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
+
+	/**
 	 * configure MailMessage
 	 * @var $mailMessege
 	 */
@@ -269,6 +284,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	}
 	$mailMessege->setSubject( 'uSearch Problem Report' );
 	$mailMessege->setMsgHTML( $email_message );
+	$mailMessege->setAltBody($message);
 
 
 	/**
@@ -282,20 +298,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 	$mailer->SMTPDebug = $email_smtp_debug;
 
 
-	/**
-	 * Assemble slack message
-	 */
-	$message = _( "New uSearch Problem Reported" ) . PHP_EOL;
-	$message .= _( "From Name: " ) . $user_name . PHP_EOL;
-	$message .= _( "From Email: " ) . $user_email . PHP_EOL;
-	$message .= _( "Affiliation: " ) . $affiliation . PHP_EOL;
-	$message .= _( "Problem Item: " ) . $item_title . PHP_EOL;
-	$message .= _( "Problem Permalink: " ) . $item_permalink . PHP_EOL;
-	$message .= _( "Primo View: " ) . $primo_view . PHP_EOL;
-	$message .= _( "Problem Type: " ) . $problem_type . PHP_EOL;
-	$message .= _( "Problem Description: " ) . $description . PHP_EOL;
-	$message .= _( "Box file: " ) . $box_file . PHP_EOL;
-	$message .= _( "Date submitted: " ) . $date_submitted . PHP_EOL;
+
 
 	/**
 	 * send comment to slack channel talkback
