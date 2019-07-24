@@ -145,6 +145,51 @@ print "
       }
     }
 
+    .switch-field {
+      display: flex;
+      margin-bottom: 36px;
+      overflow: hidden;
+    }
+    
+    .switch-field input {
+      position: absolute !important;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      width: 1px;
+      border: 0;
+      overflow: hidden;
+    }
+    
+    .switch-field label {
+      background-color: #e4e4e4;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 14px;
+      line-height: 1;
+      text-align: center;
+      padding: 8px 16px;
+      margin-right: -1px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.1s ease-in-out;
+    }
+    
+    .switch-field label:hover {
+      cursor: pointer;
+    }
+    
+    .switch-field input:checked + label {
+      background-color: #c03956;
+      box-shadow: none;
+      color: rgba(255, 255, 255, 1);
+    }
+    
+    .switch-field label:first-of-type {
+      border-radius: 4px 0 0 4px;
+    }
+    
+    .switch-field label:last-of-type {
+      border-radius: 0 4px 4px 0;
+    }
   </style>
 
   <script id='markers-container'>
@@ -223,16 +268,13 @@ print "
       $staff_map_infobox = "
         <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
         <hr/>
-        <h3 style='font-family: NotoSansBold; font-size: 16px;'><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3>
-        <label>
-          <input onclick='toggleMarker()' type='radio' name='marker_select' value='pulsing' id='marker_select_pulsing' checked>
-          <span style='font-family: sans-serif;'>&nbsp;&nbsp;Pulsing</span>
-        </label>
-        <br/>
-        <label>
-          <input onclick='toggleMarker()' type='radio' name='marker_select' value='static' id='marker_select_static'>
-          <span style='font-family: sans-serif;'>&nbsp;&nbsp;Static</span>
-        </label>
+        <h3><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3>
+        <div class='switch-field'>
+          <input onclick='toggleMarker()' type='radio' id='radio-one' name='marker_select' value='pulsing' checked/>
+          <label for='radio-one'>Pulsing</label>
+          <input onclick='toggleMarker()' type='radio' id='radio-two' name='marker_select' value='static' />
+          <label for='radio-two'>Static</label>
+        </div>
       ";
       makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; box-shadow: 0px 0px 10px #000000;');
     ?>
@@ -357,7 +399,7 @@ print "
 
       context.beginPath();
       context.arc(.5 * this.width, .5 * this.height, 15, 0, 2 * Math.PI);
-      context.fillStyle = 'rgba(255, 0, 0, 1)';
+      context.fillStyle = 'red';
       context.strokeStyle = 'black';
       context.lineWidth = 4;
 
