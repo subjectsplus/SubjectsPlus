@@ -148,8 +148,6 @@ print "
   </style>
 
   <script id='markers-container'>
-    let selectedMarkerString = 'pulsing';
-    console.log('------------------------ ', selectedMarkerString);
     let markers = [];
 ";
 
@@ -224,26 +222,17 @@ print "
     <?php
       $staff_map_infobox = "
         <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
-
-        <p>
-          <p><h3><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3></p>
-          <!-- <br/> -->
-          <!-- <select name='marker_select' id='marker_select'> -->
-          <!--   <option value='pulsing'>Pulsing Dot</option> -->
-          <!--   <option value='static'>Blue Dot</option> -->
-          <!-- </select> -->
-
-          <label>
+        <hr/>
+        <h3 style='font-family: NotoSansBold; font-size: 16px;'><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3>
+        <label>
           <input onclick='toggleMarker()' type='radio' name='marker_select' value='pulsing' id='marker_select_pulsing' checked>
-          <span>&nbsp;Pulsing</span>
-          </label>
-
-          <br/>
-          <label>
+          <span style='font-family: sans-serif;'>&nbsp;&nbsp;Pulsing</span>
+        </label>
+        <br/>
+        <label>
           <input onclick='toggleMarker()' type='radio' name='marker_select' value='static' id='marker_select_static'>
-          <span>&nbsp;Static</span>
-          </label>
-        </p>
+          <span style='font-family: sans-serif;'>&nbsp;&nbsp;Static</span>
+        </label>
       ";
       makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; box-shadow: 0px 0px 10px #000000;');
     ?>
@@ -317,7 +306,7 @@ print "
     render: function() {
       let duration = 1000;
       let t = (performance.now() % duration) / duration;
-      
+
       let radius = dotSize / 2 * 0.3;
       let outerRadius = dotSize / 2 * 0.7 * t + radius;
       let context = this.context;
@@ -356,40 +345,27 @@ print "
 
     onAdd: function() {
       let canvas = document.createElement('canvas');
+      canvas.id = 'canvas';
       canvas.width = this.width;
       canvas.height = this.height;
       this.context = canvas.getContext('2d');
+      this.context.imageSmoothingEnabled = true;
     },
 
     render: function() {
-      let duration = 1000;
-      let t = (performance.now() % duration) / duration;
-      
-      let radius = dotSize / 2 * 0.3;
-      let outerRadius = dotSize / 2 * 0.7 * t + radius;
       let context = this.context;
-      
-      // draw outer circle
-      context.clearRect(0, 0, this.width, this.height);
+
       context.beginPath();
-      context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
-      context.fillStyle = 'rgba(0, 255, 0,' + (1 - t) + ')';
-      context.fill();
-      
-      // draw inner circle
-      context.beginPath();
-      context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
-      context.fillStyle = 'rgba(0, 255, 0, 1)';
-      context.strokeStyle = 'white';
-      context.lineWidth = 2 + 4 * (1 - t);
+      context.arc(.5 * this.width, .5 * this.height, 15, 0, 2 * Math.PI);
+      context.fillStyle = 'rgba(255, 0, 0, 1)';
+      context.strokeStyle = 'black';
+      context.lineWidth = 4;
+
       context.fill();
       context.stroke();
-      
+
       // update this image's data with data from the canvas
       this.data = context.getImageData(0, 0, this.width, this.height).data;
-      
-      // keep the map repainting
-      map.triggerRepaint();
       
       // return `true` to let the map know that the image was updated
       return true;
@@ -398,7 +374,7 @@ print "
 
   // ------------------------------------------------- SETTING UP MARKER CHANGE SELECTION UI FEATURES AND FUNCTION
   
-  // let selectedMarkerString = $("input[name='marker_select']:checked").val();
+  let selectedMarkerString = $("input[name='marker_select']:checked").val();
 
   const markerMappings = {
     'pulsing': pulsingDot,
@@ -408,27 +384,12 @@ print "
   let selectedMarker = markerMappings[selectedMarkerString];
 
   function toggleMarker(){
-    let previousMarkerString = selectedMarkerString;
-
     selectedMarkerString = $("input[name='marker_select']:checked").val();
     selectedMarker = markerMappings[selectedMarkerString];
-    console.log('toggleMarker :', selectedMarkerString, selectedMarker);
-
-    for(let marker of markers){
-      marker.properties.icon = selectedMarkerString;
-    };
-    console.log(markers[0]);
-
-    map.updateImage(selectedMarkerString, selectedMarker, { pixelRatio: 2 });
-    console.log('------------- on addImage update: ', { selectedMarkerString, selectedMarker });
     map.setLayoutProperty('staff', 'icon-image', selectedMarkerString);
   };
   
-  // console.log('---------------- selectedMarkerString :', selectedMarkerString);
-  // console.log('selectedMarker :', selectedMarker);
-
   // ------------------------------------------------- END OF MARKER SELECTION CODE
-
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
