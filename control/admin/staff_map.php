@@ -148,6 +148,8 @@ print "
   </style>
 
   <script id='markers-container'>
+    let selectedMarkerString = 'pulsing';
+    console.log('------------------------ ', selectedMarkerString);
     let markers = [];
 ";
 
@@ -189,7 +191,6 @@ foreach ($staffArray as $key => $value) {
               },
               properties: {
                 id:                 " . $value["staff_id"] . ",
-                icon:               'pulsing-dot',
                 fullname:           '" . $value["fullname"] . "',
                 full_address:       '" . $value["full_address"] . "',
                 email:              '" . $value["email"] . "',
@@ -225,12 +226,23 @@ print "
         <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
 
         <p>
-          <label for='marker_select'><i class='fa fa-map-marker' aria-hidden='true'></i> Marker Type</label>
+          <p><h3><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3></p>
+          <!-- <br/> -->
+          <!-- <select name='marker_select' id='marker_select'> -->
+          <!--   <option value='pulsing'>Pulsing Dot</option> -->
+          <!--   <option value='static'>Blue Dot</option> -->
+          <!-- </select> -->
+
+          <label>
+          <input onclick='toggleMarker()' type='radio' name='marker_select' value='pulsing' id='marker_select_pulsing' checked>
+          <span>&nbsp;Pulsing</span>
+          </label>
+
           <br/>
-          <select name='marker_select' id='marker_select'>
-            <option value='pulsing'>Pulsing Dot</option>
-            <option value='static'>Blue Dot</option>
-          </select>
+          <label>
+          <input onclick='toggleMarker()' type='radio' name='marker_select' value='static' id='marker_select_static'>
+          <span>&nbsp;Static</span>
+          </label>
         </p>
       ";
       makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; box-shadow: 0px 0px 10px #000000;');
@@ -290,7 +302,7 @@ print "
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
 
-  let pulsingDot = {
+  const pulsingDot = {
     width: dotSize,
     height: dotSize,
     data: new Uint8Array(dotSize * dotSize * 4),
@@ -337,21 +349,93 @@ print "
     }
   };
 
-  let selectedMarkerString = $('#marker_select').val();
+  const staticDot = {
+    width: dotSize,
+    height: dotSize,
+    data: new Uint8Array(dotSize * dotSize * 4),
 
-  // console.log('---------------- selectedMarkerString :', selectedMarkerString);
+    onAdd: function() {
+      let canvas = document.createElement('canvas');
+      canvas.width = this.width;
+      canvas.height = this.height;
+      this.context = canvas.getContext('2d');
+    },
+
+    render: function() {
+      let duration = 1000;
+      let t = (performance.now() % duration) / duration;
+      
+      let radius = dotSize / 2 * 0.3;
+      let outerRadius = dotSize / 2 * 0.7 * t + radius;
+      let context = this.context;
+      
+      // draw outer circle
+      context.clearRect(0, 0, this.width, this.height);
+      context.beginPath();
+      context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(0, 255, 0,' + (1 - t) + ')';
+      context.fill();
+      
+      // draw inner circle
+      context.beginPath();
+      context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(0, 255, 0, 1)';
+      context.strokeStyle = 'white';
+      context.lineWidth = 2 + 4 * (1 - t);
+      context.fill();
+      context.stroke();
+      
+      // update this image's data with data from the canvas
+      this.data = context.getImageData(0, 0, this.width, this.height).data;
+      
+      // keep the map repainting
+      map.triggerRepaint();
+      
+      // return `true` to let the map know that the image was updated
+      return true;
+    }
+  };
+
+  // ------------------------------------------------- SETTING UP MARKER CHANGE SELECTION UI FEATURES AND FUNCTION
+  
+  // let selectedMarkerString = $("input[name='marker_select']:checked").val();
 
   const markerMappings = {
-    'pulsing': pulsingDot
+    'pulsing': pulsingDot,
+    'static': staticDot
   }
 
   let selectedMarker = markerMappings[selectedMarkerString];
 
+  function toggleMarker(){
+    let previousMarkerString = selectedMarkerString;
+
+    selectedMarkerString = $("input[name='marker_select']:checked").val();
+    selectedMarker = markerMappings[selectedMarkerString];
+    console.log('toggleMarker :', selectedMarkerString, selectedMarker);
+
+    for(let marker of markers){
+      marker.properties.icon = selectedMarkerString;
+    };
+    console.log(markers[0]);
+
+    map.updateImage(selectedMarkerString, selectedMarker, { pixelRatio: 2 });
+    console.log('------------- on addImage update: ', { selectedMarkerString, selectedMarker });
+    map.setLayoutProperty('staff', 'icon-image', selectedMarkerString);
+  };
+  
+  // console.log('---------------- selectedMarkerString :', selectedMarkerString);
   // console.log('selectedMarker :', selectedMarker);
+
+  // ------------------------------------------------- END OF MARKER SELECTION CODE
+
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-    map.addImage(selectedMarkerString, selectedMarker, { pixelRatio: 2 });
+    
+    map.addImage('pulsing', pulsingDot, { pixelRatio: 2 });
+    map.addImage('static', staticDot, { pixelRatio: 2 });
+    
     map.addSource("staff_locations", {
       type: "geojson",
       data: {
