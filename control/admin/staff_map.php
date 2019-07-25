@@ -28,7 +28,6 @@ $connection = $db->getConnection();
 $faculty_only = isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1;
 
 if ( $stats_encryption_enabled ) {
-
   $statement = $connection->prepare('SELECT staff_id,
     fname,
     lname,
@@ -47,7 +46,6 @@ if ( $stats_encryption_enabled ) {
   FROM staff
   WHERE lat_long LIKE "%,%"
   AND active = 1');
-
 	if ( $faculty_only ) {
 		$statement = $connection->prepare('SELECT staff_id,
       fname,
@@ -69,7 +67,6 @@ if ( $stats_encryption_enabled ) {
     AND ptags LIKE "%librarian%"');
   }
 } else {
-
   $statement = $connection->prepare('SELECT staff_id,
     CONCAT( fname, " ", lname ) AS fullname,
     email,
@@ -84,9 +81,7 @@ if ( $stats_encryption_enabled ) {
   FROM staff
   WHERE lat_long LIKE "%,%"
   AND active = 1');
-
 	if ( $faculty_only ) {
-
     $statement = $connection->prepare('SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
       email,
@@ -113,20 +108,16 @@ print "
   <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>
   <link href='" . $AssetPath . "css/shared/mapbox-gl.css' rel='stylesheet' />
 
-  // <link href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' rel='stylesheet'>
-
   <style>
     .mapboxgl-popup-content{
       width: 300px;
       border-radius: 5px;
       padding: 20px;
     }
-
     .mapboxgl-popup-content button {
       font-size: large;
       padding: inherit;
     }
-
     @media (min-width: 1280px){
       #map {
         width: 75%;
@@ -135,7 +126,6 @@ print "
         width: 50%;
       }
     }
-
     @media (max-width: 1280px){
       #map {
         width: 100%;
@@ -144,13 +134,11 @@ print "
         width: 100%;
       }
     }
-
     .switch-field {
       display: flex;
       margin-bottom: 36px;
       overflow: hidden;
-    }
-    
+    }    
     .switch-field input {
       position: absolute !important;
       clip: rect(0, 0, 0, 0);
@@ -158,8 +146,7 @@ print "
       width: 1px;
       border: 0;
       overflow: hidden;
-    }
-    
+    }    
     .switch-field label {
       background-color: #e4e4e4;
       color: rgba(0, 0, 0, 0.6);
@@ -171,22 +158,18 @@ print "
       border: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
       transition: all 0.1s ease-in-out;
-    }
-    
+    }    
     .switch-field label:hover {
       cursor: pointer;
-    }
-    
+    }    
     .switch-field input:checked + label {
       background-color: #c03956;
       box-shadow: none;
       color: rgba(255, 255, 255, 1);
-    }
-    
+    }    
     .switch-field label:first-of-type {
       border-radius: 4px 0 0 4px;
-    }
-    
+    }    
     .switch-field label:last-of-type {
       border-radius: 0 4px 4px 0;
     }
@@ -218,7 +201,7 @@ foreach ($staffArray as $key => $value) {
     
     // Put everything behind a RegExp check so we don't get junk coordinates coming through
     // Need this second RegExp check post-decryption -- even though we're doing a LIKE in the queries already --
-    //  to make sure we don't send junk coordinates in case data ISN'T encrypted, but flag is set to ON
+    // to make sure we don't send junk coordinates in case data ISN'T encrypted, but flag is set to ON
 
     $coords_regexp_match = preg_match('/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/', $value["lat_long"]);
     
@@ -267,7 +250,7 @@ print "
     <?php
       $staff_map_infobox = "
         <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
-        <hr/>
+        <hr style='width: 50%;'/>
         <h3><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3>
         <div class='switch-field'>
           <input onclick='toggleMarker()' type='radio' id='radio-one' name='marker_select' value='pulsing' checked/>
@@ -276,7 +259,7 @@ print "
           <label for='radio-two'>Static</label>
         </div>
       ";
-      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; box-shadow: 0px 0px 10px #000000;');
+      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; margin-top: 0; box-shadow: 0px 0px 10px #000000;');
     ?>
   </div>
 </div>
@@ -287,14 +270,11 @@ print "
 
   <?php
     global $mapbox_access_token;
-
     if( ! isset($mapbox_access_token) ){
       print " alert(`Mapbox access token not set in:\nSite Config > API > Mapbox Public API Key\n\nMapbox requires a valid access token to display map content.`)";
-    };
-    
+    };    
     // Use home location coordinates for map centering; this is set in config.php
     global $home_coords;
-
     if(isset($home_coords) && $home_coords != ''){
       // If $home_coords is set and not empty, split it on comma
       $home_coords = preg_split("/,/", $home_coords);
@@ -307,13 +287,10 @@ print "
   ?>
 
   mapboxgl.accessToken = "<?php echo $mapbox_access_token ?>";
-  
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
   let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
-
   
   if(!homeCoords.length){
-    
     // Backstop in case above PHP validations somehow don't work to check for valid home coords
     alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`);
   };
@@ -325,26 +302,19 @@ print "
     zoom: 9
   });
 
-  // Create default 'home' location icon based on home coordinates
-  let homeLocation = new mapboxgl.Marker()
-    .setLngLat(homeCoords)
-    .addTo(map);
-
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
 
   const pulsingDot = {
     width: dotSize,
     height: dotSize,
-    data: new Uint8Array(dotSize * dotSize * 4),
-    
+    data: new Uint8Array(dotSize * dotSize * 4),    
     onAdd: function() {
       let canvas = document.createElement('canvas');
       canvas.width = this.width;
       canvas.height = this.height;
       this.context = canvas.getContext('2d');
-    },
-    
+    },    
     render: function() {
       let duration = 1000;
       let t = (performance.now() % duration) / duration;
@@ -380,64 +350,49 @@ print "
     }
   };
 
-  const staticDot = {
-    width: dotSize,
-    height: dotSize,
-    data: new Uint8Array(dotSize * dotSize * 4),
-
-    onAdd: function() {
-      let canvas = document.createElement('canvas');
-      canvas.id = 'canvas';
-      canvas.width = this.width;
-      canvas.height = this.height;
-      this.context = canvas.getContext('2d');
-      this.context.imageSmoothingEnabled = true;
-    },
-
-    render: function() {
-      let context = this.context;
-
-      context.beginPath();
-      context.arc(.5 * this.width, .5 * this.height, 15, 0, 2 * Math.PI);
-      context.fillStyle = 'red';
-      context.strokeStyle = 'black';
-      context.lineWidth = 4;
-
-      context.fill();
-      context.stroke();
-
-      // update this image's data with data from the canvas
-      this.data = context.getImageData(0, 0, this.width, this.height).data;
-      
-      // return `true` to let the map know that the image was updated
-      return true;
-    }
-  };
-
   // ------------------------------------------------- SETTING UP MARKER CHANGE SELECTION UI FEATURES AND FUNCTION
   
   let selectedMarkerString = $("input[name='marker_select']:checked").val();
 
   const markerMappings = {
     'pulsing': pulsingDot,
-    'static': staticDot
+    'static': 'static'
   }
 
   let selectedMarker = markerMappings[selectedMarkerString];
 
-  function toggleMarker(){
+  const toggleMarker = ()=>{
     selectedMarkerString = $("input[name='marker_select']:checked").val();
     selectedMarker = markerMappings[selectedMarkerString];
     map.setLayoutProperty('staff', 'icon-image', selectedMarkerString);
+  };
+
+  const formatPhoneNumber = (phoneNumberString)=> {
+    let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+    }
+    return null
   };
   
   // ------------------------------------------------- END OF MARKER SELECTION CODE
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-    
+    const staticMarkerFilePath = "<?php echo $AssetPath . 'images/public/map_marker3.png' ?>";
+
+    map.loadImage(staticMarkerFilePath, function(error, image) {
+      if (error) throw error;
+      map.addImage('static', image, { pixelRatio: 3 });
+    });
+
     map.addImage('pulsing', pulsingDot, { pixelRatio: 2 });
-    map.addImage('static', staticDot, { pixelRatio: 2 });
+
+    // Create default 'home' location icon based on home coordinates
+    let homeLocation = new mapboxgl.Marker()
+      .setLngLat(homeCoords)
+      .addTo(map);
     
     map.addSource("staff_locations", {
       type: "geojson",
@@ -449,6 +404,7 @@ print "
       clusterMaxZoom: 1, // Max zoom to cluster points on
       clusterRadius: 1, // Radius of each cluster when clustering points (defaults to 50)
     });
+
     map.addLayer({
       "id": "staff",
       "type": "symbol",
@@ -473,7 +429,7 @@ print "
     let emergencyContact;
     if(!!staffMember.contactName){
       emergencyContact = `
-      <strong>${staffMember.contactName}</strong> (${staffMember.contactRelation}):<span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.contactPhone ? staffMember.contactPhone : `<i>Not on File</i>`}</span>
+      <strong>${staffMember.contactName}</strong> (${staffMember.contactRelation}):<span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.contactPhone ? formatPhoneNumber(staffMember.contactPhone) : `<i>Not on File</i>`}</span>
       `;
     } else {
       emergencyContact = `<i>Not on File</i>`;
@@ -492,9 +448,9 @@ print "
       <p>${staffMember.full_address}</p>
       <strong>Email:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.email ? staffMember.email : `<font color="gray">None Found</font>`}</span>
       <br />
-      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.home_phone ? staffMember.home_phone : `<i>Not on File</i>`}</span>
+      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.home_phone ? formatPhoneNumber(staffMember.home_phone) : `<i>Not on File</i>`}</span>
       <br />
-      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.cell_phone ? staffMember.cell_phone : `<i>Not on File</i>`}</span>
+      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.cell_phone ? formatPhoneNumber(staffMember.cell_phone) : `<i>Not on File</i>`}</span>
       <hr>
       <h3>Emergency Contact:</strong></h3>
       ${emergencyContact}
