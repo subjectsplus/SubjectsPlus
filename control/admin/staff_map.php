@@ -249,7 +249,7 @@ print "
   <div class="pure-u-2-5 pluslet-container">
     <?php
       $staff_map_infobox = "
-        <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
+        <p>Please note that this information is confidential, and should not be shared. It is intended to help with emergency situation planning.</p>
         <hr style='width: 50%;'/>
         <h3><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3>
         <div class='switch-field'>
@@ -259,7 +259,7 @@ print "
           <label for='radio-two'>Static</label>
         </div>
       ";
-      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; margin-top: 0; box-shadow: 0px 0px 10px #000000;');
+      makePluslet(_("Staff Disaster Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; margin-top: 0; box-shadow: 0px 0px 10px #000000;');
     ?>
   </div>
 </div>
@@ -380,11 +380,11 @@ print "
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-    const staticMarkerFilePath = "<?php echo $AssetPath . 'images/map_marker3.png' ?>";
+    const staticMarkerFilePath = "<?php echo $AssetPath . 'images/map_marker.png' ?>";
 
     map.loadImage(staticMarkerFilePath, function(error, image) {
       if (error) throw error;
-      map.addImage('static', image, { pixelRatio: 3 });
+      map.addImage('static', image, { pixelRatio: 4 });
     });
 
     map.addImage('pulsing', pulsingDot, { pixelRatio: 2 });
