@@ -380,7 +380,7 @@ print "
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-    const staticMarkerFilePath = "<?php echo $AssetPath . 'images/map_marker.png' ?>";
+    const staticMarkerFilePath = "<?php echo $AssetPath . 'images/simple-pin-pink.png' ?>";
 
     map.loadImage(staticMarkerFilePath, function(error, image) {
       if (error) throw error;

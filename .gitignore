@@ -63,7 +63,7 @@ $RECYCLE.BIN/
 
 assets/cache/*
 control/includes/config.php
-assets/images/*
+# assets/images/*
 assets/users/*
 
 *.PHPEdit*
@@ -71,7 +71,7 @@ assets/users/*
 subjects/includes/pgcache/*
 
 /assets/users/*
-/assets/images
+# /assets/images
 /assets/images/video_thumbs/
 
 .idea/
