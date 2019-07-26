@@ -268,19 +268,28 @@ switch ($_REQUEST["action"]) {
     return; // return early so we don't show the stuff that follows
     break;
   case "address_lookup":
-    //print urlencode($_REQUEST["address"]);
-    $endpoint = "http://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($_REQUEST["address"]) . "&sensor=false";
-    $address = curl_get($endpoint);
-    //print $address;
-    $output = json_decode($address);
-    //print $output->results[0]->geometry->location->lat;
-    $lat = $output->results[0]->geometry->location->lat;
-    $long = $output->results[0]->geometry->location->lng;
-    $coords = $lat . "," . $long;
+    
+    $requested_address = urlencode($_REQUEST["address"]);
+      
+    // Mapbox public access token located in config.php
+    global $mapbox_access_token;
 
-    print $coords;
+    // Endpoint for MapBox coords API.
+    // API endpoint URL + address query + JSON type + access token defined in config.php + more path parameters
+    $endpoint = "https://api.mapbox.com/geocoding/v5/mapbox.places/" . urlencode( $_REQUEST["address"] ) . ".json?access_token=" . $mapbox_access_token . "&cachebuster=1562179849619&autocomplete=true";
 
-    //print $address;
+    $mapbox_response = curl_get($endpoint);
+    $formatted_json = json_decode($mapbox_response);
+
+    // If valid response from Mapbox Geocoding API
+    if( isset($formatted_json->features[0]->center)){
+      $coords = implode(",", array_reverse($formatted_json->features[0]->center));
+      print $coords;
+    } else {
+      // If Mapbox Geocoding API isn't able to find a matching coordinate/location
+      print "";
+    }
+    
     return; // return early so we don't show the stuff that follows
 
     break;

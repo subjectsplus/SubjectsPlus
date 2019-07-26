@@ -425,31 +425,38 @@ include("../includes/footer.php");
         ///////////////
 
         $(".lookup_button").livequery('click', function() {
+
             // find our message div, clear out any message from before
-            var feedback_div = $(this).parent().find(".url_feedback")
+            let feedback_div = $(this).parent().find(".url_feedback")
             feedback_div.empty();
 
-
-            var address_location = $("#street_address").attr("value") + " " + $("#city").attr("value") + " " + $("#state").attr("value") + " " + $("#zip").attr("value");
+            let address_location = $("#street_address").attr("value") + " " + $("#city").attr("value") + " " + $("#state").attr("value") + " " + $("#zip").attr("value");
             //alert(address_location);
             address_location = $.trim(address_location);
             if (!address_location) {
-              // let's see if we can generate an address
-              var our_address = "";
-              alert ("Please enter an address, first");
-              return;
+                // let's see if we can generate an address
+                let our_address = "";
+                alert ("Please enter an address, first");
+                return;
             }
-            // load a file which queries the api, returns values
-
-            //alert(address_location);
-            //$("#latitude").attr("value").load("admin_bits.php", {action: 'address_lookup', address: address_location}).fadeIn(1600);
+        
             $.get('admin_bits.php', {action: 'address_lookup', address: address_location}, function(result) {
-    $('#lat_long').val(result);
-});
+
+                let validCoordinate = (/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/).test(result);
+                
+                // If we get back a valid coordinate result from Mapbox
+                if(validCoordinate){
+                    $('#lat_long').val(result);
+                } else {
+                    // If we don't get back a valid result
+                    $('#lat_long').val('');
+                    alert(`Unable to find coordinates for provided address.\n\nPlease check the address fields, and ensure that the record has been saved before looking up coordinates.`);
+                }
+            });
 
             return;
-
-
+            
+            
         });
 
     });

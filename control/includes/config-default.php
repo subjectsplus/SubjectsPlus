@@ -563,4 +563,9 @@ $webpac_cat_action = "";
 ////////////////////////////////////////////
 $enforce_https_upload_url = FALSE;
 
+////////////////////////////////////////////
+// Mapbox access token (API key) + home coordinates
+////////////////////////////////////////////
+$mapbox_access_token = "";
+$mapbox_home_coords = "25.721266,-80.278496";
 ?>
