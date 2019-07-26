@@ -773,7 +773,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
-		"home_coords" => array(
+		"mapbox_home_coords" => array(
 			_( "Mapbox Home Coordinates" ),
 			_( "This setting will determine the starting position of the Mapbox map on the Staff Map page" ),
 			"string",
