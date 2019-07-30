@@ -285,6 +285,25 @@ table.item_listing a:link {
     padding: 0.3em;
 }
 
+/* Blackboard LTI Messages */
+
+.alert.alert-danger {
+    padding: 10px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    text-align: center;
+}
+
+.alert .notification-close-button {
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    font-weight: 600;
+}
+
+
+
+
 
 
 /* //////////////////
@@ -367,3 +386,4 @@ table.item_listing a:link {
     vertical-align: top;
     padding-left: .25rem;
 }
+
