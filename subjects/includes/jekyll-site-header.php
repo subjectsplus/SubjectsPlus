@@ -491,7 +491,7 @@
 
                                                 ['https://www.library.miami.edu/images/card-creative-studio.jpg'],
 
-                                                ['https://www.library.miami.edu/images/card-lynda.jpg'],
+                                                ['https://www.library.miami.edu/images/card-linked-in-learning.jpg'],
 
                                                 ['https://www.library.miami.edu/images/card-mango.jpg']
 
@@ -500,7 +500,7 @@
 
                                                 ['https://www.library.miami.edu/creative-studio/index.html'],
 
-                                                ['http://access.library.miami.edu/login?url=http://www.miami.edu/lynda'],
+                                                ['https://lil.miami.edu'],
 
                                                 ['http://access.library.miami.edu/login?url=http://connect.mangolanguages.com/univ-miami/start']
 
@@ -509,7 +509,7 @@
 
                                                 ['Creative Studio'],
 
-                                                ['Lynda.com'],
+                                                ['LinkedIn Learning'],
 
                                                 ['Mango Languages']
 
@@ -518,7 +518,7 @@
 
                                                 ['Creative Studio provides expert support in the use of digital audio, video, graphic design technology, printing, 3D printing, and VR technology.'],
 
-                                                ['Tutorials just a click away. We offer access to lynda\'s 95,000+ \"how-to\" videos on a wide range of software applications.'],
+                                                ['Tutorials just a click away. We offer access to LinkedIn Learning\'s 5,000 video tutorials covering business, creative, and technology topics.'],
 
                                                 ['UM students, staff and faculty have access to Mango Languages which offers online learning in 71 languages.']
 
