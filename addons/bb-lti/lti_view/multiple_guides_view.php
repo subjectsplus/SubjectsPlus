@@ -49,4 +49,5 @@ if ($subjects_theme == "med"){
 }else{
 	include("../../subjects/includes/footer_um-new.php");
 }
+
 ?>

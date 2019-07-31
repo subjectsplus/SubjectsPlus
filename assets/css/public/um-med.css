@@ -289,9 +289,17 @@ table.item_listing a:link {
 .usearch_problem_report {
     margin-top: 30px;
 }
+/* Blackboard LTI Messages */
 
 .usearch_problem_report .pure-button {
     margin-top:16px;
+}
+.alert.alert-danger {
+    padding: 10px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    text-align: center;
 }
 
 .usearch_problem_report .form_listing td {
@@ -305,6 +313,17 @@ table.item_listing a:link {
 .usearch_problem_report .form_listing td.form-item textarea {
     width: 95%;
 }
+
+.alert .notification-close-button {
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    font-weight: 600;
+}
+
+
+
+
+
 
 /* //////////////////
 //  Media Queries 
@@ -396,3 +415,4 @@ table.item_listing a:link {
     vertical-align: top;
     padding-left: .25rem;
 }
+

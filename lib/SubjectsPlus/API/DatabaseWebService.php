@@ -104,7 +104,19 @@ class DatabaseWebService extends WebService implements InterfaceWebService
 	function generateQuery(Array $lobjParams)
 	{
 		$lstrQuery = 'SELECT distinct left(title,1) as initial, title, alternate_title, description, location, access_restrictions, title.title_id,
-					eres_display, display_note, pre, citation_guide, ctags, helpguide
+					eres_display, display_note, pre, citation_guide, ctags, helpguide, 
+					IFNULL(
+                        (SELECT GROUP_CONCAT(TRIM(subject) SEPARATOR \';\')
+                         FROM rank,
+                              subject,
+                              source so
+                         WHERE rank.subject_id = subject.subject_id
+                           AND rank.source_id = so.source_id                           
+                           AND active = 1
+                           AND (subject.type = \'Subject\' || subject.type = \'Placeholder\')
+                           AND title_id = title.title_id
+                         ORDER BY subject)
+                    , "") as subjects
 					FROM title, restrictions, location, location_title, source, rank';
 
 		$lobjConditions = array();
