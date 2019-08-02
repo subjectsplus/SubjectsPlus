@@ -78,7 +78,7 @@ class LtiWebService extends WebService implements InterfaceWebService {
        link_url                  AS 'Associated Guides',
        link_title                AS 'Research Guide Id',
        count(tab_name)           AS 'Hits Count'
-FROM sp4.stats";
+FROM stats";
 
 		foreach ( $lobjParams as $lstrKey => $lobjValues ) {
 
