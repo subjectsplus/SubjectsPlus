@@ -57,8 +57,6 @@ abstract class WebService
 
 		$lobjResults = $lobjQuerier->query($lstrQuery, \PDO::FETCH_ASSOC);
 
-		var_dump($lobjResults);
-		die();
 		if(!$lobjResults){
 			$lobjResults = array();
 		}else{
