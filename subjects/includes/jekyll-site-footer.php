@@ -23,7 +23,7 @@
                     <a href="https://www.facebook.com/pages/University-of-Miami-Libraries/16409329419" target="_blank" class="no-decoration" title="Facebook"><i class="fab fa-facebook-square"></i></a> <a href="https://twitter.com/UMiamiLibraries" target="_blank" class="no-decoration" title="Twitter"><i class="fab fa-twitter-square"></i></a> <a href="https://www.instagram.com/umiamilibraries/" target="_blank" class="no-decoration" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
                 <div class="supplemental">
-                    <h6>&copy; 2018 | <a href="https://www.library.miami.edu/about/privacy-policy.html"  class="no-decoration">Privacy</a> | <a href="mailto:webmaster.lib@miami.edu" target="_blank" class="no-decoration">Report Site Issue</a> | <a href="https://www.library.miami.edu/about/support-the-libraries.html" class="no-decoration">Make a Gift</a></h6>
+                    <h6>&copy; <?php echo date('Y'); ?> | <a href="https://www.library.miami.edu/about/privacy-policy.html"  class="no-decoration">Privacy</a> | <a href="mailto:webmaster.lib@miami.edu" target="_blank" class="no-decoration">Report Site Issue</a> | <a href="https://www.library.miami.edu/about/support-the-libraries.html" class="no-decoration">Make a Gift</a></h6>
                     <img src="https://www.library.miami.edu/assets/common-images/fdlp-logo.png" alt="Federal Depository Library Program" class="fdlp-logo">
                 </div>
             </div>
@@ -141,18 +141,6 @@
                     </div>
                 </section>
             </div>
-
-            <div class="tab-pane" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
-                <section class="section">
-                    <div class="container">
-                        <h5 class="mt-3 mt-lg-0">My Favorite Links</h5>
-                        <hr align="left" class="hr-panel">
-                        <div class="my-favorite-links uml-quick-links" data-type="account-list">
-                            <h6><a href="https://www.library.miami.edu/favorites.html" class="no-decoration default">(How to use this feature)</a></h6>
-                        </div>
-                    </div>
-                </section>
-            </div>
         </div>
     </div>
     <div class="container">
@@ -167,9 +155,6 @@
                 <a class="no-decoration nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false"><i class="fas fa-user-circle"></i> Accounts</a>
             </li>
             <li class="nav-item">
-                <a class="no-decoration nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false"><i class="fas fa-heart"></i> Favorites</a>
-            </li>
-            <li class="nav-item">
                 <a class="no-decoration nav-link" id="ask" href="https://www.library.miami.edu/research/ask-a-librarian.html" aria-selected="false"><i class="fas fa-question-circle"></i> Ask</a>
             </li>
         </ul>
@@ -181,9 +166,9 @@
         $('#toolbarTabs .nav-link').click(function(){
             var tab = $(this);
             var panel = $('#' + this.hash.substr(1).toLowerCase());
-            if (tab.hasClass('active show')){
-                tab.toggleClass('active show');
-                panel.toggleClass('active show');
+            if (tab.hasClass('active')){
+                tab.toggleClass('active');
+                panel.toggleClass('active');
                 return false;
             }
         });

@@ -24,7 +24,7 @@ function favoriteBox() {
         bindUiActions: function () {
         },
         init: function () {
-      	  document.addEventListener("DOMContentLoaded", function(event) {
+      	  $(document).ready( function(event) {
 
             myFavoriteBox.getUserFavoriteBoxes();
             

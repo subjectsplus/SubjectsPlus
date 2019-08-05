@@ -1,5 +1,5 @@
 <?php
-
+die("Disabled!");
 
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
@@ -7,6 +7,26 @@ include_once('../../../../control/includes/functions.php');
 include_once('../../../../control/includes/autoloader.php');
 
 use SubjectsPlus\Control\Querier;
+
+
+
+//added because without this check a security hole is open
+if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
+	isCool($_SERVER['mail'],"", true);
+} else {
+	session_start();
+}
+
+if( !isset($sessionCheck) || $sessionCheck != 'no' )
+{
+	$sessionCheck = checkSession();
+	if ($sessionCheck == "failure" ) {
+		exit();
+	}
+}
+
+
+
 
 //print out custom style for oddrow class
 print "<style type=\"text/css\">
@@ -47,14 +67,10 @@ $row_count = 0;
 	return $row_count;
 }
 
-// Connect to database
-try {
-	} catch (Exception $e) {
-	echo $e;
-}
 
 //querier initialize
 $db = new Querier();
+$connection = $db->getConnection();
 
 //if browsing by subject
 if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
@@ -62,8 +78,10 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 	print "<br /><h2>" . _("<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>.") . "</h2>";
 
 	//sql for all subjects
-	$q = "SELECT * FROM faq f, faq_subject fs, subject s WHERE f.faq_id = fs.faq_id AND s.subject_id = fs.subject_id GROUP BY subject";
-	$r = $db->query($q);
+	$statement  = $connection->prepare( "SELECT * FROM faq f, faq_subject fs, subject s WHERE f.faq_id = fs.faq_id AND s.subject_id = fs.subject_id GROUP BY subject");
+	$statement->execute();
+	$r = $statement->fetchAll();
+
 
 	//go through all subjects and get the related faqs
 	foreach ($r as $myrow)
@@ -75,8 +93,10 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 		print "<br /><p><strong style=\"font-size: large;\">$subject</strong></p><br />";
 
 		//sql for faqs
-		$q2 = "SELECT f.faq_id, f.question FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = '$sub_id' ORDER BY f.question";
-		$r2 = $db->query($q2);
+		$statement  = $connection->prepare( "SELECT f.faq_id, f.question FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = :sub_id ORDER BY f.question");
+		$statement->bindParam(":sub_id", $sub_id);
+		$statement->execute();
+		$r2 = $statement->fetchAll();
 
 		//go through all results to print out checkboxes
 		$rc = innerLoop($sub_id, $r2, 1);
@@ -92,9 +112,9 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 	print "<br /><h2>" . _("<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>.") . "</h2>";
 
 	//sql for all collections
-	$q = "SELECT fp.faqpage_id, fp.name FROM faq f, faq_faqpage ff, faqpage fp WHERE f.faq_id = ff.faq_id AND fp.faqpage_id = ff.faqpage_id GROUP BY fp.name";
-
-	$r = $db->query($q);
+	$statement  = $connection->prepare( "SELECT fp.faqpage_id, fp.name FROM faq f, faq_faqpage ff, faqpage fp WHERE f.faq_id = ff.faq_id AND fp.faqpage_id = ff.faqpage_id GROUP BY fp.name");
+	$statement->execute();
+	$r = $statement->fetchAll();
 
 	//go through all collections and get the related faqs
 	foreach ($r as $myrow) {
@@ -105,8 +125,10 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 		print "<br /><p><strong style=\"font-size: large;\">$collection</strong></p><br />";
 
 		//sql for faqs
-		$q2 = "SELECT f.faq_id, f.question FROM faq_faqpage ff, faq f WHERE  f.faq_id = ff.faq_id AND ff.faqpage_id = '$coll_id' ORDER BY f.question";
-		$r2 = $db->query($q2);
+		$statement  = $connection->prepare( "SELECT f.faq_id, f.question FROM faq_faqpage ff, faq f WHERE  f.faq_id = ff.faq_id AND ff.faqpage_id = :coll_id ORDER BY f.question");
+		$statement->bindParam(":coll_id", $coll_id);
+		$statement->execute();
+		$r2 = $statement->fetchAll();
 
 		//go through all results to print out checkboxes
 		$rc = innerLoop($coll_id, $r2, 1);
@@ -122,9 +144,9 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 	print "<br /><h2>" . _("<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>.") . "</h2>";
 
 	//sql for all FAQs
-	$q = "SELECT faq_id, question FROM faq";
-
-	$r = $db->query($q);
+	$statement  = $connection->prepare( "SELECT faq_id, question FROM faq");
+	$statement->execute();
+	$r = $statement->fetchAll();
 
 		//go through all results to print out checkboxes
 		$rc = innerLoop(1, $r, 1);
@@ -134,19 +156,24 @@ if (isset($_GET["browse"]) && $_GET["browse"] == "subject")
 		}
 
 
-
 } elseif(isset($_COOKIE["our_guide"]) && isset($_COOKIE["our_guide_id"])){ //get for current guide based on cookie
+
+	$our_guide_cookie = scrubData($_COOKIE["our_guide"]);
+	$our_guide_id_cookie = scrubData($_COOKIE["our_guide_id"]);
 
 	print "<br /><p>" . _("<strong>Tick</strong> the boxes of any FAQs you want to include in your pluslet and hit <strong>OK</strong>.") . "</p>";
 
-	print "<br /><strong style=\"font-size: large;\">" . $_COOKIE["our_guide"] . "</strong><br /><br />\n";
+	print "<br /><strong style=\"font-size: large;\">" . $our_guide_cookie . "</strong><br /><br />\n";
 
-	//select faqs for current guide
-	$q = "SELECT f.faq_id, f.question FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = '" . $_COOKIE["our_guide_id"] . "'";
-	$r = $db->query($q);
+
+	$statement  = $connection->prepare( "SELECT f.faq_id, f.question FROM faq_subject fs, faq f WHERE  f.faq_id = fs.faq_id AND fs.subject_id = :our_guide_id");
+	$statement->bindParam(":our_guide_id", $our_guide_id_cookie);
+	$statement->execute();
+	$r = $statement->fetchAll();
+
 
 	//go thtough all faqs and print out checkboxes
-	$rc = innerLoop($_COOKIE["our_guide_id"], $r, 1);
+	$rc = innerLoop($our_guide_id_cookie, $r, 1);
 
 	if ($rc == 0) {
 		print "<p>" . _("You don't have any FAQs associated with this subject yet.  Maybe click Browse by Subject or Browse by Collection, above, to see what else is out there.") . "</p>";

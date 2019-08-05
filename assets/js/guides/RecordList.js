@@ -190,7 +190,7 @@ var RecordSearch = (function () {
         this.searchResults = new RecordList;
         $.ajax({
             "url": this.searchUrl,
-            "data": { term: searchTerm, collection: collection }
+            "data": { term: searchTerm, collection: collection, limit_results_number: 1 }
         }).done(function (data) {
             callback(data);
             console.log(data);

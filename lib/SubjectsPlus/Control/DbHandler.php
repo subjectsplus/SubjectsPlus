@@ -23,6 +23,30 @@ class DbHandler {
 		// sanitize submission
 
 		switch ($qualifier) {
+            case "Free" :
+
+                $connection = $db->getConnection ();
+                $statement = $connection->prepare ( "SELECT DISTINCT LEFT(t.title,1) AS initial, t.title AS newtitle, t.description, location, access_restrictions, t.title_id AS this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide, alternate_title
+        FROM title AS t
+        INNER JOIN location_title AS lt
+        ON t.title_id = lt.title_id
+        INNER JOIN location AS l
+        ON lt.location_id = l.location_id
+        INNER JOIN restrictions AS r
+        ON l.access_restrictions = r.restrictions_id
+        INNER JOIN rank AS rk
+        ON rk.title_id = t.title_id
+        INNER JOIN source AS s
+        ON rk.source_id = s.source_id
+        WHERE title != ''
+        AND l.`access_restrictions` = '1'
+        AND eres_display = 'Y'
+                ORDER BY newtitle" );
+
+                $statement->execute ();
+                $results = $statement->fetchAll ();
+
+            break;
 			case "Num" :
 
 				$connection = $db->getConnection ();
@@ -402,9 +426,9 @@ ORDER BY newtitle
 			$favorite_link_rand_id = time() . rand();
 
 			if ($blurb != "") {
-				$information1 = "<span class=\"fas fa fa-heart uml-quick-links favorite-item-icon inactive-favorite\" data-favorite-link-rand-id=\"$favorite_link_rand_id\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
+				$information1 = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "more information" ) . "\"></i></span>";
 				// This is new details link; you can use the one above if you prefer
-				$information = "<span class=\"fas fa fa-heart uml-quick-links favorite-item-icon inactive-favorite\" data-favorite-link-rand-id=\"$favorite_link_rand_id\" tabindex=\"0\" role=\"button\" data-type=\"favorite-item-icon\" data-item-type=\"Databases\" alt=\"Add to My Favorites\" title=\"Add to My Favorites\"></span><span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "about" ) . "\"></i></span>";
+				$information = "<span id=\"bib-$bib_id\" class=\"toggleLink curse_me\"><i class=\"fas fa fa-info-circle\" title=\"" . _ ( "about" ) . "\"></i></span>";
 			} else {
 				$information = "";
 				$information1 = "";
