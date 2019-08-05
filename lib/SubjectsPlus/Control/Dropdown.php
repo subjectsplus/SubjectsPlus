@@ -16,8 +16,9 @@ class Dropdown {
     private $_truncation;
     private $introselect;
     private $show_keys;
+    private $required;
 
-    public function __construct($dd_name, $optionsArray, $selected="", $truncation="", $introselect="", $show_keys = FALSE, $dropdown_type = 'single') {
+    public function __construct($dd_name, $optionsArray, $selected="", $truncation="", $introselect="", $show_keys = FALSE, $dropdown_type = 'single', $required=false) {
         $this->_dd_name = $dd_name;
         $this->_optionsArray = $optionsArray;
         $this->_selected = $selected;
@@ -25,10 +26,17 @@ class Dropdown {
         $this->_introselect = $introselect;
         $this->_show_keys = $show_keys;
         $this->_dropdown_type = $dropdown_type;
+        $this->required=$required;
     }
 
     public function display() {
         $array_type = "";
+
+        $required = "";
+
+        if ($this->required){
+        	$required = "required";
+        }
 
         if(isset($this->_optionsArray[0])) {
             if (is_array($this->_optionsArray[0])) {
@@ -37,9 +45,9 @@ class Dropdown {
         }
 
         if ($this->_dropdown_type == "multi") {
-            $dd_text = '<select multiple name= "' .  $this->_dd_name .'">';  // added benton
+            $dd_text = "<select multiple $required name= \"" .  $this->_dd_name ."\">";  // added benton
         } else {
-            $dd_text = "<select name=\"" . $this->_dd_name . "\">";
+            $dd_text = "<select $required name=\"" . $this->_dd_name . "\">";
         }
         
         

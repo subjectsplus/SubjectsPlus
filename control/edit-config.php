@@ -10,6 +10,9 @@
  */
 
 use SubjectsPlus\Control\Config;
+if ( file_exists( 'includes/version.php' ) ) {
+	include_once 'includes/version.php';
+}
 
 //variables required in header and add header
 $subcat = "admin";
@@ -25,6 +28,8 @@ $lobjConfig = new Config();
 //declare variable that stores configuration path
 $lstrConfigFilePath = 'includes/config.php';
 
+
+
 //set config file path
 $lobjConfig->setConfigPath( $lstrConfigFilePath );
 
@@ -38,13 +43,14 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 	/* this is a declaration of an array that contains all the options in the
 	*  configuration that will be presented to the user in the HTML form to be
 	*  changed and saved. The way this array is declared to work with all the
-	*  functions that use it is as follows: [0] User form label [1] Notes to display
-	*  below input label [2] Type of declaration in config file [3] where to display
-	*  this input on HTML form (left or right box) [4] input specification (for string
-	*  type either small, medium, large or array type can be in form of ticks and boolean
-	*  always is a select box [5] extra data : e.g. holds options for ticks and will only be used if
-	*  array and ticks are specified or if additional data needed [6] tooltip that will display when
-	*  hovering over '?' icon and if blank, no icon will appear
+	*  functions that use it is as follows:
+	*  [0] User form label
+	*  [1] Notes to display below input label
+	*  [2] Type of declaration in config file
+	*  [3] where to display this input on HTML form (left or right box)
+	*  [4] input specification (for string type either small, medium, large or array type can be in form of ticks and boolean always is a select box
+	*  [5] extra data : e.g. holds options for ticks and will only be used if array and ticks are specified or if additional data needed
+	*  [6] tooltip that will display when hovering over '?' icon and if blank, no icon will appear
 	*/
 	$lobjConfigOptions = array(
 		"omit_user_columns" => array(
@@ -230,11 +236,63 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback tags are a way of slicing and dicing the total set of talkbacks.  If you add a new tag, you will need to add new code to deal with items with this tag.  Adding a tag by itself will do nothing except make that tag show up in some places." )
 		),
 
+		"talkback_show_headshot" => array(
+			_( "Show headshot in talkback comments" ),
+			_( "This option controls whether Talkback will display the headshot of the person who responded to the comment." ),
+			"boolean",
+			"talkback",
+			"small",
+			"",
+			_( "This option controls whether Talkback will display the headshot of the person who responded to the comment." )
+		),
+
+		"talkback_use_email" => array(
+			_( "Use Email" ),
+			_( "This option controls whether Talkback will use smtp email." ),
+			"boolean",
+			"talkback_email",
+			"small",
+			"",
+			_( "This option controls whether Talkback uses smtp email." )
+		),
+
+
+		"talkback_to_address_label" => array(
+			_( "To Address Label" ),
+			_( "This option sets the email To address label for use with Talkback" ),
+			"string",
+			"talkback_email",
+			"large",
+			"",
+			_("This option sets the email To address label for use with Talkback")
+		),
+
+		"talkback_subject_line" => array(
+			_( "Default Talkback Subject Line" ),
+			_( "This option sets the email Subject line for use with Talkback" ),
+			"string",
+			"talkback_email",
+			"large",
+			"",
+			_("This option sets the email Subject line for use with Talkback")
+		),
+
+		"talkback_use_recaptcha" => array(
+			_( "Use Recaptcha" ),
+			_( "This option controls whether Talkback will use Google Recaptcha 3." ),
+			"boolean",
+			"talkback_recaptcha",
+			"small",
+			"",
+			_( "This option controls whether Talkback uses Google Recaptcha 3." )
+		),
+
+
 		"talkback_recaptcha_site_key" => array(
 			_( "Talkback Google Recaptcha Site Key" ),
 			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
 			"string",
-			"talkback",
+			"talkback_recaptcha",
 			"large",
 			"",
 			_("The site key goes on the client side form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
@@ -244,17 +302,27 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Google Recaptcha Secret Key" ),
 			_( "This option contains the Google Recaptcha secret key required to protect the Talkback form." ),
 			"string",
-			"talkback",
+			"talkback_recaptcha",
 			"large",
 			"",
 			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"talkback_use_slack" => array(
+			_( "Use Slack" ),
+			_( "This option controls whether Talkback will use a Slack webhook." ),
+			"boolean",
+			"talkback_slack",
+			"small",
+			"",
+			_( "This option controls whether Talkback will use a Slack webhook." )
 		),
 
 		"talkback_slack_webhook_url" => array(
 			_( "Slack Webhook URL for Talkback" ),
 			_( "This option contains the webhook url from Slack that connects Talkback to Slack." ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"large",
 			"",
 			""
@@ -264,7 +332,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Slack Channel" ),
 			_( "This option contains Slack channel name that the Talkback form uses." ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"medium",
 			"",
 			""
@@ -274,7 +342,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "Talkback Slack Emoji Code" ),
 			_( "This option contains Slack emoji code that the Talkback form uses. It must begin and end with a colon. For example, :thought_balloon:" ),
 			"string",
-			"talkback",
+			"talkback_slack",
 			"medium",
 			"",
 			_( "It must begin and end with a colon. For example, :thought_balloon:" )
@@ -465,6 +533,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"",
 			""
 		),
+
+        "institution_code" => array(
+            _( "Institution Code" ),
+            _( "Institution code to create customizations" ),
+            "string",
+            "core-metadata",
+            "medium",
+            "",
+            ""
+        ),
 
 		"administrator" => array(
 			_( "Name of Library Administrator" ),
@@ -685,6 +763,26 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
+		"mapbox_access_token" => array(
+			_( "Mapbox Public API Key" ),
+			_( "This option contains the acces token required to use Mapbox staff mapping functionality on the Staff Map page" ),
+			"string",
+			"api",
+			"large",
+			"",
+			""
+		),
+
+		"home_coords" => array(
+			_( "Mapbox Home Coordinates" ),
+			_( "This setting will determine the starting position of the Mapbox map on the Staff Map page" ),
+			"string",
+			"api",
+			"large",
+			"",
+			""
+		),
+
 		"primo_action" => array(
 			_( "Primo Search Form Action" ),
 			_( "This option contains the Primo search form action for the Primo Pluslet. Includes '?' " ),
@@ -823,7 +921,168 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"small",
 			"",
 			""
-		)
+		),
+
+		"email_host" => array(
+			_( "SMTP Host" ),
+			_( "This option contains the SMTP host" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_port" => array(
+			_( "SMTP Port" ),
+			_( "This option contains the SMTP Port" ),
+			"string",
+			"email",
+			"smail",
+			"",
+			""
+		),
+
+		"email_smtp_auth" => array(
+			_( "Use SMTP Authorization" ),
+			_( "This option determines is SMTP Authorization is to be used" ),
+			"boolean",
+			"email",
+			"small",
+			"",
+			""
+		),
+
+		"email_username" => array(
+			_( "SMTP Username" ),
+			_( "This option contains the SMTP username" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_password" => array(
+			_( "SMTP Password" ),
+			_( "This option contains the SMTP password" ),
+			"string",
+			"email",
+			"large",
+			"",
+			""
+		),
+
+		"email_smtp_debug" => array(
+			_( "Display SMTP debug errors" ),
+			_( "This option sets SMTP debug level 0 = off (for production use) 1 = client messages 2 = client and server messages" ),
+			"string",
+			"email",
+			"small",
+			"",
+			""
+		),
+
+		"problem_report_use" => array(
+			_( "Use Problem Report" ),
+			_( "This option controls whether Problem Report is to be used." ),
+			"boolean",
+			"problem_report_basic",
+			"small",
+			"",
+			_( "This option controls whether Problem Report is to be used." )
+		),
+
+		"problem_report_use_recaptcha" => array(
+			_( "Use Recaptcha" ),
+			_( "This option controls whether Problem Report will use Recaptcha." ),
+			"boolean",
+			"problem_report_recaptcha",
+			"small",
+			"",
+			_( "This option controls whether Problem Report uses Recaptcha." )
+		),
+
+		"problem_report_recaptcha_site_key" => array(
+			_( "Problem Report Google Recaptcha Site Key" ),
+			_( "This option contains the Google Recaptcha site key required to protect the Talkback form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html" ),
+			"string",
+			"problem_report_recaptcha",
+			"large",
+			"",
+			_("The site key goes on the client side form. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"problem_report_recaptcha_secret_key" => array(
+			_( "Problem Report Google Recaptcha Secret Key" ),
+			_( "This option contains the Google Recaptcha secret key required to protect the Problem Report form." ),
+			"string",
+			"problem_report_recaptcha",
+			"large",
+			"",
+			_("The secret key goes in the server side function. Google Recaptcha https://www.google.com/recaptcha/intro/v3.html")
+		),
+
+		"problem_report_use_email" => array(
+			_( "Use Email" ),
+			_( "This option controls whether Problem Report will use smtp email." ),
+			"boolean",
+			"problem_report_email",
+			"small",
+			"",
+			_( "This option controls whether Problem Report uses smtp email." )
+		),
+
+		"problem_report_email_recipients" => array(
+			_( "Problem Report Email Recipient Addresses" ),
+			_( "Email addresses that will receive the problem report." ),
+			"array",
+			"problem_report_email",
+			"textarea",
+			"",
+			_( "Enter valid email addresses separated by a comma" )
+		),
+
+		"problem_report_use_slack" => array(
+			_( "Use Slack" ),
+			_( "This option controls whether Problem Report will use Slack." ),
+			"boolean",
+			"problem_report_slack",
+			"small",
+			"",
+			_( "This option controls whether Problem Report uses Slack." )
+		),
+
+		"problem_report_slack_webhook_url" => array(
+			_( "Slack Webhook URL for Problem Report" ),
+			_( "This option contains the webhook url from Slack that connects Problem Report to Slack." ),
+			"string",
+			"problem_report_slack",
+			"large",
+			"",
+			""
+		),
+
+		"problem_report_slack_channel" => array(
+			_( "Problem Report Slack Channel" ),
+			_( "This option contains Slack channel name that the Problem Report form uses." ),
+			"string",
+			"problem_report_slack",
+			"medium",
+			"",
+			""
+		),
+
+		"problem_report_slack_emoji" => array(
+			_( "Problem Report Slack Emoji Code" ),
+			_( "This option contains Slack emoji code that the Problem Report form uses. It must begin and end with a colon. For example, :thought_balloon:" ),
+			"string",
+			"problem_report_slack",
+			"medium",
+			"",
+			_( "It must begin and end with a colon. For example, :thought_balloon:" )
+		),
+
 
 	);
 

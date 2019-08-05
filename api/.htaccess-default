@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+    RewriteBase /
+
+    # Store the current location in an environment variable CWD
+    RewriteCond $0#%{REQUEST_URI} ([^#]*)#(.*)\1$
+    RewriteRule ^.*$ - [E=CWD:%2]
+
+    # Just by prefixing the environment variable, we can safely rewrite anything now
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^.*$ %{ENV:CWD}index.php [QSA,L]
+</IfModule>

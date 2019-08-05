@@ -291,6 +291,9 @@ ob_end_flush ();
 	<!-- Feedback -->
 	<div id="response"></div>
 
+    <div id="autosave-spinner">
+        <div class="loading"></div>
+    </div>
 
 	<!-- new tab form (suppressed until tab gears clicked) -->
 	<div id="dialog" title="Tab data">
@@ -513,41 +516,53 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 
 <script src="../../ckeditor/ckeditor.js"></script>
 
-<?php include("../includes/guide_footer.php"); ?>
-
+<script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
 
 <script>
 
-	<?php //include('../../assets/js/guides/PrimoSearchBox.js'); ?>
+    $(document).ready(function() {
 
-	<?php include('../../assets/js/guides/bookList.js'); ?>
+        // Initialize the guide interface
+        var myGuideSetup = guideSetup();
+        myGuideSetup.init();
 
-	var containers = $(".booklist-content");
-	$.each(containers, function() {
-		var container = this;
-		if ($(container).parent().parent().attr('name') == 'Clone'){
-			container = $("#"+$(container).parent().parent().attr('id')).find('.booklist-content')[0];
-			$(container).attr('rendered', '0');
-		}
+        var ss = subjectSpecialist();
+        ss.init();
 
-		if ($(container).attr('rendered') == '0') {
-			var b = bookList();
-			b.init(container);
-			$(container).attr('rendered', '1');
-			setTimer();
-		}
+	    <?php include('../../assets/js/guides/bookList.js'); ?>
 
-		function setTimer() {
-			setTimeout(showContainer, 1000);
-		}
+        var containers = $(".booklist-content");
+        $.each(containers, function() {
+            var container = this;
+            if ($(container).parent().parent().attr('name') == 'Clone'){
+                container = $("#"+$(container).parent().parent().attr('id')).find('.booklist-content')[0];
+                $(container).attr('rendered', '0');
+            }
 
-		function showContainer() {
-			var loader = $(container).prev();
-			$(loader).hide();
-			$(container).show();
-		}
-	});
+            if ($(container).attr('rendered') == '0') {
+                var b = bookList();
+                b.init(container);
+                $(container).attr('rendered', '1');
+                setTimer();
+            }
+
+            function setTimer() {
+                setTimeout(showContainer, 1000);
+            }
+
+            function showContainer() {
+                var loader = $(container).prev();
+                $(loader).hide();
+                $(container).show();
+            }
+        });
+
+    });
+
 
 
 
 </script>
+
+
+<?php include("../includes/guide_footer.php"); ?>

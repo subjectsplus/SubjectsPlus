@@ -83,7 +83,7 @@ if( (!empty($this->flashMessage)) ) {
     </select>
 
     <br />
-    <input id="search-primo-catalog" title="Search" type="submit" value="Search" alt="Search Catalog" class="pure-button pure-button-pluslet">
+    <input id="search-primo-catalog" title="Search" type="submit" value="Search" alt="Search Catalog" class="pure-button pure-button-pluslet pluslet-catalog-form-button">
 
     <br />
     <span class="adv-prompt"><a href="<?php echo $advanced_search_link; ?>" target="_blank"><?php echo _("Advanced Search"); ?></a></span>

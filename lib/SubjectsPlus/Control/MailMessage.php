@@ -1,73 +1,195 @@
 <?php
-   namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control;
+
 class MailMessage {
 
-    private $_to;
-    private $_from;
-    private $_fromString;
-    private $_subjectLine;
-    private $_content;
-    private $_header;
 
-    public function __construct($params=NULL) {
-        if (is_array($params)) {
-            if (isset($params['to'])) {
-                $this->_to = $params['to'];
-            }
-            if (isset($params['subjectLine'])) {
-                $this->_subjectLine = $params['subjectLine'];
-            }
-            if (isset($params['content'])) {
-                $this->_content = $params['content'];
-            }
-            if (isset($params['from'])) {
-                $this->_from = $params['from'];
-                $this->_fromString = _("Library_No_Reply") . "<" . $this->_from . ">";
-                $this->_header = "Return-Path: " . $this->_from . "\n";
-                $this->_header .= "From:  " . $this->_from . "\n";
-                $this->_header .= "Content-Type: text/html; charset=iso-8859-1;\n";
-            }
-        }
-    }
+	private $_fromAddress;
+	private $_fromLabel;
+	private $_replyToAddress;
+	private $_replyToLabel;
+	private $_toAddress;
+	private $_toAddressLabel;
+	private $_toCcAddresses = array();
+	private $_toBccAddresses = array();
+	private $_subject;
+	private $_msgHTML;
+	private $_altBody;
+	private $_attachment;
 
-    public function getTo() {
-        return $this->_to;
-    }
 
-    public function getSubjectLine() {
-        return $this->_subjectLine;
-    }
+	public function __construct() {
 
-    public function getContent() {
-        return $this->_content;
-    }
+	}
 
-    public function getFrom() {
-        return $this->_fromString;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getFromAddress() {
+		return $this->_fromAddress;
+	}
 
-    public function getHeader() {
-        return $this->_header;
-    }
+	/**
+	 * @param mixed $fromAddress
+	 */
+	public function setFromAddress( $fromAddress ){
+		$this->_fromAddress = $fromAddress;
+	}
 
-    public function setTo($recipientEmail) {
-        $this->_to = $recipientEmail;
-    }
+	/**
+	 * @return array
+	 */
+	public function getToCcAddresses() {
+		return $this->_toCcAddresses;
+	}
 
-    public function setSubjectLine($subjectLine) {
-        $this->_subjectLine = $subjectLine;
-    }
+	/**
+	 * @param array $toCcAddresses
+	 */
+	public function setToCcAddresses( array $toCcAddresses ) {
+		$this->_toCcAddresses = $toCcAddresses;
+	}
 
-    public function setContent($contentString) {
-        $this->_content = "<html><body>" . $contentString . "<p>" . _("This is an automatically generated email. Please do not respond.") . "</p><strong>" . _("Email sent: ") . date("l F j, Y, g:i a") . "</strong></body></html>";
-    }
+	/**
+	 * @return array
+	 */
+	public function getToBccAddresses() {
+		return $this->_toBccAddresses;
+	}
 
-    public function setFrom($from) {
-        $this->_fromString = "Library_No_Reply <" . $from . ">";
-        $this->_header = "Return-Path: $from\r\n";
-        $this->_header .= "From:  $this->_from\r\n";
-        $this->_header .= "Content-Type: text/html; charset=iso-8859-1;\n\n\r\n";
-    }
+	/**
+	 * @param array $toBccAddresses
+	 */
+	public function setToBccAddresses( array $toBccAddresses ){
+		$this->_toBccAddresses = $toBccAddresses;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getFromLabel() {
+		return $this->_fromLabel;
+	}
+
+	/**
+	 * @param mixed $fromLabel
+	 */
+	public function setFromLabel( $fromLabel ){
+		$this->_fromLabel = $fromLabel;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getReplyToAddress() {
+		return $this->_replyToAddress;
+	}
+
+	/**
+	 * @param mixed $replyToAddress
+	 */
+	public function setReplyToAddress( $replyToAddress ){
+		$this->_replyToAddress = $replyToAddress;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getReplyToLabel() {
+		return $this->_replyToLabel;
+	}
+
+	/**
+	 * @param mixed $replyToLabel
+	 */
+	public function setReplyToLabel( $replyToLabel ){
+		$this->_replyToLabel = $replyToLabel;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getToAddress() {
+		return $this->_toAddress;
+	}
+
+	/**
+	 * @param mixed $toAddress
+	 */
+	public function setToAddress( $toAddress ){
+		$this->_toAddress = $toAddress;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getToAddressLabel() {
+		return $this->_toAddressLabel;
+	}
+
+	/**
+	 * @param mixed $toAddressLabel
+	 */
+	public function setToAddressLabel( $toAddressLabel ){
+		$this->_toAddressLabel = $toAddressLabel;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getSubject() {
+		return $this->_subject;
+	}
+
+	/**
+	 * @param mixed $subject
+	 */
+	public function setSubject( $subject ) {
+		$this->_subject = $subject;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getMsgHTML() {
+		return $this->_msgHTML;
+	}
+
+	/**
+	 * @param mixed $msgHTML
+	 */
+	public function setMsgHTML( $msgHTML ) {
+		$this->_msgHTML = $msgHTML;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAltBody() {
+		return $this->_altBody;
+	}
+
+	/**
+	 * @param mixed $altBody
+	 */
+	public function setAltBody( $altBody ) {
+		$this->_altBody = $altBody;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAttachment() {
+		return $this->_attachment;
+	}
+
+	/**
+	 * @param mixed $attachment
+	 */
+	public function setAttachment( $attachment ) {
+		$this->_attachment = $attachment;
+	}
+
+
 
 }
-?>

@@ -29,7 +29,7 @@
                   <a href="http://www.miami.edu/employment">Employment</a><br />
                   <a href="http://www.miami.edu/index.php/privacy_statement/">Privacy Statement and Legal Notices</a><br />
                   <a href="mailto:sxh2751@med.miami.edu">Feedback</a><br />
-                  Copyright 2016 University of Miami. All Rights Reserved.
+                  Copyright <?php echo date('Y'); ?> University of Miami. All Rights Reserved.
                   </p>
     				  </div>
               <div class="pure-u-1 pure-u-lg-1-8 footer-adj">

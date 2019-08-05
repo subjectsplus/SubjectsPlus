@@ -12,7 +12,7 @@
     <meta name="keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>">
 
     <!-- SP CSS -->
-    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp.css" type="text/css">
+    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-slim.css" type="text/css">
 
     <!-- Google Analytics and Tag Manager -->
     <?php
@@ -32,16 +32,8 @@
 <body>
 
 <!-- Vendor Scripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -65,5 +57,5 @@
     <?php include("includes/jekyll-site-header.php"); ?>
 
     <!-- Main Content-->
-    <div class="body-default">
+    <div class="body-slim">
         <main>

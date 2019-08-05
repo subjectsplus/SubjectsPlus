@@ -155,8 +155,7 @@ class GuideBase {
 						foreach ( $this->_pluslets as $subject_guide ) {
 
 							// Insert pluslets
-							$pluslet_statement = $connection->prepare ( "
-			    		INSERT INTO pluslet (`title`, `body`, `type`, `extra`, `hide_titlebar`,`collapse_body`, `titlebar_styling`, `favorite_box`)
+							$pluslet_statement = $connection->prepare ( "INSERT INTO pluslet (`title`, `body`, `type`, `extra`, `hide_titlebar`,`collapse_body`, `titlebar_styling`, `favorite_box`)
 			    		VALUES (:title, :body, :type, :extra, :hide_titlebar, :collapse_body, :titlebar_styling, :favorite_box) " );
 
 							$pluslet_statement->bindParam ( ':title', $subject_guide ['title'] );
