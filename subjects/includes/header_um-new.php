@@ -12,7 +12,7 @@
     <meta name="keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>">
 
     <!-- SP CSS -->
-    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp.css" type="text/css">
+    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-slim.css" type="text/css">
 
     <!-- Google Analytics and Tag Manager -->
     <?php
@@ -57,5 +57,5 @@
     <?php include("includes/jekyll-site-header.php"); ?>
 
     <!-- Main Content-->
-    <div class="body-default">
+    <div class="body-slim">
         <main>

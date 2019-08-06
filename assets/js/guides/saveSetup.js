@@ -597,6 +597,9 @@ function saveSetup() {
                     mySaveSetup.updateTabIds();
                     mySaveSetup.updateSectionIds();
 
+                    var myTabs = tabs();
+                    myTabs.fetchTabsFlyout();
+
 
 
                 });

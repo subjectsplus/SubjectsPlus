@@ -5,7 +5,7 @@ background-image: none;
 border-top: medium none;
 }
 
-#wrap { margin: 0 auto; }
+#wrap { margin: 0 auto; min-height: max-content;}
 
 /* header styles */
 
@@ -285,14 +285,33 @@ table.item_listing a:link {
     padding: 0.3em;
 }
 
+/* uSearch Report a Problem */
+.usearch_problem_report {
+    margin-top: 30px;
+}
 /* Blackboard LTI Messages */
 
+.usearch_problem_report .pure-button {
+    margin-top:16px;
+}
 .alert.alert-danger {
     padding: 10px;
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
     text-align: center;
+}
+
+.usearch_problem_report .form_listing td {
+    width:100%;
+    float: left;
+    padding: 5px;
+}
+
+.usearch_problem_report .form_listing td.form-item input,
+.usearch_problem_report .form_listing td.form-item select,
+.usearch_problem_report .form_listing td.form-item textarea {
+    width: 95%;
 }
 
 .alert .notification-close-button {
@@ -352,8 +371,18 @@ table.item_listing a:link {
 
     #umiami_logo {text-align: left;}
 
+    .usearch_problem_report .form_listing td.label,
+    .usearch_problem_report .form_listing td.form-item {
+        width:50%;
+        float: none;
+        padding: 5px;
+    }
 
-
+    .usearch_problem_report .form_listing td.form-item input,
+    .usearch_problem_report .form_listing td.form-item select,
+    .usearch_problem_report .form_listing td.form-item textarea {
+        width: 95%;
+    }
 
 }
 
