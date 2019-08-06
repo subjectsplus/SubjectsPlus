@@ -61,14 +61,16 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-assets/cache/
+assets/cache/*
 control/includes/config.php
+assets/images/*
+assets/users/*
 
 *.PHPEdit*
 
 subjects/includes/pgcache/*
 
-/assets/users/
+/assets/users/*
 /assets/images
 /assets/images/video_thumbs/
 
@@ -152,3 +154,5 @@ nul
 /api/.htaccess
 /subjects/themes/med/
 /subjects/themes/um-new/
+
+control/lti_controller/

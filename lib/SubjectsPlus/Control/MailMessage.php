@@ -10,6 +10,8 @@ class MailMessage {
 	private $_replyToLabel;
 	private $_toAddress;
 	private $_toAddressLabel;
+	private $_toCcAddresses = array();
+	private $_toBccAddresses = array();
 	private $_subject;
 	private $_msgHTML;
 	private $_altBody;
@@ -32,6 +34,34 @@ class MailMessage {
 	 */
 	public function setFromAddress( $fromAddress ){
 		$this->_fromAddress = $fromAddress;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getToCcAddresses() {
+		return $this->_toCcAddresses;
+	}
+
+	/**
+	 * @param array $toCcAddresses
+	 */
+	public function setToCcAddresses( array $toCcAddresses ) {
+		$this->_toCcAddresses = $toCcAddresses;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getToBccAddresses() {
+		return $this->_toBccAddresses;
+	}
+
+	/**
+	 * @param array $toBccAddresses
+	 */
+	public function setToBccAddresses( array $toBccAddresses ){
+		$this->_toBccAddresses = $toBccAddresses;
 	}
 
 	/**

@@ -48,6 +48,8 @@ class Mailer {
 		//Set the SMTP port number - likely to be 25, 465 or 587
 		$mailer->Port = $this->Port;
 
+		$mailer->isHTML(true);
+
 		if($this->SMTPAuth == true) {
 
 			//Whether to use SMTP authentication
@@ -81,12 +83,23 @@ class Mailer {
 		//Set who the message is to be sent to
 		$this->_mailer->addAddress( $this->_msg->getToAddress(), $this->_msg->getToAddressLabel() );
 
+		// Set CC addresses if they exist
+		$cc_addresses = $this->_msg->getToCcAddresses();
+		if( isset($cc_addresses) && !empty($cc_addresses)) {
+			foreach($cc_addresses as $address) {
+				$this->_mailer->addCC($address);
+			}
+		}
+
 		//Set the subject line
 		$this->_mailer->Subject = $this->_msg->getSubject();
 
 		//Read an HTML message body from an external file, convert referenced images to embedded,
 		//convert HTML into a basic plain-text alternative body
 		$this->_mailer->msgHTML( $this->_msg->getMsgHTML() );
+
+		//Replace the plain text body with one created manually
+		$this->_mailer->AltBody = $this->_msg->getAltBody();
 
 		//Attach an image file
 		//$this->_mailer->addAttachment('images/phpmailer_mini.png');

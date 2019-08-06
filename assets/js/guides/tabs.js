@@ -63,6 +63,7 @@ function tabs() {
             save.saveGuide();
             $("#response").hide();
             $('#save_guide').fadeOut();
+            myTabs.fetchTabsFlyout();
         },
         getSubjectId: function() {
             var g = guide();
@@ -223,6 +224,7 @@ function tabs() {
                         //$('#save_guide').fadeIn();
                         myTabs.autoSaveGuide();
 
+
                         
                     },
                     "Delete": function () {
@@ -257,7 +259,10 @@ function tabs() {
                                     // $("#response").hide();
                                     // $('#save_guide').fadeIn();
                                     myTabs.autoSaveGuide();
+
                                 }
+
+
                             }
                         });
                     },
@@ -458,6 +463,7 @@ function tabs() {
                 var sec = section();
                 sec.getTabIds();
                 sec.getSectionIds();
+                myTabs.fetchTabsFlyout();
             });
         },
         addNewTabHtml: function() {
