@@ -93,7 +93,7 @@
         </script>
     </div>
 </div>
-<nav class="navbar-expand-lg site-navbar-slim" style="background-color:#4f5b65;">
+<nav class="navbar-expand-lg site-navbar-slim" style="background-color:#3a4955;">
     <div class="container position-relative">
         <a class="navbar-brand" href="https://www.library.miami.edu">
             <img src="https://www.library.miami.edu/assets/common-images/uml-logo_vision2.png" alt="University of Miami Libraries" class="d-inline-block d-sm-none">
