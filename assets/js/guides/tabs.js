@@ -31,6 +31,7 @@ function tabs() {
         bindUiActions: function () {
             myTabs.makeTabsClickable();
             myTabs.clickAddNewTab();
+            myTabs.activateFirstSectionControlsOnClick();
 
             myTabs.reorderTabsFlyout();
             myTabs.fetchTabsFlyout();
@@ -40,8 +41,13 @@ function tabs() {
             myTabs.newGuideFromTabsSortable();
             //copy tabs to create new guide
             myTabs.createNewGuideFromTabs();
+
+
+
         },
         init: function () {
+
+
             myTabs.setupTabs();
             myTabs.bindUiActions();
             myTabs.targetBlankLinks();
@@ -57,6 +63,7 @@ function tabs() {
             save.saveGuide();
             $("#response").hide();
             $('#save_guide').fadeOut();
+            myTabs.fetchTabsFlyout();
         },
         getSubjectId: function() {
             var g = guide();
@@ -70,23 +77,17 @@ function tabs() {
 		getSectionForNewTab : function (id, external_link, li, tabContentHtml) {
 
             if (!external_link) {
-                $.ajax
-                ({
+                $.ajax ({
                     url: "helpers/section_data.php",
                     type: "POST",
                     data: {action: 'create'},
                     dataType: "html",
                     success: function (html) {
-
-
                         myTabs.settings.tabs.append("<div id='" + id + "' class=\"sptab\">" + html
                             + "</div>");
                     }
                 });
             }
-
-            //myTabs.settings.saveButton.fadeIn();
-
 
             $('#tabs').tabs();
 
@@ -223,6 +224,7 @@ function tabs() {
                         //$('#save_guide').fadeIn();
                         myTabs.autoSaveGuide();
 
+
                         
                     },
                     "Delete": function () {
@@ -257,7 +259,10 @@ function tabs() {
                                     // $("#response").hide();
                                     // $('#save_guide').fadeIn();
                                     myTabs.autoSaveGuide();
+
                                 }
+
+
                             }
                         });
                     },
@@ -403,7 +408,6 @@ function tabs() {
             // Move the expand tab to the end
             $('#expand_tab').appendTo('#tabs .ui-tabs-nav');
 
-            //myTabs.autoSaveGuide();
             var newTab = myTabs.saveNewTab();
             newTab.then(function(data) {
                 var last_insert_tab_id = data.last_insert;
@@ -431,6 +435,8 @@ function tabs() {
                 $(t).attr('id', data.last_insert);
                 $(t).addClass('dropspotty child-tab ui-droppable');
                 return data;
+            }).then(function (data) {
+                myTabs.activateFirstSectionControlsInit();
             });
 
         },
@@ -457,6 +463,7 @@ function tabs() {
                 var sec = section();
                 sec.getTabIds();
                 sec.getSectionIds();
+                myTabs.fetchTabsFlyout();
             });
         },
         addNewTabHtml: function() {
@@ -526,6 +533,33 @@ function tabs() {
             });
 
             $('#tabs').data().tabCount++;
+        },
+
+        activateFirstSectionControlsOnClick : function() {
+
+            $("#tabs").tabs({
+                    activate: function (event, ui) {
+                        var current_tab_index = $("#tabs").tabs('option', 'active');
+                        console.log('current_tab_index click tabs object: ' + current_tab_index);
+
+                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
+                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+                        $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
+                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+                    }
+                }
+            );
+        },
+
+        activateFirstSectionControlsInit : function() {
+
+            var current_tab_index = $("#tabs").tabs('option', 'active');
+            console.log('current_tab_index init tabs object: ' + current_tab_index);
+
+            $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
+            $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+            $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
+            $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
         },
 
         targetBlankLinks: function () {
@@ -637,10 +671,11 @@ function tabs() {
                 }
             }
 
-            document.addEventListener("DOMContentLoaded", function() {
+            $( document ).ready(function() {
+
                 $('.create-guide').on('click', function() {
 
-                    //console.log('copy guide');
+                    console.log('copy guide');
 
                     var selected_guide = urlParam('subject_id');
 
@@ -674,9 +709,12 @@ function tabs() {
                         }
                     });
                 });
+
             });
 
         }
-    }
+
+
+    };
     return myTabs;
 }

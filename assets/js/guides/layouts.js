@@ -254,6 +254,13 @@ function layout() {
 
 				$('#autosave-spinner').show();
 
+				//sp_section_selected
+				//section_selected_area
+
+
+
+
+
 				var section_id = $(".section_selected_area").attr('id').split('section_')[1];
 				var layout_id = "#" + $(".active-layout-icon").attr('id');
 

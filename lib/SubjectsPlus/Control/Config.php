@@ -381,23 +381,28 @@ class Config {
 		$lstrRightBottomHTML = '';
 
 		// init new vars
-		$section_guide              = "";
-		$section_user               = "";
-		$section_auth               = "";
-		$section_video              = "";
-		$section_record             = "";
-		$section_api                = "";
-		$section_appearance         = "";
-		$section_core_tech          = "";
-		$section_core_metadata      = "";
-		$section_mysql              = "";
-		$section_catalog            = "";
-		$section_primo              = "";
-		$section_email_server       = "";
-		$section_talkback           = "";
-		$section_talkback_email     = "";
-		$section_talkback_recaptcha = "";
-        $section_talkback_slack     = "";
+		$section_guide                    = "";
+		$section_user                     = "";
+		$section_auth                     = "";
+		$section_video                    = "";
+		$section_record                   = "";
+		$section_api                      = "";
+		$section_appearance               = "";
+		$section_core_tech                = "";
+		$section_core_metadata            = "";
+		$section_mysql                    = "";
+		$section_catalog                  = "";
+		$section_primo                    = "";
+		$section_email_server             = "";
+		$section_talkback                 = "";
+		$section_talkback_email           = "";
+		$section_talkback_recaptcha       = "";
+		$section_talkback_slack           = "";
+		$section_problem_report_basic     = "";
+		$section_problem_report_recaptcha = "";
+		$section_problem_report_email     = "";
+		$section_problem_report_slack     = "";
+
 
 ;
 		//go through all options
@@ -599,6 +604,18 @@ class Config {
 				case "email":
 					$section_email_server .= $lstrHTML;
 					break;
+				case "problem_report_basic":
+					$section_problem_report_basic .= $lstrHTML;
+					break;
+				case "problem_report_recaptcha":
+					$section_problem_report_recaptcha .= $lstrHTML;
+					break;
+				case "problem_report_email":
+					$section_problem_report_email .= $lstrHTML;
+					break;
+				case "problem_report_slack":
+					$section_problem_report_slack .= $lstrHTML;
+					break;
 			}
 
 		}
@@ -619,6 +636,7 @@ class Config {
                                     <li><a href="#tabs-api"><?php print _( "API" ); ?></a></li>
                                     <li><a href="#tabs-server"><?php print _( "Server" ); ?></a></li>
                                     <li><a href="#tabs-email"><?php print _( "Email" ); ?></a></li>
+                                    <li><a href="#tabs-problem-report"><?php print _( "Problem Report" ); ?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -853,6 +871,47 @@ class Config {
 
                         </div>
 
+                    </div>
+
+                    <div id="tabs-problem-report">
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Problem Report Basic Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_problem_report_basic; ?>
+                                </div>
+                            </div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Problem Report Email Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_problem_report_email; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Problem Report Recaptcha Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+				                    <?php print $section_problem_report_recaptcha; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Problem Report Slack Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+			                        <?php print $section_problem_report_slack; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

@@ -1,5 +1,97 @@
 # Change Log
 
+## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
+
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.4...HEAD)
+
+**Implemented enhancements:**
+
+- If you navigate to sp/subjects/ before install, you see a mess [\#438](https://github.com/subjectsplus/SubjectsPlus/issues/438)
+
+**Fixed bugs:**
+
+- Deleting a tab with any number of pluslets fails [\#1354](https://github.com/subjectsplus/SubjectsPlus/issues/1354)
+- Cloning a guide with Table of Contents  [\#1353](https://github.com/subjectsplus/SubjectsPlus/issues/1353)
+- Guide Cloning doesn't always work [\#806](https://github.com/subjectsplus/SubjectsPlus/issues/806)
+- Creating new guide from Tab flyout doesn't work [\#696](https://github.com/subjectsplus/SubjectsPlus/issues/696)
+- Issues with deleting/moving sections [\#579](https://github.com/subjectsplus/SubjectsPlus/issues/579)
+- If you navigate to sp/subjects/ before install, you see a mess [\#438](https://github.com/subjectsplus/SubjectsPlus/issues/438)
+
+**Closed issues:**
+
+- Table of Contents Scroll to Pluslet [\#1377](https://github.com/subjectsplus/SubjectsPlus/issues/1377)
+- Migrate Staff Map View and 'Get Coordinates' Button from Google Maps to Mapbox [\#1376](https://github.com/subjectsplus/SubjectsPlus/issues/1376)
+
+## [v4.4](https://github.com/subjectsplus/SubjectsPlus/tree/v4.4) (2019-08-05)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/staff-coords-fix...v4.4)
+
+**Closed issues:**
+
+- Add subjects field to databases API endpoint [\#1379](https://github.com/subjectsplus/SubjectsPlus/issues/1379)
+
+## [staff-coords-fix](https://github.com/subjectsplus/SubjectsPlus/tree/staff-coords-fix) (2019-07-05)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.3...staff-coords-fix)
+
+**Implemented enhancements:**
+
+- Autosave plulets on drag and drop [\#1345](https://github.com/subjectsplus/SubjectsPlus/issues/1345)
+- Add some sort of loading-ish animation when we have to reload in Guide backend [\#1336](https://github.com/subjectsplus/SubjectsPlus/issues/1336)
+- Get rid of old icons in default SP theme [\#1335](https://github.com/subjectsplus/SubjectsPlus/issues/1335)
+- Ability to see the free dbs in the A-Z List [\#1334](https://github.com/subjectsplus/SubjectsPlus/issues/1334)
+- redo flyout so that viewport is capable of different sizes [\#738](https://github.com/subjectsplus/SubjectsPlus/issues/738)
+- Allow reordering of Subject Specialists [\#645](https://github.com/subjectsplus/SubjectsPlus/issues/645)
+- Display SP version number in admin config page [\#434](https://github.com/subjectsplus/SubjectsPlus/issues/434)
+- In custom list box, have way for people to see more than 10 results [\#358](https://github.com/subjectsplus/SubjectsPlus/issues/358)
+
+**Fixed bugs:**
+
+- tooltip in search boxes shows undefined when viewed in parent guide [\#1355](https://github.com/subjectsplus/SubjectsPlus/issues/1355)
+- Save Guide fadeOut not working on delete pluslet [\#1352](https://github.com/subjectsplus/SubjectsPlus/issues/1352)
+- Expand collapse all pluslets function causes js error [\#1351](https://github.com/subjectsplus/SubjectsPlus/issues/1351)
+- js.php included two times in guide.php [\#1344](https://github.com/subjectsplus/SubjectsPlus/issues/1344)
+- jquery droppable fires twice [\#1343](https://github.com/subjectsplus/SubjectsPlus/issues/1343)
+- Double modal window for guide metadata [\#1342](https://github.com/subjectsplus/SubjectsPlus/issues/1342)
+- Add "and more" to experts on U Miami theme [\#1337](https://github.com/subjectsplus/SubjectsPlus/issues/1337)
+- If there are a bazillion tabs, you can't see the save button in Tabs \> New Guide [\#1332](https://github.com/subjectsplus/SubjectsPlus/issues/1332)
+- For the filters on spmed theme, they only work on current year [\#1331](https://github.com/subjectsplus/SubjectsPlus/issues/1331)
+- Need to use different default image for users [\#1328](https://github.com/subjectsplus/SubjectsPlus/issues/1328)
+- Unicode Issues [\#1327](https://github.com/subjectsplus/SubjectsPlus/issues/1327)
+- Override issues in Guide Collections admin panel [\#1325](https://github.com/subjectsplus/SubjectsPlus/issues/1325)
+- Make sure description field in metadata is populated with info from guide metadata [\#1322](https://github.com/subjectsplus/SubjectsPlus/issues/1322)
+- New Record for print books [\#1300](https://github.com/subjectsplus/SubjectsPlus/issues/1300)
+- Add default image to staff list so it's not a blank [\#1299](https://github.com/subjectsplus/SubjectsPlus/issues/1299)
+- Update Articles+ Search pluslet to use new Primo UI  [\#1296](https://github.com/subjectsplus/SubjectsPlus/issues/1296)
+- Update Catalog Search pluslet to use new Primo UI  [\#1295](https://github.com/subjectsplus/SubjectsPlus/issues/1295)
+- Need to make sure the top level 404 page isn't UM specific... [\#1282](https://github.com/subjectsplus/SubjectsPlus/issues/1282)
+- With tokens, the "description note" gets repeated on different items within same box [\#1281](https://github.com/subjectsplus/SubjectsPlus/issues/1281)
+- In new user screen, there's already a user and create date under the submit button [\#1251](https://github.com/subjectsplus/SubjectsPlus/issues/1251)
+- Linked List -- Not Showing all resources when box unticked [\#1213](https://github.com/subjectsplus/SubjectsPlus/issues/1213)
+- Public display of suppressed guides not working correctly [\#1001](https://github.com/subjectsplus/SubjectsPlus/issues/1001)
+- Links to guides under Subject Area menu on staff\_details are incorrect [\#710](https://github.com/subjectsplus/SubjectsPlus/issues/710)
+- $page\_title = \_\("Search Results"\); [\#148](https://github.com/subjectsplus/SubjectsPlus/issues/148)
+
+**Closed issues:**
+
+- Worldcat pluslet: Advanced search link is broken [\#1361](https://github.com/subjectsplus/SubjectsPlus/issues/1361)
+- Accessibility: The tracker image should have an alt tag [\#1358](https://github.com/subjectsplus/SubjectsPlus/issues/1358)
+- Make it clear which fields are required in Add New User screen [\#1348](https://github.com/subjectsplus/SubjectsPlus/issues/1348)
+- Update SP Med theme to work with new markup on the code [\#1346](https://github.com/subjectsplus/SubjectsPlus/issues/1346)
+- Special characters requirement in passwords [\#1316](https://github.com/subjectsplus/SubjectsPlus/issues/1316)
+- Update guide search pluslet [\#1294](https://github.com/subjectsplus/SubjectsPlus/issues/1294)
+- If Supervisor isn't chosen in Add User screen, the save will fail [\#1275](https://github.com/subjectsplus/SubjectsPlus/issues/1275)
+- Parent guide in metadata screen [\#1216](https://github.com/subjectsplus/SubjectsPlus/issues/1216)
+
+**Merged pull requests:**
+
+- CSS fixes for UM Med theme  [\#1350](https://github.com/subjectsplus/SubjectsPlus/pull/1350) ([pvillanueva01](https://github.com/pvillanueva01))
+- Updates to Staff Display options, check all themes [\#1349](https://github.com/subjectsplus/SubjectsPlus/pull/1349) ([pvillanueva01](https://github.com/pvillanueva01))
+- Updated CSS for new UM theme. Fix for missing headshot in staff  [\#1347](https://github.com/subjectsplus/SubjectsPlus/pull/1347) ([pvillanueva01](https://github.com/pvillanueva01))
+- Fix for headshot deafult images and related uses [\#1341](https://github.com/subjectsplus/SubjectsPlus/pull/1341) ([pvillanueva01](https://github.com/pvillanueva01))
+- CSS fixes in admin area for short viewport heights \(flyout tabs\)  [\#1340](https://github.com/subjectsplus/SubjectsPlus/pull/1340) ([pvillanueva01](https://github.com/pvillanueva01))
+- Add "and more" with link to staff profile for staff listed on guide - UM New Theme only [\#1339](https://github.com/subjectsplus/SubjectsPlus/pull/1339) ([pvillanueva01](https://github.com/pvillanueva01))
+- Update old image icons with font-awesome icons, including markup for … [\#1338](https://github.com/subjectsplus/SubjectsPlus/pull/1338) ([pvillanueva01](https://github.com/pvillanueva01))
+- Pv sp4 final [\#1333](https://github.com/subjectsplus/SubjectsPlus/pull/1333) ([pvillanueva01](https://github.com/pvillanueva01))
+
 ## [v4.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.3) (2019-01-31)
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.2.2...v4.3)
 
@@ -11,7 +103,6 @@
 - A screen to easily add databases to a subject [\#722](https://github.com/subjectsplus/SubjectsPlus/issues/722)
 - Search boxes - provide where they come from [\#408](https://github.com/subjectsplus/SubjectsPlus/issues/408)
 - Ithacan New Theme [\#406](https://github.com/subjectsplus/SubjectsPlus/issues/406)
-- Background/theme for admin interface - for UM/distributed versions [\#400](https://github.com/subjectsplus/SubjectsPlus/issues/400)
 - Styles for colorbox, pop-usps etc [\#399](https://github.com/subjectsplus/SubjectsPlus/issues/399)
 - Place to insert GA code for config file [\#33](https://github.com/subjectsplus/SubjectsPlus/issues/33)
 - Add RDF microdata to pages where appropriate [\#4](https://github.com/subjectsplus/SubjectsPlus/issues/4)
