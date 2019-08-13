@@ -69,6 +69,9 @@ $branch_filter = "";
 
 $feedback = "";
 
+//flag to hide the form if form submission was successful
+$hide_form_after_submit = false;
+
 $item_title = "";
 $item_permalink = "";
 
@@ -342,6 +345,7 @@ if ( isset($_POST['problem_report_form']) && $_SERVER['REQUEST_METHOD'] === 'POS
 		// insert the new comment into the db, send to email option, send to slack option, and provide user feedback
 		if( $problemReportService->sendCommunications( $problem_report_use_email,  $mailer, $problem_report_use_slack,  $slackMsg ) ) {
 			$feedback = $form_submit_success;
+			$hide_form_after_submit = true;
 		} else {
 			$feedback = $form_submit_fail;
 		}
