@@ -147,11 +147,14 @@ SELECT GROUP_CONCAT(subject SEPARATOR \', \') as subject_areas FROM staff_subjec
 	                                    AND active = \'1\'
 	                                    AND s.type = \'Subject\'
                                         AND a.ptags LIKE \'%librarian%\'
-	                                    ORDER BY subject), "") as librarian_subject_areas
-FROM staff as a,
+	                                    ORDER BY subject), "") as librarian_subject_areas,
+        LOWER(user_type.user_type) as user_type
+FROM staff as a, user_type as user_type,
      department as department
 WHERE active = 1
   AND department.department_id = a.department_id
+  AND a.user_type_id = user_type.user_type_id
+AND a.user_type_id = 1
 ORDER BY a.staff_id';
 
 					break;
