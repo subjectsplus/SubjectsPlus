@@ -390,9 +390,9 @@ print "
     map.addImage('pulsing', pulsingDot, { pixelRatio: 2 });
 
     // Create default 'home' location icon based on home coordinates
-    let homeLocation = new mapboxgl.Marker()
-      .setLngLat(homeCoords)
-      .addTo(map);
+    // let homeLocation = new mapboxgl.Marker()
+    //   .setLngLat(homeCoords)
+    //   .addTo(map);
     
     map.addSource("staff_locations", {
       type: "geojson",
