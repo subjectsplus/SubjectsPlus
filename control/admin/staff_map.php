@@ -120,7 +120,7 @@ print "
     }
     @media (min-width: 1280px){
       #map {
-        width: 75%;
+        width: 100%;
       }
       .pluslet {
         width: 50%;
@@ -244,7 +244,7 @@ print "
 
 <div class="pure-g" style="margin-top: 25px; padding: 0 50px;">
   <div class="pure-u-3-5 map-container">
-    <div id='map' style='height: 50vh; float: right; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+    <div id='map' style='height: 75vh; float: right; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
   </div>
   <div class="pure-u-2-5 pluslet-container">
     <?php
@@ -390,9 +390,9 @@ print "
     map.addImage('pulsing', pulsingDot, { pixelRatio: 2 });
 
     // Create default 'home' location icon based on home coordinates
-    let homeLocation = new mapboxgl.Marker()
-      .setLngLat(homeCoords)
-      .addTo(map);
+    // let homeLocation = new mapboxgl.Marker()
+    //   .setLngLat(homeCoords)
+    //   .addTo(map);
     
     map.addSource("staff_locations", {
       type: "geojson",
