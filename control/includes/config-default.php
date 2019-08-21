@@ -580,4 +580,10 @@ $webpac_cat_action = "";
 ////////////////////////////////////////////
 $enforce_https_upload_url = FALSE;
 
+////////////////////////////////////////////
+// Mapbox config vars: access token (API key) + home coordinates
+////////////////////////////////////////////
+$mapbox_access_token = "";
+$mapbox_home_coords = "";
+
 ?>
