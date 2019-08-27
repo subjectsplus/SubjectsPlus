@@ -28,7 +28,6 @@ $connection = $db->getConnection();
 $faculty_only = isset( $_GET["fac_only"] ) && $_GET["fac_only"] == 1;
 
 if ( $stats_encryption_enabled ) {
-
   $statement = $connection->prepare('SELECT staff_id,
     fname,
     lname,
@@ -47,7 +46,6 @@ if ( $stats_encryption_enabled ) {
   FROM staff
   WHERE lat_long LIKE "%,%"
   AND active = 1');
-
 	if ( $faculty_only ) {
 		$statement = $connection->prepare('SELECT staff_id,
       fname,
@@ -69,7 +67,6 @@ if ( $stats_encryption_enabled ) {
     AND ptags LIKE "%librarian%"');
   }
 } else {
-
   $statement = $connection->prepare('SELECT staff_id,
     CONCAT( fname, " ", lname ) AS fullname,
     email,
@@ -84,9 +81,7 @@ if ( $stats_encryption_enabled ) {
   FROM staff
   WHERE lat_long LIKE "%,%"
   AND active = 1');
-
 	if ( $faculty_only ) {
-
     $statement = $connection->prepare('SELECT staff_id,
       CONCAT( fname, " ", lname ) AS fullname,
       email,
@@ -113,18 +108,70 @@ print "
   <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>
   <link href='" . $AssetPath . "css/shared/mapbox-gl.css' rel='stylesheet' />
 
-  // <link href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' rel='stylesheet'>
-
   <style>
     .mapboxgl-popup-content{
       width: 300px;
       border-radius: 5px;
       padding: 20px;
     }
-
     .mapboxgl-popup-content button {
       font-size: large;
       padding: inherit;
+    }
+    @media (min-width: 1280px){
+      #map {
+        width: 100%;
+      }
+      .pluslet {
+        width: 50%;
+      }
+    }
+    @media (max-width: 1280px){
+      #map {
+        width: 100%;
+      }
+      .pluslet {
+        width: 100%;
+      }
+    }
+    .switch-field {
+      display: flex;
+      margin-bottom: 36px;
+      overflow: hidden;
+    }    
+    .switch-field input {
+      position: absolute !important;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      width: 1px;
+      border: 0;
+      overflow: hidden;
+    }    
+    .switch-field label {
+      background-color: #e4e4e4;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 14px;
+      line-height: 1;
+      text-align: center;
+      padding: 8px 16px;
+      margin-right: -1px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+      transition: all 0.1s ease-in-out;
+    }    
+    .switch-field label:hover {
+      cursor: pointer;
+    }    
+    .switch-field input:checked + label {
+      background-color: #c03956;
+      box-shadow: none;
+      color: rgba(255, 255, 255, 1);
+    }    
+    .switch-field label:first-of-type {
+      border-radius: 4px 0 0 4px;
+    }    
+    .switch-field label:last-of-type {
+      border-radius: 0 4px 4px 0;
     }
   </style>
 
@@ -154,7 +201,7 @@ foreach ($staffArray as $key => $value) {
     
     // Put everything behind a RegExp check so we don't get junk coordinates coming through
     // Need this second RegExp check post-decryption -- even though we're doing a LIKE in the queries already --
-    //  to make sure we don't send junk coordinates in case data ISN'T encrypted, but flag is set to ON
+    // to make sure we don't send junk coordinates in case data ISN'T encrypted, but flag is set to ON
 
     $coords_regexp_match = preg_match('/^(\-?\d+(\.\d+)?),(\-?\d+(\.\d+)?)$/', $value["lat_long"]);
     
@@ -170,7 +217,6 @@ foreach ($staffArray as $key => $value) {
               },
               properties: {
                 id:                 " . $value["staff_id"] . ",
-                icon:               'pulsing-dot',
                 fullname:           '" . $value["fullname"] . "',
                 full_address:       '" . $value["full_address"] . "',
                 email:              '" . $value["email"] . "',
@@ -196,90 +242,55 @@ print "
 ";
 ?>
 
-<!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
-
-<div class="pure-g" style="margin-top: 25px;">
-  <div class="pure-u-3-5">
-    <div id='map' style='width: 1024px; height: 768px; float: right; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
+<div class="pure-g" style="margin-top: 25px; padding: 0 50px;">
+  <div class="pure-u-3-5 map-container">
+    <div id='map' style='height: 75vh; float: right; border: 5px solid #FFFFFF; box-shadow: 0px 0px 10px #000000; border-radius: 10px;'></div>
   </div>
-  <div class="pure-u-2-5">
+  <div class="pure-u-2-5 pluslet-container">
     <?php
       $staff_map_infobox = "
-        <p><h3 style='color: red; display: inline;'>CONFIDENTIAL</h3> staff location information.</p>
-
-        <label for='size_select'><i class='fa fa-arrows-alt'></i> Map Size</label>
-        <br/>
-        <select name='size_select' id='size_select'>
-          <option value='640'>640 x 480</option>
-          <option value='800'>800 x 600</option>
-          <option value='1024'>1024 x 768</option>
-        </select>
-
-        <p>
-          <label for='marker_select'><i class='fa fa-map-marker' aria-hidden='true'></i> Marker Type</label>
-          <br/>
-          <select name='marker_select' id='marker_select'>
-            <option value='pulsing-dot'>Pulsing Dot</option>
-            <option value='blue-dot'>Blue Dot</option>
-          </select>
-        </p>
-
-        <p>
-          <label for='map_theme'><i class='fa fa-paint-brush' aria-hidden='true'></i> Map Color Scheme</label>
-          <br/>
-          <select name='map_theme' id='map_theme'>
-            <option value='light'>Light</option>
-            <option value='dark'>Dark</option>
-            <option value='streets'>Streets</option>
-          </select>
-        </p>
-
-        <p>
-          <label for='staff_filter'><i class='fa fa-users' aria-hidden='true'></i> Filter</label>
-          <br/>
-          <select name='staff_filter' id='staff_filter'>
-            <option value='show_all'>All Staff Members</option>
-            <option value='librarians'>Librarians Only</option>
-            <option value='not-librarians'>Non-Librarians</option>
-          </select>
-        </p>
+        <p>Please note that this information is confidential, and should not be shared. It is intended to help with emergency situation planning.</p>
+        <hr style='width: 50%;'/>
+        <h3><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Marker Type</h3>
+        <div class='switch-field'>
+          <input onclick='toggleMarker()' type='radio' id='radio-one' name='marker_select' value='pulsing' checked/>
+          <label for='radio-one'>Pulsing</label>
+          <input onclick='toggleMarker()' type='radio' id='radio-two' name='marker_select' value='static' />
+          <label for='radio-two'>Static</label>
+        </div>
       ";
-      makePluslet(_("Staff Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; width: 50%; box-shadow: 0px 0px 10px #000000;');
+      makePluslet(_("Staff Disaster Map"), $staff_map_infobox , "no_overflow", true, 'margin-left: 25px; margin-top: 0; box-shadow: 0px 0px 10px #000000;');
     ?>
   </div>
 </div>
+
+<!-- ===== START OF MAPBOX JS SCRIPT TO DRAW MAP =============================================================== -->
 
 <script id="map-drawing">
 
   <?php
     global $mapbox_access_token;
-
     if( ! isset($mapbox_access_token) ){
       print " alert(`Mapbox access token not set in:\nSite Config > API > Mapbox Public API Key\n\nMapbox requires a valid access token to display map content.`)";
-    };
-    
+    };    
     // Use home location coordinates for map centering; this is set in config.php
-    global $home_coords;
-
-    if(isset($home_coords) && $home_coords != ''){
-      // If $home_coords is set and not empty, split it on comma
-      $home_coords = preg_split("/,/", $home_coords);
+    global $mapbox_home_coords;
+    if(isset($mapbox_home_coords) && $mapbox_home_coords != ''){
+      // If $mapbox_home_coords is set and not empty, split it on comma
+      $mapbox_home_coords = preg_split("/,/", $mapbox_home_coords);
     } else {
-      // If $home_coords isn't set or is an empty string, substitute UM coords as default
-      $home_coords = [25.721266,-80.278496];
+      // If $mapbox_home_coords isn't set or is an empty string, substitute UM coords as default
+      $mapbox_home_coords = [25.721266,-80.278496];
       print " alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`) ";
     };
 
   ?>
 
   mapboxgl.accessToken = "<?php echo $mapbox_access_token ?>";
-  
   // MapBox uses longitude + latitude, while we use lat-long, so have to reverse the array order
-  let homeCoords = [<?php echo $home_coords[1] ?>,<?php echo $home_coords[0] ?>];
-
+  let homeCoords = [<?php echo $mapbox_home_coords[1] ?>,<?php echo $mapbox_home_coords[0] ?>];
   
   if(!homeCoords.length){
-    
     // Backstop in case above PHP validations somehow don't work to check for valid home coords
     alert(`Home coordinates not set; using default home coordinates for University of Miami (25.721266, -80.278496).\n\nYou can change this setting on the Admin > Config Site > API page.`);
   };
@@ -291,30 +302,23 @@ print "
     zoom: 9
   });
 
-  // Create default 'home' location icon based on home coordinates
-  let homeLocation = new mapboxgl.Marker()
-    .setLngLat(homeCoords)
-    .addTo(map);
-
   // Start of code for pulsing red dot as marker
   let dotSize = 75;
 
-  let pulsingDot = {
+  const pulsingDot = {
     width: dotSize,
     height: dotSize,
-    data: new Uint8Array(dotSize * dotSize * 4),
-    
+    data: new Uint8Array(dotSize * dotSize * 4),    
     onAdd: function() {
       let canvas = document.createElement('canvas');
       canvas.width = this.width;
       canvas.height = this.height;
       this.context = canvas.getContext('2d');
-    },
-    
+    },    
     render: function() {
       let duration = 1000;
       let t = (performance.now() % duration) / duration;
-      
+
       let radius = dotSize / 2 * 0.3;
       let outerRadius = dotSize / 2 * 0.7 * t + radius;
       let context = this.context;
@@ -345,10 +349,51 @@ print "
       return true;
     }
   };
+
+  // ------------------------------------------------- SETTING UP MARKER CHANGE SELECTION UI FEATURES AND FUNCTION
+  
+  let selectedMarkerString = $("input[name='marker_select']:checked").val();
+
+  const markerMappings = {
+    'pulsing': pulsingDot,
+    'static': 'static'
+  }
+
+  let selectedMarker = markerMappings[selectedMarkerString];
+
+  const toggleMarker = ()=>{
+    selectedMarkerString = $("input[name='marker_select']:checked").val();
+    selectedMarker = markerMappings[selectedMarkerString];
+    map.setLayoutProperty('staff', 'icon-image', selectedMarkerString);
+  };
+
+  const formatPhoneNumber = (phoneNumberString)=> {
+    let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+    }
+    return null
+  };
+  
+  // ------------------------------------------------- END OF MARKER SELECTION CODE
   
   // Set up static elements of the map on completion of map loading
   map.on('load', function () {
-    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+    const staticMarkerFilePath = "<?php echo $AssetPath . 'images/simple-pin-pink.png' ?>";
+
+    map.loadImage(staticMarkerFilePath, function(error, image) {
+      if (error) throw error;
+      map.addImage('static', image, { pixelRatio: 4 });
+    });
+
+    map.addImage('pulsing', pulsingDot, { pixelRatio: 2 });
+
+    // Create default 'home' location icon based on home coordinates
+    // let homeLocation = new mapboxgl.Marker()
+    //   .setLngLat(homeCoords)
+    //   .addTo(map);
+    
     map.addSource("staff_locations", {
       type: "geojson",
       data: {
@@ -359,12 +404,13 @@ print "
       clusterMaxZoom: 1, // Max zoom to cluster points on
       clusterRadius: 1, // Radius of each cluster when clustering points (defaults to 50)
     });
+
     map.addLayer({
       "id": "staff",
       "type": "symbol",
       "source": "staff_locations",
       "layout": {
-        "icon-image": "pulsing-dot",
+        "icon-image": selectedMarkerString,
         "icon-ignore-placement": true,
         "text-field": "{title}",
         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
@@ -383,7 +429,7 @@ print "
     let emergencyContact;
     if(!!staffMember.contactName){
       emergencyContact = `
-      <strong>${staffMember.contactName}</strong> (${staffMember.contactRelation}):<span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.contactPhone ? staffMember.contactPhone : `<i>Not on File</i>`}</span>
+      <strong>${staffMember.contactName}</strong> (${staffMember.contactRelation}):<span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.contactPhone ? formatPhoneNumber(staffMember.contactPhone) : `<i>Not on File</i>`}</span>
       `;
     } else {
       emergencyContact = `<i>Not on File</i>`;
@@ -392,7 +438,7 @@ print "
     let popupHtml = `
       <div style="display: flex;">
         <div id="headshot-container" style="width: 50%; align-content: center;">
-          <img src="${assetPath}users/_${staffMember.email.split("@")[0]}/headshot.jpg" style="width: 80%; height: auto; border-radius: 5px;">
+          <img src="${assetPath}users/_${staffMember.email.split("@")[0]}/headshot_large.jpg" style="width: 80%; height: auto; border-radius: 5px;">
         </div>
         <div id="name-title-container" style="width: 50%; margin-top: 10px; align-content: center;">
           <h2 style="text-align: right; margin-bottom: 5px;">${staffMember.fullname}</h2>
@@ -402,9 +448,9 @@ print "
       <p>${staffMember.full_address}</p>
       <strong>Email:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.email ? staffMember.email : `<font color="gray">None Found</font>`}</span>
       <br />
-      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.home_phone ? staffMember.home_phone : `<i>Not on File</i>`}</span>
+      <strong>Home Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.home_phone ? formatPhoneNumber(staffMember.home_phone) : `<i>Not on File</i>`}</span>
       <br />
-      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.cell_phone ? staffMember.cell_phone : `<i>Not on File</i>`}</span>
+      <strong>Cell Phone:</strong><span style="position: absolute; right: 0px; padding-right: inherit;">${staffMember.cell_phone ? formatPhoneNumber(staffMember.cell_phone) : `<i>Not on File</i>`}</span>
       <hr>
       <h3>Emergency Contact:</strong></h3>
       ${emergencyContact}
