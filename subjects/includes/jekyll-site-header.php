@@ -229,10 +229,9 @@
 										<h5>Non-Book Materials</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/games-maps.html">Maps, Games & more
-												</a></li>
-
+											<li><a class="dropdown-item no-decoration" href="https://emuseum1.as.miami.edu/collections">Lowe Art Museum Collection</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/games-maps.html">Maps, Games & more</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/Newspapers">Newspaper Subscriptions</a></li>
 										</ul>
 
 
@@ -332,54 +331,30 @@
 										<h5>Analyze Data</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/analyze-data.html#dh">Digital Humanities Data
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/analyze-data.html#gis">Geospatial Data (GIS)
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/analyze-data.html#stats">Statistics
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/analyze-data.html#survey">Survey / Census Datasets
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/analyze-data.html#ta">Textual Analysis & Survey
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/analyze-data.html#viz">Visualization
-												</a></li>
-
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/gis">Geospatial Data (GIS)</a></li>
 										</ul>
-
 
 
 										<h5>Organize & Design</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/citation-help.html">Citation Help
-												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/citation-help.html">Citation Help</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/data-services">Data Management Strategies
-												</a></li>
-
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Management Strategies</a></li>
 										</ul>
-
-									</div>
-
-									<div class="col-12 col-lg-4">
 
 										<h5>Write</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
 											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-lg-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
-
 										</ul>
 
+									</div>
 
+									<div class="col-12 col-lg-4">
 
 										<h5>Publish & Promote</h5>
 										<hr align="left" class="hr-decoration">
@@ -446,8 +421,7 @@
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/data-services">Data Services
-														</a></li>
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab
 														</a></li>
