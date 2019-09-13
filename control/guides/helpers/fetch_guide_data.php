@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideData;
 
 $db = new Querier();
-$subject_id = '690289'; // $_GET['subject_id'];
+$subject_id = $_GET['subject_id'];
 $staff = "charlesbrownroberts@miami.edu";
 
 $objGuide = new GuideData($db);
