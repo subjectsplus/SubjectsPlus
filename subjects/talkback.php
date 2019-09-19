@@ -359,7 +359,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	if ( isset( $_POST["email_suggestion"] ) ) {
 		$this_name = scrubData($_POST["email_suggestion"]);
 	} else {
-		$this_name = "Anonymous";
+		$this_name = $administrator_email;
 	}
 
 	if ( isset( $_POST["the_suggestion"] ) ) {
