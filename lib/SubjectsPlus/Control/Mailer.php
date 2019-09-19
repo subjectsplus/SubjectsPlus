@@ -78,12 +78,6 @@ class Mailer {
 		$this->_mailer = $this->configureMailer();
 
 		//Set who the message is to be sent from
-		if ( empty($this->_msg->getFromAddress()) ) {
-			//global $administrator_email;
-			$administrator_email = "cgb37@miami.edu";
-			$this->_msg->setFromAddress($administrator_email);
-			$this->_msg->setFromLabel($administrator_email);
-		}
 		$this->_mailer->setFrom( $this->_msg->getFromAddress(), $this->_msg->getFromLabel() );
 
 		//Set who the message is to be sent to
