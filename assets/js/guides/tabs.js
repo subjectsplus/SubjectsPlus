@@ -42,8 +42,6 @@ function tabs() {
             //copy tabs to create new guide
             myTabs.createNewGuideFromTabs();
 
-
-
         },
         init: function () {
 
@@ -436,6 +434,8 @@ function tabs() {
                 $(t).addClass('dropspotty child-tab ui-droppable');
                 return data;
             }).then(function (data) {
+                var mySaveSetup = saveSetup();
+                mySaveSetup.saveGuide();
                 myTabs.activateFirstSectionControlsInit();
             });
 
@@ -712,7 +712,9 @@ function tabs() {
 
             });
 
-        }
+        },
+
+
 
 
     };

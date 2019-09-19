@@ -1148,11 +1148,9 @@ class Guide
 
         // Now loop through tab content
         foreach ($all_tabs as $key => $lobjTab) {
-        	var_dump($key);
             print "<div id=\"tabs-$key\" class=\"sptab\">";
             // get our content
-            var_dump($this->dropTabs($key));
-            //$this->dropTabs($key);
+	        $this->dropTabs($key);
             print "</div><!-- close div $key -->"; // close tab div
         }
     }

@@ -12,6 +12,7 @@ function saveSetup() {
         settings: {
             fetchTabIdsUrl: "helpers/fetch_tab_ids.php?",
             fetchSectionIdsUrl: "helpers/fetch_section_ids_by_subject_id.php?",
+            fetchGuideData: "helpers/fetch_guide_data.php?"
 
         },
         strings: {},
@@ -586,22 +587,37 @@ function saveSetup() {
                 },
                 function () {
 
-
-                    mySaveSetup.refreshFeeds();
-
-                    var g = guide();
-
-                    favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                    favoriteBox().markAsFavorite();
-                    copyClone().markAsLinked();
-                    mySaveSetup.updateTabIds();
-                    mySaveSetup.updateSectionIds();
-
-                    var myTabs = tabs();
-                    myTabs.fetchTabsFlyout();
-
-
-
+                    var saveHook = mySaveSetup.fetchGuideData();
+                    saveHook.then(function (data) {
+                        var g = guide();
+                        favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+                        favoriteBox().markAsFavorite();
+                        console.log('get favorites');
+                        return data;
+                    }).then(function (data) {
+                        copyClone().markAsLinked();
+                        console.log('mark clones as linked');
+                        return data;
+                    }).then(function (data) {
+                        mySaveSetup.updateTabIds();
+                        console.log('update tabas');
+                        return data;
+                    }).then(function (data) {
+                        mySaveSetup.updateSectionIds();
+                        console.log('updateSectionIds');
+                        return data;
+                    }).then(function (data) {
+                        mySaveSetup.refreshFeeds();
+                        console.log('refreshFeeds');
+                        return data;
+                    }).then(function (data) {
+                        var myTabs = tabs();
+                        myTabs.fetchTabsFlyout();
+                        console.log('fetchTabsFlyout');
+                        return data;
+                    }).then(function (data) {
+                        console.log(data);
+                    });
                 });
 
 
@@ -632,33 +648,40 @@ function saveSetup() {
             });
 
 
-            //$( "#autosave-spinner" ).hide();
-
         },
 
 
+        fetchGuideData: function() {
+
+            var g = guide();
+            var subjectId = g.getSubjectId();
+            var payload = {
+                'subject_id': subjectId,
+            };
+
+            return $.ajax({
+                url: mySaveSetup.settings.fetchGuideData,
+                type: "GET",
+                data: payload,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+
+
+                }
+            });
+        },
+
         getTabIds: function() {
-
-            // var g = guide();
-            // var subjectId = g.getSubjectId();
-            //
-            // console.log('subject_id:' + subjectId);
-
             var nodes = $('.child-tab');
-            console.log(nodes);
-
             var ids = [];
             $.each(nodes, function(data) {
                 console.log('tab ids: ' + this.id );
             });
-
         },
 
         getSectionIds: function() {
-
             var nodes = $('.sp_section');
-            //console.log(nodes);
-
             var ids = [];
             $.each(nodes, function(data) {
                 console.log('section ids: ' + this.id.split('_')[1] );
@@ -705,15 +728,11 @@ function saveSetup() {
         },
 
         updateSectionIds: function() {
-
             var g = guide();
             var subjectId = g.getSubjectId();
-
             var payload = {
                 'subject_id': subjectId,
             };
-
-
 
             $.ajax({
                 url: mySaveSetup.settings.fetchSectionIdsUrl,
@@ -721,7 +740,6 @@ function saveSetup() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    //console.log(data);
                     var newIds = [];
                     $.each(data.section_ids, function (index, value) {
                         newIds.push(value.section_id);
@@ -730,23 +748,17 @@ function saveSetup() {
                     $(newIds).map(function (index, value) {
                     });
 
-                    //console.log($(newIds));
-
                     var items = $('.sp_section');
                     $.each(items, function (index, obj) {
                         //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
                         var newId = "section_" + $(newIds).get(index);
                         //console.log( $(obj).attr('id', newId) );
-
                     });
-
-                    //mySaveSetup.getSectionIds();
                 }
             }).done(function () {
                 console.log('updateSectionIds stop');
                 $( "#autosave-spinner" ).hide();
             });
-
         },
 
         refreshFeeds: function () {
