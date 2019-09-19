@@ -356,8 +356,8 @@ $recaptcha_response = "";
 if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 	// clean up post variables
-	if ( isset( $_POST["name"] ) ) {
-		$this_name = scrubData( $_POST["name"] );
+	if ( isset( $_POST["email_suggestion"] ) ) {
+		$this_name = scrubData($_POST["email_suggestion"]);
 	} else {
 		$this_name = "Anonymous";
 	}
@@ -367,6 +367,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	} else {
 		$this_comment = "";
 	}
+
 
 
 	/**
