@@ -396,7 +396,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$tpl_name     = 'html_msg';
 	$tpl          = new Template( './views/talkback' );
 	$html_message = $tpl->render( $tpl_name, array(
-		'this_name'    => $this_name,
+		'this_name'    => $this_comment_from,
 		'this_comment' => $this_comment,
 		'datetime'     => date( 'D M j, Y, g:i a' )
 
