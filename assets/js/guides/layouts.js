@@ -240,6 +240,8 @@ function layout() {
 					$(this).addClass('active-layout-icon');
 
 					myLayout.layoutSection(selectedSection,$(this).data().layout);
+					var mySaveSetup = saveSetup();
+					mySaveSetup.fetchGuideData();
 				    //$("#save_guide").fadeIn();
 					//var save = saveSetup();
 					//save.saveGuide();
@@ -274,6 +276,9 @@ function layout() {
 						}).always(function () {
 							$("#section_" + section_id).attr('data-layout', layout);
 							$('#autosave-spinner').hide();
+						}).always(function () {
+							var mySaveSetup = saveSetup();
+							mySaveSetup.autoSave();
 						});
 					}
 				}

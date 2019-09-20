@@ -125,8 +125,9 @@ function section() {
 					$('div#tabs-' + selectedTab)
 					var newSectionBlock = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 					newSectionBlock.trigger('click');
-
 					mySection.viewSectionControls();
+					var mySaveSetup = saveSetup();
+					mySaveSetup.fetchGuideData();
 				});
 
 			});
@@ -156,9 +157,6 @@ function section() {
 				}
 			}
 
-
-
-
 			return $.ajax({
 
 				url : mySection.settings.sectionServicePath,
@@ -182,8 +180,8 @@ function section() {
 				console.log($(responseTitle).text() + "\n" + formatErrorMessage(xhr, err) );
 				console.log('jqXR: ' + JSON.stringify(xhr));
 			}).done(function() {
-				mySection.getTabIds();
-				mySection.getSectionIds();
+				var mySaveSetup = saveSetup();
+				mySaveSetup.autoSave();
 			});
 
 		},
@@ -334,7 +332,8 @@ function section() {
 						$("#section_" + section_id).remove();
 						//$('#response').show();
 
-						mySection.autoSaveGuide();
+						var mySaveSetup = saveSetup();
+						mySaveSetup.autoSave();
 
 						$(this).dialog('close');
 						return false;

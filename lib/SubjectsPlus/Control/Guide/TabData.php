@@ -102,6 +102,7 @@ class TabData implements OutputInterface
         $this->tab_ids = $tab_ids;
     }
 
+
     public function toArray() {
         return get_object_vars ( $this );
     }

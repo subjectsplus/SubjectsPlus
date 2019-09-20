@@ -35,7 +35,15 @@ function saveSetup() {
         init: function () {
             mySaveSetup.setupSaveButton('#save_guide');
 
+        },
 
+        autoSave: function() {
+            console.log('first autoSave fetchGuideData Called');
+            mySaveSetup.fetchGuideData();
+            mySaveSetup.saveGuide();
+            console.log('autosave Called');
+            mySaveSetup.fetchGuideData();
+            console.log('second autoSave fetchGuideData Called');
         },
 
         setupSaveButton: function (lstrSelector) {
@@ -49,14 +57,9 @@ function saveSetup() {
                     'click',
                     lstrSelector,
                     function (event) {
-
-
-                        mySaveSetup.saveGuide();
-
+                        mySaveSetup.autoSave();
                         return false;
-
                     });
-
         },
         checkRequired: function () {
             // If a required field is empty, set req_field to 1, and change the
@@ -586,45 +589,8 @@ function saveSetup() {
                     tabs: lstrTabs
                 },
                 function () {
-
-
-
-                    // var saveHook = mySaveSetup.fetchGuideData();
-                    // saveHook.then(function (data) {
-                    //     var g = guide();
-                    //     favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                    //     favoriteBox().markAsFavorite();
-                    //     console.log('get favorites');
-                    //     return data;
-                    // }).then(function (data) {
-                    //     copyClone().markAsLinked();
-                    //     console.log('mark clones as linked');
-                    //     return data;
-                    // }).then(function (data) {
-                    //     mySaveSetup.updateTabIds();
-                    //     console.log('update tab ids');
-                    //     return data;
-                    // }).then(function (data) {
-                    //     mySaveSetup.updateSectionIds();
-                    //     console.log('updateSectionIds');
-                    //     return data;
-                    // }).then(function (data) {
-                    //     mySaveSetup.refreshFeeds();
-                    //     console.log('refreshFeeds');
-                    //     return data;
-                    // }).then(function (data) {
-                    //     var myTabs = tabs();
-                    //     myTabs.fetchTabsFlyout();
-                    //     console.log('fetchTabsFlyout');
-                    //     return data;
-                    // }).then(function (data) {
-                    //     console.log(data);
-                    // });
+                    setTimeout(this, 2000);
                 });
-
-
-            console.log('post save hook starts now');
-            mySaveSetup.fetchGuideData();
 
             var containers = $(".booklist-content");
             $.each(containers, function () {

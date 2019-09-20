@@ -22,6 +22,7 @@ function tabs() {
             tabExternalUrl: 'input[name=\'tab_external_url\']',
             findBoxTabs: $('#find-box-tabs'),
             cloneByTabUrl : "helpers/fetch_cloned_pluslets_by_tab_id.php?",
+            deleteTabDataUrl: "helpers/delete_tab_data.php?"
         },
         strings: {
             tabTemplate: "<li><a href='#{href}'>#{label}</a><span class='alter_tab' role='presentation'><i class=\"fa fa-cog\"></i></span></li>",
@@ -36,6 +37,15 @@ function tabs() {
             myTabs.reorderTabsFlyout();
             myTabs.fetchTabsFlyout();
             myTabs.sortTabsFlyout();
+
+            $("#tabs").tabs({
+                    activate: function (event, ui) {
+                        console.log('fetch guide data on tab click');
+                       var mySaveSetup = saveSetup();
+                       mySaveSetup.fetchGuideData();
+                    }
+                }
+            );
 
             //configure sortable drag and drop zone for creating new guide from tabs
             myTabs.newGuideFromTabsSortable();
@@ -216,11 +226,14 @@ function tabs() {
                             $('a[href="#tabs-' + id + '"]').parent('li').addClass('hidden_tab');
                         }
 
+                        var mySaveSetup = saveSetup();
+                        mySaveSetup.autoSave();
+
                         $(this).dialog("close");
                         $("#response").hide();
                         //console.log('save guide fade in');
                         //$('#save_guide').fadeIn();
-                        myTabs.autoSaveGuide();
+                        //myTabs.autoSaveGuide();
 
 
                         
@@ -234,6 +247,7 @@ function tabs() {
                         var payload = {
                             'tab_id' : tab_id
                         };
+
 
                         $.ajax({
                             url: myTabs.settings.cloneByTabUrl,
@@ -253,13 +267,21 @@ function tabs() {
                                     myTabs.settings.tabs.tabs("destroy");
                                     myTabs.settings.tabs.tabs();
                                     myTabs.settings.tabCounter--;
-                                    editTabDialog.dialog("close");
+
+                                    myTabs.autoSaveGuide();
                                     // $("#response").hide();
                                     // $('#save_guide').fadeIn();
-                                    myTabs.autoSaveGuide();
+                                    editTabDialog.dialog("close");
 
                                 }
+                            },
+                            done: function (data) {
 
+                                console.log('done delete tab');
+                                console.log(JSON.stringify(data));
+                                // myTabs.autoSaveGuide();
+                                // console.log('done autoSaveGuide');
+                                // console.log(JSON.stringify(data));
 
                             }
                         });
@@ -285,6 +307,9 @@ function tabs() {
                 },
                 close: function () {
                     form[0].reset();
+                    var mySaveSetup = saveSetup();
+                    console.log('fetch data after tab delete');
+                    mySaveSetup.fetchGuideData();
                 }
             });
 
@@ -415,13 +440,9 @@ function tabs() {
 
                 var mySection = section();
                 var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
-                newSection.then(function(data) {
+                newSection.done(function(data) {
                     var mySaveSetup = saveSetup();
-                    mySaveSetup.updateTabIds();
-                    return data;
-                }).then(function(data) {
-                    var mySaveSetup = saveSetup();
-                    mySaveSetup.updateSectionIds();
+                    mySaveSetup.fetchGuideData();
                     return data;
                 });
                 return data;
@@ -433,10 +454,9 @@ function tabs() {
                 $(t).attr('id', data.last_insert);
                 $(t).addClass('dropspotty child-tab ui-droppable');
                 return data;
-            }).then(function (data) {
+            }).done(function () {
                 var mySaveSetup = saveSetup();
-                //mySaveSetup.saveGuide();
-                mySaveSetup.fetchGuideData();
+                mySaveSetup.autoSave();
                 myTabs.activateFirstSectionControlsInit();
             });
 
@@ -461,13 +481,11 @@ function tabs() {
                 dataType: "json"
 
             }).done(function(data) {
-                console.log('saveNeTab');
+                console.log('saveNewTab');
                 console.log(JSON.stringify(data));
-                //var sec = section();
-                //sec.getTabIds();
-                //sec.getSectionIds();
-                //myTabs.fetchTabsFlyout();
-                //var mySaveSetup = saveSetup();
+
+                var mySaveSetup = saveSetup();
+                mySaveSetup.autoSave();
                 //mySaveSetup.fetchGuideData();
             });
         },
@@ -586,6 +604,33 @@ function tabs() {
                var selected_tab = "#pluslet-" + box_id[1];
                myTabs.setupTabs(tab_id[1]);
 
+            });
+        },
+
+        deleteTabAndSectionAndPluslets: function() {
+            var subject_id = myTabs.getSubjectId();
+            var id = window.lastClickedTab.replace("#tabs-", "");
+            var href = "#tabs-" + id;
+            var tab_id = $('a[href="' + href + '" ]').parent('li').attr('id');
+
+            return $.ajax({
+                url : "helpers/delete_tab_data.php",
+                type : "GET",
+                data : {
+                    subject_id: subject_id,
+                    tab_id: tab_id
+                },
+                dataType: "json"
+
+            }).done(function(data) {
+                console.log('delete tab data including sections and pluslets');
+                console.log(JSON.stringify(data));
+                //var sec = section();
+                //sec.getTabIds();
+                //sec.getSectionIds();
+                //myTabs.fetchTabsFlyout();
+                //var mySaveSetup = saveSetup();
+                //mySaveSetup.fetchGuideData();
             });
         },
         fetchTabsFlyout : function() {
