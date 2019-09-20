@@ -1,9 +1,7 @@
 <div id="layout_options_content" class="second-level-content"
      style="display: none;">
 	<h3><?php print _("Choose Layout"); ?></h3>
-
-    <div>Active Tab: <span id="activeTab"></span></div>
-    <div>Active Section: <span id="activeSection"></span> </div>
+    <p id="select_section_message"><?php print _("Please select a section first."); ?></p>
     <div id="layout_options_container">
         <ul class="layout_options">
             <li class="layout-icon" id="col-single"

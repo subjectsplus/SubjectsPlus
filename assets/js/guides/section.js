@@ -32,6 +32,7 @@ function section() {
 				// Click the first section after everything has loaded.
 
 				$('#layout_options_container').hide();
+				$('#select_section_message').show();
 
 		    });
 			
@@ -56,9 +57,6 @@ function section() {
 
 				if ($(this).children().size() > 1) {
 					console.log("More than one section?");
-
-
-
 
 					//$(this).children().find('.section_remove').hide();
 				} else {
@@ -102,6 +100,7 @@ function section() {
 				var newSection = mySection.addNewSection(section_index, layout, tab_id);
 				newSection.then(function(data) {
 					var last_insert_id = data.last_insert;
+					console.log('last insert section id: ' + last_insert_id);
 				});
 				newSection.then(function(data) {
 
@@ -138,6 +137,28 @@ function section() {
 			console.log('layout: ' + layout);
 			console.log('tab_id: ' + tab_id);
 
+			function formatErrorMessage(jqXHR, exception) {
+
+				if (jqXHR.status === 0) {
+					return ('Not connected.\nPlease verify your network connection.');
+				} else if (jqXHR.status == 404) {
+					return ('The requested page not found. [404]');
+				} else if (jqXHR.status == 500) {
+					return ('Internal Server Error [500].');
+				} else if (exception === 'parsererror') {
+					return ('Requested JSON parse failed.');
+				} else if (exception === 'timeout') {
+					return ('Time out error.');
+				} else if (exception === 'abort') {
+					return ('Ajax request aborted.');
+				} else {
+					return ('Uncaught Error.\n' + jqXHR.responseText);
+				}
+			}
+
+
+
+
 			return $.ajax({
 
 				url : mySection.settings.sectionServicePath,
@@ -149,6 +170,17 @@ function section() {
 				},
 				dataType: "json"
 
+			}).success(function (data) {
+				console.log(data);
+				if(data.last_insert ){
+					console.log("data.last_insert:" + data.last_insert);
+				}else {
+					console.log("Error on query!");
+				}
+			}).fail(function (xhr, err) {
+				var responseTitle= $(xhr.responseText).filter('title').get(0);
+				console.log($(responseTitle).text() + "\n" + formatErrorMessage(xhr, err) );
+				console.log('jqXR: ' + JSON.stringify(xhr));
 			}).done(function() {
 				mySection.getTabIds();
 				mySection.getSectionIds();
@@ -213,6 +245,7 @@ function section() {
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
 
+				$("#select_section_message").hide();
 				$('#layout_options_container').show();
 				
 				// Removes existing highlights and controls
@@ -380,7 +413,6 @@ function section() {
 		getSectionCount: function () {
 			$('#tabs').tabs();
 			var activeTab = $('#tabs').tabs('option', 'active');
-			$('#activeTab').text(activeTab);
 			var sectionCount = $('#tabs-' + activeTab).children('.sp_section').size();
 			console.log('section count: ' + sectionCount);
 			return sectionCount;

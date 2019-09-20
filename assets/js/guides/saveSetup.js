@@ -587,40 +587,44 @@ function saveSetup() {
                 },
                 function () {
 
-                    var saveHook = mySaveSetup.fetchGuideData();
-                    saveHook.then(function (data) {
-                        var g = guide();
-                        favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                        favoriteBox().markAsFavorite();
-                        console.log('get favorites');
-                        return data;
-                    }).then(function (data) {
-                        copyClone().markAsLinked();
-                        console.log('mark clones as linked');
-                        return data;
-                    }).then(function (data) {
-                        mySaveSetup.updateTabIds();
-                        console.log('update tabas');
-                        return data;
-                    }).then(function (data) {
-                        mySaveSetup.updateSectionIds();
-                        console.log('updateSectionIds');
-                        return data;
-                    }).then(function (data) {
-                        mySaveSetup.refreshFeeds();
-                        console.log('refreshFeeds');
-                        return data;
-                    }).then(function (data) {
-                        var myTabs = tabs();
-                        myTabs.fetchTabsFlyout();
-                        console.log('fetchTabsFlyout');
-                        return data;
-                    }).then(function (data) {
-                        console.log(data);
-                    });
+
+
+                    // var saveHook = mySaveSetup.fetchGuideData();
+                    // saveHook.then(function (data) {
+                    //     var g = guide();
+                    //     favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+                    //     favoriteBox().markAsFavorite();
+                    //     console.log('get favorites');
+                    //     return data;
+                    // }).then(function (data) {
+                    //     copyClone().markAsLinked();
+                    //     console.log('mark clones as linked');
+                    //     return data;
+                    // }).then(function (data) {
+                    //     mySaveSetup.updateTabIds();
+                    //     console.log('update tab ids');
+                    //     return data;
+                    // }).then(function (data) {
+                    //     mySaveSetup.updateSectionIds();
+                    //     console.log('updateSectionIds');
+                    //     return data;
+                    // }).then(function (data) {
+                    //     mySaveSetup.refreshFeeds();
+                    //     console.log('refreshFeeds');
+                    //     return data;
+                    // }).then(function (data) {
+                    //     var myTabs = tabs();
+                    //     myTabs.fetchTabsFlyout();
+                    //     console.log('fetchTabsFlyout');
+                    //     return data;
+                    // }).then(function (data) {
+                    //     console.log(data);
+                    // });
                 });
 
 
+            console.log('post save hook starts now');
+            mySaveSetup.fetchGuideData();
 
             var containers = $(".booklist-content");
             $.each(containers, function () {
@@ -665,11 +669,36 @@ function saveSetup() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
-
+                    console.log('fetchGuideData');
+                    console.log(JSON.stringify(data));
 
                 }
+            }).done(function (data) {
+                var g = guide();
+                favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+                favoriteBox().markAsFavorite();
+                console.log('get favorites');
+
+                copyClone().markAsLinked();
+                console.log('mark clones as linked');
+
+                mySaveSetup.updateTabIds();
+                console.log('update tab ids');
+
+                mySaveSetup.updateSectionIds();
+                console.log('updateSectionIds');
+
+                mySaveSetup.refreshFeeds();
+                console.log('refreshFeeds');
+
+                var myTabs = tabs();
+                myTabs.fetchTabsFlyout();
+                console.log('fetchTabsFlyout');
+
+                console.log(JSON.stringify(data));
+                return data;
             });
+
         },
 
         getTabIds: function() {
@@ -720,7 +749,7 @@ function saveSetup() {
                         }
                     });
 
-                    //mySaveSetup.getTabIds();
+                    mySaveSetup.getTabIds();
 
                 }
             });

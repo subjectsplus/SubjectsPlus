@@ -435,7 +435,8 @@ function tabs() {
                 return data;
             }).then(function (data) {
                 var mySaveSetup = saveSetup();
-                mySaveSetup.saveGuide();
+                //mySaveSetup.saveGuide();
+                mySaveSetup.fetchGuideData();
                 myTabs.activateFirstSectionControlsInit();
             });
 
@@ -459,11 +460,15 @@ function tabs() {
                 },
                 dataType: "json"
 
-            }).done(function() {
-                var sec = section();
-                sec.getTabIds();
-                sec.getSectionIds();
-                myTabs.fetchTabsFlyout();
+            }).done(function(data) {
+                console.log('saveNeTab');
+                console.log(JSON.stringify(data));
+                //var sec = section();
+                //sec.getTabIds();
+                //sec.getSectionIds();
+                //myTabs.fetchTabsFlyout();
+                //var mySaveSetup = saveSetup();
+                //mySaveSetup.fetchGuideData();
             });
         },
         addNewTabHtml: function() {
