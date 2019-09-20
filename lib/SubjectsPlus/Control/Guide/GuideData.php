@@ -17,6 +17,8 @@ class GuideData implements OutputInterface {
 	private $_connection;
 	public $guide;
 	public $tabs = array ();
+	public $sections = array();
+	public $message;
 
 	public function __construct(Querier $db) {
 		$this->_db = $db;
@@ -94,6 +96,89 @@ class GuideData implements OutputInterface {
 		$pluslets_statement->execute ();
 		return $pluslets_statement->fetchAll ();
 	}
+
+
+	public function deleteTabAndSectionAndPluslets($subject_id, $tab_id) {
+
+		$sections = $this->fetchSectionDataByTabId($tab_id);
+		$section_array = array();
+		foreach($sections as $section):
+
+			$current_section_id = $section['section_id'];
+			array_push($section_array, $current_section_id);
+
+			$pluslets = $this->fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id, $tab_id, $section['section_id']);
+			$pluslets_array = array();
+			foreach($pluslets as $pluslet):
+				$current_pluslet_id = $pluslet['pluslet_id'];
+				//array_push($pluslets_array, $current_pluslet_id);
+
+				// delete pluslet
+				$this->deletePlusletByPlusletId($current_pluslet_id);
+
+				// delete pluslet_id from pluslet_section
+				$this->deletePlusletSectionByPlusletId($current_pluslet_id);
+			endforeach;
+
+			array_push($section_array, $pluslets_array);
+			// delete section
+			$this->deleteSectionBySectionId($current_section_id);
+
+		endforeach;
+
+		// delete tab
+		$this->deleteTabByTabId($tab_id);
+
+		$this->sections = $section_array;
+
+	}
+
+
+	protected function deleteTabByTabId($tab_id) {
+		try {
+			$statement  = $this->_connection->prepare( "DELETE FROM tab WHERE tab_id = :tab_id" );
+			$statement->bindParam( ":tab_id", $tab_id );
+			$statement->execute();
+		} catch (PDOException $e) {
+			$this->message = $e->getMessage();
+		}
+	}
+
+	protected function deleteSectionBySectionId($section_id) {
+		try {
+			$statement  = $this->_connection->prepare( "DELETE FROM section WHERE section_id = :section_id" );
+			$statement->bindParam( ":section_id", $section_id );
+			$statement->execute();
+		} catch (PDOException $e) {
+			$this->message = $e->getMessage();
+		}
+	}
+
+	protected function deletePlusletByPlusletId($pluslet_id) {
+
+		try {
+			$statement  = $this->_connection->prepare( "DELETE FROM pluslet WHERE pluslet_id = :pluslet_id" );
+			$statement->bindParam( ":pluslet_id", $pluslet_id );
+			$statement->execute();
+		} catch (PDOException $e) {
+			$this->message = $e->getMessage();
+		}
+
+	}
+
+	protected function deletePlusletSectionByPlusletId($pluslet_id) {
+
+		try {
+			$statement  = $this->_connection->prepare( "DELETE FROM pluslet_section WHERE pluslet_id = :pluslet_id" );
+			$statement->bindParam( ":pluslet_id", $pluslet_id );
+			$statement->execute();
+		} catch (PDOException $e) {
+			$this->message = $e->getMessage();
+		}
+
+	}
+
+
 
 
 	public function toArray() {
