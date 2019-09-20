@@ -19,5 +19,4 @@ $section = new SectionService( $db );
 $section_id = scrubData( $_REQUEST['section_id'], "integer" );
 $layout     = scrubData( $_REQUEST['layout'] );
 
-$result = $section->updateSectionLayout($section_id, $layout);
-var_dump($result);
+$section->updateSectionLayout($section_id, $layout);

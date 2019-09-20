@@ -45,7 +45,6 @@ function flyout() {
 		},
 		bindUiActions : function() {
 			// Show/Hide 'Find in Guide' form
-
 			for (var flyoutButton in myFlyout.flyOutPanels) {
 				{
 					myFlyout.activateFlyoutButton(flyoutButton,
@@ -55,19 +54,18 @@ function flyout() {
 			}
 		},
 		init : function() {
-
 			//Top level Panel Open by default
-
 			myFlyout.mainSlider();
-			myFlyout.bindUiActions()
+			myFlyout.bindUiActions();
 			myFlyout.setScrollBar();
+
 		},
 		mainSlider : function() {
 			var s = myFlyout.settings;
 
 			var mainslider = s.mainOptions.slideReveal({
 				trigger : s.triggerMainOptions,
-				push : false,
+				push : true,
 				width : 440,
 				shown : function(slider, trigger) {
 					 $('#trigger-pointer').addClass('fa-chevron-left');
@@ -115,8 +113,9 @@ function flyout() {
 			    minScrollbarLength: 28
 			});
 
-		}
-		
+		},
+
+
 
 	};
 
