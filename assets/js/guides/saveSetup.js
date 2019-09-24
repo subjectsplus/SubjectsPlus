@@ -38,8 +38,8 @@ function saveSetup() {
         },
 
         autoSave: function() {
-            console.log('first autoSave fetchGuideData Called');
-            mySaveSetup.fetchGuideData();
+            //console.log('first autoSave fetchGuideData Called');
+            //mySaveSetup.fetchGuideData();
             mySaveSetup.saveGuide();
             console.log('autosave Called');
             mySaveSetup.fetchGuideData();
@@ -637,30 +637,38 @@ function saveSetup() {
                 success: function (data) {
                     console.log('fetchGuideData');
                     console.log(JSON.stringify(data));
-
                 }
-            }).done(function (data) {
+            }).then(function (data) {
                 var g = guide();
                 favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+                return data;
+            }).then(function (data) {
                 favoriteBox().markAsFavorite();
                 console.log('get favorites');
-
+                return data;
+            }).then(function (data) {
                 copyClone().markAsLinked();
                 console.log('mark clones as linked');
-
+                return data;
+            }).then(function (data) {
                 mySaveSetup.updateTabIds();
                 console.log('update tab ids');
-
+                return data;
+            }).then(function (data) {
                 mySaveSetup.updateSectionIds();
                 console.log('updateSectionIds');
-
+                return data;
+            }).then(function (data) {
                 mySaveSetup.refreshFeeds();
                 console.log('refreshFeeds');
-
+                return data;
+            }).then(function (data) {
                 var myTabs = tabs();
                 myTabs.fetchTabsFlyout();
                 console.log('fetchTabsFlyout');
-
+                return data;
+            }).done(function (data) {
+                $( "#autosave-spinner" ).hide();
                 console.log(JSON.stringify(data));
                 return data;
             });
@@ -699,25 +707,26 @@ function saveSetup() {
                 dataType: "json",
                 success: function (data) {
                     //console.log(data);
-                    var newIds = [];
-                    $.each(data.tab_ids, function (index, value) {
-                        newIds.push(value.tab_id);
-                    });
-
-                    $(newIds).map(function (index, value) {
-                    });
-
-                    var items = $('#tabs > ul li');
-                    $.each(items, function (index, obj) {
-                        if ($.isNumeric($(obj).attr('id'))) {
-                            var newId = $(newIds).get(index - 1);
-                            //console.log( $(obj).attr('id', newId) );
-                        }
-                    });
-
-                    mySaveSetup.getTabIds();
-
+                    return data;
+                    //mySaveSetup.getTabIds();
                 }
+            }).then(function (data) {
+                var newIds = [];
+                $.each(data.tab_ids, function (index, value) {
+                    newIds.push(value.tab_id);
+                });
+
+                return newIds;
+            }).then(function (newIds) {
+                $(newIds).map(function (index, value) {});
+
+                var items = $('#tabs > ul li');
+                $.each(items, function (index, obj) {
+                    if ($.isNumeric($(obj).attr('id'))) {
+                        var newId = $(newIds).get(index - 1);
+                        console.log( $(obj).attr('id', newId) );
+                    }
+                });
             });
 
         },
@@ -735,24 +744,26 @@ function saveSetup() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    var newIds = [];
-                    $.each(data.section_ids, function (index, value) {
-                        newIds.push(value.section_id);
-                    });
 
-                    $(newIds).map(function (index, value) {
-                    });
-
-                    var items = $('.sp_section');
-                    $.each(items, function (index, obj) {
-                        //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
-                        var newId = "section_" + $(newIds).get(index);
-                        //console.log( $(obj).attr('id', newId) );
-                    });
+                    // var items = $('.sp_section');
+                    // $.each(items, function (index, obj) {
+                    //     //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
+                    //     var newId = "section_" + $(newIds).get(index);
+                    //     //console.log( $(obj).attr('id', newId) );
+                    // });
+                    return data;
                 }
+            }).then(function (data) {
+                var newIds = [];
+                $.each(data.section_ids, function (index, value) {
+                    newIds.push(value.section_id);
+                });
+                return newIds;
+            }).then(function (newIds) {
+                $(newIds).map(function (index, value) {});
             }).done(function () {
                 console.log('updateSectionIds stop');
-                $( "#autosave-spinner" ).hide();
+
             });
         },
 

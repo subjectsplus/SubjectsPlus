@@ -242,7 +242,7 @@ function drag() {
                         $(ui.item).find('.dropspotty').show();
                         $(ui.item).find('.pluslet').show();
                         var save = saveSetup();
-                        save.saveGuide();
+                        save.autoSave();
                         console.log('sections saveguide');
                         $('#save_guide').fadeOut();
                     }
