@@ -94,12 +94,14 @@ $about_tb_body = "<p>" . _("You may use this page to set the databases which sho
 
 </div>
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
+<script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
 
 <script>
-    var sds = subjectDatabaseService();
-    sds.init();
+
     $(document).ready(function() {
+        var sds = subjectDatabaseService();
+        sds.init();
         $('#subjects').select2();
 
     });
