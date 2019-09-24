@@ -455,8 +455,8 @@ function tabs() {
                 $(t).addClass('dropspotty child-tab ui-droppable');
                 return data;
             }).done(function () {
-                var mySaveSetup = saveSetup();
-                mySaveSetup.autoSave();
+                //var mySaveSetup = saveSetup();
+                //mySaveSetup.autoSave();
                 myTabs.activateFirstSectionControlsInit();
             });
 
@@ -480,12 +480,20 @@ function tabs() {
                 },
                 dataType: "json"
 
+            }).then(function (data) {
+                var mySaveSetup = saveSetup();
+                mySaveSetup.updateTabIds();
+                return data;
+            }).then(function (data) {
+                var mySaveSetup = saveSetup();
+                mySaveSetup.updateSectionIds();
+                return data;
             }).done(function(data) {
                 console.log('saveNewTab');
                 console.log(JSON.stringify(data));
 
-                var mySaveSetup = saveSetup();
-                mySaveSetup.autoSave();
+                //var mySaveSetup = saveSetup();
+                //mySaveSetup.autoSave();
                 //mySaveSetup.fetchGuideData();
             });
         },

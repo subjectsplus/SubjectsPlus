@@ -273,13 +273,19 @@ function layout() {
 							url: myLayout.settings.updateSectionLayoutUrl,
 							type: "GET",
 							data: payload,
-						}).always(function () {
-							$("#section_" + section_id).attr('data-layout', layout);
-							$('#autosave-spinner').hide();
-						}).always(function () {
+						}).then(function (data) {
 							var mySaveSetup = saveSetup();
-							mySaveSetup.autoSave();
+							mySaveSetup.updateTabIds();
+							return data;
+						}).then(function (data) {
+							var mySaveSetup = saveSetup();
+							mySaveSetup.updateSectionIds();
+							return data;
+						}).always(function () {
+								$("#section_" + section_id).attr('data-layout', layout);
+								$('#autosave-spinner').hide();
 						});
+
 					}
 				}
 			});
