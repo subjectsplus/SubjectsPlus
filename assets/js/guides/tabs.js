@@ -489,7 +489,9 @@ function tabs() {
                 mySaveSetup.updateSectionIds();
                 return data;
             }).done(function(data) {
-                console.log('saveNewTab');
+                console.log('activate tab after save');
+                var active_tab_index = myTabs.getActiveTab();
+                $("a[href='#tabs-" + active_tab_index + "' ]").trigger('click');
                 console.log(JSON.stringify(data));
 
                 //var mySaveSetup = saveSetup();
