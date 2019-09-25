@@ -56,11 +56,11 @@ function section() {
 				$(this).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
 
 				if ($(this).children().size() > 1) {
-					console.log("More than one section?");
+					//console.log("More than one section?");
 
 					//$(this).children().find('.section_remove').hide();
 				} else {
-					console.log("Only one section?");
+					//console.log("Only one section?");
 					$(this).children().find('.sp_section_controls').trigger('click');
 
 					// $(this).children().find('.sp_section_controls .section_sort').addClass('sp_section_selected');
@@ -75,7 +75,7 @@ function section() {
 		},
 		highlightFirstSectionControls : function () {
 			var current_tab_index = $("#tabs").tabs('option', 'active');
-			console.log('current_tab_index section object: ' + current_tab_index);
+			//console.log('current_tab_index section object: ' + current_tab_index);
 
 			// $(this).children().first().find('.sp_section_controls').trigger('click');
 			// $(this).children().first().find('.sp_section_controls').addClass('sp_section_selected');
@@ -100,12 +100,12 @@ function section() {
 				var newSection = mySection.addNewSection(section_index, layout, tab_id);
 				newSection.then(function(data) {
 					var last_insert_id = data.last_insert;
-					console.log('last insert section id: ' + last_insert_id);
+					//console.log('last insert section id: ' + last_insert_id);
 				});
 				newSection.then(function(data) {
 
 					var selectedTab = $('#tabs').tabs('option', 'active');
-					console.log(data.last_insert);
+					//console.log(data.last_insert);
 
 					// add section block html with new section id
 					var section_id = data.last_insert;
@@ -134,9 +134,9 @@ function section() {
 		},
 
 		addNewSection: function(section_index, layout, tab_id) {
-			console.log('section_index: ' + section_index);
-			console.log('layout: ' + layout);
-			console.log('tab_id: ' + tab_id);
+			//console.log('section_index: ' + section_index);
+			//console.log('layout: ' + layout);
+			//console.log('tab_id: ' + tab_id);
 
 			function formatErrorMessage(jqXHR, exception) {
 
@@ -169,7 +169,7 @@ function section() {
 				dataType: "json"
 
 			}).success(function (data) {
-				console.log(data);
+				//console.log(data);
 				if(data.last_insert ){
 					console.log("data.last_insert:" + data.last_insert);
 				}else {
@@ -177,8 +177,8 @@ function section() {
 				}
 			}).fail(function (xhr, err) {
 				var responseTitle= $(xhr.responseText).filter('title').get(0);
-				console.log($(responseTitle).text() + "\n" + formatErrorMessage(xhr, err) );
-				console.log('jqXR: ' + JSON.stringify(xhr));
+				//console.log($(responseTitle).text() + "\n" + formatErrorMessage(xhr, err) );
+				//console.log('jqXR: ' + JSON.stringify(xhr));
 			}).done(function() {
 				var mySaveSetup = saveSetup();
 				mySaveSetup.autoSave();
@@ -282,7 +282,7 @@ function section() {
 
 		clickTabOnSwitch : function () {
 			$('.ui-tabs-nav > li.child-tab').on('click', function() {
-				console.log('tab: ' + $(this).attr('aria-controls'));
+				//console.log('tab: ' + $(this).attr('aria-controls'));
 				 var tabIndex = $(this).attr('aria-controls').split('-')[1];
 				$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
 				mySection.viewSectionControls();
@@ -304,7 +304,7 @@ function section() {
 				// check for clone parent pluslets, if they exist this section cannot be deleted.
 				var hasParentClones = mySection.hasParentClones(section_id);
 				hasParentClones.then(function(data) {
-					console.log(data.clone_parents_by_section);
+					//console.log(data.clone_parents_by_section);
 					if(data.clone_parents_by_section.length > 0) {
 						// this section has parent pluslets - do not delete
 						mySection.deleteSectionRejectionDialog();
@@ -328,7 +328,7 @@ function section() {
 				buttons: {
 					Yes: function () {
 						// Remove node
-						console.log('section_id deleteSectionDialog: ' + section_id);
+						//console.log('section_id deleteSectionDialog: ' + section_id);
 						$("#section_" + section_id).remove();
 						//$('#response').show();
 
@@ -377,7 +377,7 @@ function section() {
 			var nodes = $('.child-tab');
 			var ids = [];
 			$.each(nodes, function(data) {
-				console.log('tab ids: ' + this.id );
+				//console.log('tab ids: ' + this.id );
 			});
 		},
 
@@ -385,7 +385,7 @@ function section() {
 			var nodes = $('.sp_section');
 			var ids = [];
 			$.each(nodes, function(data) {
-				console.log('section ids: ' + this.id.split('_')[1] );
+				//console.log('section ids: ' + this.id.split('_')[1] );
 			});
 		},
 
@@ -413,7 +413,7 @@ function section() {
 			$('#tabs').tabs();
 			var activeTab = $('#tabs').tabs('option', 'active');
 			var sectionCount = $('#tabs-' + activeTab).children('.sp_section').size();
-			console.log('section count: ' + sectionCount);
+			//console.log('section count: ' + sectionCount);
 			return sectionCount;
 		}
 	};

@@ -11,8 +11,8 @@ function saveSetup() {
 
         settings: {
             fetchTabIdsUrl: "helpers/fetch_tab_ids.php?",
-            fetchSectionIdsUrl: "helpers/fetch_section_ids_by_subject_id.php?",
-            fetchGuideData: "helpers/fetch_guide_data.php?"
+            fetchSectionIdsUrl: "helpers/fetch_section_ids_by_subject_id.php?"
+
 
         },
         strings: {},
@@ -34,16 +34,16 @@ function saveSetup() {
         },
         init: function () {
             mySaveSetup.setupSaveButton('#save_guide');
-
         },
 
         autoSave: function() {
-            //console.log('first autoSave fetchGuideData Called');
-            //mySaveSetup.fetchGuideData();
             mySaveSetup.saveGuide();
             console.log('autosave Called');
-            mySaveSetup.fetchGuideData();
-            console.log('second autoSave fetchGuideData Called');
+
+            var myGuideData = guideData();
+            myGuideData.fetchGuideData();
+            //mySaveSetup.fetchGuideData();
+            //console.log('autoSave fetchGuideData Called');
         },
 
         setupSaveButton: function (lstrSelector) {
@@ -57,7 +57,7 @@ function saveSetup() {
                     'click',
                     lstrSelector,
                     function (event) {
-                        mySaveSetup.autoSave();
+                        mySaveSetup.saveGuide();
                         return false;
                     });
         },
@@ -463,7 +463,7 @@ function saveSetup() {
         saveGuide: function () {
 
             $("#autosave-spinner").show();
-            console.log('saveGuide start');
+            //console.log('saveGuide start');
 
             var staff_id = $('#guide-parent-wrap').data.staffId;
             var subject_id = $('#guide-parent-wrap').data.SubjectId;
@@ -623,55 +623,55 @@ function saveSetup() {
 
         fetchGuideData: function() {
 
-            var g = guide();
-            var subjectId = g.getSubjectId();
-            var payload = {
-                'subject_id': subjectId,
-            };
-
-            return $.ajax({
-                url: mySaveSetup.settings.fetchGuideData,
-                type: "GET",
-                data: payload,
-                dataType: "json",
-                success: function (data) {
-                    console.log('fetchGuideData');
-                    console.log(JSON.stringify(data));
-                }
-            }).then(function (data) {
-                var g = guide();
-                favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                return data;
-            }).then(function (data) {
-                favoriteBox().markAsFavorite();
-                console.log('get favorites');
-                return data;
-            }).then(function (data) {
-                copyClone().markAsLinked();
-                console.log('mark clones as linked');
-                return data;
-            }).then(function (data) {
-                mySaveSetup.updateTabIds();
-                console.log('update tab ids');
-                return data;
-            }).then(function (data) {
-                mySaveSetup.updateSectionIds();
-                console.log('updateSectionIds');
-                return data;
-            }).then(function (data) {
-                mySaveSetup.refreshFeeds();
-                console.log('refreshFeeds');
-                return data;
-            }).then(function (data) {
-                var myTabs = tabs();
-                myTabs.fetchTabsFlyout();
-                console.log('fetchTabsFlyout');
-                return data;
-            }).done(function (data) {
-                $( "#autosave-spinner" ).hide();
-                console.log(JSON.stringify(data));
-                return data;
-            });
+            // var g = guide();
+            // var subjectId = g.getSubjectId();
+            // var payload = {
+            //     'subject_id': subjectId,
+            // };
+            //
+            // return $.ajax({
+            //     url: mySaveSetup.settings.fetchGuideData,
+            //     type: "GET",
+            //     data: payload,
+            //     dataType: "json",
+            //     success: function (data) {
+            //         //console.log('fetchGuideData');
+            //         //console.log(JSON.stringify(data));
+            //     }
+            // }).then(function (data) {
+            //     var g = guide();
+            //     favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+            //     return data;
+            // }).then(function (data) {
+            //     favoriteBox().markAsFavorite();
+            //     //console.log('get favorites');
+            //     return data;
+            // }).then(function (data) {
+            //     copyClone().markAsLinked();
+            //     //console.log('mark clones as linked');
+            //     return data;
+            // }).then(function (data) {
+            //     mySaveSetup.updateTabIds();
+            //     console.log('update tab ids');
+            //     return data;
+            // }).then(function (data) {
+            //     mySaveSetup.updateSectionIds();
+            //     console.log('updateSectionIds');
+            //     return data;
+            // }).then(function (data) {
+            //     mySaveSetup.refreshFeeds();
+            //     //console.log('refreshFeeds');
+            //     return data;
+            // }).then(function (data) {
+            //     var myTabs = tabs();
+            //     myTabs.fetchTabsFlyout();
+            //     //console.log('fetchTabsFlyout');
+            //     return data;
+            // }).done(function (data) {
+            //     $( "#autosave-spinner" ).hide();
+            //     //console.log(JSON.stringify(data));
+            //     return data;
+            // });
 
         },
 
@@ -679,7 +679,7 @@ function saveSetup() {
             var nodes = $('.child-tab');
             var ids = [];
             $.each(nodes, function(data) {
-                console.log('tab ids: ' + this.id );
+                //console.log('tab ids: ' + this.id );
             });
         },
 
@@ -687,7 +687,7 @@ function saveSetup() {
             var nodes = $('.sp_section');
             var ids = [];
             $.each(nodes, function(data) {
-                console.log('section ids: ' + this.id.split('_')[1] );
+                //console.log('section ids: ' + this.id.split('_')[1] );
             });
         },
 
@@ -706,27 +706,27 @@ function saveSetup() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    //console.log(data);
+                    //console.log('return tab ids' + JSON.stringify(data));
                     return data;
-                    //mySaveSetup.getTabIds();
                 }
             }).then(function (data) {
+                //console.log('updateTabIds start');
                 var newIds = [];
                 $.each(data.tab_ids, function (index, value) {
                     newIds.push(value.tab_id);
                 });
-
-                return newIds;
-            }).then(function (newIds) {
+                //console.log('newIds: ' + newIds);
                 $(newIds).map(function (index, value) {});
 
                 var items = $('#tabs > ul li');
                 $.each(items, function (index, obj) {
                     if ($.isNumeric($(obj).attr('id'))) {
                         var newId = $(newIds).get(index - 1);
-                        console.log( $(obj).attr('id', newId) );
+                        //console.log('newtabID: ' + $(obj).attr('id', newId) );
                     }
                 });
+            }).done(function () {
+                //console.log('updateTabIds stop');
             });
 
         },
@@ -754,6 +754,7 @@ function saveSetup() {
                     return data;
                 }
             }).then(function (data) {
+                //console.log('updateSectionIds start');
                 var newIds = [];
                 $.each(data.section_ids, function (index, value) {
                     newIds.push(value.section_id);
@@ -762,7 +763,7 @@ function saveSetup() {
             }).then(function (newIds) {
                 $(newIds).map(function (index, value) {});
             }).done(function () {
-                console.log('updateSectionIds stop');
+                //console.log('updateSectionIds stop');
 
             });
         },

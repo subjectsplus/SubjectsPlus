@@ -38,14 +38,14 @@ function tabs() {
             myTabs.fetchTabsFlyout();
             myTabs.sortTabsFlyout();
 
-            $("#tabs").tabs({
-                    activate: function (event, ui) {
-                        console.log('fetch guide data on tab click');
-                       var mySaveSetup = saveSetup();
-                       mySaveSetup.fetchGuideData();
-                    }
-                }
-            );
+            // $("#tabs").tabs({
+            //         activate: function (event, ui) {
+            //             //console.log('fetch guide data on tab click');
+            //            var mySaveSetup = saveSetup();
+            //            mySaveSetup.fetchGuideData();
+            //         }
+            //     }
+            // );
 
             //configure sortable drag and drop zone for creating new guide from tabs
             myTabs.newGuideFromTabsSortable();
@@ -66,13 +66,6 @@ function tabs() {
 			sec.makeAddSection('a[id="add_section"]');
         },
 
-        autoSaveGuide: function() {
-            var save = saveSetup();
-            save.saveGuide();
-            $("#response").hide();
-            $('#save_guide').fadeOut();
-            myTabs.fetchTabsFlyout();
-        },
         getSubjectId: function() {
             var g = guide();
             var subjectId = g.getSubjectId();
@@ -118,7 +111,7 @@ function tabs() {
                 var events = $._data(data, "events");
 
                 if (events) {
-                    console.log(events);
+                    //(events);
                     var onClickHandlers = events['click'];
 
                     // Only one handler. Nothing to change.
@@ -176,7 +169,7 @@ function tabs() {
                 buttons: {
                     "Save": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
-                        console.log(window.lastClickedTab);
+                        //console.log(window.lastClickedTab);
                         $('a[href="#tabs-' + id + '"]').text($('input[name="rename_tab_title"]').val());
                         $('a[href="#tabs-' + id + '"]').parent('li').attr('data-visibility', $('select[name="visibility"]').val());
 
@@ -186,7 +179,7 @@ function tabs() {
                                     events = elementData.events;
 
                                 var onClickHandlers = events['click'];
-                                console.log(onClickHandlers);
+                                //console.log(onClickHandlers);
                                 // Only one handler. Nothing to change.
                                 if (onClickHandlers.length === 1) {
                                     return;
@@ -226,17 +219,18 @@ function tabs() {
                             $('a[href="#tabs-' + id + '"]').parent('li').addClass('hidden_tab');
                         }
 
+
+
+                        var active_tab_index = window.lastClickedTab.replace("#tabs-", "");
+                        $("a[href='#tabs-" + active_tab_index +" ]").trigger('click');
+                        //console.log('activate new tab: ' + active_tab_index);
+
                         var mySaveSetup = saveSetup();
                         mySaveSetup.autoSave();
 
+
+
                         $(this).dialog("close");
-                        $("#response").hide();
-                        //console.log('save guide fade in');
-                        //$('#save_guide').fadeIn();
-                        //myTabs.autoSaveGuide();
-
-
-                        
                     },
                     "Delete": function () {
                         var id = window.lastClickedTab.replace("#tabs-", "");
@@ -255,12 +249,13 @@ function tabs() {
                             data: payload,
                             dataType: "json",
                             success: function(data) {
-
                                 if( (data.clones_by_tab.length) && (data.clones_by_tab.length > 0) ) {
 
                                     editTabDialog.dialog("close");
                                     alert('This tab contains master boxes that have linked boxes in other tabs.')
                                 } else {
+                                    // delete the tab, sections, and pluslets from db
+                                    myTabs.deleteTabAndSectionAndPluslets();
 
                                     $('a[href="#tabs-' + id + '"]').parent().remove();
                                     $('div#tabs-' + id).remove();
@@ -268,20 +263,18 @@ function tabs() {
                                     myTabs.settings.tabs.tabs();
                                     myTabs.settings.tabCounter--;
 
-                                    myTabs.autoSaveGuide();
-                                    // $("#response").hide();
-                                    // $('#save_guide').fadeIn();
-                                    editTabDialog.dialog("close");
+                                    var mySaveSetup = saveSetup();
+                                    mySaveSetup.fetchGuideData();
 
+                                    editTabDialog.dialog("close");
                                 }
                             },
-                            done: function (data) {
 
-                                console.log('done delete tab');
-                                console.log(JSON.stringify(data));
-                                // myTabs.autoSaveGuide();
-                                // console.log('done autoSaveGuide');
-                                // console.log(JSON.stringify(data));
+                            done: function (data) {
+                                //console.log('done delete tab');
+                                // remove tab from dom
+                                //console.log(JSON.stringify(data));
+
 
                             }
                         });
@@ -308,7 +301,7 @@ function tabs() {
                 close: function () {
                     form[0].reset();
                     var mySaveSetup = saveSetup();
-                    console.log('fetch data after tab delete');
+                    //console.log('fetch data after tab delete');
                     mySaveSetup.fetchGuideData();
                 }
             });
@@ -364,7 +357,7 @@ function tabs() {
         clickAddNewTab: function() {
             // addTab button: just opens the dialog
             $("#add_tab").button().click(function () {
-                console.log('click new tab: ');
+                //console.log('click new tab: ');
                 myTabs.newTabDialog();
             });
         },
@@ -441,9 +434,7 @@ function tabs() {
                 var mySection = section();
                 var newSection = mySection.addNewSection(0, '4-4-4', last_insert_tab_id);
                 newSection.done(function(data) {
-                    var mySaveSetup = saveSetup();
-                    mySaveSetup.fetchGuideData();
-                    return data;
+                    //console.log('newTab func: ' + data);
                 });
                 return data;
             }).then(function(data) {
@@ -454,9 +445,11 @@ function tabs() {
                 $(t).attr('id', data.last_insert);
                 $(t).addClass('dropspotty child-tab ui-droppable');
                 return data;
+            }).then(function(data) {
+                var mySaveSetup = saveSetup();
+                mySaveSetup.fetchGuideData();
+                return data;
             }).done(function () {
-                //var mySaveSetup = saveSetup();
-                //mySaveSetup.autoSave();
                 myTabs.activateFirstSectionControlsInit();
             });
 
@@ -481,22 +474,12 @@ function tabs() {
                 dataType: "json"
 
             }).then(function (data) {
+                console.log('save new tab: ' + JSON.stringify(data));
                 var mySaveSetup = saveSetup();
-                mySaveSetup.updateTabIds();
-                return data;
-            }).then(function (data) {
-                var mySaveSetup = saveSetup();
-                mySaveSetup.updateSectionIds();
+                mySaveSetup.fetchGuideData();
                 return data;
             }).done(function(data) {
-                console.log('activate tab after save');
-                var active_tab_index = myTabs.getActiveTab();
-                $("a[href='#tabs-" + active_tab_index + "' ]").trigger('click');
-                console.log(JSON.stringify(data));
-
-                //var mySaveSetup = saveSetup();
-                //mySaveSetup.autoSave();
-                //mySaveSetup.fetchGuideData();
+                //console.log(JSON.stringify(data));
             });
         },
         addNewTabHtml: function() {
@@ -573,7 +556,7 @@ function tabs() {
             $("#tabs").tabs({
                     activate: function (event, ui) {
                         var current_tab_index = $("#tabs").tabs('option', 'active');
-                        console.log('current_tab_index click tabs object: ' + current_tab_index);
+                        //console.log('current_tab_index click tabs object: ' + current_tab_index);
 
                         $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
                         $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
@@ -587,7 +570,7 @@ function tabs() {
         activateFirstSectionControlsInit : function() {
 
             var current_tab_index = $("#tabs").tabs('option', 'active');
-            console.log('current_tab_index init tabs object: ' + current_tab_index);
+            //console.log('current_tab_index init tabs object: ' + current_tab_index);
 
             $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
             $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
@@ -609,12 +592,12 @@ function tabs() {
             ////////////////////
             // Make page tabs clickable
             ///////////////////
-            $(document.body).on('click','a[id*=tab-]', function(event) {
-                var tab_id = $(this).attr("id").split("-");
-               var selected_tab = "#pluslet-" + box_id[1];
-               myTabs.setupTabs(tab_id[1]);
-
-            });
+            // $(document.body).on('click','a[id*=tab-]', function(event) {
+            //     var tab_id = $(this).attr("id").split("-");
+            //    var selected_tab = "#pluslet-" + box_id[1];
+            //    myTabs.setupTabs(tab_id[1]);
+            //
+            // });
         },
 
         deleteTabAndSectionAndPluslets: function() {
@@ -632,15 +615,14 @@ function tabs() {
                 },
                 dataType: "json"
 
-            }).done(function(data) {
+            }).then(function(data) {
                 console.log('delete tab data including sections and pluslets');
                 console.log(JSON.stringify(data));
-                //var sec = section();
-                //sec.getTabIds();
-                //sec.getSectionIds();
-                //myTabs.fetchTabsFlyout();
-                //var mySaveSetup = saveSetup();
-                //mySaveSetup.fetchGuideData();
+            }).done(function(data) {
+                var mySaveSetup = saveSetup();
+                mySaveSetup.fetchGuideData();
+
+
             });
         },
         fetchTabsFlyout : function() {
@@ -735,7 +717,7 @@ function tabs() {
 
                 $('.create-guide').on('click', function() {
 
-                    console.log('copy guide');
+                    //console.log('copy guide');
 
                     var selected_guide = urlParam('subject_id');
 
@@ -761,11 +743,11 @@ function tabs() {
 
                             $('.metadata-url').show();
                             $('.metadata-url').attr('href', "metadata.php?subject_id=" + new_subject_id);
-                            console.log(new_subject_id);
+                            //console.log(new_subject_id);
                             window.location.href = "metadata.php?subject_id=" + new_subject_id;
                         },
                         fail: function (err) {
-                            console.log(err);
+                            //console.log(err);
                         }
                     });
                 });
