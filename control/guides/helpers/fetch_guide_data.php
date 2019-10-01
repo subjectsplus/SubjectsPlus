@@ -16,6 +16,7 @@ $subject_id = $_GET['subject_id'];
 $staff = "charlesbrownroberts@miami.edu";
 
 $objGuide = new GuideData($db);
-$guideData = $objGuide->fetchGuideData($subject_id);
+//$guideData = $objGuide->fetchGuideData($subject_id);
+$guideData = $objGuide->createGuideDataArray($subject_id);
 
 echo json_encode($guideData);
