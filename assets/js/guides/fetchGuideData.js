@@ -30,51 +30,22 @@ function guideData() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    //console.log('fetchGuideData');
-                    //console.log(JSON.stringify(data));
+                    return data;
+                    console.log(JSON.stringify(data));
                 }
-            }).then(function (data) {
-                var g = guide();
-                favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                return data;
-            }).then(function (data) {
-                favoriteBox().markAsFavorite();
-                //console.log('get favorites');
-                return data;
-            }).then(function (data) {
-                copyClone().markAsLinked();
-                //console.log('mark clones as linked');
-                return data;
-            }).then(function (data) {
-
-                var guideTabData = myGuideData.getTabData();
-                guideTabData.then(function (data) {
-                    myGuideData.updateTabIds(data);
-                });
-
-                console.log('update tab ids');
-                return data;
-            }).then(function (data) {
-                var sectionData = myGuideData.getSectionData();
-                sectionData.then(function(data) {
-                    myGuideData.updateSectionIds(data);
-                    console.log('updateSectionIds');
-                });
-                return data;
-            }).then(function (data) {
-               // saveSetup.refreshFeeds();
-                //console.log('refreshFeeds');
-                return data;
-            }).then(function (data) {
-
-                //tabs.fetchTabsFlyout();
-                //console.log('fetchTabsFlyout');
-                return data;
-            }).done(function (data) {
-                $( "#autosave-spinner" ).hide();
-                //console.log(JSON.stringify(data));
-                return data;
             });
+
+        },
+
+        handleGuideData: function(data) {
+            //console.log(data.responseJSON);
+            var tabData = data.responseJSON.tabs;
+            console.log(tabData);
+            var newIds = [];
+            $.each(tabData, function (index, value) {
+                newIds.push(value.tab_id);
+            });
+            console.log('newIds: ' + JSON.stringify(newIds));
 
         },
 
@@ -163,3 +134,48 @@ function guideData() {
 
     return myGuideData;
 }
+
+/*
+.then(function (data) {
+                var g = guide();
+                favoriteBox().getUserFavoriteBoxes(g.getStaffId());
+                return data;
+            }).then(function (data) {
+                favoriteBox().markAsFavorite();
+                //console.log('get favorites');
+                return data;
+            }).then(function (data) {
+                copyClone().markAsLinked();
+                //console.log('mark clones as linked');
+                return data;
+            }).then(function (data) {
+
+                var guideTabData = myGuideData.getTabData();
+                guideTabData.then(function (data) {
+                    myGuideData.updateTabIds(data);
+                });
+
+                console.log('update tab ids');
+                return data;
+            }).then(function (data) {
+                var sectionData = myGuideData.getSectionData();
+                sectionData.then(function(data) {
+                    myGuideData.updateSectionIds(data);
+                    console.log('updateSectionIds');
+                });
+                return data;
+            }).then(function (data) {
+               // saveSetup.refreshFeeds();
+                //console.log('refreshFeeds');
+                return data;
+            }).then(function (data) {
+
+                //tabs.fetchTabsFlyout();
+                //console.log('fetchTabsFlyout');
+                return data;
+            }).done(function (data) {
+                $( "#autosave-spinner" ).hide();
+                //console.log(JSON.stringify(data));
+                return data;
+            })
+ */

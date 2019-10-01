@@ -35,28 +35,28 @@ class GuideData implements OutputInterface {
 		$this->guide = $statement->fetch();
 
 		$tabs = $this->fetchTabsBySubjectId($subject_id);
-		$tab_array = array();
-		foreach($tabs as $tab):
-			array_push($tab_array, $tab);
-
-			$sections = $this->fetchSectionDataByTabId($tab['tab_id']);
-			$section_array = array();
-			foreach($sections as $section):
-				array_push($section_array, $section);
-
-				$pluslets = $this->fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id, $tab['tab_id'], $section['section_id']);
-				$pluslets_array = array();
-				foreach($pluslets as $pluslet):
-					array_push($pluslets_array, $pluslet);
-				endforeach;
-
-				array_push($section_array, $pluslets_array);
-
-			endforeach;
-			array_push($tab_array, $section_array);
-
-		endforeach;
-		$this->tabs = $tab_array;
+//		$tab_array = array();
+//		foreach($tabs as $tab):
+//			array_push($tab_array, $tab);
+//
+//			$sections = $this->fetchSectionDataByTabId($tab['tab_id']);
+//			$section_array = array();
+//			foreach($sections as $section):
+//				array_push($section_array, $section);
+//
+//				$pluslets = $this->fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id, $tab['tab_id'], $section['section_id']);
+//				$pluslets_array = array();
+//				foreach($pluslets as $pluslet):
+//					array_push($pluslets_array, $pluslet);
+//				endforeach;
+//
+//				array_push($section_array, $pluslets_array);
+//
+//			endforeach;
+//			array_push($tab_array, $section_array);
+//
+//		endforeach;
+		$this->tabs = $tabs;//_array;
 
 		return $this;
 	}
