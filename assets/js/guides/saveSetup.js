@@ -39,10 +39,6 @@ function saveSetup() {
         autoSave: function() {
             mySaveSetup.saveGuide();
             console.log('autosave Called');
-
-
-            //mySaveSetup.fetchGuideData();
-            //console.log('autoSave fetchGuideData Called');
         },
 
         setupSaveButton: function (lstrSelector) {

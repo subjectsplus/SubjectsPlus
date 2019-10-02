@@ -100,7 +100,7 @@ function section() {
 				var newSection = mySection.addNewSection(section_index, layout, tab_id);
 				newSection.then(function(data) {
 					var last_insert_id = data.last_insert;
-					//console.log('last insert section id: ' + last_insert_id);
+					console.log('last insert section id: ' + last_insert_id);
 				});
 				newSection.then(function(data) {
 
@@ -126,8 +126,7 @@ function section() {
 					var newSectionBlock = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 					newSectionBlock.trigger('click');
 					mySection.viewSectionControls();
-					var mySaveSetup = saveSetup();
-					mySaveSetup.fetchGuideData();
+
 				});
 
 			});
@@ -160,7 +159,7 @@ function section() {
 			return $.ajax({
 
 				url : mySection.settings.sectionServicePath,
-				type : "GET",
+				type : "POST",
 				data : {
 					section_index: section_index,
 					layout: "4-4-4",
@@ -180,8 +179,7 @@ function section() {
 				//console.log($(responseTitle).text() + "\n" + formatErrorMessage(xhr, err) );
 				//console.log('jqXR: ' + JSON.stringify(xhr));
 			}).done(function() {
-				var mySaveSetup = saveSetup();
-				mySaveSetup.autoSave();
+				console.log('created new section');
 			});
 
 		},

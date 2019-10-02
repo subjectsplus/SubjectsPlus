@@ -38,15 +38,6 @@ function tabs() {
             myTabs.fetchTabsFlyout();
             myTabs.sortTabsFlyout();
 
-            // $("#tabs").tabs({
-            //         activate: function (event, ui) {
-            //             //console.log('fetch guide data on tab click');
-            //            var mySaveSetup = saveSetup();
-            //            mySaveSetup.fetchGuideData();
-            //         }
-            //     }
-            // );
-
             //configure sortable drag and drop zone for creating new guide from tabs
             myTabs.newGuideFromTabsSortable();
             //copy tabs to create new guide
@@ -261,19 +252,19 @@ function tabs() {
                                     myTabs.settings.tabs.tabs();
                                     myTabs.settings.tabCounter--;
 
-                                    var mySaveSetup = saveSetup();
-                                    mySaveSetup.fetchGuideData();
-
                                     editTabDialog.dialog("close");
                                 }
                             },
 
                             done: function (data) {
-                                //console.log('done delete tab');
-                                // remove tab from dom
-                                //console.log(JSON.stringify(data));
+                                var myGuideData = guideData();
 
+                                var freshData = myGuideData.fetchGuideData();
 
+                                freshData.then(function () {
+                                    myGuideData.updateTabIds(freshData);
+                                    $("#autosave-spinner").hide();
+                                });
                             }
                         });
                     },
@@ -298,9 +289,7 @@ function tabs() {
                 },
                 close: function () {
                     form[0].reset();
-                    var mySaveSetup = saveSetup();
-                    //console.log('fetch data after tab delete');
-                    mySaveSetup.fetchGuideData();
+
                 }
             });
 
@@ -443,10 +432,6 @@ function tabs() {
                 $(t).attr('id', data.last_insert);
                 $(t).addClass('dropspotty child-tab ui-droppable');
                 return data;
-            }).then(function(data) {
-                var mySaveSetup = saveSetup();
-                mySaveSetup.fetchGuideData();
-                return data;
             }).done(function () {
                 myTabs.activateFirstSectionControlsInit();
             });
@@ -461,7 +446,7 @@ function tabs() {
 
             return $.ajax({
                 url : "helpers/save_tab.php",
-                type : "GET",
+                type : "POST",
                 data : {
                     subject_id: subject_id,
                     label: label,
@@ -472,9 +457,6 @@ function tabs() {
                 dataType: "json"
 
             }).then(function (data) {
-                console.log('save new tab: ' + JSON.stringify(data));
-                var mySaveSetup = saveSetup();
-                mySaveSetup.fetchGuideData();
                 return data;
             }).done(function(data) {
                 //console.log(JSON.stringify(data));
@@ -617,9 +599,6 @@ function tabs() {
                 console.log('delete tab data including sections and pluslets');
                 console.log(JSON.stringify(data));
             }).done(function(data) {
-                var mySaveSetup = saveSetup();
-                mySaveSetup.fetchGuideData();
-
 
             });
         },
