@@ -18,6 +18,7 @@ class GuideData implements OutputInterface {
 	public $guide;
 	public $tabs = array ();
 	public $sections = array();
+	public $pluslets = array();
 	public $message;
 
 	public function __construct(Querier $db) {
@@ -58,6 +59,45 @@ class GuideData implements OutputInterface {
 		endforeach;
 		$this->tabs = $tab_array;
 
+		return $this;
+	}
+
+
+	public function createGuideDataArray($subject_id) {
+		$statement  = $this->_connection->prepare( "SELECT * FROM subject WHERE subject_id = :subject_id" );
+		$statement->bindParam( ":subject_id", $subject_id );
+		$statement->execute();
+
+		$this->guide = $statement->fetch();
+
+		$tabs = $this->fetchTabsBySubjectId($subject_id);
+		$tab_array = array();
+		foreach($tabs as $tab):
+			// add sections to array
+			$sections = $this->fetchSectionDataByTabId($tab['tab_id']);
+			$tab['sections'] = $sections;
+			array_push($tab_array, $tab);
+
+			$section_array = array();
+			foreach($sections as $section):
+				$pluslets = $this->fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id, $tab['tab_id'], $section['section_id']);
+				$section['pluslets'] = $pluslets;
+				array_merge($section, $pluslets);
+				array_push($section_array, $section);
+
+				$pluslets_array = array();
+				foreach($pluslets as $pluslet):
+					array_merge($section, $pluslets);
+					array_push($pluslets_array, $pluslet);
+				endforeach;
+				array_merge($section_array, $pluslets_array);
+			endforeach;
+
+			//array_push($tab_array, $section_array);
+
+		endforeach;
+
+		$this->tabs = $tab_array;
 		return $this;
 	}
 

@@ -240,13 +240,7 @@ function layout() {
 					$(this).addClass('active-layout-icon');
 
 					myLayout.layoutSection(selectedSection,$(this).data().layout);
-					var mySaveSetup = saveSetup();
-					mySaveSetup.fetchGuideData();
-				    //$("#save_guide").fadeIn();
-					//var save = saveSetup();
-					//save.saveGuide();
-					//$('#save_guide').fadeOut();
-					//myLayout.updateSectionLayout();
+
 			    });
 			}
 		},
