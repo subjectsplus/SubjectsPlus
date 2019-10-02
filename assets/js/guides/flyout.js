@@ -65,7 +65,7 @@ function flyout() {
 
 			var mainslider = s.mainOptions.slideReveal({
 				trigger : s.triggerMainOptions,
-				push : true,
+				push : false,
 				width : 440,
 				shown : function(slider, trigger) {
 					 $('#trigger-pointer').addClass('fa-chevron-left');
