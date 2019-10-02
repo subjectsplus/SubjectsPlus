@@ -60,7 +60,6 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 	global $debugger;
 	global $salt;
 
-
 	if ( $shibboleth == true ) {
 
 		$connection = $db->getConnection();

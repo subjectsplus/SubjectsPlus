@@ -37,20 +37,6 @@ function guideData() {
 
         },
 
-        handleGuideData: function(data) {
-
-            var tabData = data.responseJSON.tabs;
-            $.each(tabData, function (index, value) {
-                var tabIndex =  this.tab_index ;
-                var tabId = this.tab_id ;
-
-                if( tabIndex == value.tab_index) {
-                    var tabItem = $("a[href^='#tabs-" + value.tab_index + "']");
-                    $(tabItem).parent('li').attr('id', tabId);
-                }
-            });
-        },
-
 
         getTabData: function() {
             var g = guide();
@@ -102,30 +88,60 @@ function guideData() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-
-                    // var items = $('.sp_section');
-                    // $.each(items, function (index, obj) {
-                    //     //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
-                    //     var newId = "section_" + $(newIds).get(index);
-                    //     //console.log( $(obj).attr('id', newId) );
-                    // });
                     return data;
                 }
-            }).then(function (data) {
-                return data;
             });
 
         },
 
 
+        updateSectionIds: function() {
+            var sectionData = myGuideData.fetchGuideData();
+            sectionData.then(function (data) {
+                $.each(data.tabs, function (index, value) {
+                    //console.log('data: ' + JSON.stringify(value.sections));
+                    // console.log('index: ' + index);
+                    // console.log('value: ' + value);
+                    var sections = value.sections;
+                    //console.log('sections: ' + sections);
+                    $.each(sections, function(index, value) {
+                        var sectionIndex = value.section_index;
+                        var sectionId = value.section_id;
 
-        updateSectionIds: function(data) {
-            var newIds = [];
-            $.each(data.section_ids, function (index, value) {
-                newIds.push(value.section_id);
+                        //console.log('sectionIndex: ' + sectionIndex);
+                        console.log('sectionId: ' + sectionId);
+
+
+                        var sectionEls = $("#tabs-" + index).find('.sp_section');
+                        //console.log(sectionEls);
+
+                        $.each(sectionEls, function(index, value) {
+
+
+
+                            if(sectionIndex == index) {
+
+                                //var divEl = $('div').attr('id', this.id);
+                                //console.log('this.id' + divEl);
+                                console.log('div id: ' + value.id);
+                                //console.log('sectionId: ' + sectionId);
+                            }
+
+                        });
+
+
+                    });
+
+
+
+
+                });
+                return data;
             });
 
-            $(newIds).map(function (index, value) {});
+
+
+
 
         },
 
@@ -133,48 +149,3 @@ function guideData() {
 
     return myGuideData;
 }
-
-/*
-.then(function (data) {
-                var g = guide();
-                favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                return data;
-            }).then(function (data) {
-                favoriteBox().markAsFavorite();
-                //console.log('get favorites');
-                return data;
-            }).then(function (data) {
-                copyClone().markAsLinked();
-                //console.log('mark clones as linked');
-                return data;
-            }).then(function (data) {
-
-                var guideTabData = myGuideData.getTabData();
-                guideTabData.then(function (data) {
-                    myGuideData.updateTabIds(data);
-                });
-
-                console.log('update tab ids');
-                return data;
-            }).then(function (data) {
-                var sectionData = myGuideData.getSectionData();
-                sectionData.then(function(data) {
-                    myGuideData.updateSectionIds(data);
-                    console.log('updateSectionIds');
-                });
-                return data;
-            }).then(function (data) {
-               // saveSetup.refreshFeeds();
-                //console.log('refreshFeeds');
-                return data;
-            }).then(function (data) {
-
-                //tabs.fetchTabsFlyout();
-                //console.log('fetchTabsFlyout');
-                return data;
-            }).done(function (data) {
-                $( "#autosave-spinner" ).hide();
-                //console.log(JSON.stringify(data));
-                return data;
-            })
- */

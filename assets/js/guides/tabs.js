@@ -258,9 +258,7 @@ function tabs() {
 
                             done: function (data) {
                                 var myGuideData = guideData();
-
                                 var freshData = myGuideData.fetchGuideData();
-
                                 freshData.then(function () {
                                     myGuideData.updateTabIds(freshData);
                                     $("#autosave-spinner").hide();
@@ -572,12 +570,12 @@ function tabs() {
             ////////////////////
             // Make page tabs clickable
             ///////////////////
-            // $(document.body).on('click','a[id*=tab-]', function(event) {
-            //     var tab_id = $(this).attr("id").split("-");
-            //    var selected_tab = "#pluslet-" + box_id[1];
-            //    myTabs.setupTabs(tab_id[1]);
-            //
-            // });
+            $(document.body).on('click','a[id*=tab-]', function(event) {
+                var tab_id = $(this).attr("id").split("-");
+               var selected_tab = "#pluslet-" + box_id[1];
+               myTabs.setupTabs(tab_id[1]);
+
+            });
         },
 
         deleteTabAndSectionAndPluslets: function() {

@@ -186,7 +186,7 @@ function section() {
 
 		addNewSectionHtml: function(section_id) {
 
-			var html = '<div id="section_' + section_id + '" class="sp_section pure-g" data-layout="4-4-4">\n' +
+			var html = '<div id="section_' + section_id + '" class="sp_section pure-g" data-layout="4-4-4" data-section-index="">\n' +
 				'    <div class="sp_section_controls">\n' +
 				'        <i class="fa fa-arrows section_sort" title="Move Section"></i>\n' +
 				'        <i class="fa fa-trash-o section_remove" title="Delete Section" style="display: none;"></i>\n' +
