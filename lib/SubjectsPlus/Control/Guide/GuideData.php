@@ -82,11 +82,19 @@ class GuideData implements OutputInterface {
 			foreach($sections as $section):
 				$pluslets = $this->fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id, $tab['tab_id'], $section['section_id']);
 				$section['pluslets'] = $pluslets;
+				array_merge($section, $pluslets);
 				array_push($section_array, $section);
 
+				$pluslets_array = array();
+				foreach($pluslets as $pluslet):
+					array_merge($section, $pluslets);
+					array_push($pluslets_array, $pluslet);
+				endforeach;
+				array_merge($section_array, $pluslets_array);
 			endforeach;
-			$tab_array[] = $section_array;
+
 			//array_push($tab_array, $section_array);
+
 		endforeach;
 
 		$this->tabs = $tab_array;

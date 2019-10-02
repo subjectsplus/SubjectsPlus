@@ -228,8 +228,6 @@ function tabs() {
                         var mySaveSetup = saveSetup();
                         mySaveSetup.autoSave();
 
-
-
                         $(this).dialog("close");
                     },
                     "Delete": function () {

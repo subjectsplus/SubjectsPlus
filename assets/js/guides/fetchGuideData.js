@@ -38,16 +38,19 @@ function guideData() {
         },
 
         handleGuideData: function(data) {
-            //console.log(data.responseJSON);
-            var tabData = data.responseJSON.tabs;
-            console.log(tabData);
-            var newIds = [];
-            $.each(tabData, function (index, value) {
-                newIds.push(value.tab_id);
-            });
-            console.log('newIds: ' + JSON.stringify(newIds));
 
+            var tabData = data.responseJSON.tabs;
+            $.each(tabData, function (index, value) {
+                var tabIndex =  this.tab_index ;
+                var tabId = this.tab_id ;
+
+                if( tabIndex == value.tab_index) {
+                    var tabItem = $("a[href^='#tabs-" + value.tab_index + "']");
+                    $(tabItem).parent('li').attr('id', tabId);
+                }
+            });
         },
+
 
         getTabData: function() {
             var g = guide();
@@ -73,18 +76,14 @@ function guideData() {
 
 
         updateTabIds: function (data) {
-            var newIds = [];
-            $.each(data.tab_ids, function (index, value) {
-                newIds.push(value.tab_id);
-            });
-            console.log('newIds: ' + JSON.stringify(newIds));
-            $(newIds).map(function (index, value) {});
+            var tabData = data.responseJSON.tabs;
+            $.each(tabData, function (index, value) {
+                var tabIndex =  this.tab_index ;
+                var tabId = this.tab_id ;
 
-            var items = $('#tabs > ul li');
-            $.each(items, function (index, obj) {
-                if ($.isNumeric($(obj).attr('id'))) {
-                    var newId = $(newIds).get(index - 1);
-                    //console.log('newtabID: ' + $(obj).attr('id', newId) );
+                if( tabIndex == value.tab_index) {
+                    var tabItem = $("a[href^='#tabs-" + value.tab_index + "']");
+                    $(tabItem).parent('li').attr('id', tabId);
                 }
             });
         },

@@ -40,8 +40,7 @@ function saveSetup() {
             mySaveSetup.saveGuide();
             console.log('autosave Called');
 
-            var myGuideData = guideData();
-            myGuideData.fetchGuideData();
+
             //mySaveSetup.fetchGuideData();
             //console.log('autoSave fetchGuideData Called');
         },
@@ -590,6 +589,15 @@ function saveSetup() {
                 },
                 function () {
                     setTimeout(this, 2000);
+
+                    var myGuideData = guideData();
+
+                    var freshData = myGuideData.fetchGuideData();
+
+                    freshData.then(function () {
+                        myGuideData.updateTabIds(freshData);
+                        $("#autosave-spinner").hide();
+                    });
                 });
 
             var containers = $(".booklist-content");
@@ -621,59 +629,7 @@ function saveSetup() {
         },
 
 
-        fetchGuideData: function() {
 
-            // var g = guide();
-            // var subjectId = g.getSubjectId();
-            // var payload = {
-            //     'subject_id': subjectId,
-            // };
-            //
-            // return $.ajax({
-            //     url: mySaveSetup.settings.fetchGuideData,
-            //     type: "GET",
-            //     data: payload,
-            //     dataType: "json",
-            //     success: function (data) {
-            //         //console.log('fetchGuideData');
-            //         //console.log(JSON.stringify(data));
-            //     }
-            // }).then(function (data) {
-            //     var g = guide();
-            //     favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-            //     return data;
-            // }).then(function (data) {
-            //     favoriteBox().markAsFavorite();
-            //     //console.log('get favorites');
-            //     return data;
-            // }).then(function (data) {
-            //     copyClone().markAsLinked();
-            //     //console.log('mark clones as linked');
-            //     return data;
-            // }).then(function (data) {
-            //     mySaveSetup.updateTabIds();
-            //     console.log('update tab ids');
-            //     return data;
-            // }).then(function (data) {
-            //     mySaveSetup.updateSectionIds();
-            //     console.log('updateSectionIds');
-            //     return data;
-            // }).then(function (data) {
-            //     mySaveSetup.refreshFeeds();
-            //     //console.log('refreshFeeds');
-            //     return data;
-            // }).then(function (data) {
-            //     var myTabs = tabs();
-            //     myTabs.fetchTabsFlyout();
-            //     //console.log('fetchTabsFlyout');
-            //     return data;
-            // }).done(function (data) {
-            //     $( "#autosave-spinner" ).hide();
-            //     //console.log(JSON.stringify(data));
-            //     return data;
-            // });
-
-        },
 
         getTabIds: function() {
             var nodes = $('.child-tab');
