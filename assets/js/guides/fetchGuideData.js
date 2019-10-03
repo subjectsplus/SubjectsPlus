@@ -47,11 +47,8 @@ function guideData() {
                 data: payload,
                 dataType: "json",
                 success: function (data) {
-                    console.log('return tab ids' + JSON.stringify(data));
                     return data;
                 }
-            }).then(function (data) {
-                return data;
             });
         },
 
