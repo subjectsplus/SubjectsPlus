@@ -57,7 +57,7 @@ function guideData() {
 
 
         updateTabIds: function (tabData) {
-            $.each(tabData, function (index, value) {
+            $.each(tabData.tab_data, function (index, value) {
                 var tabIndex =  this.tab_index ;
                 var tabId = this.tab_id ;
 
@@ -90,7 +90,7 @@ function guideData() {
         updateSectionIds: function(sectionData) {
             sectionData.then(function (data) {
                 var newIds = [];
-                $.each(data, function (index, value) {
+                $.each(data.sections_by_subject, function (index, value) {
                     //console.log(value.section_id);
                     newIds.push(value.section_id);
                 });

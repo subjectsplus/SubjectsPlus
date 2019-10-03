@@ -18,6 +18,7 @@ class TabData implements OutputInterface
     private $_db;
 	private $_connection;
     public $tab_ids;
+    public $tab_data;
     public $tabs;
 	public $last_insert;
 
@@ -101,6 +102,14 @@ class TabData implements OutputInterface
         $tab_ids = $statement->fetchAll();
         $this->tab_ids = $tab_ids;
     }
+
+	public function fetchTabDataBySubjectId($subject_id) {
+		$statement = $this->_connection->prepare("SELECT * FROM tab WHERE subject_id = :subject_id");
+		$statement->bindParam ( ":subject_id", $subject_id );
+		$statement->execute();
+		$tabs = $statement->fetchAll();
+		$this->tab_data = $tabs;
+	}
 
 
     public function toArray() {

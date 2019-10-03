@@ -10,7 +10,7 @@ require_once("../../includes/config.php");
 require_once("../../includes/functions.php");
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\Guide\GuideData;
+use SubjectsPlus\Control\Guide\TabData;
 
 header("Content-Type: application/json");
 header("Expires: on, 01 Jan 1970 00:00:00 GMT");
@@ -20,8 +20,8 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 $db = new Querier();
-$subject_id = scrubData($_GET['subject_id']);
+$subject_id = scrubData($_GET['subject_id'], 'integer');
 
-$objGuideData = new GuideData($db);
-$objGuideData->fetchTabsBySubjectId($subject_id);
-echo $objGuideData->toJSON();
+$objTabData = new TabData($db);
+$objTabData->fetchTabDataBySubjectId($subject_id);
+echo $objTabData->toJSON();
