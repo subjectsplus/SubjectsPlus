@@ -579,14 +579,13 @@ function saveSetup() {
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
                     tabs: lstrTabs
-                },
-                function () {
-                    setTimeout(this, 2000);
+                }, function (response, status) {
 
-                    // update tab and section ids with data from db
-                    var myGuideData = guideData();
-                    myGuideData.bindNewIds();
-
+                    if (status == "success"){
+                        // update tab and section ids with data from db
+                        var myGuideData = guideData();
+                        myGuideData.bindNewIds();
+                    }
                 });
 
             var containers = $(".booklist-content");
