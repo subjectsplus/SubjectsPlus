@@ -17,7 +17,8 @@ class GuideData implements OutputInterface {
 	private $_connection;
 	public $guide;
 	public $tabs = array ();
-	public $sections = array();
+	public $sections_by_tab = array();
+	public $sections_by_subject = array();
 	public $pluslets = array();
 	public $message;
 
@@ -118,6 +119,16 @@ class GuideData implements OutputInterface {
 		$sections_statement->bindParam ( ":tab_id", $tab_id );
 		$sections_statement->execute ();
 		return $sections_statement->fetchAll ();
+	}
+
+	public function fetchSectionDataBySubjectId($subject_id = null) {
+		$statement = $this->_connection->prepare( "SELECT * FROM section
+    											INNER JOIN tab on section.tab_id = tab.tab_id
+											    INNER JOIN subject on tab.subject_id = subject.subject_id
+												WHERE tab.subject_id = :subject_id" );
+		$statement->bindParam( ":subject_id", $subject_id );
+		$statement->execute();
+		return $this->sections_by_subject =  $statement->fetchAll();
 	}
 
 	public function fetchExistingPlusletDataBySubjectIdTabIdSectionId($subject_id = null, $tab_id = null, $section_id = null) {
