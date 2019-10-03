@@ -627,7 +627,7 @@ function saveSetup() {
             freshData.then(function () {
                 myGuideData.updateTabIds(freshData);
             }).then(function () {
-                myGuideData.updateSectionIds(freshData);
+                myGuideData.updateSectionIds();
             }).always(function () {
                 $("#autosave-spinner").hide();
             });

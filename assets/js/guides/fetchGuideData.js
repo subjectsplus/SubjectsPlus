@@ -81,7 +81,7 @@ function guideData() {
             var payload = {
                 'subject_id': subjectId,
             };
-
+ 
             return $.ajax({
                 url: myGuideData.settings.fetchSectionIdsUrl,
                 type: "GET",
@@ -96,52 +96,22 @@ function guideData() {
 
 
         updateSectionIds: function() {
-            var sectionData = myGuideData.fetchGuideData();
+            var sectionData = myGuideData.getSectionData();
+
             sectionData.then(function (data) {
-                $.each(data.tabs, function (index, value) {
-                    //console.log('data: ' + JSON.stringify(value.sections));
-                    // console.log('index: ' + index);
-                    // console.log('value: ' + value);
-                    var sections = value.sections;
-                    //console.log('sections: ' + sections);
-                    $.each(sections, function(index, value) {
-                        var sectionIndex = value.section_index;
-                        var sectionId = value.section_id;
-
-                        //console.log('sectionIndex: ' + sectionIndex);
-                        console.log('sectionId: ' + sectionId);
-
-
-                        var sectionEls = $("#tabs-" + index).find('.sp_section');
-                        //console.log(sectionEls);
-
-                        $.each(sectionEls, function(index, value) {
-
-
-
-                            if(sectionIndex == index) {
-
-                                //var divEl = $('div').attr('id', this.id);
-                                //console.log('this.id' + divEl);
-                                console.log('div id: ' + value.id);
-                                //console.log('sectionId: ' + sectionId);
-                            }
-
-                        });
-
-
-                    });
-
-
-
-
+                var newIds = [];
+                $.each(data.sections, function (index, value) {
+                    //console.log(value.section_id);
+                    newIds.push(value.section_id);
                 });
-                return data;
+                return newIds;
+            }).then(function(newIds) {
+                var sectionHtml = $('#tabs').find('.sp_section');
+                $.each(sectionHtml, function(index, value) {
+                    var newId = newIds[index];
+                    $(this).attr('id', 'section_' + newId);
+                });
             });
-
-
-
-
 
         },
 
