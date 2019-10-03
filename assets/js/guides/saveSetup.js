@@ -586,14 +586,9 @@ function saveSetup() {
                 function () {
                     setTimeout(this, 2000);
 
-                    var myGuideData = guideData();
+                    // update tab and section ids with data from db
+                    mySaveSetup.bindNewIds();
 
-                    var freshData = myGuideData.fetchGuideData();
-
-                    freshData.then(function () {
-                        myGuideData.updateTabIds(freshData);
-                        $("#autosave-spinner").hide();
-                    });
                 });
 
             var containers = $(".booklist-content");
@@ -625,7 +620,18 @@ function saveSetup() {
         },
 
 
+        bindNewIds: function() {
+            var myGuideData = guideData();
+            var freshData = myGuideData.fetchGuideData();
 
+            freshData.then(function () {
+                myGuideData.updateTabIds(freshData);
+            }).then(function () {
+                myGuideData.updateSectionIds();
+            }).always(function () {
+                $("#autosave-spinner").hide();
+            });
+        },
 
         getTabIds: function() {
             var nodes = $('.child-tab');
