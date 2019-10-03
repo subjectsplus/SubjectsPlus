@@ -251,7 +251,6 @@ function layout() {
 
 				$('#autosave-spinner').show();
 
-
 				var section_id = $(".section_selected_area").attr('id').split('section_')[1];
 				var layout_id = "#" + $(".active-layout-icon").attr('id');
 
@@ -268,12 +267,8 @@ function layout() {
 							type: "GET",
 							data: payload,
 						}).then(function (data) {
-							var mySaveSetup = saveSetup();
-							mySaveSetup.updateTabIds();
-							return data;
-						}).then(function (data) {
-							var mySaveSetup = saveSetup();
-							mySaveSetup.updateSectionIds();
+							// var mySaveSetup = saveSetup();
+							// mySaveSetup.bindNewIds();
 							return data;
 						}).always(function () {
 								$("#section_" + section_id).attr('data-layout', layout);

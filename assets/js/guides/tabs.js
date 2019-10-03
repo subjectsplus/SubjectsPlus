@@ -258,11 +258,7 @@ function tabs() {
 
                             done: function (data) {
                                 var myGuideData = guideData();
-                                var freshData = myGuideData.fetchGuideData();
-                                freshData.then(function () {
-                                    myGuideData.updateTabIds(freshData);
-                                    $("#autosave-spinner").hide();
-                                });
+                                myGuideData.bindNewIds();
                             }
                         });
                     },

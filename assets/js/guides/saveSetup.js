@@ -575,9 +575,6 @@ function saveSetup() {
             });
 
             lstrTabs = JSON.stringify(lobjTabs);
-            //console.log(lstrTabs);
-            //mySaveSetup.getTabIds();
-            //mySaveSetup.getSectionIds();
             $("#response").load("helpers/save_guide.php", {
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
@@ -587,7 +584,8 @@ function saveSetup() {
                     setTimeout(this, 2000);
 
                     // update tab and section ids with data from db
-                    mySaveSetup.bindNewIds();
+                    var myGuideData = guideData();
+                    myGuideData.bindNewIds();
 
                 });
 
@@ -619,112 +617,98 @@ function saveSetup() {
 
         },
 
-
-        bindNewIds: function() {
-            var myGuideData = guideData();
-            var freshData = myGuideData.fetchGuideData();
-
-            freshData.then(function () {
-                myGuideData.updateTabIds(freshData);
-            }).then(function () {
-                myGuideData.updateSectionIds();
-            }).always(function () {
-                $("#autosave-spinner").hide();
-            });
-        },
-
-        getTabIds: function() {
-            var nodes = $('.child-tab');
-            var ids = [];
-            $.each(nodes, function(data) {
-                //console.log('tab ids: ' + this.id );
-            });
-        },
-
-        getSectionIds: function() {
-            var nodes = $('.sp_section');
-            var ids = [];
-            $.each(nodes, function(data) {
-                //console.log('section ids: ' + this.id.split('_')[1] );
-            });
-        },
-
-        updateTabIds: function () {
-
-            var g = guide();
-            var subjectId = g.getSubjectId();
-
-            var payload = {
-                'subject_id': subjectId,
-            };
-
-            $.ajax({
-                url: mySaveSetup.settings.fetchTabIdsUrl,
-                type: "GET",
-                data: payload,
-                dataType: "json",
-                success: function (data) {
-                    //console.log('return tab ids' + JSON.stringify(data));
-                    return data;
-                }
-            }).then(function (data) {
-                //console.log('updateTabIds start');
-                var newIds = [];
-                $.each(data.tab_ids, function (index, value) {
-                    newIds.push(value.tab_id);
-                });
-                //console.log('newIds: ' + newIds);
-                $(newIds).map(function (index, value) {});
-
-                var items = $('#tabs > ul li');
-                $.each(items, function (index, obj) {
-                    if ($.isNumeric($(obj).attr('id'))) {
-                        var newId = $(newIds).get(index - 1);
-                        //console.log('newtabID: ' + $(obj).attr('id', newId) );
-                    }
-                });
-            }).done(function () {
-                //console.log('updateTabIds stop');
-            });
-
-        },
-
-        updateSectionIds: function() {
-            var g = guide();
-            var subjectId = g.getSubjectId();
-            var payload = {
-                'subject_id': subjectId,
-            };
-
-            $.ajax({
-                url: mySaveSetup.settings.fetchSectionIdsUrl,
-                type: "GET",
-                data: payload,
-                dataType: "json",
-                success: function (data) {
-
-                    // var items = $('.sp_section');
-                    // $.each(items, function (index, obj) {
-                    //     //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
-                    //     var newId = "section_" + $(newIds).get(index);
-                    //     //console.log( $(obj).attr('id', newId) );
-                    // });
-                    return data;
-                }
-            }).then(function (data) {
-                //console.log('updateSectionIds start');
-                var newIds = [];
-                $.each(data.section_ids, function (index, value) {
-                    newIds.push(value.section_id);
-                });
-                return newIds;
-            }).then(function (newIds) {
-                $(newIds).map(function (index, value) {});
-            }).done(function () {
-                //console.log('updateSectionIds stop');
-
-            });
-        },
+        // getTabIds: function() {
+        //     var nodes = $('.child-tab');
+        //     var ids = [];
+        //     $.each(nodes, function(data) {
+        //         //console.log('tab ids: ' + this.id );
+        //     });
+        // },
+        //
+        // getSectionIds: function() {
+        //     var nodes = $('.sp_section');
+        //     var ids = [];
+        //     $.each(nodes, function(data) {
+        //         //console.log('section ids: ' + this.id.split('_')[1] );
+        //     });
+        // },
+        //
+        // updateTabIds: function () {
+        //
+        //     var g = guide();
+        //     var subjectId = g.getSubjectId();
+        //
+        //     var payload = {
+        //         'subject_id': subjectId,
+        //     };
+        //
+        //     $.ajax({
+        //         url: mySaveSetup.settings.fetchTabIdsUrl,
+        //         type: "GET",
+        //         data: payload,
+        //         dataType: "json",
+        //         success: function (data) {
+        //             //console.log('return tab ids' + JSON.stringify(data));
+        //             return data;
+        //         }
+        //     }).then(function (data) {
+        //         //console.log('updateTabIds start');
+        //         var newIds = [];
+        //         $.each(data.tab_ids, function (index, value) {
+        //             newIds.push(value.tab_id);
+        //         });
+        //         //console.log('newIds: ' + newIds);
+        //         $(newIds).map(function (index, value) {});
+        //
+        //         var items = $('#tabs > ul li');
+        //         $.each(items, function (index, obj) {
+        //             if ($.isNumeric($(obj).attr('id'))) {
+        //                 var newId = $(newIds).get(index - 1);
+        //                 //console.log('newtabID: ' + $(obj).attr('id', newId) );
+        //             }
+        //         });
+        //     }).done(function () {
+        //         //console.log('updateTabIds stop');
+        //     });
+        //
+        // },
+        //
+        // updateSectionIds: function() {
+        //     var g = guide();
+        //     var subjectId = g.getSubjectId();
+        //     var payload = {
+        //         'subject_id': subjectId,
+        //     };
+        //
+        //     $.ajax({
+        //         url: mySaveSetup.settings.fetchSectionIdsUrl,
+        //         type: "GET",
+        //         data: payload,
+        //         dataType: "json",
+        //         success: function (data) {
+        //
+        //             // var items = $('.sp_section');
+        //             // $.each(items, function (index, obj) {
+        //             //     //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
+        //             //     var newId = "section_" + $(newIds).get(index);
+        //             //     //console.log( $(obj).attr('id', newId) );
+        //             // });
+        //             return data;
+        //         }
+        //     }).then(function (data) {
+        //         //console.log('updateSectionIds start');
+        //         var newIds = [];
+        //         $.each(data.section_ids, function (index, value) {
+        //             newIds.push(value.section_id);
+        //         });
+        //         return newIds;
+        //     }).then(function (newIds) {
+        //         $(newIds).map(function (index, value) {});
+        //     }).done(function () {
+        //         //console.log('updateSectionIds stop');
+        //
+        //     });
+        // },
 
         refreshFeeds: function () {
             /////////////////////

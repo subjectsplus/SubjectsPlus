@@ -7,8 +7,8 @@ function guideData() {
 
         settings: {
             fetchGuideData: "helpers/fetch_guide_data.php?",
-            fetchTabIdsUrl: "helpers/fetch_tab_ids.php?",
-            fetchSectionIdsUrl: "helpers/fetch_section_ids_by_subject_id.php?"
+            fetchTabDataBySubjectId: "helpers/fetch_tab_data_by_subject_id.php?",
+            fetchSectionDataBySubjectId: "helpers/fetch_section_data_by_subject_id.php?"
         },
         strings: {},
 
@@ -17,13 +17,11 @@ function guideData() {
         },
 
         fetchGuideData: function() {
-
             var g = guide();
             var subjectId = g.getSubjectId();
             var payload = {
                 'subject_id': subjectId,
             };
-
             return $.ajax({
                 url: myGuideData.settings.fetchGuideData,
                 type: "GET",
@@ -31,23 +29,20 @@ function guideData() {
                 dataType: "json",
                 success: function (data) {
                     return data;
-                    console.log(JSON.stringify(data));
+                    //console.log(JSON.stringify(data));
                 }
             });
-
         },
 
 
         getTabData: function() {
             var g = guide();
             var subjectId = g.getSubjectId();
-            console.log(subjectId);
             var payload = {
                 'subject_id': subjectId,
             };
-
             return $.ajax({
-                url: myGuideData.settings.fetchTabIdsUrl,
+                url: myGuideData.settings.fetchTabDataBySubjectId,
                 type: "GET",
                 data: payload,
                 dataType: "json",
@@ -61,8 +56,7 @@ function guideData() {
         },
 
 
-        updateTabIds: function (data) {
-            var tabData = data.responseJSON.tabs;
+        updateTabIds: function (tabData) {
             $.each(tabData, function (index, value) {
                 var tabIndex =  this.tab_index ;
                 var tabId = this.tab_id ;
@@ -81,9 +75,8 @@ function guideData() {
             var payload = {
                 'subject_id': subjectId,
             };
- 
             return $.ajax({
-                url: myGuideData.settings.fetchSectionIdsUrl,
+                url: myGuideData.settings.fetchSectionDataBySubjectId,
                 type: "GET",
                 data: payload,
                 dataType: "json",
@@ -91,16 +84,13 @@ function guideData() {
                     return data;
                 }
             });
-
         },
 
 
-        updateSectionIds: function() {
-            var sectionData = myGuideData.getSectionData();
-
+        updateSectionIds: function(sectionData) {
             sectionData.then(function (data) {
                 var newIds = [];
-                $.each(data.sections, function (index, value) {
+                $.each(data, function (index, value) {
                     //console.log(value.section_id);
                     newIds.push(value.section_id);
                 });
@@ -112,8 +102,19 @@ function guideData() {
                     $(this).attr('id', 'section_' + newId);
                 });
             });
-
         },
+
+        bindNewIds: function() {
+            var tabData = myGuideData.getTabData();
+            tabData.then(function (data) {
+                myGuideData.updateTabIds(data);
+            }).then(function () {
+                var sectionData = myGuideData.getSectionData();
+                myGuideData.updateSectionIds(sectionData);
+            }).always(function () {
+                $("#autosave-spinner").hide();
+            });
+        }
 
     };
 

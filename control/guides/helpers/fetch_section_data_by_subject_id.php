@@ -17,12 +17,10 @@ require_once("../../includes/config.php");
 require_once("../../includes/functions.php");
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\Guide\PlusletData;
+use SubjectsPlus\Control\Guide\GuideData;
 
 $db = new Querier();
-$pluslet_id = scrubData($_GET['pluslet_id']);
+$subject_id = scrubData($_GET['subject_id']);
 
-$objPluslet = new PlusletData($db);
-$pluslet = $objPluslet->fetchPlusletById($pluslet_id);
-
-echo json_encode($pluslet);
+$objGuideData = new GuideData($db);
+echo json_encode($objGuideData->fetchSectionDataBySubjectId($subject_id));
