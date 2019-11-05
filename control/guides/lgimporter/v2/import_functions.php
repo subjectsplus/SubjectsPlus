@@ -48,7 +48,8 @@ class LGImport2 {
             $_POST['rank'] = Array(rand(0,32767));
             $_POST['location_id'] = Array('');
   	    $_POST['title_id'] = $_POST['prefix'] = $_POST['alternate_title'] = $_POST['internal_notes'] = '';
-  	    $_POST['call_number'] = $_POST['display_note'] = $_POST['eres_display'] = $_POST['ctags'] = $_POST['helpguide'] = $_POST['source'] = $_POST['description_override'] = $_POST['dbbysub_active'] = Array();
+            $_POST['eres_display'] = ('Database' == $asset->type) ? Array('Y') : Array('N');
+  	    $_POST['call_number'] = $_POST['display_note'] = $_POST['ctags'] = $_POST['helpguide'] = $_POST['source'] = $_POST['description_override'] = $_POST['dbbysub_active'] = Array();
             $newrecord = new Record("", "post"); //create new Record object with _POST values
             $newrecord->insertRecord(); //insert guide into subject, rely on this method for dupe handling
           }
