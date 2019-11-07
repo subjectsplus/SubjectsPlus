@@ -976,11 +976,12 @@ function showStaff( $email, $picture = 1, $pic_size = "medium", $link_name = 0 )
 			$img_link  = "";
 		}
 
+		$tel_paragraph = $myrow['3'] ? '<p>'.$tel_prefix.' '.$myrow['3'].'</p>' : '';
 
 		$staffer = "<div class=\"staffpic\">";
 		$staffer .= $img_link;
 		$staffer .= getHeadshot( $email, $pic_size );
-		$staffer .= "</a></div><div class=\"staff-meta\"><h4>$full_name</h4><p><em>$myrow[2]</em></p><p>$tel_prefix $myrow[3]</p><p><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p></div></td>";
+		$staffer .= "</a></div><div class=\"staff-meta\"><h4>$full_name</h4><p><em>$myrow[2]</em></p>$tel_paragraph<p><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p></div></td>";
 	}
 
 	return $staffer;

@@ -136,9 +136,9 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                 }
 
                 $items .= "</h4>
-                <p><em>$title</em></p>    			
-                <p>$tel_prefix $tel </p>
-                <p><a href=\"mailto:$email\">$email</a></p>
+                <p><em>$title</em></p>";
+                $items .= $tel ? '<p>$tel_prefix $tel </p>' : '';
+                $items .= "<p><a href=\"mailto:$email\">$email</a></p>
                 <p class=\"staff-subjects\">$assoc_subjects</p></div></li>";
 
                 $current_dept = $dept_id;
@@ -244,7 +244,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           $lname = $myrow["0"];
           $fname = $myrow["1"];
           $title = $myrow["2"];
-          $tel = $myrow["3"];
+          $tel = $myrow["3"] ? $tel_prefix.' '.$myrow["3"] : '';
           $email = $myrow["4"];
           $name_id = explode("@", $email);
           $staff_id = $myrow["5"];
@@ -274,7 +274,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
           $items .= "</span></td>
             <td class=\"$row_colour\">$title $assoc_subjects</td>
-            <td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
+            <td class=\"$row_colour staff-tel-row\">$tel</td>
             <td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
@@ -311,7 +311,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           $lname = $myrow["3"];
           $fname = $myrow["4"];
           $title = $myrow["5"];
-          $tel = $myrow["6"];
+          $tel = $myrow["6"] ? $tel_prefix.' '.$myrow["6"] : '';
           $email = $myrow["7"];
           $dept_id = $myrow["8"];
           $dept_tel = $myrow["9"];
@@ -357,7 +357,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
           $items .= "</span></td>
                 <td class=\"$row_colour\">$title $assoc_subjects</td>
-                <td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
+                <td class=\"$row_colour staff-tel-row\">$tel </td>
                 <td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
@@ -476,7 +476,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
-          $tel = $tel_prefix . " " . $myrow["tel"];
+          $tel = $myrow["tel"] ? $tel_prefix . " " . $myrow["tel"] : '';
           $email = $myrow["email"];
           $name_id = explode("@", $email);
 
@@ -563,7 +563,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           $staff_id = $myrow["staff_id"];
           $full_name = $myrow["lname"] . ", " . $myrow["fname"];
           $title = $myrow["title"];
-          $tel = $tel_prefix . " " . $myrow["tel"];
+          $tel = $myrow["tel"] ? $tel_prefix . " " . $myrow["tel"] : '';
           $email = $myrow["email"];
           $name_id = explode("@", $email);
           $department = $myrow["name"];
