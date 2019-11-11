@@ -60,7 +60,7 @@
                                         <span><a class="no-decoration default" href="https://www.library.miami.edu/richter/hours.html"><i class="far fa-clock"></i> <span data-calendar="richter"></span></a></span>
                                     </li>
                                     <li>
-                                        <a class="no-decoration default" href="https://www.library.miami.edu/architecture/index.html">Architecture Library</a>
+                                        <a class="no-decoration default" href="https://www.library.miami.edu/architecture/index.html">Architecture Research Center (ARC)</a>
                                         <span><a class="no-decoration default" href="https://www.library.miami.edu/architecture/hours.html"><i class="far fa-clock"></i> <span data-calendar="architecture"></span></a></span>
                                     </li>
                                     <li>

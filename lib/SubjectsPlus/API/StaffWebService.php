@@ -138,6 +138,7 @@ class StaffWebService extends WebService implements InterfaceWebService {
        department.department_id as department_id,
        department.name          as department_name,
        department.telephone     as department_telephone,
+       room_number,
        IF((SELECT staff_id FROM staff as b WHERE b.staff_id = a.supervisor_id AND b.active = 1) IS NOT NULL,
           a.supervisor_id, "")  as supervisor_id,
        IFNULL((
