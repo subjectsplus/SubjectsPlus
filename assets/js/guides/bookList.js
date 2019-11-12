@@ -170,7 +170,6 @@ function bookList() {
 
                     for (var j = 0; j < arr.length; j++) {
                         var isbn = arr[j];
-
                         var divContent = document.createElement('div');
                         divContent.classList.add('booklist_item');
                         divContent.setAttribute('content-div-number', j);
@@ -349,12 +348,17 @@ function bookList() {
                         coverPath = a2[0];
                     }
                 }else{
-                    validSyndetics = true;
+                    if (coverPathSyndetics.indexOf('blank-cover') === -1){
+                        validSyndetics = true;
+                    }else {
+                        if (a2[1] === 'success') {
+                            coverPath = a2[0];
+                        }
+                    }
                 }
 
                 if (a1[1] === 'success'){
                     var obj = $.parseJSON(a1[0]);
-
                     if (obj.isbn.length != 0){
                         validOpenLibraryData = true;
                         obj = obj.isbn;
@@ -366,7 +370,7 @@ function bookList() {
                             "author": obj.author.join(", ")
                         });
                         result.isbn.push({
-                            "date": myBookList.formatDate(obj.date)
+                            "date": obj.date !== "" ? myBookList.formatDate(obj.date) : ""
                         });
                         result.isbn.push({
                             "primoUrl": primoUrl
