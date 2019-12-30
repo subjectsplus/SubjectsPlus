@@ -281,7 +281,7 @@ function book_metadata_download () {
 				)
 			);
 			$newJsonString = json_encode( $data );
-			file_put_contents( $file_path, $newJsonString, FILE_APPEND | LOCK_EX );
+			file_put_contents( $file_path, $newJsonString, LOCK_EX );
 		}
 	}
 };
@@ -304,7 +304,7 @@ function book_cover_download () {
 		$page_url = explode('control', curPageURL());
 		$url = $page_url[0] . "assets/images/blank-cover.png";
 		$cover = file_get_contents($url);
-		file_put_contents($prefix[0] . "/../../assets/cache/" . $isbn . ".jpg", $cover, FILE_APPEND | LOCK_EX);
+		file_put_contents($prefix[0] . "/../../assets/cache/" . $isbn . ".jpg", $cover, LOCK_EX);
 
 	} else {
 
@@ -314,7 +314,7 @@ function book_cover_download () {
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		$raw = curl_exec($curl);
 		curl_close($curl);
-		file_put_contents($prefix[0] . "/../../assets/cache/" . $isbn . ".jpg", $raw, FILE_APPEND | LOCK_EX);
+		file_put_contents($prefix[0] . "/../../assets/cache/" . $isbn . ".jpg", $raw, LOCK_EX);
 	}
 
 };

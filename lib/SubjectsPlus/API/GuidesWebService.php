@@ -270,6 +270,7 @@ class GuidesWebService extends WebService implements InterfaceWebService
 		$lobjGuide['id'] = $lobjRow['subject_id'];
 		$lobjGuide['title'] = $lobjRow['title'];
 		$lobjGuide['description'] = $lobjRow['description'];
+		$lobjGuide['shortform'] = isset($lobjRow['shortform']) ? $lobjRow['shortform'] : "";
 		$lobjGuide['authors'] = array();
 		$lobjGuide['authors']['author'] = $this->getAuthors(intval($lobjRow['subject_id']));
 
