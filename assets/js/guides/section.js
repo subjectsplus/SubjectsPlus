@@ -21,7 +21,7 @@ function section() {
 			mySection.clickTabOnSwitch();
 			mySection.clickDeleteSection();
 			mySection.chooseSectionForLayouts();
-			mySection.viewSectionControls();
+			//mySection.viewSectionControls();
 
 		},
 		init: function () {
@@ -281,9 +281,13 @@ function section() {
 		clickTabOnSwitch : function () {
 			$('.ui-tabs-nav > li.child-tab').on('click', function() {
 				//console.log('tab: ' + $(this).attr('aria-controls'));
+				console.log('clickTabOnSwitch');
+				$("#select_section_message").css('display', 'block');
+				$('#layout_options_container').css('display', 'none');
+
 				 var tabIndex = $(this).attr('aria-controls').split('-')[1];
-				$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
-				mySection.viewSectionControls();
+				//$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
+				//mySection.viewSectionControls();
 			});
 		},
 		
