@@ -93,6 +93,8 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 			session_regenerate_id();
 
 			//var_dump($user);
+
+
 // Create session vars for the basic types
 			$_SESSION['checkit']      = md5( $user[0][4] ) . $salt;
 			$_SESSION['staff_id']     = $user[0][0];
