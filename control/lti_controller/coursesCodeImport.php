@@ -14,10 +14,9 @@
 // $med_course_codes = []; //an array of course codes
 //
 
-
 include('config.php');
-include(SP_PATH . "/control/includes/autoloader.php"); // need to use this if header not loaded yet
-include(SP_PATH . "/control/includes/config.php");
+include(getcwd() . "/../../control/includes/autoloader.php"); // need to use this if header not loaded yet
+include(getcwd() . "/../../control/includes/config.php");
 require_once('LTICourseController.php');
 
 try {
