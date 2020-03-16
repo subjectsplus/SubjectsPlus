@@ -260,8 +260,22 @@ class LTICourseController
         return $statement->fetchAll();
     }
 
+    function isMedCourseCode($course_code){
+        global $med_course_codes;
+
+        if ($med_course_codes){
+            return in_array(substr($course_code, 0, 3), $med_course_codes);
+        }
+    }
+
     function processCourseCode($course_code, $guide_path)
     {
+        //temporary fix to deal with med course guides
+        if ($this->isMedCourseCode($course_code)){
+            header("Location: https://spmed.library.miami.edu/subjects/index.php"); /* Redirect browser */
+            return;
+        }
+
         $instructor = $this->getInstructorByCourseCode($course_code);
 
         if (!empty($instructor)) {
