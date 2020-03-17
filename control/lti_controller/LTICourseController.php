@@ -27,6 +27,7 @@ class LTICourseController
 
     function __construct($course_code_table_name = 'bb_course_code', $course_instructor_table_name = 'bb_course_instructor')
     {
+
         $this->course_code_table_name = $course_code_table_name;
         $this->course_instructor_table_name = $course_instructor_table_name;
         $this->db = new Querier();
@@ -228,7 +229,7 @@ class LTICourseController
         global $specific_course_codes;
         if ($specific_course_codes) {
             foreach ($specific_course_codes as $guide_code => $course_codes) {
-                if (array_search($subject_code, $course_codes)) {
+                if (in_array($subject_code, $course_codes)) {
                     return $guide_code;
                 }
             }
