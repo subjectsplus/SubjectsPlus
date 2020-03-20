@@ -270,11 +270,11 @@ class LTICourseController
 
     function processCourseCode($course_code, $guide_path)
     {
-        //temporary fix to deal with med course guides
-        if ($this->isMedCourseCode($course_code)){
-            header("Location: https://spmed.library.miami.edu/subjects/index.php"); /* Redirect browser */
-            return;
-        }
+//        //temporary fix to deal with med course guides
+//        if ($this->isMedCourseCode($course_code)){
+//            header("Location: https://spmed.library.miami.edu/subjects/index.php"); /* Redirect browser */
+//            return;
+//        }
 
         $instructor = $this->getInstructorByCourseCode($course_code);
 
