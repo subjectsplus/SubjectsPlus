@@ -75,6 +75,7 @@ subjects/includes/pgcache/*
 /assets/images/video_thumbs/
 
 .idea/
+*.iml*
 
 /assets/users/*
 
