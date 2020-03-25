@@ -239,6 +239,7 @@
 										<h5>Related Resources</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
+                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/borrowing.html">Access & Borrowing Policies
 												</a></li>
@@ -382,6 +383,12 @@
 
 										</ul>
 
+                                        <h5>Work from Home</h5>
+                                        <hr align="left" class="hr-decoration">
+                                        <ul>
+
+                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+                                        </ul>
 
 									</div>
 								</div>
@@ -434,6 +441,8 @@
 
 													<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
 														</a></li>
+
+                                                    <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab
 														</a></li>
@@ -623,7 +632,7 @@
 										<h5>Technology</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-
+                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment
 												</a></li>
 
@@ -896,7 +905,7 @@
 										<h5>Information For...</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-
+                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/alumnus.html">Alumni
 												</a></li>
 
