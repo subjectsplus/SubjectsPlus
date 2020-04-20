@@ -8,14 +8,14 @@ function guideCollectionService() {
 
     var myGuideCollection = {
 
-        settings : {
-            collectionActionUrl : "helpers/collections.php?",
-            sortableGuideList : $('ul#guide-list')
+        settings: {
+            collectionActionUrl: "helpers/collections.php?",
+            sortableGuideList: $('ul#guide-list')
         },
-        strings : {
+        strings: {
             removeGuideBtn: "<a class='remove-guide-btn' title='Remove Guide from Collection'><i class='fa fa-trash fa-lg'></i> </a>"
         },
-        bindUiActions : function() {
+        bindUiActions: function () {
 
             myGuideCollection.addCollection();
             myGuideCollection.deleteCollection();
@@ -26,7 +26,7 @@ function guideCollectionService() {
             myGuideCollection.deleteGuideFromCollection();
             myGuideCollection.saveCollectionUpdateToDatabase();
         },
-        init : function() {
+        init: function () {
             myGuideCollection.bindUiActions();
             myGuideCollection.fetchCollections();
             myGuideCollection.hideSearchResultsContainer();
@@ -38,7 +38,7 @@ function guideCollectionService() {
 
             // define payload
             var payload = {
-                'action' : 'fetchall',
+                'action': 'fetchall',
             };
 
             $.ajax({
@@ -46,17 +46,17 @@ function guideCollectionService() {
                 type: "GET",
                 data: payload,
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     //console.log(data);
 
-                    $.each(data.collections, function(idx, obj) {
-                        $("#guide-collection-list").append( "<li " +
+                    $.each(data.collections, function (idx, obj) {
+                        $("#guide-collection-list").append("<li " +
                             "data-collection_id='" + obj.collection_id + "'" +
                             "data-shortform='" + obj.shortform + "'" +
                             "data-label='" + obj.title + "'" +
                             "data-description='" + obj.description + "'" +
-                            " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                            "<a id='display-guides-btn' title='Edit'><i class='fa fa-pencil fa-lg'></i></a> " +obj.title +
+                            " id='item_" + obj.collection_id + "' class='' title='" + obj.title + "'> " +
+                            "<a id='display-guides-btn' title='Edit'><i class='fa fa-pencil fa-lg'></i></a> " + obj.title +
                             "<a id='delete-collection-btn' title='Delete'><i class='fa fa-trash'></i></a></li>");
                     });
 
@@ -69,7 +69,7 @@ function guideCollectionService() {
 
             var payload = {
                 'action': 'fetchone',
-                'collection_id' : id
+                'collection_id': id
             };
 
 
@@ -78,19 +78,19 @@ function guideCollectionService() {
                 type: "GET",
                 dataType: "json",
                 data: payload,
-                success: function(data) {
+                success: function (data) {
 
                     var obj = data.collection;
 
-                    $("#guide-collection-list").prepend( "<li " +
+                    $("#guide-collection-list").prepend("<li " +
                         "data-collection_id='" + obj.collection_id + "'" +
                         "data-label='" + obj.title + "'" +
                         "data-description='" + obj.description + "'" +
-                        " id='item_"+ obj.collection_id +"' class='' title='" + obj.title + "'> " +
-                        "<a id='display-guides-btn'><i class='fa fa-pencil fa-lg'></i></a> " +obj.title +
+                        " id='item_" + obj.collection_id + "' class='' title='" + obj.title + "'> " +
+                        "<a id='display-guides-btn'><i class='fa fa-pencil fa-lg'></i></a> " + obj.title +
                         "<a id='delete-collection-btn'> <i class='fa fa-trash'></i></a></li>");
 
-                    $('#item_' + obj.collection_id).effect( "highlight" );
+                    $('#item_' + obj.collection_id).effect("highlight");
 
                     myGuideCollection.clearCollectionMetadata();
                     myGuideCollection.clearAddFormValues();
@@ -105,7 +105,7 @@ function guideCollectionService() {
         },
 
         addCollection: function () {
-            $('#add_collection').on('click', function(event) {
+            $('#add_collection').on('click', function (event) {
 
                 event.preventDefault();
 
@@ -114,9 +114,9 @@ function guideCollectionService() {
                 //clear guide list
                 myGuideCollection.clearGuideList();
 
-                if( $('input[id="shortform"]').val() ) {
+                if ($('input[id="shortform"]').val()) {
                     var shortform = $('input[id="shortform"]').val();
-                } else if ( $('input[id="collection-shortform-input"]').val() ) {
+                } else if ($('input[id="collection-shortform-input"]').val()) {
                     var shortform = $('input[id="collection-shortform-input"]').val();
                 }
 
@@ -128,7 +128,7 @@ function guideCollectionService() {
 
                 var isDup = myGuideCollection.shortformDupeCheck(collection.shortform);
 
-                if(isValid == true && isDup == false) {
+                if (isValid == true && isDup == false) {
                     //add collection to db and display collection metadata
                     myGuideCollection.addCollectionRequest(collection);
 
@@ -139,10 +139,10 @@ function guideCollectionService() {
 
         addCollectionRequest: function (collection) {
             var payload = {
-                'action'      : 'create',
-                'title'       : collection.title,
-                'description' : collection.description,
-                'shortform'   : collection.shortform
+                'action': 'create',
+                'title': collection.title,
+                'description': collection.description,
+                'shortform': collection.shortform
             };
 
             $.ajax({
@@ -150,25 +150,25 @@ function guideCollectionService() {
                 type: "POST",
                 dataType: "json",
                 data: payload,
-                success: function(data) {
+                success: function (data) {
                     myGuideCollection.fetchCollectionRequest(data.lastInsertId);
                 }
             });
         },
 
-        saveCollectionUpdateToDatabase: function(){
+        saveCollectionUpdateToDatabase: function () {
             $("#update-collection-metadata-btn").click(function () {
                 var collection_id = $('#collection-metadata').attr('data-collection_id');
                 var title = $('input#collection-title-input').val();
                 var shortform = $('input#collection-shortform-input').val();
-                var description =  $('input#collection-description-input').val();
+                var description = $('input#collection-description-input').val();
 
                 var payload = {
                     'action': 'update',
-                    'collection_id' : collection_id,
-                    'title' : title,
-                    'shortform' : shortform,
-                    'description' : description
+                    'collection_id': collection_id,
+                    'title': title,
+                    'shortform': shortform,
+                    'description': description
                 };
 
                 $.ajax({
@@ -176,12 +176,12 @@ function guideCollectionService() {
                     type: "POST",
                     dataType: "json",
                     data: payload,
-                    success: function(data) {
+                    success: function (data) {
                         myGuideCollection.clearEditFormValues();
                         myGuideCollection.clearCollectionMetadata();
 
-                        $( "#collection-metadata" ).fadeIn( "slow", function() {
-                            myGuideCollection.renderCollectionMetadata(title, description,shortform, collection_id);
+                        $("#collection-metadata").fadeIn("slow", function () {
+                            myGuideCollection.renderCollectionMetadata(title, description, shortform, collection_id);
                         });
 
                     }
@@ -211,46 +211,47 @@ function guideCollectionService() {
         },
 
 
-        deleteCollection: function() {
+        deleteCollection: function () {
 
             $('body').on('click', '#delete-collection-btn', function () {
 
-                alert('Are you sure?');
+                if (confirm('Are you sure?')) {
 
-                var elementDestoyed = $(this).parent('li');
-                var payload = {
-                    'action' : 'delete',
-                    'collection_id' : $(this).parent('li').attr('data-collection_id'),
-                };
+                    var elementDestoyed = $(this).parent('li');
+                    var payload = {
+                        'action': 'delete',
+                        'collection_id': $(this).parent('li').attr('data-collection_id'),
+                    };
 
-                $.ajax({
-                    url: myGuideCollection.settings.collectionActionUrl,
-                    type: "POST",
-                    dataType: "json",
-                    data: payload,
-                    success: function(data) {
-                        //render flash msg
-                        myGuideCollection.renderFlashMsg('Collection Deleted');
+                    $.ajax({
+                        url: myGuideCollection.settings.collectionActionUrl,
+                        type: "POST",
+                        dataType: "json",
+                        data: payload,
+                        success: function (data) {
+                            //render flash msg
+                            myGuideCollection.renderFlashMsg('Collection Deleted');
 
-                        //remove element from collection list
-                        $(elementDestoyed).remove();
+                            //remove element from collection list
+                            $(elementDestoyed).remove();
 
-                        //clear collection metadata
-                        myGuideCollection.clearCollectionMetadata();
+                            //clear collection metadata
+                            myGuideCollection.clearCollectionMetadata();
 
-                        //clear form value
-                        myGuideCollection.clearAddFormValues();
+                            //clear form value
+                            myGuideCollection.clearAddFormValues();
 
-                        //clear search results
-                        myGuideCollection.clearSearchResults();
+                            //clear search results
+                            myGuideCollection.clearSearchResults();
 
-                        //clear guide list
-                        myGuideCollection.clearGuideList();
+                            //clear guide list
+                            myGuideCollection.clearGuideList();
 
-                        //hide the guide container viewport container
-                        myGuideCollection.hideGuideCollectionViewportContainer();
-                    }
-                });
+                            //hide the guide container viewport container
+                            myGuideCollection.hideGuideCollectionViewportContainer();
+                        }
+                    });
+                }
             });
         },
 
@@ -276,7 +277,7 @@ function guideCollectionService() {
                         type: "GET",
                         dataType: "json",
                         data: payload,
-                        success: function(data) {
+                        success: function (data) {
                             //console.log(data);
 
                             $.each(data, function (index, obj) {
@@ -298,11 +299,11 @@ function guideCollectionService() {
             $('body').on('click', '#display-guides-btn', function () {
 
                 var collection_id = $(this).parent('li').attr('data-collection_id');
-                var title         = $(this).parent('li').attr('data-label');
-                var description   = $(this).parent('li').attr('data-description');
-                var shortform     = $(this).parent('li').attr('data-shortform');
+                var title = $(this).parent('li').attr('data-label');
+                var description = $(this).parent('li').attr('data-description');
+                var shortform = $(this).parent('li').attr('data-shortform');
 
-                
+
                 //clear/highlight current edit selection
                 var currentEdit = $(this).parent('li');
                 $('#guide-collection-list li').removeClass('edit_current');
@@ -316,8 +317,8 @@ function guideCollectionService() {
                 $('#collection-metadata-editform').find('.collection-metadata-edit-input').val('');
 
                 var payload = {
-                    'action' : 'fetchguides',
-                    'collection_id' : collection_id
+                    'action': 'fetchguides',
+                    'collection_id': collection_id
                 };
 
                 $.ajax({
@@ -325,7 +326,7 @@ function guideCollectionService() {
                     type: "GET",
                     dataType: "json",
                     data: payload,
-                    success: function(data) {
+                    success: function (data) {
 
                         //show guide collection viewport container
                         myGuideCollection.showGuideCollectionViewportContainer();
@@ -352,15 +353,14 @@ function guideCollectionService() {
                         var guides = data.guides;
                         $.each(guides, function (index, obj) {
                             var label = obj.subject;
-                            var item  = obj.collection_subject_id;
+                            var item = obj.collection_subject_id;
                             var subject_id = obj.subject_id;
-                            $('#guide-list').prepend( '<li id="item_' + item + '" ' +
+                            $('#guide-list').prepend('<li id="item_' + item + '" ' +
                                 'data-guide_id="' + subject_id + '">' +
                                 '<i class="fa fa-bars" aria-hidden="true"></i> ' +
-                                label + myGuideCollection.strings.removeGuideBtn + '</li>' );
+                                label + myGuideCollection.strings.removeGuideBtn + '</li>');
 
                         });
-
 
 
                     }
@@ -370,7 +370,7 @@ function guideCollectionService() {
             });
         },
 
-        makeGuidesSortable : function (collection_id) {
+        makeGuidesSortable: function (collection_id) {
 
             $('#guide-list').sortable({
 
@@ -382,7 +382,7 @@ function guideCollectionService() {
                         url: myGuideCollection.settings.collectionActionUrl,
                         type: "POST",
                         data: data,
-                        success: function(data) {
+                        success: function (data) {
                             console.log(data);
                         }
                     });
@@ -398,10 +398,10 @@ function guideCollectionService() {
             $('body').on('click', '.add-guide-btn', function () {
                 var label = $(this).closest('li').text();
                 var collection_id = $('#collection-title').attr('data-collection_id');
-                var subject_id =  $(this).closest('li').attr('data-guide_id');
+                var subject_id = $(this).closest('li').attr('data-guide_id');
                 var payload = {
-                    'action' : 'addguide',
-                    'collection_id' : collection_id,
+                    'action': 'addguide',
+                    'collection_id': collection_id,
                     'subject_id': subject_id
                 };
 
@@ -410,16 +410,16 @@ function guideCollectionService() {
                     type: "POST",
                     dataType: "json",
                     data: payload,
-                    success: function(data) {
+                    success: function (data) {
                         console.log(data);
-                        $('#guide-list').append( '<li id="item_' + data.lastInsertId + '" ' +
+                        $('#guide-list').append('<li id="item_' + data.lastInsertId + '" ' +
                             'data-guide_id="' + subject_id + '">' +
                             '<i class="fa fa-bars" aria-hidden="true"></i> ' +
-                            label + myGuideCollection.strings.removeGuideBtn + '</li>' );
+                            label + myGuideCollection.strings.removeGuideBtn + '</li>');
                     }
                 });
 
-                if( !$(myGuideCollection.settings.sortableGuideList).hasClass('.ui-sortable') ) {
+                if (!$(myGuideCollection.settings.sortableGuideList).hasClass('.ui-sortable')) {
                     myGuideCollection.makeGuidesSortable(collection_id);
                 }
 
@@ -433,8 +433,8 @@ function guideCollectionService() {
                 var listItem = $(this).closest('li');
 
                 var payload = {
-                    'action' : 'removeguide',
-                    'collection_id' : $('#collection-title').attr('data-collection_id'),
+                    'action': 'removeguide',
+                    'collection_id': $('#collection-title').attr('data-collection_id'),
                     'subject_id': $(this).closest('li').attr('data-guide_id')
                 };
 
@@ -445,7 +445,7 @@ function guideCollectionService() {
                     type: "POST",
                     dataType: "json",
                     data: payload,
-                    success: function(data) {
+                    success: function (data) {
                         console.log(data);
                         $(listItem).remove();
 
@@ -459,9 +459,9 @@ function guideCollectionService() {
 
             var isValid = false;
 
-            if( !$('input[name="title"]').val() ) {
+            if (!$('input[name="title"]').val()) {
                 myGuideCollection.errorDialog('#error-dialog-title');
-            } else if ( !$('input[name="shortform"]').val() ) {
+            } else if (!$('input[name="shortform"]').val()) {
                 myGuideCollection.errorDialog('#error-dialog-shortform');
             } else {
                 isValid = true;
@@ -473,8 +473,8 @@ function guideCollectionService() {
         shortformDupeCheck: function (shortform) {
 
             var payload = {
-                'action' : 'validateshortform',
-                'shortform' : shortform,
+                'action': 'validateshortform',
+                'shortform': shortform,
             };
 
 
@@ -510,14 +510,14 @@ function guideCollectionService() {
         },
 
         errorDialog: function (selector) {
-            $( selector ).dialog({
+            $(selector).dialog({
                 resizable: false,
                 height: "auto",
                 width: 400,
                 modal: true,
                 buttons: {
-                    Cancel: function() {
-                        $( this ).dialog( "close" );
+                    Cancel: function () {
+                        $(this).dialog("close");
                     }
                 }
             });
@@ -529,7 +529,7 @@ function guideCollectionService() {
         },
         renderFlashMsg: function (msg) {
             myGuideCollection.clearFlashMsg();
-            $('#flash-msg').append(msg).addClass( 'success-msg' );
+            $('#flash-msg').append(msg).parent().show().delay(5000).fadeOut();
         },
 
         showCollectionMetadataContainer: function () {
