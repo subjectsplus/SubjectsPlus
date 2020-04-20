@@ -77,7 +77,8 @@ class LtiWebService extends WebService implements InterfaceWebService {
        tab_name                  AS 'Course Code',
        link_url                  AS 'Associated Guides',
        link_title                AS 'Research Guide Id',
-       count(tab_name)           AS 'Hits Count'
+       count(tab_name)           AS 'Hits Count',
+       (SELECT IFNULL(GROUP_CONCAT(subject SEPARATOR '*--*'),'') from subject where FIND_IN_SET(subject_id, link_title)) AS 'Associated Guides Title'
 FROM stats";
 
 		foreach ( $lobjParams as $lstrKey => $lobjValues ) {
