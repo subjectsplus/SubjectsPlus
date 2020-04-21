@@ -67,7 +67,7 @@ $upload_box = "<div class=\"box no_overflow\">
 <input type=\"hidden\" name=\"video_id\" value=\"$video_id\" />
         <p>Resize image to 200px wide? <input type=\"checkbox\" name=\"resizeme\" /></p>
         <br />
-<p><input type=\"file\" size=\"32\" name=\"my_field\" value=\"\" /></p>
+<p><input type=\"file\" size=\"32\" accept=\"image/jpeg\" name=\"my_field\" value=\"\" /></p>
 <p class=\"button\"><input type=\"hidden\" name=\"action\" value=\"image\" />
 <input type=\"submit\" name=\"Submit\" value=\"" . ("Upload!") . "\" /></p>
 </div>";
