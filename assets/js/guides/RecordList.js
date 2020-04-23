@@ -66,69 +66,78 @@ var RecordListSortable = (function () {
 
 
 
-    RecordListSortable.prototype.liSortableRecord = function (record) {
+    RecordListSortable.prototype.liSortableRecord = function (recordsArray) {
         var showIconToggle;
         var showDescriptionToggle;
         var showNotesToggle;
-        var title_id = record.recordId;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
-        var rank_id;
         var description_override = '';
+
+        const onlyIds = recordsArray.map((record) => record.recordId);
+        const existingRecordList = this.recordList.recordList;
+        let html = '';
+        const that = this;
 
         $.ajax({
             url: '../records/helpers/subject_databases_helper.php',
             type: "GET",
             dataType: "json",
             data: {
-                'action': 'getDescriptionOverride',
+                'action': 'getDescriptionOverrides',
                 'subject_id': subject_id,
-                'title_id': title_id
+                'record_ids': onlyIds
             },
             async: false,
             success: function (data) {
                 var databases = data.databases;
                 $.each(databases, function (index, obj) {
-                    if (obj.description_override)
-                        description_override = obj.description_override;
-                    rank_id = obj.rank_id;
+                    const title_id = Number(obj.title_id);
+                    const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
+                    const mergedRecord = {...existingRecord, ...obj};
+
+                    if (mergedRecord.description_override) {
+                        description_override = mergedRecord.description_override;
+                    };
+
+                    // I don't know what this </span> tag below is closing, but leaving it in. ¯\_(ツ)_/¯ -Ali
+                    var textArea = `
+                        <textarea class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>
+                        </textarea>
+                        </span>"; 
+                    `;
+                    
+                    if (mergedRecord.rank_id) {
+                        textArea = "<textarea id='description-override-textarea" + mergedRecord.rank_id + "' title_id='"+mergedRecord.title_id+"' subject_id='"+mergedRecord.subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+mergedRecord.description_override+"</textarea>";
+                    };
+        
+                    var descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary' title='Edit description'><i class='fa fa-pencil'></i></button>";
+        
+                    if (mergedRecord.description_override.trim()){
+                        descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary active' title='Edit description'><i class='fa fa-pencil'></i></button>";
+                    }
+        
+                    showIconToggle = (mergedRecord.showIcons === 1) ? that.sortableToggleSpan('show-icons-toggle', true, 'Icons') : that.sortableToggleSpan('show-icons-toggle', false, 'Icons');
+                    showDescriptionToggle = (mergedRecord.showDescription === 1) ? that.sortableToggleSpan('show-description-toggle', true, 'Description') : that.sortableToggleSpan('show-description-toggle', false, 'Description');
+                    showNotesToggle = (mergedRecord.showNote === 1) ? that.sortableToggleSpan('include-note-toggle', true, 'Note') : that.sortableToggleSpan('include-note-toggle', false, 'Note');
+                    
+                    var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + mergedRecord.location + "'  \n " +
+                        "data-record-id='" + mergedRecord.recordId + "' data-title='" + mergedRecord.title + "' data-show-icons='" + mergedRecord.showIcons + "'" +
+                        " data-show-note='" + mergedRecord.showNote + "' data-show-description='" + mergedRecord.showDescription + "'>             " +
+                        "<span class='db-list-label'>" + mergedRecord.title + "</span>  " +
+                        descriptionOverrideButton +
+                        "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
+                        textArea + "</span>" +
+                        "</li>";
+
+                    html += liRecordHtml;
                 });
             }
         });
 
-        var textArea = "<textarea class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'></textarea></span>";
-        if (rank_id){
-            textArea = "<textarea id='description-override-textarea" + rank_id + "' title_id='"+title_id+"' subject_id='"+subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+description_override+"</textarea>";
-        }
-
-        var descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary' title='Edit description'><i class='fa fa-pencil'></i></button>";
-
-        if (description_override.trim()){
-            descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary active' title='Edit description'><i class='fa fa-pencil'></i></button>";
-        }
-
-        (record.showIcons === 1) ? showIconToggle = this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : showIconToggle = this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
-        (record.showDescription === 1) ? showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', true, 'Description') : showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', false, 'Description');
-        (record.showNote === 1) ? showNotesToggle = this.sortableToggleSpan('include-note-toggle', true, 'Note') : showNotesToggle = this.sortableToggleSpan('include-note-toggle', false, 'Note');
-        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + record.location + "'  \n " +
-            "data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'" +
-            " data-show-note='" + record.showNote + "' data-show-description='" + record.showDescription + "'>             " +
-            "<span class='db-list-label'>" + record.title + "</span>  " +
-             descriptionOverrideButton +
-            "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
-             textArea + "</span>" +
-            "</li>";
-        return liRecordHtml;
+        return html;
     };
     RecordListSortable.prototype.liSortableRecordList = function () {
-        var liRecordListHtml = '';
-        for (var i = 0; i < this.recordList.recordList.length; i++) {
-            if (this.recordList.recordList[i] != undefined) {
-                var sortableLi = this.recordList.recordList[i];
-                liRecordListHtml += this.liSortableRecord(sortableLi);
-            }
-        }
-
-        return liRecordListHtml;
+        return this.liSortableRecord(this.recordList.recordList);
     };
     return RecordListSortable;
 }());

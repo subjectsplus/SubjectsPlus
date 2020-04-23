@@ -174,7 +174,7 @@ function subjectDatabaseService() {
                     var hidden = $('#database-list').find("li[title_id='"+clickedRowId+"']").length;
 
                     var payload = {
-                        'action': 'getDescriptionOverride',
+                        'action': 'getDescriptionOverrides',
                         'subject_id': subject_id,
                         'title_id': clickedRowId
                     };

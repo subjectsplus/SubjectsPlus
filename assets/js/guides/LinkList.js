@@ -63,7 +63,7 @@ function LinkList(id,idSelector) {
         if (myRecordList.getList().length > 0) {
 
 
-            saveDescriptionOverride(myRecordList);
+            saveDescriptionOverrides(myRecordList);
 
             var displayList = new RecordListDisplay(myRecordList);
             var descriptionLocation = $('input[name=linkList-text-radio]:checked').val();
@@ -108,7 +108,7 @@ function LinkList(id,idSelector) {
         $('#record-description-container').show();
     });
 
-    function saveDescriptionOverride(myRecordList) {
+    function saveDescriptionOverrides(myRecordList) {
         var recordList = myRecordList.recordList;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
 
@@ -122,7 +122,7 @@ function LinkList(id,idSelector) {
                 dataType: "json",
                 async: false,
                 data: {
-                    'action': 'saveDescriptionOverride',
+                    'action': 'saveDescriptionOverrides',
                     'subject_id': subject_id,
                     'title_id': titleId,
                     'description_override': descriptionOverride
