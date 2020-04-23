@@ -53,6 +53,10 @@ var RecordListSortable = (function () {
         this.recordList = recordList;
     }
     RecordListSortable.prototype.getList = function () {
+
+        // console.error('RecordList.js > getList() called');
+        console.count('\n******************************************* RecordList.js > RecordListSortable.getList() called: ');
+
         var recordListHtml = this.liSortableRecordList();
         return "<ul class=\"db-list-results ui-sortable\" id=\"db-list-results\">" + recordListHtml + "</ul>";
     };
@@ -74,7 +78,6 @@ var RecordListSortable = (function () {
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
         var rank_id;
         var description_override = '';
-        //console.log(record.prefix);
 
         $.ajax({
             url: '../records/helpers/subject_databases_helper.php',
@@ -89,6 +92,9 @@ var RecordListSortable = (function () {
             success: function (data) {
                 var databases = data.databases;
                 $.each(databases, function (index, obj) {
+
+                    console.count('-- Hitting $.each in liSortableRecord: ');
+
                     if (obj.description_override)
                         description_override = obj.description_override;
                     rank_id = obj.rank_id;
@@ -121,13 +127,22 @@ var RecordListSortable = (function () {
         return liRecordHtml;
     };
     RecordListSortable.prototype.liSortableRecordList = function () {
+        const recordsAlreadyFetched = new Set();
+
+        console.count('* RecordList.js > RecordListSortable.liSortableRecordList() called: ');
+
         var liRecordListHtml = '';
         for (var i = 0; i < this.recordList.recordList.length; i++) {
+
+            // console.log('this.recordList: ', this.recordList.recordList);
+            // console.log(this.recordList.recordList[i].recordId);
+
             if (this.recordList.recordList[i] != undefined) {
                 var sortableLi = this.recordList.recordList[i];
                 liRecordListHtml += this.liSortableRecord(sortableLi);
             }
         }
+
         return liRecordListHtml;
     };
     return RecordListSortable;

@@ -155,8 +155,8 @@ function LinkList(id,idSelector) {
     function loadDisplayList(list) {
         // This loads a display list and appends a sortable list
         var existingList = new RecordList();
-        list.each(function (li) {
 
+        list.each(function (li) {
             var existingRecord = new Record({
                 title: $(this).data().title,
                 prefix: $(this).data().prefix,
@@ -165,14 +165,13 @@ function LinkList(id,idSelector) {
                 showDescription : $(this).data().showDescription,
                 showNote : $(this).data().showNote,
                 location : $(this).data().location
-            });
-
+            });            
             existingList.addToList(existingRecord);
-            var existingSortableList = new RecordListSortable(existingList);
-            $('.link-list-draggable').html(existingSortableList.getList());
-            $('.db-list-results').sortable();
         });
 
+        var existingSortableList = new RecordListSortable(existingList);
+        $('.link-list-draggable').html(existingSortableList.getList());
+        $('.db-list-results').sortable();
         myRecordList = existingList;
     }
 
