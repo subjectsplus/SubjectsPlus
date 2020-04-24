@@ -15,12 +15,10 @@ function LinkList(id,idSelector) {
     var myRecordList = new RecordList;
 
     // Autocomplete search
-    $(' .databases-search').keyup(function (data) {
+    $('.databases-search').keyup(function (data) {
         if ($('.databases-search').val().length > 2) {
             databaseSearch();
         }
-
-
     });
     // Rerun the search when the user changes the limit az box
     $('#limit-az').on('change', function () {
@@ -29,25 +27,34 @@ function LinkList(id,idSelector) {
 
     // Add to sortable list when user click the add button
     $('body').on('click', '.add-to-list-button', function () {
+
+        console.log('HITTING .ADD-TO-LIST-BUTTON JQUERY');
+
         // Create a Record object for the listing you clicked on
         var li = $(this).closest('li.database-listing').data();
+
+        console.log({li});
+
         var myRecord = new Record({
-            recordId: li.recordId,
-            title: li.title,
-            prefix: li.prefix,
-            location: li.location,
-            showIcons : li.showIcons,
-            showDescription : li.showDescription,
-            showNote : li.showNote
+            recordId:           li.recordId,
+            title:              li.title,
+            prefix:             li.prefix,
+            location:           li.location,
+            showIcons:          li.showIcons,
+            showDescription:    li.showDescription,
+            showNote:           li.showNote
         });
 
         // Add that record to the main RecordList
         myRecordList.addToList(myRecord);
+
         // Get a sortable list and append it to the draggable link list area
         var sortableList = new RecordListSortable(myRecordList);
+
+        // console.log('sortableList.getList(): ', sortableList.getList() );
+
         $('.link-list-draggable').html(sortableList.getList());
         $('.db-list-results').sortable();
-
     });
 
     // Reset the the html and RecordList instance
@@ -57,12 +64,11 @@ function LinkList(id,idSelector) {
     });
 
     // Create List button
-    $(' .dblist-button').on('click', function () {
+    $('.dblist-button').on('click', function () {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
+
         if (myRecordList.getList().length > 0) {
-
-
             saveDescriptionOverrides(myRecordList);
 
             var displayList = new RecordListDisplay(myRecordList);
@@ -71,7 +77,6 @@ function LinkList(id,idSelector) {
             list.html(displayList.getList());
 
             var description = CKEDITOR.instances['link-list-textarea'].getData();
-            //var description = '';
 
             if (descriptionLocation == "top") {
                 list.prepend("<div class='link-list-text-top'>" + description + "</div>");
@@ -112,24 +117,26 @@ function LinkList(id,idSelector) {
         var recordList = myRecordList.recordList;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
 
-        $.each(recordList, function (index, obj) {
-            var titleId = obj.recordId;
-            var descriptionOverride = $("li[data-record-id='"+obj.recordId+"']").find("textarea").val();
+        const overridesArray = [];
 
-            $.ajax({
-                url: '../records/helpers/subject_databases_helper.php',
-                type: "GET",
-                dataType: "json",
-                async: false,
-                data: {
-                    'action': 'saveDescriptionOverrides',
-                    'subject_id': subject_id,
-                    'title_id': titleId,
-                    'description_override': descriptionOverride
-                }
+        $.each(recordList, function (index, obj) {
+            overridesArray.push({
+                recordId:               obj.recordId,
+                descriptionOverride:    $("li[data-record-id='"+obj.recordId+"']").find("textarea").val()
             });
         });
 
+        $.ajax({
+            url: '../records/helpers/subject_databases_helper.php',
+            type: "GET",
+            dataType: "json",
+            async: false,
+            data: {
+                'action':           'saveDescriptionOverrides',
+                'subject_id':       subject_id,
+                'overrides_array':  overridesArray
+            }
+        });
     }
 
     function databaseSearch() {
@@ -148,9 +155,11 @@ function LinkList(id,idSelector) {
     }
 
     // Load existing list behaviour
-    if ($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li')) {
+    const existingList = $('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li');
+
+    if (existingList) {
         loadDisplayList($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li'));
-    }
+    };
 
     function loadDisplayList(list) {
         // This loads a display list and appends a sortable list
@@ -158,39 +167,44 @@ function LinkList(id,idSelector) {
 
         list.each(function (li) {
             var existingRecord = new Record({
-                title: $(this).data().title,
-                prefix: $(this).data().prefix,
-                recordId : $(this).data().recordId,
-                showIcons : $(this).data().showIcons,
-                showDescription : $(this).data().showDescription,
-                showNote : $(this).data().showNote,
-                location : $(this).data().location
-            });            
+                title:              $(this).data().title,
+                prefix:             $(this).data().prefix,
+                recordId:           $(this).data().recordId,
+                showIcons:          $(this).data().showIcons,
+                showDescription:    $(this).data().showDescription,
+                showNote:           $(this).data().showNote,
+                location:           $(this).data().location
+            });
+
             existingList.addToList(existingRecord);
         });
+        
+        myRecordList = existingList;
+
+        console.warn('--- LinkList.js > loadDisplayList() line 178');
 
         var existingSortableList = new RecordListSortable(existingList);
         $('.link-list-draggable').html(existingSortableList.getList());
         $('.db-list-results').sortable();
-        myRecordList = existingList;
     }
 
     function loadSortableList() {
         myRecordList = new RecordList;
         $('.db-list-item-draggable').each(function (li) {
-            //console.log(li);
             var record = new Record({
-                title: $(this).data().title,
-                prefix: $(this).data().prefix,
-                recordId : $(this).data().recordId,
-                showIcons : $(this).data().showIcons,
-                showDescription : $(this).data().showDescription,
-                showNote : $(this).data().showNote,
-                location : $(this).data().location
+                title:              $(this).data().title,
+                prefix:             $(this).data().prefix,
+                recordId:           $(this).data().recordId,
+                showIcons:          $(this).data().showIcons,
+                showDescription:    $(this).data().showDescription,
+                showNote:           $(this).data().showNote,
+                location:           $(this).data().location
             });
-            myRecordList.addToList(record);
 
+            myRecordList.addToList(record);
         });
+
+        console.warn('--- LinkList.js > loadSortableList() line 201');
     }
 
     function addSearchResultsToPage(data) {
@@ -389,40 +403,55 @@ function LinkList(id,idSelector) {
         // techniques/controls
         if (!document.getElementById('create-record-form').checkValidity()) {
             event.preventDefault();
+            console.error('CREATED RECORD NOT VALID');
         } else {
             event.preventDefault();
 
             // Insert the record object
             createRecord.insertRecord({
-                    "title_id": null,
-                    "title": $('#record-title').val(),
-                    "alternate_title": $('#alternate-title').val(),
-                    "description":  CKEDITOR.instances.description.getData(),
-                    "pre": null,
-                    "last_modified_by": "",
-                    "last_modified": "",
-                    "subjects": [{ 'subject_id': $('#guide-parent-wrap').data().subjectId }],
-                    "locations": [{
-                    "location_id": "",
-                    "format": "1",
-                    "call_number": "",
-                    "location": $('#location').val(),
-                    "access_restrictions": "1",
-                    "eres_display": "N",
-                    "display_note": "",
-                    "helpguide": "",
-                    "citation_guide": "",
-                    "ctags": "",
-                     "record_status": "Active"
-                }]
-            }, function(res){
+                "title_id":             null,
+                "title":                $('#record-title').val(),
+                "alternate_title":      $('#alternate-title').val(),
+                "description":          CKEDITOR.instances.description.getData(),
+                "pre":                  null,
+                "last_modified_by":     "",
+                "last_modified":        "",
+                "subjects": [
+                    {
+                        'subject_id': $('#guide-parent-wrap').data().subjectId
+                    }
+                ],
+                "locations": [
+                    {
+                        "location_id":          "",
+                        "format":               "1",
+                        "call_number":          "",
+                        "location":             $('#location').val(),
+                        "access_restrictions":  "1",
+                        "eres_display":         "N",
+                        "display_note":         "",
+                        "helpguide":            "",
+                        "citation_guide":       "",
+                        "ctags":                "",
+                        "record_status":        "Active"
+                    }
+                ]
+            }, function(res) {
+
+                console.warn('--------------------- res:');
+                console.table(res);
+
                 var record = new Record({
-                    recordId: res.record_id,
-                    title:  res.record.title,
-                    location: res.record.location
+                    recordId:       Number(res.record_id),
+                    title:          res.record.title,
+                    location:       res.record.locations[0]['location'],
+                    description:    res.record.description
                 });
+
                 myRecordList.addToList(record);
+
                 var sortableList = new RecordListSortable(myRecordList);
+
                 $('.link-list-draggable').html(sortableList.getList());
                 $('.db-list-results').sortable();
             });

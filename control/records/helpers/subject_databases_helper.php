@@ -18,10 +18,21 @@ $objDatabases = new SubjectDatabase($db);
 
 if(isset($_REQUEST['action'])) {
     $action = scrubData($_REQUEST['action'], 'text');
+    
     $adding_database = isset($_REQUEST['title_id']);
+    $saving_description_overrides = isset($_REQUEST['overrides_array']);
 
-   if( isset($_REQUEST['subject_id']) ) {
+    if( isset($_REQUEST['subject_id']) ) {
         $subject_id   = scrubData($_REQUEST['subject_id'], 'integer');
+    }
+
+    if ( $saving_description_overrides ) {
+        foreach( $_REQUEST['overrides_array'] as $key=>$value ) {
+            foreach( $value as $field=>$data ) {
+                $string_or_int = ($field === 'recordId') ? 'integer' : 'text';
+                $data = scrubData($data, $string_or_int);
+            };
+        };
     }
 
     if( $adding_database ) {
@@ -32,7 +43,6 @@ if(isset($_REQUEST['action'])) {
     }
 
     if( isset($_REQUEST['record_ids']) ) {
-
         $title_id_array = array();
 
         foreach($_REQUEST['record_ids'] as $key=>$value) {
@@ -74,13 +84,14 @@ if(isset($_REQUEST['action'])) {
             break;
 
         case "saveDescriptionOverrides":
+            foreach($_REQUEST['overrides_array'] as $key=>$value) {
+                $record_id = $value['recordId'];
+                $description_override = $value['descriptionOverride'];
 
-            // print_r($_REQUEST['record_ids']);
-            // die;
-
-            foreach($_REQUEST['record_ids'] as $key=>$value) {
-                $objDatabases->saveDescriptionOverrides($subject_id, $value, $description_override);
+                $objDatabases->saveDescriptionOverrides($subject_id, $record_id, $description_override);
             };
+
+            die;
 
             break;
     }

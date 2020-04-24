@@ -3,6 +3,9 @@ var Record = (function () {
     function Record(settings) {
         this.location = settings.location;
         if (settings.tokenString) {
+
+            console.warn('settings.tokenString is TRUE');
+
             this.tokenString = settings.tokenString;
             //console.log('tokenString: ' + this.tokenString);
             //console.log('prefix: ' + this.prefix);
@@ -17,6 +20,9 @@ var Record = (function () {
             this.showDescription = optionsArray[2];
         }
         else {
+
+            console.warn('settings.tokenString is false');
+
             this.recordId = settings.recordId;
             this.title = settings.title;
             this.prefix = settings.prefix;
@@ -65,16 +71,28 @@ var RecordListSortable = (function () {
     };
 
 
-
+    /**
+     * @description Fetches Records from DB.
+     * @param {RecordList} recordsArray Takes an array of Record objects.
+     */
     RecordListSortable.prototype.liSortableRecord = function (recordsArray) {
+
+        // console.table('recordsArray coming into RecordList.js > liSortableRecord(): ', recordsArray);
+
         var showIconToggle;
         var showDescriptionToggle;
         var showNotesToggle;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
         var description_override = '';
 
+        // Updated subject_databases_helper action will accept array of record IDs as just ints
         const onlyIds = recordsArray.map((record) => record.recordId);
+
+        // Local RecordList + var to track # of elements, in case they're different from DB
+        // (ie. user has added a new item to the RecordList that hasn't yet been saved)
         const existingRecordList = this.recordList.recordList;
+        const existingRecordListLength = existingRecordList.length;
+
         let html = '';
         const that = this;
 
@@ -88,54 +106,75 @@ var RecordListSortable = (function () {
                 'record_ids': onlyIds
             },
             async: false,
-            success: function (data) {
+            success: (data) => {
                 var databases = data.databases;
-                $.each(databases, function (index, obj) {
-                    const title_id = Number(obj.title_id);
-                    const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
-                    const mergedRecord = {...existingRecord, ...obj};
+                const arrayLengthMismatch = (databases.length !== existingRecordListLength);
 
-                    if (mergedRecord.description_override) {
-                        description_override = mergedRecord.description_override;
-                    };
+                if (arrayLengthMismatch) {
+                    for (const item of existingRecordList) {
+                        const itemInBoth = databases.find((dbItem) => {
+                            return Number(dbItem.title_id) === Number(item.recordId);
+                        });
 
-                    // I don't know what this </span> tag below is closing, but leaving it in. ¯\_(ツ)_/¯ -Ali
-                    var textArea = `
-                        <textarea class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>
-                        </textarea>
-                        </span>"; 
-                    `;
-                    
-                    if (mergedRecord.rank_id) {
-                        textArea = "<textarea id='description-override-textarea" + mergedRecord.rank_id + "' title_id='"+mergedRecord.title_id+"' subject_id='"+mergedRecord.subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+mergedRecord.description_override+"</textarea>";
-                    };
-        
-                    var descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary' title='Edit description'><i class='fa fa-pencil'></i></button>";
-        
-                    if (mergedRecord.description_override.trim()){
-                        descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary active' title='Edit description'><i class='fa fa-pencil'></i></button>";
+                        if (!itemInBoth) {
+                            databases.push(item);
+                        };
                     }
-        
-                    showIconToggle = (mergedRecord.showIcons === 1) ? that.sortableToggleSpan('show-icons-toggle', true, 'Icons') : that.sortableToggleSpan('show-icons-toggle', false, 'Icons');
-                    showDescriptionToggle = (mergedRecord.showDescription === 1) ? that.sortableToggleSpan('show-description-toggle', true, 'Description') : that.sortableToggleSpan('show-description-toggle', false, 'Description');
-                    showNotesToggle = (mergedRecord.showNote === 1) ? that.sortableToggleSpan('include-note-toggle', true, 'Note') : that.sortableToggleSpan('include-note-toggle', false, 'Note');
-                    
-                    var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + mergedRecord.location + "'  \n " +
-                        "data-record-id='" + mergedRecord.recordId + "' data-title='" + mergedRecord.title + "' data-show-icons='" + mergedRecord.showIcons + "'" +
-                        " data-show-note='" + mergedRecord.showNote + "' data-show-description='" + mergedRecord.showDescription + "'>             " +
-                        "<span class='db-list-label'>" + mergedRecord.title + "</span>  " +
-                        descriptionOverrideButton +
-                        "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
-                        textArea + "</span>" +
-                        "</li>";
+                };
 
-                    html += liRecordHtml;
+                console.log({ databases, existingRecordList, arrayLengthMismatch }, this );
+
+                $.each(databases, (index, obj) => {
+                    html += that.buildSortableRecordItem(obj, existingRecordList);
                 });
             }
         });
 
         return html;
     };
+
+    RecordListSortable.prototype.buildSortableRecordItem = function( record, existingRecordList ) {        
+        const title_id = Number(record.title_id) | record.recordId;
+        const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
+        const mergedRecord = {...existingRecord, ...record};
+
+        if (mergedRecord.description_override) {
+            description_override = mergedRecord.description_override.trim();
+        };
+
+        // I don't know what this </span> tag below is closing, but leaving it in. ¯\_(ツ)_/¯ -Ali
+        var textArea = `
+            <textarea class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>
+            </textarea>
+            </span>";
+        `;
+        
+        if (mergedRecord.rank_id) {
+            textArea = "<textarea id='description-override-textarea" + mergedRecord.rank_id + "' title_id='"+mergedRecord.title_id+"' subject_id='"+mergedRecord.subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+mergedRecord.description_override+"</textarea>";
+        };
+
+        var descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary' title='Edit description'><i class='fa fa-pencil'></i></button>";
+
+        if (mergedRecord.description_override){
+            descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary active' title='Edit description'><i class='fa fa-pencil'></i></button>";
+        }
+
+        showIconToggle = (mergedRecord.showIcons === 1) ? this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
+        showDescriptionToggle = (mergedRecord.showDescription === 1) ? this.sortableToggleSpan('show-description-toggle', true, 'Description') : this.sortableToggleSpan('show-description-toggle', false, 'Description');
+        showNotesToggle = (mergedRecord.showNote === 1) ? this.sortableToggleSpan('include-note-toggle', true, 'Note') : this.sortableToggleSpan('include-note-toggle', false, 'Note');
+        
+        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + mergedRecord.location + "'  \n " +
+            "data-record-id='" + mergedRecord.recordId + "' data-title='" + mergedRecord.title + "' data-show-icons='" + mergedRecord.showIcons + "'" +
+            " data-show-note='" + mergedRecord.showNote + "' data-show-description='" + mergedRecord.showDescription + "'>             " +
+            "<span class='db-list-label'>" + mergedRecord.title + "</span>  " +
+            descriptionOverrideButton +
+            "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
+            textArea + "</span>" +
+            "</li>";
+
+        return liRecordHtml;
+    };
+
     RecordListSortable.prototype.liSortableRecordList = function () {
         return this.liSortableRecord(this.recordList.recordList);
     };
@@ -143,6 +182,9 @@ var RecordListSortable = (function () {
 }());
 var RecordListDisplay = (function () {
     function RecordListDisplay(recordList) {
+
+        console.table(recordList);
+
         this.recordList = recordList;
     }
     RecordListDisplay.prototype.getList = function () {
@@ -202,13 +244,13 @@ var RecordSearch = (function () {
             "data": { term: searchTerm, collection: collection, limit_results_number: 1 }
         }).done(function (data) {
             callback(data);
-            console.log(data);
+            // console.log(data);
         }).fail(function (data) {
             console.log("Unable to perform search");
         });
     };
     RecordSearch.prototype.searchResultRecord = function (searchResult) {
-        console.log('searchresult: ' + searchResult.prefix);
+        // console.log('searchresult: ' + searchResult.prefix);
         return new Record({ recordId: searchResult.id, title: searchResult.label, prefix: searchResult.prefix, location: searchResult['location_url'] });
     };
     return RecordSearch;

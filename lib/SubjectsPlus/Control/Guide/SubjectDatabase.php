@@ -64,7 +64,7 @@ class SubjectDatabase implements OutputInterface
 
         if ($rank_id) {
             $this->updateDescriptionOverride($rank_id, $description_override);
-        }else{
+        } else {
             $this->insert($title_id, $subject_id, $description_override);
         }
     }
