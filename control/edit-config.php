@@ -216,6 +216,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
+        "kaltura_video_settings" => array(
+            _( "Kaltura Video Settings" ),
+            _( "These settings are used by the Video Pluslet. They are specific for each institution Kaltura's instance" ),
+            "array",
+            "kaltura_video_settings",
+            "large",
+            "",
+            ""
+        ),
+
 		"all_tbtags" => array(
 			_( "Talkback Site Tag" ),
 			_( "These are the tags associated with TalkBack entries. The default is to email all talkbacks to administrator email. Edit only if you want to change that or add a branch." ),

@@ -151,16 +151,18 @@ class Pluslet_HTML5Video extends Pluslet {
         		$kaltura_ref_id = $this->_extra['kaltura'];
         
         	}
-   
-        
+        	$url = $this->_extra['kaltura'];
+//   <iframe src="https://cdnapisec.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/31469421/partner_id/1332041?iframeembed=true&playerId=img_view_container&entry_id=0_cvgnzkez&flashvars[streamerType]=auto" width="560" height="395" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
+//cdnapisec.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/25208101/partner_id/1332041?iframeembed=true&playerId=kplayer&entry_id={$kaltura_ref_id}&flashvars[streamerType]=auto
         	$this->_body .= "<div class='video-container'><div id='kaltura-player'>" .
-        			 
+//        			 https://cdnapisec.kaltura.com/p/601682/sp/60168200/embedIframeJs/uiconf_id/28127352/partner_id/601682
         			"<iframe src=\"//cdnapisec.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/25208101/partner_id/1332041?iframeembed=true&playerId=kplayer&entry_id={$kaltura_ref_id}&flashvars[streamerType]=auto\""
         			. "width='560' height='315' allowfullscreen webkitallowfullscreen mozAllowFullScreen frameborder=\"0\"></iframe>"
         					. "</div></div>";
+        	//<iframe src="https://cdnapisec.kaltura.com/p/1332041/sp/133204100/embedIframeJs/uiconf_id/31469421/partner_id/1332041?iframeembed=true&playerId=img_view_container&entry_id=0_cvgnzkez&flashvars[streamerType]=auto" width="560" height="395" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
         	 
-        }
-        
+        }c
+
         } catch (Exception $e) {
         	
         }

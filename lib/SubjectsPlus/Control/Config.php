@@ -385,6 +385,7 @@ class Config {
 		$section_user                     = "";
 		$section_auth                     = "";
 		$section_video                    = "";
+        $section_kaltura_video_setting    = "";
 		$section_record                   = "";
 		$section_api                      = "";
 		$section_appearance               = "";
@@ -565,6 +566,9 @@ class Config {
 				case "video":
 					$section_video .= $lstrHTML;
 					break;
+                case "kaltura_video_settings":
+                    $section_kaltura_video_setting .= $lstrHTML;
+                    break;
 				case "talkback":
 					$section_talkback .= $lstrHTML;
 					break;
@@ -853,6 +857,14 @@ class Config {
                                 </div>
                                 <div class="pluslet_body">
 			                        <?php print $section_video; ?>
+                                </div>
+                            </div>
+                            <div class="pluslet">
+                                <div class="titlebar">
+                                    <div class="titlebar_text"><?php print _( "Kaltura Pluslet Settings" ); ?></div>
+                                </div>
+                                <div class="pluslet_body">
+                                    <?php print $section_kaltura_video_setting; ?>
                                 </div>
                             </div>
                         </div>
