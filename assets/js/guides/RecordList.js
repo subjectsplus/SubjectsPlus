@@ -4,7 +4,7 @@ var Record = (function () {
         this.location = settings.location;
         if (settings.tokenString) {
 
-            console.warn('settings.tokenString is TRUE');
+            // console.warn('settings.tokenString is TRUE');
 
             this.tokenString = settings.tokenString;
             //console.log('tokenString: ' + this.tokenString);
@@ -21,7 +21,7 @@ var Record = (function () {
         }
         else {
 
-            console.warn('settings.tokenString is false');
+            // console.warn('settings.tokenString is false');
 
             this.recordId = settings.recordId;
             this.title = settings.title;
@@ -64,9 +64,17 @@ var RecordListSortable = (function () {
     };
     RecordListSortable.prototype.sortableToggleSpan = function (toggleClass, active, label) {
         var toggleSpanHtml;
-        var checkIcon;
-        active === true ? checkIcon = "<i class='fa fa-check'></i>" : checkIcon = "<i class='fa fa-minus' ></i> ";
-        toggleSpanHtml = "<span class='" + toggleClass + " db-list-toggle'>" + checkIcon + " " + label + "</span>";
+        var checkIcon = ( active ? 'check' : 'minus' );
+        const checkHtml = `
+            <i class='fa fa-${checkIcon}'></i>
+        `;
+        
+        toggleSpanHtml = `
+            <span class='${toggleClass} db-list-toggle'>
+                ${checkHtml} ${label}
+            </span>
+        `;
+
         return toggleSpanHtml;
     };
 
@@ -79,9 +87,9 @@ var RecordListSortable = (function () {
 
         // console.table('recordsArray coming into RecordList.js > liSortableRecord(): ', recordsArray);
 
-        var showIconToggle;
-        var showDescriptionToggle;
-        var showNotesToggle;
+        // var showIconToggle;
+        // var showDescriptionToggle;
+        // var showNotesToggle;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
         var description_override = '';
 
@@ -138,39 +146,90 @@ var RecordListSortable = (function () {
         const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
         const mergedRecord = {...existingRecord, ...record};
 
+        // console.log({mergedRecord});
+
         if (mergedRecord.description_override) {
             description_override = mergedRecord.description_override.trim();
         };
 
         // I don't know what this </span> tag below is closing, but leaving it in. ¯\_(ツ)_/¯ -Ali
-        var textArea = `
-            <textarea class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>
+        let textArea = `
+            <textarea
+                class='link-list-description-override-textarea'
+                style='clear: both; display: none'
+                rows='4'
+                cols='35'>
             </textarea>
-            </span>";
+            </span>
         `;
         
         if (mergedRecord.rank_id) {
-            textArea = "<textarea id='description-override-textarea" + mergedRecord.rank_id + "' title_id='"+mergedRecord.title_id+"' subject_id='"+mergedRecord.subject_id+"' class='link-list-description-override-textarea' style='clear: both; display: none' rows='4' cols='35'>"+mergedRecord.description_override+"</textarea>";
+            textArea = `
+                <textarea
+                    id='description-override-textarea${mergedRecord.rank_id}'
+                    title_id='${mergedRecord.title_id}'
+                    subject_id='${mergedRecord.subject_id}'
+                    class='link-list-description-override-textarea'
+                    style='clear: both; display: none'
+                    rows='4'
+                    cols='35'>
+                        ${mergedRecord.description_override}
+                </textarea>
+            `;
         };
 
-        var descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary' title='Edit description'><i class='fa fa-pencil'></i></button>";
+        let descriptionOverrideButton = `
+            <button
+                class='db-list-item-description-override pure-button pure-button-secondary'
+                title='Edit description'>
+                    <i class='fa fa-pencil'></i>
+            </button>
+        `;
 
         if (mergedRecord.description_override){
-            descriptionOverrideButton = "<button class='db-list-item-description-override pure-button pure-button-secondary active' title='Edit description'><i class='fa fa-pencil'></i></button>";
-        }
+            descriptionOverrideButton = `
+                <button
+                    class='db-list-item-description-override pure-button pure-button-secondary active'
+                    title='Edit description'>
+                        <i class='fa fa-pencil'></i>
+                </button>
+            `;
+        };
 
-        showIconToggle = (mergedRecord.showIcons === 1) ? this.sortableToggleSpan('show-icons-toggle', true, 'Icons') : this.sortableToggleSpan('show-icons-toggle', false, 'Icons');
-        showDescriptionToggle = (mergedRecord.showDescription === 1) ? this.sortableToggleSpan('show-description-toggle', true, 'Description') : this.sortableToggleSpan('show-description-toggle', false, 'Description');
-        showNotesToggle = (mergedRecord.showNote === 1) ? this.sortableToggleSpan('include-note-toggle', true, 'Note') : this.sortableToggleSpan('include-note-toggle', false, 'Note');
+        const iconToggleBoolean = (mergedRecord.showIcons === 1);
+        const showIconToggle = this.sortableToggleSpan( 'show-icons-toggle', iconToggleBoolean, 'Icons');
+
+        const showDescriptionBoolean = (mergedRecord.showDescription === 1);
+        const showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', showDescriptionBoolean, 'Description');
+
+        const showNotesBoolean = (mergedRecord.showNote === 1);
+        const showNotesToggle = this.sortableToggleSpan('include-note-toggle', showNotesBoolean, 'Note');
+
+        console.log({ showIconToggle, showDescriptionToggle, showNotesToggle });
         
-        var liRecordHtml = "<li class='db-list-item-draggable' data-location='" + mergedRecord.location + "'  \n " +
-            "data-record-id='" + mergedRecord.recordId + "' data-title='" + mergedRecord.title + "' data-show-icons='" + mergedRecord.showIcons + "'" +
-            " data-show-note='" + mergedRecord.showNote + "' data-show-description='" + mergedRecord.showDescription + "'>             " +
-            "<span class='db-list-label'>" + mergedRecord.title + "</span>  " +
-            descriptionOverrideButton +
-            "<button class=\"db-list-remove-item pure-button pure-button-secondary\" title=\"Remove from list\"><i class='fa fa-remove'></i></button>\n <div>" + showIconToggle + showNotesToggle + " " + showDescriptionToggle + " </div> " +
-            textArea + "</span>" +
-            "</li>";
+        const liRecordHtml = `
+            <li
+                class='db-list-item-draggable'
+                data-location='${                   mergedRecord.location}'
+                data-record-id='${                  mergedRecord.recordId}'
+                data-title='${                      mergedRecord.title}'
+                data-show-icons='${                 mergedRecord.showIcons}'
+                data-show-note='${                  mergedRecord.showNote}'
+                data-show-description='${           mergedRecord.showDescription}'>
+                    <span class='db-list-label'>${  mergedRecord.title}</span>
+                    ${descriptionOverrideButton}
+                    <button
+                        class='db-list-remove-item pure-button pure-button-secondary'
+                        title='Remove from list'>
+                            <i class='fa fa-remove'></i>
+                    </button>
+                    <div>
+                        ${showIconToggle} ${showNotesToggle} ${showDescriptionToggle}
+                    </div>
+                    ${textArea}
+                    </span>
+            </li>
+        `;
 
         return liRecordHtml;
     };
