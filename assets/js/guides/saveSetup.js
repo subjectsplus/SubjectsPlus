@@ -471,7 +471,9 @@ function saveSetup() {
             if (test_req === 1) {
                 alert("You must complete all required form fields.");
                 return false;
-            }
+            };
+
+            console.log( $('.link-list') );
 
             // 1. Look for new- or modified-pluslet
             // 2. Check to make sure data is okay
@@ -483,6 +485,9 @@ function saveSetup() {
             // modified-pluslet
             // loop through each pluslet
             // /////////////////
+
+            console.log('modified pluslets: ', $('div[name*=modified-pluslet]'));
+
             $('div[name*=modified-pluslet]').each(
                 function () {
 
@@ -631,6 +636,7 @@ function saveSetup() {
                 }
             });
 
+            // debugger;
 
             //$( "#autosave-spinner" ).hide();
 

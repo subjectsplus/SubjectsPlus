@@ -51,7 +51,7 @@ function section() {
 					$(this).children().find('.sp_section_controls').show();
 					$(this).children().find('.section_remove').hide();
 				} else {
-					console.log("Only one section?");
+					// console.log("Only one section?");
 					//$(this).children().find('.sp_section_controls').hide();
 					//$(this).find('.sp_section').removeClass('section_selected_area');
 
@@ -60,7 +60,7 @@ function section() {
 		},
 		highlightFirstSectionControls : function () {
 			var current_tab_index = $("#tabs").tabs('option', 'active');
-			console.log('current_tab_index section object: ' + current_tab_index);
+			// console.log('current_tab_index section object: ' + current_tab_index);
 
 			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
 			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');

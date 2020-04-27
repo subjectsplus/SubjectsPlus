@@ -6,13 +6,34 @@ function LinkList(id,idSelector) {
 
     activateCKEditors();
 
-
     var myId = id;
 
-    //console.log(myId);
+    // console.log(myId);
 
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
+
+    // Clean up at least some onClick event listeners that were causing problems
+    // e.g. with boolean toggles
+    function cleanUpClickListeners() {
+        const selectorsToCleanUp = [
+            '.show-icons-toggle',
+            '.include-note-toggle',
+            '.show-description-toggle',
+            '.db-list-item-description-override',
+            '.add-to-list-button',
+            '#show-linklist-textarea-btn',
+            '#show-record-description-btn',
+            '.modal-delete',
+            '.close-trigger',
+            '.db-list-remove-item',
+            '#show-broken-record-form-btn'
+        ];
+
+        for (let selector of selectorsToCleanUp) {
+            $('body').off('click', selector);
+        };
+    };
 
     // Autocomplete search
     $('.databases-search').keyup(function (data) {
@@ -64,11 +85,18 @@ function LinkList(id,idSelector) {
     });
 
     // Create List button
-    $('.dblist-button').on('click', function () {
+    $('.dblist-button').on('click', function (event) {
+        event.preventDefault();
+
         var list = $(this).parents().find('.link-list');
         loadSortableList();
 
+        cleanUpClickListeners();
+
         if (myRecordList.getList().length > 0) {
+
+            console.log('--- HITTING .DBLIST-BUTTON CLICK EVENT IN LINKLIST.JS');
+
             saveDescriptionOverrides(myRecordList);
 
             var displayList = new RecordListDisplay(myRecordList);
@@ -77,6 +105,8 @@ function LinkList(id,idSelector) {
             list.html(displayList.getList());
 
             var description = CKEDITOR.instances['link-list-textarea'].getData();
+
+            console.log({ description });
 
             if (descriptionLocation == "top") {
                 list.prepend("<div class='link-list-text-top'>" + description + "</div>");
@@ -87,6 +117,8 @@ function LinkList(id,idSelector) {
             //remove the textarea with the list in the admin view after saving changes
             $('[name="link-list-textarea"]').hide();
 
+            $('#LinkList-body *').off();
+
             saveSetup().saveGuide();
 
         } else {
@@ -96,8 +128,13 @@ function LinkList(id,idSelector) {
 
     // Allows override button to show/hide the description override text area
     $('body').on('click', '.db-list-item-description-override', function (event) {
-        $(this).parent().find('textarea').toggle();
-        event.preventDefault();
+        event.preventDefault();        
+        const descriptionTextarea = $(this).parent().find('textarea');
+        descriptionTextarea.toggle();
+        
+        console.warn('DB-LIST-ITEM ON CLICK FIRED LINE 105 LINKLIST.JS');
+        console.log(descriptionTextarea);
+
         event.stopPropagation();
     });
     
@@ -165,6 +202,8 @@ function LinkList(id,idSelector) {
         // This loads a display list and appends a sortable list
         var existingList = new RecordList();
 
+
+
         list.each(function (li) {
             var existingRecord = new Record({
                 title:              $(this).data().title,
@@ -181,7 +220,7 @@ function LinkList(id,idSelector) {
         
         myRecordList = existingList;
 
-        console.warn('--- LinkList.js > loadDisplayList() line 178');
+        // console.warn('--- LinkList.js > loadDisplayList() line 178');
 
         var existingSortableList = new RecordListSortable(existingList);
         $('.link-list-draggable').html(existingSortableList.getList());
@@ -242,38 +281,55 @@ function LinkList(id,idSelector) {
 
 
     function toggleCheck(attr,context) {
-        //console.log("Checking?");
-        //console.log( context.closest('.db-list-item-draggable'));
-        //console.log(context.closest('.db-list-item-draggable').attr(attr));
+        // console.log("Checking?");
+        // console.log(context.closest('.db-list-item-draggable'));
 
-        if (context.closest('.db-list-item-draggable').attr(attr) == "0") {
-            //console.log("It's zero!");
-            context.closest('.db-list-item-draggable').attr(attr, 1);
-            //console.log(context.closest('.db-list-item-draggable').attr(attr));
+        const attrEnabled = (Number(context.closest('.db-list-item-draggable').attr(attr)) === 1 );
 
-            //console.log(context.children());
-            context.children().removeClass('fa-minus');
-            context.children().addClass('fa-check');
+        console.log({ attrEnabled });
+
+        const options = {
+            enabled: {
+                newAttributeNum: '0',
+                classToRemove: 'fa-check',
+                classToAdd: 'fa-minus'
+            },
+            disabled: {
+                newAttributeNum: '1',
+                classToRemove: 'fa-minus',
+                classToAdd: 'fa-check'
+            }
+        };
+        
+        console.log('starting as:', );
+        console.log(context.closest('.db-list-item-draggable').attr(attr));
+        console.log(typeof context.closest('.db-list-item-draggable').attr(attr));
+
+        if (attrEnabled) {
+            context.closest('.db-list-item-draggable').attr(attr, options.enabled.newAttributeNum);
+            context.children().removeClass(options.enabled.classToRemove);
+            context.children().addClass(options.enabled.classToAdd);
         } else {
-            //console.log("It's one!");
-            context.closest('.db-list-item-draggable').attr(attr, 0);
-            //console.log(context.closest('.db-list-item-draggable').attr(attr));
-
-            //console.log(context.children());
-            context.children().removeClass('fa-check');
-            context.children().addClass('fa-minus');
+            context.closest('.db-list-item-draggable').attr(attr, options.disabled.newAttributeNum);
+            context.children().removeClass(options.disabled.classToRemove);
+            context.children().addClass(options.disabled.classToAdd);
         }
 
-
+        console.log('ending as:');
+        console.log(context.closest('.db-list-item-draggable').attr(attr));
+        console.log(typeof context.closest('.db-list-item-draggable').attr(attr));
     }
 
-    $('body').on('click','.show-icons-toggle',function() {
+    $('body').on('click','.show-icons-toggle',function(event) {
+        event.preventDefault();
         toggleCheck('data-show-icons',$(this));
     });
-    $('body').on('click','.include-note-toggle',function() {
+    $('body').on('click','.include-note-toggle',function(event) {
+        event.preventDefault();
         toggleCheck('data-show-note',$(this));
     });
-    $('body').on('click','.show-description-toggle',function() {
+    $('body').on('click','.show-description-toggle',function(event) {
+        event.preventDefault();
         toggleCheck('data-show-description',$(this));
     });
 
@@ -287,6 +343,7 @@ function LinkList(id,idSelector) {
     });
 
     $('#show_all_desc_input').on('click', function() {
+        console.warn('HITTING #SHOW_ALL_DESC_INPUT ON CLICK');
         toggleCheck('data-show-description',$('.show-description-toggle'));
     });
 
@@ -351,6 +408,9 @@ function LinkList(id,idSelector) {
     // Pseudo-cancel action - if sortable list has items close triggers save otherwise it triggers fake delete
     $('body').on('click', '.close-trigger', function() {
         if($('.db-list-results').length > 0) {
+
+            cleanUpClickListeners();
+
             $('.dblist-button').trigger('click');
         } else {
 
@@ -399,14 +459,13 @@ function LinkList(id,idSelector) {
 
 
     function submitRecordForm(event) {
+        event.preventDefault();
+
         // Override the form submit action. Doing this lets you use the html5 form validation
         // techniques/controls
         if (!document.getElementById('create-record-form').checkValidity()) {
-            event.preventDefault();
             console.error('CREATED RECORD NOT VALID');
         } else {
-            event.preventDefault();
-
             // Insert the record object
             createRecord.insertRecord({
                 "title_id":             null,

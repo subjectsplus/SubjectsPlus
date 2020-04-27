@@ -191,7 +191,7 @@ if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
 
         LinkList();
 
-        console.log('--- HITTING LINE 194 IN LINKLISTEDIT.PHP');
+        // console.log('--- HITTING LINE 194 IN LINKLISTEDIT.PHP');
 
 
         var linkText = $('#link-text').children().html();

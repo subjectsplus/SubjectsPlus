@@ -3,9 +3,6 @@ var Record = (function () {
     function Record(settings) {
         this.location = settings.location;
         if (settings.tokenString) {
-
-            // console.warn('settings.tokenString is TRUE');
-
             this.tokenString = settings.tokenString;
             //console.log('tokenString: ' + this.tokenString);
             //console.log('prefix: ' + this.prefix);
@@ -20,9 +17,6 @@ var Record = (function () {
             this.showDescription = optionsArray[2];
         }
         else {
-
-            // console.warn('settings.tokenString is false');
-
             this.recordId = settings.recordId;
             this.title = settings.title;
             this.prefix = settings.prefix;
@@ -130,7 +124,7 @@ var RecordListSortable = (function () {
                     }
                 };
 
-                console.log({ databases, existingRecordList, arrayLengthMismatch }, this );
+                // console.log({ databases, existingRecordList, arrayLengthMismatch }, this );
 
                 $.each(databases, (index, obj) => {
                     const recordLi = that.buildSortableRecordItem(obj, existingRecordList);
@@ -172,6 +166,8 @@ var RecordListSortable = (function () {
         `;
         
         if (mergedRecord.rank_id) {
+            console.log({mergedRecord});
+
             textArea = `
                 <textarea
                     id='description-override-textarea${mergedRecord.rank_id}'
@@ -180,9 +176,10 @@ var RecordListSortable = (function () {
                     class='link-list-description-override-textarea'
                     style='clear: both; display: none'
                     rows='4'
-                    cols='35'>
-                        ${mergedRecord.description_override}
-                </textarea>
+                    cols='35'>${
+                        mergedRecord.description_override ? 
+                        (mergedRecord.description_override).trim() : ''
+                    }</textarea>
             `;
         };
 
@@ -265,7 +262,11 @@ var RecordListDisplay = (function () {
         var liRecordListHtml = '';
         for (var i = 0; i < this.recordList.recordList.length; i++) {
             if (this.recordList.recordList[i] !== undefined) {
-                liRecordListHtml += this.liDisplayRecord(this.recordList.recordList[i]);
+                const thisLiHtml = this.liDisplayRecord(this.recordList.recordList[i]);
+
+                // console.log({ thisLiHtml });
+
+                liRecordListHtml += thisLiHtml;
             }
         }
         return liRecordListHtml;

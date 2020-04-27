@@ -34,7 +34,7 @@ function analytics() {
 					+ $('#shortform').data().shortform, function(data) {
 
 				if (data.total_views != null) {
-					console.log(data.total_views)
+					// console.log(data.total_views)
 					$('.no-analytics').hide();
 					$('.total-views-count').show();
 					$('.total-views-count').html(data.total_views);

@@ -16,8 +16,6 @@ var createRecord = {
             .done(function(res) {
                 res = JSON.parse(res);
 
-                console.log(res);
-
                 if (res.response !== "error") {
                     notification = "<a target='_blank' href='" + res.response + "'>" + record.title + "</a>";
                     createRecord.insertNotify(notification);

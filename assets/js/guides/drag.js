@@ -219,7 +219,7 @@ function drag() {
 // Make "Save Changes" button appear on sorting
 ////////////////////////////
             var sortable_element = $(lstrSelector);
-            console.log(lstrType);
+            // console.log(lstrType);
 
 
 
