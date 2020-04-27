@@ -8,7 +8,7 @@ function LinkList(id,idSelector) {
 
     var myId = id;
 
-    // console.log(myId);
+    console.log(myId);
 
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
@@ -48,13 +48,10 @@ function LinkList(id,idSelector) {
 
     // Add to sortable list when user click the add button
     $('body').on('click', '.add-to-list-button', function () {
-
-        console.log('HITTING .ADD-TO-LIST-BUTTON JQUERY');
-
         // Create a Record object for the listing you clicked on
         var li = $(this).closest('li.database-listing').data();
 
-        console.log({li});
+        // console.log({li});
 
         var myRecord = new Record({
             recordId:           li.recordId,
@@ -94,9 +91,6 @@ function LinkList(id,idSelector) {
         cleanUpClickListeners();
 
         if (myRecordList.getList().length > 0) {
-
-            console.log('--- HITTING .DBLIST-BUTTON CLICK EVENT IN LINKLIST.JS');
-
             saveDescriptionOverrides(myRecordList);
 
             var displayList = new RecordListDisplay(myRecordList);
@@ -286,8 +280,6 @@ function LinkList(id,idSelector) {
 
         const attrEnabled = (Number(context.closest('.db-list-item-draggable').attr(attr)) === 1 );
 
-        console.log({ attrEnabled });
-
         const options = {
             enabled: {
                 newAttributeNum: '0',
@@ -300,10 +292,6 @@ function LinkList(id,idSelector) {
                 classToAdd: 'fa-check'
             }
         };
-        
-        console.log('starting as:', );
-        console.log(context.closest('.db-list-item-draggable').attr(attr));
-        console.log(typeof context.closest('.db-list-item-draggable').attr(attr));
 
         if (attrEnabled) {
             context.closest('.db-list-item-draggable').attr(attr, options.enabled.newAttributeNum);
@@ -314,10 +302,6 @@ function LinkList(id,idSelector) {
             context.children().removeClass(options.disabled.classToRemove);
             context.children().addClass(options.disabled.classToAdd);
         }
-
-        console.log('ending as:');
-        console.log(context.closest('.db-list-item-draggable').attr(attr));
-        console.log(typeof context.closest('.db-list-item-draggable').attr(attr));
     }
 
     $('body').on('click','.show-icons-toggle',function(event) {
@@ -496,9 +480,6 @@ function LinkList(id,idSelector) {
                     }
                 ]
             }, function(res) {
-                
-                console.log({ res });
-
                 var record = new Record({
                     recordId:       Number(res.record_id),
                     title:          res.record.title,

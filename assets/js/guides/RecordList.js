@@ -166,8 +166,6 @@ var RecordListSortable = (function () {
         `;
         
         if (mergedRecord.rank_id) {
-            console.log({mergedRecord});
-
             textArea = `
                 <textarea
                     id='description-override-textarea${mergedRecord.rank_id}'

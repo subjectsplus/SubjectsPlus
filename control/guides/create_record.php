@@ -40,8 +40,6 @@
         } else {
             e.preventDefault();
 
-            console.log('*** hitting script tag in create_record.php');
-
             record.title =          $('#record-title').val();
             record.description =    $('.cke_editable').val();
             record.pre =            $('#prefix').val();

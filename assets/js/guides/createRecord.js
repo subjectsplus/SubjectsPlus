@@ -9,8 +9,6 @@ var createRecord = {
     insertRecord : function(record, callback) {
         var notification = "";
 
-        console.log({ record, callback });
-
         // Insert the record object
         $.post('../records/insert_record.php', JSON.stringify(record), function (data) {})
             .done(function(res) {

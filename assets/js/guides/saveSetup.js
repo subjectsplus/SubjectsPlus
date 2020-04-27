@@ -473,8 +473,6 @@ function saveSetup() {
                 return false;
             };
 
-            console.log( $('.link-list') );
-
             // 1. Look for new- or modified-pluslet
             // 2. Check to make sure data is okay
             // 3. Save to DB
@@ -485,8 +483,6 @@ function saveSetup() {
             // modified-pluslet
             // loop through each pluslet
             // /////////////////
-
-            console.log('modified pluslets: ', $('div[name*=modified-pluslet]'));
 
             $('div[name*=modified-pluslet]').each(
                 function () {
