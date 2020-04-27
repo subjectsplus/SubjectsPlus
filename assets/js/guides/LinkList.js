@@ -437,9 +437,8 @@ function LinkList(id,idSelector) {
                     }
                 ]
             }, function(res) {
-
-                console.warn('--------------------- res:');
-                console.table(res);
+                
+                console.log({ res });
 
                 var record = new Record({
                     recordId:       Number(res.record_id),

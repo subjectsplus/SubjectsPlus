@@ -18,7 +18,6 @@ $title_json = file_get_contents('php://input');
 $title_array = json_decode($title_json, true);
 $title = TitleFactory::create($title_array);
 
-
 $title_insert_id = $title_db->insertTitle($title);
 
 if (isset($title_insert_id)) {

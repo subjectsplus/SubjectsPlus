@@ -20,6 +20,8 @@
                                                                 class="fa fa-globe fa-2x clickable"></i></span>
         </label>
 
+        <h1>TEST</h1>
+
         <label for="description"><?php echo _('Description'); ?>
             <textarea id="description"></textarea>
         </label>
@@ -38,10 +40,12 @@
         } else {
             e.preventDefault();
 
-            record.title = $('#record-title').val();
-            record.description = $('#description').val();
-            record.pre = $('#prefix').val();
-            location.location = $('#location').val()
+            console.log('*** hitting script tag in create_record.php');
+
+            record.title =          $('#record-title').val();
+            record.description =    $('.cke_editable').val();
+            record.pre =            $('#prefix').val();
+            location.location =     $('#location').val()
             record.locations.push(location);
 
             $.post("<?php echo getControlURL(); ?>/records/insert_record.php", JSON.stringify(record), function (data) {

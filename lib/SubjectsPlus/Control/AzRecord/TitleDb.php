@@ -27,12 +27,11 @@ class TitleDb
     public function insertTitle(Title $title) {
 
         try {
-
-            $title_param = $title->getTitle();
-            $alt_title = $title->getAlternateTitle();
-            $description = $title->getDescription();
-            $pre = $title->getPre();
-            $lastMod = $title->getLastModifiedBy();
+            $title_param =  $title->getTitle();
+            $alt_title =    $title->getAlternateTitle();
+            $description =  $title->getDescription();
+            $pre =          $title->getPre();
+            $lastMod =      $title->getLastModifiedBy();
 
             $this->connection->beginTransaction();
             $statement = $this->connection->prepare("INSERT INTO title (title, alternate_title, description, pre, last_modified_by) VALUES (:title, :alternate_title, :description, :pre, :last_modified_by)");

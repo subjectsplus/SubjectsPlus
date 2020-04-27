@@ -133,7 +133,11 @@ var RecordListSortable = (function () {
                 console.log({ databases, existingRecordList, arrayLengthMismatch }, this );
 
                 $.each(databases, (index, obj) => {
-                    html += that.buildSortableRecordItem(obj, existingRecordList);
+                    const recordLi = that.buildSortableRecordItem(obj, existingRecordList);
+
+                    if (recordLi) {
+                        html += recordLi;
+                    };
                 });
             }
         });
@@ -141,12 +145,16 @@ var RecordListSortable = (function () {
         return html;
     };
 
-    RecordListSortable.prototype.buildSortableRecordItem = function( record, existingRecordList ) {        
+    RecordListSortable.prototype.buildSortableRecordItem = function( record, existingRecordList ) {
         const title_id = Number(record.title_id) | record.recordId;
+
         const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
         const mergedRecord = {...existingRecord, ...record};
 
-        // console.log({mergedRecord});
+        // Return and don't build sortable li because this title is an 'orphan'
+        if (!mergedRecord.title) {
+            return;
+        };
 
         if (mergedRecord.description_override) {
             description_override = mergedRecord.description_override.trim();
@@ -204,8 +212,6 @@ var RecordListSortable = (function () {
 
         const showNotesBoolean = (mergedRecord.showNote === 1);
         const showNotesToggle = this.sortableToggleSpan('include-note-toggle', showNotesBoolean, 'Note');
-
-        console.log({ showIconToggle, showDescriptionToggle, showNotesToggle });
         
         const liRecordHtml = `
             <li
