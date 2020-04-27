@@ -59,13 +59,14 @@ $data = "";
 
 $select = "SELECT lname AS 'Last Name', fname AS 'First Name', tel AS 'Work Phone #', cell_phone AS 'Cell Phone #', home_phone as 'Home Phone',  staff.email AS 'Email',
 emergency_contact_name AS 'Contact Name', emergency_contact_phone AS 'Contact Phone #', emergency_contact_relation AS 'Relationship', name AS 'Department',
-  street_address AS 'Street Address', city as 'City', state AS 'State', zip as 'Zip Code', supervisor_id AS Super_ID, (SELECT lname from staff where staff.staff_id = Super_ID) AS 'Supervisor LName', (SELECT 
-  fname from staff where staff.staff_id = Super_ID) AS 'Supervisor FName'
-  FROM staff, department
-  WHERE active = '1'
-  AND staff.department_id = department.department_id
-  $and
-  ORDER BY lname";
+ street_address AS 'Street Address', city as 'City', state AS 'State', zip as 'Zip Code', supervisor_id AS Super_ID, (SELECT lname from staff where staff.staff_id = Super_ID) AS 'Supervisor LName', (SELECT
+ fname from staff where staff.staff_id = Super_ID) AS 'Supervisor FName'
+ FROM staff, staff_department, department
+ WHERE staff.staff_id = staff_department.staff_id
+ AND staff_department.department_id = department.department_id
+ AND active = '1'
+ $and
+ ORDER BY lname";
 
 $db = new Querier;
 $export = $db->query($select,PDO::FETCH_NUM);

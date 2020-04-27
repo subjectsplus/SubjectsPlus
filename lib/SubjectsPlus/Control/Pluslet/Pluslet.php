@@ -511,13 +511,32 @@ class Pluslet {
                                 $myrow[6] = preg_replace('/(<br \/>)+/', '', $myrow[6]);
                                 // See if it's a web format
                                 if ($myrow[2] == 1) {
-                                    if ($myrow[1] == 1) {
-                                        $url = $myrow[0];
-                                        $rest_icons = "unrestricted";
-                                    } else {
-                                        $url = $proxyURL . $myrow[0];
-                                        $rest_icons = "restricted";
-                                    }
+
+                                	switch ($myrow[1]) {
+
+		                                case 1:
+			                                $url = $myrow[0];
+			                                $rest_icons = "unrestricted";
+			                                break;
+		                                case 2:
+		                                case 3:
+			                                $url = $proxyURL . $myrow[0];
+			                                $rest_icons = "restricted";
+			                                break;
+		                                case 4:
+			                                $url = $myrow[0];
+			                                $rest_icons = "restricted";
+			                                break;
+	                                }
+
+//
+//                                    if ($myrow[1] == 1) {
+//                                        $url = $myrow[0];
+//                                        $rest_icons = "unrestricted";
+//                                    } else {
+//                                        $url = $proxyURL . $myrow[0];
+//                                        $rest_icons = "restricted";
+//                                    }
 
                                     $current_ctags = explode("|", $myrow[3]);
 

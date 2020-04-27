@@ -29,7 +29,7 @@
                         <textarea name="the_suggestion" cols="26" rows="6" class="form-item"
                                   value="<?php print $this_comment; ?>"></textarea><br/><br/>
                         <strong><?php print _( "Your email (optional):" ); ?></strong><br/>
-                        <input type="text" name="name" size="20" value="<?php print $this_name; ?>"
+                        <input type="text" id="suggestion_email" name="suggestion_email" size="20" value="<?php print $this_name; ?>"
                                class="form-item"/>
                         <br/>
 					    <?php print _( "(In case we need to contact you)" ); ?>

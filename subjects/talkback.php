@@ -356,10 +356,10 @@ $recaptcha_response = "";
 if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 	// clean up post variables
-	if ( isset( $_POST["name"] ) ) {
-		$this_name = scrubData( $_POST["name"] );
+	if ( isset( $_POST["email_suggestion"] ) ) {
+		$this_name = scrubData($_POST["email_suggestion"]);
 	} else {
-		$this_name = "Anonymous";
+		$this_name = $administrator_email;
 	}
 
 	if ( isset( $_POST["the_suggestion"] ) ) {
@@ -369,13 +369,19 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	}
 
 
+	if( $this_name == $administrator_email) {
+		$this_comment_from = "Anonymous";
+	} else {
+		$this_comment_from = $this_name;
+	}
+
 	/**
 	 * TalkbackComment object
 	 * @var $newComment
 	 */
 	$newComment = new TalkbackComment();
 	$newComment->setQuestion( $this_comment );
-	$newComment->setQFrom( $this_name );
+	$newComment->setQFrom( $this_comment_from );
 	$newComment->setDateSubmitted( $todaycomputer );
 	$newComment->setDisplay( 'No' );
 	$newComment->setTbtags( $branch_filter );
@@ -390,7 +396,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 	$tpl_name     = 'html_msg';
 	$tpl          = new Template( './views/talkback' );
 	$html_message = $tpl->render( $tpl_name, array(
-		'this_name'    => $this_name,
+		'this_name'    => $this_comment_from,
 		'this_comment' => $this_comment,
 		'datetime'     => date( 'D M j, Y, g:i a' )
 
@@ -421,7 +427,7 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
 
 	$msg = _( "New Comment via Talkback" ) . PHP_EOL;
 	$msg .= "$this_comment" . PHP_EOL;
-	$msg .= _( "From: " ) . $this_name . PHP_EOL;
+	$msg .= _( "From: " ) . $this_comment_from . PHP_EOL;
 	$msg .= _( "Date submitted: " ) . date( 'D M j, Y, g:i a' ) . PHP_EOL;
 	$msg .= _( "Tags: " ) . $set_filter . PHP_EOL;
 
