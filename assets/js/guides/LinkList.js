@@ -125,9 +125,6 @@ function LinkList(id,idSelector) {
         event.preventDefault();        
         const descriptionTextarea = $(this).parent().find('textarea');
         descriptionTextarea.toggle();
-        
-        console.warn('DB-LIST-ITEM ON CLICK FIRED LINE 105 LINKLIST.JS');
-        console.log(descriptionTextarea);
 
         event.stopPropagation();
     });
@@ -196,8 +193,6 @@ function LinkList(id,idSelector) {
         // This loads a display list and appends a sortable list
         var existingList = new RecordList();
 
-
-
         list.each(function (li) {
             var existingRecord = new Record({
                 title:              $(this).data().title,
@@ -213,8 +208,6 @@ function LinkList(id,idSelector) {
         });
         
         myRecordList = existingList;
-
-        // console.warn('--- LinkList.js > loadDisplayList() line 178');
 
         var existingSortableList = new RecordListSortable(existingList);
         $('.link-list-draggable').html(existingSortableList.getList());
@@ -236,8 +229,6 @@ function LinkList(id,idSelector) {
 
             myRecordList.addToList(record);
         });
-
-        console.warn('--- LinkList.js > loadSortableList() line 201');
     }
 
     function addSearchResultsToPage(data) {
@@ -327,7 +318,6 @@ function LinkList(id,idSelector) {
     });
 
     $('#show_all_desc_input').on('click', function() {
-        console.warn('HITTING #SHOW_ALL_DESC_INPUT ON CLICK');
         toggleCheck('data-show-description',$('.show-description-toggle'));
     });
 

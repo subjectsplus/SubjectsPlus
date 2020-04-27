@@ -187,12 +187,8 @@ if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
 
 
     $( document ).ready(function() {
-
-
         LinkList();
-
         var linkText = $('#link-text').children().html();
-
 
         if(CKEDITOR.instances['link-list-textarea']) {
 

@@ -78,12 +78,6 @@ var RecordListSortable = (function () {
      * @param {RecordList} recordsArray Takes an array of Record objects.
      */
     RecordListSortable.prototype.liSortableRecord = function (recordsArray) {
-
-        // console.table('recordsArray coming into RecordList.js > liSortableRecord(): ', recordsArray);
-
-        // var showIconToggle;
-        // var showDescriptionToggle;
-        // var showNotesToggle;
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
         var description_override = '';
 
@@ -123,8 +117,6 @@ var RecordListSortable = (function () {
                         };
                     }
                 };
-
-                // console.log({ databases, existingRecordList, arrayLengthMismatch }, this );
 
                 $.each(databases, (index, obj) => {
                     const recordLi = that.buildSortableRecordItem(obj, existingRecordList);
@@ -242,9 +234,6 @@ var RecordListSortable = (function () {
 }());
 var RecordListDisplay = (function () {
     function RecordListDisplay(recordList) {
-
-        console.table(recordList);
-
         this.recordList = recordList;
     }
     RecordListDisplay.prototype.getList = function () {
