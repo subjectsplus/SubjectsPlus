@@ -157,3 +157,5 @@ nul
 /subjects/themes/um-new/
 
 control/lti_controller/log.txt
+
+lib/HTMLPurifier/HTMLPurifier/DefinitionCache/
