@@ -217,8 +217,8 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 		),
 
         "kaltura_video_settings" => array(
-            _( "Kaltura Video Settings" ),
-            _( "These settings are used by the Video Pluslet. They are specific for each institution Kaltura's instance" ),
+            _( "Partner ID" ),
+            _( "Your Partner ID for Kaltura Player" ),
             "array",
             "kaltura_video_settings",
             "large",
