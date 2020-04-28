@@ -21,7 +21,7 @@ function section() {
 			mySection.clickTabOnSwitch();
 			mySection.clickDeleteSection();
 			mySection.chooseSectionForLayouts();
-			mySection.viewSectionControls();
+			//mySection.viewSectionControls();
 
 		},
 		init: function () {
@@ -30,7 +30,9 @@ function section() {
 				mySection.bindUiActions();
 
 				// Click the first section after everything has loaded.
-			    mySection.highlightFirstSectionControls();
+
+				$('#layout_options_container').hide();
+				$('#select_section_message').show();
 
 		    });
 			
@@ -46,26 +48,39 @@ function section() {
 		},
 		viewSectionControls : function() {
 			$('.sptab').each(function () {
+
+				$(this).children().find('.sp_section_controls').show();
+				$(this).children().find('.section_remove').hide();
+				$(this).children().first().find('.sp_section_controls').trigger('click');
+				$(this).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+				$(this).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+
 				if ($(this).children().size() > 1) {
-					console.log("More than one section?");
-					$(this).children().find('.sp_section_controls').show();
-					$(this).children().find('.section_remove').hide();
+					//console.log("More than one section?");
+
+					//$(this).children().find('.section_remove').hide();
 				} else {
-					console.log("Only one section?");
-					//$(this).children().find('.sp_section_controls').hide();
+					//console.log("Only one section?");
+					$(this).children().find('.sp_section_controls').trigger('click');
+
+					// $(this).children().find('.sp_section_controls .section_sort').addClass('sp_section_selected');
+					// $(this).children().find('.sp_section_controls .section_sort').hide();
+					// $(this).children().find('.sp_section_controls .section_remove').hide();
 					//$(this).find('.sp_section').removeClass('section_selected_area');
+
+
 
 				}
 			});
 		},
 		highlightFirstSectionControls : function () {
 			var current_tab_index = $("#tabs").tabs('option', 'active');
-			console.log('current_tab_index section object: ' + current_tab_index);
+			//console.log('current_tab_index section object: ' + current_tab_index);
 
-			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
-			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
-			$('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
-			$("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+			// $(this).children().first().find('.sp_section_controls').trigger('click');
+			// $(this).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+			// $(this).find('.sp_section_controls').css('display', 'block');
+			//$(this).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
 
 		},
 		makeAddSection : function(lstrSelector) {
@@ -85,11 +100,12 @@ function section() {
 				var newSection = mySection.addNewSection(section_index, layout, tab_id);
 				newSection.then(function(data) {
 					var last_insert_id = data.last_insert;
+					console.log('last insert section id: ' + last_insert_id);
 				});
 				newSection.then(function(data) {
 
 					var selectedTab = $('#tabs').tabs('option', 'active');
-					console.log(data.last_insert);
+					//console.log(data.last_insert);
 
 					// add section block html with new section id
 					var section_id = data.last_insert;
@@ -109,22 +125,41 @@ function section() {
 					$('div#tabs-' + selectedTab)
 					var newSectionBlock = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 					newSectionBlock.trigger('click');
-
 					mySection.viewSectionControls();
+
 				});
 
 			});
 		},
 
 		addNewSection: function(section_index, layout, tab_id) {
-			console.log('section_index: ' + section_index);
-			console.log('layout: ' + layout);
-			console.log('tab_id: ' + tab_id);
+			//console.log('section_index: ' + section_index);
+			//console.log('layout: ' + layout);
+			//console.log('tab_id: ' + tab_id);
+
+			function formatErrorMessage(jqXHR, exception) {
+
+				if (jqXHR.status === 0) {
+					return ('Not connected.\nPlease verify your network connection.');
+				} else if (jqXHR.status == 404) {
+					return ('The requested page not found. [404]');
+				} else if (jqXHR.status == 500) {
+					return ('Internal Server Error [500].');
+				} else if (exception === 'parsererror') {
+					return ('Requested JSON parse failed.');
+				} else if (exception === 'timeout') {
+					return ('Time out error.');
+				} else if (exception === 'abort') {
+					return ('Ajax request aborted.');
+				} else {
+					return ('Uncaught Error.\n' + jqXHR.responseText);
+				}
+			}
 
 			return $.ajax({
 
 				url : mySection.settings.sectionServicePath,
-				type : "GET",
+				type : "POST",
 				data : {
 					section_index: section_index,
 					layout: "4-4-4",
@@ -132,16 +167,26 @@ function section() {
 				},
 				dataType: "json"
 
+			}).success(function (data) {
+				//console.log(data);
+				if(data.last_insert ){
+					console.log("data.last_insert:" + data.last_insert);
+				}else {
+					console.log("Error on query!");
+				}
+			}).fail(function (xhr, err) {
+				var responseTitle= $(xhr.responseText).filter('title').get(0);
+				//console.log($(responseTitle).text() + "\n" + formatErrorMessage(xhr, err) );
+				//console.log('jqXR: ' + JSON.stringify(xhr));
 			}).done(function() {
-				mySection.getTabIds();
-				mySection.getSectionIds();
+				console.log('created new section');
 			});
 
 		},
 
 		addNewSectionHtml: function(section_id) {
 
-			var html = '<div id="section_' + section_id + '" class="sp_section pure-g" data-layout="4-4-4">\n' +
+			var html = '<div id="section_' + section_id + '" class="sp_section pure-g" data-layout="4-4-4" data-section-index="">\n' +
 				'    <div class="sp_section_controls">\n' +
 				'        <i class="fa fa-arrows section_sort" title="Move Section"></i>\n' +
 				'        <i class="fa fa-trash-o section_remove" title="Delete Section" style="display: none;"></i>\n' +
@@ -195,6 +240,9 @@ function section() {
 			 */
 			$('body').on('click','.sp_section_controls', function() {
 				var l = layout();
+
+				$("#select_section_message").hide();
+				$('#layout_options_container').show();
 				
 				// Removes existing highlights and controls
 				$('.sp_section_controls').removeClass('sp_section_selected');
@@ -204,9 +252,19 @@ function section() {
 				$('#layout_options_content').data('selected-section', '');
 
 				// This adds the classes for highlighting
-			 	$(this).toggleClass('sp_section_selected');
-			    $(this).parent().toggleClass('section_selected_area');
-			    $(this).children('.section_remove').show();
+				$(this).toggleClass('sp_section_selected');
+				$(this).parent().toggleClass('section_selected_area');
+
+				// get section count of active tab
+				var sectionCount = mySection.getSectionCount();
+				if(sectionCount > 1) {
+					$(this).children('.section_remove').show();
+				} else {
+					$(this).children('.section_remove').hide();
+				}
+
+
+
 				
 				var selectedSectionId = $(this).parent().attr('id').split('_')[1];
 				//console.log('selectedSectionId: ' + selectedSectionId);
@@ -215,17 +273,21 @@ function section() {
 				l.activateLayoutButtons();
 				// Highlight the layout that is associated with the section. 
 				l.highlightLayout($(this).parent())
-				// Show the initial section. Now you are using sections so you will need the section contorls.
+				// Show the initial section. Now you are using sections so you will need the section controls.
 
 			});
 		},
 
 		clickTabOnSwitch : function () {
 			$('.ui-tabs-nav > li.child-tab').on('click', function() {
-				console.log('tab: ' + $(this).attr('aria-controls'));
+				//console.log('tab: ' + $(this).attr('aria-controls'));
+				console.log('clickTabOnSwitch');
+				$("#select_section_message").css('display', 'block');
+				$('#layout_options_container').css('display', 'none');
+
 				 var tabIndex = $(this).attr('aria-controls').split('-')[1];
-				$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
-				mySection.viewSectionControls();
+				//$('#tabs-' + tabIndex).children().first().find('.sp_section_controls').trigger('click');
+				//mySection.viewSectionControls();
 			});
 		},
 		
@@ -244,7 +306,7 @@ function section() {
 				// check for clone parent pluslets, if they exist this section cannot be deleted.
 				var hasParentClones = mySection.hasParentClones(section_id);
 				hasParentClones.then(function(data) {
-					console.log(data.clone_parents_by_section);
+					//console.log(data.clone_parents_by_section);
 					if(data.clone_parents_by_section.length > 0) {
 						// this section has parent pluslets - do not delete
 						mySection.deleteSectionRejectionDialog();
@@ -268,11 +330,12 @@ function section() {
 				buttons: {
 					Yes: function () {
 						// Remove node
-						console.log('section_id deleteSectionDialog: ' + section_id);
+						//console.log('section_id deleteSectionDialog: ' + section_id);
 						$("#section_" + section_id).remove();
 						//$('#response').show();
 
-						mySection.autoSaveGuide();
+						var mySaveSetup = saveSetup();
+						mySaveSetup.autoSave();
 
 						$(this).dialog('close');
 						return false;
@@ -316,7 +379,7 @@ function section() {
 			var nodes = $('.child-tab');
 			var ids = [];
 			$.each(nodes, function(data) {
-				console.log('tab ids: ' + this.id );
+				//console.log('tab ids: ' + this.id );
 			});
 		},
 
@@ -324,7 +387,7 @@ function section() {
 			var nodes = $('.sp_section');
 			var ids = [];
 			$.each(nodes, function(data) {
-				console.log('section ids: ' + this.id.split('_')[1] );
+				//console.log('section ids: ' + this.id.split('_')[1] );
 			});
 		},
 
@@ -345,6 +408,15 @@ function section() {
 				data: 'section_id=' + section_id,
 				dataType: "json"
 			});
+		},
+
+
+		getSectionCount: function () {
+			$('#tabs').tabs();
+			var activeTab = $('#tabs').tabs('option', 'active');
+			var sectionCount = $('#tabs-' + activeTab).children('.sp_section').size();
+			//console.log('section count: ' + sectionCount);
+			return sectionCount;
 		}
 	};
 

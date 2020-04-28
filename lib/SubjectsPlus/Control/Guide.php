@@ -1150,7 +1150,7 @@ class Guide
         foreach ($all_tabs as $key => $lobjTab) {
             print "<div id=\"tabs-$key\" class=\"sptab\">";
             // get our content
-            $this->dropTabs($key);
+	        $this->dropTabs($key);
             print "</div><!-- close div $key -->"; // close tab div
         }
     }
@@ -1410,7 +1410,32 @@ class Guide
         $this->_debug .= "<p>4. (insert new tab) : $lstrQuery</p>";
         if (!$rscResponse) {
             echo blunDer("We have a problem with the new tab query: $rscResponse");
+        } else {
+
+        	// get last insert id for tab
+	        $last_inserted_tab_id = $db->last_id();
+
+        	// create initial section
+	        $this->createInitialSection($last_inserted_tab_id);
         }
+    }
+
+    function createInitialSection($tab_id) {
+
+	    $db = new Querier;
+	    $connection = $db->getConnection();
+	    $statement = $connection->prepare( "INSERT INTO section (section_index, layout, tab_id)
+			VALUES (:section_index, :layout, :tab_id)" );
+
+	    //default values
+	    $layout = '4-4-4';
+	    $section_index = 0;
+
+	    $statement->bindParam( ":section_index", $section_index );
+	    $statement->bindParam( ":layout", $layout );
+	    $statement->bindParam( ":tab_id", $tab_id );
+
+	    return $statement->execute();
     }
 
     function prepareDisciplines()

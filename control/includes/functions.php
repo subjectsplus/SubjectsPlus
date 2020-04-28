@@ -60,7 +60,6 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 	global $debugger;
 	global $salt;
 
-
 	if ( $shibboleth == true ) {
 
 		$connection = $db->getConnection();
@@ -89,11 +88,12 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 		if ( is_array( $user ) ) {
 
 
-//set session variables
+            //set session variables
 			session_start();
 			session_regenerate_id();
 
-// Create session vars for the basic types
+			//var_dump($user);
+            // Create session vars for the basic types
 			$_SESSION['checkit']      = md5( $user[0][4] ) . $salt;
 			$_SESSION['staff_id']     = $user[0][0];
 			$_SESSION['ok_ip']        = $user[0][1];
@@ -102,7 +102,7 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 			$_SESSION['email']        = $user[0][4];
 			$_SESSION['user_type_id'] = $user[0][5];
 
-// unpack our extra
+            // unpack our extra
 			if ( $user[0][7] != null ) {
 				$jobj            = json_decode( $user[0][7] );
 				$_SESSION['css'] = $jobj->{'css'};
