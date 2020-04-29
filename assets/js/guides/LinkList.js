@@ -178,7 +178,7 @@ function LinkList(id,idSelector) {
     const existingList = $('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li');
 
     if (existingList) {
-        loadDisplayList($('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li'));
+        loadDisplayList(existingList);
     };
 
     function loadDisplayList(list) {
