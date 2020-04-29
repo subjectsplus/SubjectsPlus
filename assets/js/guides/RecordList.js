@@ -179,13 +179,14 @@ var RecordListSortable = (function () {
             `;
         };
 
-        const activeStatusClasses = {
-            0: '',
-            1: ' active'
-        };
+        let overrideClass = '';
 
-        const hasOverride = +(!!record.description_override);
-        const overrideClass = activeStatusClasses[hasOverride];
+        if ( record.description_override ) {
+            // Need 'record.description_override' to end up as a 1 or 0;
+            // "+" coerces to a number, "!!" coerces to boolean
+            const hasOverride = +( !!( (record.description_override).trim() ) );
+            overrideClass = 'active';
+        };
 
         let descriptionOverrideButton = `
             <button
