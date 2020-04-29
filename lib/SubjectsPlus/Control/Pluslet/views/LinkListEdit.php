@@ -79,7 +79,7 @@ if( (isset($this->_linkText)) && (!empty($this->_linkText)) ) {
                 <!--buttons-->
                 <div class="records-sort">
                     <button class="pure-button pure-button-secondary" id="sort-list-alpha-btn">Sort List Alphabetically</button>
-                    <button class="pure-button pure-button-secondary dblist-reset-button">Reset List Box</button>
+                    <button class="pure-button pure-button-secondary dblist-reset-button"><?php echo _('Delete All Items'); ?></button>
                 </div>
 
 

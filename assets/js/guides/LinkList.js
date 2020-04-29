@@ -69,9 +69,9 @@ function LinkList(id,idSelector) {
         $('.db-list-results').sortable();
     });
 
-    // Reset the the html and RecordList instance
-    $(' .dblist-reset-button').on('click', function () {
-        $(this).parents().find('.link-list-draggable').html('');
+    // Reset the list HTML by emptying the <ul> of all <li> items, and re-initialize RecordList instance
+    $('.dblist-reset-button').on('click', function() {
+        $(this).parents().find('.link-list-draggable').find('#db-list-results').html('');
         myRecordList = new RecordList;
     });
 

@@ -4272,8 +4272,8 @@ msgid "Remove Boxes from Current Tab"
 msgstr "أحذف الصناديق من اللسان الحالي"
 
 #: 
-msgid "Reset List Box"
-msgstr "ضفّر صندوق القائمة"
+msgid "Delete All Items"
+msgstr "حذف الكل"
 
 #: 
 msgid "Styles"
