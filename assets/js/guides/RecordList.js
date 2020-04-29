@@ -26,36 +26,45 @@ var Record = (function () {
             settings.showNote === undefined ? this.showNote = 0 : this.showNote = settings.showNote;
             settings.showDescription === undefined ? this.showDescription = 0 : this.showDescription = settings.showDescription;
         }
-    }
+    };
+
     Record.prototype.getRecordToken = function () {
         var displayOptions = "" + this.showIcons + this.showDescription + this.showNote;
         return "{{dab},{" + this.recordId + "},{" + this.title + "},{" + displayOptions + "}}";
     };
     return Record;
 }());
+
 var RecordList = (function () {
     function RecordList() {
         this.recordList = [];
-    }
+    };
+
     RecordList.prototype.addToList = function (record) {
         this.recordList.push(record);
     };
+
     RecordList.prototype.getList = function () {
         return this.recordList;
     };
+
     RecordList.prototype.removeFromList = function (index) {
         this.recordList.splice(index, 1);
     };
+
     return RecordList;
 }());
+
 var RecordListSortable = (function () {
     function RecordListSortable(recordList) {
         this.recordList = recordList;
-    }
+    };
+
     RecordListSortable.prototype.getListHtml = function () {
         var recordListHtml = this.liSortableRecordList();
         return "<ul class=\"db-list-results ui-sortable\" id=\"db-list-results\">" + recordListHtml + "</ul>";
     };
+
     RecordListSortable.prototype.sortableToggleSpan = function (toggleClass, active, label) {
         var toggleSpanHtml;
         var checkIcon = ( active ? 'check' : 'minus' );
@@ -74,8 +83,9 @@ var RecordListSortable = (function () {
 
 
     /**
-     * @description Fetches Records from DB.
+     * @description Fetches description overrides from DB, then builds 'meat' of sortable/draggable RecordList -- ie. all the <li> tags inside the <ul>.
      * @param {RecordList} recordsArray Takes an array of Record objects.
+     * @returns String concatenating all RecordList <li> items.
      */
     RecordListSortable.prototype.liSortableRecord = function (recordsArray) {
         var subject_id = $('#guide-parent-wrap').attr("data-subject-id");
@@ -141,6 +151,8 @@ var RecordListSortable = (function () {
 
         const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
         const mergedRecord = {...existingRecord, ...record};
+
+        console.log({mergedRecord});
 
         // Return and don't build sortable li because this title is an 'orphan'
         if (!mergedRecord.title) {

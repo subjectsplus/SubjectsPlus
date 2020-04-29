@@ -568,7 +568,7 @@ class Pluslet {
 
                                         $override = findDescOverride($subject_id, $fields[1]);
                                         // if they do want to display the description:
-                                        if ($override != "") {
+                                        if (trim($override) != "") {
                                             // show the subject-specific "description_override" if it exists
                                             $description = "<br />" . scrubData($override);
                                         } else {
@@ -625,7 +625,7 @@ class Pluslet {
 
                                         $override = findDescOverride($subject_id, $fields[1]);
                                         // if they do want to display the description:
-                                        if ($override != "") {
+                                        if (trim($override) != "") {
                                             // show the subject-specific "description_override" if it exists
                                             $description = "<br />" . $override;
                                         } else {
