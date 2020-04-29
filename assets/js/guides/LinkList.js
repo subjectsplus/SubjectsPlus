@@ -8,8 +8,6 @@ function LinkList(id,idSelector) {
 
     var myId = id;
 
-    console.log(myId);
-
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
 
@@ -51,8 +49,6 @@ function LinkList(id,idSelector) {
         // Create a Record object for the listing you clicked on
         var li = $(this).closest('li.database-listing').data();
 
-        // console.log({li});
-
         var myRecord = new Record({
             recordId:           li.recordId,
             title:              li.title,
@@ -69,9 +65,7 @@ function LinkList(id,idSelector) {
         // Get a sortable list and append it to the draggable link list area
         var sortableList = new RecordListSortable(myRecordList);
 
-        // console.log('sortableList.getList(): ', sortableList.getList() );
-
-        $('.link-list-draggable').html(sortableList.getList());
+        $('.link-list-draggable').html(sortableList.getListHtml());
         $('.db-list-results').sortable();
     });
 
@@ -88,6 +82,8 @@ function LinkList(id,idSelector) {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
 
+        // Run helper function to clean up the modal's event listeners
+        // (will be re-added when modal is opened / loads again)
         cleanUpClickListeners();
 
         if (myRecordList.getList().length > 0) {
@@ -110,8 +106,6 @@ function LinkList(id,idSelector) {
 
             //remove the textarea with the list in the admin view after saving changes
             $('[name="link-list-textarea"]').hide();
-
-            $('#LinkList-body *').off();
 
             saveSetup().saveGuide();
 
@@ -210,7 +204,7 @@ function LinkList(id,idSelector) {
         myRecordList = existingList;
 
         var existingSortableList = new RecordListSortable(existingList);
-        $('.link-list-draggable').html(existingSortableList.getList());
+        $('.link-list-draggable').html(existingSortableList.getListHtml());
         $('.db-list-results').sortable();
     }
 
@@ -481,7 +475,7 @@ function LinkList(id,idSelector) {
 
                 var sortableList = new RecordListSortable(myRecordList);
 
-                $('.link-list-draggable').html(sortableList.getList());
+                $('.link-list-draggable').html(sortableList.getListHtml());
                 $('.db-list-results').sortable();
             });
 

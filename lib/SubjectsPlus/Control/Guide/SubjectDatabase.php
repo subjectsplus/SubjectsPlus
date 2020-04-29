@@ -138,15 +138,28 @@ FROM rank r, location_title lt, location l, title t
     }
 
     public function getDescriptionOverrides($subject_id, $title_ids) {
-
         $joined_array = join(',', $title_ids);
 
-        $statement = $this->connection->prepare("SELECT description_override, rank_id, title_id, subject_id FROM rank
-                    WHERE subject_id = :subject_id
-                    -- AND title_id IN (:title_ids)"
-        );
-        $statement->bindParam ( ":subject_id", $subject_id );
-        // $statement->bindParam ( ":title_ids", $joined_array );
+        // Below query is not using param binding for IN() condition because incoming array
+        // of Record IDs has already been scrubbed to ensure it consists of only ints
+        $query =
+            "SELECT
+                description_override,
+                rank_id,
+                title_id,
+                subject_id
+            FROM
+                rank
+            WHERE
+                subject_id = :subject_id
+                AND
+                title_id IN ($joined_array)
+                AND
+                description_override != '';
+            ";
+
+        $statement = $this->connection->prepare($query);
+        $statement->bindParam(":subject_id", $subject_id);
 
         $statement->execute();
         $databases = $statement->fetchAll();

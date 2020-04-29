@@ -52,7 +52,7 @@ var RecordListSortable = (function () {
     function RecordListSortable(recordList) {
         this.recordList = recordList;
     }
-    RecordListSortable.prototype.getList = function () {
+    RecordListSortable.prototype.getListHtml = function () {
         var recordListHtml = this.liSortableRecordList();
         return "<ul class=\"db-list-results ui-sortable\" id=\"db-list-results\">" + recordListHtml + "</ul>";
     };
@@ -106,6 +106,9 @@ var RecordListSortable = (function () {
                 var databases = data.databases;
                 const arrayLengthMismatch = (databases.length !== existingRecordListLength);
 
+                console.warn({ arrayLengthMismatch });
+                console.table(databases);
+
                 if (arrayLengthMismatch) {
                     for (const item of existingRecordList) {
                         const itemInBoth = databases.find((dbItem) => {
@@ -113,9 +116,11 @@ var RecordListSortable = (function () {
                         });
 
                         if (!itemInBoth) {
+                            console.warn('ITEM NOT IN BOTH', item);
+
                             databases.push(item);
                         };
-                    }
+                    };
                 };
 
                 $.each(databases, (index, obj) => {
