@@ -116,51 +116,40 @@ var RecordListSortable = (function () {
                 var databases = data.databases;
                 const arrayLengthMismatch = (databases.length !== existingRecordListLength);
 
-                console.warn({ arrayLengthMismatch });
-                console.table(databases);
+                const mergedArray = [];
 
-                if (arrayLengthMismatch) {
-                    for (const item of existingRecordList) {
-                        const itemInBoth = databases.find((dbItem) => {
-                            return Number(dbItem.title_id) === Number(item.recordId);
-                        });
+                for (const item of existingRecordList) {
+                    const itemInBoth = databases.find((dbItem) => {
+                        return Number(dbItem.title_id) === Number(item.recordId);
+                    });
 
-                        if (!itemInBoth) {
-                            console.warn('ITEM NOT IN BOTH', item);
-
-                            databases.push(item);
-                        };
+                    if (itemInBoth) {
+                        mergedArray.push({...itemInBoth, ...item});
+                    } else {
+                        mergedArray.push(item);
                     };
                 };
 
-                $.each(databases, (index, obj) => {
-                    const recordLi = that.buildSortableRecordItem(obj, existingRecordList);
-
+                for (const record of mergedArray) {
+                    const recordLi = that.buildSortableRecordItem(record);
                     if (recordLi) {
                         html += recordLi;
                     };
-                });
+                };
             }
         });
 
         return html;
     };
 
-    RecordListSortable.prototype.buildSortableRecordItem = function( record, existingRecordList ) {
-        const title_id = Number(record.title_id) | record.recordId;
-
-        const existingRecord = existingRecordList.find((record) => record.recordId === title_id);
-        const mergedRecord = {...existingRecord, ...record};
-
-        console.log({mergedRecord});
-
+    RecordListSortable.prototype.buildSortableRecordItem = function(record) {
         // Return and don't build sortable li because this title is an 'orphan'
-        if (!mergedRecord.title) {
+        if (!record.title) {
             return;
         };
 
-        if (mergedRecord.description_override) {
-            description_override = mergedRecord.description_override.trim();
+        if (record.description_override) {
+            description_override = record.description_override.trim();
         };
 
         // I don't know what this </span> tag below is closing, but leaving it in. ¯\_(ツ)_/¯ -Ali
@@ -174,59 +163,57 @@ var RecordListSortable = (function () {
             </span>
         `;
         
-        if (mergedRecord.rank_id) {
+        if (record.rank_id) {
             textArea = `
                 <textarea
-                    id='description-override-textarea${mergedRecord.rank_id}'
-                    title_id='${mergedRecord.title_id}'
-                    subject_id='${mergedRecord.subject_id}'
+                    id='description-override-textarea${record.rank_id}'
+                    title_id='${record.title_id}'
+                    subject_id='${record.subject_id}'
                     class='link-list-description-override-textarea'
                     style='clear: both; display: none'
                     rows='4'
                     cols='35'>${
-                        mergedRecord.description_override ? 
-                        (mergedRecord.description_override).trim() : ''
+                        record.description_override ? 
+                        (record.description_override).trim() : ''
                     }</textarea>
             `;
         };
 
+        const activeStatusClasses = {
+            0: '',
+            1: ' active'
+        };
+
+        const hasOverride = +(!!record.description_override);
+        const overrideClass = activeStatusClasses[hasOverride];
+
         let descriptionOverrideButton = `
             <button
-                class='db-list-item-description-override pure-button pure-button-secondary'
+                class='db-list-item-description-override pure-button pure-button-secondary ${overrideClass}'
                 title='Edit description'>
                     <i class='fa fa-pencil'></i>
             </button>
         `;
 
-        if (mergedRecord.description_override){
-            descriptionOverrideButton = `
-                <button
-                    class='db-list-item-description-override pure-button pure-button-secondary active'
-                    title='Edit description'>
-                        <i class='fa fa-pencil'></i>
-                </button>
-            `;
-        };
-
-        const iconToggleBoolean = (mergedRecord.showIcons === 1);
+        const iconToggleBoolean = (record.showIcons === 1);
         const showIconToggle = this.sortableToggleSpan( 'show-icons-toggle', iconToggleBoolean, 'Icons');
 
-        const showDescriptionBoolean = (mergedRecord.showDescription === 1);
+        const showDescriptionBoolean = (record.showDescription === 1);
         const showDescriptionToggle = this.sortableToggleSpan('show-description-toggle', showDescriptionBoolean, 'Description');
 
-        const showNotesBoolean = (mergedRecord.showNote === 1);
+        const showNotesBoolean = (record.showNote === 1);
         const showNotesToggle = this.sortableToggleSpan('include-note-toggle', showNotesBoolean, 'Note');
         
         const liRecordHtml = `
             <li
                 class='db-list-item-draggable'
-                data-location='${                   mergedRecord.location}'
-                data-record-id='${                  mergedRecord.recordId}'
-                data-title='${                      mergedRecord.title}'
-                data-show-icons='${                 mergedRecord.showIcons}'
-                data-show-note='${                  mergedRecord.showNote}'
-                data-show-description='${           mergedRecord.showDescription}'>
-                    <span class='db-list-label'>${  mergedRecord.title}</span>
+                data-location='${                   record.location}'
+                data-record-id='${                  record.recordId}'
+                data-title='${                      record.title}'
+                data-show-icons='${                 record.showIcons}'
+                data-show-note='${                  record.showNote}'
+                data-show-description='${           record.showDescription}'>
+                    <span class='db-list-label'>${  record.title}</span>
                     ${descriptionOverrideButton}
                     <button
                         class='db-list-remove-item pure-button pure-button-secondary'
@@ -259,20 +246,26 @@ var RecordListDisplay = (function () {
     };
     RecordListDisplay.prototype.liDisplayRecord = function (record) {
         var token = record.getRecordToken();
-        console.log('token: ' + token);
-        return "<li data-location='" + record.location + "' data-record-id='" + record.recordId + "' data-title='" + record.title + "' data-show-icons='" + record.showIcons + "'              data-show-description='" + record.showDescription + "' data-show-note='" + record.showNote + "' data-prefix='" + record.prefix + "'>" + token + "</li>";
+        return `
+            <li
+                data-location='${record.location}'
+                data-record-id='${record.recordId}'
+                data-title='${record.title}'
+                data-show-icons='${record.showIcons}'
+                data-show-description='${record.showDescription}'
+                data-show-note='${record.showNote}'
+                data-prefix='${record.prefix}'>
+                    ${token}
+            </li>`;
     };
     RecordListDisplay.prototype.liDisplayRecordList = function () {
         var liRecordListHtml = '';
         for (var i = 0; i < this.recordList.recordList.length; i++) {
             if (this.recordList.recordList[i] !== undefined) {
                 const thisLiHtml = this.liDisplayRecord(this.recordList.recordList[i]);
-
-                // console.log({ thisLiHtml });
-
                 liRecordListHtml += thisLiHtml;
-            }
-        }
+            };
+        };
         return liRecordListHtml;
     };
     return RecordListDisplay;

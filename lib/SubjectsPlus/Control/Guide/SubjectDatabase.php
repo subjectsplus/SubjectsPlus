@@ -154,8 +154,6 @@ FROM rank r, location_title lt, location l, title t
                 subject_id = :subject_id
                 AND
                 title_id IN ($joined_array)
-                AND
-                description_override != '';
             ";
 
         $statement = $this->connection->prepare($query);

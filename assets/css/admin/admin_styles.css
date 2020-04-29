@@ -1229,7 +1229,7 @@ li.fav-box-item:hover::before {color: #C03957;}
 }
 
 .db-list-item-draggable {
-  width: 98%; 
+  /* width: 98%; */
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 

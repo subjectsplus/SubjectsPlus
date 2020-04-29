@@ -96,8 +96,6 @@ function LinkList(id,idSelector) {
 
             var description = CKEDITOR.instances['link-list-textarea'].getData();
 
-            console.log({ description });
-
             if (descriptionLocation == "top") {
                 list.prepend("<div class='link-list-text-top'>" + description + "</div>");
             } else {
