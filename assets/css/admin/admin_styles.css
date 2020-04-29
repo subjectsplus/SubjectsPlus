@@ -4225,8 +4225,8 @@ Modal Panel
 /* modal container */
 .sp-modal .modal-container {
   width: 90%;
-  height: 750px;
-  overflow: scroll;
+  height: 80vh;
+  overflow: auto;
   position: relative;
   margin: 5% auto;
   padding: 0 0 20px 0;
@@ -4270,10 +4270,6 @@ Modal Panel
 /*///////////////////////////////////////////
 Link List Admin Panel
 ////////////////////////////////////////////*/
-
-#LinkList-body {
-  overflow: auto;
-}
 
 .db-list-input-label, #LinkList-body .modal-subs label {font-size:12px; font-family: "NotoSansBold"; margin: 0 0 10px;}
 
