@@ -216,10 +216,20 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
-        "kaltura_video_settings" => array(
+        "kaltura_video_partner_id" => array(
             _( "Partner ID" ),
             _( "Your Partner ID for Kaltura Player" ),
-            "array",
+            "string",
+            "kaltura_video_settings",
+            "large",
+            "",
+            ""
+        ),
+
+        "kaltura_video_uiconf_id" => array(
+            _( "UI Conf ID" ),
+            _( "Your UI Conf ID for Kaltura Player" ),
+            "string",
             "kaltura_video_settings",
             "large",
             "",

@@ -586,4 +586,10 @@ $enforce_https_upload_url = FALSE;
 $mapbox_access_token = "";
 $mapbox_home_coords = "";
 
+////////////////////////////////////////////
+//Kaltura Player Settings
+////////////////////////////////////////////
+$kaltura_video_partner_id = "";
+$kaltura_video_uiconf_id = "";
+
 ?>
