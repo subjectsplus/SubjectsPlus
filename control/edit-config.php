@@ -223,7 +223,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
             "kaltura_video_settings",
             "large",
             "",
-            ""
+            "You can get the partner id from your Kaltura video url. In the following url, partner_id would be 1234567 https://cdnapisec.kaltura.com/index.php/extwidget/preview/partner_id/1234567/uiconf_id/8910111/entry_id/0_abcedfg/embed/dynamic."
         ),
 
         "kaltura_video_uiconf_id" => array(
@@ -233,7 +233,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
             "kaltura_video_settings",
             "large",
             "",
-            ""
+            "You can get the uiconf id from your Kaltura video url. In the following url, uiconf_id would be 8910111 https://cdnapisec.kaltura.com/index.php/extwidget/preview/partner_id/1234567/uiconf_id/8910111/entry_id/0_abcedfg/embed/dynamic."
         ),
 
 		"all_tbtags" => array(
