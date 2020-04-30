@@ -1,13 +1,9 @@
 function LinkList(id,idSelector) {
-
     $('#save_guide').hide();
-
     hideLinkListTextareas();
-
     activateCKEditors();
 
     var myId = id;
-
     var recordSearch = new RecordSearch;
     var myRecordList = new RecordList;
 
@@ -123,9 +119,7 @@ function LinkList(id,idSelector) {
     
     //show textareas
     $('body').on('click', '#show-linklist-textarea-btn', function() {
-
         $('#link-list-textarea-container').show();
-
     });
 
     $('body').on('click', '#show-record-description-btn', function(event) {
@@ -227,7 +221,6 @@ function LinkList(id,idSelector) {
         var searchResults = new RecordList;
         $.each(data, function (index) {
             var resultRecord = recordSearch.searchResultRecord(data[index]);
-            //console.log(resultRecord);
             searchResults.addToList(resultRecord);
         });
 
@@ -236,43 +229,32 @@ function LinkList(id,idSelector) {
         element.innerHTML = searchResultsDisplay.getList(myId);
     }
 
-
     // CKEditor
     function activateCKEditors() {
-
         // (not loaded yet, your code to load it)
         CKEDITOR.replace('description', {
             toolbar: 'TextFormat'
         });
-
     }
-
-
-
 
     function hideLinkListTextareas() {
         $('#link-list-textarea-container').hide();
         $('#record-description-container').hide();
     }
 
-
-
-    function toggleCheck(attr,context) {
-        // console.log("Checking?");
-        // console.log(context.closest('.db-list-item-draggable'));
-
+    function toggleCheck(attr, context) {
         const attrEnabled = (Number(context.closest('.db-list-item-draggable').attr(attr)) === 1 );
 
         const options = {
             enabled: {
-                newAttributeNum: '0',
-                classToRemove: 'fa-check',
-                classToAdd: 'fa-minus'
+                newAttributeNum:    '0',
+                classToRemove:      'fa-check',
+                classToAdd:         'fa-minus'
             },
             disabled: {
-                newAttributeNum: '1',
-                classToRemove: 'fa-minus',
-                classToAdd: 'fa-check'
+                newAttributeNum:    '1',
+                classToRemove:      'fa-minus',
+                classToAdd:         'fa-check'
             }
         };
 
@@ -284,18 +266,21 @@ function LinkList(id,idSelector) {
             context.closest('.db-list-item-draggable').attr(attr, options.disabled.newAttributeNum);
             context.children().removeClass(options.disabled.classToRemove);
             context.children().addClass(options.disabled.classToAdd);
-        }
-    }
+        };
+    };
 
-    $('body').on('click','.show-icons-toggle',function(event) {
+    // Icon, Note, and Description toggle event bindings
+    $('body').on('click', '.show-icons-toggle', function(event) {
         event.preventDefault();
         toggleCheck('data-show-icons',$(this));
     });
-    $('body').on('click','.include-note-toggle',function(event) {
+
+    $('body').on('click', '.include-note-toggle', function(event) {
         event.preventDefault();
         toggleCheck('data-show-note',$(this));
     });
-    $('body').on('click','.show-description-toggle',function(event) {
+
+    $('body').on('click', '.show-description-toggle', function(event) {
         event.preventDefault();
         toggleCheck('data-show-description',$(this));
     });
@@ -313,52 +298,45 @@ function LinkList(id,idSelector) {
         toggleCheck('data-show-description',$('.show-description-toggle'));
     });
 
-
-    
     //hide delete button if no items exist
     if($('.db-list-results').length > 0) {
         $('#delete-linklist-btn').show();
     } else {
         $('#delete-linklist-btn').hide();
-    }
-    
+    }    
 
     //delete a saved LinkList
     $('body').on('click', '.modal-delete', function() {
-
         var elementDeletion = $(this).closest('div[name="modified-pluslet-LinkList"]');
-
         var thisPlusletId = $(this).closest('div[name="modified-pluslet-LinkList"]').attr('id').split('-')[1];
-        //console.log(thisPlusletId);
 
         var g = guide();
         var subjectId = g.getSubjectId();
 
-
         $('<div class=\'delete_confirm\' title=\'Are you sure?\'></div>').dialog({
-            autoOpen: true,
-            modal: false,
-            width: 'auto',
-            height: 'auto',
-            resizable: false,
-            dialogClass: 'topindex',
+            autoOpen:       true,
+            modal:          false,
+            width:          'auto',
+            height:         'auto',
+            resizable:      false,
+            dialogClass:    'topindex',
             buttons: {
                 'Yes': function() {
                     // Delete pluslet from database
                     $('#response').load('helpers/guide_data.php', {
-                            delete_id: thisPlusletId,
-                            subject_id: subjectId,
-                            flag: 'delete'
-                        },
-                        function() {
-                            $('textarea[name="link-list-textarea"]').hide();
-                            $('#response').fadeIn().delay(4000).fadeOut();;
-                            $( '.delete_confirm' ).dialog( 'close' );
-                        });
+                        delete_id: thisPlusletId,
+                        subject_id: subjectId,
+                        flag: 'delete'
+                    },
+                    function() {
+                        $('textarea[name="link-list-textarea"]').hide();
+                        $('#response').fadeIn().delay(4000).fadeOut();;
+                        $('.delete_confirm' ).dialog('close');
+                    });
 
                     // Remove node
                     $(elementDeletion).remove();
-                    $( this ).dialog( 'close' );
+                    $(this).dialog('close');
                     return false;
                 },
                 Cancel: function() {
@@ -366,20 +344,17 @@ function LinkList(id,idSelector) {
                 }
             }
         });
-        return false;
 
+        return false;
     });
 
 
     // Pseudo-cancel action - if sortable list has items close triggers save otherwise it triggers fake delete
     $('body').on('click', '.close-trigger', function() {
         if($('.db-list-results').length > 0) {
-
             cleanUpClickListeners();
-
             $('.dblist-button').trigger('click');
         } else {
-
             var newList = $(this).closest('div[name="new-pluslet-LinkList"]');
             var modifiedList = $(this).closest('div[name="modified-pluslet-LinkList"]');
 
@@ -389,40 +364,31 @@ function LinkList(id,idSelector) {
                 newList.remove();
             } else if (modifiedList.length > 0) {
                 $('.dblist-button').trigger('click');
-            }
-
-        }
+            };
+        };
     });
-
-
 
     // Triggered by X on sortable list
     $('body').on('click','.db-list-remove-item', function() {
-        //console.log('clicked');
         var recordId= $(this).closest('li.db-list-item-draggable').data().recordId;
 
         for (var i=0;i<myRecordList.recordList.length;i++) {
             var record = myRecordList.recordList[i];
             if (record.recordId === recordId) {
                 myRecordList.removeFromList(i);
-            }
-        }
+            };
+        };
 
         $(this).closest('li.db-list-item-draggable').remove();
-
     });
 
-
-
     // Record submission
-
     $('#create-record-form').on('submit', function (event) {
         submitRecordForm(event);
     });
     $('#checkurl').on('click', function () {
         checkUrl();
     });
-
 
     function submitRecordForm(event) {
         event.preventDefault();
@@ -470,7 +436,6 @@ function LinkList(id,idSelector) {
                 });
 
                 myRecordList.addToList(record);
-
                 var sortableList = new RecordListSortable(myRecordList);
 
                 $('.link-list-draggable').html(sortableList.getListHtml());
@@ -481,9 +446,8 @@ function LinkList(id,idSelector) {
             document.getElementById('create-record-form').reset();
             // Reset the CKEditor description content
             CKEDITOR.instances.description.setData("");
-
-        }
-    }
+        };
+    };
 
     function checkUrl() {
         var location = $('#location').val();
@@ -494,10 +458,9 @@ function LinkList(id,idSelector) {
         }, function (data) {
             $('#checkurl').html(data);
         });
-    }
+    };
 
     $('body').on('click', '#show-broken-record-form-btn', function() {
         $('#report-broken-record-container').show();
     });
-
-}
+};

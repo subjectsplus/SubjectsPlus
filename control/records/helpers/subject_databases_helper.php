@@ -55,7 +55,7 @@ if(isset($_REQUEST['action'])) {
     }
 
     if(isset($_REQUEST['description_override'])) {
-        $description_override = scrubData($_REQUEST['description_override']);
+        $description_override = scrubData($_REQUEST['description_override'], 'text');
     }
 
     if(isset($_REQUEST['rank_id'])) {
@@ -90,9 +90,6 @@ if(isset($_REQUEST['action'])) {
 
                 $objDatabases->saveDescriptionOverrides($subject_id, $record_id, $description_override);
             };
-
-            die;
-
             break;
     }
 } else {
