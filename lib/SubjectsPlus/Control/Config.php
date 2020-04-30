@@ -861,7 +861,7 @@ class Config {
                             </div>
                             <div class="pluslet">
                                 <div class="titlebar">
-                                    <div class="titlebar_text"><?php print _( "Kaltura Pluslet Settings" ); ?></div>
+                                    <div class="titlebar_text"><?php print _( "Video Pluslet - Kaltura Settings" ); ?></div>
                                 </div>
                                 <div class="pluslet_body">
                                     <?php print $section_kaltura_video_setting; ?>
