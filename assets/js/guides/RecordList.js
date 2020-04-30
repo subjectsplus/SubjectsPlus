@@ -1,6 +1,8 @@
 /// <reference path="scripts/typings/jquery/jquery.d.ts" />
 var Record = (function () {
     function Record(settings) {
+        console.log(this);
+
         this.location = settings.location;
         if (settings.tokenString) {
             this.tokenString = settings.tokenString;
@@ -25,12 +27,14 @@ var Record = (function () {
             settings.showIcons === undefined ? this.showIcons = 0 : this.showIcons = settings.showIcons;
             settings.showNote === undefined ? this.showNote = 0 : this.showNote = settings.showNote;
             settings.showDescription === undefined ? this.showDescription = 0 : this.showDescription = settings.showDescription;
-        }
+        };
     };
 
     Record.prototype.getRecordToken = function () {
         var displayOptions = "" + this.showIcons + this.showDescription + this.showNote;
-        return "{{dab},{" + this.recordId + "},{" + this.title + "},{" + displayOptions + "}}";
+        const assembledToken = `{{dab},{${this.recordId}},{${this.title}},{${displayOptions}}}`;
+
+        return assembledToken;
     };
     return Record;
 }());
@@ -133,6 +137,9 @@ var RecordListSortable = (function () {
                 for (const record of mergedArray) {
                     const recordLi = that.buildSortableRecordItem(record);
                     if (recordLi) {
+
+                        // console.log(recordLi);
+
                         html += recordLi;
                     };
                 };
@@ -208,12 +215,12 @@ var RecordListSortable = (function () {
         const liRecordHtml = `
             <li
                 class='db-list-item-draggable'
-                data-location='${                   record.location}'
-                data-record-id='${                  record.recordId}'
-                data-title='${                      record.title}'
-                data-show-icons='${                 record.showIcons}'
-                data-show-note='${                  record.showNote}'
-                data-show-description='${           record.showDescription}'>
+                data-location="${                   record.location}"
+                data-record-id="${                  record.recordId}"
+                data-title="${                      record.title}"
+                data-show-icons="${                 record.showIcons}"
+                data-show-note="${                  record.showNote}"
+                data-show-description="${           record.showDescription}">
                     <span class='db-list-label'>${  record.title}</span>
                     ${descriptionOverrideButton}
                     <button
@@ -228,6 +235,8 @@ var RecordListSortable = (function () {
                     </span>
             </li>
         `;
+
+        // console.log(record);
 
         return liRecordHtml;
     };
@@ -249,13 +258,13 @@ var RecordListDisplay = (function () {
         var token = record.getRecordToken();
         return `
             <li
-                data-location='${record.location}'
-                data-record-id='${record.recordId}'
-                data-title='${record.title}'
-                data-show-icons='${record.showIcons}'
-                data-show-description='${record.showDescription}'
-                data-show-note='${record.showNote}'
-                data-prefix='${record.prefix}'>
+                data-location="${           record.location}"
+                data-record-id="${          record.recordId}"
+                data-title="${              record.title}"
+                data-show-icons="${         record.showIcons}"
+                data-show-description="${   record.showDescription}"
+                data-show-note="${          record.showNote}"
+                data-prefix="${             record.prefix}">
                     ${token}
             </li>`;
     };

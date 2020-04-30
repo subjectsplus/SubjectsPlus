@@ -82,11 +82,11 @@ function LinkList(id,idSelector) {
         var list = $(this).parents().find('.link-list');
         loadSortableList();
 
-        // Run helper function to clean up the modal's event listeners
-        // (will be re-added when modal is opened / loads again)
-        cleanUpClickListeners();
-
         if (myRecordList.getList().length > 0) {
+            // Run helper function to clean up the modal's event listeners
+            // (will be re-added when modal is opened / loads again)
+            cleanUpClickListeners();
+
             saveDescriptionOverrides(myRecordList);
 
             var displayList = new RecordListDisplay(myRecordList);
@@ -175,10 +175,10 @@ function LinkList(id,idSelector) {
     }
 
     // Load existing list behaviour
-    const existingList = $('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li');
+    const allLisInPlusletBody = $('#LinkList-body').siblings().find('li').parents('ul.link-list-display').find('li');
 
-    if (existingList) {
-        loadDisplayList(existingList);
+    if (allLisInPlusletBody) {
+        loadDisplayList(allLisInPlusletBody);
     };
 
     function loadDisplayList(list) {
