@@ -11,7 +11,8 @@ function saveSetup() {
 
         settings: {
             fetchTabIdsUrl: "helpers/fetch_tab_ids.php?",
-            fetchSectionIdsUrl: "helpers/fetch_section_ids_by_subject_id.php?",
+            fetchSectionIdsUrl: "helpers/fetch_section_ids_by_subject_id.php?"
+
 
         },
         strings: {},
@@ -33,8 +34,11 @@ function saveSetup() {
         },
         init: function () {
             mySaveSetup.setupSaveButton('#save_guide');
+        },
 
-
+        autoSave: function() {
+            mySaveSetup.saveGuide();
+            console.log('autosave Called');
         },
 
         setupSaveButton: function (lstrSelector) {
@@ -48,14 +52,9 @@ function saveSetup() {
                     'click',
                     lstrSelector,
                     function (event) {
-
-
                         mySaveSetup.saveGuide();
-
                         return false;
-
                     });
-
         },
         checkRequired: function () {
             // If a required field is empty, set req_field to 1, and change the
@@ -459,7 +458,7 @@ function saveSetup() {
         saveGuide: function () {
 
             $("#autosave-spinner").show();
-            console.log('saveGuide start');
+            //console.log('saveGuide start');
 
             var staff_id = $('#guide-parent-wrap').data.staffId;
             var subject_id = $('#guide-parent-wrap').data.SubjectId;
@@ -577,35 +576,18 @@ function saveSetup() {
             });
 
             lstrTabs = JSON.stringify(lobjTabs);
-            //console.log(lstrTabs);
-            //mySaveSetup.getTabIds();
-            //mySaveSetup.getSectionIds();
             $("#response").load("helpers/save_guide.php", {
                     this_subject_id: $('#guide-parent-wrap').data().subjectId,
                     user_name: $('#guide-parent-wrap').data().staffId,
                     tabs: lstrTabs
-                },
-                function () {
+                }, function (response, status) {
 
-
-                    mySaveSetup.refreshFeeds();
-
-                    var g = guide();
-
-                    favoriteBox().getUserFavoriteBoxes(g.getStaffId());
-                    favoriteBox().markAsFavorite();
-                    copyClone().markAsLinked();
-                    mySaveSetup.updateTabIds();
-                    mySaveSetup.updateSectionIds();
-
-                    var myTabs = tabs();
-                    myTabs.fetchTabsFlyout();
-
-
-
+                    if (status == "success"){
+                        // update tab and section ids with data from db
+                        var myGuideData = guideData();
+                        myGuideData.bindNewIds();
+                    }
                 });
-
-
 
             var containers = $(".booklist-content");
             $.each(containers, function () {
@@ -634,122 +616,8 @@ function saveSetup() {
 
             // debugger;
 
-            //$( "#autosave-spinner" ).hide();
-
         },
 
-
-        getTabIds: function() {
-
-            // var g = guide();
-            // var subjectId = g.getSubjectId();
-            //
-            // console.log('subject_id:' + subjectId);
-
-            var nodes = $('.child-tab');
-            console.log(nodes);
-
-            var ids = [];
-            $.each(nodes, function(data) {
-                console.log('tab ids: ' + this.id );
-            });
-
-        },
-
-        getSectionIds: function() {
-
-            var nodes = $('.sp_section');
-            //console.log(nodes);
-
-            var ids = [];
-            $.each(nodes, function(data) {
-                console.log('section ids: ' + this.id.split('_')[1] );
-            });
-        },
-
-        updateTabIds: function () {
-
-            var g = guide();
-            var subjectId = g.getSubjectId();
-
-            var payload = {
-                'subject_id': subjectId,
-            };
-
-            $.ajax({
-                url: mySaveSetup.settings.fetchTabIdsUrl,
-                type: "GET",
-                data: payload,
-                dataType: "json",
-                success: function (data) {
-                    //console.log(data);
-                    var newIds = [];
-                    $.each(data.tab_ids, function (index, value) {
-                        newIds.push(value.tab_id);
-                    });
-
-                    $(newIds).map(function (index, value) {
-                    });
-
-                    var items = $('#tabs > ul li');
-                    $.each(items, function (index, obj) {
-                        if ($.isNumeric($(obj).attr('id'))) {
-                            var newId = $(newIds).get(index - 1);
-                            //console.log( $(obj).attr('id', newId) );
-                        }
-                    });
-
-                    //mySaveSetup.getTabIds();
-
-                }
-            });
-
-        },
-
-        updateSectionIds: function() {
-
-            var g = guide();
-            var subjectId = g.getSubjectId();
-
-            var payload = {
-                'subject_id': subjectId,
-            };
-
-
-
-            $.ajax({
-                url: mySaveSetup.settings.fetchSectionIdsUrl,
-                type: "GET",
-                data: payload,
-                dataType: "json",
-                success: function (data) {
-                    //console.log(data);
-                    var newIds = [];
-                    $.each(data.section_ids, function (index, value) {
-                        newIds.push(value.section_id);
-                    });
-
-                    $(newIds).map(function (index, value) {
-                    });
-
-                    //console.log($(newIds));
-
-                    var items = $('.sp_section');
-                    $.each(items, function (index, obj) {
-                        //console.log('index: ' + index + ' obj: ' + $(obj).attr('id'));
-                        var newId = "section_" + $(newIds).get(index);
-                        //console.log( $(obj).attr('id', newId) );
-
-                    });
-
-                    //mySaveSetup.getSectionIds();
-                }
-            }).done(function () {
-                console.log('updateSectionIds stop');
-                $( "#autosave-spinner" ).hide();
-            });
-
-        },
 
         refreshFeeds: function () {
             /////////////////////
