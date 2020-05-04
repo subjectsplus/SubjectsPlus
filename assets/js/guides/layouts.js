@@ -39,6 +39,7 @@ function layout() {
 				myLayout.bindUiActions();
 				myLayout.activateLayoutButtons();
 				myLayout.highlightLayout($('.sp_section'));
+
 			});
 
 		},
@@ -239,11 +240,7 @@ function layout() {
 					$(this).addClass('active-layout-icon');
 
 					myLayout.layoutSection(selectedSection,$(this).data().layout);
-				    //$("#save_guide").fadeIn();
-					//var save = saveSetup();
-					//save.saveGuide();
-					//$('#save_guide').fadeOut();
-					//myLayout.updateSectionLayout();
+
 			    });
 			}
 		},
@@ -253,13 +250,6 @@ function layout() {
 			$('.layout-icon').on('click', function () {
 
 				$('#autosave-spinner').show();
-
-				//sp_section_selected
-				//section_selected_area
-
-
-
-
 
 				var section_id = $(".section_selected_area").attr('id').split('section_')[1];
 				var layout_id = "#" + $(".active-layout-icon").attr('id');
@@ -276,14 +266,21 @@ function layout() {
 							url: myLayout.settings.updateSectionLayoutUrl,
 							type: "GET",
 							data: payload,
+						}).then(function (data) {
+							// var mySaveSetup = saveSetup();
+							// mySaveSetup.bindNewIds();
+							return data;
 						}).always(function () {
-							$("#section_" + section_id).attr('data-layout', layout);
-							$('#autosave-spinner').hide();
+								$("#section_" + section_id).attr('data-layout', layout);
+								$('#autosave-spinner').hide();
 						});
+
 					}
 				}
 			});
-		}
+		},
+
+
 
 	};
 	return myLayout;

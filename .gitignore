@@ -75,6 +75,7 @@ subjects/includes/pgcache/*
 /assets/images/video_thumbs/
 
 .idea/
+*.iml*
 
 /assets/users/*
 
@@ -155,4 +156,6 @@ nul
 /subjects/themes/med/
 /subjects/themes/um-new/
 
-control/lti_controller/
+control/lti_controller/log.txt
+
+lib/HTMLPurifier/HTMLPurifier/DefinitionCache/

@@ -24,6 +24,7 @@ class SectionService implements OutputInterface {
 		$this->_db = $db;
 		$this->_connection = $this->_db->getConnection();
 		$this->_connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
+		$this->_connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 	}
 
 	public function create($section_index, $layout, $tab_id) {
