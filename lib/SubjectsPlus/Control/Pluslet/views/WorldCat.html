@@ -92,7 +92,13 @@ function checkSearchForm() {
 
 <div id="div-search">
 
-    <form name="wcfw" id="wcfw" method="get" accept-charset="UTF-8" action="https://worldcat.org/search" target="_blank" onsubmit="return checkSearchForm()" class="pure-form">    
+  <?php
+
+  global $worldcat_search_url;
+
+  ?>
+
+    <form name="wcfw" id="wcfw" method="get" accept-charset="UTF-8" action="<?php echo($worldcat_search_url); ?>" target="_blank" onsubmit="return checkSearchForm()" class="pure-form">    
 
         <fieldset>
             <input type="hidden" name="qt" value="affiliate_wc_org_all">
