@@ -92,10 +92,9 @@ function checkSearchForm() {
 
 <div id="div-search">
 
-  <?php
-
-  global $worldcat_search_url;
-
+  <?php  
+    global $worldcat_search_url;
+    echo( $this->flashMessage );
   ?>
 
     <form name="wcfw" id="wcfw" method="get" accept-charset="UTF-8" action="<?php echo($worldcat_search_url); ?>" target="_blank" onsubmit="return checkSearchForm()" class="pure-form">    

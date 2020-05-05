@@ -735,7 +735,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 
 		"worldcat_search_url" => array(
 			_( "WorldCat Search Pluslet URL" ),
-			_( "URL that any search from a WorldCat Search Pluslet will use." ),
+			_( "URL that any search from a WorldCat Search Pluslet will use.<br>( Default URL: https://worldcat.org/search )" ),
 			"string",
 			"catalog",
 			"medium",

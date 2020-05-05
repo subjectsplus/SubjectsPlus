@@ -1,5 +1,7 @@
 <?php
+
 namespace SubjectsPlus\Control;
+
 /**
  *   @file sp_Guide
  *   @brief manage guide metadata
@@ -8,7 +10,8 @@ namespace SubjectsPlus\Control;
  *   @date Jan 2011
  *   @todo better blunDer interaction, better message, maybe hide the blunder errors until the end
  */
-class Pluslet {
+class Pluslet
+{
 
     protected $_pluslet_id;
     protected $_title;
@@ -34,7 +37,8 @@ class Pluslet {
     protected $_favorite_box;
     protected $_target_blank_links;
 
-    public function __construct($pluslet_id="", $flag="", $subject_id = "", $isclone = 0) {
+    public function __construct($pluslet_id = "", $flag = "", $subject_id = "", $isclone = 0)
+    {
 
         $this->_pluslet_id = $pluslet_id;
 
@@ -78,7 +82,6 @@ class Pluslet {
 
             $this->_favorite_box = $plusletArray[0]["favorite_box"];
             $this->_target_blank_links = $plusletArray[0]["target_blank_links"];
-
         }
 
 
@@ -86,22 +89,19 @@ class Pluslet {
         if ($this->_isclone == 1) {
             $this->_pluslet_id = "";
         }
-
-
     }
 
-    protected function establishView($view) {
+    protected function establishView($view)
+    {
         global $IconPath;
 
         switch ($view) {
-
             case "admin":
                 $delete_text = _("Remove item from this guide");
 
 
                 //If type is NOT Special
-                if(strtolower($this->_type) != 'special')
-                {
+                if (strtolower($this->_type) != 'special') {
                     $this->_icons = "";
                 }
 
@@ -113,12 +113,10 @@ class Pluslet {
                     } else {
                         $this->_icons .= "<a id=\"edit-$this->_pluslet_id-$this->_type\"><i class=\"fa fa-cog\" title=\"" . _("Edit & Box Settings") . "\" /></i></a>";
                     }
-                }
-                else {
+                } else {
 
                     //If not editable, show only delete icon
                     $this->_icons .= "<a id=\"delete-$this->_pluslet_id\"><i class=\"fa fa-trash-o\" title=\"$delete_text\" /></i></a>";
-
                 }
 
                 // Show the item id --it's handy for debugging
@@ -136,7 +134,7 @@ class Pluslet {
                 // get our relative path to the legacy fixed_pluslet folder
                 // I don't know why this needs to be relative, but this conks out the location of the subject specialists otherwise (if mod_rewrite is used)
 
-                if (strpos($_SERVER['REQUEST_URI'], "guide.php") !== false ) {
+                if (strpos($_SERVER['REQUEST_URI'], "guide.php") !== false) {
                     $this->_relative_asset_path = "../../assets/";
                 } else {
                     $this->_relative_asset_path = "../assets/";
@@ -146,7 +144,8 @@ class Pluslet {
         }
     }
 
-    protected function assemblePluslet($hide_titlebar=0) {
+    protected function assemblePluslet($hide_titlebar = 0)
+    {
         global $IconPath;
 
         // if we're using a simple pluslet, things are diff
@@ -155,11 +154,11 @@ class Pluslet {
 
         //when TITLEBAR is HIDDEN - PV
         if (($hide_titlebar == 1 && $this->_visible_id == "" || $this->_title == "" && $this->_visible_id == "")) {
-	        $this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
+            $this->_pluslet_name_field = empty($this->_pluslet_name_field) ? $this->_type : "settings-{$this->_pluslet_name_field}";
             $this->_pluslet .= "
             <div id=\"$this->_pluslet_id_field\" class=\"pluslet_simple no_overflow $this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\"><a name=\"box-" . $this->_pluslet_id . "\"></a>";
 
-            if($this->_target_blank_links == 1) {
+            if ($this->_target_blank_links == 1) {
                 $this->_pluslet_body_bonus_classes .= "target_blank_links";
             }
 
@@ -194,27 +193,24 @@ class Pluslet {
             $this->_pluslet .= "<div class=\"titlebar pluslet_sort\">";
 
 
-            if($this->_target_blank_links == 1) {
+            if ($this->_target_blank_links == 1) {
                 $this->_pluslet_body_bonus_classes .= "target_blank_links";
             }
 
             //if public view, add selected style
-            if( $this->_visible_id != '' ) {
+            if ($this->_visible_id != '') {
                 $this->_pluslet .= "<div class=\"titlebar_text\">$this->_title</div>";
-            }else
-            {
+            } else {
                 $this->_pluslet .= "<div class=\"titlebar_text {$this->_titlebar_styling}\">$this->_title</div>";
 
                 // since we're here, let's see if the body should be collapsed
                 if ($this->_collapse_body == 1) {
                     $this->_pluslet_body_bonus_classes .= "noshow";
                 }
-
-
             }
 
             //only if on admin side, display sort icon
-            if( $this->_visible_id != '' ) {
+            if ($this->_visible_id != '') {
                 $this->_pluslet .= "\n<div class=\"titlebar_options\">$this->_icons</div>";
             }
 
@@ -226,7 +222,6 @@ class Pluslet {
                             " . htmlspecialchars_decode($this->_body) . "
                     </div>";
             }
-
         }
 
 
@@ -239,7 +234,8 @@ class Pluslet {
     // without being stored in a variable, for instance, when using ckeditor
     ///////////////////
 
-    protected function startPluslet() {
+    protected function startPluslet()
+    {
 
         echo "
         <div class=\"pluslet $this->_pluslet_bonus_classes\" id=\"$this->_pluslet_id_field\" name=\"$this->_pluslet_name_field\">";
@@ -248,20 +244,21 @@ class Pluslet {
 
         echo "
             <div class=\"titlebar pure-g\">
-                <div class=\"titlebar_text pure-u-2-3\">".stripslashes($this->_title)."</div>
+                <div class=\"titlebar_text pure-u-2-3\">" . stripslashes($this->_title) . "</div>
                 <div class=\"titlebar_options pure-u-1-3\">$this->_icons</div>
             </div>
             <div class=\"pluslet_body $this->_pluslet_body_bonus_classes\">";
-
     }
 
-    protected function finishPluslet() {
+    protected function finishPluslet()
+    {
 
         echo "</div>
             </div>";
     }
 
-    protected function boxSettings() {
+    protected function boxSettings()
+    {
 
         global $titlebar_styles;
 
@@ -273,7 +270,9 @@ class Pluslet {
 
         foreach ($titlebar_styles as $key => $value) {
             $tb_styles .= "<option value=\"$value\" style=\"$value\"";
-            if ($this->_titlebar_styling == $value) { $tb_styles .= " selected";}
+            if ($this->_titlebar_styling == $value) {
+                $tb_styles .= " selected";
+            }
             $tb_styles .= ">$value</option>";
         }
 
@@ -288,7 +287,9 @@ class Pluslet {
                 <div class=\"onoffswitch titlebar_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"notitle-$this->_pluslet_id\"";
 
-        if ($this->_hide_titlebar == 1) {$box_settings .= " checked";}
+        if ($this->_hide_titlebar == 1) {
+            $box_settings .= " checked";
+        }
 
         $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"notitle-$this->_pluslet_id\">
@@ -302,7 +303,9 @@ class Pluslet {
                 <div class=\"onoffswitch body_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox\" id=\"start-collapsed-$this->_pluslet_id\"";
 
-        if ($this->_collapse_body == 1) {$box_settings .= " checked";}
+        if ($this->_collapse_body == 1) {
+            $box_settings .= " checked";
+        }
 
         $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"start-collapsed-$this->_pluslet_id\">
@@ -317,7 +320,9 @@ class Pluslet {
                 <div class=\"onoffswitch fav_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox favorite_pluslet_input\" id=\"favorite_box-$this->_pluslet_id\"";
 
-        if ($this->_favorite_box == 1) {$box_settings .= " checked";}
+        if ($this->_favorite_box == 1) {
+            $box_settings .= " checked";
+        }
 
         $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"favorite_box-$this->_pluslet_id\">
@@ -331,7 +336,9 @@ class Pluslet {
                 <div class=\"onoffswitch links_set\">
                         <input type=\"checkbox\" class=\"onoffswitch-checkbox target_blank_links\" id=\"target_blank_links-$this->_pluslet_id\"";
 
-        if ($this->_target_blank_links == 1) {$box_settings .= " checked";}
+        if ($this->_target_blank_links == 1) {
+            $box_settings .= " checked";
+        }
 
         $box_settings .= ">
                         <label class=\"onoffswitch-label\" for=\"target_blank_links-$this->_pluslet_id\">
@@ -362,10 +369,10 @@ class Pluslet {
             </div>";
 
         return $box_settings;
-
     }
 
-    protected function tokenizeText() {
+    protected function tokenizeText()
+    {
         global $proxyURL;
         global $PublicPath;
         global $FAQPath;
@@ -389,7 +396,7 @@ class Pluslet {
 
         $parts = preg_split('/<span[^>]*>{{|}}<\/span>/', $this->_body);
 
-        if( count($parts) == 1 )
+        if (count($parts) == 1)
             $parts = preg_split('/{{|}}/', $this->_body);
 
         if (count($parts) > 1) { // there are tokens in $body
@@ -404,7 +411,8 @@ class Pluslet {
                     || preg_match('/^cat},\s?{.+},\s?{.*},\s?{\w+$/', $part)
                     || preg_match('/^fil},\s?{.+},\s?{.+$/', $part)
                     || preg_match('/^sss},\s?{[^}]*/', $part)
-                    || preg_match('/^toc},\s?{[^}]*/', $part) ) { // $part is a properly formed token
+                    || preg_match('/^toc},\s?{[^}]*/', $part)
+                ) { // $part is a properly formed token
                     $fields = preg_split('/},\s?{/', $part);
                     $prefix = substr($part, 0, 3);
 
@@ -414,18 +422,18 @@ class Pluslet {
                         case "faq":
                             $query = "SELECT faq_id, question FROM `faq` WHERE faq_id IN(" . $fields[1] . ") ORDER BY question";
                             $result = $db->query($query);
-                            $tokenized.= "<ul>";
+                            $tokenized .= "<ul>";
                             foreach ($result as $myrow) {
-                                $tokenized.= "<li><a href=\"$FAQPath" . "?faq_id=$myrow[0]\" $target>" . stripslashes(htmlspecialchars_decode($myrow[1])) . "</a></li>";
+                                $tokenized .= "<li><a href=\"$FAQPath" . "?faq_id=$myrow[0]\" $target>" . stripslashes(htmlspecialchars_decode($myrow[1])) . "</a></li>";
                             }
-                            $tokenized.= "</ul>";
+                            $tokenized .= "</ul>";
                             break;
                         case "fil":
                             $ext = explode(".", $fields[1]);
-                            $i = count($ext)-1;
+                            $i = count($ext) - 1;
                             $our_icon = showDocIcon($ext[$i]);
                             $file = "$UserPath/$fields[1]";
-                            $tokenized.= "<a href=\"$file\" $target>$fields[2]</a> <img style=\"position:relative; top:.3em;\" src=\"$IconPath/$our_icon\" alt=\"$ext[$i]\" />";
+                            $tokenized .= "<a href=\"$file\" $target>$fields[2]</a> <img style=\"position:relative; top:.3em;\" src=\"$IconPath/$our_icon\" alt=\"$ext[$i]\" />";
                             break;
                         case "cat":
                             $pretext = "";
@@ -448,7 +456,7 @@ class Pluslet {
                                     $linktext = $fields[2];
                                     break;
                             }
-                            $tokenized.= "$pretext<a href=\"$cat_url\" $target>$linktext</a>";
+                            $tokenized .= "$pretext<a href=\"$cat_url\" $target>$linktext</a>";
                             break;
                         case "dab":
 
@@ -481,7 +489,7 @@ class Pluslet {
                                 }
 
                                 // This option was not in previous version so it needs to be checked
-                                if(isset($options[2])) {
+                                if (isset($options[2])) {
 
                                     $show_note_option = $options[2];
 
@@ -491,9 +499,6 @@ class Pluslet {
                                         $show_note = "";
                                     }
                                 }
-
-
-
                             }
 
                             $query = "SELECT location, access_restrictions, format, ctags, helpguide, citation_guide, description, call_number, t.title, display_note, t.pre
@@ -512,31 +517,31 @@ class Pluslet {
                                 // See if it's a web format
                                 if ($myrow[2] == 1) {
 
-                                	switch ($myrow[1]) {
+                                    switch ($myrow[1]) {
 
-		                                case 1:
-			                                $url = $myrow[0];
-			                                $rest_icons = "unrestricted";
-			                                break;
-		                                case 2:
-		                                case 3:
-			                                $url = $proxyURL . $myrow[0];
-			                                $rest_icons = "restricted";
-			                                break;
-		                                case 4:
-			                                $url = $myrow[0];
-			                                $rest_icons = "restricted";
-			                                break;
-	                                }
+                                        case 1:
+                                            $url = $myrow[0];
+                                            $rest_icons = "unrestricted";
+                                            break;
+                                        case 2:
+                                        case 3:
+                                            $url = $proxyURL . $myrow[0];
+                                            $rest_icons = "restricted";
+                                            break;
+                                        case 4:
+                                            $url = $myrow[0];
+                                            $rest_icons = "restricted";
+                                            break;
+                                    }
 
-//
-//                                    if ($myrow[1] == 1) {
-//                                        $url = $myrow[0];
-//                                        $rest_icons = "unrestricted";
-//                                    } else {
-//                                        $url = $proxyURL . $myrow[0];
-//                                        $rest_icons = "restricted";
-//                                    }
+                                    //
+                                    //                                    if ($myrow[1] == 1) {
+                                    //                                        $url = $myrow[0];
+                                    //                                        $rest_icons = "unrestricted";
+                                    //                                    } else {
+                                    //                                        $url = $proxyURL . $myrow[0];
+                                    //                                        $rest_icons = "restricted";
+                                    //                                    }
 
                                     $current_ctags = explode("|", $myrow[3]);
 
@@ -547,7 +552,6 @@ class Pluslet {
                                         $icons = showIcons($current_ctags);
                                     } else {
                                         $icons = "";
-
                                     }
 
                                     if ($show_desc == 1) {
@@ -562,7 +566,7 @@ class Pluslet {
                                             //$subject_id = $db->last_id($r1);
                                             //$subject_id = $subject_id[0];
                                             $subject_id = $r1[0]["subject_id"];
-                                        }elseif (isset($_POST["this_subject_id"])){
+                                        } elseif (isset($_POST["this_subject_id"])) {
                                             $subject_id = $_POST["this_subject_id"];
                                         }
 
@@ -583,20 +587,19 @@ class Pluslet {
 
                                     if (isset($show_note) && $show_note == 1) {
                                         if ($myrow[9] != "") {
-                                            $note = "<br />" ._("Note: ") . $myrow[9];
+                                            $note = "<br />" . _("Note: ") . $myrow[9];
                                         }
-
                                     } else {
                                         $note = "";
                                     }
 
-                                    if($myrow['10']) {
+                                    if ($myrow['10']) {
                                         $prefixed_label = $myrow['10'] . ' ' . $myrow['8'];
                                     } else {
                                         $prefixed_label = $myrow['8'];
                                     }
 
-                                    $tokenized.= "<a href=\"$url\" $target>$prefixed_label</a> $icons $description $note";
+                                    $tokenized .= "<a href=\"$url\" $target>$prefixed_label</a> $icons $description $note";
                                 } else {
                                     // It's print
                                     $format = "other";
@@ -638,25 +641,24 @@ class Pluslet {
 
                                     if (isset($show_note) && $show_note == 1) {
                                         if ($myrow[9] != "") {
-                                            $note = "<br />" ._("Note: ") . $myrow[9];
+                                            $note = "<br />" . _("Note: ") . $myrow[9];
                                         }
-
                                     } else {
                                         $note = "";
                                     }
 
                                     // Simple Print (2), or Print with URL (3)
                                     if ($myrow[2] == 3) {
-                                        $tokenized.= "<em>$myrow[8]</em><br />" . _("") . "
+                                        $tokenized .= "<em>$myrow[8]</em><br />" . _("") . "
                                         <a href=\"$myrow[0]\" $target>$myrow[7]</a>
                                         $icons $description";
                                     } else {
 
                                         // check if it's a url
                                         if (preg_match('/^(https?|www)/', $myrow[0])) {
-                                            $tokenized.= "<a href=\"$myrow[0]\" $target>$myrow[8]</a> $icons $description $note";
+                                            $tokenized .= "<a href=\"$myrow[0]\" $target>$myrow[8]</a> $icons $description $note";
                                         } else {
-                                            $tokenized.= "$myrow[8] <em>$myrow[0]</em> $icons $description $note";
+                                            $tokenized .= "$myrow[8] <em>$myrow[0]</em> $icons $description $note";
                                         }
                                     }
                                 }
@@ -666,7 +668,7 @@ class Pluslet {
                             global $tel_prefix;
 
                             $querier = new Querier();
-                            $qs = "SELECT lname, fname, email, tel, title from staff WHERE email IN ('" . str_replace( ',', "','", $fields[1] ) . "') ORDER BY lname, fname";
+                            $qs = "SELECT lname, fname, email, tel, title from staff WHERE email IN ('" . str_replace(',', "','", $fields[1]) . "') ORDER BY lname, fname";
 
                             //print $qs;
 
@@ -688,14 +690,13 @@ class Pluslet {
                             break;
                         case 'toc':
                             $lobjTocPluslet = new Pluslet_TOC('', '', $this->_subject_id);
-                            $lobjTocPluslet->setTickedItems( explode(',', $fields[1]) );
+                            $lobjTocPluslet->setTickedItems(explode(',', $fields[1]));
                             $lobjTocPluslet->setHideTitleBar(1);
                             $tokenized .= $lobjTocPluslet->output();
                             break;
-
                     }
                 } else {
-                    $tokenized.= $part;
+                    $tokenized .= $part;
                 }
             } // end foreach
         } else {
@@ -703,8 +704,8 @@ class Pluslet {
             return;
         }
 
-	    $tokenized = utf8_decode($tokenized);
-	    $this->_body = $tokenized;
+        $tokenized = utf8_decode($tokenized);
+        $this->_body = $tokenized;
     }
 
     protected function onEditOutput()
@@ -717,8 +718,9 @@ class Pluslet {
         $this->_body = "General pluslet output!";
     }
 
-    public function output($action="", $view)
+    public function output($action = "", $view)
     {
+
         $this->establishView($view);
 
         if ($action == "edit") {
@@ -755,7 +757,11 @@ class Pluslet {
         } else {
 
             // notitle hack
-            if ($this->_hide_titlebar == 1) { $this->_hide_titlebar = 1;} else {$this->_hide_titlebar = 0;}
+            if ($this->_hide_titlebar == 1) {
+                $this->_hide_titlebar = 1;
+            } else {
+                $this->_hide_titlebar = 0;
+            }
 
             $this->onViewOutput();
 
@@ -773,7 +779,7 @@ class Pluslet {
         return $this->_body;
     }
 
-    public function setHideTitleBar( $lintHide )
+    public function setHideTitleBar($lintHide)
     {
         $this->_hide_titlebar = $lintHide;
     }
@@ -783,23 +789,27 @@ class Pluslet {
         return '';
     }
 
-    function getRecordId() {
+    function getRecordId()
+    {
         return $this->_pluslet_id;
     }
 
-    function getExtraInfo() {
+    function getExtraInfo()
+    {
         return $this->_extra;
     }
 
-    function deBug() {
+    function deBug()
+    {
         print $this->_debug;
     }
 
-    function getNote() {
-
+    function getNote()
+    {
     }
 
-    public function loadHtml($path) {
+    public function loadHtml($path)
+    {
 
         ob_start();
         include $path;
@@ -807,8 +817,5 @@ class Pluslet {
         ob_end_clean();
 
         return $external_html;
-
     }
-
-
 }
