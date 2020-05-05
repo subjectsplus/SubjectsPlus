@@ -403,12 +403,10 @@ class Config {
 		$section_problem_report_email     = "";
 		$section_problem_report_slack     = "";
 
-
-;
 		//go through all options
 		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
 			//span containing input label
-			$lstrHTML = "<label for=\"{$lobjOption[0]}\">{$lobjOption[0]} ";
+			$lstrHTML = "<label for=\"{$lstrKey}\">{$lobjOption[0]} ";
 
 			//if there is a tooltip in the options
 			if ( isset( $lobjOption[6] ) && $lobjOption[6] != '' ) {
@@ -549,7 +547,6 @@ class Config {
 			}
 
 			$lstrHTML .= "\n";
-//print "<div class='pluslet_body'>$lstrHTML</div>";
 
 			// Let's group these
 			switch ( strtolower( $lobjOption[3] ) ) {
