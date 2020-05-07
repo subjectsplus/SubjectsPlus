@@ -177,9 +177,13 @@ include("includes/header.php");
     // let's grab our collections
     $collection_results = listCollections("","2col");
 
+    // Var to track if a given Guide type actually has content
+    // Used later to decide whether or not to display pill button link
+    $guide_types_present = array();
 
     // loop through our source types
-      foreach ($guide_types as $key => $value) {
+      foreach ($guide_types as $key => $value) {        
+              $guide_types_present[$value] = false; // Set our tracking var's individual keys to false by default
 
               $guide_list = new GuideList($db,$value, 1);
               
@@ -190,6 +194,7 @@ include("includes/header.php");
               $switch_row = round($total_rows / 2);
 
           if ($total_rows > 0) {
+              $guide_types_present[$value] = true; // Set Guide type field to true if >0 rows come back from DB
 
               $col_1 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
               $col_2 = "<div class=\"pure-u-1 pure-u-md-1-2\"><ul class=\"guide-listing\">";
@@ -229,8 +234,6 @@ include("includes/header.php");
           } //end if
 
       }//end foreach
-
-
 
       //EXPERTS
     //**************************************
@@ -285,10 +288,16 @@ include("includes/header.php");
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
 
     foreach ($guide_types as $key) {
-        $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+
+        // $guide_types_present[$key] = false;
         
-        $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
-    }
+        // Only create the pill button if the DB returned >0 records of this Guide type
+        if ($guide_types_present[$key]) {
+            $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
+            
+            $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
+        };
+    };
 
     $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
 
