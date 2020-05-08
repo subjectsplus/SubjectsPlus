@@ -284,24 +284,28 @@ include("includes/header.php");
 
      // ANCHOR buttons for guide types
     //**************************************
+    
+    // Start of top pill button 'sandwich'
     $guide_type_btns = "<ul>";
 
     // We don't want our placeholder
     if (in_array('Placeholder', $guide_types)) { unset($guide_types[array_search('Placeholder',$guide_types)]); }
 
+    // Fill in the 'meat' of the pill button 'sandwich'
     foreach ($guide_types as $key) {
         // Only create the pill button if the DB returned >0 records of this Guide type
         if ($guide_types_present[$key]) {
             $guide_type_btns .= "<li><a id=\"show-" . ucfirst($key) . "\" name=\"show$key\" href=\"#section-" . ucfirst($key) . "\">";
-            $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
+            $guide_type_btns .= ucfirst($key) . " " . _("Guides") . "</a></li>\n";
         };
     };
 
     // Add "Collections" link at the top if there're Collection items to show
     if ($collection_results) {
-        $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li>";
+        $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">" . _("Collections") . "</a></li>";
     };
 
+    // Close the pill button 'sandwich'
     $guide_type_btns .= "</ul>";
 
 ////////////////////////////
