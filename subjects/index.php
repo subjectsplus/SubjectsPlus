@@ -293,8 +293,6 @@ include("includes/header.php");
         
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
     }
-    
-    // die;
 
     $guide_type_btns .= "<li><a id=\"show-Collection\" name=\"showCollection\" href=\"#section-Collection\">Collections</a></li></ul>";
 
