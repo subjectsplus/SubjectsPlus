@@ -289,10 +289,6 @@ include("includes/header.php");
     foreach ($guide_types as $key) {
         $trimmed_guide_type = str_replace(' ', '-', $key);
 
-        // print_r( array(
-        //     '$trimmed_guide_type' => $trimmed_guide_type
-        // ));
-
         $guide_type_btns .= "<li><a id=\"show-" . $trimmed_guide_type . "\" name=\"show$trimmed_guide_type\" href=\"#section-" . $trimmed_guide_type . "\">";
         
         $guide_type_btns .= ucfirst($key) . " Guides</a></li>\n";
