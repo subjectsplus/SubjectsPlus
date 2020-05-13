@@ -6,6 +6,13 @@
  * Time: 2:50 PM
  */?>
 
+<?php
+
+	// Set Pluslet ID for use below
+	$booklist_id = $this->_pluslet_id;
+
+?>
+
 <div class="booklist-edit-container">
 	<textarea
 		rows="4"
@@ -36,9 +43,14 @@
 		</ul>
 
 		<div>
-			<input type="number">
+			<input
+				type="text"
+				class="isbn-input"
+				name="isbn-input">
 			<button
-				onclick="">
+				type="button"
+				class="add-isbn"
+				name="add-isbn">
 					Add
 			</button>
 		</div>

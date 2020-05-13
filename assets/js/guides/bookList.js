@@ -38,6 +38,7 @@ function bookList() {
     bindUiActionsForEditView: function () {
       myBookList.validCharacters();
       myBookList.isNumberKey();
+      myBookList.addIsbnButtonListener();
     },
     init: function (container) {
       myBookList.getUrlPrefix();
@@ -58,7 +59,7 @@ function bookList() {
       myBookList.makeListSortable();
     },
     validCharacters: function () {
-      $("textarea[name=BookList-extra-isbn]").on("paste", function () {
+      $("input[name=isbn-input]").on("paste", function () {
         var $el = $(this);
         setTimeout(function () {
           $el.val(function (i, val) {
@@ -68,18 +69,12 @@ function bookList() {
       });
     },
     isNumberKey: function () {
-      $("textarea[name=BookList-extra-isbn]").keydown(function (evt) {
+      $("input[name=isbn-input]").keydown(function (evt) {
         var result = true;
         var charCode = evt.which ? evt.which : evt.keyCode;
         if (charCode < 48 || charCode > 57) result = false;
 
-        if (
-          charCode == 88 ||
-          charCode == 44 ||
-          charCode == 8 ||
-          charCode == 188
-        )
-          result = true;
+        if (charCode == 88 || charCode == 44 || charCode == 8) result = true;
 
         if (
           (evt.ctrlKey || evt.metaKey) &&
@@ -110,6 +105,20 @@ function bookList() {
         return result;
       });
     },
+    addIsbnButtonListener: function () {
+			$('button[name=add-isbn]').on('click', (clickEvent)=> {
+				console.warn('addIsbnButtonListener CALLED');
+
+				const theButton = $(clickEvent.currentTarget);
+				const isbn = $(theButton).prev('input').val();
+
+				this.addIsbnToList(isbn);
+			});
+		},
+		addIsbnToList: function (isbn) {
+			console.error('ADD ISBN TO LIST FUNCTION CALLED');
+			console.log({isbn});
+		},
     populatePlusletViewFromCache: function (
       container,
       response,
