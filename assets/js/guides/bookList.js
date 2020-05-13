@@ -657,31 +657,53 @@ function bookList() {
       // Make whole Book List <ul> sortable via jQuery
       $(".booklist-draggables-container").sortable({
 				update: (event, ui)=> {
-					this.onSortStop(event, ui);
+					this.onListChange(event, ui);
 				},
 				change: (event, ui)=> {
-					this.onSortStop(event, ui);
+					this.onListChange(event, ui);
 				},
 				start: (event, ui)=> {
-					this.onSortStop(event, ui);
+					this.onListChange(event, ui);
 				}
 			});
 
-      this.stripeRows();
+			this.stripeRows();
 		},
-		onSortStop: function(event, ui) {
-			console.warn('HITTING ONSORTSTOP()');
-			console.log({ eventType: event.type, ui });
+		onListChange: function(event, ui) {
+			// console.warn('HITTING ONSORTSTOP()');
+			// console.warn('event: ', event.type);
+
+			switch(event.type) {
+				case 'sortstart':
+					break;
+				case 'sortchange':
+					break;
+				case 'sortupdate':
+					// Code to synchronize textarea
+
+					this.stripeRows();
+					break;
+			}
 		},
 		stripeRows: function() {
-			console.warn("STRIPE ROWS CALLED");
+			const mapping = {
+				evenRows: "evenrow striper",
+				oddRows: "oddrow striper"
+			};
 
-			$(".booklist-draggables-container li:nth-child(even)").addClass(
-				"evenrow striper"
-			);
-			$(".booklist-draggables-container li:nth-child(odd)").addClass(
-				"oddrow striper"
-			);
+			const rows = $('.booklist-draggables-container li');
+
+			$.each(rows, (index, element)=> {
+				// Strip off existing classes
+				$(element).removeClass('evenrow oddrow striper');
+
+				// Even indices
+				if ((index + 1) % 2 === 0) {
+					$(element).addClass(mapping.evenRows);
+				} else {
+					$(element).addClass(mapping.oddRows);		
+				};
+			});
 		},
 		getSortableIsbnLi: function(isbn) {
 			return `
