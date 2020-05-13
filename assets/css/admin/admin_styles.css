@@ -2308,7 +2308,8 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 }
 
 .booklist-item-draggable {
-  /* width: 98%;  */
+  display: flex;
+  justify-content: space-between;
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
@@ -2320,6 +2321,10 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
   font-family: 'NotoSansRegular'; 
   font-weight: normal; 
   padding: 4px 0 6px 8px;
+}
+
+.booklist-item-draggable .booklist-delete-button:hover {
+  cursor: pointer;
 }
 
 /* Remove boxes from current tab */

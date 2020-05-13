@@ -37,8 +37,13 @@ function bookList() {
     },
     bindUiActionsForEditView: function () {
       myBookList.validCharacters();
-      myBookList.isNumberKey();
-      myBookList.addIsbnButtonListener();
+			myBookList.isNumberKey();
+			
+			// Add ISBN button
+			myBookList.addIsbnButtonListener();
+			
+			// Delete ISBN buttons
+			myBookList.deleteIsbnButtonListener();
     },
     init: function (container) {
       myBookList.getUrlPrefix();
@@ -125,12 +130,26 @@ function bookList() {
 			});
 		},
 		addIsbnToList: function (isbn) {
-			console.error('ADD ISBN TO LIST FUNCTION CALLED');
-
 			const newLi = this.getSortableIsbnLi(isbn);
-
 			$('.booklist-draggables-container').append(newLi);
+			
+			// Restripe all the rows
 			this.stripeRows();
+
+			// Recreate event listeners for all delete buttons, so new row also gets it
+			this.deleteIsbnButtonListener();
+		},
+		deleteIsbnButtonListener: function () {
+			// Clear all delete listeners to start, so newly added ISBNs are added correctly
+			$('.booklist-delete-button').unbind('click');
+
+			$('.booklist-delete-button').on('click', (event)=> {
+				const whichLi = $(event.currentTarget).closest('li');
+				this.deleteIsbnFromList(whichLi);
+			});
+		},
+		deleteIsbnFromList: function (liToDelete) {
+			$(liToDelete).remove();
 		},
     populatePlusletViewFromCache: function (
       container,
@@ -657,7 +676,15 @@ function bookList() {
 			);
 		},
 		getSortableIsbnLi: function(isbn) {
-			return `<li class='booklist-item-draggable'>${isbn}</li>`;
+			return `
+				<li
+					data-isbn='${isbn}'
+					class='booklist-item-draggable'>
+						<span class='isbn-number'><i class='fa fa-bars'></i> ${isbn}</span>
+						<i class='fa fa-trash booklist-delete-button' data-isbn='${isbn}'></i>
+				</li>
+			`;
+			// return `<li class='booklist-item-draggable'>${isbn}</li>`;
 		}
   };
 

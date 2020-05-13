@@ -35,7 +35,15 @@
 					$list_split = explode(',', $isbn_list);
 
 					foreach($list_split as $index=>$isbn) {
-						$li = "<li class='booklist-item-draggable'>$isbn</li>";
+						$li = "
+							<li
+								data-isbn='$isbn'
+								class='booklist-item-draggable'>
+									<span class='isbn-number'>
+										<i class='fa fa-bars'></i>	
+										$isbn</span>
+									<i class='fa fa-trash booklist-delete-button' data-isbn='$isbn'></i>
+									</li>";
 						print $li;
 					};
 
@@ -53,6 +61,12 @@
 				name="add-isbn">
 					Add
 			</button>
+		</div>
+
+		<div>
+			<p>
+				You may rearrange the items in the list using the drag bar (<i class='fa fa-bars'></i>).
+			</p>
 		</div>
 
 		<!-- <textarea
