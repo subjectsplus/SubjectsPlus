@@ -69,7 +69,7 @@
 			</p>
 		</div>
 
-		<!-- <textarea
+		<textarea
 			rows="4"
 			cols="30"
 			name="BookList-extra-isbn"
@@ -78,7 +78,7 @@
 					echo $this->_extra['isbn'];
 				}
 			?>
-		</textarea> -->
+		</textarea>
 	</div>
 </div>
 

@@ -194,7 +194,7 @@ function bookList() {
       )[0];
       var divData = document.createElement("div");
       divData.classList.add("booklist_isbn_data");
-      var anchorUrl = $("<textarea/>").html(data.primoUrl).text();
+			var anchorUrl = $("<textarea/>").html(data.primoUrl).text();
 
       myBookList.setBookCoverSrc(
         container,
@@ -655,15 +655,23 @@ function bookList() {
     },
     makeListSortable: function () {
       // Make whole Book List <ul> sortable via jQuery
-      $(".booklist-draggables-container").sortable();
-
-      // Make individual <li>'s draggable via jQuery
-      $(".draggable").draggable({
-        connectToSortable: ".booklist-draggables-container",
-        helper: "clone",
-      });
+      $(".booklist-draggables-container").sortable({
+				update: (event, ui)=> {
+					this.onSortStop(event, ui);
+				},
+				change: (event, ui)=> {
+					this.onSortStop(event, ui);
+				},
+				start: (event, ui)=> {
+					this.onSortStop(event, ui);
+				}
+			});
 
       this.stripeRows();
+		},
+		onSortStop: function(event, ui) {
+			console.warn('HITTING ONSORTSTOP()');
+			console.log({ eventType: event.type, ui });
 		},
 		stripeRows: function() {
 			console.warn("STRIPE ROWS CALLED");
