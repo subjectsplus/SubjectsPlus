@@ -15,5 +15,15 @@
     <p class="booklist-list-description"><?php echo isset( $this->_extra['listDescription'] ) ? $this->_extra['listDescription'] : ''; ?></p>
 </div>
 
+<script>
+    // ** COMMENT OUT AFTER TESTING **
+    // Convenience script to automatically open editing box on page load
 
+    $(document).ready(()=> {
+        setTimeout(()=> {
+            const pluslet_id = Number(<?php print $this->_pluslet_id ?>);
+            $(`#edit-${pluslet_id}-BookList`).click();
+        }, 2000);
+    });
+</script>
 
