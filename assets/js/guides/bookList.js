@@ -112,12 +112,25 @@ function bookList() {
 				const theButton = $(clickEvent.currentTarget);
 				const isbn = $(theButton).prev('input').val();
 
+				const validLengths = [10,13];
+				const isbnLengthNotValid = !( validLengths.includes(isbn.length) );
+
+				// Make sure ISBN is 10 or 13 digits
+				if (isbnLengthNotValid) {
+					console.error('isbn.length incorrect, isbn.length was: ', isbn.length);
+					return false;
+				};
+
 				this.addIsbnToList(isbn);
 			});
 		},
 		addIsbnToList: function (isbn) {
 			console.error('ADD ISBN TO LIST FUNCTION CALLED');
-			console.log({isbn});
+
+			const newLi = this.getSortableIsbnLi(isbn);
+
+			$('.booklist-draggables-container').append(newLi);
+			this.stripeRows();
 		},
     populatePlusletViewFromCache: function (
       container,
@@ -631,23 +644,21 @@ function bookList() {
         helper: "clone",
       });
 
-      const stripeRows = () => {
-        console.warn("STRIPE ROWS CALLED");
-        $(".booklist-draggables-container li:nth-child(even)").addClass(
-          "evenrow striper"
-        );
-        $(".booklist-draggables-container li:nth-child(odd)").addClass(
-          "oddrow striper"
-        );
-      };
+      this.stripeRows();
+		},
+		stripeRows: function() {
+			console.warn("STRIPE ROWS CALLED");
 
-      stripeRows();
-
-      // Set a listener for when Book List <ul> content changes, to re-stripe rows
-      $(".booklist-draggables-container").on("change", () => {
-        stripeRows();
-      });
-    },
+			$(".booklist-draggables-container li:nth-child(even)").addClass(
+				"evenrow striper"
+			);
+			$(".booklist-draggables-container li:nth-child(odd)").addClass(
+				"oddrow striper"
+			);
+		},
+		getSortableIsbnLi: function(isbn) {
+			return `<li class='booklist-item-draggable'>${isbn}</li>`;
+		}
   };
 
   return myBookList;
