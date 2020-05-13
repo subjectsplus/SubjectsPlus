@@ -2283,7 +2283,10 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
   display: none;
 }
 
-
+.booklist-edit-container {
+  display: flex;
+  justify-content: space-around;
+}
 
 /* Remove boxes from current tab */
 .remove_boxes_content {margin-bottom: 15px;}
