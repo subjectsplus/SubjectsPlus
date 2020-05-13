@@ -55,6 +55,7 @@ function bookList() {
     },
     initEditView: function () {
       myBookList.bindUiActionsForEditView();
+      myBookList.makeListSortable();
     },
     validCharacters: function () {
       $("textarea[name=BookList-extra-isbn]").on("paste", function () {
@@ -610,6 +611,33 @@ function bookList() {
       var newDate = new Date(msec);
 
       return newDate.getFullYear();
+    },
+    makeListSortable: function () {
+      // Make whole Book List <ul> sortable via jQuery
+      $(".booklist-draggables-container").sortable();
+
+      // Make individual <li>'s draggable via jQuery
+      $(".draggable").draggable({
+        connectToSortable: ".booklist-draggables-container",
+        helper: "clone",
+      });
+
+      const stripeRows = () => {
+        console.warn("STRIPE ROWS CALLED");
+        $(".booklist-draggables-container li:nth-child(even)").addClass(
+          "evenrow striper"
+        );
+        $(".booklist-draggables-container li:nth-child(odd)").addClass(
+          "oddrow striper"
+        );
+      };
+
+      stripeRows();
+
+      // Set a listener for when Book List <ul> content changes, to re-stripe rows
+      $(".booklist-draggables-container").on("change", () => {
+        stripeRows();
+      });
     },
   };
 
