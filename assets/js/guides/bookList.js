@@ -75,11 +75,11 @@ function bookList() {
       return scrubbedString;
     },
     validCharacters: function () {
-      $("input[name=isbn-input]").on("paste", ()=> {
+      $("input[name=isbn-input]").on("paste", function () {
         var $el = $(this);
-        setTimeout(()=> {
-          $el.val((i, val)=> {
-            return this.scrubInput(val);
+        setTimeout(function () {
+          $el.val(function (i, val) {
+            return myBookList.scrubInput(val);
           });
         });
       });
@@ -122,7 +122,7 @@ function bookList() {
       });
     },
     addIsbnButtonListener: function () {
-			$('button[name=add-isbn]').on('click', (clickEvent)=> {
+			$('button[name=add-isbn]').on('click', function (clickEvent) {
         const theButton = $(clickEvent.currentTarget);
         const inputField = $(theButton).prev('input');
         const isbn = $(inputField).val();
@@ -165,7 +165,7 @@ function bookList() {
 			// Clear all delete listeners to start, so newly added ISBNs are added correctly
 			$('.booklist-delete-button').unbind('click');
 
-			$('.booklist-delete-button').on('click', (event)=> {
+			$('.booklist-delete-button').on('click', function (event) {
 				const whichLi = $(event.currentTarget).closest('li');
         this.deleteIsbnFromList(whichLi);
 
@@ -684,14 +684,14 @@ function bookList() {
     makeListSortable: function () {
       // Make whole Book List <ul> sortable via jQuery
       $(".booklist-draggables-container").sortable({
-				update: (event, ui)=> {
-					this.onListChange(event, ui);
+				update: function (event, ui) {
+					myBookList.onListChange(event, ui);
 				},
-				change: (event, ui)=> {
-					this.onListChange(event, ui);
+				change: function (event, ui) {
+					myBookList.onListChange(event, ui);
 				},
-				start: (event, ui)=> {
-					this.onListChange(event, ui);
+				start: function (event, ui) {
+					myBookList.onListChange(event, ui);
 				}
 			});
 
