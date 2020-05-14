@@ -2288,6 +2288,18 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
   justify-content: space-around;
 }
 
+.booklist-description-container {
+  width: 50%;
+}
+
+.booklist-update-container {
+  width: 50%;
+}
+
+.booklist-update-container ul {
+  padding: 0px;
+}
+
 .booklist-draggables-container {
   list-style: inside none none; 
   /* background-color: #ececec; */
@@ -2301,10 +2313,6 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
   border-bottom: 1px solid #EEEEEE; 
   border-left: 1px solid #DADFE1; 
   border-top: 1px solid #DADFE1;
-}
-
-.booklist-draggable ul {
-  padding: 0px;
 }
 
 .booklist-item-draggable {

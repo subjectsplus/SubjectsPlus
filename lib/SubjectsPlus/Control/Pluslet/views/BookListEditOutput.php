@@ -14,18 +14,21 @@
 ?>
 
 <div class="booklist-edit-container">
-	<textarea
-		rows="4"
-		cols="30"
-		name="BookList-extra-listDescription"
-		placeholder="Please insert a description for this list"><?php
-				if ($this->_extra != null) {
-						echo isset($this->_extra['listDescription']) ? $this->_extra['listDescription'] : '';
-				}
-		?>
-	</textarea>
+	
+	<div class="booklist-description-container">
+		<textarea
+			rows="4"
+			cols="30"
+			name="BookList-extra-listDescription"
+			placeholder="Please insert a description for this list"><?php
+					if ($this->_extra != null) {
+							echo isset($this->_extra['listDescription']) ? $this->_extra['listDescription'] : '';
+					}
+			?>
+		</textarea>
+	</div>
 
-	<div class="booklist-draggable">
+	<div class="booklist-update-container">
 		
 		<ul
 			class="booklist-draggables-container">

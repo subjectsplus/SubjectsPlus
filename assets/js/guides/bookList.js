@@ -4,6 +4,8 @@ function bookList() {
   var urlPrefix = "";
   var view = "control";
 
+  const isbnRegExp = /[^0-9,x,-]/gi;
+
   var validation = {
     validateSyndeticsClientCode: function () {
       $.ajax({
@@ -63,12 +65,21 @@ function bookList() {
       myBookList.bindUiActionsForEditView();
       myBookList.makeListSortable();
     },
+    scrubInput: function (inputString) {
+      let scrubbedString;
+      
+      if (typeof inputString === 'string'){
+        scrubbedString = inputString.replace(isbnRegExp, '');
+      };
+      
+      return scrubbedString;
+    },
     validCharacters: function () {
-      $("input[name=isbn-input]").on("paste", function () {
+      $("input[name=isbn-input]").on("paste", ()=> {
         var $el = $(this);
-        setTimeout(function () {
-          $el.val(function (i, val) {
-            return val.replace(/[^0-9X,-]/g, "");
+        setTimeout(()=> {
+          $el.val((i, val)=> {
+            return this.scrubInput(val);
           });
         });
       });
@@ -112,14 +123,13 @@ function bookList() {
     },
     addIsbnButtonListener: function () {
 			$('button[name=add-isbn]').on('click', (clickEvent)=> {
-				console.warn('addIsbnButtonListener CALLED');
-
         const theButton = $(clickEvent.currentTarget);
         const inputField = $(theButton).prev('input');
 				const isbn = $(inputField).val();
 
-				const validLengths = [10,13];
-				const isbnLengthNotValid = !( validLengths.includes(isbn.length) );
+        const validLengths = [10, 13];
+        const filteredValue = this.scrubInput(isbn);
+				const isbnLengthNotValid = !( validLengths.includes(filteredValue.length) );
 
 				// Make sure ISBN is 10 or 13 digits
 				if (isbnLengthNotValid) {

@@ -22,14 +22,15 @@
     $(document).ready(()=> {
         // Convenience tool to switch to editing view for development
         let automaticallyOpenEditView
-        // = true // <-- comment this out to turn off
+        = true // <-- comment this out to turn off
         ;
 
         if (automaticallyOpenEditView) {
             setTimeout(()=> {
                 const pluslet_id = Number(<?php print $this->_pluslet_id ?>);
                 $(`#edit-${pluslet_id}-BookList`).click();
-            }, 2000);
+                console.clear();
+            }, 2500);
         };
     });
 </script>
