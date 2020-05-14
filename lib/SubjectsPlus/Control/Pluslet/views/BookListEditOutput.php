@@ -30,7 +30,8 @@
 	<div class="booklist-update-container">
 		
 		<ul
-			class="booklist-draggables-container">
+			class="booklist-draggables-container"
+			style="padding: 0; margin-top: 0;">
 				<?php
 				
 					$isbn_list = $this->_extra['isbn'];
@@ -45,7 +46,7 @@
 								class='booklist-item-draggable'>
 									<div>
 										<i class='fa fa-bars'></i>
-										<span class='isbn-number'>$isbn</span>
+										<span class='isbn-number'>&nbsp;&nbsp;&nbsp;$isbn</span>
 									</div>
 									<i class='fa fa-trash booklist-delete-button' data-isbn='$isbn'></i>
 									</li>";
@@ -63,10 +64,8 @@
 				placeholder="10 or 13 digit ISBN">
 			<button
 				type="button"
-				class="add-isbn"
-				name="add-isbn">
-					Add
-			</button>
+				class="add-isbn button"
+				name="add-isbn">Add</button>
 		</div>
 
 		<div>

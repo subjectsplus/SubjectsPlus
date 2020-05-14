@@ -2285,24 +2285,20 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .booklist-edit-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
 }
 
-.booklist-edit-container * {
-  max-width: 100%;
-}
-
 .booklist-description-container {
-  width: 50%;
+  padding: 0px 10px 10px 10px;
 }
 
 .booklist-update-container {
-  width: 50%;
+  padding: 0px 10px 10px 10px;
 }
 
 .booklist-update-container * {
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 
 .booklist-update-container ul {
@@ -2310,34 +2306,26 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 }
 
 .booklist-draggables-container {
-  list-style: inside none none; 
-  /* background-color: #ececec; */
-  padding: 0px;
-  padding-left: 0px;
-  margin: 5px 0 0 0; 
-  overflow: auto;
-  max-height: 350px; 
-  width: 100% !important;
-  border-right: 1px solid #EEEEEE; 
-  border-bottom: 1px solid #EEEEEE; 
-  border-left: 1px solid #DADFE1; 
-  border-top: 1px solid #DADFE1;
+  list-style: inside none none;
 }
 
 .booklist-item-draggable {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
   cursor: move;
-  color:#333;  
-  line-height: 1.3em; 
+  color:#333;
   border-bottom: 1px dotted #CCC; 
-  font-size: 12px; 
-  font-family: 'NotoSansRegular'; 
-  font-weight: normal; 
+  font-family: 'NotoSansRegular';
+  font-weight: bold;
   padding: 4px 0 6px 8px;
+}
+
+.booklist-delete-button {
+  font-size: initial;
 }
 
 .booklist-item-draggable .booklist-delete-button:hover {

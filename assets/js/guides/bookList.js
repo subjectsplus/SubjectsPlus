@@ -138,7 +138,7 @@ function bookList() {
 
 				// Make sure ISBN is 10 or 13 digits
 				if (isbnLengthNotValid) {
-					console.error('isbn.length incorrect, isbn.length was: ', isbn.length);
+					// console.error('isbn.length incorrect, isbn.length was: ', isbn.length);
 					return false;
 				};
 
@@ -698,8 +698,8 @@ function bookList() {
 			this.stripeRows();
 		},
 		onListChange: function(event, ui) {
-			console.warn('HITTING ONSORTSTOP()');
-			console.warn('event: ', event.type);
+			// console.warn('HITTING ONLISTCHANGE()');
+			// console.warn('event: ', event.type);
 
 			switch(event.type) {
 				case 'sortstart':
@@ -728,15 +728,15 @@ function bookList() {
     },
 		stripeRows: function() {
 			const mapping = {
-				evenRows: "evenrow striper",
-				oddRows: "oddrow striper"
+				evenRows: "evenrow",
+				oddRows: "oddrow"
 			};
 
 			const rows = $('.booklist-draggables-container li');
 
 			$.each(rows, (index, element)=> {
 				// Strip off existing classes
-				$(element).removeClass('evenrow oddrow striper');
+				$(element).removeClass('evenrow oddrow');
 
 				// Even indices
 				if ((index + 1) % 2 === 0) {
@@ -755,7 +755,7 @@ function bookList() {
 					class='booklist-item-draggable'>
             <div>
               <i class='fa fa-bars'></i>
-              <span class='isbn-number'> ${isbn}</span>
+              <span class='isbn-number'>&nbsp;&nbsp;&nbsp;${isbn}</span>
             </div>
 						<i class='fa fa-trash booklist-delete-button' data-isbn='${isbn}'></i>
 				</li>
