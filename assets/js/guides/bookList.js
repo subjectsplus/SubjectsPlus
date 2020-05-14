@@ -133,7 +133,7 @@ function bookList() {
         };
 
         const validLengths = [10, 13];
-        const filteredValue = this.scrubInput(isbn);
+        const filteredValue = myBookList.scrubInput(isbn);
         const isbnLengthNotValid = !( validLengths.includes(filteredValue.length) );
 
 				// Make sure ISBN is 10 or 13 digits
@@ -142,24 +142,24 @@ function bookList() {
 					return false;
 				};
 
-        this.addIsbnToList(isbn);
+        myBookList.addIsbnToList(isbn);
 
         // Clear input element
         $(inputField).val('');
 
         // Synchronize invisible textarea with updated list
-        this.synchronizeTextarea();
+        myBookList.synchronizeTextarea();
 			});
 		},
 		addIsbnToList: function (isbn) {
-			const newLi = this.getSortableIsbnLi(isbn);
+			const newLi = myBookList.getSortableIsbnLi(isbn);
 			$('.booklist-draggables-container').append(newLi);
 			
 			// Restripe all the rows
-			this.stripeRows();
+			myBookList.stripeRows();
 
 			// Recreate event listeners for all delete buttons, so new row also gets it
-      this.deleteIsbnButtonListener();
+      myBookList.deleteIsbnButtonListener();
 		},
 		deleteIsbnButtonListener: function () {
 			// Clear all delete listeners to start, so newly added ISBNs are added correctly
@@ -167,13 +167,13 @@ function bookList() {
 
 			$('.booklist-delete-button').on('click', function (event) {
 				const whichLi = $(event.currentTarget).closest('li');
-        this.deleteIsbnFromList(whichLi);
+        myBookList.deleteIsbnFromList(whichLi);
 
         // Synchronize invisible textarea with updated list
-        this.synchronizeTextarea();
+        myBookList.synchronizeTextarea();
 
         // Re-stripe the list
-        this.stripeRows();
+        myBookList.stripeRows();
 			});
 		},
 		deleteIsbnFromList: function (liToDelete) {
@@ -695,7 +695,7 @@ function bookList() {
 				}
 			});
 
-			this.stripeRows();
+			myBookList.stripeRows();
 		},
 		onListChange: function(event, ui) {
 			// console.warn('HITTING ONLISTCHANGE()');
@@ -707,13 +707,13 @@ function bookList() {
 				case 'sortchange':
 					break;
 				case 'sortupdate':
-          this.synchronizeTextarea();
-					this.stripeRows();
+          myBookList.synchronizeTextarea();
+					myBookList.stripeRows();
 					break;
 			};
     },
     synchronizeTextarea: function () {
-      const currentListJoined = this.getBooklistFromSortables().join(',');
+      const currentListJoined = myBookList.getBooklistFromSortables().join(',');
       const textarea = $("textarea[name='BookList-extra-isbn']");
 
       if (currentListJoined.length) {
