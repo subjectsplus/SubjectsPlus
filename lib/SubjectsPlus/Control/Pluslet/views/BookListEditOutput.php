@@ -21,11 +21,10 @@
 			cols="30"
 			name="BookList-extra-listDescription"
 			placeholder="Please insert a description for this list"><?php
-					if ($this->_extra != null) {
-							echo isset($this->_extra['listDescription']) ? $this->_extra['listDescription'] : '';
-					}
-			?>
-		</textarea>
+				if ($this->_extra != null) {
+						echo isset($this->_extra['listDescription']) ? trim($this->_extra['listDescription']) : '';
+				}
+			?></textarea>
 	</div>
 
 	<div class="booklist-update-container">
@@ -38,13 +37,16 @@
 					$list_split = explode(',', $isbn_list);
 
 					foreach($list_split as $index=>$isbn) {
+						// NOTE: This template must be kept in sync with the one returned from
+						// getSortableIsbnLi() in bookList.js
 						$li = "
 							<li
 								data-isbn='$isbn'
 								class='booklist-item-draggable'>
-									<span class='isbn-number'>
-										<i class='fa fa-bars'></i>	
-										$isbn</span>
+									<div>
+										<i class='fa fa-bars'></i>
+										<span class='isbn-number'>$isbn</span>
+									</div>
 									<i class='fa fa-trash booklist-delete-button' data-isbn='$isbn'></i>
 									</li>";
 						print $li;
@@ -74,15 +76,15 @@
 		</div>
 
 		<textarea
+			class="booklist-hidden-textarea"
 			rows="6"
 			cols="50"
 			name="BookList-extra-isbn"
 			placeholder="Please insert comma-separated ISBN numbers"><?php
 				if ($this->_extra != null) {
-					echo $this->_extra['isbn'];
+					echo trim($this->_extra['isbn']);
 				}
-			?>
-		</textarea>
+			?></textarea>
 	</div>
 </div>
 

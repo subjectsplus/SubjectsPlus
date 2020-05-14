@@ -2286,6 +2286,11 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 .booklist-edit-container {
   display: flex;
   justify-content: space-around;
+  width: 100%;
+}
+
+.booklist-edit-container * {
+  max-width: 100%;
 }
 
 .booklist-description-container {
@@ -2294,6 +2299,10 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .booklist-update-container {
   width: 50%;
+}
+
+.booklist-update-container * {
+  max-width: 100%;
 }
 
 .booklist-update-container ul {
@@ -2321,7 +2330,7 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
-  cursor: move; 
+  cursor: move;
   color:#333;  
   line-height: 1.3em; 
   border-bottom: 1px dotted #CCC; 
@@ -2333,6 +2342,15 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .booklist-item-draggable .booklist-delete-button:hover {
   cursor: pointer;
+}
+
+.booklist-item-draggable .isbn-number:hover {
+  cursor: default;
+  pointer-events: none;
+}
+
+.booklist-hidden-textarea {
+  display: none;
 }
 
 /* Remove boxes from current tab */

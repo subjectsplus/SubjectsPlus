@@ -125,11 +125,16 @@ function bookList() {
 			$('button[name=add-isbn]').on('click', (clickEvent)=> {
         const theButton = $(clickEvent.currentTarget);
         const inputField = $(theButton).prev('input');
-				const isbn = $(inputField).val();
+        const isbn = $(inputField).val();
+        
+        // Don't run if empty string
+        if (isbn === '') {
+          return;
+        };
 
         const validLengths = [10, 13];
         const filteredValue = this.scrubInput(isbn);
-				const isbnLengthNotValid = !( validLengths.includes(filteredValue.length) );
+        const isbnLengthNotValid = !( validLengths.includes(filteredValue.length) );
 
 				// Make sure ISBN is 10 or 13 digits
 				if (isbnLengthNotValid) {
@@ -166,6 +171,9 @@ function bookList() {
 
         // Synchronize invisible textarea with updated list
         this.synchronizeTextarea();
+
+        // Re-stripe the list
+        this.stripeRows();
 			});
 		},
 		deleteIsbnFromList: function (liToDelete) {
@@ -739,15 +747,19 @@ function bookList() {
 			});
 		},
 		getSortableIsbnLi: function(isbn) {
+      // NOTE: Must be kept in sync with template in
+      // BookListEditOutput.php
 			return `
 				<li
 					data-isbn='${isbn}'
 					class='booklist-item-draggable'>
-						<span class='isbn-number'><i class='fa fa-bars'></i> ${isbn}</span>
+            <div>
+              <i class='fa fa-bars'></i>
+              <span class='isbn-number'> ${isbn}</span>
+            </div>
 						<i class='fa fa-trash booklist-delete-button' data-isbn='${isbn}'></i>
 				</li>
 			`;
-			// return `<li class='booklist-item-draggable'>${isbn}</li>`;
 		}
   };
 
