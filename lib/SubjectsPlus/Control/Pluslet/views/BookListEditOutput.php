@@ -50,11 +50,12 @@
 				?>
 		</ul>
 
-		<div>
+		<div class="isbn-input-container">
 			<input
 				type="text"
 				class="isbn-input"
-				name="isbn-input">
+				name="isbn-input"
+				placeholder="10 or 13 digit ISBN">
 			<button
 				type="button"
 				class="add-isbn"
@@ -65,13 +66,13 @@
 
 		<div>
 			<p>
-				You may rearrange the items in the list using the drag bar (<i class='fa fa-bars'></i>).
+				<strong>You may rearrange the items in the list using the drag bar (<i class='fa fa-bars'></i>).</strong>
 			</p>
 		</div>
 
 		<textarea
-			rows="4"
-			cols="30"
+			rows="6"
+			cols="50"
 			name="BookList-extra-isbn"
 			placeholder="Please insert comma-separated ISBN numbers"><?php
 				if ($this->_extra != null) {

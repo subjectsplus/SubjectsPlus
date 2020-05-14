@@ -20,10 +20,17 @@
     // Convenience script to automatically open editing box on page load
 
     $(document).ready(()=> {
-        setTimeout(()=> {
-            const pluslet_id = Number(<?php print $this->_pluslet_id ?>);
-            $(`#edit-${pluslet_id}-BookList`).click();
-        }, 2000);
+        // Convenience tool to switch to editing view for development
+        let automaticallyOpenEditView
+        // = true // <-- comment this out to turn off
+        ;
+
+        if (automaticallyOpenEditView) {
+            setTimeout(()=> {
+                const pluslet_id = Number(<?php print $this->_pluslet_id ?>);
+                $(`#edit-${pluslet_id}-BookList`).click();
+            }, 2000);
+        };
     });
 </script>
 

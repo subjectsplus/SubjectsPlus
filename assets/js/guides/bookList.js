@@ -114,8 +114,9 @@ function bookList() {
 			$('button[name=add-isbn]').on('click', (clickEvent)=> {
 				console.warn('addIsbnButtonListener CALLED');
 
-				const theButton = $(clickEvent.currentTarget);
-				const isbn = $(theButton).prev('input').val();
+        const theButton = $(clickEvent.currentTarget);
+        const inputField = $(theButton).prev('input');
+				const isbn = $(inputField).val();
 
 				const validLengths = [10,13];
 				const isbnLengthNotValid = !( validLengths.includes(isbn.length) );
@@ -126,7 +127,13 @@ function bookList() {
 					return false;
 				};
 
-				this.addIsbnToList(isbn);
+        this.addIsbnToList(isbn);
+
+        // Clear input element
+        $(inputField).val('');
+
+        // Synchronize invisible textarea with updated list
+        this.synchronizeTextarea();
 			});
 		},
 		addIsbnToList: function (isbn) {
@@ -137,7 +144,7 @@ function bookList() {
 			this.stripeRows();
 
 			// Recreate event listeners for all delete buttons, so new row also gets it
-			this.deleteIsbnButtonListener();
+      this.deleteIsbnButtonListener();
 		},
 		deleteIsbnButtonListener: function () {
 			// Clear all delete listeners to start, so newly added ISBNs are added correctly
@@ -145,7 +152,10 @@ function bookList() {
 
 			$('.booklist-delete-button').on('click', (event)=> {
 				const whichLi = $(event.currentTarget).closest('li');
-				this.deleteIsbnFromList(whichLi);
+        this.deleteIsbnFromList(whichLi);
+
+        // Synchronize invisible textarea with updated list
+        this.synchronizeTextarea();
 			});
 		},
 		deleteIsbnFromList: function (liToDelete) {
@@ -670,8 +680,8 @@ function bookList() {
 			this.stripeRows();
 		},
 		onListChange: function(event, ui) {
-			// console.warn('HITTING ONSORTSTOP()');
-			// console.warn('event: ', event.type);
+			console.warn('HITTING ONSORTSTOP()');
+			console.warn('event: ', event.type);
 
 			switch(event.type) {
 				case 'sortstart':
@@ -679,12 +689,25 @@ function bookList() {
 				case 'sortchange':
 					break;
 				case 'sortupdate':
-					// Code to synchronize textarea
-
+          this.synchronizeTextarea();
 					this.stripeRows();
 					break;
-			}
-		},
+			};
+    },
+    synchronizeTextarea: function () {
+      const currentListJoined = this.getBooklistFromSortables().join(',');
+      const textarea = $("textarea[name='BookList-extra-isbn']");
+
+      if (currentListJoined.length) {
+        $(textarea).html(currentListJoined);
+      };
+    },
+    getBooklistFromSortables: function () {
+      const containerDiv = $('.booklist-draggables-container');
+      const sortableItems = containerDiv.children();
+
+      return $.map(sortableItems, (item)=> $(item).data('isbn'));
+    },
 		stripeRows: function() {
 			const mapping = {
 				evenRows: "evenrow striper",

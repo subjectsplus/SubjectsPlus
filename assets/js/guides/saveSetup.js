@@ -406,8 +406,6 @@ function saveSetup() {
             // asynchronously so that setTimeout to save guide is no longer needed.
             ////////////////////////
 
-            debugger;
-
             $.ajax({
                 url: "helpers/guide_data.php",
                 data: {
