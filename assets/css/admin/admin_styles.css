@@ -2285,20 +2285,27 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .booklist-edit-container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around;
   width: 100%;
 }
 
-.booklist-description-container {
-  padding: 0px 10px 10px 0px;
+.booklist-description-container * {
+  max-width: 100%;
+}
+
+.booklist-description-container textarea {
+  border-radius: 2px;
+  margin-bottom: 10px;
 }
 
 .booklist-update-container {
-  padding: 0px 10px 10px 10px;
+  /* padding: 0px 10px 10px 10px; */
+  /* max-width: 50%; */
 }
 
 .booklist-update-container * {
-  /* max-width: 100%; */
+  max-width: 100%;
 }
 
 .booklist-update-container ul {
@@ -2335,6 +2342,16 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 .booklist-item-draggable .isbn-number:hover {
   cursor: default;
   pointer-events: none;
+}
+
+.isbn-input-container {
+  display: flex;
+  justify-content: center;
+}
+
+.isbn-input-container .button {
+  margin: 0px 0px 0px 10px;
+  border-radius: 2px;
 }
 
 .booklist-hidden-textarea {
