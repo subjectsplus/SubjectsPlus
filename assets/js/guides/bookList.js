@@ -138,7 +138,6 @@ function bookList() {
 
 				// Make sure ISBN is 10 or 13 digits
 				if (isbnLengthNotValid) {
-					// console.error('isbn.length incorrect, isbn.length was: ', isbn.length);
 					return false;
 				};
 
@@ -698,9 +697,6 @@ function bookList() {
 			myBookList.stripeRows();
 		},
 		onListChange: function(event, ui) {
-			// console.warn('HITTING ONLISTCHANGE()');
-			// console.warn('event: ', event.type);
-
 			switch(event.type) {
 				case 'sortstart':
 					break;

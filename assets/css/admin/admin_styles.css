@@ -2288,6 +2288,12 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
+  max-width: 35em;
+}
+
+.booklist-edit-container div {
+  width: 90%;
+  max-width: 90%;
 }
 
 .booklist-description-container * {
@@ -2296,16 +2302,13 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .booklist-description-container textarea {
   border-radius: 2px;
+  margin-bottom: 20px;
+  width: -webkit-fill-available;
+}
+
+.booklist-update-container > * {
+  margin: 0 auto;
   margin-bottom: 10px;
-}
-
-.booklist-update-container {
-  /* padding: 0px 10px 10px 10px; */
-  /* max-width: 50%; */
-}
-
-.booklist-update-container * {
-  max-width: 100%;
 }
 
 .booklist-update-container ul {
@@ -2314,6 +2317,10 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .booklist-draggables-container {
   list-style: inside none none;
+}
+
+.booklist-draggables-container li {
+  padding: 6px;
 }
 
 .booklist-item-draggable {
@@ -2346,7 +2353,12 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 
 .isbn-input-container {
   display: flex;
-  justify-content: center;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.isbn-input-container input {
+  min-width: 50%;
 }
 
 .isbn-input-container .button {

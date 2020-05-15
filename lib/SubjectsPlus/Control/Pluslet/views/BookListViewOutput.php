@@ -16,9 +16,6 @@
 </div>
 
 <script>
-    // ** COMMENT OUT AFTER TESTING **
-    // Convenience script to automatically open editing box on page load
-
     $(document).ready(()=> {
         // Convenience tool to switch to editing view for development
         let automaticallyOpenEditView

@@ -28,6 +28,18 @@
 	</div>
 
 	<div class="booklist-update-container">
+
+		<div class="isbn-input-container">
+			<input
+				type="text"
+				class="isbn-input"
+				name="isbn-input"
+				placeholder="10 or 13 digit ISBN">
+			<button
+				type="button"
+				class="add-isbn button"
+				name="add-isbn">Add</button>
+		</div>
 		
 		<ul
 			class="booklist-draggables-container"
@@ -56,22 +68,10 @@
 				?>
 		</ul>
 
-		<div class="isbn-input-container">
-			<input
-				type="text"
-				class="isbn-input"
-				name="isbn-input"
-				placeholder="10 or 13 digit ISBN">
-			<button
-				type="button"
-				class="add-isbn button"
-				name="add-isbn">Add</button>
-		</div>
-
-		<div>
-			<p>
+		<div style="margin-left: 0px; width: auto; max-width: none;">
+			<span>
 				<strong>You may rearrange the items in the list using the drag bar (<i class='fa fa-bars'></i>).</strong>
-			</p>
+			</span>
 		</div>
 
 		<textarea
