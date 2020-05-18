@@ -9,6 +9,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Dropdown;
+
 $subcat = "guides";
 $page_title = "Manage Guide Metadata";
 
@@ -74,18 +75,53 @@ if (isset($_POST["submit_record"])) {
 
   // Checking for Guide thumbnail upload
   if (
-      !empty($_FILES)                                     // $_FILES is not empty
-      && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
-      && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
+    !empty($_FILES)                                     // $_FILES is not empty
+    && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
+    && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
     ) {
-    print_r( array(
-      '$_FILES["guide-thumbnail-file"]' => $_FILES['guide-thumbnail-file']
-    ));
-    die;
+    // print_r( array(
+    //   '$_FILES["guide-thumbnail-file"]' => $_FILES['guide-thumbnail-file'],
+    //   '$_POST' => $_POST,
+    //   '$GLOBALS' => $GLOBALS
+    // ));
+    // die;
 
     $uploaded_file = $_FILES['guide-thumbnail-file'];
+    $guide_shortform = $_POST['shortform'];
+    $save_directory = '/var/public/assets/images/guide_thumbs/';
 
-    // 
+    $valid_image = true;
+
+    // Filetype is 'image/jpeg'
+    $filetype = $uploaded_file['type'];
+    if ($filetype !== 'image/jpeg') {
+      $valid_image = false;
+    };
+
+    if ($valid_image) {
+      // File is 125 x 125 pixels
+      $current_size = getimagesize($uploaded_file['tmp_name']);
+      $valid_dimensions = ($current_size[0] === 125 && $current_size[1] === 125);
+
+      // If not, resize
+      if (!$valid_dimensions) {
+        $resized_image = imagecreatefromjpeg($uploaded_file['tmp_name']);
+
+        print_r($resized_image);
+        die;
+      };
+
+      // Name of file matches shortform (if exists)
+      if (!empty($guide_shortform)) {
+
+      };
+    };
+
+    // Store file in guide_thumbs directory
+    if ($valid_image === true) {
+
+    };
+
   };
 
   // 1.  Make sure we have minimum non-dupe data
