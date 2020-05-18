@@ -239,38 +239,37 @@ class Guide
     }
 
     public function outputMetadataForm($wintype = "")
-    {
+	{
 
-        global $wysiwyg_desc;
-        global $IconPath;
-        global $guide_types;
-        global $guide_headers;
-        global $use_disciplines;
+		global $wysiwyg_desc;
+		global $IconPath;
+		global $guide_types;
+		global $guide_headers;
+		global $use_disciplines;
 
-        //print "<pre>";print_r($this->_staffers); print "</pre>";
+		//print "<pre>";print_r($this->_staffers); print "</pre>";
 
-        $action = htmlentities($_SERVER['PHP_SELF']) . "?subject_id=" . $this->_subject_id;
+		$action = htmlentities($_SERVER['PHP_SELF']) . "?subject_id=" . $this->_subject_id;
 
-        if ($wintype != "") {
-            $action .= "&wintype=pop";
-        }
-		if ($wintype == "pop") {
-		$copy_guide = "";
-		} else {
-		$copy_guide = "<a href='guide_copy.php'>" . _("Copy an Existing Guide") . "</a>";
+		if ($wintype != "") {
+			$action .= "&wintype=pop";
 		}
-        if ($this->_subject_id) {
-            $guide_title_line = _("Edit Existing Guide Metadata");
-			
-        } else {
-            $guide_title_line = _("Create New Guide");
-        }
+		if ($wintype == "pop") {
+			$copy_guide = "";
+		} else {
+			$copy_guide = "<a href='guide_copy.php'>" . _("Copy an Existing Guide") . "</a>";
+		}
+		if ($this->_subject_id) {
+			$guide_title_line = _("Edit Existing Guide Metadata");
+		} else {
+			$guide_title_line = _("Create New Guide");
+		}
 
-        $db = new Querier();
-        $objInstructors = new SubjectBBCourse($db);
-        $instructor_option_boxes = $objInstructors->getInstructorsDropDownItems($this->_instructor);
+		$db = new Querier();
+		$objInstructors = new SubjectBBCourse($db);
+		$instructor_option_boxes = $objInstructors->getInstructorsDropDownItems($this->_instructor);
 
-        $all_instructors = " 
+		$all_instructors = " 
             <select name=\"instructor\" id=\"instructor\"> 
             <option id='intructor_place_holder'>" . _("None") . "</option> 
             $instructor_option_boxes 
@@ -284,8 +283,8 @@ class Guide
             </script> 
             ";
 
-        echo "
-            <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\">
+		echo "
+            <form action=\"" . $action . "\" method=\"post\" id=\"new_record\" class=\"pure-form pure-form-stacked\" accept-charset=\"UTF-8\" enctype=\"multipart/form-data\">
             <input type=\"hidden\" name=\"subject_id\" value=\"" . $this->_subject_id . "\" />
             <div class=\"pure-g\">
               <div class=\"pure-u-1-2\">
@@ -304,104 +303,104 @@ class Guide
 
             <span class=\"smaller\">* " . _("Short label that shows up in URL--don't use spaces, ampersands, etc.") . "</span>";
 
-        global $lti_enabled;
-        if (isset($lti_enabled)) {
-            if ($lti_enabled) {
-                echo "
+		global $lti_enabled;
+		if (isset($lti_enabled)) {
+			if ($lti_enabled) {
+				echo "
                 <label for=\"course_code\">" . _("Course Code") . "</label>
             <input type=\"text\" name=\"coursecode\" id=\"course_code\" size=\"20\" class=\"pure - input - 1 - 4\" value=\"" . $this->_course_code . "\" >
 
             <label for=\"instructor\" > " . _("Instructor") . "</label>
             <div class=\"all - instructors - dropdown dropdown_list\">" . $all_instructors . "</div>
                 ";
-            }
-        }
-            
-        echo "<label for=\"type\">" . _("Type of Guide") . "</label>";
+			}
+		}
 
-        /////////////////////
-        // Guide types dropdown
-        /////////////////////
+		echo "<label for=\"type\">" . _("Type of Guide") . "</label>";
 
-        $guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
-        $guide_string = $guideMe->display();
-        echo $guide_string;
+		/////////////////////
+		// Guide types dropdown
+		/////////////////////
 
-        echo "<label for=\"header\">" . _("Header Type") . "</label>";
+		$guideMe = new Dropdown("type", $guide_types, $this->_type, "50");
+		$guide_string = $guideMe->display();
+		echo $guide_string;
 
-        /////////////////////
-        // Header switcher dropdown
-        /////////////////////
+		echo "<label for=\"header\">" . _("Header Type") . "</label>";
 
-        $headerMe = new Dropdown("header", $guide_headers, $this->_header, "50");
-        $header_string = $headerMe->display();
-        echo $header_string;
+		/////////////////////
+		// Header switcher dropdown
+		/////////////////////
 
-        echo "<span class=\"smaller\">* " . _("If you're not sure, stick with default") . "</span>";
+		$headerMe = new Dropdown("header", $guide_headers, $this->_header, "50");
+		$header_string = $headerMe->display();
+		echo $header_string;
 
-        /////////////////////
-        // Is Live
-        ////////////////////
+		echo "<span class=\"smaller\">* " . _("If you're not sure, stick with default") . "</span>";
 
-        $is_live = "<label for=\"active\">" . _("Visibility") . "</label>
+		/////////////////////
+		// Is Live
+		////////////////////
+
+		$is_live = "<label for=\"active\">" . _("Visibility") . "</label>
     <input name=\"active\" type=\"radio\" value=\"1\"";
-        if ($this->_active == 1) {
-            $is_live .= " checked=\"checked\"";
-        }
-        $is_live .= " /> " . _("Public:  Everyone can see") . " <br />
+		if ($this->_active == 1) {
+			$is_live .= " checked=\"checked\"";
+		}
+		$is_live .= " /> " . _("Public:  Everyone can see") . " <br />
         <input name=\"active\" type=\"radio\" value=\"0\"";
-        if ($this->_active == 0) {
-            $is_live .= " checked=\"checked\"";
-        }
-        $is_live .= " /> " . _("Hidden:  Not listed, but visible if you have the URL") . " <br />
+		if ($this->_active == 0) {
+			$is_live .= " checked=\"checked\"";
+		}
+		$is_live .= " /> " . _("Hidden:  Not listed, but visible if you have the URL") . " <br />
         <input name=\"active\" type=\"radio\" value=\"2\"";
-        if ($this->_active == 2) {
-            $is_live .= " checked=\"checked\"";
-        }
-        $is_live .= " /> " . _("Suppressed:  Must be logged in to SP to view");
+		if ($this->_active == 2) {
+			$is_live .= " checked=\"checked\"";
+		}
+		$is_live .= " /> " . _("Suppressed:  Must be logged in to SP to view");
 
-        print $is_live;
+		print $is_live;
 
-        ////////////////////////////
-        // Parenthood
-        ///////////////////////////
+		////////////////////////////
+		// Parenthood
+		///////////////////////////
 
-        $parents_list = "";
+		$parents_list = "";
 
-        if ($this->_parents == FALSE) {
-            // No results
-            $parents_list = "";
-        } else {
-            // loop through results
-            foreach ($this->_parents as $value) {
+		if ($this->_parents == FALSE) {
+			// No results
+			$parents_list = "";
+		} else {
+			// loop through results
+			foreach ($this->_parents as $value) {
 
-                $parents_list .= self::outputParents($value);
-            }
-        }
+				$parents_list .= self::outputParents($value);
+			}
+		}
 
-        ////////
-        // Parent dropdown
-        ////////
+		////////
+		// Parent dropdown
+		////////
 
-        $querier = new Querier();
-        $subject_query = "SELECT subject_id, subject FROM subject WHERE subject_id != '$this->_subject_id' ORDER BY subject ASC ";
-        $subjectArray = $querier->query($subject_query);
+		$querier = new Querier();
+		$subject_query = "SELECT subject_id, subject FROM subject WHERE subject_id != '$this->_subject_id' ORDER BY subject ASC ";
+		$subjectArray = $querier->query($subject_query);
 
-        $parentMe = new Dropdown("parent_id[]", $subjectArray, "", "50", "--Select--");
-        $parent_string = $parentMe->display();
+		$parentMe = new Dropdown("parent_id[]", $subjectArray, "", "50", "--Select--");
+		$parent_string = $parentMe->display();
 
-        $parenthood = "$parent_string <div id=\"parent_list\">$parents_list</div> <!-- parent guides inserted here -->";
+		$parenthood = "$parent_string <div id=\"parent_list\">$parents_list</div> <!-- parent guides inserted here -->";
 
-        // this is for legacy reasons, methinks
-        if (isset($main_col_size)) {
-        } else {
-        $main_col_size = null;
-        }
+		// this is for legacy reasons, methinks
+		if (isset($main_col_size)) {
+		} else {
+			$main_col_size = null;
+		}
 
-        $screen_layout = "<input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
+		$screen_layout = "<input type=\"hidden\" id=\"extra\" name=\"extra[maincol]\" value=\"$main_col_size\" />";
 
 
-        echo "
+		echo "
         <label for=\"parent\">" . _("Parent Guides") . "</label>
         $parenthood
         <br style=\"clear: both;\" />
@@ -413,83 +412,83 @@ class Guide
     <!-- right hand column -->
     <div class=\"pure-u-1-2\">";
 
-    $content = "<input type=\"submit\" name=\"submit_record\"  class=\"pure-button pure-button-primary save-guide\" value=\"" . _("Save Now") . "\" />";
+		$content = "<input type=\"submit\" name=\"submit_record\"  class=\"pure-button pure-button-primary save-guide\" value=\"" . _("Save Now") . "\" />";
 
-        // if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
-        // make sure they're allowed to delete
+		// if a) it's not a new record, and  b) we're an admin or c) we are listed as a librarian for this guide, show delete button
+		// make sure they're allowed to delete
 
-    if ($this->_subject_id != "") {
-            if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
-            $content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button delete_button pure-button-warning delete-guide\" value=\"" . _("Delete Forever!") . "\" />";
-        }
-    }
-    // get edit history
-    $last_mod = _("Last modified: ") . lastModded("guide", $this->_subject_id);
-    $title = "<div id=\"last_edited\">$last_mod</div>";
+		if ($this->_subject_id != "") {
+			if (in_array($_SESSION["staff_id"], $this->_ok_staff) || $_SESSION["admin"] == 1) {
+				$content .= " <input type=\"submit\" name=\"delete_record\" class=\"pure-button delete_button pure-button-warning delete-guide\" value=\"" . _("Delete Forever!") . "\" />";
+			}
+		}
+		// get edit history
+		$last_mod = _("Last modified: ") . lastModded("guide", $this->_subject_id);
+		$title = "<div id=\"last_edited\">$last_mod</div>";
 
-    makePluslet($title, $content, "no_overflow");
+		makePluslet($title, $content, "no_overflow");
 
-        /////////////////
-        // Staffers
-        /////////////////
-        $staffer_list = "";
+		/////////////////
+		// Staffers
+		/////////////////
+		$staffer_list = "";
 
-        if ($this->_staffers == FALSE) {
-            // No results
-            $staffer_list = "";
-        } else {
-            // loop through results
-            foreach ($this->_staffers as $value) {
+		if ($this->_staffers == FALSE) {
+			// No results
+			$staffer_list = "";
+		} else {
+			// loop through results
+			foreach ($this->_staffers as $value) {
 
-                $staffer_list .= self::outputStaff($value);
-            }
-        }
+				$staffer_list .= self::outputStaff($value);
+			}
+		}
 
-        $qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' AND active = '1' ORDER BY lname, fname";
+		$qStaff = "select staff_id, CONCAT(fname, ' ', lname) as fullname FROM staff WHERE ptags LIKE '%records%' AND active = '1' ORDER BY lname, fname";
 
-        $querierStaff = new Querier();
-        $staffArray = $querierStaff->query($qStaff);
+		$querierStaff = new Querier();
+		$staffArray = $querierStaff->query($qStaff);
 
-        $staffMe = new Dropdown("staff_id[]", $staffArray, "", "50", "--Select--");
-        $staff_string = $staffMe->display();
+		$staffMe = new Dropdown("staff_id[]", $staffArray, "", "50", "--Select--");
+		$staff_string = $staffMe->display();
 
-        /////////////////
-        // Disciplines
-        /////////////////
+		/////////////////
+		// Disciplines
+		/////////////////
 
-        if ($use_disciplines == TRUE) {
+		if ($use_disciplines == TRUE) {
 
-            $discipliner_list = "";
+			$discipliner_list = "";
 
-            if ($this->_discipliners == FALSE) {
-                // No results
-                $discipliner_list = "";
-            } else {
-                // loop through results
-                foreach ($this->_discipliners as $value) {
+			if ($this->_discipliners == FALSE) {
+				// No results
+				$discipliner_list = "";
+			} else {
+				// loop through results
+				foreach ($this->_discipliners as $value) {
 
-                    $discipliner_list .= self::outputDisciplines($value);
-                }
-            }
+					$discipliner_list .= self::outputDisciplines($value);
+				}
+			}
 
-            $qDiscipline = "select discipline_id, discipline FROM discipline ORDER BY discipline";
+			$qDiscipline = "select discipline_id, discipline FROM discipline ORDER BY discipline";
 
-            $querierDiscipline = new Querier();
-            $disciplineArray = $querierStaff->query($qDiscipline);
+			$querierDiscipline = new Querier();
+			$disciplineArray = $querierStaff->query($qDiscipline);
 
-            $disciplineMe = new Dropdown("discipline_id[]", $disciplineArray, "", "50", "--Select--");
-            $discipline_string = $disciplineMe->display();
-        }
+			$disciplineMe = new Dropdown("discipline_id[]", $disciplineArray, "", "50", "--Select--");
+			$discipline_string = $disciplineMe->display();
+		}
 
-        $staff_box = "$staff_string <div id=\"item_list\" class=\"sortable-staff-list ui-sortable\">$staffer_list</div> <!-- staff inserted here -->";
+		$staff_box = "$staff_string <div id=\"item_list\" class=\"sortable-staff-list ui-sortable\">$staffer_list</div> <!-- staff inserted here -->";
 
-        makePluslet(_("Staff"), $staff_box, "no_overflow");
+		makePluslet(_("Staff"), $staff_box, "no_overflow");
 
-        //////////////
-        // Metadata
-        //////////////
+		//////////////
+		// Metadata
+		//////////////
 
-        $metadata_box = "
+		$metadata_box = "
         <label for=\"description\">" . _("Description") . "</label>
         <textarea name=\"description\" id=\"record_description\" class=\"\" cols=\"35\" rows=\"2\">" . $this->_description . "</textarea>
 
@@ -499,25 +498,24 @@ class Guide
         <input type=\"text\" name=\"redirect_url\" id=\"record_redirect_url\" size=\"40\" class=\"\" value=\"" . $this->_redirect_url . "\">
         ";
 
-        if ($use_disciplines == TRUE) {
+		if ($use_disciplines == TRUE) {
 
-        $metadata_box .= "<label for=\"discipline_list\">" . _("Parent Disciplines") . "</span><br />
+			$metadata_box .= "<label for=\"discipline_list\">" . _("Parent Disciplines") . "</span><br />
         $discipline_string
         <div id=\"discipline_list\">$discipliner_list</div> <!-- disciplines inserted here -->
         </div>";
+		}
 
-        }
+		makePluslet(_("Metadata (optional)"), $metadata_box, "no_overflow");
 
-        makePluslet(_("Metadata (optional)"), $metadata_box, "no_overflow");
+		////////////////
+		// Thumbnail Option
+		////////////////
 
-        ////////////////
-        // Thumbnail Option
-				////////////////
-				
-				$thumbnail_box_title = "Guide Thumbnail";
+		$thumbnail_box_title = "Guide Thumbnail";
 
-				// Thumbnail upload overall container
-        $thumbnail_box = "
+		// Thumbnail upload overall container
+		$thumbnail_box = "
 						<div id='guide-metadata-thumbnail-upload-container'>
 							<p style='margin-bottom: 5px;'>To associate a thumbnail image with this guide, upload an image file below that is:</p>
 							<ul style='margin-top: 0px;'>
@@ -535,9 +533,12 @@ class Guide
 							<p>No files currently selected for upload</p>
 						</div>
 				";
-				
-				// Simple script to handle image preview
-				$thumbnail_box .= "
+
+		// Simple script to handle:
+		// - Live image preview after file selection
+		// - Filetype validation
+		// - File size validation
+		$thumbnail_box .= "
 					<script>
 						const guideThumbnailInput = document.getElementById('guide-thumbnail-file');
 						const guideThumbnailPreview = document.querySelector('.guide-thumbnail-preview');
@@ -613,13 +614,13 @@ class Guide
 					</script>
 				";
 
-        // $thumbnail_box = _("If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server.");
-        // $thumbnail_box .= "<p>" . _("E.g., musichistory.jpg, if your shortform is \"musichistory\".");
-        // $thumbnail_box .= "<p>" . _("Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus.");
+		// $thumbnail_box = _("If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server.");
+		// $thumbnail_box .= "<p>" . _("E.g., musichistory.jpg, if your shortform is \"musichistory\".");
+		// $thumbnail_box .= "<p>" . _("Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus.");
 
-        makePluslet(_($thumbnail_box_title), $thumbnail_box, "no_overflow");
+		makePluslet(_($thumbnail_box_title), $thumbnail_box, "no_overflow");
 
-        echo "</div>\n</form>";
+		echo "</div>\n</form>";
     }
 
     public function outputStaff($value)

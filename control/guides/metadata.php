@@ -14,6 +14,11 @@ $page_title = "Manage Guide Metadata";
 
 $use_jquery = array("ui_styles");
 
+// if ( !empty($_POST) ) {
+//   print_r($GLOBALS);
+//   die;
+// };
+
 // Suppress header if it is to be shown in colorbox or popup window
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   $no_header = "yes";
@@ -65,9 +70,24 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 }
 
 if (isset($_POST["submit_record"])) {
-    //$feedback = $record->getMessage();
-   
-    
+  //$feedback = $record->getMessage();
+
+  // Checking for Guide thumbnail upload
+  if (
+      !empty($_FILES)                                     // $_FILES is not empty
+      && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
+      && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
+    ) {
+    print_r( array(
+      '$_FILES["guide-thumbnail-file"]' => $_FILES['guide-thumbnail-file']
+    ));
+    die;
+
+    $uploaded_file = $_FILES['guide-thumbnail-file'];
+
+    // 
+  };
+
   // 1.  Make sure we have minimum non-dupe data
   // 1a. Make sure there is a title, location, and subject
   // we're using [staff_id][1] because the first value is an empty "--Select--"
@@ -78,7 +98,7 @@ if (isset($_POST["submit_record"])) {
 
     exit;
   }
-//print_r($_POST);exit;
+  //print_r($_POST);exit;
   // Submit form
 
   $record = new Guide($_POST["subject_id"], "post");
@@ -98,7 +118,7 @@ if (isset($_POST["submit_record"])) {
   $feedback = $record->getMessage();
   // See all the queries?
   //$record->deBug();
-    print   "<div class=\"master-feedback\" style=\"display:block;\">" . $feedback . "</div>";
+  print   "<div class=\"master-feedback\" style=\"display:block;\">" . $feedback . "</div>";
 }
 
 if (!isset($no_form)) {
