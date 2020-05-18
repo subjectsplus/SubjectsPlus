@@ -512,13 +512,112 @@ class Guide
 
         ////////////////
         // Thumbnail Option
-        ////////////////
+				////////////////
+				
+				$thumbnail_box_title = "Guide Thumbnail";
 
-        $thumbnail_box = _("If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server.");
-        $thumbnail_box .= "<p>" . _("E.g., musichistory.jpg, if your shortform is \"musichistory\".");
-        $thumbnail_box .= "<p>" . _("Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus.");
+				// Thumbnail upload overall container
+        $thumbnail_box = "
+						<div id='guide-metadata-thumbnail-upload-container'>
+							<p style='margin-bottom: 5px;'>To associate a thumbnail image with this guide, upload an image file below that is:</p>
+							<ul style='margin-top: 0px;'>
+								<li>JPEG format
+								<li>125 x 125 pixels
+							</ul>
+							<input
+								type='file'
+								id='guide-thumbnail-file'
+								name='guide-thumbnail-file'
+								accept='.jpg'
+							>
+						</div>
+						<div class='guide-thumbnail-preview'>
+							<p>No files currently selected for upload</p>
+						</div>
+				";
+				
+				// Simple script to handle image preview
+				$thumbnail_box .= "
+					<script>
+						const guideThumbnailInput = document.getElementById('guide-thumbnail-file');
+						const guideThumbnailPreview = document.querySelector('.guide-thumbnail-preview');
 
-        makePluslet(_("Thumbnail (VERY optional)"), $thumbnail_box, "no_overflow");
+						// Function to create image preview on input field change
+						const updateImageDisplay = ()=> {
+							
+							// Check if file is of valid type
+							const validFileType = (file)=> {
+
+								const fileTypes = [
+									'image/jpeg'
+								];
+
+								return fileTypes.includes(file.type);
+							};
+
+							// Check filesize
+							const returnFileSize = (number)=> {
+								if(number < 1024) {
+									return number + 'bytes';
+								} else if(number >= 1024 && number < 1048576) {
+									return (number/1024).toFixed(1) + 'KB';
+								} else if(number >= 1048576) {
+									return (number/1048576).toFixed(1) + 'MB';
+								}
+							};
+
+							// Empty out the preview div every time function is hit
+							while(guideThumbnailPreview.firstChild) {
+								guideThumbnailPreview.removeChild(guideThumbnailPreview.firstChild);
+							};
+						
+							const currentFiles = guideThumbnailInput.files;					
+							const br = document.createElement('br');
+							
+							if(currentFiles.length === 0) {
+								
+								const para = document.createElement('p');
+								para.textContent = 'No files currently selected for upload';
+								guideThumbnailPreview.appendChild(para);
+
+							} else {
+
+								const list = document.createElement('ul');
+								list.setAttribute('style', 'list-style: none; padding-left: 0px;');
+								guideThumbnailPreview.appendChild(list);
+						
+								for(const file of currentFiles) {
+									const listItem = document.createElement('li');
+									const para = document.createElement('p');
+									if (validFileType(file)) {
+										para.textContent = 'File name: ' + file.name + ', file size: ' + returnFileSize(file.size);
+										const image = document.createElement('img');
+										image.src = URL.createObjectURL(file);
+						
+										listItem.appendChild(image);
+										listItem.appendChild(br);
+										listItem.appendChild(para);
+									} else {
+										para.textContent = file.name + ' is not a valid file type. Update your selection.';
+										para.classList.add('booklist-alert');
+										listItem.appendChild(para);
+									}
+						
+									list.appendChild(listItem);
+								}
+							}
+						};
+						
+						// Attach event listener to guide thumbnail file input
+						guideThumbnailInput.addEventListener('change', updateImageDisplay);
+					</script>
+				";
+
+        // $thumbnail_box = _("If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server.");
+        // $thumbnail_box .= "<p>" . _("E.g., musichistory.jpg, if your shortform is \"musichistory\".");
+        // $thumbnail_box .= "<p>" . _("Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus.");
+
+        makePluslet(_($thumbnail_box_title), $thumbnail_box, "no_overflow");
 
         echo "</div>\n</form>";
     }
