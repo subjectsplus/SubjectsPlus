@@ -73,55 +73,77 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 if (isset($_POST["submit_record"])) {
   //$feedback = $record->getMessage();
 
-  // Checking for Guide thumbnail upload
-  if (
+  $guide_thumbnail_upload =
     !empty($_FILES)                                     // $_FILES is not empty
     && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
     && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
-    ) {
-    // print_r( array(
-    //   '$_FILES["guide-thumbnail-file"]' => $_FILES['guide-thumbnail-file'],
-    //   '$_POST' => $_POST,
-    //   '$GLOBALS' => $GLOBALS
-    // ));
-    // die;
+  ;
 
-    $uploaded_file = $_FILES['guide-thumbnail-file'];
-    $guide_shortform = $_POST['shortform'];
-    $save_directory = '/var/public/assets/images/guide_thumbs/';
+  // Checking for Guide thumbnail upload
+  if ($guide_thumbnail_upload) {
+    $uploaded_file_info = $_FILES['guide-thumbnail-file'];
 
     $valid_image = true;
 
     // Filetype is 'image/jpeg'
-    $filetype = $uploaded_file['type'];
+    $filetype = $uploaded_file_info['type'];
     if ($filetype !== 'image/jpeg') {
       $valid_image = false;
     };
 
+    // Only do the rest of this stuff if it's an image file
     if ($valid_image) {
-      // File is 125 x 125 pixels
-      $current_size = getimagesize($uploaded_file['tmp_name']);
-      $valid_dimensions = ($current_size[0] === 125 && $current_size[1] === 125);
+
+      // Check if image is 125 x 125 pixels
+      $temp_image = $uploaded_file_info['tmp_name'];
+      $current_size = getimagesize($temp_image);
+      $current_width = $current_size[0];
+      $current_height = $current_size[1];
+
+      $have_to_resize = !($current_width === 125 && $current_height === 125);
 
       // If not, resize
-      if (!$valid_dimensions) {
-        $resized_image = imagecreatefromjpeg($uploaded_file['tmp_name']);
+      if ($have_to_resize) {
+        $new_width = 125;
+        $new_height = 125;
 
-        print_r($resized_image);
-        die;
+        $original_image = imagecreatefromjpeg($temp_image);
+        $resized_image = imagecreatetruecolor($new_width, $new_height);
+        
+        imagecopyresampled(
+          $resized_image,
+          $original_image,
+          0, 0, 0, 0,
+          $new_width,
+          $new_height,
+          $current_width,
+          $current_height
+        );
+
+        $final_image = $resized_image;
+
+      } else {
+        $final_image = $temp_image;
       };
 
-      // Name of file matches shortform (if exists)
+      // Name of file should be set to guide shortform (if exists)
+      $guide_shortform = trim($_POST['shortform']);
+
       if (!empty($guide_shortform)) {
-
+        $filename = $guide_shortform . '.jpg';
       };
+
+      // Find where to save resized image
+      global $AssetPath;
+      $save_directory = '../../assets/images/guide_thumbs/';
+      $file_path = $save_directory . $filename;
+
+      // Save file to save directory
+      imagejpeg($final_image, $file_path, 100);
+
+      // $testing_output = "<h1 style=\"color: white; font-weight: boldest;\">resized_image</h1><br><img src=\"$file_path\">";
+      // echo $testing_output;
     };
-
-    // Store file in guide_thumbs directory
-    if ($valid_image === true) {
-
-    };
-
   };
 
   // 1.  Make sure we have minimum non-dupe data
