@@ -75,7 +75,7 @@ if (isset($_POST["submit_record"])) {
     !empty($_FILES)                                     // $_FILES is not empty
     && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
     && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
-  ;  
+  ;
 
   // Name of file should be set to guide shortform (if exists)
   $guide_shortform = trim($_POST['shortform']);
@@ -91,29 +91,74 @@ if (isset($_POST["submit_record"])) {
   // Checking for Guide thumbnail upload
   if ($guide_thumbnail_upload) {
     $temp_image = $_FILES['guide-thumbnail-file']['tmp_name'];
-
-    $uploaded_file_info = $_FILES['guide-thumbnail-file'];
-    
-    $valid_image = true;
+    $valid_image_file = true;
+    $safe_image = true;
 
     // Validate that it's an image file using fileinfo() and then getimagesize()
     $whitelist_type = array('image/jpeg');
 
     if (function_exists('finfo_open')) {    //(PHP >= 5.3.0, PECL fileinfo >= 0.1.0)
       $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
-
       if ( !in_array( finfo_file($fileinfo, $temp_image), $whitelist_type) ) {
-        $valid_image = false;
+        $valid_image_file = false;
       };
     } else {
       if ( !@getimagesize($temp_image) ) {  //@ - for hide warning when image not valid
-        $valid_image = false;
+        $valid_image_file = false;
+      };
+    };
+
+    // Check EXIF header for malicious code
+    if ($valid_image_file) {
+      $exif_data = exif_read_data($temp_image);
+
+      function flatten_array(array $array) {
+        $return = array();
+        array_walk_recursive($array, function ($a, $b) use (&$return) {
+          $return[$b] = $a;
+        });
+        return $return;
+      };
+
+      $flattened_exif = flatten_array($exif_data);
+
+      $forbidden_strings = array(
+        "php",
+        "form",
+        "script",
+        "java",
+        "div",
+        "table",
+        "span",
+        "tr",
+        "td",
+        "submit",
+        "body",
+        "head",
+        "var",
+        "function",
+        "exe",
+        "update",
+        "delete"
+      );
+
+      foreach ($flattened_exif as $exif_key=>$exif_value) {
+        foreach ($forbidden_strings as $string_index=>$forbidden_string) {
+          if (
+            // Add exception for FileName field, because PHP assigns uploads
+            // a temp filename of 'php' + random upper- and lower-case lettes
+            preg_match('/' . $forbidden_string . '/', $exif_value) != false
+            && $exif_key !== 'FileName'
+          ) {
+            // Maybe some kind of alert here, instead of just not allowing the file to be uploaded ?
+            $safe_image = false;
+          };
+        };
       };
     };
 
     // Only do the rest of this stuff if it's an image file
-    if ($valid_image) {
-
+    if ($valid_image_file && $safe_image) {
       // Check if image is 125 x 125 pixels
       $current_size = getimagesize($temp_image);
       $current_width = $current_size[0];
@@ -142,7 +187,6 @@ if (isset($_POST["submit_record"])) {
         );
 
         $final_image = $resized_image;
-
       };
 
       // Save file to save directory
