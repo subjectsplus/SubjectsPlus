@@ -70,11 +70,6 @@ if (isset($_POST["submit_record"])) {
 
   // --- START OF GUIDE THUMBNAIL HANDLING CODE ---
 
-  // print_r(array(
-  //   '$GLOBALS' => $GLOBALS
-  // ));
-  // die;
-
   // Checking to see if user uploaded a thumbnail
   $guide_thumbnail_upload =
     !empty($_FILES)                                     // $_FILES is not empty
@@ -166,7 +161,19 @@ if (isset($_POST["submit_record"])) {
     unlink($file_path);
   };
 
+  // Check old-shortform field to update thumbnail filename if shortform changes
+  $old_shortform = trim($_POST['old-shortform']);
+  $changing_shortform = ( $guide_shortform !== $old_shortform );
+
+  if ($changing_shortform) {
+    $old_filepath = $save_directory . $old_shortform . '.jpg';
+    $new_filepath = $file_path;
+
+    rename($old_filepath, $new_filepath);
+  };
+
   // --- END OF GUIDE THUMBNAIL HANDLING CODE --
+
 
   // 1.  Make sure we have minimum non-dupe data
   // 1a. Make sure there is a title, location, and subject

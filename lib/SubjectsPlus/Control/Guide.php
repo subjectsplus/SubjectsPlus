@@ -521,6 +521,8 @@ class Guide
 
 		if ( isset($existing_thumbnail_info) ) {
 			if ($existing_thumbnail_info['mime'] === 'image/jpeg') {
+
+				// NOTE: This template has to be kept in sync with the JavaScript generated one below!
 				$thumbnail_preview = "
 					<p><strong>Current thumbnail:</strong></p>
 					<div style=\"display: flex; justify-content: space-around; align-items: center;\">
@@ -559,6 +561,11 @@ class Guide
 				name='delete-thumbnail-input'
 				id='delete-thumbnail-input'
 				value='0'>
+			<input
+				type='hidden'
+				name='old-shortform'
+				id='old-shortform'
+				value='$this->_shortform'>
 		";
 
 		// Simple script to handle:
@@ -628,6 +635,9 @@ class Guide
 
 						const para = document.createElement('p');
 						if ( validFileType(file) ) {
+
+							// NOTE: This template has to be kept in sync with the PHP one above!
+
 							const updatedPreview = `
 								<p style='justify-self: left;'><strong>New thumbnail:</strong></p>
 								<div style=\"display: flex; justify-content: space-around; align-items: center;\">
@@ -657,12 +667,6 @@ class Guide
 						};
 
 						list.appendChild(listItem);
-						
-						// Have to use this to check image dimensions after it's selected
-						// const previewImage = document.querySelector('.thumbnail-preview-img');							
-						// previewImage.onload = ()=>{
-						// 	console.log({previewImage});
-						// };
 					}
 				}
 			};
@@ -683,10 +687,6 @@ class Guide
 			
 		</script>
 		";
-
-		// $thumbnail_box = _("If you want to associate a thumbnail image with this guide, put a file called [shortform].jpg in assets/images/guide_thumbs/ on the server.");
-		// $thumbnail_box .= "<p>" . _("E.g., musichistory.jpg, if your shortform is \"musichistory\".");
-		// $thumbnail_box .= "<p>" . _("Note that this is NOT required, and might NOT be implemented in your version of SubjectsPlus.");
 
 		makePluslet(_($thumbnail_box_title), $thumbnail_box, "no_overflow");
 
