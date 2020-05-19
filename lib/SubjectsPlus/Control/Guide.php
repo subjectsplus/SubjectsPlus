@@ -523,8 +523,17 @@ class Guide
 			if ($existing_thumbnail_info['mime'] === 'image/jpeg') {
 				$thumbnail_preview = "
 					<p><strong>Current thumbnail:</strong></p>
-					<img src=\"$thumbnail_filepath\">
-					<button>Remove</button>
+					<div style=\"display: flex; justify-content: space-around; align-items: center;\">
+						<img
+							src=\"$thumbnail_filepath\"
+							style=\"border-radius: 2px;\"
+							>
+						<button
+							type=\"button\"
+							class=\"button remove-thumbnail-button\"
+							style=\"max-height: 50px; border-radius: 2px;\"
+							onclick='removeThumbnail(event);'>Remove</button>
+					</div>
 				";
 			};
 		};
@@ -545,6 +554,11 @@ class Guide
 				>
 			</div>
 			<div class='guide-thumbnail-preview'>$thumbnail_preview</div>
+			<input
+				type='hidden'
+				name='delete-thumbnail-input'
+				id='delete-thumbnail-input'
+				value='0'>
 		";
 
 		// Simple script to handle:
@@ -555,11 +569,12 @@ class Guide
 		<script>
 			const guideThumbnailInput = document.getElementById('guide-thumbnail-file');
 			const guideThumbnailPreview = document.querySelector('.guide-thumbnail-preview');
-
-			// const existingThumbnail = 
+			const deleteThumbnailInput = document.getElementById('delete-thumbnail-input');
 
 			// Function to create image preview on input field change
-			const updateImageDisplay = ()=> {
+			const updateImageDisplay = (event)=> {
+
+				event.preventDefault();
 				
 				// Check if file is of valid type
 				const validFileType = (file)=> {
@@ -580,6 +595,11 @@ class Guide
 					} else if(number >= 1048576) {
 						return (number/1048576).toFixed(1) + 'MB';
 					}
+				};
+
+				// Check image upload dimensions
+				const checkDimensions = ()=>{
+
 				};
 
 				// Empty out the preview div every time function is hit
@@ -604,33 +624,63 @@ class Guide
 			
 					for(const file of currentFiles) {
 						const listItem = document.createElement('li');
-						listItem.setAttribute('style', 'display: flex; flex-wrap: wrap; justify-content: center;');
+						// listItem.setAttribute('style', 'display: flex; flex-wrap: wrap; justify-content: center;');
 
 						const para = document.createElement('p');
-						if (validFileType(file)) {
-							para.textContent = 'File Name: ' + file.name + ', ';
-							para.textContent += 'File Size: ' + returnFileSize(file.size);
+						if ( validFileType(file) ) {
+							const updatedPreview = `
+								<p style='justify-self: left;'><strong>New thumbnail:</strong></p>
+								<div style=\"display: flex; justify-content: space-around; align-items: center;\">
+									<img
+										class='thumbnail-preview-img'
+										src='\${URL.createObjectURL(file)}'
+										style=\"border-radius: 2px;\"
+										>
+									<button
+										type=\"button\"
+										class=\"button remove-thumbnail-button\"
+										style=\"max-height: 50px; border-radius: 2px;\"
+										onclick='removeThumbnail(event);'>Remove</button>
+								</div>
+							`;
 
-							const image = document.createElement('img');
-							image.src = URL.createObjectURL(file);
-							image.setAttribute('style', 'border-radius: 2px;');
-			
-							listItem.appendChild(image);
-							listItem.appendChild(br);
-							listItem.appendChild(para);
+							listItem.innerHTML = updatedPreview;
+							
+							// Set deletion input value to 0 / false, because we have an image selected
+							deleteThumbnailInput.value = 0;
+
 						} else {
 							para.textContent = file.name + ' is not a valid file type. Update your selection.';
 							para.classList.add('booklist-alert');
+
 							listItem.appendChild(para);
-						}
-			
+						};
+
 						list.appendChild(listItem);
+						
+						// Have to use this to check image dimensions after it's selected
+						// const previewImage = document.querySelector('.thumbnail-preview-img');							
+						// previewImage.onload = ()=>{
+						// 	console.log({previewImage});
+						// };
 					}
 				}
 			};
 			
 			// Attach event listener to guide thumbnail file input
 			guideThumbnailInput.addEventListener('change', updateImageDisplay);
+
+			const removeThumbnail = (event)=> {
+				event.preventDefault();
+				guideThumbnailPreview.innerHTML = '';
+				
+				// Reset file input field
+				guideThumbnailInput.value = '';
+
+				// Set thumbnail deletion input value to 1 / true
+				deleteThumbnailInput.value = 1;
+			};
+			
 		</script>
 		";
 

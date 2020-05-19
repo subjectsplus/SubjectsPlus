@@ -79,6 +79,18 @@ if (isset($_POST["submit_record"])) {
     && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
   ;
 
+  // Name of file should be set to guide shortform (if exists)
+  $guide_shortform = trim($_POST['shortform']);
+
+  if (!empty($guide_shortform)) {
+    $filename = $guide_shortform . '.jpg';
+  };
+
+  // Find where to save resized image
+  global $AssetPath;
+  $save_directory = '../../assets/images/guide_thumbs/';
+  $file_path = $save_directory . $filename;
+
   // Checking for Guide thumbnail upload
   if ($guide_thumbnail_upload) {
     $uploaded_file_info = $_FILES['guide-thumbnail-file'];
@@ -99,6 +111,9 @@ if (isset($_POST["submit_record"])) {
       $current_size = getimagesize($temp_image);
       $current_width = $current_size[0];
       $current_height = $current_size[1];
+      
+      $original_image = imagecreatefromjpeg($temp_image);
+      $final_image = $original_image;
 
       $have_to_resize = !($current_width === 125 && $current_height === 125);
 
@@ -107,7 +122,6 @@ if (isset($_POST["submit_record"])) {
         $new_width = 125;
         $new_height = 125;
 
-        $original_image = imagecreatefromjpeg($temp_image);
         $resized_image = imagecreatetruecolor($new_width, $new_height);
         
         imagecopyresampled(
@@ -122,21 +136,7 @@ if (isset($_POST["submit_record"])) {
 
         $final_image = $resized_image;
 
-      } else {
-        $final_image = $temp_image;
       };
-
-      // Name of file should be set to guide shortform (if exists)
-      $guide_shortform = trim($_POST['shortform']);
-
-      if (!empty($guide_shortform)) {
-        $filename = $guide_shortform . '.jpg';
-      };
-
-      // Find where to save resized image
-      global $AssetPath;
-      $save_directory = '../../assets/images/guide_thumbs/';
-      $file_path = $save_directory . $filename;
 
       // Save file to save directory
       imagejpeg($final_image, $file_path, 100);
@@ -145,6 +145,15 @@ if (isset($_POST["submit_record"])) {
       // echo $testing_output;
     };
   };
+
+  // Handle thumbnail deletion request
+  $wants_to_delete_thumbnail = ( $_POST['delete-thumbnail-input'] === '1' );
+
+  // Wants to delete thumbnail, and didn't upload new image file
+  if ( $wants_to_delete_thumbnail && !$guide_thumbnail_upload ) {
+    unlink($file_path);
+  };
+
 
   // 1.  Make sure we have minimum non-dupe data
   // 1a. Make sure there is a title, location, and subject
