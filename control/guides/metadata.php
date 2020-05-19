@@ -15,11 +15,6 @@ $page_title = "Manage Guide Metadata";
 
 $use_jquery = array("ui_styles");
 
-// if ( !empty($_POST) ) {
-//   print_r($GLOBALS);
-//   die;
-// };
-
 // Suppress header if it is to be shown in colorbox or popup window
 if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   $no_header = "yes";
@@ -73,11 +68,19 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 if (isset($_POST["submit_record"])) {
   //$feedback = $record->getMessage();
 
+  // --- START OF GUIDE THUMBNAIL HANDLING CODE ---
+
+  // print_r(array(
+  //   '$GLOBALS' => $GLOBALS
+  // ));
+  // die;
+
+  // Checking to see if user uploaded a thumbnail
   $guide_thumbnail_upload =
     !empty($_FILES)                                     // $_FILES is not empty
     && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
     && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
-  ;
+  ;  
 
   // Name of file should be set to guide shortform (if exists)
   $guide_shortform = trim($_POST['shortform']);
@@ -87,27 +90,36 @@ if (isset($_POST["submit_record"])) {
   };
 
   // Find where to save resized image
-  global $AssetPath;
   $save_directory = '../../assets/images/guide_thumbs/';
   $file_path = $save_directory . $filename;
 
   // Checking for Guide thumbnail upload
   if ($guide_thumbnail_upload) {
-    $uploaded_file_info = $_FILES['guide-thumbnail-file'];
+    $temp_image = $_FILES['guide-thumbnail-file']['tmp_name'];
 
+    $uploaded_file_info = $_FILES['guide-thumbnail-file'];
+    
     $valid_image = true;
 
-    // Filetype is 'image/jpeg'
-    $filetype = $uploaded_file_info['type'];
-    if ($filetype !== 'image/jpeg') {
-      $valid_image = false;
+    // Validate that it's an image file using fileinfo() and then getimagesize()
+    $whitelist_type = array('image/jpeg');
+
+    if (function_exists('finfo_open')) {    //(PHP >= 5.3.0, PECL fileinfo >= 0.1.0)
+      $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+
+      if ( !in_array( finfo_file($fileinfo, $temp_image), $whitelist_type) ) {
+        $valid_image = false;
+      };
+    } else {
+      if ( !@getimagesize($temp_image) ) {  //@ - for hide warning when image not valid
+        $valid_image = false;
+      };
     };
 
     // Only do the rest of this stuff if it's an image file
     if ($valid_image) {
 
       // Check if image is 125 x 125 pixels
-      $temp_image = $uploaded_file_info['tmp_name'];
       $current_size = getimagesize($temp_image);
       $current_width = $current_size[0];
       $current_height = $current_size[1];
@@ -154,6 +166,7 @@ if (isset($_POST["submit_record"])) {
     unlink($file_path);
   };
 
+  // --- END OF GUIDE THUMBNAIL HANDLING CODE --
 
   // 1.  Make sure we have minimum non-dupe data
   // 1a. Make sure there is a title, location, and subject
