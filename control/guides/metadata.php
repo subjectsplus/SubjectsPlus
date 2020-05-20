@@ -92,7 +92,6 @@ if (isset($_POST["submit_record"])) {
   if ($guide_thumbnail_upload) {
     $temp_image = $_FILES['guide-thumbnail-file']['tmp_name'];
     $valid_image_file = true;
-    $safe_image = true;
 
     // Validate that it's an image file using fileinfo() and then getimagesize()
     $whitelist_type = array('image/jpeg');
@@ -108,57 +107,8 @@ if (isset($_POST["submit_record"])) {
       };
     };
 
-    // Check EXIF header for malicious code
-    if ($valid_image_file) {
-      $exif_data = exif_read_data($temp_image);
-
-      function flatten_array(array $array) {
-        $return = array();
-        array_walk_recursive($array, function ($a, $b) use (&$return) {
-          $return[$b] = $a;
-        });
-        return $return;
-      };
-
-      $flattened_exif = flatten_array($exif_data);
-
-      $forbidden_strings = array(
-        "php",
-        "form",
-        "script",
-        "java",
-        "div",
-        "table",
-        "span",
-        "tr",
-        "td",
-        "submit",
-        "body",
-        "head",
-        "var",
-        "function",
-        "exe",
-        "update",
-        "delete"
-      );
-
-      foreach ($flattened_exif as $exif_key=>$exif_value) {
-        foreach ($forbidden_strings as $string_index=>$forbidden_string) {
-          if (
-            // Add exception for FileName field, because PHP assigns uploads
-            // a temp filename of 'php' + random upper- and lower-case lettes
-            preg_match('/' . $forbidden_string . '/', $exif_value) != false
-            && $exif_key !== 'FileName'
-          ) {
-            // Maybe some kind of alert here, instead of just not allowing the file to be uploaded ?
-            $safe_image = false;
-          };
-        };
-      };
-    };
-
     // Only do the rest of this stuff if it's an image file
-    if ($valid_image_file && $safe_image) {
+    if ($valid_image_file) {
       // Check if image is 125 x 125 pixels
       $current_size = getimagesize($temp_image);
       $current_width = $current_size[0];
