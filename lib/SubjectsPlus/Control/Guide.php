@@ -525,7 +525,9 @@ class Guide
 				// NOTE: This template has to be kept in sync with the JavaScript generated one below!
 				$thumbnail_preview = "
 					<p><strong>Current thumbnail:</strong></p>
-					<div style=\"display: flex; justify-content: space-around; align-items: center;\">
+                    <div
+                        class='guide-thumbnail-img-container'
+                        style=\"display: flex; justify-content: space-around; align-items: center; max-width: 25em;\">
 						<img
 							src=\"$thumbnail_filepath\"
 							style=\"border-radius: 2px;\"
@@ -640,7 +642,9 @@ class Guide
 
 							const updatedPreview = `
 								<p style='justify-self: left;'><strong>New thumbnail:</strong></p>
-								<div style=\"display: flex; justify-content: space-around; align-items: center;\">
+                                <div
+                                    class='guide-thumbnail-img-container'
+                                    style=\"display: flex; justify-content: space-around; align-items: center; max-width: 25em;\">
 									<img
 										class='thumbnail-preview-img'
 										src='\${URL.createObjectURL(file)}'

@@ -209,7 +209,10 @@ if (isset($_POST["submit_record"])) {
   $old_shortform = trim($_POST['old-shortform']);
   $changing_shortform = ( $guide_shortform !== $old_shortform );
 
-  if ($changing_shortform) {
+  // Brand-new guides will have a blank old_shortform, but don't rename in that case
+  $not_a_new_guide = ( $old_shortform !== '' );
+
+  if ($changing_shortform && $not_a_new_guide) {
     $old_filepath = $save_directory . $old_shortform . '.jpg';
     $new_filepath = $file_path;
 
