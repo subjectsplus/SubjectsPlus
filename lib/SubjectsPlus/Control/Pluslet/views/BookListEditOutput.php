@@ -13,7 +13,9 @@
 
 ?>
 
-<div class="booklist-edit-container">
+<div
+	class="booklist-edit-container"
+	data-booklist-id="<?php echo $booklist_id ?>">
 	
 	<div class="booklist-description-container">
 		<textarea
@@ -36,6 +38,7 @@
 				name="isbn-input"
 				placeholder="10 or 13 digit ISBN">
 			<button
+				data-booklist-id="<?php echo $booklist_id ?>"
 				type="button"
 				class="add-isbn button"
 				name="add-isbn">Add</button>
@@ -43,7 +46,8 @@
 		
 		<ul
 			class="booklist-draggables-container"
-			style="padding: 0; margin-top: 0;">
+			style="padding: 0; margin-top: 0;"
+			data-booklist-id="<?php echo $booklist_id ?>">
 				<?php
 
 					$items_to_show = ( isset($this->_extra['isbn']) && !empty($this->_extra['isbn']) );
@@ -80,9 +84,10 @@
 		</div>
 
 		<textarea
+			data-booklist-id="<?php echo $booklist_id ?>"
 			class="booklist-hidden-textarea"
 			rows="6"
-			cols="50"
+			cols="11"
 			name="BookList-extra-isbn"
 			placeholder="Please insert comma-separated ISBN numbers"><?php
 				if ($items_to_show) {

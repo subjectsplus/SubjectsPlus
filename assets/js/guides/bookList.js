@@ -126,6 +126,8 @@ function bookList() {
         const theButton = $(clickEvent.currentTarget);
         const inputField = $(theButton).prev('input');
         const isbn = $(inputField).val();
+
+        const whichBookListId = $(theButton).data('booklist-id');
         
         // Don't run if empty string
         if (isbn === '') {
@@ -141,21 +143,23 @@ function bookList() {
 					return false;
 				};
 
-        myBookList.addIsbnToList(isbn);
+        myBookList.addIsbnToList(isbn, whichBookListId);
 
         // Clear input element
         $(inputField).val('');
 
         // Synchronize invisible textarea with updated list
-        myBookList.synchronizeTextarea();
+        myBookList.synchronizeTextarea(whichBookListId);
 			});
 		},
-		addIsbnToList: function (isbn) {
-			const newLi = myBookList.getSortableIsbnLi(isbn);
-			$('.booklist-draggables-container').append(newLi);
+		addIsbnToList: function (isbn, whichList) {
+      const newLi = myBookList.getSortableIsbnLi(isbn);
+      const whichUl = $(`ul.booklist-draggables-container[data-booklist-id=${whichList}]`);
+
+			$(whichUl).append(newLi);
 			
 			// Restripe all the rows
-			myBookList.stripeRows();
+			myBookList.stripeRows(whichUl);
 
 			// Recreate event listeners for all delete buttons, so new row also gets it
       myBookList.deleteIsbnButtonListener();
@@ -165,14 +169,17 @@ function bookList() {
 			$('.booklist-delete-button').unbind('click');
 
 			$('.booklist-delete-button').on('click', function (event) {
-        const whichLi = $(event.currentTarget).closest('li');
+        const theDeleteButton = $(event.currentTarget);
+        const whichLi = $(theDeleteButton).closest('li');
+        const whichList = $(theDeleteButton).closest('ul');
+        
         myBookList.deleteIsbnFromList(whichLi);
 
         // Synchronize invisible textarea with updated list
-        myBookList.synchronizeTextarea();
+        myBookList.synchronizeTextarea(whichList);
 
         // Re-stripe the list
-        myBookList.stripeRows();
+        myBookList.stripeRows(whichList);
 			});
 		},
 		deleteIsbnFromList: function (liToDelete) {
@@ -697,46 +704,41 @@ function bookList() {
 			myBookList.stripeRows();
 		},
 		onListChange: function(event, ui) {
+      const whichUl = event.target;
+      const whichListId = $(whichUl).data('booklist-id');
+
 			switch(event.type) {
 				case 'sortstart':
 					break;
 				case 'sortchange':
 					break;
 				case 'sortupdate':
-          myBookList.synchronizeTextarea();
-					myBookList.stripeRows();
+          myBookList.synchronizeTextarea(whichListId);
+					myBookList.stripeRows(whichListId);
 					break;
 			};
     },
-    synchronizeTextarea: function () {
-      const currentListJoined = myBookList.getBooklistFromSortables().join(',');
-      const textarea = $("textarea[name='BookList-extra-isbn']");      
+    synchronizeTextarea: function (whichBookListId) {
+      const currentListJoined = myBookList.getBooklistFromSortables(whichBookListId).join(',');
+      const textarea = $(`textarea[name='BookList-extra-isbn'][data-booklist-id=${whichBookListId}]`);
+
       $(textarea).html(currentListJoined);
     },
-    getBooklistFromSortables: function () {
-      const containerDiv = $('.booklist-draggables-container');
+    getBooklistFromSortables: function (whichList) {
+      const containerDiv = $(`.booklist-draggables-container[data-booklist-id=${whichList}]`);
       const sortableItems = containerDiv.children();
 
       return $.map(sortableItems, (item)=> $(item).data('isbn'));
     },
-		stripeRows: function() {
-			const mapping = {
-				evenRows: "evenrow",
-				oddRows: "oddrow"
-			};
-
-			const rows = $('.booklist-draggables-container li');
+		stripeRows: function(whichList) {
+			const rows = $(whichList).children('li');
 
 			$.each(rows, (index, element)=> {
 				// Strip off existing classes
-				$(element).removeClass('evenrow oddrow');
+        $(element).removeClass('evenrow oddrow');
 
-				// Even indices
-				if ((index + 1) % 2 === 0) {
-					$(element).addClass(mapping.evenRows);
-				} else {
-					$(element).addClass(mapping.oddRows);		
-				};
+        const whichClass = ( (index + 1) % 2 === 0 ) ? 'evenrow' : 'oddrow';
+        $(element).addClass(whichClass);
 			});
 		},
 		getSortableIsbnLi: function(isbn) {
