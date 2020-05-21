@@ -165,7 +165,7 @@ function bookList() {
 			$('.booklist-delete-button').unbind('click');
 
 			$('.booklist-delete-button').on('click', function (event) {
-				const whichLi = $(event.currentTarget).closest('li');
+        const whichLi = $(event.currentTarget).closest('li');
         myBookList.deleteIsbnFromList(whichLi);
 
         // Synchronize invisible textarea with updated list
@@ -710,11 +710,8 @@ function bookList() {
     },
     synchronizeTextarea: function () {
       const currentListJoined = myBookList.getBooklistFromSortables().join(',');
-      const textarea = $("textarea[name='BookList-extra-isbn']");
-
-      if (currentListJoined.length) {
-        $(textarea).html(currentListJoined);
-      };
+      const textarea = $("textarea[name='BookList-extra-isbn']");      
+      $(textarea).html(currentListJoined);
     },
     getBooklistFromSortables: function () {
       const containerDiv = $('.booklist-draggables-container');

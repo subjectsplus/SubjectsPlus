@@ -45,24 +45,29 @@
 			class="booklist-draggables-container"
 			style="padding: 0; margin-top: 0;">
 				<?php
-				
-					$isbn_list = $this->_extra['isbn'];
-					$list_split = explode(',', $isbn_list);
 
-					foreach($list_split as $index=>$isbn) {
-						// NOTE: This template must be kept in sync with the one returned from
-						// getSortableIsbnLi() in bookList.js
-						$li = "
-							<li
-								data-isbn='$isbn'
-								class='booklist-item-draggable'>
-									<div>
-										<i class='fa fa-bars'></i>
-										<span class='isbn-number'>&nbsp;&nbsp;&nbsp;$isbn</span>
-									</div>
-									<i class='fa fa-trash booklist-delete-button' data-isbn='$isbn'></i>
-									</li>";
-						print $li;
+					$items_to_show = ( isset($this->_extra['isbn']) && !empty($this->_extra['isbn']) );
+				
+					// Account for new BL Pluslet, which doesn't have this field yet
+					if ( $items_to_show ) {
+						$isbn_list = $this->_extra['isbn'];
+						$list_split = explode(',', $isbn_list);
+	
+						foreach($list_split as $index=>$isbn) {
+							// NOTE: This template must be kept in sync with the one returned from
+							// getSortableIsbnLi() in bookList.js
+							$li = "
+								<li
+									data-isbn='$isbn'
+									class='booklist-item-draggable'>
+										<div>
+											<i class='fa fa-bars'></i>
+											<span class='isbn-number'>&nbsp;&nbsp;&nbsp;$isbn</span>
+										</div>
+										<i class='fa fa-trash booklist-delete-button' data-isbn='$isbn'></i>
+										</li>";
+							print $li;
+						};
 					};
 
 				?>
@@ -80,7 +85,7 @@
 			cols="50"
 			name="BookList-extra-isbn"
 			placeholder="Please insert comma-separated ISBN numbers"><?php
-				if ($this->_extra != null) {
+				if ($items_to_show) {
 					echo trim($this->_extra['isbn']);
 				}
 			?></textarea>
