@@ -168,7 +168,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 
 		"guide_types" => array(
 			_( "Guide Types" ),
-			_( "These are the different ways you may organize your guides." ),
+			_( "These are the different ways you may organize your guides.<br>(20 character limit per Guide Type.)" ),
 			"array",
 			"guide",
 			"large",

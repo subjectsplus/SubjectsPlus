@@ -231,7 +231,9 @@ include("includes/header.php");
               $col_1 .= "</ul></div>";
               $col_2 .= "</ul></div>";
 
-              $layout .= "<div class=\"guide_list_container\"><div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$value\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div></div>";
+              $trimmed_guide_type = str_replace(' ', '-', $value);
+
+              $layout .= "<div class=\"guide_list_container\"><div class=\"pure-g guide_list\"><div class=\"pure-u-1 guide_list_header\"><a name=\"section-$trimmed_guide_type\"></a><h3>$value</h3></div>" . $col_1 . $col_2 ."</div></div>";
               
           } //end if
 
