@@ -4292,8 +4292,8 @@ msgid "Suppressed:  Must be logged in to SP to view"
 msgstr "محجوب: يجب تسجيل الدخول في موضوعات بلس قبل العرض"
 
 #: 
-msgid "Thumbnail (VERY optional)"
-msgstr "صورة مصغرة (إختياري جداً)"
+msgid "Guide Thumbnail"
+msgstr "صورة مصغرة"
 
 #: 
 msgid "Wait!  Do you need help left now?"
