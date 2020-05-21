@@ -9,6 +9,7 @@
 
 use SubjectsPlus\Control\Guide;
 use SubjectsPlus\Control\Dropdown;
+
 $subcat = "guides";
 $page_title = "Manage Guide Metadata";
 
@@ -65,9 +66,112 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 }
 
 if (isset($_POST["submit_record"])) {
-    //$feedback = $record->getMessage();
-   
-    
+  //$feedback = $record->getMessage();
+
+  // --- START OF GUIDE THUMBNAIL HANDLING CODE ---
+
+  // Checking to see if user uploaded a thumbnail
+  $guide_thumbnail_upload =
+    !empty($_FILES)                                     // $_FILES is not empty
+    && isset($_FILES['guide-thumbnail-file'])           // Includes thumbnail field
+    && !empty($_FILES['guide-thumbnail-file']['name'])  // Is not empty object created by HTML
+  ;
+
+  // Name of file should be set to guide shortform (if exists)
+  $guide_shortform = trim($_POST['shortform']);
+
+  if (!empty($guide_shortform)) {
+    $filename = $guide_shortform . '.jpg';
+  };
+
+  // Find where to save resized image
+  $save_directory = '../../assets/images/guide_thumbs/';
+  $file_path = $save_directory . $filename;
+
+  // Checking for Guide thumbnail upload
+  if ($guide_thumbnail_upload) {
+    $temp_image = $_FILES['guide-thumbnail-file']['tmp_name'];
+    $valid_image_file = true;
+
+    // Validate that it's an image file using fileinfo() and then getimagesize()
+    $whitelist_type = array('image/jpeg');
+
+    if (function_exists('finfo_open')) {    //(PHP >= 5.3.0, PECL fileinfo >= 0.1.0)
+      $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
+      if ( !in_array( finfo_file($fileinfo, $temp_image), $whitelist_type) ) {
+        $valid_image_file = false;
+      };
+    } else {
+      if ( !@getimagesize($temp_image) ) {  //@ - for hide warning when image not valid
+        $valid_image_file = false;
+      };
+    };
+
+    // Only do the rest of this stuff if it's an image file
+    if ($valid_image_file) {
+      // Check if image is 125 x 125 pixels
+      $current_size = getimagesize($temp_image);
+      $current_width = $current_size[0];
+      $current_height = $current_size[1];
+      
+      $original_image = imagecreatefromjpeg($temp_image);
+      $final_image = $original_image;
+
+      $have_to_resize = !($current_width === 125 && $current_height === 125);
+
+      // If not, resize
+      if ($have_to_resize) {
+        $new_width = 125;
+        $new_height = 125;
+
+        $resized_image = imagecreatetruecolor($new_width, $new_height);
+        
+        imagecopyresampled(
+          $resized_image,
+          $original_image,
+          0, 0, 0, 0,
+          $new_width,
+          $new_height,
+          $current_width,
+          $current_height
+        );
+
+        $final_image = $resized_image;
+      };
+
+      // Save file to save directory
+      imagejpeg($final_image, $file_path, 100);
+
+      // $testing_output = "<h1 style=\"color: white; font-weight: boldest;\">resized_image</h1><br><img src=\"$file_path\">";
+      // echo $testing_output;
+    };
+  };
+
+  // Handle thumbnail deletion request
+  $wants_to_delete_thumbnail = ( $_POST['delete-thumbnail-input'] === '1' );
+
+  // Wants to delete thumbnail, and didn't upload new image file
+  if ( $wants_to_delete_thumbnail && !$guide_thumbnail_upload ) {
+    unlink($file_path);
+  };
+
+  // Check old-shortform field to update thumbnail filename if shortform changes
+  $old_shortform = trim($_POST['old-shortform']);
+  $changing_shortform = ( $guide_shortform !== $old_shortform );
+
+  // Brand-new guides will have a blank old_shortform, but don't rename in that case
+  $not_a_new_guide = ( $old_shortform !== '' );
+
+  if ($changing_shortform && $not_a_new_guide) {
+    $old_filepath = $save_directory . $old_shortform . '.jpg';
+    $new_filepath = $file_path;
+
+    rename($old_filepath, $new_filepath);
+  };
+
+  // --- END OF GUIDE THUMBNAIL HANDLING CODE --
+
+
   // 1.  Make sure we have minimum non-dupe data
   // 1a. Make sure there is a title, location, and subject
   // we're using [staff_id][1] because the first value is an empty "--Select--"
@@ -78,7 +182,7 @@ if (isset($_POST["submit_record"])) {
 
     exit;
   }
-//print_r($_POST);exit;
+  //print_r($_POST);exit;
   // Submit form
 
   $record = new Guide($_POST["subject_id"], "post");
@@ -98,7 +202,7 @@ if (isset($_POST["submit_record"])) {
   $feedback = $record->getMessage();
   // See all the queries?
   //$record->deBug();
-    print   "<div class=\"master-feedback\" style=\"display:block;\">" . $feedback . "</div>";
+  print   "<div class=\"master-feedback\" style=\"display:block;\">" . $feedback . "</div>";
 }
 
 if (!isset($no_form)) {
