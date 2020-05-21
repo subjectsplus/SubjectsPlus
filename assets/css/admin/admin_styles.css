@@ -2367,7 +2367,7 @@ ul.guide-listing li .fa {color: #ABB7B7; font-size:0.9em; cursor: pointer; margi
 }
 
 .booklist-hidden-textarea {
-  /* display: none; */
+  display: none;
   max-width: 100%;
 }
 

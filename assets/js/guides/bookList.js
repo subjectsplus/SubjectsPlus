@@ -155,11 +155,12 @@ function bookList() {
 		addIsbnToList: function (isbn, whichList) {
       const newLi = myBookList.getSortableIsbnLi(isbn);
       const whichUl = $(`ul.booklist-draggables-container[data-booklist-id=${whichList}]`);
+      const whichBookListId = $(whichUl).data('booklist-id');
 
 			$(whichUl).append(newLi);
 			
 			// Restripe all the rows
-			myBookList.stripeRows(whichUl);
+			myBookList.stripeRows(whichBookListId);
 
 			// Recreate event listeners for all delete buttons, so new row also gets it
       myBookList.deleteIsbnButtonListener();
@@ -171,7 +172,7 @@ function bookList() {
 			$('.booklist-delete-button').on('click', function (event) {
         const theDeleteButton = $(event.currentTarget);
         const whichLi = $(theDeleteButton).closest('li');
-        const whichList = $(theDeleteButton).closest('ul');
+        const whichList = $(theDeleteButton).closest('ul').data('booklist-id');
         
         myBookList.deleteIsbnFromList(whichLi);
 
@@ -731,15 +732,28 @@ function bookList() {
       return $.map(sortableItems, (item)=> $(item).data('isbn'));
     },
 		stripeRows: function(whichList) {
-			const rows = $(whichList).children('li');
+      // If we're getting a whichList argument, it means it's a list update,
+      // so we know what Book List it's coming from
+      if (whichList && typeof whichList === 'number') {
+        const theList = $(`.booklist-draggables-container[data-booklist-id=${whichList}]`);
+        const rows = $(theList).children('li');
+  
+        $.each(rows, (index, element)=> {
+          // Strip off existing classes
+          $(element).removeClass('evenrow oddrow');
+  
+          const whichClass = ( (index + 1) % 2 === 0 ) ? 'evenrow' : 'oddrow';
+          $(element).addClass(whichClass);
+        });
+      } else {
+        // If no whichList, it's on edit view load, so we have to stripe ALL Book List rows
+        const allLists = $('.booklist-draggables-container');
 
-			$.each(rows, (index, element)=> {
-				// Strip off existing classes
-        $(element).removeClass('evenrow oddrow');
-
-        const whichClass = ( (index + 1) % 2 === 0 ) ? 'evenrow' : 'oddrow';
-        $(element).addClass(whichClass);
-			});
+        $.each(allLists, (index, list) => {
+          const listId = $(list).data('booklist-id');
+          myBookList.stripeRows(listId);
+        });
+      };
 		},
 		getSortableIsbnLi: function(isbn) {
       // NOTE: Must be kept in sync with template in

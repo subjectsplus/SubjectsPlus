@@ -98,6 +98,6 @@
 </div>
 
 <script>
-    var b = bookList();
-		b.initEditView();
+	var b = bookList();
+	b.initEditView();
 </script>
