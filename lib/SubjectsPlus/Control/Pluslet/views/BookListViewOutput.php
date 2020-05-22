@@ -19,7 +19,7 @@
     $(document).ready(()=> {
         // Convenience tool to switch to editing view for development
         let automaticallyOpenEditView
-        = true // <-- comment this out to turn off
+        // = true // <-- comment this out to turn off
         ;
 
         if (automaticallyOpenEditView) {
