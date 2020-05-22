@@ -39,13 +39,13 @@ function bookList() {
     },
     bindUiActionsForEditView: function () {
       myBookList.validCharacters();
-			myBookList.isNumberKey();
-			
-			// Add ISBN button
-			myBookList.addIsbnButtonListener();
-			
-			// Delete ISBN buttons
-			myBookList.deleteIsbnButtonListener();
+      myBookList.isNumberKey();
+
+      // Add ISBN button
+      myBookList.addIsbnButtonListener();
+
+      // Delete ISBN buttons
+      myBookList.deleteIsbnButtonListener();
     },
     init: function (container) {
       myBookList.getUrlPrefix();
@@ -67,11 +67,11 @@ function bookList() {
     },
     scrubInput: function (inputString) {
       let scrubbedString;
-      
-      if (typeof inputString === 'string'){
-        scrubbedString = inputString.replace(isbnRegExp, '');
-      };
-      
+
+      if (typeof inputString === "string") {
+        scrubbedString = inputString.replace(isbnRegExp, "");
+      }
+
       return scrubbedString;
     },
     validCharacters: function () {
@@ -122,58 +122,60 @@ function bookList() {
       });
     },
     addIsbnButtonListener: function () {
-			$('button[name=add-isbn]').on('click', function (clickEvent) {
+      $("button[name=add-isbn]").on("click", function (clickEvent) {
         const theButton = $(clickEvent.currentTarget);
-        const inputField = $(theButton).prev('input');
+        const inputField = $(theButton).prev("input");
         const isbn = $(inputField).val();
 
-        const whichBookListId = $(theButton).data('booklist-id');
-        
+        const whichBookListId = $(theButton).data("booklist-id");
+
         // Don't run if empty string
-        if (isbn === '') {
+        if (isbn === "") {
           return;
-        };
+        }
 
         const validLengths = [10, 13];
         const filteredValue = myBookList.scrubInput(isbn);
-        const isbnLengthNotValid = !( validLengths.includes(filteredValue.length) );
+        const isbnLengthNotValid = !validLengths.includes(filteredValue.length);
 
-				// Make sure ISBN is 10 or 13 digits
-				if (isbnLengthNotValid) {
-					return false;
-				};
+        // Make sure ISBN is 10 or 13 digits
+        if (isbnLengthNotValid) {
+          return false;
+        }
 
         myBookList.addIsbnToList(isbn, whichBookListId);
 
         // Clear input element
-        $(inputField).val('');
+        $(inputField).val("");
 
         // Synchronize invisible textarea with updated list
         myBookList.synchronizeTextarea(whichBookListId);
-			});
-	},
-	addIsbnToList: function (isbn, whichList) {
+      });
+    },
+    addIsbnToList: function (isbn, whichList) {
       const newLi = myBookList.getSortableIsbnLi(isbn);
-      const whichUl = $(`ul.booklist-draggables-container[data-booklist-id=${whichList}]`);
-      const whichBookListId = $(whichUl).data('booklist-id');
+      const whichUl = $(
+        `ul.booklist-draggables-container[data-booklist-id=${whichList}]`
+      );
+      const whichBookListId = $(whichUl).data("booklist-id");
 
-			$(whichUl).append(newLi);
-			
-			// Restripe all the rows
-			myBookList.stripeRows(whichBookListId);
+      $(whichUl).append(newLi);
 
-			// Recreate event listeners for all delete buttons, so new row also gets it
+      // Restripe all the rows
+      myBookList.stripeRows(whichBookListId);
+
+      // Recreate event listeners for all delete buttons, so new row also gets it
       myBookList.deleteIsbnButtonListener();
-	},
-	deleteIsbnButtonListener: function () {
-			// Clear all delete listeners to start, so newly added ISBNs are added correctly
-			$('.booklist-delete-button').unbind('click');
+    },
+    deleteIsbnButtonListener: function () {
+      // Clear all delete listeners to start, so newly added ISBNs are added correctly
+      $(".booklist-delete-button").unbind("click");
 
-			$('.booklist-delete-button').on('click', function (event) {
+      $(".booklist-delete-button").on("click", function (event) {
         const theDeleteButton = $(event.currentTarget);
-        const whichLi = $(theDeleteButton).closest('li');
-        const whichList = $(theDeleteButton).closest('ul').data('booklist-id');
-        
+        const whichLi = $(theDeleteButton).closest("li");
+        const whichList = $(theDeleteButton).closest("ul").data("booklist-id");
+
         myBookList.deleteIsbnFromList(whichLi);
 
         // Synchronize invisible textarea with updated list
@@ -181,11 +183,11 @@ function bookList() {
 
         // Re-stripe the list
         myBookList.stripeRows(whichList);
-			});
-	},
-	deleteIsbnFromList: function (liToDelete) {
-			$(liToDelete).remove();
-	},
+      });
+    },
+    deleteIsbnFromList: function (liToDelete) {
+      $(liToDelete).remove();
+    },
     populatePlusletViewFromCache: function (
       container,
       response,
@@ -229,7 +231,7 @@ function bookList() {
       )[0];
       var divData = document.createElement("div");
       divData.classList.add("booklist_isbn_data");
-			var anchorUrl = $("<textarea/>").html(data.primoUrl).text();
+      var anchorUrl = $("<textarea/>").html(data.primoUrl).text();
 
       myBookList.setBookCoverSrc(
         container,
@@ -691,77 +693,86 @@ function bookList() {
     makeListSortable: function () {
       // Make whole Book List <ul> sortable via jQuery
       $(".booklist-draggables-container").sortable({
-				update: function (event, ui) {
-					myBookList.onListChange(event, ui);
-				},
-				change: function (event, ui) {
-					myBookList.onListChange(event, ui);
-				},
-				start: function (event, ui) {
-					myBookList.onListChange(event, ui);
-				}
-			});
+        update: function (event, ui) {
+          myBookList.onListChange(event, ui);
+        },
+        change: function (event, ui) {
+          myBookList.onListChange(event, ui);
+        },
+        start: function (event, ui) {
+          myBookList.onListChange(event, ui);
+        },
+      });
 
-			myBookList.stripeRows();
-	},
-	onListChange: function(event, ui) {
+      myBookList.stripeRows();
+    },
+    onListChange: function (event, ui) {
       const whichUl = event.target;
-      const whichListId = $(whichUl).data('booklist-id');
+      const whichListId = $(whichUl).data("booklist-id");
 
-			switch(event.type) {
-				case 'sortstart':
-					break;
-				case 'sortchange':
-					break;
-				case 'sortupdate':
+      switch (event.type) {
+        case "sortstart":
+          break;
+        case "sortchange":
+          break;
+        case "sortupdate":
           myBookList.synchronizeTextarea(whichListId);
-					myBookList.stripeRows(whichListId);
-					break;
-			};
+          myBookList.stripeRows(whichListId);
+          break;
+      }
     },
     synchronizeTextarea: function (whichBookListId) {
-      const currentListJoined = myBookList.getBooklistFromSortables(whichBookListId).join(',');
-      const textarea = $(`textarea[name='BookList-extra-isbn'][data-booklist-id=${whichBookListId}]`);
+      const currentListJoined = myBookList
+        .getBooklistFromSortables(whichBookListId)
+        .join(",");
+      const textarea = $(
+        `textarea[name='BookList-extra-isbn'][data-booklist-id=${whichBookListId}]`
+      );
 
       $(textarea).html(currentListJoined);
     },
     getBooklistFromSortables: function (whichList) {
-      const containerDiv = $(`.booklist-draggables-container[data-booklist-id=${whichList}]`);
+      const containerDiv = $(
+        `.booklist-draggables-container[data-booklist-id=${whichList}]`
+      );
       const sortableItems = containerDiv.children();
 
-      return $.map(sortableItems, (item)=> $(item).data('isbn'));
+      return $.map(sortableItems, (item) => $(item).data("isbn"));
     },
-    stripeRows: function(whichList) {
+    stripeRows: function (whichList) {
       // If we're getting a whichList argument, it means it's a list update,
       // so we know what Book List it's coming from
-      if (whichList && typeof whichList === 'number') {
-        const theList = $(`.booklist-draggables-container[data-booklist-id=${whichList}]`);
-        const rows = $(theList).children('li');
-  
-        $.each(rows, (index, element)=> {
+
+      if (whichList && typeof whichList !== "object") {
+        const theList = $(
+          `.booklist-draggables-container[data-booklist-id=${whichList}]`
+        );
+        const rows = $(theList).children("li");
+
+        $.each(rows, (index, element) => {
           // Strip off existing classes
-          $(element).removeClass('evenrow oddrow');
-  
-          const whichClass = ( (index + 1) % 2 === 0 ) ? 'evenrow' : 'oddrow';
+          $(element).removeClass("evenrow oddrow");
+
+          const whichClass = (index + 1) % 2 === 0 ? "evenrow" : "oddrow";
           $(element).addClass(whichClass);
         });
       } else {
         // If no whichList, it's on edit view load, so we have to stripe ALL Book List rows
-        const allLists = $('.booklist-draggables-container');
+        const allLists = $(".booklist-draggables-container");
 
         $.each(allLists, (index, list) => {
-          const listId = Number($(list).data('booklist-id'));
+          const listId = Number($(list).data("booklist-id"));
 
-          if ( listId ) {
-              myBookList.stripeRows(listId);
+          if (listId) {
+            myBookList.stripeRows(listId);
           };
         });
-      };
+      }
     },
-	getSortableIsbnLi: function(isbn) {
+    getSortableIsbnLi: function (isbn) {
       // NOTE: Must be kept in sync with template in
       // BookListEditOutput.php
-			return `
+      return `
 				<li
 					data-isbn='${isbn}'
 					class='booklist-item-draggable'>
@@ -772,7 +783,7 @@ function bookList() {
 						<i class='fa fa-trash booklist-delete-button' data-isbn='${isbn}'></i>
 				</li>
 			`;
-	}
+    },
   };
 
   return myBookList;

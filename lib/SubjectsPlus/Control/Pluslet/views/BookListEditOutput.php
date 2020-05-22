@@ -10,6 +10,14 @@
 
 	// Set Pluslet ID for use below
 	$booklist_id = $this->_pluslet_id;
+
+	// If it's a brand-new Pluslet, it won't have a Pluslet ID from the DB yet,
+	// so use the string "placeholder", and it will be replaced by temp ID below using jQuery
+	if ( empty($booklist_id) ) {
+		$booklist_id = 'placeholder';
+	};
+
+	// Set var for whether or not to run that jQuery replace code
 	$new_pluslet = empty( $this->_pluslet_id );
 
 ?>
@@ -34,13 +42,11 @@
 
 		<div class="isbn-input-container">
 			<input
-				<?php echo ($new_pluslet ? 'disabled' : ''); ?>
 				type="text"
 				class="isbn-input"
 				name="isbn-input"
 				placeholder="10 or 13 digit ISBN">
 			<button
-			  <?php echo ($new_pluslet ? 'disabled' : ''); ?>
 				data-booklist-id="<?php echo $booklist_id ?>"
 				type="button"
 				class="add-isbn button"
@@ -75,8 +81,6 @@
 										</li>";
 							print $li;
 						};
-					} elseif ( $new_pluslet ) {
-						echo "<p>(Please click the 'Save Changes' button before adding ISBNs.)</p>";
 					};
 
 				?>
@@ -103,6 +107,50 @@
 </div>
 
 <script>
+	<?php
+		// Only run this if it's a brand-new Pluslet, and there has no Pluslet ID yet
+		if ($new_pluslet) {
+			echo "
+				$(document).ready(()=> {
+					
+					// Make sure temporary ID is a unique one, and not already being used
+
+					const divsWithTempId = $(\"[name='new-pluslet-BookList']\");
+					let temporaryId;
+					
+					if (divsWithTempId.length > 1) {
+						let theActuallyUniqueId;
+
+						$.each(divsWithTempId, (index, div)=> {
+							const thisDivId = div.id;
+							const divsUsingThisId = $(`[data-booklist-id=\${thisDivId}]`).length;
+
+							if (divsUsingThisId == 0) {
+								theActuallyUniqueId = thisDivId;
+							};
+						});
+
+						temporaryId = theActuallyUniqueId;
+
+					} else {
+						// We only have one div with the temp ID, so just use that ID
+						temporaryId = $(divsWithTempId).attr('id');
+					};
+					
+					const allPlaceholders = $(\"[data-booklist-id='placeholder']\");
+
+					if (allPlaceholders.length && temporaryId ) {
+
+						$.each(allPlaceholders, (index, element) => {
+							$(element).attr('data-booklist-id', temporaryId);
+						});
+
+					};
+				});
+			";	
+		};
+	?>
+
 	var b = bookList();
 	b.initEditView();
 </script>
