@@ -10,6 +10,7 @@
 
 	// Set Pluslet ID for use below
 	$booklist_id = $this->_pluslet_id;
+	$new_pluslet = empty( $this->_pluslet_id );
 
 ?>
 
@@ -33,11 +34,13 @@
 
 		<div class="isbn-input-container">
 			<input
+				<?php echo ($new_pluslet ? 'disabled' : ''); ?>
 				type="text"
 				class="isbn-input"
 				name="isbn-input"
 				placeholder="10 or 13 digit ISBN">
 			<button
+			  <?php echo ($new_pluslet ? 'disabled' : ''); ?>
 				data-booklist-id="<?php echo $booklist_id ?>"
 				type="button"
 				class="add-isbn button"
@@ -72,6 +75,8 @@
 										</li>";
 							print $li;
 						};
+					} elseif ( $new_pluslet ) {
+						echo "<p>(Please click the 'Save Changes' button before adding ISBNs.)</p>";
 					};
 
 				?>

@@ -151,8 +151,8 @@ function bookList() {
         // Synchronize invisible textarea with updated list
         myBookList.synchronizeTextarea(whichBookListId);
 			});
-		},
-		addIsbnToList: function (isbn, whichList) {
+	},
+	addIsbnToList: function (isbn, whichList) {
       const newLi = myBookList.getSortableIsbnLi(isbn);
       const whichUl = $(`ul.booklist-draggables-container[data-booklist-id=${whichList}]`);
       const whichBookListId = $(whichUl).data('booklist-id');
@@ -164,8 +164,8 @@ function bookList() {
 
 			// Recreate event listeners for all delete buttons, so new row also gets it
       myBookList.deleteIsbnButtonListener();
-		},
-		deleteIsbnButtonListener: function () {
+	},
+	deleteIsbnButtonListener: function () {
 			// Clear all delete listeners to start, so newly added ISBNs are added correctly
 			$('.booklist-delete-button').unbind('click');
 
@@ -182,10 +182,10 @@ function bookList() {
         // Re-stripe the list
         myBookList.stripeRows(whichList);
 			});
-		},
-		deleteIsbnFromList: function (liToDelete) {
+	},
+	deleteIsbnFromList: function (liToDelete) {
 			$(liToDelete).remove();
-		},
+	},
     populatePlusletViewFromCache: function (
       container,
       response,
@@ -703,8 +703,8 @@ function bookList() {
 			});
 
 			myBookList.stripeRows();
-		},
-		onListChange: function(event, ui) {
+	},
+	onListChange: function(event, ui) {
       const whichUl = event.target;
       const whichListId = $(whichUl).data('booklist-id');
 
@@ -731,7 +731,7 @@ function bookList() {
 
       return $.map(sortableItems, (item)=> $(item).data('isbn'));
     },
-		stripeRows: function(whichList) {
+    stripeRows: function(whichList) {
       // If we're getting a whichList argument, it means it's a list update,
       // so we know what Book List it's coming from
       if (whichList && typeof whichList === 'number') {
@@ -750,12 +750,15 @@ function bookList() {
         const allLists = $('.booklist-draggables-container');
 
         $.each(allLists, (index, list) => {
-          const listId = $(list).data('booklist-id');
-          myBookList.stripeRows(listId);
+          const listId = Number($(list).data('booklist-id'));
+
+          if ( listId ) {
+              myBookList.stripeRows(listId);
+          };
         });
       };
-		},
-		getSortableIsbnLi: function(isbn) {
+    },
+	getSortableIsbnLi: function(isbn) {
       // NOTE: Must be kept in sync with template in
       // BookListEditOutput.php
 			return `
@@ -769,7 +772,7 @@ function bookList() {
 						<i class='fa fa-trash booklist-delete-button' data-isbn='${isbn}'></i>
 				</li>
 			`;
-		}
+	}
   };
 
   return myBookList;
