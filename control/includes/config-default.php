@@ -571,6 +571,14 @@ $lti_service_account_password = '';
 // e.g. 13969
 $qp_inst_id = '';
 
+////////////////////////////////////////////
+//Libchat settings
+////////////////////////////////////////////
+// you can find your hash by creating a 
+// widget using this documentation:
+// https://ask.springshare.com/libanswers/faq/1777
+$libchat_hash = '';
+
 // WebPAC III
 
 $webpac_cat_action = "";

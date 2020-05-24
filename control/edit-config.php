@@ -378,6 +378,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 				'SocialMedia',
 				'Chat',
 				'QP',
+                                'LibChat',
 				'WorldCat',
 				'Catalog',
 				'ArticlesPlus',
@@ -921,6 +922,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			"small",
 			"",
 			""
+		),
+
+		"libchat_hash" => array(
+			_( "LibChat Pluslet hash" ),
+			_( "This option contains the hash that uniquely identifies a LibChat widget that you have generated" ),
+			"string",
+			"guide",
+			"large",
+			"",
+			"Instructions for generating a widget at https://ask.springshare.com/springboards/faq/1880"
 		),
 
 		"email_host" => array(
