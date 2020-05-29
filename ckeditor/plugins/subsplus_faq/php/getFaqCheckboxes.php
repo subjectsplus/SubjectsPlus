@@ -1,5 +1,4 @@
 <?php
-die("Disabled!");
 
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
@@ -8,7 +7,12 @@ include_once('../../../../control/includes/autoloader.php');
 
 use SubjectsPlus\Control\Querier;
 
-
+//Scrubbing input
+$_SERVER['mail'] = scrubData($_SERVER['mail']);
+$_SESSION['email'] = scrubData($_SESSION['email']);
+$_GET["browse"] = scrubData($_GET["browse"]);
+$_COOKIE["our_guide"] = scrubData($_COOKIE["our_guide"]);
+$_COOKIE["our_guide_id"] = scrubData($_COOKIE["our_guide_id"]);
 
 //added because without this check a security hole is open
 if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
