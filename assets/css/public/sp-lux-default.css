@@ -11544,6 +11544,9 @@ span[id*=bib-] i {
     background-color: #ced4da;
     color: #000; }
 
+.default-search .index-search-area .ui-helper-hidden-accessible {
+  display: none; }
+
 @media print {
   .titlebar .titlebar_text {
     font-size: 16pt;
