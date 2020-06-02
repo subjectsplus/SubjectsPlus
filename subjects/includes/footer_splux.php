@@ -7,19 +7,19 @@
 </div>
 
 <!--Load Jekyll-built site footer (Site Footer, Site Toolbar)-->
-<?php include("includes/jekyll-site-footer.php"); ?>
+<?php include("themes/splux/site-footer.php"); ?>
 
 <!--container for side navigation contents-->
-<div class="c-offcanvas is-hidden" id="left">
+<div class="c-offcanvas is-hidden slim-nosliver" id="left">
     <div class="navbar mobile">
-        <div class="offcanvas-nav d-block d-xl-none" data-set="bs"></div>
+        <div class="offcanvas-nav d-block d-lg-none" data-set="bs"></div>
     </div>
 </div>
 
 </div>
 
 <!--Load Jekyll-built site scripts (Site Header Scripts, Mega Menus Scripts, Component Scripts)-->
-<?php include("includes/jekyll-site-scripts.php"); ?>
+<?php include("themes/splux/site-scripts.php"); ?>
 
 <script>
     $( function(){
@@ -103,15 +103,6 @@
         $('.pluslet[name=\"SubjectSpecialist\"] .staff-details .staff-social[data-show-instagram=\"Yes\"]').each( function() {
             $(this).find('i').removeClass('fa fa-instagram').addClass('fab fa-instagram');
         });
-
-        //Social Media avoid Font Awesome issues
-        $('.pluslet[name=\"SocialMedia\"] #social_media_accounts li').each( function() {
-            $(this).find('i.fa-facebook-square').removeClass('fa fa-facebook-square').addClass('fab fa-facebook');
-            $(this).find('i.fa-twitter-square').removeClass('fa fa-twitter-square').addClass('fab fa-twitter-square');
-            $(this).find('i.fa-pinterest-square').removeClass('fa fa-pinterest-square').addClass('fab fa-pinterest-square');
-            $(this).find('i.fa-instagram').removeClass('fa fa-instagram').addClass('fab fa-instagram');
-        });
-
 
     });
 </script>

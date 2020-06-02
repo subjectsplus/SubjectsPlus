@@ -8,6 +8,8 @@ use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\GuideList;
 
+$use_jquery = array("ui");
+
 $page_title  = "Research Guides";
 $description = "The best stuff for your research.  No kidding.";
 $keywords    = "research, databases, subjects, search, find";
@@ -368,7 +370,18 @@ $legend = "";
     <div class="section-minimal-nosearch">
         <div class="container text-center minimal-header">
             <h1><?php print $page_title; ?></h1>
-            <p><?php print $legend; ?></p>
+        </div>
+    </div>
+
+    <!-- Search Area -->
+    <div class="section default-search">
+        <div class="container">
+            <div class="index-search-area">
+                <?php
+                $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
+                $input_box->displayBox();
+                ?>
+            </div>
         </div>
     </div>
 
