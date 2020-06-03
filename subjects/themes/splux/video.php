@@ -8,14 +8,14 @@ use SubjectsPlus\Control\Querier;
 
 $use_jquery = array("colorbox");
 
-$page_title = _("Library Videos");
+$page_title = _("Videos");
 $description = _("A collection of videos produced at this library.");
 $keywords = _("library, research, videos, instruction");
 
 $extra_sql = "";
 
 // Intro text
-$intro = "A collection of videos produced by the University of Miami Libraries.";
+$intro = "A collection of videos.";
 
 try {
 } catch (Exception $e) {
@@ -145,10 +145,9 @@ if ($num_rows) {
 include( "includes/header_splux.php" );
 ?>
 
-<div class="feature section-minimal-nosearch">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
-        <hr align="center" class="hr-panel">
         <p class="mb-0 mt-2"><?php print $intro; ?></p>
     </div>
 </div>
@@ -159,10 +158,9 @@ include( "includes/header_splux.php" );
                 <?php print $display; ?>
             </div>
             <div class="col-lg-3">
-                <div class="feature popular-list">
+                <div class="feature-light popular-list">
                     <h4><?php print _("Looking for Feature Films?"); ?></h4>
                     <ul>
-                        <li><a href="https://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?mode=Basic&vid=uml&tab=default_tab">Library Catalog</a></li>
                         <li><a href="databases.php?letter=bytype&type=Video">Streaming Video</a></li>
                     </ul>
                     <h4>- <?php print _("Browse by Tag"); ?> -</h4>
