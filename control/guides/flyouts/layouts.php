@@ -2,11 +2,11 @@
 <div id="layout_options_content" class="second-level-content"
      style="display: none;">
     <h3><?php print _("Choose Layout"); ?></h3>
-    <p id="select_section_message"><?php print _("Please select a section first. Click the [arrows icon] on the appropriate section so that it turns pink."); ?> <i class="fa fa-arrows"></i>  </p>
-    <p>
+    <p id="select_section_message"><?php print _("Please select a section first. Click the [arrows icon] on the appropriate section so that it turns pink."); ?> <i class="fa fa-arrows"></i>
+        <br><br>
         <img
                 src="<?php print $AssetPath; ?>images/admin/4-arrows-icon-highlighted.png"
-                title="<?php print _("Highlighted 4 arrows icon example"); ?>"  />
+                alt="<?php print _("Highlighted 4 arrows icon example"); ?>"  />
     </p>
     <div id="layout_options_container">
         <ul class="layout_options">
