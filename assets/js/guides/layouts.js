@@ -253,16 +253,8 @@ function layout() {
 			$('.layout-icon').on('click', function () {
 
 				$('#autosave-spinner').show();
-
-				//sp_section_selected
-				//section_selected_area
-
-
-
-
-
 				var section_id = $(".section_selected_area").attr('id').split('section_')[1];
-				var layout_id = "#" + $(".active-layout-icon").attr('id');
+				var layout_id = "#" + $(this).attr('id');
 
 				for (var k in myLayout.layouts) {
 					if (layout_id === myLayout.layouts[k].selector) {
