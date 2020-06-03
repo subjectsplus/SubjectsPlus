@@ -7,7 +7,7 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 
 //header
-include("includes/header_um-new.php");
+include( "includes/header_splux.php" );
 ?>
 
 <div class="second-level">
@@ -61,6 +61,9 @@ include("includes/header_um-new.php");
     </div>
 </section>
 
+
+
+
 <section class="section">
     <div class="container">
         <h3>Oh, no!  This page doesn&#8217;t exist.</h3>
@@ -71,4 +74,4 @@ include("includes/header_um-new.php");
 
 <?php
 // Load footer file
-include("includes/footer_um-new.php"); ?>
+include( "includes/footer_splux.php" ); ?>

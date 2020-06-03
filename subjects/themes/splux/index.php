@@ -373,14 +373,20 @@ $legend = "";
         </div>
     </div>
 
-    <!-- Search Area -->
-    <div class="section default-search">
+    <div class="section section-half">
         <div class="container">
-            <div class="index-search-area">
-                <?php
-                $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
-                $input_box->displayBox();
-                ?>
+            <div class="row">
+                <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
+                    <!-- Search Area -->
+                    <div class="default-search">
+                        <div class="index-search-area">
+                            <?php
+                            $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
+                            $input_box->displayBox();
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

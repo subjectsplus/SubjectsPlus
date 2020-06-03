@@ -122,20 +122,29 @@ if ( isset( $_GET["d"] ) ) {
     </div>
 </div>
 
+    <div class="section section-half">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
+                    <!-- Search Area -->
+                    <div class="default-search">
+                        <div class="index-search-area">
+                            <?php
+                            $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
+                            $input_box->displayBox();
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <section class="section section-half-top">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <!-- Search Area -->
-                <div class="default-search default-other">
-                    <div class="index-search-area">
-                        <?php
-                        $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
-                        $input_box->displayBox();
-                        ?>
-                    </div>
-                </div>
-
                 <?php print $guide_results; ?>
             </div>
             <div class="col-lg-4">
@@ -161,7 +170,6 @@ if ( isset( $_GET["d"] ) ) {
         //add class to ui-autocomplete dropdown
         $('.ui-autocomplete-input').addClass("index-search-dd");
         $('.index-search-area .pure-button').addClass("btn-small");
-        $('.ui-autocomplete').addClass("ui-other");
 
     });
 </script>

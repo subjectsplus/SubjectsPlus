@@ -123,7 +123,7 @@ $display = $info;
 $page_title = $page_title_prefix . $fullname;
 
 //header
-include("includes/header_um-new.php");
+include( "includes/header_splux.php" );
 ?>
 
 <div class="feature section-minimal-nosearch">
@@ -156,4 +156,4 @@ include("includes/header_um-new.php");
 
 <?php
 // Footer
-include("includes/footer_um-new.php");  ?>
+include( "includes/footer_splux.php" );  ?>

@@ -142,7 +142,7 @@ if ($num_rows) {
 
 
 // Load header
-include("includes/header_um-new.php");
+include( "includes/header_splux.php" );
 ?>
 
 <div class="feature section-minimal-nosearch">
@@ -175,7 +175,7 @@ include("includes/header_um-new.php");
 
 <?php
 // Load footer file
-include("includes/footer_um-new.php"); ?>
+include( "includes/footer_splux.php" ); ?>
 
 <script>
     $( function(){

@@ -9,6 +9,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\DbHandler;
 
+
 $db = new Querier;
 
 //$use_jquery = array("sp_legacy");
@@ -217,7 +218,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more informa
 
 // Now we are finally read to display the page
 // Load header file
-include( "includes/header_um-new.php" );
+include( "includes/header_splux.php" );
 
 
 // Our version 2 vs version 3 styles choice
@@ -229,23 +230,29 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
 	print "version 3 styles not set up yet";
 }
 ?>
-<input id="jekyll-category" value="sp-databases" type="hidden">
-<div class="feature section-minimal">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
-        <hr align="center" class="hr-panel">
     </div>
 </div>
 
-<section class="search-area d-none d-lg-block">
-    <div class="full-search">
-        <div class="container text-center">
-            <div class="search-group">
-                <div class="uml-site-search-container"></div>
+    <div class="section section-half">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
+                    <!-- Search Area -->
+                    <div class="default-search">
+                        <div class="index-search-area">
+                            <?php
+                            $input_box = new CompleteMe("quick_search", "databases.php", $proxyURL, "Find Databases", "records");
+                            $input_box->displayBox();
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
 
 <section class="section section-half-top">
     <div class="container">
@@ -290,46 +297,27 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
                 ?>
             </div>
             <div class="col-lg-4">
-                <div class="row">
-                    <div class="col-sm-6 col-lg-12">
-                        <?php if ( $newlist ) { ?>
-                            <div class="feature popular-list">
-                                <h4>- New Databases -</h4>
-                                <?php print $newlist; ?>
-                                <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default"
-                                   role="button">See all</a>
-                            </div>
-                        <?php } ?>
+                <?php if ( $newlist ) { ?>
+                    <div class="feature-light popular-list">
+                        <h4>- New Databases -</h4>
+                        <?php print $newlist; ?>
+                        <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default"
+                           role="button">See all</a>
                     </div>
-                    <div class="col-sm-6 col-lg-12">
-                        <!--Resource promotion-->
-                        <div class="card mt-2 mt-sm-0 mt-lg-3 mb-3 mb-lg-4">
-                            <a href="https://lil.miami.edu" title="LinkedIn Learning"><img
-                                        src="https://www.library.miami.edu/images/card-linked-in-learning.jpg" alt="LinkedIn Learning"
-                                        class="card-img-top no-decoration"></a>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a class="no-decoration default" href="https://lil.miami.edu">LinkedIn Learning</a>
-                                </h5>
-                                <p>Tutorials just a click away. We offer access to LinkedIn Learning's 5,000 video tutorials covering business, creative, and technology topics.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
 
                 <?php if ( isset( $featured ) ) { ?>
-                    <div class="feature popular-list">
+                    <div class="feature-light popular-list">
                         <h4><?php print _( "- Featured Databases -" ); ?></h4>
                         <?php print $featured_list; ?>
                     </div>
                 <?php } ?>
 
                 <?php if ( isset( $trials ) ) { ?>
-                    <div class="feature popular-list">
+                    <div class="feature-light popular-list">
                         <h4>- Database Trials -</h4>
                         <?php print $trial_list; ?>
-                        <p>Trial demonstrations of fee-based subscription services under consideration. Feedback: <a
-                                    href="mailto:d.roose@miami.edu" class="no-decoration">d.roose@miami.edu</a></p>
+                        <p>Trial demonstrations of fee-based subscription services under consideration.</p>
                     </div>
                 <?php } ?>
             </div>
@@ -337,6 +325,15 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
     </div>
 </section>
 
+    <script>
+        $(function () {
+            //add class to ui-autocomplete dropdown
+            $('.index-search-area #quick_search').addClass("index-search-dd");
+            $('.index-search-area .pure-button').addClass("btn-small");
+
+        });
+    </script>
+
 <?php
 // Load footer file
-include( "includes/footer_um-new.php" ); ?>
+include( "includes/footer_splux.php" ); ?>

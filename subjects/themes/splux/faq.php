@@ -141,7 +141,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "Library FAQs";
 }
 
-include("includes/header_um-new.php");
+include( "includes/header_splux.php" );
 
 if ($displaytype == "search") {
 
@@ -372,4 +372,4 @@ foreach ($collections_result as $myrow1) {
 
 <?php
 // footer
-include("includes/footer_um-new.php"); ?>
+include( "includes/footer_splux.php" ); ?>

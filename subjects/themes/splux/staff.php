@@ -160,7 +160,7 @@ $staff_data = new StaffDisplay();
 $display = $staff_data->writeTable($selected_letter);
 
 // header
-include("includes/header_um-new.php");
+include( "includes/header_splux.php" );
 ?>
 
 <input id="jekyll-category" value="sp-staff" type="hidden">
@@ -274,4 +274,4 @@ include("includes/header_um-new.php");
 
 <?php
 // Footer
-include("includes/footer_um-new.php"); ?>
+include( "includes/footer_splux.php" ); ?>
