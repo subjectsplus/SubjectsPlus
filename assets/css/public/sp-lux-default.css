@@ -9594,6 +9594,9 @@ body {
 
 .body-slim {
   margin-top: 68px; }
+  @media (min-width: 576px) {
+    .body-slim {
+      margin-top: 84px; } }
   @media (min-width: 992px) {
     .body-slim {
       margin-top: 0;
@@ -10779,7 +10782,7 @@ select.selectpicker {
     font-weight: 600; }
   .pills-container .nav-pills .nav-link {
     background-color: #e9ecef;
-    font-size: 1rem; }
+    font-size: 0.875rem; }
     .pills-container .nav-pills .nav-link.active {
       background-color: #07adc7; }
 
@@ -11544,8 +11547,80 @@ span[id*=bib-] i {
     background-color: #ced4da;
     color: #000; }
 
-.default-search .index-search-area .ui-helper-hidden-accessible {
-  display: none; }
+.default-search {
+  padding-top: .5rem;
+  padding-bottom: .5rem; }
+  .default-search .index-search-area {
+    box-shadow: 0 0 1px 1px #ced4da;
+    padding: .25rem 0 0 0; }
+    @media (min-width: 768px) {
+      .default-search .index-search-area {
+        display: inline-block; } }
+    .default-search .index-search-area .ui-helper-hidden-accessible {
+      display: none; }
+    .default-search .index-search-area .index-search-dd {
+      width: calc(100% - 50px);
+      border: none;
+      padding-left: 0;
+      outline: none;
+      font-style: italic;
+      padding-bottom: 6px; }
+      @media (min-width: 768px) {
+        .default-search .index-search-area .index-search-dd {
+          width: 520px; } }
+    .default-search .index-search-area .btn-small {
+      border: none;
+      border-radius: 0.2rem; }
+      @media (min-width: 768px) {
+        .default-search .index-search-area .btn-small {
+          margin-right: 5px; } }
+  .default-search.default-other {
+    padding-top: 0;
+    padding-bottom: 1.25rem; }
+    .default-search.default-other .index-search-area {
+      display: block; }
+      @media (min-width: 768px) {
+        .default-search.default-other .index-search-area .index-search-dd {
+          width: calc(100% - 50px); } }
+
+.ui-autocomplete.ui-menu {
+  padding: .5rem;
+  border: 1px solid #dee2e6;
+  background-color: #e9ecef;
+  width: calc(100% - 50px) !important; }
+  @media (min-width: 768px) {
+    .ui-autocomplete.ui-menu {
+      width: 567px !important; } }
+  .ui-autocomplete.ui-menu.ui-other {
+    width: calc(100% - 30px) !important; }
+    @media (min-width: 576px) {
+      .ui-autocomplete.ui-menu.ui-other {
+        width: 550px !important; } }
+    @media (min-width: 768px) {
+      .ui-autocomplete.ui-menu.ui-other {
+        width: 718px !important; } }
+    @media (min-width: 992px) {
+      .ui-autocomplete.ui-menu.ui-other {
+        width: 625px !important; } }
+    @media (min-width: 1024px) {
+      .ui-autocomplete.ui-menu.ui-other {
+        width: 636px !important; } }
+    @media (min-width: 1200px) {
+      .ui-autocomplete.ui-menu.ui-other {
+        width: 770px !important; } }
+  .ui-autocomplete.ui-menu li {
+    padding-bottom: .25rem;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: .5rem; }
+    .ui-autocomplete.ui-menu li:last-child {
+      border-bottom: none;
+      margin-bottom: 0; }
+    .ui-autocomplete.ui-menu li:first-child {
+      border-bottom: 0; }
+    .ui-autocomplete.ui-menu li a {
+      display: block; }
+      .ui-autocomplete.ui-menu li a:hover, .ui-autocomplete.ui-menu li a:active, .ui-autocomplete.ui-menu li a:focus {
+        text-decoration: none; }
 
 @media print {
   .titlebar .titlebar_text {

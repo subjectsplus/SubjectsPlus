@@ -212,8 +212,8 @@ if ( isset( $_POST["searchterm"] ) && $_POST["searchterm"] != "" ) {
 
 		if ( $total_rows > 0 ) {
 
-			$col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
-			$col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
+			$col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl-6\"><ul class=\"guide-listing list-unstyled\">";
+			$col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl-6\"><ul class=\"guide-listing list-unstyled\">";
 
 			$row_count = 1;
 
@@ -409,7 +409,7 @@ $legend = "";
                                 href="<?php print PATH_TO_SP; ?>subjects/staff.php?letter=Subject Librarians"
                                 class="btn btn-default" role="button"><?php print $button_text; ?></a></div>
 
-                    <div class="feature popular-list p-3 mt-3">
+                    <div class="feature-light popular-list p-3 mt-3">
                         <h4><?php print _( "- New Databases -" ); ?></h4>
 						<?php print $newlist; ?>
                         <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
@@ -443,6 +443,7 @@ $legend = "";
 
             //add class to ui-autocomplete dropdown
             $('.ui-autocomplete-input').addClass("index-search-dd");
+            $('.index-search-area .pure-button').addClass("btn-small");
 
             //LTI notification close button
             $(".notification-close-button").click(function () {

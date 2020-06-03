@@ -1991,8 +1991,8 @@ function listCollections( $search = "", $display = "default", $show_children = "
 		case "2col":
 
 			// for 2 col
-			$col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
-			$col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl2-6\"><ul class=\"guide-listing list-unstyled\">";
+			$col_1 = "<div class=\"col-sm-6 col-lg-12 col-xl-6\"><ul class=\"guide-listing list-unstyled\">";
+			$col_2 = "<div class=\"col-sm-6 col-lg-12 col-xl-6\"><ul class=\"guide-listing list-unstyled\">";
 
 			foreach ( $r as $myrow ) {
 

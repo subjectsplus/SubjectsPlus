@@ -7,6 +7,7 @@
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 
+$use_jquery = array("ui");
 
 $page_title  = _( "Research Guide Collections" );
 $description = _( "The best stuff for your research.  No kidding." );
@@ -95,7 +96,7 @@ $newlist .= "</ul>\n";
 
 
 // Add header now
-include( "includes/header_um-new.php" );
+include( "includes/header_splux.php" );
 
 // put together our main result display
 
@@ -114,34 +115,31 @@ if ( isset( $_GET["d"] ) ) {
 // Now we are finally read to display the page
 ?>
 
-<input id="jekyll-category" value="sp-guide" type="hidden">
-<div class="feature section-minimal">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
-        <h5 class="mt-3 mt-lg-0 mb-1"><a href="index.php" class="no-decoration default">Research Guides</a></h5>
+        <h5 class="mt-3 mt-lg-0 mb-1"><a href="<?php print $PublicPath; ?>index.php" class="no-decoration default">Research Guides</a></h5>
         <h1></h1>
-        <hr align="center" class="hr-panel">
     </div>
 </div>
-
-<!-- Search Component -->
-<section class="search-area d-none d-lg-block">
-    <div class="full-search">
-        <div class="container text-center">
-            <div class="search-group">
-                <div class="uml-site-search-container"></div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="section section-half-top">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <!-- Search Area -->
+                <div class="default-search default-other">
+                    <div class="index-search-area">
+                        <?php
+                        $input_box = new CompleteMe("quick_search_b", "index.php", $proxyURL, "Find Guides", "guides");
+                        $input_box->displayBox();
+                        ?>
+                    </div>
+                </div>
+
                 <?php print $guide_results; ?>
             </div>
             <div class="col-lg-4">
-                <div class="feature popular-list p-3 mt-3">
+                <div class="feature-light popular-list p-3 mt-3">
                     <h4><?php print _( "- New Databases -" ); ?></h4>
                     <?php print $newlist; ?>
                     <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
@@ -159,11 +157,17 @@ if ( isset( $_GET["d"] ) ) {
         // Move Collection Title to minimal page header
         var $collection_title = $('#collection_parent_title');
         $('.minimal-header h1').append($collection_title);
+
+        //add class to ui-autocomplete dropdown
+        $('.ui-autocomplete-input').addClass("index-search-dd");
+        $('.index-search-area .pure-button').addClass("btn-small");
+        $('.ui-autocomplete').addClass("ui-other");
+
     });
 </script>
 
 
 <?php
 // Load footer file
-include( "includes/footer_um-new.php" );
+include( "includes/footer_splux.php" );
 ?>
