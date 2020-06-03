@@ -85,6 +85,9 @@ function section() {
 					newSectionBlock.addClass('sp_section_selected');
 					newSectionBlock.parent('div').addClass('section_selected_area');
 				});
+				newSection.done(function (data) {
+					window.scrollTo(0, $(".section_selected_area").offset().top);
+				})
 			});
 		},
 
@@ -229,12 +232,17 @@ function section() {
 				resizable: false,
 				buttons: {
 					Yes: function () {
-						// Remove node
-						console.log('section_id deleteSectionDialog: ' + section_id);
 						$("#section_" + section_id).remove();
-						//$('#response').show();
-
+						// save the guide
 						mySection.autoSaveGuide();
+
+						// scroll to first section
+						window.scrollTo(0, $(".sp_section_controls").first().offset().top);
+
+						// hightlight section controls
+						$('.sp_section_controls').first().trigger('click');
+						$('.sp_section_controls').first().addClass('sp_section_selected');
+						$('.sp_section_controls').first().parent('div').addClass('section_selected_area');
 
 						$(this).dialog('close');
 						return false;
