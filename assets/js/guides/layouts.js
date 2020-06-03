@@ -25,10 +25,7 @@ function layout() {
 
 		},
 		bindUiActions : function() {
-
-			//myLayout.activateLayoutButtons();
 			myLayout.updateSectionLayout();
-
 		},
 		init : function() {
 		
@@ -59,7 +56,6 @@ function layout() {
 						$('div#tabs-0').append(html);
 					}
 				});
-
 			}
 		},
 		moveColumnContent : function(moveColumns, sectionId) {
@@ -80,11 +76,6 @@ function layout() {
 				$('#section_' + sectionId + '  #container-' + targetColumn + ' .portal-column').append(content);
 				
 			}
-		
-			
-			
-
-
 		},
 
 		selectedLayout : function() {
@@ -147,9 +138,6 @@ function layout() {
 
 			}
 
-			//console.log(dataLayout);
-
-			
 			for (var k in myLayout.layouts) {	
 				if (dataLayout === k) {
 					//console.log("Adding active...");
@@ -157,11 +145,8 @@ function layout() {
 				} else {
 					$(myLayout.layouts[k].selector).removeClass('active-layout-icon');
 
-				} 
-				
-			  
+				}
 			}
-			
 		},
 		layoutSection : function(sectionId, layout) {
 			/** 
@@ -179,8 +164,6 @@ function layout() {
 
 			for ( var k in myLayout.layouts) {
 				if (layout === k) {
-
-
 					$(firstColumn).attr('class', '');
 					$(secondColumn).attr('class', '');
 					$(thirdColumn).attr('class', '');
@@ -189,11 +172,9 @@ function layout() {
 					$(secondColumn).addClass(myLayout.layouts[k].pureClasses[1]);
 					$(thirdColumn).addClass(myLayout.layouts[k].pureClasses[2]);
 
-					
 					myLayout.moveColumnContent(myLayout.layouts[k].moveColumns, sectionId);
 					
 					$(section).data('layout', k)
-
 				}
 			}
 		},
@@ -210,12 +191,8 @@ function layout() {
 				var layout = $('div#section_' + sectionId).data('layout');
 
 				myLayout.layoutSection(sectionId, layout);
-
 			});
 		},
-
-		
-		
 		
 		activateLayoutButtons : function() {
 			/**
@@ -228,9 +205,7 @@ function layout() {
 		
 			for ( var k in myLayout.layouts) {
 				var selector = myLayout.layouts[k].selector;
-				
 				$(selector).data('layout', k);
-
 
 				$(selector).on('click', function() {
 					var selectedSection = $('#layout_options_content').data().selectedSection;
@@ -239,11 +214,6 @@ function layout() {
 					$(this).addClass('active-layout-icon');
 
 					myLayout.layoutSection(selectedSection,$(this).data().layout);
-				    //$("#save_guide").fadeIn();
-					//var save = saveSetup();
-					//save.saveGuide();
-					//$('#save_guide').fadeOut();
-					//myLayout.updateSectionLayout();
 			    });
 			}
 		},
