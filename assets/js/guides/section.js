@@ -36,18 +36,15 @@ function section() {
 			$('#save_guide').fadeOut();
 		},
 		viewSectionControls : function() {
-			$('.sptab').each(function () {
-
+			$(".sptab").each(function () {
 				$(this).children().find('.sp_section_controls').show();
 				$(this).children().find('.section_remove').hide();
 				$(this).children().first().find('.sp_section_controls').trigger('click');
 				$(this).children().first().find('.sp_section_controls').addClass('sp_section_selected');
 				$(this).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
-
 				if ($(this).children().size() > 1) {
-					//do nothing
+					// do nothing
 				} else {
-					//console.log("Only one section?");
 					$(this).children().find('.sp_section_controls').trigger('click');
 				}
 			});
@@ -61,6 +58,7 @@ function section() {
 			//////////////
 			$(lstrSelector).on('click', function() {
 				//$(tabs).tabs();
+				console.log('lstrSelector: ' + lstrSelector);
 				var selectedTab = $('#tabs').tabs('option', 'active');
 
 				var tab_id = $("[aria-controls='tabs-"+ selectedTab +"']").attr("id");
@@ -69,9 +67,6 @@ function section() {
 				var layout = "4-4-4";
 
 				var newSection = mySection.addNewSection(section_index, layout, tab_id);
-				newSection.then(function(data) {
-					var last_insert_id = data.last_insert;
-				});
 				newSection.then(function(data) {
 					var selectedTab = $('#tabs').tabs('option', 'active');
 					// add section block html with new section id
@@ -82,14 +77,13 @@ function section() {
 					// Make sure that the new section can accept drops
 					var drop = drag();
 					drop.makeDropable(".dropspotty");
-				});
 
-				newSection.done(function(data) {
 					var selectedTab = $('#tabs').tabs('option', 'active');
 					$('div#tabs-' + selectedTab)
 					var newSectionBlock = $('#tabs-' + selectedTab + ' .sp_section_controls').last();
 					newSectionBlock.trigger('click');
-					mySection.viewSectionControls();
+					newSectionBlock.addClass('sp_section_selected');
+					newSectionBlock.parent('div').addClass('section_selected_area');
 				});
 			});
 		},
