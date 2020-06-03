@@ -9,12 +9,10 @@ if ( $siteKey === '' ): ?>
 // Add the g-recaptcha tag to the form you want to include the reCAPTCHA element
 ?>
 <div class="feature-light popular-list">
-    <h3>- Need help now? -</h3>
-    <a href="#" class="btn btn-default">Contact Us</a>
-    <hr>
+    <h4><?php echo _("Need help now? Contact Us."); ?></h4>
 
     <form id="tellus" action="talkback.php" method="post">
-        <div class="<?php print $tb_bonus_css; ?>">
+        <div class="talkback_form <?php print $tb_bonus_css; ?>">
             <div class="form-group">
                 <label for="the_suggestion"><?php print _( "Your comment:" ); ?></label>
                 <textarea name="the_suggestion" id="the_suggestion" class="form-control" rows="3" value="<?php print $this_comment; ?>"></textarea>
@@ -22,10 +20,10 @@ if ( $siteKey === '' ): ?>
             <div class="form-group">
                 <label for="suggestion_email"><?php print _( "Your email (optional):" ); ?></label>
                 <input type="email" class="form-control" id="suggestion_email" name="suggestion_email" value="">
-                <p>(In case we need to contact you)</p>
+                <p><em><?php echo _( "(In case we need to contact you)" ); ?></em></p>
                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
             </div>
-            <button type="submit" name="submit_comment" class="pure-button pure-button-topsearch"
+            <button type="submit" name="submit_comment" class="pure-button pure-button-topsearch btn-default"
             ><?php print _( "Submit" ); ?>
             </button>
         </div>

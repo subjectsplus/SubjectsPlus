@@ -9665,7 +9665,9 @@ thead.th-simple th {
   line-height: 1.2;
   transition: all 0.35s ease-in-out;
   margin-bottom: .75rem;
-  text-decoration: none; }
+  text-decoration: none;
+  border: none;
+  outline: none; }
   .btn-default:hover, .btn-default:focus {
     background-color: #0698ae;
     color: #ffffff; }
@@ -11410,17 +11412,20 @@ span[id*=bib-] i {
     flex: 0 0 100%;
     max-width: 100%; } }
 
-.talkback .pills-container a.pill {
+.talkback .pills-container a {
   border-radius: 0.2rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: #333333;
   padding: .5rem 1rem;
   text-decoration: none;
   background-color: #e9ecef;
-  display: block; }
-  .talkback .pills-container a.pill:hover, .talkback .pills-container a.pill:active, .talkback .pills-container a.pill:focus {
+  display: block;
+  margin-right: .5rem; }
+  .talkback .pills-container a:last-of-type {
+    margin-right: 0; }
+  .talkback .pills-container a:hover, .talkback .pills-container a:active, .talkback .pills-container a:focus {
     color: #0698ae; }
-  .talkback .pills-container a.pill.ctag-on {
+  .talkback .pills-container a.ctag-on {
     color: #ffffff;
     background-color: #07adc7; }
 .talkback h2 {

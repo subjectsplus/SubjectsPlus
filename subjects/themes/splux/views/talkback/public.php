@@ -1,11 +1,10 @@
-<div class="feature section-minimal-nosearch">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php if ( isset( $page_title
 		               ) && ! empty( $page_title ) ) {
 				echo $page_title;
 			} ?></h1>
-        <hr align="center" class="hr-panel">
-        <p class="mb-0"><?php if ( isset( $page_description
+        <p class="mt-3"><?php if ( isset( $page_description
 		                           ) && ! empty( $page_description ) ) {
 				echo $page_description;
 			} ?></p>
@@ -22,20 +21,19 @@
 
         <div class="row">
             <div class="col-lg-8">
-                <!--<div class="pills-container">
+                <div class="pills-container">
                     <ul class="list-unstyled d-flex flex-row flex-wrap justify-content-around justify-content-md-start">
-                        <?php //print $cat_filters; ?>
+                        <?php print $cat_filters; ?>
                     </ul>
-                </div>-->
+                </div>
 
 
-                <h2><?php if ( isset( $comment_header ) && ! empty( $comment_header ) ) {
+                <h3><?php if ( isset( $comment_header ) && ! empty( $comment_header ) ) {
 						echo $comment_header;
 					} ?>
-                    <div class="year-switch"><a
-                                href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?> </a>
+                    <div class="year-switch"><a href="<?php echo $form_action . $current_comments_link; ?>"><?php echo $current_comments_label; ?></a>
                     </div>
-                </h2>
+                </h3>
 
 				<?php if ( isset( $comments ) && ! empty( $comments ) ):
 
@@ -105,5 +103,3 @@
 
     </div>
 </section>
-
-
