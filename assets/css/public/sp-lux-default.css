@@ -10848,7 +10848,7 @@ select.selectpicker {
 
 .expander {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.875rem;
   margin-bottom: 2rem; }
 
 .list_bonus {
@@ -11559,6 +11559,16 @@ span[id*=bib-] i {
     outline: none;
     font-style: italic;
     padding-bottom: 14px; }
+    .default-search .index-search-area .index-search-dd::-webkit-input-placeholder {
+      padding-left: 10px; }
+    .default-search .index-search-area .index-search-dd::-moz-placeholder {
+      padding-left: 10px; }
+    .default-search .index-search-area .index-search-dd:-ms-input-placeholder {
+      padding-left: 10px; }
+    .default-search .index-search-area .index-search-dd::-ms-input-placeholder {
+      padding-left: 10px; }
+    .default-search .index-search-area .index-search-dd::placeholder {
+      padding-left: 10px; }
   .default-search .index-search-area .btn-small {
     border: none;
     border-radius: 0.2rem; }

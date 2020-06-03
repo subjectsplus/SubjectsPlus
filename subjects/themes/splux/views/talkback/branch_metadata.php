@@ -12,19 +12,19 @@ if ( isset( $all_tbtags ) ) {
 		// Quick'n'dirty setup email recipients
 		switch ( $set_filter ) {
 			case "music":
-				$page_title   = _("Comments for the Music Library");
+				$page_title   = _("Comments for Dept2");
 				$form_action  = "talkback.php";
 				$branch_filter = $set_filter;
 				$tb_bonus_css = "talkback_form_music";
 				break;
 			case "rsmas":
-				$page_title  = _("Comments for the Marine Library");
+				$page_title  = _("Comments for Department");
 				$form_action = "talkback.php";
 				$branch_filter = $set_filter;
 				$tb_bonus_css = "";
 				break;
 			case "richter":
-				$page_title = _("Comments for Richter Library");
+				$page_title = _("Comments for the Library");
 				$form_action  = "talkback.php";
 				$branch_filter = $set_filter;
 				$tb_bonus_css = "";

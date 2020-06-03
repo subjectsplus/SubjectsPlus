@@ -8,9 +8,9 @@ if ( $siteKey === '' ): ?>
 <?php else:
 // Add the g-recaptcha tag to the form you want to include the reCAPTCHA element
 ?>
-<div class="feature popular-list">
+<div class="feature-light popular-list">
     <h3>- Need help now? -</h3>
-    <a href="https://library.miami.edu/research/ask-a-librarian.html" class="btn btn-default">Ask a Librarian</a>
+    <a href="#" class="btn btn-default">Contact Us</a>
     <hr>
 
     <form id="tellus" action="talkback.php" method="post">

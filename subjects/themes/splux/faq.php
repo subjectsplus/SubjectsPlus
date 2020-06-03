@@ -16,7 +16,7 @@ use SubjectsPlus\Control\TextTokenizer;
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
 
-//$use_jquery = array("ui");
+$use_jquery = array("ui");
 
 //initialized passed variables
 $postvar_coll_id = '';
@@ -113,7 +113,7 @@ $suggestion_text = '';
 if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['searchterm'] != $suggestion_text) {
 
     $displaytype = "search";
-    $page_title = "Library FAQs: Search Results";
+    $page_title = "FAQs: Search Results";
 } elseif (isset($_GET['page']) && $_GET['page'] == "all") {
     $displaytype = "all";
     $page_title = "Show All FAQs";
@@ -135,10 +135,10 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $intro = stripslashes(htmlspecialchars_decode($name[0][1]));
 } elseif ($postvar_faq_id != "") {
     $displaytype = "single";
-    $page_title = "Library FAQs";
+    $page_title = "FAQs";
 } else {
     $displaytype = "splashpage";
-    $page_title = "Library FAQs";
+    $page_title = "FAQs";
 }
 
 include( "includes/header_splux.php" );
@@ -289,11 +289,9 @@ foreach ($collections_result as $myrow1) {
 
 ?>
 
-<input id="jekyll-category" value="sp-faq" type="hidden">
-<div class="feature section-minimal">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
-        <hr align="center" class="hr-panel">
         <p class="mb-0">
             <?php
             if (isset($_GET["page"]) && $_GET["page"] == "all") {
@@ -306,17 +304,25 @@ foreach ($collections_result as $myrow1) {
     </div>
 </div>
 
-<section class="search-area d-none d-lg-block">
-    <div class="full-search">
-        <div class="container text-center">
-            <div class="search-group">
-                <div class="uml-site-search-container"></div>
+<div class="section section-half">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-lg-8 offset-sm-1 offset-lg-2">
+                <!-- Search Area -->
+                <div class="default-search">
+                    <div class="index-search-area">
+                        <?php
+                        $input_box = new CompleteMe("quick_search", "faq.php", $proxyURL, "Find FAQs", "faq");
+                        $input_box->displayBox();
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<section class="section talkback">
+<section class="section section-half-top">
     <div class="container">
         <div id="backtotop">
             <a href="#" class="default no-decoration">
@@ -335,7 +341,7 @@ foreach ($collections_result as $myrow1) {
                 print $results; ?>
             </div>
             <div class="col-lg-4">
-                <div class="feature popular-list">
+                <div class="feature-light popular-list">
                     <h4><?php print _("Browse FAQs by Collection"); ?></h4>
                     <ul>
                         <?php print $coll_items; ?>
@@ -361,11 +367,14 @@ foreach ($collections_result as $myrow1) {
             }
         });
 
-        // show all db details
+        // back to top
         $('#backtotop a').click(function () {
             $('html, body').animate({scrollTop:0}, scrollSpeed);
         });
 
+        //add class to ui-autocomplete dropdown
+        $('.index-search-area #quick_search').addClass("index-search-dd");
+        $('.index-search-area .pure-button').addClass("btn-small");
 
     });
 </script>
