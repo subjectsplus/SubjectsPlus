@@ -51,11 +51,7 @@ $tel = !empty($tel_prefix) ? $tel_prefix . " " . $staffmem[0][4] : $tel_prefix .
 
 $lib_check = $staffmem[0][9];
 
-if (strpos($lib_check, 'librarian') !== false) {
-    $page_title_prefix = _("Faculty Profile: ");
-} else {
-    $page_title_prefix = _("Staff Profile: ");
-}
+$page_title_prefix = _("Profile: ");
 
 $fullname = $staffmem[0][2] . " " . $staffmem[0][1];
 
@@ -126,11 +122,9 @@ $page_title = $page_title_prefix . $fullname;
 include( "includes/header_splux.php" );
 ?>
 
-<div class="feature section-minimal-nosearch">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
-        <h5 class="mt-3 mt-lg-0 mb-1"><a href="<?php echo $StaffPath; ?>" class="no-decoration default">People</a></h5>
         <h1><?php print $page_title; ?></h1>
-        <hr align="center" class="hr-panel">
     </div>
 </div>
 
@@ -142,7 +136,7 @@ include( "includes/header_splux.php" );
             </div>
             <div class="col-lg-4">
                 <?php if ($li_subject_listing != "") { ?>
-                    <div class="feature popular-list">
+                    <div class="feature-light popular-list">
                     <h4>- Subject Areas -</h4>
                     <ul>
                         <?php print $li_subject_listing; ?>

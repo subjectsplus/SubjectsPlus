@@ -11386,6 +11386,22 @@ span[id*=bib-] i {
       .other-staff .staff-tel-row {
         min-width: 160px; } }
 
+.listing-staff .other-staff .staff-heading {
+  display: none; }
+  @media (min-width: 768px) {
+    .listing-staff .other-staff .staff-heading {
+      display: table-row; } }
+.listing-staff .other-staff .oddrow {
+  background-color: #e9ecef; }
+.listing-staff .other-staff .evenrow,
+.listing-staff .other-staff .oddrow {
+  padding: .5rem;
+  margin-bottom: .5rem; }
+  @media (min-width: 768px) {
+    .listing-staff .other-staff .evenrow,
+    .listing-staff .other-staff .oddrow {
+      padding: .75rem; } }
+
 .staff-profile .staff_photo {
   text-align: center;
   margin-bottom: .5rem; }

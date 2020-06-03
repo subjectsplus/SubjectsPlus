@@ -16,141 +16,15 @@ $description = "Library contact list.";
 $keywords = "staff list, librarians, contacts";
 
 $intro = "";
-$dept_intro = '<ul class="list-unstyled dept-intro">
-  <li><a href="'.$staff_page_url.'#101" class="dept-heading">Office of the Dean and University Librarian</a></li>
-  <li>
-    <div class="dept-sub">
-      <a href="'.$staff_page_url.'#149">Community Relations and Events</a>
-      <a href="'.$staff_page_url.'#141">Creative Services</a>
-      <a href="'.$staff_page_url.'#102">Financial Administration</a>
-      <a href="'.$staff_page_url.'#124">Human Resources</a>
-    </div>
-  </li>
-  
-  <li><a href="'.$staff_page_url.'#150" class="dept-heading">Access and Discovery Services Division</a></li>
-  <li>
-    <div class="dept-sub">
-        <a href="'.$staff_page_url.'#99">Access Services</a>        
-        <a href="'.$staff_page_url.'#113">Inter-Library Loan & Course Reserves</a>
-        <a href="'.$staff_page_url.'#106">Metadata & Discovery Services</a>
-    </div>
-  </li>
-  
-  <li><a href="'.$staff_page_url.'#122" class="dept-heading">Collection Strategies Division</a></li>
-  <li>
-    <div class="dept-sub">
-        <a href="'.$staff_page_url.'#100">Acquisitions</a>
-        <a href="'.$staff_page_url.'#151">Manuscripts & Archives Management</a>
-        <a href="'.$staff_page_url.'#128">Preservation Strategies</a>
-        <a href="'.$staff_page_url.'#109">Cuban Heritage Collection</a>
-        <a href="'.$staff_page_url.'#104">Special Collections</a>
-        <a href="'.$staff_page_url.'#133">University Archives</a>
-    </div>    
-  </li>
-  
-  <li><a href="'.$staff_page_url.'#130" class="dept-heading">Digital Strategies Division</a></li>
-  <li>
-    <div class="dept-sub">
-      <a href="'.$staff_page_url.'#145">Digital Infrastructure</a>  
-      <a href="'.$staff_page_url.'#110">Digital Production</a>  
-      <a href="'.$staff_page_url.'#144">Digital Scholarship</a>  
-      <a href="'.$staff_page_url.'#140">Web & Application Development</a>
-    </div>
-  </li>
-  
-  <li class="dept-heading">Health Sciences Division</li>
-  <li>
-    <div class="dept-sub">
-        <a href="'.$staff_page_url.'#146">Louis Calder Memorial Library</a>
-    </div>
-  </li>
-  
-   <li><a href="'.$staff_page_url.'#147" class="dept-heading">Learning & Research Services Division</a></li>
-   <li>
-    <div class="dept-sub">
-        <a href="'.$staff_page_url.'#125">Richter Library Learning & Research Services
-        <a href="'.$staff_page_url.'#117">Architecture Research Center (ARC)</a>
-        <a href="'.$staff_page_url.'#107">Creative Studio</a>
-        <a href="'.$staff_page_url.'#148">Learning Commons</a>
-        <a href="'.$staff_page_url.'#105">Judi Prokop Newman Business Information Resource Center</a>        
-        <a href="'.$staff_page_url.'#103">Marta and Austin Weeks Music Library & Technology Center</a>
-        <a href="'.$staff_page_url.'#119">Rosenstiel School of Marine Science & Atmospheric Science Library</a>
-    </div>
-   </li>
-   
-   <li><a href="'.$staff_page_url.'#126" class="dept-heading">Library Information Systems and Facilities Division</a></li>
-  <li>
-    <div class="dept-sub">        
-        <a href="'.$staff_page_url.'#132">Facilities</a>
-        <a href="'.$staff_page_url.'#143">Library Technology</a>
-        <a href="'.$staff_page_url.'#129">Systems Support</a>        
-    </div>
-  </li>   
-</ul>';
+$dept_intro = '';
 
-$dept_select = "<select id=\"select_dept\">
-  <option></option>
-  <optgroup label=\"Office of the Dean and University Librarian\">
-      <option value=\"$staff_page_url#101\" data-external=\"\">Office of the Dean and University Librarian</option>
-      <option value=\"$staff_page_url#149\" data-external=\"\">Community Relations and Events</option>
-      <option value=\"$staff_page_url#141\" data-external=\"\">Creative Services</option>
-      <option value=\"$staff_page_url#102\" data-external=\"\">Financial Administration</option>
-      <option value=\"$staff_page_url#124\" data-external=\"\">Human Resources</option>
-  </optgroup>
-  
-  <optgroup label=\"Access and Discovery Services Division\">
-    <option value=\"$staff_page_url#150\" data-external=\"\">Access and Discovery Services</option>
-    <option value=\"$staff_page_url#99\" data-external=\"\">Access Services</option>
-    <option value=\"$staff_page_url#113\" data-external=\"\">Inter-Library Loan & Course Reserves</option>
-    <option value=\"$staff_page_url#106\" data-external=\"\">Metadata & Discovery Services</option>
-  </optgroup>
-
-  <optgroup label=\"Collection Strategies Division\">
-    <option value=\"$staff_page_url#122\" data-external=\"\">Collection Strategies</option>
-    <option value=\"$staff_page_url#100\" data-external=\"\">Acquisitions</option>
-    <option value=\"$staff_page_url#151\" data-external=\"\">Manuscripts & Archives Management</option>
-    <option value=\"$staff_page_url#128\" data-external=\"\">Preservation Strategies</option>
-    <option value=\"$staff_page_url#109\" data-external=\"\">Cuban Heritage Collection</option>
-    <option value=\"$staff_page_url#104\" data-external=\"\">Special Collections</option>
-    <option value=\"$staff_page_url#133\" data-external=\"\">University Archives</option> 
-  </optgroup>
-
-  <optgroup label=\"Digital Strategies Division\">
-    <option value=\"$staff_page_url#145\" data-external=\"\">Digital Infrastructure</option>
-    <option value=\"$staff_page_url#110\" data-external=\"\">Digital Production</option>
-    <option value=\"$staff_page_url#144\" data-external=\"\">Digital Scholarship</option>
-    <option value=\"$staff_page_url#130\" data-external=\"\">Digital Strategies</option>    
-    <option value=\"$staff_page_url#140\" data-external=\"\">Web & Application Development</option>
-  </optgroup>
-
-  <optgroup label=\"Health Sciences Division\">
-    <option value=\"$staff_page_url#146\" data-external=\"\">Louis Calder Memorial Library</option>
-  </optgroup>  
-
-  <optgroup label=\"Learning & Research Services Division\">
-    <option value=\"$staff_page_url#147\" data-external=\"\">Learning & Research Services</option> 
-    <option value=\"$staff_page_url#125\" data-external=\"\">Richter Library Learning & Research Services</option>
-    <option value=\"$staff_page_url#117\" data-external=\"\">Architecture Research Center (ARC)</option>   
-    <option value=\"$staff_page_url#107\" data-external=\"\">Creative Studio</option>
-    <option value=\"$staff_page_url#148\" data-external=\"\">Learning Commons</option>
-    <option value=\"$staff_page_url#105\" data-external=\"\">Judi Prokop Newman Business Information Resource Center</option>    
-    <option value=\"$staff_page_url#103\" data-external=\"\">Marta and Austin Weeks Music Library & Technology Center</option>    
-    <option value=\"$staff_page_url#119\" data-external=\"\">Rosenstiel School of Marine Science & Atmospheric Science Library</option>
-  </optgroup>
-  
-  <optgroup label=\"Library Information Systems and Facilities Division\">
-    <option value=\"$staff_page_url#126\" data-external=\"\">Library Information Systems and Facilities</option>
-    <option value=\"$staff_page_url#132\" data-external=\"\">Facilities</option>
-    <option value=\"$staff_page_url#143\" data-external=\"\">Library Technology</option>
-    <option value=\"$staff_page_url#129\" data-external=\"\">Systems Support</option>    
-  </optgroup>
-</select>";
+$dept_select = "";
 
 // views set in StaffDisplay.php
-$our_cats = array("Departments","Subject Librarians");
+$our_cats = array("A-Z", "By Department","Subject Librarians A-Z","Librarians by Subject Specialty");
 
 // sets initial default view
-if (!isset($_GET["letter"]) || $_GET["letter"] == "") {$_GET["letter"] = "Departments";}
+if (!isset($_GET["letter"]) || $_GET["letter"] == "") {$_GET["letter"] = "A-Z";}
 
 $selected_letter = scrubData($_GET["letter"]);
 
@@ -163,29 +37,13 @@ $display = $staff_data->writeTable($selected_letter);
 include( "includes/header_splux.php" );
 ?>
 
-<input id="jekyll-category" value="sp-staff" type="hidden">
-<div class="feature section-minimal">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php print $page_title; ?></h1>
-        <hr align="center" class="hr-panel">
-        <p class="mb-0"><a href="https://www.library.miami.edu/orgchart" class="default">Organization Chart (pdf)</a></p>
     </div>
 </div>
 
-<section class="search-area d-none d-lg-block">
-    <div class="full-search">
-        <div class="container text-center">
-            <div class="search-group">
-                <div class="uml-site-search-container"></div>
-                <div class="adv-search d-none">
-                    <a class="no-decoration default" href="#">Advanced Search</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-half-top">
+<section class="section section-half-top listing-staff">
     <div class="container">
         <div id="backtotop">
             <a href="#" class="default no-decoration">
@@ -202,43 +60,8 @@ include( "includes/header_splux.php" );
                     <?php print $display;  ?>
                 </div>
                 <div class="col-lg-4 order-first order-lg-last">
-                    <div class="d-lg-none text-center">
-                        <link href="<?php print $AssetPath;  ?>js/select2/select2.css" rel="stylesheet"/>
-                        <script src="<?php print $AssetPath;  ?>js/select2/select2.js"></script>
-                        <?php print $dept_select;  ?>
-                    </div>
-                    <div class="feature popular-list d-none d-lg-inline-block">
-                        <?php print $dept_intro;  ?>
-                    </div>
                 </div>
             </div>
-
-            <script>
-                $( function(){
-                    // Select2 for Departments
-                    $('#select_dept').select2({
-                        width: "80%",
-                        containerCssClass: "tabs-select",
-                        dropdownCssClass: "tabs-select-dropdown",
-                        placeholder: "Select a department"
-                    });
-
-                    $("#select_dept").change(function() {
-
-                        // open external link on tab-select
-                        var option_external_link = $(this).find('option:selected').attr('data-external');
-
-                        if (option_external_link != "") {
-                            window.open(option_external_link, '_blank');
-                        }
-                        else {
-                            var dept_anchor = $(this).find('option:selected').val();
-                            console.log(dept_anchor);
-                            location = dept_anchor;
-                        }
-                    });
-                });
-            </script>
         <?php
             } else {
             print $display;
@@ -263,11 +86,10 @@ include( "includes/header_splux.php" );
             }
         });
 
-        // show all db details
+        // back to top
         $('#backtotop a').click(function () {
            $('html, body').animate({scrollTop:0}, scrollSpeed);
         });
-
 
     });
 </script>
