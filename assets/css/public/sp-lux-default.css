@@ -11576,20 +11576,20 @@ span[id*=bib-] i {
   .default-search .index-search-area .index-search-dd {
     width: calc(100% - 50px);
     border: none;
-    padding-left: 0;
+    padding-left: 15px;
     outline: none;
     font-style: italic;
     padding-bottom: 14px; }
     .default-search .index-search-area .index-search-dd::-webkit-input-placeholder {
-      padding-left: 10px; }
+      padding-left: 0; }
     .default-search .index-search-area .index-search-dd::-moz-placeholder {
-      padding-left: 10px; }
+      padding-left: 0; }
     .default-search .index-search-area .index-search-dd:-ms-input-placeholder {
-      padding-left: 10px; }
+      padding-left: 0; }
     .default-search .index-search-area .index-search-dd::-ms-input-placeholder {
-      padding-left: 10px; }
+      padding-left: 0; }
     .default-search .index-search-area .index-search-dd::placeholder {
-      padding-left: 10px; }
+      padding-left: 0; }
   .default-search .index-search-area .btn-small {
     border: none;
     border-radius: 0.2rem; }
