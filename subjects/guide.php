@@ -21,7 +21,7 @@ include("../control/includes/functions.php");
 
 
 
-if ( (isset( $subjects_theme )) && ( $subjects_theme == 'um-new' ) ) {
+if ( (isset( $subjects_theme )) && ( ($subjects_theme == 'um-new' || $subjects_theme == 'splux') ) ) {
 	include( "themes/$subjects_theme/guide.php" );
 	exit;
 }
@@ -200,7 +200,7 @@ print $social_and_search;
 
 <!--Minimal header if um-new theme is used-->
 <?php
-if (isset ($header_type) && $header_type == 'um-new') {
+if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ) {
 
     $guide_min_header = "<div class=\"feature section-minimal-nosearch guide-header\">
         <div class=\"container text-center minimal-header\">
@@ -234,7 +234,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
             // Only show tabs if there is more than one tab
             if ($multi_tab == TRUE) {
 
-                if (isset ($header_type) && $header_type == 'um-new'){
+                if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ){
 
                     //desktop view
                     $container_md_open = "<div class=\"d-none d-md-inline-block\">";
@@ -260,14 +260,14 @@ if (isset ($header_type) && $header_type == 'um-new') {
 
                 $bonus_class= "yes-tabs";
 
-                if (isset ($header_type) && $header_type != 'um-new'){
+                if (isset ($header_type) && ($header_type != 'um-new' || $header_type != 'splux') ){
                     print $printer_tabs;
                 }
 
             } else {
                 $bonus_class = "no-tabs";
 
-                if (isset ($header_type) && $header_type != 'um-new'){
+                if (isset ($header_type) && ($header_type != 'um-new' || $header_type != 'splux') ){
                     print $printer_no_tabs;
                 }
             }
@@ -287,7 +287,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
 </div> <!-- end tabs -->
 
 <?php
-if (isset ($header_type) && $header_type == 'um-new') {
+if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ) {
 
     $um_new_section_closing = "</div>
             </div>
@@ -386,7 +386,7 @@ $(function() {
 });
 
 <?php
-if (isset ($header_type) && $header_type == 'um-new') { ?>
+if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ) { ?>
 
     // Select2 for Guide Tabs
     $('#select_tabs').select2({

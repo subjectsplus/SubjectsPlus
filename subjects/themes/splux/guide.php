@@ -49,15 +49,6 @@ $page_keywords = _("library, research, databases, subjects, search, find");
 // Add This + Search //
 // Add This is turned off by default :)
 
-/* $addthis = '<!-- AddToAny BEGIN -->
-    <div class="a2a_kit"  style="float: left !important;">
-    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
-    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
-    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
-</div>
-    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->'; */
-
 $addthis = "";
 
 $social_and_search = '
@@ -190,15 +181,14 @@ print $tracking_image;
 print $social_and_search;
 ?>
 
-<!--Minimal header if um-new theme is used-->
+<!--Minimal header if splux theme is used-->
 <?php
-if (isset ($header_type) && $header_type == 'um-new') {
+if (isset ($header_type) && $header_type == 'splux') {
 
-    $guide_min_header = "<div class=\"feature section-minimal-nosearch guide-header\">
+    $guide_min_header = "<div class=\"section-minimal-nosearch guide-header\">
         <div class=\"container text-center minimal-header\">
             <h5 class=\"mt-3 mt-lg-0 mb-1\"><a href=\"index.php\" class=\"no-decoration default\">" . _("Research Guides") . "</a></h5>
-            <h1>" . $page_title . "</h1>
-            <hr align=\"center\" class=\"hr-panel\">" . $printOption ."</div>
+            <h1>" . $page_title . "</h1>" . $printOption ."</div>
     </div>
     <section class=\"section section-half-top\">
         <div class=\"container\">
@@ -222,7 +212,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
             // Only show tabs if there is more than one tab
             if ($multi_tab == TRUE) {
 
-                if (isset ($header_type) && $header_type == 'um-new'){
+                if (isset ($header_type) && $header_type == 'splux'){
 
                     //desktop view
                     $container_md_open = "<div class=\"d-none d-md-inline-block\">";
@@ -248,14 +238,14 @@ if (isset ($header_type) && $header_type == 'um-new') {
 
                 $bonus_class= "yes-tabs";
 
-                if (isset ($header_type) && $header_type != 'um-new'){
+                if (isset ($header_type) && $header_type != 'splux'){
                     print $printer_tabs;
                 }
 
             } else {
                 $bonus_class = "no-tabs";
 
-                if (isset ($header_type) && $header_type != 'um-new'){
+                if (isset ($header_type) && $header_type != 'splux'){
                     print $printer_no_tabs;
                 }
             }
@@ -275,7 +265,7 @@ if (isset ($header_type) && $header_type == 'um-new') {
 </div> <!-- end tabs -->
 
 <?php
-if (isset ($header_type) && $header_type == 'um-new') {
+if (isset ($header_type) && $header_type == 'splux') {
 
     $um_new_section_closing = "</div>
             </div>
@@ -374,7 +364,7 @@ $(function() {
 });
 
 <?php
-if (isset ($header_type) && $header_type == 'um-new') { ?>
+if (isset ($header_type) && $header_type == 'splux') { ?>
 
     // Select2 for Guide Tabs
     $('#select_tabs').select2({

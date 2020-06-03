@@ -11076,7 +11076,7 @@ span[id*=bib-] i {
       #tabs #tab-container .ui-tabs-nav {
         justify-content: start; }
         #tabs #tab-container .ui-tabs-nav li a {
-          font-size: 1rem;
+          font-size: 0.875rem;
           line-height: 1.2; } }
   #tabs #tab-body {
     padding: 1.25rem 0 0 0; }
@@ -11771,7 +11771,7 @@ span[id*=bib-] i {
   margin-bottom: 2rem; }
   .sptab .sp_section .pluslet .titlebar,
   .sptab .sp_section .pluslet_simple .titlebar {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -11804,7 +11804,7 @@ span[id*=bib-] i {
     @media (min-width: 992px) {
       .sptab .sp_section .pluslet .pluslet_body ul li,
       .sptab .sp_section .pluslet_simple .pluslet_body ul li {
-        font-size: 1.125rem !important; } }
+        font-size: 1rem !important; } }
     .sptab .sp_section .pluslet .pluslet_body img,
     .sptab .sp_section .pluslet_simple .pluslet_body img {
       height: 100% !important;
@@ -11824,7 +11824,7 @@ span[id*=bib-] i {
         .sptab .sp_section .pluslet .pluslet_body div,
         .sptab .sp_section .pluslet_simple .pluslet_body span,
         .sptab .sp_section .pluslet_simple .pluslet_body div {
-          font-size: 1.125rem !important; } }
+          font-size: 1rem !important; } }
     .sptab .sp_section .pluslet .pluslet_body strong,
     .sptab .sp_section .pluslet_simple .pluslet_body strong {
       font-size: 1rem !important;
@@ -11836,7 +11836,7 @@ span[id*=bib-] i {
       @media (min-width: 992px) {
         .sptab .sp_section .pluslet .pluslet_body strong,
         .sptab .sp_section .pluslet_simple .pluslet_body strong {
-          font-size: 1.125rem !important; } }
+          font-size: 1rem !important; } }
     .sptab .sp_section .pluslet .pluslet_body .subject-specialist-content .subject-specialists,
     .sptab .sp_section .pluslet_simple .pluslet_body .subject-specialist-content .subject-specialists {
       margin-bottom: .75rem; }
@@ -12048,7 +12048,7 @@ span[id*=bib-] i {
         .sptab .sp_section .pluslet .pluslet_body #social_media_accounts ul li i,
         .sptab .sp_section .pluslet_simple .pluslet_body #social_media_accounts ul li i {
           color: #07adc7;
-          font-size: 1.125rem; }
+          font-size: 1rem; }
     .sptab .sp_section .pluslet .pluslet_body .link-list-text-top,
     .sptab .sp_section .pluslet_simple .pluslet_body .link-list-text-top {
       margin-bottom: 1rem; }
@@ -12071,7 +12071,7 @@ span[id*=bib-] i {
     @media (min-width: 768px) {
       .sptab .sp_section .pluslet .pluslet_body,
       .sptab .sp_section .pluslet_simple .pluslet_body {
-        font-size: 1.125rem !important; } }
+        font-size: 1rem !important; } }
   .sptab .sp_section .pluslet[name="SubjectSpecialist"], .sptab .sp_section .pluslet.pluslet-feature,
   .sptab .sp_section .pluslet_simple[name="SubjectSpecialist"],
   .sptab .sp_section .pluslet_simple.pluslet-feature {
@@ -12105,7 +12105,7 @@ span[id*=bib-] i {
     padding: 0.5rem;
     border: 1px solid #07adc7;
     width: 25%;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     font-weight: 600; }
   @media (min-width: 768px) {
     .sptab .sp_section .pluslet[name="GuideSearch"] .autoC .quick_search,
@@ -12170,7 +12170,7 @@ span[id*=bib-] i {
     margin: 1rem 0; }
   .sptab .sp_section .pluslet[name="WorldCat"] #div-search legend,
   .sptab .sp_section .pluslet_simple[name="WorldCat"] #div-search legend {
-    font-size: 1.125rem !important; }
+    font-size: 1rem !important; }
   .sptab .sp_section .pluslet[name="WorldCat"] #div-search #searchtabs,
   .sptab .sp_section .pluslet_simple[name="WorldCat"] #div-search #searchtabs {
     display: -ms-flex;
@@ -12228,7 +12228,7 @@ span[id*=bib-] i {
     padding: 0.5rem;
     border: 1px solid #07adc7;
     width: 25%;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     font-weight: 600; }
   @media (min-width: 768px) {
     .sptab .sp_section .pluslet[name="WorldCat"] #div-search #box .input,
@@ -12243,7 +12243,7 @@ span[id*=bib-] i {
     font-size: 1rem !important; }
   .sptab .sp_section .pluslet[name="Catalog"] .catalog-search legend,
   .sptab .sp_section .pluslet_simple[name="Catalog"] .catalog-search legend {
-    font-size: 1.125rem !important; }
+    font-size: 1rem !important; }
   .sptab .sp_section .pluslet[name="Catalog"] .catalog-search .formEntryArea input, .sptab .sp_section .pluslet[name="Catalog"] .catalog-search .formEntryArea select,
   .sptab .sp_section .pluslet_simple[name="Catalog"] .catalog-search .formEntryArea input,
   .sptab .sp_section .pluslet_simple[name="Catalog"] .catalog-search .formEntryArea select {
@@ -12273,7 +12273,7 @@ span[id*=bib-] i {
     padding: 0.5rem;
     border: 1px solid #07adc7;
     width: 200px;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     font-weight: 600; }
   .sptab .sp_section .pluslet[name="Catalog"] .catalog-search .formEntryArea .adv-prompt,
   .sptab .sp_section .pluslet_simple[name="Catalog"] .catalog-search .formEntryArea .adv-prompt {
@@ -12282,7 +12282,7 @@ span[id*=bib-] i {
   .sptab .sp_section .pluslet_simple[name="GoogleBooks"] .google-search legend,
   .sptab .sp_section .pluslet_simple[name="GoogleScholar"] .google-search legend,
   .sptab .sp_section .pluslet_simple[name="GoogleSearch"] .google-search legend {
-    font-size: 1.125rem !important; }
+    font-size: 1rem !important; }
   .sptab .sp_section .pluslet[name="GoogleBooks"] .google-search input, .sptab .sp_section .pluslet[name="GoogleScholar"] .google-search input, .sptab .sp_section .pluslet[name="GoogleSearch"] .google-search input,
   .sptab .sp_section .pluslet_simple[name="GoogleBooks"] .google-search input,
   .sptab .sp_section .pluslet_simple[name="GoogleScholar"] .google-search input,
@@ -12316,7 +12316,7 @@ span[id*=bib-] i {
     padding: 0.5rem;
     border: 1px solid #07adc7;
     width: 25%;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     font-weight: 600; }
   .sptab .sp_section .pluslet[name="GoogleBooks"] .google-search .google-attribution, .sptab .sp_section .pluslet[name="GoogleScholar"] .google-search .google-attribution, .sptab .sp_section .pluslet[name="GoogleSearch"] .google-search .google-attribution,
   .sptab .sp_section .pluslet_simple[name="GoogleBooks"] .google-search .google-attribution,
@@ -12360,7 +12360,7 @@ span[id*=bib-] i {
       font-style: italic; }
   .sptab .sp_section .pluslet[name="ArticlesPlus"] .articlesplus-search legend,
   .sptab .sp_section .pluslet_simple[name="ArticlesPlus"] .articlesplus-search legend {
-    font-size: 1.125rem !important; }
+    font-size: 1 !important; }
   .sptab .sp_section .pluslet[name="ArticlesPlus"] .articlesplus-search input,
   .sptab .sp_section .pluslet_simple[name="ArticlesPlus"] .articlesplus-search input {
     display: inline-block;
@@ -12388,7 +12388,7 @@ span[id*=bib-] i {
     padding: 0.5rem;
     border: 1px solid #07adc7;
     width: 25%;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     font-weight: 600; }
   @media (min-width: 768px) {
     .sptab .sp_section .pluslet[name="ArticlesPlus"] .articlesplus-search input,
@@ -12494,7 +12494,7 @@ span[id*=bib-] i {
     padding: 0.5rem;
     border: 1px solid #07adc7;
     width: 20%;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     font-weight: 600;
     margin-top: .5rem; }
   .sptab .sp_section .pluslet[name="PrimoSearch"] div[name="advanced_search_container"],
