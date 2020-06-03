@@ -1,10 +1,9 @@
-<div class="feature section-minimal-nosearch">
+<div class="section-minimal-nosearch">
     <div class="container text-center minimal-header">
         <h1><?php if ( isset( $page_title
 		               ) && ! empty( $page_title ) ) {
 				echo $page_title;
 			} ?></h1>
-        <hr align="center" class="hr-panel">
         <p class="mb-0"><?php if ( isset( $page_description
 		                           ) && ! empty( $page_description ) ) {
 				echo $page_description;
@@ -33,10 +32,8 @@
                 </div>
 
                 <div class="col-md-4 col-lg-4 offset-lg-2">
-                    <div class="feature popular-list">
-                        <h4>- Need help now? -</h4>
-                        <a href="https://library.miami.edu/research/ask-a-librarian.html" class="btn btn-default">Ask a
-                            Librarian</a>
+                    <div class="feature-light popular-list">
+                        <h4>- Need help now? - Contact Us</h4>
                     </div>
                 </div>
             </div>

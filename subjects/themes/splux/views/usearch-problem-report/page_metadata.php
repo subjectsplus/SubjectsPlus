@@ -3,16 +3,16 @@
  * local variables used in subjectsplus header.php
  * @var $page_title
  */
-$page_title = _( "uSearch Problem Report" );
+$page_title = _( "Problem Report" );
 
 /**
  *
  * @var $page_description
  */
-$page_description = _( "Please use this page to report uSearch problems." );
+$page_description = _( "Please use this page to report problems." );
 
 /**
  *
  * @var $page_keywords
  */
-$page_keywords = _( "library, usearch, report a problem, complaints" );
+$page_keywords = _( "report a problem, complaints" );

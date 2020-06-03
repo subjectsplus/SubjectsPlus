@@ -9,11 +9,11 @@
 		<input name="user_email" size="" value="" class="form-control" />
 	</div>
 	<div class="form-group">
-		<label for="affiliation">UM Affiliation:</label>
+		<label for="affiliation">Affiliation:</label>
 		<select name="affiliation" class="form-control">
 			<option value="Student">Student</option>
 			<option value="Faculty/Staff">Faculty/Staff</option>
-			<option value="Unaffiliated">Not Affiliated with UM</option>
+			<option value="Unaffiliated">Not Affiliated</option>
 		</select>
 	</div>
 	<div class="form-group">

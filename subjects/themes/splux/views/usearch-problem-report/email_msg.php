@@ -13,7 +13,7 @@
 		<td valign="top">
             <table bgcolor="#FFFFFF" style="width:600px; height:auto;" border="0">
                 <tr>
-                    <th colspan="2"><?php echo _( "New uSearch Problem Reported" ); ?></th>
+                    <th colspan="2"><?php echo _( "Problem Reported" ); ?></th>
                 </tr>
                 <tr>
                     <td width="20%"><?php echo _( "Date submitted: " );?></td>
@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" width="600" height="70" valign="middle" align="center" bgcolor="#FFFFFF">
-                        <img src="https://sp.library.miami.edu/assets/images/email/subjectsplus-footer.jpg"
+                        <img src="<?php print $AssetPath; ?>images/email/subjectsplus-footer.jpg"
                              width="276"
                              height="40" border="0">
 

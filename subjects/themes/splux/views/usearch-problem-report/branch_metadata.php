@@ -12,19 +12,19 @@ if ( isset( $all_tbtags ) ) {
 		// Quick'n'dirty setup email recipients
 		switch ( $set_filter ) {
 			case "med":
-				$page_title   = _("uSearch Problem Report");
+				$page_title   = _("Problem Report");
 				$form_action  = "usearch-problem-report.php";
 				$branch_filter = $set_filter;
 				$problem_report_bonus_css = "";
 				break;
 			case "richter":
-				$page_title = _("uSearch Problem Report");
+				$page_title = _("Problem Report");
 				$form_action  = "usearch-problem-report.php";
 				$branch_filter = $set_filter;
 				$problem_report_bonus_css = "";
 				break;
 			case "law":
-				$page_title = _("uSearch Problem Report");
+				$page_title = _("Problem Report");
 				$form_action  = "usearch-problem-report.php";
 				$branch_filter = $set_filter;
 				$problem_report_bonus_css = "";
