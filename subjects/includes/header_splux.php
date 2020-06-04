@@ -12,7 +12,7 @@
     <meta name="keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>">
 
     <!-- SP CSS -->
-    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-lux-greens.css" type="text/css">
+    <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-lux-default.css" type="text/css">
 
     <!-- Google Analytics and Tag Manager -->
     <?php
