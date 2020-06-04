@@ -10,7 +10,7 @@
 <nav class="navbar-expand-lg site-navbar-slim-nosliver">
     <div class="container position-relative">
         <a class="navbar-brand" href="<?php print $PublicPath; ?>">
-            <img src="<?php print $AssetPath; ?>images/public/sp_logo.png" alt="logo" class="d-inline-block d-lg-block">
+            <img src="<?php print $AssetPath; ?>images/public/logo-placeholder.png" alt="logo" class="d-inline-block d-lg-block">
         </a>
         <button class="navbar-toggler js-sidebar-toggler d-block d-lg-none" data-button-options='{"modifiers":"left","wrapText":false}' aria-label="Toggle sidebar">
             <div class="nav-icon">
