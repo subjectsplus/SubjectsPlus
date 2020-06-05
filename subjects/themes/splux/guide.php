@@ -16,15 +16,8 @@ $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles
 //$use_jquery = array('sp_legacy');
 
 include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-
-
-
-if ( (isset( $subjects_theme )) && ( ($subjects_theme == 'um-new' || $subjects_theme == 'splux') ) ) {
-	include( "themes/$subjects_theme/guide.php" );
-	exit;
-}
+//include("../control/includes/config.php");
+//include("../control/includes/functions.php");
 
 $db = new Querier;
 
@@ -55,15 +48,6 @@ $page_keywords = _("library, research, databases, subjects, search, find");
 ///////////////////////
 // Add This + Search //
 // Add This is turned off by default :)
-
-/* $addthis = '<!-- AddToAny BEGIN -->
-    <div class="a2a_kit"  style="float: left !important;">
-    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
-    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
-    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
-</div>
-    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->'; */
 
 $addthis = "";
 
@@ -101,10 +85,10 @@ if ($check_this) {
 
     // check for description and keywords, which may be blank since they were added v2
     if ($r[0]["description"] != "") {
-        $page_description = $r[0]["description"];
+        $description = $r[0]["description"];
     }
     if ($r[0]["keywords"] != "") {
-        $page_keywords = $r[0]["keywords"];
+        $keywords = $r[0]["keywords"];
     }
 
     $jobj = json_decode($r[0]["extra"]);
@@ -191,26 +175,20 @@ if (count($all_tabs) > 1) {
 }
 
 // Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title .
-    "\" aria-hidden=\"true\" alt=\"\" />";
+$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title . "\" />";
 
 print $tracking_image;
 print $social_and_search;
 ?>
 
-<!--Minimal header if um-new theme is used-->
+<!--Minimal header if splux theme is used-->
 <?php
-if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ) {
+if (isset ($header_type) && $header_type == 'splux') {
 
-    $guide_min_header = "<div class=\"feature section-minimal-nosearch guide-header\">
+    $guide_min_header = "<div class=\"section-minimal-nosearch guide-header\">
         <div class=\"container text-center minimal-header\">
             <h5 class=\"mt-3 mt-lg-0 mb-1\"><a href=\"index.php\" class=\"no-decoration default\">" . _("Research Guides") . "</a></h5>
-            <h1>" . $page_title . "</h1>
-            <hr align=\"center\" class=\"hr-panel\">" . $printOption ."<div class=\"favorite-heart\">
-            <div id=\"heart\" title=\"Add to Favorites\" tabindex=\"0\" role=\"button\" data-type=\"favorite-page-icon\"
-                 data-item-type=\"Pages\" alt=\"Add to My Favorites\" class=\"uml-quick-links favorite-page-icon\" >
-            </div></div>
-        </div>
+            <h1>" . $page_title . "</h1>" . $printOption ."</div>
     </div>
     <section class=\"section section-half-top\">
         <div class=\"container\">
@@ -234,7 +212,7 @@ if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux'
             // Only show tabs if there is more than one tab
             if ($multi_tab == TRUE) {
 
-                if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ){
+                if (isset ($header_type) && $header_type == 'splux'){
 
                     //desktop view
                     $container_md_open = "<div class=\"d-none d-md-inline-block\">";
@@ -260,14 +238,14 @@ if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux'
 
                 $bonus_class= "yes-tabs";
 
-                if (isset ($header_type) && ($header_type != 'um-new' || $header_type != 'splux') ){
+                if (isset ($header_type) && $header_type != 'splux'){
                     print $printer_tabs;
                 }
 
             } else {
                 $bonus_class = "no-tabs";
 
-                if (isset ($header_type) && ($header_type != 'um-new' || $header_type != 'splux') ){
+                if (isset ($header_type) && $header_type != 'splux'){
                     print $printer_no_tabs;
                 }
             }
@@ -287,7 +265,7 @@ if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux'
 </div> <!-- end tabs -->
 
 <?php
-if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ) {
+if (isset ($header_type) && $header_type == 'splux') {
 
     $um_new_section_closing = "</div>
             </div>
@@ -386,7 +364,7 @@ $(function() {
 });
 
 <?php
-if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux') ) { ?>
+if (isset ($header_type) && $header_type == 'splux') { ?>
 
     // Select2 for Guide Tabs
     $('#select_tabs').select2({
