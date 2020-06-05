@@ -17,7 +17,7 @@ class Pluslet_TOC extends Pluslet {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
     //$this->_editable = TRUE;
-    $this->_subject_id = $subject_id;
+    $this->_subject_id = scrubData($subject_id);
     $this->_pluslet_bonus_classes = "no_overflow";
 }
 
@@ -37,8 +37,11 @@ class Pluslet_TOC extends Pluslet {
     global $title_input_size; // alter size based on column
 
     // Get pluslets associated with this
+
     $querier = new Querier();
-  	$qs = "SELECT p.pluslet_id AS id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index AS parent_id, t.label AS name
+    $connection = $querier->getConnection();
+
+    $statement = $connection->prepare( "SELECT p.pluslet_id AS id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index AS parent_id, t.label AS name
 			FROM pluslet p INNER JOIN pluslet_section ps
 			ON p.pluslet_id = ps.pluslet_id
 			INNER JOIN section sec
@@ -47,13 +50,13 @@ class Pluslet_TOC extends Pluslet {
 			ON sec.tab_id = t.tab_id
 			INNER JOIN subject s
 			ON t.subject_id = s.subject_id
-			WHERE s.subject_id = '$this->_subject_id'
+			WHERE s.subject_id = :subject_id
 			AND p.type != 'TOC'
-			ORDER BY t.tab_index, ps.pcolumn, ps.prow ASC";
+			ORDER BY t.tab_index, ps.pcolumn, ps.prow ASC");
+     $statement->bindParam(":subject_id", $this->_subject_id);
+     $statement->execute();
 
-    //print $qs;
-
-    $this->_tocArray = $querier->query($qs);
+    $this->_tocArray = $statement->fetchAll();
 
     // public vs. admin
     parent::establishView($view);
