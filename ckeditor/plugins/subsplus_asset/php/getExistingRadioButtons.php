@@ -5,7 +5,9 @@ include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
 include_once('../../../../control/includes/autoloader.php');
 
-
+#Scrubbing input
+$_SERVER['mail'] = scrubData($_SERVER['mail']);
+$_SESSION['email'] = scrubData($_SESSION['email']);
 
 //added because without this check a security hole is open
 if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {

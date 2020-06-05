@@ -9,18 +9,27 @@ include_once('../../../../control/includes/autoloader.php');
 
 global $AssetPath;
 
+$_COOKIE["our_guide"] = scrubData($_COOKIE["our_guide"]);
+$_COOKIE["our_guide_id"] = scrubData($_COOKIE["our_guide_id"]);
+$_POST["pluslets"] = scrubData($_POST["pluslets"]);
+
 try {
 	} catch (Exception $e) {
 	echo $e;
 }
 
 $querier = new Querier();
+$connection = $querier->getConnection();
 
 if( isset($_COOKIE["our_guide"]) && isset($_COOKIE["our_guide_id"]) )
 {
-	$qs = "SELECT lname, fname, email, tel, title, s.staff_id from staff s, staff_subject ss WHERE s.staff_id = ss.staff_id and ss.subject_id = " . $_COOKIE["our_guide_id"] . " ORDER BY lname, fname";
+    $our_guide_id = $_COOKIE["our_guide_id"];
+    $statement = $connection->prepare("SELECT lname, fname, email, tel, title, s.staff_id from staff s, staff_subject ss WHERE s.staff_id = ss.staff_id and ss.subject_id = :our_guide_id ORDER BY lname, fname");
+    $statement->bindParam(":our_guide_id", $our_guide_id);
+    $statement->execute();
 
-	$sugStaffArray = $querier->query($qs);
+	$sugStaffArray = $statement->fetchAll();
+
 }
 
 $lobjStaffIds = array();

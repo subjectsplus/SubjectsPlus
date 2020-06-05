@@ -1,6 +1,5 @@
 <?php
 die("Disabled!");
-
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
@@ -8,25 +7,10 @@ include_once('../../../../control/includes/autoloader.php');
 
 use SubjectsPlus\Control\Querier;
 
-
-
-//added because without this check a security hole is open
-if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
-	isCool($_SERVER['mail'],"", true);
-} else {
-	session_start();
-}
-
-if( !isset($sessionCheck) || $sessionCheck != 'no' )
-{
-	$sessionCheck = checkSession();
-	if ($sessionCheck == "failure" ) {
-		exit();
-	}
-}
-
-
-
+//Scrubbing input
+$_GET["browse"] = scrubData($_GET["browse"]);
+$_COOKIE["our_guide"] = scrubData($_COOKIE["our_guide"]);
+$_COOKIE["our_guide_id"] = scrubData($_COOKIE["our_guide_id"]);
 
 //print out custom style for oddrow class
 print "<style type=\"text/css\">

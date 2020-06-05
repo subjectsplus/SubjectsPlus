@@ -8,6 +8,10 @@ include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
 include_once('../../../../control/includes/autoloader.php');
 
+$_COOKIE["our_guide"] = scrubData($_COOKIE["our_guide"]);
+$_COOKIE["our_guide_id"] = scrubData($_COOKIE["our_guide_id"]);
+$_POST["pluslets"] = scrubData($_POST["pluslets"]);
+
 global $AssetPath;
 
 $querier = new Querier();
