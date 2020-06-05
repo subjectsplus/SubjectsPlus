@@ -1,5 +1,4 @@
 <?php
-die("Disabled!");
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Pluslet_TOC;
 

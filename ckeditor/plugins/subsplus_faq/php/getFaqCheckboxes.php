@@ -1,5 +1,4 @@
 <?php
-die("Disabled!");
 //include subjectsplus config and functions files
 include_once('../../../../control/includes/config.php');
 include_once('../../../../control/includes/functions.php');
