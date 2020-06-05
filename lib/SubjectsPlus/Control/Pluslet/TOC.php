@@ -17,7 +17,7 @@ class Pluslet_TOC extends Pluslet {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);
 
     //$this->_editable = TRUE;
-    $this->_subject_id = scrubData($subject_id);
+    $this->_subject_id = scrubData($subject_id, 'integer');
     $this->_pluslet_bonus_classes = "no_overflow";
 }
 
