@@ -9,14 +9,21 @@
 
 namespace SubjectsPlus\Control\Guide;
 
+use PDO;
 use SubjectsPlus\Control\Querier;
 
 class SaveGuide {
 
 	private $_input;
+    private $_db;
+    private $_connection;
 
-	public function __construct( $input ) {
+	public function __construct( $input, Querier $db ) {
 		$this->_input = $input;
+
+        $this->_db = $db;
+        $this->_connection = $this->_db->getConnection();
+        $this->_connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	}
 
 
@@ -60,22 +67,16 @@ AND p.type != 'Special'";
 		}
 
 		$lintTabIndex = 0;
-
 		foreach ( $lobjTabs as $lobjTab ) {
 			if ( isset ( $lobjTab ['external'] ) ) {
 			} else {
 				$lobjTab ['external'] = null;
 			}
-
-			$qi = "INSERT INTO tab (subject_id, label, tab_index, external_url, visibility) VALUES ('$subject_id', '{$lobjTab['name']}', $lintTabIndex, '{$lobjTab['external']}', {$lobjTab['visibility']})";
-			// print $qi . "<br />";
-			$db->exec( $qi );
-
-			$lintTabId = $db->last_id();
-
-			$lintSectionIndex = 0;
+			//insert tab
+            $lintTabId = $this->saveTab($subject_id, $lobjTab['name'], $lintTabIndex, $lobjTab['external'], $lobjTab['visibility']);
 
 			// insert sections
+            $lintSectionIndex = 0;
 			foreach ( $lobjTab ['sections'] as $lobjSection ) {
 				// insert section, as of now only one per tab
 				$qi = "INSERT INTO section (section_index, layout, tab_id) VALUES ('$lintSectionIndex', '{$lobjSection['layout']}', '$lintTabId')";
@@ -164,4 +165,23 @@ AND p.type != 'Special'";
 
 		print  _( "Thy Will Be Done:  Guide Updated." );
 	}
+
+    public function saveTab($subject_id, $label, $tab_index, $external_url = null, $visibility) {
+        $this->_connection->beginTransaction();
+        $last_insert = null;
+
+        $statement = $this->_connection->prepare("INSERT INTO tab (subject_id, label, tab_index, external_url, visibility) VALUES (:subject_id, :label, :tab_index, :external_url, :visibility)");
+
+        $statement->bindParam(':subject_id', $subject_id);
+        $statement->bindParam(':label', $label);
+        $statement->bindParam(':tab_index', $tab_index);
+        $statement->bindParam(':external_url', $external_url);
+        $statement->bindParam(':visibility', $visibility);
+
+        $statement->execute();
+        $last_insert = $this->_connection->lastInsertId();
+        $this->_connection->commit();
+
+        return $last_insert;
+    }
 }

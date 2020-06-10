@@ -9,9 +9,6 @@
  *   @author jlittle
  *   @date updated jul 2013
  */
-
-use SubjectsPlus\Control\Guide\SaveGuide;
-
 $subsubcat = "";
 $subcat = "guides";
 $page_title = "Save Guides include";
@@ -19,5 +16,9 @@ $header = "noshow";
 
 include("../../includes/header.php");
 
-$saveGuide = new SaveGuide($_POST);
+use SubjectsPlus\Control\Guide\SaveGuide;
+use SubjectsPlus\Control\Querier;
+
+$db = new Querier;
+$saveGuide = new SaveGuide($_POST, $db);
 $saveGuide->save();
