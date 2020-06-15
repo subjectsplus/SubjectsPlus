@@ -586,4 +586,9 @@ $enforce_https_upload_url = FALSE;
 $mapbox_access_token = "";
 $mapbox_home_coords = "";
 
+////////////////////////////////////////////
+// Setting WorldCat Search default URL
+////////////////////////////////////////////
+$worldcat_search_url = 'https://worldcat.org/search';
+
 ?>
