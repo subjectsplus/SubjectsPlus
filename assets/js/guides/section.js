@@ -241,9 +241,7 @@ function section() {
 
 						// hightlight section controls
 						var activeTab = $('#tabs').tabs('option', 'active');
-						console.log('activeTab ' + activeTab);
 						var currentTab = "#tabs-" + activeTab;
-						console.log('currentTab ' + currentTab);
 						$(currentTab).find('.sp_section_controls').first().trigger('click');
 						$(currentTab).find('.sp_section_controls').first().addClass('sp_section_selected');
 						$(currentTab).find('.sp_section_controls').first().parent('div').addClass('section_selected_area');

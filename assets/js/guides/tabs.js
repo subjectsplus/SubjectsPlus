@@ -542,10 +542,11 @@ function tabs() {
                         var current_tab_index = $("#tabs").tabs('option', 'active');
                         console.log('current_tab_index click tabs object: ' + current_tab_index);
 
-                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
-                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
-                        $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
-                        $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+                        // $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
+                        // $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
+                        // $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
+                        // $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+
                     }
                 }
             );
@@ -554,12 +555,13 @@ function tabs() {
         activateFirstSectionControlsInit : function() {
 
             var current_tab_index = $("#tabs").tabs('option', 'active');
-            console.log('current_tab_index init tabs object: ' + current_tab_index);
+            //console.log('current_tab_index init tabs object: ' + current_tab_index);
 
             $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').trigger('click');
             $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').addClass('sp_section_selected');
             $('#tabs-' + current_tab_index).find('.sp_section_controls').css('display', 'block');
             $("#tabs-" + current_tab_index).children().first().find('.sp_section_controls').parent('div').addClass('section_selected_area');
+
         },
 
         targetBlankLinks: function () {
