@@ -240,9 +240,13 @@ function section() {
 						window.scrollTo(0, $(".sp_section_controls").first().offset().top);
 
 						// hightlight section controls
-						$('.sp_section_controls').first().trigger('click');
-						$('.sp_section_controls').first().addClass('sp_section_selected');
-						$('.sp_section_controls').first().parent('div').addClass('section_selected_area');
+						var activeTab = $('#tabs').tabs('option', 'active');
+						console.log('activeTab ' + activeTab);
+						var currentTab = "#tabs-" + activeTab;
+						console.log('currentTab ' + currentTab);
+						$(currentTab).find('.sp_section_controls').first().trigger('click');
+						$(currentTab).find('.sp_section_controls').first().addClass('sp_section_selected');
+						$(currentTab).find('.sp_section_controls').first().parent('div').addClass('section_selected_area');
 
 						$(this).dialog('close');
 						return false;
