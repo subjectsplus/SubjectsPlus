@@ -1094,7 +1094,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
         ),
 
         "chat_src" => array(
-            _( "LibraryH3lp JID" ),
+            _( "LibraryH3lp SRC Attribute" ),
             _( "This option sets the src attribute for use with LibraryH3lp" ),
             "string",
             "api",
@@ -1104,7 +1104,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
         ),
 
         "chat_height" => array(
-            _( "LibraryH3lp JID" ),
+            _( "LibraryH3lp Height" ),
             _( "This option sets the height for use with LibraryH3lp" ),
             "string",
             "api",
@@ -1114,7 +1114,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
         ),
 
         "chat_width" => array(
-            _( "LibraryH3lp JID" ),
+            _( "LibraryH3lp Width" ),
             _( "This option sets the width for use with LibraryH3lp" ),
             "string",
             "api",
