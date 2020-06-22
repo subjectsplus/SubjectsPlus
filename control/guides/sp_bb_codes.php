@@ -1,7 +1,7 @@
 <?php
 
 $subcat = "guides";
-$page_title = "SubjectsPlus-Blackboard Course Codes Integrations";
+$page_title = "SP-Blackboard Course Codes Integrations";
 
 include("../includes/header.php");
 
@@ -14,10 +14,17 @@ if (!$lti_enabled){
 }
 
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\SP_BB_Integration\Integration;
+require_once( __DIR__ .'\sp-bb-special-codes\controller\Integration.php');
+
 
 $db = new Querier;
 $integration = new Integration($db);
+
+$current_codes = $integration->getSpecialCourseCodesList();
+$addNewSpecialCodeTemplate = $integration->getAddCourseCodeTemplateForm();
+$editSpecialCodeTemplate = $integration->getEditCourseCodeTemplateForm();
+
+include( __DIR__ . "/sp-bb-special-codes/views/sp-bb-codes.php");
 
 ?>
 
