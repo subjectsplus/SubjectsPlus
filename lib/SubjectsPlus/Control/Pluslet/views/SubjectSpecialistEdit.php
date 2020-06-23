@@ -82,18 +82,7 @@
 </div>
 
 
-    <script>
-        var ss = subjectSpecialist();
-        ss.init();
-
-//        var editor = CKEDITOR.instances['editor-specialist'];
-//
-//        $('#editor-specialist-container').append(editor.updateElement());
-
-        $('body').on('click', '#save_guide', function(){
-
-            window.location.reload();
-
-        });
-
-    </script>
+<script>
+    var ss = subjectSpecialist();
+    ss.init();
+</script>
