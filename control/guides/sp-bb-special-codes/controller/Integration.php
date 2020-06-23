@@ -6,6 +6,7 @@ class Integration
 {
     private $db;
     private $db_connection;
+    private $last_function_result;
 
     /**
      * SP_BB_Integration constructor.
@@ -24,11 +25,7 @@ class Integration
 id INT AUTO_INCREMENT PRIMARY KEY,
 custom_code MEDIUMTEXT  NOT NULL,
 associated_course_codes MEDIUMTEXT NOT NULL,
-description MEDIUMTEXT NULL,
-is_edited BOOLEAN DEFAULT FALSE,
-last_edited_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-last_edited_by_id INT NULL,
-FOREIGN KEY (last_edited_by_id) REFERENCES staff(staff_id) ON DELETE SET NULL
+description MEDIUMTEXT NULL
 )");
         $statement->execute();
 
@@ -38,20 +35,41 @@ FOREIGN KEY (last_edited_by_id) REFERENCES staff(staff_id) ON DELETE SET NULL
     {
         $statement = $this->db_connection->prepare("SELECT * from sp_bb_courses_relation");
         $statement->execute();
-        $special_codes = $statement->fetchAll();
-
-        return $special_codes;
+        return $statement->fetchAll();
     }
 
     public function getAddCourseCodeTemplateForm()
     {
         $template = "sp-bb-special-codes/views/partials/add-course-code-form.php";
         $labels = [
-            'uniqueCodeLabel' => _("Unique Special Code"),
+            'uniqueCodeLabel' => _("Unique Custom Course Code"),
             'description' => _("Description"),
+            'associatedCourseCodesLabel' => _("Asssociated Course Codes"),
             'addSpecialCourseCode' => _("Add new Special Code")
         ];
         return $this->renderTemplate($template, $labels);
+    }
+
+    public function lastActionResultToJson()
+    {
+        return json_encode($this->last_function_result);
+    }
+
+    public function insertCustomCourseCode($data)
+    {
+        $custom_code = scrubData($data["special-course-code"]);
+        $associated_course_codes = scrubData($data["associated-course-codes"]);
+        $description = scrubData($data["description"]);
+
+        $this->db;
+        $statement = $this->db_connection->prepare(
+            "INSERT INTO sp_bb_courses_relation (custom_code, associated_course_codes, description) 
+VALUES (:custom_code, :associated_course_codes, :description)");
+
+        $statement->bindParam(':custom_code', $custom_code);
+        $statement->bindParam(':associated_course_codes', $associated_course_codes);
+        $statement->bindParam(':description', $description);
+        $this->last_function_result = $statement->execute();;
     }
 
     public function getEditCourseCodeTemplateForm()
@@ -78,7 +96,8 @@ FOREIGN KEY (last_edited_by_id) REFERENCES staff(staff_id) ON DELETE SET NULL
         return $this->renderTemplate($template, $args);
     }
 
-    private function renderTemplate($template, $arguments){
+    private function renderTemplate($template, $arguments)
+    {
         ob_start();
         foreach ($arguments as $key => $value) {
             ${$key} = $value;

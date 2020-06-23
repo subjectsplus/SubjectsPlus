@@ -16,18 +16,13 @@ if (!$lti_enabled){
 use SubjectsPlus\Control\Querier;
 require_once( __DIR__ .'\sp-bb-special-codes\controller\Integration.php');
 
-
 $db = new Querier;
 $integration = new Integration($db);
 
-$current_codes = $integration->getSpecialCourseCodesList();
+$currentCodesList = $integration->getSpecialCourseCodesList();
 $addNewSpecialCodeTemplate = $integration->getAddCourseCodeTemplateForm();
 $editSpecialCodeTemplate = $integration->getEditCourseCodeTemplateForm();
 
-include( __DIR__ . "/sp-bb-special-codes/views/sp-bb-codes.php");
+include( __DIR__ . "/sp-bb-special-codes/views/sp-bb-codes-main.php");
 
-?>
-
-<?php 
 include("../includes/footer.php");
-?>
