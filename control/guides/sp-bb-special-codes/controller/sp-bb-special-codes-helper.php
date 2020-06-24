@@ -25,7 +25,7 @@ $integration = new Integration($db);
 switch ($action) {
     case 'insert-special-course-code':
         $integration->insertCustomCourseCode($data);
-        echo $integration->lastActionResultToJson();
+        echo $integration->lastExecutionResultToJson();
         break;
     default:
         die('Wrong request!');

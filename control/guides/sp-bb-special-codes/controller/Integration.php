@@ -6,7 +6,7 @@ class Integration
 {
     private $db;
     private $db_connection;
-    private $last_function_result;
+    private $last_execution_result;
 
     /**
      * SP_BB_Integration constructor.
@@ -50,9 +50,9 @@ description MEDIUMTEXT NULL
         return $this->renderTemplate($template, $labels);
     }
 
-    public function lastActionResultToJson()
+    public function lastExecutionResultToJson()
     {
-        return json_encode($this->last_function_result);
+        return json_encode($this->last_execution_result);
     }
 
     public function insertCustomCourseCode($data)
@@ -61,7 +61,6 @@ description MEDIUMTEXT NULL
         $associated_course_codes = scrubData($data["associated-course-codes"]);
         $description = scrubData($data["description"]);
 
-        $this->db;
         $statement = $this->db_connection->prepare(
             "INSERT INTO sp_bb_courses_relation (custom_code, associated_course_codes, description) 
 VALUES (:custom_code, :associated_course_codes, :description)");
@@ -69,7 +68,16 @@ VALUES (:custom_code, :associated_course_codes, :description)");
         $statement->bindParam(':custom_code', $custom_code);
         $statement->bindParam(':associated_course_codes', $associated_course_codes);
         $statement->bindParam(':description', $description);
-        $this->last_function_result = $statement->execute();;
+
+        $execution_result = $statement->execute();
+
+        if ($execution_result){
+            $data['id'] = $this->db->last_id();
+            $result['data'] = $data;
+        }
+
+        $result['result'] = $execution_result;
+        $this->last_execution_result = $result;
     }
 
     public function getEditCourseCodeTemplateForm()
@@ -78,9 +86,10 @@ VALUES (:custom_code, :associated_course_codes, :description)");
         $labels = [
             'formClassName' => "edit-special-course-code-form",
             'style' => "display: none;",
-            'uniqueCodeLabel' => _("Unique Special Code"),
+            'saveSpecialCourseCode' => _("Save Special Code Changes"),
+            'uniqueCodeLabel' => _("Unique Custom Course Code"),
             'description' => _("Description"),
-            'saveSpecialCourseCode' => _("Save Special Code Changes")
+            'associatedCourseCodesLabel' => _("Asssociated Course Codes"),
         ];
         return $this->renderTemplate($template, $labels);
     }
