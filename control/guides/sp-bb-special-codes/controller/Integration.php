@@ -71,9 +71,55 @@ VALUES (:custom_code, :associated_course_codes, :description)");
 
         $execution_result = $statement->execute();
 
-        if ($execution_result){
+        if ($execution_result) {
             $data['id'] = $this->db->last_id();
             $result['data'] = $data;
+        }
+
+        $result['result'] = $execution_result;
+        $this->last_execution_result = $result;
+    }
+
+    public function editCustomCourseCode($data)
+    {
+        $custom_code_id = scrubData($data["editing-course-code-id"]);
+        $custom_code = scrubData($data["special-course-code"]);
+        $associated_course_codes = scrubData($data["associated-course-codes"]);
+        $description = scrubData($data["description"]);
+
+        $statement = $this->db_connection->prepare(
+            "UPDATE sp_bb_courses_relation SET custom_code = :custom_code, associated_course_codes = :associated_course_codes, description = :description
+WHERE id = :custom_code_id");
+
+        $statement->bindParam(':custom_code', $custom_code);
+        $statement->bindParam(':associated_course_codes', $associated_course_codes);
+        $statement->bindParam(':description', $description);
+        $statement->bindParam(':custom_code_id', $custom_code_id);
+
+        $execution_result = $statement->execute();
+
+        if ($execution_result) {
+            $data['id'] = $custom_code_id;
+            $result['data'] = $data;
+        }
+
+        $result['result'] = $execution_result;
+        $this->last_execution_result = $result;
+    }
+
+    public function removeCustomCourseCode($data)
+    {
+        $custom_code_id = scrubData($data["removing-course-code-id"]);
+
+        $statement = $this->db_connection->prepare(
+            "DELETE FROM sp_bb_courses_relation WHERE id = :custom_code_id");
+
+        $statement->bindParam(':custom_code_id', $custom_code_id);
+
+        $execution_result = $statement->execute();
+
+        if ($execution_result) {
+            $result['data'] = $custom_code_id;
         }
 
         $result['result'] = $execution_result;

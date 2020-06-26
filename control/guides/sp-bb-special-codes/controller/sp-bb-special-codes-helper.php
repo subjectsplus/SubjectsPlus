@@ -27,6 +27,14 @@ switch ($action) {
         $integration->insertCustomCourseCode($data);
         echo $integration->lastExecutionResultToJson();
         break;
+    case 'edit-special-course-code':
+        $integration->editCustomCourseCode($data);
+        echo $integration->lastExecutionResultToJson();
+        break;
+    case 'remove-special-course-code':
+        $integration->removeCustomCourseCode($data);
+        echo $integration->lastExecutionResultToJson();
+        break;
     default:
         die('Wrong request!');
 }
