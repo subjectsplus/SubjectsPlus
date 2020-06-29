@@ -7,7 +7,7 @@
             <a class="edit-special-course-btn"
                title="Edit"><i
                         class="fa fa-pencil fa-lg"></i></a>
-            <?php echo $course_data['custom_code']; ?>
+            <?php echo $course_data['custom_code']; ?> <?php if (!empty($course_data['description'])) echo "(" . $course_data['description'] .")"; ?>
             <a class="delete-special-course-code-btn" title="Delete"><i
                         class="fa fa-trash"></i></a>
         </li>

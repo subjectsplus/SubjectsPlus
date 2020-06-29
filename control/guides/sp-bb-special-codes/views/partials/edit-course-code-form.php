@@ -9,4 +9,5 @@
     <button type="button" class="button pure-button
         pure-button-primary" id="save-special-course-code-changes"
             name=""save-special-course-code-changes"><?php echo $saveSpecialCourseCode; ?></button>
+    (*) required
 </form>

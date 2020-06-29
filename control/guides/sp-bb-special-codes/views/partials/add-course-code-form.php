@@ -8,4 +8,5 @@
     <button type="button" class="button pure-button
         pure-button-primary" id="add-special-course-code"
             name="add-special-course-code"><?php echo $addSpecialCourseCode; ?></button>
+    (*) required
 </form>

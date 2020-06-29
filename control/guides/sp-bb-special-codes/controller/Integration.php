@@ -25,7 +25,9 @@ class Integration
 id INT AUTO_INCREMENT PRIMARY KEY,
 custom_code MEDIUMTEXT  NOT NULL,
 associated_course_codes MEDIUMTEXT NOT NULL,
-description MEDIUMTEXT NULL
+description MEDIUMTEXT NULL,
+UNIQUE KEY unique_custom_code (custom_code(255))
+
 )");
         $statement->execute();
 
@@ -42,9 +44,9 @@ description MEDIUMTEXT NULL
     {
         $template = "sp-bb-special-codes/views/partials/add-course-code-form.php";
         $labels = [
-            'uniqueCodeLabel' => _("Unique Custom Course Code"),
-            'description' => _("Description"),
-            'associatedCourseCodesLabel' => _("Asssociated Course Codes"),
+            'uniqueCodeLabel' => _("Unique Custom Course Code (*)"),
+            'description' => _("Short description"),
+            'associatedCourseCodesLabel' => _("Asssociated Course Codes (*)"),
             'addSpecialCourseCode' => _("Add new Special Code")
         ];
         return $this->renderTemplate($template, $labels);
@@ -74,6 +76,9 @@ VALUES (:custom_code, :associated_course_codes, :description)");
         if ($execution_result) {
             $data['id'] = $this->db->last_id();
             $result['data'] = $data;
+        }else{
+            $result['errorCode'] = $statement->errorCode();
+            $result['nonUniqueCourseCode'] = $custom_code;
         }
 
         $result['result'] = $execution_result;
@@ -101,6 +106,9 @@ WHERE id = :custom_code_id");
         if ($execution_result) {
             $data['id'] = $custom_code_id;
             $result['data'] = $data;
+        }else{
+            $result['errorCode'] = $statement->errorCode();
+            $result['nonUniqueCourseCode'] = $custom_code;
         }
 
         $result['result'] = $execution_result;
@@ -133,9 +141,9 @@ WHERE id = :custom_code_id");
             'formClassName' => "edit-special-course-code-form",
             'style' => "display: none;",
             'saveSpecialCourseCode' => _("Save Special Code Changes"),
-            'uniqueCodeLabel' => _("Unique Custom Course Code"),
-            'description' => _("Description"),
-            'associatedCourseCodesLabel' => _("Asssociated Course Codes"),
+            'uniqueCodeLabel' => _("Unique Custom Course Code (*)"),
+            'description' => _("Short description"),
+            'associatedCourseCodesLabel' => _("Asssociated Course Codes (*)"),
         ];
         return $this->renderTemplate($template, $labels);
     }
