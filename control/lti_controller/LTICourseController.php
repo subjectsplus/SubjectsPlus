@@ -27,7 +27,6 @@ class LTICourseController
 
     function __construct($course_code_table_name = 'bb_course_code', $course_instructor_table_name = 'bb_course_instructor')
     {
-
         $this->course_code_table_name = $course_code_table_name;
         $this->course_instructor_table_name = $course_instructor_table_name;
         $this->db = new Querier();
@@ -211,10 +210,10 @@ class LTICourseController
             }
         }
 
-        $specific_guide_code = $this->checkSpecificCase($subject_code);
+        $specific_guide_code = $this->checkSpecificCases($subject_code);
 
         if (!empty($specific_guide_code)) {
-            $course_code = $specific_guide_code;
+            $course_code = $specific_guide_code->custom_code;
         }
 
         $q = "SELECT subject_id, subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND (instructor = 'None' OR instructor IS NULL OR instructor = '' )";
@@ -224,17 +223,15 @@ class LTICourseController
         return $statement->fetchAll();
     }
 
-    private function checkSpecificCase($subject_code)
+    private function checkSpecificCases($custom_code)
     {
-        global $specific_course_codes;
-        if ($specific_course_codes) {
-            foreach ($specific_course_codes as $guide_code => $course_codes) {
-                if (in_array($subject_code, $course_codes)) {
-                    return $guide_code;
-                }
-            }
-            return "";
-        }
+        $customCodeWildcard = '%' . $custom_code . '%';
+
+        $q = "SELECT custom_code from sp_bb_courses_relation where associated_course_codes like :custom_code";
+        $statement = $this->connection->prepare($q);
+        $statement->bindParam(':custom_code', $customCodeWildcard);
+        $statement->execute();
+        return $statement->fetchObject();
     }
 
     private function getInstructorByCourseCode($course_id)
@@ -261,22 +258,17 @@ class LTICourseController
         return $statement->fetchAll();
     }
 
-    function isMedCourseCode($course_code){
+    function isMedCourseCode($course_code)
+    {
         global $med_course_codes;
 
-        if ($med_course_codes){
+        if ($med_course_codes) {
             return in_array(substr($course_code, 0, 3), $med_course_codes);
         }
     }
 
     function processCourseCode($course_code, $guide_path)
     {
-//        //temporary fix to deal with med course guides
-//        if ($this->isMedCourseCode($course_code)){
-//            header("Location: https://spmed.library.miami.edu/subjects/index.php"); /* Redirect browser */
-//            return;
-//        }
-
         $instructor = $this->getInstructorByCourseCode($course_code);
 
         if (!empty($instructor)) {
