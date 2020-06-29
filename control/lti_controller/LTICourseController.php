@@ -195,11 +195,28 @@ class LTICourseController
 
     private function getCourseURL($subject_code)
     {
-        $temp = explode("-", $subject_code);
-        $course_code = $temp[0];
-        $instructor = $this->getInstructorByCourseCode($subject_code);
+        if (strlen($subject_code) === 3){ #It is a subject code
+            $course_code = $subject_code;
+        }else{
+            #Extracting course codes using rexeg
+            preg_match_all("/[A-Z]{3}[0-9]{3}/", $subject_code, $matches);
 
-        if (!empty($instructor)) {
+            if (!empty($matches) && !empty($matches[0])){
+                $matches = $matches[0];
+                if (count($matches) == 1){   #Case only one match
+                    $course_code = $matches[0];
+                }elseif (count($matches) > 1){  #Case multiple codes match
+                    $course_code = $matches;
+                }else{ #Case course code that doesn't follow /[A-Z]{3}[0-9]{3}/ regex
+                    $temp = explode("-", $subject_code);
+                    $course_code = $temp[0];
+                }
+            }
+        }
+
+        $instructor = $this->getInstructorByCourseCode($subject_code); #Get instructor by Course Code
+
+        if (!empty($instructor) && !is_array($course_code)) { # Check for instructor and specific course code (e.g. ARC101) match
             $q = "SELECT subject_id, subject, shortform FROM subject WHERE active = '1' AND type != 'Placeholder' AND course_code = '" . $course_code . "' AND instructor LIKE '%" . $instructor . "%' ORDER BY subject";
             $statement = $this->connection->prepare($q);
             $statement->execute();
@@ -210,7 +227,8 @@ class LTICourseController
             }
         }
 
-        $specific_guide_code = $this->checkSpecificCases($subject_code);
+        # Check custom course codes (many course codes to one guide case)
+        $specific_guide_code = $this->checkSpecificCases($course_code);
 
         if (!empty($specific_guide_code)) {
             $course_code = $specific_guide_code->custom_code;
@@ -223,13 +241,20 @@ class LTICourseController
         return $statement->fetchAll();
     }
 
-    private function checkSpecificCases($custom_code)
+    private function checkSpecificCases($custom_codes)
     {
-        $customCodeWildcard = '%' . $custom_code . '%';
+        if (is_array($custom_codes)){
+            $temp_where_clauses = array();
+            foreach ($custom_codes as $code){
+                array_push($temp_where_clauses, " associated_course_codes like '%" .$code . "%'");
+            }
+            $customCodeWildcard = implode(" AND ", $temp_where_clauses);
+        }else{
+            $customCodeWildcard = " associated_course_codes like '%" . $custom_codes . "%'";
+        }
 
-        $q = "SELECT custom_code from sp_bb_courses_relation where associated_course_codes like :custom_code";
+        $q = "SELECT custom_code from sp_bb_courses_relation where" . $customCodeWildcard;
         $statement = $this->connection->prepare($q);
-        $statement->bindParam(':custom_code', $customCodeWildcard);
         $statement->execute();
         return $statement->fetchObject();
     }
@@ -297,14 +322,16 @@ class LTICourseController
 
     function findGuideBySubjectCodeAndCourseNumber($course_code, $guide_path)
     {
-        //Find guides by subject code and course number
+         //Find guides by subject code and course number
         $guides = $this->getCourseURL($course_code);
         $guides_count = count($guides);
 
-        if ($guides_count == 0) { //If nothing found, then find guides by subject code only
+
+        if ($guides_count == 0) { //If nothing found, find guides by subject code only
             $subject_code = substr($course_code, 0, 3);
 
             $guides = $this->getCourseURL($subject_code);
+
             $guides_count = count($guides);
         }
 
