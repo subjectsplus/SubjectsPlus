@@ -14,7 +14,7 @@ if (!$lti_enabled){
 }
 
 use SubjectsPlus\Control\Querier;
-require_once( __DIR__ .'\sp-bb-special-codes\controller\Integration.php');
+require_once( __DIR__ .'/sp-bb-special-codes/controller/Integration.php');
 
 $db = new Querier;
 $integration = new Integration($db);

@@ -4,7 +4,6 @@ try {
     global $lti_enabled;
     $guide_path = $PublicPath;
 
-
     if (isset($lti_enabled) && $lti_enabled) {
         if (required_indexes_exist()) {
             include("../../control/includes/autoloader.php"); // need to use this if header not loaded yet
