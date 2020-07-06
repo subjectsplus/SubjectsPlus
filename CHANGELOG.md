@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/subjectsplus/Subjectsplus/tree/HEAD)
+## [v4.5](https://github.com/subjectsplus/Subjectsplus/tree/v4.5) (2020-07-06)
 
-[Full Changelog](https://github.com/subjectsplus/Subjectsplus/compare/v4.4...HEAD)
+[Full Changelog](https://github.com/subjectsplus/Subjectsplus/compare/v4.4...v4.5)
 
 **Implemented enhancements:**
 
@@ -133,7 +133,6 @@
 - Tokens don't work in FAQs [\#1192](https://github.com/subjectsplus/SubjectsPlus/issues/1192)
 - Need to make the suppressed guide show the theme \(if a theme is set\) [\#837](https://github.com/subjectsplus/SubjectsPlus/issues/837)
 - Upon update, text refers to the new features in v3 on the wiki  [\#801](https://github.com/subjectsplus/SubjectsPlus/issues/801)
-- Special characters not being searched in Record search [\#727](https://github.com/subjectsplus/SubjectsPlus/issues/727)
 
 **Closed issues:**
 
@@ -371,6 +370,7 @@
 - When both the uSearch and Catalog boxes are on the same page they conflict [\#853](https://github.com/subjectsplus/SubjectsPlus/issues/853)
 - Create Guide from Tabs Flyout Not Working [\#807](https://github.com/subjectsplus/SubjectsPlus/issues/807)
 - Check for cloned pluslets before deleting a guide [\#736](https://github.com/subjectsplus/SubjectsPlus/issues/736)
+- Special characters not being searched in Record search [\#727](https://github.com/subjectsplus/SubjectsPlus/issues/727)
 - Make sure that database A-Z flags are being set correctly by application \(UM\) [\#723](https://github.com/subjectsplus/SubjectsPlus/issues/723)
 - If tab is deleted that contains a master pluslet with a clone in another tab then guide death [\#717](https://github.com/subjectsplus/SubjectsPlus/issues/717)
 - you can’t delete a guide if it has a parent [\#689](https://github.com/subjectsplus/SubjectsPlus/issues/689)
@@ -810,6 +810,7 @@
 - Copyclone & Section  fixes [\#300](https://github.com/subjectsplus/SubjectsPlus/pull/300) ([little9](https://github.com/little9))
 - Fix metadata colorbox [\#298](https://github.com/subjectsplus/SubjectsPlus/pull/298) ([little9](https://github.com/little9))
 - Feature tabs layout [\#296](https://github.com/subjectsplus/SubjectsPlus/pull/296) ([little9](https://github.com/little9))
+- Feature image gallery [\#267](https://github.com/subjectsplus/SubjectsPlus/pull/267) ([little9](https://github.com/little9))
 
 ## [v4.0.0-beta.2](https://github.com/subjectsplus/Subjectsplus/tree/v4.0.0-beta.2) (2015-10-06)
 
