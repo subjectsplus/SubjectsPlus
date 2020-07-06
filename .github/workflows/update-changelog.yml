@@ -6,22 +6,14 @@ on:
       - master
   pull_request:
     branches:
-      - master
-
-name:
-  Update Changelog
 
 jobs:
   build:
-    name: Create Release
+    name: Update Changelog
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Generate changelog
+        uses: fabernovel/github-changelog-generator-action@v1
         with:
-          fetch-depth: 0
-      - name: changelog
-        uses: scottbrenner/generate-changelog-action@master
-        id: Changelog
-        env:
-          REPO: ${{ github.repository }}
+          # You can pass any parameters from https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#additional-options
+          options: --token ${{ secrets.GITHUB_TOKEN }}
