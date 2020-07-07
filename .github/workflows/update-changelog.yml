@@ -22,7 +22,6 @@ jobs:
         uses: charmixer/auto-changelog-action@v1
         with:
           token: ${{ secrets.YOUR_GITHUB_TOKEN }}
-          since_tag: v4.5
 
       - name: Commit files
         env:
