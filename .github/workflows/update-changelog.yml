@@ -1,9 +1,7 @@
 name: Changelog
 
 on:
-  push:
-    branches:
-      - master
+
   pull_request:
     types: [closed]
 
