@@ -83,7 +83,9 @@ class BuildNav {
       }
 
       if ($lti_enabled){
-          $course_codes_menu_option = "<li><a href=\"$CpanelPath" . "guides/sp_bb_codes.php\">" . _("SP-BB Special Integration Codes") . "</a></li> ";
+          $course_codes_menu_option = "<li><a href=\"$CpanelPath" . "guides/sp_bb_codes.php\">" . _("Blackboard Special Integration Codes") . "</a></li> ";
+      }else{
+          $course_codes_menu_option = "";
       }
 
       print "><a href=\"$CpanelPath" . "guides/\">" . _("Guides") . "</a>
