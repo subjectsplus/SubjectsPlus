@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="sp-bb-special-codes/css/styles.css" type="text/css" media="all">
 <script src="sp-bb-special-codes/js/sp-bb-special-codes.js"></script>
 
 <div id="sp-custom-codes-feedback" class="feedback" style="display:none;"></div>
