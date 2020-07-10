@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5...HEAD)
 
+**Implemented enhancements:**
+
+- Feedback Messages in Admin Guide Collections [\#1417](https://github.com/subjectsplus/SubjectsPlus/pull/1417) ([abelfacenda](https://github.com/abelfacenda))
+
 **Merged pull requests:**
 
 - Merge branch 'master' into cgb-gh-actions [\#1432](https://github.com/subjectsplus/SubjectsPlus/pull/1432) ([cgb37](https://github.com/cgb37))
