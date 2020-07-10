@@ -535,7 +535,7 @@ function guideCollectionService() {
         },
         renderFlashMsg: function (msg) {
             myGuideCollection.clearFlashMsg();
-            $('#flash-msg').append(msg).parent().show().delay(5000).fadeOut();
+            $('#flash-msg').append(msg).show().delay(5000).fadeOut();
         },
 
         showCollectionMetadataContainer: function () {
