@@ -8,9 +8,20 @@
 
 - Feedback Messages in Admin Guide Collections [\#1417](https://github.com/subjectsplus/SubjectsPlus/pull/1417) ([abelfacenda](https://github.com/abelfacenda))
 
+**Fixed bugs:**
+
+- Courses metadata fields shows up when LTI is disabled [\#1420](https://github.com/subjectsplus/SubjectsPlus/issues/1420)
+- Guides not being added to collections [\#1416](https://github.com/subjectsplus/SubjectsPlus/issues/1416)
+
+**Closed issues:**
+
+- Have feedback when adding a guide to a collection [\#1414](https://github.com/subjectsplus/SubjectsPlus/issues/1414)
+
 **Merged pull requests:**
 
 - Merge branch 'master' into cgb-gh-actions [\#1432](https://github.com/subjectsplus/SubjectsPlus/pull/1432) ([cgb37](https://github.com/cgb37))
+- added default value to sort column in collection\_subject table [\#1422](https://github.com/subjectsplus/SubjectsPlus/pull/1422) ([abelfacenda](https://github.com/abelfacenda))
+- \#1420 Courses metadata fields shows up when LTI is disabled [\#1421](https://github.com/subjectsplus/SubjectsPlus/pull/1421) ([abelfacenda](https://github.com/abelfacenda))
 
 ## [v4.5](https://github.com/subjectsplus/SubjectsPlus/tree/v4.5) (2020-07-06)
 
@@ -28,7 +39,6 @@
 - Guide Collections "Are You Sure?" [\#1400](https://github.com/subjectsplus/SubjectsPlus/issues/1400)
 - Link List pluslet can get cut off on smaller screens [\#1392](https://github.com/subjectsplus/SubjectsPlus/issues/1392)
 - talkback not sending email when from form input is empty [\#1382](https://github.com/subjectsplus/SubjectsPlus/issues/1382)
-- Deleting a tab with any number of pluslets fails [\#1354](https://github.com/subjectsplus/SubjectsPlus/issues/1354)
 - Cloning a guide with Table of Contents  [\#1353](https://github.com/subjectsplus/SubjectsPlus/issues/1353)
 - Guide Cloning doesn't always work [\#806](https://github.com/subjectsplus/SubjectsPlus/issues/806)
 - Creating new guide from Tab flyout doesn't work [\#696](https://github.com/subjectsplus/SubjectsPlus/issues/696)
@@ -80,6 +90,7 @@
 **Fixed bugs:**
 
 - tooltip in search boxes shows undefined when viewed in parent guide [\#1355](https://github.com/subjectsplus/SubjectsPlus/issues/1355)
+- Deleting a tab with any number of pluslets fails [\#1354](https://github.com/subjectsplus/SubjectsPlus/issues/1354)
 - Save Guide fadeOut not working on delete pluslet [\#1352](https://github.com/subjectsplus/SubjectsPlus/issues/1352)
 - Expand collapse all pluslets function causes js error [\#1351](https://github.com/subjectsplus/SubjectsPlus/issues/1351)
 - js.php included two times in guide.php [\#1344](https://github.com/subjectsplus/SubjectsPlus/issues/1344)
