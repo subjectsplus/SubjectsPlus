@@ -43,8 +43,8 @@ $database_search_viewport .= "</div>";
 
 $associated_databases_viewport = "<div id='database-list-container'>";
 $associated_databases_viewport .= "<h4 id='database-label'></h4>";
-$associated_databases_viewport .= "<ul id='database-list'></ul>";
 $associated_databases_viewport .= "<button id='update-databases-btn' class='pure-button pure-button-primary' style=\"display: none;\">Save Changes</button>";
+$associated_databases_viewport .= "<ul id='database-list'></ul>";
 $associated_databases_viewport .= "</div>";
 
 $about_tb_body = "<p>" . _("You may use this page to set the databases which should be associated with each subject.  This will appear on the public subjects/databases.php page when you click the Databases by Subject dropdown (if your site has one).") . "</p>
@@ -95,6 +95,7 @@ $about_tb_body = "<p>" . _("You may use this page to set the databases which sho
 </div>
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
 <script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
+<script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
 
 <script>
     var sds = subjectDatabaseService();
