@@ -283,15 +283,6 @@ class LTICourseController
         return $statement->fetchAll();
     }
 
-    function isMedCourseCode($course_code)
-    {
-        global $med_course_codes;
-
-        if ($med_course_codes) {
-            return in_array(substr($course_code, 0, 3), $med_course_codes);
-        }
-    }
-
     function processCourseCode($course_code, $guide_path)
     {
         $instructor = $this->getInstructorByCourseCode($course_code);
