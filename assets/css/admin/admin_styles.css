@@ -4612,3 +4612,44 @@ button.create-guide {font-family: "NotoSansBold";
 #autosave-spinner {
   display:none;
 }
+
+/*///////////////////////////////////////////
+Blackboard Special Codes Integration Admin
+////////////////////////////////////////////*/
+
+#special-course-codes-list {
+  list-style-position: outside;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 !important;
+  display: block;
+}
+
+#special-course-codes-list li {
+  background: #f6e3e7;
+  margin: 0 0 2px 0;
+  padding: 5px;
+}
+
+#special-course-codes-list li:nth-child(odd) {
+  background: transparent;
+}
+
+#special-course-codes-list a[class^="delete-special"] {
+  float: right;
+}
+
+#special-course-codes-list i {
+  margin: 0 8px 0 0;
+  font-size: 18px;
+}
+
+#add-special-course-code-form input, #add-special-course-code-form textarea,
+#edit-special-course-code-form input, #edit-special-course-code-form textarea {
+  width: 75%;
+}
+
+#add-special-course-code-form button,
+#edit-special-course-code-form button {
+  margin: 10px 0;
+}

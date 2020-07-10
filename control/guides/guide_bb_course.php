@@ -85,6 +85,7 @@ $associated_guides_viewport .= "</div>";
 </div>
 <link rel="stylesheet" href="<?php echo $AssetPath; ?>js/select2/select2.css" type="text/css" media="all" />
 <script type="text/javascript" src="<?php echo $AssetPath; ?>/js/select2/select2.min.js"></script>
+<script type="text/javascript" src="<?php echo $AssetPath; ?>/js/guides/SubjectGuideService.js"></script>
 
 <script>
     var sgs = subjectGuideService();
