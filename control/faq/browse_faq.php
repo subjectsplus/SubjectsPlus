@@ -8,6 +8,9 @@
  *   @date Sep 17, 2009
  *   @todo Remove this JavaScript in favour of using JQModal
  */
+
+use SubjectsPlus\Control\Querier;
+
 $subsubcat = "";
 $subcat = "faq";
 $page_title = "FAQ Admin";
@@ -28,6 +31,9 @@ print "
   <div class=\"pure-u-2-3\">  
   ";
 
+if (is_null($db)){
+    $db = new Querier;
+}
 
 if ($postvar_type == "holding") {
 
