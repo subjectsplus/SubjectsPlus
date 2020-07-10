@@ -88,7 +88,7 @@ $associated_guides_viewport .= "</div>";
 <div class="pure-g">
 
     <div class="pure-u-1">
-        <div class="master-feedback"><p id="flash-msg"></p></div>
+        <div id="flash-msg" class="feedback"></div>
         <div class="error-dialog" id="error-dialog-title">Title cannot be empty</div>
         <div class="error-dialog" id="error-dialog-shortform">Shortform cannot be empty</div>
         <div class="error-dialog" id="error-dialog-shortform-dup">Shortform must be unique. Please choose another</div>
