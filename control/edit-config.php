@@ -1083,6 +1083,45 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			_( "It must begin and end with a colon. For example, :thought_balloon:" )
 		),
 
+        "chat_jid" => array(
+            _( "Chat Pluslet LibraryH3lp JID" ),
+            _( "This option sets the JID for use with LibraryH3lp" ),
+            "string",
+            "api",
+            "large",
+            "",
+            _("This option sets the JID for use with LibraryH3lp")
+        ),
+
+        "chat_src" => array(
+            _( "Chat Pluslet LibraryH3lp SRC Attribute" ),
+            _( "This option sets the src attribute for use with LibraryH3lp" ),
+            "string",
+            "api",
+            "large",
+            "",
+            _("This option sets the src attribute for use with LibraryH3lp")
+        ),
+
+        "chat_height" => array(
+            _( "Chat Pluslet LibraryH3lp Height" ),
+            _( "This option sets the height for use with LibraryH3lp" ),
+            "string",
+            "api",
+            "large",
+            "",
+            _("This option sets the height for use with LibraryH3lp")
+        ),
+
+        "chat_width" => array(
+            _( "Chat Pluslet LibraryH3lp Width" ),
+            _( "This option sets the width for use with LibraryH3lp" ),
+            "string",
+            "api",
+            "large",
+            "",
+            _("This option sets the width for use with LibraryH3lp")
+        ),
 
 	);
 

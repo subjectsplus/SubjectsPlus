@@ -13,7 +13,7 @@ function guideCollectionService() {
             sortableGuideList: $('ul#guide-list')
         },
         strings: {
-            removeGuideBtn: "<a class='remove-guide-btn' title='Remove Guide from Collection'><i class='fa fa-trash fa-lg'></i> </a>"
+            removeGuideBtn: "<a class='remove-guide-btn' title='Remove Guide from Collection'><i class='fa fa-trash fa-lg' style='cursor: pointer'></i> </a>"
         },
         bindUiActions: function () {
 
@@ -56,7 +56,7 @@ function guideCollectionService() {
                             "data-label='" + obj.title + "'" +
                             "data-description='" + obj.description + "'" +
                             " id='item_" + obj.collection_id + "' class='' title='" + obj.title + "'> " +
-                            "<a id='display-guides-btn' title='Edit'><i class='fa fa-pencil fa-lg'></i></a> " + obj.title +
+                            "<a id='display-guides-btn' title='Edit'><i class='fa fa-pencil fa-lg'></i></a> " + "<span class='guide-collection-title'>"+obj.title +"</span>"+
                             "<a id='delete-collection-btn' title='Delete'><i class='fa fa-trash'></i></a></li>");
                     });
 
@@ -179,10 +179,14 @@ function guideCollectionService() {
                     success: function (data) {
                         myGuideCollection.clearEditFormValues();
                         myGuideCollection.clearCollectionMetadata();
+                        myGuideCollection.renderFlashMsg(title + ' collection details saved!');
 
                         $("#collection-metadata").fadeIn("slow", function () {
                             myGuideCollection.renderCollectionMetadata(title, description, shortform, collection_id);
                         });
+                        $("#guide-collection-list-container").find("[data-collection_id='" + collection_id + "']").attr('title', title);
+                        $("#guide-collection-list-container").find("[data-collection_id='" + collection_id + "']").attr('data-label', title);
+                        $("#guide-collection-list-container").find("[data-collection_id='" + collection_id + "']").children(".guide-collection-title").text(title);
 
                     }
                 });
@@ -384,6 +388,7 @@ function guideCollectionService() {
                         data: data,
                         success: function (data) {
                             console.log(data);
+                            myGuideCollection.renderFlashMsg('Guides order updated!');
                         }
                     });
 
@@ -416,6 +421,7 @@ function guideCollectionService() {
                             'data-guide_id="' + subject_id + '">' +
                             '<i class="fa fa-bars" aria-hidden="true"></i> ' +
                             label + myGuideCollection.strings.removeGuideBtn + '</li>');
+                        myGuideCollection.renderFlashMsg('Guide added to collection');
                     }
                 });
 
@@ -448,7 +454,7 @@ function guideCollectionService() {
                     success: function (data) {
                         console.log(data);
                         $(listItem).remove();
-
+                        myGuideCollection.renderFlashMsg('Guide removed from collection');
                     }
                 });
 
@@ -529,7 +535,7 @@ function guideCollectionService() {
         },
         renderFlashMsg: function (msg) {
             myGuideCollection.clearFlashMsg();
-            $('#flash-msg').append(msg).parent().show().delay(5000).fadeOut();
+            $('#flash-msg').append(msg).show().delay(5000).fadeOut();
         },
 
         showCollectionMetadataContainer: function () {

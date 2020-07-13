@@ -170,7 +170,7 @@ class Updater
   `collection_subject_id` int(11) NOT NULL AUTO_INCREMENT,
   `collection_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `sort` int(11) NOT NULL,
+  `sort` int(11) DEFAULT 0,
   PRIMARY KEY (`collection_subject_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='Added v4';"
 		);

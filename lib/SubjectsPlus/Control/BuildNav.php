@@ -17,6 +17,7 @@ class BuildNav {
     global $subcat;
     global $is_um;
     global $stats_enabled;
+    global $lti_enabled;
 
     $headshot = getHeadshot($_SESSION["email"], "smaller", "");
     $headshot_lg = getHeadshot($_SESSION["email"], "", "");
@@ -81,6 +82,12 @@ class BuildNav {
           $stats_menu_option = "<li><a href=\"$CpanelPath" . "guides/stats.php\">" . _("Stats") . "</a></li> ";
       }
 
+      if ($lti_enabled){
+          $course_codes_menu_option = "<li><a href=\"$CpanelPath" . "guides/sp_bb_codes.php\">" . _("Blackboard Special Integration Codes") . "</a></li> ";
+      }else{
+          $course_codes_menu_option = "";
+      }
+
       print "><a href=\"$CpanelPath" . "guides/\">" . _("Guides") . "</a>
       <div>
        <ul>
@@ -90,6 +97,7 @@ class BuildNav {
           <!--<li><a href=\"$CpanelPath" . "guides/delish_url.php\">" . _("Delicious Builder") . "</a></li>-->
           <li><a href=\"$CpanelPath" . "guides/link_checker.php\">" . _("Link Checker") . "</a></li>
           $stats_menu_option
+          $course_codes_menu_option
        </ul>
       </div></li>";
     }
