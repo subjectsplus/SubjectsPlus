@@ -1,8 +1,8 @@
 # Changelog
 
-## [v4.5.1](https://github.com/Subjectsplus/subjectsplus/tree/v4.5.1) (2020-07-10)
+## [v4.5.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.5.1) (2020-07-10)
 
-[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.5...v4.5.1)
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5...v4.5.1)
 
 **Implemented enhancements:**
 
@@ -24,7 +24,6 @@
 **Merged pull requests:**
 
 - Merge branch 'master' into cgb-gh-actions [\#1432](https://github.com/subjectsplus/SubjectsPlus/pull/1432) ([cgb37](https://github.com/cgb37))
-- added default value to sort column in collection\_subject table [\#1422](https://github.com/subjectsplus/SubjectsPlus/pull/1422) ([abelfacenda](https://github.com/abelfacenda))
 - \#1420 Courses metadata fields shows up when LTI is disabled [\#1421](https://github.com/subjectsplus/SubjectsPlus/pull/1421) ([abelfacenda](https://github.com/abelfacenda))
 
 ## [v4.5](https://github.com/Subjectsplus/subjectsplus/tree/v4.5) (2020-07-06)
@@ -66,6 +65,7 @@
 
 **Merged pull requests:**
 
+- added default value to sort column in collection\_subject table [\#1422](https://github.com/subjectsplus/SubjectsPlus/pull/1422) ([abelfacenda](https://github.com/abelfacenda))
 - disable ckeditor plugins and scrub input data [\#1419](https://github.com/subjectsplus/SubjectsPlus/pull/1419) ([abelfacenda](https://github.com/abelfacenda))
 - Spaced guide name fix [\#1410](https://github.com/subjectsplus/SubjectsPlus/pull/1410) ([alirsattar](https://github.com/alirsattar))
 
