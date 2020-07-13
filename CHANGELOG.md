@@ -1,17 +1,21 @@
 # Changelog
 
-## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
+## [v4.5.1](https://github.com/Subjectsplus/subjectsplus/tree/v4.5.1) (2020-07-10)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5...HEAD)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.5...v4.5.1)
 
 **Implemented enhancements:**
 
+- SubjectsPlus-Blackboard LTI integration enhancements  [\#1436](https://github.com/subjectsplus/SubjectsPlus/pull/1436) ([abelfacenda](https://github.com/abelfacenda))
 - Feedback Messages in Admin Guide Collections [\#1417](https://github.com/subjectsplus/SubjectsPlus/pull/1417) ([abelfacenda](https://github.com/abelfacenda))
 
 **Fixed bugs:**
 
+- Browse FAQs by Collection and Subject Area is broken in the backend [\#1434](https://github.com/subjectsplus/SubjectsPlus/issues/1434)
 - Courses metadata fields shows up when LTI is disabled [\#1420](https://github.com/subjectsplus/SubjectsPlus/issues/1420)
 - Guides not being added to collections [\#1416](https://github.com/subjectsplus/SubjectsPlus/issues/1416)
+- \#1434 Browse FAQs by Collection and Subject Area is broken in the backend  [\#1435](https://github.com/subjectsplus/SubjectsPlus/pull/1435) ([abelfacenda](https://github.com/abelfacenda))
+- fixing broken Javascript [\#1433](https://github.com/subjectsplus/SubjectsPlus/pull/1433) ([abelfacenda](https://github.com/abelfacenda))
 
 **Closed issues:**
 
@@ -23,9 +27,9 @@
 - added default value to sort column in collection\_subject table [\#1422](https://github.com/subjectsplus/SubjectsPlus/pull/1422) ([abelfacenda](https://github.com/abelfacenda))
 - \#1420 Courses metadata fields shows up when LTI is disabled [\#1421](https://github.com/subjectsplus/SubjectsPlus/pull/1421) ([abelfacenda](https://github.com/abelfacenda))
 
-## [v4.5](https://github.com/subjectsplus/SubjectsPlus/tree/v4.5) (2020-07-06)
+## [v4.5](https://github.com/Subjectsplus/subjectsplus/tree/v4.5) (2020-07-06)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.4...v4.5)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.4...v4.5)
 
 **Implemented enhancements:**
 
@@ -39,6 +43,7 @@
 - Guide Collections "Are You Sure?" [\#1400](https://github.com/subjectsplus/SubjectsPlus/issues/1400)
 - Link List pluslet can get cut off on smaller screens [\#1392](https://github.com/subjectsplus/SubjectsPlus/issues/1392)
 - talkback not sending email when from form input is empty [\#1382](https://github.com/subjectsplus/SubjectsPlus/issues/1382)
+- Deleting a tab with any number of pluslets fails [\#1354](https://github.com/subjectsplus/SubjectsPlus/issues/1354)
 - Cloning a guide with Table of Contents  [\#1353](https://github.com/subjectsplus/SubjectsPlus/issues/1353)
 - Guide Cloning doesn't always work [\#806](https://github.com/subjectsplus/SubjectsPlus/issues/806)
 - Creating new guide from Tab flyout doesn't work [\#696](https://github.com/subjectsplus/SubjectsPlus/issues/696)
@@ -64,17 +69,17 @@
 - disable ckeditor plugins and scrub input data [\#1419](https://github.com/subjectsplus/SubjectsPlus/pull/1419) ([abelfacenda](https://github.com/abelfacenda))
 - Spaced guide name fix [\#1410](https://github.com/subjectsplus/SubjectsPlus/pull/1410) ([alirsattar](https://github.com/alirsattar))
 
-## [v4.4](https://github.com/subjectsplus/SubjectsPlus/tree/v4.4) (2019-08-05)
+## [v4.4](https://github.com/Subjectsplus/subjectsplus/tree/v4.4) (2019-08-05)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/staff-coords-fix...v4.4)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/staff-coords-fix...v4.4)
 
 **Closed issues:**
 
 - Add subjects field to databases API endpoint [\#1379](https://github.com/subjectsplus/SubjectsPlus/issues/1379)
 
-## [staff-coords-fix](https://github.com/subjectsplus/SubjectsPlus/tree/staff-coords-fix) (2019-07-05)
+## [staff-coords-fix](https://github.com/Subjectsplus/subjectsplus/tree/staff-coords-fix) (2019-07-05)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.3...staff-coords-fix)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.3...staff-coords-fix)
 
 **Implemented enhancements:**
 
@@ -90,7 +95,6 @@
 **Fixed bugs:**
 
 - tooltip in search boxes shows undefined when viewed in parent guide [\#1355](https://github.com/subjectsplus/SubjectsPlus/issues/1355)
-- Deleting a tab with any number of pluslets fails [\#1354](https://github.com/subjectsplus/SubjectsPlus/issues/1354)
 - Save Guide fadeOut not working on delete pluslet [\#1352](https://github.com/subjectsplus/SubjectsPlus/issues/1352)
 - Expand collapse all pluslets function causes js error [\#1351](https://github.com/subjectsplus/SubjectsPlus/issues/1351)
 - js.php included two times in guide.php [\#1344](https://github.com/subjectsplus/SubjectsPlus/issues/1344)
@@ -131,9 +135,9 @@
 - Add empty alt text to tracking image, closes \#1358 [\#1363](https://github.com/subjectsplus/SubjectsPlus/pull/1363) ([sandbergja](https://github.com/sandbergja))
 - Correct broken link in Worldcat pluslet; closes \#1361 [\#1362](https://github.com/subjectsplus/SubjectsPlus/pull/1362) ([sandbergja](https://github.com/sandbergja))
 
-## [v4.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.3) (2019-01-31)
+## [v4.3](https://github.com/Subjectsplus/subjectsplus/tree/v4.3) (2019-01-31)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.2.2...v4.3)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/4.2.2...v4.3)
 
 **Implemented enhancements:**
 
@@ -187,9 +191,9 @@
 
 - Healthcheck [\#1303](https://github.com/subjectsplus/SubjectsPlus/pull/1303) ([cgb37](https://github.com/cgb37))
 
-## [4.2.2](https://github.com/subjectsplus/SubjectsPlus/tree/4.2.2) (2018-01-03)
+## [4.2.2](https://github.com/Subjectsplus/subjectsplus/tree/4.2.2) (2018-01-03)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.2.1...4.2.2)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/4.2.1...4.2.2)
 
 **Merged pull requests:**
 
@@ -203,9 +207,9 @@
 - Afc sp faqs tokens merge into sp4-dev [\#1205](https://github.com/subjectsplus/SubjectsPlus/pull/1205) ([cgb37](https://github.com/cgb37))
 - merge in release-it github generator from sp4-dev [\#1204](https://github.com/subjectsplus/SubjectsPlus/pull/1204) ([cgb37](https://github.com/cgb37))
 
-## [4.2.1](https://github.com/subjectsplus/SubjectsPlus/tree/4.2.1) (2018-01-03)
+## [4.2.1](https://github.com/Subjectsplus/subjectsplus/tree/4.2.1) (2018-01-03)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.2...4.2.1)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.2...4.2.1)
 
 **Closed issues:**
 
@@ -293,9 +297,9 @@
 - Hotfix linklist [\#1103](https://github.com/subjectsplus/SubjectsPlus/pull/1103) ([cgb37](https://github.com/cgb37))
 - Sp4 dev [\#1100](https://github.com/subjectsplus/SubjectsPlus/pull/1100) ([abelfacenda](https://github.com/abelfacenda))
 
-## [v4.2](https://github.com/subjectsplus/SubjectsPlus/tree/v4.2) (2017-06-21)
+## [v4.2](https://github.com/Subjectsplus/subjectsplus/tree/v4.2) (2017-06-21)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.1...v4.2)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.1...v4.2)
 
 **Implemented enhancements:**
 
@@ -364,9 +368,9 @@
 - added window reload to subject specialist to reload dom after save [\#1046](https://github.com/subjectsplus/SubjectsPlus/pull/1046) ([cgb37](https://github.com/cgb37))
 - changing STK in talkback [\#1045](https://github.com/subjectsplus/SubjectsPlus/pull/1045) ([cgb37](https://github.com/cgb37))
 
-## [v4.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.1) (2016-12-08)
+## [v4.1](https://github.com/Subjectsplus/subjectsplus/tree/v4.1) (2016-12-08)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.3...v4.1)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.3...v4.1)
 
 **Implemented enhancements:**
 
@@ -568,13 +572,13 @@
 - Styles and markup updates for Databases by Subject page [\#931](https://github.com/subjectsplus/SubjectsPlus/pull/931) ([pvillanueva01](https://github.com/pvillanueva01))
 - Feature pluslet link list description override [\#930](https://github.com/subjectsplus/SubjectsPlus/pull/930) ([cgb37](https://github.com/cgb37))
 
-## [v4.0.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.3) (2016-04-07)
+## [v4.0.3](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.3) (2016-04-07)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/4.0.2...v4.0.3)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/4.0.2...v4.0.3)
 
-## [4.0.2](https://github.com/subjectsplus/SubjectsPlus/tree/4.0.2) (2016-04-07)
+## [4.0.2](https://github.com/Subjectsplus/subjectsplus/tree/4.0.2) (2016-04-07)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.1...4.0.2)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.1...4.0.2)
 
 **Implemented enhancements:**
 
@@ -599,9 +603,9 @@
 
 - Fix \[\#474\] - GuideList pluslet links not working. Fixed by pointing u… [\#475](https://github.com/subjectsplus/SubjectsPlus/pull/475) ([cgb37](https://github.com/cgb37))
 
-## [v4.0.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.1) (2016-03-04)
+## [v4.0.1](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.1) (2016-03-04)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0...v4.0.1)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0...v4.0.1)
 
 **Closed issues:**
 
@@ -613,9 +617,9 @@
 - Sp4 dev - merge Diana fixes into master [\#441](https://github.com/subjectsplus/SubjectsPlus/pull/441) ([cgb37](https://github.com/cgb37))
 - Update TOC.php [\#439](https://github.com/subjectsplus/SubjectsPlus/pull/439) ([little9](https://github.com/little9))
 
-## [v4.0.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0) (2016-02-09)
+## [v4.0.0](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0) (2016-02-09)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.5...v4.0.0)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0-beta.5...v4.0.0)
 
 **Implemented enhancements:**
 
@@ -686,27 +690,27 @@
 - Default Index Page and styles [\#393](https://github.com/subjectsplus/SubjectsPlus/pull/393) ([pvillanueva01](https://github.com/pvillanueva01))
 - Image Card Pluslet updates for admin, default and um themes [\#392](https://github.com/subjectsplus/SubjectsPlus/pull/392) ([pvillanueva01](https://github.com/pvillanueva01))
 
-## [v4.0.0-beta.5](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.5) (2015-12-04)
+## [v4.0.0-beta.5](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0-beta.5) (2015-12-04)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.4...v4.0.0-beta.5)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0-beta.4...v4.0.0-beta.5)
 
 **Merged pull requests:**
 
 - revert fix [\#384](https://github.com/subjectsplus/SubjectsPlus/pull/384) ([pvillanueva01](https://github.com/pvillanueva01))
 - staff fix [\#383](https://github.com/subjectsplus/SubjectsPlus/pull/383) ([pvillanueva01](https://github.com/pvillanueva01))
 
-## [v4.0.0-beta.4](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.4) (2015-12-04)
+## [v4.0.0-beta.4](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0-beta.4) (2015-12-04)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.3...v4.0.0-beta.4)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0-beta.3...v4.0.0-beta.4)
 
 **Merged pull requests:**
 
 - config fix [\#382](https://github.com/subjectsplus/SubjectsPlus/pull/382) ([pvillanueva01](https://github.com/pvillanueva01))
 - fix styles for pluslets - distributed version [\#381](https://github.com/subjectsplus/SubjectsPlus/pull/381) ([pvillanueva01](https://github.com/pvillanueva01))
 
-## [v4.0.0-beta.3](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.3) (2015-12-04)
+## [v4.0.0-beta.3](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0-beta.3) (2015-12-04)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.1...v4.0.0-beta.3)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0-beta.1...v4.0.0-beta.3)
 
 **Merged pull requests:**
 
@@ -715,13 +719,13 @@
 - Add visible subject expertise to index page [\#377](https://github.com/subjectsplus/SubjectsPlus/pull/377) ([pvillanueva01](https://github.com/pvillanueva01))
 - Fix to properly display pluslet heading style options [\#374](https://github.com/subjectsplus/SubjectsPlus/pull/374) ([pvillanueva01](https://github.com/pvillanueva01))
 
-## [v4.0.0-beta.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.1) (2015-12-03)
+## [v4.0.0-beta.1](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0-beta.1) (2015-12-03)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.0...v4.0.0-beta.1)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0-beta.0...v4.0.0-beta.1)
 
-## [v4.0.0-beta.0](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.0) (2015-12-02)
+## [v4.0.0-beta.0](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0-beta.0) (2015-12-02)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.0.0-beta.2...v4.0.0-beta.0)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v4.0.0-beta.2...v4.0.0-beta.0)
 
 **Fixed bugs:**
 
@@ -834,9 +838,9 @@
 - Fix metadata colorbox [\#298](https://github.com/subjectsplus/SubjectsPlus/pull/298) ([little9](https://github.com/little9))
 - Feature tabs layout [\#296](https://github.com/subjectsplus/SubjectsPlus/pull/296) ([little9](https://github.com/little9))
 
-## [v4.0.0-beta.2](https://github.com/subjectsplus/SubjectsPlus/tree/v4.0.0-beta.2) (2015-10-06)
+## [v4.0.0-beta.2](https://github.com/Subjectsplus/subjectsplus/tree/v4.0.0-beta.2) (2015-10-06)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.1.0...v4.0.0-beta.2)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.1.0...v4.0.0-beta.2)
 
 **Implemented enhancements:**
 
@@ -876,45 +880,45 @@
 - Install v3 [\#51](https://github.com/subjectsplus/SubjectsPlus/pull/51) ([kenirwin](https://github.com/kenirwin))
 - Slovene translation [\#43](https://github.com/subjectsplus/SubjectsPlus/pull/43) ([mitjaviskric](https://github.com/mitjaviskric))
 
-## [v3.1.0](https://github.com/subjectsplus/SubjectsPlus/tree/v3.1.0) (2014-12-19)
+## [v3.1.0](https://github.com/Subjectsplus/subjectsplus/tree/v3.1.0) (2014-12-19)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.10...v3.1.0)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.10...v3.1.0)
 
-## [v3.0.10](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.10) (2014-12-11)
+## [v3.0.10](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.10) (2014-12-11)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.9...v3.0.10)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.9...v3.0.10)
 
-## [v3.0.9](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.9) (2014-11-12)
+## [v3.0.9](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.9) (2014-11-12)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.8...v3.0.9)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.8...v3.0.9)
 
-## [v3.0.8](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.8) (2014-10-27)
+## [v3.0.8](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.8) (2014-10-27)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.7...v3.0.8)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.7...v3.0.8)
 
-## [v3.0.7](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.7) (2014-08-25)
+## [v3.0.7](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.7) (2014-08-25)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.6...v3.0.7)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.6...v3.0.7)
 
-## [v3.0.6](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.6) (2014-08-13)
+## [v3.0.6](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.6) (2014-08-13)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.5...v3.0.6)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.5...v3.0.6)
 
-## [v3.0.5](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.5) (2014-08-11)
+## [v3.0.5](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.5) (2014-08-11)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.4...v3.0.5)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.4...v3.0.5)
 
-## [v3.0.4](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.4) (2014-08-06)
+## [v3.0.4](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.4) (2014-08-06)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.3...v3.0.4)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.3...v3.0.4)
 
-## [v3.0.3](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.3) (2014-07-31)
+## [v3.0.3](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.3) (2014-07-31)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v3.0.2...v3.0.3)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v3.0.2...v3.0.3)
 
-## [v3.0.2](https://github.com/subjectsplus/SubjectsPlus/tree/v3.0.2) (2014-07-24)
+## [v3.0.2](https://github.com/Subjectsplus/subjectsplus/tree/v3.0.2) (2014-07-24)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v2.1...v3.0.2)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v2.1...v3.0.2)
 
 **Implemented enhancements:**
 
@@ -945,21 +949,21 @@
 - Show pluslet boxes that are linked with a record in the A-Z List [\#16](https://github.com/subjectsplus/SubjectsPlus/issues/16)
 - SP-specific icons for FAQ WYSIWYG Box [\#14](https://github.com/subjectsplus/SubjectsPlus/issues/14)
 
-## [v2.1](https://github.com/subjectsplus/SubjectsPlus/tree/v2.1) (2014-01-31)
+## [v2.1](https://github.com/Subjectsplus/subjectsplus/tree/v2.1) (2014-01-31)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v2.0.1...v2.1)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v2.0.1...v2.1)
 
-## [v2.0.1](https://github.com/subjectsplus/SubjectsPlus/tree/v2.0.1) (2013-04-30)
+## [v2.0.1](https://github.com/Subjectsplus/subjectsplus/tree/v2.0.1) (2013-04-30)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v2.0...v2.0.1)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v2.0...v2.0.1)
 
-## [v2.0](https://github.com/subjectsplus/SubjectsPlus/tree/v2.0) (2013-04-08)
+## [v2.0](https://github.com/Subjectsplus/subjectsplus/tree/v2.0) (2013-04-08)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v2.0beta...v2.0)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/v2.0beta...v2.0)
 
-## [v2.0beta](https://github.com/subjectsplus/SubjectsPlus/tree/v2.0beta) (2013-03-07)
+## [v2.0beta](https://github.com/Subjectsplus/subjectsplus/tree/v2.0beta) (2013-03-07)
 
-[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/6e47cc666c27ed8a5263828c9020adddcbc5c595...v2.0beta)
+[Full Changelog](https://github.com/Subjectsplus/subjectsplus/compare/6e47cc666c27ed8a5263828c9020adddcbc5c595...v2.0beta)
 
 
 
