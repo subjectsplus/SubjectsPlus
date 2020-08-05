@@ -680,7 +680,7 @@
 												</div>
 											</li>
 											<li class="mm-lib">
-												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/architecture-lib-sm.jpg" alt="Architecture Library" class="mm-lib-img d-none d-lg-inline-block">
+												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/architecture-lib-sm2.jpg" alt="Architecture Library" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
 													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/architecture/index.html">Architecture Research Center (ARC)</a>
 													<div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/architecture/hours.html"><span data-calendar="architecture"></span></a></div>
