@@ -93,6 +93,85 @@
         </script>
     </div>
 </div>
+<?php
+$header_type = isset($header_type) ? $header_type : null;
+if (is_null($header_type)
+    && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
+    && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
+    ?>
+	<div class="key-messaging-desktop">
+		<!--Key messaging desktop-->
+		<!--key messaging area-->
+		<div id="keyMessagingArea" style="display: none;">
+			<div class="container">
+				<div class="row no-gutters">
+					<div class="col-sm-11 col-lg-5 col-xl-4 order-sm-first icons-section">
+						<p class="heading">Fall 2020: Book a Library Seat</p>
+						<ul class="list-unstyled d-flex flex-row flex-nowrap icons-area">
+							<li class="icon-holder">
+								<a class="default no-decoration" href="https://www.library.miami.edu/seat">
+									<i class="far fa-file-alt"></i>
+									<p><span class="icon-short-label">Online</span><br/>
+										<span class="icon-highlight">Booking</span></p>
+								</a>
+							</li>
+							<li class="icon-holder">
+								<a class="default no-decoration" href="https://libcal.miami.edu/r/checkin">
+									<img src="https://www.library.miami.edu/assets/common-images/special-icons/mobile-code.svg" alt="Mobile code icon" />
+									<p><span class="icon-short-label">Online</span><br/>
+										<span class="icon-highlight">Check-In</span></p>
+								</a>
+							</li>
+							<li class="icon-holder">
+								<i class="fas fa-ban"></i>
+								<p>Not Allowed<br/>
+									<span class="icon-highlight">Food/Drink</span></p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-11 col-sm-12 col-lg-6 col-xl-7 order-sm-3 order-lg-2 text-section">
+						<ul class="list-unstyled d-md-flex flex-md-row flex-md-nowrap text-holder">
+							<li>
+								<p class="heading"><a href="https://www.library.miami.edu/online-services" class="default">Online Services</a></p>
+								<p>Access library content, research help, teaching support, course reserves & more</p>
+							</li>
+							<li>
+								<p class="heading"><a href="https://www.library.miami.edu/find/request-materials.html" class="default">Request Materials</a></p>
+								<p>Print collections available via pick-up service and Interlibrary Loan</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-1 order-sm-2 order-lg-last close-column">
+						<div class="close-message-panel">
+							<div class="close-message d-none" title="Close"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+            $( function(){
+                // Move messaging area based on viewport
+                function moveKeyMessaging() {
+                    var area = $('#keyMessagingArea');
+                    var viewPortWidth = window.innerWidth;
+                    if (viewPortWidth < 990) {
+                        $('.key-messaging-mobile').append(area);
+                    }
+                    else {
+                        $('.key-messaging-desktop').append(area);
+                    }
+                }
+
+                moveKeyMessaging();
+                $( window ).resize(function() {
+                    moveKeyMessaging();
+                });
+            });
+		</script>
+	</div>
+<?php endif; ?>
 <nav class="navbar-expand-lg site-navbar-slim" style="background-color:#3a4955;">
     <div class="container position-relative">
         <a class="navbar-brand" href="https://www.library.miami.edu">
@@ -116,8 +195,8 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="collapse navbar-collapse" id="siteNavigation" data-set="bs">
+	<div class="container">
+		<div class="collapse navbar-collapse" id="siteNavigation" data-set="bs">
 			<ul class="navbar-nav site-nav js-append-around">
 				<li class="nav-item active d-inline-block d-lg-none">
 					<a class="nav-link no-decoration" href="#"><i class="fas fa-home"></i> Home</a>
@@ -147,9 +226,6 @@
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Renew your Books (My Account)
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide (Richter)
 												</a></li>
 
 										</ul>
@@ -229,9 +305,16 @@
 										<h5>Non-Book Materials</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-											<li><a class="dropdown-item no-decoration" href="https://emuseum1.as.miami.edu/collections">Lowe Art Museum Collection</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/games-maps.html">Maps, Games & more</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/Newspapers">Newspaper Subscriptions</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://emuseum1.as.miami.edu/collections">Lowe Art Museum Collection
+												</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/games-maps.html">Maps, Games & more
+												</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/Newspapers">Newspaper Subscriptions
+												</a></li>
+
 										</ul>
 
 
@@ -239,7 +322,9 @@
 										<h5>Related Resources</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+
+											<li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/online-services">Online Services
+													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/borrowing.html">Access & Borrowing Policies
 												</a></li>
@@ -332,25 +417,37 @@
 										<h5>Analyze Data</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/gis">Geospatial Data (GIS)</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services
+												</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/gis">Geospatial Data (GIS)
+												</a></li>
+
 										</ul>
+
 
 
 										<h5>Organize & Design</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/citation-help.html">Citation Management Tools</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/citation-help.html">Citation Management Tools
+												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Management Strategies</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Management Strategies
+												</a></li>
+
 										</ul>
+
+
 
 										<h5>Write</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
 											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-lg-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
+
 										</ul>
 
 									</div>
@@ -374,7 +471,7 @@
 
 
 
-										<h5>Apply for Fellowships</h5>
+										<h5>Fellowships</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
@@ -383,12 +480,17 @@
 
 										</ul>
 
-                                        <h5>Work from Home</h5>
-                                        <hr align="left" class="hr-decoration">
-                                        <ul>
 
-                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
-                                        </ul>
+
+										<h5>Research from Home</h5>
+										<hr align="left" class="hr-decoration">
+										<ul>
+
+											<li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/online-services">Online Services
+													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+
+										</ul>
+
 
 									</div>
 								</div>
@@ -428,7 +530,8 @@
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services</a></li>
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services
+														</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab
 														</a></li>
@@ -442,7 +545,8 @@
 													<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
 														</a></li>
 
-                                                    <li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs</a></li>
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs
+														</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab
 														</a></li>
@@ -558,12 +662,6 @@
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/rsmas-room-reservations.html">Marine & Atmospheric Library Rooms
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/music-study">Music Library Rooms
-												</a></li>
-
 										</ul>
 
 									</div>
@@ -574,7 +672,7 @@
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://libcal.miami.edu/booking/richter-study">Reserve Study Room
+											<li><a class="dropdown-item no-decoration cta" href="https://sp.library.miami.edu/subjects/book-seat">Book a Library Seat
 													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/graduate-study.html">Graduate Study Areas
@@ -632,17 +730,23 @@
 										<h5>Technology</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+
+											<li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/online-services">Online Services
+													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/computers.html">Computers
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/computers.html">Computers & Software
+												</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/library-laptop-lending-program.html">Laptop Lending Program
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/printing.html">Printing, Copying & Scanning
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/computers.html">Software
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/remote-labs.html">Remote Labs
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk
@@ -905,7 +1009,12 @@
 										<h5>Information For...</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-                                            <li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/about/remote-services.html">Remote Services<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+
+											<li><a class="dropdown-item no-decoration cta" href="https://www.library.miami.edu/online-services">Online Services
+
+													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i>
+												</a></li>
+
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/alumnus.html">Alumni
 												</a></li>
 
@@ -951,9 +1060,6 @@
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/maps-directions.html">Maps & Directions
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/stack-tower-guide.html">Stack Tower Guide (Richter)
-														</a></li>
-
 												</ul>
 
 											</div>
@@ -968,8 +1074,8 @@
 					</div>
 				</li>
 			</ul>
-        </div>
-    </div>
+		</div>
+	</div>
     <div class="mega-menu account-dropdown" aria-labelledby="dropdown-accounts">
         <div class="section">
             <div class="container">

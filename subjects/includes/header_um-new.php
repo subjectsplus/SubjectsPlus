@@ -58,4 +58,12 @@
 
     <!-- Main Content-->
     <div class="body-slim">
+        <?php
+        $header_type = isset($header_type) ? $header_type : null;
+        if (is_null($header_type)
+            && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
+            && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
+            ?>
+            <div class="key-messaging-mobile d-lg-none"><!--Key messaging mobile--></div>
+        <?php endif; ?>
         <main>
