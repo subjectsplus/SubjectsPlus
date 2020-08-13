@@ -26,10 +26,13 @@
     });
 </script>
 
+<script>
+    dataLayer = [];
+</script>
+
 <!-- Google Analytics Tag Manager Script Code-->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        dataLayer = [];
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
@@ -42,7 +45,7 @@
             j.src =
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', dataLayer, '<?php print $google_tag_manager; ?>');
+        })(window, document, 'script', 'dataLayer', '<?php print $google_tag_manager; ?>');
     });
 </script>
 <!-- End Google Tag Manager -->
