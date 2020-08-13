@@ -10,7 +10,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var uaCode = $('#google-analytics-ua').attr('data-uacode');
-        //console.log(uaCode);
+        // console.log(uaCode);
 
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -34,6 +34,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         dataLayer = [];
         var gaTagManager = $('#google_tag_manager').attr('data-tag-manager');
+        // console.log(gaTagManager);
 
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -48,7 +49,8 @@
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', dataLayer, gaTagManager);
-    });</script>
+    });
+</script>
 <!-- End Google Tag Manager -->
 
 
