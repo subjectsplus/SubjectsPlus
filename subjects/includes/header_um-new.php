@@ -19,10 +19,6 @@
     global $google_analytics_ua;
     global $google_tag_manager;
     if( isset($google_analytics_ua) && !empty($google_analytics_ua) ) {
-
-        echo "<noscript id='google-analytics-ua' style='visibility: hidden;' data-uacode='{$google_analytics_ua}'></noscript>";
-        echo "<noscript id='google_tag_manager' style='visibility: hidden;' data-tag-manager='{$google_tag_manager}'></noscript>";
-
         if( file_exists('includes/google-analytics-tag-manager.php') ) {
             include_once ('includes/google-analytics-tag-manager.php');
         }

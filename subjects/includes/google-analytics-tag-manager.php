@@ -9,9 +9,6 @@
 <!-- Google Analytics Tracker Script Code-->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var uaCode = $('#google-analytics-ua').attr('data-uacode');
-        // console.log(uaCode);
-
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -24,7 +21,7 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', uaCode, 'auto');
+        ga('create', '<?php print $google_analytics_ua; ?>', 'auto');
         ga('send', 'pageview');
     });
 </script>
@@ -33,9 +30,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         dataLayer = [];
-        var gaTagManager = $('#google_tag_manager').attr('data-tag-manager');
-        // console.log(gaTagManager);
-
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
@@ -48,7 +42,7 @@
             j.src =
                 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', dataLayer, gaTagManager);
+        })(window, document, 'script', dataLayer, '<?php print $google_tag_manager; ?>');
     });
 </script>
 <!-- End Google Tag Manager -->
