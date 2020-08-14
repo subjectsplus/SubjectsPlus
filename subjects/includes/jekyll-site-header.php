@@ -110,21 +110,21 @@ if (is_null($header_type)
 						<ul class="list-unstyled d-flex flex-row flex-nowrap icons-area">
 							<li class="icon-holder">
 								<a class="default no-decoration" href="https://www.library.miami.edu/seat">
-									<i class="far fa-file-alt"></i>
+									<img src="https://www.library.miami.edu/assets/common-images/special-icons/form-file-icon.svg" alt="Form file icon" class="form-file-icon" />
 									<p><span class="icon-short-label">Online</span><br/>
 										<span class="icon-highlight">Booking</span></p>
 								</a>
 							</li>
 							<li class="icon-holder">
 								<a class="default no-decoration" href="https://libcal.miami.edu/r/checkin">
-									<img src="https://www.library.miami.edu/assets/common-images/special-icons/mobile-code.svg" alt="Mobile code icon" />
+									<img src="https://www.library.miami.edu/assets/common-images/special-icons/mobile-code.svg" alt="Mobile code icon" class="mobile-code-icon" />
 									<p><span class="icon-short-label">Online</span><br/>
 										<span class="icon-highlight">Check-In</span></p>
 								</a>
 							</li>
 							<li class="icon-holder">
-								<i class="fas fa-ban"></i>
-								<p>Not Allowed<br/>
+								<img src="https://www.library.miami.edu/assets/common-images/special-icons/ban-icon.svg" alt="Ban icon" class="ban-icon" />
+								<p style="vertical-align: super;">Not Allowed<br/>
 									<span class="icon-highlight">Food/Drink</span></p>
 							</li>
 						</ul>
