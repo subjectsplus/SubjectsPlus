@@ -18,17 +18,15 @@
     <?php
     global $google_analytics_ua;
     global $google_tag_manager;
-    if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
-
-        echo "<div id='google-analytics-ua' style='visibility: hidden;' data-uacode='{$google_analytics_ua}'></div>";
-        echo "<div id='google_tag_manager' style='visibility: hidden;' data-tag-manager='{$google_tag_manager}'></div>";
-
+    if( isset($google_analytics_ua) && !empty($google_analytics_ua) ) {
         if( file_exists('includes/google-analytics-tag-manager.php') ) {
-            include_once ('google-analytics-tag-manager.php');
+            include_once ('includes/google-analytics-tag-manager.php');
         }
     }
     ?>
+
 </head>
+
 <body>
 
 <!-- Vendor Scripts-->
@@ -58,4 +56,12 @@
 
     <!-- Main Content-->
     <div class="body-slim">
+        <?php
+        $header_type = isset($header_type) ? $header_type : null;
+        if (is_null($header_type)
+            && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
+            && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
+            ?>
+            <div class="key-messaging-mobile d-lg-none"><!--Key messaging mobile--></div>
+        <?php endif; ?>
         <main>

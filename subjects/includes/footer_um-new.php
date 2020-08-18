@@ -10,9 +10,9 @@
 <?php include("includes/jekyll-site-footer.php"); ?>
 
 <!--container for side navigation contents-->
-<div class="c-offcanvas is-hidden" id="left">
+<div class="c-offcanvas is-hidden slim" id="left">
     <div class="navbar mobile">
-        <div class="offcanvas-nav d-block d-xl-none" data-set="bs"></div>
+        <div class="offcanvas-nav d-block d-lg-none" data-set="bs"></div>
     </div>
 </div>
 

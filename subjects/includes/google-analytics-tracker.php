@@ -10,12 +10,8 @@
 
 <!--GA Tracker Code-->
 <script type="text/javascript">
-
-    var uaCode = $('#google-analytics-ua').attr('data-uacode');
-    //console.log(uaCode);
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', uaCode]);
+   var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '<?php print $google_analytics_ua; ?>']);
     _gaq.push(['_trackPageview']);
 
     (function() {

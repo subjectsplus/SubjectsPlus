@@ -56,11 +56,8 @@ $v2styles = TRUE;
     <?php
     global $google_analytics_ua;
     if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
-
-        echo "<div id='google-analytics-ua' style='visibility: hidden;' data-uacode='{$google_analytics_ua}'></div>";
-
         if( file_exists('includes/google-analytics-tracker.php') ) {
-            include_once ('google-analytics-tracker.php');
+            include_once ('includes/google-analytics-tracker.php');
         }
     }
     ?>
