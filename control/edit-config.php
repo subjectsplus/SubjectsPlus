@@ -1123,6 +1123,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
             _("This option sets the width for use with LibraryH3lp")
         ),
 
+        "exlibris_api_key" => array(
+            _( 'Ex Libris API Key' ),
+            _( 'Add your Ex Libris API Key for use with the Featured List Pluslet.' ),
+            "string",
+            "api",
+            "large",
+            "",
+            _("This option sets the Ex Libris API Key for use with the Featured List Pluslet")
+        ),
+
 	);
 
 	//set config options
