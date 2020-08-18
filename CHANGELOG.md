@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
+
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5.1...HEAD)
+
+**Implemented enhancements:**
+
+- Add config var for Ex Libris API Key [\#1440](https://github.com/subjectsplus/SubjectsPlus/issues/1440)
+
+**Merged pull requests:**
+
+- config form and edit-config for ex libris api key for use with featur… [\#1441](https://github.com/subjectsplus/SubjectsPlus/pull/1441) ([cgb37](https://github.com/cgb37))
+
 ## [v4.5.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.5.1) (2020-07-10)
 
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5...v4.5.1)
