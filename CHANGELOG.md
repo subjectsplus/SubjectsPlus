@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- Afc fix accents linked list [\#1443](https://github.com/subjectsplus/SubjectsPlus/pull/1443) ([abelfacenda](https://github.com/abelfacenda))
 - config form and edit-config for ex libris api key for use with featur… [\#1441](https://github.com/subjectsplus/SubjectsPlus/pull/1441) ([cgb37](https://github.com/cgb37))
 
 ## [v4.5.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.5.1) (2020-07-10)
