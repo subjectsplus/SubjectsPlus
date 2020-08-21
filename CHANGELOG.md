@@ -8,6 +8,10 @@
 
 - Add config var for Ex Libris API Key [\#1440](https://github.com/subjectsplus/SubjectsPlus/issues/1440)
 
+**Fixed bugs:**
+
+- Accent marks are not working  [\#1442](https://github.com/subjectsplus/SubjectsPlus/issues/1442)
+
 **Merged pull requests:**
 
 - Afc fix accents linked list [\#1443](https://github.com/subjectsplus/SubjectsPlus/pull/1443) ([abelfacenda](https://github.com/abelfacenda))
