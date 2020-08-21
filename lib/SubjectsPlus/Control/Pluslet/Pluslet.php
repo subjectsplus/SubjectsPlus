@@ -703,7 +703,6 @@ class Pluslet {
             return;
         }
 
-//	    $tokenized = utf8_decode($tokenized);
 	    $this->_body = $tokenized;
     }
 
