@@ -12,6 +12,10 @@
 
 - Accent marks are not working  [\#1442](https://github.com/subjectsplus/SubjectsPlus/issues/1442)
 
+**Closed issues:**
+
+- about database connection problem [\#1444](https://github.com/subjectsplus/SubjectsPlus/issues/1444)
+
 **Merged pull requests:**
 
 - Afc fix accents linked list [\#1443](https://github.com/subjectsplus/SubjectsPlus/pull/1443) ([abelfacenda](https://github.com/abelfacenda))
