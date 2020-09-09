@@ -589,9 +589,14 @@ $mapbox_home_coords = "";
 ////////////////////////////////////////////
 // Chat config vars: LibraryH3lp
 ////////////////////////////////////////////
-$chat_jid = "richterlibrarys-queue@chat.libraryh3lp.com";
-$chat_src = "https://libraryh3lp.com/chat/richterlibrarys-queue@chat.libraryh3lp.com?skin=31992&amp;identity=Richter%20Reference";
-$chat_height = "325px";
-$chat_width = "100%";
+$chat_jid = "";
+$chat_src = "";
+$chat_height = "";
+$chat_width = "";
+
+////////////////////////////////////////////
+// Ex Libris API Key
+////////////////////////////////////////////
+$exlibris_api_key = "";
 
 ?>

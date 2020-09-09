@@ -506,7 +506,6 @@ class Pluslet {
 
                             foreach ($result as $myrow) {
 
-
                                 // eliminate final line breaks -- offset fixed 11/15/2011 agd
                                 $myrow[6] = preg_replace('/(<br \/>)+/', '', $myrow[6]);
                                 // See if it's a web format
@@ -551,6 +550,7 @@ class Pluslet {
                                     }
 
                                     if ($show_desc == 1) {
+
                                         // if we know the subject_id, good; for public, must look up
                                         $subject_id = '';
                                         if (isset($_GET["subject_id"])) {
@@ -703,7 +703,6 @@ class Pluslet {
             return;
         }
 
-	    $tokenized = utf8_decode($tokenized);
 	    $this->_body = $tokenized;
     }
 

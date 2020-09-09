@@ -1,5 +1,26 @@
 # Changelog
 
+## [Unreleased](https://github.com/subjectsplus/SubjectsPlus/tree/HEAD)
+
+[Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5.1...HEAD)
+
+**Implemented enhancements:**
+
+- Add config var for Ex Libris API Key [\#1440](https://github.com/subjectsplus/SubjectsPlus/issues/1440)
+
+**Fixed bugs:**
+
+- Accent marks are not working  [\#1442](https://github.com/subjectsplus/SubjectsPlus/issues/1442)
+
+**Closed issues:**
+
+- about database connection problem [\#1444](https://github.com/subjectsplus/SubjectsPlus/issues/1444)
+
+**Merged pull requests:**
+
+- Afc fix accents linked list [\#1443](https://github.com/subjectsplus/SubjectsPlus/pull/1443) ([abelfacenda](https://github.com/abelfacenda))
+- config form and edit-config for ex libris api key for use with featur… [\#1441](https://github.com/subjectsplus/SubjectsPlus/pull/1441) ([cgb37](https://github.com/cgb37))
+
 ## [v4.5.1](https://github.com/subjectsplus/SubjectsPlus/tree/v4.5.1) (2020-07-10)
 
 [Full Changelog](https://github.com/subjectsplus/SubjectsPlus/compare/v4.5...v4.5.1)
