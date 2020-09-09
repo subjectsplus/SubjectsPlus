@@ -287,7 +287,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/chc/index.html">Cuban Heritage Collection
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://merrick.library.miami.edu/cdm/">Digital Collections
+											<li><a class="dropdown-item no-decoration" href="https://digitalcollections.library.miami.edu/">Digital Collections
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/index.html">Special Collections
@@ -842,7 +842,7 @@ if (is_null($header_type)
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/digital-collections-sm.jpg" alt="Digital Collections" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="http://merrick.library.miami.edu/">Digital Collections</a>
+													<a class="dropdown-item no-decoration" href="https://digitalcollections.library.miami.edu/">Digital Collections</a>
 													<div class="mm-lib-time">Online</div>
 												</div>
 											</li>
@@ -883,7 +883,7 @@ if (is_null($header_type)
 
                                                 ['http://scholar.library.miami.edu/pozo/'],
 
-                                                ['http://merrick.library.miami.edu/specialCollections/asm0341/']
+                                                ['https://digitalcollections.library.miami.edu/digital/collection/asm0341']
 
                                             ];
                                             var cardCollectionTitle = [
@@ -919,7 +919,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://atom.library.miami.edu/">Archival Finding Aids
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="http://merrick.library.miami.edu/digitalprojects/exhibits.php">Digital Exhibits
+											<li><a class="dropdown-item no-decoration" href="https://digitalcollections.library.miami.edu/digital/custom/digital-exhibits">Digital Exhibits
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/oral-histories.html">Oral Histories
