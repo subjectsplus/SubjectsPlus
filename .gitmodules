@@ -1,6 +1,0 @@
-[submodule "subjects/themes/um-new"]
-	path = subjects/themes/um-new
-	url = git@bitbucket.org:umiamiwet/um-new.git
-[submodule "subjects/themes/med"]
-	path = subjects/themes/med
-	url = git@bitbucket.org:umiamiwet/med.git
