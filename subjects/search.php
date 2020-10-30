@@ -53,7 +53,7 @@ if (isset($_POST["searchterm"])) {
 		    break;
 
 		  case 'Subject Guide':
-		    $guides_results[] = "<a href='guide.php?subject_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+		    $guides_results[] = "<a href='guide.php?id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
 		    break;
 
 		  case 'FAQ':
