@@ -159,3 +159,4 @@ nul
 control/lti_controller/log.txt
 
 lib/HTMLPurifier/HTMLPurifier/DefinitionCache/
+/vendor/
