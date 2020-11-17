@@ -18,7 +18,7 @@ jobs:
     name: Generate changelog for master branch
     steps:
       - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@main
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
