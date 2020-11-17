@@ -21,7 +21,6 @@ jobs:
       - name: Create Changelogs
         id: changelogs
         uses: heineiuo/create-changelogs@v0.2.8
-        release_type: prerelease
 
       - name: Create Release
         id: create_release
