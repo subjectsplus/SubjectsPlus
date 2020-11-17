@@ -733,6 +733,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
+        "worldcat_search_url" => array(
+            _( "WorldCat Search Pluslet URL" ),
+            _( "URL that any search from a WorldCat Search Pluslet will use." ),
+            "string",
+            "catalog",
+            "medium",
+            "",
+            ""
+        ),
+
 		"CKBasePath" => array(
 			_( "Base Path for CKEditor" ),
 			_( "Path to CKEditor files appended to base URL" ),
