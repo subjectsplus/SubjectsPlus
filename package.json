@@ -1,5 +1,5 @@
 {
-  "name": "SubjectsPlus",
+  "name": "subjectsplus",
   "version": "4.5.2",
   "description": "SubjectsPlus is a a LAMP/WAMP application that allows you to manage a number of interrelated parts of a library website.",
   "main": "index.js",
@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/subjectsplus/SubjectsPlus#readme",
   "devDependencies": {
-    "auto-changelog": "^1.11.0",
-    "release-it": "^10.0.7"
+    "auto-changelog": "^1.11.0"
   }
 }
