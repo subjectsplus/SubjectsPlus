@@ -19,21 +19,19 @@ jobs:
       - run: |
         git fetch --prune --unshallow --tags
 
-      - name: Create changelogs
+      - name: Create Changelogs
         id: changelogs
-        uses: heineiuo/create-changelogs@master
+        uses: heineiuo/create-changelogs@v0.2.8
         release_type: prerelease
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           body: ${{ steps.changelogs.outputs.changelogs }}
           draft: true
           prerelease: ${{ steps.changelogs.outputs.release_type == 'prerelease' }}
-
-
