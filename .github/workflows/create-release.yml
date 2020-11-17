@@ -1,4 +1,6 @@
 on:
+  workflow_dispatch:
+
   push:
     # Sequence of patterns matched against refs/tags
     tags:
@@ -13,16 +15,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - run: |
+        git fetch --prune --unshallow --tags
+
+      - name: Create changelogs
+        id: changelogs
+        uses: heineiuo/create-changelogs@master
+        release_type: prerelease
+
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - See Changelog.md
-          draft: false
-          prerelease: false
+          release_name: ${{ github.ref }}
+          body: ${{ steps.changelogs.outputs.changelogs }}
+          draft: true
+          prerelease: ${{ steps.changelogs.outputs.release_type == 'prerelease' }}
+
+
