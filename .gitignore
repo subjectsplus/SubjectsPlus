@@ -151,8 +151,7 @@ nul
 public.iml
 nul
 /node_modules/
-/subjects/.htaccess
-/api/.htaccess
+
 /subjects/themes/med/
 /subjects/themes/um-new/
 
@@ -160,3 +159,6 @@ control/lti_controller/log.txt
 
 lib/HTMLPurifier/HTMLPurifier/DefinitionCache/
 /vendor/
+.htaccess
+subjects/.htaccess
+api/.htaccess
