@@ -384,10 +384,8 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/index.php">Research Guides
 												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/staff.php?letter=Subject%20Librarians">Subject Librarians
 												</a></li>
-
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/workshops-tutorials.html">Workshops
 												</a></li>
 
@@ -428,7 +426,7 @@ if (is_null($header_type)
 
 
 
-										<h5>Organize & Design</h5>
+										<h5>Organize, Design, Write</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
@@ -437,19 +435,11 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Management Strategies
 												</a></li>
-
-										</ul>
-
-
-
-										<h5>Write</h5>
-										<hr align="left" class="hr-decoration">
-										<ul>
-
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
+												</a></li>
 											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-lg-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
 
 										</ul>
-
 									</div>
 
 									<div class="col-12 col-lg-4">
