@@ -106,7 +106,7 @@ if (is_null($header_type)
 			<div class="container">
 				<div class="row no-gutters">
 					<div class="col-sm-11 col-lg-5 col-xl-4 order-sm-first icons-section">
-						<p class="heading">Fall 2020: Book a Library Seat</p>
+						<p class="heading">Spring 2021: Book a Library Seat</p>
 						<ul class="list-unstyled d-flex flex-row flex-nowrap icons-area">
 							<li class="icon-holder">
 								<a class="default no-decoration" href="https://www.library.miami.edu/seat">
