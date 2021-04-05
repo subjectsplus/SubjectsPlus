@@ -13,8 +13,10 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/video.php"); exit;}
+$this_fname = "video.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
+
 
 $use_jquery = array("colorbox");
 
@@ -160,7 +162,7 @@ if ($num_rows) {
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
+include(theme_file("includes/header.php", $subjects_theme));
 ?>
 <br />
 <div class="pure-g">
@@ -203,7 +205,7 @@ include("includes/header.php");
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 ?>
 
 <script type="text/javascript" language="javascript">

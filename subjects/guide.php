@@ -19,12 +19,9 @@ include("../control/includes/autoloader.php"); // need to use this if header not
 include("../control/includes/config.php");
 include("../control/includes/functions.php");
 
-
-
-if ( (isset( $subjects_theme )) && ( ($subjects_theme == 'um-new' || $subjects_theme == 'splux') ) ) {
-	include( "themes/$subjects_theme/guide.php" );
-	exit;
-}
+$this_fname = "guide.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
 $db = new Querier;
 
@@ -159,27 +156,9 @@ if ($check_this) {
 
 $page_title = $subject_name;
 
-// Do we have an alternate header?
-if (isset ($header_type) && $header_type != 'default') {
-    if( file_exists("includes/header_$header_type.php") )
-    {
-        include("includes/header_$header_type.php");
-    }
-    else
-    {
-        include("includes/header.php");
-    }
-} else {
-    include("includes/header.php");
-}
+// Include header
+include(theme_file("includes/header.php", $subjects_theme, $header_type));
 
-/*if (in_array($_REQUEST["subject"], $chcGuides)) {
-    include("includes/header_chc.php");
-    $our_site="chc";
-} else {
-    include("includes/header_um.php");
-    $our_site="um";
-}*/
 
 // do we have more than one tab?
 if (count($all_tabs) > 1) {
@@ -571,16 +550,5 @@ cloneView.init();
 // Load footer file
 ///////////////////////////
 
-// Do we have an alternate footer?
-if (isset ($header_type) && $header_type != 'default') {
-    if( file_exists("includes/footer_$header_type.php") )
-    {
-        include("includes/footer_$header_type.php");
-    }
-    else
-    {
-        include("includes/footer.php");
-    }
-} else {
-    include("includes/footer.php");
-}
+include(theme_file("includes/footer.php", $subjects_theme, $header_type));
+
