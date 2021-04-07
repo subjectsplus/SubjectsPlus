@@ -563,7 +563,7 @@ function blunDer( $message, $type = 1 ) {
 function theme_file( $filename, $subjects_theme = null, $header_type = null) {
 	// This works because $header_type is currently only used on files directly in includes/
 	if ( isset($header_type) && $header_type != "" && $header_type != "default" ) {
-		$guide_fname = preg_replace( '.php$', "_$header_type.php", $filename);
+		$guide_fname = preg_replace( '/\.php$/', "_$header_type.php", $filename);
 		if ( file_exists($guide_fname) ) return $guide_fname;
 	}
 
