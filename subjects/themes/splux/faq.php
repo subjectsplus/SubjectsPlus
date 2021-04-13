@@ -141,7 +141,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "FAQs";
 }
 
-include( "includes/header_splux.php" );
+//include( "../../includes/header_splux.php" );
 
 if ($displaytype == "search") {
 

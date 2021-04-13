@@ -1,5 +1,5 @@
 <?php
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_TOC
@@ -9,7 +9,7 @@ require_once("Pluslet.php");
  *   @date Feb 2011
  *   @todo
  */
-class Pluslet_TOC extends Pluslet {
+class TOC extends \SubjectsPlus\Control\Pluslet {
 
   protected $_ticked_items = array();
 
@@ -38,7 +38,7 @@ class Pluslet_TOC extends Pluslet {
 
     // Get pluslets associated with this
 
-    $querier = new Querier();
+    $querier = new \SubjectsPlus\Control\Querier();
     $connection = $querier->getConnection();
 
     $statement = $connection->prepare( "SELECT p.pluslet_id AS id, p.title, p.body, ps.pcolumn, p.type, p.extra,t.tab_index AS parent_id, t.label AS name

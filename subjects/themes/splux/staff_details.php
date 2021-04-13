@@ -41,8 +41,7 @@ $statement = $connection->prepare("SELECT s.staff_id, lname, fname, title, tel, 
 FROM staff s
 LEFT JOIN department d on s.department_id = d.department_id
 LEFT JOIN staff_subject ss ON s.staff_id = ss.staff_id
-WHERE s.email LIKE ?
-GROUP BY s.lname");
+WHERE s.email LIKE ?");
 
 $statement->execute(array("$check_this@%"));
 $staffmem = $statement->fetchAll();
@@ -119,7 +118,7 @@ $display = $info;
 $page_title = $page_title_prefix . $fullname;
 
 //header
-include( "includes/header_splux.php" );
+//include( "includes/header_splux.php" );
 ?>
 
 <div class="section-minimal-nosearch">
@@ -150,4 +149,4 @@ include( "includes/header_splux.php" );
 
 <?php
 // Footer
-include( "includes/footer_splux.php" );  ?>
+//include( "includes/footer_splux.php" );  ?>

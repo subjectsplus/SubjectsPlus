@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: XjSlelVHauPKOJR
+      MYSQL_DATABASE: subjectsplus
+      MYSQL_USER: subjectsplusdev
+      MYSQL_PASSWORD: devpass
+    ports:
+      - "9906:3306"
+  test_db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: XjSlelVHauPKOJR
+      MYSQL_DATABASE: subjectsplus_test
+      MYSQL_USER: subjectsplusdev
+      MYSQL_PASSWORD: devpass
+      MYSQL_TCPO_PORT: 3307
+  web:
+    build: .
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - "8100:80"
+    stdin_open: true
+    tty: true
+    environment:
+      api_key: key
+      salt: bnI0Q2XmLPhlvF2
+      sp_albany_contact: test@example.com
+      sp_bc_contact: test@example.com
+      sp_hoc_contact: test@example.com
+      sp_base_url: http://localhost:8100/
+      sp_db_hname: db
+      sp_db_name: subjectsplus
+      sp_db_pword: devpass
+      sp_db_uname: subjectsplusdev

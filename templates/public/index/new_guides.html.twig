@@ -1,0 +1,9 @@
+<h4 class="mt-4">{{ 'New Guides' | trans }}</h4>
+TODO: this guide list should pull dynamically, and have correct links, hopefully symfony's router provides something?
+
+
+<ul>
+{% for guide in newestGuides %}
+<li><a href="{{ path('guidebyShortname', {shortform: guide.shortform}) }}">{{ guide.subject }}</a></li>
+{% endfor %}
+</ul>

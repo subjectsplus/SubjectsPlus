@@ -1,5 +1,5 @@
 <?php
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 /**
  *   @file HTML5Video
@@ -10,7 +10,7 @@ require_once("Pluslet.php");
  *   @todo
  */
 
-class Pluslet_HTML5Video extends Pluslet {
+class HTML5Video extends \SubjectsPlus\Control\Pluslet {
 
     public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);

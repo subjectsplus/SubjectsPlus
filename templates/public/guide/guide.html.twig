@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guide{% endblock %}
+
+
+{% block body %}
+TODO: I18n
+TODO: Add the real title
+<ul class="nav nav-pills">
+    {% for tab in guide %}
+      {{ include('public/guide/tabs/tab.html.twig') }}
+    {% endfor %}
+    </ul>
+    <div class="tab-content">
+      {% for tab in guide %}
+        <div class="tab-pane" id="{{ tab.id}}" role="tabpanel">
+          {% for section in tab.sections %}
+            {% if section.layout == '0-12-0' %}
+              <div class="row">
+            {% elseif section.layout == '6-6-0' %}
+              <div class="row row-cols-2">
+            {% else %}
+              <div class="row row-cols-3">
+            {% endif %}}
+              {% for pluslet in section.pluslets %}
+                <div class="card">
+                  <div class="card-header bg-primary">
+                    {{ pluslet.title }}
+                  </div>
+                  <div class="card-body">
+                    {{ pluslet.body | raw }}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+
+{% endblock %}

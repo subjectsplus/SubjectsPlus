@@ -124,12 +124,13 @@ if ($num_rows) {
 
         // convert seconds into something more friendly
         $item_duration = "";
-        $mins = floor($myrow["duration"] / 60);
+        $raw_duration = $myrow["duration"] ? $myrow["duration"] : 0;
+        $mins = floor($raw_duration / 60);
         if ($mins != 0) {
             $item_duration .= "$mins minutes, ";
         }
 
-        $secs = $myrow["duration"] % 60;
+        $secs = $raw_duration % 60;
         $item_duration .= "$secs seconds";
 
         $display .= "<div class=\"vid_container\">$thumbnail_medium <div class=\"vid-meta\"><h3 class=\"ajax\" href=\"$location\" title=\"Click to play video\">$safe_title</h3><p class=\"runtime\">$item_duration</p></div><a class=\"details_details no-decoration default\"><i class=\"fa fa-info-circle\"></i> More about this video</a>
@@ -142,7 +143,7 @@ if ($num_rows) {
 
 
 // Load header
-include( "includes/header_splux.php" );
+//include( "includes/header_splux.php" );
 ?>
 
 <div class="section-minimal-nosearch">
@@ -173,7 +174,7 @@ include( "includes/header_splux.php" );
 
 <?php
 // Load footer file
-include( "includes/footer_splux.php" ); ?>
+//include( "includes/footer_splux.php" ); ?>
 
 <script>
     $( function(){

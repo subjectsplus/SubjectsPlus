@@ -6,12 +6,12 @@
  * Time: 3:04 PM
  */
 
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once 'Pluslet.php';
 use DOMDocument;
 use DOMXPath;
 
-class Pluslet_LinkList extends Pluslet
+class LinkList extends \SubjectsPlus\Control\Pluslet
 {
 
 

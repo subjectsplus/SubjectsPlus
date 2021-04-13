@@ -9,11 +9,11 @@
  * Class BookList
  */
 
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 
 
-class Pluslet_BookList extends Pluslet
+class BookList extends \SubjectsPlus\Control\Pluslet
 {
 
     public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0, $clone_id='') {

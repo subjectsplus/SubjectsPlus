@@ -34,7 +34,7 @@ $staff_data = new StaffDisplay();
 $display = $staff_data->writeTable($selected_letter);
 
 // header
-include( "includes/header_splux.php" );
+//include( "includes/header_splux.php" );
 ?>
 
 <div class="section-minimal-nosearch">
@@ -96,4 +96,4 @@ include( "includes/header_splux.php" );
 
 <?php
 // Footer
-include( "includes/footer_splux.php" ); ?>
+//include( "includes/footer_splux.php" ); ?>

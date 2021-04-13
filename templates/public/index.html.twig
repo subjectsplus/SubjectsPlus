@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guide{% endblock %}
+
+
+{% block body %}
+
+{% include 'public/index/header.html.twig' %}
+
+{% include 'public/index/searchbar.html.twig' %}
+
+<section class="section section-half-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="pills-container">
+                    <ul class="nav nav-pills justify-content-around justify-content-md-start" id="pills-tab-guides" role="tablist">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link no-decoration default active" id="show-Collection" name="showCollection" data-toggle="pill"
+                        href="#section-Collection" role="tab" aria-controls="section-Collection"
+                        aria-selected="true">{% trans %}Guide Collections{% endtrans %}</a>
+                    </li>
+                    {% for guideType in guideTypes %}
+                        <li class="nav-item">
+                            <a class="nav-link no-decoration default" id="show-How-to" name="showHow-to" data-toggle="pill" href="#section-{{guideType}}"
+                            role="tab" aria-controls="section-How-to" aria-selected="true">{% trans with {'%type%': guideType} %}%type% Guides{% endtrans %}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-content" id="pills-tabContent-guides">
+                </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <h4 class="mb-2">Find an Expert</h4>
+                    <p>Need help? Ask an expert!</p>
+                    <ul class="people-vertical list-unstyled">
+						                    </ul>
+
+                    <div class="text-center mt-3 mb-3 mb-lg-5"><a
+                                href="http://localhost:8100/subjects/staff.php?letter=Subject Librarians"
+                                class="btn btn-default" role="button">See all experts</a></div>
+
+                    <div class="feature-light popular-list p-3 mt-3">
+                        <h4>- New Databases -</h4>
+						<ul>
+<li><a href="https://ezproxy.libweb.linnbenton.edu/login?url=https://www.chronicle.com">Chronicle of Higher Education</a></li>
+</ul>
+                        <a href="databases.php?letter=bytype&type=New_Databases" class="btn btn-default" role="button">See
+                            all</a>
+
+                        {% include 'public/index/new_guides.html.twig' %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+{% endblock %}

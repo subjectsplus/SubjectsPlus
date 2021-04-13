@@ -6,11 +6,11 @@
  * Time: 11:12 AM
  */
 
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 
 
-class Pluslet_Card extends Pluslet
+class Card extends \SubjectsPlus\Control\Pluslet
 {
 
     public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
@@ -23,7 +23,7 @@ class Pluslet_Card extends Pluslet
             $this->_extra = json_decode($this->_extra, true);
         }
 
-        $querier = new Querier();
+        $querier = new \SubjectsPlus\Control\Querier();
         if($this->_pluslet_id != '') {
 
             $qry = "SELECT title FROM pluslet WHERE pluslet_id = {$this->_pluslet_id}";

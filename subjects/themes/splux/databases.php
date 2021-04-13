@@ -218,7 +218,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more informa
 
 // Now we are finally read to display the page
 // Load header file
-include( "includes/header_splux.php" );
+//include( "includes/header_splux.php" );
 
 
 // Our version 2 vs version 3 styles choice

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="tZ.5U7l" resname="New Guides">
+        <source>New Guides</source>
+        <target>Guías nuevas</target>
+      </trans-unit>
+      <trans-unit id="SXQUL_N" resname="Guide Collections">
+        <source>Guide Collections</source>
+        <target>__Guide Collections</target>
+      </trans-unit>
+      <trans-unit id="532_55p" resname="%type% Guides">
+        <source>%type% Guides</source>
+        <target>__%type% Guides</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="VyzXL_u" resname="Guides">
+        <source>Guides</source>
+        <target>Guías</target>
+      </trans-unit>
+      <trans-unit id="YdKv4jS" resname="Databases">
+        <source>Databases</source>
+        <target>Recursos Electrónicos</target>
+      </trans-unit>
+      <trans-unit id="jB2T5Vn" resname="Staff list">
+        <source>Staff list</source>
+        <target>Directorio</target>
+      </trans-unit>
+      <trans-unit id="mFa3Qz_" resname="FAQs">
+        <source>FAQs</source>
+        <target>__FAQs</target>
+      </trans-unit>
+      <trans-unit id="jZTE6Zz" resname="Talkback">
+        <source>Talkback</source>
+        <target>__Talkback</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
