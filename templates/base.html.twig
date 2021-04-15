@@ -10,6 +10,8 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        {{ google_analytics() }}
     </head>
     <body>
         {% include('public/shared/header.html.twig') %}
