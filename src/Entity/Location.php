@@ -97,7 +97,7 @@ class Location
      *
      * @ORM\ManyToOne(targetEntity="Format")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="format", referencedColumnName="format_id")
+     *     @ORM\JoinColumn(name="format", referencedColumnName="format_id")
      * })
      */
     private $format;
@@ -107,7 +107,7 @@ class Location
      *
      * @ORM\ManyToOne(targetEntity="Restrictions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="access_restrictions", referencedColumnName="restrictions_id")
+     *     @ORM\JoinColumn(name="access_restrictions", referencedColumnName="restrictions_id")
      * })
      */
     private $accessRestrictions;
@@ -117,12 +117,12 @@ class Location
      *
      * @ORM\ManyToMany(targetEntity="Title", inversedBy="location")
      * @ORM\JoinTable(name="location_title",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
-     *   }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
+     *     }
      * )
      */
     private $title;

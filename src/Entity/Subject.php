@@ -127,12 +127,12 @@ class Subject
      *
      * @ORM\ManyToMany(targetEntity="Discipline", inversedBy="subject")
      * @ORM\JoinTable(name="subject_discipline",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
-     *   }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="discipline_id", referencedColumnName="discipline_id")
+     *     }
      * )
      */
     private $discipline;

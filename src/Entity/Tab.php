@@ -24,7 +24,7 @@ class Tab
     /**
      * @var string
      *
-     * @ORM\Column(name="label", type="string", length=120, nullable=false, options={"default"="Main"})
+     * @ORM\Column(name="label", type="string", length=120, nullable=false, options={"default": "Main"})
      */
     private $label = 'Main';
 
@@ -45,7 +45,7 @@ class Tab
     /**
      * @var int
      *
-     * @ORM\Column(name="visibility", type="integer", nullable=false, options={"default"="1"})
+     * @ORM\Column(name="visibility", type="integer", nullable=false, options={"default": "1"})
      */
     private $visibility = 1;
 
@@ -75,7 +75,7 @@ class Tab
      *
      * @ORM\ManyToOne(targetEntity="Subject", inversedBy="tabs")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
+     *     @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
      * })
      */
     private $subject;

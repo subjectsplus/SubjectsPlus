@@ -24,7 +24,7 @@ class SubjectSubject
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="date", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $date = 'CURRENT_TIMESTAMP';
 
@@ -33,7 +33,7 @@ class SubjectSubject
      *
      * @ORM\ManyToOne(targetEntity="Subject")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subject_child", referencedColumnName="subject_id")
+     *     @ORM\JoinColumn(name="subject_child", referencedColumnName="subject_id")
      * })
      */
     private $subjectChild;
@@ -43,7 +43,7 @@ class SubjectSubject
      *
      * @ORM\ManyToOne(targetEntity="Subject")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subject_parent", referencedColumnName="subject_id")
+     *     @ORM\JoinColumn(name="subject_parent", referencedColumnName="subject_id")
      * })
      */
     private $subjectParent;

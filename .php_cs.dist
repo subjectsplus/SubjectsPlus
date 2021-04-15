@@ -6,6 +6,8 @@ $finder = (new PhpCsFixer\Finder())
 
 return (new PhpCsFixer\Config())
     ->setRules([
+        '@DoctrineAnnotation' => true,
+        '@PHP80Migration' => true,
         '@Symfony' => true,
     ])
     ->setFinder($finder)

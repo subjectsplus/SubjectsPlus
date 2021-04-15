@@ -31,7 +31,7 @@ class Section
     /**
      * @var string
      *
-     * @ORM\Column(name="layout", type="string", length=255, nullable=false, options={"default"="4-4-4"})
+     * @ORM\Column(name="layout", type="string", length=255, nullable=false, options={"default": "4-4-4"})
      */
     private $layout = '4-4-4';
 
@@ -40,7 +40,7 @@ class Section
      *
      * @ORM\ManyToOne(targetEntity="Tab", inversedBy="sections")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tab_id", referencedColumnName="tab_id")
+     *     @ORM\JoinColumn(name="tab_id", referencedColumnName="tab_id")
      * })
      */
     private $tab;

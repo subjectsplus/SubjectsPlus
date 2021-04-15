@@ -52,7 +52,7 @@ class Talkback
     /**
      * @var string
      *
-     * @ORM\Column(name="display", type="string", length=11, nullable=false, options={"default"="No"})
+     * @ORM\Column(name="display", type="string", length=11, nullable=false, options={"default": "No"})
      */
     private $display = 'No';
 
@@ -66,7 +66,7 @@ class Talkback
     /**
      * @var string|null
      *
-     * @ORM\Column(name="tbtags", type="string", length=255, nullable=true, options={"default"="main"})
+     * @ORM\Column(name="tbtags", type="string", length=255, nullable=true, options={"default": "main"})
      */
     private $tbtags = 'main';
 
@@ -82,7 +82,7 @@ class Talkback
      *
      * @ORM\ManyToOne(targetEntity="Staff")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="a_from", referencedColumnName="staff_id")
+     *     @ORM\JoinColumn(name="a_from", referencedColumnName="staff_id")
      * })
      */
     private $aFrom;

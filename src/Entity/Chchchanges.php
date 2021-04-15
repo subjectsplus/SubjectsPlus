@@ -59,7 +59,7 @@ class Chchchanges
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_added", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="date_added", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $dateAdded = 'CURRENT_TIMESTAMP';
 

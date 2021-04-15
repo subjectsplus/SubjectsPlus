@@ -38,7 +38,7 @@ class Rank
     /**
      * @var bool|null
      *
-     * @ORM\Column(name="dbbysub_active", type="boolean", nullable=true, options={"default"="1"})
+     * @ORM\Column(name="dbbysub_active", type="boolean", nullable=true, options={"default": "1"})
      */
     private $dbbysubActive = true;
 
@@ -47,7 +47,7 @@ class Rank
      *
      * @ORM\ManyToOne(targetEntity="Source")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="source_id", referencedColumnName="source_id")
+     *     @ORM\JoinColumn(name="source_id", referencedColumnName="source_id")
      * })
      */
     private $source;
@@ -57,7 +57,7 @@ class Rank
      *
      * @ORM\ManyToOne(targetEntity="Subject")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
+     *     @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
      * })
      */
     private $subject;
@@ -67,7 +67,7 @@ class Rank
      *
      * @ORM\ManyToOne(targetEntity="Title")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
+     *     @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
      * })
      */
     private $title;

@@ -244,7 +244,7 @@ class Staff
      *
      * @ORM\ManyToOne(targetEntity="UserType")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_type_id", referencedColumnName="user_type_id")
+     *     @ORM\JoinColumn(name="user_type_id", referencedColumnName="user_type_id")
      * })
      */
     private $userType;
@@ -254,12 +254,12 @@ class Staff
      *
      * @ORM\ManyToMany(targetEntity="Subject", inversedBy="staff")
      * @ORM\JoinTable(name="staff_subject",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
-     *   }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
+     *     }
      * )
      */
     private $subject;

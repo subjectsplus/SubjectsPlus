@@ -49,7 +49,7 @@ class PlusletSection
      *
      * @ORM\ManyToOne(targetEntity="Section", inversedBy="plusletSections")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
+     *     @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
      * })
      */
     private $section;

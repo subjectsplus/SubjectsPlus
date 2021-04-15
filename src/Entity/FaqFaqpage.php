@@ -26,7 +26,7 @@ class FaqFaqpage
      *
      * @ORM\ManyToOne(targetEntity="Faq")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="faq_id", referencedColumnName="faq_id")
+     *     @ORM\JoinColumn(name="faq_id", referencedColumnName="faq_id")
      * })
      */
     private $faq;
@@ -36,7 +36,7 @@ class FaqFaqpage
      *
      * @ORM\ManyToOne(targetEntity="Faqpage")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="faqpage_id", referencedColumnName="faqpage_id")
+     *     @ORM\JoinColumn(name="faqpage_id", referencedColumnName="faqpage_id")
      * })
      */
     private $faqpage;

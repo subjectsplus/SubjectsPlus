@@ -22,7 +22,7 @@ class GuideController extends AbstractController
     }
 
     /**
-     * @Route("subjects/{shortform}", name="guidebyShortname", priority=5, requirements={"shortform"="[A-Za-z0-9]+"})
+     * @Route("subjects/{shortform}", name="guidebyShortname", priority=5, requirements={"shortform": "[A-Za-z0-9]+"})
      */
     public function showPublicGuide(string $shortform): Response
     {
