@@ -6,93 +6,18 @@
                 <div class="default-search">
                     <div class="index-search-area">
                             
-   <div id="autoC" class="autoC">
-  		<form action="index.php" method="post" class="pure-form" id="sp_admin_search">
- 		<input type="text" id="quick_search_b" title="Find Guides" size="" name="searchterm" autocomplete="on" placeholder="Find Guides" /> <input type="submit" value="Go"  class="pure-button pure-button-topsearch" id="topsearch_button" name="submitsearch" alt="Search" />
-  		</form>
-	</div><script type="text/javascript">
-
-jQuery(document).ready(function() {
-
- var parents = [];
-
-$.widget("custom.catcomplete", $.ui.autocomplete, {
-  
-_renderMenu: function( ul, items ) {
-      var that = this;
-      pluslet_category = [];
-         
-      currentCategory = "";
-
-      $.each( items, function( index, item ) {
-       
-if (item.content_type === 'Pluslet') {
-
-if (parents.indexOf(item.parent) > -1) {
-
-} else {
-parents.push(item.parent);
-
-ul.append('<li class=\'ui-autocomplete-category content-in\'>Content in ' + '"' + item.parent + '"' + '</li>');
-
-}
-
-var autocomplete_labels = jQuery('.autocomplete-parent-guide');
-
-} else {
-
-if (item.content_type != undefined) {
-
- if( item.content_type != jQuery('.ui-autocomplete-category').html()) {
-
-          ul.append( "<li class='ui-autocomplete-category'>" + item.content_type + "</li>" );
-}
-}
-
-
-}
-   
-
-        that._renderItemData( ul, item );
-      });
-    }
-  });
-
-
-	var startURL = 'http://localhost:8100/subjects/';
-        
-	jQuery('#quick_search_b').catcomplete({
-		minLength	: 3,
-		source		: 'http://localhost:8100/subjects/includes/autocomplete_data.php?collection=guides',
-		focus: function(event, ui) {
-
-                event.preventDefault();
-
-
-		},
-		select: function(event, ui) {
- 
-        if (ui.item.url.indexOf('http://') === 0) {
-            
-            location.href = ui.item.url;      
-            
-        } else {
-        
-	        location.href = startURL + ui.item.url;
-}   
-
-    
-    
-               }
-	});
-
-});
-      
-	</script>                        </div>
+                        <div id="autoC" class="autoC">
+                            <form action="/subjects/search.php" method="post" class="form-floating " id="sp_admin_search">
+                                 <label for="my-autocomplete">{{ 'Find guides' | trans }}</label>
+                                 <div id="my-autocomplete-container"></div>
+                                <input type="submit" value="Go"  class="btn btn-primary" id="topsearch_button" name="submitsearch" />
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    TODO: Fix this searchbar
+    TODO: Searchbar needs correct entries

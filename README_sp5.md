@@ -19,6 +19,20 @@ Test database:
 
 To run tests: `php bin/phpunit`
 
+## Javascripts
+
+To add a js library:
+
+1. `yarn add name_of_package`
+2. `yarn encore dev`
+
+If you need some js for a particular page: https://symfony.com/doc/current/frontend/encore/simple-example.html#page-specific-javascript-or-css-multiple-entries
+
+
+## Building for production
+
+`yarn encore production`
+
 ## Translations
 
 To view in a different translation, change the `default_locale` in config/packages/translation.yaml
@@ -39,7 +53,7 @@ My goal was to more-or-less keep parity in:
 On all other matters, I tried to
 * follow Symfony best practices as documented on their Web site
 * keep code DRY
-* follow SOC principles
+* strong test coverage
 
 A few features didn't make it over:
 * 
