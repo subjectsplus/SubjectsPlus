@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Pluslet
+ * Pluslet.
  *
  * @ORM\Table(name="pluslet", indexes={@ORM\Index(name="INDEXSEARCHpluslet", columns={"body"})})
  * @ORM\Entity

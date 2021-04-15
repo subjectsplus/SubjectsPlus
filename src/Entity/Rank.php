@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Rank
+ * Rank.
  *
  * @ORM\Table(name="rank", indexes={@ORM\Index(name="fk_rank_subject_id_idx", columns={"subject_id"}), @ORM\Index(name="fk_rank_source_id_idx", columns={"source_id"}), @ORM\Index(name="fk_rank_title_id_idx", columns={"title_id"})})
  * @ORM\Entity

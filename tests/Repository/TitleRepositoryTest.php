@@ -40,6 +40,3 @@ class TitleRepositoryTest extends KernelTestCase
         $this->entityManager = null;
     }
 }
-
-
-?>

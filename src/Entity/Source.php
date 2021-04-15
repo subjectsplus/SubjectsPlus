@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Source
+ * Source.
  *
  * @ORM\Table(name="source")
  * @ORM\Entity

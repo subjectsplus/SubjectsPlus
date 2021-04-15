@@ -9,7 +9,7 @@ class GuideService
     public $privateGuideTypes = [
         'A-Z only',
         'Internal',
-        'Placeholder'
+        'Placeholder',
     ];
 
     public function guideTypeIsVisible(string $value): bool

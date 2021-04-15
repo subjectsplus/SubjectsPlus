@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Restrictions
+ * Restrictions.
  *
  * @ORM\Table(name="restrictions")
  * @ORM\Entity

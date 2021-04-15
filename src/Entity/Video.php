@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Video
+ * Video.
  *
  * @ORM\Table(name="video", indexes={@ORM\Index(name="INDEXSEARCH", columns={"title", "description"})})
  * @ORM\Entity

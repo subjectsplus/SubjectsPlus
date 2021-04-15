@@ -6,10 +6,10 @@ class PlusletService
 {
     public function plusletClassName(string $type): string
     {
-        if ($type == 'Pluslet') {
+        if ('Pluslet' == $type) {
             return "\SubjectsPlus\Control\Pluslet";
         } else {
-            return "\SubjectsPlus\Control\Pluslet\\" . $type;
+            return "\SubjectsPlus\Control\Pluslet\\".$type;
         }
     }
 }

@@ -9,13 +9,13 @@ use Psr\Log\LoggerInterface;
 
 class SubjectFixtures extends Fixture
 {
-
     private $logger;
 
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
+
     public function load(ObjectManager $manager)
     {
         $anthropology = new Subject($this->logger);

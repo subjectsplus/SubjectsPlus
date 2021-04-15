@@ -2,20 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Title;
+use App\Repository\SubjectRepository;
+use App\Service\DatabaseService;
+use App\Service\GuideService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\DatabaseService;
-use App\Service\GuideService;
-use App\Repository\SubjectRepository;
-use App\Entity\Title;
 
 class IndexController extends AbstractController
 {
-
     private $databaseService;
 
-    function __construct(DatabaseService $databaseService)
+    public function __construct(DatabaseService $databaseService)
     {
         $this->databaseService = $databaseService;
     }
@@ -38,13 +37,15 @@ class IndexController extends AbstractController
     private function guideTypes(GuideService $guideService): array
     {
         global $guide_types;
-        return array_filter($guide_types, array($guideService, 'guideTypeIsVisible'));
+
+        return array_filter($guide_types, [$guideService, 'guideTypeIsVisible']);
     }
 
     private function newestDatabases()
     {
         //return $this->getDoctrine()->getRepository(Title::class)->newPublicDatabases();
         $manager = $this->getDoctrine()->getManager();
+
         return array_map([$this, 'arrangeDatabaseForDisplay'], $manager->getRepository(Title::class)->newPublicDatabases());
     }
 
@@ -58,7 +59,7 @@ class IndexController extends AbstractController
     {
         return [
             'title' => $database['title'],
-            'url' => $this->databaseService->databaseUrl($database['location'], $database['restrictionsId'])
+            'url' => $this->databaseService->databaseUrl($database['location'], $database['restrictionsId']),
         ];
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Location
+ * Location.
  *
  * @ORM\Table(name="location", indexes={@ORM\Index(name="fk_location_format_id_idx", columns={"format"}), @ORM\Index(name="fk_location_restrictions_id_idx", columns={"access_restrictions"})})
  * @ORM\Entity
@@ -129,7 +128,7 @@ class Location
     private $title;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

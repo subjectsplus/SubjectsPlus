@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Chchchanges
+ * Chchchanges.
  *
  * @ORM\Table(name="chchchanges")
  * @ORM\Entity

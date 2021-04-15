@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * StaffDepartment
+ * StaffDepartment.
  *
  * @ORM\Table(name="staff_department")
  * @ORM\Entity

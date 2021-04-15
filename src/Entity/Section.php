@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Section
+ * Section.
  *
  * @ORM\Table(name="section", indexes={@ORM\Index(name="fk_section_tab_idx", columns={"tab_id"})})
  * @ORM\Entity
@@ -45,7 +45,7 @@ class Section
      */
     private $tab;
 
-     /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\PlusletSection", mappedBy="section")
      */
     private $plusletSections;
@@ -95,7 +95,6 @@ class Section
 
         return $this;
     }
-
 
     public function getPlusletSections()
     {

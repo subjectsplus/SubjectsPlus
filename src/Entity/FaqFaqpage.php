@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FaqFaqpage
+ * FaqFaqpage.
  *
  * @ORM\Table(name="faq_faqpage", indexes={@ORM\Index(name="fk_ff_faqpage_id_idx", columns={"faqpage_id"}), @ORM\Index(name="fk_ff_faq_id_idx", columns={"faq_id"})})
  * @ORM\Entity

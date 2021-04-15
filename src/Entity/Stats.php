@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Stats
+ * Stats.
  *
  * @ORM\Table(name="stats")
  * @ORM\Entity

@@ -3,9 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Subject;
+use App\Service\GuideService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Service\GuideService;
 
 /**
  * @method Subject|null find($id, $lockMode = null, $lockVersion = null)

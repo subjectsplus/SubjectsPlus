@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FaqSubject
+ * FaqSubject.
  *
  * @ORM\Table(name="faq_subject", indexes={@ORM\Index(name="fk_fs_faq_id_idx", columns={"faq_id"}), @ORM\Index(name="fk_fs_subject_id_idx", columns={"subject_id"})})
  * @ORM\Entity

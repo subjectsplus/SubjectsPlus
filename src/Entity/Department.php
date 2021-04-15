@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Department
+ * Department.
  *
  * @ORM\Table(name="department", indexes={@ORM\Index(name="INDEXSEARCHdepart", columns={"name"})})
  * @ORM\Entity

@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PlusletSection
+ * PlusletSection.
  *
  * @ORM\Table(name="pluslet_section", indexes={@ORM\Index(name="fk_pt_pluslet_id_idx", columns={"pluslet_id"}), @ORM\Index(name="fk_pt_tab_id_idx", columns={"section_id"})})
  * @ORM\Entity
@@ -53,7 +53,6 @@ class PlusletSection
      * })
      */
     private $section;
-
 
     /**
      * @ORM\ManyToOne(targetEntity=Pluslet::class, inversedBy="plusletSections", fetch="EAGER")

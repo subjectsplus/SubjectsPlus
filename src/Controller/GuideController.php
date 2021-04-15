@@ -5,21 +5,22 @@ namespace App\Controller;
 use App\Entity\Subject;
 use App\Service\PlusletService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 
 class GuideController extends AbstractController
 {
-
     private $_twig;
     private $plusletService;
+
     public function __construct(Environment $twig, PlusletService $plusletService)
     {
         $this->_twig = $twig;
         $this->plusletService = $plusletService;
     }
+
     /**
      * @Route("subjects/{shortform}", name="guidebyShortname", priority=5, requirements={"shortform"="[A-Za-z0-9]+"})
      */
@@ -54,7 +55,7 @@ class GuideController extends AbstractController
             [
             'guide' => $this->getDoctrine()
             ->getRepository(\App\Entity\Subject::class)
-            ->find($id)->toPublicArray($this->plusletService)
+            ->find($id)->toPublicArray($this->plusletService),
             ]
         );
     }

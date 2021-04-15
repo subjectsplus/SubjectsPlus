@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Format
+ * Format.
  *
  * @ORM\Table(name="format")
  * @ORM\Entity

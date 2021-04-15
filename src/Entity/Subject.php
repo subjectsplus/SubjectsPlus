@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use App\Entity\Tab;
 use App\Service\PlusletService;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
 
 /**
- * Subject
+ * Subject.
  *
  * @ORM\Table(name="subject", indexes={@ORM\Index(name="INDEXSEARCHsubject", columns={"subject", "shortform", "description", "keywords"})})
  * @ORM\Entity(repositoryClass="App\Repository\SubjectRepository")
@@ -149,9 +147,8 @@ class Subject
      */
     private $logger;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(LoggerInterface $logger)
     {
@@ -400,18 +397,18 @@ class Subject
                             $pluslet = new $pluslet_obj($pluslet_id, '', $this->getSubjectId());
                             $pluslets[] = [
                                 'title' => $pluslet_model->getTitle(),
-                                'body' => $pluslet->output('view', 'public')
+                                'body' => $pluslet->output('view', 'public'),
                             ];
                         } else {
                             if ($this->logger) {
-                                $this->logger->error("Could not autoload pluslet class $pluslet_obj in ". $this->getShortform().' guide');
+                                $this->logger->error("Could not autoload pluslet class $pluslet_obj in ".$this->getShortform().' guide');
                             }
                         }
                     }
                 }
                 $tab_array['sections'][] = [
                     'layout' => $section->getLayout(),
-                    'pluslets' => $pluslets
+                    'pluslets' => $pluslets,
                 ];
             }
             $tabs[] = $tab_array;

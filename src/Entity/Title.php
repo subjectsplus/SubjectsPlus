@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Title
+ * Title.
  *
  * @ORM\Table(name="title", indexes={@ORM\Index(name="INDEXSEARCHtitle", columns={"title", "alternate_title", "description"})})
  * @ORM\Entity(repositoryClass="App\Repository\TitleRepository")
@@ -80,7 +79,7 @@ class Title
     private $location;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

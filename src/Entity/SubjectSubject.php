@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SubjectSubject
+ * SubjectSubject.
  *
  * @ORM\Table(name="subject_subject", indexes={@ORM\Index(name="fk_subject_parent_idx", columns={"subject_parent"}), @ORM\Index(name="fk_subject_child_idx", columns={"subject_child"})})
  * @ORM\Entity

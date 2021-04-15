@@ -13,6 +13,5 @@ final class RoutingTest extends WebTestCase
         $client->request('GET', '/subjects/anth');
 
         $this->assertFalse($client->getResponse()->isNotFound());
-
     }
 }

@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserType
+ * UserType.
  *
  * @ORM\Table(name="user_type")
  * @ORM\Entity

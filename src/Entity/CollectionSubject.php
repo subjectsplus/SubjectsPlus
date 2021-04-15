@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CollectionSubject
+ * CollectionSubject.
  *
  * @ORM\Table(name="collection_subject")
  * @ORM\Entity

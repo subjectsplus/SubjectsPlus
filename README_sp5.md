@@ -4,6 +4,10 @@
 
 To upgrade dependencies to the latest versions, `composer upgrade && yarn install --force`
 
+## Static analysis
+
+`vendor/bin/php-cs-fixer fix` to fix issues.  Append `--verbose --dry-run` to learn more about the issues before they are automatically fixed.
+
 ## Testing
 
 Test database:
