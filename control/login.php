@@ -19,12 +19,12 @@ if ( isset( $_POST['thecount'] ) && isset( $_POST['username'] ) && isset( $_POST
 }
 $debugger = "no";
 
-include( "includes/functions.php" );
-include( "includes/autoloader.php" );
+include_once( "includes/functions.php" );
+include_once( "includes/autoloader.php" );
 
 
 //added in order to redirect to proper page if config file doesn't exist
-if ( ! file_exists( "includes/config.php" ) || filesize( "includes/config.php" ) < 10 ) {
+if ( ! file_exists( dirname(__FILE__) . "/includes/config.php" ) || filesize( dirname(__FILE__) . "/includes/config.php" ) < 10 ) {
 	$lstrURL = getControlURL();
 
 	if ( ! file_exists( "includes/config-default.php" ) ) {

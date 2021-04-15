@@ -5,10 +5,10 @@
  *   @author little9 (Jamie Little)
  *   @date July 2015
  */
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 
 require_once ("Pluslet.php");
-class Pluslet_Related extends Pluslet {
+class Related extends \SubjectsPlus\Control\Pluslet {
     public function __construct($pluslet_id, $flag = "", $subject_id, $isclone = 0) {
         parent::__construct ( $pluslet_id, $flag, $subject_id, $isclone );
 

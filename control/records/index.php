@@ -23,7 +23,7 @@ $letter = "";
 $ctag = "";
 $full_query = "";
 
-include("../includes/header.php");
+include_once(dirname(__FILE__) . "/../includes/header.php");
 
 $db = new Querier;
 

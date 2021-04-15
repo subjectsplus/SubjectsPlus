@@ -5,10 +5,10 @@
  *   @author little9 (Jamie Little)
  *   @date September 2015
  */
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 
-class Pluslet_GoogleSearch extends Pluslet {
+class GoogleSearch extends \SubjectsPlus\Control\Pluslet {
 
   public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
     parent::__construct($pluslet_id, $flag, $subject_id, $isclone);

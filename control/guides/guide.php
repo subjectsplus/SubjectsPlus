@@ -42,7 +42,7 @@ $tertiary_nav = "yes";
 
 ob_start ();
 
-include ("../includes/header.php");
+include_once (dirname(__FILE__) . "/../includes/header.php");
 
 $postvar_subject_id = scrubData ( $_GET ['subject_id'] );
 $this_id = $_GET ["subject_id"];
@@ -132,8 +132,8 @@ $all_boxes = "<p>" . _ ( "Drag box selection, then drop it to the right" ) . "</
 <ul id=\"box_options\">";
 
 foreach ( $pluslets_activated as $lstrPluslet ) {
-	if (file_exists ( dirname ( dirname ( __DIR__ ) ) . "/lib/SubjectsPlus/Control/Pluslet/$lstrPluslet.php" )) {
-		$lstrObj = "SubjectsPlus\Control\Pluslet_" . $lstrPluslet;
+	if (file_exists ( dirname ( dirname ( __DIR__ ) ) . "/lib/SubjectsPlus/Control/Pluslet/$lstrPluslet.php" ) && !is_numeric($lstrPluslet)) {
+		$lstrObj = "SubjectsPlus\Control\Pluslet\\" . $lstrPluslet;
 		
 		if (method_exists ( $lstrObj, 'getMenuIcon' )) {
 			$all_boxes .= "<li class=\"box-item draggable\" id=\"pluslet-id-$lstrPluslet\" ckclass='" . call_user_func ( array (

@@ -6,10 +6,10 @@
  * Time: 12:55 PM
  */
 
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 
-class Pluslet_SubjectSpecialist extends Pluslet {
+class SubjectSpecialist extends \SubjectsPlus\Control\Pluslet {
 
     public function __construct($pluslet_id, $flag="", $subject_id, $isclone=0) {
         parent::__construct($pluslet_id, $flag, $subject_id, $isclone);

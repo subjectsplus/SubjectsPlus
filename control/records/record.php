@@ -27,7 +27,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
 }
 
 $tertiary_nav = "yes";
-include("../includes/header.php");
+include_once(dirname(__FILE__) . "/../includes/header.php");
 
 // The following is just for testing purposes, to turn on/off the delete functionality
 //$_SESSION["eresource_mgr"] = 0;
