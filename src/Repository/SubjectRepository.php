@@ -22,6 +22,7 @@ class SubjectRepository extends ServiceEntityRepository
 
     public function newPublicGuides(GuideService $guideService, $numToFetch = 5)
     {
+        // TODO: narrow by guides that are of a public type
         return $this->createQueryBuilder('s')
         ->select(['s.shortform', 's.subject'])
         ->andWhere('s.active = :val')
@@ -34,32 +35,4 @@ class SubjectRepository extends ServiceEntityRepository
 
     }
 
-    // /**
-    //  * @return Subject[] Returns an array of Subject objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Subject
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

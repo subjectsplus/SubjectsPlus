@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Title
  *
  * @ORM\Table(name="title", indexes={@ORM\Index(name="INDEXSEARCHtitle", columns={"title", "alternate_title", "description"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TitleRepository")
  */
 class Title
 {

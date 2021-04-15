@@ -1,0 +1,8 @@
+<h4 class="mt-4">{{ 'New Databases' | trans }}</h4>
+
+
+<ul>
+{% for database in newestDatabases %}
+<li><a href="{{database.url}}">{{database.title}}</a></li>
+{% endfor %}
+</ul>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
+  <file source-language="es" target-language="es" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -40,6 +40,14 @@
       <trans-unit id="jZTE6Zz" resname="Talkback">
         <source>Talkback</source>
         <target>__Talkback</target>
+      </trans-unit>
+      <trans-unit id="rnIBH2e" resname="Research Guides">
+        <source>Research Guides</source>
+        <target>__Research Guides</target>
+      </trans-unit>
+      <trans-unit id="JC4J84D" resname="New Databases">
+        <source>New Databases</source>
+        <target>Recursos nuevos</target>
       </trans-unit>
     </body>
   </file>
