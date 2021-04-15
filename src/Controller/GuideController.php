@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Subject;
 use App\Service\PlusletService;
+use PHP_CodeSniffer\Tokenizers\JS;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,6 +47,22 @@ class GuideController extends AbstractController
         }
         // TODO: actually do the lookup by ID
         return new Response($this->_renderPublicGuide($request->query->get('id')));
+    }
+
+    /**
+     * @Route("api/autocomplete/guides.json", name="guidesAutocomplete", priority=10)
+     */
+    public function autocompleteGuides(): JsonResponse
+    {
+        $request = Request::createFromGlobals();
+        $query = $request->query->get('query') ? $request->query->get('query') : '';
+        $flatten = function($row)
+        {
+            return $row['subject'];
+        };
+        return new JsonResponse(array_map($flatten, $this->getDoctrine()
+                                                    ->getRepository(Subject::class)
+                                                    ->searchBySubstring($query)));
     }
 
     private function _renderPublicGuide(int $id): string

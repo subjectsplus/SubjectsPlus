@@ -33,4 +33,20 @@ class SubjectRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+
+    public function searchBySubstring(string $substring, $numToFetch = 10)
+    {
+        // TODO: narrow by guides that are of a public type
+        return $this->createQueryBuilder('s')
+        ->select('s.subject')
+        ->where('s.active = :val')
+        ->setParameter('val', true)
+        ->andWhere('s.subject LIKE :substring')
+        ->setParameter('substring', "%$substring%")
+        ->orderBy('s.subjectId', 'DESC')
+        ->setMaxResults($numToFetch)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
 }
