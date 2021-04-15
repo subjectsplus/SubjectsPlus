@@ -12,6 +12,9 @@ Test database:
 `docker-compose exec web php bin/console doctrine:migrations:migrate -e test`
 `docker-compose exec web php bin/console doctrine:fixtures:load -e test`
 
+
+To run tests: `php bin/phpunit`
+
 ## Translations
 
 To view in a different translation, change the `default_locale` in config/packages/translation.yaml

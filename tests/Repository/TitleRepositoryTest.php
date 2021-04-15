@@ -25,10 +25,10 @@ class TitleRepositoryTest extends KernelTestCase
     {
         $titles = $this->entityManager
             ->getRepository(Title::class)
-            ->newPublicDatabases()
+            ->newPublicDatabases(1)
         ;
 
-        $this->assertSame(1, count($titles));
+        $this->assertSame('Jstor', $titles[0]['title']);
     }
 
     protected function tearDown(): void

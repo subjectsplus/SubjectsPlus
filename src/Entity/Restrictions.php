@@ -38,6 +38,13 @@ class Restrictions
         return $this->restrictions;
     }
 
+    public function setRestrictionsId(?int $restrictionsId): self
+    {
+        $this->restrictionsId = $restrictionsId;
+
+        return $this;
+    }
+
     public function setRestrictions(?string $restrictions): self
     {
         $this->restrictions = $restrictions;

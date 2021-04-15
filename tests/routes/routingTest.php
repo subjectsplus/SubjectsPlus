@@ -10,7 +10,7 @@ final class RoutingTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/subjects/anthropology');
+        $client->request('GET', '/subjects/anth');
 
         $this->assertFalse($client->getResponse()->isNotFound());
 
