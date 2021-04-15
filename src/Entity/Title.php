@@ -68,9 +68,9 @@ class Title
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_modified", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="last_modified", type="datetime", nullable=false)
      */
-    private $lastModified = 'CURRENT_TIMESTAMP';
+    private $lastModified;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

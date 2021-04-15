@@ -17,7 +17,8 @@ services:
       MYSQL_DATABASE: subjectsplus_test
       MYSQL_USER: subjectsplusdev
       MYSQL_PASSWORD: devpass
-      MYSQL_TCPO_PORT: 3307
+    ports:
+      - "3307:3306"
   web:
     build: .
     volumes:

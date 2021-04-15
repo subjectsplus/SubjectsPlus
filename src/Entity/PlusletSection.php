@@ -54,10 +54,6 @@ class PlusletSection
      */
     private $section;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Pluslet::class, inversedBy="plusletSections")
-     */
-    private $pluslets;
 
     /**
      * @ORM\ManyToOne(targetEntity=Pluslet::class, inversedBy="plusletSections", fetch="EAGER")

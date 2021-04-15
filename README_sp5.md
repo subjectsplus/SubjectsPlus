@@ -1,5 +1,17 @@
 # SubjectsPlus v5
 
+## Dependencies
+
+To upgrade dependencies to the latest versions, `composer upgrade && yarn install --force`
+
+## Testing
+
+Test database:
+
+`docker-compose exec web php bin/console doctrine:schema:drop --force -e test`
+`docker-compose exec web php bin/console doctrine:migrations:migrate -e test`
+`docker-compose exec web php bin/console doctrine:fixtures:load -e test`
+
 ## Translations
 
 To view in a different translation, change the `default_locale` in config/packages/translation.yaml

@@ -26,7 +26,14 @@ class GuideController extends AbstractController
     public function showPublicGuide(string $shortform): Response
     {
         $subjects = $this->getDoctrine()->getRepository(Subject::class)->findBy(['shortform' => $shortform]);
-        return new Response($this->_renderPublicGuide(array_pop($subjects)->getSubjectId()));
+        if (count($subjects))
+        {
+            return new Response($this->_renderPublicGuide(array_pop($subjects)->getSubjectId()));
+        }
+        else
+        {
+            throw $this->createNotFoundException('The guide does not exist');
+        }
     }
 
     /**
