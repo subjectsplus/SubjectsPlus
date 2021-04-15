@@ -15,7 +15,6 @@ class SubjectFixtures extends Fixture
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-        
     }
     public function load(ObjectManager $manager)
     {

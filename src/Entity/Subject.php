@@ -393,8 +393,7 @@ class Subject
                 $plusletSections = $section->getPlusletSections();
                 foreach ($plusletSections as $plusletSection) {
                     $pluslet_model = $plusletSection->getPluslet();
-                    if ($pluslet_model)
-                    {
+                    if ($pluslet_model) {
                         $pluslet_obj = $plusletService->plusletClassName($pluslet_model->getType());
                         if (class_exists($pluslet_obj, false)) {
                             $pluslet_id = $pluslet_model->getPlusletId();

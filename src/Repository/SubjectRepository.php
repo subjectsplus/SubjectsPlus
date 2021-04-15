@@ -31,8 +31,6 @@ class SubjectRepository extends ServiceEntityRepository
         ->setMaxResults($numToFetch)
         ->getQuery()
         ->getResult()
-    ;
-
+        ;
     }
-
 }

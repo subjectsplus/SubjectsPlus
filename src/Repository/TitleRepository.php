@@ -30,7 +30,6 @@ class TitleRepository extends ServiceEntityRepository
         ->setMaxResults($numToFetch)
         ->getQuery()
         ->getResult()
-    ;
-
+        ;
     }
 }

@@ -60,6 +60,5 @@ class IndexController extends AbstractController
             'title' => $database['title'],
             'url' => $this->databaseService->databaseUrl($database['location'], $database['restrictionsId'])
         ];
-
     }
 }

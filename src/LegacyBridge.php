@@ -19,12 +19,9 @@ class LegacyBridge
         // some env vars.
         $legacyScriptFilename = '..'.$request->getPathInfo();
 
-        if (is_file($legacyScriptFilename))
-        {
+        if (is_file($legacyScriptFilename)) {
             return $legacyScriptFilename;
-        }
-        else
-        {
+        } else {
             return $legacyScriptFilename."/index.php";
         }
 

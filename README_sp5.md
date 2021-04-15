@@ -25,3 +25,19 @@ To add a translation:
 
 1. Add the translation to translations/messages.LOCALE.xlf for the appropriate locale
 2. `php bin/console cache:clear && php bin/console debug:translation LOCALE` to refresh your dev server and output any troubleshooting info
+
+## New/modified functionality
+
+My goal was to more-or-less keep parity in:
+* Display (with the SPLUX theme)
+* Database + Configuration (so an existing db and config.php could use this with no changes)
+
+On all other matters, I tried to
+* follow Symfony best practices as documented on their Web site
+* keep code DRY
+* follow SOC principles
+
+A few features didn't make it over:
+* 
+
+A few features were added

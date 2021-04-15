@@ -16,9 +16,4 @@ class GuideService
     {
         return !in_array($value, $this->privateGuideTypes);
     }
-
-
 }
-
-
-?>
