@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Tab;
+use App\Service\PlusletService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -380,7 +381,7 @@ class Subject
         return $this;
     }
 
-    public function toPublicArray()
+    public function toPublicArray(PlusletService $plusletService): array
     {
         $tabs = [];
         foreach ($this->getTabs() as $key => $tab) {
@@ -392,17 +393,20 @@ class Subject
                 $plusletSections = $section->getPlusletSections();
                 foreach ($plusletSections as $plusletSection) {
                     $pluslet_model = $plusletSection->getPluslet();
-                    $pluslet_obj = '\\SubjectsPlus\\Control\\Pluslet\\' . $pluslet_model->getType();
-                    if (class_exists($pluslet_obj, false)) {
-                        $pluslet_id = $pluslet_model->getPlusletId();
-                        $pluslet = new $pluslet_obj($pluslet_id, '', $this->getSubjectId());
-                        $pluslets[] = [
-                            'title' => $pluslet_model->getTitle(),
-                            'body' => $pluslet->output('view', 'public')
-                        ];
-                    } else {
-                        if ($this->logger) {
-                            $this->logger->error("Could not autoload pluslet class $pluslet_obj in ". $this->getShortform().' guide');
+                    if ($pluslet_model)
+                    {
+                        $pluslet_obj = $plusletService->plusletClassName($pluslet_model->getType());
+                        if (class_exists($pluslet_obj, false)) {
+                            $pluslet_id = $pluslet_model->getPlusletId();
+                            $pluslet = new $pluslet_obj($pluslet_id, '', $this->getSubjectId());
+                            $pluslets[] = [
+                                'title' => $pluslet_model->getTitle(),
+                                'body' => $pluslet->output('view', 'public')
+                            ];
+                        } else {
+                            if ($this->logger) {
+                                $this->logger->error("Could not autoload pluslet class $pluslet_obj in ". $this->getShortform().' guide');
+                            }
                         }
                     }
                 }

@@ -60,7 +60,7 @@ class PlusletSection
     private $pluslets;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Pluslet::class, inversedBy="plusletSections")
+     * @ORM\ManyToOne(targetEntity=Pluslet::class, inversedBy="plusletSections", fetch="EAGER")
      * @ORM\JoinColumn(name="pluslet_id", referencedColumnName="pluslet_id", nullable=false)
      */
     private $pluslet;
