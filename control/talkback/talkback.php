@@ -22,7 +22,7 @@ if ( isset( $_REQUEST["wintype"] ) && $_REQUEST["wintype"] == "pop") {
 $feedback = "";
 $no_form = "";
 
-include("../includes/header.php");
+include_once(__DIR__."/../includes/header.php");
 
 
 // Test our record_id, if it exists; must be integer
@@ -100,7 +100,7 @@ if (!$no_form) {
 
 //$record->deBug();
 
-include("../includes/footer.php");
+include(dirname(__FILE__)."/../includes/footer.php");
 ?>
 
 <script type="text/javascript">
