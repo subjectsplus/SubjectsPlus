@@ -20,6 +20,21 @@ class SubjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Subject::class);
     }
 
+    public function guidesByType()
+    {
+        return $this->createQueryBuilder('s')
+        ->select(['s.type', 's.shortform', 's.subject'])
+        ->where('s.active = :val')
+        ->setParameter('val', true)
+        ->addgroupBy('s.type')
+        ->addgroupBy('s.shortform')
+        ->addgroupBy('s.subject')
+        ->orderBy('s.subject', 'ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     public function newPublicGuides(GuideService $guideService, $numToFetch = 5)
     {
         // TODO: narrow by guides that are of a public type
@@ -38,7 +53,7 @@ class SubjectRepository extends ServiceEntityRepository
     {
         // TODO: narrow by guides that are of a public type
         return $this->createQueryBuilder('s')
-        ->select('s.subject')
+        ->select(['s.shortform', 's.subject'])
         ->where('s.active = :val')
         ->setParameter('val', true)
         ->andWhere('s.subject LIKE :substring')

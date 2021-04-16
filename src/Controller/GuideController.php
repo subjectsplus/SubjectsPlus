@@ -24,7 +24,7 @@ class GuideController extends AbstractController
     }
 
     /**
-     * @Route("subjects/{shortform}", name="guidebyShortname", priority=5, requirements={"shortform": "[A-Za-z0-9]+"})
+     * @Route("subjects/{shortform}", name="guidebyShortname", priority=5)
      */
     public function showPublicGuide(string $shortform): Response
     {
@@ -56,13 +56,9 @@ class GuideController extends AbstractController
     {
         $request = Request::createFromGlobals();
         $query = $request->query->get('query') ? $request->query->get('query') : '';
-        $flatten = function($row)
-        {
-            return $row['subject'];
-        };
-        return new JsonResponse(array_map($flatten, $this->getDoctrine()
-                                                    ->getRepository(Subject::class)
-                                                    ->searchBySubstring($query)));
+        return new JsonResponse($this->getDoctrine()
+                                ->getRepository(Subject::class)
+                                ->searchBySubstring($query));
     }
 
     private function _renderPublicGuide(int $id): string

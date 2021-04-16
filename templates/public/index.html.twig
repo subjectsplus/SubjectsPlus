@@ -14,6 +14,7 @@
 
 {% include 'public/index/searchbar.html.twig' %}
 
+
 <section class="section section-half-top">
     <div class="container">
         <div class="row">
@@ -28,13 +29,27 @@
                     </li>
                     {% for guideType in guideTypes %}
                         <li class="nav-item">
-                            <a class="nav-link no-decoration default" id="show-How-to" name="showHow-to" data-toggle="pill" href="#section-{{guideType}}"
-                            role="tab" aria-controls="section-How-to" aria-selected="true">{% trans with {'%type%': guideType} %}%type% Guides{% endtrans %}</a>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#section-{{guideType | replace({' ': '-'})}}" type="button" role="tab" aria-controls="section-{{guideType}}">
+                            {% trans with {'%type%': guideType} %}%type% Guides{% endtrans %}
+                            </button>
                         </li>
                     {% endfor %}
                     </ul>
                 </div>
                 <div class="tab-content" id="pills-tabContent-guides">
+                <div class="tab-pane show active" id="section-Collection" role="tabpanel">
+                TODO: good display of collection
+                </div>
+                {% for guideType in guideTypes %}
+                     <div class="tab-pane" id="section-{{guideType | replace({' ': '-'})}}" role="tabpanel">
+                         <ul class="two-columns">
+                             {% set filteredGuides =  guides | filter(g => g['type'] == guideType) %}
+                             {% for guide in filteredGuides %}
+                                 <li><a href="{{ path('guidebyShortname', {shortform: guide.shortform}) }}">{{ guide.subject }}</a></li>
+                             {% endfor %}
+                         </ul>
+                     </div>
+                {% endfor %}
                 </div>
                 </div>
 
