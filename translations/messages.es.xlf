@@ -11,11 +11,11 @@
       </trans-unit>
       <trans-unit id="SXQUL_N" resname="Guide Collections">
         <source>Guide Collections</source>
-        <target>__Guide Collections</target>
+        <target>Colleciones de guías</target>
       </trans-unit>
       <trans-unit id="532_55p" resname="%type% Guides">
         <source>%type% Guides</source>
-        <target>__%type% Guides</target>
+        <target>Guías de %type%</target>
       </trans-unit>
       <trans-unit id="OnhpU4i" resname="Home">
         <source>Home</source>
@@ -35,15 +35,15 @@
       </trans-unit>
       <trans-unit id="mFa3Qz_" resname="FAQs">
         <source>FAQs</source>
-        <target>__FAQs</target>
+        <target>Preguntas más frecuentes</target>
       </trans-unit>
       <trans-unit id="jZTE6Zz" resname="Talkback">
         <source>Talkback</source>
-        <target>__Talkback</target>
+        <target>Comentarios</target>
       </trans-unit>
       <trans-unit id="rnIBH2e" resname="Research Guides">
         <source>Research Guides</source>
-        <target>__Research Guides</target>
+        <target>Guías de Recursos</target>
       </trans-unit>
       <trans-unit id="JC4J84D" resname="New Databases">
         <source>New Databases</source>
