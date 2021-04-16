@@ -24,7 +24,8 @@ class GuideController extends AbstractController
     }
 
     /**
-     * @Route("subjects/{shortform}", name="guidebyShortname", priority=5)
+     * @Route("subjects/{shortform}", name="guidebyShortname", priority=5, requirements={"shortform": "^(?!.*?\.php).*$"})
+     * (guide shortforms should not include .php)
      */
     public function showPublicGuide(string $shortform): Response
     {
