@@ -378,6 +378,7 @@ class Subject
         return $this;
     }
 
+    // TODO: test!  And probably refactor for SOC
     public function toPublicArray(PlusletService $plusletService): array
     {
         $tabs = [];
@@ -386,7 +387,7 @@ class Subject
             $tab_array['id'] = "tab-$key";
             $sections = $tab->getSections();
             foreach ($sections as $section) {
-                $pluslets = [];
+                $columns = [];
                 $plusletSections = $section->getPlusletSections();
                 foreach ($plusletSections as $plusletSection) {
                     $pluslet_model = $plusletSection->getPluslet();
@@ -395,9 +396,10 @@ class Subject
                         if (class_exists($pluslet_obj, true)) {
                             $pluslet_id = $pluslet_model->getPlusletId();
                             $pluslet = new $pluslet_obj($pluslet_id, '', $this->getSubjectId());
-                            $pluslets[] = [
+                            $columns[$plusletSection->getPcolumn()]['pluslets'][] = [
                                 'title' => $pluslet_model->getTitle(),
                                 'body' => $pluslet->output('view', 'public'),
+                                'row' => $plusletSection->getProw()
                             ];
                         } else {
                             if ($this->logger) {
@@ -408,7 +410,7 @@ class Subject
                 }
                 $tab_array['sections'][] = [
                     'layout' => $section->getLayout(),
-                    'pluslets' => $pluslets,
+                    'columns' => $columns,
                 ];
             }
             $tabs[] = $tab_array;

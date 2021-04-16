@@ -4,37 +4,27 @@
 
 
 {% block body %}
-TODO: I18n
-TODO: Add the real title
+<h2>{{ title }}</h2>
 <ul class="nav nav-pills">
     {{ include('public/guide/tabs/tabs.html.twig') }}
-    </ul>
-    <div class="tab-content">
-      {% for tab in guide %}
-        <div class="tab-pane {% if loop.first %} show active {% endif %}" id="{{ tab.id}}" role="tabpanel">
-          {% for section in tab.sections %}
-            {% if section.layout == '0-12-0' %}
-              <div class="row">
-            {% elseif section.layout == '6-6-0' %}
-              <div class="row row-cols-2">
-            {% else %}
-              <div class="row row-cols-3">
-            {% endif %}}
-              {% for pluslet in section.pluslets %}
-                <div class="card">
-                  <div class="card-header bg-primary">
-                    {{ pluslet.title }}
-                  </div>
-                  <div class="card-body">
-                    {{ pluslet.body | raw }}
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
+</ul>
+<div class="tab-content">
+  {% for tab in tabs %}
+    <div class="tab-pane {% if loop.first %} show active {% endif %}" id="{{ tab.id}}" role="tabpanel">
+      {% for section in tab.sections %}
+        <div class="row">
+          {% for column_number, column_contents in section.columns %}
+          <div class="{{ column_class(section.layout, column_number) }}">
+            {% for pluslet in column_contents.pluslets %}
+              {% include('public/guide/pluslets/pluslet.html.twig') %}
+            {% endfor %}
+          </div>
           {% endfor %}
         </div>
       {% endfor %}
     </div>
+  {% endfor %}
+</div>
 
 
 {% endblock %}

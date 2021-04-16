@@ -175,7 +175,7 @@ class SubjectSpecialist extends \SubjectsPlus\Control\Pluslet {
     }
 
     protected function getGuideEditors($subject_id) {
-        $querier = new Querier();
+        $querier = new \SubjectsPlus\Control\Querier();
         $qs = "SELECT DISTINCT(s.staff_id), s.fname, s.lname, s.email, s.title, s.tel, s.social_media
                     FROM staff s, staff_subject ss
                     WHERE s.staff_id = ss.staff_id

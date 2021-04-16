@@ -1,4 +1,4 @@
-{% for tab in guide %}
+{% for tab in tabs %}
     {% set class = loop.first ? 'nav-link active' : 'nav-link' %}
     <li class="nav-item">
     {% if tab.external_url %}

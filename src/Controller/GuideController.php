@@ -64,14 +64,15 @@ class GuideController extends AbstractController
 
     private function _renderPublicGuide(int $id): string
     {
+        $entity = $this->getDoctrine()
+                       ->getRepository(\App\Entity\Subject::class)
+                       ->find($id);
         // TODO: check visibility; make sure public is allowed to see
         return $this->_twig->render(
             'public/guide/guide.html.twig',
             [
-            'guide' => $this->getDoctrine()
-                            ->getRepository(\App\Entity\Subject::class)
-                            ->find($id)
-                            ->toPublicArray($this->plusletService),
+            'title' => $entity->getSubject(),
+            'tabs' => $entity->toPublicArray($this->plusletService),
             ]
         );
     }
