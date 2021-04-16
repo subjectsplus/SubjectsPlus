@@ -6,10 +6,10 @@
  * Time: 1:20 PM
  */
 
-namespace SubjectsPlus\Control;
+namespace SubjectsPlus\Control\Pluslet;
 require_once("Pluslet.php");
 
-class Pluslet_PrimoSearch extends Pluslet
+class PrimoSearch extends \SubjectsPlus\Control\Pluslet
 {
 
     private $_action;

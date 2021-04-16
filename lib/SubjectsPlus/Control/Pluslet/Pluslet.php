@@ -54,7 +54,7 @@ class Pluslet {
         // Get pluslet table info
         /////////////
 
-        $querier = new Querier();
+        $querier = new \SubjectsPlus\Control\Querier();
         $q1 = "SELECT pluslet_id, title, body, clone, type, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box, target_blank_links
         FROM pluslet WHERE pluslet_id = " . $this->_pluslet_id;
 

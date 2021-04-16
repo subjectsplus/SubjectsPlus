@@ -72,8 +72,9 @@ class GuideController extends AbstractController
             'public/guide/guide.html.twig',
             [
             'guide' => $this->getDoctrine()
-            ->getRepository(\App\Entity\Subject::class)
-            ->find($id)->toPublicArray($this->plusletService),
+                            ->getRepository(\App\Entity\Subject::class)
+                            ->find($id)
+                            ->toPublicArray($this->plusletService),
             ]
         );
     }

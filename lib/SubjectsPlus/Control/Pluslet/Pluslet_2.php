@@ -1,5 +1,5 @@
 <?php
-   namespace SubjectsPlus\Control;
+   namespace SubjectsPlus\Control\Pluslet;
      require_once("Pluslet.php");
 /**
  *   @file sp_Pluslet_2
@@ -10,7 +10,7 @@
  *   @date Feb 2011
  *   @todo 
  */
-class Pluslet_2 extends Pluslet {
+class Pluslet_2 extends \SubjectsPlus\Control\Pluslet {
 
     public function __construct($pluslet_id, $flag="", $subject_id) {
         parent::__construct($pluslet_id, $flag, $subject_id);

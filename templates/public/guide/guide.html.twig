@@ -7,13 +7,11 @@
 TODO: I18n
 TODO: Add the real title
 <ul class="nav nav-pills">
-    {% for tab in guide %}
-      {{ include('public/guide/tabs/tab.html.twig') }}
-    {% endfor %}
+    {{ include('public/guide/tabs/tabs.html.twig') }}
     </ul>
     <div class="tab-content">
       {% for tab in guide %}
-        <div class="tab-pane" id="{{ tab.id}}" role="tabpanel">
+        <div class="tab-pane {% if loop.first %} show active {% endif %}" id="{{ tab.id}}" role="tabpanel">
           {% for section in tab.sections %}
             {% if section.layout == '0-12-0' %}
               <div class="row">
