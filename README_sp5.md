@@ -8,6 +8,12 @@ To upgrade dependencies to the latest versions, `composer upgrade && yarn instal
 
 `vendor/bin/php-cs-fixer fix` to fix issues.  Append `--verbose --dry-run` to learn more about the issues before they are automatically fixed.
 
+TODO: add jslint
+
+## Themes
+
+To add a theme, create a folder in the templates directory with the same structure as the templates directory
+
 ## Testing
 
 Test database:

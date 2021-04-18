@@ -14,7 +14,9 @@
         {{ google_analytics() }}
     </head>
     <body>
-        {% include('public/shared/header.html.twig') %}
+        {% block header %}
+          {% include('public/shared/header.html.twig') %}
+        {% endblock %}
         <div class="container">
           {% block body %}{% endblock %}
         </div>

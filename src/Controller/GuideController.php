@@ -73,6 +73,7 @@ class GuideController extends AbstractController
             [
             'title' => $entity->getSubject(),
             'tabs' => $entity->toPublicArray($this->plusletService),
+            'special_header' => $entity->getHeader(),
             ]
         );
     }

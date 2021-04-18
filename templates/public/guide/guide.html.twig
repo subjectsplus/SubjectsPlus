@@ -2,6 +2,13 @@
 
 {% block title %}Guide{% endblock %}
 
+{% block header %}
+  {% if special_header and header_exists_for_theme(special_header) %}
+    {{ include_header_from_theme(special_header) }}
+  {% else %}
+    {{ include('public/shared/header.html.twig')}}
+  {% endif %}
+{% endblock %}
 
 {% block body %}
 <h2>{{ title }}</h2>
