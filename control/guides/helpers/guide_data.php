@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 $subcat = "guides";
 $header = "noshow"; // authentication only
 
-include("../../includes/header.php");
+include(dirname(__FILE__)."/../../includes/header.php");
 
 $location = "";
 $is_sidebar = "";
@@ -46,6 +46,7 @@ if ($is_sidebar !== false) {
     $title_input_size = "";
 }
 
+$pluslet_service = new \App\Service\PlusletService();
 
 
 /////////////////////////
@@ -71,7 +72,7 @@ switch ($_POST["flag"]) {
             $our_id = "";
         }
 
-        $obj = "SubjectsPlus\Control\Pluslet_" . $our_type;
+        $obj = $pluslet_service->plusletClassName($our_type);
         //global $obj;
         $record = new $obj($our_id, "", $our_subject_id, $isclone);
         print $record->output("edit", "admin");
@@ -80,7 +81,7 @@ switch ($_POST["flag"]) {
         break;
     case "modify":
 
-        $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["type"];
+        $obj = $pluslet_service->plusletClassName($_POST["type"]);
         //global $obj;
         $record = new $obj($_POST["edit"], "", $our_subject_id);
         print $record->output("edit", "admin");
@@ -94,8 +95,8 @@ switch ($_POST["flag"]) {
         $this_id = modifyDB("", "insert");
 
 
-        if ($this_id) {
-            $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
+        if ($this_id ) {
+            $obj = $pluslet_service->plusletClassName($_POST["item_type"]);
             //print "obj = $obj<p>";
             //global $obj;
             $record = new $obj($this_id, "", $our_subject_id);
@@ -113,7 +114,7 @@ switch ($_POST["flag"]) {
 
         $this_id = modifyDB($_POST["update_id"], "update");
 
-        $obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
+        $obj = $pluslet_service->plusletClassName($_POST["type"]);
         //global $obj;
         $record = new $obj($_POST["update_id"], "", $our_subject_id);
         print $record->output("view", "admin");
@@ -123,7 +124,7 @@ switch ($_POST["flag"]) {
     case "settings":
     	$this_id = modifyDB($_POST["update_id"], "settings");
 
-    	$obj = "SubjectsPlus\Control\Pluslet_" . $_POST["item_type"];
+        $obj = $pluslet_service->plusletClassName($_POST["type"]);
     	//global $obj;
     	$record = new $obj($_POST["update_id"], "", $our_subject_id);
     	print $record->output("view", "admin");

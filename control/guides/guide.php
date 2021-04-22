@@ -503,7 +503,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
         var ss = subjectSpecialist();
         ss.init();
 
-	    <?php include('../../assets/js/guides/bookList.js'); ?>
+	    <?php include('../public/build/assets/js/guides/bookList.js'); ?>
 
         var containers = $(".booklist-content");
         $.each(containers, function() {
@@ -539,4 +539,4 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 </script>
 
 
-<?php include("../includes/guide_footer.php"); ?>
+<?php include(dirname(__FILE__)."/../includes/guide_footer.php"); ?>

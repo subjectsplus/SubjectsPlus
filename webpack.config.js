@@ -21,7 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('public_index', './assets/public/index.js')
+    .addEntry('public_index', './assets/javascripts/public/index.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -64,6 +64,17 @@ Encore
         from: './assets/images',
         to: 'assets/images/[path][name].[ext]'
     })
+
+    // Make legacy js available
+    .copyFiles({
+        from: './assets/js',
+        to: 'assets/js/[path][name].[ext]'
+    })
+    .copyFiles({
+        from: './assets/jquery',
+        to: 'assets/jquery/[path][name].[ext]'
+    })
+
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
