@@ -96,7 +96,7 @@ $newlist .= "</ul>\n";
 
 
 // Add header now
-include( "includes/header_splux.php" );
+include( dirname(__FILE__)."/../../includes/header_splux.php" );
 
 // put together our main result display
 
@@ -177,5 +177,6 @@ if ( isset( $_GET["d"] ) ) {
 
 <?php
 // Load footer file
-include( "includes/footer_splux.php" );
+include( dirname(__FILE__)."/../../includes/footer_splux.php" );
+
 ?>

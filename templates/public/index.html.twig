@@ -36,7 +36,11 @@
                 </div>
                 <div class="tab-content" id="pills-tabContent-guides">
                 <div class="tab-pane show active" id="section-Collection" role="tabpanel">
-                TODO: good display of collection
+                    <ul class="two-columns">
+                        {% for collection in collections %}
+                            <li><a href="/subjects/collection.php?d={{collection.shortform}}">{{collection.title}}</a></li>
+                        {% endfor %}
+                    </ul>
                 </div>
                 {% for guideType in guideTypes %}
                      <div class="tab-pane" id="section-{{guideType | replace({' ': '-'})}}" role="tabpanel">

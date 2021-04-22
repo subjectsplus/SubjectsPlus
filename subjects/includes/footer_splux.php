@@ -7,7 +7,7 @@
 </div>
 
 <!--Load Jekyll-built site footer (Site Footer, Site Toolbar)-->
-<?php include("themes/splux/site-footer.php"); ?>
+<?php include(dirname(__FILE__)."/../themes/splux/site-footer.php"); ?>
 
 <!--container for side navigation contents-->
 <div class="c-offcanvas is-hidden slim-nosliver" id="left">
@@ -19,7 +19,7 @@
 </div>
 
 <!--Load Jekyll-built site scripts (Site Header Scripts, Mega Menus Scripts, Component Scripts)-->
-<?php include("themes/splux/site-scripts.php"); ?>
+<?php include(dirname(__FILE__)."/../themes/splux/site-scripts.php"); ?>
 
 <script>
     $( function(){

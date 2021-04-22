@@ -28,11 +28,20 @@ class IndexController extends AbstractController
     public function index(GuideService $guideService, SubjectRepository $subjectRepository): Response
     {
         return $this->render('public/index.html.twig', [
+            'collections' => $this->collections(),
             'guides' => $this->guidesByType(),
             'guideTypes' => $this->guideTypes($guideService),
             'newestDatabases' => $this->newestDatabases(),
             'newestGuides' => $this->newestGuides($guideService, $subjectRepository),
         ]);
+    }
+
+    private function collections(): array
+    {
+        return array_map([$this, 'arrangeCollectionForDisplay'],
+                         $this->getDoctrine()
+                              ->getRepository(\App\Entity\Collection::class)
+                              ->findAll());
     }
 
     private function guideTypes(GuideService $guideService): array
@@ -59,6 +68,15 @@ class IndexController extends AbstractController
     private function newestGuides($guideService, $subjectRepository): array
     {
         return $subjectRepository->newPublicGuides($guideService);
+    }
+
+    private function arrangeCollectionForDisplay($collection): array
+    {
+        return [
+            'title' => $collection->getTitle(),
+            'shortform' => $collection->getShortForm()
+        ];
+
     }
 
     private function arrangeDatabaseForDisplay($database): array

@@ -65,7 +65,11 @@ Encore
         to: 'assets/images/[path][name].[ext]'
     })
 
-    // Make legacy js available
+    // Make legacy assets available
+    .copyFiles({
+        from: './assets/css',
+        to: 'assets/css/[path][name].[ext]'
+    })
     .copyFiles({
         from: './assets/js',
         to: 'assets/js/[path][name].[ext]'

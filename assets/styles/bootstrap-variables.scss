@@ -1,0 +1,11 @@
+$primary: #07adc7;
+$secondary: #00243c;
+$navbar-dark-color: #FFF;
+$navbar-dark-active-color: $primary;
+$navbar-dark-hover-color: $primary;
+
+
+
+.navbar-dark {
+    background-color: $secondary;
+}
