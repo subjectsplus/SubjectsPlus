@@ -1,20 +1,28 @@
 # SubjectsPlus v5
 
-## Dependencies
+## Upgrading an existing system
+
+. Use git to checkout this code
+. `composer install`
+. `yarn encore dev`
+. Change the assetPath line in config.php to: `$AssetPath = $BaseURL.'build/assets/';`
+
+## Development notes
+### Dependencies
 
 To upgrade dependencies to the latest versions, `composer upgrade && yarn install --force`
 
-## Static analysis
+### Static analysis
 
 `vendor/bin/php-cs-fixer fix` to fix issues.  Append `--verbose --dry-run` to learn more about the issues before they are automatically fixed.
 
 TODO: add jslint
 
-## Themes
+### Themes
 
 To add a theme, create a folder in the templates directory with the same structure as the templates directory
 
-## Testing
+### Testing
 
 Test database:
 
@@ -25,7 +33,7 @@ Test database:
 
 To run tests: `php bin/phpunit`
 
-## Javascripts
+### Javascripts
 
 To add a js library:
 
@@ -35,11 +43,11 @@ To add a js library:
 If you need some js for a particular page: https://symfony.com/doc/current/frontend/encore/simple-example.html#page-specific-javascript-or-css-multiple-entries
 
 
-## Building for production
+### Building for production
 
 `yarn encore production`
 
-## Translations
+### Translations
 
 To view in a different translation, change the `default_locale` in config/packages/translation.yaml
 
@@ -50,7 +58,7 @@ To add a translation:
 1. Add the translation to translations/messages.LOCALE.xlf for the appropriate locale
 2. `php bin/console cache:clear && php bin/console debug:translation LOCALE` to refresh your dev server and output any troubleshooting info
 
-## New/modified functionality
+### New/modified functionality
 
 My goal was to more-or-less keep parity in:
 * Display (with the SPLUX theme)

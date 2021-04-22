@@ -44,7 +44,7 @@ Encore
     //.enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning()
+    //.enableVersioning()
 
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
@@ -62,7 +62,7 @@ Encore
     // Make images available to templates
     .copyFiles({
         from: './assets/images',
-        to: 'images/[path][name].[hash:8].[ext]'
+        to: 'assets/images/[path][name].[ext]'
     })
 
     // uncomment if you use TypeScript
