@@ -249,7 +249,7 @@ class Guide
 
 		//print "<pre>";print_r($this->_staffers); print "</pre>";
 
-		$action = htmlentities($_SERVER['PHP_SELF']) . "?subject_id=" . $this->_subject_id;
+		$action = "/control/guides/metadata.php?subject_id=" . $this->_subject_id;
 
 		if ($wintype != "") {
 			$action .= "&wintype=pop";
@@ -524,7 +524,7 @@ class Guide
 		$thumbnail_preview = '<p>No files currently selected for upload</p>';
 
 		if ( isset($existing_thumbnail_info) ) {
-			if ($existing_thumbnail_info['mime'] === 'image/jpeg') {
+			if (is_array($existing_thumbnail_info) && $existing_thumbnail_info['mime'] === 'image/jpeg') {
 
 				// NOTE: This template has to be kept in sync with the JavaScript generated one below!
 				$thumbnail_preview = "

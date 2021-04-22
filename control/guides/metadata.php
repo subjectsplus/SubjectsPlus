@@ -21,7 +21,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   $bonus_css = "relative";
 }
 
-include("../includes/header.php");
+include(dirname(__FILE__) . "/../includes/header.php");
 
 // The following is just for testing purposes, to turn on/off the delete functionality
 //$_SESSION["eresource_mgr"] = 1;
@@ -238,7 +238,7 @@ print   "<div class=\"master-feedback\" style=\"display:block;\">" . $record->ge
 
 print "</div>"; // end #maincontent
 
-include("../includes/footer.php");
+include(dirname(__FILE__) . "/../includes/footer.php");
 ?>
 
 <script type="text/javascript">
