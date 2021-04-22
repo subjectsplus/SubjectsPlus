@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Patron;
 
 use App\Entity\Title;
 use App\Repository\SubjectRepository;
@@ -27,7 +27,7 @@ class IndexController extends AbstractController
      */
     public function index(GuideService $guideService, SubjectRepository $subjectRepository): Response
     {
-        return $this->render('public/index.html.twig', [
+        return $this->render('patron/index.html.twig', [
             'collections' => $this->collections(),
             'guides' => $this->guidesByType(),
             'guideTypes' => $this->guideTypes($guideService),

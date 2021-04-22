@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Patron;
 
 use App\Entity\Subject;
 use App\Service\PlusletService;
@@ -69,7 +69,7 @@ class GuideController extends AbstractController
                        ->find($id);
         // TODO: check visibility; make sure public is allowed to see
         return $this->_twig->render(
-            'public/guide/guide.html.twig',
+            'patron/guide/guide.html.twig',
             [
             'title' => $entity->getSubject(),
             'tabs' => $entity->toPublicArray($this->plusletService),

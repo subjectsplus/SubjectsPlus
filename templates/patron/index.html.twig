@@ -5,12 +5,12 @@
 
 {% block javascripts %}
      {{ parent() }}
-     {{ encore_entry_script_tags('public_index') }}
+     {{ encore_entry_script_tags('patron_index') }}
 {% endblock %}
 
 {% block body %}
 
-{% include 'public/index/searchbar.html.twig' %}
+{% include 'patron/shared/searchbar.html.twig' with {'action': '/subjects/search.php', 'label': 'Find guides'} %}
 
 
 <section class="section section-half-top">
@@ -54,7 +54,7 @@
                 {% endfor %}
                 </div>
                 </div>
-
+<!-- TODO: extract the expert bubbles ->
                 <div class="col-lg-4">
                     <h4 class="mb-2">Find an Expert</h4>
                     <p>Need help? Ask an expert!</p>
@@ -66,8 +66,8 @@
                                 class="btn btn-default" role="button">See all experts</a></div>
 
                     <div class="feature-light popular-list p-3 mt-3">
-                        {% include 'public/index/new_databases.html.twig' %}
-                        {% include 'public/index/new_guides.html.twig' %}
+                        {% include 'patron/index/new_databases.html.twig' %}
+                        {% include 'patron/index/new_guides.html.twig' %}
                     </div>
                 </div>
             </div>

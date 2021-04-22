@@ -1,5 +1,6 @@
 $primary: #07adc7;
 $secondary: #00243c;
+$light: #eef0f1;
 $navbar-dark-color: #FFF;
 $navbar-dark-active-color: $primary;
 $navbar-dark-hover-color: $primary;
@@ -8,4 +9,8 @@ $navbar-dark-hover-color: $primary;
 
 .navbar-dark {
     background-color: $secondary;
+}
+
+.feature-light {
+    background-color: $light;
 }

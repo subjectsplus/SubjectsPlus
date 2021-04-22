@@ -6,14 +6,14 @@
   {% if special_header and header_exists_for_theme(special_header) %}
     {{ include_header_from_theme(special_header) }}
   {% else %}
-    {{ include('public/shared/header.html.twig')}}
+    {{ include('patron/shared/header.html.twig')}}
   {% endif %}
 {% endblock %}
 
 {% block body %}
 <h2>{{ title }}</h2>
 <ul class="nav nav-pills">
-    {{ include('public/guide/tabs/tabs.html.twig') }}
+    {{ include('patron/guide/tabs/tabs.html.twig') }}
 </ul>
 <div class="tab-content">
   {% for tab in tabs %}
@@ -23,7 +23,7 @@
           {% for column_number, column_contents in section.columns %}
           <div class="{{ column_class(section.layout, column_number) }}">
             {% for pluslet in column_contents.pluslets %}
-              {% include('public/guide/pluslets/pluslet.html.twig') %}
+              {% include('patron/guide/pluslets/pluslet.html.twig') %}
             {% endfor %}
           </div>
           {% endfor %}
