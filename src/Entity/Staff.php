@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Staff.
  *
- * @ORM\Table(name="staff", indexes={@ORM\Index(name="fk_supervisor_staff_id_idx", columns={"supervisor_id"}), @ORM\Index(name="fk_staff_department_id_idx", columns={"department_id"}), @ORM\Index(name="fk_staff_user_type_id_idx", columns={"user_type_id"}), @ORM\Index(name="INDEXSEARCHstaff", columns={"lname", "fname"})})
+ * @ORM\Table(name="staff", indexes={@ORM\Index(name="fk_supervisor_staff_id_idx", columns={"supervisor_id"}), @ORM\Index(name="fk_staff_department_id_idx", columns={"department_id"}), @ORM\Index(name="fk_staff_user_type_id_idx", columns={"user_type_id"})})
  * @ORM\Entity
  */
 class Staff

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pluslet.
  *
- * @ORM\Table(name="pluslet", indexes={@ORM\Index(name="INDEXSEARCHpluslet", columns={"body"})})
+ * @ORM\Table(name="pluslet")
  * @ORM\Entity
  */
 class Pluslet

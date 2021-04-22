@@ -24,14 +24,7 @@ To add a theme, create a folder in the templates directory with the same structu
 
 ### Testing
 
-Test database:
-
-`docker-compose exec web php bin/console doctrine:schema:drop --force -e test`
-`docker-compose exec web php bin/console doctrine:migrations:migrate -e test`
-`docker-compose exec web php bin/console doctrine:fixtures:load -e test`
-
-
-To run tests: `php bin/phpunit`
+To run tests: `docker-compose exec web ./run_tests.sh`
 
 ### Javascripts
 
@@ -57,6 +50,19 @@ To add a translation:
 
 1. Add the translation to translations/messages.LOCALE.xlf for the appropriate locale
 2. `php bin/console cache:clear && php bin/console debug:translation LOCALE` to refresh your dev server and output any troubleshooting info
+
+### To migrate a screen to Symfony
+
+* Create a new controller *or* add a method to an existing controller (e.g. `php bin/console make:controller Patron\TalkbackController`)
+* Modify the route annotation to match the current route(s) used for the screen in SP4
+* Add any necessary logic to your controller.  Note that Symfony recommends "skinny controllers", with most of the logic happening in other objects.
+* For any logic shared between controllers, create:
+  * a file in tests/Service/ with some tests for your logic
+  * a file in src/Service with your actual logic -- this can be just a plain PHP object which can then be injected into your controllers
+* For any sophisticated queries:
+  * add any data necessary for testing to the fixtures
+  * add some tests to the tests/Entity or tests/Repository directory
+  * add your logic to an Entity or Repository
 
 ### New/modified functionality
 

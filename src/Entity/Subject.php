@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Subject.
  *
- * @ORM\Table(name="subject", indexes={@ORM\Index(name="INDEXSEARCHsubject", columns={"subject", "shortform", "description", "keywords"})})
+ * @ORM\Table(name="subject")
  * @ORM\Entity(repositoryClass="App\Repository\SubjectRepository")
  */
 class Subject

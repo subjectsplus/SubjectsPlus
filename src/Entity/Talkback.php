@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Talkback.
  *
- * @ORM\Table(name="talkback", indexes={@ORM\Index(name="INDEXSEARCHtalkback", columns={"question", "answer"}), @ORM\Index(name="fk_talkback_staff_id_idx", columns={"a_from"})})
+ * @ORM\Table(name="talkback", indexes={@ORM\Index(name="fk_talkback_staff_id_idx", columns={"a_from"})})
  * @ORM\Entity
  */
 class Talkback

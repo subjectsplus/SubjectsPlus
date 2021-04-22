@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Video.
  *
- * @ORM\Table(name="video", indexes={@ORM\Index(name="INDEXSEARCH", columns={"title", "description"})})
+ * @ORM\Table(name="video")
  * @ORM\Entity
  */
 class Video
