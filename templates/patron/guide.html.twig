@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Guide{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block header %}
   {% if special_header and header_exists_for_theme(special_header) %}

@@ -31,7 +31,7 @@ class IndexController extends AbstractController
             'collections' => $this->collections(),
             'guides' => $this->guidesByType(),
             'guideTypes' => $this->guideTypes($guideService),
-            'newestDatabases' => $this->newestDatabases(),
+            'newestDatabases' => $this->databaseService->newestDatabases(),
             'newestGuides' => $this->newestGuides($guideService, $subjectRepository),
         ]);
     }
@@ -56,14 +56,6 @@ class IndexController extends AbstractController
         return $this->getDoctrine()->getRepository(\App\Entity\Subject::class)->guidesByType();
     }
 
-    private function newestDatabases()
-    {
-        //return $this->getDoctrine()->getRepository(Title::class)->newPublicDatabases();
-        $manager = $this->getDoctrine()->getManager();
-
-        return array_map([$this, 'arrangeDatabaseForDisplay'], $manager->getRepository(Title::class)->newPublicDatabases());
-    }
-
     // Returns array of [shortform: label]
     private function newestGuides($guideService, $subjectRepository): array
     {
@@ -79,11 +71,4 @@ class IndexController extends AbstractController
 
     }
 
-    private function arrangeDatabaseForDisplay($database): array
-    {
-        return [
-            'title' => $database['title'],
-            'url' => $this->databaseService->databaseUrl($database['location'], $database['restrictionsId']),
-        ];
-    }
 }

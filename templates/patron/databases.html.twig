@@ -1,20 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DatabaseListController!{% endblock %}
+{% block title %}{{'Database list' | trans}}{% endblock %}
+
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('patron_database_list') }}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% include 'patron/shared/searchbar.html.twig' with {'action': '/subjects/databases.php', 'label': 'Find databases'} %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/repos/sp5/src/Controller/Public/DatabaseListController.php'|file_link(0) }}">src/Controller/Public/DatabaseListController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/repos/sp5/templates/public/database_list/index.html.twig'|file_link(0) }}">templates/public/database_list/index.html.twig</a></code></li>
-    </ul>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+        </div>
+        <div class="col-lg-4">
+            <div class="feature-light popular-list p-3 mt-3">
+                {% include 'patron/shared/new_databases.html.twig' %}
+            </div>
+        </div>
+    </div>
 </div>
+
+
 {% endblock %}

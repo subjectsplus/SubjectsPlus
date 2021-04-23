@@ -32,4 +32,21 @@ class TitleRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+
+    public function searchBySubstring(string $substring, $numToFetch = 10)
+    {
+        // TODO: narrow by guides that are of a public type
+        return $this->createQueryBuilder('t')
+        ->select(['t.title', 'l.location', 'r.restrictionsId'])
+        ->innerJoin('t.location', 'l')
+        ->innerJoin('l.accessRestrictions', 'r')
+        ->where('t.title LIKE :substring')
+        ->setParameter('substring', "%$substring%")
+        ->orderBy('t.title', 'ASC')
+        ->setMaxResults($numToFetch)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
 }

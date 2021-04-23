@@ -69,7 +69,7 @@ class GuideController extends AbstractController
                        ->find($id);
         // TODO: check visibility; make sure public is allowed to see
         return $this->_twig->render(
-            'patron/guide/guide.html.twig',
+            'patron/guide.html.twig',
             [
             'title' => $entity->getSubject(),
             'tabs' => $entity->toPublicArray($this->plusletService),

@@ -1,21 +1,21 @@
 import {createAutocomplete} from '../autocomplete';
 
-function goToGuide(result) {
-  window.location.href = "/subjects/" + result['shortform'];
+function goToDatabase(result) {
+  window.location.href = result['url'];
 }
 
 function template(result) {
-  return result && result['subject'];
+  return result && result['title'];
 }
 
 createAutocomplete(
   '#my-autocomplete-container',
   'my-autocomplete',
-  '/api/autocomplete/guides.json?query=',
+  '/api/autocomplete/databases.json?query=',
   'searchterm',
   {
     inputValue: template,
     suggestion: template,
   },
-  goToGuide
+  goToDatabase
 );

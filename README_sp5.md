@@ -63,6 +63,11 @@ To add a translation:
   * add any data necessary for testing to the fixtures
   * add some tests to the tests/Entity or tests/Repository directory
   * add your logic to an Entity or Repository
+* Add templates
+* Add javascripts.
+  * Throw the shared ones into the assets/javascripts directory (autocomplete.js is a good example)
+  * The ones that are just used for one page: add to the patron or staff directory, as needed.  Then add an addEntry line to webpack.config.js and a
+  `{{encore_entry_script_tags}}` tag to your template
 
 ### New/modified functionality
 
