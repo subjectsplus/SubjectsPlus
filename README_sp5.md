@@ -56,6 +56,7 @@ To add a translation:
 * Create a new controller *or* add a method to an existing controller (e.g. `php bin/console make:controller Patron\TalkbackController`)
 * Modify the route annotation to match the current route(s) used for the screen in SP4
 * Add any necessary logic to your controller.  Note that Symfony recommends "skinny controllers", with most of the logic happening in other objects.
+  * You can use any functions or classes from SP4 as well
 * For any logic shared between controllers, create:
   * a file in tests/Service/ with some tests for your logic
   * a file in src/Service with your actual logic -- this can be just a plain PHP object which can then be injected into your controllers
