@@ -79,11 +79,18 @@ class Title
     private $location;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Rank", mappedBy="title")
+     */
+    private $ranks;
+
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->location = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ranks = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getTitleId(): ?string

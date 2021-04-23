@@ -3,6 +3,7 @@
     "@popperjs/core": "^2.9.2",
     "accessible-autocomplete": "^2.0.3",
     "bootstrap": "^5.0.0-beta3",
+    "bootstrap-icons": "^1.4.1",
     "core-js": "3"
   },
   "devDependencies": {

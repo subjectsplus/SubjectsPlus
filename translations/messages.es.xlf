@@ -49,6 +49,14 @@
         <source>New Databases</source>
         <target>Recursos nuevos</target>
       </trans-unit>
+      <trans-unit id="C128DYJ" resname="Trial Databases">
+        <source>Trial Databases</source>
+        <target>Recursos bajo consideración</target>
+      </trans-unit>
+      <trans-unit id="QCdxK7x" resname="Database list">
+        <source>Database list</source>
+        <target>__Database list</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

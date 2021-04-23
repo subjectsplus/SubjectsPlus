@@ -613,7 +613,7 @@ print "</div>"; // close #maincontent
 </script>
 
 <?php
-include("../includes/footer.php");
+include(dirname(__FILE__)."/../includes/footer.php");
 
 ?>
 

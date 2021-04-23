@@ -39,7 +39,16 @@ class DatabaseListController extends AbstractController
     public function index(): Response
     {
         return $this->render('patron/databases.html.twig', [
+            'letters' => getLetters('databases'),
             'newestDatabases' => $this->databaseService->newestDatabases(),
+            'trialDatabases' => $this->databaseService->getTrialDatabases(),
+            'results' => $this->getDoctrine()
+                              ->getRepository(Title::class)
+                              ->getDatabasesBy(true, $this->databaseService->searchCriteriaFromParams())
+                              ->getArrayResult(),
         ]);
+
     }
+
+
 }
