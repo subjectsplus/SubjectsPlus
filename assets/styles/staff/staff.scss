@@ -1,5 +1,7 @@
+// SCSS needed by every staff screen
 
-body {
-    background: url(../../images/admin/mission_control_lg.jpg);
-    height: 100vh;
-}
+@import "bootstrap-variables";
+
+@import "../global";
+
+@import "staff.css";

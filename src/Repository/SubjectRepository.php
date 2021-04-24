@@ -15,33 +15,42 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SubjectRepository extends ServiceEntityRepository
 {
+
+    private $basic_fields = ['s.shortform', 's.subject'];
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Subject::class);
+    }
+
+    public function getGuideListForStaff()
+    {
+        return $this->createQueryBuilder('s')
+        ->select($this->basic_fields)
+        ->orderBy('s.subject', 'ASC')
+        ->getQuery()
+        ->getArrayResult();
     }
 
     public function guidesByType()
     {
         return $this->createQueryBuilder('s')
         ->select(['s.type', 's.shortform', 's.subject'])
-        ->where('s.active = :val')
-        ->setParameter('val', true)
+        ->where('s.active = true')
         ->addgroupBy('s.type')
         ->addgroupBy('s.shortform')
         ->addgroupBy('s.subject')
         ->orderBy('s.subject', 'ASC')
         ->getQuery()
-        ->getResult()
-        ;
+        ->getResult();
     }
 
     public function newPublicGuides(GuideService $guideService, $numToFetch = 5)
     {
         // TODO: narrow by guides that are of a public type
         return $this->createQueryBuilder('s')
-        ->select(['s.shortform', 's.subject'])
-        ->andWhere('s.active = :val')
-        ->setParameter('val', true)
+        ->select($this->basic_fields)
+        ->andWhere('s.active = true')
         ->orderBy('s.subjectId', 'DESC')
         ->setMaxResults($numToFetch)
         ->getQuery()
@@ -53,9 +62,8 @@ class SubjectRepository extends ServiceEntityRepository
     {
         // TODO: narrow by guides that are of a public type
         return $this->createQueryBuilder('s')
-        ->select(['s.shortform', 's.subject'])
-        ->where('s.active = :val')
-        ->setParameter('val', true)
+        ->select($this->basic_fields)
+        ->where('s.active = true')
         ->andWhere('s.subject LIKE :substring')
         ->setParameter('substring', "%$substring%")
         ->orderBy('s.subjectId', 'DESC')
