@@ -5,6 +5,7 @@
 * `docker-compose up -d`
 * Make sure there is some good data in the database -- I just used mysqldump to get data from our production SubjectsPlus
 * `composer install`
+* `yarn install`
 * `yarn encore dev`
 * Change the assetPath line in config.php to: `$AssetPath = $BaseURL.'build/assets/';`
 
