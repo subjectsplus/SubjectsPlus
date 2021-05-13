@@ -2,10 +2,10 @@
 
 ## Upgrading an existing system
 
-. Use git to checkout this code
-. `composer install`
-. `yarn encore dev`
-. Change the assetPath line in config.php to: `$AssetPath = $BaseURL.'build/assets/';`
+* Use git to checkout this code
+* `composer install`
+* `yarn encore dev`
+* Change the assetPath line in config.php to: `$AssetPath = $BaseURL.'build/assets/';`
 
 ## Development notes
 ### Dependencies
@@ -79,9 +79,4 @@ My goal was to more-or-less keep parity in:
 On all other matters, I tried to
 * follow Symfony best practices as documented on their Web site
 * keep code DRY
-* strong test coverage
-
-A few features didn't make it over:
-* 
-
-A few features were added
+* include automated tests
