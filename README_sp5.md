@@ -1,8 +1,9 @@
 # SubjectsPlus v5
-
 ## Upgrading an existing system
 
-* Use git to checkout this code
+* Use git to checkout this branch, maintaining your existing config.php, etc.
+* `docker-compose up -d`
+* Make sure there is some good data in the database -- I just used mysqldump to get data from our production SubjectsPlus
 * `composer install`
 * `yarn encore dev`
 * Change the assetPath line in config.php to: `$AssetPath = $BaseURL.'build/assets/';`

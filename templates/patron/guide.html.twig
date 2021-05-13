@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-<h2>{{ title }}</h2>
+<h2>{{ title | raw }}</h2>
 <ul class="nav nav-pills">
     {{ include('patron/guide/tabs/tabs.html.twig') }}
 </ul>

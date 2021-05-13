@@ -38,7 +38,7 @@ class Talkback
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_submitted", type="datetime", nullable=false)
+     * @ORM\Column(name="date_submitted", type="datetime")
      */
     private $dateSubmitted;
 

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Subject;
 use App\Service\LinkCheckService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LinkCheckerController extends AbstractController
 {
@@ -27,12 +28,14 @@ class LinkCheckerController extends AbstractController
         return $this->render('staff/link_checker.html.twig', [
             'guides' => $this->getDoctrine()
                              ->getRepository(Subject::class)
-                             ->getGuideListForStaff(),
-            'links' => $this->links()
+                             ->getGuideListForStaff()
         ]);
     }
 
-    private function links(): array
+    /**
+     * @Route("/control/guides/check_links.json", name="link_checker_api")
+     */
+    public function links(): JsonResponse
     {
         $urls = [
             'https://library.linnbenton.edu',
@@ -50,7 +53,7 @@ class LinkCheckerController extends AbstractController
             'http://guides.library.jhu.edu/primary-sources-history',
             'https://www.linnbenton.edu/student-services/library-tutoring-testing/library/index2php'
         ];
-        return $this->linkCheckService->getUrlStatuses($urls);
+        return new JsonResponse($this->linkCheckService->getUrlStatuses($urls));
 
     }
 }

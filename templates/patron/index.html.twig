@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div class="pills-container">
+                <div class="pills-container mt-5">
                     <ul class="nav nav-pills justify-content-around justify-content-md-start" id="pills-tab-guides" role="tablist">
                     
                     <li class="nav-item">
@@ -35,19 +35,19 @@
                     </ul>
                 </div>
                 <div class="tab-content" id="pills-tabContent-guides">
-                <div class="tab-pane show active" id="section-Collection" role="tabpanel">
+                <div class="tab-pane show active mt-4" id="section-Collection" role="tabpanel">
                     <ul class="two-columns">
                         {% for collection in collections %}
-                            <li><a href="/subjects/collection.php?d={{collection.shortform}}">{{collection.title}}</a></li>
+                            <li><a href="/subjects/collection.php?d={{collection.shortform}}">{{collection.title | raw}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 {% for guideType in guideTypes %}
-                     <div class="tab-pane" id="section-{{guideType | replace({' ': '-'})}}" role="tabpanel">
+                     <div class="tab-pane mt-4" id="section-{{guideType | replace({' ': '-'})}}" role="tabpanel">
                          <ul class="two-columns">
                              {% set filteredGuides =  guides | filter(g => g['type'] == guideType) %}
                              {% for guide in filteredGuides %}
-                                 <li><a href="{{ path('guidebyShortname', {shortform: guide.shortform}) }}">{{ guide.subject }}</a></li>
+                                 <li><a href="{{ path('guidebyShortname', {shortform: guide.shortform}) }}">{{ guide.subject | raw }}</a></li>
                              {% endfor %}
                          </ul>
                      </div>

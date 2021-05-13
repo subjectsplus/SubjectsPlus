@@ -57,6 +57,118 @@
         <source>Database list</source>
         <target>__Database list</target>
       </trans-unit>
+      <trans-unit id="OvyO74O" resname="Link checker">
+        <source>Link checker</source>
+        <target>__Link checker</target>
+      </trans-unit>
+      <trans-unit id="PIPUPqY" resname="Choose a guide">
+        <source>Choose a guide</source>
+        <target>__Choose a guide</target>
+      </trans-unit>
+      <trans-unit id="pu.M8ln" resname="Select guide">
+        <source>Select guide</source>
+        <target>__Select guide</target>
+      </trans-unit>
+      <trans-unit id="IZxKbIa" resname="Results">
+        <source>Results</source>
+        <target>__Results</target>
+      </trans-unit>
+      <trans-unit id="R6hOktW" resname="Records">
+        <source>Records</source>
+        <target>__Records</target>
+      </trans-unit>
+      <trans-unit id="OkJqOml" resname="New record">
+        <source>New record</source>
+        <target>__New record</target>
+      </trans-unit>
+      <trans-unit id="RX6kkLd" resname="Browse items">
+        <source>Browse items</source>
+        <target>__Browse items</target>
+      </trans-unit>
+      <trans-unit id="89e4BGQ" resname="Databases by subject">
+        <source>Databases by subject</source>
+        <target>__Databases by subject</target>
+      </trans-unit>
+      <trans-unit id="bBGFM.7" resname="New guide">
+        <source>New guide</source>
+        <target>__New guide</target>
+      </trans-unit>
+      <trans-unit id="Kbff5xh" resname="Browse guides">
+        <source>Browse guides</source>
+        <target>__Browse guides</target>
+      </trans-unit>
+      <trans-unit id="sx0DNnr" resname="Manage files">
+        <source>Manage files</source>
+        <target>__Manage files</target>
+      </trans-unit>
+      <trans-unit id="tKc2V0D" resname="Stats">
+        <source>Stats</source>
+        <target>__Stats</target>
+      </trans-unit>
+      <trans-unit id="PgREtev" resname="New FAQ">
+        <source>New FAQ</source>
+        <target>__New FAQ</target>
+      </trans-unit>
+      <trans-unit id="IY1Rhrj" resname="Browse by subject">
+        <source>Browse by subject</source>
+        <target>__Browse by subject</target>
+      </trans-unit>
+      <trans-unit id="E8zxacA" resname="Browse by collection">
+        <source>Browse by collection</source>
+        <target>__Browse by collection</target>
+      </trans-unit>
+      <trans-unit id="yaljlGP" resname="Videos">
+        <source>Videos</source>
+        <target>__Videos</target>
+      </trans-unit>
+      <trans-unit id="OLZdaiv" resname="Browse videos">
+        <source>Browse videos</source>
+        <target>__Browse videos</target>
+      </trans-unit>
+      <trans-unit id="h6a9DVN" resname="Find/ingest video">
+        <source>Find/ingest video</source>
+        <target>__Find/ingest video</target>
+      </trans-unit>
+      <trans-unit id="EfZdqxV" resname="Manually enter video">
+        <source>Manually enter video</source>
+        <target>__Manually enter video</target>
+      </trans-unit>
+      <trans-unit id="wcIksDz" resname="Admin">
+        <source>Admin</source>
+        <target>__Admin</target>
+      </trans-unit>
+      <trans-unit id="3QLw0Ms" resname="Admin dashboard">
+        <source>Admin dashboard</source>
+        <target>__Admin dashboard</target>
+      </trans-unit>
+      <trans-unit id="SBrkRVV" resname="Add new user">
+        <source>Add new user</source>
+        <target>__Add new user</target>
+      </trans-unit>
+      <trans-unit id="X5SUxNI" resname="Departments">
+        <source>Departments</source>
+        <target>__Departments</target>
+      </trans-unit>
+      <trans-unit id="PQTtSGj" resname="Manage guides">
+        <source>Manage guides</source>
+        <target>__Manage guides</target>
+      </trans-unit>
+      <trans-unit id="SAR0QJ7" resname="Guide collections">
+        <source>Guide collections</source>
+        <target>__Guide collections</target>
+      </trans-unit>
+      <trans-unit id="uwe1YLt" resname="Database types">
+        <source>Database types</source>
+        <target>__Database types</target>
+      </trans-unit>
+      <trans-unit id="vJuZaTm" resname="FAQ collections">
+        <source>FAQ collections</source>
+        <target>__FAQ collections</target>
+      </trans-unit>
+      <trans-unit id="gNzfBk3" resname="Config site">
+        <source>Config site</source>
+        <target>__Config site</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

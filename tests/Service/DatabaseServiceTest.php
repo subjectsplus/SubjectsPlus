@@ -9,8 +9,11 @@ class DatabaseServiceTest extends KernelTestCase
 {
     public function testDatabaseUrl()
     {
+        self::bootKernel();
+        $container = self::$container;
+
         $proxy_url = 'http://proxy.university.edu/login?url=';
-        $service = new DatabaseService();
+        $service = $container->get(DatabaseService::class);
         $proxy_needed = $service->databaseUrl('http://ebsco.com/database', 0, $proxy_url);
         $expected = 'http://proxy.university.edu/login?url=http://ebsco.com/database';
         $this->assertSame($expected, $proxy_needed);

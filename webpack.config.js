@@ -24,6 +24,7 @@ Encore
     .addEntry('patron_index', './assets/javascripts/patron/index.js')
     .addEntry('patron_database_list', './assets/javascripts/patron/database_list.js')
     .addEntry('staff', './assets/javascripts/staff/staff.js')
+    .addEntry('linkcheck', './assets/javascripts/staff/linkcheck.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
