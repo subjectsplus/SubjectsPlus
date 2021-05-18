@@ -1,3 +1,169 @@
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+assets/cache/*
+control/includes/config.php
+assets/images/*
+assets/users/*
+
+*.PHPEdit*
+
+subjects/includes/pgcache/*
+
+/assets/users/*
+/assets/images
+/assets/images/video_thumbs/
+
+.idea/
+*.iml*
+
+/assets/users/*
+
+control/includes/db.ini
+db.ini
+
+*.ini*
+*.db.ini*
+new_acquisitions.php
+
+tests/_output/*
+
+
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# Eclipse Core
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# TeXlipse plugin
+.texlipse
+
+
+
+php_errors.log
+
+tests/_output/*
+libguides.xml
+import_log.html
+4.7.0,a06f1b3a8b377b8784aa8b263f9597fa11d113a2,1.ser
+4.7.0,5495b309761ea0de1744a362cfae7235ad53ee72,1.ser
+
+subjectsplus-db-diagram.png
+richter_items.php
+external_scripts
+
+control/lti_controller/config.php
+nul
+
+
+.idea/
+public.iml
+nul
+/node_modules/
+
+/subjects/themes/med/
+/subjects/themes/um-new/
+
+control/lti_controller/log.txt
+
+lib/HTMLPurifier/HTMLPurifier/DefinitionCache/
+/vendor/
+.htaccess
+subjects/.htaccess
+api/.htaccess
+
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -27,3 +193,5 @@ yarn-error.log
 ###< symfony/phpunit-bridge ###
 #
 /assets/cache
+
+control/includes/config.php
