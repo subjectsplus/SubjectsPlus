@@ -447,7 +447,7 @@ if (is_null($header_type)
 										<h5>Publish & Promote</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/ORCID">Create an ORCID iD</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)
 												</a></li>
 
