@@ -197,5 +197,5 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 
 
 <?php 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>

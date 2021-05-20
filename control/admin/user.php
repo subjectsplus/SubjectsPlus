@@ -20,7 +20,7 @@ $feedback = "";
     
 
     
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 // Test our record_id, if it exists; must be integer
 if (isset($_REQUEST["staff_id"])) {
@@ -159,7 +159,7 @@ if (isset($_GET["browse"])) {
     makePluslet(_("On Privilege"), $privs_blurb, "no_overflow");
 
     print "</div>";
-    include("../includes/footer.php");
+    include_once("../control/includes/footer.php");
     ?>
 
 <script type="text/javascript">
@@ -306,7 +306,7 @@ if (isset($_POST["delete_record"]) || isset($_GET["delete_record"])) {
 
 //$record->deBug();
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 
 <script type="text/javascript">

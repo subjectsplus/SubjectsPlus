@@ -12,9 +12,11 @@ header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
-require_once("../../includes/autoloader.php");
-require_once("../../includes/config.php");
-require_once("../../includes/functions.php");
+
+
+require_once("../control/includes/autoloader.php");
+require_once("../control/includes/config.php");
+require_once("../control/includes/functions.php");
 
 use SubjectsPlus\Control\Guide\GuideCollection;
 use SubjectsPlus\Control\Querier;

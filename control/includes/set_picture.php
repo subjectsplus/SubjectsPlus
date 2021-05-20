@@ -188,4 +188,4 @@ print "</div></div>";
 
 <?php
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");

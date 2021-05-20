@@ -22,7 +22,7 @@ if(isset($_GET['type']))
 	$postvar_type = $_GET['type'];
 }
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 // Print out //
 
@@ -118,5 +118,5 @@ ORDER BY faq_id DESC";
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>

@@ -115,7 +115,7 @@ if (!$no_form) {
 
 //$record->deBug();
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 
 <script type="text/javascript">

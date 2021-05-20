@@ -17,7 +17,7 @@ $page_title = "Admin FAQ Collections";
 
 // print_r($_POST);
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 $db = new Querier;
 //init
 $ourlist = "";
@@ -138,7 +138,7 @@ print "</div>"; // close pure-u-1-3
 print "</div>"; // close pure-g
 
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 <script type="text/javascript">
     $(function() {

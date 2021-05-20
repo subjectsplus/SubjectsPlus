@@ -136,5 +136,5 @@ print $upload_box;
 print $original_photo;
 print "</div>";
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>

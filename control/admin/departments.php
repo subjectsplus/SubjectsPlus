@@ -18,8 +18,8 @@ $feedback = "";
 
 //print_r($_POST);
 
-include("../includes/header.php");
-include("../includes/autoloader.php");
+include("../control/includes/header.php");
+include("../control/includes/autoloader.php");
 // Connect to database
 $db = new Querier;
 
@@ -180,7 +180,7 @@ makePluslet(_("View Live!"), $view_depts_box, "no_overflow");
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 <script type="text/javascript">
     $(function() {

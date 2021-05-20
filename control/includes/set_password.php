@@ -77,6 +77,6 @@ print $feedback;
 print $password_box;
 print "</div>";
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 
 ?>

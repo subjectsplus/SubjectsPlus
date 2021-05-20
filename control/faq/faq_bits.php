@@ -17,7 +17,7 @@ $page_title = "FAQ Bits include";
 $header = "noshow";
 
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 // Connect to database
 

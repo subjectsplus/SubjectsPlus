@@ -25,4 +25,4 @@ $editSpecialCodeTemplate = $integration->getEditCourseCodeTemplateForm();
 
 include( __DIR__ . "/sp-bb-special-codes/views/sp-bb-codes-main.php");
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");

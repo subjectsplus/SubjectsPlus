@@ -18,7 +18,7 @@ $feedback = "";
 
 //var_dump($_POST);
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 include("../includes/autoloader.php");
 
 

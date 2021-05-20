@@ -16,7 +16,7 @@ $subcat = "admin";
 $page_title = "Admin Source Types";
 //print_r($_POST);
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 $db = new Querier;
 
@@ -140,7 +140,7 @@ makePluslet(_("Add Source"), $add_source_box, "no_overflow");
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 <script type="text/javascript">
  jQuery(function() {

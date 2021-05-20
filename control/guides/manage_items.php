@@ -173,7 +173,7 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 
 

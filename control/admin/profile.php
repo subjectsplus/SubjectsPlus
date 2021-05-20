@@ -14,7 +14,7 @@ use SubjectsPlus\Control\Querier;
   
 $page_title = "Admin::Users";
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 // init
 $feedback = "";
@@ -71,7 +71,7 @@ $record->outputSelfEditForm();
 
 //$record->deBug();
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 
 <script type="text/javascript">

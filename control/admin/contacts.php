@@ -14,7 +14,7 @@ $subsubcat = "";
 $subcat = "";
 $page_title = "View/Export Contact Information";
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 $reporting_id = $_SESSION["staff_id"];
 
@@ -82,7 +82,7 @@ if (isset($show_reports_hierarchical) && $show_reports_hierarchical != "") {
 </div>
 
 <?php
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 
 
 

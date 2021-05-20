@@ -89,7 +89,7 @@ $linkReport
     </div>
 </div>";
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 <script type="text/javascript">
 

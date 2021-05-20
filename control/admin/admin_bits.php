@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 $subsubcat = "";
 $page_title = "Admin Bits include";
 $header = "noshow";
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 $db = new Querier;
 
@@ -334,4 +334,4 @@ print "<div class=\"box_feedback\">$message</div><br /><br />";
 
 print $staff_list;
 
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");

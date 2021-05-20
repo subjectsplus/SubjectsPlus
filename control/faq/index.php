@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 $subcat = "faq";
 $page_title = "FAQ Admin";
 
-include("../includes/header.php");
+include_once("../control/includes/header.php");
 
 try {
   } catch (Exception $e) {
@@ -117,7 +117,7 @@ $faq_body .= "</strong></p>" . $faq_list;
 
 </div>
 <?php
-include("../includes/footer.php");
+include_once("../control/includes/footer.php");
 ?>
 
 
