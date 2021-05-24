@@ -99,78 +99,6 @@ if (is_null($header_type)
     && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
     && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
     ?>
-	<div class="key-messaging-desktop">
-		<!--Key messaging desktop-->
-		<!--key messaging area-->
-		<div id="keyMessagingArea" style="display: none;">
-			<div class="container">
-				<div class="row no-gutters">
-					<div class="col-sm-11 col-lg-5 col-xl-4 order-sm-first icons-section">
-						<p class="heading">Spring 2021: Book a Library Seat</p>
-						<ul class="list-unstyled d-flex flex-row flex-nowrap icons-area">
-							<li class="icon-holder">
-								<a class="default no-decoration" href="https://www.library.miami.edu/seat">
-									<img src="https://www.library.miami.edu/assets/common-images/special-icons/form-file-icon.svg" alt="Form file icon" class="form-file-icon" />
-									<p><span class="icon-short-label">Online</span><br/>
-										<span class="icon-highlight">Booking</span></p>
-								</a>
-							</li>
-							<li class="icon-holder">
-								<a class="default no-decoration" href="https://libcal.miami.edu/r/checkin">
-									<img src="https://www.library.miami.edu/assets/common-images/special-icons/mobile-code.svg" alt="Mobile code icon" class="mobile-code-icon" />
-									<p><span class="icon-short-label">Online</span><br/>
-										<span class="icon-highlight">Check-In</span></p>
-								</a>
-							</li>
-							<li class="icon-holder">
-								<img src="https://www.library.miami.edu/assets/common-images/special-icons/ban-icon.svg" alt="Ban icon" class="ban-icon" />
-								<p style="vertical-align: super;">Not Allowed<br/>
-									<span class="icon-highlight">Food/Drink</span></p>
-							</li>
-						</ul>
-					</div>
-					<div class="col-11 col-sm-12 col-lg-6 col-xl-7 order-sm-3 order-lg-2 text-section">
-						<ul class="list-unstyled d-md-flex flex-md-row flex-md-nowrap text-holder">
-							<li>
-								<p class="heading"><a href="https://www.library.miami.edu/online-services" class="default">Online Services</a></p>
-								<p>Access library content, research help, teaching support, course reserves & more</p>
-							</li>
-							<li>
-								<p class="heading"><a href="https://www.library.miami.edu/find/request-materials.html" class="default">Request Materials</a></p>
-								<p>Print collections available via pick-up service and Interlibrary Loan</p>
-							</li>
-						</ul>
-					</div>
-					<div class="col-1 order-sm-2 order-lg-last close-column">
-						<div class="close-message-panel">
-							<div class="close-message d-none" title="Close"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<script>
-            $( function(){
-                // Move messaging area based on viewport
-                function moveKeyMessaging() {
-                    var area = $('#keyMessagingArea');
-                    var viewPortWidth = window.innerWidth;
-                    if (viewPortWidth < 990) {
-                        $('.key-messaging-mobile').append(area);
-                    }
-                    else {
-                        $('.key-messaging-desktop').append(area);
-                    }
-                }
-
-                moveKeyMessaging();
-                $( window ).resize(function() {
-                    moveKeyMessaging();
-                });
-            });
-		</script>
-	</div>
 <?php endif; ?>
 <nav class="navbar-expand-lg site-navbar-slim" style="background-color:#3a4955;">
     <div class="container position-relative">
@@ -227,6 +155,7 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Renew your Books (My Account)
 												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/request-materials.html">Request Materials</a></li>
 
 										</ul>
 
@@ -662,8 +591,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://sp.library.miami.edu/subjects/book-seat">Book a Library Seat
-													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+											<li><a class="dropdown-item no-decoration cta" href="https://sp.library.miami.edu/subjects/study-rooms">Study Rooms <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/graduate-study.html">Graduate Study Areas
 												</a></li>
