@@ -50,12 +50,12 @@ class CompleteMe {
 
 
     switch($this->display) {
-
-      case "public":
-        $auto_complete_url = $PublicPath;
-        break;
       case "control":
         $auto_complete_url = $CpanelPath;
+        break;
+      case "public":
+      default:
+        $auto_complete_url = $PublicPath;
         break;
     }
     
