@@ -31,7 +31,7 @@ if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subject
 include("includes/header.php");
 
 // Our search box
-$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60", "");
+$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60");
 
 if (isset($_GET["searchterm"])) {
 	$search = new Search;
