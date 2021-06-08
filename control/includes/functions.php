@@ -495,10 +495,6 @@ function scrubData( $string, $type = "text" ) {
 
 	switch ( $type ) {
 		case "text":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			$string = strip_tags( $string );
 			$string = htmlspecialchars( $string, ENT_QUOTES );
 			$config   = HTMLPurifier_Config::createDefault();
@@ -507,10 +503,6 @@ function scrubData( $string, $type = "text" ) {
 			$string   = $purifier->purify( $string );
 			break;
 		case "richtext":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			break;
 		case "richtext_html_purifier":
 			$config   = HTMLPurifier_Config::createDefault();
@@ -519,10 +511,6 @@ function scrubData( $string, $type = "text" ) {
 			$string   = $purifier->purify( $string );
 			break;
 		case "email":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			//removes any tags protecting against javascript injection
 			$string = filter_var( $string, FILTER_SANITIZE_EMAIL );
 
