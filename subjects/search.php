@@ -21,8 +21,8 @@ include("../control/includes/autoloader.php");
 $page_title = _("Search Results");
 
 // scrub incoming
-if (isset($_POST["searchterm"])) {
-	$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+if (isset($_GET["searchterm"])) {
+	$_GET["searchterm"] = scrubData($_GET["searchterm"]);
 }
 
 // If you have a theme set, but DON'T want to use it for this page, comment out the next line
@@ -33,9 +33,9 @@ include("includes/header.php");
 // Our search box
 $input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60", "");
 
-if (isset($_POST["searchterm"])) {
+if (isset($_GET["searchterm"])) {
 	$search = new Search;
-	$search->setSearch($_POST['searchterm']);
+	$search->setSearch($_GET['searchterm']);
 
 	$results = $search->getResults();
 
@@ -97,7 +97,7 @@ if (isset($_POST["searchterm"])) {
 	        }
 	    }
 
-$subtitle = _("Search Results for ") . $_POST['searchterm'];
+$subtitle = _("Search Results for ") . $_GET['searchterm'];
 
 } else {
 	$subtitle = _("No search term entered");
