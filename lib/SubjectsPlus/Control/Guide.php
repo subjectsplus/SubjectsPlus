@@ -1218,7 +1218,7 @@ class Guide
 
 
 
-        $childs = implode($child_ids, ',');
+        $childs = implode(',', $child_ids);
         
         	// Modded to handle tab children
         	
@@ -1289,7 +1289,7 @@ class Guide
                 }
             }
 
-            $childs = implode($child_ids, ',');
+            $childs = implode(',', $child_ids);
 
             $class = "";
             $class .= $lobjTabMobile['visibility'] == 0 ? ' hidden_tab' : '';
