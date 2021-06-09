@@ -426,7 +426,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . "
           WHERE faq_id = " . scrubData($this->_faq_id, 'integer');
 
-    $rUpFAQ = $db->query($qUpFAQ);
+    $rUpFAQ = $db->exec($qUpFAQ);
 
     $this->_debug = "<p>1. update faq: $qUpFAQ</p>";
 
@@ -437,7 +437,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 
     $qClearSubs = "DELETE FROM faq_subject WHERE faq_id = " . $this->_faq_id;
 
-    $rClearSubs = $db->query($qClearSubs);
+    $rClearSubs = $db->exec($qClearSubs);
 
     $this->_debug .= "<p>2. clear rank: $qClearSubs</p>";
 
@@ -453,7 +453,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 
     // wipe entry from intervening table
     $qClearColls = "DELETE FROM faq_faqpage WHERE faq_id = " . scrubData($this->_faq_id, "integer");
-    $rClearColls = $db->query($qClearColls);
+    $rClearColls = $db->exec($qClearColls);
 
     $this->_debug .= "<p>4. wipe faq_faqpage: $qClearColls</p>";
     if ($rClearColls === FALSE) {
@@ -485,7 +485,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
                 " . scrubData($this->_faq_id, 'integer') . ",
                 " . scrubData($this->_subject[$i], 'integer') . ")";
 
-      $rUpSub = $db->query($qUpSub);
+      $rUpSub = $db->exec($qUpSub);
 
       $this->_debug .= "<p>3. (update faq_subject loop) : $qUpSub</p>";
       if ($rUpSub === FALSE) {
@@ -501,7 +501,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
                 " . scrubData($this->_faq_id, "integer") . ",
                 " . scrubData($this->_collection[$i], "integer") . ")";
 
-      $rUpColl = $db->query($qUpColl);
+      $rUpColl = $db->exec($qUpColl);
 
       $this->_debug .= "<p>3. (update faq_faqpage loop) : $qUpColl</p>";
       if ($rUpColl === FALSE) {
