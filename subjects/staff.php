@@ -18,8 +18,10 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/staff.php"); exit;}
+$this_fname = "staff.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
+
 
 $page_title = "Library Staff";
 $description = "Library contact list.";
@@ -58,7 +60,7 @@ $display = $alphabet . $intro . $out;
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
+include(theme_file("includes/header.php", $subjects_theme));
 
 ?>
 <div class="pure-g">
@@ -97,6 +99,6 @@ include("includes/header.php");
 // Footer
 ///////////
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 
 ?>

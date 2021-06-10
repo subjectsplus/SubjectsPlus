@@ -21,8 +21,9 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index.php"); exit;}
+$this_fname = "index.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
 
 // Now, check if they want to use an SP guide as the splash page
@@ -155,8 +156,7 @@ $searchbox = '
 
 
 // Add header now, because we need a value ($v2styles) from it
-include("includes/header.php");
-
+include(theme_file("includes/header.php", $subjects_theme));
 
 // put together our main result display
 //**************************************
@@ -361,7 +361,7 @@ include("includes/header.php");
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 
 ?>
 

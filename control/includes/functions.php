@@ -548,6 +548,21 @@ function blunDer( $message, $type = 1 ) {
 // Erstwhile guide_functions.php
 ////////////////
 
+function theme_file( $filename, $subjects_theme = null, $header_type = null) {
+	// This works because $header_type is currently only used on files directly in includes/
+	if ( isset($header_type) && $header_type != "" && $header_type != "default" ) {
+		$guide_fname = preg_replace( '/\.php$/', "_$header_type.php", $filename);
+		if ( file_exists($guide_fname) ) return $guide_fname;
+	}
+
+	if ( isset($subjects_theme) && $subjects_theme != "" ) {
+		$theme_fname = "themes/$subjects_theme/$filename";
+		if ( file_exists($theme_fname) ) return $theme_fname;
+	}
+
+	return $filename;
+}
+
 
 function findDescOverride( $subject_id, $title_id ) {
 	$db = new Querier();

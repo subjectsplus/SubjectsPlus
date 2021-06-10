@@ -25,10 +25,12 @@ if (isset($_GET["searchterm"])) {
 	$_GET["searchterm"] = scrubData($_GET["searchterm"]);
 }
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/search.php"); exit;}
+$this_fname = "search.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
-include("includes/header.php");
+include(theme_file("includes/header.php", $subjects_theme));
+
 
 // Our search box
 $input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60");
@@ -132,6 +134,6 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 //print "<pre>";
 //print_r($results);
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 
 ?>

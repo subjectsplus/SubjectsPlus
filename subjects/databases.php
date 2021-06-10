@@ -15,8 +15,10 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/databases.php"); exit;}
+$this_fname = "databases.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
+
 
 $db = new Querier;
 $connection = $db->getConnection();
@@ -192,7 +194,7 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-include("includes/header.php");
+include(theme_file("includes/header.php", $subjects_theme));
 
 // Our version 2 vs version 3 styles choice
 
@@ -271,7 +273,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 ?>
 
 <script type="text/javascript" language="javascript">
