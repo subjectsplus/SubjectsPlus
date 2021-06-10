@@ -1192,7 +1192,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 				//if the mod_rewrite option changed
 				if ( $lobjConfig->isNewModRewrite() ) {
 					//write the approriate .htaccess file to given path
-					$lobjConfig->wrtieModRewriteFile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess' );
+					$lobjConfig->writeModRewriteFile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess' );
 				}
 
 			} else {
