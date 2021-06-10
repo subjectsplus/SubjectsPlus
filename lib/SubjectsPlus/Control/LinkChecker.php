@@ -73,7 +73,7 @@ class LinkChecker {
 			<span class="record_label"><?php print _("Select Guide"); ?>:</span><br />
 				<form method="post">
 			<?php
-			if(($_SESSION['admin'] == 1) || ($_SESSION['allguides'] == 1))
+			if( (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1)) || (isset($_SESSION['allguides']) && $_SESSION['allguides'] == 1) )
 			{
 				$from = 'subject';
 				$where = '';
