@@ -256,22 +256,14 @@ $branch_filter = "";
  * Variables set here will be used in the appropriate theme header
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include("./themes/{$subjects_theme}/views/talkback/page_metadata.php");
-} else {
-	include( "views/talkback/page_metadata.php" );
-}
+include(theme_file("views/talkback/page_metadata.php", $subjects_theme));
 
 
 /**
  * Include the branch_metadata based on the theme used
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include("./themes/{$subjects_theme}/views/talkback/branch_metadata.php");
-} else {
-	include( "./views/talkback/branch_metadata.php" );
-}
+include(theme_file("views/talkback/branch_metadata.php", $subjects_theme));
 
 
 if ( isset( $_GET['c'] ) ) {
@@ -492,11 +484,8 @@ if ( isset( $_POST['the_suggestion'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' 
  * Include the header based on the theme used
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include( "includes/header_{$subjects_theme}.php" );
-} else {
-	include( "includes/header.php" );
-}
+// Looks wrong but matches previous behavior.
+include(theme_file("includes/header.php", $subjects_theme, $subjects_theme));
 
 
 /**
@@ -504,12 +493,7 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
  * @global $subjects_theme
  * @var $tpl_folder
  */
-
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	$tpl_folder = "./themes/{$subjects_theme}/views/talkback";
-} else {
-	$tpl_folder = "./views/talkback";
-}
+$tpl_folder = theme_file("views/talkback", $subjects_theme);
 
 /**
  *
@@ -551,8 +535,6 @@ echo $tpl->render( $tpl_name, array(
  * Include the footer based on the theme used
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include( "includes/footer_{$subjects_theme}.php" );
-} else {
-	include( "includes/footer.php" );
-}
+// Looks wrong but matches previous behavior
+include(theme_file("includes/footer.php", $subjects_theme, $subjects_theme));
+

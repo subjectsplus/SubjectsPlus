@@ -148,22 +148,14 @@ $form_submit_fail = _("There was a problem submitting your issue. Please contact
  * Variables set here will be used in the appropriate theme header
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include("./themes/{$subjects_theme}/views/usearch-problem-report/page_metadata.php");
-} else {
-	include( "views/usearch-problem-report/page_metadata.php" );
-}
+include(theme_file("views/usearch-problem-report/page_metadata.php", $subjects_theme));
 
 
 /**
  * Include the branch_metadata based on the theme used
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include("./themes/{$subjects_theme}/views/usearch-problem-report/branch_metadata.php");
-} else {
-	include( "./views/usearch-problem-report/branch_metadata.php" );
-}
+include(theme_file("views/usearch-problem-report/branch_metadata.php", $subjects_theme));
 
 
 
@@ -171,12 +163,8 @@ if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
  * Include the header based on the theme used
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include( "includes/header_{$subjects_theme}.php" );
-} else {
-	include( "includes/header.php" );
-}
-
+// Looks wrong but matches previous behavior
+include(theme_file("includes/header.php", $subjects_theme, $subjects_theme));
 
 
 
@@ -402,8 +390,6 @@ echo $tpl->render( $tpl_name, array(
  * Include the footer based on the theme used
  * @global $subjects_theme
  */
-if ( isset( $subjects_theme ) && $subjects_theme != "" ) {
-	include( "includes/footer_{$subjects_theme}.php" );
-} else {
-	include( "includes/footer.php" );
-}
+// Looks wrong but matches previous behavior
+include(theme_file("includes/footer.php", $subjects_theme, $subjects_theme));
+
