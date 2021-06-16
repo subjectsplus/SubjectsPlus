@@ -25,14 +25,15 @@
     "core-js": "3"
   },
   "devDependencies": {
-    "auto-changelog": "^1.11.0",
     "@symfony/stimulus-bridge": "2.0.0",
     "@symfony/webpack-encore": "^1.1.2",
+    "auto-changelog": "^1.11.0",
     "file-loader": "6.0.0",
     "jquery": "^3.6.0",
     "node-sass": "^5.0.0",
     "popper.js": "^1.16.1",
     "sass-loader": "^11.0.1",
-    "stimulus": "^2.0.0"
+    "stimulus": "^2.0.0",
+    "webpack-notifier": "^1.6.0"
   }
 }
