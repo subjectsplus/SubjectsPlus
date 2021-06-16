@@ -285,7 +285,7 @@ $DelishPath = $PublicPath . "delish_feed.php";
 
 /* Path to the asset folder
    You shouldn't have to modify this */
-$AssetPath = $BaseURL . "assets/";
+$AssetPath = $BaseURL . "/build/assets/";
 
 /* Path to the user folder
    You shouldn't have to modify this */
