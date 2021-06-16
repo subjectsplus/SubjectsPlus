@@ -294,6 +294,8 @@ fabric.properties
 composer.phar
 /vendor/
 
+composer.lock
+
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
@@ -304,6 +306,8 @@ composer.phar
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+
+symfony.lock
 
 # Email spool folder
 /app/spool/*
@@ -1226,3 +1230,15 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
