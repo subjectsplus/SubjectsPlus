@@ -21,6 +21,30 @@ if (isset($_GET["searchterm"]) && strlen($_GET["searchterm"]) > 0) {
 	// Loop through each content type returned in array
 	foreach ($results as $result) {
 		
+		// Matching text does not exist or is empty
+		if (!isset($result['matching_text']) || trim($result['matching_text']) == "") {
+			// Use additional text instead
+			if (isset($result['additional_text']) && trim($result['additional_text']) != ""
+				&& $result['content_type'] != "Pluslet") {
+				
+				// Length of additional_text to display
+				$text_length = 25;
+				
+				// Display additional_text as matching_text up to the length of text_length
+				$result['matching_text'] = $result['additional_text'];
+				if (strlen($result['additional_text']) <= $text_length) {
+					$result['matching_text'] = $result['additional_text'];
+				} else {
+					$result['matching_text'] = trim(substr($result['additional_text'], 0, $text_length))  . "...";
+				}
+			} else {
+				// neither the matching text nor the additional text are available, 
+				// pluslets have an incompatible additional_text value (HTML),
+				// skip the result
+				continue;
+			}
+		}
+
 		switch($result['content_type']) {
 
 	 	  case 'Record':
@@ -42,6 +66,7 @@ if (isset($_GET["searchterm"]) && strlen($_GET["searchterm"]) > 0) {
 		  case 'Pluslet':
 		    $pluslets_results[] = "<a href='guides/guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
 		    break;
+
 		  case 'Staff':
 		    $staff_results[] = "<a href='admin/user.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
 		    break;
@@ -90,7 +115,7 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 
 		<?php
 		// Additional Search bar pluslet
-		$search_subtitle = "Search";
+		$search_subtitle = ("Search");
 		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "", $subcat, "", "control", $_GET["searchterm"]);
 		$input_box_html = $input_box->displayBox(false);
 		makePluslet($search_subtitle, $input_box_html, "no_overflow");
