@@ -9,7 +9,10 @@ use SubjectsPlus\Control\Search;
 // scrub incoming
 $_GET["searchterm"] = scrubData($_GET["searchterm"]);
 
-if (isset($_GET["searchterm"])) {
+// trim search string
+$_GET["searchterm"] = trim($_GET["searchterm"]);
+
+if (isset($_GET["searchterm"]) && strlen($_GET["searchterm"]) > 0) {
 	$search = new Search;
 	$search->setSearch($_GET['searchterm']);
 
