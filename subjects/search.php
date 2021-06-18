@@ -33,7 +33,7 @@ include(theme_file("includes/header.php", $subjects_theme));
 
 
 // Our search box
-$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60");
+$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", "", "60", "public", $_GET["searchterm"]);
 
 if (isset($_GET["searchterm"])) {
 	$search = new Search;
@@ -47,7 +47,7 @@ if (isset($_GET["searchterm"])) {
 		switch($result['content_type']) {
 
 	 	  case 'Record':
-	 	  	$records_results[] = "<a href='databases.php?letter=%" . $result['matching_text'] . "%'/>" . $result['matching_text'] .  "</a>";	    
+	 	  	$records_results[] = "<a href='record.php?id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
 		    break;
 
 	 	  case 'Talkback':

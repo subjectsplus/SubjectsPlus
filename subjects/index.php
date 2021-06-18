@@ -61,15 +61,6 @@ if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
     $view_type = "all";
 }
 
-///////////////////////
-// Have they done a search?
-
-$search = "";
-
-if (isset($_POST["search"])) {
-    $search = scrubData($_POST["search"]);
-}
-
 // Get the subjects for jquery autocomplete
 $suggestibles = "";  // init
 
@@ -146,7 +137,7 @@ $newlist .= "</ul>\n";
 
 $searchbox = '
 <div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
-    <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
+    <form id="sp_admin_search" class="pure-form" method="get" action="search.php">
         <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
         <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" alt="Search" name="submitsearch" id="topsearch_button" class="pure-button pure-button-topsearch" value="Go">

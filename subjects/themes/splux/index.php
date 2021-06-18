@@ -126,8 +126,8 @@ $layout             = ""; //init
 $collection_results = ""; //init
 
 // Is this a search?
-if ( isset( $_POST["searchterm"] ) && $_POST["searchterm"] != "" ) {
-	$searchterm   = scrubData( $_POST["searchterm"] );
+if ( isset( $_GET["searchterm"] ) && trim($_GET["searchterm"]) != "") {
+	$searchterm   = scrubData( $_GET["searchterm"] );
 	$search_param = "%" . $searchterm . "%";
 
 	$pills = "<div class=\"feature-light p-3 mb-3\">" . _( "Need to start over? " ) . "<a href=\"index.php\" class=\"no-decoration\">See All Research Guides</a></div>";
