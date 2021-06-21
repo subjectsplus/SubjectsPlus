@@ -62,7 +62,7 @@ class CompleteMe {
     $search_form_html = "
     <div id=\"autoC\" class=\"autoC\">
        <form action=\"$this->action\" method=\"get\" class=\"pure-form\" id=\"sp_admin_search\">
-      <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" /> <input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button pure-button-topsearch\" id=\"topsearch_button\" name=\"submitsearch\" alt=\"Search\" />
+      <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" /> <input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button pure-button-topsearch\" id=\"topsearch_button\" name=\"\" alt=\"Search\" />
        </form>
    </div>";
 

@@ -5,19 +5,74 @@ $page_title = "Search Results";
 include("includes/header.php");
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Search;
+use SubjectsPlus\Control\Dropdown;
 
-// scrub incoming
-$_GET["searchterm"] = scrubData($_GET["searchterm"]);
+// Categories for searching and sortby
+$search_categories = array("all" => "All", "records" => "Records",
+"guides" => "Guides", "faq" => "FAQs", "talkback" => "Talkbacks",
+"pluslets" => "Pluslets", "staff" => "Staff");
 
-// trim search string
-$_GET["searchterm"] = trim($_GET["searchterm"]);
+$sortby_categories = array("relevance" => "Relevance", 
+"alphabetical_ascending" => "Alphabetical (A-Z)", 
+"alphabetical_descending" => "Alphabetical (Z-A)");
 
-if (isset($_GET["searchterm"]) && strlen($_GET["searchterm"]) > 0) {
+// Defaults for category and sortby
+$default_category = "all";
+$default_sortby = "relevance";
+
+if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
+
+	// scrub incoming
+	$_GET["searchterm"] = scrubData($_GET["searchterm"]);
+
+	if (!isset($_GET["category"])) {
+		$_GET["category"] = $default_category;
+	} else {
+		$_GET["category"] = scrubData($_GET["category"]);
+	}
+
+	if (!isset($_GET["sortby"])) {
+		$_GET["sortby"] = $default_sortby;
+	} else {
+		$_GET["sortby"] = scrubData($_GET["sortby"]);
+	}
+
 	$search = new Search;
 	$search->setSearch($_GET['searchterm']);
 
-	$results = $search->getResults();
+	$results = NULL;
 
+	switch($_GET["category"]) {
+		case "records":
+			$results = $search->getRecordSearch($_GET["sortby"]);
+			break;
+		
+		case "guides":
+			$results = $search->getSubjectGuideSearch($_GET["sortby"]);
+			break;
+
+		case "talkback":
+			$results = $search->getTalkbackSearch($_GET["sortby"]);
+			break;
+		
+		case "faq":
+			$results = $search->getFAQSearch($_GET["sortby"]);
+			break;
+		
+		case "pluslets":
+			$results = $search->getPlusletSearch($_GET["sortby"]);
+			break;
+		
+		case "staff":
+			$results = $search->getStaffSearch($_GET["sortby"]);
+			break;
+
+		case "all":
+		default:
+			$results = $search->getResults($_GET["sortby"]);
+			break;
+	}
+	
 	// Loop through each content type returned in array
 	foreach ($results as $result) {
 		
@@ -77,31 +132,31 @@ if (isset($_GET["searchterm"]) && strlen($_GET["searchterm"]) > 0) {
 
 	$search_types = array("records", "guides", "pluslets", "faq", "staff", "talkback");
 
-	    $colour1 = "#fff";
-	    $colour2 = "#F6E3E7";
-	    $colour3 = "highlight";
+	$colour1 = "#fff";
+	$colour2 = "#F6E3E7";
+	$colour3 = "highlight";
 
 	$search_result = '';
 
-	    foreach ($search_types as $key) {
-	        $row_count = 0;
-	        $currentArray = $key . "_results";
-	        global $$currentArray;
+	foreach ($search_types as $key) {
+		$row_count = 0;
+		$currentArray = $key . "_results";
+		global $$currentArray;
 
-	        if ($$currentArray) {
-	            $intro = ""; // clear out the intro
-	            $search_result .= "<h3>" . ucfirst($key) . "</h3>";
+		if ($$currentArray) {
+			$intro = ""; // clear out the intro
+			$search_result .= "<h3>" . ucfirst($key) . "</h3>";
 
-	            foreach ($$currentArray as $value) {
-	                $row_colour = ($row_count % 2) ? $colour1 : $colour2;
-	                $search_result .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\">
-	&nbsp;&nbsp;<img src=\"$IconPath/required.png\" alt=\"bullet\" /> " . $value . "</div>";
-	                $row_count++;
-	            }
-	        }
-	    }
+			foreach ($$currentArray as $value) {
+				$row_colour = ($row_count % 2) ? $colour1 : $colour2;
+				$search_result .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\">
+&nbsp;&nbsp;<img src=\"$IconPath/required.png\" alt=\"bullet\" /> " . $value . "</div>";
+				$row_count++;
+			}
+		}
+	}
 
-$subtitle = _("Search Results for ") . $_GET['searchterm'];
+	$subtitle = _("Search Results for ") . $_GET['searchterm'];
 
 } else {
 	$subtitle = _("No search term entered");
@@ -114,11 +169,64 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 		<div class="pure-u-1-2">
 
 		<?php
-		// Additional Search bar pluslet
+		// Create an additional Search bar pluslet with sort by methods
 		$search_subtitle = ("Search");
-		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "", $subcat, "", "control", $_GET["searchterm"]);
-		$input_box_html = $input_box->displayBox(false);
-		makePluslet($search_subtitle, $input_box_html, "no_overflow");
+		
+		if (!isset($_GET["searchterm"])) {
+			$_GET["searchterm"] = "";
+		}
+
+		if (!isset($_GET["category"])) {
+			$_GET["category"] = "all";
+		}
+
+		$pluslet_html = ""; // accumulation of search box html, category html, and sortby html
+
+		// Search box
+		$input_box = NULL;
+		
+		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "Search", $subcat, "45%", "control", $_GET["searchterm"]);
+		
+		$input_box_html = "<div style=\"display: inline-block\">" . $input_box->displayBox(false) . "</div>&nbsp;&nbsp;";
+
+		// sortby dropdown
+		$sortby_dropdown = new Dropdown("sortby_dropdown", $sortby_categories, $_GET["sortby"], "", "", true);
+		$sortby_dropdown_js = "
+		<script type=\"text/javascript\">
+		jQuery(document).ready(function() {
+    
+			$(\"#sortby_dropdown select\").bind(\"change\", function() {
+				var url = \"search.php?searchterm={$_GET["searchterm"]}&category={$_GET["category"]}&sortby=\" + $(this).val();
+				window.location = url;
+			});
+		});
+		</script>";
+		$sortby_html = "<div id=\"sortby_dropdown\" style=\"display: inline-block; float: right;\">" . $sortby_dropdown->display() . $sortby_dropdown_js . "</div>";
+
+
+		// Create radio buttons for the search categories
+		$searchcategories_html = "<br /><div align=\"center\">";
+		foreach ($search_categories as $key => $value) {
+			$html = "<span class=\"";
+
+			if (isset($_GET["category"]) && $_GET["category"] == $key) {
+				$html .= "ctag-on"; // css class for category chosen
+			} else {
+				$html .= "ctag-off"; // css class for category not chosen
+			}
+
+			$html .= "\"><a href=\"search.php?searchterm={$_GET["searchterm"]}&category={$key}
+					\">{$value}</a></span>";
+
+			$searchcategories_html .= $html;
+		}
+
+		$searchcategories_html .= "</div>";
+
+		// Create the pluslet
+		$pluslet_html = $input_box_html . $sortby_html . $searchcategories_html;
+
+		makePluslet($search_subtitle, $pluslet_html, "no_overflow");
 		
 		?> 
 
