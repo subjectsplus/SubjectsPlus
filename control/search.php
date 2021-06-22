@@ -209,11 +209,11 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 			});
 		});
 		</script>";
-		$sortby_html = "<div id=\"sortby_dropdown\" style=\"display: inline-block; float: right;\">" . $sortby_dropdown->display() . $sortby_dropdown_js . "</div>";
+		$sortby_html = "<div id=\"sortby_dropdown\" style=\"display: inline-block; margin-top: 0.5%; float: right;\">" . $sortby_dropdown->display() . $sortby_dropdown_js . "</div>";
 
 
 		// Create radio buttons for the search categories
-		$searchcategories_html = "<br /><div align=\"center\">";
+		$searchcategories_html = "<br /><div align=\"center\" style=\"margin-top: 2%;\">";
 		foreach ($search_categories as $key => $value) {
 			$html = "<span class=\"";
 
