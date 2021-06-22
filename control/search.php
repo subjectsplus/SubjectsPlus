@@ -1,6 +1,7 @@
 <?php
 
 $page_title = "Search Results";
+$subcat = "home";
 
 include("includes/header.php");
 use SubjectsPlus\Control\CompleteMe;
@@ -45,29 +46,35 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 	switch($_GET["category"]) {
 		case "records":
 			$results = $search->getRecordSearch($_GET["sortby"]);
+			$subcat = "records";
 			break;
 		
 		case "guides":
 			$results = $search->getSubjectGuideSearch($_GET["sortby"]);
+			$subcat = "guides";
 			break;
 
 		case "talkback":
 			$results = $search->getTalkbackSearch($_GET["sortby"]);
+			$subcat = "talkback";
 			break;
 		
 		case "faq":
 			$results = $search->getFAQSearch($_GET["sortby"]);
+			$subcat = "faq";
 			break;
 		
 		case "pluslets":
 			$results = $search->getPlusletSearch($_GET["sortby"]);
+			$subcat = "pluslet";
 			break;
 		
 		case "staff":
 			$results = $search->getStaffSearch($_GET["sortby"]);
+			$subcat = "admin";
 			break;
 
-		case "all":
+		case "all": // Deliberate fall-through
 		default:
 			$results = $search->getResults($_GET["sortby"]);
 			break;
@@ -159,6 +166,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 	$subtitle = _("Search Results for ") . $_GET['searchterm'];
 
 } else {
+	$subcat = "home";
 	$subtitle = _("No search term entered");
 	$search_result =  _("<p>Please search for something with the box above.</p>");
 }

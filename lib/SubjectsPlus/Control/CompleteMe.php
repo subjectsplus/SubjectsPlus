@@ -142,9 +142,8 @@ class CompleteMe {
         
                    }
       });
-    
+      $('#" . $this->input_id . "').attr('autocomplete', 'on');
     });
-          
       </script>";
     
     if ($printout) {
