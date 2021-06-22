@@ -10,7 +10,6 @@ namespace SubjectsPlus\Control;
  *
  *   @author adarby
  *   @date mar 2011
- *   @todo can only have one autocomplete on a page; this stinks!
  */
 class CompleteMe {
 
@@ -48,7 +47,6 @@ class CompleteMe {
       $data_location = $CpanelPath . "includes/autocomplete_data.php?collection=" . $this->collection;
     }
 
-
     switch($this->display) {
       case "public":
         $auto_complete_url = $PublicPath;
@@ -57,12 +55,37 @@ class CompleteMe {
         $auto_complete_url = $CpanelPath;
         break;
     }
+
+    // Handle category selection when searching on a page other than search.php
+    $category = $this->collection;
+    switch($category) {
+      // Intentional fall-through condition
+      // if the category is of any of these, no change necessary
+      case "guides":
+      case "records":
+      case "talkback":
+      case "faq":
+        break;
+      
+      // Admin refers to staff category for the purposes of searching
+      case "admin":
+        $category = "staff";
+        break;
+      
+      // Any other values will refer to all categories for the purposes of searching
+      default:
+        $category = "all";
+        break;
+    }
+
     
     // HTML for the Search Form
     $search_form_html = "
     <div id=\"autoC\" class=\"autoC\">
        <form action=\"$this->action\" method=\"get\" class=\"pure-form\" id=\"sp_admin_search\">
-      <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" /> <input type=\"submit\" value=\"" . _("Go") . "\"  class=\"pure-button pure-button-topsearch\" id=\"topsearch_button\" name=\"\" alt=\"Search\" />
+        <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" />
+        <input type=\"hidden\" value=\"" . $category . "\" name=\"category\"/>
+        <input type=\"submit\" value=\"" . _("Go") . "\" class=\"pure-button pure-button-topsearch\" id=\"topsearch_button\" name=\"\" alt=\"Search\" />
        </form>
    </div>";
 
