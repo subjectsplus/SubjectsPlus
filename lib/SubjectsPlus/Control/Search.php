@@ -62,7 +62,7 @@ class Search {
           t.title LIKE :patterned
         OR 
           t.description LIKE :patterned
-        ORDER BY t.title {$order}";
+        ORDER BY LOWER(t.title) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -75,7 +75,7 @@ class Search {
           t.title LIKE :patterned
         OR 
           t.description LIKE :patterned
-        ORDER BY t.title {$order}";
+        ORDER BY LOWER(t.title) {$order}";
         break;
 
       case "relevance":
@@ -131,7 +131,7 @@ class Search {
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
         OR s.type LIKE :patterned
-        ORDER BY s.subject {$order}";
+        ORDER BY LOWER(s.subject) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -145,7 +145,7 @@ class Search {
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
         OR s.type LIKE :patterned
-        ORDER BY s.subject {$order}";
+        ORDER BY LOWER(s.subject) {$order}";
         break;
 
       case "relevance":
@@ -207,7 +207,7 @@ class Search {
         ON su.subject_id = t.subject_id
         WHERE p.body LIKE :patterned
         OR p.title LIKE :patterned
-        ORDER BY p.title {$order}";
+        ORDER BY LOWER(p.title) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -226,7 +226,7 @@ class Search {
         ON su.subject_id = t.subject_id
         WHERE p.body LIKE :patterned
         OR p.title LIKE :patterned
-        ORDER BY p.title {$order}";
+        ORDER BY LOWER(p.title) {$order}";
         break;
 
       case "relevance":
@@ -286,7 +286,7 @@ class Search {
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
         OR keywords LIKE :patterned
-        ORDER BY question {$order}";
+        ORDER BY LOWER(question) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -298,7 +298,7 @@ class Search {
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
         OR keywords LIKE :patterned
-        ORDER BY question {$order}";
+        ORDER BY LOWER(question) {$order}";
         break;
 
       case "relevance":
@@ -350,7 +350,7 @@ class Search {
         FROM talkback 
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
-        ORDER BY question {$order}";
+        ORDER BY LOWER(question) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -361,7 +361,7 @@ class Search {
         FROM talkback 
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
-        ORDER BY question {$order}";
+        ORDER BY LOWER(question) {$order}";
         break;
 
       case "relevance":
@@ -412,7 +412,7 @@ class Search {
         FROM department 
         WHERE name LIKE :patterned
         OR telephone LIKE :patterned
-        ORDER BY name {$order}";
+        ORDER BY LOWER(name) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -423,7 +423,7 @@ class Search {
         FROM department 
         WHERE name LIKE :patterned
         OR telephone LIKE :patterned
-        ORDER BY name {$order}";
+        ORDER BY LOWER(name) {$order}";
         break;
 
       case "relevance":
@@ -475,7 +475,7 @@ class Search {
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
         OR tel LIKE :patterned
-        ORDER BY fname {$order}, lname {$order}";
+        ORDER BY LOWER(fname) {$order}, LOWER(lname) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -487,7 +487,7 @@ class Search {
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
         OR tel LIKE :patterned
-        ORDER BY fname {$order}, lname {$order}";
+        ORDER BY LOWER(fname) {$order}, LOWER(lname) {$order}";
         break;
 
       case "relevance":
@@ -545,7 +545,7 @@ class Search {
         WHERE title LIKE :patterned
         OR description LIKE :patterned
         OR vtags LIKE :patterned
-        ORDER BY title {$order}";
+        ORDER BY LOWER(title) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -557,7 +557,7 @@ class Search {
         WHERE title LIKE :patterned
         OR description LIKE :patterned
         OR vtags LIKE :patterned
-        ORDER BY title {$order}";
+        ORDER BY LOWER(title) {$order}";
         break;
 
       case "relevance":

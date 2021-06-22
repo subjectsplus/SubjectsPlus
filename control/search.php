@@ -185,7 +185,11 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 		}
 
 		if (!isset($_GET["category"])) {
-			$_GET["category"] = "all";
+			$_GET["category"] = $default_category;
+		}
+
+		if (!isset($_GET["sortby"])) {
+			$_GET["sortby"] = $default_sortby;
 		}
 
 		$pluslet_html = ""; // accumulation of search box html, category html, and sortby html
