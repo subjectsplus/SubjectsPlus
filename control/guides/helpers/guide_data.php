@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 $subcat = "guides";
 $header = "noshow"; // authentication only
 
-include_once(__DIR__ . "/../../includes/header.php");
+include("../../includes/header.php");
 
 $location = "";
 $is_sidebar = "";
