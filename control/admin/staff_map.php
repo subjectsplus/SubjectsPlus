@@ -14,7 +14,7 @@ include_once(__DIR__ . "/../includes/header.php");
 if (! (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) ){
   // shouldn't be here
   echo "<br /><br /><p class=\"box\">" . _("You are not authorized to view this.") . "</p>";
-  include("../includes/footer.php");
+  include_once(__DIR__ . "/../includes/footer.php");
   exit;
 };
 
