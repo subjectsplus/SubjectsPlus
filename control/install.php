@@ -22,7 +22,7 @@ $no_header = "yes";
 $installCheck = 'no';
 $updateCheck = 'no';
 
-include_once("includes/header.php");
+include("includes/header.php");
 
 //logo only header
 displayLogoOnlyHeader();
