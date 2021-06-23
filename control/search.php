@@ -2,7 +2,7 @@
 
 $page_title = "Search Results";
 
-include("includes/header.php");
+include_once("includes/header.php");
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Search;
 

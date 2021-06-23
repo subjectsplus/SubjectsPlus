@@ -24,7 +24,7 @@ include_once( "includes/autoloader.php" );
 
 
 //added in order to redirect to proper page if config file doesn't exist
-if ( ! file_exists( "includes/config.php" ) || filesize( "includes/config.php" ) < 10 ) {
+if ( ! file_exists( __DIR__ . "/includes/config.php" ) || filesize( __DIR__ . "/includes/config.php" ) < 10 ) {
 	$lstrURL = getControlURL();
 
 	if ( ! file_exists( "includes/config-default.php" ) ) {
@@ -36,7 +36,7 @@ if ( ! file_exists( "includes/config.php" ) || filesize( "includes/config.php" )
 	exit;
 }
 
-require_once( "includes/config.php" );
+require_once(__DIR__ .  "/includes/config.php" );
 
 // Let's start by making sure they aren't using Shibboleth; if someone is in Shibboleth, but not in SP, they could land on this page
 

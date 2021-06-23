@@ -19,7 +19,7 @@ $subcat = "admin";
 $page_title = "Configuration Editing";
 $use_jquery = array( "ui_styles" );
 
-include( "includes/header.php" );
+include_once( "includes/header.php" );
 
 
 //new instance of config class
