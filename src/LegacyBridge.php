@@ -10,7 +10,7 @@ class LegacyBridge
     public static function prepareLegacyScript(Request $request, Response $response, string $publicDirectory)
     {
 
-        var_dump($response);
+        //var_dump($response);
         // If Symfony successfully handled the route, you do not have to do anything.
         if (false === $response->isNotFound()) {
             return;
@@ -20,7 +20,7 @@ class LegacyBridge
         // from the existing application and possibly (re-)set
         // some env vars.
         $legacyScriptFilename = '..'.$request->getPathInfo();
-        var_dump($legacyScriptFilename);
+        //var_dump($legacyScriptFilename);
 
         if (is_file($legacyScriptFilename)) {
             return $legacyScriptFilename;
