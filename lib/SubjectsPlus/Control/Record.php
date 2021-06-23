@@ -201,7 +201,7 @@ class Record {
   	";
 
   	if ($wysiwyg_desc == 1) {
-  		include($CKPath);
+  		include_once($CKPath);
   		global $BaseURL;
 
   		// Create and output object

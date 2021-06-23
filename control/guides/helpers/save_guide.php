@@ -14,7 +14,7 @@ $subcat = "guides";
 $page_title = "Save Guides include";
 $header = "noshow";
 
-include("../../includes/header.php");
+include_once(__DIR__ . "/../../includes/header.php");
 
 use SubjectsPlus\Control\Guide\SaveGuide;
 use SubjectsPlus\Control\Querier;

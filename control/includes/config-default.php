@@ -390,7 +390,7 @@ $proxyURL = "";
    If your path is wrong, but $ck_installed is set to 1, some pages will throw
    errors */
 
-$CKBasePath = "/sp/ckeditor/";
+$CKBasePath = "ckeditor/";
 
 $CKPath = $_SERVER["DOCUMENT_ROOT"] . $CKBasePath . "ckeditor.php"; // used to call the editor
 

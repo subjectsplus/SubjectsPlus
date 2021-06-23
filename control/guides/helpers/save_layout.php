@@ -16,7 +16,7 @@ $subcat = "guides";
 $page_title = "Save Layout include";
 $header = "noshow";
 
-include("../../includes/header.php");
+include_once(__DIR__ . "/../../includes/header.php");
 
 $oSaveLayout = new Guide($_POST["subject_id"]);
 
