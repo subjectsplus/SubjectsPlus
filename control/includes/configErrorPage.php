@@ -42,8 +42,8 @@ for( $i=(count($lobjSplit) - 1); $i >=0; $i-- )
     <body>
 <?php
 
-include("autoloader.php");
-include("functions.php");
+include_once("autoloader.php");
+include_once("functions.php");
 
 //create new config instance
 $lobjConfig = new Config();

@@ -14,9 +14,8 @@ use SubjectsPlus\Control\Querier;
 
 $subcat = "guides";
 $page_title = "Modify Guides in SubjectsPlus";
-
-include("../includes/config.php");
-include("../includes/header.php");
+include_once("../control/includes/config.php");
+include_once("../control/includes/header.php");
 
 $db = new Querier;
 

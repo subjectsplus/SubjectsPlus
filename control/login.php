@@ -19,8 +19,8 @@ if ( isset( $_POST['thecount'] ) && isset( $_POST['username'] ) && isset( $_POST
 }
 $debugger = "no";
 
-include( "includes/functions.php" );
-include( "includes/autoloader.php" );
+include_once( "includes/functions.php" );
+include_once( "includes/autoloader.php" );
 
 
 //added in order to redirect to proper page if config file doesn't exist
@@ -128,14 +128,14 @@ if ( ! isset( $updateCheck ) || $updateCheck != 'no' ) {
 }
 
 //added in order to redirect to control home if already logged in. Only check if $sessionCheck variable doesn't exists and says no
-$sessionCheck = checkSession();
-
-if ( $sessionCheck != "failure" ) {
-	global $CpanelPath;
-
-	header( "location:$CpanelPath" );
-	exit;
-}
+//$sessionCheck = checkSession();
+//
+//if ( $sessionCheck != "failure" ) {
+//	global $CpanelPath;
+//
+//	header( "location:$CpanelPath" );
+//	exit;
+//}
 
 // If they have tried too many times, send them away
 // Could add some sort of log of this failed attempt . . .
