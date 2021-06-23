@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 $subcat = "";
 $header = "noshow";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 $db = new Querier;
 
@@ -49,7 +49,7 @@ switch ($_GET["type"]) {
 if ($check_credentials == FALSE) {
 
   echo "<p style=\"background-color: red; color: white;\">You probably should not be here.  Please use the back button.  If you think you should be able to access this part of the site, please contact an administrator";
-  include("../includes/footer.php");
+    include_once(__DIR__ . "/../includes/footer.php");
   
   exit;
 }
