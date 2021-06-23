@@ -128,14 +128,14 @@ if ( ! isset( $updateCheck ) || $updateCheck != 'no' ) {
 }
 
 //added in order to redirect to control home if already logged in. Only check if $sessionCheck variable doesn't exists and says no
-$sessionCheck = checkSession();
-
-if ( $sessionCheck != "failure" ) {
-	global $CpanelPath;
-
-	header( "location:$CpanelPath" );
-	exit;
-}
+//$sessionCheck = checkSession();
+//
+//if ( $sessionCheck != "failure" ) {
+//	global $CpanelPath;
+//
+//	header( "location:$CpanelPath" );
+//	exit;
+//}
 
 // If they have tried too many times, send them away
 // Could add some sort of log of this failed attempt . . .
