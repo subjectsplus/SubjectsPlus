@@ -10,7 +10,7 @@
 $subcat = "admin";
 $page_title = "Admin SubjectsPlus";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 $recent_activity = seeRecentChanges("", 20);
 
@@ -78,5 +78,4 @@ print "</div>"; // close pure
 
 
 <?php
-        include("../includes/footer.php");
-?>
+include_once(__DIR__ . "/../includes/footer.php");
