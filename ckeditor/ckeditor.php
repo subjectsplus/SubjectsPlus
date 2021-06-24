@@ -12,7 +12,7 @@
  * \subsection step1 Include ckeditor.php in your PHP web site.
  * @code
  * <?php
- * include("ckeditor/ckeditor.php");
+ * include(__DIR__ . "/ckeditor/ckeditor.php");
  * ?>
  * @endcode
  * \subsection step2 Create CKEditor class instance and use one of available methods to insert CKEditor.
@@ -25,6 +25,6 @@
  */
 
 if ( !function_exists('version_compare') || version_compare( phpversion(), '5', '<' ) )
-	include_once( 'ckeditor_php4.php' ) ;
+	include_once(__DIR__ . '/ckeditor_php4.php' ) ;
 else
-	include_once( 'ckeditor_php5.php' ) ;
+	include_once(__DIR__ . '/ckeditor_php5.php' ) ;

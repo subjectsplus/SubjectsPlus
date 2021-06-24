@@ -9,9 +9,9 @@
  *   @date mar 2011
  */
 
-require_once("autoloader.php");
+require_once(__DIR__ . "/autoloader.php");
 
-require_once("functions.php");
+require_once(__DIR__ . "/functions.php");
 
 //include_once(dirname(dirname(dirname(__FILE__))) . "/lib/CSRF-Protector-PHP-nojs-support/libs/csrf/csrfprotector.php");
 

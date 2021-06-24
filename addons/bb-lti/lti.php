@@ -1,15 +1,15 @@
 <?php
 try {
-    include("../../control/includes/config.php");
+    include_once(__DIR__ . "/../../control/includes/config.php");
     global $lti_enabled;
     $guide_path = $PublicPath;
 
     if (isset($lti_enabled) && $lti_enabled) {
         if (required_indexes_exist()) {
-            include("../../control/includes/autoloader.php"); // need to use this if header not loaded yet
-            include_once('../../control/includes/functions.php');
-            require_once '../../lib/ims-blti/blti.php';
-            require_once('../../control/lti_controller/LTICourseController.php');
+            include_once(__DIR__ . "/../../control/includes/autoloader.php"); // need to use this if header not loaded yet
+            include_once(__DIR__ . '/../../control/includes/functions.php');
+            require_once(__DIR__ . '/../../lib/ims-blti/blti.php');
+            require_once(__DIR__ . '/../../control/lti_controller/LTICourseController.php');
 
             global $lti_blackboard_consumer_key;
 

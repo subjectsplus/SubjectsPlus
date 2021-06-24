@@ -247,7 +247,7 @@ if ( isset( $_SESSION['firstUpdate'] ) && $_SESSION['firstUpdate'] == 1 ) {
 	unset( $_SESSION['firstUpdate'] );
 }
 
-include( "includes/footer.php" );
+include_once(__DIR__ . "/includes/footer.php" );
 ?>
 
 
