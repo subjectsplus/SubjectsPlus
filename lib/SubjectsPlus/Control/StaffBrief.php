@@ -508,7 +508,7 @@ $headshot
         global $CKBasePath;
 
         if ($wysiwyg_desc == 1) {
-            include($CKPath);
+            include_once($CKPath);
             global $BaseURL;
 
             $oCKeditor = new CKEditor($CKBasePath);
