@@ -18,7 +18,7 @@ $subcat = "guides";
 $page_title = "Save Tab Order";
 $header = "noshow";
 
-include("../../includes/header.php");
+include_once(__DIR__ . "/../../includes/header.php");
 
 $db = new Querier;
 
