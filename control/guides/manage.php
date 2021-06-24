@@ -236,7 +236,7 @@ makePluslet(_("Manage All Items by Source"), $manage_all_box, "no_overflow");
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 ////////////////////
 // functions used in the non-find option
