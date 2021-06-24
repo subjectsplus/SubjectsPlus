@@ -18,7 +18,7 @@ $page_title = "Set Biography";
 
 $no_header = "yes";
 
-include("../includes/header.php");
+require_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 try {
@@ -82,6 +82,6 @@ print "</div>
     </form>
     </div>";
 
-include("../includes/footer.php");
+require_once(__DIR__ . "/../includes/footer.php");
 //$record->deBug();
 ?>

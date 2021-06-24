@@ -2,10 +2,10 @@
 
 use SubjectsPlus\Control\Querier;
 
-include_once( "autoloader.php" );
+require_once( "autoloader.php" );
 
 if ( file_exists( "config.php" ) ) {
-	include_once( "config.php" );
+	require_once( "config.php" );
 }
 
 
