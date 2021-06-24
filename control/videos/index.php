@@ -12,7 +12,7 @@ use SubjectsPlus\Control\Querier;
 $subcat = "video";
 $page_title = "Video Admin";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 try {
   } catch (Exception $e) {
@@ -115,7 +115,7 @@ print "</div>"; // close pure-u-1-3
 print "</div>"; // close pure-g
 
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 ?>
 
 
