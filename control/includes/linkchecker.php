@@ -17,7 +17,7 @@ $page_title = "Link Checker";
 
 $no_header = "yes";
 
-include("../includes/header.php");
+require_once(__DIR__ . "/../includes/header.php");
 
 $shortie = scrubData($_REQUEST["shortform"]);
 

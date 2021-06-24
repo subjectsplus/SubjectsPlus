@@ -11,7 +11,8 @@ $subcat = "guides";
 $page_title = "LibGuides Importer Stage 1";
 
 
-include('../../includes/header.php');
+include_once(__DIR__ . "/../../includes/header.php");
+
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LGImport;
