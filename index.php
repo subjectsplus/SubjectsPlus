@@ -2,14 +2,14 @@
 /* Redirect so directory contents can't be viewed */
 header('Location: subjects/index.php');
 
-include("control/includes/config.php");
-include("control/includes/functions.php");
+include(__DIR__ . "/control/includes/config.php");
+include(__DIR__ . "/control/includes/functions.php");
 
 $page_title = "SubjectsPlus:  Available Public Pages";
 $description = "The best stuff for your research.  No kidding.";
 $keywords = "research, databases, subjects, search, find, suggestion box, talkback, staff list, faqs";
 
-include("subjects/includes/header.php");
+include(__DIR__ . "/subjects/includes/header.php");
 
 ?>
 <div class="pure-g">
