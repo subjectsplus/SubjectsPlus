@@ -9,15 +9,15 @@ $page_title = "Select your guide";
 $feedback = "";
 
 $use_jquery = array("ui");
-include("../../control/includes/autoloader.php");
-require_once("../../control/includes/config.php");
-require_once("../../control/includes/functions.php");
+include_once(__DIR__ . "/../../control/includes/autoloader.php");
+require_once(__DIR__ . "/../../control/includes/config.php");
+require_once(__DIR__ . "/../../control/includes/functions.php");
 
 global $subjects_theme;
 if ($subjects_theme == "med"){
-	include("../../subjects/includes/header_med.php");
+	include_once(__DIR__ . "../../subjects/includes/header_med.php");
 }else{
-	include("../../subjects/includes/header_um-new.php");
+	include_once(__DIR__ . "../../subjects/includes/header_um-new.php");
 }
 ?>
     <div class="panel-container panel-adj">
@@ -45,9 +45,9 @@ if ($subjects_theme == "med"){
 <?php
 
 if ($subjects_theme == "med"){
-	include("../../subjects/includes/footer_med.php");
+	include_once(__DIR__ . "/../../subjects/includes/footer_med.php");
 }else{
-	include("../../subjects/includes/footer_um-new.php");
+	include_once(__DIR__ . "/../../subjects/includes/footer_um-new.php");
 }
 
 ?>
