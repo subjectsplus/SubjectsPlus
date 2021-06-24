@@ -1,6 +1,6 @@
 <?php
-include ("../includes/autoloader.php");
-include ("../includes/config.php");
+include_once(__DIR__ . "/../includes/autoloader.php");
+include_once(__DIR__ . "/../includes/config.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\AzRecord\AzRecord;
