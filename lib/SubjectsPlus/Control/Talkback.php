@@ -144,7 +144,7 @@ class Talkback {
 <label for=\"answer\">" . _("Answer") . "</label>";
 
     if ($wysiwyg_desc == 1) {
-    	include($CKPath);
+    	include_once($CKPath);
     	global $BaseURL;
 
     	$oCKeditor = new CKEditor($CKBasePath);
