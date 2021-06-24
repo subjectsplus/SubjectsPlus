@@ -14,7 +14,7 @@ $subsubcat = "";
 $subcat = "guides";
 $page_title = "Manage Files, Record Associations, etc.";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 //init
 $all_guides = "";

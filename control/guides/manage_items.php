@@ -16,7 +16,7 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
     $no_header = "yes";
 }
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 $postvar_subject_id = '';
 
@@ -173,7 +173,7 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 ?>
 
 

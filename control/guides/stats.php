@@ -11,7 +11,7 @@
 $subcat = "analytics";
 $page_title = "SubjectsPlus Usage Statistics";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 global $stats_enabled;
 if (!$stats_enabled){
@@ -196,6 +196,6 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 </script>
 
 
-<?php 
-include("../includes/footer.php");
+<?php
+include_once(__DIR__ . "/../includes/footer.php");
 ?>
