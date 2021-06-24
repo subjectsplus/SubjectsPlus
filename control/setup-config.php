@@ -12,15 +12,15 @@
 
 use SubjectsPlus\Control\Config;
 
-include("includes/functions.php");
-include("includes/autoloader.php");
+include_once(__DIR__ . "/includes/functions.php");
+include_once(__DIR__ . "/includes/autoloader.php");
 
 //create an instance of the sp_config class
 $lobjConfig = new Config();
 
 //declare variable that stores configuration path
-$lstrConfigFilePath = 'includes/config.php';
-$lstrConfigBaseFilePath = 'includes/config-default.php';
+$lstrConfigFilePath = __DIR__ . '/includes/config.php';
+$lstrConfigBaseFilePath = __DIR__ . '/includes/config-default.php';
 
 //begin HTML document
 $AssetURL = getAssetURL();
