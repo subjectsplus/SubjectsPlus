@@ -22,9 +22,11 @@ if(isset($_GET['type']))
     $postvar_type = $_GET['type'];
 }
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // Print out //
+
+
 
 print "
 <div class=\"pure-g\">
@@ -118,5 +120,4 @@ ORDER BY faq_id DESC";
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
-?>
+include_once(__DIR__ . "/../includes/footer.php");

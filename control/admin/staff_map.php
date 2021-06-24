@@ -8,13 +8,13 @@ $subsubcat = "";
 // $subcat = "admin";
 $page_title = "Staff Map";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 //check if they have the view_map permission
 if (! (isset($_SESSION['view_map']) && $_SESSION['view_map'] == 1) ){
   // shouldn't be here
   echo "<br /><br /><p class=\"box\">" . _("You are not authorized to view this.") . "</p>";
-  include("../includes/footer.php");
+  include_once(__DIR__ . "/../includes/footer.php");
   exit;
 };
 
@@ -102,7 +102,7 @@ if ( $stats_encryption_enabled ) {
 $statement->execute();
 $staffArray = $statement->fetchAll();
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 print "
   <script src='" . $AssetPath . "jquery/libs/mapbox-gl.js'></script>

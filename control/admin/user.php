@@ -158,7 +158,7 @@ if (isset($_GET["browse"])) {
     makePluslet(_("On Privilege"), $privs_blurb, "no_overflow");
 
     print "</div>";
-    include("../includes/footer.php");
+    include_once(__DIR__ . "/../includes/footer.php");
     ?>
 
 <script type="text/javascript">

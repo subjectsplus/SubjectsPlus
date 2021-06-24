@@ -16,7 +16,7 @@ $page_title = "Admin Discipline Types";
 
 //print_r($_POST);
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 //init
 $ourlist = "";
@@ -136,7 +136,7 @@ print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 ?>
 <script type="text/javascript">
  jQuery(document).ready(function() {
