@@ -540,7 +540,7 @@ function blunDer( $message, $type = 1 ) {
 	}
 	print "<p>$message</p>\n";
 	print _( "<p>Please contact the <a href=\"mailto:$administrator\">Administrator</a></p>" );
-	include( "../includes/footer.php" );
+	include_once(__DIR__ . "/../includes/footer.php" );
 	exit();
 }
 
