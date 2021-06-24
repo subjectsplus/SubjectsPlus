@@ -32,7 +32,7 @@ $updateTBTable = FALSE;
 $subcat = "admin";
 $page_title = "Migration script";
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
 
 
 
@@ -410,5 +410,5 @@ if ($updateTBTable) {
 
 }
 
-include("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");
 ?>
