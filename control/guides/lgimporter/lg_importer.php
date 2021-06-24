@@ -13,7 +13,7 @@ header('Content-Type:text/html; charset=UTF-8');
 $subcat = "guides";
 $page_title = "LibGuides Importer Stage 2";
 
-include ('../../includes/header.php');
+include_once(__DIR__ . "/../../includes/header.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\LGImport;
