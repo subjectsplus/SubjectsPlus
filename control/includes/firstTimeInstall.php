@@ -6,7 +6,7 @@ $page_title = "First Time Install";
 $use_jquery = array("ui_styles");
 $no_header = "yes";
 
-require_once("header.php");
+require_once(__DIR__ . "/header.php");
 
 ?>
 	<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
@@ -25,6 +25,6 @@ require_once("header.php");
 	</div>
 <?php
 
-include("footer.php")
+include_once(__DIR__ . "/footer.php")
 
 ?>
