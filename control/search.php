@@ -2,7 +2,7 @@
 
 $page_title = "Search Results";
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Search;
 
@@ -114,6 +114,6 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 //print "<pre>";
 //print_r($results);
 
-include("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");
 
 ?>
