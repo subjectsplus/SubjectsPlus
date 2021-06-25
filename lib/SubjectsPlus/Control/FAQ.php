@@ -135,7 +135,7 @@ class FAQ {
     global $PublicPath;
     global $guide_types;
 
-    $action = htmlentities($_SERVER['PHP_SELF']) . "?faq_id=" . $this->_faq_id;
+    $action = getControlURL() . "faq/faq.php?faq_id=" . $this->_faq_id;
 
     if ($wintype != "") {
       $action .= "&wintype=pop";
