@@ -33,15 +33,13 @@ $sortby_categories = array("relevance" => "Relevance",
 "alphabetical_ascending" => "Alphabetical (A-Z)", 
 "alphabetical_descending" => "Alphabetical (Z-A)");
 
-// Defaults for category and sortby
+// Defaults for category, sortby, and collections
 $default_category = "all";
 $default_sortby = "relevance";
+$collections = "home";
 
 if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 	$_GET["searchterm"] = scrubData($_GET["searchterm"]);
-
-	// Our search box
-	$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", "all", "60", "public", $_GET["searchterm"]);
 
 	if (!isset($_GET["category"])) {
 		$_GET["category"] = $default_category;
@@ -62,35 +60,45 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 
 	switch($_GET["category"]) {
 		case "records":
+			$collections = "records";
 			$results = $search->getRecordSearch($_GET["sortby"]);
 			break;
 		
 		case "guides":
+			$collections = "guides";
 			$results = $search->getSubjectGuideSearch($_GET["sortby"]);
 			break;
 
 		case "talkback":
+			$collections = "talkback";
 			$results = $search->getTalkbackSearch($_GET["sortby"]);
 			break;
 		
 		case "faq":
+			$collections = "faq";
 			$results = $search->getFAQSearch($_GET["sortby"]);
 			break;
 		
 		case "pluslets":
+			$collections = "pluslet";
 			$results = $search->getPlusletSearch($_GET["sortby"]);
 			break;
 		
 		case "staff":
+			$collections = "admin";
 			$results = $search->getStaffSearch($_GET["sortby"]);
 			break;
 
 		case "all": // Deliberate fall-through
 		default:
+			$collections = "home";
 			$results = $search->getResults($_GET["sortby"]);
 			break;
 	}
 	
+	// Our search box
+	$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", $collections, "60", "public", $_GET["searchterm"]);
+
 	if (count($results) > 0) {
 		// Loop through each content type returned in array
 		foreach ($results as $result) {
@@ -184,7 +192,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 
 } else {
 	// Our search box
-	$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", "", "60", "public", "");
+	$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", "home", "60", "public", "");
 	
 	$subtitle = _("No search term entered");
 	$search_result =  _("<p>Please search for something with the box above.</p>");
