@@ -168,7 +168,7 @@ class Record {
   	global $CKBasePath;
   	global $IconPath;
 
-  	$action = htmlentities($_SERVER['PHP_SELF']) . "?record_id=" . $this->_record_id;
+  	$action = getControlURL() . "records/record.php?record_id=" . $this->_record_id;
 
   	if ($wintype != "") {
   		$action .= "&wintype=pop";
@@ -221,7 +221,7 @@ class Record {
     ";
 
     if ($wysiwyg_desc == 1) {
-      include($CKPath);
+      include_once($CKPath);
       global $BaseURL;
 
       // Create and output object
