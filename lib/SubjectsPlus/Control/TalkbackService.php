@@ -84,7 +84,24 @@ class TalkbackService {
 		return $statement->fetchAll();
 	}
 
+	/**
+	 * @param int $id
+	 *
+	 * @return array
+	 */
+	public function getCommentsWithTalkbackId($id) {
+		$statement  = $this->_connection->prepare( "SELECT talkback_id, question, q_from, date_submitted, DATE_FORMAT(date_submitted, '%b %d %Y') as thedate,
+	answer, a_from, fname, lname, email, staff.title, YEAR(date_submitted) as theyear
+	FROM talkback LEFT JOIN staff
+	ON talkback.a_from = staff.staff_id
+	WHERE (display ='1' OR display ='Yes')
+    AND talkback_id = :id");
 
+		$statement->bindParam( ":id", $id );
+		$statement->execute();
+
+		return $statement->fetchAll();
+	}
 
 	public function sendCommunications($comment_insert_db, TalkbackComment $newComment,  $talkback_use_email, Mailer $mailer, $talkback_use_slack, SlackMessenger $slackMsg) {
 
