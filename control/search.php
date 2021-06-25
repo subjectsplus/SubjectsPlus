@@ -80,87 +80,91 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 			break;
 	}
 	
-	// Loop through each content type returned in array
-	foreach ($results as $result) {
-		
-		// Matching text does not exist or is empty
-		if (!isset($result['matching_text']) || trim($result['matching_text']) == "") {
-			// Use additional text instead
-			if (isset($result['additional_text']) && trim($result['additional_text']) != ""
-				&& $result['content_type'] != "Pluslet") {
-				
-				// Length of additional_text to display
-				$text_length = 25;
-				
-				// Display additional_text as matching_text up to the length of text_length
-				$result['matching_text'] = $result['additional_text'];
-				if (strlen($result['additional_text']) <= $text_length) {
+	if (count($results) > 0) {
+		// Loop through each content type returned in array
+		foreach ($results as $result) {
+			
+			// Matching text does not exist or is empty
+			if (!isset($result['matching_text']) || trim($result['matching_text']) == "") {
+				// Use additional text instead
+				if (isset($result['additional_text']) && trim($result['additional_text']) != ""
+					&& $result['content_type'] != "Pluslet") {
+					
+					// Length of additional_text to display
+					$text_length = 25;
+					
+					// Display additional_text as matching_text up to the length of text_length
 					$result['matching_text'] = $result['additional_text'];
+					if (strlen($result['additional_text']) <= $text_length) {
+						$result['matching_text'] = $result['additional_text'];
+					} else {
+						$result['matching_text'] = trim(substr($result['additional_text'], 0, $text_length))  . "...";
+					}
 				} else {
-					$result['matching_text'] = trim(substr($result['additional_text'], 0, $text_length))  . "...";
+					// neither the matching text nor the additional text are available, 
+					// pluslets have an incompatible additional_text value (HTML),
+					// skip the result
+					continue;
 				}
-			} else {
-				// neither the matching text nor the additional text are available, 
-				// pluslets have an incompatible additional_text value (HTML),
-				// skip the result
-				continue;
 			}
+
+			switch($result['content_type']) {
+
+			case 'Record':
+				$records_results[] = "<a href='records/record.php?record_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
+				break;
+
+			case 'Talkback':
+				$talkback_results[] = "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
+				break;
+
+			case 'Subject Guide':
+				$guides_results[] = "<a href='guides/guide.php?subject_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+				break;
+
+			case 'FAQ':
+				$faq_results[] = "<a href='faq/faq.php?faq_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+				break;
+
+			case 'Pluslet':
+				$pluslets_results[] = "<a href='guides/guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
+				break;
+
+			case 'Staff':
+				$staff_results[] = "<a href='admin/user.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
+				break;
+			}   
 		}
 
-		switch($result['content_type']) {
+		// Now build our display
+		$search_types = array("records", "guides", "pluslets", "faq", "staff", "talkback");
 
-	 	  case 'Record':
-	 	  	$records_results[] = "<a href='records/record.php?record_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
-		    break;
+		$colour1 = "#fff";
+		$colour2 = "#F6E3E7";
+		$colour3 = "highlight";
 
-	 	  case 'Talkback':
-	 	  	$talkback_results[] = "<a href='talkback/talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
-		    break;
+		$search_result = '';
 
-		  case 'Subject Guide':
-		    $guides_results[] = "<a href='guides/guide.php?subject_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
-		    break;
+		foreach ($search_types as $key) {
+			$row_count = 0;
+			$currentArray = $key . "_results";
+			global $$currentArray;
 
-		  case 'FAQ':
-		    $faq_results[] = "<a href='faq/faq.php?faq_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
-		    break;
+			if ($$currentArray) {
+				$intro = ""; // clear out the intro
+				$search_result .= "<h3>" . ucfirst($key) . "</h3>";
 
-		  case 'Pluslet':
-		    $pluslets_results[] = "<a href='guides/guide.php?subject_id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
-		    break;
-
-		  case 'Staff':
-		    $staff_results[] = "<a href='admin/user.php?staff_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";	    
-		    break;
-		}   
-	}
-
-	// Now build our display
-
-	$search_types = array("records", "guides", "pluslets", "faq", "staff", "talkback");
-
-	$colour1 = "#fff";
-	$colour2 = "#F6E3E7";
-	$colour3 = "highlight";
-
-	$search_result = '';
-
-	foreach ($search_types as $key) {
-		$row_count = 0;
-		$currentArray = $key . "_results";
-		global $$currentArray;
-
-		if ($$currentArray) {
-			$intro = ""; // clear out the intro
-			$search_result .= "<h3>" . ucfirst($key) . "</h3>";
-
-			foreach ($$currentArray as $value) {
-				$row_colour = ($row_count % 2) ? $colour1 : $colour2;
-				$search_result .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\">
-&nbsp;&nbsp;<img src=\"$IconPath/required.png\" alt=\"bullet\" /> " . $value . "</div>";
-				$row_count++;
+				foreach ($$currentArray as $value) {
+					$row_colour = ($row_count % 2) ? $colour1 : $colour2;
+					$search_result .= "<div style=\"background-color:$row_colour ; padding: 2px;\" class=\"striper\">
+	&nbsp;&nbsp;<img src=\"$IconPath/required.png\" alt=\"bullet\" /> " . $value . "</div>";
+					$row_count++;
+				}
 			}
 		}
+	} else {
+		// No results found
+		$search_result = ("<p>No results found.</p>");
 	}
 
 	$subtitle = _("Search Results for ") . $_GET['searchterm'];
@@ -194,9 +198,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 
 		$pluslet_html = ""; // accumulation of search box html, category html, and sortby html
 
-		// Search box
-		$input_box = NULL;
-		
+		// Search box		
 		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "Search", $subcat, "45%", "control", $_GET["searchterm"]);
 		
 		$input_box_html = "<div style=\"display: inline-block\">" . $input_box->displayBox(false) . "</div>&nbsp;&nbsp;";

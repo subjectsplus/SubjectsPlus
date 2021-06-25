@@ -65,6 +65,7 @@ class CompleteMe {
       case "records":
       case "talkback":
       case "faq":
+      case "all":
         break;
       
       // Admin refers to staff category for the purposes of searching
