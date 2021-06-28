@@ -523,7 +523,7 @@ class Guide
 		$existing_thumbnail_info = @getimagesize($thumbnail_filepath);
 		$thumbnail_preview = '<p>No files currently selected for upload</p>';
 
-		if ( isset($existing_thumbnail_info) ) {
+		if ( isset($existing_thumbnail_info['mime']) ) {
 			if ($existing_thumbnail_info['mime'] === 'image/jpeg') {
 
 				// NOTE: This template has to be kept in sync with the JavaScript generated one below!
