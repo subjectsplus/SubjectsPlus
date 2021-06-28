@@ -46,7 +46,7 @@ class Search {
    *                       Default is "relevance".
    * @return array $results Results of record search in array form.
    */
-  public function getRecordSearch($sortby="relevance") {
+  public function getRecordSearch($sortby="relevance", $atoz=true) {
     // Set the order and query
     $order = NULL;
     $query = NULL;
@@ -55,46 +55,96 @@ class Search {
       case "alphabetical_ascending":
         // Query will order by title alphabetically from A to Z
         $order = "ASC";
-        $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
-        description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
-        FROM title AS t
-        WHERE 
-          t.title LIKE :patterned
-        OR 
-          t.description LIKE :patterned
-        ORDER BY LOWER(t.title) {$order}";
+        if ($atoz) {
+          $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
+          t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
+          FROM title AS t, location, location_title
+          WHERE
+            t.title_id = location_title.title_id
+          AND
+            location.location_id = location_title.location_id
+          AND
+            location.eres_display = 'Y'
+          AND 
+            (t.title LIKE :patterned OR t.description LIKE :patterned)
+          ORDER BY LOWER(t.title) {$order}";
+        } else {
+          $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
+          description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
+          FROM title AS t
+          WHERE 
+            t.title LIKE :patterned
+          OR 
+            t.description LIKE :patterned
+          ORDER BY LOWER(t.title) {$order}";
+        }
         break;
       
       case "alphabetical_descending":
         // Query will order by title alphabetically from Z to A
         $order = "DESC";
-        $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
-        description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
-        FROM title AS t
-        WHERE 
-          t.title LIKE :patterned
-        OR 
-          t.description LIKE :patterned
-        ORDER BY LOWER(t.title) {$order}";
+        if ($atoz) {
+          $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
+          t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
+          FROM title AS t, location, location_title
+          WHERE
+            t.title_id = location_title.title_id
+          AND
+            location.location_id = location_title.location_id
+          AND
+            location.eres_display = 'Y'
+          AND
+            (t.title LIKE :patterned OR t.description LIKE :patterned)
+          ORDER BY LOWER(t.title) {$order}";
+        } else {
+          $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
+          description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
+          FROM title AS t
+          WHERE 
+            t.title LIKE :patterned
+          OR 
+            t.description LIKE :patterned
+          ORDER BY LOWER(t.title) {$order}";
+        }
         break;
 
       case "relevance":
       default:
         // Query will prioritize best match/most relevant for the title
         $order = "ASC";
-        $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
-        description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
-        FROM title AS t
-        WHERE 
-          t.title LIKE :patterned
-        OR 
-          t.description LIKE :patterned
-        ORDER BY
-          CASE 
-            WHEN LOCATE(:search, t.title) > 0 THEN 0
-            ELSE 1
-          END ASC,
-          LOCATE(:search, t.title) {$order}";
+        if ($atoz) {
+          $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
+          t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
+          FROM title AS t, location, location_title
+          WHERE
+            t.title_id = location_title.title_id
+          AND
+            location.location_id = location_title.location_id
+          AND
+            location.eres_display = 'Y'
+          AND
+            (t.title LIKE :patterned OR t.description LIKE :patterned)
+          ORDER BY
+            CASE 
+              WHEN LOCATE(:search, t.title) > 0 THEN 0
+              ELSE 1
+            END ASC,
+            LOCATE(:search, t.title) {$order}";
+        } else {
+          $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
+          description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
+          FROM title AS t
+          WHERE 
+            t.title LIKE :patterned
+          OR 
+            t.description LIKE :patterned
+          ORDER BY
+            CASE 
+              WHEN LOCATE(:search, t.title) > 0 THEN 0
+              ELSE 1
+            END ASC,
+            LOCATE(:search, t.title) {$order}";
+        }
         break;
     }
 
@@ -595,10 +645,13 @@ class Search {
    *
    * @param string $sortby Sort order by "relevance", "alphabetical_ascending", or "alphabetical_descending". 
    *                       Default is "relevance".
+   * @param bool $atoz Determines whether the AtoZ list is used for records.
+   *                      Default is true.
+   * 
    * @return array $results Results of records, subject guides, pluslets, faq, talkback, departments, staff, 
    *                        and videos in array form.
    */
-  public function getResults($sortby="relevance") {
+  public function getResults($sortby="relevance", $atoz=true) {
     
     switch($sortby) {
       case "relevance":
@@ -615,7 +668,7 @@ class Search {
     $results = array(); // Compilation of all search results
 
     // Individual search results from different categories
-    $record_results = $this->getRecordSearch($sortby);
+    $record_results = $this->getRecordSearch($sortby, $atoz);
     $subject_results = $this->getSubjectGuideSearch($sortby);
     $pluslet_results = $this->getPlusletSearch($sortby);
     $faq_results = $this->getFAQSearch($sortby);

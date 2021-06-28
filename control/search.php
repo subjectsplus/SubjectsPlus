@@ -45,7 +45,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 
 	switch($_GET["category"]) {
 		case "records":
-			$results = $search->getRecordSearch($_GET["sortby"]);
+			$results = $search->getRecordSearch($_GET["sortby"], false);
 			$subcat = "records";
 			break;
 		
@@ -76,7 +76,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 
 		case "all": // Deliberate fall-through
 		default:
-			$results = $search->getResults($_GET["sortby"]);
+			$results = $search->getResults($_GET["sortby"], false);
 			break;
 	}
 	

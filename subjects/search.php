@@ -25,9 +25,8 @@ if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 include(theme_file("includes/header.php", $subjects_theme));
 
 // Categories for searching and sortby
-$search_categories = array("all" => "All", "records" => "Records",
-"guides" => "Guides", "faq" => "FAQs", "talkback" => "Talkbacks",
-"pluslets" => "Pluslets", "staff" => "Staff");
+$search_categories = array("all" => "All", "guides" => "Guides", "records" => "Databases",
+	"faq" => "FAQs", "staff" => "Staff");
 
 $sortby_categories = array("relevance" => "Relevance", 
 "alphabetical_ascending" => "Alphabetical (A-Z)", 
@@ -68,20 +67,10 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 			$collections = "guides";
 			$results = $search->getSubjectGuideSearch($_GET["sortby"]);
 			break;
-
-		case "talkback":
-			$collections = "talkback";
-			$results = $search->getTalkbackSearch($_GET["sortby"]);
-			break;
 		
 		case "faq":
 			$collections = "faq";
 			$results = $search->getFAQSearch($_GET["sortby"]);
-			break;
-		
-		case "pluslets":
-			$collections = "pluslet";
-			$results = $search->getPlusletSearch($_GET["sortby"]);
 			break;
 		
 		case "staff":
@@ -130,23 +119,15 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 			switch($result['content_type']) {
 
 			case 'Record':
-				$records_results[] = "<a href='record.php?id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
-				break;
-
-			case 'Talkback':
-				$talkback_results[] = "<a href='talkback.php?talkback_id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
-				break;
-
-			case 'Subject Guide':
-				$guides_results[] = "<a href='guide.php?id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+				$databases_results[] = "<a href='record.php?id=" . $result['id'] . "'/>" . $result['matching_text'] .  "</a>";	    
 				break;
 
 			case 'FAQ':
 				$faq_results[] = "<a href='faq.php?faq_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
 				break;
-
-			case 'Pluslet':
-				$pluslets_results[] = "<a href='guide.php?id=" . $result['parent_id'] . "#box-" . $result['tab_index'] . "-" . $result['id'] . "'/>" . $result['matching_text'] . "</a>";	    
+	
+			case 'Subject Guide':
+				$guides_results[] = "<a href='guide.php?id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
 				break;
 
 			case 'Staff':
@@ -158,7 +139,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 		}
 
 		// Now build our display
-		$search_types = array("records", "guides", "pluslets", "faq", "staff", "talkback");
+		$search_types = array("guides", "databases", "faq", "staff");
 
 		$colour1 = "#fff";
 		$colour2 = "#F6E3E7";
@@ -245,7 +226,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 
 			if (isset($_GET["category"]) && $_GET["category"] == $key) {
 				// css style for if category is on
-				$html .= "color: #f0e284;";
+				$html .= "font-weight: bold; text-decoration-line: none; color: #000000;";
 			} else {
 				// css style for if category is off
 				$html .= "color: #000000;"; // css class for category not chosen
