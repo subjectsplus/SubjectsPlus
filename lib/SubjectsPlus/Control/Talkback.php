@@ -114,7 +114,7 @@ class Talkback {
 
     //print "<pre>";print_r($this->_staffers); print "</pre>";
 
-    $action = htmlentities($_SERVER['PHP_SELF']) . "?talkback_id=" . $this->_talkback_id;
+    $action = getControlURL() . "talkback/talkback.php?talkback_id=" . $this->_talkback_id;
 
     if ($wintype != "") {
       $action .= "&wintype=pop";
