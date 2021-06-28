@@ -85,7 +85,7 @@ if (isset($_POST["submit_record"])) {
   };
 
   // Find where to save resized image
-  $save_directory = '../../assets/images/guide_thumbs/';
+  $save_directory = __DIR__ . '/../../assets/images/guide_thumbs/';
   $file_path = $save_directory . $filename;
 
   // Checking for Guide thumbnail upload
