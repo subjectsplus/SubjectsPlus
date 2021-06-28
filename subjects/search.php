@@ -86,7 +86,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 	}
 	
 	// Our search box
-	$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", $collections, "60", "public", $_GET["searchterm"]);
+	$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", $collections, "60", "public", $_GET["searchterm"], $_GET["sortby"]);
 
 	if (count($results) > 0) {
 		// Loop through each content type returned in array
@@ -232,7 +232,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 				$html .= "color: #000000;"; // css class for category not chosen
 			}
 
-			$html .= "\" href=\"search.php?searchterm={$_GET["searchterm"]}&category={$key}
+			$html .= "\" href=\"search.php?searchterm={$_GET["searchterm"]}&category={$key}&sortby={$_GET["sortby"]}
 					\">{$value}</a>";
 
 			$searchcategories_html .= $html . "&nbsp&nbsp&nbsp&nbsp";

@@ -20,7 +20,7 @@ class CompleteMe {
   public $default_text;
   
   
-  public function __construct($input_id, $action, $target_url, $default_text = "Search", $collection = "guides", $box_size="", $display="public", $value="") {
+  public function __construct($input_id, $action, $target_url, $default_text = "Search", $collection = "guides", $box_size="", $display="public", $value="", $sortby="") {
 
     self::$_counter++;
     $this->num = self::$_counter;
@@ -31,7 +31,8 @@ class CompleteMe {
     $this->collection = $collection;
     $this->search_box_size = $box_size;
     $this->display = $display;
-    $this->value =$value;
+    $this->value = $value;
+    $this->sortby = $sortby;
   }
 
   public function displayBox($printout = true) {
@@ -86,6 +87,7 @@ class CompleteMe {
        <form action=\"$this->action\" method=\"get\" class=\"pure-form\" id=\"sp_admin_search\">
         <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" />
         <input type=\"hidden\" value=\"" . $category . "\" name=\"category\"/>
+        <input type=\"hidden\" value=\"" . $this->sortby . "\" name=\"sortby\"/>
         <input type=\"submit\" value=\"" . _("Go") . "\" class=\"pure-button pure-button-topsearch\" id=\"topsearch_button\" name=\"\" alt=\"Search\" />
        </form>
    </div>";

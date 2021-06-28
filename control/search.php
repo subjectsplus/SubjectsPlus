@@ -199,7 +199,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 		$pluslet_html = ""; // accumulation of search box html, category html, and sortby html
 
 		// Search box		
-		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "Search", $subcat, "45%", "control", $_GET["searchterm"]);
+		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "Search", $subcat, "45%", "control", $_GET["searchterm"], $_GET["sortby"]);
 		
 		$input_box_html = "<div style=\"display: inline-block\">" . $input_box->displayBox(false) . "</div>&nbsp;&nbsp;";
 
@@ -228,7 +228,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 				$html .= "ctag-off"; // css class for category not chosen
 			}
 
-			$html .= "\"><a href=\"search.php?searchterm={$_GET["searchterm"]}&category={$key}
+			$html .= "\"><a href=\"search.php?searchterm={$_GET["searchterm"]}&category={$key}&sortby={$_GET["sortby"]}
 					\">{$value}</a></span>";
 
 			$searchcategories_html .= $html;
