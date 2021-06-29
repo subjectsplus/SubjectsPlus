@@ -28,18 +28,16 @@ $db = new Querier;
 // special image path because of mod_rewrite issues when source types are included in URL
 $img_path = $PublicPath . "images";
 
-if( isset( $_GET['subject'] ) ) {
+if (isset($_GET['subject'])) {
 	$check_this = $_GET['subject'];
-
-} elseif( isset($_GET['id']) ) {
-
-    $id = $_GET['id'];
+} elseif (isset($_GET['id'])) {
+    $_GET['id'] = scrubData($_GET['id']);
     $connection = $db->getConnection();
-    $statement = $connection->prepare("SELECT shortform FROM subject WHERE subject_id = :value");
-    $statement->bindParam(':value', $id);
+    $statement = $connection->prepare("SELECT shortform FROM subject WHERE subject_id = :value LIMIT 1");
+    $statement->bindParam(':value', $_GET['id']);
     $statement->execute();
     $res = $statement->fetchAll();
-
+    
     $check_this = $res[0]["shortform"];
 
 } else {
@@ -170,8 +168,8 @@ if (count($all_tabs) > 1) {
 }
 
 // Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title .
-    "\" aria-hidden=\"true\" alt=\"\" />";
+$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($check_this) . "&page_title=" . $page_title .
+        "\" aria-hidden=\"true\" alt=\"\" />";
 
 print $tracking_image;
 print $social_and_search;
@@ -202,7 +200,7 @@ if (isset ($header_type) && ($header_type == 'um-new' || $header_type == 'splux'
 
 <!-- Guide content display-->
 <div id="tabs" class="hide-tabs-fouc">
-	<div id="main-content" data-subject="<?php echo scrubData($_GET['subject']); ?>" data-url="<?php echo getSubjectsURL(); ?>" data-subject-id="<?php echo $this_id; ?>">
+	<div id="main-content" data-subject="<?php echo scrubData($check_this); ?>" data-url="<?php echo getSubjectsURL(); ?>" data-subject-id="<?php echo $this_id; ?>">
 
 		<div id="tab-container" style="visibility: hidden;">
             <?php
