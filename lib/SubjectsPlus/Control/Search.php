@@ -44,6 +44,8 @@ class Search {
    *
    * @param string $sortby Sort order by "relevance", "alphabetical_ascending", or "alphabetical_descending". 
    *                       Default is "relevance".
+   * @param bool $atoz Determines whether the AtoZ list is used for records.
+   *                   Default is true.
    * @return array $results Results of record search in array form.
    */
   public function getRecordSearch($sortby="relevance", $atoz=true) {
@@ -51,100 +53,63 @@ class Search {
     $order = NULL;
     $query = NULL;
     
+    // conditional for eres_display in query
+    // when atoz is true, the query will only display those in the AtoZ list
+    $eres_display_query = ($atoz ? "AND location.eres_display = 'Y'" : "");
+
     switch($sortby) {
       case "alphabetical_ascending":
         // Query will order by title alphabetically from A to Z
         $order = "ASC";
-        if ($atoz) {
-          $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
-          t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
-          FROM title AS t, location, location_title
-          WHERE
-            t.title_id = location_title.title_id
-          AND
-            location.location_id = location_title.location_id
-          AND
-            location.eres_display = 'Y'
-          AND 
-            (t.title LIKE :patterned OR t.description LIKE :patterned)
-          ORDER BY LOWER(t.title) {$order}";
-        } else {
-          $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
-          description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
-          FROM title AS t
-          WHERE 
-            t.title LIKE :patterned
-          OR 
-            t.description LIKE :patterned
-          ORDER BY LOWER(t.title) {$order}";
-        }
+        $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
+        t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
+        FROM title AS t, location, location_title
+        WHERE
+          t.title_id = location_title.title_id
+        AND
+          location.location_id = location_title.location_id 
+        {$eres_display_query} 
+        AND 
+          (t.title LIKE :patterned OR t.description LIKE :patterned)
+        ORDER BY LOWER(t.title) {$order}";
         break;
       
       case "alphabetical_descending":
         // Query will order by title alphabetically from Z to A
         $order = "DESC";
-        if ($atoz) {
-          $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
-          t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
-          FROM title AS t, location, location_title
-          WHERE
-            t.title_id = location_title.title_id
-          AND
-            location.location_id = location_title.location_id
-          AND
-            location.eres_display = 'Y'
-          AND
-            (t.title LIKE :patterned OR t.description LIKE :patterned)
-          ORDER BY LOWER(t.title) {$order}";
-        } else {
-          $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
-          description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
-          FROM title AS t
-          WHERE 
-            t.title LIKE :patterned
-          OR 
-            t.description LIKE :patterned
-          ORDER BY LOWER(t.title) {$order}";
-        }
+        $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
+        t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type'
+        FROM title AS t, location, location_title
+        WHERE
+          t.title_id = location_title.title_id
+        AND
+          location.location_id = location_title.location_id 
+        {$eres_display_query} 
+        AND
+          (t.title LIKE :patterned OR t.description LIKE :patterned)
+        ORDER BY LOWER(t.title) {$order}";
         break;
 
       case "relevance":
       default:
         // Query will prioritize best match/most relevant for the title
         $order = "ASC";
-        if ($atoz) {
-          $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
-          t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
-          FROM title AS t, location, location_title
-          WHERE
-            t.title_id = location_title.title_id
-          AND
-            location.location_id = location_title.location_id
-          AND
-            location.eres_display = 'Y'
-          AND
-            (t.title LIKE :patterned OR t.description LIKE :patterned)
-          ORDER BY
-            CASE 
-              WHEN LOCATE(:search, t.title) > 0 THEN 0
-              ELSE 1
-            END ASC,
-            LOCATE(:search, t.title) {$order}";
-        } else {
-          $query = "SELECT title_id AS 'id', '' AS 'shortform', title AS 'matching_text', 
-          description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
-          FROM title AS t
-          WHERE 
-            t.title LIKE :patterned
-          OR 
-            t.description LIKE :patterned
-          ORDER BY
-            CASE 
-              WHEN LOCATE(:search, t.title) > 0 THEN 0
-              ELSE 1
-            END ASC,
-            LOCATE(:search, t.title) {$order}";
-        }
+        $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
+        t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
+        FROM title AS t, location, location_title
+        WHERE
+          t.title_id = location_title.title_id
+        AND
+          location.location_id = location_title.location_id 
+        {$eres_display_query} 
+        AND
+          (t.title LIKE :patterned OR t.description LIKE :patterned)
+        ORDER BY
+          CASE 
+            WHEN LOCATE(:search, t.title) > 0 THEN 0
+            ELSE 1
+          END ASC,
+          LOCATE(:search, t.title) {$order}";
         break;
     }
 
@@ -162,13 +127,18 @@ class Search {
    *
    * @param string $sortby Sort order by "relevance", "alphabetical_ascending", or "alphabetical_descending". 
    *                       Default is "relevance".
+   * @param bool $active Determines whether to only show guides marked as active.
    * @return array $results Results of subject guides search in array form.
    */
-  public function getSubjectGuideSearch($sortby="relevance") {
+  public function getSubjectGuideSearch($sortby="relevance", $active=true) {
     // Set the order and query
     $order = NULL;
     $query = NULL;
     
+    // conditional for active in query
+    // when active is true, the query will only display guides that are marked active
+    $active_query = ($active ? "s.active = 1 AND" : "");
+
     switch($sortby) {
       case "alphabetical_ascending":
         // Query will order by subject alphabetically from A to Z
@@ -176,11 +146,11 @@ class Search {
         $query = "SELECT subject_id AS 'id', shortform AS 'shortform',  subject AS 'matching_text', 
         description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Subject Guide' AS 'content_type'
         FROM subject AS s
-        WHERE s.description LIKE :patterned
+        WHERE {$active_query} (s.description LIKE :patterned
         OR s.subject LIKE :patterned
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
-        OR s.type LIKE :patterned
+        OR s.type LIKE :patterned)
         ORDER BY LOWER(s.subject) {$order}";
         break;
       
@@ -190,11 +160,11 @@ class Search {
         $query = "SELECT subject_id AS 'id', shortform AS 'shortform',  subject AS 'matching_text', 
         description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Subject Guide' AS 'content_type'
         FROM subject AS s
-        WHERE s.description LIKE :patterned
+        WHERE {$active_query} (s.description LIKE :patterned
         OR s.subject LIKE :patterned
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
-        OR s.type LIKE :patterned
+        OR s.type LIKE :patterned)
         ORDER BY LOWER(s.subject) {$order}";
         break;
 
@@ -206,11 +176,11 @@ class Search {
         description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Subject Guide' AS 'content_type',
         LOCATE(:search, s.subject)
         FROM subject AS s
-        WHERE s.description LIKE :patterned
+        WHERE {$active_query} (s.description LIKE :patterned
         OR s.subject LIKE :patterned
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
-        OR s.type LIKE :patterned
+        OR s.type LIKE :patterned)
         ORDER BY 
           CASE
             WHEN LOCATE(:search, s.subject) > 0 THEN 0
@@ -508,23 +478,28 @@ class Search {
    *
    * @param string $sortby Sort order by "relevance", "alphabetical_ascending", or "alphabetical_descending". 
    *                       Default is "relevance".
+   * @param bool $active Determines whether to only show staff marked as active.
    * @return array $results Results of staff search in array form.
    */
-  public function getStaffSearch($sortby="relevance") {
+  public function getStaffSearch($sortby="relevance", $active=true) {
     // Set the order and query
     $order = NULL;
     $query = NULL;
     
+    // conditional for active in query
+    // when active is true, the query will only display staff that are marked active
+    $active_query = ($active ? "active = 1 AND" : "");
+
     switch($sortby) {
       case "alphabetical_ascending":
         // Query will order by first and last name alphabetically from A to Z
         $order = "ASC";
         $query = "SELECT staff_id AS 'id', '' AS 'shortform', email AS 'matching_text' , fname AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Staff' AS 'content_type' 
         FROM staff
-        WHERE CONCAT(fname, lname) LIKE REPLACE(:patterned, ' ', '')
+        WHERE {$active_query} (CONCAT(fname, lname) LIKE REPLACE(:patterned, ' ', '')
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
-        OR tel LIKE :patterned
+        OR tel LIKE :patterned)
         ORDER BY LOWER(fname) {$order}, LOWER(lname) {$order}";
         break;
       
@@ -533,10 +508,10 @@ class Search {
         $order = "DESC";
         $query = "SELECT staff_id AS 'id', '' AS 'shortform', email AS 'matching_text' , fname AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Staff' AS 'content_type' 
         FROM staff
-        WHERE CONCAT(fname, lname) LIKE REPLACE(:patterned, ' ', '')
+        WHERE {$active_query} (CONCAT(fname, lname) LIKE REPLACE(:patterned, ' ', '')
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
-        OR tel LIKE :patterned
+        OR tel LIKE :patterned)
         ORDER BY LOWER(fname) {$order}, LOWER(lname) {$order}";
         break;
 
@@ -546,10 +521,10 @@ class Search {
         $order = "ASC";
         $query = "SELECT staff_id AS 'id', '' AS 'shortform', email AS 'matching_text' , fname AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Staff' AS 'content_type' 
         FROM staff
-        WHERE CONCAT(fname, lname) LIKE REPLACE(:patterned, ' ', '')
+        WHERE {$active_query} (CONCAT(fname, lname) LIKE REPLACE(:patterned, ' ', '')
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
-        OR tel LIKE :patterned
+        OR tel LIKE :patterned)
         ORDER BY 
         CASE
           WHEN LOCATE(:search, fname) > 0 THEN 0
@@ -645,13 +620,13 @@ class Search {
    *
    * @param string $sortby Sort order by "relevance", "alphabetical_ascending", or "alphabetical_descending". 
    *                       Default is "relevance".
-   * @param bool $atoz Determines whether the AtoZ list is used for records.
-   *                      Default is true.
+   * @param bool $display_only_public Determines whether to display only public results.
+   *                                  Default is true.
    * 
    * @return array $results Results of records, subject guides, pluslets, faq, talkback, departments, staff, 
    *                        and videos in array form.
    */
-  public function getResults($sortby="relevance", $atoz=true) {
+  public function getResults($sortby="relevance", $display_only_public=true) {
     
     switch($sortby) {
       case "relevance":
@@ -668,13 +643,13 @@ class Search {
     $results = array(); // Compilation of all search results
 
     // Individual search results from different categories
-    $record_results = $this->getRecordSearch($sortby, $atoz);
-    $subject_results = $this->getSubjectGuideSearch($sortby);
+    $record_results = $this->getRecordSearch($sortby, $display_only_public);
+    $subject_results = $this->getSubjectGuideSearch($sortby, $display_only_public);
     $pluslet_results = $this->getPlusletSearch($sortby);
     $faq_results = $this->getFAQSearch($sortby);
     $talkback_results = $this->getTalkbackSearch($sortby);
     $dept_results = $this->getDepartmentSearch($sortby);
-    $staff_results = $this->getStaffSearch($sortby);
+    $staff_results = $this->getStaffSearch($sortby, $display_only_public);
     $video_results = $this->getVideoSearch($sortby);
 
     // Merge the different categorized search results

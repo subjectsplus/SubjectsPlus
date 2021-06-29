@@ -50,7 +50,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 			break;
 		
 		case "guides":
-			$results = $search->getSubjectGuideSearch($_GET["sortby"]);
+			$results = $search->getSubjectGuideSearch($_GET["sortby"], false);
 			$subcat = "guides";
 			break;
 
@@ -70,7 +70,7 @@ if (isset($_GET["searchterm"]) && strlen(trim($_GET["searchterm"])) > 0) {
 			break;
 		
 		case "staff":
-			$results = $search->getStaffSearch($_GET["sortby"]);
+			$results = $search->getStaffSearch($_GET["sortby"], false);
 			$subcat = "admin";
 			break;
 
