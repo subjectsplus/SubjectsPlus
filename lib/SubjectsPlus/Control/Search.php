@@ -71,7 +71,7 @@ class Search {
         {$eres_display_query} 
         AND 
           (t.title LIKE :patterned OR t.description LIKE :patterned)
-        ORDER BY LOWER(t.title) {$order}";
+        ORDER BY TRIM(LOWER(t.title)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -87,7 +87,7 @@ class Search {
         {$eres_display_query} 
         AND
           (t.title LIKE :patterned OR t.description LIKE :patterned)
-        ORDER BY LOWER(t.title) {$order}";
+        ORDER BY TRIM(LOWER(t.title)) {$order}";
         break;
 
       case "relevance":
@@ -95,7 +95,7 @@ class Search {
         // Query will prioritize best match/most relevant for the title
         $order = "ASC";
         $query = "SELECT t.title_id AS 'id', '' AS 'shortform', t.title AS 'matching_text', 
-        t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, t.title)
+        t.description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Record' AS 'content_type', LOCATE(:search, TRIM(t.title))
         FROM title AS t, location, location_title
         WHERE
           t.title_id = location_title.title_id
@@ -106,10 +106,10 @@ class Search {
           (t.title LIKE :patterned OR t.description LIKE :patterned)
         ORDER BY
           CASE 
-            WHEN LOCATE(:search, t.title) > 0 THEN 0
+            WHEN LOCATE(:search, TRIM(t.title)) > 0 THEN 0
             ELSE 1
           END ASC,
-          LOCATE(:search, t.title) {$order}";
+          LOCATE(:search, TRIM(t.title)) {$order}";
         break;
     }
 
@@ -151,7 +151,7 @@ class Search {
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
         OR s.type LIKE :patterned)
-        ORDER BY LOWER(s.subject) {$order}";
+        ORDER BY TRIM(LOWER(s.subject)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -165,7 +165,7 @@ class Search {
         OR s.keywords LIKE :patterned
         OR s.shortform LIKE :patterned
         OR s.type LIKE :patterned)
-        ORDER BY LOWER(s.subject) {$order}";
+        ORDER BY TRIM(LOWER(s.subject)) {$order}";
         break;
 
       case "relevance":
@@ -174,7 +174,7 @@ class Search {
         $order = "ASC";
         $query = "SELECT subject_id AS 'id', shortform AS 'shortform',  subject AS 'matching_text', 
         description AS 'additional_text', '' AS 'tab_index', '' AS 'parent_id', 'Subject Guide' AS 'content_type',
-        LOCATE(:search, s.subject)
+        LOCATE(:search, TRIM(s.subject))
         FROM subject AS s
         WHERE {$active_query} (s.description LIKE :patterned
         OR s.subject LIKE :patterned
@@ -183,10 +183,10 @@ class Search {
         OR s.type LIKE :patterned)
         ORDER BY 
           CASE
-            WHEN LOCATE(:search, s.subject) > 0 THEN 0
+            WHEN LOCATE(:search, TRIM(s.subject)) > 0 THEN 0
             ELSE 1
           END ASC,
-          LOCATE(:search, s.subject) {$order}";
+          LOCATE(:search, TRIM(s.subject)) {$order}";
         break;
     }
     
@@ -227,7 +227,7 @@ class Search {
         ON su.subject_id = t.subject_id
         WHERE p.body LIKE :patterned
         OR p.title LIKE :patterned
-        ORDER BY LOWER(p.title) {$order}";
+        ORDER BY TRIM(LOWER(p.title)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -246,7 +246,7 @@ class Search {
         ON su.subject_id = t.subject_id
         WHERE p.body LIKE :patterned
         OR p.title LIKE :patterned
-        ORDER BY LOWER(p.title) {$order}";
+        ORDER BY TRIM(LOWER(p.title)) {$order}";
         break;
 
       case "relevance":
@@ -254,7 +254,7 @@ class Search {
         // Query will prioritize best match/most relevant for the pluslet title
         $order = "ASC";
         $query = "SELECT p.pluslet_id AS 'id', su.shortform AS 'shortform', p.title AS 'matching_text',p.body AS 'additional_text', 
-        t.tab_index AS 'tab_index', su.subject_id AS 'parent_id', 'Pluslet' AS 'content_type', LOCATE(:search, p.title)
+        t.tab_index AS 'tab_index', su.subject_id AS 'parent_id', 'Pluslet' AS 'content_type', LOCATE(:search, TRIM(p.title))
         FROM pluslet AS p 
         INNER JOIN pluslet_section AS ps 
         ON ps.pluslet_id = p.pluslet_id
@@ -268,10 +268,10 @@ class Search {
         OR p.title LIKE :patterned
         ORDER BY
           CASE
-            WHEN LOCATE(:search, p.title) > 0 THEN 0
+            WHEN LOCATE(:search, TRIM(p.title)) > 0 THEN 0
               ELSE 1
           END ASC,
-          LOCATE(:search, p.title) {$order}";
+          LOCATE(:search, TRIM(p.title)) {$order}";
         break;
     }
     
@@ -306,7 +306,7 @@ class Search {
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
         OR keywords LIKE :patterned
-        ORDER BY LOWER(question) {$order}";
+        ORDER BY TRIM(LOWER(question)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -318,7 +318,7 @@ class Search {
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
         OR keywords LIKE :patterned
-        ORDER BY LOWER(question) {$order}";
+        ORDER BY TRIM(LOWER(question)) {$order}";
         break;
 
       case "relevance":
@@ -326,17 +326,17 @@ class Search {
         // Query will prioritize best match/most relevant for the question
         $order = "ASC";
         $query = "SELECT faq_id AS 'id', '' AS 'shortform', question AS 'matching_text', answer AS 'additional_text', '' AS 'tab_index', 
-        '' AS 'parent_id', 'FAQ' AS 'content_type', LOCATE(:search, question)
+        '' AS 'parent_id', 'FAQ' AS 'content_type', LOCATE(:search, TRIM(question))
         FROM faq 
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
         OR keywords LIKE :patterned
         ORDER BY
           CASE
-              WHEN LOCATE(:search, question) > 0 THEN 0
+              WHEN LOCATE(:search, TRIM(question)) > 0 THEN 0
                 ELSE 1
             END ASC,
-          LOCATE(:search, question) {$order}";
+          LOCATE(:search, TRIM(question)) {$order}";
         break;
     }
     
@@ -370,7 +370,7 @@ class Search {
         FROM talkback 
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
-        ORDER BY LOWER(question) {$order}";
+        ORDER BY TRIM(LOWER(question)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -381,7 +381,7 @@ class Search {
         FROM talkback 
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
-        ORDER BY LOWER(question) {$order}";
+        ORDER BY TRIM(LOWER(question)) {$order}";
         break;
 
       case "relevance":
@@ -389,16 +389,16 @@ class Search {
         // Query will prioritize best match/most relevant for the talkback question
         $order = "ASC";
         $query = "SELECT talkback_id AS 'id', '' AS 'shortform',  question AS 'matching_text' , answer AS 'additional_text', 
-        '' AS 'tab_index',  '' AS 'parent_id', 'Talkback' AS 'content_type', LOCATE(:search, question)
+        '' AS 'tab_index',  '' AS 'parent_id', 'Talkback' AS 'content_type', LOCATE(:search, TRIM(question))
         FROM talkback 
         WHERE question LIKE :patterned
         OR answer LIKE :patterned
         ORDER BY
           CASE
-            WHEN LOCATE(:search, question) > 0 THEN 0
+            WHEN LOCATE(:search, TRIM(question)) > 0 THEN 0
               ELSE 1
             END ASC,
-          LOCATE(:search, question) {$order}";
+          LOCATE(:search, TRIM(question)) {$order}";
         break;
     }
     
@@ -432,7 +432,7 @@ class Search {
         FROM department 
         WHERE name LIKE :patterned
         OR telephone LIKE :patterned
-        ORDER BY LOWER(name) {$order}";
+        ORDER BY TRIM(LOWER(name)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -443,7 +443,7 @@ class Search {
         FROM department 
         WHERE name LIKE :patterned
         OR telephone LIKE :patterned
-        ORDER BY LOWER(name) {$order}";
+        ORDER BY TRIM(LOWER(name)) {$order}";
         break;
 
       case "relevance":
@@ -451,16 +451,16 @@ class Search {
         // Query will prioritize best match/most relevant for the department name
         $order = "ASC";
         $query = "SELECT department_id AS 'id', '' AS 'shortform', name AS 'matching_text' , telephone AS 'additional_text',
-        '' AS 'tab_index',  '' AS 'parent_id', 'Department' AS 'content_type', LOCATE(:search, name)
+        '' AS 'tab_index',  '' AS 'parent_id', 'Department' AS 'content_type', LOCATE(:search, TRIM(name))
         FROM department 
         WHERE name LIKE :patterned
         OR telephone LIKE :patterned
         ORDER BY
           CASE
-              WHEN LOCATE(:search, name) > 0 THEN 0
+              WHEN LOCATE(:search, TRIM(name)) > 0 THEN 0
                 ELSE 1
               END ASC,
-          LOCATE(:search, name) {$order}";
+          LOCATE(:search, TRIM(name)) {$order}";
         break;
     }
     
@@ -500,7 +500,7 @@ class Search {
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
         OR tel LIKE :patterned)
-        ORDER BY LOWER(fname) {$order}, LOWER(lname) {$order}";
+        ORDER BY TRIM(LOWER(fname)) {$order}, TRIM(LOWER(lname)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -512,7 +512,7 @@ class Search {
         OR CONCAT(lname, fname) LIKE REPLACE(:patterned, ' ', '')
         OR email LIKE :patterned
         OR tel LIKE :patterned)
-        ORDER BY LOWER(fname) {$order}, LOWER(lname) {$order}";
+        ORDER BY TRIM(LOWER(fname)) {$order}, TRIM(LOWER(lname)) {$order}";
         break;
 
       case "relevance":
@@ -527,15 +527,15 @@ class Search {
         OR tel LIKE :patterned)
         ORDER BY 
         CASE
-          WHEN LOCATE(:search, fname) > 0 THEN 0
+          WHEN LOCATE(:search, TRIM(fname)) > 0 THEN 0
           ELSE 1
         END ASC,
         CASE
-          WHEN LOCATE(:search, lname) > 0 THEN 0
+          WHEN LOCATE(:search, TRIM(lname)) > 0 THEN 0
           ELSE 1
         END ASC,
-          LOCATE(:search, fname) {$order},
-          LOCATE(:search, lname) {$order}";
+          LOCATE(:search, TRIM(fname)) {$order},
+          LOCATE(:search, TRIM(lname)) {$order}";
         break;
     }
     
@@ -570,7 +570,7 @@ class Search {
         WHERE title LIKE :patterned
         OR description LIKE :patterned
         OR vtags LIKE :patterned
-        ORDER BY LOWER(title) {$order}";
+        ORDER BY TRIM(LOWER(title)) {$order}";
         break;
       
       case "alphabetical_descending":
@@ -582,7 +582,7 @@ class Search {
         WHERE title LIKE :patterned
         OR description LIKE :patterned
         OR vtags LIKE :patterned
-        ORDER BY LOWER(title) {$order}";
+        ORDER BY TRIM(LOWER(title)) {$order}";
         break;
 
       case "relevance":
@@ -590,17 +590,17 @@ class Search {
         // Query will prioritize best match/most relevant for the title
         $order = "ASC";
         $query = "SELECT video_id AS 'id',  '' AS 'shortform', title AS 'matching_text' , description AS 'additional_text',
-        '' AS 'tab_index', '' AS 'parent_id', 'Video' AS 'content_type', LOCATE(:search, title)
+        '' AS 'tab_index', '' AS 'parent_id', 'Video' AS 'content_type', LOCATE(:search, TRIM(title))
         FROM video 
         WHERE title LIKE :patterned
         OR description LIKE :patterned
         OR vtags LIKE :patterned
         ORDER BY 
           CASE
-            WHEN LOCATE(:search, title) > 0 THEN 0
+            WHEN LOCATE(:search, TRIM(title)) > 0 THEN 0
             ELSE 1
           END ASC,
-          LOCATE(:search, title) {$order}";
+          LOCATE(:search, TRIM(title)) {$order}";
         break;
     }
     
