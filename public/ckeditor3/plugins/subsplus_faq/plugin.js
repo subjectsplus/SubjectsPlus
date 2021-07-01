@@ -33,7 +33,7 @@ CKEDITOR.plugins.add( 'subsplus_faq', {
 			toolbar: 'subjectsplus',
 
 			//icon specification
-			icon: '../assets/images/icons/faq_add.png'
+			icon: '../build/assets/images/icons/faq_add.png'
 		});
 
         editor.on( 'doubleclick', function( evt )

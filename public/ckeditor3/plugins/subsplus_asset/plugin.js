@@ -33,7 +33,7 @@ CKEDITOR.plugins.add( 'subsplus_asset', {
 			toolbar: 'subjectsplus',
 
 			//icon specification
-			icon: '../assets/images/icons/folder_add.png'
+			icon: '../build/assets/images/icons/folder_add.png'
 		});
 
         editor.on( 'doubleclick', function( evt )
