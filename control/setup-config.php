@@ -23,7 +23,7 @@ $lstrConfigFilePath = __DIR__ . '/includes/config.php';
 $lstrConfigBaseFilePath = __DIR__ . '/includes/config-default.php';
 
 //begin HTML document
-$AssetURL = getAssetURL();
+$AssetURL = "/build/assets/";
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -32,10 +32,10 @@ $AssetURL = getAssetURL();
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
        <style type="text/css" media="all">@import "<?php print $AssetURL; ?>css/admin/admin_styles.css";></style>
-       <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.livequery.min.js"></script>
-       <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.hoverIntent.js"></script>
+       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/libs/jquery.livequery.min.js"></script>
+       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/libs/jquery.hoverIntent.js"></script>
        <script type="text/javascript" src="<?php print $AssetURL ?>js/shared.js"></script>
-       <script type="text/javascript" src="<?php print $AssetURL ?>js/jquery.colorbox-min.js"></script>
+       <script type="text/javascript" src="<?php print $AssetURL ?>jquery/libs/jquery.colorbox-min.js"></script>
        <title>Setup Configuration Page</title>
    </head>
 
