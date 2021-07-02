@@ -64,6 +64,10 @@ Encore
         from: './assets/images',
         to: 'assets/images/[path][name].[ext]'
     })
+    .copyFiles({
+        from: './control/includes/images',
+        to: 'assets/images/control/[path][name].[ext]'
+    })
 
     // Make legacy assets available
     .copyFiles({
