@@ -13,8 +13,8 @@
     
     // Define the asset and cache directories
     
-    $assets = dirname(dirname (__DIR__)) . DIRECTORY_SEPARATOR . 'assets';
-    $cache = $assets . DIRECTORY_SEPARATOR . 'cache';
+    $assets = __DIR__ . '/../../public/build/assets';
+    $cache = $assets . '/cache';
     
     // A new CSS file can be added by sticking it in the assets folder or in 3 steps you can add a file that needs to be called in a specific order.
     
