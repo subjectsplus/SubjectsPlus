@@ -488,7 +488,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 </div>
 <!--end .guide-parent-wrap-->
 
-<script src="../../ckeditor/ckeditor.js"></script>
+<script src="/ckeditor3/ckeditor.js"></script>
 
 <script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
 

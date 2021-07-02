@@ -134,7 +134,7 @@ class Video {
     	$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
     	$config['height'] = '100';
-    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
     	echo $oCKeditor->editor('description', $this->_description, $config);
 		echo "<br />";

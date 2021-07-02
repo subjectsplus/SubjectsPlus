@@ -56,7 +56,7 @@ class Pluslet_Card extends Pluslet
         //$oCKeditor->config['ToolbarStartExpanded'] = true;
         $config['toolbar'] = 'ImageOnly';
         $config['height'] = '300';
-        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
         $this_instance = "cardEditor";
         $this->_editor = $oCKeditor->editor($this_instance, $this->_body, $config);

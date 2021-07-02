@@ -208,7 +208,7 @@ class Record {
   		$oCKeditor = new CKEditor($CKBasePath);
   		$oCKeditor->timestamp = time();
   		$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-  		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+  		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
   		 $oCKeditor->editor('description', $this->_description, $config);
   		echo "<br />";
@@ -228,7 +228,7 @@ class Record {
       $oCKeditor = new CKEditor($CKBasePath);
       $oCKeditor->timestamp = time();
       $config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-      $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+      $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
        $oCKeditor->editor('internal_notes', $this->_internal_notes, $config);
       echo "<br />";
@@ -529,7 +529,7 @@ class Record {
  			$oCKeditor->timestamp = time();
  			$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
  			$config['height'] = 75;
- 			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+ 			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
  			echo $oCKeditor->editor('display_note[]', $this->_display_note, $config);
  			echo "<br />";

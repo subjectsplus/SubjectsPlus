@@ -34,7 +34,7 @@ class CKEditor
 	 *
 	 * Example usage:
 	 * @code
-	 * $CKEditor->basePath = '/ckeditor/';
+	 * $CKEditor->basePath = '/ckeditor3/';
 	 * @endcode
 	 */
 	public $basePath;
@@ -507,7 +507,7 @@ class CKEditor
 		$file = str_replace("\\", "/", __FILE__);
 
 		if (!$selfPath || !$realPath || !$file) {
-			return "/ckeditor/";
+			return "/ckeditor3/";
 		}
 
 		$documentRoot = substr($realPath, 0, strlen($realPath) - strlen($selfPath));

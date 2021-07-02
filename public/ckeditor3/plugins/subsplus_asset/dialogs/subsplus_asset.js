@@ -28,7 +28,7 @@ for(var i = 0; i < lobjScripts.length; i++)
 {
 	if(lobjScripts[i].src.indexOf('subsplus_asset.js') != -1)
 	{
-		var lstrPathToCkEditor = lobjScripts[i].src.substring(0,(lobjScripts[i].src.indexOf('/ckeditor/') + 10));
+		var lstrPathToCkEditor = lobjScripts[i].src.substring(0,(lobjScripts[i].src.indexOf('/ckeditor3/') + 10));
 
 		break;
 	};
