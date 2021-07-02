@@ -99,7 +99,7 @@ $our_form = $introtext . "<br />" . $lstrForm;
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="<?php echo getControlURL(); ?>includes/css.php" type="text/css" media="all" />
-        <style type="text/css" media="all">@import "<?php print $AssetPath; ?>css/admin/admin_styles.css";</style>
+        <style type="text/css" media="all">@import "/build/assets/css/admin/admin_styles.css";</style>
         <title><?php print _("Forgot Password"); ?></title>
     </head>
 
