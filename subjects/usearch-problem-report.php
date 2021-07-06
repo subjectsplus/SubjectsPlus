@@ -7,9 +7,9 @@ use SubjectsPlus\Control\SlackMessenger;
 use SubjectsPlus\Control\ProblemReportService;
 
 
-include( "../control/includes/config.php" );
-include( "../control/includes/functions.php" );
-include( "../control/includes/autoloader.php" );
+include_once(__DIR__ . "/../control/includes/config.php" );
+include_once(__DIR__ . "/../control/includes/functions.php" );
+include_once(__DIR__ . "/../control/includes/autoloader.php" );
 
 
 $problemReportService = new ProblemReportService();
