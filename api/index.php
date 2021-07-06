@@ -8,9 +8,9 @@
  *   @date November 2012
  */
 
-include_once("../control/includes/autoloader.php");
-include_once("../control/includes/config.php");
-include_once("../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
 
 use SubjectsPlus\API\WebServiceHandler;
 //if the not properly configured, redirect to control folder for installation/update
