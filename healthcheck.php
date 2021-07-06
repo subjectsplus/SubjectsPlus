@@ -7,4 +7,4 @@
  */
 
 //used for azure high availability
-include(__DIR__ . "/control/includes/config.php");
+include_once(__DIR__ . "/control/includes/config.php");
