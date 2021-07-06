@@ -937,6 +937,8 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/alumnus.html">Alumni
 												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/community.html">Community
+												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/faculty.html">Faculty
 												</a></li>
@@ -945,9 +947,6 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/undergrad.html">Undergraduate
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/visitors.html">Visitor
 												</a></li>
 
 										</ul>
