@@ -7,8 +7,8 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Autocomplete;
-include('../../control/includes/config.php');
-include("../../control/includes/autoloader.php");
+include(__DIR__ . "/../../control/includes/config.php");
+include_once(__DIR__ . "/../../control/includes/autoloader.php");
 
 $auto_complete = new Autocomplete();
 $auto_complete->setSearchPage("public");
