@@ -12,9 +12,9 @@ $page_title = "Search Results";
 
 $use_jquery = array("ui"); 
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
 
 $this_fname = "noguide.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
