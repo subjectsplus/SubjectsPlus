@@ -10,9 +10,9 @@ use SubjectsPlus\Control\Template;
 use SubjectsPlus\Control\ReCaptchaService;
 
 
-include( "../control/includes/config.php" );
-include( "../control/includes/functions.php" );
-include( "../control/includes/autoloader.php" );
+include_once(__DIR__ . "/../control/includes/config.php" );
+include_once(__DIR__ . "/../control/includes/functions.php" );
+include_once(__DIR__ . "/../control/includes/autoloader.php" );
 
 /**
  *
