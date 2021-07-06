@@ -503,7 +503,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
         var ss = subjectSpecialist();
         ss.init();
 
-	    <?php include('build/assets/js/guides/bookList.js'); ?>
+	    <?php include_once('build/assets/js/guides/bookList.js'); ?>
 
         var containers = $(".booklist-content");
         $.each(containers, function() {
