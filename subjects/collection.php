@@ -9,13 +9,13 @@
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
 
 $this_fname = "collection.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
-if ( $this_fname != $that_fname ) { include($that_fname); exit; }
+if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
    
 $use_jquery = array("ui");
 
@@ -122,7 +122,7 @@ $searchbox = '
 
 // Add header now 
 
-include(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file("includes/header.php", $subjects_theme));
 
 // put together our main result display
 
@@ -194,7 +194,7 @@ $layout = makePluslet("", $guide_results, "","",FALSE);
 // Load footer file
 ///////////////////////////
 
-include(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file("includes/footer.php", $subjects_theme));
 
 ?>
 
