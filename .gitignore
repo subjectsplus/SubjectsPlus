@@ -181,6 +181,10 @@ api/.htaccess
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
 
+var/cache/*
+var/log/*
+
+
 # Logs (Symfony4)
 /var/log/*
 !var/log/.gitkeep

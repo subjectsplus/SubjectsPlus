@@ -1,0 +1,1082 @@
+/* CSS Document for SubjectsPlus, public display (i.e., subjects/ folder ) */
+
+/* YUI 3.5.0 reset.css (http://developer.yahoo.com/yui/3/cssreset/) - http://cssreset.com */
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
+
+/* fonts */
+
+
+
+body {
+    margin: 0 0 0 5px;
+    padding: 0;
+
+    font-size: 0.8125em;
+    text-align: left;
+    line-height: 1.5em;
+    color: #000;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pluslet, table {
+    font-size: 1.2em !important;
+}
+
+
+/* changed from #wrap to main-content per RG */
+
+#main-content {
+    position: relative;
+    text-align: left;
+    padding: 0;
+    margin: 0px auto;
+    width: 95%;
+    /*min-width: 550px;*/
+    max-width: 1100px;
+    background-color: transparent;
+}
+
+html>body #main-content {
+    width: 95%;
+}
+
+a {
+    color: #3498db;
+    text-decoration:  none;
+}
+
+a:link {
+    color: #3498db;
+}
+
+a:visited {
+    color: #2980b9;
+}
+
+a:hover {
+    color: #e67e22;
+}
+
+h1 {
+    color: #333333;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 0.5em 0 1em;
+  /*  text-shadow: 0 2px 3px #CCCCCC; */
+    margin-left: 2em;
+}
+
+h2 {
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: #333;
+
+}
+
+h3 {
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    color: #6F6F6F;
+}
+
+em {font-style: italic;}
+
+ul {
+    padding-left: 1em;
+}
+
+li {
+    list-style-type: square;
+}
+img {
+    height: auto !important;
+    max-width: 100%;
+}
+
+#header {
+    background: #fff;
+    height: 3em;
+    padding: 1em 3em;
+    margin: 0 0 2em 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#header_inner_wrap {
+    position: relative;
+    text-align: left;
+    padding: 0;
+    margin: 0px auto;
+    width: 100%;
+    min-width: 550px;
+    background-color: transparent;
+}
+/* Main content areas */
+
+
+#leftcol {
+    clear: both; float: left; width: 30%; margin-left: 2%;
+}
+
+#maincol {
+    float: left; width: 30%; margin-left: 3%;
+}
+
+#rightcol {
+    float: left; width: 30%; margin-left: 3%;
+}
+
+#rightcol p,#rightcol ul,#rightcol dl {
+    margin: 4px 10px 4px 10px;
+    padding: 0;
+    list-style: none;
+}
+
+#rightcol ul li {
+    margin: 0 0 .5em 0;
+    padding: 0 0 0 18px;
+    line-height: 1.4em;
+    background: url("../images/icons/required.png") no-repeat 0 0px;
+}
+
+#rightcol h3 {
+    font: 1.2em sans-serif;
+    font-weight: 700;
+    margin: 10px 0 12px 0;
+    padding: 5px 10px 0px;
+    border: none;
+    color: #000;
+}
+
+#rightcol h4 {
+    font-size: 92%;
+    font-weight: normal;
+    margin: 0;
+}
+
+
+/* Footer */
+
+#footer {
+    position: relative;
+    clear: both;
+    margin: 0;
+    padding: 10px 0 0px 0;
+    width: 70%;
+    font-size: .8em;
+    color: #333;
+    border-top: 1px dotted #efefef;
+}
+
+#footer p {
+    margin: 0;
+    line-height: 1.4em;
+}
+
+#footer a {
+    color: #888;
+}
+
+#footer a:hover {
+    color: #ccc;
+}
+
+
+
+/* This is for the pluslets */
+
+.pluslet_simple {
+    position: relative;
+    clear: both;
+    cursor: auto;
+    z-index: 1;
+    overflow: visible;
+    border: 1px solid #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    -moz-border-radius: 10px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    padding: .5em 1em;
+    margin-bottom: 1em;
+}
+.pluslet_simple ul, ol {
+    margin: 1em;
+}
+
+#maincontent .pluslet_simple h2 {
+    border: none;
+    color: #333;
+    background-color: #fff;
+    border-bottom: 1px solid #efefef;
+}
+.no_overflow {
+    overflow:auto;
+}
+
+.pluslet {
+    position: relative;
+    clear: both;
+    background: #fff;
+    cursor: auto;
+    z-index: 50;
+    border: 0;
+    padding: 0px;
+    font-size: 1em;
+    line-height: 1.6em;
+    margin: 1em 1em 2em 0em;
+
+}
+.titlebar {
+    position: relative;
+    padding: 0px 0;
+    margin: 0;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    background-color: transparent;
+
+}
+
+.titlebar_text {
+
+    font: 1.3em sans-serif;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    margin-top: 0px;
+    padding: 5px 10px 0px;
+    border:  none;
+    color: #2d3e50;
+    /*color: #000;*/
+    background-color: transparent;
+
+}
+
+.titlebar_options { 
+
+    display: none;
+
+}
+
+/* Next lines override the regular pluslet to create a heading */
+.plusheading, .type-heading { background-color: #9F3E3B; width: 70%; padding: 0; text-transform:uppercase;}
+div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
+
+.pluslet_body {
+    background-color: #ecf0f1;
+    padding: 1em;
+    margin: 0;
+    text-align: left;
+    overflow: auto;
+}
+
+div.pluslet form {
+    padding-top: -10px;
+    margin: 0;
+}
+
+/* subjects/databases.php */
+
+#a2z a  {
+    color: #fff;
+    font-size: larger;
+    text-decoration: none;
+    text-align:center;
+}
+
+#a2z a:link a:visited {
+    color: #fff;
+}
+
+#a2z a:hover {
+    color: #333;
+}
+
+.togglelink img {
+    cursor: pointer;
+}
+
+
+/* jQuery autocomplete search categories */
+
+.ui-autocomplete-category {
+  font-weight: bold;
+  padding: .2em .4em;
+  margin: .8em 0 .2em;
+  line-height: 1.5;
+}
+
+.ui-helper-hidden-accessible {
+
+    display:none;
+}
+
+.autocomplete-parent-guide {
+    /*text-indent:1.5em;*/
+    font-weight:bold;
+    font-size:.9em;
+    text-indent:.8em;
+
+
+}
+
+
+.ui-autocomplete {
+max-height: 300px;
+overflow: auto;
+
+}
+
+/* Search boxes on subjects/index.php */
+
+.main_search_box {
+    text-align: left;
+    margin-left: 0px;
+}
+
+
+#listguides {
+    font-size: 1.3em;
+}
+
+#listguides td.subject {
+    font-size: .8em;
+    color: #ccc;
+}
+/* Display for the "all items" pluslet */
+
+.leftcolheader {
+    background-color: #EFF8CE;
+    border: none;
+    color: #000000;
+    font-size: 1em;
+    padding: 2px;
+    text-align: center;
+    font-weight: 700;
+    margin-left: -5px;
+    margin-right: -5px;
+    background-color: #CFDAE6;
+}				
+
+
+.note {
+    font-size: 9pt;
+    line-height: 12pt;
+}
+
+
+/* Databases Page, Guides listing page */
+
+#letterhead {
+    margin: .3em 1em;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding-bottom: 1em;
+    list-style-type: none;
+    float: left;
+    line-height: 2.4em;
+}
+
+#letterhead a, #letterhead li, #selected_letter, #letterhead .inactive {
+    background: none repeat scroll 0 0 #E67E22;
+    color: #FFFFFF;
+    
+    
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-transform: none;
+    z-index: 90;
+    padding: .4em .6em;
+    text-decoration: none;
+    margin: 0px;
+    display: inline;
+
+}
+
+#letterhead .inactive {
+    background-color: #ecf0f1;
+
+}
+
+#selected_letter {
+
+    background-color: #79A4D4;
+
+}
+#letterhead a:hover {
+    background-color: #79A4D4;
+    color: #fff;
+}
+#letterhead input {
+    background-color: #e0e0e0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: .2em .6em;
+    margin: .5em;
+    font-size: 1em;
+}
+#letterhead select {
+
+
+}
+#letterhead option {
+
+}
+#letterhead_small {
+    margin-bottom: .2em;
+    font-size: 12px;
+    font-weight: normal;
+    padding-bottom: .2em;
+}
+#letterhead_small a {
+    color: #333;
+    text-decoration: none;
+    width: 1em;
+    display: inline-block;
+    list-style-type: none;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 .6em;
+    margin: .2em .5em .2em 0;
+    color: 333;
+    text-decoration: none;
+}
+#letterhead_small a:hover {
+    background-color: #79A4D4;
+    color: #fff;
+}
+.dbresults {
+    clear:both;
+    padding: 7px 0;
+    border-top: 1px dashed #dfdfdf;
+}
+
+.no-border {
+    border: none;
+}
+
+.dbresults-inset {
+    clear:both;
+    padding: 7px 0;
+    margin-left: 2em;
+}
+.zebra {
+    padding: .5em 0 .5em .5em;
+    border-bottom: 1px solid #ecf0f1;
+    border: none;
+}
+/*
+.zebra:hover {
+    background-color: #ccc;
+}
+*/
+
+.evenrow, .even {
+    background-color: #efefef;
+}
+.oddrow, .odd {
+    background-color: #fff;
+}
+
+.list_bonus {
+    display: none;
+    z-index: 200000;
+    margin-top: .5em;
+    color: #333;
+    font-size: 0.8em !important;
+}
+
+.list_bonus img { 
+    background-color: #79A4D4;
+    border-radius: 3px;
+    height: 15px;
+    padding: 3px;
+    width: 15px;
+}
+
+.toggleLink {
+    font-size: 13px; background-color: #ccc; border-radius: 3px; margin-left: 1em; color: #fff; padding: 1px 3px;
+    display: inline-block;
+}
+
+.togglelink:hover {
+    background-color: #E67E22 !important;
+}
+
+table {
+    font-size: 1em;
+}
+table.item_listing td, div.item_listing p {
+    padding: .5em 0 .5em .5em;
+    font-size: 1.3em;
+    margin: 0;
+    background-color: #ECF0F1;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+table.item_listing td:hover {
+    background-color: #fff;
+}
+table.item_listing th {
+    padding: .5em 0 .5em .5em;
+    border-top: 1px solid #EFE9C2;
+    background-color: #000;
+    background: #000;
+    color: #fff;
+
+}
+
+table.istem_listing h2 {
+    border:none;
+    background-color: #fff;
+}
+/* The next three classes are used for even/odd striped tables of data/results */
+.striped_data {
+    font-size: 100%;
+    margin: 2px;
+    background-color: #ccc;
+}
+
+
+
+/* This is for debugger results, if $debugger variable is turned on in file */
+.debugger {
+    text-align: left;
+    background: Yellow;
+    font-size: 12px;
+    margin: 15px;
+    padding: 5px;
+    border: 1px dashed #ccc;
+    overflow: auto;
+}
+
+/* For subjects/faq.php results */
+
+.faq_item {
+    background: url("../images/left_top_corner.gif") no-repeat;
+}
+
+.faq_item_q { /*background: #333; color: #fff;
+	*/
+              padding-left: 15px;
+              margin-bottom: 2px;
+              padding-bottom: 2px;
+              font-weight: bold;
+              padding-top: 9px;
+}
+
+.faq_item_a {
+    padding-left: 15px;
+    padding-bottom: 5px;
+}
+
+.faq_filter {
+	font-size: .8em;
+	text-align: center;
+	margin:1em;
+}
+
+/* The next few determine how peoples' names and pix appear in staff.php & staff_details.php 
+staff_photo2 is in the sidebar of the subject results page (which requires a float)*/
+
+.staff_photo {
+    position: relative;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.staff_photo2 {
+    position: relative;
+    float: left;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin: 0 10px 0 10px;
+}
+
+.staff_contact {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding: 0;
+}
+
+span.staff_contact a:link {
+
+    color: #000;
+    text-decoration: underline;
+}
+span.staff_contact a:visited {
+
+    color: #000;
+    text-decoration: underline;
+}
+
+span.staff_contact a:hover {
+
+    text-decoration: none;
+    color: #cc6666;
+
+}
+
+span.staff_contact a {
+
+    color: #000;
+    text-decoration: underline;
+}
+
+h2.dept_header {
+    border:none !important;
+    background-color: #fff  !important;
+    border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -khtml-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    text-align: center !important;
+}
+
+/* This is for the search box on subjects/display.php & subjects/faq.php */
+
+.search_smaller {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* Used throughout for print that is um smaller  */
+.smaller {font-size: 8pt; }
+
+#listing a:hover {
+    text-decoration: underline;
+
+} 
+
+#listing a   {
+    text-decoration: none;
+}
+
+
+#intro_pluslet {
+
+    position: relative;  clear: both; background: #fff; margin-bottom: 10px; z-index: 50; border: 1px solid #929abe;  padding: 0px;cursor: move; font-size: 10pt;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+#navbar {
+    width:100%;
+}
+
+#nav a {color: #000;
+        text-decoration:none;}
+
+#nav a:link {color: #000;
+             text-decoration:none;}
+
+#nav a:visited {color: #000;
+                text-decoration:none;}
+
+/* Talk Back */
+
+.pluslet_error {
+    background-color: #CC0000;
+}
+
+.tb_year_head {
+    background-color: #333;
+    font-size: 16pt;
+}
+
+div.tb_year_head a {
+    color: #fff;
+}
+
+.tb_form_head {
+    background-color: #fff;
+}
+
+
+.tb_answer {
+    margin-top: 8px;
+    padding: 8px 5px;
+    min-height: 70px;
+    background-color: #e0e0e0;
+    border-top: 1px solid #ccc;
+}
+
+.tb_staff_photo {
+    position: relative;
+    float: left;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin: 0 10px 0 0px;
+    max-width: 50px;
+
+}
+
+.toc {
+    float: left;
+    width: 30%;
+    margin: 0 1% 1em 1%;
+}
+
+/* Tell Us Page */
+form#tellus p {
+    padding: .5em 0 .5em 1em;
+}
+
+.tellus_item {
+    clear: both;
+    display: block;
+    float: left;
+    margin: 1em 0;
+    padding: .5em;
+    min-width: 95%;
+    background-color: #fff;
+    border-bottom: 1px dashed #DCD9CC;
+}
+.comment_num {
+    position: relative;
+    float: left;
+    display: inline-block;
+    background-image: url(../images/icons/comment_box.png);
+    width: 39px;
+    height: 34px;
+    margin-right: 1em;
+    text-align: center;
+    font-size: 1.4em;
+    color: #fff;
+
+
+}
+.tellus_comment {
+    background-color: #fff;
+    padding: .5em;
+    margin: 0;
+}
+
+/* Styling the markup generated by the autocomplete jQuery UI widget */
+
+
+ul.ui-autocomplete{
+    width:250px;
+    background-color:#fff;
+    border:1px solid #fff;
+    outline:1px solid #ccc;
+
+}
+
+ul.ui-autocomplete li{
+    list-style:none;
+    border-bottom:1px solid #e0e0e0;
+    border-top:1px solid #fff;
+    text-align: left !important;
+}
+
+ul.ui-autocomplete li:first-child{
+    border-top:none;
+}
+
+
+ul.ui-autocomplete li:last-child{
+    border-bottom:none;
+}
+
+ul.ui-autocomplete li a{
+    color:#333;
+    border:none !important;
+    text-decoration:none !important;
+    padding:5px 10px;
+    display:block;
+}
+
+#ui-active-menuitem{
+    background-color:#79A4D4;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* Videos page */
+
+
+.vid_container {
+  clear: both;
+  float: left; 
+  margin-right: 25px; 
+  margin-bottom: 2em; 
+  background-color: #333; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  width: 550px;
+  color: #fff;
+}
+
+
+div.vid_container img {
+  float: left; 
+  margin-right: 20px; 
+  margin-bottom: 0px; 
+  background-color: #4F4E4E; 
+  width: 150px;
+  cursor: pointer;
+  list-style: none outside none;
+  padding: 7px;
+  position: relative;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+}
+
+
+
+div.vid_container h3 {
+  font-size: 1.3em;
+  color: #B0CBE8 !important;
+  margin-top: 0;
+  cursor: pointer;
+}
+
+div.vid_container p {
+  font-size: 1em;
+  color: #fff;
+  margin-top: 0;
+}
+
+div.vid_container a {
+  color: #B0CBE8;
+  cursor: pointer;
+}
+
+div.vid_container p.runtime {margin-top: -10px; font-size: smaller;}
+
+.video_thumb {
+  float: left; 
+  margin-right: 25px; 
+  margin-bottom: 20px; 
+  background-color: #333; 
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+div.video_thumb img {
+  float: left;
+  margin-left: 10px;
+
+}
+.video_list {
+  clear: both; float: left; width: 500px;
+}
+
+/* Override Made Easy
+ * The following styles are commonly overridden to make simple colour customizations
+ * I did a couple to get ya started
+*/
+
+body {
+ background: url("../../images/public/gis_bg.jpg") repeat-x fixed top center #fff; 
+ background-size: 2000px 14em;
+}
+
+#header {
+    margin: 0;
+}
+
+ h1 {
+    font-size: 2.5em;
+    color: #fff; 
+    padding-top: 1em;
+    padding-bottom: .5em;
+    margin-left: .5em;
+     text-shadow: 0 1px 3px #333;
+
+}
+#header_inner_wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper-full {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#tabs {
+    margin: 0 0em;
+
+}
+
+#tabs ul {
+    margin: 0 1em;
+}
+#content_roof {
+    background-color: #fff !important;
+    border: 1px solid #aaa;
+    border-bottom: none !important;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.7);
+    -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.7);
+    box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.7);
+    padding: .6em !important;    
+    height: 4em;
+    -moz-border-radius-topleft: 4px;
+-webkit-border-top-left-radius: 4px;
+ border-top-left-radius: 4px;
+-moz-border-radius-topright: 4px;
+-webkit-border-top-right-radius: 4px;
+border-top-right-radius: 4px;
+
+}
+
+#body_inner_wrap {
+    position: relative;
+     top: -5em; 
+     margin: 0; 
+     padding: 0em;
+}
+
+/* these .ui class overrides tweak border and spacing of tab containers */
+.ui-widget-header {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* this is a hack to put a white box over the bottom of the tabs dropshadow */
+
+#shadowkiller {
+    background-color: #fff;
+    width: 100%;
+    height: 5px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+    border-bottom-left-radius: 0px !important;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 0px !important;
+}
+
+.ui-widget-content {
+    border: none !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em !important;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    border-bottom: 0 none !important;
+    float: left;
+    list-style: none outside none;
+    margin: 0 .9em 0px 0 !important;
+    padding: 0;
+    position: relative;
+    white-space: nowrap;
+    background-color: #2c3e50 !important;
+    border: none;
+    border-radius: 0;
+    border-left: 10px solid #e67e22;
+    font-size: 1.1em;
+
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    color: #fff !important;
+}
+
+.ui-tabs .ui-tabs-nav li a:hover {
+    background-color: #e67e22 !important;
+}
+
+.hometab {
+    padding: 4px 3px 0px 3px !important;
+}
+
+.pluslet {
+
+}
+
+.pluslet_simple {
+    border: 1px solid #ccc;
+}
+
+.titlebar {
+
+}
+
+.titlebar_text {
+
+}
+
+/* Next lines override the regular pluslet to create a heading */
+.plusheading, .type-heading { width: 70%; padding: 0; text-transform:uppercase;}
+div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
+div.type-heading .titlebar {}
+
+.evenrow {
+    background-color: #fff;
+
+}
+
+.bullet {
+height:55px;
+width:55px;
+}
+
+
+.staff-info {
+    float:left;
+}
+
+.clearboth {
+    
+    clear:both;
+}
+
+.clear-both-left {
+    clear:both;
+    float:left;
+    
+}
+
+.float-left {
+    float:left;
+}
+
+.curse_me {cursor: pointer;}
+
+.find_feed {
+   margin-left:1em !important;
+}
+.rss-list {
+    margin-left:1em;
+}
+
+.rss-list-item {
+    margin-bottom:1em;
+}
