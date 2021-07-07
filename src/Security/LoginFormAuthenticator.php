@@ -51,12 +51,32 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        //return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('control_dashboard'));
+        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+    }
+
+
+    /**
+     * Gather the credentials which need to be checked in order to authenticate.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function getCredentials(Request $request) # FIRST
+    {
+        $credentials = [
+            'email'       => $request->request->get('email'),
+            'password'    => $request->request->get('password'),
+            'csrf_token' => $request->request->get('_csrf_token'),
+        ];
+
+        $request->getSession()->set(Security::LAST_USERNAME, $credentials['email']);
+
+        return $credentials;
     }
 }

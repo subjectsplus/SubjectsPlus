@@ -1247,3 +1247,6 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
+/var
+var
+/var/cache/dev/
