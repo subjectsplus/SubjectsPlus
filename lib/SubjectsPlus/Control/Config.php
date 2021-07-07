@@ -130,24 +130,26 @@ class Config {
 		$lobjNewValues = array();
 
 		foreach ( $this->lobjConfigOptions as $lstrKey => $lobjOption ) {
-			switch ( $lobjOption[2] ) {
-				case 'array':
-					$lobjNewValues[ $lstrKey ] = $this->commaListToArray( addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" ) );
-					break;
-				case 'aarray':
-					$lobjNewValues[ $lstrKey ] = $this->commaListToAArray( addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" ) );
-					break;
-				case 'boolean':
-					$lstrValue = addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" );
-					$lstrValue = strtolower( $lstrValue );
-					if ( $lstrValue == 'true' ) {
-						$lobjNewValues[ $lstrKey ] = true;
-					} else {
-						$lobjNewValues[ $lstrKey ] = false;
-					}
-					break;
-				default:
-					$lobjNewValues[ $lstrKey ] = addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" );
+			if (isset($_POST[ $lstrKey ])) {
+				switch ( $lobjOption[2] ) {
+					case 'array':
+						$lobjNewValues[ $lstrKey ] = $this->commaListToArray( addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" ) );
+						break;
+					case 'aarray':
+						$lobjNewValues[ $lstrKey ] = $this->commaListToAArray( addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" ) );
+						break;
+					case 'boolean':
+						$lstrValue = addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" );
+						$lstrValue = strtolower( $lstrValue );
+						if ( $lstrValue == 'true' ) {
+							$lobjNewValues[ $lstrKey ] = true;
+						} else {
+							$lobjNewValues[ $lstrKey ] = false;
+						}
+						break;
+					default:
+						$lobjNewValues[ $lstrKey ] = addcslashes( trim( $_POST[ $lstrKey ] ), "\\'\"" );
+				}
 			}
 		}
 
@@ -417,131 +419,133 @@ class Config {
 			$lstrHTML .= "<span style=\"font-size: smaller; padding: 0px 0px 5px 0px;\">{$lobjOption[1]}</span><br />\n";
 
 			//based on type, create HTML form inputs
-			switch ( $lobjOption[2] ) {
-				case 'array':
-					//based on type of array
-					switch ( strtolower( $lobjOption[4] ) ) {
-						case 'ticks':
+			if (isset($lobjValues[ $lstrKey ])) {
+				switch ( $lobjOption[2] ) {
+					case 'array':
+						//based on type of array
+						switch ( strtolower( $lobjOption[4] ) ) {
+							case 'ticks':
 
-							if ( isset( $lobjOption[5] ) && is_array( $lobjOption[5] ) ) {
-								$lstrHTML .= $this->arrayToTicks( $lobjOption[5], $lobjValues[ $lstrKey ], $lstrKey );
-								$lstrHTML .= "\n";
+								if ( isset( $lobjOption[5] ) && is_array( $lobjOption[5] ) ) {
+									$lstrHTML .= $this->arrayToTicks( $lobjOption[5], $lobjValues[ $lstrKey ], $lstrKey );
+									$lstrHTML .= "\n";
+									break;
+								}
+
+							case "textarea":
+								$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<textarea id=\"{$lstrKey}\" name=\"{$lstrKey}\" cols=\"45\" rows=\"3\" >{$lstrValue}</textarea>";
 								break;
-							}
 
-						case "textarea":
-							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<textarea id=\"{$lstrKey}\" name=\"{$lstrKey}\" cols=\"45\" rows=\"3\" >{$lstrValue}</textarea>";
-							break;
+							case 'medium':
+								$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+								$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" />\n";
+								break;
+							case 'small':
+								$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+								$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" />\n";
+								break;
+							default:
+								$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+								$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" />\n";
+								break;
+						}
 
-						case 'medium':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" />\n";
-							break;
-						case 'small':
-							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" />\n";
-							break;
-						default:
-							$lstrValue = $this->arrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" />\n";
-							break;
-					}
-
-					$lstrHTML .= "\n";
-					break;
-				//case of an assosiative array
-				case 'aarray':
-					//based on type of aarray
-					switch ( strtolower( $lobjOption[4] ) ) {
-						case 'medium':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
-							break;
-						case 'small':
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
-							break;
-						default:
-							$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
-							$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
-							$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
-							break;
-					}
-
-					//append to auto generated options in order to discourage changing important
-					//configurations
-					if ( in_array( $lstrKey, array( 'all_tbtags' ) ) ) {
-						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
-										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Edit?" ) . "</a></span>\n";
+						$lstrHTML .= "\n";
 						break;
-					}
+					//case of an assosiative array
+					case 'aarray':
+						//based on type of aarray
+						switch ( strtolower( $lobjOption[4] ) ) {
+							case 'medium':
+								$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+								$lstrHTML  .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+								break;
+							case 'small':
+								$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+								$lstrHTML  .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
+								break;
+							default:
+								$lstrValue = $this->aarrayToCommaList( $lobjValues[ $lstrKey ] );
+								$lstrHTML  .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lstrValue}\" ";
+								$lstrHTML  .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
+								break;
+						}
 
-					$lstrHTML .= "/>\n";
-					break;
-				case 'boolean':
-					//if a boolean type
-					$lstrHTML .= "<select id=\"{$lstrKey}\" name=\"{$lstrKey}\">\n";
-
-					if ( $lobjValues[ $lstrKey ] ) {
-						$lstrHTML .= "<option value=\"TRUE\" selected>" . _( "TRUE" ) . "</option>\n";
-						$lstrHTML .= "<option value=\"FALSE\" >" . _( "FALSE" ) . "</option>\n";
-					} else {
-						$lstrHTML .= "<option value=\"TRUE\" >" . _( "TRUE" ) . "</option>\n";
-						$lstrHTML .= "<option value=\"FALSE\" selected>" . _( "FALSE" ) . "</option>\n";
-					}
-
-					$lstrHTML .= "</select>\n";
-
-					break;
-				case 'pword':
-					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"password\" value=\"{$lobjValues[$lstrKey]}\" ";
-
-					switch ( strtolower( $lobjOption[4] ) ) {
-						case 'medium':
-							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+						//append to auto generated options in order to discourage changing important
+						//configurations
+						if ( in_array( $lstrKey, array( 'all_tbtags' ) ) ) {
+							$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
+											<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Edit?" ) . "</a></span>\n";
 							break;
-						case 'small':
-							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
-							break;
-						default:
-							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
-							break;
-					}
+						}
 
-					$lstrHTML .= "/>\n";
-					break;
-
-				default:
-					$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lobjValues[$lstrKey]}\" ";
-
-					switch ( strtolower( $lobjOption[4] ) ) {
-						case 'medium':
-							$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
-							break;
-						case 'small':
-							$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
-							break;
-						default:
-							$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
-							break;
-					}
-
-					//append to auto generated options in order to discourage changing important
-					//configurations
-					if ( in_array( $lstrKey, array( 'BaseURL', 'CKBasePath' ) ) ) {
-						$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
-										<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Not right?" ) . "</a></span>\n";
+						$lstrHTML .= "/>\n";
 						break;
-					}
+					case 'boolean':
+						//if a boolean type
+						$lstrHTML .= "<select id=\"{$lstrKey}\" name=\"{$lstrKey}\">\n";
 
-					$lstrHTML .= "/>\n";
-					break;
+						if ( isset($lobjValues[ $lstrKey ]) &&  $lobjValues[ $lstrKey ]) {
+							$lstrHTML .= "<option value=\"TRUE\" selected>" . _( "TRUE" ) . "</option>\n";
+							$lstrHTML .= "<option value=\"FALSE\" >" . _( "FALSE" ) . "</option>\n";
+						} else {
+							$lstrHTML .= "<option value=\"TRUE\" >" . _( "TRUE" ) . "</option>\n";
+							$lstrHTML .= "<option value=\"FALSE\" selected>" . _( "FALSE" ) . "</option>\n";
+						}
+
+						$lstrHTML .= "</select>\n";
+
+						break;
+					case 'pword':
+						$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"password\" value=\"{$lobjValues[$lstrKey]}\" ";
+
+						switch ( strtolower( $lobjOption[4] ) ) {
+							case 'medium':
+								$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+								break;
+							case 'small':
+								$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
+								break;
+							default:
+								$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
+								break;
+						}
+
+						$lstrHTML .= "/>\n";
+						break;
+
+					default:
+						$lstrHTML .= "<input id=\"{$lstrKey}\" name=\"{$lstrKey}\" type=\"text\" value=\"{$lobjValues[$lstrKey]}\" ";
+
+						switch ( strtolower( $lobjOption[4] ) ) {
+							case 'medium':
+								$lstrHTML .= "size=\"" . self::MEDIUM_INPUT_SIZE . "\" ";
+								break;
+							case 'small':
+								$lstrHTML .= "size=\"" . self::SMALL_INPUT_SIZE . "\" ";
+								break;
+							default:
+								$lstrHTML .= "size=\"" . self::LARGE_INPUT_SIZE . "\" ";
+								break;
+						}
+
+						//append to auto generated options in order to discourage changing important
+						//configurations
+						if ( in_array( $lstrKey, array( 'BaseURL', 'CKBasePath' ) ) ) {
+							$lstrHTML .= " disabled />\n<br /><span style=\"font-size: smaller\">**" . _( "This is automatically generated on installation" ) . ".
+											<a onclick=\"javascript: enableTextBox(this);\" style=\"cursor: pointer; color: #C03957; text-decoration: underline;\" >" . _( "Not right?" ) . "</a></span>\n";
+							break;
+						}
+
+						$lstrHTML .= "/>\n";
+						break;
+				}
 			}
 
 			$lstrHTML .= "\n";
@@ -1327,51 +1331,54 @@ class Config {
 
 				//based on the type defined in the option array, write new declaration
 				//of configuration variable
-				switch ( $lobjOption[2] ) {
-					case 'array':
-						$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = array( ";
+				if (isset($lobjMatch[1])) {
+					switch ( $lobjOption[2] ) {
+						case 'array':
+							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = array( ";
 
-						$lobjList = $this->lobjNewConfigValues[ $lobjMatch[1] ];
+							$lobjList = isset($this->lobjNewConfigValues[ $lobjMatch[1] ]) ? 
+								$this->lobjNewConfigValues[ $lobjMatch[1]] : null;
 
-						if ( count( $lobjList ) == 0 ) {
-							$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
-						} else {
-							foreach ( $lobjList as $lstrItem ) {
-								$this->lobjConfigFile[ $lintLineNumber ] .= '"' . $lstrItem . '", ';
+							if ( !isset($lobjList) || count( $lobjList ) == 0 ) {
+								$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
+							} else {
+								foreach ( $lobjList as $lstrItem ) {
+									$this->lobjConfigFile[ $lintLineNumber ] .= '"' . $lstrItem . '", ';
+								}
+
+								//remove last charcter, which is an extra comma
+								$this->lobjConfigFile[ $lintLineNumber ] = substr( $this->lobjConfigFile[ $lintLineNumber ], 0, ( strlen( $this->lobjConfigFile[ $lintLineNumber ] ) - 2 ) );
+								$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
 							}
+							break;
+						case 'aarray':
+							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = array( ";
 
-							//remove last charcter, which is an extra comma
-							$this->lobjConfigFile[ $lintLineNumber ] = substr( $this->lobjConfigFile[ $lintLineNumber ], 0, ( strlen( $this->lobjConfigFile[ $lintLineNumber ] ) - 2 ) );
-							$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
-						}
-						break;
-					case 'aarray':
-						$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = array( ";
+							$lobjList = $this->lobjNewConfigValues[ $lobjMatch[1] ];
 
-						$lobjList = $this->lobjNewConfigValues[ $lobjMatch[1] ];
+							if ( count( $lobjList ) == 0 ) {
+								$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
+							} else {
+								foreach ( $lobjList as $lstrKey => $lstrItem ) {
+									$this->lobjConfigFile[ $lintLineNumber ] .= '"' . $lstrKey . '"' . ' => "' . $lstrItem . '", ';
+								}
 
-						if ( count( $lobjList ) == 0 ) {
-							$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
-						} else {
-							foreach ( $lobjList as $lstrKey => $lstrItem ) {
-								$this->lobjConfigFile[ $lintLineNumber ] .= '"' . $lstrKey . '"' . ' => "' . $lstrItem . '", ';
+								//remove last charcter, which is an extra comma
+								$this->lobjConfigFile[ $lintLineNumber ] = substr( $this->lobjConfigFile[ $lintLineNumber ], 0, ( strlen( $this->lobjConfigFile[ $lintLineNumber ] ) - 2 ) );
+								$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
 							}
-
-							//remove last charcter, which is an extra comma
-							$this->lobjConfigFile[ $lintLineNumber ] = substr( $this->lobjConfigFile[ $lintLineNumber ], 0, ( strlen( $this->lobjConfigFile[ $lintLineNumber ] ) - 2 ) );
-							$this->lobjConfigFile[ $lintLineNumber ] .= ");\r\n";
-						}
-						break;
-					case 'boolean':
-						if ( $this->lobjNewConfigValues[ $lobjMatch[1] ] ) {
-							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = TRUE;\r\n";
-						} else {
-							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = FALSE;\r\n";
-						}
-						break;
-					default:
-						$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = \"{$this->lobjNewConfigValues[ $lobjMatch[1] ]}\";\r\n";
-						break;
+							break;
+						case 'boolean':
+							if ( isset($this->lobjNewConfigValues[ $lobjMatch[1]]) && $this->lobjNewConfigValues[ $lobjMatch[1] ] ) {
+								$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = TRUE;\r\n";
+							} else {
+								$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = FALSE;\r\n";
+							}
+							break;
+						default:
+							$this->lobjConfigFile[ $lintLineNumber ] = "\${$lobjMatch[1]} = \"{$this->lobjNewConfigValues[ $lobjMatch[1] ]}\";\r\n";
+							break;
+					}
 				}
 			}
 		}
@@ -1403,21 +1410,22 @@ class Config {
 				switch ( $lobjOption[2] ) {
 					case 'array':
 						preg_match( '/array\((.*)\)/', $lobjMatch[2], $lobjElements );
+						
+						if (isset($lobjElements[1])) {
+							if ( trim( $lobjElements[1] ) == '' ) {
+								$lobjValues[ $lobjMatch[1] ] = array();
+							} else {
+								$lobjElements = explode( ',', $lobjElements[1] );
+								//remove first and last character (quotes)
+								foreach ( $lobjElements as $key => $lstrElement ) {
+									$lstrElement = trim( $lstrElement );
+									$lstrElement = substr( $lstrElement, 1, ( strlen( $lstrElement ) - 2 ) );
 
-						if ( trim( $lobjElements[1] ) == '' ) {
-							$lobjValues[ $lobjMatch[1] ] = array();
-						} else {
-							$lobjElements = explode( ',', $lobjElements[1] );
+									$lobjElements[ $key ] = $lstrElement;
+								}
 
-							//remove first and last character (quotes)
-							foreach ( $lobjElements as $key => $lstrElement ) {
-								$lstrElement = trim( $lstrElement );
-								$lstrElement = substr( $lstrElement, 1, ( strlen( $lstrElement ) - 2 ) );
-
-								$lobjElements[ $key ] = $lstrElement;
+								$lobjValues[ $lobjMatch[1] ] = $lobjElements;
 							}
-
-							$lobjValues[ $lobjMatch[1] ] = $lobjElements;
 						}
 
 						break;
