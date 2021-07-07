@@ -6,14 +6,12 @@ class PlusletService
 {
     public function plusletClassName(string $type): string
     {
-        if ('Pluslet' == $type) {
+        if ($type == "Pluslet") {
             return '\\SubjectsPlus\\Control\\Pluslet';
-        } elseif ('Clone' == $type) {
-            return '\\SubjectsPlus\\Control\\Pluslet\\Pluslet_Clone';
-        } elseif (is_numeric($type)) {
-            return '\\SubjectsPlus\\Control\\Pluslet\\Pluslet_'.$type;
+        } elseif ($type == "PlusletInterface") {
+            return '\\SubjectsPlus\\Control\\Pluslet\\PlusletInterface';
         } else {
-            return '\\SubjectsPlus\\Control\\Pluslet\\'.$type;
+            return '\\SubjectsPlus\\Control\\Pluslet\\Pluslet_'.$type;
         }
     }
 }
