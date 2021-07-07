@@ -341,15 +341,16 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
     $db = new Querier;
 
     // Delete the records from faq and linked tables
-    $q = "DELETE FROM faq WHERE faq_id = '" . $this->_faq_id . "'";
-    
-    $delete_result = $db->exec($q);
+    $q = "DELETE FROM faq WHERE faq_id = :id";
+    $statement = $db->prepareStatement($q, array(
+      ":id" => $this->_faq_id
+    ));
+    $statement->execute();
 
     $this->_debug = "<p>Del query: $q";
 
-    if (count($delete_result) != 0) {
-
-    } else {
+    // check whether any rows were deleted
+    if ($statement->rowCount() == 0) {
       // message
       $this->_message = _("There was a problem with your delete (stage 1 of 2).");
       return FALSE;
