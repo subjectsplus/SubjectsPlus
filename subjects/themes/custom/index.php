@@ -151,7 +151,7 @@ $searchbox = '
 
 
 // Add header now, because we need a value ($v2styles) from it
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 
 
 // put together our main result display
@@ -353,7 +353,7 @@ include("includes/header_custom.php");
 // Load footer file
 ///////////////////////////
 
-include("includes/footer_custom.php");
+include_once(__DIR__ . "/includes/footer_custom.php");
 
 ?>
 
