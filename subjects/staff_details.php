@@ -14,7 +14,7 @@ include_once(__DIR__ . "/../control/includes/config.php");
 include_once(__DIR__ . "/../control/includes/functions.php");
 include_once(__DIR__ . "/../control/includes/autoloader.php");
 
-$this_fname = "staff_details.php";
+$this_fname = __DIR__ . "/staff_details.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
 if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
@@ -153,7 +153,7 @@ $page_title = _("Staff Listing: ") . $fullname;
 // Now we are finally read to display the page
 ////////////////////////////
 
-include(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 
 ?>
 <div class="pure-g">
@@ -185,6 +185,6 @@ include(theme_file("includes/header.php", $subjects_theme));
 // Footer
 ///////////
 
-include(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 
 ?>
