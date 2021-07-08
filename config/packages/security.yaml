@@ -27,6 +27,11 @@ security:
                 # where to redirect after logout
                 target: app_login
 
+            remember_me:
+               name: SECURITY_SP
+               secret: '%kernel.secret%'
+               lifetime: 1800
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
