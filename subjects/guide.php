@@ -19,7 +19,7 @@ include_once(__DIR__ . "/../control/includes/autoloader.php"); // need to use th
 include_once(__DIR__ . "/../control/includes/config.php");
 include_once(__DIR__ . "/../control/includes/functions.php");
 
-$this_fname = "guide.php";
+$this_fname = __DIR__ . "/guide.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
 if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
 
@@ -157,7 +157,7 @@ if ($check_this) {
 $page_title = $subject_name;
 
 // Include header
-include_once(theme_file("includes/header.php", $subjects_theme, $header_type));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme, $header_type));
 
 
 // do we have more than one tab?
@@ -550,5 +550,5 @@ cloneView.init();
 // Load footer file
 ///////////////////////////
 
-include_once(theme_file("includes/footer.php", $subjects_theme, $header_type));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme, $header_type));
 
