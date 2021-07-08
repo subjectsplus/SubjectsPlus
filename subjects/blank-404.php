@@ -10,11 +10,11 @@ $page_title = "404 -- Page Not Found";
 include_once(__DIR__ . "/../control/includes/config.php");
 include_once(__DIR__ . "/../control/includes/functions.php");
 
-$this_fname = "blank-404.php";
+$this_fname = __DIR__ . "/blank-404.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
 if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
 
-include_once(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 ?>
 
   <div class="pure-g">
@@ -42,5 +42,5 @@ include_once(theme_file("includes/header.php", $subjects_theme));
 <?php 
 //print "<pre>";
 //print_r($results);
-include_once(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 ?>
