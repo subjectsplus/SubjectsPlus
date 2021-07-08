@@ -17,7 +17,7 @@ include_once(__DIR__ . "/../control/includes/config.php");
 include_once(__DIR__ . "/../control/includes/functions.php");
 include_once(__DIR__ . "/../control/includes/autoloader.php");
 
-$this_fname = "faq.php";
+$this_fname = __DIR__ . "/faq.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
 if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
 
@@ -150,7 +150,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "Library FAQs";
 }
 
-include_once(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 
 if ($displaytype == "search") {
 
@@ -382,7 +382,7 @@ print $results; ?>
 </div>
 <?php
 
-include_once(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 
 ?>
 <script type="text/javascript">
