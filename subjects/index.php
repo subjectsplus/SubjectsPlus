@@ -21,7 +21,7 @@ include_once(__DIR__ . "/../control/includes/config.php");
 include_once(__DIR__ . "/../control/includes/functions.php");
 include_once(__DIR__ . "/../control/includes/autoloader.php");
 
-$this_fname = "index.php";
+$this_fname = __DIR__ . "/index.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
 if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
@@ -156,7 +156,7 @@ $searchbox = '
 
 
 // Add header now, because we need a value ($v2styles) from it
-include(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 
 // put together our main result display
 //**************************************
@@ -361,7 +361,7 @@ include(theme_file("includes/header.php", $subjects_theme));
 // Load footer file
 ///////////////////////////
 
-include(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 
 ?>
 
