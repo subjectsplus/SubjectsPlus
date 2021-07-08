@@ -1,0 +1,99 @@
+{% extends 'staff/base.html.twig' %}
+
+{% block title %}Staff index{% endblock %}
+
+{% block body %}
+    <h1>Staff index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>StaffId</th>
+                <th>Lname</th>
+                <th>Fname</th>
+                <th>Title</th>
+                <th>Tel</th>
+                <th>DepartmentId</th>
+                <th>StaffSort</th>
+                <th>Email</th>
+                <th>Ip</th>
+                <th>AccessLevel</th>
+                <th>Password</th>
+                <th>Active</th>
+                <th>Ptags</th>
+                <th>Extra</th>
+                <th>Bio</th>
+                <th>PositionNumber</th>
+                <th>JobClassification</th>
+                <th>RoomNumber</th>
+                <th>SupervisorId</th>
+                <th>EmergencyContactName</th>
+                <th>EmergencyContactRelation</th>
+                <th>EmergencyContactPhone</th>
+                <th>StreetAddress</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>HomePhone</th>
+                <th>CellPhone</th>
+                <th>Fax</th>
+                <th>Intercom</th>
+                <th>LatLong</th>
+                <th>SocialMedia</th>
+                <th>Roles</th>
+                <th>IsVerified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for staff in staff %}
+            <tr>
+                <td>{{ staff.staffId }}</td>
+                <td>{{ staff.lname }}</td>
+                <td>{{ staff.fname }}</td>
+                <td>{{ staff.title }}</td>
+                <td>{{ staff.tel }}</td>
+                <td>{{ staff.departmentId }}</td>
+                <td>{{ staff.staffSort }}</td>
+                <td>{{ staff.email }}</td>
+                <td>{{ staff.ip }}</td>
+                <td>{{ staff.accessLevel }}</td>
+                <td>{{ staff.password }}</td>
+                <td>{{ staff.active }}</td>
+                <td>{{ staff.ptags }}</td>
+                <td>{{ staff.extra }}</td>
+                <td>{{ staff.bio }}</td>
+                <td>{{ staff.positionNumber }}</td>
+                <td>{{ staff.jobClassification }}</td>
+                <td>{{ staff.roomNumber }}</td>
+                <td>{{ staff.supervisorId }}</td>
+                <td>{{ staff.emergencyContactName }}</td>
+                <td>{{ staff.emergencyContactRelation }}</td>
+                <td>{{ staff.emergencyContactPhone }}</td>
+                <td>{{ staff.streetAddress }}</td>
+                <td>{{ staff.city }}</td>
+                <td>{{ staff.state }}</td>
+                <td>{{ staff.zip }}</td>
+                <td>{{ staff.homePhone }}</td>
+                <td>{{ staff.cellPhone }}</td>
+                <td>{{ staff.fax }}</td>
+                <td>{{ staff.intercom }}</td>
+                <td>{{ staff.latLong }}</td>
+                <td>{{ staff.socialMedia }}</td>
+                <td>{{ staff.roles ? staff.roles|json_encode : '' }}</td>
+                <td>{{ staff.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('staff_show', {'staffId': staff.staffId}) }}">show</a>
+                    <a href="{{ path('staff_edit', {'staffId': staff.staffId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="35">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('staff_new') }}">Create new</a>
+{% endblock %}

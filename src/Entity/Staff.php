@@ -14,12 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-
 /**
  * Staff.
  *
  * @ORM\Table(name="staff", indexes={@ORM\Index(name="fk_supervisor_staff_id_idx", columns={"supervisor_id"}), @ORM\Index(name="fk_staff_department_id_idx", columns={"department_id"}), @ORM\Index(name="fk_staff_user_type_id_idx", columns={"user_type_id"})})
  * @ORM\Entity
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -279,6 +279,11 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 
 
     /**
@@ -761,5 +766,17 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUsername()
     {
         // TODO: Implement getUsername() method.
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }

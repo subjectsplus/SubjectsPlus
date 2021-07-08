@@ -1,0 +1,154 @@
+{% extends 'staff/base.html.twig' %}
+
+{% block title %}Staff{% endblock %}
+
+{% block body %}
+    <h1>Staff</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>StaffId</th>
+                <td>{{ staff.staffId }}</td>
+            </tr>
+            <tr>
+                <th>Lname</th>
+                <td>{{ staff.lname }}</td>
+            </tr>
+            <tr>
+                <th>Fname</th>
+                <td>{{ staff.fname }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ staff.title }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ staff.tel }}</td>
+            </tr>
+            <tr>
+                <th>DepartmentId</th>
+                <td>{{ staff.departmentId }}</td>
+            </tr>
+            <tr>
+                <th>StaffSort</th>
+                <td>{{ staff.staffSort }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ staff.email }}</td>
+            </tr>
+            <tr>
+                <th>Ip</th>
+                <td>{{ staff.ip }}</td>
+            </tr>
+            <tr>
+                <th>AccessLevel</th>
+                <td>{{ staff.accessLevel }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ staff.password }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ staff.active }}</td>
+            </tr>
+            <tr>
+                <th>Ptags</th>
+                <td>{{ staff.ptags }}</td>
+            </tr>
+            <tr>
+                <th>Extra</th>
+                <td>{{ staff.extra }}</td>
+            </tr>
+            <tr>
+                <th>Bio</th>
+                <td>{{ staff.bio }}</td>
+            </tr>
+            <tr>
+                <th>PositionNumber</th>
+                <td>{{ staff.positionNumber }}</td>
+            </tr>
+            <tr>
+                <th>JobClassification</th>
+                <td>{{ staff.jobClassification }}</td>
+            </tr>
+            <tr>
+                <th>RoomNumber</th>
+                <td>{{ staff.roomNumber }}</td>
+            </tr>
+            <tr>
+                <th>SupervisorId</th>
+                <td>{{ staff.supervisorId }}</td>
+            </tr>
+            <tr>
+                <th>EmergencyContactName</th>
+                <td>{{ staff.emergencyContactName }}</td>
+            </tr>
+            <tr>
+                <th>EmergencyContactRelation</th>
+                <td>{{ staff.emergencyContactRelation }}</td>
+            </tr>
+            <tr>
+                <th>EmergencyContactPhone</th>
+                <td>{{ staff.emergencyContactPhone }}</td>
+            </tr>
+            <tr>
+                <th>StreetAddress</th>
+                <td>{{ staff.streetAddress }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ staff.city }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ staff.state }}</td>
+            </tr>
+            <tr>
+                <th>Zip</th>
+                <td>{{ staff.zip }}</td>
+            </tr>
+            <tr>
+                <th>HomePhone</th>
+                <td>{{ staff.homePhone }}</td>
+            </tr>
+            <tr>
+                <th>CellPhone</th>
+                <td>{{ staff.cellPhone }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ staff.fax }}</td>
+            </tr>
+            <tr>
+                <th>Intercom</th>
+                <td>{{ staff.intercom }}</td>
+            </tr>
+            <tr>
+                <th>LatLong</th>
+                <td>{{ staff.latLong }}</td>
+            </tr>
+            <tr>
+                <th>SocialMedia</th>
+                <td>{{ staff.socialMedia }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ staff.roles ? staff.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ staff.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('staff_index') }}">back to list</a>
+
+    <a href="{{ path('staff_edit', {'staffId': staff.staffId}) }}">edit</a>
+
+    {{ include('staff/_delete_form.html.twig') }}
+{% endblock %}

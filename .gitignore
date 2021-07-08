@@ -164,6 +164,7 @@ subjects/.htaccess
 api/.htaccess
 
 ### Symfony template
+.env
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
