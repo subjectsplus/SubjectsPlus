@@ -25,11 +25,11 @@ if (isset($_GET["searchterm"])) {
 	$_GET["searchterm"] = scrubData($_GET["searchterm"]);
 }
 
-$this_fname = "search.php";
+$this_fname = __DIR__ . "/search.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
 if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
-include(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 
 
 // Our search box
@@ -134,6 +134,6 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 //print "<pre>";
 //print_r($results);
 
-include(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 
 ?>
