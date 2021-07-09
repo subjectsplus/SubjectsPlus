@@ -63,9 +63,12 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var int|null
      *
-     * @ORM\Column(name="department_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Department")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="department_id", referencedColumnName="department_id")
+     * })
      */
-    private $departmentId;
+    private $department;
 
     /**
      * @var int|null
@@ -276,7 +279,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     private $subject;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $roles = [];
 
@@ -347,17 +350,19 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDepartmentId(): ?int
+    public function getDepartment(): ?Department
     {
-        return $this->departmentId;
+        return $this->department;
     }
 
-    public function setDepartmentId(?int $departmentId): self
+    public function setDepartment(?Department $department): self
     {
-        $this->departmentId = $departmentId;
+        $this->department = $department;
 
         return $this;
     }
+
+
 
     public function getStaffSort(): ?int
     {
@@ -723,6 +728,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     /**
      * @see PasswordAuthenticatedUserInterface
