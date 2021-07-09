@@ -1,0 +1,1626 @@
+/* CSS Document for SubjectsPlus, public display (i.e., subjects/ folder ) */
+
+/* reset - blueprint mod */
+* {padding: 0; margin: 0;}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align:top; }
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+p {margin-bottom: 10px;}
+
+/* no's*/
+.no-border{border: 0 !important}
+.no-margin{margin: 0 !important}
+.no-bg{background: none !important}
+.no-pad-left{padding-left: 0 !important}
+.no-pad-right{padding-right: 0 !important}
+
+/* jQuery UI overrides */
+.ui-widget {
+       font-family: sans-serif;
+}
+
+
+body,
+.pure-g [class *= "pure-u"],
+.pure-g-r [class *= "pure-u"] {
+    /* Set you're content font stack here: */
+    font-family: sans-serif;
+}
+
+.ui-widget-header {
+       background: #cccccc !important;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    
+    font-size: 0.8125em;
+    text-align: left;
+    line-height: 1.5em;
+    color: #000;
+    background: url("http://www.subjectsplus.com/images/bg1.jpg") no-repeat scroll center top #E3E1D9;
+    color: #858585;
+}
+
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+
+a,
+a:link  {
+    color: #40659B;
+}
+
+a:visited {
+    color: #551A8B;
+}
+
+a:hover {
+    color: #cc6666;
+}
+
+h1 {
+    color: #333333;
+  
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1em 0 0em 2em;
+    text-shadow: 0 2px 3px #CCCCCC;
+    margin: .5em 0 0em 0em;    
+}
+
+h2 {
+  
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: #333;
+    font-size: 1.3em;
+}
+
+h3 {
+    
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    color: #6F6F6F;
+}
+
+em {font-style: italic;}
+
+
+img {
+    height: auto !important;
+    max-width: 100%;
+}
+
+.clearboth {
+    clear:both;
+}
+
+.clear-both-left {
+    clear:both;
+    float:left;
+}
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -45px;
+}
+
+#push, #footer {
+        height: 45px;
+    }
+
+.main_logo { }
+
+/* Header area */
+
+#header {
+    background: transparent;
+    height: 3em;
+    padding: 1em;
+    margin: 0 0 2em 0;
+    box-shadow: none;
+}
+
+#header_inner_wrap {
+    text-align: left;
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+    background-color: transparent;
+    height: 3em;
+    max-width: 1400px;
+}
+
+
+
+/* Main content areas */
+
+.wrapper-full {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#main-content { /* changed from #wrap to main-content per RG */
+    position: relative;
+    text-align: left;    
+    background-color: transparent;
+    width: 100%;
+}
+
+
+
+#leftcol {
+    clear: both; float: left; width: 30%; margin-left: 2%;
+}
+
+#maincol {
+    float: left; width: 30%; margin-left: 3%;
+}
+
+#rightcol {
+    float: left; width: 30%; margin-left: 3%;
+}
+
+#rightcol p,#rightcol ul,#rightcol dl {
+    margin: 4px 10px 4px 10px;
+    padding: 0;
+    list-style: none;
+}
+
+#rightcol ul li {
+    margin: 0 0 .5em 0;
+    padding: 0 0 0 18px;
+    line-height: 1.4em;
+    background: url("../images/icons/required.png") no-repeat 0 0px;
+}
+
+#rightcol h3 {
+    font: 1.2em sans-serif;
+    font-weight: 700;
+    margin: 10px 0 12px 0;
+    padding: 5px 10px 0px;
+    border: none;
+    color: #000;
+}
+
+#rightcol h4 {
+    font-size: 92%;
+    font-weight: normal;
+    margin: 0;
+}
+
+
+/* Footer */
+
+#footer {
+    margin: 0;
+    padding: 10px 0 0px 0;
+    font-size: .8em;
+    color: #333;
+    border-top: 1px dotted #efefef;
+}
+
+#footer p {
+    margin: 0;
+    line-height: 1.4em;
+    text-align: center;
+}
+
+#footer a, #footer a:link, #footer a:visited {
+    color: #888;
+}
+
+#footer a:hover {
+    color: #ccc;
+}
+
+/* Guide Tools */
+
+#guide_nav_tools {
+    float: left;
+    margin: 2em 0 1em 40px;
+}
+
+#guide_nav_tools img {
+    margin: 0 .25em;
+    opacity: .6;
+}
+
+#guide_nav_tools img:hover {
+    opacity: 1;
+}
+
+#sp_search {
+    margin-left: 1em;
+    margin-right: 2px;
+}
+
+
+/* This is for the pluslets */
+
+.pluslet_simple {
+    position: relative;
+    clear: both;
+    cursor: auto;
+    z-index: 1;
+    overflow: visible;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;    
+     padding: .5em 1em;
+    margin: 1em;
+}
+
+.pluslet_simple ul, ol {
+    margin: 1em;
+}
+
+#maincontent .pluslet_simple h2 {
+    border: none;
+    color: #333;
+    background-color: #fff;
+    border-bottom: 1px solid #efefef;
+}
+.no_overflow {
+    overflow:auto;
+}
+
+.pluslet {
+    position: relative;
+    clear: both;
+    background: #fff; 
+    border: 1px solid #ccc;
+    padding: 0;
+    font-size: 10pt;   
+    border-radius: 5px;
+    margin: 1em 1em;    
+    box-shadow: 5px 5px 7px #e0e0e0;
+}
+
+.pluslet ul {
+    margin-left: 2em;
+}
+
+.pluslet li {
+    display: list-item;
+}
+
+.pluslet li a {
+    background-color: transparent;
+    border: medium none;
+    box-shadow: none;
+    color: #40659b;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.pluslet li a:hover {
+    color: #cc6666;
+    text-decoration: underline;
+}
+#tabs .pluslet ul {
+    margin-bottom: 0.5em;
+}
+
+.pluslet_body {
+    background-color: #fff;
+    padding: .5em;
+    margin: .5em;
+    text-align: left;
+    overflow: auto;
+}
+
+
+.titlebar {
+    color: #333;
+    position: relative;
+    height: 2em;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-bottom: 1px solid #B3B9BF;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #333;
+}
+
+.titlebar_text {
+    font: 1em sans-serif;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    padding: 5px 10px 5px;
+    border:  none;
+    color: #fff;
+    background-color: transparent;
+
+}
+
+.titlebar_options {
+    display: none;
+}
+
+
+/* Tabs */
+
+#tabs {    
+    background-color: transparent;
+    width: 100%;
+    float: left;
+    clear: both;
+    margin-top: 45px;
+}
+
+#tab-container {margin: -40px 0 0 0; padding: 0;}
+
+/* if no tabs are being rendered, let's adjust our margins (example: one page guide - no tabs!!) */
+#tab-body.no-tabs { 
+    margin: -50px 0 0 0 ;
+    padding: 50px 0 0 0;
+}
+
+#tabs ul {
+     margin: 5px 5px 0 5px;
+     padding: 10px 30px 0 2px;
+}
+
+
+/* Print Dialog */
+
+
+div.printer_tabs { /* Print button on guide with tabs */
+    margin: 0 0 0 0;  
+    background-color: transparent;
+    position: absolute;
+    top:-60px !important;
+    width: 36px;
+}
+
+div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: -41px 0 0 5px;  
+     background-color: transparent;
+    position: absolute;
+    top: 0 !important;
+    width: 36px;
+
+}
+
+.print-img-tabs, .print-img-tabs:hover { 
+    background-image: url("../../images/printer-default.png");
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    cursor: pointer;    
+    padding: 2px 5px;
+    background-color: #333 !important; 
+    border-radius: 8px;
+    border: none;
+    opacity: .6;
+}
+
+.print-img-no-tabs, .print-img-no-tabs:hover { 
+    background-image: url("../../images/printer-default.png");
+    background-repeat: no-repeat;
+    background-position: 50% 65%;
+    cursor: pointer;    
+    padding: 2px 6px;
+    background-color: #333 !important; 
+    border-radius: 8px;
+    border: none;
+    opacity: .6;
+}
+
+.printDialog {
+    margin: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.printDialog ul {margin: 0; padding: 0; list-style-type: none;}
+
+.printDialog ul li {margin-bottom: 15px; font-size: 14px; }
+
+.printDialog ul li a.pure-button-topsearch,
+.printDialog ul li a.pure-button-topsearch:link,
+.printDialog ul li a.pure-button-topsearch:hover {
+    color: #fff;
+    width: 150px; 
+    padding-top: 10px;
+}
+
+.pure-button-topsearch {
+    background-color: #333;
+    color: #fff;
+}
+
+
+/* Next lines override the regular pluslet to create a heading */
+.plusheading, .type-heading { background-color: #9F3E3B; padding: 0; text-transform: none;}
+div.plusheading .pluslet_body, div.type-heading .pluslet_body {position: relative;padding:0;}
+
+
+
+div.pluslet form {
+    padding-top: -10px;
+    margin: 0;
+}
+
+/* subjects/databases.php */
+
+#a2z a  {
+    color: #fff;
+    font-size: larger;
+    text-decoration: none;
+    text-align:center;
+}
+
+#a2z a:link a:visited {
+    color: #fff;
+}
+
+#a2z a:hover {
+    color: #333;
+}
+
+.togglelink img {
+    cursor: pointer;
+}
+
+
+/* jQuery autocomplete search categories */
+
+.ui-autocomplete-category {
+  font-weight: bold;
+  padding: .2em .4em;
+  margin: .8em 0 .2em;
+  line-height: 1.5;
+}
+
+.ui-helper-hidden-accessible {
+
+    display:none;
+}
+
+.autocomplete-parent-guide {
+    /*text-indent:1.5em;*/
+    font-weight:bold;
+    font-size:.9em;
+    text-indent:.8em;
+}
+
+
+.ui-autocomplete {
+max-height: 300px;
+overflow: auto;
+
+}
+
+.ui-menu-item a {
+    cursor: pointer;
+}
+/* Search boxes on subjects/index.php */
+
+.main_search_box {
+    text-align: left;
+    margin-left: 0px;
+}
+
+/* Display for the "all items" pluslet */
+
+.leftcolheader {
+    background-color: #EFF8CE;
+    border: none;
+    color: #000000;
+    font-size: 1em;
+    padding: 2px;
+    text-align: center;
+    font-weight: 700;
+    margin-left: -5px;
+    margin-right: -5px;
+    background-color: #CFDAE6;
+}
+
+
+.note {
+    font-size: 9pt;
+    line-height: 12pt;
+}
+
+/* Databases Page */
+
+#letterhead {
+    margin-bottom: 1em;
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ccc;
+    list-style-type: none;
+}
+#selected_letter {
+    display: inline-block;
+    border: 1px solid #ccc;
+    background-color: #79A4D4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 .6em;
+    margin: .5em .5em .5em 0;
+    color: #fff;
+}
+#letterhead a, #letterhead li {
+    display: inline-block;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 .6em;
+    margin: .5em .5em .5em 0;
+    text-decoration: none;
+    color: #333;
+}
+#letterhead a:hover {
+    background-color: #79A4D4;
+    color: #fff;
+}
+#letterhead input {
+    background-color: #e0e0e0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: .2em .6em;
+    margin: .5em;
+    font-size: 1em;
+}
+#letterhead select {
+    background-color: #e0e0e0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: .1em 0 .1em 0;
+    margin: .5em .5em 0 0;
+    font-size: 1em;
+}
+#letterhead option {
+}
+#letterhead_small {
+    margin-bottom: .2em;
+    font-size: 12px;
+    font-weight: normal;
+    padding-bottom: .2em;
+}
+#letterhead_small a {
+    color: #333;
+    text-decoration: none;
+    width: 1em;
+    display: inline-block;
+    list-style-type: none;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 .6em;
+    margin: .2em .5em .2em 0;
+    color: #333;
+    text-decoration: none;
+}
+#letterhead_small a:hover {
+    background-color: #79A4D4;
+    color: #fff;
+}
+
+#letterhead .inactive {display: none;}
+
+.dbresults {
+    clear:both;
+    padding: 7px 0;
+    border-top: 1px dashed #dfdfdf;
+}
+
+.no-border {
+    border: none;
+}
+
+.dbresults-inset {
+    clear:both;
+    padding: 7px 0;
+    margin-left: 2em;
+}
+.zebra {
+    padding: .5em 0 .5em .5em;
+    border-bottom: 1px solid #ccc;
+}
+/*
+.zebra:hover {
+    background-color: #ccc;
+}
+*/
+
+.evenrow, .even {
+    background-color: #efefef;
+}
+.oddrow, .odd {
+    background-color: #fff;
+}
+
+.list_bonus {
+    display: none;
+    z-index: 200000;
+}
+
+table {
+    font-size: 1.2em;
+}
+table.item_listing td, div.item_listing p {
+    padding: .5em 0 .5em .5em;
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+}
+table.item_listing th {
+    padding: .5em 0 .5em .5em;
+    border-top: 1px solid #EFE9C2;
+    background-color: #000;
+    background: #000;
+    color: #fff;
+
+}
+
+table.istem_listing h2 {
+    border:none;
+    background-color: #fff;
+}
+
+table.item_listing a {
+    text-decoration: none;
+}
+
+table.item_listing a:hover {
+    text-decoration: underline;
+}
+
+.list_bonus {
+    display: none;
+    z-index: 200000;
+    margin-top: .5em;
+    color: #333;
+    font-size: 0.8em !important;
+}
+
+.list_bonus img {
+    background-color: #79A4D4;
+    border-radius: 3px;
+    height: 15px;
+    padding: 3px;
+    width: 15px;
+}
+
+.db_icons {
+    float: right;
+    font-size: 0.8em !important;
+    margin-right: 1em;
+}
+
+.db_icons img {
+    /* background-color: #79A4D4; */
+    border-radius: 3px;
+    height: 15px;
+    width: 15px;
+    padding: 3px;
+}
+
+.toggleLink {
+    font-size: 13px; border-radius: 3px; margin-left: 1em; color: #666; padding: 1px 3px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.togglelink:hover {
+    background-color: #E67E22 !important;
+}
+
+/* The next three classes are used for even/odd striped tables of data/results */
+.striped_data {
+    font-size: 100%;
+    margin: 2px;
+    background-color: #ccc;
+}
+
+
+
+/* This is for debugger results, if $debugger variable is turned on in file */
+.debugger {
+    text-align: left;
+    background: Yellow;
+    font-size: 12px;
+    margin: 15px;
+    padding: 5px;
+    border: 1px dashed #ccc;
+    overflow: auto;
+}
+
+/* For subjects/faq.php results */
+
+.faq_item {
+    background: url("../images/left_top_corner.gif") no-repeat;
+}
+
+.faq_item_q { /*background: #333; color: #fff;
+	*/
+              padding-left: 15px;
+              margin-bottom: 2px;
+              padding-bottom: 2px;
+              font-weight: bold;
+              padding-top: 9px;
+}
+
+.faq_item_a {
+    padding-left: 15px;
+    padding-bottom: 5px;
+}
+
+.faq_filter {
+	font-size: .8em;
+	text-align: center;
+	margin:1em;
+}
+
+/* The next few determine how peoples' names and pix appear in staff.php & staff_details.php
+staff_photo2 is in the sidebar of the subject results page (which requires a float)*/
+
+.staff_photo {
+    position: relative;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.staff_photo2 {
+    background: none repeat scroll 0 0 #efefef;
+    border: 1px solid #333;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 3px;
+    position: relative;
+}
+
+.staff_contact {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding: 0;
+}
+
+span.staff_contact a:link {
+
+    color: #000;
+    text-decoration: underline;
+}
+span.staff_contact a:visited {
+
+    color: #000;
+    text-decoration: underline;
+}
+
+span.staff_contact a:hover {
+
+    text-decoration: none;
+    color: #cc6666;
+
+}
+
+span.staff_contact a {
+
+    color: #000;
+    text-decoration: underline;
+}
+
+h2.dept_header {
+    border:none !important;
+    background-color: #fff  !important;
+    border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -khtml-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    text-align: center !important;
+}
+
+/* This is for the search box on subjects/display.php & subjects/faq.php */
+
+.search_smaller {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* Used throughout for print that is um smaller  */
+.smaller {font-size: 8pt; }
+
+#listing a:hover {
+    text-decoration: underline;
+
+}
+
+#listing a   {
+    text-decoration: none;
+}
+
+
+#intro_pluslet {
+
+    position: relative;  clear: both; background: #fff; margin-bottom: 10px; z-index: 50; border: 1px solid #929abe;  padding: 0px;cursor: move; font-size: 10pt;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+#navbar {
+    width:100%;
+}
+
+#nav a {color: #000;
+        text-decoration:none;}
+
+#nav a:link {color: #000;
+             text-decoration:none;}
+
+#nav a:visited {color: #000;
+                text-decoration:none;}
+
+/* Talk Back */
+
+.pluslet_error {
+    background-color: #CC0000;
+}
+
+.tb_year_head {
+    background-color: #333;
+    font-size: 16pt;
+}
+
+div.tb_year_head a {
+    color: #fff;
+}
+
+.tb_form_head {
+    background-color: #fff;
+}
+
+
+.tb_answer {
+    margin-top: 8px;
+    padding: 8px 5px;
+    min-height: 70px;
+    background-color: #e0e0e0;
+    border-top: 1px solid #ccc;
+}
+
+.tb_staff_photo {
+    position: relative;
+    float: left;
+    background: #efefef;
+    padding: 3px;
+    border: 1px solid #333;
+    margin: 0 10px 0 0px;
+    max-width: 50px;
+
+}
+
+.toc {
+    float: left;
+    width: 30%;
+    margin: 0 1% 1em 1%;
+}
+
+/* Tell Us Page */
+form#tellus p {
+    padding: .5em 0 .5em 1em;
+}
+
+.tellus_item {
+    clear: both;
+    display: block;
+    float: left;
+    margin: 1em 0;
+    padding: .5em;
+    min-width: 95%;
+    background-color: #fff;
+    border-bottom: 1px dashed #DCD9CC;
+}
+.comment_num {
+    position: relative;
+    float: left;
+    display: inline-block;
+    background-image: url('../../images/icons/comment_box.png');
+    background-repeat: no-repeat;
+    width: 39px;
+    height: 34px;
+    margin-right: 1em;
+    text-align: center;
+    font-size: 1.4em;
+    color: #fff;
+    padding-top: 5px;
+}
+.tellus_comment {
+    background-color: #fff;
+    padding: .5em;
+    margin: 0;
+}
+
+/* Styling the markup generated by the autocomplete jQuery UI widget */
+
+
+ul.ui-autocomplete{
+    width:250px;
+    background-color:#fff;
+    border:1px solid #fff;
+    outline:1px solid #ccc;
+
+}
+
+ul.ui-autocomplete li{
+    list-style:none;
+    border-bottom:1px solid #e0e0e0;
+    border-top:1px solid #fff;
+    text-align: left !important;
+}
+
+ul.ui-autocomplete li:first-child{
+    border-top:none;
+}
+
+
+ul.ui-autocomplete li:last-child{
+    border-bottom:none;
+}
+
+ul.ui-autocomplete li a{
+    color:#333;
+    border:none !important;
+    text-decoration:none !important;
+    padding:5px 10px;
+    display:block;
+}
+
+#ui-active-menuitem{
+    background-color:#79A4D4;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* Videos page */
+
+
+div.vid_container {
+  background-color: #333;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
+  float: left;
+  margin: 0 0 25px 0;
+  padding-bottom: 10px;
+  color: #fff;
+}
+
+
+div.vid_container img {
+  float: left;
+  margin: 10px 20px 10px 10px;
+  background-color: #4F4E4E;
+  width: 150px;
+  cursor: pointer;
+  list-style: none outside none;
+  padding: 7px;
+  position: relative;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+}
+
+
+
+div.vid_container h3 {
+  font-size: 1.3em;
+  color: #B0CBE8 !important;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+div.vid_container p {
+  font-size: 1em;
+  color: #fff;
+  margin-top: 0;
+}
+
+div.vid_container a {
+  color: #B0CBE8;
+  cursor: pointer;
+}
+
+div.vid_container p.runtime {font-size: smaller; margin-bottom: 15px;}
+
+.video_thumb {
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  background-color: #333;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+div.video_thumb img {
+  float: left;
+
+}
+.video_list {
+  clear: both; float: left; width: 500px;
+}
+
+
+
+
+/* these .ui class overrides tweak border and spacing of tab containers */
+.ui-content {
+    border: none !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em !important;
+}
+
+.ui-state-active {
+    background: #79A4D4 !important;
+}
+.hometab {
+    
+}
+
+/* DZ's fixes to  make the home icon work properly */
+/* DZ when on another tab */
+
+.ui-state-default .hometab {
+    
+    /*background: url(../../images/icons/home-active.png) no-repeat center center !important;*/
+}
+
+ 
+/* DZ - When hovering on this tab */
+.ui-state-hover .hometab
+
+{
+    
+    /*background: url(../../images/icons/home-hover.png) no-repeat center center !important;*/
+}
+
+/* DZ -  When on this tab */
+.ui-state-active .hometab, .ui-state-focus .hometab {
+    
+   /* background: url(../../images/icons/home-white.png) no-repeat center center !important;*/
+    background-color: rgba(51, 51, 51, 0.7) !important;
+    color: #FFF !important;
+}
+
+.dropspotty.ui-state-active {background-color: rgba(51, 51, 51, 0.7) !important; color: #FFF !important;}
+.dropspotty.ui-state-active a {color: #FFF !important;}
+
+/* Next lines override the regular pluslet to create a heading */
+.evenrow {
+    background-color: #E3E1D9;
+}
+
+.bullet {
+height:55px;
+width:55px;
+}
+
+
+.staff-info {
+    float:left;
+}
+
+
+
+.float-left {
+    float:left;
+}
+
+
+
+.ts-blackwhite, .ts-umgreen
+{
+	background-color:black;
+	color:white;
+}
+
+.ts-whiteblack, .ts-umcream
+{
+	background-color:white;
+	color:black;
+}
+
+.noshow {display: none;}
+
+
+
+/* Catalog Pluslet Display - Front-end */
+
+.catalog-search {width:100%; margin: 0;}
+
+.catalog-search .adv-prompt a{font-size: 0.8em;}
+
+
+
+/* Social Media Pluslet - Front-end*/
+#social_media_accounts ul {list-style-type: none; margin: 0; padding: 0;}
+
+#social_media_accounts ul li { display: inline; }
+
+#social_media_accounts ul li a { text-decoration: none; padding: .2em 0.3em .2em 0; font-size: 26px; color: rgba(51,51,51,0.7);}
+#social_media_accounts ul li a:hover { color: rgba(51,51,51,1);}
+
+
+
+
+/* Hide Expand/Collapse Pluslets - Front-end*/
+#expand_tab {display: none !important;}
+
+
+
+/* Subject Specialist Pluslet - NEW - Front-end*/
+.subjectSpecialistPlusletOld {margin: 0 0 12px 0; display: block; padding-bottom: 10px;}
+.subjectSpecialistPluslet {margin: 0 0 12px 0; display: block; border-bottom: 1px dashed #CCC; padding-bottom: 10px;}
+
+
+.staff-image {width: 90px; float:left; display: inline-block; margin-right: 10px; }
+
+.staff-photo {width: 70px; height: 70px; border: 1px solid #d5d5d5; padding: 3px; background-color: #f2f2f2;}
+
+.staff-content {
+  float:left; 
+  display: inline-block;
+  width: calc(100% - 110px);
+  width: -moz-calc(100% - 110px);
+  width: -webkit-calc(100% - 110px);
+}
+
+.staff-details {list-style-type: none; margin: 0 !important; padding: 0; display: inline-block; }
+.staff-details h4 {font-weight: bold; margin-bottom: 6px;}
+.staff-details li {margin: 0 !important; display: block !important; white-space: pre-wrap;   white-space: -moz-pre-wrap;   
+   white-space: -o-pre-wrap;  word-wrap: break-word; }
+
+.staff-social {padding: .2em 0.2em .2em 0; font-size: 26px; display: inline-block;}
+.staff-social  a {text-decoration: none; color: rgba(51,51,51,0.7) !important;}
+.staff-social a:hover { color: rgba(51,51,51,1) !important;}
+
+
+
+/* WorldCat Pluslet - Front-end */
+#div-search { width: 100%;}
+
+#wcfw p {margin:0 0 0.5em 0;}
+
+#wcfw #box {margin: 0 10px 0 0;}
+
+#wcfw input {margin-bottom: 4px;}
+
+/* tab style */
+.pluslet_body ul.shadetabs {padding: 3px 0 !important; font-size: 1em !important; font-weight: normal !important; list-style-type: none !important; text-align: left !important; margin: 10px 0 0 0 !important;}
+.pluslet_body ul.shadetabs li {display: inline-block !important; margin: 0 0 12px 0 !important; font-size: 0.9em !important;}
+.pluslet_body ul.shadetabs li a{text-decoration: none !important; position: relative !important; z-index: 1 !important; padding: 3px 7px !important; margin-right: 3px !important; border: 1px solid #CCC !important; color: #333 !important; cursor:pointer !important; border-radius: 2px !important;}
+.pluslet_body ul.shadetabs li a:visited{color: #333 !important;}
+.pluslet_body ul.shadetabs li a:hover{text-decoration: underline !important; color: #000 !important;}
+.pluslet_body ul.shadetabs li a.selected{position: relative !important; top: 1px !important; color: #333 !important; background: #d5d5d5 !important; cursor:text !important;}
+.pluslet_body ul.shadetabs li a.selected:hover{text-decoration: none !important;}
+
+
+#journalsearch {margin-top: 0;}
+
+.wcat-label {font-weight: normal; font-size: 0.9em; margin: 0 !important;}
+
+#bottomdiv {
+  padding: 0.2em 0 0.2em 10px; 
+  background: url(https://www.worldcat.org/searchbox/images/wclocal_srchwc.gif?ai=SubjectsPlus) 98% bottom no-repeat;}
+
+#bottomdiv a {font-size: 0.8em;}
+
+/* Pure Form overrides - PV */
+.pluslet_body .pure-form input,
+.pluslet_body .pure-form select,
+.pluslet_body .pure-form textarea {
+  border-radius: 2px !important;
+  border: 1px solid #bcbbbb !important;
+  box-shadow: none !important;
+  padding: 4px !important;
+  margin-bottom: 6px;
+  width: 50%;
+  white-space: nowrap;
+}
+
+.pluslet_body .pure-form select {  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
+    padding: 0.3em 1.75em 0.3em 0.5em !important;
+  -webkit-border-radius: 2px; 
+}
+
+.pluslet_body .pure-form select option {white-space: nowrap; width: auto;}
+
+.pluslet_body .pure-button-pluslet, 
+.pluslet_body a.pure-button-pluslet {
+  background-color: rgba(51,51,51, 0.7);
+  box-shadow: none;
+  color: #FFF !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;   
+}
+
+.pluslet_body .pure-form input.pure-button-pluslet {padding: 4px 10px !important; width: auto;}
+
+.pluslet_body .pure-button-pluslet:hover, 
+.pluslet_body a.pure-button-pluslet:hover {
+  background-color: rgba(51,51,51, 1);
+}
+
+.pluslet_body .pure-form legend {
+    border-bottom: none;
+    color: #333;
+    font-style: italic;
+    width: 94%;
+    margin:0;
+    padding: 0;
+}
+
+/* TOC Pluslet - Front-end */
+h4.toc-heading {margin: 6px 0; font-weight: bold;}
+.table-of-contents { font-size: 1em; display: list-item; list-style-position: inside; padding: 0;}
+
+
+/* Google Search Pluslet - Front-end */
+
+.google-attribution {
+  padding: 0.5em 0 0.2em 10px; 
+  background: url("../../images/icons/powered_by_google_on_white.png") 98% bottom no-repeat;
+  display: block;
+  height: 15px;
+  max-width: 110px;
+  background-size:contain;
+}
+
+
+/* Guide Select Pluslet  - Front-end */
+h4.guide-select-heading {margin: 6px 0; font-weight: bold;}
+.pluslet_container .pure-form select {width:200px !important;}
+
+
+
+/* HTML5 Video Pluslet - Front-end */
+.video-container {margin-bottom: 10px;}
+
+
+
+/*Experts Pluslet - Front-end */
+.type-experts .pluslet_body {overflow: initial !important;}
+
+.find-expert-area-circ {padding:0;}
+
+.expert-list-circ {list-style-type: none; margin:15px 0 15px 0; padding:0 !important; text-align: center;}
+.expert-list-circ li {
+    display:inline-block; 
+    margin: 0 0 10px 0;
+    padding:0; 
+    width:120px;
+    position:relative;
+}
+
+.expert-list-circ .expert-img {display: block; text-align: center;}
+.expert-list-circ .expert-img img.staff_photo_full {padding:0; background-color: transparent; width: 80px; height: 80px; border: none; border-radius: 50%;}
+.expert-list-circ .expert-label {display: block; text-align: center; padding:3px 0; width:100%; font-size:0.9em; line-height: 1.1em;}
+.expert-list-circ .expert-title {display: block; font-size:0.95em; line-height: 1.2em; padding:5px; color:#FFF;}
+.expert-list-circ .expert-subjects {display: block; text-align: left; padding:5px; font-size: 0.85em; line-height: 1.2em; color: #FFF;}
+
+.expert-btn-area {text-align: center; margin-top:15px; margin-bottom:10px;}
+.find-expert-area-circ .expert-button {text-align: center; padding:4px 10px; border: 1px solid #bcbbbb; background-color: rgba(51, 51, 51, 0.7); font-size:1em; color:#FFF !important; border-radius: 2px; text-decoration: none; font-family: Verdana,Arial,sans-serif !important;}
+.find-expert-area-circ .expert-button:hover {background-color: rgba(51, 51, 51, 1);}
+
+.expert-subject-min {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 115px;}
+
+/*Expert tooltips */
+
+.expert-list-circ li:hover .expert-tooltip {display:block;}
+
+.expert-tooltip {
+    position:absolute;
+    top:-20px;
+    right:92%;
+    display:none;
+    margin:5px;
+    width:175px;
+    min-height:120px;    
+    border-radius: 2px;
+    background-color: rgba(102, 102, 102, 0.9);
+    z-index:99999;
+    padding: 5px;  
+    color: #FFF;  
+}
+
+.expert-tooltip:before {
+    content:"\A";
+    border-style: solid;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent  transparent transparent rgba(102, 102, 102, 0.9);
+    position: absolute;
+    right: -15px;
+    top:35%;
+}
+
+
+
+/*Guide List Pluslet */
+.guide_list {background-color: #FFF; padding:5px 5px;margin-bottom: 10px; border-radius: 2px; }
+
+.guide_list_header {border-bottom: 1px dotted #ccc; font-size: 1.1em !important; font-weight: bold;}
+.guide_list_header h3 {letter-spacing: 0; color:#333; font-size: 1em; padding-bottom:2px; }
+
+ul.guide-listing {list-style: inside none none !important; margin: 5px 0 0 5px !important; padding: 0 !important;}
+ul.guide-listing li {font-size:1em !important; padding-bottom:0;}
+ul.guide-listing li .fa {color: #666; font-size:0.9em; cursor: pointer; margin-right:4px;}
+
+.guide_list_bonus {padding:5px 10px; font-size:0.9em; line-height: 1.2em; display:none; color: #333;}
+
+.pills-label {display:inline-block; color: #858585; font-size:1em; margin-right:5px; font-weight: bold; font-style: italic;}
+.pills-container {display:inline-block; margin-bottom: 5px;}
+.pills-container ul {list-style-type: none;}
+.pills-container ul li {display:inline-block; font-size:1em; margin-right:8px;}
+.pills-container ul li a {display:inline-block; font-size:1em; color: #333; padding: 0;}
+
+
+
+
+
+/*  Media Queries */
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+
+}
+
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+
+    h1 {
+        clear: left;
+        margin-top: 0;
+    }
+
+    #guide_nav_tools {
+        float: right !important;
+        margin: 0 0 0 0;
+    }
+
+    div.printer_tabs { /* Print button on guide with tabs */
+        margin: 0 0 0 0;  
+        background-color: transparent;
+        position: absolute;
+        top:-46px !important;
+        right: 305px;
+        width: 36px;
+    }
+
+    div.printer_no_tabs { /* Print button on guide with NO tabs */
+    margin: -28px 0 0 5px;  
+     background-color: transparent;
+    position: absolute;
+    top: 0 !important;
+    right: 305px !important;
+    width: 36px;
+    }
+
+    .ui-widget-header {
+       background: url("../shared/images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll top left #cccccc !important;
+    }
+
+    .pluslet_body .pure-form input,
+    .pluslet_body .pure-form select,
+    .pluslet_body .pure-form textarea {
+      width: 65%;
+    }
+
+
+}
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+
+    .pluslet_body .pure-form input,
+    .pluslet_body .pure-form select,
+    .pluslet_body .pure-form textarea {
+      width: 55%;
+    }
+
+}
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+
+}
+
+
+
+/* For imported Guides */
+.links {
+    margin-bottom:5%;
+}
+
+
+
+
+
+/** styles for custom CKEditor dropdown **/
+
+img.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+img.pluslet_card_image {
+    display:block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    width:100%;
+    height:auto;
+}
+
+
+/** end ckeditor custom styles ***/
+
+
+
+
+/*** styles for Card Pluslet - taken from http://materializecss.com/cards.html ***/
+/** added cbrownroberts nov 19, 2015 ***/
+
+
+.card {
+    position: relative;
+    margin: 0.5rem 0 1rem 0;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-panel {
+    transition: box-shadow .25s;
+    padding: 20px;
+    margin: 0.5rem 0 1rem 0;
+    border-radius: 2px;
+    background-color: #fff; }
+
+
+.card .card-title {
+    font-size: 20px;
+    font-weight: 300;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%; }
+.card .card-title.activator {
+    cursor: pointer; }
+.card.small, .card.medium, .card.large {
+    position: relative; }
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    max-height: 60%;
+    overflow: hidden; }
+.card.small .card-content, .card.medium .card-content, .card.large .card-content {
+    max-height: 40%;
+    overflow: hidden; }
+.card.small .card-action, .card.medium .card-action, .card.large .card-action {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: inherit; }
+.card.small {
+    height: 300px; }
+.card.medium {
+    height: 400px; }
+.card.large {
+    height: 500px; }
+.card .card-image {
+    position: relative; }
+.card .card-image img {
+    display: block;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%; }
+.card .card-image .card-title {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px; }
+.card .card-content {
+    padding: 20px;
+    border-radius: 0 0 2px 2px;
+}
+.card .card-content p {
+    margin: 0;
+    color: inherit; }
+.card .card-content .card-title {
+    line-height: 48px; }
+.card .card-action {
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 20px; }
+.card .card-action a {
+    color: #ffab40;
+    margin-right: 20px;
+    -webkit-transition: color .3s ease;
+    -moz-transition: color .3s ease;
+    -o-transition: color .3s ease;
+    -ms-transition: color .3s ease;
+    transition: color .3s ease;
+    text-transform: uppercase; }
+.card .card-action a:hover {
+    color: #ffd8a6; }
+.card .card-reveal {
+    padding: 20px;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    overflow-y: auto;
+    top: 100%;
+    height: 100%;
+    z-index: 1;
+    display: none; }
+.card .card-reveal .card-title {
+    cursor: pointer;
+    display: block; }
+
+/*** end Card styles ****/

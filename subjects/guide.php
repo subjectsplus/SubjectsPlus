@@ -30,6 +30,7 @@ $img_path = $PublicPath . "images";
 
 if( isset( $_GET['subject'] ) ) {
 	$check_this = $_GET['subject'];
+	$id = $_GET['subject'];
 
 } elseif( isset($_GET['id']) ) {
 
@@ -170,7 +171,7 @@ if (count($all_tabs) > 1) {
 }
 
 // Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title .
+$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($id) . "&page_title=" . $page_title .
     "\" aria-hidden=\"true\" alt=\"\" />";
 
 print $tracking_image;

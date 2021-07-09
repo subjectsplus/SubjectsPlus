@@ -23,6 +23,7 @@
         "symfony/form": "5.3.*",
         "symfony/framework-bundle": "5.3.*",
         "symfony/http-client": "5.3.*",
+        "symfony/mailer": "5.3.*",
         "symfony/monolog-bundle": ">=3.0.1",
         "symfony/proxy-manager-bridge": "5.3.*",
         "symfony/runtime": "5.3.*",
@@ -33,6 +34,7 @@
         "symfony/web-profiler-bundle": "5.0.*",
         "symfony/webpack-encore-bundle": "^1.11",
         "symfony/yaml": "5.3.*",
+        "symfonycasts/verify-email-bundle": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },

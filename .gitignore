@@ -164,6 +164,7 @@ subjects/.htaccess
 api/.htaccess
 
 ### Symfony template
+.env
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
@@ -180,6 +181,10 @@ api/.htaccess
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
+
+var/cache/*
+var/log/*
+
 
 # Logs (Symfony4)
 /var/log/*
@@ -294,7 +299,7 @@ fabric.properties
 composer.phar
 /vendor/
 
-composer.lock
+
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
@@ -1114,9 +1119,7 @@ FodyWeavers.xsd
 composer.phar
 /vendor/
 
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -1242,3 +1245,7 @@ Temporary Items
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/var
+var
+/var/cache/dev/

@@ -1,0 +1,15 @@
+/* 
+    Document   : nasa
+    Created on : 2014
+    Author     : agdarby
+    Description:  One of the backgrounds for SubjectdPlus
+*/
+
+
+.background {display: block;}
+
+h1 { color: #efefef;}
+
+#maincontent h2 {
+    color: #fff;
+}

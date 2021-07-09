@@ -3,15 +3,25 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
+
+/**
+ * @ORM\Entity(repositoryClass=UserRepository::class)
+ */
 /**
  * Staff.
  *
  * @ORM\Table(name="staff", indexes={@ORM\Index(name="fk_supervisor_staff_id_idx", columns={"supervisor_id"}), @ORM\Index(name="fk_staff_department_id_idx", columns={"department_id"}), @ORM\Index(name="fk_staff_user_type_id_idx", columns={"user_type_id"})})
  * @ORM\Entity
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Staff
+class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @var int
@@ -53,9 +63,12 @@ class Staff
     /**
      * @var int|null
      *
-     * @ORM\Column(name="department_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Department")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="department_id", referencedColumnName="department_id")
+     * })
      */
-    private $departmentId;
+    private $department;
 
     /**
      * @var int|null
@@ -85,10 +98,11 @@ class Staff
      */
     private $accessLevel;
 
+
+
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="password", type="string", length=192, nullable=true)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
@@ -265,6 +279,17 @@ class Staff
     private $subject;
 
     /**
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -325,17 +350,19 @@ class Staff
         return $this;
     }
 
-    public function getDepartmentId(): ?int
+    public function getDepartment(): ?Department
     {
-        return $this->departmentId;
+        return $this->department;
     }
 
-    public function setDepartmentId(?int $departmentId): self
+    public function setDepartment(?Department $department): self
     {
-        $this->departmentId = $departmentId;
+        $this->department = $department;
 
         return $this;
     }
+
+
 
     public function getStaffSort(): ?int
     {
@@ -381,18 +408,6 @@ class Staff
     public function setAccessLevel(?int $accessLevel): self
     {
         $this->accessLevel = $accessLevel;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(?string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }
@@ -681,6 +696,92 @@ class Staff
     public function removeSubject(Subject $subject): self
     {
         $this->subject->removeElement($subject);
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
