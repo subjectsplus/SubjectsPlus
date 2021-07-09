@@ -29,7 +29,7 @@ class StaffType extends AbstractType
             ->add('positionNumber')
             ->add('jobClassification')
             ->add('roomNumber')
-            ->add('supervisorId')
+            //->add('supervisor')
             ->add('emergencyContactName')
             ->add('emergencyContactRelation')
             ->add('emergencyContactPhone')
