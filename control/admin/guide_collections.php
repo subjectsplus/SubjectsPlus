@@ -16,10 +16,9 @@ $subcat = "admin";
 $page_title = "Admin Guide Collections";
 $feedback = "";
 
-//var_dump($_POST);
 
-include("../includes/header.php");
-include("../includes/autoloader.php");
+include_once(__DIR__ . "/../includes/header.php");
+include_once(__DIR__ . "/../includes/autoloader.php");
 
 
 $add_collection_box = "

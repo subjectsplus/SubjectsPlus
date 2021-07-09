@@ -14,8 +14,7 @@ $subsubcat = "";
 $subcat = "";
 $page_title = "View/Export Contact Information";
 
-include("../includes/header.php");
-
+include_once(__DIR__ . "/../includes/header.php");
 $reporting_id = $_SESSION["staff_id"];
 
 $all_supers = array(); // we init this; used as global in the function checkReports()
@@ -82,7 +81,7 @@ if (isset($show_reports_hierarchical) && $show_reports_hierarchical != "") {
 </div>
 
 <?php
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 
 
@@ -216,4 +215,3 @@ if ( $data == "" )
 {
   $data = "\n(0) Records Found!\n";                        
 }
-?>

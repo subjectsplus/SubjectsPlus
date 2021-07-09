@@ -18,7 +18,7 @@ $subcat = "guides";
 $page_title = "Section Functions";
 $header = "noshow";
 
-include("../../includes/header.php");
+include_once(__DIR__ . "/../../includes/header.php");
 
 $sectionData = new SectionData($_POST);
 $sectionData->processSection();

@@ -10,9 +10,9 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
  * Time: 11:01 AM
  */
 
-include('config.php');
-include_once(getcwd() . "/../../lib/SubjectsPlus/Control/Querier.php");
-include_once(getcwd() . "/../../lib/SubjectsPlus/Control/Stats/Stats.php");
+include(__DIR__ . '/config.php');
+include_once(__DIR__ . "/../../lib/SubjectsPlus/Control/Querier.php");
+include_once(__DIR__ . "/../../lib/SubjectsPlus/Control/Stats/Stats.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Stats\Stats;
@@ -302,7 +302,7 @@ class LTICourseController
                     array_push($research_guide_ids, $guide['subject_id']);
                 }
                 $this->saveStats($course_code, $instructor_courses_count, implode(",", $research_guide_ids));
-                include('lti_view/multiple_guides_view.php');
+                include(__DIR__ . '/lti_view/multiple_guides_view.php');
             } else {
                 $this->findGuideBySubjectCodeAndCourseNumber($course_code, $guide_path);
             }
@@ -341,7 +341,7 @@ class LTICourseController
                 $results[$guide['subject']] = $guide_path . "guide.php?subject=" . $guide['shortform'];
             }
             $this->saveStats($course_code, $guides_count, implode(",", $research_guide_ids));
-            include('lti_view/multiple_guides_view.php');
+            include(__DIR__ . 'lti_view/multiple_guides_view.php');
         }
     }
 

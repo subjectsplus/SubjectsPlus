@@ -100,7 +100,7 @@ class Pluslet_LinkList extends Pluslet
         //$oCKeditor->config['ToolbarStartExpanded'] = true;
         $config['toolbar'] = 'TextFormat';
         $config['height'] = '300';
-        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
         $this_instance = "link-list-textarea";
         $this->_editor = $oCKeditor->editor($this_instance, $this->_body, $config);

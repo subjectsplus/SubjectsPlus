@@ -6,7 +6,7 @@ $page_title = "First Time Update";
 $use_jquery = array("ui_styles");
 $no_header = "yes";
 
-include("header.php");
+require_once(__DIR__ . "/header.php");
 
 ?>
 	<div id="maincontent" style="max-width: 800px; margin-right: auto; margin-left: auto;">
@@ -30,6 +30,6 @@ include("header.php");
 	</div>
 <?php
 
-include("footer.php")
+include_once(__DIR__ . "/footer.php")
 
 ?>

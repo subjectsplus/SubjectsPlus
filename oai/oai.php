@@ -17,8 +17,8 @@ use SubjectsPlus\Control\OAI\Request;
 header("Content-type: text/xml");
 
 
-include_once ('../control/includes/autoloader.php');
-include_once('../control/includes/config.php');
+include_once(__DIR__ . '/../control/includes/autoloader.php');
+include_once(__DIR__ . '/../control/includes/config.php');
 
 if(isset($language)) {
     $lang = $language;

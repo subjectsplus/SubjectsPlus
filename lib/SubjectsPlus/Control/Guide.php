@@ -249,7 +249,7 @@ class Guide
 
 		//print "<pre>";print_r($this->_staffers); print "</pre>";
 
-		$action = htmlentities($_SERVER['PHP_SELF']) . "?subject_id=" . $this->_subject_id;
+		$action = getControlURL() . "guides/metadata.php?subject_id=" . $this->_subject_id;
 
 		if ($wintype != "") {
 			$action .= "&wintype=pop";
@@ -257,7 +257,7 @@ class Guide
 		if ($wintype == "pop") {
 			$copy_guide = "";
 		} else {
-			$copy_guide = "<a href='guide_copy.php'>" . _("Copy an Existing Guide") . "</a>";
+			$copy_guide = "<a href='" . getControlURL() . "guides/guide_copy.php'>" . _("Copy an Existing Guide") . "</a>";
 		}
 		if ($this->_subject_id) {
 			$guide_title_line = _("Edit Existing Guide Metadata");
@@ -523,7 +523,7 @@ class Guide
 		$existing_thumbnail_info = @getimagesize($thumbnail_filepath);
 		$thumbnail_preview = '<p>No files currently selected for upload</p>';
 
-		if ( isset($existing_thumbnail_info) ) {
+		if ( isset($existing_thumbnail_info['mime']) ) {
 			if ($existing_thumbnail_info['mime'] === 'image/jpeg') {
 
 				// NOTE: This template has to be kept in sync with the JavaScript generated one below!
@@ -873,14 +873,14 @@ class Guide
 
         $hasMasterClones = $this->hasMasterPluslets($this->_subject_id);
         if($hasMasterClones == true) {
-            $this->_message = _("This guide cannot be deleted because it contains master boxes " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            $this->_message = _("This guide cannot be deleted because it contains master boxes " . "<a class=\"master-feedback-link\" href=\"" . getControlURL() . "guides/index.php\">" . _("Back to Browse Guides.") . "</a>");
             return FALSE;
         }
 
         //is this a parent guide? if so, cannot delete because it will leave orphans
         $isParentGuide = $this->isParentGuide($this->_subject_id);
         if($isParentGuide == true) {
-            $this->_message = _("This guide cannot be deleted because it is a parent guide. " . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a>");
+            $this->_message = _("This guide cannot be deleted because it is a parent guide. " . "<a class=\"master-feedback-link\" href=\"" . getControlURL() . "guides/index.php\">" . _("Back to Browse Guides.") . "</a>");
             return FALSE;
         }
 
@@ -924,9 +924,9 @@ class Guide
         if (isset($delete_result2)) {
             // message
             if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
-                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a></div>";
+                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"" . getControlURL() . "guides/index.php\">" . _("Back to Browse Guides.") . "</a></div>";
             } else {
-                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"index.php\">" . _("Back to Browse Guides.") . "</a></div>";
+                $this->_message = "<div class=\"master-feedback\" style=\"display:block;\">" . _("Thy will be done.  Offending Guide (and associated boxes) deleted. ") . "<a class=\"master-feedback-link\" href=\"" . getControlURL() . "guides/index.php\">" . _("Back to Browse Guides.") . "</a></div>";
             }
 
             ///////////////////////
@@ -1024,7 +1024,7 @@ class Guide
 
 
         // message
-        $this->_message = _("Thy Will Be Done.") . " <a class=\"master-feedback-link\" href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
+        $this->_message = _("Thy Will Be Done.") . " <a class=\"master-feedback-link\" href=\"" . getControlURL() . "guides/guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
     }
 
     public function updateRecord()
@@ -1135,7 +1135,7 @@ class Guide
         } else 
         { 
         	
-        	$this->_message = _("Thy Will Be Done.") . " <a href=\"guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
+        	$this->_message = _("Thy Will Be Done.") . " <a href=\"" . getControlURL() . "guides/guide.php?subject_id=" . $this->_subject_id . "\">" . _("Add Content To Your New Guide") . "</a>";
         }
         
     }

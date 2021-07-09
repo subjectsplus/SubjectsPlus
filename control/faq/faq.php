@@ -18,7 +18,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
   $no_header = "yes";
 }
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 try {
@@ -108,7 +108,7 @@ if (!isset($no_form)) {
 
 //$record->deBug();
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 ?>
 
 <script type="text/javascript">

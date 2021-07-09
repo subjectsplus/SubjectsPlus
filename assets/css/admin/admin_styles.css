@@ -659,7 +659,7 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-WorldCat {
-  background-image: url(images/icons/world-cat-grey.svg);
+  background-image: url(/build/assets/images/control/icons/world-cat-grey.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -667,14 +667,14 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-WorldCat:hover {
-  background-image: url(images/icons/world-cat-white.svg);  
+  background-image: url(/build/assets/images/control/icons/world-cat-white.svg);  
 }
 
 .worldcat-text {margin-top: 30px;}
 
 
 #pluslet-id-GoogleScholar {
-  background-image: url(images/icons/gscholar.png);
+  background-image: url(/build/assets/images/control/icons/gscholar.png);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -682,11 +682,11 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-GoogleScholar:hover {
-  background-image: url(images/icons/gscholar-white.png);  
+  background-image: url(/build/assets/images/control/icons/gscholar-white.png);  
 }
 
 #pluslet-id-GoogleBooks {
-  background-image: url(images/icons/gbooks.svg);
+  background-image: url(/build/assets/images/control/icons/gbooks.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -694,11 +694,11 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-GoogleBooks:hover {
-  background-image: url(images/icons/gbooks-white.svg);  
+  background-image: url(/build/assets/images/control/icons/gbooks-white.svg);  
 }
 
 #pluslet-id-GoogleSearch {
-  background-image: url(images/icons/gsearch.png);
+  background-image: url(/build/assets/images/control/icons/gsearch.png);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -706,13 +706,13 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-GoogleSearch:hover {
-  background-image: url(images/icons/gsearch-white.png);  
+  background-image: url(/build/assets/images/control/icons/gsearch-white.png);  
 }
 
 .googlescholar-text, .guidesearch-text {margin-top: 30px;}
 
 #pluslet-id-1{
-  background-image: url(images/icons/all-items.svg);
+  background-image: url(/build/assets/images/control/icons/all-items.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -720,11 +720,11 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-1:hover {
-  background-image: url(images/icons/all-items-white.svg);  
+  background-image: url(/build/assets/images/control/icons/all-items-white.svg);  
 }
 
 #pluslet-id-GuideSearch {
-  background-image: url(images/icons/guide-search.svg);
+  background-image: url(/build/assets/images/control/icons/guide-search.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -732,11 +732,11 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-GuideSearch:hover {
-  background-image: url(images/icons/guide-search-white.svg);  
+  background-image: url(/build/assets/images/control/icons/guide-search-white.svg);  
 }
 
 #pluslet-id-NewGuides {
-  background-image: url(images/icons/new-guides.svg);
+  background-image: url(/build/assets/images/control/icons/new-guides.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -744,11 +744,11 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-NewGuides:hover {
-  background-image: url(images/icons/new-guides-white.svg);  
+  background-image: url(/build/assets/images/control/icons/new-guides-white.svg);  
 }
 
 #pluslet-id-CollectionList {
-  background-image: url(images/icons/guide-collections.svg);
+  background-image: url(/build/assets/images/control/icons/guide-collections.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -756,11 +756,11 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-CollectionList:hover {
-  background-image: url(images/icons/guide-collections-white.svg);  
+  background-image: url(/build/assets/images/control/icons/guide-collections-white.svg);  
 }
 
 #pluslet-id-Card {
-  background-image: url(images/icons/image-card.svg);
+  background-image: url(/build/assets/images/control/icons/image-card.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -768,12 +768,12 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-Card:hover {
-  background-image: url(images/icons/image-card-white.svg);  
+  background-image: url(/build/assets/images/control/icons/image-card-white.svg);  
 }
 
 
 #pluslet-id-BookList {
-  background-image: url(images/icons/booklist.svg);
+  background-image: url(/build/assets/images/control/icons/booklist.svg);
   background-position: 50% 30%;
   background-size: 30px 30px;
   background-repeat: no-repeat;
@@ -781,7 +781,7 @@ html, button, input, select, textarea {
 }
 
 #pluslet-id-BookList:hover {
-  background-image: url(images/icons/booklist-white.svg);  
+  background-image: url(/build/assets/images/control/icons/booklist-white.svg);  
 }
 
 
@@ -1139,23 +1139,23 @@ li.fav-box-item:hover::before {color: #C03957;}
 
 .layout-icon:hover, .layout-icon.active-layout-icon {background-color:#C03957; }
 
-#col-single {background-image: url(images/icons/col1-icon.svg);}
-#col-single:hover, #col-single.active-layout-icon {background-image: url(images/icons/col1-iconw.svg);}
+#col-single {background-image: url(/build/assets/images/control/icons/col1-icon.svg);}
+#col-single:hover, #col-single.active-layout-icon {background-image: url(/build/assets/images/control/icons/col1-iconw.svg);}
 
-#col-double {background-image: url(images/icons/col2-icon.svg);}
-#col-double:hover, #col-double.active-layout-icon {background-image: url(images/icons/col2-iconw.svg);}
+#col-double {background-image: url(/build/assets/images/control/icons/col2-icon.svg);}
+#col-double:hover, #col-double.active-layout-icon {background-image: url(/build/assets/images/control/icons/col2-iconw.svg);}
 
-#col-48 {background-image: url(images/icons/col2-48-icon.svg);}
-#col-48:hover, #col-48.active-layout-icon {background-image: url(images/icons/col2-48-iconw.svg);}
+#col-48 {background-image: url(/build/assets/images/control/icons/col2-48-icon.svg);}
+#col-48:hover, #col-48.active-layout-icon {background-image: url(/build/assets/images/control/icons/col2-48-iconw.svg);}
 
-#col-84 {background-image: url(images/icons/col2-84-icon.svg);}
-#col-84:hover, #col-84.active-layout-icon {background-image: url(images/icons/col2-84-iconw.svg);}
+#col-84 {background-image: url(/build/assets/images/control/icons/col2-84-icon.svg);}
+#col-84:hover, #col-84.active-layout-icon {background-image: url(/build/assets/images/control/icons/col2-84-iconw.svg);}
 
-#col-triple {background-image: url(images/icons/col3-icon.svg);}
-#col-triple:hover, #col-triple.active-layout-icon {background-image: url(images/icons/col3-iconw.svg);}
+#col-triple {background-image: url(/build/assets/images/control/icons/col3-icon.svg);}
+#col-triple:hover, #col-triple.active-layout-icon {background-image: url(/build/assets/images/control/icons/col3-iconw.svg);}
 
-#col-363 {background-image: url(images/icons/col3-363-icon.svg);}
-#col-363:hover, #col-363.active-layout-icon {background-image: url(images/icons/col3-363-iconw.svg);}
+#col-363 {background-image: url(/build/assets/images/control/icons/col3-363-icon.svg);}
+#col-363:hover, #col-363.active-layout-icon {background-image: url(/build/assets/images/control/icons/col3-363-iconw.svg);}
 
 .layout_options .top-panel-option-item {padding:1em;background-color:#d5d5d5;}
 .layout_options .top-panel-option-item:hover {background-color:#C03957;}
@@ -2038,7 +2038,7 @@ h4.toc-heading {margin: 6px 0;}
 
 .google-attribution {
   padding: 0.5em 0 0.2em 10px; 
-  background: url(images/icons/powered_by_google_on_white.png) 98% bottom no-repeat;
+  background: url(/build/assets/images/control/icons/powered_by_google_on_white.png) 98% bottom no-repeat;
   display: block;
   height: 15px; 
   max-width: 125px;

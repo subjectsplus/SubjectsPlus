@@ -143,10 +143,10 @@ class PGFeed {
 
 
   private function cacheFeed($source) {
-    if (!(file_exists("pgcache"))) {
+    if (!(file_exists(__DIR__ . "/pgcache"))) {
       mkdir("pgcache");
     }
-    $localfile = "pgcache/" . urlencode($source);
+    $localfile = __DIR__ . "/pgcache/" . urlencode($source);
     $feedxml = file_get_contents($source);
     
     $fp = fopen($localfile,"w");

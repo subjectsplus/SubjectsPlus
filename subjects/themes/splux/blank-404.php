@@ -7,11 +7,11 @@ $page_title = "Page Not Found (404)";
 $description = "404 Page Not Found";
 $keywords = "404, missing page";
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
 
 //header
-include( "includes/header_splux.php" );
+include_once(__DIR__ . "/includes/header_splux.php" );
 ?>
 
 <div class="section-minimal-nosearch">
@@ -57,4 +57,4 @@ include( "includes/header_splux.php" );
 
 <?php
 // Load footer file
-include( "includes/footer_splux.php" ); ?>
+include_once(__DIR__ . "/includes/footer_splux.php" ); ?>

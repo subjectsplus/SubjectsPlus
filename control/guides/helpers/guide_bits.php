@@ -19,7 +19,7 @@ $page_title = "Guide Bits include";
 $header = "noshow";
 
 
-include("../../includes/header.php");
+include_once(__DIR__ . "/../../includes/header.php");
 
 // Connect to database
 

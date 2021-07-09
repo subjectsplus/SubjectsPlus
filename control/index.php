@@ -14,7 +14,7 @@ use SubjectsPlus\Control\Querier;
 $page_title = "SubjectsPlus";
 $subcat     = "home";
 
-include( __DIR__ . '/includes/header.php' );
+include_once( __DIR__ . '/includes/header.php' );
 
 
 $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
@@ -247,7 +247,7 @@ if ( isset( $_SESSION['firstUpdate'] ) && $_SESSION['firstUpdate'] == 1 ) {
 	unset( $_SESSION['firstUpdate'] );
 }
 
-include( "includes/footer.php" );
+include_once(__DIR__ . "/includes/footer.php" );
 ?>
 
 

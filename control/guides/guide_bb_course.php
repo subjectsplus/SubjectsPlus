@@ -8,12 +8,11 @@ $subcat = "guide";
 $page_title = "Manage Guides and Blackboard Courses";
 $feedback = "";
 
-//var_dump($_POST);
 
-include("../includes/header.php");
-include("../includes/autoloader.php");
-require_once("../includes/config.php");
-require_once("../includes/functions.php");
+include_once(__DIR__ . "/../includes/autoloader.php");
+require_once(__DIR__ . "/../includes/config.php");
+require_once(__DIR__ . "/../includes/functions.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 $db = new Querier;
 $objSubjectCodes = new SubjectBBCourse($db);
