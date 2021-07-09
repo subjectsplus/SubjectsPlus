@@ -183,6 +183,11 @@ class Subject
         return $this;
     }
 
+    // Register Magic Method to Print the subject
+    public function __toString() {
+        return $this->subject;
+    }
+
     public function getActive(): ?int
     {
         return $this->active;

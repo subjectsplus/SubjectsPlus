@@ -1,0 +1,418 @@
+/* UM Med Theme Styles */
+body {
+background-color: #d9e0bf !important;
+background-image: none;
+border-top: medium none;
+}
+
+#wrap { margin: 0 auto; min-height: max-content;}
+
+/* header styles */
+
+#header-content {
+    border: none;
+    border-radius: 0;
+    margin: 0 auto;
+    padding: 3px 0 0;
+    max-width: 1110px;
+}
+
+.header-content {
+    padding: 15px 15px 0;
+}
+
+#header-content img {
+    float: none;
+}
+
+.uhealth-area {text-align: right;}
+
+.calder-logo {width:220px; height:75px; max-width: 95%;}
+
+.uhealth-logo {width:200px; height:75px; max-width: 95%;}
+
+#menu_button {
+    display: inline-block;
+    float: right;
+    margin: 10px 20px 0 0;
+    text-align: left;
+    width: 65px;
+}
+
+.button-menu {
+    background-color: #d77127;
+    border-radius: 2px;
+    color: #FFF !important;
+    text-shadow: none;
+}
+
+#spum_nav {
+    margin:36px 0 0 0;
+    padding:0;
+    background-color: #d77127;
+}
+
+#spum_nav ul li {
+    border-bottom: 1px solid #f5924b;
+}
+
+#spum_nav a:hover,
+#spum_nav a:active  {
+    color: #f5e9b8 !important;
+}
+
+a.nav_highlight:hover {background-color: transparent !important; color: #f5e9b8 !important;}
+
+.dropmenudiv_e {display: none !important;}
+
+
+/* footer styles */
+
+#push, .footer-container {
+    height: auto;
+}
+
+.footer-container {
+    background-color: transparent;
+    border-top: medium none;
+}
+
+#wide_footer {
+    background-color: #7b9a70;
+    background-image: none;
+    color: #eaf1e1;
+    font-size: 1em;
+    line-height: 1.5em;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+#wide_footer a:link {color: #d8e0b9;}
+
+.directions-btn {
+    color:#F5E9B8 !important; 
+    font-weight:bold; 
+    font-size:12px; 
+    text-shadow: 0 1px 1px #000; 
+    background:#de752f; 
+    padding:5px; 
+    border-radius:4px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+#social_icons_small {text-align: right; margin-right: 10px;}
+
+#umiami_logo {text-align: center; padding:0; }
+
+
+/* content areas styles */
+
+h1 {
+    background-image: none;
+    background-color: #7b9a70 !important;
+    margin-top: 10px;
+    text-shadow: 0 1px 1px #444;
+    color: #eaf1e1;
+}
+
+
+a:link {
+    color: #40659b;
+    text-decoration: none;
+}
+a:hover {text-decoration: underline;}
+
+.pluslet_body a, .pluslet_body a:link {
+    color: #40659b;
+    text-decoration: underline;
+}
+
+
+.print-img-tabs, .print-img-tabs:hover {
+    background-image: url("../../images/printer-chc.png");
+    border: 2px solid #de752f;
+}
+
+#tabs li a {
+    background-color: #7b9a70;
+    color: #fff;
+}
+
+#tabs li a:hover{
+    background-color: #de752f;
+    color: #f5e9b8;
+}
+
+#tabs .pluslet li a, #tabs .pluslet_simple li a {color: #40659b;}
+#tabs .pluslet li a:hover, #tabs .pluslet_simple li a:hover {background-color:transparent; color: #40659b;}
+
+div.printer_no_tabs {padding-top: 5px;}
+
+#topsearch_button2 {
+    background: url("https://library.miami.edu/wp-content/themes/umiami/images/search_button_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.titlebar {border-bottom: none !important; background-color: #d9e0bf;}
+
+.titlebar_text {background-color: #d9e0bf;}
+
+/* Front-end pluslet customization colors for titlebar - PV */
+.ts-whiteblack, .ts-umgreen {
+    background-color: #d9e0bf !important;
+    color: #000 !important;
+}
+
+.ts-umcream {
+    background-color: rgba(236, 215, 157, 1) !important;
+    color: #000 !important;
+}
+
+
+.pluslet_body .pure-button-pluslet, 
+.pluslet_body a.pure-button-pluslet {
+  background-color: #d77127;
+  color: #FFF !important;
+  text-shadow: 0 1px 1px #000;  
+}
+
+.pluslet_body .pure-button-pluslet:hover, 
+.pluslet_body a.pure-button-pluslet:hover {
+  background-color: #d77127;
+}
+
+.type-experts .expert-button {    
+    border: 1px solid #bcbbbb;
+    background-color: #d77127;
+    color: #fff !important;
+    text-decoration: none !important;
+    text-shadow: 0 0 1px #333;
+}
+
+.type-experts .expert-button:hover {background-color: #d77127;}
+
+
+#social_media_accounts ul li a { color: rgba(51,51,51,0.7) !important;}
+#social_media_accounts ul li a:hover { color: #f1722e !important;}
+
+.staff-social li  a {color: rgba(51,51,51,0.7) !important;}
+.staff-social li a:hover { color: #f1722e !important;}
+
+
+.table-of-contents { color: #40659b !important;}
+.table-of-contents:hover { color: #cc6666 !important;}
+
+.card .card-action a {color: #40659b !important; text-decoration: none !important; }
+.card .card-action a:hover {text-decoration: underline !important; color: #cc6666 !important;}
+
+
+/* CUSTOM pages */
+
+/* Index page */
+.index-search-area .pure-button-topsearch {
+    background-color: #d77127;
+    color: #fff;
+    text-shadow: 0 0 1px #333;
+}
+
+.index-search-area ul.guide-listing a:link {
+    color: #40659b;
+    text-decoration: none;
+}
+
+.find-expert-area-circ h3 {
+    color: #de752f;
+}
+
+.expert-label a:link {color: #6c8564;}
+
+.expert-subjects {
+    color: #f5e9b8 !important;
+}
+
+.find-expert-area-circ .expert-button {
+    background-color: #d77127;
+}
+
+/* Sidebars */
+.tip {
+    background-color: #7b9a70;
+    background-image: none;
+}
+
+div.tip h2 {
+    border-bottom: 1px dashed #d9e0bf;
+    color:#FFF;
+}
+
+div.tip a, div.tip ul li, div.tip p {
+    color: #FFF;
+}
+
+.sidebar-bkg {
+    background: transparent none no-repeat scroll left top;}
+
+/* Databases */
+#selected_letter, #letterhead a:hover {
+    background-color: #d77127;
+}
+
+table.item_listing a:link {
+    color: #40659b;
+}
+
+.pure-button-topsearch {
+    background-color: #d77127;
+    color: #fff;
+    text-shadow: 0 0 1px #333;
+}
+
+
+
+/* Talkback */
+
+.talkback-link {color: #40659b !important;}
+
+
+/* System Alert */
+
+.sys-alert-regular {
+    background-color: #ffffff;
+    border-bottom: 1px dashed #cccccc;
+    color: #333333;
+    font-size: 1.15em;
+    margin-bottom: 3em;
+    padding: 0.3em;
+}
+
+/* uSearch Report a Problem */
+.usearch_problem_report {
+    margin-top: 30px;
+}
+/* Blackboard LTI Messages */
+
+.usearch_problem_report .pure-button {
+    margin-top:16px;
+}
+.alert.alert-danger {
+    padding: 10px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    text-align: center;
+}
+
+.usearch_problem_report .form_listing td {
+    width:100%;
+    float: left;
+    padding: 5px;
+}
+
+.usearch_problem_report .form_listing td.form-item input,
+.usearch_problem_report .form_listing td.form-item select,
+.usearch_problem_report .form_listing td.form-item textarea {
+    width: 95%;
+}
+
+.alert .notification-close-button {
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    font-weight: 600;
+}
+
+
+
+
+
+
+/* //////////////////
+//  Media Queries 
+////////////////// */
+/* ≥ 480px  */
+@media screen and (min-width: 480px) {
+
+#menu_button {float: right; width: auto; margin-right: 20px;}
+
+
+}
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+
+.calder-logo {width:220px; height:75px; max-width: 100%;}
+
+.uhealth-logo {width:200px; height:75px; max-width: 100%;}
+
+}
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) {
+    
+    #header-content {margin: 10px auto 0 auto;}
+
+    #menu_button {display:none !important;}
+
+    #spum_nav {margin: 5px 0 0 0;}
+
+    #spum_nav ul li {border-bottom: none; display: inline-block;}
+
+    #spum_nav a {font-size:13px; padding: 10px 4px; color:#f5e9b8;}
+
+    #spum_nav a:hover,
+    #spum_nav a:active  {color: #7A5330 !important;}
+
+    a.nav_highlight:hover {color: #7A5330 !important;}
+
+    .dropmenudiv_e {display: block !important;}
+
+    .footer-container {float: left; margin-top: 2em; width: 100%; padding-bottom: 10px;}
+
+    h1 {margin-top:0px;}
+
+    #umiami_logo {text-align: left;}
+
+    .usearch_problem_report .form_listing td.label,
+    .usearch_problem_report .form_listing td.form-item {
+        width:50%;
+        float: none;
+        padding: 5px;
+    }
+
+    .usearch_problem_report .form_listing td.form-item input,
+    .usearch_problem_report .form_listing td.form-item select,
+    .usearch_problem_report .form_listing td.form-item textarea {
+        width: 95%;
+    }
+
+}
+
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) {
+
+    #spum_nav a {font-size:14px; padding: 10px 5px;}
+
+    #spum_nav ul {text-align: center;}
+
+    #social_icons_small {text-align: center;}
+
+}
+
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) {
+
+    #spum_nav a {padding: 10px;}
+ 
+    
+}
+
+.fa,
+.fas {font-size: 16px !important;} /* Default size for font-awesomeicons */
+
+.db_icons i {
+    padding-right: .25rem;
+    vertical-align: top;
+    padding-left: .25rem;
+}
+

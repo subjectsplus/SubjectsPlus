@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 $session = new Session();
 $session->start();
 
+
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
 if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FILE__) . '/config.php' ) < 10 )
 {

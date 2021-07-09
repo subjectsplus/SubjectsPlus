@@ -120,4 +120,9 @@ class Department
 
         return $this;
     }
+
+    // Register Magic Method to Print the userType
+    public function __toString() {
+        return $this->name;
+    }
 }

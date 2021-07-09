@@ -1,0 +1,21 @@
+/* 
+    Document   : override.css
+    Created on : updated Feb 2014 
+    Author     : agdarby
+    Description: stylesheet for easy overrides of css; always called last by assestic
+*/
+
+
+
+/* User Styles */
+/* Front-end pluslet customization */
+
+.ts-blackwhite {
+	background-color: #000 !important;
+	color: #fff !important;
+}
+
+.ts-blackwhite {
+	background-color: #fff !important;
+	color: #FF0 !important;
+}
