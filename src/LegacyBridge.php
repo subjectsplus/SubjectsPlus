@@ -21,8 +21,12 @@ class LegacyBridge
         $legacyScriptFilename = '..'.$request->getPathInfo();
 
         if (is_file($legacyScriptFilename)) {
+            $_SERVER["PHP_SELF"] = $request->getPathInfo();
+            $_SERVER["SCRIPT_FILENAME"] = basename($request->getPathInfo());
             return $legacyScriptFilename;
         } else {
+            $_SERVER["PHP_SELF"] = $request->getPathInfo() .'/index.php';
+            $_SERVER["SCRIPT_FILENAME"] = 'index.php';
             return $legacyScriptFilename.'/index.php';
         }
 

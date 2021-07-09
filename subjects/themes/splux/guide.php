@@ -15,9 +15,9 @@ use SubjectsPlus\Control\SubjectsPlus\Control;
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array('sp_legacy');
 
-include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
-//include("../control/includes/config.php");
-//include("../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php"); // need to use this if header not loaded yet
+//include_once(__DIR__ . "/../control/includes/config.php");
+//include_once(__DIR__ . "/../control/includes/functions.php");
 
 $db = new Querier;
 
@@ -147,21 +147,21 @@ $page_title = $subject_name;
 if (isset ($header_type) && $header_type != 'default') {
     if( file_exists("includes/header_$header_type.php") )
     {
-        include("includes/header_$header_type.php");
+        include_once(__DIR__ . "/includes/header_$header_type.php");
     }
     else
     {
-        include("includes/header.php");
+        include_once(__DIR__ . "/includes/header.php");
     }
 } else {
-    include("includes/header.php");
+    include_once(__DIR__ . "/includes/header.php");
 }
 
 /*if (in_array($_REQUEST["subject"], $chcGuides)) {
-    include("includes/header_chc.php");
+    include_once(__DIR__ . "/includes/header_chc.php");
     $our_site="chc";
 } else {
-    include("includes/header_um.php");
+    include_once(__DIR__ . "/includes/header_um.php");
     $our_site="um";
 }*/
 
@@ -553,12 +553,12 @@ cloneView.init();
 if (isset ($header_type) && $header_type != 'default') {
     if( file_exists("includes/footer_$header_type.php") )
     {
-        include("includes/footer_$header_type.php");
+        include_once(__DIR__ . "/includes/footer_$header_type.php");
     }
     else
     {
-        include("includes/footer.php");
+        include_once(__DIR__ . "/includes/footer.php");
     }
 } else {
-    include("includes/footer.php");
+    include_once(__DIR__ . "/includes/footer.php");
 }

@@ -17,7 +17,7 @@ class SearchBox {
 
 	public function requireToVar($file){
 		ob_start();
-		require($file);
+		require_once($file);
 
 		return ob_get_clean();
 	}

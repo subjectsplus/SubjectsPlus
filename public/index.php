@@ -7,8 +7,8 @@ use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/vendor/autoload.php';
-include_once("../control/includes/config.php");
-include_once("../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
 
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
 

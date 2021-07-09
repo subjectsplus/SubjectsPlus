@@ -11,13 +11,13 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\DbHandler;    
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
 
-$this_fname = "databases.php";
+$this_fname = __DIR__ . "/databases.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
-if ( $this_fname != $that_fname ) { include($that_fname); exit; }
+if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
 
 
 $db = new Querier;
@@ -194,7 +194,7 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-include(theme_file("includes/header.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 
 // Our version 2 vs version 3 styles choice
 
@@ -273,7 +273,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 // Load footer file
 ///////////////////////////
 
-include(theme_file("includes/footer.php", $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 ?>
 
 <script type="text/javascript" language="javascript">

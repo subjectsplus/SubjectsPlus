@@ -145,7 +145,7 @@ $page_title = _("Staff Listing: ") . $fullname;
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
 
 ?>
 <div class="pure-g">
@@ -177,5 +177,5 @@ include("includes/header.php");
 // Footer
 ///////////
 
-include("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");
 ?>

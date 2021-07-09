@@ -24,7 +24,7 @@ $sessionCheck = 'no';
 $no_header = "yes";
 $updateCheck = 'no';
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
 
 //logo only header
 displayLogoOnlyHeader();
@@ -68,6 +68,6 @@ if( isUpdated() )
 	}
 }
 
-include("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");
 
 ?>

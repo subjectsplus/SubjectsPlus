@@ -1,8 +1,9 @@
 <?php
 
 $page_title = "Search Results";
+$subcat = "home";
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Search;
 
@@ -88,7 +89,7 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 		<?php
 		// Additional Search bar pluslet
 		$search_subtitle = "Search";
-		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", $target_url, "", $subcat, "", "private", $_GET["searchterm"]);
+		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "", $subcat, "", "private", $_GET["searchterm"]);
 		$input_box_html = $input_box->displayBox(false);
 		makePluslet($search_subtitle, $input_box_html, "no_overflow");
 		
@@ -114,6 +115,6 @@ $subtitle = _("Search Results for ") . $_GET['searchterm'];
 //print "<pre>";
 //print_r($results);
 
-include("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");
 
 ?>

@@ -1,7 +1,7 @@
 <?php
    namespace SubjectsPlus\Control;
 
-   require_once("Pluslet.php");
+   require_once(__DIR__ . "/Pluslet.php");
 
 /**
  *   @file sp_Pluslet_Basic
@@ -74,7 +74,7 @@
 			//$oCKeditor->config['ToolbarStartExpanded'] = true;
 			$config['toolbar'] = 'SubsPlus_Narrow';
 			$config['height'] = '300';
-			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
 			// Create and output object
 			print parent::startPluslet();

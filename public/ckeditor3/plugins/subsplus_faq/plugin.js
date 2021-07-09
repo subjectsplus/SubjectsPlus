@@ -1,15 +1,15 @@
 //plugin.js
 /*
- * this is plugin for subjectsplus resource link
+ * this is plugin for subjectsplus faq link
  *
- * insert resource
+ * insert faq
  * @author: David Gonzalez
  */
 // Register the related command.
-CKEDITOR.plugins.add( 'subsplus_resource', {
+CKEDITOR.plugins.add( 'subsplus_faq', {
 
 	// Register the icons.
-	icons: 'subsplus_resource',
+	icons: 'subsplus_faq',
 
 	//which languages are available for plugin
 	lang: [ 'en', 'es' ],
@@ -18,37 +18,36 @@ CKEDITOR.plugins.add( 'subsplus_resource', {
 	init: function( editor ) {
 
 		// Define an editor command that opens our dialog.
-		editor.addCommand( 'subsplus_resource', new CKEDITOR.dialogCommand( 'subsplus_resourceDialog' ) );
+		editor.addCommand( 'subsplus_faq', new CKEDITOR.dialogCommand( 'subsplus_faqDialog' ) );
 
 		// Create a toolbar button that executes the above command.
-		editor.ui.addButton( 'subsplus_resource', {
+		editor.ui.addButton( 'subsplus_faq', {
 
 			// The text part of the button (if available) and tooptip.
-			label: editor.lang['subsplus_resource.Label'],
+			label: editor.lang['subsplus_faq.Label'],
 
 			// The command to execute on click.
-			command: 'subsplus_resource',
+			command: 'subsplus_faq',
 
 			// The button placement in the toolbar (toolbar group name).
 			toolbar: 'subjectsplus',
 
 			//icon specification
-			icon: '../assets/images/icons/database_add.png'
+			icon: '../build/assets/images/icons/faq_add.png'
 		});
 
         editor.on( 'doubleclick', function( evt )
         {
             var element = evt.data.element;
 
-            if ( $(element.$).is('span.subsplus_resource') )
+            if ( $(element.$).is('span.subsplus_faq') )
             {
-            	var selection = editor.getSelection();
-            	selection.fake(element);
-                evt.data.dialog = 'subsplus_resourceDialog';
+                evt.data.dialog = 'subsplus_faqDialog';
+                editor.getSelection().selectElement( element );
             }
         });
 
 		// Register our dialog file. this.path is the plugin folder path.
-		CKEDITOR.dialog.add( 'subsplus_resourceDialog', this.path + 'dialogs/subsplus_resource.js' );
+		CKEDITOR.dialog.add( 'subsplus_faqDialog', this.path + 'dialogs/subsplus_faq.js' );
 	}
 });

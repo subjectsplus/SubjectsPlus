@@ -14,7 +14,7 @@ $keywords    = _( "" );
 
 
 // Add header now
-include( "includes/header_splux.php" );
+include_once(__DIR__ . "/includes/header_splux.php" );
 
 // Now we are finally read to display the page
 ?>
@@ -62,5 +62,5 @@ include( "includes/header_splux.php" );
 
 <?php
 // Load footer file
-include( "includes/footer_splux.php" );
+include_once(__DIR__ . "/includes/footer_splux.php" );
 ?>

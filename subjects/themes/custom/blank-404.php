@@ -9,7 +9,7 @@
 $page_title = "404 -- Page Not Found";
 
 
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 ?>
 
   <div class="pure-g">
@@ -34,4 +34,4 @@ include("includes/header_custom.php");
   </div>
 
 
-<?php include("includes/footer_custom.php"); ?>
+<?php include_once(__DIR__ . "/includes/footer_custom.php"); ?>

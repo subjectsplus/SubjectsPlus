@@ -10,7 +10,7 @@
      */
     ini_set('display_errors',1);
     error_reporting(E_ALL);
-    include("../../control/includes/autoloader.php");
+    include_once(__DIR__ . "/../../control/includes/autoloader.php");
 
     use SubjectsPlus\Control\PGFeed;
 

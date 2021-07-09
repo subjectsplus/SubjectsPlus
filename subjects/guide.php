@@ -15,13 +15,13 @@ use SubjectsPlus\Control\SubjectsPlus\Control;
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array('sp_legacy');
 
-include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php"); // need to use this if header not loaded yet
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
 
-$this_fname = "guide.php";
+$this_fname = __DIR__ . "/guide.php";
 $that_fname = theme_file($this_fname, $subjects_theme);
-if ( $this_fname != $that_fname ) { include($that_fname); exit; }
+if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
 
 $db = new Querier;
 
@@ -158,7 +158,7 @@ if ($check_this) {
 $page_title = $subject_name;
 
 // Include header
-include(theme_file("includes/header.php", $subjects_theme, $header_type));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme, $header_type));
 
 
 // do we have more than one tab?
@@ -489,17 +489,17 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 
 
 <script>
-<?php include('./includes/js/hash.js'); ?>
-<?php include('./includes/js/track.js'); ?>
-<?php include('./includes/js/tabDropdown.js'); ?>
-<?php include('./includes/js/jquery.scrollTo.js'); ?>
-<?php include('./includes/js/autoComplete.js'); ?>
-<?php include('./includes/js/cloneView.js'); ?>
-<?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
-<?php include('../assets/js/guides/Catalog.js'); ?>
-<?php include('../assets/js/guides/ArticlesPlus.js'); ?>
-<?php include('../assets/js/guides/PrimoSearchBox.js'); ?>
-<?php include('../assets/js/guides/bookList.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/hash.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/track.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/tabDropdown.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/jquery.scrollTo.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/autoComplete.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/cloneView.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/SubjectSpecialist.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/Catalog.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/ArticlesPlus.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/PrimoSearchBox.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/bookList.js'); ?>
 
 hash.init();
 track.init();
@@ -551,5 +551,5 @@ cloneView.init();
 // Load footer file
 ///////////////////////////
 
-include(theme_file("includes/footer.php", $subjects_theme, $header_type));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme, $header_type));
 

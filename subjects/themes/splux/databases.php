@@ -218,7 +218,7 @@ $legend = "<i class=\"fas fa-info-circle\"></i> = " . _( "Click for more informa
 
 // Now we are finally read to display the page
 // Load header file
-include( "includes/header_splux.php" );
+include_once(__DIR__ . "/includes/header_splux.php" );
 
 
 // Our version 2 vs version 3 styles choice
@@ -336,4 +336,4 @@ if ( isset ( $v2styles ) && $v2styles == 1 ) {
 
 <?php
 // Load footer file
-include( "includes/footer_splux.php" ); ?>
+include_once(__DIR__ . "/includes/footer_splux.php" ); ?>

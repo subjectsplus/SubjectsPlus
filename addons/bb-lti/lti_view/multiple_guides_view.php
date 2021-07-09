@@ -15,9 +15,9 @@ require_once(__DIR__ . "/../../control/includes/functions.php");
 
 global $subjects_theme;
 if ($subjects_theme == "med"){
-	include_once(__DIR__ . "../../subjects/includes/header_med.php");
+	include_once(__DIR__ . "/../../subjects/includes/header_med.php");
 }else{
-	include_once(__DIR__ . "../../subjects/includes/header_um-new.php");
+	include_once(__DIR__ . "/../../subjects/includes/header_um-new.php");
 }
 ?>
     <div class="panel-container panel-adj">

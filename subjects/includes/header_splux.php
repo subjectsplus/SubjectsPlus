@@ -54,7 +54,7 @@ $v2styles = TRUE;
 <div class="c-offcanvas-content-wrap">
 
     <!-- Load Jekyll-built site header (UM Sliver, Site Header)-->
-    <?php include("themes/splux/site-header.php"); ?>
+    <?php include_once(__DIR__ . "/../themes/splux/site-header.php"); ?>
 
     <!-- Main Content-->
     <div class="body-slim">

@@ -15,18 +15,18 @@
  * $CKEditor->editor("editor1", "<p>Initial value.</p>");
  * @endcode
  */
+namespace SubjectsPlus\Control;
+
 class CKEditor
 {
 	/**
 	 * The version of %CKEditor.
-	 * \private
 	 */
-	var $version = '3.6.5';
+	const version = '3.6.5';
 	/**
 	 * A constant string unique for each release of %CKEditor.
-	 * \private
 	 */
-	var $_timestamp = 'C9A85WF';
+	const timestamp = 'C9A85WF';
 
 	/**
 	 * URL to the %CKEditor installation directory (absolute or relative to document root).
@@ -34,10 +34,10 @@ class CKEditor
 	 *
 	 * Example usage:
 	 * @code
-	 * $CKEditor->basePath = '/ckeditor/';
+	 * $CKEditor->basePath = '/ckeditor3/';
 	 * @endcode
 	 */
-	var $basePath;
+	public $basePath;
 	/**
 	 * An array that holds the global %CKEditor configuration.
 	 * For the list of available options, see http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html
@@ -49,13 +49,13 @@ class CKEditor
 	 * $CKEditor->config['width'] = '@@screen.width * 0.8';
 	 * @endcode
 	 */
-	var $config = array();
+	public $config = array();
 	/**
 	 * A boolean variable indicating whether CKEditor has been initialized.
 	 * Set it to true only if you have already included
 	 * &lt;script&gt; tag loading ckeditor.js in your website.
 	 */
-	var $initialized = false;
+	public $initialized = false;
 	/**
 	 * Boolean variable indicating whether created code should be printed out or returned by a function.
 	 *
@@ -68,36 +68,34 @@ class CKEditor
 	 * echo $code;
 	 * @endcode
 	 */
-	var $returnOutput = false;
+	public $returnOutput = false;
 	/**
 	 * An array with textarea attributes.
 	 *
 	 * When %CKEditor is created with the editor() method, a HTML &lt;textarea&gt; element is created,
-	 * it will be displayed to anyone with JavaScript disabled or with incompatible browser.
+	 * it will be displayed to anyone with JavaScript disabled or with incompatible browser.  agd: chaned to cols = 50 from 60
 	 */
-	var $textareaAttributes = array( "rows" => 8, "cols" => 60 );
+	public $textareaAttributes = array( "rows" => 8, "cols" => 50 );
 	/**
 	 * A string indicating the creation date of %CKEditor.
 	 * Do not change it unless you want to force browsers to not use previously cached version of %CKEditor.
 	 */
-	var $timestamp = "C9A85WF";
+	public $timestamp = "C9A85WF";
 	/**
 	 * An array that holds event listeners.
-	 * \private
 	 */
-	var $_events = array();
+	private $events = array();
 	/**
 	 * An array that holds global event listeners.
-	 * \private
 	 */
-	var $_globalEvents = array();
+	private $globalEvents = array();
 
 	/**
 	 * Main Constructor.
 	 *
 	 *  @param $basePath (string) URL to the %CKEditor installation directory (optional).
 	 */
-	function CKEditor($basePath = null) {
+	function __construct($basePath = null) {
 		if (!empty($basePath)) {
 			$this->basePath = $basePath;
 		}
@@ -132,7 +130,7 @@ class CKEditor
 	 * $CKEditor->editor("field1", "<p>Initial value.</p>", $config, $events);
 	 * @endcode
 	 */
-	function editor($name, $value = "", $config = array(), $events = array())
+	public function editor($name, $value = "", $config = array(), $events = array())
 	{
 		$attr = "";
 		foreach ($this->textareaAttributes as $key => $val) {
@@ -174,7 +172,7 @@ class CKEditor
 	 * $CKEditor->replace("article");
 	 * @endcode
 	 */
-	function replace($id, $config = array(), $events = array())
+	public function replace($id, $config = array(), $events = array())
 	{
 		$out = "";
 		if (!$this->initialized) {
@@ -217,7 +215,7 @@ class CKEditor
 	 * $CKEditor->replaceAll( 'myClassName' );
 	 * @endcode
 	 */
-	function replaceAll($className = null)
+	public function replaceAll($className = null)
 	{
 		$out = "";
 		if (!$this->initialized) {
@@ -272,14 +270,14 @@ class CKEditor
 	 * }');
 	 * @endcode
 	 */
-	function addEventHandler($event, $javascriptCode)
+	public function addEventHandler($event, $javascriptCode)
 	{
-		if (!isset($this->_events[$event])) {
-			$this->_events[$event] = array();
+		if (!isset($this->events[$event])) {
+			$this->events[$event] = array();
 		}
 		// Avoid duplicates.
-		if (!in_array($javascriptCode, $this->_events[$event])) {
-			$this->_events[$event][] = $javascriptCode;
+		if (!in_array($javascriptCode, $this->events[$event])) {
+			$this->events[$event][] = $javascriptCode;
 		}
 	}
 
@@ -289,13 +287,13 @@ class CKEditor
 	 *
 	 * @param $event (string) Event name, if not set all event handlers will be removed (optional).
 	 */
-	function clearEventHandlers($event = null)
+	public function clearEventHandlers($event = null)
 	{
 		if (!empty($event)) {
-			$this->_events[$event] = array();
+			$this->events[$event] = array();
 		}
 		else {
-			$this->_events = array();
+			$this->events = array();
 		}
 	}
 
@@ -312,14 +310,14 @@ class CKEditor
 	 * }');
 	 * @endcode
 	 */
-	function addGlobalEventHandler($event, $javascriptCode)
+	public function addGlobalEventHandler($event, $javascriptCode)
 	{
-		if (!isset($this->_globalEvents[$event])) {
-			$this->_globalEvents[$event] = array();
+		if (!isset($this->globalEvents[$event])) {
+			$this->globalEvents[$event] = array();
 		}
 		// Avoid duplicates.
-		if (!in_array($javascriptCode, $this->_globalEvents[$event])) {
-			$this->_globalEvents[$event][] = $javascriptCode;
+		if (!in_array($javascriptCode, $this->globalEvents[$event])) {
+			$this->globalEvents[$event][] = $javascriptCode;
 		}
 	}
 
@@ -329,23 +327,22 @@ class CKEditor
 	 *
 	 * @param $event (string) Event name, if not set all event handlers will be removed (optional).
 	 */
-	function clearGlobalEventHandlers($event = null)
+	public function clearGlobalEventHandlers($event = null)
 	{
 		if (!empty($event)) {
-			$this->_globalEvents[$event] = array();
+			$this->globalEvents[$event] = array();
 		}
 		else {
-			$this->_globalEvents = array();
+			$this->globalEvents = array();
 		}
 	}
 
 	/**
 	 * Prints javascript code.
-	 * \private
 	 *
 	 * @param string $js
 	 */
-	function script($js)
+	private function script($js)
 	{
 		$out = "<script type=\"text/javascript\">";
 		$out .= "//<![CDATA[\n";
@@ -358,15 +355,14 @@ class CKEditor
 
 	/**
 	 * Returns the configuration array (global and instance specific settings are merged into one array).
-	 * \private
 	 *
 	 * @param $config (array) The specific configurations to apply to editor instance.
 	 * @param $events (array) Event listeners for editor instance.
 	 */
-	function configSettings($config = array(), $events = array())
+	private function configSettings($config = array(), $events = array())
 	{
 		$_config = $this->config;
-		$_events = $this->_events;
+		$_events = $this->events;
 
 		if (is_array($config) && !empty($config)) {
 			$_config = array_merge($_config, $config);
@@ -406,9 +402,8 @@ class CKEditor
 
 	/**
 	 * Return global event handlers.
-	 * \private
 	 */
-	function returnGlobalEvents()
+	private function returnGlobalEvents()
 	{
 		static $returnedEvents;
 		$out = "";
@@ -417,8 +412,8 @@ class CKEditor
 			$returnedEvents = array();
 		}
 
-		if (!empty($this->_globalEvents)) {
-			foreach ($this->_globalEvents as $eventName => $handlers) {
+		if (!empty($this->globalEvents)) {
+			foreach ($this->globalEvents as $eventName => $handlers) {
 				foreach ($handlers as $handler => $code) {
 					if (!isset($returnedEvents[$eventName])) {
 						$returnedEvents[$eventName] = array();
@@ -437,9 +432,8 @@ class CKEditor
 
 	/**
 	 * Initializes CKEditor (executed only once).
-	 * \private
 	 */
-	function init()
+	private function init()
 	{
 		static $initComplete;
 		$out = "";
@@ -468,7 +462,7 @@ class CKEditor
 		$out .= "<script type=\"text/javascript\" src=\"" . $ckeditorPath . 'ckeditor.js' . $args . "\"></script>\n";
 
 		$extraCode = "";
-		if ($this->timestamp != $this->_timestamp) {
+		if ($this->timestamp != self::timestamp) {
 			$extraCode .= ($extraCode ? "\n" : "") . "CKEDITOR.timestamp = '". $this->timestamp ."';";
 		}
 		if ($extraCode) {
@@ -482,9 +476,8 @@ class CKEditor
 
 	/**
 	 * Return path to ckeditor.js.
-	 * \private
 	 */
-	function ckeditorPath()
+	private function ckeditorPath()
 	{
 		if (!empty($this->basePath)) {
 			return $this->basePath;
@@ -514,24 +507,23 @@ class CKEditor
 		$file = str_replace("\\", "/", __FILE__);
 
 		if (!$selfPath || !$realPath || !$file) {
-			return "/ckeditor/";
+			return "/ckeditor3/";
 		}
 
 		$documentRoot = substr($realPath, 0, strlen($realPath) - strlen($selfPath));
 		$fileUrl = substr($file, strlen($documentRoot));
-		$ckeditorUrl = str_replace("ckeditor_php4.php", "", $fileUrl);
+		$ckeditorUrl = str_replace("ckeditor_php5.php", "", $fileUrl);
 
 		return $ckeditorUrl;
 	}
 
 	/**
 	 * This little function provides a basic JSON support.
-	 * \private
 	 *
 	 * @param mixed $val
 	 * @return string
 	 */
-	function jsEncode($val)
+	private function jsEncode($val)
 	{
 		if (is_null($val)) {
 			return 'null';

@@ -1373,14 +1373,14 @@ class Staff {
 		global $CKBasePath;
 
 		if ( $wysiwyg_desc == 1 ) {
-			include( $CKPath );
+			include_once( $CKPath );
 			global $BaseURL;
 
 			$oCKeditor                      = new CKEditor( $CKBasePath );
 			$oCKeditor->timestamp           = time();
 			$config['toolbar']              = 'Basic';// Default shows a much larger set of toolbar options
 			$config['height']               = '300';
-			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
 			echo $oCKeditor->editor( 'bio', $this->_bio, $config );
 			echo "<br />";
