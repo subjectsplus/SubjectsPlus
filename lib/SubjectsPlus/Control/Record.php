@@ -340,12 +340,14 @@ class Record {
 			$(document).ready(function() {
 				$('#all_tag').click(function() {
 					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select --") . "</option>" .  str_replace("'", "\\'", $all_string) . "');
+					$('#select_subject').val('').change();
 					$('#all_tag').attr('class', 'toggle-on');
 					$('#subject_tag').attr('class', 'toggle-off');
 				});
 
 				$('#subject_tag').click(function() {
 					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select Subject--") . "</option>" .  str_replace("'", "\\'", $subject_string) . "');	
+					$('#select_subject').val('').change();
 					$('#all_tag').attr('class', 'toggle-off');
 					$('#subject_tag').attr('class', 'toggle-on');
 				});
