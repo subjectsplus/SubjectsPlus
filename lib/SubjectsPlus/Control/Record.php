@@ -313,25 +313,77 @@ class Record {
 	}
 
 	if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
-		$subject_string = getSubBoxes('', 50, 1);
+		$all_string = getSubBoxes('', 50, "all");
+		$subject_string = getSubBoxes('', 50, "subject");
+
+		echo "
+		<div class=\"pluslet no_overflow\">
+		  <div class=\"titlebar\">
+			<div class=\"titlebar_text\">" . _("Subjects") . "</div>
+			<div class=\"titlebar_options\"></div>
+		  </div>
+		  <div class=\"pluslet_body\">
+		  
+		  <!-- ctags for subjects by type -->
+		  <div id=\"ctags_selection\" align=\"left\" style=\"margin-top: 2%;\">
+		  	<span id=\"subject_tag\" class=\"ctag-on\">By Subject</span>
+		  	<span id=\"all_tag\" class=\"ctag-off\">All</span>
+		  </div>
+
+		  <select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select Subject--") . "</option>
+		  $subject_string
+		  </select>
+		  <div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
+		  </div>
+		  </div>
+		  <script type=\"text/javascript\">
+			$(document).ready(function() {
+				$('#all_tag').click(function() {
+					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select --") . "</option>" .  str_replace("'", "\\'", $all_string) . "');
+					$('#subject_tag').removeClass().addClass('ctag-off');
+				});
+
+				$('#subject_tag').click(function() {
+					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select Subject--") . "</option>" .  str_replace("'", "\\'", $subject_string) . "');
+					$('#all_tag').removeClass().addClass('ctag-off');
+				});
+
+			});
+		  </script>
+		 
+		  ";
 	} else {
 		$subject_string = getSubBoxes('', 50);
+		echo "
+		<div class=\"pluslet no_overflow\">
+		  <div class=\"titlebar\">
+			<div class=\"titlebar_text\">" . _("Subjects") . "</div>
+			<div class=\"titlebar_options\"></div>
+		  </div>
+		  <div class=\"pluslet_body\">
+		  
+		  <select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
+		  $subject_string
+		  </select>
+		  <div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
+		  </div>
+		  </div>";
 	}
 
-	echo "
-  <div class=\"pluslet no_overflow\">
-    <div class=\"titlebar\">
-      <div class=\"titlebar_text\">" . _("Subjects") . "</div>
-      <div class=\"titlebar_options\"></div>
-    </div>
-    <div class=\"pluslet_body\">
+// 	echo "
+//   <div class=\"pluslet no_overflow\">
+//     <div class=\"titlebar\">
+//       <div class=\"titlebar_text\">" . _("Subjects") . "</div>
+//       <div class=\"titlebar_options\"></div>
+//     </div>
+//     <div class=\"pluslet_body\">
 	
-	<select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
-	$subject_string
-	</select>
-	<div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
-	</div>
-	</div>";
+// 	<select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select --") . "</option>
+// 	$subject_string
+// 	</select>
+// 	<div id=\"subject_list\">$subject_list</div> <!-- subjects inserted here -->
+// 	</div>
+// 	</div>";
 
   	$this->outputRelatedPluslets();
   	print "</div></form>";
