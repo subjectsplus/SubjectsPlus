@@ -326,8 +326,8 @@ class Record {
 		  
 		  <!-- ctags for subjects by type -->
 		  <div id=\"ctags_selection\" align=\"left\" style=\"margin-top: 2%;\">
-		  	<span id=\"subject_tag\" class=\"ctag-on\">By Subject</span>
-		  	<span id=\"all_tag\" class=\"ctag-off\">All</span>
+		  	<span id=\"subject_tag\" class=\"toggle-on\">By Subject</span>
+		  	<span id=\"all_tag\" class=\"toggle-off\">All</span>
 		  </div>
 
 		  <select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select Subject--") . "</option>
@@ -340,12 +340,14 @@ class Record {
 			$(document).ready(function() {
 				$('#all_tag').click(function() {
 					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select --") . "</option>" .  str_replace("'", "\\'", $all_string) . "');
-					$('#subject_tag').removeClass().addClass('ctag-off');
+					$('#all_tag').attr('class', 'toggle-on');
+					$('#subject_tag').attr('class', 'toggle-off');
 				});
 
 				$('#subject_tag').click(function() {
-					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select Subject--") . "</option>" .  str_replace("'", "\\'", $subject_string) . "');
-					$('#all_tag').removeClass().addClass('ctag-off');
+					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select Subject--") . "</option>" .  str_replace("'", "\\'", $subject_string) . "');	
+					$('#all_tag').attr('class', 'toggle-off');
+					$('#subject_tag').attr('class', 'toggle-on');
 				});
 
 			});
