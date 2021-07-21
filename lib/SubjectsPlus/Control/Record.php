@@ -325,8 +325,8 @@ class Record {
 		  <div class=\"pluslet_body\">
 		  
 		  <!-- ctags for subjects by type -->
-		  <div id=\"ctags_selection\" align=\"left\" style=\"margin-top: 2%;\">
-		  	<span id=\"subject_tag\" class=\"toggle-on\">By Subject</span>
+		  <div id=\"ctags_selection\" align=\"left\" style=\"margin-top: 2%; margin-bottom: 2%;\">
+		  	<span id=\"subject_tag\" class=\"toggle-on\">DB by Subject</span>
 		  	<span id=\"all_tag\" class=\"toggle-off\">All</span>
 		  </div>
 
