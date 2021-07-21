@@ -1068,7 +1068,7 @@ class Staff {
 		} else {
 
 			if ( $this->correctPassword( $this->_password ) ) {
-				$this->_password = md5( $this->_password );
+				$this->_password = password_hash( md5( $this->_password ), PASSWORD_BCRYPT );
 			} else {
 				$this->_message = _( "Pasword must have a special character, a letter, a number, and at least 6 characters. Insert was not executed." );
 
@@ -1296,9 +1296,11 @@ class Staff {
 
 	public function updatePassword( $new_pass ) {
 
+        $hashed_password = password_hash(md5($new_pass), PASSWORD_BCRYPT);
+
 		$db = new Querier;
 
-		$q = "UPDATE staff SET password = md5( " . $db->quote( scrubData( $new_pass ) ) . " ) WHERE staff_id = " . $this->_staff_id;
+		$q = "UPDATE staff SET password = " . $db->quote( scrubData( $hashed_password ) ) . " WHERE staff_id = " . $this->_staff_id;
 
 		$this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 
