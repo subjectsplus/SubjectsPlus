@@ -342,7 +342,7 @@ $headshot
         
         $db = new Querier;
         
-        $this->_password = password_hash(md5($this->_password), PASSWORD_BCRYPT);
+        $this->_password = md5($this->_password);
 
         ////////////////
         // Insert staff
@@ -443,9 +443,7 @@ $headshot
 
     public function updatePassword($new_pass) {
 
-        $hashed_password = password_hash(md5($new_pass), PASSWORD_BCRYPT);
-
-        $q = "UPDATE staff SET password = " . $db->quote(scrubData($hashed_password)) . " WHERE staff_id = " . $this->_staff_id;
+        $q = "UPDATE staff SET password = md5('" . $db->quote(scrubData($new_pass)) . "') WHERE staff_id = " . $this->_staff_id;
 
         $this->_debug = "<p class=\"debug\">Password Update query: $q</p>";
 

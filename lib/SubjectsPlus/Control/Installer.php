@@ -27,7 +27,7 @@ class Installer
 
 		//set random password and convert to md5 hash to store in database
 		$this->setRandomPassword();
-		$lstrHashPassword = password_hash( md5( scrubData( $this->lstrRandomPassword ) ), PASSWORD_BCRYPT );
+		$lstrHashPassword = md5( scrubData( $this->lstrRandomPassword ) );
 
 		//all the table creation queries
 		$this->lobjCreateQueries = array(
