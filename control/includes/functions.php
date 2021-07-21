@@ -290,19 +290,40 @@ function uploader2( $temp_path, $target_path ) {
 	}
 }
 
-function getSubBoxes( $prefix = "", $trunc = "", $all_subs = 0 ) {
+function getSubBoxes( $prefix = "", $trunc = "", $subs = "") {
 
 	$subs_option_boxes = "";
 
-	if ( $all_subs == "1" ) {
-		$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
-	} else {
-		$subs_query = "SELECT distinct s.subject_id, subject, type
-            FROM subject s, staff_subject ss
-            WHERE s.subject_id = ss.subject_id
-            AND ss.staff_id = " . $_SESSION['staff_id'] . "
-            ORDER BY type, subject";
+	switch($subs) {
+		case "1": // all types
+		case "all":
+			// all types
+			$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
+			break;
+		case "subject":
+			// only by "Subject" type
+			$subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Subject' AND active = '1' ORDER BY type, subject";
+			break;
+		case "staff":
+		default:
+			$subs_query = "SELECT distinct s.subject_id, subject, type
+				FROM subject s, staff_subject ss
+				WHERE s.subject_id = ss.subject_id
+				AND ss.staff_id = " . $_SESSION['staff_id'] . "
+				ORDER BY type, subject";
+			break;
+			
 	}
+
+	// if ( $subs == "all" ) {
+	// 	$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
+	// } else {
+	// 	$subs_query = "SELECT distinct s.subject_id, subject, type
+    //         FROM subject s, staff_subject ss
+    //         WHERE s.subject_id = ss.subject_id
+    //         AND ss.staff_id = " . $_SESSION['staff_id'] . "
+    //         ORDER BY type, subject";
+	// }
 
 	$db          = new Querier;
 	$subs_result = $db->query( $subs_query );

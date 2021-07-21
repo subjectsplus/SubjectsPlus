@@ -3273,7 +3273,7 @@ div.ctag_list a:hover {
 
 }
 
-.ctag-on, .aztag-on, .lookup_button {
+.ctag-on, .aztag-on, .lookup_button, .toggle-on {
   background-color: #C03957;
   color: #fff;
   margin: 0 2px;
@@ -3289,7 +3289,7 @@ div.ctag_list a:hover {
 .lookup_button {
   background-color: #F37521;
 }
-.ctag-off, .aztag-off {
+.ctag-off, .aztag-off, .toggle-off {
   background-color: #ccc;
   color: #333;
   margin: 0 2px;

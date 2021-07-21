@@ -379,7 +379,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/ORCID">Create an ORCID iD</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)
 												</a></li>
-
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/open-access-publishing.html">Open Access Publishing</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing
 												</a></li>
 
@@ -937,6 +937,8 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/alumnus.html">Alumni
 												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/community.html">Community
+												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/faculty.html">Faculty
 												</a></li>
@@ -945,9 +947,6 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/undergrad.html">Undergraduate
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/visitors.html">Visitor
 												</a></li>
 
 										</ul>

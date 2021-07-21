@@ -325,6 +325,12 @@ $talkbackService = new TalkbackService($db);
  */
 $comments_response = $talkbackService->getComments($comment_year, $this_year, $branch_filter, $cat_tags);
 
+// if talkback id is provided, return comments specific to the talkback instance
+if (isset($_GET["talkback_id"])) {
+	$_GET["talkback_id"] = scrubData($_GET["talkback_id"], "integer");
+	$comments_response = $talkbackService->getCommentsWithTalkbackId($_GET["talkback_id"]);
+}
+
 
 /**
  * Set the $comments template var
