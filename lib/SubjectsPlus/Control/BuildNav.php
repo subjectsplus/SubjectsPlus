@@ -206,9 +206,9 @@ if ($is_um == TRUE) {
         $target_url = "faq.php?faq_id=";
         break;
       case "home":
-	$input_text = _("Search all");
+	      $input_text = _("Search all");
         $target_url = "../control/guides/guide.php?subject_id=";
-	break;
+	      break;
       case "talkback";
         $input_text = _("Search talkback");
         $target_url = "talkback.php?talkback_id=";
