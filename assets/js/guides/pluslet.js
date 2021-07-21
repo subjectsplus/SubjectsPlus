@@ -28,6 +28,22 @@ function pluslet() {
                 myPluslet.makeEditable('a[id*=edit]', subjectId);
                 myPluslet.makeDeleteable('a[id*=delete]');
                 //myPluslet.makeDeleteable('.section_remove', 'sections');
+
+                // start with the pluslet identified in url
+                var url  = document.URL;
+                var box_anchor = url.split('#')[1];
+                if (box_anchor) {
+                    var tab_id = box_anchor.split('-')[1];
+                    var box_id = box_anchor.split('-')[2];
+                    
+                    var selected_box = '.pluslet-' + box_id;
+
+                    $('#tabs').tabs('select', tab_id);
+
+                    $(selected_box).effect('pulsate', {
+                        times: 1
+                    }, 2000);
+                }
             });
 
 

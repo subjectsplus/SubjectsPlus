@@ -244,6 +244,12 @@ print "</div>"; // close #maincontent
 
             if (!our_sub_id) { return false;} // Only add subjects with values
 
+            // check whether id is already in subject list
+            if ($('#subject_list div').hasClass('new_subject-' + our_sub_id)) {
+                alert("Thwarted! Subject has already been added.");
+                return false; 
+            }
+
             var our_sub_text = $('select[name*=subject_id] :selected').text();
             var our_source_text = $('select[name=default_source_id] :selected').text();
             var our_source_id = $('select[name=default_source_id] :selected').val();

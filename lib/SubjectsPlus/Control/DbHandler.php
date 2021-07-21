@@ -156,7 +156,25 @@ class DbHandler {
         WHERE subject_id = :subject_id
         	AND eres_display = 'Y'
         	AND dbbysub_active = 1
-        ORDER BY newtitle" );
+		UNION
+			SELECT DISTINCT LEFT(alternate_title,1) as initial, alternate_title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide,alternate_title
+			FROM title as t
+					INNER JOIN location_title as lt
+								ON t.title_id = lt.title_id
+					INNER JOIN location as l
+								ON lt.location_id = l.location_id
+					INNER JOIN restrictions as r
+								ON l.access_restrictions = r.restrictions_id
+					INNER JOIN rank as rk
+								ON rk.title_id = t.title_id
+					INNER JOIN source as s
+								ON rk.source_id = s.source_id
+		WHERE subject_id = :subject_id
+			AND eres_display = 'Y'
+			AND dbbysub_active = 1
+			AND t.alternate_title IS NOT NULL
+			AND t.alternate_title != ''
+		ORDER BY newtitle" );
 
 						$statement->bindParam ( ":subject_id", $subject_id );
 						$statement->execute ();

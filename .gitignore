@@ -162,3 +162,5 @@ lib/HTMLPurifier/HTMLPurifier/DefinitionCache/
 .htaccess
 subjects/.htaccess
 api/.htaccess
+
+var
