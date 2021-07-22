@@ -22,7 +22,7 @@ class FaqSubject
     private $faqSubjectId;
 
     /**
-     * @var \Faq
+     * @var \Faq|null
      *
      * @ORM\ManyToOne(targetEntity="Faq")
      * @ORM\JoinColumns({
@@ -32,7 +32,7 @@ class FaqSubject
     private $faq;
 
     /**
-     * @var \Subject
+     * @var \Subject|null
      *
      * @ORM\ManyToOne(targetEntity="Subject")
      * @ORM\JoinColumns({

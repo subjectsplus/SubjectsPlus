@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Faq.
  *
  * @ORM\Table(name="faq")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\FaqRepository")
  */
 class Faq
 {
@@ -41,6 +41,20 @@ class Faq
      * @ORM\Column(name="keywords", type="string", length=255, nullable=false)
      */
     private $keywords;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\FaqSubject", mappedBy="faq")
+     */
+    private $faqSubject;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\FaqFaqpage", mappedBy="faq")
+     */
+    private $faqFaqpage;
 
     public function getFaqId(): ?int
     {
@@ -79,6 +93,44 @@ class Faq
     public function setKeywords(string $keywords): self
     {
         $this->keywords = $keywords;
+
+        return $this;
+    }
+
+    public function addFaqSubject(FaqSubject $faqSubject): self
+    {
+        if (!$this->faqSubject->contains($faqSubject)) {
+            $this->faqSubject[] = $faqSubject;
+            $faqSubject->setFaq($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFaqSubject(FaqSubject $faqSubject): self
+    {
+        if ($this->faqSubject->removeElement($faqSubject)) {
+            $faqSubject->setFaq(null);
+        }
+
+        return $this;
+    }
+
+    public function addFaqpage(FaqFaqpage $faqFaqPage): self
+    {
+        if (!$this->faqFaqpage->contains($faqFaqPage)) {
+            $this->faqFaqpage[] = $faqFaqPage;
+            $faqFaqPage->setFaq($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFaqpage(FaqFaqpage $faqFaqPage): self
+    {
+        if ($this->faqSubject->removeElement($faqFaqPage)) {
+            $faqFaqPage->setFaq(null);
+        }
 
         return $this;
     }
