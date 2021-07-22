@@ -1249,3 +1249,8 @@ yarn-error.log
 /var
 var
 /var/cache/dev/
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
