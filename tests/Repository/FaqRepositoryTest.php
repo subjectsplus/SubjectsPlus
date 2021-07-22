@@ -99,6 +99,11 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertArrayHasKey($faq_id, $faqs);
     }
 
+    /**
+     * Asserts that an invalid faq id is not present in the array of Faq entities 
+     * returned in GetAllFaqs(<void>).
+     * @return void
+     */
     public function test_GetAllFaqs_FaqIdDoesNotExist()
     {
         // Call getAllFaqs()
@@ -132,6 +137,11 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertEquals(trim($question), trim($faq_question));
     }
 
+    /**
+     * Asserts whether GetFaqsBySubject(<void>) returns an array.
+     *
+     * @return void
+     */
     public function test_GetFaqsBySubject_ReturnsAnArray()
     {
         // Retrieve Subject
@@ -147,6 +157,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertIsArray($faqs);
     }
 
+    /**
+     * Asserts whether GetFaqsBySubject(<void>) contains only objects of type
+     * "\App\Entity\Faq" in the returned array.
+     *
+     * @return void
+     */
     public function test_GetFaqsBySubject_ContainsOnlyFaq()
     {
         // Retrieve Subject
@@ -162,6 +178,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertContainsOnly("\App\Entity\Faq", $faqs);
     }
 
+    /**
+     * Asserts whether a valid faq id exists in the array of Faq entities 
+     * returned in GetFaqsBySubject(<void>).
+     *
+     * @return void
+     */
     public function test_GetFaqsBySubject_FaqIdExists()
     {
         // Retrieve Subject
@@ -179,6 +201,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertArrayHasKey($faq_id, $faqs);
     }
 
+    /**
+     * Asserts that an invalid faq id is not present in the array of Faq entities 
+     * returned in GetFaqsBySubject(<void>).
+     *
+     * @return void
+     */
     public function test_GetFaqsBySubject_FaqIdDoesNotExist()
     {
         // Retrieve Subject
@@ -196,6 +224,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertArrayNotHasKey($faq_id, $faqs);
     }
 
+    /**
+     * Asserts whether retrieving a question using faq_id from GetFaqsBySubject(<void>) will
+     * return an accurate result.
+     *
+     * @return void
+     */
     public function test_GetFaqsBySubject_HasQuestion()
     {
         // Retrieve Subject
@@ -216,6 +250,11 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertEquals(trim($question), trim($faq_question));
     }
 
+    /**
+     * Asserts whether GetFaqsByCollection(<void>) returns an array.
+     *
+     * @return void
+     */
     public function test_GetFaqsByCollection_ReturnsAnArray()
     {
         // Retrieve Faqpage/Collection
@@ -230,6 +269,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertIsArray($faqs);
     }
 
+    /**
+     * Asserts whether GetFaqsByCollection(<void>) contains only objects of type
+     * "\App\Entity\Faq" in the returned array.
+     *
+     * @return void
+     */
     public function test_GetFaqsByCollection_ContainsOnlyFaq()
     {
         // Retrieve Faqpage/Collection
@@ -244,6 +289,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertContainsOnly("\App\Entity\Faq", $faqs);
     }
 
+    /**
+     * Asserts whether a valid faq id exists in the array of Faq entities 
+     * returned in GetFaqsByCollection(<void>).
+     *
+     * @return void
+     */
     public function test_GetFaqsByCollection_FaqIdExists()
     {
         // Retrieve Faqpage/Collection
@@ -260,6 +311,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertArrayHasKey($faq_id, $faqs);
     }
 
+    /**
+     * Asserts that an invalid faq id is not present in the array of Faq entities 
+     * returned in GetFaqsByCollection(<void>).
+     *
+     * @return void
+     */
     public function test_GetFaqsByCollection_FaqIdDoesNotExist()
     {
         // Retrieve Faqpage/Collection
@@ -276,6 +333,12 @@ class FaqRepositoryTest extends KernelTestCase
         $this->assertArrayNotHasKey($faq_id, $faqs);
     }
 
+    /**
+     * Asserts whether retrieving a question using faq_id from GetFaqsByCollection(<void>) will
+     * return an accurate result.
+     *
+     * @return void
+     */
     public function test_GetFaqsByCollection_HasQuestion()
     {
         // Retrieve Faqpage/Collection
