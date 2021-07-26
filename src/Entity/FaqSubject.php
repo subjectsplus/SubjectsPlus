@@ -24,7 +24,7 @@ class FaqSubject
     /**
      * @var \Faq|null
      *
-     * @ORM\ManyToOne(targetEntity="Faq")
+     * @ORM\ManyToOne(targetEntity="Faq", inversedBy="faqSubject")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(name="faq_id", referencedColumnName="faq_id")
      * })
