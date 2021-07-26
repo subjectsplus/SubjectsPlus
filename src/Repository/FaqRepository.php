@@ -30,7 +30,7 @@ class FaqRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function getFaqsBySubjects()
+    public function getAllFaqsBySubject()
     {
         $results = array();
         
@@ -60,7 +60,7 @@ class FaqRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function getFaqsByCollections()
+    public function getAllFaqsByCollection()
     {
         $results = array();
 

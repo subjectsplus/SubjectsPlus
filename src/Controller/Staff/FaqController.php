@@ -59,20 +59,20 @@ class FaqController extends AbstractController
     public function displayFaqsBySubjects(): Response {
         $subject_faqs = $this->getDoctrine()
         ->getRepository(Faq::class)
-        ->getFaqsBySubjects();
+        ->getAllFaqsBySubject();
 
         return $this->render('faq/show_subjects.html.twig', [
             "subject_faqs" => $subject_faqs,
         ]);
     }
 
-        /**
+    /**
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
     public function displayFaqsByCollections(): Response {
         $collection_faqs = $this->getDoctrine()
         ->getRepository(Faq::class)
-        ->getFaqsByCollections();
+        ->getAllFaqsByCollection();
 
         return $this->render('faq/show_collections.html.twig', [
             "collection_faqs" => $collection_faqs,

@@ -138,7 +138,7 @@ class FaqRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Asserts whether GetFaqsBySubject(<void>) returns an array.
+     * Asserts whether GetFaqsBySubject(<Subject>) returns an array.
      *
      * @return void
      */
@@ -158,7 +158,7 @@ class FaqRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Asserts whether GetFaqsBySubject(<void>) contains only objects of type
+     * Asserts whether GetFaqsBySubject(<Subject>) contains only objects of type
      * "\App\Entity\Faq" in the returned array.
      *
      * @return void
@@ -180,7 +180,7 @@ class FaqRepositoryTest extends KernelTestCase
 
     /**
      * Asserts whether a valid faq id exists in the array of Faq entities 
-     * returned in GetFaqsBySubject(<void>).
+     * returned in GetFaqsBySubject(<Subject>).
      *
      * @return void
      */
@@ -203,7 +203,7 @@ class FaqRepositoryTest extends KernelTestCase
 
     /**
      * Asserts that an invalid faq id is not present in the array of Faq entities 
-     * returned in GetFaqsBySubject(<void>).
+     * returned in GetFaqsBySubject(<Subject>).
      *
      * @return void
      */
@@ -225,7 +225,7 @@ class FaqRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Asserts whether retrieving a question using faq_id from GetFaqsBySubject(<void>) will
+     * Asserts whether retrieving a question using faq_id from GetFaqsBySubject(<Subject>) will
      * return an accurate result.
      *
      * @return void
@@ -251,7 +251,7 @@ class FaqRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Asserts whether GetFaqsByCollection(<void>) returns an array.
+     * Asserts whether GetFaqsByCollection(<Collection>) returns an array.
      *
      * @return void
      */
@@ -270,7 +270,7 @@ class FaqRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Asserts whether GetFaqsByCollection(<void>) contains only objects of type
+     * Asserts whether GetFaqsByCollection(<Collection>) contains only objects of type
      * "\App\Entity\Faq" in the returned array.
      *
      * @return void
@@ -291,7 +291,7 @@ class FaqRepositoryTest extends KernelTestCase
 
     /**
      * Asserts whether a valid faq id exists in the array of Faq entities 
-     * returned in GetFaqsByCollection(<void>).
+     * returned in GetFaqsByCollection(<Collection>).
      *
      * @return void
      */
@@ -313,7 +313,7 @@ class FaqRepositoryTest extends KernelTestCase
 
     /**
      * Asserts that an invalid faq id is not present in the array of Faq entities 
-     * returned in GetFaqsByCollection(<void>).
+     * returned in GetFaqsByCollection(<Collection>).
      *
      * @return void
      */
@@ -334,7 +334,7 @@ class FaqRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Asserts whether retrieving a question using faq_id from GetFaqsByCollection(<void>) will
+     * Asserts whether retrieving a question using faq_id from GetFaqsByCollection(<Collection>) will
      * return an accurate result.
      *
      * @return void
@@ -356,6 +356,36 @@ class FaqRepositoryTest extends KernelTestCase
         $faq_question = $faqs[$faq_id]->getQuestion();
         
         $this->assertEquals(trim($question), trim($faq_question));
+    }
+
+    /**
+     * Asserts whether GetAllFaqsBySubject(<void>) returns an array.
+     *
+     * @return void
+     */
+    public function test_GetFaqsBySubjects_ReturnsAnArray()
+    {
+        // Call getFaqsBySubjects(<void>)
+        $faqs = $this->entityManager
+        ->getRepository(Faq::class)
+        ->getAllFaqsBySubject();
+
+        $this->assertIsArray($faqs);
+    }
+
+        /**
+     * Asserts whether GetAllFaqsByCollection(<void>) returns an array.
+     *
+     * @return void
+     */
+    public function test_GetAllFaqsByCollection_ReturnsAnArray()
+    {
+        // Call getFaqsBySubjects(<void>)
+        $faqs = $this->entityManager
+        ->getRepository(Faq::class)
+        ->getAllFaqsByCollection();
+
+        $this->assertIsArray($faqs);
     }
 
     protected function tearDown() : void
