@@ -3,6 +3,7 @@
 namespace App\Controller\Staff;
 
 use App\Entity\Faq;
+use App\Entity\Subject;
 use App\Form\FaqType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +50,32 @@ class FaqController extends AbstractController
         return $this->render('faq/new.html.twig', [
             'faq' => $faq,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/subjects", name="faq_show_subjects", methods={"GET"})
+     */
+    public function displayFaqsBySubjects(): Response {
+        $subject_faqs = $this->getDoctrine()
+        ->getRepository(Faq::class)
+        ->getFaqsBySubjects();
+
+        return $this->render('faq/show_subjects.html.twig', [
+            "subject_faqs" => $subject_faqs,
+        ]);
+    }
+
+        /**
+     * @Route("/collections", name="faq_show_collections", methods={"GET"})
+     */
+    public function displayFaqsByCollections(): Response {
+        $collection_faqs = $this->getDoctrine()
+        ->getRepository(Faq::class)
+        ->getFaqsByCollections();
+
+        return $this->render('faq/show_collections.html.twig', [
+            "collection_faqs" => $collection_faqs,
         ]);
     }
 

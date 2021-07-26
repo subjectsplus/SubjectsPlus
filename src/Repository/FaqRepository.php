@@ -30,12 +30,55 @@ class FaqRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function getFaqsBySubjects()
+    {
+        $results = array();
+        
+        $subjects = $this->createQueryBuilder('f')
+        ->select('(fs.subject) AS subject')
+        ->innerJoin('f.faqSubject', 'fs')
+        ->groupBy('subject')
+        ->getQuery()
+        ->getResult();
+
+
+        foreach($subjects as $subject) {
+            $subjectId = $subject["subject"];
+            $subject = $this->getEntityManager()->find(Subject::class, $subjectId);
+            $name = $subject->getSubject();
+            $results[$name] = $this->getFaqsBySubject($subject);
+        }
+
+        return $results;
+    }
+
     public function getFaqsBySubject(Subject $subject)
     {
         $query = $this->baseQuery();
         $query->innerJoin('f.faqSubject', 'fs');
         $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq("fs.subject", $subject)));
         return $query->getQuery()->getResult();
+    }
+
+    public function getFaqsByCollections()
+    {
+        $results = array();
+
+        $collections = $this->createQueryBuilder('f')
+        ->select('(ffp.faqpage) AS faqpage')
+        ->innerJoin('f.faqFaqpage', 'ffp')
+        ->groupBy('faqpage')
+        ->getQuery()
+        ->getResult();
+
+        foreach($collections as $collection) {
+            $faqPageId = $collection["faqpage"];
+            $faqPage = $this->getEntityManager()->find(Faqpage::class, $faqPageId);
+            $name = $faqPage->getName();
+            $results[$name] = $this->getFaqsByCollection($faqPage);
+        }
+
+        return $results;
     }
 
     public function getFaqsByCollection(Faqpage $faqPage)

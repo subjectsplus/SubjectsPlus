@@ -1,0 +1,41 @@
+{% extends 'staff/base.html.twig' %}
+
+{% block title %}FAQs by Subject{% endblock %}
+
+{% block body %}
+    <h1>FAQs by Subject</h1>
+    
+    {% for name, subject in subject_faqs %}
+        <h2>{{ name | raw}}</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FaqId</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Keywords</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for faq in subject %}
+                <tr>
+                    <td>{{ faq.faqId }}</td>
+                    <td>{{ faq.question }}</td>
+                    <td>{{ faq.answer | raw }}</td>
+                    <td>{{ faq.keywords }}</td>
+                    <td>
+                        <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>
+                        <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock %}
