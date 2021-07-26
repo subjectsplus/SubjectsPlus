@@ -4,6 +4,7 @@ namespace App\Controller\Staff;
 
 use App\Entity\Faq;
 use App\Entity\Subject;
+use App\Entity\Faqpage;
 use App\Form\FaqType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,12 +68,42 @@ class FaqController extends AbstractController
     }
 
     /**
+     * @Route("/subject/{subjectId}", name="faq_show_subject", methods={"GET"})
+     */
+    public function displayFaqsBySubject(Subject $subject): Response {
+        $subject_faqs = array(); 
+        
+        $subject_faqs[$subject->getSubject()] = $this->getDoctrine()
+        ->getRepository(Faq::class)
+        ->getFaqsBySubject($subject);
+
+        return $this->render('faq/show_subjects.html.twig', [
+            "subject_faqs" => $subject_faqs,
+        ]);
+    }
+
+    /**
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
     public function displayFaqsByCollections(): Response {
         $collection_faqs = $this->getDoctrine()
         ->getRepository(Faq::class)
         ->getAllFaqsByCollection();
+
+        return $this->render('faq/show_collections.html.twig', [
+            "collection_faqs" => $collection_faqs,
+        ]);
+    }
+
+    /**
+     * @Route("/collection/{faqpageId}", name="faq_show_collection", methods={"GET"})
+     */
+    public function displayFaqsByCollection(Faqpage $faqPage): Response {
+        $collection_faqs = array();
+        
+        $collection_faqs[$faqPage->getName()] = $this->getDoctrine()
+        ->getRepository(Faq::class)
+        ->getFaqsByCollection($faqPage);
 
         return $this->render('faq/show_collections.html.twig', [
             "collection_faqs" => $collection_faqs,

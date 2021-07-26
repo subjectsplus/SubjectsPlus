@@ -21,7 +21,7 @@
             {% for faq in subject %}
                 <tr>
                     <td>{{ faq.faqId }}</td>
-                    <td>{{ faq.question }}</td>
+                    <td>{{ faq.question | raw }}</td>
                     <td>{{ faq.answer | raw }}</td>
                     <td>{{ faq.keywords }}</td>
                     <td>
