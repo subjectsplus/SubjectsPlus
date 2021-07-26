@@ -363,7 +363,7 @@ class FaqRepositoryTest extends KernelTestCase
      *
      * @return void
      */
-    public function test_GetFaqsBySubjects_ReturnsAnArray()
+    public function test_GetAllFaqsBySubject_ReturnsAnArray()
     {
         // Call getFaqsBySubjects(<void>)
         $faqs = $this->entityManager
