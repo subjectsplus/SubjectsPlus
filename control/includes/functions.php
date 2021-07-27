@@ -2106,9 +2106,9 @@ ORDER BY cs.sort";
 		$thumbnail_default = $collection_thumbnail_default;
 
 		//check if appropriate image exists; otherwise use the default one
-		if ( ! @getimagesize( $thumbnail ) ) {
-			$thumbnail = $thumbnail_default;
-		}
+//		if ( ! @getimagesize( $thumbnail ) ) {
+//			$thumbnail = $thumbnail_default;
+//		}
 
 		// Stick in the title if it's the first row
 		if ( $key == 0 ) {
