@@ -1242,6 +1242,7 @@ Temporary Items
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
+/public/bundles/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
