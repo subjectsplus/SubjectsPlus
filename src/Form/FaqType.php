@@ -4,24 +4,34 @@ namespace App\Form;
 
 use App\Entity\Faq;
 use App\Entity\Subject;
-use App\Entity\FaqSubject;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class FaqType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question')
+            ->add('question', CKEditorType::class)
             ->add('answer', CKEditorType::class)
-            ->add('keywords', TextType::class, [
+            ->add('keywords', null, [
                 'required' => false,
                 'empty_data' => '',
+            ])
+            ->add('subject', EntityType::class, [
+                'class' => Subject::class,
+                'required' => false,
+                'mapped' => false,
+                'choice_label' => function($subject) {
+                    return $subject;
+                },
+                'multiple' => true,
+                "empty_data" => [],
+                'placeholder' => 'Select a subject',
+                'expanded' => true,
             ]);
     }
 

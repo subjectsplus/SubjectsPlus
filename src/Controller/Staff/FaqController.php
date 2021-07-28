@@ -4,6 +4,7 @@ namespace App\Controller\Staff;
 
 use App\Entity\Faq;
 use App\Entity\Subject;
+use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
 use App\Form\FaqType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -125,11 +126,60 @@ class FaqController extends AbstractController
      */
     public function edit(Request $request, Faq $faq): Response
     {
+        // Get all subjects associated with the faq
+        $subjects = $this->getDoctrine()
+        ->getRepository(FaqSubject::class)
+        ->getSubjectsByFaq($faq);
+
         $form = $this->createForm(FaqType::class, $faq);
+
+        // Set the subject field
+        $form->get('subject')->setData($subjects);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            // Get the subject field, check for any changes
+            $subjectsField = $form->get('subject')->getData();
+            $diffAdded = array_diff($subjectsField, $subjects); // Newly added subjects
+            $diffRemoved = array_diff($subjects, $subjectsField); // Subjects removed
+            
+            // Add new Subjects to Faq
+            foreach($diffAdded as $subjectAdded) {
+                // Check if FaqSubject row already exists for new subject
+                $duplicate = $this->getDoctrine()
+                ->getRepository(FaqSubject::class)
+                ->findBy(['faq' => $faq, 'subject' => $subjectAdded]);
+                
+                if (!$duplicate) {
+                    // Create new FaqSubject row
+                    $faqSubject = new FaqSubject();
+                    $faqSubject->setFaq($faq);
+                    $faqSubject->setSubject($subjectAdded);
+
+                    $faq->addFaqSubject($faqSubject);
+                    $entityManager->persist($faqSubject);
+                }
+            }
+
+            // Delete old Subjects from Faq
+            foreach($diffRemoved as $subjectRemoved) {
+                // Check if FaqSubject row to be removed exists
+                $exists = $this->getDoctrine()
+                ->getRepository(FaqSubject::class)
+                ->findOneBy(['faq' => $faq, 'subject' => $subjectRemoved]);
+                
+                //return new Response($exists->getFaqSubjectId());
+                if ($exists) {
+                    // Delete the associated FaqSubject
+                    $faq->removeFaqSubject($exists);
+                    $entityManager->remove($exists);
+                }
+            }
+
+            $entityManager->flush();
 
             return $this->redirectToRoute('faq_index');
         }
