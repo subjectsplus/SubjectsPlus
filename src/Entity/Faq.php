@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Faq.
@@ -57,8 +58,8 @@ class Faq
     private $faqFaqpage;
 
     public function __construct() {
-        $this->faqSubject = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->faqFaqpage = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->faqSubject = new ArrayCollection();
+        $this->faqFaqpage = new ArrayCollection();
     }
 
     public function getFaqId(): ?int
@@ -102,6 +103,10 @@ class Faq
         return $this;
     }
 
+    public function getFaqSubjects(): ArrayCollection {
+        return $this->faqSubject;
+    }
+
     public function addFaqSubject(FaqSubject $faqSubject): self
     {
         if (!$this->faqSubject->contains($faqSubject)) {
@@ -119,6 +124,10 @@ class Faq
         }
 
         return $this;
+    }
+
+    public function getFaqPages(): ArrayCollection {
+        return $this->faqFaqpage;
     }
 
     public function addFaqpage(FaqFaqpage $faqFaqPage): self
