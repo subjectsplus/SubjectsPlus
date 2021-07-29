@@ -130,7 +130,7 @@ class Faq
         return $this->faqFaqpage;
     }
 
-    public function addFaqpage(FaqFaqpage $faqFaqPage): self
+    public function addFaqFaqpage(FaqFaqpage $faqFaqPage): self
     {
         if (!$this->faqFaqpage->contains($faqFaqPage)) {
             $this->faqFaqpage[] = $faqFaqPage;
@@ -140,7 +140,7 @@ class Faq
         return $this;
     }
 
-    public function removeFaqpage(FaqFaqpage $faqFaqPage): self
+    public function removeFaqFaqpage(FaqFaqpage $faqFaqPage): self
     {
         if ($this->faqSubject->removeElement($faqFaqPage)) {
             $faqFaqPage->setFaq(null);

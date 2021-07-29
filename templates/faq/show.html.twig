@@ -29,6 +29,12 @@
                     <td>{{ subject.subject }}</td>
                 {% endfor %}
             </tr>
+            <tr>
+                <th>Collections</th>
+                {% for faqpage in faqpages %}
+                    <td>{{ faqpage.name }}</td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
 
