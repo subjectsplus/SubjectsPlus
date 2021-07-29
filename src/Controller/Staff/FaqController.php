@@ -44,9 +44,27 @@ class FaqController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($faq);
+
+            // Get the subject field
+            $subjectsField = $form->get('subject')->getData();
+            
+            // Add new Subjects to Faq
+            foreach($subjectsField as $subjectAdded) {
+                
+                // Create new FaqSubject row
+                $faqSubject = new FaqSubject();
+                $faqSubject->setFaq($faq);
+                $faqSubject->setSubject($subjectAdded);
+
+                $faq->addFaqSubject($faqSubject);
+                $entityManager->persist($faqSubject);
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('faq_index');
+            return $this->redirectToRoute('faq_show', [
+                'faqId' => $faq->getFaqId(),
+            ]);
         }
 
         return $this->render('faq/new.html.twig', [
@@ -116,8 +134,14 @@ class FaqController extends AbstractController
      */
     public function show(Faq $faq): Response
     {
+        // Get all subjects associated with the faq
+        $subjects = $this->getDoctrine()
+        ->getRepository(FaqSubject::class)
+        ->getSubjectsByFaq($faq);
+
         return $this->render('faq/show.html.twig', [
             'faq' => $faq,
+            'subjects' => $subjects,
         ]);
     }
 
@@ -181,7 +205,9 @@ class FaqController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('faq_index');
+            return $this->redirectToRoute('faq_show', [
+                'faqId' => $faq->getFaqId(),
+            ]);
         }
 
         return $this->render('faq/edit.html.twig', [
@@ -197,6 +223,16 @@ class FaqController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$faq->getFaqId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            // Delete FaqSubject's associated
+            $faqSubjects = $this->getDoctrine()
+                ->getRepository(FaqSubject::class)
+                ->findBy(['faq' => $faq]);
+
+            foreach($faqSubjects as $faqSubject) {
+                $entityManager->remove($faqSubject);
+            }
+            
             $entityManager->remove($faq);
             $entityManager->flush();
         }

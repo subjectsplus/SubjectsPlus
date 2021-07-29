@@ -23,6 +23,12 @@
                 <th>Keywords</th>
                 <td>{{ faq.keywords }}</td>
             </tr>
+            <tr>
+                <th>Subjects</th>
+                {% for subject in subjects %}
+                    <td>{{ subject.subject }}</td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
 

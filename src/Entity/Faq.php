@@ -56,6 +56,11 @@ class Faq
      */
     private $faqFaqpage;
 
+    public function __construct() {
+        $this->faqSubject = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->faqFaqpage = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     public function getFaqId(): ?int
     {
         return $this->faqId;
