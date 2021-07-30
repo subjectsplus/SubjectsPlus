@@ -8,6 +8,7 @@ use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
 use App\Entity\FaqFaqpage;
 use App\Form\FaqType;
+use App\Service\FaqService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,8 +37,9 @@ class FaqController extends AbstractController
     /**
      * @Route("/new", name="faq_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FaqService $fs): Response
     {
+        // Create a new Faq entry
         $faq = new Faq();
         $form = $this->createForm(FaqType::class, $faq);
         $form->handleRequest($request);
@@ -47,34 +49,17 @@ class FaqController extends AbstractController
 
             // Get the subject field
             $subjectsField = $form->get('subject')->getData();
-
+            
             // Get the faqpage field
             $faqpagesField = $form->get('faqpage')->getData();
-            
-            // Add new Subjects to Faq
-            foreach($subjectsField as $subjectAdded) {
-                
-                // Create new FaqSubject row
-                $faqSubject = new FaqSubject();
-                $faqSubject->setFaq($faq);
-                $faqSubject->setSubject($subjectAdded);
 
-                $faq->addFaqSubject($faqSubject);
-                $entityManager->persist($faqSubject);
-            }
+            // Add new Subjects to Faq
+            $fs->addSubjectsToFaq($faq, $subjectsField);
 
             // Add new Faqpages to Faq
-            foreach($faqpagesField as $faqpageAdded) {
-    
-                // Create new FaqSubject row
-                $faqFaqpage = new FaqFaqpage();
-                $faqFaqpage->setFaq($faq);
-                $faqFaqpage->setFaqpage($faqpageAdded);
+            $fs->addFaqpagesToFaq($faq, $faqpagesField);
 
-                $faq->addFaqFaqpage($faqFaqpage);
-                $entityManager->persist($faqFaqpage);
-            }
-
+            // Persist and save the Faq, FaqSubject's, and FaqFaqpages's to Database
             $entityManager->persist($faq);
             $entityManager->flush();
 
@@ -93,9 +78,12 @@ class FaqController extends AbstractController
      * @Route("/subjects", name="faq_show_subjects", methods={"GET"})
      */
     public function displayFaqsBySubjects(): Response {
-        $subject_faqs = $this->getDoctrine()
-        ->getRepository(Faq::class)
-        ->getAllFaqsBySubject();
+        // Get all Faq's by Subject
+        /** @var FaqRepository $faqRepo */
+        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
+
+        // FORMAT [string: Subject Name] = array: Faq
+        $subject_faqs = $faqRepo->getAllFaqsBySubject();
 
         return $this->render('faq/show_subjects.html.twig', [
             "subject_faqs" => $subject_faqs,
@@ -106,10 +94,14 @@ class FaqController extends AbstractController
      * @Route("/subject/{subjectId}", name="faq_show_subject", methods={"GET"})
      */
     public function displayFaqsBySubject(Subject $subject): Response {
-        $subject_faqs = array(); 
-        
-        $subject_faqs[$subject->getSubject()] = $this->getDoctrine()
-        ->getRepository(Faq::class)
+        // Display Faq's for a specific Subject
+        $subject_faqs = array();
+
+        /** @var FaqRepository $faqRepo */
+        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
+
+        // FORMAT [string: Subject Name] = array: Faq
+        $subject_faqs[$subject->getSubject()] = $faqRepo
         ->getFaqsBySubject($subject);
 
         return $this->render('faq/show_subjects.html.twig', [
@@ -121,9 +113,12 @@ class FaqController extends AbstractController
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
     public function displayFaqsByCollections(): Response {
-        $collection_faqs = $this->getDoctrine()
-        ->getRepository(Faq::class)
-        ->getAllFaqsByCollection();
+        // Get all Faq's by Collection/Faqpage
+        /** @var FaqRepository $faqRepo */
+        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
+
+        // FORMAT [string: Faqpage Name] = array: Faq
+        $collection_faqs = $faqRepo->getAllFaqsByCollection();
 
         return $this->render('faq/show_collections.html.twig', [
             "collection_faqs" => $collection_faqs,
@@ -134,10 +129,14 @@ class FaqController extends AbstractController
      * @Route("/collection/{faqpageId}", name="faq_show_collection", methods={"GET"})
      */
     public function displayFaqsByCollection(Faqpage $faqPage): Response {
+        // Display Faq's for a specific Collection/Faqpage
         $collection_faqs = array();
         
-        $collection_faqs[$faqPage->getName()] = $this->getDoctrine()
-        ->getRepository(Faq::class)
+        /** @var FaqRepository $faqRepo */
+        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
+
+        // FORMAT [string: Faqpage Name] = array: Faq
+        $collection_faqs[$faqPage->getName()] = $faqRepo
         ->getFaqsByCollection($faqPage);
 
         return $this->render('faq/show_collections.html.twig', [
@@ -151,14 +150,16 @@ class FaqController extends AbstractController
     public function show(Faq $faq): Response
     {
         // Get all subjects associated with the faq
-        $subjects = $this->getDoctrine()
-        ->getRepository(FaqSubject::class)
-        ->getSubjectsByFaq($faq);
+        /** @var FaqSubjectRepository $faqSubjectRepo */
+        $faqSubjectRepo = $this->getDoctrine()
+        ->getRepository(FaqSubject::class);
+        $subjects = $faqSubjectRepo->getSubjectsByFaq($faq);
 
         // Get all faqpages/collections associated with the faq
-        $faqPages = $this->getDoctrine()
-        ->getRepository(FaqFaqpage::class)
-        ->getFaqPagesByFaq($faq);
+        /** @var FaqFaqpageRepository $faqFaqpageRepo */
+        $faqFaqpageRepo = $this->getDoctrine()
+        ->getRepository(FaqFaqpage::class);
+        $faqPages = $faqFaqpageRepo->getFaqPagesByFaq($faq);
 
         return $this->render('faq/show.html.twig', [
             'faq' => $faq,
@@ -170,17 +171,18 @@ class FaqController extends AbstractController
     /**
      * @Route("/{faqId}/edit", name="faq_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Faq $faq): Response
+    public function edit(Request $request, FaqService $fs, Faq $faq): Response
     {
         // Get all subjects associated with the faq
-        $subjects = $this->getDoctrine()
-        ->getRepository(FaqSubject::class)
-        ->getSubjectsByFaq($faq);
+        /** @var FaqSubjectRepository $faqSubjectRepo */
+        $faqSubjectRepo = $this->getDoctrine()->getRepository(FaqSubject::class);
+        $subjects = $faqSubjectRepo->getSubjectsByFaq($faq);
 
         // Get all faqpages/collections associated with the faq
-        $faqPages = $this->getDoctrine()
-        ->getRepository(FaqFaqpage::class)
-        ->getFaqPagesByFaq($faq);
+        /** @var FaqFaqpageRepository $faqFaqpageRepo */
+        $faqFaqpageRepo = $this->getDoctrine()
+        ->getRepository(FaqFaqpage::class);
+        $faqPages = $faqFaqpageRepo->getFaqPagesByFaq($faq);
 
         $form = $this->createForm(FaqType::class, $faq);
 
@@ -206,68 +208,16 @@ class FaqController extends AbstractController
             $faqpagesRemoved = array_diff($faqPages, $faqpageField); // Subjects removed
 
             // Add new Subjects to Faq
-            foreach($subjectsAdded as $subjectAdded) {
-                // Check if FaqSubject row already exists for new subject
-                $duplicate = $this->getDoctrine()
-                ->getRepository(FaqSubject::class)
-                ->findBy(['faq' => $faq, 'subject' => $subjectAdded]);
-                
-                if (!$duplicate) {
-                    // Create new FaqSubject row
-                    $faqSubject = new FaqSubject();
-                    $faqSubject->setFaq($faq);
-                    $faqSubject->setSubject($subjectAdded);
-
-                    $faq->addFaqSubject($faqSubject);
-                    $entityManager->persist($faqSubject);
-                }
-            }
+            $fs->addSubjectsToFaq($faq, $subjectsAdded);
 
             // Delete old Subjects from Faq
-            foreach($subjectsRemoved as $subjectRemoved) {
-                // Check if FaqSubject row to be removed exists
-                $exists = $this->getDoctrine()
-                ->getRepository(FaqSubject::class)
-                ->findOneBy(['faq' => $faq, 'subject' => $subjectRemoved]);
-                
-                if ($exists) {
-                    // Delete the associated FaqSubject
-                    $faq->removeFaqSubject($exists);
-                    $entityManager->remove($exists);
-                }
-            }
+            $fs->removeSubjectsFromFaq($faq, $subjectsRemoved);
 
             // Add new Faqpages to Faq
-            foreach($faqpagesAdded as $faqpageAdded) {
-                // Check if FaqFaqpage row already exists for new subject
-                $duplicate = $this->getDoctrine()
-                ->getRepository(FaqFaqpage::class)
-                ->findBy(['faq' => $faq, 'faqpage' => $faqpageAdded]);
-                
-                if (!$duplicate) {
-                    // Create new FaqFaqpage row
-                    $faqFaqPage = new FaqFaqpage();
-                    $faqFaqPage->setFaq($faq);
-                    $faqFaqPage->setFaqpage($faqpageAdded);
-
-                    $faq->addFaqFaqpage($faqFaqPage);
-                    $entityManager->persist($faqFaqPage);
-                }
-            }
+            $fs->addFaqpagesToFaq($faq, $faqpagesAdded);
 
             // Delete old Faqpages from Faq
-            foreach($faqpagesRemoved as $faqpageRemoved) {
-                // Check if FaqFaqpage row to be removed exists
-                $exists = $this->getDoctrine()
-                ->getRepository(FaqFaqpage::class)
-                ->findOneBy(['faq' => $faq, 'faqpage' => $faqpageRemoved]);
-                
-                if ($exists) {
-                    // Delete the associated FaqFaqpage
-                    $faq->removeFaqFaqpage($exists);
-                    $entityManager->remove($exists);
-                }
-            }
+            $fs->removeFaqpagesFromFaq($faq, $faqpagesRemoved);
 
             $entityManager->flush();
 
@@ -285,30 +235,12 @@ class FaqController extends AbstractController
     /**
      * @Route("/{faqId}", name="faq_delete", methods={"POST"})
      */
-    public function delete(Request $request, Faq $faq): Response
+    public function delete(Request $request, FaqService $fs, Faq $faq): Response
     {
+        // Delete Faq and associated FaqSubject's and FaqFaqPage's
         if ($this->isCsrfTokenValid('delete'.$faq->getFaqId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            // Delete FaqSubject's associated
-            $faqSubjects = $this->getDoctrine()
-                ->getRepository(FaqSubject::class)
-                ->findBy(['faq' => $faq]);
-
-            foreach($faqSubjects as $faqSubject) {
-                $entityManager->remove($faqSubject);
-            }
-
-            // Delete FaqFaqpage's associated
-            $faqFaqpages = $this->getDoctrine()
-            ->getRepository(FaqFaqpage::class)
-            ->findBy(['faq' => $faq]);
-
-            foreach($faqFaqpages as $faqFaqpage) {
-                $entityManager->remove($faqFaqpage);
-            }
-
-            $entityManager->remove($faq);
+            $fs->deleteFaq($faq);
             $entityManager->flush();
         }
 
