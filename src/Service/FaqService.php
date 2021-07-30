@@ -8,6 +8,7 @@ use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
 use App\Entity\FaqFaqpage;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class FaqService {
 
@@ -20,9 +21,9 @@ class FaqService {
 
     /**
      * @param Faq $faq
-     * @param Subject[] $subjects
+     * @param ArrayCollection|array $subjects
      */
-    public function addSubjectsToFaq(Faq $faq, array $subjects) {
+    public function addSubjectsToFaq(Faq $faq, $subjects) {
         foreach ($subjects as $subject) {
             $this->addSubjectToFaq($faq, $subject);
         }
@@ -51,9 +52,9 @@ class FaqService {
 
     /**
      * @param Faq $faq
-     * @param Subject[] $subjects
+     * @param ArrayCollection|array $subjects
      */
-    public function removeSubjectsFromFaq(Faq $faq, array $subjects) {
+    public function removeSubjectsFromFaq(Faq $faq, $subjects) {
         foreach ($subjects as $subject) {
             $this->removeSubjectFromFaq($faq, $subject);
         }
@@ -78,9 +79,9 @@ class FaqService {
 
     /**
      * @param Faq $faq
-     * @param Faqpage[] $faqpages
+     * @param ArrayCollection|array $faqpages
      */
-    public function addFaqpagesToFaq(Faq $faq, array $faqpages) {
+    public function addFaqpagesToFaq(Faq $faq, $faqpages) {
         foreach ($faqpages as $faqpage) {
             $this->addFaqpageToFaq($faq, $faqpage);
         }
@@ -109,9 +110,9 @@ class FaqService {
 
     /**
      * @param Faq $faq
-     * @param Faqpage[] $faqpages
+     * @param ArrayCollection|array $faqpages
      */
-    public function removeFaqpagesFromFaq(Faq $faq, array $faqpages) {
+    public function removeFaqpagesFromFaq(Faq $faq, $faqpages) {
         foreach ($faqpages as $faqpage) {
             $this->removeFaqpageFromFaq($faq, $faqpage);
         }
