@@ -22,6 +22,7 @@
     "accessible-autocomplete": "^2.0.3",
     "bootstrap": "^5.0.0-beta3",
     "bootstrap-icons": "^1.4.1",
+    "ckeditor4": "^4.16.1",
     "core-js": "3"
   },
   "devDependencies": {
