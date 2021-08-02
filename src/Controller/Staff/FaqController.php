@@ -162,7 +162,7 @@ class FaqController extends AbstractController
         ->getRepository(FaqFaqpage::class);
         $faqPages = $faqFaqpageRepo->getFaqPagesByFaq($faq);
 
-        // Get all staff associated with the faqPages
+        // Get all staff associated with the faq
         /** @var ChchchangesRepository $chchchangesRepo */
         $chchchangesRepo = $this->getDoctrine()
         ->getRepository(Chchchanges::class);
