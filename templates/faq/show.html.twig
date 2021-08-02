@@ -24,15 +24,21 @@
                 <td>{{ faq.keywords }}</td>
             </tr>
             <tr>
+                <th>Staff</th>
+                {% for entry in staff %}
+                    <span><td>{{ "%s, %s"|format(entry.dateModified|format_date(), entry.staff.email) }}</td></span>
+                {% endfor %}
+            </tr>
+            <tr>
                 <th>Subjects</th>
                 {% for subject in subjects %}
-                    <td>{{ subject.subject }}</td>
+                    <span><td>{{ subject.subject }}</td><span>
                 {% endfor %}
             </tr>
             <tr>
                 <th>Collections</th>
                 {% for faqpage in faqpages %}
-                    <td>{{ faqpage.name }}</td>
+                    <span><td>{{ faqpage.name }}</td></span>
                 {% endfor %}
             </tr>
         </tbody>

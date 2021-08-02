@@ -7,6 +7,7 @@ use App\Entity\Subject;
 use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
 use App\Entity\FaqFaqpage;
+use App\Entity\Chchchanges;
 use App\Form\FaqType;
 use App\Service\FaqService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -161,10 +162,17 @@ class FaqController extends AbstractController
         ->getRepository(FaqFaqpage::class);
         $faqPages = $faqFaqpageRepo->getFaqPagesByFaq($faq);
 
+        // Get all staff associated with the faqPages
+        /** @var ChchchangesRepository $chchchangesRepo */
+        $chchchangesRepo = $this->getDoctrine()
+        ->getRepository(Chchchanges::class);
+        $staff = $chchchangesRepo->getStaffByFaq($faq);
+
         return $this->render('faq/show.html.twig', [
             'faq' => $faq,
             'subjects' => $subjects,
             'faqpages' => $faqPages,
+            'staff' => $staff,
         ]);
     }
 

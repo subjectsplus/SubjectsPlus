@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Chchchanges.
  *
  * @ORM\Table(name="chchchanges")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ChchchangesRepository")
  */
 class Chchchanges
 {
@@ -22,11 +22,13 @@ class Chchchanges
     private $chchchangesId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="staff_id", type="integer", nullable=false)
+     * @var \Staff
+     * @ORM\ManyToOne(targetEntity="Staff")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
+     * })
      */
-    private $staffId;
+    private $staff;
 
     /**
      * @var string
@@ -68,14 +70,14 @@ class Chchchanges
         return $this->chchchangesId;
     }
 
-    public function getStaffId(): ?int
+    public function getStaff(): ?Staff
     {
-        return $this->staffId;
+        return $this->staff;
     }
 
-    public function setStaffId(int $staffId): self
+    public function setStaff(Staff $staff): self
     {
-        $this->staffId = $staffId;
+        $this->staff = $staff;
 
         return $this;
     }
