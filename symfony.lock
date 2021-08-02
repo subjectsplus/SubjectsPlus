@@ -133,6 +133,9 @@
     "symfony/form": {
         "version": "v5.3.2"
     },
+    "symfony/intl": {
+        "version": "v5.3.4"
+    },
     "symfony/mailer": {
         "version": "4.3",
         "recipe": {
@@ -165,6 +168,9 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.0"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.0"
     },
     "webmozart/assert": {
         "version": "1.10.0"
