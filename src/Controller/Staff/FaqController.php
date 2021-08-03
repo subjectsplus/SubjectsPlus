@@ -8,6 +8,7 @@ use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
 use App\Entity\FaqFaqpage;
 use App\Entity\Chchchanges;
+use App\Entity\Staff;
 use App\Form\FaqType;
 use App\Service\FaqService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -142,6 +143,26 @@ class FaqController extends AbstractController
 
         return $this->render('faq/show_collections.html.twig', [
             "collection_faqs" => $collection_faqs,
+        ]);
+    }
+
+    /**
+     * @Route("/staffmember/{staffId}", name="faq_show_by_staff_member", methods={"GET"})
+     */
+    public function displayFaqsByStaffMember(Staff $staff): Response {
+        // Get all faqs associated with the staff member
+        /** @var ChchchangesRepository $chchchangesRepo */
+        $chchchangesRepo = $this->getDoctrine()
+        ->getRepository(Chchchanges::class);
+        $faqs = $chchchangesRepo->getFaqsByStaff($staff);
+
+        $staffName = $staff->getFName() . $staff->getLName();
+        $staffEmail = $staff->getEmail();
+
+        return $this->render('faq/show_staffmember.html.twig', [
+            "faqs" => $faqs,
+            "staffName" => $staffName,
+            "staffEmail" => $staffEmail,
         ]);
     }
 
