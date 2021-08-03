@@ -25,15 +25,17 @@ class FaqService {
      */
     public function addSubjectsToFaq(Faq $faq, $subjects) {
         foreach ($subjects as $subject) {
-            $this->addSubjectToFaq($faq, $subject);
+            $this->addSubjectToFaq($faq, $subject, false);
         }
+        $this->entityManager->flush();
     }
 
     /**
      * @param Faq $faq
      * @param Subject $subject
+     * @param boolean $flush
      */
-    public function addSubjectToFaq(Faq $faq, Subject $subject) {
+    public function addSubjectToFaq(Faq $faq, Subject $subject, $flush=true) {
         // Check if FaqSubject row already exists for new subject
         $duplicate = $this->entityManager
         ->getRepository(FaqSubject::class)
@@ -47,6 +49,10 @@ class FaqService {
 
             $faq->addFaqSubject($faqSubject);
             $this->entityManager->persist($faqSubject);
+
+            if ($flush) {
+                $this->entityManager->flush();
+            }
         }
     }
 
@@ -56,15 +62,17 @@ class FaqService {
      */
     public function removeSubjectsFromFaq(Faq $faq, $subjects) {
         foreach ($subjects as $subject) {
-            $this->removeSubjectFromFaq($faq, $subject);
+            $this->removeSubjectFromFaq($faq, $subject, false);
         }
+        $this->entityManager->flush();
     }
 
     /**
      * @param Faq $faq
      * @param Subject $subject
+     * @param boolean $flush
      */
-    public function removeSubjectFromFaq(Faq $faq, Subject $subject) {
+    public function removeSubjectFromFaq(Faq $faq, Subject $subject, $flush=true) {
         // Check if FaqSubject row to be removed exists
         $exists = $this->entityManager
         ->getRepository(FaqSubject::class)
@@ -74,6 +82,10 @@ class FaqService {
             // Delete the associated FaqSubject
             $faq->removeFaqSubject($exists);
             $this->entityManager->remove($exists);
+
+            if ($flush) {
+                $this->entityManager->flush();
+            }
         }
     }
 
@@ -83,15 +95,17 @@ class FaqService {
      */
     public function addFaqpagesToFaq(Faq $faq, $faqpages) {
         foreach ($faqpages as $faqpage) {
-            $this->addFaqpageToFaq($faq, $faqpage);
+            $this->addFaqpageToFaq($faq, $faqpage, false);
         }
+        $this->entityManager->flush();
     }
 
     /**
      * @param Faq $faq
      * @param Faqpage $faqpage
+     * @param boolean $flush
      */
-    public function addFaqpageToFaq(Faq $faq, Faqpage $faqpage) {
+    public function addFaqpageToFaq(Faq $faq, Faqpage $faqpage, $flush=true) {
         // Check if FaqFaqpage row already exists for new subject
         $duplicate = $this->entityManager
         ->getRepository(FaqFaqpage::class)
@@ -105,6 +119,10 @@ class FaqService {
 
             $faq->addFaqFaqpage($faqFaqPage);
             $this->entityManager->persist($faqFaqPage);
+
+            if ($flush) {
+                $this->entityManager->flush();
+            }
         }
     }
 
@@ -114,15 +132,17 @@ class FaqService {
      */
     public function removeFaqpagesFromFaq(Faq $faq, $faqpages) {
         foreach ($faqpages as $faqpage) {
-            $this->removeFaqpageFromFaq($faq, $faqpage);
+            $this->removeFaqpageFromFaq($faq, $faqpage, false);
         }
+        $this->entityManager->flush();
     }
 
     /**
      * @param Faq $faq
      * @param Faqpage $faqpage
+     * @param boolean $flush
      */
-    public function removeFaqpageFromFaq(Faq $faq, Faqpage $faqpage) {
+    public function removeFaqpageFromFaq(Faq $faq, Faqpage $faqpage, $flush=true) {
         // Check if FaqFaqpage row to be removed exists
         $exists = $this->entityManager
         ->getRepository(FaqFaqpage::class)
@@ -132,13 +152,18 @@ class FaqService {
             // Delete the associated FaqFaqpage
             $faq->removeFaqFaqpage($exists);
             $this->entityManager->remove($exists);
+            
+            if ($flush) {
+                $this->entityManager->flush();
+            }
         }
     }
 
     /**
      * @param Faq $faq
+     * @param boolean $flush
      */
-    public function deleteFaq(Faq $faq) {
+    public function deleteFaq(Faq $faq, $flush=true) {
         // Delete FaqSubject's associated
         $faqSubjects = $this->entityManager
         ->getRepository(FaqSubject::class)
@@ -158,5 +183,9 @@ class FaqService {
         }
 
         $this->entityManager->remove($faq);
+
+        if ($flush) {
+            $this->entityManager->flush();
+        }
     }
 }

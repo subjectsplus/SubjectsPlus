@@ -249,7 +249,6 @@ class FaqController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$faq->getFaqId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $fs->deleteFaq($faq);
-            $entityManager->flush();
         }
 
         return $this->redirectToRoute('faq_index');
