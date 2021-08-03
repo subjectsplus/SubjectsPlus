@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Chchchanges;
 use App\Entity\Faq;
+use App\Entity\Staff;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Common\Collections\Criteria;
@@ -23,11 +24,11 @@ class ChchchangesRepository extends ServiceEntityRepository
 
     public function getStaffByFaq(Faq $faq) {
         return $this->createQueryBuilder('ch')
-        ->select('s as staff, ch.dateAdded as dateModified')
+        ->select('s as staff, ch.dateAdded as dateAdded')
         ->innerJoin('\App\Entity\Staff', 's', 'WITH', 's = (ch.staff)')
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.ourtable', 'faq')))
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.recordId', $faq->getFaqId())))
-        ->orderBy('ch.dateAdded', 'DESC')
+        ->orderBy('dateAdded', 'DESC')
         ->getQuery()
         ->getResult();
     }
