@@ -35,7 +35,7 @@ class ChchchangesRepository extends ServiceEntityRepository
 
     public function getFaqsByStaff(Staff $staff) {
         return $this->createQueryBuilder('ch')
-        ->select('f as faq, ch.dateAdded as dateAdded, ch.message as message')
+        ->select('DISTINCT f as faq, ch.dateAdded as dateAdded, ch.message as message')
         ->innerJoin('\App\Entity\Faq', 'f', 'WITH', 'f.faqId = ch.recordId')
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.ourtable', 'faq')))
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.staff', $staff)))
