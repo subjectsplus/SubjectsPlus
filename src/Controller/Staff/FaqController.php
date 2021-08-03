@@ -11,6 +11,7 @@ use App\Entity\Chchchanges;
 use App\Entity\Staff;
 use App\Form\FaqType;
 use App\Service\FaqService;
+use App\Service\ChangeLogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -156,8 +157,8 @@ class FaqController extends AbstractController
         ->getRepository(Chchchanges::class);
         $faqs = $chchchangesRepo->getFaqsByStaff($staff);
 
-        $staffName = $staff->getFName() . $staff->getLName();
-        $staffEmail = $staff->getEmail();
+        $staffName = trim($staff->getFName() . ' ' . $staff->getLName());
+        $staffEmail = trim($staff->getEmail());
 
         return $this->render('faq/show_staffmember.html.twig', [
             "faqs" => $faqs,
