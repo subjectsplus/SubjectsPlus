@@ -36,11 +36,13 @@
                     {{'FAQs' | trans}}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="faqsDropdown">
-                    <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'View your FAQs (NEW)' | trans }}</a></li>
                     <li><a class="dropdown-item" href="/control/faq/new">{{ 'Create new FAQ (NEW)' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'View your FAQs (NEW)' | trans }}</a></li>
                     <li><a class="dropdown-item" href="/control/faq/">{{ 'View FAQ (NEW)' | trans }}</a></li>
                     <li><a class="dropdown-item" href="/control/faq/subjects">{{ 'View FAQ By Subjects (NEW)' | trans }}</a></li>
                     <li><a class="dropdown-item" href="/control/faq/collections">{{ 'View FAQ By Collections (NEW)' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="/control/faq/faq.php">{{ 'New FAQ' | trans }}</a></li>
                     <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=subject">{{ 'Browse by subject' | trans }}</a></li>
                     <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=holding">{{ 'Browse by collection' | trans }}</a></li>
