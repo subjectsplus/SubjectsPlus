@@ -63,7 +63,7 @@ class Chchchanges
      *
      * @ORM\Column(name="date_added", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
      */
-    private $dateAdded = 'CURRENT_TIMESTAMP';
+    private $dateAdded;
 
     public function getChchchangesId(): ?string
     {
@@ -133,12 +133,5 @@ class Chchchanges
     public function getDateAdded(): ?\DateTimeInterface
     {
         return $this->dateAdded;
-    }
-
-    public function setDateAdded(\DateTimeInterface $dateAdded): self
-    {
-        $this->dateAdded = $dateAdded;
-
-        return $this;
     }
 }
