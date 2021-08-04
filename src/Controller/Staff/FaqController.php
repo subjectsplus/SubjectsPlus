@@ -40,8 +40,12 @@ class FaqController extends AbstractController
     /**
      * @Route("/new", name="faq_new", methods={"GET","POST"})
      */
-    public function new(Request $request, FaqService $fs): Response
+    public function new(Request $request, FaqService $fs, ChangeLogService $cls): Response
     {
+        // Check whether user is authenticated
+        // TODO: Check if permissions permit user to create new faq
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         // Create a new Faq entry
         $faq = new Faq();
         $form = $this->createForm(FaqType::class, $faq);
@@ -49,6 +53,8 @@ class FaqController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->persist($faq);
 
             // Get the subject field
             $subjectsField = $form->get('subject')->getData();
@@ -62,12 +68,18 @@ class FaqController extends AbstractController
             // Add new Faqpages to Faq
             $fs->addFaqpagesToFaq($faq, $faqpagesField);
 
-            // Persist and save the Faq, FaqSubject's, and FaqFaqpages's to Database
-            $entityManager->persist($faq);
             $entityManager->flush();
 
+            // Create new log entry
+            /** @var Staff $staff */
+            $staff = $this->getUser();
+            $faqId = $faq->getFaqId();
+            $question = $faq->getQuestion();
+
+            $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
+
             return $this->redirectToRoute('faq_show', [
-                'faqId' => $faq->getFaqId(),
+                'faqId' => $faqId,
             ]);
         }
 
@@ -201,8 +213,12 @@ class FaqController extends AbstractController
     /**
      * @Route("/{faqId}/edit", name="faq_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, FaqService $fs, Faq $faq): Response
+    public function edit(Request $request, FaqService $fs, ChangeLogService $cls, Faq $faq): Response
     {
+        // Check whether user is authenticated
+        // TODO: Check if permissions permit user to edit the faq
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         // Get all subjects associated with the faq
         /** @var FaqSubjectRepository $faqSubjectRepo */
         $faqSubjectRepo = $this->getDoctrine()->getRepository(FaqSubject::class);
@@ -251,6 +267,14 @@ class FaqController extends AbstractController
 
             $entityManager->flush();
 
+            // Create new log entry
+            /** @var Staff $staff */
+            $staff = $this->getUser();
+            $faqId = $faq->getFaqId();
+            $question = $faq->getQuestion();
+
+            $cls->addLog($staff, 'faq', $faqId, $question, 'update');
+
             return $this->redirectToRoute('faq_show', [
                 'faqId' => $faq->getFaqId(),
             ]);
@@ -265,12 +289,25 @@ class FaqController extends AbstractController
     /**
      * @Route("/{faqId}", name="faq_delete", methods={"POST"})
      */
-    public function delete(Request $request, FaqService $fs, Faq $faq): Response
+    public function delete(Request $request, FaqService $fs, ChangeLogService $cls, Faq $faq): Response
     {
+        // Check whether user is authenticated
+        // TODO: Check if permissions permit user to delete the faq
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         // Delete Faq and associated FaqSubject's and FaqFaqPage's
         if ($this->isCsrfTokenValid('delete'.$faq->getFaqId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+            // Preserve before deletion
+            $faqId = $faq->getFaqId();
+            $question = $faq->getQuestion();
+
+            // Delete Faq
             $fs->deleteFaq($faq);
+
+            // Create new log entry
+            /** @var Staff $staff */
+            $staff = $this->getUser();
+            $cls->addLog($staff, 'faq', $faqId, $question, 'delete');
         }
 
         return $this->redirectToRoute('faq_index');
