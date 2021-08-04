@@ -17,20 +17,24 @@ use Doctrine\Common\Collections\Criteria;
  */
 class ChchchangesRepository extends ServiceEntityRepository
 {
+
+    private $staffFields = ['s.staffId', 's.lname', 's.fname', 's.title', 's.email'];
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Chchchanges::class);
     }
 
     public function getStaffByFaq(Faq $faq) {
-        return $this->createQueryBuilder('ch')
-        ->select('s as staff, ch.dateAdded as dateAdded')
+        $query = $this->createQueryBuilder('ch')
+        ->select($this->staffFields)
+        ->addSelect('ch.dateAdded')
         ->innerJoin('\App\Entity\Staff', 's', 'WITH', 's = (ch.staff)')
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.ourtable', 'faq')))
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.recordId', $faq->getFaqId())))
-        ->orderBy('dateAdded', 'DESC')
+        ->orderBy('ch.dateAdded', 'DESC')
         ->getQuery()
-        ->getResult();
+        ->getArrayResult();
     }
 
     public function getFaqsByStaff(Staff $staff) {

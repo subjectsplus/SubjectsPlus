@@ -26,7 +26,7 @@
             <tr>
                 <th>Staff</th>
                 {% for entry in staff %}
-                    <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.staff.email) }}</td></span>
+                    <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>
                 {% endfor %}
             </tr>
             <tr>
