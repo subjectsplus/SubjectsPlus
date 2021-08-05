@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FaqController extends AbstractController
 {
+    // TODO: Validation Package 
     /**
      * @Route("/", name="faq_index", methods={"GET"})
      * @Route("/index.php", methods={"GET"})
@@ -52,34 +53,35 @@ class FaqController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->persist($faq);
+            $entityManager->transactional(function() use($form, $faq, $entityManager, $fs, $cls) {
+                // Persist Faq entity
+                $entityManager->persist($faq);
 
-            // Get the subject field
-            $subjectsField = $form->get('subject')->getData();
-            
-            // Get the faqpage field
-            $faqpagesField = $form->get('faqpage')->getData();
-
-            // Add new Subjects to Faq
-            $fs->addSubjectsToFaq($faq, $subjectsField);
-
-            // Add new Faqpages to Faq
-            $fs->addFaqpagesToFaq($faq, $faqpagesField);
-
-            $entityManager->flush();
-
-            // Create new log entry
-            /** @var Staff $staff */
-            $staff = $this->getUser();
-            $faqId = $faq->getFaqId();
-            $question = $faq->getQuestion();
-
-            $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
+                // Get the subject field
+                $subjectsField = $form->get('subject')->getData();
+                
+                // Get the faqpage field
+                $faqpagesField = $form->get('faqpage')->getData();
+    
+                // Add new Subjects to Faq
+                $fs->addSubjectsToFaq($faq, $subjectsField);
+    
+                // Add new Faqpages to Faq
+                $fs->addFaqpagesToFaq($faq, $faqpagesField);
+                
+                // Create new log entry 
+                /** @var Staff $staff */
+                $staff = $this->getUser();
+                $faqId = $faq->getFaqId();
+                $question = $faq->getQuestion();
+                $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
+            });
 
             return $this->redirectToRoute('faq_show', [
-                'faqId' => $faqId,
+                'faqId' => $faq->getFaqId(),
             ]);
         }
 
@@ -241,39 +243,39 @@ class FaqController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
-
-            // Get the subject field, check for any changes
-            $subjectsField = $form->get('subject')->getData();
-            $subjectsAdded = array_diff($subjectsField, $subjects); // Newly added subjects
-            $subjectsRemoved = array_diff($subjects, $subjectsField); // Subjects removed
             
-            // Get the faqpage field, check for any changes
-            $faqpageField = $form->get('faqpage')->getData();
-            $faqpagesAdded = array_diff($faqpageField, $faqPages); // Newly added subjects
-            $faqpagesRemoved = array_diff($faqPages, $faqpageField); // Subjects removed
+            $entityManager->transactional(function() use ($faq, $fs, $cls, $form, $subjects, $faqPages) {
+                // Get the subject field, check for any changes
+                $subjectsField = $form->get('subject')->getData();
+                $subjectsAdded = array_diff($subjectsField, $subjects); // Newly added subjects
+                $subjectsRemoved = array_diff($subjects, $subjectsField); // Subjects removed
+                
+                // Get the faqpage field, check for any changes
+                $faqpageField = $form->get('faqpage')->getData();
+                $faqpagesAdded = array_diff($faqpageField, $faqPages); // Newly added subjects
+                $faqpagesRemoved = array_diff($faqPages, $faqpageField); // Subjects removed
+            
+                // Add new Subjects to Faq
+                $fs->addSubjectsToFaq($faq, $subjectsAdded);
 
-            // Add new Subjects to Faq
-            $fs->addSubjectsToFaq($faq, $subjectsAdded);
+                // Delete old Subjects from Faq
+                $fs->removeSubjectsFromFaq($faq, $subjectsRemoved);
 
-            // Delete old Subjects from Faq
-            $fs->removeSubjectsFromFaq($faq, $subjectsRemoved);
+                // Add new Faqpages to Faq
+                $fs->addFaqpagesToFaq($faq, $faqpagesAdded);
 
-            // Add new Faqpages to Faq
-            $fs->addFaqpagesToFaq($faq, $faqpagesAdded);
+                // Delete old Faqpages from Faq
+                $fs->removeFaqpagesFromFaq($faq, $faqpagesRemoved);
 
-            // Delete old Faqpages from Faq
-            $fs->removeFaqpagesFromFaq($faq, $faqpagesRemoved);
-
-            $entityManager->flush();
-
-            // Create new log entry
-            /** @var Staff $staff */
-            $staff = $this->getUser();
-            $faqId = $faq->getFaqId();
-            $question = $faq->getQuestion();
-
-            $cls->addLog($staff, 'faq', $faqId, $question, 'update');
+                // Create new log entry
+                /** @var Staff $staff */
+                $staff = $this->getUser();
+                $faqId = $faq->getFaqId();
+                $question = $faq->getQuestion();
+                $cls->addLog($staff, 'faq', $faqId, $question, 'update');
+            });
 
             return $this->redirectToRoute('faq_show', [
                 'faqId' => $faq->getFaqId(),
@@ -297,17 +299,22 @@ class FaqController extends AbstractController
 
         // Delete Faq and associated FaqSubject's and FaqFaqPage's
         if ($this->isCsrfTokenValid('delete'.$faq->getFaqId(), $request->request->get('_token'))) {
-            // Preserve before deletion
-            $faqId = $faq->getFaqId();
-            $question = $faq->getQuestion();
+            /** @var EntityManagerInterface $entityManager */
+            $entityManager = $this->getDoctrine()->getManager();
 
-            // Delete Faq
-            $fs->deleteFaq($faq);
+            $entityManager->transactional(function() use($faq, $fs, $cls) {
+                // Preserve before deletion
+                $faqId = $faq->getFaqId();
+                $question = $faq->getQuestion();
 
-            // Create new log entry
-            /** @var Staff $staff */
-            $staff = $this->getUser();
-            $cls->addLog($staff, 'faq', $faqId, $question, 'delete');
+                // Delete Faq
+                $fs->deleteFaq($faq);
+
+                // Create new log entry
+                /** @var Staff $staff */
+                $staff = $this->getUser();
+                $cls->addLog($staff, 'faq', $faqId, $question, 'delete');
+            });
         }
 
         return $this->redirectToRoute('faq_index');
