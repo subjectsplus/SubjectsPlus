@@ -26,7 +26,7 @@ class ChchchangesRepository extends ServiceEntityRepository
     }
 
     public function getStaffByFaq(Faq $faq) {
-        $query = $this->createQueryBuilder('ch')
+        return $this->createQueryBuilder('ch')
         ->select($this->staffFields)
         ->addSelect('ch.dateAdded')
         ->innerJoin('\App\Entity\Staff', 's', 'WITH', 's = (ch.staff)')
