@@ -22,7 +22,7 @@ class Chchchanges
     private $chchchangesId;
 
     /**
-     * @var \Staff
+     * @var \Staff|null
      * @ORM\ManyToOne(targetEntity="Staff")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
