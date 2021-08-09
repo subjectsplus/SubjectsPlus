@@ -64,6 +64,9 @@
             "tests/bootstrap.php"
         ]
     },
+    "scienta/doctrine-json-functions": {
+        "version": "4.3.0"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.1"
     },
