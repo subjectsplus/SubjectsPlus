@@ -37,9 +37,9 @@ class Faq
     private $answer;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="keywords", type="string", length=255, nullable=false)
+     * @var \Doctrine\Common\Collections\Collection|null
+     * 
+     * @ORM\Column(name="keywords", type="json", nullable=true)
      */
     private $keywords;
 
@@ -91,14 +91,19 @@ class Faq
         return $this;
     }
 
-    public function getKeywords(): ?string
+    public function getKeywords(): ?ArrayCollection
     {
         return $this->keywords;
     }
 
-    public function setKeywords(string $keywords): self
+    public function addKeyword(string $keyword): self
     {
-        $this->keywords = $keywords;
+        if (!$this->keywords)
+            $this->keywords = new ArrayCollection();
+
+        if (!$this->keywords->contains($keyword)) {
+            $this->keywords[] = $keyword;
+        }
 
         return $this;
     }
