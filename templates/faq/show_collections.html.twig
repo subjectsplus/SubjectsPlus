@@ -23,7 +23,14 @@
                     <td>{{ faq.faqId }}</td>
                     <td>{{ faq.question | raw }}</td>
                     <td>{{ faq.answer | raw }}</td>
-                    <td>{{ faq.keywords }}</td>
+                    <td>
+                        {% for keyword in faq.keywords %}
+                            {{ keyword }}
+                            {% if not loop.last %}
+                                {{'| '}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>
                         <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>
                         <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>

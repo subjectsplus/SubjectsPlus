@@ -21,7 +21,14 @@
             </tr>
             <tr>
                 <th>Keywords</th>
-                <td>{{ faq.keywords }}</td>
+                <td>
+                    {% for keyword in faq.keywords %}
+                        {{ keyword }}
+                        {% if not loop.last %}
+                            {{'| '}}
+                        {% endif %}
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>Staff</th>

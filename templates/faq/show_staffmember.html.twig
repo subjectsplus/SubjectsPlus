@@ -22,7 +22,14 @@
                     <td>{{ entry.faq.faqId }}</td>
                     <td>{{ entry.faq.question | raw }}</td>
                     <td>{{ entry.faq.answer | raw }}</td>
-                    <td>{{ entry.faq.keywords }}</td>
+                    <td>
+                        {% for keyword in entry.faq.keywords %}
+                            {{ keyword }}
+                            {% if not loop.last %}
+                                {{'| '}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{ "%s, %s"|format(entry.message, entry.dateAdded|format_date())}}</td>
                     <td>
                         <a href="{{ path('faq_show', {'faqId': entry.faq.faqId}) }}">show</a>
