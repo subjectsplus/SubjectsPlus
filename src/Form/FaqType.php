@@ -13,14 +13,29 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+
 
 class FaqType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('question', CKEditorType::class)
-            ->add('answer', CKEditorType::class)
+            ->add('question', CKEditorType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                    new NotNull(),
+                ]
+            ])
+            ->add('answer', CKEditorType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                    new NotNull(),
+                ]
+            ])
             ->add('keywords', TextType::class, [
                 'required' => false,
                 'getter' => function(Faq $faq, FormInterface $form) { 
@@ -39,7 +54,6 @@ class FaqType extends AbstractType
                     return $subject;
                 },
                 'multiple' => true,
-                "empty_data" => new ArrayCollection(),
                 'placeholder' => 'Select a subject',
                 'expanded' => true,
             ])
@@ -51,7 +65,6 @@ class FaqType extends AbstractType
                     return $faqPage;
                 },
                 'multiple' => true,
-                "empty_data" => new ArrayCollection(),
                 'placeholder' => 'Select a collection',
                 'expanded' => true,
             ]);
@@ -75,7 +88,7 @@ class FaqType extends AbstractType
     public function keywordsSetter(Faq $faq, ?string $keywords, FormInterface $form) {
         // When keywords string is empty, an empty array is used for keywordsArray
         $keywordsArray = empty(trim($keywords)) ? [] : array_map('trim', explode(',', $keywords));
-        $currentKeywords = $faq->getKeywords();
+        $currentKeywords = ($faq->getKeywords() == null) ? [] : $faq->getKeywords();
         $diffAdded = array_diff($keywordsArray, $currentKeywords); // keywords added
         $diffRemoved = array_diff($currentKeywords, $keywordsArray); // keywords removed
         

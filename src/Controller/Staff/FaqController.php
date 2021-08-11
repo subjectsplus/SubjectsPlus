@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Route("/control/faq")
@@ -67,10 +68,12 @@ class FaqController extends AbstractController
                 $faqpagesField = $form->get('faqpage')->getData();
     
                 // Add new Subjects to Faq
-                $fs->addSubjectsToFaq($faq, $subjectsField);
+                if (!empty($subjectsField)) 
+                    $fs->addSubjectsToFaq($faq, $subjectsField);
     
                 // Add new Faqpages to Faq
-                $fs->addFaqpagesToFaq($faq, $faqpagesField);
+                if (!empty($faqpagesField))
+                    $fs->addFaqpagesToFaq($faq, $faqpagesField);
                 
                 // Create new log entry 
                 /** @var Staff $staff */
@@ -258,16 +261,20 @@ class FaqController extends AbstractController
                 $faqpagesRemoved = array_diff($faqPages, $faqpageField); // Subjects removed
             
                 // Add new Subjects to Faq
-                $fs->addSubjectsToFaq($faq, $subjectsAdded);
+                if (!empty($subjectsAdded))
+                    $fs->addSubjectsToFaq($faq, $subjectsAdded);
 
                 // Delete old Subjects from Faq
-                $fs->removeSubjectsFromFaq($faq, $subjectsRemoved);
+                if (!empty($subjectsRemoved))
+                    $fs->removeSubjectsFromFaq($faq, $subjectsRemoved);
 
                 // Add new Faqpages to Faq
-                $fs->addFaqpagesToFaq($faq, $faqpagesAdded);
+                if (!empty($faqpagesAdded))
+                    $fs->addFaqpagesToFaq($faq, $faqpagesAdded);
 
                 // Delete old Faqpages from Faq
-                $fs->removeFaqpagesFromFaq($faq, $faqpagesRemoved);
+                if (!empty($faqpagesRemoved))
+                    $fs->removeFaqpagesFromFaq($faq, $faqpagesRemoved);
 
                 // Create new log entry
                 /** @var Staff $staff */
