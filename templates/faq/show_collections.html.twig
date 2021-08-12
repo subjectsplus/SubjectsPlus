@@ -14,6 +14,7 @@
                     <th>Question</th>
                     <th>Answer</th>
                     <th>Keywords</th>
+                    <th>Visibility</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -30,6 +31,13 @@
                                 {{'| '}}
                             {% endif %}
                         {% endfor %}
+                    </td>
+                    <td>
+                        {% if faq.active %}
+                            {{ 'Active' }}
+                        {% else %}
+                            {{ 'Inactive' }}
+                        {% endif %}
                     </td>
                     <td>
                         <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>

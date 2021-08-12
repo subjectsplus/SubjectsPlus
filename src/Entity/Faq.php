@@ -44,6 +44,13 @@ class Faq
     private $keywords;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean", nullable="false")
+     */
+    private $active;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\FaqSubject", mappedBy="faq")
@@ -60,6 +67,7 @@ class Faq
     public function __construct() {
         $this->faqSubject = new ArrayCollection();
         $this->faqFaqpage = new ArrayCollection();
+        $this->active = true;
     }
 
     public function getFaqId(): ?int
@@ -162,5 +170,17 @@ class Faq
         }
 
         return $this;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+        
+        return $this;
+    }
+
+    public function getActive(): bool
+    {
+        return $this->active;
     }
 }

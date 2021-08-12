@@ -31,6 +31,16 @@
                 </td>
             </tr>
             <tr>
+                <th>Visibility</th>
+                <td>
+                    {% if faq.active %}
+                        {{ 'Active' }}
+                    {% else %}
+                        {{ 'Inactive' }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Staff</th>
                 {% for entry in staff %}
                     <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>

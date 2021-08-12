@@ -5,12 +5,11 @@ namespace App\Form;
 use App\Entity\Faq;
 use App\Entity\Subject;
 use App\Entity\Faqpage;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -32,16 +31,15 @@ class FaqType extends AbstractType
                 ]
             ])
             ->add('answer', CKEditorType::class, [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank(),
-                    new NotNull(),
-                ]
+                'required' => false,
             ])
             ->add('keywords', TextType::class, [
                 'required' => false,
                 'mapped' => false,
                 'empty_data' => '',
+            ])
+            ->add('active', CheckboxType::class, [
+                'required' => false,
             ])
             ->add('subject', EntityType::class, [
                 'class' => Subject::class,

@@ -12,6 +12,7 @@
                 <th>Question</th>
                 <th>Answer</th>
                 <th>Keywords</th>
+                <th>Visibility</th>
                 <th>Action,Date</th>
                 <th>actions</th>
             </tr>
@@ -29,6 +30,13 @@
                                 {{'| '}}
                             {% endif %}
                         {% endfor %}
+                    </td>
+                    <td>
+                        {% if entry.faq.active %}
+                            {{ 'Active' }}
+                        {% else %}
+                            {{ 'Inactive' }}
+                        {% endif %}
                     </td>
                     <td>{{ "%s, %s"|format(entry.message, entry.dateAdded|format_date())}}</td>
                     <td>
