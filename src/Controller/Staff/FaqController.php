@@ -61,12 +61,23 @@ class FaqController extends AbstractController
                 // Persist Faq entity
                 $entityManager->persist($faq);
 
+                // Get the keywords field
+                $keywordsField = $form->get('keywords')->getData();
+
                 // Get the subject field
                 $subjectsField = $form->get('subject')->getData();
                 
                 // Get the faqpage field
                 $faqpagesField = $form->get('faqpage')->getData();
-    
+
+                // Add new Keywords to Faq
+                if (!empty(trim($keywordsField))) {
+                    $keywordsArray = array_map('trim', explode(',', $keywordsField));
+                    foreach ($keywordsArray as $keyword) {
+                        $faq->addKeyword($keyword);
+                    }
+                }
+
                 // Add new Subjects to Faq
                 if (!empty($subjectsField)) 
                     $fs->addSubjectsToFaq($faq, $subjectsField);
@@ -224,6 +235,15 @@ class FaqController extends AbstractController
         // TODO: Check if permissions permit user to edit the faq
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        // Get all keywords associated with the faq
+        $keywords = $faq->getKeywords();
+        $keywordsString = '';
+        if ($keywords !== null) {
+            $keywordsString = implode(',', $keywords);
+        } else {
+            $keywords = [];
+        }
+
         // Get all subjects associated with the faq
         /** @var FaqSubjectRepository $faqSubjectRepo */
         $faqSubjectRepo = $this->getDoctrine()->getRepository(FaqSubject::class);
@@ -237,6 +257,9 @@ class FaqController extends AbstractController
 
         $form = $this->createForm(FaqType::class, $faq);
 
+        // Set the keywords field
+        $form->get('keywords')->setData($keywordsString);
+
         // Set the subject field
         $form->get('subject')->setData($subjects);
 
@@ -249,7 +272,13 @@ class FaqController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
             
-            $entityManager->transactional(function() use ($faq, $fs, $cls, $form, $subjects, $faqPages) {
+            $entityManager->transactional(function() use ($faq, $fs, $cls, $form, $keywords, $subjects, $faqPages) {
+                // Get the keywords field, check for any changes
+                $keywordsField = $form->get('keywords')->getData();
+                $keywordsFieldArray = empty(trim($keywordsField)) ? [] : array_map('trim', explode(',', $keywordsField));
+                $keywordsAdded = array_diff($keywordsFieldArray, $keywords); // keywords added
+                $keywordsRemoved = array_diff($keywords, $keywordsFieldArray); // keywords removed
+
                 // Get the subject field, check for any changes
                 $subjectsField = $form->get('subject')->getData();
                 $subjectsAdded = array_diff($subjectsField, $subjects); // Newly added subjects
@@ -260,6 +289,16 @@ class FaqController extends AbstractController
                 $faqpagesAdded = array_diff($faqpageField, $faqPages); // Newly added subjects
                 $faqpagesRemoved = array_diff($faqPages, $faqpageField); // Subjects removed
             
+                // Add new keywords to Faq
+                foreach ($keywordsAdded as $keywordAdded) {
+                    $faq->addKeyword($keywordAdded);
+                }
+
+                // Remove old keywords from Faq
+                foreach ($keywordsRemoved as $keywordRemoved) {
+                    $faq->removeKeyword($keywordRemoved);
+                }
+
                 // Add new Subjects to Faq
                 if (!empty($subjectsAdded))
                     $fs->addSubjectsToFaq($faq, $subjectsAdded);

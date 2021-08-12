@@ -21,6 +21,8 @@ class FaqType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // TODO: autosave ckeditor
+        // TODO: flash messages
         $builder
             ->add('question', CKEditorType::class, [
                 'required' => true,
@@ -38,12 +40,7 @@ class FaqType extends AbstractType
             ])
             ->add('keywords', TextType::class, [
                 'required' => false,
-                'getter' => function(Faq $faq, FormInterface $form) { 
-                    return $this->keywordsGetter($faq, $form);
-                },
-                'setter' => function(Faq $faq, ?string $keywords, FormInterface $form) {
-                    $this->keywordsSetter($faq, $keywords, $form);
-                },
+                'mapped' => false,
                 'empty_data' => '',
             ])
             ->add('subject', EntityType::class, [
@@ -75,31 +72,5 @@ class FaqType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Faq::class,
         ]);
-    }
-
-    public function keywordsGetter(Faq $faq, FormInterface $form) {
-        $keywords = $faq->getKeywords();
-        if ($keywords) {
-            return implode(',', $keywords);
-        }
-        return '';
-    }
-
-    public function keywordsSetter(Faq $faq, ?string $keywords, FormInterface $form) {
-        // When keywords string is empty, an empty array is used for keywordsArray
-        $keywordsArray = empty(trim($keywords)) ? [] : array_map('trim', explode(',', $keywords));
-        $currentKeywords = ($faq->getKeywords() == null) ? [] : $faq->getKeywords();
-        $diffAdded = array_diff($keywordsArray, $currentKeywords); // keywords added
-        $diffRemoved = array_diff($currentKeywords, $keywordsArray); // keywords removed
-        
-        // Add keywords
-        foreach ($diffAdded as $keyword) {
-            $faq->addKeyword($keyword);
-        }
-
-        // Remove keywords
-        foreach ($diffRemoved as $keyword) {
-            $faq->removeKeyword($keyword);
-        }
     }
 }
