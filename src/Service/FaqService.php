@@ -10,7 +10,19 @@ use App\Entity\FaqFaqpage;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * FaqService allows for interactions between the Faq, Subject, and Faqpage entities.
+ * 
+ * Functionalities of FaqService include adding and removing subjects to the Faq, 
+ * adding and removing faqpages to the Faq, and deleting the Faq.
+ */
 class FaqService {
+
+    /**
+     * Entity Manager.
+     *
+     * @var EntityManagerInterface $entityManager
+     */
 
     private $entityManager;
 
@@ -20,8 +32,13 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param ArrayCollection|array $subjects
+     * Add an array of subject associations to an Faq entity.
+     * 
+     * Loops through the $subjects array and calls FaqService::addSubjectToFaq on
+     * each subject.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param ArrayCollection|array $subjects Array consisting of Subject entity.
      */
     public function addSubjectsToFaq(Faq $faq, $subjects) {
         $this->entityManager->transactional(function() use ($faq, $subjects) {
@@ -32,8 +49,15 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param Subject $subject
+     * Add a subject association to an Faq entity.
+     * 
+     * Checks if a duplicate FaqSubject exists consisting of the provided $faq
+     * and $subject. If not, creates a new FaqSubject with the provided $faq and $subject,
+     * and adds the new FaqSubject to the $faq. The new FaqSubject is then added to the
+     * database.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param Subject $subject Subject entity.
      */
     public function addSubjectToFaq(Faq $faq, Subject $subject) {
         // Check if FaqSubject row already exists for new subject
@@ -55,8 +79,13 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param ArrayCollection|array $subjects
+     * Remove an array of subject associations from an Faq entity.
+     * 
+     * Loops through the $subjects array and calls FaqService::removeSubjectFromFaq on
+     * each subject.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param ArrayCollection|array $subjects Array consisting of Subject entity.
      */
     public function removeSubjectsFromFaq(Faq $faq, $subjects) {
         $this->entityManager->transactional(function() use($faq, $subjects) {
@@ -67,8 +96,14 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param Subject $subject
+     * Remove a subject association from an Faq entity.
+     * 
+     * Checks if an FaqSubject exists consisting of the provided $faq
+     * and $subject. If it does, the FaqSubject is removed from the $faq
+     * and deleted from the database.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param Subject $subject Subject entity.
      */
     public function removeSubjectFromFaq(Faq $faq, Subject $subject) {
         // Check if FaqSubject row to be removed exists
@@ -86,8 +121,13 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param ArrayCollection|array $faqpages
+     * Add an array of faqpage associations to an Faq entity.
+     * 
+     * Loops through the $faqpages array and calls FaqService::addFaqpageToFaq on
+     * each faqpage.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param ArrayCollection|array $faqpages Array consisting of Faqpage entity.
      */
     public function addFaqpagesToFaq(Faq $faq, $faqpages) {
         $this->entityManager->transactional(function() use($faq, $faqpages) {
@@ -98,11 +138,18 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param Faqpage $faqpage
+     * Add an faqpage association to an Faq entity.
+     * 
+     * Checks if a duplicate FaqFaqpage exists consisting of the provided $faq
+     * and $faqpage. If not, creates a new FaqFaqpage with the provided $faq and $faqpage,
+     * and adds the new FaqFaqpage to the $faq. The new FaqFaqpage is then added to the
+     * database.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param Faqpage $faqpage Faqpage entity.
      */
     public function addFaqpageToFaq(Faq $faq, Faqpage $faqpage) {
-        // Check if FaqFaqpage row already exists for new subject
+        // Check if FaqFaqpage row already exists for new faqpage
         $duplicate = $this->entityManager
         ->getRepository(FaqFaqpage::class)
         ->findBy(['faq' => $faq, 'faqpage' => $faqpage]);
@@ -121,8 +168,13 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param ArrayCollection|array $faqpages
+     * Remove an array of faqpage associations from an Faq entity.
+     * 
+     * Loops through the $faqpages array and calls FaqService::removeFaqpageFromFaq on
+     * each faqpage.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param ArrayCollection|array $faqpages Array consisting of Faqpage entity.
      */
     public function removeFaqpagesFromFaq(Faq $faq, $faqpages) {
         $this->entityManager->transactional(function() use($faq, $faqpages) {
@@ -133,8 +185,14 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param Faqpage $faqpage
+     * Remove an faqpage association from an Faq entity.
+     * 
+     * Checks if an FaqFaqpage exists consisting of the provided $faq
+     * and $faqpage. If it does, the FaqFaqpage is removed from the $faq
+     * and deleted from the database.
+     * 
+     * @param Faq $faq Faq entity.
+     * @param Faqpage $faqpage Faqpage entity.
      */
     public function removeFaqpageFromFaq(Faq $faq, Faqpage $faqpage) {
         // Check if FaqFaqpage row to be removed exists
@@ -152,8 +210,12 @@ class FaqService {
     }
 
     /**
-     * @param Faq $faq
-     * @param boolean $flush
+     * Deletes an Faq entity and removes any subject or faqpage associations to the Faq.
+     * 
+     * Finds any FaqSubject or FaqFaqpage owned by the $faq and removes them from the 
+     * database before subsequently removing the $faq itself from the database.
+     * 
+     * @param Faq $faq Faq entity.
      */
     public function deleteFaq(Faq $faq) {
         $this->entityManager->transactional(function() use($faq) {
