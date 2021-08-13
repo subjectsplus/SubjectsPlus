@@ -1249,3 +1249,10 @@ yarn-error.log
 /var
 var
 /var/cache/dev/
+
+public/
+public/build/
+public/bundles/
+
+docs/
+.phpdoc/
