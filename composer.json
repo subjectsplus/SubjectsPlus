@@ -13,6 +13,7 @@
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "friendsofsymfony/ckeditor-bundle": "^2.3",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/apache-pack": "^1.0",
         "symfony/browser-kit": "5.3.*",
@@ -36,15 +37,19 @@
         "symfony/yaml": "5.3.*",
         "symfonycasts/verify-email-bundle": "^1.5",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/intl-extra": "^3.3",
+        "twig/twig": "^2.12|^3.0",
+        "scienta/doctrine-json-functions": "~4.3"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^6.5",
+        "dama/doctrine-test-bundle": "^6.6",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "3.*",
+        "symfony/css-selector": "^5.3",
+        "symfony/debug-bundle": "5.3.*",
         "symfony/maker-bundle": "^1.30",
-        "symfony/phpunit-bridge": "^5.2",
-        "symfony/debug-bundle": "5.3.*"
+        "symfony/phpunit-bridge": "^5.2"
     },
     "config": {
         "optimize-autoloader": true,
