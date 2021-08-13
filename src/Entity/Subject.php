@@ -150,7 +150,7 @@ class Subject
     /**
      * Constructor.
      */
-    public function __construct(LoggerInterface $logger)
+    public function __construct(?LoggerInterface $logger)
     {
         $this->staff = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
