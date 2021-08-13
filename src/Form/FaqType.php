@@ -32,6 +32,7 @@ class FaqType extends AbstractType
             ])
             ->add('answer', CKEditorType::class, [
                 'required' => false,
+                'empty_data' => '',
             ])
             ->add('keywords', TextType::class, [
                 'required' => false,
