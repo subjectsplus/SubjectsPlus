@@ -147,12 +147,12 @@ class FaqRepositoryTest extends KernelTestCase
         // Retrieve Subject
         $subject = $this->entityManager
         ->getRepository(Subject::class)
-        ->searchBySubstring("Book a Library Seat", 1);
+        ->findOneBy(['subject' => 'Book a Library Seat', 'active' => 1]);
 
         // Call getFaqsBySubject(<Subject>)
         $faqs = $this->entityManager
         ->getRepository(Faq::class)
-        ->getFaqsBySubject($subject[0]);
+        ->getFaqsBySubject($subject);
 
         $this->assertIsArray($faqs);
     }
@@ -168,12 +168,12 @@ class FaqRepositoryTest extends KernelTestCase
         // Retrieve Subject
         $subject = $this->entityManager
         ->getRepository(Subject::class)
-        ->searchBySubstring("Book a Library Seat", 1);
+        ->findOneBy(['subject' => 'Book a Library Seat', 'active' => 1]);
 
         // Call getFaqsBySubject(<Subject>)
         $faqs = $this->entityManager
         ->getRepository(Faq::class)
-        ->getFaqsBySubject($subject[0]);
+        ->getFaqsBySubject($subject);
 
         $this->assertContainsOnly("\App\Entity\Faq", $faqs);
     }
@@ -189,12 +189,12 @@ class FaqRepositoryTest extends KernelTestCase
         // Retrieve Subject
         $subject = $this->entityManager
         ->getRepository(Subject::class)
-        ->searchBySubstring("Book a Library Seat", 1);
+        ->findOneBy(['subject' => 'Book a Library Seat', 'active' => 1]);
 
         // Call getFaqsBySubject(<Subject>)
         $faqs = $this->entityManager
         ->getRepository(Faq::class)
-        ->getFaqsBySubject($subject[0]);
+        ->getFaqsBySubject($subject);
 
         $faq_id = 107; // populate with faq_id containing "Book a Library Seat" subject
 
@@ -212,12 +212,12 @@ class FaqRepositoryTest extends KernelTestCase
         // Retrieve Subject
         $subject = $this->entityManager
         ->getRepository(Subject::class)
-        ->searchBySubstring("Book a Library Seat", 1);
+        ->findOneBy(['subject' => 'Book a Library Seat', 'active' => 1]);
 
         // Call getFaqsBySubject(<Subject>)
         $faqs = $this->entityManager
         ->getRepository(Faq::class)
-        ->getFaqsBySubject($subject[0]);
+        ->getFaqsBySubject($subject);
 
         $faq_id = 10; // populate with faq_id that does NOT contain "Book a Library Seat" subject
         
@@ -235,12 +235,12 @@ class FaqRepositoryTest extends KernelTestCase
         // Retrieve Subject
         $subject = $this->entityManager
         ->getRepository(Subject::class)
-        ->searchBySubstring("Book a Library Seat", 1);
+        ->findOneBy(['subject' => 'Book a Library Seat', 'active' => 1]);
 
         // Call getFaqsBySubject(<Subject>)
         $faqs = $this->entityManager
         ->getRepository(Faq::class)
-        ->getFaqsBySubject($subject[0]);
+        ->getFaqsBySubject($subject);
 
         $faq_id = 107; // populate with faq_id that contains "Book a Library Seat" subject
         $question = "Are the distinctive collections (Special Collections, Cuban Heritage Collection, University Archives) open for visitors?"; // question from faq_id in database
