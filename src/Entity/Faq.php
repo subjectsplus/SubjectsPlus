@@ -5,12 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use \Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Faq.
  *
  * @ORM\Table(name="faq")
  * @ORM\Entity(repositoryClass="App\Repository\FaqRepository")
+ * 
+ * @UniqueEntity(fields={"question"}, message="Thwarted! Question already exists. Cannot use duplicate questions.")
  */
 class Faq
 {
