@@ -25,10 +25,6 @@ class FaqType extends AbstractType
         $builder
             ->add('question', CKEditorType::class, [
                 'required' => true,
-                'constraints' => [
-                    new NotBlank(),
-                    new NotNull(),
-                ]
             ])
             ->add('answer', CKEditorType::class, [
                 'required' => false,
