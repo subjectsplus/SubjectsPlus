@@ -66,6 +66,7 @@ class FaqType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Faq::class,
+            'validation_groups' => ['Default'],
         ]);
     }
 }
