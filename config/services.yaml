@@ -31,3 +31,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # monolog doctrine handler
+    monolog.db_error_handler:
+        class: App\Logger\MonologDBHandler
+        arguments: ['@doctrine.orm.entity_manager', !php/const Monolog\Logger::ERROR]
+    
+    # monolog processor
+    monolog.processor.request:
+        class: App\Logger\RequestProcessor
+        arguments: ['@request_stack', '@service_container']
+        tags:
+            - { name: monolog.processor, method: processRecord, handler: db_error_handler }
