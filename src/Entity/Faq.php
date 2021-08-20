@@ -4,16 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use \Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Faq.
  *
  * @ORM\Table(name="faq")
  * @ORM\Entity(repositoryClass="App\Repository\FaqRepository")
- * 
- * @UniqueEntity(fields={"question"}, message="Thwarted! Question already exists. Cannot use duplicate questions.")
  */
 class Faq
 {
@@ -30,9 +26,6 @@ class Faq
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=255, nullable=false)
-     * 
-     * @Assert\NotBlank(message="Thwarted! Question field cannot be blank!")
-     * @Assert\NotNull(message="Thwarted! Question field cannot be null!")
      */
     private $question;
 
@@ -40,8 +33,6 @@ class Faq
      * @var string
      *
      * @ORM\Column(name="answer", type="text", length=65535, nullable=false)
-     * 
-     * @Assert\NotNull(message="Thwarted! Answer field cannot be null!")
      */
     private $answer;
 
@@ -56,8 +47,6 @@ class Faq
      * @var bool
      *
      * @ORM\Column(name="active", type="boolean", nullable="false")
-     * 
-     * @Assert\NotNull(message="Thwarted! Active field cannot be null!")
      */
     private $active;
 
@@ -193,5 +182,9 @@ class Faq
     public function getActive(): bool
     {
         return $this->active;
+    }
+
+    public function __toString(): string {
+        return "Entity: Faq, Id: " . $this->getFaqId();
     }
 }
