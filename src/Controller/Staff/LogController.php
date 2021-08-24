@@ -26,38 +26,17 @@ class LogController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // Get the filters through request query
-        $ip = $request->query->get('client_ip');
+        $clientIp = $request->query->get('client_ip');
+        $clientPort = $request->query->get('client_port');
         $uri = $request->query->get('uri');
         $method = $request->query->get('method');
         $level = $request->query->get('level');
         $levelName = $request->query->get('level_name');
-
-        // Set criteria
-        $criteria = [];
-
-        if ($ip !== null) {
-            $criteria['clientIp'] = $ip;
-        }
-        
-        if ($uri !== null) {
-            $criteria['uri'] = $uri;
-        }
-
-        if ($method !== null) {
-            $criteria['method'] = $method;
-        }
-
-        if ($level !== null) {
-            $criteria['level'] = $level;
-        }
-
-        if ($levelName !== null) { 
-           $criteria['levelName'] = $levelName;
-        }
+        $token = $request->query->get('token');
 
         /** @var LogRepository $logRepo */
         $logRepo = $this->getDoctrine()->getRepository(Log::class);
-        $logs = $logRepo->findBy($criteria);
+        $logs = $logRepo->findLogsBy($level, $levelName, $clientIp, $clientPort, $uri, $method, $token);
 
         return $this->render('logs/index.html.twig', [
             'logs' => $logs,
