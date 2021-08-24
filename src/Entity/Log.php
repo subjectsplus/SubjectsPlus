@@ -13,42 +13,73 @@ class Log
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="message", type="text")
      */
     private $message;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(name="context", type="json")
      */
     private $context = [];
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(name="level", type="smallint")
      */
     private $level;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="level_name", type="string", length=255)
      */
     private $levelName;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(name="client_ip", type="string", length=50, nullable=true)
      */
-    private $extra = [];
+    private $clientIp;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(name="client_port", type="smallint", options={})
+     */
+    private $clientPort;
+
+    /**
+     * @ORM\Column(name="method", type="string", length=4)
+     */
+    private $method;
+
+    /**
+     * @ORM\Column(name="uri", type="text")
+     */
+    private $uri;
+
+    /**
+     * @ORM\Column(name="request", type="json")
+     */
+    private $request = [];
+
+    /**
+     * @ORM\Column(name="token", type="string", length=17, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(name="query_string", type="text", nullable=true)
+     */
+    private $queryString;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime_immutable")
      */
     private $createdAt;
 
-    public function __construct()
+    public function __construct(?string $token)
     {
+        $this->token = $token;
         $this->createdAt = new \DateTimeImmutable();
     }
 
@@ -105,14 +136,79 @@ class Log
         return $this;
     }
 
-    public function getExtra(): ?array
+    public function getClientIp(): ?string
     {
-        return $this->extra;
+        return $this->clientIp;
     }
 
-    public function setExtra(array $extra): self
+    public function setClientIp(?string $clientIp): self
     {
-        $this->extra = $extra;
+        $this->clientIp = $clientIp;
+
+        return $this;
+    }
+
+    public function getClientPort(): ?int
+    {
+        return $this->clientPort;
+    }
+
+    public function setClientPort(int $clientPort): self
+    {
+        $this->clientPort = $clientPort;
+
+        return $this;
+    }
+
+    public function getMethod(): ?string
+    {
+        return $this->method;
+    }
+
+    public function setMethod(string $method): self
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    public function getUri(): ?string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri): self
+    {
+        $this->uri = $uri;
+
+        return $this;
+    }
+
+    public function getRequest(): ?array
+    {
+        return $this->request;
+    }
+
+    public function setRequest(array $request): self
+    {
+        $this->request = $request;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function getQueryString(): ?string
+    {
+        return $this->queryString;
+    }
+
+    public function setQueryString(?string $queryString): self
+    {
+        $this->queryString = $queryString;
 
         return $this;
     }

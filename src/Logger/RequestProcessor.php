@@ -33,6 +33,7 @@ class RequestProcessor
             }
             
             if (!$session->isStarted()) {
+                $record['extra']['token'] = null;
                 return $record;
             }
 

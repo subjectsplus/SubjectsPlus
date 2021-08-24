@@ -27,21 +27,26 @@ class MonologDBHandler extends AbstractProcessingHandler
             );
         }
 
-        $logEntry = new Log();
+        $logEntry = new Log($record['extra']['token']);
         $logEntry->setMessage($record['message']);
         $logEntry->setLevel($record['level']);
         $logEntry->setLevelName($record['level_name']);
-        
-        if(is_array($record['extra'])) {
-            $logEntry->setExtra($record['extra']);
-        } else {
-            $logEntry->setExtra([]);
-        }
+        $logEntry->setClientIp($record['extra']['client_ip']);
+        $logEntry->setClientPort($record['extra']['client_port']);
+        $logEntry->setMethod($record['extra']['method']);
+        $logEntry->setUri($record['extra']['uri']);
+        $logEntry->setQueryString($record['extra']['query_string']);
 
         if (is_array($record['context'])) {
             $logEntry->setContext($record['context']);
         } else {
             $logEntry->setContext([]);
+        }
+
+        if (is_array($record['extra']['request'])) {
+            $logEntry->setRequest($record['extra']['request']);
+        } else {
+            $logEntry->setRequest([]);
         }
 
         $this->entityManager->persist($logEntry);
