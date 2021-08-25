@@ -18,55 +18,65 @@ class LogRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Log::class);
     }
-
+    
     /**
-     * Find Log by level, level name, client ip, uri, and/or method.
+     * Find log by criteria; properties levelName, clientIp, clientPort, uri, method, and token
+     * will use the LIKE operator, all other properties will use equality operator.
      *
-     * @param integer|null $level
-     * @param string|null $levelName
-     * @param string|null $clientIp
-     * @param string|null $uri
-     * @param string|null $method
+     * @param array $criteria
+     * @param boolean $allow_null_values
      * @return void
      */
-    public function findLogsBy(?int $level=null, ?string $levelName=null, ?string $clientIp=null, ?int $clientPort=null, 
-        ?string $uri=null, ?string $method=null, ?string $token)
+    public function findLogsBy(array $criteria, bool $allow_null_values=false)
     {
         $query = $this->createQueryBuilder('l')->select('l');
+        $logMetadata = $this->getClassMetadata(Log::class);
 
-        if ($level !== null) {
-            $query->andWhere("l.level = :level");
-            $query->setParameter('level', $level);
-        }
-
-        if ($levelName !== null) {
-            $query->andWhere("l.levelName LIKE :levelName");
-            $query->setParameter('levelName', $levelName);
-        }
-
-        if ($clientIp !== null) {
-            $query->andWhere("l.clientIp LIKE :clientIp");
-            $query->setParameter('clientIp', '%' . $clientIp . '%');
-        }
-
-        if ($clientPort !== null) {
-            $query->andWhere("l.clientPort LIKE :clientPort");
-            $query->setParameter('clientPort', '%' . $clientPort . '%');
-        }
-
-        if ($uri !== null) {
-            $query->andWhere("l.uri LIKE :uri");
-            $query->setParameter('uri', '%' . $uri . '%');
-        }
-
-        if ($method !== null) {
-            $query->andWhere("l.method LIKE :method");
-            $query->setParameter('method', $method);
-        }
-
-        if ($token !== null) {
-            $query->andWhere("l.token LIKE :token");
-            $query->setParameter('token', '%' . $token . '%');
+        foreach ($criteria as $key => $value) {
+            if (!$allow_null_values && $value === null)
+                continue;
+            
+            switch($key) {
+                case 'level':
+                    $query->andWhere("l.level = :level");
+                    $query->setParameter('level', $value);
+                    break;
+                case 'levelName':
+                    $query->andWhere("l.levelName LIKE :levelName");
+                    $query->setParameter('levelName', $value);
+                    break;
+                case 'clientIp':
+                    $query->andWhere("l.clientIp LIKE :clientIp");
+                    $query->setParameter('clientIp', '%' . $value . '%');
+                    break;
+                case 'clientPort':
+                    $query->andWhere("l.clientPort LIKE :clientPort");
+                    $query->setParameter('clientPort', '%' . $value . '%');
+                    break;
+                case 'uri':
+                    $query->andWhere("l.uri LIKE :uri");
+                    $query->setParameter('uri', '%' . $value . '%');
+                    break;
+                case 'method':
+                    $query->andWhere("l.method LIKE :method");
+                    $query->setParameter('method', $value);
+                    break;
+                case 'token':
+                    $query->andWhere("l.token LIKE :token");
+                    $query->setParameter('token', '%' . $value . '%');
+                    break;
+                case 'message':
+                    $query->andWhere("l.message LIKE :message");
+                    $query->setParameter('message', '%' . $value . '%');
+                    break;
+                default:
+                    if ($logMetadata->hasField($key)) {
+                        $query->andWhere(":key = :value");
+                        $query->setParameter('key', 'l.' . $key);
+                        $query->setParameter('value', $value);
+                    }
+                    break;
+            }
         }
 
         return $query->getQuery()->getResult();

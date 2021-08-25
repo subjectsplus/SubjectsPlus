@@ -25,21 +25,34 @@ class LogController extends AbstractController
         // TODO: Check if permissions permit user to interact with logs
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // Get the filters through request query
-        $clientIp = $request->query->get('client_ip');
-        $clientPort = $request->query->get('client_port');
-        $uri = $request->query->get('uri');
-        $method = $request->query->get('method');
-        $level = $request->query->get('level');
-        $levelName = $request->query->get('level_name');
-        $token = $request->query->get('token');
+        // Get the filters through request query and add to criteria
+        $criteria = [];
+
+        $criteria['clientIp'] = $request->query->get('client_ip');
+        $criteria['clientPort'] = $request->query->get('client_port');
+        $criteria['uri'] = $request->query->get('uri');
+        $criteria['method'] = $request->query->get('method');
+        $criteria['level'] = $request->query->get('level');
+        $criteria['levelName'] = $request->query->get('level_name');
+        $criteria['token'] = $request->query->get('token');
+        $criteria['message'] = $request->query->get('message');
 
         /** @var LogRepository $logRepo */
         $logRepo = $this->getDoctrine()->getRepository(Log::class);
-        $logs = $logRepo->findLogsBy($level, $levelName, $clientIp, $clientPort, $uri, $method, $token);
+        $logs = $logRepo->findLogsBy($criteria);
 
         return $this->render('logs/index.html.twig', [
             'logs' => $logs,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="log_show", methods={"GET"})
+     */
+    public function show(Log $log)
+    {
+        return $this->render('logs/show.html.twig', [
+            'log' => $log,
         ]);
     }
 }
