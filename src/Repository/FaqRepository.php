@@ -30,7 +30,7 @@ class FaqRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function getAllFaqsBySubject()
+    public function getAllFaqsBySubject($active=null)
     {
         $results = array();
         
@@ -46,21 +46,24 @@ class FaqRepository extends ServiceEntityRepository
             $subjectId = $subject["subject"];
             $subject = $this->getEntityManager()->find(Subject::class, $subjectId);
             $name = $subject->getSubject();
-            $results[$name] = $this->getFaqsBySubject($subject);
+            $results[$name] = $this->getFaqsBySubject($subject, $active);
         }
 
         return $results;
     }
 
-    public function getFaqsBySubject(Subject $subject)
+    public function getFaqsBySubject(Subject $subject, $active=null)
     {
         $query = $this->baseQuery();
         $query->innerJoin('f.faqSubject', 'fs');
         $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq("fs.subject", $subject)));
+        if ($active !== null && ($active == 0 || $active == 1))
+            $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq("f.active", $active)));
+
         return $query->getQuery()->getResult();
     }
 
-    public function getAllFaqsByCollection()
+    public function getAllFaqsByCollection($active=null)
     {
         $results = array();
 
@@ -75,17 +78,20 @@ class FaqRepository extends ServiceEntityRepository
             $faqPageId = $collection["faqpage"];
             $faqPage = $this->getEntityManager()->find(Faqpage::class, $faqPageId);
             $name = $faqPage->getName();
-            $results[$name] = $this->getFaqsByCollection($faqPage);
+            $results[$name] = $this->getFaqsByCollection($faqPage, $active);
         }
 
         return $results;
     }
 
-    public function getFaqsByCollection(Faqpage $faqPage)
+    public function getFaqsByCollection(Faqpage $faqPage, $active=null)
     {
         $query = $this->baseQuery();
         $query->innerJoin('f.faqFaqpage', 'ffp');
         $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq("ffp.faqpage", $faqPage)));
+        if ($active !== null && ($active == 0 || $active == 1))
+            $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq("f.active", $active)));
+
         return $query->getQuery()->getResult();
     }
 
