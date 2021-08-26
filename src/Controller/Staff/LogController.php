@@ -3,8 +3,7 @@
 namespace App\Controller\Staff;
 
 use App\Entity\Log;
-use App\Entity\Staff;
-use App\Service\ChangeLogService;
+use App\Service\DateTimeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +18,7 @@ class LogController extends AbstractController
      * @Route("/", name="log_index", methods={"GET"})
      * @Route("/index.php", methods={"GET"})
      */
-    public function index(Request $request): Response
+    public function index(Request $request, DateTimeService $dts): Response
     {
         // Check whether user is authenticated
         // TODO: Check if permissions permit user to interact with logs
@@ -36,6 +35,23 @@ class LogController extends AbstractController
         $criteria['levelName'] = $request->query->get('level_name');
         $criteria['token'] = $request->query->get('token');
         $criteria['message'] = $request->query->get('message');
+        
+        // Set and verify the date follows the format. 
+        $format = 'Y-m-d';
+
+        $dateFrom = $request->query->get('date_from');
+        $dateFrom = $dateFrom ? $dts->verifyDate($dateFrom, $format) : null;
+        if ($dateFrom === false) {
+            throw new \InvalidArgumentException("date_from must be in $format format.");
+        }
+
+        $dateTo = $request->query->get('date_to');
+        $dateTo = $dateTo ? $dts->verifyDate($dateTo, $format) : null;
+        if ($dateTo === false) {
+            throw new \InvalidArgumentException("date_to must be in $format format.");
+        }
+
+        $criteria['date_range'] = [$dateFrom, $dateTo];
 
         /** @var LogRepository $logRepo */
         $logRepo = $this->getDoctrine()->getRepository(Log::class);

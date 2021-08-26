@@ -23,6 +23,8 @@ class LogRepository extends ServiceEntityRepository
      * Find log by criteria; properties levelName, clientIp, clientPort, uri, method, and token
      * will use the LIKE operator, all other properties will use equality operator.
      *
+     * Notice: Date format for date_from and date_to are YYYY-MM-DD.
+     * 
      * @param array $criteria
      * @param boolean $allow_null_values
      * @return void
@@ -69,6 +71,22 @@ class LogRepository extends ServiceEntityRepository
                     $query->andWhere("l.message LIKE :message");
                     $query->setParameter('message', '%' . $value . '%');
                     break;
+                case 'date_range':
+                    if ($value[0] !== null && $value[1] !== null) {
+                        // range is from date_from to date_to
+                        $query->andWhere("l.createdAt BETWEEN :date_from AND :date_to");
+                        $query->setParameter('date_from', $value[0]->format('Y-m-d 00:00:00'));
+                        $query->setParameter('date_to', $value[1]->format('Y-m-d 23:59:59'));
+                    } else if ($value[0] !== null && $value[1] === null) {
+                        // range is from date_from
+                        $query->andWhere("l.createdAt >= :date_from");
+                        $query->setParameter('date_from', $value[0]->format('Y-m-d 00:00:00'));
+                    } else if ($value[0] === null && $value[1] !== null) {
+                        // range is up to date_to
+                        $query->andWhere("l.createdAt <= :date_to");
+                        $query->setParameter('date_to', $value[1]->format('Y-m-d 23:59:59'));
+                    }
+                    break;
                 default:
                     if ($logMetadata->hasField($key)) {
                         $query->andWhere(":key = :value");
@@ -78,7 +96,7 @@ class LogRepository extends ServiceEntityRepository
                     break;
             }
         }
-
+        
         return $query->getQuery()->getResult();
     }
 }
