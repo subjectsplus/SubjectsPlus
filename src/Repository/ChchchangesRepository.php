@@ -37,15 +37,18 @@ class ChchchangesRepository extends ServiceEntityRepository
         ->getArrayResult();
     }
 
-    public function getFaqsByStaff(Staff $staff) {
-        return $this->createQueryBuilder('ch')
+    public function getFaqsByStaff(Staff $staff, $activeFaq=null) {
+        $query = $this->createQueryBuilder('ch')
         ->select('f as faq, ch.dateAdded as dateAdded, ch.message as message')
         ->innerJoin('\App\Entity\Faq', 'f', 'WITH', 'f.faqId = ch.recordId')
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.ourtable', 'faq')))
         ->addCriteria(Criteria::create()->where(Criteria::expr()->eq('ch.staff', $staff)))
         ->addCriteria(Criteria::create()->where(Criteria::expr()->neq('ch.message', 'delete')))
-        ->orderBy('dateAdded', 'DESC')
-        ->getQuery()
-        ->getArrayResult();
+        ->orderBy('dateAdded', 'DESC');
+
+        if ($activeFaq !== null && ($activeFaq == 0 || $activeFaq == 1))
+            $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq('f.active', $activeFaq)));
+            
+        return $query->getQuery()->getArrayResult();
     }
 }
