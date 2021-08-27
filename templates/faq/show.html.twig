@@ -5,6 +5,12 @@
 {% block body %}
     <h1>FAQ</h1>
 
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <table class="table">
         <tbody>
             <tr>

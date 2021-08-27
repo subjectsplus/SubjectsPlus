@@ -23,16 +23,23 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class FaqController extends AbstractController
 {
-    // TODO: Validation Package 
     /**
      * @Route("/", name="faq_index", methods={"GET"})
      * @Route("/index.php", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $faqs = $this->getDoctrine()
-            ->getRepository(Faq::class)
-            ->findAll();
+        $activeFlag = $request->query->get('active');
+        
+        if ($activeFlag !== null && ($activeFlag == 0 || $activeFlag == 1)) {
+            $faqs = $this->getDoctrine()
+                ->getRepository(Faq::class)
+                ->findBy(['active' => $activeFlag]);
+        } else {
+            $faqs = $this->getDoctrine()
+                ->getRepository(Faq::class)
+                ->findAll();
+        }
 
         return $this->render('faq/index.html.twig', [
             'faqs' => $faqs,
@@ -92,6 +99,9 @@ class FaqController extends AbstractController
                 $faqId = $faq->getFaqId();
                 $question = $faq->getQuestion();
                 $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
+
+                // Create flash message
+                $this->addFlash('notice', 'Success! Created new Faq!');
             });
 
             return $this->redirectToRoute('faq_show', [
@@ -108,13 +118,15 @@ class FaqController extends AbstractController
     /**
      * @Route("/subjects", name="faq_show_subjects", methods={"GET"})
      */
-    public function displayFaqsBySubjects(): Response {
+    public function displayFaqsBySubjects(Request $request): Response {
         // Get all Faq's by Subject
         /** @var FaqRepository $faqRepo */
         $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
 
+        $activeFlag = $request->query->get('active');
+
         // FORMAT [string: Subject Name] = array: Faq
-        $subject_faqs = $faqRepo->getAllFaqsBySubject();
+        $subject_faqs = $faqRepo->getAllFaqsBySubject($activeFlag);
 
         return $this->render('faq/show_subjects.html.twig', [
             "subject_faqs" => $subject_faqs,
@@ -124,16 +136,18 @@ class FaqController extends AbstractController
     /**
      * @Route("/subject/{subjectId}", name="faq_show_subject", methods={"GET"})
      */
-    public function displayFaqsBySubject(Subject $subject): Response {
+    public function displayFaqsBySubject(Request $request, Subject $subject): Response {
         // Display Faq's for a specific Subject
         $subject_faqs = array();
 
         /** @var FaqRepository $faqRepo */
         $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
 
+        $activeFlag = $request->query->get('active');
+
         // FORMAT [string: Subject Name] = array: Faq
         $subject_faqs[$subject->getSubject()] = $faqRepo
-        ->getFaqsBySubject($subject);
+        ->getFaqsBySubject($subject, $activeFlag);
 
         return $this->render('faq/show_subjects.html.twig', [
             "subject_faqs" => $subject_faqs,
@@ -143,13 +157,15 @@ class FaqController extends AbstractController
     /**
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
-    public function displayFaqsByCollections(): Response {
+    public function displayFaqsByCollections(Request $request): Response {
         // Get all Faq's by Collection/Faqpage
         /** @var FaqRepository $faqRepo */
         $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
 
+        $activeFlag = $request->query->get('active');
+
         // FORMAT [string: Faqpage Name] = array: Faq
-        $collection_faqs = $faqRepo->getAllFaqsByCollection();
+        $collection_faqs = $faqRepo->getAllFaqsByCollection($activeFlag);
 
         return $this->render('faq/show_collections.html.twig', [
             "collection_faqs" => $collection_faqs,
@@ -159,16 +175,18 @@ class FaqController extends AbstractController
     /**
      * @Route("/collection/{faqpageId}", name="faq_show_collection", methods={"GET"})
      */
-    public function displayFaqsByCollection(Faqpage $faqPage): Response {
+    public function displayFaqsByCollection(Request $request, Faqpage $faqPage): Response {
         // Display Faq's for a specific Collection/Faqpage
         $collection_faqs = array();
         
         /** @var FaqRepository $faqRepo */
         $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
 
+        $activeFlag = $request->query->get('active');
+
         // FORMAT [string: Faqpage Name] = array: Faq
         $collection_faqs[$faqPage->getName()] = $faqRepo
-        ->getFaqsByCollection($faqPage);
+        ->getFaqsByCollection($faqPage, $activeFlag);
 
         return $this->render('faq/show_collections.html.twig', [
             "collection_faqs" => $collection_faqs,
@@ -178,12 +196,15 @@ class FaqController extends AbstractController
     /**
      * @Route("/staffmember/{staffId}", name="faq_show_by_staff_member", methods={"GET"})
      */
-    public function displayFaqsByStaffMember(Staff $staff): Response {
+    public function displayFaqsByStaffMember(Request $request, Staff $staff): Response {
         // Get all faqs associated with the staff member
         /** @var ChchchangesRepository $chchchangesRepo */
         $chchchangesRepo = $this->getDoctrine()
         ->getRepository(Chchchanges::class);
-        $faqs = $chchchangesRepo->getFaqsByStaff($staff);
+
+        $activeFlag = $request->query->get('active');
+
+        $faqs = $chchchangesRepo->getFaqsByStaff($staff, $activeFlag);
 
         $staffName = trim($staff->getFName() . ' ' . $staff->getLName());
         $staffEmail = trim($staff->getEmail());
@@ -321,6 +342,9 @@ class FaqController extends AbstractController
                 $faqId = $faq->getFaqId();
                 $question = $faq->getQuestion();
                 $cls->addLog($staff, 'faq', $faqId, $question, 'update');
+
+                // Create flash message
+                $this->addFlash('notice', 'Success! Changes saved to Faq!');
             });
 
             return $this->redirectToRoute('faq_show', [
@@ -360,6 +384,9 @@ class FaqController extends AbstractController
                 /** @var Staff $staff */
                 $staff = $this->getUser();
                 $cls->addLog($staff, 'faq', $faqId, $question, 'delete');
+
+                // Create flash message
+                $this->addFlash('notice', 'Success! Deleted Faq!');
             });
         }
 

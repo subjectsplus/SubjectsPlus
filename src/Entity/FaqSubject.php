@@ -69,4 +69,8 @@ class FaqSubject
 
         return $this;
     }
+
+    public function __toString(): string {
+        return "Entity: FaqSubject, Id: " . $this->getFaqSubjectId();
+    }
 }

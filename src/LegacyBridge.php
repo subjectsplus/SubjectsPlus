@@ -20,14 +20,16 @@ class LegacyBridge
         // some env vars.
         $legacyScriptFilename = '..'.$request->getPathInfo();
 
+        if (!file_exists($legacyScriptFilename))
+            return null;
+            
         if (is_file($legacyScriptFilename)) {
             $_SERVER["PHP_SELF"] = $request->getPathInfo();
             $_SERVER["SCRIPT_FILENAME"] = basename($request->getPathInfo());
-            return $legacyScriptFilename;
         } else {
+            $legacyScriptFilename .= '/index.php';
             $_SERVER["PHP_SELF"] = $request->getPathInfo() .'/index.php';
             $_SERVER["SCRIPT_FILENAME"] = 'index.php';
-            return $legacyScriptFilename.'/index.php';
         }
 
         return $legacyScriptFilename;

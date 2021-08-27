@@ -3,6 +3,12 @@
 {% block title %}FAQs index{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
     <h1>FAQs index</h1>
 
     <a href="{{ path('faq_new') }}">Create new</a>

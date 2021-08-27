@@ -183,4 +183,8 @@ class Faq
     {
         return $this->active;
     }
+
+    public function __toString(): string {
+        return "Entity: Faq, Id: " . $this->getFaqId();
+    }
 }
