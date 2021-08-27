@@ -44,31 +44,38 @@ class LogRepository extends ServiceEntityRepository
                     $query->setParameter('level', $value);
                     break;
                 case 'levelName':
-                    $query->andWhere("l.levelName LIKE :levelName");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.levelName $operator :levelName");
                     $query->setParameter('levelName', $value);
                     break;
                 case 'clientIp':
-                    $query->andWhere("l.clientIp LIKE :clientIp");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.clientIp $operator :clientIp");
                     $query->setParameter('clientIp', '%' . $value . '%');
                     break;
                 case 'clientPort':
-                    $query->andWhere("l.clientPort LIKE :clientPort");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.clientPort $operator :clientPort");
                     $query->setParameter('clientPort', '%' . $value . '%');
                     break;
                 case 'uri':
-                    $query->andWhere("l.uri LIKE :uri");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.uri $operator :uri");
                     $query->setParameter('uri', '%' . $value . '%');
                     break;
                 case 'method':
-                    $query->andWhere("l.method LIKE :method");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.method $operator :method");
                     $query->setParameter('method', $value);
                     break;
                 case 'token':
-                    $query->andWhere("l.token LIKE :token");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.token $operator :token");
                     $query->setParameter('token', '%' . $value . '%');
                     break;
                 case 'message':
-                    $query->andWhere("l.message LIKE :message");
+                    $operator = $value !== null ? 'LIKE' : '=';
+                    $query->andWhere("l.message $operator :message");
                     $query->setParameter('message', '%' . $value . '%');
                     break;
                 case 'date_range':
