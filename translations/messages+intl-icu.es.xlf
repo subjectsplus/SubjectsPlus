@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="es" target-language="es" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="C128DYJ" resname="Trial Databases">
+        <source>Trial Databases</source>
+        <target>Bases de Datos de Prueba</target>
+      </trans-unit>
+      <trans-unit id="QCdxK7x" resname="Database list">
+        <source>Database list</source>
+        <target>Lista de Bases de Datos</target>
+      </trans-unit>
+      <trans-unit id="rnIBH2e" resname="Research Guides">
+        <source>Research Guides</source>
+        <target>Guías de Investigación</target>
+      </trans-unit>
+      <trans-unit id="tZ.5U7l" resname="New Guides">
+        <source>New Guides</source>
+        <target>Nuevas Guías</target>
+      </trans-unit>
+      <trans-unit id="SXQUL_N" resname="Guide Collections">
+        <source>Guide Collections</source>
+        <target>Guía de Colecciones</target>
+      </trans-unit>
+      <trans-unit id="532_55p" resname="%type% Guides">
+        <source>%type% Guides</source>
+        <target>%type% Guías</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="VyzXL_u" resname="Guides">
+        <source>Guides</source>
+        <target>Guías</target>
+      </trans-unit>
+      <trans-unit id="YdKv4jS" resname="Databases">
+        <source>Databases</source>
+        <target>Bases de Datos</target>
+      </trans-unit>
+      <trans-unit id="jB2T5Vn" resname="Staff list">
+        <source>Staff list</source>
+        <target>Lista de personal</target>
+      </trans-unit>
+      <trans-unit id="mFa3Qz_" resname="FAQs">
+        <source>FAQs</source>
+        <target>Preguntas Frecuentes</target>
+      </trans-unit>
+      <trans-unit id="jZTE6Zz" resname="Talkback">
+        <source>Talkback</source>
+        <target>Responde a la Pregunta</target>
+      </trans-unit>
+      <trans-unit id="JC4J84D" resname="New Databases">
+        <source>New Databases</source>
+        <target>Nuevas Bases de Datos</target>
+      </trans-unit>
+      <trans-unit id=".sKsD0z" resname="Edit Profile">
+        <source>Edit Profile</source>
+        <target>Editar Perfil</target>
+      </trans-unit>
+      <trans-unit id="l8P7TIZ" resname="Create New Record">
+        <source>Create New Record</source>
+        <target>Crear un Nuevo Registro</target>
+      </trans-unit>
+      <trans-unit id="vaq8WXp" resname="Create New Guide">
+        <source>Create New Guide</source>
+        <target>Crear una Nueva Guía</target>
+      </trans-unit>
+      <trans-unit id="ZBAqAm." resname="Create New FAQ">
+        <source>Create New FAQ</source>
+        <target>Crear Nuevas Preguntas Frecuentes</target>
+      </trans-unit>
+      <trans-unit id="OvyO74O" resname="Link checker">
+        <source>Link checker</source>
+        <target>Verificador de enlaces</target>
+      </trans-unit>
+      <trans-unit id="PIPUPqY" resname="Choose a guide">
+        <source>Choose a guide</source>
+        <target>Elija una guía</target>
+      </trans-unit>
+      <trans-unit id="pu.M8ln" resname="Select guide">
+        <source>Select guide</source>
+        <target>Seleccione la guía</target>
+      </trans-unit>
+      <trans-unit id="IZxKbIa" resname="Results">
+        <source>Results</source>
+        <target>Resultados</target>
+      </trans-unit>
+      <trans-unit id="R6hOktW" resname="Records">
+        <source>Records</source>
+        <target>Registros</target>
+      </trans-unit>
+      <trans-unit id="OkJqOml" resname="New record">
+        <source>New record</source>
+        <target>Nuevo récord</target>
+      </trans-unit>
+      <trans-unit id="RX6kkLd" resname="Browse items">
+        <source>Browse items</source>
+        <target>Buscar artículos</target>
+      </trans-unit>
+      <trans-unit id="89e4BGQ" resname="Databases by subject">
+        <source>Databases by subject</source>
+        <target>Bases de datos por temas</target>
+      </trans-unit>
+      <trans-unit id="bBGFM.7" resname="New guide">
+        <source>New guide</source>
+        <target>Nueva guía</target>
+      </trans-unit>
+      <trans-unit id="Kbff5xh" resname="Browse guides">
+        <source>Browse guides</source>
+        <target>Buscar guías</target>
+      </trans-unit>
+      <trans-unit id="sx0DNnr" resname="Manage files">
+        <source>Manage files</source>
+        <target>Gestionar archivos</target>
+      </trans-unit>
+      <trans-unit id="tKc2V0D" resname="Stats">
+        <source>Stats</source>
+        <target>Estadísticas</target>
+      </trans-unit>
+      <trans-unit id="Mt7rujS" resname="Create new FAQ (NEW)">
+        <source>Create new FAQ (NEW)</source>
+        <target>Crear un nuevo FAQ (NUEVO)</target>
+      </trans-unit>
+      <trans-unit id="eYxgQHS" resname="View your FAQs (NEW)">
+        <source>View your FAQs (NEW)</source>
+        <target>Vea sus preguntas frecuentes (NUEVO)</target>
+      </trans-unit>
+      <trans-unit id="Lvh.5iK" resname="View FAQ (NEW)">
+        <source>View FAQ (NEW)</source>
+        <target>Ver las preguntas frecuentes (NUEVO)</target>
+      </trans-unit>
+      <trans-unit id="wyeCzgy" resname="View FAQ By Subjects (NEW)">
+        <source>View FAQ By Subjects (NEW)</source>
+        <target>Ver preguntas frecuentes por temas (NUEVO)</target>
+      </trans-unit>
+      <trans-unit id="FeI_YI7" resname="View FAQ By Collections (NEW)">
+        <source>View FAQ By Collections (NEW)</source>
+        <target>Ver preguntas frecuentes por colecciones (NUEVO)</target>
+      </trans-unit>
+      <trans-unit id="PgREtev" resname="New FAQ">
+        <source>New FAQ</source>
+        <target>Nuevas preguntas frecuentes</target>
+      </trans-unit>
+      <trans-unit id="IY1Rhrj" resname="Browse by subject">
+        <source>Browse by subject</source>
+        <target>Buscar por temas</target>
+      </trans-unit>
+      <trans-unit id="E8zxacA" resname="Browse by collection">
+        <source>Browse by collection</source>
+        <target>Buscar por colección</target>
+      </trans-unit>
+      <trans-unit id="yaljlGP" resname="Videos">
+        <source>Videos</source>
+        <target>Videos</target>
+      </trans-unit>
+      <trans-unit id="OLZdaiv" resname="Browse videos">
+        <source>Browse videos</source>
+        <target>Ver vídeos</target>
+      </trans-unit>
+      <trans-unit id="h6a9DVN" resname="Find/ingest video">
+        <source>Find/ingest video</source>
+        <target>Buscar/encontrar un vídeo</target>
+      </trans-unit>
+      <trans-unit id="EfZdqxV" resname="Manually enter video">
+        <source>Manually enter video</source>
+        <target>Introducir manualmente el vídeo</target>
+      </trans-unit>
+      <trans-unit id="wcIksDz" resname="Admin">
+        <source>Admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="Z7aWRoY" resname="Dashboard">
+        <source>Dashboard</source>
+        <target>Tablero de mandos</target>
+      </trans-unit>
+      <trans-unit id="3QLw0Ms" resname="Admin dashboard">
+        <source>Admin dashboard</source>
+        <target>Panel de control de la administración</target>
+      </trans-unit>
+      <trans-unit id="_vHaK6i" resname="Users New">
+        <source>Users New</source>
+        <target>Usuarios Nuevo</target>
+      </trans-unit>
+      <trans-unit id="SBrkRVV" resname="Add new user">
+        <source>Add new user</source>
+        <target>Añadir un nuevo usuario</target>
+      </trans-unit>
+      <trans-unit id="QrjGMv7" resname="Departments New">
+        <source>Departments New</source>
+        <target>Departamentos Nuevo</target>
+      </trans-unit>
+      <trans-unit id="X5SUxNI" resname="Departments">
+        <source>Departments</source>
+        <target>Departamentos</target>
+      </trans-unit>
+      <trans-unit id="PQTtSGj" resname="Manage guides">
+        <source>Manage guides</source>
+        <target>Gestionar guíass</target>
+      </trans-unit>
+      <trans-unit id="SAR0QJ7" resname="Guide collections">
+        <source>Guide collections</source>
+        <target>Colecciones de guías</target>
+      </trans-unit>
+      <trans-unit id="uwe1YLt" resname="Database types">
+        <source>Database types</source>
+        <target>Tipos de bases de datos</target>
+      </trans-unit>
+      <trans-unit id="vJuZaTm" resname="FAQ collections">
+        <source>FAQ collections</source>
+        <target>Colecciones de preguntas frecuentes</target>
+      </trans-unit>
+      <trans-unit id="gNzfBk3" resname="Config site">
+        <source>Config site</source>
+        <target>Configurar el sitio</target>
+      </trans-unit>
+      <trans-unit id="DOqz7OJ" resname="Admin Log">
+        <source>Admin Log</source>
+        <target>Registro de la administración</target>
+      </trans-unit>
+      <trans-unit id="GF_NsyJ" resname="Hello">
+        <source>Hello</source>
+        <target>Hola</target>
+      </trans-unit>
+      <trans-unit id="DiImtSN" resname="Welcome">
+        <source>Welcome</source>
+        <target>Bienvenido</target>
+      </trans-unit>
+      <trans-unit id="i0oZBdG" resname="This friendly message is coming from">
+        <source>This friendly message is coming from</source>
+        <target>Este mensaje amistoso viene de</target>
+      </trans-unit>
+      <trans-unit id="_43haIJ" resname="Your controller at">
+        <source>Your controller at</source>
+        <target>Su controlador en</target>
+      </trans-unit>
+      <trans-unit id="rPGZ2.r" resname="Your template at">
+        <source>Your template at</source>
+        <target>Su plantilla en</target>
+      </trans-unit>
+      <trans-unit id="YrNJlJR" resname="Quick Links">
+        <source>Quick Links</source>
+        <target>Enlaces rápidos</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
