@@ -525,6 +525,18 @@
         <source>Please enter a valid week.</source>
         <target>Por favor, ingrese una semana válida.</target>
       </trans-unit>
+      <trans-unit id="SoADgXp" resname="faq.constraints.question.unique_entity">
+        <source>faq.constraints.question.unique_entity</source>
+        <target>¡Frustrado! La pregunta ya existe. No se pueden utilizar preguntas duplicadas.</target>
+      </trans-unit>
+      <trans-unit id="mzGRjfW" resname="faq.question.not_null">
+        <source>faq.question.not_null</source>
+        <target>¡Frustrado! El campo de la pregunta no debe estar en blanco.</target>
+      </trans-unit>
+      <trans-unit id="picnH94" resname="faq.answer.not_null">
+        <source>faq.answer.not_null</source>
+        <target>¡Frustrado! El campo de respuesta no debe estar en blanco.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
