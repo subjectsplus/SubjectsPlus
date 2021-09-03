@@ -10,7 +10,7 @@
 
 {% block body %}
 
-{% include 'patron/shared/searchbar.html.twig' with {'action': '/subjects/search.php', 'label': 'Find guides'} %}
+{% include 'patron/shared/searchbar.html.twig' with {'action': '/subjects/search.php', 'label': ('Find guides' | trans)} %}
 
 
 <section class="section section-half-top">
@@ -23,12 +23,12 @@
                     <li class="nav-item">
                         <a class="nav-link no-decoration default active" id="show-Collection" name="showCollection" data-toggle="pill"
                         href="#section-Collection" role="tab" aria-controls="section-Collection"
-                        aria-selected="true">{% trans %}Guide Collections{% endtrans %}</a>
+                        aria-selected="true">{% trans %}section.guide_collections{% endtrans %}</a>
                     </li>
                     {% for guideType in guideTypes %}
                         <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#section-{{guideType | replace({' ': '-'})}}" type="button" role="tab" aria-controls="section-{{guideType}}">
-                            {% trans with {'%type%': guideType} %}%type% Guides{% endtrans %}
+                            {% trans with {'%type%': guideType} %}section.guide_type{% endtrans %}
                             </button>
                         </li>
                     {% endfor %}

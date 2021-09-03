@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="es" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="mLJNb0." resname="popular_list.trial_databases">
+        <source>popular_list.trial_databases</source>
+        <target>Trial Databases</target>
+      </trans-unit>
+      <trans-unit id="4Q7dOAj" resname="title.database_list">
+        <source>title.database_list</source>
+        <target>Database lists</target>
+      </trans-unit>
+      <trans-unit id="hNuTeun" resname="heading.research_guides">
+        <source>heading.research_guides</source>
+        <target>Research Guides</target>
+      </trans-unit>
+      <trans-unit id="xFfWCvJ" resname="popular_list.new_guides">
+        <source>popular_list.new_guides</source>
+        <target>New Guides</target>
+      </trans-unit>
+      <trans-unit id="Ws.lr_a" resname="section.guide_collections">
+        <source>section.guide_collections</source>
+        <target>Guide Collections</target>
+      </trans-unit>
+      <trans-unit id="CrwOF_v" resname="section.guide_type">
+        <source>section.guide_type</source>
+        <target>%type% Guides</target>
+      </trans-unit>
+      <trans-unit id="f7zJIGL" resname="header.home">
+        <source>header.home</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="aTlR91a" resname="header.guides">
+        <source>header.guides</source>
+        <target>Guides</target>
+      </trans-unit>
+      <trans-unit id="Y4wO586" resname="header.databases">
+        <source>header.databases</source>
+        <target>Databases</target>
+      </trans-unit>
+      <trans-unit id="4gHhc2o" resname="header.staff_list">
+        <source>header.staff_list</source>
+        <target>Staff list</target>
+      </trans-unit>
+      <trans-unit id="v9TN.32" resname="header.faqs">
+        <source>header.faqs</source>
+        <target>FAQs</target>
+      </trans-unit>
+      <trans-unit id="VEHuRAg" resname="header.talkback">
+        <source>header.talkback</source>
+        <target>Talkback</target>
+      </trans-unit>
+      <trans-unit id="pcLnDJk" resname="popular_list.new_databases">
+        <source>popular_list.new_databases</source>
+        <target>New Databases</target>
+      </trans-unit>
+      <trans-unit id="IqoIvz7" resname="control.dashboard.hello">
+        <source>control.dashboard.hello</source>
+        <target>Hello</target>
+      </trans-unit>
+      <trans-unit id="1ESeN7a" resname="control.dashboard.welcome">
+        <source>control.dashboard.welcome</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id="m_HeL_J" resname="control.dashboard.friendly_message_coming_from">
+        <source>control.dashboard.friendly_message_coming_from</source>
+        <target>This friendly message is coming from</target>
+      </trans-unit>
+      <trans-unit id="AxEFdGk" resname="control.dashboard.your_controller_at">
+        <source>control.dashboard.your_controller_at</source>
+        <target>Your controller at</target>
+      </trans-unit>
+      <trans-unit id="hhDA0Xm" resname="control.dashboard.your_template_at">
+        <source>control.dashboard.your_template_at</source>
+        <target>Your template at</target>
+      </trans-unit>
+      <trans-unit id="RV2LBXZ" resname="header.dashboard">
+        <source>header.dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="DFBCkgF" resname="control.dashboard.edit_profile">
+        <source>control.dashboard.edit_profile</source>
+        <target>Edit Profile</target>
+      </trans-unit>
+      <trans-unit id="GA6NRwR" resname="control.dashboard.quick_links">
+        <source>control.dashboard.quick_links</source>
+        <target>Quick Links</target>
+      </trans-unit>
+      <trans-unit id="2Oy8S9a" resname="control.dashboard.create_new_record">
+        <source>control.dashboard.create_new_record</source>
+        <target>Create New Record</target>
+      </trans-unit>
+      <trans-unit id="2a9t2sP" resname="control.dashboard.create_new_guide">
+        <source>control.dashboard.create_new_guide</source>
+        <target>Create New Guide</target>
+      </trans-unit>
+      <trans-unit id="vviDGCL" resname="control.dashboard.create_new_faq">
+        <source>control.dashboard.create_new_faq</source>
+        <target>Create New FAQ</target>
+      </trans-unit>
+      <trans-unit id="ZIuIunT" resname="control.link_checker">
+        <source>control.link_checker</source>
+        <target>Link checker</target>
+      </trans-unit>
+      <trans-unit id="uMNLbA9" resname="linkchecker.choose_a_guide">
+        <source>linkchecker.choose_a_guide</source>
+        <target>Choose a guide</target>
+      </trans-unit>
+      <trans-unit id="CbzDWbg" resname="link_checker.select_guide">
+        <source>link_checker.select_guide</source>
+        <target>Select guide</target>
+      </trans-unit>
+      <trans-unit id="Vdumz78" resname="link_checker.results">
+        <source>link_checker.results</source>
+        <target>Results</target>
+      </trans-unit>
+      <trans-unit id="J62gEvr" resname="control.header.records">
+        <source>control.header.records</source>
+        <target>Records</target>
+      </trans-unit>
+      <trans-unit id="sfouvFI" resname="control.header.records.new_record">
+        <source>control.header.records.new_record</source>
+        <target>New record</target>
+      </trans-unit>
+      <trans-unit id="a1eFlPx" resname="control.header.records.browse_items">
+        <source>control.header.records.browse_items</source>
+        <target>Browse items</target>
+      </trans-unit>
+      <trans-unit id="O3tjp_Y" resname="control.header.records.databases_by_subject">
+        <source>control.header.records.databases_by_subject</source>
+        <target>Databases by subject</target>
+      </trans-unit>
+      <trans-unit id="QYMJjQL" resname="control.header.guides.new_guide">
+        <source>control.header.guides.new_guide</source>
+        <target>New guide</target>
+      </trans-unit>
+      <trans-unit id="EVTC8m6" resname="control.header.guides.browse_guides">
+        <source>control.header.guides.browse_guides</source>
+        <target>Browse guides</target>
+      </trans-unit>
+      <trans-unit id="5F_jaqd" resname="control.header.guides.manage_files">
+        <source>control.header.guides.manage_files</source>
+        <target>Manage files</target>
+      </trans-unit>
+      <trans-unit id=".M5NV5y" resname="control.header.guides.stats">
+        <source>control.header.guides.stats</source>
+        <target>Stats</target>
+      </trans-unit>
+      <trans-unit id="xQQZp_W" resname="control.header.faqs.create_new_faq">
+        <source>control.header.faqs.create_new_faq</source>
+        <target>Create new FAQ</target>
+      </trans-unit>
+      <trans-unit id="15QX2jT" resname="control.header.faqs.view_your_faqs">
+        <source>control.header.faqs.view_your_faqs</source>
+        <target>View your FAQs</target>
+      </trans-unit>
+      <trans-unit id="g0v_.sm" resname="control.header.faqs.view_faqs">
+        <source>control.header.faqs.view_faqs</source>
+        <target>View FAQ</target>
+      </trans-unit>
+      <trans-unit id="oussNQK" resname="control.header.faqs.view_faqs_by_subject">
+        <source>control.header.faqs.view_faqs_by_subject</source>
+        <target>View FAQ By Subjects</target>
+      </trans-unit>
+      <trans-unit id="PVfj5gy" resname="control.header.faqs.view_faqs_by_collection">
+        <source>control.header.faqs.view_faqs_by_collection</source>
+        <target>View FAQ By Collections</target>
+      </trans-unit>
+      <trans-unit id="_TKGxO2" resname="control.header.admin">
+        <source>control.header.admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="59BhCKY" resname="control.header.admin_dashboard">
+        <source>control.header.admin_dashboard</source>
+        <target>Admin dashboard</target>
+      </trans-unit>
+      <trans-unit id="9ViPiWr" resname="control.header.admin.users">
+        <source>control.header.admin.users</source>
+        <target>Users New</target>
+      </trans-unit>
+      <trans-unit id="9ZDzbLg" resname="control.header.admin.departments">
+        <source>control.header.admin.departments</source>
+        <target>Departments New</target>
+      </trans-unit>
+      <trans-unit id="X1eAE_k" resname="control.header.admin.manage_guides">
+        <source>control.header.admin.manage_guides</source>
+        <target>Manage guides</target>
+      </trans-unit>
+      <trans-unit id="xEyTML4" resname="control.header.admin.guide_collections">
+        <source>control.header.admin.guide_collections</source>
+        <target>Guide collections</target>
+      </trans-unit>
+      <trans-unit id="9NK15bt" resname="control.header.admin.database_types">
+        <source>control.header.admin.database_types</source>
+        <target>Database types</target>
+      </trans-unit>
+      <trans-unit id="75XaUDy" resname="control.header.admin.faq_collections">
+        <source>control.header.admin.faq_collections</source>
+        <target>FAQ collections</target>
+      </trans-unit>
+      <trans-unit id="mQehS7r" resname="control.header.admin.edit_config">
+        <source>control.header.admin.edit_config</source>
+        <target>Config site</target>
+      </trans-unit>
+      <trans-unit id="pob60e1" resname="control.header.admin.logs">
+        <source>control.header.admin.logs</source>
+        <target>Admin Log</target>
+      </trans-unit>
+      <trans-unit id="2dMCNfz" resname="control.header.guides">
+        <source>control.header.guides</source>
+        <target>Guides</target>
+      </trans-unit>
+      <trans-unit id="q0kPNdU" resname="control.header.faqs">
+        <source>control.header.faqs</source>
+        <target>FAQs</target>
+      </trans-unit>
+      <trans-unit id="qoDtjUP" resname="control.header.talkback">
+        <source>control.header.talkback</source>
+        <target>Talkback</target>
+      </trans-unit>
+      <trans-unit id="PgREtev" resname="New FAQ">
+        <source>New FAQ</source>
+        <target>New FAQ</target>
+      </trans-unit>
+      <trans-unit id="IY1Rhrj" resname="Browse by subject">
+        <source>Browse by subject</source>
+        <target>Browse by subject</target>
+      </trans-unit>
+      <trans-unit id="E8zxacA" resname="Browse by collection">
+        <source>Browse by collection</source>
+        <target>Browse by collection</target>
+      </trans-unit>
+      <trans-unit id="yaljlGP" resname="Videos">
+        <source>Videos</source>
+        <target>Videos</target>
+      </trans-unit>
+      <trans-unit id="OLZdaiv" resname="Browse videos">
+        <source>Browse videos</source>
+        <target>Browse videos</target>
+      </trans-unit>
+      <trans-unit id="h6a9DVN" resname="Find/ingest video">
+        <source>Find/ingest video</source>
+        <target>Find/ingest video</target>
+      </trans-unit>
+      <trans-unit id="EfZdqxV" resname="Manually enter video">
+        <source>Manually enter video</source>
+        <target>Manually enter video</target>
+      </trans-unit>
+      <trans-unit id="SBrkRVV" resname="Add new user">
+        <source>Add new user</source>
+        <target>Add new user</target>
+      </trans-unit>
+      <trans-unit id="X5SUxNI" resname="Departments">
+        <source>Departments</source>
+        <target>Departments</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

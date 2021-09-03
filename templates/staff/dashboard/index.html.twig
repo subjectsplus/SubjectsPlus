@@ -9,13 +9,13 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>{{ 'Hello' | trans }} {{ controller_name }}! ✅</h1>
+    <h1>{{ 'control.dashboard.hello' | trans }} {{ controller_name }}! ✅</h1>
 <?php var_dump($session); ?>
-    <p>{{ 'Welcome' | trans }}, {{ app.user.fname }}</p>
-    {{ 'This friendly message is coming from' | trans }} :
+    <p>{{ 'control.dashboard.welcome' | trans }}, {{ app.user.fname }}</p>
+    {{ 'control.dashboard.friendly_message_coming_from' | trans }} :
     <ul>
-        <li>{{ 'Your controller at' | trans }} <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/src/Controller/Staff/DashboardController.php'|file_link(0) }}">src/Controller/Staff/DashboardController.php</a></code></li>
-        <li>{{ 'Your template at' | trans }} <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/templates/staff/dashboard/index.html.twig'|file_link(0) }}">templates/staff/dashboard/index.html.twig</a></code></li>
+        <li>{{ 'control.dashboard.your_controller_at' | trans }} <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/src/Controller/Staff/DashboardController.php'|file_link(0) }}">src/Controller/Staff/DashboardController.php</a></code></li>
+        <li>{{ 'control.dashboard.your_template_at' | trans }} <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/templates/staff/dashboard/index.html.twig'|file_link(0) }}">templates/staff/dashboard/index.html.twig</a></code></li>
     </ul>
 
     <div class="container px-4 py-5" id="hanging-icons">
@@ -33,7 +33,7 @@
                         <li class="list-group-item">{{ app.user.tel }}</li>
                     </ul>
                     <a href="/control/admin/profile.php" class="btn btn-primary">
-                        {{ 'Edit Profile' | trans  }}
+                        {{ 'control.dashboard.edit_profile' | trans  }}
                     </a>
                 </div>
             </div>
@@ -42,11 +42,11 @@
                     <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
                 </div>
                 <div>
-                    <h2>{{ 'Quick Links' | trans }}</h2>
+                    <h2>{{ 'control.dashboard.quick_links' | trans }}</h2>
                     <ul class="list-group">
-                        <li class="list-group-item">{{ 'Create New Record' | trans }}</li>
-                        <li class="list-group-item">{{ 'Create New Guide' | trans }}</li>
-                        <li class="list-group-item">{{ 'Create New FAQ' | trans }}</li>
+                        <li class="list-group-item">{{ 'control.dashboard.create_new_record' | trans }}</li>
+                        <li class="list-group-item">{{ 'control.dashboard.create_new_guide' | trans }}</li>
+                        <li class="list-group-item">{{ 'control.dashboard.create_new_faq' | trans }}</li>
                     </ul>
                 </div>
             </div>
