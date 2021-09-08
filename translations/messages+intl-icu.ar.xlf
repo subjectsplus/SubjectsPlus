@@ -4174,6 +4174,18 @@
         <source>control.header.admin.logs</source>
         <target>__control.header.admin.logs</target>
       </trans-unit>
+      <trans-unit id="v7mzcA." resname="searchbar.find_guides">
+        <source>searchbar.find_guides</source>
+        <target>__searchbar.find_guides</target>
+      </trans-unit>
+      <trans-unit id="pcLnDJk" resname="popular_list.new_databases">
+        <source>popular_list.new_databases</source>
+        <target>__popular_list.new_databases</target>
+      </trans-unit>
+      <trans-unit id="FXKxO1H" resname="control.dashboard">
+        <source>control.dashboard</source>
+        <target>__control.dashboard</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

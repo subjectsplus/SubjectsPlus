@@ -3907,10 +3907,6 @@
         <source>popular_list.new_guides</source>
         <target>__popular_list.new_guides</target>
       </trans-unit>
-      <trans-unit id="2htDRA6" resname="Find guides">
-        <source>Find guides</source>
-        <target>__Find guides</target>
-      </trans-unit>
       <trans-unit id="Ws.lr_a" resname="section.guide_collections">
         <source>section.guide_collections</source>
         <target>__section.guide_collections</target>
@@ -3966,10 +3962,6 @@
       <trans-unit id="hhDA0Xm" resname="control.dashboard.your_template_at">
         <source>control.dashboard.your_template_at</source>
         <target>__control.dashboard.your_template_at</target>
-      </trans-unit>
-      <trans-unit id="Z7aWRoY" resname="Dashboard">
-        <source>Dashboard</source>
-        <target>__Dashboard</target>
       </trans-unit>
       <trans-unit id="DFBCkgF" resname="control.dashboard.edit_profile">
         <source>control.dashboard.edit_profile</source>
@@ -4138,6 +4130,18 @@
       <trans-unit id="pob60e1" resname="control.header.admin.logs">
         <source>control.header.admin.logs</source>
         <target>__control.header.admin.logs</target>
+      </trans-unit>
+      <trans-unit id="v7mzcA." resname="searchbar.find_guides">
+        <source>searchbar.find_guides</source>
+        <target>__searchbar.find_guides</target>
+      </trans-unit>
+      <trans-unit id="pcLnDJk" resname="popular_list.new_databases">
+        <source>popular_list.new_databases</source>
+        <target>__popular_list.new_databases</target>
+      </trans-unit>
+      <trans-unit id="FXKxO1H" resname="control.dashboard">
+        <source>control.dashboard</source>
+        <target>__control.dashboard</target>
       </trans-unit>
     </body>
   </file>

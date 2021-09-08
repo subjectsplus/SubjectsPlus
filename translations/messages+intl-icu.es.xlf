@@ -5,10 +5,6 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="FeI_YI7" resname="View FAQ By Collections (NEW)">
-        <source>View FAQ By Collections (NEW)</source>
-        <target>Ver preguntas frecuentes por colecciones (NUEVO)</target>
-      </trans-unit>
       <trans-unit id="PgREtev" resname="New FAQ">
         <source>New FAQ</source>
         <target>Nuevo FAQ</target>
@@ -260,6 +256,14 @@
       <trans-unit id="qoDtjUP" resname="control.header.talkback">
         <source>control.header.talkback</source>
         <target>Responde a la Pregunta</target>
+      </trans-unit>
+      <trans-unit id="v7mzcA." resname="searchbar.find_guides">
+        <source>searchbar.find_guides</source>
+        <target>Buscar Guías</target>
+      </trans-unit>
+      <trans-unit id="FXKxO1H" resname="control.dashboard">
+        <source>control.dashboard</source>
+        <target>Tablero de mandos</target>
       </trans-unit>
     </body>
   </file>

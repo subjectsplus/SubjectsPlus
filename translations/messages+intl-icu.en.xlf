@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="es" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -27,7 +27,7 @@
       </trans-unit>
       <trans-unit id="CrwOF_v" resname="section.guide_type">
         <source>section.guide_type</source>
-        <target>%type% Guides</target>
+        <target>{type} Guides</target>
       </trans-unit>
       <trans-unit id="f7zJIGL" resname="header.home">
         <source>header.home</source>
@@ -256,6 +256,14 @@
       <trans-unit id="X5SUxNI" resname="Departments">
         <source>Departments</source>
         <target>Departments</target>
+      </trans-unit>
+      <trans-unit id="v7mzcA." resname="searchbar.find_guides">
+        <source>searchbar.find_guides</source>
+        <target>Find Guides</target>
+      </trans-unit>
+      <trans-unit id="FXKxO1H" resname="control.dashboard">
+        <source>control.dashboard</source>
+        <target>Dashboard</target>
       </trans-unit>
     </body>
   </file>
