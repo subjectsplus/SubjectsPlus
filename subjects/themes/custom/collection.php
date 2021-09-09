@@ -114,7 +114,7 @@ $searchbox = '
 
 // Add header now 
 
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 
 // put together our main result display
 
@@ -186,7 +186,7 @@ $layout = makePluslet("", $guide_results, "","",FALSE);
 // Load footer file
 ///////////////////////////
 
-include("includes/footer_custom.php");
+include_once(__DIR__ . "/includes/footer_custom.php");
 
 ?>
 

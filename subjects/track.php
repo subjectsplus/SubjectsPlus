@@ -10,9 +10,9 @@ header("Pragma: no-cache");
 
 echo base64_decode('R0lGODlhAQABAJAAAP8AAAAAACH5BAUQAAAALAAAAAABAAEAAAICBAEAOw==');
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
 
 $db = new Querier;
 $stats = new Stats($db);

@@ -14,28 +14,30 @@ use SubjectsPlus\Control\CompleteMe;
 
 $use_jquery = array("ui"); 
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
 
 $page_title = _("Search Results");
 
 // scrub incoming
-if (isset($_POST["searchterm"])) {
-	$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+if (isset($_GET["searchterm"])) {
+	$_GET["searchterm"] = scrubData($_GET["searchterm"]);
 }
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/search.php"); exit;}
+$this_fname = __DIR__ . "/search.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
-include("includes/header.php");
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
+
 
 // Our search box
-$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60", "");
+$input_box = new CompleteMe("sp_search", $PublicPath . "search.php", "search.php", "", '', "60");
 
-if (isset($_POST["searchterm"])) {
+if (isset($_GET["searchterm"])) {
 	$search = new Search;
-	$search->setSearch($_POST['searchterm']);
+	$search->setSearch($_GET['searchterm']);
 
 	$results = $search->getResults();
 
@@ -53,7 +55,7 @@ if (isset($_POST["searchterm"])) {
 		    break;
 
 		  case 'Subject Guide':
-		    $guides_results[] = "<a href='guide.php?subject_id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
+		    $guides_results[] = "<a href='guide.php?id=" . $result['id'] . "'/>". $result['matching_text'] ."</a>";
 		    break;
 
 		  case 'FAQ':
@@ -97,7 +99,7 @@ if (isset($_POST["searchterm"])) {
 	        }
 	    }
 
-$subtitle = _("Search Results for ") . $_POST['searchterm'];
+$subtitle = _("Search Results for ") . $_GET['searchterm'];
 
 } else {
 	$subtitle = _("No search term entered");
@@ -132,6 +134,6 @@ $subtitle = _("Search Results for ") . $_POST['searchterm'];
 //print "<pre>";
 //print_r($results);
 
-include("includes/footer.php");
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 
 ?>

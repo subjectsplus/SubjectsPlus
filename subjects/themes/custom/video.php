@@ -156,7 +156,7 @@ if ($num_rows) {
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 ?>
 <br />
 <div class="pure-g">
@@ -199,7 +199,7 @@ include("includes/header_custom.php");
 // Load footer file
 ///////////////////////////
 
-include("includes/footer_custom.php");
+include_once(__DIR__ . "/includes/footer_custom.php");
 ?>
 
 <script type="text/javascript" language="javascript">

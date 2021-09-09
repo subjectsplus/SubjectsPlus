@@ -1,0 +1,80 @@
+{% extends 'patron/base.html.twig' %}
+
+{% block title %}Guide{% endblock %}
+
+
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('patron_index') }}
+{% endblock %}
+
+{% block body %}
+
+{% include 'patron/shared/searchbar.html.twig' with {'action': '/subjects/search.php', 'label': 'Find guides'} %}
+
+
+<section class="section section-half-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="pills-container mt-5">
+                    <ul class="nav nav-pills justify-content-around justify-content-md-start" id="pills-tab-guides" role="tablist">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link no-decoration default active" id="show-Collection" name="showCollection" data-toggle="pill"
+                        href="#section-Collection" role="tab" aria-controls="section-Collection"
+                        aria-selected="true">{% trans %}Guide Collections{% endtrans %}</a>
+                    </li>
+                    {% for guideType in guideTypes %}
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#section-{{guideType | replace({' ': '-'})}}" type="button" role="tab" aria-controls="section-{{guideType}}">
+                            {% trans with {'%type%': guideType} %}%type% Guides{% endtrans %}
+                            </button>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-content" id="pills-tabContent-guides">
+                <div class="tab-pane show active mt-4" id="section-Collection" role="tabpanel">
+                    <ul class="two-columns">
+                        {% for collection in collections %}
+                            <li><a href="/subjects/collection.php?d={{collection.shortform}}">{{collection.title | raw}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% for guideType in guideTypes %}
+                     <div class="tab-pane mt-4" id="section-{{guideType | replace({' ': '-'})}}" role="tabpanel">
+                         <ul class="two-columns">
+                             {% set filteredGuides =  guides | filter(g => g['type'] == guideType) %}
+                             {% for guide in filteredGuides %}
+                                 <li><a href="{{ path('guidebyShortname', {shortform: guide.shortform}) }}">{{ guide.subject | raw }}</a></li>
+                             {% endfor %}
+                         </ul>
+                     </div>
+                {% endfor %}
+                </div>
+                </div>
+<!-- TODO: extract the expert bubbles -->
+                <div class="col-lg-4">
+                    <h4 class="mb-2">Find an Expert</h4>
+                    <p>Need help? Ask an expert!</p>
+                    <ul class="people-vertical list-unstyled">
+						                    </ul>
+
+                    <div class="text-center mt-3 mb-3 mb-lg-5"><a
+                                href="http://localhost:8100/subjects/staff.php?letter=Subject Librarians"
+                                class="btn btn-default" role="button">See all experts</a></div>
+
+                    <div class="feature-light popular-list p-3 mt-3">
+                        {% include 'patron/shared/new_databases.html.twig' %}
+                        {% include 'patron/index/new_guides.html.twig' %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+{% endblock %}

@@ -1,0 +1,43 @@
+<nav class="navbar-expand-lg site-navbar-slim-nosliver navbar-dark">
+    <div class="container position-relative">
+        <a class="navbar-brand" href="/">
+        <!-- TODO add a good alt text for the logo -->
+            <img src="{{ asset('build/assets/images/public/logo-placeholder.png') }}" alt="logo" class="d-inline-block d-lg-block">
+        </a>
+        <button class="navbar-toggler js-sidebar-toggler d-block d-lg-none" data-button-options='{"modifiers":"left","wrapText":false}' aria-label="Toggle sidebar">
+            <div class="nav-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="siteNavigation" data-set="bs">
+            <ul class="navbar-nav site-nav js-append-around">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">{{ 'Home' | trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">{{ 'Guides' | trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/subjects/databases.php">{{ 'Databases' | trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/subjects/staff.php">{{ 'Staff list' | trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/subjects/faq.php">{{ 'FAQs' | trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/subjects/talkback.php">{{ 'Talkback' | trans }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

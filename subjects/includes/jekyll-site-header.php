@@ -99,78 +99,6 @@ if (is_null($header_type)
     && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
     && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
     ?>
-	<div class="key-messaging-desktop">
-		<!--Key messaging desktop-->
-		<!--key messaging area-->
-		<div id="keyMessagingArea" style="display: none;">
-			<div class="container">
-				<div class="row no-gutters">
-					<div class="col-sm-11 col-lg-5 col-xl-4 order-sm-first icons-section">
-						<p class="heading">Fall 2020: Book a Library Seat</p>
-						<ul class="list-unstyled d-flex flex-row flex-nowrap icons-area">
-							<li class="icon-holder">
-								<a class="default no-decoration" href="https://www.library.miami.edu/seat">
-									<img src="https://www.library.miami.edu/assets/common-images/special-icons/form-file-icon.svg" alt="Form file icon" class="form-file-icon" />
-									<p><span class="icon-short-label">Online</span><br/>
-										<span class="icon-highlight">Booking</span></p>
-								</a>
-							</li>
-							<li class="icon-holder">
-								<a class="default no-decoration" href="https://libcal.miami.edu/r/checkin">
-									<img src="https://www.library.miami.edu/assets/common-images/special-icons/mobile-code.svg" alt="Mobile code icon" class="mobile-code-icon" />
-									<p><span class="icon-short-label">Online</span><br/>
-										<span class="icon-highlight">Check-In</span></p>
-								</a>
-							</li>
-							<li class="icon-holder">
-								<img src="https://www.library.miami.edu/assets/common-images/special-icons/ban-icon.svg" alt="Ban icon" class="ban-icon" />
-								<p style="vertical-align: super;">Not Allowed<br/>
-									<span class="icon-highlight">Food/Drink</span></p>
-							</li>
-						</ul>
-					</div>
-					<div class="col-11 col-sm-12 col-lg-6 col-xl-7 order-sm-3 order-lg-2 text-section">
-						<ul class="list-unstyled d-md-flex flex-md-row flex-md-nowrap text-holder">
-							<li>
-								<p class="heading"><a href="https://www.library.miami.edu/online-services" class="default">Online Services</a></p>
-								<p>Access library content, research help, teaching support, course reserves & more</p>
-							</li>
-							<li>
-								<p class="heading"><a href="https://www.library.miami.edu/find/request-materials.html" class="default">Request Materials</a></p>
-								<p>Print collections available via pick-up service and Interlibrary Loan</p>
-							</li>
-						</ul>
-					</div>
-					<div class="col-1 order-sm-2 order-lg-last close-column">
-						<div class="close-message-panel">
-							<div class="close-message d-none" title="Close"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<script>
-            $( function(){
-                // Move messaging area based on viewport
-                function moveKeyMessaging() {
-                    var area = $('#keyMessagingArea');
-                    var viewPortWidth = window.innerWidth;
-                    if (viewPortWidth < 990) {
-                        $('.key-messaging-mobile').append(area);
-                    }
-                    else {
-                        $('.key-messaging-desktop').append(area);
-                    }
-                }
-
-                moveKeyMessaging();
-                $( window ).resize(function() {
-                    moveKeyMessaging();
-                });
-            });
-		</script>
-	</div>
 <?php endif; ?>
 <nav class="navbar-expand-lg site-navbar-slim" style="background-color:#3a4955;">
     <div class="container position-relative">
@@ -227,6 +155,7 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Renew your Books (My Account)
 												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/request-materials.html">Request Materials</a></li>
 
 										</ul>
 
@@ -338,7 +267,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/suggest-a-purchase/">Recommend a Purchase
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarly Repository
+											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
@@ -384,10 +313,8 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/index.php">Research Guides
 												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/staff.php?letter=Subject%20Librarians">Subject Librarians
 												</a></li>
-
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/workshops-tutorials.html">Workshops
 												</a></li>
 
@@ -428,7 +355,7 @@ if (is_null($header_type)
 
 
 
-										<h5>Organize & Design</h5>
+										<h5>Organize, Design, Write</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
 
@@ -437,19 +364,11 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Management Strategies
 												</a></li>
-
-										</ul>
-
-
-
-										<h5>Write</h5>
-										<hr align="left" class="hr-decoration">
-										<ul>
-
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
+												</a></li>
 											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-lg-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
 
 										</ul>
-
 									</div>
 
 									<div class="col-12 col-lg-4">
@@ -457,14 +376,14 @@ if (is_null($header_type)
 										<h5>Publish & Promote</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
-
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/ORCID">Create an ORCID iD</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarly Repository
+											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami
 												</a></li>
 
 										</ul>
@@ -672,8 +591,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://sp.library.miami.edu/subjects/book-seat">Book a Library Seat
-													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+											<li><a class="dropdown-item no-decoration cta" href="https://sp.library.miami.edu/subjects/study-rooms">Study Rooms <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/graduate-study.html">Graduate Study Areas
 												</a></li>
@@ -849,7 +767,7 @@ if (is_null($header_type)
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/scholarly-repository2-sm.jpg"  alt="Scholarly Repository" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarly Repository</a>
+													<a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami</a>
 													<div class="mm-lib-time">Online</div>
 												</div>
 											</li>
@@ -966,6 +884,7 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/events.html">Library Events</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/library-exhibitions.html">Library Exhibitions</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://news.miami.edu/libraries/index.html">Library News</a></li>
 

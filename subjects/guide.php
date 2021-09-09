@@ -15,16 +15,13 @@ use SubjectsPlus\Control\SubjectsPlus\Control;
 $use_jquery = array("ui", "ui_styles", "colorbox");  // don't want the UI styles?  remove ui_styles from array
 //$use_jquery = array('sp_legacy');
 
-include("../control/includes/autoloader.php"); // need to use this if header not loaded yet
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php"); // need to use this if header not loaded yet
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
 
-
-
-if ( (isset( $subjects_theme )) && ( ($subjects_theme == 'um-new' || $subjects_theme == 'splux') ) ) {
-	include( "themes/$subjects_theme/guide.php" );
-	exit;
-}
+$this_fname = __DIR__ . "/guide.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
 
 $db = new Querier;
 
@@ -33,6 +30,7 @@ $img_path = $PublicPath . "images";
 
 if( isset( $_GET['subject'] ) ) {
 	$check_this = $_GET['subject'];
+	$id = $_GET['subject'];
 
 } elseif( isset($_GET['id']) ) {
 
@@ -159,27 +157,9 @@ if ($check_this) {
 
 $page_title = $subject_name;
 
-// Do we have an alternate header?
-if (isset ($header_type) && $header_type != 'default') {
-    if( file_exists("includes/header_$header_type.php") )
-    {
-        include("includes/header_$header_type.php");
-    }
-    else
-    {
-        include("includes/header.php");
-    }
-} else {
-    include("includes/header.php");
-}
+// Include header
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme, $header_type));
 
-/*if (in_array($_REQUEST["subject"], $chcGuides)) {
-    include("includes/header_chc.php");
-    $our_site="chc";
-} else {
-    include("includes/header_um.php");
-    $our_site="um";
-}*/
 
 // do we have more than one tab?
 if (count($all_tabs) > 1) {
@@ -191,7 +171,7 @@ if (count($all_tabs) > 1) {
 }
 
 // Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($_GET['subject']) . "&page_title=" . $page_title .
+$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($id) . "&page_title=" . $page_title .
     "\" aria-hidden=\"true\" alt=\"\" />";
 
 print $tracking_image;
@@ -509,17 +489,17 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 
 
 <script>
-<?php include('./includes/js/hash.js'); ?>
-<?php include('./includes/js/track.js'); ?>
-<?php include('./includes/js/tabDropdown.js'); ?>
-<?php include('./includes/js/jquery.scrollTo.js'); ?>
-<?php include('./includes/js/autoComplete.js'); ?>
-<?php include('./includes/js/cloneView.js'); ?>
-<?php include('../assets/js/guides/SubjectSpecialist.js'); ?>
-<?php include('../assets/js/guides/Catalog.js'); ?>
-<?php include('../assets/js/guides/ArticlesPlus.js'); ?>
-<?php include('../assets/js/guides/PrimoSearchBox.js'); ?>
-<?php include('../assets/js/guides/bookList.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/hash.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/track.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/tabDropdown.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/jquery.scrollTo.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/autoComplete.js'); ?>
+<?php include_once(__DIR__ . '/./includes/js/cloneView.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/SubjectSpecialist.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/Catalog.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/ArticlesPlus.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/PrimoSearchBox.js'); ?>
+<?php include_once(__DIR__ . '/../assets/js/guides/bookList.js'); ?>
 
 hash.init();
 track.init();
@@ -571,16 +551,5 @@ cloneView.init();
 // Load footer file
 ///////////////////////////
 
-// Do we have an alternate footer?
-if (isset ($header_type) && $header_type != 'default') {
-    if( file_exists("includes/footer_$header_type.php") )
-    {
-        include("includes/footer_$header_type.php");
-    }
-    else
-    {
-        include("includes/footer.php");
-    }
-} else {
-    include("includes/footer.php");
-}
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme, $header_type));
+

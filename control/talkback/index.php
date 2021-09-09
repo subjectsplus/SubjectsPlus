@@ -14,7 +14,7 @@ $subcat = "talkback";
 $page_title = "Talk Back Admin";
 $default_limit = 25; // # of items to show by default; you can change this!
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 /////////////////
 // See if a filter has been added
@@ -188,7 +188,7 @@ print "</div>"; // close pure-u-1-3
 print "</div>"; // close pure-g
 
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 /////////////////
 // genTalkBacks

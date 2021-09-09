@@ -3,7 +3,7 @@
 $subcat = "guides";
 $page_title = "SP-Blackboard Course Codes Integrations";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 global $lti_enabled;
 if (!$lti_enabled){
@@ -25,4 +25,4 @@ $editSpecialCodeTemplate = $integration->getEditCourseCodeTemplateForm();
 
 include( __DIR__ . "/sp-bb-special-codes/views/sp-bb-codes-main.php");
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");

@@ -145,7 +145,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "Library FAQs";
 }
 
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 
 if ($displaytype == "search") {
 
@@ -377,7 +377,7 @@ print $results; ?>
 </div>
 <?php
 
-include("includes/footer_custom.php");
+include_once(__DIR__ . "/includes/footer_custom.php");
 
 ?>
 <script type="text/javascript">

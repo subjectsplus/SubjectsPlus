@@ -25,7 +25,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
 $feedback = "";
 $no_form = "";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 
@@ -115,7 +115,7 @@ if (!$no_form) {
 
 //$record->deBug();
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 ?>
 
 <script type="text/javascript">

@@ -1,6 +1,6 @@
 {
-  "name": "SubjectsPlus",
-  "version": "4.5.2",
+  "name": "subjectsplus",
+  "version": "5.0.0",
   "description": "SubjectsPlus is a a LAMP/WAMP application that allows you to manage a number of interrelated parts of a library website.",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,24 @@
     "url": "https://github.com/subjectsplus/SubjectsPlus/issues"
   },
   "homepage": "https://github.com/subjectsplus/SubjectsPlus#readme",
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "accessible-autocomplete": "^2.0.3",
+    "bootstrap": "^5.0.0-beta3",
+    "bootstrap-icons": "^1.4.1",
+    "ckeditor4": "^4.16.1",
+    "core-js": "3"
+  },
   "devDependencies": {
+    "@symfony/stimulus-bridge": "2.0.0",
+    "@symfony/webpack-encore": "^1.1.2",
     "auto-changelog": "^1.11.0",
-    "release-it": "^10.0.7"
+    "file-loader": "6.0.0",
+    "jquery": "^3.6.0",
+    "node-sass": "^5.0.0",
+    "popper.js": "^1.16.1",
+    "sass-loader": "^11.0.1",
+    "stimulus": "^2.0.0",
+    "webpack-notifier": "^1.6.0"
   }
 }

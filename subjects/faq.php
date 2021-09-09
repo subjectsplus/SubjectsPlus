@@ -13,12 +13,14 @@ use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\TextTokenizer;
 
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-include("../control/includes/autoloader.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+include_once(__DIR__ . "/../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/faq.php"); exit;}
+$this_fname = __DIR__ . "/faq.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
+
 
 $description = "A searchable, sortable list of Frequently Asked Questions";
 $keywords = "FAQ, FAQs, help, questions";
@@ -148,7 +150,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "Library FAQs";
 }
 
-include("includes/header.php");
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 
 if ($displaytype == "search") {
 
@@ -380,7 +382,7 @@ print $results; ?>
 </div>
 <?php
 
-include("includes/footer.php");
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 
 ?>
 <script type="text/javascript">

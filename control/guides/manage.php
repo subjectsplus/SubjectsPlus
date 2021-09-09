@@ -14,7 +14,7 @@ $subsubcat = "";
 $subcat = "guides";
 $page_title = "Manage Files, Record Associations, etc.";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 //init
 $all_guides = "";
@@ -236,7 +236,7 @@ makePluslet(_("Manage All Items by Source"), $manage_all_box, "no_overflow");
 print "</div>"; // close pure-u-
 print "</div>"; // close pure
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 ////////////////////
 // functions used in the non-find option

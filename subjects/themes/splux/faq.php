@@ -141,7 +141,7 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "FAQs";
 }
 
-include( "includes/header_splux.php" );
+include_once(__DIR__ . "/includes/header_splux.php" );
 
 if ($displaytype == "search") {
 
@@ -381,4 +381,4 @@ foreach ($collections_result as $myrow1) {
 
 <?php
 // footer
-include( "includes/footer_splux.php" ); ?>
+include_once(__DIR__ . "/includes/footer_splux.php" ); ?>

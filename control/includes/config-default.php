@@ -285,7 +285,7 @@ $DelishPath = $PublicPath . "delish_feed.php";
 
 /* Path to the asset folder
    You shouldn't have to modify this */
-$AssetPath = $BaseURL . "assets/";
+$AssetPath = $BaseURL . "/build/assets/";
 
 /* Path to the user folder
    You shouldn't have to modify this */
@@ -390,9 +390,9 @@ $proxyURL = "";
    If your path is wrong, but $ck_installed is set to 1, some pages will throw
    errors */
 
-$CKBasePath = "/sp/ckeditor/";
+$CKBasePath = "/ckeditor3/";
 
-$CKPath = $_SERVER["DOCUMENT_ROOT"] . $CKBasePath . "ckeditor.php"; // used to call the editor
+$CKPath = "ckeditor3/ckeditor.php"; // used to call the editor
 
 /* Set $wysiwyg_desc to "1" if you want a WYSIWYG description field in
    SP::Records.  Requires that above two CK path variables are set correctly. */
@@ -585,6 +585,11 @@ $enforce_https_upload_url = FALSE;
 ////////////////////////////////////////////
 $mapbox_access_token = "";
 $mapbox_home_coords = "";
+
+////////////////////////////////////////////
+// Setting WorldCat Search default URL
+////////////////////////////////////////////
+$worldcat_search_url = 'https://worldcat.org/search';
 
 ////////////////////////////////////////////
 // Chat config vars: LibraryH3lp

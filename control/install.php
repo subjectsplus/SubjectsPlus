@@ -22,7 +22,7 @@ $no_header = "yes";
 $installCheck = 'no';
 $updateCheck = 'no';
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
 
 //logo only header
 displayLogoOnlyHeader();
@@ -184,4 +184,4 @@ if( isInstalled() )
 	}
 }
 
-include_once("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");

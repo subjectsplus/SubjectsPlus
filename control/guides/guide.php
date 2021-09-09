@@ -42,7 +42,7 @@ $tertiary_nav = "yes";
 
 ob_start ();
 
-include ("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 $postvar_subject_id = scrubData ( $_GET ['subject_id'] );
 $this_id = $_GET ["subject_id"];
@@ -65,8 +65,8 @@ if ($canedit == 0) {
 		$no_permission = _ ( "You do not have permission to edit this guide.  Ask the guide's creator to add you as a co-editor." );
 		
 		print noPermission ( $no_permission );
-		
-		include ("../includes/footer.php");
+
+        include_once(__DIR__ . "/../includes/footer.php");
 		exit ();
 	}
 }
@@ -488,7 +488,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 </div>
 <!--end .guide-parent-wrap-->
 
-<script src="../../ckeditor/ckeditor.js"></script>
+<script src="/ckeditor3/ckeditor.js"></script>
 
 <script src="<?php echo getControlURL(); ?>includes/js_custom.php" type="text/javascript"></script>
 
@@ -503,7 +503,7 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
         var ss = subjectSpecialist();
         ss.init();
 
-	    <?php include('../../assets/js/guides/bookList.js'); ?>
+	    <?php include_once('build/assets/js/guides/bookList.js'); ?>
 
         var containers = $(".booklist-content");
         $.each(containers, function() {
@@ -539,4 +539,4 @@ echo "<span id=\"shortform\" data-shortform=\"{$sform[0][0]}\" />";
 </script>
 
 
-<?php include("../includes/guide_footer.php"); ?>
+<?php include_once(__DIR__ . "/../includes/guide_footer.php"); ?>

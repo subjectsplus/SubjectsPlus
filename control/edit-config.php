@@ -10,8 +10,8 @@
  */
 
 use SubjectsPlus\Control\Config;
-if ( file_exists( 'includes/version.php' ) ) {
-	include_once 'includes/version.php';
+if ( file_exists(__DIR__ . '/includes/version.php' ) ) {
+	include_once(__DIR__ . '/includes/version.php');
 }
 
 //variables required in header and add header
@@ -19,14 +19,14 @@ $subcat = "admin";
 $page_title = "Configuration Editing";
 $use_jquery = array( "ui_styles" );
 
-include( "includes/header.php" );
+include_once(__DIR__ . "/includes/header.php" );
 
 
 //new instance of config class
 $lobjConfig = new Config();
 
 //declare variable that stores configuration path
-$lstrConfigFilePath = 'includes/config.php';
+$lstrConfigFilePath = __DIR__ . '/includes/config.php';
 
 
 
@@ -733,6 +733,16 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 			""
 		),
 
+        "worldcat_search_url" => array(
+            _( "WorldCat Search Pluslet URL" ),
+            _( "URL that any search from a WorldCat Search Pluslet will use." ),
+            "string",
+            "catalog",
+            "medium",
+            "",
+            ""
+        ),
+
 		"CKBasePath" => array(
 			_( "Base Path for CKEditor" ),
 			_( "Path to CKEditor files appended to base URL" ),
@@ -1182,7 +1192,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 				//if the mod_rewrite option changed
 				if ( $lobjConfig->isNewModRewrite() ) {
 					//write the approriate .htaccess file to given path
-					$lobjConfig->wrtieModRewriteFile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess' );
+					$lobjConfig->writeModRewriteFile( dirname( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess' );
 				}
 
 			} else {
@@ -1211,7 +1221,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 }
 
 //SubjectsPlus footer
-include( "includes/footer.php" );
+include_once(__DIR__ . "/includes/footer.php" );
 
 //extra css to style tooltip feature
 //javascript for 'not right?' functionality, array ticks functionality, required

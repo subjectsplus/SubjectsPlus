@@ -210,7 +210,7 @@ class Pluslet_SubjectSpecialist extends Pluslet {
         //$oCKeditor->config['ToolbarStartExpanded'] = true;
         $config['toolbar'] = 'TextFormat';
         $config['height'] = '300';
-        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+        $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
         $this_instance = "editor-specialist";
         $ckEditor = $oCKeditor->editor($this_instance,  $body_before_ckEditor, $config);

@@ -2,10 +2,10 @@
 
 use SubjectsPlus\Control\Querier;
 
-include_once( "autoloader.php" );
+require_once(__DIR__ . "/autoloader.php" );
 
-if ( file_exists( "config.php" ) ) {
-	include_once( "config.php" );
+if ( file_exists(__DIR__ . "config.php" ) ) {
+	require_once(__DIR__ . "/config.php" );
 }
 
 
@@ -495,10 +495,6 @@ function scrubData( $string, $type = "text" ) {
 
 	switch ( $type ) {
 		case "text":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			$string = strip_tags( $string );
 			$string = htmlspecialchars( $string, ENT_QUOTES );
 			$config   = HTMLPurifier_Config::createDefault();
@@ -507,10 +503,6 @@ function scrubData( $string, $type = "text" ) {
 			$string   = $purifier->purify( $string );
 			break;
 		case "richtext":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			break;
 		case "richtext_html_purifier":
 			$config   = HTMLPurifier_Config::createDefault();
@@ -519,10 +511,6 @@ function scrubData( $string, $type = "text" ) {
 			$string   = $purifier->purify( $string );
 			break;
 		case "email":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			//removes any tags protecting against javascript injection
 			$string = filter_var( $string, FILTER_SANITIZE_EMAIL );
 
@@ -552,13 +540,28 @@ function blunDer( $message, $type = 1 ) {
 	}
 	print "<p>$message</p>\n";
 	print _( "<p>Please contact the <a href=\"mailto:$administrator\">Administrator</a></p>" );
-	include( "../includes/footer.php" );
+	include_once(__DIR__ . "/../includes/footer.php" );
 	exit();
 }
 
 //////////////
 // Erstwhile guide_functions.php
 ////////////////
+
+function theme_file( $filename, $subjects_theme = null, $header_type = null) {
+	// This works because $header_type is currently only used on files directly in includes/
+	if ( isset($header_type) && $header_type != "" && $header_type != "default" ) {
+		$guide_fname = preg_replace( '/\.php$/', "_$header_type.php", $filename);
+		if ( file_exists($guide_fname) ) return $guide_fname;
+	}
+
+	if ( isset($subjects_theme) && $subjects_theme != "" ) {
+		$theme_fname = "themes/$subjects_theme/$filename";
+		if ( file_exists($theme_fname) ) return $theme_fname;
+	}
+
+	return $filename;
+}
 
 
 function findDescOverride( $subject_id, $title_id ) {
@@ -721,14 +724,12 @@ function seeRecentChanges( $staff_id, $limit = 10 ) {
 		$sq2 = "SELECT ourtable, record_id, record_title, message, date_added
         FROM chchchanges
         WHERE staff_id = '" . $staff_id . "'
-        GROUP BY record_title, message, ourtable
         ORDER BY date_added DESC
         LIMIT 0, $limit";
 	} else {
 		$sq2 = "SELECT ourtable, record_id, record_title, message, date_added, CONCAT( fname, ' ', lname ) AS fullname
         FROM chchchanges, staff
         WHERE chchchanges.staff_id = staff.staff_id
-        GROUP BY record_title, message, ourtable
         ORDER BY date_added DESC
         LIMIT 0 , $limit";
 	}

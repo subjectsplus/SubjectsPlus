@@ -135,7 +135,7 @@ class FAQ {
     global $PublicPath;
     global $guide_types;
 
-    $action = htmlentities($_SERVER['PHP_SELF']) . "?faq_id=" . $this->_faq_id;
+    $action = getControlURL() . "faq/faq.php?faq_id=" . $this->_faq_id;
 
     if ($wintype != "") {
       $action .= "&wintype=pop";
@@ -170,7 +170,7 @@ class FAQ {
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'SubsPlus_Narrow';// Default shows a much larger set of toolbar options
-    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);
 
@@ -341,15 +341,16 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
     $db = new Querier;
 
     // Delete the records from faq and linked tables
-    $q = "DELETE FROM faq WHERE faq_id = '" . $this->_faq_id . "'";
-    
-    $delete_result = $db->exec($q);
+    $q = "DELETE FROM faq WHERE faq_id = :id";
+    $statement = $db->prepareStatement($q, array(
+      ":id" => $this->_faq_id
+    ));
+    $statement->execute();
 
     $this->_debug = "<p>Del query: $q";
 
-    if (count($delete_result) != 0) {
-
-    } else {
+    // check whether any rows were deleted
+    if ($statement->rowCount() == 0) {
       // message
       $this->_message = _("There was a problem with your delete (stage 1 of 2).");
       return FALSE;
@@ -426,7 +427,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 	  keywords = " . $db->quote(scrubData($this->_keywords, 'text')) . "
           WHERE faq_id = " . scrubData($this->_faq_id, 'integer');
 
-    $rUpFAQ = $db->query($qUpFAQ);
+    $rUpFAQ = $db->exec($qUpFAQ);
 
     $this->_debug = "<p>1. update faq: $qUpFAQ</p>";
 
@@ -437,7 +438,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 
     $qClearSubs = "DELETE FROM faq_subject WHERE faq_id = " . $this->_faq_id;
 
-    $rClearSubs = $db->query($qClearSubs);
+    $rClearSubs = $db->exec($qClearSubs);
 
     $this->_debug .= "<p>2. clear rank: $qClearSubs</p>";
 
@@ -453,7 +454,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
 
     // wipe entry from intervening table
     $qClearColls = "DELETE FROM faq_faqpage WHERE faq_id = " . scrubData($this->_faq_id, "integer");
-    $rClearColls = $db->query($qClearColls);
+    $rClearColls = $db->exec($qClearColls);
 
     $this->_debug .= "<p>4. wipe faq_faqpage: $qClearColls</p>";
     if ($rClearColls === FALSE) {
@@ -485,7 +486,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
                 " . scrubData($this->_faq_id, 'integer') . ",
                 " . scrubData($this->_subject[$i], 'integer') . ")";
 
-      $rUpSub = $db->query($qUpSub);
+      $rUpSub = $db->exec($qUpSub);
 
       $this->_debug .= "<p>3. (update faq_subject loop) : $qUpSub</p>";
       if ($rUpSub === FALSE) {
@@ -501,7 +502,7 @@ $last_mod = _("Last modified: ") . lastModded("faq", $this->_faq_id);
                 " . scrubData($this->_faq_id, "integer") . ",
                 " . scrubData($this->_collection[$i], "integer") . ")";
 
-      $rUpColl = $db->query($qUpColl);
+      $rUpColl = $db->exec($qUpColl);
 
       $this->_debug .= "<p>3. (update faq_faqpage loop) : $qUpColl</p>";
       if ($rUpColl === FALSE) {

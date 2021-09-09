@@ -7,11 +7,14 @@
  *   @date Jan 2019
  */
 $page_title = "404 -- Page Not Found";
-include("../control/includes/config.php");
-include("../control/includes/functions.php");
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/blank-404.php"); exit;}
-include("includes/header.php");
+include_once(__DIR__ . "/../control/includes/config.php");
+include_once(__DIR__ . "/../control/includes/functions.php");
+
+$this_fname = __DIR__ . "/blank-404.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include_once($that_fname); exit; }
+
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme));
 ?>
 
   <div class="pure-g">
@@ -39,5 +42,5 @@ include("includes/header.php");
 <?php 
 //print "<pre>";
 //print_r($results);
-include("includes/footer.php");
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme));
 ?>

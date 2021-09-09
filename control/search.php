@@ -1,16 +1,18 @@
 <?php
 
 $page_title = "Search Results";
+$subcat = "home";
 
-include("includes/header.php");
+include_once(__DIR__ . "/includes/header.php");
+use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\Search;
 
 // scrub incoming
-$_POST["searchterm"] = scrubData($_POST["searchterm"]);
+$_GET["searchterm"] = scrubData($_GET["searchterm"]);
 
-if (isset($_POST["searchterm"])) {
+if (isset($_GET["searchterm"])) {
 	$search = new Search;
-	$search->setSearch($_POST['searchterm']);
+	$search->setSearch($_GET['searchterm']);
 
 	$results = $search->getResults();
 
@@ -72,23 +74,39 @@ if (isset($_POST["searchterm"])) {
 	        }
 	    }
 
-$subtitle = _("Search Results for ") . $_POST['searchterm'];
+$subtitle = _("Search Results for ") . $_GET['searchterm'];
 
 } else {
 	$subtitle = _("No search term entered");
 	$search_result =  _("<p>Please search for something with the box above.</p>");
 }
 ?>
+
 <div id="main-content">
-  <div class="pure-g">
-    <div class="pure-u-1-2">
+	<div class="pure-g">
+		<div class="pure-u-1-2">
 
-	<?php
-	
-	makePluslet($subtitle, $search_result, "no_overflow");
-	?> 
+		<?php
+		// Additional Search bar pluslet
+		$search_subtitle = "Search";
+		$input_box = new CompleteMe("sp_search_additional", $CpanelPath . "search.php", "", "", $subcat, "", "private", $_GET["searchterm"]);
+		$input_box_html = $input_box->displayBox(false);
+		makePluslet($search_subtitle, $input_box_html, "no_overflow");
+		
+		?> 
 
-    </div>
+		</div>
+  </div>
+  
+	<div class="pure-g">
+    	<div class="pure-u-1-2">
+
+		<?php
+		// Search Result pluslet
+		makePluslet($subtitle, $search_result, "no_overflow");
+		?> 
+
+    	</div>
   </div>
 </div>
 
@@ -97,6 +115,6 @@ $subtitle = _("Search Results for ") . $_POST['searchterm'];
 //print "<pre>";
 //print_r($results);
 
-include("includes/footer.php");
+include_once(__DIR__ . "/includes/footer.php");
 
 ?>

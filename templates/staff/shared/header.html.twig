@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/control">
+    <!-- TODO add a good alt text for the logo -->
+        <img src="{{ asset('build/assets/images/admin/logo_v3_full.png') }}" alt="logo" class="m-2">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav m-2 me-auto my-lg-0">
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="recordsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{'Records' | trans}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="recordsDropdown">
+                    <li><a class="dropdown-item" href="/control/records/record.php">{{ 'New record' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/records/index.php">{{ 'Browse items' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/records/subject_databases.php">{{ 'Databases by subject' | trans }}</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="guidesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{'Guides' | trans}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="guidesDropdown">
+                    <li><a class="dropdown-item" href="/control/guides/metadata.php">{{ 'New guide' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/guides/index.php">{{ 'Browse guides' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/guides/manage.php">{{ 'Manage files' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="{{ path('staff_link_checker') }}">{{ 'Link checker' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/guides/stats.php">{{ 'Stats' | trans }}</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="faqsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{'FAQs' | trans}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="faqsDropdown">
+                    <li><a class="dropdown-item" href="/control/faq/new">{{ 'Create new FAQ (NEW)' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'View your FAQs (NEW)' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/faq/">{{ 'View FAQ (NEW)' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/faq/subjects">{{ 'View FAQ By Subjects (NEW)' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/faq/collections">{{ 'View FAQ By Collections (NEW)' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/faq/faq.php">{{ 'New FAQ' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=subject">{{ 'Browse by subject' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=holding">{{ 'Browse by collection' | trans }}</a></li>
+                </ul>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link" href="/control/talkback">{{ 'Talkback' | trans }}</a>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="videosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{'Videos' | trans}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="videosDropdown">
+                    <li><a class="dropdown-item" href="/control/videos">{{ 'Browse videos' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/videos/ingest.php">{{ 'Find/ingest video' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/videos/video.php">{{ 'Manually enter video' | trans }}</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{'Admin' | trans}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                    <li><a class="dropdown-item" href="/control/dashboard">{{ 'Dashboard' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/admin">{{ 'Admin dashboard' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/staff">{{ 'Users New' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/admin/user.php?browse=true">{{ 'Add new user' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/department">{{ 'Departments New' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/admin/departments.php">{{ 'Departments' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/admin/manage_guides.php">{{ 'Manage guides' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/admin/guide_collections.php">{{ 'Guide collections' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/admin/sources.php">{{ 'Database types' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/admin/faq_collections.php">{{ 'FAQ collections' | trans }}</a></li>
+                    <li><a class="dropdown-item" href="/control/edit-config.php">{{ 'Config site' | trans }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/control/logs">{{ 'Admin Log' | trans }}</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+</nav>

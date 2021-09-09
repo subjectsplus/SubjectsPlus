@@ -168,7 +168,7 @@ class Record {
   	global $CKBasePath;
   	global $IconPath;
 
-  	$action = htmlentities($_SERVER['PHP_SELF']) . "?record_id=" . $this->_record_id;
+  	$action = getControlURL() . "records/record.php?record_id=" . $this->_record_id;
 
   	if ($wintype != "") {
   		$action .= "&wintype=pop";
@@ -201,14 +201,14 @@ class Record {
   	";
 
   	if ($wysiwyg_desc == 1) {
-  		include($CKPath);
+  		include_once($CKPath);
   		global $BaseURL;
 
   		// Create and output object
   		$oCKeditor = new CKEditor($CKBasePath);
   		$oCKeditor->timestamp = time();
   		$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-  		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+  		$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
   		 $oCKeditor->editor('description', $this->_description, $config);
   		echo "<br />";
@@ -221,14 +221,14 @@ class Record {
     ";
 
     if ($wysiwyg_desc == 1) {
-      include($CKPath);
+      include_once($CKPath);
       global $BaseURL;
 
       // Create and output object
       $oCKeditor = new CKEditor($CKBasePath);
       $oCKeditor->timestamp = time();
       $config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
-      $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+      $config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
        $oCKeditor->editor('internal_notes', $this->_internal_notes, $config);
       echo "<br />";
@@ -529,7 +529,7 @@ class Record {
  			$oCKeditor->timestamp = time();
  			$config['toolbar'] = 'Basic';// Default shows a much larger set of toolbar options
  			$config['height'] = 75;
- 			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+ 			$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
  			echo $oCKeditor->editor('display_note[]', $this->_display_note, $config);
  			echo "<br />";

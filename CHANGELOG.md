@@ -14,6 +14,7 @@
 
 **Closed issues:**
 
+- lib/SubjectsPlus/Control/Record.php [\#1456](https://github.com/subjectsplus/SubjectsPlus/issues/1456)
 - about database connection problem [\#1444](https://github.com/subjectsplus/SubjectsPlus/issues/1444)
 
 **Merged pull requests:**

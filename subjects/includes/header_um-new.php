@@ -52,7 +52,7 @@
 <div class="c-offcanvas-content-wrap">
 
     <!-- Load Jekyll-built site header (UM Sliver, Site Header)-->
-    <?php include("includes/jekyll-site-header.php"); ?>
+    <?php include_once(__DIR__ . "/jekyll-site-header.php"); ?>
 
     <!-- Main Content-->
     <div class="body-slim">
@@ -62,6 +62,5 @@
             && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
             && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
             ?>
-            <div class="key-messaging-mobile d-lg-none"><!--Key messaging mobile--></div>
         <?php endif; ?>
         <main>
