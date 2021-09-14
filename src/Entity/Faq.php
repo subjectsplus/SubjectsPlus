@@ -4,12 +4,17 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use \Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Faq.
  *
  * @ORM\Table(name="faq")
  * @ORM\Entity(repositoryClass="App\Repository\FaqRepository")
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  */
 class Faq
 {
@@ -38,7 +43,7 @@ class Faq
 
     /**
      * @var array|null
-     * 
+     *
      * @ORM\Column(name="keywords", type="json", nullable=true)
      */
     private $keywords;
@@ -51,14 +56,14 @@ class Faq
     private $active;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\FaqSubject", mappedBy="faq")
      */
     private $faqSubject;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\FaqFaqpage", mappedBy="faq")
      */
@@ -126,9 +131,6 @@ class Faq
         return $this;
     }
 
-    public function getFaqSubjects(): ArrayCollection {
-        return $this->faqSubject;
-    }
 
     public function addFaqSubject(FaqSubject $faqSubject): self
     {
@@ -149,9 +151,6 @@ class Faq
         return $this;
     }
 
-    public function getFaqPages(): ArrayCollection {
-        return $this->faqFaqpage;
-    }
 
     public function addFaqFaqpage(FaqFaqpage $faqFaqPage): self
     {
@@ -175,7 +174,7 @@ class Faq
     public function setActive(bool $active): self
     {
         $this->active = $active;
-        
+
         return $this;
     }
 
