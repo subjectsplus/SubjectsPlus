@@ -59,11 +59,16 @@ class Chchchanges
     private $message;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeImmutable
      *
-     * @ORM\Column(name="date_added", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="date_added", type="datetime_immutable")
      */
     private $dateAdded;
+
+    public function __construct()
+    {
+        $this->dateAdded = new \DateTimeImmutable();
+    }
 
     public function getChchchangesId(): ?string
     {
