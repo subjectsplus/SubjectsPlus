@@ -267,7 +267,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/suggest-a-purchase/">Recommend a Purchase
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami
+											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
@@ -383,7 +383,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami
+											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami
 												</a></li>
 
 										</ul>
@@ -767,7 +767,7 @@ if (is_null($header_type)
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/scholarly-repository2-sm.jpg"  alt="Scholarly Repository" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami</a>
+													<a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami</a>
 													<div class="mm-lib-time">Online</div>
 												</div>
 											</li>
