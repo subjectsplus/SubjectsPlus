@@ -452,7 +452,7 @@ if (is_null($header_type)
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Digital Scholars' Lab
 														</a></li>
 
 												</ul>
@@ -575,7 +575,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Information Literacy Lab
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center
@@ -624,7 +624,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Digital Scholars' Lab
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
