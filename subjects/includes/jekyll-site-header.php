@@ -345,7 +345,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data Services
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data & Visualization Services
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/gis">Geospatial Data (GIS)
@@ -449,7 +449,7 @@ if (is_null($header_type)
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data Services
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data & Visualization Services
 														</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Digital Scholars' Lab
