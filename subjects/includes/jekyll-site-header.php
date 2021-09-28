@@ -118,8 +118,8 @@ if (is_null($header_type)
         </button>
 
         <div class="nav-account d-none d-lg-inline-block">
-            <a class="no-decoration mr-3" href="https://www.library.miami.edu/research/ask-a-librarian.html"><i class="fas fa-question-circle"></i> Ask A Librarian</a>
-            <a class="no-decoration account" href="#"><i class="fas fa-user-circle"></i> Accounts</a>
+			<a class="no-decoration mr-5 ask-lib-header" href="https://www.library.miami.edu/research/ask-a-librarian.html" title="Ask A Librarian"><img src="https://www.library.miami.edu/assets/common-images/special-icons/ask2.svg" alt="Ask icon" class="ask-lib-header-icon" />A Librarian</a>
+			<a class="no-decoration account" href="#" title="Accounts"><img src="https://www.library.miami.edu/assets/common-images/special-icons/accounts.svg" alt="Accounts icon" class="accounts-header-icon" />Accounts</a>
         </div>
     </div>
 

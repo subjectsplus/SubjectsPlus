@@ -145,18 +145,19 @@
     </div>
     <div class="container">
         <ul id="toolbarTabs" role="tablist" class="nav nav-tabs d-lg-none">
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true"><i class="fas fa-search"></i> Search</a>
-            </li>
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="hours-tab" data-toggle="tab" href="#hours" role="tab" aria-controls="hours" aria-selected="false"><i class="far fa-clock"></i> Hours</a>
-            </li>
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false"><i class="fas fa-user-circle"></i> Accounts</a>
-            </li>
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="ask" href="https://www.library.miami.edu/research/ask-a-librarian.html" aria-selected="false"><i class="fas fa-question-circle"></i> Ask</a>
-            </li>
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-search" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true"><img src="https://www.library.miami.edu/assets/common-images/special-icons/search.svg" alt="Search icon" id="gtm_toolbarSearchIcon" />Search</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-hours" id="hours-tab" data-toggle="tab" href="#hours" role="tab" aria-controls="hours" aria-selected="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/hours.svg" alt="Hours icon" id="gtm_toolbarHoursIcon" />Hours</a>
+			</li>
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-account" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/accounts.svg" alt="Accounts icon" id="gtm_toolbarAccountsIcon" />Accounts</a>
+			</li>
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-ask" id="ask" href="https://www.library.miami.edu/research/ask-a-librarian.html" aria-selected="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/ask2.svg" alt="Ask icon" id="gtm_toolbarAskIcon" />A Librarian</a>
+			</li>
         </ul>
     </div>
 </section>
