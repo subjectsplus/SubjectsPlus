@@ -12,6 +12,10 @@
                 <td>{{ staff.staffId }}</td>
             </tr>
             <tr>
+                <th>Staff Photo</th>
+                <td><img src="{{ asset('images/users/' ~ staff.staffPhoto.imageName) }}"></td>
+            </tr>
+            <tr>
                 <th>Lname</th>
                 <td>{{ staff.lname }}</td>
             </tr>

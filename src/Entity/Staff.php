@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Staff implements UserInterface, PasswordAuthenticatedUserInterface
+class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     /**
      * @var int
@@ -97,8 +97,6 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(name="access_level", type="integer", nullable=true)
      */
     private $accessLevel;
-
-
 
     /**
      * @var string The hashed password
@@ -288,6 +286,13 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @var StaffPhoto|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\StaffPhoto", inversedBy="staff", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="staffphoto_id", referencedColumnName="staffphoto_id")
+     */
+    private $staffPhoto;
 
     /**
      * Constructor.
@@ -361,8 +366,6 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
 
     public function getStaffSort(): ?int
     {
@@ -784,5 +787,101 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    public function getStaffPhoto(): ?StaffPhoto
+    {
+        return $this->staffPhoto;
+    }
+
+    public function setStaffPhoto(?StaffPhoto $staffPhoto): self
+    {
+        $this->staffPhoto = $staffPhoto;
+
+        return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->staffId,
+            $this->lname,
+            $this->fname,
+            $this->title,
+            $this->tel,
+            $this->department,
+            $this->staffSort,
+            $this->email,
+            $this->ip,
+            $this->accessLevel,
+            $this->password,
+            $this->active,
+            $this->ptags,
+            $this->extra,
+            $this->bio,
+            $this->positionNumber,
+            $this->jobClassification,
+            $this->roomNumber,
+            $this->supervisorId,
+            $this->emergencyContactName,
+            $this->emergencyContactRelation,
+            $this->emergencyContactPhone,
+            $this->streetAddress,
+            $this->city,
+            $this->state,
+            $this->zip,
+            $this->homePhone,
+            $this->cellPhone,
+            $this->fax,
+            $this->intercom,
+            $this->latLong,
+            $this->socialMedia,
+            $this->userType,
+            $this->subject,
+            $this->roles,
+            $this->isVerified,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->staffId,
+            $this->lname,
+            $this->fname,
+            $this->title,
+            $this->tel,
+            $this->department,
+            $this->staffSort,
+            $this->email,
+            $this->ip,
+            $this->accessLevel,
+            $this->password,
+            $this->active,
+            $this->ptags,
+            $this->extra,
+            $this->bio,
+            $this->positionNumber,
+            $this->jobClassification,
+            $this->roomNumber,
+            $this->supervisorId,
+            $this->emergencyContactName,
+            $this->emergencyContactRelation,
+            $this->emergencyContactPhone,
+            $this->streetAddress,
+            $this->city,
+            $this->state,
+            $this->zip,
+            $this->homePhone,
+            $this->cellPhone,
+            $this->fax,
+            $this->intercom,
+            $this->latLong,
+            $this->socialMedia,
+            $this->userType,
+            $this->subject,
+            $this->roles,
+            $this->isVerified,
+        ) = unserialize($serialized);
     }
 }
