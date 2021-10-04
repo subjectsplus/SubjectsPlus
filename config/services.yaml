@@ -43,3 +43,8 @@ services:
         arguments: ['@request_stack', '@service_container']
         tags:
             - { name: monolog.processor, method: processRecord, handler: db_error_handler }
+    
+    # vichuploaderbundle
+    App\EventListener\UploadPostRemoveListener:
+        tags:
+            - { name: kernel.event_listener, event: vich_uploader.post_remove }
