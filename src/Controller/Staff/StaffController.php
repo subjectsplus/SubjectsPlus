@@ -3,6 +3,7 @@
 namespace App\Controller\Staff;
 
 use App\Entity\Staff;
+use App\Entity\Media;
 use App\Form\StaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +41,13 @@ class StaffController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($staff);
+
+            // Set staff for media entity
+            $staffPhoto = $form->get('staffPhoto')->getData();
+            if ($staffPhoto instanceof Media) {
+                $staffPhoto->setStaff($staff);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('staff_index');
@@ -70,6 +78,12 @@ class StaffController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Set staff for media entity
+            $staffPhoto = $form->get('staffPhoto')->getData();
+            if ($staffPhoto instanceof Media) {
+                $staffPhoto->setStaff($staff);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('staff_show', [

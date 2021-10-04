@@ -287,10 +287,10 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
     private $isVerified = false;
 
     /**
-     * @var StaffPhoto|null
+     * @var Media|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\StaffPhoto", inversedBy="staff", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="staffphoto_id", referencedColumnName="staffphoto_id")
+     * @ORM\OneToOne(targetEntity="App\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="media_id")
      */
     private $staffPhoto;
 
@@ -789,12 +789,12 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
         return $this;
     }
 
-    public function getStaffPhoto(): ?StaffPhoto
+    public function getStaffPhoto(): ?Media
     {
         return $this->staffPhoto;
     }
 
-    public function setStaffPhoto(?StaffPhoto $staffPhoto): self
+    public function setStaffPhoto(?Media $staffPhoto): self
     {
         $this->staffPhoto = $staffPhoto;
 

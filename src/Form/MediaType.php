@@ -2,20 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\StaffPhoto;
+use App\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class StaffPhotoType extends AbstractType
+class MediaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('imageFile', VichImageType::class, [
+        $builder->add('file', VichFileType::class, [
             'required' => false,
-            'allow_delete' => true,
-            'delete_label' => 'Remove Image',
+            'allow_delete' => false,
             'image_uri' => true,
             'asset_helper' => true,
         ]);
@@ -24,7 +23,7 @@ class StaffPhotoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => StaffPhoto::class,
+            'data_class' => Media::class,
         ]);
     }
 }
