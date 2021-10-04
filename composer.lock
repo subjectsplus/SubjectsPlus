@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bad441dfa8ea75dec303069e2b28fa1",
+    "content-hash": "0cc189c096e548b14c4a482768fd8949",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4823,16 +4823,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v5.3.7",
+            "version": "v5.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "ae887cb3b044658676129f5e97aeb7e9eb69c2d8"
+                "reference": "a756033d0a7e53db389618653ae991eba5a19a11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/ae887cb3b044658676129f5e97aeb7e9eb69c2d8",
-                "reference": "ae887cb3b044658676129f5e97aeb7e9eb69c2d8",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/a756033d0a7e53db389618653ae991eba5a19a11",
+                "reference": "a756033d0a7e53db389618653ae991eba5a19a11",
                 "shasum": ""
             },
             "require": {
@@ -4886,7 +4886,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v5.3.7"
+                "source": "https://github.com/symfony/mime/tree/v5.3.8"
             },
             "funding": [
                 {
@@ -4902,7 +4902,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-20T11:40:01+00:00"
+            "time": "2021-09-10T12:30:38+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
