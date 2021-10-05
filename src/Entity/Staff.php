@@ -252,7 +252,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
     private $socialMedia;
 
     /**
-     * @var \UserType
+     * @var UserType
      *
      * @ORM\ManyToOne(targetEntity="UserType")
      * @ORM\JoinColumns({
@@ -287,10 +287,10 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
     private $isVerified = false;
 
     /**
-     * @var Media|null
+     * @var MediaAttachment|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Media", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="media_id")
+     * @ORM\OneToOne(targetEntity="App\Entity\MediaAttachment", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="staff_photo_id", referencedColumnName="media_attachment_id")
      */
     private $staffPhoto;
 
@@ -789,12 +789,12 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
         return $this;
     }
 
-    public function getStaffPhoto(): ?Media
+    public function getStaffPhoto(): ?MediaAttachment
     {
         return $this->staffPhoto;
     }
 
-    public function setStaffPhoto(?Media $staffPhoto): self
+    public function setStaffPhoto(?MediaAttachment $staffPhoto): self
     {
         $this->staffPhoto = $staffPhoto;
 

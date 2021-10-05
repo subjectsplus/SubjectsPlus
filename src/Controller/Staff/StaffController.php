@@ -4,6 +4,7 @@ namespace App\Controller\Staff;
 
 use App\Entity\Staff;
 use App\Entity\Media;
+use App\Entity\MediaAttachment;
 use App\Form\StaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,15 +43,23 @@ class StaffController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($staff);
 
-            // Set staff for media entity
-            $staffPhoto = $form->get('staffPhoto')->getData();
-            if ($staffPhoto instanceof Media) {
-                $staffPhoto->setStaff($staff);
+            $staffPhotoAttachment = $form->get('staffPhoto')->getData();
+            if ($staffPhotoAttachment instanceof MediaAttachment) {
+                $media = $staffPhotoAttachment->getMedia();
+
+                // Set staff who uploaded the media file
+                $media->setStaff($staff);
+
+                // create media attachment entry for staff photo
+                $staffPhotoAttachment->setAttachmentType("staff_photo");
+                $staffPhotoAttachment->setAttachmentId($staff->getStaffId());
             }
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('staff_index');
+            return $this->redirectToRoute('staff_show', [
+                'staffId' => $staff->getStaffId(),
+            ]);
         }
 
         return $this->render('staff/new.html.twig', [
@@ -76,15 +85,23 @@ class StaffController extends AbstractController
     {
         $form = $this->createForm(StaffType::class, $staff);
         $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Set staff for media entity
-            $staffPhoto = $form->get('staffPhoto')->getData();
-            if ($staffPhoto instanceof Media) {
-                $staffPhoto->setStaff($staff);
+            
+            $staffPhotoAttachment = $form->get('staffPhoto')->getData();
+            if ($staffPhotoAttachment instanceof MediaAttachment) {
+                $media = $staffPhotoAttachment->getMedia();
+
+                // Set staff who uploaded the media file
+                $media->setStaff($staff);
+
+                // create media attachment entry for staff photo
+                $staffPhotoAttachment->setAttachmentType("staff_photo");
+                $staffPhotoAttachment->setAttachmentId($staff->getStaffId());
             }
 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('staff_show', [
                     'staffId' => $staff->getStaffId(),
@@ -103,6 +120,7 @@ class StaffController extends AbstractController
     public function delete(Request $request, Staff $staff): Response
     {
         if ($this->isCsrfTokenValid('delete'.$staff->getStaffId(), $request->request->get('_token'))) {
+            // TODO: Rather than delete, set a delete timestamp
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($staff);
             $entityManager->flush();

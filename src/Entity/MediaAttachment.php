@@ -22,7 +22,7 @@ class MediaAttachment
     /**
      * @var Media|null
      * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Media", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="media_id")
      */
     private $media;
@@ -53,14 +53,14 @@ class MediaAttachment
         return $this;
     }
 
-    public function getMediaId(): ?int
+    public function getMedia(): ?Media
     {
-        return $this->mediaId;
+        return $this->media;
     }
 
-    public function setMediaId(?int $mediaId): self
+    public function setMedia(?Media $media): self
     {
-        $this->mediaId = $mediaId;
+        $this->media = $media;
 
         return $this;
     }

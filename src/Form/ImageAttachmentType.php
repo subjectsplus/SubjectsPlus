@@ -2,22 +2,17 @@
 
 namespace App\Form;
 
-use App\Entity\Media;
+use App\Entity\MediaAttachment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class ImageType extends AbstractType
+class ImageAttachmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('file', VichImageType::class, [
+        $builder->add('media', ImageType::class, [
             'required' => false,
-            'allow_delete' => false,
-            'download_label' => false,
-            'image_uri' => true,
-            'asset_helper' => true,
             'label' => false,
         ]);
     }
@@ -25,7 +20,7 @@ class ImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Media::class,
+            'data_class' => MediaAttachment::class,
         ]);
     }
 }

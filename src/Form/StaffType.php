@@ -14,7 +14,7 @@ class StaffType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('staffPhoto', ImageType::class)
+            ->add('staffPhoto', ImageAttachmentType::class)
             ->add('lname')
             ->add('fname')
             ->add('title')
