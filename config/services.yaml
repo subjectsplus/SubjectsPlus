@@ -48,3 +48,7 @@ services:
     App\EventListener\UploadPostRemoveListener:
         tags:
             - { name: kernel.event_listener, event: vich_uploader.post_remove }
+    
+    App\Service\DirectoryNamerService:
+        public: true
+
