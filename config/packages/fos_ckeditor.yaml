@@ -3,6 +3,9 @@
 fos_ck_editor:
     base_path: "build/ckeditor"
     js_path:   "build/ckeditor/ckeditor.js"
+    configs:
+        default:
+            toolbar: full
 
 twig:
     form_themes:

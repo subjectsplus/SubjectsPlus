@@ -12,6 +12,13 @@
                 <td>{{ staff.staffId }}</td>
             </tr>
             <tr>
+                <th>Staff Photo</th>
+                <td><img src="
+                {% if staff.staffPhoto is not null %}
+                    {{ asset('uploads/images/' ~ staff.staffPhoto.media.fileName) }}
+                {% endif %}"></td>
+            </tr>
+            <tr>
                 <th>Lname</th>
                 <td>{{ staff.lname }}</td>
             </tr>
