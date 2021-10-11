@@ -379,8 +379,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/ORCID">Create an ORCID iD</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)
 												</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/open-access-publishing.html">Open Access Publishing</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/open-access-and-publishing.html">Open Access and Publishing
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami
