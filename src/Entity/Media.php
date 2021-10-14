@@ -4,14 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="media")
- * @ORM\Entity
- * @Vich\Uploadable
+ * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
  */
-class Media
+class Media implements \Serializable
 {
     /**
      * @ORM\Id
@@ -21,10 +20,6 @@ class Media
     private $mediaId;
 
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @Vich\UploadableField(mapping="media", fileNameProperty="fileName", size="fileSize", mimeType="mimeType")
-     * 
      * @var File|null
      */
     private $file;
@@ -79,11 +74,6 @@ class Media
      */
     private $staff;
 
-    public function __construct()
-    {
-        $this->createdAt =new \DateTimeImmutable();
-    }
-
     public function getMediaId(): ?int
     {
         return $this->mediaId;
@@ -97,8 +87,12 @@ class Media
         $this->file = $file;
 
         if (null !== $file) {
-            $this->updatedAt = new \DateTimeImmutable();
-            $this->deletedAt = null;
+            if ($this->createdAt !== null) {
+                $this->updatedAt = new \DateTimeImmutable();
+                $this->deletedAt = null;
+            } else {
+                $this->createdAt = new \DateTimeImmutable();
+            }
         }
     }
 
@@ -172,4 +166,22 @@ class Media
     {
         return $this->mimeType;
     }
+
+      /** @see \Serializable::serialize() */
+      public function serialize()
+      {
+          return serialize(array(
+              $this->mediaId,
+              $this->file,
+          ));
+      }
+  
+      /** @see \Serializable::unserialize() */
+      public function unserialize($serialized)
+      {
+          list (
+            $this->mediaId,
+            $this->file,
+          ) = unserialize($serialized, array('allowed_classes' => false));
+      }
 }
