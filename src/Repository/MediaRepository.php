@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\MediaAttachment;
+use App\Entity\Media;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method MediaAttachment|null find($id, $lockMode = null, $lockVersion = null)
- * @method MediaAttachment|null findOneBy(array $criteria, array $orderBy = null)
- * @method MediaAttachment[]    findAll()
- * @method MediaAttachment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Media|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Media|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Media[]    findAll()
+ * @method Media[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MediaAttachmentRepository extends ServiceEntityRepository
+class MediaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MediaAttachment::class);
+        parent::__construct($registry, Media::class);
     }
 
     // /**
-    //  * @return MediaAttachment[] Returns an array of MediaAttachment objects
+    //  * @return Media[] Returns an array of Media objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class MediaAttachmentRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?MediaAttachment
+    public function findOneBySomeField($value): ?Media
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.exampleField = :val')
