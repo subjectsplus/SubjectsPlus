@@ -26,17 +26,13 @@ App\Entity\Media:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
             fields: [fileName]
             message: 'media.constraints.file_name.unique_entity'
-            groups: ['Default', 'image', 'generic']
     properties:
         file:
             - Image:
-                mimeTypes: ['image/png']
+                mimeTypes: ['image/*']
                 groups: ['image']
             - File:
                 # do not include images for generic, use image group
                 mimeTypes: ['application/*', 'audio/*', 'text/*']
                 groups: ['generic']
-        fileName:
-          - NotNull: 
-              message: 'media.file_name.not_null'
         
