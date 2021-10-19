@@ -74,6 +74,13 @@ class Media implements \Serializable
      */
     private $staff;
 
+    /**
+     * string|null
+     * 
+     * @ORM\Column(name="title", type="string", nullable=true)
+     */
+    private $title = "Untitled";
+
     public function getMediaId(): ?int
     {
         return $this->mediaId;
@@ -167,21 +174,33 @@ class Media implements \Serializable
         return $this->mimeType;
     }
 
-      /** @see \Serializable::serialize() */
-      public function serialize()
-      {
-          return serialize(array(
-              $this->mediaId,
-              $this->file,
-          ));
-      }
-  
-      /** @see \Serializable::unserialize() */
-      public function unserialize($serialized)
-      {
-          list (
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
             $this->mediaId,
             $this->file,
-          ) = unserialize($serialized, array('allowed_classes' => false));
-      }
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+        $this->mediaId,
+        $this->file,
+        ) = unserialize($serialized, array('allowed_classes' => false));
+    }
 }
