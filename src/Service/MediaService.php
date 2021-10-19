@@ -4,12 +4,13 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
 
-class UploadService {
+class MediaService {
 
     private $entityManager;
     private $fileNamer;
@@ -49,6 +50,23 @@ class UploadService {
         return ['file' => $file, 'fileName' => $name, 'url' => $publicDestination . $name];
     }
 
+    public function getRelativeUrlFromMedia(Media $media) { 
+        $mimeType = $media->getMimeType();
+
+        if ($mimeType === null) return null;
+
+        $subDirName = $this->fileNamer->getSubDirectoryFromMimeType($mimeType);
+        $publicDestination = join(DIRECTORY_SEPARATOR, [
+            $this->uploadDestination, 
+            $subDirName
+        ]);
+        $fileName = $media->getFileName();
+        $relativeUrl = sprintf("%s/%s", $publicDestination, $fileName);
+
+        return $relativeUrl;
+
+    }
+
     public function createMedia(?string $fileName = null, ?File $file = null, ?Staff $uploader = null)
     {
         $media = new Media();
@@ -68,11 +86,30 @@ class UploadService {
         return $media;
     }
 
-    public function createMediaAttachment(?string $attachmentType,  ?int $mediaAttachmentId)
+    public function createMediaAttachment(?Media $media, ?string $attachmentType,  ?int $attachmentId)
     {
         $mediaAttachment = new MediaAttachment();
+        $mediaAttachment->setMedia($media);
+        $mediaAttachment->setAttachmentType($attachmentType);
+        $mediaAttachment->setAttachmentId($attachmentId);
+        return $mediaAttachment;
+    }
 
-        //$mediaAttachment->setMediaAttachmentId();
+    public static function determineValidationGroups(FormInterface $form)
+    {
+        $fileData = $form->get('file')->getData();
+
+        if ($fileData instanceof File) {
+            $mimeType = $fileData->getMimeType();
+            if ($mimeType !== null) {
+                if (strpos($mimeType, "image/") !== false) {
+                    return ['image'];
+                } else {
+                    return ['generic'];
+                }
+            }
+        }
+        return ['Default'];
     }
 
     public function storeImageAssetsFromHTML(string $html, string $attachmentType, int $attachmentId) {
@@ -97,8 +134,8 @@ class UploadService {
                 if ($media) {
                     $mediaAttachment = new MediaAttachment();
                     $mediaAttachment->setMedia($media);
-                    $mediaAttachment->setAttachmentType('faq');
-                    $mediaAttachment->setAttachmentId($faq->getFaqId());
+                    $mediaAttachment->setAttachmentType($attachmentType);
+                    $mediaAttachment->setAttachmentId($attachmentId);
                     $this->entityManager->persist($mediaAttachment);
                 } else {
                     // check if file exists
