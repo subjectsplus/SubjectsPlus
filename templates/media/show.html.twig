@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Media{% endblock %}
+
+{% block body %}
+    {% for error in app.flashes('error') %}
+        <div class="flash-error">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ media.title }}</td>
+            </tr>
+            {% if type == 'image' %}
+                <tr>
+                    <th>Image<th>
+                    <td><img src="{{ asset(url) }}" /></td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>MimeType</th>
+                <td>{{ media.mimeType }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td><a href="{{ url }}">Link to Media</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('media_upload') }}">back to upload</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Details To Upload{% endblock %}
+
+{% block body %}
+    {% for error in app.flashes('error') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {{ include('media/_form.html.twig') }} 
+{% endblock %}
