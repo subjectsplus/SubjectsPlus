@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Media;
+use App\Service\MediaService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +13,9 @@ class MediaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('file', FileType::class, [
+        $builder
+        ->add('title')
+        ->add('file', FileType::class, [
             'required' => true,
             'label' => 'Select File',
         ]);
@@ -22,6 +25,10 @@ class MediaType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Media::class,
+            'validation_groups' => [
+                MediaService::class,
+                'determineValidationGroups',
+            ]
         ]);
     }
 }
