@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Media;
+use App\Entity\Staff;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,35 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
-    // /**
-    //  * @return Media[] Returns an array of Media objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Staff $staff The staff member
+     * @param string $mediaType Type of media to query (all, image, generic)
+     * @return Media[] Returns an array of Media objects from Staff
+     */
+    public function findByStaff(Staff $staff, string $mediaType = 'all')
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $query = $this->createQueryBuilder('m')
+        ->select('m');
 
-    /*
-    public function findOneBySomeField($value): ?Media
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        switch($mediaType) {
+            case 'image':
+                $query = $query->andWhere($query->expr()->eq(
+                    $query->expr()->substring('m.mimeType', 1, 6),
+                    $query->expr()->literal("image/")
+                ));
+                break;
+            case 'generic':
+                $query = $query->andWhere($query->expr()->neq(
+                    $query->expr()->substring('m.mimeType', 1, 6),
+                    $query->expr()->literal("image/")
+                ));
+                break;
+        }
+
+        $query = $query->andWhere('m.staff = :staff')
+        ->setParameter('staff', $staff)
+        ->orderBy('m.createdAt', 'DESC');
+
+        return $query->getQuery()->getResult();
     }
-    */
 }
