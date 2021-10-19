@@ -5,11 +5,13 @@ namespace App\Controller\Staff;
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
+use App\Repository\MediaRepository;
 use App\Form\ImageType;
 use App\Form\ImageAttachmentType;
 use App\Form\MediaType;
+use App\Form\MediaEditType;
 use App\Form\CKEditorImageUploadType;
-use App\Service\UploadService;
+use App\Service\MediaService;
 use App\Service\ValidationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,28 +65,20 @@ class MediaController extends AbstractController
     /**
      * @Route("/upload", name="media_upload")
      */
-    public function upload(Request $request, UploadService $uploader, ValidationService $validation, LoggerInterface $logger): Response
+    public function upload(Request $request, MediaService $uploader, ValidationService $validation, LoggerInterface $logger, string $uploadDestination): Response
     {
         
         $logger->info("Connected to media_upload route.");
-
-        $type = $request->query->get('type');
-        $validation_groups = [];
-
-        if ($type === 'image') {
-            $validation_groups[] = 'image';
-        } else {
-            // generic file
-            $validation_groups[] = 'generic';
-        }
-
-        $logger->info(implode(',', $validation_groups));
+       
+        /** @var Staff $staff */
+        $staff = $this->getUser();
+        /** @var MediaRepository $mediaRepo */
+        $mediaRepo = $this->getDoctrine()->getRepository(Media::class);
+        $staffMedia = $mediaRepo->findByStaff($staff); // all media owned by staff member
 
         $media = new Media();
 
-        $form = $this->createForm(MediaType::class, $media, [
-            'validation_groups' => $validation_groups,
-        ]);
+        $form = $this->createForm(MediaType::class, $media);
         $form->handleRequest($request);
 
         $logger->info("Created form.");
@@ -97,8 +91,6 @@ class MediaController extends AbstractController
 
             /** @var UploadedFile $upload */
             $upload = $form->get('file')->getData();
-            /** @var Staff $staff */
-            $staff = $this->getUser();
 
             // Upload file to file server
             $uploadResults = $uploader->uploadFile($upload);
@@ -113,19 +105,54 @@ class MediaController extends AbstractController
             
             $entityManager->persist($media);
             $entityManager->flush();
+
+            return $this->redirectToRoute("media_show", [
+                "mediaId" => $media->getMediaId(),
+            ]);
         }
         
         return $this->render('media/upload.html.twig', [
             'form' => $form->createView(),
             'button_label' => 'Upload File',
+            'staff_media' => $staffMedia,
+            'relative_url' => $uploadDestination,
         ]);
     }
 
-    // /**
-    //  * @Route("/upload/add_details", name="media_upload_add_details")
-    //  */
-    // public function addDetails(Request $request)
-    // {
+    /**
+     * @Route("/{mediaId}", name="media_show")
+     */
+    public function show(Request $request, Media $media, MediaService $uploader)
+    {
+        $url = $uploader->getRelativeUrlFromMedia($media);
+        $mimeType = $media->getMimeType();
+        $type = 'generic';
 
-    // } 
+        if (strpos($mimeType, "image/") !== false)
+            $type = 'image';
+
+        return $this->render('media/show.html.twig', [
+            'media' => $media,
+            'url' => $url,
+            'type' => $type,
+        ]);
+    }
+
+    /**
+     * @Route("/{mediaId}/edit", name="media_edit")
+     */
+    public function edit(Request $request, Media $media): Response
+    {
+        $form = $this->createForm(MediaEditType::class, $media);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render('media/edit.html.twig', [
+            'media' => $media,
+            'form' => $form->createView(),
+        ]);
+    } 
 }
