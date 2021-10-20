@@ -22,32 +22,46 @@ class MediaService {
     {
         $this->entityManager = $entityManager;
         $this->fileNamer = $fileNamer;
-        $this->projectDir = $projectDir;
-        $this->uploadDestination = $uploadDestination;
+        $this->projectDir = rtrim($projectDir, "/\\");
+        $this->uploadDestination = rtrim($uploadDestination, "/\\");
     }
 
     public function uploadFile(UploadedFile $file) {
         // todo: check if file has already been uploaded before
-        // todo: create a file namer service
-        // todo: file validation
         // todo: exception handling
         // todo: doctrine transactions
         
         // move file to upload destination
         $name = $this->fileNamer->fileName($file);
-        $subDirName = $this->fileNamer->directoryName($file);
+        $subDirName = rtrim($this->fileNamer->directoryName($file), "/\\");
         $publicDestination = join(DIRECTORY_SEPARATOR, [
-            $this->uploadDestination, 
+            $this->uploadDestination,
             $subDirName
         ]);
         $absDestination = join(DIRECTORY_SEPARATOR, [
             $this->projectDir, 
-            'public/',
+            'public',
             $publicDestination,
         ]);
+
+        // do not upload until file name is unique
+        /** @var \App\Repository\MediaRepository $mediaRepo */
+        $mediaRepo = $this->entityManager->getRepository(Media::class);
+
+        while ($mediaRepo->findOneBy(['file_name' => $name]) !== null) {
+            $name = $this->fileNamer->fileName($file);
+        }
+
+        // full absolute path of new file upload
+        $path = join(DIRECTORY_SEPARATOR, [
+            $absDestination,
+            $name
+        ]);
+
+        // move file to absolute upload destination from tmp directory
         $file = $file->move($absDestination, $name);
 
-        return ['file' => $file, 'fileName' => $name, 'url' => $publicDestination . $name];
+        return ['file' => $file, 'fileName' => $name, 'path' => $path, 'url' => $publicDestination . $name];
     }
 
     public function getRelativeUrlFromMedia(Media $media) { 
