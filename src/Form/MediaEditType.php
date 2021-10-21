@@ -11,7 +11,16 @@ class MediaEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title');
+        $builder
+        ->add('title', null, [
+            'label' => 'Title',
+        ])
+        ->add('caption', null, [
+            'label' => 'Caption'
+        ])
+        ->add('altText', null, [
+            'label' => 'Alt Text'
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

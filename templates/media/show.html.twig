@@ -12,17 +12,25 @@
         <tbody>
             <tr>
                 <th>Title</th>
-                <td>{{ media.title }}</td>
+                <td>{{ media.title|default('N/A') }}</td>
+            </tr>
+            <tr>
+                <th>Caption</th>
+                <td>{{ media.caption|default('N/A') }}</td>
+            </tr>
+            <tr>
+                <th>Alt Text</th>
+                <td>{{ media.altText|default('N/A') }}</td>
             </tr>
             {% if type == 'image' %}
                 <tr>
                     <th>Image<th>
-                    <td><img src="{{ asset(url) }}" /></td>
+                    <td><img src="{{ asset(url) }}" height="200px" width="200px"/></td>
                 </tr>
             {% endif %}
             <tr>
                 <th>MimeType</th>
-                <td>{{ media.mimeType }}</td>
+                <td>{{ media.mimeType|default('N/A') }}</td>
             </tr>
             <tr>
                 <th>Link</th>
