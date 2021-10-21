@@ -27,41 +27,46 @@ class MediaService {
     }
 
     public function uploadFile(UploadedFile $file) {
-        // todo: check if file has already been uploaded before
-        // todo: exception handling
-        // todo: doctrine transactions
-        
-        // move file to upload destination
-        $name = $this->fileNamer->fileName($file);
-        $subDirName = rtrim($this->fileNamer->directoryName($file), "/\\");
-        $publicDestination = join(DIRECTORY_SEPARATOR, [
-            $this->uploadDestination,
-            $subDirName
-        ]);
-        $absDestination = join(DIRECTORY_SEPARATOR, [
-            $this->projectDir, 
-            'public',
-            $publicDestination,
-        ]);
-
-        // do not upload until file name is unique
-        /** @var \App\Repository\MediaRepository $mediaRepo */
-        $mediaRepo = $this->entityManager->getRepository(Media::class);
-
-        while ($mediaRepo->findOneBy(['file_name' => $name]) !== null) {
+        $path = null;
+        try {
+            // move file to upload destination
             $name = $this->fileNamer->fileName($file);
+            $subDirName = rtrim($this->fileNamer->directoryName($file), "/\\");
+            $publicDestination = join(DIRECTORY_SEPARATOR, [
+                $this->uploadDestination,
+                $subDirName
+            ]);
+            $absDestination = join(DIRECTORY_SEPARATOR, [
+                $this->projectDir, 
+                'public',
+                $publicDestination,
+            ]);
+
+            // do not upload until file name is unique
+            /** @var \App\Repository\MediaRepository $mediaRepo */
+            $mediaRepo = $this->entityManager->getRepository(Media::class);
+
+            while ($mediaRepo->findOneBy(['fileName' => $name]) !== null) {
+                $name = $this->fileNamer->fileName($file);
+            }
+
+            // full absolute path of new file upload
+            $path = join(DIRECTORY_SEPARATOR, [
+                $absDestination,
+                $name
+            ]);
+
+            // move file to absolute upload destination from tmp directory
+            $file = $file->move($absDestination, $name);
+
+            return ['file' => $file, 'fileName' => $name, 'path' => $path, 'url' => $publicDestination . $name];
+        } catch (\Exception $e) {
+            // rollback the file upload; delete file 
+            if (isset($path) && file_exists($path)) {
+                unlink($path);
+            }
+            throw $e;
         }
-
-        // full absolute path of new file upload
-        $path = join(DIRECTORY_SEPARATOR, [
-            $absDestination,
-            $name
-        ]);
-
-        // move file to absolute upload destination from tmp directory
-        $file = $file->move($absDestination, $name);
-
-        return ['file' => $file, 'fileName' => $name, 'path' => $path, 'url' => $publicDestination . $name];
     }
 
     public function getRelativeUrlFromMedia(Media $media) { 
