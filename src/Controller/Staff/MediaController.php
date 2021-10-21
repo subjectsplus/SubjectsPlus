@@ -88,23 +88,36 @@ class MediaController extends AbstractController
             $logger->info("Validation succeeded!");
 
             $entityManager = $this->getDoctrine()->getManager();
+            $conn = $this->getDoctrine()->getConnection();
 
-            /** @var UploadedFile $upload */
-            $upload = $form->get('file')->getData();
+            $conn->beginTransaction();
 
-            // Upload file to file server
-            $uploadResults = $uploader->uploadFile($upload);
-            $upload = $uploadResults['file'];
-            $fileName = $uploadResults['fileName'];
+            try {
+                /** @var UploadedFile $upload */
+                $upload = $form->get('file')->getData();
 
-            // Fill Media entity values
-            $media->setFileName($fileName);
-            $media->setMimeType($upload->getMimeType());
-            $media->setFilesize($upload->getSize());
-            $media->setStaff($staff);
-            
-            $entityManager->persist($media);
-            $entityManager->flush();
+                // Upload file to file server
+                $uploadResults = $uploader->uploadFile($upload);
+                $upload = $uploadResults['file'];
+                $fileName = $uploadResults['fileName'];
+
+                // Fill Media entity values
+                $media->setFileName($fileName);
+                $media->setMimeType($upload->getMimeType());
+                $media->setFilesize($upload->getSize());
+                $media->setStaff($staff);
+                
+                $entityManager->persist($media);
+                $entityManager->flush();
+                $conn->commit();
+            } catch (\Exception $e) {
+                // delete the file if uploaded already
+                if (isset($uploadResults['path']) && file_exists($uploadResults['path'])) {
+                    unlink($uploadResults['path']);
+                }
+                $conn->rollback();
+                throw $e;
+            }
 
             return $this->redirectToRoute("media_show", [
                 "mediaId" => $media->getMediaId(),
