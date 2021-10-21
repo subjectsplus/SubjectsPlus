@@ -75,11 +75,25 @@ class Media implements \Serializable
     private $staff;
 
     /**
-     * string|null
+     * @var string|null
      * 
      * @ORM\Column(name="title", type="string", nullable=true)
      */
     private $title = "Untitled";
+
+    /**
+     * @var string|null
+     * 
+     * @ORM\Column(name="caption", type="text", nullable=true)
+     */
+    private $caption;
+
+    /**
+     * @var string|null
+     * 
+     * @ORM\Column(name="alt_text", type="text", nullable=true)
+     */
+    private $altText;
 
     public function getMediaId(): ?int
     {
@@ -184,6 +198,30 @@ class Media implements \Serializable
     public function getTitle(): ?string
     {
         return $this->title;
+    }
+
+    public function setCaption(?string $caption): self
+    {
+        $this->caption = $caption;
+
+        return $this;
+    }
+
+    public function getCaption(): ?string
+    {
+        return $this->caption;
+    }
+
+    public function setAltText(?string $altText): self
+    {
+        $this->altText = $altText;
+
+        return $this;
+    }
+
+    public function getAltText(): ?string
+    {
+        return $this->altText;
     }
 
     /** @see \Serializable::serialize() */
