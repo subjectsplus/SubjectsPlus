@@ -119,13 +119,20 @@ class MediaService {
         $fileData = $form->get('file')->getData();
 
         if ($fileData instanceof File) {
-            $mimeType = $fileData->getMimeType();
-            if ($mimeType !== null) {
-                if (strpos($mimeType, "image/") !== false) {
-                    return ['image'];
-                } else {
-                    return ['generic'];
+            try {
+                $mimeType = $fileData->getMimeType();
+                if ($mimeType !== null) {
+                    if (strpos($mimeType, "image/") !== false) {
+                        return ['image'];
+                    } else {
+                        return ['generic'];
+                    }
                 }
+            } catch (\Exception $e) {
+                // This will most likely be an file upload size error
+                // triggered by the ini requirements
+                // Return and let symfony forms generate the error to client
+                return;
             }
         }
         return ['Default'];
