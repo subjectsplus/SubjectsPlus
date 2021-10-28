@@ -19,13 +19,13 @@ class FileNamerService
         $subDir = "";
         
         if (strpos($mimeType, "image/") !== false) {
-            $subDir .= "images/";
+            $subDir .= "images";
         } else if (strpos($mimeType, "video/") !== false) {
-            $subDir .= "videos/";
+            $subDir .= "videos";
         } else if ($mimeType === "application/pdf") {
-            $subDir .= "pdfs/";
+            $subDir .= "pdfs";
         } else {
-            $subDir .= "other/";
+            $subDir .= "other";
         }
         return $subDir;
     }

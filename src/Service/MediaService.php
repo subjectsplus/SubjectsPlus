@@ -31,7 +31,7 @@ class MediaService {
         try {
             // move file to upload destination
             $name = $this->fileNamer->fileName($file);
-            $subDirName = rtrim($this->fileNamer->directoryName($file), "/\\");
+            $subDirName = $this->fileNamer->directoryName($file);
             $publicDestination = join(DIRECTORY_SEPARATOR, [
                 $this->uploadDestination,
                 $subDirName
@@ -39,7 +39,7 @@ class MediaService {
             $absDestination = join(DIRECTORY_SEPARATOR, [
                 $this->projectDir, 
                 'public',
-                $publicDestination,
+                rtrim($publicDestination, "/\\"),
             ]);
 
             // do not upload until file name is unique
@@ -86,34 +86,6 @@ class MediaService {
 
     }
 
-    public function createMedia(?string $fileName = null, ?File $file = null, ?Staff $uploader = null)
-    {
-        $media = new Media();
-        $media->setFileName($fileName);
-        $media->setFile($file);
-
-        if ($file !== null) {
-            $media->setFileSize($file->getSize());
-            $media->setMimeType($file->getMimeType());
-        } else {
-            $media->setFileSize(null);
-            $media->setMimeType(null);
-        }
-
-        $media->setStaff($uploader);
-
-        return $media;
-    }
-
-    public function createMediaAttachment(?Media $media, ?string $attachmentType,  ?int $attachmentId)
-    {
-        $mediaAttachment = new MediaAttachment();
-        $mediaAttachment->setMedia($media);
-        $mediaAttachment->setAttachmentType($attachmentType);
-        $mediaAttachment->setAttachmentId($attachmentId);
-        return $mediaAttachment;
-    }
-
     public static function determineValidationGroups(FormInterface $form)
     {
         $fileData = $form->get('file')->getData();
@@ -138,8 +110,8 @@ class MediaService {
         return ['Default'];
     }
 
-    public function storeImageAssetsFromHTML(string $html, string $attachmentType, int $attachmentId) {
-        // Load the html from ckeditor form field
+    public function createAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
+        // Load the html for parsing
         $doc = new \DOMDocument();
         $doc->loadHTML($html);
         $xpath = new \DOMXPath($doc);
