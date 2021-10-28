@@ -1,15 +1,19 @@
 CKEDITOR.plugins.add( 'media', {
     icons: 'media',
+    allowedContent: 'img[src,alt,width,height],figure,figcaption',
     init: function( editor ) {
         editor.on('paste', function(evt) {
             var media = evt.data.dataTransfer.getData('media');
             if (!media) {
                 return;
             }
-            
+
             if (media.mimeType.substring(0, 5) === 'image') {
                 evt.data.dataValue =
-                '<img src="' + media.link + '" />';
+                '<figure class="image">' +
+                    '<img alt="' + media.altText + '" src="' + media.link + '" />' +
+                    '<figcaption>' + media.caption + '</figcaption>' +
+                '</figure>';
             } else {
                 evt.data.dataValue =
                 '<a href="' + media.link + '">' + media.title + '</a>';

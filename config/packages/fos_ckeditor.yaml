@@ -6,8 +6,7 @@ fos_ck_editor:
 
     configs:
         default:
-            extraPlugins: "media"
-            extraAllowedContent: "img[src,alt,width,height]"
+            extraPlugins: "media,image2"
 
             # file upload/browse routes
             # filebrowserBrowseRoute: "media_browse"
@@ -26,6 +25,9 @@ fos_ck_editor:
         plugins:
                 media:
                     path: "build/ckeditor/plugins/media/"
+                    filename: "plugin.js"
+                image2:
+                    path: "build/ckeditor/plugins/image2/"
                     filename: "plugin.js"
 twig:
     form_themes:
