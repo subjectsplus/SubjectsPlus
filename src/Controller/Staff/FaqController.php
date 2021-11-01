@@ -131,7 +131,6 @@ class FaqController extends AbstractController
             'faq' => $faq,
             'form' => $form->createView(),
             'media' => $staffMedia,
-            'relative_url' => $uploadDestination,
         ]);
     }
 
