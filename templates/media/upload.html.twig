@@ -20,7 +20,7 @@
                         <img src="
                             {% if 'image/' in media_item.mimeType %}
                                 {# media_item is an image #}
-                                {{ asset(relative_url ~ 'images/' ~ media_item.fileName) }}
+                                {{ asset(media_item | get_media_url) }}
                             {% endif %}
                         " height="200px" width="200px"/>
                     </a>

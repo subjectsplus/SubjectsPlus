@@ -54,13 +54,13 @@
                 <li>
                     <div class="media-card" draggable="true" data-media-id="{{ media_entry.mediaId }}"
                         data-mime-type="{{ media_entry.mimeType }}" 
-                        data-link="{{relative_url ~ 'images/' ~ media_entry.fileName }}"
+                        data-link="{{ media_entry | get_media_url }}"
                         data-title="{{ media_entry.title }}" data-alt-text="{{ media_entry.altText }}"
                         data-caption="{{ media_entry.caption }}">
                         <img class="media-picture" src="
                         {% if 'image/' in media_entry.mimeType %}
                             {# media_entry is an image #}
-                            {{ asset(relative_url ~ 'images/' ~ media_entry.fileName) }}
+                            {{ asset(media_entry | get_media_url) }}
                         {% endif %}"
                             height="50px" width="50px" />
                             {{ media_entry.title }}
