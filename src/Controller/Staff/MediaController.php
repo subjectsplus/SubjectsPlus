@@ -65,7 +65,7 @@ class MediaController extends AbstractController
     /**
      * @Route("/upload", name="media_upload")
      */
-    public function upload(Request $request, MediaService $uploader, ValidationService $validation, LoggerInterface $logger, string $uploadDestination): Response
+    public function upload(Request $request, MediaService $uploader, ValidationService $validation, LoggerInterface $logger): Response
     {
         
         $logger->info("Connected to media_upload route.");
@@ -128,7 +128,6 @@ class MediaController extends AbstractController
             'form' => $form->createView(),
             'button_label' => 'Upload File',
             'staff_media' => $staffMedia,
-            'relative_url' => $uploadDestination,
         ]);
     }
 
@@ -137,17 +136,8 @@ class MediaController extends AbstractController
      */
     public function show(Request $request, Media $media, MediaService $uploader)
     {
-        $url = $uploader->getRelativeUrlFromMedia($media);
-        $mimeType = $media->getMimeType();
-        $type = 'generic';
-
-        if (strpos($mimeType, "image/") !== false)
-            $type = 'image';
-
         return $this->render('media/show.html.twig', [
             'media' => $media,
-            'url' => $url,
-            'type' => $type,
         ]);
     }
 
