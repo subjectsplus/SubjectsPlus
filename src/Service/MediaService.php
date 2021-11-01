@@ -9,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
+use Masterminds\HTML5;
+use Psr\Log\LoggerInterface;
 
 class MediaService {
 
@@ -16,14 +18,15 @@ class MediaService {
     private $fileNamer;
     private $projectDir;
     private $uploadDestination;
-    
+    private $logger;
 
-    public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, string $projectDir, string $uploadDestination)
+    public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, LoggerInterface $logger, string $projectDir, string $uploadDestination)
     {
         $this->entityManager = $entityManager;
         $this->fileNamer = $fileNamer;
         $this->projectDir = rtrim($projectDir, "/\\");
         $this->uploadDestination = rtrim($uploadDestination, "/\\");
+        $this->logger = $logger;
     }
 
     public function uploadFile(UploadedFile $file) {
@@ -39,7 +42,7 @@ class MediaService {
             $absDestination = join(DIRECTORY_SEPARATOR, [
                 $this->projectDir, 
                 'public',
-                rtrim($publicDestination, "/\\"),
+                trim($publicDestination, "/\\"),
             ]);
 
             // do not upload until file name is unique
@@ -112,38 +115,132 @@ class MediaService {
 
     public function createAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
         // Load the html for parsing
-        $doc = new \DOMDocument();
-        $doc->loadHTML($html);
+        $html5 = new HTML5([
+            'disable_html_ns' => true,
+        ]);
+        $doc = $html5->loadHTML($html);
         $xpath = new \DOMXPath($doc);
 
-        // Query for all image tags and isolate the source attribute
-        /** @var \DomNodeList $imageSources */
+        // Query for all image/link tags and isolate the source attribute
+        /** @var \DomNodeList $sources */
+        $sources = [];
         $imageSources = $xpath->query('//img/@src');
-                
-        $mediaRepo = $this->entityManager->getRepository(Media::class);
-        if ($imageSources->count() > 0) {
-            foreach ($imageSources as $imageSource) {
-                $filePath = $imageSource->nodeValue;
-                $fileName = basename($filePath);
-                
-                /** @var Media $media */
-                $media = $mediaRepo->findOneBy(['fileName' => $fileName]);
-                
-                if ($media) {
-                    $mediaAttachment = new MediaAttachment();
-                    $mediaAttachment->setMedia($media);
-                    $mediaAttachment->setAttachmentType($attachmentType);
-                    $mediaAttachment->setAttachmentId($attachmentId);
-                    $this->entityManager->persist($mediaAttachment);
-                } else {
-                    // check if file exists
-                    if (file_exists($filePath)) {
+        $linkSources = $xpath->query('//a/@href');
+        
+        // Copy into sources array for parsing
+        foreach ($imageSources as $imageSource) {
+            $sources[] = $imageSource;
+        }
+
+        foreach ($linkSources as $linkSource) {
+            $sources[] = $linkSource;
+        }
+
+        if (count($sources) > 0) {
+            foreach ($sources as $source) {
+                $filePath = $source->nodeValue;
+                if ($filePath[0] === DIRECTORY_SEPARATOR) {
+                    // is an absolute file path
+                    $filePath = join(DIRECTORY_SEPARATOR, [
+                        $this->projectDir, 
+                        'public',
+                        trim($filePath, "/\\"),
+                    ]);
+                }
+
+                if (file_exists($filePath) !== false) {
+                    $fileName = basename($filePath);
+                    
+                    $mediaRepo = $this->entityManager->getRepository(Media::class);
+                    /** @var Media $media */
+                    $media = $mediaRepo->findOneBy(['fileName' => $fileName]);
+                    
+                    if ($media !== null) {
+                        // check if media attachment already exists
+                        $mediaAttachmentRepo = $this->entityManager->getRepository(MediaAttachment::class);
+                        $mediaAttachment = $mediaAttachmentRepo->findOneBy(['media' => $media]);
                         
+                        if ($mediaAttachment === null) {
+                            $mediaAttachment = new MediaAttachment();
+                            $mediaAttachment->setMedia($media);
+                            $mediaAttachment->setAttachmentType($attachmentType);
+                            $mediaAttachment->setAttachmentId($attachmentId);
+                            $this->entityManager->persist($mediaAttachment);
+                        }
                     } else {
-                        // report as a missing file
+                        // file exists but no media object associated
+                        // most likely a file uploaded before new media manager implementation
+                        // todo: likely solution is to handle such cases to where file is moved to proper location, renamed,
+                        // with all current references to it updated
+                        // the underlying issue is that old references to that media file location will still exist and will
+                        // now produce file missing errors
+                        // an alternative solution is to have a media manager initialization process where all old media files are moved,
+                        // and searches are conducted to find any reference to them and update that reference
                     }
                 }
             }
         }
+    }
+
+    public function removeAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
+        // Get all current media attachments for the attachment id
+        $mediaAttachmentRepo = $this->entityManager->getRepository(MediaAttachment::class);
+        /** @var MediaAttachment $mediaAttachments */
+        $mediaAttachments = $mediaAttachmentRepo->findBy([
+            'attachmentType' => $attachmentType, 
+            'attachmentId' => $attachmentId,
+        ]);
+
+        // Load the html for parsing
+        $html5 = new HTML5([
+            'disable_html_ns' => true,
+        ]);
+        $doc = $html5->loadHTML($html);
+        $xpath = new \DOMXPath($doc);
+
+        // Query for all image/link tags and isolate the source attribute
+        /** @var \DomNodeList $sources */
+        $sources = [];
+        $imageSources = $xpath->query('//img/@src');
+        $linkSources = $xpath->query('//a/@href');
+        
+        // Copy into sources array for parsing
+        foreach ($imageSources as $imageSource) {
+            $sources[] = $imageSource;
+        }
+        
+        foreach ($linkSources as $linkSource) {
+            $sources[] = $linkSource;
+        }
+
+        // Get all file names from image sources
+        $fileNames = [];
+        foreach ($sources as $source) {
+            $filePath = $source->nodeValue;
+            if ($filePath[0] === DIRECTORY_SEPARATOR) {
+                // is an absolute file path
+                $filePath = join(DIRECTORY_SEPARATOR, [
+                    $this->projectDir, 
+                    'public',
+                    trim($filePath, "/\\"),
+                ]);
+            }
+
+            if (file_exists($filePath) !== false) {
+                $fileName = basename($filePath);
+                $fileNames[$fileName] = true;
+            }
+        }
+
+        // Delete the media attachment for any sources no longer referenced
+        foreach ($mediaAttachments as $attachment) {
+            $media = $attachment->getMedia();
+            $fileName = $media->getFileName();
+            if (isset($fileNames[$fileName]) === false) {
+                $attachment->setMedia(null);
+                $this->entityManager->remove($attachment);
+            }
+        }
+        $this->entityManager->flush();
     }
 }
