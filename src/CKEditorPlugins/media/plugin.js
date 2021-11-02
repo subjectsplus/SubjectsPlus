@@ -2,6 +2,21 @@ CKEDITOR.plugins.add( 'media', {
     icons: 'media',
     allowedContent: 'img[src,alt,width,height],figure,figcaption',
     init: function( editor ) {
+        editor.addCommand('toggleSidebar', {
+            'exec': function(editor) {
+                var sidebar = document.getElementById('media-sidebar');
+                if (sidebar) {
+                    console.log(sidebar);
+                    console.log(sidebar.style.display);
+                    if (sidebar.style.display === 'none' || sidebar.style.display === '') {
+                        sidebar.style.display = 'block';
+                    } else {
+                        sidebar.style.display = 'none';
+                    }
+                }
+            }
+        });
+
         editor.on('paste', function(evt) {
             var media = evt.data.dataTransfer.getData('media');
             if (!media) {
@@ -22,7 +37,7 @@ CKEDITOR.plugins.add( 'media', {
 
         editor.ui.addButton( 'Media', {
             label: 'Insert Media',
-            command: 'showSidebar',
+            command: 'toggleSidebar',
             toolbar: 'insert'
         });
     }
