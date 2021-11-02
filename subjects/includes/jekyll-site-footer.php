@@ -122,22 +122,26 @@
             <div class="tab-pane" id="account" role="tabpanel" aria-labelledby="account-tab">
                 <section class="section">
                     <div class="container">
-                        <h5 class="mt-3 mt-lg-0">Accounts</h5>
-                        <hr align="left" class="hr-panel">
-                        <ul class="d-inline-block">
+						<div class="row">
+							<div class="col-lg-6 col-xl-4">
+								<h5>Library Accounts</h5>
+								<hr align="left" class="hr-panel">
+								<ul class="d-inline-block">
+									<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">uSearch (books, articles, music, images, etc) <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+									<li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
+									<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
+								</ul>
+							</div>
+							<div class="col-lg-6 col-xl-8">
+								<h5 class="mt-4 mt-lg-0">Campus Accounts</h5>
+								<hr align="left" class="hr-panel">
+								<ul class="d-inline-block">
+									<li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
+									<li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
+								</ul>
 
-                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
-
-                        </ul>
-
+							</div>
+						</div>
                     </div>
                 </section>
             </div>
