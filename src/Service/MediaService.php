@@ -29,6 +29,19 @@ class MediaService {
         $this->logger = $logger;
     }
 
+    /**
+     * Uploads a file to the file server.
+     * 
+     * Given a Symfony UploadedFile instance, the file undergoes an upload sequence consisting
+     * of renaming the file to be a unique identifier, establishing the upload destination based on mime type,
+     * and moving the file from the temporary location to the upload destination on the file server.
+     * 
+     * @param UploadedFile $file
+     * @return array array containing 'file', 'fileName', 'path', and 'url'
+     * 
+     * @throws \Exception Upon an error, rollback will occur where file is deleted to preserve
+     * the integrity of the file server.
+     */
     public function uploadFile(UploadedFile $file) {
         $path = null;
         try {
@@ -89,6 +102,15 @@ class MediaService {
 
     }
 
+    /**
+     * Determines the validation group based on the mime type of the file uploaded.
+     *
+     * Uploaded images will return the image validation group while any other files will return the
+     * generic validation group.
+     *  
+     * @param FormInterface $form
+     * @return void
+     */
     public static function determineValidationGroups(FormInterface $form)
     {
         $fileData = $form->get('file')->getData();
@@ -113,6 +135,17 @@ class MediaService {
         return ['Default'];
     }
 
+    /**
+     * Creates MediaAttachment entities from the inputted html source, attachment type, and attachment id.
+     * 
+     * The html source is parsed for media sources (links and images) and creates a MediaAttachment entity
+     * to link the media source to the attachment.
+     *  
+     * @param string $html html source
+     * @param string $attachmentType Type of attachment. Ex: 'faq', 'record'
+     * @param integer $attachmentId Id of attachment
+     * @return void
+     */
     public function createAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
         // Load the html for parsing
         $html5 = new HTML5([
@@ -182,6 +215,18 @@ class MediaService {
         }
     }
 
+    /**
+     * Removes MediaAttachment entities from attachments for media sources that are no longer referenced in the html source.
+     * 
+     * The html source is parsed for media sources (links and images) and is compared to the full list of MediaAttachment entities
+     * that exist for the attachment. Media sources that are no longer referenced in the html source have their corresponding MediaAttachment 
+     * entities removed.
+     *  
+     * @param string $html html source
+     * @param string $attachmentType Type of attachment. Ex: 'faq', 'record'
+     * @param integer $attachmentId Id of attachment
+     * @return void
+     */
     public function removeAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
         // Get all current media attachments for the attachment id
         $mediaAttachmentRepo = $this->entityManager->getRepository(MediaAttachment::class);
