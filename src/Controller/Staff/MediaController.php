@@ -63,7 +63,19 @@ class MediaController extends AbstractController
     }
 
     /**
+     * Renders an upload page for Media source.
+     * 
+     * Renders an upload page for client to upload media sources.
+     * Upon form submission, the file is uploaded to the file server and
+     * a new Media entity is created for that file in the database.
+     * 
      * @Route("/upload", name="media_upload")
+     * 
+     * @return Response Pre-Submission: Renders 'media/upload.html.twig' template with parameters 'form' signifying the form's view, 
+     * 'button_label' signifying the label of the submit button, and 'staff_media' signifying media the logged in staff member has
+     * previously uploaded.
+     * 
+     * Post-Submission: Redirects to the 'media_show' route with parameter 'mediaId'.
      */
     public function upload(Request $request, MediaService $uploader, ValidationService $validation, LoggerInterface $logger): Response
     {
@@ -132,6 +144,11 @@ class MediaController extends AbstractController
     }
 
     /**
+     * Renders a display page for Media source.
+     * 
+     * @return Response Renders 'media/show.html.twig' template with parameter 'media' signifying
+     * the Media entity to display.
+     * 
      * @Route("/{mediaId}", name="media_show")
      */
     public function show(Request $request, Media $media, MediaService $uploader)
@@ -142,6 +159,14 @@ class MediaController extends AbstractController
     }
 
     /**
+     * Renders an edit page for the Media source.
+     * 
+     * @return Response Pre-Submission: Renders 'media/edit.html.twig' template with parameter 'media' signifying
+     * the Media entity to edit and 'form' signifying the form's view.
+     * 
+     * Post-Submission: Saves the changes to the database and redirects to the 'media_show' route
+     * with parameter 'mediaId'.
+     * 
      * @Route("/{mediaId}/edit", name="media_edit")
      */
     public function edit(Request $request, Media $media): Response
@@ -151,6 +176,10 @@ class MediaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            
+            return $this->redirectToRoute("media_show", [
+                "mediaId" => $media->getMediaId(),
+            ]);
         }
 
         return $this->render('media/edit.html.twig', [
