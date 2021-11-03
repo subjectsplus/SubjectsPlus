@@ -1,6 +1,6 @@
 CKEDITOR.plugins.add( 'media', {
     icons: 'media',
-    allowedContent: 'img[src,alt,width,height],figure,figcaption',
+    allowedContent: 'img[src,alt,width,height],figure,figcaption,br',
     init: function( editor ) {
         editor.addCommand('toggleSidebar', {
             'exec': function(editor) {
@@ -25,10 +25,12 @@ CKEDITOR.plugins.add( 'media', {
 
             if (media.mimeType.substring(0, 5) === 'image') {
                 evt.data.dataValue =
+                '<br />' +
                 '<figure class="image">' +
                     '<img alt="' + media.altText + '" src="' + media.link + '" />' +
                     '<figcaption>' + media.caption + '</figcaption>' +
-                '</figure>';
+                '</figure>' +
+                '<br />';
             } else {
                 evt.data.dataValue =
                 '<a href="' + media.link + '">' + media.title + '</a>';
