@@ -8,12 +8,24 @@ class FileNamerService
 {
     private const MAX_EXTENSION_CHAR_COUNT = 10;
 
+    /**
+     * Gets the directory name for the specified file based on mime type.
+     *
+     * @param UploadedFile $file
+     * @return string
+     */
     public function directoryName(UploadedFile $file): string
     {
         $mimeType = $file->getMimeType();
         return $this->getSubDirectoryFromMimeType($mimeType);
     }
 
+    /**
+     * Gets the subdirectory name given the specified mime type.
+     *
+     * @param string $mimeType
+     * @return string
+     */
     public function getSubDirectoryFromMimeType(string $mimeType): string
     {
         $subDir = "";
@@ -30,6 +42,21 @@ class FileNamerService
         return $subDir;
     }
 
+    /**
+     * Generates a file name for the uploaded file.
+     * 
+     * File names generated are a maximum length of 255 characters and 
+     * include the original file name along with a unique identifier and extension.
+     * The unique identifier is 24 characters including a prefixed dash.
+     * The extension is allowed a maximum of 10 characters. The remaining
+     * characters are allocated to the original file name. If the original file name
+     * exceeds the remaining character space, the name is truncated to fit.
+     * 
+     * Format: [original_file_name][unique identifier].[extension]
+     *
+     * @param UploadedFile $file
+     * @return string
+     */
     public function fileName(UploadedFile $file): string
     {
         $origName = $file->getClientOriginalName();
