@@ -265,6 +265,14 @@
         <source>control.dashboard</source>
         <target>Dashboard</target>
       </trans-unit>
+      <trans-unit id="Bv6U9x8" resname="control.header.media">
+        <source>control.header.media</source>
+        <target>Media</target>
+      </trans-unit>
+      <trans-unit id="bSM2iAG" resname="control.header.media.upload">
+        <source>control.header.media.upload</source>
+        <target>Upload Media</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
