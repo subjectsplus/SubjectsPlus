@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
+class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @var int
@@ -799,89 +799,5 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface, \Seria
         $this->staffPhoto = $staffPhoto;
 
         return $this;
-    }
-
-    public function serialize()
-    {
-        return serialize(array(
-            $this->staffId,
-            $this->lname,
-            $this->fname,
-            $this->title,
-            $this->tel,
-            $this->department,
-            $this->staffSort,
-            $this->email,
-            $this->ip,
-            $this->accessLevel,
-            $this->password,
-            $this->active,
-            $this->ptags,
-            $this->extra,
-            $this->bio,
-            $this->positionNumber,
-            $this->jobClassification,
-            $this->roomNumber,
-            $this->supervisorId,
-            $this->emergencyContactName,
-            $this->emergencyContactRelation,
-            $this->emergencyContactPhone,
-            $this->streetAddress,
-            $this->city,
-            $this->state,
-            $this->zip,
-            $this->homePhone,
-            $this->cellPhone,
-            $this->fax,
-            $this->intercom,
-            $this->latLong,
-            $this->socialMedia,
-            $this->userType,
-            $this->subject,
-            $this->roles,
-            $this->isVerified,
-        ));
-    }
-
-    public function unserialize($serialized)
-    {
-        list(
-            $this->staffId,
-            $this->lname,
-            $this->fname,
-            $this->title,
-            $this->tel,
-            $this->department,
-            $this->staffSort,
-            $this->email,
-            $this->ip,
-            $this->accessLevel,
-            $this->password,
-            $this->active,
-            $this->ptags,
-            $this->extra,
-            $this->bio,
-            $this->positionNumber,
-            $this->jobClassification,
-            $this->roomNumber,
-            $this->supervisorId,
-            $this->emergencyContactName,
-            $this->emergencyContactRelation,
-            $this->emergencyContactPhone,
-            $this->streetAddress,
-            $this->city,
-            $this->state,
-            $this->zip,
-            $this->homePhone,
-            $this->cellPhone,
-            $this->fax,
-            $this->intercom,
-            $this->latLong,
-            $this->socialMedia,
-            $this->userType,
-            $this->subject,
-            $this->roles,
-            $this->isVerified,
-        ) = unserialize($serialized);
     }
 }
