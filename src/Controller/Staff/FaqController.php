@@ -9,14 +9,18 @@ use App\Entity\Faqpage;
 use App\Entity\FaqFaqpage;
 use App\Entity\Chchchanges;
 use App\Entity\Staff;
+use App\Entity\Media;
+use App\Entity\MediaAttachment;
 use App\Form\FaqType;
 use App\Service\FaqService;
 use App\Service\ChangeLogService;
+use App\Service\MediaService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Collections\ArrayCollection;
+use Psr\Log\LoggerInterface;
 
 /**
  * @Route("/control/faq")
@@ -49,7 +53,7 @@ class FaqController extends AbstractController
     /**
      * @Route("/new", name="faq_new", methods={"GET","POST"})
      */
-    public function new(Request $request, FaqService $fs, ChangeLogService $cls): Response
+    public function new(Request $request, FaqService $fs, ChangeLogService $cls, LoggerInterface $logger, MediaService $ms): Response
     {
         // Check whether user is authenticated
         // TODO: Check if permissions permit user to create new faq
@@ -60,11 +64,18 @@ class FaqController extends AbstractController
         $form = $this->createForm(FaqType::class, $faq);
         $form->handleRequest($request);
 
+        // Get all media associated with the staff member
+        /** @var Staff $staff */
+        $staff = $this->getUser();
+        /** @var MediaRepository $mediaRepo */
+        $mediaRepo = $this->getDoctrine()->getRepository(Media::class);
+        $staffMedia = $mediaRepo->findByStaff($staff);
+
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->transactional(function() use($form, $faq, $entityManager, $fs, $cls) {
+            $entityManager->transactional(function() use($form, $faq, $entityManager, $fs, $cls, $ms, $logger) {
                 // Persist Faq entity
                 $entityManager->persist($faq);
 
@@ -76,7 +87,7 @@ class FaqController extends AbstractController
                 
                 // Get the faqpage field
                 $faqpagesField = $form->get('faqpage')->getData();
-
+                
                 // Add new Keywords to Faq
                 if (!empty(trim($keywordsField))) {
                     $keywordsArray = array_map('trim', explode(',', $keywordsField));
@@ -93,10 +104,17 @@ class FaqController extends AbstractController
                 if (!empty($faqpagesField))
                     $fs->addFaqpagesToFaq($faq, $faqpagesField);
                 
+                // Check for any new images/links added
+                $faqId = $faq->getFaqId();
+                $questionHtml = $form->get('question')->getData();
+                $answerHtml = $form->get('answer')->getData();
+
+                $ms->createAttachmentFromHTML($questionHtml, 'faq', $faqId);
+                $ms->createAttachmentFromHTML($answerHtml, 'faq', $faqId);
+
                 // Create new log entry 
                 /** @var Staff $staff */
                 $staff = $this->getUser();
-                $faqId = $faq->getFaqId();
                 $question = $faq->getQuestion();
                 $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
 
@@ -112,6 +130,7 @@ class FaqController extends AbstractController
         return $this->render('faq/new.html.twig', [
             'faq' => $faq,
             'form' => $form->createView(),
+            'media' => $staffMedia,
         ]);
     }
 
@@ -250,11 +269,18 @@ class FaqController extends AbstractController
     /**
      * @Route("/{faqId}/edit", name="faq_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, FaqService $fs, ChangeLogService $cls, Faq $faq): Response
+    public function edit(Request $request, FaqService $fs, ChangeLogService $cls, MediaService $ms, Faq $faq): Response
     {
         // Check whether user is authenticated
         // TODO: Check if permissions permit user to edit the faq
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // Get all media associated with the staff member
+        /** @var Staff $staff */
+        $staff = $this->getUser();
+        /** @var MediaRepository $mediaRepo */
+        $mediaRepo = $this->getDoctrine()->getRepository(Media::class);
+        $staffMedia = $mediaRepo->findByStaff($staff);
 
         // Get all keywords associated with the faq
         $keywords = $faq->getKeywords();
@@ -293,7 +319,7 @@ class FaqController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
             
-            $entityManager->transactional(function() use ($faq, $fs, $cls, $form, $keywords, $subjects, $faqPages) {
+            $entityManager->transactional(function() use ($faq, $fs, $cls, $ms, $form, $keywords, $subjects, $faqPages) {
                 // Get the keywords field, check for any changes
                 $keywordsField = $form->get('keywords')->getData();
                 $keywordsFieldArray = empty(trim($keywordsField)) ? [] : array_map('trim', explode(',', $keywordsField));
@@ -336,6 +362,16 @@ class FaqController extends AbstractController
                 if (!empty($faqpagesRemoved))
                     $fs->removeFaqpagesFromFaq($faq, $faqpagesRemoved);
 
+                // Check for any new images/links added/removed
+                $faqId = $faq->getFaqId();
+                $questionHtml = $form->get('question')->getData();
+                $answerHtml = $form->get('answer')->getData();
+
+                $ms->removeAttachmentFromHTML($questionHtml, 'faq', $faqId);
+                $ms->removeAttachmentFromHTML($answerHtml, 'faq', $faqId);
+                $ms->createAttachmentFromHTML($questionHtml, 'faq', $faqId);
+                $ms->createAttachmentFromHTML($answerHtml, 'faq', $faqId);
+                
                 // Create new log entry
                 /** @var Staff $staff */
                 $staff = $this->getUser();
@@ -355,6 +391,7 @@ class FaqController extends AbstractController
         return $this->render('faq/edit.html.twig', [
             'faq' => $faq,
             'form' => $form->createView(),
+            'media' => $staffMedia,
         ]);
     }
 

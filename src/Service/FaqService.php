@@ -7,6 +7,7 @@ use App\Entity\Subject;
 use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
 use App\Entity\FaqFaqpage;
+use App\Entity\MediaAttachment;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -237,6 +238,15 @@ class FaqService {
                 $this->entityManager->remove($faqFaqpage);
             }
 
+            // Delete MediaAttachment's associated
+            $mediaAttachments = $this->entityManager
+            ->getRepository(MediaAttachment::class)
+            ->findBy(['attachmentType' => 'faq', 'attachmentId' => $faq->getFaqId()]);
+
+            foreach($mediaAttachments as $attachment) {
+                $this->entityManager->remove($attachment);
+            }
+            
             $this->entityManager->remove($faq);
         });
     }

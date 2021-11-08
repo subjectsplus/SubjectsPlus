@@ -5,9 +5,8 @@
 {% block body %}
     <h1>Edit FAQ</h1>
 
+    {{ include('media/sidebar.html.twig') }}
     {{ include('faq/_form.html.twig', {'button_label': 'Update'}) }}
-
     <a href="{{ path('faq_index') }}">back to list</a>
-
     {{ include('faq/_delete_form.html.twig') }}
 {% endblock %}

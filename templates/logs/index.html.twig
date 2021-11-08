@@ -50,7 +50,11 @@
                         {{'N/A'}}
                     {% else %}
                         {% for request_key, request_entry in entry.request %}
-                            {{ request_key ~ ': ' ~ (request_entry|join(', ')) }}
+                            {% if request_entry is iterable %}
+                                {{ request_key ~ ': ' ~ (request_entry|json_encode(constant('JSON_PRETTY_PRINT'))) }}
+                            {% else %}
+                                {{ request_key ~ ': ' ~ request_entry }}
+                            {% endif %}
                         {% endfor %}
                     {% endif %}
                 </td>

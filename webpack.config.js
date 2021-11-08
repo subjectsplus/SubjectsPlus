@@ -90,7 +90,10 @@ Encore
         {from: './node_modules/ckeditor4/lang', to: 'ckeditor/lang/[path][name].[ext]'},
         {from: './node_modules/ckeditor4/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
         {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
-        {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'}
+        {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'},
+        
+        // CKEditor Plugins
+        {from: './src/CKEditorPlugins/', to: 'ckeditor/plugins/[path][name].[ext]'}
     ])
 
 

@@ -98,8 +98,6 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $accessLevel;
 
-
-
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
@@ -254,7 +252,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     private $socialMedia;
 
     /**
-     * @var \UserType
+     * @var UserType
      *
      * @ORM\ManyToOne(targetEntity="UserType")
      * @ORM\JoinColumns({
@@ -288,6 +286,13 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @var MediaAttachment|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\MediaAttachment", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="staff_photo_id", referencedColumnName="media_attachment_id")
+     */
+    private $staffPhoto;
 
     /**
      * Constructor.
@@ -361,8 +366,6 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
 
     public function getStaffSort(): ?int
     {
@@ -782,6 +785,18 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getStaffPhoto(): ?MediaAttachment
+    {
+        return $this->staffPhoto;
+    }
+
+    public function setStaffPhoto(?MediaAttachment $staffPhoto): self
+    {
+        $this->staffPhoto = $staffPhoto;
 
         return $this;
     }

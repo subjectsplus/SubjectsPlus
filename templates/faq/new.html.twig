@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Create new FAQ</h1>
 
+    {{ include('media/sidebar.html.twig') }}
     {{ include('faq/_form.html.twig') }}
 
     <a href="{{ path('faq_index') }}">back to list</a>
