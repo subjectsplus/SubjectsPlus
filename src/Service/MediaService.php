@@ -18,15 +18,34 @@ class MediaService {
     private $fileNamer;
     private $projectDir;
     private $uploadDestination;
+    private $smallImageDimensions;
+    private $mediumImageDimensions;
+    private $largeImageDimensions;
     private $logger;
 
-    public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, LoggerInterface $logger, string $projectDir, string $uploadDestination)
+    public const SMALL_IMAGE = 0;
+    public const MEDIUM_IMAGE = 1;
+    public const LARGE_IMAGE = 2;
+
+    public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, 
+        LoggerInterface $logger, string $projectDir, string $uploadDestination, string $smallImageDimensions,
+        string $mediumImageDimensions, string $largeImageDimensions)
     {
         $this->entityManager = $entityManager;
         $this->fileNamer = $fileNamer;
         $this->projectDir = rtrim($projectDir, "/\\");
         $this->uploadDestination = rtrim($uploadDestination, "/\\");
         $this->logger = $logger;
+
+        // Set Image Dimensions
+        list($width, $height) = explode('x', $smallImageDimensions, 2);
+        $this->smallImageDimensions = [(float)$width, (float)$height];
+
+        list($width, $height) = explode('x', $mediumImageDimensions, 2);
+        $this->mediumImageDimensions = [(float)$width, (float)$height];
+
+        list($width, $height) = explode('x', $largeImageDimensions, 2);
+        $this->largeImageDimensions = [(float)$width, (float)$height];;
     }
 
     /**
@@ -78,6 +97,92 @@ class MediaService {
             return ['file' => $file, 'fileName' => $name, 'path' => $path, 'url' => $publicDestination . $name];
         } catch (\Exception $e) {
             // rollback the file upload; delete file 
+            if (isset($path) && file_exists($path)) {
+                unlink($path);
+            }
+            throw $e;
+        }
+    }
+
+    private function generateSizedImage(File $file, int $sizeType) {
+        if ($sizeType !== self::SMALL_IMAGE && $sizeType !== self::MEDIUM_IMAGE
+                && $sizeType !== self::LARGE_IMAGE) {
+            throw new \Exception("Incorrect argument supplied for integer \$sizeType.");
+        }
+
+        $directory = pathinfo($file->getRealPath(), PATHINFO_DIRNAME);
+        $fileName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+        $fileExtension = $file->getExtension();
+        
+        if ($sizeType == self::SMALL_IMAGE) {
+            $newWidth = $this->smallImageDimensions[0];
+            $newHeight = $this->smallImageDimensions[1];
+            $type = 'small';
+        } else if ($sizeType == self::MEDIUM_IMAGE) {
+            $newWidth = $this->mediumImageDimensions[0];
+            $newHeight = $this->mediumImageDimensions[1];
+            $type = 'medium';
+        } else {
+            $newWidth = $this->largeImageDimensions[0];
+            $newHeight = $this->largeImageDimensions[1];
+            $type = 'large';
+        }
+
+        $newFileName = sprintf('%s_%s.%s', $fileName, $type, $fileExtension);
+        $path = sprintf('%s/%s', $directory, $newFileName);
+
+        if (copy($file->getRealPath(), $path) === true) {
+            // Generate image
+            $image = new \Imagick($path);
+            //$res = $image->resizeImage($newWidth, $newHeight, \Imagick::FILTER_LANCZOS, 1, true);
+            $res = $image->thumbnailImage($newWidth, $newHeight, true);
+            
+            if ($res === true) {
+                $image->writeImage($path);
+                $image->destroy();
+                return $path;
+            } else {
+                throw new \Exception(sprintf("Failed to resize image to $type dimensions '%s'", $file->getRealPath()));
+            }
+        } else {
+            throw new \Exception(sprintf("Failed to copy image in path '%s' to '%s'.",
+                $file->getRealPath(), $path));
+        }
+    }
+
+    public function generateSizedImages(File $file) {
+        try {
+            $mimeType = $file->getMimeType();
+            if ($mimeType === null || strpos($mimeType, 'image/') === false) {
+                return;
+            }
+
+            $generatedImages = [];
+
+            // Load the image file in Imagick
+            $path = $file->getRealPath();
+            $image = new \Imagick($path);
+
+            // Get dimensions of image file
+            $width = $image->getImageWidth();
+            $height = $image->getImageHeight();
+
+            $image->destroy();
+            
+            if ($width > $this->smallImageDimensions[0] || $height > $this->smallImageDimensions[1]) {
+                $generatedImages['small'] = $this->generateSizedImage($file, self::SMALL_IMAGE);
+            }
+
+            if ($width > $this->mediumImageDimensions[0] || $height > $this->mediumImageDimensions[1]) {
+                $generatedImages['medium'] = $this->generateSizedImage($file, self::MEDIUM_IMAGE);
+            }
+
+            if ($width > $this->largeImageDimensions[0] || $height > $this->largeImageDimensions[1]) {
+                $generateImages['large'] = $this->generateSizedImage($file, self::LARGE_IMAGE);
+            }
+            
+            return $generatedImages;
+        } catch (\Exception $e) {
             if (isset($path) && file_exists($path)) {
                 unlink($path);
             }

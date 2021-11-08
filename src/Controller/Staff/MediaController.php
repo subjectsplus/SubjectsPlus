@@ -113,6 +113,12 @@ class MediaController extends AbstractController
                 $upload = $uploadResults['file'];
                 $fileName = $uploadResults['fileName'];
 
+                $sizedImages = $uploader->generateSizedImages($upload);
+                $logger->info("Sized Images: ");
+                foreach ($sizedImages as $image) {
+                    $logger->info($image);
+                }
+                
                 // Fill Media entity values
                 $media->setFileName($fileName);
                 $media->setMimeType($upload->getMimeType());
