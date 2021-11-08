@@ -114,7 +114,7 @@ class Talkback {
 
     //print "<pre>";print_r($this->_staffers); print "</pre>";
 
-    $action = htmlentities($_SERVER['PHP_SELF']) . "?talkback_id=" . $this->_talkback_id;
+    $action = getControlURL() . "talkback/talkback.php?talkback_id=" . $this->_talkback_id;
 
     if ($wintype != "") {
       $action .= "&wintype=pop";
@@ -144,14 +144,14 @@ class Talkback {
 <label for=\"answer\">" . _("Answer") . "</label>";
 
     if ($wysiwyg_desc == 1) {
-    	include($CKPath);
+    	include_once($CKPath);
     	global $BaseURL;
 
     	$oCKeditor = new CKEditor($CKBasePath);
     	$oCKeditor->timestamp = time();
     	$config['toolbar'] = 'SubsPlus_Narrow';// Default shows a much larger set of toolbar options
     	$config['height'] = '200';
-    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor/php/uploader.php";
+    	$config['filebrowserUploadUrl'] = $BaseURL . "ckeditor3/php/uploader.php";
 
     	echo $oCKeditor->editor('answer', $this->_answer, $config);
 		echo "<br />";

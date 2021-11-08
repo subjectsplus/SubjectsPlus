@@ -9,9 +9,9 @@ header("Content-Type: application/json; charset=UTF-8");
 
 
 
-include('../../includes/autoloader.php');
-include('../../includes/config.php');
-include('../../includes/functions.php');
+include_once(__DIR__ . "/../../includes/autoloader.php");
+include_once(__DIR__ . "/../../includes/config.php");
+include_once(__DIR__ . "/../../includes/functions.php");
 
 
 use SubjectsPlus\Control\Querier;

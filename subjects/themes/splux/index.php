@@ -115,7 +115,7 @@ if ( $rnew = $statement->fetchAll() ) {
 
 
 // Add header now, because we need a value ($v2styles) from it
-include( "includes/header_splux.php" );
+include_once(__DIR__ . "/includes/header_splux.php" );
 
 
 // put together our main result display
@@ -460,5 +460,5 @@ $legend = "";
 
 <?php
 // Load footer file
-include( "includes/footer_splux.php" );
+include_once(__DIR__ . "/includes/footer_splux.php" );
 ?>

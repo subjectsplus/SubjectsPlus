@@ -188,7 +188,7 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 
 // Our version 2 vs version 3 styles choice
 
@@ -267,7 +267,7 @@ if (isset ($v2styles) && $v2styles == 1) {
 // Load footer file
 ///////////////////////////
 
-include("includes/footer_custom.php");
+include_once(__DIR__ . "/includes/footer_custom.php");
 ?>
 
 <script type="text/javascript" language="javascript">

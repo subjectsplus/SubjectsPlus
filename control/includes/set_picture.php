@@ -24,8 +24,8 @@ $page_title = "Set Picture";
 
 $no_header = "yes";
 
-include("../includes/header.php");
-include("../includes/upload/class.upload.php");
+require_once(__DIR__ . "/../includes/header.php");
+require_once(__DIR__ . "/../includes/upload/class.upload.php");
 
 $feedback = "";
 $result = "";
@@ -188,4 +188,4 @@ print "</div></div>";
 
 <?php
 
-include("../includes/footer.php");
+require_once(__DIR__ . "/../includes/footer.php");

@@ -1,0 +1,252 @@
+{
+    "api-platform/api-pack": {
+        "version": "v1.3.0"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "f132b33c43cf47b4451d91d2b57057eacb6b8e1d"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
+    "egulias/email-validator": {
+        "version": "3.1.1"
+    },
+    "fig/link-util": {
+        "version": "1.1.2"
+    },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
+        },
+        "files": [
+            "config/packages/fos_ckeditor.yaml"
+        ]
+    },
+    "jms/metadata": {
+        "version": "2.5.1"
+    },
+    "masterminds/html5": {
+        "version": "2.7.5"
+    },
+    "myclabs/deep-copy": {
+        "version": "1.10.2"
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
+    },
+    "phar-io/manifest": {
+        "version": "2.0.1"
+    },
+    "phar-io/version": {
+        "version": "3.1.0"
+    },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.2.2"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.4.0"
+    },
+    "phpspec/prophecy": {
+        "version": "1.13.0"
+    },
+    "phpunit/php-code-coverage": {
+        "version": "9.2.6"
+    },
+    "phpunit/php-file-iterator": {
+        "version": "3.0.5"
+    },
+    "phpunit/php-invoker": {
+        "version": "3.1.1"
+    },
+    "phpunit/php-text-template": {
+        "version": "2.0.4"
+    },
+    "phpunit/php-timer": {
+        "version": "5.0.3"
+    },
+    "phpunit/phpunit": {
+        "version": "9.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "9.3",
+            "ref": "a6249a6c4392e9169b87abf93225f7f9f59025e6"
+        },
+        "files": [
+            ".env.test",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
+    "psr/link": {
+        "version": "1.0.0"
+    },
+    "scienta/doctrine-json-functions": {
+        "version": "4.3.0"
+    },
+    "sebastian/cli-parser": {
+        "version": "1.0.1"
+    },
+    "sebastian/code-unit": {
+        "version": "1.0.8"
+    },
+    "sebastian/code-unit-reverse-lookup": {
+        "version": "2.0.3"
+    },
+    "sebastian/comparator": {
+        "version": "4.0.6"
+    },
+    "sebastian/complexity": {
+        "version": "2.0.2"
+    },
+    "sebastian/diff": {
+        "version": "4.0.4"
+    },
+    "sebastian/environment": {
+        "version": "5.1.3"
+    },
+    "sebastian/exporter": {
+        "version": "4.0.3"
+    },
+    "sebastian/global-state": {
+        "version": "5.0.3"
+    },
+    "sebastian/lines-of-code": {
+        "version": "1.0.3"
+    },
+    "sebastian/object-enumerator": {
+        "version": "4.0.4"
+    },
+    "sebastian/object-reflector": {
+        "version": "2.0.4"
+    },
+    "sebastian/recursion-context": {
+        "version": "4.0.4"
+    },
+    "sebastian/resource-operations": {
+        "version": "3.0.3"
+    },
+    "sebastian/type": {
+        "version": "2.3.4"
+    },
+    "sebastian/version": {
+        "version": "3.0.2"
+    },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        },
+        "files": [
+            "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "symfony/css-selector": {
+        "version": "v5.3.0"
+    },
+    "symfony/expression-language": {
+        "version": "v5.3.4"
+    },
+    "symfony/form": {
+        "version": "v5.3.2"
+    },
+    "symfony/intl": {
+        "version": "v5.3.4"
+    },
+    "symfony/mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
+    },
+    "symfony/mime": {
+        "version": "v5.3.2"
+    },
+    "symfony/options-resolver": {
+        "version": "v5.3.0"
+    },
+    "symfony/orm-pack": {
+        "version": "v2.1.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.23.0"
+    },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.23.0"
+    },
+    "symfony/serializer": {
+        "version": "v5.3.4"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.4"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.8"
+    },
+    "symfony/web-link": {
+        "version": "v5.3.4"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.5.0"
+    },
+    "theseer/tokenizer": {
+        "version": "1.2.0"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.0"
+    },
+    "twig/string-extra": {
+        "version": "v3.3.1"
+    },
+    "vich/uploader-bundle": {
+        "version": "1.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.7",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "config/packages/vich_uploader.yaml"
+        ]
+    },
+    "webmozart/assert": {
+        "version": "1.10.0"
+    },
+    "willdurand/negotiation": {
+        "version": "3.0.0"
+    }
+}

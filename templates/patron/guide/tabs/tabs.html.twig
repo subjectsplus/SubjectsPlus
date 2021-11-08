@@ -1,0 +1,18 @@
+{% for tab in tabs %}
+    {% set class = loop.first ? 'nav-link active' : 'nav-link' %}
+    <li class="nav-item">
+    {% if tab.external_url %}
+    <a class="{{ class }}" href="{{tab.external_url}}">Tab {{ tab.label }}</a>
+    {% else %}
+        <button class="{{ class }}" data-bs-toggle="tab" data-bs-target="#{{tab.id}}" type="button" role="tab" aria-controls="{{tab.id}}">
+        {{tab.label}}
+        </button>
+    {% endif %}
+    </li>
+
+{% endfor %}
+
+
+<!-- TODO: tabs that are external links -->
+<!-- TODO: aria-selected -->
+<!-- TODO: give these tabs real numbers -->

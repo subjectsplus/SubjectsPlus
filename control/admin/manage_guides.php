@@ -16,7 +16,7 @@ $subsubcat = "";
 $subcat = "admin";
 $page_title = "Subject/Librarian Associations";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 try { 	} catch (Exception $e) { echo $e; }
@@ -143,7 +143,7 @@ makePluslet(_("Manage Guides"), $mg_box, "no_overflow");
 
 print "</div></div>";
 
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 ?>
 

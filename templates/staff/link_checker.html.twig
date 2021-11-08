@@ -1,0 +1,45 @@
+{% extends 'staff/base.html.twig' %}
+
+{% block title %}{{ 'control.link_checker' | trans }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('linkcheck') }}
+{% endblock %}
+
+{% block body %}
+
+<div class="accordion mt-5" id="linkCheckAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseParams" aria-expanded="true" aria-controls="collapseOne">
+        {{ 'linkchecker.choose_a_guide' | trans }}
+      </button>
+    </h2>
+    <div id="collapseParams" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#linkCheckAccordion">
+      <div class="accordion-body">
+        <label for="guide-list" class="form-label">{{ 'link_checker.select_guide' | trans }}</label>
+        <div class="input-group">
+            {% include 'staff/shared/guide_dropdown.html.twig' with {'dropdownId': 'guide-list'} %}
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="check-links-button">{{'Check links in guide'}}</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseResults" aria-expanded="false" aria-controls="collapseTwo">
+        {{ 'link_checker.results' | trans }}
+      </button>
+    </h2>
+    <div id="collapseResults" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#linkCheckAccordion">
+      <div class="accordion-body">
+      <table class="table table-striped" id="results-table"></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

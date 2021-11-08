@@ -10,8 +10,8 @@
  */
 
 use SubjectsPlus\Control\Config;
-if ( file_exists( 'includes/version.php' ) ) {
-	include_once 'includes/version.php';
+if ( file_exists(__DIR__ . '/includes/version.php' ) ) {
+	include_once(__DIR__ . '/includes/version.php');
 }
 
 //variables required in header and add header
@@ -19,14 +19,14 @@ $subcat = "admin";
 $page_title = "Configuration Editing";
 $use_jquery = array( "ui_styles" );
 
-include( "includes/header.php" );
+include_once(__DIR__ . "/includes/header.php" );
 
 
 //new instance of config class
 $lobjConfig = new Config();
 
 //declare variable that stores configuration path
-$lstrConfigFilePath = 'includes/config.php';
+$lstrConfigFilePath = __DIR__ . '/includes/config.php';
 
 
 
@@ -1221,7 +1221,7 @@ if ( ! is_writable( $lstrConfigFilePath ) ) {
 }
 
 //SubjectsPlus footer
-include( "includes/footer.php" );
+include_once(__DIR__ . "/includes/footer.php" );
 
 //extra css to style tooltip feature
 //javascript for 'not right?' functionality, array ticks functionality, required

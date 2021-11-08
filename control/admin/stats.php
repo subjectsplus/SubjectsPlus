@@ -11,7 +11,7 @@
 $subcat = "analytics";
 $page_title = "SubjectsPlus Usage Statistics";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Stats;
@@ -147,6 +147,5 @@ $total_external_link_clicks = $stats->getTopExternalLinks();
 
 
 
-<?php 
-include("../includes/footer.php");
-?>
+<?php
+include_once(__DIR__ . "/../includes/footer.php");

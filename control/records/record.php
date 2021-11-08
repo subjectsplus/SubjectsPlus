@@ -27,7 +27,7 @@ if (isset($_REQUEST["wintype"]) && $_REQUEST["wintype"] == "pop") {
 }
 
 $tertiary_nav = "yes";
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // The following is just for testing purposes, to turn on/off the delete functionality
 //$_SESSION["eresource_mgr"] = 0;
@@ -129,7 +129,7 @@ if (isset($_GET["wintype"]) && $_GET["wintype"] == "pop") {
 
 // output our record, which will be blank if there's no id
 
-?> 
+?>
 
 <div id="maincontent">
 
@@ -613,7 +613,7 @@ print "</div>"; // close #maincontent
 </script>
 
 <?php
-include("../includes/footer.php");
+include_once(__DIR__ . "/../includes/footer.php");
 
 ?>
 

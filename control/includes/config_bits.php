@@ -17,7 +17,7 @@ $page_title = "Record Bits include";
 $header = "noshow";
 
 
-include("../includes/header.php");
+require_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 

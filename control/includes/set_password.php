@@ -19,7 +19,7 @@ $page_title = "Set Password";
 
 $no_header = "yes";
 
-include("../includes/header.php");
+require_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 
@@ -77,6 +77,4 @@ print $feedback;
 print $password_box;
 print "</div>";
 
-include("../includes/footer.php");
-
-?>
+require_once(__DIR__ . "/../includes/footer.php");

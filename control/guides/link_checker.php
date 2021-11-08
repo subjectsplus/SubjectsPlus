@@ -19,7 +19,7 @@ if( isset($_GET['type']) && strtolower( $_GET['type'] ) == 'records' )
 	$subcat = "records";
 	$page_title = "Records Link Checker";
 	$use_jquery = array("ui_styles");
-	include("../includes/header.php");
+    include_once(__DIR__ . "/../includes/header.php");
 
 	//create new link checker object
 	$lobjLinkChecker = new LinkChecker($proxyURL);
@@ -36,7 +36,7 @@ if( isset($_GET['type']) && strtolower( $_GET['type'] ) == 'records' )
 	$subcat = "guides";
 	$page_title = "Guide Link Checker";
 	$use_jquery = array("ui_styles");
-	include("../includes/header.php");
+    include_once(__DIR__ . "/../includes/header.php");
 
 	//create new link checker object
 	$lobjLinkChecker = new LinkChecker($proxyURL);
@@ -49,4 +49,4 @@ if( isset($_GET['type']) && strtolower( $_GET['type'] ) == 'records' )
 
 }
 
-include('../includes/footer.php'); ?>
+include_once(__DIR__ . "/../includes/footer.php"); ?>

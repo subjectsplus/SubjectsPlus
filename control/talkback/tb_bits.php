@@ -16,7 +16,7 @@ $subcat = "talkback";
 $page_title = "TB Bits include";
 $header = "noshow";
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // get our limit, if there is one
 // Keep it safe by only accepting certain values

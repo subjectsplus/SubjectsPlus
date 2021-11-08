@@ -9,9 +9,9 @@
  *   @date mar 2011
  */
 
-require_once("autoloader.php");
+require_once(__DIR__ . "/autoloader.php");
 
-require_once("functions.php");
+require_once(__DIR__ . "/functions.php");
 
 //include_once(dirname(dirname(dirname(__FILE__))) . "/lib/CSRF-Protector-PHP-nojs-support/libs/csrf/csrfprotector.php");
 
@@ -19,6 +19,10 @@ use SubjectsPlus\Control\DBConnector;
 use SubjectsPlus\Control\BuildNav;
 use SubjectsPlus\Control\Querier;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
+$session = new Session();
+$session->start();
 
 
 //added in order to redirect to proper page if config file doesn't exist or if only placeholder
@@ -40,6 +44,9 @@ if( !file_exists( dirname(__FILE__) . '/config.php' ) || filesize( dirname(__FIL
 require_once(dirname(__FILE__) . "/config.php");
 
 
+
+
+
 if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
 	
 	isCool($_SERVER['mail'],"", true);
@@ -48,7 +55,7 @@ if ((isset($use_shibboleth) && $use_shibboleth) == TRUE) {
 	
 	$db = new Querier;
 	// start our session
-	session_start();
+	//session_start();
 	
 }
 

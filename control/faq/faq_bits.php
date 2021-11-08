@@ -17,7 +17,7 @@ $page_title = "FAQ Bits include";
 $header = "noshow";
 
 
-include("../includes/header.php");
+include_once(__DIR__ . "/../includes/header.php");
 
 // Connect to database
 
@@ -61,4 +61,3 @@ switch ($_POST["type"]) {
         echo "<div class=\"rec_delete_confirm\">" . _("Delete request sent to ") . "$administrator_email</div>";
         break;
 }
-?>

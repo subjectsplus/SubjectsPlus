@@ -14,10 +14,10 @@
 // $med_course_codes = []; //an array of course codes
 //
 
-include('config.php');
-include(getcwd() . "/../../control/includes/autoloader.php"); // need to use this if header not loaded yet
-include(getcwd() . "/../../control/includes/config.php");
-require_once('LTICourseController.php');
+include(__DIR__ . '/config.php');
+include_once(__DIR__ . "/../../control/includes/autoloader.php"); // need to use this if header not loaded yet
+include_once(__DIR__ . "/../../control/includes/config.php");
+require_once(__DIR__ . '/LTICourseController.php');
 
 try {
     $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');

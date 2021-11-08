@@ -1,0 +1,8 @@
+<h4 class="mt-4 text-center">{{ 'popular_list.trial_databases' | trans }}</h4>
+
+
+<ul>
+{% for database in trialDatabases %}
+<li><a href="{{database.url}}">{{database.title}}</a></li>
+{% endfor %}
+</ul>

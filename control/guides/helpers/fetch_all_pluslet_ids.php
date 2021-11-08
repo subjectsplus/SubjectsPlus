@@ -5,8 +5,8 @@
  * Date: 1/5/16
  * Time: 2:10 PM
  */
-require_once("../../includes/autoloader.php");
-require_once("../../includes/config.php");
+require_once(__DIR__ . "/../../includes/autoloader.php");
+require_once(__DIR__ . "/../../includes/config.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\PlusletData;

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * FaqSubject.
  *
  * @ORM\Table(name="faq_subject", indexes={@ORM\Index(name="fk_fs_faq_id_idx", columns={"faq_id"}), @ORM\Index(name="fk_fs_subject_id_idx", columns={"subject_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\FaqSubjectRepository")
  */
 class FaqSubject
 {
@@ -22,9 +22,9 @@ class FaqSubject
     private $faqSubjectId;
 
     /**
-     * @var \Faq
+     * @var \Faq|null
      *
-     * @ORM\ManyToOne(targetEntity="Faq")
+     * @ORM\ManyToOne(targetEntity="Faq", inversedBy="faqSubject")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(name="faq_id", referencedColumnName="faq_id")
      * })
@@ -32,7 +32,7 @@ class FaqSubject
     private $faq;
 
     /**
-     * @var \Subject
+     * @var \Subject|null
      *
      * @ORM\ManyToOne(targetEntity="Subject")
      * @ORM\JoinColumns({
@@ -68,5 +68,9 @@ class FaqSubject
         $this->subject = $subject;
 
         return $this;
+    }
+
+    public function __toString(): string {
+        return "Entity: FaqSubject, Id: " . $this->getFaqSubjectId();
     }
 }

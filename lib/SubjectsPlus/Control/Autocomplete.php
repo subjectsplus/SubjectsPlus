@@ -12,7 +12,7 @@ namespace SubjectsPlus\Control;
 
 use SubjectsPlus\Control\Querier;
 
-include('../../control/includes/functions.php');
+include_once(__DIR__ . '/../../../control/includes/functions.php');
 
 class Autocomplete {
     private $param;

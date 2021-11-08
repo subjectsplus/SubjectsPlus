@@ -1,6 +1,6 @@
 <?php
 
-include("includes/config.php");
+include_once(__DIR__ . "/includes/config.php");
 
 global $use_shibboleth;
 global $shibboleth_logout;

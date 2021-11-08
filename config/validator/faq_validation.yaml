@@ -1,0 +1,36 @@
+########################################
+# Full List of Constraints: https://symfony.com/doc/current/reference/constraints.html
+# Follow the YAML examples for applying a specific constraint.
+# 
+# NOTES
+# Omitting the "groups" field will keep the constraint apart of the default group.
+# How to apply validation groups: https://symfony.com/doc/current/form/validation_groups.html
+#
+# FORMAT
+# App\Entity\[EntityName]:
+#   constraints:
+#     - [Constraint]:
+#          fields: [ [EntityPropertyName], ... ]
+#          message: "[ErrorMessage]"
+#          groups: [ [GroupName] ]
+#   properties:
+#     [EntityPropertyName]:
+#       - [Constraint]:
+#            message: "[ErrorMessage]"
+#            groups: [ [GroupName] ]
+#
+########################################
+
+App\Entity\Faq:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: [question]
+            message: "faq.constraints.question.unique_entity"
+    properties:
+        question:
+          - NotNull: 
+              message: "faq.question.not_null"
+        answer:
+          - NotNull: 
+              message: "faq.answer.not_null"
+        

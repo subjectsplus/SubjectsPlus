@@ -1,4 +1,4 @@
-<?php include("../includes/header.php"); ?>
+<?php include_once(__DIR__ . "/../includes/header.php"); ?>
 
 <form id="create-record-from" class="pure-form pure-form-stacked">
     <fieldset>

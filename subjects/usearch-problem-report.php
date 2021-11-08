@@ -7,9 +7,9 @@ use SubjectsPlus\Control\SlackMessenger;
 use SubjectsPlus\Control\ProblemReportService;
 
 
-include( "../control/includes/config.php" );
-include( "../control/includes/functions.php" );
-include( "../control/includes/autoloader.php" );
+include_once(__DIR__ . "/../control/includes/config.php" );
+include_once(__DIR__ . "/../control/includes/functions.php" );
+include_once(__DIR__ . "/../control/includes/autoloader.php" );
 
 
 $problemReportService = new ProblemReportService();
@@ -148,14 +148,14 @@ $form_submit_fail = _("There was a problem submitting your issue. Please contact
  * Variables set here will be used in the appropriate theme header
  * @global $subjects_theme
  */
-include(theme_file("views/usearch-problem-report/page_metadata.php", $subjects_theme));
+include(theme_file(__DIR__ . "/views/usearch-problem-report/page_metadata.php", $subjects_theme));
 
 
 /**
  * Include the branch_metadata based on the theme used
  * @global $subjects_theme
  */
-include(theme_file("views/usearch-problem-report/branch_metadata.php", $subjects_theme));
+include(theme_file(__DIR__ . "/views/usearch-problem-report/branch_metadata.php", $subjects_theme));
 
 
 
@@ -164,7 +164,7 @@ include(theme_file("views/usearch-problem-report/branch_metadata.php", $subjects
  * @global $subjects_theme
  */
 // Looks wrong but matches previous behavior
-include(theme_file("includes/header.php", $subjects_theme, $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/header.php", $subjects_theme, $subjects_theme));
 
 
 
@@ -391,5 +391,5 @@ echo $tpl->render( $tpl_name, array(
  * @global $subjects_theme
  */
 // Looks wrong but matches previous behavior
-include(theme_file("includes/footer.php", $subjects_theme, $subjects_theme));
+include_once(theme_file(__DIR__ . "/includes/footer.php", $subjects_theme, $subjects_theme));
 

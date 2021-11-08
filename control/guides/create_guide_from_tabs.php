@@ -11,8 +11,8 @@ global $AssetPath;
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Guide\CopyGuide;
 
-include ("../includes/autoloader.php");
-include ("../includes/config.php");
+include_once(__DIR__ . "/../includes/autoloader.php");
+include_once(__DIR__ . "/../includes/config.php");
 
 if (isset($_REQUEST['subject_id'])) {
     session_start();
@@ -33,5 +33,5 @@ if (isset($_REQUEST['subject_id'])) {
 
     exit;
 } else {
-    include("../includes/header.php");
+    include_once(__DIR__ . "/../includes/header.php");
 }

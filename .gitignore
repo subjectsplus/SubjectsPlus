@@ -92,7 +92,6 @@ tests/_output/*
 *.pydevproject
 .metadata
 .gradle
-bin/
 tmp/
 *.tmp
 *.bak
@@ -164,6 +163,7 @@ subjects/.htaccess
 api/.htaccess
 
 ### Symfony template
+.env
 # Cache and logs (Symfony2)
 /app/cache/*
 /app/logs/*
@@ -180,6 +180,10 @@ api/.htaccess
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
+
+var/cache/*
+var/log/*
+
 
 # Logs (Symfony4)
 /var/log/*
@@ -294,7 +298,7 @@ fabric.properties
 composer.phar
 /vendor/
 
-composer.lock
+
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
@@ -334,6 +338,7 @@ symfony.lock
 /bin/*
 !bin/console
 !bin/symfony_requirements
+!bin/phpunit
 /vendor/
 
 # Assets and user uploads
@@ -412,7 +417,6 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
@@ -580,10 +584,6 @@ PublishScripts/
 *.nupkg
 # NuGet Symbol Packages
 *.snupkg
-# The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
-# except build/, which is used as an MSBuild target.
-!**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
@@ -776,7 +776,6 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
@@ -944,10 +943,6 @@ PublishScripts/
 *.nupkg
 # NuGet Symbol Packages
 *.snupkg
-# The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
-# except build/, which is used as an MSBuild target.
-!**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
@@ -1114,9 +1109,7 @@ FodyWeavers.xsd
 composer.phar
 /vendor/
 
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -1238,22 +1231,26 @@ Temporary Items
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
-/public/build/
+/public/build
+public/build
+public/bundles
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+/var
+var
+/var/cache/dev/
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
+###> phpunit/phpunit ###
 /phpunit.xml
-###< symfony/phpunit-bridge ###
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> phpdoc ###
+.phpdoc/
+docs/
+###< phpdoc ###
+
+### image/file uploads
+public/uploads/

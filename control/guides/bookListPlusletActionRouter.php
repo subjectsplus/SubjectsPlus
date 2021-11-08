@@ -6,8 +6,8 @@
  * Time: 2:37 PM
  */
 
-include_once("../includes/config.php");
-include("../includes/functions.php");
+include_once(__DIR__ . "/../includes/config.php");
+include_once(__DIR__ . "/../includes/functions.php");
 
 $bookListRouter = function ($action) {
 

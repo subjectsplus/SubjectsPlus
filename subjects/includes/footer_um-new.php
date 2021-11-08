@@ -7,7 +7,7 @@
 </div>
 
 <!--Load Jekyll-built site footer (Site Footer, Site Toolbar)-->
-<?php include("includes/jekyll-site-footer.php"); ?>
+<?php include_once(__DIR__ . "/jekyll-site-footer.php"); ?>
 
 <!--container for side navigation contents-->
 <div class="c-offcanvas is-hidden slim" id="left">
@@ -19,7 +19,7 @@
 </div>
 
 <!--Load Jekyll-built site scripts (Site Header Scripts, Mega Menus Scripts, Component Scripts)-->
-<?php include("includes/jekyll-site-scripts.php"); ?>
+<?php include_once(__DIR__ . "/jekyll-site-scripts.php"); ?>
 
 <script>
     $( function(){

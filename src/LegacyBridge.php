@@ -9,6 +9,7 @@ class LegacyBridge
 {
     public static function prepareLegacyScript(Request $request, Response $response, string $publicDirectory)
     {
+
         // If Symfony successfully handled the route, you do not have to do anything.
         if (false === $response->isNotFound()) {
             return;
@@ -19,10 +20,16 @@ class LegacyBridge
         // some env vars.
         $legacyScriptFilename = '..'.$request->getPathInfo();
 
+        if (!file_exists($legacyScriptFilename))
+            return null;
+            
         if (is_file($legacyScriptFilename)) {
-            return $legacyScriptFilename;
+            $_SERVER["PHP_SELF"] = $request->getPathInfo();
+            $_SERVER["SCRIPT_FILENAME"] = basename($request->getPathInfo());
         } else {
-            return $legacyScriptFilename.'/index.php';
+            $legacyScriptFilename .= '/index.php';
+            $_SERVER["PHP_SELF"] = $request->getPathInfo() .'/index.php';
+            $_SERVER["SCRIPT_FILENAME"] = 'index.php';
         }
 
         return $legacyScriptFilename;

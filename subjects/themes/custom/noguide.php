@@ -15,7 +15,7 @@ $use_jquery = array("ui");
 
 
 
-include("includes/header_custom.php");
+include_once(__DIR__ . "/includes/header_custom.php");
 
 ?>
 
@@ -44,6 +44,6 @@ include("includes/header_custom.php");
 <?php 
 
 
-include("includes/footer_custom.php");
+include_once(__DIR__ . "/includes/footer_custom.php");
 
 ?>

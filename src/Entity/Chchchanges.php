@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Chchchanges.
  *
  * @ORM\Table(name="chchchanges")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ChchchangesRepository")
  */
 class Chchchanges
 {
@@ -22,11 +22,13 @@ class Chchchanges
     private $chchchangesId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="staff_id", type="integer", nullable=false)
+     * @var \Staff|null
+     * @ORM\ManyToOne(targetEntity="Staff")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
+     * })
      */
-    private $staffId;
+    private $staff;
 
     /**
      * @var string
@@ -57,25 +59,30 @@ class Chchchanges
     private $message;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeImmutable
      *
-     * @ORM\Column(name="date_added", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="date_added", type="datetime_immutable")
      */
-    private $dateAdded = 'CURRENT_TIMESTAMP';
+    private $dateAdded;
+
+    public function __construct()
+    {
+        $this->dateAdded = new \DateTimeImmutable();
+    }
 
     public function getChchchangesId(): ?string
     {
         return $this->chchchangesId;
     }
 
-    public function getStaffId(): ?int
+    public function getStaff(): ?Staff
     {
-        return $this->staffId;
+        return $this->staff;
     }
 
-    public function setStaffId(int $staffId): self
+    public function setStaff(Staff $staff): self
     {
-        $this->staffId = $staffId;
+        $this->staff = $staff;
 
         return $this;
     }
@@ -131,12 +138,5 @@ class Chchchanges
     public function getDateAdded(): ?\DateTimeInterface
     {
         return $this->dateAdded;
-    }
-
-    public function setDateAdded(\DateTimeInterface $dateAdded): self
-    {
-        $this->dateAdded = $dateAdded;
-
-        return $this;
     }
 }
