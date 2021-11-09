@@ -159,8 +159,13 @@ class MediaController extends AbstractController
      */
     public function show(Request $request, Media $media, MediaService $uploader)
     {
+        /** @var MediaAttachmentRepository $mediaAttRepo */
+        $mediaAttRepo = $this->getDoctrine()->getRepository(MediaAttachment::class);
+        $attachments = $mediaAttRepo->findBy(['media' => $media]);
+
         return $this->render('media/show.html.twig', [
             'media' => $media,
+            'attachments' => $attachments,
         ]);
     }
 
