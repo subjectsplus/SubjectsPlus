@@ -135,7 +135,8 @@ class MediaService {
             // Generate image
             $image = new \Imagick($path);
             //$res = $image->resizeImage($newWidth, $newHeight, \Imagick::FILTER_LANCZOS, 1, true);
-            $res = $image->thumbnailImage($newWidth, $newHeight, true);
+            //$res = $image->thumbnailImage($newWidth, $newHeight, true);
+            $res = $image->scaleImage($newWidth, 0);
             
             if ($res === true) {
                 $image->writeImage($path);
@@ -296,7 +297,11 @@ class MediaService {
                     if ($media !== null) {
                         // check if media attachment already exists
                         $mediaAttachmentRepo = $this->entityManager->getRepository(MediaAttachment::class);
-                        $mediaAttachment = $mediaAttachmentRepo->findOneBy(['media' => $media]);
+                        $mediaAttachment = $mediaAttachmentRepo->findOneBy([
+                            'media' => $media, 
+                            'attachmentId' => $attachmentId,
+                            'attachmentType' => $attachmentType,
+                        ]);
                         
                         if ($mediaAttachment === null) {
                             $mediaAttachment = new MediaAttachment();
