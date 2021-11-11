@@ -5,11 +5,14 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.upload_destination: '/uploads/' # Relative path from public/ for file uploads
-    app.small_image_dimensions: '150x150' # Maximum dimensions (width x height) in pixels for small image
+    
+    # IMAGE SETTINGS
+    app.small_image_dimensions: '264x264' # Maximum dimensions (width x height) in pixels for small image
     app.medium_image_dimensions: '500x500' # Maximum dimensions (width x height) in pixels for medium image
     app.large_image_dimensions: '750x750' # Maximum dimensions (width x height) in pixels for large image
+    app.keep_original_image: false
 
-services:
+    services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -20,6 +23,7 @@ services:
             $smallImageDimensions: '%app.small_image_dimensions%' 
             $mediumImageDimensions: '%app.medium_image_dimensions%'
             $largeImageDimensions: '%app.large_image_dimensions%'
+            $keepOriginalImage: '%app.keep_original_image%'
 
 
     # makes classes in src/ available to be used as services

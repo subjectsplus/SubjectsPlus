@@ -134,9 +134,11 @@ class MediaService {
         if (copy($file->getRealPath(), $path) === true) {
             // Generate image
             $image = new \Imagick($path);
-            //$res = $image->resizeImage($newWidth, $newHeight, \Imagick::FILTER_LANCZOS, 1, true);
+            $image->setImageCompressionQuality(85);
+            $image->stripImage();
+            $res = $image->resizeImage($newWidth, 0, \Imagick::FILTER_LANCZOS, 1);
             //$res = $image->thumbnailImage($newWidth, $newHeight, true);
-            $res = $image->scaleImage($newWidth, 0);
+            //$res = $image->scaleImage($newWidth, 0);
             
             if ($res === true) {
                 $image->writeImage($path);
@@ -169,18 +171,29 @@ class MediaService {
             $height = $image->getImageHeight();
 
             $image->destroy();
+
+            $sized = false;
             
             if ($width > $this->smallImageDimensions[0] || $height > $this->smallImageDimensions[1]) {
                 $generatedImages['small'] = $this->generateSizedImage($file, self::SMALL_IMAGE);
+                $sized = true;
             }
 
             if ($width > $this->mediumImageDimensions[0] || $height > $this->mediumImageDimensions[1]) {
                 $generatedImages['medium'] = $this->generateSizedImage($file, self::MEDIUM_IMAGE);
+                $sized = true;
             }
 
             if ($width > $this->largeImageDimensions[0] || $height > $this->largeImageDimensions[1]) {
                 $generateImages['large'] = $this->generateSizedImage($file, self::LARGE_IMAGE);
+                $sized = true;
             }
+
+            // if ($sized === false) {
+            //     // we did not generate any sized images
+            //     // perform only image compression
+            //     $image = new \Imagick($path);
+            // }
             
             return $generatedImages;
         } catch (\Exception $e) {

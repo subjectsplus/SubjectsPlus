@@ -13,6 +13,7 @@ use App\Form\MediaEditType;
 use App\Form\CKEditorImageUploadType;
 use App\Service\MediaService;
 use App\Service\ValidationService;
+use App\Service\ChangeLogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -197,5 +198,43 @@ class MediaController extends AbstractController
             'media' => $media,
             'form' => $form->createView(),
         ]);
-    } 
+    }
+
+    // public function delete(Request $request, ChangeLogService $cls, Media $media)
+    // {
+    //     // Check whether user is authenticated
+    //     // TODO: Check if permissions permit user to delete the faq
+    //     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    //     // Delete Faq and associated FaqSubject's and FaqFaqPage's
+    //     if ($this->isCsrfTokenValid('delete'.$media->getMediaId(), $request->request->get('_token'))) {
+    //         /** @var EntityManagerInterface $entityManager */
+    //         $entityManager = $this->getDoctrine()->getManager();
+
+    //         $entityManager->transactional(function() use($media, $cls) {
+    //             // Preserve before deletion
+    //             $mediaId = $media->getMediaId();
+    //             $title = $media->getTitle();
+
+    //             /** @var MediaAttachmentRepository $mediaAttRepo */
+    //             $mediaAttRepo = $this->getDoctrine()->getRepository(MediaAttachment::class);
+    //             $attachments = $mediaAttRepo->findBy([
+    //                 'media' => $media,
+    //             ]);
+
+    //             // Delete Media (Set delete flag)
+    //             $media->setDeletedAt(new \DateTimeImmutable());
+
+    //             // Create new log entry
+    //             /** @var Staff $staff */
+    //             $staff = $this->getUser();
+    //             $cls->addLog($staff, 'media', $mediaId, $title, 'delete');
+
+    //             // Create flash message
+    //             $this->addFlash('notice', 'Success! Deleted Media!');
+    //         });
+    //     }
+
+    //     return $this->redirectToRoute('faq_index');
+    // }
 }
