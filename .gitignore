@@ -89,6 +89,9 @@ new_acquisitions.php
 tests/_output/*
 
 
+# Do NOT Ignore templates/backend/log
+!templates/backend/log
+
 *.pydevproject
 .metadata
 .gradle
