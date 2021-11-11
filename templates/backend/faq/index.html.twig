@@ -1,20 +1,61 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend/base.html.twig' %}
 
-{% block title %}Hello FaqController!{% endblock %}
+{% block title %}FAQs index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+    <h1>FAQs index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <a href="{{ path('faq_new') }}">Create new</a>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FaqId</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Keywords</th>
+                <th>Visibility</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for faq in faqs %}
+            <tr>
+                <td>{{ faq.faqId }}</td>
+                <td>{{ faq.question | raw }}</td>
+                <td>{{ faq.answer | raw }}</td>
+                <td>
+                    {% for keyword in faq.keywords %}
+                        {{ keyword }}
+                        {% if not loop.last %}
+                            {{'| '}}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if faq.active %}
+                        {{ 'Active' }}
+                    {% else %}
+                        {{ 'Inactive' }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>
+                    <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/src/Controller/Backend/FaqController.php'|file_link(0) }}">src/Controller/Backend/FaqController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/templates/backend/faq/index.html.twig'|file_link(0) }}">templates/backend/faq/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

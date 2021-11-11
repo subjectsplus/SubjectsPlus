@@ -1,0 +1,74 @@
+{% block content %}
+<style>
+
+    #media-sidebar {
+      float: right;
+      width: 35%;
+      box-sizing: border-box;
+      padding: 0 0 0 20px;
+      display: none;
+    }
+
+    #media-list {
+      list-style-type: none;
+      margin: 0 !important;
+      padding: 0;
+    }
+
+    #media-list li {
+      background: #FAFAFA;
+      margin-bottom: 1px;
+      height: 56px;
+      line-height: 56px;
+      cursor: pointer;
+    }
+
+    #media-list li:nth-child(2n) {
+      background: #F3F3F3;
+    }
+
+    #media-list li:hover {
+      background: #FFFDE3;
+      border-left: 5px solid #DCDAC1;
+      margin-left: -5px;
+    }
+
+    .media-card {
+      padding: 0 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .media-card .media-picture {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+</style>
+
+<div id="media-sidebar">
+    <div class="media-cards">
+        <h1>Your Media</h1>
+        <ul id="media-list">
+            {% for media_entry in media %}
+                <li>
+                    <div class="media-card" draggable="true" data-media-id="{{ media_entry.mediaId }}"
+                        data-mime-type="{{ media_entry.mimeType }}" 
+                        data-link="{{ media_entry | get_media_url }}"
+                        data-title="{{ media_entry.title }}" data-alt-text="{{ media_entry.altText }}"
+                        data-caption="{{ media_entry.caption }}">
+                        <img class="media-picture" src="
+                        {% if 'image/' in media_entry.mimeType %}
+                            {# media_entry is an image #}
+                            {{ asset(media_entry | get_media_url) }}
+                        {% endif %}"
+                            height="50px" width="50px" />
+                            {{ media_entry.title }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
