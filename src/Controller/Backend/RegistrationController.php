@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Backend;
 
 use App\Entity\Staff;
 use App\Form\RegistrationFormType;
@@ -58,7 +58,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('control_dashboard');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('backend/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
