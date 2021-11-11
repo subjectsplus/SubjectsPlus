@@ -1,0 +1,12 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}New FAQ{% endblock %}
+
+{% block body %}
+    <h1>Create new FAQ</h1>
+
+    {{ include('backend/media/sidebar.html.twig') }}
+    {{ include('backend/faq/_form.html.twig') }}
+
+    <a href="{{ path('faq_index') }}">back to list</a>
+{% endblock %}
