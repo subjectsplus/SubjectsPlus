@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Staff;
+namespace App\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,9 +13,8 @@ class DashboardController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('staff/dashboard/index.html.twig', [
+        return $this->render('backend/dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
-            'user' => $this->getUser()
         ]);
     }
 }
