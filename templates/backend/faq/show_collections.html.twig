@@ -1,0 +1,56 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}FAQs by Collection{% endblock %}
+
+{% block body %}
+    <h1>FAQs by Collection</h1>
+    
+    {% for name, collection in collection_faqs %}
+        <h2>{{ name | raw}}</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FaqId</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Keywords</th>
+                    <th>Visibility</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for faq in collection %}
+                <tr>
+                    <td>{{ faq.faqId }}</td>
+                    <td>{{ faq.question | raw }}</td>
+                    <td>{{ faq.answer | raw }}</td>
+                    <td>
+                        {% for keyword in faq.keywords %}
+                            {{ keyword }}
+                            {% if not loop.last %}
+                                {{'| '}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if faq.active %}
+                            {{ 'Active' }}
+                        {% else %}
+                            {{ 'Inactive' }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>
+                        <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock %}
