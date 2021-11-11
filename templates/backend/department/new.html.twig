@@ -1,11 +1,11 @@
-{% extends 'staff/base.html.twig' %}
+{% extends 'backend/base.html.twig' %}
 
 {% block title %}New Department{% endblock %}
 
 {% block body %}
     <h1>Create new Department</h1>
 
-    {{ include('department/_form.html.twig') }}
+    {{ include('backend/department/_form.html.twig') }}
 
     <a href="{{ path('department_index') }}">back to list</a>
 {% endblock %}

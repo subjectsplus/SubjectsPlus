@@ -1,13 +1,13 @@
-{% extends 'staff/base.html.twig' %}
+{% extends 'backend/base.html.twig' %}
 
 {% block title %}Edit Department{% endblock %}
 
 {% block body %}
     <h1>Edit Department</h1>
 
-    {{ include('department/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('backend/department/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('department_index') }}">back to list</a>
 
-    {{ include('department/_delete_form.html.twig') }}
+    {{ include('backend/department/_delete_form.html.twig') }}
 {% endblock %}
