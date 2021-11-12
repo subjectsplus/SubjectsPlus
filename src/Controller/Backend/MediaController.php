@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Staff;
+namespace App\Controller\Backend;
 
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
@@ -33,7 +33,7 @@ class MediaController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('media/index.html.twig', [
+        return $this->render('backend/media/index.html.twig', [
             'controller_name' => 'MediaController',
         ]);
     }
@@ -57,7 +57,7 @@ class MediaController extends AbstractController
         $logger->info("Target: " . $target);
         $logger->info("Target Id: " . $targetId);
 
-        return $this->render('media/browse.html.twig', [
+        return $this->render('backend/media/browse.html.twig', [
             
         ]);
     }
@@ -71,7 +71,7 @@ class MediaController extends AbstractController
      * 
      * @Route("/upload", name="media_upload")
      * 
-     * @return Response Pre-Submission: Renders 'media/upload.html.twig' template with parameters 'form' signifying the form's view, 
+     * @return Response Pre-Submission: Renders 'backend/media/upload.html.twig' template with parameters 'form' signifying the form's view, 
      * 'button_label' signifying the label of the submit button, and 'staff_media' signifying media the logged in staff member has
      * previously uploaded.
      * 
@@ -136,7 +136,7 @@ class MediaController extends AbstractController
             ]);
         }
         
-        return $this->render('media/upload.html.twig', [
+        return $this->render('backend/media/upload.html.twig', [
             'form' => $form->createView(),
             'button_label' => 'Upload File',
             'staff_media' => $staffMedia,
@@ -146,14 +146,14 @@ class MediaController extends AbstractController
     /**
      * Renders a display page for Media source.
      * 
-     * @return Response Renders 'media/show.html.twig' template with parameter 'media' signifying
+     * @return Response Renders 'backend/media/show.html.twig' template with parameter 'media' signifying
      * the Media entity to display.
      * 
      * @Route("/{mediaId}", name="media_show")
      */
     public function show(Request $request, Media $media, MediaService $uploader)
     {
-        return $this->render('media/show.html.twig', [
+        return $this->render('backend/media/show.html.twig', [
             'media' => $media,
         ]);
     }
@@ -161,7 +161,7 @@ class MediaController extends AbstractController
     /**
      * Renders an edit page for the Media source.
      * 
-     * @return Response Pre-Submission: Renders 'media/edit.html.twig' template with parameter 'media' signifying
+     * @return Response Pre-Submission: Renders 'backend/media/edit.html.twig' template with parameter 'media' signifying
      * the Media entity to edit and 'form' signifying the form's view.
      * 
      * Post-Submission: Saves the changes to the database and redirects to the 'media_show' route
@@ -182,7 +182,7 @@ class MediaController extends AbstractController
             ]);
         }
 
-        return $this->render('media/edit.html.twig', [
+        return $this->render('backend/media/edit.html.twig', [
             'media' => $media,
             'form' => $form->createView(),
         ]);

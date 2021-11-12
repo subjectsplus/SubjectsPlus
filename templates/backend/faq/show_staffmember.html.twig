@@ -1,0 +1,55 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Staff FAQs{% endblock %}
+
+{% block body %}
+    <h1>Staff FAQs</h1>
+    <h2>{{ "%s (%s)"|format(staffName, staffEmail) }}</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FaqId</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Keywords</th>
+                <th>Visibility</th>
+                <th>Action,Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in faqs %}
+                <tr>
+                    <td>{{ entry.faq.faqId }}</td>
+                    <td>{{ entry.faq.question | raw }}</td>
+                    <td>{{ entry.faq.answer | raw }}</td>
+                    <td>
+                        {% for keyword in entry.faq.keywords %}
+                            {{ keyword }}
+                            {% if not loop.last %}
+                                {{'| '}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if entry.faq.active %}
+                            {{ 'Active' }}
+                        {% else %}
+                            {{ 'Inactive' }}
+                        {% endif %}
+                    </td>
+                    <td>{{ "%s, %s"|format(entry.message, entry.dateAdded|format_date())}}</td>
+                    <td>
+                        <a href="{{ path('faq_show', {'faqId': entry.faq.faqId}) }}">show</a>
+                        <a href="{{ path('faq_edit', {'faqId': entry.faq.faqId}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
