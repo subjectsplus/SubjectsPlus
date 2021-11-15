@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Staff;
+namespace App\Controller\Backend;
 
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
@@ -110,16 +110,19 @@ class MediaController extends AbstractController
                 $uploadResults = $uploader->uploadFile($upload);
                 $upload = $uploadResults['file'];
                 $fileName = $uploadResults['fileName'];
+                $mimeType = $upload->getMimeType();
 
-                $sizedImages = $uploader->generateSizedImages($upload);
-                $logger->info("Sized Images: ");
-                foreach ($sizedImages as $image) {
-                    $logger->info($image);
+                if ($mimeType !== null && substr($mimeType, 0, 6) === 'image/') {
+                    $sizedImages = $uploader->generateSizedImages($upload);
+                    $logger->info("Sized Images: ");
+                    foreach ($sizedImages as $image) {
+                        $logger->info($image);
+                    }
                 }
                 
                 // Fill Media entity values
                 $media->setFileName($fileName);
-                $media->setMimeType($upload->getMimeType());
+                $media->setMimeType($mimeType);
                 $media->setFilesize($upload->getSize());
                 $media->setStaff($staff);
                 
@@ -140,7 +143,7 @@ class MediaController extends AbstractController
             ]);
         }
         
-        return $this->render('media/upload.html.twig', [
+        return $this->render('backend/media/upload.html.twig', [
             'form' => $form->createView(),
             'button_label' => 'Upload File',
             'staff_media' => $staffMedia,
@@ -155,15 +158,10 @@ class MediaController extends AbstractController
      * 
      * @Route("/{mediaId}", name="media_show")
      */
-    public function show(Request $request, Media $media, MediaService $uploader)
+    public function show(Request $request, Media $media, MediaService $uploader): Response
     {
-        /** @var MediaAttachmentRepository $mediaAttRepo */
-        $mediaAttRepo = $this->getDoctrine()->getRepository(MediaAttachment::class);
-        $attachments = $mediaAttRepo->findBy(['media' => $media]);
-
         return $this->render('backend/media/show.html.twig', [
             'media' => $media,
-            'attachments' => $attachments,
         ]);
     }
 
@@ -197,41 +195,42 @@ class MediaController extends AbstractController
         ]);
     }
 
-    // public function delete(Request $request, ChangeLogService $cls, Media $media)
-    // {
-    //     // Check whether user is authenticated
-    //     // TODO: Check if permissions permit user to delete the faq
-    //     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    /**
+     * Performs a delete request for the Media entity.
+     * 
+     * @return Response Upon successful deletion of Media entity, redirects to the media_upload route.
+     * 
+     * @Route("/{mediaId}", name="media_delete", methods={"POST"})
+     */
+    public function delete(Request $request, ChangeLogService $cls, Media $media): Response
+    {
+        // Check whether user is authenticated
+        // TODO: Check if permissions permit user to delete the faq
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-    //     // Delete Faq and associated FaqSubject's and FaqFaqPage's
-    //     if ($this->isCsrfTokenValid('delete'.$media->getMediaId(), $request->request->get('_token'))) {
-    //         /** @var EntityManagerInterface $entityManager */
-    //         $entityManager = $this->getDoctrine()->getManager();
+        // Delete Faq and associated FaqSubject's and FaqFaqPage's
+        if ($this->isCsrfTokenValid('delete'.$media->getMediaId(), $request->request->get('_token'))) {
+            /** @var EntityManagerInterface $entityManager */
+            $entityManager = $this->getDoctrine()->getManager();
 
-    //         $entityManager->transactional(function() use($media, $cls) {
-    //             // Preserve before deletion
-    //             $mediaId = $media->getMediaId();
-    //             $title = $media->getTitle();
+            $entityManager->transactional(function() use($media, $cls) {
+                // Preserve before deletion
+                $mediaId = $media->getMediaId();
+                $title = $media->getTitle();
 
-    //             /** @var MediaAttachmentRepository $mediaAttRepo */
-    //             $mediaAttRepo = $this->getDoctrine()->getRepository(MediaAttachment::class);
-    //             $attachments = $mediaAttRepo->findBy([
-    //                 'media' => $media,
-    //             ]);
+                // Delete Media (Set delete flag)
+                $media->setDeletedAt(new \DateTimeImmutable());
 
-    //             // Delete Media (Set delete flag)
-    //             $media->setDeletedAt(new \DateTimeImmutable());
+                // Create new log entry
+                /** @var Staff $staff */
+                $staff = $this->getUser();
+                $cls->addLog($staff, 'media', $mediaId, $title, 'delete');
 
-    //             // Create new log entry
-    //             /** @var Staff $staff */
-    //             $staff = $this->getUser();
-    //             $cls->addLog($staff, 'media', $mediaId, $title, 'delete');
+                // Create flash message
+                $this->addFlash('notice', 'Success! Deleted Media!');
+            });
+        }
 
-    //             // Create flash message
-    //             $this->addFlash('notice', 'Success! Deleted Media!');
-    //         });
-    //     }
-
-    //     return $this->redirectToRoute('faq_index');
-    // }
+        return $this->redirectToRoute('media_upload');
+    }
 }

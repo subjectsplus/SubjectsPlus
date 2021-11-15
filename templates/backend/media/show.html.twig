@@ -36,7 +36,25 @@
                 <th>Link</th>
                 <td><a href="{{ media | get_media_url }}">Link to Media</a></td>
             </tr>
+            <tr>
+                <th>Attachments</td>
+                {% for attachment in (media | get_media_attachments) %}
+                    <span>
+                        <td>
+                            <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}">
+                                {{'%s:%s'| format(attachment.attachmentType, attachment.attachmentId) }}
+                            </a>
+                        </td>
+                    </span>
+                {% else %}
+                    <td>N/A</td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
+    
     <a href="{{ path('media_upload') }}">back to upload</a>
+    
+    <a href="{{ path('media_edit', {'mediaId': media.mediaId}) }}">edit</a>
+    
 {% endblock %}
