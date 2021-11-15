@@ -156,7 +156,7 @@ class MediaController extends AbstractController
      * @return Response Renders 'backend/media/show.html.twig' template with parameter 'media' signifying
      * the Media entity to display.
      * 
-     * @Route("/{mediaId}", name="media_show")
+     * @Route("/{mediaId}", name="media_show", methods={"GET"})
      */
     public function show(Request $request, Media $media, MediaService $uploader): Response
     {
@@ -213,13 +213,14 @@ class MediaController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->transactional(function() use($media, $cls) {
+            $entityManager->transactional(function() use($media, $cls, $entityManager) {
                 // Preserve before deletion
                 $mediaId = $media->getMediaId();
                 $title = $media->getTitle();
 
                 // Delete Media (Set delete flag)
                 $media->setDeletedAt(new \DateTimeImmutable());
+                $entityManager->persist($media);
 
                 // Create new log entry
                 /** @var Staff $staff */
