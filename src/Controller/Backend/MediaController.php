@@ -205,10 +205,10 @@ class MediaController extends AbstractController
     public function delete(Request $request, ChangeLogService $cls, Media $media): Response
     {
         // Check whether user is authenticated
-        // TODO: Check if permissions permit user to delete the faq
+        // TODO: Check if permissions permit user to delete the media
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // Delete Faq and associated FaqSubject's and FaqFaqPage's
+        // Delete Media
         if ($this->isCsrfTokenValid('delete'.$media->getMediaId(), $request->request->get('_token'))) {
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
