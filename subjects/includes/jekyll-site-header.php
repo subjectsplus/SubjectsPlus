@@ -260,6 +260,8 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/course-reserves.html">Course Reserves
 												</a></li>
+											
+											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/collectionDiscovery?vid=uml_new">Featured Lists</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)
 												</a></li>
