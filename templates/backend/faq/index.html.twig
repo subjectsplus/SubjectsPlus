@@ -2,7 +2,7 @@
 
 {% block title %}FAQs index{% endblock %}
 
-{% block body %}
+{% block content %}
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">
             {{ message }}
