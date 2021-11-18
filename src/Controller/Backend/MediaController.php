@@ -108,16 +108,26 @@ class MediaController extends AbstractController
 
                 // Upload file to file server
                 $uploadResults = $uploader->uploadFile($upload);
+                /** @var UploadedFile $upload */
                 $upload = $uploadResults['file'];
-                $fileName = $uploadResults['fileName'];
+                $fileName = $upload->getFilename();
                 $mimeType = $upload->getMimeType();
 
-                if ($mimeType !== null && substr($mimeType, 0, 6) === 'image/') {
-                    $sizedImages = $uploader->generateSizedImages($upload);
-                    $logger->info("Sized Images: ");
-                    foreach ($sizedImages as $image) {
-                        $logger->info($image);
-                    }
+                // Variations for image files
+                $largeFile = $uploadResults['largeFile'];
+                $mediumFile = $uploadResults['mediumFile'];
+                $smallFile = $uploadResults['smallFile'];
+
+                if ($largeFile !== null) {
+                    $media->setLargeFileName($largeFile->getFilename());
+                }
+
+                if ($mediumFile !== null) {
+                    $media->setMediumFileName($mediumFile->getFilename());
+                }
+
+                if ($smallFile !== null) {
+                    $media->setSmallFileName($smallFile->getFilename());
                 }
                 
                 // Fill Media entity values
@@ -131,8 +141,17 @@ class MediaController extends AbstractController
                 $conn->commit();
             } catch (\Exception $e) {
                 // delete the file if uploaded already
-                if (isset($uploadResults['path']) && file_exists($uploadResults['path'])) {
-                    unlink($uploadResults['path']);
+                if (isset($file) && file_exists($file->getRealPath())) {
+                    unlink($file->getRealPath());
+                }
+                if (isset($largeFile) && file_exists($largeFile->getRealPath())) {
+                    unlink($largeFile->getRealPath());
+                }
+                if (isset($mediumFile) && file_exists($mediumFile->getRealPath())) {
+                    unlink($mediumFile->getRealPath());
+                }
+                if (isset($smallFile) && file_exists($smallFile->getRealPath())) {
+                    unlink($smallFile->getRealPath());
                 }
                 $conn->rollback();
                 throw $e;
