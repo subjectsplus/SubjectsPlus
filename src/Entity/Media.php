@@ -33,6 +33,27 @@ class Media implements \Serializable
     private $fileName;
 
     /**
+     * @ORM\Column(name="large_file_name", type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private $largeFileName;
+
+    /**
+     * @ORM\Column(name="medium_file_name", type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private $mediumFileName;
+
+    /**
+     * @ORM\Column(name="small_file_name", type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private $smallFileName;
+
+    /**
      * @ORM\Column(name="file_size", type="integer", nullable=true)
      *
      * @var int|null
@@ -131,6 +152,36 @@ class Media implements \Serializable
     public function getFileName(): ?string
     {
         return $this->fileName;
+    }
+
+    public function setLargeFileName(?string $fileName): void
+    {
+        $this->largeFileName = $fileName;
+    }
+
+    public function getLargeFileName(): ?string
+    {
+        return $this->largeFileName;
+    }
+
+    public function setMediumFileName(?string $fileName): void
+    {
+        $this->mediumFileName = $fileName;
+    }
+
+    public function getMediumFileName(): ?string
+    {
+        return $this->mediumFileName;
+    }
+
+    public function setSmallFileName(?string $fileName): void
+    {
+        $this->smallFileName = $fileName;
+    }
+
+    public function getSmallFileName(): ?string
+    {
+        return $this->smallFileName;
     }
     
     public function setFileSize(?int $fileSize): void
