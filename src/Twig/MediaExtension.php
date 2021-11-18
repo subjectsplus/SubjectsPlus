@@ -9,6 +9,7 @@ use App\Service\MediaService;
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
+use App\Enum\ImageSizeType;
 
 class MediaExtension extends AbstractExtension
 {
@@ -41,9 +42,19 @@ class MediaExtension extends AbstractExtension
         ];
     }
 
-    public function getMediaUrl(Media $media)
+    public function getMediaUrl(Media $media, string $size = 'original')
     {
-        return $this->mediaService->getRelativeUrlFromMedia($media);
+        $sizeType = ImageSizeType::ORIGINAL_IMAGE;
+
+        if ($size === 'large') {
+            $sizeType = ImageSizeType::LARGE_IMAGE;
+        } else if ($size === 'medium') {
+            $sizeType = ImageSizeType::MEDIUM_IMAGE;
+        } else if ($size === 'small') {
+            $sizeType = ImageSizeType::SMALL_IMAGE;
+        }
+        
+        return $this->mediaService->getRelativeUrlFromMedia($media, $sizeType);
     }
 
     public function getMediaByStaff(Staff $staff, string $mediaType = 'all')
