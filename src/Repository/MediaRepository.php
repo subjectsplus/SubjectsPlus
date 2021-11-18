@@ -51,4 +51,28 @@ class MediaRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function findByFileName(string $fileName) {
+        $query = $this->createQueryBuilder('m')
+        ->select('m');
+
+        $query->orWhere($query->expr()->eq('m.fileName', $fileName));
+        $query->orWhere($query->expr()->eq('m.largeFileName', $fileName));
+        $query->orWhere($query->expr()->eq('m.mediumFileName', $fileName));
+        $query->orWhere($query->expr()->eq('m.smallFileName', $fileName));
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function findOneByFileName(string $fileName) {
+        $query = $this->createQueryBuilder('m')
+        ->select('m');
+
+        $query->orWhere($query->expr()->eq('m.fileName', $fileName));
+        $query->orWhere($query->expr()->eq('m.largeFileName', $fileName));
+        $query->orWhere($query->expr()->eq('m.mediumFileName', $fileName));
+        $query->orWhere($query->expr()->eq('m.smallFileName', $fileName));
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
 }
