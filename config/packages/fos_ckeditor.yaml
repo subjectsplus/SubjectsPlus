@@ -6,7 +6,7 @@ fos_ck_editor:
 
     configs:
         default:
-            extraPlugins: 'media,image2,embed,autoembed,find'
+            extraPlugins: 'media,image2,embed,autoembed,find,autogrow'
             embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
 
             # file upload/browse routes
@@ -38,6 +38,9 @@ fos_ck_editor:
                     filename: 'plugin.js'
                 find:
                     path: 'build/ckeditor/plugins/find'
+                    filename: 'plugin.js'
+                autogrow:
+                    path: 'build/ckeditor/plugins/autogrow'
                     filename: 'plugin.js'
                 
 twig:
