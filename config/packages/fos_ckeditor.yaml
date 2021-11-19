@@ -6,7 +6,8 @@ fos_ck_editor:
 
     configs:
         default:
-            extraPlugins: "media,image2"
+            extraPlugins: "media,image2,embed,autoembed"
+            embed_provider: "//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}"
 
             # file upload/browse routes
             # filebrowserBrowseRoute: "media_browse"
@@ -28,6 +29,12 @@ fos_ck_editor:
                     filename: "plugin.js"
                 image2:
                     path: "build/ckeditor/plugins/image2/"
+                    filename: "plugin.js"
+                embed:
+                    path: "build/ckeditor/plugins/embed"
+                    filename: "plugin.js"
+                autoembed:
+                    path: "build/ckeditor/plugins/autoembed"
                     filename: "plugin.js"
 twig:
     form_themes:
