@@ -14,7 +14,7 @@
             {% if 'image/' in media.mimeType %}
                 <tr>
                     <th>Image<th>
-                    <td><img src="{{ asset(media | get_media_url) }}" height="200px" width="200px"/></td>
+                    <td><img src="{{ asset(media | get_media_url('small')) }}"/></td>
                 </tr>
             {% endif %}
             <tr>
