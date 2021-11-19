@@ -1,41 +1,45 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
 
 fos_ck_editor:
-    base_path: "build/ckeditor"
-    js_path:   "build/ckeditor/ckeditor.js"
+    base_path: 'build/ckeditor'
+    js_path:   'build/ckeditor/ckeditor.js'
 
     configs:
         default:
-            extraPlugins: "media,image2,embed,autoembed"
-            embed_provider: "//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}"
+            extraPlugins: 'media,image2,embed,autoembed,find'
+            embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
 
             # file upload/browse routes
-            # filebrowserBrowseRoute: "media_browse"
-            # filebrowserBrowseRouteParameters: {type: "file"}
+            # filebrowserBrowseRoute: 'media_browse'
+            # filebrowserBrowseRouteParameters: {type: 'file'}
             # filebrowserBrowseRouteType: 0
-            # filebrowserImageBrowseRoute: "media_browse"
-            # filebrowserImageBrowseRouteParameters: {type: "image"}
+            # filebrowserImageBrowseRoute: 'media_browse'
+            # filebrowserImageBrowseRouteParameters: {type: 'image'}
             # filebrowserImageBrowseRouteType: 0
-            # filebrowserUploadRoute: "media_upload"
-            # filebrowserUploadRouteParameters: {type: "file"}
+            # filebrowserUploadRoute: 'media_upload'
+            # filebrowserUploadRouteParameters: {type: 'file'}
             # filebrowserUploadRouteType: 0
-            # filebrowserImageUploadRoute: "media_upload"
-            # filebrowserImageUploadRouteParameters: {type: "image"}
+            # filebrowserImageUploadRoute: 'media_upload'
+            # filebrowserImageUploadRouteParameters: {type: 'image'}
             # filebrowserImageUploadRouteType: 0
 
         plugins:
                 media:
-                    path: "build/ckeditor/plugins/media/"
-                    filename: "plugin.js"
+                    path: 'build/ckeditor/plugins/media/'
+                    filename: 'plugin.js'
                 image2:
-                    path: "build/ckeditor/plugins/image2/"
-                    filename: "plugin.js"
+                    path: 'build/ckeditor/plugins/image2/'
+                    filename: 'plugin.js'
                 embed:
-                    path: "build/ckeditor/plugins/embed"
-                    filename: "plugin.js"
+                    path: 'build/ckeditor/plugins/embed'
+                    filename: 'plugin.js'
                 autoembed:
-                    path: "build/ckeditor/plugins/autoembed"
-                    filename: "plugin.js"
+                    path: 'build/ckeditor/plugins/autoembed'
+                    filename: 'plugin.js'
+                find:
+                    path: 'build/ckeditor/plugins/find'
+                    filename: 'plugin.js'
+                
 twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
