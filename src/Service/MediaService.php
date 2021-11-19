@@ -98,22 +98,17 @@ class MediaService {
                 $largeFile = null;
                 if (isset($sizedImages['large'])) {
                     $largeFile = new File($sizedImages['large']);
-                    $largeFile = $largeFile->move($absDestination, $largeFile->getFilename());
                 }
 
                 $mediumFile = null;
                 if (isset($sizedImages['medium'])) {
                     $mediumFile = new File($sizedImages['medium']);
-                    $mediumFile = $mediumFile->move($absDestination, $mediumFile->getFilename());
                 }
 
                 $smallFile = null;
                 if (isset($sizedImages['small'])) {
                     $smallFile = new File($sizedImages['small']);
-                    $smallFile = $smallFile->move($absDestination, $smallFile->getFilename());
                 }
-
-                $this->logger->info($sizedImages['small']);
 
                 if ($this->uploadOriginalImage === false) {
                     // delete original image
@@ -173,7 +168,7 @@ class MediaService {
 
         $newFileName = sprintf('%s_%s.%s', $fileName, $type, $fileExtension);
         $path = sprintf('%s/%s', $directory, $newFileName);
-
+        
         if (copy($file->getRealPath(), $path) === true) {
             // Generate image
             $image = new \Imagick($path);
@@ -235,7 +230,7 @@ class MediaService {
             }
 
             if ($width > $this->largeImageDimensions[0] || $height > $this->largeImageDimensions[1]) {
-                $generateImages['large'] = $this->generateSizedImage($file, ImageSizeType::LARGE_IMAGE);
+                $generatedImages['large'] = $this->generateSizedImage($file, ImageSizeType::LARGE_IMAGE);
                 $sized = true;
             }
 
