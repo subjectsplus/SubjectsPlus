@@ -66,6 +66,9 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
+    // enables PostCSS, autoprefixing
+    .enablePostCssLoader()
+
     // Make images available to templates
     //.copyFiles({
         //from: './assets/images',
