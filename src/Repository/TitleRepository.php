@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Criteria;
  */
 class TitleRepository extends ServiceEntityRepository
 {
-    private $basic_fields = ['t.title', 'l.location', 'r.restrictionsId'];
+    private $basic_fields = ['t.title', 'l.location', 'r.restrictionsId', 'f.format'];
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -64,10 +64,10 @@ class TitleRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function getDatabasesBy($patronView = true, $criteria = [])
+    public function getDatabasesBy(bool $patronView = true, array $criteria = [], int $num_to_fetch = null)
     {
         $query = $this->baseQuery()
-                      ->select('t, l, r')
+                      ->select('t, l, r, f')
                       ->orderBy('t.title', 'ASC');
         if ($patronView)
         {
@@ -96,15 +96,24 @@ class TitleRepository extends ServiceEntityRepository
         {
             $query->addCriteria(Criteria::create()->where(Criteria::expr()->contains('l.ctags', $criteria['type'])));
         }
+        if (array_key_exists('format', $criteria))
+        {
+            $query->addCriteria(Criteria::create()->where(Criteria::expr()->eq('f.format', $criteria['format'])));
+        }
 
-        return $query->getQuery();
+        if ($num_to_fetch !== null && $num_to_fetch > 0) {
+            $query->setMaxResults($num_to_fetch);
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     private function baseQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('t')
         ->innerJoin('t.location', 'l')
-        ->innerJoin('l.accessRestrictions', 'r');
+        ->innerJoin('l.accessRestrictions', 'r')
+        ->innerJoin('l.format', 'f');
     }
 
 }
