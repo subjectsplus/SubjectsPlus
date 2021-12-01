@@ -1,5 +1,5 @@
 CKEDITOR.plugins.add( 'record_tokenizer', {
-    icons: 'records',
+    icons: 'record',
     init: function( editor ) {
         editor.addCommand('toggleRecordSidebar', {
             'exec': function(editor) {
