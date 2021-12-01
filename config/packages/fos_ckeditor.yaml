@@ -6,8 +6,9 @@ fos_ck_editor:
 
     configs:
         default:
-            extraPlugins: 'media,image2,embed,autoembed,find,autogrow'
+            extraPlugins: 'media,record_tokenizer,image2,embed,autoembed,find,autogrow'
             embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
+            extraAllowedContent: 'a[href,data-*](record-token)'
 
             # file upload/browse routes
             # filebrowserBrowseRoute: 'media_browse'
@@ -27,20 +28,23 @@ fos_ck_editor:
                 media:
                     path: 'build/ckeditor/plugins/media/'
                     filename: 'plugin.js'
+                record_tokenizer:
+                    path: 'build/ckeditor/plugins/record_tokenizer/'
+                    filename: 'plugin.js'
                 image2:
                     path: 'build/ckeditor/plugins/image2/'
                     filename: 'plugin.js'
                 embed:
-                    path: 'build/ckeditor/plugins/embed'
+                    path: 'build/ckeditor/plugins/embed/'
                     filename: 'plugin.js'
                 autoembed:
-                    path: 'build/ckeditor/plugins/autoembed'
+                    path: 'build/ckeditor/plugins/autoembed/'
                     filename: 'plugin.js'
                 find:
-                    path: 'build/ckeditor/plugins/find'
+                    path: 'build/ckeditor/plugins/find/'
                     filename: 'plugin.js'
                 autogrow:
-                    path: 'build/ckeditor/plugins/autogrow'
+                    path: 'build/ckeditor/plugins/autogrow/'
                     filename: 'plugin.js'
                 
 twig:
