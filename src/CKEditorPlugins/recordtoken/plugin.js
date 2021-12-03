@@ -9,6 +9,17 @@
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
         requires: 'widget',
+        
+        onLoad: function() {
+            CKEDITOR.addCss(
+                '.record-token {' +
+                'background: #FFFDE3;' +
+                'padding: 3px 6px;' +
+                'border-bottom: 1px dashed #ccc;' +
+                '}' 
+            );
+        },
+
         init: function( editor ) {
             editor.widgets.add('recordtoken', {
                 allowedContent: getWidgetAllowedContent(),
