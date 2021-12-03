@@ -6,9 +6,8 @@ fos_ck_editor:
 
     configs:
         default:
-            extraPlugins: 'media,record_tokenizer,image2,embed,autoembed,find,autogrow'
+            extraPlugins: 'media,recordtoken,image2,embed,autoembed,find,autogrow'
             embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
-            extraAllowedContent: 'a[href,data-*](record-token)'
 
             # file upload/browse routes
             # filebrowserBrowseRoute: 'media_browse'
