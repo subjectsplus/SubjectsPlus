@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * Title.
@@ -16,6 +18,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *     collectionOperations={"get"},
  *     itemOperations={"get"}
  * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={
+ *      "title": "partial",
+ *      "alternateTitle": "partial",
+ *      "location.format.format": "exact"
+ *  })
  */
 class Title
 {
