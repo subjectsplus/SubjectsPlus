@@ -23,6 +23,9 @@ Encore
     // Backend Main JS
     .addEntry('backend-main', './assets/backend/backend-main.js')
 
+    //Backend CSS
+    .addStyleEntry('light', './assets/styles/backend/sp-light.scss')
+
     // Added by Jane - to be reviewed
     //.addEntry('patron', './assets/javascripts/patron/patron.js')
     //.addEntry('patron_index', './assets/javascripts/patron/index.js')
@@ -67,8 +70,13 @@ Encore
     .enableSassLoader()
 
     // enables PostCSS, autoprefixing
-    .enablePostCssLoader()
+    //.enablePostCssLoader()
 
+    .enablePostCssLoader((options) => {
+        options.postcssOptions = {
+            config: './postcss.config.js',
+        }
+    })
     // Make images available to templates
     //.copyFiles({
         //from: './assets/images',

@@ -40,6 +40,7 @@
     "webpack-notifier": "^1.14.1"
   },
   "browserslist": [
-    "defaults"
+    "> 0.5%",
+    "not IE 11"
   ]
 }
