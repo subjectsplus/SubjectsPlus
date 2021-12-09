@@ -9,4 +9,13 @@
 import '../styles/backend/global.scss';
 
 // Bootstrap JS plugins
-require('bootstrap');
+//require('bootstrap');
+
+window.bootstrap = require("bootstrap");
+
+//window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
+
+//import * as bootstrap from 'bootstrap';
+//window.bootstrap = bootstrap;
+
+//const bootstrap = window.bootstrap = require('bootstrap');

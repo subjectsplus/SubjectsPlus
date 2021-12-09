@@ -2,6 +2,11 @@
 
 {% block title %}Hello DashboardController!{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+{% endblock %}
+
 {% block content %}
     <div class="container px-4 py-5 dashboard" id="hanging-icons">
         <h2 class="pb-2 border-bottom">{{ 'control.dashboard' | trans }}</h2>
@@ -39,8 +44,13 @@
                     </ul>
                 </div>
             </div>
-            <button type="button" class="btn btn-lg btn-danger example-popover" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+            <button id="example" type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button>
 
         </div>
     </div>
+    <script>
+        //console.log("working");
+        //let exampleEl = document.querySelector('#example');
+        //let popover = new bootstrap.Popover(exampleEl);
+    </script>
 {% endblock %}

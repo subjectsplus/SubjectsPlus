@@ -22,6 +22,7 @@ Encore
      */
     // Backend Main JS
     .addEntry('backend-main', './assets/backend/backend-main.js')
+    .addEntry('dashboard', './assets/backend/dashboard.js')
 
     //Backend CSS
     .addStyleEntry('light', './assets/styles/backend/sp-light.scss')
