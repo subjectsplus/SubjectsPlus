@@ -1,1 +1,14 @@
 // SCSS general for every backend theme
+
+// Bootstrap Customizations/Overrides
+@import 'libs/vars';
+@import 'libs/mixins';
+
+// add Bootstrap 5.1.3 and Font-Awesome 5.15.4
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+// add partials
+@import 'elements/dashboard';
