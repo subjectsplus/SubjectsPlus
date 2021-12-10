@@ -2,7 +2,7 @@
 /* Redirect so directory contents can't be viewed */
 header('Location: subjects/index.php');
 /**
- * test scm repo settings again
+ * test scm repo settings again again
  */
 include("control/includes/config.php");
 include("control/includes/functions.php");
