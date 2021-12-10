@@ -6,6 +6,7 @@
     <h1>Edit FAQ</h1>
 
     {{ include('backend/media/sidebar.html.twig') }}
+    {{ include('backend/records/sidebar.html.twig') }}
     {{ include('backend/faq/_form.html.twig', {'button_label': 'Update'}) }}
     <a href="{{ path('faq_index') }}">back to list</a>
     {{ include('backend/faq/_delete_form.html.twig') }}
