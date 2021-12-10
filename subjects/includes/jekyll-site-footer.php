@@ -122,22 +122,26 @@
             <div class="tab-pane" id="account" role="tabpanel" aria-labelledby="account-tab">
                 <section class="section">
                     <div class="container">
-                        <h5 class="mt-3 mt-lg-0">Accounts</h5>
-                        <hr align="left" class="hr-panel">
-                        <ul class="d-inline-block">
+						<div class="row">
+							<div class="col-lg-6 col-xl-4">
+								<h5>Library Accounts</h5>
+								<hr align="left" class="hr-panel">
+								<ul class="d-inline-block">
+									<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">uSearch (books, articles, music, images, etc) <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+									<li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
+									<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
+								</ul>
+							</div>
+							<div class="col-lg-6 col-xl-8">
+								<h5 class="mt-4 mt-lg-0">Campus Accounts</h5>
+								<hr align="left" class="hr-panel">
+								<ul class="d-inline-block">
+									<li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
+									<li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
+								</ul>
 
-                            <li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
-
-                            <li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
-
-                        </ul>
-
+							</div>
+						</div>
                     </div>
                 </section>
             </div>
@@ -145,18 +149,19 @@
     </div>
     <div class="container">
         <ul id="toolbarTabs" role="tablist" class="nav nav-tabs d-lg-none">
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true"><i class="fas fa-search"></i> Search</a>
-            </li>
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="hours-tab" data-toggle="tab" href="#hours" role="tab" aria-controls="hours" aria-selected="false"><i class="far fa-clock"></i> Hours</a>
-            </li>
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false"><i class="fas fa-user-circle"></i> Accounts</a>
-            </li>
-            <li class="nav-item">
-                <a class="no-decoration nav-link" id="ask" href="https://www.library.miami.edu/research/ask-a-librarian.html" aria-selected="false"><i class="fas fa-question-circle"></i> Ask</a>
-            </li>
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-search" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true"><img src="https://www.library.miami.edu/assets/common-images/special-icons/search.svg" alt="Search icon" id="gtm_toolbarSearchIcon" />Search</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-hours" id="hours-tab" data-toggle="tab" href="#hours" role="tab" aria-controls="hours" aria-selected="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/hours.svg" alt="Hours icon" id="gtm_toolbarHoursIcon" />Hours</a>
+			</li>
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-account" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/accounts.svg" alt="Accounts icon" id="gtm_toolbarAccountsIcon" />Accounts</a>
+			</li>
+			<li class="nav-item">
+				<a class="no-decoration nav-link toolbar-ask" id="ask" href="https://www.library.miami.edu/research/ask-a-librarian.html" aria-selected="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/ask2.svg" alt="Ask icon" id="gtm_toolbarAskIcon" />A Librarian</a>
+			</li>
         </ul>
     </div>
 </section>

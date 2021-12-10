@@ -118,8 +118,8 @@ if (is_null($header_type)
         </button>
 
         <div class="nav-account d-none d-lg-inline-block">
-            <a class="no-decoration mr-3" href="https://www.library.miami.edu/research/ask-a-librarian.html"><i class="fas fa-question-circle"></i> Ask A Librarian</a>
-            <a class="no-decoration account" href="#"><i class="fas fa-user-circle"></i> Accounts</a>
+			<a class="no-decoration mr-5 ask-lib-header" href="https://www.library.miami.edu/research/ask-a-librarian.html" title="Ask A Librarian"><img src="https://www.library.miami.edu/assets/common-images/special-icons/ask2.svg" alt="Ask icon" class="ask-lib-header-icon" />A Librarian</a>
+			<a class="no-decoration account" href="#" title="Accounts"><img src="https://www.library.miami.edu/assets/common-images/special-icons/accounts.svg" alt="Accounts icon" class="accounts-header-icon" />Accounts</a>
         </div>
     </div>
 
@@ -260,6 +260,8 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/course-reserves.html">Course Reserves
 												</a></li>
+											
+											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/collectionDiscovery?vid=uml_new">Featured Lists</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)
 												</a></li>
@@ -267,7 +269,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/suggest-a-purchase/">Recommend a Purchase
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami
+											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
@@ -345,7 +347,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data & Visualization Services
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/gis">Geospatial Data (GIS)
@@ -362,7 +364,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/citation-help.html">Citation Management Tools
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Management Strategies
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data Management Strategies
 												</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
 												</a></li>
@@ -379,11 +381,10 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/ORCID">Create an ORCID iD</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)
 												</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/open-access-publishing.html">Open Access Publishing</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/scholarly-communications.html">Scholarly Communications & Publishing
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/open-access-and-publishing.html">Open Access and Publishing
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami
+											<li><a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami
 												</a></li>
 
 										</ul>
@@ -449,21 +450,18 @@ if (is_null($header_type)
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/data-services.html">Data Services
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data & Visualization Services
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Digital Scholars' Lab
 														</a></li>
-
+													<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
+														</a></li>
 												</ul>
 											</div>
 
 											<div class="col-12 col-lg-6">
 												<ul>
-
-													<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
-														</a></li>
-
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs
 														</a></li>
 
@@ -478,6 +476,7 @@ if (is_null($header_type)
 
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/computers.html">Software
 														</a></li>
+													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/stress-relief-activities.html">Stress Relief Activities</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk
 														</a></li>
@@ -575,7 +574,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/info-lit-lab.html">Information Literacy Lab
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Information Literacy Lab
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center
@@ -624,7 +623,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/scholars-lab.html">Digital Scholars' Lab
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/third-floor-lab.html">Digital Scholars' Lab
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
@@ -767,7 +766,7 @@ if (is_null($header_type)
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/scholarly-repository2-sm.jpg"  alt="Scholarly Repository" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/discovery/search?vid=01UOML_INST:ResearchRepository">Scholarship@Miami</a>
+													<a class="dropdown-item no-decoration" href="https://scholarship.miami.edu/esploro/">Scholarship@Miami</a>
 													<div class="mm-lib-time">Online</div>
 												</div>
 											</li>
@@ -884,7 +883,7 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/events.html">Library Events</a></li>
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/library-exhibitions.html">Library Exhibitions</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/exhibitions/index.html">Library Exhibitions</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://news.miami.edu/libraries/index.html">Library News</a></li>
 
@@ -998,21 +997,26 @@ if (is_null($header_type)
     <div class="mega-menu account-dropdown" aria-labelledby="dropdown-accounts">
         <div class="section">
             <div class="container">
-				<h5>Accounts</h5>
-				<hr align="left" class="hr-panel">
-				<ul class="d-inline-block">
+				<div class="row">
+					<div class="col-lg-6 col-xl-4">
+						<h5>Library Accounts</h5>
+						<hr align="left" class="hr-panel">
+						<ul class="d-inline-block">
+							<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">uSearch (books, articles, music, images, etc) <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+							<li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
+							<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
+						</ul>
+					</div>
+					<div class="col-lg-6 col-xl-8">
+						<h5 class="mt-4 mt-lg-0">Campus Accounts</h5>
+						<hr align="left" class="hr-panel">
+						<ul class="d-inline-block">
+							<li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
+							<li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
+						</ul>
 
-					<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Library Account (uSearch) <i class="fas fa-chevron-right d-none d-xl-inline-block"></i></a></li>
-
-					<li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
-
-					<li><a class="dropdown-item no-decoration" href="https://www.courses.miami.edu/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_259_1">Blackboard</a></li>
-
-					<li><a class="dropdown-item no-decoration" href="https://myum.miami.edu/">Cane Link</a></li>
-
-					<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
-
-				</ul>
+					</div>
+				</div>
                 <div class="panel-close d-none d-lg-block">
                     <div class="close-mm" title="Close"></div>
                 </div>
