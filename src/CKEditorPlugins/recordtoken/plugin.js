@@ -1,18 +1,24 @@
 (function() {
 
-    var linkTemplate = '<a class="record-link" href="{recordLink}">{recordTitle}</a>',
-        descriptionTemplate = '<span class="record-description">{recordDescription}</span>',
-        template = '<span class="record-token" data-record-id="{recordId}">' +
+    var linkClass = 'record-link';
+    var tokenClass = 'record-token';
+    var descriptionClass = 'record-description';
+
+    var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
+        descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
+        template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>';
 
+    var titleApi = '/api/titles/{titleId}';
+
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
-        requires: 'widget',
+        requires: 'widget,dialog',
         
         onLoad: function() {
             CKEDITOR.addCss(
-                '.record-token {' +
+                '.' + tokenClass + ' {' +
                 'background: #FFFDE3;' +
                 'padding: 3px 6px;' +
                 'border-bottom: 1px dashed #ccc;' +
@@ -21,23 +27,78 @@
         },
 
         init: function( editor ) {
+
+            var records = {};
+
+            // Create record token widget
             editor.widgets.add('recordtoken', {
                 allowedContent: getWidgetAllowedContent(),
                 pathName: 'recordtoken',
-
+                dialog: 'recordtokenDialog',
+                
                 upcast: function(el) {
-                    return el.name == 'span' && el.hasClass('record-token');
+                    return el.name == 'span' && el.hasClass(tokenClass);
+                },
+
+                init: function() {
+                    var recordId = this.element.data('record-id');
+
+                    if (records[recordId]) {
+                        this.setData('record', records[recordId]);
+                    } else {
+                        // call api
+                        var apiLink = titleApi.replace('{titleId}', recordId);
+                        var apiResult = CKEDITOR.ajax.load(apiLink);
+                        
+                        if (apiResult) {
+                            record = JSON.parse(apiResult);
+                            
+                            records[recordId] = {
+                                'recordId': recordId,
+                                'title': record.title,
+                                'description': record.description,
+                            }
+    
+                            this.setData('record', records[recordId]);
+                        } else {
+                            this.setData('record', null);
+                        }
+                    }
                 }
             });
 
+            // Register the record token widget
             editor.addFeature(editor.widgets.registered.recordtoken);
+
+            // Register the record token dialog window
+            CKEDITOR.dialog.add('recordtokenDialog', this.path + 'dialog/recordtoken.js');
+
+            // Define an editor command that opens our dialog window
+		    editor.addCommand( 'recordtoken', new CKEDITOR.dialogCommand('recordtokenDialog'));
+
+            // if editor has a context menu, add context entry for opening dialog window
+            if (editor.contextMenu) {
+                editor.addMenuGroup('recordtoken', 3);
+                editor.addMenuItems({
+                    recordtoken_edit: {
+                        label: 'Edit Record Token',
+                        icon: this.path + 'icons/record.png',
+                        command: 'recordtoken',
+                        group: 'recordtoken'
+                    }
+                });
+
+                editor.contextMenu.addListener( function( element ) {
+                    if (element.hasClass('cke_widget_wrapper_' + tokenClass)) {
+                        return { recordtoken_edit: CKEDITOR.TRISTATE_OFF };
+                    }
+                });
+            }
 
             editor.addCommand('toggleRecordSidebar', {
                 'exec': function(editor) {
                     var sidebar = document.getElementById('records-sidebar');
                     if (sidebar) {
-                        console.log(sidebar);
-                        console.log(sidebar.style.display);
                         if (sidebar.style.display === 'none' || sidebar.style.display === '') {
                             sidebar.style.display = 'block';
                         } else {
@@ -58,9 +119,10 @@
                 dataValue = dataValue.replace('{recordLink}', record.location);
                 dataValue = dataValue.replace('{recordTitle}', record.title);
 
+                console.log(evt);
                 evt.data.dataValue = dataValue;
 
-                console.log(evt.data.dataValue);
+                records[record.recordId.toString()] = record;
             });
 
             editor.ui.addButton( 'Record', {
@@ -88,6 +150,7 @@
         var record = {
             'recordId': target.data('record-id'),
             'title': target.data('record-title'),
+            'description': target.data('record-description'),
             'location': target.data('record-location')
         };
 
@@ -100,7 +163,7 @@
 
         // You can still access and use the native dataTransfer - e.g. to set the drag image.
         // Note: IEs do not support this method... :(.
-        if (dataTransfer.$.setDragImage) {
+        if (dataTransfer.$.setDragImage && target.findOne('img')) {
             dataTransfer.$.setDragImage(target.findOne('img').$, 0, 0);
         }
         });
