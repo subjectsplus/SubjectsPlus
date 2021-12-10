@@ -62,6 +62,5 @@
             && !strpos($_SERVER['PHP_SELF'], 'subjects/guide.php')
             && !strpos($_SERVER['PHP_SELF'], 'subjects/usearch-problem-report.php')):
             ?>
-            <div class="key-messaging-mobile d-lg-none"><!--Key messaging mobile--></div>
         <?php endif; ?>
         <main>

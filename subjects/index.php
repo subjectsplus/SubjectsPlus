@@ -21,8 +21,9 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/index.php"); exit;}
+$this_fname = "index.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
 
 // Now, check if they want to use an SP guide as the splash page
@@ -58,15 +59,6 @@ if (isset($_GET['type']) && in_array(($_GET['type']), $guide_types)) {
     $view_type = scrubData($_GET['type']);
 } else {
     $view_type = "all";
-}
-
-///////////////////////
-// Have they done a search?
-
-$search = "";
-
-if (isset($_POST["search"])) {
-    $search = scrubData($_POST["search"]);
 }
 
 // Get the subjects for jquery autocomplete
@@ -137,7 +129,7 @@ $newlist = "<ul>\n";
         $db_url = $proxyURL;
     }
 
-    $newlist .= "<li><a href=\"$db_url$myrow[1][0]\">$myrow[0]</a></li>\n";
+    $newlist .= "<li><a href=\"$db_url$myrow[1]\">$myrow[0]</a></li>\n";
 }
 $newlist .= "</ul>\n";
 
@@ -145,7 +137,7 @@ $newlist .= "</ul>\n";
 
 $searchbox = '
 <div class="autoC" id="autoC" style="margin: 1em 2em 2em 0;">
-    <form id="sp_admin_search" class="pure-form" method="post" action="search.php">
+    <form id="sp_admin_search" class="pure-form" method="get" action="search.php">
         <span class="titlebar_text">' .  _("Search Research Guides") . '</span>
         <input type="text" placeholder="Search" autocomplete="off" name="searchterm" size="" id="sp_search" class="ui-autocomplete-input autoC"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" alt="Search" name="submitsearch" id="topsearch_button" class="pure-button pure-button-topsearch" value="Go">
@@ -155,8 +147,7 @@ $searchbox = '
 
 
 // Add header now, because we need a value ($v2styles) from it
-include("includes/header.php");
-
+include(theme_file("includes/header.php", $subjects_theme));
 
 // put together our main result display
 //**************************************
@@ -361,7 +352,7 @@ include("includes/header.php");
 // Load footer file
 ///////////////////////////
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 
 ?>
 

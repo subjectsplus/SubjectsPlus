@@ -292,19 +292,40 @@ function uploader2( $temp_path, $target_path ) {
 	}
 }
 
-function getSubBoxes( $prefix = "", $trunc = "", $all_subs = 0 ) {
+function getSubBoxes( $prefix = "", $trunc = "", $subs = "") {
 
 	$subs_option_boxes = "";
 
-	if ( $all_subs == "1" ) {
-		$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
-	} else {
-		$subs_query = "SELECT distinct s.subject_id, subject, type
-            FROM subject s, staff_subject ss
-            WHERE s.subject_id = ss.subject_id
-            AND ss.staff_id = " . $_SESSION['staff_id'] . "
-            ORDER BY type, subject";
+	switch($subs) {
+		case "1": // all types
+		case "all":
+			// all types
+			$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
+			break;
+		case "subject":
+			// only by "Subject" type
+			$subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Subject' AND active = '1' ORDER BY type, subject";
+			break;
+		case "staff":
+		default:
+			$subs_query = "SELECT distinct s.subject_id, subject, type
+				FROM subject s, staff_subject ss
+				WHERE s.subject_id = ss.subject_id
+				AND ss.staff_id = " . $_SESSION['staff_id'] . "
+				ORDER BY type, subject";
+			break;
+			
 	}
+
+	// if ( $subs == "all" ) {
+	// 	$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
+	// } else {
+	// 	$subs_query = "SELECT distinct s.subject_id, subject, type
+    //         FROM subject s, staff_subject ss
+    //         WHERE s.subject_id = ss.subject_id
+    //         AND ss.staff_id = " . $_SESSION['staff_id'] . "
+    //         ORDER BY type, subject";
+	// }
 
 	$db          = new Querier;
 	$subs_result = $db->query( $subs_query );
@@ -495,10 +516,6 @@ function scrubData( $string, $type = "text" ) {
 
 	switch ( $type ) {
 		case "text":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			$string = strip_tags( $string );
 			$string = htmlspecialchars( $string, ENT_QUOTES );
 			$config   = HTMLPurifier_Config::createDefault();
@@ -507,10 +524,6 @@ function scrubData( $string, $type = "text" ) {
 			$string   = $purifier->purify( $string );
 			break;
 		case "richtext":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			break;
 		case "richtext_html_purifier":
 			$config   = HTMLPurifier_Config::createDefault();
@@ -519,10 +532,6 @@ function scrubData( $string, $type = "text" ) {
 			$string   = $purifier->purify( $string );
 			break;
 		case "email":
-// magic quotes test
-			if ( get_magic_quotes_gpc() ) {
-				$string = stripslashes( $string );
-			}
 			//removes any tags protecting against javascript injection
 			$string = filter_var( $string, FILTER_SANITIZE_EMAIL );
 
@@ -559,6 +568,21 @@ function blunDer( $message, $type = 1 ) {
 //////////////
 // Erstwhile guide_functions.php
 ////////////////
+
+function theme_file( $filename, $subjects_theme = null, $header_type = null) {
+	// This works because $header_type is currently only used on files directly in includes/
+	if ( isset($header_type) && $header_type != "" && $header_type != "default" ) {
+		$guide_fname = preg_replace( '/\.php$/', "_$header_type.php", $filename);
+		if ( file_exists($guide_fname) ) return $guide_fname;
+	}
+
+	if ( isset($subjects_theme) && $subjects_theme != "" ) {
+		$theme_fname = "themes/$subjects_theme/$filename";
+		if ( file_exists($theme_fname) ) return $theme_fname;
+	}
+
+	return $filename;
+}
 
 
 function findDescOverride( $subject_id, $title_id ) {

@@ -16,10 +16,11 @@ include("../control/includes/config.php");
 include("../control/includes/functions.php");
 include("../control/includes/autoloader.php");
 
-// If you have a theme set, but DON'T want to use it for this page, comment out the next line
-if (isset($subjects_theme)  && $subjects_theme != "") { include("themes/$subjects_theme/noguide.php"); exit;}
+$this_fname = "noguide.php";
+$that_fname = theme_file($this_fname, $subjects_theme);
+if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
-include("includes/header.php");
+include(theme_file("includes/header.php", $subjects_theme));
 
 ?>
 
@@ -50,6 +51,6 @@ include("includes/header.php");
 //print "<pre>";
 //print_r($results);
 
-include("includes/footer.php");
+include(theme_file("includes/footer.php", $subjects_theme));
 
 ?>

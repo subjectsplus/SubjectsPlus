@@ -287,17 +287,15 @@ class Config {
 				}
 			}
 
-			//close and change permissions of file
-			fclose( $lhndFile );
-
-			return chmod( $this->lstrConfigPath, 0666 );
+			//close file
+			return fclose( $lhndFile );
 		}
 
 		return false;
 	}
 
 	/**
-	 * sp_Config::wrtieModRewriteFile() - this method, depending on the new values
+	 * sp_Config::writeModRewriteFile() - this method, depending on the new values
 	 * 'mod_rewrite', write the .htaccess file to make prettier URL in the subject
 	 * folder
 	 *
@@ -305,7 +303,7 @@ class Config {
 	 *
 	 * @return boolean
 	 */
-	public function wrtieModRewriteFile( $lstrModRewritePath = '' ) {
+	public function writeModRewriteFile( $lstrModRewritePath = '' ) {
 		if ( $lstrModRewritePath == '' ) {
 			return false;
 		}
@@ -349,10 +347,8 @@ class Config {
 			}
 		}
 
-		//close file and change permissions
-		fclose( $lhndFile );
-
-		return chmod( $lstrModRewritePath, 0666 );
+		//close file
+		return fclose( $lhndFile );
 	}
 
 	/**

@@ -201,15 +201,9 @@ function modifyDB($id, $type) {
         $pluslet_clone = 0;
     }
     // let's not have those errant slashes
-    if (get_magic_quotes_gpc ()) {
-        $pluslet_title = stripcslashes(stripcslashes($pluslet_title));
-        $pluslet_body = stripslashes(stripslashes($pluslet_body));
-        $pluslet_extra = stripslashes(stripslashes($pluslet_extra));
-    } else {
-        $pluslet_title = stripcslashes($pluslet_title);
-        $pluslet_body = stripslashes($pluslet_body);
-        $pluslet_extra = stripslashes($pluslet_extra);
-    }
+    $pluslet_title = stripcslashes($pluslet_title);
+    $pluslet_body = stripslashes($pluslet_body);
+    $pluslet_extra = stripslashes($pluslet_extra);
     switch ($type) {
         case "insert":
             $q = sprintf("INSERT INTO pluslet (title, body, type, clone, extra, hide_titlebar, collapse_body, titlebar_styling, favorite_box, target_blank_links) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", $db->quote($pluslet_title), $db->quote($pluslet_body), $db->quote($pluslet_type), $db->quote($pluslet_clone), $db->quote($pluslet_extra), $db->quote($pluslet_hide_titlebar), $db->quote($pluslet_collapse_body), $db->quote($pluslet_titlebar_styling), $db->quote($pluslet_favorite_box), $db->quote($pluslet_target_blank_links));

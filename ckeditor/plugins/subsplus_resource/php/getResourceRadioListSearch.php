@@ -34,11 +34,7 @@ if (isset($_POST["search_terms"])) {
 
     $content = '<strong>Results</strong><br />';
 
-    if (get_magic_quotes_gpc()) {
-        $searcher = scrubData($_POST["search_terms"]);
-    } else {
-        $searcher = addslashes(scrubData($_POST["search_terms"]));
-    }
+    $searcher = addslashes(scrubData($_POST["search_terms"]));
 
     $searcher = "%" . $searcher . "%";
     $statement = $connection->prepare("SELECT title_id, title FROM title WHERE title LIKE :searcher ORDER BY title");
