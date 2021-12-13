@@ -113,7 +113,7 @@
                         return;
                     
                     var description = this.data.record.description;
-                    if (!description) {
+                    if (!description || description.trim().length == 0) {
                         // Description is null or empty
                         // Set description type to none and notify the user
                         this.setData('descriptionType', 'none');
