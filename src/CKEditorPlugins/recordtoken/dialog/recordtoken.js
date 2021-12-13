@@ -16,32 +16,47 @@ CKEDITOR.dialog.add( 'recordtokenDialog', function( editor ) {
                         validate: CKEDITOR.dialog.validate.notEmpty('Title field cannot be empty.'),
 
                         setup: function(widget) {
-                            console.log(widget);
                             var record = widget.data.record;
                             if (record) {
                                 this.setValue(record.title);
                             }
+                        },
+
+                        commit: function(widget) {
+                            widget.setData('title', this.getValue());
                         }
                     },
-                    
+
                     {
                         type: 'text',
                         id: 'record-description',
                         label: 'Description',
-                        validate: CKEDITOR.dialog.validate.notEmpty('Description field cannot be empty.'),
                         setup: function(widget) {
                             console.log(widget);
                             var record = widget.data.record;
                             if (record) {
                                 this.setValue(record.description);
+                                this.disable();
                             }
                         }
                     },
                     {
-                        type: 'checkbox',
-                        id: 'record-show-description',
-                        label: 'Show Description',
-                        'default': false
+                        type: 'radio',
+                        id: 'record-description-type',
+                        label: 'Description Type',
+                        items: [
+                            ['No Description', 'none'], ['Description Icon', 'icon'], ['Description Block', 'block']
+                        ],
+                        'default': 'none',
+                        
+                        setup: function(widget) {
+                            this.setValue(widget.data.descriptionType);
+                        },
+
+                        commit: function(widget) {
+                            console.log(widget.element);
+                            widget.setData('descriptionType', this.getValue());
+                        }
                     }
                 ]
             }

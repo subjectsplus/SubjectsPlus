@@ -3,12 +3,31 @@
     var linkClass = 'record-link';
     var tokenClass = 'record-token';
     var descriptionClass = 'record-description';
+    var iconClass = 'record-icon';
+
+    var iconSource = '/build/assets/images/icons/information.png';
 
     var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
+        iconTemplate = '<button class="' + iconClass + '"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>';
+    
+    var templateBlock = new CKEDITOR.template(function(data) {
+
+        if (data.descriptionType == 'block') {
+            return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
+                linkTemplate + descriptionTemplate +
+                    '</span>';
+        } else if (data.descriptionType == 'icon') {
+            return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
+            linkTemplate + iconTemplate +
+                '</span>';
+        } else {
+            return template;
+        }
+    });
 
     var titleApi = '/api/titles/{titleId}';
 
@@ -22,7 +41,18 @@
                 'background: #FFFDE3;' +
                 'padding: 3px 6px;' +
                 'border-bottom: 1px dashed #ccc;' +
-                '}' 
+                '}' +
+                '.' + iconClass + ' {' +
+                'background-color: transparent;' +
+                'background-repeat: no-repeat;' +
+                'border: none;' +
+                'cursor: pointer;' +
+                'overflow: hidden;' +
+                'outline: none;' +
+                '}' +
+                '.' + iconClass + ' img {' +
+                'margin: auto' +
+                '}'
             );
         },
 
@@ -35,7 +65,8 @@
                 allowedContent: getWidgetAllowedContent(),
                 pathName: 'recordtoken',
                 dialog: 'recordtokenDialog',
-                
+                template: templateBlock,
+
                 upcast: function(el) {
                     return el.name == 'span' && el.hasClass(tokenClass);
                 },
@@ -43,27 +74,85 @@
                 init: function() {
                     var recordId = this.element.data('record-id');
 
+                    // Set record data, call api and index if unavailable
                     if (records[recordId]) {
                         this.setData('record', records[recordId]);
                     } else {
-                        // call api
-                        var apiLink = titleApi.replace('{titleId}', recordId);
-                        var apiResult = CKEDITOR.ajax.load(apiLink);
-                        
-                        if (apiResult) {
+                        var record = getRecordFromAPI(recordId);
+                        if (record) {
                             record = JSON.parse(apiResult);
-                            
-                            records[recordId] = {
-                                'recordId': recordId,
-                                'title': record.title,
-                                'description': record.description,
-                            }
-    
-                            this.setData('record', records[recordId]);
+                            this.setData('record', record);
+                            records[recordId] = record;
                         } else {
                             this.setData('record', null);
                         }
                     }
+
+                    // Set description type data
+                    var descriptionBlock = this.element.findOne('.' + descriptionClass);
+                    var descriptionIcon = this.element.findOne('.' + iconClass);
+
+                    if (descriptionBlock) {
+                        this.setData('descriptionType', 'block');
+                        this.oldDescriptionType = 'block';
+                    } else if (descriptionIcon) {
+                        this.setData('descriptionType', 'icon');
+                        this.oldDescriptionType = 'icon';
+                    } else {
+                        this.setData('descriptionType', 'none');
+                        this.oldDescriptionType = 'none';
+                    }
+                },
+
+                data: function() {
+                    var newDescriptionType = this.data.descriptionType;
+                    console.log("Old DescriptionType: " + this.oldDescriptionType);
+                    console.log("New DescriptionType: " + newDescriptionType);
+
+                    if (this.oldDescriptionType == newDescriptionType)
+                        return;
+                    
+                    var description = this.data.record.description;
+                    if (!description) {
+                        // Description is null or empty
+                        // Set description type to none and notify the user
+                        this.setData('descriptionType', 'none');
+                        var notification = new CKEDITOR.plugins.notification( editor, {
+                            message: 'No description is available for this record! Description type will default to none.',
+                            type: 'warning'
+                        } );
+                        notification.show();
+
+                        return;
+                    }
+
+                    if (this.oldDescriptionType == 'block') {
+                        // Undo the block template
+                        var descriptionBlock = this.element.findOne('.' + descriptionClass);
+                        if (descriptionBlock) {
+                            descriptionBlock.remove();
+                        }
+
+                        var breakLine = this.element.findOne('br');
+                        if (breakLine) {
+                            breakLine.remove();
+                        }
+                    } else if (this.oldDescriptionType == 'icon') {
+                        // Undo the icon template
+                        var descriptionIcon = this.element.findOne('.' + iconClass);
+                        if (descriptionIcon) {
+                            descriptionIcon.remove();
+                        }
+                    }
+
+                    if (newDescriptionType == 'block') {
+                        var html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
+                        this.element.appendHtml(html);
+                    } else if (newDescriptionType == 'icon') {
+                        this.element.appendHtml(iconTemplate);
+                    }
+
+                    this.oldDescriptionType = newDescriptionType;
                 }
             });
 
@@ -115,11 +204,11 @@
                 }
 
                 // replace placeholders in template with record details
+                console.log(templateBlock);
                 var dataValue = template.replace('{recordId}', record.recordId);
                 dataValue = dataValue.replace('{recordLink}', record.location);
                 dataValue = dataValue.replace('{recordTitle}', record.title);
 
-                console.log(evt);
                 evt.data.dataValue = dataValue;
 
                 records[record.recordId.toString()] = record;
@@ -172,17 +261,37 @@
     function getWidgetAllowedContent() {
         var rules = {
             span: {
-                classes: 'record-token',
+                classes: [tokenClass, descriptionClass],
                 attributes: 'data-*'
             },
 
             a: {
-                classes: 'record-link',
+                classes: linkClass,
                 attributes: 'href'
+            },
+
+            button: {
+                classes: iconClass,
+                attributes: 'src'
             }
         }
 
         return rules;
+    }
+
+    function getRecordFromAPI(recordId) {
+        var apiLink = titleApi.replace('{titleId}', recordId);
+        var apiResult = CKEDITOR.ajax.load(apiLink);
+        
+        if (apiResult) {
+            var record = JSON.parse(apiResult);
+
+            return {
+                'recordId': recordId,
+                'title': record.title,
+                'description': record.description,
+            }
+        }
     }
 })();
 
