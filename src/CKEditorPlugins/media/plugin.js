@@ -40,7 +40,7 @@ CKEDITOR.plugins.add( 'media', {
         editor.ui.addButton( 'Media', {
             label: 'Insert Media',
             command: 'toggleMediaSidebar',
-            toolbar: 'insert'
+            toolbar: 'insert,100'
         });
     }
 });
