@@ -80,7 +80,11 @@
                     } else {
                         var record = getRecordFromAPI(recordId);
                         if (record) {
-                            record = JSON.parse(apiResult);
+                            // sanitize record title and description
+                            record.title = htmlEntityDecode(record.title);
+                            record.description = htmlEntityDecode(record.description);
+
+                            // set to data and index the record
                             this.setData('record', record);
                             records[recordId] = record;
                         } else {
@@ -106,8 +110,6 @@
 
                 data: function() {
                     var newDescriptionType = this.data.descriptionType;
-                    console.log("Old DescriptionType: " + this.oldDescriptionType);
-                    console.log("New DescriptionType: " + newDescriptionType);
 
                     if (this.oldDescriptionType == newDescriptionType)
                         return;
@@ -147,9 +149,13 @@
 
                     if (newDescriptionType == 'block') {
                         var html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
+                        editor.fire('saveSnapshot');
                         this.element.appendHtml(html);
+                        editor.fire('saveSnapshot');
                     } else if (newDescriptionType == 'icon') {
+                        editor.fire('saveSnapshot');
                         this.element.appendHtml(iconTemplate);
+                        editor.fire('saveSnapshot');
                     }
 
                     this.oldDescriptionType = newDescriptionType;
@@ -204,20 +210,24 @@
                 }
 
                 // replace placeholders in template with record details
-                console.log(templateBlock);
                 var dataValue = template.replace('{recordId}', record.recordId);
                 dataValue = dataValue.replace('{recordLink}', record.location);
                 dataValue = dataValue.replace('{recordTitle}', record.title);
 
                 evt.data.dataValue = dataValue;
 
+                // sanitize record title and description
+                record.title = htmlEntityDecode(record.title);
+                record.description = htmlEntityDecode(record.description);
+
+                // index the record
                 records[record.recordId.toString()] = record;
             });
 
             editor.ui.addButton( 'Record', {
                 label: 'Insert Record',
                 command: 'toggleRecordSidebar',
-                toolbar: 'insert'
+                toolbar: 'insert,101'
             });
         }
     });
@@ -292,6 +302,13 @@
                 'description': record.description,
             }
         }
+    }
+
+    function htmlEntityDecode(str) {
+        if (typeof str !== 'string') return '';
+
+        var doc = new DOMParser().parseFromString(str, 'text/html');
+        return doc.body.textContent || '';
     }
 })();
 
