@@ -64,7 +64,7 @@
             editor.widgets.add('recordtoken', {
                 allowedContent: getWidgetAllowedContent(),
                 pathName: 'recordtoken',
-                dialog: 'recordtokenDialog',
+                dialog: 'recordtoken',
                 template: templateBlock,
 
                 upcast: function(el) {
@@ -166,10 +166,7 @@
             editor.addFeature(editor.widgets.registered.recordtoken);
 
             // Register the record token dialog window
-            CKEDITOR.dialog.add('recordtokenDialog', this.path + 'dialog/recordtoken.js');
-
-            // Define an editor command that opens our dialog window
-		    editor.addCommand( 'recordtoken', new CKEDITOR.dialogCommand('recordtokenDialog'));
+            CKEDITOR.dialog.add('recordtoken', this.path + 'dialog/recordtoken.js');
 
             // if editor has a context menu, add context entry for opening dialog window
             if (editor.contextMenu) {

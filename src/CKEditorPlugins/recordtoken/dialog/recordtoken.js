@@ -1,4 +1,4 @@
-CKEDITOR.dialog.add( 'recordtokenDialog', function( editor ) {
+CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
     return {
         title: 'Edit Record Token',
         minWidth: 400,
@@ -28,11 +28,10 @@ CKEDITOR.dialog.add( 'recordtokenDialog', function( editor ) {
                     },
 
                     {
-                        type: 'text',
+                        type: 'textarea',
                         id: 'record-description',
                         label: 'Description',
                         setup: function(widget) {
-                            console.log(widget);
                             var record = widget.data.record;
                             if (record) {
                                 this.setValue(record.description);
@@ -54,7 +53,6 @@ CKEDITOR.dialog.add( 'recordtokenDialog', function( editor ) {
                         },
 
                         commit: function(widget) {
-                            console.log(widget.element);
                             widget.setData('descriptionType', this.getValue());
                         }
                     }
