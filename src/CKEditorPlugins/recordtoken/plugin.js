@@ -102,7 +102,9 @@
                     }
 
                     // Set data for locally changeable title
-                    if (record) {
+                    if (this.element.data('record-title')) {
+                        this.setData('title', this.element.data('record-title'));
+                    } else if (record) {
                         this.setData('title', record.title);
                     }
 
@@ -128,17 +130,28 @@
                     var newTitle = this.data.title;
                     
                     if (origTitle !== newTitle) {
+                        // New title must meet character requirements before being set
                         if (newTitle.trim().length >= minimumTitleLength) {
+                            // Set new record title data field and text
                             editor.fire('saveSnapshot');
                             this.element.data('record-title', newTitle);
                             this.element.findOne('.' + linkClass).setText(newTitle);
                             editor.fire('saveSnapshot');
                         } else {
+                            // Notify the user of invalid title length
                             var notification = new CKEDITOR.plugins.notification( editor, {
                                 message: 'Invalid title entered! Title must be a minimum of ' + minimumTitleLength + ' characters.',
                                 type: 'warning'
                             } );
                             notification.show();
+                        }
+                    } else {
+                        // New title is the same as original
+                        this.element.findOne('.' + linkClass).setText(origTitle);
+                        
+                        if (this.element.data('record-title')) {
+                            // remove record title override data
+                            this.element.removeAttribute('data-record-title');
                         }
                     }
 
