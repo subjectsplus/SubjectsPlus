@@ -73,6 +73,12 @@
                 },
 
                 init: function() {
+
+                    // Add widget reference to dialog data
+                    this.on('dialog', function(evt) {
+                        evt.data.widget = this;
+                    });
+
                     var recordId = this.element.data('record-id');
                     var record = null;
 

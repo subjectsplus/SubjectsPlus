@@ -25,6 +25,23 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                     },
 
                     {
+                        type: 'button',
+                        id: 'record-title-reset',
+                        label: 'Reset',
+                        validate: CKEDITOR.dialog.validate.notEmpty('Title field cannot be empty.'),
+
+                        onClick: function() {
+                            var dialog = this.getDialog();
+                            var widget = dialog.widget;
+
+                            var record = widget.data.record;
+                            if (record) {
+                                dialog.setValueOf('tab-main', 'record-title', record.title);
+                            }
+                        }
+                    },
+
+                    {
                         type: 'textarea',
                         id: 'record-description',
                         label: 'Description',
