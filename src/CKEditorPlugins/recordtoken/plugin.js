@@ -29,6 +29,7 @@
         }
     });
 
+    var minimumTitleLength = 3;
     var titleApi = '/api/titles/{titleId}';
 
     CKEDITOR.plugins.add('recordtoken', {
@@ -73,12 +74,14 @@
 
                 init: function() {
                     var recordId = this.element.data('record-id');
+                    var record = null;
 
                     // Set record data, call api and index if unavailable
                     if (records[recordId]) {
-                        this.setData('record', records[recordId]);
+                        record = records[recordId];
+                        this.setData('record', record);
                     } else {
-                        var record = getRecordFromAPI(recordId);
+                        record = getRecordFromAPI(recordId);
                         if (record) {
                             // sanitize record title and description
                             record.title = htmlEntityDecode(record.title);
@@ -90,6 +93,11 @@
                         } else {
                             this.setData('record', null);
                         }
+                    }
+
+                    // Set data for locally changeable title
+                    if (record) {
+                        this.setData('title', record.title);
                     }
 
                     // Set description type data
@@ -109,9 +117,29 @@
                 },
 
                 data: function() {
+                    // Update title
+                    var origTitle = this.data.record.title;
+                    var newTitle = this.data.title;
+                    
+                    if (origTitle !== newTitle) {
+                        if (newTitle.trim().length >= minimumTitleLength) {
+                            editor.fire('saveSnapshot');
+                            this.element.data('record-title', newTitle);
+                            this.element.findOne('.' + linkClass).setText(newTitle);
+                            editor.fire('saveSnapshot');
+                        } else {
+                            var notification = new CKEDITOR.plugins.notification( editor, {
+                                message: 'Invalid title entered! Title must be a minimum of ' + minimumTitleLength + ' characters.',
+                                type: 'warning'
+                            } );
+                            notification.show();
+                        }
+                    }
+
+                    // Update description type
                     var newDescriptionType = this.data.descriptionType;
 
-                    if (this.oldDescriptionType == newDescriptionType)
+                    if (this.oldDescriptionType === newDescriptionType)
                         return;
                     
                     var description = this.data.record.description;

@@ -16,10 +16,7 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         validate: CKEDITOR.dialog.validate.notEmpty('Title field cannot be empty.'),
 
                         setup: function(widget) {
-                            var record = widget.data.record;
-                            if (record) {
-                                this.setValue(record.title);
-                            }
+                            this.setValue(widget.data.title);
                         },
 
                         commit: function(widget) {
