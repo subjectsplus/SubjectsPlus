@@ -129,14 +129,14 @@
                     var origTitle = this.data.record.title;
                     var newTitle = this.data.title;
                     
+                    editor.fire('saveSnapshot');
+
                     if (origTitle !== newTitle) {
                         // New title must meet character requirements before being set
                         if (newTitle.trim().length >= minimumTitleLength) {
                             // Set new record title data field and text
-                            editor.fire('saveSnapshot');
                             this.element.data('record-title', newTitle);
                             this.element.findOne('.' + linkClass).setText(newTitle);
-                            editor.fire('saveSnapshot');
                         } else {
                             // Notify the user of invalid title length
                             var notification = new CKEDITOR.plugins.notification( editor, {
@@ -164,14 +164,8 @@
                     var description = this.data.record.description;
                     if (!description || description.trim().length == 0) {
                         // Description is null or empty
-                        // Set description type to none and notify the user
+                        // Set description type to none
                         this.setData('descriptionType', 'none');
-                        var notification = new CKEDITOR.plugins.notification( editor, {
-                            message: 'No description is available for this record! Description type will default to none.',
-                            type: 'warning'
-                        } );
-                        notification.show();
-
                         return;
                     }
 
@@ -196,16 +190,14 @@
 
                     if (newDescriptionType == 'block') {
                         var html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
-                        editor.fire('saveSnapshot');
                         this.element.appendHtml(html);
-                        editor.fire('saveSnapshot');
                     } else if (newDescriptionType == 'icon') {
-                        editor.fire('saveSnapshot');
                         this.element.appendHtml(iconTemplate);
-                        editor.fire('saveSnapshot');
                     }
 
                     this.oldDescriptionType = newDescriptionType;
+
+                    editor.fire('saveSnapshot');
                 }
             });
 

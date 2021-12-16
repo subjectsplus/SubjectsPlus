@@ -63,7 +63,13 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         'default': 'none',
                         
                         setup: function(widget) {
-                            this.setValue(widget.data.descriptionType);
+                            var record = widget.data.record;
+
+                            if (record && (!record.description || record.description.trim().length === 0)) {
+                                this.getElement().hide();
+                            } else {
+                                this.getElement().show();
+                            }
                         },
 
                         commit: function(widget) {
