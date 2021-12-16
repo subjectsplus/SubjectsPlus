@@ -48,7 +48,11 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         setup: function(widget) {
                             var record = widget.data.record;
                             if (record) {
-                                this.setValue(record.description);
+                                if (!record.description || record.description.trim().length === 0) {
+                                    this.setValue('No description available for this record.');
+                                } else {
+                                    this.setValue(record.description);
+                                }
                                 this.disable();
                             }
                         }
