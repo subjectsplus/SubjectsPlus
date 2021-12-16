@@ -6,9 +6,11 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Criteria;
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
+use App\Enum\ImageSizeType;
 use Masterminds\HTML5;
 use Psr\Log\LoggerInterface;
 
@@ -18,15 +20,35 @@ class MediaService {
     private $fileNamer;
     private $projectDir;
     private $uploadDestination;
+    private $smallImageDimensions;
+    private $mediumImageDimensions;
+    private $largeImageDimensions;
     private $logger;
+    private $uploadOriginalImage;
+    private $imageCompressionQuality;
 
-    public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, LoggerInterface $logger, string $projectDir, string $uploadDestination)
+    public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, 
+        LoggerInterface $logger, string $projectDir, string $uploadDestination, string $smallImageDimensions,
+        string $mediumImageDimensions, string $largeImageDimensions, bool $uploadOriginalImage, int $imageCompressionQuality)
     {
         $this->entityManager = $entityManager;
         $this->fileNamer = $fileNamer;
         $this->projectDir = rtrim($projectDir, "/\\");
         $this->uploadDestination = rtrim($uploadDestination, "/\\");
         $this->logger = $logger;
+
+        // Set Image Dimensions
+        list($width, $height) = explode('x', $smallImageDimensions, 2);
+        $this->smallImageDimensions = [(float)$width, (float)$height];
+
+        list($width, $height) = explode('x', $mediumImageDimensions, 2);
+        $this->mediumImageDimensions = [(float)$width, (float)$height];
+
+        list($width, $height) = explode('x', $largeImageDimensions, 2);
+        $this->largeImageDimensions = [(float)$width, (float)$height];;
+
+        $this->uploadOriginalImage = $uploadOriginalImage;
+        $this->imageCompressionQuality = $imageCompressionQuality;
     }
 
     /**
@@ -48,6 +70,7 @@ class MediaService {
             // move file to upload destination
             $name = $this->fileNamer->fileName($file);
             $subDirName = $this->fileNamer->directoryName($file);
+            $mimeType = $file->getMimeType();
             $publicDestination = join(DIRECTORY_SEPARATOR, [
                 $this->uploadDestination,
                 $subDirName
@@ -61,23 +84,164 @@ class MediaService {
             // do not upload until file name is unique
             /** @var \App\Repository\MediaRepository $mediaRepo */
             $mediaRepo = $this->entityManager->getRepository(Media::class);
-
+            
             while ($mediaRepo->findOneBy(['fileName' => $name]) !== null) {
                 $name = $this->fileNamer->fileName($file);
             }
 
-            // full absolute path of new file upload
-            $path = join(DIRECTORY_SEPARATOR, [
-                $absDestination,
-                $name
-            ]);
-
-            // move file to absolute upload destination from tmp directory
+            // move to upload destination and rename
             $file = $file->move($absDestination, $name);
+            
+            if (strpos($mimeType, "image/") !== false) {
+                 // Generate and upload the sized images
+                $sizedImages = $this->generateSizedImages($file);
+                $largeFile = null;
+                if (isset($sizedImages['large'])) {
+                    $largeFile = new File($sizedImages['large']);
+                }
 
-            return ['file' => $file, 'fileName' => $name, 'path' => $path, 'url' => $publicDestination . $name];
+                $mediumFile = null;
+                if (isset($sizedImages['medium'])) {
+                    $mediumFile = new File($sizedImages['medium']);
+                }
+
+                $smallFile = null;
+                if (isset($sizedImages['small'])) {
+                    $smallFile = new File($sizedImages['small']);
+                }
+
+                if ($this->uploadOriginalImage === false) {
+                    // delete original image
+                    unlink($file->getRealPath());
+                    // reset reference to largest image version available
+                    $file = $largeFile ?? $mediumFile ?? $smallFile;
+                }
+            }
+
+            return [
+                'file' => $file,
+                'largeFile' => $largeFile,
+                'mediumFile' => $mediumFile,
+                'smallFile' => $smallFile,
+            ];
         } catch (\Exception $e) {
             // rollback the file upload; delete file 
+            if (isset($file) && file_exists($file->getRealPath())) {
+                unlink($file->getRealPath());
+            }
+            if (isset($smallImage) && file_exists($smallImage->getRealPath())) {
+                unlink($smallImage->getRealPath());
+            }
+            if (isset($mediumImage) && file_exists($mediumImage->getRealPath())) {
+                unlink($mediumImage->getRealPath());
+            }
+            if (isset($largeImage) && file_exists($largeImage->getRealPath())) {
+                unlink($largeImage->getRealPath());
+            }
+            throw $e;
+        }
+    }
+
+    private function generateSizedImage(File $file, int $sizeType) {
+        if ($sizeType !== ImageSizeType::SMALL_IMAGE && $sizeType !== ImageSizeType::MEDIUM_IMAGE &&
+            $sizeType !== ImageSizeType::LARGE_IMAGE && $sizeType !== ImageSizeType::ORIGINAL_IMAGE) {
+            throw new \Exception("Incorrect argument supplied for integer \$sizeType.");
+        }
+
+        $directory = pathinfo($file->getRealPath(), PATHINFO_DIRNAME);
+        $fileName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+        $fileExtension = $file->getExtension();
+        
+        if ($sizeType === ImageSizeType::LARGE_IMAGE) {
+            $newWidth = $this->largeImageDimensions[0];
+            $newHeight = $this->largeImageDimensions[1];
+            $type = 'large';
+        } else if ($sizeType === ImageSizeType::MEDIUM_IMAGE) {
+            $newWidth = $this->mediumImageDimensions[0];
+            $newHeight = $this->mediumImageDimensions[1];
+            $type = 'medium';
+        } else {
+            $newWidth = $this->smallImageDimensions[0];
+            $newHeight = $this->smallImageDimensions[1];
+            $type = 'small';
+        }
+
+        $newFileName = sprintf('%s_%s.%s', $fileName, $type, $fileExtension);
+        $path = sprintf('%s/%s', $directory, $newFileName);
+        
+        if (copy($file->getRealPath(), $path) === true) {
+            // Generate image
+            $image = new \Imagick($path);
+            $image->setImageCompressionQuality($this->imageCompressionQuality);
+            $image->stripImage();
+            if ($sizeType === ImageSizeType::ORIGINAL_IMAGE) {
+                // only compress, keep original size
+                $res = $image->resizeImage($image->getImageWidth(), $image->getImageHeight(), \Imagick::FILTER_LANCZOS, 1);
+            } else {
+                $res = $image->resizeImage($newWidth, 0, \Imagick::FILTER_LANCZOS, 1);
+            }
+
+            if ($res === true) {
+                $image->writeImage($path);
+                $image->destroy();
+                return $path;
+            } else {
+                throw new \Exception(sprintf("Failed to resize image to $type dimensions '%s'", $file->getRealPath()));
+            }
+        } else {
+            throw new \Exception(sprintf("Failed to copy image in path '%s' to '%s'.",
+                $file->getRealPath(), $path));
+        }
+    }
+
+    public function generateSizedImages(File $file) {
+        try {
+            $mimeType = $file->getMimeType();
+            if ($mimeType === null || strpos($mimeType, 'image/') === false) {
+                return;
+            }
+
+            $generatedImages = [
+                'large' => null,
+                'medium' => null,
+                'small' => null,
+            ];
+
+            // Load the image file in Imagick
+            $path = $file->getRealPath();
+            $image = new \Imagick($path);
+
+            // Get dimensions of image file
+            $width = $image->getImageWidth();
+            $height = $image->getImageHeight();
+
+            $image->destroy();
+
+            $sized = false;
+            
+            if ($width > $this->smallImageDimensions[0] || $height > $this->smallImageDimensions[1]) {
+                $generatedImages['small'] = $this->generateSizedImage($file, ImageSizeType::SMALL_IMAGE);
+                $sized = true;
+            }
+
+            if ($width > $this->mediumImageDimensions[0] || $height > $this->mediumImageDimensions[1]) {
+                $generatedImages['medium'] = $this->generateSizedImage($file, ImageSizeType::MEDIUM_IMAGE);
+                $sized = true;
+            }
+
+            if ($width > $this->largeImageDimensions[0] || $height > $this->largeImageDimensions[1]) {
+                $generatedImages['large'] = $this->generateSizedImage($file, ImageSizeType::LARGE_IMAGE);
+                $sized = true;
+            }
+
+            if ($sized === false) {
+                // we did not generate any sized images
+                // keep same image size, only compress
+                $generatedImages['small'] = $this->generateSizedImage($file, ImageSizeType::ORIGINAL_IMAGE);
+            }
+            
+            return $generatedImages;
+        } catch (\Exception $e) {
             if (isset($path) && file_exists($path)) {
                 unlink($path);
             }
@@ -85,7 +249,7 @@ class MediaService {
         }
     }
 
-    public function getRelativeUrlFromMedia(Media $media) { 
+    public function getRelativeUrlFromMedia(Media $media, int $sizeType = ImageSizeType::ORIGINAL_IMAGE) { 
         $mimeType = $media->getMimeType();
 
         if ($mimeType === null) return null;
@@ -95,11 +259,19 @@ class MediaService {
             $this->uploadDestination, 
             $subDirName
         ]);
-        $fileName = $media->getFileName();
+        if ($sizeType === ImageSizeType::LARGE_IMAGE) {
+            $fileName = $media->getLargeFileName();
+        } else if ($sizeType === ImageSizeType::MEDIUM_IMAGE) {
+            $fileName = $media->getMediumFileName();
+        } else if ($sizeType === ImageSizeType::SMALL_IMAGE) {
+            $fileName = $media->getSmallFileName();
+        } else {
+            $fileName = $media->getFileName();
+        }
+        
         $relativeUrl = sprintf("%s/%s", $publicDestination, $fileName);
 
         return $relativeUrl;
-
     }
 
     /**
@@ -184,14 +356,19 @@ class MediaService {
                 if (file_exists($filePath) !== false) {
                     $fileName = basename($filePath);
                     
+                    /** @var \App\Repository\MediaRepository $mediaRepo */
                     $mediaRepo = $this->entityManager->getRepository(Media::class);
                     /** @var Media $media */
-                    $media = $mediaRepo->findOneBy(['fileName' => $fileName]);
+                    $media = $mediaRepo->findOneByFileName($fileName);
                     
                     if ($media !== null) {
                         // check if media attachment already exists
                         $mediaAttachmentRepo = $this->entityManager->getRepository(MediaAttachment::class);
-                        $mediaAttachment = $mediaAttachmentRepo->findOneBy(['media' => $media]);
+                        $mediaAttachment = $mediaAttachmentRepo->findOneBy([
+                            'media' => $media, 
+                            'attachmentId' => $attachmentId,
+                            'attachmentType' => $attachmentType,
+                        ]);
                         
                         if ($mediaAttachment === null) {
                             $mediaAttachment = new MediaAttachment();
@@ -281,7 +458,13 @@ class MediaService {
         foreach ($mediaAttachments as $attachment) {
             $media = $attachment->getMedia();
             $fileName = $media->getFileName();
-            if (isset($fileNames[$fileName]) === false) {
+            $largeFileName = $media->getLargeFileName() ?? $fileName;
+            $mediumFileName = $media->getMediumFileName() ?? $fileName;
+            $smallFileName = $media->getSmallFileName() ?? $fileName;
+            if (isset($fileNames[$fileName]) === false &&
+                isset($fileNames[$largeFileName]) === false &&
+                isset($fileNames[$mediumFileName]) === false &&
+                isset($fileNames[$smallFileName]) === false) {
                 $attachment->setMedia(null);
                 $this->entityManager->remove($attachment);
             }

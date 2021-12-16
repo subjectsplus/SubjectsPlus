@@ -1,0 +1,11 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}New Staff{% endblock %}
+
+{% block body %}
+    <h1>Create new Staff</h1>
+
+    {{ include('backend/staff/_form.html.twig') }}
+
+    <a href="{{ path('staff_index') }}">back to list</a>
+{% endblock %}

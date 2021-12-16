@@ -89,6 +89,9 @@ new_acquisitions.php
 tests/_output/*
 
 
+# Do NOT Ignore templates/backend/log
+!templates/backend/log
+
 *.pydevproject
 .metadata
 .gradle
@@ -338,6 +341,7 @@ symfony.lock
 /bin/*
 !bin/console
 !bin/symfony_requirements
+!bin/phpunit
 /vendor/
 
 # Assets and user uploads
