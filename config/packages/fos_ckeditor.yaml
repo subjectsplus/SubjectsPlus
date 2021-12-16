@@ -9,6 +9,9 @@ fos_ck_editor:
             extraPlugins: 'media,recordtoken,image2,embed,autoembed,find,autogrow'
             embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
 
+
+
+
             # file upload/browse routes
             # filebrowserBrowseRoute: 'media_browse'
             # filebrowserBrowseRouteParameters: {type: 'file'}

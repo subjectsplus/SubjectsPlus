@@ -26,12 +26,23 @@ Encore
     .addEntry('staff', './assets/javascripts/staff/staff.js')
     .addEntry('linkcheck', './assets/javascripts/staff/linkcheck.js')
 
+
+    /*
+    * React Testing
+     */
+    .addEntry('rep_log_react', './assets/js/rep_log_react.js')
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+
+    /*
+     * Enable React
+     */
+    .enableReactPreset()
 
     /*
      * FEATURE CONFIG
