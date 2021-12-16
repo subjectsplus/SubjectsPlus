@@ -6,13 +6,11 @@ use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
 use App\Repository\MediaRepository;
-use App\Form\ImageType;
-use App\Form\ImageAttachmentType;
 use App\Form\MediaType;
 use App\Form\MediaEditType;
-use App\Form\CKEditorImageUploadType;
 use App\Service\MediaService;
 use App\Service\ValidationService;
+use App\Service\ChangeLogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +31,7 @@ class MediaController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('backend/media/index.html.twig', [
+        return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
         ]);
     }
@@ -110,12 +108,31 @@ class MediaController extends AbstractController
 
                 // Upload file to file server
                 $uploadResults = $uploader->uploadFile($upload);
+                /** @var UploadedFile $upload */
                 $upload = $uploadResults['file'];
-                $fileName = $uploadResults['fileName'];
+                $fileName = $upload->getFilename();
+                $mimeType = $upload->getMimeType();
 
+                // Variations for image files
+                $largeFile = $uploadResults['largeFile'];
+                $mediumFile = $uploadResults['mediumFile'];
+                $smallFile = $uploadResults['smallFile'];
+
+                if ($largeFile !== null) {
+                    $media->setLargeFileName($largeFile->getFilename());
+                }
+
+                if ($mediumFile !== null) {
+                    $media->setMediumFileName($mediumFile->getFilename());
+                }
+
+                if ($smallFile !== null) {
+                    $media->setSmallFileName($smallFile->getFilename());
+                }
+                
                 // Fill Media entity values
                 $media->setFileName($fileName);
-                $media->setMimeType($upload->getMimeType());
+                $media->setMimeType($mimeType);
                 $media->setFilesize($upload->getSize());
                 $media->setStaff($staff);
                 
@@ -124,8 +141,17 @@ class MediaController extends AbstractController
                 $conn->commit();
             } catch (\Exception $e) {
                 // delete the file if uploaded already
-                if (isset($uploadResults['path']) && file_exists($uploadResults['path'])) {
-                    unlink($uploadResults['path']);
+                if (isset($file) && file_exists($file->getRealPath())) {
+                    unlink($file->getRealPath());
+                }
+                if (isset($largeFile) && file_exists($largeFile->getRealPath())) {
+                    unlink($largeFile->getRealPath());
+                }
+                if (isset($mediumFile) && file_exists($mediumFile->getRealPath())) {
+                    unlink($mediumFile->getRealPath());
+                }
+                if (isset($smallFile) && file_exists($smallFile->getRealPath())) {
+                    unlink($smallFile->getRealPath());
                 }
                 $conn->rollback();
                 throw $e;
@@ -149,9 +175,9 @@ class MediaController extends AbstractController
      * @return Response Renders 'backend/media/show.html.twig' template with parameter 'media' signifying
      * the Media entity to display.
      * 
-     * @Route("/{mediaId}", name="media_show")
+     * @Route("/{mediaId}", name="media_show", methods={"GET"})
      */
-    public function show(Request $request, Media $media, MediaService $uploader)
+    public function show(Request $request, Media $media, MediaService $uploader): Response
     {
         return $this->render('backend/media/show.html.twig', [
             'media' => $media,
@@ -186,5 +212,45 @@ class MediaController extends AbstractController
             'media' => $media,
             'form' => $form->createView(),
         ]);
-    } 
+    }
+
+    /**
+     * Performs a delete request for the Media entity.
+     * 
+     * @return Response Upon successful deletion of Media entity, redirects to the media_upload route.
+     * 
+     * @Route("/{mediaId}", name="media_delete", methods={"POST"})
+     */
+    public function delete(Request $request, ChangeLogService $cls, Media $media): Response
+    {
+        // Check whether user is authenticated
+        // TODO: Check if permissions permit user to delete the media
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // Delete Media
+        if ($this->isCsrfTokenValid('delete'.$media->getMediaId(), $request->request->get('_token'))) {
+            /** @var EntityManagerInterface $entityManager */
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->transactional(function() use($media, $cls, $entityManager) {
+                // Preserve before deletion
+                $mediaId = $media->getMediaId();
+                $title = $media->getTitle();
+
+                // Delete Media (Set delete flag)
+                $media->setDeletedAt(new \DateTimeImmutable());
+                $entityManager->persist($media);
+
+                // Create new log entry
+                /** @var Staff $staff */
+                $staff = $this->getUser();
+                $cls->addLog($staff, 'media', $mediaId, $title, 'delete');
+
+                // Create flash message
+                $this->addFlash('notice', 'Success! Deleted Media!');
+            });
+        }
+
+        return $this->redirectToRoute('media_upload');
+    }
 }

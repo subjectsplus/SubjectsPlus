@@ -20,9 +20,9 @@
                         <img src="
                             {% if 'image/' in media_item.mimeType %}
                                 {# media_item is an image #}
-                                {{ asset(media_item | get_media_url) }}
+                                {{ asset(media_item | get_media_url('small')) }}
                             {% endif %}
-                        " height="200px" width="200px"/>
+                        "/>
                     </a>
                     <div class="media-item-title">{{ media_item.title }}</div>
                 </div>

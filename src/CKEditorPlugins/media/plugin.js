@@ -2,7 +2,7 @@ CKEDITOR.plugins.add( 'media', {
     icons: 'media',
     allowedContent: 'img[src,alt,width,height],figure,figcaption,br',
     init: function( editor ) {
-        editor.addCommand('toggleSidebar', {
+        editor.addCommand('toggleMediaSidebar', {
             'exec': function(editor) {
                 var sidebar = document.getElementById('media-sidebar');
                 if (sidebar) {
@@ -39,8 +39,8 @@ CKEDITOR.plugins.add( 'media', {
 
         editor.ui.addButton( 'Media', {
             label: 'Insert Media',
-            command: 'toggleSidebar',
-            toolbar: 'insert'
+            command: 'toggleMediaSidebar',
+            toolbar: 'insert,100'
         });
     }
 });
