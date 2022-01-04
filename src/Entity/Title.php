@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Filter\FullTextSearchFilter;
 
 /**
  * Title.
@@ -24,6 +25,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      "alternateTitle": "partial",
  *      "location.format.format": "exact"
  *  })
+ * 
+ * @ApiFilter(FullTextSearchFilter::class, properties={
+ *      "title": "partial",
+ *      "alternateTitle": "partial"
+ * })
  */
 class Title
 {
