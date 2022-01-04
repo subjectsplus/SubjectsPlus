@@ -1,6 +1,5 @@
 {% block content %}
 <style>
-
     #records-sidebar {
       float: right;
       width: 35%;
@@ -46,22 +45,7 @@
       margin-right: 10px;
     }
 </style>
+<div id="record-sidebar-container"></div>
 
-<div id="records-sidebar">
-    <div class="records-cards">
-        <h1>Your records</h1>
-        <ul id="records-list">
-            {% for records_entry in records %}
-                <li>
-                    <div class="records-card" draggable="true" data-record-id="{{ records_entry.titleId }}"
-                        data-record-title="{{ records_entry.title }}"
-                        data-record-description="{{ records_entry.description }}" 
-                        data-record-location="{{ (records_entry.location | first).location }}">
-                            {{ records_entry.title }}
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+{{ encore_entry_script_tags('records_sidebar') }}
 {% endblock %}
