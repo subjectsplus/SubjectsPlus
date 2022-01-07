@@ -44,9 +44,7 @@ export default class Sidebar extends Component {
             resLink += '&location.eresDisplay=Y';
         }
 
-        console.log(resLink);
-        $.getJSON(resLink)
-        .then((results) => {
+        $.getJSON(resLink).then((results) => {
             this.setState({
                 inputEmpty: false, 
                 previousInput: search_term, 
