@@ -4,7 +4,6 @@ export default class SearchBar extends Component {
 
     render() {
         return (
-            
             <form action="#">
                 {/* Label is for accessibility purposes, will not be visible */}
                 <label htmlFor={this.props.id}>
