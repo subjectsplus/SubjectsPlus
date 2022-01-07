@@ -23,7 +23,8 @@ use App\Filter\FullTextSearchFilter;
  * @ApiFilter(SearchFilter::class, properties={
  *      "title": "partial",
  *      "alternateTitle": "partial",
- *      "location.format.format": "exact"
+ *      "location.format.format": "exact",
+ *      "location.eresDisplay": "exact"
  *  })
  * 
  * @ApiFilter(FullTextSearchFilter::class, properties={
