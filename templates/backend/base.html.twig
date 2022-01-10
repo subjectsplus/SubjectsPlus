@@ -17,5 +17,8 @@
     {% block main %}
         {% block content %}{% endblock %}
     {% endblock %}
-    {% block footer %}{% endblock %}
+{% endblock %}
+
+{% block footer %}
+    {% include('backend/includes/footer.html.twig') %}
 {% endblock %}
