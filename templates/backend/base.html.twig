@@ -11,12 +11,14 @@
 {% endblock %}
 
 {% block body %}
+    <main>
     {% block header %}
         {% include('backend/includes/header.html.twig') %}
     {% endblock %}
     {% block main %}
         {% block content %}{% endblock %}
     {% endblock %}
+    </main>
 {% endblock %}
 
 {% block footer %}

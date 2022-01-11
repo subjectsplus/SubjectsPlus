@@ -52,7 +52,7 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
 // add partials - General
-@import 'elements/general';
+@import 'assets/styles/backend/elements/general';
 
 // add partials - Layout
 @import 'layout/header';
@@ -60,4 +60,5 @@
 @import 'layout/navigation';
 
 // add partials - Elements
+@import 'elements/login';
 @import 'elements/dashboard';
