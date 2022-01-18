@@ -24,18 +24,13 @@ Encore
     .addEntry('backend-main', './assets/backend/backend-main.js')
     .addEntry('dashboard', './assets/backend/dashboard.js')
 
-    //Backend CSS
-    .addStyleEntry('light', './assets/styles/backend/sp-light.scss')
-
-    // Added by Jane - to be reviewed
-    //.addEntry('patron', './assets/javascripts/patron/patron.js')
-    //.addEntry('patron_index', './assets/javascripts/patron/index.js')
-    //.addEntry('patron_database_list', './assets/javascripts/patron/database_list.js')
-    //.addEntry('staff', './assets/javascripts/staff/staff.js')
-    .addEntry('linkcheck', './assets/javascripts/staff/linkcheck.js')
-
     //Front-end Main JS
     .addEntry('frontend-main', './assets/frontend/frontend-main.js')
+
+    // Added by Jane - to be reviewed
+    //.addEntry('patron_index', './assets/frontend/jane/index.js')
+    //.addEntry('patron_database_list', './assets/frontend/jane/database_list.js')
+    //.addEntry('linkcheck', './assets/frontend/jane/linkcheck.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -78,15 +73,6 @@ Encore
             config: './postcss.config.js',
         }
     })
-    // Make images available to templates
-    //.copyFiles({
-        //from: './assets/images',
-       // to: 'assets/images/[path][name].[ext]'
-    //})
-    //.copyFiles({
-     //   from: './control/includes/images',
-     //   to: 'assets/images/control/[path][name].[ext]'
-    //})
 
     // Make legacy assets available
     //.copyFiles({

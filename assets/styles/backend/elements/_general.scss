@@ -7,4 +7,35 @@ body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: initial !important;
+  background-color: var(--sp-bg-color);
+  color: var(--sp-font-color);
+}
+
+a {
+  color: var(--sp-primary-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken(rgb(255, 255, 0), 5%);
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: var(--sp-heading-color);
+}
+
+.test-sp {
+  color: var(--sp-primary-color);
+  background: url('../../../images/backend/sp_logo.png');
+}
+
+.color {
+  width: calc(100% - 1rem);
+  border-radius: .25rem;
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
 }
