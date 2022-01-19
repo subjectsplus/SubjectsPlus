@@ -253,14 +253,14 @@
                 });
             }
 
-            editor.addCommand('toggleRecordSidebar', {
+            editor.addCommand('toggleRecordSearch', {
                 'exec': function(editor) {
-                    var sidebar = document.getElementById('records-sidebar');
-                    if (sidebar) {
-                        if (sidebar.style.display === 'none' || sidebar.style.display === '') {
-                            sidebar.style.display = 'block';
+                    var searchComponent = document.getElementById('record-search');
+                    if (searchComponent) {
+                        if (searchComponent.style.display === 'none' || searchComponent.style.display === '') {
+                            searchComponent.style.display = 'block';
                         } else {
-                            sidebar.style.display = 'none';
+                            searchComponent.style.display = 'none';
                         }
                     }
                 }
@@ -289,7 +289,7 @@
 
             editor.ui.addButton( 'Record', {
                 label: 'Insert Record',
-                command: 'toggleRecordSidebar',
+                command: 'toggleRecordSearch',
                 toolbar: 'insert,101'
             });
         }

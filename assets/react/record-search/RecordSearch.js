@@ -112,7 +112,7 @@ export default class Sidebar extends Component {
         }
 
         return (
-            <div id="records-sidebar">
+            <div id="record-search">
                 <h1>Get Records</h1>
                 <SearchBar id="record-searchbar" className="sidebar-searchbar" 
                     placeholder="Search Records" onChange={this.onSearchInput} />
