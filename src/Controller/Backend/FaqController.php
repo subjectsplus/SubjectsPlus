@@ -70,12 +70,6 @@ class FaqController extends AbstractController
         /** @var MediaRepository $mediaRepo */
         $mediaRepo = $this->getDoctrine()->getRepository(Media::class);
         $staffMedia = $mediaRepo->findByStaff($staff);
-        /** @var \App\Repository\TitleRepository $titleRepo */
-        $titleRepo = $this->getDoctrine()->getRepository(\App\Entity\Title::class);
-        $records = $titleRepo->getDatabasesBy(false, [
-            'format' => 'Web',
-        ], 5);
-        //$records = $titleRepo->findBy([], ['title' => 'ASC'], 5, 0);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var EntityManagerInterface $entityManager */
@@ -137,7 +131,6 @@ class FaqController extends AbstractController
             'faq' => $faq,
             'form' => $form->createView(),
             'media' => $staffMedia,
-            'records' => $records,
         ]);
     }
 
