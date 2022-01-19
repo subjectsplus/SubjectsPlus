@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Token from './Token.js';
-import SearchBar from './SearchBar.js';
+import Token from '../components/Token.js';
+import SearchBar from '../components/SearchBar.js';
 
 export default class Sidebar extends Component {
     apiLink = '/api/titles';
@@ -141,5 +141,5 @@ export default class Sidebar extends Component {
     }
 }
 
-ReactDOM.render(<Sidebar />, 
-    document.getElementById('record-sidebar-container'));
+ReactDOM.render(<Sidebar />,
+    document.getElementById('record-search-container'));
