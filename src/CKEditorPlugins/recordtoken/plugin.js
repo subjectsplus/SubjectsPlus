@@ -1,4 +1,5 @@
 (function() {
+    // TODO: Implement auto check for record tokens whose details might have changed in database
 
     var linkClass = 'record-link';
     var tokenClass = 'record-token';
@@ -108,6 +109,20 @@
                         this.setData('title', record.title);
                     }
 
+                    // Check if location has changed from database
+                    // and update if applicable
+                    var linkElement = this.element.findOne('.' + linkClass);
+                    if (record && linkElement) {
+                        var locationFromDB = record.location;
+                        var locationFromLocal = linkElement.getAttribute('href');
+                        
+                        if (locationFromDB !== locationFromLocal) {
+                            linkElement.setAttribute('href', locationFromDB);
+                            linkElement.$.removeAttribute('data-cke-saved-href');
+                            console.log("Updated location for record id " + record.recordId);
+                        }
+                    }
+
                     // Set description type data
                     var descriptionBlock = this.element.findOne('.' + descriptionClass);
                     var descriptionIcon = this.element.findOne('.' + iconClass);
@@ -115,6 +130,18 @@
                     if (descriptionBlock) {
                         this.setData('descriptionType', 'block');
                         this.oldDescriptionType = 'block';
+
+                        // Check if description content from DB has changed
+                        // and update if applicable
+                        if (record) {
+                            var descriptionFromDB = record.description;
+                            var descriptionFromLocal = descriptionBlock.getText();
+
+                            if (descriptionFromDB !== descriptionFromLocal) {
+                                descriptionBlock.setText(descriptionFromDB);
+                                console.log("Updated description for record id " + record.recordId);
+                            }
+                        }
                     } else if (descriptionIcon) {
                         this.setData('descriptionType', 'icon');
                         this.oldDescriptionType = 'icon';
@@ -269,39 +296,44 @@
     });
 
     CKEDITOR.on('instanceReady', function() {
+
         // When an item in the contact list is dragged, copy its data into the drag and drop data transfer.
         // This data is later read by the editor#paste listener in the media plugin defined above.
-        CKEDITOR.document.getById('records-list').on('dragstart', function(evt) {
-        // The target may be some element inside the draggable div (e.g. the image), so get the div.media-card.
-        var target = evt.data.getTarget().getAscendant('div', true);
+        if (CKEDITOR.document.getById('records-list')) {
+            CKEDITOR.document.getById('records-list').on('dragstart', function(evt) {
+                // The target may be some element inside the draggable div (e.g. the image), so get the div.media-card.
+                var target = evt.data.getTarget().getAscendant('div', true);
 
-        // Initialization of the CKEditor 4 data transfer facade is a necessary step to extend and unify native
-        // browser capabilities. For instance, Internet Explorer does not support any other data type than 'text' and 'URL'.
-        // Note: evt is an instance of CKEDITOR.dom.event, not a native event.
-        CKEDITOR.plugins.clipboard.initDragDataTransfer(evt);
+                // Initialization of the CKEditor 4 data transfer facade is a necessary step to extend and unify native
+                // browser capabilities. For instance, Internet Explorer does not support any other data type than 'text' and 'URL'.
+                // Note: evt is an instance of CKEDITOR.dom.event, not a native event.
+                CKEDITOR.plugins.clipboard.initDragDataTransfer(evt);
 
-        var dataTransfer = evt.data.dataTransfer;
+                var dataTransfer = evt.data.dataTransfer;
 
-        var record = {
-            'recordId': target.data('record-id'),
-            'title': target.data('record-title'),
-            'description': target.data('record-description'),
-            'location': target.data('record-location')
-        };
+                var record = {
+                    'recordId': target.data('record-id'),
+                    'title': target.data('record-title'),
+                    'description': target.data('record-description'),
+                    'location': target.data('record-location')
+                };
 
-        dataTransfer.setData('record', record);
+                dataTransfer.setData('record', record);
 
-        // You need to set some normal data types to backup values for two reasons:
-        // * In some browsers this is necessary to enable drag and drop into text in the editor.
-        // * The content may be dropped in another place than the editor.
-        dataTransfer.setData('text/html', target.getText());
+                // You need to set some normal data types to backup values for two reasons:
+                // * In some browsers this is necessary to enable drag and drop into text in the editor.
+                // * The content may be dropped in another place than the editor.
+                dataTransfer.setData('text/html', target.getText());
 
-        // You can still access and use the native dataTransfer - e.g. to set the drag image.
-        // Note: IEs do not support this method... :(.
-        if (dataTransfer.$.setDragImage && target.findOne('img')) {
-            dataTransfer.$.setDragImage(target.findOne('img').$, 0, 0);
+                // You can still access and use the native dataTransfer - e.g. to set the drag image.
+                // Note: IEs do not support this method... :(.
+                if (dataTransfer.$.setDragImage && target.findOne('img')) {
+                    dataTransfer.$.setDragImage(target.findOne('img').$, 0, 0);
+                }
+            });
+        } else {
+            console.log('Record Token dragstart event failed to load! Id "records-list" is null.')
         }
-        });
     });
 
     function getWidgetAllowedContent() {
@@ -336,6 +368,7 @@
                 'recordId': recordId,
                 'title': record.title,
                 'description': record.description,
+                'location': record.location[0].location
             }
         }
     }
