@@ -5,5 +5,8 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-// any CSS you import will output into a single css file (app.css in this case)
-//import '';
+// any CSS you import will output into a single css file (backend-main.css in this case)
+import '../styles/frontend/frontend-global.scss';
+
+// Bootstrap JS
+//window.bootstrap = require("bootstrap");

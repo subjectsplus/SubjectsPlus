@@ -24,9 +24,9 @@
                 </div>
             {% endif %}
 
-            <label for="inputEmail">{{ 'login.form.email.label' | trans }}</label>
+            <label for="inputEmail" class="form-label">{{ 'login.form.email.label' | trans }}</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-            <label for="inputPassword">{{ 'login.form.password.label' | trans }}</label>
+            <label for="inputPassword" class="form-label">{{ 'login.form.password.label' | trans }}</label>
             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
