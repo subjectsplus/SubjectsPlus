@@ -16,7 +16,7 @@ a {
   &:hover,
   &:active,
   &:focus {
-    color: darken(rgb(255, 255, 0), 5%);
+    color: var(--sp-secondary-color);
   }
 }
 
@@ -27,6 +27,24 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   color: var(--sp-heading-color);
+}
+
+h1, .h1 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.75rem;
+  }
+}
+
+h2, .h2 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.5rem;
+  }
+}
+
+h3, .h3 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.375rem;
+  }
 }
 
 .test-sp {

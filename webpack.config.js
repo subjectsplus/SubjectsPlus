@@ -74,7 +74,13 @@ Encore
         }
     })
 
-    // Make legacy assets available
+    // copy images to reference in templates
+    .copyFiles({
+        from: './assets/images/backend',
+        to: 'images/backend/[path][name].[ext]'
+    })
+
+    // Make legacy assets available | Added by Jane - to be reviewed
     //.copyFiles({
      //   from: './assets/css',
      //   to: 'assets/css/[path][name].[ext]'
