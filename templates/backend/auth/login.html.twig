@@ -10,38 +10,43 @@
 {% endblock %}
 
 {% block body %}
-    <div class="login-landing">
-        <img src="{{ asset('build/images/backend/sp_logo.png') }}" alt="SubjectsPlus logo" class="img-fluid mb-4">
+    <div class="m-auto panel-basic gradient-border-round">
+        <img src="{{ asset('build/images/backend/sp_logo.png') }}" alt="SubjectsPlus logo" class="img-fluid mb-4" style="width: 275px;" />
         <h1 class="h3">{{ 'login.form.heading' | trans }}</h1>
         <form method="post">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="mb-4 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
+            {# TODO: Display username #}
             {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                <div class="mb-4 alert alert-info">
+                    {{ 'login.form.logged.message' | trans }} <strong>{{ app.user.username }}</strong>. <a href="{{ path('app_logout') }}">({{ 'login.form.logout.prompt' | trans }})</a>
                 </div>
             {% endif %}
 
-            <label for="inputEmail" class="form-label">{{ 'login.form.email.label' | trans }}</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-            <label for="inputPassword" class="form-label">{{ 'login.form.password.label' | trans }}</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            <div class="form-floating mb-3">
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="{{ 'login.form.email.label' | trans }}">
+                <label for="inputEmail">{{ 'login.form.email.label' | trans }}</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="{{ 'login.form.password.label' | trans }}">
+                <label for="inputPassword">{{ 'login.form.password.label' | trans }}</label>
+            </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
+            {# TODO: Add remember_me option below your firewall to activate remember me functionality. #}
+            {# See https://symfony.com/doc/current/security/remember_me.html#}
 
-            {#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.#}
-            {#        See https://symfony.com/doc/current/security/remember_me.html#}
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> {{ 'login.form.remember.check' | trans }}
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" name="_remember_me">
+                <label class="form-check-label" for="rememberMe">
+                    <small>{{ 'login.form.remember.check' | trans }}</small>
                 </label>
             </div>
 
-            <button class="btn btn-primary" type="submit">{{ 'login.form.button' | trans }}</button>
+            <button class="btn btn-gradient fw-semi" type="submit">{{ 'login.form.button' | trans }}</button>
         </form>
     </div>
 {% endblock %}

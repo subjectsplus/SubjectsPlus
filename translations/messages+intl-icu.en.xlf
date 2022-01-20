@@ -293,6 +293,14 @@
         <source>login.form.button</source>
         <target>Sign In</target>
       </trans-unit>
+      <trans-unit id="2LeHx9q" resname="login.form.logged.message">
+        <source>login.form.logged.message</source>
+        <target>You are logged in as</target>
+      </trans-unit>
+      <trans-unit id="pTtVF6l" resname="login.form.logout.prompt">
+        <source>login.form.logout.prompt</source>
+        <target>Sign Out</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

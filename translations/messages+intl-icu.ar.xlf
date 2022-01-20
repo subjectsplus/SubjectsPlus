@@ -4214,6 +4214,14 @@
         <source>login.form.button</source>
         <target>__login.form.button</target>
       </trans-unit>
+      <trans-unit id="2LeHx9q" resname="login.form.logged.message">
+        <source>login.form.logged.message</source>
+        <target>__login.form.logged.message</target>
+      </trans-unit>
+      <trans-unit id="pTtVF6l" resname="login.form.logout.prompt">
+        <source>login.form.logout.prompt</source>
+        <target>__login.form.logout.prompt</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

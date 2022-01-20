@@ -293,6 +293,14 @@
         <source>login.form.button</source>
         <target>Iniciar sesión</target>
       </trans-unit>
+      <trans-unit id="2LeHx9q" resname="login.form.logged.message">
+        <source>login.form.logged.message</source>
+        <target>Has iniciado sesión como</target>
+      </trans-unit>
+      <trans-unit id="pTtVF6l" resname="login.form.logout.prompt">
+        <source>login.form.logout.prompt</source>
+        <target>Desconectar</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
