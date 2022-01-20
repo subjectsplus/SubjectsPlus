@@ -14,13 +14,15 @@ export default class Token extends Component {
     }
 
     render() {
-        return (
-            <div className={this.props.tokenClassName} draggable="true"
-                data-record-id={this.props.recordId} data-record-title={this.props.recordTitle}
-                data-record-description={this.props.recordDescription} 
-                data-record-location={this.props.recordLocation}>
-                    {this.htmlEntityDecode(this.props.recordTitle)}
-            </div>
-        );
+        if (this.props.tokenType === 'record') {
+            return (
+                <div className="record-token" draggable="true"
+                    data-record-id={this.props.recordId} data-record-title={this.props.recordTitle}
+                    data-record-description={this.props.recordDescription} 
+                    data-record-location={this.props.recordLocation}>
+                        {this.htmlEntityDecode(this.props.recordTitle)}
+                </div>
+            );
+        }
     }
 }

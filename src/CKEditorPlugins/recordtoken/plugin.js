@@ -305,8 +305,8 @@
 
         // When an item in the contact list is dragged, copy its data into the drag and drop data transfer.
         // This data is later read by the editor#paste listener in the media plugin defined above.
-        if (CKEDITOR.document.getById('records-list')) {
-            CKEDITOR.document.getById('records-list').on('dragstart', function(evt) {
+        if (CKEDITOR.document.getById('record-list')) {
+            CKEDITOR.document.getById('record-list').on('dragstart', function(evt) {
                 // The target may be some element inside the draggable div (e.g. the image), so get the div.media-card.
                 var target = evt.data.getTarget().getAscendant('div', true);
 
