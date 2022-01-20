@@ -61,6 +61,7 @@
         init: function( editor ) {
 
             var records = {};
+            var notifiedToSave = false;
 
             // Create record token widget
             editor.widgets.add('recordtoken', {
@@ -120,6 +121,10 @@
                             linkElement.setAttribute('href', locationFromDB);
                             linkElement.$.removeAttribute('data-cke-saved-href');
                             console.log("Updated location for record id " + record.recordId);
+                            if (!notifiedToSave) {
+                                notifyUser(editor, 'One or more record token references have been updated. Please remember to save/update!');
+                                notifiedToSave = true;
+                            }
                         }
                     }
 
@@ -140,6 +145,11 @@
                             if (descriptionFromDB !== descriptionFromLocal) {
                                 descriptionBlock.setText(descriptionFromDB);
                                 console.log("Updated description for record id " + record.recordId);
+
+                                if (!notifiedToSave) {
+                                    notifyUser(editor, 'One or more record token references have been updated. Please remember to save/update!');
+                                    notifiedToSave = true;
+                                }
                             }
                         }
                     } else if (descriptionIcon) {
@@ -166,11 +176,7 @@
                             this.element.findOne('.' + linkClass).setText(newTitle);
                         } else {
                             // Notify the user of invalid title length
-                            var notification = new CKEDITOR.plugins.notification( editor, {
-                                message: 'Invalid title entered! Title must be a minimum of ' + minimumTitleLength + ' characters.',
-                                type: 'warning'
-                            } );
-                            notification.show();
+                            notifyUser(editor, 'Invalid title entered! Title must be a minimum of ' + minimumTitleLength + ' characters.');
                         }
                     } else {
                         // New title is the same as original
@@ -378,6 +384,14 @@
 
         var doc = new DOMParser().parseFromString(str, 'text/html');
         return doc.body.textContent || '';
+    }
+
+    function notifyUser(editor, message, messageType='warning') {
+        var notification = new CKEDITOR.plugins.notification( editor, {
+            message: message,
+            type: messageType
+        });
+        notification.show();
     }
 })();
 
