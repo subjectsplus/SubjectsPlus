@@ -30,7 +30,7 @@ Encore
     * React Testing
      */
     .addEntry('rep_log_react', './assets/js/rep_log_react.js')
-    .addEntry('record_search', './assets/react/record-search/RecordSearch.js')
+    .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

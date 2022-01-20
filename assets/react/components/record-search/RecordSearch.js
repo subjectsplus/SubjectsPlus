@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Token from '../components/Token.js';
-import SearchBar from '../components/SearchBar.js';
+import Token from '../../shared/Token.js';
+import SearchBar from '../../shared/SearchBar.js';
 
 export default class Sidebar extends Component {
     apiLink = '/api/titles';
