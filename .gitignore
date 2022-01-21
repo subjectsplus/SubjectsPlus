@@ -91,6 +91,7 @@ tests/_output/*
 
 # Do NOT Ignore templates/backend/log
 !templates/backend/log
+!/assets/images/backend/*
 
 *.pydevproject
 .metadata
