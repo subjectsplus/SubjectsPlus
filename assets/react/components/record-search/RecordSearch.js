@@ -23,8 +23,6 @@ export default class RecordSearch extends Component {
             () => {
                 this.searchElement.current.refresh();
             });
-        console.log("checked: " + evt.target.checked);
-        console.log("state: " + this.state.azlist);
     }
 
     getApiLink(search_term, page=1) {
