@@ -89,7 +89,7 @@ Encore
 
     // copy images to reference in templates
     .copyFiles({
-        from: './assets/images/backend',
+        from: './assets/backend/images',
         to: 'images/backend/[path][name].[ext]'
     })
 
