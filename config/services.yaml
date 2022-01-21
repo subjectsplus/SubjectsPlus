@@ -4,6 +4,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.upload_destination: '/uploads/' # Relative path from public/ for file uploads
+    
+    # IMAGE SETTINGS
+    app.small_image_dimensions: '264x264' # Maximum dimensions (width x height) in pixels for small image
+    app.medium_image_dimensions: '500x500' # Maximum dimensions (width x height) in pixels for medium image
+    app.large_image_dimensions: '750x750' # Maximum dimensions (width x height) in pixels for large image
+    app.upload_original_image: false # Whether to upload the original image in addition to the generated images
+    app.image_compression_quality: 85
 
 services:
     # default configuration for services in *this* file
@@ -12,6 +20,13 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $projectDir: '%kernel.project_dir%'
+            $uploadDestination: '%app.upload_destination%'
+            $smallImageDimensions: '%app.small_image_dimensions%' 
+            $mediumImageDimensions: '%app.medium_image_dimensions%'
+            $largeImageDimensions: '%app.large_image_dimensions%'
+            $uploadOriginalImage: '%app.upload_original_image%'
+            $imageCompressionQuality: '%app.image_compression_quality%'
+
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -43,3 +58,4 @@ services:
         arguments: ['@request_stack', '@service_container']
         tags:
             - { name: monolog.processor, method: processRecord, handler: db_error_handler }
+

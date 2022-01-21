@@ -3,15 +3,18 @@
 namespace App\Form;
 
 use App\Entity\Staff;
+use App\Entity\StaffPhoto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class StaffType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            //->add('staffPhoto', ImageAttachmentType::class)
             ->add('lname')
             ->add('fname')
             ->add('title')

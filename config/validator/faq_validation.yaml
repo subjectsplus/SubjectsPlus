@@ -25,12 +25,12 @@ App\Entity\Faq:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
             fields: [question]
-            message: "Thwarted! Question already exists. Cannot use duplicate questions. -validation.yaml"
+            message: "faq.constraints.question.unique_entity"
     properties:
         question:
           - NotNull: 
-              message: "Thwarted! Question field should not be blank. -validation.yaml"
+              message: "faq.question.not_null"
         answer:
           - NotNull: 
-              message: "Thwarted! Answer field should not be blank. -validation.yaml"
+              message: "faq.answer.not_null"
         

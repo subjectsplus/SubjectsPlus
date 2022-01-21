@@ -1,6 +1,26 @@
 {
+    "api-platform/api-pack": {
+        "version": "v1.3.0"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "f132b33c43cf47b4451d91d2b57057eacb6b8e1d"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
     "egulias/email-validator": {
         "version": "3.1.1"
+    },
+    "fig/link-util": {
+        "version": "1.1.2"
     },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "2.0",
@@ -14,8 +34,26 @@
             "config/packages/fos_ckeditor.yaml"
         ]
     },
+    "jms/metadata": {
+        "version": "2.5.1"
+    },
+    "masterminds/html5": {
+        "version": "2.7.5"
+    },
     "myclabs/deep-copy": {
         "version": "1.10.2"
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
     },
     "phar-io/manifest": {
         "version": "2.0.1"
@@ -63,6 +101,9 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
+    },
+    "psr/link": {
+        "version": "1.0.0"
     },
     "scienta/doctrine-json-functions": {
         "version": "4.3.0"
@@ -157,14 +198,26 @@
     "symfony/options-resolver": {
         "version": "v5.3.0"
     },
+    "symfony/orm-pack": {
+        "version": "v2.1.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.23.0"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.23.0"
     },
+    "symfony/serializer": {
+        "version": "v5.3.4"
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.4"
+    },
     "symfony/test-pack": {
         "version": "v1.0.8"
+    },
+    "symfony/web-link": {
+        "version": "v5.3.4"
     },
     "symfonycasts/verify-email-bundle": {
         "version": "v1.5.0"
@@ -178,7 +231,22 @@
     "twig/string-extra": {
         "version": "v3.3.1"
     },
+    "vich/uploader-bundle": {
+        "version": "1.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.7",
+            "ref": "c4f5755b37fb65b9c6a3cbdae91205c15a137ed4"
+        },
+        "files": [
+            "config/packages/vich_uploader.yaml"
+        ]
+    },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "willdurand/negotiation": {
+        "version": "3.0.0"
     }
 }
