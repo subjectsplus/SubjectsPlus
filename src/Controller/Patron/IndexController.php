@@ -27,7 +27,7 @@ class IndexController extends AbstractController
      */
     public function index(GuideService $guideService, SubjectRepository $subjectRepository): Response
     {
-        return $this->render('patron/index.html.twig', [
+        return $this->render('jane/index.html.twig', [
             'collections' => $this->collections(),
             'guides' => $this->guidesByType(),
             'guideTypes' => $this->guideTypes($guideService),

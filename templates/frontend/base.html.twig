@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+    {{ parent }}
+    // TODO: Populate meta content below with values in config file
+    <meta name="description" content="Custom description">
+    <meta name="author" content="Institution name">
+    <meta name="keywords" content="custom keywords, research guides">
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+    {% block main %}{% endblock %}
+{% endblock %}

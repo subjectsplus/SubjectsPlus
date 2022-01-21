@@ -1,4 +1,4 @@
-import {createAutocomplete} from '../autocomplete';
+import {createAutocomplete} from 'autocomplete';
 
 function goToGuide(result) {
   window.location.href = "/subjects/" + result['shortform'];
