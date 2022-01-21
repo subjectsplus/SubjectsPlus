@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Token from '../../shared/Token.js';
-import SearchBar from '../../shared/SearchBar.js';
 import Search from '../../shared/Search.js';
 
 export default class RecordSearch extends Component {
