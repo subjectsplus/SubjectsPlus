@@ -20,17 +20,25 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('patron', './assets/javascripts/patron/patron.js')
-    .addEntry('patron_index', './assets/javascripts/patron/index.js')
-    .addEntry('patron_database_list', './assets/javascripts/patron/database_list.js')
-    .addEntry('staff', './assets/javascripts/staff/staff.js')
-    .addEntry('linkcheck', './assets/javascripts/staff/linkcheck.js')
-    
+
     /*
     * React Testing
      */
     .addEntry('rep_log_react', './assets/js/rep_log_react.js')
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
+
+    // Backend Main JS
+    .addEntry('backend-main', './assets/backend/backend-main.js')
+    .addEntry('dashboard', './assets/backend/dashboard.js')
+
+    //Front-end Main JS
+    .addEntry('frontend-main', './assets/frontend/frontend-main.js')
+
+    // Added by Jane - to be reviewed
+    //.addEntry('patron_index', './assets/frontend/jane/index.js')
+    //.addEntry('patron_database_list', './assets/frontend/jane/database_list.js')
+    //.addEntry('linkcheck', './assets/frontend/jane/linkcheck.js')
+
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -52,10 +60,10 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .cleanupOutputBeforeBuild()
-    //.enableBuildNotifications()
+    .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
-    //.enableVersioning()
+    .enableVersioning(Encore.isProduction())
 
     .configureBabel((config) => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
@@ -70,29 +78,34 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
-    // Make images available to templates
-    .copyFiles({
-        from: './assets/images',
-        to: 'assets/images/[path][name].[ext]'
-    })
-    .copyFiles({
-        from: './control/includes/images',
-        to: 'assets/images/control/[path][name].[ext]'
+    // enables PostCSS, autoprefixing
+    //.enablePostCssLoader()
+
+    .enablePostCssLoader((options) => {
+        options.postcssOptions = {
+            config: './postcss.config.js',
+        }
     })
 
-    // Make legacy assets available
+    // copy images to reference in templates
     .copyFiles({
-        from: './assets/css',
-        to: 'assets/css/[path][name].[ext]'
+        from: './assets/images/backend',
+        to: 'images/backend/[path][name].[ext]'
     })
-    .copyFiles({
-        from: './assets/js',
-        to: 'assets/js/[path][name].[ext]'
-    })
-    .copyFiles({
-        from: './assets/jquery',
-        to: 'assets/jquery/[path][name].[ext]'
-    })
+
+    // Make legacy assets available | Added by Jane - to be reviewed
+    //.copyFiles({
+     //   from: './assets/css',
+     //   to: 'assets/css/[path][name].[ext]'
+    //})
+    //.copyFiles({
+    //    from: './assets/js',
+    //    to: 'assets/js/[path][name].[ext]'
+    //})
+    //.copyFiles({
+     //   from: './assets/jquery',
+    //    to: 'assets/jquery/[path][name].[ext]'
+   // })
     
     // CKEditor 4
     .copyFiles([
@@ -111,15 +124,12 @@ Encore
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
-    // uncomment if you use React
-    //.enableReactPreset()
-
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery()
+    //.autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();

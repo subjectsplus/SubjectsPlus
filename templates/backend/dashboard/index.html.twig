@@ -2,50 +2,55 @@
 
 {% block title %}Hello DashboardController!{% endblock %}
 
-{% block body %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('dashboard') }}
+{% endblock %}
 
-    <div class="row">
-        <div id="lift-stuff-app"></div>
-    </div>
-    <br><br><br><br><br><br>
-    <hr />
-
-
-
-        <div class="container px-4 py-5" id="hanging-icons">
-            <h2 class="pb-2 border-bottom">{{ 'control.dashboard' | trans }}</h2>
-            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
-                <div class="col d-flex align-items-start">
-                    <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
-                        <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
-                    </div>
-                    <div>
-                        <h2>{{ app.user.fname }} {{ app.user.lname }}</h2>
-                        <ul class="list-group">
-                            <li class="list-group-item">{{ app.user.title }}</li>
-                            <li class="list-group-item">{{ app.user.email }}</li>
-                            <li class="list-group-item">{{ app.user.tel }}</li>
-                        </ul>
-                        <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-primary">
-                            {{ 'control.dashboard.edit_profile' | trans  }}
-                        </a>
-                    </div>
+{% block content %}
+    <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">{{ 'control.dashboard' | trans }}</h2>
+        <!--<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="My cool tooltip">
+            Tooltip on top
+        </button>-->
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
                 </div>
-                <div class="col d-flex align-items-start">
-                    <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
-                        <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
-                    </div>
-                    <div>
-                        <h2>{{ 'control.dashboard.quick_links' | trans }}</h2>
-                        <ul class="list-group">
-                            <li class="list-group-item">{{ 'control.dashboard.create_new_record' | trans }}</li>
-                            <li class="list-group-item">{{ 'control.dashboard.create_new_guide' | trans }}</li>
-                            <li class="list-group-item">{{ 'control.dashboard.create_new_faq' | trans }}</li>
-                        </ul>
-                    </div>
+                <div>
+                    <h2>{{ app.user.fname }} {{ app.user.lname }}</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">{{ app.user.title }}</li>
+                        <li class="list-group-item">{{ app.user.email }}</li>
+                        <li class="list-group-item">{{ app.user.tel }}</li>
+                    </ul>
+                    <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
+                    </a>
+                    <!--<i class="fas fa-camera"></i> Test icon-->
                 </div>
-
             </div>
-        </div>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
+                </div>
+                <div>
+                    <h2>{{ 'control.dashboard.quick_links' | trans }}</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item">{{ 'control.dashboard.create_new_record' | trans }}</li>
+                        <li class="list-group-item">{{ 'control.dashboard.create_new_guide' | trans }}</li>
+                        <li class="list-group-item">{{ 'control.dashboard.create_new_faq' | trans }}</li>
+                    </ul>
+                </div>
+            </div>
+            <!--<button id="example" type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button>-->
 
+        </div>
+    </div>
+    <script>
+        //console.log("working");
+        //let exampleEl = document.querySelector('#example');
+        //let popover = new bootstrap.Popover(exampleEl);
+    </script>
 {% endblock %}

@@ -273,6 +273,34 @@
         <source>control.header.media.upload</source>
         <target>Upload Media</target>
       </trans-unit>
+      <trans-unit id="wF0XxWv" resname="login.form.heading">
+        <source>login.form.heading</source>
+        <target>Sign In</target>
+      </trans-unit>
+      <trans-unit id="smYVPEM" resname="login.form.email.label">
+        <source>login.form.email.label</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="OyhW8sn" resname="login.form.password.label">
+        <source>login.form.password.label</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="kWxquYy" resname="login.form.remember.check">
+        <source>login.form.remember.check</source>
+        <target>Remember me</target>
+      </trans-unit>
+      <trans-unit id="rm4AE65" resname="login.form.button">
+        <source>login.form.button</source>
+        <target>Sign In</target>
+      </trans-unit>
+      <trans-unit id="2LeHx9q" resname="login.form.logged.message">
+        <source>login.form.logged.message</source>
+        <target>You are logged in as</target>
+      </trans-unit>
+      <trans-unit id="pTtVF6l" resname="login.form.logout.prompt">
+        <source>login.form.logout.prompt</source>
+        <target>Sign Out</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

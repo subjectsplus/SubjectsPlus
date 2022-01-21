@@ -7,7 +7,7 @@
     {{ encore_entry_script_tags('linkcheck') }}
 {% endblock %}
 
-{% block body %}
+{% block content %}
 
 <div class="accordion mt-5" id="linkCheckAccordion">
   <div class="accordion-item">
@@ -20,7 +20,7 @@
       <div class="accordion-body">
         <label for="guide-list" class="form-label">{{ 'link_checker.select_guide' | trans }}</label>
         <div class="input-group">
-            {% include 'staff/shared/guide_dropdown.html.twig' with {'dropdownId': 'guide-list'} %}
+            {% include 'backend/includes/guide_dropdown.html.twig' with {'dropdownId': 'guide-list'} %}
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" id="check-links-button">{{'Check links in guide'}}</button>
             </div>

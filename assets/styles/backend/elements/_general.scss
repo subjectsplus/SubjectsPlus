@@ -1,0 +1,106 @@
+html,
+body {
+  height:100%;
+}
+
+body {
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: initial !important;
+  background-color: var(--sp-bg-color);
+  color: var(--sp-font-color);
+}
+
+a {
+  color: var(--sp-primary-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-secondary-color);
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: var(--sp-heading-color);
+  font-weight: $font-weight-semi;
+}
+
+h1, .h1 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.75rem;
+  }
+}
+
+h2, .h2 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.5rem;
+  }
+}
+
+h3, .h3 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.375rem;
+  }
+}
+
+.fw-semi {
+  font-weight: $font-weight-semi;
+}
+
+// Forms
+.form-control,
+.form-check-input,
+.btn,
+.btn-check {
+  &:focus {
+    border-color: var(--sp-primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--sp-primary-color-rgb), 20%);
+  }
+}
+
+// Alerts
+.alert {
+  padding: 0.5rem 1rem;
+}
+.alert-info {
+  color: #055160;
+  background-color: rgba(var(--sp-accent-color-rgb), 10%);
+  border-color: var(--sp-accent-color);
+}
+
+// Gradient Borders
+.gradient-border{
+  border-image: linear-gradient(45deg, var(--sp-primary-color), var(--sp-secondary-color)) 1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.gradient-border-round{
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: $border-radius;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-90deg, var(--sp-primary-color), var(--sp-secondary-color)) border-box;
+    border: inherit;
+    border-radius: inherit;
+    mask: linear-gradient($white, $white) padding-box, linear-gradient($white, $white);
+    mask-composite: exclude;
+  }
+}
+
+
+.test-sp {
+  background: url('../../../images/backend/sp_logo.png');
+}

@@ -1,4 +1,4 @@
-import {createAutocomplete} from '../autocomplete';
+import {createAutocomplete} from 'autocomplete';
 
 function goToDatabase(result) {
   window.location.href = result['url'];

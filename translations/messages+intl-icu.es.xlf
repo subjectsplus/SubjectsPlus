@@ -265,6 +265,42 @@
         <source>control.dashboard</source>
         <target>Tablero de mandos</target>
       </trans-unit>
+      <trans-unit id="Bv6U9x8" resname="control.header.media">
+        <source>control.header.media</source>
+        <target>__control.header.media</target>
+      </trans-unit>
+      <trans-unit id="bSM2iAG" resname="control.header.media.upload">
+        <source>control.header.media.upload</source>
+        <target>__control.header.media.upload</target>
+      </trans-unit>
+      <trans-unit id="wF0XxWv" resname="login.form.heading">
+        <source>login.form.heading</source>
+        <target>Iniciar sesión</target>
+      </trans-unit>
+      <trans-unit id="smYVPEM" resname="login.form.email.label">
+        <source>login.form.email.label</source>
+        <target>Correo electrónico</target>
+      </trans-unit>
+      <trans-unit id="OyhW8sn" resname="login.form.password.label">
+        <source>login.form.password.label</source>
+        <target>Contraseña</target>
+      </trans-unit>
+      <trans-unit id="kWxquYy" resname="login.form.remember.check">
+        <source>login.form.remember.check</source>
+        <target>Recuérdame</target>
+      </trans-unit>
+      <trans-unit id="rm4AE65" resname="login.form.button">
+        <source>login.form.button</source>
+        <target>Iniciar sesión</target>
+      </trans-unit>
+      <trans-unit id="2LeHx9q" resname="login.form.logged.message">
+        <source>login.form.logged.message</source>
+        <target>Has iniciado sesión como</target>
+      </trans-unit>
+      <trans-unit id="pTtVF6l" resname="login.form.logout.prompt">
+        <source>login.form.logout.prompt</source>
+        <target>Desconectar</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
