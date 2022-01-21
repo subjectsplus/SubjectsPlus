@@ -63,6 +63,11 @@ h3, .h3 {
   }
 }
 
+.form-check-input:checked {
+  background-color: var(--sp-primary-color);
+  border-color: var(--sp-primary-color);
+}
+
 // Alerts
 .alert {
   padding: 0.5rem 1rem;
@@ -84,6 +89,7 @@ h3, .h3 {
   position: relative;
   border: 2px solid transparent;
   border-radius: $border-radius;
+  z-index: 1;
 
   &::before {
     content: '';
@@ -97,6 +103,7 @@ h3, .h3 {
     border-radius: inherit;
     mask: linear-gradient($white, $white) padding-box, linear-gradient($white, $white);
     mask-composite: exclude;
+    z-index: -1;
   }
 }
 
