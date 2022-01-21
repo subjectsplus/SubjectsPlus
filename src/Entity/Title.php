@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use App\Filter\FullTextSearchFilter;
 
 /**
  * Title.
@@ -16,14 +18,21 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * 
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     order={"title": "ASC"}
  * )
  * 
  * @ApiFilter(SearchFilter::class, properties={
  *      "title": "partial",
  *      "alternateTitle": "partial",
- *      "location.format.format": "exact"
+ *      "location.format.format": "exact",
+ *      "location.eresDisplay": "exact"
  *  })
+ * 
+ * @ApiFilter(FullTextSearchFilter::class, properties={
+ *      "title": "partial",
+ *      "alternateTitle": "partial"
+ * })
  */
 class Title
 {

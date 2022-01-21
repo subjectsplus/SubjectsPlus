@@ -25,6 +25,12 @@ Encore
     .addEntry('patron_database_list', './assets/javascripts/patron/database_list.js')
     .addEntry('staff', './assets/javascripts/staff/staff.js')
     .addEntry('linkcheck', './assets/javascripts/staff/linkcheck.js')
+    
+    /*
+    * React Testing
+     */
+    .addEntry('rep_log_react', './assets/js/rep_log_react.js')
+    .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -32,6 +38,11 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+
+    /*
+     * Enable React
+     */
+    .enableReactPreset()
 
     /*
      * FEATURE CONFIG
@@ -97,18 +108,18 @@ Encore
     ])
 
 
-// uncomment if you use TypeScript
-//.enableTypeScriptLoader()
+    // uncomment if you use TypeScript
+    //.enableTypeScriptLoader()
 
-// uncomment if you use React
-//.enableReactPreset()
+    // uncomment if you use React
+    //.enableReactPreset()
 
-// uncomment to get integrity="..." attributes on your script & link tags
-// requires WebpackEncoreBundle 1.4 or higher
-//.enableIntegrityHashes(Encore.isProduction())
+    // uncomment to get integrity="..." attributes on your script & link tags
+    // requires WebpackEncoreBundle 1.4 or higher
+    //.enableIntegrityHashes(Encore.isProduction())
 
-// uncomment if you're having problems with a jQuery plugin
-//.autoProvidejQuery()
+    // uncomment if you're having problems with a jQuery plugin
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
