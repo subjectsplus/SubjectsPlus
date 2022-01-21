@@ -1,7 +1,8 @@
 {% block content %}
-<style>
 
-    #records-sidebar {
+{# TODO: Refactor into different CSS #}
+<style>
+    #record-search {
       float: right;
       width: 35%;
       box-sizing: border-box;
@@ -9,59 +10,43 @@
       display: none;
     }
 
-    #records-list {
+    #record-list {
       list-style-type: none;
       margin: 0 !important;
       padding: 0;
+      overflow: auto;
+      height: 300px;
     }
 
-    #records-list li {
+    #record-list li {
       background: #FAFAFA;
       margin-bottom: 1px;
       height: 56px;
       line-height: 56px;
       cursor: pointer;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
-    #records-list li:nth-child(2n) {
+    #record-list li:nth-child(2n) {
       background: #F3F3F3;
     }
 
-    #records-list li:hover {
+    #record-list li:hover {
       background: #FFFDE3;
       border-left: 5px solid #DCDAC1;
       margin-left: -5px;
     }
 
-    .records-card {
+    .record-token {
       padding: 0 10px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
-    .records-card .records-picture {
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 10px;
-    }
 </style>
+<div id="record-search-container"></div>
 
-<div id="records-sidebar">
-    <div class="records-cards">
-        <h1>Your records</h1>
-        <ul id="records-list">
-            {% for records_entry in records %}
-                <li>
-                    <div class="records-card" draggable="true" data-record-id="{{ records_entry.titleId }}"
-                        data-record-title="{{ records_entry.title }}"
-                        data-record-description="{{ records_entry.description }}" 
-                        data-record-location="{{ (records_entry.location | first).location }}">
-                            {{ records_entry.title }}
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+{{ encore_entry_script_tags('record_search') }}
 {% endblock %}
