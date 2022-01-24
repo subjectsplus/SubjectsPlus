@@ -27,14 +27,14 @@ export default class Search extends Component {
         var userInput = evt.target.value;
         if (typeof userInput === 'string' && userInput.length >= 3) {
             if (userInput !== this.state.previousInput) {
-                this.getRecords(userInput, 1);
+                this.getResults(userInput, 1);
             }
         } else {
             this.setState({inputEmpty: true, page: 1});
         }
     }
 
-    getRecords(search_term, page=1, append=false) {
+    getResults(search_term, page=1, append=false) {
         // formulate the results api link
         var resLink = this.props.apiLink(search_term, page);
 
@@ -74,12 +74,12 @@ export default class Search extends Component {
     }
 
     refresh() {
-        this.getRecords(this.state.previousInput);
+        this.getResults(this.state.previousInput);
     }
 
     loadNextPage() {
         this.setState({loading: true},
-            this.getRecords(this.state.previousInput, this.state.page + 1, true));
+            this.getResults(this.state.previousInput, this.state.page + 1, true));
     }
 
     scrollToTop(evt) {
