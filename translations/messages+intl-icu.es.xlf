@@ -301,6 +301,14 @@
         <source>login.form.logout.prompt</source>
         <target>Desconectar</target>
       </trans-unit>
+      <trans-unit id="ZU9rs.6" resname="dashboard.controller.text">
+        <source>dashboard.controller.text</source>
+        <target>Controlador:</target>
+      </trans-unit>
+      <trans-unit id="XuP3agr" resname="dashboard.controller.template.text">
+        <source>dashboard.controller.template.text</source>
+        <target>Plantilla:</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
