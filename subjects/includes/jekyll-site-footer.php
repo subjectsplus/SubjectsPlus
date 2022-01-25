@@ -65,7 +65,7 @@
                                     </li>
                                     <li>
                                         <a class="no-decoration default" href="https://www.library.miami.edu/business/index.html">Business Library</a>
-                                        <span><a class="no-decoration default" href="https://www.library.miami.edu/business/hours.html"><i class="far fa-clock"></i> <span data-calendar="business"></span></a></span>
+                                        <span><a class="no-decoration default" href="https://www.library.miami.edu/business/hours.html"><i class="far fa-clock"></i> See Hours</a></span>
                                     </li>
                                     <li>
                                         <a class="no-decoration default" href="http://www.law.miami.edu/library/">Law Library</a>
