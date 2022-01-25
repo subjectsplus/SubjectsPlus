@@ -1,15 +1,16 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Hello DashboardController! | SubjectsPlus{% endblock %}
+{% block title %}{{ 'control.dashboard' | trans }} | SubjectsPlus{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('dashboard') }}
+    {{ encore_entry_script_tags('mode-switcher') }}
 {% endblock %}
 
 {% block content %}
-    <div class="container px-4 py-5" id="hanging-icons">
-        <h2 class="pb-2 border-bottom">{{ 'control.dashboard' | trans }}</h2>
+    <div class="container py-4" id="hanging-icons">
+        <div class="panel-basic gradient-border-round">
+        <h1>{{ 'control.dashboard' | trans }}</h1>
         <!--<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="My cool tooltip">
             Tooltip on top
         </button>-->
@@ -47,10 +48,6 @@
             <!--<button id="example" type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button>-->
 
         </div>
+        </div>
     </div>
-    <script>
-        //console.log("working");
-        //let exampleEl = document.querySelector('#example');
-        //let popover = new bootstrap.Popover(exampleEl);
-    </script>
 {% endblock %}
