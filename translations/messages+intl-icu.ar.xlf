@@ -4222,14 +4222,6 @@
         <source>login.form.logout.prompt</source>
         <target>__login.form.logout.prompt</target>
       </trans-unit>
-      <trans-unit id="ZU9rs.6" resname="dashboard.controller.text">
-        <source>dashboard.controller.text</source>
-        <target>__dashboard.controller.text</target>
-      </trans-unit>
-      <trans-unit id="XuP3agr" resname="dashboard.controller.template.text">
-        <source>dashboard.controller.template.text</source>
-        <target>__dashboard.controller.template.text</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

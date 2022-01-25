@@ -301,14 +301,6 @@
         <source>login.form.logout.prompt</source>
         <target>Sign Out</target>
       </trans-unit>
-      <trans-unit id="ZU9rs.6" resname="dashboard.controller.text">
-        <source>dashboard.controller.text</source>
-        <target>Controller:</target>
-      </trans-unit>
-      <trans-unit id="XuP3agr" resname="dashboard.controller.template.text">
-        <source>dashboard.controller.template.text</source>
-        <target>Template:</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>
