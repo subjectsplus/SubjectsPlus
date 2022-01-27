@@ -1,0 +1,14 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Guides index{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+    <h1>Guide Builder</h1>
+
+{% endblock %}
