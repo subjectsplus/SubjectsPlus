@@ -301,6 +301,22 @@
         <source>login.form.logout.prompt</source>
         <target>Sign Out</target>
       </trans-unit>
+      <trans-unit id="WA1Ef4B" resname="close.aria.label">
+        <source>close.aria.label</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="KuHVLvv" resname="control.header.search.placeholder">
+        <source>control.header.search.placeholder</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="oJEnRYh" resname="control.header.search.aria.label">
+        <source>control.header.search.aria.label</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="f9Ob4nr" resname="control.header.search.button">
+        <source>control.header.search.button</source>
+        <target>Go</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

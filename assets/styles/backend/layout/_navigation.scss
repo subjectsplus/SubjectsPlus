@@ -54,7 +54,11 @@
   &:focus {
     i {
       @include transition-all();
-      color: var(--sp-secondary-color);
+      color: var(--sp-primary-color);
     }
+  }
+
+  &:after {
+    display: none;
   }
 }

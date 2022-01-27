@@ -51,15 +51,12 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
-// add partials - General
-@import 'assets/styles/backend/elements/general';
-
-// add partials - Layout
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/navigation';
-
-// add partials - Elements
+// add partials - General Elements
+@import 'elements/general';
 @import 'elements/buttons';
 @import 'elements/panels';
 @import 'elements/borders';
+
+// add partials - Layout
+@import 'layout/footer';
+@import 'layout/navigation';
