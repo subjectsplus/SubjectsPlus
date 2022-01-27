@@ -43,7 +43,7 @@ class Subject
      *
      * @ORM\Column(name="shortform", type="string", length=50, nullable=false)
      */
-    private $shortform = '0';
+    private $shortform = '';
 
     /**
      * @var string|null
@@ -143,7 +143,7 @@ class Subject
     /**
      * Constructor.
      */
-    public function __construct(?LoggerInterface $logger)
+    public function __construct(?LoggerInterface $logger=null)
     {
         $this->staff = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
