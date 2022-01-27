@@ -1,6 +1,6 @@
+{# TODO: Recreate navbar as a React component  #}
 <nav class="navbar navbar-expand-lg bg-light border-divider">
     <div class="container">
-        {# TODO: Check url path to dashboard  - hard-coded vs variable #}
         <a class="navbar-brand" href="/control/dashboard">
             <img src="{{ asset('build/images/backend/sp_logo.png') }}" alt="SubjectsPlus logo" class="img-fluid" style="width: 200px;" />
         </a>
@@ -87,10 +87,23 @@
                         </ul>
                     </li>
                 </ul>
+
+                {# TODO: Search as a working React component #}
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-primary" type="submit">Search</button>
                 </form>
+
+                {# TODO: User Account dropdown menu #}
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-circle"></i></a>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/control/staff/{{ app.user.staffId }}/edit">{{ 'control.dashboard.edit_profile' | trans  }}</a></li>
+                            <li><a class="dropdown-item" href="/control/records/index.php">{{ 'login.form.logout.prompt' | trans }}</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
