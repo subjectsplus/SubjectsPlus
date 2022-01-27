@@ -1,91 +1,97 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/control">
-    <!-- TODO add a good alt text for the logo -->
-        <img src="{{ asset('build/assets/images/admin/logo_v3_full.png') }}" alt="logo" class="m-2">
-    </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav m-2 me-auto my-lg-0">
-            <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="recordsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{'control.header.records' | trans}}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="recordsDropdown">
-                    <li><a class="dropdown-item" href="/control/records/record.php">{{ 'control.header.records.new_record' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/records/index.php">{{ 'control.header.records.browse_items' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/records/subject_databases.php">{{ 'control.header.records.databases_by_subject' | trans }}</a></li>
+<nav class="navbar navbar-expand-lg bg-light border-divider">
+    <div class="container">
+        {# TODO: Check url path to dashboard  - hard-coded vs variable #}
+        <a class="navbar-brand" href="/control/dashboard">
+            <img src="{{ asset('build/images/backend/sp_logo.png') }}" alt="SubjectsPlus logo" class="img-fluid" style="width: 200px;" />
+        </a>
+        <button class="sp-navbar-toggler navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
+            <div class="offcanvas-header justify-content-end pb-2">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body pt-0 justify-content-lg-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="recordsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{'control.header.records' | trans}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="recordsDropdown">
+                            <li><a class="dropdown-item" href="/control/records/record.php">{{ 'control.header.records.new_record' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/records/index.php">{{ 'control.header.records.browse_items' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/records/subject_databases.php">{{ 'control.header.records.databases_by_subject' | trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="guidesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{'control.header.guides' | trans}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="guidesDropdown">
+                            <li><a class="dropdown-item" href="/control/guides/metadata.php">{{ 'control.header.guides.new_guide' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/guides/index.php">{{ 'control.header.guides.browse_guides' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/guides/manage.php">{{ 'control.header.guides.manage_files' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="{{ path('staff_link_checker') }}">{{ 'control.link_checker' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/guides/stats.php">{{ 'control.header.guides.stats' | trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="faqsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{'control.header.faqs' | trans}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="faqsDropdown">
+                            <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.header.faqs.create_new_faq' | trans }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'control.header.faqs.view_your_faqs' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/faq/">{{ 'control.header.faqs.view_faqs' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/faq/subjects">{{ 'control.header.faqs.view_faqs_by_subject' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/faq/collections">{{ 'control.header.faqs.view_faqs_by_collection' | trans }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/control/faq/faq.php">{{ 'New FAQ' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=subject">{{ 'Browse by subject' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=holding">{{ 'Browse by collection' | trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/control/talkback">{{ 'control.header.talkback' | trans }}</a>
+                    </li>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{'control.header.media' | trans}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="videosDropdown">
+                            <li><a class="dropdown-item" href="/control/media/upload">{{ 'control.header.media.upload' | trans }}</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{'control.header.admin' | trans}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                            <li><a class="dropdown-item" href="/control/dashboard">{{ 'header.dashboard' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/admin">{{ 'control.header.admin_dashboard' | trans }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/control/staff">{{ 'control.header.admin.users' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/admin/user.php?browse=true">{{ 'Add new user' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/department">{{ 'control.header.admin.departments' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/admin/departments.php">{{ 'Departments' | trans }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/control/admin/manage_guides.php">{{ 'control.header.admin.manage_guides' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/admin/guide_collections.php">{{ 'control.header.admin.guide_collections' | trans }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/control/admin/sources.php">{{ 'control.header.admin.database_types' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/admin/faq_collections.php">{{ 'control.header.admin.faq_collections' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/edit-config.php">{{ 'control.header.admin.edit_config' | trans }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/control/log">{{ 'control.header.admin.logs' | trans }}</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-            <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="guidesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{'control.header.guides' | trans}}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="guidesDropdown">
-                    <li><a class="dropdown-item" href="/control/guides/metadata.php">{{ 'control.header.guides.new_guide' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/guides/index.php">{{ 'control.header.guides.browse_guides' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/guides/manage.php">{{ 'control.header.guides.manage_files' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="{{ path('staff_link_checker') }}">{{ 'control.link_checker' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/guides/stats.php">{{ 'control.header.guides.stats' | trans }}</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="faqsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{'control.header.faqs' | trans}}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="faqsDropdown">
-                    <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.header.faqs.create_new_faq' | trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'control.header.faqs.view_your_faqs' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/faq/">{{ 'control.header.faqs.view_faqs' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/faq/subjects">{{ 'control.header.faqs.view_faqs_by_subject' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/faq/collections">{{ 'control.header.faqs.view_faqs_by_collection' | trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/control/faq/faq.php">{{ 'New FAQ' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=subject">{{ 'Browse by subject' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=holding">{{ 'Browse by collection' | trans }}</a></li>
-                </ul>
-            </li>
-            <li class="nav-item mx-2">
-                <a class="nav-link" href="/control/talkback">{{ 'control.header.talkback' | trans }}</a>
-            </li>
-            <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{'control.header.media' | trans}}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="videosDropdown">
-                    <li><a class="dropdown-item" href="/control/media/upload">{{ 'control.header.media.upload' | trans }}</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{'control.header.admin' | trans}}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-                    <li><a class="dropdown-item" href="/control/dashboard">{{ 'header.dashboard' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/admin">{{ 'control.header.admin_dashboard' | trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/control/staff">{{ 'control.header.admin.users' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/admin/user.php?browse=true">{{ 'Add new user' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/department">{{ 'control.header.admin.departments' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/admin/departments.php">{{ 'Departments' | trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/control/admin/manage_guides.php">{{ 'control.header.admin.manage_guides' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/admin/guide_collections.php">{{ 'control.header.admin.guide_collections' | trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/control/admin/sources.php">{{ 'control.header.admin.database_types' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/admin/faq_collections.php">{{ 'control.header.admin.faq_collections' | trans }}</a></li>
-                    <li><a class="dropdown-item" href="/control/edit-config.php">{{ 'control.header.admin.edit_config' | trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/control/log">{{ 'control.header.admin.logs' | trans }}</a></li>
-                </ul>
-            </li>
-        </ul>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
     </div>
 </nav>
