@@ -69,11 +69,7 @@ h3, .h3 {
   border-color: var(--sp-primary-color);
 }
 
-.dropdown-toggle{
-  &:after {
-    color: var(--sp-primary-color);
-  }
-}
+
 
 // Alerts
 .alert {
@@ -98,7 +94,7 @@ h3, .h3 {
     &:active,
     &:focus {
       @include transition-all();
-      color: var(--sp-primary-color);
+      color: var(--sp-secondary-color);
     }
   }
 }
