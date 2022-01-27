@@ -87,13 +87,13 @@ class Tab
 
     public function __construct()
     {
-        $this->sections = new \Doctrine\ORM\PersistentCollection();
+        $this->sections = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * @return Collection|Section[]
      */
-    public function getSections(): \Doctrine\ORM\PersistentCollection
+    public function getSections(): \Doctrine\Common\Collections\ArrayCollection
     {
         return $this->sections;
     }

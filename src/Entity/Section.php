@@ -52,7 +52,7 @@ class Section
 
     public function __construct()
     {
-        $this->plusletSections = new \Doctrine\ORM\PersistentCollection();
+        $this->plusletSections = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getSectionId(): ?string
