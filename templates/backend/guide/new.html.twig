@@ -1,0 +1,12 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}New Guide{% endblock %}
+
+{% block content %}
+
+    <h1>Create new Guide</h1>
+
+    {{ include('backend/guide/_form.html.twig') }}
+
+    <a href="{{ path('guide_index') }}">back to list</a>
+{% endblock %}
