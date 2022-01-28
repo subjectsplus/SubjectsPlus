@@ -711,7 +711,7 @@ if (is_null($header_type)
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/business-lib-sm.jpg" alt="Business Library" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
 													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/business/index.html">Business Library</a>
-													<div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/business/hours.html"><span data-calendar="business"></span></a></div>
+													<div class="mm-lib-time"><a class="no-decoration default" href="https://www.library.miami.edu/business/hours.html">See Hours</a></div>
 												</div>
 											</li>
 											<li class="mm-lib">
