@@ -451,6 +451,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         AND staff.active = 1
         AND subject.active = 1
         AND staff.user_type_id = 1
+        AND staff.ptags like '%librarian%'
         AND type != 'Placeholder'
             order by subject, lname, fname";
 
