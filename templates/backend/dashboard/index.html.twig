@@ -12,10 +12,9 @@
         <div class="panel-basic border-basic">
         <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Enable Dark Mode</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
+            <label class="form-check-label" for="switchMode">Enable Dark Mode</label>
         </div>
-
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
@@ -28,7 +27,7 @@
                         <li class="list-group-item">{{ app.user.email }}</li>
                         <li class="list-group-item">{{ app.user.tel }}</li>
                     </ul>
-                    <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-primary">
+                    <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-gradient">
                         <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
                     </a>
                 </div>

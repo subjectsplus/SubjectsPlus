@@ -307,7 +307,7 @@
       </trans-unit>
       <trans-unit id="KuHVLvv" resname="control.header.search.placeholder">
         <source>control.header.search.placeholder</source>
-        <target>Search</target>
+        <target>Search all</target>
       </trans-unit>
       <trans-unit id="oJEnRYh" resname="control.header.search.aria.label">
         <source>control.header.search.aria.label</source>
