@@ -91,15 +91,15 @@
       </trans-unit>
       <trans-unit id="2Oy8S9a" resname="control.dashboard.create_new_record">
         <source>control.dashboard.create_new_record</source>
-        <target>Create New Record</target>
+        <target>Record</target>
       </trans-unit>
       <trans-unit id="2a9t2sP" resname="control.dashboard.create_new_guide">
         <source>control.dashboard.create_new_guide</source>
-        <target>Create New Guide</target>
+        <target>Guide</target>
       </trans-unit>
       <trans-unit id="vviDGCL" resname="control.dashboard.create_new_faq">
         <source>control.dashboard.create_new_faq</source>
-        <target>Create New FAQ</target>
+        <target>FAQ</target>
       </trans-unit>
       <trans-unit id="ZIuIunT" resname="control.link_checker">
         <source>control.link_checker</source>

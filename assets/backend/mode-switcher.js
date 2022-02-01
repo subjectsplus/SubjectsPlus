@@ -1,24 +1,22 @@
-// TODO: Save user preference for admin theme mode in database vs. local storage
+// TODO: Save mode user preference in database vs. local storage
+// Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#storing-preferences
+
 const adminModeToggleSwitch = document.querySelector('#switchMode');
 
-const currentMode = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+const currentMode = localStorage.getItem('mode') ? localStorage.getItem('mode') : null;
 
-if (currentMode) {
-    document.documentElement.setAttribute('data-theme', currentMode);
-
-    if (currentMode === 'dark') {
-        adminModeToggleSwitch.checked = true;
-    }
+if (currentMode === 'dark') {
+    adminModeToggleSwitch.checked = true;
 }
 
 function switchAdminMode(e) {
     if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-mode', 'dark');
+        localStorage.setItem('mode', 'dark');
     }
     else {
-        document.documentElement.setAttribute('data-theme', 'default');
-        localStorage.setItem('theme', 'default');
+        document.documentElement.setAttribute('data-mode', 'default');
+        localStorage.setItem('mode', 'default');
     }
 }
 

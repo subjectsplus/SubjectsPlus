@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 
 //Custom colors
-:root, [data-theme="default"] {
+:root, [data-mode="default"] {
   --sp-bg-color: #fff9fe;
   --sp-bg-color-alt: #ffffff;
   --sp-primary-color: #c054a0;
@@ -19,7 +19,7 @@
   --sp-accent-color-alt: #74ae25;
 }
 
-[data-theme="dark"] {
+[data-mode="dark"] {
   --sp-bg-color: #1c1d26;
   --sp-bg-color-alt: #242631;
   --sp-primary-color: #c054a0;
@@ -35,7 +35,7 @@
   --sp-accent-color-alt: #74ae25;
 }
 
-[data-theme="classic"] {
+[data-mode="classic"] {
   --sp-bg-color: #f6e3e7;
   --sp-bg-color-alt: #ffffff;
   --sp-primary-color: #e488b6;

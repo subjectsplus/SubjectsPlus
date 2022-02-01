@@ -25,7 +25,7 @@ class LinkCheckerController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('backend/link_checker.html.twig', [
+        return $this->render('backend/link_checker/link_checker.html.twig', [
             'guides' => $this->getDoctrine()
                              ->getRepository(Subject::class)
                              ->getGuideListForStaff()
