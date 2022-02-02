@@ -57,4 +57,3 @@ class LinkCheckerController extends AbstractController
 
     }
 }
-

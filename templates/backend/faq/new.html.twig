@@ -1,14 +1,16 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}New FAQ{% endblock %}
+{% block title %}{{ 'control.header.faqs.create_new_faq' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
+    <div class="container py-5">
+        <div class="panel-basic border-basic">
+            <h1 class="fw-light">{{ 'control.header.faqs.create_new_faq' | trans }}</h1>
+            <a href="{{ path('faq_index') }}">back to list</a>
+            {{ include('backend/faq/_form.html.twig') }}
+            {{ include('backend/media/sidebar.html.twig') }}
+            {{ include('backend/records/sidebar.html.twig') }}
 
-    <h1>Create new FAQ</h1>
-
-    {{ include('backend/media/sidebar.html.twig') }}
-    {{ include('backend/records/sidebar.html.twig') }}
-    {{ include('backend/faq/_form.html.twig') }}
-
-    <a href="{{ path('faq_index') }}">back to list</a>
+        </div>
+    </div>
 {% endblock %}

@@ -317,6 +317,10 @@
         <source>control.header.search.button</source>
         <target>Ir</target>
       </trans-unit>
+      <trans-unit id="KxcpoWo" resname="link_checker.check">
+        <source>link_checker.check</source>
+        <target>__link_checker.check</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
