@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * Tab.
  *
  * @ORM\Table(name="tab", indexes={@ORM\Index(name="fk_t_subject_id_idx", columns={"subject_id"})})
  * @ORM\Entity
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  */
 class Tab
 {
@@ -81,21 +90,13 @@ class Tab
     private $subject;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Section", mappedBy="tab")
+     * @ORM\OneToMany(targetEntity="Section", mappedBy="tab")
      */
     private $sections;
 
     public function __construct()
     {
-        $this->sections = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * @return Collection|Section[]
-     */
-    public function getSections(): \Doctrine\Common\Collections\ArrayCollection
-    {
-        return $this->sections;
+        $this->sections = new ArrayCollection();
     }
 
     public function getTabId(): ?string
@@ -205,5 +206,35 @@ class Tab
             'label' => $this->getLabel(),
             'external_url' => $this->getExternalUrl(),
         ];
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setTab($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getTab() === $this) {
+                $section->setTab(null);
+            }
+        }
+
+        return $this;
     }
 }
