@@ -9,29 +9,29 @@
 
 {% block content %}
     <div class="container py-5">
-        <div class="panel-basic border-basic">
-            <div class="row row-cols-2">
-                <div class="col-7">
-                    <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
-                        <label class="form-check-label" for="switchMode">Enable Dark Mode</label>
-                    </div>
-                </div>
-                <div class="col-5 text-end">
-                    <div class="dropdown basic-dropdown">
-                        <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-plus-circle"></i> Create New
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
-                            <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
-                            <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
-                            <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
-                        </ul>
-                    </div>
+        <div class="row row-cols-2">
+            <div class="col-7">
+                <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
+                    <label class="form-check-label" for="switchMode">Enable Dark Mode</label>
                 </div>
             </div>
-            <h2 class="pt-4">{{ app.user.fname }} {{ app.user.lname }}</h2>
+            <div class="col-5 text-end">
+                <div class="dropdown basic-dropdown">
+                    <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Create New
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
+                        <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
+                        <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
+                        <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel-basic border-basic mt-4">
+            <h2>{{ app.user.fname }} {{ app.user.lname }}</h2>
             <ul class="list-unstyled">
                 <li>{{ app.user.title }}</li>
                 <li>{{ app.user.email }}</li>

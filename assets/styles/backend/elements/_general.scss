@@ -12,11 +12,12 @@ body {
 }
 
 a {
-  color: var(--sp-primary-color);
+  color: var(--sp-nav-color);
   &:hover,
   &:active,
   &:focus {
-    color: var(--sp-secondary-color);
+    @include transition-all();
+    color: var(--sp-nav-color);
   }
 }
 
