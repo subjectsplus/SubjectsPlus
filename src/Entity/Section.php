@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * Section.
  *
  * @ORM\Table(name="section", indexes={@ORM\Index(name="fk_section_tab_idx", columns={"tab_id"})})
  * @ORM\Entity
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ * )
  */
 class Section
 {
@@ -36,23 +45,19 @@ class Section
     private $layout = '4-4-4';
 
     /**
-     * @var \Tab
-     *
-     * @ORM\ManyToOne(targetEntity="Tab", inversedBy="sections")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(name="tab_id", referencedColumnName="tab_id")
-     * })
+     * @ORM\ManyToOne(targetEntity=Tab::class, inversedBy="sections")
+     * @ORM\JoinColumn(name="tab_id", referencedColumnName="tab_id")
      */
     private $tab;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PlusletSection", mappedBy="section")
+     * @ORM\OneToMany(targetEntity=Pluslet::class, mappedBy="section")
      */
-    private $plusletSections;
+    private $pluslets;
 
     public function __construct()
     {
-        $this->plusletSections = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pluslets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getSectionId(): ?string
@@ -96,27 +101,30 @@ class Section
         return $this;
     }
 
-    public function getPlusletSections()
+    /**
+     * @return Collection|Pluslet[]
+     */
+    public function getPluslets(): Collection
     {
-        return $this->plusletSections;
+        return $this->pluslets;
     }
 
-    public function addPlusletSection(PlusletSection $plusletSection): self
+    public function addPluslet(Pluslet $pluslet): self
     {
-        if (!$this->plusletSections->contains($plusletSection)) {
-            $this->plusletSections[] = $plusletSection;
-            $plusletSection->setPluslet($this);
+        if (!$this->pluslets->contains($pluslet)) {
+            $this->pluslets[] = $pluslet;
+            $pluslet->setSection($this);
         }
 
         return $this;
     }
 
-    public function removePlusletSection(PlusletSection $plusletSection): self
+    public function removePluslet(Pluslet $pluslet): self
     {
-        if ($this->plusletSections->removeElement($plusletSection)) {
+        if ($this->pluslets->removeElement($pluslet)) {
             // set the owning side to null (unless already changed)
-            if ($plusletSection->getPluslet() === $this) {
-                $plusletSection->setPluslet(null);
+            if ($pluslet->getSection() === $this) {
+                $pluslet->setSection(null);
             }
         }
 
