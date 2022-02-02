@@ -3,15 +3,23 @@
 namespace App\Entity;
 
 use App\Service\PlusletService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Subject.
  *
  * @ORM\Table(name="subject")
  * @ORM\Entity(repositoryClass="App\Repository\SubjectRepository")
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ *     order={"subject": "ASC"}
+ * )
  */
 class Subject
 {
@@ -111,13 +119,6 @@ class Subject
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Staff", mappedBy="subject")
-     */
-    private $staff;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="Discipline", inversedBy="subject")
      * @ORM\JoinTable(name="subject_discipline",
      *     joinColumns={
@@ -139,6 +140,11 @@ class Subject
      * @var LoggerInterface
      */
     private $logger;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Staff", mappedBy="subjects")
+     */
+    private $staff;
 
     /**
      * Constructor.
@@ -314,33 +320,6 @@ class Subject
     }
 
     /**
-     * @return Collection|Staff[]
-     */
-    public function getStaff(): Collection
-    {
-        return $this->staff;
-    }
-
-    public function addStaff(Staff $staff): self
-    {
-        if (!$this->staff->contains($staff)) {
-            $this->staff[] = $staff;
-            $staff->addSubject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStaff(Staff $staff): self
-    {
-        if ($this->staff->removeElement($staff)) {
-            $staff->removeSubject($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Discipline[]
      */
     public function getDiscipline(): Collection
@@ -422,6 +401,33 @@ class Subject
             if ($tab->getSubject() === $this) {
                 $tab->setSubject(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Staff[]
+     */
+    public function getStaff(): Collection
+    {
+        return $this->staff;
+    }
+
+    public function addStaff(Staff $staff): self
+    {
+        if (!$this->staff->contains($staff)) {
+            $this->staff[] = $staff;
+            $staff->addSubject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStaff(Staff $staff): self
+    {
+        if ($this->staff->removeElement($staff)) {
+            $staff->removeSubject($this);
         }
 
         return $this;
