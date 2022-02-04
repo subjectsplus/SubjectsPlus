@@ -3,15 +3,25 @@
 namespace App\Entity;
 
 use App\Service\PlusletService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Subject.
  *
  * @ORM\Table(name="subject")
  * @ORM\Entity(repositoryClass="App\Repository\SubjectRepository")
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ *     order={"subject": "ASC"}
+ * )
  */
 class Subject
 {
@@ -43,7 +53,7 @@ class Subject
      *
      * @ORM\Column(name="shortform", type="string", length=50, nullable=false)
      */
-    private $shortform = '0';
+    private $shortform = '';
 
     /**
      * @var string|null
@@ -111,13 +121,6 @@ class Subject
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Staff", mappedBy="subject")
-     */
-    private $staff;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\ManyToMany(targetEntity="Discipline", inversedBy="subject")
      * @ORM\JoinTable(name="subject_discipline",
      *     joinColumns={
@@ -132,6 +135,7 @@ class Subject
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tab", mappedBy="subject")
+     * @ApiSubresource(maxDepth=1)
      */
     private $tabs;
 
@@ -141,9 +145,14 @@ class Subject
     private $logger;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Staff", mappedBy="subjects")
+     */
+    private $staff;
+
+    /**
      * Constructor.
      */
-    public function __construct(?LoggerInterface $logger)
+    public function __construct(?LoggerInterface $logger=null)
     {
         $this->staff = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
@@ -314,33 +323,6 @@ class Subject
     }
 
     /**
-     * @return Collection|Staff[]
-     */
-    public function getStaff(): Collection
-    {
-        return $this->staff;
-    }
-
-    public function addStaff(Staff $staff): self
-    {
-        if (!$this->staff->contains($staff)) {
-            $this->staff[] = $staff;
-            $staff->addSubject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStaff(Staff $staff): self
-    {
-        if ($this->staff->removeElement($staff)) {
-            $staff->removeSubject($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Discipline[]
      */
     public function getDiscipline(): Collection
@@ -422,6 +404,33 @@ class Subject
             if ($tab->getSubject() === $this) {
                 $tab->setSubject(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Staff[]
+     */
+    public function getStaff(): Collection
+    {
+        return $this->staff;
+    }
+
+    public function addStaff(Staff $staff): self
+    {
+        if (!$this->staff->contains($staff)) {
+            $this->staff[] = $staff;
+            $staff->addSubject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStaff(Staff $staff): self
+    {
+        if ($this->staff->removeElement($staff)) {
+            $staff->removeSubject($this);
         }
 
         return $this;

@@ -4,12 +4,19 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * Discipline.
  *
  * @ORM\Table(name="discipline", uniqueConstraints={@ORM\UniqueConstraint(name="discipline", columns={"discipline"})})
  * @ORM\Entity
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ * )
  */
 class Discipline
 {

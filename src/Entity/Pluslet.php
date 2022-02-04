@@ -5,12 +5,19 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * Pluslet.
  *
  * @ORM\Table(name="pluslet")
  * @ORM\Entity
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ * )
  */
 class Pluslet
 {
@@ -108,9 +115,17 @@ class Pluslet
     private $targetBlankLinks = '0';
 
     /**
-     * @ORM\OneToMany(targetEntity=PlusletSection::class, mappedBy="pluslet")
+     * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="pluslets")
+     * @ORM\JoinTable(name="pluslet_section", 
+     *  joinColumns={
+     *         @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
+     *     },
+     *  inverseJoinColumns={
+     *         @ORM\JoinColumn(name="pluslet_id", referencedColumnName="pluslet_id")
+     *     }
+     * )
      */
-    private $plusletSections;
+    private $section;
 
     public function __construct()
     {
@@ -274,24 +289,14 @@ class Pluslet
         return $this->plusletSections;
     }
 
-    public function addPlusletSection(PlusletSection $plusletSection): self
+    public function getSection(): ?Section
     {
-        if (!$this->plusletSections->contains($plusletSection)) {
-            $this->plusletSections[] = $plusletSection;
-            $plusletSection->setPluslet($this);
-        }
-
-        return $this;
+        return $this->section;
     }
 
-    public function removePlusletSection(PlusletSection $plusletSection): self
+    public function setSection(?Section $section): self
     {
-        if ($this->plusletSections->removeElement($plusletSection)) {
-            // set the owning side to null (unless already changed)
-            if ($plusletSection->getPluslet() === $this) {
-                $plusletSection->setPluslet(null);
-            }
-        }
+        $this->section = $section;
 
         return $this;
     }

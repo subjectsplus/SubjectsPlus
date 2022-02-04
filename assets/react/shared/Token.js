@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
+import Utility from '../../js/Utility/Utility.js';
 
 export default class Token extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    htmlEntityDecode(str) {
-        if (typeof str !== 'string') return '';
-
-        var doc = new DOMParser().parseFromString(str, 'text/html');
-        return doc.body.textContent || '';
     }
 
     render() {
@@ -20,7 +14,7 @@ export default class Token extends Component {
                     data-record-id={this.props.recordId} data-record-title={this.props.recordTitle}
                     data-record-description={this.props.recordDescription} 
                     data-record-location={this.props.recordLocation}>
-                        {this.htmlEntityDecode(this.props.recordTitle)}
+                        {Utility.htmlEntityDecode(this.props.recordTitle)}
                 </div>
             );
         }
