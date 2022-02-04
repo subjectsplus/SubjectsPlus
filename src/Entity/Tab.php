@@ -16,7 +16,8 @@ use ApiPlatform\Core\Annotation\ApiFilter;
  * 
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     order={"tabIndex": "ASC"}
  * )
  */
 class Tab
