@@ -80,6 +80,14 @@ class GuideController extends AbstractController
     }
 
     /**
+     * @Route("/build", name="guide_build", methods={"GET"})
+     */
+    public function build(): Response
+    {
+        return $this->render('backend/guide/builder.html.twig', []);
+    }
+
+    /**
      * @Route("/{subjectId}", name="guide_show", methods={"GET"})
      */
     public function show(Subject $subject): Response
