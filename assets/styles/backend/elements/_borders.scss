@@ -1,0 +1,47 @@
+// Borders
+.gradient-border{
+  border-image: linear-gradient(45deg, var(--sp-primary-color), var(--sp-secondary-color)) 1;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.gradient-border-round{
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: $border-radius;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-90deg, var(--sp-primary-color), var(--sp-secondary-color)) border-box;
+    border: inherit;
+    border-radius: inherit;
+    mask: linear-gradient($white, $white) padding-box, linear-gradient($white, $white);
+    mask-composite: exclude;
+    z-index: -1;
+  }
+}
+
+.border-basic {
+  border: 1px solid var(--sp-border-color);
+  border-radius: $border-radius-sm;
+}
+
+.border-primary {
+  border-color: var(--sp-primary-color) !important;
+}
+
+.border-secondary {
+  border-color: var(--sp-secondary-color) !important;
+}
+
+.border-divider {
+  border-image: linear-gradient(45deg, var(--sp-primary-color), var(--sp-secondary-color)) 1;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}

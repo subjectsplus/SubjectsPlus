@@ -12,11 +12,12 @@ body {
 }
 
 a {
-  color: var(--sp-primary-color);
+  color: var(--sp-nav-color);
   &:hover,
   &:active,
   &:focus {
-    color: var(--sp-secondary-color);
+    @include transition-all();
+    color: var(--sp-nav-color);
   }
 }
 
@@ -56,12 +57,20 @@ h3, .h3 {
 .form-control,
 .form-check-input,
 .btn,
-.btn-check {
+.btn-check,
+.btn-close {
   &:focus {
     border-color: var(--sp-primary-color);
     box-shadow: 0 0 0 0.25rem rgba(var(--sp-primary-color-rgb), 20%);
   }
 }
+
+.form-check-input:checked {
+  background-color: var(--sp-nav-color);
+  border-color: var(--sp-nav-color);
+}
+
+
 
 // Alerts
 .alert {
@@ -73,34 +82,61 @@ h3, .h3 {
   border-color: var(--sp-accent-color);
 }
 
-// Gradient Borders
-.gradient-border{
-  border-image: linear-gradient(45deg, var(--sp-primary-color), var(--sp-secondary-color)) 1;
-  border-width: 2px;
-  border-style: solid;
-}
 
-.gradient-border-round{
-  position: relative;
-  border: 2px solid transparent;
-  border-radius: $border-radius;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(-90deg, var(--sp-primary-color), var(--sp-secondary-color)) border-box;
-    border: inherit;
-    border-radius: inherit;
-    mask: linear-gradient($white, $white) padding-box, linear-gradient($white, $white);
-    mask-composite: exclude;
+// Backgrounds
+.bg-light {
+  background-color: var(--sp-bg-color-alt) !important;
+  color: var(--sp-font-color);
+
+  a{
+    color: var(--sp-font-color);
+    &:hover,
+    &:active,
+    &:focus {
+      @include transition-all();
+      color: var(--sp-nav-color);
+    }
   }
 }
 
+.offcanvas {
+  background-color: var(--sp-bg-color-alt);
+}
 
-.test-sp {
+[data-mode="default"] {
+  .btn-close{
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23b0248f'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  }
+}
 
+[data-mode="dark"] {
+  .btn-close{
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c054a0'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  }
+}
+
+// Dropdowns
+.basic-dropdown{
+  .dropdown-menu {
+    border: 1px solid var(--sp-border-color);
+    background-color: var(--sp-bg-color-alt);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
+  }
+
+  .dropdown-item {
+    color: var(--sp-font-color);
+    &:hover,
+    &:focus {
+      @include transition-all();
+      background-color: var(--sp-nav-color);
+      color:$white !important;
+    }
+  }
+
+  .dropdown-toggle{
+    &:after {
+      display: none;
+    }
+  }
 }

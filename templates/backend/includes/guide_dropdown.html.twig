@@ -1,5 +1,6 @@
-<select id="{{ dropdownId }}" class="form-select">
-{% for guide in guides %}
-    <option value="{{guide.shortform}}">{{guide.subject}}</option>
-{% endfor %}
+<select id="{{ dropdownId }}" class="form-select" aria-label="{{ selectGuideLabel }}">
+    <option selected>{{ selectGuideLabel }}</option>
+    {% for guide in guides %}
+        <option value="{{guide.shortform}}">{{guide.subject}}</option>
+    {% endfor %}
 </select>

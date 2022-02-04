@@ -30,13 +30,13 @@ class FaqType extends AbstractType
                 'required' => false,
                 'empty_data' => '',
             ])
+            ->add('active', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('keywords', TextType::class, [
                 'required' => false,
                 'mapped' => false,
                 'empty_data' => '',
-            ])
-            ->add('active', CheckboxType::class, [
-                'required' => false,
             ])
             ->add('subject', EntityType::class, [
                 'class' => Subject::class,
