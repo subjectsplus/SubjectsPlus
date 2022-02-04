@@ -91,19 +91,19 @@
       </trans-unit>
       <trans-unit id="2Oy8S9a" resname="control.dashboard.create_new_record">
         <source>control.dashboard.create_new_record</source>
-        <target>Create New Record</target>
+        <target>Record</target>
       </trans-unit>
       <trans-unit id="2a9t2sP" resname="control.dashboard.create_new_guide">
         <source>control.dashboard.create_new_guide</source>
-        <target>Create New Guide</target>
+        <target>Guide</target>
       </trans-unit>
       <trans-unit id="vviDGCL" resname="control.dashboard.create_new_faq">
         <source>control.dashboard.create_new_faq</source>
-        <target>Create New FAQ</target>
+        <target>FAQ</target>
       </trans-unit>
       <trans-unit id="ZIuIunT" resname="control.link_checker">
         <source>control.link_checker</source>
-        <target>Link checker</target>
+        <target>Link Checker</target>
       </trans-unit>
       <trans-unit id="uMNLbA9" resname="linkchecker.choose_a_guide">
         <source>linkchecker.choose_a_guide</source>
@@ -111,7 +111,7 @@
       </trans-unit>
       <trans-unit id="CbzDWbg" resname="link_checker.select_guide">
         <source>link_checker.select_guide</source>
-        <target>Select guide</target>
+        <target>Select a guide</target>
       </trans-unit>
       <trans-unit id="Vdumz78" resname="link_checker.results">
         <source>link_checker.results</source>
@@ -151,7 +151,7 @@
       </trans-unit>
       <trans-unit id="xQQZp_W" resname="control.header.faqs.create_new_faq">
         <source>control.header.faqs.create_new_faq</source>
-        <target>Create new FAQ</target>
+        <target>Create New FAQ</target>
       </trans-unit>
       <trans-unit id="15QX2jT" resname="control.header.faqs.view_your_faqs">
         <source>control.header.faqs.view_your_faqs</source>
@@ -300,6 +300,26 @@
       <trans-unit id="pTtVF6l" resname="login.form.logout.prompt">
         <source>login.form.logout.prompt</source>
         <target>Sign Out</target>
+      </trans-unit>
+      <trans-unit id="WA1Ef4B" resname="close.aria.label">
+        <source>close.aria.label</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="KuHVLvv" resname="control.header.search.placeholder">
+        <source>control.header.search.placeholder</source>
+        <target>Search all</target>
+      </trans-unit>
+      <trans-unit id="oJEnRYh" resname="control.header.search.aria.label">
+        <source>control.header.search.aria.label</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="f9Ob4nr" resname="control.header.search.button">
+        <source>control.header.search.button</source>
+        <target>Go</target>
+      </trans-unit>
+      <trans-unit id="KxcpoWo" resname="link_checker.check">
+        <source>link_checker.check</source>
+        <target>Check links in guide</target>
       </trans-unit>
     </body>
   </file>

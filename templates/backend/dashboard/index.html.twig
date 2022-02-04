@@ -8,46 +8,38 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-4">
-        <div class="panel-basic border-basic">
-        <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
-        <!--<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="My cool tooltip">
-            Tooltip on top
-        </button>-->
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
-                </div>
-                <div>
-                    <h2>{{ app.user.fname }} {{ app.user.lname }}</h2>
-                    <ul class="list-group">
-                        <li class="list-group-item">{{ app.user.title }}</li>
-                        <li class="list-group-item">{{ app.user.email }}</li>
-                        <li class="list-group-item">{{ app.user.tel }}</li>
-                    </ul>
-                    <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
-                    </a>
-                    <!--<i class="fas fa-camera"></i> Test icon-->
+    <div class="container py-5">
+        <div class="row row-cols-2">
+            <div class="col-7">
+                <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
+                    <label class="form-check-label" for="switchMode">Enable Dark Mode</label>
                 </div>
             </div>
-            <div class="col d-flex align-items-start">
-                <div class="icon-square bg-light text-dark flex-shrink-0 me-2">
-                    <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
-                </div>
-                <div>
-                    <h2>{{ 'control.dashboard.quick_links' | trans }}</h2>
-                    <ul class="list-group">
-                        <li class="list-group-item">{{ 'control.dashboard.create_new_record' | trans }}</li>
-                        <li class="list-group-item">{{ 'control.dashboard.create_new_guide' | trans }}</li>
-                        <li class="list-group-item">{{ 'control.dashboard.create_new_faq' | trans }}</li>
+            <div class="col-5 text-end">
+                <div class="dropdown basic-dropdown">
+                    <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-plus-circle"></i> Create New
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
+                        <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
+                        <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
+                        <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
                     </ul>
                 </div>
             </div>
-            <!--<button id="example" type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button>-->
-
         </div>
+        <div class="panel-basic border-basic mt-4">
+            <h2>{{ app.user.fname }} {{ app.user.lname }}</h2>
+            <ul class="list-unstyled">
+                <li>{{ app.user.title }}</li>
+                <li>{{ app.user.email }}</li>
+                <li>{{ app.user.tel }}</li>
+            </ul>
+            <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-gradient">
+                <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
+            </a>
         </div>
     </div>
 {% endblock %}

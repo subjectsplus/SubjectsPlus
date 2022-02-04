@@ -1,16 +1,9 @@
-import { Collapse } from 'bootstrap';
+const checkLinksButton = document.querySelector('#checkLinksBtn');
+const resultsTable = document.querySelector('checkLinksResultsTable');
 
-const checkLinksButton = document.getElementById('check-links-button');
-const resultsTable = document.getElementById('results-table');
-
-const paramsCollapse = new Collapse(document.getElementById('collapseParams', {toggle: false}));
-const resultsCollapse = new Collapse(document.getElementById('collapseResults', {toggle: false}));
-
-paramsCollapse.show();
-resultsCollapse.hide();
+// TODO: fetch data and display results in table
 
 checkLinksButton.addEventListener('click', () => {
-    paramsCollapse.hide();
     fetch('/control/guides/check_links.json')
     .then(response => response.json())
     .then(data => {
@@ -26,6 +19,5 @@ checkLinksButton.addEventListener('click', () => {
             boxCell.innerHTML = "Box";
 
         }
-        resultsCollapse.show();
     })
 })

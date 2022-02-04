@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 
 //Custom colors
-:root, [data-theme="default"] {
+:root, [data-mode="default"] {
   --sp-bg-color: #fff9fe;
   --sp-bg-color-alt: #ffffff;
   --sp-primary-color: #c054a0;
@@ -12,26 +12,30 @@
   --sp-secondary-color-rgb: 176, 36, 143;
   --sp-font-color: #333333;
   --sp-heading-color: #333333;
+  --sp-border-color: #e9ecef;
+  --sp-nav-color: var(--sp-secondary-color);
   --sp-accent-color: #3fc2c6;
   --sp-accent-color-rgb: 63, 194, 198;
   --sp-accent-color-alt: #74ae25;
 }
 
-[data-theme="dark"] {
-  --sp-bg-color: #060b17;
-  --sp-bg-color-alt: #191d2a;
+[data-mode="dark"] {
+  --sp-bg-color: #1c1d26;
+  --sp-bg-color-alt: #242631;
   --sp-primary-color: #c054a0;
   --sp-primary-color-rgb: 192, 84, 160;
   --sp-secondary-color: #b0248f;
   --sp-secondary-color-rgb: 176, 36, 143;
   --sp-font-color: #ffffff;
   --sp-heading-color: #ffffff;
+  --sp-border-color: #353948;
+  --sp-nav-color: var(--sp-primary-color);
   --sp-accent-color: #3fc2c6;
   --sp-accent-color-rgb: 63, 194, 198;
   --sp-accent-color-alt: #74ae25;
 }
 
-[data-theme="classic"] {
+[data-mode="classic"] {
   --sp-bg-color: #f6e3e7;
   --sp-bg-color-alt: #ffffff;
   --sp-primary-color: #e488b6;
@@ -60,7 +64,7 @@ $duration: 0.35s;
 // -------------------------
 
 // Links
-$link-decoration:           	underline;
+$link-decoration:           	none;
 $link-hover-decoration:     	underline;
 $link-bkg-color:                transparent;
 

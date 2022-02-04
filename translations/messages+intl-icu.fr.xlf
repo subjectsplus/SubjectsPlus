@@ -4179,6 +4179,26 @@
         <source>login.form.logout.prompt</source>
         <target>__login.form.logout.prompt</target>
       </trans-unit>
+      <trans-unit id="WA1Ef4B" resname="close.aria.label">
+        <source>close.aria.label</source>
+        <target>__close.aria.label</target>
+      </trans-unit>
+      <trans-unit id="KuHVLvv" resname="control.header.search.placeholder">
+        <source>control.header.search.placeholder</source>
+        <target>__control.header.search.placeholder</target>
+      </trans-unit>
+      <trans-unit id="oJEnRYh" resname="control.header.search.aria.label">
+        <source>control.header.search.aria.label</source>
+        <target>__control.header.search.aria.label</target>
+      </trans-unit>
+      <trans-unit id="f9Ob4nr" resname="control.header.search.button">
+        <source>control.header.search.button</source>
+        <target>__control.header.search.button</target>
+      </trans-unit>
+      <trans-unit id="KxcpoWo" resname="link_checker.check">
+        <source>link_checker.check</source>
+        <target>__link_checker.check</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -37,7 +37,7 @@ Encore
     // Added by Jane - to be reviewed
     //.addEntry('patron_index', './assets/frontend/jane/index.js')
     //.addEntry('patron_database_list', './assets/frontend/jane/database_list.js')
-    //.addEntry('linkcheck', './assets/frontend/jane/linkcheck.js')
+    .addEntry('linkcheck', './assets/backend/linkcheck.js')
 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
