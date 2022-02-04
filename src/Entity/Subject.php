@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Subject.
@@ -133,6 +135,7 @@ class Subject
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tab", mappedBy="subject")
+     * @ApiSubresource(maxDepth=1)
      */
     private $tabs;
 
