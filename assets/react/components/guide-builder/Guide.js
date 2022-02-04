@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import GuideTabContainer from './GuideTabContainer.js';
+import Utility from '../../../js/Utility/Utility.js';
 
-export class Guide extends Component {
-    apiLink = 'api/subjects/';
+export default class Guide extends Component {
+    apiLink = '/api/subjects/';
 
     constructor(props) {
+        super(props);
+
         this.state = {
             guide: null,
+            loading: true,
             isErrored: false
         }
+    }
+
+    componentDidMount() {
+        this.getGuide();
     }
 
     getAPILink() {
@@ -16,7 +26,7 @@ export class Guide extends Component {
 
     getGuide() {
         // formulate the results api link for guide
-        var resLink = getAPILink();
+        var resLink = this.getAPILink();
 
         // fetch api results
         fetch(resLink).then(response => {
@@ -31,6 +41,7 @@ export class Guide extends Component {
         .then(results => {
             this.setState({
                 guide: results,
+                loading: false,
                 isErrored: false
             });
         }
@@ -39,13 +50,26 @@ export class Guide extends Component {
             console.error(err);
             this.setState({
                 isErrored: true,
+                loading: false
             });
         });
     }
 
     render() {
-        if (this.state.guide) {
-            <p>{'Subject:' + this.state.guide.subject}</p>
+        if (this.state.loading) {
+            return (<p>Loading Guide...</p>);
+        } else if (this.state.guide) {
+            return (
+                <div id="guide-builder">
+                    <h3>{Utility.htmlEntityDecode(this.state.guide.subject)}</h3>
+                    <GuideTabContainer guideId={this.props.guideId}/>
+                </div>
+            );
+        } else {
+            return (<p>Guide not found!</p>);
         }
     }
 }
+
+ReactDOM.render(<Guide guideId="653876" />, 
+    document.getElementById('guide-builder-container'));
