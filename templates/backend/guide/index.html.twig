@@ -1,0 +1,53 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Guides index{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+    <h1>Guides index</h1>
+    
+    <a href="{{ path('guide_new') }}">Create new</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Subject Id</th>
+                <th>Subject</th>
+                <th>Active</th>
+                <th>Shortform</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for guide in guides %}
+            <tr>
+                <td>{{ guide.subjectId }}</td>
+                <td>{{ guide.subject | raw }}</td>
+                <td>
+                    {% if guide.active %}
+                        {{ 'Active' }}
+                    {% else %}
+                        {{ 'Inactive' }}
+                    {% endif %}
+                </td>
+                <td>{{ guide.shortform }}</td>
+                <td>{{ guide.type }}</td>
+                <td>
+                    <a href="{{ path('guide_show', {'subjectId': guide.subjectId}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +10,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,6 +22,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="staff", indexes={@ORM\Index(name="fk_supervisor_staff_id_idx", columns={"supervisor_id"}), @ORM\Index(name="fk_staff_department_id_idx", columns={"department_id"}), @ORM\Index(name="fk_staff_user_type_id_idx", columns={"user_type_id"})})
  * @ORM\Entity
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ * )
  */
 class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -262,21 +269,6 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     private $userType;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Subject", inversedBy="staff")
-     * @ORM\JoinTable(name="staff_subject",
-     *     joinColumns={
-     *         @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
-     *     },
-     *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
-     *     }
-     * )
-     */
-    private $subject;
-
-    /**
      * @ORM\Column(type="json_array", nullable=true)
      */
     private $roles = [];
@@ -295,11 +287,23 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     private $staffPhoto;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Subject::class, inversedBy="staff")
+     * @ORM\JoinTable(name="staff_subject", 
+     *  joinColumns={
+     *         @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
+     *     },
+     *  inverseJoinColumns={
+     *         @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
+     * })
+     */
+    private $subjects;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->subject = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->subjects = new ArrayCollection();
     }
 
     public function getStaffId(): ?int
@@ -680,30 +684,6 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Subject[]
-     */
-    public function getSubject(): Collection
-    {
-        return $this->subject;
-    }
-
-    public function addSubject(Subject $subject): self
-    {
-        if (!$this->subject->contains($subject)) {
-            $this->subject[] = $subject;
-        }
-
-        return $this;
-    }
-
-    public function removeSubject(Subject $subject): self
-    {
-        $this->subject->removeElement($subject);
-
-        return $this;
-    }
-
-    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -797,6 +777,30 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStaffPhoto(?MediaAttachment $staffPhoto): self
     {
         $this->staffPhoto = $staffPhoto;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subject[]
+     */
+    public function getSubjects(): Collection
+    {
+        return $this->subjects;
+    }
+
+    public function addSubject(Subject $subject): self
+    {
+        if (!$this->subjects->contains($subject)) {
+            $this->subjects[] = $subject;
+        }
+
+        return $this;
+    }
+
+    public function removeSubject(Subject $subject): self
+    {
+        $this->subjects->removeElement($subject);
 
         return $this;
     }

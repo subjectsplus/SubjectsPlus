@@ -1,16 +1,19 @@
-<style>
-    .form {
-      border: 1px solid #E7E7E7;
-      padding: 0 20px;
-      background: #fff;
-      position: relative;
-      float: left;
-    }
-</style>
-
-<div class="form">
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel-basic border-basic">
+            {{ form_row(form.question) }}
+            {{ form_row(form.answer) }}
+        </div>
+    </div>
+    <div class="col-lg-3 offset-lg-1">
+        <h3>Settings</h3>
+        {{ form_row(form.active) }}
+        {{ form_row(form.keywords) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.faqpage) }}
+        {{ form_rest(form) }}
+        <button class="btn btn-gradient">{{ button_label|default('Save') }}</button>
+    </div>
 </div>
+{{ form_end(form) }}

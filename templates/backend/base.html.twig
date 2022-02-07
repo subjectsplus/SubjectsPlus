@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block body %}
+    {% include('backend/includes/mode-detector.html.twig') %}
     <main>
     {% block header %}
         {% include('backend/includes/header.html.twig') %}

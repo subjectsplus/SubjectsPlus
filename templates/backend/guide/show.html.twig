@@ -1,0 +1,86 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Guide{% endblock %}
+
+{% block content %}
+    <h1>Guide</h1>
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>SubjectId</th>
+                <td>{{ guide.subjectId }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ guide.subject | raw }}</td>
+            </tr>
+            <tr>
+                <th>Visibility</th>
+                <td>
+                    {% if guide.active %}
+                        {{ 'Active' }}
+                    {% else %}
+                        {{ 'Inactive' }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Shortform</th>
+                <td>{{ guide.shortform }}</td>
+            </tr>
+            <tr>
+                <th>Redirect URL</th>
+                <td>{{ guide.redirectUrl }}</td>
+            </tr>
+            <tr>
+                <th>Header</th>
+                <td>{{ guide.header }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ guide.description }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ guide.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ guide.type }}</td>
+            </tr>
+            <tr>
+                <th>Last Modified</th>
+                <td>{{ guide.lastModified|format_date() }}</td>
+            </tr>
+            <tr>
+                <th>Extra</th>
+                <td>{{ guide.extra }}</td>
+            </tr>
+            <tr>
+                <th>Course Code</th>
+                <td>{{ guide.courseCode }}</td>
+            </tr>
+            <tr>
+                <th>Instructor</th>
+                <td>{{ guide.instructor }}</td>
+            </tr>
+            <tr>
+                <th>Staff</th>
+                <td>{{ dump(guide.staff) }}</td>
+                {# {% for entry in staff %}
+                    <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>
+                {% endfor %} #}
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('guide_index') }}">back to list</a>
+
+{% endblock %}

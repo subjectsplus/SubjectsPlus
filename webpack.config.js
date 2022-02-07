@@ -26,10 +26,11 @@ Encore
      */
     .addEntry('rep_log_react', './assets/js/rep_log_react.js')
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
+    .addEntry('guide_builder', './assets/react/components/guide-builder/Guide.js')
 
-    // Backend Main JS
+    // Backend JS
     .addEntry('backend-main', './assets/backend/backend-main.js')
-    .addEntry('dashboard', './assets/backend/dashboard.js')
+    .addEntry('mode-switcher', './assets/backend/mode-switcher.js')
 
     //Front-end Main JS
     .addEntry('frontend-main', './assets/frontend/frontend-main.js')
@@ -37,7 +38,7 @@ Encore
     // Added by Jane - to be reviewed
     //.addEntry('patron_index', './assets/frontend/jane/index.js')
     //.addEntry('patron_database_list', './assets/frontend/jane/database_list.js')
-    //.addEntry('linkcheck', './assets/frontend/jane/linkcheck.js')
+    .addEntry('linkcheck', './assets/backend/linkcheck.js')
 
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
