@@ -21,7 +21,7 @@
             {# TODO: Display username #}
             {% if app.user %}
                 <div class="mb-4 alert alert-info">
-                    {{ 'login.form.logged.message' | trans }} <strong>{{ app.user.username }}</strong>. <a href="{{ path('app_logout') }}">({{ 'login.form.logout.prompt' | trans }})</a>
+                    {{ 'login.form.logged.message' | trans }} <strong>{{ app.user.fname }} {{ app.user.lname }}</strong>. <a href="{{ path('app_logout') }}">({{ 'login.form.logout.prompt' | trans }})</a>
                 </div>
             {% endif %}
 

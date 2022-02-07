@@ -321,6 +321,18 @@
         <source>link_checker.check</source>
         <target>__link_checker.check</target>
       </trans-unit>
+      <trans-unit id="Q8Kd18B" resname="control.dashboard.enable_dark_mode">
+        <source>control.dashboard.enable_dark_mode</source>
+        <target>__control.dashboard.enable_dark_mode</target>
+      </trans-unit>
+      <trans-unit id="Et0eLPT" resname="control.dashboard.create_new_button">
+        <source>control.dashboard.create_new_button</source>
+        <target>__control.dashboard.create_new_button</target>
+      </trans-unit>
+      <trans-unit id="GIy1lYN" resname="control.back_to_list">
+        <source>control.back_to_list</source>
+        <target>__control.back_to_list</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
