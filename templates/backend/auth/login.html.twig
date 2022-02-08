@@ -13,12 +13,13 @@
     <div class="m-auto panel-basic gradient-border-round">
         <img src="{{ asset('build/images/backend/sp_logo.png') }}" alt="SubjectsPlus logo" class="img-fluid mb-4" style="width: 275px;" />
         <h1 class="h2 fw-light">{{ 'login.form.heading' | trans }}</h1>
+
+        {# TODO: Convert form to Symfony Form #}
         <form method="post">
             {% if error %}
                 <div class="mb-4 alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            {# TODO: Display username #}
             {% if app.user %}
                 <div class="mb-4 alert alert-info">
                     {{ 'login.form.logged.message' | trans }} <strong>{{ app.user.fname }} {{ app.user.lname }}</strong>. <a href="{{ path('app_logout') }}">({{ 'login.form.logout.prompt' | trans }})</a>
