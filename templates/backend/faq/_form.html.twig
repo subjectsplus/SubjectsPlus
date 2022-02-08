@@ -15,5 +15,6 @@
         {{ form_rest(form) }}
         <button class="btn btn-gradient">{{ button_label|default('Save') }}</button>
     </div>
+    {{ encore_entry_script_tags('react_select_init') }}
 </div>
 {{ form_end(form) }}
