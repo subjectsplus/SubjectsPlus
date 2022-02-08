@@ -27,7 +27,8 @@ Encore
     .addEntry('rep_log_react', './assets/js/rep_log_react.js')
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
     .addEntry('guide_builder', './assets/react/components/guide-builder/Guide.js')
-
+    .addEntry('react_select_init', './assets/js/select-field-type/initSelect.js')
+    
     // Backend JS
     .addEntry('backend-main', './assets/backend/backend-main.js')
     .addEntry('mode-switcher', './assets/backend/mode-switcher.js')

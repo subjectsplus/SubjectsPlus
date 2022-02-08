@@ -47,7 +47,7 @@ class FaqType extends AbstractType
                 },
                 'multiple' => true,
                 'placeholder' => 'Select a subject',
-                'expanded' => true,
+                'expanded' => false,
             ])
             ->add('faqpage', EntityType::class, [
                 'class' => Faqpage::class,
@@ -58,7 +58,7 @@ class FaqType extends AbstractType
                 },
                 'multiple' => true,
                 'placeholder' => 'Select a collection',
-                'expanded' => true,
+                'expanded' => false,
             ]);
     }
 
