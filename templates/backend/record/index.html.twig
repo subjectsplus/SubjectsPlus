@@ -1,0 +1,38 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Hello RecordController!{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1>Record Index</h1>
+    <table>
+        <thead>
+            <tr>
+                <td>Record ID</td>
+                <td>Title</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.titleId }}</td>
+                <td>{{ record.title }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+{% endblock %}
+
+
