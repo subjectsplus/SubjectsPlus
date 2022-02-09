@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Utility from '../../../js/Utility/Utility.js';
+import SectionContainer from './SectionContainer.js';
 
 export default class GuideTabContainer extends Component {
     apiLink = '/api/subjects/{subjectId}/tabs';
@@ -59,7 +60,7 @@ export default class GuideTabContainer extends Component {
                 return (
                     <Tab key={results.tabId} eventKey={results.tabIndex} 
                         title={Utility.htmlEntityDecode(results.label)}>
-                        Content for {results.label}
+                        <SectionContainer tabId={results.tabId} />
                     </Tab>
                 );
             });
