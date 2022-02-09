@@ -50,6 +50,7 @@
     "postcss-loader": "^6.0.0",
     "sass-loader": "^11.0.1",
     "stimulus": "^2.0.0",
+    "styled-components": "^5.3.3",
     "webpack-notifier": "^1.14.1"
   },
   "browserslist": [

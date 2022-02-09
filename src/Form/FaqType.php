@@ -50,7 +50,7 @@ class FaqType extends AbstractType
                 },
                 'multiple' => true,
                 'placeholder' => 'Select a subject',
-                'attr' => ['data-placeholder-text' => 'Select a subject'],
+                'attr' => ['data-placeholder-text' => 'Select a false subject'],
                 'expanded' => false,
             ])
             ->add('faqpage', EntityType::class, [
