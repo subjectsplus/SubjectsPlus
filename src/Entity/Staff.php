@@ -112,9 +112,9 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @var int|null
+     * @var bool|null
      *
-     * @ORM\Column(name="active", type="integer", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=true)
      */
     private $active;
 

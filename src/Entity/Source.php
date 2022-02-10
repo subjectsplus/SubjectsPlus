@@ -15,7 +15,7 @@ class Source
     /**
      * @var int
      *
-     * @ORM\Column(name="source_id", type="bigint", nullable=false)
+     * @ORM\Column(name="source_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -35,7 +35,7 @@ class Source
      */
     private $rs;
 
-    public function getSourceId(): ?string
+    public function getSourceId(): ?int
     {
         return $this->sourceId;
     }

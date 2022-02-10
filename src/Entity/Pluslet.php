@@ -24,7 +24,7 @@ class Pluslet
     /**
      * @var int
      *
-     * @ORM\Column(name="pluslet_id", type="bigint", nullable=false)
+     * @ORM\Column(name="pluslet_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -52,11 +52,11 @@ class Pluslet
     private $localFile;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="clone", type="integer", nullable=false)
+     * @ORM\Column(name="clone", type="boolean", nullable=false)
      */
-    private $clone = '0';
+    private $clone = false;
 
     /**
      * @var string|null
@@ -73,18 +73,18 @@ class Pluslet
     private $extra;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="hide_titlebar", type="integer", nullable=false)
+     * @ORM\Column(name="hide_titlebar", type="boolean", nullable=false)
      */
-    private $hideTitlebar = '0';
+    private $hideTitlebar = false;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="collapse_body", type="integer", nullable=false)
+     * @ORM\Column(name="collapse_body", type="boolean", nullable=false)
      */
-    private $collapseBody = '0';
+    private $collapseBody = false;
 
     /**
      * @var string|null
@@ -94,45 +94,35 @@ class Pluslet
     private $titlebarStyling;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="favorite_box", type="integer", nullable=false)
+     * @ORM\Column(name="favorite_box", type="boolean", nullable=false)
      */
-    private $favoriteBox = '0';
+    private $favoriteBox = false;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="master", type="integer", nullable=false)
+     * @ORM\Column(name="master", type="boolean", nullable=true)
      */
-    private $master = '0';
+    private $master = false;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="target_blank_links", type="integer", nullable=false)
+     * @ORM\Column(name="target_blank_links", type="boolean", nullable=false)
      */
-    private $targetBlankLinks = '0';
+    private $targetBlankLinks = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="pluslets")
-     * @ORM\JoinTable(name="pluslet_section", 
-     *  joinColumns={
-     *         @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
-     *     },
-     *  inverseJoinColumns={
-     *         @ORM\JoinColumn(name="pluslet_id", referencedColumnName="pluslet_id")
-     *     }
-     * )
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
+     * })
      */
     private $section;
 
-    public function __construct()
-    {
-        $this->plusletSections = new ArrayCollection();
-    }
-
-    public function getPlusletId(): ?string
+    public function getPlusletId(): ?int
     {
         return $this->plusletId;
     }
@@ -173,12 +163,12 @@ class Pluslet
         return $this;
     }
 
-    public function getClone(): ?int
+    public function getClone(): bool
     {
         return $this->clone;
     }
 
-    public function setClone(int $clone): self
+    public function setClone(bool $clone): self
     {
         $this->clone = $clone;
 
@@ -209,24 +199,24 @@ class Pluslet
         return $this;
     }
 
-    public function getHideTitlebar(): ?int
+    public function getHideTitlebar(): bool
     {
         return $this->hideTitlebar;
     }
 
-    public function setHideTitlebar(int $hideTitlebar): self
+    public function setHideTitlebar(bool $hideTitlebar): self
     {
         $this->hideTitlebar = $hideTitlebar;
 
         return $this;
     }
 
-    public function getCollapseBody(): ?int
+    public function getCollapseBody(): bool
     {
         return $this->collapseBody;
     }
 
-    public function setCollapseBody(int $collapseBody): self
+    public function setCollapseBody(bool $collapseBody): self
     {
         $this->collapseBody = $collapseBody;
 
@@ -245,48 +235,40 @@ class Pluslet
         return $this;
     }
 
-    public function getFavoriteBox(): ?int
+    public function getFavoriteBox(): bool
     {
         return $this->favoriteBox;
     }
 
-    public function setFavoriteBox(int $favoriteBox): self
+    public function setFavoriteBox(bool $favoriteBox): self
     {
         $this->favoriteBox = $favoriteBox;
 
         return $this;
     }
 
-    public function getMaster(): ?int
+    public function getMaster(): ?bool
     {
         return $this->master;
     }
 
-    public function setMaster(int $master): self
+    public function setMaster(?bool $master): self
     {
         $this->master = $master;
 
         return $this;
     }
 
-    public function getTargetBlankLinks(): ?int
+    public function getTargetBlankLinks(): bool
     {
         return $this->targetBlankLinks;
     }
 
-    public function setTargetBlankLinks(int $targetBlankLinks): self
+    public function setTargetBlankLinks(bool $targetBlankLinks): self
     {
         $this->targetBlankLinks = $targetBlankLinks;
 
         return $this;
-    }
-
-    /**
-     * @return Collection|PlusletSection[]
-     */
-    public function getPlusletSections(): Collection
-    {
-        return $this->plusletSections;
     }
 
     public function getSection(): ?Section

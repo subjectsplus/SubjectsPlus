@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
@@ -25,7 +26,7 @@ class Tab
     /**
      * @var int
      *
-     * @ORM\Column(name="tab_id", type="bigint", nullable=false)
+     * @ORM\Column(name="tab_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -55,9 +56,9 @@ class Tab
     /**
      * @var int
      *
-     * @ORM\Column(name="visibility", type="integer", nullable=false, options={"default": "1"})
+     * @ORM\Column(name="visibility", type="boolean", nullable=false, options={"default": "1"})
      */
-    private $visibility = 1;
+    private $visibility = true;
 
     /**
      * @var string|null
@@ -92,6 +93,7 @@ class Tab
 
     /**
      * @ORM\OneToMany(targetEntity="Section", mappedBy="tab")
+     * @ApiSubresource(maxDepth=1)
      */
     private $sections;
 
@@ -141,12 +143,12 @@ class Tab
         return $this;
     }
 
-    public function getVisibility(): ?int
+    public function getVisibility(): ?bool
     {
         return $this->visibility;
     }
 
-    public function setVisibility(int $visibility): self
+    public function setVisibility(bool $visibility): self
     {
         $this->visibility = $visibility;
 
