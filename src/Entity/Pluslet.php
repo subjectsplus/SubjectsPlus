@@ -24,7 +24,7 @@ class Pluslet
     /**
      * @var int
      *
-     * @ORM\Column(name="pluslet_id", type="integer", nullable=false)
+     * @ORM\Column(name="pluslet_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -33,14 +33,14 @@ class Pluslet
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100, nullable=false)
+     * @ORM\Column(name="title", type="string", length=100)
      */
     private $title = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text", length=0, nullable=false)
+     * @ORM\Column(name="body", type="text", length=0)
      */
     private $body;
 
@@ -54,7 +54,7 @@ class Pluslet
     /**
      * @var bool
      *
-     * @ORM\Column(name="clone", type="boolean", nullable=false)
+     * @ORM\Column(name="clone", type="boolean")
      */
     private $clone = false;
 
@@ -75,14 +75,14 @@ class Pluslet
     /**
      * @var bool
      *
-     * @ORM\Column(name="hide_titlebar", type="boolean", nullable=false)
+     * @ORM\Column(name="hide_titlebar", type="boolean")
      */
     private $hideTitlebar = false;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="collapse_body", type="boolean", nullable=false)
+     * @ORM\Column(name="collapse_body", type="boolean")
      */
     private $collapseBody = false;
 
@@ -96,7 +96,7 @@ class Pluslet
     /**
      * @var bool
      *
-     * @ORM\Column(name="favorite_box", type="boolean", nullable=false)
+     * @ORM\Column(name="favorite_box", type="boolean")
      */
     private $favoriteBox = false;
 
@@ -110,7 +110,7 @@ class Pluslet
     /**
      * @var bool
      *
-     * @ORM\Column(name="target_blank_links", type="boolean", nullable=false)
+     * @ORM\Column(name="target_blank_links", type="boolean")
      */
     private $targetBlankLinks = false;
 
@@ -121,6 +121,16 @@ class Pluslet
      * })
      */
     private $section;
+
+    /**
+     * @ORM\Column(name="pcolumn", type="integer")
+     */
+    private $pcolumn;
+
+    /**
+     * @ORM\Column(name="prow", type="integer")
+     */
+    private $prow;
 
     public function getPlusletId(): ?int
     {
@@ -279,6 +289,30 @@ class Pluslet
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getPcolumn(): ?int
+    {
+        return $this->pcolumn;
+    }
+
+    public function setPcolumn(int $pcolumn): self
+    {
+        $this->pcolumn = $pcolumn;
+
+        return $this;
+    }
+
+    public function getProw(): ?int
+    {
+        return $this->prow;
+    }
+
+    public function setProw(int $prow): self
+    {
+        $this->prow = $prow;
 
         return $this;
     }
