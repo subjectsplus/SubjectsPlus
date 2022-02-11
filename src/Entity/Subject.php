@@ -28,7 +28,7 @@ class Subject
     /**
      * @var int
      *
-     * @ORM\Column(name="subject_id", type="bigint", nullable=false)
+     * @ORM\Column(name="subject_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -44,9 +44,9 @@ class Subject
     /**
      * @var int
      *
-     * @ORM\Column(name="active", type="integer", nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $active = '0';
+    private $active = false;
 
     /**
      * @var string
@@ -96,6 +96,13 @@ class Subject
      * @ORM\Column(name="last_modified", type="datetime", nullable=true)
      */
     private $lastModified;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="background_link", type="string", length=255, nullable=true)
+     */
+    private $backgroundLink;
 
     /**
      * @var string|null
@@ -168,7 +175,7 @@ class Subject
         return $this->tabs;
     }
 
-    public function getSubjectId(): ?string
+    public function getSubjectId(): ?int
     {
         return $this->subjectId;
     }
@@ -190,12 +197,12 @@ class Subject
         return $this->subject;
     }
 
-    public function getActive(): ?int
+    public function getActive(): bool
     {
         return $this->active;
     }
 
-    public function setActive(int $active): self
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
@@ -282,6 +289,17 @@ class Subject
     public function setLastModified(?\DateTimeInterface $lastModified): self
     {
         $this->lastModified = $lastModified;
+
+        return $this;
+    }
+
+    public function getBackgroundLink(): ?string {
+        return $this->backgroundLink;
+    }
+
+    public function setBackgroundLink(?string $backgroundLink): self
+    {
+        $this->backgroundLink = $backgroundLink;
 
         return $this;
     }

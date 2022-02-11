@@ -33,7 +33,7 @@ class Department
      *
      * @ORM\Column(name="department_sort", type="integer", nullable=false)
      */
-    private $departmentSort = '0';
+    private $departmentSort = 0;
 
     /**
      * @var string

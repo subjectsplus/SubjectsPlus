@@ -15,7 +15,7 @@ class Format
     /**
      * @var int
      *
-     * @ORM\Column(name="format_id", type="bigint", nullable=false)
+     * @ORM\Column(name="format_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -28,7 +28,7 @@ class Format
      */
     private $format;
 
-    public function getFormatId(): ?string
+    public function getFormatId(): ?int
     {
         return $this->formatId;
     }

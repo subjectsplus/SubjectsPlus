@@ -16,7 +16,7 @@ class Location
     /**
      * @var int
      *
-     * @ORM\Column(name="location_id", type="bigint", nullable=false)
+     * @ORM\Column(name="location_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -135,7 +135,7 @@ class Location
         $this->title = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function getLocationId(): ?string
+    public function getLocationId(): ?int
     {
         return $this->locationId;
     }

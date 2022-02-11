@@ -39,7 +39,7 @@ class Title
     /**
      * @var int
      *
-     * @ORM\Column(name="title_id", type="bigint", nullable=false)
+     * @ORM\Column(name="title_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -116,7 +116,7 @@ class Title
         $this->ranks = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function getTitleId(): ?string
+    public function getTitleId(): ?int
     {
         return $this->titleId;
     }
